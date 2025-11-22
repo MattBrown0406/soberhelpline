@@ -1,5 +1,6 @@
 import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import logo from "@/assets/logo.png";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2 },
@@ -17,7 +18,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="mb-4 text-5xl font-bold text-foreground">Sober Helpline</h1>
+          <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-64 h-auto" />
           <p className="text-xl text-muted-foreground">
             Find addiction recovery service providers by location, type, and cost. Your path to recovery starts here.
           </p>
