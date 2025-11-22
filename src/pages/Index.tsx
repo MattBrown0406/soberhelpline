@@ -52,8 +52,17 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-12">
-          <img src={familyHero} alt="Family together in recovery" className="w-full max-w-4xl mx-auto rounded-lg shadow-lg" />
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <img src={familyHero} alt="Family together in recovery" className="w-full rounded-lg shadow-lg" />
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold text-foreground">Our Mission</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              At Sober Helpline, we are dedicated to providing the families of addicted loved ones with ethical and proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria in order to be included on this site.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              This site is free to use for those needing help. Sober Helpline receives a set monthly fee from listed providers to cover the cost of operations. We take no commissions or payments from treatment providers for clients that get referred by us. This is considered patient brokering and we will never promote programs or services that would do so.
+            </p>
+          </div>
         </div>
       </div>
     </div>
