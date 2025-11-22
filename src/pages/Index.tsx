@@ -1,6 +1,7 @@
 import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import familyHero from "@/assets/family-hero.png";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2 },
@@ -49,6 +50,10 @@ const Index = () => {
               );
             })}
           </div>
+        </div>
+
+        <div className="mt-12">
+          <img src={familyHero} alt="Family together in recovery" className="w-full max-w-4xl mx-auto rounded-lg shadow-lg" />
         </div>
       </div>
     </div>
