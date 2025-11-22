@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 
@@ -17,6 +17,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-end mb-4">
+          <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+            <Phone className="w-5 h-5" />
+            <span className="font-medium">(541) 241-5886</span>
+          </a>
+        </div>
         <div className="text-center mb-12">
           <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-64 h-auto" />
           <h2 className="text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
