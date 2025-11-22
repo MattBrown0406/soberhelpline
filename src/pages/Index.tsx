@@ -19,8 +19,9 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-64 h-auto" />
-          <p className="text-xl text-muted-foreground">
-            Find addiction recovery service providers by location, type, and cost. Your path to recovery starts here.
+          <h2 className="text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
+          <p className="text-lg text-muted-foreground">
+            We help families find ethical, proven treatment and recovery resources nationwide and beyond.
           </p>
         </div>
 
