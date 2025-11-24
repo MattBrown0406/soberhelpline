@@ -5,13 +5,13 @@ import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 
 const categories = [
-  { name: "Inpatient Treatment", icon: Building2 },
-  { name: "Outpatient Treatment", icon: Home },
-  { name: "Interventionists", icon: Users },
-  { name: "Sober Living", icon: Bed },
-  { name: "Therapists", icon: Brain },
-  { name: "Psychiatrists", icon: Stethoscope },
-  { name: "Attorneys", icon: Scale },
+  { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
+  { name: "Outpatient Treatment", icon: Home, path: "/outpatient-treatment" },
+  { name: "Interventionists", icon: Users, path: "/interventionists" },
+  { name: "Sober Living", icon: Bed, path: "/sober-living" },
+  { name: "Therapists", icon: Brain, path: "/therapists" },
+  { name: "Psychiatrists", icon: Stethoscope, path: "/psychiatrists" },
+  { name: "Attorneys", icon: Scale, path: "/attorneys" },
 ];
 
 const Index = () => {
@@ -46,15 +46,16 @@ const Index = () => {
             {categories.map((category) => {
               const Icon = category.icon;
               return (
-                <Card
-                  key={category.name}
-                  className="p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
-                >
-                  <Icon className="w-8 h-8 text-primary" />
-                  <span className="text-sm font-medium text-foreground leading-tight">
-                    {category.name}
-                  </span>
-                </Card>
+                <Link key={category.name} to={category.path}>
+                  <Card
+                    className="p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
+                  >
+                    <Icon className="w-8 h-8 text-primary" />
+                    <span className="text-sm font-medium text-foreground leading-tight">
+                      {category.name}
+                    </span>
+                  </Card>
+                </Link>
               );
             })}
           </div>
