@@ -57,6 +57,8 @@ const insuranceProviders = [
   "Oscar Health",
   "Bright Health",
   "Friday Health Plans",
+  "Moda",
+  "Pacific Source",
   "Other"
 ];
 
