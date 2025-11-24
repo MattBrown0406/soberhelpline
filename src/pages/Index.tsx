@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart, Phone } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
@@ -12,7 +12,6 @@ const categories = [
   { name: "Therapists", icon: Brain },
   { name: "Psychiatrists", icon: Stethoscope },
   { name: "Attorneys", icon: Scale },
-  { name: "Recovery Fellowships", icon: Heart },
 ];
 
 const Index = () => {
