@@ -2,3 +2,6 @@ project_id = "anwqprmpzmcqbkttmxos"
 
 [functions.fetch-podcast-feed]
 verify_jwt = false
+
+[functions.send-provider-notification]
+verify_jwt = false

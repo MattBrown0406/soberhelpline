@@ -257,6 +257,21 @@ const ProviderInfo = () => {
 
       if (error) throw error;
 
+      // Send email notification
+      try {
+        await supabase.functions.invoke('send-provider-notification', {
+          body: {
+            providerName: data.providerName,
+            category: data.category,
+            email: data.email,
+            phoneNumber: data.phoneNumber,
+          }
+        });
+      } catch (emailError) {
+        console.error('Failed to send notification email:', emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast({
         title: "Application submitted!",
         description: "Your provider information has been received and is pending review.",
