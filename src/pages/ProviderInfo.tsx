@@ -399,7 +399,7 @@ const ProviderInfo = () => {
                 name="cost"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Cost *</FormLabel>
+                    <FormLabel>Private Pay Rate (without insurance) *</FormLabel>
                     <FormControl>
                       <Input placeholder="e.g., $5,000 - $10,000 per month" {...field} />
                     </FormControl>
