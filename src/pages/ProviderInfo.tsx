@@ -21,6 +21,60 @@ import { ArrowLeft, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 
+// Resize image to fit within maxSize while maintaining aspect ratio
+const resizeImage = (file: File, maxSize: number = 300): Promise<Blob> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Calculate new dimensions maintaining aspect ratio
+        if (width > height) {
+          if (width > maxSize) {
+            height *= maxSize / width;
+            width = maxSize;
+          }
+        } else {
+          if (height > maxSize) {
+            width *= maxSize / height;
+            height = maxSize;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Could not get canvas context'));
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('Failed to create blob'));
+            }
+          },
+          'image/jpeg',
+          0.9
+        );
+      };
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+};
+
 const providerCategories = [
   "Inpatient Treatment",
   "Outpatient Treatment",
@@ -154,14 +208,17 @@ const ProviderInfo = () => {
           return;
         }
 
+        // Resize image to 300x300 max (suitable for 1.5" at 2x DPI)
+        const resizedBlob = await resizeImage(logoFile, 300);
+
         // Generate unique filename
-        const fileExt = logoFile.name.split('.').pop();
+        const fileExt = 'jpg'; // Always save as jpg after resize
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
         
         // Upload to storage
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from('provider-logos')
-          .upload(fileName, logoFile);
+          .upload(fileName, resizedBlob);
 
         if (uploadError) {
           throw new Error(`Logo upload failed: ${uploadError.message}`);
@@ -541,7 +598,7 @@ const ProviderInfo = () => {
                       />
                     </FormControl>
                     <FormDescription>
-                      Upload your logo (.jpg or .png files only)
+                      Upload your logo (.jpg or .png files only). Images will be automatically resized to fit within 1.5" square.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
