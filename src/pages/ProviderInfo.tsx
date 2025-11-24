@@ -39,7 +39,7 @@ const providerFormSchema = z.object({
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Valid zip code is required (e.g., 12345 or 12345-6789)"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
-  website: z.string().url("Valid website URL is required").or(z.literal("")),
+  website: z.string().url("Valid website URL is required").min(1, "Website is required"),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   cost: z.string().min(1, "Cost information is required").max(100),
@@ -88,7 +88,7 @@ const ProviderInfo = () => {
           zip_code: data.zipCode,
           phone_number: data.phoneNumber,
           email: data.email,
-          website: data.website || null,
+          website: data.website,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           cost: data.cost,
@@ -246,11 +246,10 @@ const ProviderInfo = () => {
                 name="website"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Website</FormLabel>
+                    <FormLabel>Website *</FormLabel>
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
                     </FormControl>
-                    <FormDescription>Optional - Your organization's website URL</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
