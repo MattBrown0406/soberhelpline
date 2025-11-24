@@ -263,7 +263,7 @@ const ProviderInfo = () => {
                   <FormItem>
                     <FormLabel>Length of Services *</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., 30 days, 90 days" {...field} />
+                      <Input placeholder="30, 60, 90 days, etc" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
