@@ -25,7 +25,7 @@ const Index = () => {
               Recovery Podcasts
             </Link>
             <Link to="/provider-info" className="text-foreground hover:text-primary transition-colors font-medium">
-              Provider Information
+              Provider Application
             </Link>
           </div>
           <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
