@@ -291,7 +291,7 @@ const ProviderInfo = () => {
 
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2">Provider Information</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Provider Application</h1>
             <p className="text-lg text-muted-foreground">
               Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards.
             </p>
