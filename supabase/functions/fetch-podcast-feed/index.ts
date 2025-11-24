@@ -11,9 +11,21 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Fetching Party Wreckers RSS feed...');
+    const { feedUrl } = await req.json();
     
-    const response = await fetch('https://feeds.buzzsprout.com/1941777.rss');
+    if (!feedUrl) {
+      return new Response(
+        JSON.stringify({ error: 'feedUrl parameter is required' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400 
+        }
+      );
+    }
+    
+    console.log('Fetching RSS feed:', feedUrl);
+    
+    const response = await fetch(feedUrl);
     const xmlText = await response.text();
     
     console.log('RSS feed fetched successfully');
