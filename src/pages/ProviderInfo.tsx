@@ -36,6 +36,7 @@ const providerFormSchema = z.object({
   category: z.string().min(1, "Please select a provider category"),
   providerName: z.string().min(2, "Provider name must be at least 2 characters").max(100),
   address: z.string().min(5, "Address is required").max(200),
+  zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Valid zip code is required (e.g., 12345 or 12345-6789)"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
   website: z.string().url("Valid website URL is required").or(z.literal("")),
@@ -57,6 +58,7 @@ const ProviderInfo = () => {
       category: "",
       providerName: "",
       address: "",
+      zipCode: "",
       phoneNumber: "",
       email: "",
       website: "",
@@ -83,6 +85,7 @@ const ProviderInfo = () => {
           category: data.category,
           provider_name: data.providerName,
           address: data.address,
+          zip_code: data.zipCode,
           phone_number: data.phoneNumber,
           email: data.email,
           website: data.website || null,
@@ -186,7 +189,22 @@ const ProviderInfo = () => {
                   <FormItem>
                     <FormLabel>Address *</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Enter full address including city, state, and zip code" {...field} />
+                      <Textarea placeholder="Enter street address, city, and state" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter address without zip code</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="zipCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Zip Code *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="12345 or 12345-6789" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
