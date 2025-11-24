@@ -32,6 +32,34 @@ const providerCategories = [
   "Recovery Fellowships",
 ];
 
+const insuranceProviders = [
+  "Self Pay",
+  "UnitedHealthcare",
+  "Anthem/Blue Cross Blue Shield",
+  "Aetna",
+  "Cigna",
+  "Humana",
+  "Kaiser Permanente",
+  "Centene",
+  "Molina Healthcare",
+  "WellCare",
+  "Highmark",
+  "Independence Blue Cross",
+  "Health Care Service Corporation (HCSC)",
+  "CareSource",
+  "Tricare",
+  "Medicare",
+  "Medicaid",
+  "Blue Shield of California",
+  "Magellan Health",
+  "Beacon Health Options",
+  "Optum",
+  "Ambetter",
+  "Oscar Health",
+  "Bright Health",
+  "Friday Health Plans"
+];
+
 const providerFormSchema = z.object({
   category: z.string().min(1, "Please select a provider category"),
   providerName: z.string().min(2, "Provider name must be at least 2 characters").max(100),
@@ -44,7 +72,7 @@ const providerFormSchema = z.object({
   detoxAvailable: z.boolean().default(false),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
-  insurancesAccepted: z.string().min(1, "Insurance information is required").max(500),
+  insurancesAccepted: z.array(z.string()).min(1, "Please select at least one insurance provider"),
   logo: z.instanceof(FileList).optional(),
 });
 
@@ -68,19 +96,13 @@ const ProviderInfo = () => {
       detoxAvailable: false,
       descriptionOfServices: "",
       cost: "",
-      insurancesAccepted: "",
+      insurancesAccepted: [],
     },
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
     setIsSubmitting(true);
     try {
-      // Convert insurances from string to array
-      const insurancesArray = data.insurancesAccepted
-        .split(',')
-        .map(i => i.trim())
-        .filter(i => i.length > 0);
-
       let logoUrl = null;
 
       // Upload logo if provided
@@ -134,7 +156,7 @@ const ProviderInfo = () => {
           detox_available: data.detoxAvailable,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
-          insurances_accepted: insurancesArray,
+          insurances_accepted: data.insurancesAccepted,
           logo_url: logoUrl,
           status: 'pending'
         });
@@ -371,16 +393,49 @@ const ProviderInfo = () => {
               <FormField
                 control={form.control}
                 name="insurancesAccepted"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
-                    <FormLabel>Insurances Accepted *</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="List all insurance providers accepted (e.g., Aetna, BlueCross BlueShield, UnitedHealthcare, or 'Self-pay only')"
-                        {...field}
-                        rows={4}
-                      />
-                    </FormControl>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Insurances Accepted *</FormLabel>
+                      <FormDescription>
+                        Select all insurance providers you accept
+                      </FormDescription>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border rounded-lg p-4 bg-muted max-h-96 overflow-y-auto">
+                      {insuranceProviders.map((insurance) => (
+                        <FormField
+                          key={insurance}
+                          control={form.control}
+                          name="insurancesAccepted"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={insurance}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(insurance)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value, insurance])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== insurance
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {insurance}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
