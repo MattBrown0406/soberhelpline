@@ -20,6 +20,7 @@ export type Database = {
           category: string
           cost: string | null
           created_at: string | null
+          description_of_services: string | null
           detox_available: boolean | null
           email: string
           id: string
@@ -38,6 +39,7 @@ export type Database = {
           category: string
           cost?: string | null
           created_at?: string | null
+          description_of_services?: string | null
           detox_available?: boolean | null
           email: string
           id?: string
@@ -56,6 +58,7 @@ export type Database = {
           category?: string
           cost?: string | null
           created_at?: string | null
+          description_of_services?: string | null
           detox_available?: boolean | null
           email?: string
           id?: string
