@@ -1,0 +1,4 @@
+project_id = "anwqprmpzmcqbkttmxos"
+
+[functions.fetch-podcast-feed]
+verify_jwt = false
