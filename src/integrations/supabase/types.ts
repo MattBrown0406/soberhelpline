@@ -26,6 +26,7 @@ export type Database = {
           id: string
           insurances_accepted: string[] | null
           length_of_services: string | null
+          logo_url: string | null
           phone_number: string
           provider_name: string
           status: string | null
@@ -45,6 +46,7 @@ export type Database = {
           id?: string
           insurances_accepted?: string[] | null
           length_of_services?: string | null
+          logo_url?: string | null
           phone_number: string
           provider_name: string
           status?: string | null
@@ -64,6 +66,7 @@ export type Database = {
           id?: string
           insurances_accepted?: string[] | null
           length_of_services?: string | null
+          logo_url?: string | null
           phone_number?: string
           provider_name?: string
           status?: string | null

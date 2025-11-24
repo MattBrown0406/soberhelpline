@@ -45,6 +45,7 @@ const providerFormSchema = z.object({
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.string().min(1, "Insurance information is required").max(500),
+  logo: z.instanceof(FileList).optional(),
 });
 
 type ProviderFormValues = z.infer<typeof providerFormSchema>;
@@ -80,6 +81,44 @@ const ProviderInfo = () => {
         .map(i => i.trim())
         .filter(i => i.length > 0);
 
+      let logoUrl = null;
+
+      // Upload logo if provided
+      if (data.logo && data.logo.length > 0) {
+        const logoFile = data.logo[0];
+        
+        // Validate file type
+        if (!['image/jpeg', 'image/png'].includes(logoFile.type)) {
+          toast({
+            title: "Invalid file type",
+            description: "Logo must be a .jpg or .png file",
+            variant: "destructive",
+          });
+          setIsSubmitting(false);
+          return;
+        }
+
+        // Generate unique filename
+        const fileExt = logoFile.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        
+        // Upload to storage
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('provider-logos')
+          .upload(fileName, logoFile);
+
+        if (uploadError) {
+          throw new Error(`Logo upload failed: ${uploadError.message}`);
+        }
+
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from('provider-logos')
+          .getPublicUrl(fileName);
+        
+        logoUrl = publicUrl;
+      }
+
       // Insert into database
       const { error } = await supabase
         .from('provider_submissions')
@@ -96,6 +135,7 @@ const ProviderInfo = () => {
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           insurances_accepted: insurancesArray,
+          logo_url: logoUrl,
           status: 'pending'
         });
 
@@ -341,6 +381,28 @@ const ProviderInfo = () => {
                         rows={4}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="logo"
+                render={({ field: { value, onChange, ...field } }) => (
+                  <FormItem>
+                    <FormLabel>Provider Logo</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="file"
+                        accept=".jpg,.jpeg,.png"
+                        onChange={(e) => onChange(e.target.files)}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Upload your logo (.jpg or .png files only)
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
