@@ -42,6 +42,7 @@ const providerFormSchema = z.object({
   website: z.string().url("Valid website URL is required").min(1, "Website is required"),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
+  descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.string().min(1, "Insurance information is required").max(500),
 });
@@ -64,6 +65,7 @@ const ProviderInfo = () => {
       website: "",
       lengthOfServices: "",
       detoxAvailable: false,
+      descriptionOfServices: "",
       cost: "",
       insurancesAccepted: "",
     },
@@ -91,6 +93,7 @@ const ProviderInfo = () => {
           website: data.website,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
+          description_of_services: data.descriptionOfServices,
           cost: data.cost,
           insurances_accepted: insurancesArray,
           status: 'pending'
@@ -284,6 +287,28 @@ const ProviderInfo = () => {
                       <FormLabel>Detox Available?</FormLabel>
                       <FormDescription>Check if your facility offers detox services</FormDescription>
                     </div>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="descriptionOfServices"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description of Services *</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Describe the services you provide..."
+                        {...field}
+                        rows={4}
+                        maxLength={500}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      {field.value?.length || 0}/500 characters
+                    </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
