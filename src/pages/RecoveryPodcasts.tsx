@@ -49,6 +49,13 @@ const podcasts = [
     link: "https://soberpowered.com/",
     rssFeed: "https://feeds.buzzsprout.com/1616789.rss",
   },
+  {
+    name: "Man Road Media",
+    description: "Inspiring stories and conversations about recovery, personal growth, and overcoming life's challenges.",
+    host: "Man Road Media",
+    link: "https://manroadmedia.com/",
+    rssFeed: "https://feed.podbean.com/Manroadmedia.feed.xml",
+  },
 ];
 
 const RecoveryPodcasts = () => {
