@@ -48,7 +48,6 @@ const insuranceProviders = [
   "Health Care Service Corporation (HCSC)",
   "CareSource",
   "Tricare",
-  "Medicare",
   "Medicaid",
   "Blue Shield",
   "Magellan Health",
