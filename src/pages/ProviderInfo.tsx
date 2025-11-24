@@ -57,7 +57,8 @@ const insuranceProviders = [
   "Ambetter",
   "Oscar Health",
   "Bright Health",
-  "Friday Health Plans"
+  "Friday Health Plans",
+  "Other"
 ];
 
 const providerFormSchema = z.object({
@@ -73,6 +74,7 @@ const providerFormSchema = z.object({
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.array(z.string()).min(1, "Please select at least one insurance provider"),
+  otherInsurances: z.string().optional(),
   logo: z.instanceof(FileList).optional(),
 });
 
@@ -97,12 +99,28 @@ const ProviderInfo = () => {
       descriptionOfServices: "",
       cost: "",
       insurancesAccepted: [],
+      otherInsurances: "",
     },
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
     setIsSubmitting(true);
     try {
+      // Combine selected insurances with custom "Other" insurances
+      let finalInsurances = [...data.insurancesAccepted];
+      
+      // If "Other" is selected and there are custom insurances, add them
+      if (data.insurancesAccepted.includes("Other") && data.otherInsurances) {
+        const customInsurances = data.otherInsurances
+          .split(',')
+          .map(i => i.trim())
+          .filter(i => i.length > 0);
+        
+        // Remove "Other" and add the custom insurances
+        finalInsurances = finalInsurances.filter(i => i !== "Other");
+        finalInsurances = [...finalInsurances, ...customInsurances];
+      }
+
       let logoUrl = null;
 
       // Upload logo if provided
@@ -156,7 +174,7 @@ const ProviderInfo = () => {
           detox_available: data.detoxAvailable,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
-          insurances_accepted: data.insurancesAccepted,
+          insurances_accepted: finalInsurances,
           logo_url: logoUrl,
           status: 'pending'
         });
@@ -440,6 +458,29 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {form.watch("insurancesAccepted")?.includes("Other") && (
+                <FormField
+                  control={form.control}
+                  name="otherInsurances"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Other Insurance Providers</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Enter insurance providers separated by commas (e.g., Provider A, Provider B, Provider C)"
+                          {...field}
+                          rows={3}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        List any insurance providers not shown above, separated by commas
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={form.control}
