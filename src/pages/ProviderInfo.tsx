@@ -40,7 +40,6 @@ const providerFormSchema = z.object({
   email: z.string().email("Valid email is required").max(255),
   website: z.string().url("Valid website URL is required").or(z.literal("")),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
-  totalTreatmentBeds: z.string().min(1, "Total treatment beds is required"),
   detoxAvailable: z.boolean().default(false),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.string().min(1, "Insurance information is required").max(500),
@@ -62,7 +61,6 @@ const ProviderInfo = () => {
       email: "",
       website: "",
       lengthOfServices: "",
-      totalTreatmentBeds: "",
       detoxAvailable: false,
       cost: "",
       insurancesAccepted: "",
@@ -89,7 +87,6 @@ const ProviderInfo = () => {
           email: data.email,
           website: data.website || null,
           length_of_services: data.lengthOfServices,
-          total_treatment_beds: parseInt(data.totalTreatmentBeds) || null,
           detox_available: data.detoxAvailable,
           cost: data.cost,
           insurances_accepted: insurancesArray,
@@ -241,35 +238,19 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="lengthOfServices"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Length of Services *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., 30 days, 90 days" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="totalTreatmentBeds"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Total Treatment Beds *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., 20" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="lengthOfServices"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Length of Services *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., 30 days, 90 days" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <FormField
                 control={form.control}
