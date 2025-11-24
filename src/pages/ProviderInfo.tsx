@@ -65,7 +65,8 @@ const insuranceProviders = [
 const providerFormSchema = z.object({
   category: z.string().min(1, "Please select a provider category"),
   providerName: z.string().min(2, "Provider name must be at least 2 characters").max(100),
-  address: z.string().min(5, "Address is required").max(200),
+  city: z.string().min(2, "City is required").max(100),
+  state: z.string().min(2, "State is required").max(50),
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Valid zip code is required (e.g., 12345 or 12345-6789)"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
@@ -90,7 +91,8 @@ const ProviderInfo = () => {
     defaultValues: {
       category: "",
       providerName: "",
-      address: "",
+      city: "",
+      state: "",
       zipCode: "",
       phoneNumber: "",
       email: "",
@@ -166,7 +168,8 @@ const ProviderInfo = () => {
         .insert({
           category: data.category,
           provider_name: data.providerName,
-          address: data.address,
+          city: data.city,
+          state: data.state,
           zip_code: data.zipCode,
           phone_number: data.phoneNumber,
           email: data.email,
@@ -177,6 +180,7 @@ const ProviderInfo = () => {
           cost: data.cost,
           insurances_accepted: finalInsurances,
           logo_url: logoUrl,
+          address: null,
           status: 'pending'
         });
 
@@ -266,20 +270,35 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address *</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Enter street address, city, and state" {...field} />
-                    </FormControl>
-                    <FormDescription>Enter address without zip code</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="city"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>City *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter city" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="state"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>State *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter state" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
