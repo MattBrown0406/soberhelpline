@@ -22,7 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 
 // Resize image to fit within maxSize while maintaining aspect ratio
-const resizeImage = (file: File, maxSize: number = 300): Promise<Blob> => {
+const resizeImage = (file: File, maxSize: number = 400): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -208,8 +208,8 @@ const ProviderInfo = () => {
           return;
         }
 
-        // Resize image to 300x300 max (suitable for 1.5" at 2x DPI)
-        const resizedBlob = await resizeImage(logoFile, 300);
+        // Resize image to 400x400 max (suitable for 2" at 2x DPI)
+        const resizedBlob = await resizeImage(logoFile, 400);
 
         // Generate unique filename
         const fileExt = 'jpg'; // Always save as jpg after resize
@@ -598,7 +598,7 @@ const ProviderInfo = () => {
                       />
                     </FormControl>
                     <FormDescription>
-                      Upload your logo (.jpg or .png files only). Images will be automatically resized to fit within 1.5" square.
+                      Upload your logo (.jpg or .png files only). Images will be automatically resized to fit within 2" square.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
