@@ -501,7 +501,15 @@ const ProviderInfo = () => {
                   <FormItem>
                     <FormLabel>Private Pay Rate (without insurance) *</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., $5,000 - $10,000 per month" {...field} />
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                        <Input 
+                          type="number" 
+                          placeholder="cost per month" 
+                          className="pl-7"
+                          {...field} 
+                        />
+                      </div>
                     </FormControl>
                     <FormDescription>Provide cost range or pricing structure</FormDescription>
                     <FormMessage />
