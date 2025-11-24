@@ -48,7 +48,7 @@ const Index = () => {
               return (
                 <Link key={category.name} to={category.path}>
                   <Card
-                    className="p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
+                    className="p-4 h-[120px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
                   >
                     <Icon className="w-8 h-8 text-primary" />
                     <span className="text-sm font-medium text-foreground leading-tight">
