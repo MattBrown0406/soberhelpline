@@ -1,9 +1,16 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Headphones, ArrowLeft } from "lucide-react";
+import { Headphones, ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const podcasts: any[] = [];
+const podcasts = [
+  {
+    name: "The Party Wreckers Podcast",
+    description: "Real conversations about recovery, sobriety, and living life beyond addiction.",
+    host: "The Party Wreckers",
+    link: "https://www.thepartywreckerspodcast.com/",
+  },
+];
 
 const RecoveryPodcasts = () => {
   return (
@@ -48,9 +55,10 @@ const RecoveryPodcasts = () => {
                   rel="noopener noreferrer"
                   className="mt-auto"
                 >
-                  <Button variant="outline" className="w-full gap-2">
-                    Listen Now
-                  </Button>
+                <Button variant="outline" className="w-full gap-2">
+                  Listen Now
+                  <ExternalLink className="w-4 h-4" />
+                </Button>
                 </a>
               </Card>
             ))}
