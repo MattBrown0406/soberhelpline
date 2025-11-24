@@ -24,9 +24,9 @@ const podcasts = [
     logo: partyWreckersLogo,
   },
   {
-    name: "Man Road Media",
+    name: "The Unbroken with Sam Davis",
     description: "Inspiring stories and conversations about recovery, personal growth, and overcoming life's challenges.",
-    host: "Man Road Media",
+    host: "Sam Davis",
     link: "https://manroadmedia.com/",
     rssFeed: "https://feed.podbean.com/Manroadmedia/feed.xml",
   },
