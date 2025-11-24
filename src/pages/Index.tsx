@@ -42,7 +42,7 @@ const Index = () => {
 
         <div className="mb-12">
           <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">Browse by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 justify-items-center">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
