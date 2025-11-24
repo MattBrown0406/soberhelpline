@@ -18,7 +18,7 @@ const podcasts = [
     name: "The Party Wreckers Podcast",
     description: "Real conversations about recovery, sobriety, and living life beyond addiction.",
     host: "Matt Brown",
-    link: "https://www.thepartywreckerspodcast.com/",
+    link: "https://partywreckers.com",
     rssFeed: "https://feeds.buzzsprout.com/1941777.rss",
   },
   {
