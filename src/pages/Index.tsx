@@ -1,5 +1,6 @@
 import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Heart, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 
@@ -19,9 +20,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-4">
-          <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+          <Link to="/recovery-podcasts" className="text-foreground hover:text-primary transition-colors font-medium">
             Recovery Podcasts
-          </a>
+          </Link>
           <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
             <Phone className="w-5 h-5" />
             <span className="font-medium">(541) 241-5886</span>
