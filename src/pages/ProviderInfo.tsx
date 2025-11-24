@@ -630,6 +630,19 @@ const ProviderInfo = () => {
                 )}
               />
 
+              <div className="bg-muted p-4 rounded-md border border-border">
+                <p className="text-sm text-muted-foreground">
+                  Upon approval you will be sent an invoice to the email provided in the application for the recurring monthly or annual fee. If you wish to use a different email please contact{" "}
+                  <a href="mailto:matt@soberhelpline.com" className="text-primary hover:underline">
+                    matt@soberhelpline.com
+                  </a>{" "}
+                  or call{" "}
+                  <a href="tel:5038362136" className="text-primary hover:underline">
+                    503-836-2136
+                  </a>.
+                </p>
+              </div>
+
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit Provider Information"}
               </Button>
