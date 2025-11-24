@@ -28,7 +28,7 @@ const podcasts = [
     description: "Inspiring stories and conversations about recovery, personal growth, and overcoming life's challenges.",
     host: "Man Road Media",
     link: "https://manroadmedia.com/",
-    rssFeed: "https://feed.podbean.com/Manroadmedia.feed.xml",
+    rssFeed: "https://feed.podbean.com/Manroadmedia/feed.xml",
   },
 ];
 
