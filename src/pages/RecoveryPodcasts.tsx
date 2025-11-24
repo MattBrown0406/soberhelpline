@@ -4,6 +4,7 @@ import { Headphones, ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import partyWreckersLogo from "@/assets/party-wreckers-logo.png";
 
 interface Episode {
   title: string;
@@ -20,6 +21,7 @@ const podcasts = [
     host: "Matt Brown",
     link: "https://partywreckers.com",
     rssFeed: "https://feeds.buzzsprout.com/1941777.rss",
+    logo: partyWreckersLogo,
   },
   {
     name: "Man Road Media",
@@ -98,8 +100,13 @@ const RecoveryPodcasts = () => {
 
             return (
               <Card key={podcast.name} className="p-6 hover:shadow-lg transition-shadow">
+                {podcast.logo && (
+                  <div className="mb-4 flex justify-center">
+                    <img src={podcast.logo} alt={`${podcast.name} logo`} className="h-32 w-32 object-contain rounded-lg" />
+                  </div>
+                )}
                 <div className="flex items-start gap-3 mb-4">
-                  <Headphones className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                  {!podcast.logo && <Headphones className="w-6 h-6 text-primary flex-shrink-0 mt-1" />}
                   <div className="flex-grow">
                     <h3 className="text-xl font-semibold text-foreground">{podcast.name}</h3>
                     <p className="text-sm text-muted-foreground mt-1">
