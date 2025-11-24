@@ -16,8 +16,9 @@ export type Database = {
     Tables: {
       provider_submissions: {
         Row: {
-          address: string
+          address: string | null
           category: string
+          city: string | null
           cost: string | null
           created_at: string | null
           description_of_services: string | null
@@ -29,6 +30,7 @@ export type Database = {
           logo_url: string | null
           phone_number: string
           provider_name: string
+          state: string | null
           status: string | null
           total_treatment_beds: number | null
           updated_at: string | null
@@ -36,8 +38,9 @@ export type Database = {
           zip_code: string | null
         }
         Insert: {
-          address: string
+          address?: string | null
           category: string
+          city?: string | null
           cost?: string | null
           created_at?: string | null
           description_of_services?: string | null
@@ -49,6 +52,7 @@ export type Database = {
           logo_url?: string | null
           phone_number: string
           provider_name: string
+          state?: string | null
           status?: string | null
           total_treatment_beds?: number | null
           updated_at?: string | null
@@ -56,8 +60,9 @@ export type Database = {
           zip_code?: string | null
         }
         Update: {
-          address?: string
+          address?: string | null
           category?: string
+          city?: string | null
           cost?: string | null
           created_at?: string | null
           description_of_services?: string | null
@@ -69,6 +74,7 @@ export type Database = {
           logo_url?: string | null
           phone_number?: string
           provider_name?: string
+          state?: string | null
           status?: string | null
           total_treatment_beds?: number | null
           updated_at?: string | null
