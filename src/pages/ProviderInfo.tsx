@@ -18,6 +18,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 
 const providerCategories = [
   "Inpatient Treatment",
@@ -48,6 +50,7 @@ type ProviderFormValues = z.infer<typeof providerFormSchema>;
 
 const ProviderInfo = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<ProviderFormValues>({
     resolver: zodResolver(providerFormSchema),
@@ -66,13 +69,50 @@ const ProviderInfo = () => {
     },
   });
 
-  const onSubmit = (data: ProviderFormValues) => {
-    console.log(data);
-    toast({
-      title: "Form submitted!",
-      description: "Your provider information has been received.",
-    });
-    form.reset();
+  const onSubmit = async (data: ProviderFormValues) => {
+    setIsSubmitting(true);
+    try {
+      // Convert insurances from string to array
+      const insurancesArray = data.insurancesAccepted
+        .split(',')
+        .map(i => i.trim())
+        .filter(i => i.length > 0);
+
+      // Insert into database
+      const { error } = await supabase
+        .from('provider_submissions')
+        .insert({
+          category: data.category,
+          provider_name: data.providerName,
+          address: data.address,
+          phone_number: data.phoneNumber,
+          email: data.email,
+          website: data.website || null,
+          length_of_services: data.lengthOfServices,
+          total_treatment_beds: parseInt(data.totalTreatmentBeds) || null,
+          detox_available: data.detoxAvailable,
+          cost: data.cost,
+          insurances_accepted: insurancesArray,
+          status: 'pending'
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Application submitted!",
+        description: "Your provider information has been received and is pending review.",
+      });
+      form.reset();
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -283,7 +323,9 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <Button type="submit" size="lg" className="w-full">Submit Provider Information</Button>
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit Provider Information"}
+              </Button>
             </form>
           </Form>
         </div>
