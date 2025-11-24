@@ -20,9 +20,14 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-4">
-          <Link to="/recovery-podcasts" className="text-foreground hover:text-primary transition-colors font-medium">
-            Recovery Podcasts
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link to="/recovery-podcasts" className="text-foreground hover:text-primary transition-colors font-medium">
+              Recovery Podcasts
+            </Link>
+            <Link to="/provider-info" className="text-foreground hover:text-primary transition-colors font-medium">
+              Provider Information
+            </Link>
+          </div>
           <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
             <Phone className="w-5 h-5" />
             <span className="font-medium">(541) 241-5886</span>
