@@ -117,17 +117,19 @@ const RecoveryPodcasts = () => {
                 
                 <p className="text-muted-foreground mb-4">{podcast.description}</p>
                 
-                <a 
-                  href={podcast.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block mb-6"
-                >
-                  <Button variant="outline" className="gap-2">
-                    Visit Website
-                    <ExternalLink className="w-4 h-4" />
-                  </Button>
-                </a>
+                {podcast.name !== "The Unbroken with Sam Davis" && (
+                  <a 
+                    href={podcast.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block mb-6"
+                  >
+                    <Button variant="outline" className="gap-2">
+                      Visit Website
+                      <ExternalLink className="w-4 h-4" />
+                    </Button>
+                  </a>
+                )}
 
                 <div className="border-t pt-6">
                   <h4 className="text-lg font-semibold mb-4">Recent Episodes</h4>
