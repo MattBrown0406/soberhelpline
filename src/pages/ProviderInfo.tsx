@@ -139,6 +139,7 @@ const providerFormSchema = z.object({
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
   website: z.string().url("Valid website URL is required").min(1, "Website is required"),
+  interventionModalities: z.array(z.string()).optional(),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
@@ -182,6 +183,7 @@ const ProviderInfo = () => {
       phoneNumber: "",
       email: "",
       website: "",
+      interventionModalities: [],
       lengthOfServices: "",
       detoxAvailable: false,
       coOccurringDiagnoses: [],
@@ -283,6 +285,7 @@ const ProviderInfo = () => {
           phone_number: data.phoneNumber,
           email: data.email,
           website: data.website,
+          intervention_modalities: data.interventionModalities || null,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
@@ -498,6 +501,57 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {form.watch("category") === "Interventionists" && (
+                <FormField
+                  control={form.control}
+                  name="interventionModalities"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Are you trained in any of the following intervention modalities?</FormLabel>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                        {["ARISE", "Family Systems", "Johnson Model", "CRAFT (Community Reinforcement and Family Training)", "Motivational Interviewing", "Systemic Family Intervention", "Invitational Intervention"].map((modality) => (
+                          <FormField
+                            key={modality}
+                            control={form.control}
+                            name="interventionModalities"
+                            render={({ field }) => {
+                              const value = field.value || [];
+                              return (
+                                <FormItem
+                                  key={modality}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={value.includes(modality)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...value, modality])
+                                          : field.onChange(
+                                              value.filter(
+                                                (val) => val !== modality
+                                              )
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {modality}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
                 <FormField

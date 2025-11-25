@@ -28,6 +28,7 @@ export type Database = {
           gender_specific_treatment: string[] | null
           id: string
           insurances_accepted: string[] | null
+          intervention_modalities: string[] | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
@@ -55,6 +56,7 @@ export type Database = {
           gender_specific_treatment?: string[] | null
           id?: string
           insurances_accepted?: string[] | null
+          intervention_modalities?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
@@ -82,6 +84,7 @@ export type Database = {
           gender_specific_treatment?: string[] | null
           id?: string
           insurances_accepted?: string[] | null
+          intervention_modalities?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
