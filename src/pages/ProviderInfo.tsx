@@ -669,9 +669,19 @@ const ProviderInfo = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Length of Services *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="30, 60, 90 days, etc" {...field} />
-                      </FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select length of services" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="30 days">30 days</SelectItem>
+                          <SelectItem value="60 days">60 days</SelectItem>
+                          <SelectItem value="90 days">90 days</SelectItem>
+                          <SelectItem value="More than 90 days">More than 90 days</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
