@@ -56,6 +56,7 @@ export type Database = {
           residents_expected_to_work: boolean | null
           state: string | null
           status: string | null
+          substance_use_disorder_experience: boolean | null
           therapeutic_modalities: string[] | null
           total_treatment_beds: number | null
           updated_at: string | null
@@ -104,6 +105,7 @@ export type Database = {
           residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
+          substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
           updated_at?: string | null
@@ -152,6 +154,7 @@ export type Database = {
           residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
+          substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
           updated_at?: string | null
