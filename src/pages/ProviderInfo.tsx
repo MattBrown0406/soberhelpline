@@ -141,6 +141,8 @@ const providerFormSchema = z.object({
   website: z.string().url("Valid website URL is required").min(1, "Website is required"),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
+  genderSpecificTreatment: z.array(z.string()).optional(),
+  lgbtSupportive: z.boolean().default(false),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.array(z.string()).min(1, "Please select at least one insurance provider"),
@@ -167,6 +169,8 @@ const ProviderInfo = () => {
       website: "",
       lengthOfServices: "",
       detoxAvailable: false,
+      genderSpecificTreatment: [],
+      lgbtSupportive: false,
       descriptionOfServices: "",
       cost: "",
       insurancesAccepted: [],
@@ -247,6 +251,8 @@ const ProviderInfo = () => {
           website: data.website,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
+          gender_specific_treatment: data.genderSpecificTreatment || null,
+          lgbt_supportive: data.lgbtSupportive,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           insurances_accepted: finalInsurances,
@@ -484,6 +490,73 @@ const ProviderInfo = () => {
                     <div className="space-y-1 leading-none">
                       <FormLabel>Detox Available?</FormLabel>
                       <FormDescription>Check if your facility offers detox services</FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="genderSpecificTreatment"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Do you offer gender specific treatment?</FormLabel>
+                    </div>
+                    <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
+                      {["Men", "Women"].map((gender) => (
+                        <FormField
+                          key={gender}
+                          control={form.control}
+                          name="genderSpecificTreatment"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={gender}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(gender)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value, gender])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== gender
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {gender}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="lgbtSupportive"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>LGBT supportive treatment?</FormLabel>
+                      <FormDescription>Check if your facility offers LGBT supportive treatment</FormDescription>
                     </div>
                   </FormItem>
                 )}

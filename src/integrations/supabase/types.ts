@@ -24,9 +24,11 @@ export type Database = {
           description_of_services: string | null
           detox_available: boolean | null
           email: string
+          gender_specific_treatment: string[] | null
           id: string
           insurances_accepted: string[] | null
           length_of_services: string | null
+          lgbt_supportive: boolean | null
           logo_url: string | null
           phone_number: string
           provider_name: string
@@ -46,9 +48,11 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           email: string
+          gender_specific_treatment?: string[] | null
           id?: string
           insurances_accepted?: string[] | null
           length_of_services?: string | null
+          lgbt_supportive?: boolean | null
           logo_url?: string | null
           phone_number: string
           provider_name: string
@@ -68,9 +72,11 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           email?: string
+          gender_specific_treatment?: string[] | null
           id?: string
           insurances_accepted?: string[] | null
           length_of_services?: string | null
+          lgbt_supportive?: boolean | null
           logo_url?: string | null
           phone_number?: string
           provider_name?: string
