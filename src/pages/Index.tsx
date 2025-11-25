@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -47,13 +47,19 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <Link to="/recovery-podcasts">
               <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
                 <Headphones className="w-4 h-4" />
                 Recovery Podcasts
               </Button>
             </Link>
+            <a href="#partnership">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Heart className="w-4 h-4" />
+                Free Family Education and Support
+              </Button>
+            </a>
           </div>
           <div className="flex items-center gap-4">
             <Link to="/provider-info" className="text-foreground hover:text-primary transition-colors font-medium">
@@ -119,7 +125,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-12 bg-accent rounded-lg p-8 text-center max-w-4xl mx-auto">
+        <div id="partnership" className="mt-12 bg-accent rounded-lg p-8 text-center max-w-4xl mx-auto scroll-mt-8">
           <img src={iocLogo} alt="Intervention On Call" className="mx-auto mb-6 h-20 w-auto" />
           <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
