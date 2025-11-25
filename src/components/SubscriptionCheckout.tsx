@@ -80,7 +80,7 @@ interface SubscriptionCheckoutProps {
 }
 
 export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess }: SubscriptionCheckoutProps) {
-  const { createSubscription, isLoading } = usePayPalSubscription();
+  const { createSubscription, isLoading, paypalUrl } = usePayPalSubscription();
   const [discountCode, setDiscountCode] = useState('');
   const plan = getSubscriptionPlan(category);
 
@@ -92,7 +92,6 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
         providerSubmissionId,
         discountCode: discountCode.trim() || undefined,
       });
-      onSuccess?.();
     } catch (error) {
       // Error is handled in the hook
     }
@@ -145,21 +144,44 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
         </CardContent>
 
         <CardFooter className="flex flex-col gap-4">
-          <Button 
-            size="lg" 
-            onClick={handleSubscribe}
-            disabled={isLoading}
-            className="w-full"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Processing...
-              </>
-            ) : (
-              <>Subscribe with PayPal</>
-            )}
-          </Button>
+          {paypalUrl ? (
+            <>
+              <div className="w-full p-4 bg-muted rounded-lg text-center space-y-3">
+                <p className="text-sm font-medium text-foreground">
+                  Click the button below to complete your payment with PayPal
+                </p>
+                <a 
+                  href={paypalUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block w-full"
+                >
+                  <Button size="lg" className="w-full">
+                    Continue to PayPal →
+                  </Button>
+                </a>
+                <p className="text-xs text-muted-foreground">
+                  Opens in a new tab. Return here after completing payment.
+                </p>
+              </div>
+            </>
+          ) : (
+            <Button 
+              size="lg" 
+              onClick={handleSubscribe}
+              disabled={isLoading}
+              className="w-full"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                <>Subscribe with PayPal</>
+              )}
+            </Button>
+          )}
           <p className="text-sm text-muted-foreground text-center">
             Secure payment powered by PayPal. Cancel anytime.
           </p>
