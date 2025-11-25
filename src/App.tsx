@@ -17,6 +17,8 @@ import Attorneys from "./pages/Attorneys";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
+import SubscriptionSuccess from "./pages/SubscriptionSuccess";
+import SubscriptionCancel from "./pages/SubscriptionCancel";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ const App = () => (
           <Route path="/attorneys" element={<Attorneys />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/subscription/success" element={<SubscriptionSuccess />} />
+          <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
