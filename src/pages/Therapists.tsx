@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
-
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
@@ -13,6 +13,22 @@ import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
 import logo from "@/assets/logo.png";
+
+const therapeuticModalities = [
+  "All",
+  "CBT (Cognitive Behavioral Therapy)",
+  "DBT (Dialectical Behavior Therapy)",
+  "EMDR",
+  "Equine Therapy",
+  "Family Therapy",
+  "Group Therapy",
+  "IFS (Internal Family Systems)",
+  "Individual Therapy",
+  "Mindfulness Based Therapy",
+  "Motivational Interviewing",
+  "Psychodynamic Therapy",
+  "Somatic and Experiential Therapy",
+];
 
 interface Provider {
   id: string;
@@ -33,18 +49,26 @@ const Therapists = () => {
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
+  const [selectedModality, setSelectedModality] = useState("All");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
     setLoading(true);
     setShowingNearby(false);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved")
         .eq("state", state);
+
+      // Apply therapeutic modality filter
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
       
@@ -67,12 +91,19 @@ const Therapists = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
+
+      // Apply therapeutic modality filter for nearby providers
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -139,11 +170,16 @@ const Therapists = () => {
     setSelectedState(null);
     
     try {
-      const query = supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved");
+
+      // Apply therapeutic modality filter
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
 
       const { data, error } = await query;
 
@@ -160,9 +196,10 @@ const Therapists = () => {
       setShowingNearby(isNearby);
       
       if (filteredProviders.length === 0) {
+        const modalityText = selectedModality !== "All" ? ` offering ${selectedModality}` : "";
         toast({
           title: "No providers found",
-          description: `No providers found near zip code ${zipCodeSearch}`,
+          description: `No providers found near zip code ${zipCodeSearch}${modalityText}`,
         });
       }
     } catch (error) {
@@ -215,22 +252,43 @@ const Therapists = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-md mx-auto mt-6">
-            <div className="space-y-2">
-              <Label htmlFor="zipSearch">Search by Zip Code</Label>
-              <Input
-                id="zipSearch"
-                type="text"
-                placeholder="Enter zip code"
-                value={zipCodeSearch}
-                onChange={(e) => setZipCodeSearch(e.target.value)}
-                maxLength={10}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    handleZipCodeSearch();
-                  }
-                }}
-              />
+          <div className="max-w-2xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="zipSearch">Search by Zip Code</Label>
+                <Input
+                  id="zipSearch"
+                  type="text"
+                  placeholder="Enter zip code"
+                  value={zipCodeSearch}
+                  onChange={(e) => setZipCodeSearch(e.target.value)}
+                  maxLength={10}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleZipCodeSearch();
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="modalitySearch">Search by Therapeutic Modality</Label>
+                <Select
+                  value={selectedModality}
+                  onValueChange={setSelectedModality}
+                >
+                  <SelectTrigger id="modalitySearch" className="bg-background">
+                    <SelectValue placeholder="Select modality" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50 max-h-60">
+                    {therapeuticModalities.map((modality) => (
+                      <SelectItem key={modality} value={modality}>
+                        {modality}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             
             <div className="flex justify-center mt-4">
