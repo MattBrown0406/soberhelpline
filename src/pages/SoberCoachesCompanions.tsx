@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
+import ProviderFilters from "@/components/ProviderFilters";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import logo from "@/assets/logo.png";
@@ -31,19 +32,34 @@ const SoberCoachesCompanions = () => {
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
+  const [filters, setFilters] = useState({
+    insurance: "All",
+    maxBudget: "",
+    zipCode: "",
+    genderSpecific: [] as string[],
+    lgbtSupportive: false,
+  });
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
     setLoading(true);
     setShowingNearby(false);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Sober Coaches/Companions")
         .eq("status", "approved")
         .eq("state", state);
 
+      if (filters.zipCode) {
+        query = query.eq("zip_code", filters.zipCode);
+      }
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
       
       if (!data || data.length === 0) {
@@ -65,13 +81,18 @@ const SoberCoachesCompanions = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Sober Coaches/Companions")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
 
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
 
       if (data && data.length > 0) {
@@ -110,6 +131,13 @@ const SoberCoachesCompanions = () => {
   const handleStateClick = (stateName: string) => {
     setSelectedState(stateName);
     fetchProviders(stateName);
+  };
+
+  const handleFiltersChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    if (selectedState) {
+      fetchProviders(selectedState);
+    }
   };
 
   const handleZipCodeSearch = async () => {
@@ -224,7 +252,15 @@ const SoberCoachesCompanions = () => {
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
-          <div className="max-w-4xl mx-auto">
+          <>
+            <ProviderFilters 
+              filters={filters} 
+              onFiltersChange={handleFiltersChange}
+              showInsurance={false}
+              showGenderSpecific={false}
+            />
+            
+            <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
               {zipCodeSearch && !selectedState
                 ? `Providers in Zip Code ${zipCodeSearch}`
@@ -250,7 +286,8 @@ const SoberCoachesCompanions = () => {
                 No approved providers found.
               </p>
             )}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>
