@@ -12,6 +12,7 @@ import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
+import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
 import logo from "@/assets/logo.png";
 
 const insuranceProviders = [
@@ -212,6 +213,16 @@ const MedicalDetox = () => {
       return;
     }
 
+    const searchLocation = getZipCodeLocation(zipCodeSearch);
+    if (!searchLocation) {
+      toast({
+        title: "Invalid Zip Code",
+        description: "Could not find location for this zip code",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (insuranceSearch === "Other" && !customInsurance.trim()) {
       toast({
         title: "Insurance Provider Required",
@@ -248,8 +259,7 @@ const MedicalDetox = () => {
         .from("provider_submissions")
         .select("*")
         .eq("category", "Medical Detox")
-        .eq("status", "approved")
-        .eq("zip_code", zipCodeSearch);
+        .eq("status", "approved");
 
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
       if (insuranceSearch !== "All") {
@@ -280,15 +290,23 @@ const MedicalDetox = () => {
 
       if (error) throw error;
       
-      setProviders(data || []);
+      const { providers: filteredProviders, isNearby } = filterProvidersByDistance(
+        data || [],
+        zipCodeSearch,
+        100,
+        3
+      );
       
-      if (!data || data.length === 0) {
+      setProviders(filteredProviders);
+      setShowingNearby(isNearby);
+      
+      if (filteredProviders.length === 0) {
         const insuranceText = insuranceSearch === "Other" ? customInsurance : insuranceSearch;
         const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
         const lengthText = lengthOfStay !== "All" ? ` with ${lengthOfStay} length of stay` : "";
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}${lengthText}`,
+          description: `No providers found near zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}${lengthText}`,
         });
       }
     } catch (error) {
@@ -476,14 +494,18 @@ const MedicalDetox = () => {
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-semibold mb-4">
                 {zipCodeSearch && !selectedState
-                  ? `Providers in Zip Code ${zipCodeSearch}`
+                  ? (showingNearby 
+                      ? `Nearest Medical Detox Providers to ${zipCodeSearch}`
+                      : `Medical Detox Providers within 100 miles of ${zipCodeSearch}`)
                   : showingNearby 
                     ? `Nearest Medical Detox Providers to ${selectedState}` 
                     : `Medical Detox Providers in ${selectedState}`}
               </h3>
               {showingNearby && (
                 <p className="text-muted-foreground mb-4">
-                  No providers found in {selectedState}. Showing the 3 nearest providers.
+                  {zipCodeSearch && !selectedState
+                    ? `No providers found within 100 miles of ${zipCodeSearch}. Showing the 3 geographically closest providers.`
+                    : `No providers found in ${selectedState}. Showing the 3 nearest providers.`}
                 </p>
               )}
               {loading ? (

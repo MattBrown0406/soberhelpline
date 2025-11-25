@@ -11,6 +11,7 @@ import ProviderCard from "@/components/ProviderCard";
 import CategoryNav from "@/components/CategoryNav";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
+import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
 import logo from "@/assets/logo.png";
 
 interface Provider {
@@ -125,6 +126,16 @@ const SoberLiving = () => {
       return;
     }
 
+    const searchLocation = getZipCodeLocation(zipCodeSearch);
+    if (!searchLocation) {
+      toast({
+        title: "Invalid Zip Code",
+        description: "Could not find location for this zip code",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (genderSpecificCare === "Yes" && !genderType) {
       toast({
         title: "Gender Selection Required",
@@ -143,8 +154,7 @@ const SoberLiving = () => {
         .from("provider_submissions")
         .select("*")
         .eq("category", "Sober Living")
-        .eq("status", "approved")
-        .eq("zip_code", zipCodeSearch);
+        .eq("status", "approved");
 
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
@@ -154,13 +164,21 @@ const SoberLiving = () => {
 
       if (error) throw error;
       
-      setProviders(data || []);
+      const { providers: filteredProviders, isNearby } = filterProvidersByDistance(
+        data || [],
+        zipCodeSearch,
+        100,
+        3
+      );
       
-      if (!data || data.length === 0) {
+      setProviders(filteredProviders);
+      setShowingNearby(isNearby);
+      
+      if (filteredProviders.length === 0) {
         const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}${genderText}`,
+          description: `No providers found near zip code ${zipCodeSearch}${genderText}`,
         });
       }
     } catch (error) {
@@ -279,14 +297,18 @@ const SoberLiving = () => {
           <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
               {zipCodeSearch && !selectedState
-                ? `Providers in Zip Code ${zipCodeSearch}`
+                ? (showingNearby 
+                    ? `Nearest Sober Living Providers to ${zipCodeSearch}`
+                    : `Sober Living Providers within 100 miles of ${zipCodeSearch}`)
                 : showingNearby 
                   ? `Nearest Sober Living Providers to ${selectedState}` 
                   : `Sober Living Providers in ${selectedState}`}
             </h3>
             {showingNearby && (
               <p className="text-muted-foreground mb-4">
-                No providers found in {selectedState}. Showing the 3 geographically closest providers.
+                {zipCodeSearch && !selectedState
+                  ? `No providers found within 100 miles of ${zipCodeSearch}. Showing the 3 geographically closest providers.`
+                  : `No providers found in ${selectedState}. Showing the 3 geographically closest providers.`}
               </p>
             )}
             {loading ? (
