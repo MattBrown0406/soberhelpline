@@ -163,6 +163,7 @@ const providerFormSchema = z.object({
   medicationAdministration: z.string().optional(),
   acceptsMatResidents: z.boolean().optional(),
   minimumTimeSinceLastUse: z.string().optional(),
+  requiredMeetingsPerWeek: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -247,6 +248,7 @@ const ProviderInfo = () => {
       medicationAdministration: "",
       acceptsMatResidents: false,
       minimumTimeSinceLastUse: "",
+      requiredMeetingsPerWeek: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -377,6 +379,7 @@ const ProviderInfo = () => {
           medication_administration: data.medicationAdministration || null,
           accepts_mat_residents: data.acceptsMatResidents || null,
           minimum_time_since_last_use: data.minimumTimeSinceLastUse || null,
+          required_meetings_per_week: data.requiredMeetingsPerWeek || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1147,6 +1150,36 @@ const ProviderInfo = () => {
                           <SelectItem value="One week">One week</SelectItem>
                           <SelectItem value="One month">One month</SelectItem>
                           <SelectItem value="More than one month">More than one month</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="requiredMeetingsPerWeek"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>How many meetings a week are your residents required to attend?</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select required meetings per week" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6">6</SelectItem>
+                          <SelectItem value="7">7</SelectItem>
+                          <SelectItem value="More than 7">More than 7</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
