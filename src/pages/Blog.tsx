@@ -7,7 +7,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { ScrollArea } from "@/components/ui/scroll-area";
 import logo from "@/assets/logo.png";
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
-
+import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
+import supportLovedOneImg from "@/assets/blog-support-loved-one.png";
+import aftercareImg from "@/assets/blog-aftercare-recovery.png";
 const blogPosts = [
   {
     id: 1,
@@ -76,7 +78,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-15",
     category: "Recovery Basics",
-    image: null,
+    image: firstStepsImg,
     content: null
   },
   {
@@ -86,7 +88,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-10",
     category: "Family Support",
-    image: null,
+    image: supportLovedOneImg,
     content: null
   },
   {
@@ -96,7 +98,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-05",
     category: "Aftercare",
-    image: null,
+    image: aftercareImg,
     content: null
   }
 ];
