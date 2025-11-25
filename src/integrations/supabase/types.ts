@@ -61,6 +61,7 @@ export type Database = {
           daily_companion_fee: string | null
           description_of_services: string | null
           detox_available: boolean | null
+          detox_only_services: boolean | null
           email: string
           gender_specific_treatment: string[] | null
           has_valid_passport: boolean | null
@@ -114,6 +115,7 @@ export type Database = {
           daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
+          detox_only_services?: boolean | null
           email: string
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
@@ -167,6 +169,7 @@ export type Database = {
           daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
+          detox_only_services?: boolean | null
           email?: string
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null

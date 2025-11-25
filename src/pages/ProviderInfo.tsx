@@ -154,6 +154,7 @@ const providerFormSchema = z.object({
   caseManagementServices: z.boolean().optional(),
   lengthOfServices: z.array(z.string()).optional(),
   detoxAvailable: z.boolean().default(false),
+  detoxOnlyServices: z.boolean().optional(),
   coOccurringDiagnoses: z.array(z.string()).optional(),
   therapeuticModalities: z.array(z.string()).optional(),
   otherTherapeuticModalities: z.string().optional(),
@@ -297,6 +298,7 @@ const ProviderInfo = () => {
       caseManagementServices: false,
       lengthOfServices: [],
       detoxAvailable: false,
+      detoxOnlyServices: false,
       coOccurringDiagnoses: [],
       therapeuticModalities: [],
       otherTherapeuticModalities: "",
@@ -448,6 +450,7 @@ const ProviderInfo = () => {
           case_management_services: data.caseManagementServices || null,
           length_of_services: data.lengthOfServices && data.lengthOfServices.length > 0 ? data.lengthOfServices.join(", ") : null,
           detox_available: data.detoxAvailable,
+          detox_only_services: data.detoxOnlyServices || null,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
           therapeutic_modalities: finalModalities.length > 0 ? finalModalities : null,
           in_person_companion_work: data.inPersonCompanionWork || null,
@@ -628,6 +631,30 @@ const ProviderInfo = () => {
                         <FormLabel>Are you a CIP?</FormLabel>
                         <FormDescription>Check if you are a Certified Intervention Professional</FormDescription>
                       </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Medical Detox" && (
+                <FormField
+                  control={form.control}
+                  name="detoxOnlyServices"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Do you provide detox only services? *</FormLabel>
+                      <Select onValueChange={(value) => field.onChange(value === "yes")} defaultValue={field.value ? "yes" : "no"}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-popover z-50">
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
