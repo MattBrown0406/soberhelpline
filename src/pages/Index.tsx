@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck, LogIn } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck, LogIn, Headphones } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -48,8 +48,11 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-6">
-            <Link to="/recovery-podcasts" className="text-foreground hover:text-primary transition-colors font-medium">
-              Recovery Podcasts
+            <Link to="/recovery-podcasts">
+              <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
+                <Headphones className="w-4 h-4" />
+                Recovery Podcasts
+              </Button>
             </Link>
           </div>
           <div className="flex items-center gap-4">
