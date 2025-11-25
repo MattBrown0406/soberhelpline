@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Globe } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Phone, Mail, Globe, Award } from "lucide-react";
 
 interface Provider {
   id: string;
@@ -12,6 +13,7 @@ interface Provider {
   website: string | null;
   description_of_services: string | null;
   logo_url: string | null;
+  cip_certified?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -24,7 +26,15 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <CardTitle className="text-xl mb-2">{provider.provider_name}</CardTitle>
+            <div className="flex items-center gap-2 mb-2">
+              <CardTitle className="text-xl">{provider.provider_name}</CardTitle>
+              {provider.cip_certified && (
+                <Badge variant="default" className="gap-1 bg-primary text-primary-foreground">
+                  <Award className="w-3 h-3" />
+                  CIP Certified
+                </Badge>
+              )}
+            </div>
             {provider.city && provider.state && (
               <div className="flex items-center gap-2 text-muted-foreground mb-2">
                 <MapPin className="w-4 h-4" />
