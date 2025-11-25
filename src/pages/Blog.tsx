@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import logo from "@/assets/logo.png";
+import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 
 const blogPosts = [
   {
@@ -15,6 +16,7 @@ const blogPosts = [
     author: "Sober Helpline Team",
     date: "2024-11-25",
     category: "Family Support",
+    image: reluctantLovedOneImg,
     content: `Helping an addicted son or daughter become willing to get treatment starts with changing how the family responds to the addiction, using calm, consistent love, clear boundaries, and evidence-based communication rather than pressure or panic. Parents cannot force true recovery, but they can strongly influence motivation and make the path into treatment feel safer, more hopeful, and more attractive than staying in addiction.
 
 **Understand addiction and denial**
@@ -74,6 +76,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-15",
     category: "Recovery Basics",
+    image: null,
     content: null
   },
   {
@@ -83,6 +86,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-10",
     category: "Family Support",
+    image: null,
     content: null
   },
   {
@@ -92,6 +96,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     author: "Sober Helpline Team",
     date: "2024-01-05",
     category: "Aftercare",
+    image: null,
     content: null
   }
 ];
@@ -149,9 +154,18 @@ const Blog = () => {
           {blogPosts.map((post) => (
             <Card 
               key={post.id} 
-              className={`hover:shadow-lg transition-shadow ${post.content ? 'cursor-pointer' : ''}`}
+              className={`hover:shadow-lg transition-shadow overflow-hidden ${post.content ? 'cursor-pointer' : ''}`}
               onClick={() => post.content && setSelectedPost(post)}
             >
+              {post.image && (
+                <div className="w-full h-48 overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
               <CardHeader>
                 <div className="text-sm text-primary font-medium mb-2">{post.category}</div>
                 <CardTitle className="text-xl">{post.title}</CardTitle>
@@ -206,6 +220,13 @@ const Blog = () => {
           </DialogHeader>
           <ScrollArea className="max-h-[60vh] pr-4">
             <div className="py-4">
+              {selectedPost?.image && (
+                <img 
+                  src={selectedPost.image} 
+                  alt={selectedPost.title} 
+                  className="w-full h-64 object-cover rounded-lg mb-6"
+                />
+              )}
               {selectedPost?.content && renderContent(selectedPost.content)}
             </div>
           </ScrollArea>
