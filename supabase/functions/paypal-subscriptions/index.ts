@@ -222,11 +222,17 @@ Deno.serve(async (req) => {
         // Apply discount if valid code provided
         let finalAmount = parseFloat(amount);
         let appliedDiscount = null;
+        let bypassPayment = false;
 
+        // Check for FREELIST code - bypasses payment entirely
+        if (discountCode && discountCode.toUpperCase() === 'FREELIST') {
+          bypassPayment = true;
+          appliedDiscount = 'FREELIST';
+          finalAmount = 0;
+          console.log('Applied FREELIST: Bypassing payment, free listing');
+        }
         // Check for free trial code (FREEMONTH) - works for both monthly and annual plans
-        let includeFreeTrial = false;
-        if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
-          includeFreeTrial = true;
+        else if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
           appliedDiscount = 'FREEMONTH';
           console.log('Applied FREEMONTH: First month free trial');
         } else if (discountCode) {
@@ -250,6 +256,54 @@ Deno.serve(async (req) => {
             console.log(`Invalid discount code attempted: ${discountCode}`);
           }
         }
+
+        // If FREELIST code, bypass PayPal entirely
+        if (bypassPayment) {
+          // Create free subscription record directly
+          const { error: dbError } = await supabaseClient
+            .from('provider_subscriptions')
+            .insert({
+              user_id: userId,
+              provider_submission_id: providerSubmissionId || null,
+              paypal_subscription_id: `FREE-${Date.now()}`,
+              plan_type: planType,
+              status: 'active',
+              amount: 0,
+              start_date: new Date().toISOString(),
+            });
+
+          if (dbError) {
+            console.error('Database error:', dbError);
+            throw new Error('Failed to create free subscription');
+          }
+
+          // Auto-approve the provider submission
+          if (providerSubmissionId) {
+            const { error: updateError } = await supabaseClient
+              .from('provider_submissions')
+              .update({ status: 'approved' })
+              .eq('id', providerSubmissionId);
+
+            if (updateError) {
+              console.error('Failed to auto-approve provider:', updateError);
+            } else {
+              console.log('Provider auto-approved with FREELIST code');
+            }
+          }
+
+          return new Response(
+            JSON.stringify({ 
+              success: true,
+              bypassPayment: true,
+              appliedDiscount,
+              message: 'Free listing activated'
+            }),
+            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        // Check for free trial code
+        let includeFreeTrial = appliedDiscount === 'FREEMONTH';
 
         // Create product and plan with potentially discounted amount
         const productId = await createPayPalProduct(accessToken);
