@@ -147,6 +147,7 @@ const providerFormSchema = z.object({
   }, "Year must be between 1900 and current year"),
   interventionModalities: z.array(z.string()).optional(),
   otherInterventionModalities: z.string().optional(),
+  cipCertified: z.boolean().optional(),
   hourlyCoachingSessions: z.boolean().optional(),
   hourlyCoachingRate: z.string().optional(),
   caseManagementServices: z.boolean().optional(),
@@ -275,6 +276,7 @@ const ProviderInfo = () => {
       yearStarted: "",
       interventionModalities: [],
       otherInterventionModalities: "",
+      cipCertified: false,
       hourlyCoachingSessions: false,
       hourlyCoachingRate: "",
       caseManagementServices: false,
@@ -424,6 +426,7 @@ const ProviderInfo = () => {
           website: data.website,
           year_started: data.yearStarted ? parseInt(data.yearStarted) : null,
           intervention_modalities: finalInterventionModalities.length > 0 ? finalInterventionModalities : null,
+          cip_certified: data.cipCertified || null,
           hourly_coaching_sessions: data.hourlyCoachingSessions || null,
           hourly_coaching_rate: data.hourlyCoachingRate || null,
           case_management_services: data.caseManagementServices || null,
@@ -760,6 +763,27 @@ const ProviderInfo = () => {
                         />
                       )}
                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Interventionists" && (
+                <FormField
+                  control={form.control}
+                  name="cipCertified"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Are you a CIP (Certified Intervention Professional)?</FormLabel>
+                        <FormDescription>Check if you hold CIP certification</FormDescription>
+                      </div>
                     </FormItem>
                   )}
                 />
