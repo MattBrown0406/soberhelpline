@@ -26,7 +26,9 @@ export type Database = {
           detox_available: boolean | null
           email: string
           gender_specific_treatment: string[] | null
+          has_valid_passport: boolean | null
           id: string
+          in_person_companion_work: boolean | null
           insurances_accepted: string[] | null
           intervention_modalities: string[] | null
           length_of_services: string | null
@@ -54,7 +56,9 @@ export type Database = {
           detox_available?: boolean | null
           email: string
           gender_specific_treatment?: string[] | null
+          has_valid_passport?: boolean | null
           id?: string
+          in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           length_of_services?: string | null
@@ -82,7 +86,9 @@ export type Database = {
           detox_available?: boolean | null
           email?: string
           gender_specific_treatment?: string[] | null
+          has_valid_passport?: boolean | null
           id?: string
+          in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           length_of_services?: string | null
