@@ -22,6 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
+import { SubscriptionCheckout } from "@/components/SubscriptionCheckout";
 
 // Resize image to fit within maxSize while maintaining aspect ratio
 const resizeImage = (file: File, maxSize: number = 400): Promise<Blob> => {
@@ -240,6 +241,9 @@ const ProviderInfo = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
+  const [submittedCategory, setSubmittedCategory] = useState<string>('');
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -425,7 +429,7 @@ const ProviderInfo = () => {
       }
 
       // Insert into database
-      const { error } = await supabase
+      const { data: insertedData, error } = await supabase
         .from('provider_submissions')
         .insert({
           category: data.category,
@@ -475,7 +479,9 @@ const ProviderInfo = () => {
           address: null,
           status: 'pending',
           submitted_by: user.id
-        });
+        })
+        .select('id')
+        .single();
 
       if (error) throw error;
 
@@ -494,11 +500,16 @@ const ProviderInfo = () => {
         // Don't fail the submission if email fails
       }
 
-      toast({
-        title: "Application submitted!",
-        description: "Your provider information has been received and is pending review.",
-      });
-      form.reset();
+      // Store submission details and show checkout
+      if (insertedData?.id) {
+        setSubmissionId(insertedData.id);
+        setSubmittedCategory(data.category);
+        setShowCheckout(true);
+        toast({
+          title: "Application submitted!",
+          description: "Please complete payment to finalize your listing.",
+        });
+      }
     } catch (error) {
       console.error('Submission error:', error);
       toast({
@@ -537,14 +548,26 @@ const ProviderInfo = () => {
               </a>
             </div>
 
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-8 text-center">
-            <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
-            <h1 className="text-4xl font-bold text-foreground mb-2">Provider Application</h1>
-            <p className="text-lg text-muted-foreground">
-              Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards.
-            </p>
+        {showCheckout && submissionId ? (
+          <div className="max-w-3xl mx-auto">
+            <div className="mb-8 text-center">
+              <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
+            </div>
+            <SubscriptionCheckout 
+              providerSubmissionId={submissionId} 
+              category={submittedCategory}
+              onSuccess={() => navigate('/')}
+            />
           </div>
+        ) : (
+          <div className="max-w-3xl mx-auto">
+            <div className="mb-8 text-center">
+              <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
+              <h1 className="text-4xl font-bold text-foreground mb-2">Provider Application</h1>
+              <p className="text-lg text-muted-foreground">
+                Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards.
+              </p>
+            </div>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-6 rounded-lg shadow-lg">
@@ -1813,6 +1836,7 @@ const ProviderInfo = () => {
             </form>
           </Form>
         </div>
+        )}
       </div>
         </>
       )}
