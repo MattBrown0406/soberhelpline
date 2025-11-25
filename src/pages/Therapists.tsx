@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Brain } from "lucide-react";
+import { ArrowLeft, Brain, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -184,7 +184,13 @@ const Therapists = () => {
               Back to Home
             </Button>
           </Link>
-          <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
+          <div className="flex flex-col items-end gap-2">
+            <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
+            <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+              <Phone className="w-5 h-5" />
+              <span className="font-medium">(541) 241-5886</span>
+            </a>
+          </div>
         </div>
 
         <div className="text-center mb-12">
