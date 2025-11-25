@@ -114,6 +114,16 @@ const Index = () => {
             </p>
           </div>
         </div>
+
+        <div className="mt-12 bg-accent rounded-lg p-8 text-center max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            We have partnered with Intervention On Call to provide the families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
+          </p>
+          <Button size="lg" className="font-semibold">
+            Register Here!
+          </Button>
+        </div>
       </div>
     </div>
   );
