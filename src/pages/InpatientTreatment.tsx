@@ -5,6 +5,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
+import ProviderFilters from "@/components/ProviderFilters";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 
@@ -26,18 +27,52 @@ const InpatientTreatment = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
+  const [filters, setFilters] = useState({
+    insurance: "All",
+    maxBudget: "",
+    zipCode: "",
+    genderSpecific: [] as string[],
+    lgbtSupportive: false,
+  });
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
     setLoading(true);
     setShowingNearby(false);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved")
         .eq("state", state);
+
+      // Apply insurance filter
+      if (filters.insurance !== "All") {
+        query = query.contains("insurances_accepted", [filters.insurance]);
+      }
+
+      // Apply budget filter
+      if (filters.maxBudget) {
+        query = query.lte("cost", filters.maxBudget);
+      }
+
+      // Apply zip code filter
+      if (filters.zipCode) {
+        query = query.eq("zip_code", filters.zipCode);
+      }
+
+      // Apply gender specific filter
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      }
+
+      // Apply LGBT supportive filter
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
       
@@ -60,12 +95,28 @@ const InpatientTreatment = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
+
+      // Apply same filters for nearby providers
+      if (filters.insurance !== "All") {
+        query = query.contains("insurances_accepted", [filters.insurance]);
+      }
+      if (filters.maxBudget) {
+        query = query.lte("cost", filters.maxBudget);
+      }
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      }
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -107,6 +158,13 @@ const InpatientTreatment = () => {
     fetchProviders(stateName);
   };
 
+  const handleFiltersChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    if (selectedState) {
+      fetchProviders(selectedState);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -135,7 +193,10 @@ const InpatientTreatment = () => {
         </div>
 
         {selectedState && (
-          <div className="max-w-4xl mx-auto">
+          <>
+            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
+            
+            <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
               {showingNearby 
                 ? `Nearest Inpatient Treatment Providers to ${selectedState}` 
@@ -159,7 +220,8 @@ const InpatientTreatment = () => {
                 No approved providers found.
               </p>
             )}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>
