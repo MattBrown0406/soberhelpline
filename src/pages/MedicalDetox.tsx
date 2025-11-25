@@ -67,9 +67,6 @@ const MedicalDetox = () => {
   const [zipCodeSearch, setZipCodeSearch] = useState("");
   const [insuranceSearch, setInsuranceSearch] = useState("All");
   const [customInsurance, setCustomInsurance] = useState("");
-  const [genderSpecificCare, setGenderSpecificCare] = useState("No");
-  const [genderType, setGenderType] = useState("");
-  const [lengthOfStay, setLengthOfStay] = useState("All");
   const [maxBudget, setMaxBudget] = useState("");
   const [filters, setFilters] = useState({
     insurance: "All",
@@ -100,24 +97,6 @@ const MedicalDetox = () => {
       // Apply budget filter for Self Pay
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
-      }
-
-      // Apply gender specific filter
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-
-      // Apply length of stay filter
-      if (lengthOfStay !== "All") {
-        if (lengthOfStay === "30 days") {
-          query = query.ilike("length_of_services", "%30%");
-        } else if (lengthOfStay === "60 days") {
-          query = query.ilike("length_of_services", "%60%");
-        } else if (lengthOfStay === "90 days") {
-          query = query.ilike("length_of_services", "%90%");
-        } else if (lengthOfStay === "longer than 90 days") {
-          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
-        }
       }
 
       const { data, error } = await query;
@@ -157,20 +136,6 @@ const MedicalDetox = () => {
       }
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
-      }
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-      if (lengthOfStay !== "All") {
-        if (lengthOfStay === "30 days") {
-          query = query.ilike("length_of_services", "%30%");
-        } else if (lengthOfStay === "60 days") {
-          query = query.ilike("length_of_services", "%60%");
-        } else if (lengthOfStay === "90 days") {
-          query = query.ilike("length_of_services", "%90%");
-        } else if (lengthOfStay === "longer than 90 days") {
-          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
-        }
       }
 
       const { data, error } = await query;
@@ -251,15 +216,6 @@ const MedicalDetox = () => {
       return;
     }
 
-    if (genderSpecificCare === "Yes" && !genderType) {
-      toast({
-        title: "Gender Selection Required",
-        description: "Please select either Men or Women for gender-specific care",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (insuranceSearch === "Self Pay" && !maxBudget) {
       toast({
         title: "Budget Required",
@@ -285,24 +241,8 @@ const MedicalDetox = () => {
         query = query.contains("insurances_accepted", [searchInsurance]);
       }
 
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
-      }
-
-      if (lengthOfStay !== "All") {
-        if (lengthOfStay === "30 days") {
-          query = query.ilike("length_of_services", "%30%");
-        } else if (lengthOfStay === "60 days") {
-          query = query.ilike("length_of_services", "%60%");
-        } else if (lengthOfStay === "90 days") {
-          query = query.ilike("length_of_services", "%90%");
-        } else if (lengthOfStay === "longer than 90 days") {
-          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
-        }
       }
 
       const { data, error } = await query;
@@ -321,11 +261,9 @@ const MedicalDetox = () => {
       
       if (filteredProviders.length === 0) {
         const insuranceText = insuranceSearch === "Other" ? customInsurance : insuranceSearch;
-        const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
-        const lengthText = lengthOfStay !== "All" ? ` with ${lengthOfStay} length of stay` : "";
         toast({
           title: "No providers found",
-          description: `No providers found near zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}${lengthText}`,
+          description: `No providers found near zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}`,
         });
       }
     } catch (error) {
@@ -378,25 +316,23 @@ const MedicalDetox = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-4xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="max-w-2xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="zipSearch"
-                    type="text"
-                    placeholder="Enter zip code"
-                    value={zipCodeSearch}
-                    onChange={(e) => setZipCodeSearch(e.target.value)}
-                    maxLength={10}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
-                        handleZipCodeSearch();
-                      }
-                    }}
-                  />
-                </div>
+                <Input
+                  id="zipSearch"
+                  type="text"
+                  placeholder="Enter zip code"
+                  value={zipCodeSearch}
+                  onChange={(e) => setZipCodeSearch(e.target.value)}
+                  maxLength={10}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleZipCodeSearch();
+                    }
+                  }}
+                />
               </div>
               
               <div className="space-y-2">
@@ -443,55 +379,6 @@ const MedicalDetox = () => {
                   </div>
                 )}
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="genderCare">Gender Specific Care Needed?</Label>
-                <Select
-                  value={genderSpecificCare}
-                  onValueChange={setGenderSpecificCare}
-                >
-                  <SelectTrigger id="genderCare" className="bg-background">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="No">No</SelectItem>
-                    <SelectItem value="Yes">Yes</SelectItem>
-                  </SelectContent>
-                </Select>
-                {genderSpecificCare === "Yes" && (
-                  <Select
-                    value={genderType}
-                    onValueChange={setGenderType}
-                  >
-                    <SelectTrigger className="bg-background mt-2">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      <SelectItem value="Men">Men</SelectItem>
-                      <SelectItem value="Women">Women</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="lengthOfStay">Length of Stay</Label>
-                <Select
-                  value={lengthOfStay}
-                  onValueChange={setLengthOfStay}
-                >
-                  <SelectTrigger id="lengthOfStay" className="bg-background">
-                    <SelectValue placeholder="Select length" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="All">All</SelectItem>
-                    <SelectItem value="30 days">30 days</SelectItem>
-                    <SelectItem value="60 days">60 days</SelectItem>
-                    <SelectItem value="90 days">90 days</SelectItem>
-                    <SelectItem value="longer than 90 days">Longer than 90 days</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
             
             <div className="flex justify-center mt-4">
@@ -524,24 +411,22 @@ const MedicalDetox = () => {
                 <p className="text-muted-foreground mb-4">
                   {zipCodeSearch && !selectedState
                     ? `No providers found within 100 miles of ${zipCodeSearch}. Showing the 3 geographically closest providers.`
-                    : `No providers found in ${selectedState}. Showing the 3 nearest providers.`}
+                    : `No providers found in ${selectedState}. Showing the 3 geographically closest providers.`}
                 </p>
               )}
-              {loading ? (
-                <div className="text-center py-8">
-                  <p className="text-muted-foreground">Loading providers...</p>
-                </div>
-              ) : providers.length > 0 ? (
-                <div className="space-y-4">
-                  {providers.map((provider) => (
-                    <ProviderCard key={provider.id} provider={provider} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center py-8 text-muted-foreground">
-                  No providers found matching your criteria.
-                </p>
-              )}
+            {loading ? (
+              <p className="text-muted-foreground text-center">Loading providers...</p>
+            ) : providers.length > 0 ? (
+              <div className="space-y-4">
+                {providers.map((provider) => (
+                  <ProviderCard key={provider.id} provider={provider} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-center">
+                No approved providers found.
+              </p>
+            )}
             </div>
           </>
         )}
