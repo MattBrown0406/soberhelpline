@@ -50,11 +50,11 @@ const Index = () => {
             <Link to="/recovery-podcasts" className="text-foreground hover:text-primary transition-colors font-medium">
               Recovery Podcasts
             </Link>
+          </div>
+          <div className="flex items-center gap-4">
             <Link to="/provider-info" className="text-foreground hover:text-primary transition-colors font-medium">
               Provider Application
             </Link>
-          </div>
-          <div className="flex items-center gap-4">
             {user ? (
               <Button variant="outline" onClick={handleLogout}>
                 Logout
