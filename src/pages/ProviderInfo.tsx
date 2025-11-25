@@ -1142,7 +1142,7 @@ const ProviderInfo = () => {
                 )}
               />
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Sober Living"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="insurancesAccepted"
