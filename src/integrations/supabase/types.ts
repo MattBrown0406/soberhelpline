@@ -28,6 +28,7 @@ export type Database = {
           email: string
           gender_specific_treatment: string[] | null
           has_valid_passport: boolean | null
+          hourly_coaching_sessions: boolean | null
           id: string
           in_person_companion_work: boolean | null
           insurances_accepted: string[] | null
@@ -59,6 +60,7 @@ export type Database = {
           email: string
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
+          hourly_coaching_sessions?: boolean | null
           id?: string
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
@@ -90,6 +92,7 @@ export type Database = {
           email?: string
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
+          hourly_coaching_sessions?: boolean | null
           id?: string
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
