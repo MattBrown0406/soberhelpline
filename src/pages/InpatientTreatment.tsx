@@ -4,11 +4,43 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
+
+const insuranceProviders = [
+  "All",
+  "Self Pay",
+  "UnitedHealthcare",
+  "Anthem/Blue Cross Blue Shield",
+  "Aetna",
+  "Cigna",
+  "Humana",
+  "Kaiser Permanente",
+  "Centene",
+  "Molina Healthcare",
+  "WellCare",
+  "Highmark",
+  "Blue Cross",
+  "Health Care Service Corporation (HCSC)",
+  "CareSource",
+  "Tricare",
+  "Medicaid",
+  "Blue Shield",
+  "Magellan Health",
+  "Beacon Health Options",
+  "Optum",
+  "Ambetter",
+  "Oscar Health",
+  "Bright Health",
+  "Friday Health Plans",
+  "Moda",
+  "Pacific Source",
+];
 
 interface Provider {
   id: string;
@@ -29,6 +61,7 @@ const InpatientTreatment = () => {
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
+  const [insuranceSearch, setInsuranceSearch] = useState("All");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -182,12 +215,19 @@ const InpatientTreatment = () => {
     setSelectedState(null);
     
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved")
         .eq("zip_code", zipCodeSearch);
+
+      // Apply insurance filter if selected
+      if (insuranceSearch !== "All") {
+        query = query.contains("insurances_accepted", [insuranceSearch]);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
       
@@ -196,7 +236,7 @@ const InpatientTreatment = () => {
       if (!data || data.length === 0) {
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}`,
+          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceSearch}` : ""}`,
         });
       }
     } catch (error) {
@@ -237,26 +277,53 @@ const InpatientTreatment = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-md mx-auto mt-6">
-            <div className="flex gap-2">
-              <div className="flex-1">
-                <Input
-                  type="text"
-                  placeholder="Enter zip code"
-                  value={zipCodeSearch}
-                  onChange={(e) => setZipCodeSearch(e.target.value)}
-                  maxLength={10}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleZipCodeSearch();
-                    }
-                  }}
-                />
+          <div className="max-w-3xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="zipSearch">Search by Zip Code</Label>
+                <div className="flex gap-2">
+                  <Input
+                    id="zipSearch"
+                    type="text"
+                    placeholder="Enter zip code"
+                    value={zipCodeSearch}
+                    onChange={(e) => setZipCodeSearch(e.target.value)}
+                    maxLength={10}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        handleZipCodeSearch();
+                      }
+                    }}
+                  />
+                </div>
               </div>
-              <Button onClick={handleZipCodeSearch}>
-                Search Zip Code
+              
+              <div className="space-y-2">
+                <Label htmlFor="insuranceSearch">Search by Insurance</Label>
+                <Select
+                  value={insuranceSearch}
+                  onValueChange={setInsuranceSearch}
+                >
+                  <SelectTrigger id="insuranceSearch" className="bg-background">
+                    <SelectValue placeholder="Select insurance" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50 max-h-60">
+                    {insuranceProviders.map((provider) => (
+                      <SelectItem key={provider} value={provider}>
+                        {provider}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-4">
+              <Button onClick={handleZipCodeSearch} size="lg">
+                Search Providers
               </Button>
             </div>
+            
             <p className="text-sm text-muted-foreground text-center mt-2">
               Or click a state on the map above
             </p>
