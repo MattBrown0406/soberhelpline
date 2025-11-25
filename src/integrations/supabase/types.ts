@@ -74,6 +74,7 @@ export type Database = {
           intervention_modalities: string[] | null
           items_included_in_cost: string[] | null
           job_assistance_provided: boolean | null
+          languages_spoken: string[] | null
           legal_assistance_types: string[] | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
@@ -96,6 +97,8 @@ export type Database = {
           travel_expenses_included: boolean | null
           updated_at: string | null
           website: string | null
+          works_internationally: boolean | null
+          works_nationally: boolean | null
           year_started: number | null
           zip_code: string | null
         }
@@ -128,6 +131,7 @@ export type Database = {
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
           job_assistance_provided?: boolean | null
+          languages_spoken?: string[] | null
           legal_assistance_types?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
@@ -150,6 +154,8 @@ export type Database = {
           travel_expenses_included?: boolean | null
           updated_at?: string | null
           website?: string | null
+          works_internationally?: boolean | null
+          works_nationally?: boolean | null
           year_started?: number | null
           zip_code?: string | null
         }
@@ -182,6 +188,7 @@ export type Database = {
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
           job_assistance_provided?: boolean | null
+          languages_spoken?: string[] | null
           legal_assistance_types?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
@@ -204,6 +211,8 @@ export type Database = {
           travel_expenses_included?: boolean | null
           updated_at?: string | null
           website?: string | null
+          works_internationally?: boolean | null
+          works_nationally?: boolean | null
           year_started?: number | null
           zip_code?: string | null
         }
