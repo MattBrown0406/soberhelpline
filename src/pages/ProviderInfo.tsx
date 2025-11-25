@@ -532,56 +532,61 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="coOccurringDiagnoses"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4">
-                      <FormLabel className="text-base">Co-Occurring Diagnoses: Are you able to treat any of the following diagnoses?</FormLabel>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                      {["ADHD", "Antisocial Personality Disorder", "Anxiety Disorders", "Bipolar Disorder", "Borderline Personality Disorder", "Depression", "Eating Disorders", "Narcissistic Personality Disorder", "OCD", "Schizoaffective Disorder", "Schizophrenia", "Trauma"].map((diagnosis) => (
-                        <FormField
-                          key={diagnosis}
-                          control={form.control}
-                          name="coOccurringDiagnoses"
-                          render={({ field }) => {
-                            const value = field.value || [];
-                            return (
-                              <FormItem
-                                key={diagnosis}
-                                className="flex flex-row items-start space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={value.includes(diagnosis)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...value, diagnosis])
-                                        : field.onChange(
-                                            value.filter(
-                                              (val) => val !== diagnosis
-                                            )
-                                          )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {diagnosis}
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               {(form.watch("category") === "Inpatient Treatment" || 
+                form.watch("category") === "Outpatient Treatment" || 
+                form.watch("category") === "Therapists" ||
+                form.watch("category") === "Psychiatrists") && (
+                <FormField
+                  control={form.control}
+                  name="coOccurringDiagnoses"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Co-Occurring Diagnoses: Are you able to treat any of the following diagnoses?</FormLabel>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                        {["ADHD", "Antisocial Personality Disorder", "Anxiety Disorders", "Bipolar Disorder", "Borderline Personality Disorder", "Depression", "Eating Disorders", "Narcissistic Personality Disorder", "OCD", "Schizoaffective Disorder", "Schizophrenia", "Trauma"].map((diagnosis) => (
+                          <FormField
+                            key={diagnosis}
+                            control={form.control}
+                            name="coOccurringDiagnoses"
+                            render={({ field }) => {
+                              const value = field.value || [];
+                              return (
+                                <FormItem
+                                  key={diagnosis}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={value.includes(diagnosis)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...value, diagnosis])
+                                          : field.onChange(
+                                              value.filter(
+                                                (val) => val !== diagnosis
+                                              )
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {diagnosis}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {(form.watch("category") === "Inpatient Treatment" ||
                 form.watch("category") === "Outpatient Treatment" || 
                 form.watch("category") === "Therapists") && (
                 <FormField
