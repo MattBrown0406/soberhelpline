@@ -19,8 +19,18 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 
 type ProviderSubmission = {
   id: string;
@@ -39,6 +49,8 @@ const Admin = () => {
   const [submissions, setSubmissions] = useState<ProviderSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [editingSubmission, setEditingSubmission] = useState<ProviderSubmission | null>(null);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
 
   useEffect(() => {
     checkAdminAccess();
@@ -118,6 +130,37 @@ const Admin = () => {
     }
   };
 
+  const handleEdit = (submission: ProviderSubmission) => {
+    setEditingSubmission(submission);
+    setEditDialogOpen(true);
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingSubmission) return;
+
+    try {
+      const { error } = await supabase
+        .from("provider_submissions")
+        .update({
+          provider_name: editingSubmission.provider_name,
+          email: editingSubmission.email,
+          phone_number: editingSubmission.phone_number,
+          city: editingSubmission.city,
+          state: editingSubmission.state,
+        })
+        .eq("id", editingSubmission.id);
+
+      if (error) throw error;
+
+      toast.success("Provider submission updated successfully");
+      setEditDialogOpen(false);
+      fetchSubmissions();
+    } catch (error) {
+      console.error("Error updating submission:", error);
+      toast.error("Failed to update submission");
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       pending: "secondary",
@@ -191,21 +234,30 @@ const Admin = () => {
                         {new Date(submission.created_at).toLocaleDateString()}
                       </TableCell>
                       <TableCell>
-                        <Select
-                          value={submission.status || "pending"}
-                          onValueChange={(value) =>
-                            updateStatus(submission.id, value)
-                          }
-                        >
-                          <SelectTrigger className="w-32 bg-background">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background z-50">
-                            <SelectItem value="pending">Pending</SelectItem>
-                            <SelectItem value="approved">Approved</SelectItem>
-                            <SelectItem value="rejected">Rejected</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleEdit(submission)}
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </Button>
+                          <Select
+                            value={submission.status || "pending"}
+                            onValueChange={(value) =>
+                              updateStatus(submission.id, value)
+                            }
+                          >
+                            <SelectTrigger className="w-32 bg-background">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent className="bg-background z-50">
+                              <SelectItem value="pending">Pending</SelectItem>
+                              <SelectItem value="approved">Approved</SelectItem>
+                              <SelectItem value="rejected">Rejected</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -219,6 +271,90 @@ const Admin = () => {
             )}
           </CardContent>
         </Card>
+
+        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Edit Provider Submission</DialogTitle>
+            </DialogHeader>
+            {editingSubmission && (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="provider_name">Provider Name</Label>
+                  <Input
+                    id="provider_name"
+                    value={editingSubmission.provider_name}
+                    onChange={(e) =>
+                      setEditingSubmission({
+                        ...editingSubmission,
+                        provider_name: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={editingSubmission.email}
+                    onChange={(e) =>
+                      setEditingSubmission({
+                        ...editingSubmission,
+                        email: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="phone_number">Phone Number</Label>
+                  <Input
+                    id="phone_number"
+                    value={editingSubmission.phone_number}
+                    onChange={(e) =>
+                      setEditingSubmission({
+                        ...editingSubmission,
+                        phone_number: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="city">City</Label>
+                  <Input
+                    id="city"
+                    value={editingSubmission.city || ""}
+                    onChange={(e) =>
+                      setEditingSubmission({
+                        ...editingSubmission,
+                        city: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="state">State</Label>
+                  <Input
+                    id="state"
+                    value={editingSubmission.state || ""}
+                    onChange={(e) =>
+                      setEditingSubmission({
+                        ...editingSubmission,
+                        state: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            )}
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleSaveEdit}>Save Changes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
