@@ -25,74 +25,90 @@ const stateAbbreviations: Record<string, string> = {
   "Wisconsin": "WI", "Wyoming": "WY"
 };
 
-// State color mapping using eight distinct colors
+// State color mapping using 16 muted colors
 // Ensuring no adjacent states share the same color
 const stateColors: Record<string, string> = {
-  // Color 1 - Blue
-  "Alabama": "hsl(210, 70%, 60%)",
-  "Connecticut": "hsl(210, 70%, 60%)",
-  "Illinois": "hsl(210, 70%, 60%)",
-  "Maine": "hsl(210, 70%, 60%)",
-  "Nevada": "hsl(210, 70%, 60%)",
-  "South Dakota": "hsl(210, 70%, 60%)",
+  // Color 1 - Muted Blue
+  "Connecticut": "hsl(210, 35%, 55%)",
+  "Nevada": "hsl(210, 35%, 55%)",
+  "South Dakota": "hsl(210, 35%, 55%)",
   
-  // Color 2 - Green
-  "Arkansas": "hsl(145, 65%, 55%)",
-  "Idaho": "hsl(145, 65%, 55%)",
-  "Minnesota": "hsl(145, 65%, 55%)",
-  "New Jersey": "hsl(145, 65%, 55%)",
-  "Ohio": "hsl(145, 65%, 55%)",
-  "Washington": "hsl(145, 65%, 55%)",
+  // Color 2 - Muted Sage Green
+  "Arkansas": "hsl(145, 30%, 50%)",
+  "Minnesota": "hsl(145, 30%, 50%)",
+  "Ohio": "hsl(145, 30%, 50%)",
   
-  // Color 3 - Amber
-  "Colorado": "hsl(40, 85%, 60%)",
-  "Georgia": "hsl(40, 85%, 60%)",
-  "Maryland": "hsl(40, 85%, 60%)",
-  "Mississippi": "hsl(40, 85%, 60%)",
-  "North Dakota": "hsl(40, 85%, 60%)",
-  "Wisconsin": "hsl(40, 85%, 60%)",
+  // Color 3 - Muted Amber
+  "Colorado": "hsl(40, 40%, 55%)",
+  "Mississippi": "hsl(40, 40%, 55%)",
+  "Wisconsin": "hsl(40, 40%, 55%)",
   
-  // Color 4 - Purple
-  "Nebraska": "hsl(270, 65%, 65%)",
-  "Pennsylvania": "hsl(270, 65%, 65%)",
-  "Virginia": "hsl(270, 65%, 65%)",
-  "Alaska": "hsl(270, 65%, 65%)",
+  // Color 4 - Muted Lavender
+  "Nebraska": "hsl(270, 30%, 60%)",
+  "Virginia": "hsl(270, 30%, 60%)",
   
-  // Color 5 - Coral/Rose
-  "Arizona": "hsl(350, 75%, 65%)",
-  "Delaware": "hsl(350, 75%, 65%)",
-  "Kentucky": "hsl(350, 75%, 65%)",
-  "Montana": "hsl(350, 75%, 65%)",
-  "Rhode Island": "hsl(350, 75%, 65%)",
-  "Texas": "hsl(350, 75%, 65%)",
+  // Color 5 - Muted Rose
+  "Arizona": "hsl(350, 35%, 58%)",
+  "Kentucky": "hsl(350, 35%, 58%)",
+  "Rhode Island": "hsl(350, 35%, 58%)",
   
-  // Color 6 - Teal
-  "Florida": "hsl(180, 65%, 55%)",
-  "Iowa": "hsl(180, 65%, 55%)",
-  "Michigan": "hsl(180, 65%, 55%)",
-  "New York": "hsl(180, 65%, 55%)",
-  "Oregon": "hsl(180, 65%, 55%)",
-  "West Virginia": "hsl(180, 65%, 55%)",
+  // Color 6 - Muted Teal
+  "Florida": "hsl(180, 30%, 50%)",
+  "Michigan": "hsl(180, 30%, 50%)",
+  "Oregon": "hsl(180, 30%, 50%)",
   
-  // Color 7 - Indigo
-  "California": "hsl(240, 70%, 65%)",
-  "Kansas": "hsl(240, 70%, 65%)",
-  "Louisiana": "hsl(240, 70%, 65%)",
-  "Massachusetts": "hsl(240, 70%, 65%)",
-  "Oklahoma": "hsl(240, 70%, 65%)",
-  "Vermont": "hsl(240, 70%, 65%)",
+  // Color 7 - Muted Indigo
+  "California": "hsl(240, 30%, 58%)",
+  "Louisiana": "hsl(240, 30%, 58%)",
+  "Vermont": "hsl(240, 30%, 58%)",
   
-  // Color 8 - Orange
-  "Hawaii": "hsl(25, 85%, 60%)",
-  "Indiana": "hsl(25, 85%, 60%)",
-  "Missouri": "hsl(25, 85%, 60%)",
-  "New Hampshire": "hsl(25, 85%, 60%)",
-  "New Mexico": "hsl(25, 85%, 60%)",
-  "North Carolina": "hsl(25, 85%, 60%)",
-  "South Carolina": "hsl(25, 85%, 60%)",
-  "Tennessee": "hsl(25, 85%, 60%)",
-  "Utah": "hsl(25, 85%, 60%)",
-  "Wyoming": "hsl(25, 85%, 60%)",
+  // Color 8 - Muted Coral
+  "Hawaii": "hsl(25, 40%, 55%)",
+  "Missouri": "hsl(25, 40%, 55%)",
+  "New Mexico": "hsl(25, 40%, 55%)",
+  
+  // Color 9 - Muted Slate Blue
+  "Alabama": "hsl(220, 30%, 52%)",
+  "Maine": "hsl(220, 30%, 52%)",
+  "Wyoming": "hsl(220, 30%, 52%)",
+  
+  // Color 10 - Muted Olive
+  "Idaho": "hsl(80, 25%, 48%)",
+  "New Jersey": "hsl(80, 25%, 48%)",
+  "Washington": "hsl(80, 25%, 48%)",
+  
+  // Color 11 - Muted Mauve
+  "Georgia": "hsl(320, 25%, 55%)",
+  "North Dakota": "hsl(320, 25%, 55%)",
+  "Utah": "hsl(320, 25%, 55%)",
+  
+  // Color 12 - Muted Steel
+  "Pennsylvania": "hsl(200, 25%, 55%)",
+  "Alaska": "hsl(200, 25%, 55%)",
+  "Tennessee": "hsl(200, 25%, 55%)",
+  
+  // Color 13 - Muted Bronze
+  "Delaware": "hsl(35, 35%, 50%)",
+  "Montana": "hsl(35, 35%, 50%)",
+  "Texas": "hsl(35, 35%, 50%)",
+  
+  // Color 14 - Muted Seafoam
+  "Iowa": "hsl(160, 28%, 52%)",
+  "New York": "hsl(160, 28%, 52%)",
+  "West Virginia": "hsl(160, 28%, 52%)",
+  
+  // Color 15 - Muted Plum
+  "Kansas": "hsl(280, 25%, 55%)",
+  "Massachusetts": "hsl(280, 25%, 55%)",
+  "Oklahoma": "hsl(280, 25%, 55%)",
+  
+  // Color 16 - Muted Terracotta
+  "Illinois": "hsl(15, 35%, 52%)",
+  "Indiana": "hsl(15, 35%, 52%)",
+  "New Hampshire": "hsl(15, 35%, 52%)",
+  "North Carolina": "hsl(15, 35%, 52%)",
+  "South Carolina": "hsl(15, 35%, 52%)",
+  "Maryland": "hsl(15, 35%, 52%)",
 };
 
 const USMap = ({ onStateClick, selectedState }: USMapProps) => {
@@ -133,7 +149,7 @@ const USMap = ({ onStateClick, selectedState }: USMapProps) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-6 relative">
+    <div className="w-full max-w-[672px] mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-5 relative">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
