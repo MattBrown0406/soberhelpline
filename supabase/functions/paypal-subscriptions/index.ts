@@ -72,8 +72,8 @@ async function createPayPalPlan(
 ): Promise<string> {
   const billingCycles = [];
 
-  // Add free trial period if applicable (for FREEMONTH code on monthly plans)
-  if (includeFreeTrial && planType === 'monthly') {
+  // Add free trial period if applicable
+  if (includeFreeTrial) {
     billingCycles.push({
       frequency: { interval_unit: 'MONTH', interval_count: 1 },
       tenure_type: 'TRIAL',
@@ -100,7 +100,7 @@ async function createPayPalPlan(
     billingCycles.push({
       frequency: { interval_unit: 'YEAR', interval_count: 1 },
       tenure_type: 'REGULAR',
-      sequence: 1,
+      sequence: includeFreeTrial ? 2 : 1,
       total_cycles: 0,
       pricing_scheme: {
         fixed_price: { value: amount, currency_code: 'USD' }
@@ -223,9 +223,9 @@ Deno.serve(async (req) => {
         let finalAmount = parseFloat(amount);
         let appliedDiscount = null;
 
-        // Check for free trial code (FREEMONTH) - only for monthly plans
+        // Check for free trial code (FREEMONTH) - works for both monthly and annual plans
         let includeFreeTrial = false;
-        if (discountCode && discountCode.toUpperCase() === 'FREEMONTH' && planType === 'monthly') {
+        if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
           includeFreeTrial = true;
           appliedDiscount = 'FREEMONTH';
           console.log('Applied FREEMONTH: First month free trial');
