@@ -974,7 +974,7 @@ const ProviderInfo = () => {
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel>Do you provide hourly coaching sessions not attached to in person interventions?</FormLabel>
+                        <FormLabel>Do you provide hourly family coaching sessions separate from intervention services?</FormLabel>
                       </div>
                     </FormItem>
                   )}
