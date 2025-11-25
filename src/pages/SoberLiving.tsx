@@ -3,6 +3,9 @@ import { ArrowLeft, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import { useToast } from "@/hooks/use-toast";
@@ -26,6 +29,9 @@ const SoberLiving = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
+  const [zipCodeSearch, setZipCodeSearch] = useState("");
+  const [genderSpecificCare, setGenderSpecificCare] = useState("No");
+  const [genderType, setGenderType] = useState("");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
@@ -107,6 +113,66 @@ const SoberLiving = () => {
     fetchProviders(stateName);
   };
 
+  const handleZipCodeSearch = async () => {
+    if (!zipCodeSearch || zipCodeSearch.length < 5) {
+      toast({
+        title: "Invalid Zip Code",
+        description: "Please enter a valid 5-digit zip code",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (genderSpecificCare === "Yes" && !genderType) {
+      toast({
+        title: "Gender Selection Required",
+        description: "Please select either Men or Women for gender-specific care",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    setShowingNearby(false);
+    setSelectedState(null);
+    
+    try {
+      let query = supabase
+        .from("provider_submissions")
+        .select("*")
+        .eq("category", "Sober Living")
+        .eq("status", "approved")
+        .eq("zip_code", zipCodeSearch);
+
+      if (genderSpecificCare === "Yes" && genderType) {
+        query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      const { data, error } = await query;
+
+      if (error) throw error;
+      
+      setProviders(data || []);
+      
+      if (!data || data.length === 0) {
+        const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
+        toast({
+          title: "No providers found",
+          description: `No providers found in zip code ${zipCodeSearch}${genderText}`,
+        });
+      }
+    } catch (error) {
+      console.error("Error searching by zip code:", error);
+      toast({
+        title: "Error",
+        description: "Failed to search providers. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -132,14 +198,77 @@ const SoberLiving = () => {
             Select a State to View Providers
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          
+          <div className="max-w-3xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="zipSearch">Search by Zip Code</Label>
+                <Input
+                  id="zipSearch"
+                  type="text"
+                  placeholder="Enter zip code"
+                  value={zipCodeSearch}
+                  onChange={(e) => setZipCodeSearch(e.target.value)}
+                  maxLength={10}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleZipCodeSearch();
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="genderCare">Gender Specific Care Needed?</Label>
+                <Select
+                  value={genderSpecificCare}
+                  onValueChange={setGenderSpecificCare}
+                >
+                  <SelectTrigger id="genderCare" className="bg-background">
+                    <SelectValue placeholder="Select option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="No">No</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                  </SelectContent>
+                </Select>
+                {genderSpecificCare === "Yes" && (
+                  <Select
+                    value={genderType}
+                    onValueChange={setGenderType}
+                  >
+                    <SelectTrigger className="bg-background mt-2">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50">
+                      <SelectItem value="Men">Men</SelectItem>
+                      <SelectItem value="Women">Women</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-4">
+              <Button onClick={handleZipCodeSearch} size="lg">
+                Search Providers
+              </Button>
+            </div>
+            
+            <p className="text-sm text-muted-foreground text-center mt-2">
+              Or click a state on the map above
+            </p>
+          </div>
         </div>
 
-        {selectedState && (
+        {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
-              {showingNearby 
-                ? `Nearest Sober Living Providers to ${selectedState}` 
-                : `Sober Living Providers in ${selectedState}`}
+              {zipCodeSearch && !selectedState
+                ? `Providers in Zip Code ${zipCodeSearch}`
+                : showingNearby 
+                  ? `Nearest Sober Living Providers to ${selectedState}` 
+                  : `Sober Living Providers in ${selectedState}`}
             </h3>
             {showingNearby && (
               <p className="text-muted-foreground mb-4">
