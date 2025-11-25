@@ -1,4 +1,5 @@
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { useState, useRef } from "react";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -6,6 +7,23 @@ interface USMapProps {
   onStateClick: (stateName: string) => void;
   selectedState: string | null;
 }
+
+// State abbreviation mapping
+const stateAbbreviations: Record<string, string> = {
+  "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR",
+  "California": "CA", "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE",
+  "Florida": "FL", "Georgia": "GA", "Hawaii": "HI", "Idaho": "ID",
+  "Illinois": "IL", "Indiana": "IN", "Iowa": "IA", "Kansas": "KS",
+  "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD",
+  "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS",
+  "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV",
+  "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY",
+  "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK",
+  "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "South Carolina": "SC",
+  "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT",
+  "Vermont": "VT", "Virginia": "VA", "Washington": "WA", "West Virginia": "WV",
+  "Wisconsin": "WI", "Wyoming": "WY"
+};
 
 // State color mapping using eight distinct colors
 // Ensuring no adjacent states share the same color
@@ -78,8 +96,44 @@ const stateColors: Record<string, string> = {
 };
 
 const USMap = ({ onStateClick, selectedState }: USMapProps) => {
+  const [hoveredState, setHoveredState] = useState<string | null>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (stateName: string, event: React.MouseEvent) => {
+    setHoveredState(stateName);
+    setTooltipPosition({ x: event.clientX, y: event.clientY });
+    
+    // Clear any existing timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    // Set timeout to show tooltip after 2 seconds
+    hoverTimeoutRef.current = setTimeout(() => {
+      setShowTooltip(true);
+    }, 2000);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredState(null);
+    setShowTooltip(false);
+    
+    // Clear timeout if user leaves before 2 seconds
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+  };
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    if (showTooltip) {
+      setTooltipPosition({ x: event.clientX, y: event.clientY });
+    }
+  };
+
   return (
-    <div className="w-full max-w-4xl mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-6">
+    <div className="w-full max-w-4xl mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-6 relative">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -93,6 +147,9 @@ const USMap = ({ onStateClick, selectedState }: USMapProps) => {
                   key={geo.rsmKey}
                   geography={geo}
                   onClick={() => onStateClick(geo.properties.name)}
+                  onMouseEnter={(e) => handleMouseEnter(stateName, e)}
+                  onMouseLeave={handleMouseLeave}
+                  onMouseMove={handleMouseMove}
                   style={{
                     default: {
                       fill: isSelected ? "hsl(var(--primary))" : stateColor,
@@ -120,6 +177,19 @@ const USMap = ({ onStateClick, selectedState }: USMapProps) => {
           }
         </Geographies>
       </ComposableMap>
+      
+      {/* Tooltip */}
+      {showTooltip && hoveredState && (
+        <div
+          className="fixed z-50 bg-primary text-primary-foreground px-3 py-2 rounded-md text-sm font-semibold shadow-lg pointer-events-none"
+          style={{
+            left: `${tooltipPosition.x + 10}px`,
+            top: `${tooltipPosition.y - 30}px`,
+          }}
+        >
+          {stateAbbreviations[hoveredState]}
+        </div>
+      )}
     </div>
   );
 };
