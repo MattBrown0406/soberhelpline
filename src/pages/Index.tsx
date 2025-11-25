@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
+import iocLogo from "@/assets/ioc-logo.jpg";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -116,6 +117,7 @@ const Index = () => {
         </div>
 
         <div className="mt-12 bg-accent rounded-lg p-8 text-center max-w-4xl mx-auto">
+          <img src={iocLogo} alt="Intervention On Call" className="mx-auto mb-6 h-20 w-auto" />
           <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
             We have partnered with Intervention On Call to provide the families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
