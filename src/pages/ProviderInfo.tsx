@@ -16,10 +16,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { User, Session } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 
 // Resize image to fit within maxSize while maintaining aspect ratio
@@ -222,7 +223,43 @@ type ProviderFormValues = z.infer<typeof providerFormSchema>;
 
 const ProviderInfo = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setIsLoading(false);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Redirect to auth page if not logged in
+  useEffect(() => {
+    if (!isLoading && !user) {
+      toast({
+        title: "Authentication required",
+        description: "Please log in to submit a provider application.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+    }
+  }, [user, isLoading, navigate, toast]);
   
   const form = useForm<ProviderFormValues>({
     resolver: zodResolver(providerFormSchema),
@@ -275,6 +312,16 @@ const ProviderInfo = () => {
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "You must be logged in to submit.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       // Combine selected insurances with custom "Other" insurances
@@ -410,7 +457,8 @@ const ProviderInfo = () => {
           insurances_accepted: finalInsurances,
           logo_url: logoUrl,
           address: null,
-          status: 'pending'
+          status: 'pending',
+          submitted_by: user.id
         });
 
       if (error) throw error;
@@ -449,19 +497,29 @@ const ProviderInfo = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <Link to="/">
-            <Button variant="ghost" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-            <Phone className="w-5 h-5" />
-            <span className="font-medium">(541) 241-5886</span>
-          </a>
+      {isLoading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <p className="text-lg text-muted-foreground">Loading...</p>
         </div>
+      ) : !user ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <p className="text-lg text-muted-foreground">Redirecting to login...</p>
+        </div>
+      ) : (
+        <>
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex justify-between items-center mb-6">
+              <Link to="/">
+                <Button variant="ghost" className="gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Home
+                </Button>
+              </Link>
+              <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+                <Phone className="w-5 h-5" />
+                <span className="font-medium">(541) 241-5886</span>
+              </a>
+            </div>
 
         <div className="max-w-3xl mx-auto">
           <div className="mb-8 text-center">
@@ -1698,6 +1756,8 @@ const ProviderInfo = () => {
           </Form>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };
