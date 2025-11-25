@@ -92,6 +92,7 @@ export type Database = {
           substance_use_disorder_experience: boolean | null
           therapeutic_modalities: string[] | null
           total_treatment_beds: number | null
+          travel_expenses_included: boolean | null
           updated_at: string | null
           website: string | null
           year_started: number | null
@@ -144,6 +145,7 @@ export type Database = {
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
+          travel_expenses_included?: boolean | null
           updated_at?: string | null
           website?: string | null
           year_started?: number | null
@@ -196,6 +198,7 @@ export type Database = {
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
+          travel_expenses_included?: boolean | null
           updated_at?: string | null
           website?: string | null
           year_started?: number | null
