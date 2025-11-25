@@ -187,7 +187,7 @@ const providerFormSchema = z.object({
   logo: z.instanceof(FileList).optional(),
 }).refine((data) => {
   // Length of services is required for categories that show this field
-  const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"];
+  const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Medical Detox"];
   if (!excludedCategories.includes(data.category)) {
     return data.lengthOfServices && data.lengthOfServices.length > 0;
   }
@@ -852,7 +852,7 @@ const ProviderInfo = () => {
                 />
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists", "Medical Detox"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="lengthOfServices"
