@@ -9,7 +9,7 @@ interface USMapProps {
 
 const USMap = ({ onStateClick, selectedState }: USMapProps) => {
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-6">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
