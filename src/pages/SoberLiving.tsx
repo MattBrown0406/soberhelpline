@@ -69,12 +69,19 @@ const SoberLiving = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Sober Living")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
+
+      // Apply gender filter for nearby providers
+      if (genderSpecificCare === "Yes" && genderType) {
+        query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
