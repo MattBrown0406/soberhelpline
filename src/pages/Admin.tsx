@@ -230,6 +230,28 @@ const Admin = () => {
                         <div className="flex flex-col text-sm space-y-1">
                           {submission.cost && <span>Cost: {submission.cost}</span>}
                           {submission.year_started && <span>Since: {submission.year_started}</span>}
+                          
+                          {/* Interventionist-specific fields */}
+                          {submission.category === "Interventionists" && (
+                            <>
+                              {submission.intervention_modalities && submission.intervention_modalities.length > 0 && (
+                                <div className="flex flex-wrap gap-1">
+                                  {submission.intervention_modalities.map((modality, idx) => (
+                                    <Badge key={idx} variant="secondary" className="text-xs">
+                                      {modality}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              )}
+                              {submission.travel_expenses_included && (
+                                <Badge variant="outline" className="w-fit text-xs">
+                                  <CheckCircle className="h-3 w-3 mr-1" />
+                                  Travel Included
+                                </Badge>
+                              )}
+                            </>
+                          )}
+                          
                           {submission.detox_available && (
                             <Badge variant="outline" className="w-fit text-xs">
                               <CheckCircle className="h-3 w-3 mr-1" />
