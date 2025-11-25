@@ -8,6 +8,7 @@ import ProviderInfo from "./pages/ProviderInfo";
 import RecoveryPodcasts from "./pages/RecoveryPodcasts";
 import InpatientTreatment from "./pages/InpatientTreatment";
 import OutpatientTreatment from "./pages/OutpatientTreatment";
+import MedicalDetox from "./pages/MedicalDetox";
 import Interventionists from "./pages/Interventionists";
 import SoberCoachesCompanions from "./pages/SoberCoachesCompanions";
 import SoberLiving from "./pages/SoberLiving";
@@ -19,7 +20,6 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import SubscriptionCancel from "./pages/SubscriptionCancel";
-
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -34,6 +34,7 @@ const App = () => (
           <Route path="/recovery-podcasts" element={<RecoveryPodcasts />} />
           <Route path="/inpatient-treatment" element={<InpatientTreatment />} />
           <Route path="/outpatient-treatment" element={<OutpatientTreatment />} />
+          <Route path="/medical-detox" element={<MedicalDetox />} />
           <Route path="/interventionists" element={<Interventionists />} />
           <Route path="/sober-coaches-companions" element={<SoberCoachesCompanions />} />
           <Route path="/sober-living" element={<SoberLiving />} />

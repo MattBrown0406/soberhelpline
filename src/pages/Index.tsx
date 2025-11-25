@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck, LogIn, Headphones } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck, LogIn, Headphones, Pill } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import iocLogo from "@/assets/ioc-logo.jpg";
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
   { name: "Outpatient Treatment", icon: Home, path: "/outpatient-treatment" },
+  { name: "Medical Detox", icon: Pill, path: "/medical-detox" },
   { name: "Interventionists", icon: Users, path: "/interventionists" },
   { name: "Sober Coaches/Companions", icon: UserCheck, path: "/sober-coaches-companions" },
   { name: "Sober Living", icon: Bed, path: "/sober-living" },
