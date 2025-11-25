@@ -143,6 +143,7 @@ const providerFormSchema = z.object({
   otherInterventionModalities: z.string().optional(),
   hourlyCoachingSessions: z.boolean().optional(),
   hourlyCoachingRate: z.string().optional(),
+  caseManagementServices: z.boolean().optional(),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
@@ -218,6 +219,7 @@ const ProviderInfo = () => {
       otherInterventionModalities: "",
       hourlyCoachingSessions: false,
       hourlyCoachingRate: "",
+      caseManagementServices: false,
       lengthOfServices: "",
       detoxAvailable: false,
       coOccurringDiagnoses: [],
@@ -340,6 +342,7 @@ const ProviderInfo = () => {
           intervention_modalities: finalInterventionModalities.length > 0 ? finalInterventionModalities : null,
           hourly_coaching_sessions: data.hourlyCoachingSessions || null,
           hourly_coaching_rate: data.hourlyCoachingRate || null,
+          case_management_services: data.caseManagementServices || null,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
@@ -1003,6 +1006,26 @@ const ProviderInfo = () => {
                         </div>
                       </FormControl>
                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Interventionists" && (
+                <FormField
+                  control={form.control}
+                  name="caseManagementServices"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you provide case management services?</FormLabel>
+                      </div>
                     </FormItem>
                   )}
                 />
