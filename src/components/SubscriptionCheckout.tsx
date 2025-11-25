@@ -57,7 +57,6 @@ function getSubscriptionPlan(category: string): SubscriptionPlan {
     case 'Sober Coaches/Companions':
     case 'Therapists':
     case 'Psychiatrists':
-    case 'Attorneys':
     default:
       return {
         id: 'professional-annual',
