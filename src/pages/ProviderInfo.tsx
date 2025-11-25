@@ -1088,7 +1088,11 @@ const ProviderInfo = () => {
                 name="logo"
                 render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Provider Logo</FormLabel>
+                    <FormLabel>
+                      {["Interventionists", "Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
+                        ? "Provider Logo or Photo"
+                        : "Provider Logo"}
+                    </FormLabel>
                     <FormControl>
                       <Input 
                         type="file"
