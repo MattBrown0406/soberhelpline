@@ -35,6 +35,7 @@ export type Database = {
           in_person_companion_work: boolean | null
           insurances_accepted: string[] | null
           intervention_modalities: string[] | null
+          items_included_in_cost: string[] | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
@@ -70,6 +71,7 @@ export type Database = {
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
+          items_included_in_cost?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
@@ -105,6 +107,7 @@ export type Database = {
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
+          items_included_in_cost?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null

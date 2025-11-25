@@ -162,6 +162,7 @@ const providerFormSchema = z.object({
   licenseCurrentGoodStanding: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
+  itemsIncludedInCost: z.array(z.string()).optional(),
   insurancesAccepted: z.array(z.string()),
   otherInsurances: z.string().optional(),
   logo: z.instanceof(FileList).optional(),
@@ -239,6 +240,7 @@ const ProviderInfo = () => {
       licenseCurrentGoodStanding: false,
       descriptionOfServices: "",
       cost: "",
+      itemsIncludedInCost: [],
       insurancesAccepted: [],
       otherInsurances: "",
     },
@@ -362,6 +364,7 @@ const ProviderInfo = () => {
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
+          items_included_in_cost: data.itemsIncludedInCost || null,
           insurances_accepted: finalInsurances,
           logo_url: logoUrl,
           address: null,
@@ -1137,6 +1140,54 @@ const ProviderInfo = () => {
                       </div>
                     </FormControl>
                     <FormDescription>Provide cost range or pricing structure</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="itemsIncludedInCost"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Are the following items included in the cost?</FormLabel>
+                    </div>
+                    <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
+                      {["Food", "Transportation", "Therapeutic Support"].map((item) => (
+                        <FormField
+                          key={item}
+                          control={form.control}
+                          name="itemsIncludedInCost"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={item}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...(field.value || []), item])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== item
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {item}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
