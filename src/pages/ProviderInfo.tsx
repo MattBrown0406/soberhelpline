@@ -918,7 +918,7 @@ const ProviderInfo = () => {
                           <FormLabel className="text-base">What languages do you speak other than English?</FormLabel>
                         </div>
                         <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Other"].map((language) => (
+                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Farsi", "Other"].map((language) => (
                             <FormField
                               key={language}
                               control={form.control}
@@ -1258,7 +1258,7 @@ const ProviderInfo = () => {
                           <FormLabel className="text-base">What languages do you speak other than English?</FormLabel>
                         </div>
                         <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Other"].map((language) => (
+                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Farsi", "Other"].map((language) => (
                             <FormField
                               key={language}
                               control={form.control}
