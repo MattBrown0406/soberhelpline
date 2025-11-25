@@ -986,7 +986,9 @@ const ProviderInfo = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      {["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
+                      {form.watch("category") === "Interventionists"
+                        ? "Cost per intervention *"
+                        : ["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
                         ? "Cost per session/meeting *"
                         : "Private Pay Rate (without insurance) *"}
                     </FormLabel>
