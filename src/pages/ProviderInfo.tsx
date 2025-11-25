@@ -166,6 +166,7 @@ const providerFormSchema = z.object({
   requiredMeetingsPerWeek: z.string().optional(),
   mandatoryCurfew: z.boolean().optional(),
   curfewTime: z.string().optional(),
+  choresRequired: z.boolean().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -253,6 +254,7 @@ const ProviderInfo = () => {
       requiredMeetingsPerWeek: "",
       mandatoryCurfew: false,
       curfewTime: "",
+      choresRequired: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -386,6 +388,7 @@ const ProviderInfo = () => {
           required_meetings_per_week: data.requiredMeetingsPerWeek || null,
           mandatory_curfew: data.mandatoryCurfew || null,
           curfew_time: data.curfewTime || null,
+          chores_required: data.choresRequired || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1230,6 +1233,26 @@ const ProviderInfo = () => {
                       </FormControl>
                       <FormDescription>Select curfew time</FormDescription>
                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="choresRequired"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you require that residents participate in chores?</FormLabel>
+                      </div>
                     </FormItem>
                   )}
                 />
