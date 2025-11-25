@@ -1522,7 +1522,7 @@ const ProviderInfo = () => {
                 )}
               />
 
-              {!["Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category")) && (
+              {form.watch("category") === "Sober Living" && (
                 <FormField
                   control={form.control}
                   name="itemsIncludedInCost"
