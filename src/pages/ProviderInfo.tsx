@@ -148,6 +148,7 @@ const providerFormSchema = z.object({
   otherTherapeuticModalities: z.string().optional(),
   inPersonCompanionWork: z.boolean().optional(),
   hasValidPassport: z.boolean().optional(),
+  dailyCompanionFee: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -195,6 +196,7 @@ const ProviderInfo = () => {
       otherTherapeuticModalities: "",
       inPersonCompanionWork: false,
       hasValidPassport: false,
+      dailyCompanionFee: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -313,6 +315,7 @@ const ProviderInfo = () => {
           therapeutic_modalities: finalModalities.length > 0 ? finalModalities : null,
           in_person_companion_work: data.inPersonCompanionWork || null,
           has_valid_passport: data.hasValidPassport || null,
+          daily_companion_fee: data.dailyCompanionFee || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -782,24 +785,53 @@ const ProviderInfo = () => {
                   />
 
                   {form.watch("inPersonCompanionWork") && (
-                    <FormField
-                      control={form.control}
-                      name="hasValidPassport"
-                      render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <div className="space-y-1 leading-none">
-                            <FormLabel>Do you have a valid passport?</FormLabel>
-                            <FormDescription>Confirm you have a valid passport for international companion work</FormDescription>
-                          </div>
-                        </FormItem>
-                      )}
-                    />
+                    <>
+                      <FormField
+                        control={form.control}
+                        name="hasValidPassport"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                              />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                              <FormLabel>Do you have a valid passport?</FormLabel>
+                              <FormDescription>Confirm you have a valid passport for international companion work</FormDescription>
+                            </div>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="dailyCompanionFee"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>What is your daily fee for in person companion work?</FormLabel>
+                            <FormControl>
+                              <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                                <Input 
+                                  type="text" 
+                                  placeholder="Enter daily fee" 
+                                  className="pl-7"
+                                  {...field}
+                                  onChange={(e) => {
+                                    const value = e.target.value.replace(/[^0-9]/g, '');
+                                    field.onChange(value);
+                                  }}
+                                />
+                              </div>
+                            </FormControl>
+                            <FormDescription>Enter your daily rate for in-person companion services</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
                   )}
                 </>
               )}

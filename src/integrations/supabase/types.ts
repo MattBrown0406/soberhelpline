@@ -22,6 +22,7 @@ export type Database = {
           co_occurring_diagnoses: string[] | null
           cost: string | null
           created_at: string | null
+          daily_companion_fee: string | null
           description_of_services: string | null
           detox_available: boolean | null
           email: string
@@ -52,6 +53,7 @@ export type Database = {
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
+          daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
           email: string
@@ -82,6 +84,7 @@ export type Database = {
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
+          daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
           email?: string
