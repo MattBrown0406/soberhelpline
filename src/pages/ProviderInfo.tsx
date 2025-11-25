@@ -178,6 +178,7 @@ const providerFormSchema = z.object({
   legalAssistanceTypes: z.array(z.string()).optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(750, "Description must be less than 750 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
+  travelExpensesIncluded: z.boolean().optional(),
   itemsIncludedInCost: z.array(z.string()).optional(),
   insurancesAccepted: z.array(z.string()),
   otherInsurances: z.string().optional(),
@@ -317,6 +318,7 @@ const ProviderInfo = () => {
       legalAssistanceTypes: [],
       descriptionOfServices: "",
       cost: "",
+      travelExpensesIncluded: false,
       itemsIncludedInCost: [],
       insurancesAccepted: [],
       otherInsurances: "",
@@ -466,6 +468,7 @@ const ProviderInfo = () => {
           legal_assistance_types: data.legalAssistanceTypes || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
+          travel_expenses_included: data.travelExpensesIncluded || null,
           items_included_in_cost: data.itemsIncludedInCost || null,
           insurances_accepted: finalInsurances,
           logo_url: logoUrl,
@@ -1613,6 +1616,27 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {form.watch("category") === "Interventionists" && (
+                <FormField
+                  control={form.control}
+                  name="travelExpensesIncluded"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Are travel expenses included with the intervention fee?</FormLabel>
+                        <FormDescription>Check if travel costs are included in the intervention fee</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {form.watch("category") === "Sober Living" && (
                 <FormField
