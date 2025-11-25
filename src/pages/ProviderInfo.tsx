@@ -340,15 +340,20 @@ const ProviderInfo = () => {
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
-    if (!user) {
+    // Re-verify session directly from Supabase to ensure auth is current
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    
+    if (sessionError || !sessionData.session?.user) {
       toast({
         title: "Authentication required",
-        description: "You must be logged in to submit.",
+        description: "Your session has expired. Please log in again.",
         variant: "destructive",
       });
       navigate("/auth");
       return;
     }
+
+    const authenticatedUserId = sessionData.session.user.id;
 
     setIsSubmitting(true);
     try {
@@ -500,7 +505,7 @@ const ProviderInfo = () => {
           logo_url: logoUrl,
           address: null,
           status: 'pending',
-          submitted_by: user.id
+          submitted_by: authenticatedUserId
         })
         .select('id')
         .single();
