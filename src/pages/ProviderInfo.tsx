@@ -1344,7 +1344,7 @@ const ProviderInfo = () => {
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel>Do you have experience with working with substance use disorder?</FormLabel>
+                        <FormLabel>Do you have experience working with individuals with substance use disorder?</FormLabel>
                       </div>
                     </FormItem>
                   )}
