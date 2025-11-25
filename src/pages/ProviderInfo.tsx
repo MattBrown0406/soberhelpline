@@ -576,7 +576,7 @@ const ProviderInfo = () => {
                         <FormLabel className="text-base">Do you offer any of the following therapeutic modalities?</FormLabel>
                       </div>
                       <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                        {["CBT (Cognitive Behavioral Therapy)", "DBT (Dialectical Behavior Therapy)", "EMDR", "Motivational Interviewing", "Psychodynamic Therapy", "Family Therapy", "Group Therapy", "Individual Therapy"].map((modality) => (
+                        {["CBT (Cognitive Behavioral Therapy)", "DBT (Dialectical Behavior Therapy)", "EMDR", "IFS (Internal Family Systems)", "Motivational Interviewing", "Psychodynamic Therapy", "Family Therapy", "Group Therapy", "Individual Therapy"].map((modality) => (
                           <FormField
                             key={modality}
                             control={form.control}
