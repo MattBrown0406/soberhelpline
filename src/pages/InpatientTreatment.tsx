@@ -3,6 +3,7 @@ import { ArrowLeft, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Input } from "@/components/ui/input";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
@@ -27,6 +28,7 @@ const InpatientTreatment = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
+  const [zipCodeSearch, setZipCodeSearch] = useState("");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -165,6 +167,50 @@ const InpatientTreatment = () => {
     }
   };
 
+  const handleZipCodeSearch = async () => {
+    if (!zipCodeSearch || zipCodeSearch.length < 5) {
+      toast({
+        title: "Invalid Zip Code",
+        description: "Please enter a valid 5-digit zip code",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    setShowingNearby(false);
+    setSelectedState(null);
+    
+    try {
+      const { data, error } = await supabase
+        .from("provider_submissions")
+        .select("*")
+        .eq("category", "Inpatient Treatment")
+        .eq("status", "approved")
+        .eq("zip_code", zipCodeSearch);
+
+      if (error) throw error;
+      
+      setProviders(data || []);
+      
+      if (!data || data.length === 0) {
+        toast({
+          title: "No providers found",
+          description: `No providers found in zip code ${zipCodeSearch}`,
+        });
+      }
+    } catch (error) {
+      console.error("Error searching by zip code:", error);
+      toast({
+        title: "Error",
+        description: "Failed to search providers. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -190,18 +236,45 @@ const InpatientTreatment = () => {
             Select a State to View Providers
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          
+          <div className="max-w-md mx-auto mt-6">
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <Input
+                  type="text"
+                  placeholder="Enter zip code"
+                  value={zipCodeSearch}
+                  onChange={(e) => setZipCodeSearch(e.target.value)}
+                  maxLength={10}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleZipCodeSearch();
+                    }
+                  }}
+                />
+              </div>
+              <Button onClick={handleZipCodeSearch}>
+                Search Zip Code
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground text-center mt-2">
+              Or click a state on the map above
+            </p>
+          </div>
         </div>
 
-        {selectedState && (
+        {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <>
             <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
             
             <div className="max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4">
-              {showingNearby 
-                ? `Nearest Inpatient Treatment Providers to ${selectedState}` 
-                : `Inpatient Treatment Providers in ${selectedState}`}
-            </h3>
+              <h3 className="text-xl font-semibold mb-4">
+                {zipCodeSearch && !selectedState
+                  ? `Providers in Zip Code ${zipCodeSearch}`
+                  : showingNearby 
+                    ? `Nearest Inpatient Treatment Providers to ${selectedState}` 
+                    : `Inpatient Treatment Providers in ${selectedState}`}
+              </h3>
             {showingNearby && (
               <p className="text-muted-foreground mb-4">
                 No providers found in {selectedState}. Showing the 3 geographically closest providers.
