@@ -42,13 +42,13 @@ export type Database = {
           intervention_modalities: string[] | null
           items_included_in_cost: string[] | null
           job_assistance_provided: boolean | null
+          legal_assistance_types: string[] | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
           logo_url: string | null
           mandatory_curfew: boolean | null
           mandatory_house_meetings: boolean | null
-          marchman_act_assistance: boolean | null
           medication_administration: string | null
           minimum_time_since_last_use: string | null
           phone_number: string
@@ -92,13 +92,13 @@ export type Database = {
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
           job_assistance_provided?: boolean | null
+          legal_assistance_types?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
-          marchman_act_assistance?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number: string
@@ -142,13 +142,13 @@ export type Database = {
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
           job_assistance_provided?: boolean | null
+          legal_assistance_types?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
-          marchman_act_assistance?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number?: string
