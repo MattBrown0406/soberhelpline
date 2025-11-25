@@ -299,8 +299,8 @@ const OutpatientTreatment = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-start mb-6">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-start mb-4">
           <div className="flex flex-col gap-2">
             <Link to="/">
               <Button variant="ghost" className="gap-2">
@@ -315,12 +315,12 @@ const OutpatientTreatment = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(541) 241-5886</span>
             </a>
-            <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
+            <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
           </div>
         </div>
 
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center gap-3 mb-2">
             <Home className="w-10 h-10 text-primary" />
             <h1 className="text-4xl font-bold text-foreground">Outpatient Treatment</h1>
           </div>
@@ -329,7 +329,7 @@ const OutpatientTreatment = () => {
           </p>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-6">
           <h2 className="text-2xl font-semibold text-center mb-4">
             Select a State to View Providers
           </h2>
