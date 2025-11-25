@@ -19,30 +19,10 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil } from "lucide-react";
-
-type ProviderSubmission = {
-  id: string;
-  provider_name: string;
-  category: string;
-  email: string;
-  phone_number: string;
-  status: string;
-  created_at: string;
-  city: string | null;
-  state: string | null;
-};
+import { ArrowLeft, Pencil, CheckCircle, XCircle } from "lucide-react";
+import { ProviderSubmission } from "@/types/provider";
+import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -100,7 +80,7 @@ const Admin = () => {
     try {
       const { data, error } = await supabase
         .from("provider_submissions")
-        .select("id, provider_name, category, email, phone_number, status, created_at, city, state")
+        .select("*")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -135,20 +115,14 @@ const Admin = () => {
     setEditDialogOpen(true);
   };
 
-  const handleSaveEdit = async () => {
-    if (!editingSubmission) return;
-
+  const handleSaveEdit = async (updatedSubmission: ProviderSubmission) => {
     try {
+      const { id, created_at, updated_at, ...updateData } = updatedSubmission;
+      
       const { error } = await supabase
         .from("provider_submissions")
-        .update({
-          provider_name: editingSubmission.provider_name,
-          email: editingSubmission.email,
-          phone_number: editingSubmission.phone_number,
-          city: editingSubmission.city,
-          state: editingSubmission.state,
-        })
-        .eq("id", editingSubmission.id);
+        .update(updateData)
+        .eq("id", id);
 
       if (error) throw error;
 
@@ -208,8 +182,8 @@ const Admin = () => {
                     <TableHead>Provider Name</TableHead>
                     <TableHead>Category</TableHead>
                     <TableHead>Location</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Phone</TableHead>
+                    <TableHead>Contact</TableHead>
+                    <TableHead>Details</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Submitted</TableHead>
                     <TableHead>Actions</TableHead>
@@ -219,16 +193,63 @@ const Admin = () => {
                   {submissions.map((submission) => (
                     <TableRow key={submission.id}>
                       <TableCell className="font-medium">
-                        {submission.provider_name}
+                        <div className="flex flex-col">
+                          <span>{submission.provider_name}</span>
+                          {submission.cip_certified && (
+                            <Badge variant="secondary" className="w-fit mt-1 text-xs">
+                              CIP Certified
+                            </Badge>
+                          )}
+                        </div>
                       </TableCell>
                       <TableCell>{submission.category}</TableCell>
                       <TableCell>
-                        {submission.city && submission.state
-                          ? `${submission.city}, ${submission.state}`
-                          : submission.state || "N/A"}
+                        <div className="flex flex-col text-sm">
+                          {submission.city && submission.state ? (
+                            <>
+                              <span>{submission.city}, {submission.state}</span>
+                              {submission.zip_code && <span className="text-muted-foreground">{submission.zip_code}</span>}
+                            </>
+                          ) : (
+                            <span>{submission.state || "N/A"}</span>
+                          )}
+                        </div>
                       </TableCell>
-                      <TableCell>{submission.email}</TableCell>
-                      <TableCell>{submission.phone_number}</TableCell>
+                      <TableCell>
+                        <div className="flex flex-col text-sm">
+                          <span>{submission.email}</span>
+                          <span className="text-muted-foreground">{submission.phone_number}</span>
+                          {submission.website && (
+                            <a href={submission.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-xs">
+                              Website
+                            </a>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex flex-col text-sm space-y-1">
+                          {submission.cost && <span>Cost: {submission.cost}</span>}
+                          {submission.year_started && <span>Since: {submission.year_started}</span>}
+                          {submission.detox_available && (
+                            <Badge variant="outline" className="w-fit text-xs">
+                              <CheckCircle className="h-3 w-3 mr-1" />
+                              Detox
+                            </Badge>
+                          )}
+                          {submission.lgbt_supportive && (
+                            <Badge variant="outline" className="w-fit text-xs">
+                              <CheckCircle className="h-3 w-3 mr-1" />
+                              LGBT Supportive
+                            </Badge>
+                          )}
+                          {submission.license_current_good_standing && (
+                            <Badge variant="outline" className="w-fit text-xs">
+                              <CheckCircle className="h-3 w-3 mr-1" />
+                              Licensed
+                            </Badge>
+                          )}
+                        </div>
+                      </TableCell>
                       <TableCell>{getStatusBadge(submission.status || "pending")}</TableCell>
                       <TableCell>
                         {new Date(submission.created_at).toLocaleDateString()}
@@ -272,89 +293,12 @@ const Admin = () => {
           </CardContent>
         </Card>
 
-        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Edit Provider Submission</DialogTitle>
-            </DialogHeader>
-            {editingSubmission && (
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="provider_name">Provider Name</Label>
-                  <Input
-                    id="provider_name"
-                    value={editingSubmission.provider_name}
-                    onChange={(e) =>
-                      setEditingSubmission({
-                        ...editingSubmission,
-                        provider_name: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={editingSubmission.email}
-                    onChange={(e) =>
-                      setEditingSubmission({
-                        ...editingSubmission,
-                        email: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="phone_number">Phone Number</Label>
-                  <Input
-                    id="phone_number"
-                    value={editingSubmission.phone_number}
-                    onChange={(e) =>
-                      setEditingSubmission({
-                        ...editingSubmission,
-                        phone_number: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    value={editingSubmission.city || ""}
-                    onChange={(e) =>
-                      setEditingSubmission({
-                        ...editingSubmission,
-                        city: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="state">State</Label>
-                  <Input
-                    id="state"
-                    value={editingSubmission.state || ""}
-                    onChange={(e) =>
-                      setEditingSubmission({
-                        ...editingSubmission,
-                        state: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-              </div>
-            )}
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
-                Cancel
-              </Button>
-              <Button onClick={handleSaveEdit}>Save Changes</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <EditSubmissionDialog
+          submission={editingSubmission}
+          open={editDialogOpen}
+          onOpenChange={setEditDialogOpen}
+          onSave={handleSaveEdit}
+        />
       </div>
     </div>
   );
