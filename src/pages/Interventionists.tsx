@@ -26,6 +26,10 @@ interface Provider {
   description_of_services: string | null;
   logo_url: string | null;
   cip_certified?: boolean | null;
+  category?: string;
+  cost?: string | null;
+  intervention_modalities?: string[] | null;
+  travel_expenses_included?: boolean | null;
 }
 
 const Interventionists = () => {

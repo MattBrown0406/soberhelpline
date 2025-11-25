@@ -14,6 +14,10 @@ interface Provider {
   description_of_services: string | null;
   logo_url: string | null;
   cip_certified?: boolean | null;
+  category?: string;
+  cost?: string | null;
+  intervention_modalities?: string[] | null;
+  travel_expenses_included?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -57,6 +61,38 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
         {provider.description_of_services && (
           <p className="text-muted-foreground mb-4">{provider.description_of_services}</p>
         )}
+        
+        {/* Interventionist-specific information */}
+        {provider.category === "Interventionists" && (
+          <div className="mb-4 space-y-3">
+            {provider.cost && (
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-sm">Cost:</span>
+                <span className="text-sm">{provider.cost}</span>
+              </div>
+            )}
+            
+            {provider.intervention_modalities && provider.intervention_modalities.length > 0 && (
+              <div>
+                <span className="font-semibold text-sm block mb-2">Intervention Modalities:</span>
+                <div className="flex flex-wrap gap-2">
+                  {provider.intervention_modalities.map((modality, idx) => (
+                    <Badge key={idx} variant="secondary">
+                      {modality}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {provider.travel_expenses_included && (
+              <Badge variant="outline" className="w-fit">
+                ✓ Travel Expenses Included
+              </Badge>
+            )}
+          </div>
+        )}
+        
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-sm">
             <Phone className="w-4 h-4 text-primary" />
