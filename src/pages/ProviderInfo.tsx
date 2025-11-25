@@ -81,6 +81,7 @@ const resizeImage = (file: File, maxSize: number = 400): Promise<Blob> => {
 const providerCategories = [
   "Inpatient Treatment",
   "Outpatient Treatment",
+  "Medical Detox",
   "Interventionists",
   "Sober Coaches/Companions",
   "Sober Living",

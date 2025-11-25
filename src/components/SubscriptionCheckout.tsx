@@ -23,6 +23,7 @@ function getSubscriptionPlan(category: string): SubscriptionPlan {
   switch (category) {
     case 'Inpatient Treatment':
     case 'Outpatient Treatment':
+    case 'Medical Detox':
       return {
         id: 'treatment-monthly',
         name: 'Treatment Provider',
