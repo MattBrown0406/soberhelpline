@@ -206,6 +206,56 @@ export type Database = {
         }
         Relationships: []
       }
+      provider_subscriptions: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          next_billing_date: string | null
+          paypal_subscription_id: string | null
+          plan_type: string
+          provider_submission_id: string | null
+          start_date: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          next_billing_date?: string | null
+          paypal_subscription_id?: string | null
+          plan_type: string
+          provider_submission_id?: string | null
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          next_billing_date?: string | null
+          paypal_subscription_id?: string | null
+          plan_type?: string
+          provider_submission_id?: string | null
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null

@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.send-provider-notification]
 verify_jwt = false
+
+[functions.paypal-subscriptions]
+verify_jwt = false

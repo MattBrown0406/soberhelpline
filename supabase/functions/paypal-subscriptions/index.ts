@@ -1,0 +1,343 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
+const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox' 
+  ? 'https://api-m.sandbox.paypal.com'
+  : 'https://api-m.paypal.com';
+
+async function getPayPalAccessToken(): Promise<string> {
+  const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
+  const clientSecret = Deno.env.get('PAYPAL_SECRET_KEY');
+  
+  if (!clientId || !clientSecret) {
+    throw new Error('PayPal credentials not configured');
+  }
+
+  const auth = btoa(`${clientId}:${clientSecret}`);
+  
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: 'grant_type=client_credentials',
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error('PayPal auth error:', error);
+    throw new Error('Failed to get PayPal access token');
+  }
+
+  const data = await response.json();
+  return data.access_token;
+}
+
+async function createPayPalProduct(accessToken: string): Promise<string> {
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/catalogs/products`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: 'Sober Helpline Provider Listing',
+      description: 'Monthly or annual listing fee for addiction recovery service providers',
+      type: 'SERVICE',
+      category: 'SOFTWARE',
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error('PayPal product creation error:', error);
+    throw new Error('Failed to create PayPal product');
+  }
+
+  const data = await response.json();
+  return data.id;
+}
+
+async function createPayPalPlan(
+  accessToken: string, 
+  productId: string, 
+  planType: 'monthly' | 'annual',
+  amount: string
+): Promise<string> {
+  const billingCycles = planType === 'monthly' 
+    ? [{
+        frequency: { interval_unit: 'MONTH', interval_count: 1 },
+        tenure_type: 'REGULAR',
+        sequence: 1,
+        total_cycles: 0,
+        pricing_scheme: {
+          fixed_price: { value: amount, currency_code: 'USD' }
+        }
+      }]
+    : [{
+        frequency: { interval_unit: 'YEAR', interval_count: 1 },
+        tenure_type: 'REGULAR',
+        sequence: 1,
+        total_cycles: 0,
+        pricing_scheme: {
+          fixed_price: { value: amount, currency_code: 'USD' }
+        }
+      }];
+
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/plans`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      product_id: productId,
+      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}`,
+      description: `${planType === 'monthly' ? 'Monthly' : 'Annual'} subscription for provider listing`,
+      billing_cycles: billingCycles,
+      payment_preferences: {
+        auto_bill_outstanding: true,
+        setup_fee_failure_action: 'CONTINUE',
+        payment_failure_threshold: 3
+      }
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error('PayPal plan creation error:', error);
+    throw new Error('Failed to create PayPal plan');
+  }
+
+  const data = await response.json();
+  return data.id;
+}
+
+async function createPayPalSubscription(
+  accessToken: string,
+  planId: string,
+  returnUrl: string,
+  cancelUrl: string
+): Promise<{ subscriptionId: string; approvalUrl: string }> {
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/subscriptions`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      plan_id: planId,
+      application_context: {
+        brand_name: 'Sober Helpline',
+        locale: 'en-US',
+        shipping_preference: 'NO_SHIPPING',
+        user_action: 'SUBSCRIBE_NOW',
+        return_url: returnUrl,
+        cancel_url: cancelUrl,
+      }
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error('PayPal subscription creation error:', error);
+    throw new Error('Failed to create PayPal subscription');
+  }
+
+  const data = await response.json();
+  const approvalLink = data.links.find((link: { rel: string }) => link.rel === 'approve');
+  
+  return {
+    subscriptionId: data.id,
+    approvalUrl: approvalLink?.href || '',
+  };
+}
+
+async function getSubscriptionDetails(accessToken: string, subscriptionId: string) {
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/subscriptions/${subscriptionId}`, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error('PayPal get subscription error:', error);
+    throw new Error('Failed to get subscription details');
+  }
+
+  return response.json();
+}
+
+Deno.serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    const { action, ...params } = await req.json();
+    console.log('PayPal action:', action, 'params:', JSON.stringify(params));
+
+    const accessToken = await getPayPalAccessToken();
+
+    switch (action) {
+      case 'create-subscription': {
+        const { planType, amount, userId, providerSubmissionId, returnUrl, cancelUrl } = params;
+        
+        if (!planType || !amount || !userId || !returnUrl || !cancelUrl) {
+          throw new Error('Missing required parameters');
+        }
+
+        // Create product and plan
+        const productId = await createPayPalProduct(accessToken);
+        const planId = await createPayPalPlan(accessToken, productId, planType, amount);
+        
+        // Create subscription
+        const { subscriptionId, approvalUrl } = await createPayPalSubscription(
+          accessToken, 
+          planId, 
+          returnUrl, 
+          cancelUrl
+        );
+
+        // Store pending subscription in database
+        const { error: dbError } = await supabaseClient
+          .from('provider_subscriptions')
+          .insert({
+            user_id: userId,
+            provider_submission_id: providerSubmissionId || null,
+            paypal_subscription_id: subscriptionId,
+            plan_type: planType,
+            status: 'pending',
+            amount: parseFloat(amount),
+          });
+
+        if (dbError) {
+          console.error('Database error:', dbError);
+          throw new Error('Failed to store subscription');
+        }
+
+        return new Response(
+          JSON.stringify({ subscriptionId, approvalUrl }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      case 'activate-subscription': {
+        const { subscriptionId } = params;
+        
+        if (!subscriptionId) {
+          throw new Error('Missing subscription ID');
+        }
+
+        // Get subscription details from PayPal
+        const details = await getSubscriptionDetails(accessToken, subscriptionId);
+        
+        if (details.status === 'ACTIVE') {
+          // Update subscription status in database
+          const { error: dbError } = await supabaseClient
+            .from('provider_subscriptions')
+            .update({
+              status: 'active',
+              start_date: details.start_time,
+              next_billing_date: details.billing_info?.next_billing_time,
+            })
+            .eq('paypal_subscription_id', subscriptionId);
+
+          if (dbError) {
+            console.error('Database error:', dbError);
+            throw new Error('Failed to update subscription');
+          }
+
+          return new Response(
+            JSON.stringify({ success: true, status: 'active' }),
+            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        return new Response(
+          JSON.stringify({ success: false, status: details.status }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      case 'cancel-subscription': {
+        const { subscriptionId, reason } = params;
+        
+        if (!subscriptionId) {
+          throw new Error('Missing subscription ID');
+        }
+
+        const response = await fetch(
+          `${PAYPAL_API_BASE}/v1/billing/subscriptions/${subscriptionId}/cancel`,
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ reason: reason || 'User requested cancellation' }),
+          }
+        );
+
+        if (!response.ok && response.status !== 204) {
+          const error = await response.text();
+          console.error('PayPal cancel error:', error);
+          throw new Error('Failed to cancel subscription');
+        }
+
+        // Update database
+        const { error: dbError } = await supabaseClient
+          .from('provider_subscriptions')
+          .update({ status: 'cancelled' })
+          .eq('paypal_subscription_id', subscriptionId);
+
+        if (dbError) {
+          console.error('Database error:', dbError);
+        }
+
+        return new Response(
+          JSON.stringify({ success: true }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      case 'get-subscription': {
+        const { subscriptionId } = params;
+        
+        if (!subscriptionId) {
+          throw new Error('Missing subscription ID');
+        }
+
+        const details = await getSubscriptionDetails(accessToken, subscriptionId);
+        
+        return new Response(
+          JSON.stringify(details),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      default:
+        throw new Error(`Unknown action: ${action}`);
+    }
+  } catch (error) {
+    console.error('PayPal function error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return new Response(
+      JSON.stringify({ error: errorMessage }),
+      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+});
