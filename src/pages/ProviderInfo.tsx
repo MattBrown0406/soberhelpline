@@ -141,6 +141,7 @@ const providerFormSchema = z.object({
   website: z.string().url("Valid website URL is required").min(1, "Website is required"),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
+  coOccurringDiagnoses: z.array(z.string()).optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -181,6 +182,7 @@ const ProviderInfo = () => {
       website: "",
       lengthOfServices: "",
       detoxAvailable: false,
+      coOccurringDiagnoses: [],
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -264,6 +266,7 @@ const ProviderInfo = () => {
           website: data.website,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
+          co_occurring_diagnoses: data.coOccurringDiagnoses || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -505,6 +508,55 @@ const ProviderInfo = () => {
                       <FormLabel>Detox Available?</FormLabel>
                       <FormDescription>Check if your facility offers detox services</FormDescription>
                     </div>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="coOccurringDiagnoses"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Co-Occurring Diagnoses: Are you able to treat any of the following diagnoses?</FormLabel>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                      {["ADHD", "Anxiety Disorders", "Bipolar Disorder", "Depression", "Eating Disorders", "OCD", "PTSD", "Schizophrenia"].map((diagnosis) => (
+                        <FormField
+                          key={diagnosis}
+                          control={form.control}
+                          name="coOccurringDiagnoses"
+                          render={({ field }) => {
+                            const value = field.value || [];
+                            return (
+                              <FormItem
+                                key={diagnosis}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={value.includes(diagnosis)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...value, diagnosis])
+                                        : field.onChange(
+                                            value.filter(
+                                              (val) => val !== diagnosis
+                                            )
+                                          )
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {diagnosis}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

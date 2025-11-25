@@ -19,6 +19,7 @@ export type Database = {
           address: string | null
           category: string
           city: string | null
+          co_occurring_diagnoses: string[] | null
           cost: string | null
           created_at: string | null
           description_of_services: string | null
@@ -44,6 +45,7 @@ export type Database = {
           address?: string | null
           category: string
           city?: string | null
+          co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
           description_of_services?: string | null
@@ -69,6 +71,7 @@ export type Database = {
           address?: string | null
           category?: string
           city?: string | null
+          co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
           description_of_services?: string | null
