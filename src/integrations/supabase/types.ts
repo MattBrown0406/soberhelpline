@@ -52,6 +52,7 @@ export type Database = {
           case_management_services: boolean | null
           category: string
           chores_required: boolean | null
+          cip_certified: boolean | null
           city: string | null
           co_occurring_diagnoses: string[] | null
           cost: string | null
@@ -103,6 +104,7 @@ export type Database = {
           case_management_services?: boolean | null
           category: string
           chores_required?: boolean | null
+          cip_certified?: boolean | null
           city?: string | null
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
@@ -154,6 +156,7 @@ export type Database = {
           case_management_services?: boolean | null
           category?: string
           chores_required?: boolean | null
+          cip_certified?: boolean | null
           city?: string | null
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
