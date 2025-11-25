@@ -43,13 +43,13 @@ const Index = () => {
 
         <div className="mb-12">
           <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">Browse by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-center">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
                 <Link key={category.name} to={category.path}>
                   <Card
-                    className="p-4 h-[120px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
+                    className="p-4 h-[120px] w-full hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
                   >
                     <Icon className="w-8 h-8 text-primary" />
                     <span className="text-sm font-medium text-foreground leading-tight">
