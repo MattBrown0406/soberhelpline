@@ -143,6 +143,7 @@ const providerFormSchema = z.object({
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
   therapeuticModalities: z.array(z.string()).optional(),
+  otherTherapeuticModalities: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -185,6 +186,7 @@ const ProviderInfo = () => {
       detoxAvailable: false,
       coOccurringDiagnoses: [],
       therapeuticModalities: [],
+      otherTherapeuticModalities: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -211,6 +213,21 @@ const ProviderInfo = () => {
         // Remove "Other" and add the custom insurances
         finalInsurances = finalInsurances.filter(i => i !== "Other");
         finalInsurances = [...finalInsurances, ...customInsurances];
+      }
+
+      // Combine selected therapeutic modalities with custom "Other" modalities
+      let finalModalities = data.therapeuticModalities ? [...data.therapeuticModalities] : [];
+      
+      // If "Other" is selected and there are custom modalities, add them
+      if (data.therapeuticModalities?.includes("Other") && data.otherTherapeuticModalities) {
+        const customModalities = data.otherTherapeuticModalities
+          .split(',')
+          .map(m => m.trim())
+          .filter(m => m.length > 0);
+        
+        // Remove "Other" and add the custom modalities
+        finalModalities = finalModalities.filter(m => m !== "Other");
+        finalModalities = [...finalModalities, ...customModalities];
       }
 
       let logoUrl = null;
@@ -269,7 +286,7 @@ const ProviderInfo = () => {
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
-          therapeutic_modalities: data.therapeuticModalities || null,
+          therapeutic_modalities: finalModalities.length > 0 ? finalModalities : null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -611,6 +628,26 @@ const ProviderInfo = () => {
                           />
                         ))}
                       </div>
+                      {form.watch("therapeuticModalities")?.includes("Other") && (
+                        <FormField
+                          control={form.control}
+                          name="otherTherapeuticModalities"
+                          render={({ field }) => (
+                            <FormItem className="mt-3">
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  placeholder="Enter other modalities, separated by commas"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormDescription>
+                                List any additional therapeutic modalities you offer, separated by commas
+                              </FormDescription>
+                            </FormItem>
+                          )}
+                        />
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}
