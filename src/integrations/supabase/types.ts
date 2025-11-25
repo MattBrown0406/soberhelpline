@@ -47,6 +47,7 @@ export type Database = {
           total_treatment_beds: number | null
           updated_at: string | null
           website: string | null
+          year_started: number | null
           zip_code: string | null
         }
         Insert: {
@@ -81,6 +82,7 @@ export type Database = {
           total_treatment_beds?: number | null
           updated_at?: string | null
           website?: string | null
+          year_started?: number | null
           zip_code?: string | null
         }
         Update: {
@@ -115,6 +117,7 @@ export type Database = {
           total_treatment_beds?: number | null
           updated_at?: string | null
           website?: string | null
+          year_started?: number | null
           zip_code?: string | null
         }
         Relationships: []

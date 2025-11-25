@@ -139,6 +139,11 @@ const providerFormSchema = z.object({
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
   website: z.string().optional(),
+  yearStarted: z.string().regex(/^\d{4}$/, "Please enter a valid 4-digit year").refine((val) => {
+    const year = parseInt(val);
+    const currentYear = new Date().getFullYear();
+    return year >= 1900 && year <= currentYear;
+  }, "Year must be between 1900 and current year"),
   interventionModalities: z.array(z.string()).optional(),
   otherInterventionModalities: z.string().optional(),
   hourlyCoachingSessions: z.boolean().optional(),
@@ -215,6 +220,7 @@ const ProviderInfo = () => {
       phoneNumber: "",
       email: "",
       website: "",
+      yearStarted: "",
       interventionModalities: [],
       otherInterventionModalities: "",
       hourlyCoachingSessions: false,
@@ -339,6 +345,7 @@ const ProviderInfo = () => {
           phone_number: data.phoneNumber,
           email: data.email,
           website: data.website,
+          year_started: data.yearStarted ? parseInt(data.yearStarted) : null,
           intervention_modalities: finalInterventionModalities.length > 0 ? finalInterventionModalities : null,
           hourly_coaching_sessions: data.hourlyCoachingSessions || null,
           hourly_coaching_rate: data.hourlyCoachingRate || null,
@@ -559,6 +566,25 @@ const ProviderInfo = () => {
                     </FormLabel>
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="yearStarted"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What year did you begin providing services? *</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="text" 
+                        placeholder="YYYY" 
+                        maxLength={4}
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
