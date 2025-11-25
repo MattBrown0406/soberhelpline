@@ -576,6 +576,27 @@ const ProviderInfo = () => {
                 )}
               />
 
+              {form.watch("category") === "Interventionists" && (
+                <FormField
+                  control={form.control}
+                  name="cipCertified"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Are you a CIP?</FormLabel>
+                        <FormDescription>Check if you are a Certified Intervention Professional</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
@@ -763,27 +784,6 @@ const ProviderInfo = () => {
                         />
                       )}
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-
-              {form.watch("category") === "Interventionists" && (
-                <FormField
-                  control={form.control}
-                  name="cipCertified"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>Are you a CIP (Certified Intervention Professional)?</FormLabel>
-                        <FormDescription>Check if you hold CIP certification</FormDescription>
-                      </div>
                     </FormItem>
                   )}
                 />
