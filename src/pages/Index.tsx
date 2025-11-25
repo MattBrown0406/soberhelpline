@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
@@ -8,6 +8,7 @@ const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
   { name: "Outpatient Treatment", icon: Home, path: "/outpatient-treatment" },
   { name: "Interventionists", icon: Users, path: "/interventionists" },
+  { name: "Sober Coaches/Companions", icon: UserCheck, path: "/sober-coaches-companions" },
   { name: "Sober Living", icon: Bed, path: "/sober-living" },
   { name: "Therapists", icon: Brain, path: "/therapists" },
   { name: "Psychiatrists", icon: Stethoscope, path: "/psychiatrists" },
@@ -42,7 +43,7 @@ const Index = () => {
 
         <div className="mb-12">
           <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">Browse by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-items-center">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
