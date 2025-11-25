@@ -985,7 +985,11 @@ const ProviderInfo = () => {
                 name="cost"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Private Pay Rate (without insurance) *</FormLabel>
+                    <FormLabel>
+                      {["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
+                        ? "Cost per session/meeting *"
+                        : "Private Pay Rate (without insurance) *"}
+                    </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
