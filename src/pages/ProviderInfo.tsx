@@ -80,11 +80,11 @@ const providerCategories = [
   "Inpatient Treatment",
   "Outpatient Treatment",
   "Interventionists",
+  "Sober Coaches/Companions",
   "Sober Living",
   "Therapists",
   "Psychiatrists",
   "Attorneys",
-  "Recovery Fellowships",
 ];
 
 const insuranceProviders = [
