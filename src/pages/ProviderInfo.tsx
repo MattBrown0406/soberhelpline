@@ -146,9 +146,20 @@ const providerFormSchema = z.object({
   licenseCurrentGoodStanding: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
-  insurancesAccepted: z.array(z.string()).min(1, "Please select at least one insurance provider"),
+  insurancesAccepted: z.array(z.string()),
   otherInsurances: z.string().optional(),
   logo: z.instanceof(FileList).optional(),
+}).refine((data) => {
+  // Insurance is optional for these categories
+  const optionalInsuranceCategories = ["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"];
+  if (optionalInsuranceCategories.includes(data.category)) {
+    return true;
+  }
+  // For other categories, require at least one insurance
+  return data.insurancesAccepted.length > 0;
+}, {
+  message: "Please select at least one insurance provider",
+  path: ["insurancesAccepted"],
 });
 
 type ProviderFormValues = z.infer<typeof providerFormSchema>;
@@ -639,9 +650,13 @@ const ProviderInfo = () => {
                 render={() => (
                   <FormItem>
                     <div className="mb-4">
-                      <FormLabel className="text-base">Insurances Accepted *</FormLabel>
+                      <FormLabel className="text-base">
+                        Insurances Accepted
+                        {!["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " *"}
+                      </FormLabel>
                       <FormDescription>
                         Select all insurance providers you accept
+                        {["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " (optional)"}
                       </FormDescription>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border rounded-lg p-4 bg-muted max-h-96 overflow-y-auto">
