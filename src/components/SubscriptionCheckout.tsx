@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { usePayPalSubscription } from '@/hooks/usePayPalSubscription';
-import { Check, Loader2, Tag } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { Check, Loader2, Tag, CheckCircle2 } from 'lucide-react';
 
 interface SubscriptionPlan {
   id: string;
@@ -80,22 +82,64 @@ interface SubscriptionCheckoutProps {
 }
 
 export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess }: SubscriptionCheckoutProps) {
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const { createSubscription, isLoading, paypalUrl } = usePayPalSubscription();
   const [discountCode, setDiscountCode] = useState('');
+  const [freeListingActivated, setFreeListingActivated] = useState(false);
   const plan = getSubscriptionPlan(category);
 
   const handleSubscribe = async () => {
     try {
-      await createSubscription({
+      const result = await createSubscription({
         planType: plan.billingCycle,
         amount: plan.price,
         providerSubmissionId,
         discountCode: discountCode.trim() || undefined,
       });
+      
+      // Check if FREELIST code was used
+      if (result?.bypassed) {
+        setFreeListingActivated(true);
+        toast({
+          title: 'Free Listing Activated!',
+          description: 'Your provider listing has been published.',
+        });
+      }
     } catch (error) {
       // Error is handled in the hook
     }
   };
+
+  // Show success state for free listing
+  if (freeListingActivated) {
+    return (
+      <div className="w-full max-w-2xl mx-auto">
+        <Card className="border-green-500">
+          <CardHeader className="text-center">
+            <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <CardTitle className="text-2xl text-green-600">Listing Activated!</CardTitle>
+            <CardDescription>
+              Your provider listing has been published and is now searchable.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-muted p-4 rounded-lg text-sm">
+              <p className="font-medium mb-1">What's next?</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                <li>Your listing is now live</li>
+                <li>Users can find you in the provider directory</li>
+                <li>You'll appear in search results</li>
+              </ul>
+            </div>
+            <Button onClick={() => navigate('/')} className="w-full">
+              Return to Home
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-2xl mx-auto">

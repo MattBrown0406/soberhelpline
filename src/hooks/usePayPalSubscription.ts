@@ -10,10 +10,13 @@ interface CreateSubscriptionParams {
 }
 
 interface CreateSubscriptionResult {
-  subscriptionId: string;
-  approvalUrl: string;
+  subscriptionId?: string;
+  approvalUrl?: string;
   appliedDiscount: string | null;
-  finalAmount: number;
+  finalAmount?: number;
+  bypassed?: boolean;
+  bypassPayment?: boolean;
+  message?: string;
 }
 
 export function usePayPalSubscription() {
@@ -50,6 +53,12 @@ export function usePayPalSubscription() {
 
       if (error) {
         throw new Error(error.message || 'Failed to create subscription');
+      }
+
+      // Check if payment was bypassed (FREELIST code)
+      if (data?.bypassPayment) {
+        setIsLoading(false);
+        return { ...data, bypassed: true };
       }
 
       if (data?.approvalUrl) {
