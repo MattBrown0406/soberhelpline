@@ -91,24 +91,33 @@ const MedicalDetox = () => {
         .eq("status", "approved")
         .eq("state", state);
 
-      if (filters.insurance !== "All") {
-        query = query.contains("insurances_accepted", [filters.insurance]);
+      // Apply insurance filter from search form
+      const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
+      if (insuranceSearch !== "All" && searchInsurance) {
+        query = query.contains("insurances_accepted", [searchInsurance]);
       }
 
-      if (filters.maxBudget) {
-        query = query.lte("cost", filters.maxBudget);
+      // Apply budget filter for Self Pay
+      if (insuranceSearch === "Self Pay" && maxBudget) {
+        query = query.lte("cost", maxBudget);
       }
 
-      if (filters.zipCode) {
-        query = query.eq("zip_code", filters.zipCode);
+      // Apply gender specific filter
+      if (genderSpecificCare === "Yes" && genderType) {
+        query = query.contains("gender_specific_treatment", [genderType]);
       }
 
-      if (filters.genderSpecific.length > 0) {
-        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
-      }
-
-      if (filters.lgbtSupportive) {
-        query = query.eq("lgbt_supportive", true);
+      // Apply length of stay filter
+      if (lengthOfStay !== "All") {
+        if (lengthOfStay === "30 days") {
+          query = query.ilike("length_of_services", "%30%");
+        } else if (lengthOfStay === "60 days") {
+          query = query.ilike("length_of_services", "%60%");
+        } else if (lengthOfStay === "90 days") {
+          query = query.ilike("length_of_services", "%90%");
+        } else if (lengthOfStay === "longer than 90 days") {
+          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
+        }
       }
 
       const { data, error } = await query;
@@ -141,17 +150,27 @@ const MedicalDetox = () => {
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
 
-      if (filters.insurance !== "All") {
-        query = query.contains("insurances_accepted", [filters.insurance]);
+      // Apply same filters for nearby providers
+      const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
+      if (insuranceSearch !== "All" && searchInsurance) {
+        query = query.contains("insurances_accepted", [searchInsurance]);
       }
-      if (filters.maxBudget) {
-        query = query.lte("cost", filters.maxBudget);
+      if (insuranceSearch === "Self Pay" && maxBudget) {
+        query = query.lte("cost", maxBudget);
       }
-      if (filters.genderSpecific.length > 0) {
-        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      if (genderSpecificCare === "Yes" && genderType) {
+        query = query.contains("gender_specific_treatment", [genderType]);
       }
-      if (filters.lgbtSupportive) {
-        query = query.eq("lgbt_supportive", true);
+      if (lengthOfStay !== "All") {
+        if (lengthOfStay === "30 days") {
+          query = query.ilike("length_of_services", "%30%");
+        } else if (lengthOfStay === "60 days") {
+          query = query.ilike("length_of_services", "%60%");
+        } else if (lengthOfStay === "90 days") {
+          query = query.ilike("length_of_services", "%90%");
+        } else if (lengthOfStay === "longer than 90 days") {
+          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
+        }
       }
 
       const { data, error } = await query;
