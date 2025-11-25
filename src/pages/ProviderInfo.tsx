@@ -149,7 +149,7 @@ const providerFormSchema = z.object({
   hourlyCoachingSessions: z.boolean().optional(),
   hourlyCoachingRate: z.string().optional(),
   caseManagementServices: z.boolean().optional(),
-  lengthOfServices: z.string().min(1, "Length of services is required").max(100),
+  lengthOfServices: z.array(z.string()).min(1, "Please select at least one length of service"),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
   therapeuticModalities: z.array(z.string()).optional(),
@@ -226,7 +226,7 @@ const ProviderInfo = () => {
       hourlyCoachingSessions: false,
       hourlyCoachingRate: "",
       caseManagementServices: false,
-      lengthOfServices: "",
+      lengthOfServices: [],
       detoxAvailable: false,
       coOccurringDiagnoses: [],
       therapeuticModalities: [],
@@ -350,7 +350,7 @@ const ProviderInfo = () => {
           hourly_coaching_sessions: data.hourlyCoachingSessions || null,
           hourly_coaching_rate: data.hourlyCoachingRate || null,
           case_management_services: data.caseManagementServices || null,
-          length_of_services: data.lengthOfServices,
+          length_of_services: data.lengthOfServices && data.lengthOfServices.length > 0 ? data.lengthOfServices.join(", ") : null,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
           therapeutic_modalities: finalModalities.length > 0 ? finalModalities : null,
@@ -666,22 +666,46 @@ const ProviderInfo = () => {
                 <FormField
                   control={form.control}
                   name="lengthOfServices"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
-                      <FormLabel>Length of Services *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select length of services" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="30 days">30 days</SelectItem>
-                          <SelectItem value="60 days">60 days</SelectItem>
-                          <SelectItem value="90 days">90 days</SelectItem>
-                          <SelectItem value="More than 90 days">More than 90 days</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Length of Services *</FormLabel>
+                      </div>
+                      <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
+                        {["30 days", "60 days", "90 days", "More than 90 days"].map((length) => (
+                          <FormField
+                            key={length}
+                            control={form.control}
+                            name="lengthOfServices"
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={length}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(length)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...(field.value || []), length])
+                                          : field.onChange(
+                                              field.value?.filter(
+                                                (value) => value !== length
+                                              )
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {length}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
