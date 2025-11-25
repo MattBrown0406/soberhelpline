@@ -142,6 +142,7 @@ const providerFormSchema = z.object({
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
+  therapeuticModalities: z.array(z.string()).optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -183,6 +184,7 @@ const ProviderInfo = () => {
       lengthOfServices: "",
       detoxAvailable: false,
       coOccurringDiagnoses: [],
+      therapeuticModalities: [],
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -267,6 +269,7 @@ const ProviderInfo = () => {
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
+          therapeutic_modalities: data.therapeuticModalities || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -560,6 +563,59 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {(form.watch("category") === "Inpatient Treatment" || 
+                form.watch("category") === "Outpatient Treatment" || 
+                form.watch("category") === "Therapists") && (
+                <FormField
+                  control={form.control}
+                  name="therapeuticModalities"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Do you offer any of the following therapeutic modalities?</FormLabel>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                        {["CBT (Cognitive Behavioral Therapy)", "DBT (Dialectical Behavior Therapy)", "EMDR", "Motivational Interviewing", "Psychodynamic Therapy", "Family Therapy", "Group Therapy", "Individual Therapy"].map((modality) => (
+                          <FormField
+                            key={modality}
+                            control={form.control}
+                            name="therapeuticModalities"
+                            render={({ field }) => {
+                              const value = field.value || [];
+                              return (
+                                <FormItem
+                                  key={modality}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={value.includes(modality)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...value, modality])
+                                          : field.onChange(
+                                              value.filter(
+                                                (val) => val !== modality
+                                              )
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {modality}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={form.control}
