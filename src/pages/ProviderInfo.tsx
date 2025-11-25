@@ -162,6 +162,7 @@ const providerFormSchema = z.object({
   jobAssistanceProvided: z.boolean().optional(),
   medicationAdministration: z.string().optional(),
   acceptsMatResidents: z.boolean().optional(),
+  minimumTimeSinceLastUse: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -245,6 +246,7 @@ const ProviderInfo = () => {
       jobAssistanceProvided: false,
       medicationAdministration: "",
       acceptsMatResidents: false,
+      minimumTimeSinceLastUse: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -374,6 +376,7 @@ const ProviderInfo = () => {
           job_assistance_provided: data.jobAssistanceProvided || null,
           medication_administration: data.medicationAdministration || null,
           accepts_mat_residents: data.acceptsMatResidents || null,
+          minimum_time_since_last_use: data.minimumTimeSinceLastUse || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1121,6 +1124,32 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you accept residents that are currently on MAT?</FormLabel>
                       </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="minimumTimeSinceLastUse"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Do you have a minimum requirement for time since last use?</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select minimum time requirement" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="No">No</SelectItem>
+                          <SelectItem value="One week">One week</SelectItem>
+                          <SelectItem value="One month">One month</SelectItem>
+                          <SelectItem value="More than one month">More than one month</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

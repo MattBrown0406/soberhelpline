@@ -44,6 +44,7 @@ export type Database = {
           license_current_good_standing: boolean | null
           logo_url: string | null
           medication_administration: string | null
+          minimum_time_since_last_use: string | null
           phone_number: string
           provider_name: string
           residents_expected_to_work: boolean | null
@@ -85,6 +86,7 @@ export type Database = {
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           medication_administration?: string | null
+          minimum_time_since_last_use?: string | null
           phone_number: string
           provider_name: string
           residents_expected_to_work?: boolean | null
@@ -126,6 +128,7 @@ export type Database = {
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           medication_administration?: string | null
+          minimum_time_since_last_use?: string | null
           phone_number?: string
           provider_name?: string
           residents_expected_to_work?: boolean | null
