@@ -151,7 +151,7 @@ const providerFormSchema = z.object({
   hourlyCoachingSessions: z.boolean().optional(),
   hourlyCoachingRate: z.string().optional(),
   caseManagementServices: z.boolean().optional(),
-  lengthOfServices: z.array(z.string()).min(1, "Please select at least one length of service"),
+  lengthOfServices: z.array(z.string()).optional(),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
   therapeuticModalities: z.array(z.string()).optional(),
@@ -182,6 +182,16 @@ const providerFormSchema = z.object({
   insurancesAccepted: z.array(z.string()),
   otherInsurances: z.string().optional(),
   logo: z.instanceof(FileList).optional(),
+}).refine((data) => {
+  // Length of services is required for categories that show this field
+  const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"];
+  if (!excludedCategories.includes(data.category)) {
+    return data.lengthOfServices && data.lengthOfServices.length > 0;
+  }
+  return true;
+}, {
+  message: "Please select at least one length of service",
+  path: ["lengthOfServices"],
 }).refine((data) => {
   // Insurance is optional for these categories
   const optionalInsuranceCategories = ["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"];
