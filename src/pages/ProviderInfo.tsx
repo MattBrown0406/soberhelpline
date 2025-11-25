@@ -558,8 +558,8 @@ const ProviderInfo = () => {
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel>LGBT supportive treatment?</FormLabel>
-                      <FormDescription>Check if your facility offers LGBT supportive treatment</FormDescription>
+                      <FormLabel>LGBT supportive treatment or care?</FormLabel>
+                      <FormDescription>Check if your facility offers LGBT supportive treatment or care</FormDescription>
                     </div>
                   </FormItem>
                 )}
