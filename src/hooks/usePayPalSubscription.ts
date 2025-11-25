@@ -44,14 +44,15 @@ export function usePayPalSubscription() {
       }
 
       if (data?.approvalUrl) {
-        // Redirect to PayPal for approval
+        // Redirect to PayPal for approval - don't set isLoading to false
+        // as we're navigating away from the page
         window.location.href = data.approvalUrl;
+        return data;
       } else {
         throw new Error('No approval URL received');
       }
-
-      return data;
     } catch (error) {
+      setIsLoading(false);
       const message = error instanceof Error ? error.message : 'Failed to create subscription';
       toast({
         title: 'Subscription Error',
@@ -59,8 +60,6 @@ export function usePayPalSubscription() {
         variant: 'destructive',
       });
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
 
