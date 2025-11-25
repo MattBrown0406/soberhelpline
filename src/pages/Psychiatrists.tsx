@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
@@ -33,8 +32,6 @@ const Psychiatrists = () => {
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
-  const [genderSpecificCare, setGenderSpecificCare] = useState("No");
-  const [genderType, setGenderType] = useState("");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
@@ -69,19 +66,12 @@ const Psychiatrists = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      let query = supabase
+      const { data, error } = await supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Psychiatrists")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
-
-      // Apply gender filter for nearby providers
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-
-      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -143,31 +133,16 @@ const Psychiatrists = () => {
       return;
     }
 
-    if (genderSpecificCare === "Yes" && !genderType) {
-      toast({
-        title: "Gender Selection Required",
-        description: "Please select either Men or Women for gender-specific care",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setLoading(true);
     setShowingNearby(false);
     setSelectedState(null);
     
     try {
-      let query = supabase
+      const { data, error } = await supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Psychiatrists")
         .eq("status", "approved");
-
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-
-      const { data, error } = await query;
 
       if (error) throw error;
       
@@ -182,10 +157,9 @@ const Psychiatrists = () => {
       setShowingNearby(isNearby);
       
       if (filteredProviders.length === 0) {
-        const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
         toast({
           title: "No providers found",
-          description: `No providers found near zip code ${zipCodeSearch}${genderText}`,
+          description: `No providers found near zip code ${zipCodeSearch}`,
         });
       }
     } catch (error) {
@@ -238,54 +212,22 @@ const Psychiatrists = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-3xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="zipSearch">Search by Zip Code</Label>
-                <Input
-                  id="zipSearch"
-                  type="text"
-                  placeholder="Enter zip code"
-                  value={zipCodeSearch}
-                  onChange={(e) => setZipCodeSearch(e.target.value)}
-                  maxLength={10}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleZipCodeSearch();
-                    }
-                  }}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="genderCare">Gender Specific Care Needed?</Label>
-                <Select
-                  value={genderSpecificCare}
-                  onValueChange={setGenderSpecificCare}
-                >
-                  <SelectTrigger id="genderCare" className="bg-background">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="No">No</SelectItem>
-                    <SelectItem value="Yes">Yes</SelectItem>
-                  </SelectContent>
-                </Select>
-                {genderSpecificCare === "Yes" && (
-                  <Select
-                    value={genderType}
-                    onValueChange={setGenderType}
-                  >
-                    <SelectTrigger className="bg-background mt-2">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      <SelectItem value="Men">Men</SelectItem>
-                      <SelectItem value="Women">Women</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
-              </div>
+          <div className="max-w-md mx-auto mt-6">
+            <div className="space-y-2">
+              <Label htmlFor="zipSearch">Search by Zip Code</Label>
+              <Input
+                id="zipSearch"
+                type="text"
+                placeholder="Enter zip code"
+                value={zipCodeSearch}
+                onChange={(e) => setZipCodeSearch(e.target.value)}
+                maxLength={10}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleZipCodeSearch();
+                  }
+                }}
+              />
             </div>
             
             <div className="flex justify-center mt-4">
