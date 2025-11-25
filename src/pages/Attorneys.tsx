@@ -30,8 +30,6 @@ const Attorneys = () => {
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
-  const [genderSpecificCare, setGenderSpecificCare] = useState("No");
-  const [genderType, setGenderType] = useState("");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
@@ -123,42 +121,26 @@ const Attorneys = () => {
       return;
     }
 
-    if (genderSpecificCare === "Yes" && !genderType) {
-      toast({
-        title: "Gender Selection Required",
-        description: "Please select either Men or Women for gender-specific care",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setLoading(true);
     setShowingNearby(false);
     setSelectedState(null);
     
     try {
-      let query = supabase
+      const { data, error } = await supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Attorneys")
         .eq("status", "approved")
         .eq("zip_code", zipCodeSearch);
 
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
-      }
-
-      const { data, error } = await query;
-
       if (error) throw error;
       
       setProviders(data || []);
       
       if (!data || data.length === 0) {
-        const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}${genderText}`,
+          description: `No providers found in zip code ${zipCodeSearch}`,
         });
       }
     } catch (error) {
@@ -199,9 +181,9 @@ const Attorneys = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-3xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+          <div className="max-w-4xl mx-auto mt-6">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-full max-w-md space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <Input
                   id="zipSearch"
@@ -216,36 +198,6 @@ const Attorneys = () => {
                     }
                   }}
                 />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="genderCare">Gender Specific Care Needed?</Label>
-                <Select
-                  value={genderSpecificCare}
-                  onValueChange={setGenderSpecificCare}
-                >
-                  <SelectTrigger id="genderCare" className="bg-background">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="No">No</SelectItem>
-                    <SelectItem value="Yes">Yes</SelectItem>
-                  </SelectContent>
-                </Select>
-                {genderSpecificCare === "Yes" && (
-                  <Select
-                    value={genderType}
-                    onValueChange={setGenderType}
-                  >
-                    <SelectTrigger className="bg-background mt-2">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      <SelectItem value="Men">Men</SelectItem>
-                      <SelectItem value="Women">Women</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
               </div>
             </div>
             
