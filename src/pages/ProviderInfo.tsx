@@ -142,6 +142,7 @@ const providerFormSchema = z.object({
   interventionModalities: z.array(z.string()).optional(),
   otherInterventionModalities: z.string().optional(),
   hourlyCoachingSessions: z.boolean().optional(),
+  hourlyCoachingRate: z.string().optional(),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
@@ -216,6 +217,7 @@ const ProviderInfo = () => {
       interventionModalities: [],
       otherInterventionModalities: "",
       hourlyCoachingSessions: false,
+      hourlyCoachingRate: "",
       lengthOfServices: "",
       detoxAvailable: false,
       coOccurringDiagnoses: [],
@@ -337,6 +339,7 @@ const ProviderInfo = () => {
           website: data.website,
           intervention_modalities: finalInterventionModalities.length > 0 ? finalInterventionModalities : null,
           hourly_coaching_sessions: data.hourlyCoachingSessions || null,
+          hourly_coaching_rate: data.hourlyCoachingRate || null,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
@@ -976,6 +979,30 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you provide hourly family coaching sessions separate from intervention services?</FormLabel>
                       </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Interventionists" && form.watch("hourlyCoachingSessions") && (
+                <FormField
+                  control={form.control}
+                  name="hourlyCoachingRate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Hourly Rate</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                          <Input 
+                            type="number" 
+                            placeholder="Enter hourly rate" 
+                            className="pl-7"
+                            {...field} 
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
