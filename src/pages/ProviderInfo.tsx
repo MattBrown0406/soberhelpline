@@ -157,6 +157,7 @@ const providerFormSchema = z.object({
   inPersonCompanionWork: z.boolean().optional(),
   hasValidPassport: z.boolean().optional(),
   dailyCompanionFee: z.string().optional(),
+  awakeStaff247: z.boolean().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -235,6 +236,7 @@ const ProviderInfo = () => {
       inPersonCompanionWork: false,
       hasValidPassport: false,
       dailyCompanionFee: "",
+      awakeStaff247: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -359,6 +361,7 @@ const ProviderInfo = () => {
           in_person_companion_work: data.inPersonCompanionWork || null,
           has_valid_passport: data.hasValidPassport || null,
           daily_companion_fee: data.dailyCompanionFee || null,
+          awake_staff_24_7: data.awakeStaff247 || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1001,6 +1004,26 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>LGBT supportive treatment or care?</FormLabel>
                         <FormDescription>Check if your facility offers LGBT supportive treatment or care</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="awakeStaff247"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Is there awake staff at the house 24/7?</FormLabel>
                       </div>
                     </FormItem>
                   )}
