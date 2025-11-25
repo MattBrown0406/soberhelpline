@@ -67,6 +67,7 @@ const InpatientTreatment = () => {
   const [genderSpecificCare, setGenderSpecificCare] = useState("No");
   const [genderType, setGenderType] = useState("");
   const [lengthOfStay, setLengthOfStay] = useState("All");
+  const [maxBudget, setMaxBudget] = useState("");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -235,6 +236,16 @@ const InpatientTreatment = () => {
       return;
     }
 
+    // Validate budget if Self Pay is selected
+    if (insuranceSearch === "Self Pay" && !maxBudget) {
+      toast({
+        title: "Budget Required",
+        description: "Please enter your maximum monthly budget for Self Pay",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     setShowingNearby(false);
     setSelectedState(null);
@@ -256,6 +267,11 @@ const InpatientTreatment = () => {
       // Apply gender-specific filter
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply budget filter for Self Pay
+      if (insuranceSearch === "Self Pay" && maxBudget) {
+        query = query.lte("cost", maxBudget);
       }
 
       // Apply length of stay filter
@@ -370,6 +386,23 @@ const InpatientTreatment = () => {
                     onChange={(e) => setCustomInsurance(e.target.value)}
                     className="mt-2"
                   />
+                )}
+                {insuranceSearch === "Self Pay" && (
+                  <div className="mt-2">
+                    <Label htmlFor="budget" className="text-sm">Maximum Monthly Budget</Label>
+                    <Input
+                      id="budget"
+                      type="text"
+                      placeholder="Enter amount"
+                      value={maxBudget}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/[^0-9]/g, '');
+                        setMaxBudget(value);
+                      }}
+                      className="mt-1"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">$ amount per month</p>
+                  </div>
                 )}
               </div>
 
