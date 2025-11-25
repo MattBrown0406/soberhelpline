@@ -17,6 +17,7 @@ export type Database = {
       provider_submissions: {
         Row: {
           address: string | null
+          case_management_services: boolean | null
           category: string
           city: string | null
           co_occurring_diagnoses: string[] | null
@@ -50,6 +51,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          case_management_services?: boolean | null
           category: string
           city?: string | null
           co_occurring_diagnoses?: string[] | null
@@ -83,6 +85,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          case_management_services?: boolean | null
           category?: string
           city?: string | null
           co_occurring_diagnoses?: string[] | null
