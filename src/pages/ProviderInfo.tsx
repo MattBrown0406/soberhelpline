@@ -1625,7 +1625,7 @@ const ProviderInfo = () => {
                       />
                     </FormControl>
                     <FormDescription>
-                      {field.value?.length || 0}/500 characters
+                      {field.value?.length || 0}/750 characters
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
