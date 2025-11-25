@@ -9,6 +9,7 @@ import RecoveryPodcasts from "./pages/RecoveryPodcasts";
 import InpatientTreatment from "./pages/InpatientTreatment";
 import OutpatientTreatment from "./pages/OutpatientTreatment";
 import Interventionists from "./pages/Interventionists";
+import SoberCoachesCompanions from "./pages/SoberCoachesCompanions";
 import SoberLiving from "./pages/SoberLiving";
 import Therapists from "./pages/Therapists";
 import Psychiatrists from "./pages/Psychiatrists";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/inpatient-treatment" element={<InpatientTreatment />} />
           <Route path="/outpatient-treatment" element={<OutpatientTreatment />} />
           <Route path="/interventionists" element={<Interventionists />} />
+          <Route path="/sober-coaches-companions" element={<SoberCoachesCompanions />} />
           <Route path="/sober-living" element={<SoberLiving />} />
           <Route path="/therapists" element={<Therapists />} />
           <Route path="/psychiatrists" element={<Psychiatrists />} />
