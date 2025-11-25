@@ -120,9 +120,11 @@ const Index = () => {
           <p className="text-muted-foreground leading-relaxed mb-4">
             We have partnered with Intervention On Call to provide the families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
           </p>
-          <Button size="lg" className="font-semibold">
-            Register Here!
-          </Button>
+          <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="font-semibold">
+              Register Here!
+            </Button>
+          </a>
         </div>
       </div>
     </div>
