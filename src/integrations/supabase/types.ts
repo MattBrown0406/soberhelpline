@@ -36,6 +36,7 @@ export type Database = {
           provider_name: string
           state: string | null
           status: string | null
+          therapeutic_modalities: string[] | null
           total_treatment_beds: number | null
           updated_at: string | null
           website: string | null
@@ -62,6 +63,7 @@ export type Database = {
           provider_name: string
           state?: string | null
           status?: string | null
+          therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
           updated_at?: string | null
           website?: string | null
@@ -88,6 +90,7 @@ export type Database = {
           provider_name?: string
           state?: string | null
           status?: string | null
+          therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
           updated_at?: string | null
           website?: string | null
