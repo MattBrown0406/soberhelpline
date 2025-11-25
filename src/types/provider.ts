@@ -35,6 +35,9 @@ export type ProviderSubmission = {
   hourly_coaching_rate: string | null;
   case_management_services: boolean | null;
   travel_expenses_included: boolean | null;
+  works_nationally: boolean | null;
+  works_internationally: boolean | null;
+  languages_spoken: string[] | null;
   
   // Sober Coaches/Companions-specific fields
   in_person_companion_work: boolean | null;

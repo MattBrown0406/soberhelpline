@@ -267,6 +267,25 @@ export function EditSubmissionDialog({
                   </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="works_nationally"
+                      checked={editedSubmission.works_nationally || false}
+                      onCheckedChange={(checked) => updateField("works_nationally", checked)}
+                    />
+                    <Label htmlFor="works_nationally">Works Nationally</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="works_internationally"
+                      checked={editedSubmission.works_internationally || false}
+                      onCheckedChange={(checked) => updateField("works_internationally", checked)}
+                    />
+                    <Label htmlFor="works_internationally">Works Internationally</Label>
+                  </div>
+                </div>
+
                 <div>
                   <Label htmlFor="hourly_coaching_rate">Hourly Coaching Rate</Label>
                   <Input
@@ -274,6 +293,22 @@ export function EditSubmissionDialog({
                     value={editedSubmission.hourly_coaching_rate || ""}
                     onChange={(e) => updateField("hourly_coaching_rate", e.target.value)}
                   />
+                </div>
+
+                <div>
+                  <Label className="mb-2 block">Languages Spoken</Label>
+                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-3 bg-muted">
+                    {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Farsi"].map((language) => (
+                      <div key={language} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`lang_int_${language}`}
+                          checked={(editedSubmission.languages_spoken || []).includes(language)}
+                          onCheckedChange={() => toggleArrayItem("languages_spoken", language)}
+                        />
+                        <Label htmlFor={`lang_int_${language}`} className="text-sm">{language}</Label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -430,6 +465,22 @@ export function EditSubmissionDialog({
                     value={editedSubmission.daily_companion_fee || ""}
                     onChange={(e) => updateField("daily_companion_fee", e.target.value)}
                   />
+                </div>
+
+                <div>
+                  <Label className="mb-2 block">Languages Spoken</Label>
+                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-3 bg-muted">
+                    {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Farsi"].map((language) => (
+                      <div key={language} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`lang_coach_${language}`}
+                          checked={(editedSubmission.languages_spoken || []).includes(language)}
+                          onCheckedChange={() => toggleArrayItem("languages_spoken", language)}
+                        />
+                        <Label htmlFor={`lang_coach_${language}`} className="text-sm">{language}</Label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
