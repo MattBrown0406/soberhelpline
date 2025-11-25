@@ -137,6 +137,15 @@ const Index = () => {
             </Button>
           </a>
         </div>
+
+        {/* Blog Link */}
+        <div className="mt-12 text-center">
+          <Link to="/blog">
+            <Button variant="outline" size="lg" className="font-semibold">
+              Visit Our Blog
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
