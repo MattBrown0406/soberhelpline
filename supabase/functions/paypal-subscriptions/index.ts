@@ -67,27 +67,46 @@ async function createPayPalPlan(
   accessToken: string, 
   productId: string, 
   planType: 'monthly' | 'annual',
-  amount: string
+  amount: string,
+  includeFreeTrial: boolean = false
 ): Promise<string> {
-  const billingCycles = planType === 'monthly' 
-    ? [{
-        frequency: { interval_unit: 'MONTH', interval_count: 1 },
-        tenure_type: 'REGULAR',
-        sequence: 1,
-        total_cycles: 0,
-        pricing_scheme: {
-          fixed_price: { value: amount, currency_code: 'USD' }
-        }
-      }]
-    : [{
-        frequency: { interval_unit: 'YEAR', interval_count: 1 },
-        tenure_type: 'REGULAR',
-        sequence: 1,
-        total_cycles: 0,
-        pricing_scheme: {
-          fixed_price: { value: amount, currency_code: 'USD' }
-        }
-      }];
+  const billingCycles = [];
+
+  // Add free trial period if applicable (for FREEMONTH code on monthly plans)
+  if (includeFreeTrial && planType === 'monthly') {
+    billingCycles.push({
+      frequency: { interval_unit: 'MONTH', interval_count: 1 },
+      tenure_type: 'TRIAL',
+      sequence: 1,
+      total_cycles: 1,
+      pricing_scheme: {
+        fixed_price: { value: '0.00', currency_code: 'USD' }
+      }
+    });
+  }
+
+  // Regular billing cycle
+  if (planType === 'monthly') {
+    billingCycles.push({
+      frequency: { interval_unit: 'MONTH', interval_count: 1 },
+      tenure_type: 'REGULAR',
+      sequence: includeFreeTrial ? 2 : 1,
+      total_cycles: 0,
+      pricing_scheme: {
+        fixed_price: { value: amount, currency_code: 'USD' }
+      }
+    });
+  } else {
+    billingCycles.push({
+      frequency: { interval_unit: 'YEAR', interval_count: 1 },
+      tenure_type: 'REGULAR',
+      sequence: 1,
+      total_cycles: 0,
+      pricing_scheme: {
+        fixed_price: { value: amount, currency_code: 'USD' }
+      }
+    });
+  }
 
   const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/plans`, {
     method: 'POST',
@@ -97,7 +116,7 @@ async function createPayPalPlan(
     },
     body: JSON.stringify({
       product_id: productId,
-      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}`,
+      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}${includeFreeTrial ? ' (First Month Free)' : ''}`,
       description: `${planType === 'monthly' ? 'Monthly' : 'Annual'} subscription for provider listing`,
       billing_cycles: billingCycles,
       payment_preferences: {
@@ -204,8 +223,14 @@ Deno.serve(async (req) => {
         let finalAmount = parseFloat(amount);
         let appliedDiscount = null;
 
-        if (discountCode) {
-          // Check for valid discount codes (you can expand this or use a database table)
+        // Check for free trial code (FREEMONTH) - only for monthly plans
+        let includeFreeTrial = false;
+        if (discountCode && discountCode.toUpperCase() === 'FREEMONTH' && planType === 'monthly') {
+          includeFreeTrial = true;
+          appliedDiscount = 'FREEMONTH';
+          console.log('Applied FREEMONTH: First month free trial');
+        } else if (discountCode) {
+          // Check for other valid discount codes
           const discountCodes: Record<string, { type: 'percent' | 'fixed'; value: number }> = {
             'WELCOME50': { type: 'percent', value: 50 },
             'SAVE25': { type: 'percent', value: 25 },
@@ -228,7 +253,7 @@ Deno.serve(async (req) => {
 
         // Create product and plan with potentially discounted amount
         const productId = await createPayPalProduct(accessToken);
-        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2));
+        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2), includeFreeTrial);
         
         // Create subscription
         const { subscriptionId, approvalUrl } = await createPayPalSubscription(
