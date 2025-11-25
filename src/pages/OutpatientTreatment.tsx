@@ -5,6 +5,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
+import ProviderFilters from "@/components/ProviderFilters";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 
@@ -26,19 +27,43 @@ const OutpatientTreatment = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
+  const [filters, setFilters] = useState({
+    insurance: "All",
+    maxBudget: "",
+    zipCode: "",
+    genderSpecific: [] as string[],
+    lgbtSupportive: false,
+  });
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
     setLoading(true);
     setShowingNearby(false);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Outpatient Treatment")
         .eq("status", "approved")
         .eq("state", state);
 
+      if (filters.insurance !== "All") {
+        query = query.contains("insurances_accepted", [filters.insurance]);
+      }
+      if (filters.maxBudget) {
+        query = query.lte("cost", filters.maxBudget);
+      }
+      if (filters.zipCode) {
+        query = query.eq("zip_code", filters.zipCode);
+      }
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      }
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
       
       if (!data || data.length === 0) {
@@ -60,13 +85,27 @@ const OutpatientTreatment = () => {
 
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions")
         .select("*")
         .eq("category", "Outpatient Treatment")
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
 
+      if (filters.insurance !== "All") {
+        query = query.contains("insurances_accepted", [filters.insurance]);
+      }
+      if (filters.maxBudget) {
+        query = query.lte("cost", filters.maxBudget);
+      }
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      }
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      const { data, error } = await query;
       if (error) throw error;
 
       if (data && data.length > 0) {
@@ -107,6 +146,13 @@ const OutpatientTreatment = () => {
     fetchProviders(stateName);
   };
 
+  const handleFiltersChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    if (selectedState) {
+      fetchProviders(selectedState);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -135,31 +181,35 @@ const OutpatientTreatment = () => {
         </div>
 
         {selectedState && (
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold mb-4">
-              {showingNearby 
-                ? `Nearest Outpatient Treatment Providers to ${selectedState}` 
-                : `Outpatient Treatment Providers in ${selectedState}`}
-            </h3>
-            {showingNearby && (
-              <p className="text-muted-foreground mb-4">
-                No providers found in {selectedState}. Showing the 3 geographically closest providers.
-              </p>
-            )}
-            {loading ? (
-              <p className="text-muted-foreground text-center">Loading providers...</p>
-            ) : providers.length > 0 ? (
-              <div className="space-y-4">
-                {providers.map((provider) => (
-                  <ProviderCard key={provider.id} provider={provider} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted-foreground text-center">
-                No approved providers found.
-              </p>
-            )}
-          </div>
+          <>
+            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
+            
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-xl font-semibold mb-4">
+                {showingNearby 
+                  ? `Nearest Outpatient Treatment Providers to ${selectedState}` 
+                  : `Outpatient Treatment Providers in ${selectedState}`}
+              </h3>
+              {showingNearby && (
+                <p className="text-muted-foreground mb-4">
+                  No providers found in {selectedState}. Showing the 3 geographically closest providers.
+                </p>
+              )}
+              {loading ? (
+                <p className="text-muted-foreground text-center">Loading providers...</p>
+              ) : providers.length > 0 ? (
+                <div className="space-y-4">
+                  {providers.map((provider) => (
+                    <ProviderCard key={provider.id} provider={provider} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground text-center">
+                  No approved providers found.
+                </p>
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>
