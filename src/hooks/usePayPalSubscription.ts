@@ -44,9 +44,30 @@ export function usePayPalSubscription() {
       }
 
       if (data?.approvalUrl) {
-        // Redirect to PayPal for approval - don't set isLoading to false
-        // as we're navigating away from the page
-        window.location.href = data.approvalUrl;
+        // Try to redirect to PayPal - use window.open as fallback for iframe environments
+        try {
+          // First try direct navigation
+          if (window.top !== window.self) {
+            // We're in an iframe, open in new tab
+            window.open(data.approvalUrl, '_blank');
+            toast({
+              title: 'PayPal Opened',
+              description: 'Complete your payment in the new tab, then return here.',
+            });
+            setIsLoading(false);
+          } else {
+            // Direct navigation
+            window.location.href = data.approvalUrl;
+          }
+        } catch {
+          // Fallback: open in new window
+          window.open(data.approvalUrl, '_blank');
+          toast({
+            title: 'PayPal Opened',
+            description: 'Complete your payment in the new tab, then return here.',
+          });
+          setIsLoading(false);
+        }
         return data;
       } else {
         throw new Error('No approval URL received');
