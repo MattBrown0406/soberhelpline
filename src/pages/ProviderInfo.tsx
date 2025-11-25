@@ -1060,7 +1060,7 @@ const ProviderInfo = () => {
                   <FormItem>
                     <FormLabel>
                       {form.watch("category") === "Interventionists"
-                        ? "Cost per intervention *"
+                        ? "Cost of Services *"
                         : ["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
                         ? "Cost per session/meeting *"
                         : "Private Pay Rate (without insurance) *"}
@@ -1070,7 +1070,7 @@ const ProviderInfo = () => {
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
                         <Input 
                           type="number" 
-                          placeholder="cost per month" 
+                          placeholder={form.watch("category") === "Interventionists" ? "cost per intervention" : "cost per month"}
                           className="pl-7"
                           {...field} 
                         />
