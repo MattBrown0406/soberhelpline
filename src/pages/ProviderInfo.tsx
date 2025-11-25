@@ -175,7 +175,7 @@ const providerFormSchema = z.object({
   substanceUseDisorderExperience: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
   legalAssistanceTypes: z.array(z.string()).optional(),
-  descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
+  descriptionOfServices: z.string().min(1, "Description of services is required").max(750, "Description must be less than 750 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   itemsIncludedInCost: z.array(z.string()).optional(),
   insurancesAccepted: z.array(z.string()),
@@ -1534,7 +1534,7 @@ const ProviderInfo = () => {
                         placeholder="Describe the services you provide..."
                         {...field}
                         rows={4}
-                        maxLength={500}
+                        maxLength={750}
                       />
                     </FormControl>
                     <FormDescription>
