@@ -499,40 +499,44 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="lengthOfServices"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Length of Services *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="30, 60, 90 days, etc" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="lengthOfServices"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Length of Services *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="30, 60, 90 days, etc" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
-              <FormField
-                control={form.control}
-                name="detoxAvailable"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>Detox Available?</FormLabel>
-                      <FormDescription>Check if your facility offers detox services</FormDescription>
-                    </div>
-                  </FormItem>
-                )}
-              />
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="detoxAvailable"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Detox Available?</FormLabel>
+                        <FormDescription>Check if your facility offers detox services</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
 
-              {(form.watch("category") === "Inpatient Treatment" || 
+              {(form.watch("category") === "Inpatient Treatment" ||
                 form.watch("category") === "Outpatient Treatment" || 
                 form.watch("category") === "Therapists" ||
                 form.watch("category") === "Psychiatrists") && (
@@ -659,74 +663,78 @@ const ProviderInfo = () => {
                 />
               )}
 
-              <FormField
-                control={form.control}
-                name="genderSpecificTreatment"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4">
-                      <FormLabel className="text-base">Do you offer gender specific treatment or care?</FormLabel>
-                    </div>
-                    <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
-                      {["Men", "Women"].map((gender) => (
-                        <FormField
-                          key={gender}
-                          control={form.control}
-                          name="genderSpecificTreatment"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={gender}
-                                className="flex flex-row items-start space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(gender)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...field.value, gender])
-                                        : field.onChange(
-                                            field.value?.filter(
-                                              (value) => value !== gender
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="genderSpecificTreatment"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Do you offer gender specific treatment or care?</FormLabel>
+                      </div>
+                      <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
+                        {["Men", "Women"].map((gender) => (
+                          <FormField
+                            key={gender}
+                            control={form.control}
+                            name="genderSpecificTreatment"
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={gender}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(gender)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...field.value, gender])
+                                          : field.onChange(
+                                              field.value?.filter(
+                                                (value) => value !== gender
+                                              )
                                             )
-                                          )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {gender}
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {gender}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="lgbtSupportive"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
                         />
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>LGBT supportive treatment or care?</FormLabel>
+                        <FormDescription>Check if your facility offers LGBT supportive treatment or care</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
 
-              <FormField
-                control={form.control}
-                name="lgbtSupportive"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>LGBT supportive treatment or care?</FormLabel>
-                      <FormDescription>Check if your facility offers LGBT supportive treatment or care</FormDescription>
-                    </div>
-                  </FormItem>
-                )}
-              />
-
-              {(form.watch("category") === "Therapists" || 
+              {(form.watch("category") === "Therapists" ||
                 form.watch("category") === "Psychiatrists" || 
                 form.watch("category") === "Attorneys") && (
                 <FormField
@@ -794,60 +802,62 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="insurancesAccepted"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4">
-                      <FormLabel className="text-base">
-                        Insurances Accepted
-                        {!["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " *"}
-                      </FormLabel>
-                      <FormDescription>
-                        Select all insurance providers you accept
-                        {["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " (optional)"}
-                      </FormDescription>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border rounded-lg p-4 bg-muted max-h-96 overflow-y-auto">
-                      {insuranceProviders.map((insurance) => (
-                        <FormField
-                          key={insurance}
-                          control={form.control}
-                          name="insurancesAccepted"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={insurance}
-                                className="flex flex-row items-start space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(insurance)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...field.value, insurance])
-                                        : field.onChange(
-                                            field.value?.filter(
-                                              (value) => value !== insurance
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="insurancesAccepted"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">
+                          Insurances Accepted
+                          {!["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " *"}
+                        </FormLabel>
+                        <FormDescription>
+                          Select all insurance providers you accept
+                          {["Interventionists", "Sober Coaches/Companions", "Sober Living", "Attorneys"].includes(form.watch("category")) && " (optional)"}
+                        </FormDescription>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border rounded-lg p-4 bg-muted max-h-96 overflow-y-auto">
+                        {insuranceProviders.map((insurance) => (
+                          <FormField
+                            key={insurance}
+                            control={form.control}
+                            name="insurancesAccepted"
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={insurance}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(insurance)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...field.value, insurance])
+                                          : field.onChange(
+                                              field.value?.filter(
+                                                (value) => value !== insurance
+                                              )
                                             )
-                                          )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {insurance}
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {insurance}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {form.watch("insurancesAccepted")?.includes("Other") && (
                 <FormField
