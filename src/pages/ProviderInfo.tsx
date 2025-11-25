@@ -167,6 +167,8 @@ const providerFormSchema = z.object({
   mandatoryCurfew: z.boolean().optional(),
   curfewTime: z.string().optional(),
   choresRequired: z.boolean().optional(),
+  mandatoryHouseMeetings: z.boolean().optional(),
+  houseMeetingsPerWeek: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -255,6 +257,8 @@ const ProviderInfo = () => {
       mandatoryCurfew: false,
       curfewTime: "",
       choresRequired: false,
+      mandatoryHouseMeetings: false,
+      houseMeetingsPerWeek: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -389,6 +393,8 @@ const ProviderInfo = () => {
           mandatory_curfew: data.mandatoryCurfew || null,
           curfew_time: data.curfewTime || null,
           chores_required: data.choresRequired || null,
+          mandatory_house_meetings: data.mandatoryHouseMeetings || null,
+          house_meetings_per_week: data.houseMeetingsPerWeek ? parseInt(data.houseMeetingsPerWeek) : null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1253,6 +1259,46 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you require that residents participate in chores?</FormLabel>
                       </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="mandatoryHouseMeetings"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you have mandatory house meetings or groups?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && form.watch("mandatoryHouseMeetings") && (
+                <FormField
+                  control={form.control}
+                  name="houseMeetingsPerWeek"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>How many per week?</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          placeholder="Enter number of meetings per week"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

@@ -35,6 +35,7 @@ export type Database = {
           has_valid_passport: boolean | null
           hourly_coaching_rate: string | null
           hourly_coaching_sessions: boolean | null
+          house_meetings_per_week: number | null
           id: string
           in_person_companion_work: boolean | null
           insurances_accepted: string[] | null
@@ -46,6 +47,7 @@ export type Database = {
           license_current_good_standing: boolean | null
           logo_url: string | null
           mandatory_curfew: boolean | null
+          mandatory_house_meetings: boolean | null
           medication_administration: string | null
           minimum_time_since_last_use: string | null
           phone_number: string
@@ -81,6 +83,7 @@ export type Database = {
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
           hourly_coaching_sessions?: boolean | null
+          house_meetings_per_week?: number | null
           id?: string
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
@@ -92,6 +95,7 @@ export type Database = {
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           mandatory_curfew?: boolean | null
+          mandatory_house_meetings?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number: string
@@ -127,6 +131,7 @@ export type Database = {
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
           hourly_coaching_sessions?: boolean | null
+          house_meetings_per_week?: number | null
           id?: string
           in_person_companion_work?: boolean | null
           insurances_accepted?: string[] | null
@@ -138,6 +143,7 @@ export type Database = {
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           mandatory_curfew?: boolean | null
+          mandatory_house_meetings?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number?: string
