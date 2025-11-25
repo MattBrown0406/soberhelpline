@@ -164,6 +164,8 @@ const providerFormSchema = z.object({
   acceptsMatResidents: z.boolean().optional(),
   minimumTimeSinceLastUse: z.string().optional(),
   requiredMeetingsPerWeek: z.string().optional(),
+  mandatoryCurfew: z.boolean().optional(),
+  curfewTime: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -249,6 +251,8 @@ const ProviderInfo = () => {
       acceptsMatResidents: false,
       minimumTimeSinceLastUse: "",
       requiredMeetingsPerWeek: "",
+      mandatoryCurfew: false,
+      curfewTime: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -380,6 +384,8 @@ const ProviderInfo = () => {
           accepts_mat_residents: data.acceptsMatResidents || null,
           minimum_time_since_last_use: data.minimumTimeSinceLastUse || null,
           required_meetings_per_week: data.requiredMeetingsPerWeek || null,
+          mandatory_curfew: data.mandatoryCurfew || null,
+          curfew_time: data.curfewTime || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1182,6 +1188,47 @@ const ProviderInfo = () => {
                           <SelectItem value="More than 7">More than 7</SelectItem>
                         </SelectContent>
                       </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="mandatoryCurfew"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you have a mandatory curfew?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && form.watch("mandatoryCurfew") && (
+                <FormField
+                  control={form.control}
+                  name="curfewTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Curfew Time</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="time" 
+                          placeholder="00:00"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>Select curfew time</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

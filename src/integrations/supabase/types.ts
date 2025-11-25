@@ -25,6 +25,7 @@ export type Database = {
           co_occurring_diagnoses: string[] | null
           cost: string | null
           created_at: string | null
+          curfew_time: string | null
           daily_companion_fee: string | null
           description_of_services: string | null
           detox_available: boolean | null
@@ -43,6 +44,7 @@ export type Database = {
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
           logo_url: string | null
+          mandatory_curfew: boolean | null
           medication_administration: string | null
           minimum_time_since_last_use: string | null
           phone_number: string
@@ -68,6 +70,7 @@ export type Database = {
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
+          curfew_time?: string | null
           daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
@@ -86,6 +89,7 @@ export type Database = {
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
+          mandatory_curfew?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number: string
@@ -111,6 +115,7 @@ export type Database = {
           co_occurring_diagnoses?: string[] | null
           cost?: string | null
           created_at?: string | null
+          curfew_time?: string | null
           daily_companion_fee?: string | null
           description_of_services?: string | null
           detox_available?: boolean | null
@@ -129,6 +134,7 @@ export type Database = {
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
+          mandatory_curfew?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number?: string
