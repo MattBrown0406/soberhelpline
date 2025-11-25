@@ -532,11 +532,12 @@ const ProviderInfo = () => {
           description: "Please complete payment to finalize your listing.",
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Submission error:', error);
+      const errorMessage = error?.message || error?.error_description || "There was an error submitting your application. Please try again.";
       toast({
         title: "Submission failed",
-        description: "There was an error submitting your application. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
