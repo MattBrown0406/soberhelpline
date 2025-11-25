@@ -184,12 +184,12 @@ const Psychiatrists = () => {
               Back to Home
             </Button>
           </Link>
-          <div className="flex flex-col items-end gap-2">
-            <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
+          <div className="flex items-center gap-4">
             <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
               <span className="font-medium">(541) 241-5886</span>
             </a>
+            <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
           </div>
         </div>
 
