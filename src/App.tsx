@@ -14,7 +14,6 @@ import SoberCoachesCompanions from "./pages/SoberCoachesCompanions";
 import SoberLiving from "./pages/SoberLiving";
 import Therapists from "./pages/Therapists";
 import Psychiatrists from "./pages/Psychiatrists";
-import Attorneys from "./pages/Attorneys";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
@@ -40,7 +39,6 @@ const App = () => (
           <Route path="/sober-living" element={<SoberLiving />} />
           <Route path="/therapists" element={<Therapists />} />
           <Route path="/psychiatrists" element={<Psychiatrists />} />
-          <Route path="/attorneys" element={<Attorneys />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/subscription/success" element={<SubscriptionSuccess />} />

@@ -87,7 +87,6 @@ const providerCategories = [
   "Sober Living",
   "Therapists",
   "Psychiatrists",
-  "Attorneys",
 ];
 
 const insuranceProviders = [
