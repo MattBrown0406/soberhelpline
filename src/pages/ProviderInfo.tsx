@@ -146,6 +146,8 @@ const providerFormSchema = z.object({
   coOccurringDiagnoses: z.array(z.string()).optional(),
   therapeuticModalities: z.array(z.string()).optional(),
   otherTherapeuticModalities: z.string().optional(),
+  inPersonCompanionWork: z.boolean().optional(),
+  hasValidPassport: z.boolean().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -191,6 +193,8 @@ const ProviderInfo = () => {
       coOccurringDiagnoses: [],
       therapeuticModalities: [],
       otherTherapeuticModalities: "",
+      inPersonCompanionWork: false,
+      hasValidPassport: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -307,6 +311,8 @@ const ProviderInfo = () => {
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
           therapeutic_modalities: finalModalities.length > 0 ? finalModalities : null,
+          in_person_companion_work: data.inPersonCompanionWork || null,
+          has_valid_passport: data.hasValidPassport || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -752,6 +758,50 @@ const ProviderInfo = () => {
                     </FormItem>
                   )}
                 />
+              )}
+
+              {form.watch("category") === "Sober Coaches/Companions" && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="inPersonCompanionWork"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Do you do in person sober companion work?</FormLabel>
+                          <FormDescription>Check if you provide in-person sober companion services</FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  {form.watch("inPersonCompanionWork") && (
+                    <FormField
+                      control={form.control}
+                      name="hasValidPassport"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel>Do you have a valid passport?</FormLabel>
+                            <FormDescription>Confirm you have a valid passport for international companion work</FormDescription>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  )}
+                </>
               )}
 
               {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
