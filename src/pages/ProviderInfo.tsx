@@ -140,6 +140,7 @@ const providerFormSchema = z.object({
   email: z.string().email("Valid email is required").max(255),
   website: z.string().url("Valid website URL is required").min(1, "Website is required"),
   interventionModalities: z.array(z.string()).optional(),
+  otherInterventionModalities: z.string().optional(),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
   detoxAvailable: z.boolean().default(false),
   coOccurringDiagnoses: z.array(z.string()).optional(),
@@ -184,6 +185,7 @@ const ProviderInfo = () => {
       email: "",
       website: "",
       interventionModalities: [],
+      otherInterventionModalities: "",
       lengthOfServices: "",
       detoxAvailable: false,
       coOccurringDiagnoses: [],
@@ -230,6 +232,21 @@ const ProviderInfo = () => {
         // Remove "Other" and add the custom modalities
         finalModalities = finalModalities.filter(m => m !== "Other");
         finalModalities = [...finalModalities, ...customModalities];
+      }
+
+      // Combine selected intervention modalities with custom "Other" modalities
+      let finalInterventionModalities = data.interventionModalities ? [...data.interventionModalities] : [];
+      
+      // If "Other" is selected and there are custom intervention modalities, add them
+      if (data.interventionModalities?.includes("Other") && data.otherInterventionModalities) {
+        const customInterventionModalities = data.otherInterventionModalities
+          .split(',')
+          .map(m => m.trim())
+          .filter(m => m.length > 0);
+        
+        // Remove "Other" and add the custom intervention modalities
+        finalInterventionModalities = finalInterventionModalities.filter(m => m !== "Other");
+        finalInterventionModalities = [...finalInterventionModalities, ...customInterventionModalities];
       }
 
       let logoUrl = null;
@@ -285,7 +302,7 @@ const ProviderInfo = () => {
           phone_number: data.phoneNumber,
           email: data.email,
           website: data.website,
-          intervention_modalities: data.interventionModalities || null,
+          intervention_modalities: finalInterventionModalities.length > 0 ? finalInterventionModalities : null,
           length_of_services: data.lengthOfServices,
           detox_available: data.detoxAvailable,
           co_occurring_diagnoses: data.coOccurringDiagnoses || null,
@@ -512,7 +529,7 @@ const ProviderInfo = () => {
                         <FormLabel className="text-base">Are you trained in any of the following intervention modalities?</FormLabel>
                       </div>
                       <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                        {["ARISE", "Family Systems", "Johnson Model", "Motivational Interviewing", "Invitational Intervention"].map((modality) => (
+                        {["ARISE", "Family Systems", "Johnson Model", "Motivational Interviewing", "Invitational Intervention", "Other"].map((modality) => (
                           <FormField
                             key={modality}
                             control={form.control}
@@ -547,6 +564,26 @@ const ProviderInfo = () => {
                           />
                         ))}
                       </div>
+                      {form.watch("interventionModalities")?.includes("Other") && (
+                        <FormField
+                          control={form.control}
+                          name="otherInterventionModalities"
+                          render={({ field }) => (
+                            <FormItem className="mt-3">
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  placeholder="Enter other intervention modalities, separated by commas"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormDescription>
+                                List any additional intervention modalities you have been trained in, separated by commas
+                              </FormDescription>
+                            </FormItem>
+                          )}
+                        />
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}
