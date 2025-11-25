@@ -17,6 +17,7 @@ export type Database = {
       provider_submissions: {
         Row: {
           address: string | null
+          awake_staff_24_7: boolean | null
           case_management_services: boolean | null
           category: string
           city: string | null
@@ -53,6 +54,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category: string
           city?: string | null
@@ -89,6 +91,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category?: string
           city?: string | null
