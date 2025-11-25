@@ -7,6 +7,14 @@ import logo from "@/assets/logo.png";
 const blogPosts = [
   {
     id: 1,
+    title: "Motivating Your Reluctant Loved One",
+    excerpt: "When someone you care about is struggling with addiction but resistant to help, it can feel hopeless. Discover compassionate strategies to encourage treatment without pushing them away.",
+    author: "Sober Helpline Team",
+    date: "2024-11-25",
+    category: "Family Support"
+  },
+  {
+    id: 2,
     title: "Understanding the First Steps of Recovery",
     excerpt: "Recovery is a journey that begins with a single step. Learn about the crucial first steps that can set you or your loved one on the path to lasting sobriety.",
     author: "Sober Helpline Team",
@@ -14,7 +22,7 @@ const blogPosts = [
     category: "Recovery Basics"
   },
   {
-    id: 2,
+    id: 3,
     title: "How to Support a Loved One in Treatment",
     excerpt: "Supporting someone through addiction treatment can be challenging. Discover effective ways to be there for your loved one while maintaining healthy boundaries.",
     author: "Sober Helpline Team",
@@ -22,7 +30,7 @@ const blogPosts = [
     category: "Family Support"
   },
   {
-    id: 3,
+    id: 4,
     title: "The Importance of Aftercare in Recovery",
     excerpt: "Treatment is just the beginning. Learn why aftercare programs are essential for maintaining long-term sobriety and preventing relapse.",
     author: "Sober Helpline Team",
