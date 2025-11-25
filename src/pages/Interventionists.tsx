@@ -19,7 +19,7 @@ const Interventionists = () => {
             <h1 className="text-4xl font-bold text-foreground">Interventionists</h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Connect with professional interventionists who can help facilitate difficult conversations and guide loved ones toward treatment.
+            A professional interventionist can help unite the support system behind the common goal of getting your loved one the help they need. They will help you choose the correct treatment experience. They will educate and guide your family to over come the resistance you currently face from your loved one and create change.
           </p>
         </div>
 
