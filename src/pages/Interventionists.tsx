@@ -25,6 +25,7 @@ interface Provider {
   website: string | null;
   description_of_services: string | null;
   logo_url: string | null;
+  cip_certified?: boolean | null;
 }
 
 const Interventionists = () => {
