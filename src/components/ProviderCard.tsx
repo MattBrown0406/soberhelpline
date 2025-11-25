@@ -27,11 +27,23 @@ interface ProviderCardProps {
 const ProviderCard = ({ provider }: ProviderCardProps) => {
   return (
     <Card className="hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
+      <CardContent className="p-6">
+        <div className="flex items-start gap-6">
+          {/* Left section: Logo */}
+          {provider.logo_url && (
+            <div className="flex-shrink-0">
+              <img
+                src={provider.logo_url}
+                alt={`${provider.provider_name} logo`}
+                className="w-20 h-20 object-contain"
+              />
+            </div>
+          )}
+          
+          {/* Middle section: Main info */}
+          <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
-              <CardTitle className="text-xl">{provider.provider_name}</CardTitle>
+              <h3 className="text-xl font-semibold">{provider.provider_name}</h3>
               {provider.cip_certified && (
                 <Badge variant="default" className="gap-1 bg-primary text-primary-foreground">
                   <Award className="w-3 h-3" />
@@ -39,86 +51,80 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                 </Badge>
               )}
             </div>
+            
             {provider.city && provider.state && (
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
+              <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
                 <MapPin className="w-4 h-4" />
                 <span>
                   {provider.city}, {provider.state} {provider.zip_code}
                 </span>
               </div>
             )}
-          </div>
-          {provider.logo_url && (
-            <img
-              src={provider.logo_url}
-              alt={`${provider.provider_name} logo`}
-              className="w-16 h-16 object-contain"
-            />
-          )}
-        </div>
-      </CardHeader>
-      <CardContent>
-        {provider.description_of_services && (
-          <p className="text-muted-foreground mb-4">{provider.description_of_services}</p>
-        )}
-        
-        {/* Interventionist-specific information */}
-        {provider.category === "Interventionists" && (
-          <div className="mb-4 space-y-3">
-            {provider.cost && (
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-sm">Cost:</span>
-                <span className="text-sm">{provider.cost}</span>
-              </div>
+            
+            {provider.description_of_services && (
+              <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+                {provider.description_of_services}
+              </p>
             )}
             
-            {provider.intervention_modalities && provider.intervention_modalities.length > 0 && (
-              <div>
-                <span className="font-semibold text-sm block mb-2">Intervention Modalities:</span>
-                <div className="flex flex-wrap gap-2">
-                  {provider.intervention_modalities.map((modality, idx) => (
-                    <Badge key={idx} variant="secondary">
-                      {modality}
-                    </Badge>
-                  ))}
-                </div>
+            {/* Interventionist-specific information */}
+            {provider.category === "Interventionists" && (
+              <div className="mb-3 space-y-2">
+                {provider.cost && (
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-sm">Cost:</span>
+                    <span className="text-sm">{provider.cost}</span>
+                  </div>
+                )}
+                
+                {provider.intervention_modalities && provider.intervention_modalities.length > 0 && (
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-semibold text-sm">Modalities:</span>
+                    {provider.intervention_modalities.map((modality, idx) => (
+                      <Badge key={idx} variant="secondary" className="text-xs">
+                        {modality}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+                
+                {provider.travel_expenses_included && (
+                  <Badge variant="outline" className="w-fit text-xs">
+                    ✓ Travel Expenses Included
+                  </Badge>
+                )}
               </div>
             )}
-            
-            {provider.travel_expenses_included && (
-              <Badge variant="outline" className="w-fit">
-                ✓ Travel Expenses Included
-              </Badge>
-            )}
           </div>
-        )}
-        
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm">
-            <Phone className="w-4 h-4 text-primary" />
-            <a href={`tel:${provider.phone_number}`} className="hover:underline">
-              {provider.phone_number}
-            </a>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <Mail className="w-4 h-4 text-primary" />
-            <a href={`mailto:${provider.email}`} className="hover:underline">
-              {provider.email}
-            </a>
-          </div>
-          {provider.website && (
+          
+          {/* Right section: Contact info */}
+          <div className="flex-shrink-0 space-y-2 min-w-[200px]">
             <div className="flex items-center gap-2 text-sm">
-              <Globe className="w-4 h-4 text-primary" />
-              <a
-                href={provider.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                Visit Website
+              <Phone className="w-4 h-4 text-primary" />
+              <a href={`tel:${provider.phone_number}`} className="hover:underline">
+                {provider.phone_number}
               </a>
             </div>
-          )}
+            <div className="flex items-center gap-2 text-sm">
+              <Mail className="w-4 h-4 text-primary" />
+              <a href={`mailto:${provider.email}`} className="hover:underline truncate">
+                {provider.email}
+              </a>
+            </div>
+            {provider.website && (
+              <div className="flex items-center gap-2 text-sm">
+                <Globe className="w-4 h-4 text-primary" />
+                <a
+                  href={provider.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  Visit Website
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>
