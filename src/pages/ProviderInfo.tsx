@@ -138,7 +138,7 @@ const providerFormSchema = z.object({
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Valid zip code is required (e.g., 12345 or 12345-6789)"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
-  website: z.string().url("Valid website URL is required").min(1, "Website is required"),
+  website: z.string().optional(),
   interventionModalities: z.array(z.string()).optional(),
   otherInterventionModalities: z.string().optional(),
   lengthOfServices: z.string().min(1, "Length of services is required").max(100),
@@ -168,6 +168,31 @@ const providerFormSchema = z.object({
 }, {
   message: "Please select at least one insurance provider",
   path: ["insurancesAccepted"],
+}).refine((data) => {
+  // Website is optional for these categories
+  const optionalWebsiteCategories = ["Sober Coaches/Companions", "Therapists"];
+  if (optionalWebsiteCategories.includes(data.category)) {
+    return true;
+  }
+  // For other categories, require website
+  return data.website && data.website.length > 0;
+}, {
+  message: "Website is required for this category",
+  path: ["website"],
+}).refine((data) => {
+  // If website is provided, it must be a valid URL
+  if (data.website && data.website.length > 0) {
+    try {
+      new URL(data.website);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  return true;
+}, {
+  message: "Please enter a valid website URL",
+  path: ["website"],
 });
 
 type ProviderFormValues = z.infer<typeof providerFormSchema>;
@@ -519,7 +544,10 @@ const ProviderInfo = () => {
                 name="website"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Website *</FormLabel>
+                    <FormLabel>
+                      Website
+                      {!["Sober Coaches/Companions", "Therapists"].includes(form.watch("category")) && " *"}
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
                     </FormControl>
