@@ -521,7 +521,7 @@ const ProviderInfo = () => {
                       <FormLabel className="text-base">Co-Occurring Diagnoses: Are you able to treat any of the following diagnoses?</FormLabel>
                     </div>
                     <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                      {["ADHD", "Anxiety Disorders", "Bipolar Disorder", "Depression", "Eating Disorders", "OCD", "PTSD", "Schizophrenia"].map((diagnosis) => (
+                      {["ADHD", "Anxiety Disorders", "Bipolar Disorder", "Borderline Personality Disorder", "Depression", "Eating Disorders", "Schizoaffective Disorder", "Schizophrenia", "Trauma"].map((diagnosis) => (
                         <FormField
                           key={diagnosis}
                           control={form.control}
