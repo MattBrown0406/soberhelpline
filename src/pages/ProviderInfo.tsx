@@ -636,7 +636,7 @@ const ProviderInfo = () => {
                 />
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="lengthOfServices"
@@ -652,7 +652,7 @@ const ProviderInfo = () => {
                 />
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="detoxAvailable"
@@ -873,7 +873,7 @@ const ProviderInfo = () => {
                 </>
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="genderSpecificTreatment"
