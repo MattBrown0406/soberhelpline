@@ -143,6 +143,7 @@ const providerFormSchema = z.object({
   detoxAvailable: z.boolean().default(false),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
+  licenseCurrentGoodStanding: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   insurancesAccepted: z.array(z.string()).min(1, "Please select at least one insurance provider"),
@@ -171,6 +172,7 @@ const ProviderInfo = () => {
       detoxAvailable: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
+      licenseCurrentGoodStanding: false,
       descriptionOfServices: "",
       cost: "",
       insurancesAccepted: [],
@@ -253,6 +255,7 @@ const ProviderInfo = () => {
           detox_available: data.detoxAvailable,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
+          license_current_good_standing: data.licenseCurrentGoodStanding || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           insurances_accepted: finalInsurances,
@@ -561,6 +564,29 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {(form.watch("category") === "Therapists" || 
+                form.watch("category") === "Psychiatrists" || 
+                form.watch("category") === "Attorneys") && (
+                <FormField
+                  control={form.control}
+                  name="licenseCurrentGoodStanding"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Is your license current and in good standing? *</FormLabel>
+                        <FormDescription>Confirm that your professional license is active and in good standing</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={form.control}

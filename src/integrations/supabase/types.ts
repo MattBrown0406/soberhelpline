@@ -29,6 +29,7 @@ export type Database = {
           insurances_accepted: string[] | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
+          license_current_good_standing: boolean | null
           logo_url: string | null
           phone_number: string
           provider_name: string
@@ -53,6 +54,7 @@ export type Database = {
           insurances_accepted?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
+          license_current_good_standing?: boolean | null
           logo_url?: string | null
           phone_number: string
           provider_name: string
@@ -77,6 +79,7 @@ export type Database = {
           insurances_accepted?: string[] | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
+          license_current_good_standing?: boolean | null
           logo_url?: string | null
           phone_number?: string
           provider_name?: string
