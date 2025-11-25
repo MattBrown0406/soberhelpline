@@ -66,6 +66,7 @@ const InpatientTreatment = () => {
   const [customInsurance, setCustomInsurance] = useState("");
   const [genderSpecificCare, setGenderSpecificCare] = useState("No");
   const [genderType, setGenderType] = useState("");
+  const [lengthOfStay, setLengthOfStay] = useState("All");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -257,6 +258,19 @@ const InpatientTreatment = () => {
         query = query.contains("gender_specific_treatment", [genderType]);
       }
 
+      // Apply length of stay filter
+      if (lengthOfStay !== "All") {
+        if (lengthOfStay === "30 days") {
+          query = query.ilike("length_of_services", "%30%");
+        } else if (lengthOfStay === "60 days") {
+          query = query.ilike("length_of_services", "%60%");
+        } else if (lengthOfStay === "90 days") {
+          query = query.ilike("length_of_services", "%90%");
+        } else if (lengthOfStay === "longer than 90 days") {
+          query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
+        }
+      }
+
       const { data, error } = await query;
 
       if (error) throw error;
@@ -266,9 +280,10 @@ const InpatientTreatment = () => {
       if (!data || data.length === 0) {
         const insuranceText = insuranceSearch === "Other" ? customInsurance : insuranceSearch;
         const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
+        const lengthText = lengthOfStay !== "All" ? ` with ${lengthOfStay} length of stay` : "";
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}`,
+          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}${lengthText}`,
         });
       }
     } catch (error) {
@@ -309,8 +324,8 @@ const InpatientTreatment = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-3xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="max-w-4xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <div className="flex gap-2">
@@ -386,6 +401,25 @@ const InpatientTreatment = () => {
                     </SelectContent>
                   </Select>
                 )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="lengthOfStay">Length of Stay</Label>
+                <Select
+                  value={lengthOfStay}
+                  onValueChange={setLengthOfStay}
+                >
+                  <SelectTrigger id="lengthOfStay" className="bg-background">
+                    <SelectValue placeholder="Select length" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="30 days">30 days</SelectItem>
+                    <SelectItem value="60 days">60 days</SelectItem>
+                    <SelectItem value="90 days">90 days</SelectItem>
+                    <SelectItem value="longer than 90 days">Longer than 90 days</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
