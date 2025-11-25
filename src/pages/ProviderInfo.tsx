@@ -701,7 +701,7 @@ const ProviderInfo = () => {
                 />
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="lengthOfServices"
