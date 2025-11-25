@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { usePayPalSubscription } from '@/hooks/usePayPalSubscription';
-import { Check, Loader2 } from 'lucide-react';
+import { Check, Loader2, Tag } from 'lucide-react';
 
 interface SubscriptionPlan {
   id: string;
@@ -79,6 +81,7 @@ interface SubscriptionCheckoutProps {
 
 export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess }: SubscriptionCheckoutProps) {
   const { createSubscription, isLoading } = usePayPalSubscription();
+  const [discountCode, setDiscountCode] = useState('');
   const plan = getSubscriptionPlan(category);
 
   const handleSubscribe = async () => {
@@ -87,6 +90,7 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
         planType: plan.billingCycle,
         amount: plan.price,
         providerSubmissionId,
+        discountCode: discountCode.trim() || undefined,
       });
       onSuccess?.();
     } catch (error) {
@@ -115,7 +119,7 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="space-y-6">
           <ul className="space-y-3">
             {plan.features.map((feature, index) => (
               <li key={index} className="flex items-center gap-2">
@@ -124,6 +128,20 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
               </li>
             ))}
           </ul>
+
+          <div className="space-y-2">
+            <Label htmlFor="discountCode" className="flex items-center gap-2">
+              <Tag className="h-4 w-4" />
+              Discount Code (optional)
+            </Label>
+            <Input
+              id="discountCode"
+              placeholder="Enter discount code"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+              maxLength={50}
+            />
+          </div>
         </CardContent>
 
         <CardFooter className="flex flex-col gap-4">

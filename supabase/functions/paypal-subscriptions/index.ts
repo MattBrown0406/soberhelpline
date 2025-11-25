@@ -194,15 +194,41 @@ Deno.serve(async (req) => {
 
     switch (action) {
       case 'create-subscription': {
-        const { planType, amount, userId, providerSubmissionId, returnUrl, cancelUrl } = params;
+        const { planType, amount, userId, providerSubmissionId, discountCode, returnUrl, cancelUrl } = params;
         
         if (!planType || !amount || !userId || !returnUrl || !cancelUrl) {
           throw new Error('Missing required parameters');
         }
 
-        // Create product and plan
+        // Apply discount if valid code provided
+        let finalAmount = parseFloat(amount);
+        let appliedDiscount = null;
+
+        if (discountCode) {
+          // Check for valid discount codes (you can expand this or use a database table)
+          const discountCodes: Record<string, { type: 'percent' | 'fixed'; value: number }> = {
+            'WELCOME50': { type: 'percent', value: 50 },
+            'SAVE25': { type: 'percent', value: 25 },
+            'SAVE100': { type: 'fixed', value: 100 },
+          };
+
+          const discount = discountCodes[discountCode.toUpperCase()];
+          if (discount) {
+            if (discount.type === 'percent') {
+              finalAmount = finalAmount * (1 - discount.value / 100);
+            } else {
+              finalAmount = Math.max(0, finalAmount - discount.value);
+            }
+            appliedDiscount = discountCode.toUpperCase();
+            console.log(`Applied discount code ${appliedDiscount}: $${amount} -> $${finalAmount.toFixed(2)}`);
+          } else {
+            console.log(`Invalid discount code attempted: ${discountCode}`);
+          }
+        }
+
+        // Create product and plan with potentially discounted amount
         const productId = await createPayPalProduct(accessToken);
-        const planId = await createPayPalPlan(accessToken, productId, planType, amount);
+        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2));
         
         // Create subscription
         const { subscriptionId, approvalUrl } = await createPayPalSubscription(
@@ -221,7 +247,7 @@ Deno.serve(async (req) => {
             paypal_subscription_id: subscriptionId,
             plan_type: planType,
             status: 'pending',
-            amount: parseFloat(amount),
+            amount: finalAmount,
           });
 
         if (dbError) {
@@ -230,7 +256,7 @@ Deno.serve(async (req) => {
         }
 
         return new Response(
-          JSON.stringify({ subscriptionId, approvalUrl }),
+          JSON.stringify({ subscriptionId, approvalUrl, appliedDiscount, finalAmount }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
