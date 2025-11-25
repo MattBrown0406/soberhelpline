@@ -120,7 +120,7 @@ const Index = () => {
           <img src={iocLogo} alt="Intervention On Call" className="mx-auto mb-6 h-20 w-auto" />
           <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            We have partnered with Intervention On Call to provide the families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
+            We have partnered with Intervention On Call to provide families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
           </p>
           <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="font-semibold">
