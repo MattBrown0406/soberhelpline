@@ -9,12 +9,21 @@ interface CreateSubscriptionParams {
   discountCode?: string;
 }
 
+interface CreateSubscriptionResult {
+  subscriptionId: string;
+  approvalUrl: string;
+  appliedDiscount: string | null;
+  finalAmount: number;
+}
+
 export function usePayPalSubscription() {
   const [isLoading, setIsLoading] = useState(false);
+  const [paypalUrl, setPaypalUrl] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const createSubscription = async ({ planType, amount, providerSubmissionId, discountCode }: CreateSubscriptionParams) => {
+  const createSubscription = async ({ planType, amount, providerSubmissionId, discountCode }: CreateSubscriptionParams): Promise<CreateSubscriptionResult | null> => {
     setIsLoading(true);
+    setPaypalUrl(null);
     
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -44,30 +53,9 @@ export function usePayPalSubscription() {
       }
 
       if (data?.approvalUrl) {
-        // Try to redirect to PayPal - use window.open as fallback for iframe environments
-        try {
-          // First try direct navigation
-          if (window.top !== window.self) {
-            // We're in an iframe, open in new tab
-            window.open(data.approvalUrl, '_blank');
-            toast({
-              title: 'PayPal Opened',
-              description: 'Complete your payment in the new tab, then return here.',
-            });
-            setIsLoading(false);
-          } else {
-            // Direct navigation
-            window.location.href = data.approvalUrl;
-          }
-        } catch {
-          // Fallback: open in new window
-          window.open(data.approvalUrl, '_blank');
-          toast({
-            title: 'PayPal Opened',
-            description: 'Complete your payment in the new tab, then return here.',
-          });
-          setIsLoading(false);
-        }
+        // Store the URL so we can display it
+        setPaypalUrl(data.approvalUrl);
+        setIsLoading(false);
         return data;
       } else {
         throw new Error('No approval URL received');
@@ -82,6 +70,10 @@ export function usePayPalSubscription() {
       });
       throw error;
     }
+  };
+
+  const clearPaypalUrl = () => {
+    setPaypalUrl(null);
   };
 
   const activateSubscription = async (subscriptionId: string) => {
@@ -157,6 +149,8 @@ export function usePayPalSubscription() {
 
   return {
     isLoading,
+    paypalUrl,
+    clearPaypalUrl,
     createSubscription,
     activateSubscription,
     cancelSubscription,
