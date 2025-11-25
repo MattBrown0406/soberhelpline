@@ -37,12 +37,14 @@ export type Database = {
           insurances_accepted: string[] | null
           intervention_modalities: string[] | null
           items_included_in_cost: string[] | null
+          job_assistance_provided: boolean | null
           length_of_services: string | null
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
           logo_url: string | null
           phone_number: string
           provider_name: string
+          residents_expected_to_work: boolean | null
           state: string | null
           status: string | null
           therapeutic_modalities: string[] | null
@@ -74,12 +76,14 @@ export type Database = {
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
+          job_assistance_provided?: boolean | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           phone_number: string
           provider_name: string
+          residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
           therapeutic_modalities?: string[] | null
@@ -111,12 +115,14 @@ export type Database = {
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
+          job_assistance_provided?: boolean | null
           length_of_services?: string | null
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
           phone_number?: string
           provider_name?: string
+          residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
           therapeutic_modalities?: string[] | null

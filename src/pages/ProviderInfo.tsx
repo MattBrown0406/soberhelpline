@@ -158,6 +158,8 @@ const providerFormSchema = z.object({
   hasValidPassport: z.boolean().optional(),
   dailyCompanionFee: z.string().optional(),
   awakeStaff247: z.boolean().optional(),
+  residentsExpectedToWork: z.boolean().optional(),
+  jobAssistanceProvided: z.boolean().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -237,6 +239,8 @@ const ProviderInfo = () => {
       hasValidPassport: false,
       dailyCompanionFee: "",
       awakeStaff247: false,
+      residentsExpectedToWork: false,
+      jobAssistanceProvided: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -362,6 +366,8 @@ const ProviderInfo = () => {
           has_valid_passport: data.hasValidPassport || null,
           daily_companion_fee: data.dailyCompanionFee || null,
           awake_staff_24_7: data.awakeStaff247 || null,
+          residents_expected_to_work: data.residentsExpectedToWork || null,
+          job_assistance_provided: data.jobAssistanceProvided || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1024,6 +1030,46 @@ const ProviderInfo = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Is there awake staff at the house 24/7?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="residentsExpectedToWork"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Are your residents expected to work while in the sober living?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && form.watch("residentsExpectedToWork") && (
+                <FormField
+                  control={form.control}
+                  name="jobAssistanceProvided"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you provide assistance with getting a job?</FormLabel>
                       </div>
                     </FormItem>
                   )}
