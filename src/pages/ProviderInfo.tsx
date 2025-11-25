@@ -504,7 +504,7 @@ const ProviderInfo = () => {
                 render={() => (
                   <FormItem>
                     <div className="mb-4">
-                      <FormLabel className="text-base">Do you offer gender specific treatment?</FormLabel>
+                      <FormLabel className="text-base">Do you offer gender specific treatment or care?</FormLabel>
                     </div>
                     <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
                       {["Men", "Women"].map((gender) => (
