@@ -512,7 +512,7 @@ const ProviderInfo = () => {
                         <FormLabel className="text-base">Are you trained in any of the following intervention modalities?</FormLabel>
                       </div>
                       <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                        {["ARISE", "Family Systems", "Johnson Model", "Motivational Interviewing", "Systemic Family Intervention", "Invitational Intervention"].map((modality) => (
+                        {["ARISE", "Family Systems", "Johnson Model", "Motivational Interviewing", "Invitational Intervention"].map((modality) => (
                           <FormField
                             key={modality}
                             control={form.control}
