@@ -21,6 +21,7 @@ interface Provider {
   logo_url: string | null;
   cip_certified?: boolean | null;
   detox_only_services?: boolean | null;
+  length_of_services?: string | null;
   category?: string;
   cost?: string | null;
   intervention_modalities?: string[] | null;
@@ -63,6 +64,22 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <Badge variant="secondary" className="gap-1">
                       Detox Only
                     </Badge>
+                  )}
+                  {provider.category === "Inpatient Treatment" && provider.length_of_services && (
+                    <>
+                      {provider.length_of_services.includes("30 days") && (
+                        <Badge variant="outline" className="text-xs">30 Day</Badge>
+                      )}
+                      {provider.length_of_services.includes("60 days") && (
+                        <Badge variant="outline" className="text-xs">60 Day</Badge>
+                      )}
+                      {provider.length_of_services.includes("90 days") && (
+                        <Badge variant="outline" className="text-xs">90 Day</Badge>
+                      )}
+                      {provider.length_of_services.includes("More than 90 days") && (
+                        <Badge variant="outline" className="text-xs">&gt;90 Day</Badge>
+                      )}
+                    </>
                   )}
                 </div>
                 
