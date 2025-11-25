@@ -184,7 +184,7 @@ const Psychiatrists = () => {
               Back to Home
             </Button>
           </Link>
-          <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
+          <img src={logo} alt="Sober Helpline" className="h-48 w-48 object-contain" />
         </div>
 
         <div className="text-center mb-12">
