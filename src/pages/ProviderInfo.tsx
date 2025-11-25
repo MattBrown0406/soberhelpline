@@ -161,6 +161,10 @@ const providerFormSchema = z.object({
   inPersonCompanionWork: z.boolean().optional(),
   hasValidPassport: z.boolean().optional(),
   dailyCompanionFee: z.string().optional(),
+  worksNationally: z.boolean().optional(),
+  worksInternationally: z.boolean().optional(),
+  languagesSpoken: z.array(z.string()).optional(),
+  otherLanguages: z.string().optional(),
   awakeStaff247: z.boolean().optional(),
   residentsExpectedToWork: z.boolean().optional(),
   jobAssistanceProvided: z.boolean().optional(),
@@ -305,6 +309,10 @@ const ProviderInfo = () => {
       inPersonCompanionWork: false,
       hasValidPassport: false,
       dailyCompanionFee: "",
+      worksNationally: false,
+      worksInternationally: false,
+      languagesSpoken: [],
+      otherLanguages: "",
       awakeStaff247: false,
       residentsExpectedToWork: false,
       jobAssistanceProvided: false,
@@ -456,6 +464,17 @@ const ProviderInfo = () => {
           in_person_companion_work: data.inPersonCompanionWork || null,
           has_valid_passport: data.hasValidPassport || null,
           daily_companion_fee: data.dailyCompanionFee || null,
+          works_nationally: data.worksNationally || null,
+          works_internationally: data.worksInternationally || null,
+          languages_spoken: (() => {
+            let languages = data.languagesSpoken ? [...data.languagesSpoken] : [];
+            if (data.languagesSpoken?.includes("Other") && data.otherLanguages) {
+              const customLanguages = data.otherLanguages.split(',').map(l => l.trim()).filter(l => l.length > 0);
+              languages = languages.filter(l => l !== "Other");
+              languages = [...languages, ...customLanguages];
+            }
+            return languages.length > 0 ? languages : null;
+          })(),
           awake_staff_24_7: data.awakeStaff247 || null,
           residents_expected_to_work: data.residentsExpectedToWork || null,
           job_assistance_provided: data.jobAssistanceProvided || null,
@@ -850,6 +869,117 @@ const ProviderInfo = () => {
                 />
               )}
 
+              {form.watch("category") === "Interventionists" && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="worksNationally"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Do you work nationally?</FormLabel>
+                          <FormDescription>Check if you provide intervention services throughout the United States</FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="worksInternationally"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Do you work internationally?</FormLabel>
+                          <FormDescription>Check if you provide intervention services outside the United States</FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="languagesSpoken"
+                    render={() => (
+                      <FormItem>
+                        <div className="mb-4">
+                          <FormLabel className="text-base">What languages do you speak other than English?</FormLabel>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Other"].map((language) => (
+                            <FormField
+                              key={language}
+                              control={form.control}
+                              name="languagesSpoken"
+                              render={({ field }) => {
+                                const value = field.value || [];
+                                return (
+                                  <FormItem
+                                    key={language}
+                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={value.includes(language)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([...value, language])
+                                            : field.onChange(
+                                                value.filter(
+                                                  (val) => val !== language
+                                                )
+                                              )
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">
+                                      {language}
+                                    </FormLabel>
+                                  </FormItem>
+                                )
+                              }}
+                            />
+                          ))}
+                        </div>
+                        {form.watch("languagesSpoken")?.includes("Other") && (
+                          <FormField
+                            control={form.control}
+                            name="otherLanguages"
+                            render={({ field }) => (
+                              <FormItem className="mt-3">
+                                <FormControl>
+                                  <Input
+                                    type="text"
+                                    placeholder="Enter other languages, separated by commas"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormDescription>
+                                  List any additional languages you speak, separated by commas
+                                </FormDescription>
+                              </FormItem>
+                            )}
+                          />
+                        )}
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
+              )}
+
               {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists", "Medical Detox"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
@@ -1118,6 +1248,75 @@ const ProviderInfo = () => {
                       />
                     </>
                   )}
+
+                  <FormField
+                    control={form.control}
+                    name="languagesSpoken"
+                    render={() => (
+                      <FormItem>
+                        <div className="mb-4">
+                          <FormLabel className="text-base">What languages do you speak other than English?</FormLabel>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                          {["Spanish", "French", "German", "Portuguese", "Italian", "Mandarin", "Cantonese", "Japanese", "Korean", "Arabic", "Russian", "Hindi", "Vietnamese", "Tagalog", "Other"].map((language) => (
+                            <FormField
+                              key={language}
+                              control={form.control}
+                              name="languagesSpoken"
+                              render={({ field }) => {
+                                const value = field.value || [];
+                                return (
+                                  <FormItem
+                                    key={language}
+                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={value.includes(language)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([...value, language])
+                                            : field.onChange(
+                                                value.filter(
+                                                  (val) => val !== language
+                                                )
+                                              )
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">
+                                      {language}
+                                    </FormLabel>
+                                  </FormItem>
+                                )
+                              }}
+                            />
+                          ))}
+                        </div>
+                        {form.watch("languagesSpoken")?.includes("Other") && (
+                          <FormField
+                            control={form.control}
+                            name="otherLanguages"
+                            render={({ field }) => (
+                              <FormItem className="mt-3">
+                                <FormControl>
+                                  <Input
+                                    type="text"
+                                    placeholder="Enter other languages, separated by commas"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormDescription>
+                                  List any additional languages you speak, separated by commas
+                                </FormDescription>
+                              </FormItem>
+                            )}
+                          />
+                        )}
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </>
               )}
 

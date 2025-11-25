@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +26,9 @@ interface Provider {
   cost?: string | null;
   intervention_modalities?: string[] | null;
   travel_expenses_included?: boolean | null;
+  works_nationally?: boolean | null;
+  works_internationally?: boolean | null;
+  languages_spoken?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -33,6 +36,8 @@ interface ProviderCardProps {
 }
 
 const ProviderCard = ({ provider }: ProviderCardProps) => {
+  const isInterventionistOrCoach = provider.category === "Interventionists" || provider.category === "Sober Coaches/Companions";
+
   return (
     <Card className="hover:shadow-lg transition-shadow">
       <CardContent className="p-6">
@@ -81,7 +86,32 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       )}
                     </>
                   )}
+                  {/* National/International badges for Interventionists */}
+                  {provider.category === "Interventionists" && provider.works_nationally && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Globe2 className="w-3 h-3" />
+                      Works Nationally
+                    </Badge>
+                  )}
+                  {provider.category === "Interventionists" && provider.works_internationally && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Globe2 className="w-3 h-3" />
+                      Works Internationally
+                    </Badge>
+                  )}
                 </div>
+
+                {/* Language badges for Interventionists and Sober Coaches */}
+                {isInterventionistOrCoach && provider.languages_spoken && provider.languages_spoken.length > 0 && (
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <Languages className="w-4 h-4 text-muted-foreground" />
+                    {provider.languages_spoken.map((language, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {language}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
                 
                 {provider.city && provider.state && (
                   <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
@@ -181,6 +211,34 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                         ✓ Travel Expenses Included
                       </Badge>
                     )}
+
+                    {/* Show languages in expanded section too */}
+                    {provider.languages_spoken && provider.languages_spoken.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-sm mb-2">Languages Spoken</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {provider.languages_spoken.map((language, idx) => (
+                            <Badge key={idx} variant="outline" className="text-xs">
+                              {language}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Sober Coaches specific - show languages in expanded section */}
+                {provider.category === "Sober Coaches/Companions" && provider.languages_spoken && provider.languages_spoken.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Languages Spoken</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {provider.languages_spoken.map((language, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs">
+                          {language}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
