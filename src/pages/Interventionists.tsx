@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import { useToast } from "@/hooks/use-toast";
+import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 
 interface Provider {
   id: string;
@@ -24,10 +25,12 @@ const Interventionists = () => {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showingNearby, setShowingNearby] = useState(false);
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
     setLoading(true);
+    setShowingNearby(false);
     try {
       const { data, error } = await supabase
         .from("provider_submissions")
@@ -37,7 +40,13 @@ const Interventionists = () => {
         .eq("state", state);
 
       if (error) throw error;
-      setProviders(data || []);
+      
+      if (!data || data.length === 0) {
+        // Fetch nearby providers if none found in selected state
+        await fetchNearbyProviders(state);
+      } else {
+        setProviders(data);
+      }
     } catch (error) {
       console.error("Error fetching providers:", error);
       toast({
@@ -47,6 +56,51 @@ const Interventionists = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchNearbyProviders = async (selectedStateName: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("provider_submissions")
+        .select("*")
+        .eq("category", "Interventionists")
+        .eq("status", "approved")
+        .not("state", "eq", selectedStateName);
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        // Calculate distances and sort
+        const selectedStateCoords = stateCoordinates[selectedStateName];
+        if (!selectedStateCoords) {
+          setProviders([]);
+          return;
+        }
+
+        const providersWithDistance = data
+          .filter(provider => provider.state && stateCoordinates[provider.state])
+          .map(provider => {
+            const providerStateCoords = stateCoordinates[provider.state!];
+            const distance = calculateDistance(
+              selectedStateCoords.lat,
+              selectedStateCoords.lng,
+              providerStateCoords.lat,
+              providerStateCoords.lng
+            );
+            return { ...provider, distance };
+          })
+          .sort((a, b) => a.distance - b.distance)
+          .slice(0, 3);
+
+        setProviders(providersWithDistance);
+        setShowingNearby(true);
+      } else {
+        setProviders([]);
+      }
+    } catch (error) {
+      console.error("Error fetching nearby providers:", error);
+      setProviders([]);
     }
   };
 
@@ -85,8 +139,15 @@ const Interventionists = () => {
         {selectedState && (
           <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
-              Interventionists in {selectedState}
+              {showingNearby 
+                ? `Nearest Interventionists to ${selectedState}` 
+                : `Interventionists in ${selectedState}`}
             </h3>
+            {showingNearby && (
+              <p className="text-muted-foreground mb-4">
+                No providers found in {selectedState}. Showing the 3 geographically closest providers.
+              </p>
+            )}
             {loading ? (
               <p className="text-muted-foreground text-center">Loading providers...</p>
             ) : providers.length > 0 ? (
@@ -97,7 +158,7 @@ const Interventionists = () => {
               </div>
             ) : (
               <p className="text-muted-foreground text-center">
-                No approved providers found in {selectedState}.
+                No approved providers found.
               </p>
             )}
           </div>
