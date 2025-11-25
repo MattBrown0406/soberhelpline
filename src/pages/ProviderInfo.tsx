@@ -173,6 +173,7 @@ const providerFormSchema = z.object({
   lgbtSupportive: z.boolean().default(false),
   substanceUseDisorderExperience: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
+  marchmanActAssistance: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   itemsIncludedInCost: z.array(z.string()).optional(),
@@ -264,6 +265,7 @@ const ProviderInfo = () => {
       lgbtSupportive: false,
       substanceUseDisorderExperience: false,
       licenseCurrentGoodStanding: false,
+      marchmanActAssistance: false,
       descriptionOfServices: "",
       cost: "",
       itemsIncludedInCost: [],
@@ -401,6 +403,7 @@ const ProviderInfo = () => {
           lgbt_supportive: data.lgbtSupportive,
           substance_use_disorder_experience: data.substanceUseDisorderExperience || null,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
+          marchman_act_assistance: data.marchmanActAssistance || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           items_included_in_cost: data.itemsIncludedInCost || null,
@@ -1345,6 +1348,26 @@ const ProviderInfo = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you have experience working with individuals with substance use disorder?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Attorneys" && form.watch("state") === "Florida" && (
+                <FormField
+                  control={form.control}
+                  name="marchmanActAssistance"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Are you able to assist families with the Marchman Act process?</FormLabel>
                       </div>
                     </FormItem>
                   )}

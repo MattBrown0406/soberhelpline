@@ -48,6 +48,7 @@ export type Database = {
           logo_url: string | null
           mandatory_curfew: boolean | null
           mandatory_house_meetings: boolean | null
+          marchman_act_assistance: boolean | null
           medication_administration: string | null
           minimum_time_since_last_use: string | null
           phone_number: string
@@ -97,6 +98,7 @@ export type Database = {
           logo_url?: string | null
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
+          marchman_act_assistance?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number: string
@@ -146,6 +148,7 @@ export type Database = {
           logo_url?: string | null
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
+          marchman_act_assistance?: boolean | null
           medication_administration?: string | null
           minimum_time_since_last_use?: string | null
           phone_number?: string
