@@ -1472,53 +1472,55 @@ const ProviderInfo = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="itemsIncludedInCost"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4">
-                      <FormLabel className="text-base">Are the following items included in the cost?</FormLabel>
-                    </div>
-                    <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
-                      {["Food", "Transportation", "Therapeutic Support"].map((item) => (
-                        <FormField
-                          key={item}
-                          control={form.control}
-                          name="itemsIncludedInCost"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={item}
-                                className="flex flex-row items-start space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(item)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([...(field.value || []), item])
-                                        : field.onChange(
-                                            field.value?.filter(
-                                              (value) => value !== item
+              {!["Therapists", "Psychiatrists"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="itemsIncludedInCost"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Are the following items included in the cost?</FormLabel>
+                      </div>
+                      <div className="flex flex-col space-y-3 border rounded-lg p-4 bg-muted">
+                        {["Food", "Transportation", "Therapeutic Support"].map((item) => (
+                          <FormField
+                            key={item}
+                            control={form.control}
+                            name="itemsIncludedInCost"
+                            render={({ field }) => {
+                              return (
+                                <FormItem
+                                  key={item}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={field.value?.includes(item)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...(field.value || []), item])
+                                          : field.onChange(
+                                              field.value?.filter(
+                                                (value) => value !== item
+                                              )
                                             )
-                                          )
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {item}
-                                </FormLabel>
-                              </FormItem>
-                            )
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {item}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Sober Living"].includes(form.watch("category")) && (
                 <FormField
