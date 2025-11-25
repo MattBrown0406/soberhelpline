@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
+import CategoryNav from "@/components/CategoryNav";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import logo from "@/assets/logo.png";
@@ -178,12 +179,15 @@ const Psychiatrists = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-start mb-6">
-          <Link to="/">
-            <Button variant="ghost" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
+          <div className="flex flex-col gap-2">
+            <Link to="/">
+              <Button variant="ghost" className="gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Button>
+            </Link>
+            <CategoryNav />
+          </div>
           <div className="flex items-center gap-4">
             <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
