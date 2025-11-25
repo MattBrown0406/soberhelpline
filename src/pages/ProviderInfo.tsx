@@ -1454,7 +1454,13 @@ const ProviderInfo = () => {
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
                         <Input 
                           type="number" 
-                          placeholder={form.watch("category") === "Interventionists" ? "cost per intervention" : "cost per month"}
+                          placeholder={
+                            form.watch("category") === "Interventionists" 
+                              ? "cost per intervention" 
+                              : ["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
+                              ? "cost per session/meeting"
+                              : "cost per month"
+                          }
                           className="pl-7"
                           {...field} 
                         />
