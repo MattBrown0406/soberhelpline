@@ -40,6 +40,7 @@ const insuranceProviders = [
   "Friday Health Plans",
   "Moda",
   "Pacific Source",
+  "Other",
 ];
 
 interface Provider {
@@ -62,6 +63,7 @@ const InpatientTreatment = () => {
   const [showingNearby, setShowingNearby] = useState(false);
   const [zipCodeSearch, setZipCodeSearch] = useState("");
   const [insuranceSearch, setInsuranceSearch] = useState("All");
+  const [customInsurance, setCustomInsurance] = useState("");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -210,6 +212,16 @@ const InpatientTreatment = () => {
       return;
     }
 
+    // Validate custom insurance if "Other" is selected
+    if (insuranceSearch === "Other" && !customInsurance.trim()) {
+      toast({
+        title: "Insurance Provider Required",
+        description: "Please enter an insurance provider name",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     setShowingNearby(false);
     setSelectedState(null);
@@ -222,9 +234,10 @@ const InpatientTreatment = () => {
         .eq("status", "approved")
         .eq("zip_code", zipCodeSearch);
 
-      // Apply insurance filter if selected
+      // Apply insurance filter
+      const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
       if (insuranceSearch !== "All") {
-        query = query.contains("insurances_accepted", [insuranceSearch]);
+        query = query.contains("insurances_accepted", [searchInsurance]);
       }
 
       const { data, error } = await query;
@@ -234,9 +247,10 @@ const InpatientTreatment = () => {
       setProviders(data || []);
       
       if (!data || data.length === 0) {
+        const insuranceText = insuranceSearch === "Other" ? customInsurance : insuranceSearch;
         toast({
           title: "No providers found",
-          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceSearch}` : ""}`,
+          description: `No providers found in zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}`,
         });
       }
     } catch (error) {
@@ -315,6 +329,15 @@ const InpatientTreatment = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                {insuranceSearch === "Other" && (
+                  <Input
+                    type="text"
+                    placeholder="Enter insurance provider name"
+                    value={customInsurance}
+                    onChange={(e) => setCustomInsurance(e.target.value)}
+                    className="mt-2"
+                  />
+                )}
               </div>
             </div>
             
