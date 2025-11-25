@@ -1,6 +1,10 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Scale, Phone, UserCheck, LogIn } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 
@@ -16,6 +20,28 @@ const categories = [
 ];
 
 const Index = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -28,10 +54,24 @@ const Index = () => {
               Provider Application
             </Link>
           </div>
-          <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-            <Phone className="w-5 h-5" />
-            <span className="font-medium">(541) 241-5886</span>
-          </a>
+          <div className="flex items-center gap-4">
+            {user ? (
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </Button>
+              </Link>
+            )}
+            <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+              <Phone className="w-5 h-5" />
+              <span className="font-medium">(541) 241-5886</span>
+            </a>
+          </div>
         </div>
         <div className="text-center mb-12">
           <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-64 h-auto" />

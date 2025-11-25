@@ -14,6 +14,7 @@ import SoberLiving from "./pages/SoberLiving";
 import Therapists from "./pages/Therapists";
 import Psychiatrists from "./pages/Psychiatrists";
 import Attorneys from "./pages/Attorneys";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/therapists" element={<Therapists />} />
           <Route path="/psychiatrists" element={<Psychiatrists />} />
           <Route path="/attorneys" element={<Attorneys />} />
+          <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

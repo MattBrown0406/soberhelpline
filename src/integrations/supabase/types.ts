@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          phone_number: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          phone_number: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          phone_number?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       provider_submissions: {
         Row: {
           accepts_mat_residents: boolean | null
@@ -57,6 +87,7 @@ export type Database = {
           residents_expected_to_work: boolean | null
           state: string | null
           status: string | null
+          submitted_by: string | null
           substance_use_disorder_experience: boolean | null
           therapeutic_modalities: string[] | null
           total_treatment_beds: number | null
@@ -107,6 +138,7 @@ export type Database = {
           residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
+          submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
@@ -157,6 +189,7 @@ export type Database = {
           residents_expected_to_work?: boolean | null
           state?: string | null
           status?: string | null
+          submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
           total_treatment_beds?: number | null
