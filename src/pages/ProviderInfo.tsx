@@ -171,6 +171,7 @@ const providerFormSchema = z.object({
   houseMeetingsPerWeek: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
+  substanceUseDisorderExperience: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(500, "Description must be less than 500 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
@@ -261,6 +262,7 @@ const ProviderInfo = () => {
       houseMeetingsPerWeek: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
+      substanceUseDisorderExperience: false,
       licenseCurrentGoodStanding: false,
       descriptionOfServices: "",
       cost: "",
@@ -397,6 +399,7 @@ const ProviderInfo = () => {
           house_meetings_per_week: data.houseMeetingsPerWeek ? parseInt(data.houseMeetingsPerWeek) : null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
+          substance_use_disorder_experience: data.substanceUseDisorderExperience || null,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
@@ -1321,6 +1324,27 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>Is your license current and in good standing? *</FormLabel>
                         <FormDescription>Confirm that your professional license is active and in good standing</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {(form.watch("category") === "Therapists" ||
+                form.watch("category") === "Psychiatrists") && (
+                <FormField
+                  control={form.control}
+                  name="substanceUseDisorderExperience"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you have experience with working with substance use disorder?</FormLabel>
                       </div>
                     </FormItem>
                   )}
