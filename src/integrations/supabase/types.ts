@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       provider_submissions: {
         Row: {
+          accepts_mat_residents: boolean | null
           address: string | null
           awake_staff_24_7: boolean | null
           case_management_services: boolean | null
@@ -42,6 +43,7 @@ export type Database = {
           lgbt_supportive: boolean | null
           license_current_good_standing: boolean | null
           logo_url: string | null
+          medication_administration: string | null
           phone_number: string
           provider_name: string
           residents_expected_to_work: boolean | null
@@ -55,6 +57,7 @@ export type Database = {
           zip_code: string | null
         }
         Insert: {
+          accepts_mat_residents?: boolean | null
           address?: string | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
@@ -81,6 +84,7 @@ export type Database = {
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
+          medication_administration?: string | null
           phone_number: string
           provider_name: string
           residents_expected_to_work?: boolean | null
@@ -94,6 +98,7 @@ export type Database = {
           zip_code?: string | null
         }
         Update: {
+          accepts_mat_residents?: boolean | null
           address?: string | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
@@ -120,6 +125,7 @@ export type Database = {
           lgbt_supportive?: boolean | null
           license_current_good_standing?: boolean | null
           logo_url?: string | null
+          medication_administration?: string | null
           phone_number?: string
           provider_name?: string
           residents_expected_to_work?: boolean | null

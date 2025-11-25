@@ -160,6 +160,8 @@ const providerFormSchema = z.object({
   awakeStaff247: z.boolean().optional(),
   residentsExpectedToWork: z.boolean().optional(),
   jobAssistanceProvided: z.boolean().optional(),
+  medicationAdministration: z.string().optional(),
+  acceptsMatResidents: z.boolean().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -241,6 +243,8 @@ const ProviderInfo = () => {
       awakeStaff247: false,
       residentsExpectedToWork: false,
       jobAssistanceProvided: false,
+      medicationAdministration: "",
+      acceptsMatResidents: false,
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       licenseCurrentGoodStanding: false,
@@ -368,6 +372,8 @@ const ProviderInfo = () => {
           awake_staff_24_7: data.awakeStaff247 || null,
           residents_expected_to_work: data.residentsExpectedToWork || null,
           job_assistance_provided: data.jobAssistanceProvided || null,
+          medication_administration: data.medicationAdministration || null,
+          accepts_mat_residents: data.acceptsMatResidents || null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1070,6 +1076,50 @@ const ProviderInfo = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you provide assistance with getting a job?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="medicationAdministration"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Do your residents administer their own medication or is it supervised?</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select medication administration" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Self-administered">Self-administered</SelectItem>
+                          <SelectItem value="Supervised">Supervised</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {form.watch("category") === "Sober Living" && (
+                <FormField
+                  control={form.control}
+                  name="acceptsMatResidents"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you accept residents that are currently on MAT?</FormLabel>
                       </div>
                     </FormItem>
                   )}
