@@ -279,7 +279,12 @@ const Interventionists = () => {
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <>
-            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
+            <ProviderFilters 
+              filters={filters} 
+              onFiltersChange={handleFiltersChange}
+              showInsurance={false}
+              showGenderSpecific={false}
+            />
             
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-semibold mb-4">
