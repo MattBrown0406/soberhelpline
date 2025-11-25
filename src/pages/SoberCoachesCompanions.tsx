@@ -10,6 +10,7 @@ import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
+import logo from "@/assets/logo.png";
 
 interface Provider {
   id: string;
@@ -158,12 +159,15 @@ const SoberCoachesCompanions = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        <Link to="/">
-          <Button variant="ghost" className="mb-6 gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-        </Link>
+        <div className="flex justify-between items-start mb-6">
+          <Link to="/">
+            <Button variant="ghost" className="gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </Button>
+          </Link>
+          <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
+        </div>
 
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
