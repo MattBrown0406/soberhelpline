@@ -601,6 +601,28 @@ const ProviderInfo = () => {
                   </FormItem>
                 )}
               />
+
+              {form.watch("category") === "Medical Detox" && (
+                <FormField
+                  control={form.control}
+                  name="detoxOnlyServices"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you provide detox only services without a commitment for ongoing treatment?</FormLabel>
+                        <FormDescription>Check yes if you only provide detox services</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
               <FormField
                 control={form.control}
                 name="providerName"
@@ -631,30 +653,6 @@ const ProviderInfo = () => {
                         <FormLabel>Are you a CIP?</FormLabel>
                         <FormDescription>Check if you are a Certified Intervention Professional</FormDescription>
                       </div>
-                    </FormItem>
-                  )}
-                />
-              )}
-
-              {form.watch("category") === "Medical Detox" && (
-                <FormField
-                  control={form.control}
-                  name="detoxOnlyServices"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Do you provide detox only services? *</FormLabel>
-                      <Select onValueChange={(value) => field.onChange(value === "yes")} defaultValue={field.value ? "yes" : "no"}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select an option" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-popover z-50">
-                          <SelectItem value="yes">Yes</SelectItem>
-                          <SelectItem value="no">No</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
                     </FormItem>
                   )}
                 />

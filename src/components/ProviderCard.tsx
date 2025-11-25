@@ -20,6 +20,7 @@ interface Provider {
   description_of_services: string | null;
   logo_url: string | null;
   cip_certified?: boolean | null;
+  detox_only_services?: boolean | null;
   category?: string;
   cost?: string | null;
   intervention_modalities?: string[] | null;
@@ -50,12 +51,17 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
               
               {/* Middle section: Main info */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <h3 className="text-xl font-semibold">{provider.provider_name}</h3>
                   {provider.cip_certified && (
                     <Badge variant="default" className="gap-1 bg-primary text-primary-foreground">
                       <Award className="w-3 h-3" />
                       CIP Certified
+                    </Badge>
+                  )}
+                  {provider.category === "Medical Detox" && provider.detox_only_services && (
+                    <Badge variant="secondary" className="gap-1">
+                      Detox Only
                     </Badge>
                   )}
                 </div>
