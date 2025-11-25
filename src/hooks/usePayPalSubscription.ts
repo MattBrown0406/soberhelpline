@@ -6,13 +6,14 @@ interface CreateSubscriptionParams {
   planType: 'monthly' | 'annual';
   amount: string;
   providerSubmissionId?: string;
+  discountCode?: string;
 }
 
 export function usePayPalSubscription() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const createSubscription = async ({ planType, amount, providerSubmissionId }: CreateSubscriptionParams) => {
+  const createSubscription = async ({ planType, amount, providerSubmissionId, discountCode }: CreateSubscriptionParams) => {
     setIsLoading(true);
     
     try {
@@ -32,6 +33,7 @@ export function usePayPalSubscription() {
           amount,
           userId: user.id,
           providerSubmissionId,
+          discountCode,
           returnUrl,
           cancelUrl,
         },
