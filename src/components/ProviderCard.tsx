@@ -41,6 +41,7 @@ interface Provider {
   tiktok_url?: string | null;
   instagram_url?: string | null;
   facebook_url?: string | null;
+  gender_specific_treatment?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -95,6 +96,16 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       )}
                       {provider.length_of_services.includes("More than 90 days") && (
                         <Badge variant="outline" className="text-xs">&gt;90 Day</Badge>
+                      )}
+                    </>
+                  )}
+                  {provider.category === "Inpatient Treatment" && provider.gender_specific_treatment && provider.gender_specific_treatment.length > 0 && (
+                    <>
+                      {provider.gender_specific_treatment.includes("Men") && (
+                        <Badge variant="secondary" className="text-xs">Men Only</Badge>
+                      )}
+                      {provider.gender_specific_treatment.includes("Women") && (
+                        <Badge variant="secondary" className="text-xs">Women Only</Badge>
                       )}
                     </>
                   )}
