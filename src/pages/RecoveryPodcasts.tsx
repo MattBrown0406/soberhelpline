@@ -36,7 +36,7 @@ const podcasts = [
     accentColor: "bg-cyan-500",
   },
   {
-    name: "Recovery Podcast",
+    name: "When God Intervenes",
     description: "Stories and insights from the recovery community to inspire and support your journey.",
     host: "Darryl Rodgers",
     rssFeed: "https://anchor.fm/s/fccf0970/podcast/rss",
