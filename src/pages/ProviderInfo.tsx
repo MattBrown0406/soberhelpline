@@ -350,28 +350,36 @@ const ProviderInfo = () => {
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
-    // Force a session refresh to ensure the auth token is current and attached to the client
-    const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
+    // Get the current session first
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
     
-    if (refreshError || !refreshData.session?.user) {
-      // If refresh fails, try getting existing session
-      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    let authenticatedUserId: string | null = null;
+    
+    if (sessionData?.session?.user) {
+      authenticatedUserId = sessionData.session.user.id;
+    } else {
+      // Try to refresh the session if getSession didn't return one
+      const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
       
-      if (sessionError || !sessionData.session?.user) {
-        toast({
-          title: "Authentication required",
-          description: "Your session has expired. Please log in again.",
-          variant: "destructive",
-        });
-        navigate("/auth");
-        return;
+      if (refreshData?.session?.user) {
+        authenticatedUserId = refreshData.session.user.id;
       }
     }
-
-    // Get the current user after refresh
-    const { data: { user: currentUser } } = await supabase.auth.getUser();
     
-    if (!currentUser) {
+    if (!authenticatedUserId) {
+      toast({
+        title: "Authentication required",
+        description: "Your session has expired. Please log in again.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    // Double-check with getUser to ensure token is valid
+    const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !currentUser || currentUser.id !== authenticatedUserId) {
       toast({
         title: "Authentication required",
         description: "Unable to verify your identity. Please log in again.",
@@ -380,8 +388,6 @@ const ProviderInfo = () => {
       navigate("/auth");
       return;
     }
-
-    const authenticatedUserId = currentUser.id;
 
     setIsSubmitting(true);
     try {
