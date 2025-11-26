@@ -38,7 +38,7 @@ const podcasts = [
   {
     name: "Recovery Podcast",
     description: "Stories and insights from the recovery community to inspire and support your journey.",
-    host: "Recovery Community",
+    host: "Darryl Rodgers",
     rssFeed: "https://anchor.fm/s/fccf0970/podcast/rss",
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
     accentColor: "bg-emerald-500",
