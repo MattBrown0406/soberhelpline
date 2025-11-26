@@ -224,6 +224,25 @@ export function EditSubmissionDialog({
               </div>
             )}
 
+            {/* Recovery Fellowships - for Inpatient, Outpatient, Sober Living, Sober Coaches */}
+            {["Inpatient Treatment", "Outpatient Treatment", "Sober Living", "Sober Coaches/Companions"].includes(editedSubmission.category) && (
+              <div className="space-y-4 border-t pt-4">
+                <h3 className="font-semibold text-lg">Recovery Fellowships</h3>
+                <div className="grid grid-cols-2 gap-2 border rounded-lg p-3 bg-muted">
+                  {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Al-Anon / Nar-Anon", "Other"].map((fellowship) => (
+                    <div key={fellowship} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`fellowship_${fellowship}`}
+                        checked={(editedSubmission.recovery_fellowships || []).includes(fellowship)}
+                        onCheckedChange={() => toggleArrayItem("recovery_fellowships", fellowship)}
+                      />
+                      <Label htmlFor={`fellowship_${fellowship}`} className="text-sm">{fellowship}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Interventionist-Specific Fields */}
             {editedSubmission.category === "Interventionists" && (
               <div className="space-y-4 border-t pt-4">

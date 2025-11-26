@@ -86,6 +86,7 @@ export type Database = {
           minimum_time_since_last_use: string | null
           phone_number: string
           provider_name: string
+          recovery_fellowships: string[] | null
           required_meetings_per_week: string | null
           residents_expected_to_work: boolean | null
           state: string | null
@@ -143,6 +144,7 @@ export type Database = {
           minimum_time_since_last_use?: string | null
           phone_number: string
           provider_name: string
+          recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
           residents_expected_to_work?: boolean | null
           state?: string | null
@@ -200,6 +202,7 @@ export type Database = {
           minimum_time_since_last_use?: string | null
           phone_number?: string
           provider_name?: string
+          recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
           residents_expected_to_work?: boolean | null
           state?: string | null

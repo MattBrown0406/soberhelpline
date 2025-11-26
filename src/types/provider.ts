@@ -65,4 +65,7 @@ export type ProviderSubmission = {
   
   // Attorney-specific fields
   legal_assistance_types: string[] | null;
+  
+  // Recovery fellowships (shared across multiple categories)
+  recovery_fellowships: string[] | null;
 };
