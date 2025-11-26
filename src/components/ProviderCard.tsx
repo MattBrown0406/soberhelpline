@@ -29,6 +29,7 @@ interface Provider {
   works_nationally?: boolean | null;
   works_internationally?: boolean | null;
   languages_spoken?: string[] | null;
+  recovery_fellowships?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -236,6 +237,21 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       {provider.languages_spoken.map((language, idx) => (
                         <Badge key={idx} variant="outline" className="text-xs">
                           {language}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Recovery Fellowships - for Inpatient, Outpatient, Sober Living, Sober Coaches */}
+                {["Inpatient Treatment", "Outpatient Treatment", "Sober Living", "Sober Coaches/Companions"].includes(provider.category || "") && 
+                  provider.recovery_fellowships && provider.recovery_fellowships.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Recovery Fellowships Available</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {provider.recovery_fellowships.map((fellowship, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {fellowship}
                         </Badge>
                       ))}
                     </div>
