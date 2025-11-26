@@ -34,6 +34,22 @@ const insuranceProviders = [
   "Pacific Source",
 ];
 
+const therapeuticModalities = [
+  "All",
+  "CBT",
+  "DBT",
+  "EMDR",
+  "Motivational Interviewing",
+  "Psychodynamic Therapy",
+  "Family Therapy",
+  "Group Therapy",
+  "Individual Therapy",
+  "IFS (Internal Family Systems)",
+  "Equine Therapy",
+  "Somatic and Experiential Therapy",
+  "Mindfulness Based Therapy",
+];
+
 interface ProviderFiltersProps {
   filters: {
     insurance: string;
@@ -41,11 +57,13 @@ interface ProviderFiltersProps {
     zipCode: string;
     genderSpecific: string[];
     lgbtSupportive: boolean;
+    therapeuticModality?: string;
   };
   onFiltersChange: (filters: any) => void;
   showInsurance?: boolean;
   showGenderSpecific?: boolean;
   showBudget?: boolean;
+  showTherapeuticModality?: boolean;
 }
 
 const ProviderFilters = ({ 
@@ -54,6 +72,7 @@ const ProviderFilters = ({
   showInsurance = true,
   showGenderSpecific = true,
   showBudget = true,
+  showTherapeuticModality = false,
 }: ProviderFiltersProps) => {
   return (
     <Card className="p-6 mb-8">
@@ -117,6 +136,30 @@ const ProviderFilters = ({
             maxLength={10}
           />
         </div>
+
+        {/* Therapeutic Modality */}
+        {showTherapeuticModality && (
+          <div className="space-y-2">
+            <Label htmlFor="modality">Therapeutic Modality</Label>
+            <Select
+              value={filters.therapeuticModality || "All"}
+              onValueChange={(value) =>
+                onFiltersChange({ ...filters, therapeuticModality: value })
+              }
+            >
+              <SelectTrigger id="modality" className="bg-background">
+                <SelectValue placeholder="Select modality" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover z-50 max-h-60">
+                {therapeuticModalities.map((modality) => (
+                  <SelectItem key={modality} value={modality}>
+                    {modality}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       {/* Gender Specific Care */}
