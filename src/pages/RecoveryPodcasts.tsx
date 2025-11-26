@@ -126,19 +126,19 @@ const RecoveryPodcasts = () => {
             <img src={logo} alt="Sober Helpline" className="h-16 w-auto" />
           </div>
 
-          <div className="text-center py-12">
-            <div className="inline-flex items-center justify-center gap-3 mb-6 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full">
+        <div className="text-center py-6">
+            <div className="inline-flex items-center justify-center gap-3 mb-4 bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full">
               <Radio className="w-6 h-6 text-pink-400 animate-pulse" />
               <span className="text-pink-300 font-medium">Now Streaming</span>
             </div>
             
-            <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl shadow-2xl shadow-purple-500/30">
                 <Headphones className="w-12 h-12 text-white" />
               </div>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
               Recovery Podcasts
             </h1>
             <p className="text-xl text-purple-200 max-w-2xl mx-auto leading-relaxed">
