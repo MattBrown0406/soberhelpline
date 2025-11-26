@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import partyWreckersLogo from "@/assets/party-wreckers-logo.png";
 import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
+import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
 import logo from "@/assets/logo.png";
 
 interface Episode {
@@ -33,6 +34,7 @@ const podcasts = [
     host: "Sam Davis",
     link: "https://manroadmedia.com/",
     rssFeed: "https://feed.podbean.com/Manroadmedia/feed.xml",
+    logo: unbrokenPodcastLogo,
     gradient: "from-cyan-500 via-blue-500 to-purple-600",
     accentColor: "bg-cyan-500",
   },
