@@ -182,6 +182,7 @@ const providerFormSchema = z.object({
   substanceUseDisorderExperience: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
   legalAssistanceTypes: z.array(z.string()).optional(),
+  recoveryFellowships: z.array(z.string()).optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(750, "Description must be less than 750 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   travelExpensesIncluded: z.boolean().optional(),
@@ -330,6 +331,7 @@ const ProviderInfo = () => {
       substanceUseDisorderExperience: false,
       licenseCurrentGoodStanding: false,
       legalAssistanceTypes: [],
+      recoveryFellowships: [],
       descriptionOfServices: "",
       cost: "",
       travelExpensesIncluded: false,
@@ -515,6 +517,7 @@ const ProviderInfo = () => {
           substance_use_disorder_experience: data.substanceUseDisorderExperience || null,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
           legal_assistance_types: data.legalAssistanceTypes || null,
+          recovery_fellowships: data.recoveryFellowships && data.recoveryFellowships.length > 0 ? data.recoveryFellowships : null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           travel_expenses_included: data.travelExpensesIncluded || null,
@@ -1826,6 +1829,57 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you provide case management services?</FormLabel>
                       </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {["Inpatient Treatment", "Outpatient Treatment", "Sober Living", "Sober Coaches/Companions"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="recoveryFellowships"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Which of the following recovery fellowships do you make available to your clients?</FormLabel>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
+                        {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Al-Anon / Nar-Anon", "Other"].map((fellowship) => (
+                          <FormField
+                            key={fellowship}
+                            control={form.control}
+                            name="recoveryFellowships"
+                            render={({ field }) => {
+                              const value = field.value || [];
+                              return (
+                                <FormItem
+                                  key={fellowship}
+                                  className="flex flex-row items-start space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <Checkbox
+                                      checked={value.includes(fellowship)}
+                                      onCheckedChange={(checked) => {
+                                        return checked
+                                          ? field.onChange([...value, fellowship])
+                                          : field.onChange(
+                                              value.filter(
+                                                (val) => val !== fellowship
+                                              )
+                                            )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {fellowship}
+                                  </FormLabel>
+                                </FormItem>
+                              )
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
