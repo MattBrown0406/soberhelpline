@@ -63,6 +63,9 @@ export type ProviderSubmission = {
   license_current_good_standing: boolean | null;
   substance_use_disorder_experience: boolean | null;
   
+  // Telehealth (Outpatient, Therapists, Psychiatrists)
+  telehealth_available: boolean | null;
+  
   // Attorney-specific fields
   legal_assistance_types: string[] | null;
   

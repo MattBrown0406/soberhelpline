@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -42,6 +42,7 @@ interface Provider {
   instagram_url?: string | null;
   facebook_url?: string | null;
   gender_specific_treatment?: string[] | null;
+  telehealth_available?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -130,6 +131,15 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <Badge variant="secondary" className="gap-1">
                       <Globe2 className="w-3 h-3" />
                       Works Internationally
+                    </Badge>
+                  )}
+                  {/* Telehealth badge for Outpatient, Therapists, Psychiatrists */}
+                  {(provider.category === "Outpatient Treatment" || 
+                    provider.category === "Therapists" || 
+                    provider.category === "Psychiatrists") && provider.telehealth_available && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Video className="w-3 h-3" />
+                      Telehealth Provider
                     </Badge>
                   )}
                 </div>
