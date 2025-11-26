@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import partyWreckersLogo from "@/assets/party-wreckers-logo.png";
+import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
 import logo from "@/assets/logo.png";
 
 interface Episode {
@@ -40,6 +41,7 @@ const podcasts = [
     description: "Stories and insights from the recovery community to inspire and support your journey.",
     host: "Darryl Rodgers",
     rssFeed: "https://anchor.fm/s/fccf0970/podcast/rss",
+    logo: whenGodIntervenesLogo,
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
     accentColor: "bg-emerald-500",
   },
