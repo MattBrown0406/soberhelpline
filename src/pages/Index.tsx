@@ -8,6 +8,7 @@ import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
+import MobileNav from "@/components/MobileNav";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -45,8 +46,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-4">
+      <div className="container mx-auto px-4 py-4 md:py-8">
+        {/* Mobile Header */}
+        <div className="flex md:hidden justify-between items-center mb-4">
+          <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+            <Phone className="w-5 h-5" />
+            <span className="font-medium text-sm">(541) 241-5886</span>
+          </a>
+          <MobileNav user={user} onLogout={handleLogout} />
+        </div>
+
+        {/* Desktop Header */}
+        <div className="hidden md:flex justify-between items-center mb-4">
           <div className="flex items-center gap-4">
             <Link to="/recovery-podcasts">
               <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
@@ -83,26 +94,26 @@ const Index = () => {
             </a>
           </div>
         </div>
-        <div className="text-center mb-12">
-          <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-64 h-auto" />
-          <h2 className="text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
-          <p className="text-lg text-muted-foreground">
+        <div className="text-center mb-8 md:mb-12">
+          <img src={logo} alt="Sober Helpline" className="mx-auto mb-4 md:mb-6 w-48 md:w-64 h-auto" />
+          <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
+          <p className="text-base md:text-lg text-muted-foreground px-2">
             We help families find ethical, proven treatment and recovery resources nationwide and beyond.
           </p>
         </div>
 
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-foreground mb-6 text-center">Browse by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-center">
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4 md:mb-6 text-center">Browse by Category</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4 justify-center">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
                 <Link key={category.name} to={category.path}>
                   <Card
-                    className="p-4 h-[120px] w-full hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-3 bg-card hover:bg-accent"
+                    className="p-3 md:p-4 h-[100px] md:h-[120px] w-full hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
                   >
-                    <Icon className="w-8 h-8 text-primary" />
-                    <span className="text-sm font-medium text-foreground leading-tight">
+                    <Icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                    <span className="text-xs md:text-sm font-medium text-foreground leading-tight">
                       {category.name}
                     </span>
                   </Card>
@@ -112,27 +123,27 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
           <img src={familyHero} alt="Family together in recovery" className="w-full rounded-lg shadow-lg object-cover" width={636} height={636} fetchPriority="high" />
-          <div className="space-y-4 bg-black rounded-lg shadow-lg p-8 flex flex-col justify-center">
-            <h2 className="text-3xl font-bold text-white text-center">Our Mission</h2>
-            <p className="text-gray-200 leading-relaxed">
+          <div className="space-y-3 md:space-y-4 bg-black rounded-lg shadow-lg p-5 md:p-8 flex flex-col justify-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Our Mission</h2>
+            <p className="text-gray-200 leading-relaxed text-sm md:text-base">
               At Sober Helpline, we are dedicated to providing the families of addicted loved ones with ethical and proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria in order to be included on this site.
             </p>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-gray-200 leading-relaxed text-sm md:text-base">
               This site is free to use for those needing help. Sober Helpline receives a set monthly fee from listed providers to cover the cost of operations. <strong className="underline">We take no commissions or payments from treatment providers for clients that get referred by us.</strong> This is considered patient brokering and we will never promote programs or services that would do so.
             </p>
           </div>
         </div>
 
-        <div id="partnership" className="mt-12 bg-accent rounded-lg p-8 text-center max-w-4xl mx-auto scroll-mt-8">
-          <img src={iocLogo} alt="Intervention On Call" className="mx-auto mb-6 h-20 w-auto" />
-          <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
-          <p className="text-muted-foreground leading-relaxed mb-4">
+        <div id="partnership" className="mt-8 md:mt-12 bg-accent rounded-lg p-5 md:p-8 text-center max-w-4xl mx-auto scroll-mt-8">
+          <img src={iocLogo} alt="Intervention On Call" className="mx-auto mb-4 md:mb-6 h-16 md:h-20 w-auto" />
+          <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4">Partnership with Intervention On Call</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4 text-sm md:text-base">
             We have partnered with Intervention On Call to provide families with real time access to help for their addicted loved one. Intervention On Call provides hourly coaching sessions for families to get better educated on boundaries, strategies, help with choosing the right treatment center etc. Intervention On Call also provides FREE family support zoom calls 5 nights a week.
           </p>
           <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="font-semibold">
+            <Button size="default" className="font-semibold md:text-base">
               Register Here!
             </Button>
           </a>
