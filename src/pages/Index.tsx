@@ -113,7 +113,7 @@ const Index = () => {
         </div>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          <img src={familyHero} alt="Family together in recovery" className="w-full rounded-lg shadow-lg object-cover" />
+          <img src={familyHero} alt="Family together in recovery" className="w-full rounded-lg shadow-lg object-cover" width={636} height={636} fetchPriority="high" />
           <div className="space-y-4 bg-black rounded-lg shadow-lg p-8 flex flex-col justify-center">
             <h2 className="text-3xl font-bold text-white text-center">Our Mission</h2>
             <p className="text-gray-200 leading-relaxed">
