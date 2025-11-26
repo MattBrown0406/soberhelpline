@@ -1844,7 +1844,7 @@ const ProviderInfo = () => {
                         <FormLabel className="text-base">Which of the following recovery fellowships do you make available to your clients?</FormLabel>
                       </div>
                       <div className="grid grid-cols-2 gap-3 border rounded-lg p-4 bg-muted">
-                        {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Al-Anon / Nar-Anon", "Other"].map((fellowship) => (
+                        {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Other"].map((fellowship) => (
                           <FormField
                             key={fellowship}
                             control={form.control}
