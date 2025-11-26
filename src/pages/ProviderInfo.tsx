@@ -340,20 +340,38 @@ const ProviderInfo = () => {
   });
 
   const onSubmit = async (data: ProviderFormValues) => {
-    // Re-verify session directly from Supabase to ensure auth is current
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    // Force a session refresh to ensure the auth token is current and attached to the client
+    const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
     
-    if (sessionError || !sessionData.session?.user) {
+    if (refreshError || !refreshData.session?.user) {
+      // If refresh fails, try getting existing session
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !sessionData.session?.user) {
+        toast({
+          title: "Authentication required",
+          description: "Your session has expired. Please log in again.",
+          variant: "destructive",
+        });
+        navigate("/auth");
+        return;
+      }
+    }
+
+    // Get the current user after refresh
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    
+    if (!currentUser) {
       toast({
         title: "Authentication required",
-        description: "Your session has expired. Please log in again.",
+        description: "Unable to verify your identity. Please log in again.",
         variant: "destructive",
       });
       navigate("/auth");
       return;
     }
 
-    const authenticatedUserId = sessionData.session.user.id;
+    const authenticatedUserId = currentUser.id;
 
     setIsSubmitting(true);
     try {
