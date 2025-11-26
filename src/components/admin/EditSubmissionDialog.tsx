@@ -529,6 +529,53 @@ export function EditSubmissionDialog({
                 </div>
               </div>
             )}
+
+            {/* Social Media Links - for all categories */}
+            <div className="space-y-4 border-t pt-4">
+              <h3 className="font-semibold text-lg">Social Media Links</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="youtube_url">YouTube URL</Label>
+                  <Input
+                    id="youtube_url"
+                    value={editedSubmission.youtube_url || ""}
+                    onChange={(e) => updateField("youtube_url", e.target.value)}
+                    placeholder="https://youtube.com/@channel"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="tiktok_url">TikTok URL</Label>
+                  <Input
+                    id="tiktok_url"
+                    value={editedSubmission.tiktok_url || ""}
+                    onChange={(e) => updateField("tiktok_url", e.target.value)}
+                    placeholder="https://tiktok.com/@username"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="instagram_url">Instagram URL</Label>
+                  <Input
+                    id="instagram_url"
+                    value={editedSubmission.instagram_url || ""}
+                    onChange={(e) => updateField("instagram_url", e.target.value)}
+                    placeholder="https://instagram.com/username"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="facebook_url">Facebook URL</Label>
+                  <Input
+                    id="facebook_url"
+                    value={editedSubmission.facebook_url || ""}
+                    onChange={(e) => updateField("facebook_url", e.target.value)}
+                    placeholder="https://facebook.com/page"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </ScrollArea>
         <DialogFooter>

@@ -63,6 +63,7 @@ export type Database = {
           detox_available: boolean | null
           detox_only_services: boolean | null
           email: string
+          facebook_url: string | null
           gender_specific_treatment: string[] | null
           has_valid_passport: boolean | null
           hourly_coaching_rate: string | null
@@ -70,6 +71,7 @@ export type Database = {
           house_meetings_per_week: number | null
           id: string
           in_person_companion_work: boolean | null
+          instagram_url: string | null
           insurances_accepted: string[] | null
           intervention_modalities: string[] | null
           items_included_in_cost: string[] | null
@@ -94,6 +96,7 @@ export type Database = {
           submitted_by: string | null
           substance_use_disorder_experience: boolean | null
           therapeutic_modalities: string[] | null
+          tiktok_url: string | null
           total_treatment_beds: number | null
           travel_expenses_included: boolean | null
           updated_at: string | null
@@ -101,6 +104,7 @@ export type Database = {
           works_internationally: boolean | null
           works_nationally: boolean | null
           year_started: number | null
+          youtube_url: string | null
           zip_code: string | null
         }
         Insert: {
@@ -121,6 +125,7 @@ export type Database = {
           detox_available?: boolean | null
           detox_only_services?: boolean | null
           email: string
+          facebook_url?: string | null
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
@@ -128,6 +133,7 @@ export type Database = {
           house_meetings_per_week?: number | null
           id?: string
           in_person_companion_work?: boolean | null
+          instagram_url?: string | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
@@ -152,6 +158,7 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
+          tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
           updated_at?: string | null
@@ -159,6 +166,7 @@ export type Database = {
           works_internationally?: boolean | null
           works_nationally?: boolean | null
           year_started?: number | null
+          youtube_url?: string | null
           zip_code?: string | null
         }
         Update: {
@@ -179,6 +187,7 @@ export type Database = {
           detox_available?: boolean | null
           detox_only_services?: boolean | null
           email?: string
+          facebook_url?: string | null
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
@@ -186,6 +195,7 @@ export type Database = {
           house_meetings_per_week?: number | null
           id?: string
           in_person_companion_work?: boolean | null
+          instagram_url?: string | null
           insurances_accepted?: string[] | null
           intervention_modalities?: string[] | null
           items_included_in_cost?: string[] | null
@@ -210,6 +220,7 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           therapeutic_modalities?: string[] | null
+          tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
           updated_at?: string | null
@@ -217,6 +228,7 @@ export type Database = {
           works_internationally?: boolean | null
           works_nationally?: boolean | null
           year_started?: number | null
+          youtube_url?: string | null
           zip_code?: string | null
         }
         Relationships: []
