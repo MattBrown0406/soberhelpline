@@ -47,6 +47,22 @@ const insuranceProviders = [
   "Other",
 ];
 
+const therapeuticModalities = [
+  "All",
+  "CBT (Cognitive Behavioral Therapy)",
+  "DBT (Dialectical Behavior Therapy)",
+  "EMDR",
+  "Equine Therapy",
+  "Family Therapy",
+  "Group Therapy",
+  "IFS (Internal Family Systems)",
+  "Individual Therapy",
+  "Mindfulness Based Therapy",
+  "Motivational Interviewing",
+  "Psychodynamic Therapy",
+  "Somatic and Experiential Therapy",
+];
+
 interface Provider {
   id: string;
   provider_name: string;
@@ -72,6 +88,7 @@ const OutpatientTreatment = () => {
   const [genderType, setGenderType] = useState("");
   const [lengthOfStay, setLengthOfStay] = useState("All");
   const [maxBudget, setMaxBudget] = useState("");
+  const [selectedModality, setSelectedModality] = useState("All");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -119,6 +136,11 @@ const OutpatientTreatment = () => {
         } else if (lengthOfStay === "longer than 90 days") {
           query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
         }
+      }
+
+      // Apply therapeutic modality filter
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
       }
 
       const { data, error } = await query;
@@ -171,6 +193,10 @@ const OutpatientTreatment = () => {
         } else if (lengthOfStay === "longer than 90 days") {
           query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
         }
+      }
+      // Apply therapeutic modality filter
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
       }
 
       const { data, error } = await query;
@@ -305,6 +331,11 @@ const OutpatientTreatment = () => {
         }
       }
 
+      // Apply therapeutic modality filter
+      if (selectedModality !== "All") {
+        query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+
       const { data, error } = await query;
 
       if (error) throw error;
@@ -394,8 +425,8 @@ const OutpatientTreatment = () => {
           </h2>
           <USMap onStateClick={handleStateClick} selectedState={selectedState} />
           
-          <div className="max-w-4xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="max-w-6xl mx-auto mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <Input
@@ -503,6 +534,25 @@ const OutpatientTreatment = () => {
                     <SelectItem value="60 days">60 days</SelectItem>
                     <SelectItem value="90 days">90 days</SelectItem>
                     <SelectItem value="longer than 90 days">Longer than 90 days</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="modalitySearch">Therapeutic Modality</Label>
+                <Select
+                  value={selectedModality}
+                  onValueChange={setSelectedModality}
+                >
+                  <SelectTrigger id="modalitySearch" className="bg-background">
+                    <SelectValue placeholder="Select modality" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50 max-h-60">
+                    {therapeuticModalities.map((modality) => (
+                      <SelectItem key={modality} value={modality}>
+                        {modality}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
