@@ -2121,7 +2121,7 @@ const ProviderInfo = () => {
 
 
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Submit Provider Information"}
+                {isSubmitting ? "Submitting..." : "Continue to Payment"}
               </Button>
             </form>
           </Form>
