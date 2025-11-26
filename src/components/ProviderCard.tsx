@@ -109,6 +109,16 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       )}
                     </>
                   )}
+                  {provider.category === "Sober Living" && provider.gender_specific_treatment && provider.gender_specific_treatment.length > 0 && (
+                    <>
+                      {provider.gender_specific_treatment.includes("Men") && (
+                        <Badge variant="secondary" className="text-xs">Men Only</Badge>
+                      )}
+                      {provider.gender_specific_treatment.includes("Women") && (
+                        <Badge variant="secondary" className="text-xs">Women Only</Badge>
+                      )}
+                    </>
+                  )}
                   {/* National/International badges for Interventionists */}
                   {provider.category === "Interventionists" && provider.works_nationally && (
                     <Badge variant="secondary" className="gap-1">
