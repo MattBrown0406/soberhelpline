@@ -81,7 +81,7 @@ const InpatientTreatment = () => {
   });
   const { toast } = useToast();
 
-  const fetchProviders = async (state: string) => {
+  const fetchProviders = async (state: string, currentFilters = filters) => {
     setLoading(true);
     setShowingNearby(false);
     try {
@@ -109,8 +109,8 @@ const InpatientTreatment = () => {
       }
 
       // Apply gender specific filter from ProviderFilters
-      if (filters.genderSpecific.length > 0) {
-        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
       }
 
       // Apply length of stay filter
@@ -131,7 +131,7 @@ const InpatientTreatment = () => {
       if (error) throw error;
       
       if (!data || data.length === 0) {
-        await fetchNearbyProviders(state);
+        await fetchNearbyProviders(state, currentFilters);
       } else {
         setProviders(data);
       }
@@ -147,7 +147,7 @@ const InpatientTreatment = () => {
     }
   };
 
-  const fetchNearbyProviders = async (selectedStateName: string) => {
+  const fetchNearbyProviders = async (selectedStateName: string, currentFilters = filters) => {
     try {
       let query = supabase
         .from("provider_submissions")
@@ -168,8 +168,8 @@ const InpatientTreatment = () => {
         query = query.contains("gender_specific_treatment", [genderType]);
       }
       // Apply gender specific filter from ProviderFilters
-      if (filters.genderSpecific.length > 0) {
-        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
       }
       if (lengthOfStay !== "All") {
         if (lengthOfStay === "30 days") {
@@ -228,7 +228,7 @@ const InpatientTreatment = () => {
   const handleFiltersChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
     if (selectedState) {
-      fetchProviders(selectedState);
+      fetchProviders(selectedState, newFilters);
     }
   };
 
