@@ -1,12 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+// TikTok icon component since lucide-react doesn't have one
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
 
 interface Provider {
   id: string;
@@ -30,6 +37,10 @@ interface Provider {
   works_internationally?: boolean | null;
   languages_spoken?: string[] | null;
   recovery_fellowships?: string[] | null;
+  youtube_url?: string | null;
+  tiktok_url?: string | null;
+  instagram_url?: string | null;
+  facebook_url?: string | null;
 }
 
 interface ProviderCardProps {
@@ -163,6 +174,56 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     >
                       Visit Website
                     </a>
+                  </div>
+                )}
+                
+                {/* Social Media Icons */}
+                {(provider.youtube_url || provider.tiktok_url || provider.instagram_url || provider.facebook_url) && (
+                  <div className="flex items-center gap-3 mt-2">
+                    {provider.youtube_url && (
+                      <a
+                        href={provider.youtube_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-red-600 transition-colors"
+                        title="YouTube"
+                      >
+                        <Youtube className="w-5 h-5" />
+                      </a>
+                    )}
+                    {provider.tiktok_url && (
+                      <a
+                        href={provider.tiktok_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                        title="TikTok"
+                      >
+                        <TikTokIcon className="w-5 h-5" />
+                      </a>
+                    )}
+                    {provider.instagram_url && (
+                      <a
+                        href={provider.instagram_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-pink-600 transition-colors"
+                        title="Instagram"
+                      >
+                        <Instagram className="w-5 h-5" />
+                      </a>
+                    )}
+                    {provider.facebook_url && (
+                      <a
+                        href={provider.facebook_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-blue-600 transition-colors"
+                        title="Facebook"
+                      >
+                        <Facebook className="w-5 h-5" />
+                      </a>
+                    )}
                   </div>
                 )}
                 

@@ -68,4 +68,10 @@ export type ProviderSubmission = {
   
   // Recovery fellowships (shared across multiple categories)
   recovery_fellowships: string[] | null;
+  
+  // Social media links
+  youtube_url: string | null;
+  tiktok_url: string | null;
+  instagram_url: string | null;
+  facebook_url: string | null;
 };
