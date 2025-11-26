@@ -35,6 +35,14 @@ const podcasts = [
     gradient: "from-cyan-500 via-blue-500 to-purple-600",
     accentColor: "bg-cyan-500",
   },
+  {
+    name: "Recovery Podcast",
+    description: "Stories and insights from the recovery community to inspire and support your journey.",
+    host: "Recovery Community",
+    rssFeed: "https://anchor.fm/s/fccf0970/podcast/rss",
+    gradient: "from-emerald-500 via-teal-500 to-cyan-600",
+    accentColor: "bg-emerald-500",
+  },
 ];
 
 const RecoveryPodcasts = () => {
