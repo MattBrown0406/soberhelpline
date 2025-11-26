@@ -221,6 +221,17 @@ export function EditSubmissionDialog({
                     onChange={(e) => updateField("length_of_services", e.target.value)}
                   />
                 </div>
+
+                {editedSubmission.category === "Outpatient Treatment" && (
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="telehealth_available_outpatient"
+                      checked={editedSubmission.telehealth_available || false}
+                      onCheckedChange={(checked) => updateField("telehealth_available", checked)}
+                    />
+                    <Label htmlFor="telehealth_available_outpatient">Telehealth Available</Label>
+                  </div>
+                )}
               </div>
             )}
 
@@ -526,6 +537,15 @@ export function EditSubmissionDialog({
                     />
                     <Label htmlFor="substance_use_disorder_experience">SUD Experience</Label>
                   </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="telehealth_available_clinical"
+                    checked={editedSubmission.telehealth_available || false}
+                    onCheckedChange={(checked) => updateField("telehealth_available", checked)}
+                  />
+                  <Label htmlFor="telehealth_available_clinical">Telehealth Available</Label>
                 </div>
               </div>
             )}

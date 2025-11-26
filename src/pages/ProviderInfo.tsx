@@ -180,6 +180,7 @@ const providerFormSchema = z.object({
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
   substanceUseDisorderExperience: z.boolean().optional(),
+  telehealthAvailable: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
   legalAssistanceTypes: z.array(z.string()).optional(),
   recoveryFellowships: z.array(z.string()).optional(),
@@ -333,6 +334,7 @@ const ProviderInfo = () => {
       genderSpecificTreatment: [],
       lgbtSupportive: false,
       substanceUseDisorderExperience: false,
+      telehealthAvailable: false,
       licenseCurrentGoodStanding: false,
       legalAssistanceTypes: [],
       recoveryFellowships: [],
@@ -529,6 +531,7 @@ const ProviderInfo = () => {
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
           substance_use_disorder_experience: data.substanceUseDisorderExperience || null,
+          telehealth_available: data.telehealthAvailable || null,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
           legal_assistance_types: data.legalAssistanceTypes || null,
           recovery_fellowships: data.recoveryFellowships && data.recoveryFellowships.length > 0 ? data.recoveryFellowships : null,
@@ -1817,6 +1820,28 @@ const ProviderInfo = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you have experience working with individuals with substance use disorder?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {(form.watch("category") === "Outpatient Treatment" ||
+                form.watch("category") === "Therapists" ||
+                form.watch("category") === "Psychiatrists") && (
+                <FormField
+                  control={form.control}
+                  name="telehealthAvailable"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you offer telehealth sessions?</FormLabel>
                       </div>
                     </FormItem>
                   )}
