@@ -133,8 +133,9 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       Works Internationally
                     </Badge>
                   )}
-                  {/* Telehealth badge for Outpatient, Therapists, Psychiatrists */}
+                  {/* Telehealth badge for Outpatient, Sober Coaches, Therapists, Psychiatrists */}
                   {(provider.category === "Outpatient Treatment" || 
+                    provider.category === "Sober Coaches/Companions" ||
                     provider.category === "Therapists" || 
                     provider.category === "Psychiatrists") && provider.telehealth_available && (
                     <Badge variant="secondary" className="gap-1">
