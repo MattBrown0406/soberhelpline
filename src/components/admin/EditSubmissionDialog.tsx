@@ -229,7 +229,7 @@ export function EditSubmissionDialog({
               <div className="space-y-4 border-t pt-4">
                 <h3 className="font-semibold text-lg">Recovery Fellowships</h3>
                 <div className="grid grid-cols-2 gap-2 border rounded-lg p-3 bg-muted">
-                  {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Al-Anon / Nar-Anon", "Other"].map((fellowship) => (
+                  {["Alcoholics Anonymous (AA)", "Narcotics Anonymous (NA)", "SMART Recovery", "Celebrate Recovery", "Refuge Recovery / Recovery Dharma", "Other"].map((fellowship) => (
                     <div key={fellowship} className="flex items-center space-x-2">
                       <Checkbox
                         id={`fellowship_${fellowship}`}
