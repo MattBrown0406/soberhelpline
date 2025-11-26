@@ -497,6 +497,15 @@ export function EditSubmissionDialog({
                   />
                 </div>
 
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="telehealth_available_coach"
+                    checked={editedSubmission.telehealth_available || false}
+                    onCheckedChange={(checked) => updateField("telehealth_available", checked)}
+                  />
+                  <Label htmlFor="telehealth_available_coach">Telehealth Available</Label>
+                </div>
+
                 <div>
                   <Label className="mb-2 block">Languages Spoken</Label>
                   <div className="grid grid-cols-3 gap-2 border rounded-lg p-3 bg-muted">

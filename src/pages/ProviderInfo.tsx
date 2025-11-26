@@ -1827,6 +1827,7 @@ const ProviderInfo = () => {
               )}
 
               {(form.watch("category") === "Outpatient Treatment" ||
+                form.watch("category") === "Sober Coaches/Companions" ||
                 form.watch("category") === "Therapists" ||
                 form.watch("category") === "Psychiatrists") && (
                 <FormField
