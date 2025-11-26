@@ -10,6 +10,7 @@ import USMap from "@/components/USMap";
 import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
+import CategoryMobileNav from "@/components/CategoryMobileNav";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
@@ -232,7 +233,23 @@ const Interventionists = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-start mb-4">
+        {/* Mobile Header */}
+        <div className="flex md:hidden justify-between items-center mb-4">
+          <Link to="/">
+            <Button variant="ghost" size="sm" className="gap-1 px-2">
+              <ArrowLeft className="w-4 h-4" />
+              Home
+            </Button>
+          </Link>
+          <a href="tel:5412415886" className="flex items-center gap-1 text-foreground hover:text-primary transition-colors">
+            <Phone className="w-4 h-4" />
+            <span className="font-medium text-sm">(541) 241-5886</span>
+          </a>
+          <CategoryMobileNav />
+        </div>
+
+        {/* Desktop Header */}
+        <div className="hidden md:flex justify-between items-start mb-4">
           <div className="flex flex-col gap-2">
             <Link to="/">
               <Button variant="ghost" className="gap-2">
@@ -251,12 +268,12 @@ const Interventionists = () => {
           </div>
         </div>
 
-        <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <Users className="w-10 h-10 text-primary" />
-            <h1 className="text-4xl font-bold text-foreground">Interventionists</h1>
+        <div className="text-center mb-4 md:mb-6">
+          <div className="flex items-center justify-center gap-2 md:gap-3 mb-2">
+            <Users className="w-8 h-8 md:w-10 md:h-10 text-primary" />
+            <h1 className="text-2xl md:text-4xl font-bold text-foreground">Interventionists</h1>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             A professional interventionist can help unite the support system behind the common goal of getting your loved one the help they need. They will help you choose the correct treatment experience. They will educate and guide your family to overcome the resistance you currently face from your loved one and create change.
           </p>
         </div>
