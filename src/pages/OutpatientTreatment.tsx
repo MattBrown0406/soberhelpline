@@ -95,10 +95,11 @@ const OutpatientTreatment = () => {
     zipCode: "",
     genderSpecific: [] as string[],
     lgbtSupportive: false,
+    therapeuticModality: "All",
   });
   const { toast } = useToast();
 
-  const fetchProviders = async (state: string) => {
+  const fetchProviders = async (state: string, currentFilters = filters) => {
     setLoading(true);
     setShowingNearby(false);
     try {
@@ -120,9 +121,14 @@ const OutpatientTreatment = () => {
         query = query.lte("cost", maxBudget);
       }
 
-      // Apply gender specific filter
+      // Apply gender specific filter from search form
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply gender specific filter from ProviderFilters
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
       }
 
       // Apply length of stay filter
@@ -138,16 +144,21 @@ const OutpatientTreatment = () => {
         }
       }
 
-      // Apply therapeutic modality filter
+      // Apply therapeutic modality filter from search form
       if (selectedModality !== "All") {
         query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+
+      // Apply therapeutic modality filter from ProviderFilters
+      if (currentFilters.therapeuticModality && currentFilters.therapeuticModality !== "All") {
+        query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
       }
 
       const { data, error } = await query;
       if (error) throw error;
       
       if (!data || data.length === 0) {
-        await fetchNearbyProviders(state);
+        await fetchNearbyProviders(state, currentFilters);
       } else {
         setProviders(data);
       }
@@ -163,7 +174,7 @@ const OutpatientTreatment = () => {
     }
   };
 
-  const fetchNearbyProviders = async (selectedStateName: string) => {
+  const fetchNearbyProviders = async (selectedStateName: string, currentFilters = filters) => {
     try {
       let query = supabase
         .from("provider_submissions")
@@ -183,6 +194,10 @@ const OutpatientTreatment = () => {
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
       }
+      // Apply gender specific filter from ProviderFilters
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
+      }
       if (lengthOfStay !== "All") {
         if (lengthOfStay === "30 days") {
           query = query.ilike("length_of_services", "%30%");
@@ -194,9 +209,13 @@ const OutpatientTreatment = () => {
           query = query.or("length_of_services.ilike.%120%,length_of_services.ilike.%6 month%,length_of_services.ilike.%180%,length_of_services.ilike.%long term%,length_of_services.ilike.%extended%");
         }
       }
-      // Apply therapeutic modality filter
+      // Apply therapeutic modality filter from search form
       if (selectedModality !== "All") {
         query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+      // Apply therapeutic modality filter from ProviderFilters
+      if (currentFilters.therapeuticModality && currentFilters.therapeuticModality !== "All") {
+        query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
       }
 
       const { data, error } = await query;
@@ -243,7 +262,7 @@ const OutpatientTreatment = () => {
   const handleFiltersChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
     if (selectedState) {
-      fetchProviders(selectedState);
+      fetchProviders(selectedState, newFilters);
     }
   };
 
@@ -331,9 +350,14 @@ const OutpatientTreatment = () => {
         }
       }
 
-      // Apply therapeutic modality filter
+      // Apply therapeutic modality filter from search form
       if (selectedModality !== "All") {
         query = query.contains("therapeutic_modalities", [selectedModality]);
+      }
+
+      // Apply therapeutic modality filter from ProviderFilters
+      if (filters.therapeuticModality && filters.therapeuticModality !== "All") {
+        query = query.contains("therapeutic_modalities", [filters.therapeuticModality]);
       }
 
       const { data, error } = await query;
@@ -572,7 +596,7 @@ const OutpatientTreatment = () => {
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <>
-            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
+            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} showTherapeuticModality={true} />
             
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-semibold mb-4">
