@@ -103,9 +103,14 @@ const InpatientTreatment = () => {
         query = query.lte("cost", maxBudget);
       }
 
-      // Apply gender specific filter
+      // Apply gender specific filter from search form
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply gender specific filter from ProviderFilters
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
       }
 
       // Apply length of stay filter
@@ -161,6 +166,10 @@ const InpatientTreatment = () => {
       }
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+      // Apply gender specific filter from ProviderFilters
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
       }
       if (lengthOfStay !== "All") {
         if (lengthOfStay === "30 days") {
@@ -292,9 +301,14 @@ const InpatientTreatment = () => {
         query = query.contains("insurances_accepted", [searchInsurance]);
       }
 
-      // Apply gender-specific filter
+      // Apply gender-specific filter from search form
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply gender specific filter from ProviderFilters
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
       }
 
       // Apply budget filter for Self Pay
