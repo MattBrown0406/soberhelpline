@@ -166,19 +166,19 @@ const StateMap = ({ stateName, providers, onBackToUSMap, onProviderClick }: Stat
                   geography={geo}
                   style={{
                     default: {
-                      fill: "hsl(var(--muted))",
+                      fill: "hsl(220, 10%, 75%)",
                       stroke: "hsl(var(--border))",
                       strokeWidth: 1,
                       outline: "none",
                     },
                     hover: {
-                      fill: "hsl(var(--muted))",
+                      fill: "hsl(220, 10%, 75%)",
                       stroke: "hsl(var(--border))",
                       strokeWidth: 1,
                       outline: "none",
                     },
                     pressed: {
-                      fill: "hsl(var(--muted))",
+                      fill: "hsl(220, 10%, 75%)",
                       stroke: "hsl(var(--border))",
                       strokeWidth: 1,
                       outline: "none",
