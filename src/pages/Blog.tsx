@@ -13,6 +13,7 @@ import aaMeetingsImg from "@/assets/blog-aa-meetings.png";
 import amIAddictedImg from "@/assets/blog-am-i-addicted.png";
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import gratitudeHappinessImg from "@/assets/blog-gratitude-happiness.png";
+import holidayRelapseTriggersImg from "@/assets/blog-holiday-relapse-triggers.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -396,6 +397,52 @@ Every time someone in recovery chooses gratitude over resentment, they affirm th
 For those walking the road of sobriety, gratitude and happiness are not luxuries; they are necessities. They sustain motivation when the initial excitement of recovery fades and life resumes its normal rhythm. Practicing gratitude isn't about ignoring pain or pretending everything is fine—it's about recognizing that even through struggle, there are reasons to be thankful. And in that recognition, happiness naturally emerges.
 
 Sobriety, at its heart, is a process of rediscovering life's gifts. When a person learns to be deeply grateful for the clarity, relationships, and opportunities sobriety brings, they are not just staying sober—they are living joyfully. Gratitude and happiness, inseparable and self-renewing, become the true measures of freedom.`
+  },
+  {
+    id: 9,
+    title: "Holiday Relapse Triggers: How to Protect Your Recovery This Season",
+    excerpt: "The holidays can quietly increase relapse risk for people in recovery from alcohol or other addictions. Learn practical, compassionate strategies to stay grounded, connected, and sober this season.",
+    author: "Sober Helpline Team",
+    date: "2025-11-27",
+    category: "Recovery Basics",
+    image: holidayRelapseTriggersImg,
+    content: `Listening to the holidays being described as "the most wonderful time of the year" can feel painful when you are just trying to stay sober one day at a time. If you are worried about relapse between now and the New Year, you are not alone and there are concrete steps you can take to protect your recovery.
+
+**Why the Holidays Feel So Hard**
+
+Research shows that relapse risk often jumps during the holiday season because stress, social pressure, and disrupted routines all pile up at once. Alcohol-centered gatherings, travel, financial strain, grief, and "holiday blues" can reactivate old patterns even when motivation to stay sober is strong.
+
+For many people, familiar places, family dynamics, or certain dates carry powerful emotional memories linked to drinking, using, or other compulsive behaviors. When those memories collide with loneliness or conflict, cravings can feel intense and sudden.
+
+**Know Your Triggers Before They Hit**
+
+Taking time now to list your biggest triggers gives you more control when things get busy. Common holiday triggers include alcohol at every event, being around people you used to use with, unstructured time, and exhaustion from overscheduling.
+
+Once you know your triggers, create a simple written plan: which events you will attend or skip, what you will say when offered a drink, who you will call if cravings spike, and how you will leave early if you start feeling unsafe. Treat this plan like a safety net rather than a set of rules to "perform" perfectly.
+
+**Protect Your Routine and Your Body**
+
+Studies and clinical experience both suggest that relapse risk increases when sleep, meals, and daily structure fall apart. Try to keep a basic routine: regular wake and bed times, consistent meals, movement, and a few non-negotiable recovery actions each day.
+
+Simple physical habits can make a real difference in cravings: staying hydrated, eating balanced food, moving your body, and using grounding skills like slow breathing or brief mindfulness check-ins. When your body is less stressed, your brain has more space to use the tools you already have.
+
+**Stay Connected, Not Isolated**
+
+Loneliness and feeling "different" at holiday events are major risk factors for relapse. Planning regular contact with sober friends, peer support, or a sponsor can cushion those moments when you feel out of place or overwhelmed.
+
+You might choose to bookend difficult events with calls or texts, attend extra mutual-help meetings, or join online recovery communities when travel or weather make in-person support hard to reach. Even a short check-in can remind you that you are not facing this season alone.
+
+**Give Yourself Permission to Set Boundaries**
+
+Recovery often requires saying no to situations that other people see as "no big deal." It is okay to leave early, decline invitations, skip traditions that revolve around alcohol, or bring your own non-alcoholic drink to feel more comfortable.
+
+If certain conversations or people are consistently harmful, you can keep interactions brief, change the subject, or choose not to engage at all. Protecting your sobriety is not selfish; it is an act of care that benefits both you and the people who love you.
+
+**A Gentle Call to Reach Out**
+
+If this holiday season feels heavy, or if you are scared you might relapse, reaching out for help is a sign of strength, not failure. A helpline, local treatment program, therapist, or peer support group can help you make a plan and walk with you through the hardest days.
+
+You deserve support, and you do not have to wait until things get worse to ask for it. If you or someone you love is struggling right now, consider contacting a trusted helpline or recovery resource today to talk to someone who understands and can help you stay safe.`
   }
 ];
 
