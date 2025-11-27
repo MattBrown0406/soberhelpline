@@ -9,11 +9,12 @@ import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 import dadDaughter from "@/assets/dad-daughter.png";
 import hispanicFamily from "@/assets/hispanic-family.png";
+import aaMeeting from "@/assets/aa-meeting.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 
-const heroImages = [familyHero, dadDaughter, hispanicFamily];
+const heroImages = [familyHero, dadDaughter, hispanicFamily, aaMeeting];
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
