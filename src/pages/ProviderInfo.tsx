@@ -195,6 +195,7 @@ const providerFormSchema = z.object({
   tiktokUrl: z.string().optional(),
   instagramUrl: z.string().optional(),
   facebookUrl: z.string().optional(),
+  slidingScaleAvailable: z.boolean().default(false),
 }).refine((data) => {
   // Length of services is required for categories that show this field
   const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Medical Detox"];
@@ -633,7 +634,8 @@ const ProviderInfo = () => {
           youtube_url: data.youtubeUrl || null,
           tiktok_url: data.tiktokUrl || null,
           instagram_url: data.instagramUrl || null,
-          facebook_url: data.facebookUrl || null
+          facebook_url: data.facebookUrl || null,
+          sliding_scale_available: data.slidingScaleAvailable || false
       };
 
       let resultData;
@@ -2195,6 +2197,25 @@ const ProviderInfo = () => {
                     </FormControl>
                     <FormDescription>Provide cost range or pricing structure</FormDescription>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="slidingScaleAvailable"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>Sliding scale options available?</FormLabel>
+                      <FormDescription>Check if you offer sliding scale pricing based on client income</FormDescription>
+                    </div>
                   </FormItem>
                 )}
               />

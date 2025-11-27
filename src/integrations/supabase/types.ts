@@ -91,6 +91,7 @@ export type Database = {
           recovery_fellowships: string[] | null
           required_meetings_per_week: string | null
           residents_expected_to_work: boolean | null
+          sliding_scale_available: boolean | null
           state: string | null
           status: string | null
           submitted_by: string | null
@@ -154,6 +155,7 @@ export type Database = {
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
           residents_expected_to_work?: boolean | null
+          sliding_scale_available?: boolean | null
           state?: string | null
           status?: string | null
           submitted_by?: string | null
@@ -217,6 +219,7 @@ export type Database = {
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
           residents_expected_to_work?: boolean | null
+          sliding_scale_available?: boolean | null
           state?: string | null
           status?: string | null
           submitted_by?: string | null

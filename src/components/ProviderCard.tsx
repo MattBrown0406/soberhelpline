@@ -45,6 +45,7 @@ interface Provider {
   telehealth_available?: boolean | null;
   detox_available?: boolean | null;
   year_started?: number | null;
+  sliding_scale_available?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -192,6 +193,11 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                   <div className="flex items-center gap-2 mb-2">
                     <span className="font-semibold text-sm">Cost:</span>
                     <span className="text-sm">{provider.cost}</span>
+                    {provider.sliding_scale_available && (
+                      <Badge variant="secondary" className="text-xs ml-1">
+                        Sliding Scale
+                      </Badge>
+                    )}
                   </div>
                 )}
               </div>
@@ -293,12 +299,17 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                 )}
                 
                 {/* Interventionist-specific information */}
-                {provider.category === "Interventionists" && (
+                    {provider.category === "Interventionists" && (
                   <div className="space-y-3">
                     {provider.cost && (
-                      <div>
+                      <div className="flex items-center gap-2">
                         <span className="font-semibold text-sm">Cost: </span>
                         <span className="text-sm">{provider.cost}</span>
+                        {provider.sliding_scale_available && (
+                          <Badge variant="secondary" className="text-xs">
+                            Sliding Scale
+                          </Badge>
+                        )}
                       </div>
                     )}
                     
