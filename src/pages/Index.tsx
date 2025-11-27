@@ -9,7 +9,7 @@ import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
-import AddictionCycleWheel from "@/components/AddictionCycleWheel";
+import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -155,8 +155,8 @@ const Index = () => {
           <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">
             We're here to help you interrupt this cycle
           </h2>
-          <div className="rounded-lg shadow-lg p-6 md:p-8" style={{ backgroundColor: 'hsl(162, 48%, 42%)' }}>
-            <AddictionCycleWheel />
+          <div className="rounded-lg shadow-lg overflow-hidden">
+            <img src={addictionCycleImg} alt="The Cycle of Addiction" className="w-full h-auto" />
           </div>
         </div>
 
