@@ -10,7 +10,7 @@ const AddictionCycleWheel = () => {
     { label: "Loss of\nControl", angle: 120 },
     { label: "Guilt & Shame\nOver Consequences", angle: 165 },
     { label: "Cessation\nof Use", angle: 210 },
-    { label: "Passage\nof Time", angle: 255 },
+    { label: "Abstinence Without\nTreating Root Causes", angle: 255 },
   ];
 
   const centerX = 200;
