@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -404,24 +404,20 @@ Sobriety, at its heart, is a process of rediscovering life's gifts. When a perso
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
   const [showShareOptions, setShowShareOptions] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
-  const handleShare = async (post: typeof blogPosts[0]) => {
-    const shareData = {
-      title: post.title,
-      text: post.excerpt,
-      url: window.location.origin + '/blog#' + post.id,
-    };
+  const handleShare = (post: typeof blogPosts[0]) => {
+    setShowShareOptions(!showShareOptions);
+  };
 
-    // Try using native Web Share API first (includes SMS/iMessage on mobile)
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.log('Share cancelled or failed');
-      }
-    } else {
-      // Fallback: show custom share options
-      setShowShareOptions(true);
+  const copyLink = async (post: typeof blogPosts[0]) => {
+    const url = window.location.origin + '/blog#' + post.id;
+    try {
+      await navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    } catch (err) {
+      console.log('Failed to copy link');
     }
   };
 
@@ -445,10 +441,18 @@ const Blog = () => {
       case 'email':
         shareUrl = `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
         break;
+      case 'native':
+        if (navigator.share) {
+          navigator.share({
+            title: post.title,
+            text: post.excerpt,
+            url: window.location.origin + '/blog#' + post.id,
+          }).catch(err => console.log('Share cancelled'));
+        }
+        return;
     }
 
     window.open(shareUrl, '_blank', 'width=600,height=400');
-    setShowShareOptions(false);
   };
 
   const renderContent = (content: string) => {
@@ -604,14 +608,23 @@ const Blog = () => {
               className="w-full flex items-center justify-center gap-2"
             >
               <Share2 className="w-4 h-4" />
-              Share this article
+              {showShareOptions ? 'Hide share options' : 'Share this article'}
             </Button>
             
-            {/* Fallback Share Options (shown when Web Share API not available) */}
+            {/* Share Options */}
             {showShareOptions && selectedPost && (
               <div className="mt-4 p-4 border rounded-lg bg-muted/50">
                 <p className="text-sm text-muted-foreground mb-3">Share via:</p>
                 <div className="flex gap-2 flex-wrap">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => copyLink(selectedPost)}
+                    className="flex items-center gap-2"
+                  >
+                    {linkCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    {linkCopied ? 'Copied!' : 'Copy Link'}
+                  </Button>
                   <Button 
                     size="sm" 
                     variant="outline" 
@@ -648,6 +661,17 @@ const Blog = () => {
                     <Mail className="w-4 h-4" />
                     Email
                   </Button>
+                  {navigator.share && (
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      onClick={() => shareToSocial('native', selectedPost)}
+                      className="flex items-center gap-2"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      More Options
+                    </Button>
+                  )}
                 </div>
               </div>
             )}
