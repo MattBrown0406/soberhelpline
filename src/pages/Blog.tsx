@@ -19,7 +19,7 @@ const blogPosts = [
     title: "How Do I Know If I'm Addicted?",
     excerpt: "The DSM-IV provided clear guidelines for diagnosing substance use disorder and alcohol use disorder. Learn about the criteria that help identify when someone's use of drugs or alcohol is causing serious problems.",
     author: "Sober Helpline Team",
-    date: "2024-11-28",
+    date: "2025-01-15",
     category: "Recovery Basics",
     image: amIAddictedImg,
     content: `The DSM-IV (Diagnostic and Statistical Manual of Mental Disorders, Fourth Edition) provided clear guidelines for diagnosing both substance use disorder and alcohol use disorder. These diagnoses helped clinicians identify when someone's use of drugs or alcohol was causing serious problems in their life. The criteria are designed to be understood in everyday language, so families and individuals can recognize warning signs and seek help when needed.
@@ -91,7 +91,7 @@ Understanding these criteria helps families and friends recognize when someone m
     title: "The Lifeline After Treatment: Why AA Meetings Matter Most Once Rehab Ends",
     excerpt: "Completing inpatient treatment is an enormous accomplishment, but the transition back to everyday life brings new challenges. Discover why AA meetings become the single most consistent support system in lifelong recovery.",
     author: "Sober Helpline Team",
-    date: "2024-11-27",
+    date: "2025-01-10",
     category: "Aftercare",
     image: aaMeetingsImg,
     content: `Completing an inpatient treatment program for alcohol addiction is an enormous accomplishment. It marks the end of one chapter and the beginning of another—life in recovery. But while residential treatment provides a safe and structured space to heal physically and emotionally, the transition back into everyday life often brings new challenges. This is where Alcoholics Anonymous (AA) meetings play a vital role. Attending AA meetings after inpatient care isn't just recommended; for many people, it becomes the single most consistent support system in their lifelong recovery journey.
@@ -147,7 +147,7 @@ For anyone completing inpatient treatment, attending AA meetings is not merely a
     title: "Why the Right Level of Care Matters",
     excerpt: "Choosing the right level of addiction treatment care is critical because it can mean the difference between short-term symptom relief and lasting recovery.",
     author: "Sober Helpline Team",
-    date: "2024-11-26",
+    date: "2025-01-05",
     category: "Treatment",
     image: levelOfCareImg,
     content: `Choosing the right level of addiction treatment care is critical because it can mean the difference between short-term symptom relief and lasting recovery. Matching care intensity to a person's medical, psychological, and social needs creates a safer, more effective path out of addiction.
@@ -199,7 +199,7 @@ Families and individuals who understand the purpose of each level can ask better
     title: "Motivating Your Reluctant Loved One",
     excerpt: "When someone you care about is struggling with addiction but resistant to help, it can feel hopeless. Discover compassionate strategies to encourage treatment without pushing them away.",
     author: "Sober Helpline Team",
-    date: "2024-11-25",
+    date: "2025-01-01",
     category: "Family Support",
     image: reluctantLovedOneImg,
     content: `Helping an addicted son or daughter become willing to get treatment starts with changing how the family responds to the addiction, using calm, consistent love, clear boundaries, and evidence-based communication rather than pressure or panic. Parents cannot force true recovery, but they can strongly influence motivation and make the path into treatment feel safer, more hopeful, and more attractive than staying in addiction.
@@ -259,7 +259,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     title: "Understanding the First Steps of Recovery",
     excerpt: "Recovery is a journey that begins with a single step. Learn about the crucial first steps that can set you or your loved one on the path to lasting sobriety.",
     author: "Sober Helpline Team",
-    date: "2024-01-15",
+    date: "2025-01-20",
     category: "Recovery Basics",
     image: firstStepsImg,
     content: null
@@ -269,7 +269,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     title: "How to Support a Loved One in Treatment",
     excerpt: "Supporting someone through addiction treatment can be challenging. Discover effective ways to be there for your loved one while maintaining healthy boundaries.",
     author: "Sober Helpline Team",
-    date: "2024-01-10",
+    date: "2025-01-25",
     category: "Family Support",
     image: supportLovedOneImg,
     content: null
@@ -279,7 +279,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     title: "The Importance of Aftercare in Recovery",
     excerpt: "Treatment is just the beginning. Learn why aftercare programs are essential for maintaining long-term sobriety and preventing relapse.",
     author: "Sober Helpline Team",
-    date: "2024-01-05",
+    date: "2025-01-30",
     category: "Aftercare",
     image: aftercareImg,
     content: null
