@@ -47,18 +47,6 @@ const AddictionCycleWheel = () => {
   return (
     <div className="w-full max-w-lg mx-auto">
       <svg viewBox="0 0 400 400" className="w-full h-auto">
-        {/* Main circle */}
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={radius}
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="3"
-          strokeDasharray="8 4"
-          className="opacity-30"
-        />
-        
         {/* Arrows around the wheel */}
         {stages.map((stage, index) => {
           const nextIndex = (index + 1) % stages.length;
