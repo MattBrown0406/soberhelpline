@@ -179,6 +179,7 @@ const providerFormSchema = z.object({
   houseMeetingsPerWeek: z.string().optional(),
   genderSpecificTreatment: z.array(z.string()).optional(),
   lgbtSupportive: z.boolean().default(false),
+  adolescentServices: z.boolean().default(false),
   substanceUseDisorderExperience: z.boolean().optional(),
   telehealthAvailable: z.boolean().optional(),
   licenseCurrentGoodStanding: z.boolean().optional(),
@@ -336,6 +337,7 @@ const ProviderInfo = () => {
       houseMeetingsPerWeek: "",
       genderSpecificTreatment: [],
       lgbtSupportive: false,
+      adolescentServices: false,
       substanceUseDisorderExperience: false,
       telehealthAvailable: false,
       licenseCurrentGoodStanding: false,
@@ -418,6 +420,7 @@ const ProviderInfo = () => {
           houseMeetingsPerWeek: data.house_meetings_per_week?.toString() || "",
           genderSpecificTreatment: data.gender_specific_treatment || [],
           lgbtSupportive: data.lgbt_supportive || false,
+          adolescentServices: data.adolescent_services || false,
           substanceUseDisorderExperience: data.substance_use_disorder_experience || false,
           telehealthAvailable: data.telehealth_available || false,
           licenseCurrentGoodStanding: data.license_current_good_standing || false,
@@ -617,6 +620,7 @@ const ProviderInfo = () => {
           house_meetings_per_week: data.houseMeetingsPerWeek ? parseInt(data.houseMeetingsPerWeek) : null,
           gender_specific_treatment: data.genderSpecificTreatment || null,
           lgbt_supportive: data.lgbtSupportive,
+          adolescent_services: data.adolescentServices,
           substance_use_disorder_experience: data.substanceUseDisorderExperience || null,
           telehealth_available: data.telehealthAvailable || null,
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
@@ -1648,6 +1652,27 @@ const ProviderInfo = () => {
                       <div className="space-y-1 leading-none">
                         <FormLabel>LGBT supportive treatment or care?</FormLabel>
                         <FormDescription>Check if your facility offers LGBT supportive treatment or care</FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {["Inpatient Treatment", "Outpatient Treatment", "Interventionists", "Sober Living"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="adolescentServices"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you provide services for adolescent aged individuals?</FormLabel>
+                        <FormDescription>Check if you work with teens</FormDescription>
                       </div>
                     </FormItem>
                   )}

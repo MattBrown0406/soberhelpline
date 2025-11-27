@@ -48,6 +48,7 @@ export type Database = {
         Row: {
           accepts_mat_residents: boolean | null
           address: string | null
+          adolescent_services: boolean | null
           awake_staff_24_7: boolean | null
           case_management_services: boolean | null
           category: string
@@ -112,6 +113,7 @@ export type Database = {
         Insert: {
           accepts_mat_residents?: boolean | null
           address?: string | null
+          adolescent_services?: boolean | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category: string
@@ -176,6 +178,7 @@ export type Database = {
         Update: {
           accepts_mat_residents?: boolean | null
           address?: string | null
+          adolescent_services?: boolean | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category?: string
