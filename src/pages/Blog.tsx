@@ -602,18 +602,9 @@ const Blog = () => {
           
           {/* Share Button */}
           <div className="border-t pt-4 mt-2">
-            <Button 
-              onClick={() => selectedPost && handleShare(selectedPost)} 
-              variant="outline" 
-              className="w-full flex items-center justify-center gap-2"
-            >
-              <Share2 className="w-4 h-4" />
-              {showShareOptions ? 'Hide share options' : 'Share this article'}
-            </Button>
-            
-            {/* Share Options */}
+            {/* Share Options - Appears above button */}
             {showShareOptions && selectedPost && (
-              <div className="mt-4 p-4 border rounded-lg bg-muted/50">
+              <div className="mb-4 p-4 border rounded-lg bg-background shadow-lg z-50">
                 <p className="text-sm text-muted-foreground mb-3">Share via:</p>
                 <div className="flex gap-2 flex-wrap">
                   <Button 
@@ -675,6 +666,15 @@ const Blog = () => {
                 </div>
               </div>
             )}
+            
+            <Button 
+              onClick={() => selectedPost && handleShare(selectedPost)} 
+              variant="outline" 
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <Share2 className="w-4 h-4" />
+              {showShareOptions ? 'Hide share options' : 'Share this article'}
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
