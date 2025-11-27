@@ -15,10 +15,14 @@ const AddictionCycleWheel = () => {
 
   const centerX = 400;
   const centerY = 200;
-  const radiusX = 180; // Horizontal radius (wider)
-  const radiusY = 120; // Vertical radius (shorter)
-  const textRadiusX = 240; // Text horizontal radius
-  const textRadiusY = 160; // Text vertical radius
+  const radiusX = 180;
+  const radiusY = 120;
+  const textRadiusX = 240;
+  const textRadiusY = 160;
+
+  const totalStages = stages.length;
+  const animationDuration = 8; // Total cycle duration in seconds
+  const stageDelay = animationDuration / totalStages;
 
   // Calculate position for each stage on ellipse
   const getPosition = (angle: number, rx: number, ry: number) => {
@@ -39,7 +43,6 @@ const AddictionCycleWheel = () => {
     const endX = centerX + radiusX * Math.cos(endRad);
     const endY = centerY + radiusY * Math.sin(endRad);
     
-    // Use arc with ellipse radii
     const largeArc = Math.abs(endAngle - startAngle) > 180 ? 1 : 0;
     
     return `M ${startX} ${startY} A ${radiusX} ${radiusY} 0 ${largeArc} 1 ${endX} ${endY}`;
@@ -47,6 +50,24 @@ const AddictionCycleWheel = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
+      <style>
+        {`
+          @keyframes pulse-text {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 0.85;
+            }
+            50% {
+              transform: scale(1.15);
+              opacity: 1;
+            }
+          }
+          .cycle-text {
+            transform-origin: center;
+            transform-box: fill-box;
+          }
+        `}
+      </style>
       <svg viewBox="0 0 800 400" className="w-full h-auto">
         {/* Arrows around the ellipse */}
         {stages.map((stage, index) => {
@@ -54,7 +75,6 @@ const AddictionCycleWheel = () => {
           const startAngle = stage.angle + 8;
           let endAngle = stages[nextIndex].angle - 8;
           
-          // Handle wrap-around for the last segment
           if (index === stages.length - 1) {
             endAngle = stages[nextIndex].angle + 360 - 8;
           }
@@ -64,7 +84,6 @@ const AddictionCycleWheel = () => {
           const endX = centerX + radiusX * Math.cos(endRad);
           const endY = centerY + radiusY * Math.sin(endRad);
           
-          // Arrow head direction - calculate tangent to ellipse
           const tangentAngle = Math.atan2(radiusX * Math.sin(endRad + Math.PI/2), radiusY * Math.cos(endRad + Math.PI/2));
           const arrowSize = 10;
           const arrow1X = endX - arrowSize * Math.cos(tangentAngle - 0.5);
@@ -109,10 +128,11 @@ const AddictionCycleWheel = () => {
           of Addiction
         </text>
         
-        {/* Stage labels */}
+        {/* Stage labels with animation */}
         {stages.map((stage, index) => {
           const pos = getPosition(stage.angle, textRadiusX, textRadiusY);
           const lines = stage.label.split('\n');
+          const delay = index * stageDelay;
           
           return (
             <text
@@ -121,8 +141,13 @@ const AddictionCycleWheel = () => {
               y={pos.y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="font-semibold"
-              style={{ fontSize: '14px', fill: 'white' }}
+              className="font-semibold cycle-text"
+              style={{ 
+                fontSize: '14px', 
+                fill: 'white',
+                animation: `pulse-text ${animationDuration}s ease-in-out infinite`,
+                animationDelay: `${delay}s`
+              }}
             >
               {lines.map((line, lineIndex) => (
                 <tspan
