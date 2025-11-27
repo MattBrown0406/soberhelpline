@@ -51,7 +51,7 @@ const podcasts = [
     accentColor: "bg-emerald-500",
   },
   {
-    name: "Purpose with Pej",
+    name: "Primary Purpose with Pej",
     description: "Inspiring conversations about finding purpose, overcoming challenges, and building a meaningful life in recovery.",
     host: "Pej",
     link: "",
