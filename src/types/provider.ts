@@ -15,6 +15,7 @@ export type ProviderSubmission = {
   description_of_services: string | null;
   logo_url: string | null;
   cost: string | null;
+  sliding_scale_available: boolean | null;
   length_of_services: string | null;
   year_started: number | null;
   submitted_by: string | null;
@@ -22,6 +23,7 @@ export type ProviderSubmission = {
   // Treatment-specific fields
   total_treatment_beds: number | null;
   detox_available: boolean | null;
+  detox_only_services: boolean | null;
   gender_specific_treatment: string[] | null;
   lgbt_supportive: boolean | null;
   insurances_accepted: string[] | null;
