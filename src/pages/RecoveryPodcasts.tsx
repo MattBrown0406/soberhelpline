@@ -50,6 +50,16 @@ const podcasts = [
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
     accentColor: "bg-emerald-500",
   },
+  {
+    name: "Purpose with Pej",
+    description: "Inspiring conversations about finding purpose, overcoming challenges, and building a meaningful life in recovery.",
+    host: "Pej",
+    link: "",
+    rssFeed: "https://feeds.megaphone.fm/purpose-with-pej",
+    logo: null,
+    gradient: "from-amber-500 via-orange-500 to-red-600",
+    accentColor: "bg-amber-500",
+  },
 ];
 
 const RecoveryPodcasts = () => {
@@ -205,7 +215,7 @@ const RecoveryPodcasts = () => {
                               </Button>
                             </a>
                           )}
-                          {podcast.name !== "The Unbroken with Sam Davis" && (
+                          {podcast.name !== "The Unbroken with Sam Davis" && podcast.link && (
                             <a 
                               href={podcast.link} 
                               target="_blank" 
