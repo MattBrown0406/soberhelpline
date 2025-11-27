@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video, Clock, Baby } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -47,6 +47,7 @@ interface Provider {
   detox_available?: boolean | null;
   year_started?: number | null;
   sliding_scale_available?: boolean | null;
+  adolescent_services?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -158,6 +159,16 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     provider.detox_available && (
                     <Badge variant="default" className="gap-1 bg-accent text-accent-foreground">
                       Detox Available
+                    </Badge>
+                  )}
+                  {/* Adolescent services badge */}
+                  {(provider.category === "Inpatient Treatment" || 
+                    provider.category === "Outpatient Treatment" || 
+                    provider.category === "Interventionists" || 
+                    provider.category === "Sober Living") && provider.adolescent_services && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Baby className="w-3 h-3" />
+                      Works with Teens
                     </Badge>
                   )}
                 </div>

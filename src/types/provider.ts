@@ -68,6 +68,9 @@ export type ProviderSubmission = {
   // Telehealth (Outpatient, Therapists, Psychiatrists)
   telehealth_available: boolean | null;
   
+  // Adolescent services (Inpatient, Outpatient, Interventionists, Sober Living)
+  adolescent_services: boolean | null;
+  
   // Attorney-specific fields
   legal_assistance_types: string[] | null;
   
