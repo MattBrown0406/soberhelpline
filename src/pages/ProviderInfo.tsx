@@ -255,6 +255,8 @@ const ProviderInfo = () => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [submittedCategory, setSubmittedCategory] = useState<string>('');
+  const [existingSubmission, setExistingSubmission] = useState<any>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -351,6 +353,92 @@ const ProviderInfo = () => {
     },
   });
 
+  // Load existing submission if user has one
+  useEffect(() => {
+    const loadExistingSubmission = async () => {
+      if (!user) return;
+      
+      const { data, error } = await supabase
+        .from('provider_submissions')
+        .select('*')
+        .eq('submitted_by', user.id)
+        .maybeSingle();
+      
+      if (error) {
+        console.error('Error loading submission:', error);
+        return;
+      }
+      
+      if (data) {
+        setExistingSubmission(data);
+        setIsEditMode(true);
+        
+        // Pre-populate form with existing data
+        form.reset({
+          category: data.category || "",
+          providerName: data.provider_name || "",
+          city: data.city || "",
+          state: data.state || "",
+          zipCode: data.zip_code || "",
+          phoneNumber: data.phone_number || "",
+          email: data.email || "",
+          website: data.website || "",
+          yearStarted: data.year_started?.toString() || "",
+          interventionModalities: data.intervention_modalities || [],
+          otherInterventionModalities: "",
+          cipCertified: data.cip_certified || false,
+          hourlyCoachingSessions: data.hourly_coaching_sessions || false,
+          hourlyCoachingRate: data.hourly_coaching_rate || "",
+          caseManagementServices: data.case_management_services || false,
+          lengthOfServices: data.length_of_services ? data.length_of_services.split(", ") : [],
+          detoxAvailable: data.detox_available || false,
+          detoxOnlyServices: data.detox_only_services || false,
+          coOccurringDiagnoses: data.co_occurring_diagnoses || [],
+          therapeuticModalities: data.therapeutic_modalities || [],
+          otherTherapeuticModalities: "",
+          inPersonCompanionWork: data.in_person_companion_work || false,
+          hasValidPassport: data.has_valid_passport || false,
+          dailyCompanionFee: data.daily_companion_fee || "",
+          worksNationally: data.works_nationally || false,
+          worksInternationally: data.works_internationally || false,
+          languagesSpoken: data.languages_spoken || [],
+          otherLanguages: "",
+          awakeStaff247: data.awake_staff_24_7 || false,
+          residentsExpectedToWork: data.residents_expected_to_work || false,
+          jobAssistanceProvided: data.job_assistance_provided || false,
+          medicationAdministration: data.medication_administration || "",
+          acceptsMatResidents: data.accepts_mat_residents || false,
+          minimumTimeSinceLastUse: data.minimum_time_since_last_use || "",
+          requiredMeetingsPerWeek: data.required_meetings_per_week || "",
+          mandatoryCurfew: data.mandatory_curfew || false,
+          curfewTime: data.curfew_time || "",
+          choresRequired: data.chores_required || false,
+          mandatoryHouseMeetings: data.mandatory_house_meetings || false,
+          houseMeetingsPerWeek: data.house_meetings_per_week?.toString() || "",
+          genderSpecificTreatment: data.gender_specific_treatment || [],
+          lgbtSupportive: data.lgbt_supportive || false,
+          substanceUseDisorderExperience: data.substance_use_disorder_experience || false,
+          telehealthAvailable: data.telehealth_available || false,
+          licenseCurrentGoodStanding: data.license_current_good_standing || false,
+          legalAssistanceTypes: data.legal_assistance_types || [],
+          recoveryFellowships: data.recovery_fellowships || [],
+          descriptionOfServices: data.description_of_services || "",
+          cost: data.cost || "",
+          travelExpensesIncluded: data.travel_expenses_included || false,
+          itemsIncludedInCost: data.items_included_in_cost || [],
+          insurancesAccepted: data.insurances_accepted || [],
+          otherInsurances: "",
+          youtubeUrl: data.youtube_url || "",
+          tiktokUrl: data.tiktok_url || "",
+          instagramUrl: data.instagram_url || "",
+          facebookUrl: data.facebook_url || "",
+        });
+      }
+    };
+    
+    loadExistingSubmission();
+  }, [user, form]);
+
   const onSubmit = async (data: ProviderFormValues) => {
     // Get the current session first
     const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
@@ -438,7 +526,7 @@ const ProviderInfo = () => {
         finalInterventionModalities = [...finalInterventionModalities, ...customInterventionModalities];
       }
 
-      let logoUrl = null;
+      let logoUrl = existingSubmission?.logo_url || null;
 
       // Upload logo if provided
       if (data.logo && data.logo.length > 0) {
@@ -479,10 +567,8 @@ const ProviderInfo = () => {
         logoUrl = publicUrl;
       }
 
-      // Insert into database
-      const { data: insertedData, error } = await supabase
-        .from('provider_submissions')
-        .insert({
+      // Prepare the submission data
+      const submissionData = {
           category: data.category,
           provider_name: data.providerName,
           city: data.city,
@@ -548,36 +634,69 @@ const ProviderInfo = () => {
           tiktok_url: data.tiktokUrl || null,
           instagram_url: data.instagramUrl || null,
           facebook_url: data.facebookUrl || null
-        })
-        .select('id')
-        .single();
+      };
+
+      let resultData;
+      let error;
+
+      if (isEditMode && existingSubmission) {
+        // Update existing submission
+        const { data: updatedData, error: updateError } = await supabase
+          .from('provider_submissions')
+          .update(submissionData)
+          .eq('id', existingSubmission.id)
+          .select('id')
+          .single();
+        
+        resultData = updatedData;
+        error = updateError;
+      } else {
+        // Insert new submission
+        const { data: insertedData, error: insertError } = await supabase
+          .from('provider_submissions')
+          .insert(submissionData)
+          .select('id')
+          .single();
+        
+        resultData = insertedData;
+        error = insertError;
+      }
 
       if (error) throw error;
 
-      // Send email notification
-      try {
-        await supabase.functions.invoke('send-provider-notification', {
-          body: {
-            providerName: data.providerName,
-            category: data.category,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-          }
-        });
-      } catch (emailError) {
-        console.error('Failed to send notification email:', emailError);
-        // Don't fail the submission if email fails
-      }
-
-      // Store submission details and show checkout
-      if (insertedData?.id) {
-        setSubmissionId(insertedData.id);
-        setSubmittedCategory(data.category);
-        setShowCheckout(true);
+      if (isEditMode) {
+        // Just show success message for updates
         toast({
-          title: "Application submitted!",
-          description: "Please complete payment to finalize your listing.",
+          title: "Information updated!",
+          description: "Your provider information has been successfully updated.",
         });
+        navigate('/');
+      } else {
+        // Send email notification for new submissions
+        try {
+          await supabase.functions.invoke('send-provider-notification', {
+            body: {
+              providerName: data.providerName,
+              category: data.category,
+              email: data.email,
+              phoneNumber: data.phoneNumber,
+            }
+          });
+        } catch (emailError) {
+          console.error('Failed to send notification email:', emailError);
+          // Don't fail the submission if email fails
+        }
+
+        // Store submission details and show checkout for new submissions
+        if (resultData?.id) {
+          setSubmissionId(resultData.id);
+          setSubmittedCategory(data.category);
+          setShowCheckout(true);
+          toast({
+            title: "Application submitted!",
+            description: "Please complete payment to finalize your listing.",
+          });
+        }
       }
     } catch (error: any) {
       console.error('Submission error:', error);
@@ -633,9 +752,14 @@ const ProviderInfo = () => {
           <div className="max-w-3xl mx-auto">
             <div className="mb-8 text-center">
               <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
-              <h1 className="text-4xl font-bold text-foreground mb-2">Provider Application</h1>
+              <h1 className="text-4xl font-bold text-foreground mb-2">
+                {isEditMode ? "Edit Provider Information" : "Provider Application"}
+              </h1>
               <p className="text-lg text-muted-foreground">
-                Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards.
+                {isEditMode 
+                  ? "Update your provider information below. Note: You cannot change your provider category."
+                  : "Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards."
+                }
               </p>
             </div>
 
@@ -647,7 +771,11 @@ const ProviderInfo = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Provider Category *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select 
+                      onValueChange={field.onChange} 
+                      defaultValue={field.value}
+                      disabled={isEditMode}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a provider category" />
@@ -662,7 +790,10 @@ const ProviderInfo = () => {
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Choose the category that best describes your services
+                      {isEditMode 
+                        ? "Category cannot be changed after initial submission"
+                        : "Choose the category that best describes your services"
+                      }
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -2247,7 +2378,10 @@ const ProviderInfo = () => {
 
 
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Continue to Payment"}
+                {isSubmitting 
+                  ? (isEditMode ? "Updating..." : "Submitting...") 
+                  : (isEditMode ? "Update Information" : "Continue to Payment")
+                }
               </Button>
             </form>
           </Form>
