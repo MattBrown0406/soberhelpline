@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import logo from "@/assets/logo.png";
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
@@ -17,11 +15,11 @@ import amIAddictedImg from "@/assets/blog-am-i-addicted.png";
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import gratitudeHappinessImg from "@/assets/blog-gratitude-happiness.png";
 
-const imageMap: Record<string, string> = {
+export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
-const blogPosts = [
+export const blogPosts = [
   {
     id: 0,
     title: "Understanding the Cycle of Addiction and How 12-Step Recovery Breaks It",
@@ -403,129 +401,11 @@ Sobriety, at its heart, is a process of rediscovering life's gifts. When a perso
 ];
 
 const Blog = () => {
-  const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
-  const [showShareOptions, setShowShareOptions] = useState(false);
-  const [linkCopied, setLinkCopied] = useState(false);
-  const shareSectionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (showShareOptions && shareSectionRef.current) {
-      shareSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, [showShareOptions]);
-
-  const handleShare = (post: typeof blogPosts[0]) => {
-    setShowShareOptions(!showShareOptions);
-  };
-  const copyLink = async (post: typeof blogPosts[0]) => {
-    const url = window.location.origin + '/blog#' + post.id;
-    const textToCopy = `${post.title} - Sober Helpline\n${url}`;
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      setLinkCopied(true);
-      setTimeout(() => setLinkCopied(false), 2000);
-    } catch (err) {
-      console.log('Failed to copy link');
-    }
-  };
-
-  const shareToSocial = (platform: string, post: typeof blogPosts[0]) => {
-    const url = encodeURIComponent(window.location.origin + '/blog#' + post.id);
-    const title = encodeURIComponent(post.title);
-    const text = encodeURIComponent(post.excerpt);
-
-    let shareUrl = '';
-    
-    switch(platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-        break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-        break;
-      case 'email':
-        shareUrl = `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0A${url}`;
-        break;
-      case 'native':
-        if (navigator.share) {
-          navigator.share({
-            title: post.title,
-            text: post.excerpt,
-            url: window.location.origin + '/blog#' + post.id,
-          }).catch(err => console.log('Share cancelled'));
-        }
-        return;
-    }
-
-    window.open(shareUrl, '_blank', 'width=600,height=400');
-  };
-
-  const renderContent = (content: string) => {
-    return content.split('\n\n').map((paragraph, index) => {
-      // Check for image markers like [IMAGE:imageName]
-      const imageMatch = paragraph.match(/^\[IMAGE:(\w+)\]$/);
-      if (imageMatch) {
-        const imageName = imageMatch[1];
-        const imageSrc = imageMap[imageName];
-        if (imageSrc) {
-          return (
-            <div key={index} className="my-6 rounded-lg overflow-hidden shadow-lg">
-              <img src={imageSrc} alt="Article illustration" className="w-full h-auto" />
-            </div>
-          );
-        }
-        return null;
-      }
-      
-      if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-        return (
-          <h3 key={index} className="text-xl font-semibold text-foreground mt-6 mb-3">
-            {paragraph.replace(/\*\*/g, '')}
-          </h3>
-        );
-      }
-      return (
-        <p key={index} className="text-muted-foreground mb-4 leading-relaxed">
-          {paragraph}
-        </p>
-      );
-    });
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        {selectedPost ? (
-          <>
-            <title>{selectedPost.title} - Sober Helpline</title>
-            <meta name="description" content={selectedPost.excerpt} />
-            <meta property="og:title" content={selectedPost.title} />
-            <meta property="og:description" content={selectedPost.excerpt} />
-            <meta property="og:image" content={window.location.origin + selectedPost.image} />
-            <meta property="og:url" content={window.location.origin + '/blog#' + selectedPost.id} />
-            <meta property="og:type" content="article" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={selectedPost.title} />
-            <meta name="twitter:description" content={selectedPost.excerpt} />
-            <meta name="twitter:image" content={window.location.origin + selectedPost.image} />
-          </>
-        ) : (
-          <>
-            <title>Recovery Blog - Sober Helpline</title>
-            <meta name="description" content="Expert guidance on addiction recovery, treatment options, and family support." />
-            <meta property="og:title" content="Recovery Blog - Sober Helpline" />
-            <meta property="og:description" content="Expert guidance on addiction recovery, treatment options, and family support." />
-            <meta property="og:image" content={window.location.origin + logo} />
-            <meta property="og:url" content={window.location.origin + '/blog'} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Recovery Blog - Sober Helpline" />
-            <meta name="twitter:description" content="Expert guidance on addiction recovery, treatment options, and family support." />
-            <meta name="twitter:image" content={window.location.origin + logo} />
-          </>
-        )}
+        <title>Recovery Blog - Sober Helpline</title>
+        <meta name="description" content="Expert guidance on addiction recovery, treatment options, and family support." />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
@@ -556,43 +436,41 @@ const Blog = () => {
         {/* Blog Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {blogPosts.map((post) => (
-            <Card 
-              key={post.id} 
-              className={`hover:shadow-lg transition-shadow overflow-hidden ${post.content ? 'cursor-pointer' : ''}`}
-              onClick={() => post.content && setSelectedPost(post)}
-            >
-              {post.image && (
-                <div className="w-full h-48 overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )}
-              <CardHeader>
-                <div className="text-sm text-primary font-medium mb-2">{post.category}</div>
-                <CardTitle className="text-xl">{post.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
-                    <span>{post.author}</span>
+            <Link key={post.id} to={post.content ? `/blog/${post.id}` : '#'} className={post.content ? '' : 'pointer-events-none'}>
+              <Card className={`hover:shadow-lg transition-shadow overflow-hidden h-full ${post.content ? 'cursor-pointer' : ''}`}>
+                {post.image && (
+                  <div className="w-full h-48 overflow-hidden">
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
-                  </div>
-                </div>
-                {post.content && (
-                  <Button variant="link" className="mt-4 p-0 h-auto text-primary">
-                    Read Full Article →
-                  </Button>
                 )}
-              </CardContent>
-            </Card>
+                <CardHeader>
+                  <div className="text-sm text-primary font-medium mb-2">{post.category}</div>
+                  <CardTitle className="text-xl">{post.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <User className="w-4 h-4" />
+                      <span>{post.author}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(post.date).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                  {post.content && (
+                    <Button variant="link" className="mt-4 p-0 h-auto text-primary">
+                      Read Full Article →
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
@@ -604,119 +482,6 @@ const Blog = () => {
           </p>
         </div>
       </div>
-
-      {/* Article Dialog */}
-      <Dialog open={!!selectedPost} onOpenChange={() => {
-        setSelectedPost(null);
-        setShowShareOptions(false);
-      }}>
-        <DialogContent className="max-w-3xl max-h-[90vh]">
-          <DialogHeader>
-            <div className="text-sm text-primary font-medium mb-1">{selectedPost?.category}</div>
-            <DialogTitle className="text-2xl">{selectedPost?.title}</DialogTitle>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground pt-2">
-              <div className="flex items-center gap-1">
-                <User className="w-4 h-4" />
-                <span>{selectedPost?.author}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                <span>{selectedPost?.date && new Date(selectedPost.date).toLocaleDateString()}</span>
-              </div>
-            </div>
-          </DialogHeader>
-          
-          {/* Share Button - At Top */}
-          <div className="border-y py-3" ref={shareSectionRef}>
-            <Button 
-              onClick={() => selectedPost && handleShare(selectedPost)} 
-              variant="outline" 
-              className="w-full flex items-center justify-center gap-2"
-            >
-              <Share2 className="w-4 h-4" />
-              {showShareOptions ? 'Hide share options' : 'Share this article'}
-            </Button>
-            
-            {/* Share Options */}
-            {showShareOptions && selectedPost && (
-              <div className="mt-3 p-4 border rounded-lg bg-background shadow-lg">
-                <p className="text-sm text-muted-foreground mb-3">Share via:</p>
-                <div className="flex gap-2 flex-wrap">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => copyLink(selectedPost)}
-                    className="flex items-center gap-2"
-                  >
-                    {linkCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                    {linkCopied ? 'Copied!' : 'Copy Link'}
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('facebook', selectedPost)}
-                    className="flex items-center gap-2"
-                  >
-                    <Facebook className="w-4 h-4" />
-                    Facebook
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('twitter', selectedPost)}
-                    className="flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Twitter
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('linkedin', selectedPost)}
-                    className="flex items-center gap-2"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                    LinkedIn
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('email', selectedPost)}
-                    className="flex items-center gap-2"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Email
-                  </Button>
-                  {navigator.share && (
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      onClick={() => shareToSocial('native', selectedPost)}
-                      className="flex items-center gap-2"
-                    >
-                      <Share2 className="w-4 h-4" />
-                      More Options
-                    </Button>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <ScrollArea className="max-h-[60vh] pr-4">
-            <div className="py-4">
-              {selectedPost?.image && (
-                <img 
-                  src={selectedPost.image} 
-                  alt={selectedPost.title} 
-                  className="w-full h-64 object-cover rounded-lg mb-6"
-                />
-              )}
-              {selectedPost?.content && renderContent(selectedPost.content)}
-            </div>
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
