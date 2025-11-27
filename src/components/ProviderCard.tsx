@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video, Clock } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -27,6 +27,7 @@ interface Provider {
   description_of_services: string | null;
   logo_url: string | null;
   cip_certified?: boolean | null;
+  hourly_coaching_sessions?: boolean | null;
   detox_only_services?: boolean | null;
   length_of_services?: string | null;
   category?: string;
@@ -80,6 +81,12 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <Badge variant="default" className="gap-1 bg-primary text-primary-foreground">
                       <Award className="w-3 h-3" />
                       CIP Certified
+                    </Badge>
+                  )}
+                  {provider.category === "Interventionists" && provider.hourly_coaching_sessions && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Clock className="w-3 h-3" />
+                      Hourly Coaching Available
                     </Badge>
                   )}
                   {provider.category === "Medical Detox" && provider.detox_only_services && (
