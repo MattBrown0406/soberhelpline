@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -495,6 +496,36 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        {selectedPost ? (
+          <>
+            <title>{selectedPost.title} - Sober Helpline</title>
+            <meta name="description" content={selectedPost.excerpt} />
+            <meta property="og:title" content={selectedPost.title} />
+            <meta property="og:description" content={selectedPost.excerpt} />
+            <meta property="og:image" content={window.location.origin + selectedPost.image} />
+            <meta property="og:url" content={window.location.origin + '/blog#' + selectedPost.id} />
+            <meta property="og:type" content="article" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={selectedPost.title} />
+            <meta name="twitter:description" content={selectedPost.excerpt} />
+            <meta name="twitter:image" content={window.location.origin + selectedPost.image} />
+          </>
+        ) : (
+          <>
+            <title>Recovery Blog - Sober Helpline</title>
+            <meta name="description" content="Expert guidance on addiction recovery, treatment options, and family support." />
+            <meta property="og:title" content="Recovery Blog - Sober Helpline" />
+            <meta property="og:description" content="Expert guidance on addiction recovery, treatment options, and family support." />
+            <meta property="og:image" content={window.location.origin + logo} />
+            <meta property="og:url" content={window.location.origin + '/blog'} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Recovery Blog - Sober Helpline" />
+            <meta name="twitter:description" content="Expert guidance on addiction recovery, treatment options, and family support." />
+            <meta name="twitter:image" content={window.location.origin + logo} />
+          </>
+        )}
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
