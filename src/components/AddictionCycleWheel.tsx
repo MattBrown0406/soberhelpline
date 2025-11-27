@@ -53,12 +53,12 @@ const AddictionCycleWheel = () => {
       <style>
         {`
           @keyframes pulse-text {
-            0%, 100% {
+            0%, 12.5%, 100% {
               transform: scale(1);
               opacity: 0.85;
             }
-            50% {
-              transform: scale(1.15);
+            6.25% {
+              transform: scale(1.2);
               opacity: 1;
             }
           }
