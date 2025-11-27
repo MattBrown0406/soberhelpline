@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -405,11 +405,17 @@ const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const shareSectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (showShareOptions && shareSectionRef.current) {
+      shareSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, [showShareOptions]);
 
   const handleShare = (post: typeof blogPosts[0]) => {
     setShowShareOptions(!showShareOptions);
   };
-
   const copyLink = async (post: typeof blogPosts[0]) => {
     const url = window.location.origin + '/blog#' + post.id;
     try {
@@ -601,7 +607,7 @@ const Blog = () => {
           </ScrollArea>
           
           {/* Share Button */}
-          <div className="border-t pt-4 mt-2">
+          <div className="border-t pt-4 mt-2" ref={shareSectionRef}>
             {/* Share Options - Appears above button */}
             {showShareOptions && selectedPost && (
               <div className="mb-4 p-4 border rounded-lg bg-background shadow-lg z-50">
