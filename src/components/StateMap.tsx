@@ -131,7 +131,7 @@ const StateMap = ({ stateName, providers, onBackToUSMap, onProviderClick }: Stat
   };
 
   return (
-    <div className="w-full max-w-[672px] mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-5 relative">
+    <div className="w-full max-w-[672px] mx-auto bg-card rounded-lg border-2 border-foreground shadow-xl p-5 relative">
       <div className="flex items-center justify-between mb-4">
         <Button 
           variant="outline" 
