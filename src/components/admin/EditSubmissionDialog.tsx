@@ -177,6 +177,15 @@ export function EditSubmissionDialog({
                   />
                 </div>
               </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="sliding_scale_available"
+                  checked={editedSubmission.sliding_scale_available || false}
+                  onCheckedChange={(checked) => updateField("sliding_scale_available", checked)}
+                />
+                <Label htmlFor="sliding_scale_available">Sliding Scale Options Available</Label>
+              </div>
             </div>
 
             {/* Treatment-Specific Fields */}
