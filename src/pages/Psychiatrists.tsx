@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
+import StateMap from "@/components/StateMap";
 import ProviderCard from "@/components/ProviderCard";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
@@ -29,6 +30,7 @@ interface Provider {
 
 const Psychiatrists = () => {
   const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [showStateMap, setShowStateMap] = useState(false);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
@@ -111,7 +113,14 @@ const Psychiatrists = () => {
 
   const handleStateClick = (stateName: string) => {
     setSelectedState(stateName);
+    setShowStateMap(true);
     fetchProviders(stateName);
+  };
+
+  const handleBackToUSMap = () => {
+    setShowStateMap(false);
+    setSelectedState(null);
+    setProviders([]);
   };
 
   const handleZipCodeSearch = async () => {
@@ -225,9 +234,17 @@ const Psychiatrists = () => {
 
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-center mb-4">
-            Select a State to View Providers
+            {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          {showStateMap && selectedState ? (
+            <StateMap
+              stateName={selectedState}
+              providers={providers}
+              onBackToUSMap={handleBackToUSMap}
+            />
+          ) : (
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          )}
           
           <div className="max-w-md mx-auto mt-6">
             <div className="space-y-2">

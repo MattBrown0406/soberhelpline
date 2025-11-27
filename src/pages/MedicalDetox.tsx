@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
+import StateMap from "@/components/StateMap";
 import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
@@ -62,6 +63,7 @@ interface Provider {
 
 const MedicalDetox = () => {
   const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [showStateMap, setShowStateMap] = useState(false);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
   const [showingNearby, setShowingNearby] = useState(false);
@@ -178,7 +180,14 @@ const MedicalDetox = () => {
 
   const handleStateClick = (stateName: string) => {
     setSelectedState(stateName);
+    setShowStateMap(true);
     fetchProviders(stateName);
+  };
+
+  const handleBackToUSMap = () => {
+    setShowStateMap(false);
+    setSelectedState(null);
+    setProviders([]);
   };
 
   const handleFiltersChange = (newFilters: typeof filters) => {
@@ -329,9 +338,17 @@ const MedicalDetox = () => {
 
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-center mb-4">
-            Select a State to View Providers
+            {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          {showStateMap && selectedState ? (
+            <StateMap
+              stateName={selectedState}
+              providers={providers}
+              onBackToUSMap={handleBackToUSMap}
+            />
+          ) : (
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+          )}
           
           <div className="max-w-2xl mx-auto mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
