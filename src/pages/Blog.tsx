@@ -13,7 +13,67 @@ import aftercareImg from "@/assets/blog-aftercare-recovery.png";
 import levelOfCareImg from "@/assets/blog-level-of-care.png";
 import aaMeetingsImg from "@/assets/blog-aa-meetings.png";
 import amIAddictedImg from "@/assets/blog-am-i-addicted.png";
+import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
+
+const imageMap: Record<string, string> = {
+  cycleOfAddictionImg,
+};
+
 const blogPosts = [
+  {
+    id: 0,
+    title: "Understanding the Cycle of Addiction and How 12-Step Recovery Breaks It",
+    excerpt: "The diagram shows how addiction becomes a self-feeding cycle, and how the 12-step recovery model speaks directly to each part of that loop, offering a spiritual and practical shift that breaks the cycle from the inside out.",
+    author: "Sober Helpline Team",
+    date: "2025-11-27",
+    category: "Recovery Basics",
+    image: cycleOfAddictionImg,
+    content: `The diagram shows how addiction becomes a self-feeding cycle, and how the 12-step recovery model speaks directly to each part of that loop. It moves from internal discomfort and obsession, to using, to remorse and resolution, and then back again unless something deeper changes. In 12-step language, that "something" is a spiritual and practical shift that breaks the cycle from the inside out.
+
+[IMAGE:cycleOfAddictionImg]
+
+**Restless, irritable, and obsessed**
+
+At the top, the diagram starts with being "restless, irritable, discontented with an obsession to use." That's the emotional and spiritual condition described in Step 1: life has become unmanageable, and the person feels driven by a power they can't control. This is more than just "wanting a drink" or "wanting a hit" – it's the sense that nothing feels right unless they can change how they feel with a substance.
+
+In 12-step terms, this is untreated addiction: the person may be sober for a moment, but the inner discomfort and untreated spiritual condition make them vulnerable. Without recovery tools, meetings, a sponsor, and a Higher Power, this restless, irritable, and discontent state almost always leads back to the first drink or drug.
+
+**Succumbing to the desire to use**
+
+The next box, "succumb to the desire to use," shows the moment of giving in. In the 12-step model, this is where lack of power shows up clearly. The Big Book talks about the "mental obsession" that convinces the person "this time will be different," even when experience shows otherwise. In that moment, logic and good intentions lose to the urge.
+
+Steps 1–3 address this part of the cycle. Step 1 admits powerlessness. Step 2 opens the door to believing that a Power greater than oneself can restore sanity. Step 3 is a decision to turn one's will and life over to that Power. In practice, that looks like calling a sponsor, going to a meeting, praying, or pausing to use tools instead of acting on the first thought.
+
+**Ease, comfort, and craving**
+
+Once the person uses, the diagram shows "sense of ease and comfort after using" followed by "phenomenon of craving to keep using." For many people, that first drink or drug brings a powerful sense of relief: tension drops, anxiety fades, and things feel "normal" for a little while. That relief is what the addicted brain remembers and chases.
+
+In 12-step language, the "phenomenon of craving" is more than just liking it; it's a physical and mental response that makes stopping very hard once the person starts. This is why the program emphasizes "one day at a time" and "don't pick up the first one." If the first use triggers craving, then the safest place to interrupt the cycle is before that first drink, pill, or bet.
+
+**Active using and consequences**
+
+At the bottom of the diagram, "active using" runs along the curve, showing that once craving kicks in, the person may stay in a pattern of heavy use. In this phase, relationships, work, health, and self-respect often erode. The person may hurt others, break promises, lie, or cross their own moral lines – all classic themes described in stories shared at 12-step meetings.
+
+The 12 steps respond to this not just by telling people to stop, but by giving a path to clean up the wreckage. Steps 4–9 deal with moral inventory, sharing the truth with another person, becoming ready to change character defects, and making amends. These steps help heal the guilt and shame that build up during active using.
+
+**Emerging remorseful and resolving to quit**
+
+The left side of the diagram says "emerge remorseful" and then "firm resolution to not use again." Many people in addiction wake up after a binge feeling deep shame, fear, and regret. They swear off: "Never again." They may mean it with all their heart. The problem is that, without a program of recovery, this sincere resolution usually is not enough to protect them the next time obsession returns.
+
+The 12-step model understands this pattern well. Step 1 recognizes that willpower alone has failed repeatedly. Steps 10–12 provide daily tools: ongoing self-inventory, promptly admitting when wrong, seeking conscious contact with a Higher Power, and carrying the message to others. These daily practices help turn "firm resolution" into a way of life, not just a promise made in pain.
+
+**Breaking the cycle with the 12 steps**
+
+If nothing changes, the person moves from remorse and resolution right back into restlessness, irritability, discontent, and obsession – and the cycle repeats. The 12 steps aim to interrupt that loop at multiple points:
+
+Before using: by building a spiritual foundation, a support network, and habits like meetings, sponsorship, prayer, and service.
+
+After harm: by providing a way to make amends and grow, instead of drowning in shame.
+
+In daily life: by helping people handle stress, resentment, fear, and discomfort without needing to numb out.
+
+In short, the diagram illustrates the untreated disease of addiction, and the 12-step recovery model offers a set of actions that change how a person responds at each stage. Instead of being trapped in the cycle of obsession, use, craving, and remorse, people in recovery learn to live with more serenity, honesty, and connection – one day at a time.`
+  },
   {
     id: 1,
     title: "How Do I Know If I'm Addicted?",
@@ -291,6 +351,21 @@ const Blog = () => {
 
   const renderContent = (content: string) => {
     return content.split('\n\n').map((paragraph, index) => {
+      // Check for image markers like [IMAGE:imageName]
+      const imageMatch = paragraph.match(/^\[IMAGE:(\w+)\]$/);
+      if (imageMatch) {
+        const imageName = imageMatch[1];
+        const imageSrc = imageMap[imageName];
+        if (imageSrc) {
+          return (
+            <div key={index} className="my-6 rounded-lg overflow-hidden shadow-lg">
+              <img src={imageSrc} alt="Article illustration" className="w-full h-auto" />
+            </div>
+          );
+        }
+        return null;
+      }
+      
       if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
         return (
           <h3 key={index} className="text-xl font-semibold text-foreground mt-6 mb-3">
