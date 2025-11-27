@@ -172,7 +172,21 @@ const RecoveryPodcasts = () => {
                       </div>
                     )}
                     <div className="flex-grow">
-                      <h3 className="text-2xl font-bold text-white mb-1">{podcast.name}</h3>
+                      <div className="flex items-center justify-between gap-4">
+                        <h3 className="text-2xl font-bold text-white mb-1">{podcast.name}</h3>
+                        {podcast.name !== "The Unbroken with Sam Davis" && (
+                          <a 
+                            href={podcast.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">
+                              Visit Website
+                              <ExternalLink className="w-4 h-4" />
+                            </Button>
+                          </a>
+                        )}
+                      </div>
                       <p className="text-white/80 flex items-center gap-2">
                         <Mic2 className="w-4 h-4" />
                         Hosted by {podcast.host}
@@ -183,20 +197,6 @@ const RecoveryPodcasts = () => {
 
                 <div className="p-6">
                   <p className="text-muted-foreground mb-4 text-lg">{podcast.description}</p>
-                  
-                  {podcast.name !== "The Unbroken with Sam Davis" && (
-                    <a 
-                      href={podcast.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-block mb-6"
-                    >
-                      <Button className={`gap-2 bg-gradient-to-r ${podcast.gradient} hover:opacity-90 text-white border-0`}>
-                        Visit Website
-                        <ExternalLink className="w-4 h-4" />
-                      </Button>
-                    </a>
-                  )}
 
                   {/* Episodes Section */}
                   <div className="mt-4">
