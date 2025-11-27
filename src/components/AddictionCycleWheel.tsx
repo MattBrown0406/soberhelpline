@@ -15,10 +15,10 @@ const AddictionCycleWheel = () => {
 
   const centerX = 400;
   const centerY = 200;
-  const radiusX = 180;
-  const radiusY = 120;
-  const textRadiusX = 240;
-  const textRadiusY = 160;
+  const radiusX = 160;
+  const radiusY = 110;
+  const textRadiusX = 260;
+  const textRadiusY = 170;
 
   const totalStages = stages.length;
   const animationDuration = 8; // Total cycle duration in seconds
@@ -55,10 +55,10 @@ const AddictionCycleWheel = () => {
           @keyframes pulse-text {
             0%, 12.5%, 100% {
               transform: scale(1);
-              opacity: 0.85;
+              opacity: 0.9;
             }
             6.25% {
-              transform: scale(1.2);
+              transform: scale(1.15);
               opacity: 1;
             }
           }
@@ -69,6 +69,16 @@ const AddictionCycleWheel = () => {
         `}
       </style>
       <svg viewBox="0 0 800 400" className="w-full h-auto">
+        {/* Define drop shadow filter for text */}
+        <defs>
+          <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#000" floodOpacity="0.5"/>
+          </filter>
+          <filter id="centerTextShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.6"/>
+          </filter>
+        </defs>
+
         {/* Arrows around the ellipse */}
         {stages.map((stage, index) => {
           const nextIndex = (index + 1) % stages.length;
@@ -85,7 +95,7 @@ const AddictionCycleWheel = () => {
           const endY = centerY + radiusY * Math.sin(endRad);
           
           const tangentAngle = Math.atan2(radiusX * Math.sin(endRad + Math.PI/2), radiusY * Math.cos(endRad + Math.PI/2));
-          const arrowSize = 10;
+          const arrowSize = 12;
           const arrow1X = endX - arrowSize * Math.cos(tangentAngle - 0.5);
           const arrow1Y = endY - arrowSize * Math.sin(tangentAngle - 0.5);
           const arrow2X = endX - arrowSize * Math.cos(tangentAngle + 0.5);
@@ -97,12 +107,14 @@ const AddictionCycleWheel = () => {
                 d={getArrowPath(startAngle, endAngle)}
                 fill="none"
                 stroke="white"
-                strokeWidth="3"
+                strokeWidth="4"
                 strokeLinecap="round"
+                style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }}
               />
               <polygon
                 points={`${endX},${endY} ${arrow1X},${arrow1Y} ${arrow2X},${arrow2Y}`}
                 fill="white"
+                style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }}
               />
             </g>
           );
@@ -111,10 +123,15 @@ const AddictionCycleWheel = () => {
         {/* Center text */}
         <text
           x={centerX}
-          y={centerY - 15}
+          y={centerY - 18}
           textAnchor="middle"
-          className="font-bold"
-          style={{ fontSize: '24px', fill: 'white' }}
+          className="font-black"
+          style={{ 
+            fontSize: '28px', 
+            fill: 'white',
+            filter: 'url(#centerTextShadow)',
+            letterSpacing: '0.5px'
+          }}
         >
           The Cycle
         </text>
@@ -122,8 +139,13 @@ const AddictionCycleWheel = () => {
           x={centerX}
           y={centerY + 18}
           textAnchor="middle"
-          className="font-bold"
-          style={{ fontSize: '24px', fill: 'white' }}
+          className="font-black"
+          style={{ 
+            fontSize: '28px', 
+            fill: 'white',
+            filter: 'url(#centerTextShadow)',
+            letterSpacing: '0.5px'
+          }}
         >
           of Addiction
         </text>
@@ -141,10 +163,12 @@ const AddictionCycleWheel = () => {
               y={pos.y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="font-semibold cycle-text"
+              className="font-bold cycle-text"
               style={{ 
-                fontSize: '14px', 
+                fontSize: '16px', 
                 fill: 'white',
+                filter: 'url(#textShadow)',
+                letterSpacing: '0.3px',
                 animation: `pulse-text ${animationDuration}s ease-in-out infinite`,
                 animationDelay: `${delay}s`
               }}
