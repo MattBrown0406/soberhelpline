@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Phone, Calendar, User, X } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User, X, Share2, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -403,6 +403,53 @@ Sobriety, at its heart, is a process of rediscovering life's gifts. When a perso
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
+  const [showShareOptions, setShowShareOptions] = useState(false);
+
+  const handleShare = async (post: typeof blogPosts[0]) => {
+    const shareData = {
+      title: post.title,
+      text: post.excerpt,
+      url: window.location.origin + '/blog#' + post.id,
+    };
+
+    // Try using native Web Share API first (includes SMS/iMessage on mobile)
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Share cancelled or failed');
+      }
+    } else {
+      // Fallback: show custom share options
+      setShowShareOptions(true);
+    }
+  };
+
+  const shareToSocial = (platform: string, post: typeof blogPosts[0]) => {
+    const url = encodeURIComponent(window.location.origin + '/blog#' + post.id);
+    const title = encodeURIComponent(post.title);
+    const text = encodeURIComponent(post.excerpt);
+
+    let shareUrl = '';
+    
+    switch(platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        break;
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        break;
+      case 'email':
+        shareUrl = `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
+        break;
+    }
+
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+    setShowShareOptions(false);
+  };
 
   const renderContent = (content: string) => {
     return content.split('\n\n').map((paragraph, index) => {
@@ -517,7 +564,10 @@ const Blog = () => {
       </div>
 
       {/* Article Dialog */}
-      <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
+      <Dialog open={!!selectedPost} onOpenChange={() => {
+        setSelectedPost(null);
+        setShowShareOptions(false);
+      }}>
         <DialogContent className="max-w-3xl max-h-[90vh]">
           <DialogHeader>
             <div className="text-sm text-primary font-medium mb-1">{selectedPost?.category}</div>
@@ -545,6 +595,63 @@ const Blog = () => {
               {selectedPost?.content && renderContent(selectedPost.content)}
             </div>
           </ScrollArea>
+          
+          {/* Share Button */}
+          <div className="border-t pt-4 mt-2">
+            <Button 
+              onClick={() => selectedPost && handleShare(selectedPost)} 
+              variant="outline" 
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <Share2 className="w-4 h-4" />
+              Share this article
+            </Button>
+            
+            {/* Fallback Share Options (shown when Web Share API not available) */}
+            {showShareOptions && selectedPost && (
+              <div className="mt-4 p-4 border rounded-lg bg-muted/50">
+                <p className="text-sm text-muted-foreground mb-3">Share via:</p>
+                <div className="flex gap-2 flex-wrap">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => shareToSocial('facebook', selectedPost)}
+                    className="flex items-center gap-2"
+                  >
+                    <Facebook className="w-4 h-4" />
+                    Facebook
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => shareToSocial('twitter', selectedPost)}
+                    className="flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Twitter
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => shareToSocial('linkedin', selectedPost)}
+                    className="flex items-center gap-2"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => shareToSocial('email', selectedPost)}
+                    className="flex items-center gap-2"
+                  >
+                    <Mail className="w-4 h-4" />
+                    Email
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     </div>
