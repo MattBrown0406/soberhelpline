@@ -28,6 +28,7 @@ const podcasts = [
     gradient: "from-purple-600 via-pink-500 to-orange-400",
     accentColor: "bg-purple-500",
     applePodcastsUrl: "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
+    spotifyUrl: "https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn?si=630de0950ea34b41",
   },
   {
     name: "The Unbroken with Sam Davis",
@@ -183,9 +184,23 @@ const RecoveryPodcasts = () => {
                               rel="noopener noreferrer"
                               title="Listen on Apple Podcasts"
                             >
-                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
+                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
                                 <svg className="w-5 h-5" viewBox="0 0 50 50" fill="currentColor">
                                   <path d="M25 2C12.3 2 2 12.3 2 25s10.3 23 23 23 23-10.3 23-23S37.7 2 25 2zm0 4c10.5 0 19 8.5 19 19s-8.5 19-19 19S6 35.5 6 25 14.5 6 25 6zm0 5c-4.4 0-8.3 2-11 5-.4.4-.3 1.1.1 1.4.4.4 1.1.3 1.4-.1C17.8 14.5 21.2 13 25 13s7.2 1.5 9.5 4.3c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-2.7-3.1-6.6-5.1-11.1-5.1zm0 6c-2.8 0-5.2 1.2-7 3.2-.4.4-.3 1 .1 1.4.4.4 1 .3 1.4-.1 1.4-1.5 3.3-2.4 5.5-2.4s4.1.9 5.5 2.4c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-1.8-2-4.3-3.3-7.1-3.3zm0 6c-2.2 0-4 1.8-4 4 0 1.5.8 2.7 2 3.4v9.1c0 1.1.9 2 2 2s2-.9 2-2v-9.1c1.2-.7 2-2 2-3.4 0-2.2-1.8-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+                                </svg>
+                              </Button>
+                            </a>
+                          )}
+                          {podcast.spotifyUrl && (
+                            <a 
+                              href={podcast.spotifyUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              title="Listen on Spotify"
+                            >
+                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
+                                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
                                 </svg>
                               </Button>
                             </a>
