@@ -13,10 +13,10 @@ const AddictionCycleWheel = () => {
     { label: "Abstinence Without\nTreating Root Causes", angle: 255 },
   ];
 
-  const centerX = 200;
-  const centerY = 200;
-  const radius = 140;
-  const textRadius = 165;
+  const centerX = 300;
+  const centerY = 300;
+  const radius = 130;
+  const textRadius = 175;
 
   // Calculate position for each stage
   const getPosition = (angle: number, r: number) => {
@@ -45,8 +45,8 @@ const AddictionCycleWheel = () => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
-      <svg viewBox="0 0 400 400" className="w-full h-auto">
+    <div className="w-full max-w-xl mx-auto">
+      <svg viewBox="0 0 600 600" className="w-full h-auto">
         {/* Arrows around the wheel */}
         {stages.map((stage, index) => {
           const nextIndex = (index + 1) % stages.length;
