@@ -48,6 +48,8 @@ interface Provider {
   year_started?: number | null;
   sliding_scale_available?: boolean | null;
   adolescent_services?: boolean | null;
+  accepts_mat_residents?: boolean | null;
+  items_included_in_cost?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -128,6 +130,23 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       )}
                       {provider.gender_specific_treatment.includes("Women") && (
                         <Badge variant="secondary" className="text-xs">Women Only</Badge>
+                      )}
+                    </>
+                  )}
+                  {/* MAT and included items badges for Sober Living */}
+                  {provider.category === "Sober Living" && provider.accepts_mat_residents && (
+                    <Badge variant="default" className="text-xs bg-accent text-accent-foreground">MAT OK</Badge>
+                  )}
+                  {provider.category === "Sober Living" && provider.items_included_in_cost && provider.items_included_in_cost.length > 0 && (
+                    <>
+                      {provider.items_included_in_cost.includes("Food") && (
+                        <Badge variant="outline" className="text-xs">Food Included</Badge>
+                      )}
+                      {provider.items_included_in_cost.includes("Transportation") && (
+                        <Badge variant="outline" className="text-xs">Transportation Included</Badge>
+                      )}
+                      {provider.items_included_in_cost.includes("Therapeutic Support") && (
+                        <Badge variant="outline" className="text-xs">Therapeutic Support Included</Badge>
                       )}
                     </>
                   )}
