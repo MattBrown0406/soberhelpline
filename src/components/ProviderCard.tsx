@@ -44,6 +44,7 @@ interface Provider {
   gender_specific_treatment?: string[] | null;
   telehealth_available?: boolean | null;
   detox_available?: boolean | null;
+  year_started?: number | null;
 }
 
 interface ProviderCardProps {
@@ -171,6 +172,12 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <span>
                       {provider.city}, {provider.state} {provider.zip_code}
                     </span>
+                  </div>
+                )}
+                
+                {provider.year_started && (
+                  <div className="text-sm text-muted-foreground mb-3">
+                    <span className="font-semibold">Providing Services Since:</span> {provider.year_started}
                   </div>
                 )}
                 
