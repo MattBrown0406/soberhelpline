@@ -180,7 +180,7 @@ const Index = () => {
         {/* Addiction Cycle Section */}
         <div className="mt-8 md:mt-12 text-center max-w-4xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">
-            We're here to help you interrupt this cycle
+            We're Here to Help You Interrupt This Cycle
           </h2>
           <div className="rounded-lg shadow-lg overflow-hidden">
             <img src={addictionCycleImg} alt="The Cycle of Addiction" className="w-full h-auto" />
