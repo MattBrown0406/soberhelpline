@@ -7,9 +7,13 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
+import dadDaughter from "@/assets/dad-daughter.png";
+import hispanicFamily from "@/assets/hispanic-family.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
+
+const heroImages = [familyHero, dadDaughter, hispanicFamily];
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -24,6 +28,7 @@ const categories = [
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -39,6 +44,13 @@ const Index = () => {
     });
 
     return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleLogout = async () => {
@@ -125,7 +137,21 @@ const Index = () => {
         </div>
 
         <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
-          <img src={familyHero} alt="Family together in recovery" className="w-full rounded-lg shadow-lg object-cover" width={636} height={636} fetchPriority="high" />
+          <div className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg">
+            {heroImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt="Family together in recovery"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+                width={636}
+                height={636}
+                fetchPriority={index === 0 ? "high" : "low"}
+              />
+            ))}
+          </div>
           <div className="space-y-3 md:space-y-4 bg-black rounded-lg shadow-lg p-5 md:p-8 flex flex-col justify-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Our Mission</h2>
             <p className="text-gray-200 leading-relaxed text-sm md:text-base">
