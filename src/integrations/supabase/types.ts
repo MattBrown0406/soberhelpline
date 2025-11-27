@@ -312,7 +312,31 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      provider_subscriptions_with_provider: {
+        Row: {
+          amount: number | null
+          created_at: string | null
+          id: string | null
+          next_billing_date: string | null
+          paypal_subscription_id: string | null
+          plan_type: string | null
+          provider_name: string | null
+          provider_submission_id: string | null
+          start_date: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       has_role: {
