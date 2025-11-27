@@ -9,6 +9,7 @@ import logo from "@/assets/logo.png";
 import familyHero from "@/assets/family-hero.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
+import AddictionCycleWheel from "@/components/AddictionCycleWheel";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -147,6 +148,16 @@ const Index = () => {
               Register Here!
             </Button>
           </a>
+        </div>
+
+        {/* Addiction Cycle Section */}
+        <div className="mt-8 md:mt-12 text-center max-w-4xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">
+            We're here to help you interrupt this cycle
+          </h2>
+          <div className="bg-card rounded-lg shadow-lg p-6 md:p-8">
+            <AddictionCycleWheel />
+          </div>
         </div>
 
         {/* Blog Link */}
