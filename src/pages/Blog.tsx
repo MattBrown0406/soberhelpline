@@ -19,7 +19,7 @@ const blogPosts = [
     title: "How Do I Know If I'm Addicted?",
     excerpt: "The DSM-IV provided clear guidelines for diagnosing substance use disorder and alcohol use disorder. Learn about the criteria that help identify when someone's use of drugs or alcohol is causing serious problems.",
     author: "Sober Helpline Team",
-    date: "2025-01-15",
+    date: "2025-11-27",
     category: "Recovery Basics",
     image: amIAddictedImg,
     content: `The DSM-IV (Diagnostic and Statistical Manual of Mental Disorders, Fourth Edition) provided clear guidelines for diagnosing both substance use disorder and alcohol use disorder. These diagnoses helped clinicians identify when someone's use of drugs or alcohol was causing serious problems in their life. The criteria are designed to be understood in everyday language, so families and individuals can recognize warning signs and seek help when needed.
