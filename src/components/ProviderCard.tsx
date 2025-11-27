@@ -43,6 +43,7 @@ interface Provider {
   facebook_url?: string | null;
   gender_specific_treatment?: string[] | null;
   telehealth_available?: boolean | null;
+  detox_available?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -141,6 +142,13 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <Badge variant="secondary" className="gap-1">
                       <Video className="w-3 h-3" />
                       Telehealth Provider
+                    </Badge>
+                  )}
+                  {/* Detox badge for Inpatient and Outpatient Treatment */}
+                  {(provider.category === "Inpatient Treatment" || provider.category === "Outpatient Treatment") && 
+                    provider.detox_available && (
+                    <Badge variant="default" className="gap-1 bg-accent text-accent-foreground">
+                      Detox Available
                     </Badge>
                   )}
                 </div>
