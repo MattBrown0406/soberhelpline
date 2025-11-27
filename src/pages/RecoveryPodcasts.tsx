@@ -27,6 +27,7 @@ const podcasts = [
     logo: partyWreckersLogo,
     gradient: "from-purple-600 via-pink-500 to-orange-400",
     accentColor: "bg-purple-500",
+    applePodcastsUrl: "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
   },
   {
     name: "The Unbroken with Sam Davis",
@@ -174,18 +175,34 @@ const RecoveryPodcasts = () => {
                     <div className="flex-grow">
                       <div className="flex items-center justify-between gap-4">
                         <h3 className="text-2xl font-bold text-white mb-1">{podcast.name}</h3>
-                        {podcast.name !== "The Unbroken with Sam Davis" && (
-                          <a 
-                            href={podcast.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                          >
-                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">
-                              Visit Website
-                              <ExternalLink className="w-4 h-4" />
-                            </Button>
-                          </a>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {podcast.applePodcastsUrl && (
+                            <a 
+                              href={podcast.applePodcastsUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              title="Listen on Apple Podcasts"
+                            >
+                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
+                                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 1.5c4.687 0 8.5 3.813 8.5 8.5s-3.813 8.5-8.5 8.5-8.5-3.813-8.5-8.5 3.813-8.5 8.5-8.5zm0 2.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm0 1.5a2 2 0 110 4 2 2 0 010-4zm0 6.5c-1.38 0-2.5 1.12-2.5 2.5v1.5h5v-1.5c0-1.38-1.12-2.5-2.5-2.5z"/>
+                                </svg>
+                              </Button>
+                            </a>
+                          )}
+                          {podcast.name !== "The Unbroken with Sam Davis" && (
+                            <a 
+                              href={podcast.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                            >
+                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">
+                                Visit Website
+                                <ExternalLink className="w-4 h-4" />
+                              </Button>
+                            </a>
+                          )}
+                        </div>
                       </div>
                       <p className="text-white/80 flex items-center gap-2">
                         <Mic2 className="w-4 h-4" />
