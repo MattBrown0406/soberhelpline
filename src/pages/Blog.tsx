@@ -593,24 +593,21 @@ const Blog = () => {
               </div>
             </div>
           </DialogHeader>
-          <ScrollArea className="max-h-[60vh] pr-4">
-            <div className="py-4">
-              {selectedPost?.image && (
-                <img 
-                  src={selectedPost.image} 
-                  alt={selectedPost.title} 
-                  className="w-full h-64 object-cover rounded-lg mb-6"
-                />
-              )}
-              {selectedPost?.content && renderContent(selectedPost.content)}
-            </div>
-          </ScrollArea>
           
-          {/* Share Button */}
-          <div className="border-t pt-4 mt-2" ref={shareSectionRef}>
-            {/* Share Options - Appears above button */}
+          {/* Share Button - At Top */}
+          <div className="border-y py-3" ref={shareSectionRef}>
+            <Button 
+              onClick={() => selectedPost && handleShare(selectedPost)} 
+              variant="outline" 
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <Share2 className="w-4 h-4" />
+              {showShareOptions ? 'Hide share options' : 'Share this article'}
+            </Button>
+            
+            {/* Share Options */}
             {showShareOptions && selectedPost && (
-              <div className="mb-4 p-4 border rounded-lg bg-background shadow-lg z-50">
+              <div className="mt-3 p-4 border rounded-lg bg-background shadow-lg">
                 <p className="text-sm text-muted-foreground mb-3">Share via:</p>
                 <div className="flex gap-2 flex-wrap">
                   <Button 
@@ -672,16 +669,20 @@ const Blog = () => {
                 </div>
               </div>
             )}
-            
-            <Button 
-              onClick={() => selectedPost && handleShare(selectedPost)} 
-              variant="outline" 
-              className="w-full flex items-center justify-center gap-2"
-            >
-              <Share2 className="w-4 h-4" />
-              {showShareOptions ? 'Hide share options' : 'Share this article'}
-            </Button>
           </div>
+
+          <ScrollArea className="max-h-[60vh] pr-4">
+            <div className="py-4">
+              {selectedPost?.image && (
+                <img 
+                  src={selectedPost.image} 
+                  alt={selectedPost.title} 
+                  className="w-full h-64 object-cover rounded-lg mb-6"
+                />
+              )}
+              {selectedPost?.content && renderContent(selectedPost.content)}
+            </div>
+          </ScrollArea>
         </DialogContent>
       </Dialog>
     </div>
