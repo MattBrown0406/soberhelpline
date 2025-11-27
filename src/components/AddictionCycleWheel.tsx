@@ -51,10 +51,16 @@ const AddictionCycleWheel = () => {
         {stages.map((stage, index) => {
           const nextIndex = (index + 1) % stages.length;
           const startAngle = stage.angle + 8;
-          const endAngle = stages[nextIndex].angle - 8;
+          let endAngle = stages[nextIndex].angle - 8;
+          
+          // Handle wrap-around for the last segment
+          if (index === stages.length - 1) {
+            endAngle = stages[nextIndex].angle + 360 - 8;
+          }
           
           const arrowRadius = radius;
-          const endRad = (endAngle - 90) * (Math.PI / 180);
+          const actualEndAngle = stages[nextIndex].angle - 8;
+          const endRad = (actualEndAngle - 90) * (Math.PI / 180);
           const endX = centerX + arrowRadius * Math.cos(endRad);
           const endY = centerY + arrowRadius * Math.sin(endRad);
           
