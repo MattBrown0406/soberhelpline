@@ -12,9 +12,82 @@ import supportLovedOneImg from "@/assets/blog-support-loved-one.png";
 import aftercareImg from "@/assets/blog-aftercare-recovery.png";
 import levelOfCareImg from "@/assets/blog-level-of-care.png";
 import aaMeetingsImg from "@/assets/blog-aa-meetings.png";
+import amIAddictedImg from "@/assets/blog-am-i-addicted.png";
 const blogPosts = [
   {
     id: 1,
+    title: "How Do I Know If I'm Addicted?",
+    excerpt: "The DSM-IV provided clear guidelines for diagnosing substance use disorder and alcohol use disorder. Learn about the criteria that help identify when someone's use of drugs or alcohol is causing serious problems.",
+    author: "Sober Helpline Team",
+    date: "2024-11-28",
+    category: "Recovery Basics",
+    image: amIAddictedImg,
+    content: `The DSM-IV (Diagnostic and Statistical Manual of Mental Disorders, Fourth Edition) provided clear guidelines for diagnosing both substance use disorder and alcohol use disorder. These diagnoses helped clinicians identify when someone's use of drugs or alcohol was causing serious problems in their life. The criteria are designed to be understood in everyday language, so families and individuals can recognize warning signs and seek help when needed.
+
+**DSM-IV Criteria for Substance Use Disorder**
+
+Substance use disorder under DSM-IV was divided into two categories: substance abuse and substance dependence. To be diagnosed with substance abuse, a person must show at least one of the following within a 12-month period:
+
+Repeatedly failing to meet major responsibilities at work, school, or home because of substance use.
+
+Using substances in dangerous situations, like driving or operating machinery while impaired.
+
+Getting into repeated legal trouble due to substance use.
+
+Continuing to use substances even when it causes or worsens social or relationship problems.
+
+For substance dependence, a person must show at least three of these criteria in a 12-month period:
+
+Tolerance: needing much more of the substance to feel the desired effect, or feeling less effect with the same amount.
+
+Withdrawal: experiencing physical or emotional symptoms when not using, or using the substance to avoid withdrawal.
+
+Using more or for a longer time than intended.
+
+Repeatedly trying to cut down or stop but failing.
+
+Spending a lot of time obtaining, using, or recovering from the substance.
+
+Giving up important activities (social, work, hobbies) because of substance use.
+
+Continuing to use despite knowing it is causing or worsening physical or mental health problems.
+
+**DSM-IV Criteria for Alcohol Use Disorder**
+
+Alcohol use disorder was diagnosed using similar criteria. Alcohol abuse was diagnosed if at least one of the following was present in the past year:
+
+Alcohol interfered with responsibilities at home, work, or school.
+
+Repeatedly used alcohol in physically hazardous situations.
+
+Had repeated legal problems related to drinking.
+
+Continued drinking despite ongoing relationship problems caused by alcohol.
+
+Alcohol dependence required at least three of the following in a 12-month period:
+
+Tolerance: needing more alcohol to feel the same effect, or less effect with the same amount.
+
+Withdrawal: experiencing withdrawal symptoms or drinking to avoid them.
+
+Drinking more or longer than intended.
+
+Repeated unsuccessful attempts to cut down or quit.
+
+Spending a lot of time drinking or recovering from drinking.
+
+Giving up important activities to drink.
+
+Continuing to drink despite knowing it is causing or worsening physical or mental health problems.
+
+**Key Differences and Practical Implications**
+
+The DSM-IV separated abuse and dependence, which helped clinicians understand the severity of someone's condition. Abuse was considered less severe, while dependence indicated more serious problems and often physical addiction. These distinctions helped guide treatment decisions and support strategies for individuals and families.
+
+Understanding these criteria helps families and friends recognize when someone might need professional help. If someone is showing several of these signs, it's important to encourage them to speak with a healthcare provider or addiction specialist. Early intervention can make a big difference in recovery outcomes.`
+  },
+  {
+    id: 2,
     title: "The Lifeline After Treatment: Why AA Meetings Matter Most Once Rehab Ends",
     excerpt: "Completing inpatient treatment is an enormous accomplishment, but the transition back to everyday life brings new challenges. Discover why AA meetings become the single most consistent support system in lifelong recovery.",
     author: "Sober Helpline Team",
@@ -70,7 +143,7 @@ In the end, the goal of recovery is not just to stop drinking, but to rediscover
 For anyone completing inpatient treatment, attending AA meetings is not merely an afterthought. It is the continuation of recovery, the maintenance plan that keeps healing active and alive. Sobriety is built one day at a time—and AA offers the daily framework and fellowship to make that possible.`
   },
   {
-    id: 2,
+    id: 3,
     title: "Why the Right Level of Care Matters",
     excerpt: "Choosing the right level of addiction treatment care is critical because it can mean the difference between short-term symptom relief and lasting recovery.",
     author: "Sober Helpline Team",
@@ -122,7 +195,7 @@ Because matching a person to the correct level of addiction treatment depends on
 Families and individuals who understand the purpose of each level can ask better questions, advocate for appropriate placement, and recognize when a change in level is needed. This collaboration with professionals helps ensure that treatment is not only accessible, but also effective, personalized, and sustainable over time.`
   },
   {
-    id: 3,
+    id: 4,
     title: "Motivating Your Reluctant Loved One",
     excerpt: "When someone you care about is struggling with addiction but resistant to help, it can feel hopeless. Discover compassionate strategies to encourage treatment without pushing them away.",
     author: "Sober Helpline Team",
@@ -182,7 +255,7 @@ Prioritizing your own mental health and self-care is not selfish; it models heal
 By combining compassionate communication, firm boundaries, concrete treatment options, and evidence-based family strategies, parents can dramatically increase the chances that an addicted son or daughter will say "yes" to help and begin the journey into recovery.`
   },
   {
-    id: 4,
+    id: 5,
     title: "Understanding the First Steps of Recovery",
     excerpt: "Recovery is a journey that begins with a single step. Learn about the crucial first steps that can set you or your loved one on the path to lasting sobriety.",
     author: "Sober Helpline Team",
@@ -192,7 +265,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     content: null
   },
   {
-    id: 5,
+    id: 6,
     title: "How to Support a Loved One in Treatment",
     excerpt: "Supporting someone through addiction treatment can be challenging. Discover effective ways to be there for your loved one while maintaining healthy boundaries.",
     author: "Sober Helpline Team",
@@ -202,7 +275,7 @@ By combining compassionate communication, firm boundaries, concrete treatment op
     content: null
   },
   {
-    id: 6,
+    id: 7,
     title: "The Importance of Aftercare in Recovery",
     excerpt: "Treatment is just the beginning. Learn why aftercare programs are essential for maintaining long-term sobriety and preventing relapse.",
     author: "Sober Helpline Team",
