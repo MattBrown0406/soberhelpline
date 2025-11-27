@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import partyWreckersLogo from "@/assets/party-wreckers-logo.png";
 import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
 import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
+import primaryPurposePejLogo from "@/assets/primary-purpose-pej-logo.jpeg";
 import logo from "@/assets/logo.png";
 
 interface Episode {
@@ -56,7 +57,7 @@ const podcasts = [
     host: "Pej",
     link: "",
     rssFeed: "https://feeds.megaphone.fm/purpose-with-pej",
-    logo: null,
+    logo: primaryPurposePejLogo,
     gradient: "from-amber-500 via-orange-500 to-red-600",
     accentColor: "bg-amber-500",
   },
