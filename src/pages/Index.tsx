@@ -155,7 +155,7 @@ const Index = () => {
           <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">
             We're here to help you interrupt this cycle
           </h2>
-          <div className="bg-card rounded-lg shadow-lg p-6 md:p-8">
+          <div className="rounded-lg shadow-lg p-6 md:p-8" style={{ backgroundColor: 'hsl(162, 48%, 42%)' }}>
             <AddictionCycleWheel />
           </div>
         </div>

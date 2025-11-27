@@ -77,13 +77,13 @@ const AddictionCycleWheel = () => {
               <path
                 d={getArrowPath(startAngle, endAngle)}
                 fill="none"
-                stroke="hsl(var(--primary))"
+                stroke="white"
                 strokeWidth="3"
                 strokeLinecap="round"
               />
               <polygon
                 points={`${endX},${endY} ${arrow1X},${arrow1Y} ${arrow2X},${arrow2Y}`}
-                fill="hsl(var(--primary))"
+                fill="white"
               />
             </g>
           );
@@ -94,8 +94,8 @@ const AddictionCycleWheel = () => {
           x={centerX}
           y={centerY - 15}
           textAnchor="middle"
-          className="fill-foreground font-bold text-xl"
-          style={{ fontSize: '20px' }}
+          className="font-bold text-xl"
+          style={{ fontSize: '20px', fill: 'white' }}
         >
           The Cycle
         </text>
@@ -103,8 +103,8 @@ const AddictionCycleWheel = () => {
           x={centerX}
           y={centerY + 12}
           textAnchor="middle"
-          className="fill-foreground font-bold text-xl"
-          style={{ fontSize: '20px' }}
+          className="font-bold text-xl"
+          style={{ fontSize: '20px', fill: 'white' }}
         >
           of Addiction
         </text>
@@ -121,8 +121,8 @@ const AddictionCycleWheel = () => {
               y={pos.y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="fill-primary font-semibold"
-              style={{ fontSize: '12px' }}
+              className="font-semibold"
+              style={{ fontSize: '12px', fill: 'white' }}
             >
               {lines.map((line, lineIndex) => (
                 <tspan
