@@ -419,8 +419,9 @@ const Blog = () => {
   };
   const copyLink = async (post: typeof blogPosts[0]) => {
     const url = window.location.origin + '/blog#' + post.id;
+    const textToCopy = `${post.title} - Sober Helpline\n${url}`;
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(textToCopy);
       setLinkCopied(true);
       setTimeout(() => setLinkCopied(false), 2000);
     } catch (err) {
@@ -446,7 +447,7 @@ const Blog = () => {
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
         break;
       case 'email':
-        shareUrl = `mailto:?subject=${title}&body=${text}%0A%0A${url}`;
+        shareUrl = `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0A${url}`;
         break;
       case 'native':
         if (navigator.share) {
