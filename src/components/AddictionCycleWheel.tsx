@@ -8,7 +8,7 @@ const AddictionCycleWheel = () => {
     { label: "Obsessing", angle: 30 },
     { label: "Substance\nAbuse", angle: 75 },
     { label: "Loss of\nControl", angle: 120 },
-    { label: "Guilt\nOver Use", angle: 165 },
+    { label: "Guilt & Shame\nOver Consequences", angle: 165 },
     { label: "Cessation\nof Use", angle: 210 },
     { label: "Passage\nof Time", angle: 255 },
   ];
