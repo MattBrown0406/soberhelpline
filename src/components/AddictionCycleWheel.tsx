@@ -3,7 +3,7 @@ import React from 'react';
 const AddictionCycleWheel = () => {
   // Positions for each stage around the wheel (in degrees, starting from top)
   const stages = [
-    { label: "Internal\nFrustration", angle: -60 },
+    { label: "Emotional\nPain", angle: -60 },
     { label: "Fantasizing", angle: -15 },
     { label: "Obsessing", angle: 30 },
     { label: "Substance\nAbuse", angle: 75 },
