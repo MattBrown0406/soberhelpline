@@ -530,7 +530,7 @@ const Blog = () => {
 
         {/* Blog Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {blogPosts.map((post) => (
+          {blogPosts.slice().reverse().map((post) => (
             <Link key={post.id} to={post.content ? `/blog/${post.id}` : '#'} className={post.content ? '' : 'pointer-events-none'}>
               <Card className={`hover:shadow-lg transition-shadow overflow-hidden h-full ${post.content ? 'cursor-pointer' : ''}`}>
                 {post.image && (
