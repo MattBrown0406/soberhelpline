@@ -14,6 +14,7 @@ import amIAddictedImg from "@/assets/blog-am-i-addicted.png";
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import gratitudeHappinessImg from "@/assets/blog-gratitude-happiness.png";
 import holidayRelapseTriggersImg from "@/assets/blog-holiday-relapse-triggers.png";
+import ozempicEatingDisordersImg from "@/assets/blog-ozempic-eating-disorders.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -440,9 +441,57 @@ If certain conversations or people are consistently harmful, you can keep intera
 
 **A Gentle Call to Reach Out**
 
-If this holiday season feels heavy, or if you are scared you might relapse, reaching out for help is a sign of strength, not failure. A helpline, local treatment program, therapist, or peer support group can help you make a plan and walk with you through the hardest days.
+    If this holiday season feels heavy, or if you are scared you might relapse, reaching out for help is a sign of strength, not failure. A helpline, local treatment program, therapist, or peer support group can help you make a plan and walk with you through the hardest days.
 
 You deserve support, and you do not have to wait until things get worse to ask for it. If you or someone you love is struggling right now, consider contacting a trusted helpline or recovery resource today to talk to someone who understands and can help you stay safe.`
+  },
+  {
+    id: 10,
+    title: "Ozempic, Weight Loss, and Eating Disorders: A Gentle Guide for Families",
+    excerpt: "GLP‑1 drugs like Ozempic and Wegovy are all over the news, and many families feel unsure about the risks. This gentle guide explains how these medications can interact with eating disorders and how to lovingly support a loved one.",
+    author: "Sober Helpline Team",
+    date: "2025-11-28",
+    category: "Family Support",
+    image: ozempicEatingDisordersImg,
+    content: `Medications like Ozempic, Wegovy, and similar GLP‑1 drugs were created to help people manage type 2 diabetes, but their strong effect on appetite and weight loss has made them widely used for weight control. Many people now know someone who is taking one of these medications or considering it, so it is natural to have questions and worries.
+
+For some, these drugs can bring real health benefits. At the same time, they exist in a culture that praises thinness and quick fixes, which can be especially hard for anyone who already struggles with body image or food. Families are not overreacting when they pause and ask, "Is this truly supporting long‑term health?"
+
+**How These Medications Change Hunger and Eating**
+
+GLP‑1 medications change how the brain and gut communicate about hunger and fullness, often leading people to feel satisfied with much less food and to think about eating less often. Many describe this as "food getting quieter" in their minds, which can feel like a huge relief after years of struggling with overeating.
+
+For someone who has wrestled with binge eating or emotional eating, this can seem like a fresh start. But when eating becomes very limited, rules get rigid, or there is growing fear about ever gaining weight back, the line between "helpful support" and "harmful control" can quietly blur. That is where gentle, curious conversations and good professional support really matter.
+
+**When Helpful Support Starts to Hurt**
+
+More professionals are noticing that these medications can sometimes worsen existing eating disorders or help them hide in plain sight. Rapid weight loss, constant compliments about appearance, and pressure to "keep it off" can accidentally reinforce dangerous patterns. On the surface, a person may look "successful," while inside they feel terrified of food or of their body changing.
+
+There is also the emotional crash that can come if weight returns when the medicine is stopped or changed. Someone may feel shame, like they "failed," and that can push them toward more extreme dieting or urgent attempts to get back on the medication. In these moments, compassion and connection from loved ones are much more powerful than advice or criticism.
+
+**Gentle Warning Signs to Notice**
+
+If someone you care about is using a GLP‑1 medication, it helps to look at the whole picture, not just their weight. You might want to pay attention if you notice:
+
+Often skipped meals, very long stretches without eating, or pride in "forgetting to eat" because of the shot.
+
+Intense fear around missing a dose or gaining any amount of weight back, even a few pounds.
+
+New, rigid food rules ("I never eat carbs now," "I can't eat after 4 p.m.") that cause distress if broken.
+
+Pulling away from social events that involve food, or becoming more anxious, withdrawn, or self‑critical about appearance.
+
+Noticing these signs does not mean you have to label anything right away. It simply means something important is going on and your loved one may need extra kindness, curiosity, and support.
+
+**How to Show Up With Care**
+
+You do not need to have all the answers to be deeply helpful. Often, what matters most is your steady presence and your willingness to listen without judgment. You might say things like, "I've noticed you seem more stressed about food lately—how has this been feeling for you?" or "I care about you far beyond your weight or what you eat."
+
+If your loved one is open to it, encouraging a conversation with their prescriber, a therapist, or a dietitian who understands eating disorders can be a loving next step. Remind them that needing help is not a failure; it is a brave and wise response to something complicated. Their worth was never meant to be measured by a number on the scale or by a prescription.
+
+**A Soft Call to Reach Out**
+
+If any of this feels familiar—for you or someone you love—you do not have to sort it out alone. A caring helpline or recovery‑focused resource can listen to your story, help you make sense of what is happening, and connect you with support that fits your situation. Reaching out is not an overreaction; it is a gentle act of protection for your body, your mind, and your future. You and your loved ones deserve that care.`
   }
 ];
 
