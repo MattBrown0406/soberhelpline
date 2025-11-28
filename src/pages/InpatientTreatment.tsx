@@ -117,7 +117,15 @@ const InpatientTreatment = () => {
       const filterInsurance = currentFilters.insurance !== "All" ? currentFilters.insurance : null;
       const activeInsurance = searchInsurance !== "All" ? searchInsurance : filterInsurance;
       
+      console.log("Insurance Filter Debug:", { 
+        insuranceSearch, 
+        searchInsurance, 
+        filterInsurance: currentFilters.insurance,
+        activeInsurance 
+      });
+      
       if (activeInsurance && activeInsurance !== "All") {
+        console.log("Applying insurance filter:", activeInsurance);
         query = query.contains("insurances_accepted", [activeInsurance]);
       }
 
