@@ -65,6 +65,7 @@ export type Database = {
           detox_only_services: boolean | null
           email: string
           facebook_url: string | null
+          faith_based_services: boolean | null
           gender_specific_treatment: string[] | null
           has_valid_passport: boolean | null
           hourly_coaching_rate: string | null
@@ -86,6 +87,7 @@ export type Database = {
           mandatory_curfew: boolean | null
           mandatory_house_meetings: boolean | null
           medication_administration: string | null
+          military_first_responder_care: boolean | null
           minimum_time_since_last_use: string | null
           phone_number: string
           provider_name: string
@@ -130,6 +132,7 @@ export type Database = {
           detox_only_services?: boolean | null
           email: string
           facebook_url?: string | null
+          faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
@@ -151,6 +154,7 @@ export type Database = {
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
           medication_administration?: string | null
+          military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           phone_number: string
           provider_name: string
@@ -195,6 +199,7 @@ export type Database = {
           detox_only_services?: boolean | null
           email?: string
           facebook_url?: string | null
+          faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
           has_valid_passport?: boolean | null
           hourly_coaching_rate?: string | null
@@ -216,6 +221,7 @@ export type Database = {
           mandatory_curfew?: boolean | null
           mandatory_house_meetings?: boolean | null
           medication_administration?: string | null
+          military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           phone_number?: string
           provider_name?: string

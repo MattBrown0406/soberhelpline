@@ -185,6 +185,8 @@ const providerFormSchema = z.object({
   licenseCurrentGoodStanding: z.boolean().optional(),
   legalAssistanceTypes: z.array(z.string()).optional(),
   recoveryFellowships: z.array(z.string()).optional(),
+  faithBasedServices: z.boolean().optional(),
+  militaryFirstResponderCare: z.boolean().optional(),
   descriptionOfServices: z.string().min(1, "Description of services is required").max(750, "Description must be less than 750 characters"),
   cost: z.string().min(1, "Cost information is required").max(100),
   travelExpensesIncluded: z.boolean().optional(),
@@ -343,6 +345,8 @@ const ProviderInfo = () => {
       licenseCurrentGoodStanding: false,
       legalAssistanceTypes: [],
       recoveryFellowships: [],
+      faithBasedServices: false,
+      militaryFirstResponderCare: false,
       descriptionOfServices: "",
       cost: "",
       travelExpensesIncluded: false,
@@ -426,6 +430,8 @@ const ProviderInfo = () => {
           licenseCurrentGoodStanding: data.license_current_good_standing || false,
           legalAssistanceTypes: data.legal_assistance_types || [],
           recoveryFellowships: data.recovery_fellowships || [],
+          faithBasedServices: data.faith_based_services || false,
+          militaryFirstResponderCare: data.military_first_responder_care || false,
           descriptionOfServices: data.description_of_services || "",
           cost: data.cost || "",
           travelExpensesIncluded: data.travel_expenses_included || false,
@@ -626,6 +632,8 @@ const ProviderInfo = () => {
           license_current_good_standing: data.licenseCurrentGoodStanding || null,
           legal_assistance_types: data.legalAssistanceTypes || null,
           recovery_fellowships: data.recoveryFellowships && data.recoveryFellowships.length > 0 ? data.recoveryFellowships : null,
+          faith_based_services: data.faithBasedServices || null,
+          military_first_responder_care: data.militaryFirstResponderCare || null,
           description_of_services: data.descriptionOfServices,
           cost: data.cost,
           travel_expenses_included: data.travelExpensesIncluded || null,
@@ -2001,6 +2009,46 @@ const ProviderInfo = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Do you offer telehealth sessions?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {["Inpatient Treatment", "Outpatient Treatment", "Therapists", "Sober Living"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="faithBasedServices"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you offer faith based services?</FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {["Inpatient Treatment", "Outpatient Treatment", "Therapists", "Sober Living"].includes(form.watch("category")) && (
+                <FormField
+                  control={form.control}
+                  name="militaryFirstResponderCare"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-muted">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Do you offer specialized treatment or programs for military veterans or first responders?</FormLabel>
                       </div>
                     </FormItem>
                   )}
