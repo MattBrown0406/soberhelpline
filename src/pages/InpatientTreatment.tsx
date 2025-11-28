@@ -169,6 +169,12 @@ const InpatientTreatment = () => {
 
       const { data, error } = await query;
 
+      console.log("Query results:", { 
+        resultCount: data?.length || 0,
+        activeInsurance,
+        state 
+      });
+
       if (error) throw error;
       
       if (!data || data.length === 0) {
@@ -285,9 +291,21 @@ const InpatientTreatment = () => {
   };
 
   const handleFiltersChange = (newFilters: typeof filters) => {
+    console.log("Filter changed!", { 
+      newFilters, 
+      selectedState,
+      oldFilters: filters 
+    });
     setFilters(newFilters);
     if (selectedState) {
+      console.log("Fetching providers with new filters for state:", selectedState);
       fetchProviders(selectedState, newFilters);
+    } else {
+      console.log("No state selected, filters saved but not applied yet");
+      toast({
+        title: "Select a location first",
+        description: "Please select a state on the map or enter a zip code to apply filters",
+      });
     }
   };
 
