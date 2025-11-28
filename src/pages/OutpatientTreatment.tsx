@@ -112,10 +112,13 @@ const OutpatientTreatment = () => {
         .eq("status", "approved")
         .eq("state", state);
 
-      // Apply insurance filter from search form
+      // Apply insurance filter from search form OR ProviderFilters
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
-      if (insuranceSearch !== "All" && searchInsurance) {
-        query = query.contains("insurances_accepted", [searchInsurance]);
+      const filterInsurance = currentFilters.insurance !== "All" ? currentFilters.insurance : null;
+      const activeInsurance = searchInsurance !== "All" ? searchInsurance : filterInsurance;
+      
+      if (activeInsurance && activeInsurance !== "All") {
+        query = query.contains("insurances_accepted", [activeInsurance]);
       }
 
       // Apply budget filter for Self Pay
@@ -187,8 +190,11 @@ const OutpatientTreatment = () => {
 
       // Apply same filters for nearby providers
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
-      if (insuranceSearch !== "All" && searchInsurance) {
-        query = query.contains("insurances_accepted", [searchInsurance]);
+      const filterInsurance = currentFilters.insurance !== "All" ? currentFilters.insurance : null;
+      const activeInsurance = searchInsurance !== "All" ? searchInsurance : filterInsurance;
+      
+      if (activeInsurance && activeInsurance !== "All") {
+        query = query.contains("insurances_accepted", [activeInsurance]);
       }
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
@@ -335,8 +341,11 @@ const OutpatientTreatment = () => {
         .eq("status", "approved");
 
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
-      if (insuranceSearch !== "All") {
-        query = query.contains("insurances_accepted", [searchInsurance]);
+      const filterInsurance = filters.insurance !== "All" ? filters.insurance : null;
+      const activeInsurance = searchInsurance !== "All" ? searchInsurance : filterInsurance;
+      
+      if (activeInsurance && activeInsurance !== "All") {
+        query = query.contains("insurances_accepted", [activeInsurance]);
       }
 
       if (genderSpecificCare === "Yes" && genderType) {
