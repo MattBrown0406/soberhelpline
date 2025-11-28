@@ -247,7 +247,7 @@ const MedicalDetox = () => {
         .eq("status", "approved");
 
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
-      if (insuranceSearch !== "All") {
+      if (insuranceSearch !== "All" && searchInsurance) {
         query = query.contains("insurances_accepted", [searchInsurance]);
       }
 

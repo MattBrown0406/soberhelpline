@@ -207,6 +207,20 @@ const Interventionists = () => {
         .eq("category", "Interventionists")
         .eq("status", "approved");
 
+      // Apply insurance filter from ProviderFilters
+      if (filters.insurance !== "All") {
+        query = query.contains("insurances_accepted", [filters.insurance]);
+      }
+      if (filters.maxBudget) {
+        query = query.lte("cost", filters.maxBudget);
+      }
+      if (filters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", filters.genderSpecific);
+      }
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
       const { data, error } = await query;
 
       if (error) throw error;
