@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video, Clock, Baby } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Award, ChevronDown, Globe2, Languages, Youtube, Instagram, Facebook, Video, Clock, Baby, Cross, ShieldCheck } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -50,6 +50,8 @@ interface Provider {
   adolescent_services?: boolean | null;
   accepts_mat_residents?: boolean | null;
   items_included_in_cost?: string[] | null;
+  faith_based_services?: boolean | null;
+  military_first_responder_care?: boolean | null;
 }
 
 interface ProviderCardProps {
@@ -188,6 +190,26 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     <Badge variant="secondary" className="gap-1">
                       <Baby className="w-3 h-3" />
                       Works with Teens
+                    </Badge>
+                  )}
+                  {/* Faith based services badge */}
+                  {(provider.category === "Inpatient Treatment" || 
+                    provider.category === "Outpatient Treatment" || 
+                    provider.category === "Therapists" || 
+                    provider.category === "Sober Living") && provider.faith_based_services && (
+                    <Badge variant="secondary" className="gap-1">
+                      <Cross className="w-3 h-3" />
+                      Faith Based
+                    </Badge>
+                  )}
+                  {/* Military/First Responder care badge */}
+                  {(provider.category === "Inpatient Treatment" || 
+                    provider.category === "Outpatient Treatment" || 
+                    provider.category === "Therapists" || 
+                    provider.category === "Sober Living") && provider.military_first_responder_care && (
+                    <Badge variant="secondary" className="gap-1">
+                      <ShieldCheck className="w-3 h-3" />
+                      Military & First Responder
                     </Badge>
                   )}
                 </div>
