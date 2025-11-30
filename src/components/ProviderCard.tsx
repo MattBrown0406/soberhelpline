@@ -8,6 +8,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// Format phone number to (000) 000-0000
+const formatPhoneNumber = (phoneNumber: string): string => {
+  // Remove all non-numeric characters
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  
+  // Format as (000) 000-0000
+  if (cleaned.length === 10) {
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  }
+  
+  // Return original if not 10 digits
+  return phoneNumber;
+};
+
 // TikTok icon component since lucide-react doesn't have one
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -266,7 +280,7 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                 <div className="flex items-center gap-2 text-sm">
                   <Phone className="w-4 h-4 text-primary" />
                   <a href={`tel:${provider.phone_number}`} className="hover:underline">
-                    {provider.phone_number}
+                    {formatPhoneNumber(provider.phone_number)}
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
