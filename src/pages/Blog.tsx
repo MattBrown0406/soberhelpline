@@ -16,6 +16,7 @@ import gratitudeHappinessImg from "@/assets/blog-gratitude-happiness.png";
 import holidayRelapseTriggersImg from "@/assets/blog-holiday-relapse-triggers.png";
 import ozempicEatingDisordersImg from "@/assets/blog-ozempic-eating-disorders.png";
 import youthVapingRecovery2025Img from "@/assets/blog-youth-vaping-recovery-2025.png";
+import sportsBettingAddictionImg from "@/assets/blog-sports-betting-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -523,6 +524,60 @@ Preventing youth vaping and supporting those struggling with addiction require c
 **Call to Action**
 
 If you or someone you care about is facing challenges with substance use or addiction, reaching out for support can be a life-changing step. Contact a trusted helpline or local recovery resource today to learn about available options and start the journey toward healing.`
+  },
+  {
+    id: 12,
+    title: "Are Sports Betting Apps Quietly Fueling a New Addiction Crisis?",
+    excerpt: "Mobile sports betting has made gambling feel like a game, especially for young men—but the mental health and financial fallout is very real. Here's how to spot the signs and where to get support.",
+    author: "Sober Helpline Team",
+    date: "2025-11-30",
+    category: "Family Support",
+    image: sportsBettingAddictionImg,
+    content: `Mobile sports betting has made gambling feel like a game, especially for young men—but the mental health and financial fallout is very real. Here's how to spot the signs and where to get support.
+
+**Why Sports Betting Feels "Safer" Than It Is**
+
+Legal sports betting has exploded across the United States, driven largely by easy-to-use apps and nonstop advertising. Because bets happen on a phone instead of at a casino, many people see it as entertainment rather than a serious risk.
+
+Surveys show that a growing majority of online sports bettors now believe they can reliably make money from betting, even though the odds are stacked against them. That confidence keeps people placing more bets, chasing the rush of a "big win" that rarely solves the damage being done in the background.
+
+**The New Face of Gambling Addiction**
+
+Mobile sports betting has changed who is getting hooked, and how quickly. Research and public health experts warn that young men are being hit especially hard, with rising rates of anxiety, depression, and substance use tied directly to sports betting apps. What used to develop over years in a casino can now escalate in months when a sportsbook lives in someone's pocket 24/7.
+
+Data from recent surveys show that more than half of online sports bettors have chased losses and bet more than they felt comfortable losing. Many report feeling ashamed after a betting binge, and a significant portion say their gambling has already harmed their finances or relationships.
+
+**Warning Signs You Might Be Past "Just for Fun"**
+
+Problem gambling rarely starts as an obvious addiction; it usually begins as "just something to do during the game." Over time, certain patterns are red flags that things are slipping out of control.
+
+Common warning signs include:
+
+Betting more money or more often than planned, especially to "win back" what was lost.
+
+Hiding betting activity, lying about losses, or moving money around to cover gaps.
+
+Using credit cards, payday loans, or missed bills to keep betting.
+
+Feeling intense shame, anxiety, or desperation after betting—but still going back to the app.
+
+If a loved one seems constantly glued to live odds, has sudden money problems, or becomes irritable when they cannot check scores or place bets, those are also strong indicators that gambling might be crossing the line.
+
+**The Hidden Mental Health Toll**
+
+The damage from sports betting is not just financial. Mental health researchers are increasingly framing mobile betting as a growing public health problem. Constant exposure to real-time odds, "risk-free" promotions, and in-game bets creates a near-constant loop of anticipation, reward, and crash—very similar to other behavioral and substance addictions.
+
+Problem bettors report higher levels of depression, anxiety, and thoughts of self-harm, especially when losses affect housing, family stability, or the ability to pay basic bills. For some, alcohol or drug use becomes a way to numb the shame and stress, creating a dangerous cycle where gambling and substance use feed each other.
+
+**What Help Looks Like (And Why It's Not "Weak" to Ask)**
+
+Gambling disorder is a treatable condition, not a moral failure. Evidence-based help can include specialized gambling counseling, debt and financial planning support, peer support groups, and sometimes medications for co-occurring depression or anxiety. Many people begin to recover as soon as they break the secrecy and talk honestly with someone who understands this specific kind of addiction.
+
+If sports betting is starting to scare you—or someone you love—you do not have to wait for a complete collapse to reach out. A confidential helpline, support group, or addiction specialist can help you assess what is going on, talk through options, and create a practical plan to protect both mental health and money.
+
+**Call to Action: You're Not Alone in This**
+
+If sports betting, casino apps, or any form of gambling is taking over your life or your family's life, reach out today. A confidential helpline or recovery support service can help you make sense of what is happening and take the next right step—whether that is a conversation, a support group, or a structured intervention plan. You do not have to hit rock bottom, lose everything, or wait for one more "big game" to ask for help.`
   }
 ];
 
