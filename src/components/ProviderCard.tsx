@@ -260,19 +260,6 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                     {provider.description_of_services}
                   </p>
                 )}
-                
-                {/* Quick view of key info */}
-                {provider.category === "Interventionists" && provider.cost && (
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold text-sm">Cost:</span>
-                    <span className="text-sm">{provider.cost}</span>
-                    {provider.sliding_scale_available && (
-                      <Badge variant="secondary" className="text-xs ml-1">
-                        Sliding Scale
-                      </Badge>
-                    )}
-                  </div>
-                )}
               </div>
               
               {/* Right section: Contact info + Expand trigger */}
