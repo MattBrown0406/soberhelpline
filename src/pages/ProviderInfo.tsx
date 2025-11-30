@@ -438,10 +438,10 @@ const ProviderInfo = () => {
           itemsIncludedInCost: data.items_included_in_cost || [],
           insurancesAccepted: data.insurances_accepted || [],
           otherInsurances: "",
-          youtubeUrl: data.youtube_url || "",
-          tiktokUrl: data.tiktok_url || "",
-          instagramUrl: data.instagram_url || "",
-          facebookUrl: data.facebook_url || "",
+          youtubeUrl: data.youtube_url ? data.youtube_url.replace('https://youtube.com/@', '').replace('http://youtube.com/@', '') : "",
+          tiktokUrl: data.tiktok_url ? data.tiktok_url.replace('https://tiktok.com/@', '').replace('http://tiktok.com/@', '') : "",
+          instagramUrl: data.instagram_url ? data.instagram_url.replace('https://instagram.com/', '').replace('http://instagram.com/', '') : "",
+          facebookUrl: data.facebook_url ? data.facebook_url.replace('https://facebook.com/', '').replace('http://facebook.com/', '') : "",
         });
       }
     };
@@ -643,10 +643,10 @@ const ProviderInfo = () => {
           address: null,
           status: 'pending',
           submitted_by: authenticatedUserId,
-          youtube_url: data.youtubeUrl || null,
-          tiktok_url: data.tiktokUrl || null,
-          instagram_url: data.instagramUrl || null,
-          facebook_url: data.facebookUrl || null,
+          youtube_url: data.youtubeUrl && !data.youtubeUrl.startsWith('http') ? `https://youtube.com/@${data.youtubeUrl}` : (data.youtubeUrl || null),
+          tiktok_url: data.tiktokUrl && !data.tiktokUrl.startsWith('http') ? `https://tiktok.com/@${data.tiktokUrl}` : (data.tiktokUrl || null),
+          instagram_url: data.instagramUrl && !data.instagramUrl.startsWith('http') ? `https://instagram.com/${data.instagramUrl}` : (data.instagramUrl || null),
+          facebook_url: data.facebookUrl && !data.facebookUrl.startsWith('http') ? `https://facebook.com/${data.facebookUrl}` : (data.facebookUrl || null),
           sliding_scale_available: data.slidingScaleAvailable || false
       };
 
@@ -991,7 +991,10 @@ const ProviderInfo = () => {
                           YouTube
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="https://youtube.com/@yourchannel" {...field} />
+                          <div className="flex items-center">
+                            <span className="text-sm text-muted-foreground mr-2">https://youtube.com/@</span>
+                            <Input placeholder="yourchannel" {...field} />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1009,7 +1012,10 @@ const ProviderInfo = () => {
                           TikTok
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="https://tiktok.com/@yourusername" {...field} />
+                          <div className="flex items-center">
+                            <span className="text-sm text-muted-foreground mr-2">https://tiktok.com/@</span>
+                            <Input placeholder="yourusername" {...field} />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1027,7 +1033,10 @@ const ProviderInfo = () => {
                           Instagram
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="https://instagram.com/yourusername" {...field} />
+                          <div className="flex items-center">
+                            <span className="text-sm text-muted-foreground mr-2">https://instagram.com/</span>
+                            <Input placeholder="yourusername" {...field} />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -1045,7 +1054,10 @@ const ProviderInfo = () => {
                           Facebook
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="https://facebook.com/yourpage" {...field} />
+                          <div className="flex items-center">
+                            <span className="text-sm text-muted-foreground mr-2">https://facebook.com/</span>
+                            <Input placeholder="yourpage" {...field} />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
