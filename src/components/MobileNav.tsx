@@ -48,11 +48,26 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 </Button>
               </a>
               
-              <Link to="/provider-info" onClick={closeMenu}>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  Provider Application
-                </Button>
-              </Link>
+              <div className="space-y-1">
+                <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
+                  For Providers
+                </div>
+                <Link to="/provider-info" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-4">
+                    Provider Application
+                  </Button>
+                </Link>
+                <a 
+                  href="https://gratis-class-d1c.notion.site/2bb286dad2cf8169863de855ab9a22c4?pvs=105" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                >
+                  <Button variant="ghost" className="w-full justify-start pl-4">
+                    Provider Inquiry
+                  </Button>
+                </a>
+              </div>
               
               <Link to="/blog" onClick={closeMenu}>
                 <Button variant="ghost" className="w-full justify-start gap-2">
