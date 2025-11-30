@@ -154,7 +154,9 @@ const Index = () => {
                   <Card
                     className="p-3 md:p-4 h-[100px] md:h-[120px] w-full hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
                   >
-                    <Icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyan-100 flex items-center justify-center">
+                      <Icon className="w-6 h-6 md:w-8 md:h-8 text-cyan-600" />
+                    </div>
                     <span className="text-xs md:text-sm font-medium text-foreground leading-tight">
                       {category.name}
                     </span>
