@@ -15,6 +15,7 @@ import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import gratitudeHappinessImg from "@/assets/blog-gratitude-happiness.png";
 import holidayRelapseTriggersImg from "@/assets/blog-holiday-relapse-triggers.png";
 import ozempicEatingDisordersImg from "@/assets/blog-ozempic-eating-disorders.png";
+import youthVapingRecovery2025Img from "@/assets/blog-youth-vaping-recovery-2025.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -492,6 +493,36 @@ If your loved one is open to it, encouraging a conversation with their prescribe
 **A Soft Call to Reach Out**
 
 If any of this feels familiar—for you or someone you love—you do not have to sort it out alone. A caring helpline or recovery‑focused resource can listen to your story, help you make sense of what is happening, and connect you with support that fits your situation. Reaching out is not an overreaction; it is a gentle act of protection for your body, your mind, and your future. You and your loved ones deserve that care.`
+  },
+  {
+    id: 11,
+    title: "The Surge of Flavored Marijuana Vaping Among Youth and What Recovery Looks Like in 2025",
+    excerpt: "Explore the sharp increase in flavored marijuana vaping among adolescents, evolving public views on alcohol risks, and the newest trends in compassionate addiction recovery support in 2025.",
+    author: "Sober Helpline Team",
+    date: "2025-11-30",
+    category: "Family Support",
+    image: youthVapingRecovery2025Img,
+    content: `In recent years, flavored marijuana vaping has become a major trend among adolescents, raising health concerns for families and communities nationwide. Alongside this, shifts in alcohol consumption patterns and innovations in recovery support reveal a landscape of change in how addiction and wellness are understood and addressed today.
+
+**The Rise of Flavored Marijuana Vaping Among Youth**
+
+Studies show that from 2021 to 2024, the percentage of adolescents vaping flavored marijuana rose significantly, with vaping becoming the predominant mode of marijuana use among teens. This trend is troubling because flavored vaping products are often more appealing to young people and may facilitate more frequent, habitual use. Experts are calling for targeted research and policies to address this growing public health challenge focused on youth prevention and education.
+
+**Changing Perceptions and Patterns of Alcohol Use**
+
+In 2025, U.S. adults are drinking alcohol at historic lows, driven by a growing belief that even moderate alcohol consumption poses health risks. This shifting mindset has led to a surge in non-alcoholic beverage options and more public dialogue about alcohol's impact on sleep, blood pressure, cancer risk, and overall well-being. This change presents an opportunity for communities to support healthier lifestyles through education and interventions that reflect current scientific understanding.
+
+**Innovations in Addiction Recovery Support**
+
+Recovery in 2025 is evolving beyond traditional methods, emphasizing compassionate, culturally sensitive care that respects individual dignity. Outpatient treatment and virtual care are gaining popularity due to cost and accessibility benefits. Additionally, peer support services are increasingly recognized as vital in sustaining recovery, helping individuals navigate the challenges of maintaining health while managing life's economic pressures.
+
+**Preventing and Addressing Addiction in Our Communities**
+
+Preventing youth vaping and supporting those struggling with addiction require community-driven efforts, combining education, policy, treatment, and peer networks. Understanding these trends helps families, educators, and healthcare providers engage more effectively, fostering environments where support and recovery resources are accessible and stigma is reduced.
+
+**Call to Action**
+
+If you or someone you care about is facing challenges with substance use or addiction, reaching out for support can be a life-changing step. Contact a trusted helpline or local recovery resource today to learn about available options and start the journey toward healing.`
   }
 ];
 
