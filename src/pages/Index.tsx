@@ -23,8 +23,8 @@ import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 const heroImages = [familyHero, dadDaughter, hispanicFamily, aaMeeting];
 
 const categories = [
-  { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
-  { name: "Outpatient Treatment", icon: Home, path: "/outpatient-treatment" },
+  { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment" },
+  { name: "Outpatient Treatment", icon: Building2, path: "/outpatient-treatment" },
   { name: "Medical Detox", icon: Pill, path: "/medical-detox" },
   { name: "Interventionists", icon: Users, path: "/interventionists" },
   { name: "Sober Coaches/Companions", icon: UserCheck, path: "/sober-coaches-companions" },
