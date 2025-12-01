@@ -76,6 +76,21 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Cancel anytime',
           ],
         },
+        annual: {
+          id: 'sober-living-annual',
+          name: 'Sober Living Provider (Annual)',
+          price: '2500.00',
+          period: '/year',
+          billingCycle: 'annual',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            '2 FREE MONTHS included!',
+            'Best value - Save $500',
+          ],
+        },
       };
     case 'Interventionists':
     case 'Sober Coaches/Companions':
