@@ -40,23 +40,22 @@ const AddictionAssessment = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between mb-4">
           <Link to="/">
-            <Button variant="ghost" className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Home
             </Button>
           </Link>
+          <img src={logo} alt="Sober Helpline" className="w-24 md:w-32 h-auto" />
         </div>
 
-        <div className="text-center mb-8">
-          <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 md:w-64 h-auto" />
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             Addiction Assessment
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Understanding the signs of addiction is the first step toward recovery. 
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
             Use the questions below to assess whether your loved one may be struggling with substance use disorder.
           </p>
         </div>
