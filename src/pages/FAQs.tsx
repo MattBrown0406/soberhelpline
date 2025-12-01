@@ -42,6 +42,7 @@ const faqs: FAQ[] = [
         • Documenting specific incidents and patterns you've observed{"\n"}
         • Reaching out to a professional interventionist or addiction counselor for guidance{"\n"}
         • Connecting with support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> for families{"\n"}
+        • Attending a FREE family support zoom meeting offered by the interventionists at <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a>{"\n"}
         • Planning a calm, private conversation when they're sober
         {"\n\n"}
         Avoid confronting them when they're intoxicated or in a public setting. Having professional guidance before your first conversation can make a significant difference in the outcome.
