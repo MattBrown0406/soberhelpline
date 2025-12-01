@@ -49,6 +49,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Addiction Assessment
                   </Button>
                 </Link>
+                <Link to="/blog" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Blog
+                  </Button>
+                </Link>
               </div>
               
               <a href="#partnership" onClick={closeMenu}>
@@ -78,12 +83,6 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                   </Button>
                 </a>
               </div>
-              
-              <Link to="/blog" onClick={closeMenu}>
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  Blog
-                </Button>
-              </Link>
             </div>
             
             <div className="border-t my-4" />
