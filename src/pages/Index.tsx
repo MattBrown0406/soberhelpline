@@ -79,12 +79,27 @@ const Index = () => {
         {/* Desktop Header */}
         <div className="hidden md:flex justify-between items-center mb-4">
           <div className="flex items-center gap-4">
-            <Link to="/recovery-podcasts">
-              <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
-                <Headphones className="w-4 h-4" />
-                Recovery Podcasts
-              </Button>
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
+                  <Headphones className="w-4 h-4" />
+                  Addiction Education Resources
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="bg-popover">
+                <DropdownMenuItem asChild>
+                  <Link to="/recovery-podcasts" className="cursor-pointer">
+                    Recovery Podcasts
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/addiction-assessment" className="cursor-pointer">
+                    Addiction Assessment
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <a href="#partnership">
               <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
                 <Heart className="w-4 h-4" />
