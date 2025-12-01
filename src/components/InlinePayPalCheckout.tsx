@@ -18,40 +18,64 @@ interface SubscriptionPlan {
   features: string[];
 }
 
-// Get subscription plan based on provider category
-function getSubscriptionPlan(category: string): SubscriptionPlan {
+interface PlanOptions {
+  monthly?: SubscriptionPlan;
+  annual?: SubscriptionPlan;
+}
+
+// Get subscription plans based on provider category
+function getSubscriptionPlans(category: string): PlanOptions {
   switch (category) {
     case 'Inpatient Treatment':
     case 'Outpatient Treatment':
     case 'Medical Detox':
       return {
-        id: 'treatment-monthly',
-        name: 'Treatment Provider',
-        price: '500.00',
-        period: '/month',
-        billingCycle: 'monthly',
-        features: [
-          'Listed in provider directory',
-          'Searchable by location',
-          'Display your services',
-          'Contact information visible',
-          'Cancel anytime',
-        ],
+        monthly: {
+          id: 'treatment-monthly',
+          name: 'Treatment Provider',
+          price: '500.00',
+          period: '/month',
+          billingCycle: 'monthly',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            'Cancel anytime',
+          ],
+        },
+        annual: {
+          id: 'treatment-annual',
+          name: 'Treatment Provider (Annual)',
+          price: '5000.00',
+          period: '/year',
+          billingCycle: 'annual',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            '2 FREE MONTHS included!',
+            'Best value - Save $1,000',
+          ],
+        },
       };
     case 'Sober Living':
       return {
-        id: 'sober-living-monthly',
-        name: 'Sober Living Provider',
-        price: '250.00',
-        period: '/month',
-        billingCycle: 'monthly',
-        features: [
-          'Listed in provider directory',
-          'Searchable by location',
-          'Display your services',
-          'Contact information visible',
-          'Cancel anytime',
-        ],
+        monthly: {
+          id: 'sober-living-monthly',
+          name: 'Sober Living Provider',
+          price: '250.00',
+          period: '/month',
+          billingCycle: 'monthly',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            'Cancel anytime',
+          ],
+        },
       };
     case 'Interventionists':
     case 'Sober Coaches/Companions':
@@ -59,18 +83,20 @@ function getSubscriptionPlan(category: string): SubscriptionPlan {
     case 'Psychiatrists':
     default:
       return {
-        id: 'professional-annual',
-        name: 'Professional Provider',
-        price: '250.00',
-        period: '/year',
-        billingCycle: 'annual',
-        features: [
-          'Listed in provider directory',
-          'Searchable by location',
-          'Display your services',
-          'Contact information visible',
-          'Full year of visibility',
-        ],
+        annual: {
+          id: 'professional-annual',
+          name: 'Professional Provider',
+          price: '250.00',
+          period: '/year',
+          billingCycle: 'annual',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            'Full year of visibility',
+          ],
+        },
       };
   }
 }
@@ -94,7 +120,13 @@ export function InlinePayPalCheckout({
   const [discountCode, setDiscountCode] = useState('');
   const [freeListingActivated, setFreeListingActivated] = useState(false);
   const [processingPayment, setProcessingPayment] = useState(false);
-  const plan = getSubscriptionPlan(category);
+  const [selectedBillingCycle, setSelectedBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  
+  const planOptions = getSubscriptionPlans(category);
+  const hasAnnualOption = planOptions.monthly && planOptions.annual;
+  const plan = hasAnnualOption 
+    ? (selectedBillingCycle === 'annual' ? planOptions.annual! : planOptions.monthly!)
+    : (planOptions.monthly || planOptions.annual!);
 
   const handleSubscribe = async () => {
     setProcessingPayment(true);
@@ -185,9 +217,44 @@ export function InlinePayPalCheckout({
           <CardTitle className="text-lg">Complete Your Listing</CardTitle>
           <Badge className="bg-primary">{category}</Badge>
         </div>
-        <CardDescription>
+        
+        {/* Billing cycle toggle for treatment providers */}
+        {hasAnnualOption && (
+          <div className="flex gap-2 mt-4">
+            <Button
+              type="button"
+              variant={selectedBillingCycle === 'monthly' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedBillingCycle('monthly')}
+              className="flex-1"
+            >
+              Monthly
+            </Button>
+            <Button
+              type="button"
+              variant={selectedBillingCycle === 'annual' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedBillingCycle('annual')}
+              className="flex-1 relative"
+            >
+              Annual
+              <Badge className="absolute -top-2 -right-2 bg-green-500 text-xs px-1.5">
+                Save $1K
+              </Badge>
+            </Button>
+          </div>
+        )}
+        
+        <CardDescription className="pt-3">
           <span className="text-3xl font-bold text-foreground">${plan.price}</span>
           <span className="text-muted-foreground">{plan.period}</span>
+          {selectedBillingCycle === 'annual' && hasAnnualOption && (
+            <div className="mt-2">
+              <Badge variant="secondary" className="bg-green-100 text-green-700 border-green-300">
+                🎉 2 FREE MONTHS included!
+              </Badge>
+            </div>
+          )}
         </CardDescription>
       </CardHeader>
 
@@ -195,8 +262,8 @@ export function InlinePayPalCheckout({
         <ul className="space-y-2">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-              <span className="text-sm text-muted-foreground">{feature}</span>
+              <Check className={`h-4 w-4 flex-shrink-0 ${feature.includes('FREE') || feature.includes('Save') ? 'text-green-600' : 'text-green-500'}`} />
+              <span className={`text-sm ${feature.includes('FREE') || feature.includes('Save') ? 'text-green-600 font-semibold' : 'text-muted-foreground'}`}>{feature}</span>
             </li>
           ))}
         </ul>
