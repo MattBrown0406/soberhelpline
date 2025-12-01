@@ -22,7 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
-import { SubscriptionCheckout } from "@/components/SubscriptionCheckout";
+import { InlinePayPalCheckout } from "@/components/InlinePayPalCheckout";
 
 // Resize image to fit within maxSize while maintaining aspect ratio
 const resizeImage = (file: File, maxSize: number = 400): Promise<Blob> => {
@@ -256,9 +256,6 @@ const ProviderInfo = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [submissionId, setSubmissionId] = useState<string | null>(null);
-  const [submittedCategory, setSubmittedCategory] = useState<string>('');
   const [existingSubmission, setExistingSubmission] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -701,16 +698,8 @@ const ProviderInfo = () => {
           // Don't fail the submission if email fails
         }
 
-        // Store submission details and show checkout for new submissions
-        if (resultData?.id) {
-          setSubmissionId(resultData.id);
-          setSubmittedCategory(data.category);
-          setShowCheckout(true);
-          toast({
-            title: "Application submitted!",
-            description: "Please complete payment to finalize your listing.",
-          });
-        }
+        // Return the submission ID for payment processing
+        return resultData?.id || null;
       }
     } catch (error: any) {
       console.error('Submission error:', error);
@@ -751,18 +740,8 @@ const ProviderInfo = () => {
               </a>
             </div>
 
-        {showCheckout && submissionId ? (
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-8 text-center">
-              <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
-            </div>
-            <SubscriptionCheckout 
-              providerSubmissionId={submissionId} 
-              category={submittedCategory}
-              onSuccess={() => navigate('/')}
-            />
-          </div>
-        ) : (
+
+        {/* Main Form */}
           <div className="max-w-3xl mx-auto">
             <div className="mb-8 text-center">
               <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
@@ -778,7 +757,7 @@ const ProviderInfo = () => {
             </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-6 rounded-lg shadow-lg">
+            <form onSubmit={isEditMode ? form.handleSubmit(onSubmit) : (e) => e.preventDefault()} className="space-y-6 bg-card p-6 rounded-lg shadow-lg">
               <FormField
                 control={form.control}
                 name="category"
@@ -2483,16 +2462,37 @@ const ProviderInfo = () => {
               />
 
 
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting 
-                  ? (isEditMode ? "Updating..." : "Submitting...") 
-                  : (isEditMode ? "Update Information" : "Continue to Payment")
-                }
-              </Button>
+              {isEditMode ? (
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Updating..." : "Update Information"}
+                </Button>
+              ) : (
+                <InlinePayPalCheckout
+                  category={form.watch("category")}
+                  isSubmitting={isSubmitting}
+                  isEditMode={isEditMode}
+                  onSubmitAndPay={async (discountCode) => {
+                    // Trigger form validation
+                    const isValid = await form.trigger();
+                    if (!isValid) {
+                      toast({
+                        title: "Please fix form errors",
+                        description: "Check the form for required fields and validation errors.",
+                        variant: "destructive",
+                      });
+                      return null;
+                    }
+                    
+                    // Submit the form and return the submission ID
+                    const values = form.getValues();
+                    const result = await onSubmit(values);
+                    return result || null;
+                  }}
+                />
+              )}
             </form>
           </Form>
         </div>
-        )}
       </div>
         </>
       )}
