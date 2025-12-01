@@ -34,12 +34,22 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
           
           <nav className="flex-1 overflow-y-auto p-4">
             <div className="space-y-2">
-              <Link to="/recovery-podcasts" onClick={closeMenu}>
-                <Button variant="ghost" className="w-full justify-start gap-2">
+              <div className="space-y-1">
+                <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground flex items-center gap-2">
                   <Headphones className="w-4 h-4" />
-                  Recovery Podcasts
-                </Button>
-              </Link>
+                  Addiction Education Resources
+                </div>
+                <Link to="/recovery-podcasts" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Recovery Podcasts
+                  </Button>
+                </Link>
+                <Link to="/addiction-assessment" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Addiction Assessment
+                  </Button>
+                </Link>
+              </div>
               
               <a href="#partnership" onClick={closeMenu}>
                 <Button variant="ghost" className="w-full justify-start gap-2">
