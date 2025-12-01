@@ -7,6 +7,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useClickTracking } from "@/hooks/useClickTracking";
+import { useEffect, useRef } from "react";
 
 // Format phone number to (000) 000-0000
 const formatPhoneNumber = (phoneNumber: string): string => {
@@ -74,6 +76,28 @@ interface ProviderCardProps {
 
 const ProviderCard = ({ provider }: ProviderCardProps) => {
   const isInterventionistOrCoach = provider.category === "Interventionists" || provider.category === "Sober Coaches/Companions";
+  const { trackClick } = useClickTracking();
+  const hasTrackedView = useRef(false);
+
+  // Track card view when component mounts
+  useEffect(() => {
+    if (!hasTrackedView.current && provider.id) {
+      trackClick({ providerId: provider.id, clickType: 'card_view' });
+      hasTrackedView.current = true;
+    }
+  }, [provider.id, trackClick]);
+
+  const handlePhoneClick = () => {
+    trackClick({ providerId: provider.id, clickType: 'phone_click' });
+  };
+
+  const handleEmailClick = () => {
+    trackClick({ providerId: provider.id, clickType: 'email_click' });
+  };
+
+  const handleWebsiteClick = () => {
+    trackClick({ providerId: provider.id, clickType: 'website_click' });
+  };
 
   return (
     <Card className="hover:shadow-lg transition-shadow">
@@ -266,13 +290,13 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
               <div className="flex-shrink-0 space-y-2 min-w-[200px]">
                 <div className="flex items-center gap-2 text-sm">
                   <Phone className="w-4 h-4 text-primary" />
-                  <a href={`tel:${provider.phone_number}`} className="hover:underline">
+                  <a href={`tel:${provider.phone_number}`} className="hover:underline" onClick={handlePhoneClick}>
                     {formatPhoneNumber(provider.phone_number)}
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Mail className="w-4 h-4 text-primary" />
-                  <a href={`mailto:${provider.email}`} className="hover:underline truncate">
+                  <a href={`mailto:${provider.email}`} className="hover:underline truncate" onClick={handleEmailClick}>
                     {provider.email}
                   </a>
                 </div>
@@ -284,6 +308,7 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:underline"
+                      onClick={handleWebsiteClick}
                     >
                       Visit Website
                     </a>
