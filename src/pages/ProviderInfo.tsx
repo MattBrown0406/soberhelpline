@@ -256,7 +256,6 @@ const ProviderInfo = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showCheckout, setShowCheckout] = useState(false);
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [submittedCategory, setSubmittedCategory] = useState<string>('');
   const [existingSubmission, setExistingSubmission] = useState<any>(null);
@@ -701,15 +700,21 @@ const ProviderInfo = () => {
           // Don't fail the submission if email fails
         }
 
-        // Store submission details and show checkout for new submissions
+        // Store submission details and enable checkout for new submissions
         if (resultData?.id) {
           setSubmissionId(resultData.id);
           setSubmittedCategory(data.category);
-          setShowCheckout(true);
           toast({
             title: "Application submitted!",
-            description: "Please complete payment to finalize your listing.",
+            description: "Please scroll down to complete payment to finalize your listing.",
           });
+          // Scroll to checkout section smoothly
+          setTimeout(() => {
+            const checkoutSection = document.getElementById('checkout-section');
+            if (checkoutSection) {
+              checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
         }
       }
     } catch (error: any) {
@@ -751,18 +756,6 @@ const ProviderInfo = () => {
               </a>
             </div>
 
-        {showCheckout && submissionId ? (
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-8 text-center">
-              <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
-            </div>
-            <SubscriptionCheckout 
-              providerSubmissionId={submissionId} 
-              category={submittedCategory}
-              onSuccess={() => navigate('/')}
-            />
-          </div>
-        ) : (
           <div className="max-w-3xl mx-auto">
             <div className="mb-8 text-center">
               <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
@@ -2483,16 +2476,26 @@ const ProviderInfo = () => {
               />
 
 
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting || submissionId !== null}>
                 {isSubmitting 
-                  ? (isEditMode ? "Updating..." : "Submitting...") 
-                  : (isEditMode ? "Update Information" : "Continue to Payment")
+                  ? (isEditMode ? "Updating..." : "Submitting Application...") 
+                  : (isEditMode ? "Update Information" : (submissionId ? "Application Submitted ✓" : "Submit Application"))
                 }
               </Button>
             </form>
           </Form>
+
+          {/* Payment Section - Shows after form submission for new applications */}
+          {!isEditMode && submissionId && (
+            <div id="checkout-section" className="mt-12 pt-8 border-t-2 border-primary">
+              <SubscriptionCheckout 
+                providerSubmissionId={submissionId} 
+                category={submittedCategory}
+                onSuccess={() => navigate('/')}
+              />
+            </div>
+          )}
         </div>
-        )}
       </div>
         </>
       )}
