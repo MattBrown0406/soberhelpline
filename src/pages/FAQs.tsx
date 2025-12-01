@@ -9,19 +9,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
+interface FAQ {
+  question: string;
+  answer: string | React.ReactNode;
+}
+
+const faqs: FAQ[] = [
   {
     question: "How do I know if my loved one is really addicted and not \"just partying\" or stressed?",
-    answer: `Addiction is characterized by a pattern of compulsive use despite negative consequences. Key warning signs include:
-
-• Loss of control over how much or how often they use
-• Continued use despite problems at work, school, or in relationships
-• Withdrawal symptoms when not using
-• Tolerance (needing more to get the same effect)
-• Giving up activities they once enjoyed
-• Failed attempts to cut back or stop
-
-If substance use is causing problems in their life and they continue anyway, it's likely more than just "partying." The DSM-5 criteria suggest that meeting 2 or more of 11 specific criteria over a 12-month period indicates a substance use disorder. Our Addiction Assessment tool can help you identify these warning signs.`
+    answer: (
+      <>
+        Addiction is characterized by a pattern of compulsive use despite negative consequences. Key warning signs include:
+        {"\n\n"}
+        • Loss of control over how much or how often they use{"\n"}
+        • Continued use despite problems at work, school, or in relationships{"\n"}
+        • Withdrawal symptoms when not using{"\n"}
+        • Tolerance (needing more to get the same effect){"\n"}
+        • Giving up activities they once enjoyed{"\n"}
+        • Failed attempts to cut back or stop
+        {"\n\n"}
+        If substance use is causing problems in their life and they continue anyway, it's likely more than just "partying." The DSM-5 criteria suggest that meeting 2 or more of 11 specific criteria over a 12-month period indicates a substance use disorder. Our <Link to="/addiction-assessment" className="text-primary hover:underline font-medium">Addiction Assessment</Link> tool can help you identify these warning signs.
+      </>
+    )
   },
   {
     question: "What is the first step I should take if I'm worried about their drinking or drug use?",
