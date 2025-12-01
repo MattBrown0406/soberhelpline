@@ -54,7 +54,7 @@ const faqs: FAQ[] = [
     answer: `Effective communication requires planning and emotional preparation:
 
 • Choose the right time: When they're sober, calm, and you have privacy
-• Use "I" statements: "I feel scared when..." instead of "You always..."
+• Use "I" statements: "I feel scared when..." instead of "You always..." or "You need..."
 • Express love and concern, not judgment or ultimatums
 • Be specific about behaviors you've observed, not character attacks
 • Listen more than you speak
