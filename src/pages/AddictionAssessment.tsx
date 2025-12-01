@@ -87,7 +87,7 @@ const AddictionAssessment = () => {
             <div className="flex flex-col lg:flex-row gap-6 items-center">
               <div className="flex-1 text-sm md:text-base text-foreground">
                 <p className="leading-relaxed">
-                  According to the DSM (Diagnostic and Statistical Manual) answering "yes" to several suggests addiction may be present. Over a 12-month period, a person qualifies for an SUD (substance use disorder) diagnosis by meeting at least 2 of the 11 criteria, with severity graded as <strong>mild (2-3 criteria)</strong>, <strong>moderate (4-5)</strong>, or <strong>severe (6+)</strong>.
+                  According to the DSM (Diagnostic and Statistical Manual) answering "yes" to several suggests addiction may be present. Over a 12-month period, a person qualifies for an SUD (substance use disorder) diagnosis by meeting at least 2 of the 10 criteria, with severity graded as <strong>mild (2-3 criteria)</strong>, <strong>moderate (4-5)</strong>, or <strong>severe (6+)</strong>.
                 </p>
               </div>
               <div className="flex-shrink-0 bg-card rounded-lg p-6 shadow-md text-center min-w-[160px]">
