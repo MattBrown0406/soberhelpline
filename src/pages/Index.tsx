@@ -103,6 +103,11 @@ const Index = () => {
                     Blog
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/faqs" className="cursor-pointer">
+                    FAQs
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="#partnership">
