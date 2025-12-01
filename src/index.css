@@ -57,6 +57,8 @@ All colors MUST be HSL.
     --podcast-primary: 262 83% 58%;
     --podcast-secondary: 199 89% 48%;
     --podcast-accent: 330 81% 60%;
+    
+    --logo-green: 145 63% 42%;
   }
 
   .dark {
