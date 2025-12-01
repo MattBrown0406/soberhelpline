@@ -172,7 +172,7 @@ const Index = () => {
               return (
                 <Link key={category.name} to={category.path}>
                   <Card
-                    className="p-3 md:p-4 h-[100px] md:h-[120px] w-full hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
+                    className="p-4 md:p-5 h-[100px] md:h-[120px] min-w-[120px] md:min-w-[130px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
                   >
                     <Icon className="w-6 h-6 md:w-8 md:h-8 text-logo-green" />
                     <span className="text-xs md:text-sm font-medium text-foreground leading-tight">
