@@ -54,6 +54,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Blog
                   </Button>
                 </Link>
+                <Link to="/faqs" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    FAQs
+                  </Button>
+                </Link>
               </div>
               
               <a href="#partnership" onClick={closeMenu}>
