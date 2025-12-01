@@ -98,6 +98,11 @@ const Index = () => {
                     Addiction Assessment
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/blog" className="cursor-pointer">
+                    Blog
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="#partnership">
