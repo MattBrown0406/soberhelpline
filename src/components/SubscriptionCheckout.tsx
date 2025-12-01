@@ -98,9 +98,23 @@ function getSubscriptionPlans(category: string): PlanOptions {
     case 'Psychiatrists':
     default:
       return {
+        monthly: {
+          id: 'professional-monthly',
+          name: 'Professional Provider',
+          price: '25.00',
+          period: '/month',
+          billingCycle: 'monthly',
+          features: [
+            'Listed in provider directory',
+            'Searchable by location',
+            'Display your services',
+            'Contact information visible',
+            'Cancel anytime',
+          ],
+        },
         annual: {
           id: 'professional-annual',
-          name: 'Professional Provider',
+          name: 'Professional Provider (Annual)',
           price: '250.00',
           period: '/year',
           billingCycle: 'annual',
@@ -109,7 +123,8 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Searchable by location',
             'Display your services',
             'Contact information visible',
-            'Full year of visibility',
+            '2 FREE MONTHS included!',
+            'Best value - Save $50',
           ],
         },
       };
@@ -225,7 +240,11 @@ export function SubscriptionCheckout({ providerSubmissionId, category, onSuccess
               >
                 Annual
                 <Badge className="absolute -top-2 -right-2 bg-green-500 text-xs px-1.5">
-                  Save $1K
+                  {category === 'Inpatient Treatment' || category === 'Outpatient Treatment' || category === 'Medical Detox' 
+                    ? 'Save $1K' 
+                    : category === 'Sober Living' 
+                      ? 'Save $500' 
+                      : 'Save $50'}
                 </Badge>
               </Button>
             </div>
