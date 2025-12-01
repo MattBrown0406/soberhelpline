@@ -137,7 +137,7 @@ const providerFormSchema = z.object({
   providerName: z.string().min(2, "Provider name must be at least 2 characters").max(100),
   city: z.string().min(2, "City is required").max(100),
   state: z.string().min(2, "State is required").max(50),
-  zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, "Valid zip code is required (e.g., 12345 or 12345-6789)"),
+  zipCode: z.string().regex(/^\d{5}$/, "Valid 5-digit zip code is required"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
   website: z.string().optional(),
