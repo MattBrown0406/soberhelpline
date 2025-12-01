@@ -166,13 +166,13 @@ const Index = () => {
 
         <div className="mb-8 md:mb-12">
           <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4 md:mb-6 text-center">Browse by Category</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4 justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2 md:gap-3 justify-center">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
                 <Link key={category.name} to={category.path}>
                   <Card
-                    className="p-4 md:p-5 h-[100px] md:h-[120px] min-w-[120px] md:min-w-[130px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
+                    className="p-4 md:p-5 h-[100px] md:h-[120px] min-w-[130px] md:min-w-[140px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center text-center gap-2 md:gap-3 bg-card hover:bg-accent"
                   >
                     <Icon className="w-6 h-6 md:w-8 md:h-8 text-logo-green" />
                     <span className="text-xs md:text-sm font-medium text-foreground leading-tight">
