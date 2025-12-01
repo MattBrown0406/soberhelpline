@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -17,6 +19,25 @@ const questions = [
 ];
 
 const AddictionAssessment = () => {
+  const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
+
+  const handleCheckChange = (index: number, checked: boolean) => {
+    const newCheckedItems = [...checkedItems];
+    newCheckedItems[index] = checked;
+    setCheckedItems(newCheckedItems);
+  };
+
+  const totalChecked = checkedItems.filter(Boolean).length;
+
+  const getSeverity = (count: number) => {
+    if (count >= 6) return { label: "Severe", color: "text-red-600" };
+    if (count >= 4) return { label: "Moderate", color: "text-orange-500" };
+    if (count >= 2) return { label: "Mild", color: "text-yellow-600" };
+    return { label: "Below threshold", color: "text-muted-foreground" };
+  };
+
+  const severity = getSeverity(totalChecked);
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -40,7 +61,7 @@ const AddictionAssessment = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="bg-card rounded-lg p-6 md:p-8 shadow-lg mb-8">
             <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-6 text-center">
               10 Key Questions to Ask Yourself
@@ -48,20 +69,39 @@ const AddictionAssessment = () => {
             
             <ol className="space-y-4">
               {questions.map((question, index) => (
-                <li key={index} className="flex gap-4 p-4 bg-muted/50 rounded-lg">
+                <li key={index} className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
                   <span className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-semibold text-sm">
                     {index + 1}
                   </span>
-                  <p className="text-foreground leading-relaxed pt-1">{question}</p>
+                  <p className="text-foreground leading-relaxed flex-1">{question}</p>
+                  <Checkbox
+                    checked={checkedItems[index]}
+                    onCheckedChange={(checked) => handleCheckChange(index, checked as boolean)}
+                    className="w-6 h-6 flex-shrink-0"
+                  />
                 </li>
               ))}
             </ol>
           </div>
 
-          <div className="bg-accent rounded-lg p-6 md:p-8 text-center">
-            <p className="text-foreground font-medium mb-4 text-lg">
-              Answering "yes" to several of these questions suggests addiction may be present.
-            </p>
+          <div className="bg-accent rounded-lg p-6 md:p-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-6 items-center">
+              <div className="flex-1 text-sm md:text-base text-foreground">
+                <p className="leading-relaxed">
+                  According to the DSM (Diagnostic and Statistical Manual) answering "yes" to several suggests addiction may be present. Over a 12-month period, a person qualifies for an SUD (substance use disorder) diagnosis by meeting at least 2 of the 11 criteria, with severity graded as <strong>mild (2-3 criteria)</strong>, <strong>moderate (4-5)</strong>, or <strong>severe (6+)</strong>.
+                </p>
+              </div>
+              <div className="flex-shrink-0 bg-card rounded-lg p-6 shadow-md text-center min-w-[160px]">
+                <p className="text-sm text-muted-foreground mb-2">Questions Checked</p>
+                <p className="text-4xl font-bold text-primary mb-2">{totalChecked}</p>
+                <p className={`text-sm font-semibold ${severity.color}`}>
+                  {severity.label}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card rounded-lg p-6 md:p-8 text-center shadow-lg">
             <p className="text-muted-foreground mb-6">
               Professional assessment is the next step for intervention and support.
             </p>
