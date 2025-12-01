@@ -368,6 +368,8 @@ const ProviderInfo = () => {
         .from('provider_submissions')
         .select('*')
         .eq('submitted_by', user.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
         .maybeSingle();
       
       if (error) {
