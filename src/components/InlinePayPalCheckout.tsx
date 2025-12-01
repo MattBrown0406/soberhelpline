@@ -42,6 +42,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Display your services',
             'Contact information visible',
             'Cancel anytime',
+            'All payments are non-refundable',
           ],
         },
         annual: {
@@ -57,6 +58,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Contact information visible',
             '2 FREE MONTHS included!',
             'Best value - Save $1,000',
+            'All payments are non-refundable',
           ],
         },
       };
@@ -74,6 +76,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Display your services',
             'Contact information visible',
             'Cancel anytime',
+            'All payments are non-refundable',
           ],
         },
         annual: {
@@ -89,6 +92,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Contact information visible',
             '2 FREE MONTHS included!',
             'Best value - Save $500',
+            'All payments are non-refundable',
           ],
         },
       };
@@ -110,6 +114,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Display your services',
             'Contact information visible',
             'Cancel anytime',
+            'All payments are non-refundable',
           ],
         },
         annual: {
@@ -125,6 +130,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Contact information visible',
             '2 FREE MONTHS included!',
             'Best value - Save $50',
+            'All payments are non-refundable',
           ],
         },
       };
