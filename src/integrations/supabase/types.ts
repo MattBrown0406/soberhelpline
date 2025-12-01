@@ -44,6 +44,63 @@ export type Database = {
         }
         Relationships: []
       }
+      provider_clicks: {
+        Row: {
+          city: string | null
+          click_type: string
+          clicked_at: string
+          country: string | null
+          id: string
+          ip_address: string | null
+          provider_id: string
+          referrer: string | null
+          region: string | null
+          session_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          city?: string | null
+          click_type?: string
+          clicked_at?: string
+          country?: string | null
+          id?: string
+          ip_address?: string | null
+          provider_id: string
+          referrer?: string | null
+          region?: string | null
+          session_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          city?: string | null
+          click_type?: string
+          clicked_at?: string
+          country?: string | null
+          id?: string
+          ip_address?: string | null
+          provider_id?: string
+          referrer?: string | null
+          region?: string | null
+          session_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_clicks_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_click_analytics"
+            referencedColumns: ["provider_id"]
+          },
+          {
+            foreignKeyName: "provider_clicks_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       provider_submissions: {
         Row: {
           accepts_mat_residents: boolean | null
@@ -293,6 +350,13 @@ export type Database = {
             foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
             columns: ["provider_submission_id"]
             isOneToOne: false
+            referencedRelation: "provider_click_analytics"
+            referencedColumns: ["provider_id"]
+          },
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
@@ -321,6 +385,26 @@ export type Database = {
       }
     }
     Views: {
+      provider_click_analytics: {
+        Row: {
+          card_views: number | null
+          category: string | null
+          city: string | null
+          clicks_last_30_days: number | null
+          clicks_last_7_days: number | null
+          email_clicks: number | null
+          first_click: string | null
+          last_click: string | null
+          phone_clicks: number | null
+          provider_id: string | null
+          provider_name: string | null
+          state: string | null
+          total_clicks: number | null
+          unique_visitors: number | null
+          website_clicks: number | null
+        }
+        Relationships: []
+      }
       provider_subscriptions_with_provider: {
         Row: {
           amount: number | null
@@ -337,6 +421,13 @@ export type Database = {
           user_id: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_click_analytics"
+            referencedColumns: ["provider_id"]
+          },
           {
             foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
             columns: ["provider_submission_id"]

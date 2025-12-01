@@ -19,10 +19,12 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3 } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
+import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -170,12 +172,22 @@ const Admin = () => {
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Provider Submissions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
+        <Tabs defaultValue="submissions" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="submissions">Provider Submissions</TabsTrigger>
+            <TabsTrigger value="analytics" className="gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Click Analytics
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="submissions">
+            <Card>
+              <CardHeader>
+                <CardTitle>Provider Submissions</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -314,6 +326,22 @@ const Admin = () => {
             )}
           </CardContent>
         </Card>
+          </TabsContent>
+
+          <TabsContent value="analytics">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5" />
+                  Provider Click Analytics
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ProviderAnalytics />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
 
         <EditSubmissionDialog
           submission={editingSubmission}
