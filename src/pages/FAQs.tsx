@@ -69,7 +69,7 @@ Remember, you cannot force someone into recovery, but you can create conditions 
     answer: `An intervention is a structured conversation where loved ones come together to motivate someone to accept treatment. Here's how it typically works:
 
 • A professional interventionist guides the family through preparation
-• Each participant writes a letter expressing love, specific concerns, and consequences
+• Each participant writes a letter expressing love, specific concerns, and boundaries
 • The group rehearses to ensure a calm, unified approach
 • Treatment arrangements are made in advance so they can leave immediately
 • The intervention is conducted with the goal of breaking through denial
