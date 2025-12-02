@@ -347,7 +347,7 @@ const MedicalDetox = () => {
               onBackToUSMap={handleBackToUSMap}
             />
           ) : (
-            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Medical Detox" />
           )}
           
           <div className="max-w-2xl mx-auto mt-6">

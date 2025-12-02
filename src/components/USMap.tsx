@@ -1,11 +1,14 @@
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { useState, useRef } from "react";
+import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import { useState, useRef, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { stateCoordinates } from "@/utils/stateCoordinates";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 interface USMapProps {
   onStateClick: (stateName: string) => void;
   selectedState: string | null;
+  category?: string;
 }
 
 // State abbreviation mapping
@@ -24,6 +27,12 @@ const stateAbbreviations: Record<string, string> = {
   "Vermont": "VT", "Virginia": "VA", "Washington": "WA", "West Virginia": "WV",
   "Wisconsin": "WI", "Wyoming": "WY"
 };
+
+// Reverse mapping: abbreviation to full name
+const abbreviationToState: Record<string, string> = Object.entries(stateAbbreviations).reduce(
+  (acc, [name, abbr]) => ({ ...acc, [abbr]: name }),
+  {}
+);
 
 // State color mapping using 16 muted colors
 // Ensuring no adjacent states share the same color
@@ -111,11 +120,64 @@ const stateColors: Record<string, string> = {
   "Maryland": "hsl(15, 35%, 52%)",
 };
 
-const USMap = ({ onStateClick, selectedState }: USMapProps) => {
+interface ProviderLocation {
+  state: string;
+  count: number;
+  coordinates: [number, number]; // [lng, lat] for react-simple-maps
+}
+
+const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
   const [hoveredState, setHoveredState] = useState<string | null>(null);
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [providerLocations, setProviderLocations] = useState<ProviderLocation[]>([]);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Fetch provider locations when category changes
+  useEffect(() => {
+    const fetchProviderLocations = async () => {
+      if (!category) return;
+
+      const { data, error } = await supabase
+        .from('provider_submissions')
+        .select('state')
+        .eq('category', category)
+        .eq('status', 'approved')
+        .not('state', 'is', null);
+
+      if (error) {
+        console.error('Error fetching provider locations:', error);
+        return;
+      }
+
+      // Group by state and count
+      const stateCounts: Record<string, number> = {};
+      data?.forEach(provider => {
+        if (provider.state) {
+          // Handle both full state names and abbreviations
+          const fullStateName = abbreviationToState[provider.state] || provider.state;
+          stateCounts[fullStateName] = (stateCounts[fullStateName] || 0) + 1;
+        }
+      });
+
+      // Convert to array with coordinates
+      const locations: ProviderLocation[] = Object.entries(stateCounts)
+        .map(([state, count]) => {
+          const coords = stateCoordinates[state];
+          if (!coords) return null;
+          return {
+            state,
+            count,
+            coordinates: [coords.lng, coords.lat] as [number, number]
+          };
+        })
+        .filter((loc): loc is ProviderLocation => loc !== null);
+
+      setProviderLocations(locations);
+    };
+
+    fetchProviderLocations();
+  }, [category]);
 
   const handleMouseEnter = (stateName: string, event: React.MouseEvent) => {
     setHoveredState(stateName);
@@ -192,6 +254,41 @@ const USMap = ({ onStateClick, selectedState }: USMapProps) => {
             })
           }
         </Geographies>
+        
+        {/* Provider location dots */}
+        {providerLocations.map((location) => (
+          <Marker key={location.state} coordinates={location.coordinates}>
+            <circle
+              r={Math.min(4 + location.count * 1.5, 12)}
+              fill="hsl(var(--logo-green))"
+              stroke="hsl(var(--background))"
+              strokeWidth={1.5}
+              style={{ 
+                cursor: 'pointer',
+                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onStateClick(location.state);
+              }}
+            />
+            {location.count > 1 && (
+              <text
+                textAnchor="middle"
+                y={4}
+                style={{
+                  fontFamily: 'system-ui',
+                  fill: 'white',
+                  fontSize: '10px',
+                  fontWeight: 'bold',
+                  pointerEvents: 'none'
+                }}
+              >
+                {location.count}
+              </text>
+            )}
+          </Marker>
+        ))}
       </ComposableMap>
       
       {/* Tooltip */}

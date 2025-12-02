@@ -283,7 +283,7 @@ const Therapists = () => {
               onBackToUSMap={handleBackToUSMap}
             />
           ) : (
-            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Therapists" />
           )}
           
           <div className="max-w-2xl mx-auto mt-6">

@@ -472,7 +472,7 @@ const OutpatientTreatment = () => {
               onBackToUSMap={handleBackToUSMap}
             />
           ) : (
-            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Outpatient Treatment" />
           )}
           
           <div className="max-w-6xl mx-auto mt-6">
