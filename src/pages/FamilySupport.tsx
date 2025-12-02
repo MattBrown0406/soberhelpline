@@ -37,7 +37,7 @@ export default function FamilySupport() {
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
                 Family Support Resources
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -50,8 +50,8 @@ export default function FamilySupport() {
             <div className="grid gap-6 md:grid-cols-2 mb-10">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                    <Users className="h-5 w-5 text-logo-green" />
                     Family Support Groups
                   </CardTitle>
                   <CardDescription>
@@ -104,8 +104,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                    <BookOpen className="h-5 w-5 text-logo-green" />
                     Educational Resources
                   </CardTitle>
                   <CardDescription>
@@ -127,8 +127,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Shield className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                    <Shield className="h-5 w-5 text-logo-green" />
                     Setting Boundaries
                   </CardTitle>
                   <CardDescription>
@@ -148,8 +148,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                    <MessageCircle className="h-5 w-5 text-logo-green" />
                     Professional Intervention Help
                   </CardTitle>
                   <CardDescription>
@@ -176,7 +176,7 @@ export default function FamilySupport() {
             <Card className="bg-primary/5 border-primary/20">
               <CardContent className="p-6 md:p-8 text-center">
                 <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-                <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3">
+                <h2 className="text-xl md:text-2xl font-semibold text-logo-green mb-3">
                   Need Help Right Now?
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
