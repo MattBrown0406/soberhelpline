@@ -23,6 +23,7 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import AddictionAssessment from "./pages/AddictionAssessment";
 import FAQs from "./pages/FAQs";
+import FamilySupport from "./pages/FamilySupport";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/blog/:id" element={<BlogArticle />} />
           <Route path="/addiction-assessment" element={<AddictionAssessment />} />
           <Route path="/faqs" element={<FAQs />} />
+          <Route path="/family-support" element={<FamilySupport />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

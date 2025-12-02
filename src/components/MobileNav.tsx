@@ -59,6 +59,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     FAQs
                   </Button>
                 </Link>
+                <Link to="/family-support" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Family Support
+                  </Button>
+                </Link>
               </div>
               
               <a href="#partnership" onClick={closeMenu}>
