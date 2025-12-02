@@ -140,8 +140,8 @@ export default function FamilySupport() {
                     Setting boundaries is one of the most loving things you can do for your addicted loved one. 
                     Boundaries protect your well-being while encouraging them to seek help.
                   </p>
-                  <Link to="/blog/motivating-reluctant-loved-one" className="text-primary hover:underline text-sm">
-                    Read: Motivating Your Reluctant Loved One →
+                  <Link to="/blog/14" className="text-primary hover:underline text-sm">
+                    Read: Defending Your Castle from Addiction →
                   </Link>
                 </CardContent>
               </Card>
