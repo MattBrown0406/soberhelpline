@@ -209,7 +209,6 @@ Many families find that their own healing journey transforms their relationships
 • Remember: You cannot want recovery more than they do
 
 **If They Relapse:**
-• Relapse is often part of recovery, not the end of it
 • Assess the severity—do they need medical attention or detox?
 • Avoid shame and blame; express concern and love
 • Review and potentially tighten boundaries
