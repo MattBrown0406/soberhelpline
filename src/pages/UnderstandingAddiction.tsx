@@ -35,7 +35,7 @@ export default function UnderstandingAddiction() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
             Addiction: A Chronic Disease, Not a Choice
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -47,8 +47,8 @@ export default function UnderstandingAddiction() {
           {/* What Is Addiction? */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Brain className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">What Is Addiction?</h2>
+              <Brain className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">What Is Addiction?</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -63,8 +63,8 @@ export default function UnderstandingAddiction() {
           {/* Brain Science Behind the Shift */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">Brain Science Behind the Shift</h2>
+              <AlertTriangle className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">Brain Science Behind the Shift</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -86,8 +86,8 @@ export default function UnderstandingAddiction() {
           {/* The Lobster Allergy Metaphor */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Heart className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">Why "Just Stopping" Isn't Simple</h2>
+              <Heart className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">Why "Just Stopping" Isn't Simple</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -105,8 +105,8 @@ export default function UnderstandingAddiction() {
           {/* The Role of Genetics and Environment */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Lightbulb className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">The Role of Genetics and Environment</h2>
+              <Lightbulb className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">The Role of Genetics and Environment</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -132,8 +132,8 @@ export default function UnderstandingAddiction() {
           {/* Why the "Choice" Myth Persists */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Users className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">Why the "Choice" Myth Persists</h2>
+              <Users className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">Why the "Choice" Myth Persists</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -146,10 +146,10 @@ export default function UnderstandingAddiction() {
           </section>
 
           {/* Hope for Recovery */}
-          <section className="bg-primary/10 border border-primary/20 rounded-lg p-6 md:p-8">
+          <section className="bg-logo-green/10 border border-logo-green/20 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-primary">Hope for Recovery</h2>
+              <TrendingUp className="h-6 w-6 text-logo-green" />
+              <h2 className="text-xl md:text-2xl font-semibold text-logo-green">Hope for Recovery</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -173,7 +173,7 @@ export default function UnderstandingAddiction() {
 
         {/* Call to Action */}
         <div className="mt-12 bg-card border border-border rounded-lg p-6 md:p-8 text-center">
-          <h2 className="text-xl md:text-2xl font-semibold text-primary mb-3">
+          <h2 className="text-xl md:text-2xl font-semibold text-logo-green mb-3">
             Ready to Take the Next Step?
           </h2>
           <p className="text-muted-foreground mb-4">
