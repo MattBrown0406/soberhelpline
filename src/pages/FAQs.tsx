@@ -168,8 +168,8 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         • Some treatment centers have staff who can help navigate insurance enrollment
         {"\n\n"}
         **Other Resources:**{"\n"}
-        • SAMHSA's National Helpline (1-800-662-4357) offers free referrals 24/7{"\n"}
-        • 12-step programs like AA and NA are always free{"\n"}
+        • SAMHSA's National Helpline (<a href="tel:1-800-662-4357" className="text-primary hover:underline font-medium">1-800-662-4357</a>) offers free referrals 24/7{"\n"}
+        • 12-step programs like <a href="https://www.aa.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">AA</a> and <a href="https://www.na.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">NA</a> are always free{"\n"}
         • Some interventionists and sober coaches offer payment plans
       </>
     )
