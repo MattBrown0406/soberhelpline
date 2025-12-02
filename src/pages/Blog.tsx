@@ -615,7 +615,7 @@ If you're worried about a loved one's addiction, reaching out to a professional 
   },
   {
     id: 14,
-    title: "Boundaries Are the Fortress That Protects You from the Invasion of Addiction",
+    title: "Defending Your Castle from Addiction",
     excerpt: "Picture your family as an old stone castle on a hill. Addiction is not your loved one's soul or character; it is the enemy army camped outside the walls, always probing for weak spots, always trying to get inside the courtyard where your peace, safety, and sanity live.",
     author: "Sober Helpline Team",
     date: "2025-12-02",
