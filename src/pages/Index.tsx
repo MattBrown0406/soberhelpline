@@ -113,6 +113,11 @@ const Index = () => {
                     Family Support
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/understanding-addiction" className="cursor-pointer">
+                    Understanding Addiction as a Disease
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="#partnership">
