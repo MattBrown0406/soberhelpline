@@ -158,7 +158,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         {"\n\n"}
         **State-Funded and Non-Profit Programs:**{"\n"}
         • Most states have publicly funded treatment programs{"\n"}
-        • <a href="https://www.salvationarmyusa.org/usn/adult-rehabilitation-centers/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Salvation Army Adult Rehabilitation Centers</a> offer free long-term treatment{"\n"}
+        • <a href="https://www.salvationarmyusa.org/recovery/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Salvation Army Adult Rehabilitation Centers</a> offer free long-term treatment{"\n"}
         • Faith-based programs like <a href="https://teenchallengeusa.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Adult & Teen Challenge</a> offer free or low-cost care{"\n"}
         • Community health centers may offer substance abuse services on a sliding scale
         {"\n\n"}
