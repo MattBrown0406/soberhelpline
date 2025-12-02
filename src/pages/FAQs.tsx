@@ -207,23 +207,27 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
   },
   {
     question: "What can I do for myself while my loved one is using or in treatment?",
-    answer: `You deserve support regardless of what your loved one chooses. Prioritizing your own well-being is not selfish—it's essential.
-
-**Self-Care Actions:**
-• Attend Al-Anon, Nar-Anon, or other family support groups
-• Find a therapist who understands addiction and family dynamics
-• Educate yourself about addiction and codependency
-• Maintain your own health: sleep, nutrition, exercise
-• Stay connected with friends and activities you enjoy
-• Set boundaries to protect your mental and financial health
-
-**Important Truths:**
-• You did not cause their addiction
-• You cannot control their addiction
-• You cannot cure their addiction
-• You CAN focus on your own recovery and growth
-
-Many families find that their own healing journey transforms their relationships and creates conditions more conducive to their loved one's recovery.`
+    answer: (
+      <>
+        You deserve support regardless of what your loved one chooses. Prioritizing your own well-being is not selfish—it's essential.
+        {"\n\n"}
+        **Self-Care Actions:**{"\n"}
+        • Attend <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a>, <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>, or <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a> family support groups{"\n"}
+        • Find a therapist who understands addiction and family dynamics{"\n"}
+        • Educate yourself about addiction and codependency{"\n"}
+        • Maintain your own health: sleep, nutrition, exercise{"\n"}
+        • Stay connected with friends and activities you enjoy{"\n"}
+        • Set boundaries to protect your mental and financial health
+        {"\n\n"}
+        **Important Truths:**{"\n"}
+        • You did not cause their addiction{"\n"}
+        • You cannot control their addiction{"\n"}
+        • You cannot cure their addiction{"\n"}
+        • You CAN focus on your own recovery and growth
+        {"\n\n"}
+        Many families find that their own healing journey transforms their relationships and creates conditions more conducive to their loved one's recovery.
+      </>
+    )
   },
   {
     question: "What happens if they refuse help or relapse after treatment?",
