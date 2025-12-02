@@ -213,7 +213,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         {"\n\n"}
         **Self-Care Actions:**{"\n"}
         • Attend <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a>, <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>, or <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a> family support groups{"\n"}
-        • Find a therapist who understands addiction and family dynamics{"\n"}
+        • Find a <Link to="/therapists" className="text-primary hover:underline font-medium">therapist</Link> who understands addiction and family dynamics{"\n"}
         • Educate yourself about addiction and codependency{"\n"}
         • Maintain your own health: sleep, nutrition, exercise{"\n"}
         • Stay connected with friends and activities you enjoy{"\n"}
