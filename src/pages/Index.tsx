@@ -108,6 +108,11 @@ const Index = () => {
                     FAQs
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/family-support" className="cursor-pointer">
+                    Family Support
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="#partnership">
