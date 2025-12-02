@@ -163,7 +163,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         • Community health centers may offer substance abuse services on a sliding scale
         {"\n\n"}
         **Getting Insurance:**{"\n"}
-        • Medicaid may be available based on income (apply at healthcare.gov or your state's Medicaid office){"\n"}
+        • Medicaid may be available based on income (apply at <a href="https://www.healthcare.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">healthcare.gov</a> or your state's Medicaid office){"\n"}
         • The Affordable Care Act marketplace offers subsidized plans during open enrollment{"\n"}
         • Some treatment centers have staff who can help navigate insurance enrollment
         {"\n\n"}
