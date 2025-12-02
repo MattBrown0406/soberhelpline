@@ -171,8 +171,6 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         • SAMHSA's National Helpline (1-800-662-4357) offers free referrals 24/7{"\n"}
         • 12-step programs like AA and NA are always free{"\n"}
         • Some interventionists and sober coaches offer payment plans
-        {"\n\n"}
-        Don't let the absence of insurance stop you from seeking help. Call us at (541) 241-5886 and we can help you explore options based on your specific situation.
       </>
     )
   },
