@@ -312,7 +312,7 @@ const Interventionists = () => {
               onBackToUSMap={handleBackToUSMap}
             />
           ) : (
-            <USMap onStateClick={handleStateClick} selectedState={selectedState} />
+            <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Interventionists" />
           )}
           
           <div className="max-w-4xl mx-auto mt-6">
