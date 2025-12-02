@@ -73,6 +73,7 @@ Remember, you cannot force someone into recovery, but you can create conditions 
 • The group rehearses to ensure a calm, unified approach
 • Treatment arrangements are made in advance so they can leave immediately
 • The intervention is conducted with the goal of creating hope and a willingness to change
+• The interventionist is almost always the person who will transport the individual to the designated treatment facility on the day of the intervention
 
 Who attends: Close family members, friends, and sometimes employers who are directly affected. The interventionist helps determine who should participate.
 
