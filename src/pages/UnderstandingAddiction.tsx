@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb } from "lucide-react";
+import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb, Users, TrendingUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import logo from "@/assets/logo.png";
 
@@ -7,7 +7,7 @@ export default function UnderstandingAddiction() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Understanding Addiction as a Disease | Sober Helpline</title>
+        <title>Addiction: A Chronic Disease, Not a Choice | Sober Helpline</title>
         <meta name="description" content="Learn why addiction is classified as a chronic brain disease, how it affects the brain, and why this understanding is crucial for effective treatment and recovery." />
       </Helmet>
 
@@ -35,11 +35,11 @@ export default function UnderstandingAddiction() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Understanding Addiction as a Disease
+          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            Addiction: A Chronic Disease, Not a Choice
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Addiction is not a moral failing or a lack of willpower—it is a chronic, relapsing brain disease that requires understanding, compassion, and proper treatment.
+            Families facing a loved one's addiction often feel frustration, anger, or betrayal, wondering why they "choose" to destroy their lives despite pleas and consequences. Viewing addiction as a chronic disease—much like diabetes or heart disease—shifts understanding from moral failure to a treatable medical condition rooted in brain changes, genetics, and environment. This reframing builds empathy, encourages evidence-based treatment, and improves recovery odds.
           </p>
         </div>
 
@@ -48,32 +48,32 @@ export default function UnderstandingAddiction() {
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <Brain className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground">What Is Addiction?</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">What Is Addiction?</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
-                The American Medical Association, the American Society of Addiction Medicine, and the National Institute on Drug Abuse all recognize addiction as a <strong>chronic brain disease</strong>. Like diabetes, heart disease, or asthma, addiction involves complex interactions between brain circuits, genetics, environment, and life experiences.
+                Major health organizations, including the National Institute on Drug Abuse (NIDA) and American Medical Association, classify addiction as a <strong>chronic, relapsing brain disease</strong>. Prolonged substance use alters brain structure and function, hijacking reward pathways, impairing decision-making, and strengthening memory circuits tied to drug cues.
               </p>
               <p>
-                Addiction fundamentally changes how the brain works. It hijacks the brain's reward system, making the pursuit of substances or behaviors feel as essential as food or water. This is why people continue to use despite devastating consequences—their brain has been rewired to prioritize the substance above all else.
+                Neuroimaging shows these changes persist years after quitting, explaining intense cravings and relapse risks even after long abstinence. Like hypertension damaging arteries over time, addiction rewires neural circuits, making controlled use nearly impossible without intervention.
               </p>
             </div>
           </section>
 
-          {/* How Addiction Changes the Brain */}
+          {/* Brain Science Behind the Shift */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <AlertTriangle className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground">How Addiction Changes the Brain</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">Brain Science Behind the Shift</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
-                Substances of abuse flood the brain with dopamine—the "feel good" neurotransmitter—at levels far beyond what natural rewards provide. Over time, this causes significant changes:
+                Substances flood the brain's dopamine system, creating euphoria far beyond natural rewards like food or relationships. Repeated exposure strengthens these pathways, turning casual use into compulsion. The prefrontal cortex, responsible for impulse control and foresight, weakens, while the amygdala heightens emotional responses to drug cues—social settings, stress, or locations once linked to use.
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Tolerance:</strong> The brain reduces dopamine receptors, requiring more of the substance to feel the same effect.</li>
                 <li><strong>Dependence:</strong> The brain becomes reliant on the substance to function normally, leading to withdrawal symptoms without it.</li>
-                <li><strong>Impaired Decision-Making:</strong> The prefrontal cortex (responsible for judgment, impulse control, and decision-making) becomes compromised.</li>
+                <li><strong>Impaired Decision-Making:</strong> The prefrontal cortex becomes compromised, weakening judgment and impulse control.</li>
                 <li><strong>Hijacked Stress Response:</strong> The brain's stress systems become dysregulated, making stress a powerful trigger for use.</li>
                 <li><strong>Memory and Learning Changes:</strong> Powerful associations form between environmental cues and drug use, creating persistent cravings.</li>
               </ul>
@@ -83,26 +83,21 @@ export default function UnderstandingAddiction() {
             </div>
           </section>
 
-          {/* Why "Just Stopping" Isn't Simple */}
+          {/* The Lobster Allergy Metaphor */}
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <Heart className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground">Why "Just Stopping" Isn't Simple</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">Why "Just Stopping" Isn't Simple</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
-                Family members often wonder, "Why can't they just stop?" Understanding addiction as a disease helps answer this question. Consider:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>We don't tell someone with diabetes to "just produce more insulin"</li>
-                <li>We don't expect someone with depression to "just cheer up"</li>
-                <li>We don't ask someone with heart disease to "just have better arteries"</li>
-              </ul>
-              <p>
-                Similarly, telling someone with addiction to "just stop" ignores the biological reality of their condition. Their brain has been fundamentally altered, and recovery requires proper treatment, support, and often medical intervention—not just good intentions.
+                Consider this metaphor: A group of friends goes out to a seafood restaurant and all order lobster dinners. For most, it's a delightful meal—rich flavors, no issues, just satisfaction. But one person has a shellfish allergy due to their unique immune wiring. Within minutes, they experience hives, swelling, wheezing, and potentially life-threatening reactions.
               </p>
               <p>
-                This doesn't mean people with addiction aren't responsible for their recovery. It means that recovery is possible with the right help, and that shame and blame are counterproductive approaches that often make things worse.
+                The allergic person didn't "choose" this reaction; their biology dictates it. No amount of willpower stops the immune flood of histamines. <strong>Addiction works the same way:</strong> substances trigger dopamine surges everyone feels initially, but the genetically or environmentally vulnerable brain reacts pathologically, creating compulsion beyond choice. Willpower has no bearing; it's physiological, not personal failure.
+              </p>
+              <p>
+                This mirrors other chronic diseases. Diabetes involves insulin dysregulation requiring lifelong management. Heart disease builds plaque silently until crisis strikes. Addiction follows suit: no "cure," but remission through medication, therapy, and lifestyle changes. Relapse rates match those of asthma (50-70%) or hypertension (50-70%), not a sign of weak character but disease progression without ongoing care.
               </p>
             </div>
           </section>
@@ -111,7 +106,7 @@ export default function UnderstandingAddiction() {
           <section className="bg-card border border-border rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <Lightbulb className="h-6 w-6 text-primary" />
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground">The Role of Genetics and Environment</h2>
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">The Role of Genetics and Environment</h2>
             </div>
             <div className="text-muted-foreground space-y-4">
               <p>
@@ -134,9 +129,28 @@ export default function UnderstandingAddiction() {
             </div>
           </section>
 
+          {/* Why the "Choice" Myth Persists */}
+          <section className="bg-card border border-border rounded-lg p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="h-6 w-6 text-primary" />
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">Why the "Choice" Myth Persists</h2>
+            </div>
+            <div className="text-muted-foreground space-y-4">
+              <p>
+                Cultural stigma paints addiction as willpower deficit, rooted in outdated moral models. Early users choose experimentation, but dependence flips agency—cravings override rational choice, much like hunger drives eating despite diet knowledge. Families see "choices" like skipping work or stealing, missing the underlying compulsion.
+              </p>
+              <p>
+                This view delays treatment; only 23% of U.S. adults with substance use disorders get help, versus 80-90% for other chronic illnesses. Stigma worsens isolation, shame, and barriers like job loss or family rejection. <strong>Reframing reduces these harms.</strong> Studies show disease-model education increases family support and treatment adherence.
+              </p>
+            </div>
+          </section>
+
           {/* Hope for Recovery */}
           <section className="bg-primary/10 border border-primary/20 rounded-lg p-6 md:p-8">
-            <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4">Hope for Recovery</h2>
+            <div className="flex items-center gap-3 mb-4">
+              <TrendingUp className="h-6 w-6 text-primary" />
+              <h2 className="text-xl md:text-2xl font-semibold text-primary">Hope for Recovery</h2>
+            </div>
             <div className="text-muted-foreground space-y-4">
               <p>
                 The disease model of addiction isn't about hopelessness—it's about understanding what we're dealing with so we can treat it effectively. The good news is:
@@ -144,11 +158,14 @@ export default function UnderstandingAddiction() {
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>The brain can heal.</strong> With sustained recovery, many brain changes can reverse over time.</li>
                 <li><strong>Treatment works.</strong> Evidence-based treatments have success rates comparable to other chronic diseases.</li>
-                <li><strong>Recovery is possible.</strong> Millions of people are living in long-term recovery.</li>
-                <li><strong>Each attempt builds toward success.</strong> Relapse isn't failure—it's often part of the learning process.</li>
+                <li><strong>Recovery is possible.</strong> Over 50% achieve long-term recovery with proper management.</li>
+                <li><strong>Relapse isn't failure</strong>—it's a signal for adjustment, like tweaking insulin for diabetes spikes.</li>
               </ul>
               <p>
-                Understanding addiction as a disease opens the door to compassion, appropriate treatment, and lasting recovery. It helps families support their loved ones without enabling, and helps those struggling understand that they're not broken—they have a treatable condition.
+                Detox alone fails 80-90% within a year; comprehensive care—residential programs, counseling, family therapy—addresses medical, psychological, and social roots. Families play key roles: learning boundaries prevents enabling, attending support groups builds resilience, and modeling healthy behaviors aids recovery.
+              </p>
+              <p>
+                <strong>Your loved one deserves treatment as a patient, not punishment as a criminal.</strong> Recovery thrives when all see the disease, commit to management, and reject choice-based myths.
               </p>
             </div>
           </section>
@@ -156,7 +173,7 @@ export default function UnderstandingAddiction() {
 
         {/* Call to Action */}
         <div className="mt-12 bg-card border border-border rounded-lg p-6 md:p-8 text-center">
-          <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3">
+          <h2 className="text-xl md:text-2xl font-semibold text-primary mb-3">
             Ready to Take the Next Step?
           </h2>
           <p className="text-muted-foreground mb-4">
