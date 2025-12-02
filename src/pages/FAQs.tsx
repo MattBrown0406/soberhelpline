@@ -147,29 +147,33 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
   },
   {
     question: "What should I expect during treatment and early recovery?",
-    answer: `Understanding the process helps you support without smothering:
-
-**During Treatment:**
-• Detox may take 3-10 days depending on substances used
-• Limited communication initially (often "blackout" periods)
-• Family sessions are typically offered—participate if possible
-• Your loved one may seem worse before they get better as emotions surface
-• Treatment is the beginning, not the end, of recovery
-• Be prepared for requests to leave treatment early. Have a plan for what you will say when this happens. If you don't know what to say, speak with an interventionist, therapist, or sober coach who can help you.
-
-**Early Recovery (First Year):**
-• Relapse risk is highest in the first 90 days
-• They need structure: Outpatient, Sober Living, Meetings, Therapy, and Sober Support
-• Mood swings and emotional volatility are normal
-• They're learning to live without their primary coping mechanism
-• Recovery is their responsibility—you can support but not do it for them
-
-**How to Help:**
-• Attend family support groups
-• Learn about addiction and recovery
-• Celebrate milestones without creating pressure
-• Be patient with the process
-• Focus on your own healing too`
+    answer: (
+      <>
+        Understanding the process helps you support without smothering:
+        {"\n\n"}
+        **During Treatment:**{"\n"}
+        • Detox may take 3-10 days depending on substances used{"\n"}
+        • Limited communication initially (often "blackout" periods){"\n"}
+        • Family sessions are typically offered—participate if possible{"\n"}
+        • Your loved one may seem worse before they get better as emotions surface{"\n"}
+        • Treatment is the beginning, not the end, of recovery{"\n"}
+        • Be prepared for requests to leave treatment early. Have a plan for what you will say when this happens. If you don't know what to say, speak with an interventionist, therapist, or sober coach who can help you.
+        {"\n\n"}
+        **Early Recovery (First Year):**{"\n"}
+        • Relapse risk is highest in the first 90 days{"\n"}
+        • They need structure: Outpatient, Sober Living, Meetings, Therapy, and Sober Support{"\n"}
+        • Mood swings and emotional volatility are normal{"\n"}
+        • They're learning to live without their primary coping mechanism{"\n"}
+        • Recovery is their responsibility—<span className="underline">you can support but not do it for them</span>
+        {"\n\n"}
+        **How to Help:**{"\n"}
+        • Attend family support groups{"\n"}
+        • Learn about addiction and recovery{"\n"}
+        • Celebrate milestones without creating pressure{"\n"}
+        • Be patient with the process{"\n"}
+        • Focus on your own healing too
+      </>
+    )
   },
   {
     question: "What can I do for myself while my loved one is using or in treatment?",
