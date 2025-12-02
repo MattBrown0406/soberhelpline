@@ -2,6 +2,7 @@ import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps
 import { useState, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { stateCoordinates } from "@/utils/stateCoordinates";
+import zipcodes from "zipcodes";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -121,8 +122,10 @@ const stateColors: Record<string, string> = {
 };
 
 interface ProviderLocation {
+  id: string;
   state: string;
-  count: number;
+  city: string | null;
+  providerName: string;
   coordinates: [number, number]; // [lng, lat] for react-simple-maps
 }
 
@@ -140,7 +143,7 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
 
       const { data, error } = await supabase
         .from('provider_submissions')
-        .select('state')
+        .select('id, state, zip_code, city, provider_name')
         .eq('category', category)
         .eq('status', 'approved')
         .not('state', 'is', null);
@@ -150,28 +153,61 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
         return;
       }
 
-      // Group by state and count
-      const stateCounts: Record<string, number> = {};
+      // Group by state first
+      const providersByState: Record<string, typeof data> = {};
       data?.forEach(provider => {
         if (provider.state) {
-          // Handle both full state names and abbreviations
           const fullStateName = abbreviationToState[provider.state] || provider.state;
-          stateCounts[fullStateName] = (stateCounts[fullStateName] || 0) + 1;
+          if (!providersByState[fullStateName]) {
+            providersByState[fullStateName] = [];
+          }
+          providersByState[fullStateName].push(provider);
         }
       });
 
-      // Convert to array with coordinates
-      const locations: ProviderLocation[] = Object.entries(stateCounts)
-        .map(([state, count]) => {
-          const coords = stateCoordinates[state];
-          if (!coords) return null;
-          return {
-            state,
-            count,
-            coordinates: [coords.lng, coords.lat] as [number, number]
-          };
-        })
-        .filter((loc): loc is ProviderLocation => loc !== null);
+      // Limit to 6 per state and get coordinates
+      const locations: ProviderLocation[] = [];
+      
+      Object.entries(providersByState).forEach(([stateName, providers]) => {
+        // Take up to 6 providers per state
+        const limitedProviders = providers.slice(0, 6);
+        
+        limitedProviders.forEach((provider, index) => {
+          let coords: [number, number] | null = null;
+          
+          // Try to get coordinates from zip code
+          if (provider.zip_code) {
+            const zipInfo = zipcodes.lookup(provider.zip_code);
+            if (zipInfo && zipInfo.latitude && zipInfo.longitude) {
+              coords = [zipInfo.longitude, zipInfo.latitude];
+            }
+          }
+          
+          // Fall back to state centroid with slight offset for multiple providers
+          if (!coords) {
+            const stateCoords = stateCoordinates[stateName];
+            if (stateCoords) {
+              // Add slight random offset to avoid overlapping dots
+              const offset = index * 0.5;
+              const angle = (index * 60) * (Math.PI / 180);
+              coords = [
+                stateCoords.lng + Math.cos(angle) * offset,
+                stateCoords.lat + Math.sin(angle) * offset
+              ];
+            }
+          }
+          
+          if (coords) {
+            locations.push({
+              id: provider.id,
+              state: stateName,
+              city: provider.city,
+              providerName: provider.provider_name,
+              coordinates: coords
+            });
+          }
+        });
+      });
 
       setProviderLocations(locations);
     };
@@ -257,9 +293,9 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
         
         {/* Provider location dots */}
         {providerLocations.map((location) => (
-          <Marker key={location.state} coordinates={location.coordinates}>
+          <Marker key={location.id} coordinates={location.coordinates}>
             <circle
-              r={Math.min(4 + location.count * 1.5, 12)}
+              r={5}
               fill="hsl(var(--logo-green))"
               stroke="hsl(var(--background))"
               strokeWidth={1.5}
@@ -272,21 +308,6 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
                 onStateClick(location.state);
               }}
             />
-            {location.count > 1 && (
-              <text
-                textAnchor="middle"
-                y={4}
-                style={{
-                  fontFamily: 'system-ui',
-                  fill: 'white',
-                  fontSize: '10px',
-                  fontWeight: 'bold',
-                  pointerEvents: 'none'
-                }}
-              >
-                {location.count}
-              </text>
-            )}
           </Marker>
         ))}
       </ComposableMap>
