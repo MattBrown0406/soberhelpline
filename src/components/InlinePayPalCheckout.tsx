@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { usePayPalSubscription } from '@/hooks/usePayPalSubscription';
 import { useToast } from '@/hooks/use-toast';
 import { Check, Loader2, Tag, CheckCircle2 } from 'lucide-react';
-
 interface SubscriptionPlan {
   id: string;
   name: string;
@@ -157,6 +156,21 @@ export function InlinePayPalCheckout({
   const plan = hasAnnualOption 
     ? (selectedBillingCycle === 'annual' ? planOptions.annual! : planOptions.monthly!)
     : (planOptions.monthly || planOptions.annual!);
+
+  // Auto-redirect to PayPal when approval URL is received
+  useEffect(() => {
+    if (paypalUrl) {
+      toast({
+        title: 'Redirecting to PayPal',
+        description: 'Please complete your payment on PayPal.',
+      });
+      // Small delay to ensure toast is shown before redirect
+      const timer = setTimeout(() => {
+        window.location.href = paypalUrl;
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [paypalUrl, toast]);
 
   const handleSubscribe = async () => {
     setProcessingPayment(true);
@@ -318,21 +332,12 @@ export function InlinePayPalCheckout({
 
         {paypalUrl ? (
           <div className="w-full p-4 bg-muted rounded-lg text-center space-y-3">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
             <p className="text-sm font-medium text-foreground">
-              Click the button below to complete your payment with PayPal
+              Redirecting you to PayPal...
             </p>
-            <a 
-              href={paypalUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block w-full"
-            >
-              <Button size="lg" className="w-full">
-                Continue to PayPal →
-              </Button>
-            </a>
             <p className="text-xs text-muted-foreground">
-              Opens in a new tab. Return here after completing payment.
+              If you're not redirected automatically, <a href={paypalUrl} className="underline text-primary">click here</a>.
             </p>
           </div>
         ) : (
