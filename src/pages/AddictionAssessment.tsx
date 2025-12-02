@@ -56,7 +56,7 @@ const AddictionAssessment = () => {
             Addiction Assessment
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
-            In the United States, about 54.2 million people aged 12 and older needed treatment for a substance use disorder in 2023, but only about 23% (12.5 million) of those received treatment during the past year. This gap (41.7 million) demonstrates how most people struggling with addiction do not get the help they need.
+            In the United States, about 54.2 million people needed treatment for a substance use disorder in 2023, but only about 23% (12.5 million) of those received treatment during the past year. This gap (41.7 million) demonstrates how most people struggling with addiction do not get the help they need.
           </p>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mt-4">
             Use the questions below to assess whether your loved one may be struggling with substance use disorder.
