@@ -239,7 +239,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
 • Keep the door open for when they're ready
 • Consider whether a professional intervention might help
 • Focus on your own recovery and well-being
-• Remember: You cannot want recovery more than they do
+• Remember: Never work harder on solving their problems than they are
 
 **If They Relapse:**
 • Assess the severity—do they need medical attention or detox?
