@@ -171,7 +171,8 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         • Learn about addiction and recovery{"\n"}
         • Celebrate milestones without creating pressure{"\n"}
         • Be patient with the process{"\n"}
-        • Focus on your own healing too
+        • Focus on your own healing too{"\n"}
+        • Set clear expectations around sobriety and behaviors that have been harmful in the past. Accountability is important.
       </>
     )
   },
