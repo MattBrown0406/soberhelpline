@@ -103,22 +103,26 @@ A professional can help assess the appropriate level of care based on your loved
   },
   {
     question: "What's the difference between helping and enabling? Am I making things worse?",
-    answer: `This is one of the most common and painful questions families face.
-
-**Enabling** protects someone from the consequences of their addiction, making it easier to continue using:
-• Paying their bills or rent
-• Making excuses for missed work or events
-• Lying to cover up their behavior
-• Bailing them out of legal trouble
-• Providing housing without conditions
-
-**Helping** supports their recovery without removing natural consequences:
-• Offering to drive them to treatment or meetings
-• Paying directly for treatment (not giving them cash)
-• Maintaining your own boundaries and well-being
-• Expressing love while refusing to participate in their addiction
-
-Stopping enabling is NOT abandoning them. It's allowing reality to become their teacher. This is incredibly difficult, and working with a therapist or attending family support groups can help you navigate this transition.`
+    answer: (
+      <>
+        This is one of the most common and painful questions families face.
+        {"\n\n"}
+        **Enabling** protects someone from the consequences of their addiction, making it easier to continue using:{"\n"}
+        • Paying their bills or rent{"\n"}
+        • Making excuses for missed work or events{"\n"}
+        • Lying to cover up their behavior{"\n"}
+        • Bailing them out of legal trouble{"\n"}
+        • Providing housing without conditions
+        {"\n\n"}
+        **Helping** supports their recovery without removing natural consequences:{"\n"}
+        • Offering to drive them to treatment or meetings{"\n"}
+        • Paying directly for treatment (not giving them cash){"\n"}
+        • Maintaining your own boundaries and well-being{"\n"}
+        • Expressing love while refusing to participate in their addiction
+        {"\n\n"}
+        Stopping enabling is NOT abandoning them. It's allowing reality to become their teacher. This is incredibly difficult, and working with a therapist or attending family support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a>, <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>, or <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a> can help you navigate this transition.
+      </>
+    )
   },
   {
     question: "What boundaries should I set, and how do I follow through on them?",
