@@ -201,7 +201,7 @@ const providerFormSchema = z.object({
   slidingScaleAvailable: z.boolean().default(false),
 }).refine((data) => {
   // Length of services is required for categories that show this field
-  const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Medical Detox", "Therapists"];
+  const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Medical Detox", "Therapists", "Sober Living"];
   if (!excludedCategories.includes(data.category)) {
     return data.lengthOfServices && data.lengthOfServices.length > 0;
   }
@@ -1246,7 +1246,7 @@ const ProviderInfo = () => {
                 </>
               )}
 
-              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists", "Medical Detox"].includes(form.watch("category")) && (
+              {!["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Therapists", "Medical Detox", "Sober Living"].includes(form.watch("category")) && (
                 <FormField
                   control={form.control}
                   name="lengthOfServices"
