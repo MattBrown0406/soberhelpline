@@ -146,6 +146,37 @@ A professional can help assess the appropriate level of care based on your loved
 Remember: A boundary without a consequence is just a suggestion. Be prepared to follow through, even when it's heartbreaking.`
   },
   {
+    question: "What do I do if my addicted loved one doesn't have insurance?",
+    answer: (
+      <>
+        Lack of insurance doesn't mean your loved one can't get help. There are several options to explore:
+        {"\n\n"}
+        **Self-Pay and Sliding Scale Options:**{"\n"}
+        • Many treatment centers offer sliding scale fees based on income{"\n"}
+        • Some facilities offer payment plans to make treatment more affordable{"\n"}
+        • Look for providers on our directory who accept self-pay and offer sliding scale options
+        {"\n\n"}
+        **State-Funded and Non-Profit Programs:**{"\n"}
+        • Most states have publicly funded treatment programs{"\n"}
+        • Salvation Army Adult Rehabilitation Centers offer free long-term treatment{"\n"}
+        • Faith-based programs often provide free or low-cost care{"\n"}
+        • Community health centers may offer substance abuse services on a sliding scale
+        {"\n\n"}
+        **Getting Insurance:**{"\n"}
+        • Medicaid may be available based on income (apply at healthcare.gov or your state's Medicaid office){"\n"}
+        • The Affordable Care Act marketplace offers subsidized plans during open enrollment{"\n"}
+        • Some treatment centers have staff who can help navigate insurance enrollment
+        {"\n\n"}
+        **Other Resources:**{"\n"}
+        • SAMHSA's National Helpline (1-800-662-4357) offers free referrals 24/7{"\n"}
+        • 12-step programs like AA and NA are always free{"\n"}
+        • Some interventionists and sober coaches offer payment plans
+        {"\n\n"}
+        Don't let the absence of insurance stop you from seeking help. Call us at (541) 241-5886 and we can help you explore options based on your specific situation.
+      </>
+    )
+  },
+  {
     question: "What should I expect during treatment and early recovery?",
     answer: (
       <>
