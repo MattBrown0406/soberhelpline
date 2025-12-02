@@ -155,6 +155,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
 • Family sessions are typically offered—participate if possible
 • Your loved one may seem worse before they get better as emotions surface
 • Treatment is the beginning, not the end, of recovery
+• Be prepared for requests to leave treatment early. Have a plan for what you will say when this happens. If you don't know what to say, speak with an interventionist, therapist, or sober coach who can help you.
 
 **Early Recovery (First Year):**
 • Relapse risk is highest in the first 90 days
