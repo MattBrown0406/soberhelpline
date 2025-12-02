@@ -616,70 +616,52 @@ If you're worried about a loved one's addiction, reaching out to a professional 
   {
     id: 14,
     title: "Boundaries Are the Fortress That Protects You from the Invasion of Addiction",
-    excerpt: "Healthy boundaries are not walls built out of anger—they are protective measures that preserve your well-being while creating space for your loved one to face the consequences of their choices and find their own path to recovery.",
+    excerpt: "Picture your family as an old stone castle on a hill. Addiction is not your loved one's soul or character; it is the enemy army camped outside the walls, always probing for weak spots, always trying to get inside the courtyard where your peace, safety, and sanity live.",
     author: "Sober Helpline Team",
     date: "2025-12-02",
     category: "Family Support",
     image: boundariesFortressImg,
-    content: `When addiction enters a family, it does not knock politely at the door. It invades. It takes over conversations, hijacks emotions, disrupts routines, and slowly erodes the peace and stability that once existed. For family members watching a loved one struggle with substance use disorder, the instinct is often to help, fix, rescue, and protect. But without healthy boundaries, that instinct can become a liability—both for you and for your loved one.
+    content: `Picture your family as an old stone castle on a hill. Addiction is not your loved one's soul or character; it is the enemy army camped outside the walls, always probing for weak spots, always trying to get inside the courtyard where your peace, safety, and sanity live.
 
-**What Are Boundaries and Why Do They Matter?**
+**Walls and Gates**
 
-Boundaries are the limits we set to protect our physical, emotional, and mental well-being. They define what we will and will not accept in our relationships. In the context of addiction, boundaries are not about controlling your loved one or punishing them for their behavior. They are about protecting yourself from the chaos and destruction that addiction brings.
+The castle walls are your boundaries. They are not built to punish the person outside; they are built to protect the people inside.
 
-Think of boundaries as the walls of a fortress. Inside those walls is everything you need to protect: your health, your peace of mind, your other relationships, your finances, and your sense of self. Without those walls, addiction can invade every corner of your life, leaving nothing untouched.
+If the walls are too low or crumbling, the invading force walks right in—crises, lies, late-night chaos, and constant rescues pour into your living room. If the walls are too high and sealed, the castle becomes a prison; no warmth, no relationship, just stone and silence.
 
-**The Difference Between Helping and Enabling**
+That is why a healthy castle has walls and gates. The gate is where you say, "Here is what it takes to come inside: honesty, safety, respect, sobriety."
 
-One of the hardest lessons for families of addicted loved ones is learning the difference between helping and enabling. Helping supports someone in moving toward health and recovery. Enabling, on the other hand, removes the natural consequences of addiction and makes it easier for the person to continue using.
+The gate can open for connection and close to manipulation. It does not swing on mood; it moves on clear values and limits.
 
-Common enabling behaviors include:
-- Giving money that may be used for substances
-- Making excuses for their behavior to employers, friends, or family
-- Paying their bills or legal fees
-- Allowing them to live in your home without expectations
-- Cleaning up their messes—literally or figuratively
-- Lying to protect them from consequences
+**Moat and Drawbridge**
 
-Enabling feels like love in the moment, but it often prolongs the addiction. When we shield someone from the consequences of their choices, we remove the very pain that might motivate them to change.
+Around the castle is a moat. The moat is emotional distance: the space between you and the addiction. It means you no longer jump into the water every time your loved one thrashes; you let the water show them they are in trouble, while you stay on solid ground.
 
-**Setting Boundaries Is an Act of Love**
+The drawbridge is how you respond. You can lower it when your loved one is willing to take real steps toward help, accountability, and recovery. You can raise it when they bring active use, blame, or abuse to your door. This is not cruelty; it is choosing safety over chaos.
 
-It may feel counterintuitive, but setting boundaries is one of the most loving things you can do for someone struggling with addiction. Boundaries communicate that you care about them too much to participate in their destruction. They also model self-respect and healthy behavior.
+**Watchtowers and Alarms**
 
-Setting a boundary might sound like:
-- I love you, but I will not give you money anymore.
-- You are welcome to visit, but not if you are under the influence.
-- I will not lie for you or cover up your behavior.
-- If you want to live here, you need to be actively working on your recovery.
+Every good castle has watchtowers. These are your awareness and support: education about addiction, therapy, groups like SMART Family & Friends or Al-Anon, coaching, and your own recovery work.
 
-These statements are not ultimatums delivered in anger. They are calm, clear expressions of what you need to maintain your own well-being.
+From the tower, you can see the patterns coming: the broken promises, the guilt trips, the "just this once" requests for money or rescue.
 
-**The Emotional Toll of Boundary Setting**
+When the guards see danger, they sound the alarm. For a family, the alarm is a calm, consistent boundary:
 
-Setting boundaries is not easy. It often comes with guilt, fear, and grief. You may worry that your loved one will hate you, cut you off, or spiral further into addiction. You may feel selfish for prioritizing your own needs. These feelings are normal, but they do not mean you are doing the wrong thing.
+- "We will not have drugs or alcohol in this house."
+- "We will not give you money, but we will help you find treatment."
+- "If you are verbally abusive, we will end the conversation and step away."
 
-Remember: you did not cause the addiction, you cannot control it, and you cannot cure it. What you can control is how you respond. Boundaries give you back that sense of agency in a situation that often feels completely out of control.
+**Inner Courtyard**
 
-**Protecting Your Fortress**
+Inside the walls is the courtyard: your values, your peace, your other children, your marriage, your health, your work, your spirituality. Addiction loves to drag the entire castle into constant war, until no one inside remembers what a normal day feels like.
 
-Once you set boundaries, you must be prepared to enforce them. A boundary without enforcement is just a suggestion. This does not mean you have to be cold or cruel. It means you follow through with what you said you would do.
+Healthy boundaries are how the castle remembers itself. They free the family to heal, rest, and connect again, instead of living in permanent crisis. They also give the addicted loved one something solid to push against—a clear outline of reality that can help them finally see the need for change.
 
-If you told your loved one they cannot stay with you while actively using, you must be prepared to ask them to leave. If you said you would not answer the phone after midnight, you must not answer. Consistency is key. When boundaries shift based on manipulation, guilt, or fear, they lose their power.
+**The Invitation, Not the Siege**
 
-**You Deserve Protection Too**
+The goal is not to rain fire on your loved one outside the walls; it is to stop surrendering the castle to the invading army. When your boundaries are clear, consistent, and grounded in love, your message becomes: "This castle is safe, and you are wanted here—but only if you come without the army of addiction at your back."
 
-Families of addicted individuals often forget that they matter too. You are not just a supporting character in your loved one's story—you are living your own life, with your own needs, dreams, and limitations. Protecting yourself is not abandonment. It is survival.
-
-Support groups like Al-Anon, Nar-Anon, and CoDA can help you navigate the emotional complexity of loving someone with addiction. These communities remind you that you are not alone and that setting boundaries is not only acceptable but necessary.
-
-**The Fortress Stands for Recovery**
-
-Boundaries create the conditions where recovery becomes possible. When your loved one can no longer rely on you to clean up their messes, they are forced to face reality. That reality, as painful as it is, is often the catalyst for change.
-
-Your fortress is not a rejection of your loved one. It is a protected space where you remain whole and healthy enough to support them when they are ready to recover. It is where you preserve your energy, your hope, and your love—so that when the time comes, you have something left to give.
-
-Addiction may try to invade, but your boundaries are the fortress that keeps it out. Build them strong. Maintain them with consistency. And remember: protecting yourself is not giving up on your loved one—it is making sure you are still standing when they find their way back.`
+One day, if they choose recovery, they do not have to storm the walls. They can walk across the bridge, lay down their weapons, and enter a home that is still standing, still warm, and still healthy enough to welcome them in.`
   }
 ];
 
