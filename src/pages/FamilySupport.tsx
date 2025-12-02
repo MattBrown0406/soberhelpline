@@ -83,6 +83,14 @@ export default function FamilySupport() {
                   >
                     Families Anonymous →
                   </a>
+                  <a
+                    href="https://coda.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-primary hover:underline"
+                  >
+                    Co-Dependents Anonymous (CoDA) →
+                  </a>
                 </CardContent>
               </Card>
 
