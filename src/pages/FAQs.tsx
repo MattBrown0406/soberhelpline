@@ -159,7 +159,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
 
 **Early Recovery (First Year):**
 • Relapse risk is highest in the first 90 days
-• They need structure: meetings, therapy, sober support
+• They need structure: Outpatient, Sober Living, Meetings, Therapy, and Sober Support
 • Mood swings and emotional volatility are normal
 • They're learning to live without their primary coping mechanism
 • Recovery is their responsibility—you can support but not do it for them
