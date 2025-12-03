@@ -244,6 +244,63 @@ export function EditSubmissionDialog({
               </div>
             )}
 
+            {/* Insurance Providers - for Inpatient, Outpatient, Medical Detox */}
+            {["Inpatient Treatment", "Outpatient Treatment", "Medical Detox"].includes(editedSubmission.category) && (
+              <div className="space-y-4 border-t pt-4">
+                <h3 className="font-semibold text-lg">Insurances Accepted</h3>
+                <div className="grid grid-cols-3 gap-2 border rounded-lg p-3 bg-muted max-h-64 overflow-y-auto">
+                  {["Self Pay", "Aetna", "Anthem", "Blue Cross", "Blue Shield", "Cigna", "Humana", "Kaiser Permanente", "Medicaid", "Molina Healthcare", "United Healthcare", "Tricare", "Centene", "Health Net", "WellCare", "Ambetter", "Bright Health", "Oscar Health", "Clover Health", "Moda", "Pacific Source", "Other"].map((insurance) => (
+                    <div key={insurance} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`insurance_${insurance}`}
+                        checked={(editedSubmission.insurances_accepted || []).includes(insurance)}
+                        onCheckedChange={() => toggleArrayItem("insurances_accepted", insurance)}
+                      />
+                      <Label htmlFor={`insurance_${insurance}`} className="text-sm">{insurance}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Therapeutic Modalities - for Inpatient, Outpatient, Therapists */}
+            {["Inpatient Treatment", "Outpatient Treatment", "Therapists"].includes(editedSubmission.category) && (
+              <div className="space-y-4 border-t pt-4">
+                <h3 className="font-semibold text-lg">Therapeutic Modalities</h3>
+                <div className="grid grid-cols-2 gap-2 border rounded-lg p-3 bg-muted">
+                  {["CBT", "DBT", "EMDR", "Motivational Interviewing", "Psychodynamic Therapy", "Family Therapy", "Group Therapy", "Individual Therapy", "IFS (Internal Family Systems)", "Equine Therapy", "Somatic and Experiential Therapy", "Mindfulness Based Therapy", "Other"].map((modality) => (
+                    <div key={modality} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`modality_${modality}`}
+                        checked={(editedSubmission.therapeutic_modalities || []).includes(modality)}
+                        onCheckedChange={() => toggleArrayItem("therapeutic_modalities", modality)}
+                      />
+                      <Label htmlFor={`modality_${modality}`} className="text-sm">{modality}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Co-Occurring Diagnoses - for Inpatient, Outpatient, Therapists, Psychiatrists */}
+            {["Inpatient Treatment", "Outpatient Treatment", "Therapists", "Psychiatrists"].includes(editedSubmission.category) && (
+              <div className="space-y-4 border-t pt-4">
+                <h3 className="font-semibold text-lg">Co-Occurring Diagnoses Treated</h3>
+                <div className="grid grid-cols-2 gap-2 border rounded-lg p-3 bg-muted">
+                  {["ADHD", "Anxiety", "Bipolar", "Borderline Personality Disorder", "Depression", "Eating Disorders", "Schizoaffective Disorder", "Schizophrenia", "Trauma", "Antisocial Personality Disorder", "Narcissistic Personality Disorder", "OCD"].map((diagnosis) => (
+                    <div key={diagnosis} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`diagnosis_${diagnosis}`}
+                        checked={(editedSubmission.co_occurring_diagnoses || []).includes(diagnosis)}
+                        onCheckedChange={() => toggleArrayItem("co_occurring_diagnoses", diagnosis)}
+                      />
+                      <Label htmlFor={`diagnosis_${diagnosis}`} className="text-sm">{diagnosis}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Recovery Fellowships - for Inpatient, Outpatient, Sober Living, Sober Coaches */}
             {["Inpatient Treatment", "Outpatient Treatment", "Sober Living", "Sober Coaches/Companions"].includes(editedSubmission.category) && (
               <div className="space-y-4 border-t pt-4">
