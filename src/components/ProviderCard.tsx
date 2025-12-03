@@ -374,6 +374,19 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
             {/* Expandable section with full details */}
             <AccordionContent className="pt-4 border-t mt-4">
               <div className="space-y-4">
+                {/* Pricing section - show for all categories except Interventionists (handled separately below) */}
+                {provider.cost && provider.category !== "Interventionists" && (
+                  <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                    <span className="font-semibold text-sm">Pricing:</span>
+                    <span className="text-sm">{provider.cost}</span>
+                    {provider.sliding_scale_available && (
+                      <Badge variant="secondary" className="text-xs">
+                        Sliding Scale Available
+                      </Badge>
+                    )}
+                  </div>
+                )}
+                
                 {provider.description_of_services && (
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Full Description</h4>
