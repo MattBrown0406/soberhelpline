@@ -377,7 +377,7 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                 {/* Pricing section - show for all categories except Interventionists (handled separately below) */}
                 {provider.cost && provider.category !== "Interventionists" && (
                   <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
-                    <span className="font-semibold text-sm">Pricing:</span>
+                    <span className="font-semibold text-sm">Cost per Month:</span>
                     <span className="text-sm">{provider.cost}</span>
                     {provider.sliding_scale_available && (
                       <Badge variant="secondary" className="text-xs">
