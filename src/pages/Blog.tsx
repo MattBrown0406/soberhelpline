@@ -20,6 +20,7 @@ import sportsBettingAddictionImg from "@/assets/blog-sports-betting-addiction.pn
 import professionalInterventionistImg from "@/assets/blog-professional-interventionist.png";
 import boundariesFortressImg from "@/assets/blog-boundaries-fortress.png";
 import protectingChildrenAddictionImg from "@/assets/blog-protecting-children-addiction.png";
+import healthyBoundariesImg from "@/assets/blog-healthy-boundaries.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -711,7 +712,7 @@ Children thrive when adults prioritize their needs amid chaos. For confidential 
     author: "Sober Helpline Team",
     date: "2025-12-03",
     category: "Family Support",
-    image: boundariesFortressImg,
+    image: healthyBoundariesImg,
     content: `Setting healthy boundaries while stopping enabling behaviors is a vital foundation for families dealing with addiction. Enabling—such as paying debts, making excuses, or covering up for the addicted loved one—often arises from love and fear but unintentionally prolongs the addiction by removing consequences that motivate change. Families must learn to recognize these behaviors and replace them with firm but compassionate boundaries to protect themselves and help the addicted individual face accountability.
 
 **What Are Healthy Boundaries?**
