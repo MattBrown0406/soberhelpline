@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +13,9 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ProviderSubmission } from "@/types/provider";
+import { supabase } from "@/integrations/supabase/client";
+import { Upload, X } from "lucide-react";
+import { toast } from "sonner";
 
 type EditSubmissionDialogProps = {
   submission: ProviderSubmission | null;
@@ -28,6 +31,8 @@ export function EditSubmissionDialog({
   onSave,
 }: EditSubmissionDialogProps) {
   const [editedSubmission, setEditedSubmission] = useState<ProviderSubmission | null>(null);
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (submission) {
@@ -51,6 +56,47 @@ export function EditSubmissionDialog({
       ? currentArray.filter((i) => i !== item)
       : [...currentArray, item];
     updateField(field, newArray);
+  };
+
+  const handleLogoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.match(/^image\/(jpeg|png)$/)) {
+      toast.error("Please upload a JPG or PNG image");
+      return;
+    }
+
+    setIsUploadingLogo(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${editedSubmission.id}-${Date.now()}.${fileExt}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('provider-logos')
+        .upload(fileName, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('provider-logos')
+        .getPublicUrl(fileName);
+
+      updateField('logo_url', publicUrl);
+      toast.success("Logo uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading logo:", error);
+      toast.error("Failed to upload logo");
+    } finally {
+      setIsUploadingLogo(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleRemoveLogo = () => {
+    updateField('logo_url', null);
   };
 
   return (
@@ -146,6 +192,53 @@ export function EditSubmissionDialog({
                   value={editedSubmission.address || ""}
                   onChange={(e) => updateField("address", e.target.value)}
                 />
+              </div>
+
+              {/* Logo Upload Section */}
+              <div>
+                <Label className="mb-2 block">Provider Logo</Label>
+                <div className="flex items-center gap-4">
+                  {editedSubmission.logo_url ? (
+                    <div className="relative">
+                      <img 
+                        src={editedSubmission.logo_url} 
+                        alt="Provider logo" 
+                        className="w-20 h-20 object-contain border rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleRemoveLogo}
+                        className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-1 hover:bg-destructive/90"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 border-2 border-dashed rounded-lg flex items-center justify-center text-muted-foreground">
+                      No logo
+                    </div>
+                  )}
+                  <div>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept=".jpg,.jpeg,.png"
+                      onChange={handleLogoUpload}
+                      className="hidden"
+                      id="logo-upload"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isUploadingLogo}
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      {isUploadingLogo ? "Uploading..." : "Upload New Logo"}
+                    </Button>
+                  </div>
+                </div>
               </div>
 
               <div>
