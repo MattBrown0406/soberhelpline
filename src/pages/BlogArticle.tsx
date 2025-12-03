@@ -70,6 +70,37 @@ const BlogArticle = () => {
     window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
+  const renderTextWithLinks = (text: string) => {
+    const linkRegex = /\[LINK:([^:]+):([^\]]+)\]/g;
+    const parts: (string | JSX.Element)[] = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      parts.push(
+        <a
+          key={match.index}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline font-medium"
+        >
+          {match[1]}
+        </a>
+      );
+      lastIndex = match.index + match[0].length;
+    }
+
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : text;
+  };
+
   const renderContent = (content: string) => {
     return content.split('\n\n').map((paragraph, index) => {
       const imageMatch = paragraph.match(/^\[IMAGE:(\w+)\]$/);
@@ -95,7 +126,7 @@ const BlogArticle = () => {
       }
       return (
         <p key={index} className="text-muted-foreground mb-4 leading-relaxed">
-          {paragraph}
+          {renderTextWithLinks(paragraph)}
         </p>
       );
     });
