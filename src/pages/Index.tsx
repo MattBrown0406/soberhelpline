@@ -16,11 +16,15 @@ import familyHero from "@/assets/family-hero.png";
 import dadDaughter from "@/assets/dad-daughter.png";
 import hispanicFamily from "@/assets/hispanic-family.png";
 import aaMeeting from "@/assets/aa-meeting.png";
+import familyAdultSon from "@/assets/family-adult-son.png";
+import familyAdultDaughter from "@/assets/family-adult-daughter.png";
+import familyMultigenerational from "@/assets/family-multigenerational.png";
+import familyOutdoorWalk from "@/assets/family-outdoor-walk.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 
-const heroImages = [familyHero, dadDaughter, hispanicFamily, aaMeeting];
+const heroImages = [familyHero, dadDaughter, hispanicFamily, aaMeeting, familyAdultSon, familyAdultDaughter, familyMultigenerational, familyOutdoorWalk];
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment" },
