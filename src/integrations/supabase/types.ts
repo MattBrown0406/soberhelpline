@@ -106,6 +106,8 @@ export type Database = {
           accepts_mat_residents: boolean | null
           address: string | null
           adolescent_services: boolean | null
+          also_provides_outpatient: boolean | null
+          also_provides_sober_living: boolean | null
           awake_staff_24_7: boolean | null
           case_management_services: boolean | null
           category: string
@@ -146,6 +148,7 @@ export type Database = {
           medication_administration: string | null
           military_first_responder_care: boolean | null
           minimum_time_since_last_use: string | null
+          parent_submission_id: string | null
           phone_number: string
           provider_name: string
           recovery_fellowships: string[] | null
@@ -173,6 +176,8 @@ export type Database = {
           accepts_mat_residents?: boolean | null
           address?: string | null
           adolescent_services?: boolean | null
+          also_provides_outpatient?: boolean | null
+          also_provides_sober_living?: boolean | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category: string
@@ -213,6 +218,7 @@ export type Database = {
           medication_administration?: string | null
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
+          parent_submission_id?: string | null
           phone_number: string
           provider_name: string
           recovery_fellowships?: string[] | null
@@ -240,6 +246,8 @@ export type Database = {
           accepts_mat_residents?: boolean | null
           address?: string | null
           adolescent_services?: boolean | null
+          also_provides_outpatient?: boolean | null
+          also_provides_sober_living?: boolean | null
           awake_staff_24_7?: boolean | null
           case_management_services?: boolean | null
           category?: string
@@ -280,6 +288,7 @@ export type Database = {
           medication_administration?: string | null
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
+          parent_submission_id?: string | null
           phone_number?: string
           provider_name?: string
           recovery_fellowships?: string[] | null
@@ -303,7 +312,22 @@ export type Database = {
           youtube_url?: string | null
           zip_code?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
+            columns: ["parent_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_click_analytics"
+            referencedColumns: ["provider_id"]
+          },
+          {
+            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
+            columns: ["parent_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       provider_subscriptions: {
         Row: {

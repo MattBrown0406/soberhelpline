@@ -199,6 +199,9 @@ const providerFormSchema = z.object({
   instagramUrl: z.string().optional(),
   facebookUrl: z.string().optional(),
   slidingScaleAvailable: z.boolean().default(false),
+  // Inpatient additional services
+  alsoProvideOutpatient: z.boolean().default(false),
+  alsoProvideSoberLiving: z.boolean().default(false),
 }).refine((data) => {
   // Length of services is required for categories that show this field
   const excludedCategories = ["Interventionists", "Attorneys", "Sober Coaches/Companions", "Psychiatrists", "Medical Detox", "Therapists", "Sober Living"];
@@ -354,6 +357,8 @@ const ProviderInfo = () => {
       tiktokUrl: "",
       instagramUrl: "",
       facebookUrl: "",
+      alsoProvideOutpatient: false,
+      alsoProvideSoberLiving: false,
     },
   });
 
@@ -439,6 +444,8 @@ const ProviderInfo = () => {
           tiktokUrl: data.tiktok_url ? data.tiktok_url.replace('https://tiktok.com/@', '').replace('http://tiktok.com/@', '') : "",
           instagramUrl: data.instagram_url ? data.instagram_url.replace('https://instagram.com/', '').replace('http://instagram.com/', '') : "",
           facebookUrl: data.facebook_url ? data.facebook_url.replace('https://facebook.com/', '').replace('http://facebook.com/', '') : "",
+          alsoProvideOutpatient: data.also_provides_outpatient || false,
+          alsoProvideSoberLiving: data.also_provides_sober_living || false,
         });
       }
     };
@@ -644,7 +651,9 @@ const ProviderInfo = () => {
           tiktok_url: data.tiktokUrl && !data.tiktokUrl.startsWith('http') ? `https://tiktok.com/@${data.tiktokUrl}` : (data.tiktokUrl || null),
           instagram_url: data.instagramUrl && !data.instagramUrl.startsWith('http') ? `https://instagram.com/${data.instagramUrl}` : (data.instagramUrl || null),
           facebook_url: data.facebookUrl && !data.facebookUrl.startsWith('http') ? `https://facebook.com/${data.facebookUrl}` : (data.facebookUrl || null),
-          sliding_scale_available: data.slidingScaleAvailable || false
+          sliding_scale_available: data.slidingScaleAvailable || false,
+          also_provides_outpatient: data.alsoProvideOutpatient || false,
+          also_provides_sober_living: data.alsoProvideSoberLiving || false
       };
 
       let resultData;
@@ -671,6 +680,29 @@ const ProviderInfo = () => {
         
         resultData = insertedData;
         error = insertError;
+
+        // Create additional provider cards for related services if checked
+        if (!insertError && insertedData?.id && data.category === "Inpatient Treatment") {
+          const parentId = insertedData.id;
+          const additionalCategories: string[] = [];
+          
+          if (data.alsoProvideOutpatient) additionalCategories.push("Outpatient Treatment");
+          if (data.alsoProvideSoberLiving) additionalCategories.push("Sober Living");
+          
+          for (const additionalCategory of additionalCategories) {
+            const relatedSubmission = {
+              ...submissionData,
+              category: additionalCategory,
+              parent_submission_id: parentId,
+              also_provides_outpatient: false,
+              also_provides_sober_living: false,
+            };
+            
+            await supabase
+              .from('provider_submissions')
+              .insert(relatedSubmission);
+          }
+        }
       }
 
       if (error) throw error;
@@ -812,6 +844,47 @@ const ProviderInfo = () => {
                     </FormItem>
                   )}
                 />
+              )}
+
+              {form.watch("category") === "Inpatient Treatment" && !isEditMode && (
+                <div className="rounded-md border p-4 bg-muted space-y-4">
+                  <div className="space-y-1">
+                    <FormLabel className="text-base font-medium">Do you provide any of the following recovery services under the same name?</FormLabel>
+                    <FormDescription>Select any additional services you offer. A provider listing will be created for each selected category.</FormDescription>
+                  </div>
+                  <div className="space-y-3">
+                    <FormField
+                      control={form.control}
+                      name="alsoProvideOutpatient"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal cursor-pointer">Outpatient Treatment</FormLabel>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="alsoProvideSoberLiving"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal cursor-pointer">Sober Living</FormLabel>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
               )}
 
               <FormField
