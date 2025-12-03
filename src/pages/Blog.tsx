@@ -19,6 +19,7 @@ import youthVapingRecovery2025Img from "@/assets/blog-youth-vaping-recovery-2025
 import sportsBettingAddictionImg from "@/assets/blog-sports-betting-addiction.png";
 import professionalInterventionistImg from "@/assets/blog-professional-interventionist.png";
 import boundariesFortressImg from "@/assets/blog-boundaries-fortress.png";
+import protectingChildrenAddictionImg from "@/assets/blog-protecting-children-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -662,6 +663,46 @@ Healthy boundaries are how the castle remembers itself. They free the family to 
 The goal is not to rain fire on your loved one outside the walls; it is to stop surrendering the castle to the invading army. When your boundaries are clear, consistent, and grounded in love, your message becomes: "This castle is safe, and you are wanted here—but only if you come without the army of addiction at your back."
 
 One day, if they choose recovery, they do not have to storm the walls. They can walk across the bridge, lay down their weapons, and enter a home that is still standing, still warm, and still healthy enough to welcome them in.`
+  },
+  {
+    id: 15,
+    title: "Protecting Children from Parental Addiction: A Family Guide",
+    excerpt: "Nearly 1 in 4 U.S. children live with a parent struggling with substance use disorder, facing risks to their safety, emotions, and future. This guide offers families compassionate steps to safeguard kids, support recovery, and rebuild stability.",
+    author: "Sober Helpline Team",
+    date: "2025-12-03",
+    category: "Family Support",
+    image: protectingChildrenAddictionImg,
+    content: `Nearly 1 in 4 U.S. children live with a parent struggling with substance use disorder, facing risks to their safety, emotions, and future. This guide offers families compassionate steps to safeguard kids, support recovery, and rebuild stability.
+
+**The Alarming Reality for Kids Today**
+
+In 2023, almost 19 million U.S. children—one in four—lived with at least one parent or caregiver battling a substance use disorder. These kids often endure impaired caregiving, neglect of basic needs, and exposure to chaotic home environments that heighten their own risks for emotional distress, poor school performance, and future addiction. Parents in active addiction may prioritize substances over routines like meals, bedtime, or emotional support, leaving children feeling scared, abandoned, or responsible for family survival.
+
+This crisis persists into 2025, with young children especially vulnerable to developmental delays from inconsistent parenting. Families feel the weight of secrecy, financial strain, and shifting roles where kids act as mini-adults, monitoring a parent's behavior or hiding the problem from outsiders. Recognizing addiction as a family disease helps shift focus from blame to collective healing.
+
+**Hidden Impacts on Children's Well-Being**
+
+Children in these homes face disrupted schooling, friendships, and trust, often internalizing shame or anger they cannot name. Chronic stress raises their chances of health issues like anxiety, depression, or substance use later in life, as unstable environments wire the brain for survival over thriving. Siblings may compete for scarce parental attention, while basic safety—like supervision during emergencies—falters.
+
+Financial fallout compounds the pain: unpaid bills, evictions, or stolen money for drugs create insecurity that lingers into adulthood. Without intervention, these children carry invisible scars, repeating cycles of poor boundaries or enabling in their own relationships. Early awareness empowers families to act before harm deepens.
+
+**Practical Steps to Protect Your Children**
+
+Prioritize kids' safety first—create a crisis plan with trusted contacts, safe spaces, and routines that provide stability regardless of parental sobriety. Enroll children in school counseling or extracurriculars for positive outlets, and model healthy coping by naming emotions openly without burdening them with adult worries. If neglect risks escalate, explore temporary kinship care with relatives or child welfare resources that support family unity over separation.
+
+Secure finances through separate child-focused accounts and community aid for food or housing, easing daily pressures. Involve non-addicted parents or guardians in therapy to rebuild routines, ensuring kids witness accountability and hope. These actions shield children while encouraging the addicted parent's recovery motivation.
+
+**Supporting Recovery as a Family Unit**
+
+Family-based treatment addresses root dynamics, with programs blending therapy for parents and age-appropriate support for kids to heal together. Approaches like motivational interviewing and mindfulness help parents manage urges, while family sessions restore trust and communication. Groups such as Al-Anon for adults and child-focused recovery peers reduce isolation and teach boundary-setting.
+
+Holistic elements—yoga, nutrition, and social skill-building—strengthen the entire household, tackling social factors like housing or jobs that fuel addiction. Progress includes celebrating small wins, like sober family nights, to reinforce bonds. Integrated care for co-occurring mental health boosts long-term success.
+
+**Healing and Breaking the Cycle**
+
+Caregivers must practice self-care to avoid burnout—therapy, support groups, and respite prevent resentment from overwhelming the home. Track family health through regular check-ins, addressing stress-related issues like sleep or immunity proactively. With consistent effort, families rewrite narratives, turning pain into resilience.
+
+Children thrive when adults prioritize their needs amid chaos. For confidential guidance on protecting kids or starting family recovery, contact SAMHSA's National Helpline at 1-800-662-HELP today—free, 24/7 support tailored to your situation.`
   }
 ];
 
