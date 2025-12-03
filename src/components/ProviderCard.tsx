@@ -387,6 +387,19 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                   </div>
                 )}
                 
+                {/* Cost section for other categories (except Interventionists which has its own section) */}
+                {provider.cost && !["Inpatient Treatment", "Outpatient Treatment", "Sober Living", "Interventionists"].includes(provider.category || "") && (
+                  <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                    <span className="font-semibold text-sm">Cost:</span>
+                    <span className="text-sm">{provider.cost}</span>
+                    {provider.sliding_scale_available && (
+                      <Badge variant="secondary" className="text-xs">
+                        Sliding Scale Available
+                      </Badge>
+                    )}
+                  </div>
+                )}
+                
                 {provider.description_of_services && (
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Full Description</h4>
