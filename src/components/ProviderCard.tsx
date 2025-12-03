@@ -31,6 +31,13 @@ const TikTokIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Horse silhouette icon for equine therapy
+const HorseIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M22 6.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5v.5h-1V5c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v2h-1.5l-2-2.5c-.2-.25-.51-.39-.83-.39-.32 0-.63.14-.83.39L8.5 6.5H7V5c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v2H2c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-3h10v3c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-3h1c.55 0 1-.45 1-1V8c0-.55-.45-1-1-1h-1v-.5zM5 6h1v1H5V6zm14 0h1v1h-1V6z"/>
+  </svg>
+);
+
 interface Provider {
   id: string;
   provider_name: string;
@@ -68,6 +75,7 @@ interface Provider {
   items_included_in_cost?: string[] | null;
   faith_based_services?: boolean | null;
   military_first_responder_care?: boolean | null;
+  therapeutic_modalities?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -121,7 +129,14 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
               <div className="flex-1 min-w-0">
                 {/* Provider name and badges */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
-                  <h3 className="text-lg sm:text-xl font-semibold text-center sm:text-left">{provider.provider_name}</h3>
+                  <div className="flex items-center gap-2 justify-center sm:justify-start">
+                    <h3 className="text-lg sm:text-xl font-semibold">{provider.provider_name}</h3>
+                    {provider.therapeutic_modalities?.includes("Equine Therapy") && (
+                      <Badge variant="outline" className="gap-1 text-xs border-primary text-primary">
+                        <HorseIcon className="w-4 h-4" />
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 
                 {/* Badges - scrollable on mobile */}
