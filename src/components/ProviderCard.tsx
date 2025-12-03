@@ -101,39 +101,45 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
 
   return (
     <Card className="hover:shadow-lg transition-shadow">
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="details" className="border-none">
-            <div className="flex items-start gap-6">
-              {/* Left section: Logo */}
+            {/* Mobile: Stack layout / Desktop: Flex layout */}
+            <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+              {/* Logo - centered on mobile, left on desktop */}
               {provider.logo_url && (
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 flex justify-center md:justify-start">
                   <img
                     src={provider.logo_url}
                     alt={`${provider.provider_name} logo`}
-                    className="w-20 h-20 object-contain"
+                    className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
                   />
                 </div>
               )}
               
-              {/* Middle section: Main info */}
+              {/* Main info section */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <h3 className="text-xl font-semibold">{provider.provider_name}</h3>
+                {/* Provider name and badges */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-center sm:text-left">{provider.provider_name}</h3>
+                </div>
+                
+                {/* Badges - scrollable on mobile */}
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 justify-center sm:justify-start">
                   {provider.cip_certified && (
-                    <Badge variant="default" className="gap-1 bg-primary text-primary-foreground">
+                    <Badge variant="default" className="gap-1 bg-primary text-primary-foreground text-xs">
                       <Award className="w-3 h-3" />
                       CIP Certified
                     </Badge>
                   )}
                   {provider.category === "Interventionists" && provider.hourly_coaching_sessions && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Clock className="w-3 h-3" />
-                      Hourly Coaching Available
+                      Hourly Coaching
                     </Badge>
                   )}
                   {provider.category === "Medical Detox" && provider.detox_only_services && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       Detox Only
                     </Badge>
                   )}
@@ -173,88 +179,81 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       )}
                     </>
                   )}
-                  {/* MAT and included items badges for Sober Living */}
                   {provider.category === "Sober Living" && provider.accepts_mat_residents && (
                     <Badge variant="default" className="text-xs bg-accent text-accent-foreground">MAT OK</Badge>
                   )}
                   {provider.category === "Sober Living" && provider.items_included_in_cost && provider.items_included_in_cost.length > 0 && (
                     <>
                       {provider.items_included_in_cost.includes("Food") && (
-                        <Badge variant="outline" className="text-xs">Food Included</Badge>
+                        <Badge variant="outline" className="text-xs">Food</Badge>
                       )}
                       {provider.items_included_in_cost.includes("Transportation") && (
-                        <Badge variant="outline" className="text-xs">Transportation Included</Badge>
+                        <Badge variant="outline" className="text-xs">Transport</Badge>
                       )}
                       {provider.items_included_in_cost.includes("Therapeutic Support") && (
-                        <Badge variant="outline" className="text-xs">Therapeutic Support Included</Badge>
+                        <Badge variant="outline" className="text-xs">Therapy</Badge>
                       )}
                     </>
                   )}
-                  {/* National/International badges for Interventionists */}
                   {provider.category === "Interventionists" && provider.works_nationally && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Globe2 className="w-3 h-3" />
-                      Works Nationally
+                      National
                     </Badge>
                   )}
                   {provider.category === "Interventionists" && provider.works_internationally && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Globe2 className="w-3 h-3" />
-                      Works Internationally
+                      International
                     </Badge>
                   )}
-                  {/* Telehealth badge for Outpatient, Sober Coaches, Therapists, Psychiatrists */}
                   {(provider.category === "Outpatient Treatment" || 
                     provider.category === "Sober Coaches/Companions" ||
                     provider.category === "Therapists" || 
                     provider.category === "Psychiatrists") && provider.telehealth_available && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Video className="w-3 h-3" />
-                      Telehealth Provider
+                      Telehealth
                     </Badge>
                   )}
-                  {/* Detox badge for Inpatient and Outpatient Treatment */}
                   {(provider.category === "Inpatient Treatment" || provider.category === "Outpatient Treatment") && 
                     provider.detox_available && (
-                    <Badge variant="default" className="gap-1 bg-accent text-accent-foreground">
-                      Detox Available
+                    <Badge variant="default" className="gap-1 text-xs bg-accent text-accent-foreground">
+                      Detox
                     </Badge>
                   )}
-                  {/* Adolescent services badge */}
                   {(provider.category === "Inpatient Treatment" || 
                     provider.category === "Outpatient Treatment" || 
                     provider.category === "Interventionists" || 
                     provider.category === "Sober Living") && provider.adolescent_services && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Baby className="w-3 h-3" />
-                      Works with Teens
+                      Teens
                     </Badge>
                   )}
-                  {/* Faith based services badge */}
                   {(provider.category === "Inpatient Treatment" || 
                     provider.category === "Outpatient Treatment" || 
                     provider.category === "Therapists" || 
                     provider.category === "Sober Living") && provider.faith_based_services && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <Cross className="w-3 h-3" />
                       Faith Based
                     </Badge>
                   )}
-                  {/* Military/First Responder care badge */}
                   {(provider.category === "Inpatient Treatment" || 
                     provider.category === "Outpatient Treatment" || 
                     provider.category === "Therapists" || 
                     provider.category === "Sober Living") && provider.military_first_responder_care && (
-                    <Badge variant="secondary" className="gap-1">
+                    <Badge variant="secondary" className="gap-1 text-xs">
                       <ShieldCheck className="w-3 h-3" />
-                      Military & First Responder
+                      Military/First Responder
                     </Badge>
                   )}
                 </div>
 
                 {/* Language badges for Interventionists and Sober Coaches */}
                 {isInterventionistOrCoach && provider.languages_spoken && provider.languages_spoken.length > 0 && (
-                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <div className="flex items-center gap-1 sm:gap-2 mb-2 flex-wrap justify-center sm:justify-start">
                     <Languages className="w-4 h-4 text-muted-foreground" />
                     {provider.languages_spoken.map((language, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs">
@@ -264,60 +263,67 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                   </div>
                 )}
                 
+                {/* Location */}
                 {provider.city && provider.state && (
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
-                    <MapPin className="w-4 h-4" />
-                    <span>
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-muted-foreground text-sm mb-2">
+                    <MapPin className="w-4 h-4 flex-shrink-0" />
+                    <span className="truncate">
                       {provider.city}, {provider.state} {provider.zip_code}
                     </span>
                   </div>
                 )}
                 
+                {/* Year started - hidden on mobile to save space */}
                 {provider.year_started && (
-                  <div className="text-sm text-muted-foreground mb-3">
-                    <span className="font-semibold">Providing Services Since:</span> {provider.year_started}
+                  <div className="hidden sm:block text-sm text-muted-foreground mb-2">
+                    <span className="font-semibold">Since:</span> {provider.year_started}
                   </div>
                 )}
                 
+                {/* Description - hidden on mobile, shown in expanded view */}
                 {provider.description_of_services && (
-                  <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+                  <p className="hidden sm:block text-muted-foreground text-sm mb-3 line-clamp-2">
                     {provider.description_of_services}
                   </p>
                 )}
               </div>
               
-              {/* Right section: Contact info + Expand trigger */}
-              <div className="flex-shrink-0 space-y-2 min-w-[200px]">
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="w-4 h-4 text-primary" />
-                  <a href={`tel:${provider.phone_number}`} className="hover:underline" onClick={handlePhoneClick}>
-                    {formatPhoneNumber(provider.phone_number)}
+              {/* Contact info section - full width on mobile, right column on desktop */}
+              <div className="w-full md:w-auto md:flex-shrink-0 space-y-2 md:min-w-[180px]">
+                <div className="flex flex-col sm:flex-row md:flex-col gap-2 items-center md:items-start">
+                  <a 
+                    href={`tel:${provider.phone_number}`} 
+                    className="flex items-center gap-2 text-sm hover:underline"
+                    onClick={handlePhoneClick}
+                  >
+                    <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>{formatPhoneNumber(provider.phone_number)}</span>
                   </a>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="w-4 h-4 text-primary" />
-                  <a href={`mailto:${provider.email}`} className="hover:underline truncate" onClick={handleEmailClick}>
-                    {provider.email}
+                  <a 
+                    href={`mailto:${provider.email}`} 
+                    className="flex items-center gap-2 text-sm hover:underline max-w-full"
+                    onClick={handleEmailClick}
+                  >
+                    <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="truncate">{provider.email}</span>
                   </a>
-                </div>
-                {provider.website && (
-                  <div className="flex items-center gap-2 text-sm">
-                    <Globe className="w-4 h-4 text-primary" />
+                  {provider.website && (
                     <a
                       href={provider.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:underline"
+                      className="flex items-center gap-2 text-sm hover:underline"
                       onClick={handleWebsiteClick}
                     >
-                      Visit Website
+                      <Globe className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span>Visit Website</span>
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
                 
                 {/* Social Media Icons */}
                 {(provider.youtube_url || provider.tiktok_url || provider.instagram_url || provider.facebook_url) && (
-                  <div className="flex items-center gap-3 mt-2">
+                  <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
                     {provider.youtube_url && (
                       <a
                         href={provider.youtube_url}
@@ -365,7 +371,7 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                   </div>
                 )}
                 
-                <AccordionTrigger className="mt-4 pt-3 border-t hover:no-underline">
+                <AccordionTrigger className="w-full mt-2 pt-2 border-t hover:no-underline justify-center md:justify-start">
                   <span className="text-sm text-primary">View Full Details</span>
                 </AccordionTrigger>
               </div>
