@@ -31,10 +31,10 @@ const TikTokIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Horse silhouette icon for equine therapy
+// Horse head icon for equine therapy
 const HorseIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22 6.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5v.5h-1V5c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v2h-1.5l-2-2.5c-.2-.25-.51-.39-.83-.39-.32 0-.63.14-.83.39L8.5 6.5H7V5c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v2H2c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-3h10v3c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-3h1c.55 0 1-.45 1-1V8c0-.55-.45-1-1-1h-1v-.5zM5 6h1v1H5V6zm14 0h1v1h-1V6z"/>
+    <path d="M21 3c-1.5 0-2.5 1-3 2l-1 3-3 1c-2 0-4 1-5 3l-1 2-3-1c-1 0-2 1-2 2v4c0 1 1 2 2 2h2l1-2 2-1 3 1c2 0 3-1 4-2l2-4 2-1V3zm-5 5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
   </svg>
 );
 
