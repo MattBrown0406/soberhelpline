@@ -703,6 +703,32 @@ Holistic elements—yoga, nutrition, and social skill-building—strengthen the 
 Caregivers must practice self-care to avoid burnout—therapy, support groups, and respite prevent resentment from overwhelming the home. Track family health through regular check-ins, addressing stress-related issues like sleep or immunity proactively. With consistent effort, families rewrite narratives, turning pain into resilience.
 
 Children thrive when adults prioritize their needs amid chaos. For confidential guidance on protecting kids or starting family recovery, contact SAMHSA's National Helpline at 1-800-662-HELP today—free, 24/7 support tailored to your situation.`
+  },
+  {
+    id: 16,
+    title: "Setting Healthy Boundaries While Stopping Enabling Behaviors",
+    excerpt: "Enabling behaviors like paying debts or making excuses often arise from love but unintentionally prolong addiction. Learn how to set firm, compassionate boundaries that protect your family and encourage accountability.",
+    author: "Sober Helpline Team",
+    date: "2025-12-03",
+    category: "Family Support",
+    image: boundariesFortressImg,
+    content: `Setting healthy boundaries while stopping enabling behaviors is a vital foundation for families dealing with addiction. Enabling—such as paying debts, making excuses, or covering up for the addicted loved one—often arises from love and fear but unintentionally prolongs the addiction by removing consequences that motivate change. Families must learn to recognize these behaviors and replace them with firm but compassionate boundaries to protect themselves and help the addicted individual face accountability.
+
+**What Are Healthy Boundaries?**
+
+Boundaries involve clearly stating what behavior is acceptable and what is not, such as refusing to lend money, not allowing use or intoxication in the home, insisting on respectful communication, and requiring engagement in treatment as a condition of support. Setting boundaries is an act of self-respect and protection, not punishment or rejection. Consistency is key—families must follow through with stated consequences to reinforce these limits.
+
+**Boundaries Are a Two-Way Street**
+
+Importantly, boundaries are a two-way street: the addicted person also benefits from setting boundaries to protect their recovery from toxic family dynamics. Both the family and the individual bring healthier interactions and accountability to the relationship when they establish limits.
+
+**Practical Tips for Families**
+
+Practical tips for families include having open, honest conversations about concerns, stating personal limits calmly and clearly, and maintaining those limits even when faced with resistance or emotional pressure. Professional guidance from interventionists or family therapists can support families in this challenging process.
+
+**Breaking the Cycle**
+
+By breaking the cycle of enabling and embracing boundaries, families create a safer, more supportive environment that encourages healing and long-term recovery for everyone involved.`
   }
 ];
 
