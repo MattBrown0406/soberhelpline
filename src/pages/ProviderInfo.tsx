@@ -261,6 +261,7 @@ const ProviderInfo = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [existingSubmission, setExistingSubmission] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [forceNewApplication, setForceNewApplication] = useState(false);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -365,7 +366,7 @@ const ProviderInfo = () => {
   // Load existing submission if user has one
   useEffect(() => {
     const loadExistingSubmission = async () => {
-      if (!user) return;
+      if (!user || forceNewApplication) return;
       
       // Use limit(1) instead of maybeSingle() to handle users with multiple submissions
       const { data: submissions, error } = await supabase
@@ -456,7 +457,82 @@ const ProviderInfo = () => {
     };
     
     loadExistingSubmission();
-  }, [user, form]);
+  }, [user, form, forceNewApplication]);
+
+  const startNewApplication = () => {
+    setForceNewApplication(true);
+    setExistingSubmission(null);
+    setIsEditMode(false);
+    form.reset({
+      category: "",
+      providerName: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      phoneNumber: "",
+      email: "",
+      website: "",
+      yearStarted: "",
+      interventionModalities: [],
+      otherInterventionModalities: "",
+      cipCertified: false,
+      hourlyCoachingSessions: false,
+      hourlyCoachingRate: "",
+      caseManagementServices: false,
+      lengthOfServices: [],
+      detoxAvailable: false,
+      detoxOnlyServices: false,
+      coOccurringDiagnoses: [],
+      therapeuticModalities: [],
+      otherTherapeuticModalities: "",
+      inPersonCompanionWork: false,
+      hasValidPassport: false,
+      dailyCompanionFee: "",
+      worksNationally: false,
+      worksInternationally: false,
+      languagesSpoken: [],
+      otherLanguages: "",
+      awakeStaff247: false,
+      residentsExpectedToWork: false,
+      jobAssistanceProvided: false,
+      medicationAdministration: "",
+      acceptsMatResidents: false,
+      minimumTimeSinceLastUse: "",
+      requiredMeetingsPerWeek: "",
+      mandatoryCurfew: false,
+      curfewTime: "",
+      choresRequired: false,
+      mandatoryHouseMeetings: false,
+      houseMeetingsPerWeek: "",
+      genderSpecificTreatment: [],
+      lgbtSupportive: false,
+      adolescentServices: false,
+      substanceUseDisorderExperience: false,
+      telehealthAvailable: false,
+      licenseCurrentGoodStanding: false,
+      legalAssistanceTypes: [],
+      recoveryFellowships: [],
+      faithBasedServices: false,
+      militaryFirstResponderCare: false,
+      descriptionOfServices: "",
+      cost: "",
+      travelExpensesIncluded: false,
+      itemsIncludedInCost: [],
+      insurancesAccepted: [],
+      otherInsurances: "",
+      youtubeUrl: "",
+      tiktokUrl: "",
+      instagramUrl: "",
+      facebookUrl: "",
+      slidingScaleAvailable: false,
+      alsoProvideOutpatient: false,
+      alsoProvideSoberLiving: false,
+    });
+    toast({
+      title: "New Application",
+      description: "You can now fill out a new provider application.",
+    });
+  };
 
   const onSubmit = async (data: ProviderFormValues) => {
     // Get the current session first
@@ -804,6 +880,16 @@ const ProviderInfo = () => {
                   : "Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards."
                 }
               </p>
+              {isEditMode && (
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={startNewApplication}
+                  className="mt-4"
+                >
+                  + Create New Provider Application
+                </Button>
+              )}
             </div>
 
           <Form {...form}>
