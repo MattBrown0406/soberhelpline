@@ -367,16 +367,21 @@ const ProviderInfo = () => {
     const loadExistingSubmission = async () => {
       if (!user) return;
       
-      const { data, error } = await supabase
+      // Use limit(1) instead of maybeSingle() to handle users with multiple submissions
+      const { data: submissions, error } = await supabase
         .from('provider_submissions')
         .select('*')
         .eq('submitted_by', user.id)
-        .maybeSingle();
+        .is('parent_submission_id', null) // Only get parent submissions, not child ones
+        .order('created_at', { ascending: false })
+        .limit(1);
       
       if (error) {
         console.error('Error loading submission:', error);
         return;
       }
+      
+      const data = submissions?.[0] || null;
       
       if (data) {
         setExistingSubmission(data);
