@@ -374,8 +374,8 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
             {/* Expandable section with full details */}
             <AccordionContent className="pt-4 border-t mt-4">
               <div className="space-y-4">
-                {/* Pricing section - show for all categories except Interventionists (handled separately below) */}
-                {provider.cost && provider.category !== "Interventionists" && (
+                {/* Pricing section - show for Inpatient, Outpatient, and Sober Living */}
+                {provider.cost && ["Inpatient Treatment", "Outpatient Treatment", "Sober Living"].includes(provider.category || "") && (
                   <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
                     <span className="font-semibold text-sm">Cost per Month:</span>
                     <span className="text-sm">{provider.cost}</span>
