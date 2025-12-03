@@ -645,7 +645,7 @@ The drawbridge is how you respond. You can lower it when your loved one is willi
 
 **Watchtowers and Alarms**
 
-Every good castle has watchtowers. These are your awareness and support: education about addiction, therapy, groups like SMART Family & Friends or Al-Anon, coaching, and your own recovery work.
+Every good castle has watchtowers. These are your awareness and support: education about addiction, therapy, groups like SMART Family & Friends or [LINK:Al-Anon:https://al-anon.org/], coaching, and your own recovery work.
 
 From the tower, you can see the patterns coming: the broken promises, the guilt trips, the "just this once" requests for money or rescue.
 
@@ -697,7 +697,7 @@ Secure finances through separate child-focused accounts and community aid for fo
 
 **Supporting Recovery as a Family Unit**
 
-Family-based treatment addresses root dynamics, with programs blending therapy for parents and age-appropriate support for kids to heal together. Approaches like motivational interviewing and mindfulness help parents manage urges, while family sessions restore trust and communication. Groups such as Al-Anon for adults and child-focused recovery peers reduce isolation and teach boundary-setting.
+Family-based treatment addresses root dynamics, with programs blending therapy for parents and age-appropriate support for kids to heal together. Approaches like motivational interviewing and mindfulness help parents manage urges, while family sessions restore trust and communication. Groups such as [LINK:Al-Anon:https://al-anon.org/] for adults and child-focused recovery peers reduce isolation and teach boundary-setting.
 
 Holistic elements—yoga, nutrition, and social skill-building—strengthen the entire household, tackling social factors like housing or jobs that fuel addiction. Progress includes celebrating small wins, like sober family nights, to reinforce bonds. Integrated care for co-occurring mental health boosts long-term success.
 
@@ -841,7 +841,7 @@ If relapse occurs, maintain the boundaries you've established. Enabling behavior
 
 **5. Attend Support Groups**
 
-Al-Anon, Nar-Anon, and family therapy provide guidance for navigating these difficult situations. You don't have to face this alone.
+[LINK:Al-Anon:https://al-anon.org/], [LINK:Nar-Anon:https://www.nar-anon.org/], and family therapy provide guidance for navigating these difficult situations. You don't have to face this alone.
 
 **6. Celebrate Small Wins**
 
