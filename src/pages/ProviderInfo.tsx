@@ -664,6 +664,19 @@ const ProviderInfo = () => {
       let resultData;
       let error;
 
+      // Refresh session right before database operation to ensure valid token
+      const { error: refreshError } = await supabase.auth.refreshSession();
+      if (refreshError) {
+        console.error('Session refresh failed before submission:', refreshError);
+        toast({
+          title: "Session expired",
+          description: "Please log in again to submit your application.",
+          variant: "destructive",
+        });
+        navigate("/auth");
+        return null;
+      }
+
       if (isEditMode && existingSubmission) {
         // Update existing submission
         const { data: updatedData, error: updateError } = await supabase
