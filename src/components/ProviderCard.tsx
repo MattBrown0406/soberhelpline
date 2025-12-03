@@ -132,8 +132,8 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                   <div className="flex items-center gap-2 justify-center sm:justify-start">
                     <h3 className="text-lg sm:text-xl font-semibold">{provider.provider_name}</h3>
                     {provider.therapeutic_modalities?.includes("Equine Therapy") && (
-                      <Badge variant="outline" className="gap-1 text-xs border-primary text-primary">
-                        <HorseIcon className="w-4 h-4" />
+                      <Badge variant="outline" className="text-xs border-primary text-primary">
+                        Equine
                       </Badge>
                     )}
                   </div>
