@@ -1121,7 +1121,20 @@ const ProviderInfo = () => {
                       {!["Sober Coaches/Companions", "Therapists"].includes(form.watch("category")) && " *"}
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="https://example.com" {...field} />
+                      <div className="flex">
+                        <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-input bg-muted text-muted-foreground text-sm">
+                          https://
+                        </span>
+                        <Input 
+                          className="rounded-l-none" 
+                          placeholder="example.com" 
+                          value={field.value?.replace(/^https?:\/\//, '') || ''}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/^https?:\/\//, '');
+                            field.onChange(value ? `https://${value}` : '');
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
