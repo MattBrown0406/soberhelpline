@@ -200,7 +200,6 @@ const BlogArticle = () => {
                   <a 
                     href={shareUrls.facebook}
                     target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Facebook className="w-4 h-4" />
@@ -209,7 +208,6 @@ const BlogArticle = () => {
                   <a 
                     href={shareUrls.twitter}
                     target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Twitter className="w-4 h-4" />
