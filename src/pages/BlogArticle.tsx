@@ -223,7 +223,7 @@ const BlogArticle = () => {
                     className="flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
-                    Twitter
+                    X
                   </Button>
                   <Button 
                     size="sm" 
