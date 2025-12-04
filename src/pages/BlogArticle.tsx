@@ -37,39 +37,38 @@ const BlogArticle = () => {
   };
 
   const shareToSocial = (platform: string) => {
-    const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(post.title);
-    const text = encodeURIComponent(post.excerpt);
+    const pageUrl = window.location.href;
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const encodedTitle = encodeURIComponent(post.title);
+    const encodedText = encodeURIComponent(post.excerpt);
+    const encodedTitleAndText = encodeURIComponent(`${post.title}\n\n${post.excerpt}`);
 
     let shareUrl = '';
     
     switch(platform) {
       case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`;
+        // Use Facebook's share dialog with hashtag for better visibility
+        shareUrl = `https://www.facebook.com/sharer.php?u=${encodedUrl}&quote=${encodedTitleAndText}`;
         break;
       case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
         break;
       case 'email':
-        window.location.href = `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0A${decodeURIComponent(url)}`;
+        window.location.href = `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedText}%0A%0ARead more: ${pageUrl}`;
         return;
       case 'native':
         if (navigator.share) {
           navigator.share({
             title: post.title,
             text: post.excerpt,
-            url: window.location.href,
+            url: pageUrl,
           }).catch(err => console.log('Share cancelled'));
         }
         return;
     }
 
-    // Use window.open with proper features to avoid popup blocking
-    const popup = window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500,left=100,top=100');
-    if (!popup) {
-      // Fallback if popup blocked - navigate directly
-      window.location.href = shareUrl;
-    }
+    // Open share dialog in a popup window
+    window.open(shareUrl, 'share-dialog', 'width=626,height=436,left=100,top=100');
   };
 
   const renderTextWithLinks = (text: string) => {
