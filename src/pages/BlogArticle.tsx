@@ -36,37 +36,28 @@ const BlogArticle = () => {
     }
   };
 
-  const shareToSocial = (platform: string) => {
-    const pageUrl = window.location.href;
-    const encodedUrl = encodeURIComponent(pageUrl);
-    const encodedTitle = encodeURIComponent(post.title);
-    const encodedText = encodeURIComponent(post.excerpt);
-
-    let shareUrl = '';
+  const getShareUrls = () => {
+    const pageUrl = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(post.title);
+    const text = encodeURIComponent(post.excerpt);
     
-    switch(platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
-        break;
-      case 'email':
-        window.location.href = `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedText}%0A%0ARead more: ${pageUrl}`;
-        return;
-      case 'native':
-        if (navigator.share) {
-          navigator.share({
-            title: post.title,
-            text: post.excerpt,
-            url: pageUrl,
-          }).catch(() => {});
-        }
-        return;
-    }
+    return {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+      twitter: `https://x.com/intent/tweet?url=${pageUrl}&text=${title}`,
+      email: `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0ARead more: ${decodeURIComponent(pageUrl)}`,
+    };
+  };
 
-    // Navigate directly to avoid COOP issues
-    window.location.href = shareUrl;
+  const shareUrls = getShareUrls();
+
+  const handleNativeShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        text: post.excerpt,
+        url: window.location.href,
+      }).catch(() => {});
+    }
   };
 
   const renderTextWithLinks = (text: string) => {
@@ -206,38 +197,36 @@ const BlogArticle = () => {
                     {linkCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     {linkCopied ? 'Copied!' : 'Copy Link'}
                   </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('facebook')}
-                    className="flex items-center gap-2"
+                  <a 
+                    href={shareUrls.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Facebook className="w-4 h-4" />
                     Facebook
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('twitter')}
-                    className="flex items-center gap-2"
+                  </a>
+                  <a 
+                    href={shareUrls.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Twitter className="w-4 h-4" />
                     X
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('email')}
-                    className="flex items-center gap-2"
+                  </a>
+                  <a 
+                    href={shareUrls.email}
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Mail className="w-4 h-4" />
                     Email
-                  </Button>
+                  </a>
                   {navigator.share && (
                     <Button 
                       size="sm" 
                       variant="outline" 
-                      onClick={() => shareToSocial('native')}
+                      onClick={handleNativeShare}
                       className="flex items-center gap-2"
                     >
                       <Share2 className="w-4 h-4" />
