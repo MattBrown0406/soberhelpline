@@ -859,7 +859,7 @@ Relapse rates for addiction are similar to those of other chronic conditions lik
 With early recognition, compassionate response, and professional support, families can help their loved ones get back on track and strengthen their long-term recovery.`
   },
   {
-    id: 17,
+    id: 19,
     title: "How Strong Boundaries Reduce Emotional Fatigue (Without Controlling Others)",
     excerpt: "In families facing addiction or relational stress, the urge to control loved ones often stems from love but leads to burnout. Strong emotional boundaries shift this dynamic by clarifying personal responsibility, conserving energy, and fostering peace without manipulation.",
     author: "Sober Helpline Team",
