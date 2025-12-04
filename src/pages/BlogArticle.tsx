@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import logo from "@/assets/logo.png";
@@ -45,17 +45,14 @@ const BlogArticle = () => {
     
     switch(platform) {
       case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`;
         break;
       case 'twitter':
         shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
         break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-        break;
       case 'email':
-        shareUrl = `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0A${url}`;
-        break;
+        window.location.href = `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0A${decodeURIComponent(url)}`;
+        return;
       case 'native':
         if (navigator.share) {
           navigator.share({
@@ -67,7 +64,12 @@ const BlogArticle = () => {
         return;
     }
 
-    window.open(shareUrl, '_blank', 'width=600,height=400');
+    // Use window.open with proper features to avoid popup blocking
+    const popup = window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500,left=100,top=100');
+    if (!popup) {
+      // Fallback if popup blocked - navigate directly
+      window.location.href = shareUrl;
+    }
   };
 
   const renderTextWithLinks = (text: string) => {
@@ -224,15 +226,6 @@ const BlogArticle = () => {
                   >
                     <Twitter className="w-4 h-4" />
                     X
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    onClick={() => shareToSocial('linkedin')}
-                    className="flex items-center gap-2"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                    LinkedIn
                   </Button>
                   <Button 
                     size="sm" 
