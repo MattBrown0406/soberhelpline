@@ -23,6 +23,7 @@ import protectingChildrenAddictionImg from "@/assets/blog-protecting-children-ad
 import healthyBoundariesImg from "@/assets/blog-healthy-boundaries.png";
 import gamingSocialMediaAddictionImg from "@/assets/blog-gaming-social-media-addiction.png";
 import relapseWarningSignsImg from "@/assets/blog-relapse-warning-signs.png";
+import emotionalBoundariesFatigueImg from "@/assets/blog-emotional-boundaries-fatigue.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -856,6 +857,61 @@ Discuss in advance what steps will be taken if relapse occurs. Having a plan red
 Relapse rates for addiction are similar to those of other chronic conditions like diabetes and hypertension (40-60%). A relapse doesn't erase progress—it's information about what additional support or changes may be needed.
 
 With early recognition, compassionate response, and professional support, families can help their loved ones get back on track and strengthen their long-term recovery.`
+  },
+  {
+    id: 17,
+    title: "How Strong Boundaries Reduce Emotional Fatigue (Without Controlling Others)",
+    excerpt: "In families facing addiction or relational stress, the urge to control loved ones often stems from love but leads to burnout. Strong emotional boundaries shift this dynamic by clarifying personal responsibility, conserving energy, and fostering peace without manipulation.",
+    author: "Sober Helpline Team",
+    date: "2025-12-04",
+    category: "Family Support",
+    image: emotionalBoundariesFatigueImg,
+    content: `In families facing addiction or relational stress, the urge to control loved ones often stems from love but leads to burnout. Strong emotional boundaries shift this dynamic by clarifying personal responsibility, conserving energy, and fostering peace without manipulation.
+
+**The Energy Trap of Trying to Control Others**
+
+Attempting to manage a loved one's choices—such as monitoring their actions or preventing relapses—creates constant vigilance. This overreach blurs empathy with enmeshment, draining emotional reserves through endless anticipation of crises.
+
+The physical toll appears as tension, poor sleep, and anxiety, as the nervous system stays activated. Conditional peace, reliant on others' behavior, proves unsustainable and heightens emotional fatigue.
+
+**How Boundaries Protect Your Emotional Energy**
+
+Emotional boundaries act as personal limits, defining what you control: your responses, time, and well-being. Phrases like "I won't engage during active use" preserve energy otherwise spent on futile oversight.
+
+This approach ends the cycle of pleading or fixing, freeing mental space for self-care. Families report less anger and more clarity once boundaries replace control efforts.
+
+**Control, Responsibility, and Family Dynamics**
+
+Control confuses with responsibility; intervening feels like duty, yet it invades others' autonomy. In addiction contexts, tracking or rescuing sustains chaos while exhausting the family.
+
+True responsibility focuses inward: "I manage my reactions, not your choices." This distinction ends enabling, promotes accountability, and reduces relational burnout.
+
+**The Emotional Cost of Over-Investing in Others**
+
+View emotional energy as a finite budget; control depletes it via arguments and worry. Without boundaries, families in addiction scenarios face chronic depletion, mistaking it for commitment.
+
+Boundaries enforce discipline, halting leaks from others' decisions. This regulation stabilizes mood, independent of external chaos, yielding grounded compassion over reactive stress.
+
+**The Freedom and Relief of Letting Go**
+
+Releasing control paradoxically strengthens bonds, as authenticity replaces pressure. Loved ones respond to clear limits rather than resistance to micromanagement.
+
+Consistency emerges: peace no longer hinges on others' actions. This empowerment replaces anxiety with sustainable serenity in high-stakes family dynamics.
+
+**How to Start Setting Healthier Boundaries**
+
+Begin by pinpointing overreach, like unsolicited advice or repeated rescues. Ask: "Is this mine to handle?" Communicate limits calmly, without blame.
+
+Initial guilt fades as energy rebounds. Consistent practice builds resilience, transforming exhaustion into empowerment for families navigating addiction or conflict.
+
+**Get Support Setting Boundaries With a Loved One**
+
+Exhausted from managing a loved one's addiction? Professional guidance helps families set boundaries, end enabling, and pursue change.
+
+• Schedule a free 20-minute consultation to assess your situation.
+• Explore intervention services for structured family support.
+
+Contact today for confidential help tailored to your needs.`
   }
 ];
 
