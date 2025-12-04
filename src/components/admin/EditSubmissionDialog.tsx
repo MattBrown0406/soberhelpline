@@ -82,8 +82,16 @@ export function EditSubmissionDialog({
         .from('provider-logos')
         .getPublicUrl(fileName);
 
+      // Immediately save logo_url to database
+      const { error: updateError } = await supabase
+        .from('provider_submissions')
+        .update({ logo_url: publicUrl })
+        .eq('id', editedSubmission.id);
+
+      if (updateError) throw updateError;
+
       updateField('logo_url', publicUrl);
-      toast.success("Logo uploaded successfully");
+      toast.success("Logo uploaded and saved successfully");
     } catch (error) {
       console.error("Error uploading logo:", error);
       toast.error("Failed to upload logo");
