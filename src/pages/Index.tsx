@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,22 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
-import familyHero from "@/assets/family-hero.png";
-import dadDaughter from "@/assets/dad-daughter.png";
-import hispanicFamily from "@/assets/hispanic-family.png";
-import aaMeeting from "@/assets/aa-meeting.png";
-import familyAdultSon from "@/assets/family-adult-son.png";
-import familyAdultDaughter from "@/assets/family-adult-daughter.png";
-import familyMultigenerational from "@/assets/family-multigenerational.png";
-import familyOutdoorWalk from "@/assets/family-outdoor-walk.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
-
-const heroImages = [familyHero, dadDaughter, hispanicFamily, aaMeeting, familyAdultSon, familyAdultDaughter, familyMultigenerational, familyOutdoorWalk];
+import { blogPosts } from "@/pages/Blog";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment" },
@@ -39,7 +30,14 @@ const categories = [
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
+
+  // Get the 5 most recent blog posts
+  const featuredArticles = useMemo(() => {
+    return [...blogPosts]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5);
+  }, []);
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -59,10 +57,10 @@ const Index = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      setCurrentArticleIndex((prev) => (prev + 1) % featuredArticles.length);
     }, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [featuredArticles.length]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -205,20 +203,65 @@ const Index = () => {
         </div>
 
         <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
-          <div className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg">
-            {heroImages.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt="Family together in recovery"
-                className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
-                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+          <div className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg bg-card">
+            {featuredArticles.map((article, index) => (
+              <Link
+                key={article.id}
+                to={`/blog/${article.id}`}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+                  index === currentArticleIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                 }`}
-                width={636}
-                height={636}
-                fetchPriority={index === 0 ? "high" : "low"}
-              />
+              >
+                <div className="relative w-full h-full">
+                  {article.image && (
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                      fetchPriority={index === 0 ? "high" : "low"}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                    <span className="inline-block px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded mb-2">
+                      {article.category}
+                    </span>
+                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 line-clamp-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-200 text-sm line-clamp-2 mb-3 hidden md:block">
+                      {article.excerpt}
+                    </p>
+                    <div className="flex items-center gap-3 text-xs text-gray-300">
+                      <div className="flex items-center gap-1">
+                        <UserIcon className="w-3 h-3" />
+                        <span>{article.author}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>{new Date(article.date).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             ))}
+            {/* Carousel indicators */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+              {featuredArticles.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentArticleIndex(index);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentArticleIndex ? 'bg-white w-4' : 'bg-white/50'
+                  }`}
+                  aria-label={`Go to article ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
           <div className="space-y-3 md:space-y-4 bg-black rounded-lg shadow-lg p-5 md:p-8 flex flex-col justify-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Our Mission</h2>
