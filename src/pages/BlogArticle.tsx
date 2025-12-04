@@ -41,17 +41,15 @@ const BlogArticle = () => {
     const encodedUrl = encodeURIComponent(pageUrl);
     const encodedTitle = encodeURIComponent(post.title);
     const encodedText = encodeURIComponent(post.excerpt);
-    const encodedTitleAndText = encodeURIComponent(`${post.title}\n\n${post.excerpt}`);
 
     let shareUrl = '';
     
     switch(platform) {
       case 'facebook':
-        // Use Facebook's share dialog with hashtag for better visibility
-        shareUrl = `https://www.facebook.com/sharer.php?u=${encodedUrl}&quote=${encodedTitleAndText}`;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
         break;
       case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+        shareUrl = `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
         break;
       case 'email':
         window.location.href = `mailto:?subject=${encodedTitle}&body=${encodedTitle}%0A%0A${encodedText}%0A%0ARead more: ${pageUrl}`;
@@ -62,13 +60,13 @@ const BlogArticle = () => {
             title: post.title,
             text: post.excerpt,
             url: pageUrl,
-          }).catch(err => console.log('Share cancelled'));
+          }).catch(() => {});
         }
         return;
     }
 
-    // Open share dialog in a popup window
-    window.open(shareUrl, 'share-dialog', 'width=626,height=436,left=100,top=100');
+    // Navigate directly to avoid COOP issues
+    window.location.href = shareUrl;
   };
 
   const renderTextWithLinks = (text: string) => {
