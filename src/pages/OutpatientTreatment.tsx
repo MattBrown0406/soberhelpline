@@ -91,6 +91,7 @@ const OutpatientTreatment = () => {
   const [lengthOfStay, setLengthOfStay] = useState("All");
   const [maxBudget, setMaxBudget] = useState("");
   const [selectedModality, setSelectedModality] = useState("All");
+  const [militaryFirstResponder, setMilitaryFirstResponder] = useState("All");
   const [filters, setFilters] = useState({
     insurance: "All",
     maxBudget: "",
@@ -159,6 +160,13 @@ const OutpatientTreatment = () => {
         query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
       }
 
+      // Apply military/first responder filter
+      if (militaryFirstResponder === "Yes") {
+        query = query.eq("military_first_responder_care", true);
+      } else if (militaryFirstResponder === "No") {
+        query = query.eq("military_first_responder_care", false);
+      }
+
       const { data, error } = await query;
       if (error) throw error;
       
@@ -224,6 +232,13 @@ const OutpatientTreatment = () => {
       // Apply therapeutic modality filter from ProviderFilters
       if (currentFilters.therapeuticModality && currentFilters.therapeuticModality !== "All") {
         query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
+      }
+
+      // Apply military/first responder filter
+      if (militaryFirstResponder === "Yes") {
+        query = query.eq("military_first_responder_care", true);
+      } else if (militaryFirstResponder === "No") {
+        query = query.eq("military_first_responder_care", false);
       }
 
       const { data, error } = await query;
@@ -376,6 +391,13 @@ const OutpatientTreatment = () => {
       // Apply therapeutic modality filter from ProviderFilters
       if (filters.therapeuticModality && filters.therapeuticModality !== "All") {
         query = query.contains("therapeutic_modalities", [filters.therapeuticModality]);
+      }
+
+      // Apply military/first responder filter
+      if (militaryFirstResponder === "Yes") {
+        query = query.eq("military_first_responder_care", true);
+      } else if (militaryFirstResponder === "No") {
+        query = query.eq("military_first_responder_care", false);
       }
 
       const { data, error } = await query;
@@ -603,6 +625,23 @@ const OutpatientTreatment = () => {
                         {modality}
                       </SelectItem>
                     ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="militaryFirstResponder">Military/First Responder Services?</Label>
+                <Select
+                  value={militaryFirstResponder}
+                  onValueChange={setMilitaryFirstResponder}
+                >
+                  <SelectTrigger id="militaryFirstResponder" className="bg-background">
+                    <SelectValue placeholder="Select option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                    <SelectItem value="No">No</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

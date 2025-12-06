@@ -39,6 +39,7 @@ const SoberLiving = () => {
   const [genderSpecificCare, setGenderSpecificCare] = useState("No");
   const [genderType, setGenderType] = useState("");
   const [matFriendly, setMatFriendly] = useState("All");
+  const [militaryFirstResponder, setMilitaryFirstResponder] = useState("All");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
@@ -90,6 +91,13 @@ const SoberLiving = () => {
         query = query.eq("accepts_mat_residents", true);
       } else if (matFriendly === "No") {
         query = query.eq("accepts_mat_residents", false);
+      }
+
+      // Apply military/first responder filter for nearby providers
+      if (militaryFirstResponder === "Yes") {
+        query = query.eq("military_first_responder_care", true);
+      } else if (militaryFirstResponder === "No") {
+        query = query.eq("military_first_responder_care", false);
       }
 
       const { data, error } = await query;
@@ -190,6 +198,13 @@ const SoberLiving = () => {
         query = query.eq("accepts_mat_residents", true);
       } else if (matFriendly === "No") {
         query = query.eq("accepts_mat_residents", false);
+      }
+
+      // Apply military/first responder filter
+      if (militaryFirstResponder === "Yes") {
+        query = query.eq("military_first_responder_care", true);
+      } else if (militaryFirstResponder === "No") {
+        query = query.eq("military_first_responder_care", false);
       }
 
       const { data, error } = await query;
@@ -343,6 +358,23 @@ const SoberLiving = () => {
                   onValueChange={setMatFriendly}
                 >
                   <SelectTrigger id="matFriendly" className="bg-background">
+                    <SelectValue placeholder="Select option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                    <SelectItem value="No">No</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="militaryFirstResponder">Military/First Responder Services?</Label>
+                <Select
+                  value={militaryFirstResponder}
+                  onValueChange={setMilitaryFirstResponder}
+                >
+                  <SelectTrigger id="militaryFirstResponder" className="bg-background">
                     <SelectValue placeholder="Select option" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
