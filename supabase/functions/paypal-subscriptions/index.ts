@@ -201,6 +201,43 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Verify JWT and extract user from token
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: 'Missing or invalid authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const token = authHeader.replace('Bearer ', '');
+    
+    // Create Supabase client with user's token to verify authentication
+    const supabaseAuth = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      {
+        global: {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      }
+    );
+
+    // Get the authenticated user from the token
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
+    
+    if (authError || !user) {
+      console.error('Auth error:', authError);
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized - invalid token' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const authenticatedUserId = user.id;
+    console.log('Authenticated user:', authenticatedUserId);
+
+    // Service role client for database operations
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
@@ -213,9 +250,12 @@ Deno.serve(async (req) => {
 
     switch (action) {
       case 'create-subscription': {
-        const { planType, amount, userId, providerSubmissionId, discountCode, returnUrl, cancelUrl } = params;
+        const { planType, amount, providerSubmissionId, discountCode, returnUrl, cancelUrl } = params;
         
-        if (!planType || !amount || !userId || !returnUrl || !cancelUrl) {
+        // Use authenticated user ID from token instead of request body
+        const userId = authenticatedUserId;
+        
+        if (!planType || !amount || !returnUrl || !cancelUrl) {
           throw new Error('Missing required parameters');
         }
 
@@ -385,6 +425,24 @@ Deno.serve(async (req) => {
           throw new Error('Missing subscription ID');
         }
 
+        // Verify the authenticated user owns this subscription
+        const { data: subscription, error: fetchError } = await supabaseClient
+          .from('provider_subscriptions')
+          .select('user_id')
+          .eq('paypal_subscription_id', subscriptionId)
+          .single();
+
+        if (fetchError || !subscription) {
+          throw new Error('Subscription not found');
+        }
+
+        if (subscription.user_id !== authenticatedUserId) {
+          return new Response(
+            JSON.stringify({ error: 'Unauthorized - you do not own this subscription' }),
+            { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         const response = await fetch(
           `${PAYPAL_API_BASE}/v1/billing/subscriptions/${subscriptionId}/cancel`,
           {
@@ -424,6 +482,24 @@ Deno.serve(async (req) => {
         
         if (!subscriptionId) {
           throw new Error('Missing subscription ID');
+        }
+
+        // Verify the authenticated user owns this subscription
+        const { data: subscription, error: fetchError } = await supabaseClient
+          .from('provider_subscriptions')
+          .select('user_id')
+          .eq('paypal_subscription_id', subscriptionId)
+          .single();
+
+        if (fetchError || !subscription) {
+          throw new Error('Subscription not found');
+        }
+
+        if (subscription.user_id !== authenticatedUserId) {
+          return new Response(
+            JSON.stringify({ error: 'Unauthorized - you do not own this subscription' }),
+            { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
         const details = await getSubscriptionDetails(accessToken, subscriptionId);
