@@ -38,6 +38,7 @@ const SoberLiving = () => {
   const [zipCodeSearch, setZipCodeSearch] = useState("");
   const [genderSpecificCare, setGenderSpecificCare] = useState("No");
   const [genderType, setGenderType] = useState("");
+  const [matFriendly, setMatFriendly] = useState("All");
   const { toast } = useToast();
 
   const fetchProviders = async (state: string) => {
@@ -82,6 +83,13 @@ const SoberLiving = () => {
       // Apply gender filter for nearby providers
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply MAT friendly filter for nearby providers
+      if (matFriendly === "Yes") {
+        query = query.eq("accepts_mat_residents", true);
+      } else if (matFriendly === "No") {
+        query = query.eq("accepts_mat_residents", false);
       }
 
       const { data, error } = await query;
@@ -175,6 +183,13 @@ const SoberLiving = () => {
 
       if (genderSpecificCare === "Yes" && genderType) {
         query = query.contains("gender_specific_treatment", [genderType]);
+      }
+
+      // Apply MAT friendly filter
+      if (matFriendly === "Yes") {
+        query = query.eq("accepts_mat_residents", true);
+      } else if (matFriendly === "No") {
+        query = query.eq("accepts_mat_residents", false);
       }
 
       const { data, error } = await query;
@@ -319,6 +334,23 @@ const SoberLiving = () => {
                     </SelectContent>
                   </Select>
                 )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="matFriendly">MAT Friendly?</Label>
+                <Select
+                  value={matFriendly}
+                  onValueChange={setMatFriendly}
+                >
+                  <SelectTrigger id="matFriendly" className="bg-background">
+                    <SelectValue placeholder="Select option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                    <SelectItem value="No">No</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
