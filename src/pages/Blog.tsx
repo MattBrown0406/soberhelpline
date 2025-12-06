@@ -24,12 +24,81 @@ import healthyBoundariesImg from "@/assets/blog-healthy-boundaries.png";
 import gamingSocialMediaAddictionImg from "@/assets/blog-gaming-social-media-addiction.png";
 import relapseWarningSignsImg from "@/assets/blog-relapse-warning-signs.png";
 import emotionalBoundariesFatigueImg from "@/assets/blog-emotional-boundaries-fatigue.png";
+import methPsychosisImg from "@/assets/blog-meth-psychosis.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 20,
+    title: "Understanding Methamphetamine-Induced Psychosis: A Guide for Families",
+    excerpt: "Methamphetamine-induced psychosis is a serious psychiatric condition characterized by paranoia, hallucinations, and delusions. Learn how to recognize symptoms and take action to help loved ones experiencing this condition.",
+    author: "Sober Helpline Team",
+    date: "2025-12-06",
+    category: "Family Support",
+    image: methPsychosisImg,
+    content: `Methamphetamine-induced psychosis (MAP) is a serious psychiatric condition characterized by symptoms such as paranoia, hallucinations, delusions, and disorganized thinking. It results from the neurochemical effects of methamphetamine on the brain, which disrupt normal signaling and cause intense alterations in perception and behavior. Psychotic symptoms can appear acutely during intoxication or persist even after cessation of drug use, with the duration and severity varying based on individual and usage factors. Immediate and long-term actions are critical for helping loved ones experiencing meth-induced psychosis.
+
+**Causes of Methamphetamine-Induced Psychosis**
+
+The primary cause of MAP lies in the drug's powerful impact on brain chemistry. Methamphetamine causes excessive release of dopamine and glutamate in key brain pathways (nigrostriatal, mesolimbic, and mesocortical), which overwhelms inhibitory GABAergic interneurons in the cortex. This dysregulation results in psychotic symptoms like paranoia, auditory hallucinations, and disorganized speech. Chronic or high-dose use disrupts the balance of neurotransmitters more severely, increasing risk of psychosis.
+
+Further contributors include sleep deprivation, polydrug use, pre-existing mental health disorders such as schizophrenia or affective disorders, and trauma history, which can all increase vulnerability to MAP. Meth use can either trigger new psychosis or exacerbate an underlying psychiatric condition.
+
+**Duration of Methamphetamine Psychosis**
+
+Symptoms of methamphetamine-induced psychosis can range from brief and transient to long-lasting or chronic. Acute psychotic episodes often coincide with periods of intoxication or shortly after use, with hallucinations typically resolving within 1 to 2 days and delusions or paranoia settling within 2 to 3 weeks after abstinence.
+
+However, a subset of users may experience persistent psychotic symptoms lasting months or longer, even without continued meth use. For some, meth psychosis resembles schizophrenia, potentially unmasked or triggered by meth exposure, requiring longer and more comprehensive psychiatric treatment. Symptoms can recur with relapse, stress, or sleep deprivation, underscoring the need for sustained recovery efforts.
+
+**Recognizing Methamphetamine Psychosis in a Loved One**
+
+Key signs that a loved one may be undergoing a meth-induced psychotic episode include:
+
+• Paranoia or extreme suspicion of others with no clear basis
+
+• Auditory or visual hallucinations (hearing or seeing things not present)
+
+• Confused, disorganized, or "odd" speech and behavior
+
+• Extreme agitation, restlessness, or unusual hyperactivity
+
+• Delusional beliefs that are false and fixed despite evidence
+
+• Erratic or violent behavior potentially endangering themselves or others
+
+It is important to differentiate between intoxication effects and psychosis persisting beyond drug influence, as the latter requires urgent professional care.
+
+**Steps to Take if a Loved One is Experiencing Psychosis**
+
+**1. Seek Immediate Medical Help**
+
+Acute meth psychosis, especially with agitation or violent behavior, is a psychiatric emergency. Call emergency services or take them to an emergency room for evaluation and stabilization. Pharmacological treatment including antipsychotics and benzodiazepines may be necessary.
+
+**2. Ensure Safety**
+
+Remove any potentially dangerous objects from the environment. Stay calm and avoid confrontation. Reduce stimuli and keep the person in a quiet, safe place.
+
+**3. Encourage Abstinence**
+
+Psychotic symptoms often recede with sustained abstinence from methamphetamine. Support their entry into addiction treatment programs focusing on behavioral therapies shown to reduce relapse and psychosis recurrence.
+
+**4. Arrange for Psychiatric Assessment**
+
+Long-term evaluation is important to determine whether psychosis is solely substance-induced or part of a primary psychotic disorder like schizophrenia, as this influences treatment approach.
+
+**5. Provide Ongoing Support and Monitoring**
+
+Engage family and community resources, encourage adherence to treatment plans, and monitor for any return of symptoms. Psychosocial interventions including counseling, rehabilitation, and family therapy improve outcomes.
+
+**Early Intervention Saves Lives**
+
+Understanding the neurobiology and clinical course of methamphetamine-induced psychosis equips families to respond effectively and compassionately. Early intervention, professional psychiatric care, and sustained recovery support can significantly reduce the harm of this complex condition.
+
+If you suspect a loved one is experiencing methamphetamine-induced psychosis, do not delay in seeking medical care and addiction treatment resources. Prompt action saves lives and helps pave the way to healing and stability.`
+  },
   {
     id: 0,
     title: "Understanding the Cycle of Addiction and How 12-Step Recovery Breaks It",
