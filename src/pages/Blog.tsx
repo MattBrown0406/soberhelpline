@@ -25,12 +25,55 @@ import gamingSocialMediaAddictionImg from "@/assets/blog-gaming-social-media-add
 import relapseWarningSignsImg from "@/assets/blog-relapse-warning-signs.png";
 import emotionalBoundariesFatigueImg from "@/assets/blog-emotional-boundaries-fatigue.png";
 import methPsychosisImg from "@/assets/blog-meth-psychosis.png";
+import chsThcDangerImg from "@/assets/blog-chs-thc-danger.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 21,
+    title: "Cannabinoid Hyperemesis Syndrome: A Hidden Danger of High-Potency THC Use",
+    excerpt: "Cannabinoid hyperemesis syndrome (CHS) emerges in long-term cannabis users, causing cycles of intense nausea, vomiting, and abdominal pain. This condition paradoxically affects those who rely on marijuana for nausea relief.",
+    author: "Sober Helpline Team",
+    date: "2025-12-06",
+    category: "Family Support",
+    image: chsThcDangerImg,
+    content: `Cannabinoid hyperemesis syndrome (CHS) emerges in long-term cannabis users, causing cycles of intense nausea, vomiting, and abdominal pain that can lead to emergency room visits and severe dehydration. This condition paradoxically affects those who rely on marijuana for nausea relief, striking after years of frequent use, especially with high-potency THC products common among young adults. Families often mistake early signs for stomach bugs, delaying recognition of the cannabis link.
+
+**Phases of CHS**
+
+CHS progresses through three distinct phases tied to ongoing cannabis exposure.
+
+• Prodromal phase: Early morning nausea, mild stomach pain, and fear of vomiting begin, often prompting more cannabis use for perceived relief.
+
+• Hyperemetic phase: Symptoms peak with relentless vomiting—up to five times per hour—severe abdominal cramps, dehydration, and "scromiting" (screaming from pain while vomiting).
+
+• Recovery phase: Abstinence from cannabis brings gradual relief over weeks, but resuming use restarts the cycle.
+
+Young adults in this phase may compulsively take hot showers or baths, as heat temporarily eases gut spasms by activating certain receptors.
+
+**Causes Linked to High-Potency THC**
+
+Chronic overstimulation of the body's endocannabinoid receptors from high-THC products disrupts natural nausea controls in the gut and brain. High-potency concentrates, vapes, and edibles deliver concentrated doses that build up in fat tissues, worsening the effect over time—often after 10-12 years of weekly or daily use starting in adolescence. Not all heavy users develop CHS, but risk climbs with potency and frequency, explaining rising cases among young adults using modern 20-90% THC products.
+
+**Severe Complications for Young Users**
+
+Unchecked CHS leads to dangerous outcomes, hitting developing bodies hardest.
+
+• Dehydration and electrolyte imbalances requiring hospitalization.
+
+• Esophageal tears, tooth enamel erosion from stomach acid, and aspiration pneumonia.
+
+• Rare but life-threatening issues like kidney failure, seizures, heart rhythm problems, or brain swelling.
+
+Young adults face amplified risks due to ongoing brain and organ development, with repeated ER trips signaling deeper cannabis use disorder.
+
+**Helping Families Spot and Stop CHS**
+
+Families can intervene by watching for cyclic vomiting, hot bathing rituals, and cannabis paraphernalia alongside weight loss or secrecy. Encourage total abstinence—the only cure—and seek addiction specialists for withdrawal support, as symptoms linger weeks post-quit. Early education on high-THC perils empowers loved ones to guide recovery without judgment.`
+  },
   {
     id: 20,
     title: "Understanding Methamphetamine-Induced Psychosis: A Guide for Families",
