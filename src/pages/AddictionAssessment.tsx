@@ -136,23 +136,18 @@ const AddictionAssessment = () => {
                   {totalChecked >= 4 && totalChecked < 6 && (
                     <>
                       {isDefensiveOrInDenial 
-                        ? "Because your loved one appears defensive or in denial about their use, a professional interventionist and inpatient treatment are recommended to provide the structure and support needed for breakthrough."
-                        : "Outpatient treatment or intensive outpatient (IOP) is recommended. Structured therapy and support are important at this stage."}
+                        ? `Because your loved one appears defensive or in denial about their use, a professional interventionist and inpatient treatment are recommended.${hasWithdrawalSymptoms ? " Medical detox is also strongly recommended due to the presence of withdrawal symptoms." : ""}`
+                        : `Outpatient treatment or intensive outpatient (IOP) is recommended. Structured therapy and support are important at this stage.${hasWithdrawalSymptoms ? " Medical detox is strongly recommended due to the presence of withdrawal symptoms." : ""}`}
                     </>
                   )}
                   {totalChecked >= 2 && totalChecked < 4 && (
                     <>
                       {isDefensiveOrInDenial
-                        ? "Because your loved one appears defensive or in denial, consulting with a professional interventionist may help. Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment is also recommended."
-                        : "Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment may be beneficial."}
+                        ? `Because your loved one appears defensive or in denial, consulting with a professional interventionist may help. Individual therapy and/or outpatient treatment is also recommended.${hasWithdrawalSymptoms ? " Medical detox is strongly recommended due to the presence of withdrawal symptoms." : ""}`
+                        : `Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment may be beneficial.${hasWithdrawalSymptoms ? " Medical detox is strongly recommended due to the presence of withdrawal symptoms." : ""}`}
                     </>
                   )}
                 </p>
-                {hasWithdrawalSymptoms && totalChecked < 6 && (
-                  <p className="text-sm text-foreground leading-relaxed mb-3">
-                    <strong>Important:</strong> Because withdrawal symptoms are present, medical detox under professional supervision is strongly recommended before beginning any treatment program. Withdrawal can be dangerous without proper medical care.
-                  </p>
-                )}
                 {totalChecked < 6 && (
                   <p className="text-sm text-foreground leading-relaxed">
                     <strong>Recovery Support:</strong> Participation in recovery fellowships can provide ongoing peer support:{" "}
