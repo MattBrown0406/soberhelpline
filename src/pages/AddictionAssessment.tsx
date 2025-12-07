@@ -32,6 +32,13 @@ const AddictionAssessment = () => {
   const isDefensiveOrInDenial = checkedItems[8]; // Question 9: defensive/denial question
   const hasWithdrawalSymptoms = checkedItems[10]; // Question 11: withdrawal symptoms
 
+  const getCareLevelWithDetox = (baseLevel: string) => {
+    if (hasWithdrawalSymptoms && !baseLevel.includes("Medical Detox")) {
+      return `Medical Detox / ${baseLevel}`;
+    }
+    return baseLevel;
+  };
+
   const getSeverity = (count: number) => {
     if (count >= 6) return { 
       label: "Severe", 
@@ -41,17 +48,17 @@ const AddictionAssessment = () => {
     if (count >= 4) return { 
       label: "Moderate", 
       color: "text-orange-500",
-      careLevel: isDefensiveOrInDenial ? "Inpatient Treatment" : "Outpatient Treatment"
+      careLevel: getCareLevelWithDetox(isDefensiveOrInDenial ? "Interventionist / Inpatient Treatment" : "Outpatient Treatment")
     };
     if (count >= 2) return { 
       label: "Mild", 
       color: "text-yellow-600",
-      careLevel: "Therapists / Outpatient Treatment"
+      careLevel: getCareLevelWithDetox(isDefensiveOrInDenial ? "Interventionist / Therapists / Outpatient Treatment" : "Therapists / Outpatient Treatment")
     };
     return { 
       label: "Below threshold", 
       color: "text-muted-foreground",
-      careLevel: "Education & Support Groups"
+      careLevel: hasWithdrawalSymptoms ? "Medical Detox / Education & Support Groups" : "Education & Support Groups"
     };
   };
 
