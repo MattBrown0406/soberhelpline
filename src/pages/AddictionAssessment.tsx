@@ -28,30 +28,27 @@ const AddictionAssessment = () => {
   };
 
   const totalChecked = checkedItems.filter(Boolean).length;
+  const isDefensiveOrInDenial = checkedItems[8]; // Question 9: defensive/denial question
 
   const getSeverity = (count: number) => {
     if (count >= 6) return { 
       label: "Severe", 
       color: "text-red-600",
-      recommendation: "Inpatient treatment or medical detox is strongly recommended. This level of severity often requires 24/7 medical supervision and intensive therapeutic support.",
-      careLevel: "Inpatient Treatment / Medical Detox"
+      careLevel: "Interventionist / Medical Detox / Inpatient Treatment"
     };
     if (count >= 4) return { 
       label: "Moderate", 
       color: "text-orange-500",
-      recommendation: "Intensive outpatient treatment (IOP) or a professional evaluation for inpatient care is recommended. Structured support and therapy are important at this stage.",
-      careLevel: "Intensive Outpatient / Inpatient Evaluation"
+      careLevel: isDefensiveOrInDenial ? "Inpatient Treatment" : "Outpatient Treatment"
     };
     if (count >= 2) return { 
       label: "Mild", 
       color: "text-yellow-600",
-      recommendation: "Outpatient treatment, individual therapy, or participation in recovery support groups (AA, NA, SMART Recovery) may be beneficial.",
-      careLevel: "Outpatient Treatment / Therapy"
+      careLevel: "Therapists / Outpatient Treatment"
     };
     return { 
       label: "Below threshold", 
       color: "text-muted-foreground",
-      recommendation: "While formal treatment may not be indicated, education about addiction and attending family support groups like Al-Anon or Nar-Anon can be helpful.",
       careLevel: "Education & Support Groups"
     };
   };
@@ -129,9 +126,31 @@ const AddictionAssessment = () => {
             </div>
             {totalChecked >= 2 && (
               <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
-                <p className="text-sm text-foreground leading-relaxed">
-                  <strong>Recommendation:</strong> {severity.recommendation}
+                <p className="text-sm text-foreground leading-relaxed mb-3">
+                  <strong>Recommendation:</strong>{" "}
+                  {totalChecked >= 6 && (
+                    <>A professional interventionist is strongly recommended to help your loved one accept treatment. Medical detox with 24/7 supervision followed by inpatient treatment is appropriate for this level of severity.</>
+                  )}
+                  {totalChecked >= 4 && totalChecked < 6 && (
+                    <>
+                      {isDefensiveOrInDenial 
+                        ? "Because your loved one appears defensive or in denial about their use, inpatient treatment is recommended to provide the structure and distance needed for breakthrough."
+                        : "Outpatient treatment or intensive outpatient (IOP) is recommended. Structured therapy and support are important at this stage."}
+                    </>
+                  )}
+                  {totalChecked >= 2 && totalChecked < 4 && (
+                    <>Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment may be beneficial.</>
+                  )}
                 </p>
+                {totalChecked < 6 && (
+                  <p className="text-sm text-foreground leading-relaxed">
+                    <strong>Recovery Support:</strong> Participation in recovery fellowships can provide ongoing peer support:{" "}
+                    <a href="https://www.aa.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">AA</a>,{" "}
+                    <a href="https://na.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">NA</a>,{" "}
+                    <a href="https://www.smartrecovery.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">SMART Recovery</a>, or{" "}
+                    <a href="https://www.refugerecovery.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Refuge Recovery</a>.
+                  </p>
+                )}
               </div>
             )}
           </div>
