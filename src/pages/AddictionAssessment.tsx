@@ -16,6 +16,7 @@ const questions = [
   "Does their substance use continue despite causing health issues, arguments, or other clear harm?",
   "Are they defensive, in denial, or making excuses when confronted about their use?",
   "Have I been covering for them, paying bills, or shielding them from consequences of their actions?",
+  "Have they experienced withdrawal symptoms (shaking, sweating, nausea, anxiety, insomnia) when not using?",
 ];
 
 const AddictionAssessment = () => {
@@ -29,6 +30,7 @@ const AddictionAssessment = () => {
 
   const totalChecked = checkedItems.filter(Boolean).length;
   const isDefensiveOrInDenial = checkedItems[8]; // Question 9: defensive/denial question
+  const hasWithdrawalSymptoms = checkedItems[10]; // Question 11: withdrawal symptoms
 
   const getSeverity = (count: number) => {
     if (count >= 6) return { 
@@ -146,6 +148,11 @@ const AddictionAssessment = () => {
                     </>
                   )}
                 </p>
+                {hasWithdrawalSymptoms && totalChecked < 6 && (
+                  <p className="text-sm text-foreground leading-relaxed mb-3">
+                    <strong>Important:</strong> Because withdrawal symptoms are present, medical detox under professional supervision is strongly recommended before beginning any treatment program. Withdrawal can be dangerous without proper medical care.
+                  </p>
+                )}
                 {totalChecked < 6 && (
                   <p className="text-sm text-foreground leading-relaxed">
                     <strong>Recovery Support:</strong> Participation in recovery fellowships can provide ongoing peer support:{" "}
