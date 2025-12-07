@@ -5,6 +5,20 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Allowlist of trusted podcast feed hosts to prevent SSRF attacks
+const ALLOWED_HOSTS = [
+  'feeds.buzzsprout.com',
+  'anchor.fm',
+  'feed.podbean.com',
+  'feeds.libsyn.com',
+  'feeds.simplecast.com',
+  'rss.art19.com',
+  'feeds.megaphone.fm',
+  'feeds.transistor.fm',
+  'www.spreaker.com',
+  'feeds.acast.com',
+];
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -16,6 +30,43 @@ serve(async (req) => {
     if (!feedUrl) {
       return new Response(
         JSON.stringify({ error: 'feedUrl parameter is required' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400 
+        }
+      );
+    }
+
+    // Validate URL against allowlist to prevent SSRF
+    let parsedUrl: URL;
+    try {
+      parsedUrl = new URL(feedUrl);
+    } catch {
+      return new Response(
+        JSON.stringify({ error: 'Invalid URL format' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400 
+        }
+      );
+    }
+
+    // Check if the host is in our allowlist
+    if (!ALLOWED_HOSTS.includes(parsedUrl.hostname)) {
+      console.warn('Blocked SSRF attempt to:', parsedUrl.hostname);
+      return new Response(
+        JSON.stringify({ error: 'Feed URL host is not allowed. Only trusted podcast platforms are supported.' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 403 
+        }
+      );
+    }
+
+    // Ensure HTTPS protocol
+    if (parsedUrl.protocol !== 'https:') {
+      return new Response(
+        JSON.stringify({ error: 'Only HTTPS URLs are allowed' }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           status: 400 
