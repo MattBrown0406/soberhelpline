@@ -30,10 +30,30 @@ const AddictionAssessment = () => {
   const totalChecked = checkedItems.filter(Boolean).length;
 
   const getSeverity = (count: number) => {
-    if (count >= 6) return { label: "Severe", color: "text-red-600" };
-    if (count >= 4) return { label: "Moderate", color: "text-orange-500" };
-    if (count >= 2) return { label: "Mild", color: "text-yellow-600" };
-    return { label: "Below threshold", color: "text-muted-foreground" };
+    if (count >= 6) return { 
+      label: "Severe", 
+      color: "text-red-600",
+      recommendation: "Inpatient treatment or medical detox is strongly recommended. This level of severity often requires 24/7 medical supervision and intensive therapeutic support.",
+      careLevel: "Inpatient Treatment / Medical Detox"
+    };
+    if (count >= 4) return { 
+      label: "Moderate", 
+      color: "text-orange-500",
+      recommendation: "Intensive outpatient treatment (IOP) or a professional evaluation for inpatient care is recommended. Structured support and therapy are important at this stage.",
+      careLevel: "Intensive Outpatient / Inpatient Evaluation"
+    };
+    if (count >= 2) return { 
+      label: "Mild", 
+      color: "text-yellow-600",
+      recommendation: "Outpatient treatment, individual therapy, or participation in recovery support groups (AA, NA, SMART Recovery) may be beneficial.",
+      careLevel: "Outpatient Treatment / Therapy"
+    };
+    return { 
+      label: "Below threshold", 
+      color: "text-muted-foreground",
+      recommendation: "While formal treatment may not be indicated, education about addiction and attending family support groups like Al-Anon or Nar-Anon can be helpful.",
+      careLevel: "Education & Support Groups"
+    };
   };
 
   const severity = getSeverity(totalChecked);
@@ -93,14 +113,27 @@ const AddictionAssessment = () => {
                   According to the DSM (Diagnostic and Statistical Manual) answering "yes" to several suggests addiction may be present. Over a 12-month period, a person qualifies for an SUD (substance use disorder) diagnosis by meeting at least 2 of the 10 criteria, with severity graded as <strong>mild (2-3 criteria)</strong>, <strong>moderate (4-5)</strong>, or <strong>severe (6+)</strong>.
                 </p>
               </div>
-              <div className="flex-shrink-0 bg-card rounded-lg p-6 shadow-md text-center min-w-[160px]">
+              <div className="flex-shrink-0 bg-card rounded-lg p-6 shadow-md text-center min-w-[200px]">
                 <p className="text-sm text-muted-foreground mb-2">Questions Checked</p>
                 <p className="text-4xl font-bold text-primary mb-2">{totalChecked}</p>
                 <p className={`text-sm font-semibold ${severity.color}`}>
                   {severity.label}
                 </p>
+                {totalChecked >= 2 && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <p className="text-xs text-muted-foreground mb-1">Recommended Level of Care</p>
+                    <p className="text-sm font-semibold text-primary">{severity.careLevel}</p>
+                  </div>
+                )}
               </div>
             </div>
+            {totalChecked >= 2 && (
+              <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+                <p className="text-sm text-foreground leading-relaxed">
+                  <strong>Recommendation:</strong> {severity.recommendation}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="bg-card rounded-lg p-6 md:p-8 text-center shadow-lg">
