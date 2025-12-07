@@ -134,12 +134,16 @@ const AddictionAssessment = () => {
                   {totalChecked >= 4 && totalChecked < 6 && (
                     <>
                       {isDefensiveOrInDenial 
-                        ? "Because your loved one appears defensive or in denial about their use, inpatient treatment is recommended to provide the structure and distance needed for breakthrough."
+                        ? "Because your loved one appears defensive or in denial about their use, a professional interventionist and inpatient treatment are recommended to provide the structure and support needed for breakthrough."
                         : "Outpatient treatment or intensive outpatient (IOP) is recommended. Structured therapy and support are important at this stage."}
                     </>
                   )}
                   {totalChecked >= 2 && totalChecked < 4 && (
-                    <>Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment may be beneficial.</>
+                    <>
+                      {isDefensiveOrInDenial
+                        ? "Because your loved one appears defensive or in denial, consulting with a professional interventionist may help. Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment is also recommended."
+                        : "Individual therapy with a licensed therapist experienced in substance use disorders and/or outpatient treatment may be beneficial."}
+                    </>
                   )}
                 </p>
                 {totalChecked < 6 && (
