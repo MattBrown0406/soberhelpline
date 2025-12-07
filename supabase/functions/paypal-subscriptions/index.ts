@@ -387,6 +387,24 @@ Deno.serve(async (req) => {
           throw new Error('Missing subscription ID');
         }
 
+        // Verify the authenticated user owns this subscription
+        const { data: subscription, error: fetchError } = await supabaseClient
+          .from('provider_subscriptions')
+          .select('user_id')
+          .eq('paypal_subscription_id', subscriptionId)
+          .single();
+
+        if (fetchError || !subscription) {
+          throw new Error('Subscription not found');
+        }
+
+        if (subscription.user_id !== authenticatedUserId) {
+          return new Response(
+            JSON.stringify({ error: 'Unauthorized - you do not own this subscription' }),
+            { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         // Get subscription details from PayPal
         const details = await getSubscriptionDetails(accessToken, subscriptionId);
         
