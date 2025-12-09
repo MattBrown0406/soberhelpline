@@ -36,6 +36,84 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts = [
   {
+    id: 25,
+    title: "When Living Stopped Feeling Like Living: One Young Man's Journey to Recovery",
+    excerpt: "A first-person account of a 25-year-old's descent into addiction, the quiet moment of clarity in a parked car at dawn, and the first trembling steps toward asking for help.",
+    author: "Anonymous",
+    date: "2025-12-09",
+    category: "Personal Stories",
+    image: firstStepsImg,
+    content: `When Living Stopped Feeling Like Living
+
+I'm twenty-five years old, and for a long time, I thought I had everything under control. Maybe that's a phrase you've heard before — the kind of lie people in addiction tell themselves until it wears too thin to believe anymore. I told it constantly. I told it to my parents, my friends, my boss, and myself. For years, I did whatever it took to make sure no one saw how bad things actually were.
+
+At first, it didn't look like "addiction." It looked like a phase — a release, a way to take the edge off or fit in. But as the months turned into years, I started chasing that numbness like oxygen. I needed to feel nothing. Because nothing felt better than the pain that was always waiting when I sobered up.
+
+**The Web of "Friends"**
+
+By the time I hit twenty-three, my entire world had shrunk to a handful of people who used like I did. We called each other "family," but none of us really knew how to love anyone — least of all ourselves. We used together, partied together, sometimes stole together. There was an unspoken rule among us: no judgment, no interference. You don't tell me to stop, and I'll never tell you to either.
+
+I told myself they were the only ones who understood me. They didn't guilt me or ask questions. They laughed at my worst stories and pretended it was all funny. But what I didn't realize back then was that being "understood" isn't the same thing as being cared for. Our friendship was built on mutual avoidance — a shared agreement to stay sick together so none of us had to face the truth.
+
+The more I stayed around people who used, the further I drifted from my real family. When my mom called, I'd hit "ignore." When my dad texted, I'd respond with one-word answers. Holidays started to feel like bad theater — me pretending everything was fine while they pretended to believe me.
+
+**The People Who Tried to Reach Me**
+
+Looking back now, I can see that people tried to reach me. There was my sister, voice trembling on the phone, telling me she missed the person I used to be. There was my best friend from high school, who still checked in once in a while and asked if I was okay, even when he knew what the answer was.
+
+At the time, I hated those conversations. They felt like intrusions — like someone had stepped into a room I'd barricaded shut. I'd tell them they didn't understand, that I was fine, that they should stop worrying. But after they hung up, I'd sit in silence feeling the weight of every word they said. I wouldn't show it, but their care got under my skin. It left a crack in the wall I'd built around myself.
+
+I'd replay my sister's voice in my head when I was alone: "I just want you back." It hurt — not because it made me feel guilty, but because deep down, it reminded me there was still a version of me she believed in. I didn't believe in him anymore, but the fact that someone did... that lingered.
+
+**My Parents' Love — and Their Fear**
+
+My parents loved me more than I could handle. It's strange to say that, but it's true. Their love showed up as fear, as giving, as rescue. Every time things got bad — when I couldn't pay rent, lost a job, wrecked a car — they were there. They told themselves they were helping me get back on my feet, but what they were really doing was cushioning the fall so I never had to feel it.
+
+I used their love like I used everything else — to survive without changing. Each time they bailed me out, I told myself I'd do better next time. And for a few days, maybe even a few weeks, I actually tried. But addiction doesn't negotiate. It waits. And once the guilt softened, the craving always came back stronger.
+
+My parents didn't see how much their help hurt me, and I didn't have the heart to tell them. Their enabling wasn't because they didn't care — it was because they cared too much. They couldn't stand to watch me suffer, and I knew exactly how to use that. That's one of the ugliest truths about addiction: you learn to weaponize people's love while pretending not to notice.
+
+**When the Lies Stopped Working**
+
+It wasn't one big event that brought me to a breaking point. No overdose, no jail time, no tragic loss. It was just the quiet, crushing realization that I couldn't do this anymore. One morning, I woke up in my car — engine off, seat reclined, a fast-food bag on the floor, my phone dead again. The sun had just come up, but I couldn't remember the day before.
+
+For the first time, the thought that hit me wasn't "I need to get more." It was "I can't live like this anymore."
+
+That moment wasn't loud or dramatic. It wasn't "rock bottom." It was emptiness — the kind that stretches past despair and lands in truth. I saw myself clearly for the first time in years: a guy who'd burned every bridge and still kept lighting matches out of habit.
+
+I didn't cry. I didn't shout. I just sat there, staring out the windshield, realizing how small my world had become. No friends I could call who wouldn't be high. No job I could go back to. Just me, the stale stink of smoke, and the thought that something had to change.
+
+**The First Real Decision**
+
+Asking for help is supposed to feel courageous, but in that moment, it mostly felt like surrender. I picked up my phone, plugged it into the charger, and stared at the screen for a while. The first person I thought of was my mom. I knew she'd answer. She always did.
+
+When she picked up, her voice was tired and cautious, the way it gets when you've hoped too many times and been disappointed every time before.
+
+"Mom," I said, "I think I need help."
+
+Silence hung there for a few seconds. Then I heard her crying — quietly, like she didn't want to scare the moment away. She asked if I was safe. I told her yes, though I wasn't really sure. She asked what I wanted to do, and for the first time in a long time, I said the truth: "I don't know. But I can't keep doing this."
+
+That simple sentence felt heavier than years of addiction. It wasn't an apology, and it wasn't a promise. It was just honesty — stripped, trembling, real.
+
+**Fear and Hope**
+
+The days that followed were terrifying. Rehab brochures, detox talk, phone calls with strangers asking intake questions — all of it felt surreal. Every step toward help made the voice in my head scream, Who are you without this? What happens when the numbness is gone?
+
+But something else came with that fear: a flicker of hope. For the first time, I wasn't lying to anyone. Not my mom. Not my dad. Not myself. That felt strange and clean — like breathing air after living underwater.
+
+The same people who once tried to reach me, who I ignored or pushed away, were suddenly standing around me again. My dad offered to drive me to my first appointment. My sister texted me pictures of us from when we were kids. My old best friend, the one who'd never stopped checking in, showed up at the door just to say he was proud of me.
+
+And those invisible moments — all the times they had tried to reach me before — they came back to me, one by one. I realized they hadn't failed. I just wasn't ready. Their words had settled deep inside me, soft and patient, waiting for the day I could finally hear them.
+
+**Where I Am Now**
+
+I'm only a few weeks into this new chapter, and it's hard. Harder than any binge, any withdrawal, any lie I've ever told. But there's something different about this pain — it feels alive. It feels like something that might actually lead somewhere.
+
+Sometimes I wake up scared — not of relapsing, but of who I might become without my old crutches. Other times, I wake up hopeful — because maybe, just maybe, there's still a life waiting for me that hasn't been written yet.
+
+I don't know what the future looks like. But I know that for the first time in years, I want one. And maybe that's enough to start with.`
+  },
+  {
     id: 24,
     title: "Essential Questions to Ask When Choosing an Addiction Treatment Center",
     excerpt: "Choosing the right addiction treatment center can transform a family's crisis into a pathway for lasting recovery. By asking targeted questions about accreditation, staff expertise, family involvement, and aftercare, families empower themselves to select programs that align with their loved one's needs.",
