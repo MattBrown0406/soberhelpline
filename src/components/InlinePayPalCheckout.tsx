@@ -28,11 +28,12 @@ function getSubscriptionPlans(category: string): PlanOptions {
     case 'Inpatient Treatment':
     case 'Outpatient Treatment':
     case 'Medical Detox':
+    case 'Sober Living':
       return {
         monthly: {
           id: 'treatment-monthly',
           name: 'Treatment Provider',
-          price: '500.00',
+          price: '100.00',
           period: '/month',
           billingCycle: 'monthly',
           features: [
@@ -46,7 +47,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
         annual: {
           id: 'treatment-annual',
           name: 'Treatment Provider (Annual)',
-          price: '5000.00',
+          price: '1000.00',
           period: '/year',
           billingCycle: 'annual',
           features: [
@@ -55,39 +56,7 @@ function getSubscriptionPlans(category: string): PlanOptions {
             'Display your services',
             'Contact information visible',
             '2 FREE MONTHS included!',
-            'Best value - Save $1,000',
-          ],
-        },
-      };
-    case 'Sober Living':
-      return {
-        monthly: {
-          id: 'sober-living-monthly',
-          name: 'Sober Living Provider',
-          price: '250.00',
-          period: '/month',
-          billingCycle: 'monthly',
-          features: [
-            'Listed in provider directory',
-            'Searchable by location',
-            'Display your services',
-            'Contact information visible',
-            'Cancel anytime',
-          ],
-        },
-        annual: {
-          id: 'sober-living-annual',
-          name: 'Sober Living Provider (Annual)',
-          price: '2500.00',
-          period: '/year',
-          billingCycle: 'annual',
-          features: [
-            'Listed in provider directory',
-            'Searchable by location',
-            'Display your services',
-            'Contact information visible',
-            '2 FREE MONTHS included!',
-            'Best value - Save $500',
+            'Best value - Save $200',
           ],
         },
       };
@@ -283,11 +252,9 @@ export function InlinePayPalCheckout({
             >
               Annual
               <Badge className="absolute -top-2 -right-2 bg-green-500 text-xs px-1.5">
-                {category === 'Inpatient Treatment' || category === 'Outpatient Treatment' || category === 'Medical Detox' 
-                  ? 'Save $1K' 
-                  : category === 'Sober Living' 
-                    ? 'Save $500' 
-                    : 'Save $50'}
+                {['Inpatient Treatment', 'Outpatient Treatment', 'Medical Detox', 'Sober Living'].includes(category)
+                  ? 'Save $200' 
+                  : 'Save $50'}
               </Badge>
             </Button>
           </div>
