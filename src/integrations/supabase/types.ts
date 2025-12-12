@@ -51,7 +51,6 @@ export type Database = {
           clicked_at: string
           country: string | null
           id: string
-          ip_address: string | null
           provider_id: string
           referrer: string | null
           region: string | null
@@ -64,7 +63,6 @@ export type Database = {
           clicked_at?: string
           country?: string | null
           id?: string
-          ip_address?: string | null
           provider_id: string
           referrer?: string | null
           region?: string | null
@@ -77,7 +75,6 @@ export type Database = {
           clicked_at?: string
           country?: string | null
           id?: string
-          ip_address?: string | null
           provider_id?: string
           referrer?: string | null
           region?: string | null
