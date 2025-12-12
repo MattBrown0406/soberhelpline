@@ -32,12 +32,99 @@ import choosingTreatmentCenterImg from "@/assets/blog-choosing-treatment-center.
 import delta8SyntheticDangersImg from "@/assets/blog-delta8-synthetic-dangers.png";
 import rockBottomMythImg from "@/assets/blog-rock-bottom-myth.png";
 import interventionsUniteFamiliesImg from "@/assets/blog-interventions-unite-families.png";
+import couplesRecoveryAlcoholismImg from "@/assets/blog-couples-recovery-alcoholism.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 29,
+    title: "Rebuilding Your Relationship After Alcoholism: A Couples Guide to Recovery",
+    excerpt: "Couples who survive alcoholism and recovery face a second mountain: learning how to be in a relationship again without alcohol running the show. Recovery changes both partners, not just the one who put the drink down.",
+    author: "Sober Helpline",
+    date: "2025-12-12",
+    category: "Family Support",
+    image: couplesRecoveryAlcoholismImg,
+    content: `**Rebuilding Your Relationship After Alcoholism: A Couples Guide to Recovery**
+
+Couples who survive alcoholism and recovery face a second mountain: learning how to be in a relationship again without alcohol running the show. Recovery changes both partners, not just the one who put the drink down. This phase can be incredibly hopeful—and incredibly fragile.
+
+**How Alcoholism Reshapes Relationships**
+
+Alcohol misuse often brings secrecy, broken promises, financial strain, emotional distance, and sometimes safety concerns into a relationship. Over time, both partners adapt in unhealthy ways: one may become controlling or hypervigilant, while the other becomes evasive or withdrawn.
+
+Even when drinking stops, those patterns don't vanish overnight. Couples can feel like strangers trying to build a life together on a floor that just stopped shaking.
+
+**Early Sobriety: Why Timing Matters**
+
+The first year of sobriety is a high-risk period for relapse, so recovery work has to come first, even before "fixing the relationship." Many clinicians recommend that the partner in recovery stabilize with treatment, peer support, and healthy routines before the couple takes on major decisions or conflicts.
+
+This doesn't mean the non-addicted partner waits in silence. It means relationship talks are paced, not avoided—handled in small, honest doses instead of explosive showdowns.
+
+**Key Challenges Couples Face**
+
+Common pain points in couples' recovery include:
+
+• Mistrust after years of lies or broken promises
+• Money problems from past spending on alcohol, debt, or lost work
+• Sexual and emotional intimacy feeling awkward, numb, or flooded
+• Role confusion—one partner used to "parent," the other used to hide
+• Fear of relapse shaping every disagreement or night out
+
+Naming these challenges out loud helps both partners see the problem as "us versus the illness," not "me versus you."
+
+**Tools That Help Couples Heal**
+
+Evidence-based approaches like Behavioral Couples Therapy (BCT) for alcohol and drug problems show that involving partners directly in recovery can improve both sobriety and relationship satisfaction. BCT typically focuses on:
+
+• Making daily "recovery contracts" (for example, no drinking plus a brief check-in)
+• Practicing specific communication skills in session
+• Planning sober activities and routines together
+
+Outside formal therapy, couples benefit from simple habits: regular check-ins, shared calendars for meetings and appointments, and agreed-upon scripts for handling cravings or triggers.
+
+**Communication Without Walking on Eggs**
+
+Healthy communication in recovery is honest, but not brutal. Helpful guidelines include:
+
+• Use "I feel" instead of "You always" to lower defensiveness
+• Choose calm times, not crisis moments, for big conversations
+• Set time limits so talks don't spiral into all-night interrogations
+
+The partner in recovery needs space to share urges, shame, or stress without fearing instant punishment. The other partner needs permission to express fear and anger without being told they're "holding the past over your head."
+
+**Boundaries, Not Surveillance**
+
+Boundaries protect both people; surveillance slowly destroys trust. Healthy boundaries might look like:
+
+• No alcohol in the home, or clear rules about where it's kept
+• No driving after any drinking, ever
+• Agreements about money management and transparency
+
+Surveillance—secretly checking phones, tracking every move, interrogating about every delay—may reduce anxiety for a moment but can keep the relationship locked in the old crisis posture. When safety is a real concern, outside help and clear safety plans are crucial.
+
+**Relapse Planning as a Team**
+
+Relapse is a risk with alcohol use disorder, even after long periods of sobriety. Couples who talk openly about this risk fare better than those who pretend it can't happen. A simple relapse plan usually includes:
+
+• Early warning signs both partners agree to watch for (isolation, skipped meetings, mood swings)
+• What the person in recovery will do if those signs show up (call sponsor, see therapist, increase meetings)
+• What the partner will and will not do—supporting treatment steps but not covering up or rescuing
+
+Treating a slip as data, not instant doom, helps both people re-engage with support quickly.
+
+**Where Couples Can Get Support**
+
+Couples do not have to figure this out alone. Options include:
+
+• Couples-based addiction treatment programs or therapists who use models like BCT
+• Family or couples sessions offered by many rehab and outpatient centers
+• Peer support for partners (<a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Al-Anon</a>, SMART Recovery Family & Friends) alongside AA or other groups for the person in recovery
+
+When both partners have somewhere to tell the truth, the relationship no longer has to carry the full weight of the illness.`,
+  },
   {
     id: 28,
     title: "One Common Goal, Many Different Roads: How Interventions Unite Families in Addiction Recovery",
