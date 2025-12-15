@@ -34,12 +34,56 @@ import rockBottomMythImg from "@/assets/blog-rock-bottom-myth.png";
 import interventionsUniteFamiliesImg from "@/assets/blog-interventions-unite-families.png";
 import couplesRecoveryAlcoholismImg from "@/assets/blog-couples-recovery-alcoholism.png";
 import enablingCodependencyImg from "@/assets/blog-enabling-codependency.png";
+import earlyRecoveryJourneyImg from "@/assets/blog-early-recovery-journey.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 31,
+    title: "Sobriety Is More Than Abstinence—What Families Often Misunderstand About Early Recovery",
+    excerpt: "When families hear the word sobriety, they often assume it simply means stopping the use of alcohol or drugs. While abstinence is a necessary starting point, sobriety is far more complex—and far more fragile—than many people realize.",
+    author: "Sober Helpline",
+    date: "2025-12-15",
+    category: "Family Support",
+    image: earlyRecoveryJourneyImg,
+    content: `**Sobriety Is More Than Abstinence—What Families Often Misunderstand About Early Recovery**
+
+When families hear the word sobriety, they often assume it simply means stopping the use of alcohol or drugs. While abstinence is a necessary starting point, sobriety is far more complex—and far more fragile—than many people realize. For individuals struggling with addiction, sobriety represents a fundamental shift in how they cope with stress, regulate emotions, and navigate relationships.
+
+Understanding what sobriety truly entails can help families set realistic expectations and provide more effective support.
+
+**Sobriety Is a Process, Not an Event**
+
+Stopping substance use removes a coping mechanism that may have been relied upon for years. In early sobriety, individuals often experience emotional volatility, irritability, fatigue, anxiety, and difficulty concentrating. These symptoms are not signs of failure; they are signs of adjustment.
+
+The brain and nervous system need time to recalibrate. During this period, people may appear withdrawn, defensive, or overwhelmed—even though they are technically "doing the right thing."
+
+**Emotional Sobriety Takes Time**
+
+One of the most overlooked aspects of recovery is emotional sobriety. Substances often numb feelings or suppress internal distress. When that numbing disappears, unresolved emotions surface.
+
+Without tools to manage emotions, early sobriety can feel unbearable. This is why therapy, structure, and accountability are essential—not optional.
+
+**Why Relapse Risk Is Highest Early On**
+
+Families are often surprised when relapse occurs after a period of abstinence. Early sobriety requires learning entirely new ways to cope with discomfort. Stress, conflict, or unexpected life events can quickly overwhelm someone without adequate support.
+
+Relapse does not mean sobriety was pointless. It often indicates that additional skills, structure, or treatment are needed.
+
+**How Families Can Support Sobriety**
+
+Helpful support includes:
+
+• Encouraging structure and routine
+• Supporting therapy and ongoing care
+• Avoiding pressure to "be back to normal" quickly
+• Maintaining clear boundaries
+
+Sobriety is not about perfection. It is about consistency, accountability, and gradual growth. Families who understand this are better positioned to support lasting recovery.`
+  },
   {
     id: 30,
     title: "When Help Hurts: How Enabling and Codependency Sustain Addiction—and What Families Can Do Instead",
