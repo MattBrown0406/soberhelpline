@@ -243,7 +243,7 @@ export default function FamilySupport() {
                           Unlock Premium Member Resources
                         </h3>
                         <p className="text-muted-foreground mb-4">
-                          Join our family support membership for just $10/month to access:
+                          Join our family support membership for just $14.99/month to access:
                         </p>
                         <div className="grid gap-3 md:grid-cols-4 mb-6">
                           <div className="flex items-center gap-2">
@@ -265,7 +265,7 @@ export default function FamilySupport() {
                         </div>
                         <Link to="/family-membership">
                           <Button>
-                            Become a Member - $10/month
+                            Become a Member - $14.99/month
                           </Button>
                         </Link>
                       </div>
