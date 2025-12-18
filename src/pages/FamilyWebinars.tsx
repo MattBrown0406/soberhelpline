@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { Phone, ArrowLeft, Video, Calendar, Clock, Users, Lock, Loader2, PlayCircle, CheckCircle, Bell } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -99,6 +100,8 @@ export default function FamilyWebinars() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [userProfile, setUserProfile] = useState<{ first_name: string; last_name: string; email: string } | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -123,6 +126,7 @@ export default function FamilyWebinars() {
       }
 
       try {
+        // Check membership
         const { data, error } = await supabase
           .from('provider_subscriptions')
           .select('*')
@@ -137,6 +141,17 @@ export default function FamilyWebinars() {
         } else {
           setHasMembership(data && data.length > 0);
         }
+
+        // Fetch user profile for registration
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('first_name, last_name, email')
+          .eq('id', user.id)
+          .single();
+
+        if (profileData) {
+          setUserProfile(profileData);
+        }
       } catch (err) {
         console.error('Membership check failed:', err);
         setHasMembership(false);
@@ -147,6 +162,55 @@ export default function FamilyWebinars() {
 
     checkMembership();
   }, [user]);
+
+  const { toast } = useToast();
+
+  const handleWebinarRegistration = async () => {
+    if (!userProfile) {
+      toast({
+        title: "Profile not found",
+        description: "Please complete your profile to register.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsRegistering(true);
+    try {
+      const { error } = await supabase.functions.invoke('add-to-webinar-list', {
+        body: {
+          email: userProfile.email,
+          firstName: userProfile.first_name,
+          lastName: userProfile.last_name,
+          webinarTitle: upcomingWebinar.title,
+        },
+      });
+
+      if (error) {
+        console.error('Webinar registration error:', error);
+        toast({
+          title: "Registration failed",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      } else {
+        setIsRegistered(true);
+        toast({
+          title: "Registration successful!",
+          description: "You'll receive a reminder before the webinar.",
+        });
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
+      toast({
+        title: "Registration failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsRegistering(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -185,7 +249,7 @@ export default function FamilyWebinars() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to access live monthly webinars and our complete library of past recordings.
+                  Join our family support membership for just $14.99/month to access live monthly webinars and our complete library of past recordings.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">
@@ -281,9 +345,17 @@ export default function FamilyWebinars() {
                         <span className="font-medium">You're registered! We'll send you a reminder.</span>
                       </div>
                     ) : (
-                      <Button onClick={() => setIsRegistered(true)} className="gap-2">
-                        <Bell className="h-4 w-4" />
-                        Register for This Webinar
+                      <Button 
+                        onClick={handleWebinarRegistration} 
+                        className="gap-2"
+                        disabled={isRegistering}
+                      >
+                        {isRegistering ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Bell className="h-4 w-4" />
+                        )}
+                        {isRegistering ? "Registering..." : "Register for This Webinar"}
                       </Button>
                     )}
                   </div>
