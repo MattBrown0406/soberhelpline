@@ -34,8 +34,12 @@ export default function FamilySupport() {
         </header>
 
         {/* Premium Header Banner */}
-        <div className="bg-primary text-primary-foreground py-3 text-center">
-          <h2 className="text-lg md:text-xl font-semibold">Premium Family Support Resources</h2>
+        <div className="bg-primary text-primary-foreground py-4 text-center">
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Premium Family Support Resources</h2>
+          <p className="text-primary-foreground/90 text-sm md:text-base max-w-2xl mx-auto px-4">
+            Supporting a loved one through addiction is challenging. You don't have to do it alone. 
+            Find resources, guidance, and community support to help you and your family navigate this journey.
+          </p>
         </div>
 
         {/* Main Content */}
@@ -45,10 +49,6 @@ export default function FamilySupport() {
               <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
                 Free Family Support Resources
               </h1>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Supporting a loved one through addiction is challenging. You don't have to do it alone. 
-                Find resources, guidance, and community support to help you and your family navigate this journey.
-              </p>
             </div>
 
             {/* Resource Cards */}
