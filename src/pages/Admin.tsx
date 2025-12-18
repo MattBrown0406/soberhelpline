@@ -21,10 +21,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3 } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
+import { FamilyMemberManagement } from "@/components/admin/FamilyMemberManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -175,6 +176,10 @@ const Admin = () => {
         <Tabs defaultValue="submissions" className="space-y-6">
           <TabsList>
             <TabsTrigger value="submissions">Provider Submissions</TabsTrigger>
+            <TabsTrigger value="family-members" className="gap-2">
+              <Users className="h-4 w-4" />
+              Family Members
+            </TabsTrigger>
             <TabsTrigger value="analytics" className="gap-2">
               <BarChart3 className="h-4 w-4" />
               Click Analytics
@@ -326,6 +331,20 @@ const Admin = () => {
             )}
           </CardContent>
         </Card>
+          </TabsContent>
+
+          <TabsContent value="family-members">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Family Member Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <FamilyMemberManagement />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="analytics">

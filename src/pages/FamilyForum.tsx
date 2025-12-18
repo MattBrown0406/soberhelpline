@@ -8,6 +8,8 @@ import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
+import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
+import { toast } from "sonner";
 
 interface ForumTopic {
   id: string;
@@ -116,6 +118,8 @@ export default function FamilyForum() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
+  const [hasAgreedToCodeOfConduct, setHasAgreedToCodeOfConduct] = useState(false);
+  const [showCodeOfConduct, setShowCodeOfConduct] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -132,15 +136,17 @@ export default function FamilyForum() {
   }, []);
 
   useEffect(() => {
-    const checkMembership = async () => {
+    const checkMembershipAndCodeOfConduct = async () => {
       if (!user) {
         setHasMembership(false);
+        setHasAgreedToCodeOfConduct(false);
         setIsLoading(false);
         return;
       }
 
       try {
-        const { data, error } = await supabase
+        // Check membership
+        const { data: subData, error: subError } = await supabase
           .from('provider_subscriptions')
           .select('*')
           .eq('user_id', user.id)
@@ -148,22 +154,62 @@ export default function FamilyForum() {
           .is('provider_submission_id', null)
           .limit(1);
 
-        if (error) {
-          console.error('Error checking membership:', error);
+        if (subError) {
+          console.error('Error checking membership:', subError);
           setHasMembership(false);
         } else {
-          setHasMembership(data && data.length > 0);
+          setHasMembership(subData && subData.length > 0);
+        }
+
+        // Check code of conduct agreement
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
+          .select('agreed_to_code_of_conduct')
+          .eq('id', user.id)
+          .maybeSingle();
+
+        if (profileError) {
+          console.error('Error checking code of conduct:', profileError);
+        } else {
+          const agreed = profileData?.agreed_to_code_of_conduct === true;
+          setHasAgreedToCodeOfConduct(agreed);
+          if (!agreed && subData && subData.length > 0) {
+            setShowCodeOfConduct(true);
+          }
         }
       } catch (err) {
-        console.error('Membership check failed:', err);
+        console.error('Check failed:', err);
         setHasMembership(false);
       } finally {
         setIsLoading(false);
       }
     };
 
-    checkMembership();
+    checkMembershipAndCodeOfConduct();
   }, [user]);
+
+  const handleAgreeToCodeOfConduct = async () => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          agreed_to_code_of_conduct: true,
+          code_of_conduct_agreed_at: new Date().toISOString()
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
+
+      setHasAgreedToCodeOfConduct(true);
+      setShowCodeOfConduct(false);
+      toast.success("Welcome to the forum!");
+    } catch (err) {
+      console.error('Error updating code of conduct agreement:', err);
+      toast.error("Failed to save agreement. Please try again.");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -226,6 +272,11 @@ export default function FamilyForum() {
         <title>Family Discussion Forum | Sober Helpline</title>
         <meta name="description" content="Connect with other families supporting loved ones through addiction. Share experiences, ask questions, and find community." />
       </Helmet>
+
+      <CodeOfConductDialog 
+        open={showCodeOfConduct} 
+        onAgree={handleAgreeToCodeOfConduct} 
+      />
 
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur">
