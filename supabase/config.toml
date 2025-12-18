@@ -11,3 +11,6 @@ verify_jwt = true
 
 [functions.create-zoom-meeting]
 verify_jwt = true
+
+[functions.add-to-mailchimp]
+verify_jwt = true
