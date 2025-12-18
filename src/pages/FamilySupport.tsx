@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2 } from "lucide-react";
+import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2, Presentation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -125,7 +125,7 @@ export default function FamilySupport() {
                   </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-3 mb-8">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
                   {/* Family Education Videos */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>
@@ -146,6 +146,31 @@ export default function FamilySupport() {
                       <Link to="/family-videos">
                         <Button variant="outline" size="sm" className="w-full mt-4">
                           View All Videos
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+
+                  {/* Monthly Webinars */}
+                  <Card className="border-primary/30 bg-primary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                        <Presentation className="h-5 w-5 text-primary" />
+                        Monthly Webinars
+                      </CardTitle>
+                      <CardDescription>
+                        Live sessions with addiction specialists
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="space-y-2">
+                        <p className="text-sm text-muted-foreground">
+                          Join monthly live webinars with experts and access our library of past recordings.
+                        </p>
+                      </div>
+                      <Link to="/family-webinars">
+                        <Button variant="outline" size="sm" className="w-full mt-4">
+                          View Webinars
                         </Button>
                       </Link>
                     </CardContent>
@@ -220,10 +245,14 @@ export default function FamilySupport() {
                         <p className="text-muted-foreground mb-4">
                           Join our family support membership for just $10/month to access:
                         </p>
-                        <div className="grid gap-3 md:grid-cols-3 mb-6">
+                        <div className="grid gap-3 md:grid-cols-4 mb-6">
                           <div className="flex items-center gap-2">
                             <Video className="h-4 w-4 text-primary" />
                             <span className="text-sm">Education Videos</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Presentation className="h-4 w-4 text-primary" />
+                            <span className="text-sm">Monthly Webinars</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <MessagesSquare className="h-4 w-4 text-primary" />
