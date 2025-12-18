@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
+import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { toast } from "sonner";
 
 interface ForumTopic {
@@ -120,6 +121,7 @@ export default function FamilyForum() {
   const [hasMembership, setHasMembership] = useState(false);
   const [hasAgreedToCodeOfConduct, setHasAgreedToCodeOfConduct] = useState(false);
   const [showCodeOfConduct, setShowCodeOfConduct] = useState(false);
+  const [showReportDialog, setShowReportDialog] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -278,6 +280,11 @@ export default function FamilyForum() {
         onAgree={handleAgreeToCodeOfConduct} 
       />
 
+      <ReportContentDialog
+        open={showReportDialog}
+        onOpenChange={setShowReportDialog}
+      />
+
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur">
           <div className="container flex h-16 items-center justify-between">
@@ -401,7 +408,13 @@ export default function FamilyForum() {
                     <p>• Be respectful and supportive</p>
                     <p>• Maintain confidentiality</p>
                     <p>• No medical advice - consult professionals</p>
-                    <p>• Report concerning content</p>
+                    <button 
+                      onClick={() => setShowReportDialog(true)}
+                      className="text-left text-destructive hover:underline cursor-pointer flex items-center gap-1"
+                    >
+                      <Flag className="h-3 w-3" />
+                      Report concerning content
+                    </button>
                   </CardContent>
                 </Card>
               </div>

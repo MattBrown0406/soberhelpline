@@ -17,3 +17,6 @@ verify_jwt = true
 
 [functions.add-to-webinar-list]
 verify_jwt = true
+
+[functions.send-content-report]
+verify_jwt = true
