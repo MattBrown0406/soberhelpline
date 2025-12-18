@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
 import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
+import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { toast } from "sonner";
 
 interface ForumTopic {
@@ -122,6 +123,14 @@ export default function FamilyForum() {
   const [hasAgreedToCodeOfConduct, setHasAgreedToCodeOfConduct] = useState(false);
   const [showCodeOfConduct, setShowCodeOfConduct] = useState(false);
   const [showReportDialog, setShowReportDialog] = useState(false);
+  const [isModerator, setIsModerator] = useState(false);
+  const [showModeratorActions, setShowModeratorActions] = useState(false);
+  const [forumMembers, setForumMembers] = useState<Array<{
+    id: string;
+    username: string | null;
+    first_name: string;
+    last_name: string;
+  }>>([]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -142,6 +151,7 @@ export default function FamilyForum() {
       if (!user) {
         setHasMembership(false);
         setHasAgreedToCodeOfConduct(false);
+        setIsModerator(false);
         setIsLoading(false);
         return;
       }
@@ -179,6 +189,22 @@ export default function FamilyForum() {
             setShowCodeOfConduct(true);
           }
         }
+
+        // Check if user is a moderator
+        const { data: roleData, error: roleError } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', user.id)
+          .in('role', ['moderator', 'admin'])
+          .limit(1);
+
+        if (!roleError && roleData && roleData.length > 0) {
+          setIsModerator(true);
+          // Fetch forum members for moderator actions
+          fetchForumMembers(user.id);
+        } else {
+          setIsModerator(false);
+        }
       } catch (err) {
         console.error('Check failed:', err);
         setHasMembership(false);
@@ -189,6 +215,42 @@ export default function FamilyForum() {
 
     checkMembershipAndCodeOfConduct();
   }, [user]);
+
+  const fetchForumMembers = async (currentUserId: string) => {
+    try {
+      // Get all active family members
+      const { data: subscriptions, error: subError } = await supabase
+        .from('provider_subscriptions')
+        .select('user_id')
+        .is('provider_submission_id', null)
+        .eq('status', 'active');
+
+      if (subError) throw subError;
+
+      if (!subscriptions || subscriptions.length === 0) {
+        setForumMembers([]);
+        return;
+      }
+
+      const userIds = [...new Set(subscriptions.map(s => s.user_id))].filter(id => id !== currentUserId);
+
+      if (userIds.length === 0) {
+        setForumMembers([]);
+        return;
+      }
+
+      const { data: profiles, error: profileError } = await supabase
+        .from('profiles')
+        .select('id, username, first_name, last_name')
+        .in('id', userIds);
+
+      if (profileError) throw profileError;
+
+      setForumMembers(profiles || []);
+    } catch (error) {
+      console.error("Error fetching forum members:", error);
+    }
+  };
 
   const handleAgreeToCodeOfConduct = async () => {
     if (!user) return;
@@ -285,6 +347,12 @@ export default function FamilyForum() {
         onOpenChange={setShowReportDialog}
       />
 
+      <ModeratorActionsDialog
+        open={showModeratorActions}
+        onOpenChange={setShowModeratorActions}
+        members={forumMembers}
+      />
+
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur">
           <div className="container flex h-16 items-center justify-between">
@@ -308,20 +376,28 @@ export default function FamilyForum() {
               Back to Family Support
             </Link>
 
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Family Discussion Forum
-                </h1>
-                <p className="text-muted-foreground">
-                  Connect with other families who understand what you're going through.
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
+                    Family Discussion Forum
+                  </h1>
+                  <p className="text-muted-foreground">
+                    Connect with other families who understand what you're going through.
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  {isModerator && (
+                    <Button variant="outline" className="gap-2" onClick={() => setShowModeratorActions(true)}>
+                      <Shield className="h-4 w-4" />
+                      Moderator Actions
+                    </Button>
+                  )}
+                  <Button className="gap-2">
+                    <Plus className="h-4 w-4" />
+                    New Post
+                  </Button>
+                </div>
               </div>
-              <Button className="gap-2">
-                <Plus className="h-4 w-4" />
-                New Post
-              </Button>
-            </div>
 
             <div className="grid gap-8 lg:grid-cols-3">
               {/* Forum Topics */}
