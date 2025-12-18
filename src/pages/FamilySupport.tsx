@@ -1,11 +1,67 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, Heart, Users, Shield, BookOpen, MessageCircle } from "lucide-react";
+import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
 
 export default function FamilySupport() {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasMembership, setHasMembership] = useState(false);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Check for active family membership
+  useEffect(() => {
+    const checkMembership = async () => {
+      if (!user) {
+        setHasMembership(false);
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('provider_subscriptions')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('status', 'active')
+          .is('provider_submission_id', null)
+          .limit(1);
+
+        if (error) {
+          console.error('Error checking membership:', error);
+          setHasMembership(false);
+        } else {
+          setHasMembership(data && data.length > 0);
+        }
+      } catch (err) {
+        console.error('Membership check failed:', err);
+        setHasMembership(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkMembership();
+  }, [user]);
+
   return (
     <>
       <Helmet>
@@ -40,16 +96,187 @@ export default function FamilySupport() {
             Supporting a loved one through addiction is challenging. You don't have to do it alone. 
             Find resources, guidance, and community support to help you and your family navigate this journey.
           </p>
-          <Link to="/family-membership">
-            <Button variant="secondary" size="sm" className="font-semibold">
-              Create a Member Account
-            </Button>
-          </Link>
+          {!hasMembership && (
+            <Link to="/family-membership">
+              <Button variant="secondary" size="sm" className="font-semibold">
+                Create a Member Account
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Main Content */}
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
+            
+            {/* Premium Member Content Section */}
+            {isLoading ? (
+              <div className="flex justify-center py-8">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              </div>
+            ) : hasMembership ? (
+              <div className="mb-12">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-2">
+                    Welcome, Member!
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Access your exclusive premium resources below.
+                  </p>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-3 mb-8">
+                  {/* Family Education Videos */}
+                  <Card className="border-primary/30 bg-primary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                        <Video className="h-5 w-5 text-primary" />
+                        Education Videos
+                      </CardTitle>
+                      <CardDescription>
+                        Expert-led video courses on addiction and recovery
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="space-y-2">
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Understanding Addiction: The Science →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Setting Healthy Boundaries →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Self-Care for Family Members →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Communication Strategies →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Preparing for an Intervention →
+                        </a>
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-4">
+                        View All Videos
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  {/* Discussion Forum */}
+                  <Card className="border-primary/30 bg-primary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                        <MessagesSquare className="h-5 w-5 text-primary" />
+                        Discussion Forum
+                      </CardTitle>
+                      <CardDescription>
+                        Connect with other families for support
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="space-y-2">
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Introductions & Welcome →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Share Your Story →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Ask the Community →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Recovery Wins & Celebrations →
+                        </a>
+                        <a href="#" className="block text-sm text-primary hover:underline">
+                          Resources & Recommendations →
+                        </a>
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-4">
+                        Join the Forum
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  {/* Schedule Zoom Call */}
+                  <Card className="border-primary/30 bg-primary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                        <Calendar className="h-5 w-5 text-primary" />
+                        1-on-1 Consultation
+                      </CardTitle>
+                      <CardDescription>
+                        Schedule a private call with an interventionist
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p className="text-sm text-muted-foreground">
+                        Get personalized guidance from a certified interventionist. Discuss your 
+                        situation, get advice on next steps, and create a plan for your family.
+                      </p>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• 30-minute private Zoom call</li>
+                        <li>• Confidential consultation</li>
+                        <li>• Personalized action plan</li>
+                      </ul>
+                      <a 
+                        href="https://calendly.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button className="w-full mt-4">
+                          <Calendar className="h-4 w-4 mr-2" />
+                          Schedule a Call
+                        </Button>
+                      </a>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="border-t border-border pt-8" />
+              </div>
+            ) : (
+              /* Non-member Premium Teaser */
+              <div className="mb-12">
+                <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
+                  <CardContent className="p-6 md:p-8">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-primary/10 rounded-full">
+                        <Lock className="h-6 w-6 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-logo-green mb-2">
+                          Unlock Premium Member Resources
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          Join our family support membership for just $10/month to access:
+                        </p>
+                        <div className="grid gap-3 md:grid-cols-3 mb-6">
+                          <div className="flex items-center gap-2">
+                            <Video className="h-4 w-4 text-primary" />
+                            <span className="text-sm">Education Videos</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MessagesSquare className="h-4 w-4 text-primary" />
+                            <span className="text-sm">Discussion Forum</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4 text-primary" />
+                            <span className="text-sm">1-on-1 Consultations</span>
+                          </div>
+                        </div>
+                        <Link to="/family-membership">
+                          <Button>
+                            Become a Member - $10/month
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Free Resources Section */}
             <div className="text-center mb-10">
               <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
                 Free Family Support Resources
