@@ -15,7 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Phone, Check, Loader2, Tag, CheckCircle2, Heart } from "lucide-react";
+import { ArrowLeft, Phone, Check, Loader2, Tag, CheckCircle2, Heart, UserCircle, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
@@ -25,6 +25,10 @@ import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 
 const membershipFormSchema = z.object({
+  username: z.string()
+    .min(3, "Username must be at least 3 characters")
+    .max(30, "Username must be less than 30 characters")
+    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
   firstName: z.string().min(2, "First name must be at least 2 characters").max(50),
   lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
   email: z.string().email("Valid email is required").max(255),
@@ -122,6 +126,7 @@ export default function FamilyMembership() {
   const form = useForm<MembershipFormValues>({
     resolver: zodResolver(membershipFormSchema),
     defaultValues: {
+      username: "",
       firstName: "",
       lastName: "",
       email: user?.email || "",
@@ -164,9 +169,19 @@ export default function FamilyMembership() {
           last_name: formData.lastName,
           email: formData.email,
           phone_number: formData.phoneNumber,
+          username: formData.username,
         });
 
       if (profileError) {
+        if (profileError.code === '23505') {
+          toast({
+            title: "Username taken",
+            description: "This username is already in use. Please choose another.",
+            variant: "destructive",
+          });
+          setProcessingPayment(false);
+          return;
+        }
         console.error('Profile update error:', profileError);
       }
 
@@ -297,6 +312,32 @@ export default function FamilyMembership() {
                     <CardDescription>Please provide your contact details</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    {/* Username Field */}
+                    <div className="bg-muted/50 p-4 rounded-lg border border-border">
+                      <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex items-center gap-2">
+                              <UserCircle className="h-4 w-4" />
+                              Choose a Username *
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="anonymous_helper" {...field} />
+                            </FormControl>
+                            <div className="flex items-start gap-2 mt-2">
+                              <Info className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                              <p className="text-xs text-muted-foreground">
+                                Your username will be displayed in the forum instead of your real name to protect your privacy.
+                              </p>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormField
                         control={form.control}
