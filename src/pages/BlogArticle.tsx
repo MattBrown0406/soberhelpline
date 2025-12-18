@@ -14,7 +14,11 @@ const BlogArticle = () => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   
-  const post = blogPosts.find(p => p.id.toString() === id);
+  // Check for slug-based route first, then fall back to id-based
+  const currentPath = window.location.pathname;
+  const post = blogPosts.find(p => 
+    (p as any).slug && `/${(p as any).slug}` === currentPath
+  ) || blogPosts.find(p => p.id.toString() === id);
 
   useEffect(() => {
     if (!post) {
@@ -127,16 +131,16 @@ const BlogArticle = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{post.title} - Sober Helpline</title>
-        <meta name="description" content={post.excerpt} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.excerpt} />
+        <title>{(post as any).seoTitle || post.title} - Sober Helpline</title>
+        <meta name="description" content={(post as any).metaDescription || post.excerpt} />
+        <meta property="og:title" content={(post as any).seoTitle || post.title} />
+        <meta property="og:description" content={(post as any).metaDescription || post.excerpt} />
         <meta property="og:image" content={fullImageUrl} />
         <meta property="og:url" content={window.location.href} />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:title" content={(post as any).seoTitle || post.title} />
+        <meta name="twitter:description" content={(post as any).metaDescription || post.excerpt} />
         <meta name="twitter:image" content={fullImageUrl} />
       </Helmet>
 

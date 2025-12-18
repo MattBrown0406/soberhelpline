@@ -53,6 +53,7 @@ const App = () => (
             <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogArticle />} />
+            <Route path="/fentanyl-overdose-signs-safety-plan" element={<BlogArticle />} />
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />

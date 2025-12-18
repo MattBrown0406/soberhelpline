@@ -37,12 +37,131 @@ import enablingCodependencyImg from "@/assets/blog-enabling-codependency.png";
 import earlyRecoveryJourneyImg from "@/assets/blog-early-recovery-journey.png";
 import soberHelplineFirstStepImg from "@/assets/blog-sober-helpline-first-step.png";
 import treatingWholePersonImg from "@/assets/blog-treating-whole-person.png";
+import fentanylOverdoseSafetyImg from "@/assets/blog-fentanyl-overdose-safety.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 34,
+    title: "Fentanyl and Overdose Risk—A Family Safety Plan That Can Save a Life",
+    excerpt: "Fentanyl overdose can happen fast. Learn signs of opioid overdose, what to do immediately, how naloxone works, and how families can plan ahead.",
+    author: "Sober Helpline",
+    date: "2025-12-18",
+    category: "Family Support",
+    image: fentanylOverdoseSafetyImg,
+    slug: "fentanyl-overdose-signs-safety-plan",
+    seoTitle: "Fentanyl Overdose Signs: A Family Safety Plan (911 + Naloxone)",
+    metaDescription: "Fentanyl overdose can happen fast. Learn signs of opioid overdose, what to do immediately, how naloxone works, and how families can plan ahead.",
+    content: `**Fentanyl and Overdose Risk—A Family Safety Plan That Can Save a Life**
+
+**The New Reality Families Are Facing**
+
+Many families still imagine overdose risk as something that happens only to "hardcore" opioid users. But fentanyl has changed the landscape. Overdose risk can affect people using heroin, counterfeit pills, or drugs contaminated without the person's knowledge.
+
+Families need two things at the same time:
+
+• Hope for long-term recovery
+• A short-term safety plan for today
+
+This article focuses on the safety plan—because you can't recover if you don't survive.
+
+**Step One: Know the Most Common Signs of Opioid Overdose**
+
+The [CDC](https://www.cdc.gov/overdose-prevention/about/opioid-overdose.html) emphasizes that naloxone can reverse an opioid overdose (including fentanyl) when given in time. But first you have to recognize the emergency.
+
+Common overdose warning signs include:
+
+• Slow, shallow, or stopped breathing
+• Unresponsiveness (won't wake up, can't stay awake)
+• Blue/gray lips or fingertips
+• Snoring or gurgling sounds
+• Limp body, pale or clammy skin
+
+If you suspect an overdose, treat it as real. Don't wait for certainty.
+
+**Step Two: What to Do Immediately (The "Do This Now" List)**
+
+1. Call emergency services (911 in the U.S.)
+2. Try to wake them (loud voice, firm rub on the sternum)
+3. Give naloxone if available
+4. Start rescue breathing/CPR if trained
+5. Stay until help arrives
+6. Give additional naloxone doses if needed (some overdoses require more than one dose)
+
+[SAMHSA's guidance](https://store.samhsa.gov/product/opioid-overdose-prevention-toolkit/sma18-4742) for first responders notes that all naloxone products are effective, including for fentanyl-involved overdoses, though more than one dose may be needed in some cases.
+
+**Step Three: Understand Naloxone (So Fear Doesn't Stop You)**
+
+Naloxone is a medication that can reverse opioid overdose by blocking opioid effects. CDC describes it as life-saving when administered in time.
+
+Families often hesitate because they fear:
+
+• "What if I'm wrong?"
+• "What if it hurts them?"
+• "What if they get angry?"
+
+In an emergency, the risk of doing nothing is far greater than the risk of acting. [MedlinePlus](https://medlineplus.gov/druginfo/meds/a612022.html) notes naloxone can work in minutes to reverse an overdose.
+
+**Step Four: Build a Simple Household Safety Plan**
+
+A safety plan doesn't mean you approve of drug use. It means you acknowledge reality and prepare for the worst day.
+
+Your family safety plan can include:
+
+• Keep naloxone accessible (not locked away in a back closet)
+• Teach household members where it is and how to use it
+• Keep emergency numbers visible
+• Agree on "no debate" rules: if overdose suspected, someone calls immediately
+• Remove shame from emergency response ("We'll argue later—right now we save a life.")
+
+If children are in the home, the plan should include age-appropriate safeguards and adult-only storage—balanced with quick access.
+
+**Step Five: Reduce Risk Without Enabling**
+
+Families often worry: "If I carry naloxone, am I enabling?"
+
+Not if you pair safety with boundaries.
+
+Examples:
+
+• "You cannot use in this home."
+• "I will not give you money."
+• "I will help you access professional support."
+• "If you are intoxicated, you cannot be around the kids."
+• "If you overdose, I will call for help every time."
+
+This is the "both/and" approach: compassion + accountability.
+
+**Step Six: After an Overdose Scare, Don't Go Back to Normal**
+
+Near-overdoses and emergency calls often create a brief window of openness. Families can use that window to move toward real help.
+
+Helpful next steps:
+
+• A clinical assessment
+• Family counseling focused on boundaries and communication
+• A structured recovery plan (not just promises)
+• Ongoing support for loved ones impacted by trauma and fear
+
+[SAMHSA](https://www.samhsa.gov/families) highlights the role of family support and coping resources for families dealing with mental and substance use disorders.
+
+**What Families Need to Hear (Even If It's Hard)**
+
+If fentanyl risk is part of your world right now, you may be living in constant panic—sleeping lightly, checking breathing, scanning text messages, waiting for "the call."
+
+That stress is real. You deserve support too.
+
+A sober helpline can help you:
+
+• Build a clear, realistic safety plan
+• Prepare boundaries that reduce chaos
+• Identify next steps that fit your family's situation
+
+You don't have to choose between loving them and protecting yourself. You can do both.`
+  },
   {
     id: 33,
     title: "Why Sobriety Alone Is Not Enough — The Importance of Treating the Whole Person in Recovery",
