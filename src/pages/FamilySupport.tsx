@@ -139,25 +139,15 @@ export default function FamilySupport() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Understanding Addiction: The Science →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Setting Healthy Boundaries →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Self-Care for Family Members →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Communication Strategies →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Preparing for an Intervention →
-                        </a>
+                        <p className="text-sm text-muted-foreground">
+                          Access our library of educational videos covering topics like understanding addiction, setting boundaries, and self-care.
+                        </p>
                       </div>
-                      <Button variant="outline" size="sm" className="w-full mt-4">
-                        View All Videos
-                      </Button>
+                      <Link to="/family-videos">
+                        <Button variant="outline" size="sm" className="w-full mt-4">
+                          View All Videos
+                        </Button>
+                      </Link>
                     </CardContent>
                   </Card>
 
@@ -174,25 +164,15 @@ export default function FamilySupport() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Introductions & Welcome →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Share Your Story →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Ask the Community →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Recovery Wins & Celebrations →
-                        </a>
-                        <a href="#" className="block text-sm text-primary hover:underline">
-                          Resources & Recommendations →
-                        </a>
+                        <p className="text-sm text-muted-foreground">
+                          Join our community forum to share experiences, ask questions, and connect with families who understand.
+                        </p>
                       </div>
-                      <Button variant="outline" size="sm" className="w-full mt-4">
-                        Join the Forum
-                      </Button>
+                      <Link to="/family-forum">
+                        <Button variant="outline" size="sm" className="w-full mt-4">
+                          Join the Forum
+                        </Button>
+                      </Link>
                     </CardContent>
                   </Card>
 
@@ -212,22 +192,12 @@ export default function FamilySupport() {
                         Get personalized guidance from a certified interventionist. Discuss your 
                         situation, get advice on next steps, and create a plan for your family.
                       </p>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• 30-minute private Zoom call</li>
-                        <li>• Confidential consultation</li>
-                        <li>• Personalized action plan</li>
-                      </ul>
-                      <a 
-                        href="https://calendly.com" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="block"
-                      >
+                      <Link to="/family-consultation">
                         <Button className="w-full mt-4">
                           <Calendar className="h-4 w-4 mr-2" />
                           Schedule a Call
                         </Button>
-                      </a>
+                      </Link>
                     </CardContent>
                   </Card>
                 </div>
