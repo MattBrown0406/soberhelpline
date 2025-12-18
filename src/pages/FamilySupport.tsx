@@ -36,10 +36,15 @@ export default function FamilySupport() {
         {/* Premium Header Banner */}
         <div className="bg-primary text-primary-foreground py-4 text-center">
           <h2 className="text-lg md:text-xl font-semibold mb-2">Premium Family Support Resources</h2>
-          <p className="text-primary-foreground/90 text-sm md:text-base max-w-2xl mx-auto px-4">
+          <p className="text-primary-foreground/90 text-sm md:text-base max-w-2xl mx-auto px-4 mb-3">
             Supporting a loved one through addiction is challenging. You don't have to do it alone. 
             Find resources, guidance, and community support to help you and your family navigate this journey.
           </p>
+          <Link to="/family-membership">
+            <Button variant="secondary" size="sm" className="font-semibold">
+              Create a Member Account
+            </Button>
+          </Link>
         </div>
 
         {/* Main Content */}

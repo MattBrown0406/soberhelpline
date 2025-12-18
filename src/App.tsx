@@ -26,6 +26,7 @@ import AddictionAssessment from "./pages/AddictionAssessment";
 import FAQs from "./pages/FAQs";
 import FamilySupport from "./pages/FamilySupport";
 import UnderstandingAddiction from "./pages/UnderstandingAddiction";
+import FamilyMembership from "./pages/FamilyMembership";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />
+            <Route path="/family-membership" element={<FamilyMembership />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
