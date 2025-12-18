@@ -26,6 +26,7 @@ export type Database = {
           phone_number: string
           updated_at: string | null
           username: string | null
+          webinar_reminders_opted_in: boolean | null
         }
         Insert: {
           agreed_to_code_of_conduct?: boolean | null
@@ -38,6 +39,7 @@ export type Database = {
           phone_number: string
           updated_at?: string | null
           username?: string | null
+          webinar_reminders_opted_in?: boolean | null
         }
         Update: {
           agreed_to_code_of_conduct?: boolean | null
@@ -50,6 +52,7 @@ export type Database = {
           phone_number?: string
           updated_at?: string | null
           username?: string | null
+          webinar_reminders_opted_in?: boolean | null
         }
         Relationships: []
       }
