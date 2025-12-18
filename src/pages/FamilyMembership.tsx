@@ -56,7 +56,7 @@ const usStates = [
 const membershipPlan = {
   id: 'family-membership-monthly',
   name: 'Family Support Membership',
-  price: '10.00',
+  price: '14.99',
   period: '/month',
   billingCycle: 'monthly' as const,
   features: [
