@@ -33,6 +33,11 @@ export default function FamilySupport() {
           </div>
         </header>
 
+        {/* Premium Header Banner */}
+        <div className="bg-primary text-primary-foreground py-3 text-center">
+          <h2 className="text-lg md:text-xl font-semibold">Premium Family Support Resources</h2>
+        </div>
+
         {/* Main Content */}
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
