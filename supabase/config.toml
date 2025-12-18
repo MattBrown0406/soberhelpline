@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.paypal-subscriptions]
 verify_jwt = true
+
+[functions.create-zoom-meeting]
+verify_jwt = true
