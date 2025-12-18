@@ -22,6 +22,7 @@ import { User, Session } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
 import { usePayPalSubscription } from "@/hooks/usePayPalSubscription";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Helmet } from "react-helmet-async";
 
 const membershipFormSchema = z.object({
@@ -77,6 +78,7 @@ export default function FamilyMembership() {
   const [discountCode, setDiscountCode] = useState('');
   const [freeListingActivated, setFreeListingActivated] = useState(false);
   const [processingPayment, setProcessingPayment] = useState(false);
+  const [webinarRemindersOptIn, setWebinarRemindersOptIn] = useState(false);
   
   const { createSubscription, isLoading: paypalLoading, paypalUrl, clearPaypalUrl } = usePayPalSubscription();
 
@@ -170,6 +172,7 @@ export default function FamilyMembership() {
           email: formData.email,
           phone_number: formData.phoneNumber,
           username: formData.username,
+          webinar_reminders_opted_in: webinarRemindersOptIn,
         });
 
       if (profileError) {
@@ -380,6 +383,26 @@ export default function FamilyMembership() {
                         </FormItem>
                       )}
                     />
+
+                    {/* Webinar Reminders Opt-in */}
+                    <div className="flex items-start space-x-3 pl-1">
+                      <Checkbox
+                        id="webinar-reminders"
+                        checked={webinarRemindersOptIn}
+                        onCheckedChange={(checked) => setWebinarRemindersOptIn(checked === true)}
+                      />
+                      <div className="grid gap-1.5 leading-none">
+                        <Label 
+                          htmlFor="webinar-reminders" 
+                          className="text-sm font-normal cursor-pointer"
+                        >
+                          Send me reminders for upcoming webinars and special education sessions
+                        </Label>
+                        <p className="text-xs text-muted-foreground">
+                          You can unsubscribe at any time from your account settings.
+                        </p>
+                      </div>
+                    </div>
 
                     <FormField
                       control={form.control}
