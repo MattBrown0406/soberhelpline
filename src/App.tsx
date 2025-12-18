@@ -31,6 +31,7 @@ import FamilyVideos from "./pages/FamilyVideos";
 import FamilyForum from "./pages/FamilyForum";
 import FamilyConsultation from "./pages/FamilyConsultation";
 import FamilyWebinars from "./pages/FamilyWebinars";
+import ForumTopic from "./pages/ForumTopic";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -66,6 +67,7 @@ const App = () => (
             <Route path="/family-membership" element={<FamilyMembership />} />
             <Route path="/family-videos" element={<FamilyVideos />} />
             <Route path="/family-forum" element={<FamilyForum />} />
+            <Route path="/family-forum/:topicId" element={<ForumTopic />} />
             <Route path="/family-consultation" element={<FamilyConsultation />} />
             <Route path="/family-webinars" element={<FamilyWebinars />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />

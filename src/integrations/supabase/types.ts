@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      forum_posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          parent_post_id: string | null
+          title: string | null
+          topic_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_posts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       member_warnings: {
         Row: {
           admin_notes: string | null
