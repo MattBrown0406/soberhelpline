@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ import { User } from "@supabase/supabase-js";
 import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
 import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
+import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
 import { toast } from "sonner";
 
 interface ForumTopic {
@@ -125,6 +126,7 @@ export default function FamilyForum() {
   const [showReportDialog, setShowReportDialog] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
   const [showModeratorActions, setShowModeratorActions] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
   const [forumMembers, setForumMembers] = useState<Array<{
     id: string;
     username: string | null;
@@ -353,6 +355,14 @@ export default function FamilyForum() {
         members={forumMembers}
       />
 
+      {user && (
+        <PrivateMessagesDialog
+          open={showMessages}
+          onOpenChange={setShowMessages}
+          currentUserId={user.id}
+        />
+      )}
+
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur">
           <div className="container flex h-16 items-center justify-between">
@@ -386,6 +396,10 @@ export default function FamilyForum() {
                   </p>
                 </div>
                 <div className="flex gap-2">
+                  <Button variant="outline" className="gap-2" onClick={() => setShowMessages(true)}>
+                    <Mail className="h-4 w-4" />
+                    Messages
+                  </Button>
                   {isModerator && (
                     <Button variant="outline" className="gap-2" onClick={() => setShowModeratorActions(true)}>
                       <Shield className="h-4 w-4" />
