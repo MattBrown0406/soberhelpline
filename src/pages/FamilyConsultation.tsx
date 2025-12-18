@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Calendar, Clock, Video, User, Lock, Loader2, Check } 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,9 +13,17 @@ import { User as SupabaseUser } from "@supabase/supabase-js";
 interface TimeSlot {
   id: string;
   date: string;
+  fullDate: Date;
   dayOfWeek: string;
   time: string;
   available: boolean;
+}
+
+interface ZoomMeetingDetails {
+  joinUrl: string;
+  meetingId: string;
+  password?: string;
+  startTime: string;
 }
 
 // Generate sample time slots for the next 7 days
@@ -33,9 +42,20 @@ function generateTimeSlots(): TimeSlot[] {
     if (dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday') continue;
     
     times.forEach((time, index) => {
+      // Parse time to create full date
+      const [hourStr, period] = time.split(' ');
+      const [hours, minutes] = hourStr.split(':').map(Number);
+      let hour24 = hours;
+      if (period === 'PM' && hours !== 12) hour24 += 12;
+      if (period === 'AM' && hours === 12) hour24 = 0;
+      
+      const fullDate = new Date(date);
+      fullDate.setHours(hour24, minutes || 0, 0, 0);
+      
       slots.push({
         id: `${i}-${index}`,
         date: dateStr,
+        fullDate,
         dayOfWeek,
         time,
         available: Math.random() > 0.3 // Randomly mark some as unavailable
@@ -48,6 +68,7 @@ function generateTimeSlots(): TimeSlot[] {
 
 export default function FamilyConsultation() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
@@ -55,6 +76,8 @@ export default function FamilyConsultation() {
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [isBooking, setIsBooking] = useState(false);
+  const [zoomDetails, setZoomDetails] = useState<ZoomMeetingDetails | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -109,9 +132,52 @@ export default function FamilyConsultation() {
     ? timeSlots.filter(slot => slot.date === selectedDate)
     : [];
 
-  const handleBooking = () => {
-    if (selectedSlot) {
+  const handleBooking = async () => {
+    if (!selectedSlot || !user) return;
+    
+    setIsBooking(true);
+    
+    try {
+      // Create Zoom meeting
+      const { data, error } = await supabase.functions.invoke('create-zoom-meeting', {
+        body: {
+          topic: 'Family Support Consultation - Sober Helpline',
+          startTime: selectedSlot.fullDate.toISOString(),
+          duration: 30,
+          userEmail: user.email,
+        },
+      });
+
+      if (error) {
+        throw new Error(error.message || 'Failed to create Zoom meeting');
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to create Zoom meeting');
+      }
+
+      setZoomDetails({
+        joinUrl: data.joinUrl,
+        meetingId: data.meetingId,
+        password: data.password,
+        startTime: data.startTime,
+      });
+      
       setBookingConfirmed(true);
+      
+      toast({
+        title: 'Consultation Booked!',
+        description: 'Your Zoom meeting has been scheduled.',
+      });
+    } catch (error) {
+      console.error('Booking error:', error);
+      toast({
+        title: 'Booking Failed',
+        description: error instanceof Error ? error.message : 'Failed to book consultation',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsBooking(false);
     }
   };
 
@@ -196,7 +262,7 @@ export default function FamilyConsultation() {
                 </div>
                 <CardTitle className="text-2xl text-green-600">Consultation Booked!</CardTitle>
                 <CardDescription>
-                  Your appointment has been confirmed.
+                  Your Zoom meeting has been scheduled.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -223,11 +289,34 @@ export default function FamilyConsultation() {
                     </div>
                   </div>
                 </div>
+                
+                {zoomDetails && (
+                  <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg space-y-3">
+                    <h4 className="font-semibold text-blue-900">Zoom Meeting Details</h4>
+                    <div className="text-sm space-y-2">
+                      <p><span className="text-blue-700">Meeting ID:</span> {zoomDetails.meetingId}</p>
+                      {zoomDetails.password && (
+                        <p><span className="text-blue-700">Password:</span> {zoomDetails.password}</p>
+                      )}
+                    </div>
+                    <a 
+                      href={zoomDetails.joinUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        <Video className="h-4 w-4 mr-2" />
+                        Join Zoom Meeting
+                      </Button>
+                    </a>
+                  </div>
+                )}
+                
                 <p className="text-sm text-muted-foreground text-center">
                   A confirmation email with Zoom details has been sent to your email address.
                 </p>
                 <Link to="/family-support">
-                  <Button className="w-full">Back to Family Support</Button>
+                  <Button variant="outline" className="w-full">Back to Family Support</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -397,12 +486,26 @@ export default function FamilyConsultation() {
                     </div>
                     <Badge variant="secondary">30 min</Badge>
                   </div>
-                  <Button className="w-full" size="lg" onClick={handleBooking}>
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Confirm Booking
+                  <Button 
+                    className="w-full" 
+                    size="lg" 
+                    onClick={handleBooking}
+                    disabled={isBooking}
+                  >
+                    {isBooking ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Creating Zoom Meeting...
+                      </>
+                    ) : (
+                      <>
+                        <Calendar className="h-4 w-4 mr-2" />
+                        Confirm Booking
+                      </>
+                    )}
                   </Button>
                   <p className="text-sm text-muted-foreground text-center">
-                    You'll receive a confirmation email with Zoom details.
+                    A Zoom meeting will be created and you'll receive the join link immediately.
                   </p>
                 </CardContent>
               </Card>
