@@ -25,6 +25,13 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Helmet } from "react-helmet-async";
 
+const referralSources = [
+  "Facebook",
+  "TikTok", 
+  "InterventionOnCall.com",
+  "Word of Mouth",
+];
+
 const membershipFormSchema = z.object({
   username: z.string()
     .min(3, "Username must be at least 3 characters")
@@ -36,6 +43,7 @@ const membershipFormSchema = z.object({
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   city: z.string().min(2, "City is required").max(100),
   state: z.string().min(2, "State is required").max(50),
+  referralSource: z.string().min(1, "Please let us know how you heard about us"),
 });
 
 type MembershipFormValues = z.infer<typeof membershipFormSchema>;
@@ -135,6 +143,7 @@ export default function FamilyMembership() {
       phoneNumber: "",
       city: "",
       state: "",
+      referralSource: "",
     },
   });
 
@@ -478,6 +487,31 @@ export default function FamilyMembership() {
                         )}
                       />
                     </div>
+
+                    {/* How did you hear about us */}
+                    <FormField
+                      control={form.control}
+                      name="referralSource"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>How did you hear about us? *</FormLabel>
+                          <FormControl>
+                            <select
+                              {...field}
+                              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                            >
+                              <option value="">Select an option</option>
+                              {referralSources.map((source) => (
+                                <option key={source} value={source}>
+                                  {source}
+                                </option>
+                              ))}
+                            </select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </CardContent>
                 </Card>
 
