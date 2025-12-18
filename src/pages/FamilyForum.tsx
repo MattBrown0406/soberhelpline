@@ -405,26 +405,28 @@ export default function FamilyForum() {
                 <h2 className="text-xl font-semibold text-logo-green mb-4">Forum Topics</h2>
                 <div className="grid gap-4">
                   {forumTopics.map((topic) => (
-                    <Card key={topic.id} className="cursor-pointer hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <div className="flex items-start gap-4">
-                          <div className={`p-3 rounded-lg ${topic.color} text-white`}>
-                            {topic.icon}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between gap-2">
-                              <h3 className="font-semibold text-logo-green">{topic.title}</h3>
-                              <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                    <Link key={topic.id} to={`/family-forum/${topic.id}`}>
+                      <Card className="cursor-pointer hover:shadow-md transition-shadow">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-4">
+                            <div className={`p-3 rounded-lg ${topic.color} text-white`}>
+                              {topic.icon}
                             </div>
-                            <p className="text-sm text-muted-foreground mt-1">{topic.description}</p>
-                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                              <span>{topic.postCount} posts</span>
-                              <span>Last activity: {topic.lastActivity}</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <h3 className="font-semibold text-logo-green">{topic.title}</h3>
+                                <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                              </div>
+                              <p className="text-sm text-muted-foreground mt-1">{topic.description}</p>
+                              <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                                <span>{topic.postCount} posts</span>
+                                <span>Last activity: {topic.lastActivity}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </div>
