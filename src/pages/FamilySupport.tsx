@@ -9,7 +9,7 @@ export default function FamilySupport() {
   return (
     <>
       <Helmet>
-        <title>Family Support Resources | Sober Helpline</title>
+        <title>Free Family Support Resources | Sober Helpline</title>
         <meta
           name="description"
           content="Resources and support for families of individuals struggling with addiction. Find guidance, education, and community support to help your loved one on their recovery journey."
@@ -38,7 +38,7 @@ export default function FamilySupport() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Family Support Resources
+                Free Family Support Resources
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Supporting a loved one through addiction is challenging. You don't have to do it alone. 
