@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          agreed_to_code_of_conduct: boolean | null
+          code_of_conduct_agreed_at: string | null
           created_at: string | null
           email: string
           first_name: string
@@ -26,6 +28,8 @@ export type Database = {
           username: string | null
         }
         Insert: {
+          agreed_to_code_of_conduct?: boolean | null
+          code_of_conduct_agreed_at?: string | null
           created_at?: string | null
           email: string
           first_name: string
@@ -36,6 +40,8 @@ export type Database = {
           username?: string | null
         }
         Update: {
+          agreed_to_code_of_conduct?: boolean | null
+          code_of_conduct_agreed_at?: string | null
           created_at?: string | null
           email?: string
           first_name?: string
