@@ -188,6 +188,28 @@ export default function FamilyMembership() {
         console.error('Profile update error:', profileError);
       }
 
+      // Add to Mailchimp if opted in for webinar reminders
+      if (webinarRemindersOptIn) {
+        try {
+          const { error: mailchimpError } = await supabase.functions.invoke('add-to-mailchimp', {
+            body: {
+              email: formData.email,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+            },
+          });
+          
+          if (mailchimpError) {
+            console.error('Mailchimp error:', mailchimpError);
+            // Don't block subscription on Mailchimp failure
+          } else {
+            console.log('Successfully added to Mailchimp');
+          }
+        } catch (mailchimpErr) {
+          console.error('Mailchimp integration error:', mailchimpErr);
+        }
+      }
+
       // Create the subscription
       const result = await createSubscription({
         planType: 'monthly',
