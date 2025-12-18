@@ -38,12 +38,88 @@ import earlyRecoveryJourneyImg from "@/assets/blog-early-recovery-journey.png";
 import soberHelplineFirstStepImg from "@/assets/blog-sober-helpline-first-step.png";
 import treatingWholePersonImg from "@/assets/blog-treating-whole-person.png";
 import fentanylOverdoseSafetyImg from "@/assets/blog-fentanyl-overdose-safety.png";
+import parentsAddictedAdultChildImg from "@/assets/blog-parents-addicted-adult-child.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 35,
+    title: "Living With an Addicted Adult Child: Grief, Guilt, and Letting Go",
+    excerpt: "Parenting an addicted adult child is heartbreaking. Learn how to cope with guilt, grief, and boundaries without giving up hope.",
+    author: "Sober Helpline",
+    date: "2025-12-18",
+    category: "Family Support",
+    image: parentsAddictedAdultChildImg,
+    slug: "parents-addicted-adult-children",
+    seoTitle: "Parents of Addicted Adult Children: How to Cope Without Enabling",
+    metaDescription: "Parenting an addicted adult child is heartbreaking. Learn how to cope with guilt, grief, and boundaries without giving up hope.",
+    content: `**Living With an Addicted Adult Child: Grief, Guilt, and Letting Go**
+
+**A Pain Few Talk About**
+
+Parents of addicted adult children live in a unique kind of anguish. The rules of parenting change, but the instinct to protect never fades.
+
+Parents often feel:
+
+• Crushing guilt
+• Shame and isolation
+• Fear of "giving up"
+• Confusion about boundaries
+• Pressure from other family members
+
+Unlike parenting young children, you cannot force change—and that reality is devastating.
+
+**The Weight of Parental Guilt**
+
+Many parents ask:
+
+• "Where did I go wrong?"
+• "Did I cause this?"
+• "If I stop helping, am I abandoning my child?"
+
+Addiction is not caused by one parent, one mistake, or one failure. Guilt keeps parents trapped in rescue cycles that exhaust everyone involved.
+
+**Why Adult Children Change the Equation**
+
+When children become adults, help must shift from control to influence. Financial rescue, housing without boundaries, or emotional cushioning can unintentionally delay change.
+
+Loving an adult child sometimes means tolerating their anger while protecting your own stability.
+
+**What Healthy Detachment Really Means**
+
+Detachment is not indifference. It is loving without destroying yourself.
+
+Healthy detachment includes:
+
+• Allowing adult consequences
+• Refusing to argue about reality
+• Maintaining your routines and health
+• Saying "I can't" without justification
+• Staying emotionally present but behaviorally firm
+
+Parents who detach often feel calmer—even before their child changes.
+
+**Grieving the Child You Thought You'd Have**
+
+Parents must often grieve:
+
+• Lost milestones
+• Strained holidays
+• Fear of phone calls at night
+• The loss of trust
+• The dream of "normal adulthood"
+
+This grief is real and valid, even while your child is still alive.
+
+**Hope Without Illusion**
+
+Hope does not require endless sacrifice. Many parents find that when they stop rescuing, their child eventually faces a crossroads.
+
+You are not giving up. You are giving reality space to work.`
+  },
   {
     id: 34,
     title: "Fentanyl and Overdose Risk—A Family Safety Plan That Can Save a Life",
