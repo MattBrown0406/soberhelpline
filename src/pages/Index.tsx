@@ -158,7 +158,7 @@ const Index = () => {
             <Link to="/family-forum">
               <Button variant="default" className="flex items-center gap-2 bg-logo-green hover:bg-logo-green/90">
                 <UserIcon className="w-4 h-4" />
-                Member Forum
+                Family Member Forum
               </Button>
             </Link>
             {user ? (
