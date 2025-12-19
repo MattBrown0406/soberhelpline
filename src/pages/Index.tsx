@@ -181,8 +181,8 @@ const Index = () => {
         </div>
 
         {/* Featured Video and Logo */}
-        <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
-          <div className="max-w-2xl flex-1">
+        <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-center gap-6">
+          <div className="w-full md:w-1/2 lg:w-2/5">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe
                 src="https://www.youtube.com/embed/Li2fH0doWPc"
@@ -193,7 +193,7 @@ const Index = () => {
               />
             </div>
           </div>
-          <div className="flex-shrink-0 flex items-center justify-center">
+          <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
             <img src={logo} alt="Sober Helpline" className="h-40 md:h-56 w-auto" />
           </div>
         </div>
