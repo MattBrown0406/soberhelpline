@@ -180,13 +180,9 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Logo below header */}
-        <div className="flex justify-center mb-6 md:mb-8">
-          <img src={logo} alt="Sober Helpline" className="h-16 md:h-20 w-auto" />
-        </div>
-        {/* Featured Video */}
-        <div className="mb-8 md:mb-12">
-          <div className="max-w-2xl mr-auto ml-0 md:ml-12">
+        {/* Featured Video and Logo */}
+        <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
+          <div className="max-w-2xl flex-1">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe
                 src="https://www.youtube.com/embed/Li2fH0doWPc"
@@ -196,6 +192,9 @@ const Index = () => {
                 className="absolute inset-0 w-full h-full"
               />
             </div>
+          </div>
+          <div className="flex-shrink-0">
+            <img src={logo} alt="Sober Helpline" className="h-24 md:h-32 w-auto" />
           </div>
         </div>
 
