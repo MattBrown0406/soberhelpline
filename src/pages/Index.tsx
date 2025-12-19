@@ -194,7 +194,7 @@ const Index = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
-            <img src={logo} alt="Sober Helpline" className="h-40 md:h-56 w-auto" />
+            <img src={logo} alt="Sober Helpline" className="h-48 md:h-64 w-auto" />
           </div>
         </div>
 
