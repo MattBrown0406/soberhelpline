@@ -319,6 +319,12 @@ export default function FamilyVideos() {
                     Values Clarification Exercise
                   </Button>
                 </Link>
+                <Link to="/talking-about-treatment">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    How to Talk About Treatment
+                  </Button>
+                </Link>
               </div>
             </div>
 
