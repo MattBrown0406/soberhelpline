@@ -289,6 +289,12 @@ export default function FamilyVideos() {
                     What Recovery Requires From Families
                   </Button>
                 </Link>
+                <Link to="/family-action-plan">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Family Recovery Action Plan
+                  </Button>
+                </Link>
               </div>
             </div>
 
