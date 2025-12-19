@@ -75,6 +75,7 @@ const Index = () => {
             <Phone className="w-5 h-5" />
             <span className="font-medium text-sm">(541) 241-5886</span>
           </a>
+          <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
           <MobileNav user={user} onLogout={handleLogout} />
         </div>
 
@@ -177,11 +178,12 @@ const Index = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(541) 241-5886</span>
             </a>
+            <img src={logo} alt="Sober Helpline" className="h-14 w-auto" />
           </div>
         </div>
         {/* Featured Video */}
         <div className="mb-8 md:mb-12">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe
                 src="https://www.youtube.com/embed/Li2fH0doWPc"
@@ -195,7 +197,6 @@ const Index = () => {
         </div>
 
         <div className="text-center mb-8 md:mb-12">
-          <img src={logo} alt="Sober Helpline" className="mx-auto mb-4 md:mb-6 w-48 md:w-64 h-auto" />
           <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
           <p className="text-base md:text-lg text-muted-foreground px-2">
             We help families find ethical, proven treatment and recovery resources nationwide and beyond.
