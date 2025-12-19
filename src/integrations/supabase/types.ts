@@ -768,6 +768,15 @@ export type Database = {
       }
     }
     Functions: {
+      get_public_profiles: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          first_name: string
+          id: string
+          last_name: string
+          username: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -775,6 +784,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_active_family_member: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user" | "moderator"

@@ -13,6 +13,7 @@ import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
 import { toast } from "sonner";
+import { fetchPublicProfiles } from "@/lib/publicProfiles";
 
 interface ForumTopic {
   id: string;
@@ -224,12 +225,7 @@ export default function FamilyForum() {
         return;
       }
 
-      const { data: profiles, error: profileError } = await supabase
-        .from('profiles')
-        .select('id, username, first_name, last_name')
-        .in('id', userIds);
-
-      if (profileError) throw profileError;
+      const profiles = await fetchPublicProfiles(userIds);
 
       setForumMembers(profiles || []);
     } catch (error) {
@@ -253,19 +249,17 @@ export default function FamilyForum() {
         if (error) throw error;
 
         if (posts && posts.length > 0) {
-          // Get usernames for the posts
+          // Get display names for the posts (safe RPC, no email/phone exposure)
           const userIds = [...new Set(posts.map(p => p.user_id))];
-          const { data: profiles } = await supabase
-            .from('profiles')
-            .select('id, username, first_name')
-            .in('id', userIds);
+          const profiles = await fetchPublicProfiles(userIds);
 
-          const postsWithUsernames = posts.map(post => ({
-            ...post,
-            username: profiles?.find(p => p.id === post.user_id)?.username || 
-                      profiles?.find(p => p.id === post.user_id)?.first_name || 
-                      'Anonymous'
-          }));
+          const postsWithUsernames = posts.map(post => {
+            const profile = profiles?.find(p => p.id === post.user_id);
+            return {
+              ...post,
+              username: profile?.username || profile?.first_name || 'Anonymous'
+            };
+          });
 
           setRecentPosts(postsWithUsernames);
         }

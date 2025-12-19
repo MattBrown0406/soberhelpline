@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { toast } from "sonner";
+import { fetchPublicProfiles } from "@/lib/publicProfiles";
 
 interface ForumTopicConfig {
   id: string;
@@ -229,24 +230,21 @@ export default function ForumTopic() {
       // Get unique user IDs
       const userIds = [...new Set(postsData.map(p => p.user_id))];
 
-      // Fetch profiles
-      const { data: profiles, error: profileError } = await supabase
-        .from('profiles')
-        .select('id, username, first_name, last_name')
-        .in('id', userIds);
-
-      if (profileError) throw profileError;
+      // Fetch safe public display fields (no email/phone)
+      const profiles = await fetchPublicProfiles(userIds);
 
       // Combine data and organize into threads
       const enrichedPosts: ForumPost[] = postsData.map(post => {
         const profile = profiles?.find(p => p.id === post.user_id);
         return {
           ...post,
-          author: profile ? {
-            username: profile.username,
-            first_name: profile.first_name,
-            last_name: profile.last_name
-          } : undefined
+          author: profile
+            ? {
+                username: profile.username,
+                first_name: profile.first_name,
+                last_name: profile.last_name,
+              }
+            : undefined,
         };
       });
 

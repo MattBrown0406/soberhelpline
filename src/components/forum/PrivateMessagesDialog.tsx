@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Send, Inbox, ArrowLeft, Trash2, Check } from 'lucide-react';
 import { format } from 'date-fns';
+import { fetchPublicProfiles } from '@/lib/publicProfiles';
 
 interface PrivateMessagesDialogProps {
   open: boolean;
@@ -103,12 +104,9 @@ export function PrivateMessagesDialog({ open, onOpenChange, currentUserId }: Pri
         userIds.add(msg.recipient_id);
       });
 
-      const { data: profiles } = await supabase
-        .from('profiles')
-        .select('id, username')
-        .in('id', Array.from(userIds));
+      const profiles = await fetchPublicProfiles(Array.from(userIds));
 
-      const usernameMap = new Map(profiles?.map(p => [p.id, p.username || 'Anonymous']) || []);
+      const usernameMap = new Map(profiles?.map(p => [p.id, p.username || p.first_name || 'Anonymous']) || []);
 
       const messagesWithUsernames = data?.map(msg => ({
         ...msg,
@@ -137,15 +135,14 @@ export function PrivateMessagesDialog({ open, onOpenChange, currentUserId }: Pri
 
       const userIds = subscriptions.map(s => s.user_id).filter(id => id !== currentUserId);
 
-      const { data: profiles } = await supabase
-        .from('profiles')
-        .select('id, username')
-        .in('id', userIds);
+      const profiles = await fetchPublicProfiles(userIds);
 
-      setMembers(profiles?.filter(p => p.username).map(p => ({
-        id: p.id,
-        username: p.username || 'Anonymous'
-      })) || []);
+      setMembers(profiles
+        ?.map(p => ({
+          id: p.id,
+          username: p.username || p.first_name || 'Anonymous'
+        }))
+        .filter(p => p.username !== 'Anonymous') || []);
     } catch (error) {
       console.error('Error fetching members:', error);
     }
