@@ -145,7 +145,7 @@ export default function FamilySupport() {
                       </div>
                       <Link to="/family-videos">
                         <Button variant="outline" size="sm" className="w-full mt-4">
-                          View All Videos
+                          View Resources
                         </Button>
                       </Link>
                     </CardContent>
