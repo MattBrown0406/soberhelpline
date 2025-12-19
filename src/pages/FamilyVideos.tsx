@@ -333,6 +333,13 @@ export default function FamilyVideos() {
                     Your browser does not support the audio element.
                   </audio>
                 </div>
+                <div className="bg-background rounded-lg p-4 border">
+                  <h4 className="font-medium text-foreground mb-2">Releasing Sadness and Guilt with Compassion</h4>
+                  <audio controls className="w-full">
+                    <source src="/audio/releasing-sadness-guilt-meditation.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
               </div>
             </div>
 
