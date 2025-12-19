@@ -274,14 +274,22 @@ export default function FamilyVideos() {
             <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
               <h3 className="text-lg font-semibold text-logo-green mb-3">Printable Resources</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Download and print these guides to use when evaluating treatment options.
+                Download and print these guides to use when evaluating treatment options and supporting recovery.
               </p>
-              <Link to="/treatment-questions">
-                <Button variant="outline" className="gap-2">
-                  <FileText className="h-4 w-4" />
-                  40 Questions to Ask a Treatment Center
-                </Button>
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/treatment-questions">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    40 Questions to Ask a Treatment Center
+                  </Button>
+                </Link>
+                <Link to="/recovery-requirements">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    What Recovery Requires From Families
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             {/* Category Filter */}
