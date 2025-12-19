@@ -106,7 +106,7 @@ const OutpatientTreatment = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Outpatient Treatment")
         .eq("status", "approved")
@@ -182,7 +182,7 @@ const OutpatientTreatment = () => {
   const fetchNearbyProviders = async (selectedStateName: string, currentFilters = filters) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Outpatient Treatment")
         .eq("status", "approved")
@@ -335,7 +335,7 @@ const OutpatientTreatment = () => {
     
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Outpatient Treatment")
         .eq("status", "approved");

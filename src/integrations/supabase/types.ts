@@ -397,6 +397,13 @@ export type Database = {
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "provider_clicks_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       provider_submissions: {
@@ -618,6 +625,13 @@ export type Database = {
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
+            columns: ["parent_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       provider_subscriptions: {
@@ -666,6 +680,13 @@ export type Database = {
             columns: ["provider_submission_id"]
             isOneToOne: false
             referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
             referencedColumns: ["id"]
           },
         ]
@@ -719,6 +740,241 @@ export type Database = {
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "provider_clicks_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_submissions_public: {
+        Row: {
+          accepts_mat_residents: boolean | null
+          address: string | null
+          adolescent_services: boolean | null
+          also_provides_outpatient: boolean | null
+          also_provides_sober_living: boolean | null
+          awake_staff_24_7: boolean | null
+          case_management_services: boolean | null
+          category: string | null
+          chores_required: boolean | null
+          cip_certified: boolean | null
+          city: string | null
+          co_occurring_diagnoses: string[] | null
+          cost: string | null
+          created_at: string | null
+          curfew_time: string | null
+          daily_companion_fee: string | null
+          description_of_services: string | null
+          detox_available: boolean | null
+          detox_only_services: boolean | null
+          email: string | null
+          facebook_url: string | null
+          faith_based_services: boolean | null
+          gender_specific_treatment: string[] | null
+          has_valid_passport: boolean | null
+          hourly_coaching_rate: string | null
+          hourly_coaching_sessions: boolean | null
+          house_meetings_per_week: number | null
+          id: string | null
+          in_person_companion_work: boolean | null
+          instagram_url: string | null
+          insurances_accepted: string[] | null
+          intervention_modalities: string[] | null
+          items_included_in_cost: string[] | null
+          job_assistance_provided: boolean | null
+          languages_spoken: string[] | null
+          legal_assistance_types: string[] | null
+          length_of_services: string | null
+          lgbt_supportive: boolean | null
+          license_current_good_standing: boolean | null
+          logo_url: string | null
+          mandatory_curfew: boolean | null
+          mandatory_house_meetings: boolean | null
+          medication_administration: string | null
+          military_first_responder_care: boolean | null
+          minimum_time_since_last_use: string | null
+          parent_submission_id: string | null
+          phone_number: string | null
+          provider_name: string | null
+          recovery_fellowships: string[] | null
+          required_meetings_per_week: string | null
+          residents_expected_to_work: boolean | null
+          sliding_scale_available: boolean | null
+          state: string | null
+          status: string | null
+          submitted_by: string | null
+          substance_use_disorder_experience: boolean | null
+          telehealth_available: boolean | null
+          therapeutic_modalities: string[] | null
+          tiktok_url: string | null
+          total_treatment_beds: number | null
+          travel_expenses_included: boolean | null
+          updated_at: string | null
+          website: string | null
+          works_internationally: boolean | null
+          works_nationally: boolean | null
+          year_started: number | null
+          youtube_url: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          accepts_mat_residents?: boolean | null
+          address?: string | null
+          adolescent_services?: boolean | null
+          also_provides_outpatient?: boolean | null
+          also_provides_sober_living?: boolean | null
+          awake_staff_24_7?: boolean | null
+          case_management_services?: boolean | null
+          category?: string | null
+          chores_required?: boolean | null
+          cip_certified?: boolean | null
+          city?: string | null
+          co_occurring_diagnoses?: string[] | null
+          cost?: string | null
+          created_at?: string | null
+          curfew_time?: string | null
+          daily_companion_fee?: string | null
+          description_of_services?: string | null
+          detox_available?: boolean | null
+          detox_only_services?: boolean | null
+          email?: never
+          facebook_url?: string | null
+          faith_based_services?: boolean | null
+          gender_specific_treatment?: string[] | null
+          has_valid_passport?: boolean | null
+          hourly_coaching_rate?: string | null
+          hourly_coaching_sessions?: boolean | null
+          house_meetings_per_week?: number | null
+          id?: string | null
+          in_person_companion_work?: boolean | null
+          instagram_url?: string | null
+          insurances_accepted?: string[] | null
+          intervention_modalities?: string[] | null
+          items_included_in_cost?: string[] | null
+          job_assistance_provided?: boolean | null
+          languages_spoken?: string[] | null
+          legal_assistance_types?: string[] | null
+          length_of_services?: string | null
+          lgbt_supportive?: boolean | null
+          license_current_good_standing?: boolean | null
+          logo_url?: string | null
+          mandatory_curfew?: boolean | null
+          mandatory_house_meetings?: boolean | null
+          medication_administration?: string | null
+          military_first_responder_care?: boolean | null
+          minimum_time_since_last_use?: string | null
+          parent_submission_id?: string | null
+          phone_number?: never
+          provider_name?: string | null
+          recovery_fellowships?: string[] | null
+          required_meetings_per_week?: string | null
+          residents_expected_to_work?: boolean | null
+          sliding_scale_available?: boolean | null
+          state?: string | null
+          status?: string | null
+          submitted_by?: string | null
+          substance_use_disorder_experience?: boolean | null
+          telehealth_available?: boolean | null
+          therapeutic_modalities?: string[] | null
+          tiktok_url?: string | null
+          total_treatment_beds?: number | null
+          travel_expenses_included?: boolean | null
+          updated_at?: string | null
+          website?: string | null
+          works_internationally?: boolean | null
+          works_nationally?: boolean | null
+          year_started?: number | null
+          youtube_url?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          accepts_mat_residents?: boolean | null
+          address?: string | null
+          adolescent_services?: boolean | null
+          also_provides_outpatient?: boolean | null
+          also_provides_sober_living?: boolean | null
+          awake_staff_24_7?: boolean | null
+          case_management_services?: boolean | null
+          category?: string | null
+          chores_required?: boolean | null
+          cip_certified?: boolean | null
+          city?: string | null
+          co_occurring_diagnoses?: string[] | null
+          cost?: string | null
+          created_at?: string | null
+          curfew_time?: string | null
+          daily_companion_fee?: string | null
+          description_of_services?: string | null
+          detox_available?: boolean | null
+          detox_only_services?: boolean | null
+          email?: never
+          facebook_url?: string | null
+          faith_based_services?: boolean | null
+          gender_specific_treatment?: string[] | null
+          has_valid_passport?: boolean | null
+          hourly_coaching_rate?: string | null
+          hourly_coaching_sessions?: boolean | null
+          house_meetings_per_week?: number | null
+          id?: string | null
+          in_person_companion_work?: boolean | null
+          instagram_url?: string | null
+          insurances_accepted?: string[] | null
+          intervention_modalities?: string[] | null
+          items_included_in_cost?: string[] | null
+          job_assistance_provided?: boolean | null
+          languages_spoken?: string[] | null
+          legal_assistance_types?: string[] | null
+          length_of_services?: string | null
+          lgbt_supportive?: boolean | null
+          license_current_good_standing?: boolean | null
+          logo_url?: string | null
+          mandatory_curfew?: boolean | null
+          mandatory_house_meetings?: boolean | null
+          medication_administration?: string | null
+          military_first_responder_care?: boolean | null
+          minimum_time_since_last_use?: string | null
+          parent_submission_id?: string | null
+          phone_number?: never
+          provider_name?: string | null
+          recovery_fellowships?: string[] | null
+          required_meetings_per_week?: string | null
+          residents_expected_to_work?: boolean | null
+          sliding_scale_available?: boolean | null
+          state?: string | null
+          status?: string | null
+          submitted_by?: string | null
+          substance_use_disorder_experience?: boolean | null
+          telehealth_available?: boolean | null
+          therapeutic_modalities?: string[] | null
+          tiktok_url?: string | null
+          total_treatment_beds?: number | null
+          travel_expenses_included?: boolean | null
+          updated_at?: string | null
+          website?: string | null
+          works_internationally?: boolean | null
+          works_nationally?: boolean | null
+          year_started?: number | null
+          youtube_url?: string | null
+          zip_code?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
+            columns: ["parent_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
+            columns: ["parent_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       provider_subscriptions_with_provider: {
@@ -742,6 +998,13 @@ export type Database = {
             columns: ["provider_submission_id"]
             isOneToOne: false
             referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
+            columns: ["provider_submission_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions_public"
             referencedColumns: ["id"]
           },
         ]

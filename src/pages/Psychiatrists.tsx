@@ -42,7 +42,7 @@ const Psychiatrists = () => {
     setShowingNearby(false);
     try {
       const { data, error } = await supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Psychiatrists")
         .eq("status", "approved")
@@ -70,7 +70,7 @@ const Psychiatrists = () => {
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
       const { data, error } = await supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Psychiatrists")
         .eq("status", "approved")
@@ -149,7 +149,7 @@ const Psychiatrists = () => {
     
     try {
       const { data, error } = await supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Psychiatrists")
         .eq("status", "approved");

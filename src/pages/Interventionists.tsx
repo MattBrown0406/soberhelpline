@@ -57,7 +57,7 @@ const Interventionists = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Interventionists")
         .eq("status", "approved")
@@ -102,7 +102,7 @@ const Interventionists = () => {
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Interventionists")
         .eq("status", "approved")
@@ -202,7 +202,7 @@ const Interventionists = () => {
     
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Interventionists")
         .eq("status", "approved");

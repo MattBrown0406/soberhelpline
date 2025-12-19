@@ -44,8 +44,8 @@ interface Provider {
   city: string | null;
   state: string | null;
   zip_code: string | null;
-  phone_number: string;
-  email: string;
+  phone_number: string | null;
+  email: string | null;
   website: string | null;
   description_of_services: string | null;
   logo_url: string | null;
@@ -306,22 +306,28 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
               {/* Contact info section - full width on mobile, right column on desktop */}
               <div className="w-full md:w-auto md:flex-shrink-0 space-y-2 md:min-w-[180px]">
                 <div className="flex flex-col sm:flex-row md:flex-col gap-2 items-center md:items-start">
-                  <a 
-                    href={`tel:${provider.phone_number}`} 
-                    className="flex items-center gap-2 text-sm hover:underline"
-                    onClick={handlePhoneClick}
-                  >
-                    <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>{formatPhoneNumber(provider.phone_number)}</span>
-                  </a>
-                  <a 
-                    href={`mailto:${provider.email}`} 
-                    className="flex items-center gap-2 text-sm hover:underline max-w-full"
-                    onClick={handleEmailClick}
-                  >
-                    <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="truncate">{provider.email}</span>
-                  </a>
+                  {provider.phone_number && (
+                    <a 
+                      href={`tel:${provider.phone_number}`} 
+                      className="flex items-center gap-2 text-sm hover:underline"
+                      onClick={handlePhoneClick}
+                    >
+                      <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span>{formatPhoneNumber(provider.phone_number)}</span>
+                    </a>
+                  )}
+
+                  {provider.email && (
+                    <a 
+                      href={`mailto:${provider.email}`} 
+                      className="flex items-center gap-2 text-sm hover:underline max-w-full"
+                      onClick={handleEmailClick}
+                    >
+                      <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="truncate">{provider.email}</span>
+                    </a>
+                  )}
+
                   {provider.website && (
                     <a
                       href={provider.website}

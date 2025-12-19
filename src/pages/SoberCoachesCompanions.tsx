@@ -51,7 +51,7 @@ const SoberCoachesCompanions = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Sober Coaches/Companions")
         .eq("status", "approved")
@@ -87,7 +87,7 @@ const SoberCoachesCompanions = () => {
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Sober Coaches/Companions")
         .eq("status", "approved")
@@ -178,7 +178,7 @@ const SoberCoachesCompanions = () => {
     
     try {
       const { data, error } = await supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Sober Coaches/Companions")
         .eq("status", "approved");
