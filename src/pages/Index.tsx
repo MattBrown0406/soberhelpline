@@ -194,7 +194,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <img src={logo} alt="Sober Helpline" className="h-24 md:h-32 w-auto" />
+            <img src={logo} alt="Sober Helpline" className="h-40 md:h-56 w-auto" />
           </div>
         </div>
 
