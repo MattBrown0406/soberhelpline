@@ -313,6 +313,12 @@ export default function FamilyVideos() {
                     Emotional Regulation Tools
                   </Button>
                 </Link>
+                <Link to="/values-exercise">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Values Clarification Exercise
+                  </Button>
+                </Link>
               </div>
             </div>
 
