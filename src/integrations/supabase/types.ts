@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      family_assessments: {
+        Row: {
+          created_at: string
+          id: string
+          reflection_answers: Json | null
+          section1_score: number
+          section2_score: number
+          section3_score: number
+          section4_score: number
+          total_score: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          reflection_answers?: Json | null
+          section1_score?: number
+          section2_score?: number
+          section3_score?: number
+          section4_score?: number
+          total_score?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          reflection_answers?: Json | null
+          section1_score?: number
+          section2_score?: number
+          section3_score?: number
+          section4_score?: number
+          total_score?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       forum_posts: {
         Row: {
           content: string
