@@ -50,6 +50,60 @@ export type Database = {
         }
         Relationships: []
       }
+      family_control_worksheets: {
+        Row: {
+          created_at: string
+          id: string
+          part1_managing: string | null
+          part1_stress: string | null
+          part1_wellbeing: string | null
+          part2_examples: Json | null
+          part2_reflection_cost: string | null
+          part2_reflection_hardest: string | null
+          part3_examples: Json | null
+          part3_reflection: string | null
+          part4_shifts: Json | null
+          part5_boundary: string | null
+          part5_start_doing: string | null
+          part5_stop_doing: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          part1_managing?: string | null
+          part1_stress?: string | null
+          part1_wellbeing?: string | null
+          part2_examples?: Json | null
+          part2_reflection_cost?: string | null
+          part2_reflection_hardest?: string | null
+          part3_examples?: Json | null
+          part3_reflection?: string | null
+          part4_shifts?: Json | null
+          part5_boundary?: string | null
+          part5_start_doing?: string | null
+          part5_stop_doing?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          part1_managing?: string | null
+          part1_stress?: string | null
+          part1_wellbeing?: string | null
+          part2_examples?: Json | null
+          part2_reflection_cost?: string | null
+          part2_reflection_hardest?: string | null
+          part3_examples?: Json | null
+          part3_reflection?: string | null
+          part4_shifts?: Json | null
+          part5_boundary?: string | null
+          part5_start_doing?: string | null
+          part5_stop_doing?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       forum_posts: {
         Row: {
           content: string

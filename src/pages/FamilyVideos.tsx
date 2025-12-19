@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
+import ControlWorksheet from "@/components/ControlWorksheet";
 
 interface VideoItem {
   id: string;
@@ -261,6 +262,9 @@ export default function FamilyVideos() {
 
             {/* Self-Assessment */}
             {user && <FamilySelfAssessment user={user} />}
+
+            {/* Control Worksheet */}
+            {user && <ControlWorksheet user={user} />}
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2 justify-center mb-8">
