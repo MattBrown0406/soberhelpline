@@ -307,6 +307,12 @@ export default function FamilyVideos() {
                     Crisis vs. Chaos Decision Guide
                   </Button>
                 </Link>
+                <Link to="/emotional-regulation">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Emotional Regulation Tools
+                  </Button>
+                </Link>
               </div>
             </div>
 
