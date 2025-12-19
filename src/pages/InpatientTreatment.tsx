@@ -106,7 +106,7 @@ const InpatientTreatment = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved")
@@ -197,7 +197,7 @@ const InpatientTreatment = () => {
   const fetchNearbyProviders = async (selectedStateName: string, currentFilters = filters) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved")
@@ -367,7 +367,7 @@ const InpatientTreatment = () => {
     try {
       // Fetch all providers in category (without zip filter) to enable distance search
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Inpatient Treatment")
         .eq("status", "approved");

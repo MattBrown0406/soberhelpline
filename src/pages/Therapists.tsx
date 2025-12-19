@@ -60,7 +60,7 @@ const Therapists = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved")
@@ -95,7 +95,7 @@ const Therapists = () => {
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved")
@@ -181,7 +181,7 @@ const Therapists = () => {
     
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Therapists")
         .eq("status", "approved");

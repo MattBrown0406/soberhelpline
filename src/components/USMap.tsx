@@ -142,7 +142,7 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
       if (!category) return;
 
       const { data, error } = await supabase
-        .from('provider_submissions')
+        .from('provider_submissions_public')
         .select('id, state, zip_code, city, provider_name')
         .eq('category', category)
         .eq('status', 'approved')

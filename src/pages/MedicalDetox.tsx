@@ -85,7 +85,7 @@ const MedicalDetox = () => {
     setShowingNearby(false);
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Medical Detox")
         .eq("status", "approved")
@@ -126,7 +126,7 @@ const MedicalDetox = () => {
   const fetchNearbyProviders = async (selectedStateName: string) => {
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Medical Detox")
         .eq("status", "approved")
@@ -241,7 +241,7 @@ const MedicalDetox = () => {
     
     try {
       let query = supabase
-        .from("provider_submissions")
+        .from("provider_submissions_public")
         .select("*")
         .eq("category", "Medical Detox")
         .eq("status", "approved");
