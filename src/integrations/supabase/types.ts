@@ -394,13 +394,6 @@ export type Database = {
             foreignKeyName: "provider_clicks_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
-            referencedRelation: "provider_click_analytics"
-            referencedColumns: ["provider_id"]
-          },
-          {
-            foreignKeyName: "provider_clicks_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
@@ -622,13 +615,6 @@ export type Database = {
             foreignKeyName: "provider_submissions_parent_submission_id_fkey"
             columns: ["parent_submission_id"]
             isOneToOne: false
-            referencedRelation: "provider_click_analytics"
-            referencedColumns: ["provider_id"]
-          },
-          {
-            foreignKeyName: "provider_submissions_parent_submission_id_fkey"
-            columns: ["parent_submission_id"]
-            isOneToOne: false
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
@@ -679,13 +665,6 @@ export type Database = {
             foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
             columns: ["provider_submission_id"]
             isOneToOne: false
-            referencedRelation: "provider_click_analytics"
-            referencedColumns: ["provider_id"]
-          },
-          {
-            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
-            columns: ["provider_submission_id"]
-            isOneToOne: false
             referencedRelation: "provider_submissions"
             referencedColumns: ["id"]
           },
@@ -732,7 +711,15 @@ export type Database = {
           unique_visitors: number | null
           website_clicks: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "provider_clicks_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       provider_subscriptions_with_provider: {
         Row: {
@@ -750,13 +737,6 @@ export type Database = {
           user_id: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
-            columns: ["provider_submission_id"]
-            isOneToOne: false
-            referencedRelation: "provider_click_analytics"
-            referencedColumns: ["provider_id"]
-          },
           {
             foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
             columns: ["provider_submission_id"]
