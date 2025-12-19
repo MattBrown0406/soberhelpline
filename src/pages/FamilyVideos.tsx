@@ -220,7 +220,7 @@ export default function FamilyVideos() {
             <div className="text-center mb-8">
               <Video className="h-12 w-12 text-primary mx-auto mb-4" />
               <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Family Education Videos
+                Family Education Resources
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Expert-led video courses to help you understand addiction and support your loved one's recovery.
