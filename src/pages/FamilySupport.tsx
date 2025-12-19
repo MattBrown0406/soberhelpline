@@ -131,7 +131,7 @@ export default function FamilySupport() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-logo-green">
                         <Video className="h-5 w-5 text-primary" />
-                        Education Videos
+                        Education Videos and Resources
                       </CardTitle>
                       <CardDescription>
                         Expert-led video courses on addiction and recovery
