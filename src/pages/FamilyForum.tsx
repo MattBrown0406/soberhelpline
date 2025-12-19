@@ -19,8 +19,6 @@ interface ForumTopic {
   title: string;
   description: string;
   icon: React.ReactNode;
-  postCount: number;
-  lastActivity: string;
   color: string;
 }
 
@@ -30,8 +28,6 @@ const forumTopics: ForumTopic[] = [
     title: "Introductions & Welcome",
     description: "New to the community? Introduce yourself and meet other families.",
     icon: <Users className="h-6 w-6" />,
-    postCount: 156,
-    lastActivity: "2 hours ago",
     color: "bg-blue-500"
   },
   {
@@ -39,8 +35,6 @@ const forumTopics: ForumTopic[] = [
     title: "Share Your Story",
     description: "A safe space to share your experiences and journey.",
     icon: <Heart className="h-6 w-6" />,
-    postCount: 243,
-    lastActivity: "30 mins ago",
     color: "bg-pink-500"
   },
   {
@@ -48,8 +42,6 @@ const forumTopics: ForumTopic[] = [
     title: "Treatment Center, IOP & Sober Living Discussions",
     description: "Discuss experiences with treatment centers, intensive outpatient programs, and sober living homes.",
     icon: <MessagesSquare className="h-6 w-6" />,
-    postCount: 178,
-    lastActivity: "1 hour ago",
     color: "bg-cyan-500"
   },
   {
@@ -57,8 +49,6 @@ const forumTopics: ForumTopic[] = [
     title: "Ask the Community",
     description: "Have questions? Get advice from families who've been there.",
     icon: <MessageCircle className="h-6 w-6" />,
-    postCount: 412,
-    lastActivity: "15 mins ago",
     color: "bg-green-500"
   },
   {
@@ -66,8 +56,6 @@ const forumTopics: ForumTopic[] = [
     title: "Setting Boundaries",
     description: "Discuss strategies for establishing healthy boundaries.",
     icon: <MessagesSquare className="h-6 w-6" />,
-    postCount: 189,
-    lastActivity: "1 hour ago",
     color: "bg-orange-500"
   },
   {
@@ -75,8 +63,6 @@ const forumTopics: ForumTopic[] = [
     title: "Self-Care & Wellness",
     description: "Tips and support for taking care of yourself.",
     icon: <Heart className="h-6 w-6" />,
-    postCount: 167,
-    lastActivity: "3 hours ago",
     color: "bg-purple-500"
   },
   {
@@ -84,8 +70,6 @@ const forumTopics: ForumTopic[] = [
     title: "Recovery Wins & Celebrations",
     description: "Share milestones, good news, and celebrate progress.",
     icon: <Heart className="h-6 w-6" />,
-    postCount: 298,
-    lastActivity: "45 mins ago",
     color: "bg-yellow-500"
   },
   {
@@ -93,8 +77,6 @@ const forumTopics: ForumTopic[] = [
     title: "Resources & Recommendations",
     description: "Share helpful books, articles, podcasts, and more.",
     icon: <MessagesSquare className="h-6 w-6" />,
-    postCount: 134,
-    lastActivity: "5 hours ago",
     color: "bg-teal-500"
   },
   {
@@ -102,28 +84,10 @@ const forumTopics: ForumTopic[] = [
     title: "Intervention Discussions",
     description: "Considering an intervention? Get advice and share experiences.",
     icon: <Users className="h-6 w-6" />,
-    postCount: 87,
-    lastActivity: "2 hours ago",
     color: "bg-red-500"
   },
 ];
 
-interface RecentPost {
-  id: string;
-  title: string;
-  author: string;
-  topic: string;
-  replies: number;
-  timeAgo: string;
-}
-
-const recentPosts: RecentPost[] = [
-  { id: "1", title: "How do I stop enabling without pushing them away?", author: "Sarah M.", topic: "Setting Boundaries", replies: 12, timeAgo: "15 mins ago" },
-  { id: "2", title: "My son just completed 30 days sober!", author: "Michael T.", topic: "Recovery Wins", replies: 24, timeAgo: "30 mins ago" },
-  { id: "3", title: "First time here - feeling lost and scared", author: "Anonymous", topic: "Introductions", replies: 18, timeAgo: "1 hour ago" },
-  { id: "4", title: "Has anyone tried family therapy during recovery?", author: "Jennifer L.", topic: "Ask Community", replies: 8, timeAgo: "2 hours ago" },
-  { id: "5", title: "Book recommendation: Beyond Addiction", author: "David R.", topic: "Resources", replies: 6, timeAgo: "3 hours ago" },
-];
 
 export default function FamilyForum() {
   const navigate = useNavigate();
@@ -441,10 +405,6 @@ export default function FamilyForum() {
                                 <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                               </div>
                               <p className="text-sm text-muted-foreground mt-1">{topic.description}</p>
-                              <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                                <span>{topic.postCount} posts</span>
-                                <span>Last activity: {topic.lastActivity}</span>
-                              </div>
                             </div>
                           </div>
                         </CardContent>
@@ -456,50 +416,6 @@ export default function FamilyForum() {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                {/* Community Stats */}
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg">Community Stats</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Members</span>
-                      <span className="font-semibold">1,247</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Posts</span>
-                      <span className="font-semibold">3,892</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Online Now</span>
-                      <span className="font-semibold text-green-600">43</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Recent Discussions */}
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg">Recent Discussions</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {recentPosts.map((post) => (
-                      <div key={post.id} className="border-b border-border last:border-0 pb-3 last:pb-0">
-                        <h4 className="text-sm font-medium text-logo-green line-clamp-2 hover:underline cursor-pointer">
-                          {post.title}
-                        </h4>
-                        <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
-                          <span>{post.author}</span>
-                          <span>•</span>
-                          <span>{post.replies} replies</span>
-                          <span>•</span>
-                          <span>{post.timeAgo}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-
                 {/* Forum Guidelines */}
                 <Card className="bg-primary/5 border-primary/20">
                   <CardHeader className="pb-3">
