@@ -114,6 +114,8 @@ export default function FamilyForum() {
     user_id: string;
     username?: string;
   }>>([]);
+  const [totalMembers, setTotalMembers] = useState(0);
+  const [onlineMembers, setOnlineMembers] = useState(0);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -274,6 +276,52 @@ export default function FamilyForum() {
 
     fetchRecentPosts();
   }, [hasMembership]);
+
+  // Fetch total members count and track online presence
+  useEffect(() => {
+    const fetchMemberCount = async () => {
+      if (!hasMembership) return;
+      
+      try {
+        const { count, error } = await supabase
+          .from('provider_subscriptions')
+          .select('*', { count: 'exact', head: true })
+          .is('provider_submission_id', null)
+          .eq('status', 'active');
+
+        if (!error && count !== null) {
+          setTotalMembers(count);
+        }
+      } catch (error) {
+        console.error("Error fetching member count:", error);
+      }
+    };
+
+    fetchMemberCount();
+  }, [hasMembership]);
+
+  // Track online presence
+  useEffect(() => {
+    if (!hasMembership || !user) return;
+
+    const channel = supabase.channel('forum_presence');
+
+    channel
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState();
+        const onlineCount = Object.keys(state).length;
+        setOnlineMembers(onlineCount);
+      })
+      .subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          await channel.track({ user_id: user.id, online_at: new Date().toISOString() });
+        }
+      });
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [hasMembership, user]);
 
   const handleAgreeToCodeOfConduct = async () => {
     if (!user) return;
@@ -464,6 +512,23 @@ export default function FamilyForum() {
 
               {/* Sidebar */}
               <div className="space-y-6">
+                {/* Community Stats */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Community</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Members</span>
+                      <span className="font-semibold">{totalMembers}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Online Now</span>
+                      <span className="font-semibold text-green-600">{onlineMembers}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {/* Recent Posts */}
                 <Card>
                   <CardHeader className="pb-3">
