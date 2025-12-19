@@ -35,6 +35,7 @@ import ForumTopic from "./pages/ForumTopic";
 import TreatmentQuestions from "./pages/TreatmentQuestions";
 import RecoveryRequirements from "./pages/RecoveryRequirements";
 import FamilyActionPlan from "./pages/FamilyActionPlan";
+import ScenarioExercise from "./pages/ScenarioExercise";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -76,6 +77,7 @@ const App = () => (
             <Route path="/treatment-questions" element={<TreatmentQuestions />} />
             <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
             <Route path="/family-action-plan" element={<FamilyActionPlan />} />
+            <Route path="/scenario-exercise" element={<ScenarioExercise />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

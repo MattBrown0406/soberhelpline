@@ -295,6 +295,12 @@ export default function FamilyVideos() {
                     Family Recovery Action Plan
                   </Button>
                 </Link>
+                <Link to="/scenario-exercise">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Scenario Practice Exercise
+                  </Button>
+                </Link>
               </div>
             </div>
 
