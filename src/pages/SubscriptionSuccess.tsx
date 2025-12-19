@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { usePayPalSubscription } from '@/hooks/usePayPalSubscription';
 import { CheckCircle2, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function SubscriptionSuccess() {
   const [searchParams] = useSearchParams();
@@ -11,13 +12,24 @@ export default function SubscriptionSuccess() {
   const { activateSubscription, isLoading } = usePayPalSubscription();
   const [activated, setActivated] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isProviderSubscription, setIsProviderSubscription] = useState<boolean | null>(null);
 
   const subscriptionId = searchParams.get('subscription_id');
 
   useEffect(() => {
     if (subscriptionId && !activated) {
       activateSubscription(subscriptionId)
-        .then(() => setActivated(true))
+        .then(async () => {
+          setActivated(true);
+          // Check if this is a provider or family subscription
+          const { data } = await supabase
+            .from('provider_subscriptions')
+            .select('provider_submission_id')
+            .eq('paypal_subscription_id', subscriptionId)
+            .maybeSingle();
+          
+          setIsProviderSubscription(data?.provider_submission_id !== null);
+        })
         .catch((err) => setError(err.message));
     }
   }, [subscriptionId]);
@@ -67,6 +79,38 @@ export default function SubscriptionSuccess() {
     );
   }
 
+  // Family membership success content
+  if (isProviderSubscription === false) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="max-w-md w-full">
+          <CardHeader className="text-center">
+            <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <CardTitle className="text-2xl text-green-600">Welcome to Family Support!</CardTitle>
+            <CardDescription>
+              Your membership is now active. You have full access to all family resources.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-muted p-4 rounded-lg text-sm">
+              <p className="font-medium mb-1">Your membership includes:</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                <li>Educational videos and worksheets</li>
+                <li>Access to the family forum</li>
+                <li>Guided meditations</li>
+                <li>Printable resources</li>
+              </ul>
+            </div>
+            <Button onClick={() => navigate('/family-videos')} className="w-full">
+              Access Family Resources
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Provider subscription success content
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="max-w-md w-full">
