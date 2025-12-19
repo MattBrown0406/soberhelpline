@@ -5,8 +5,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { User } from "@supabase/supabase-js";
-import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer } from "lucide-react";
+import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ScenarioWorksheetProps {
@@ -138,6 +139,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
     supportNeeded: ""
   });
 
+  const [isOpen, setIsOpen] = useState(false);
   const handleEmotionToggle = (emotion: string, current: string[], setter: (emotions: string[]) => void) => {
     if (current.includes(emotion)) {
       setter(current.filter(e => e !== emotion));
@@ -155,23 +157,30 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
   const scenario6Emotions = ["Anger", "Disappointment", "Fear", "Sadness", "Relief", "Compassion"];
 
   return (
-    <Card className="mb-10">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Brain className="h-6 w-6 text-primary" />
-            <div>
-              <CardTitle className="text-logo-green">"What Would You Do?"</CardTitle>
-              <CardDescription>Scenario-Based Exercises for Family Recovery</CardDescription>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Card className="mb-10">
+        <CollapsibleTrigger asChild>
+          <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Brain className="h-6 w-6 text-primary" />
+                <div>
+                  <CardTitle className="text-logo-green">"What Would You Do?"</CardTitle>
+                  <CardDescription>Scenario-Based Exercises for Family Recovery</CardDescription>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button onClick={(e) => { e.stopPropagation(); handlePrint(); }} variant="outline" size="sm" className="gap-2 print:hidden">
+                  <Printer className="h-4 w-4" />
+                  Print
+                </Button>
+                <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              </div>
             </div>
-          </div>
-          <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2 print:hidden">
-            <Printer className="h-4 w-4" />
-            Print
-          </Button>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
+          </CardHeader>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <CardContent className="space-y-6">
         {/* Purpose Section */}
         <div className="bg-muted/50 p-4 rounded-lg border">
           <h3 className="font-semibold text-foreground mb-2">Purpose</h3>
@@ -811,7 +820,9 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
             </Link>
           </div>
         </div>
-      </CardContent>
-    </Card>
+          </CardContent>
+        </CollapsibleContent>
+      </Card>
+    </Collapsible>
   );
 }
