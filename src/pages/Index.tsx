@@ -179,6 +179,21 @@ const Index = () => {
             </a>
           </div>
         </div>
+        {/* Featured Video */}
+        <div className="mb-8 md:mb-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.youtube.com/embed/Li2fH0doWPc"
+                title="Sober Helpline Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mb-8 md:mb-12">
           <img src={logo} alt="Sober Helpline" className="mx-auto mb-4 md:mb-6 w-48 md:w-64 h-auto" />
           <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-2">Empowering Your Recovery Journey</h2>
