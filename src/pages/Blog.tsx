@@ -39,12 +39,91 @@ import soberHelplineFirstStepImg from "@/assets/blog-sober-helpline-first-step.p
 import treatingWholePersonImg from "@/assets/blog-treating-whole-person.png";
 import fentanylOverdoseSafetyImg from "@/assets/blog-fentanyl-overdose-safety.png";
 import parentsAddictedAdultChildImg from "@/assets/blog-parents-addicted-adult-child.png";
+import addictionGrandchildrenBoundariesImg from "@/assets/blog-addiction-grandchildren-boundaries.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 36,
+    title: "When Addiction Affects Grandchildren: How to Protect Kids Without Creating Family War",
+    excerpt: "Addiction impacts children deeply. Learn how grandparents and relatives can protect kids while managing family conflict.",
+    author: "Sober Helpline",
+    date: "2025-12-19",
+    category: "Family Support",
+    image: addictionGrandchildrenBoundariesImg,
+    slug: "addiction-grandchildren-boundaries",
+    seoTitle: "Protecting Children When a Parent Is Addicted",
+    metaDescription: "Addiction impacts children deeply. Learn how grandparents and relatives can protect kids while managing family conflict.",
+    content: `**When Addiction Affects Grandchildren: How to Protect Kids Without Creating Family War**
+
+**The Quiet Crisis Families Avoid Talking About**
+
+When addiction enters a family with children, grandparents and relatives often face impossible choices:
+
+• Protect the kids or preserve the relationship?
+• Speak up or stay quiet?
+• Help financially or risk enabling?
+
+Children become silent witnesses to instability they can't understand.
+
+**How Addiction Affects Children**
+
+Even when parents think kids "don't notice," children often experience:
+
+• Anxiety and insecurity
+• Role reversal (becoming caretakers)
+• Shame and secrecy
+• Emotional withdrawal
+• Behavioral issues
+
+The absence of physical abuse does not mean the absence of harm.
+
+**Why Families Hesitate to Intervene**
+
+Families fear:
+
+• Losing access to the children
+• Being accused of overstepping
+• Exploding already fragile relationships
+• Creating loyalty conflicts
+
+These fears are real—but so are the long-term impacts on children.
+
+**Protecting Children Without Becoming the Enemy**
+
+Effective protection focuses on:
+
+• Safety, not blame
+• Consistency, not confrontation
+• Boundaries, not control
+
+Examples:
+
+• Refusing unsupervised visits when substance use is active
+• Providing stable routines when children are present
+• Speaking honestly in age-appropriate ways
+• Modeling emotional regulation
+• Documenting concerns calmly
+
+**When Boundaries Create Conflict**
+
+You may be accused of:
+
+• "Trying to take my kids"
+• "Judging my parenting"
+• "Ruining the family"
+
+This doesn't mean you're wrong. It means the boundary disrupted denial.
+
+**A Long-View Perspective**
+
+Children don't need perfect families. They need safe, predictable ones.
+
+Protecting kids is not betrayal—it's responsibility.`
+  },
   {
     id: 35,
     title: "Living With an Addicted Adult Child: Grief, Guilt, and Letting Go",

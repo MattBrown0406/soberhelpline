@@ -69,6 +69,7 @@ const App = () => (
             <Route path="/blog/:id" element={<BlogArticle />} />
             <Route path="/fentanyl-overdose-signs-safety-plan" element={<BlogArticle />} />
             <Route path="/parents-addicted-adult-children" element={<BlogArticle />} />
+            <Route path="/addiction-grandchildren-boundaries" element={<BlogArticle />} />
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />
