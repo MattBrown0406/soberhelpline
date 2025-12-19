@@ -111,7 +111,7 @@ const Auth = () => {
       // Validate input
       loginSchema.parse(loginData);
 
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: loginData.email,
         password: loginData.password,
       });
@@ -131,7 +131,22 @@ const Auth = () => {
           title: "Welcome back!",
           description: "You have successfully logged in.",
         });
-        navigate("/");
+        
+        // Check if user has an active family membership (subscription without provider_submission_id)
+        const { data: subscription } = await supabase
+          .from('provider_subscriptions')
+          .select('provider_submission_id')
+          .eq('user_id', authData.user?.id)
+          .eq('status', 'active')
+          .is('provider_submission_id', null)
+          .maybeSingle();
+        
+        // Redirect family members to forum, others to home
+        if (subscription) {
+          navigate("/family-forum");
+        } else {
+          navigate("/");
+        }
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
