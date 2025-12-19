@@ -75,7 +75,6 @@ const Index = () => {
             <Phone className="w-5 h-5" />
             <span className="font-medium text-sm">(541) 241-5886</span>
           </a>
-          <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
           <MobileNav user={user} onLogout={handleLogout} />
         </div>
 
@@ -178,12 +177,16 @@ const Index = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(541) 241-5886</span>
             </a>
-            <img src={logo} alt="Sober Helpline" className="h-14 w-auto" />
           </div>
+        </div>
+
+        {/* Logo below header */}
+        <div className="flex justify-center mb-6 md:mb-8">
+          <img src={logo} alt="Sober Helpline" className="h-16 md:h-20 w-auto" />
         </div>
         {/* Featured Video */}
         <div className="mb-8 md:mb-12">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mr-auto ml-0 md:ml-12">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe
                 src="https://www.youtube.com/embed/Li2fH0doWPc"
