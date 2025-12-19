@@ -33,6 +33,7 @@ import FamilyConsultation from "./pages/FamilyConsultation";
 import FamilyWebinars from "./pages/FamilyWebinars";
 import ForumTopic from "./pages/ForumTopic";
 import TreatmentQuestions from "./pages/TreatmentQuestions";
+import RecoveryRequirements from "./pages/RecoveryRequirements";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -72,6 +73,7 @@ const App = () => (
             <Route path="/family-consultation" element={<FamilyConsultation />} />
             <Route path="/family-webinars" element={<FamilyWebinars />} />
             <Route path="/treatment-questions" element={<TreatmentQuestions />} />
+            <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
