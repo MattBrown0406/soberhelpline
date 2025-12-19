@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2 } from "lucide-react";
+import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -269,6 +269,20 @@ export default function FamilyVideos() {
 
             {/* Boundary Worksheet */}
             {user && <BoundaryWorksheet user={user} />}
+
+            {/* Printable Resources */}
+            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+              <h3 className="text-lg font-semibold text-logo-green mb-3">Printable Resources</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Download and print these guides to use when evaluating treatment options.
+              </p>
+              <Link to="/treatment-questions">
+                <Button variant="outline" className="gap-2">
+                  <FileText className="h-4 w-4" />
+                  40 Questions to Ask a Treatment Center
+                </Button>
+              </Link>
+            </div>
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2 justify-center mb-8">
