@@ -10,6 +10,7 @@ import { User } from "@supabase/supabase-js";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import ControlWorksheet from "@/components/ControlWorksheet";
 import BoundaryWorksheet from "@/components/BoundaryWorksheet";
+import ScenarioWorksheet from "@/components/ScenarioWorksheet";
 
 interface VideoItem {
   id: string;
@@ -269,6 +270,9 @@ export default function FamilyVideos() {
 
             {/* Boundary Worksheet */}
             {user && <BoundaryWorksheet user={user} />}
+
+            {/* Scenario Worksheet */}
+            {user && <ScenarioWorksheet user={user} />}
 
             {/* Printable Resources */}
             <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
