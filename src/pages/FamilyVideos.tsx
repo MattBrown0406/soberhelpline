@@ -227,6 +227,41 @@ export default function FamilyVideos() {
               </p>
             </div>
 
+            {/* The Six Pillars Section */}
+            <div className="mb-10">
+              <h2 className="text-2xl font-bold text-logo-green text-center mb-6">The Six Pillars</h2>
+              <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">1</span>
+                    <p className="text-foreground pt-1">Understanding Addiction (Foundational)</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">2</span>
+                    <p className="text-foreground pt-1">Understanding Mental Health & Dual Diagnosis</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">3</span>
+                    <p className="text-foreground pt-1">Understanding Family Systems and Enabling</p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">4</span>
+                    <p className="text-foreground pt-1">Treatment Literacy</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">5</span>
+                    <p className="text-foreground pt-1">Boundaries, Consequences, and Change</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">6</span>
+                    <p className="text-foreground pt-1">Family Recovery</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2 justify-center mb-8">
               {categories.map((category) => (
