@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -447,13 +447,22 @@ export default function FamilyForum() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-6xl mx-auto">
-            <Link
-              to="/family-support"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Support
-            </Link>
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <Link
+                to="/family-support"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Support
+              </Link>
+              <Link
+                to="/family-videos"
+                className="inline-flex items-center text-primary hover:text-primary/80 gap-1"
+              >
+                <Video className="h-4 w-4" />
+                Education Videos & Resources
+              </Link>
+            </div>
 
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
                 <div>
