@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Printer, FileText, CheckSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 
 const ValuesExercise = () => {
+  const [coreValues, setCoreValues] = useState<string[]>(["", "", "", "", ""]);
+
+  const handleValueChange = (index: number, value: string) => {
+    const newValues = [...coreValues];
+    newValues[index] = value;
+    setCoreValues(newValues);
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -156,10 +166,16 @@ const ValuesExercise = () => {
               <p className="text-muted-foreground mb-4">From the list above, choose <strong>5 core values</strong> that you want to guide your decisions moving forward.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 mb-4">
-                {[1, 2, 3, 4, 5].map((num) => (
-                  <div key={num} className="border rounded-lg p-3 text-center">
-                    <span className="text-xs text-muted-foreground">Value #{num}</span>
-                    <div className="h-8 border-b border-dashed mt-2"></div>
+                {[0, 1, 2, 3, 4].map((index) => (
+                  <div key={index} className="border rounded-lg p-3 text-center">
+                    <span className="text-xs text-muted-foreground">Value #{index + 1}</span>
+                    <Input
+                      value={coreValues[index]}
+                      onChange={(e) => handleValueChange(index, e.target.value)}
+                      className="mt-2 text-center print:border print:border-gray-300"
+                      placeholder="Enter value..."
+                      maxLength={50}
+                    />
                   </div>
                 ))}
               </div>
@@ -176,9 +192,11 @@ const ValuesExercise = () => {
               <p className="text-muted-foreground mb-4">Values only matter if they guide behavior.</p>
               <p className="font-medium mb-4">For each value, answer the following:</p>
               
-              {[1, 2, 3, 4, 5].map((num) => (
-                <div key={num} className="mb-6 p-4 bg-muted/20 rounded-lg border">
-                  <h3 className="font-semibold mb-3">Value #{num}: <span className="border-b border-dashed inline-block w-48"></span></h3>
+              {[0, 1, 2, 3, 4].map((index) => (
+                <div key={index} className="mb-6 p-4 bg-muted/20 rounded-lg border">
+                  <h3 className="font-semibold mb-3">
+                    Value #{index + 1}: <span className="text-logo-green">{coreValues[index] || <span className="text-muted-foreground italic">Not yet entered</span>}</span>
+                  </h3>
                   <div className="space-y-3">
                     <div>
                       <label className="block text-sm font-medium mb-1">What this value means to me:</label>
