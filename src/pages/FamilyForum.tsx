@@ -106,6 +106,14 @@ export default function FamilyForum() {
     first_name: string;
     last_name: string;
   }>>([]);
+  const [recentPosts, setRecentPosts] = useState<Array<{
+    id: string;
+    title: string | null;
+    topic_id: string;
+    created_at: string;
+    user_id: string;
+    username?: string;
+  }>>([]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -226,6 +234,46 @@ export default function FamilyForum() {
       console.error("Error fetching forum members:", error);
     }
   };
+
+  // Fetch recent posts
+  useEffect(() => {
+    const fetchRecentPosts = async () => {
+      if (!hasMembership) return;
+      
+      try {
+        const { data: posts, error } = await supabase
+          .from('forum_posts')
+          .select('id, title, topic_id, created_at, user_id')
+          .is('parent_post_id', null)
+          .order('created_at', { ascending: false })
+          .limit(5);
+
+        if (error) throw error;
+
+        if (posts && posts.length > 0) {
+          // Get usernames for the posts
+          const userIds = [...new Set(posts.map(p => p.user_id))];
+          const { data: profiles } = await supabase
+            .from('profiles')
+            .select('id, username, first_name')
+            .in('id', userIds);
+
+          const postsWithUsernames = posts.map(post => ({
+            ...post,
+            username: profiles?.find(p => p.id === post.user_id)?.username || 
+                      profiles?.find(p => p.id === post.user_id)?.first_name || 
+                      'Anonymous'
+          }));
+
+          setRecentPosts(postsWithUsernames);
+        }
+      } catch (error) {
+        console.error("Error fetching recent posts:", error);
+      }
+    };
+
+    fetchRecentPosts();
+  }, [hasMembership]);
 
   const handleAgreeToCodeOfConduct = async () => {
     if (!user) return;
@@ -416,6 +464,35 @@ export default function FamilyForum() {
 
               {/* Sidebar */}
               <div className="space-y-6">
+                {/* Recent Posts */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg">Recent Posts</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {recentPosts.length > 0 ? (
+                      recentPosts.map((post) => (
+                        <Link 
+                          key={post.id} 
+                          to={`/family-forum/${post.topic_id}`}
+                          className="block border-b border-border last:border-0 pb-3 last:pb-0"
+                        >
+                          <h4 className="text-sm font-medium text-logo-green line-clamp-2 hover:underline">
+                            {post.title || "Untitled Post"}
+                          </h4>
+                          <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                            <span>{post.username}</span>
+                            <span>•</span>
+                            <span>{new Date(post.created_at).toLocaleDateString()}</span>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground">No posts yet. Be the first to start a discussion!</p>
+                    )}
+                  </CardContent>
+                </Card>
+
                 {/* Forum Guidelines */}
                 <Card className="bg-primary/5 border-primary/20">
                   <CardHeader className="pb-3">
