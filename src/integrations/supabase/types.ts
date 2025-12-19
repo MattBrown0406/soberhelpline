@@ -50,6 +50,93 @@ export type Database = {
         }
         Relationships: []
       }
+      family_boundary_worksheets: {
+        Row: {
+          boundary_statement: string | null
+          calm_response: string | null
+          consequence_about_me: boolean | null
+          consequence_consistent: boolean | null
+          consequence_willing: boolean | null
+          created_at: string
+          id: string
+          impact_emotional: string | null
+          impact_family: string | null
+          impact_finances: string | null
+          impact_safety: string | null
+          mindset_difficulties: string[] | null
+          mindset_emotion: string | null
+          mindset_other: string | null
+          mindset_past_limits: string | null
+          problem_behavior: string | null
+          problem_frequency: string | null
+          pushback_fears: string | null
+          pushback_responses: string[] | null
+          revised_boundary: string | null
+          signed: boolean | null
+          signed_at: string | null
+          support_methods: string[] | null
+          support_person: string | null
+          user_id: string
+          warning_signs: string | null
+        }
+        Insert: {
+          boundary_statement?: string | null
+          calm_response?: string | null
+          consequence_about_me?: boolean | null
+          consequence_consistent?: boolean | null
+          consequence_willing?: boolean | null
+          created_at?: string
+          id?: string
+          impact_emotional?: string | null
+          impact_family?: string | null
+          impact_finances?: string | null
+          impact_safety?: string | null
+          mindset_difficulties?: string[] | null
+          mindset_emotion?: string | null
+          mindset_other?: string | null
+          mindset_past_limits?: string | null
+          problem_behavior?: string | null
+          problem_frequency?: string | null
+          pushback_fears?: string | null
+          pushback_responses?: string[] | null
+          revised_boundary?: string | null
+          signed?: boolean | null
+          signed_at?: string | null
+          support_methods?: string[] | null
+          support_person?: string | null
+          user_id: string
+          warning_signs?: string | null
+        }
+        Update: {
+          boundary_statement?: string | null
+          calm_response?: string | null
+          consequence_about_me?: boolean | null
+          consequence_consistent?: boolean | null
+          consequence_willing?: boolean | null
+          created_at?: string
+          id?: string
+          impact_emotional?: string | null
+          impact_family?: string | null
+          impact_finances?: string | null
+          impact_safety?: string | null
+          mindset_difficulties?: string[] | null
+          mindset_emotion?: string | null
+          mindset_other?: string | null
+          mindset_past_limits?: string | null
+          problem_behavior?: string | null
+          problem_frequency?: string | null
+          pushback_fears?: string | null
+          pushback_responses?: string[] | null
+          revised_boundary?: string | null
+          signed?: boolean | null
+          signed_at?: string | null
+          support_methods?: string[] | null
+          support_person?: string | null
+          user_id?: string
+          warning_signs?: string | null
+        }
+        Relationships: []
+      }
       family_control_worksheets: {
         Row: {
           created_at: string
