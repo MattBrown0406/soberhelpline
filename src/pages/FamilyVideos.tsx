@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import ControlWorksheet from "@/components/ControlWorksheet";
+import BoundaryWorksheet from "@/components/BoundaryWorksheet";
 
 interface VideoItem {
   id: string;
@@ -265,6 +266,9 @@ export default function FamilyVideos() {
 
             {/* Control Worksheet */}
             {user && <ControlWorksheet user={user} />}
+
+            {/* Boundary Worksheet */}
+            {user && <BoundaryWorksheet user={user} />}
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2 justify-center mb-8">
