@@ -44,6 +44,15 @@ const forumTopics: ForumTopic[] = [
     color: "bg-pink-500"
   },
   {
+    id: "treatment-discussions",
+    title: "Treatment Center, IOP & Sober Living Discussions",
+    description: "Discuss experiences with treatment centers, intensive outpatient programs, and sober living homes.",
+    icon: <MessagesSquare className="h-6 w-6" />,
+    postCount: 178,
+    lastActivity: "1 hour ago",
+    color: "bg-cyan-500"
+  },
+  {
     id: "ask-community",
     title: "Ask the Community",
     description: "Have questions? Get advice from families who've been there.",

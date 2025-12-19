@@ -42,6 +42,12 @@ const topicConfigs: Record<string, ForumTopicConfig> = {
     description: "A safe space to share your experiences and journey.",
     color: "bg-pink-500"
   },
+  "treatment-discussions": {
+    id: "treatment-discussions",
+    title: "Treatment Center, IOP & Sober Living Discussions",
+    description: "Discuss experiences with treatment centers, intensive outpatient programs, and sober living homes.",
+    color: "bg-cyan-500"
+  },
   "ask-community": {
     id: "ask-community",
     title: "Ask the Community",
