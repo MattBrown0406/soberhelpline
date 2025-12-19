@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText } from "lucide-react";
+import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -313,6 +313,26 @@ export default function FamilyVideos() {
                     Emotional Regulation Tools
                   </Button>
                 </Link>
+              </div>
+            </div>
+
+            {/* Guided Meditations */}
+            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+              <h3 className="text-lg font-semibold text-logo-green mb-3 flex items-center gap-2">
+                <Headphones className="h-5 w-5" />
+                Guided Meditations
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Audio resources to help you stay grounded during difficult moments.
+              </p>
+              <div className="space-y-4">
+                <div className="bg-background rounded-lg p-4 border">
+                  <h4 className="font-medium text-foreground mb-2">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
+                  <audio controls className="w-full">
+                    <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
               </div>
             </div>
 
