@@ -1,12 +1,72 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer, ClipboardList } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 
 export default function FamilyActionPlan() {
+  // Part 1 state
+  const [lovedOneStatus, setLovedOneStatus] = useState<string[]>([]);
+  const [biggestChallenges, setBiggestChallenges] = useState("");
+  const [repeatedPatterns, setRepeatedPatterns] = useState("");
+
+  // Part 2 state
+  const [familyValues, setFamilyValues] = useState<string[]>([]);
+  const [otherValue, setOtherValue] = useState("");
+  const [nonNegotiables, setNonNegotiables] = useState("");
+
+  // Part 3 state
+  const [enablingPatterns, setEnablingPatterns] = useState<string[]>([]);
+  const [additionalPatterns, setAdditionalPatterns] = useState("");
+
+  // Part 4 state
+  const [boundaries, setBoundaries] = useState([
+    { behavior: "", statement: "", consequence: "" },
+    { behavior: "", statement: "", consequence: "" }
+  ]);
+
+  // Part 5 state
+  const [trueEmergency, setTrueEmergency] = useState("");
+  const [notEmergencies, setNotEmergencies] = useState("");
+  const [crisisResponses, setCrisisResponses] = useState<string[]>([]);
+
+  // Part 6 state
+  const [familySupports, setFamilySupports] = useState<string[]>([]);
+  const [selfCareCommitments, setSelfCareCommitments] = useState("");
+  const [burnoutSigns, setBurnoutSigns] = useState("");
+
+  // Part 7 state
+  const [groundingPhrase, setGroundingPhrase] = useState("");
+
+  // Part 8 state
+  const [accountabilityPerson, setAccountabilityPerson] = useState("");
+  const [reviewFrequency, setReviewFrequency] = useState<string[]>([]);
+  const [progressToLookFor, setProgressToLookFor] = useState("");
+
+  // Part 9 state
+  const [signature, setSignature] = useState("");
+  const [signDate, setSignDate] = useState("");
+
   const handlePrint = () => {
     window.print();
+  };
+
+  const toggleArrayItem = (array: string[], setArray: (arr: string[]) => void, item: string) => {
+    if (array.includes(item)) {
+      setArray(array.filter(i => i !== item));
+    } else {
+      setArray([...array, item]);
+    }
+  };
+
+  const updateBoundary = (index: number, field: keyof typeof boundaries[0], value: string) => {
+    const newBoundaries = [...boundaries];
+    newBoundaries[index][field] = value;
+    setBoundaries(newBoundaries);
   };
 
   return (
@@ -93,37 +153,36 @@ export default function FamilyActionPlan() {
                   <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                     <p className="font-medium mb-3">My loved one's current status (check all that apply):</p>
                     <div className="grid grid-cols-2 gap-2 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Actively using
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        In detox or treatment
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Early recovery
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Long-term recovery
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Relapsed or unstable
-                      </label>
+                      {["Actively using", "In detox or treatment", "Early recovery", "Long-term recovery", "Relapsed or unstable"].map((status) => (
+                        <label key={status} className="flex items-center gap-2 cursor-pointer">
+                          <Checkbox
+                            checked={lovedOneStatus.includes(status)}
+                            onCheckedChange={() => toggleArrayItem(lovedOneStatus, setLovedOneStatus, status)}
+                          />
+                          {status}
+                        </label>
+                      ))}
                     </div>
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">The biggest ongoing challenges for our family are:</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16 print:h-20"></div>
+                    <Textarea
+                      value={biggestChallenges}
+                      onChange={(e) => setBiggestChallenges(e.target.value)}
+                      placeholder="Describe your family's biggest challenges..."
+                      className="min-h-[80px] print:border print:border-gray-300"
+                    />
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">What patterns have repeated despite our best efforts?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16 print:h-20"></div>
+                    <Textarea
+                      value={repeatedPatterns}
+                      onChange={(e) => setRepeatedPatterns(e.target.value)}
+                      placeholder="Describe repeated patterns..."
+                      className="min-h-[80px] print:border print:border-gray-300"
+                    />
                   </div>
                 </div>
               </section>
@@ -139,42 +198,39 @@ export default function FamilyActionPlan() {
                   <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                     <p className="font-medium mb-3">The values we want to prioritize in our family include:</p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Safety
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Honesty
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Accountability
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Stability
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Respect
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Health
-                      </label>
+                      {["Safety", "Honesty", "Accountability", "Stability", "Respect", "Health"].map((value) => (
+                        <label key={value} className="flex items-center gap-2 cursor-pointer">
+                          <Checkbox
+                            checked={familyValues.includes(value)}
+                            onCheckedChange={() => toggleArrayItem(familyValues, setFamilyValues, value)}
+                          />
+                          {value}
+                        </label>
+                      ))}
                     </div>
-                    <div className="mt-3">
-                      <label className="flex items-center gap-2 text-sm">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Other: <span className="flex-1 border-b border-dashed border-foreground/30"></span>
-                      </label>
+                    <div className="mt-3 flex items-center gap-2">
+                      <Checkbox
+                        checked={otherValue.length > 0}
+                        onCheckedChange={() => {}}
+                      />
+                      <span className="text-sm">Other:</span>
+                      <Input
+                        value={otherValue}
+                        onChange={(e) => setOtherValue(e.target.value)}
+                        placeholder="Enter other value..."
+                        className="flex-1 h-8 print:border print:border-gray-300"
+                      />
                     </div>
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">Non-negotiables (behaviors we will not accept in our home or lives):</p>
-                    <div className="border-b border-dashed border-foreground/30 h-20 print:h-24"></div>
+                    <Textarea
+                      value={nonNegotiables}
+                      onChange={(e) => setNonNegotiables(e.target.value)}
+                      placeholder="List your non-negotiables..."
+                      className="min-h-[100px] print:border print:border-gray-300"
+                    />
                   </div>
                 </div>
               </section>
@@ -189,32 +245,32 @@ export default function FamilyActionPlan() {
                 <div className="p-4 bg-primary/5 rounded-lg print:bg-gray-50">
                   <p className="font-medium mb-3">We will stop:</p>
                   <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                      Covering for consequences (work, legal, social)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                      Providing money during active use
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                      Making excuses or lying
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                      Rescuing from predictable outcomes
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                      Managing emotions or crises we didn't create
-                    </li>
+                    {[
+                      "Covering for consequences (work, legal, social)",
+                      "Providing money during active use",
+                      "Making excuses or lying",
+                      "Rescuing from predictable outcomes",
+                      "Managing emotions or crises we didn't create"
+                    ].map((pattern) => (
+                      <li key={pattern} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={enablingPatterns.includes(pattern)}
+                          onCheckedChange={() => toggleArrayItem(enablingPatterns, setEnablingPatterns, pattern)}
+                        />
+                        {pattern}
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
                 <div className="mt-4">
                   <p className="font-medium mb-2">Additional patterns we will stop:</p>
-                  <div className="border-b border-dashed border-foreground/30 h-16 print:h-20"></div>
+                  <Textarea
+                    value={additionalPatterns}
+                    onChange={(e) => setAdditionalPatterns(e.target.value)}
+                    placeholder="List additional patterns..."
+                    className="min-h-[80px] print:border print:border-gray-300"
+                  />
                 </div>
               </section>
 
@@ -226,41 +282,40 @@ export default function FamilyActionPlan() {
                 <p className="text-sm text-muted-foreground mb-4">For each boundary, be specific.</p>
 
                 <div className="space-y-6">
-                  <div className="p-4 border rounded-lg">
-                    <h3 className="font-semibold mb-3">Boundary #1</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-sm font-medium mb-1">Behavior triggering the boundary:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Boundary statement:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Consequence we will follow through on:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
+                  {boundaries.map((boundary, index) => (
+                    <div key={index} className="p-4 border rounded-lg">
+                      <h3 className="font-semibold mb-3">Boundary #{index + 1}</h3>
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-sm font-medium mb-1">Behavior triggering the boundary:</p>
+                          <Input
+                            value={boundary.behavior}
+                            onChange={(e) => updateBoundary(index, "behavior", e.target.value)}
+                            placeholder="Describe the triggering behavior..."
+                            className="print:border print:border-gray-300"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium mb-1">Boundary statement:</p>
+                          <Input
+                            value={boundary.statement}
+                            onChange={(e) => updateBoundary(index, "statement", e.target.value)}
+                            placeholder="Write your boundary statement..."
+                            className="print:border print:border-gray-300"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium mb-1">Consequence we will follow through on:</p>
+                          <Input
+                            value={boundary.consequence}
+                            onChange={(e) => updateBoundary(index, "consequence", e.target.value)}
+                            placeholder="Describe the consequence..."
+                            className="print:border print:border-gray-300"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="p-4 border rounded-lg">
-                    <h3 className="font-semibold mb-3">Boundary #2</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-sm font-medium mb-1">Behavior triggering the boundary:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Boundary statement:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium mb-1">Consequence we will follow through on:</p>
-                        <div className="border-b border-dashed border-foreground/30 h-8"></div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
 
                   <p className="text-sm text-muted-foreground italic">(Add additional boundaries as needed.)</p>
                 </div>
@@ -276,37 +331,42 @@ export default function FamilyActionPlan() {
                 <div className="space-y-4">
                   <div>
                     <p className="font-medium mb-2">What constitutes a true emergency (health, safety, legal)?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Textarea
+                      value={trueEmergency}
+                      onChange={(e) => setTrueEmergency(e.target.value)}
+                      placeholder="Define what constitutes a true emergency..."
+                      className="min-h-[60px] print:border print:border-gray-300"
+                    />
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">What behaviors will not be treated as emergencies?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Textarea
+                      value={notEmergencies}
+                      onChange={(e) => setNotEmergencies(e.target.value)}
+                      placeholder="List behaviors that are not emergencies..."
+                      className="min-h-[60px] print:border print:border-gray-300"
+                    />
                   </div>
 
                   <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                     <p className="font-medium mb-3">Our crisis response will include:</p>
                     <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                        Calling emergency services when appropriate
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                        Not negotiating under pressure
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                        Referring to previously set boundaries
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                        Reaching out to a support person
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0"></span>
-                        Taking a pause before responding
-                      </li>
+                      {[
+                        "Calling emergency services when appropriate",
+                        "Not negotiating under pressure",
+                        "Referring to previously set boundaries",
+                        "Reaching out to a support person",
+                        "Taking a pause before responding"
+                      ].map((response) => (
+                        <li key={response} className="flex items-center gap-2">
+                          <Checkbox
+                            checked={crisisResponses.includes(response)}
+                            onCheckedChange={() => toggleArrayItem(crisisResponses, setCrisisResponses, response)}
+                          />
+                          {response}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -323,37 +383,42 @@ export default function FamilyActionPlan() {
                   <div className="p-4 bg-primary/5 rounded-lg print:bg-gray-50">
                     <p className="font-medium mb-3">Individual or family supports we will engage in:</p>
                     <div className="grid grid-cols-2 gap-2 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Therapy or counseling
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Support groups
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Coaching
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Educational resources
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Spiritual or community support
-                      </label>
+                      {[
+                        "Therapy or counseling",
+                        "Support groups",
+                        "Coaching",
+                        "Educational resources",
+                        "Spiritual or community support"
+                      ].map((support) => (
+                        <label key={support} className="flex items-center gap-2 cursor-pointer">
+                          <Checkbox
+                            checked={familySupports.includes(support)}
+                            onCheckedChange={() => toggleArrayItem(familySupports, setFamilySupports, support)}
+                          />
+                          {support}
+                        </label>
+                      ))}
                     </div>
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">Personal commitments to self-care:</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Textarea
+                      value={selfCareCommitments}
+                      onChange={(e) => setSelfCareCommitments(e.target.value)}
+                      placeholder="List your self-care commitments..."
+                      className="min-h-[60px] print:border print:border-gray-300"
+                    />
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">Warning signs we are burning out or reverting to old patterns:</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Textarea
+                      value={burnoutSigns}
+                      onChange={(e) => setBurnoutSigns(e.target.value)}
+                      placeholder="Describe warning signs..."
+                      className="min-h-[60px] print:border print:border-gray-300"
+                    />
                   </div>
                 </div>
               </section>
@@ -380,7 +445,12 @@ export default function FamilyActionPlan() {
                   <p className="text-sm text-muted-foreground italic mb-2">
                     Example: "We're not going to argue about this. Our decision remains the same."
                   </p>
-                  <div className="border-b border-dashed border-foreground/30 h-8"></div>
+                  <Input
+                    value={groundingPhrase}
+                    onChange={(e) => setGroundingPhrase(e.target.value)}
+                    placeholder="Enter your grounding response phrase..."
+                    className="print:border print:border-gray-300"
+                  />
                 </div>
               </section>
 
@@ -393,30 +463,37 @@ export default function FamilyActionPlan() {
                 <div className="space-y-4">
                   <div>
                     <p className="font-medium mb-2">Who will help hold us accountable to this plan?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-8"></div>
+                    <Input
+                      value={accountabilityPerson}
+                      onChange={(e) => setAccountabilityPerson(e.target.value)}
+                      placeholder="Enter name(s)..."
+                      className="print:border print:border-gray-300"
+                    />
                   </div>
 
                   <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                     <p className="font-medium mb-3">How often will we review and update this plan?</p>
                     <div className="flex flex-wrap gap-4 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Monthly
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Quarterly
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        As circumstances change
-                      </label>
+                      {["Monthly", "Quarterly", "As circumstances change"].map((freq) => (
+                        <label key={freq} className="flex items-center gap-2 cursor-pointer">
+                          <Checkbox
+                            checked={reviewFrequency.includes(freq)}
+                            onCheckedChange={() => toggleArrayItem(reviewFrequency, setReviewFrequency, freq)}
+                          />
+                          {freq}
+                        </label>
+                      ))}
                     </div>
                   </div>
 
                   <div>
                     <p className="font-medium mb-2">What progress will we look for in ourselves—not our loved one?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Textarea
+                      value={progressToLookFor}
+                      onChange={(e) => setProgressToLookFor(e.target.value)}
+                      placeholder="Describe the progress you'll look for..."
+                      className="min-h-[60px] print:border print:border-gray-300"
+                    />
                   </div>
                 </div>
               </section>
@@ -436,11 +513,21 @@ export default function FamilyActionPlan() {
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm font-medium mb-1">Signature(s):</p>
-                      <div className="border-b border-foreground/50 h-8"></div>
+                      <Input
+                        value={signature}
+                        onChange={(e) => setSignature(e.target.value)}
+                        placeholder="Type your name(s) as signature..."
+                        className="print:border print:border-gray-300"
+                      />
                     </div>
                     <div>
                       <p className="text-sm font-medium mb-1">Date:</p>
-                      <div className="border-b border-foreground/50 h-8 w-48"></div>
+                      <Input
+                        type="date"
+                        value={signDate}
+                        onChange={(e) => setSignDate(e.target.value)}
+                        className="w-48 print:border print:border-gray-300"
+                      />
                     </div>
                   </div>
                 </div>
