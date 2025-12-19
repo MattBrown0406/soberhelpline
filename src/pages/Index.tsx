@@ -193,7 +193,7 @@ const Index = () => {
               />
             </div>
           </div>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center justify-center">
             <img src={logo} alt="Sober Helpline" className="h-40 md:h-56 w-auto" />
           </div>
         </div>
