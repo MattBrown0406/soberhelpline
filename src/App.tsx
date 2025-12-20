@@ -40,6 +40,7 @@ import CrisisChaos from "./pages/CrisisChaos";
 import EmotionalRegulation from "./pages/EmotionalRegulation";
 import ValuesExercise from "./pages/ValuesExercise";
 import TalkingAboutTreatment from "./pages/TalkingAboutTreatment";
+import ReadinessChecklist from "./pages/ReadinessChecklist";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -87,6 +88,7 @@ const App = () => (
             <Route path="/emotional-regulation" element={<EmotionalRegulation />} />
             <Route path="/values-exercise" element={<ValuesExercise />} />
             <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
+            <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
