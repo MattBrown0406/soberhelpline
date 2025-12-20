@@ -155,12 +155,6 @@ const Index = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link to="/family-forum">
-              <Button variant="default" className="flex items-center gap-2 bg-logo-green hover:bg-logo-green/90">
-                <UserIcon className="w-4 h-4" />
-                Family Member Forum
-              </Button>
-            </Link>
             {user ? (
               <Button variant="outline" onClick={handleLogout}>
                 Logout
@@ -196,6 +190,16 @@ const Index = () => {
           <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
             <img src={logo} alt="Sober Helpline" className="h-48 md:h-64 w-auto" />
           </div>
+        </div>
+
+        {/* Family Member Forum Button */}
+        <div className="text-center mb-4">
+          <Link to="/family-forum">
+            <Button variant="default" className="flex items-center gap-2 bg-logo-green hover:bg-logo-green/90 mx-auto">
+              <UserIcon className="w-4 h-4" />
+              Family Member Forum
+            </Button>
+          </Link>
         </div>
 
         <div className="text-center mb-8 md:mb-12">
