@@ -1,13 +1,138 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, ClipboardCheck, Printer } from "lucide-react";
+import { Phone, ArrowLeft, ClipboardCheck, Printer, AlertCircle, TrendingUp, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import logo from "@/assets/logo.png";
 
+const checklistItems = {
+  section1: [
+    "Acknowledges there is a problem without blaming others",
+    "Takes responsibility for specific behaviors (not just general regret)",
+    "Accepts feedback without escalating or becoming defensive",
+    "Does not minimize or rationalize substance use",
+    "Acknowledges consequences without arguing them away",
+  ],
+  section2: [
+    "Takes initiative to seek help or evaluation",
+    "Follows through on appointments without reminders",
+    "Completes required steps (calls, paperwork, planning) independently",
+    "Shows up on time and prepared",
+    "Follows rules and expectations without repeated negotiation",
+  ],
+  section3: [
+    "Accepts \"no\" without emotional escalation",
+    "Does not demand immediate relief or reassurance",
+    "Tolerates boundaries without punishment or withdrawal",
+    "Does not use guilt, fear, or anger to change decisions",
+    "Accepts consequences without demanding rescue",
+  ],
+  section4: [
+    "Willingly participates in treatment or professional recommendations",
+    "Attends meetings, therapy, or recovery activities consistently",
+    "Is open to structure and accountability",
+    "Engages with recovery supports beyond family",
+    "Accepts guidance from professionals without controlling the process",
+  ],
+  section5: [
+    "Willing to change people, places, or routines connected to use",
+    "Reduces contact with substance-using peers",
+    "Accepts structured living if recommended",
+    "Makes daily life changes that support stability",
+    "Shows effort toward healthy routines (sleep, work, responsibilities)",
+  ],
+  section6: [
+    "Behaviors have remained consistent for at least 2 weeks",
+    "Progress continues without a crisis driving it",
+    "Effort remains even when support is not guaranteed",
+    "There is follow-through even after conflict or disappointment",
+    "Actions match stated intentions",
+  ],
+};
+
+type CheckedState = Record<string, boolean>;
+
 export default function ReadinessChecklist() {
+  const [checkedItems, setCheckedItems] = useState<CheckedState>({});
+
   const handlePrint = () => {
     window.print();
   };
+
+  const handleCheck = (sectionKey: string, index: number) => {
+    const key = `${sectionKey}-${index}`;
+    setCheckedItems(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const isChecked = (sectionKey: string, index: number) => {
+    return checkedItems[`${sectionKey}-${index}`] || false;
+  };
+
+  const totalChecked = Object.values(checkedItems).filter(Boolean).length;
+  const maxItems = 30;
+  const progressPercent = (totalChecked / maxItems) * 100;
+
+  const getReadinessLevel = () => {
+    if (totalChecked <= 10) {
+      return {
+        level: "Low Readiness",
+        color: "text-red-600",
+        bgColor: "bg-red-50 dark:bg-red-950/30",
+        borderColor: "border-red-200 dark:border-red-800",
+        icon: AlertCircle,
+        message: "Focus on boundaries, consequences, and your own recovery.",
+      };
+    } else if (totalChecked <= 20) {
+      return {
+        level: "Emerging Readiness",
+        color: "text-yellow-600",
+        bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+        borderColor: "border-yellow-200 dark:border-yellow-800",
+        icon: TrendingUp,
+        message: "Encourage professional assessment. Maintain boundaries. Avoid rescuing.",
+      };
+    } else {
+      return {
+        level: "Strong Readiness",
+        color: "text-green-600",
+        bgColor: "bg-green-50 dark:bg-green-950/30",
+        borderColor: "border-green-200 dark:border-green-800",
+        icon: CheckCircle2,
+        message: "Support treatment engagement while maintaining accountability.",
+      };
+    }
+  };
+
+  const readiness = getReadinessLevel();
+  const ReadinessIcon = readiness.icon;
+
+  const renderSection = (sectionKey: keyof typeof checklistItems, title: string, items: string[]) => (
+    <section className="mb-8">
+      <h2 className="text-xl font-bold text-logo-green mb-4">{title}</h2>
+      <div className="space-y-3">
+        {items.map((item, index) => (
+          <label key={index} className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isChecked(sectionKey, index)}
+              onChange={() => handleCheck(sectionKey, index)}
+              className="mt-1 h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <span className="text-foreground">{item}</span>
+          </label>
+        ))}
+      </div>
+      <div className="mt-4">
+        <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
+        <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
+      </div>
+    </section>
+  );
+
   return (
     <>
       <Helmet>
@@ -17,7 +142,7 @@ export default function ReadinessChecklist() {
 
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
           <div className="container flex h-16 items-center justify-between">
             <Link to="/" className="flex items-center">
               <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
@@ -46,17 +171,45 @@ export default function ReadinessChecklist() {
               </Button>
             </div>
 
+            {/* Interactive Score Card - Sticky on desktop */}
+            <div className={`mb-6 p-4 rounded-lg border-2 ${readiness.bgColor} ${readiness.borderColor} print:hidden sticky top-4 z-10 shadow-lg`}>
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <ReadinessIcon className={`h-8 w-8 ${readiness.color}`} />
+                  <div>
+                    <p className="text-sm text-muted-foreground">Your Readiness Score</p>
+                    <p className={`text-2xl font-bold ${readiness.color}`}>
+                      {totalChecked} / {maxItems}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-1 min-w-[200px] max-w-md">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`font-semibold ${readiness.color}`}>{readiness.level}</span>
+                  </div>
+                  <Progress value={progressPercent} className="h-3" />
+                  <p className="text-sm text-muted-foreground mt-1">{readiness.message}</p>
+                </div>
+              </div>
+            </div>
+
             {/* Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b">
-                <ClipboardCheck className="h-12 w-12 text-primary mx-auto mb-4" />
+                <ClipboardCheck className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
                 <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
                   Readiness for Change Checklist
                 </h1>
                 <p className="text-lg text-muted-foreground">
                   Assessing Actions, Not Promises
                 </p>
+              </div>
+
+              {/* Print Score Summary */}
+              <div className="hidden print:block mb-6 p-4 border rounded-lg">
+                <p className="font-bold">Readiness Score: {totalChecked} / {maxItems} — {readiness.level}</p>
+                <p className="text-sm">{readiness.message}</p>
               </div>
 
               {/* Instructions */}
@@ -69,191 +222,12 @@ export default function ReadinessChecklist() {
                 </ul>
               </section>
 
-              {/* Section 1 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 1: Accountability & Ownership</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Acknowledges there is a problem without blaming others</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Takes responsibility for specific behaviors (not just general regret)</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Accepts feedback without escalating or becoming defensive</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Does not minimize or rationalize substance use</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Acknowledges consequences without arguing them away</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
-
-              {/* Section 2 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 2: Behavioral Follow-Through</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Takes initiative to seek help or evaluation</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Follows through on appointments without reminders</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Completes required steps (calls, paperwork, planning) independently</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Shows up on time and prepared</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Follows rules and expectations without repeated negotiation</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
-
-              {/* Section 3 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 3: Tolerance for Discomfort</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Accepts "no" without emotional escalation</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Does not demand immediate relief or reassurance</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Tolerates boundaries without punishment or withdrawal</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Does not use guilt, fear, or anger to change decisions</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Accepts consequences without demanding rescue</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
-
-              {/* Section 4 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 4: Engagement With Recovery Supports</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Willingly participates in treatment or professional recommendations</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Attends meetings, therapy, or recovery activities consistently</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Is open to structure and accountability</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Engages with recovery supports beyond family</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Accepts guidance from professionals without controlling the process</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
-
-              {/* Section 5 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 5: Lifestyle & Environment Changes</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Willing to change people, places, or routines connected to use</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Reduces contact with substance-using peers</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Accepts structured living if recommended</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Makes daily life changes that support stability</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Shows effort toward healthy routines (sleep, work, responsibilities)</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
-
-              {/* Section 6 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Section 6: Consistency Over Time</h2>
-                <div className="space-y-3">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Behaviors have remained consistent for at least 2 weeks</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Progress continues without a crisis driving it</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Effort remains even when support is not guaranteed</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">There is follow-through even after conflict or disappointment</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
-                    <span className="text-foreground">Actions match stated intentions</span>
-                  </label>
-                </div>
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Notes / examples:</label>
-                  <textarea className="w-full p-3 border rounded-lg min-h-[80px] bg-background" placeholder="Add your observations here..." />
-                </div>
-              </section>
+              {renderSection("section1", "Section 1: Accountability & Ownership", checklistItems.section1)}
+              {renderSection("section2", "Section 2: Behavioral Follow-Through", checklistItems.section2)}
+              {renderSection("section3", "Section 3: Tolerance for Discomfort", checklistItems.section3)}
+              {renderSection("section4", "Section 4: Engagement With Recovery Supports", checklistItems.section4)}
+              {renderSection("section5", "Section 5: Lifestyle & Environment Changes", checklistItems.section5)}
+              {renderSection("section6", "Section 6: Consistency Over Time", checklistItems.section6)}
 
               {/* Scoring Guide */}
               <section className="mb-8 p-6 bg-muted/30 rounded-lg border">
@@ -261,24 +235,24 @@ export default function ReadinessChecklist() {
                 <p className="text-sm text-muted-foreground mb-4">(Use as a Reference, Not a Rule)</p>
                 
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
+                  <div className={`flex items-start gap-3 p-3 rounded-lg ${totalChecked <= 10 ? 'bg-red-100 dark:bg-red-950/50 ring-2 ring-red-400' : ''}`}>
+                    <AlertCircle className={`h-5 w-5 mt-0.5 ${totalChecked <= 10 ? 'text-red-600' : 'text-muted-foreground'}`} />
                     <div>
-                      <span className="font-semibold text-foreground">0–10 boxes checked — Low readiness</span>
+                      <span className={`font-semibold ${totalChecked <= 10 ? 'text-red-700 dark:text-red-400' : 'text-foreground'}`}>0–10 boxes checked — Low readiness</span>
                       <p className="text-sm text-muted-foreground">Focus on boundaries, consequences, and your own recovery.</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
+                  <div className={`flex items-start gap-3 p-3 rounded-lg ${totalChecked > 10 && totalChecked <= 20 ? 'bg-yellow-100 dark:bg-yellow-950/50 ring-2 ring-yellow-400' : ''}`}>
+                    <TrendingUp className={`h-5 w-5 mt-0.5 ${totalChecked > 10 && totalChecked <= 20 ? 'text-yellow-600' : 'text-muted-foreground'}`} />
                     <div>
-                      <span className="font-semibold text-foreground">11–20 boxes checked — Emerging readiness</span>
+                      <span className={`font-semibold ${totalChecked > 10 && totalChecked <= 20 ? 'text-yellow-700 dark:text-yellow-400' : 'text-foreground'}`}>11–20 boxes checked — Emerging readiness</span>
                       <p className="text-sm text-muted-foreground">Encourage professional assessment. Maintain boundaries. Avoid rescuing.</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
+                  <div className={`flex items-start gap-3 p-3 rounded-lg ${totalChecked > 20 ? 'bg-green-100 dark:bg-green-950/50 ring-2 ring-green-400' : ''}`}>
+                    <CheckCircle2 className={`h-5 w-5 mt-0.5 ${totalChecked > 20 ? 'text-green-600' : 'text-muted-foreground'}`} />
                     <div>
-                      <span className="font-semibold text-foreground">21–30 boxes checked — Strong readiness indicators</span>
+                      <span className={`font-semibold ${totalChecked > 20 ? 'text-green-700 dark:text-green-400' : 'text-foreground'}`}>21–30 boxes checked — Strong readiness indicators</span>
                       <p className="text-sm text-muted-foreground">Support treatment engagement while maintaining accountability.</p>
                     </div>
                   </div>
