@@ -40,12 +40,90 @@ import treatingWholePersonImg from "@/assets/blog-treating-whole-person.png";
 import fentanylOverdoseSafetyImg from "@/assets/blog-fentanyl-overdose-safety.png";
 import parentsAddictedAdultChildImg from "@/assets/blog-parents-addicted-adult-child.png";
 import addictionGrandchildrenBoundariesImg from "@/assets/blog-addiction-grandchildren-boundaries.png";
+import addictionMarriageFamilyImg from "@/assets/blog-addiction-marriage-family.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 37,
+    title: "Loving Someone With Addiction Without Losing Your Marriage or Family",
+    excerpt: "Addiction strains marriages and families. Learn how to protect relationships without abandoning your loved one.",
+    author: "Sober Helpline",
+    date: "2025-12-20",
+    category: "Family Support",
+    image: addictionMarriageFamilyImg,
+    slug: "addiction-marriage-family-protection",
+    seoTitle: "Addiction and Marriage: Protecting Your Family While Loving an Addict",
+    metaDescription: "Addiction strains marriages and families. Learn how to protect relationships without abandoning your loved one.",
+    content: `**Loving Someone With Addiction Without Losing Your Marriage or Family**
+
+**The Collateral Damage No One Prepares For**
+
+Addiction rarely affects just one relationship. Marriages strain. Siblings resent. Children feel unsafe. Families fracture under the weight of chronic stress.
+
+Many spouses feel trapped between loyalty and self‑preservation.
+
+**Common Relationship Patterns**
+
+Families often fall into:
+
+• Constant crisis management
+• Parent‑child dynamics between partners
+• Emotional withdrawal
+• Chronic resentment
+• Loss of intimacy
+
+Without intervention, these patterns harden.
+
+**Why "Staying Together at All Costs" Can Backfire**
+
+Sacrificing stability to preserve proximity often damages everyone involved—especially children.
+
+Protection is not abandonment. Structure is not cruelty.
+
+**What Protecting the Family Looks Like**
+
+Protection may include:
+
+• Separate finances
+• Clear household rules
+• Time‑limited separations
+• Counseling for non‑using family members
+• Consistent routines for children
+
+These steps create safety without requiring ultimatums.
+
+**Children Need Predictability More Than Promises**
+
+Kids don't need perfect parents. They need:
+
+• Emotional safety
+• Consistent boundaries
+• Honest, age‑appropriate communication
+• Adults who regulate themselves
+
+Protecting children is an act of love—not betrayal.
+
+**Love With Limits**
+
+Loving someone with addiction requires redefining love:
+
+• Love that doesn't rescue
+• Love that tells the truth
+• Love that protects the vulnerable
+• Love that survives even if the relationship changes
+
+You can care deeply without letting addiction consume your family.
+
+**Take the Next Step**
+
+If addiction is affecting your marriage or family, you don't have to navigate it alone. Call the Sober Helpline at [LINK:844-762-3734:tel:844-762-3734] for free, confidential guidance.
+
+Protecting your family is not giving up—it's the most loving thing you can do.`
+  },
   {
     id: 36,
     title: "When Addiction Affects Grandchildren: How to Protect Kids Without Creating Family War",
