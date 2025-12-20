@@ -808,7 +808,6 @@ export type Database = {
           submitted_by: string | null
           substance_use_disorder_experience: boolean | null
           telehealth_available: boolean | null
-          therapeutic_modalities: string[] | null
           tiktok_url: string | null
           total_treatment_beds: number | null
           travel_expenses_included: boolean | null
@@ -878,7 +877,6 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           telehealth_available?: boolean | null
-          therapeutic_modalities?: string[] | null
           tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
@@ -948,7 +946,6 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           telehealth_available?: boolean | null
-          therapeutic_modalities?: string[] | null
           tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
