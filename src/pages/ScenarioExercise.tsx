@@ -1,9 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Target } from "lucide-react";
+import { Phone, ArrowLeft, Target, Printer } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
 export default function ScenarioExercise() {
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <>
@@ -28,7 +32,7 @@ export default function ScenarioExercise() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            {/* Back Link - Hidden on print */}
+            {/* Back Link & Print Button - Hidden on print */}
             <div className="flex items-center justify-between mb-6 print:hidden">
               <Link
                 to="/family-videos"
@@ -37,6 +41,10 @@ export default function ScenarioExercise() {
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Family Resources
               </Link>
+              <Button onClick={handlePrint} className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print Document
+              </Button>
             </div>
 
             {/* Printable Document Content */}

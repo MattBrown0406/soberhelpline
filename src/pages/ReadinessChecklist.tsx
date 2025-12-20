@@ -1,9 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, ClipboardCheck } from "lucide-react";
+import { Phone, ArrowLeft, ClipboardCheck, Printer } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
 export default function ReadinessChecklist() {
+  const handlePrint = () => {
+    window.print();
+  };
   return (
     <>
       <Helmet>
@@ -27,8 +31,8 @@ export default function ReadinessChecklist() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            {/* Back Link */}
-            <div className="flex items-center justify-between mb-6">
+            {/* Back Link & Print Button */}
+            <div className="flex items-center justify-between mb-6 print:hidden">
               <Link
                 to="/family-videos"
                 className="inline-flex items-center text-primary hover:text-primary/80"
@@ -36,10 +40,14 @@ export default function ReadinessChecklist() {
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Family Resources
               </Link>
+              <Button onClick={handlePrint} className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print Checklist
+              </Button>
             </div>
 
             {/* Document Content */}
-            <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12">
+            <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b">
                 <ClipboardCheck className="h-12 w-12 text-primary mx-auto mb-4" />
