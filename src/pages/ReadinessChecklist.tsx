@@ -240,6 +240,7 @@ export default function ReadinessChecklist() {
                     <div>
                       <span className={`font-semibold ${totalChecked <= 10 ? 'text-red-700 dark:text-red-400' : 'text-foreground'}`}>0–10 boxes checked — Low readiness</span>
                       <p className="text-sm text-muted-foreground">Focus on boundaries, consequences, and your own recovery.</p>
+                      <p className="text-sm text-primary font-medium mt-1">Consider consulting with an interventionist to help create willingness.</p>
                     </div>
                   </div>
                   <div className={`flex items-start gap-3 p-3 rounded-lg ${totalChecked > 10 && totalChecked <= 20 ? 'bg-yellow-100 dark:bg-yellow-950/50 ring-2 ring-yellow-400' : ''}`}>
@@ -247,6 +248,7 @@ export default function ReadinessChecklist() {
                     <div>
                       <span className={`font-semibold ${totalChecked > 10 && totalChecked <= 20 ? 'text-yellow-700 dark:text-yellow-400' : 'text-foreground'}`}>11–20 boxes checked — Emerging readiness</span>
                       <p className="text-sm text-muted-foreground">Encourage professional assessment. Maintain boundaries. Avoid rescuing.</p>
+                      <p className="text-sm text-primary font-medium mt-1">Consider consulting with an interventionist to help create willingness.</p>
                     </div>
                   </div>
                   <div className={`flex items-start gap-3 p-3 rounded-lg ${totalChecked > 20 ? 'bg-green-100 dark:bg-green-950/50 ring-2 ring-green-400' : ''}`}>
