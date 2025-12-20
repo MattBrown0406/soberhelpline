@@ -305,6 +305,12 @@ export default function FamilyVideos() {
                     Scenario Practice Exercise
                   </Button>
                 </Link>
+                <Link to="/readiness-checklist">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Readiness for Change Checklist
+                  </Button>
+                </Link>
                 <Link to="/crisis-chaos">
                   <Button variant="outline" className="gap-2">
                     <FileText className="h-4 w-4" />
