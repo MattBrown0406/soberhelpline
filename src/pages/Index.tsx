@@ -195,8 +195,8 @@ const Index = () => {
         {/* Family Member Forum Button */}
         <div className="text-center mb-4">
           <Link to="/family-forum">
-            <Button variant="default" className="flex items-center gap-2 bg-logo-green hover:bg-logo-green/90 mx-auto">
-              <UserIcon className="w-4 h-4" />
+            <Button variant="default" size="lg" className="flex items-center gap-3 bg-logo-green hover:bg-logo-green/90 mx-auto text-base px-6 py-3">
+              <UserIcon className="w-5 h-5" />
               Family Member Forum
             </Button>
           </Link>
