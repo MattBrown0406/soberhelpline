@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users, Calendar } from "lucide-react";
+import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users, Calendar, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -399,28 +399,60 @@ export default function FamilyVideos() {
               </p>
               <div className="space-y-4">
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-rose-600 dark:text-rose-400 mb-2">Loving Enough to Let Go, Trusting Enough to Hope</h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-rose-600 dark:text-rose-400">Loving Enough to Let Go, Trusting Enough to Hope</h4>
+                    <a href="/audio/loving-enough-to-let-go-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-rose-600 hover:text-rose-700 dark:text-rose-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
                   <audio controls className="w-full">
                     <source src="/audio/loving-enough-to-let-go-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-sky-600 dark:text-sky-400 mb-2">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-sky-600 dark:text-sky-400">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
+                    <a href="/audio/regaining-calm-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-sky-600 hover:text-sky-700 dark:text-sky-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
                   <audio controls className="w-full">
                     <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-purple-600 dark:text-purple-400 mb-2">Releasing Sadness and Guilt with Compassion</h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-purple-600 dark:text-purple-400">Releasing Sadness and Guilt with Compassion</h4>
+                    <a href="/audio/releasing-sadness-guilt-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-purple-600 hover:text-purple-700 dark:text-purple-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
                   <audio controls className="w-full">
                     <source src="/audio/releasing-sadness-guilt-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-amber-600 dark:text-amber-400 mb-2">Allowing Hope and Happiness to Return</h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-amber-600 dark:text-amber-400">Allowing Hope and Happiness to Return</h4>
+                    <a href="/audio/allowing-hope-happiness-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-amber-600 hover:text-amber-700 dark:text-amber-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
                   <audio controls className="w-full">
                     <source src="/audio/allowing-hope-happiness-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
