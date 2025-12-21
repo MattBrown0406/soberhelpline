@@ -224,7 +224,7 @@ export default function FamilyVideos() {
                 Back to Family Support
               </Link>
               <Link to="/family-forum">
-                <Button variant="outline" size="sm" className="gap-2">
+                <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
                   <Users className="h-4 w-4" />
                   Family Forum
                 </Button>
