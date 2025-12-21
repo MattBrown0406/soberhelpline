@@ -188,13 +188,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
                   <CardDescription>Scenario-Based Exercises for Family Recovery</CardDescription>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Button onClick={(e) => { e.stopPropagation(); handlePrint(); }} variant="outline" size="sm" className="gap-2 print:hidden">
-                  <Printer className="h-4 w-4" />
-                  Print
-                </Button>
-                <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-              </div>
+              <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </div>
           </CardHeader>
         </CollapsibleTrigger>
@@ -916,6 +910,22 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
           <p className="text-muted-foreground mt-4 text-sm italic">
             Practicing these scenarios prepares you to act from clarity—not panic—when it matters most.
           </p>
+        </div>
+
+        {/* Print Completed Exercises */}
+        <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 print:hidden">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-semibold text-foreground mb-1">Print Your Completed Exercises</h3>
+              <p className="text-sm text-muted-foreground">
+                Save a copy of your responses to review later or share with a therapist or support person.
+              </p>
+            </div>
+            <Button onClick={handlePrint} className="gap-2">
+              <Printer className="h-4 w-4" />
+              Print Exercises
+            </Button>
+          </div>
         </div>
 
         {/* Companion Resources */}
