@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users } from "lucide-react";
+import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -227,6 +227,12 @@ export default function FamilyVideos() {
                 <Button variant="outline" size="sm" className="gap-2">
                   <Users className="h-4 w-4" />
                   Family Forum
+                </Button>
+              </Link>
+              <Link to="/family-webinars">
+                <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                  <Calendar className="h-4 w-4" />
+                  Monthly Webinar
                 </Button>
               </Link>
             </div>
