@@ -399,28 +399,28 @@ export default function FamilyVideos() {
               </p>
               <div className="space-y-4">
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-foreground mb-2">Loving Enough to Let Go, Trusting Enough to Hope</h4>
+                  <h4 className="font-medium text-rose-600 dark:text-rose-400 mb-2">Loving Enough to Let Go, Trusting Enough to Hope</h4>
                   <audio controls className="w-full">
                     <source src="/audio/loving-enough-to-let-go-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-foreground mb-2">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
+                  <h4 className="font-medium text-sky-600 dark:text-sky-400 mb-2">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
                   <audio controls className="w-full">
                     <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-foreground mb-2">Releasing Sadness and Guilt with Compassion</h4>
+                  <h4 className="font-medium text-purple-600 dark:text-purple-400 mb-2">Releasing Sadness and Guilt with Compassion</h4>
                   <audio controls className="w-full">
                     <source src="/audio/releasing-sadness-guilt-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
-                  <h4 className="font-medium text-foreground mb-2">Allowing Hope and Happiness to Return</h4>
+                  <h4 className="font-medium text-amber-600 dark:text-amber-400 mb-2">Allowing Hope and Happiness to Return</h4>
                   <audio controls className="w-full">
                     <source src="/audio/allowing-hope-happiness-meditation.mp3" type="audio/mpeg" />
                     Your browser does not support the audio element.
