@@ -1029,6 +1029,29 @@ export type Database = {
       }
     }
     Functions: {
+      get_my_provider_subscriptions_with_provider: {
+        Args: never
+        Returns: {
+          amount: number | null
+          created_at: string | null
+          id: string | null
+          next_billing_date: string | null
+          paypal_subscription_id: string | null
+          plan_type: string | null
+          provider_name: string | null
+          provider_submission_id: string | null
+          start_date: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "provider_subscriptions_with_provider"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_provider_click_analytics_admin: {
         Args: never
         Returns: {
@@ -1051,6 +1074,29 @@ export type Database = {
         SetofOptions: {
           from: "*"
           to: "provider_click_analytics"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_provider_subscriptions_with_provider_admin: {
+        Args: never
+        Returns: {
+          amount: number | null
+          created_at: string | null
+          id: string | null
+          next_billing_date: string | null
+          paypal_subscription_id: string | null
+          plan_type: string | null
+          provider_name: string | null
+          provider_submission_id: string | null
+          start_date: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "provider_subscriptions_with_provider"
           isOneToOne: false
           isSetofReturn: true
         }
