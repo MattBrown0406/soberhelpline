@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -455,6 +455,13 @@ export default function FamilyForum() {
               >
                 <Video className="h-4 w-4" />
                 Education Videos & Resources
+              </Link>
+              <Link
+                to="/family-webinars"
+                className="inline-flex items-center text-primary hover:text-primary/80 gap-1"
+              >
+                <CalendarDays className="h-4 w-4" />
+                Monthly Webinar Registration
               </Link>
             </div>
 
