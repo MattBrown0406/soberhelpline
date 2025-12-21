@@ -385,6 +385,12 @@ export default function FamilyVideos() {
                     Aftercare Readiness Checklist
                   </Button>
                 </Link>
+                <Link to="/treatment-red-flags">
+                  <Button variant="outline" className="gap-2 border-red-600/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
+                    <FileText className="h-4 w-4" />
+                    Treatment Industry Red Flags Guide
+                  </Button>
+                </Link>
               </div>
             </div>
 
