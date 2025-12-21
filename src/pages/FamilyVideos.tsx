@@ -385,6 +385,12 @@ export default function FamilyVideos() {
                     Aftercare Readiness Checklist
                   </Button>
                 </Link>
+                <Link to="/why-change-doesnt-happen">
+                  <Button variant="outline" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                    <FileText className="h-4 w-4" />
+                    Why Change Doesn't Happen When Families Try Harder
+                  </Button>
+                </Link>
                 <Link to="/treatment-red-flags">
                   <Button variant="outline" className="gap-2 border-red-600/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
                     <FileText className="h-4 w-4" />
