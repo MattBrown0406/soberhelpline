@@ -840,7 +840,7 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           detox_only_services?: boolean | null
-          email?: string | null
+          email?: never
           facebook_url?: string | null
           faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
@@ -867,7 +867,7 @@ export type Database = {
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           parent_submission_id?: string | null
-          phone_number?: string | null
+          phone_number?: never
           provider_name?: string | null
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
@@ -910,7 +910,7 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           detox_only_services?: boolean | null
-          email?: string | null
+          email?: never
           facebook_url?: string | null
           faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
@@ -937,7 +937,7 @@ export type Database = {
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           parent_submission_id?: string | null
-          phone_number?: string | null
+          phone_number?: never
           provider_name?: string | null
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
