@@ -45,6 +45,7 @@ import RelapseWarningSignsTracker from "./pages/RelapseWarningSignsTracker";
 import CommunicationGuide from "./pages/CommunicationGuide";
 import AftercareChecklist from "./pages/AftercareChecklist";
 import TreatmentRedFlags from "./pages/TreatmentRedFlags";
+import FamilyAdvocacyToolkit from "./pages/FamilyAdvocacyToolkit";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -97,6 +98,7 @@ const App = () => (
             <Route path="/communication-guide" element={<CommunicationGuide />} />
             <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
             <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
+            <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
