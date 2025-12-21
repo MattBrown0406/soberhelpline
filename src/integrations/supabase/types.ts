@@ -808,6 +808,7 @@ export type Database = {
           submitted_by: string | null
           substance_use_disorder_experience: boolean | null
           telehealth_available: boolean | null
+          therapeutic_modalities: string[] | null
           tiktok_url: string | null
           total_treatment_beds: number | null
           travel_expenses_included: boolean | null
@@ -839,7 +840,7 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           detox_only_services?: boolean | null
-          email?: never
+          email?: string | null
           facebook_url?: string | null
           faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
@@ -866,7 +867,7 @@ export type Database = {
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           parent_submission_id?: string | null
-          phone_number?: never
+          phone_number?: string | null
           provider_name?: string | null
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
@@ -877,6 +878,7 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           telehealth_available?: boolean | null
+          therapeutic_modalities?: string[] | null
           tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
@@ -908,7 +910,7 @@ export type Database = {
           description_of_services?: string | null
           detox_available?: boolean | null
           detox_only_services?: boolean | null
-          email?: never
+          email?: string | null
           facebook_url?: string | null
           faith_based_services?: boolean | null
           gender_specific_treatment?: string[] | null
@@ -935,7 +937,7 @@ export type Database = {
           military_first_responder_care?: boolean | null
           minimum_time_since_last_use?: string | null
           parent_submission_id?: string | null
-          phone_number?: never
+          phone_number?: string | null
           provider_name?: string | null
           recovery_fellowships?: string[] | null
           required_meetings_per_week?: string | null
@@ -946,6 +948,7 @@ export type Database = {
           submitted_by?: string | null
           substance_use_disorder_experience?: boolean | null
           telehealth_available?: boolean | null
+          therapeutic_modalities?: string[] | null
           tiktok_url?: string | null
           total_treatment_beds?: number | null
           travel_expenses_included?: boolean | null
