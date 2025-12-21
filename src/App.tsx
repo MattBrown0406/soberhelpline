@@ -27,7 +27,7 @@ import FAQs from "./pages/FAQs";
 import FamilySupport from "./pages/FamilySupport";
 import UnderstandingAddiction from "./pages/UnderstandingAddiction";
 import FamilyMembership from "./pages/FamilyMembership";
-import FamilyVideos from "./pages/FamilyVideos";
+import FamilyEducation from "./pages/FamilyEducation";
 import FamilyForum from "./pages/FamilyForum";
 import FamilyConsultation from "./pages/FamilyConsultation";
 import FamilyWebinars from "./pages/FamilyWebinars";
@@ -81,7 +81,7 @@ const App = () => (
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />
             <Route path="/family-membership" element={<FamilyMembership />} />
-            <Route path="/family-videos" element={<FamilyVideos />} />
+            <Route path="/family-education" element={<FamilyEducation />} />
             <Route path="/family-forum" element={<FamilyForum />} />
             <Route path="/family-forum/:topicId" element={<ForumTopic />} />
             <Route path="/family-consultation" element={<FamilyConsultation />} />

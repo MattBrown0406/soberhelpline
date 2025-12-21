@@ -141,9 +141,9 @@ const Auth = () => {
           .is('provider_submission_id', null)
           .maybeSingle();
         
-        // Redirect family members to family videos page, others to home
+        // Redirect family members to family education page, others to home
         if (subscription) {
-          navigate("/family-videos");
+          navigate("/family-education");
         } else {
           navigate("/");
         }

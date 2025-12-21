@@ -159,7 +159,7 @@ export default function ReadinessChecklist() {
             {/* Back Link & Print Button */}
             <div className="flex items-center justify-between mb-6 print:hidden">
               <Link
-                to="/family-videos"
+                to="/family-education"
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
@@ -391,7 +391,7 @@ export default function ReadinessChecklist() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/family-videos" className="text-primary hover:underline">
+                    <Link to="/family-education" className="text-primary hover:underline">
                       Boundary Setting Worksheet
                     </Link>
                   </li>

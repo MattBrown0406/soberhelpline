@@ -449,7 +449,7 @@ export default function FamilyForum() {
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Family Support
               </Link>
-              <Link to="/family-videos">
+              <Link to="/family-education">
                 <Button variant="default" className="gap-2 bg-logo-green hover:bg-logo-green/90">
                   <Video className="h-4 w-4" />
                   Education Videos & Resources

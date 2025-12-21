@@ -95,7 +95,7 @@ export default function FamilyActionPlan() {
             {/* Back Link & Print Button - Hidden on print */}
             <div className="flex items-center justify-between mb-6 print:hidden">
               <Link
-                to="/family-videos"
+                to="/family-education"
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />

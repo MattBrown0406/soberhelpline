@@ -101,7 +101,7 @@ export default function SubscriptionSuccess() {
                 <li>Printable resources</li>
               </ul>
             </div>
-            <Button onClick={() => navigate('/family-videos')} className="w-full">
+            <Button onClick={() => navigate('/family-education')} className="w-full">
               Access Family Resources
             </Button>
           </CardContent>

@@ -143,7 +143,7 @@ export default function FamilySupport() {
                           Access our library of educational videos covering topics like understanding addiction, setting boundaries, and self-care.
                         </p>
                       </div>
-                      <Link to="/family-videos">
+                      <Link to="/family-education">
                         <Button variant="outline" size="sm" className="w-full mt-4">
                           View Resources
                         </Button>
