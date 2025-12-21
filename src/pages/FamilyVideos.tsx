@@ -314,67 +314,67 @@ export default function FamilyVideos() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link to="/treatment-questions">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
                     <FileText className="h-4 w-4" />
                     40 Questions to Ask a Treatment Center
                   </Button>
                 </Link>
                 <Link to="/recovery-requirements">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
                     <FileText className="h-4 w-4" />
                     What Recovery Requires From Families
                   </Button>
                 </Link>
                 <Link to="/family-action-plan">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
                     <FileText className="h-4 w-4" />
                     Family Recovery Action Plan
                   </Button>
                 </Link>
                 <Link to="/scenario-exercise">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
                     <FileText className="h-4 w-4" />
                     Scenario Practice Exercise
                   </Button>
                 </Link>
                 <Link to="/readiness-checklist">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
                     <FileText className="h-4 w-4" />
                     Readiness for Change Checklist
                   </Button>
                 </Link>
                 <Link to="/crisis-chaos">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
                     <FileText className="h-4 w-4" />
                     Crisis vs. Chaos Decision Guide
                   </Button>
                 </Link>
                 <Link to="/emotional-regulation">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-sky-500/50 text-sky-700 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-950/30">
                     <FileText className="h-4 w-4" />
                     Emotional Regulation Tools
                   </Button>
                 </Link>
                 <Link to="/values-exercise">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
                     <FileText className="h-4 w-4" />
                     Values Clarification Exercise
                   </Button>
                 </Link>
                 <Link to="/talking-about-treatment">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
                     <FileText className="h-4 w-4" />
                     How to Talk About Treatment
                   </Button>
                 </Link>
                 <Link to="/communication-guide">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
                     <FileText className="h-4 w-4" />
                     What to Say / What Not to Say
                   </Button>
                 </Link>
                 <Link to="/aftercare-checklist">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
                     <FileText className="h-4 w-4" />
                     Aftercare Readiness Checklist
                   </Button>
