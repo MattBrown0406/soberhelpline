@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones } from "lucide-react";
+import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -215,13 +215,21 @@ export default function FamilyVideos() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-6xl mx-auto">
-            <Link
-              to="/family-support"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Support
-            </Link>
+            <div className="flex items-center gap-4 mb-6">
+              <Link
+                to="/family-support"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Support
+              </Link>
+              <Link to="/family-forum">
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Users className="h-4 w-4" />
+                  Family Forum
+                </Button>
+              </Link>
+            </div>
 
             <div className="text-center mb-8">
               <Video className="h-12 w-12 text-primary mx-auto mb-4" />
