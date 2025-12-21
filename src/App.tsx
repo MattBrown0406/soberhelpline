@@ -43,6 +43,7 @@ import TalkingAboutTreatment from "./pages/TalkingAboutTreatment";
 import ReadinessChecklist from "./pages/ReadinessChecklist";
 import RelapseWarningSignsTracker from "./pages/RelapseWarningSignsTracker";
 import CommunicationGuide from "./pages/CommunicationGuide";
+import AftercareChecklist from "./pages/AftercareChecklist";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -93,6 +94,7 @@ const App = () => (
             <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
             <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
             <Route path="/communication-guide" element={<CommunicationGuide />} />
+            <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

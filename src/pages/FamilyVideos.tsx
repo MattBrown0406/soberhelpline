@@ -365,6 +365,12 @@ export default function FamilyVideos() {
                     What to Say / What Not to Say
                   </Button>
                 </Link>
+                <Link to="/aftercare-checklist">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    Aftercare Readiness Checklist
+                  </Button>
+                </Link>
               </div>
             </div>
 
