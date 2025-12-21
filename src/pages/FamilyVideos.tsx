@@ -355,6 +355,12 @@ export default function FamilyVideos() {
                     How to Talk About Treatment
                   </Button>
                 </Link>
+                <Link to="/communication-guide">
+                  <Button variant="outline" className="gap-2">
+                    <FileText className="h-4 w-4" />
+                    What to Say / What Not to Say
+                  </Button>
+                </Link>
               </div>
             </div>
 
