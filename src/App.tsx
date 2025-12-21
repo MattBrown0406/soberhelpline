@@ -46,6 +46,7 @@ import CommunicationGuide from "./pages/CommunicationGuide";
 import AftercareChecklist from "./pages/AftercareChecklist";
 import TreatmentRedFlags from "./pages/TreatmentRedFlags";
 import FamilyAdvocacyToolkit from "./pages/FamilyAdvocacyToolkit";
+import WhyChangeDoesntHappen from "./pages/WhyChangeDoesntHappen";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -100,6 +101,7 @@ const App = () => (
             <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
             <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />
             <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
+            <Route path="/why-change-doesnt-happen" element={<WhyChangeDoesntHappen />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
