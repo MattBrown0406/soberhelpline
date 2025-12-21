@@ -255,7 +255,7 @@ export default function CommunicationGuide() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-6 print:hidden">
               <Link
-                to="/family-videos"
+                to="/family-education"
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
@@ -484,7 +484,7 @@ export default function CommunicationGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/family-videos">
+                  <Link to="/family-education">
                     <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
                   </Link>
                   <Link to="/emotional-regulation">
@@ -496,7 +496,7 @@ export default function CommunicationGuide() {
                   <Link to="/family-action-plan">
                     <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
-                  <Link to="/family-videos">
+                  <Link to="/family-education">
                     <Button variant="outline" size="sm">"Is This Help or Enabling?" Decision Tree</Button>
                   </Link>
                 </div>

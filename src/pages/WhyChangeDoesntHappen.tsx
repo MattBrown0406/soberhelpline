@@ -28,7 +28,7 @@ const WhyChangeDoesntHappen = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-videos" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
+        <Link to="/family-education" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
@@ -420,15 +420,15 @@ const WhyChangeDoesntHappen = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">Suggested Companion Resources</h2>
             
             <div className="grid sm:grid-cols-2 gap-3">
-              <Link to="/family-videos" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <FileText className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Guilt vs. Responsibility Deep-Dive Module</span>
               </Link>
-              <Link to="/family-videos" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <GitBranch className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Helping vs. Enabling Decision Tree</span>
               </Link>
-              <Link to="/family-videos" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <ClipboardList className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Boundary Setting Worksheet</span>
               </Link>
@@ -446,7 +446,7 @@ const WhyChangeDoesntHappen = () => {
 
         <div className="flex justify-center">
           <Button asChild>
-            <Link to="/family-videos">
+            <Link to="/family-education">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Family Resources
             </Link>

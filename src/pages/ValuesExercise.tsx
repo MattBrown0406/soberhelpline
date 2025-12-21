@@ -51,7 +51,7 @@ const ValuesExercise = () => {
         <main className="container mx-auto px-4 py-8 max-w-4xl">
           {/* Navigation - Hidden in print */}
           <div className="mb-6 flex justify-between items-center print:hidden">
-            <Link to="/family-videos">
+            <Link to="/family-education">
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Resources

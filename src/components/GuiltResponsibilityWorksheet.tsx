@@ -752,10 +752,10 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
                 Suggested Companion Tools
               </h3>
               <div className="flex flex-wrap gap-2">
-                <Link to="/family-videos">
+                <Link to="/family-education">
                   <Button variant="outline" size="sm">"Is This Help or Enabling?" Decision Tree</Button>
                 </Link>
-                <Link to="/family-videos">
+                <Link to="/family-education">
                   <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
                 </Link>
                 <Link to="/emotional-regulation">

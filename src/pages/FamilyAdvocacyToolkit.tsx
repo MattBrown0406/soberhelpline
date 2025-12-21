@@ -120,7 +120,7 @@ const FamilyAdvocacyToolkit = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-videos" className="inline-flex items-center text-logo-green hover:underline mb-6 print:hidden">
+        <Link to="/family-education" className="inline-flex items-center text-logo-green hover:underline mb-6 print:hidden">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
@@ -655,7 +655,7 @@ const FamilyAdvocacyToolkit = () => {
                 <FileText className="h-4 w-4 text-red-500" />
                 <span className="text-sm">Crisis vs. Chaos Decision Guide</span>
               </Link>
-              <Link to="/family-videos" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
+              <Link to="/family-education" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
                 <FileText className="h-4 w-4 text-amber-500" />
                 <span className="text-sm">Guilt vs. Responsibility Worksheet</span>
               </Link>
