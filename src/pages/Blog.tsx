@@ -42,12 +42,72 @@ import parentsAddictedAdultChildImg from "@/assets/blog-parents-addicted-adult-c
 import addictionGrandchildrenBoundariesImg from "@/assets/blog-addiction-grandchildren-boundaries.png";
 import addictionMarriageFamilyImg from "@/assets/blog-addiction-marriage-family.png";
 import tmsDepressionTreatmentImg from "@/assets/blog-tms-depression-treatment.png";
+import addictionAnxietyFamilyImg from "@/assets/blog-addiction-anxiety-family.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 39,
+    title: "Addiction and Anxiety: How Chronic Fear Drives Substance Use and Family Burnout",
+    excerpt: "Anxiety is one of the most overlooked drivers of addiction. It fuels substance use and quietly consumes families. Understanding this connection helps families respond more effectively.",
+    author: "Sober Helpline",
+    date: "2025-12-21",
+    category: "Family Support",
+    image: addictionAnxietyFamilyImg,
+    slug: "addiction-anxiety-family-burnout",
+    seoTitle: "Addiction and Anxiety: How Chronic Fear Drives Substance Use and Family Burnout",
+    metaDescription: "Learn how anxiety drives addiction and burns out families. Discover strategies to break the anxiety-addiction loop and restore emotional regulation in the family system.",
+    content: `**Addiction and Anxiety: How Chronic Fear Drives Substance Use and Family Burnout**
+
+Anxiety is one of the most overlooked drivers of addiction. It fuels substance use and quietly consumes families.
+
+Understanding this connection helps families respond more effectively.
+
+**Anxiety as a Catalyst for Addiction**
+
+Anxiety can feel unbearable. Racing thoughts, constant worry, and physical tension often drive people toward substances that provide temporary relief.
+
+Over time, substances worsen anxiety, creating dependency and escalation.
+
+**How Family Anxiety Mirrors Addiction**
+
+Families develop their own anxiety patterns:
+
+• Constant vigilance
+• Obsessive monitoring
+• Fear-based decision making
+• Control attempts
+• Emotional burnout
+
+The entire household becomes dysregulated.
+
+**Why Reassurance Doesn't Work**
+
+Families often try to calm anxiety through reassurance, logic, or promises. Anxiety—and addiction—do not respond to reassurance. They respond to structure and consistency.
+
+**Breaking the Anxiety-Addiction Loop**
+
+Families can reduce their own anxiety by:
+
+• Creating predictable boundaries
+• Limiting crisis response
+• Avoiding reactive decisions
+• Seeking support for themselves
+• Letting go of control over outcomes
+
+Reducing family anxiety often stabilizes the environment, even if the addicted person remains unstable.
+
+**Healing the Family System**
+
+Recovery is not just about stopping substances. It is about restoring emotional regulation across the system.
+
+Families who reclaim calm, boundaries, and self-care often find they are no longer consumed by addiction—even while loving someone who struggles.
+
+If your family is caught in cycles of anxiety and addiction, you do not have to navigate this alone. Call the Sober Helpline at (866) 961-3255 for compassionate support.`
+  },
   {
     id: 38,
     title: "Transcranial Magnetic Stimulation (TMS) for Depression: How Treating Underlying Mental Health Can Support Addiction Recovery",
