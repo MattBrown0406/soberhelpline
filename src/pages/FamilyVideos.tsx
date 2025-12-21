@@ -379,6 +379,13 @@ export default function FamilyVideos() {
               </p>
               <div className="space-y-4">
                 <div className="bg-background rounded-lg p-4 border">
+                  <h4 className="font-medium text-foreground mb-2">Loving Enough to Let Go, Trusting Enough to Hope</h4>
+                  <audio controls className="w-full">
+                    <source src="/audio/loving-enough-to-let-go-meditation.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+                <div className="bg-background rounded-lg p-4 border">
                   <h4 className="font-medium text-foreground mb-2">Regaining Calm When Addiction Triggers Fear and Urgency</h4>
                   <audio controls className="w-full">
                     <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
