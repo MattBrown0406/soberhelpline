@@ -27,16 +27,16 @@ interface Webinar {
 
 const upcomingWebinar: Webinar = {
   id: "upcoming-1",
-  title: "Understanding Relapse: Prevention Strategies for Families",
-  description: "Learn to recognize early warning signs of relapse and discover effective strategies to support your loved one without enabling. This interactive session includes Q&A time for your specific questions.",
-  date: "January 15, 2025",
-  time: "7:00 PM EST",
+  title: "Upcoming Webinar",
+  description: "Upcoming webinar date, subject and speaker to be announced soon!",
+  date: "To Be Announced",
+  time: "To Be Announced",
   duration: "60 minutes",
-  host: "Dr. Sarah Mitchell",
-  hostTitle: "Licensed Clinical Psychologist & Addiction Specialist",
+  host: "To Be Announced",
+  hostTitle: "",
   isLive: false,
   isUpcoming: true,
-  registeredCount: 47,
+  registeredCount: 0,
 };
 
 const pastWebinars: Webinar[] = [
