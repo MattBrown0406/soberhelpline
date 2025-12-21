@@ -12,6 +12,7 @@ import ControlWorksheet from "@/components/ControlWorksheet";
 import BoundaryWorksheet from "@/components/BoundaryWorksheet";
 import ScenarioWorksheet from "@/components/ScenarioWorksheet";
 import EnablingDecisionTree from "@/components/EnablingDecisionTree";
+import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksheet";
 
 interface VideoItem {
   id: string;
@@ -279,6 +280,9 @@ export default function FamilyVideos() {
 
             {/* Scenario Worksheet */}
             {user && <ScenarioWorksheet user={user} />}
+
+            {/* Guilt vs Responsibility Worksheet */}
+            {user && <GuiltResponsibilityWorksheet user={user} />}
 
             {/* Relapse Warning Signs Tracker */}
             <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
