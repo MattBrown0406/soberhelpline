@@ -349,11 +349,11 @@ export default function FamilyWebinars() {
             <Card className="mt-10 bg-muted/30">
               <CardContent className="p-6 text-center">
                 <Calendar className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-logo-green mb-2">Coming Up in 2025</h3>
+                <h3 className="font-semibold text-logo-green mb-2">Coming Up in 2026</h3>
                 <div className="text-sm text-muted-foreground space-y-1 max-w-md mx-auto">
-                  <p><strong>February:</strong> Addiction & Mental Health: The Connection</p>
-                  <p><strong>March:</strong> Supporting Long-Term Recovery</p>
-                  <p><strong>April:</strong> When an Intervention is Needed</p>
+                  <p><strong>February:</strong> TBD</p>
+                  <p><strong>March:</strong> TBD</p>
+                  <p><strong>April:</strong> TBD</p>
                 </div>
               </CardContent>
             </Card>
