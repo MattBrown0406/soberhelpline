@@ -171,21 +171,28 @@ export default function FamilyMembership() {
     try {
       const formData = form.getValues();
       
-      // Update the user's profile with the form data
+      // Update the user's profile with the form data (non-sensitive fields)
       const { error: profileError } = await supabase
         .from('profiles')
         .upsert({
           id: user!.id,
           first_name: formData.firstName,
           last_name: formData.lastName,
-          email: formData.email,
-          phone_number: formData.phoneNumber,
           username: formData.username,
           webinar_reminders_opted_in: webinarRemindersOptIn,
         });
 
-      if (profileError) {
-        if (profileError.code === '23505') {
+      // Store contact data separately
+      const { error: privateError } = await supabase
+        .from('profile_private')
+        .upsert({
+          user_id: user!.id,
+          email: formData.email,
+          phone_number: formData.phoneNumber,
+        });
+
+      if (profileError || privateError) {
+        if (profileError?.code === '23505') {
           toast({
             title: "Username taken",
             description: "This username is already in use. Please choose another.",
@@ -194,7 +201,7 @@ export default function FamilyMembership() {
           setProcessingPayment(false);
           return;
         }
-        console.error('Profile update error:', profileError);
+        console.error('Profile update error:', profileError || privateError);
       }
 
       // Add to Mailchimp if opted in for webinar reminders

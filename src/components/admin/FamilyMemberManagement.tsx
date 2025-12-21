@@ -28,8 +28,6 @@ interface FamilyMember {
   username: string | null;
   first_name: string;
   last_name: string;
-  email: string;
-  phone_number: string;
   created_at: string | null;
   agreed_to_code_of_conduct: boolean | null;
   code_of_conduct_agreed_at: string | null;
@@ -41,6 +39,10 @@ interface FamilyMember {
     created_at: string;
     paypal_subscription_id: string | null;
   } | null;
+  contact?: {
+    email: string;
+    phone_number: string | null;
+  };
 }
 
 export function FamilyMemberManagement() {
@@ -77,18 +79,28 @@ export function FamilyMemberManagement() {
       // Fetch profiles for these users
       const { data: profiles, error: profileError } = await supabase
         .from('profiles')
-        .select('*')
+        .select('id, username, first_name, last_name, created_at, agreed_to_code_of_conduct, code_of_conduct_agreed_at')
         .in('id', userIds);
 
       if (profileError) throw profileError;
+
+      // Fetch contact info for these users
+      const { data: contacts, error: contactError } = await supabase
+        .from('profile_private')
+        .select('user_id, email, phone_number')
+        .in('user_id', userIds);
+
+      if (contactError) throw contactError;
 
       // Combine data - for each profile, find their active/latest subscription
       const membersData: FamilyMember[] = (profiles || []).map(profile => {
         const userSubs = subscriptions.filter(s => s.user_id === profile.id);
         const activeSub = userSubs.find(s => s.status === 'active') || userSubs[0];
-        
+        const contact = contacts?.find(c => c.user_id === profile.id);
+
         return {
           ...profile,
+          contact: contact ? { email: contact.email, phone_number: contact.phone_number } : undefined,
           subscription: activeSub ? {
             id: activeSub.id,
             status: activeSub.status,
@@ -185,8 +197,8 @@ export function FamilyMemberManagement() {
                 <TableCell>
                   {member.first_name} {member.last_name}
                 </TableCell>
-                <TableCell>{member.email}</TableCell>
-                <TableCell>{member.phone_number}</TableCell>
+                <TableCell>{member.contact?.email || '-'}</TableCell>
+                <TableCell>{member.contact?.phone_number || '-'}</TableCell>
                 <TableCell>
                   {member.agreed_to_code_of_conduct ? (
                     <div className="flex items-center gap-1 text-green-600">
