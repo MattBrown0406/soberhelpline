@@ -11,6 +11,7 @@ import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import ControlWorksheet from "@/components/ControlWorksheet";
 import BoundaryWorksheet from "@/components/BoundaryWorksheet";
 import ScenarioWorksheet from "@/components/ScenarioWorksheet";
+import EnablingDecisionTree from "@/components/EnablingDecisionTree";
 
 interface VideoItem {
   id: string;
@@ -260,6 +261,11 @@ export default function FamilyVideos() {
                   <p className="text-foreground whitespace-nowrap">Family Recovery</p>
                 </div>
               </div>
+            </div>
+
+            {/* Enabling vs Helping Decision Tree */}
+            <div className="mb-10">
+              <EnablingDecisionTree />
             </div>
 
             {/* Self-Assessment */}
