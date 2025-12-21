@@ -391,6 +391,12 @@ export default function FamilyVideos() {
                     Treatment Industry Red Flags Guide
                   </Button>
                 </Link>
+                <Link to="/family-advocacy-toolkit">
+                  <Button variant="outline" className="gap-2 border-green-600/50 text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/30">
+                    <FileText className="h-4 w-4" />
+                    Family Advocacy Toolkit
+                  </Button>
+                </Link>
               </div>
             </div>
 
