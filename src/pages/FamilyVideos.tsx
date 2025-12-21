@@ -274,6 +274,20 @@ export default function FamilyVideos() {
             {/* Scenario Worksheet */}
             {user && <ScenarioWorksheet user={user} />}
 
+            {/* Relapse Warning Signs Tracker */}
+            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+              <h3 className="text-lg font-semibold text-logo-green mb-3">Relapse Warning Signs Tracker</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Return to active use is the end of a process that often begins days or weeks before the substance is used. This interactive tracker helps you identify emotional, behavioral, and cognitive warning signs early—when intervention is most effective.
+              </p>
+              <Link to="/relapse-warning-signs">
+                <Button className="gap-2">
+                  <FileText className="h-4 w-4" />
+                  Open Warning Signs Tracker
+                </Button>
+              </Link>
+            </div>
+
             {/* Printable Resources */}
             <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
               <h3 className="text-lg font-semibold text-logo-green mb-3">Printable Resources</h3>
@@ -333,12 +347,6 @@ export default function FamilyVideos() {
                   <Button variant="outline" className="gap-2">
                     <FileText className="h-4 w-4" />
                     How to Talk About Treatment
-                  </Button>
-                </Link>
-                <Link to="/relapse-warning-signs">
-                  <Button variant="outline" className="gap-2">
-                    <FileText className="h-4 w-4" />
-                    Relapse Warning Signs Tracker
                   </Button>
                 </Link>
               </div>
