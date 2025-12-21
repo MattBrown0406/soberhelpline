@@ -310,16 +310,38 @@ export type Database = {
         }
         Relationships: []
       }
+      profile_private: {
+        Row: {
+          created_at: string
+          email: string
+          phone_number: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          phone_number?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          phone_number?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           agreed_to_code_of_conduct: boolean | null
           code_of_conduct_agreed_at: string | null
           created_at: string | null
-          email: string
           first_name: string
           id: string
           last_name: string
-          phone_number: string
           updated_at: string | null
           username: string | null
           webinar_reminders_opted_in: boolean | null
@@ -328,11 +350,9 @@ export type Database = {
           agreed_to_code_of_conduct?: boolean | null
           code_of_conduct_agreed_at?: string | null
           created_at?: string | null
-          email: string
           first_name: string
           id: string
           last_name: string
-          phone_number: string
           updated_at?: string | null
           username?: string | null
           webinar_reminders_opted_in?: boolean | null
@@ -341,11 +361,9 @@ export type Database = {
           agreed_to_code_of_conduct?: boolean | null
           code_of_conduct_agreed_at?: string | null
           created_at?: string | null
-          email?: string
           first_name?: string
           id?: string
           last_name?: string
-          phone_number?: string
           updated_at?: string | null
           username?: string | null
           webinar_reminders_opted_in?: boolean | null

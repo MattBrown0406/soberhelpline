@@ -47,6 +47,9 @@ interface Moderator {
     username: string | null;
     first_name: string;
     last_name: string;
+    email?: string;
+  } | null;
+  contact?: {
     email: string;
   } | null;
 }
@@ -95,17 +98,26 @@ export function ModeratorManagement() {
       const userIds = roles.map(r => r.user_id);
       const { data: profiles, error: profileError } = await supabase
         .from('profiles')
-        .select('id, username, first_name, last_name, email')
+        .select('id, username, first_name, last_name')
         .in('id', userIds);
 
       if (profileError) throw profileError;
 
+      const { data: contacts, error: contactError } = await supabase
+        .from('profile_private')
+        .select('user_id, email')
+        .in('user_id', userIds);
+
+      if (contactError) throw contactError;
+
       // Combine data
       const moderatorData: Moderator[] = roles.map(role => {
         const profile = profiles?.find(p => p.id === role.user_id);
+        const contact = contacts?.find(c => c.user_id === role.user_id);
         return {
           ...role,
-          profile: profile || null
+          profile: profile || null,
+          contact: contact ? { email: contact.email } : null,
         };
       });
 
@@ -138,12 +150,24 @@ export function ModeratorManagement() {
 
       const { data: profiles, error: profileError } = await supabase
         .from('profiles')
-        .select('id, username, first_name, last_name, email')
+        .select('id, username, first_name, last_name')
         .in('id', userIds);
 
       if (profileError) throw profileError;
 
-      setFamilyMembers(profiles || []);
+      const { data: contacts, error: contactError } = await supabase
+        .from('profile_private')
+        .select('user_id, email')
+        .in('user_id', userIds);
+
+      if (contactError) throw contactError;
+
+      const merged: FamilyMember[] = (profiles || []).map(p => {
+        const contact = contacts?.find(c => c.user_id === p.id);
+        return { ...p, email: contact?.email || '' };
+      });
+
+      setFamilyMembers(merged);
     } catch (error) {
       console.error("Error fetching family members:", error);
     }
@@ -255,7 +279,7 @@ export function ModeratorManagement() {
                 <TableCell>
                   {moderator.profile?.first_name} {moderator.profile?.last_name}
                 </TableCell>
-                <TableCell>{moderator.profile?.email}</TableCell>
+                <TableCell>{moderator.contact?.email || '-'}</TableCell>
                 <TableCell>
                   <Badge className="gap-1">
                     <Shield className="h-3 w-3" />

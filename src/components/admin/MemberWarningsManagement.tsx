@@ -36,12 +36,15 @@ interface MemberWarning {
     username: string | null;
     first_name: string;
     last_name: string;
-    email: string;
+    email?: string;
   } | null;
   moderator_profile: {
     username: string | null;
     first_name: string;
     last_name: string;
+  } | null;
+  member_contact?: {
+    email: string;
   } | null;
 }
 
@@ -77,32 +80,41 @@ export function MemberWarningsManagement() {
       const moderatorIds = [...new Set(warningsData.map(w => w.moderator_id))];
       const allUserIds = [...new Set([...memberIds, ...moderatorIds])];
 
-      // Fetch profiles
+      // Fetch basic profiles
       const { data: profiles, error: profileError } = await supabase
         .from('profiles')
-        .select('id, username, first_name, last_name, email')
+        .select('id, username, first_name, last_name')
         .in('id', allUserIds);
 
       if (profileError) throw profileError;
+
+      // Fetch member emails (private contact table)
+      const { data: contacts, error: contactError } = await supabase
+        .from('profile_private')
+        .select('user_id, email')
+        .in('user_id', memberIds);
+
+      if (contactError) throw contactError;
 
       // Combine data
       const enrichedWarnings: MemberWarning[] = warningsData.map(warning => {
         const memberProfile = profiles?.find(p => p.id === warning.member_id);
         const moderatorProfile = profiles?.find(p => p.id === warning.moderator_id);
-        
+        const memberContact = contacts?.find(c => c.user_id === warning.member_id);
+
         return {
           ...warning,
           member_profile: memberProfile ? {
             username: memberProfile.username,
             first_name: memberProfile.first_name,
             last_name: memberProfile.last_name,
-            email: memberProfile.email
           } : null,
           moderator_profile: moderatorProfile ? {
             username: moderatorProfile.username,
             first_name: moderatorProfile.first_name,
             last_name: moderatorProfile.last_name
-          } : null
+          } : null,
+          member_contact: memberContact ? { email: memberContact.email } : null,
         };
       });
 
@@ -300,7 +312,7 @@ export function MemberWarningsManagement() {
                 <p className="mt-1">
                   {selectedWarning.member_profile?.username || 
                    `${selectedWarning.member_profile?.first_name} ${selectedWarning.member_profile?.last_name}`}
-                  <span className="text-muted-foreground ml-2">({selectedWarning.member_profile?.email})</span>
+                  <span className="text-muted-foreground ml-2">({selectedWarning.member_contact?.email || '-'})</span>
                 </p>
               </div>
 

@@ -102,6 +102,7 @@ export default function FamilyWebinars() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [userProfile, setUserProfile] = useState<{ first_name: string; last_name: string; email: string } | null>(null);
+  const userEmail = user?.email ?? "";
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -142,15 +143,23 @@ export default function FamilyWebinars() {
           setHasMembership(data && data.length > 0);
         }
 
-        // Fetch user profile for registration
-        const { data: profileData } = await supabase
+        // Fetch user profile for registration (names from profiles, email from auth session)
+        const { data: profileData, error: profileError } = await supabase
           .from('profiles')
-          .select('first_name, last_name, email')
+          .select('first_name, last_name')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
-        if (profileData) {
-          setUserProfile(profileData);
+        if (profileError) {
+          console.error('Profile fetch error:', profileError);
+        }
+
+        if (profileData && userEmail) {
+          setUserProfile({
+            first_name: profileData.first_name,
+            last_name: profileData.last_name,
+            email: userEmail,
+          });
         }
       } catch (err) {
         console.error('Membership check failed:', err);
