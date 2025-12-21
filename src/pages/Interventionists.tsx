@@ -24,8 +24,8 @@ interface Provider {
   city: string | null;
   state: string | null;
   zip_code: string | null;
-  phone_number: string;
-  email: string;
+  phone_number?: string | null;
+  email?: string | null;
   website: string | null;
   description_of_services: string | null;
   logo_url: string | null;
