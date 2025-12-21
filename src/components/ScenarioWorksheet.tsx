@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { User } from "@supabase/supabase-js";
-import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer, ChevronDown } from "lucide-react";
+import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer, ChevronDown, Gavel } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ScenarioWorksheetProps {
@@ -68,6 +68,15 @@ interface Scenario7State {
   valueHonored: string;
   regulationTool: string;
   reminder: string;
+}
+
+interface Scenario8State {
+  emotions: string[];
+  crisisOrChaos: string;
+  immediateOptions: string;
+  enablingAction: string;
+  boundaryResponse: string;
+  whoToCall: string;
 }
 
 interface ReflectionState {
@@ -133,6 +142,15 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
     reminder: ""
   });
 
+  const [scenario8, setScenario8] = useState<Scenario8State>({
+    emotions: [],
+    crisisOrChaos: "",
+    immediateOptions: "",
+    enablingAction: "",
+    boundaryResponse: "",
+    whoToCall: ""
+  });
+
   const [reflection, setReflection] = useState<ReflectionState>({
     mostFamiliar: "",
     likelyAbandon: "",
@@ -155,6 +173,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
   const scenario1Emotions = ["Hope", "Relief", "Fear", "Guilt", "Skepticism"];
   const scenario3Feelings = ["Anger", "Guilt", "Fear", "Sadness"];
   const scenario6Emotions = ["Anger", "Disappointment", "Fear", "Sadness", "Relief", "Compassion"];
+  const scenario8Emotions = ["Panic", "Fear", "Anger", "Shame", "Guilt", "Helplessness"];
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -737,6 +756,106 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
                     placeholder="Write an affirmation or reminder..."
                     className="mt-1"
                   />
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* Scenario 8 */}
+          <AccordionItem value="scenario-8" className="border rounded-lg px-4">
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-3">
+                <Gavel className="h-5 w-5 text-primary" />
+                <span className="font-semibold">Scenario 8: The Call from Jail</span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="space-y-4 pt-4">
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <h4 className="font-medium text-foreground mb-2">Situation</h4>
+                <p className="text-muted-foreground text-sm">
+                  You receive a phone call from your loved one—they have been arrested and are in jail. They are asking you to post bail, hire an attorney, or come get them immediately. They sound scared and desperate.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <Label className="text-sm font-medium">What emotions immediately surface?</Label>
+                  <div className="flex flex-wrap gap-3 mt-2">
+                    {scenario8Emotions.map(emotion => (
+                      <label key={emotion} className="flex items-center gap-2 cursor-pointer">
+                        <Checkbox
+                          checked={scenario8.emotions.includes(emotion)}
+                          onCheckedChange={() => handleEmotionToggle(emotion, scenario8.emotions, (emotions) => setScenario8({...scenario8, emotions}))}
+                        />
+                        <span className="text-sm">{emotion}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="s8-crisis">Is this a crisis requiring immediate action, or chaos that feels urgent but isn't?</Label>
+                  <Textarea
+                    id="s8-crisis"
+                    value={scenario8.crisisOrChaos}
+                    onChange={(e) => setScenario8({...scenario8, crisisOrChaos: e.target.value})}
+                    placeholder="Consider: Is anyone in immediate physical danger? What happens if you wait 24 hours before deciding?"
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="s8-options">What are your immediate options—and which align with your values?</Label>
+                  <Textarea
+                    id="s8-options"
+                    value={scenario8.immediateOptions}
+                    onChange={(e) => setScenario8({...scenario8, immediateOptions: e.target.value})}
+                    placeholder="List options: Post bail / Don't post bail / Wait to decide / Consult with others first..."
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="s8-enabling">What enabling action are you most tempted to take—and why?</Label>
+                  <Textarea
+                    id="s8-enabling"
+                    value={scenario8.enablingAction}
+                    onChange={(e) => setScenario8({...scenario8, enablingAction: e.target.value})}
+                    placeholder="Be honest about your impulses and what emotions are driving them..."
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="s8-boundary">What boundary-aligned response could you give—even if it feels harsh?</Label>
+                  <Textarea
+                    id="s8-boundary"
+                    value={scenario8.boundaryResponse}
+                    onChange={(e) => setScenario8({...scenario8, boundaryResponse: e.target.value})}
+                    placeholder='Example: "I love you, and I am not going to post bail. You can call me when you are ready to talk about treatment."'
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="s8-who">Who do you need to call or consult before making a decision?</Label>
+                  <Textarea
+                    id="s8-who"
+                    value={scenario8.whoToCall}
+                    onChange={(e) => setScenario8({...scenario8, whoToCall: e.target.value})}
+                    placeholder="Sponsor, therapist, family member, interventionist, attorney..."
+                    className="mt-1"
+                  />
+                </div>
+
+                <div className="bg-orange-50 dark:bg-orange-950/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800 mt-4">
+                  <h5 className="font-medium text-orange-800 dark:text-orange-300 mb-2">Remember</h5>
+                  <ul className="text-sm text-orange-700 dark:text-orange-400 space-y-1">
+                    <li>• Jail is often safer than active use on the street.</li>
+                    <li>• Consequences can be a pathway to clarity.</li>
+                    <li>• You are not required to fix this immediately.</li>
+                    <li>• Bailing them out may remove a natural consequence that could lead to change.</li>
+                  </ul>
                 </div>
               </div>
             </AccordionContent>
