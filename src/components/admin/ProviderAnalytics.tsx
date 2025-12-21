@@ -61,15 +61,12 @@ export function ProviderAnalytics() {
 
   const fetchAnalytics = async () => {
     try {
-      const { data, error } = await supabase
-        .from('provider_click_analytics')
-        .select('*')
-        .order('total_clicks', { ascending: false });
+      const { data, error } = await supabase.rpc("get_provider_click_analytics_admin");
 
       if (error) throw error;
-      setAnalytics(data || []);
+      setAnalytics((data as ClickAnalytics[]) || []);
     } catch (error) {
-      console.error('Error fetching analytics:', error);
+      console.error("Error fetching analytics:", error);
     } finally {
       setLoading(false);
     }

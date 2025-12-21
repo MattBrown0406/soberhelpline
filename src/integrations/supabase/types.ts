@@ -1029,6 +1029,32 @@ export type Database = {
       }
     }
     Functions: {
+      get_provider_click_analytics_admin: {
+        Args: never
+        Returns: {
+          card_views: number | null
+          category: string | null
+          city: string | null
+          clicks_last_30_days: number | null
+          clicks_last_7_days: number | null
+          email_clicks: number | null
+          first_click: string | null
+          last_click: string | null
+          phone_clicks: number | null
+          provider_id: string | null
+          provider_name: string | null
+          state: string | null
+          total_clicks: number | null
+          unique_visitors: number | null
+          website_clicks: number | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "provider_click_analytics"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_public_profiles: {
         Args: { _user_ids: string[] }
         Returns: {
