@@ -2,8 +2,8 @@ export type ProviderSubmission = {
   id: string;
   provider_name: string;
   category: string;
-  email: string;
-  phone_number: string;
+  email?: string | null;
+  phone_number?: string | null;
   status: string;
   created_at: string;
   updated_at: string | null;
