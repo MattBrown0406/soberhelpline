@@ -449,19 +449,17 @@ export default function FamilyForum() {
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Family Support
               </Link>
-              <Link
-                to="/family-videos"
-                className="inline-flex items-center text-primary hover:text-primary/80 gap-1"
-              >
-                <Video className="h-4 w-4" />
-                Education Videos & Resources
+              <Link to="/family-videos">
+                <Button variant="default" className="gap-2 bg-logo-green hover:bg-logo-green/90">
+                  <Video className="h-4 w-4" />
+                  Education Videos & Resources
+                </Button>
               </Link>
-              <Link
-                to="/family-webinars"
-                className="inline-flex items-center text-primary hover:text-primary/80 gap-1"
-              >
-                <CalendarDays className="h-4 w-4" />
-                Monthly Webinar Registration
+              <Link to="/family-webinars">
+                <Button variant="default" className="gap-2 bg-primary hover:bg-primary/90">
+                  <CalendarDays className="h-4 w-4" />
+                  Monthly Webinar Registration
+                </Button>
               </Link>
             </div>
 
