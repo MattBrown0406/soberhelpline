@@ -39,60 +39,7 @@ const upcomingWebinar: Webinar = {
   registeredCount: 0,
 };
 
-const pastWebinars: Webinar[] = [
-  {
-    id: "past-1",
-    title: "Setting Boundaries Without Guilt",
-    description: "A comprehensive guide to establishing and maintaining healthy boundaries while supporting a loved one through addiction recovery.",
-    date: "December 11, 2024",
-    time: "7:00 PM EST",
-    duration: "55 minutes",
-    host: "Michael Torres, LCSW",
-    hostTitle: "Family Therapist & Intervention Specialist",
-    isLive: false,
-    isUpcoming: false,
-    recordingUrl: "#",
-  },
-  {
-    id: "past-2",
-    title: "Self-Care for Caregivers: Protecting Your Mental Health",
-    description: "Essential strategies for maintaining your own wellbeing while supporting someone through addiction and recovery.",
-    date: "November 13, 2024",
-    time: "7:00 PM EST",
-    duration: "50 minutes",
-    host: "Jennifer Adams, PhD",
-    hostTitle: "Psychologist & Wellness Coach",
-    isLive: false,
-    isUpcoming: false,
-    recordingUrl: "#",
-  },
-  {
-    id: "past-3",
-    title: "Communication Strategies That Actually Work",
-    description: "Learn proven techniques for having difficult conversations with your loved one about their addiction and recovery.",
-    date: "October 9, 2024",
-    time: "7:00 PM EST",
-    duration: "65 minutes",
-    host: "Dr. Robert Chen",
-    hostTitle: "Clinical Director, Family Recovery Institute",
-    isLive: false,
-    isUpcoming: false,
-    recordingUrl: "#",
-  },
-  {
-    id: "past-4",
-    title: "Navigating the Treatment Landscape",
-    description: "Understanding different levels of care, how to choose the right treatment center, and what to expect during the recovery process.",
-    date: "September 11, 2024",
-    time: "7:00 PM EST",
-    duration: "60 minutes",
-    host: "Amanda Pierce, CIP",
-    hostTitle: "Certified Intervention Professional",
-    isLive: false,
-    isUpcoming: false,
-    recordingUrl: "#",
-  },
-];
+const pastWebinars: Webinar[] = [];
 
 export default function FamilyWebinars() {
   const navigate = useNavigate();
@@ -389,41 +336,14 @@ export default function FamilyWebinars() {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              {pastWebinars.map((webinar) => (
-                <Card key={webinar.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-5">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg flex-shrink-0">
-                        <PlayCircle className="h-6 w-6 text-primary" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-logo-green mb-1 line-clamp-2">
-                          {webinar.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
-                          {webinar.description}
-                        </p>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
-                          <span>{webinar.date}</span>
-                          <span>•</span>
-                          <span>{webinar.duration}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-muted-foreground">
-                            {webinar.host}
-                          </span>
-                          <Button variant="outline" size="sm" className="gap-1">
-                            <PlayCircle className="h-3 w-3" />
-                            Watch
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <Card className="bg-muted/30">
+              <CardContent className="p-6 text-center">
+                <PlayCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+                <p className="text-muted-foreground">
+                  Past webinar recordings will be available here after our first live session.
+                </p>
+              </CardContent>
+            </Card>
 
             {/* Coming Up */}
             <Card className="mt-10 bg-muted/30">
