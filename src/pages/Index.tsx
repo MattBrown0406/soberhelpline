@@ -143,16 +143,6 @@ const Index = () => {
                     Provider Application
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a 
-                    href="https://gratis-class-d1c.notion.site/2bb286dad2cf8169863de855ab9a22c4?pvs=105" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="cursor-pointer"
-                  >
-                    Provider Inquiry
-                  </a>
-                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             {user ? (
