@@ -403,6 +403,12 @@ export default function FamilyVideos() {
                     Family Advocacy Toolkit
                   </Button>
                 </Link>
+                <Link to="/treatment-industry-guide">
+                  <Button variant="outline" className="gap-2 border-slate-600/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
+                    <FileText className="h-4 w-4" />
+                    How the Treatment Industry Works
+                  </Button>
+                </Link>
               </div>
             </div>
 
