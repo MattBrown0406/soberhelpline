@@ -409,6 +409,12 @@ export default function FamilyVideos() {
                     How the Treatment Industry Works
                   </Button>
                 </Link>
+                <Link to="/drug-induced-psychosis">
+                  <Button variant="outline" className="gap-2 border-fuchsia-600/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
+                    <FileText className="h-4 w-4" />
+                    Understanding Drug-Induced Psychosis
+                  </Button>
+                </Link>
               </div>
             </div>
 
