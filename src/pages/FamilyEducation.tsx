@@ -454,6 +454,21 @@ export default function FamilyVideos() {
                     Your browser does not support the audio element.
                   </audio>
                 </div>
+                <div className="bg-background rounded-lg p-4 border">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-indigo-600 dark:text-indigo-400">What I Can Control Today</h4>
+                    <a href="/audio/what-i-can-control-today-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
+                  <audio controls className="w-full">
+                    <source src="/audio/what-i-can-control-today-meditation.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
               </div>
             </div>
 
