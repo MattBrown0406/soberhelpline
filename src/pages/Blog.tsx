@@ -43,12 +43,95 @@ import addictionGrandchildrenBoundariesImg from "@/assets/blog-addiction-grandch
 import addictionMarriageFamilyImg from "@/assets/blog-addiction-marriage-family.png";
 import tmsDepressionTreatmentImg from "@/assets/blog-tms-depression-treatment.png";
 import addictionAnxietyFamilyImg from "@/assets/blog-addiction-anxiety-family.png";
+import reinerFamilyTragedyImg from "@/assets/blog-reiner-family-tragedy.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 40,
+    title: "What the Reiner Family Tragedy Teaches Us About Addiction, Silence, and Waiting Too Long",
+    excerpt: "Recent media coverage involving the Reiner family has reignited a painful but necessary conversation about addiction, mental health, and the cost of waiting for things to 'get bad enough' before intervening.",
+    author: "Sober Helpline",
+    date: "2025-12-22",
+    category: "Family Support",
+    image: reinerFamilyTragedyImg,
+    slug: "reiner-family-tragedy-addiction-intervention",
+    seoTitle: "What the Reiner Family Tragedy Teaches Us About Addiction, Silence, and Waiting Too Long",
+    metaDescription: "The Reiner family tragedy reminds us that addiction rarely looks like an emergency—until it is. Learn why families wait and how early intervention can prevent tragedy.",
+    content: `**What the Reiner Family Tragedy Teaches Us About Addiction, Silence, and Waiting Too Long**
+
+Recent media coverage involving the Reiner family has reignited a painful but necessary conversation about addiction, mental health, and the cost of waiting for things to "get bad enough" before intervening. While every family's story is unique, tragedies like this resonate because they reflect patterns many families recognize all too well.
+
+For those watching from the outside, the question is often the same: How did this happen?
+
+For families living inside addiction, the question is quieter and heavier: Could this happen to us?
+
+**Addiction Rarely Looks Like an Emergency—Until It Is**
+
+One of the most dangerous aspects of addiction is how slowly it escalates. Families often adapt to changes incrementally:
+
+• Increased mood swings become "stress"
+• Isolation becomes "needing space"
+• Escalating use becomes "just a phase"
+• Emotional distress becomes "personality"
+
+By the time alarm bells are ringing, families may already be deeply exhausted and unsure how to act.
+
+Public tragedies shock us because they feel sudden. For families involved, they are often the result of long periods of concern, uncertainty, and hesitation.
+
+**The Power—and Risk—of Silence**
+
+In many addiction-affected families, silence is mistaken for protection. Loved ones avoid hard conversations out of fear:
+
+• Fear of conflict
+• Fear of being wrong
+• Fear of pushing someone away
+• Fear of making things worse
+
+But silence does not neutralize addiction. It gives it room.
+
+In cases like the Reiner family's, public attention often reveals what many families already knew privately: there were warning signs, moments of concern, and unanswered questions long before crisis struck.
+
+**Why Families Wait**
+
+Families wait because they love deeply. They wait because they hope. They wait because they don't want to overreact. They wait because they believe their loved one will ask for help when they're ready.
+
+Unfortunately, addiction does not operate on readiness—it operates on momentum.
+
+**What Families Can Learn Without Blame**
+
+The goal in reflecting on tragedies is not to assign fault. It is to learn.
+
+Families can take away several critical lessons:
+
+• You do not need certainty to seek guidance
+• You do not need agreement to set boundaries
+• You do not need a catastrophe to justify concern
+• You are allowed to act on patterns, not promises
+
+Calling a sober helpline is not an overreaction. It is a way to interrupt isolation and think clearly before options narrow.
+
+**When Support Matters Most**
+
+Helplines exist for moments of uncertainty—not just emergencies. Speaking with someone who understands addiction can help families:
+
+• Assess risk realistically
+• Plan conversations thoughtfully
+• Understand next steps
+• Reduce panic-driven decisions
+• Avoid waiting until options disappear
+
+**Turning Tragedy Into Prevention**
+
+While no family can undo the past, many can change the future. Tragedies like the Reiner family's remind us that addiction does not announce its final turning point in advance.
+
+If you are worried—even if you can't fully explain why—that concern matters. Reaching out early is not pessimism. It is protection.
+
+If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+  },
   {
     id: 39,
     title: "Addiction and Anxiety: How Chronic Fear Drives Substance Use and Family Burnout",
