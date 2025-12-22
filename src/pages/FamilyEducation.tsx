@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Play, Lock, Loader2, FileText, Headphones, Users, Calendar, Download } from "lucide-react";
+import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -15,77 +15,12 @@ import EnablingDecisionTree from "@/components/EnablingDecisionTree";
 import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksheet";
 import SelfCareWorksheet from "@/components/SelfCareWorksheet";
 
-interface VideoItem {
-  id: string;
-  title: string;
-  description: string;
-  videoUrl: string;
-  thumbnailUrl?: string;
-  duration: string;
-  category: string;
-}
-
-// Sample videos - these would come from a database in production
-const sampleVideos: VideoItem[] = [
-  {
-    id: "1",
-    title: "Understanding Addiction: The Science of the Brain",
-    description: "Learn how addiction affects the brain and why it's considered a disease, not a moral failing.",
-    videoUrl: "https://www.youtube.com/embed/HUngLgGRJpo",
-    duration: "15:32",
-    category: "Understanding Addiction"
-  },
-  {
-    id: "2",
-    title: "Setting Healthy Boundaries with Your Loved One",
-    description: "Practical strategies for establishing boundaries that protect you while encouraging recovery.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "22:15",
-    category: "Boundaries"
-  },
-  {
-    id: "3",
-    title: "Self-Care for Family Members",
-    description: "You can't pour from an empty cup. Learn essential self-care practices for families in crisis.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "18:45",
-    category: "Self-Care"
-  },
-  {
-    id: "4",
-    title: "Effective Communication Strategies",
-    description: "How to communicate with your loved one without enabling or pushing them away.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "20:10",
-    category: "Communication"
-  },
-  {
-    id: "5",
-    title: "Preparing for an Intervention",
-    description: "What to expect and how to prepare for a professional intervention.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "25:30",
-    category: "Interventions"
-  },
-  {
-    id: "6",
-    title: "Supporting Recovery: The First 90 Days",
-    description: "How to support your loved one during the critical early recovery period.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    duration: "19:22",
-    category: "Recovery Support"
-  },
-];
-
-const categories = ["All", "Understanding Addiction", "Boundaries", "Self-Care", "Communication", "Interventions", "Recovery Support"];
 
 export default function FamilyVideos() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -135,9 +70,6 @@ export default function FamilyVideos() {
     checkMembership();
   }, [user]);
 
-  const filteredVideos = selectedCategory === "All" 
-    ? sampleVideos 
-    : sampleVideos.filter(v => v.category === selectedCategory);
 
   if (isLoading) {
     return (
@@ -525,68 +457,13 @@ export default function FamilyVideos() {
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2 justify-center mb-8">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-
-            {/* Active Video Player */}
-            {activeVideo && (
-              <Card className="mb-8">
-                <CardContent className="p-0">
-                  <div className="aspect-video">
-                    <iframe
-                      src={activeVideo.videoUrl}
-                      title={activeVideo.title}
-                      className="w-full h-full rounded-t-lg"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h2 className="text-xl font-semibold text-logo-green mb-2">{activeVideo.title}</h2>
-                    <p className="text-muted-foreground">{activeVideo.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Video Grid */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredVideos.map((video) => (
-                <Card 
-                  key={video.id} 
-                  className={`cursor-pointer transition-all hover:shadow-lg ${activeVideo?.id === video.id ? 'ring-2 ring-primary' : ''}`}
-                  onClick={() => setActiveVideo(video)}
-                >
-                  <CardContent className="p-0">
-                    <div className="aspect-video bg-muted relative rounded-t-lg overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                        <div className="p-3 bg-primary rounded-full">
-                          <Play className="h-6 w-6 text-primary-foreground" />
-                        </div>
-                      </div>
-                      <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                        {video.duration}
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <span className="text-xs text-primary font-medium">{video.category}</span>
-                      <h3 className="font-semibold text-logo-green mt-1 line-clamp-2">{video.title}</h3>
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* Educational Videos - Coming Soon */}
+            <div className="p-8 bg-muted/30 rounded-lg border text-center">
+              <Video className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-logo-green mb-3">Educational Videos Coming Soon</h3>
+              <p className="text-muted-foreground max-w-lg mx-auto">
+                We're developing a comprehensive library of information resource videos to help families navigate addiction and recovery. Check back soon for expert-led content on understanding addiction, setting boundaries, communication strategies, and more.
+              </p>
             </div>
           </div>
         </main>
