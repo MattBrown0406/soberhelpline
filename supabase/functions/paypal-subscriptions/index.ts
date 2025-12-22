@@ -68,29 +68,45 @@ async function createPayPalPlan(
   productId: string, 
   planType: 'monthly' | 'annual',
   amount: string,
-  includeFreeTrial: boolean = false
+  trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false }
 ): Promise<string> {
   const billingCycles = [];
 
   // Add free trial period if applicable
-  if (includeFreeTrial) {
-    billingCycles.push({
-      frequency: { interval_unit: 'MONTH', interval_count: 1 },
-      tenure_type: 'TRIAL',
-      sequence: 1,
-      total_cycles: 1,
-      pricing_scheme: {
-        fixed_price: { value: '0.00', currency_code: 'USD' }
-      }
-    });
+  if (trialConfig.enabled) {
+    if (trialConfig.days) {
+      // Day-based trial (e.g., 7-day trial)
+      billingCycles.push({
+        frequency: { interval_unit: 'DAY', interval_count: trialConfig.days },
+        tenure_type: 'TRIAL',
+        sequence: 1,
+        total_cycles: 1,
+        pricing_scheme: {
+          fixed_price: { value: '0.00', currency_code: 'USD' }
+        }
+      });
+    } else if (trialConfig.months) {
+      // Month-based trial (e.g., 1 month free)
+      billingCycles.push({
+        frequency: { interval_unit: 'MONTH', interval_count: trialConfig.months },
+        tenure_type: 'TRIAL',
+        sequence: 1,
+        total_cycles: 1,
+        pricing_scheme: {
+          fixed_price: { value: '0.00', currency_code: 'USD' }
+        }
+      });
+    }
   }
+
+  const hasTrial = trialConfig.enabled && (trialConfig.days || trialConfig.months);
 
   // Regular billing cycle
   if (planType === 'monthly') {
     billingCycles.push({
       frequency: { interval_unit: 'MONTH', interval_count: 1 },
       tenure_type: 'REGULAR',
-      sequence: includeFreeTrial ? 2 : 1,
+      sequence: hasTrial ? 2 : 1,
       total_cycles: 0,
       pricing_scheme: {
         fixed_price: { value: amount, currency_code: 'USD' }
@@ -100,13 +116,19 @@ async function createPayPalPlan(
     billingCycles.push({
       frequency: { interval_unit: 'YEAR', interval_count: 1 },
       tenure_type: 'REGULAR',
-      sequence: includeFreeTrial ? 2 : 1,
+      sequence: hasTrial ? 2 : 1,
       total_cycles: 0,
       pricing_scheme: {
         fixed_price: { value: amount, currency_code: 'USD' }
       }
     });
   }
+
+  const trialDescription = trialConfig.days 
+    ? ` (${trialConfig.days}-Day Free Trial)` 
+    : trialConfig.months 
+      ? ' (First Month Free)' 
+      : '';
 
   const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/plans`, {
     method: 'POST',
@@ -116,7 +138,7 @@ async function createPayPalPlan(
     },
     body: JSON.stringify({
       product_id: productId,
-      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}${includeFreeTrial ? ' (First Month Free)' : ''}`,
+      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}${hasTrial ? trialDescription : ''}`,
       description: `${planType === 'monthly' ? 'Monthly' : 'Annual'} subscription for provider listing`,
       billing_cycles: billingCycles,
       payment_preferences: {
@@ -271,6 +293,11 @@ Deno.serve(async (req) => {
           finalAmount = 0;
           console.log('Applied FREELIST: Bypassing payment, free listing');
         }
+        // Check for HAPPYNEWYEAR code - 7-day free trial
+        else if (discountCode && discountCode.toUpperCase() === 'HAPPYNEWYEAR') {
+          appliedDiscount = 'HAPPYNEWYEAR';
+          console.log('Applied HAPPYNEWYEAR: 7-day free trial');
+        }
         // Check for free trial code (FREEMONTH) - works for both monthly and annual plans
         else if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
           appliedDiscount = 'FREEMONTH';
@@ -342,12 +369,17 @@ Deno.serve(async (req) => {
           );
         }
 
-        // Check for free trial code
-        let includeFreeTrial = appliedDiscount === 'FREEMONTH';
+        // Configure trial based on discount code
+        let trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false };
+        if (appliedDiscount === 'HAPPYNEWYEAR') {
+          trialConfig = { enabled: true, days: 7 };
+        } else if (appliedDiscount === 'FREEMONTH') {
+          trialConfig = { enabled: true, months: 1 };
+        }
 
         // Create product and plan with potentially discounted amount
         const productId = await createPayPalProduct(accessToken);
-        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2), includeFreeTrial);
+        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2), trialConfig);
         
         // Create subscription
         const { subscriptionId, approvalUrl } = await createPayPalSubscription(
