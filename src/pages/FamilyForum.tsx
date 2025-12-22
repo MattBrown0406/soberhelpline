@@ -321,15 +321,24 @@ export default function FamilyForum() {
     if (!user) return;
 
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
         .update({
           agreed_to_code_of_conduct: true,
           code_of_conduct_agreed_at: new Date().toISOString()
         })
-        .eq('id', user.id);
+        .eq('id', user.id)
+        .select('agreed_to_code_of_conduct')
+        .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Update error:', error);
+        throw error;
+      }
+
+      if (!data?.agreed_to_code_of_conduct) {
+        throw new Error('Update did not apply');
+      }
 
       setHasAgreedToCodeOfConduct(true);
       setShowCodeOfConduct(false);
