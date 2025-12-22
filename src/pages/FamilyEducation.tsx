@@ -484,6 +484,21 @@ export default function FamilyVideos() {
                 </div>
                 <div className="bg-background rounded-lg p-4 border">
                   <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-teal-600 dark:text-teal-400">Finding Steadiness During a Holiday Without Them</h4>
+                    <a href="/audio/finding-steadiness-holiday-meditation.mp3" download className="shrink-0">
+                      <Button variant="ghost" size="sm" className="gap-1 text-teal-600 hover:text-teal-700 dark:text-teal-400">
+                        <Download className="h-4 w-4" />
+                        Download
+                      </Button>
+                    </a>
+                  </div>
+                  <audio controls className="w-full">
+                    <source src="/audio/finding-steadiness-holiday-meditation.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+                <div className="bg-background rounded-lg p-4 border">
+                  <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium text-emerald-600 dark:text-emerald-400">Letting Go of What Was Never About You (Don't Take It Personally)</h4>
                     <a href="/audio/letting-go-not-about-you-meditation.mp3" download className="shrink-0">
                       <Button variant="ghost" size="sm" className="gap-1 text-emerald-600 hover:text-emerald-700 dark:text-emerald-400">
