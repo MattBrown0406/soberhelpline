@@ -260,7 +260,7 @@ export default function SUDAssessment() {
 
         <div className="space-y-6">
           {category.criteria.map((criterion) => (
-            <div key={criterion.id} className="p-4 bg-muted/50 rounded-lg space-y-3">
+            <div key={criterion.id} className="p-4 bg-muted/50 rounded-lg space-y-3 border border-black/20 dark:border-white/20">
               <p className="font-medium">{criterion.question}</p>
               <div className="flex items-start gap-2 text-xs text-muted-foreground bg-background/50 p-2 rounded">
                 <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
