@@ -124,12 +124,6 @@ const Index = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <a href="#partnership">
-              <Button variant="default" className="flex items-center gap-2 bg-primary hover:bg-primary/90 animate-pulse hover:animate-none">
-                <Heart className="w-4 h-4" />
-                Free Family Education and Support
-              </Button>
-            </a>
           </div>
           <div className="flex items-center gap-4">
             <DropdownMenu>
