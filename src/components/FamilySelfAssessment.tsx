@@ -71,7 +71,7 @@ const reflectionQuestions = [
 ];
 
 interface Props {
-  user: User;
+  user?: User | null;
 }
 
 export default function FamilySelfAssessment({ user }: Props) {
@@ -88,10 +88,14 @@ export default function FamilySelfAssessment({ user }: Props) {
   const [justSubmittedScore, setJustSubmittedScore] = useState<number | null>(null);
 
   useEffect(() => {
-    fetchPastResults();
+    if (user) {
+      fetchPastResults();
+    }
   }, [user]);
 
   const fetchPastResults = async () => {
+    if (!user) return;
+    
     const { data, error } = await supabase
       .from('family_assessments')
       .select('*')
@@ -126,28 +130,32 @@ export default function FamilySelfAssessment({ user }: Props) {
     const s4 = calculateSectionScore(section4Answers);
     const total = s1 + s2 + s3 + s4;
 
-    const { error } = await supabase.from('family_assessments').insert({
-      user_id: user.id,
-      section1_score: s1,
-      section2_score: s2,
-      section3_score: s3,
-      section4_score: s4,
-      total_score: total,
-      reflection_answers: reflectionAnswers.map((answer, i) => ({
-        question: reflectionQuestions[i],
-        answer
-      }))
-    });
+    // If user is logged in, save to database
+    if (user) {
+      const { error } = await supabase.from('family_assessments').insert({
+        user_id: user.id,
+        section1_score: s1,
+        section2_score: s2,
+        section3_score: s3,
+        section4_score: s4,
+        total_score: total,
+        reflection_answers: reflectionAnswers.map((answer, i) => ({
+          question: reflectionQuestions[i],
+          answer
+        }))
+      });
 
-    if (error) {
-      toast.error("Failed to save assessment");
-      console.error(error);
-    } else {
-      toast.success("Assessment saved!");
-      setJustSubmittedScore(total);
-      setCurrentStep(6);
-      fetchPastResults();
+      if (error) {
+        toast.error("Failed to save assessment");
+        console.error(error);
+      } else {
+        toast.success("Assessment saved!");
+        fetchPastResults();
+      }
     }
+    
+    setJustSubmittedScore(total);
+    setCurrentStep(6);
     setIsSubmitting(false);
   };
 

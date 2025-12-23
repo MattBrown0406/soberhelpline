@@ -16,7 +16,7 @@ import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 import { blogPosts } from "@/pages/Blog";
-import EnablingDecisionTree from "@/components/EnablingDecisionTree";
+import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment" },
@@ -193,14 +193,14 @@ const Index = () => {
           </Link>
         </div>
 
-        {/* Free Enabling Exercise for Families */}
+        {/* Free Enabling Self-Assessment for Families */}
         <div className="mb-8 md:mb-12">
           <div className="text-center mb-4">
             <p className="text-sm text-muted-foreground">
               Try this free exercise — one of many tools available to members
             </p>
           </div>
-          <EnablingDecisionTree />
+          <FamilySelfAssessment user={user} />
         </div>
 
         <div className="text-center mb-8 md:mb-12">
