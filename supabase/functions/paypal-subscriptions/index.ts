@@ -127,7 +127,7 @@ async function createPayPalPlan(
   const trialDescription = trialConfig.days 
     ? ` (${trialConfig.days}-Day Free Trial)` 
     : trialConfig.months 
-      ? ' (First Month Free)' 
+      ? ` (First ${trialConfig.months === 1 ? 'Month' : `${trialConfig.months} Months`} Free)` 
       : '';
 
   const response = await fetch(`${PAYPAL_API_BASE}/v1/billing/plans`, {
@@ -293,6 +293,11 @@ Deno.serve(async (req) => {
           finalAmount = 0;
           console.log('Applied FREELIST: Bypassing payment, free listing');
         }
+        // Check for FREE6 code - 6 months free trial
+        else if (discountCode && discountCode.toUpperCase() === 'FREE6') {
+          appliedDiscount = 'FREE6';
+          console.log('Applied FREE6: 6 months free trial');
+        }
         // Check for HAPPYNEWYEAR code - 7-day free trial
         else if (discountCode && discountCode.toUpperCase() === 'HAPPYNEWYEAR') {
           appliedDiscount = 'HAPPYNEWYEAR';
@@ -371,7 +376,9 @@ Deno.serve(async (req) => {
 
         // Configure trial based on discount code
         let trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false };
-        if (appliedDiscount === 'HAPPYNEWYEAR') {
+        if (appliedDiscount === 'FREE6') {
+          trialConfig = { enabled: true, months: 6 };
+        } else if (appliedDiscount === 'HAPPYNEWYEAR') {
           trialConfig = { enabled: true, days: 7 };
         } else if (appliedDiscount === 'FREEMONTH') {
           trialConfig = { enabled: true, months: 1 };
