@@ -17,6 +17,7 @@ import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
 import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
+import SUDAssessment from "@/components/SUDAssessment";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment" },
@@ -193,13 +194,14 @@ const Index = () => {
           </Link>
         </div>
 
-        {/* Free Enabling Self-Assessment for Families */}
-        <div className="mb-8 md:mb-12">
+        {/* Free Assessments for Families */}
+        <div className="mb-8 md:mb-12 space-y-6">
           <div className="text-center mb-4">
             <p className="text-sm text-muted-foreground">
-              Try this free exercise — one of many tools available to members
+              Try these free assessments — samples of the tools available to members
             </p>
           </div>
+          <SUDAssessment />
           <FamilySelfAssessment user={user} />
         </div>
 
