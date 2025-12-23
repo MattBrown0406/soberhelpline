@@ -235,7 +235,7 @@ export default function FamilyVideos() {
             {user && <SelfCareWorksheet user={user} />}
 
             {/* Relapse Warning Signs Tracker */}
-            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+            <div className="mb-10 p-6 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent rounded-lg border-2 border-amber-500 ring-2 ring-amber-500/30 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300">
               <h3 className="text-lg font-semibold text-logo-green mb-3">Relapse Warning Signs Tracker</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Return to active use is the end of a process that often begins days or weeks before the substance is used. This interactive tracker helps you identify emotional, behavioral, and cognitive warning signs early—when intervention is most effective.
@@ -249,7 +249,7 @@ export default function FamilyVideos() {
             </div>
 
             {/* Printable Resources */}
-            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+            <div className="mb-10 p-6 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent rounded-lg border-2 border-amber-500 ring-2 ring-amber-500/30 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300">
               <h3 className="text-lg font-semibold text-logo-green mb-3">Printable Resources</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Download and print these guides to use when evaluating treatment options and supporting recovery.
