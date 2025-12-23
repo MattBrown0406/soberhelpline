@@ -266,7 +266,7 @@ export default function EnablingDecisionTree() {
   if (!isExpanded) {
     return (
       <Card 
-        className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent cursor-pointer hover:border-primary/40 transition-all duration-300" 
+        className="border-2 border-amber-500 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent cursor-pointer hover:border-amber-600 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 ring-2 ring-amber-500/30" 
         onClick={() => setIsExpanded(true)}
       >
         <CardHeader className="pb-4">
