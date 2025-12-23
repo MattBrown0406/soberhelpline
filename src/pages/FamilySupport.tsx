@@ -306,11 +306,13 @@ export default function FamilySupport() {
                           </div>
                         </div>
                         
-                        <Link to="/family-membership">
-                          <Button size="lg">
-                            Become a Member - $14.99/month
-                          </Button>
-                        </Link>
+                        <div className="text-center">
+                          <Link to="/family-membership">
+                            <Button size="lg">
+                              Become a Member - $14.99/month
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
