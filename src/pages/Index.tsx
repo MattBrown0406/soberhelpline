@@ -205,7 +205,7 @@ const Index = () => {
           <FamilySelfAssessment user={user} />
           
           {/* Guided Meditation */}
-          <Card className="p-6 bg-amber-50 dark:bg-amber-950/20 border-l-4 border-l-amber-400 border-t-0 border-r-0 border-b-0 shadow-sm">
+          <Card className="p-6 bg-amber-50 dark:bg-amber-950/20 border-2 border-amber-400 shadow-sm">
             <div className="text-center space-y-4">
               <h3 className="text-lg font-semibold text-foreground">Guided Meditation for Families</h3>
               <p className="text-sm text-muted-foreground">
