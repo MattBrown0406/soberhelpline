@@ -194,7 +194,7 @@ const Index = () => {
         </div>
 
         {/* Free Enabling Exercise for Families */}
-        <div className="max-w-4xl mx-auto mb-8 md:mb-12">
+        <div className="mb-8 md:mb-12">
           <div className="text-center mb-4">
             <p className="text-sm text-muted-foreground">
               Try this free exercise — one of many tools available to members
