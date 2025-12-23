@@ -187,12 +187,14 @@ const Auth = () => {
                 <CardDescription>Log in to submit provider applications</CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleLogin} className="space-y-4">
+                <form onSubmit={handleLogin} className="space-y-4" autoComplete="on">
                   <div className="space-y-2">
                     <Label htmlFor="login-email">Email</Label>
                     <Input
                       id="login-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="your@email.com"
                       value={loginData.email}
                       onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
@@ -203,7 +205,9 @@ const Auth = () => {
                     <Label htmlFor="login-password">Password</Label>
                     <Input
                       id="login-password"
+                      name="password"
                       type="password"
+                      autoComplete="current-password"
                       value={loginData.password}
                       onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                       required
@@ -224,12 +228,14 @@ const Auth = () => {
                 <CardDescription>Sign up to submit provider applications</CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSignup} className="space-y-4">
+                <form onSubmit={handleSignup} className="space-y-4" autoComplete="on">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
                       <Input
                         id="firstName"
+                        name="given-name"
+                        autoComplete="given-name"
                         value={signupData.firstName}
                         onChange={(e) => setSignupData({ ...signupData, firstName: e.target.value })}
                         required
@@ -239,6 +245,8 @@ const Auth = () => {
                       <Label htmlFor="lastName">Last Name</Label>
                       <Input
                         id="lastName"
+                        name="family-name"
+                        autoComplete="family-name"
                         value={signupData.lastName}
                         onChange={(e) => setSignupData({ ...signupData, lastName: e.target.value })}
                         required
@@ -249,7 +257,9 @@ const Auth = () => {
                     <Label htmlFor="phoneNumber">Phone Number</Label>
                     <Input
                       id="phoneNumber"
+                      name="tel"
                       type="tel"
+                      autoComplete="tel"
                       placeholder="(555) 123-4567"
                       value={signupData.phoneNumber}
                       onChange={(e) => setSignupData({ ...signupData, phoneNumber: e.target.value })}
@@ -260,7 +270,9 @@ const Auth = () => {
                     <Label htmlFor="signup-email">Email</Label>
                     <Input
                       id="signup-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="your@email.com"
                       value={signupData.email}
                       onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
@@ -271,7 +283,9 @@ const Auth = () => {
                     <Label htmlFor="signup-password">Password</Label>
                     <Input
                       id="signup-password"
+                      name="new-password"
                       type="password"
+                      autoComplete="new-password"
                       placeholder="At least 6 characters"
                       value={signupData.password}
                       onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
