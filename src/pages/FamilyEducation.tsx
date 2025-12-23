@@ -361,7 +361,7 @@ export default function FamilyVideos() {
             </div>
 
             {/* Guided Meditations */}
-            <div className="mb-10 p-6 bg-muted/30 rounded-lg border">
+            <div className="mb-10 p-6 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent rounded-lg border-2 border-amber-500 ring-2 ring-amber-500/30 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300">
               <h3 className="text-lg font-semibold text-logo-green mb-3 flex items-center gap-2">
                 <Headphones className="h-5 w-5" />
                 Guided Meditations
