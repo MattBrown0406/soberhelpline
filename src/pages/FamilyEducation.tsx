@@ -351,6 +351,12 @@ export default function FamilyVideos() {
                     Understanding Drug-Induced Psychosis
                   </Button>
                 </Link>
+                <Link to="/multiple-treatment-episodes">
+                  <Button variant="outline" className="gap-2 border-orange-600/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
+                    <FileText className="h-4 w-4" />
+                    Why Multiple Treatment Episodes Don't Mean Failure
+                  </Button>
+                </Link>
               </div>
             </div>
 
