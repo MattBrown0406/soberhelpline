@@ -240,7 +240,7 @@ export default function FamilySelfAssessment({ user }: Props) {
   );
 
   return (
-    <Card className="mb-10 border-2 border-logo-green/50">
+    <Card className="mb-10 border-2 border-amber-500 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent">
       <CardHeader 
         className="cursor-pointer" 
         onClick={() => setIsExpanded(!isExpanded)}
