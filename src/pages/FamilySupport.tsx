@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2, Presentation } from "lucide-react";
+import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2, Presentation, FileText, Headphones, ClipboardCheck, Scale, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -232,7 +232,7 @@ export default function FamilySupport() {
             ) : (
               /* Non-member Premium Teaser */
               <div className="mb-12">
-                <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
+                <Card className="border-l-4 border-l-amber-400 border-t border-r border-b border-border bg-amber-50 dark:bg-amber-950/20">
                   <CardContent className="p-6 md:p-8">
                     <div className="flex items-start gap-4">
                       <div className="p-3 bg-primary/10 rounded-full">
@@ -240,31 +240,74 @@ export default function FamilySupport() {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-semibold text-logo-green mb-2">
-                          Unlock Premium Member Resources
+                          Unlock Premium Member Services
                         </h3>
-                        <p className="text-muted-foreground mb-4">
-                          Join our family support membership for just $14.99/month to access:
+                        <p className="text-muted-foreground mb-6">
+                          Join our family support membership for just $14.99/month to access exclusive resources designed to help you navigate your loved one's addiction journey:
                         </p>
-                        <div className="grid gap-3 md:grid-cols-4 mb-6">
-                          <div className="flex items-center gap-2">
-                            <Video className="h-4 w-4 text-primary" />
-                            <span className="text-sm">Education Videos</span>
+                        
+                        {/* Premium offerings grid */}
+                        <div className="grid gap-4 md:grid-cols-2 mb-6">
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Education Videos & Resources</span>
+                              <p className="text-sm text-muted-foreground">Expert-led video courses on addiction, recovery, and family healing</p>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Presentation className="h-4 w-4 text-primary" />
-                            <span className="text-sm">Monthly Webinars</span>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Monthly Live Webinars</span>
+                              <p className="text-sm text-muted-foreground">Interactive sessions with addiction specialists and counselors</p>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <MessagesSquare className="h-4 w-4 text-primary" />
-                            <span className="text-sm">Discussion Forum</span>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Private Discussion Forum</span>
+                              <p className="text-sm text-muted-foreground">Connect with families who understand your journey</p>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-primary" />
-                            <span className="text-sm">1-on-1 Consultations</span>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">1-on-1 Consultations</span>
+                              <p className="text-sm text-muted-foreground">Schedule private calls with certified interventionists</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Interactive Worksheets</span>
+                              <p className="text-sm text-muted-foreground">Boundary setting, self-care, and family action planning tools</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Guided Meditations</span>
+                              <p className="text-sm text-muted-foreground">Calming audio exercises for stress relief and emotional balance</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Decision-Making Tools</span>
+                              <p className="text-sm text-muted-foreground">Is This Help or Enabling? assessments and scenario exercises</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <div>
+                              <span className="font-medium text-foreground">Treatment Navigation Guides</span>
+                              <p className="text-sm text-muted-foreground">Checklists and resources for choosing the right care</p>
+                            </div>
                           </div>
                         </div>
+                        
                         <Link to="/family-membership">
-                          <Button>
+                          <Button size="lg">
                             Become a Member - $14.99/month
                           </Button>
                         </Link>
