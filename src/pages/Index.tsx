@@ -93,6 +93,11 @@ const Index = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="bg-popover">
                 <DropdownMenuItem asChild>
+                  <Link to="/family-support" className="cursor-pointer">
+                    Family Member Education Section
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/recovery-podcasts" className="cursor-pointer">
                     Recovery Podcasts
                   </Link>
@@ -110,11 +115,6 @@ const Index = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/faqs" className="cursor-pointer">
                     FAQs
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/family-support" className="cursor-pointer">
-                    Family Support
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
