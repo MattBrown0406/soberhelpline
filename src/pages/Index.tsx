@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -203,6 +203,24 @@ const Index = () => {
           </div>
           <SUDAssessment />
           <FamilySelfAssessment user={user} />
+          
+          {/* Guided Meditation */}
+          <Card className="p-6 bg-card border-primary/20">
+            <div className="text-center space-y-4">
+              <h3 className="text-lg font-semibold text-foreground">Guided Meditation for Families</h3>
+              <p className="text-sm text-muted-foreground">
+                Finding Steadiness During the Holidays — A calming meditation for family members navigating addiction
+              </p>
+              <audio 
+                controls 
+                className="w-full max-w-md mx-auto"
+                preload="metadata"
+              >
+                <source src="/audio/finding-steadiness-holiday-meditation.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          </Card>
         </div>
 
         <div className="text-center mb-8 md:mb-12">
