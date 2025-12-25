@@ -4,8 +4,11 @@ import { Phone, ArrowLeft, Heart, Shield, CheckCircle2, AlertTriangle, Eye, Cloc
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function SafeToOpenUp() {
+  useGuideTracking("/safe-to-open-up", "Is It Safe to Open Up Again? (Guide for Injured Spouses)");
+
   const handlePrint = () => {
     window.print();
   };

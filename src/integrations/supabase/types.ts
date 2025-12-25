@@ -232,6 +232,33 @@ export type Database = {
           },
         ]
       }
+      guide_views: {
+        Row: {
+          guide_name: string
+          guide_path: string
+          id: string
+          session_id: string | null
+          user_id: string | null
+          viewed_at: string
+        }
+        Insert: {
+          guide_name: string
+          guide_path: string
+          id?: string
+          session_id?: string | null
+          user_id?: string | null
+          viewed_at?: string
+        }
+        Update: {
+          guide_name?: string
+          guide_path?: string
+          id?: string
+          session_id?: string | null
+          user_id?: string | null
+          viewed_at?: string
+        }
+        Relationships: []
+      }
       member_warnings: {
         Row: {
           admin_notes: string | null
@@ -777,6 +804,17 @@ export type Database = {
       }
     }
     Views: {
+      guide_analytics: {
+        Row: {
+          guide_name: string | null
+          guide_path: string | null
+          month: string | null
+          total_views: number | null
+          unique_sessions: number | null
+          unique_users: number | null
+        }
+        Relationships: []
+      }
       provider_click_analytics: {
         Row: {
           card_views: number | null
@@ -1036,6 +1074,17 @@ export type Database = {
       }
     }
     Functions: {
+      get_guide_analytics: {
+        Args: never
+        Returns: {
+          guide_name: string
+          guide_path: string
+          month: string
+          total_views: number
+          unique_sessions: number
+          unique_users: number
+        }[]
+      }
       get_my_provider_subscriptions_with_provider: {
         Args: never
         Returns: Database["public"]["CompositeTypes"]["provider_subscription_with_provider"][]

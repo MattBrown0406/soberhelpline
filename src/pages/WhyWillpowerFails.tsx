@@ -4,8 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, Zap, Shield, XCircle, CheckCircle, RefreshCw, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const WhyWillpowerFails = () => {
+  useGuideTracking("/why-willpower-fails", "Why Willpower Fails (and What Actually Works)");
+
   const handlePrint = () => {
     window.print();
   };

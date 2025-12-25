@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, Heart, Shield, Clock, Target, Users, Lightbulb, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const AddictionAsStressDisorder = () => {
   const navigate = useNavigate();
+  
+  useGuideTracking("/addiction-as-stress-disorder", "Addiction as a Stress-Regulation Disorder");
 
   const handlePrint = () => {
     window.print();
