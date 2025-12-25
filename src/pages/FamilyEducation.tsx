@@ -447,6 +447,12 @@ export default function FamilyVideos() {
                   <h4 className="font-semibold text-foreground">Family Recovery</h4>
                 </div>
                 <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/what-changes-when-families-change">
+                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                      <FileText className="h-3 w-3" />
+                      What Changes When Families Change
+                    </Button>
+                  </Link>
                   <Link to="/recovery-requirements">
                     <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
                       <FileText className="h-3 w-3" />
