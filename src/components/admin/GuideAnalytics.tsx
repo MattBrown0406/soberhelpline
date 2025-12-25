@@ -10,82 +10,142 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { BookOpen, Eye, Users } from "lucide-react";
+import { BookOpen, Eye, Users, Calendar } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-interface GuideAnalytics {
+interface GuideView {
+  id: string;
+  guide_path: string;
+  guide_name: string;
+  viewed_at: string;
+  session_id: string | null;
+  user_id: string | null;
+}
+
+interface AggregatedGuide {
   guide_path: string;
   guide_name: string;
   total_views: number;
   unique_sessions: number;
   unique_users: number;
-  month: string;
 }
 
 export const GuideAnalytics = () => {
-  const [analytics, setAnalytics] = useState<GuideAnalytics[]>([]);
+  const [views, setViews] = useState<GuideView[]>([]);
   const [loading, setLoading] = useState(true);
+  const [timePeriod, setTimePeriod] = useState<"week" | "month" | "year">("month");
 
   useEffect(() => {
-    fetchAnalytics();
+    fetchViews();
   }, []);
 
-  const fetchAnalytics = async () => {
+  const fetchViews = async () => {
     try {
-      const { data, error } = await supabase.rpc('get_guide_analytics');
+      const { data, error } = await supabase
+        .from("guide_views")
+        .select("*")
+        .order("viewed_at", { ascending: false });
 
       if (error) throw error;
-      setAnalytics(data || []);
+      setViews(data || []);
     } catch (error) {
-      console.error("Error fetching guide analytics:", error);
+      console.error("Error fetching guide views:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const getFilteredViews = () => {
+    const now = new Date();
+    let cutoffDate: Date;
+
+    switch (timePeriod) {
+      case "week":
+        cutoffDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        break;
+      case "month":
+        cutoffDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        break;
+      case "year":
+        cutoffDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+        break;
+    }
+
+    return views.filter(v => new Date(v.viewed_at) >= cutoffDate);
+  };
+
+  const aggregateByGuide = (filteredViews: GuideView[]): AggregatedGuide[] => {
+    const aggregated: Record<string, AggregatedGuide> = {};
+
+    filteredViews.forEach(view => {
+      if (!aggregated[view.guide_path]) {
+        aggregated[view.guide_path] = {
+          guide_path: view.guide_path,
+          guide_name: view.guide_name,
+          total_views: 0,
+          unique_sessions: 0,
+          unique_users: 0,
+        };
+      }
+      aggregated[view.guide_path].total_views++;
+    });
+
+    // Calculate unique sessions and users
+    Object.keys(aggregated).forEach(path => {
+      const guideViews = filteredViews.filter(v => v.guide_path === path);
+      const sessions = new Set(guideViews.map(v => v.session_id).filter(Boolean));
+      const users = new Set(guideViews.map(v => v.user_id).filter(Boolean));
+      aggregated[path].unique_sessions = sessions.size;
+      aggregated[path].unique_users = users.size;
+    });
+
+    return Object.values(aggregated).sort((a, b) => b.total_views - a.total_views);
   };
 
   if (loading) {
     return <div className="text-center py-8">Loading analytics...</div>;
   }
 
-  // Aggregate totals across all months
-  const aggregatedByGuide = analytics.reduce((acc, item) => {
-    const existing = acc.find(a => a.guide_path === item.guide_path);
-    if (existing) {
-      existing.total_views += item.total_views;
-      existing.unique_sessions += item.unique_sessions;
-      existing.unique_users += item.unique_users;
-    } else {
-      acc.push({
-        guide_path: item.guide_path,
-        guide_name: item.guide_name,
-        total_views: item.total_views,
-        unique_sessions: item.unique_sessions,
-        unique_users: item.unique_users,
-      });
-    }
-    return acc;
-  }, [] as { guide_path: string; guide_name: string; total_views: number; unique_sessions: number; unique_users: number }[]);
+  const filteredViews = getFilteredViews();
+  const aggregatedByGuide = aggregateByGuide(filteredViews);
 
-  // Sort by total views descending
-  aggregatedByGuide.sort((a, b) => b.total_views - a.total_views);
-
-  // Calculate totals
   const totalViews = aggregatedByGuide.reduce((sum, item) => sum + item.total_views, 0);
   const totalSessions = aggregatedByGuide.reduce((sum, item) => sum + item.unique_sessions, 0);
   const totalUsers = aggregatedByGuide.reduce((sum, item) => sum + item.unique_users, 0);
 
-  // Top 10 for chart
   const chartData = aggregatedByGuide.slice(0, 10).map(item => ({
     name: item.guide_name.length > 25 ? item.guide_name.substring(0, 25) + '...' : item.guide_name,
     views: item.total_views,
   }));
 
+  const periodLabel = timePeriod === "week" ? "Past 7 Days" : timePeriod === "month" ? "Past 30 Days" : "Past Year";
+
   return (
     <div className="space-y-6">
+      {/* Time Period Selector */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
+            Time Period
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs value={timePeriod} onValueChange={(v) => setTimePeriod(v as "week" | "month" | "year")}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="week">Week</TabsTrigger>
+              <TabsTrigger value="month">Month</TabsTrigger>
+              <TabsTrigger value="year">Year</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </CardContent>
+      </Card>
+
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Views</CardTitle>
+            <CardTitle className="text-sm font-medium">Total Views ({periodLabel})</CardTitle>
             <Eye className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -116,7 +176,7 @@ export const GuideAnalytics = () => {
       {chartData.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Top 10 Most Viewed Guides</CardTitle>
+            <CardTitle>Top 10 Most Viewed Guides ({periodLabel})</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -137,7 +197,7 @@ export const GuideAnalytics = () => {
       {/* Full Table */}
       <Card>
         <CardHeader>
-          <CardTitle>All Guide Analytics</CardTitle>
+          <CardTitle>All Guide Analytics ({periodLabel})</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
@@ -164,7 +224,7 @@ export const GuideAnalytics = () => {
           </div>
           {aggregatedByGuide.length === 0 && (
             <div className="text-center py-8 text-muted-foreground">
-              No guide analytics data yet. Views will appear here as users access the guides.
+              No guide views recorded for this time period.
             </div>
           )}
         </CardContent>
