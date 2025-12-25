@@ -425,6 +425,12 @@ export default function FamilyVideos() {
                       Requests, Demands, Ultimatums & Boundaries
                     </Button>
                   </Link>
+                  <Link to="/insight-behavior-tracker">
+                    <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                      <FileText className="h-3 w-3" />
+                      Insight vs. Behavior Tracker
+                    </Button>
+                  </Link>
                   <Link to="/scenario-exercise">
                     <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
                       <FileText className="h-3 w-3" />
