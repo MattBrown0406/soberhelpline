@@ -277,6 +277,12 @@ export default function FamilyVideos() {
                       Mental Health vs. Substance-Induced Symptoms
                     </Button>
                   </Link>
+                  <Link to="/misunderstood-diagnoses">
+                    <Button variant="outline" size="sm" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
+                      <FileText className="h-3 w-3" />
+                      Commonly Misunderstood Diagnoses
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
