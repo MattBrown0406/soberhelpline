@@ -193,7 +193,7 @@ const Index = () => {
           <Link to="/family-membership">
             <Button variant="outline" size="lg" className="flex items-center gap-3 mx-auto text-base px-6 py-3 border-primary text-primary hover:bg-primary/10">
               <Lock className="w-5 h-5" />
-              Unlock Premium Member Services (Over 60 Different Exercises, Videos and Guides)
+              Unlock Premium Member Services (Over 60 Different Exercises, Videos and Guides) — $14.99/month
             </Button>
           </Link>
         </div>
