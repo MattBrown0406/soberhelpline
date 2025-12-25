@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, CheckCircle, AlertCircle, Eye, Heart, Users, Scale, L
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function TwelveStepsExplained() {
+  useGuideTracking("/twelve-steps-explained", "The 12 Steps Explained for Families");
   const handlePrint = () => {
     window.print();
   };

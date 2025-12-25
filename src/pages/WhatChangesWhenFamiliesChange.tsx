@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, Heart, Shield, Brain, CheckCircle, XCircle,
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function WhatChangesWhenFamiliesChange() {
+  useGuideTracking("/what-changes-when-families-change", "What Changes When Families Change");
   return (
     <>
       <Helmet>

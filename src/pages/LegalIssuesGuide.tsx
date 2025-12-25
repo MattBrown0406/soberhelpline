@@ -7,8 +7,10 @@ import { ArrowLeft, Printer, Scale, AlertTriangle, Shield, FileText, Users, Hear
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const LegalIssuesGuide = () => {
+  useGuideTracking("/legal-issues-guide", "Legal Issues Families Should Understand");
   const [checklist, setChecklist] = useState<string[]>([]);
 
   const checklistItems = [

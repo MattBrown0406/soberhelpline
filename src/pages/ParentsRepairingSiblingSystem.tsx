@@ -3,8 +3,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, XCircle, MessageCircle } from "lucide-react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const ParentsRepairingSiblingSystem = () => {
+  useGuideTracking("/parents-repairing-sibling-system", "Parents: Repairing the Sibling System");
   const handlePrint = () => {
     window.print();
   };

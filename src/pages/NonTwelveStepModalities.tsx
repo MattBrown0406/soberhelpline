@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, BookOpen, Brain, Pill, Heart, Users, MessageSquare, L
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function NonTwelveStepModalities() {
+  useGuideTracking("/non-twelve-step-modalities", "Non-12-Step Recovery Modalities Explained");
   return (
     <>
       <Helmet>

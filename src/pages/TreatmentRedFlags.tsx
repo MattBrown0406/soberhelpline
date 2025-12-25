@@ -8,8 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Printer, AlertTriangle, Shield, DollarSign, MessageSquare, Users, Search, FileText, Clock, Building } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const TreatmentRedFlags = () => {
+  useGuideTracking("/treatment-red-flags", "Treatment Red Flags Checklist");
   const [marketingFlags, setMarketingFlags] = useState<string[]>([]);
   const [referralFlags, setReferralFlags] = useState<string[]>([]);
   const [salesFlags, setSalesFlags] = useState<string[]>([]);

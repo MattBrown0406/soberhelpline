@@ -5,6 +5,7 @@ import { Phone, ArrowLeft, ClipboardCheck, Printer, AlertCircle, TrendingUp, Che
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const checklistItems = {
   section1: [
@@ -54,6 +55,7 @@ const checklistItems = {
 type CheckedState = Record<string, boolean>;
 
 export default function ReadinessChecklist() {
+  useGuideTracking("/readiness-checklist", "Readiness for Change Checklist");
   const [checkedItems, setCheckedItems] = useState<CheckedState>({});
 
   const handlePrint = () => {

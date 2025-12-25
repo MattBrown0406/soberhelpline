@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, Users, Heart, Brain, AlertTriangle, Eye, Shi
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function SiblingExperience() {
+  useGuideTracking("/sibling-experience", "The Sibling Experience in Addiction");
   const handlePrint = () => {
     window.print();
   };

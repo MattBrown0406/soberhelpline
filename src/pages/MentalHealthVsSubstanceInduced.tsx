@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, AlertTriangle, HelpCircle, XCircle, CheckCircle, Heart, Scale } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const MentalHealthVsSubstanceInduced = () => {
+  useGuideTracking("/mental-health-vs-substance-induced", "Mental Health vs. Substance-Induced Symptoms");
   const handlePrint = () => {
     window.print();
   };

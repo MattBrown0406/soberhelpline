@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, Heart, Sun, CheckCircle, XCircle, Shield, B
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function LivingWellRegardless() {
+  useGuideTracking("/living-well-regardless", "Living Well Regardless of Outcome");
   return (
     <>
       <Helmet>

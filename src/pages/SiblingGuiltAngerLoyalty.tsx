@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, Heart, Brain, Shield, AlertTriangle, HelpCir
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function SiblingGuiltAngerLoyalty() {
+  useGuideTracking("/sibling-guilt-anger-loyalty", "Sibling Guilt, Anger, and Loyalty Conflicts");
   const handlePrint = () => {
     window.print();
   };

@@ -3,8 +3,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Clock, Users, CheckCircle, AlertCircle, HelpCircle } from "lucide-react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const RebuildingSiblingRelationships = () => {
+  useGuideTracking("/rebuilding-sibling-relationships", "Rebuilding Sibling Relationships in Recovery");
   const handlePrint = () => {
     window.print();
   };

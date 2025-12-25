@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, XCircle, CheckCircle, ListOrdered, Heart, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const MentalHealthDelaysRecovery = () => {
+  useGuideTracking("/mental-health-delays-recovery", "Why Focusing Only on Mental Health Can Delay Recovery");
   const handlePrint = () => {
     window.print();
   };

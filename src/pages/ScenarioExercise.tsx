@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 interface Scenario1State {
   isEmergency: string;
@@ -55,6 +56,7 @@ interface ReflectionState {
 }
 
 export default function ScenarioExercise() {
+  useGuideTracking("/scenario-exercise", "Family Recovery Scenario Exercise");
   const [scenario1, setScenario1] = useState<Scenario1State>({
     isEmergency: "",
     boundary: "",
