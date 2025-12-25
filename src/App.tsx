@@ -84,6 +84,7 @@ import AddictionRewritesFamilyRules from "./pages/AddictionRewritesFamilyRules";
 import CostOfSecrecy from "./pages/CostOfSecrecy";
 import BoundaryDrift from "./pages/BoundaryDrift";
 import AngerAndBoundaries from "./pages/AngerAndBoundaries";
+import FlexibilityVsInstability from "./pages/FlexibilityVsInstability";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -176,6 +177,7 @@ const App = () => (
             <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
             <Route path="/boundary-drift" element={<BoundaryDrift />} />
             <Route path="/anger-and-boundaries" element={<AngerAndBoundaries />} />
+            <Route path="/flexibility-vs-instability" element={<FlexibilityVsInstability />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

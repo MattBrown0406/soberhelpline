@@ -539,6 +539,12 @@ export default function FamilyVideos() {
                       Anger and Boundaries Are Not the Same Thing
                     </Button>
                   </Link>
+                  <Link to="/flexibility-vs-instability">
+                    <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                      <FileText className="h-3 w-3" />
+                      The Difference Between Flexibility and Instability
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div>
