@@ -357,6 +357,12 @@ export default function FamilyVideos() {
                       The Hidden Cost of Being the "Strong One"
                     </Button>
                   </Link>
+                  <Link to="/guilt-relief-resentment">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <FileText className="h-3 w-3" />
+                      The Guilt–Relief–Resentment Cycle
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
