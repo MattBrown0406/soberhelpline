@@ -647,6 +647,12 @@ export default function FamilyVideos() {
                       Grief for the Family You Thought You'd Have
                     </Button>
                   </Link>
+                  <Link to="/safe-to-open-up">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <FileText className="h-3 w-3" />
+                      Is It Safe to Open Up Again? (Guide for Injured Spouses)
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
