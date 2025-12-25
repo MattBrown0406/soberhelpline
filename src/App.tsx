@@ -88,6 +88,7 @@ import FlexibilityVsInstability from "./pages/FlexibilityVsInstability";
 import AddictionAttachmentStyles from "./pages/AddictionAttachmentStyles";
 import GriefForFamily from "./pages/GriefForFamily";
 import EnablingLanguageTranslator from "./pages/EnablingLanguageTranslator";
+import IntergenerationalEnabling from "./pages/IntergenerationalEnabling";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -184,6 +185,7 @@ const App = () => (
             <Route path="/addiction-attachment-styles" element={<AddictionAttachmentStyles />} />
             <Route path="/grief-for-family" element={<GriefForFamily />} />
             <Route path="/enabling-language-translator" element={<EnablingLanguageTranslator />} />
+            <Route path="/intergenerational-enabling" element={<IntergenerationalEnabling />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

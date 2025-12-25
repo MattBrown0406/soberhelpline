@@ -440,6 +440,12 @@ export default function FamilyVideos() {
                         Enabling Language Translator
                       </Button>
                     </Link>
+                    <Link to="/intergenerational-enabling">
+                      <Button variant="outline" size="sm" className="gap-2 border-sky-500/50 text-sky-700 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-950/30">
+                        <FileText className="h-3 w-3" />
+                        Breaking Intergenerational Enabling
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
