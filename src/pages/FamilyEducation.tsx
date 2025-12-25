@@ -237,6 +237,12 @@ export default function FamilyVideos() {
                       Why Multiple Treatment Episodes Don't Mean Failure
                     </Button>
                   </Link>
+                  <Link to="/disease-choice-reality-map">
+                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                      <FileText className="h-3 w-3" />
+                      The Disease vs. Choice Reality Map
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
