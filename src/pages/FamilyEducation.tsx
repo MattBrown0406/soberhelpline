@@ -326,6 +326,12 @@ export default function FamilyVideos() {
                     Why Multiple Treatment Episodes Don't Mean Failure
                   </Button>
                 </Link>
+                <Link to="/legal-issues-guide">
+                  <Button variant="outline" className="gap-2 border-slate-500/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
+                    <FileText className="h-4 w-4" />
+                    Legal Issues Families Should Understand
+                  </Button>
+                </Link>
               </div>
             </div>
 
