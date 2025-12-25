@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, Heart, Brain, RefreshCw, AlertTriangle, Chec
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function GuiltReliefResentmentCycle() {
+  useGuideTracking("The Guilt-Relief-Resentment Cycle", "/guilt-relief-resentment-cycle");
   const handlePrint = () => {
     window.print();
   };

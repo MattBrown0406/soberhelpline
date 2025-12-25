@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Brain, Heart, CheckCircle, AlertTriangle, Lightbulb, 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function BrainSpiritualRecovery() {
+  useGuideTracking("Addiction, the Brain, and Spiritual Recovery", "/brain-spiritual-recovery");
   return (
     <>
       <Helmet>

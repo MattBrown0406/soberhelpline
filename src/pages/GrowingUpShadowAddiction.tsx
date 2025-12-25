@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, Heart, Brain, Shield, Eye, AlertTriangle, He
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function GrowingUpShadowAddiction() {
+  useGuideTracking("Growing Up in the Shadow of Addiction", "/growing-up-shadow-addiction");
   const handlePrint = () => {
     window.print();
   };

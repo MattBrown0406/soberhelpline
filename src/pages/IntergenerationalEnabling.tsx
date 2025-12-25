@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, Users, ArrowRight, AlertTriangle, CheckCirc
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function IntergenerationalEnabling() {
+  useGuideTracking("Intergenerational Enabling", "/intergenerational-enabling");
   const handlePrint = () => {
     window.print();
   };

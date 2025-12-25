@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { Loader2, Lock } from "lucide-react";
 import { CardDescription } from "@/components/ui/card";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 interface CommunicationSection {
   title: string;
@@ -120,6 +121,7 @@ const languageEffects = [
 ];
 
 export default function CommunicationGuide() {
+  useGuideTracking("What to Say / What Not to Say", "/communication-guide");
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);

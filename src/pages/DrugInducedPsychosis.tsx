@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Printer, AlertTriangle, Brain, Activity, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const DrugInducedPsychosis = () => {
+  useGuideTracking("Understanding Drug-Induced Psychosis", "/drug-induced-psychosis");
   const handlePrint = () => {
     window.print();
   };

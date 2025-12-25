@@ -3,8 +3,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, AlertCircle, HelpCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const AddictionRewritesFamilyRules = () => {
+  useGuideTracking("How Addiction Rewrites Family Rules", "/addiction-rewrites-family-rules");
   const handlePrint = () => {
     window.print();
   };

@@ -7,8 +7,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function FamilyActionPlan() {
+  useGuideTracking("Family Action Plan", "/family-action-plan");
   // Part 1 state
   const [lovedOneStatus, setLovedOneStatus] = useState<string[]>([]);
   const [biggestChallenges, setBiggestChallenges] = useState("");

@@ -8,8 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Printer, AlertTriangle, CheckCircle2, Clock, Users, Home, Shield, Heart, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const AftercareChecklist = () => {
+  useGuideTracking("Aftercare Checklist", "/aftercare-checklist");
   const [section1, setSection1] = useState<string[]>([]);
   const [section2, setSection2] = useState<string[]>([]);
   const [section3, setSection3] = useState<string[]>([]);

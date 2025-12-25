@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const questions = [
   "Has my loved one tried to cut back or stop using substances but failed repeatedly?",
@@ -20,6 +21,7 @@ const questions = [
 ];
 
 const AddictionAssessment = () => {
+  useGuideTracking("Addiction Assessment", "/addiction-assessment");
   const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
 
   const handleCheckChange = (index: number, checked: boolean) => {

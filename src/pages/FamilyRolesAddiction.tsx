@@ -3,8 +3,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, ArrowRight } from "lucide-react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const FamilyRolesAddiction = () => {
+  useGuideTracking("Family Roles in Addiction", "/family-roles-addiction");
   const handlePrint = () => {
     window.print();
   };

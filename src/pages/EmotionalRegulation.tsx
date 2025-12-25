@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function EmotionalRegulation() {
+  useGuideTracking("Emotional Regulation Tools for Families", "/emotional-regulation");
   const handlePrint = () => {
     window.print();
   };

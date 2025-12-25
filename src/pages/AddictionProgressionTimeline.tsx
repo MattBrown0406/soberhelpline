@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const AddictionProgressionTimeline = () => {
+  useGuideTracking("Addiction Progression Timeline", "/addiction-progression-timeline");
   const handlePrint = () => {
     window.print();
   };

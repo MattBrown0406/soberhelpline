@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function CrisisChaos() {
+  useGuideTracking("Crisis vs. Chaos Decision Guide", "/crisis-chaos");
   const handlePrint = () => {
     window.print();
   };
