@@ -533,10 +533,14 @@ export default function FamilyVideos() {
                       Boundary Drift: How Limits Slowly Erode
                     </Button>
                   </Link>
+                  <Link to="/anger-and-boundaries">
+                    <Button variant="outline" size="sm" className="gap-2 border-pink-500/50 text-pink-700 hover:bg-pink-50 dark:text-pink-400 dark:hover:bg-pink-950/30">
+                      <FileText className="h-3 w-3" />
+                      Anger and Boundaries Are Not the Same Thing
+                    </Button>
+                  </Link>
                 </div>
               </div>
-
-              {/* Pillar 6: Family Recovery */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">6</span>
