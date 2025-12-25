@@ -1034,59 +1034,14 @@ export type Database = {
           },
         ]
       }
-      provider_subscriptions_with_provider: {
-        Row: {
-          amount: number | null
-          created_at: string | null
-          id: string | null
-          next_billing_date: string | null
-          paypal_subscription_id: string | null
-          plan_type: string | null
-          provider_name: string | null
-          provider_submission_id: string | null
-          start_date: string | null
-          status: string | null
-          updated_at: string | null
-          user_id: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
-            columns: ["provider_submission_id"]
-            isOneToOne: false
-            referencedRelation: "provider_submissions"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "provider_subscriptions_provider_submission_id_fkey"
-            columns: ["provider_submission_id"]
-            isOneToOne: false
-            referencedRelation: "provider_submissions_public"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
     }
     Functions: {
       get_my_provider_subscriptions_with_provider: {
         Args: never
-        Returns: {
-          amount: number | null
-          created_at: string | null
-          id: string | null
-          next_billing_date: string | null
-          paypal_subscription_id: string | null
-          plan_type: string | null
-          provider_name: string | null
-          provider_submission_id: string | null
-          start_date: string | null
-          status: string | null
-          updated_at: string | null
-          user_id: string | null
-        }[]
+        Returns: Database["public"]["CompositeTypes"]["provider_subscription_with_provider"][]
         SetofOptions: {
           from: "*"
-          to: "provider_subscriptions_with_provider"
+          to: "provider_subscription_with_provider"
           isOneToOne: false
           isSetofReturn: true
         }
@@ -1119,23 +1074,10 @@ export type Database = {
       }
       get_provider_subscriptions_with_provider_admin: {
         Args: never
-        Returns: {
-          amount: number | null
-          created_at: string | null
-          id: string | null
-          next_billing_date: string | null
-          paypal_subscription_id: string | null
-          plan_type: string | null
-          provider_name: string | null
-          provider_submission_id: string | null
-          start_date: string | null
-          status: string | null
-          updated_at: string | null
-          user_id: string | null
-        }[]
+        Returns: Database["public"]["CompositeTypes"]["provider_subscription_with_provider"][]
         SetofOptions: {
           from: "*"
-          to: "provider_subscriptions_with_provider"
+          to: "provider_subscription_with_provider"
           isOneToOne: false
           isSetofReturn: true
         }
@@ -1162,7 +1104,20 @@ export type Database = {
       app_role: "admin" | "user" | "moderator"
     }
     CompositeTypes: {
-      [_ in never]: never
+      provider_subscription_with_provider: {
+        id: string | null
+        user_id: string | null
+        provider_submission_id: string | null
+        paypal_subscription_id: string | null
+        plan_type: string | null
+        status: string | null
+        amount: number | null
+        start_date: string | null
+        next_billing_date: string | null
+        created_at: string | null
+        updated_at: string | null
+        provider_name: string | null
+      }
     }
   }
 }
