@@ -243,6 +243,12 @@ export default function FamilyVideos() {
                       The Disease vs. Choice Reality Map
                     </Button>
                   </Link>
+                  <Link to="/why-willpower-fails">
+                    <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
+                      <FileText className="h-3 w-3" />
+                      Why Willpower Fails (and What Actually Works)
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
