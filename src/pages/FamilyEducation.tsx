@@ -421,6 +421,12 @@ export default function FamilyVideos() {
                       Why Some Therapies Fail at the Wrong Time
                     </Button>
                   </Link>
+                  <Link to="/non-twelve-step-modalities">
+                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                      <FileText className="h-3 w-3" />
+                      Non–12-Step Recovery Modalities
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
