@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function GriefForFamily() {
+  useGuideTracking("Grief for the Family You Thought You'd Have", "/grief-for-family");
   const handlePrint = () => {
     window.print();
   };

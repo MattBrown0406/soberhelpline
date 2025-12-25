@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, Users, AlertTriangle, CheckCircle, XCircle,
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function FamilyUnityLiability() {
+  useGuideTracking("When Family Unity Becomes a Liability", "/family-unity-liability");
   const handlePrint = () => {
     window.print();
   };

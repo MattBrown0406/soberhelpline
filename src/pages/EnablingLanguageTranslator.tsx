@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, MessageSquare, ArrowRight, AlertTriangle, C
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function EnablingLanguageTranslator() {
+  useGuideTracking("Enabling Language Translator", "/enabling-language-translator");
   const translations = [
     {
       enabling: '"Just this once."',

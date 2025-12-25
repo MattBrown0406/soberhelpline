@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, Scale, AlertTriangle, Heart, CheckCircle, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const DiseaseChoiceRealityMap = () => {
+  useGuideTracking("The Disease vs. Choice Reality Map", "/disease-choice-reality-map");
   const handlePrint = () => {
     window.print();
   };

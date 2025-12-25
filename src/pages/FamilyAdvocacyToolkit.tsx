@@ -8,8 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Printer, Shield, Users, FileText, MessageSquare, AlertTriangle, Heart, Target, ClipboardList, Scale, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const FamilyAdvocacyToolkit = () => {
+  useGuideTracking("Family Advocacy Toolkit", "/family-advocacy-toolkit");
   const [preparationChecklist, setPreparationChecklist] = useState<string[]>([]);
   const [clinicalQuestions, setClinicalQuestions] = useState<string[]>([]);
   const [dischargeQuestions, setDischargeQuestions] = useState<string[]>([]);

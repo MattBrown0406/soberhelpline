@@ -10,8 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function InsightBehaviorTracker() {
+  useGuideTracking("Insight vs. Behavior Tracker", "/insight-behavior-tracker");
   const [timeframe, setTimeframe] = useState("");
   const [insightChecks, setInsightChecks] = useState<string[]>([]);
   const [behaviorChecks, setBehaviorChecks] = useState<string[]>([]);
