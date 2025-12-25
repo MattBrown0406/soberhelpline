@@ -85,6 +85,7 @@ import CostOfSecrecy from "./pages/CostOfSecrecy";
 import BoundaryDrift from "./pages/BoundaryDrift";
 import AngerAndBoundaries from "./pages/AngerAndBoundaries";
 import FlexibilityVsInstability from "./pages/FlexibilityVsInstability";
+import AddictionAttachmentStyles from "./pages/AddictionAttachmentStyles";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -178,6 +179,7 @@ const App = () => (
             <Route path="/boundary-drift" element={<BoundaryDrift />} />
             <Route path="/anger-and-boundaries" element={<AngerAndBoundaries />} />
             <Route path="/flexibility-vs-instability" element={<FlexibilityVsInstability />} />
+            <Route path="/addiction-attachment-styles" element={<AddictionAttachmentStyles />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

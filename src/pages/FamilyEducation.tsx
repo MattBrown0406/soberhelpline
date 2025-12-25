@@ -411,10 +411,14 @@ export default function FamilyVideos() {
                       The Cost of Secrecy
                     </Button>
                   </Link>
+                  <Link to="/addiction-attachment-styles">
+                    <Button variant="outline" size="sm" className="gap-2 border-fuchsia-500/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
+                      <FileText className="h-3 w-3" />
+                      How Addiction Shapes Attachment Styles
+                    </Button>
+                  </Link>
                 </div>
               </div>
-
-              {/* Pillar 4: Treatment Literacy */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">4</span>
