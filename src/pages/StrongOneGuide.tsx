@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, Heart, Brain, Users, AlertTriangle, Shield, 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function StrongOneGuide() {
+  useGuideTracking("/strong-one-guide", "The Hidden Cost of Being the Strong One");
   const handlePrint = () => {
     window.print();
   };

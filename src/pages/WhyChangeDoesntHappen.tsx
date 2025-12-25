@@ -18,8 +18,10 @@ import {
   AlertCircle,
   CheckSquare
 } from "lucide-react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const WhyChangeDoesntHappen = () => {
+  useGuideTracking("/why-change-doesnt-happen", "Why Change Doesn't Happen When Families Try Harder");
   return (
     <div className="min-h-screen bg-background">
       <Helmet>

@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, ShieldAlert, AlertTriangle, CheckCircle, XCircle, Tar
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function NoNegotiationGuide() {
+  useGuideTracking("/no-negotiation-guide", "We Don't Negotiate with Terrorists");
   return (
     <>
       <Helmet>

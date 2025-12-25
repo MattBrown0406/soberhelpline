@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, Printer, MessageCircle, AlertTriangle, CheckCircle } 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function TalkingAboutTreatment() {
+  useGuideTracking("/talking-about-treatment", "How to Talk to Your Loved One About Treatment");
   const handlePrint = () => {
     window.print();
   };

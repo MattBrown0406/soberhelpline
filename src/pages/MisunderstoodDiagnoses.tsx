@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, AlertTriangle, HelpCircle, XCircle, CheckCircle, Shield, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const MisunderstoodDiagnoses = () => {
+  useGuideTracking("/misunderstood-diagnoses", "Commonly Misunderstood Diagnoses in Addiction");
   const handlePrint = () => {
     window.print();
   };

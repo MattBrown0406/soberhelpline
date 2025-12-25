@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer, Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function TreatmentQuestions() {
+  useGuideTracking("/treatment-questions", "Questions to Ask a Treatment Center");
   const handlePrint = () => {
     window.print();
   };

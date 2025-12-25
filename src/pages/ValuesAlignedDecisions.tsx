@@ -10,8 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function ValuesAlignedDecisions() {
+  useGuideTracking("/values-aligned-decisions", "Values-Aligned Decision Making");
   const [currentDecision, setCurrentDecision] = useState("");
   const [emotionChecks, setEmotionChecks] = useState<string[]>([]);
   const [loudestEmotion, setLoudestEmotion] = useState("");

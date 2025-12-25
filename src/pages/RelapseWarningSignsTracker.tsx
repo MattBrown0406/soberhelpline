@@ -8,8 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Printer, AlertTriangle, Clock, TrendingDown, RefreshCw, Info, Heart, Brain, Users, Shield } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 const RelapseWarningSignsTracker = () => {
+  useGuideTracking("/relapse-warning-signs-tracker", "Relapse Warning Signs Tracker");
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
   const [notes, setNotes] = useState("");
 

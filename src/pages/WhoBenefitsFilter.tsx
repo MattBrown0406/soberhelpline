@@ -4,8 +4,10 @@ import { Phone, ArrowLeft, FileText, Filter, ArrowRight, CheckCircle, XCircle, P
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function WhoBenefitsFilter() {
+  useGuideTracking("/who-benefits-filter", "The Who Benefits Filter");
   const handlePrint = () => {
     window.print();
   };
