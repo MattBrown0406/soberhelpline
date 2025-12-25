@@ -82,6 +82,7 @@ import ParentsRepairingSiblingSystem from "./pages/ParentsRepairingSiblingSystem
 import FamilyRolesAddiction from "./pages/FamilyRolesAddiction";
 import AddictionRewritesFamilyRules from "./pages/AddictionRewritesFamilyRules";
 import CostOfSecrecy from "./pages/CostOfSecrecy";
+import BoundaryDrift from "./pages/BoundaryDrift";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -172,6 +173,7 @@ const App = () => (
             <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
             <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
             <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
+            <Route path="/boundary-drift" element={<BoundaryDrift />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

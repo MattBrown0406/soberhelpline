@@ -527,6 +527,12 @@ export default function FamilyVideos() {
                       We Don't Negotiate with Terrorists
                     </Button>
                   </Link>
+                  <Link to="/boundary-drift">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <FileText className="h-3 w-3" />
+                      Boundary Drift: How Limits Slowly Erode
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
