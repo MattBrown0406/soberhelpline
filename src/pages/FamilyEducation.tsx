@@ -375,6 +375,12 @@ export default function FamilyVideos() {
                       Growing Up in the Shadow of Addiction
                     </Button>
                   </Link>
+                  <Link to="/sibling-guilt-anger-loyalty">
+                    <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                      <FileText className="h-3 w-3" />
+                      Sibling Guilt, Anger, and Loyalty Conflicts
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

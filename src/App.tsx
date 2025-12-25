@@ -76,6 +76,7 @@ import StrongOneGuide from "./pages/StrongOneGuide";
 import GuiltReliefResentmentCycle from "./pages/GuiltReliefResentmentCycle";
 import SiblingExperience from "./pages/SiblingExperience";
 import GrowingUpShadowAddiction from "./pages/GrowingUpShadowAddiction";
+import SiblingGuiltAngerLoyalty from "./pages/SiblingGuiltAngerLoyalty";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -160,6 +161,7 @@ const App = () => (
             <Route path="/guilt-relief-resentment" element={<GuiltReliefResentmentCycle />} />
             <Route path="/sibling-experience" element={<SiblingExperience />} />
             <Route path="/growing-up-shadow" element={<GrowingUpShadowAddiction />} />
+            <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
