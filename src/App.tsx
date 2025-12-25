@@ -62,6 +62,7 @@ import HowTraumaShapesAddiction from "./pages/HowTraumaShapesAddiction";
 import TreatmentModalities from "./pages/TreatmentModalities";
 import MatchingModality from "./pages/MatchingModality";
 import TherapyTimingGuide from "./pages/TherapyTimingGuide";
+import FamilyInterferenceGuide from "./pages/FamilyInterferenceGuide";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -132,6 +133,7 @@ const App = () => (
             <Route path="/treatment-modalities" element={<TreatmentModalities />} />
             <Route path="/matching-modality" element={<MatchingModality />} />
             <Route path="/therapy-timing" element={<TherapyTimingGuide />} />
+            <Route path="/family-interference" element={<FamilyInterferenceGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -333,6 +333,12 @@ export default function FamilyVideos() {
                       What to Say / What Not to Say
                     </Button>
                   </Link>
+                  <Link to="/family-interference">
+                    <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
+                      <FileText className="h-3 w-3" />
+                      How Families Accidentally Interfere with Recovery
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
