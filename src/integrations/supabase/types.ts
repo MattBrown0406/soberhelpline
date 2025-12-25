@@ -277,6 +277,51 @@ export type Database = {
         }
         Relationships: []
       }
+      pending_topic_requests: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          id: string
+          post_content: string
+          post_title: string
+          requested_by: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          topic_description: string
+          topic_title: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          post_content: string
+          post_title: string
+          requested_by: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          topic_description: string
+          topic_title: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          post_content?: string
+          post_title?: string
+          requested_by?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          topic_description?: string
+          topic_title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       private_messages: {
         Row: {
           content: string
