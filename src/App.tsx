@@ -67,6 +67,7 @@ import BoundariesUltimatumsGuide from "./pages/BoundariesUltimatumsGuide";
 import WhatChangesWhenFamiliesChange from "./pages/WhatChangesWhenFamiliesChange";
 import InsightBehaviorTracker from "./pages/InsightBehaviorTracker";
 import ValuesAlignedDecisions from "./pages/ValuesAlignedDecisions";
+import LivingWellRegardless from "./pages/LivingWellRegardless";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -142,6 +143,7 @@ const App = () => (
             <Route path="/what-changes-when-families-change" element={<WhatChangesWhenFamiliesChange />} />
             <Route path="/insight-behavior-tracker" element={<InsightBehaviorTracker />} />
             <Route path="/values-aligned-decisions" element={<ValuesAlignedDecisions />} />
+            <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
