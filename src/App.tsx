@@ -90,6 +90,7 @@ import GriefForFamily from "./pages/GriefForFamily";
 import EnablingLanguageTranslator from "./pages/EnablingLanguageTranslator";
 import IntergenerationalEnabling from "./pages/IntergenerationalEnabling";
 import WhoBenefitsFilter from "./pages/WhoBenefitsFilter";
+import FamilyUnityLiability from "./pages/FamilyUnityLiability";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -188,6 +189,7 @@ const App = () => (
             <Route path="/enabling-language-translator" element={<EnablingLanguageTranslator />} />
             <Route path="/intergenerational-enabling" element={<IntergenerationalEnabling />} />
             <Route path="/who-benefits-filter" element={<WhoBenefitsFilter />} />
+            <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
