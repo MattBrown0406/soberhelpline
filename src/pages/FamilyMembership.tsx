@@ -32,6 +32,26 @@ const referralSources = [
   "Word of Mouth",
 ];
 
+// Format phone number as user types: (000) 000-0000
+const formatPhoneNumber = (value: string): string => {
+  // Remove all non-digit characters
+  const digits = value.replace(/\D/g, '');
+  
+  // Check if it might be an international number (starts with + or has more than 10 digits)
+  if (value.startsWith('+') || digits.length > 10) {
+    return value; // Don't format international numbers
+  }
+  
+  // Format as US phone number
+  if (digits.length <= 3) {
+    return digits.length > 0 ? `(${digits}` : '';
+  } else if (digits.length <= 6) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  } else {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+  }
+};
+
 const membershipFormSchema = z.object({
   username: z.string()
     .min(3, "Username must be at least 3 characters")
@@ -40,7 +60,7 @@ const membershipFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters").max(50),
   lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
   email: z.string().email("Valid email is required").max(255),
-  phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
+  phoneNumber: z.string().min(10, "Valid phone number is required"),
   city: z.string().min(2, "City is required").max(100),
   state: z.string().min(2, "State is required").max(50),
   referralSource: z.string().min(1, "Please let us know how you heard about us"),
@@ -465,7 +485,14 @@ export default function FamilyMembership() {
                         <FormItem>
                           <FormLabel>Phone Number *</FormLabel>
                           <FormControl>
-                            <Input placeholder="(555) 123-4567" {...field} />
+                            <Input 
+                              placeholder="(555) 123-4567" 
+                              {...field}
+                              onChange={(e) => {
+                                const formatted = formatPhoneNumber(e.target.value);
+                                field.onChange(formatted);
+                              }}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
