@@ -391,6 +391,12 @@ export default function FamilyVideos() {
                       Treatment Modalities Explained
                     </Button>
                   </Link>
+                  <Link to="/matching-modality">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <FileText className="h-3 w-3" />
+                      Matching the Modality to the Problem
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
