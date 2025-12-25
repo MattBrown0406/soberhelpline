@@ -55,6 +55,7 @@ import DiseaseChoiceRealityMap from "./pages/DiseaseChoiceRealityMap";
 import WhyWillpowerFails from "./pages/WhyWillpowerFails";
 import AddictionProgressionTimeline from "./pages/AddictionProgressionTimeline";
 import MentalHealthVsSubstanceInduced from "./pages/MentalHealthVsSubstanceInduced";
+import MisunderstoodDiagnoses from "./pages/MisunderstoodDiagnoses";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -118,6 +119,7 @@ const App = () => (
             <Route path="/why-willpower-fails" element={<WhyWillpowerFails />} />
             <Route path="/addiction-progression-timeline" element={<AddictionProgressionTimeline />} />
             <Route path="/mental-health-vs-substance-induced" element={<MentalHealthVsSubstanceInduced />} />
+            <Route path="/misunderstood-diagnoses" element={<MisunderstoodDiagnoses />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
