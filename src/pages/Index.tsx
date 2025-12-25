@@ -161,22 +161,18 @@ const Index = () => {
         </div>
 
         {/* Featured Video and Logo */}
-        <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-stretch gap-6">
-          <div className="w-full md:w-1/2 lg:w-2/5">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.youtube.com/embed/Li2fH0doWPc"
-                title="Sober Helpline Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
-            </div>
+        <div className="mb-8 md:mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_3fr] gap-6">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.youtube.com/embed/Li2fH0doWPc"
+              title="Sober Helpline Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
           </div>
-          <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
-            <div className="aspect-video h-full w-full flex items-center justify-center">
-              <img src={bannerLogo} alt="Sober Helpline" className="h-full w-auto object-contain rounded-lg" />
-            </div>
+          <div className="relative w-full aspect-video flex items-center justify-center">
+            <img src={bannerLogo} alt="Sober Helpline" className="max-h-full max-w-full object-contain rounded-lg" />
           </div>
         </div>
 
