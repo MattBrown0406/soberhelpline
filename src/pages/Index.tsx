@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -184,6 +184,16 @@ const Index = () => {
             <Button variant="default" size="lg" className="flex items-center gap-3 bg-logo-green hover:bg-logo-green/90 mx-auto text-base px-6 py-3">
               <UserIcon className="w-5 h-5" />
               Family Member Forum
+            </Button>
+          </Link>
+        </div>
+
+        {/* Premium Member Services */}
+        <div className="text-center mb-6">
+          <Link to="/family-membership">
+            <Button variant="outline" size="lg" className="flex items-center gap-3 mx-auto text-base px-6 py-3 border-primary text-primary hover:bg-primary/10">
+              <Lock className="w-5 h-5" />
+              Unlock Premium Member Services (Over 60 Different Exercises, Videos and Guides)
             </Button>
           </Link>
         </div>
