@@ -239,7 +239,7 @@ export default function FamilySupport() {
                         <Lock className="h-6 w-6 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-logo-green mb-2">
+                        <h3 className="text-lg font-semibold text-logo-green mb-2">
                           Unlock Premium Member Services (Over 60 Different Exercises, Videos and Guides)
                         </h3>
                         <p className="text-muted-foreground mb-6">
