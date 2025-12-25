@@ -1,11 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, CheckCircle, AlertCircle, Eye, Heart, Users, Scale, Lightbulb } from "lucide-react";
+import { Phone, ArrowLeft, CheckCircle, AlertCircle, Eye, Heart, Users, Scale, Lightbulb, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 
 export default function TwelveStepsExplained() {
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <>
       <Helmet>
@@ -14,7 +18,7 @@ export default function TwelveStepsExplained() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
           <div className="container flex h-16 items-center justify-between">
             <Link to="/" className="flex items-center">
               <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
@@ -28,13 +32,19 @@ export default function TwelveStepsExplained() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print Guide
+              </Button>
+            </div>
 
             <div className="text-center mb-10">
               <div className="flex justify-center mb-4">
