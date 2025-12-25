@@ -11,7 +11,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
-import logo from "@/assets/logo.png";
+import bannerLogo from "@/assets/banner-logo.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
 import MobileNav from "@/components/MobileNav";
 import addictionCycleImg from "@/assets/addiction-cycle.jpg";
@@ -174,7 +174,7 @@ const Index = () => {
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
-            <img src={logo} alt="Sober Helpline" className="h-auto max-h-[56.25vw] md:max-h-[calc((50vw-3rem)*9/16)] lg:max-h-[calc((40vw-3rem)*9/16)] w-auto border-2 border-black rounded-lg" />
+            <img src={bannerLogo} alt="Sober Helpline" className="h-auto max-h-[56.25vw] md:max-h-[calc((50vw-3rem)*9/16)] lg:max-h-[calc((40vw-3rem)*9/16)] w-auto rounded-lg" />
           </div>
         </div>
 
