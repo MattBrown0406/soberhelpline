@@ -419,6 +419,12 @@ export default function FamilyVideos() {
                   <h4 className="font-semibold text-foreground">Boundaries, Consequences, and Change</h4>
                 </div>
                 <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/boundaries-ultimatums">
+                    <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                      <FileText className="h-3 w-3" />
+                      Requests, Demands, Ultimatums & Boundaries
+                    </Button>
+                  </Link>
                   <Link to="/scenario-exercise">
                     <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
                       <FileText className="h-3 w-3" />
