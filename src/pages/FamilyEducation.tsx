@@ -265,6 +265,12 @@ export default function FamilyVideos() {
                       Addiction, the Brain & Spiritual Recovery
                     </Button>
                   </Link>
+                  <Link to="/twelve-steps-explained">
+                    <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                      <FileText className="h-3 w-3" />
+                      The 12 Steps Explained for Families
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
