@@ -1,11 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, Users, ArrowRight, AlertTriangle, CheckCircle, Heart } from "lucide-react";
+import { Phone, ArrowLeft, FileText, Users, ArrowRight, AlertTriangle, CheckCircle, Heart, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 
 export default function IntergenerationalEnabling() {
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <>
       <Helmet>
@@ -14,7 +18,7 @@ export default function IntergenerationalEnabling() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
           <div className="container flex h-16 items-center justify-between">
             <Link to="/" className="flex items-center">
               <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
@@ -27,12 +31,18 @@ export default function IntergenerationalEnabling() {
         </header>
 
         <main className="container py-8 md:py-12 max-w-4xl">
-          <Link to="/family-education">
-            <Button variant="ghost" className="mb-6 gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Family Education
+          <div className="flex items-center justify-between mb-6 print:hidden">
+            <Link to="/family-education">
+              <Button variant="ghost" className="gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Family Education
+              </Button>
+            </Link>
+            <Button onClick={handlePrint} variant="outline" className="gap-2">
+              <Printer className="h-4 w-4" />
+              Print Guide
             </Button>
-          </Link>
+          </div>
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">

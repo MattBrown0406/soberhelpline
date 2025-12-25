@@ -162,3 +162,101 @@ All colors MUST be HSL.
     z-index: 2;
   }
 }
+
+/* Print Styles for Printable Guides */
+@media print {
+  /* Reset background and ensure clean print */
+  body {
+    background: white !important;
+    background-image: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  body::before,
+  body::after {
+    display: none !important;
+  }
+  
+  /* Hide navigation elements */
+  header,
+  .print\\:hidden,
+  [class*="print:hidden"] {
+    display: none !important;
+  }
+  
+  /* Remove shadows and complex backgrounds for cleaner print */
+  .shadow,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg,
+  .shadow-xl,
+  [class*="shadow"] {
+    box-shadow: none !important;
+  }
+  
+  /* Ensure text is readable */
+  * {
+    color: black !important;
+    background: transparent !important;
+  }
+  
+  /* Keep card borders visible */
+  .border,
+  [class*="border-"] {
+    border-color: #e5e7eb !important;
+  }
+  
+  /* Preserve important background colors for visual elements */
+  .bg-primary\/5,
+  .bg-primary\/10,
+  [class*="bg-rose-"],
+  [class*="bg-blue-"],
+  [class*="bg-emerald-"],
+  [class*="bg-amber-"],
+  [class*="bg-violet-"],
+  [class*="bg-teal-"],
+  [class*="bg-purple-"],
+  [class*="bg-indigo-"],
+  [class*="bg-sky-"],
+  [class*="bg-orange-"],
+  [class*="bg-red-"],
+  [class*="bg-green-"] {
+    background-color: #f9fafb !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* Ensure proper page breaks */
+  .card,
+  article,
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  
+  /* Full width content */
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  main {
+    padding: 0 !important;
+  }
+  
+  /* Ensure links are visible but not styled */
+  a {
+    text-decoration: none !important;
+  }
+  
+  /* Hide dark mode specific styles */
+  .dark {
+    color-scheme: light !important;
+  }
+}
