@@ -14,6 +14,7 @@ import ScenarioWorksheet from "@/components/ScenarioWorksheet";
 import EnablingDecisionTree from "@/components/EnablingDecisionTree";
 import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksheet";
 import SelfCareWorksheet from "@/components/SelfCareWorksheet";
+import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAssessment";
 
 
 export default function FamilyVideos() {
@@ -184,6 +185,9 @@ export default function FamilyVideos() {
             <div className="mb-10">
               <EnablingDecisionTree />
             </div>
+
+            {/* Trauma & Hypervigilance Self-Assessment */}
+            <TraumaHypervigilanceAssessment />
 
             {/* Self-Assessment */}
             {user && <FamilySelfAssessment user={user} />}
