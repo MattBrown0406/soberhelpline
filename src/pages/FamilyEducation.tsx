@@ -271,6 +271,12 @@ export default function FamilyVideos() {
                       The 12 Steps Explained for Families
                     </Button>
                   </Link>
+                  <Link to="/addiction-as-stress-disorder">
+                    <Button variant="outline" size="sm" className="gap-2 border-pink-500/50 text-pink-700 hover:bg-pink-50 dark:text-pink-400 dark:hover:bg-pink-950/30">
+                      <FileText className="h-3 w-3" />
+                      Addiction as a Stress-Regulation Disorder
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

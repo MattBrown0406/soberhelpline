@@ -92,6 +92,7 @@ import IntergenerationalEnabling from "./pages/IntergenerationalEnabling";
 import WhoBenefitsFilter from "./pages/WhoBenefitsFilter";
 import FamilyUnityLiability from "./pages/FamilyUnityLiability";
 import SafeToOpenUp from "./pages/SafeToOpenUp";
+import AddictionAsStressDisorder from "./pages/AddictionAsStressDisorder";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -192,6 +193,7 @@ const App = () => (
             <Route path="/who-benefits-filter" element={<WhoBenefitsFilter />} />
             <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
             <Route path="/safe-to-open-up" element={<SafeToOpenUp />} />
+            <Route path="/addiction-as-stress-disorder" element={<AddictionAsStressDisorder />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
