@@ -405,6 +405,12 @@ export default function FamilyVideos() {
                       How Addiction Rewrites Family Rules
                     </Button>
                   </Link>
+                  <Link to="/cost-of-secrecy">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <FileText className="h-3 w-3" />
+                      The Cost of Secrecy
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
