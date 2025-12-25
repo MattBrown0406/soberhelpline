@@ -51,6 +51,7 @@ import TreatmentIndustryGuide from "./pages/TreatmentIndustryGuide";
 import DrugInducedPsychosis from "./pages/DrugInducedPsychosis";
 import MultipleTreatmentEpisodes from "./pages/MultipleTreatmentEpisodes";
 import LegalIssuesGuide from "./pages/LegalIssuesGuide";
+import DiseaseChoiceRealityMap from "./pages/DiseaseChoiceRealityMap";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -110,6 +111,7 @@ const App = () => (
             <Route path="/drug-induced-psychosis" element={<DrugInducedPsychosis />} />
             <Route path="/multiple-treatment-episodes" element={<MultipleTreatmentEpisodes />} />
             <Route path="/legal-issues-guide" element={<LegalIssuesGuide />} />
+            <Route path="/disease-choice-reality-map" element={<DiseaseChoiceRealityMap />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
