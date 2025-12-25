@@ -387,6 +387,12 @@ export default function FamilyVideos() {
                       Rebuilding Sibling Relationships in Recovery
                     </Button>
                   </Link>
+                  <Link to="/parents-repairing-sibling-system">
+                    <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                      <FileText className="h-3 w-3" />
+                      Parents: Repairing the Sibling System
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
