@@ -68,6 +68,7 @@ import WhatChangesWhenFamiliesChange from "./pages/WhatChangesWhenFamiliesChange
 import InsightBehaviorTracker from "./pages/InsightBehaviorTracker";
 import ValuesAlignedDecisions from "./pages/ValuesAlignedDecisions";
 import LivingWellRegardless from "./pages/LivingWellRegardless";
+import BrainSpiritualRecovery from "./pages/BrainSpiritualRecovery";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -144,6 +145,7 @@ const App = () => (
             <Route path="/insight-behavior-tracker" element={<InsightBehaviorTracker />} />
             <Route path="/values-aligned-decisions" element={<ValuesAlignedDecisions />} />
             <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
+            <Route path="/brain-spiritual-recovery" element={<BrainSpiritualRecovery />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
