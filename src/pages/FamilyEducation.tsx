@@ -326,103 +326,121 @@ export default function FamilyVideos() {
                   <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">3</span>
                   <h4 className="font-semibold text-foreground">Understanding Family Systems and Enabling</h4>
                 </div>
-                <div className="flex flex-wrap gap-2 ml-9">
-                  <Link to="/why-change-doesnt-happen">
-                    <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
-                      <FileText className="h-3 w-3" />
-                      Why Change Doesn't Happen When Families Try Harder
-                    </Button>
-                  </Link>
-                  <Link to="/crisis-chaos">
-                    <Button variant="outline" size="sm" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
-                      <FileText className="h-3 w-3" />
-                      Crisis vs. Chaos Decision Guide
-                    </Button>
-                  </Link>
-                  <Link to="/communication-guide">
-                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
-                      <FileText className="h-3 w-3" />
-                      What to Say / What Not to Say
-                    </Button>
-                  </Link>
-                  <Link to="/family-interference">
-                    <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
-                      <FileText className="h-3 w-3" />
-                      How Families Accidentally Interfere with Recovery
-                    </Button>
-                  </Link>
-                  <Link to="/strong-one">
-                    <Button variant="outline" size="sm" className="gap-2 border-pink-500/50 text-pink-700 hover:bg-pink-50 dark:text-pink-400 dark:hover:bg-pink-950/30">
-                      <FileText className="h-3 w-3" />
-                      The Hidden Cost of Being the "Strong One"
-                    </Button>
-                  </Link>
-                  <Link to="/guilt-relief-resentment">
-                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
-                      <FileText className="h-3 w-3" />
-                      The Guilt–Relief–Resentment Cycle
-                    </Button>
-                  </Link>
-                  <Link to="/sibling-experience">
-                    <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
-                      <FileText className="h-3 w-3" />
-                      The Sibling Experience in Addiction
-                    </Button>
-                  </Link>
-                  <Link to="/growing-up-shadow">
-                    <Button variant="outline" size="sm" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
-                      <FileText className="h-3 w-3" />
-                      Growing Up in the Shadow of Addiction
-                    </Button>
-                  </Link>
-                  <Link to="/sibling-guilt-anger-loyalty">
-                    <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
-                      <FileText className="h-3 w-3" />
-                      Sibling Guilt, Anger, and Loyalty Conflicts
-                    </Button>
-                  </Link>
-                  <Link to="/rebuilding-sibling-relationships">
-                    <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
-                      <FileText className="h-3 w-3" />
-                      Rebuilding Sibling Relationships in Recovery
-                    </Button>
-                  </Link>
-                  <Link to="/parents-repairing-sibling-system">
-                    <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
-                      <FileText className="h-3 w-3" />
-                      Parents: Repairing the Sibling System
-                    </Button>
-                  </Link>
-                  <Link to="/family-roles-addiction">
-                    <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
-                      <FileText className="h-3 w-3" />
-                      Family Roles in Addiction (Beyond the Clichés)
-                    </Button>
-                  </Link>
-                  <Link to="/addiction-rewrites-family-rules">
-                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
-                      <FileText className="h-3 w-3" />
-                      How Addiction Rewrites Family Rules
-                    </Button>
-                  </Link>
-                  <Link to="/cost-of-secrecy">
-                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
-                      <FileText className="h-3 w-3" />
-                      The Cost of Secrecy
-                    </Button>
-                  </Link>
-                  <Link to="/addiction-attachment-styles">
-                    <Button variant="outline" size="sm" className="gap-2 border-fuchsia-500/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
-                      <FileText className="h-3 w-3" />
-                      How Addiction Shapes Attachment Styles
-                    </Button>
-                  </Link>
-                  <Link to="/enabling-language-translator">
-                    <Button variant="outline" size="sm" className="gap-2 border-lime-500/50 text-lime-700 hover:bg-lime-50 dark:text-lime-400 dark:hover:bg-lime-950/30">
-                      <FileText className="h-3 w-3" />
-                      Enabling Language Translator
-                    </Button>
-                  </Link>
+                
+                {/* Subcategory: Family Systems */}
+                <div className="ml-9 mb-4">
+                  <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Family Systems
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Link to="/family-roles-addiction">
+                      <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                        <FileText className="h-3 w-3" />
+                        Family Roles in Addiction (Beyond the Clichés)
+                      </Button>
+                    </Link>
+                    <Link to="/addiction-rewrites-family-rules">
+                      <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                        <FileText className="h-3 w-3" />
+                        How Addiction Rewrites Family Rules
+                      </Button>
+                    </Link>
+                    <Link to="/cost-of-secrecy">
+                      <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                        <FileText className="h-3 w-3" />
+                        The Cost of Secrecy
+                      </Button>
+                    </Link>
+                    <Link to="/addiction-attachment-styles">
+                      <Button variant="outline" size="sm" className="gap-2 border-fuchsia-500/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
+                        <FileText className="h-3 w-3" />
+                        How Addiction Shapes Attachment Styles
+                      </Button>
+                    </Link>
+                    <Link to="/strong-one">
+                      <Button variant="outline" size="sm" className="gap-2 border-pink-500/50 text-pink-700 hover:bg-pink-50 dark:text-pink-400 dark:hover:bg-pink-950/30">
+                        <FileText className="h-3 w-3" />
+                        The Hidden Cost of Being the "Strong One"
+                      </Button>
+                    </Link>
+                    <Link to="/guilt-relief-resentment">
+                      <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                        <FileText className="h-3 w-3" />
+                        The Guilt–Relief–Resentment Cycle
+                      </Button>
+                    </Link>
+                    <Link to="/sibling-experience">
+                      <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                        <FileText className="h-3 w-3" />
+                        The Sibling Experience in Addiction
+                      </Button>
+                    </Link>
+                    <Link to="/growing-up-shadow">
+                      <Button variant="outline" size="sm" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
+                        <FileText className="h-3 w-3" />
+                        Growing Up in the Shadow of Addiction
+                      </Button>
+                    </Link>
+                    <Link to="/sibling-guilt-anger-loyalty">
+                      <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                        <FileText className="h-3 w-3" />
+                        Sibling Guilt, Anger, and Loyalty Conflicts
+                      </Button>
+                    </Link>
+                    <Link to="/rebuilding-sibling-relationships">
+                      <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                        <FileText className="h-3 w-3" />
+                        Rebuilding Sibling Relationships in Recovery
+                      </Button>
+                    </Link>
+                    <Link to="/parents-repairing-sibling-system">
+                      <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                        <FileText className="h-3 w-3" />
+                        Parents: Repairing the Sibling System
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Subcategory: Understanding Enabling */}
+                <div className="ml-9">
+                  <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Understanding Enabling
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Link to="/why-change-doesnt-happen">
+                      <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                        <FileText className="h-3 w-3" />
+                        Why Change Doesn't Happen When Families Try Harder
+                      </Button>
+                    </Link>
+                    <Link to="/crisis-chaos">
+                      <Button variant="outline" size="sm" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
+                        <FileText className="h-3 w-3" />
+                        Crisis vs. Chaos Decision Guide
+                      </Button>
+                    </Link>
+                    <Link to="/communication-guide">
+                      <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                        <FileText className="h-3 w-3" />
+                        What to Say / What Not to Say
+                      </Button>
+                    </Link>
+                    <Link to="/family-interference">
+                      <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
+                        <FileText className="h-3 w-3" />
+                        How Families Accidentally Interfere with Recovery
+                      </Button>
+                    </Link>
+                    <Link to="/enabling-language-translator">
+                      <Button variant="outline" size="sm" className="gap-2 border-lime-500/50 text-lime-700 hover:bg-lime-50 dark:text-lime-400 dark:hover:bg-lime-950/30">
+                        <FileText className="h-3 w-3" />
+                        Enabling Language Translator
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
               <div className="mb-6">
