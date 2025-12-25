@@ -176,7 +176,7 @@ export default function FamilyVideos() {
                 Family Education Resources
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Expert-led video courses to help you understand addiction and support your loved one's recovery.
+                Expert created educational resources to help you understand addiction and support your loved one's recovery.
               </p>
             </div>
 
