@@ -180,37 +180,6 @@ export default function FamilyVideos() {
               </p>
             </div>
 
-            {/* The Six Pillars Section */}
-            <div className="mb-10">
-              <h2 className="text-2xl font-bold text-logo-green text-center mb-6">The Six Pillars</h2>
-              <div className="grid md:grid-cols-2 gap-x-16 gap-y-3 max-w-4xl mx-auto">
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">1</span>
-                  <p className="text-foreground whitespace-nowrap">Understanding Addiction (Foundational)</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">4</span>
-                  <p className="text-foreground whitespace-nowrap">Treatment Literacy</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">2</span>
-                  <p className="text-foreground whitespace-nowrap">Understanding Mental Health & Dual Diagnosis</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">5</span>
-                  <p className="text-foreground whitespace-nowrap">Boundaries, Consequences, and Change</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">3</span>
-                  <p className="text-foreground whitespace-nowrap">Understanding Family Systems and Enabling</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">6</span>
-                  <p className="text-foreground whitespace-nowrap">Family Recovery</p>
-                </div>
-              </div>
-            </div>
-
             {/* Enabling vs Helping Decision Tree */}
             <div className="mb-10">
               <EnablingDecisionTree />
