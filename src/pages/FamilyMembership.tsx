@@ -61,20 +61,33 @@ const usStates = [
   "West Virginia", "Wisconsin", "Wyoming"
 ];
 
-const membershipPlan = {
-  id: 'family-membership-monthly',
-  name: 'Family Support Membership',
-  price: '14.99',
-  period: '/month',
-  billingCycle: 'monthly' as const,
-  features: [
-    'Access to premium family resources',
-    'Exclusive support group access',
-    'Educational webinars & content',
-    'Direct support from our team',
-    'Cancel anytime',
-  ],
+const membershipPlans = {
+  monthly: {
+    id: 'family-membership-monthly',
+    name: 'Family Support Membership',
+    price: '14.99',
+    period: '/month',
+    billingCycle: 'monthly' as const,
+  },
+  annual: {
+    id: 'family-membership-annual',
+    name: 'Family Support Membership',
+    price: '149',
+    period: '/year',
+    billingCycle: 'annual' as const,
+  },
 };
+
+const membershipFeatures = [
+  'Access to premium family resources',
+  'Exclusive support group access',
+  'Educational webinars & content',
+  'Direct support from our team',
+  'Cancel anytime',
+];
+
+const MONTHLY_ANNUAL_COST = 14.99 * 12; // $179.88
+const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 149; // $30.88
 
 export default function FamilyMembership() {
   const { toast } = useToast();
@@ -87,6 +100,9 @@ export default function FamilyMembership() {
   const [freeListingActivated, setFreeListingActivated] = useState(false);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [webinarRemindersOptIn, setWebinarRemindersOptIn] = useState(false);
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  
+  const selectedPlan = membershipPlans[billingCycle];
   
   const { createSubscription, isLoading: paypalLoading, paypalUrl, clearPaypalUrl } = usePayPalSubscription();
 
@@ -228,8 +244,8 @@ export default function FamilyMembership() {
 
       // Create the subscription
       const result = await createSubscription({
-        planType: 'monthly',
-        amount: membershipPlan.price,
+        planType: billingCycle,
+        amount: selectedPlan.price,
         discountCode: discountCode.trim() || undefined,
       });
       
@@ -527,17 +543,49 @@ export default function FamilyMembership() {
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">Complete Your Membership</CardTitle>
-                      <Badge className="bg-primary">Monthly</Badge>
                     </div>
-                    <CardDescription className="pt-3">
-                      <span className="text-3xl font-bold text-foreground">${membershipPlan.price}</span>
-                      <span className="text-muted-foreground">{membershipPlan.period}</span>
+                    
+                    {/* Billing Cycle Toggle */}
+                    <div className="flex gap-2 mt-3">
+                      <Button
+                        type="button"
+                        variant={billingCycle === 'monthly' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setBillingCycle('monthly')}
+                        className="flex-1"
+                      >
+                        Monthly
+                      </Button>
+                      <Button
+                        type="button"
+                        variant={billingCycle === 'annual' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setBillingCycle('annual')}
+                        className="flex-1"
+                      >
+                        Annual
+                        <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 text-xs">
+                          Save ${ANNUAL_SAVINGS.toFixed(0)}
+                        </Badge>
+                      </Button>
+                    </div>
+
+                    <CardDescription className="pt-4">
+                      <span className="text-3xl font-bold text-foreground">${selectedPlan.price}</span>
+                      <span className="text-muted-foreground">{selectedPlan.period}</span>
+                      {billingCycle === 'annual' && (
+                        <div className="mt-2">
+                          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                            Save ${ANNUAL_SAVINGS.toFixed(2)} vs monthly (${MONTHLY_ANNUAL_COST.toFixed(2)}/year)
+                          </Badge>
+                        </div>
+                      )}
                     </CardDescription>
                   </CardHeader>
 
                   <CardContent className="space-y-4">
                     <ul className="space-y-2">
-                      {membershipPlan.features.map((feature, index) => (
+                      {membershipFeatures.map((feature, index) => (
                         <li key={index} className="flex items-center gap-2">
                           <Check className="h-4 w-4 flex-shrink-0 text-green-500" />
                           <span className="text-sm text-muted-foreground">{feature}</span>
