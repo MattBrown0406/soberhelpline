@@ -397,6 +397,12 @@ export default function FamilyVideos() {
                       Matching the Modality to the Problem
                     </Button>
                   </Link>
+                  <Link to="/therapy-timing">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-600/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <FileText className="h-3 w-3" />
+                      Why Some Therapies Fail at the Wrong Time
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
