@@ -1,10 +1,115 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Target, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.png";
 
+interface Scenario1State {
+  isEmergency: string;
+  boundary: string;
+  emotions: string[];
+  plannedResponse: string;
+  consequence: string;
+  supportContact: string;
+}
+
+interface Scenario2State {
+  pastPatterns: string;
+  allowsNoAccountability: string;
+  boundary: string;
+  calmResponse: string;
+  supportiveAlternative: string;
+}
+
+interface Scenario3State {
+  withinControl: string;
+  notWithinControl: string;
+  enablingTemptation: string;
+  actionPlanSays: string;
+  manageAnxiety: string;
+}
+
+interface Scenario4State {
+  alignedWithValues: string;
+  boundaryNeeded: string;
+  addressWithoutMonitoring: string;
+  whatConsistencyLooksLike: string;
+}
+
+interface Scenario5State {
+  impactOnPlan: string;
+  boundaryWithFamily: string;
+  guidingValues: string;
+  unityStatement: string;
+}
+
+interface ReflectionState {
+  hardestScenario: string;
+  likelyToAbandon: string;
+  supportNeeded: string;
+}
+
 export default function ScenarioExercise() {
+  const [scenario1, setScenario1] = useState<Scenario1State>({
+    isEmergency: "",
+    boundary: "",
+    emotions: [],
+    plannedResponse: "",
+    consequence: "",
+    supportContact: ""
+  });
+
+  const [scenario2, setScenario2] = useState<Scenario2State>({
+    pastPatterns: "",
+    allowsNoAccountability: "",
+    boundary: "",
+    calmResponse: "",
+    supportiveAlternative: ""
+  });
+
+  const [scenario3, setScenario3] = useState<Scenario3State>({
+    withinControl: "",
+    notWithinControl: "",
+    enablingTemptation: "",
+    actionPlanSays: "",
+    manageAnxiety: ""
+  });
+
+  const [scenario4, setScenario4] = useState<Scenario4State>({
+    alignedWithValues: "",
+    boundaryNeeded: "",
+    addressWithoutMonitoring: "",
+    whatConsistencyLooksLike: ""
+  });
+
+  const [scenario5, setScenario5] = useState<Scenario5State>({
+    impactOnPlan: "",
+    boundaryWithFamily: "",
+    guidingValues: "",
+    unityStatement: ""
+  });
+
+  const [reflection, setReflection] = useState<ReflectionState>({
+    hardestScenario: "",
+    likelyToAbandon: "",
+    supportNeeded: ""
+  });
+
+  const scenario1Emotions = ["Fear", "Guilt", "Panic", "Anger", "Sadness"];
+
+  const handleEmotionToggle = (emotion: string) => {
+    if (scenario1.emotions.includes(emotion)) {
+      setScenario1({ ...scenario1, emotions: scenario1.emotions.filter(e => e !== emotion) });
+    } else {
+      setScenario1({ ...scenario1, emotions: [...scenario1.emotions, emotion] });
+    }
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -95,65 +200,82 @@ export default function ScenarioExercise() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div className="p-4 border rounded-lg">
-                    <p className="font-medium mb-2">Is this a true emergency according to your action plan?</p>
-                    <div className="flex gap-4 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Yes
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        No
-                      </label>
+                    <Label className="font-medium mb-3 block">Is this a true emergency according to your action plan?</Label>
+                    <RadioGroup
+                      value={scenario1.isEmergency}
+                      onValueChange={(value) => setScenario1({ ...scenario1, isEmergency: value })}
+                      className="flex gap-6"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="yes" id="s1-emergency-yes" />
+                        <Label htmlFor="s1-emergency-yes">Yes</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="no" id="s1-emergency-no" />
+                        <Label htmlFor="s1-emergency-no">No</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="s1-boundary" className="font-medium mb-2 block">Which boundary or non-negotiable applies here?</Label>
+                    <Textarea
+                      id="s1-boundary"
+                      value={scenario1.boundary}
+                      onChange={(e) => setScenario1({ ...scenario1, boundary: e.target.value })}
+                      placeholder="Write the boundary that applies..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
+                  </div>
+
+                  <div className="p-4 border rounded-lg">
+                    <Label className="font-medium mb-3 block">What emotions does this scenario trigger for you?</Label>
+                    <div className="flex flex-wrap gap-4">
+                      {scenario1Emotions.map(emotion => (
+                        <label key={emotion} className="flex items-center gap-2 cursor-pointer">
+                          <Checkbox
+                            checked={scenario1.emotions.includes(emotion)}
+                            onCheckedChange={() => handleEmotionToggle(emotion)}
+                          />
+                          <span className="text-sm">{emotion}</span>
+                        </label>
+                      ))}
                     </div>
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">Which boundary or non-negotiable applies here?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
-                  </div>
-
-                  <div className="p-4 border rounded-lg">
-                    <p className="font-medium mb-2">What emotions does this scenario trigger for you?</p>
-                    <div className="flex flex-wrap gap-3 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Fear
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Guilt
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Panic
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Anger
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Sadness
-                      </label>
-                    </div>
+                    <Label htmlFor="s1-response" className="font-medium mb-2 block">What is your planned response (not your impulse)?</Label>
+                    <Textarea
+                      id="s1-response"
+                      value={scenario1.plannedResponse}
+                      onChange={(e) => setScenario1({ ...scenario1, plannedResponse: e.target.value })}
+                      placeholder="Describe your planned, values-based response..."
+                      className="min-h-[80px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What is your planned response (not your impulse)?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16"></div>
+                    <Label htmlFor="s1-consequence" className="font-medium mb-2 block">What consequence are you willing to allow to occur?</Label>
+                    <Textarea
+                      id="s1-consequence"
+                      value={scenario1.consequence}
+                      onChange={(e) => setScenario1({ ...scenario1, consequence: e.target.value })}
+                      placeholder="Name the natural consequence you will allow..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What consequence are you willing to allow to occur?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">Who can you contact afterward for support?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-8"></div>
+                    <Label htmlFor="s1-support" className="font-medium mb-2 block">Who can you contact afterward for support?</Label>
+                    <Textarea
+                      id="s1-support"
+                      value={scenario1.supportContact}
+                      onChange={(e) => setScenario1({ ...scenario1, supportContact: e.target.value })}
+                      placeholder="Name specific people you can reach out to..."
+                      className="min-h-[40px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -171,39 +293,67 @@ export default function ScenarioExercise() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div>
-                    <p className="font-medium mb-2">What past patterns does this resemble?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s2-patterns" className="font-medium mb-2 block">What past patterns does this resemble?</Label>
+                    <Textarea
+                      id="s2-patterns"
+                      value={scenario2.pastPatterns}
+                      onChange={(e) => setScenario2({ ...scenario2, pastPatterns: e.target.value })}
+                      placeholder="Describe similar situations from the past..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div className="p-4 border rounded-lg">
-                    <p className="font-medium mb-2">Does your action plan allow support without accountability?</p>
-                    <div className="flex gap-4 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Yes
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        No
-                      </label>
-                    </div>
+                    <Label className="font-medium mb-3 block">Does your action plan allow support without accountability?</Label>
+                    <RadioGroup
+                      value={scenario2.allowsNoAccountability}
+                      onValueChange={(value) => setScenario2({ ...scenario2, allowsNoAccountability: value })}
+                      className="flex gap-6"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="yes" id="s2-accountability-yes" />
+                        <Label htmlFor="s2-accountability-yes">Yes</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="no" id="s2-accountability-no" />
+                        <Label htmlFor="s2-accountability-no">No</Label>
+                      </div>
+                    </RadioGroup>
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What boundary applies here?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s2-boundary" className="font-medium mb-2 block">What boundary applies here?</Label>
+                    <Textarea
+                      id="s2-boundary"
+                      value={scenario2.boundary}
+                      onChange={(e) => setScenario2({ ...scenario2, boundary: e.target.value })}
+                      placeholder="State the relevant boundary..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">Write your calm, repeatable response:</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16"></div>
+                    <Label htmlFor="s2-calm" className="font-medium mb-2 block">Write your calm, repeatable response:</Label>
+                    <Textarea
+                      id="s2-calm"
+                      value={scenario2.calmResponse}
+                      onChange={(e) => setScenario2({ ...scenario2, calmResponse: e.target.value })}
+                      placeholder="Write the exact words you would say..."
+                      className="min-h-[80px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What supportive alternative (if any) aligns with recovery?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s2-alternative" className="font-medium mb-2 block">What supportive alternative (if any) aligns with recovery?</Label>
+                    <Textarea
+                      id="s2-alternative"
+                      value={scenario2.supportiveAlternative}
+                      onChange={(e) => setScenario2({ ...scenario2, supportiveAlternative: e.target.value })}
+                      placeholder="Describe recovery-aligned support options..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -221,30 +371,60 @@ export default function ScenarioExercise() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div>
-                    <p className="font-medium mb-2">What part of this is within your control?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s3-control" className="font-medium mb-2 block">What part of this is within your control?</Label>
+                    <Textarea
+                      id="s3-control"
+                      value={scenario3.withinControl}
+                      onChange={(e) => setScenario3({ ...scenario3, withinControl: e.target.value })}
+                      placeholder="List what you can control..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What part is not?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s3-not-control" className="font-medium mb-2 block">What part is not?</Label>
+                    <Textarea
+                      id="s3-not-control"
+                      value={scenario3.notWithinControl}
+                      onChange={(e) => setScenario3({ ...scenario3, notWithinControl: e.target.value })}
+                      placeholder="List what you cannot control..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What enabling behavior are you tempted to continue?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s3-enabling" className="font-medium mb-2 block">What enabling behavior are you tempted to continue?</Label>
+                    <Textarea
+                      id="s3-enabling"
+                      value={scenario3.enablingTemptation}
+                      onChange={(e) => setScenario3({ ...scenario3, enablingTemptation: e.target.value })}
+                      placeholder="Be honest about your impulses..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What does your action plan say you will do instead?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s3-action" className="font-medium mb-2 block">What does your action plan say you will do instead?</Label>
+                    <Textarea
+                      id="s3-action"
+                      value={scenario3.actionPlanSays}
+                      onChange={(e) => setScenario3({ ...scenario3, actionPlanSays: e.target.value })}
+                      placeholder="Reference your action plan..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">How will you manage the anxiety that comes with holding your boundary?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s3-anxiety" className="font-medium mb-2 block">How will you manage the anxiety that comes with holding your boundary?</Label>
+                    <Textarea
+                      id="s3-anxiety"
+                      value={scenario3.manageAnxiety}
+                      onChange={(e) => setScenario3({ ...scenario3, manageAnxiety: e.target.value })}
+                      placeholder="Describe your coping strategies..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -262,34 +442,56 @@ export default function ScenarioExercise() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div className="p-4 border rounded-lg">
-                    <p className="font-medium mb-2">Is this behavior aligned with your values and non-negotiables?</p>
-                    <div className="flex gap-4 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        Yes
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
-                        No
-                      </label>
-                    </div>
+                    <Label className="font-medium mb-3 block">Is this behavior aligned with your values and non-negotiables?</Label>
+                    <RadioGroup
+                      value={scenario4.alignedWithValues}
+                      onValueChange={(value) => setScenario4({ ...scenario4, alignedWithValues: value })}
+                      className="flex gap-6"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="yes" id="s4-aligned-yes" />
+                        <Label htmlFor="s4-aligned-yes">Yes</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="no" id="s4-aligned-no" />
+                        <Label htmlFor="s4-aligned-no">No</Label>
+                      </div>
+                    </RadioGroup>
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What boundary or conversation is needed now—not later?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s4-boundary" className="font-medium mb-2 block">What boundary or conversation is needed now—not later?</Label>
+                    <Textarea
+                      id="s4-boundary"
+                      value={scenario4.boundaryNeeded}
+                      onChange={(e) => setScenario4({ ...scenario4, boundaryNeeded: e.target.value })}
+                      placeholder="Describe the immediate boundary or conversation..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">How can you address this without monitoring or controlling?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s4-monitoring" className="font-medium mb-2 block">How can you address this without monitoring or controlling?</Label>
+                    <Textarea
+                      id="s4-monitoring"
+                      value={scenario4.addressWithoutMonitoring}
+                      onChange={(e) => setScenario4({ ...scenario4, addressWithoutMonitoring: e.target.value })}
+                      placeholder="Describe a healthy approach..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What would consistency look like in this moment?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s4-consistency" className="font-medium mb-2 block">What would consistency look like in this moment?</Label>
+                    <Textarea
+                      id="s4-consistency"
+                      value={scenario4.whatConsistencyLooksLike}
+                      onChange={(e) => setScenario4({ ...scenario4, whatConsistencyLooksLike: e.target.value })}
+                      placeholder="Define consistent behavior..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -307,25 +509,49 @@ export default function ScenarioExercise() {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div>
-                    <p className="font-medium mb-2">How does this impact your family recovery plan?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s5-impact" className="font-medium mb-2 block">How does this impact your family recovery plan?</Label>
+                    <Textarea
+                      id="s5-impact"
+                      value={scenario5.impactOnPlan}
+                      onChange={(e) => setScenario5({ ...scenario5, impactOnPlan: e.target.value })}
+                      placeholder="Describe the impact..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What boundary is needed with other family members?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s5-family-boundary" className="font-medium mb-2 block">What boundary is needed with other family members?</Label>
+                    <Textarea
+                      id="s5-family-boundary"
+                      value={scenario5.boundaryWithFamily}
+                      onChange={(e) => setScenario5({ ...scenario5, boundaryWithFamily: e.target.value })}
+                      placeholder="State the boundary with family..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What values are guiding your decision—not their opinions?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="s5-values" className="font-medium mb-2 block">What values are guiding your decision—not their opinions?</Label>
+                    <Textarea
+                      id="s5-values"
+                      value={scenario5.guidingValues}
+                      onChange={(e) => setScenario5({ ...scenario5, guidingValues: e.target.value })}
+                      placeholder="Name your guiding values..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">Write a statement that reinforces unity and clarity:</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16"></div>
+                    <Label htmlFor="s5-unity" className="font-medium mb-2 block">Write a statement that reinforces unity and clarity:</Label>
+                    <Textarea
+                      id="s5-unity"
+                      value={scenario5.unityStatement}
+                      onChange={(e) => setScenario5({ ...scenario5, unityStatement: e.target.value })}
+                      placeholder="Write a unifying statement..."
+                      className="min-h-[80px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -337,20 +563,38 @@ export default function ScenarioExercise() {
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Answer honestly:</p>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div>
-                    <p className="font-medium mb-2">Which scenario was hardest for you? Why?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-16"></div>
+                    <Label htmlFor="ref-hardest" className="font-medium mb-2 block">Which scenario was hardest for you? Why?</Label>
+                    <Textarea
+                      id="ref-hardest"
+                      value={reflection.hardestScenario}
+                      onChange={(e) => setReflection({ ...reflection, hardestScenario: e.target.value })}
+                      placeholder="Reflect on which scenario challenged you most..."
+                      className="min-h-[80px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">Where are you most likely to abandon the plan?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="ref-abandon" className="font-medium mb-2 block">Where are you most likely to abandon the plan?</Label>
+                    <Textarea
+                      id="ref-abandon"
+                      value={reflection.likelyToAbandon}
+                      onChange={(e) => setReflection({ ...reflection, likelyToAbandon: e.target.value })}
+                      placeholder="Identify your vulnerable points..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
 
                   <div>
-                    <p className="font-medium mb-2">What support do you need to strengthen consistency?</p>
-                    <div className="border-b border-dashed border-foreground/30 h-12"></div>
+                    <Label htmlFor="ref-support" className="font-medium mb-2 block">What support do you need to strengthen consistency?</Label>
+                    <Textarea
+                      id="ref-support"
+                      value={reflection.supportNeeded}
+                      onChange={(e) => setReflection({ ...reflection, supportNeeded: e.target.value })}
+                      placeholder="Describe the support you need..."
+                      className="min-h-[60px] print:border-dashed"
+                    />
                   </div>
                 </div>
               </section>
@@ -395,6 +639,11 @@ export default function ScenarioExercise() {
           }
           @page {
             margin: 0.5in;
+          }
+          textarea {
+            border: 1px dashed #999 !important;
+            min-height: 60px !important;
+            background: #fafafa !important;
           }
         }
       `}</style>
