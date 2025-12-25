@@ -461,6 +461,12 @@ export default function FamilyVideos() {
                       Readiness for Change Checklist
                     </Button>
                   </Link>
+                  <Link to="/no-negotiation">
+                    <Button variant="outline" size="sm" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
+                      <FileText className="h-3 w-3" />
+                      We Don't Negotiate with Terrorists
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
