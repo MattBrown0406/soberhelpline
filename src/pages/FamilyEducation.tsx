@@ -381,6 +381,12 @@ export default function FamilyVideos() {
                       Sibling Guilt, Anger, and Loyalty Conflicts
                     </Button>
                   </Link>
+                  <Link to="/rebuilding-sibling-relationships">
+                    <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                      <FileText className="h-3 w-3" />
+                      Rebuilding Sibling Relationships in Recovery
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

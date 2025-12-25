@@ -77,6 +77,7 @@ import GuiltReliefResentmentCycle from "./pages/GuiltReliefResentmentCycle";
 import SiblingExperience from "./pages/SiblingExperience";
 import GrowingUpShadowAddiction from "./pages/GrowingUpShadowAddiction";
 import SiblingGuiltAngerLoyalty from "./pages/SiblingGuiltAngerLoyalty";
+import RebuildingSiblingRelationships from "./pages/RebuilingSiblingRelationships";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -162,6 +163,7 @@ const App = () => (
             <Route path="/sibling-experience" element={<SiblingExperience />} />
             <Route path="/growing-up-shadow" element={<GrowingUpShadowAddiction />} />
             <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
+            <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
