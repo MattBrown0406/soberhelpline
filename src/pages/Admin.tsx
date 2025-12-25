@@ -21,13 +21,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
 import { FamilyMemberManagement } from "@/components/admin/FamilyMemberManagement";
 import { ModeratorManagement } from "@/components/admin/ModeratorManagement";
 import { MemberWarningsManagement } from "@/components/admin/MemberWarningsManagement";
+import { GuideAnalytics } from "@/components/admin/GuideAnalytics";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -193,6 +194,10 @@ const Admin = () => {
             <TabsTrigger value="analytics" className="gap-2">
               <BarChart3 className="h-4 w-4" />
               Click Analytics
+            </TabsTrigger>
+            <TabsTrigger value="guide-analytics" className="gap-2">
+              <FileText className="h-4 w-4" />
+              Guide Analytics
             </TabsTrigger>
           </TabsList>
 
@@ -395,6 +400,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ProviderAnalytics />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="guide-analytics">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Guide Usage Analytics
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <GuideAnalytics />
               </CardContent>
             </Card>
           </TabsContent>
