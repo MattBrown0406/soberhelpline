@@ -446,6 +446,12 @@ export default function FamilyVideos() {
                         Breaking Intergenerational Enabling
                       </Button>
                     </Link>
+                    <Link to="/who-benefits-filter">
+                      <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                        <FileText className="h-3 w-3" />
+                        "Who Benefits From This?" Decision Filter
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
