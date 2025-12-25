@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,8 +22,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Loader2, UserX, CheckCircle, XCircle, RefreshCw } from "lucide-react";
+import { Loader2, UserX, CheckCircle, XCircle, RefreshCw, Pencil } from "lucide-react";
 
 interface FamilyMember {
   id: string;
@@ -50,6 +60,15 @@ export function FamilyMemberManagement() {
   const [loading, setLoading] = useState(true);
   const [revoking, setRevoking] = useState<string | null>(null);
   const [confirmRevoke, setConfirmRevoke] = useState<FamilyMember | null>(null);
+  const [editingMember, setEditingMember] = useState<FamilyMember | null>(null);
+  const [editForm, setEditForm] = useState({
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+  });
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     fetchFamilyMembers();
@@ -145,6 +164,63 @@ export function FamilyMemberManagement() {
     }
   };
 
+  const handleEditMember = (member: FamilyMember) => {
+    setEditForm({
+      username: member.username || '',
+      first_name: member.first_name || '',
+      last_name: member.last_name || '',
+      email: member.contact?.email || '',
+      phone_number: member.contact?.phone_number || '',
+    });
+    setEditingMember(member);
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingMember) return;
+    
+    setSaving(true);
+    try {
+      // Update profile
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({
+          username: editForm.username || null,
+          first_name: editForm.first_name,
+          last_name: editForm.last_name,
+        })
+        .eq('id', editingMember.id);
+
+      if (profileError) {
+        if (profileError.code === '23505') {
+          toast.error("Username is already taken. Please choose a different one.");
+          setSaving(false);
+          return;
+        }
+        throw profileError;
+      }
+
+      // Update private profile
+      const { error: privateError } = await supabase
+        .from('profile_private')
+        .update({
+          email: editForm.email,
+          phone_number: editForm.phone_number || null,
+        })
+        .eq('user_id', editingMember.id);
+
+      if (privateError) throw privateError;
+
+      toast.success("Member details updated successfully");
+      setEditingMember(null);
+      fetchFamilyMembers();
+    } catch (error) {
+      console.error("Error updating member:", error);
+      toast.error("Failed to update member details");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       active: "default",
@@ -223,23 +299,33 @@ export function FamilyMemberManagement() {
                     : '-'}
                 </TableCell>
                 <TableCell>
-                  {member.subscription?.status === 'active' && (
+                  <div className="flex items-center gap-2">
                     <Button
-                      variant="destructive"
+                      variant="outline"
                       size="sm"
-                      onClick={() => setConfirmRevoke(member)}
-                      disabled={revoking === member.id}
+                      onClick={() => handleEditMember(member)}
                     >
-                      {revoking === member.id ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <>
-                          <UserX className="h-4 w-4 mr-1" />
-                          Revoke
-                        </>
-                      )}
+                      <Pencil className="h-4 w-4 mr-1" />
+                      Edit
                     </Button>
-                  )}
+                    {member.subscription?.status === 'active' && (
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => setConfirmRevoke(member)}
+                        disabled={revoking === member.id}
+                      >
+                        {revoking === member.id ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <>
+                            <UserX className="h-4 w-4 mr-1" />
+                            Revoke
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
@@ -274,6 +360,83 @@ export function FamilyMemberManagement() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Edit Member Dialog */}
+      <Dialog open={!!editingMember} onOpenChange={() => setEditingMember(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit Member Details</DialogTitle>
+            <DialogDescription>
+              Update the account information for {editingMember?.first_name} {editingMember?.last_name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="edit-username">Username</Label>
+              <Input
+                id="edit-username"
+                value={editForm.username}
+                onChange={(e) => setEditForm({ ...editForm, username: e.target.value })}
+                placeholder="Username"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-first-name">First Name</Label>
+                <Input
+                  id="edit-first-name"
+                  value={editForm.first_name}
+                  onChange={(e) => setEditForm({ ...editForm, first_name: e.target.value })}
+                  placeholder="First name"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-last-name">Last Name</Label>
+                <Input
+                  id="edit-last-name"
+                  value={editForm.last_name}
+                  onChange={(e) => setEditForm({ ...editForm, last_name: e.target.value })}
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-email">Email</Label>
+              <Input
+                id="edit-email"
+                type="email"
+                value={editForm.email}
+                onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                placeholder="Email address"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-phone">Phone Number</Label>
+              <Input
+                id="edit-phone"
+                value={editForm.phone_number}
+                onChange={(e) => setEditForm({ ...editForm, phone_number: e.target.value })}
+                placeholder="Phone number"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditingMember(null)}>
+              Cancel
+            </Button>
+            <Button onClick={handleSaveEdit} disabled={saving}>
+              {saving ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                'Save Changes'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
