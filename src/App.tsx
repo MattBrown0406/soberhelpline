@@ -70,6 +70,7 @@ import ValuesAlignedDecisions from "./pages/ValuesAlignedDecisions";
 import LivingWellRegardless from "./pages/LivingWellRegardless";
 import BrainSpiritualRecovery from "./pages/BrainSpiritualRecovery";
 import TwelveStepsExplained from "./pages/TwelveStepsExplained";
+import NonTwelveStepModalities from "./pages/NonTwelveStepModalities";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -148,6 +149,7 @@ const App = () => (
             <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
             <Route path="/brain-spiritual-recovery" element={<BrainSpiritualRecovery />} />
             <Route path="/twelve-steps-explained" element={<TwelveStepsExplained />} />
+            <Route path="/non-twelve-step-modalities" element={<NonTwelveStepModalities />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
