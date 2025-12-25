@@ -599,6 +599,12 @@ export default function FamilyVideos() {
                       Living Well Regardless of Outcome
                     </Button>
                   </Link>
+                  <Link to="/grief-for-family">
+                    <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                      <FileText className="h-3 w-3" />
+                      Grief for the Family You Thought You'd Have
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
