@@ -72,6 +72,7 @@ import BrainSpiritualRecovery from "./pages/BrainSpiritualRecovery";
 import TwelveStepsExplained from "./pages/TwelveStepsExplained";
 import NonTwelveStepModalities from "./pages/NonTwelveStepModalities";
 import NoNegotiationGuide from "./pages/NoNegotiationGuide";
+import StrongOneGuide from "./pages/StrongOneGuide";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -152,6 +153,7 @@ const App = () => (
             <Route path="/twelve-steps-explained" element={<TwelveStepsExplained />} />
             <Route path="/non-twelve-step-modalities" element={<NonTwelveStepModalities />} />
             <Route path="/no-negotiation" element={<NoNegotiationGuide />} />
+            <Route path="/strong-one" element={<StrongOneGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
