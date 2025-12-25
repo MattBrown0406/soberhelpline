@@ -64,6 +64,7 @@ import MatchingModality from "./pages/MatchingModality";
 import TherapyTimingGuide from "./pages/TherapyTimingGuide";
 import FamilyInterferenceGuide from "./pages/FamilyInterferenceGuide";
 import BoundariesUltimatumsGuide from "./pages/BoundariesUltimatumsGuide";
+import WhatChangesWhenFamiliesChange from "./pages/WhatChangesWhenFamiliesChange";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -136,6 +137,7 @@ const App = () => (
             <Route path="/therapy-timing" element={<TherapyTimingGuide />} />
             <Route path="/family-interference" element={<FamilyInterferenceGuide />} />
             <Route path="/boundaries-ultimatums" element={<BoundariesUltimatumsGuide />} />
+            <Route path="/what-changes-when-families-change" element={<WhatChangesWhenFamiliesChange />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
