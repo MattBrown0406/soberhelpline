@@ -80,6 +80,7 @@ import SiblingGuiltAngerLoyalty from "./pages/SiblingGuiltAngerLoyalty";
 import RebuildingSiblingRelationships from "./pages/RebuilingSiblingRelationships";
 import ParentsRepairingSiblingSystem from "./pages/ParentsRepairingSiblingSystem";
 import FamilyRolesAddiction from "./pages/FamilyRolesAddiction";
+import AddictionRewritesFamilyRules from "./pages/AddictionRewritesFamilyRules";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -168,6 +169,7 @@ const App = () => (
             <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
             <Route path="/parents-repairing-sibling-system" element={<ParentsRepairingSiblingSystem />} />
             <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
+            <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

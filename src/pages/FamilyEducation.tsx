@@ -399,6 +399,12 @@ export default function FamilyVideos() {
                       Family Roles in Addiction (Beyond the Clichés)
                     </Button>
                   </Link>
+                  <Link to="/addiction-rewrites-family-rules">
+                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                      <FileText className="h-3 w-3" />
+                      How Addiction Rewrites Family Rules
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
