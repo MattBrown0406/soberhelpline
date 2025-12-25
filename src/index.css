@@ -60,6 +60,11 @@ All colors MUST be HSL.
     
     --logo-green: 145 63% 42%;
   }
+  
+  /* Sober Helpline logo styling */
+  img[alt="Sober Helpline"] {
+    @apply border-2 border-black rounded-md;
+  }
 
   .dark {
     --background: 222.2 84% 4.9%;
