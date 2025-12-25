@@ -489,6 +489,12 @@ export default function FamilyVideos() {
                       Values-Aligned Decision Making Exercise
                     </Button>
                   </Link>
+                  <Link to="/living-well-regardless">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <FileText className="h-3 w-3" />
+                      Living Well Regardless of Outcome
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
