@@ -417,6 +417,12 @@ export default function FamilyVideos() {
                       How Addiction Shapes Attachment Styles
                     </Button>
                   </Link>
+                  <Link to="/enabling-language-translator">
+                    <Button variant="outline" size="sm" className="gap-2 border-lime-500/50 text-lime-700 hover:bg-lime-50 dark:text-lime-400 dark:hover:bg-lime-950/30">
+                      <FileText className="h-3 w-3" />
+                      Enabling Language Translator
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="mb-6">
