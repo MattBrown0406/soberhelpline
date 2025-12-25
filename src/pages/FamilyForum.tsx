@@ -12,6 +12,7 @@ import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
 import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
+import { NewPostDialog } from "@/components/forum/NewPostDialog";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
 
@@ -100,6 +101,7 @@ export default function FamilyForum() {
   const [showReportDialog, setShowReportDialog] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
   const [showModeratorActions, setShowModeratorActions] = useState(false);
+  const [showNewPostDialog, setShowNewPostDialog] = useState(false);
   const [showMessages, setShowMessages] = useState(false);
   const [forumMembers, setForumMembers] = useState<Array<{
     id: string;
@@ -492,11 +494,20 @@ export default function FamilyForum() {
                       Moderator Actions
                     </Button>
                   )}
-                  <Button className="gap-2">
+                  <Button className="gap-2" onClick={() => setShowNewPostDialog(true)}>
                     <Plus className="h-4 w-4" />
                     New Post
                   </Button>
                 </div>
+
+              {user && (
+                <NewPostDialog
+                  open={showNewPostDialog}
+                  onOpenChange={setShowNewPostDialog}
+                  userId={user.id}
+                  forumTopics={forumTopics.map(t => ({ id: t.id, title: t.title, description: t.description }))}
+                />
+              )}
               </div>
 
             <div className="grid gap-8 lg:grid-cols-3">
