@@ -363,6 +363,12 @@ export default function FamilyVideos() {
                       The Guilt–Relief–Resentment Cycle
                     </Button>
                   </Link>
+                  <Link to="/sibling-experience">
+                    <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                      <FileText className="h-3 w-3" />
+                      The Sibling Experience in Addiction
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

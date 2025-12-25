@@ -74,6 +74,7 @@ import NonTwelveStepModalities from "./pages/NonTwelveStepModalities";
 import NoNegotiationGuide from "./pages/NoNegotiationGuide";
 import StrongOneGuide from "./pages/StrongOneGuide";
 import GuiltReliefResentmentCycle from "./pages/GuiltReliefResentmentCycle";
+import SiblingExperience from "./pages/SiblingExperience";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -156,6 +157,7 @@ const App = () => (
             <Route path="/no-negotiation" element={<NoNegotiationGuide />} />
             <Route path="/strong-one" element={<StrongOneGuide />} />
             <Route path="/guilt-relief-resentment" element={<GuiltReliefResentmentCycle />} />
+            <Route path="/sibling-experience" element={<SiblingExperience />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
