@@ -217,121 +217,179 @@ export default function FamilyVideos() {
               </Link>
             </div>
 
-            {/* Printable Resources */}
+            {/* Printable Resources - Organized by Six Pillars */}
             <div className="mb-10 p-6 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent rounded-lg border-2 border-amber-500 ring-2 ring-amber-500/30 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300">
-              <h3 className="text-lg font-semibold text-logo-green mb-3">Printable Resources</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Download and print these guides to use when evaluating treatment options and supporting recovery.
+              <h3 className="text-lg font-semibold text-logo-green mb-2">Printable Resources</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Download and print these guides organized by the Six Pillars of family education.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <Link to="/treatment-questions">
-                  <Button variant="outline" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
-                    <FileText className="h-4 w-4" />
-                    40 Questions to Ask a Treatment Center
-                  </Button>
-                </Link>
-                <Link to="/recovery-requirements">
-                  <Button variant="outline" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
-                    <FileText className="h-4 w-4" />
-                    What Recovery Requires From Families
-                  </Button>
-                </Link>
-                <Link to="/family-action-plan">
-                  <Button variant="outline" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
-                    <FileText className="h-4 w-4" />
-                    Family Recovery Action Plan
-                  </Button>
-                </Link>
-                <Link to="/scenario-exercise">
-                  <Button variant="outline" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
-                    <FileText className="h-4 w-4" />
-                    Scenario Practice Exercise
-                  </Button>
-                </Link>
-                <Link to="/readiness-checklist">
-                  <Button variant="outline" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
-                    <FileText className="h-4 w-4" />
-                    Readiness for Change Checklist
-                  </Button>
-                </Link>
-                <Link to="/crisis-chaos">
-                  <Button variant="outline" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
-                    <FileText className="h-4 w-4" />
-                    Crisis vs. Chaos Decision Guide
-                  </Button>
-                </Link>
-                <Link to="/emotional-regulation">
-                  <Button variant="outline" className="gap-2 border-sky-500/50 text-sky-700 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-950/30">
-                    <FileText className="h-4 w-4" />
-                    Emotional Regulation Tools
-                  </Button>
-                </Link>
-                <Link to="/values-exercise">
-                  <Button variant="outline" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
-                    <FileText className="h-4 w-4" />
-                    Values Clarification Exercise
-                  </Button>
-                </Link>
-                <Link to="/talking-about-treatment">
-                  <Button variant="outline" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
-                    <FileText className="h-4 w-4" />
-                    How to Talk About Treatment
-                  </Button>
-                </Link>
-                <Link to="/communication-guide">
-                  <Button variant="outline" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
-                    <FileText className="h-4 w-4" />
-                    What to Say / What Not to Say
-                  </Button>
-                </Link>
-                <Link to="/aftercare-checklist">
-                  <Button variant="outline" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
-                    <FileText className="h-4 w-4" />
-                    Aftercare Readiness Checklist
-                  </Button>
-                </Link>
-                <Link to="/why-change-doesnt-happen">
-                  <Button variant="outline" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
-                    <FileText className="h-4 w-4" />
-                    Why Change Doesn't Happen When Families Try Harder
-                  </Button>
-                </Link>
-                <Link to="/treatment-red-flags">
-                  <Button variant="outline" className="gap-2 border-red-600/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
-                    <FileText className="h-4 w-4" />
-                    Treatment Industry Red Flags Guide
-                  </Button>
-                </Link>
-                <Link to="/family-advocacy-toolkit">
-                  <Button variant="outline" className="gap-2 border-green-600/50 text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/30">
-                    <FileText className="h-4 w-4" />
-                    Family Advocacy Toolkit
-                  </Button>
-                </Link>
-                <Link to="/treatment-industry-guide">
-                  <Button variant="outline" className="gap-2 border-slate-600/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
-                    <FileText className="h-4 w-4" />
-                    How the Treatment Industry Works
-                  </Button>
-                </Link>
-                <Link to="/drug-induced-psychosis">
-                  <Button variant="outline" className="gap-2 border-fuchsia-600/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
-                    <FileText className="h-4 w-4" />
-                    Understanding Drug-Induced Psychosis
-                  </Button>
-                </Link>
-                <Link to="/multiple-treatment-episodes">
-                  <Button variant="outline" className="gap-2 border-orange-600/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
-                    <FileText className="h-4 w-4" />
-                    Why Multiple Treatment Episodes Don't Mean Failure
-                  </Button>
-                </Link>
-                <Link to="/legal-issues-guide">
-                  <Button variant="outline" className="gap-2 border-slate-500/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
-                    <FileText className="h-4 w-4" />
-                    Legal Issues Families Should Understand
-                  </Button>
-                </Link>
+
+              {/* Pillar 1: Understanding Addiction */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">1</span>
+                  <h4 className="font-semibold text-foreground">Understanding Addiction (Foundational)</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/multiple-treatment-episodes">
+                    <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                      <FileText className="h-3 w-3" />
+                      Why Multiple Treatment Episodes Don't Mean Failure
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Pillar 2: Understanding Mental Health & Dual Diagnosis */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">2</span>
+                  <h4 className="font-semibold text-foreground">Understanding Mental Health & Dual Diagnosis</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/drug-induced-psychosis">
+                    <Button variant="outline" size="sm" className="gap-2 border-fuchsia-500/50 text-fuchsia-700 hover:bg-fuchsia-50 dark:text-fuchsia-400 dark:hover:bg-fuchsia-950/30">
+                      <FileText className="h-3 w-3" />
+                      Understanding Drug-Induced Psychosis
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Pillar 3: Understanding Family Systems and Enabling */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">3</span>
+                  <h4 className="font-semibold text-foreground">Understanding Family Systems and Enabling</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/why-change-doesnt-happen">
+                    <Button variant="outline" size="sm" className="gap-2 border-violet-500/50 text-violet-700 hover:bg-violet-50 dark:text-violet-400 dark:hover:bg-violet-950/30">
+                      <FileText className="h-3 w-3" />
+                      Why Change Doesn't Happen When Families Try Harder
+                    </Button>
+                  </Link>
+                  <Link to="/crisis-chaos">
+                    <Button variant="outline" size="sm" className="gap-2 border-red-500/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
+                      <FileText className="h-3 w-3" />
+                      Crisis vs. Chaos Decision Guide
+                    </Button>
+                  </Link>
+                  <Link to="/communication-guide">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <FileText className="h-3 w-3" />
+                      What to Say / What Not to Say
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Pillar 4: Treatment Literacy */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">4</span>
+                  <h4 className="font-semibold text-foreground">Treatment Literacy</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/treatment-questions">
+                    <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                      <FileText className="h-3 w-3" />
+                      40 Questions to Ask a Treatment Center
+                    </Button>
+                  </Link>
+                  <Link to="/treatment-industry-guide">
+                    <Button variant="outline" size="sm" className="gap-2 border-slate-500/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
+                      <FileText className="h-3 w-3" />
+                      How the Treatment Industry Works
+                    </Button>
+                  </Link>
+                  <Link to="/treatment-red-flags">
+                    <Button variant="outline" size="sm" className="gap-2 border-red-600/50 text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30">
+                      <FileText className="h-3 w-3" />
+                      Treatment Industry Red Flags Guide
+                    </Button>
+                  </Link>
+                  <Link to="/talking-about-treatment">
+                    <Button variant="outline" size="sm" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
+                      <FileText className="h-3 w-3" />
+                      How to Talk About Treatment
+                    </Button>
+                  </Link>
+                  <Link to="/aftercare-checklist">
+                    <Button variant="outline" size="sm" className="gap-2 border-cyan-500/50 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400 dark:hover:bg-cyan-950/30">
+                      <FileText className="h-3 w-3" />
+                      Aftercare Readiness Checklist
+                    </Button>
+                  </Link>
+                  <Link to="/family-advocacy-toolkit">
+                    <Button variant="outline" size="sm" className="gap-2 border-green-600/50 text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/30">
+                      <FileText className="h-3 w-3" />
+                      Family Advocacy Toolkit
+                    </Button>
+                  </Link>
+                  <Link to="/legal-issues-guide">
+                    <Button variant="outline" size="sm" className="gap-2 border-slate-600/50 text-slate-700 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-950/30">
+                      <FileText className="h-3 w-3" />
+                      Legal Issues Families Should Understand
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Pillar 5: Boundaries, Consequences, and Change */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">5</span>
+                  <h4 className="font-semibold text-foreground">Boundaries, Consequences, and Change</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/scenario-exercise">
+                    <Button variant="outline" size="sm" className="gap-2 border-orange-500/50 text-orange-700 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/30">
+                      <FileText className="h-3 w-3" />
+                      Scenario Practice Exercise
+                    </Button>
+                  </Link>
+                  <Link to="/readiness-checklist">
+                    <Button variant="outline" size="sm" className="gap-2 border-teal-500/50 text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/30">
+                      <FileText className="h-3 w-3" />
+                      Readiness for Change Checklist
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Pillar 6: Family Recovery */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">6</span>
+                  <h4 className="font-semibold text-foreground">Family Recovery</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 ml-9">
+                  <Link to="/recovery-requirements">
+                    <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                      <FileText className="h-3 w-3" />
+                      What Recovery Requires From Families
+                    </Button>
+                  </Link>
+                  <Link to="/family-action-plan">
+                    <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                      <FileText className="h-3 w-3" />
+                      Family Recovery Action Plan
+                    </Button>
+                  </Link>
+                  <Link to="/emotional-regulation">
+                    <Button variant="outline" size="sm" className="gap-2 border-sky-500/50 text-sky-700 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-950/30">
+                      <FileText className="h-3 w-3" />
+                      Emotional Regulation Tools
+                    </Button>
+                  </Link>
+                  <Link to="/values-exercise">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <FileText className="h-3 w-3" />
+                      Values Clarification Exercise
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
 
