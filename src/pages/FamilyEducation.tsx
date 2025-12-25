@@ -483,6 +483,12 @@ export default function FamilyVideos() {
                       Values Clarification Exercise
                     </Button>
                   </Link>
+                  <Link to="/values-aligned-decisions">
+                    <Button variant="outline" size="sm" className="gap-2 border-indigo-500/50 text-indigo-700 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30">
+                      <FileText className="h-3 w-3" />
+                      Values-Aligned Decision Making Exercise
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
