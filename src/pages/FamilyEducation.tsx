@@ -289,6 +289,12 @@ export default function FamilyVideos() {
                       Why Focusing Only on Mental Health Can Delay Recovery
                     </Button>
                   </Link>
+                  <Link to="/trauma-vs-excuses">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <FileText className="h-3 w-3" />
+                      Trauma vs. Excuses: A Necessary Distinction
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

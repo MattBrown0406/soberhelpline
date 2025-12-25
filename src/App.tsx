@@ -57,6 +57,7 @@ import AddictionProgressionTimeline from "./pages/AddictionProgressionTimeline";
 import MentalHealthVsSubstanceInduced from "./pages/MentalHealthVsSubstanceInduced";
 import MisunderstoodDiagnoses from "./pages/MisunderstoodDiagnoses";
 import MentalHealthDelaysRecovery from "./pages/MentalHealthDelaysRecovery";
+import TraumaVsExcuses from "./pages/TraumaVsExcuses";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -122,6 +123,7 @@ const App = () => (
             <Route path="/mental-health-vs-substance-induced" element={<MentalHealthVsSubstanceInduced />} />
             <Route path="/misunderstood-diagnoses" element={<MisunderstoodDiagnoses />} />
             <Route path="/mental-health-delays-recovery" element={<MentalHealthDelaysRecovery />} />
+            <Route path="/trauma-vs-excuses" element={<TraumaVsExcuses />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
