@@ -219,14 +219,14 @@ const Index = () => {
             <div className="text-center space-y-4">
               <h3 className="text-lg font-semibold text-foreground">Guided Meditation for Families</h3>
               <p className="text-sm text-muted-foreground">
-                Finding Steadiness During the Holidays — A calming meditation for family members navigating addiction
+                Regaining Calm When Addiction Triggers Fear and Urgency — A calming meditation for family members navigating addiction
               </p>
               <audio 
                 controls 
                 className="w-full max-w-md mx-auto"
                 preload="metadata"
               >
-                <source src="/audio/finding-steadiness-holiday-meditation.mp3" type="audio/mpeg" />
+                <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             </div>
