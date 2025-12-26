@@ -173,8 +173,8 @@ const Index = () => {
               />
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center">
-            <img src={bannerLogo} alt="Sober Helpline" className="h-48 md:h-64 w-auto rounded-lg" />
+          <div className="w-full md:w-1/2 lg:w-3/5 flex items-center justify-center aspect-video">
+            <img src={bannerLogo} alt="Sober Helpline" className="h-full w-auto object-contain" />
           </div>
         </div>
 
