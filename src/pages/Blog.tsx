@@ -47,12 +47,54 @@ import reinerFamilyTragedyImg from "@/assets/blog-reiner-family-tragedy.png";
 import addictionEducationBeforeCrisisImg from "@/assets/blog-addiction-education-before-crisis.png";
 import familiesSenseTroubleImg from "@/assets/blog-families-sense-trouble.png";
 import addictionBeforeCrisisImg from "@/assets/blog-addiction-before-crisis.png";
+import mentalHealthCostWaitingImg from "@/assets/blog-mental-health-cost-waiting.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 44,
+    title: "The Mental Health Cost Families Pay While Waiting for Change",
+    excerpt: "Families affected by addiction often live in a state of suspended hope. They believe change is coming. They look for signs of improvement. They tell themselves to hang on just a little longer. While they wait, their own mental health quietly deteriorates.",
+    author: "Sober Helpline",
+    date: "2025-12-26",
+    category: "Family Support",
+    image: mentalHealthCostWaitingImg,
+    slug: "mental-health-cost-families-pay-waiting-for-change",
+    seoTitle: "The Mental Health Cost Families Pay While Waiting for Change | Sober Helpline",
+    metaDescription: "Families waiting for a loved one to change often sacrifice their own mental health. Learn why addressing your wellbeing is not abandonment—it's preservation.",
+    content: `**The Mental Health Cost Families Pay While Waiting for Change**
+
+Families affected by addiction often live in a state of suspended hope. They believe change is coming. They look for signs of improvement. They tell themselves to hang on just a little longer. While they wait, their own mental health quietly deteriorates.
+
+This deterioration rarely looks dramatic. It shows up as chronic anxiety, irritability, fatigue, and emotional numbness. Families may feel detached from activities they once enjoyed. They may struggle to concentrate or sleep. These symptoms are often dismissed as stress.
+
+**The Unique Strain of Waiting**
+
+Waiting creates a unique form of psychological strain. Families feel responsible for outcomes they cannot control. They monitor behavior closely, searching for reassurance. When progress stalls, disappointment sets in, followed by renewed hope at the next promise.
+
+This cycle is emotionally exhausting. It keeps families focused on the future at the expense of the present. Their own needs are deferred, sometimes indefinitely. Self‑care feels indulgent when someone else is struggling.
+
+**The Compounding Effect of Isolation**
+
+Isolation compounds the problem. Many families avoid talking openly, either to protect privacy or avoid judgment. Without outside perspective, their experience becomes normalized. They assume this is simply what life looks like now.
+
+Children in these environments often internalize responsibility early. They may become caretakers, peacemakers, or perfectionists. Adults may struggle with boundaries and self‑worth long after the addiction is addressed.
+
+**Expanding Compassion to the Whole Family**
+
+Recognizing the mental health toll on families is not about shifting blame. It is about expanding compassion. Addiction affects entire systems, not just individuals.
+
+Families deserve support regardless of whether their loved one changes. Waiting does not have to mean sacrificing your own stability. Addressing your mental health is not abandonment. It is preservation.
+
+**The First Meaningful Shift**
+
+Often, the first meaningful shift in an addicted family system occurs not when the addicted person changes, but when the family stops disappearing while they wait.
+
+If you are struggling while waiting for a loved one to change, you do not have to wait alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+  },
   {
     id: 43,
     title: "What Families Need to Understand About Addiction Before Crisis Hits",
