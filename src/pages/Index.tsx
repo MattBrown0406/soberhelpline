@@ -390,7 +390,7 @@ const Index = () => {
                   At Sober Helpline, we are dedicated to providing families of addicted loved ones with ethical, proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria.
                 </p>
                 <p>
-                  This site is free to use. We receive a set monthly fee from listed providers to cover operations.
+                  Our provider directory is completely free to use—search for trusted treatment centers, therapists, interventionists, and recovery resources at no cost. For families seeking deeper support, our Family Forum and Education Center offer 60+ interactive tools, guides, and videos for a small monthly fee of $14.99.
                 </p>
                 <p className="font-semibold text-white">
                   We take no commissions or payments from treatment providers for referred clients. This is patient brokering—and we will never do it.
