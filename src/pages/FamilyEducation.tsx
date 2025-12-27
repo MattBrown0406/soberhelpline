@@ -371,22 +371,54 @@ export default function FamilyEducation() {
               </div>
             </div>
 
-            {/* Main Content Tabs */}
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-10">
-              <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:inline-grid lg:grid-cols-3 mb-6">
-                <TabsTrigger value="tools" className="gap-2">
-                  <Lightbulb className="h-4 w-4" />
-                  <span className="hidden sm:inline">Interactive</span> Tools
-                </TabsTrigger>
-                <TabsTrigger value="pillars" className="gap-2">
-                  <BookOpen className="h-4 w-4" />
-                  <span className="hidden sm:inline">Six</span> Pillars
-                </TabsTrigger>
-                <TabsTrigger value="wellness" className="gap-2">
-                  <Heart className="h-4 w-4" />
-                  Wellness
-                </TabsTrigger>
-              </TabsList>
+            {/* Main Content Tabs - Prominent Section Navigation */}
+            <div className="mb-8">
+              <div className="text-center mb-6">
+                <h2 className="text-xl font-semibold text-foreground mb-2">Explore Our Resources</h2>
+                <p className="text-muted-foreground text-sm">Choose a section below to access different types of support materials</p>
+              </div>
+              
+              <Tabs value={activeTab} onValueChange={setActiveTab}>
+                <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <TabsTrigger 
+                    value="tools" 
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                  >
+                    <div className="p-2 rounded-full bg-amber-500/20 data-[state=active]:bg-white/20">
+                      <Lightbulb className="h-5 w-5 text-amber-600 data-[state=active]:text-white" />
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <div className="font-semibold">Interactive Tools</div>
+                      <div className="text-xs opacity-70 hidden sm:block">Worksheets & Assessments</div>
+                    </div>
+                  </TabsTrigger>
+                  
+                  <TabsTrigger 
+                    value="pillars" 
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                  >
+                    <div className="p-2 rounded-full bg-blue-500/20 data-[state=active]:bg-white/20">
+                      <BookOpen className="h-5 w-5 text-blue-600 data-[state=active]:text-white" />
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <div className="font-semibold">Six Pillars</div>
+                      <div className="text-xs opacity-70 hidden sm:block">60+ Educational Guides</div>
+                    </div>
+                  </TabsTrigger>
+                  
+                  <TabsTrigger 
+                    value="wellness" 
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                  >
+                    <div className="p-2 rounded-full bg-rose-500/20 data-[state=active]:bg-white/20">
+                      <Heart className="h-5 w-5 text-rose-600 data-[state=active]:text-white" />
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <div className="font-semibold">Wellness</div>
+                      <div className="text-xs opacity-70 hidden sm:block">Meditations & Self-Care</div>
+                    </div>
+                  </TabsTrigger>
+                </TabsList>
 
               {/* Interactive Tools Tab */}
               <TabsContent value="tools" className="space-y-6 animate-fade-in">
@@ -651,6 +683,7 @@ export default function FamilyEducation() {
                 </Card>
               </TabsContent>
             </Tabs>
+            </div>
           </div>
         </main>
       </div>
