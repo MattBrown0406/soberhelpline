@@ -88,7 +88,7 @@ const Index = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="gap-1 text-foreground/80 hover:text-foreground">
-                      Resources
+                      For Families
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
