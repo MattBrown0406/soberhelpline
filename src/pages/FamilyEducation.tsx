@@ -379,16 +379,16 @@ export default function FamilyEducation() {
               </div>
               
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <TabsTrigger 
                     value="tools" 
                     className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
                   >
-                    <div className="p-2 rounded-full bg-amber-500/20 data-[state=active]:bg-white/20">
-                      <Lightbulb className="h-5 w-5 text-amber-600 data-[state=active]:text-white" />
+                    <div className="p-2 rounded-full bg-amber-500/20">
+                      <Lightbulb className="h-5 w-5 text-amber-600" />
                     </div>
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold">Interactive Tools</div>
+                      <div className="font-semibold text-sm">Interactive Tools</div>
                       <div className="text-xs opacity-70 hidden sm:block">Worksheets & Assessments</div>
                     </div>
                   </TabsTrigger>
@@ -397,11 +397,11 @@ export default function FamilyEducation() {
                     value="pillars" 
                     className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
                   >
-                    <div className="p-2 rounded-full bg-blue-500/20 data-[state=active]:bg-white/20">
-                      <BookOpen className="h-5 w-5 text-blue-600 data-[state=active]:text-white" />
+                    <div className="p-2 rounded-full bg-blue-500/20">
+                      <BookOpen className="h-5 w-5 text-blue-600" />
                     </div>
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold">Six Pillars</div>
+                      <div className="font-semibold text-sm">Six Pillars</div>
                       <div className="text-xs opacity-70 hidden sm:block">60+ Educational Guides</div>
                     </div>
                   </TabsTrigger>
@@ -410,12 +410,25 @@ export default function FamilyEducation() {
                     value="wellness" 
                     className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
                   >
-                    <div className="p-2 rounded-full bg-rose-500/20 data-[state=active]:bg-white/20">
-                      <Heart className="h-5 w-5 text-rose-600 data-[state=active]:text-white" />
+                    <div className="p-2 rounded-full bg-rose-500/20">
+                      <Heart className="h-5 w-5 text-rose-600" />
                     </div>
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold">Wellness</div>
+                      <div className="font-semibold text-sm">Wellness</div>
                       <div className="text-xs opacity-70 hidden sm:block">Meditations & Self-Care</div>
+                    </div>
+                  </TabsTrigger>
+                  
+                  <TabsTrigger 
+                    value="videos" 
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                  >
+                    <div className="p-2 rounded-full bg-indigo-500/20">
+                      <Video className="h-5 w-5 text-indigo-600" />
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <div className="font-semibold text-sm">Video Library</div>
+                      <div className="text-xs opacity-70 hidden sm:block">Expert-Led Content</div>
                     </div>
                   </TabsTrigger>
                 </TabsList>
@@ -670,15 +683,39 @@ export default function FamilyEducation() {
                     ))}
                   </div>
                 </div>
+              </TabsContent>
 
-                {/* Coming Soon: Videos */}
-                <Card className="border-dashed border-2 border-muted-foreground/20">
-                  <CardContent className="py-12 text-center">
-                    <Video className="h-16 w-16 text-muted-foreground/50 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-muted-foreground mb-2">Educational Videos Coming Soon</h3>
-                    <p className="text-muted-foreground max-w-lg mx-auto">
-                      We're developing a comprehensive library of expert-led video content on understanding addiction, setting boundaries, communication strategies, and more.
+              {/* Video Library Tab */}
+              <TabsContent value="videos" className="space-y-8 animate-fade-in">
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+                      <Video className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-2xl font-semibold text-logo-green">Video Library</h3>
+                      <p className="text-sm text-muted-foreground">Expert-led educational content</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Card className="border-2 border-indigo-500/20 bg-gradient-to-br from-indigo-50/50 to-transparent dark:from-indigo-950/10">
+                  <CardContent className="py-16 text-center">
+                    <div className="relative inline-block mb-6">
+                      <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-xl animate-pulse" />
+                      <Video className="relative h-20 w-20 text-indigo-500/60 mx-auto" />
+                    </div>
+                    <h3 className="text-2xl font-semibold text-foreground mb-3">Coming Soon</h3>
+                    <p className="text-muted-foreground max-w-lg mx-auto mb-6">
+                      We're developing a comprehensive library of expert-led video content covering understanding addiction, setting boundaries, effective communication, treatment navigation, and family recovery.
                     </p>
+                    <div className="flex flex-wrap justify-center gap-2 text-sm text-muted-foreground">
+                      <span className="px-3 py-1 rounded-full bg-muted">Understanding Addiction</span>
+                      <span className="px-3 py-1 rounded-full bg-muted">Setting Boundaries</span>
+                      <span className="px-3 py-1 rounded-full bg-muted">Communication Strategies</span>
+                      <span className="px-3 py-1 rounded-full bg-muted">Treatment Navigation</span>
+                      <span className="px-3 py-1 rounded-full bg-muted">Family Recovery</span>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
