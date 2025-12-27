@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -184,12 +184,18 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Family Discussion Forum Button */}
-        <div className="text-center mb-4">
+        {/* Family Discussion Forum and Education Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
           <Link to="/family-forum">
-            <Button variant="default" size="lg" className="flex items-center gap-3 bg-logo-green hover:bg-logo-green/90 mx-auto text-base px-6 py-3">
+            <Button variant="default" size="lg" className="flex items-center gap-3 bg-logo-green hover:bg-logo-green/90 text-base px-6 py-3">
               <UserIcon className="w-5 h-5" />
               Family Discussion Forum
+            </Button>
+          </Link>
+          <Link to="/family-education">
+            <Button variant="default" size="lg" className="flex items-center gap-3 bg-logo-green hover:bg-logo-green/90 text-base px-6 py-3">
+              <BookOpen className="w-5 h-5" />
+              Family Education Section
             </Button>
           </Link>
         </div>
