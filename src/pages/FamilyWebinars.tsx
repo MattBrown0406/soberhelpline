@@ -260,6 +260,11 @@ export default function FamilyWebinars() {
               <p className="text-muted-foreground">
                 Live sessions with addiction specialists, plus access to our full library of past recordings.
               </p>
+              <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+                <p className="text-sm text-amber-800 dark:text-amber-200">
+                  <strong>Coming Soon:</strong> Once our membership reaches 100 families, we will begin scheduling our monthly live webinars. Thank you for being an early member!
+                </p>
+              </div>
             </div>
 
             {/* Upcoming Webinar */}
