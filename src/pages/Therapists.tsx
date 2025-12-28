@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Brain, Phone, ExternalLink } from "lucide-react";
+import { ArrowLeft, Brain, Phone, ExternalLink, MessageCircle, Video, Clock, Users, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -338,33 +338,64 @@ const Therapists = () => {
             </p>
 
             {/* BetterHelp Promotion */}
-            <Card className="mt-6 border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
-              <CardContent className="p-6">
-                <div className="flex flex-col md:flex-row md:items-center gap-4">
-                  <div className="flex-shrink-0">
-                    <img 
-                      src={betterHelpLogo} 
-                      alt="BetterHelp" 
-                      className="h-12 md:h-16 w-auto object-contain"
-                    />
+            <Card className="mt-6 overflow-hidden border-0 shadow-xl">
+              <div className="bg-[#3F5F4F] p-6 md:p-8">
+                <div className="flex flex-col md:flex-row gap-6">
+                  {/* Logo and headline */}
+                  <div className="flex-shrink-0 flex flex-col items-center md:items-start">
+                    <div className="bg-white rounded-lg p-3 mb-3">
+                      <img 
+                        src={betterHelpLogo} 
+                        alt="BetterHelp" 
+                        className="h-8 md:h-10 w-auto object-contain"
+                      />
+                    </div>
+                    <p className="text-white/90 text-sm font-medium">World's Largest Therapy Service</p>
                   </div>
+                  
+                  {/* Content */}
                   <div className="flex-grow">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Online Therapy Available Now</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      While we're in the process of adding therapists to our directory, you can access professional online therapy through BetterHelp and get <span className="font-semibold text-primary">10% off your first month</span>.
+                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">
+                      You deserve to be happy.
+                    </h3>
+                    <p className="text-white/80 text-sm mb-4">
+                      While we're adding therapists to our directory, get matched with a licensed therapist online. 
+                      <span className="font-semibold text-[#C4A962]"> Get 10% off your first month!</span>
                     </p>
+                    
+                    {/* Features */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+                      <div className="flex items-center gap-2 text-white/90 text-xs">
+                        <Users className="w-4 h-4 text-[#C4A962]" />
+                        <span>32,000+ Therapists</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-white/90 text-xs">
+                        <MessageCircle className="w-4 h-4 text-[#C4A962]" />
+                        <span>Message Anytime</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-white/90 text-xs">
+                        <Video className="w-4 h-4 text-[#C4A962]" />
+                        <span>Video Sessions</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-white/90 text-xs">
+                        <CheckCircle className="w-4 h-4 text-[#C4A962]" />
+                        <span>HSA/FSA Accepted</span>
+                      </div>
+                    </div>
+                    
                     <a
                       href="https://betterhelp.com/partywreckers"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
                     >
-                      Visit BetterHelp
-                      <ExternalLink className="w-4 h-4" />
+                      <Button className="bg-white text-[#3F5F4F] hover:bg-white/90 font-semibold gap-2">
+                        Get Started
+                        <ExternalLink className="w-4 h-4" />
+                      </Button>
                     </a>
                   </div>
                 </div>
-              </CardContent>
+              </div>
             </Card>
           </div>
         </div>
