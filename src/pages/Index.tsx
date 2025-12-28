@@ -283,8 +283,8 @@ const Index = () => {
             <FamilySelfAssessment user={user} />
             
             {/* Fear Inventory Exercise Link */}
-            <Link to="/fear-inventory-exercise">
-              <Card className="overflow-hidden border-2 border-red-500/40 bg-gradient-to-br from-red-50 to-transparent dark:from-red-950/20 hover:border-red-500/60 hover:shadow-lg transition-all cursor-pointer group">
+            <Link to="/fear-inventory-exercise" className="block">
+              <Card className="overflow-hidden border-2 border-red-500/40 bg-gradient-to-br from-red-50 to-transparent dark:from-red-950/20 hover:border-red-500/60 hover:shadow-lg transition-all cursor-pointer group mt-8">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     <div className="flex-shrink-0">
