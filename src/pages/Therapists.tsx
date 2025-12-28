@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
 import logo from "@/assets/logo.png";
+import betterHelpLogo from "@/assets/betterhelp-logo.png";
 
 const therapeuticModalities = [
   "All",
@@ -340,6 +341,13 @@ const Therapists = () => {
             <Card className="mt-6 border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex-shrink-0">
+                    <img 
+                      src={betterHelpLogo} 
+                      alt="BetterHelp" 
+                      className="h-12 md:h-16 w-auto object-contain"
+                    />
+                  </div>
                   <div className="flex-grow">
                     <h3 className="text-lg font-semibold text-foreground mb-2">Online Therapy Available Now</h3>
                     <p className="text-sm text-muted-foreground mb-3">
