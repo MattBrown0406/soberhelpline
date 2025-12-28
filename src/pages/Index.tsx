@@ -165,7 +165,7 @@ const Index = () => {
               <span className="block text-logo-green">Find Healing.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              We connect families with ethical, proven treatment providers nationwide. Free guidance, no commissions—just compassionate support when you need it most.
+              We connect families with ethical, proven treatment providers nationwide—offering compassionate guidance and unwavering support when you need it most.
             </p>
             
             {/* Primary CTAs */}
