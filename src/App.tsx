@@ -93,6 +93,7 @@ import WhoBenefitsFilter from "./pages/WhoBenefitsFilter";
 import FamilyUnityLiability from "./pages/FamilyUnityLiability";
 import SafeToOpenUp from "./pages/SafeToOpenUp";
 import AddictionAsStressDisorder from "./pages/AddictionAsStressDisorder";
+import FearInventoryExercise from "./pages/FearInventoryExercise";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -194,6 +195,7 @@ const App = () => (
             <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
             <Route path="/safe-to-open-up" element={<SafeToOpenUp />} />
             <Route path="/addiction-as-stress-disorder" element={<AddictionAsStressDisorder />} />
+            <Route path="/fear-inventory-exercise" element={<FearInventoryExercise />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
