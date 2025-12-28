@@ -197,20 +197,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Featured Video */}
-          <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/20 border border-border/50">
-              <div className="aspect-video">
-                <iframe
-                  src="https://www.youtube.com/embed/Li2fH0doWPc"
-                  title="Sober Helpline Video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
