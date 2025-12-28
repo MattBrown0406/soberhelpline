@@ -343,11 +343,11 @@ const Therapists = () => {
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Logo and headline */}
                   <div className="flex-shrink-0 flex flex-col items-center md:items-start">
-                    <div className="bg-white rounded-lg p-3 mb-3">
+                    <div className="bg-white rounded-lg p-4 mb-3">
                       <img 
                         src={betterHelpLogo} 
                         alt="BetterHelp" 
-                        className="h-8 md:h-10 w-auto object-contain"
+                        className="h-12 md:h-16 w-auto object-contain"
                       />
                     </div>
                     <p className="text-white/90 text-sm font-medium">World's Largest Therapy Service</p>
