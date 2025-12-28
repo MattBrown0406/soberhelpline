@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Brain, Phone } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft, Brain, Phone, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -334,6 +335,29 @@ const Therapists = () => {
             <p className="text-sm text-muted-foreground text-center mt-2">
               Or click a state on the map above
             </p>
+
+            {/* BetterHelp Promotion */}
+            <Card className="mt-6 border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Online Therapy Available Now</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      While we're in the process of adding therapists to our directory, you can access professional online therapy through BetterHelp and get <span className="font-semibold text-primary">10% off your first month</span>.
+                    </p>
+                    <a
+                      href="https://betterhelp.com/partywreckers"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
+                    >
+                      Visit BetterHelp
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
