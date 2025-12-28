@@ -284,12 +284,12 @@ const Index = () => {
             
             {/* Fear Inventory Exercise Link */}
             <Link to="/fear-inventory-exercise">
-              <Card className="overflow-hidden border-2 border-amber-500/30 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 hover:border-amber-500/50 hover:shadow-lg transition-all cursor-pointer group">
+              <Card className="overflow-hidden border-2 border-red-500/40 bg-gradient-to-br from-red-50 to-transparent dark:from-red-950/20 hover:border-red-500/60 hover:shadow-lg transition-all cursor-pointer group">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <AlertTriangle className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                      <div className="w-16 h-16 rounded-2xl bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
                       </div>
                     </div>
                     <div className="flex-grow">
@@ -302,7 +302,7 @@ const Index = () => {
                       </p>
                     </div>
                     <div className="flex-shrink-0 hidden md:block">
-                      <ArrowRight className="w-5 h-5 text-amber-600 dark:text-amber-400 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 text-red-600 dark:text-red-400 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </CardContent>
