@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -303,6 +303,33 @@ const Index = () => {
                     </div>
                     <div className="flex-shrink-0 hidden md:block">
                       <ArrowRight className="w-5 h-5 text-red-600 dark:text-red-400 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Conversation Starters Guide */}
+            <Link to="/conversation-starters" className="block">
+              <Card className="overflow-hidden border-2 border-blue-500/40 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-950/20 hover:border-blue-500/60 hover:shadow-lg transition-all cursor-pointer group">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <MessageSquare className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                      </div>
+                    </div>
+                    <div className="flex-grow">
+                      <h3 className="text-lg font-semibold text-foreground mb-1">Conversation Starters for Families</h3>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        Questions to reduce defensiveness and speak from a calmer place
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        These conversation starters help families slow things down and speak from a steadier place—whether addressing impact, boundaries, or looking forward together.
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0 hidden md:block">
+                      <ArrowRight className="w-5 h-5 text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </CardContent>
