@@ -191,10 +191,6 @@ const Index = () => {
                 <span>Vetted Providers</span>
               </div>
               <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-logo-green" />
-                <span>No Commissions</span>
-              </div>
-              <div className="flex items-center gap-2">
                 <Heart className="w-4 h-4 text-logo-green" />
                 <span>Family-Focused</span>
               </div>
