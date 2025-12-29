@@ -337,8 +337,8 @@ export default function FamilyEducation() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-logo-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
               
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="relative text-center">
+                <div className="flex flex-col items-center gap-3 mb-4">
                   <div className="p-3 rounded-xl bg-logo-green/10 border border-logo-green/20">
                     <BookOpen className="h-8 w-8 text-logo-green" />
                   </div>
@@ -349,19 +349,19 @@ export default function FamilyEducation() {
                     <p className="text-muted-foreground">Expert-created resources for your journey</p>
                   </div>
                 </div>
-                <p className="text-lg text-muted-foreground max-w-2xl mt-4">
+                <p className="text-lg text-muted-foreground max-w-4xl mx-auto mt-4">
                   A comprehensive library of interactive tools, educational guides, and healing resources designed to help you understand addiction, set healthy boundaries, and reclaim your own wellbeing.
                 </p>
                 
                 {/* Healing Journey Note */}
-                <div className="mt-6 p-4 bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-800/30 rounded-xl max-w-2xl">
+                <div className="mt-6 p-4 bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-800/30 rounded-xl max-w-4xl mx-auto">
                   <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
                     <span className="font-semibold">A note on your journey:</span> These exercises and guides are designed to help your family system become educated and heal over time—not overnight. Please take your time with each resource and allow yourself space to process what you're learning. Healing happens gradually, and there's no need to rush through everything at once. Be gentle with yourself.
                   </p>
                 </div>
                 
                 {/* Quick Stats */}
-                <div className="flex flex-wrap gap-6 mt-6">
+                <div className="flex flex-wrap justify-center gap-6 mt-6">
                   <div className="flex items-center gap-2">
                     <Target className="h-5 w-5 text-logo-green" />
                     <span className="text-sm font-medium">60+ Resources</span>
