@@ -353,6 +353,13 @@ export default function FamilyEducation() {
                   A comprehensive library of interactive tools, educational guides, and healing resources designed to help you understand addiction, set healthy boundaries, and reclaim your own wellbeing.
                 </p>
                 
+                {/* Healing Journey Note */}
+                <div className="mt-6 p-4 bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-800/30 rounded-xl max-w-2xl">
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                    <span className="font-semibold">A note on your journey:</span> These exercises and guides are designed to help your family system become educated and heal over time—not overnight. Please take your time with each resource and allow yourself space to process what you're learning. Healing happens gradually, and there's no need to rush through everything at once. Be gentle with yourself.
+                  </p>
+                </div>
+                
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-6 mt-6">
                   <div className="flex items-center gap-2">
