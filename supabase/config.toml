@@ -9,6 +9,9 @@ verify_jwt = false
 [functions.paypal-subscriptions]
 verify_jwt = true
 
+[functions.paypal-webhook]
+verify_jwt = false
+
 [functions.create-zoom-meeting]
 verify_jwt = true
 
