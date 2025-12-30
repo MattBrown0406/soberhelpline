@@ -165,6 +165,7 @@ const meditations = [
   { title: "Allowing Hope and Happiness to Return", file: "allowing-hope-happiness-meditation.mp3", color: "amber" },
   { title: "Letting Go of What Was Never About You", file: "letting-go-not-about-you-meditation.mp3", color: "emerald" },
   { title: "What I Can Control Today", file: "what-i-can-control-today-meditation.mp3", color: "indigo" },
+  { title: "You Are Allowed to Say No", file: "you-are-allowed-to-say-no-meditation.mp3", color: "teal" },
 ];
 
 const getColorClasses = (color: string) => ({
