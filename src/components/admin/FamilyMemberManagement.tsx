@@ -31,7 +31,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Loader2, UserX, CheckCircle, XCircle, RefreshCw, Pencil } from "lucide-react";
+import {
+  Loader2,
+  UserX,
+  CheckCircle,
+  XCircle,
+  RefreshCw,
+  Pencil,
+  RotateCw,
+} from "lucide-react";
 
 interface FamilyMember {
   id: string;
@@ -59,14 +67,15 @@ export function FamilyMemberManagement() {
   const [members, setMembers] = useState<FamilyMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [revoking, setRevoking] = useState<string | null>(null);
+  const [syncing, setSyncing] = useState<string | null>(null);
   const [confirmRevoke, setConfirmRevoke] = useState<FamilyMember | null>(null);
   const [editingMember, setEditingMember] = useState<FamilyMember | null>(null);
   const [editForm, setEditForm] = useState({
-    username: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone_number: '',
+    username: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
   });
   const [saving, setSaving] = useState(false);
 
@@ -140,16 +149,45 @@ export function FamilyMemberManagement() {
     }
   };
 
+  const handleSyncSubscription = async (member: FamilyMember) => {
+    const subscriptionId = member.subscription?.paypal_subscription_id;
+    if (!subscriptionId) return;
+
+    setSyncing(member.id);
+    try {
+      const { data, error } = await supabase.functions.invoke("paypal-admin-sync", {
+        body: { action: "sync-subscription", subscriptionId },
+      });
+
+      if (error) throw error;
+
+      if (data?.updated) {
+        toast.success("Subscription updated to active");
+      } else {
+        toast.message("No change", {
+          description: `PayPal status: ${data?.paypalStatus || "unknown"}`,
+        });
+      }
+
+      await fetchFamilyMembers();
+    } catch (e) {
+      console.error("Error syncing subscription:", e);
+      toast.error("Failed to sync subscription status");
+    } finally {
+      setSyncing(null);
+    }
+  };
+
   const handleRevokeMembership = async (member: FamilyMember) => {
     if (!member.subscription) return;
-    
+
     setRevoking(member.id);
     try {
       // Update the subscription status to cancelled
       const { error } = await supabase
-        .from('provider_subscriptions')
-        .update({ status: 'cancelled' })
-        .eq('id', member.subscription.id);
+        .from("provider_subscriptions")
+        .update({ status: "cancelled" })
+        .eq("id", member.subscription.id);
 
       if (error) throw error;
 
@@ -308,7 +346,26 @@ export function FamilyMemberManagement() {
                       <Pencil className="h-4 w-4 mr-1" />
                       Edit
                     </Button>
-                    {member.subscription?.status === 'active' && (
+
+                    {member.subscription?.status === "pending" && member.subscription?.paypal_subscription_id && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleSyncSubscription(member)}
+                        disabled={syncing === member.id}
+                      >
+                        {syncing === member.id ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <>
+                            <RotateCw className="h-4 w-4 mr-1" />
+                            Sync
+                          </>
+                        )}
+                      </Button>
+                    )}
+
+                    {member.subscription?.status === "active" && (
                       <Button
                         variant="destructive"
                         size="sm"
