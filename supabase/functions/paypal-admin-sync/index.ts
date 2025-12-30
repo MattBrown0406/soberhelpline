@@ -50,8 +50,14 @@ async function getSubscriptionDetails(accessToken: string, subscriptionId: strin
   );
 
   if (!response.ok) {
-    const error = await response.text();
-    console.error("PayPal get subscription error:", error);
+    const errorText = await response.text();
+    console.error("PayPal get subscription error:", errorText);
+    
+    // Check if it's a "not found" error - subscription was abandoned/cleaned up
+    if (response.status === 404 || errorText.includes("RESOURCE_NOT_FOUND")) {
+      return { status: "NOT_FOUND", notFound: true };
+    }
+    
     throw new Error("Failed to get subscription details");
   }
 
@@ -131,6 +137,32 @@ Deno.serve(async (req) => {
 
     const accessToken = await getPayPalAccessToken();
     const details = await getSubscriptionDetails(accessToken, subscriptionId);
+
+    // Handle case where subscription doesn't exist in PayPal (abandoned checkout)
+    if (details.notFound) {
+      const { error: dbError } = await supabaseAdmin
+        .from("provider_subscriptions")
+        .update({
+          status: "expired",
+          updated_at: new Date().toISOString(),
+        })
+        .eq("paypal_subscription_id", subscriptionId);
+
+      if (dbError) {
+        console.error("DB update error:", dbError);
+        throw new Error("Failed to update subscription status");
+      }
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          paypalStatus: "NOT_FOUND",
+          updated: true,
+          message: "Subscription not found in PayPal - marked as expired (abandoned checkout)",
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
 
     const paypalStatus = String(details?.status ?? "");
 
