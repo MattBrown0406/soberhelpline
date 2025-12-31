@@ -51,12 +51,50 @@ import mentalHealthCostWaitingImg from "@/assets/blog-mental-health-cost-waiting
 import familyEducationBeforeAnswersImg from "@/assets/blog-family-education-before-answers.png";
 import quietGriefFamiliesImg from "@/assets/blog-quiet-grief-families.png";
 import familyEducationFirstStepImg from "@/assets/blog-family-education-first-step.png";
+import alcoholProblemsSocialDrinkingImg from "@/assets/blog-alcohol-problems-social-drinking.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 48,
+    title: "Why Alcohol Problems Feel So Confusing When Drinking Is Still 'Social'",
+    excerpt: "Many families struggle to identify alcohol problems because the behavior looks familiar. Drinking happens at dinners, celebrations, and stressful moments. This makes it difficult to recognize when alcohol has crossed from social use into something more concerning.",
+    author: "Sober Helpline",
+    date: "2025-12-31",
+    category: "Family Support",
+    image: alcoholProblemsSocialDrinkingImg,
+    slug: "why-alcohol-problems-confusing-social-drinking",
+    seoTitle: "Why Alcohol Problems Feel So Confusing When Drinking Is Still 'Social' | Sober Helpline",
+    metaDescription: "Alcohol problems often show up emotionally before behaviorally. Learn why families struggle to identify concerning drinking when it still looks social.",
+    content: `**Why Alcohol Problems Feel So Confusing When Drinking Is Still "Social"**
+
+Many families struggle to identify alcohol problems because the behavior looks familiar. Drinking happens at dinners, celebrations, and stressful moments. It's normalized, joked about, and often encouraged. This makes it difficult to recognize when alcohol has crossed from social use into something more concerning.
+
+The confusion deepens when the person drinking maintains responsibilities. They may still work, parent, and show up socially. From the outside, nothing looks extreme. From inside the relationship, something feels off.
+
+**Emotional Signs Appear First**
+
+Alcohol problems often show up emotionally before they show up behaviorally. Irritability increases. Emotional availability decreases. Conversations feel shallow or defensive. Promises are made and forgotten. Trust erodes slowly.
+
+Families sense these changes but struggle to articulate them. They wonder if they're being too sensitive. They compare their situation to stereotypes and dismiss their concerns because things don't look "that bad."
+
+**The Hidden Impact on Relationships**
+
+What gets overlooked is that alcohol can alter emotional presence long before it causes obvious consequences. Inconsistency becomes the norm. Family members learn not to rely on emotional engagement or follow‑through.
+
+Over time, families stop bringing things up. They avoid "ruining the mood." They lower expectations. This adaptation keeps the peace but deepens disconnection.
+
+**Trusting What You Experience**
+
+Alcohol doesn't have to cause public disasters to damage relationships. Emotional absence, defensiveness, and unreliability are meaningful impacts, even if they're easy to minimize.
+
+Families are allowed to trust what they're experiencing. If alcohol repeatedly interferes with connection, honesty, and safety, it deserves attention—regardless of appearances.
+
+If you're concerned about a loved one's drinking, you don't have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+  },
   {
     id: 47,
     title: "Why Education—Not Urgency—is Often the First Thing Families Need",
