@@ -168,6 +168,7 @@ const meditations = [
   { title: "You Are Allowed to Say No", file: "you-are-allowed-to-say-no-meditation.mp3", color: "teal" },
   { title: "Guided Inner Dialogue: Talking to the Part of You That's Hurting", file: "guided-inner-dialogue-meditation.mp3", color: "pink" },
   { title: "Talking to the Part That Wants to Rescue", file: "talking-to-the-part-that-wants-to-rescue-meditation.mp3", color: "cyan" },
+  { title: "Connecting With Your Inner Child", file: "connecting-with-your-inner-child-meditation.mp3", color: "fuchsia" },
 ];
 
 const getColorClasses = (color: string) => ({
