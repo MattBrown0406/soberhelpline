@@ -62,7 +62,8 @@ const membershipFormSchema = z.object({
   email: z.string().email("Valid email is required").max(255),
   phoneNumber: z.string().min(10, "Valid phone number is required"),
   city: z.string().min(2, "City is required").max(100),
-  state: z.string().min(2, "State is required").max(50),
+  country: z.enum(["US", "CA"], { required_error: "Please select a country" }),
+  state: z.string().min(2, "State/Province is required").max(50),
   referralSource: z.string().min(1, "Please let us know how you heard about us"),
 });
 
@@ -79,6 +80,13 @@ const usStates = [
   "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
   "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
   "West Virginia", "Wisconsin", "Wyoming"
+];
+
+const canadianProvinces = [
+  "Alberta", "British Columbia", "Manitoba", "New Brunswick",
+  "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
+  "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
+  "Saskatchewan", "Yukon"
 ];
 
 const membershipPlans = {
@@ -178,10 +186,13 @@ export default function FamilyMembership() {
       email: user?.email || "",
       phoneNumber: "",
       city: "",
+      country: "US",
       state: "",
       referralSource: "",
     },
   });
+
+  const selectedCountry = form.watch("country");
 
   // Update email when user is loaded
   useEffect(() => {
@@ -499,6 +510,30 @@ export default function FamilyMembership() {
                       )}
                     />
 
+                    <FormField
+                      control={form.control}
+                      name="country"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Country *</FormLabel>
+                          <FormControl>
+                            <select
+                              {...field}
+                              onChange={(e) => {
+                                field.onChange(e);
+                                form.setValue("state", ""); // Reset state when country changes
+                              }}
+                              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                            >
+                              <option value="US">United States</option>
+                              <option value="CA">Canada</option>
+                            </select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormField
                         control={form.control}
@@ -518,16 +553,16 @@ export default function FamilyMembership() {
                         name="state"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>State *</FormLabel>
+                            <FormLabel>{selectedCountry === "CA" ? "Province/Territory" : "State"} *</FormLabel>
                             <FormControl>
                               <select
                                 {...field}
                                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                               >
-                                <option value="">Select a state</option>
-                                {usStates.map((state) => (
-                                  <option key={state} value={state}>
-                                    {state}
+                                <option value="">Select {selectedCountry === "CA" ? "a province" : "a state"}</option>
+                                {(selectedCountry === "CA" ? canadianProvinces : usStates).map((region) => (
+                                  <option key={region} value={region}>
+                                    {region}
                                   </option>
                                 ))}
                               </select>
