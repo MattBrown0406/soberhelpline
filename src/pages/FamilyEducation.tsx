@@ -167,6 +167,7 @@ const meditations = [
   { title: "What I Can Control Today", file: "what-i-can-control-today-meditation.mp3", color: "indigo" },
   { title: "You Are Allowed to Say No", file: "you-are-allowed-to-say-no-meditation.mp3", color: "teal" },
   { title: "Guided Inner Dialogue: Talking to the Part of You That's Hurting", file: "guided-inner-dialogue-meditation.mp3", color: "pink" },
+  { title: "Talking to the Part That Wants to Rescue", file: "talking-to-the-part-that-wants-to-rescue-meditation.mp3", color: "cyan" },
 ];
 
 const getColorClasses = (color: string) => ({
