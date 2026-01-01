@@ -52,12 +52,58 @@ import familyEducationBeforeAnswersImg from "@/assets/blog-family-education-befo
 import quietGriefFamiliesImg from "@/assets/blog-quiet-grief-families.png";
 import familyEducationFirstStepImg from "@/assets/blog-family-education-first-step.png";
 import alcoholProblemsSocialDrinkingImg from "@/assets/blog-alcohol-problems-social-drinking.png";
+import familyAngerGuiltImg from "@/assets/blog-family-anger-guilt.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 49,
+    title: "Why Families Feel Guilty for Being Angry—and What That Anger Is Really Saying",
+    excerpt: "Anger is one of the most misunderstood emotions in families affected by addiction. Many family members feel ashamed of it. Yet anger rarely appears without reason—it often signals violated boundaries, unmet needs, and prolonged powerlessness.",
+    author: "Sober Helpline",
+    date: "2026-01-01",
+    category: "Family Support",
+    image: familyAngerGuiltImg,
+    slug: "why-families-feel-guilty-for-being-angry",
+    seoTitle: "Why Families Feel Guilty for Being Angry—and What That Anger Is Really Saying | Sober Helpline",
+    metaDescription: "Anger in families affected by addiction often signals violated boundaries and unmet needs. Learn why suppressing anger prolongs dysfunction and how to use it constructively.",
+    content: `**Why Families Feel Guilty for Being Angry—and What That Anger Is Really Saying**
+
+Anger is one of the most misunderstood emotions in families affected by addiction. Many family members feel ashamed of it. They believe anger means they lack compassion or understanding. They suppress it, redirect it inward, or disguise it as worry.
+
+Yet anger rarely appears without reason.
+
+**What Anger Signals**
+
+In the context of addiction, anger often signals violated boundaries, unmet needs, and prolonged powerlessness. Families may feel angry about broken promises, emotional absence, financial strain, or the constant uncertainty of not knowing what to expect.
+
+Because addiction is widely framed as an illness, families feel pressure to be endlessly patient. They are told to be supportive, understanding, and forgiving. While compassion is important, this messaging often leaves no room for legitimate frustration.
+
+**When Anger Is Suppressed**
+
+When anger is suppressed, it doesn't disappear. It leaks out through sarcasm, withdrawal, resentment, or emotional numbness. Relationships suffer, and families feel increasingly disconnected from themselves.
+
+Anger can also stem from grief. Families grieve the loss of trust, stability, and the relationship they once had. They grieve future plans that feel uncertain or impossible. Anger becomes a response to loss that hasn't been acknowledged.
+
+**The Impact on Children**
+
+Children in these families often absorb this unspoken anger. They may feel responsible for tension they don't understand. They may learn that strong emotions are unsafe or unacceptable.
+
+**Reframing Anger as Information**
+
+Reframing anger as information rather than failure changes everything. Anger points to something that matters. It highlights where limits have been crossed or where balance has been lost.
+
+Addressing anger does not mean acting impulsively or cruelly. It means listening to what the emotion is communicating. It means identifying boundaries that need reinforcement and needs that have gone unmet for too long.
+
+**Anger and Love Can Coexist**
+
+Families are allowed to feel angry and still be loving. Suppressing anger in the name of compassion often prolongs dysfunction. Acknowledging it honestly is often the first step toward healthier boundaries and clearer communication.
+
+If you're struggling with difficult emotions related to a loved one's addiction, you don't have to navigate them alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+  },
   {
     id: 48,
     title: "Why Alcohol Problems Feel So Confusing When Drinking Is Still 'Social'",
