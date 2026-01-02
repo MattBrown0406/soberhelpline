@@ -53,12 +53,54 @@ import quietGriefFamiliesImg from "@/assets/blog-quiet-grief-families.png";
 import familyEducationFirstStepImg from "@/assets/blog-family-education-first-step.png";
 import alcoholProblemsSocialDrinkingImg from "@/assets/blog-alcohol-problems-social-drinking.png";
 import familyAngerGuiltImg from "@/assets/blog-family-anger-guilt.png";
+import trustAfterRelapseImg from "@/assets/blog-trust-after-relapse.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 50,
+    title: "Why Families Struggle to Trust Change After Repeated Relapses",
+    excerpt: "Relapse doesn't just impact the person struggling with addiction. It profoundly affects the family's sense of safety and trust. Each attempt at change followed by a return to old patterns chips away at hope.",
+    author: "Sober Helpline",
+    date: "2026-01-02",
+    category: "Family Support",
+    image: trustAfterRelapseImg,
+    slug: "why-families-struggle-to-trust-change-after-repeated-relapses",
+    seoTitle: "Why Families Struggle to Trust Change After Repeated Relapses | Sober Helpline",
+    metaDescription: "After multiple relapses, families often become guarded. Learn why caution is not cruelty and how trust is rebuilt through patterns, not promises.",
+    content: `**Why Families Struggle to Trust Change After Repeated Relapses**
+
+Relapse doesn't just impact the person struggling with addiction. It profoundly affects the family's sense of safety and trust. Each attempt at change followed by a return to old patterns chips away at hope, even when families desperately want to believe things will be different this time.
+
+**The Protective Response**
+
+After multiple relapses, families often become guarded. They stop celebrating early progress. They hesitate to believe promises. They prepare themselves emotionally for disappointment, even during periods of apparent stability.
+
+This guardedness is often misinterpreted as coldness or lack of support. In reality, it is a survival response. Families learn that hope without evidence feels dangerous. Emotional investment becomes risky.
+
+**The Internal Conflict**
+
+Relapse also creates internal conflict. Families want to be encouraging but don't want to be naïve. They want to support recovery but fear being pulled back into chaos. This tension can create emotional distance and confusion about how to respond.
+
+**The Impact on Children**
+
+Children are especially affected. They may learn not to trust improvement. They become skeptical of change. This skepticism can follow them into adulthood, shaping how they approach relationships and commitment.
+
+**Rebuilding Trust Takes Time**
+
+Rebuilding trust after relapse takes time and consistency. Words alone are not enough. Families look for behavioral follow-through, emotional presence, and accountability over extended periods.
+
+It's important for families to understand that caution is not cruelty. Protecting emotional well-being is not the same as withholding love. Trust is rebuilt through patterns, not promises.
+
+**Moving at Your Own Pace**
+
+Families are allowed to move at their own pace. Healing relationships after relapse is a process—not a demand.
+
+If you're navigating trust issues after a loved one's relapse, you don't have to figure it out alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+  },
   {
     id: 49,
     title: "Why Families Feel Guilty for Being Angry—and What That Anger Is Really Saying",
