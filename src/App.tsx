@@ -100,6 +100,7 @@ import AIEnablingDecisionCoach from "./pages/AIEnablingDecisionCoach";
 import AIBoundaryBuilderCoach from "./pages/AIBoundaryBuilderCoach";
 import AITreatmentNavigator from "./pages/AITreatmentNavigator";
 import AIRelapseResponseGuide from "./pages/AIRelapseResponseGuide";
+import AIAddictionRealityTranslator from "./pages/AIAddictionRealityTranslator";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -208,6 +209,7 @@ const App = () => (
             <Route path="/ai-boundary-builder-coach" element={<AIBoundaryBuilderCoach />} />
             <Route path="/ai-treatment-navigator" element={<AITreatmentNavigator />} />
             <Route path="/ai-relapse-response-guide" element={<AIRelapseResponseGuide />} />
+            <Route path="/ai-addiction-reality-translator" element={<AIAddictionRealityTranslator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
