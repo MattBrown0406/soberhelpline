@@ -725,6 +725,24 @@ export default function FamilyEducation() {
                         </CardContent>
                       </Card>
                     </Link>
+                    
+                    <Link to="/ai-enabling-decision-coach">
+                      <Card className="h-full border-2 border-amber-500/20 hover:border-amber-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/10">
+                        <CardContent className="py-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-lg bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
+                              <Scale className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors mb-1">Helping vs. Enabling Decision Coach</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Turn AI into a decision coach that helps you distinguish between helping and enabling behaviors.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </div>
                 </div>
               </TabsContent>
