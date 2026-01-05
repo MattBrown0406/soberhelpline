@@ -231,10 +231,10 @@ const AITreatmentNavigator = () => {
               <img src={logo} alt="Sober Helpline" className="h-10 w-auto" />
             </Link>
             <a
-              href="tel:1-844-762-3745"
+              href="tel:541-241-5886"
               className="text-lg font-semibold text-logo-green hover:text-logo-green/80"
             >
-              1-844-SOBER-HELP
+              541-241-5886
             </a>
           </div>
         </header>

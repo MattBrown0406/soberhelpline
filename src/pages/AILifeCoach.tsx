@@ -218,8 +218,8 @@ const AILifeCoach = () => {
             <Link to="/" className="flex items-center gap-2">
               <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
             </Link>
-            <a href="tel:1-800-555-0199" className="text-lg font-semibold hover:underline">
-              1-800-555-0199
+            <a href="tel:541-241-5886" className="text-lg font-semibold hover:underline">
+              541-241-5886
             </a>
           </div>
         </header>
