@@ -743,6 +743,24 @@ export default function FamilyEducation() {
                         </CardContent>
                       </Card>
                     </Link>
+                    
+                    <Link to="/ai-boundary-builder-coach">
+                      <Card className="h-full border-2 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/10">
+                        <CardContent className="py-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-lg bg-emerald-500/10 group-hover:bg-emerald-500/20 transition-colors">
+                              <Shield className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors mb-1">Boundary Builder Coach</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Transform AI into a boundary coach that helps you set clear, calm, enforceable boundaries.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </div>
                 </div>
               </TabsContent>
