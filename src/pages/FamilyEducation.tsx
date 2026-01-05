@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download, BookOpen, Brain, Heart, Shield, Sparkles, ChevronDown, ChevronRight, GraduationCap, AlertTriangle, Scale, Compass, TreePine, Activity, Target, Lightbulb } from "lucide-react";
+import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download, BookOpen, Brain, Heart, Shield, Sparkles, ChevronDown, ChevronRight, GraduationCap, AlertTriangle, Scale, Compass, TreePine, Activity, Target, Lightbulb, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -773,6 +773,24 @@ export default function FamilyEducation() {
                               <h4 className="font-semibold text-foreground group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors mb-1">Treatment Reality Navigator</h4>
                               <p className="text-sm text-muted-foreground">
                                 Understand what treatment can and cannot do—without the marketing spin.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                    
+                    <Link to="/ai-relapse-response-guide">
+                      <Card className="h-full border-2 border-orange-500/20 hover:border-orange-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-orange-50/50 to-transparent dark:from-orange-950/10">
+                        <CardContent className="py-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-lg bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
+                              <RefreshCw className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground group-hover:text-orange-700 dark:group-hover:text-orange-400 transition-colors mb-1">Relapse Response Guide</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Respond to relapse without panic, punishment, or enabling—stay consistent when it matters most.
                               </p>
                             </div>
                           </div>
