@@ -96,6 +96,7 @@ import AddictionAsStressDisorder from "./pages/AddictionAsStressDisorder";
 import FearInventoryExercise from "./pages/FearInventoryExercise";
 import ConversationStartersGuide from "./pages/ConversationStartersGuide";
 import AILifeCoach from "./pages/AILifeCoach";
+import AIEnablingDecisionCoach from "./pages/AIEnablingDecisionCoach";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -200,6 +201,7 @@ const App = () => (
             <Route path="/fear-inventory-exercise" element={<FearInventoryExercise />} />
             <Route path="/conversation-starters" element={<ConversationStartersGuide />} />
             <Route path="/ai-life-coach" element={<AILifeCoach />} />
+            <Route path="/ai-enabling-decision-coach" element={<AIEnablingDecisionCoach />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
