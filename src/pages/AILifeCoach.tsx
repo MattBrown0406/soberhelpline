@@ -348,15 +348,15 @@ const AILifeCoach = () => {
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">2</span>
-                <span>Open ChatGPT, Claude, or your preferred AI chatbot.</span>
+                <span>Open your preferred AI chatbot (ChatGPT, Claude, Gemini, etc.).</span>
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">3</span>
-                <span>Paste the prompt as your first message and send it.</span>
+                <span>Create a Custom GPT, Project, or Workspace (depending on your platform) and paste the prompt into the system instructions or custom instructions field.</span>
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">4</span>
-                <span>The AI will acknowledge the role and be ready to support you as your personal life coach and recovery guide.</span>
+                <span>Save your custom configuration. The AI will now consistently act as your personal life coach and recovery guide every time you use that project or workspace.</span>
               </li>
             </ol>
           </section>
