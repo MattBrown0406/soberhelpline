@@ -707,18 +707,25 @@ export default function FamilyEducation() {
                     </div>
                   </div>
                   
-                  <Card className="border-2 border-violet-500/20 bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/10">
-                    <CardContent className="py-12 text-center">
-                      <div className="relative inline-block mb-6">
-                        <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-xl animate-pulse" />
-                        <Sparkles className="relative h-16 w-16 text-violet-500/60 mx-auto" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-3">Coming Soon</h3>
-                      <p className="text-muted-foreground max-w-lg mx-auto">
-                        AI-powered tools to help you navigate difficult conversations, process emotions, and find personalized guidance on your journey.
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <Link to="/ai-life-coach">
+                      <Card className="h-full border-2 border-violet-500/20 hover:border-violet-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/10">
+                        <CardContent className="py-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-lg bg-violet-500/10 group-hover:bg-violet-500/20 transition-colors">
+                              <Sparkles className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground group-hover:text-violet-700 dark:group-hover:text-violet-400 transition-colors mb-1">AI Life Coach</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Transform any AI chatbot into a master life coach and recovery guide with our specialized prompt.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </div>
                 </div>
               </TabsContent>
 
