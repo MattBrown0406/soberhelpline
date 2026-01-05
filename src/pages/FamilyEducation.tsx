@@ -425,8 +425,8 @@ export default function FamilyEducation() {
                       <Heart className="h-5 w-5 text-rose-600" />
                     </div>
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold text-sm">Wellness</div>
-                      <div className="text-xs opacity-70 hidden sm:block">Meditations & Self-Care</div>
+                      <div className="font-semibold text-sm">Wellness & AI Tools</div>
+                      <div className="text-xs opacity-70 hidden sm:block">Meditations, Self-Care & AI Coaches</div>
                     </div>
                   </TabsTrigger>
                   
