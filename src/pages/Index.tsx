@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -316,6 +316,33 @@ const Index = () => {
                     </div>
                     <div className="flex-shrink-0 hidden md:block">
                       <ArrowRight className="w-5 h-5 text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* AI Helping vs Enabling Decision Coach */}
+            <Link to="/ai-enabling-decision-coach" className="block">
+              <Card className="overflow-hidden border-2 border-amber-500/40 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 hover:border-amber-500/60 hover:shadow-lg transition-all cursor-pointer group">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Scale className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                      </div>
+                    </div>
+                    <div className="flex-grow">
+                      <h3 className="text-lg font-semibold text-foreground mb-1">AI Helping vs. Enabling Decision Coach</h3>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        Transform any AI chatbot into a decision coach for families
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Use this specialized prompt to turn ChatGPT, Claude, or other AI tools into a coach that helps you distinguish between helping and enabling behaviors.
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0 hidden md:block">
+                      <ArrowRight className="w-5 h-5 text-amber-600 dark:text-amber-400 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </CardContent>
