@@ -761,6 +761,24 @@ export default function FamilyEducation() {
                         </CardContent>
                       </Card>
                     </Link>
+                    
+                    <Link to="/ai-treatment-navigator">
+                      <Card className="h-full border-2 border-blue-500/20 hover:border-blue-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/10">
+                        <CardContent className="py-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
+                              <Compass className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors mb-1">Treatment Reality Navigator</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Understand what treatment can and cannot do—without the marketing spin.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </div>
                 </div>
               </TabsContent>
