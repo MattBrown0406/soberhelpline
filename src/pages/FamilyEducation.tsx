@@ -694,6 +694,32 @@ export default function FamilyEducation() {
                     ))}
                   </div>
                 </div>
+
+                {/* AI Tools Section */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 rounded-lg bg-violet-500/10">
+                      <Sparkles className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-logo-green">AI Tools</h3>
+                      <p className="text-sm text-muted-foreground">Intelligent support for your journey</p>
+                    </div>
+                  </div>
+                  
+                  <Card className="border-2 border-violet-500/20 bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/10">
+                    <CardContent className="py-12 text-center">
+                      <div className="relative inline-block mb-6">
+                        <div className="absolute inset-0 bg-violet-500/20 rounded-full blur-xl animate-pulse" />
+                        <Sparkles className="relative h-16 w-16 text-violet-500/60 mx-auto" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-3">Coming Soon</h3>
+                      <p className="text-muted-foreground max-w-lg mx-auto">
+                        AI-powered tools to help you navigate difficult conversations, process emotions, and find personalized guidance on your journey.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
               </TabsContent>
 
               {/* Video Library Tab */}
