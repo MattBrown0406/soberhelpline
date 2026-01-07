@@ -57,12 +57,64 @@ import trustAfterRelapseImg from "@/assets/blog-trust-after-relapse.png";
 import familiesNeedSupportImg from "@/assets/blog-families-need-support.png";
 import alcoholismChildrenAdaptImg from "@/assets/blog-alcoholism-children-adapt.png";
 import earlyInterventionFamilyImg from "@/assets/blog-early-intervention-family.png";
+import earlyInterventionFamilyFirstImg from "@/assets/blog-early-intervention-family-first.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 54,
+    title: "Early Intervention Starts With the Family—Not the Person Using Substances",
+    excerpt: "Many families believe early intervention means convincing their loved one to get help as soon as possible. When that doesn't happen, they assume they've failed or that it's 'too early' to do anything meaningful.",
+    author: "Sober Helpline",
+    date: "2026-01-07",
+    category: "Family Support",
+    image: earlyInterventionFamilyFirstImg,
+    slug: "early-intervention-starts-with-family",
+    seoTitle: "Early Intervention Starts With the Family—Not the Person Using Substances | Sober Helpline",
+    metaDescription: "Early intervention is not about pushing treatment. It is about strengthening the family system before addiction fractures it further.",
+    content: `**Early Intervention Starts With the Family—Not the Person Using Substances**
+
+Many families believe early intervention means convincing their loved one to get help as soon as possible. When that doesn't happen, they assume they've failed or that it's "too early" to do anything meaningful. As a result, families often wait until exhaustion or crisis forces their hand.
+
+Early intervention, however, is not about pushing treatment. It is about strengthening the family system before addiction fractures it further.
+
+**Sensing Something Is Wrong**
+
+Families are often the first to sense that something is wrong. Communication changes. Emotional availability decreases. Anxiety becomes constant. Loved ones feel distant or unpredictable. These shifts happen long before labels like "addiction" feel certain.
+
+Because nothing dramatic has happened yet, families doubt themselves. They minimize concerns. They wait for proof. Meanwhile, stress accumulates and confusion grows.
+
+**Education Provides Clarity**
+
+Sober Helpline exists to support families in this early stage—when clarity is needed most. Education helps families understand addiction as a pattern rather than a single behavior. It helps them recognize how mental health, stress, and coping intersect with substance use.
+
+**The Power of Family Unity**
+
+One of the most important benefits of early intervention is family unity. Addiction thrives in division. When family members disagree about what's happening or how to respond, anxiety escalates. Education provides a shared framework that reduces conflict and strengthens cohesion.
+
+**Avoiding Common Pitfalls**
+
+Early support also helps families avoid common pitfalls. Without guidance, families often drift into enabling behaviors, absorbing consequences to keep life stable. They overfunction because they don't know what else to do. Education provides alternatives that protect the family while reducing harm.
+
+**Focusing on Family Well-Being**
+
+Importantly, early intervention focuses on the family's well-being regardless of the loved one's willingness to change. Families deserve support even when their loved one is ambivalent or resistant. Stabilizing the family system improves outcomes across the board.
+
+**The Family Membership**
+
+Sober Helpline's family membership is designed to meet this need. Members gain access to educational videos, decision-making tools, guided exercises, and members-only discussions that normalize their experience and reduce isolation. These resources help families move from panic to clarity.
+
+Joining the family membership does not mean committing to a specific outcome. It means committing to support, education, and stability. Families who feel supported make better decisions—whether change comes quickly or slowly.
+
+**Preventative Care for Families**
+
+Early intervention is not premature. It is preventative care for families under strain. If your family is struggling, even quietly, consider joining the Sober Helpline family membership to access deeper education and ongoing support.
+
+To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+  },
   {
     id: 53,
     title: "Early Intervention Isn't About Crisis—It's About Strengthening the Family Before One Happens",
