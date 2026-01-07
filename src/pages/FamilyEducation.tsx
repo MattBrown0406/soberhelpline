@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download, BookOpen, Brain, Heart, Shield, Sparkles, ChevronDown, ChevronRight, GraduationCap, AlertTriangle, Scale, Compass, TreePine, Activity, Target, Lightbulb, RefreshCw, Eye } from "lucide-react";
+import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download, BookOpen, Brain, Heart, Shield, Sparkles, ChevronDown, ChevronRight, GraduationCap, AlertTriangle, Scale, Compass, TreePine, Activity, Target, Lightbulb, RefreshCw, Eye, Globe } from "lucide-react";
+import GoogleTranslate from "@/components/GoogleTranslate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -312,27 +313,32 @@ export default function FamilyEducation() {
         <main className="container py-8 md:py-12">
           <div className="max-w-6xl mx-auto">
             {/* Navigation */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <Link
-                to="/family-support"
-                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4 mr-1" />
-                Back
-              </Link>
-              <div className="flex flex-wrap gap-2">
-                <Link to="/family-forum">
-                  <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
-                    <Users className="h-4 w-4" />
-                    Forum
-                  </Button>
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  to="/family-support"
+                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-1" />
+                  Back
                 </Link>
-                <Link to="/family-webinars">
-                  <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
-                    <Calendar className="h-4 w-4" />
-                    Webinars
-                  </Button>
-                </Link>
+                <div className="flex flex-wrap gap-2">
+                  <Link to="/family-forum">
+                    <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                      <Users className="h-4 w-4" />
+                      Forum
+                    </Button>
+                  </Link>
+                  <Link to="/family-webinars">
+                    <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                      <Calendar className="h-4 w-4" />
+                      Webinars
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-1.5 border border-border/50">
+                <GoogleTranslate />
               </div>
             </div>
 
