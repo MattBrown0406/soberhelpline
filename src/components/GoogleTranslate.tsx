@@ -122,80 +122,23 @@ export default function GoogleTranslate() {
     }
   };
 
-  // Show fallback selector if Google Translate didn't load
-  if (showFallback && !googleLoaded) {
-    return (
-      <div className="flex items-center gap-2">
-        <Globe className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-        <Select onValueChange={handleLanguageChange}>
-          <SelectTrigger className="w-[140px] h-8 text-sm">
-            <SelectValue placeholder="Translate" />
-          </SelectTrigger>
-          <SelectContent>
-            {languages.map((lang) => (
-              <SelectItem key={lang.code} value={lang.code}>
-                {lang.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-    );
-  }
-
   return (
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-      <div id="google_translate_element" className="google-translate-container">
-        {!googleLoaded && (
-          <span className="text-sm text-muted-foreground">Loading...</span>
-        )}
-      </div>
-      <style>{`
-        .google-translate-container .goog-te-gadget {
-          font-family: inherit !important;
-          font-size: 0 !important;
-        }
-        .google-translate-container .goog-te-gadget-simple {
-          background-color: transparent !important;
-          border: 1px solid hsl(var(--border)) !important;
-          border-radius: 0.375rem !important;
-          padding: 0.25rem 0.5rem !important;
-          font-size: 0.875rem !important;
-          cursor: pointer !important;
-        }
-        .google-translate-container .goog-te-gadget-simple:hover {
-          background-color: hsl(var(--accent)) !important;
-        }
-        .google-translate-container .goog-te-gadget-simple .goog-te-menu-value {
-          color: hsl(var(--foreground)) !important;
-        }
-        .google-translate-container .goog-te-gadget-simple .goog-te-menu-value span {
-          color: hsl(var(--foreground)) !important;
-          font-size: 0.875rem !important;
-        }
-        .google-translate-container .goog-te-gadget-icon {
-          display: none !important;
-        }
-        .google-translate-container .goog-te-gadget-simple img {
-          display: none !important;
-        }
-        .google-translate-container .goog-te-gadget > span {
-          display: none !important;
-        }
-        .google-translate-container .goog-te-gadget-simple .goog-te-menu-value span:first-child {
-          display: inline !important;
-        }
-        .goog-te-banner-frame {
-          display: none !important;
-        }
-        body {
-          top: 0 !important;
-        }
-        .skiptranslate:not(.goog-te-gadget) {
-          display: none !important;
-        }
-      `}</style>
+      <Select onValueChange={handleLanguageChange}>
+        <SelectTrigger className="w-[140px] h-8 text-sm">
+          <SelectValue placeholder="Translate" />
+        </SelectTrigger>
+        <SelectContent>
+          {languages.map((lang) => (
+            <SelectItem key={lang.code} value={lang.code}>
+              {lang.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {/* Hidden element for Google Translate to attach to */}
+      <div id="google_translate_element" className="hidden" />
     </div>
   );
 }
