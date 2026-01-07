@@ -107,14 +107,12 @@ export default function GoogleTranslate() {
 
   const handleLanguageChange = (langCode: string) => {
     if (langCode === "en") {
-      // Reset to English - remove translation
-      const frame = document.querySelector(".goog-te-banner-frame") as HTMLIFrameElement;
-      if (frame) {
-        const button = frame.contentDocument?.querySelector(".goog-te-button button") as HTMLButtonElement;
-        button?.click();
-      }
-      // Fallback: reload page without translation
-      window.location.href = window.location.pathname;
+      // Clear Google Translate cookies to reset to English
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.lovableproject.com";
+      // Reload without cache to ensure clean state
+      window.location.reload();
     } else {
       // Open Google Translate in new tab for the current page
       const url = `https://translate.google.com/translate?sl=en&tl=${langCode}&u=${encodeURIComponent(window.location.href)}`;
