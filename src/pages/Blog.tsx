@@ -60,12 +60,66 @@ import earlyInterventionFamilyImg from "@/assets/blog-early-intervention-family.
 import earlyInterventionFamilyFirstImg from "@/assets/blog-early-intervention-family-first.png";
 import earlyInterventionFamilyCrisisImg from "@/assets/blog-early-intervention-family-crisis.png";
 import earlyInterventionStabilizingFamilyImg from "@/assets/blog-early-intervention-stabilizing-family.png";
+import earlyInterventionFamilySkillImg from "@/assets/blog-early-intervention-family-skill.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 57,
+    title: "Early Intervention Is a Family Skill—Not a Crisis Response",
+    excerpt: "Many families believe intervention begins when things fall apart. Until then, they assume their job is to wait, manage stress, and hope the situation improves on its own.",
+    author: "Sober Helpline",
+    date: "2026-01-10",
+    category: "Family Support",
+    image: earlyInterventionFamilySkillImg,
+    slug: "early-intervention-family-skill-not-crisis-response",
+    seoTitle: "Early Intervention Is a Family Skill—Not a Crisis Response | Sober Helpline",
+    metaDescription: "Early intervention is not about forcing treatment. It is about strengthening the family system before addiction creates deeper fractures.",
+    content: `**Early Intervention Is a Family Skill—Not a Crisis Response**
+
+Many families believe intervention begins when things fall apart. Until then, they assume their job is to wait, manage stress, and hope the situation improves on its own. This belief leaves families unsupported during the very stage when education and clarity matter most.
+
+Early intervention is not about forcing treatment. It is about strengthening the family system before addiction creates deeper fractures.
+
+**Noticing Changes Before Labels Make Sense**
+
+Families often notice changes long before labels make sense. Communication becomes strained. Trust erodes. Anxiety increases. Loved ones feel emotionally distant or unpredictable. Because nothing dramatic has happened yet, families doubt themselves and minimize concerns.
+
+This quiet phase is when families need the most support.
+
+**Reactive Patterns Without Guidance**
+
+Without guidance, families often drift into reactive patterns. Some overfunction, managing responsibilities and consequences to keep life stable. Others avoid difficult conversations altogether. Family members disagree about what's happening, creating division and confusion.
+
+**Education and Cohesion**
+
+Early intervention focuses on education and cohesion. When families understand addiction as a pattern—not a moral failure—they stop arguing about whether there is a problem and start addressing how it affects everyone.
+
+**Mental Health Matters**
+
+Mental health plays a critical role here. Anxiety, depression, and chronic stress often affect the entire household. Early support helps families care for themselves rather than postponing their well-being until sobriety arrives.
+
+**The Family Membership**
+
+This is where Sober Helpline's family membership becomes essential. Behind the paywall, families gain access to educational videos, family decision tools, guided exercises, and members-only discussion forums. These resources provide structure, reassurance, and connection during an isolating time.
+
+Membership is not about convincing someone else to change. It is about building a stronger, more unified family system—one that can respond thoughtfully rather than react emotionally.
+
+**Families Who Feel Supported**
+
+Families who feel supported communicate more clearly. They set healthier boundaries. They reduce enabling behaviors without resorting to ultimatums. Even when their loved one remains resistant, the family becomes more stable.
+
+**Preventative Care for Families**
+
+Early intervention is not premature. It is preventative care for families under stress.
+
+If your family feels unsettled, divided, or exhausted, consider joining the Sober Helpline family membership. The more education and support you have now, the better equipped your family will be—no matter what comes next.
+
+To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+  },
   {
     id: 56,
     title: "Early Intervention Isn't About Forcing Treatment—It's About Stabilizing the Family First",
