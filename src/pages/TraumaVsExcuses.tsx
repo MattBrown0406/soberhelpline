@@ -15,11 +15,12 @@ const TraumaVsExcuses = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Trauma vs. Excuses: A Necessary Distinction | Family First Intervention</title>
+        <title>Trauma vs Excuses: A Necessary Distinction | Sober Helpline</title>
         <meta 
           name="description" 
           content="Learn how to hold compassion for trauma without justifying harm. A guide for families navigating accountability and understanding." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/trauma-vs-excuses" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

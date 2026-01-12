@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, UserCheck, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -214,7 +215,13 @@ const SoberCoachesCompanions = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Sober Coaches & Companions | Sober Helpline</title>
+        <meta name="description" content="Search vetted sober coaches and recovery companions. Find personal recovery support professionals near you." />
+        <link rel="canonical" href="https://soberhelpline.com/sober-coaches-companions" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -351,6 +358,7 @@ const SoberCoachesCompanions = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

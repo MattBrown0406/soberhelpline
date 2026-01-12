@@ -15,11 +15,12 @@ const MentalHealthVsSubstanceInduced = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Mental Health vs. Substance-Induced Symptoms | Family First Intervention</title>
+        <title>Mental Health vs Substance-Induced Symptoms | Sober Helpline</title>
         <meta 
           name="description" 
           content="Learn to distinguish between primary mental health conditions and substance-induced symptoms. A guide for families navigating dual diagnosis." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/mental-health-vs-substance-induced" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

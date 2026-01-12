@@ -14,8 +14,9 @@ export default function GriefForFamily() {
   return (
     <>
       <Helmet>
-        <title>Grief for the Family You Thought You'd Have | Sober Helpline</title>
-        <meta name="description" content="Naming the loss no one prepared you for. Understanding ambiguous grief in families affected by addiction—and finding permission to grieve honestly." />
+        <title>Grief for the Family You Expected | Sober Helpline</title>
+        <meta name="description" content="Naming the loss no one prepared you for. Understanding ambiguous grief in families affected by addiction and finding permission to grieve." />
+        <link rel="canonical" href="https://soberhelpline.com/grief-for-family" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

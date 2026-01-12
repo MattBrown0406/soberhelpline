@@ -44,11 +44,12 @@ const AddictionProgressionTimeline = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Addiction Progression Timeline | Family First Intervention</title>
+        <title>Addiction Progression Timeline | Sober Helpline</title>
         <meta 
           name="description" 
-          content="Understand addiction as a process, not a series of failures. Learn to recognize the stages of addiction progression and make better decisions." 
+          content="Understand addiction as a process, not a series of failures. Learn to recognize the stages of addiction progression." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/addiction-progression-timeline" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

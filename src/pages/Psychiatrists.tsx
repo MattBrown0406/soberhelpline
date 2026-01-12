@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Stethoscope, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -185,7 +186,13 @@ const Psychiatrists = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Addiction Psychiatrists | Sober Helpline</title>
+        <meta name="description" content="Search psychiatrists specializing in addiction medicine. Find medication management and dual diagnosis treatment." />
+        <link rel="canonical" href="https://soberhelpline.com/psychiatrists" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -311,6 +318,7 @@ const Psychiatrists = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

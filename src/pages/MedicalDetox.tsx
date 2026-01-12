@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Pill, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -289,7 +290,13 @@ const MedicalDetox = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Medical Detox Centers | Sober Helpline</title>
+        <meta name="description" content="Search vetted medical detox facilities by state. Find safe, medically-supervised withdrawal management programs." />
+        <link rel="canonical" href="https://soberhelpline.com/medical-detox" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -466,6 +473,7 @@ const MedicalDetox = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

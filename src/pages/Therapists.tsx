@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Brain, Phone, ExternalLink, MessageCircle, Video, Clock, Users, CheckCircle } from "lucide-react";
@@ -227,7 +228,13 @@ const Therapists = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Addiction Therapists | Sober Helpline</title>
+        <meta name="description" content="Find therapists specializing in addiction and family recovery. Browse vetted mental health professionals for lasting support." />
+        <link rel="canonical" href="https://soberhelpline.com/therapists" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -435,6 +442,7 @@ const Therapists = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
