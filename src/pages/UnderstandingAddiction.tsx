@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb, Users, TrendingUp } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import SEOHead from "@/components/SEOHead";
 
 export default function UnderstandingAddiction() {
   useGuideTracking("/understanding-addiction", "Addiction: A Chronic Disease, Not a Choice");
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Addiction: A Chronic Disease, Not a Choice | Sober Helpline</title>
-        <meta name="description" content="Learn why addiction is classified as a chronic brain disease, how it affects the brain, and why this understanding is crucial for effective treatment and recovery." />
-      </Helmet>
+      <SEOHead
+        title="Addiction: A Chronic Disease, Not a Choice | Sober Helpline"
+        description="Learn why addiction is classified as a chronic brain disease, how it affects the brain, and why this understanding is crucial for effective treatment and recovery."
+      />
 
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border">

@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import SEOHead from "@/components/SEOHead";
 
 const questions = [
   "Has my loved one tried to cut back or stop using substances but failed repeatedly?",
@@ -68,6 +69,10 @@ const AddictionAssessment = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Addiction Assessment Tool | Sober Helpline"
+        description="Use our free addiction assessment tool to evaluate if your loved one may be struggling with substance use disorder. Get personalized care level recommendations."
+      />
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between mb-4">
           <Link to="/">

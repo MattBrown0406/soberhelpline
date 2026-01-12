@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { Phone, ArrowLeft, Video, Lock, Loader2, FileText, Headphones, Users, Calendar, Download, BookOpen, Brain, Heart, Shield, Sparkles, ChevronDown, ChevronRight, GraduationCap, AlertTriangle, Scale, Compass, TreePine, Activity, Target, Lightbulb, RefreshCw, Eye, Globe } from "lucide-react";
 import GoogleTranslate from "@/components/GoogleTranslate";
@@ -18,6 +17,7 @@ import EnablingDecisionTree from "@/components/EnablingDecisionTree";
 import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksheet";
 import SelfCareWorksheet from "@/components/SelfCareWorksheet";
 import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAssessment";
+import SEOHead from "@/components/SEOHead";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -246,9 +246,10 @@ export default function FamilyEducation() {
   if (!hasMembership) {
     return (
       <>
-        <Helmet>
-          <title>Family Education Resources | Sober Helpline</title>
-        </Helmet>
+        <SEOHead
+          title="Family Education Resources | Sober Helpline"
+          description="Comprehensive educational resources for families supporting loved ones through addiction and recovery. Interactive tools, guides, and meditations."
+        />
         <div className="min-h-screen bg-background">
           <header className="border-b border-border/40 bg-background/95 backdrop-blur">
             <div className="container flex h-16 items-center justify-between">
@@ -292,10 +293,10 @@ export default function FamilyEducation() {
 
   return (
     <>
-      <Helmet>
-        <title>Family Education Resources | Sober Helpline</title>
-        <meta name="description" content="Comprehensive educational resources for families supporting loved ones through addiction and recovery. Interactive tools, guides, and meditations." />
-      </Helmet>
+      <SEOHead
+        title="Family Education Resources | Sober Helpline"
+        description="Comprehensive educational resources for families supporting loved ones through addiction and recovery. Interactive tools, guides, and meditations."
+      />
 
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur sticky top-0 z-50">
