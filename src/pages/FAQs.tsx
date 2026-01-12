@@ -260,12 +260,46 @@ Recovery is rarely a straight line. Each attempt at sobriety can build toward la
   }
 ];
 
+// Generate plain text answers for schema (strip JSX)
+const getPlainTextAnswer = (answer: string | React.ReactNode): string => {
+  if (typeof answer === 'string') {
+    return answer.replace(/\*\*/g, '').trim();
+  }
+  // For JSX, return a simplified version
+  return "See the full answer on our FAQ page.";
+};
+
+// JSON-LD FAQPage Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": getPlainTextAnswer(faq.answer)
+    }
+  }))
+};
+
 export default function FAQs() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>FAQs - Addiction & Recovery Questions | Sober Helpline</title>
-        <meta name="description" content="Frequently asked questions about addiction, intervention, treatment options, enabling vs. helping, setting boundaries, and supporting a loved one in recovery." />
+        <title>Addiction & Recovery FAQs | Sober Helpline</title>
+        <meta name="description" content="Get answers to common questions about addiction, intervention, treatment options, enabling vs. helping, and supporting a loved one in recovery." />
+        <link rel="canonical" href="https://soberhelpline.com/faqs" />
+        <meta property="og:title" content="Addiction & Recovery FAQs | Sober Helpline" />
+        <meta property="og:description" content="Get answers to common questions about addiction, intervention, treatment options, enabling vs. helping, and supporting a loved one in recovery." />
+        <meta property="og:url" content="https://soberhelpline.com/faqs" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Addiction & Recovery FAQs | Sober Helpline" />
+        <meta name="twitter:description" content="Get answers to common questions about addiction, intervention, treatment options, and supporting a loved one in recovery." />
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
       </Helmet>
 
       {/* Header */}
