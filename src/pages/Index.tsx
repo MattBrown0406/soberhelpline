@@ -17,6 +17,7 @@ import MobileNav from "@/components/MobileNav";
 import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
+import SEOHead from "@/components/SEOHead";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -65,7 +66,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <SEOHead
+        title="Sober Helpline - Find Addiction Recovery Help"
+        description="Connect with ethical addiction treatment providers. Free family support resources, vetted rehabs, interventionists, and recovery coaches nationwide."
+      />
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4">
@@ -521,6 +527,7 @@ const Index = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
