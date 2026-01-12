@@ -3594,12 +3594,51 @@ Contact today for confidential help tailored to your needs.`
   }
 ];
 
+// JSON-LD Blog Schema
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Sober Helpline Recovery Blog",
+  "description": "Expert guidance on addiction recovery, treatment options, family support, and helping loved ones find healing.",
+  "url": "https://soberhelpline.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sober Helpline",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://soberhelpline.com/og-image.png"
+    }
+  },
+  "blogPost": blogPosts.slice(0, 10).map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": (post as any).metaDescription || post.excerpt,
+    "datePublished": post.date,
+    "author": {
+      "@type": "Organization",
+      "name": post.author
+    },
+    "url": `https://soberhelpline.com/blog/${post.id}`
+  }))
+};
+
 const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Recovery Blog - Sober Helpline</title>
-        <meta name="description" content="Expert guidance on addiction recovery, treatment options, and family support." />
+        <title>Addiction Recovery Blog | Sober Helpline</title>
+        <meta name="description" content="Expert guidance on addiction recovery, treatment options, family support, and helping loved ones find healing. Read our latest articles." />
+        <link rel="canonical" href="https://soberhelpline.com/blog" />
+        <meta property="og:title" content="Addiction Recovery Blog | Sober Helpline" />
+        <meta property="og:description" content="Expert guidance on addiction recovery, treatment options, family support, and helping loved ones find healing." />
+        <meta property="og:url" content="https://soberhelpline.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Addiction Recovery Blog | Sober Helpline" />
+        <meta name="twitter:description" content="Expert guidance on addiction recovery, treatment options, family support, and helping loved ones find healing." />
+        <script type="application/ld+json">
+          {JSON.stringify(blogSchema)}
+        </script>
       </Helmet>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

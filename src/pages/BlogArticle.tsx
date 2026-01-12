@@ -126,22 +126,61 @@ const BlogArticle = () => {
     });
   };
 
-  const fullImageUrl = window.location.origin + post.image;
+  const fullImageUrl = `https://soberhelpline.com${post.image}`;
+  const canonicalUrl = (post as any).slug 
+    ? `https://soberhelpline.com/blog/${(post as any).slug}`
+    : `https://soberhelpline.com/blog/${post.id}`;
+  
+  // JSON-LD Article Schema
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": (post as any).metaDescription || post.excerpt,
+    "image": fullImageUrl,
+    "author": {
+      "@type": "Organization",
+      "name": post.author,
+      "url": "https://soberhelpline.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sober Helpline",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://soberhelpline.com/og-image.png"
+      }
+    },
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    },
+    "articleSection": post.category
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{(post as any).seoTitle || post.title} - Sober Helpline</title>
+        <title>{(post as any).seoTitle || post.title}</title>
         <meta name="description" content={(post as any).metaDescription || post.excerpt} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={(post as any).seoTitle || post.title} />
         <meta property="og:description" content={(post as any).metaDescription || post.excerpt} />
         <meta property="og:image" content={fullImageUrl} />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:author" content={post.author} />
+        <meta property="article:section" content={post.category} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={(post as any).seoTitle || post.title} />
         <meta name="twitter:description" content={(post as any).metaDescription || post.excerpt} />
         <meta name="twitter:image" content={fullImageUrl} />
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
+        </script>
       </Helmet>
 
       <div className="container mx-auto px-4 py-8">
