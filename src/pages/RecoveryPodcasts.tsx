@@ -9,6 +9,7 @@ import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
 import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
 import primaryPurposePejLogo from "@/assets/primary-purpose-pej-logo.jpeg";
 import logo from "@/assets/logo.png";
+import SEOHead from "@/components/SEOHead";
 
 interface Episode {
   title: string;
@@ -105,6 +106,10 @@ const RecoveryPodcasts = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Recovery Podcasts | Sober Helpline"
+        description="Listen to inspiring recovery podcasts featuring stories of hope, addiction education, and family support. Free audio resources for your recovery journey."
+      />
       {/* Hero Section with Gradient */}
       <div className="relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900">
         {/* Animated Background Elements */}

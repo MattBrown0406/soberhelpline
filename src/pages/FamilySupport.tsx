@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2, Presentation, FileText, Headphones, ClipboardCheck, Scale, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
+import SEOHead from "@/components/SEOHead";
 
 export default function FamilySupport() {
   const [user, setUser] = useState<User | null>(null);
@@ -64,13 +64,10 @@ export default function FamilySupport() {
 
   return (
     <>
-      <Helmet>
-        <title>Free Family Support Resources | Sober Helpline</title>
-        <meta
-          name="description"
-          content="Resources and support for families of individuals struggling with addiction. Find guidance, education, and community support to help your loved one on their recovery journey."
-        />
-      </Helmet>
+      <SEOHead
+        title="Free Family Support Resources | Sober Helpline"
+        description="Resources and support for families of individuals struggling with addiction. Find guidance, education, and community support to help your loved one on their recovery journey."
+      />
 
       <div className="min-h-screen bg-background">
         {/* Header */}
