@@ -15,11 +15,12 @@ const MentalHealthDelaysRecovery = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Why Focusing Only on Mental Health Can Delay Recovery | Family First Intervention</title>
+        <title>Why Mental Health Focus Can Delay Recovery | Sober Helpline</title>
         <meta 
           name="description" 
           content="Understand why treatment sequence matters. Learn how addressing addiction first often protects mental health rather than harms it." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/mental-health-delays-recovery" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

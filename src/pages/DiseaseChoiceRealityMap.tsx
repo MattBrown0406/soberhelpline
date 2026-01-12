@@ -15,11 +15,12 @@ const DiseaseChoiceRealityMap = () => {
   return (
     <Layout>
       <Helmet>
-        <title>The Disease vs. Choice Reality Map | Family First Intervention</title>
+        <title>Disease vs Choice Reality Map | Sober Helpline</title>
         <meta 
           name="description" 
-          content="Understand where addiction limits choice and where responsibility still exists. A guide for families navigating the disease model of addiction." 
+          content="Understand where addiction limits choice and where responsibility still exists. A guide for families navigating the disease model." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/disease-choice-reality-map" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

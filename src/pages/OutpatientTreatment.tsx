@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -414,7 +415,13 @@ const OutpatientTreatment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Outpatient Treatment Programs | Sober Helpline</title>
+        <meta name="description" content="Search vetted outpatient addiction treatment programs by state. Find IOP, PHP, and flexible recovery options near you." />
+        <link rel="canonical" href="https://soberhelpline.com/outpatient-treatment" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -659,6 +666,7 @@ const OutpatientTreatment = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

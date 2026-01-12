@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Users, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -254,7 +255,13 @@ const Interventionists = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Find Professional Interventionists | Sober Helpline</title>
+        <meta name="description" content="Search certified interventionists by state. Find professional guidance to help your loved one accept treatment." />
+        <link rel="canonical" href="https://soberhelpline.com/interventionists" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
         <div className="flex md:hidden justify-between items-center mb-4">
@@ -391,6 +398,7 @@ const Interventionists = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

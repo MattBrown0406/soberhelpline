@@ -15,11 +15,12 @@ const MisunderstoodDiagnoses = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Commonly Misunderstood Diagnoses in Addiction | Family First Intervention</title>
+        <title>Misunderstood Diagnoses in Addiction | Sober Helpline</title>
         <meta 
           name="description" 
           content="Learn about commonly misunderstood psychiatric diagnoses in addiction. What families need to know and what to be careful not to assume." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/misunderstood-diagnoses" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

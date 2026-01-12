@@ -16,11 +16,12 @@ const WhyWillpowerFails = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Why Willpower Fails (and What Actually Works) | Family First Intervention</title>
+        <title>Why Willpower Fails in Addiction | Sober Helpline</title>
         <meta 
           name="description" 
-          content="Understand why willpower is unreliable in addiction, and what actually supports lasting change. A guide for families navigating recovery." 
+          content="Understand why willpower is unreliable in addiction, and what actually supports lasting change. A guide for families." 
         />
+        <link rel="canonical" href="https://soberhelpline.com/why-willpower-fails" />
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
