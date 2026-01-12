@@ -69,6 +69,55 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts = [
   {
+    id: 59,
+    title: "Early Intervention Isn't About Readiness—It's About Reducing Family Damage",
+    excerpt: "Families often believe early intervention depends on one thing: whether their loved one is ready. Until that moment arrives, they assume there is nothing meaningful to do except manage stress and hope for improvement.",
+    author: "Sober Helpline",
+    date: "2026-01-12",
+    category: "Family Support",
+    image: earlyInterventionFamilyFirstImg,
+    slug: "early-intervention-reducing-family-damage",
+    seoTitle: "Early Intervention Isn't About Readiness—It's About Reducing Family Damage | Sober Helpline",
+    metaDescription: "Early intervention is not about convincing someone to change. It is about reducing the damage addiction causes to the family system while change is still uncertain.",
+    content: `**Early Intervention Isn't About Readiness—It's About Reducing Family Damage**
+
+Families often believe early intervention depends on one thing: whether their loved one is ready. Until that moment arrives, they assume there is nothing meaningful to do except manage stress and hope for improvement.
+
+This belief quietly harms families.
+
+Early intervention is not about convincing someone to change. It is about reducing the damage addiction causes to the family system while change is still uncertain.
+
+**Sensing Something Is Wrong**
+
+Most families sense something is wrong long before they can name it. Emotional distance grows. Anxiety becomes constant. Trust feels fragile. Parents disagree. Siblings withdraw. Children feel the tension without understanding it.
+
+Because there is no clear crisis, families minimize their concerns. They tell themselves it's not serious enough yet. Meanwhile, stress accumulates and confusion deepens.
+
+**Education and Cohesion**
+
+Early intervention focuses on education and cohesion. When families understand addiction patterns, they stop arguing about whether there's a problem and start addressing how it affects everyone.
+
+**Family Mental Health Is Central**
+
+Family mental health is central to this process. Anxiety, depression, and burnout often affect the entire household. Supporting the family early prevents long-term damage and improves communication—regardless of whether the loved one seeks help.
+
+**The Family Membership**
+
+This is exactly why the Sober Helpline family membership exists. Behind the paywall, families gain access to educational videos, structured decision-making tools, guided exercises, and members-only discussion forums. These resources help families replace panic with clarity and isolation with connection.
+
+Membership is not about forcing outcomes. It is about strengthening families so they can respond intentionally instead of react emotionally.
+
+**Making Better Decisions**
+
+Families who feel supported make better decisions. They set clearer boundaries. They reduce enabling behaviors. They regain stability—even when answers are still unfolding.
+
+**Getting Support Now**
+
+If your family feels unsettled, divided, or worn down, early intervention can help now. Consider joining the Sober Helpline family membership to access deeper education and ongoing support. You don't need readiness to deserve help.
+
+To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+  },
+  {
     id: 58,
     title: "Why Early Intervention Works Best When the Family Changes First",
     excerpt: "Many families assume early intervention means pushing their loved one toward treatment as quickly as possible. When that doesn't happen, they conclude there's nothing meaningful they can do yet.",
