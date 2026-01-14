@@ -23,3 +23,9 @@ verify_jwt = true
 
 [functions.send-content-report]
 verify_jwt = true
+
+[functions.paypal-admin-sync]
+verify_jwt = true
+
+[functions.send-monthly-provider-analytics]
+verify_jwt = false
