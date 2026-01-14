@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Building2, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -458,11 +458,28 @@ const InpatientTreatment = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Find Inpatient Treatment Centers | Sober Helpline</title>
-        <meta name="description" content="Search vetted inpatient rehab and residential treatment centers by state. Find ethical addiction treatment providers with verified credentials." />
-        <link rel="canonical" href="https://soberhelpline.com/inpatient-treatment" />
-      </Helmet>
+      <SEOHead
+        title="Find Inpatient Treatment Centers | Sober Helpline"
+        description="Search vetted inpatient rehab and residential treatment centers by state. Find ethical addiction treatment providers with verified credentials."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "MedicalWebPage",
+          "name": "Inpatient Treatment Centers Directory",
+          "description": "Search vetted inpatient rehab and residential treatment centers by state. Find ethical addiction treatment providers with verified credentials.",
+          "url": "https://soberhelpline.com/inpatient-treatment",
+          "mainEntity": {
+            "@type": "ItemList",
+            "name": "Inpatient Treatment Centers",
+            "description": "Directory of vetted inpatient addiction treatment facilities"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Sober Helpline",
+            "url": "https://soberhelpline.com",
+            "telephone": "+1-541-241-5886"
+          }
+        }}
+      />
       <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
