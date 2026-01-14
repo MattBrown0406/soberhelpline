@@ -14,6 +14,17 @@ interface ContentReportRequest {
   postContent: string;
   concernDetails: string;
 }
+// HTML escape function to prevent HTML injection in emails
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
 
 serve(async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
@@ -92,21 +103,21 @@ serve(async (req: Request): Promise<Response> => {
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
               <h2 style="color: #1f2937; margin-top: 0;">Reported User</h2>
               <p style="color: #4b5563; background-color: #f3f4f6; padding: 10px; border-radius: 4px;">
-                <strong>Username:</strong> ${sanitizedUsername}
+                <strong>Username:</strong> ${escapeHtml(sanitizedUsername)}
               </p>
             </div>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
               <h2 style="color: #1f2937; margin-top: 0;">Reported Content</h2>
               <div style="color: #4b5563; background-color: #fef2f2; padding: 15px; border-radius: 4px; border-left: 4px solid #dc2626;">
-                ${sanitizedPostContent.replace(/\n/g, '<br>')}
+                ${escapeHtml(sanitizedPostContent).replace(/\n/g, '<br>')}
               </div>
             </div>
             
             <div style="background-color: white; padding: 20px; border-radius: 8px;">
               <h2 style="color: #1f2937; margin-top: 0;">Reason for Report</h2>
               <p style="color: #4b5563; background-color: #f3f4f6; padding: 15px; border-radius: 4px;">
-                ${sanitizedConcernDetails.replace(/\n/g, '<br>')}
+                ${escapeHtml(sanitizedConcernDetails).replace(/\n/g, '<br>')}
               </p>
             </div>
           </div>

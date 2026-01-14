@@ -15,6 +15,17 @@ interface NotificationRequest {
   email: string;
   phoneNumber: string;
 }
+// HTML escape function to prevent HTML injection in emails
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
 
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
@@ -78,10 +89,10 @@ const handler = async (req: Request): Promise<Response> => {
         
         <h2>Provider Details:</h2>
         <ul>
-          <li><strong>Provider Name:</strong> ${providerName}</li>
-          <li><strong>Category:</strong> ${category}</li>
-          <li><strong>Email:</strong> ${email}</li>
-          <li><strong>Phone Number:</strong> ${phoneNumber}</li>
+          <li><strong>Provider Name:</strong> ${escapeHtml(providerName)}</li>
+          <li><strong>Category:</strong> ${escapeHtml(category)}</li>
+          <li><strong>Email:</strong> ${escapeHtml(email)}</li>
+          <li><strong>Phone Number:</strong> ${escapeHtml(phoneNumber)}</li>
           <li><strong>Submitted By User ID:</strong> ${user.id}</li>
         </ul>
         
