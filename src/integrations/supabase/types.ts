@@ -1140,6 +1140,10 @@ export type Database = {
           username: string
         }[]
       }
+      has_active_provider_subscription: {
+        Args: { _provider_id: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
