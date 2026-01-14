@@ -298,10 +298,10 @@ Deno.serve(async (req) => {
           appliedDiscount = 'FREE6';
           console.log('Applied FREE6: 6 months free trial');
         }
-        // Check for HAPPYNEWYEAR code - 7-day free trial
-        else if (discountCode && discountCode.toUpperCase() === 'HAPPYNEWYEAR') {
-          appliedDiscount = 'HAPPYNEWYEAR';
-          console.log('Applied HAPPYNEWYEAR: 7-day free trial');
+        // Check for HELPLINE code - 7-day free trial
+        else if (discountCode && discountCode.toUpperCase() === 'HELPLINE') {
+          appliedDiscount = 'HELPLINE';
+          console.log('Applied HELPLINE: 7-day free trial');
         }
         // Check for free trial code (FREEMONTH) - works for both monthly and annual plans
         else if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
@@ -378,7 +378,7 @@ Deno.serve(async (req) => {
         let trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false };
         if (appliedDiscount === 'FREE6') {
           trialConfig = { enabled: true, months: 6 };
-        } else if (appliedDiscount === 'HAPPYNEWYEAR') {
+        } else if (appliedDiscount === 'HELPLINE') {
           trialConfig = { enabled: true, days: 7 };
         } else if (appliedDiscount === 'FREEMONTH') {
           trialConfig = { enabled: true, months: 1 };
