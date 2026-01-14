@@ -194,17 +194,40 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Parse optional test parameters
+    let testMode = false;
+    let testEmail: string | null = null;
+    let testProviderId: string | null = null;
+
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        testMode = body.testMode === true;
+        testEmail = body.testEmail || null;
+        testProviderId = body.providerId || null;
+        console.log(`Test mode: ${testMode}, testEmail: ${testEmail}, providerId: ${testProviderId}`);
+      } catch {
+        // No body or invalid JSON, continue with normal operation
+      }
+    }
+
     console.log("Starting monthly provider analytics email job...");
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Get all approved providers with their submitter info
-    const { data: providers, error: providersError } = await supabase
+    // Build query - filter by specific provider if in test mode
+    let query = supabase
       .from("provider_submissions")
       .select("id, provider_name, email, submitted_by, category, city, state")
       .eq("status", "approved");
+
+    if (testMode && testProviderId) {
+      query = query.eq("id", testProviderId);
+    }
+
+    const { data: providers, error: providersError } = await query;
 
     if (providersError) {
       console.error("Error fetching providers:", providersError);
@@ -278,18 +301,21 @@ const handler = async (req: Request): Promise<Response> => {
 
       const emailHtml = generateEmailHtml(providerName, listingAnalytics, monthYear);
 
+      // Use test email if provided, otherwise use provider's email
+      const recipientEmail = testMode && testEmail ? testEmail : primaryEmail;
+
       try {
         const emailResponse = await resend.emails.send({
           from: "Sober Helpline <noreply@soberhelpline.com>",
-          to: [primaryEmail],
+          to: [recipientEmail],
           subject: `Your Sober Helpline Analytics Report - ${monthYear}`,
           html: emailHtml,
         });
 
-        console.log(`Email sent to ${primaryEmail}:`, emailResponse);
+        console.log(`Email sent to ${recipientEmail}:`, emailResponse);
         emailsSent++;
       } catch (emailError) {
-        console.error(`Failed to send email to ${primaryEmail}:`, emailError);
+        console.error(`Failed to send email to ${recipientEmail}:`, emailError);
         emailsFailed++;
       }
     }
