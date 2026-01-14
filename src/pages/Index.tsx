@@ -206,6 +206,29 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Free Trial Promo Banner */}
+      <section className="bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 border-y border-logo-green/30">
+        <div className="container mx-auto px-4 py-4">
+          <Link to="/family-membership" className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 group">
+            <div className="flex items-center gap-3">
+              <div className="px-3 py-1 rounded-full bg-logo-green text-white text-xs font-bold uppercase tracking-wide animate-pulse">
+                Free Trial
+              </div>
+              <div className="text-center sm:text-left">
+                <p className="font-semibold text-foreground">
+                  Try Premium Free for 7 Days — Use Code: <span className="text-logo-green font-bold">HELPLINE</span>
+                </p>
+                <p className="text-sm text-muted-foreground">Access 60+ exercises, videos & guides at no cost</p>
+              </div>
+            </div>
+            <Button variant="default" size="sm" className="gap-2 bg-logo-green hover:bg-logo-green/90 group-hover:gap-3 transition-all">
+              Start Free Trial
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* Premium Membership Banner */}
       <section className="bg-gradient-to-r from-primary/5 via-logo-green/5 to-primary/5 border-y border-border/50">
         <div className="container mx-auto px-4 py-6">
