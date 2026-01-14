@@ -229,26 +229,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Premium Membership Banner */}
-      <section className="bg-gradient-to-r from-primary/5 via-logo-green/5 to-primary/5 border-y border-border/50">
-        <div className="container mx-auto px-4 py-6">
-          <Link to="/family-membership" className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 group">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-logo-green/10">
-                <Lock className="w-5 h-5 text-logo-green" />
-              </div>
-              <div className="text-center md:text-left">
-                <p className="font-semibold text-foreground">Premium Member Services</p>
-                <p className="text-sm text-muted-foreground">60+ exercises, videos & guides — $14.99/month</p>
-              </div>
-            </div>
-            <Button variant="default" className="gap-2 bg-logo-green hover:bg-logo-green/90 group-hover:gap-3 transition-all">
-              Unlock Access
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
 
       {/* Browse Categories */}
       <section className="container mx-auto px-4 py-16">
