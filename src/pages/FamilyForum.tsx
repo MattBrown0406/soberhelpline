@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Link, useNavigate } from "react-router-dom";
 import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -362,9 +362,11 @@ export default function FamilyForum() {
   if (!hasMembership) {
     return (
       <>
-        <Helmet>
-          <title>Family Discussion Forum | Sober Helpline</title>
-        </Helmet>
+        <SEOHead
+          title="Family Discussion Forum | Sober Helpline"
+          description="Connect with other families supporting loved ones through addiction. Share experiences, ask questions, and find community in our members-only forum."
+          noIndex={true}
+        />
         <div className="min-h-screen bg-background">
           <header className="border-b border-border/40 bg-background/95 backdrop-blur">
             <div className="container flex h-16 items-center justify-between">
@@ -408,10 +410,11 @@ export default function FamilyForum() {
 
   return (
     <>
-      <Helmet>
-        <title>Family Discussion Forum | Sober Helpline</title>
-        <meta name="description" content="Connect with other families supporting loved ones through addiction. Share experiences, ask questions, and find community." />
-      </Helmet>
+      <SEOHead
+        title="Family Discussion Forum | Sober Helpline"
+        description="Connect with other families supporting loved ones through addiction. Share experiences, ask questions, and find community in our members-only forum."
+        noIndex={true}
+      />
 
       <CodeOfConductDialog 
         open={showCodeOfConduct} 

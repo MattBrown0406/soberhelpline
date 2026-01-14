@@ -13,6 +13,7 @@ interface SEOHeadProps {
     section?: string;
   };
   noIndex?: boolean;
+  jsonLd?: Record<string, unknown>;
 }
 
 const BASE_URL = "https://soberhelpline.com";
@@ -24,6 +25,7 @@ export default function SEOHead({
   image = "/og-image.png",
   article,
   noIndex = false,
+  jsonLd,
 }: SEOHeadProps) {
   const location = useLocation();
   const canonicalUrl = `${BASE_URL}${location.pathname}`;
@@ -74,6 +76,13 @@ export default function SEOHead({
             <meta property="article:section" content={article.section} />
           )}
         </>
+      )}
+
+      {/* Custom JSON-LD Schema */}
+      {jsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
       )}
     </Helmet>
   );

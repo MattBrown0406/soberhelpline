@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import logo from "@/assets/logo.png";
+import SEOHead from "@/components/SEOHead";
 
 const signupSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -198,7 +199,13 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+    <>
+      <SEOHead
+        title="Login or Sign Up | Sober Helpline"
+        description="Create an account or log in to access family support resources, submit provider applications, and connect with our recovery community."
+        noIndex={true}
+      />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
           <img src={logo} alt="Sober Helpline" className="h-24 w-auto" />
@@ -378,6 +385,7 @@ const Auth = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

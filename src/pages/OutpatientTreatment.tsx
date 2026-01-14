@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -416,11 +416,18 @@ const OutpatientTreatment = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Find Outpatient Treatment Programs | Sober Helpline</title>
-        <meta name="description" content="Search vetted outpatient addiction treatment programs by state. Find IOP, PHP, and flexible recovery options near you." />
-        <link rel="canonical" href="https://soberhelpline.com/outpatient-treatment" />
-      </Helmet>
+      <SEOHead
+        title="Find Outpatient Treatment Programs | Sober Helpline"
+        description="Search vetted outpatient addiction treatment programs by state. Find IOP, PHP, and flexible recovery options near you."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "MedicalWebPage",
+          "name": "Outpatient Treatment Programs Directory",
+          "description": "Search vetted outpatient addiction treatment programs by state.",
+          "url": "https://soberhelpline.com/outpatient-treatment",
+          "publisher": { "@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com" }
+        }}
+      />
       <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}

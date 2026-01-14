@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, UserCheck, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -216,11 +216,11 @@ const SoberCoachesCompanions = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Find Sober Coaches & Companions | Sober Helpline</title>
-        <meta name="description" content="Search vetted sober coaches and recovery companions. Find personal recovery support professionals near you." />
-        <link rel="canonical" href="https://soberhelpline.com/sober-coaches-companions" />
-      </Helmet>
+      <SEOHead
+        title="Find Sober Coaches & Companions | Sober Helpline"
+        description="Search vetted sober coaches and recovery companions. Find personal recovery support professionals near you."
+        jsonLd={{ "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "Sober Coaches Directory", "url": "https://soberhelpline.com/sober-coaches-companions", "publisher": { "@type": "Organization", "name": "Sober Helpline" } }}
+      />
       <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}

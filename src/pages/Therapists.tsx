@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Brain, Phone, ExternalLink, MessageCircle, Video, Clock, Users, CheckCircle } from "lucide-react";
@@ -229,11 +229,11 @@ const Therapists = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Find Addiction Therapists | Sober Helpline</title>
-        <meta name="description" content="Find therapists specializing in addiction and family recovery. Browse vetted mental health professionals for lasting support." />
-        <link rel="canonical" href="https://soberhelpline.com/therapists" />
-      </Helmet>
+      <SEOHead
+        title="Find Addiction Therapists | Sober Helpline"
+        description="Find therapists specializing in addiction and family recovery. Browse vetted mental health professionals for lasting support."
+        jsonLd={{ "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "Addiction Therapists Directory", "url": "https://soberhelpline.com/therapists", "publisher": { "@type": "Organization", "name": "Sober Helpline" } }}
+      />
       <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
         {/* Mobile Header */}
