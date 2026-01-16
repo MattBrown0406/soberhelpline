@@ -91,7 +91,7 @@ export function FamilyMemberManagement() {
         .from('provider_subscriptions')
         .select('*')
         .is('provider_submission_id', null)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: true });
 
       if (subError) throw subError;
 
