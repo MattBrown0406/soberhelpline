@@ -157,47 +157,47 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-logo-green/5 via-background to-primary/5" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+        <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
         
-        <div className="container mx-auto px-4 py-12 md:py-20 relative">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green text-sm font-medium mb-6">
-              <Heart className="w-4 h-4" />
+        <div className="container mx-auto px-4 py-8 md:py-20 relative">
+          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
+            <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4 md:mb-6">
+              <Heart className="w-3 h-3 md:w-4 md:h-4" />
               Supporting Families Through Recovery
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight px-2">
               Find Hope. Find Help.
               <span className="block text-logo-green">Find Healing.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2">
               We connect families with ethical, proven treatment providers nationwide—offering compassionate guidance and unwavering support when you need it most.
             </p>
             
             {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <Link to="/family-forum">
-                <Button size="lg" className="gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 py-6 text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <MessageCircle className="w-5 h-5" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8 px-4">
+              <Link to="/family-forum" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
+                  <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
                   Join Family Forum
                 </Button>
               </Link>
-              <Link to="/family-education">
-                <Button size="lg" variant="outline" className="gap-3 px-8 py-6 text-lg border-2 border-logo-green/30 text-logo-green hover:bg-logo-green/10">
-                  <BookOpen className="w-5 h-5" />
+              <Link to="/family-education" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 md:gap-3 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg border-2 border-logo-green/30 text-logo-green hover:bg-logo-green/10">
+                  <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
                   Education Center
                 </Button>
               </Link>
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-logo-green" />
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <Shield className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
                 <span>Vetted Providers</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Heart className="w-4 h-4 text-logo-green" />
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <Heart className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
                 <span>Family-Focused</span>
               </div>
             </div>
@@ -208,22 +208,22 @@ const Index = () => {
 
       {/* Free Trial Promo Banner */}
       <section className="bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 border-y border-logo-green/30">
-        <div className="container mx-auto px-4 py-4">
-          <Link to="/family-membership" className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 group">
-            <div className="flex items-center gap-3">
-              <div className="px-3 py-1 rounded-full bg-logo-green text-white text-xs font-bold uppercase tracking-wide animate-pulse">
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <Link to="/family-membership" className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-4 md:gap-6 group">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+              <div className="px-2.5 py-1 rounded-full bg-logo-green text-white text-[10px] md:text-xs font-bold uppercase tracking-wide animate-pulse shrink-0">
                 Free Trial
               </div>
-              <div className="text-center sm:text-left">
-                <p className="font-semibold text-foreground">
-                  Try Premium Free for 7 Days — Use Code: <span className="text-logo-green font-bold">HELPLINE</span>
+              <div>
+                <p className="font-semibold text-foreground text-sm md:text-base">
+                  Try Premium Free for 7 Days — Code: <span className="text-logo-green font-bold">HELPLINE</span>
                 </p>
-                <p className="text-sm text-muted-foreground">Access 60+ exercises, videos & guides at no cost</p>
+                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Access 60+ exercises, videos & guides at no cost</p>
               </div>
             </div>
-            <Button variant="default" size="sm" className="gap-2 bg-logo-green hover:bg-logo-green/90 group-hover:gap-3 transition-all">
+            <Button variant="default" size="sm" className="gap-2 bg-logo-green hover:bg-logo-green/90 group-hover:gap-3 transition-all text-xs md:text-sm">
               Start Free Trial
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
             </Button>
           </Link>
         </div>
@@ -231,26 +231,26 @@ const Index = () => {
 
 
       {/* Browse Categories */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-foreground mb-3">Find the Right Support</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Find the Right Support</h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
             Browse our directory of vetted treatment providers and recovery professionals
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4">
           {categories.map((category) => {
             const Icon = category.icon;
             return (
               <Link key={category.name} to={category.path}>
                 <Card className="h-full hover:shadow-lg hover:shadow-logo-green/10 hover:border-logo-green/30 transition-all duration-300 group cursor-pointer">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-14 h-14 rounded-2xl bg-logo-green/10 flex items-center justify-center mb-4 group-hover:bg-logo-green/20 group-hover:scale-110 transition-all">
-                      <Icon className="w-7 h-7 text-logo-green" />
+                  <CardContent className="p-3 md:p-6 flex flex-col items-center text-center">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-logo-green/10 flex items-center justify-center mb-2 md:mb-4 group-hover:bg-logo-green/20 group-hover:scale-110 transition-all">
+                      <Icon className="w-5 h-5 md:w-7 md:h-7 text-logo-green" />
                     </div>
-                    <h3 className="font-semibold text-foreground mb-1">{category.name}</h3>
-                    <p className="text-xs text-muted-foreground">{category.description}</p>
+                    <h3 className="font-semibold text-foreground text-xs md:text-base mb-0.5 md:mb-1 leading-tight">{category.name}</h3>
+                    <p className="text-[10px] md:text-xs text-muted-foreground hidden sm:block">{category.description}</p>
                   </CardContent>
                 </Card>
               </Link>
@@ -261,38 +261,38 @@ const Index = () => {
 
       {/* Free Tools Section */}
       <section className="bg-muted/30 border-y border-border/50">
-        <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-sm font-medium mb-4">
-              <Sparkles className="w-4 h-4" />
+        <div className="container mx-auto px-4 py-10 md:py-16">
+          <div className="text-center mb-6 md:mb-10">
+            <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs md:text-sm font-medium mb-3 md:mb-4">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
               Free Resources
             </div>
-            <h2 className="text-3xl font-bold text-foreground mb-3">Try Our Free Tools</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Try Our Free Tools</h2>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
               Sample the interactive assessments available to our members
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
             <SUDAssessment />
             <FamilySelfAssessment user={user} />
             
             {/* Fear Inventory Exercise Link */}
             <Link to="/fear-inventory-exercise" className="block">
-              <Card className="overflow-hidden border-2 border-red-500/40 bg-gradient-to-br from-red-50 to-transparent dark:from-red-950/20 hover:border-red-500/60 hover:shadow-lg transition-all cursor-pointer group mt-8">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <Card className="overflow-hidden border-2 border-red-500/40 bg-gradient-to-br from-red-50 to-transparent dark:from-red-950/20 hover:border-red-500/60 hover:shadow-lg transition-all cursor-pointer group mt-4 md:mt-8">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex items-start md:items-center gap-4 md:gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-2xl bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <AlertTriangle className="w-6 h-6 md:w-8 md:h-8 text-red-600 dark:text-red-400" />
                       </div>
                     </div>
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">What Are We Afraid Will Happen?</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
+                    <div className="flex-grow min-w-0">
+                      <h3 className="text-base md:text-lg font-semibold text-foreground mb-0.5 md:mb-1 leading-tight">What Are We Afraid Will Happen?</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">
                         A Fear Inventory Exercise for Families
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-[11px] md:text-xs text-muted-foreground hidden sm:block">
                         Discover how fear holds you back from setting boundaries, talking openly, offering treatment, or considering intervention—and learn to act from love instead of fear.
                       </p>
                     </div>
@@ -307,19 +307,19 @@ const Index = () => {
             {/* Conversation Starters Guide */}
             <Link to="/conversation-starters" className="block">
               <Card className="overflow-hidden border-2 border-blue-500/40 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-950/20 hover:border-blue-500/60 hover:shadow-lg transition-all cursor-pointer group">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex items-start md:items-center gap-4 md:gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <MessageSquare className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <MessageSquare className="w-6 h-6 md:w-8 md:h-8 text-blue-600 dark:text-blue-400" />
                       </div>
                     </div>
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">Conversation Starters for Families</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
+                    <div className="flex-grow min-w-0">
+                      <h3 className="text-base md:text-lg font-semibold text-foreground mb-0.5 md:mb-1 leading-tight">Conversation Starters for Families</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">
                         Questions to reduce defensiveness and speak from a calmer place
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-[11px] md:text-xs text-muted-foreground hidden sm:block">
                         These conversation starters help families slow things down and speak from a steadier place—whether addressing impact, boundaries, or looking forward together.
                       </p>
                     </div>
@@ -334,19 +334,19 @@ const Index = () => {
             {/* AI Helping vs Enabling Decision Coach */}
             <Link to="/ai-enabling-decision-coach" className="block">
               <Card className="overflow-hidden border-2 border-amber-500/40 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 hover:border-amber-500/60 hover:shadow-lg transition-all cursor-pointer group">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex items-start md:items-center gap-4 md:gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Scale className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Scale className="w-6 h-6 md:w-8 md:h-8 text-amber-600 dark:text-amber-400" />
                       </div>
                     </div>
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">AI Helping vs. Enabling Decision Coach</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
+                    <div className="flex-grow min-w-0">
+                      <h3 className="text-base md:text-lg font-semibold text-foreground mb-0.5 md:mb-1 leading-tight">AI Helping vs. Enabling Decision Coach</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">
                         Transform any AI chatbot into a decision coach for families
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-[11px] md:text-xs text-muted-foreground hidden sm:block">
                         Use this specialized prompt to turn ChatGPT, Claude, or other AI tools into a coach that helps you distinguish between helping and enabling behaviors.
                       </p>
                     </div>
@@ -360,19 +360,23 @@ const Index = () => {
 
             {/* Guided Meditation */}
             <Card className="overflow-hidden border-2 border-amber-500/30 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20">
-              <CardContent className="p-6">
-                <div className="flex flex-col md:flex-row md:items-center gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center">
-                      <Headphones className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+              <CardContent className="p-4 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
+                  <div className="flex-shrink-0 flex items-center gap-4 sm:block">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-amber-500/20 flex items-center justify-center">
+                      <Headphones className="w-6 h-6 md:w-8 md:h-8 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div className="sm:hidden">
+                      <h3 className="text-base font-semibold text-foreground leading-tight">Guided Meditation for Families</h3>
+                      <p className="text-xs text-muted-foreground">Regaining Calm When Addiction Triggers Fear</p>
                     </div>
                   </div>
                   <div className="flex-grow">
-                    <h3 className="text-lg font-semibold text-foreground mb-1">Guided Meditation for Families</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <h3 className="text-base md:text-lg font-semibold text-foreground mb-0.5 md:mb-1 hidden sm:block">Guided Meditation for Families</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 hidden sm:block">
                       Regaining Calm When Addiction Triggers Fear and Urgency
                     </p>
-                    <audio controls className="w-full max-w-md" preload="metadata">
+                    <audio controls className="w-full" preload="metadata">
                       <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
                       Your browser does not support the audio element.
                     </audio>
@@ -385,10 +389,10 @@ const Index = () => {
       </section>
 
       {/* Featured Articles & Mission */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-4 md:gap-8 items-stretch">
           {/* Featured Articles Carousel */}
-          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px] rounded-2xl overflow-hidden shadow-xl">
+          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
             {featuredArticles.map((article, index) => (
               <Link
                 key={article.id}
@@ -407,23 +411,23 @@ const Index = () => {
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                    <span className="inline-block px-3 py-1 bg-logo-green text-white text-xs font-medium rounded-full mb-3">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
+                    <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-logo-green text-white text-[10px] md:text-xs font-medium rounded-full mb-2 md:mb-3">
                       {article.category}
                     </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 line-clamp-2">
+                    <h3 className="text-lg md:text-2xl font-bold text-white mb-1.5 md:mb-2 line-clamp-2 leading-tight">
                       {article.title}
                     </h3>
                     <p className="text-gray-200 text-sm line-clamp-2 mb-4 hidden md:block">
                       {article.excerpt}
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-gray-300">
+                    <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-gray-300">
                       <div className="flex items-center gap-1">
-                        <UserIcon className="w-3 h-3" />
+                        <UserIcon className="w-2.5 h-2.5 md:w-3 md:h-3" />
                         <span>{article.author}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
+                        <Calendar className="w-2.5 h-2.5 md:w-3 md:h-3" />
                         <span>{new Date(article.date).toLocaleDateString()}</span>
                       </div>
                     </div>
@@ -432,7 +436,7 @@ const Index = () => {
               </Link>
             ))}
             {/* Carousel indicators */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+            <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
               {featuredArticles.map((_, index) => (
                 <button
                   key={index}
@@ -440,8 +444,8 @@ const Index = () => {
                     e.preventDefault();
                     setCurrentArticleIndex(index);
                   }}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentArticleIndex ? 'bg-white w-6' : 'bg-white/50 w-2'
+                  className={`h-1.5 md:h-2 rounded-full transition-all ${
+                    index === currentArticleIndex ? 'bg-white w-4 md:w-6' : 'bg-white/50 w-1.5 md:w-2'
                   }`}
                   aria-label={`Go to article ${index + 1}`}
                 />
@@ -451,27 +455,27 @@ const Index = () => {
 
           {/* Mission Statement */}
           <Card className="bg-gradient-to-br from-foreground to-foreground/90 text-background border-0 shadow-xl">
-            <CardContent className="p-8 md:p-10 flex flex-col justify-center h-full">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 text-sm font-medium mb-6 w-fit">
-                <Heart className="w-4 h-4" />
+            <CardContent className="p-5 md:p-10 flex flex-col justify-center h-full">
+              <div className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs md:text-sm font-medium mb-4 md:mb-6 w-fit">
+                <Heart className="w-3 h-3 md:w-4 md:h-4" />
                 Our Promise
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Our Mission</h2>
-              <div className="space-y-4 text-gray-300 leading-relaxed">
+              <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">Our Mission</h2>
+              <div className="space-y-3 md:space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
                 <p>
                   At Sober Helpline, we are dedicated to providing families of addicted loved ones with ethical, proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria.
                 </p>
-                <p>
+                <p className="hidden sm:block">
                   Our provider directory is completely free to use—search for trusted treatment centers, therapists, interventionists, and recovery resources at no cost. For families seeking deeper support, our Family Forum and Education Center offer 60+ interactive tools, guides, and videos for a small monthly fee of $14.99.
                 </p>
                 <p className="font-semibold text-white">
                   We take no commissions or payments from treatment providers for referred clients. This is patient brokering—and we will never do it.
                 </p>
               </div>
-              <Link to="/blog" className="mt-8">
-                <Button variant="secondary" className="gap-2 bg-white text-foreground hover:bg-white/90">
+              <Link to="/blog" className="mt-5 md:mt-8">
+                <Button variant="secondary" className="gap-2 bg-white text-foreground hover:bg-white/90 text-sm md:text-base">
                   Visit Our Blog
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 </Button>
               </Link>
             </CardContent>
@@ -481,22 +485,22 @@ const Index = () => {
 
       {/* Partnership Section */}
       <section id="partnership" className="bg-gradient-to-br from-logo-green/5 to-primary/5 border-t border-border/50 scroll-mt-20">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-10 md:py-16">
           <Card className="max-w-4xl mx-auto border-2 border-logo-green/20 shadow-xl overflow-hidden">
             <CardContent className="p-0">
               <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/3 bg-gradient-to-br from-logo-green/10 to-transparent p-8 flex items-center justify-center">
-                  <img src={iocLogo} alt="Intervention On Call" className="h-24 w-auto" />
+                <div className="md:w-1/3 bg-gradient-to-br from-logo-green/10 to-transparent p-5 md:p-8 flex items-center justify-center">
+                  <img src={iocLogo} alt="Intervention On Call" className="h-16 md:h-24 w-auto" />
                 </div>
-                <div className="md:w-2/3 p-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Partnership with Intervention On Call</h2>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                <div className="md:w-2/3 p-5 md:p-8">
+                  <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4">Partnership with Intervention On Call</h2>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 leading-relaxed">
                     We've partnered with Intervention On Call to provide families with real-time access to help. They offer hourly coaching sessions for education on boundaries, strategies, and choosing the right treatment center—plus FREE family support Zoom calls 5 nights a week.
                   </p>
                   <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer">
-                    <Button className="gap-2 bg-logo-green hover:bg-logo-green/90">
+                    <Button className="gap-2 bg-logo-green hover:bg-logo-green/90 text-sm md:text-base">
                       Register for Free Calls
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </Button>
                   </a>
                 </div>
@@ -507,22 +511,22 @@ const Index = () => {
       </section>
 
       {/* Footer CTA */}
-      <section className="container mx-auto px-4 py-16 text-center">
+      <section className="container mx-auto px-4 py-10 md:py-16 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Ready to Take the Next Step?</h2>
-          <p className="text-muted-foreground mb-8">
+          <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">Ready to Take the Next Step?</h2>
+          <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
             Whether you're looking for treatment options, family support, or just need someone to talk to—we're here for you.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="tel:5412415886">
-              <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 px-8">
-                <Phone className="w-5 h-5" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
+            <a href="tel:5412415886" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-green hover:bg-logo-green/90 px-6 md:px-8 text-sm md:text-base">
+                <Phone className="w-4 h-4 md:w-5 md:h-5" />
                 Call Now: (541) 241-5886
               </Button>
             </a>
-            <Link to="/family-membership">
-              <Button size="lg" variant="outline" className="gap-2 px-8">
-                <Lock className="w-5 h-5" />
+            <Link to="/family-membership" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base">
+                <Lock className="w-4 h-4 md:w-5 md:h-5" />
                 Join Membership
               </Button>
             </Link>
