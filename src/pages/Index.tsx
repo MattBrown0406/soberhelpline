@@ -13,6 +13,7 @@ import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import bannerLogo from "@/assets/banner-logo.png";
 import iocLogo from "@/assets/ioc-logo.jpg";
+import raybanMetaWayfarer from "@/assets/rayban-meta-wayfarer.png";
 import MobileNav from "@/components/MobileNav";
 import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
@@ -229,6 +230,38 @@ const Index = () => {
         </div>
       </section>
 
+      {/* RayBan Meta Wayfarer Giveaway Banner */}
+      <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-y border-slate-700/50">
+        <div className="container mx-auto px-4 py-4 md:py-5">
+          <Link to="/family-membership" className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6 md:gap-8 group">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <img 
+                src={raybanMetaWayfarer} 
+                alt="Ray-Ban Meta Wayfarer Sunglasses" 
+                className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-lg group-hover:scale-110 transition-transform"
+              />
+              <div className="text-center sm:text-left">
+                <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                  <div className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-900 text-[10px] md:text-xs font-bold uppercase tracking-wide">
+                    Giveaway
+                  </div>
+                  <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-amber-400" />
+                </div>
+                <p className="font-bold text-white text-sm md:text-lg leading-tight">
+                  Win Ray-Ban Meta Wayfarer Smart Glasses!
+                </p>
+                <p className="text-xs md:text-sm text-slate-300 mt-0.5">
+                  All subscribers with active accounts on <span className="text-amber-400 font-semibold">April 30th</span> are eligible
+                </p>
+              </div>
+            </div>
+            <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-400 hover:bg-amber-500/20 hover:text-amber-300 group-hover:gap-3 transition-all text-xs md:text-sm">
+              Subscribe Now
+              <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
 
       {/* Browse Categories */}
       <section className="container mx-auto px-4 py-10 md:py-16">
