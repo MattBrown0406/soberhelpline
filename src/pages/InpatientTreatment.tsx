@@ -554,7 +554,8 @@ const InpatientTreatment = () => {
             )}
           </div>
           
-          {/* Desktop filter options */}
+          {/* Desktop filter options - hide when state selected */}
+          {!selectedState && providers.length === 0 && (
           <div className="hidden md:block max-w-6xl mx-auto mt-4 md:mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-4">
               <div className="space-y-2">
@@ -700,8 +701,10 @@ const InpatientTreatment = () => {
               Or click a state on the map above
             </p>
           </div>
+          )}
 
-          {/* Mobile filter options (simplified) */}
+          {/* Mobile filter options (simplified) - hide when state selected */}
+          {!selectedState && providers.length === 0 && (
           <div className="md:hidden mt-4 space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
@@ -824,6 +827,7 @@ const InpatientTreatment = () => {
               Search Providers
             </Button>
           </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
