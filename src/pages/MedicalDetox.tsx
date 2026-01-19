@@ -13,6 +13,7 @@ import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
+import MobileStateSelector from "@/components/MobileStateSelector";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
@@ -354,7 +355,20 @@ const MedicalDetox = () => {
           <h2 className="text-lg md:text-2xl font-semibold text-center mb-3 md:mb-4">
             {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x">
+          
+          {/* Mobile: State dropdown and zip search */}
+          <div className="md:hidden">
+            <MobileStateSelector
+              selectedState={selectedState}
+              onStateSelect={handleStateClick}
+              zipCode={zipCodeSearch}
+              onZipCodeChange={setZipCodeSearch}
+              onZipCodeSearch={handleZipCodeSearch}
+            />
+          </div>
+          
+          {/* Desktop: Interactive map */}
+          <div className="hidden md:block">
             {showStateMap && selectedState ? (
               <StateMap
                 stateName={selectedState}
