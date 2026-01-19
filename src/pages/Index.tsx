@@ -248,10 +248,10 @@ const Index = () => {
                   <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-amber-400" />
                 </div>
                 <p className="font-bold text-white text-sm md:text-lg leading-tight">
-                  Win Ray-Ban Meta Wayfarer Smart Glasses!
+                  Win a Pair of Ray-Ban Meta Wayfarer Smart Glasses!
                 </p>
                 <p className="text-xs md:text-sm text-slate-300 mt-0.5">
-                  All subscribers with active accounts on <span className="text-amber-400 font-semibold">April 30th</span> are eligible
+                  One pair up for grabs — all active subscribers on <span className="text-amber-400 font-semibold">April 30th</span> entered to win
                 </p>
               </div>
             </div>
