@@ -531,7 +531,7 @@ const InpatientTreatment = () => {
           <h2 className="text-lg md:text-2xl font-semibold text-center mb-3 md:mb-4">
             {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x">
             {showStateMap && selectedState ? (
               <StateMap
                 stateName={selectedState}
@@ -544,7 +544,7 @@ const InpatientTreatment = () => {
           </div>
           
           <div className="max-w-6xl mx-auto mt-4 md:mt-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-3 md:gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <div className="flex gap-2">

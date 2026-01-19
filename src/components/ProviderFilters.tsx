@@ -75,9 +75,9 @@ const ProviderFilters = ({
   showTherapeuticModality = false,
 }: ProviderFiltersProps) => {
   return (
-    <Card className="p-6 mb-8">
-      <h3 className="text-lg font-semibold mb-4">Filter Providers</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Card className="p-4 sm:p-6 mb-6 md:mb-8">
+      <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Filter Providers</h3>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-4">
         {/* Insurance Provider */}
         {showInsurance && (
           <div className="space-y-2">
@@ -165,8 +165,8 @@ const ProviderFilters = ({
       {/* Gender Specific Care */}
       {showGenderSpecific && (
         <div className="mt-4 space-y-3">
-          <Label>Gender Specific Care Needed</Label>
-          <div className="flex gap-6">
+          <Label className="text-sm sm:text-base">Gender Specific Care Needed</Label>
+          <div className="flex flex-wrap gap-4 sm:gap-6">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="men"
@@ -210,7 +210,7 @@ const ProviderFilters = ({
             onFiltersChange({ ...filters, lgbtSupportive: checked as boolean })
           }
         />
-        <Label htmlFor="lgbt" className="font-normal cursor-pointer">
+        <Label htmlFor="lgbt" className="font-normal cursor-pointer text-sm sm:text-base">
           LGBT Supportive Care Needed
         </Label>
       </div>

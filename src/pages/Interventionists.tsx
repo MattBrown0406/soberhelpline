@@ -315,19 +315,21 @@ const Interventionists = () => {
           </p>
         </div>
 
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-center mb-4">
+        <div className="mb-4 md:mb-6">
+          <h2 className="text-lg md:text-2xl font-semibold text-center mb-3 md:mb-4">
             {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          {showStateMap && selectedState ? (
-            <StateMap
-              stateName={selectedState}
-              providers={providers}
-              onBackToUSMap={handleBackToUSMap}
-            />
-          ) : (
-            <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Interventionists" />
-          )}
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x">
+            {showStateMap && selectedState ? (
+              <StateMap
+                stateName={selectedState}
+                providers={providers}
+                onBackToUSMap={handleBackToUSMap}
+              />
+            ) : (
+              <USMap onStateClick={handleStateClick} selectedState={selectedState} category="Interventionists" />
+            )}
+          </div>
           
           <div className="max-w-4xl mx-auto mt-6">
             <div className="flex flex-col items-center gap-4">

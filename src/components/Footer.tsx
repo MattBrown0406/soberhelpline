@@ -2,9 +2,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-muted/50 border-t border-border py-6 mt-auto">
+    <footer className="bg-muted/50 border-t border-border py-4 sm:py-6 mt-auto">
       <div className="container mx-auto px-4 text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs sm:text-sm text-muted-foreground">
           © {currentYear} Sober Helpline. All rights reserved.
         </p>
       </div>
