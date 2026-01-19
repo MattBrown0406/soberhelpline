@@ -377,81 +377,83 @@ const MedicalDetox = () => {
             )}
           </div>
           
-          <div className="max-w-2xl mx-auto mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="zipSearch">Search by Zip Code</Label>
-                <Input
-                  id="zipSearch"
-                  type="text"
-                  placeholder="Enter zip code"
-                  value={zipCodeSearch}
-                  onChange={(e) => setZipCodeSearch(e.target.value)}
-                  maxLength={10}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleZipCodeSearch();
-                    }
-                  }}
-                />
+          {!selectedState && providers.length === 0 && (
+            <div className="max-w-2xl mx-auto mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="zipSearch">Search by Zip Code</Label>
+                  <Input
+                    id="zipSearch"
+                    type="text"
+                    placeholder="Enter zip code"
+                    value={zipCodeSearch}
+                    onChange={(e) => setZipCodeSearch(e.target.value)}
+                    maxLength={10}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        handleZipCodeSearch();
+                      }
+                    }}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="insuranceSearch">Search by Insurance</Label>
+                  <Select
+                    value={insuranceSearch}
+                    onValueChange={setInsuranceSearch}
+                  >
+                    <SelectTrigger id="insuranceSearch" className="bg-background">
+                      <SelectValue placeholder="Select insurance" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover z-50 max-h-60">
+                      {insuranceProviders.map((provider) => (
+                        <SelectItem key={provider} value={provider}>
+                          {provider}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {insuranceSearch === "Other" && (
+                    <Input
+                      type="text"
+                      placeholder="Enter insurance provider name"
+                      value={customInsurance}
+                      onChange={(e) => setCustomInsurance(e.target.value)}
+                      className="mt-2"
+                    />
+                  )}
+                  {insuranceSearch === "Self Pay" && (
+                    <div className="mt-2">
+                      <Label htmlFor="budget" className="text-sm">Maximum Monthly Budget</Label>
+                      <Input
+                        id="budget"
+                        type="text"
+                        placeholder="Enter amount"
+                        value={maxBudget}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/[^0-9]/g, '');
+                          setMaxBudget(value);
+                        }}
+                        className="mt-1"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">$ amount per month</p>
+                    </div>
+                  )}
+                </div>
               </div>
               
-              <div className="space-y-2">
-                <Label htmlFor="insuranceSearch">Search by Insurance</Label>
-                <Select
-                  value={insuranceSearch}
-                  onValueChange={setInsuranceSearch}
-                >
-                  <SelectTrigger id="insuranceSearch" className="bg-background">
-                    <SelectValue placeholder="Select insurance" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 max-h-60">
-                    {insuranceProviders.map((provider) => (
-                      <SelectItem key={provider} value={provider}>
-                        {provider}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {insuranceSearch === "Other" && (
-                  <Input
-                    type="text"
-                    placeholder="Enter insurance provider name"
-                    value={customInsurance}
-                    onChange={(e) => setCustomInsurance(e.target.value)}
-                    className="mt-2"
-                  />
-                )}
-                {insuranceSearch === "Self Pay" && (
-                  <div className="mt-2">
-                    <Label htmlFor="budget" className="text-sm">Maximum Monthly Budget</Label>
-                    <Input
-                      id="budget"
-                      type="text"
-                      placeholder="Enter amount"
-                      value={maxBudget}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/[^0-9]/g, '');
-                        setMaxBudget(value);
-                      }}
-                      className="mt-1"
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">$ amount per month</p>
-                  </div>
-                )}
+              <div className="flex justify-center mt-4">
+                <Button onClick={handleZipCodeSearch} size="lg">
+                  Search Providers
+                </Button>
               </div>
+              
+              <p className="text-sm text-muted-foreground text-center mt-2">
+                Or click a state on the map above
+              </p>
             </div>
-            
-            <div className="flex justify-center mt-4">
-              <Button onClick={handleZipCodeSearch} size="lg">
-                Search Providers
-              </Button>
-            </div>
-            
-            <p className="text-sm text-muted-foreground text-center mt-2">
-              Or click a state on the map above
-            </p>
-          </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
