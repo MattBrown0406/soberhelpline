@@ -247,7 +247,7 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
   };
 
   return (
-    <div className="w-full max-w-[672px] mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-5 relative">
+    <div className="w-full max-w-[672px] mx-auto bg-card rounded-lg border-2 border-primary/20 shadow-lg p-3 sm:p-5 relative min-w-[320px]">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
