@@ -50,6 +50,21 @@ const therapeuticModalities = [
   "Mindfulness Based Therapy",
 ];
 
+const mentalHealthDiagnoses = [
+  "All",
+  "Depression",
+  "Anxiety",
+  "Bipolar Disorder",
+  "PTSD",
+  "Trauma",
+  "ADHD",
+  "OCD",
+  "Personality Disorders",
+  "Eating Disorders",
+  "Schizophrenia",
+  "Dual Diagnosis",
+];
+
 interface ProviderFiltersProps {
   filters: {
     insurance: string;
@@ -58,12 +73,14 @@ interface ProviderFiltersProps {
     genderSpecific: string[];
     lgbtSupportive: boolean;
     therapeuticModality?: string;
+    mentalHealthDiagnosis?: string;
   };
   onFiltersChange: (filters: any) => void;
   showInsurance?: boolean;
   showGenderSpecific?: boolean;
   showBudget?: boolean;
   showTherapeuticModality?: boolean;
+  showMentalHealthDiagnosis?: boolean;
 }
 
 const ProviderFilters = ({ 
@@ -73,6 +90,7 @@ const ProviderFilters = ({
   showGenderSpecific = true,
   showBudget = true,
   showTherapeuticModality = false,
+  showMentalHealthDiagnosis = true,
 }: ProviderFiltersProps) => {
   return (
     <Card className="p-4 sm:p-6 mb-6 md:mb-8">
@@ -154,6 +172,30 @@ const ProviderFilters = ({
                 {therapeuticModalities.map((modality) => (
                   <SelectItem key={modality} value={modality}>
                     {modality}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
+        {/* Mental Health Diagnosis */}
+        {showMentalHealthDiagnosis && (
+          <div className="space-y-2">
+            <Label htmlFor="diagnosis">Mental Health Diagnosis</Label>
+            <Select
+              value={filters.mentalHealthDiagnosis || "All"}
+              onValueChange={(value) =>
+                onFiltersChange({ ...filters, mentalHealthDiagnosis: value })
+              }
+            >
+              <SelectTrigger id="diagnosis" className="bg-background">
+                <SelectValue placeholder="Select diagnosis" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover z-50 max-h-60">
+                {mentalHealthDiagnoses.map((diagnosis) => (
+                  <SelectItem key={diagnosis} value={diagnosis}>
+                    {diagnosis}
                   </SelectItem>
                 ))}
               </SelectContent>

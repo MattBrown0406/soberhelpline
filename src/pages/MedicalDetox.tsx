@@ -361,9 +361,6 @@ const MedicalDetox = () => {
             <MobileStateSelector
               selectedState={selectedState}
               onStateSelect={handleStateClick}
-              zipCode={zipCodeSearch}
-              onZipCodeChange={setZipCodeSearch}
-              onZipCodeSearch={handleZipCodeSearch}
             />
           </div>
           
