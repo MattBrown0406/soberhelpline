@@ -307,6 +307,7 @@ const SoberLiving = () => {
             )}
           </div>
           
+          {!selectedState && providers.length === 0 && (
           <div className="max-w-3xl mx-auto mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -384,6 +385,7 @@ const SoberLiving = () => {
               Or click a state on the map above
             </p>
           </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (

@@ -308,6 +308,7 @@ const Therapists = () => {
             )}
           </div>
           
+          {!selectedState && providers.length === 0 && (
           <div className="max-w-2xl mx-auto mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -356,9 +357,11 @@ const Therapists = () => {
             <p className="text-sm text-muted-foreground text-center mt-2">
               Or click a state on the map above
             </p>
+          </div>
+          )}
 
             {/* BetterHelp Promotion */}
-            <Card className="mt-6 overflow-hidden border-0 shadow-xl">
+            <Card className="mt-6 overflow-hidden border-0 shadow-xl max-w-2xl mx-auto">
               <div className="bg-[#3F5F4F] p-6 md:p-8">
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Logo and headline */}
@@ -417,7 +420,6 @@ const Therapists = () => {
                 </div>
               </div>
             </Card>
-          </div>
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
