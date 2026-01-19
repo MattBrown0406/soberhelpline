@@ -251,7 +251,7 @@ const Index = () => {
                   Win a Pair of Ray-Ban Meta Wayfarer Smart Glasses!
                 </p>
                 <p className="text-xs md:text-sm text-slate-300 mt-0.5">
-                  One pair up for grabs — all active subscribers on <span className="text-amber-400 font-semibold">April 30th</span> entered to win
+                  One pair up for grabs — all active subscribers on <span className="text-amber-400 font-semibold">March 1st</span> entered to win
                 </p>
               </div>
             </div>
