@@ -342,6 +342,7 @@ const Interventionists = () => {
             )}
           </div>
           
+          {!selectedState && providers.length === 0 && (
           <div className="max-w-4xl mx-auto mt-6">
             <div className="flex flex-col items-center gap-4">
               <div className="w-full max-w-md space-y-2">
@@ -372,6 +373,7 @@ const Interventionists = () => {
               Or click a state on the map above
             </p>
           </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (

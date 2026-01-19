@@ -266,6 +266,7 @@ const Psychiatrists = () => {
             )}
           </div>
           
+          {!selectedState && providers.length === 0 && (
           <div className="max-w-md mx-auto mt-6">
             <div className="space-y-2">
               <Label htmlFor="zipSearch">Search by Zip Code</Label>
@@ -294,6 +295,7 @@ const Psychiatrists = () => {
               Or click a state on the map above
             </p>
           </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (

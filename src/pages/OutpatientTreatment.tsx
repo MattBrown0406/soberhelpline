@@ -502,6 +502,7 @@ const OutpatientTreatment = () => {
             )}
           </div>
           
+          {!selectedState && providers.length === 0 && (
           <div className="max-w-6xl mx-auto mt-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               <div className="space-y-2">
@@ -645,6 +646,7 @@ const OutpatientTreatment = () => {
               Or click a state on the map above
             </p>
           </div>
+          )}
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
