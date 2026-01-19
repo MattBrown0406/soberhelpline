@@ -13,6 +13,7 @@ import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
+import MobileStateSelector from "@/components/MobileStateSelector";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
@@ -531,7 +532,20 @@ const InpatientTreatment = () => {
           <h2 className="text-lg md:text-2xl font-semibold text-center mb-3 md:mb-4">
             {showStateMap && selectedState ? `Providers in ${selectedState}` : "Select a State to View Providers"}
           </h2>
-          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 touch-pan-x">
+          
+          {/* Mobile: State dropdown and zip search */}
+          <div className="md:hidden">
+            <MobileStateSelector
+              selectedState={selectedState}
+              onStateSelect={handleStateClick}
+              zipCode={zipCodeSearch}
+              onZipCodeChange={setZipCodeSearch}
+              onZipCodeSearch={handleZipCodeSearch}
+            />
+          </div>
+          
+          {/* Desktop: Interactive map */}
+          <div className="hidden md:block">
             {showStateMap && selectedState ? (
               <StateMap
                 stateName={selectedState}
@@ -543,8 +557,9 @@ const InpatientTreatment = () => {
             )}
           </div>
           
-          <div className="max-w-6xl mx-auto mt-4 md:mt-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-3 md:gap-4">
+          {/* Desktop filter options */}
+          <div className="hidden md:block max-w-6xl mx-auto mt-4 md:mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <div className="flex gap-2">
@@ -687,6 +702,130 @@ const InpatientTreatment = () => {
             <p className="text-sm text-muted-foreground text-center mt-2">
               Or click a state on the map above
             </p>
+          </div>
+
+          {/* Mobile filter options (simplified) */}
+          <div className="md:hidden mt-4 space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="insuranceSearchMobile" className="text-sm">Insurance</Label>
+                <Select
+                  value={insuranceSearch}
+                  onValueChange={setInsuranceSearch}
+                >
+                  <SelectTrigger id="insuranceSearchMobile" className="bg-background">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50 max-h-60">
+                    {insuranceProviders.map((provider) => (
+                      <SelectItem key={provider} value={provider}>
+                        {provider}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="genderCareMobile" className="text-sm">Gender Care</Label>
+                <Select
+                  value={genderSpecificCare}
+                  onValueChange={setGenderSpecificCare}
+                >
+                  <SelectTrigger id="genderCareMobile" className="bg-background">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="No">No</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {genderSpecificCare === "Yes" && (
+              <Select
+                value={genderType}
+                onValueChange={setGenderType}
+              >
+                <SelectTrigger className="bg-background">
+                  <SelectValue placeholder="Select gender" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover z-50">
+                  <SelectItem value="Men">Men</SelectItem>
+                  <SelectItem value="Women">Women</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+
+            {insuranceSearch === "Other" && (
+              <Input
+                type="text"
+                placeholder="Enter insurance provider name"
+                value={customInsurance}
+                onChange={(e) => setCustomInsurance(e.target.value)}
+              />
+            )}
+
+            {insuranceSearch === "Self Pay" && (
+              <div className="space-y-1">
+                <Label htmlFor="budgetMobile" className="text-sm">Max Monthly Budget</Label>
+                <Input
+                  id="budgetMobile"
+                  type="text"
+                  placeholder="$ amount"
+                  value={maxBudget}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    setMaxBudget(value);
+                  }}
+                />
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="lengthOfStayMobile" className="text-sm">Length of Stay</Label>
+                <Select
+                  value={lengthOfStay}
+                  onValueChange={setLengthOfStay}
+                >
+                  <SelectTrigger id="lengthOfStayMobile" className="bg-background">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="All">All</SelectItem>
+                    <SelectItem value="30 days">30 days</SelectItem>
+                    <SelectItem value="60 days">60 days</SelectItem>
+                    <SelectItem value="90 days">90 days</SelectItem>
+                    <SelectItem value="longer than 90 days">90+ days</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="modalityMobile" className="text-sm">Modality</Label>
+                <Select
+                  value={selectedModality}
+                  onValueChange={setSelectedModality}
+                >
+                  <SelectTrigger id="modalityMobile" className="bg-background">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50 max-h-60">
+                    {therapeuticModalities.map((modality) => (
+                      <SelectItem key={modality} value={modality}>
+                        {modality}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <Button onClick={handleZipCodeSearch} className="w-full">
+              Search Providers
+            </Button>
           </div>
         </div>
 
