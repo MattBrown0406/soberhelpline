@@ -4,6 +4,7 @@ import { ArrowLeft, Phone, Printer, AlertTriangle, Heart, Scale, Activity, Shiel
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import EatingDisorderScreening from '@/components/EatingDisorderScreening';
 
 const EatingDisordersGuide = () => {
   useGuideTracking("Understanding Eating Disorders", "/eating-disorders-guide");
@@ -55,6 +56,9 @@ const EatingDisordersGuide = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Understanding Eating Disorders</h1>
             <p className="text-xl text-muted-foreground italic">A Family Guide to Recognition, Risk Factors, and Treatment</p>
           </div>
+
+          {/* Screening Tool */}
+          <EatingDisorderScreening />
 
           {/* Purpose Section */}
           <section className="mb-8">
