@@ -6,9 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
+import { moderateContent } from "@/lib/contentModeration";
 import { toast } from "sonner";
-import { Loader2, Plus, MessageSquare } from "lucide-react";
+import { Loader2, Plus, MessageSquare, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface ForumTopic {
@@ -39,6 +41,7 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
   const [newTopicDescription, setNewTopicDescription] = useState("");
   const [newTopicPostTitle, setNewTopicPostTitle] = useState("");
   const [newTopicPostContent, setNewTopicPostContent] = useState("");
+  const [moderationError, setModerationError] = useState<string | null>(null);
 
   const resetForm = () => {
     setPostType("existing");
@@ -49,6 +52,7 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
     setNewTopicDescription("");
     setNewTopicPostTitle("");
     setNewTopicPostContent("");
+    setModerationError(null);
   };
 
   const handleSubmitExistingTopic = async () => {
@@ -58,7 +62,18 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
     }
 
     setIsSubmitting(true);
+    setModerationError(null);
+    
     try {
+      // Check content moderation
+      const moderation = await moderateContent(postContent.trim(), postTitle.trim());
+      
+      if (!moderation.allowed) {
+        setModerationError(moderation.reason || "Please revise your message to be more respectful and try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase
         .from('forum_posts')
         .insert({
@@ -89,7 +104,18 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
     }
 
     setIsSubmitting(true);
+    setModerationError(null);
+    
     try {
+      // Check content moderation
+      const moderation = await moderateContent(newTopicPostContent.trim(), newTopicPostTitle.trim());
+      
+      if (!moderation.allowed) {
+        setModerationError(moderation.reason || "Please revise your message to be more respectful and try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase
         .from('pending_topic_requests')
         .insert({
@@ -169,6 +195,13 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
           {/* Existing Topic Form */}
           {postType === "existing" && (
             <div className="space-y-4 animate-in fade-in-50 duration-200">
+              {moderationError && (
+                <Alert variant="destructive">
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertDescription>{moderationError}</AlertDescription>
+                </Alert>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="topic">Select Topic</Label>
                 <Select value={selectedTopicId} onValueChange={setSelectedTopicId}>
@@ -191,7 +224,10 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
                   id="postTitle"
                   placeholder="Enter a title for your post..."
                   value={postTitle}
-                  onChange={(e) => setPostTitle(e.target.value)}
+                  onChange={(e) => {
+                    setPostTitle(e.target.value);
+                    setModerationError(null);
+                  }}
                   maxLength={200}
                 />
               </div>
@@ -202,7 +238,10 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
                   id="postContent"
                   placeholder="Share your thoughts, questions, or experiences..."
                   value={postContent}
-                  onChange={(e) => setPostContent(e.target.value)}
+                  onChange={(e) => {
+                    setPostContent(e.target.value);
+                    setModerationError(null);
+                  }}
                   className="min-h-[150px]"
                   maxLength={5000}
                 />
@@ -213,6 +252,13 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
           {/* New Topic Request Form */}
           {postType === "new" && (
             <div className="space-y-4 animate-in fade-in-50 duration-200">
+              {moderationError && (
+                <Alert variant="destructive">
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertDescription>{moderationError}</AlertDescription>
+                </Alert>
+              )}
+              
               <div className="p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
                 <p className="text-sm text-amber-800 dark:text-amber-200">
                   New topic requests are reviewed by moderators before being created. You'll be notified once your request is approved.
@@ -252,7 +298,10 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
                       id="newTopicPostTitle"
                       placeholder="Enter a title for your post..."
                       value={newTopicPostTitle}
-                      onChange={(e) => setNewTopicPostTitle(e.target.value)}
+                      onChange={(e) => {
+                        setNewTopicPostTitle(e.target.value);
+                        setModerationError(null);
+                      }}
                       maxLength={200}
                     />
                   </div>
@@ -263,7 +312,10 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
                       id="newTopicPostContent"
                       placeholder="Share your thoughts to start the discussion..."
                       value={newTopicPostContent}
-                      onChange={(e) => setNewTopicPostContent(e.target.value)}
+                      onChange={(e) => {
+                        setNewTopicPostContent(e.target.value);
+                        setModerationError(null);
+                      }}
                       className="min-h-[150px]"
                       maxLength={5000}
                     />
