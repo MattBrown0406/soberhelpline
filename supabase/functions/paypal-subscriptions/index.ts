@@ -286,14 +286,21 @@ Deno.serve(async (req) => {
         let appliedDiscount = null;
         let bypassPayment = false;
 
-        // Check for FREELIST code - bypasses payment entirely
+        // Check for FREELIST code - bypasses payment entirely (for providers)
         if (discountCode && discountCode.toUpperCase() === 'FREELIST') {
           bypassPayment = true;
           appliedDiscount = 'FREELIST';
           finalAmount = 0;
           console.log('Applied FREELIST: Bypassing payment, free listing');
         }
-        // Check for FREE6 code - 6 months free trial
+        // Check for FAMILY6 code - 6 months free for family members (bypasses payment)
+        else if (discountCode && discountCode.toUpperCase() === 'FAMILY6') {
+          bypassPayment = true;
+          appliedDiscount = 'FAMILY6';
+          finalAmount = 0;
+          console.log('Applied FAMILY6: Bypassing payment, 6 months free family membership');
+        }
+        // Check for FREE6 code - 6 months free trial (for providers)
         else if (discountCode && discountCode.toUpperCase() === 'FREE6') {
           appliedDiscount = 'FREE6';
           console.log('Applied FREE6: 6 months free trial');
@@ -329,19 +336,28 @@ Deno.serve(async (req) => {
           }
         }
 
-        // If FREELIST code, bypass PayPal entirely
+        // If bypass code (FREELIST or FAMILY6), bypass PayPal entirely
         if (bypassPayment) {
+          // Calculate next billing date for FAMILY6 (6 months from now)
+          const startDate = new Date();
+          let nextBillingDate = null;
+          if (appliedDiscount === 'FAMILY6') {
+            nextBillingDate = new Date(startDate);
+            nextBillingDate.setMonth(nextBillingDate.getMonth() + 6);
+          }
+
           // Create free subscription record directly
           const { error: dbError } = await supabaseClient
             .from('provider_subscriptions')
             .insert({
               user_id: userId,
               provider_submission_id: providerSubmissionId || null,
-              paypal_subscription_id: `FREE-${Date.now()}`,
+              paypal_subscription_id: `${appliedDiscount}-${Date.now()}`,
               plan_type: planType,
               status: 'active',
               amount: 0,
-              start_date: new Date().toISOString(),
+              start_date: startDate.toISOString(),
+              next_billing_date: nextBillingDate ? nextBillingDate.toISOString() : null,
             });
 
           if (dbError) {
@@ -349,8 +365,8 @@ Deno.serve(async (req) => {
             throw new Error('Failed to create free subscription');
           }
 
-          // Auto-approve the provider submission
-          if (providerSubmissionId) {
+          // Auto-approve the provider submission (only for FREELIST)
+          if (providerSubmissionId && appliedDiscount === 'FREELIST') {
             const { error: updateError } = await supabaseClient
               .from('provider_submissions')
               .update({ status: 'approved' })
@@ -363,12 +379,17 @@ Deno.serve(async (req) => {
             }
           }
 
+          const message = appliedDiscount === 'FAMILY6' 
+            ? '6-month free family membership activated' 
+            : 'Free listing activated';
+
           return new Response(
             JSON.stringify({ 
               success: true,
               bypassPayment: true,
               appliedDiscount,
-              message: 'Free listing activated'
+              message,
+              nextBillingDate: nextBillingDate ? nextBillingDate.toISOString() : null
             }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
           );
