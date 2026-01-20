@@ -442,6 +442,36 @@ export type Database = {
         }
         Relationships: []
       }
+      promo_code_usage: {
+        Row: {
+          code: string
+          created_at: string
+          current_uses: number
+          id: string
+          is_active: boolean
+          max_uses: number
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          current_uses?: number
+          id?: string
+          is_active?: boolean
+          max_uses?: number
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          current_uses?: number
+          id?: string
+          is_active?: boolean
+          max_uses?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       provider_clicks: {
         Row: {
           city: string | null
@@ -1095,6 +1125,7 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      get_promo_remaining: { Args: { promo_code: string }; Returns: number }
       get_provider_click_analytics_admin: {
         Args: never
         Returns: {
@@ -1152,6 +1183,7 @@ export type Database = {
         Returns: boolean
       }
       is_active_family_member: { Args: { _user_id: string }; Returns: boolean }
+      use_promo_code: { Args: { promo_code: string }; Returns: Json }
     }
     Enums: {
       app_role: "admin" | "user" | "moderator"

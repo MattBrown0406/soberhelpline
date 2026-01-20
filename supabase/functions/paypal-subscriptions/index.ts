@@ -293,12 +293,25 @@ Deno.serve(async (req) => {
           finalAmount = 0;
           console.log('Applied FREELIST: Bypassing payment, free listing');
         }
-        // Check for FAMILY6 code - 6 months free for family members (bypasses payment)
+        // Check for FAMILY6 code - 6 months free for family members (bypasses payment, limited uses)
         else if (discountCode && discountCode.toUpperCase() === 'FAMILY6') {
+          // Check if promo code has remaining uses
+          const { data: promoResult, error: promoError } = await supabaseClient
+            .rpc('use_promo_code', { promo_code: 'FAMILY6' });
+          
+          if (promoError) {
+            console.error('Promo code error:', promoError);
+            throw new Error('Failed to validate promo code');
+          }
+          
+          if (!promoResult?.success) {
+            throw new Error(promoResult?.error || 'Promo code is no longer available');
+          }
+          
           bypassPayment = true;
           appliedDiscount = 'FAMILY6';
           finalAmount = 0;
-          console.log('Applied FAMILY6: Bypassing payment, 6 months free family membership');
+          console.log('Applied FAMILY6: Bypassing payment, 6 months free family membership. Remaining:', promoResult.remaining);
         }
         // Check for FREE6 code - 6 months free trial (for providers)
         else if (discountCode && discountCode.toUpperCase() === 'FREE6') {

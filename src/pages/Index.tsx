@@ -19,6 +19,7 @@ import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
 import SEOHead from "@/components/SEOHead";
+import Free6PromoBanner from "@/components/Free6PromoBanner";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -207,28 +208,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Free Trial Promo Banner */}
-      <section className="bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 border-y border-logo-green/30">
-        <div className="container mx-auto px-4 py-3 md:py-4">
-          <Link to="/family-membership" className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-4 md:gap-6 group">
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
-              <div className="px-2.5 py-1 rounded-full bg-logo-green text-white text-[10px] md:text-xs font-bold uppercase tracking-wide animate-pulse shrink-0">
-                Free Trial
-              </div>
-              <div>
-                <p className="font-semibold text-foreground text-sm md:text-base">
-                  Try Premium Free for 7 Days — Code: <span className="text-logo-green font-bold">HELPLINE</span>
-                </p>
-                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Access 60+ exercises, videos & guides at no cost</p>
-              </div>
-            </div>
-            <Button variant="default" size="sm" className="gap-2 bg-logo-green hover:bg-logo-green/90 group-hover:gap-3 transition-all text-xs md:text-sm">
-              Start Free Trial
-              <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
+      {/* FREE6 Promo Banner */}
+      <Free6PromoBanner />
 
       {/* RayBan Meta Wayfarer Giveaway Banner */}
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-y border-slate-700/50 overflow-hidden">
