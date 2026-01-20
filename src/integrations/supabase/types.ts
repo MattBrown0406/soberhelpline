@@ -14,6 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
+      education_bookmarks: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          resource_name: string
+          resource_path: string
+          resource_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          resource_name: string
+          resource_path: string
+          resource_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          resource_name?: string
+          resource_path?: string
+          resource_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      education_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          progress_percentage: number | null
+          resource_name: string
+          resource_path: string
+          resource_type: string
+          status: string
+          time_spent_seconds: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          progress_percentage?: number | null
+          resource_name: string
+          resource_path: string
+          resource_type: string
+          status?: string
+          time_spent_seconds?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          progress_percentage?: number | null
+          resource_name?: string
+          resource_path?: string
+          resource_type?: string
+          status?: string
+          time_spent_seconds?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       family_assessments: {
         Row: {
           created_at: string
@@ -304,6 +376,41 @@ export type Database = {
         }
         Relationships: []
       }
+      forum_mentions: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          mentioned_user_id: string
+          mentioning_user_id: string
+          post_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          mentioned_user_id: string
+          mentioning_user_id: string
+          post_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          mentioned_user_id?: string
+          mentioning_user_id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_mentions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       forum_poll_options: {
         Row: {
           created_at: string
@@ -405,6 +512,50 @@ export type Database = {
             foreignKeyName: "forum_polls_post_id_fkey"
             columns: ["post_id"]
             isOneToOne: true
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_post_drafts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_anonymous: boolean
+          parent_post_id: string | null
+          title: string | null
+          topic_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_anonymous?: boolean
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_post_drafts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
             referencedRelation: "forum_posts"
             referencedColumns: ["id"]
           },
@@ -537,6 +688,45 @@ export type Database = {
           session_id?: string | null
           user_id?: string | null
           viewed_at?: string
+        }
+        Relationships: []
+      }
+      journal_entries: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_private: boolean
+          mood: string | null
+          related_resource_name: string | null
+          related_resource_path: string | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_private?: boolean
+          mood?: string | null
+          related_resource_name?: string | null
+          related_resource_path?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_private?: boolean
+          mood?: string | null
+          related_resource_name?: string | null
+          related_resource_path?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -1123,6 +1313,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_notification_preferences: {
+        Row: {
+          created_at: string
+          id: string
+          mention_notifications: boolean
+          updated_at: string
+          user_id: string
+          weekly_education_nudge: boolean
+          weekly_forum_digest: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mention_notifications?: boolean
+          updated_at?: string
+          user_id: string
+          weekly_education_nudge?: boolean
+          weekly_forum_digest?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mention_notifications?: boolean
+          updated_at?: string
+          user_id?: string
+          weekly_education_nudge?: boolean
+          weekly_forum_digest?: boolean
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
