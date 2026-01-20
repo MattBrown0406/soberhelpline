@@ -4,7 +4,7 @@ import { Headphones, ArrowLeft, ExternalLink, Play, Clock, Calendar, Mic2, Radio
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import partyWreckersLogo from "@/assets/party-wreckers-logo.png";
+import partyWreckersLogo from "@/assets/party-wreckers-logo-2026.png";
 import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
 import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
 import primaryPurposePejLogo from "@/assets/primary-purpose-pej-logo.jpeg";
