@@ -18,6 +18,7 @@ import MobileNav from "@/components/MobileNav";
 import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
+import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 import Free6PromoBanner from "@/components/Free6PromoBanner";
 
@@ -312,6 +313,7 @@ const Index = () => {
 
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
             <SUDAssessment />
+            <EatingDisorderScreening />
             <FamilySelfAssessment user={user} />
             
             {/* Fear Inventory Exercise Link */}
