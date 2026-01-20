@@ -51,6 +51,7 @@ const pillars = [
       { title: "Understanding Drug-Induced Psychosis", path: "/drug-induced-psychosis", color: "fuchsia" },
       { title: "Mental Health vs. Substance-Induced Symptoms", path: "/mental-health-vs-substance-induced", color: "purple" },
       { title: "Understanding Eating Disorders", path: "/eating-disorders-guide", color: "pink" },
+      { title: "Trauma & Hypervigilance Self-Assessment", path: "#trauma-assessment", color: "violet", isAnchor: true },
       { title: "Commonly Misunderstood Diagnoses", path: "/misunderstood-diagnoses", color: "indigo" },
       { title: "Why Focusing Only on Mental Health Can Delay Recovery", path: "/mental-health-delays-recovery", color: "rose" },
       { title: "Trauma vs. Excuses: A Necessary Distinction", path: "/trauma-vs-excuses", color: "amber" },
@@ -501,7 +502,7 @@ export default function FamilyEducation() {
                 </div>
 
                 {/* Trauma Assessment */}
-                <Card className="overflow-hidden border-2 border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
+                <Card id="trauma-assessment" className="overflow-hidden border-2 border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 scroll-mt-24">
                   <CardHeader className="bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-950/20">
                     <div className="flex items-start gap-3">
                       <div className="p-2 rounded-lg bg-purple-500/10">
@@ -643,18 +644,45 @@ export default function FamilyEducation() {
                           </div>
                         ) : (
                           <div className="flex flex-wrap gap-2">
-                            {pillar.resources?.map((resource, idx) => (
-                              <Link key={idx} to={resource.path}>
-                                <Button 
-                                  variant="outline" 
-                                  size="sm" 
-                                  className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
-                                >
-                                  <FileText className="h-3 w-3" />
-                                  {resource.title}
-                                </Button>
-                              </Link>
-                            ))}
+                            {pillar.resources?.map((resource, idx) => {
+                              const isAnchor = (resource as any).isAnchor;
+                              if (isAnchor) {
+                                return (
+                                  <a 
+                                    key={idx} 
+                                    href={resource.path}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      setActiveTab("tools");
+                                      setTimeout(() => {
+                                        document.getElementById("trauma-assessment")?.scrollIntoView({ behavior: "smooth" });
+                                      }, 100);
+                                    }}
+                                  >
+                                    <Button 
+                                      variant="outline" 
+                                      size="sm" 
+                                      className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
+                                    >
+                                      <Brain className="h-3 w-3" />
+                                      {resource.title}
+                                    </Button>
+                                  </a>
+                                );
+                              }
+                              return (
+                                <Link key={idx} to={resource.path}>
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm" 
+                                    className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
+                                  >
+                                    <FileText className="h-3 w-3" />
+                                    {resource.title}
+                                  </Button>
+                                </Link>
+                              );
+                            })}
                           </div>
                         )}
                       </AccordionContent>
