@@ -22,6 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
+import { moderateContent } from "@/lib/contentModeration";
 import { PostReactions } from "@/components/forum/PostReactions";
 import { PostBookmark } from "@/components/forum/PostBookmark";
 import { TopicFollow } from "@/components/forum/TopicFollow";
@@ -29,6 +30,8 @@ import { UserBadges } from "@/components/forum/UserBadges";
 import { PollDisplay } from "@/components/forum/PollDisplay";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertTriangle } from "lucide-react";
 
 interface ForumTopicConfig {
   id: string;
@@ -127,6 +130,7 @@ export default function ForumTopic() {
   const [deleteConfirm, setDeleteConfirm] = useState<ForumPost | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [canModerate, setCanModerate] = useState(false);
+  const [moderationError, setModerationError] = useState<string | null>(null);
 
   const topicConfig = topicId ? topicConfigs[topicId] : null;
 
@@ -280,7 +284,18 @@ export default function ForumTopic() {
     }
 
     setIsSubmitting(true);
+    setModerationError(null);
+    
     try {
+      // Check content moderation
+      const moderation = await moderateContent(newPostContent.trim(), newPostTitle.trim());
+      
+      if (!moderation.allowed) {
+        setModerationError(moderation.reason || "Please revise your message to be more respectful and try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase
         .from('forum_posts')
         .insert({
@@ -296,6 +311,7 @@ export default function ForumTopic() {
       setNewPostTitle("");
       setNewPostContent("");
       setShowNewPost(false);
+      setModerationError(null);
       fetchPosts();
     } catch (error) {
       console.error("Error creating post:", error);
@@ -312,7 +328,18 @@ export default function ForumTopic() {
     }
 
     setIsSubmitting(true);
+    setModerationError(null);
+    
     try {
+      // Check content moderation
+      const moderation = await moderateContent(replyContent.trim());
+      
+      if (!moderation.allowed) {
+        setModerationError(moderation.reason || "Please revise your reply to be more respectful and try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase
         .from('forum_posts')
         .insert({
@@ -529,15 +556,27 @@ export default function ForumTopic() {
                   <CardTitle className="text-lg">Create New Post</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {moderationError && (
+                    <Alert variant="destructive">
+                      <AlertTriangle className="h-4 w-4" />
+                      <AlertDescription>{moderationError}</AlertDescription>
+                    </Alert>
+                  )}
                   <Input
                     placeholder="Post title (optional)"
                     value={newPostTitle}
-                    onChange={(e) => setNewPostTitle(e.target.value)}
+                    onChange={(e) => {
+                      setNewPostTitle(e.target.value);
+                      setModerationError(null);
+                    }}
                   />
                   <Textarea
                     placeholder="Share your thoughts..."
                     value={newPostContent}
-                    onChange={(e) => setNewPostContent(e.target.value)}
+                    onChange={(e) => {
+                      setNewPostContent(e.target.value);
+                      setModerationError(null);
+                    }}
                     rows={4}
                   />
                   <div className="flex gap-2 justify-end">
