@@ -1,6 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video, CalendarDays } from "lucide-react";
+import { Phone, ArrowLeft, MessagesSquare, MessageCircle, Users, Heart, Lock, Loader2, Plus, ChevronRight, Flag, Shield, Mail, Video, CalendarDays, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,10 @@ import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
 import { NewPostDialog } from "@/components/forum/NewPostDialog";
+import { ForumSearch } from "@/components/forum/ForumSearch";
+import { DailyPrompt } from "@/components/forum/DailyPrompt";
+import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
+import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
 
@@ -543,11 +547,25 @@ export default function FamilyForum() {
 
               {/* Sidebar */}
               <div className="space-y-6">
+                {/* Member Spotlight */}
+                <MemberSpotlight />
+
                 {/* Community Stats */}
                 <Card>
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg">Community</CardTitle>
                   </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Members</span>
+                      <span className="font-semibold">{totalMembers}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Online Now</span>
+                      <span className="font-semibold text-green-600">{onlineMembers}</span>
+                    </div>
+                  </CardContent>
+                </Card>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Members</span>

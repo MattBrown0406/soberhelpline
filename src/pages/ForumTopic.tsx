@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Loader2, Plus, MessageCircle, Clock, User, Trash2, Send } from "lucide-react";
+import { Phone, ArrowLeft, Loader2, Plus, MessageCircle, Clock, User, Trash2, Send, Pin, EyeOff, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
+import { PostReactions } from "@/components/forum/PostReactions";
+import { PostBookmark } from "@/components/forum/PostBookmark";
+import { TopicFollow } from "@/components/forum/TopicFollow";
+import { UserBadges } from "@/components/forum/UserBadges";
+import { PollDisplay } from "@/components/forum/PollDisplay";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface ForumTopicConfig {
   id: string;
@@ -506,10 +513,13 @@ export default function ForumTopic() {
                 </div>
               </div>
               
-              <Button onClick={() => setShowNewPost(true)} className="gap-2">
-                <Plus className="h-4 w-4" />
-                New Post
-              </Button>
+              <div className="flex gap-2">
+                {user && topicId && <TopicFollow topicId={topicId} userId={user.id} />}
+                <Button onClick={() => setShowNewPost(true)} className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  New Post
+                </Button>
+              </div>
             </div>
 
             {/* New Post Form */}
@@ -604,21 +614,28 @@ export default function ForumTopic() {
                         
                         <p className="text-foreground whitespace-pre-wrap">{post.content}</p>
                         
-                        <div className="flex items-center gap-4 pt-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setReplyingTo(replyingTo === post.id ? null : post.id)}
-                            className="text-muted-foreground"
-                          >
-                            <MessageCircle className="h-4 w-4 mr-1" />
-                            Reply
-                            {post.replies && post.replies.length > 0 && (
-                              <Badge variant="secondary" className="ml-2">
-                                {post.replies.length}
-                              </Badge>
-                            )}
-                          </Button>
+                        {/* Poll Display */}
+                        {user && <PollDisplay postId={post.id} userId={user.id} />}
+
+                        <div className="flex items-center gap-2 pt-2 flex-wrap">
+                          {user && <PostReactions postId={post.id} userId={user.id} />}
+                          <div className="flex items-center gap-1 ml-auto">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setReplyingTo(replyingTo === post.id ? null : post.id)}
+                              className="text-muted-foreground"
+                            >
+                              <MessageCircle className="h-4 w-4 mr-1" />
+                              Reply
+                              {post.replies && post.replies.length > 0 && (
+                                <Badge variant="secondary" className="ml-2">
+                                  {post.replies.length}
+                                </Badge>
+                              )}
+                            </Button>
+                            {user && <PostBookmark postId={post.id} userId={user.id} />}
+                          </div>
                         </div>
 
                         {/* Reply Form */}
