@@ -50,6 +50,7 @@ const pillars = [
     resources: [
       { title: "Understanding Drug-Induced Psychosis", path: "/drug-induced-psychosis", color: "fuchsia" },
       { title: "Mental Health vs. Substance-Induced Symptoms", path: "/mental-health-vs-substance-induced", color: "purple" },
+      { title: "Understanding Eating Disorders", path: "/eating-disorders-guide", color: "pink" },
       { title: "Commonly Misunderstood Diagnoses", path: "/misunderstood-diagnoses", color: "indigo" },
       { title: "Why Focusing Only on Mental Health Can Delay Recovery", path: "/mental-health-delays-recovery", color: "rose" },
       { title: "Trauma vs. Excuses: A Necessary Distinction", path: "/trauma-vs-excuses", color: "amber" },
