@@ -481,41 +481,58 @@ export default function FamilyForum() {
               </Link>
             </div>
 
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-                <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                    Family Discussion Forum
-                  </h1>
-                  <p className="text-muted-foreground">
-                    Connect with other families who understand what you're going through.
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" className="gap-2" onClick={() => setShowMessages(true)}>
-                    <Mail className="h-4 w-4" />
-                    Messages
-                  </Button>
-                  {isModerator && (
-                    <Button variant="outline" className="gap-2" onClick={() => setShowModeratorActions(true)}>
-                      <Shield className="h-4 w-4" />
-                      Moderator Actions
-                    </Button>
-                  )}
-                  <Button className="gap-2" onClick={() => setShowNewPostDialog(true)}>
-                    <Plus className="h-4 w-4" />
-                    New Post
-                  </Button>
-                </div>
-
-              {user && (
-                <NewPostDialog
-                  open={showNewPostDialog}
-                  onOpenChange={setShowNewPostDialog}
-                  userId={user.id}
-                  forumTopics={forumTopics.map(t => ({ id: t.id, title: t.title, description: t.description }))}
-                />
-              )}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
+                  Family Discussion Forum
+                </h1>
+                <p className="text-muted-foreground">
+                  Connect with other families who understand what you're going through.
+                </p>
               </div>
+              <div className="flex gap-2 flex-wrap">
+                {user && <BookmarkedPosts userId={user.id} />}
+                <Button variant="outline" className="gap-2" onClick={() => setShowMessages(true)}>
+                  <Mail className="h-4 w-4" />
+                  Messages
+                </Button>
+                {isModerator && (
+                  <Button variant="outline" className="gap-2" onClick={() => setShowModeratorActions(true)}>
+                    <Shield className="h-4 w-4" />
+                    Moderator Actions
+                  </Button>
+                )}
+                <Button className="gap-2" onClick={() => setShowNewPostDialog(true)}>
+                  <Plus className="h-4 w-4" />
+                  New Post
+                </Button>
+              </div>
+            </div>
+
+            {user && (
+              <NewPostDialog
+                open={showNewPostDialog}
+                onOpenChange={setShowNewPostDialog}
+                userId={user.id}
+                forumTopics={forumTopics.map(t => ({ id: t.id, title: t.title, description: t.description }))}
+              />
+            )}
+
+            {/* Daily Prompt & Search */}
+            <div className="grid gap-4 md:grid-cols-2 mb-8">
+              <DailyPrompt />
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Search className="h-4 w-4" />
+                    Search Posts
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ForumSearch />
+                </CardContent>
+              </Card>
+            </div>
 
             <div className="grid gap-8 lg:grid-cols-3">
               {/* Forum Topics */}
@@ -562,18 +579,7 @@ export default function FamilyForum() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Online Now</span>
-                      <span className="font-semibold text-green-600">{onlineMembers}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-                  <CardContent className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Members</span>
-                      <span className="font-semibold">{totalMembers}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Online Now</span>
-                      <span className="font-semibold text-green-600">{onlineMembers}</span>
+                      <span className="font-semibold text-primary">{onlineMembers}</span>
                     </div>
                   </CardContent>
                 </Card>
