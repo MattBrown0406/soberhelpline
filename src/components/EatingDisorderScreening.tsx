@@ -462,45 +462,46 @@ export default function EatingDisorderScreening() {
   };
 
   return (
-    <Accordion 
-      type="single" 
-      collapsible 
-      value={isExpanded ? "screening" : ""}
-      onValueChange={(value) => setIsExpanded(value === "screening")}
-      className="mb-8"
-    >
-      <AccordionItem value="screening" className="border rounded-lg">
-        <AccordionTrigger className="px-6 hover:no-underline">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <Heart className="w-5 h-5 text-primary" />
-            </div>
-            <div className="text-left">
-              <h3 className="text-lg font-semibold text-foreground">
-                Eating Disorder Warning Signs Screening
-              </h3>
-              <p className="text-sm text-muted-foreground font-normal">
-                Interactive tool to help families identify potential warning signs
-              </p>
-            </div>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="px-6 pb-6">
-          {currentStep > 0 && currentStep <= categories.length && (
-            <div className="mb-6">
-              <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                <span>Category {currentStep} of {categories.length}</span>
-                <span>{getCheckedCount()} signs checked</span>
+    <div className="border-2 border-pink-500/40 bg-gradient-to-br from-pink-50 to-transparent dark:from-pink-950/20 rounded-lg overflow-hidden">
+      <Accordion 
+        type="single" 
+        collapsible 
+        value={isExpanded ? "screening" : ""}
+        onValueChange={(value) => setIsExpanded(value === "screening")}
+      >
+        <AccordionItem value="screening" className="border-0">
+          <AccordionTrigger className="px-6 hover:no-underline">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-pink-500/20 rounded-lg">
+                <Heart className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               </div>
-              <Progress value={progress} className="h-2" />
+              <div className="text-left">
+                <h3 className="text-lg font-semibold text-foreground">
+                  Eating Disorder Warning Signs Screening
+                </h3>
+                <p className="text-sm text-muted-foreground font-normal">
+                  Interactive tool to help families identify potential warning signs
+                </p>
+              </div>
             </div>
-          )}
+          </AccordionTrigger>
+          <AccordionContent className="px-6 pb-6">
+            {currentStep > 0 && currentStep <= categories.length && (
+              <div className="mb-6">
+                <div className="flex justify-between text-sm text-muted-foreground mb-2">
+                  <span>Category {currentStep} of {categories.length}</span>
+                  <span>{getCheckedCount()} signs checked</span>
+                </div>
+                <Progress value={progress} className="h-2" />
+              </div>
+            )}
 
-          {currentStep === 0 && renderIntro()}
-          {currentStep >= 1 && currentStep <= categories.length && renderCategory(currentStep)}
-          {currentStep > categories.length && renderResults()}
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+            {currentStep === 0 && renderIntro()}
+            {currentStep >= 1 && currentStep <= categories.length && renderCategory(currentStep)}
+            {currentStep > categories.length && renderResults()}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 }
