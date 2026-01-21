@@ -295,12 +295,18 @@ const MedicalDetox = () => {
       <SEOHead
         title="Find Medical Detox Centers | Sober Helpline"
         description="Search vetted medical detox facilities by state. Find safe, medically-supervised withdrawal management programs."
+        faqItems={[
+          { question: "What is medical detox?", answer: "Medical detox is a supervised process where medical professionals help manage withdrawal symptoms safely using medications and monitoring. It's the first step in treatment for substances like alcohol, opioids, and benzodiazepines." },
+          { question: "How long does detox take?", answer: "Medical detox typically lasts 3-10 days depending on the substance, severity of dependence, and individual health factors. Alcohol and benzodiazepine detox often takes 5-7 days; opioid detox may be 5-10 days." },
+          { question: "Is medical detox dangerous?", answer: "Unsupervised withdrawal can be dangerous or fatal for alcohol and benzodiazepines. Medical detox provides 24/7 monitoring and medications to manage symptoms safely, significantly reducing risks." }
+        ]}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "MedicalWebPage",
           "name": "Medical Detox Centers Directory",
           "description": "Search vetted medical detox facilities by state.",
           "url": "https://soberhelpline.com/medical-detox",
+          "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".provider-card-title"] },
           "publisher": { "@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com" }
         }}
       />

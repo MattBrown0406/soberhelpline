@@ -67,11 +67,33 @@ const AddictionAssessment = () => {
 
   const severity = getSeverity(totalChecked);
 
+  // AEO-optimized FAQ items
+  const faqItems = [
+    { question: "How do I know if someone is addicted?", answer: "Look for signs like failed attempts to stop, using more than intended, neglecting responsibilities, withdrawal symptoms, and continued use despite negative consequences. Our assessment covers 11 key warning signs based on DSM-5 criteria." },
+    { question: "What does a mild substance use disorder mean?", answer: "A mild substance use disorder involves 2-3 symptoms from the diagnostic criteria. It may still require professional support such as therapy or outpatient treatment, especially if the person is defensive about their use." },
+    { question: "When is inpatient treatment necessary?", answer: "Inpatient treatment is typically recommended when 6 or more symptoms are present, indicating severe substance use disorder. It may also be needed if there are withdrawal symptoms requiring medical supervision." },
+    { question: "Should I confront my loved one about their addiction?", answer: "Consider consulting a professional interventionist first, especially if your loved one is defensive or in denial. They can guide you on how to have effective conversations that encourage treatment acceptance." }
+  ];
+
+  // HowTo schema for assessing addiction
+  const howToSteps = [
+    { name: "Review the warning signs", text: "Go through each of the 11 questions based on DSM-5 substance use disorder criteria, checking any that apply to your loved one." },
+    { name: "Count your responses", text: "Total the number of warning signs you identified. 2-3 indicates mild, 4-5 moderate, and 6+ severe substance use disorder." },
+    { name: "Note specific concerns", text: "Pay special attention to withdrawal symptoms (requiring medical detox) and defensive behavior (suggesting professional intervention may help)." },
+    { name: "Review recommendations", text: "Based on your assessment, review the suggested level of care and appropriate resources for your situation." },
+    { name: "Seek professional guidance", text: "Contact a professional for personalized guidance, especially for moderate to severe assessments." }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Addiction Assessment Tool | Sober Helpline"
         description="Use our free addiction assessment tool to evaluate if your loved one may be struggling with substance use disorder. Get personalized care level recommendations."
+        faqItems={faqItems}
+        howToSteps={howToSteps}
+        howToName="How to Assess if Someone Has a Substance Use Disorder"
+        howToDescription="A step-by-step guide to evaluate warning signs of addiction and determine appropriate care level"
+        speakableSelectors={["h1", ".assessment-intro", ".severity-result"]}
       />
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between mb-4">

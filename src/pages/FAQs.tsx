@@ -269,10 +269,17 @@ const getPlainTextAnswer = (answer: string | React.ReactNode): string => {
   return "See the full answer on our FAQ page.";
 };
 
-// JSON-LD FAQPage Schema
+// JSON-LD FAQPage Schema with AEO speakable optimization
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "name": "Addiction & Recovery Frequently Asked Questions",
+  "description": "Comprehensive answers to common questions about addiction, intervention, treatment options, enabling vs. helping, and supporting a loved one in recovery.",
+  "url": "https://soberhelpline.com/faqs",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".accordion-trigger", ".accordion-content p:first-of-type"]
+  },
   "mainEntity": faqs.map(faq => ({
     "@type": "Question",
     "name": faq.question,
@@ -280,7 +287,13 @@ const faqSchema = {
       "@type": "Answer",
       "text": getPlainTextAnswer(faq.answer)
     }
-  }))
+  })),
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sober Helpline",
+    "url": "https://soberhelpline.com",
+    "telephone": "+1-541-241-5886"
+  }
 };
 
 export default function FAQs() {

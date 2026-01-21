@@ -260,12 +260,18 @@ const Interventionists = () => {
       <SEOHead
         title="Find Professional Interventionists | Sober Helpline"
         description="Search certified interventionists by state. Find professional guidance to help your loved one accept treatment."
+        faqItems={[
+          { question: "What does an interventionist do?", answer: "An interventionist is a trained professional who helps families plan and conduct structured conversations to motivate a loved one to accept addiction treatment. They guide preparation, facilitate the intervention, and often arrange immediate transport to treatment." },
+          { question: "How much does an intervention cost?", answer: "Professional interventions typically range from $2,500-$10,000+ depending on the interventionist's experience, travel requirements, and level of involvement. Many offer payment plans and the cost often includes follow-up support." },
+          { question: "Do interventions actually work?", answer: "Professional interventions have success rates of 80-90% in getting someone to accept treatment. Success depends on proper preparation, family commitment, and having treatment arrangements ready." }
+        ]}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "MedicalWebPage",
           "name": "Professional Interventionists Directory",
           "description": "Search certified interventionists by state.",
           "url": "https://soberhelpline.com/interventionists",
+          "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".provider-card-title"] },
           "publisher": { "@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com" }
         }}
       />

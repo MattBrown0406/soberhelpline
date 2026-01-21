@@ -462,12 +462,22 @@ const InpatientTreatment = () => {
       <SEOHead
         title="Find Inpatient Treatment Centers | Sober Helpline"
         description="Search vetted inpatient rehab and residential treatment centers by state. Find ethical addiction treatment providers with verified credentials."
+        faqItems={[
+          { question: "What is inpatient treatment for addiction?", answer: "Inpatient treatment, also called residential treatment, provides 24/7 care in a structured facility. Patients live at the treatment center for typically 30-90 days, receiving intensive therapy, medical support, and skill-building for recovery." },
+          { question: "How long does inpatient rehab last?", answer: "Most inpatient programs last 28-30 days, though 60-90 day programs are often recommended for better outcomes. Some facilities offer extended care for 6 months or longer depending on individual needs." },
+          { question: "How much does inpatient treatment cost?", answer: "Costs vary widely from $10,000-$80,000+ depending on the facility, location, and level of luxury. Many programs accept insurance, and some offer sliding scale fees or scholarships. Use our directory to find options that match your budget." },
+          { question: "How do I find the right treatment center?", answer: "Look for accredited facilities with evidence-based treatment approaches, proper licensing, good staff-to-patient ratios, and aftercare planning. Consider location, specialty programs for co-occurring disorders, and insurance acceptance." }
+        ]}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "MedicalWebPage",
           "name": "Inpatient Treatment Centers Directory",
           "description": "Search vetted inpatient rehab and residential treatment centers by state. Find ethical addiction treatment providers with verified credentials.",
           "url": "https://soberhelpline.com/inpatient-treatment",
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": ["h1", ".provider-card-title", ".search-description"]
+          },
           "mainEntity": {
             "@type": "ItemList",
             "name": "Inpatient Treatment Centers",

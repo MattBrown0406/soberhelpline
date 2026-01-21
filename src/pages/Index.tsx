@@ -68,12 +68,67 @@ const Index = () => {
     await supabase.auth.signOut();
   };
 
+  // AEO-optimized homepage schema
+  const homepageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sober Helpline",
+    "url": "https://soberhelpline.com",
+    "description": "Connect with ethical addiction treatment providers. Free family support resources, vetted rehabs, interventionists, and recovery coaches nationwide.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://soberhelpline.com/inpatient-treatment?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".hero-description", ".mission-statement"]
+    }
+  };
+
+  // Service offerings for AEO
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Addiction Recovery Services",
+    "description": "Find ethical addiction treatment providers across the United States",
+    "itemListElement": categories.map((cat, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "name": cat.name,
+        "description": cat.description,
+        "url": `https://soberhelpline.com${cat.path}`,
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline"
+        }
+      }
+    }))
+  };
+
+  // Quick FAQ for homepage AEO
+  const homepageFaqItems = [
+    { question: "What is Sober Helpline?", answer: "Sober Helpline connects families with ethical, vetted addiction treatment providers nationwide, offering free resources, education, and support for those affected by addiction." },
+    { question: "How do I find a treatment center near me?", answer: "Use our interactive maps to search by state, or enter your zip code to find inpatient treatment, outpatient programs, medical detox, and sober living homes in your area." },
+    { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer premium family membership with additional support features." },
+    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5886 to speak with someone who can help you understand your options." }
+  ];
+
   return (
     <>
       <SEOHead
         title="Sober Helpline - Find Addiction Recovery Help"
         description="Connect with ethical addiction treatment providers. Free family support resources, vetted rehabs, interventionists, and recovery coaches nationwide."
+        jsonLd={homepageSchema}
+        faqItems={homepageFaqItems}
+        speakableSelectors={["h1", ".hero-description", ".mission-statement"]}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
