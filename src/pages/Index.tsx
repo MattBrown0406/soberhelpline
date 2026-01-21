@@ -232,18 +232,12 @@ const Index = () => {
               We connect families with ethical, proven treatment providers nationwide—offering compassionate guidance and unwavering support when you need it most.
             </p>
             
-            {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8 px-4">
-              <Link to="/family-forum" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
-                  Join Family Forum
-                </Button>
-              </Link>
-              <Link to="/family-education" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 md:gap-3 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg border-2 border-logo-green/30 text-logo-green hover:bg-logo-green/10">
-                  <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
-                  Education Center
+            {/* Primary CTA */}
+            <div className="flex items-center justify-center mb-6 md:mb-8 px-4">
+              <Link to="/family-forum">
+                <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
+                  <Users className="w-4 h-4 md:w-5 md:h-5" />
+                  Join Our Family Community
                 </Button>
               </Link>
             </div>
