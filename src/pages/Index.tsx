@@ -580,15 +580,12 @@ const Index = () => {
               <p className="text-sm md:text-base text-muted-foreground mb-4">
                 <span className="font-semibold text-foreground">Stop going it alone.</span> Join families who are learning to heal together.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Link to="/family-membership">
-                  <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
-                    <Lock className="w-4 h-4" />
-                    Unlock Full Access — $14.99/month
-                  </Button>
-                </Link>
-                <span className="text-xs text-muted-foreground">or use code <span className="font-mono font-bold text-logo-green">FAMILY6</span> for 6 months free</span>
-              </div>
+              <Link to="/family-membership">
+                <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
+                  <Lock className="w-4 h-4" />
+                  Unlock Full Access — $14.99/month
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
