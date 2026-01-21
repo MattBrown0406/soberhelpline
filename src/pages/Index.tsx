@@ -453,25 +453,25 @@ const Index = () => {
             </Link>
 
             {/* Guided Meditation */}
-            <Card className="overflow-hidden border-2 border-amber-500/30 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20">
+            <Card className="overflow-hidden border-2 border-slate-500/30 bg-gradient-to-br from-slate-50 to-transparent dark:from-slate-950/20">
               <CardContent className="p-4 md:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
                   <div className="flex-shrink-0 flex items-center gap-4 sm:block">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-amber-500/20 flex items-center justify-center">
-                      <Headphones className="w-6 h-6 md:w-8 md:h-8 text-amber-600 dark:text-amber-400" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-slate-500/20 flex items-center justify-center">
+                      <Headphones className="w-6 h-6 md:w-8 md:h-8 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div className="sm:hidden">
                       <h3 className="text-base font-semibold text-foreground leading-tight">Guided Meditation for Families</h3>
-                      <p className="text-xs text-muted-foreground">Regaining Calm When Addiction Triggers Fear</p>
+                      <p className="text-xs text-muted-foreground">Staying Grounded When They Won't Accept Help</p>
                     </div>
                   </div>
                   <div className="flex-grow">
                     <h3 className="text-base md:text-lg font-semibold text-foreground mb-0.5 md:mb-1 hidden sm:block">Guided Meditation for Families</h3>
                     <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 hidden sm:block">
-                      Regaining Calm When Addiction Triggers Fear and Urgency
+                      Staying Grounded When They Won't Accept Help
                     </p>
                     <audio controls className="w-full" preload="metadata">
-                      <source src="/audio/regaining-calm-meditation.mp3" type="audio/mpeg" />
+                      <source src="/audio/staying-grounded-when-they-wont-accept-help-meditation.mp3" type="audio/mpeg" />
                       Your browser does not support the audio element.
                     </audio>
                   </div>
