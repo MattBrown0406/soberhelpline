@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, Camera, Volume2, Mic, GraduationCap, TreePine, Eye } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, Camera, Volume2, Mic, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -572,6 +572,85 @@ const Index = () => {
                 <div className="text-xs text-muted-foreground">Personalized guidance</div>
               </div>
             </div>
+          </div>
+
+          {/* Side-by-Side Comparison */}
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
+            {/* Going It Alone */}
+            <Card className="border-2 border-destructive/30 bg-gradient-to-br from-destructive/5 to-transparent">
+              <CardContent className="p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center">
+                    <X className="w-5 h-5 text-destructive" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">Going It Alone</h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Wondering if you're overreacting—or not doing enough</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Googling at 2am with no one to talk to</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Walking on eggshells, afraid to make it worse</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Feeling judged by friends who don't understand</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Enabling without realizing it—then feeling guilty</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Exhausted from carrying the weight alone</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* With Our Community */}
+            <Card className="border-2 border-logo-green/40 bg-gradient-to-br from-logo-green/5 to-transparent">
+              <CardContent className="p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-logo-green/20 flex items-center justify-center">
+                    <Check className="w-5 h-5 text-logo-green" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">With Our Community</h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>Clear education that explains what you're seeing</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>A private forum of families who truly get it</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>Practical tools for boundaries that actually work</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>Guided meditations for when the stress overwhelms</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>AI coaching tools for real-time decision support</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>The confidence to respond instead of react</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
 
           {/* CTA */}
