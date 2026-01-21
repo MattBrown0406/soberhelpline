@@ -162,6 +162,7 @@ const pillars = [
 ];
 
 const meditations = [
+  { title: "Staying Grounded When They Won't Accept Help", file: "staying-grounded-when-they-wont-accept-help-meditation.mp3", color: "slate" },
   { title: "Loving Enough to Let Go, Trusting Enough to Hope", file: "loving-enough-to-let-go-meditation.mp3", color: "rose" },
   { title: "Regaining Calm When Addiction Triggers Fear and Urgency", file: "regaining-calm-meditation.mp3", color: "sky" },
   { title: "Releasing Sadness and Guilt with Compassion", file: "releasing-sadness-guilt-meditation.mp3", color: "purple" },
