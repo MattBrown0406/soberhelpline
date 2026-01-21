@@ -62,11 +62,21 @@ export default function FamilySupport() {
     checkMembership();
   }, [user]);
 
+  // AEO-optimized FAQ items for family support
+  const faqItems = [
+    { question: "How can I help a family member with addiction?", answer: "Start by educating yourself about addiction as a disease, set healthy boundaries, avoid enabling behaviors, connect with support groups like Al-Anon, and consider consulting a professional interventionist if they're resistant to treatment." },
+    { question: "What is enabling vs helping with addiction?", answer: "Enabling means protecting someone from the natural consequences of their addiction (paying bills, making excuses), which allows the addiction to continue. Helping means supporting their recovery while maintaining boundaries that don't shield them from consequences." },
+    { question: "Should I do an intervention for my loved one?", answer: "An intervention may be appropriate when your loved one is in denial, has refused treatment, or when the situation is becoming dangerous. Professional interventionists can guide the process and significantly improve outcomes." },
+    { question: "Where can families of addicts find support?", answer: "Families can find support through Al-Anon and Nar-Anon meetings, family therapy, educational resources about addiction, online support communities, and professional family consultations. Sober Helpline offers both free and premium family resources." }
+  ];
+
   return (
     <>
       <SEOHead
         title="Free Family Support Resources | Sober Helpline"
         description="Resources and support for families of individuals struggling with addiction. Find guidance, education, and community support to help your loved one on their recovery journey."
+        faqItems={faqItems}
+        speakableSelectors={["h1", "h2", ".hero-description"]}
       />
 
       <div className="min-h-screen bg-background">

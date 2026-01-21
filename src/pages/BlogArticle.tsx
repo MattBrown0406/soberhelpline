@@ -131,7 +131,7 @@ const BlogArticle = () => {
     ? `https://soberhelpline.com/blog/${(post as any).slug}`
     : `https://soberhelpline.com/blog/${post.id}`;
   
-  // JSON-LD Article Schema
+  // JSON-LD Article Schema with AEO speakable support
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -157,7 +157,13 @@ const BlogArticle = () => {
       "@type": "WebPage",
       "@id": canonicalUrl
     },
-    "articleSection": post.category
+    "articleSection": post.category,
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["article h1", "article h2", "article p:first-of-type", ".article-summary"]
+    },
+    "isAccessibleForFree": true,
+    "keywords": (post as any).keywords || [post.category, "addiction recovery", "family support"]
   };
 
   return (

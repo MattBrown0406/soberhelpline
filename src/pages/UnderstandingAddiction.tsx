@@ -6,11 +6,33 @@ import SEOHead from "@/components/SEOHead";
 
 export default function UnderstandingAddiction() {
   useGuideTracking("/understanding-addiction", "Addiction: A Chronic Disease, Not a Choice");
+
+  // AEO-optimized FAQ items for this educational page
+  const faqItems = [
+    { question: "Is addiction a disease or a choice?", answer: "Addiction is classified as a chronic brain disease by major health organizations including NIDA and AMA. While the initial decision to use substances may be voluntary, repeated use causes brain changes that make quitting extremely difficult without treatment." },
+    { question: "Why can't someone just stop using drugs or alcohol?", answer: "Addiction rewires the brain's reward, stress, and decision-making systems. These neurological changes persist for years after quitting, explaining why willpower alone is often insufficient and professional treatment is necessary." },
+    { question: "How does addiction affect the brain?", answer: "Substances flood the brain with dopamine, causing tolerance (needing more), dependence (needing it to feel normal), impaired decision-making, and a hijacked stress response that makes stress a powerful trigger for use." },
+    { question: "Can addiction be treated like other chronic diseases?", answer: "Yes. Like diabetes or heart disease, addiction requires ongoing management, not a one-time cure. Evidence-based treatment, medication, therapy, and lifestyle changes can lead to successful long-term recovery." }
+  ];
+
+  // HowTo schema for understanding addiction
+  const howToSteps = [
+    { name: "Recognize addiction as a disease", text: "Understand that addiction is a chronic brain disease, not a moral failing or lack of willpower." },
+    { name: "Learn about brain changes", text: "Educate yourself on how substances alter dopamine, stress response, and decision-making systems in the brain." },
+    { name: "Shift from blame to empathy", text: "Replace judgment with understanding that your loved one's brain has been physically changed by addiction." },
+    { name: "Seek evidence-based treatment", text: "Look for treatment programs that address addiction as a medical condition requiring professional intervention." }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Addiction: A Chronic Disease, Not a Choice | Sober Helpline"
         description="Learn why addiction is classified as a chronic brain disease, how it affects the brain, and why this understanding is crucial for effective treatment and recovery."
+        faqItems={faqItems}
+        howToSteps={howToSteps}
+        howToName="How to Understand Addiction as a Disease"
+        howToDescription="A step-by-step guide to understanding addiction as a chronic brain disease and supporting recovery"
+        speakableSelectors={["h1", "main p:first-of-type", "section h2"]}
       />
 
       {/* Header */}
