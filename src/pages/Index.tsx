@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, Camera, Volume2, Mic } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, Camera, Volume2, Mic, GraduationCap, TreePine, Eye } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -478,6 +478,248 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Peek Inside the Curriculum - Membership Conversion Section */}
+      <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8 md:mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4">
+              <Eye className="w-3.5 h-3.5 md:w-4 md:h-4" />
+              Peek Inside
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+              The Six Pillars of Family Recovery
+            </h2>
+            <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              A comprehensive curriculum designed to help families understand addiction, set boundaries, and reclaim their lives—whether or not their loved one chooses recovery.
+            </p>
+          </div>
+
+          {/* Six Pillars Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
+            {/* Pillar 1 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-emerald-500/30 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                      <Brain className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-emerald-600 dark:text-emerald-400 mb-1">Pillar 1</div>
+                      <h3 className="font-semibold text-foreground mb-2">Understanding Addiction</h3>
+                      <p className="text-xs text-muted-foreground">Why willpower fails, how the brain changes, and what families need to know about the disease.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>7 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-rose-500/30 bg-gradient-to-br from-rose-50/50 to-transparent dark:from-rose-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center flex-shrink-0">
+                      <Heart className="w-6 h-6 text-rose-600 dark:text-rose-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-rose-600 dark:text-rose-400 mb-1">Pillar 2</div>
+                      <h3 className="font-semibold text-foreground mb-2">Mental Health & Dual Diagnosis</h3>
+                      <p className="text-xs text-muted-foreground">How mental health conditions interact with substance use and what families should understand.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>8 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-violet-500/30 bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center flex-shrink-0">
+                      <Users className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-violet-600 dark:text-violet-400 mb-1">Pillar 3</div>
+                      <h3 className="font-semibold text-foreground mb-2">Family Systems & Enabling</h3>
+                      <p className="text-xs text-muted-foreground">Recognize patterns that keep families stuck and learn to break the cycle of enabling.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>19 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pillar 4 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-blue-500/30 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-blue-600 dark:text-blue-400 mb-1">Pillar 4</div>
+                      <h3 className="font-semibold text-foreground mb-2">Treatment Literacy</h3>
+                      <p className="text-xs text-muted-foreground">Navigate the treatment system, ask the right questions, and avoid industry red flags.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>11 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pillar 5 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-amber-500/30 bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-amber-600 dark:text-amber-400 mb-1">Pillar 5</div>
+                      <h3 className="font-semibold text-foreground mb-2">Boundaries & Consequences</h3>
+                      <p className="text-xs text-muted-foreground">Set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>8 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Pillar 6 */}
+            <div className="relative group">
+              <Card className="h-full border-2 border-teal-500/30 bg-gradient-to-br from-teal-50/50 to-transparent dark:from-teal-950/20 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 z-10">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <Lock className="w-4 h-4" />
+                    <span>Members Only</span>
+                  </div>
+                </div>
+                <CardContent className="p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-teal-500/20 flex items-center justify-center flex-shrink-0">
+                      <TreePine className="w-6 h-6 text-teal-600 dark:text-teal-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-teal-600 dark:text-teal-400 mb-1">Pillar 6</div>
+                      <h3 className="font-semibold text-foreground mb-2">Family Recovery</h3>
+                      <p className="text-xs text-muted-foreground">Focus on your own healing journey regardless of your loved one's choices.</p>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>9 resources</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Also Includes */}
+          <div className="bg-background/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 mb-8 md:mb-10 border border-border/50">
+            <h3 className="text-lg md:text-xl font-semibold text-foreground text-center mb-6">Also Included in Your Membership</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <Headphones className="w-6 h-6 text-primary" />
+                </div>
+                <div className="font-medium text-sm text-foreground">11 Guided Meditations</div>
+                <div className="text-xs text-muted-foreground">For stress & healing</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <MessageCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div className="font-medium text-sm text-foreground">Private Forum</div>
+                <div className="text-xs text-muted-foreground">24/7 peer support</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <BookOpen className="w-6 h-6 text-primary" />
+                </div>
+                <div className="font-medium text-sm text-foreground">Interactive Worksheets</div>
+                <div className="text-xs text-muted-foreground">Track your progress</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                </div>
+                <div className="font-medium text-sm text-foreground">AI Coaching Tools</div>
+                <div className="text-xs text-muted-foreground">Personalized guidance</div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <div className="inline-block bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 rounded-2xl p-6 md:p-8 border border-logo-green/20">
+              <p className="text-sm md:text-base text-muted-foreground mb-4">
+                <span className="font-semibold text-foreground">Stop going it alone.</span> Join families who are learning to heal together.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <Link to="/family-membership">
+                  <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
+                    <Lock className="w-4 h-4" />
+                    Unlock Full Access — $9/month
+                  </Button>
+                </Link>
+                <span className="text-xs text-muted-foreground">or use code <span className="font-mono font-bold text-logo-green">FAMILY6</span> for 6 months free</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
