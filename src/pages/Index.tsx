@@ -222,14 +222,14 @@ const Index = () => {
           <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
             <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4 md:mb-6">
               <Heart className="w-3 h-3 md:w-4 md:h-4" />
-              Supporting Families Through Recovery
+              For Families Affected by Addiction
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight px-2">
-              Find Hope. Find Help.
-              <span className="block text-logo-green">Find Healing.</span>
+              Stop Walking on Eggshells.
+              <span className="block text-logo-green">Start Taking Your Life Back.</span>
             </h1>
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2">
-              We connect families with ethical, proven treatment providers nationwide—offering compassionate guidance and unwavering support when you need it most.
+            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2 hero-description">
+              Learn to respond instead of react. Set boundaries without guilt. Find peace—whether or not your loved one chooses recovery.
             </p>
             
             {/* Primary CTA */}
@@ -237,20 +237,24 @@ const Index = () => {
               <Link to="/family-forum">
                 <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
                   <Users className="w-4 h-4 md:w-5 md:h-5" />
-                  Join Our Family Community
+                  Join Families Who Get It
                 </Button>
               </Link>
             </div>
 
-            {/* Trust indicators */}
+            {/* Outcome-focused trust indicators */}
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
               <div className="flex items-center gap-1.5 md:gap-2">
-                <Shield className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
-                <span>Vetted Providers</span>
+                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
+                <span>End the Confusion</span>
               </div>
               <div className="flex items-center gap-1.5 md:gap-2">
-                <Heart className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
-                <span>Family-Focused</span>
+                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
+                <span>Break the Cycle</span>
+              </div>
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
+                <span>Reclaim Your Peace</span>
               </div>
             </div>
           </div>
