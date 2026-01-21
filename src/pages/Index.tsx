@@ -225,11 +225,11 @@ const Index = () => {
               For Families Affected by Addiction
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight px-2">
-              Stop Walking on Eggshells.
-              <span className="block text-logo-green">Start Taking Your Life Back.</span>
+              Leave the Chaos Behind.
+              <span className="block text-logo-green">Find Clarity Ahead.</span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2 hero-description">
-              Learn to respond instead of react. Set boundaries without guilt. Find peace—whether or not your loved one chooses recovery.
+              When addiction takes over your family, confusion becomes constant. We help you see clearly, act confidently, and reclaim your peace—whether or not your loved one chooses recovery.
             </p>
             
             {/* Primary CTA */}
