@@ -19,7 +19,6 @@ import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
 import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 interface ForumTopic {
   id: string;
@@ -480,11 +479,6 @@ export default function FamilyForum() {
                   Monthly Webinar Registration
                 </Button>
               </Link>
-            </div>
-
-            {/* Family Bridge Banner */}
-            <div className="mb-6">
-              <FamilyBridgeBanner />
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
