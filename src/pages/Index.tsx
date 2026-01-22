@@ -21,6 +21,7 @@ import SUDAssessment from "@/components/SUDAssessment";
 import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 import Free6PromoBanner from "@/components/Free6PromoBanner";
+import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -637,6 +638,11 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Family Bridge Banner */}
+      <section className="container mx-auto px-4 pt-10 md:pt-16">
+        <FamilyBridgeBanner />
       </section>
 
       {/* Browse Categories */}
