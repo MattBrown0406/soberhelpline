@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
+import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 const signupSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -382,6 +383,11 @@ const Auth = () => {
           <Button variant="ghost" onClick={() => navigate("/")} className="text-sm">
             Back to Home
           </Button>
+        </div>
+
+        {/* Family Bridge Banner */}
+        <div className="mt-6">
+          <FamilyBridgeBanner />
         </div>
       </div>
     </div>

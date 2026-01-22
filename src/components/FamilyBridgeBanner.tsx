@@ -38,11 +38,11 @@ const FamilyBridgeBanner = () => {
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-white/95">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-white/95">
             {features.map((feature, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-white/80 flex-shrink-0" />
-                <span className="text-xs md:text-sm whitespace-nowrap">{feature}</span>
+              <div key={index} className="flex items-start gap-2">
+                <Check className="h-4 w-4 text-white/80 flex-shrink-0 mt-0.5" />
+                <span className="text-xs md:text-sm">{feature}</span>
               </div>
             ))}
           </div>
