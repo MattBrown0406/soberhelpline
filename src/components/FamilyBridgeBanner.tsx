@@ -4,9 +4,9 @@ import familyBridgeLogo from "@/assets/family-bridge-logo.png";
 const FamilyBridgeBanner = () => {
   const features = [
     "Daily check-ins & progress tracking",
-    "Secure family communication tools",
+    "Secure family communication & financial tools",
     "Recovery milestone celebrations",
-    "24/7 support resources"
+    "AI-powered pattern recognition for early relapse prevention"
   ];
 
   return (
