@@ -22,7 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import logo from "@/assets/logo.png";
-import { InlinePayPalCheckout } from "@/components/InlinePayPalCheckout";
+
 
 // Resize image to fit within maxSize while maintaining aspect ratio
 const resizeImage = (file: File, maxSize: number = 400): Promise<Blob> => {
@@ -801,15 +801,8 @@ const ProviderInfo = () => {
 
       if (error) throw error;
 
-      if (isEditMode) {
-        // Just show success message for updates
-        toast({
-          title: "Information updated!",
-          description: "Your provider information has been successfully updated.",
-        });
-        navigate('/');
-      } else {
-        // Send email notification for new submissions
+      // Send email notification for new submissions
+      if (!isEditMode) {
         try {
           await supabase.functions.invoke('send-provider-notification', {
             body: {
@@ -823,10 +816,15 @@ const ProviderInfo = () => {
           console.error('Failed to send notification email:', emailError);
           // Don't fail the submission if email fails
         }
-
-        // Return the submission ID for payment processing
-        return resultData?.id || null;
       }
+
+      toast({
+        title: isEditMode ? "Information updated!" : "Application submitted!",
+        description: isEditMode 
+          ? "Your provider information has been successfully updated."
+          : "Your application has been submitted for review. You will be notified once it's approved.",
+      });
+      navigate('/');
     } catch (error: any) {
       console.error('Submission error:', error);
       const errorMessage = error?.message || error?.error_description || "There was an error submitting your application. Please try again.";
@@ -893,7 +891,7 @@ const ProviderInfo = () => {
             </div>
 
           <Form {...form}>
-            <form onSubmit={isEditMode ? form.handleSubmit(onSubmit) : (e) => e.preventDefault()} className="space-y-6 bg-card p-6 rounded-lg shadow-lg">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-6 rounded-lg shadow-lg">
               <FormField
                 control={form.control}
                 name="category"
@@ -2652,34 +2650,9 @@ const ProviderInfo = () => {
               />
 
 
-              {isEditMode ? (
-                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Updating..." : "Update Information"}
-                </Button>
-              ) : (
-                <InlinePayPalCheckout
-                  category={form.watch("category")}
-                  isSubmitting={isSubmitting}
-                  isEditMode={isEditMode}
-                  onSubmitAndPay={async (discountCode) => {
-                    // Trigger form validation
-                    const isValid = await form.trigger();
-                    if (!isValid) {
-                      toast({
-                        title: "Please fix form errors",
-                        description: "Check the form for required fields and validation errors.",
-                        variant: "destructive",
-                      });
-                      return null;
-                    }
-                    
-                    // Submit the form and return the submission ID
-                    const values = form.getValues();
-                    const result = await onSubmit(values);
-                    return result || null;
-                  }}
-                />
-              )}
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : (isEditMode ? "Update Information" : "Submit Application")}
+              </Button>
             </form>
           </Form>
         </div>
