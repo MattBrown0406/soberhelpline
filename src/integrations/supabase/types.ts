@@ -323,6 +323,13 @@ export type Database = {
             referencedRelation: "forum_posts"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "forum_bookmarks_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
+            referencedColumns: ["id"]
+          },
         ]
       }
       forum_daily_prompts: {
@@ -407,6 +414,13 @@ export type Database = {
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forum_mentions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
             referencedColumns: ["id"]
           },
         ]
@@ -515,6 +529,13 @@ export type Database = {
             referencedRelation: "forum_posts"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "forum_polls_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: true
+            referencedRelation: "forum_posts_secure"
+            referencedColumns: ["id"]
+          },
         ]
       }
       forum_post_drafts: {
@@ -559,6 +580,13 @@ export type Database = {
             referencedRelation: "forum_posts"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "forum_post_drafts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
+            referencedColumns: ["id"]
+          },
         ]
       }
       forum_post_reactions: {
@@ -589,6 +617,13 @@ export type Database = {
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forum_post_reactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
             referencedColumns: ["id"]
           },
         ]
@@ -639,6 +674,13 @@ export type Database = {
             columns: ["parent_post_id"]
             isOneToOne: false
             referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forum_posts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
             referencedColumns: ["id"]
           },
         ]
@@ -1367,6 +1409,63 @@ export type Database = {
       }
     }
     Views: {
+      forum_posts_secure: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string | null
+          is_anonymous: boolean | null
+          is_pinned: boolean | null
+          needs_support: boolean | null
+          parent_post_id: string | null
+          title: string | null
+          topic_id: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_anonymous?: boolean | null
+          is_pinned?: boolean | null
+          needs_support?: boolean | null
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id?: string | null
+          updated_at?: string | null
+          user_id?: never
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_anonymous?: boolean | null
+          is_pinned?: boolean | null
+          needs_support?: boolean | null
+          parent_post_id?: string | null
+          title?: string | null
+          topic_id?: string | null
+          updated_at?: string | null
+          user_id?: never
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_posts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forum_posts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       guide_analytics: {
         Row: {
           guide_name: string | null
