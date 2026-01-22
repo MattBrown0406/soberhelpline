@@ -18,6 +18,7 @@ import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksh
 import SelfCareWorksheet from "@/components/SelfCareWorksheet";
 import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAssessment";
 import SEOHead from "@/components/SEOHead";
+import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -344,6 +345,11 @@ export default function FamilyEducation() {
               <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-1.5 border border-border/50">
                 <GoogleTranslate />
               </div>
+            </div>
+
+            {/* Family Bridge Banner */}
+            <div className="mb-8">
+              <FamilyBridgeBanner />
             </div>
 
             {/* Hero Section */}
