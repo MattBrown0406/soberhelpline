@@ -71,12 +71,209 @@ import addictionMentalHealthLinkImg from "@/assets/blog-addiction-mental-health-
 import treatmentLevelsOfCareImg from "@/assets/blog-treatment-levels-of-care.png";
 import relapseProcessStagesImg from "@/assets/blog-relapse-process-stages.png";
 import treatmentStabilizationVsChangeImg from "@/assets/blog-treatment-stabilization-vs-change.png";
+import addictionMentalHealthSeparateSystemsImg from "@/assets/blog-addiction-mental-health-separate-systems.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 70,
+    title: "Why Addiction and Mental Health Get Treated Separately—and Why That Confuses Families",
+    excerpt: "Families navigating addiction are often told their loved one needs mental health care, addiction treatment, or sometimes both—but rarely with a clear explanation of how these systems work together. The separation between addiction and mental health treatment creates confusion, conflicting advice, and frustration.",
+    author: "Sober Helpline",
+    date: "2026-01-25",
+    category: "Family Support",
+    image: addictionMentalHealthSeparateSystemsImg,
+    slug: "addiction-mental-health-treatment-separation",
+    seoTitle: "Addiction and Mental Health Treatment | Why Systems Are Separate",
+    metaDescription: "Learn why addiction and mental health treatment are separate systems and how this confuses families. Understand co-occurring disorders, dual diagnosis, and how to navigate overlapping care.",
+    keywords: ["addiction and mental health treatment", "co-occurring disorders families", "addiction vs mental health care", "dual diagnosis explained", "substance use and mental illness", "family education addiction mental health"],
+    content: `**Why Addiction and Mental Health Get Treated Separately—and Why That Confuses Families**
+
+Families navigating addiction are often told their loved one needs mental health care, addiction treatment, or sometimes both—but rarely with a clear explanation of how these systems work together. The separation between addiction and mental health treatment creates confusion, conflicting advice, and frustration for families trying to help. Understanding why these systems are divided—and how symptoms overlap—helps families make clearer, more informed decisions.
+
+**Why Families Hear Conflicting Recommendations**
+
+One professional says it's depression.
+Another says it's addiction.
+A third says treatment won't work until sobriety happens first.
+
+Families are left wondering:
+
+• Which problem came first?
+• Which one matters more?
+• What happens if we treat the wrong thing?
+
+This confusion is not a failure of families. It is the result of two historically separate treatment systems trying to address problems that are deeply interconnected.
+
+**How Addiction and Mental Health Became Separate Systems**
+
+Addiction and mental health treatment developed along different tracks.
+
+Mental health care traditionally focused on:
+
+• Mood disorders
+• Anxiety disorders
+• Trauma
+• Thought disorders
+
+Addiction treatment evolved around:
+
+• Substance dependence
+• Behavioral patterns
+• Relapse prevention
+• Recovery support models
+
+Although science now clearly shows these conditions overlap, many systems still operate independently—creating silos that families are forced to navigate.
+
+**Why Symptoms Overlap So Much**
+
+One of the biggest sources of confusion is how similar addiction and mental health symptoms can look.
+
+Both may include:
+
+• Depression
+• Anxiety
+• Irritability
+• Sleep disruption
+• Emotional instability
+• Withdrawal from relationships
+
+Families understandably ask:
+"Is this substance use causing the mental health issue—or is the mental health issue driving the substance use?"
+
+In many cases, the answer is both.
+
+**How Substance Use Masks Mental Health Conditions**
+
+Active substance use can:
+
+• Mimic mental health symptoms
+• Exaggerate existing conditions
+• Temporarily relieve emotional pain
+• Distort accurate diagnosis
+
+For example:
+
+• Alcohol can look like depression
+• Stimulants can resemble anxiety or bipolar symptoms
+• Cannabis can intensify paranoia or apathy
+
+When substance use is present, it becomes difficult to accurately assess underlying mental health conditions.
+
+This is why professionals often recommend addressing substance use first—not because mental health doesn't matter, but because clarity is hard to achieve while substances are active.
+
+**Why Mental Health Treatment Alone Often Falls Short**
+
+Families are sometimes told:
+"Let's treat the anxiety first."
+"Once the depression improves, the substance use will stop."
+
+In some cases, this works. In many others, it doesn't.
+
+When addiction is present:
+
+• Therapy may not hold under stress
+• Medications may be misused or inconsistent
+• Emotional insight may not translate into behavior change
+
+Mental health care without addressing substance use often leads to partial improvement followed by regression.
+
+Families may feel misled when symptoms return.
+
+**Why Addiction Treatment Alone Can Also Miss the Mark**
+
+On the other side, families sometimes hear:
+"Get sober first—then we'll address mental health."
+
+While sobriety can improve symptoms, untreated mental health conditions often:
+
+• Increase relapse risk
+• Reduce stress tolerance
+• Undermine motivation
+• Create emotional instability
+
+Addiction treatment that ignores mental health leaves families wondering why progress feels fragile.
+
+Both systems matter—and both must be considered.
+
+**What "Co-Occurring Disorders" Actually Means**
+
+When professionals talk about co-occurring disorders (sometimes called dual diagnosis), they mean that:
+
+• Addiction and mental health conditions exist simultaneously
+• Each influences the other
+• Treating one without the other reduces effectiveness
+
+For families, this means there is rarely a single "right" doorway into care. There is only the best starting point, based on current stability and risk.
+
+**Why Families Feel Like They're Playing Whack-a-Mole**
+
+Families often feel stuck addressing one issue at a time.
+
+When substance use improves, mental health flares.
+When mental health stabilizes, substance use returns.
+
+This cycle creates exhaustion and doubt.
+
+Understanding that addiction and mental health are interacting systems—not competing explanations—helps families stop looking for a single root cause and start focusing on coordinated care.
+
+**Why Clear Guidance Matters for Families**
+
+Without clear education, families often:
+
+• Chase the latest recommendation
+• Second-guess past decisions
+• Blame themselves or professionals
+• Feel paralyzed by uncertainty
+
+Education doesn't eliminate complexity—but it reduces chaos.
+
+Families don't need to become clinicians. They need a framework for understanding what they're seeing.
+
+**The Role of Professional Perspective**
+
+Professionals who understand both addiction and mental health can help families:
+
+• Interpret symptoms more accurately
+• Avoid false either/or thinking
+• Understand sequencing of care
+• Set realistic expectations
+• Reduce blame and confusion
+
+This guidance helps families move forward without needing perfect answers first.
+
+**What Families Can Focus on Instead of Labels**
+
+Rather than fixating on diagnosis, families often benefit from watching:
+
+• Stability over time
+• Stress tolerance
+• Consistency of behavior
+• Willingness to accept support
+• Ability to follow through
+
+These indicators provide more useful information than labels alone.
+
+**A More Grounded Way to Think About Care**
+
+Addiction and mental health are not competing explanations.
+They are overlapping realities.
+
+Families don't need to choose sides.
+They need coordinated thinking, realistic expectations, and support navigating complexity.
+
+**A Clearer Educational Takeaway**
+
+Families are confused because the system is confusing—not because they're missing something obvious.
+
+Understanding why addiction and mental health are treated separately helps families stop chasing certainty and start making steadier decisions.
+
+When families replace urgency with education, they gain clarity.
+And clarity—not perfection—is what allows families to move forward with confidence.`
+  },
   {
     id: 69,
     title: "Why Treatment 'Worked Before' and Still Failed: Understanding Temporary Stabilization vs. Lasting Change",
