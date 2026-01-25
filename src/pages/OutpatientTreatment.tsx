@@ -100,6 +100,10 @@ const OutpatientTreatment = () => {
     genderSpecific: [] as string[],
     lgbtSupportive: false,
     therapeuticModality: "All",
+    adolescentServices: false,
+    faithBased: false,
+    languageSpoken: "All",
+    recoveryFellowship: "All",
   });
   const { toast } = useToast();
 
@@ -159,6 +163,31 @@ const OutpatientTreatment = () => {
       // Apply therapeutic modality filter from ProviderFilters
       if (currentFilters.therapeuticModality && currentFilters.therapeuticModality !== "All") {
         query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
+      }
+
+      // Apply adolescent services filter
+      if (currentFilters.adolescentServices) {
+        query = query.eq("adolescent_services", true);
+      }
+
+      // Apply faith-based filter
+      if (currentFilters.faithBased) {
+        query = query.eq("faith_based_services", true);
+      }
+
+      // Apply language spoken filter
+      if (currentFilters.languageSpoken && currentFilters.languageSpoken !== "All") {
+        query = query.contains("languages_spoken", [currentFilters.languageSpoken]);
+      }
+
+      // Apply recovery fellowship filter
+      if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
+        query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
+      }
+
+      // Apply LGBT supportive filter
+      if (currentFilters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
       }
 
       const { data, error } = await query;
@@ -226,6 +255,31 @@ const OutpatientTreatment = () => {
       // Apply therapeutic modality filter from ProviderFilters
       if (currentFilters.therapeuticModality && currentFilters.therapeuticModality !== "All") {
         query = query.contains("therapeutic_modalities", [currentFilters.therapeuticModality]);
+      }
+
+      // Apply adolescent services filter
+      if (currentFilters.adolescentServices) {
+        query = query.eq("adolescent_services", true);
+      }
+
+      // Apply faith-based filter
+      if (currentFilters.faithBased) {
+        query = query.eq("faith_based_services", true);
+      }
+
+      // Apply language spoken filter
+      if (currentFilters.languageSpoken && currentFilters.languageSpoken !== "All") {
+        query = query.contains("languages_spoken", [currentFilters.languageSpoken]);
+      }
+
+      // Apply recovery fellowship filter
+      if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
+        query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
+      }
+
+      // Apply LGBT supportive filter
+      if (currentFilters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
       }
 
       const { data, error } = await query;
@@ -378,6 +432,31 @@ const OutpatientTreatment = () => {
       // Apply therapeutic modality filter from ProviderFilters
       if (filters.therapeuticModality && filters.therapeuticModality !== "All") {
         query = query.contains("therapeutic_modalities", [filters.therapeuticModality]);
+      }
+
+      // Apply adolescent services filter
+      if (filters.adolescentServices) {
+        query = query.eq("adolescent_services", true);
+      }
+
+      // Apply faith-based filter
+      if (filters.faithBased) {
+        query = query.eq("faith_based_services", true);
+      }
+
+      // Apply language spoken filter
+      if (filters.languageSpoken && filters.languageSpoken !== "All") {
+        query = query.contains("languages_spoken", [filters.languageSpoken]);
+      }
+
+      // Apply recovery fellowship filter
+      if (filters.recoveryFellowship && filters.recoveryFellowship !== "All") {
+        query = query.contains("recovery_fellowships", [filters.recoveryFellowship]);
+      }
+
+      // Apply LGBT supportive filter
+      if (filters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
       }
 
       const { data, error } = await query;
@@ -651,7 +730,15 @@ const OutpatientTreatment = () => {
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <>
-            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} showTherapeuticModality={true} />
+            <ProviderFilters 
+              filters={filters} 
+              onFiltersChange={handleFiltersChange} 
+              showTherapeuticModality={true}
+              showAdolescentServices={true}
+              showFaithBased={true}
+              showLanguageSpoken={true}
+              showRecoveryFellowship={true}
+            />
             
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-semibold mb-4">

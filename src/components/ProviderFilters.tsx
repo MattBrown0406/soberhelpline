@@ -65,6 +65,40 @@ const mentalHealthDiagnoses = [
   "Dual Diagnosis",
 ];
 
+const recoveryFellowships = [
+  "All",
+  "Alcoholics Anonymous (AA)",
+  "Narcotics Anonymous (NA)",
+  "SMART Recovery",
+  "Celebrate Recovery",
+  "Refuge Recovery / Recovery Dharma",
+  "LifeRing Secular Recovery",
+  "Secular Organizations for Sobriety (SOS)",
+  "Women for Sobriety",
+  "Moderation Management",
+];
+
+const languagesSpoken = [
+  "All",
+  "Spanish",
+  "Mandarin",
+  "Cantonese",
+  "Vietnamese",
+  "Korean",
+  "Tagalog",
+  "Russian",
+  "Arabic",
+  "French",
+  "Portuguese",
+  "Hindi",
+  "Urdu",
+  "Polish",
+  "German",
+  "Italian",
+  "Japanese",
+  "ASL (American Sign Language)",
+];
+
 interface ProviderFiltersProps {
   filters: {
     insurance: string;
@@ -74,6 +108,10 @@ interface ProviderFiltersProps {
     lgbtSupportive: boolean;
     therapeuticModality?: string;
     mentalHealthDiagnosis?: string;
+    adolescentServices?: boolean;
+    faithBased?: boolean;
+    languageSpoken?: string;
+    recoveryFellowship?: string;
   };
   onFiltersChange: (filters: any) => void;
   showInsurance?: boolean;
@@ -81,6 +119,10 @@ interface ProviderFiltersProps {
   showBudget?: boolean;
   showTherapeuticModality?: boolean;
   showMentalHealthDiagnosis?: boolean;
+  showAdolescentServices?: boolean;
+  showFaithBased?: boolean;
+  showLanguageSpoken?: boolean;
+  showRecoveryFellowship?: boolean;
 }
 
 const ProviderFilters = ({ 
@@ -91,6 +133,10 @@ const ProviderFilters = ({
   showBudget = true,
   showTherapeuticModality = false,
   showMentalHealthDiagnosis = true,
+  showAdolescentServices = false,
+  showFaithBased = false,
+  showLanguageSpoken = false,
+  showRecoveryFellowship = false,
 }: ProviderFiltersProps) => {
   return (
     <Card className="p-4 sm:p-6 mb-6 md:mb-8">
@@ -202,6 +248,54 @@ const ProviderFilters = ({
             </Select>
           </div>
         )}
+
+        {/* Recovery Fellowship */}
+        {showRecoveryFellowship && (
+          <div className="space-y-2">
+            <Label htmlFor="fellowship">Recovery Fellowship</Label>
+            <Select
+              value={filters.recoveryFellowship || "All"}
+              onValueChange={(value) =>
+                onFiltersChange({ ...filters, recoveryFellowship: value })
+              }
+            >
+              <SelectTrigger id="fellowship" className="bg-background">
+                <SelectValue placeholder="Select fellowship" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover z-50 max-h-60">
+                {recoveryFellowships.map((fellowship) => (
+                  <SelectItem key={fellowship} value={fellowship}>
+                    {fellowship}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
+        {/* Language Spoken */}
+        {showLanguageSpoken && (
+          <div className="space-y-2">
+            <Label htmlFor="language">Language Spoken</Label>
+            <Select
+              value={filters.languageSpoken || "All"}
+              onValueChange={(value) =>
+                onFiltersChange({ ...filters, languageSpoken: value })
+              }
+            >
+              <SelectTrigger id="language" className="bg-background">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover z-50 max-h-60">
+                {languagesSpoken.map((language) => (
+                  <SelectItem key={language} value={language}>
+                    {language}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       {/* Gender Specific Care */}
@@ -243,18 +337,53 @@ const ProviderFilters = ({
         </div>
       )}
 
-      {/* LGBT Supportive Care */}
-      <div className="mt-4 flex items-center space-x-2">
-        <Checkbox
-          id="lgbt"
-          checked={filters.lgbtSupportive}
-          onCheckedChange={(checked) =>
-            onFiltersChange({ ...filters, lgbtSupportive: checked as boolean })
-          }
-        />
-        <Label htmlFor="lgbt" className="font-normal cursor-pointer text-sm sm:text-base">
-          LGBT Supportive Care Needed
-        </Label>
+      {/* Checkbox Filters Row */}
+      <div className="mt-4 flex flex-wrap gap-4 sm:gap-6">
+        {/* LGBT Supportive Care */}
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="lgbt"
+            checked={filters.lgbtSupportive}
+            onCheckedChange={(checked) =>
+              onFiltersChange({ ...filters, lgbtSupportive: checked as boolean })
+            }
+          />
+          <Label htmlFor="lgbt" className="font-normal cursor-pointer text-sm sm:text-base">
+            LGBT Supportive Care
+          </Label>
+        </div>
+
+        {/* Adolescent Services */}
+        {showAdolescentServices && (
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="adolescent"
+              checked={filters.adolescentServices || false}
+              onCheckedChange={(checked) =>
+                onFiltersChange({ ...filters, adolescentServices: checked as boolean })
+              }
+            />
+            <Label htmlFor="adolescent" className="font-normal cursor-pointer text-sm sm:text-base">
+              Adolescent Services (Under 18)
+            </Label>
+          </div>
+        )}
+
+        {/* Faith Based Services */}
+        {showFaithBased && (
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="faithBased"
+              checked={filters.faithBased || false}
+              onCheckedChange={(checked) =>
+                onFiltersChange({ ...filters, faithBased: checked as boolean })
+              }
+            />
+            <Label htmlFor="faithBased" className="font-normal cursor-pointer text-sm sm:text-base">
+              Faith-Based Program
+            </Label>
+          </div>
+        )}
       </div>
     </Card>
   );

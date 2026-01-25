@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import USMap from "@/components/USMap";
 import StateMap from "@/components/StateMap";
 import ProviderCard from "@/components/ProviderCard";
+import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
 import MobileStateSelector from "@/components/MobileStateSelector";
@@ -41,23 +42,66 @@ const SoberLiving = () => {
   const [genderSpecificCare, setGenderSpecificCare] = useState("No");
   const [genderType, setGenderType] = useState("");
   const [matFriendly, setMatFriendly] = useState("All");
+  const [filters, setFilters] = useState({
+    insurance: "All",
+    maxBudget: "",
+    zipCode: "",
+    genderSpecific: [] as string[],
+    lgbtSupportive: false,
+    adolescentServices: false,
+    faithBased: false,
+    languageSpoken: "All",
+    recoveryFellowship: "All",
+  });
   const { toast } = useToast();
 
-  const fetchProviders = async (state: string) => {
+  const fetchProviders = async (state: string, currentFilters = filters) => {
     setLoading(true);
     setShowingNearby(false);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("provider_submissions_public")
         .select("*")
         .eq("category", "Sober Living")
         .eq("status", "approved")
         .eq("state", state);
 
+      // Apply gender specific filter from ProviderFilters
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
+      }
+
+      // Apply LGBT supportive filter
+      if (currentFilters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      // Apply adolescent services filter
+      if (currentFilters.adolescentServices) {
+        query = query.eq("adolescent_services", true);
+      }
+
+      // Apply faith-based filter
+      if (currentFilters.faithBased) {
+        query = query.eq("faith_based_services", true);
+      }
+
+      // Apply language spoken filter
+      if (currentFilters.languageSpoken && currentFilters.languageSpoken !== "All") {
+        query = query.contains("languages_spoken", [currentFilters.languageSpoken]);
+      }
+
+      // Apply recovery fellowship filter
+      if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
+        query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
+      }
+
+      const { data, error } = await query;
+
       if (error) throw error;
       
       if (!data || data.length === 0) {
-        await fetchNearbyProviders(state);
+        await fetchNearbyProviders(state, currentFilters);
       } else {
         setProviders(data);
       }
@@ -73,7 +117,7 @@ const SoberLiving = () => {
     }
   };
 
-  const fetchNearbyProviders = async (selectedStateName: string) => {
+  const fetchNearbyProviders = async (selectedStateName: string, currentFilters = filters) => {
     try {
       let query = supabase
         .from("provider_submissions_public")
@@ -87,11 +131,41 @@ const SoberLiving = () => {
         query = query.contains("gender_specific_treatment", [genderType]);
       }
 
+      // Apply gender specific filter from ProviderFilters
+      if (currentFilters.genderSpecific.length > 0) {
+        query = query.overlaps("gender_specific_treatment", currentFilters.genderSpecific);
+      }
+
       // Apply MAT friendly filter for nearby providers
       if (matFriendly === "Yes") {
         query = query.eq("accepts_mat_residents", true);
       } else if (matFriendly === "No") {
         query = query.eq("accepts_mat_residents", false);
+      }
+
+      // Apply LGBT supportive filter
+      if (currentFilters.lgbtSupportive) {
+        query = query.eq("lgbt_supportive", true);
+      }
+
+      // Apply adolescent services filter
+      if (currentFilters.adolescentServices) {
+        query = query.eq("adolescent_services", true);
+      }
+
+      // Apply faith-based filter
+      if (currentFilters.faithBased) {
+        query = query.eq("faith_based_services", true);
+      }
+
+      // Apply language spoken filter
+      if (currentFilters.languageSpoken && currentFilters.languageSpoken !== "All") {
+        query = query.contains("languages_spoken", [currentFilters.languageSpoken]);
+      }
+
+      // Apply recovery fellowship filter
+      if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
+        query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
       }
 
       const { data, error } = await query;
@@ -141,6 +215,18 @@ const SoberLiving = () => {
     setShowStateMap(false);
     setSelectedState(null);
     setProviders([]);
+  };
+
+  const handleFiltersChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    if (selectedState) {
+      fetchProviders(selectedState, newFilters);
+    } else {
+      toast({
+        title: "Select a location first",
+        description: "Please select a state on the map or enter a zip code to apply filters",
+      });
+    }
   };
 
   const handleZipCodeSearch = async () => {
@@ -389,7 +475,20 @@ const SoberLiving = () => {
         </div>
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
-          <div className="max-w-4xl mx-auto">
+          <>
+            <ProviderFilters 
+              filters={filters} 
+              onFiltersChange={handleFiltersChange}
+              showInsurance={false}
+              showBudget={false}
+              showTherapeuticModality={false}
+              showMentalHealthDiagnosis={false}
+              showAdolescentServices={true}
+              showFaithBased={true}
+              showLanguageSpoken={true}
+              showRecoveryFellowship={true}
+            />
+            <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
               {zipCodeSearch && !selectedState
                 ? (showingNearby 
@@ -419,7 +518,8 @@ const SoberLiving = () => {
                 No approved providers found.
               </p>
             )}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>
