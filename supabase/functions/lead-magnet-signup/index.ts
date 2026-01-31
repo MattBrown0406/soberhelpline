@@ -8,6 +8,8 @@ const corsHeaders = {
 interface LeadMagnetRequest {
   email: string;
   firstName: string;
+  phoneNumber?: string;
+  smsOptIn?: boolean;
   source?: string;
 }
 
@@ -17,7 +19,7 @@ serve(async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { email, firstName, source = "lead-magnet" }: LeadMagnetRequest = await req.json();
+    const { email, firstName, phoneNumber, smsOptIn, source = "lead-magnet" }: LeadMagnetRequest = await req.json();
 
     // Basic validation
     if (!email || !email.includes("@")) {
@@ -34,7 +36,15 @@ serve(async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log("Lead magnet signup:", { email, firstName, source });
+    // Validate phone number if SMS opt-in is enabled
+    if (smsOptIn && (!phoneNumber || phoneNumber.trim().length < 10)) {
+      return new Response(
+        JSON.stringify({ error: "Valid phone number is required for SMS notifications" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    console.log("Lead magnet signup:", { email, firstName, phoneNumber: smsOptIn ? phoneNumber : undefined, smsOptIn, source });
 
     const apiKey = Deno.env.get("MAILCHIMP_API_KEY");
     const audienceId = Deno.env.get("MAILCHIMP_AUDIENCE_ID");
@@ -47,6 +57,21 @@ serve(async (req: Request): Promise<Response> => {
     const datacenter = apiKey.split("-").pop();
     const url = `https://${datacenter}.api.mailchimp.com/3.0/lists/${audienceId}/members`;
 
+    // Build merge fields - include phone if opted in
+    const mergeFields: Record<string, string> = {
+      FNAME: firstName.trim(),
+    };
+    
+    if (smsOptIn && phoneNumber) {
+      mergeFields.PHONE = phoneNumber.trim();
+    }
+
+    // Build tags array
+    const tags = ["Lead Magnet", "Free Guide"];
+    if (smsOptIn) {
+      tags.push("SMS Opt-In");
+    }
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -56,10 +81,8 @@ serve(async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         email_address: email.toLowerCase().trim(),
         status: "subscribed",
-        merge_fields: {
-          FNAME: firstName.trim(),
-        },
-        tags: ["Lead Magnet", "Free Guide"],
+        merge_fields: mergeFields,
+        tags: tags,
       }),
     });
 
@@ -67,8 +90,40 @@ serve(async (req: Request): Promise<Response> => {
 
     if (!response.ok) {
       if (data.title === "Member Exists") {
-        // Already subscribed - still give them the guide
-        console.log("Member already exists, allowing download");
+        // Update existing member with new phone/SMS opt-in if provided
+        if (smsOptIn && phoneNumber) {
+          const memberHash = await createMD5Hash(email.toLowerCase().trim());
+          const updateUrl = `https://${datacenter}.api.mailchimp.com/3.0/lists/${audienceId}/members/${memberHash}`;
+          
+          await fetch(updateUrl, {
+            method: "PATCH",
+            headers: {
+              "Authorization": `apikey ${apiKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              merge_fields: {
+                FNAME: firstName.trim(),
+                PHONE: phoneNumber.trim(),
+              },
+            }),
+          });
+
+          // Add SMS Opt-In tag
+          const tagsUrl = `https://${datacenter}.api.mailchimp.com/3.0/lists/${audienceId}/members/${memberHash}/tags`;
+          await fetch(tagsUrl, {
+            method: "POST",
+            headers: {
+              "Authorization": `apikey ${apiKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              tags: [{ name: "SMS Opt-In", status: "active" }],
+            }),
+          });
+        }
+        
+        console.log("Member already exists, updated with SMS opt-in");
         return new Response(
           JSON.stringify({ success: true, message: "Welcome back! Here's your guide." }),
           { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -79,7 +134,7 @@ serve(async (req: Request): Promise<Response> => {
       throw new Error(data.detail || "Failed to subscribe");
     }
 
-    console.log("Successfully added lead:", data.id);
+    console.log("Successfully added lead:", data.id, smsOptIn ? "(with SMS opt-in)" : "");
 
     return new Response(
       JSON.stringify({ success: true, message: "You're in! Check your email." }),
@@ -93,3 +148,12 @@ serve(async (req: Request): Promise<Response> => {
     );
   }
 });
+
+// Helper function to create MD5 hash for Mailchimp member lookup
+async function createMD5Hash(input: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  const hashBuffer = await crypto.subtle.digest("MD5", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+}
