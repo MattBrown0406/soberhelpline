@@ -20,7 +20,7 @@ import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
 import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
-import Free6PromoBanner from "@/components/Free6PromoBanner";
+
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 const categories = [
@@ -263,8 +263,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FREE6 Promo Banner */}
-      <Free6PromoBanner />
 
       {/* RayBan Meta Wayfarer Giveaway Banner */}
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-y border-slate-700/50 overflow-hidden">
