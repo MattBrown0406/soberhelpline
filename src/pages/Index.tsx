@@ -22,6 +22,7 @@ import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
+import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -122,6 +123,7 @@ const Index = () => {
 
   return (
     <>
+      <LeadMagnetPopup />
       <SEOHead
         title="Sober Helpline - Find Addiction Recovery Help"
         description="Connect with ethical addiction treatment providers. Free family support resources, vetted rehabs, interventionists, and recovery coaches nationwide."
