@@ -112,6 +112,7 @@ interface ProviderFiltersProps {
     faithBased?: boolean;
     languageSpoken?: string;
     recoveryFellowship?: string;
+    maxCost?: string;
   };
   onFiltersChange: (filters: any) => void;
   showInsurance?: boolean;
@@ -123,6 +124,7 @@ interface ProviderFiltersProps {
   showFaithBased?: boolean;
   showLanguageSpoken?: boolean;
   showRecoveryFellowship?: boolean;
+  showMaxCost?: boolean;
 }
 
 const ProviderFilters = ({ 
@@ -137,6 +139,7 @@ const ProviderFilters = ({
   showFaithBased = false,
   showLanguageSpoken = false,
   showRecoveryFellowship = false,
+  showMaxCost = false,
 }: ProviderFiltersProps) => {
   return (
     <Card className="p-4 sm:p-6 mb-6 md:mb-8">
@@ -201,7 +204,26 @@ const ProviderFilters = ({
           />
         </div>
 
-        {/* Therapeutic Modality */}
+        {/* Maximum Cost */}
+        {showMaxCost && (
+          <div className="space-y-2">
+            <Label htmlFor="maxCost">Maximum Cost (Monthly)</Label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+              <Input
+                id="maxCost"
+                type="number"
+                placeholder="Enter max cost"
+                value={filters.maxCost || ""}
+                onChange={(e) =>
+                  onFiltersChange({ ...filters, maxCost: e.target.value })
+                }
+                className="pl-7"
+              />
+            </div>
+          </div>
+        )}
+
         {showTherapeuticModality && (
           <div className="space-y-2">
             <Label htmlFor="modality">Therapeutic Modality</Label>

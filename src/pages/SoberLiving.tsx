@@ -52,6 +52,7 @@ const SoberLiving = () => {
     faithBased: false,
     languageSpoken: "All",
     recoveryFellowship: "All",
+    maxCost: "",
   });
   const { toast } = useToast();
 
@@ -94,6 +95,11 @@ const SoberLiving = () => {
       // Apply recovery fellowship filter
       if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
         query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
+      }
+
+      // Apply max cost filter
+      if (currentFilters.maxCost) {
+        query = query.lte("cost", currentFilters.maxCost);
       }
 
       const { data, error } = await query;
@@ -166,6 +172,11 @@ const SoberLiving = () => {
       // Apply recovery fellowship filter
       if (currentFilters.recoveryFellowship && currentFilters.recoveryFellowship !== "All") {
         query = query.contains("recovery_fellowships", [currentFilters.recoveryFellowship]);
+      }
+
+      // Apply max cost filter
+      if (currentFilters.maxCost) {
+        query = query.lte("cost", currentFilters.maxCost);
       }
 
       const { data, error } = await query;
@@ -278,6 +289,11 @@ const SoberLiving = () => {
         query = query.eq("accepts_mat_residents", true);
       } else if (matFriendly === "No") {
         query = query.eq("accepts_mat_residents", false);
+      }
+
+      // Apply max cost filter
+      if (filters.maxCost) {
+        query = query.lte("cost", filters.maxCost);
       }
 
       const { data, error } = await query;
@@ -487,6 +503,7 @@ const SoberLiving = () => {
               showFaithBased={true}
               showLanguageSpoken={true}
               showRecoveryFellowship={true}
+              showMaxCost={true}
             />
             <div className="max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold mb-4">
