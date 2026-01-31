@@ -32,7 +32,7 @@ const FamilyBridgeBanner = () => {
             <div className="text-white text-center lg:text-left">
               <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
                 <h3 className="font-bold text-xl md:text-2xl">
-                  Family Bridge App
+                  FamilyBridge
                 </h3>
                 <span className="inline-flex items-center gap-1 bg-white/20 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
                   <Sparkles className="h-3 w-3" />
