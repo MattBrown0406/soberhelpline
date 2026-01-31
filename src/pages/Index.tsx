@@ -517,7 +517,7 @@ const Index = () => {
                 <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                   <Headphones className="w-6 h-6 text-primary" />
                 </div>
-                <div className="font-medium text-sm text-foreground">11 Guided Meditations</div>
+                <div className="font-medium text-sm text-foreground">Guided Meditations</div>
                 <div className="text-xs text-muted-foreground">For stress & healing</div>
               </div>
               <div className="text-center">
