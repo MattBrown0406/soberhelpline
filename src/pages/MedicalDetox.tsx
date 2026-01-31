@@ -79,6 +79,7 @@ const MedicalDetox = () => {
     zipCode: "",
     genderSpecific: [] as string[],
     lgbtSupportive: false,
+    maxCost: "",
   });
   const { toast } = useToast();
 
@@ -102,6 +103,11 @@ const MedicalDetox = () => {
       // Apply budget filter for Self Pay
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
+      }
+
+      // Apply max cost filter from ProviderFilters
+      if (filters.maxCost) {
+        query = query.lte("cost", filters.maxCost);
       }
 
       const { data, error } = await query;
@@ -141,6 +147,11 @@ const MedicalDetox = () => {
       }
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
+      }
+
+      // Apply max cost filter from ProviderFilters
+      if (filters.maxCost) {
+        query = query.lte("cost", filters.maxCost);
       }
 
       const { data, error } = await query;
@@ -255,6 +266,11 @@ const MedicalDetox = () => {
 
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
+      }
+
+      // Apply max cost filter from ProviderFilters
+      if (filters.maxCost) {
+        query = query.lte("cost", filters.maxCost);
       }
 
       const { data, error } = await query;
@@ -464,7 +480,7 @@ const MedicalDetox = () => {
 
         {(selectedState || (providers.length > 0 && zipCodeSearch)) && (
           <>
-            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} />
+            <ProviderFilters filters={filters} onFiltersChange={handleFiltersChange} showMaxCost={true} />
             
             <div className="max-w-4xl mx-auto">
               <h3 className="text-xl font-semibold mb-4">

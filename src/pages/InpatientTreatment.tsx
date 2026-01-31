@@ -104,6 +104,7 @@ const InpatientTreatment = () => {
     faithBased: false,
     languageSpoken: "All",
     recoveryFellowship: "All",
+    maxCost: "",
   });
   const { toast } = useToast();
 
@@ -196,6 +197,11 @@ const InpatientTreatment = () => {
       // Apply LGBT supportive filter
       if (currentFilters.lgbtSupportive) {
         query = query.eq("lgbt_supportive", true);
+      }
+
+      // Apply max cost filter
+      if (currentFilters.maxCost) {
+        query = query.lte("cost", currentFilters.maxCost);
       }
 
       const { data, error } = await query;
@@ -295,6 +301,11 @@ const InpatientTreatment = () => {
       // Apply LGBT supportive filter
       if (currentFilters.lgbtSupportive) {
         query = query.eq("lgbt_supportive", true);
+      }
+
+      // Apply max cost filter
+      if (currentFilters.maxCost) {
+        query = query.lte("cost", currentFilters.maxCost);
       }
 
       const { data, error } = await query;
@@ -498,6 +509,11 @@ const InpatientTreatment = () => {
       // Apply LGBT supportive filter
       if (filters.lgbtSupportive) {
         query = query.eq("lgbt_supportive", true);
+      }
+
+      // Apply max cost filter
+      if (filters.maxCost) {
+        query = query.lte("cost", filters.maxCost);
       }
 
       const { data, error } = await query;
@@ -929,6 +945,7 @@ const InpatientTreatment = () => {
               showFaithBased={true}
               showLanguageSpoken={true}
               showRecoveryFellowship={true}
+              showMaxCost={true}
             />
             
             <div className="max-w-4xl mx-auto">
