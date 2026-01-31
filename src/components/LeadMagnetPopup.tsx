@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { X, Gift, Download, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,7 @@ const STORAGE_KEY = "leadMagnetDismissed";
 const SHOW_DELAY = 8000; // 8 seconds
 
 const LeadMagnetPopup = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -109,11 +111,23 @@ const LeadMagnetPopup = () => {
               <CheckCircle className="w-12 h-12 text-logo-green mx-auto mb-3" />
               <h3 className="font-semibold text-lg mb-2">You're In!</h3>
               <p className="text-muted-foreground text-sm mb-4">
-                Check your email for your free guide. We've also added you to our weekly tips newsletter.
+                Your free guide is ready! Click below to read it now.
               </p>
-              <Button onClick={handleDismiss} variant="outline" size="sm">
-                Close
-              </Button>
+              <div className="flex flex-col gap-2">
+                <Button 
+                  onClick={() => {
+                    setIsVisible(false);
+                    navigate("/free-guide?access=granted");
+                  }} 
+                  className="gap-2"
+                >
+                  <Download className="w-4 h-4" />
+                  Read My Free Guide
+                </Button>
+                <Button onClick={handleDismiss} variant="ghost" size="sm">
+                  I'll read it later
+                </Button>
+              </div>
             </div>
           ) : (
             <>
