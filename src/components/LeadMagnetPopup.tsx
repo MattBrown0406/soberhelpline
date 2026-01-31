@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { X, Gift, Download, CheckCircle, Loader2 } from "lucide-react";
+import { X, Gift, Download, CheckCircle, Loader2, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -14,6 +15,8 @@ const LeadMagnetPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [smsOptIn, setSmsOptIn] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
@@ -51,7 +54,13 @@ const LeadMagnetPopup = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke("lead-magnet-signup", {
-        body: { email, firstName, source: "homepage-popup" },
+        body: { 
+          email, 
+          firstName, 
+          phoneNumber: smsOptIn ? phoneNumber : undefined,
+          smsOptIn,
+          source: "homepage-popup" 
+        },
       });
 
       if (error) throw error;
@@ -163,6 +172,39 @@ const LeadMagnetPopup = () => {
                   className="h-11"
                   disabled={isSubmitting}
                 />
+                
+                {/* SMS Opt-in Section */}
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="sms-optin"
+                      checked={smsOptIn}
+                      onCheckedChange={(checked) => setSmsOptIn(checked === true)}
+                      disabled={isSubmitting}
+                    />
+                    <label
+                      htmlFor="sms-optin"
+                      className="text-sm text-muted-foreground cursor-pointer"
+                    >
+                      Get SMS updates & reminders
+                    </label>
+                  </div>
+                  
+                  {smsOptIn && (
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-muted-foreground shrink-0" />
+                      <Input
+                        type="tel"
+                        placeholder="(555) 123-4567"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        className="h-10"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  )}
+                </div>
+
                 <Button 
                   type="submit" 
                   className="w-full h-11 bg-primary hover:bg-primary/90"
