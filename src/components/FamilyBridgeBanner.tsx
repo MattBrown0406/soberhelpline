@@ -6,7 +6,9 @@ const FamilyBridgeBanner = () => {
     "FIIS AI-powered recovery intelligence (Patent Pending)",
     "Smart medication compliance with family alerts",
     "GPS-verified meeting check-ins",
-    "Secure family voting on financial requests"
+    "Secure family voting on financial requests",
+    "365-day recovery trajectory tracking",
+    "Real-time AI-moderated communication"
   ];
 
   return (
