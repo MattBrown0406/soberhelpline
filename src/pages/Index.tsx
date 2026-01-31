@@ -747,7 +747,7 @@ const Index = () => {
                 Our Promise
               </div>
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">Our Mission</h2>
-              <div className="space-y-3 md:space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
+              <div className="space-y-3 md:space-y-4 text-gray-300 leading-relaxed text-sm md:text-base mission-statement">
                 <p>
                   At Sober Helpline, we are dedicated to providing families of addicted loved ones with ethical, proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria.
                 </p>
@@ -755,7 +755,7 @@ const Index = () => {
                   Our provider directory is completely free to use—search for trusted treatment centers, therapists, interventionists, and recovery resources at no cost. For families seeking deeper support, our Family Forum and Education Center offer 60+ interactive tools, guides, and videos for a small monthly fee of $14.99.
                 </p>
                 <p className="font-semibold text-white">
-                  We take no commissions or payments from treatment providers for referred clients. This is patient brokering—and we will never do it.
+                  Treatment centers are not charged a fee for listing their programs. Only trusted providers who meet our standards are invited to be a part of our database. We take no commissions or payments for referred clients—patient brokering is something we will never do.
                 </p>
               </div>
               <Link to="/blog" className="mt-5 md:mt-8">
