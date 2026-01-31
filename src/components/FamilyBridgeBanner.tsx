@@ -1,12 +1,12 @@
-import { ExternalLink, Check } from "lucide-react";
+import { ExternalLink, Check, Sparkles } from "lucide-react";
 import familyBridgeLogo from "@/assets/family-bridge-logo.png";
 
 const FamilyBridgeBanner = () => {
   const features = [
-    "Daily check-ins & progress tracking",
-    "Secure family communication & financial tools",
-    "Recovery milestone celebrations",
-    "AI-powered pattern recognition for early relapse prevention"
+    "FIIS AI-powered recovery intelligence (Patent Pending)",
+    "Smart medication compliance with family alerts",
+    "GPS-verified meeting check-ins",
+    "Secure family voting on financial requests"
   ];
 
   return (
@@ -28,11 +28,17 @@ const FamilyBridgeBanner = () => {
               />
             </div>
             <div className="text-white text-center lg:text-left">
-              <h3 className="font-bold text-xl md:text-2xl mb-1">
-                Family Bridge App
-              </h3>
+              <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                <h3 className="font-bold text-xl md:text-2xl">
+                  Family Bridge App
+                </h3>
+                <span className="inline-flex items-center gap-1 bg-white/20 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                  <Sparkles className="h-3 w-3" />
+                  FIIS Tech
+                </span>
+              </div>
               <p className="text-white/90 text-sm md:text-base">
-                Bridging the gap between families and recovery
+                Healing starts with connection • HIPAA compliant
               </p>
             </div>
           </div>
@@ -50,7 +56,7 @@ const FamilyBridgeBanner = () => {
           {/* CTA */}
           <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0">
             <span className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
-              Learn More
+              Start Your Journey
             </span>
             <ExternalLink className="h-4 w-4 text-white" />
           </div>
