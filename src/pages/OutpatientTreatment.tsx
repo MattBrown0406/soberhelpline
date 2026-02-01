@@ -599,7 +599,7 @@ const OutpatientTreatment = () => {
           
           {!selectedState && providers.length === 0 && (
           <div className="max-w-6xl mx-auto mt-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <Input
@@ -660,6 +660,21 @@ const OutpatientTreatment = () => {
                     <p className="text-xs text-muted-foreground mt-1">$ amount per month</p>
                   </div>
                 )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="maxCostSearch">Maximum Cost (Monthly)</Label>
+                <Input
+                  id="maxCostSearch"
+                  type="text"
+                  placeholder="Enter max cost"
+                  value={filters.maxCost}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, "");
+                    setFilters((prev) => ({ ...prev, maxCost: value }));
+                  }}
+                />
+                <p className="text-xs text-muted-foreground">$ amount per month</p>
               </div>
 
               <div className="space-y-2">
