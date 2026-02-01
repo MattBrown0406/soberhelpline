@@ -465,7 +465,7 @@ const MedicalDetox = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="maxCostSearch">Maximum Cost (Monthly)</Label>
+                  <Label htmlFor="maxCostSearch">Maximum Cost (Daily)</Label>
                   <Input
                     id="maxCostSearch"
                     type="text"
@@ -476,7 +476,7 @@ const MedicalDetox = () => {
                       setFilters((prev) => ({ ...prev, maxCost: value }));
                     }}
                   />
-                  <p className="text-xs text-muted-foreground">$ amount per month</p>
+                  <p className="text-xs text-muted-foreground">$ amount per day</p>
                 </div>
               </div>
               
