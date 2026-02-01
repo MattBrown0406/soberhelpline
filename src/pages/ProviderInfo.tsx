@@ -2428,6 +2428,8 @@ const ProviderInfo = () => {
                         ? "Cost of Services *"
                         : ["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
                         ? "Cost per session/meeting *"
+                        : form.watch("category") === "Medical Detox"
+                        ? "Daily Rate (without insurance) *"
                         : "Private Pay Rate (without insurance) *"}
                     </FormLabel>
                     <FormControl>
@@ -2440,6 +2442,8 @@ const ProviderInfo = () => {
                               ? "cost per intervention" 
                               : ["Sober Coaches/Companions", "Therapists", "Psychiatrists", "Attorneys"].includes(form.watch("category"))
                               ? "cost per session/meeting"
+                              : form.watch("category") === "Medical Detox"
+                              ? "cost per day"
                               : "cost per month"
                           }
                           className="pl-7"
