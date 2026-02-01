@@ -463,6 +463,21 @@ const MedicalDetox = () => {
                     </div>
                   )}
                 </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="maxCostSearch">Maximum Cost (Monthly)</Label>
+                  <Input
+                    id="maxCostSearch"
+                    type="text"
+                    placeholder="Enter max cost"
+                    value={filters.maxCost}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, "");
+                      setFilters((prev) => ({ ...prev, maxCost: value }));
+                    }}
+                  />
+                  <p className="text-xs text-muted-foreground">$ amount per month</p>
+                </div>
               </div>
               
               <div className="flex justify-center mt-4">
