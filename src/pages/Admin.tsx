@@ -87,7 +87,7 @@ const Admin = () => {
       const { data, error } = await supabase
         .from("provider_submissions")
         .select("*")
-        .order("created_at", { ascending: true });
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setSubmissions(data || []);
