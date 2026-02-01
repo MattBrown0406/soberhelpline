@@ -88,8 +88,6 @@ const OutpatientTreatment = () => {
   const [zipCodeSearch, setZipCodeSearch] = useState("");
   const [insuranceSearch, setInsuranceSearch] = useState("All");
   const [customInsurance, setCustomInsurance] = useState("");
-  const [genderSpecificCare, setGenderSpecificCare] = useState("No");
-  const [genderType, setGenderType] = useState("");
   const [lengthOfStay, setLengthOfStay] = useState("All");
   const [maxBudget, setMaxBudget] = useState("");
   const [selectedModality, setSelectedModality] = useState("All");
@@ -131,11 +129,6 @@ const OutpatientTreatment = () => {
       // Apply budget filter for Self Pay
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
-      }
-
-      // Apply gender specific filter from search form
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
       }
 
       // Apply gender specific filter from ProviderFilters
@@ -235,9 +228,6 @@ const OutpatientTreatment = () => {
       }
       if (insuranceSearch === "Self Pay" && maxBudget) {
         query = query.lte("cost", maxBudget);
-      }
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
       }
       // Apply gender specific filter from ProviderFilters
       if (currentFilters.genderSpecific.length > 0) {
@@ -378,15 +368,6 @@ const OutpatientTreatment = () => {
       return;
     }
 
-    if (genderSpecificCare === "Yes" && !genderType) {
-      toast({
-        title: "Gender Selection Required",
-        description: "Please select either Men or Women for gender-specific care",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (insuranceSearch === "Self Pay" && !maxBudget) {
       toast({
         title: "Budget Required",
@@ -413,10 +394,6 @@ const OutpatientTreatment = () => {
       
       if (activeInsurance && activeInsurance !== "All") {
         query = query.contains("insurances_accepted", [activeInsurance]);
-      }
-
-      if (genderSpecificCare === "Yes" && genderType) {
-        query = query.contains("gender_specific_treatment", [genderType]);
       }
 
       if (insuranceSearch === "Self Pay" && maxBudget) {
@@ -491,11 +468,10 @@ const OutpatientTreatment = () => {
       
       if (filteredProviders.length === 0) {
         const insuranceText = insuranceSearch === "Other" ? customInsurance : insuranceSearch;
-        const genderText = genderSpecificCare === "Yes" ? ` with ${genderType} specific care` : "";
         const lengthText = lengthOfStay !== "All" ? ` with ${lengthOfStay} length of stay` : "";
         toast({
           title: "No providers found",
-          description: `No providers found near zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${genderText}${lengthText}`,
+          description: `No providers found near zip code ${zipCodeSearch}${insuranceSearch !== "All" ? ` that accept ${insuranceText}` : ""}${lengthText}`,
         });
       }
     } catch (error) {
@@ -599,7 +575,7 @@ const OutpatientTreatment = () => {
           
           {!selectedState && providers.length === 0 && (
           <div className="max-w-6xl mx-auto mt-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="zipSearch">Search by Zip Code</Label>
                 <Input
@@ -678,36 +654,6 @@ const OutpatientTreatment = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="genderCare">Gender Specific Care Needed?</Label>
-                <Select
-                  value={genderSpecificCare}
-                  onValueChange={setGenderSpecificCare}
-                >
-                  <SelectTrigger id="genderCare" className="bg-background">
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="No">No</SelectItem>
-                    <SelectItem value="Yes">Yes</SelectItem>
-                  </SelectContent>
-                </Select>
-                {genderSpecificCare === "Yes" && (
-                  <Select
-                    value={genderType}
-                    onValueChange={setGenderType}
-                  >
-                    <SelectTrigger className="bg-background mt-2">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      <SelectItem value="Men">Men</SelectItem>
-                      <SelectItem value="Women">Women</SelectItem>
-                    </SelectContent>
-                  </Select>
-                )}
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="lengthOfStay">Length of Stay</Label>
                 <Select
                   value={lengthOfStay}
@@ -764,6 +710,7 @@ const OutpatientTreatment = () => {
             <ProviderFilters 
               filters={filters} 
               onFiltersChange={handleFiltersChange} 
+              showGenderSpecific={false}
               showTherapeuticModality={true}
               showAdolescentServices={true}
               showFaithBased={true}
