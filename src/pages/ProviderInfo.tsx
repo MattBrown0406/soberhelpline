@@ -740,21 +740,36 @@ const ProviderInfo = () => {
       let resultData;
       let error;
 
-      // Refresh session right before database operation to ensure valid token
+      // Refresh session right before database operation to ensure the token used by PostgREST
+      // matches the user_id we write into submitted_by (RLS requires auth.uid() = submitted_by).
       const { data: finalRefreshData, error: refreshError } = await supabase.auth.refreshSession();
-      if (refreshError || !finalRefreshData?.session?.user) {
-        console.error('Session refresh failed before submission:', refreshError);
+      if (refreshError) {
+        console.error("Session refresh failed before submission:", refreshError);
+      }
+
+      // After refresh, re-verify the currently active user from the token.
+      const {
+        data: { user: finalUser },
+        error: finalUserError,
+      } = await supabase.auth.getUser();
+
+      if (finalUserError || !finalUser) {
+        console.error("Unable to verify user after refresh:", {
+          finalUserError,
+          refreshError,
+          hasSessionUser: Boolean(finalRefreshData?.session?.user),
+        });
         toast({
-          title: "Session expired",
-          description: "Please log in again to submit your application.",
+          title: "Authentication required",
+          description: "We couldn't verify your login. Please log in again and resubmit.",
           variant: "destructive",
         });
         navigate("/auth");
         return null;
       }
-      
-      // Update submitted_by with the refreshed user ID to ensure consistency
-      submissionData.submitted_by = finalRefreshData.session.user.id;
+
+      // Update submitted_by using the *token-derived* user id (most authoritative).
+      submissionData.submitted_by = finalUser.id;
 
       if (isEditMode && existingSubmission) {
         // Update existing submission
