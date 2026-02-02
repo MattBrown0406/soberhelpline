@@ -741,8 +741,8 @@ const ProviderInfo = () => {
       let error;
 
       // Refresh session right before database operation to ensure valid token
-      const { error: refreshError } = await supabase.auth.refreshSession();
-      if (refreshError) {
+      const { data: finalRefreshData, error: refreshError } = await supabase.auth.refreshSession();
+      if (refreshError || !finalRefreshData?.session?.user) {
         console.error('Session refresh failed before submission:', refreshError);
         toast({
           title: "Session expired",
@@ -752,6 +752,9 @@ const ProviderInfo = () => {
         navigate("/auth");
         return null;
       }
+      
+      // Update submitted_by with the refreshed user ID to ensure consistency
+      submissionData.submitted_by = finalRefreshData.session.user.id;
 
       if (isEditMode && existingSubmission) {
         // Update existing submission
