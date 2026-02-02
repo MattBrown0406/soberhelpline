@@ -134,15 +134,16 @@ const RecoveryPodcasts = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-8 relative z-10">
-          <div className="flex justify-between items-center mb-8">
+        <div className="container mx-auto px-4 py-6 sm:py-8 relative z-10">
+          <div className="flex justify-between items-center mb-6 sm:mb-8 gap-2">
             <Link to="/">
-              <Button variant="ghost" className="gap-2 text-white hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="gap-1 sm:gap-2 text-white hover:bg-white/10 px-2 sm:px-4">
                 <ArrowLeft className="w-4 h-4" />
-                Back to Home
+                <span className="hidden sm:inline">Back to Home</span>
+                <span className="sm:hidden">Back</span>
               </Button>
             </Link>
-            <img src={logo} alt="Sober Helpline" className="h-16 w-auto" />
+            <img src={logo} alt="Sober Helpline" className="h-12 sm:h-16 w-auto" />
           </div>
 
         <div className="text-center py-6">
@@ -177,68 +178,67 @@ const RecoveryPodcasts = () => {
             return (
               <Card key={podcast.name} className="overflow-hidden border-0 shadow-2xl bg-card">
                 {/* Podcast Header with Gradient */}
-                <div className={`relative p-6 bg-gradient-to-r ${podcast.gradient}`}>
+                <div className={`relative p-4 sm:p-6 bg-gradient-to-r ${podcast.gradient}`}>
                   <div className="absolute inset-0 bg-black/20" />
-                  <div className="relative z-10 flex items-center gap-4">
+                  <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-4">
                     {podcast.logo ? (
-                      <div className="w-24 h-24 rounded-2xl overflow-hidden bg-white shadow-xl flex-shrink-0">
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-white shadow-xl flex-shrink-0">
                         <img src={podcast.logo} alt={`${podcast.name} logo`} className="w-full h-full object-contain p-2" />
                       </div>
                     ) : (
-                      <div className="w-24 h-24 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl flex-shrink-0">
-                        <Mic2 className="w-12 h-12 text-white" />
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl flex-shrink-0">
+                        <Mic2 className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
                       </div>
                     )}
-                    <div className="flex-grow">
-                      <div className="flex items-center justify-between gap-4">
-                        <h3 className="text-2xl font-bold text-white mb-1">{podcast.name}</h3>
-                        <div className="flex items-center gap-2">
-                          {podcast.applePodcastsUrl && (
-                            <a 
-                              href={podcast.applePodcastsUrl} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              title="Listen on Apple Podcasts"
-                            >
-                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
-                                <svg className="w-5 h-5" viewBox="0 0 50 50" fill="currentColor">
-                                  <path d="M25 2C12.3 2 2 12.3 2 25s10.3 23 23 23 23-10.3 23-23S37.7 2 25 2zm0 4c10.5 0 19 8.5 19 19s-8.5 19-19 19S6 35.5 6 25 14.5 6 25 6zm0 5c-4.4 0-8.3 2-11 5-.4.4-.3 1.1.1 1.4.4.4 1.1.3 1.4-.1C17.8 14.5 21.2 13 25 13s7.2 1.5 9.5 4.3c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-2.7-3.1-6.6-5.1-11.1-5.1zm0 6c-2.8 0-5.2 1.2-7 3.2-.4.4-.3 1 .1 1.4.4.4 1 .3 1.4-.1 1.4-1.5 3.3-2.4 5.5-2.4s4.1.9 5.5 2.4c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-1.8-2-4.3-3.3-7.1-3.3zm0 6c-2.2 0-4 1.8-4 4 0 1.5.8 2.7 2 3.4v9.1c0 1.1.9 2 2 2s2-.9 2-2v-9.1c1.2-.7 2-2 2-3.4 0-2.2-1.8-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
-                                </svg>
-                              </Button>
-                            </a>
-                          )}
-                          {podcast.spotifyUrl && (
-                            <a 
-                              href={podcast.spotifyUrl} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              title="Listen on Spotify"
-                            >
-                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
-                                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                                </svg>
-                              </Button>
-                            </a>
-                          )}
-                          {podcast.name !== "The Unbroken with Sam Davis" && podcast.link && (
-                            <a 
-                              href={podcast.link} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                            >
-                              <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">
-                                Visit Website
-                                <ExternalLink className="w-4 h-4" />
-                              </Button>
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-white/80 flex items-center gap-2">
+                    <div className="flex-grow text-center sm:text-left w-full">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{podcast.name}</h3>
+                      <p className="text-white/80 flex items-center justify-center sm:justify-start gap-2 mb-3">
                         <Mic2 className="w-4 h-4" />
                         Hosted by {podcast.host}
                       </p>
+                      <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+                        {podcast.applePodcastsUrl && (
+                          <a 
+                            href={podcast.applePodcastsUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            title="Listen on Apple Podcasts"
+                          >
+                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
+                              <svg className="w-5 h-5" viewBox="0 0 50 50" fill="currentColor">
+                                <path d="M25 2C12.3 2 2 12.3 2 25s10.3 23 23 23 23-10.3 23-23S37.7 2 25 2zm0 4c10.5 0 19 8.5 19 19s-8.5 19-19 19S6 35.5 6 25 14.5 6 25 6zm0 5c-4.4 0-8.3 2-11 5-.4.4-.3 1.1.1 1.4.4.4 1.1.3 1.4-.1C17.8 14.5 21.2 13 25 13s7.2 1.5 9.5 4.3c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-2.7-3.1-6.6-5.1-11.1-5.1zm0 6c-2.8 0-5.2 1.2-7 3.2-.4.4-.3 1 .1 1.4.4.4 1 .3 1.4-.1 1.4-1.5 3.3-2.4 5.5-2.4s4.1.9 5.5 2.4c.2.2.5.4.8.4.2 0 .5-.1.7-.2.4-.4.5-1 .1-1.4-1.8-2-4.3-3.3-7.1-3.3zm0 6c-2.2 0-4 1.8-4 4 0 1.5.8 2.7 2 3.4v9.1c0 1.1.9 2 2 2s2-.9 2-2v-9.1c1.2-.7 2-2 2-3.4 0-2.2-1.8-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+                              </svg>
+                            </Button>
+                          </a>
+                        )}
+                        {podcast.spotifyUrl && (
+                          <a 
+                            href={podcast.spotifyUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            title="Listen on Spotify"
+                          >
+                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2">
+                              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                              </svg>
+                            </Button>
+                          </a>
+                        )}
+                        {podcast.name !== "The Unbroken with Sam Davis" && podcast.link && (
+                          <a 
+                            href={podcast.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            <Button size="sm" className="gap-2 bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">
+                              <span className="hidden sm:inline">Visit Website</span>
+                              <span className="sm:hidden">Website</span>
+                              <ExternalLink className="w-4 h-4" />
+                            </Button>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

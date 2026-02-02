@@ -189,35 +189,36 @@ const BlogArticle = () => {
         </script>
       </Helmet>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
           <Link to="/blog">
-            <Button variant="outline" className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back to Blog
+              <span className="hidden sm:inline">Back to Blog</span>
+              <span className="sm:hidden">Back</span>
             </Button>
           </Link>
-          <div className="flex items-center gap-4">
-            <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-              <Phone className="w-5 h-5" />
-              <span className="font-medium">(541) 241-5886</span>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <a href="tel:5412415886" className="flex items-center gap-1 sm:gap-2 text-foreground hover:text-primary transition-colors">
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="font-medium text-sm sm:text-base">(541) 241-5886</span>
             </a>
-            <img src={logo} alt="Sober Helpline" className="h-16 w-auto" />
+            <img src={logo} alt="Sober Helpline" className="h-12 sm:h-16 w-auto" />
           </div>
         </div>
 
         {/* Article */}
-        <div className="max-w-3xl mx-auto">
+        <article className="max-w-3xl mx-auto">
           <div className="text-sm text-primary font-medium mb-2">{post.category}</div>
-          <h1 className="text-4xl font-bold text-foreground mb-4">{post.title}</h1>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">{post.title}</h1>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-6">
             <div className="flex items-center gap-1">
-              <User className="w-4 h-4" />
+              <User className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>{post.author}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>{new Date(post.date).toLocaleDateString()}</span>
             </div>
           </div>
@@ -290,15 +291,15 @@ const BlogArticle = () => {
             <img 
               src={post.image} 
               alt={post.title} 
-              className="w-full h-96 object-cover rounded-lg mb-8"
+              className="w-full h-48 sm:h-72 md:h-96 object-cover rounded-lg mb-6 sm:mb-8"
             />
           )}
 
           {/* Content */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-sm sm:prose-lg max-w-none">
             {post.content && renderContent(post.content)}
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );
