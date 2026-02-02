@@ -17,7 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Phone } from "lucide-react";
+import { ArrowLeft, Phone, Save } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
@@ -256,6 +256,7 @@ const ProviderInfo = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSavingDraft, setIsSavingDraft] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -532,6 +533,157 @@ const ProviderInfo = () => {
       title: "New Application",
       description: "You can now fill out a new provider application.",
     });
+  };
+
+  // Save draft functionality - saves current form state without full validation
+  const saveDraft = async () => {
+    // Get the current session first
+    const { data: sessionData } = await supabase.auth.getSession();
+    
+    let authenticatedUserId: string | null = null;
+    
+    if (sessionData?.session?.user) {
+      authenticatedUserId = sessionData.session.user.id;
+    } else {
+      const { data: refreshData } = await supabase.auth.refreshSession();
+      if (refreshData?.session?.user) {
+        authenticatedUserId = refreshData.session.user.id;
+      }
+    }
+    
+    if (!authenticatedUserId) {
+      toast({
+        title: "Authentication required",
+        description: "Your session has expired. Please log in again.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    // Verify user
+    const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !currentUser) {
+      toast({
+        title: "Authentication required",
+        description: "Unable to verify your identity. Please log in again.",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    setIsSavingDraft(true);
+    try {
+      const formData = form.getValues();
+      
+      // Prepare draft data (same structure as full submission but with status='draft')
+      const draftData = {
+        category: formData.category || null,
+        provider_name: formData.providerName || "Untitled Draft",
+        city: formData.city || null,
+        state: formData.state || null,
+        zip_code: formData.zipCode || null,
+        phone_number: formData.phoneNumber || "000-000-0000", // Required field placeholder
+        email: formData.email || currentUser.email || "draft@placeholder.com", // Required field placeholder
+        website: formData.website || null,
+        year_started: formData.yearStarted ? parseInt(formData.yearStarted) : null,
+        intervention_modalities: formData.interventionModalities?.length ? formData.interventionModalities : null,
+        cip_certified: formData.cipCertified || null,
+        hourly_coaching_sessions: formData.hourlyCoachingSessions || null,
+        hourly_coaching_rate: formData.hourlyCoachingRate || null,
+        case_management_services: formData.caseManagementServices || null,
+        length_of_services: formData.lengthOfServices?.length ? formData.lengthOfServices.join(", ") : null,
+        detox_available: formData.detoxAvailable || false,
+        detox_only_services: formData.detoxOnlyServices || null,
+        co_occurring_diagnoses: formData.coOccurringDiagnoses || null,
+        therapeutic_modalities: formData.therapeuticModalities?.length ? formData.therapeuticModalities : null,
+        in_person_companion_work: formData.inPersonCompanionWork || null,
+        has_valid_passport: formData.hasValidPassport || null,
+        daily_companion_fee: formData.dailyCompanionFee || null,
+        works_nationally: formData.worksNationally || null,
+        works_internationally: formData.worksInternationally || null,
+        languages_spoken: formData.languagesSpoken?.length ? formData.languagesSpoken : null,
+        awake_staff_24_7: formData.awakeStaff247 || null,
+        residents_expected_to_work: formData.residentsExpectedToWork || null,
+        job_assistance_provided: formData.jobAssistanceProvided || null,
+        medication_administration: formData.medicationAdministration || null,
+        accepts_mat_residents: formData.acceptsMatResidents || null,
+        minimum_time_since_last_use: formData.minimumTimeSinceLastUse || null,
+        required_meetings_per_week: formData.requiredMeetingsPerWeek || null,
+        mandatory_curfew: formData.mandatoryCurfew || null,
+        curfew_time: formData.curfewTime || null,
+        chores_required: formData.choresRequired || null,
+        mandatory_house_meetings: formData.mandatoryHouseMeetings || null,
+        house_meetings_per_week: formData.houseMeetingsPerWeek ? parseInt(formData.houseMeetingsPerWeek) : null,
+        gender_specific_treatment: formData.genderSpecificTreatment || null,
+        lgbt_supportive: formData.lgbtSupportive || false,
+        adolescent_services: formData.adolescentServices || false,
+        substance_use_disorder_experience: formData.substanceUseDisorderExperience || null,
+        telehealth_available: formData.telehealthAvailable || null,
+        license_current_good_standing: formData.licenseCurrentGoodStanding || null,
+        legal_assistance_types: formData.legalAssistanceTypes || null,
+        recovery_fellowships: formData.recoveryFellowships?.length ? formData.recoveryFellowships : null,
+        faith_based_services: formData.faithBasedServices || null,
+        military_first_responder_care: formData.militaryFirstResponderCare || null,
+        description_of_services: formData.descriptionOfServices || null,
+        cost: formData.cost || null,
+        travel_expenses_included: formData.travelExpensesIncluded || null,
+        items_included_in_cost: formData.itemsIncludedInCost || null,
+        insurances_accepted: formData.insurancesAccepted || [],
+        logo_url: existingSubmission?.logo_url || null,
+        status: 'draft',
+        submitted_by: currentUser.id,
+        youtube_url: formData.youtubeUrl && !formData.youtubeUrl.startsWith('http') ? `https://youtube.com/@${formData.youtubeUrl}` : (formData.youtubeUrl || null),
+        tiktok_url: formData.tiktokUrl && !formData.tiktokUrl.startsWith('http') ? `https://tiktok.com/@${formData.tiktokUrl}` : (formData.tiktokUrl || null),
+        instagram_url: formData.instagramUrl && !formData.instagramUrl.startsWith('http') ? `https://instagram.com/${formData.instagramUrl}` : (formData.instagramUrl || null),
+        facebook_url: formData.facebookUrl && !formData.facebookUrl.startsWith('http') ? `https://facebook.com/${formData.facebookUrl}` : (formData.facebookUrl || null),
+        sliding_scale_available: formData.slidingScaleAvailable || false,
+        also_provides_outpatient: formData.alsoProvideOutpatient || false,
+        also_provides_sober_living: formData.alsoProvideSoberLiving || false
+      };
+
+      let error;
+
+      if (existingSubmission && (existingSubmission.status === 'draft' || isEditMode)) {
+        // Update existing draft
+        const { error: updateError } = await supabase
+          .from('provider_submissions')
+          .update(draftData)
+          .eq('id', existingSubmission.id);
+        error = updateError;
+      } else {
+        // Insert new draft
+        const { data: insertedData, error: insertError } = await supabase
+          .from('provider_submissions')
+          .insert(draftData)
+          .select()
+          .single();
+        
+        if (insertedData) {
+          setExistingSubmission(insertedData);
+          setIsEditMode(true);
+        }
+        error = insertError;
+      }
+
+      if (error) throw error;
+
+      toast({
+        title: "Draft saved!",
+        description: "Your application has been saved. You can return anytime to complete it.",
+      });
+    } catch (error: any) {
+      console.error('Save draft error:', error);
+      toast({
+        title: "Save failed",
+        description: error?.message || "There was an error saving your draft. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingDraft(false);
+    }
   };
 
   const onSubmit = async (data: ProviderFormValues) => {
@@ -888,12 +1040,18 @@ const ProviderInfo = () => {
             <div className="mb-8 text-center">
               <img src={logo} alt="Sober Helpline" className="mx-auto mb-6 w-48 h-48 object-contain" />
               <h1 className="text-4xl font-bold text-foreground mb-2">
-                {isEditMode ? "Edit Provider Information" : "Provider Application"}
+                {existingSubmission?.status === 'draft' 
+                  ? "Continue Your Application" 
+                  : isEditMode 
+                    ? "Edit Provider Information" 
+                    : "Provider Application"}
               </h1>
               <p className="text-lg text-muted-foreground">
-                {isEditMode 
-                  ? "Update your provider information below. Note: You cannot change your provider category."
-                  : "Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards."
+                {existingSubmission?.status === 'draft'
+                  ? "You have a saved draft. Complete your application and submit when ready."
+                  : isEditMode 
+                    ? "Update your provider information below. Note: You cannot change your provider category."
+                    : "Submit your information to be listed on Sober Helpline. All providers are carefully vetted to ensure they meet our rigorous ethical standards."
                 }
               </p>
               {isEditMode && (
@@ -2672,9 +2830,27 @@ const ProviderInfo = () => {
               />
 
 
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : (isEditMode ? "Update Information" : "Submit Application")}
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto flex-1 gap-2" 
+                  onClick={saveDraft}
+                  disabled={isSavingDraft || isSubmitting}
+                >
+                  <Save className="w-4 h-4" />
+                  {isSavingDraft ? "Saving..." : "Save Draft"}
+                </Button>
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full sm:w-auto flex-1" 
+                  disabled={isSubmitting || isSavingDraft}
+                >
+                  {isSubmitting ? "Submitting..." : (isEditMode && existingSubmission?.status !== 'draft' ? "Update Information" : "Submit Application")}
+                </Button>
+              </div>
             </form>
           </Form>
         </div>

@@ -142,12 +142,19 @@ const Admin = () => {
   };
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive"> = {
+    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
       pending: "secondary",
       approved: "default",
       rejected: "destructive",
+      draft: "outline",
     };
-    return <Badge variant={variants[status] || "default"}>{status}</Badge>;
+    const labels: Record<string, string> = {
+      pending: "Pending",
+      approved: "Approved",
+      rejected: "Rejected",
+      draft: "Draft",
+    };
+    return <Badge variant={variants[status] || "default"}>{labels[status] || status}</Badge>;
   };
 
   if (loading) {
@@ -327,6 +334,7 @@ const Admin = () => {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-background z-50">
+                              <SelectItem value="draft">Draft</SelectItem>
                               <SelectItem value="pending">Pending</SelectItem>
                               <SelectItem value="approved">Approved</SelectItem>
                               <SelectItem value="rejected">Rejected</SelectItem>
