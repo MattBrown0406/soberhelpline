@@ -1583,7 +1583,7 @@ export type Database = {
         }
         Insert: {
           accepts_mat_residents?: boolean | null
-          address?: string | null
+          address?: never
           adolescent_services?: boolean | null
           also_provides_outpatient?: boolean | null
           also_provides_sober_living?: boolean | null
@@ -1651,7 +1651,7 @@ export type Database = {
         }
         Update: {
           accepts_mat_residents?: boolean | null
-          address?: string | null
+          address?: never
           adolescent_services?: boolean | null
           also_provides_outpatient?: boolean | null
           also_provides_sober_living?: boolean | null
