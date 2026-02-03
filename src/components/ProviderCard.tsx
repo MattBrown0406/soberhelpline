@@ -76,6 +76,7 @@ interface Provider {
   faith_based_services?: boolean | null;
   military_first_responder_care?: boolean | null;
   therapeutic_modalities?: string[] | null;
+  insurances_accepted?: string[] | null;
 }
 
 interface ProviderCardProps {
@@ -509,6 +510,21 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                       {provider.recovery_fellowships.map((fellowship, idx) => (
                         <Badge key={idx} variant="secondary" className="text-xs">
                           {fellowship}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Insurance Accepted - for Inpatient, Outpatient, and Medical Detox */}
+                {["Inpatient Treatment", "Outpatient Treatment", "Medical Detox"].includes(provider.category || "") && 
+                  provider.insurances_accepted && provider.insurances_accepted.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Insurance Accepted</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {provider.insurances_accepted.map((insurance, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs">
+                          {insurance}
                         </Badge>
                       ))}
                     </div>
