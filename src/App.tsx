@@ -136,6 +136,9 @@ const App = () => (
             <Route path="/how-addiction-affects-the-brain" element={<BlogArticle />} />
             <Route path="/addiction-and-mental-health" element={<BlogArticle />} />
             <Route path="/relapse-process-addiction" element={<BlogArticle />} />
+            <Route path="/relapse-warning-signs-family-education" element={<BlogArticle />} />
+            <Route path="/early-recovery-symptoms-family-education" element={<BlogArticle />} />
+            <Route path="/treatment-to-home-transition-family-education" element={<BlogArticle />} />
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />

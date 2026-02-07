@@ -78,12 +78,302 @@ import holdingBoundariesFamiliesImg from "@/assets/blog-holding-boundaries-famil
 import familyRolesAddictionImg from "@/assets/blog-family-roles-addiction.png";
 import relapseWarningPhaseImg from "@/assets/blog-relapse-warning-phase.png";
 import earlyRecoveryTurbulenceImg from "@/assets/blog-early-recovery-turbulence.png";
+import treatmentHomeTransitionImg from "@/assets/blog-treatment-home-transition.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 77,
+    title: "Why Treatment 'Works' on Paper but Fails at Home—What Families Aren't Told",
+    excerpt: "Families often feel blindsided when treatment appears successful—progress reports are positive, completion certificates are earned, and hope is high—yet stability unravels once their loved one returns home.",
+    author: "Sober Helpline",
+    date: "2026-02-07",
+    category: "Family Support",
+    image: treatmentHomeTransitionImg,
+    slug: "treatment-to-home-transition-family-education",
+    seoTitle: "Treatment to Home Transition | What Families Aren't Told",
+    metaDescription: "Treatment success doesn't always translate home. Learn why skills learned in treatment struggle in real-world environments and how families can support the transition without panic.",
+    keywords: ["treatment to home transition", "discharge planning addiction", "aftercare gaps families", "treatment relapse risk", "recovery environment mismatch", "family education addiction"],
+    content: `**Why Treatment "Works" on Paper but Fails at Home—What Families Aren't Told**
+
+Many families feel blindsided when treatment appears successful—progress reports are positive, completion certificates are earned, and hope is high—yet stability unravels once their loved one returns home. This disconnect doesn't mean treatment failed or that families did something wrong. It reflects a gap families are rarely educated about: treatment is a controlled environment, while home is not. Understanding why treatment "works" on paper but struggles at home helps families prepare for reality instead of being surprised by it.
+
+**Why Families Expect Treatment to Translate Seamlessly**
+
+Treatment feels definitive.
+
+Families see:
+
+Structure
+
+Professional oversight
+
+Daily accountability
+
+Clear rules
+
+Limited access to substances
+
+When discharge arrives, families assume these gains are internalized.
+
+They think:
+"They've learned the tools."
+"They know what to do now."
+"This should be easier."
+
+What families aren't told is that context matters as much as skill.
+
+**Treatment Environments Are Artificially Stable by Design**
+
+Treatment settings are intentionally simplified.
+
+They remove:
+
+Daily decision fatigue
+
+Environmental triggers
+
+Competing responsibilities
+
+Access to substances
+
+Ambiguous expectations
+
+This isn't a flaw—it's necessary for stabilization.
+
+But it creates a problem: success inside treatment doesn't guarantee readiness for unstructured environments.
+
+**Why Skills Don't Automatically Transfer Home**
+
+Skills are context-dependent.
+
+Coping strategies learned in treatment often rely on:
+
+Immediate support
+
+Predictable schedules
+
+Low external stress
+
+At home, those supports vanish quickly.
+
+Suddenly, individuals face:
+
+Family dynamics
+
+Work stress
+
+Financial pressure
+
+Emotional triggers
+
+Unsupervised time
+
+Families misinterpret this struggle as resistance instead of skill transfer failure.
+
+**The Environment Shift Families Aren't Prepared For**
+
+Home environments contain history.
+
+Old roles, expectations, and emotional patterns reappear immediately.
+
+Even well-meaning families:
+
+Revert to old habits
+
+React emotionally
+
+Struggle with boundaries
+
+Feel pressure to "get back to normal"
+
+This emotional reactivation can overwhelm newly learned skills.
+
+**Why Discharge Planning Often Underserves Families**
+
+Discharge planning frequently focuses on:
+
+Appointments
+
+Medication lists
+
+Meeting recommendations
+
+Basic aftercare instructions
+
+Families are rarely taught:
+
+What instability looks like
+
+How to respond to early warning signs
+
+How to maintain structure without controlling
+
+What not to do when anxiety rises
+
+Without education, families fill the gap with guesswork.
+
+**The Myth of "They've Got This Now"**
+
+Families want to believe recovery is linear.
+
+They assume:
+
+Insight equals stability
+
+Completion equals readiness
+
+Motivation equals capacity
+
+This optimism is understandable—but dangerous.
+
+Early recovery often requires more external structure, not less.
+
+When structure drops too fast, relapse risk increases.
+
+**Why Families Feel Responsible When Things Deteriorate**
+
+When progress slips, families blame themselves.
+
+They ask:
+"What did we miss?"
+"Did we do something wrong?"
+"Were we too strict—or not strict enough?"
+
+This self-blame grows because families were never told to expect turbulence.
+
+Recovery doesn't fail at home because families are incompetent.
+It struggles because the environment changed dramatically.
+
+**How Pressure to "Trust" Undermines Stability**
+
+Families are often told:
+"You need to trust them."
+
+Trust matters—but timing matters more.
+
+Premature trust can look like:
+
+Removing accountability
+
+Relaxing structure
+
+Avoiding difficult conversations
+
+Withholding concerns
+
+Trust grows best after consistency—not before it.
+
+**Why Home Requires Different Skills Than Treatment**
+
+Treatment teaches:
+
+Awareness
+
+Insight
+
+Emotional vocabulary
+
+Home requires:
+
+Emotional regulation under stress
+
+Boundary tolerance
+
+Time management
+
+Conflict navigation
+
+Delayed gratification
+
+Families assume these skills are interchangeable.
+They're not.
+
+**The Family's Role in the Transition Phase**
+
+Families aren't responsible for recovery—but they influence stability.
+
+Helpful family responses include:
+
+Maintaining predictable routines
+
+Holding boundaries calmly
+
+Avoiding emotional negotiations
+
+Seeking guidance early
+
+Expecting adjustment—not perfection
+
+Families don't need to manage recovery.
+They need to support the environment where recovery can hold.
+
+**Why Early Support Is Preventative, Not Reactive**
+
+Families often wait until problems escalate before seeking help.
+
+By then:
+
+Patterns have returned
+
+Resistance has increased
+
+Stress is high
+
+Early consultation helps families:
+
+Normalize instability
+
+Adjust expectations
+
+Respond without panic
+
+Preserve gains
+
+Support early protects progress later.
+
+**When Families Should Reach Out for Guidance**
+
+Professional input is especially helpful when:
+
+Emotions escalate quickly
+
+Boundaries feel unclear
+
+Old dynamics reappear
+
+Families feel unsure how to respond
+
+Consultation doesn't mean failure.
+It means families are adapting proactively.
+
+**A More Accurate Way to Think About Treatment Success**
+
+Instead of asking:
+"Why didn't treatment work?"
+
+Ask:
+"What support does this transition require?"
+
+That question reframes the issue from blame to design.
+
+**A Clear Educational Takeaway**
+
+Treatment works best when families understand its limits.
+
+Recovery doesn't fail at home because treatment was useless.
+It struggles because skills need support, environments matter, and transitions are fragile.
+
+Families don't need to be perfect.
+They need education, structure, and perspective.
+
+When families understand that the real work begins after treatment—not ends there—they stop being surprised by challenges and start responding with steadiness.
+
+And steadiness—not urgency—is what allows recovery to take root at home.`
+  },
   {
     id: 76,
     title: "Why Early Recovery Looks Worse Before It Looks Better—and What Families Misinterpret",
