@@ -283,15 +283,17 @@ export default function MondayZoomRegistration() {
             </Link>
 
             {/* Hero Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary/85 to-primary/70 p-8 md:p-12 mb-8 text-primary-foreground shadow-xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-              <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-              <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-primary-foreground shadow-2xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
+              <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
+              <div className="absolute -top-12 -left-12 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
               <div className="relative z-10 text-center">
-                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/20 backdrop-blur-sm mb-5 ring-2 ring-white/30">
-                  <Video className="h-8 w-8" />
+                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/25 backdrop-blur-sm mb-5 ring-2 ring-white/40 shadow-lg shadow-black/10">
+                  <Video className="h-8 w-8 drop-shadow" />
                 </div>
-                <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-sm">
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
                   FREE Monday Night<br />Family Support Zoom Meeting
                 </h1>
                 <p className="text-primary-foreground/90 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
