@@ -318,6 +318,7 @@ export default function MondayZoomRegistration() {
                     <Label htmlFor="name">Full Name *</Label>
                     <Input
                       id="name"
+                      required
                       placeholder="Your full name"
                       value={formData.name}
                       onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
@@ -331,6 +332,7 @@ export default function MondayZoomRegistration() {
                     <Input
                       id="email"
                       type="email"
+                      required
                       placeholder="your@email.com"
                       value={formData.email}
                       onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
@@ -344,6 +346,7 @@ export default function MondayZoomRegistration() {
                     <Input
                       id="phone"
                       type="tel"
+                      required
                       placeholder="(555) 123-4567"
                       value={formData.phone}
                       onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
