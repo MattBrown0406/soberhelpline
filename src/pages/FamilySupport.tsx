@@ -208,6 +208,29 @@ export default function FamilySupport() {
                     </CardContent>
                   </Card>
 
+                  {/* Monday Zoom Meeting */}
+                  <Card className="border-primary/30 bg-primary/5">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                        <Video className="h-5 w-5 text-primary" />
+                        Monday Night Zoom
+                      </CardTitle>
+                      <CardDescription>
+                        FREE weekly family support meeting
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p className="text-sm text-muted-foreground">
+                        Join our free Monday night Zoom meeting for families. Ask questions, get support, and connect with others.
+                      </p>
+                      <Link to="/monday-zoom-meeting">
+                        <Button variant="outline" size="sm" className="w-full mt-4">
+                          Register Now
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+
                   {/* Schedule Zoom Call */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>

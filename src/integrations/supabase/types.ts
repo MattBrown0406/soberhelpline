@@ -1407,6 +1407,42 @@ export type Database = {
         }
         Relationships: []
       }
+      zoom_meeting_registrations: {
+        Row: {
+          consent_email_list: boolean
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          question: string
+          request_follow_up: boolean
+          user_id: string
+        }
+        Insert: {
+          consent_email_list?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          question: string
+          request_follow_up?: boolean
+          user_id: string
+        }
+        Update: {
+          consent_email_list?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          question?: string
+          request_follow_up?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       forum_posts_secure: {
