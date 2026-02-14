@@ -9,6 +9,37 @@ const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
   ? 'https://api-m.sandbox.paypal.com'
   : 'https://api-m.paypal.com';
 
+async function sendAdminNotification(subject: string, htmlContent: string) {
+  const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
+  if (!SENDGRID_API_KEY) {
+    console.error("SENDGRID_API_KEY not configured, skipping admin notification");
+    return;
+  }
+  try {
+    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: "matt@soberhelpline.com" }, { email: "matt@freedominterventions.com" }] }],
+        from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
+        subject,
+        content: [{ type: "text/html", value: htmlContent }],
+      }),
+    });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`SendGrid error [${response.status}]: ${errorText}`);
+    } else {
+      console.log("Admin notification email sent successfully");
+    }
+  } catch (err) {
+    console.error("Failed to send admin notification:", err);
+  }
+}
+
 async function getPayPalAccessToken(): Promise<string> {
   const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
   const clientSecret = Deno.env.get('PAYPAL_SECRET_KEY');
@@ -396,6 +427,33 @@ Deno.serve(async (req) => {
             ? '6-month free family membership activated' 
             : 'Free listing activated';
 
+          // Send admin notification for family membership signups (no provider_submission_id)
+          if (!providerSubmissionId) {
+            const { data: profile } = await supabaseClient
+              .from('profiles')
+              .select('first_name, last_name')
+              .eq('id', userId)
+              .single();
+            const { data: privateProfile } = await supabaseClient
+              .from('profile_private')
+              .select('email')
+              .eq('user_id', userId)
+              .single();
+            const memberName = profile ? `${profile.first_name} ${profile.last_name}` : 'Unknown';
+            const memberEmail = privateProfile?.email || 'Unknown';
+            await sendAdminNotification(
+              `🎉 New Family Membership: ${memberName}`,
+              `<h2>New Family Membership Signup</h2>
+              <ul>
+                <li><strong>Name:</strong> ${memberName}</li>
+                <li><strong>Email:</strong> ${memberEmail}</li>
+                <li><strong>Plan:</strong> ${planType}</li>
+                <li><strong>Discount Code:</strong> ${appliedDiscount || 'None'}</li>
+                <li><strong>Amount:</strong> $${finalAmount.toFixed(2)}</li>
+              </ul>`
+            );
+          }
+
           return new Response(
             JSON.stringify({ 
               success: true,
@@ -445,6 +503,34 @@ Deno.serve(async (req) => {
         if (dbError) {
           console.error('Database error:', dbError);
           throw new Error('Failed to store subscription');
+        }
+
+        // Send admin notification for family membership signups (no provider_submission_id)
+        if (!providerSubmissionId) {
+          const { data: profile } = await supabaseClient
+            .from('profiles')
+            .select('first_name, last_name')
+            .eq('id', userId)
+            .single();
+          const { data: privateProfile } = await supabaseClient
+            .from('profile_private')
+            .select('email')
+            .eq('user_id', userId)
+            .single();
+          const memberName = profile ? `${profile.first_name} ${profile.last_name}` : 'Unknown';
+          const memberEmail = privateProfile?.email || 'Unknown';
+          await sendAdminNotification(
+            `🎉 New Family Membership Signup: ${memberName}`,
+            `<h2>New Family Membership Signup</h2>
+            <ul>
+              <li><strong>Name:</strong> ${memberName}</li>
+              <li><strong>Email:</strong> ${memberEmail}</li>
+              <li><strong>Plan:</strong> ${planType}</li>
+              <li><strong>Discount Code:</strong> ${appliedDiscount || 'None'}</li>
+              <li><strong>Amount:</strong> $${finalAmount.toFixed(2)}</li>
+              <li><strong>Status:</strong> Pending PayPal approval</li>
+            </ul>`
+          );
         }
 
         return new Response(
