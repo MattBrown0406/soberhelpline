@@ -1,12 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@3.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 interface NotificationRequest {
@@ -15,16 +12,38 @@ interface NotificationRequest {
   email: string;
   phoneNumber: string;
 }
-// HTML escape function to prevent HTML injection in emails
+
 function escapeHtml(text: string): string {
   const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+async function sendEmail(to: string[], subject: string, htmlContent: string, from = "Sober Helpline <matt@soberhelpline.com>") {
+  const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
+  if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: to.map(email => ({ email })) }],
+      from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
+      subject,
+      content: [{ type: "text/html", value: htmlContent }],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`SendGrid API error [${response.status}]: ${errorText}`);
+  }
+
+  return { success: true };
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -33,7 +52,6 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Verify authentication
     const authHeader = req.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       console.error("Missing or invalid authorization header");
@@ -69,7 +87,6 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { providerName, category, email, phoneNumber }: NotificationRequest = await req.json();
     
-    // Validate required fields
     if (!providerName || !category || !email || !phoneNumber) {
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
@@ -79,11 +96,10 @@ const handler = async (req: Request): Promise<Response> => {
     
     const backendUrl = `https://lovable.dev/projects/d06fcc5d-ea53-4bb5-8116-170ffa8e9ee1/backend`;
 
-    const emailResponse = await resend.emails.send({
-      from: "Sober Helpline <onboarding@resend.dev>",
-      to: ["matt@soberhelpline.com", "matt@freedominterventions.com"],
-      subject: `New Provider Application: ${providerName}`,
-      html: `
+    const emailResponse = await sendEmail(
+      ["matt@soberhelpline.com", "matt@freedominterventions.com"],
+      `New Provider Application: ${providerName}`,
+      `
         <h1>New Provider Application Submitted</h1>
         <p>A new provider has submitted an application on Sober Helpline.</p>
         
@@ -105,26 +121,20 @@ const handler = async (req: Request): Promise<Response> => {
         <p style="margin-top: 20px; color: #666; font-size: 14px;">
           Click the button above to access the provider_submissions table and review this application.
         </p>
-      `,
-    });
+      `
+    );
 
     console.log("Email sent successfully:", emailResponse);
 
     return new Response(JSON.stringify(emailResponse), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error: any) {
     console.error("Error in send-provider-notification function:", error);
     return new Response(
       JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };

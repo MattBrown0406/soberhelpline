@@ -1,12 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@3.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 interface ContentReportRequest {
@@ -14,26 +11,46 @@ interface ContentReportRequest {
   postContent: string;
   concernDetails: string;
 }
-// HTML escape function to prevent HTML injection in emails
+
 function escapeHtml(text: string): string {
   const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
+async function sendEmail(to: string[], subject: string, htmlContent: string, from = "Sober Helpline <matt@soberhelpline.com>") {
+  const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
+  if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: to.map(email => ({ email })) }],
+      from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
+      subject,
+      content: [{ type: "text/html", value: htmlContent }],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`SendGrid API error [${response.status}]: ${errorText}`);
+  }
+
+  return { success: true };
+}
+
 serve(async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Verify authentication
     const authHeader = req.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       console.error("Missing or invalid authorization header");
@@ -69,23 +86,18 @@ serve(async (req: Request): Promise<Response> => {
 
     const { reportedUsername, postContent, concernDetails }: ContentReportRequest = await req.json();
 
-    console.log("Sending content report email");
-
-    // Validate inputs
     if (!reportedUsername || !postContent || !concernDetails) {
       throw new Error("Missing required fields");
     }
 
-    // Sanitize inputs for email
     const sanitizedUsername = reportedUsername.substring(0, 100);
     const sanitizedPostContent = postContent.substring(0, 2000);
     const sanitizedConcernDetails = concernDetails.substring(0, 1000);
 
-    const emailResponse = await resend.emails.send({
-      from: "Sober Helpline Forum <onboarding@resend.dev>",
-      to: ["matt@soberhelpline.com"],
-      subject: "⚠️ Forum Content Report - Action Required",
-      html: `
+    const emailResponse = await sendEmail(
+      ["matt@soberhelpline.com"],
+      "⚠️ Forum Content Report - Action Required",
+      `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background-color: #dc2626; color: white; padding: 20px; text-align: center;">
             <h1 style="margin: 0;">⚠️ Content Report</h1>
@@ -128,7 +140,8 @@ serve(async (req: Request): Promise<Response> => {
           </div>
         </div>
       `,
-    });
+      "Sober Helpline Forum <matt@soberhelpline.com>"
+    );
 
     console.log("Content report email sent successfully:", emailResponse);
 

@@ -1,12 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { Resend } from "https://esm.sh/resend@2.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 interface ProviderAnalytics {
@@ -32,6 +29,32 @@ interface ProviderWithEmail {
   category: string;
   city: string;
   state: string;
+}
+
+async function sendEmail(to: string[], subject: string, htmlContent: string, from = "Sober Helpline <noreply@soberhelpline.com>") {
+  const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
+  if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: to.map(email => ({ email })) }],
+      from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
+      subject,
+      content: [{ type: "text/html", value: htmlContent }],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`SendGrid API error [${response.status}]: ${errorText}`);
+  }
+
+  return { success: true };
 }
 
 function formatNumber(num: number | null): string {
@@ -116,22 +139,17 @@ function generateEmailHtml(
     </head>
     <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f1f5f9;">
       <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <!-- Header with Logo -->
         <div style="text-align: center; margin-bottom: 32px;">
           <img src="https://soberhelpline.lovable.app/lovable-uploads/e3e9bf01-a493-4d24-9ebd-1c71dd37f1b2.png" alt="Sober Helpline" style="max-width: 200px; height: auto;">
         </div>
         
-        <!-- Main Card -->
         <div style="background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); overflow: hidden;">
-          <!-- Green Header Bar -->
           <div style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 24px; text-align: center;">
             <h1 style="margin: 0; color: white; font-size: 24px; font-weight: 600;">Monthly Analytics Report</h1>
             <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.9); font-size: 16px;">${monthYear}</p>
           </div>
           
-          <!-- Content -->
           <div style="padding: 32px;">
-            <!-- Gratitude Message -->
             <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 8px; padding: 20px; margin-bottom: 24px; border: 1px solid #bbf7d0;">
               <p style="margin: 0; color: #166534; font-size: 16px; line-height: 1.6;">
                 <strong>Thank you for being part of the Sober Helpline community!</strong>
@@ -145,17 +163,14 @@ function generateEmailHtml(
               Here's how your listing${analytics.length > 1 ? 's have' : ' has'} performed this past month:
             </p>
             
-            <!-- Analytics Cards -->
             ${listingsHtml}
             
-            <!-- Hope Message -->
             <div style="text-align: center; padding: 24px 0; border-top: 1px solid #e2e8f0; margin-top: 24px;">
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin: 0;">
                 We hope these numbers represent meaningful connections — families finding the help they need, and your organization making a difference in their lives.
               </p>
             </div>
             
-            <!-- Contact Section -->
             <div style="background: #f8fafc; border-radius: 8px; padding: 20px; text-align: center;">
               <p style="margin: 0 0 8px 0; color: #1e293b; font-size: 15px;">
                 <strong>Questions or feedback?</strong>
@@ -171,7 +186,6 @@ function generateEmailHtml(
             </div>
           </div>
           
-          <!-- Footer -->
           <div style="background: #1e293b; padding: 24px; text-align: center;">
             <p style="margin: 0; color: #94a3b8; font-size: 13px;">
               © ${new Date().getFullYear()} Sober Helpline. All rights reserved.
@@ -188,13 +202,11 @@ function generateEmailHtml(
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Parse optional test parameters
     let testMode = false;
     let testEmail: string | null = null;
     let testProviderId: string | null = null;
@@ -217,7 +229,6 @@ const handler = async (req: Request): Promise<Response> => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Build query - filter by specific provider if in test mode
     let query = supabase
       .from("provider_submissions")
       .select("id, provider_name, email, submitted_by, category, city, state")
@@ -236,7 +247,6 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Found ${providers?.length || 0} approved providers`);
 
-    // Get all analytics data
     const { data: analytics, error: analyticsError } = await supabase
       .from("provider_click_analytics")
       .select("*");
@@ -246,13 +256,11 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Failed to fetch analytics");
     }
 
-    // Create a map of analytics by provider_id
     const analyticsMap = new Map<string, ProviderAnalytics>();
     for (const a of analytics || []) {
       analyticsMap.set(a.provider_id, a);
     }
 
-    // Group providers by submitted_by (the account creator)
     const providersBySubmitter = new Map<string, ProviderWithEmail[]>();
     for (const provider of providers || []) {
       if (!provider.submitted_by) continue;
@@ -268,20 +276,16 @@ const handler = async (req: Request): Promise<Response> => {
     let emailsSent = 0;
     let emailsFailed = 0;
 
-    // Send email to each provider account holder
     for (const [submitterId, providerList] of providersBySubmitter) {
-      // Get the email from the first provider (they all belong to the same submitter)
       const primaryEmail = providerList[0].email;
       const providerName = providerList[0].provider_name;
 
-      // Gather analytics for all their listings
       const listingAnalytics: ProviderAnalytics[] = [];
       for (const provider of providerList) {
         const providerAnalytics = analyticsMap.get(provider.id);
         if (providerAnalytics) {
           listingAnalytics.push(providerAnalytics);
         } else {
-          // Include listing even without analytics (shows zeros)
           listingAnalytics.push({
             provider_id: provider.id,
             provider_name: provider.provider_name,
@@ -300,17 +304,14 @@ const handler = async (req: Request): Promise<Response> => {
       }
 
       const emailHtml = generateEmailHtml(providerName, listingAnalytics, monthYear);
-
-      // Use test email if provided, otherwise use provider's email
       const recipientEmail = testMode && testEmail ? testEmail : primaryEmail;
 
       try {
-        const emailResponse = await resend.emails.send({
-          from: "Sober Helpline <noreply@soberhelpline.com>",
-          to: [recipientEmail],
-          subject: `Your Sober Helpline Analytics Report - ${monthYear}`,
-          html: emailHtml,
-        });
+        const emailResponse = await sendEmail(
+          [recipientEmail],
+          `Your Sober Helpline Analytics Report - ${monthYear}`,
+          emailHtml
+        );
 
         console.log(`Email sent to ${recipientEmail}:`, emailResponse);
         emailsSent++;
