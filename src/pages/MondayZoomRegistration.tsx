@@ -296,7 +296,7 @@ export default function MondayZoomRegistration() {
                 <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
                   FREE Monday Night<br />Family Support Zoom Meeting
                 </h1>
-                <p className="text-primary-foreground/90 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
+                <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
                   Join other families navigating addiction for a supportive, guided group session every Monday night.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
