@@ -300,7 +300,7 @@ export default function MondayZoomRegistration() {
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
                     { icon: Calendar, label: "Every Monday" },
-                    { icon: Clock, label: "Evening Session" },
+                    { icon: Clock, label: "6:00 PM PST" },
                     { icon: Users, label: "Free for Members" },
                     { icon: Video, label: "Via Zoom" },
                   ].map(({ icon: Icon, label }) => (
