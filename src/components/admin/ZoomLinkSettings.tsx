@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays } from "lucide-react";
 
 function getNextMonday(): string {
   const now = new Date();
@@ -39,10 +40,13 @@ export function ZoomLinkSettings() {
   const [saving, setSaving] = useState(false);
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loadingRegistrations, setLoadingRegistrations] = useState(true);
+  const [followUps, setFollowUps] = useState<Registration[]>([]);
+  const [loadingFollowUps, setLoadingFollowUps] = useState(true);
 
   useEffect(() => {
     fetchZoomLink();
     fetchRegistrations();
+    fetchFollowUps();
   }, []);
 
   const fetchZoomLink = async () => {
@@ -77,6 +81,24 @@ export function ZoomLinkSettings() {
       console.error("Error fetching registrations:", err);
     } finally {
       setLoadingRegistrations(false);
+    }
+  };
+
+  const fetchFollowUps = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("zoom_meeting_registrations")
+        .select("*")
+        .eq("request_follow_up", true)
+        .order("meeting_date", { ascending: false })
+        .order("created_at", { ascending: true });
+
+      if (error) throw error;
+      setFollowUps(data || []);
+    } catch (err) {
+      console.error("Error fetching follow-ups:", err);
+    } finally {
+      setLoadingFollowUps(false);
     }
   };
 
@@ -253,6 +275,66 @@ export function ZoomLinkSettings() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+      </div>
+
+      <Separator />
+
+      {/* Follow-Up Contacts Section */}
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <UserCheck className="h-5 w-5" />
+            Follow-Up Contact Requests
+          </h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            Members who requested a private follow-up from an interventionist, organized by meeting week.
+          </p>
+        </div>
+
+        {loadingFollowUps ? (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          </div>
+        ) : followUps.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
+            No follow-up requests have been submitted.
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {(() => {
+              const grouped: Record<string, Registration[]> = {};
+              followUps.forEach((r) => {
+                const key = r.meeting_date;
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(r);
+              });
+              return Object.entries(grouped).map(([date, regs]) => (
+                <div key={date} className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4 text-primary" />
+                    <h4 className="font-medium text-foreground">{formatDate(date)}</h4>
+                    <Badge variant="secondary" className="text-xs">{regs.length}</Badge>
+                  </div>
+                  <div className="space-y-2 pl-6">
+                    {regs.map((r) => (
+                      <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <span className="font-medium text-foreground">{r.name}</span>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                          <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary">
+                            <Mail className="h-3 w-3" />{r.email}
+                          </a>
+                          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary">
+                            <Phone className="h-3 w-3" />{r.phone}
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ));
+            })()}
           </div>
         )}
       </div>
