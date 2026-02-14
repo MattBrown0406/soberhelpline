@@ -30,6 +30,7 @@ import FamilyMembership from "./pages/FamilyMembership";
 import FamilyEducation from "./pages/FamilyEducation";
 import FamilyForum from "./pages/FamilyForum";
 import FamilyConsultation from "./pages/FamilyConsultation";
+import MondayZoomRegistration from "./pages/MondayZoomRegistration";
 import FamilyWebinars from "./pages/FamilyWebinars";
 import ForumTopic from "./pages/ForumTopic";
 import TreatmentQuestions from "./pages/TreatmentQuestions";
@@ -151,6 +152,7 @@ const App = () => (
             <Route path="/family-forum" element={<FamilyForum />} />
             <Route path="/family-forum/:topicId" element={<ForumTopic />} />
             <Route path="/family-consultation" element={<FamilyConsultation />} />
+            <Route path="/monday-zoom-meeting" element={<MondayZoomRegistration />} />
             <Route path="/family-webinars" element={<FamilyWebinars />} />
             <Route path="/treatment-questions" element={<TreatmentQuestions />} />
             <Route path="/recovery-requirements" element={<RecoveryRequirements />} />

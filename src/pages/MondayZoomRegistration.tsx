@@ -1,0 +1,388 @@
+import { Link, useNavigate } from "react-router-dom";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import logo from "@/assets/logo.png";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
+import { useToast } from "@/hooks/use-toast";
+import SEOHead from "@/components/SEOHead";
+import { z } from "zod";
+
+const registrationSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  phone: z.string().trim().min(1, "Phone number is required").max(20),
+  question: z.string().trim().min(10, "Please write a complete question (at least 10 characters)").max(1000),
+});
+
+export default function MondayZoomRegistration() {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasMembership, setHasMembership] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    question: "",
+    requestFollowUp: false,
+    consentEmailList: false,
+  });
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const checkMembership = async () => {
+      if (!user) {
+        setHasMembership(false);
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const { data, error } = await supabase
+          .from("provider_subscriptions")
+          .select("*")
+          .eq("user_id", user.id)
+          .eq("status", "active")
+          .is("provider_submission_id", null)
+          .limit(1);
+
+        if (error) {
+          setHasMembership(false);
+        } else {
+          setHasMembership(data && data.length > 0);
+        }
+      } catch {
+        setHasMembership(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    checkMembership();
+  }, [user]);
+
+  // Pre-fill email from user profile
+  useEffect(() => {
+    if (user?.email) {
+      setFormData((prev) => ({ ...prev, email: user.email || "" }));
+    }
+  }, [user]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrors({});
+
+    const result = registrationSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("zoom_meeting_registrations").insert({
+        user_id: user!.id,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        question: formData.question.trim(),
+        request_follow_up: formData.requestFollowUp,
+        consent_email_list: formData.consentEmailList,
+      });
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      toast({
+        title: "Registration Submitted!",
+        description: "You're registered for the Monday night family support Zoom meeting.",
+      });
+    } catch (err: any) {
+      console.error("Registration error:", err);
+      toast({
+        title: "Registration Failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container flex h-16 items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
+            </Link>
+          </div>
+        </header>
+        <main className="container py-16 text-center">
+          <Video className="h-12 w-12 text-primary mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-foreground mb-4">Member Access Required</h1>
+          <p className="text-muted-foreground mb-6">Please log in to access the Monday night Zoom meeting registration.</p>
+          <div className="flex gap-4 justify-center">
+            <Link to="/auth">
+              <Button>Log In</Button>
+            </Link>
+            <Link to="/family-membership">
+              <Button variant="outline">Become a Member</Button>
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (!hasMembership) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container flex h-16 items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
+            </Link>
+          </div>
+        </header>
+        <main className="container py-16 text-center">
+          <Video className="h-12 w-12 text-primary mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-foreground mb-4">Premium Members Only</h1>
+          <p className="text-muted-foreground mb-6">
+            The Monday night family support Zoom meeting is available exclusively to premium members.
+          </p>
+          <Link to="/family-membership">
+            <Button size="lg">Become a Member - $14.99/month</Button>
+          </Link>
+        </main>
+      </div>
+    );
+  }
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container flex h-16 items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
+            </Link>
+          </div>
+        </header>
+        <main className="container py-16 max-w-2xl mx-auto text-center">
+          <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
+          <h1 className="text-3xl font-bold text-foreground mb-4">You're Registered!</h1>
+          <p className="text-muted-foreground text-lg mb-8">
+            Thank you for registering for the Monday night family support Zoom meeting. 
+            You'll receive details via email before the meeting.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link to="/family-support">
+              <Button variant="outline">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Family Support
+              </Button>
+            </Link>
+            <Link to="/family-education">
+              <Button>Explore Education Resources</Button>
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <SEOHead
+        title="Monday Night Family Support Zoom Meeting | Sober Helpline"
+        description="Register for our free Monday night family support Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
+      />
+
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
+          <div className="container flex h-16 items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
+            </Link>
+            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
+              <Phone className="h-4 w-4" />
+              (541) 241-5886
+            </a>
+          </div>
+        </header>
+
+        <main className="container py-8 md:py-12">
+          <div className="max-w-2xl mx-auto">
+            <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
+              <ArrowLeft className="h-4 w-4 mr-1" />
+              Back to Family Support
+            </Link>
+
+            {/* Meeting Info */}
+            <div className="text-center mb-8">
+              <Video className="h-10 w-10 text-primary mx-auto mb-3" />
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                FREE Monday Night Family Support Zoom Meeting
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-6">
+                Join other families navigating addiction for a supportive, guided group session every Monday night.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4 text-primary" /> Every Monday
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4 text-primary" /> Evening Session
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Users className="h-4 w-4 text-primary" /> Free for Members
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Video className="h-4 w-4 text-primary" /> Via Zoom
+                </span>
+              </div>
+            </div>
+
+            {/* Registration Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl text-foreground">Register for the Meeting</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name *</Label>
+                    <Input
+                      id="name"
+                      placeholder="Your full name"
+                      value={formData.name}
+                      onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
+                      className={errors.name ? "border-destructive" : ""}
+                    />
+                    {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                      className={errors.email ? "border-destructive" : ""}
+                    />
+                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(555) 123-4567"
+                      value={formData.phone}
+                      onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
+                      className={errors.phone ? "border-destructive" : ""}
+                    />
+                    {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="question">Your Question for the Group *</Label>
+                    <p className="text-sm text-muted-foreground">
+                      Please write out a complete question you'd like discussed during the meeting—not just a topic or keyword. 
+                      For example, instead of "boundaries," write something like: "How do I set a boundary with my son about 
+                      not lending him money without damaging our relationship?"
+                    </p>
+                    <Textarea
+                      id="question"
+                      placeholder="Write your full question here..."
+                      rows={4}
+                      value={formData.question}
+                      onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))}
+                      className={errors.question ? "border-destructive" : ""}
+                    />
+                    {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
+                  </div>
+
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="followUp"
+                        checked={formData.requestFollowUp}
+                        onCheckedChange={(checked) =>
+                          setFormData((p) => ({ ...p, requestFollowUp: checked === true }))
+                        }
+                      />
+                      <Label htmlFor="followUp" className="text-sm leading-snug cursor-pointer">
+                        I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
+                      </Label>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="emailConsent"
+                        checked={formData.consentEmailList}
+                        onCheckedChange={(checked) =>
+                          setFormData((p) => ({ ...p, consentEmailList: checked === true }))
+                        }
+                      />
+                      <Label htmlFor="emailConsent" className="text-sm leading-snug cursor-pointer">
+                        I consent to being added to the email list for updates on special events, resources, or services.
+                      </Label>
+                    </div>
+                  </div>
+
+                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Register for Monday Night Meeting"
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+      </div>
+    </>
+  );
+}
