@@ -102,6 +102,15 @@ export default function MondayZoomRegistration() {
     }
 
     setIsSubmitting(true);
+
+    // Calculate next Monday date
+    const now = new Date();
+    const day = now.getDay();
+    const daysUntilMonday = day <= 1 ? 1 - day : 8 - day;
+    const nextMonday = new Date(now);
+    nextMonday.setDate(now.getDate() + daysUntilMonday);
+    const meetingDate = nextMonday.toISOString().split("T")[0];
+
     try {
       // Save registration
       const { error } = await supabase.from("zoom_meeting_registrations").insert({
@@ -112,6 +121,7 @@ export default function MondayZoomRegistration() {
         question: formData.question.trim(),
         request_follow_up: formData.requestFollowUp,
         consent_email_list: formData.consentEmailList,
+        meeting_date: meetingDate,
       });
 
       if (error) throw error;
