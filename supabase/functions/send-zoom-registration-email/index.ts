@@ -1,12 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@3.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 function escapeHtml(text: string): string {
@@ -14,6 +11,32 @@ function escapeHtml(text: string): string {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+async function sendEmail(to: string[], subject: string, htmlContent: string, from = "Sober Helpline <matt@soberhelpline.com>") {
+  const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
+  if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      personalizations: [{ to: to.map(email => ({ email })) }],
+      from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
+      subject,
+      content: [{ type: "text/html", value: htmlContent }],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`SendGrid API error [${response.status}]: ${errorText}`);
+  }
+
+  return { success: true };
 }
 
 serve(async (req: Request) => {
@@ -78,11 +101,10 @@ serve(async (req: Request) => {
         </div>
       `;
 
-    const emailResponse = await resend.emails.send({
-      from: "Sober Helpline <matt@soberhelpline.com>",
-      to: [email],
-      subject: "You're Registered! Monday Night Family Support Zoom Meeting",
-      html: `
+    const emailResult = await sendEmail(
+      [email],
+      "You're Registered! Monday Night Family Support Zoom Meeting",
+      `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Welcome, ${safeName}!</h1>
           <p>Thank you for registering for the <strong>Monday Night Family Support Zoom Meeting</strong>.</p>
@@ -97,24 +119,23 @@ serve(async (req: Request) => {
             Sober Helpline — Supporting Families Through Recovery
           </p>
         </div>
-      `,
-    });
+      `
+    );
 
-    console.log("Zoom registration email sent:", emailResponse);
+    console.log("Zoom registration email sent:", emailResult);
 
     // Also notify admin
-    await resend.emails.send({
-      from: "Sober Helpline <matt@soberhelpline.com>",
-      to: ["matt@soberhelpline.com"],
-      subject: `New Zoom Meeting Registration: ${safeName}`,
-      html: `
+    await sendEmail(
+      ["matt@soberhelpline.com"],
+      `New Zoom Meeting Registration: ${safeName}`,
+      `
         <h2>New Monday Night Zoom Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>
         </ul>
-      `,
-    });
+      `
+    );
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
