@@ -103,6 +103,7 @@ export default function MondayZoomRegistration() {
 
     setIsSubmitting(true);
     try {
+      // Save registration
       const { error } = await supabase.from("zoom_meeting_registrations").insert({
         user_id: user!.id,
         name: formData.name.trim(),
@@ -115,10 +116,30 @@ export default function MondayZoomRegistration() {
 
       if (error) throw error;
 
+      // Fetch the current Zoom link
+      const { data: settingData } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "monday_zoom_link")
+        .maybeSingle();
+
+      // Send confirmation email with Zoom link
+      try {
+        await supabase.functions.invoke("send-zoom-registration-email", {
+          body: {
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            zoomLink: settingData?.value || "",
+          },
+        });
+      } catch (emailErr) {
+        console.error("Email sending failed (registration still saved):", emailErr);
+      }
+
       setSubmitted(true);
       toast({
         title: "Registration Submitted!",
-        description: "You're registered for the Monday night family support Zoom meeting.",
+        description: "You're registered! Check your email for the Zoom meeting link.",
       });
     } catch (err: any) {
       console.error("Registration error:", err);
