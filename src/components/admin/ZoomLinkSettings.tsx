@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History } from "lucide-react";
 
 function getNextMonday(): string {
   const now = new Date();
@@ -289,7 +290,7 @@ export function ZoomLinkSettings() {
             Follow-Up Contact Requests
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            Members who requested a private follow-up from an interventionist, organized by meeting week.
+            Members who requested a private follow-up from an interventionist.
           </p>
         </div>
 
@@ -302,40 +303,93 @@ export function ZoomLinkSettings() {
             No follow-up requests have been submitted.
           </div>
         ) : (
-          <div className="space-y-6">
-            {(() => {
-              const grouped: Record<string, Registration[]> = {};
-              followUps.forEach((r) => {
-                const key = r.meeting_date;
-                if (!grouped[key]) grouped[key] = [];
-                grouped[key].push(r);
-              });
-              return Object.entries(grouped).map(([date, regs]) => (
-                <div key={date} className="space-y-3">
+          (() => {
+            const nextMonday = getNextMonday();
+            const currentWeek = followUps.filter((r) => r.meeting_date === nextMonday);
+            const previousWeeks: Record<string, Registration[]> = {};
+            followUps.forEach((r) => {
+              if (r.meeting_date !== nextMonday) {
+                if (!previousWeeks[r.meeting_date]) previousWeeks[r.meeting_date] = [];
+                previousWeeks[r.meeting_date].push(r);
+              }
+            });
+            const prevEntries = Object.entries(previousWeeks);
+
+            return (
+              <div className="space-y-6">
+                {/* Current Week */}
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-primary" />
-                    <h4 className="font-medium text-foreground">{formatDate(date)}</h4>
-                    <Badge variant="secondary" className="text-xs">{regs.length}</Badge>
+                    <h4 className="font-medium text-foreground">This Week — {formatDate(nextMonday)}</h4>
+                    <Badge variant="secondary" className="text-xs">{currentWeek.length}</Badge>
                   </div>
-                  <div className="space-y-2 pl-6">
-                    {regs.map((r) => (
-                      <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <span className="font-medium text-foreground">{r.name}</span>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                          <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary">
-                            <Mail className="h-3 w-3" />{r.email}
-                          </a>
-                          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary">
-                            <Phone className="h-3 w-3" />{r.phone}
-                          </a>
+                  {currentWeek.length === 0 ? (
+                    <div className="text-sm text-muted-foreground border border-dashed border-border rounded-lg p-4 ml-6">
+                      No follow-up requests for the upcoming meeting yet.
+                    </div>
+                  ) : (
+                    <div className="space-y-2 pl-6">
+                      {currentWeek.map((r) => (
+                        <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                          <span className="font-medium text-foreground">{r.name}</span>
+                          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                            <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary">
+                              <Mail className="h-3 w-3" />{r.email}
+                            </a>
+                            <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary">
+                              <Phone className="h-3 w-3" />{r.phone}
+                            </a>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ));
-            })()}
-          </div>
+
+                {/* Previous Weeks */}
+                {prevEntries.length > 0 && (
+                  <Collapsible>
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" className="w-full justify-between text-muted-foreground hover:text-foreground">
+                        <span className="flex items-center gap-2">
+                          <History className="h-4 w-4" />
+                          Previous Weeks ({prevEntries.reduce((sum, [, regs]) => sum + regs.length, 0)} total requests)
+                        </span>
+                        <ChevronDown className="h-4 w-4" />
+                      </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-5 pt-2">
+                      {prevEntries.map(([date, regs]) => (
+                        <div key={date} className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <CalendarDays className="h-4 w-4 text-muted-foreground" />
+                            <h4 className="font-medium text-muted-foreground">{formatDate(date)}</h4>
+                            <Badge variant="outline" className="text-xs">{regs.length}</Badge>
+                          </div>
+                          <div className="space-y-2 pl-6">
+                            {regs.map((r) => (
+                              <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 bg-muted/30">
+                                <span className="font-medium text-foreground">{r.name}</span>
+                                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                                  <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary">
+                                    <Mail className="h-3 w-3" />{r.email}
+                                  </a>
+                                  <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary">
+                                    <Phone className="h-3 w-3" />{r.phone}
+                                  </a>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+              </div>
+            );
+          })()
         )}
       </div>
     </div>
