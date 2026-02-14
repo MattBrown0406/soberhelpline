@@ -283,7 +283,7 @@ export default function MondayZoomRegistration() {
             </Link>
 
             {/* Hero Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-primary-foreground shadow-2xl">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
               <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
