@@ -79,7 +79,7 @@ serve(async (req: Request) => {
       `;
 
     const emailResponse = await resend.emails.send({
-      from: "Sober Helpline <onboarding@resend.dev>",
+      from: "Sober Helpline <matt@soberhelpline.com>",
       to: [email],
       subject: "You're Registered! Monday Night Family Support Zoom Meeting",
       html: `
@@ -104,7 +104,7 @@ serve(async (req: Request) => {
 
     // Also notify admin
     await resend.emails.send({
-      from: "Sober Helpline <onboarding@resend.dev>",
+      from: "Sober Helpline <matt@soberhelpline.com>",
       to: ["matt@soberhelpline.com"],
       subject: `New Zoom Meeting Registration: ${safeName}`,
       html: `
