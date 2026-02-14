@@ -1434,6 +1434,7 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          meeting_date: string
           name: string
           phone: string
           question: string
@@ -1445,6 +1446,7 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
+          meeting_date?: string
           name: string
           phone: string
           question: string
@@ -1456,6 +1458,7 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
+          meeting_date?: string
           name?: string
           phone?: string
           question?: string
