@@ -277,40 +277,48 @@ export default function MondayZoomRegistration() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
-            <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
-              <ArrowLeft className="h-4 w-4 mr-1" />
+            <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 mb-6 group">
+              <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
               Back to Family Support
             </Link>
 
-            {/* Meeting Info */}
-            <div className="text-center mb-8">
-              <Video className="h-10 w-10 text-primary mx-auto mb-3" />
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-                FREE Monday Night Family Support Zoom Meeting
-              </h1>
-              <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-6">
-                Join other families navigating addiction for a supportive, guided group session every Monday night.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="h-4 w-4 text-primary" /> Every Monday
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4 text-primary" /> Evening Session
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4 text-primary" /> Free for Members
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Video className="h-4 w-4 text-primary" /> Via Zoom
-                </span>
+            {/* Hero Banner */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary/85 to-primary/70 p-8 md:p-12 mb-8 text-primary-foreground shadow-xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
+              <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+              <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/20 backdrop-blur-sm mb-5 ring-2 ring-white/30">
+                  <Video className="h-8 w-8" />
+                </div>
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-sm">
+                  FREE Monday Night<br />Family Support Zoom Meeting
+                </h1>
+                <p className="text-primary-foreground/90 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
+                  Join other families navigating addiction for a supportive, guided group session every Monday night.
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    { icon: Calendar, label: "Every Monday" },
+                    { icon: Clock, label: "Evening Session" },
+                    { icon: Users, label: "Free for Members" },
+                    { icon: Video, label: "Via Zoom" },
+                  ].map(({ icon: Icon, label }) => (
+                    <span key={label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium">
+                      <Icon className="h-4 w-4" /> {label}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Registration Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl text-foreground">Register for the Meeting</CardTitle>
+            <Card className="border-2 shadow-lg">
+              <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
+                <CardTitle className="text-xl text-foreground flex items-center gap-2">
+                  <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
+                  Register for the Meeting
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-5">
