@@ -144,6 +144,7 @@ const App = () => (
             <Route path="/stability-vs-recovery-families-healing" element={<BlogArticle />} />
             <Route path="/readiness-for-addiction-treatment-families" element={<BlogArticle />} />
             <Route path="/emotional-whiplash-addiction-families" element={<BlogArticle />} />
+            <Route path="/sobriety-vs-recovery-families" element={<BlogArticle />} />
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />
