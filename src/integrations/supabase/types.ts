@@ -125,6 +125,132 @@ export type Database = {
         }
         Relationships: []
       }
+      coaching_intake_assessments: {
+        Row: {
+          anxiety_level: string | null
+          arguments_strain: string | null
+          assigned_phase: string | null
+          coaching_goal_other: string | null
+          coaching_goals: string[] | null
+          confidence_change: number | null
+          conflict_frequency: number | null
+          created_at: string
+          current_status: string | null
+          decision_makers_aligned: string | null
+          emotionally_exhausted: string | null
+          enabling_behaviors: string[] | null
+          family_members_list: string | null
+          feel_safe: string | null
+          financial_risks: string[] | null
+          history_details: string | null
+          history_overdose: string | null
+          history_suicidal: string | null
+          history_violence: string | null
+          household_stress_level: number | null
+          id: string
+          loved_one_age: string | null
+          most_urgent: string | null
+          multiple_family_members: boolean | null
+          outside_support: string | null
+          overdose_date: string | null
+          primary_contact_name: string | null
+          readiness_enforce_boundaries: number | null
+          readiness_stop_rescuing: number | null
+          relationship_other: string | null
+          relationship_to_loved_one: string | null
+          risk_indicators: string[] | null
+          sleep_quality: string | null
+          substance_other: string | null
+          substances: string[] | null
+          unified_approach: string | null
+          updated_at: string
+          user_id: string
+          written_boundaries: string | null
+        }
+        Insert: {
+          anxiety_level?: string | null
+          arguments_strain?: string | null
+          assigned_phase?: string | null
+          coaching_goal_other?: string | null
+          coaching_goals?: string[] | null
+          confidence_change?: number | null
+          conflict_frequency?: number | null
+          created_at?: string
+          current_status?: string | null
+          decision_makers_aligned?: string | null
+          emotionally_exhausted?: string | null
+          enabling_behaviors?: string[] | null
+          family_members_list?: string | null
+          feel_safe?: string | null
+          financial_risks?: string[] | null
+          history_details?: string | null
+          history_overdose?: string | null
+          history_suicidal?: string | null
+          history_violence?: string | null
+          household_stress_level?: number | null
+          id?: string
+          loved_one_age?: string | null
+          most_urgent?: string | null
+          multiple_family_members?: boolean | null
+          outside_support?: string | null
+          overdose_date?: string | null
+          primary_contact_name?: string | null
+          readiness_enforce_boundaries?: number | null
+          readiness_stop_rescuing?: number | null
+          relationship_other?: string | null
+          relationship_to_loved_one?: string | null
+          risk_indicators?: string[] | null
+          sleep_quality?: string | null
+          substance_other?: string | null
+          substances?: string[] | null
+          unified_approach?: string | null
+          updated_at?: string
+          user_id: string
+          written_boundaries?: string | null
+        }
+        Update: {
+          anxiety_level?: string | null
+          arguments_strain?: string | null
+          assigned_phase?: string | null
+          coaching_goal_other?: string | null
+          coaching_goals?: string[] | null
+          confidence_change?: number | null
+          conflict_frequency?: number | null
+          created_at?: string
+          current_status?: string | null
+          decision_makers_aligned?: string | null
+          emotionally_exhausted?: string | null
+          enabling_behaviors?: string[] | null
+          family_members_list?: string | null
+          feel_safe?: string | null
+          financial_risks?: string[] | null
+          history_details?: string | null
+          history_overdose?: string | null
+          history_suicidal?: string | null
+          history_violence?: string | null
+          household_stress_level?: number | null
+          id?: string
+          loved_one_age?: string | null
+          most_urgent?: string | null
+          multiple_family_members?: boolean | null
+          outside_support?: string | null
+          overdose_date?: string | null
+          primary_contact_name?: string | null
+          readiness_enforce_boundaries?: number | null
+          readiness_stop_rescuing?: number | null
+          relationship_other?: string | null
+          relationship_to_loved_one?: string | null
+          risk_indicators?: string[] | null
+          sleep_quality?: string | null
+          substance_other?: string | null
+          substances?: string[] | null
+          unified_approach?: string | null
+          updated_at?: string
+          user_id?: string
+          written_boundaries?: string | null
+        }
+        Relationships: []
+      }
       consultation_bookings: {
         Row: {
           amount_paid: number

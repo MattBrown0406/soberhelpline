@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, ClipboardCheck, Calendar, ChevronRight, ShieldAlert } from "lucide-react";
+import { Phone, ArrowLeft, ClipboardCheck, Calendar, ChevronRight, ShieldAlert, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -11,6 +11,7 @@ import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
+import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 
 const sections = [
   {
@@ -338,6 +339,22 @@ export default function FamilyCoaching() {
                     Schedule a Session
                   </Button>
                 </Link>
+              </CardContent>
+            </Card>
+
+            {/* Intake Assessment - directly under booking CTA */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-primary">
+                  <FileText className="h-5 w-5" />
+                  Family Coaching Intake Assessment™
+                </CardTitle>
+                <CardDescription>
+                  Complete this confidential assessment so your coach can understand where your family is in the recovery journey. Estimated time: 12–15 minutes.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CoachingIntakeAssessment />
               </CardContent>
             </Card>
 

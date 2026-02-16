@@ -15,6 +15,7 @@ import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Moni
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
+import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -29,6 +30,7 @@ const ConsultationProviderDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [isAdminView, setIsAdminView] = useState(false);
   const [clientWorksheets, setClientWorksheets] = useState<any[]>([]);
+  const [clientIntakes, setClientIntakes] = useState<any[]>([]);
 
   // New slot form
   const [newSlot, setNewSlot] = useState({ dayOfWeek: "1", startTime: "09:00", endTime: "10:00" });
@@ -86,28 +88,24 @@ const ConsultationProviderDashboard = () => {
     setBookings(bookRes.data || []);
     setPayouts(payRes.data || []);
 
-    // Load client worksheets - get unique client user IDs from bookings
+    // Load client worksheets and intake assessments
     const clientUserIds = [...new Set((bookRes.data || []).map((b: any) => b.client_user_id))];
     if (clientUserIds.length > 0) {
-      const { data: worksheets } = await supabase
-        .from("boundary_clarity_worksheets")
-        .select("*")
-        .in("user_id", clientUserIds)
-        .order("updated_at", { ascending: false });
+      const [worksheetRes, intakeRes] = await Promise.all([
+        supabase.from("boundary_clarity_worksheets").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
+        supabase.from("coaching_intake_assessments").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
+      ]);
 
-      // Enrich with client names from bookings
       const clientNameMap: Record<string, string> = {};
       (bookRes.data || []).forEach((b: any) => {
-        if (!clientNameMap[b.client_user_id]) {
-          clientNameMap[b.client_user_id] = b.client_name;
-        }
+        if (!clientNameMap[b.client_user_id]) clientNameMap[b.client_user_id] = b.client_name;
       });
 
       setClientWorksheets(
-        (worksheets || []).map((w: any) => ({
-          ...w,
-          client_name: clientNameMap[w.user_id] || "Unknown Client",
-        }))
+        (worksheetRes.data || []).map((w: any) => ({ ...w, client_name: clientNameMap[w.user_id] || "Unknown Client" }))
+      );
+      setClientIntakes(
+        (intakeRes.data || []).map((w: any) => ({ ...w, client_name: clientNameMap[w.user_id] || "Unknown Client" }))
       );
     }
 
@@ -314,12 +312,32 @@ const ConsultationProviderDashboard = () => {
                 <CardDescription>View worksheets and assessments completed by your clients.</CardDescription>
               </CardHeader>
               <CardContent>
-                {clientWorksheets.length === 0 ? (
+                {clientWorksheets.length === 0 && clientIntakes.length === 0 ? (
                   <p className="text-muted-foreground text-center py-8">No client documents yet. Documents will appear here when clients complete worksheets.</p>
                 ) : (
                   <Accordion type="single" collapsible className="space-y-2">
+                    {clientIntakes.map((intake) => (
+                      <AccordionItem key={`intake-${intake.id}`} value={`intake-${intake.id}`} className="border rounded-lg px-4">
+                        <AccordionTrigger className="hover:no-underline">
+                          <div className="flex items-center gap-3 text-left">
+                            <FileText className="h-5 w-5 text-primary shrink-0" />
+                            <div>
+                              <p className="font-semibold">{intake.client_name}</p>
+                              <p className="text-xs text-muted-foreground">
+                                Coaching Intake Assessment™ · {intake.assigned_phase && <Badge variant="secondary" className="ml-1 text-xs">{intake.assigned_phase}</Badge>} · Updated {new Date(intake.updated_at).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="pt-2">
+                            <CoachingIntakeAssessment readOnly assessmentData={intake} />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
                     {clientWorksheets.map((worksheet) => (
-                      <AccordionItem key={worksheet.id} value={worksheet.id} className="border rounded-lg px-4">
+                      <AccordionItem key={`ws-${worksheet.id}`} value={`ws-${worksheet.id}`} className="border rounded-lg px-4">
                         <AccordionTrigger className="hover:no-underline">
                           <div className="flex items-center gap-3 text-left">
                             <FileText className="h-5 w-5 text-primary shrink-0" />
