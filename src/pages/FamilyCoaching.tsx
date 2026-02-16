@@ -129,7 +129,7 @@ export default function FamilyCoaching() {
                     <Calendar className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session</CardTitle>
+                    <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150</CardTitle>
                     <CardDescription>
                       Schedule a one-on-one session with one of our family recovery coaches for personalized support.
                     </CardDescription>
