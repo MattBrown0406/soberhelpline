@@ -88,11 +88,9 @@ const ConsultationProviderCreator = () => {
         .map((s: string) => s.trim())
         .filter(Boolean);
 
-      // Admin creates the provider directly as approved
-      // We'll look up the user by email, or create without user_id for now
-      // The provider will be linked when they log in
+      // Admin creates the provider directly as active
       const { error } = await supabase.from("consultation_providers").insert({
-        user_id: "00000000-0000-0000-0000-000000000000", // placeholder, admin will update
+        user_id: "00000000-0000-0000-0000-000000000000",
         full_name: formData.fullName,
         title: formData.title || null,
         bio: formData.bio,
@@ -101,12 +99,12 @@ const ConsultationProviderCreator = () => {
         photo_url: photoUrl,
         session_rate: 150,
         session_duration_minutes: 60,
-        status: "approved",
+        status: "active",
       });
 
       if (error) throw error;
 
-      toast.success("Consultation provider created and approved!");
+      toast.success("Consultation provider created and activated!");
       setFormData({
         fullName: "",
         email: "",
