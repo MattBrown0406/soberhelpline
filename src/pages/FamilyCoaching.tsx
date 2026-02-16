@@ -78,10 +78,13 @@ export default function FamilyCoaching() {
                   </div>
                 </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4 italic">
-                  You're exhausted, scared, and unsure what to do next. Your loved one is using again, and you can feel things slipping out of control.
+                  You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan session gives your family immediate, steady guidance so you don't have to figure this out alone.
                 </p>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                  Expert coaching to help your family navigate addiction, establish boundaries, and build a sustainable path forward — together.
+                  In one focused 60‑minute call, we'll clarify what's really happening, identify the biggest risks right now, and map out a concrete 7–14‑day plan. You'll leave knowing what to say (and what not to say), which options make sense for treatment or next steps, and how to set boundaries you can actually keep.
+                </p>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4 font-medium">
+                  This is for families who can't wait weeks for help and need clear direction in the next 24 hours.
                 </p>
               </div>
             </div>
