@@ -142,12 +142,13 @@ Deno.serve(async (req) => {
 
     // ACTION: Process payout (called when session is marked complete)
     if (action === 'payout') {
+      const providerPayout = 125; // Provider receives $125 of the $150 session fee
       try {
-        const payoutId = await processPayPalPayout(provider.paypal_email, Number(booking.amount_paid), bookingId);
+        const payoutId = await processPayPalPayout(provider.paypal_email, providerPayout, bookingId);
         await adminClient.from('consultation_payouts').insert({
           booking_id: bookingId,
           provider_id: provider.id,
-          amount: booking.amount_paid,
+          amount: providerPayout,
           paypal_payout_id: payoutId,
           status: payoutId ? 'completed' : 'failed',
           processed_at: new Date().toISOString(),
@@ -157,7 +158,7 @@ Deno.serve(async (req) => {
         await adminClient.from('consultation_payouts').insert({
           booking_id: bookingId,
           provider_id: provider.id,
-          amount: booking.amount_paid,
+          amount: providerPayout,
           status: 'failed',
           error_message: err instanceof Error ? err.message : 'Unknown error',
         });
