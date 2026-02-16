@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, ClipboardCheck, Calendar, ChevronRight } from "lucide-react";
+import { Phone, ArrowLeft, ClipboardCheck, Calendar, ChevronRight, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
@@ -318,151 +319,162 @@ export default function FamilyCoaching() {
               Personalized guidance for families navigating a loved one's addiction and recovery.
             </p>
 
-            {/* Book a Session CTA */}
-            <Card className="mb-10 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-primary">
-                  <Calendar className="h-5 w-5" />
-                  Book a Coaching Session
-                </CardTitle>
-                <CardDescription>
-                  Schedule a one-on-one session with one of our family recovery coaches for personalized support.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link to="/book-consultation">
-                  <Button className="gap-2">
-                    <Calendar className="h-4 w-4" />
-                    Schedule a Session
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+            <Accordion type="multiple" className="space-y-4">
+              {/* Book a Session */}
+              <AccordionItem value="booking" className="border rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <Calendar className="h-5 w-5" />
+                    Book a Coaching Session
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <p className="text-muted-foreground mb-4">
+                    Schedule a one-on-one session with one of our family recovery coaches for personalized support.
+                  </p>
+                  <Link to="/book-consultation">
+                    <Button className="gap-2">
+                      <Calendar className="h-4 w-4" />
+                      Schedule a Session
+                    </Button>
+                  </Link>
+                </AccordionContent>
+              </AccordionItem>
 
-            {/* Assessment */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-primary mb-1 flex items-center gap-2">
-                <ClipboardCheck className="h-6 w-6" />
-                Family Readiness Assessment™
-              </h2>
-              <p className="text-muted-foreground text-sm">
-                Estimated time: 7–10 minutes &bull; Understand where your family is in your parallel recovery journey.
-              </p>
-            </div>
+              {/* Family Readiness Assessment */}
+              <AccordionItem value="readiness" className="border rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <ClipboardCheck className="h-5 w-5" />
+                    Family Readiness Assessment™
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <p className="text-muted-foreground text-sm mb-6">
+                    Estimated time: 7–10 minutes &bull; Understand where your family is in your parallel recovery journey.
+                  </p>
 
-            {!showResults ? (
-              <>
-                {/* Progress */}
-                <div className="mb-6">
-                  <div className="flex justify-between text-sm text-muted-foreground mb-1">
-                    <span>Section {currentSection + 1} of {sections.length}: {sections[currentSection].title}</span>
-                    <span>{answeredCount}/{totalQuestions} answered</span>
-                  </div>
-                  <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
-                </div>
+                  {!showResults ? (
+                    <>
+                      <div className="mb-6">
+                        <div className="flex justify-between text-sm text-muted-foreground mb-1">
+                          <span>Section {currentSection + 1} of {sections.length}: {sections[currentSection].title}</span>
+                          <span>{answeredCount}/{totalQuestions} answered</span>
+                        </div>
+                        <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
+                      </div>
 
-                <Card className="mb-6">
-                  <CardHeader>
-                    <CardTitle className="text-lg">Section {currentSection + 1}: {sections[currentSection].title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-8">
-                    {sectionQuestions.map((q) => (
-                      <div key={q.id}>
-                        <p className="font-medium mb-3">{q.id}. {q.text}</p>
-                        <RadioGroup
-                          value={answers[q.id]?.toString()}
-                          onValueChange={(val) => handleAnswer(q.id, parseInt(val))}
-                          className="space-y-2"
-                        >
-                          {q.options.map((opt) => (
-                            <div key={opt.value} className="flex items-center space-x-2">
-                              <RadioGroupItem value={opt.value.toString()} id={`q${q.id}-${opt.value}`} />
-                              <Label htmlFor={`q${q.id}-${opt.value}`} className="cursor-pointer">{opt.label}</Label>
+                      <Card className="mb-6">
+                        <CardHeader>
+                          <CardTitle className="text-lg">Section {currentSection + 1}: {sections[currentSection].title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-8">
+                          {sectionQuestions.map((q) => (
+                            <div key={q.id}>
+                              <p className="font-medium mb-3">{q.id}. {q.text}</p>
+                              <RadioGroup
+                                value={answers[q.id]?.toString()}
+                                onValueChange={(val) => handleAnswer(q.id, parseInt(val))}
+                                className="space-y-2"
+                              >
+                                {q.options.map((opt) => (
+                                  <div key={opt.value} className="flex items-center space-x-2">
+                                    <RadioGroupItem value={opt.value.toString()} id={`q${q.id}-${opt.value}`} />
+                                    <Label htmlFor={`q${q.id}-${opt.value}`} className="cursor-pointer">{opt.label}</Label>
+                                  </div>
+                                ))}
+                              </RadioGroup>
                             </div>
                           ))}
-                        </RadioGroup>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
+                        </CardContent>
+                      </Card>
 
-                <div className="flex justify-between">
-                  <Button variant="outline" onClick={() => setCurrentSection((s) => Math.max(0, s - 1))} disabled={currentSection === 0}>
-                    Previous
-                  </Button>
-                  {currentSection < sections.length - 1 ? (
-                    <Button onClick={() => setCurrentSection((s) => s + 1)} disabled={!sectionAnswered} className="gap-1">
-                      Next <ChevronRight className="h-4 w-4" />
-                    </Button>
+                      <div className="flex justify-between">
+                        <Button variant="outline" onClick={() => setCurrentSection((s) => Math.max(0, s - 1))} disabled={currentSection === 0}>
+                          Previous
+                        </Button>
+                        {currentSection < sections.length - 1 ? (
+                          <Button onClick={() => setCurrentSection((s) => s + 1)} disabled={!sectionAnswered} className="gap-1">
+                            Next <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        ) : (
+                          <Button onClick={handleSubmit} disabled={!allAnswered}>
+                            View Results
+                          </Button>
+                        )}
+                      </div>
+                    </>
                   ) : (
-                    <Button onClick={handleSubmit} disabled={!allAnswered}>
-                      View Results
-                    </Button>
+                    <div className="space-y-6 print:space-y-4">
+                      <Card className={`border ${info.bg}`}>
+                        <CardHeader>
+                          <CardTitle className={info.color}>
+                            {info.title} — Score: {totalScore}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <p className="text-lg italic">&ldquo;{info.message}&rdquo;</p>
+                          <div>
+                            <p className="font-semibold mb-1">Recommended:</p>
+                            <p className={info.color}>{info.recommend}</p>
+                          </div>
+                          <Link to="/book-consultation">
+                            <Button className="gap-2 mt-2">
+                              <Calendar className="h-4 w-4" />
+                              Book a Coaching Session
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Detailed Breakdown</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <p className="text-sm text-muted-foreground">Boundary Clarity (Q4–6)</p>
+                              <p className="text-xl font-bold">{boundaryScore}/12</p>
+                            </div>
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <p className="text-sm text-muted-foreground">Enabling Score (Q7–9)</p>
+                              <p className="text-xl font-bold">{enablingScore}/12</p>
+                            </div>
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <p className="text-sm text-muted-foreground">Emotional Distress (Q10–12)</p>
+                              <p className="text-xl font-bold">{emotionalScore}/9</p>
+                            </div>
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <p className="text-sm text-muted-foreground">System Alignment (Q13–15)</p>
+                              <p className="text-xl font-bold">{alignmentScore}/11</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <div className="flex gap-3 print:hidden">
+                        <Button variant="outline" onClick={handlePrint}>Print Results</Button>
+                        <Button variant="outline" onClick={handleReset}>Retake Assessment</Button>
+                      </div>
+                    </div>
                   )}
-                </div>
-              </>
-            ) : (
-              <div className="space-y-6 print:space-y-4">
-                {/* Results */}
-                <Card className={`border ${info.bg}`}>
-                  <CardHeader>
-                    <CardTitle className={info.color}>
-                      {info.title} — Score: {totalScore}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-lg italic">&ldquo;{info.message}&rdquo;</p>
-                    <div>
-                      <p className="font-semibold mb-1">Recommended:</p>
-                      <p className={info.color}>{info.recommend}</p>
-                    </div>
-                    <Link to="/book-consultation">
-                      <Button className="gap-2 mt-2">
-                        <Calendar className="h-4 w-4" />
-                        Book a Coaching Session
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                </AccordionContent>
+              </AccordionItem>
 
-                {/* Sub-scores */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Detailed Breakdown</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="p-3 rounded-lg bg-muted/50">
-                        <p className="text-sm text-muted-foreground">Boundary Clarity (Q4–6)</p>
-                        <p className="text-xl font-bold">{boundaryScore}/12</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-muted/50">
-                        <p className="text-sm text-muted-foreground">Enabling Score (Q7–9)</p>
-                        <p className="text-xl font-bold">{enablingScore}/12</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-muted/50">
-                        <p className="text-sm text-muted-foreground">Emotional Distress (Q10–12)</p>
-                        <p className="text-xl font-bold">{emotionalScore}/9</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-muted/50">
-                        <p className="text-sm text-muted-foreground">System Alignment (Q13–15)</p>
-                        <p className="text-xl font-bold">{alignmentScore}/11</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <div className="flex gap-3 print:hidden">
-                  <Button variant="outline" onClick={handlePrint}>Print Results</Button>
-                  <Button variant="outline" onClick={handleReset}>Retake Assessment</Button>
-                </div>
-              </div>
-            )}
-
-            {/* Enabling Behavior Audit */}
-            <div className="mt-16 pt-10 border-t border-border/50">
-              <EnablingBehaviorAudit />
-            </div>
+              {/* Enabling Behavior Audit */}
+              <AccordionItem value="audit" className="border rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <ShieldAlert className="h-5 w-5" />
+                    Enabling Behavior Audit™
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <EnablingBehaviorAudit />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </main>
       </div>
