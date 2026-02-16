@@ -319,28 +319,28 @@ export default function FamilyCoaching() {
               Personalized guidance for families navigating a loved one's addiction and recovery.
             </p>
 
-            <Accordion type="multiple" className="space-y-4">
-              {/* Book a Session */}
-              <AccordionItem value="booking" className="border rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
-                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
-                    <Calendar className="h-5 w-5" />
-                    Book a Coaching Session
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground mb-4">
-                    Schedule a one-on-one session with one of our family recovery coaches for personalized support.
-                  </p>
-                  <Link to="/book-consultation">
-                    <Button className="gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Schedule a Session
-                    </Button>
-                  </Link>
-                </AccordionContent>
-              </AccordionItem>
+            {/* Book a Session CTA */}
+            <Card className="mb-8 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-primary">
+                  <Calendar className="h-5 w-5" />
+                  Book a Coaching Session
+                </CardTitle>
+                <CardDescription>
+                  Schedule a one-on-one session with one of our family recovery coaches for personalized support.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link to="/book-consultation">
+                  <Button className="gap-2">
+                    <Calendar className="h-4 w-4" />
+                    Schedule a Session
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
 
+            <Accordion type="multiple" className="space-y-4">
               {/* Family Readiness Assessment */}
               <AccordionItem value="readiness" className="border rounded-lg overflow-hidden">
                 <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
