@@ -163,10 +163,26 @@ const ConsultationProviderDashboard = () => {
 
     if (error) {
       toast({ title: "Error", description: "Failed to update booking", variant: "destructive" });
-    } else {
-      toast({ title: "Session marked as completed" });
-      loadData();
+      return;
     }
+
+    // Trigger payout via edge function
+    try {
+      const { data: payoutResult, error: payoutError } = await supabase.functions.invoke("process-consultation-booking", {
+        body: { bookingId, action: "payout" },
+      });
+      if (payoutError) {
+        console.error("Payout error:", payoutError);
+        toast({ title: "Session completed", description: "Payout processing encountered an issue. Admin has been notified.", variant: "destructive" });
+      } else {
+        toast({ title: "Session completed & payout sent", description: `$${payoutResult?.amount || ''} payout has been processed.` });
+      }
+    } catch (err) {
+      console.error("Payout invocation error:", err);
+      toast({ title: "Session completed", description: "Payout will be processed shortly." });
+    }
+
+    loadData();
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;

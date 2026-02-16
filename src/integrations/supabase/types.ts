@@ -251,6 +251,56 @@ export type Database = {
         }
         Relationships: []
       }
+      coaching_plans: {
+        Row: {
+          client_user_id: string
+          completed_sessions: number
+          created_at: string
+          id: string
+          plan_type: string
+          provider_id: string
+          provider_payout_per_session: number
+          status: string
+          total_amount: number
+          total_sessions: number
+          updated_at: string
+        }
+        Insert: {
+          client_user_id: string
+          completed_sessions?: number
+          created_at?: string
+          id?: string
+          plan_type: string
+          provider_id: string
+          provider_payout_per_session: number
+          status?: string
+          total_amount: number
+          total_sessions?: number
+          updated_at?: string
+        }
+        Update: {
+          client_user_id?: string
+          completed_sessions?: number
+          created_at?: string
+          id?: string
+          plan_type?: string
+          provider_id?: string
+          provider_payout_per_session?: number
+          status?: string
+          total_amount?: number
+          total_sessions?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coaching_plans_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       consultation_bookings: {
         Row: {
           amount_paid: number
@@ -260,6 +310,7 @@ export type Database = {
           client_notified: boolean | null
           client_phone: string | null
           client_user_id: string
+          coaching_plan_id: string | null
           created_at: string
           end_time: string
           id: string
@@ -283,6 +334,7 @@ export type Database = {
           client_notified?: boolean | null
           client_phone?: string | null
           client_user_id: string
+          coaching_plan_id?: string | null
           created_at?: string
           end_time: string
           id?: string
@@ -306,6 +358,7 @@ export type Database = {
           client_notified?: boolean | null
           client_phone?: string | null
           client_user_id?: string
+          coaching_plan_id?: string | null
           created_at?: string
           end_time?: string
           id?: string
@@ -322,6 +375,13 @@ export type Database = {
           zoom_passcode?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "consultation_bookings_coaching_plan_id_fkey"
+            columns: ["coaching_plan_id"]
+            isOneToOne: false
+            referencedRelation: "coaching_plans"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "consultation_bookings_provider_id_fkey"
             columns: ["provider_id"]
