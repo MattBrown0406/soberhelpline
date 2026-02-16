@@ -157,6 +157,7 @@ export type Database = {
           session_rate: number
           specialties: string[] | null
           status: string
+          timezone: string
           title: string | null
           updated_at: string
           user_id: string
@@ -172,6 +173,7 @@ export type Database = {
           session_rate?: number
           specialties?: string[] | null
           status?: string
+          timezone?: string
           title?: string | null
           updated_at?: string
           user_id: string
@@ -187,6 +189,7 @@ export type Database = {
           session_rate?: number
           specialties?: string[] | null
           status?: string
+          timezone?: string
           title?: string | null
           updated_at?: string
           user_id?: string

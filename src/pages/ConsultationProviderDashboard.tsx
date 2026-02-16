@@ -96,7 +96,7 @@ const ConsultationProviderDashboard = () => {
       day_of_week: parseInt(newSlot.dayOfWeek),
       start_time: newSlot.startTime,
       end_time: newSlot.endTime,
-      timezone: "America/Los_Angeles",
+      timezone: provider.timezone || "America/Los_Angeles",
     });
 
     if (error) {
@@ -329,6 +329,7 @@ const ConsultationProviderDashboard = () => {
                       </div>
                     </div>
                     <div><Label className="text-xs text-muted-foreground">PayPal Email</Label><p className="text-sm">{provider.paypal_email}</p></div>
+                    <div><Label className="text-xs text-muted-foreground">Timezone</Label><p className="text-sm">{provider.timezone || "America/Los_Angeles"}</p></div>
                     <div><Label className="text-xs text-muted-foreground">Session Rate</Label><p className="font-medium">${provider.session_rate} / {provider.session_duration_minutes} min</p></div>
                   </div>
                 )}

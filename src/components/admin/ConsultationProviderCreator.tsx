@@ -29,6 +29,7 @@ const ConsultationProviderCreator = () => {
     bio: "",
     specialties: "",
     paypalEmail: "",
+    timezone: "America/Los_Angeles",
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,6 +101,7 @@ const ConsultationProviderCreator = () => {
         session_rate: 150,
         session_duration_minutes: 60,
         status: "active",
+        timezone: formData.timezone,
       });
 
       if (error) throw error;
@@ -112,6 +114,7 @@ const ConsultationProviderCreator = () => {
         bio: "",
         specialties: "",
         paypalEmail: "",
+        timezone: "America/Los_Angeles",
       });
       removeHeadshot();
     } catch (error) {
@@ -240,6 +243,23 @@ const ConsultationProviderCreator = () => {
             onChange={(e) => setFormData({ ...formData, specialties: e.target.value })}
             placeholder="Family Intervention, Addiction Counseling, Trauma"
           />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="cp-timezone">Provider Timezone *</Label>
+          <select
+            id="cp-timezone"
+            value={formData.timezone}
+            onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+          >
+            <option value="America/New_York">Eastern (ET)</option>
+            <option value="America/Chicago">Central (CT)</option>
+            <option value="America/Denver">Mountain (MT)</option>
+            <option value="America/Los_Angeles">Pacific (PT)</option>
+            <option value="America/Anchorage">Alaska (AKT)</option>
+            <option value="Pacific/Honolulu">Hawaii (HT)</option>
+          </select>
         </div>
 
         <div className="space-y-2">

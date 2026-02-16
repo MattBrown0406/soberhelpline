@@ -11,11 +11,57 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+const TIMEZONE_OPTIONS = [
+  { value: "America/New_York", label: "Eastern Time (ET)" },
+  { value: "America/Chicago", label: "Central Time (CT)" },
+  { value: "America/Denver", label: "Mountain Time (MT)" },
+  { value: "America/Los_Angeles", label: "Pacific Time (PT)" },
+  { value: "America/Anchorage", label: "Alaska Time (AKT)" },
+  { value: "Pacific/Honolulu", label: "Hawaii Time (HT)" },
+];
+
+const getTimezoneLabel = (tz: string) => TIMEZONE_OPTIONS.find((t) => t.value === tz)?.label || tz;
+
+// Convert a time string (HH:MM) from one timezone to another on a given date
+const convertTime = (timeStr: string, dateStr: string, fromTz: string, toTz: string): { time: string; dayOffset: number } => {
+  const [h, m] = timeStr.split(":").map(Number);
+  // Build a date-time in the source timezone using Intl
+  const sourceDateStr = `${dateStr}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
+  
+  // Get UTC offset for both timezones
+  const getOffset = (tz: string, date: Date) => {
+    const utc = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
+    const local = new Date(date.toLocaleString("en-US", { timeZone: tz }));
+    return (local.getTime() - utc.getTime()) / 60000;
+  };
+  
+  const refDate = new Date(sourceDateStr);
+  const fromOffset = getOffset(fromTz, refDate);
+  const toOffset = getOffset(toTz, refDate);
+  const diffMinutes = toOffset - fromOffset;
+  
+  let totalMinutes = h * 60 + m + diffMinutes;
+  let dayOffset = 0;
+  while (totalMinutes < 0) { totalMinutes += 1440; dayOffset--; }
+  while (totalMinutes >= 1440) { totalMinutes -= 1440; dayOffset++; }
+  
+  const newH = String(Math.floor(totalMinutes / 60)).padStart(2, "0");
+  const newM = String(totalMinutes % 60).padStart(2, "0");
+  return { time: `${newH}:${newM}`, dayOffset };
+};
+
+const formatTime12h = (time24: string) => {
+  const [h, m] = time24.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  return `${h12}:${String(m).padStart(2, "0")} ${period}`;
+};
 
 // Intake questionnaire sections
 const intakeSections = [
@@ -61,6 +107,12 @@ const BookConsultation = () => {
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [clientTimezone, setClientTimezone] = useState(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return TIMEZONE_OPTIONS.some((t) => t.value === tz) ? tz : "America/Los_Angeles";
+    } catch { return "America/Los_Angeles"; }
+  });
 
   const totalSteps = 6; // 0=browse, 1=slot, 2-4=intake sections, 5=confirm
   const progressPercent = ((step + 1) / totalSteps) * 100;
@@ -151,7 +203,8 @@ const BookConsultation = () => {
     const dayOfWeek = d.getDay();
     const dayAvailability = availability.filter((a) => a.day_of_week === dayOfWeek);
     const duration = selectedProvider?.session_duration_minutes || 60;
-    const slots: { id: string; start_time: string; end_time: string; timezone: string }[] = [];
+    const providerTz = selectedProvider?.timezone || "America/Los_Angeles";
+    const slots: { id: string; start_time: string; end_time: string; provider_start_time: string; provider_end_time: string; display_start: string; display_end: string; timezone: string }[] = [];
 
     dayAvailability.forEach((a) => {
       const [startH, startM] = a.start_time.split(":").map(Number);
@@ -165,19 +218,27 @@ const BookConsultation = () => {
         const slotEndTotal = m + duration;
         const slotEndH = String(Math.floor(slotEndTotal / 60)).padStart(2, "0");
         const slotEndM = String(slotEndTotal % 60).padStart(2, "0");
-        const startTime = `${slotStartH}:${slotStartM}:00`;
-        const endTime = `${slotEndH}:${slotEndM}:00`;
+        const providerStartTime = `${slotStartH}:${slotStartM}:00`;
+        const providerEndTime = `${slotEndH}:${slotEndM}:00`;
 
-        // Check if this slot is already booked
+        // Check if this slot is already booked (in provider timezone)
         const isBooked = bookedSlots.some(
-          (b) => b.booking_date === dateStr && b.start_time === startTime
+          (b) => b.booking_date === dateStr && b.start_time === providerStartTime
         );
         if (!isBooked) {
+          // Convert to client timezone for display
+          const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
+          const convertedEnd = convertTime(`${slotEndH}:${slotEndM}`, dateStr, providerTz, clientTimezone);
+          
           slots.push({
-            id: `${a.id}-${startTime}`,
-            start_time: startTime,
-            end_time: endTime,
-            timezone: a.timezone || "America/Los_Angeles",
+            id: `${a.id}-${providerStartTime}`,
+            start_time: providerStartTime,
+            end_time: providerEndTime,
+            provider_start_time: providerStartTime,
+            provider_end_time: providerEndTime,
+            display_start: formatTime12h(convertedStart.time),
+            display_end: formatTime12h(convertedEnd.time),
+            timezone: a.timezone || providerTz,
           });
         }
       }
@@ -318,6 +379,18 @@ const BookConsultation = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
+                  <Label className="flex items-center gap-2"><Globe className="h-4 w-4" />Your Timezone</Label>
+                  <Select value={clientTimezone} onValueChange={(v) => { setClientTimezone(v); setSelectedSlot(null); }}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {TIMEZONE_OPTIONS.map((tz) => (
+                        <SelectItem key={tz.value} value={tz.value}>{tz.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
                   <Label>Available Dates</Label>
                   <Select value={selectedDate} onValueChange={(v) => { setSelectedDate(v); setSelectedSlot(null); }}>
                     <SelectTrigger><SelectValue placeholder="Select a date..." /></SelectTrigger>
@@ -332,14 +405,14 @@ const BookConsultation = () => {
 
                 {selectedDate && (
                   <div className="space-y-2">
-                    <Label>Available Times</Label>
+                    <Label>Available Times <span className="text-muted-foreground font-normal">({getTimezoneLabel(clientTimezone)})</span></Label>
                     <RadioGroup value={selectedSlot?.id || ""} onValueChange={(v) => setSelectedSlot(getSlotsForDate(selectedDate).find((s) => s.id === v))}>
                       {getSlotsForDate(selectedDate).map((slot) => (
                         <div key={slot.id} className="flex items-center space-x-2 p-3 border rounded-lg">
                           <RadioGroupItem value={slot.id} id={slot.id} />
                           <Label htmlFor={slot.id} className="flex items-center gap-2 cursor-pointer">
                             <Clock className="h-4 w-4" />
-                            {slot.start_time.slice(0, 5)} - {slot.end_time.slice(0, 5)} ({slot.timezone})
+                            {slot.display_start} - {slot.display_end}
                           </Label>
                         </div>
                       ))}
@@ -414,7 +487,7 @@ const BookConsultation = () => {
                 <div className="bg-muted/50 rounded-lg p-4 space-y-2">
                   <div className="flex justify-between"><span className="text-muted-foreground">Provider</span><span className="font-medium">{selectedProvider?.full_name}</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.start_time?.slice(0, 5)} - {selectedSlot?.end_time?.slice(0, 5)}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{selectedProvider?.session_duration_minutes} minutes</span></div>
                   <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${selectedProvider?.session_rate}</span></div>
                 </div>
