@@ -77,9 +77,12 @@ export default function FamilyCoaching() {
                     <p className="text-muted-foreground">Personalized guidance for your parallel recovery journey</p>
                   </div>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400 max-w-3xl mx-auto mt-6">
-                  The Emergency Game Plan
-                </h2>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
+                  <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
+                    The Emergency Game Plan
+                  </h2>
+                  <span className="text-xl font-bold text-primary">— $150</span>
+                </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3 italic">
                   You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan session gives your family immediate, steady guidance so you don't have to figure this out alone.
                 </p>
@@ -90,9 +93,12 @@ export default function FamilyCoaching() {
                   This is for families who can't wait weeks for help and need clear direction in the next 24 hours.
                 </p>
 
-                <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400 max-w-3xl mx-auto mt-8">
-                  Family Stabilization Plan
-                </h2>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-8 max-w-3xl mx-auto">
+                  <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
+                    Family Stabilization Plan
+                  </h2>
+                  <span className="text-xl font-bold text-primary">— $500</span>
+                </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3">
                   Designed for families who feel stuck in cycles of crisis, enabling, and guilt. Across four sessions you map the family roles, set and practice new boundaries, build a relapse/overdose safety plan, and coordinate treatment or next‑step options, with email check‑ins between sessions.
                 </p>
