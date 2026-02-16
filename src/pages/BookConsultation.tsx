@@ -61,7 +61,7 @@ const BookConsultation = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const totalSteps = 6; // 0=browse, 1-3=intake sections, 4=slot, 5=confirm
+  const totalSteps = 6; // 0=browse, 1=slot, 2-4=intake sections, 5=confirm
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const BookConsultation = () => {
       .order("day_of_week")
       .order("start_time");
     setAvailability(data || []);
-    setStep(1);
+    setStep(1); // Go to date/time selection
   };
 
   const handleIntakeChange = (fieldId: string, value: string) => {
@@ -117,8 +117,8 @@ const BookConsultation = () => {
   };
 
   const goNext = () => {
-    if (step >= 1 && step <= 3) {
-      if (!validateSection(step - 1)) return;
+    if (step >= 2 && step <= 4) {
+      if (!validateSection(step - 2)) return;
     }
     setStep(step + 1);
   };
@@ -260,57 +260,8 @@ const BookConsultation = () => {
             </>
           )}
 
-          {/* Steps 1-3: Intake Questionnaire */}
-          {step >= 1 && step <= 3 && (
-            <Card>
-              <CardHeader>
-                <CardTitle>{intakeSections[step - 1].title}</CardTitle>
-                <CardDescription>Section {step} of 3</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {intakeSections[step - 1].fields.map((field) => (
-                  <div key={field.id} className="space-y-2">
-                    <Label htmlFor={field.id}>{field.label} {field.required && "*"}</Label>
-                    {field.type === "select" ? (
-                      <Select value={intakeData[field.id] || ""} onValueChange={(v) => handleIntakeChange(field.id, v)}>
-                        <SelectTrigger><SelectValue placeholder="Select..." /></SelectTrigger>
-                        <SelectContent>
-                          {field.options?.map((opt) => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    ) : field.type === "textarea" ? (
-                      <Textarea
-                        id={field.id}
-                        value={intakeData[field.id] || ""}
-                        onChange={(e) => handleIntakeChange(field.id, e.target.value)}
-                        placeholder={field.placeholder}
-                        rows={4}
-                      />
-                    ) : (
-                      <Input
-                        id={field.id}
-                        type={field.type}
-                        value={intakeData[field.id] || ""}
-                        onChange={(e) => handleIntakeChange(field.id, e.target.value)}
-                        placeholder={field.placeholder}
-                      />
-                    )}
-                  </div>
-                ))}
-                <div className="flex justify-between pt-4">
-                  <Button variant="outline" onClick={() => setStep(step - 1)}>
-                    <ArrowLeft className="w-4 h-4 mr-1" />Previous
-                  </Button>
-                  <Button onClick={goNext}>
-                    Next<ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Step 4: Select Date & Time */}
-          {step === 4 && (
+          {/* Step 1: Select Date & Time */}
+          {step === 1 && (
             <Card>
               <CardHeader>
                 <CardTitle>Select Date & Time</CardTitle>
@@ -348,8 +299,57 @@ const BookConsultation = () => {
                 )}
 
                 <div className="flex justify-between pt-4">
-                  <Button variant="outline" onClick={() => setStep(3)}><ArrowLeft className="w-4 h-4 mr-1" />Previous</Button>
+                  <Button variant="outline" onClick={() => setStep(0)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button onClick={goNext} disabled={!selectedSlot}>Next<ArrowRight className="w-4 h-4 ml-1" /></Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Steps 2-4: Intake Questionnaire */}
+          {step >= 2 && step <= 4 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>{intakeSections[step - 2].title}</CardTitle>
+                <CardDescription>Section {step - 1} of 3</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {intakeSections[step - 2].fields.map((field) => (
+                  <div key={field.id} className="space-y-2">
+                    <Label htmlFor={field.id}>{field.label} {field.required && "*"}</Label>
+                    {field.type === "select" ? (
+                      <Select value={intakeData[field.id] || ""} onValueChange={(v) => handleIntakeChange(field.id, v)}>
+                        <SelectTrigger><SelectValue placeholder="Select..." /></SelectTrigger>
+                        <SelectContent>
+                          {field.options?.map((opt) => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                    ) : field.type === "textarea" ? (
+                      <Textarea
+                        id={field.id}
+                        value={intakeData[field.id] || ""}
+                        onChange={(e) => handleIntakeChange(field.id, e.target.value)}
+                        placeholder={field.placeholder}
+                        rows={4}
+                      />
+                    ) : (
+                      <Input
+                        id={field.id}
+                        type={field.type}
+                        value={intakeData[field.id] || ""}
+                        onChange={(e) => handleIntakeChange(field.id, e.target.value)}
+                        placeholder={field.placeholder}
+                      />
+                    )}
+                  </div>
+                ))}
+                <div className="flex justify-between pt-4">
+                  <Button variant="outline" onClick={() => setStep(step - 1)}>
+                    <ArrowLeft className="w-4 h-4 mr-1" />Previous
+                  </Button>
+                  <Button onClick={goNext}>
+                    Next<ArrowRight className="w-4 h-4 ml-1" />
+                  </Button>
                 </div>
               </CardContent>
             </Card>
