@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 
@@ -184,9 +184,15 @@ const BookConsultation = () => {
 
       toast({
         title: "Consultation Booked!",
-        description: "You'll receive a confirmation email with your Zoom meeting link.",
+        description: "Your session is confirmed. You can join from this site when it's time.",
       });
-      navigate("/");
+
+      // If we got a zoom meeting ID back, navigate to join page; otherwise go home
+      if (data.zoom_meeting_id) {
+        navigate(`/join-meeting?mn=${data.zoom_meeting_id}&pwd=${encodeURIComponent(data.zoom_passcode || "")}`);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Booking error:", error);
       toast({ title: "Booking failed", description: "Please try again.", variant: "destructive" });
@@ -371,7 +377,7 @@ const BookConsultation = () => {
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  A Zoom meeting link will be created automatically and sent to both you and the provider via email. Payment will be processed through PayPal.
+                  A video session will be created automatically. After booking, you'll be able to join the session directly from this site — no downloads required. You'll also receive a confirmation email.
                 </p>
 
                 <div className="flex justify-between pt-4">

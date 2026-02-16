@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2 } from "lucide-react";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,7 @@ export default function MondayZoomRegistration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -86,6 +87,30 @@ export default function MondayZoomRegistration() {
       setFormData((prev) => ({ ...prev, email: user.email || "" }));
     }
   }, [user]);
+
+  // Fetch Monday meeting info when submitted
+  useEffect(() => {
+    if (!submitted) return;
+    const fetchMeetingInfo = async () => {
+      const { data: meetingIdSetting } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "monday_zoom_meeting_id")
+        .maybeSingle();
+      const { data: passcodeSetting } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "monday_zoom_passcode")
+        .maybeSingle();
+      if (meetingIdSetting?.value) {
+        setMeetingInfo({
+          meetingId: meetingIdSetting.value,
+          passcode: passcodeSetting?.value || "",
+        });
+      }
+    };
+    fetchMeetingInfo();
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -223,6 +248,7 @@ export default function MondayZoomRegistration() {
   }
 
   if (submitted) {
+
     return (
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/40 bg-background/95 backdrop-blur">
@@ -237,9 +263,28 @@ export default function MondayZoomRegistration() {
           <h1 className="text-3xl font-bold text-foreground mb-4">You're Registered!</h1>
           <p className="text-muted-foreground text-lg mb-8">
             Thank you for registering for the Monday night family support Zoom meeting. 
-            You'll receive details via email before the meeting.
+            When it's time, join directly from this page — no need to leave the site.
           </p>
-          <div className="flex gap-4 justify-center">
+
+          {meetingInfo ? (
+            <div className="space-y-4">
+              <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
+                <Button size="lg" className="gap-2">
+                  <Monitor className="h-5 w-5" />
+                  Join Monday Night Meeting
+                </Button>
+              </Link>
+              <p className="text-sm text-muted-foreground">
+                The meeting opens every Monday at 6:00 PM PST. You can join a few minutes early.
+              </p>
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              You'll receive the meeting details via email before the meeting.
+            </p>
+          )}
+
+          <div className="flex gap-4 justify-center mt-8">
             <Link to="/family-support">
               <Button variant="outline">
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -247,7 +292,7 @@ export default function MondayZoomRegistration() {
               </Button>
             </Link>
             <Link to="/family-education">
-              <Button>Explore Education Resources</Button>
+              <Button variant="outline">Explore Education Resources</Button>
             </Link>
           </div>
         </main>
