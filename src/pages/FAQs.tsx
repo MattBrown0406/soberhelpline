@@ -43,7 +43,7 @@ const faqs: FAQ[] = [
         • Documenting specific incidents and patterns you've observed{"\n"}
         • Reaching out to a professional interventionist or addiction counselor for guidance{"\n"}
         • Connecting with support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> for families{"\n"}
-        • Attending a FREE family support zoom meeting offered by the interventionists at <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a>{"\n"}
+        • Planning a calm, private conversation when they're sober
         • Planning a calm, private conversation when they're sober
         {"\n\n"}
         Avoid confronting them when they're intoxicated or in a public setting. Having professional guidance before your first conversation can make a significant difference in the outcome.
@@ -121,7 +121,7 @@ A professional can help assess the appropriate level of care based on your loved
         • Maintaining your own boundaries and well-being{"\n"}
         • Expressing love while refusing to participate in their addiction
         {"\n\n"}
-        Stopping enabling is NOT abandoning them. It's allowing reality to become their teacher. This is incredibly difficult, and working with a therapist or attending family support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a>, <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>, or <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a> can help you navigate this transition.
+        Stopping enabling is NOT abandoning them. It's allowing reality to become their teacher. This is incredibly difficult, and working with a therapist or attending family support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> can help you navigate this transition.
       </>
     )
   },
@@ -213,7 +213,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         You deserve support regardless of what your loved one chooses. Prioritizing your own well-being is not selfish—it's essential.
         {"\n\n"}
         **Self-Care Actions:**{"\n"}
-        • Attend <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a>, <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>, or <a href="https://interventiononcall.com/live-family-friends-zoom/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Intervention On Call</a> family support groups{"\n"}
+        • Attend <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> family support groups{"\n"}
         • Find a <Link to="/therapists" className="text-primary hover:underline font-medium">therapist</Link> who understands addiction and family dynamics{"\n"}
         • Educate yourself about addiction and codependency{"\n"}
         • Maintain your own health: sleep, nutrition, exercise{"\n"}

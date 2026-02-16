@@ -324,14 +324,6 @@ export default function FamilySupport() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <a
-                    href="https://interventiononcall.com/live-family-friends-zoom/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-primary hover:underline"
-                  >
-                    Intervention On Call (FREE Zoom Calls) →
-                  </a>
-                  <a
                     href="https://al-anon.org"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -424,14 +416,6 @@ export default function FamilySupport() {
                   <Link to="/interventionists" className="block text-primary hover:underline">
                     Find an Interventionist →
                   </Link>
-                  <a
-                    href="https://interventiononcall.com/live-family-friends-zoom/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-primary hover:underline"
-                  >
-                    FREE Family Support Zoom Calls →
-                  </a>
                 </CardContent>
               </Card>
             </div>
