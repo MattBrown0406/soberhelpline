@@ -55,6 +55,7 @@ const BookConsultation = () => {
   const [providers, setProviders] = useState<any[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<any>(null);
   const [availability, setAvailability] = useState<any[]>([]);
+  const [bookedSlots, setBookedSlots] = useState<any[]>([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
@@ -90,15 +91,23 @@ const BookConsultation = () => {
 
   const selectProvider = async (provider: any) => {
     setSelectedProvider(provider);
-    const { data } = await supabase
-      .from("provider_availability")
-      .select("*")
-      .eq("provider_id", provider.id)
-      .eq("is_active", true)
-      .order("day_of_week")
-      .order("start_time");
-    setAvailability(data || []);
-    setStep(1); // Go to date/time selection
+    const [availRes, bookingsRes] = await Promise.all([
+      supabase
+        .from("provider_availability")
+        .select("*")
+        .eq("provider_id", provider.id)
+        .eq("is_active", true)
+        .order("day_of_week")
+        .order("start_time"),
+      supabase
+        .from("consultation_bookings")
+        .select("booking_date, start_time, end_time")
+        .eq("provider_id", provider.id)
+        .in("status", ["confirmed", "pending"]),
+    ]);
+    setAvailability(availRes.data || []);
+    setBookedSlots(bookingsRes.data || []);
+    setStep(1);
   };
 
   const handleIntakeChange = (fieldId: string, value: string) => {
@@ -140,7 +149,41 @@ const BookConsultation = () => {
   const getSlotsForDate = (dateStr: string) => {
     const d = new Date(dateStr + "T00:00:00");
     const dayOfWeek = d.getDay();
-    return availability.filter((a) => a.day_of_week === dayOfWeek);
+    const dayAvailability = availability.filter((a) => a.day_of_week === dayOfWeek);
+    const duration = selectedProvider?.session_duration_minutes || 60;
+    const slots: { id: string; start_time: string; end_time: string; timezone: string }[] = [];
+
+    dayAvailability.forEach((a) => {
+      const [startH, startM] = a.start_time.split(":").map(Number);
+      const [endH, endM] = a.end_time.split(":").map(Number);
+      const startMinutes = startH * 60 + startM;
+      const endMinutes = endH * 60 + endM;
+
+      for (let m = startMinutes; m + duration <= endMinutes; m += duration) {
+        const slotStartH = String(Math.floor(m / 60)).padStart(2, "0");
+        const slotStartM = String(m % 60).padStart(2, "0");
+        const slotEndTotal = m + duration;
+        const slotEndH = String(Math.floor(slotEndTotal / 60)).padStart(2, "0");
+        const slotEndM = String(slotEndTotal % 60).padStart(2, "0");
+        const startTime = `${slotStartH}:${slotStartM}:00`;
+        const endTime = `${slotEndH}:${slotEndM}:00`;
+
+        // Check if this slot is already booked
+        const isBooked = bookedSlots.some(
+          (b) => b.booking_date === dateStr && b.start_time === startTime
+        );
+        if (!isBooked) {
+          slots.push({
+            id: `${a.id}-${startTime}`,
+            start_time: startTime,
+            end_time: endTime,
+            timezone: a.timezone || "America/Los_Angeles",
+          });
+        }
+      }
+    });
+
+    return slots;
   };
 
   const handleBooking = async () => {
