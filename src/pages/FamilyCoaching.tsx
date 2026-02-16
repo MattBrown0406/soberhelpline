@@ -92,6 +92,14 @@ export default function FamilyCoaching() {
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4 font-medium">
                   This is for families who can't wait weeks for help and need clear direction in the next 24 hours.
                 </p>
+                <div className="mt-4">
+                  <Link to="/book-consultation">
+                    <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
+                      <Calendar className="h-4 w-4" />
+                      Book an Emergency Session — $150
+                    </Button>
+                  </Link>
+                </div>
 
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-8 max-w-3xl mx-auto">
                   <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
