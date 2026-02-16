@@ -65,7 +65,7 @@ const ConsultationProviderDashboard = () => {
         .eq("user_id", user.id)
         .maybeSingle();
 
-      if (!providerData) { navigate("/consultation-provider-signup"); return; }
+      if (!providerData) { navigate("/family-education"); return; }
       if (providerData.status !== "active") {
         toast({ title: "Account inactive", description: "Your provider account is currently inactive. Please contact an administrator." });
         navigate("/");
