@@ -10,6 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
+import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 
 const sections = [
   {
@@ -472,6 +473,18 @@ export default function FamilyCoaching() {
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-6">
                   <EnablingBehaviorAudit />
+                </AccordionContent>
+              </AccordionItem>
+              {/* Boundary Clarity Worksheet */}
+              <AccordionItem value="boundary-worksheet" className="border rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <ClipboardCheck className="h-5 w-5" />
+                    Boundary Clarity Worksheet™
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <BoundaryClarityWorksheet />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
