@@ -87,6 +87,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Provider Application
                   </Button>
                 </Link>
+                <Link to="/consultation-provider-dashboard" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-4">
+                    Coaching Provider Login
+                  </Button>
+                </Link>
                 <a 
                   href="https://gratis-class-d1c.notion.site/2bb286dad2cf8169863de855ab9a22c4?pvs=105" 
                   target="_blank" 

@@ -222,22 +222,26 @@ Deno.serve(async (req) => {
       .eq('user_id', provider.user_id)
       .single();
 
-    if (providerPrivate?.email) {
-      await sendEmail(providerPrivate.email, 'New Consultation Booking - Sober Helpline', `
+    const providerEmail = providerPrivate?.email || provider.paypal_email;
+
+    if (providerEmail) {
+      await sendEmail(providerEmail, `New Session Booked – ${formattedDate} - Sober Helpline`, `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #1a365d;">New Consultation Booking</h2>
-          <p>You have a new consultation booked.</p>
+          <h2 style="color: #1a365d;">New Consultation Session Booked</h2>
+          <p>Hi ${provider.full_name},</p>
+          <p>A new consultation session has been booked with you. Here are the details:</p>
           <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin: 16px 0;">
-            <p><strong>Client:</strong> ${booking.client_name}</p>
-            <p><strong>Email:</strong> ${booking.client_email}</p>
-            ${booking.client_phone ? `<p><strong>Phone:</strong> ${booking.client_phone}</p>` : ''}
+            <p><strong>Client Name:</strong> ${booking.client_name}</p>
             <p><strong>Date:</strong> ${formattedDate}</p>
             <p><strong>Time:</strong> ${formattedTime} (Pacific)</p>
+            <p><strong>Duration:</strong> ${provider.session_duration_minutes} minutes</p>
             <p><strong>Zoom Link:</strong> <a href="${zoomLink}">${zoomLink}</a></p>
             ${zoomPasscode ? `<p><strong>Passcode:</strong> ${zoomPasscode}</p>` : ''}
           </div>
           <h3>Client Intake Responses</h3>
           ${intakeSummary || '<p>No intake responses provided.</p>'}
+          <p style="margin-top: 16px;">Log in to your <a href="https://soberhelpline.lovable.app/consultation-provider-dashboard">Provider Dashboard</a> to manage your bookings.</p>
+          <p>— Sober Helpline Team</p>
         </div>
       `);
     }
