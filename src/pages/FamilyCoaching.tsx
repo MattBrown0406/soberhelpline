@@ -77,6 +77,9 @@ export default function FamilyCoaching() {
                     <p className="text-muted-foreground">Personalized guidance for your parallel recovery journey</p>
                   </div>
                 </div>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4 italic">
+                  You're exhausted, scared, and unsure what to do next. Your loved one is using again, and you can feel things slipping out of control.
+                </p>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
                   Expert coaching to help your family navigate addiction, establish boundaries, and build a sustainable path forward — together.
                 </p>
