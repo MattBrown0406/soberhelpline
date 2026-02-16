@@ -342,23 +342,22 @@ export default function FamilyCoaching() {
               </CardContent>
             </Card>
 
-            {/* Intake Assessment - directly under booking CTA */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-primary">
-                  <FileText className="h-5 w-5" />
-                  Family Coaching Intake Assessment™
-                </CardTitle>
-                <CardDescription>
-                  Complete this confidential assessment so your coach can understand where your family is in the recovery journey. Estimated time: 12–15 minutes.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <CoachingIntakeAssessment />
-              </CardContent>
-            </Card>
-
             <Accordion type="multiple" className="space-y-4">
+              {/* Intake Assessment */}
+              <AccordionItem value="intake" className="border rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                  <span className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <FileText className="h-5 w-5" />
+                    Family Coaching Intake Assessment™
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <p className="text-muted-foreground text-sm mb-6">
+                    Complete this confidential assessment so your coach can understand where your family is in the recovery journey. Estimated time: 12–15 minutes.
+                  </p>
+                  <CoachingIntakeAssessment />
+                </AccordionContent>
+              </AccordionItem>
               {/* Family Readiness Assessment */}
               <AccordionItem value="readiness" className="border rounded-lg overflow-hidden">
                 <AccordionTrigger className="px-6 py-4 hover:no-underline [&[data-state=open]>svg]:rotate-180">
