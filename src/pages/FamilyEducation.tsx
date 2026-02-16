@@ -339,6 +339,12 @@ export default function FamilyEducation() {
                       Webinars
                     </Button>
                   </Link>
+                  <Link to="/family-coaching">
+                    <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                      <Compass className="h-4 w-4" />
+                      Coaching
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-1.5 border border-border/50">

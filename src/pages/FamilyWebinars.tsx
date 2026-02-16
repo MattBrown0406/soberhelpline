@@ -245,13 +245,21 @@ export default function FamilyWebinars() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-5xl mx-auto">
-            <Link
-              to="/family-support"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Support
-            </Link>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <Link
+                to="/family-support"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back
+              </Link>
+              <Link to="/family-coaching">
+                <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/30">
+                  <Users className="h-4 w-4" />
+                  Family Coaching
+                </Button>
+              </Link>
+            </div>
 
             <div className="mb-8">
               <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
