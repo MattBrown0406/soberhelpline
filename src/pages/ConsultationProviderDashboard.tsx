@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,12 +18,14 @@ const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 const ConsultationProviderDashboard = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [provider, setProvider] = useState<any>(null);
   const [availability, setAvailability] = useState<any[]>([]);
   const [bookings, setBookings] = useState<any[]>([]);
   const [payouts, setPayouts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdminView, setIsAdminView] = useState(false);
 
   // New slot form
   const [newSlot, setNewSlot] = useState({ dayOfWeek: "1", startTime: "09:00", endTime: "10:00" });
@@ -36,26 +38,49 @@ const ConsultationProviderDashboard = () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { navigate("/auth"); return; }
 
-    const { data: providerData } = await supabase
-      .from("consultation_providers")
-      .select("*")
-      .eq("user_id", user.id)
-      .maybeSingle();
+    const adminViewUserId = searchParams.get("admin_view");
+    let resolvedProvider: any = null;
 
-    if (!providerData) { navigate("/consultation-provider-signup"); return; }
-    if (providerData.status !== "active") {
-      toast({ title: "Account inactive", description: "Your provider account is currently inactive. Please contact an administrator." });
-      navigate("/");
-      return;
+    // If admin_view param is present, check if current user is admin
+    if (adminViewUserId) {
+      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
+      if (!roles || roles.length === 0) {
+        navigate("/");
+        return;
+      }
+
+      const { data: providerData } = await supabase
+        .from("consultation_providers")
+        .select("*")
+        .eq("user_id", adminViewUserId)
+        .maybeSingle();
+
+      if (!providerData) { toast({ title: "Provider not found" }); navigate("/admin"); return; }
+      resolvedProvider = providerData;
+      setIsAdminView(true);
+    } else {
+      const { data: providerData } = await supabase
+        .from("consultation_providers")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (!providerData) { navigate("/consultation-provider-signup"); return; }
+      if (providerData.status !== "active") {
+        toast({ title: "Account inactive", description: "Your provider account is currently inactive. Please contact an administrator." });
+        navigate("/");
+        return;
+      }
+      resolvedProvider = providerData;
     }
 
-    setProvider(providerData);
+    setProvider(resolvedProvider);
 
     // Load availability, bookings, payouts in parallel
     const [availRes, bookRes, payRes] = await Promise.all([
-      supabase.from("provider_availability").select("*").eq("provider_id", providerData.id).order("day_of_week").order("start_time"),
-      supabase.from("consultation_bookings").select("*").eq("provider_id", providerData.id).order("booking_date", { ascending: false }),
-      supabase.from("consultation_payouts").select("*").eq("provider_id", providerData.id).order("created_at", { ascending: false }),
+      supabase.from("provider_availability").select("*").eq("provider_id", resolvedProvider.id).order("day_of_week").order("start_time"),
+      supabase.from("consultation_bookings").select("*").eq("provider_id", resolvedProvider.id).order("booking_date", { ascending: false }),
+      supabase.from("consultation_payouts").select("*").eq("provider_id", resolvedProvider.id).order("created_at", { ascending: false }),
     ]);
 
     setAvailability(availRes.data || []);
@@ -116,16 +141,22 @@ const ConsultationProviderDashboard = () => {
       <SEOHead title="Provider Dashboard | Sober Helpline" description="Manage your consultation availability, bookings, and payouts." noIndex={true} />
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between mb-4">
-          <Link to="/">
+          <Link to={isAdminView ? "/admin" : "/"}>
             <Button variant="ghost" size="sm" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {isAdminView ? "Back to Admin" : "Back"}
             </Button>
           </Link>
           <img src={logo} alt="Sober Helpline" className="w-24 md:w-32 h-auto" />
         </div>
 
-        <h1 className="text-2xl font-bold mb-6">Provider Dashboard</h1>
+        {isAdminView && (
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-3 mb-4 text-sm text-primary">
+            <strong>Admin View:</strong> Viewing dashboard for <strong>{provider?.full_name}</strong>. Changes you make here will affect this provider's account.
+          </div>
+        )}
+
+        <h1 className="text-2xl font-bold mb-6">{isAdminView ? `${provider?.full_name}'s Dashboard` : "Provider Dashboard"}</h1>
 
         <Tabs defaultValue="availability" className="space-y-6">
           <TabsList className="flex-wrap h-auto gap-1">

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { CheckCircle, XCircle, DollarSign, Eye, ArrowLeft, Calendar, Clock, Video } from "lucide-react";
+import { CheckCircle, XCircle, DollarSign, Eye, ArrowLeft, Calendar, Clock, Video, ExternalLink, ClipboardList } from "lucide-react";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -270,6 +270,7 @@ export const ConsultationManagement = () => {
       <TabsList>
         <TabsTrigger value="providers">Providers ({providers.length})</TabsTrigger>
         <TabsTrigger value="bookings">All Bookings ({bookings.length})</TabsTrigger>
+        <TabsTrigger value="assessments">Assessments</TabsTrigger>
         <TabsTrigger value="payouts">All Payouts ({payouts.length})</TabsTrigger>
       </TabsList>
 
@@ -306,6 +307,11 @@ export const ConsultationManagement = () => {
                       <Button size="sm" variant="outline" onClick={() => setSelectedProvider(p)} className="gap-1">
                         <Eye className="h-3 w-3" />View
                       </Button>
+                      <a href={`/consultation-provider-dashboard?admin_view=${p.user_id}`} target="_blank" rel="noopener noreferrer">
+                        <Button size="sm" variant="outline" className="gap-1">
+                          <ExternalLink className="h-3 w-3" />Dashboard
+                        </Button>
+                      </a>
                       <Select value={p.status} onValueChange={(v) => updateProviderStatus(p.id, v)}>
                         <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                         <SelectContent>
@@ -369,6 +375,50 @@ export const ConsultationManagement = () => {
             </TableBody>
           </Table>
         </div>
+      </TabsContent>
+
+      <TabsContent value="assessments">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <ClipboardList className="h-4 w-4" />
+              Family Intake Assessments
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {bookings.filter(b => b.intake_responses).length === 0 ? (
+              <p className="text-muted-foreground text-sm">No intake assessments submitted yet.</p>
+            ) : (
+              <div className="space-y-4">
+                {bookings.filter(b => b.intake_responses).map((b) => {
+                  const prov = providers.find(p => p.id === b.provider_id);
+                  return (
+                    <div key={b.id} className="border rounded-lg p-4 space-y-3">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                          <p className="font-medium">{b.client_name}</p>
+                          <p className="text-xs text-muted-foreground">{b.client_email}{b.client_phone ? ` • ${b.client_phone}` : ""}</p>
+                        </div>
+                        <div className="text-right text-sm">
+                          <p className="text-muted-foreground">Provider: <span className="font-medium text-foreground">{prov?.full_name || "—"}</span></p>
+                          <p className="text-muted-foreground">{b.booking_date} • {b.start_time?.slice(0, 5)}</p>
+                        </div>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded space-y-2 text-sm">
+                        {Object.entries(b.intake_responses as Record<string, string>).map(([q, a]) => (
+                          <div key={q}>
+                            <span className="font-medium text-foreground">{q}:</span>{" "}
+                            <span className="text-muted-foreground">{a}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </TabsContent>
 
       <TabsContent value="payouts">
