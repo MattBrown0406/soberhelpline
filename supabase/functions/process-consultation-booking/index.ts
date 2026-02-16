@@ -142,6 +142,24 @@ Deno.serve(async (req) => {
 
     // ACTION: Process payout (called when session is marked complete)
     if (action === 'payout') {
+      // Skip payout for Matt Brown (owner) - it's his PayPal account
+      if (provider.full_name === 'Matt Brown') {
+        // Still update coaching plan progress if applicable
+        if (booking.coaching_plan_id) {
+          const { data: plan } = await adminClient
+            .from('coaching_plans')
+            .select('*')
+            .eq('id', booking.coaching_plan_id)
+            .single();
+
+          if (plan) {
+            const newCompleted = (plan.completed_sessions || 0) + 1;
+            const newStatus = newCompleted >= plan.total_sessions ? 'completed' : 'active';
+            await adminClient.from('coaching_plans').update({ completed_sessions: newCompleted, status: newStatus }).eq('id', plan.id);
+          }
+        }
+        return new Response(JSON.stringify({ success: true, skipped: true, reason: 'Owner provider - no payout needed' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
       // Determine payout amount based on coaching plan
       let providerPayout = 125; // Default: $125 of the $150 emergency/single session fee
 
