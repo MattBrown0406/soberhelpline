@@ -191,6 +191,9 @@ const Index = () => {
                     <DropdownMenuItem asChild>
                       <Link to="/provider-info" className="cursor-pointer">Provider Application</Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/consultation-provider-dashboard" className="cursor-pointer">Coaching Provider Login</Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </nav>
