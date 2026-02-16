@@ -101,7 +101,7 @@ export default function FamilyCoaching() {
                   </Link>
                 </div>
 
-                <Accordion type="single" collapsible className="mt-8 max-w-3xl mx-auto">
+                <Accordion type="single" collapsible className="mt-8 max-w-3xl mx-auto space-y-4">
                   <AccordionItem value="stabilization" className="border-2 border-amber-500/20 rounded-lg overflow-hidden">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-amber-50 to-transparent dark:from-amber-950/20 [&[data-state=open]>svg]:rotate-180">
                       <span className="flex flex-col md:flex-row items-center gap-2 text-lg font-semibold text-amber-700 dark:text-amber-400">
@@ -117,6 +117,152 @@ export default function FamilyCoaching() {
                           <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
                             <Calendar className="h-4 w-4" />
                             Book the Stabilization Plan — $500
+                          </Button>
+                        </Link>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="parallel-recovery" className="border-2 border-emerald-500/20 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-emerald-50 to-transparent dark:from-emerald-950/20 [&[data-state=open]>svg]:rotate-180">
+                      <span className="flex flex-col md:flex-row items-center gap-2 text-lg font-semibold text-emerald-700 dark:text-emerald-400">
+                        Parallel Recovery Program™
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-6">
+                      <p className="text-xl font-semibold text-emerald-700 dark:text-emerald-400 mt-3">
+                        A 12-Week Structured Coaching Path for Families of Addicted Loved Ones
+                      </p>
+                      <p className="text-muted-foreground mt-3">
+                        When someone you love struggles with addiction, your life changes too.
+                      </p>
+                      <p className="text-muted-foreground mt-3">
+                        Most families focus entirely on getting their loved one sober. But what often gets overlooked is this:
+                      </p>
+                      <p className="text-muted-foreground mt-2 font-semibold italic">
+                        Addiction destabilizes the entire system — not just the individual.
+                      </p>
+                      <p className="text-muted-foreground mt-3">
+                        The Parallel Recovery Program™ is a structured 12-week coaching experience designed specifically for families. This is not therapy. It is not crisis consulting. And it is not advice-by-the-hour.
+                      </p>
+                      <p className="text-muted-foreground mt-2 font-medium">
+                        It is a step-by-step framework that helps families move from chaos and reactivity to clarity, consistency, and confidence.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">Why "Parallel Recovery"?</h3>
+                      <p className="text-muted-foreground mt-2">
+                        Because families must recover alongside their loved one.
+                      </p>
+                      <p className="text-muted-foreground mt-2">While your loved one works on sobriety, you work on:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Ending enabling patterns</li>
+                        <li>Regulating emotional reactivity</li>
+                        <li>Establishing enforceable boundaries</li>
+                        <li>Aligning as a couple or family unit</li>
+                        <li>Preparing for relapse without panic</li>
+                        <li>Rebuilding trust gradually and safely</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium italic">
+                        Recovery is not one person's journey. It is systemic.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">What You Can Expect</h3>
+                      <p className="text-muted-foreground mt-2">Over 12 structured weeks, you will:</p>
+
+                      <div className="mt-4 space-y-4">
+                        <div className="pl-4 border-l-4 border-red-400/50">
+                          <p className="font-semibold text-red-700 dark:text-red-400">Phase 1: Stabilize the System</p>
+                          <p className="text-muted-foreground text-sm mt-1">Reduce chaos, understand your role in the family dynamic, and implement your first enforceable boundary.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-amber-400/50">
+                          <p className="font-semibold text-amber-700 dark:text-amber-400">Phase 2: Detach Without Abandoning</p>
+                          <p className="text-muted-foreground text-sm mt-1">Learn how to stop rescuing without becoming cold or disconnected. Replace guilt-driven decisions with values-based structure.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-emerald-400/50">
+                          <p className="font-semibold text-emerald-700 dark:text-emerald-400">Phase 3: Build Accountability & Structure</p>
+                          <p className="text-muted-foreground text-sm mt-1">Create written financial policies, communication scripts, and a relapse response plan so you are never reacting blindly again.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-blue-400/50">
+                          <p className="font-semibold text-blue-700 dark:text-blue-400">Phase 4: Sustain & Transition</p>
+                          <p className="text-muted-foreground text-sm mt-1">Rebuild trust carefully, reclaim your identity outside of crisis, and design a long-term family stability blueprint.</p>
+                        </div>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">Who This Program Is For</h3>
+                      <p className="text-muted-foreground mt-2">This program is appropriate if:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Your loved one is actively using or early in recovery</li>
+                        <li>You feel emotionally exhausted or constantly reactive</li>
+                        <li>Boundaries exist but are inconsistent</li>
+                        <li>Financial support has become confusing or chaotic</li>
+                        <li>You and your partner are divided on what to do</li>
+                        <li>You are afraid of relapse but unsure how to prepare</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 italic">
+                        It is especially helpful for families who are no longer in immediate crisis but still feel stuck in unhealthy patterns.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">How It Works</h3>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Weekly 60-minute private coaching sessions</li>
+                        <li>Structured curriculum and guided worksheets</li>
+                        <li>Accountability and implementation tracking</li>
+                        <li>Boundary scripting tools</li>
+                        <li>Financial clarity frameworks</li>
+                        <li>Relapse response planning</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium">
+                        This is not open-ended support. It is structured transformation.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">What Changes by Week 12</h3>
+                      <p className="text-muted-foreground mt-2">Families who complete the program typically report:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Reduced emotional volatility</li>
+                        <li>Increased boundary consistency</li>
+                        <li>Clear financial decision-making</li>
+                        <li>Improved couple alignment</li>
+                        <li>Lower household stress</li>
+                        <li>Greater confidence responding to relapse or resistance</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium">
+                        Most importantly, they no longer feel controlled by addiction — even if their loved one is still struggling.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">This Program Does Not</h3>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Force your loved one into treatment</li>
+                        <li>Replace therapy or psychiatric care</li>
+                        <li>Guarantee sobriety</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-semibold">
+                        It strengthens the one factor you can control:
+                      </p>
+                      <p className="text-emerald-700 dark:text-emerald-400 font-bold text-lg mt-1">
+                        The health and stability of your family system.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">The Result</h3>
+                      <p className="text-muted-foreground mt-2 font-semibold italic">
+                        When families stabilize, addiction loses leverage.
+                      </p>
+                      <p className="text-muted-foreground mt-2">
+                        You move from reacting to managing.<br />
+                        From rescuing to supporting.<br />
+                        From panic to structure.
+                      </p>
+                      <p className="text-muted-foreground mt-3 font-medium">
+                        Recovery becomes sustainable — for everyone.
+                      </p>
+
+                      <p className="text-muted-foreground mt-6 font-semibold">
+                        Ready to begin your family's parallel recovery journey?
+                      </p>
+                      <div className="mt-3">
+                        <Link to="/book-consultation">
+                          <Button className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white">
+                            <Calendar className="h-4 w-4" />
+                            Schedule a Strategy Call
                           </Button>
                         </Link>
                       </div>
