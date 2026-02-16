@@ -132,7 +132,7 @@ export default function FamilySupport() {
                   </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+                <div className="grid gap-6 md:grid-cols-3 mb-8">
                   {/* Family Education Videos */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>
@@ -208,53 +208,6 @@ export default function FamilySupport() {
                     </CardContent>
                   </Card>
 
-                  {/* Monday Zoom Meeting */}
-                  <Card className="border-primary/30 bg-primary/5">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-logo-green">
-                        <Video className="h-5 w-5 text-primary" />
-                        Monday Night Zoom
-                      </CardTitle>
-                      <CardDescription>
-                        FREE weekly family support meeting
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <p className="text-sm text-muted-foreground">
-                        Join our free Monday night Zoom meeting for families. Ask questions, get support, and connect with others.
-                      </p>
-                      <Link to="/monday-zoom-meeting">
-                        <Button variant="outline" size="sm" className="w-full mt-4">
-                          Register Now
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-
-                  {/* Schedule Zoom Call */}
-                  <Card className="border-primary/30 bg-primary/5">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-logo-green">
-                        <Calendar className="h-5 w-5 text-primary" />
-                        1-on-1 Consultation
-                      </CardTitle>
-                      <CardDescription>
-                        Schedule a private call with an interventionist
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <p className="text-sm text-muted-foreground">
-                        Get personalized guidance from a certified interventionist. Discuss your 
-                        situation, get advice on next steps, and create a plan for your family.
-                      </p>
-                      <Link to="/family-consultation">
-                        <Button className="w-full mt-4">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          Schedule a Call
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
                 </div>
 
                 <div className="border-t border-border pt-8" />
