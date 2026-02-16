@@ -126,7 +126,7 @@ export default function FamilyCoaching() {
                   <AccordionItem value="parallel-recovery" className="border-2 border-emerald-500/20 rounded-lg overflow-hidden">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-emerald-50 to-transparent dark:from-emerald-950/20 [&[data-state=open]>svg]:rotate-180">
                       <span className="flex flex-col md:flex-row items-center gap-2 text-lg font-semibold text-emerald-700 dark:text-emerald-400">
-                        Parallel Recovery Program™
+                        Parallel Recovery Program™ <span className="text-primary font-bold">— $1,500</span>
                       </span>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6">
@@ -259,10 +259,10 @@ export default function FamilyCoaching() {
                         Ready to begin your family's parallel recovery journey?
                       </p>
                       <div className="mt-3">
-                        <Link to="/book-consultation">
+                        <Link to="/book-consultation?plan=parallel-recovery">
                           <Button className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white">
                             <Calendar className="h-4 w-4" />
-                            Schedule a Strategy Call
+                            Book the Parallel Recovery Program — $1,500
                           </Button>
                         </Link>
                       </div>

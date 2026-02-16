@@ -245,7 +245,8 @@ Deno.serve(async (req) => {
     if (booking.coaching_plan_id) {
       const { data: plan } = await adminClient.from('coaching_plans').select('*').eq('id', booking.coaching_plan_id).single();
       if (plan) {
-        planContext = `<p><strong>Plan:</strong> Family Stabilization Plan (Session ${(plan.completed_sessions || 0) + 1} of ${plan.total_sessions})</p>`;
+        const planLabel = plan.plan_type === 'parallel-recovery' ? 'Parallel Recovery Program™' : 'Family Stabilization Plan';
+        planContext = `<p><strong>Plan:</strong> ${planLabel} (Session ${(plan.completed_sessions || 0) + 1} of ${plan.total_sessions})</p>`;
       }
     }
 
