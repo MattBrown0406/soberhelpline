@@ -142,7 +142,33 @@ Deno.serve(async (req) => {
 
     // ACTION: Process payout (called when session is marked complete)
     if (action === 'payout') {
-      const providerPayout = 125; // Provider receives $125 of the $150 session fee
+      // Determine payout amount based on coaching plan
+      let providerPayout = 125; // Default: $125 of the $150 emergency/single session fee
+
+      if (booking.coaching_plan_id) {
+        const { data: plan } = await adminClient
+          .from('coaching_plans')
+          .select('*')
+          .eq('id', booking.coaching_plan_id)
+          .single();
+
+        if (plan) {
+          providerPayout = Number(plan.provider_payout_per_session); // $100 for stabilization plan
+
+          // Increment completed sessions
+          const newCompleted = (plan.completed_sessions || 0) + 1;
+          const newStatus = newCompleted >= plan.total_sessions ? 'completed' : 'active';
+
+          await adminClient
+            .from('coaching_plans')
+            .update({
+              completed_sessions: newCompleted,
+              status: newStatus,
+            })
+            .eq('id', plan.id);
+        }
+      }
+
       try {
         const payoutId = await processPayPalPayout(provider.paypal_email, providerPayout, bookingId);
         await adminClient.from('consultation_payouts').insert({
@@ -153,7 +179,7 @@ Deno.serve(async (req) => {
           status: payoutId ? 'completed' : 'failed',
           processed_at: new Date().toISOString(),
         });
-        return new Response(JSON.stringify({ success: true, payoutId }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        return new Response(JSON.stringify({ success: true, payoutId, amount: providerPayout }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
       } catch (err) {
         await adminClient.from('consultation_payouts').insert({
           booking_id: bookingId,
@@ -196,6 +222,15 @@ Deno.serve(async (req) => {
       intakeSummary = Object.entries(responses).map(([q, a]) => `<p><strong>${q}:</strong> ${a}</p>`).join('');
     }
 
+    // Determine plan context for emails
+    let planContext = '';
+    if (booking.coaching_plan_id) {
+      const { data: plan } = await adminClient.from('coaching_plans').select('*').eq('id', booking.coaching_plan_id).single();
+      if (plan) {
+        planContext = `<p><strong>Plan:</strong> Family Stabilization Plan (Session ${(plan.completed_sessions || 0) + 1} of ${plan.total_sessions})</p>`;
+      }
+    }
+
     // Email to client
     await sendEmail(booking.client_email, 'Your Consultation is Confirmed - Sober Helpline', `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -204,6 +239,7 @@ Deno.serve(async (req) => {
         <p>Your consultation has been booked successfully.</p>
         <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin: 16px 0;">
           <p><strong>Provider:</strong> ${provider.full_name}</p>
+          ${planContext}
           <p><strong>Date:</strong> ${formattedDate}</p>
           <p><strong>Time:</strong> ${formattedTime} (Pacific)</p>
           <p><strong>Duration:</strong> ${provider.session_duration_minutes} minutes</p>
@@ -232,6 +268,7 @@ Deno.serve(async (req) => {
           <p>A new consultation session has been booked with you. Here are the details:</p>
           <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p><strong>Client Name:</strong> ${booking.client_name}</p>
+            ${planContext}
             <p><strong>Date:</strong> ${formattedDate}</p>
             <p><strong>Time:</strong> ${formattedTime} (Pacific)</p>
             <p><strong>Duration:</strong> ${provider.session_duration_minutes} minutes</p>

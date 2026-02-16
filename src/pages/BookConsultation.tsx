@@ -262,6 +262,47 @@ const BookConsultation = () => {
         });
       });
 
+      // Determine plan type from URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const planType = urlParams.get("plan"); // 'emergency', 'stabilization', or null
+
+      let coachingPlanId: string | null = null;
+
+      // For stabilization plan, check for existing active plan or create one
+      if (planType === "stabilization") {
+        // Check if there's already an active stabilization plan with this provider
+        const { data: existingPlans } = await supabase
+          .from("coaching_plans")
+          .select("*")
+          .eq("client_user_id", user.id)
+          .eq("provider_id", selectedProvider.id)
+          .eq("plan_type", "stabilization")
+          .eq("status", "active");
+
+        if (existingPlans && existingPlans.length > 0) {
+          coachingPlanId = existingPlans[0].id;
+        } else {
+          // Create a new stabilization plan
+          const { data: newPlan, error: planError } = await supabase
+            .from("coaching_plans")
+            .insert({
+              client_user_id: user.id,
+              provider_id: selectedProvider.id,
+              plan_type: "stabilization",
+              total_sessions: 4,
+              total_amount: 500,
+              provider_payout_per_session: 100,
+            })
+            .select()
+            .single();
+
+          if (planError) throw planError;
+          coachingPlanId = newPlan.id;
+        }
+      }
+
+      const amountPaid = planType === "stabilization" ? 500 : selectedProvider.session_rate;
+
       const { data, error } = await supabase.from("consultation_bookings").insert({
         provider_id: selectedProvider.id,
         client_user_id: user.id,
@@ -269,13 +310,14 @@ const BookConsultation = () => {
         start_time: selectedSlot.start_time,
         end_time: selectedSlot.end_time,
         timezone: selectedSlot.timezone || "America/Los_Angeles",
-        amount_paid: selectedProvider.session_rate,
+        amount_paid: amountPaid,
         intake_responses: intakeResponses,
         client_name: intakeData.client_name,
         client_email: intakeData.client_email,
         client_phone: intakeData.client_phone || null,
         status: "confirmed",
-      }).select().single();
+        coaching_plan_id: coachingPlanId,
+      } as any).select().single();
 
       if (error) throw error;
 
@@ -288,7 +330,9 @@ const BookConsultation = () => {
 
       toast({
         title: "Consultation Booked!",
-        description: "Your session is confirmed. You can join from this site when it's time.",
+        description: planType === "stabilization" 
+          ? "Your stabilization plan session is confirmed. You can book remaining sessions from the coaching page."
+          : "Your session is confirmed. You can join from this site when it's time.",
       });
 
       // If we got a zoom meeting ID back, navigate to join page; otherwise go home

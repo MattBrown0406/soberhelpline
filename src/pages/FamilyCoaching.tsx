@@ -93,7 +93,7 @@ export default function FamilyCoaching() {
                   This is for families who can't wait weeks for help and need clear direction in the next 24 hours.
                 </p>
                 <div className="mt-4">
-                  <Link to="/book-consultation">
+                  <Link to="/book-consultation?plan=emergency">
                     <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
                       <Calendar className="h-4 w-4" />
                       Book an Emergency Session — $150
@@ -111,7 +111,7 @@ export default function FamilyCoaching() {
                   Designed for families who feel stuck in cycles of crisis, enabling, and guilt. Across four sessions you map the family roles, set and practice new boundaries, build a relapse/overdose safety plan, and coordinate treatment or next‑step options, with email check‑ins between sessions.
                 </p>
                 <div className="mt-4">
-                  <Link to="/book-consultation">
+                  <Link to="/book-consultation?plan=stabilization">
                     <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
                       <Calendar className="h-4 w-4" />
                       Book the Stabilization Plan — $500
