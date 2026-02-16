@@ -37,6 +37,8 @@ interface Registration {
 
 export function ZoomLinkSettings() {
   const [zoomLink, setZoomLink] = useState("");
+  const [meetingId, setMeetingId] = useState("");
+  const [passcode, setPasscode] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -54,14 +56,17 @@ export function ZoomLinkSettings() {
     try {
       const { data, error } = await supabase
         .from("site_settings")
-        .select("value")
-        .eq("key", "monday_zoom_link")
-        .maybeSingle();
+        .select("key, value")
+        .in("key", ["monday_zoom_link", "monday_zoom_meeting_id", "monday_zoom_passcode"]);
       if (error) throw error;
-      setZoomLink(data?.value || "");
+      data?.forEach((row) => {
+        if (row.key === "monday_zoom_link") setZoomLink(row.value || "");
+        if (row.key === "monday_zoom_meeting_id") setMeetingId(row.value || "");
+        if (row.key === "monday_zoom_passcode") setPasscode(row.value || "");
+      });
     } catch (err) {
-      console.error("Error fetching zoom link:", err);
-      toast.error("Failed to load Zoom link");
+      console.error("Error fetching zoom settings:", err);
+      toast.error("Failed to load Zoom settings");
     } finally {
       setLoading(false);
     }
@@ -107,15 +112,22 @@ export function ZoomLinkSettings() {
     setSaving(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      const { error } = await supabase
-        .from("site_settings")
-        .update({ value: zoomLink.trim(), updated_by: user?.id })
-        .eq("key", "monday_zoom_link");
-      if (error) throw error;
-      toast.success("Zoom meeting link updated successfully!");
+      const updates = [
+        { key: "monday_zoom_link", value: zoomLink.trim() },
+        { key: "monday_zoom_meeting_id", value: meetingId.trim() },
+        { key: "monday_zoom_passcode", value: passcode.trim() },
+      ];
+      for (const u of updates) {
+        const { error } = await supabase
+          .from("site_settings")
+          .update({ value: u.value, updated_by: user?.id })
+          .eq("key", u.key);
+        if (error) throw error;
+      }
+      toast.success("Zoom meeting settings updated successfully!");
     } catch (err) {
-      console.error("Error saving zoom link:", err);
-      toast.error("Failed to save Zoom link");
+      console.error("Error saving zoom settings:", err);
+      toast.error("Failed to save Zoom settings");
     } finally {
       setSaving(false);
     }
@@ -176,41 +188,59 @@ export function ZoomLinkSettings() {
 
   return (
     <div className="space-y-8">
-      {/* Zoom Link Section */}
+      {/* Zoom Settings Section */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-foreground">Meeting Link</h3>
+        <h3 className="text-lg font-semibold text-foreground">Meeting Settings</h3>
         <p className="text-sm text-muted-foreground">
-          Update the Zoom meeting link for the Monday night family support meeting.
-          When a member registers, they'll receive an email with this link.
+          Configure the Zoom meeting credentials for the Monday night family support meeting.
+          The Meeting ID and Passcode power the in-browser embedded experience. The external link is a fallback.
         </p>
-        <div className="space-y-2">
-          <Label htmlFor="zoomLink">Monday Night Zoom Meeting Link</Label>
-          <div className="flex gap-3">
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="meetingId">Zoom Meeting ID</Label>
             <Input
-              id="zoomLink"
-              type="url"
-              placeholder="https://zoom.us/j/1234567890?pwd=..."
-              value={zoomLink}
-              onChange={(e) => setZoomLink(e.target.value)}
-              className="flex-1"
+              id="meetingId"
+              placeholder="123 456 7890"
+              value={meetingId}
+              onChange={(e) => setMeetingId(e.target.value)}
             />
-            <Button onClick={handleSave} disabled={saving}>
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Save className="h-4 w-4 mr-2" />Save</>}
-            </Button>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="passcode">Meeting Passcode</Label>
+            <Input
+              id="passcode"
+              placeholder="abc123"
+              value={passcode}
+              onChange={(e) => setPasscode(e.target.value)}
+            />
           </div>
         </div>
-        {zoomLink && (
+
+        <div className="space-y-2">
+          <Label htmlFor="zoomLink">External Zoom Link (fallback)</Label>
+          <Input
+            id="zoomLink"
+            type="url"
+            placeholder="https://zoom.us/j/1234567890?pwd=..."
+            value={zoomLink}
+            onChange={(e) => setZoomLink(e.target.value)}
+          />
+        </div>
+
+        <Button onClick={handleSave} disabled={saving}>
+          {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Save className="h-4 w-4 mr-2" />Save Settings</>}
+        </Button>
+
+        {meetingId && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 p-3 rounded-md">
             <Video className="h-4 w-4 text-primary flex-shrink-0" />
-            <span className="truncate">Current link: {zoomLink}</span>
-            <a href={zoomLink} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
-              <ExternalLink className="h-4 w-4 text-primary hover:text-primary/80" />
-            </a>
+            <span>In-browser join link: /join-meeting?mn={meetingId}{passcode ? `&pwd=${passcode}` : ""}</span>
           </div>
         )}
-        {!zoomLink && (
+        {!meetingId && (
           <p className="text-sm text-destructive">
-            ⚠️ No Zoom link is set. Members who register will not receive a meeting link in their confirmation email.
+            ⚠️ No Meeting ID is set. Members will not be able to join the meeting in-browser after registering.
           </p>
         )}
       </div>
