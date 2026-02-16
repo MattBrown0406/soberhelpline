@@ -70,7 +70,7 @@ const ProviderDetailView = ({ provider, onBack }: { provider: any; onBack: () =>
             <h3 className="font-semibold text-lg">{provider.full_name}</h3>
             <p className="text-sm text-muted-foreground">{provider.title || "No title"} • {provider.paypal_email}</p>
           </div>
-          <Badge variant={provider.status === "approved" ? "default" : provider.status === "suspended" ? "destructive" : "secondary"}>
+          <Badge variant={provider.status === "active" ? "default" : "destructive"}>
             {provider.status}
           </Badge>
         </div>
@@ -297,7 +297,7 @@ export const ConsultationManagement = () => {
                   <TableCell>{p.title || "—"}</TableCell>
                   <TableCell className="text-sm">{p.paypal_email}</TableCell>
                   <TableCell>
-                    <Badge variant={p.status === "approved" ? "default" : p.status === "suspended" ? "destructive" : "secondary"}>
+                    <Badge variant={p.status === "active" ? "default" : "destructive"}>
                       {p.status}
                     </Badge>
                   </TableCell>
@@ -309,9 +309,8 @@ export const ConsultationManagement = () => {
                       <Select value={p.status} onValueChange={(v) => updateProviderStatus(p.id, v)}>
                         <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="approved">Approved</SelectItem>
-                          <SelectItem value="suspended">Suspended</SelectItem>
+                          <SelectItem value="active">Active</SelectItem>
+                          <SelectItem value="inactive">Inactive</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

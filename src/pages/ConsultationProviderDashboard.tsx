@@ -43,8 +43,8 @@ const ConsultationProviderDashboard = () => {
       .maybeSingle();
 
     if (!providerData) { navigate("/consultation-provider-signup"); return; }
-    if (providerData.status !== "approved") {
-      toast({ title: "Application pending", description: "Your application is still under review." });
+    if (providerData.status !== "active") {
+      toast({ title: "Account inactive", description: "Your provider account is currently inactive. Please contact an administrator." });
       navigate("/");
       return;
     }

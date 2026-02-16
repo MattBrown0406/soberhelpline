@@ -83,7 +83,7 @@ const BookConsultation = () => {
     const { data } = await supabase
       .from("consultation_providers")
       .select("*")
-      .eq("status", "approved");
+      .eq("status", "active");
     setProviders(data || []);
     setLoading(false);
   };
