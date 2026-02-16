@@ -97,13 +97,14 @@ const BookConsultation = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
-  const [step, setStep] = useState(0); // 0=providers, 1-3=intake, 4=select slot, 5=confirm
+  const [step, setStep] = useState(0); // 0=providers, 1=select slot(s), 2-4=intake, 5=confirm
   const [providers, setProviders] = useState<any[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<any>(null);
   const [availability, setAvailability] = useState<any[]>([]);
   const [bookedSlots, setBookedSlots] = useState<any[]>([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
+  const [stabilizationSlots, setStabilizationSlots] = useState<Array<{ date: string; slot: any }>>([]);
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -114,7 +115,12 @@ const BookConsultation = () => {
     } catch { return "America/Los_Angeles"; }
   });
 
-  const totalSteps = 6; // 0=browse, 1=slot, 2-4=intake sections, 5=confirm
+  const urlParams = new URLSearchParams(window.location.search);
+  const planType = urlParams.get("plan"); // 'emergency', 'stabilization', or null
+  const isStabilization = planType === "stabilization";
+  const requiredSlots = isStabilization ? 4 : 1;
+
+  const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
   useEffect(() => {
@@ -247,8 +253,34 @@ const BookConsultation = () => {
     return slots;
   };
 
+  // Add a slot for stabilization plan
+  const addStabilizationSlot = () => {
+    if (!selectedDate || !selectedSlot) return;
+    // Check for duplicate
+    const isDuplicate = stabilizationSlots.some(
+      (s) => s.date === selectedDate && s.slot.id === selectedSlot.id
+    );
+    if (isDuplicate) {
+      toast({ title: "Duplicate slot", description: "You've already selected this time slot.", variant: "destructive" });
+      return;
+    }
+    setStabilizationSlots([...stabilizationSlots, { date: selectedDate, slot: selectedSlot }]);
+    setSelectedDate("");
+    setSelectedSlot(null);
+  };
+
+  const removeStabilizationSlot = (index: number) => {
+    setStabilizationSlots(stabilizationSlots.filter((_, i) => i !== index));
+  };
+
   const handleBooking = async () => {
-    if (!selectedProvider || !selectedSlot || !selectedDate || !user) return;
+    if (!selectedProvider || !user) return;
+
+    const slotsToBook = isStabilization
+      ? stabilizationSlots.map((s) => ({ date: s.date, slot: s.slot }))
+      : selectedSlot ? [{ date: selectedDate, slot: selectedSlot }] : [];
+
+    if (slotsToBook.length === 0) return;
     setIsSubmitting(true);
 
     try {
@@ -262,85 +294,69 @@ const BookConsultation = () => {
         });
       });
 
-      // Determine plan type from URL params
-      const urlParams = new URLSearchParams(window.location.search);
-      const planType = urlParams.get("plan"); // 'emergency', 'stabilization', or null
-
       let coachingPlanId: string | null = null;
 
-      // For stabilization plan, check for existing active plan or create one
-      if (planType === "stabilization") {
-        // Check if there's already an active stabilization plan with this provider
-        const { data: existingPlans } = await supabase
+      // For stabilization plan, create the coaching plan
+      if (isStabilization) {
+        const { data: newPlan, error: planError } = await supabase
           .from("coaching_plans")
-          .select("*")
-          .eq("client_user_id", user.id)
-          .eq("provider_id", selectedProvider.id)
-          .eq("plan_type", "stabilization")
-          .eq("status", "active");
+          .insert({
+            client_user_id: user.id,
+            provider_id: selectedProvider.id,
+            plan_type: "stabilization",
+            total_sessions: 4,
+            total_amount: 500,
+            provider_payout_per_session: 100,
+          } as any)
+          .select()
+          .single();
 
-        if (existingPlans && existingPlans.length > 0) {
-          coachingPlanId = existingPlans[0].id;
-        } else {
-          // Create a new stabilization plan
-          const { data: newPlan, error: planError } = await supabase
-            .from("coaching_plans")
-            .insert({
-              client_user_id: user.id,
-              provider_id: selectedProvider.id,
-              plan_type: "stabilization",
-              total_sessions: 4,
-              total_amount: 500,
-              provider_payout_per_session: 100,
-            })
-            .select()
-            .single();
-
-          if (planError) throw planError;
-          coachingPlanId = newPlan.id;
-        }
+        if (planError) throw planError;
+        coachingPlanId = newPlan.id;
       }
 
-      const amountPaid = planType === "stabilization" ? 500 : selectedProvider.session_rate;
+      const amountPaid = isStabilization ? 500 : selectedProvider.session_rate;
 
-      const { data, error } = await supabase.from("consultation_bookings").insert({
+      // Create all bookings
+      const bookingInserts = slotsToBook.map((s, index) => ({
         provider_id: selectedProvider.id,
         client_user_id: user.id,
-        booking_date: selectedDate,
-        start_time: selectedSlot.start_time,
-        end_time: selectedSlot.end_time,
-        timezone: selectedSlot.timezone || "America/Los_Angeles",
-        amount_paid: amountPaid,
+        booking_date: s.date,
+        start_time: s.slot.start_time,
+        end_time: s.slot.end_time,
+        timezone: s.slot.timezone || "America/Los_Angeles",
+        amount_paid: isStabilization ? (index === 0 ? 500 : 0) : amountPaid,
         intake_responses: intakeResponses,
         client_name: intakeData.client_name,
         client_email: intakeData.client_email,
         client_phone: intakeData.client_phone || null,
         status: "confirmed",
         coaching_plan_id: coachingPlanId,
-      } as any).select().single();
+      }));
+
+      const { data: bookingsData, error } = await supabase
+        .from("consultation_bookings")
+        .insert(bookingInserts as any)
+        .select();
 
       if (error) throw error;
 
-      // Trigger edge function to create Zoom meeting and send emails
-      const { error: fnError } = await supabase.functions.invoke("process-consultation-booking", {
-        body: { bookingId: data.id },
-      });
-
-      if (fnError) console.error("Edge function error:", fnError);
+      // Trigger edge function for each booking (Zoom + emails)
+      for (const booking of (bookingsData || [])) {
+        const { error: fnError } = await supabase.functions.invoke("process-consultation-booking", {
+          body: { bookingId: booking.id },
+        });
+        if (fnError) console.error("Edge function error for booking:", booking.id, fnError);
+      }
 
       toast({
-        title: "Consultation Booked!",
-        description: planType === "stabilization" 
-          ? "Your stabilization plan session is confirmed. You can book remaining sessions from the coaching page."
+        title: isStabilization ? "Stabilization Plan Booked!" : "Consultation Booked!",
+        description: isStabilization
+          ? "All 4 sessions have been scheduled. Check your email for confirmation details."
           : "Your session is confirmed. You can join from this site when it's time.",
       });
 
-      // If we got a zoom meeting ID back, navigate to join page; otherwise go home
-      if (data.zoom_meeting_id) {
-        navigate(`/join-meeting?mn=${data.zoom_meeting_id}&pwd=${encodeURIComponent(data.zoom_passcode || "")}`);
-      } else {
-        navigate("/");
-      }
+      navigate("/");
     } catch (error) {
       console.error("Booking error:", error);
       toast({ title: "Booking failed", description: "Please try again.", variant: "destructive" });
@@ -381,8 +397,8 @@ const BookConsultation = () => {
           {/* Step 0: Browse Providers */}
           {step === 0 && (
             <>
-              <h1 className="text-2xl font-bold mb-2 text-center">Book a Consultation</h1>
-              <p className="text-muted-foreground text-center mb-6">Choose a provider to schedule your 60-minute video consultation ($150)</p>
+              <h1 className="text-2xl font-bold mb-2 text-center">{isStabilization ? "Book Family Stabilization Plan" : "Book a Consultation"}</h1>
+              <p className="text-muted-foreground text-center mb-6">{isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : "Choose a provider to schedule your 60-minute video consultation ($150)"}</p>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
@@ -418,55 +434,105 @@ const BookConsultation = () => {
           {step === 1 && (
             <Card>
               <CardHeader>
-                <CardTitle>Select Date & Time</CardTitle>
-                <CardDescription>Choose an available date and time slot with {selectedProvider?.full_name}</CardDescription>
+                <CardTitle>{isStabilization ? `Select 4 Session Times` : "Select Date & Time"}</CardTitle>
+                <CardDescription>
+                  {isStabilization 
+                    ? `Choose dates and times for all 4 sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of 4 selected.`
+                    : `Choose an available date and time slot with ${selectedProvider?.full_name}`}
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label className="flex items-center gap-2"><Globe className="h-4 w-4" />Your Timezone</Label>
-                  <Select value={clientTimezone} onValueChange={(v) => { setClientTimezone(v); setSelectedSlot(null); }}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
-                    <SelectContent>
-                      {TIMEZONE_OPTIONS.map((tz) => (
-                        <SelectItem key={tz.value} value={tz.value}>{tz.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Available Dates</Label>
-                  <Select value={selectedDate} onValueChange={(v) => { setSelectedDate(v); setSelectedSlot(null); }}>
-                    <SelectTrigger><SelectValue placeholder="Select a date..." /></SelectTrigger>
-                    <SelectContent>
-                      {getAvailableDates().map((d) => {
-                        const date = new Date(d + "T00:00:00");
-                        return <SelectItem key={d} value={d}>{DAYS[date.getDay()]}, {date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</SelectItem>;
-                      })}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {selectedDate && (
+                {/* Show already selected slots for stabilization */}
+                {isStabilization && stabilizationSlots.length > 0 && (
                   <div className="space-y-2">
-                    <Label>Available Times <span className="text-muted-foreground font-normal">({getTimezoneLabel(clientTimezone)})</span></Label>
-                    <RadioGroup value={selectedSlot?.id || ""} onValueChange={(v) => setSelectedSlot(getSlotsForDate(selectedDate).find((s) => s.id === v))}>
-                      {getSlotsForDate(selectedDate).map((slot) => (
-                        <div key={slot.id} className="flex items-center space-x-2 p-3 border rounded-lg">
-                          <RadioGroupItem value={slot.id} id={slot.id} />
-                          <Label htmlFor={slot.id} className="flex items-center gap-2 cursor-pointer">
-                            <Clock className="h-4 w-4" />
-                            {slot.display_start} - {slot.display_end}
-                          </Label>
+                    <Label>Selected Sessions</Label>
+                    {stabilizationSlots.map((s, i) => {
+                      const dateObj = new Date(s.date + "T00:00:00");
+                      return (
+                        <div key={i} className="flex items-center justify-between p-3 border rounded-lg bg-primary/5">
+                          <div className="flex items-center gap-2">
+                            <Badge variant="secondary">Session {i + 1}</Badge>
+                            <span className="text-sm font-medium">
+                              {DAYS[dateObj.getDay()]}, {dateObj.toLocaleDateString("en-US", { month: "long", day: "numeric" })}
+                            </span>
+                            <span className="text-sm text-muted-foreground">
+                              {s.slot.display_start} - {s.slot.display_end}
+                            </span>
+                          </div>
+                          <Button variant="ghost" size="sm" onClick={() => removeStabilizationSlot(i)} className="text-destructive hover:text-destructive">
+                            ✕
+                          </Button>
                         </div>
-                      ))}
-                    </RadioGroup>
+                      );
+                    })}
                   </div>
                 )}
 
+                {/* Show slot picker if more slots are needed */}
+                {(!isStabilization || stabilizationSlots.length < 4) && (
+                  <>
+                    <div className="space-y-2">
+                      <Label className="flex items-center gap-2"><Globe className="h-4 w-4" />Your Timezone</Label>
+                      <Select value={clientTimezone} onValueChange={(v) => { setClientTimezone(v); setSelectedSlot(null); }}>
+                        <SelectTrigger><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          {TIMEZONE_OPTIONS.map((tz) => (
+                            <SelectItem key={tz.value} value={tz.value}>{tz.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>{isStabilization ? `Select Date for Session ${stabilizationSlots.length + 1}` : "Available Dates"}</Label>
+                      <Select value={selectedDate} onValueChange={(v) => { setSelectedDate(v); setSelectedSlot(null); }}>
+                        <SelectTrigger><SelectValue placeholder="Select a date..." /></SelectTrigger>
+                        <SelectContent>
+                          {getAvailableDates().map((d) => {
+                            const date = new Date(d + "T00:00:00");
+                            return <SelectItem key={d} value={d}>{DAYS[date.getDay()]}, {date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</SelectItem>;
+                          })}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {selectedDate && (
+                      <div className="space-y-2">
+                        <Label>Available Times <span className="text-muted-foreground font-normal">({getTimezoneLabel(clientTimezone)})</span></Label>
+                        <RadioGroup value={selectedSlot?.id || ""} onValueChange={(v) => setSelectedSlot(getSlotsForDate(selectedDate).find((s) => s.id === v))}>
+                          {getSlotsForDate(selectedDate).filter((slot) => {
+                            // For stabilization, exclude already-selected slots
+                            if (!isStabilization) return true;
+                            return !stabilizationSlots.some((s) => s.date === selectedDate && s.slot.id === slot.id);
+                          }).map((slot) => (
+                            <div key={slot.id} className="flex items-center space-x-2 p-3 border rounded-lg">
+                              <RadioGroupItem value={slot.id} id={slot.id} />
+                              <Label htmlFor={slot.id} className="flex items-center gap-2 cursor-pointer">
+                                <Clock className="h-4 w-4" />
+                                {slot.display_start} - {slot.display_end}
+                              </Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </div>
+                    )}
+
+                    {isStabilization && selectedSlot && (
+                      <Button onClick={addStabilizationSlot} className="w-full">
+                        Add Session {stabilizationSlots.length + 1} of 4
+                      </Button>
+                    )}
+                  </>
+                )}
+
                 <div className="flex justify-between pt-4">
-                  <Button variant="outline" onClick={() => setStep(0)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
-                  <Button onClick={goNext} disabled={!selectedSlot}>Next<ArrowRight className="w-4 h-4 ml-1" /></Button>
+                  <Button variant="outline" onClick={() => { setStep(0); setStabilizationSlots([]); }}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
+                  <Button 
+                    onClick={goNext} 
+                    disabled={isStabilization ? stabilizationSlots.length < 4 : !selectedSlot}
+                  >
+                    Next<ArrowRight className="w-4 h-4 ml-1" />
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -525,25 +591,52 @@ const BookConsultation = () => {
           {step === 5 && (
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-primary" />Confirm Your Booking</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary" />
+                  {isStabilization ? "Confirm Your Stabilization Plan" : "Confirm Your Booking"}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="bg-muted/50 rounded-lg p-4 space-y-2">
                   <div className="flex justify-between"><span className="text-muted-foreground">Provider</span><span className="font-medium">{selectedProvider?.full_name}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{selectedProvider?.session_duration_minutes} minutes</span></div>
-                  <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${selectedProvider?.session_rate}</span></div>
+                  {isStabilization ? (
+                    <>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Plan</span><span className="font-medium">Family Stabilization Plan (4 sessions)</span></div>
+                      <div className="border-t pt-2 mt-2 space-y-2">
+                        {stabilizationSlots.map((s, i) => {
+                          const dateObj = new Date(s.date + "T00:00:00");
+                          return (
+                            <div key={i} className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">Session {i + 1}</span>
+                              <span className="font-medium">
+                                {DAYS[dateObj.getDay()]}, {dateObj.toLocaleDateString("en-US", { month: "short", day: "numeric" })} — {s.slot.display_start} - {s.slot.display_end}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">$500</span></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{selectedProvider?.session_duration_minutes} minutes</span></div>
+                      <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${selectedProvider?.session_rate}</span></div>
+                    </>
+                  )}
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  A video session will be created automatically. After booking, you'll be able to join the session directly from this site — no downloads required. You'll also receive a confirmation email.
+                  {isStabilization 
+                    ? "Zoom meetings will be created for each session. You'll receive confirmation emails with join links for all 4 sessions."
+                    : "A video session will be created automatically. After booking, you'll be able to join the session directly from this site — no downloads required. You'll also receive a confirmation email."}
                 </p>
 
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => setStep(4)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button onClick={handleBooking} disabled={isSubmitting} size="lg">
-                    {isSubmitting ? "Booking..." : `Book & Pay $${selectedProvider?.session_rate}`}
+                    {isSubmitting ? "Booking..." : isStabilization ? "Book & Pay $500" : `Book & Pay $${selectedProvider?.session_rate}`}
                   </Button>
                 </div>
               </CardContent>
