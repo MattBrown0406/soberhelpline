@@ -104,7 +104,6 @@ import AIRelapseResponseGuide from "./pages/AIRelapseResponseGuide";
 import AIAddictionRealityTranslator from "./pages/AIAddictionRealityTranslator";
 import EatingDisordersGuide from "./pages/EatingDisordersGuide";
 import FreeGuide from "./pages/FreeGuide";
-import ConsultationProviderSignup from "./pages/ConsultationProviderSignup";
 import ConsultationProviderDashboard from "./pages/ConsultationProviderDashboard";
 import BookConsultation from "./pages/BookConsultation";
 const queryClient = new QueryClient();
@@ -230,7 +229,6 @@ const App = () => (
             <Route path="/ai-addiction-reality-translator" element={<AIAddictionRealityTranslator />} />
             <Route path="/eating-disorders-guide" element={<EatingDisordersGuide />} />
             <Route path="/free-guide" element={<FreeGuide />} />
-            <Route path="/consultation-provider-signup" element={<ConsultationProviderSignup />} />
             <Route path="/consultation-provider-dashboard" element={<ConsultationProviderDashboard />} />
             <Route path="/book-consultation" element={<BookConsultation />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

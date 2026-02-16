@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText, Video, CalendarCheck } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText, Video, CalendarCheck, UserPlus } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -31,6 +31,7 @@ import { MemberWarningsManagement } from "@/components/admin/MemberWarningsManag
 import { GuideAnalytics } from "@/components/admin/GuideAnalytics";
 import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
 import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
+import ConsultationProviderCreator from "@/components/admin/ConsultationProviderCreator";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -215,6 +216,10 @@ const Admin = () => {
             <TabsTrigger value="consultations" className="gap-2">
               <CalendarCheck className="h-4 w-4" />
               Consultations
+            </TabsTrigger>
+            <TabsTrigger value="add-provider" className="gap-2">
+              <UserPlus className="h-4 w-4" />
+              Add Provider
             </TabsTrigger>
           </TabsList>
 
@@ -460,6 +465,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ConsultationManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="add-provider">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <UserPlus className="h-5 w-5" />
+                  Add Consultation Provider
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ConsultationProviderCreator />
               </CardContent>
             </Card>
           </TabsContent>
