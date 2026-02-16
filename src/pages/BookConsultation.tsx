@@ -116,9 +116,11 @@ const BookConsultation = () => {
   });
 
   const urlParams = new URLSearchParams(window.location.search);
-  const planType = urlParams.get("plan"); // 'emergency', 'stabilization', or null
+  const planType = urlParams.get("plan"); // 'emergency', 'stabilization', 'parallel-recovery', or null
   const isStabilization = planType === "stabilization";
-  const requiredSlots = isStabilization ? 4 : 1;
+  const isParallelRecovery = planType === "parallel-recovery";
+  const isMultiSession = isStabilization || isParallelRecovery;
+  const requiredSlots = isParallelRecovery ? 12 : isStabilization ? 4 : 1;
 
   const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
@@ -193,7 +195,8 @@ const BookConsultation = () => {
   const getAvailableDates = () => {
     const dates: string[] = [];
     const today = new Date();
-    for (let i = 1; i <= 30; i++) {
+    const daysAhead = isParallelRecovery ? 90 : 30;
+    for (let i = 1; i <= daysAhead; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() + i);
       const dayOfWeek = d.getDay();
@@ -276,7 +279,7 @@ const BookConsultation = () => {
   const handleBooking = async () => {
     if (!selectedProvider || !user) return;
 
-    const slotsToBook = isStabilization
+    const slotsToBook = isMultiSession
       ? stabilizationSlots.map((s) => ({ date: s.date, slot: s.slot }))
       : selectedSlot ? [{ date: selectedDate, slot: selectedSlot }] : [];
 
@@ -297,16 +300,17 @@ const BookConsultation = () => {
       let coachingPlanId: string | null = null;
 
       // For stabilization plan, create the coaching plan
-      if (isStabilization) {
+      if (isMultiSession) {
+        const planConfig = isParallelRecovery
+          ? { plan_type: "parallel-recovery", total_sessions: 12, total_amount: 1500, provider_payout_per_session: 100 }
+          : { plan_type: "stabilization", total_sessions: 4, total_amount: 500, provider_payout_per_session: 100 };
+
         const { data: newPlan, error: planError } = await supabase
           .from("coaching_plans")
           .insert({
             client_user_id: user.id,
             provider_id: selectedProvider.id,
-            plan_type: "stabilization",
-            total_sessions: 4,
-            total_amount: 500,
-            provider_payout_per_session: 100,
+            ...planConfig,
           } as any)
           .select()
           .single();
@@ -315,7 +319,8 @@ const BookConsultation = () => {
         coachingPlanId = newPlan.id;
       }
 
-      const amountPaid = isStabilization ? 500 : selectedProvider.session_rate;
+      const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : selectedProvider.session_rate;
+      const amountPaid = totalAmount;
 
       // Create all bookings
       const bookingInserts = slotsToBook.map((s, index) => ({
@@ -325,7 +330,7 @@ const BookConsultation = () => {
         start_time: s.slot.start_time,
         end_time: s.slot.end_time,
         timezone: s.slot.timezone || "America/Los_Angeles",
-        amount_paid: isStabilization ? (index === 0 ? 500 : 0) : amountPaid,
+        amount_paid: isMultiSession ? (index === 0 ? totalAmount : 0) : amountPaid,
         intake_responses: intakeResponses,
         client_name: intakeData.client_name,
         client_email: intakeData.client_email,
@@ -349,10 +354,11 @@ const BookConsultation = () => {
         if (fnError) console.error("Edge function error for booking:", booking.id, fnError);
       }
 
+      const planName = isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan";
       toast({
-        title: isStabilization ? "Stabilization Plan Booked!" : "Consultation Booked!",
-        description: isStabilization
-          ? "All 4 sessions have been scheduled. Check your email for confirmation details."
+        title: isMultiSession ? `${planName} Booked!` : "Consultation Booked!",
+        description: isMultiSession
+          ? `All ${requiredSlots} sessions have been scheduled. Check your email for confirmation details.`
           : "Your session is confirmed. You can join from this site when it's time.",
       });
 
@@ -397,8 +403,8 @@ const BookConsultation = () => {
           {/* Step 0: Browse Providers */}
           {step === 0 && (
             <>
-              <h1 className="text-2xl font-bold mb-2 text-center">{isStabilization ? "Book Family Stabilization Plan" : "Book a Consultation"}</h1>
-              <p className="text-muted-foreground text-center mb-6">{isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : "Choose a provider to schedule your 60-minute video consultation ($150)"}</p>
+              <h1 className="text-2xl font-bold mb-2 text-center">{isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}</h1>
+              <p className="text-muted-foreground text-center mb-6">{isParallelRecovery ? `Choose a provider for your 12-session program ($1,500)` : isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : "Choose a provider to schedule your 60-minute video consultation ($150)"}</p>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
@@ -434,16 +440,16 @@ const BookConsultation = () => {
           {step === 1 && (
             <Card>
               <CardHeader>
-                <CardTitle>{isStabilization ? `Select 4 Session Times` : "Select Date & Time"}</CardTitle>
+                <CardTitle>{isMultiSession ? `Select ${requiredSlots} Session Times` : "Select Date & Time"}</CardTitle>
                 <CardDescription>
-                  {isStabilization 
-                    ? `Choose dates and times for all 4 sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of 4 selected.`
+                  {isMultiSession 
+                    ? `Choose dates and times for all ${requiredSlots} sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of ${requiredSlots} selected.`
                     : `Choose an available date and time slot with ${selectedProvider?.full_name}`}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Show already selected slots for stabilization */}
-                {isStabilization && stabilizationSlots.length > 0 && (
+                {isMultiSession && stabilizationSlots.length > 0 && (
                   <div className="space-y-2">
                     <Label>Selected Sessions</Label>
                     {stabilizationSlots.map((s, i) => {
@@ -469,7 +475,7 @@ const BookConsultation = () => {
                 )}
 
                 {/* Show slot picker if more slots are needed */}
-                {(!isStabilization || stabilizationSlots.length < 4) && (
+                {(!isMultiSession || stabilizationSlots.length < requiredSlots) && (
                   <>
                     <div className="space-y-2">
                       <Label className="flex items-center gap-2"><Globe className="h-4 w-4" />Your Timezone</Label>
@@ -484,7 +490,7 @@ const BookConsultation = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{isStabilization ? `Select Date for Session ${stabilizationSlots.length + 1}` : "Available Dates"}</Label>
+                      <Label>{isMultiSession ? `Select Date for Session ${stabilizationSlots.length + 1}` : "Available Dates"}</Label>
                       <Select value={selectedDate} onValueChange={(v) => { setSelectedDate(v); setSelectedSlot(null); }}>
                         <SelectTrigger><SelectValue placeholder="Select a date..." /></SelectTrigger>
                         <SelectContent>
@@ -501,8 +507,7 @@ const BookConsultation = () => {
                         <Label>Available Times <span className="text-muted-foreground font-normal">({getTimezoneLabel(clientTimezone)})</span></Label>
                         <RadioGroup value={selectedSlot?.id || ""} onValueChange={(v) => setSelectedSlot(getSlotsForDate(selectedDate).find((s) => s.id === v))}>
                           {getSlotsForDate(selectedDate).filter((slot) => {
-                            // For stabilization, exclude already-selected slots
-                            if (!isStabilization) return true;
+                            if (!isMultiSession) return true;
                             return !stabilizationSlots.some((s) => s.date === selectedDate && s.slot.id === slot.id);
                           }).map((slot) => (
                             <div key={slot.id} className="flex items-center space-x-2 p-3 border rounded-lg">
@@ -517,9 +522,9 @@ const BookConsultation = () => {
                       </div>
                     )}
 
-                    {isStabilization && selectedSlot && (
+                    {isMultiSession && selectedSlot && (
                       <Button onClick={addStabilizationSlot} className="w-full">
-                        Add Session {stabilizationSlots.length + 1} of 4
+                        Add Session {stabilizationSlots.length + 1} of {requiredSlots}
                       </Button>
                     )}
                   </>
@@ -529,7 +534,7 @@ const BookConsultation = () => {
                   <Button variant="outline" onClick={() => { setStep(0); setStabilizationSlots([]); }}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button 
                     onClick={goNext} 
-                    disabled={isStabilization ? stabilizationSlots.length < 4 : !selectedSlot}
+                    disabled={isMultiSession ? stabilizationSlots.length < requiredSlots : !selectedSlot}
                   >
                     Next<ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
@@ -593,15 +598,15 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-primary" />
-                  {isStabilization ? "Confirm Your Stabilization Plan" : "Confirm Your Booking"}
+                   {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Booking"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="bg-muted/50 rounded-lg p-4 space-y-2">
                   <div className="flex justify-between"><span className="text-muted-foreground">Provider</span><span className="font-medium">{selectedProvider?.full_name}</span></div>
-                  {isStabilization ? (
+                  {isMultiSession ? (
                     <>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Plan</span><span className="font-medium">Family Stabilization Plan (4 sessions)</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Plan</span><span className="font-medium">{isParallelRecovery ? "Parallel Recovery Program™ (12 sessions)" : "Family Stabilization Plan (4 sessions)"}</span></div>
                       <div className="border-t pt-2 mt-2 space-y-2">
                         {stabilizationSlots.map((s, i) => {
                           const dateObj = new Date(s.date + "T00:00:00");
@@ -615,7 +620,7 @@ const BookConsultation = () => {
                           );
                         })}
                       </div>
-                      <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">$500</span></div>
+                      <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${isParallelRecovery ? "1,500" : "500"}</span></div>
                     </>
                   ) : (
                     <>
@@ -628,15 +633,15 @@ const BookConsultation = () => {
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  {isStabilization 
-                    ? "Zoom meetings will be created for each session. You'll receive confirmation emails with join links for all 4 sessions."
+                  {isMultiSession 
+                    ? `Zoom meetings will be created for each session. You'll receive confirmation emails with join links for all ${requiredSlots} sessions.`
                     : "A video session will be created automatically. After booking, you'll be able to join the session directly from this site — no downloads required. You'll also receive a confirmation email."}
                 </p>
 
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => setStep(4)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button onClick={handleBooking} disabled={isSubmitting} size="lg">
-                    {isSubmitting ? "Booking..." : isStabilization ? "Book & Pay $500" : `Book & Pay $${selectedProvider?.session_rate}`}
+                    {isSubmitting ? "Booking..." : isMultiSession ? `Book & Pay $${isParallelRecovery ? "1,500" : "500"}` : `Book & Pay $${selectedProvider?.session_rate}`}
                   </Button>
                 </div>
               </CardContent>
