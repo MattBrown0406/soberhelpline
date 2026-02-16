@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText, Video } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText, Video, CalendarCheck } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -30,6 +30,7 @@ import { ModeratorManagement } from "@/components/admin/ModeratorManagement";
 import { MemberWarningsManagement } from "@/components/admin/MemberWarningsManagement";
 import { GuideAnalytics } from "@/components/admin/GuideAnalytics";
 import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
+import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -210,6 +211,10 @@ const Admin = () => {
             <TabsTrigger value="zoom-settings" className="gap-2">
               <Video className="h-4 w-4" />
               Zoom Meeting
+            </TabsTrigger>
+            <TabsTrigger value="consultations" className="gap-2">
+              <CalendarCheck className="h-4 w-4" />
+              Consultations
             </TabsTrigger>
           </TabsList>
 
@@ -441,6 +446,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ZoomLinkSettings />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="consultations">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CalendarCheck className="h-5 w-5" />
+                  Consultation Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ConsultationManagement />
               </CardContent>
             </Card>
           </TabsContent>

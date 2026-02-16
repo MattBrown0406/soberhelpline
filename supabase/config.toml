@@ -32,3 +32,6 @@ verify_jwt = false
 
 [functions.send-zoom-registration-email]
 verify_jwt = false
+
+[functions.process-consultation-booking]
+verify_jwt = false

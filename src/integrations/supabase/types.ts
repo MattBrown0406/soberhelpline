@@ -14,6 +14,185 @@ export type Database = {
   }
   public: {
     Tables: {
+      consultation_bookings: {
+        Row: {
+          amount_paid: number
+          booking_date: string
+          client_email: string
+          client_name: string
+          client_notified: boolean | null
+          client_phone: string | null
+          client_user_id: string
+          created_at: string
+          end_time: string
+          id: string
+          intake_responses: Json | null
+          paypal_order_id: string | null
+          provider_id: string
+          provider_notified: boolean | null
+          start_time: string
+          status: string
+          timezone: string
+          updated_at: string
+          zoom_meeting_id: string | null
+          zoom_meeting_url: string | null
+          zoom_passcode: string | null
+        }
+        Insert: {
+          amount_paid?: number
+          booking_date: string
+          client_email: string
+          client_name: string
+          client_notified?: boolean | null
+          client_phone?: string | null
+          client_user_id: string
+          created_at?: string
+          end_time: string
+          id?: string
+          intake_responses?: Json | null
+          paypal_order_id?: string | null
+          provider_id: string
+          provider_notified?: boolean | null
+          start_time: string
+          status?: string
+          timezone?: string
+          updated_at?: string
+          zoom_meeting_id?: string | null
+          zoom_meeting_url?: string | null
+          zoom_passcode?: string | null
+        }
+        Update: {
+          amount_paid?: number
+          booking_date?: string
+          client_email?: string
+          client_name?: string
+          client_notified?: boolean | null
+          client_phone?: string | null
+          client_user_id?: string
+          created_at?: string
+          end_time?: string
+          id?: string
+          intake_responses?: Json | null
+          paypal_order_id?: string | null
+          provider_id?: string
+          provider_notified?: boolean | null
+          start_time?: string
+          status?: string
+          timezone?: string
+          updated_at?: string
+          zoom_meeting_id?: string | null
+          zoom_meeting_url?: string | null
+          zoom_passcode?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultation_bookings_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      consultation_payouts: {
+        Row: {
+          amount: number
+          booking_id: string
+          created_at: string
+          error_message: string | null
+          id: string
+          paypal_payout_id: string | null
+          processed_at: string | null
+          provider_id: string
+          status: string
+        }
+        Insert: {
+          amount: number
+          booking_id: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          paypal_payout_id?: string | null
+          processed_at?: string | null
+          provider_id: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          booking_id?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          paypal_payout_id?: string | null
+          processed_at?: string | null
+          provider_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultation_payouts_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultation_payouts_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      consultation_providers: {
+        Row: {
+          bio: string | null
+          created_at: string
+          full_name: string
+          id: string
+          paypal_email: string
+          photo_url: string | null
+          session_duration_minutes: number
+          session_rate: number
+          specialties: string[] | null
+          status: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          full_name: string
+          id?: string
+          paypal_email: string
+          photo_url?: string | null
+          session_duration_minutes?: number
+          session_rate?: number
+          specialties?: string[] | null
+          status?: string
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          paypal_email?: string
+          photo_url?: string | null
+          session_duration_minutes?: number
+          session_rate?: number
+          specialties?: string[] | null
+          status?: string
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       education_bookmarks: {
         Row: {
           created_at: string
@@ -984,6 +1163,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      provider_availability: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          id: string
+          is_active: boolean
+          provider_id: string
+          start_time: string
+          timezone: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time: string
+          id?: string
+          is_active?: boolean
+          provider_id: string
+          start_time: string
+          timezone?: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          is_active?: boolean
+          provider_id?: string
+          start_time?: string
+          timezone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_availability_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       provider_clicks: {
         Row: {
