@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, ChevronRight, ShieldAlert } from "lucide-react";
+import { Calendar, ChevronRight, ShieldAlert, Save, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const auditSections = [
   {
@@ -126,10 +128,20 @@ const riskInfo = {
   },
 };
 
-export default function EnablingBehaviorAudit() {
+interface EnablingBehaviorAuditProps {
+  readOnly?: boolean;
+  auditData?: any;
+}
+
+export default function EnablingBehaviorAudit({ readOnly = false, auditData }: EnablingBehaviorAuditProps) {
+  const { toast } = useToast();
   const [answers, setAnswers] = useState<Answers>({});
   const [showResults, setShowResults] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(!readOnly);
+  const [existingId, setExistingId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   const totalQuestions = 25;
   const answeredCount = Object.keys(answers).length;
@@ -139,7 +151,6 @@ export default function EnablingBehaviorAudit() {
   const risk = getRiskLevel(totalScore);
   const info = riskInfo[risk];
 
-  // Subscores
   const subscore = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (_, i) => start + i).reduce((s, id) => s + (answers[id] ?? 0), 0);
 
@@ -149,8 +160,93 @@ export default function EnablingBehaviorAudit() {
   const controlScore = subscore(16, 20);
   const selfNeglectScore = subscore(21, 25);
 
+  // Load from readOnly data
+  useEffect(() => {
+    if (readOnly && auditData) {
+      const loadedAnswers: Answers = {};
+      if (auditData.answers && typeof auditData.answers === 'object') {
+        Object.entries(auditData.answers).forEach(([k, v]) => {
+          loadedAnswers[parseInt(k)] = v as number;
+        });
+      }
+      setAnswers(loadedAnswers);
+      setShowResults(true);
+      setLoading(false);
+      return;
+    }
+  }, [readOnly, auditData]);
+
+  // Load existing for logged-in user
+  useEffect(() => {
+    if (readOnly) return;
+    const loadExisting = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+      setUserId(user.id);
+
+      const { data } = await supabase
+        .from("enabling_behavior_audits")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (data) {
+        setExistingId(data.id);
+        const loadedAnswers: Answers = {};
+        if (data.answers && typeof data.answers === 'object') {
+          Object.entries(data.answers as Record<string, number>).forEach(([k, v]) => {
+            loadedAnswers[parseInt(k)] = v;
+          });
+        }
+        setAnswers(loadedAnswers);
+        if (Object.keys(loadedAnswers).length === totalQuestions) {
+          setShowResults(true);
+        }
+      }
+      setLoading(false);
+    };
+    loadExisting();
+  }, [readOnly]);
+
   const handleAnswer = (questionId: number, value: number) => {
+    if (readOnly) return;
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
+  };
+
+  const handleSave = async () => {
+    if (!userId || readOnly) return;
+    setSaving(true);
+
+    const payload = {
+      user_id: userId,
+      answers: answers as any,
+      total_score: totalScore,
+      risk_level: risk,
+      financial_score: financialScore,
+      consequence_score: consequenceScore,
+      emotional_score: emotionalScore,
+      control_score: controlScore,
+      self_neglect_score: selfNeglectScore,
+    };
+
+    let error;
+    if (existingId) {
+      const res = await supabase.from("enabling_behavior_audits").update(payload).eq("id", existingId);
+      error = res.error;
+    } else {
+      const res = await supabase.from("enabling_behavior_audits").insert(payload).select("id").single();
+      error = res.error;
+      if (res.data) setExistingId(res.data.id);
+    }
+
+    setSaving(false);
+    if (error) {
+      toast({ title: "Error saving", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Audit saved", description: "Your Enabling Behavior Audit has been saved." });
+    }
   };
 
   const sectionQuestions = auditSections[currentSection]?.questions ?? [];
@@ -161,6 +257,8 @@ export default function EnablingBehaviorAudit() {
     setShowResults(false);
     setCurrentSection(0);
   };
+
+  if (loading) return <div className="flex items-center justify-center py-8"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
 
   return (
     <div className="space-y-6">
@@ -199,6 +297,7 @@ export default function EnablingBehaviorAudit() {
                     value={answers[q.id]?.toString()}
                     onValueChange={(val) => handleAnswer(q.id, parseInt(val))}
                     className="space-y-2"
+                    disabled={readOnly}
                   >
                     {scaleOptions.map((opt) => (
                       <div key={opt.value} className="flex items-center space-x-2">
@@ -244,16 +343,17 @@ export default function EnablingBehaviorAudit() {
                 <p className="font-semibold mb-1">Recommended:</p>
                 <p className={info.color}>{info.recommend}</p>
               </div>
-              <Link to="/book-consultation">
-                <Button className="gap-2 mt-2">
-                  <Calendar className="h-4 w-4" />
-                  Book a Coaching Session
-                </Button>
-              </Link>
+              {!readOnly && (
+                <Link to="/book-consultation">
+                  <Button className="gap-2 mt-2">
+                    <Calendar className="h-4 w-4" />
+                    Book a Coaching Session
+                  </Button>
+                </Link>
+              )}
             </CardContent>
           </Card>
 
-          {/* Debrief */}
           <Card className="border-border/50 bg-muted/30">
             <CardContent className="p-6">
               <p className="text-center italic text-muted-foreground">
@@ -264,7 +364,6 @@ export default function EnablingBehaviorAudit() {
             </CardContent>
           </Card>
 
-          {/* Subscores */}
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Detailed Breakdown</CardTitle>
@@ -296,8 +395,14 @@ export default function EnablingBehaviorAudit() {
           </Card>
 
           <div className="flex gap-3 print:hidden">
+            {!readOnly && (
+              <Button onClick={handleSave} disabled={saving} className="gap-2">
+                {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                {existingId ? "Update Results" : "Save Results"}
+              </Button>
+            )}
             <Button variant="outline" onClick={() => window.print()}>Print Results</Button>
-            <Button variant="outline" onClick={handleReset}>Retake Audit</Button>
+            {!readOnly && <Button variant="outline" onClick={handleReset}>Retake Audit</Button>}
           </div>
         </div>
       )}
