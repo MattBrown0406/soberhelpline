@@ -362,7 +362,8 @@ const BookConsultation = () => {
           : "Your session is confirmed. You can join from this site when it's time.",
       });
 
-      navigate("/");
+      const onboardingPlan = planType || "single";
+      navigate(`/coaching-onboarding?plan=${onboardingPlan}`);
     } catch (error) {
       console.error("Booking error:", error);
       toast({ title: "Booking failed", description: "Please try again.", variant: "destructive" });
