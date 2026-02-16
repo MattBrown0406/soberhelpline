@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
+import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 
 const sections = [
   {
@@ -457,6 +458,11 @@ export default function FamilyCoaching() {
                 </div>
               </div>
             )}
+
+            {/* Enabling Behavior Audit */}
+            <div className="mt-16 pt-10 border-t border-border/50">
+              <EnablingBehaviorAudit />
+            </div>
           </div>
         </main>
       </div>
