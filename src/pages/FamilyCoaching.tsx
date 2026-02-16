@@ -101,23 +101,28 @@ export default function FamilyCoaching() {
                   </Link>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-8 max-w-3xl mx-auto">
-                  <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
-                    Family Stabilization Plan
-                  </h2>
-                  <span className="text-xl font-bold text-primary">— $500</span>
-                </div>
-                <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3">
-                  Designed for families who feel stuck in cycles of crisis, enabling, and guilt. Across four sessions you map the family roles, set and practice new boundaries, build a relapse/overdose safety plan, and coordinate treatment or next‑step options, with email check‑ins between sessions.
-                </p>
-                <div className="mt-4">
-                  <Link to="/book-consultation?plan=stabilization">
-                    <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
-                      <Calendar className="h-4 w-4" />
-                      Book the Stabilization Plan — $500
-                    </Button>
-                  </Link>
-                </div>
+                <Accordion type="single" collapsible className="mt-8 max-w-3xl mx-auto">
+                  <AccordionItem value="stabilization" className="border-2 border-amber-500/20 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-amber-50 to-transparent dark:from-amber-950/20 [&[data-state=open]>svg]:rotate-180">
+                      <span className="flex flex-col md:flex-row items-center gap-2 text-lg font-semibold text-amber-700 dark:text-amber-400">
+                        Family Stabilization Plan <span className="text-primary font-bold">— $500</span>
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-6">
+                      <p className="text-lg text-muted-foreground mt-3">
+                        Designed for families who feel stuck in cycles of crisis, enabling, and guilt. Across four sessions you map the family roles, set and practice new boundaries, build a relapse/overdose safety plan, and coordinate treatment or next‑step options, with email check‑ins between sessions.
+                      </p>
+                      <div className="mt-4">
+                        <Link to="/book-consultation?plan=stabilization">
+                          <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
+                            <Calendar className="h-4 w-4" />
+                            Book the Stabilization Plan — $500
+                          </Button>
+                        </Link>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
 
