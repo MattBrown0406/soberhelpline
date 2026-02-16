@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Monitor } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 
@@ -247,9 +247,17 @@ const ConsultationProviderDashboard = () => {
                           <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{b.booking_date}</span>
                           <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{b.start_time?.slice(0, 5)} - {b.end_time?.slice(0, 5)}</span>
                         </div>
-                        {b.zoom_meeting_url && (
+                        {b.zoom_meeting_id && (
+                          <Link 
+                            to={`/join-meeting?mn=${b.zoom_meeting_id}&pwd=${encodeURIComponent(b.zoom_passcode || "")}&role=1`}
+                            className="text-primary hover:underline text-sm flex items-center gap-1"
+                          >
+                            <Monitor className="h-4 w-4" />Join Session (In-Browser)
+                          </Link>
+                        )}
+                        {b.zoom_meeting_url && !b.zoom_meeting_id && (
                           <a href={b.zoom_meeting_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm flex items-center gap-1">
-                            <Video className="h-4 w-4" />Join Zoom Meeting
+                            <Video className="h-4 w-4" />Join Zoom (External)
                           </a>
                         )}
                         {b.intake_responses && (
