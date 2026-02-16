@@ -11,11 +11,13 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Monitor, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Monitor, FileText, ShieldAlert, ClipboardCheck } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
+import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
+import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -31,6 +33,8 @@ const ConsultationProviderDashboard = () => {
   const [isAdminView, setIsAdminView] = useState(false);
   const [clientWorksheets, setClientWorksheets] = useState<any[]>([]);
   const [clientIntakes, setClientIntakes] = useState<any[]>([]);
+  const [clientAudits, setClientAudits] = useState<any[]>([]);
+  const [clientReadiness, setClientReadiness] = useState<any[]>([]);
 
   // New slot form
   const [newSlot, setNewSlot] = useState({ dayOfWeek: "1", startTime: "09:00", endTime: "10:00" });
@@ -91,9 +95,11 @@ const ConsultationProviderDashboard = () => {
     // Load client worksheets and intake assessments
     const clientUserIds = [...new Set((bookRes.data || []).map((b: any) => b.client_user_id))];
     if (clientUserIds.length > 0) {
-      const [worksheetRes, intakeRes] = await Promise.all([
+      const [worksheetRes, intakeRes, auditRes, readinessRes] = await Promise.all([
         supabase.from("boundary_clarity_worksheets").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
         supabase.from("coaching_intake_assessments").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
+        supabase.from("enabling_behavior_audits").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
+        supabase.from("family_readiness_assessments").select("*").in("user_id", clientUserIds).order("updated_at", { ascending: false }),
       ]);
 
       const clientNameMap: Record<string, string> = {};
@@ -106,6 +112,12 @@ const ConsultationProviderDashboard = () => {
       );
       setClientIntakes(
         (intakeRes.data || []).map((w: any) => ({ ...w, client_name: clientNameMap[w.user_id] || "Unknown Client" }))
+      );
+      setClientAudits(
+        (auditRes.data || []).map((w: any) => ({ ...w, client_name: clientNameMap[w.user_id] || "Unknown Client" }))
+      );
+      setClientReadiness(
+        (readinessRes.data || []).map((w: any) => ({ ...w, client_name: clientNameMap[w.user_id] || "Unknown Client" }))
       );
     }
 
@@ -312,7 +324,7 @@ const ConsultationProviderDashboard = () => {
                 <CardDescription>View worksheets and assessments completed by your clients.</CardDescription>
               </CardHeader>
               <CardContent>
-                {clientWorksheets.length === 0 && clientIntakes.length === 0 ? (
+                {clientWorksheets.length === 0 && clientIntakes.length === 0 && clientAudits.length === 0 && clientReadiness.length === 0 ? (
                   <p className="text-muted-foreground text-center py-8">No client documents yet. Documents will appear here when clients complete worksheets.</p>
                 ) : (
                   <Accordion type="single" collapsible className="space-y-2">
@@ -320,7 +332,7 @@ const ConsultationProviderDashboard = () => {
                       <AccordionItem key={`intake-${intake.id}`} value={`intake-${intake.id}`} className="border rounded-lg px-4">
                         <AccordionTrigger className="hover:no-underline">
                           <div className="flex items-center gap-3 text-left">
-                            <FileText className="h-5 w-5 text-primary shrink-0" />
+                            <FileText className="h-5 w-5 text-teal-600 shrink-0" />
                             <div>
                               <p className="font-semibold">{intake.client_name}</p>
                               <p className="text-xs text-muted-foreground">
@@ -336,11 +348,51 @@ const ConsultationProviderDashboard = () => {
                         </AccordionContent>
                       </AccordionItem>
                     ))}
+                    {clientReadiness.map((item) => (
+                      <AccordionItem key={`readiness-${item.id}`} value={`readiness-${item.id}`} className="border rounded-lg px-4">
+                        <AccordionTrigger className="hover:no-underline">
+                          <div className="flex items-center gap-3 text-left">
+                            <ClipboardCheck className="h-5 w-5 text-violet-600 shrink-0" />
+                            <div>
+                              <p className="font-semibold">{item.client_name}</p>
+                              <p className="text-xs text-muted-foreground">
+                                Family Readiness Assessment™ · {item.phase && <Badge variant="secondary" className="ml-1 text-xs">{item.phase}</Badge>} · Score: {item.total_score} · Updated {new Date(item.updated_at).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="pt-2">
+                            <FamilyReadinessAssessment readOnly assessmentData={item} />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                    {clientAudits.map((audit) => (
+                      <AccordionItem key={`audit-${audit.id}`} value={`audit-${audit.id}`} className="border rounded-lg px-4">
+                        <AccordionTrigger className="hover:no-underline">
+                          <div className="flex items-center gap-3 text-left">
+                            <ShieldAlert className="h-5 w-5 text-rose-600 shrink-0" />
+                            <div>
+                              <p className="font-semibold">{audit.client_name}</p>
+                              <p className="text-xs text-muted-foreground">
+                                Enabling Behavior Audit™ · {audit.risk_level && <Badge variant="secondary" className="ml-1 text-xs">{audit.risk_level}</Badge>} · Score: {audit.total_score}/100 · Updated {new Date(audit.updated_at).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="pt-2">
+                            <EnablingBehaviorAudit readOnly auditData={audit} />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
                     {clientWorksheets.map((worksheet) => (
                       <AccordionItem key={`ws-${worksheet.id}`} value={`ws-${worksheet.id}`} className="border rounded-lg px-4">
                         <AccordionTrigger className="hover:no-underline">
                           <div className="flex items-center gap-3 text-left">
-                            <FileText className="h-5 w-5 text-primary shrink-0" />
+                            <FileText className="h-5 w-5 text-cyan-600 shrink-0" />
                             <div>
                               <p className="font-semibold">{worksheet.client_name}</p>
                               <p className="text-xs text-muted-foreground">

@@ -505,6 +505,51 @@ export type Database = {
         }
         Relationships: []
       }
+      enabling_behavior_audits: {
+        Row: {
+          answers: Json
+          consequence_score: number | null
+          control_score: number | null
+          created_at: string
+          emotional_score: number | null
+          financial_score: number | null
+          id: string
+          risk_level: string | null
+          self_neglect_score: number | null
+          total_score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          consequence_score?: number | null
+          control_score?: number | null
+          created_at?: string
+          emotional_score?: number | null
+          financial_score?: number | null
+          id?: string
+          risk_level?: string | null
+          self_neglect_score?: number | null
+          total_score?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          consequence_score?: number | null
+          control_score?: number | null
+          created_at?: string
+          emotional_score?: number | null
+          financial_score?: number | null
+          id?: string
+          risk_level?: string | null
+          self_neglect_score?: number | null
+          total_score?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       family_assessments: {
         Row: {
           created_at: string
@@ -678,6 +723,48 @@ export type Database = {
           part5_boundary?: string | null
           part5_start_doing?: string | null
           part5_stop_doing?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      family_readiness_assessments: {
+        Row: {
+          alignment_score: number | null
+          answers: Json
+          boundary_score: number | null
+          created_at: string
+          emotional_score: number | null
+          enabling_score: number | null
+          id: string
+          phase: string | null
+          total_score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alignment_score?: number | null
+          answers?: Json
+          boundary_score?: number | null
+          created_at?: string
+          emotional_score?: number | null
+          enabling_score?: number | null
+          id?: string
+          phase?: string | null
+          total_score?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alignment_score?: number | null
+          answers?: Json
+          boundary_score?: number | null
+          created_at?: string
+          emotional_score?: number | null
+          enabling_score?: number | null
+          id?: string
+          phase?: string | null
+          total_score?: number
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
