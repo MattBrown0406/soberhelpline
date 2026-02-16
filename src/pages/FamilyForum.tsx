@@ -479,6 +479,12 @@ export default function FamilyForum() {
                   Monthly Webinar Registration
                 </Button>
               </Link>
+              <Link to="/family-coaching">
+                <Button variant="default" className="gap-2 bg-amber-600 hover:bg-amber-600/90 text-white">
+                  <Users className="h-4 w-4" />
+                  Family Coaching
+                </Button>
+              </Link>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
