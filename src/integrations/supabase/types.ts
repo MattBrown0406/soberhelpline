@@ -14,6 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
+      boundary_clarity_worksheets: {
+        Row: {
+          boundary_about_me: boolean | null
+          boundary_clear: boolean | null
+          boundary_enforceable: boolean | null
+          boundary_specific: boolean | null
+          boundary_statement: string | null
+          coaching_phase: string | null
+          communication_script: string | null
+          created_at: string
+          enforcement_avoid_arguing: boolean | null
+          enforcement_follow_through: boolean | null
+          enforcement_repeat_once: boolean | null
+          enforcement_seek_support: boolean | null
+          enforcement_stay_calm: boolean | null
+          fear_emotional_or_factual: string | null
+          fear_other: string | null
+          fear_sentence: string | null
+          fears: string[] | null
+          final_consequence: string | null
+          financial_acting_from_fear: boolean | null
+          financial_aligns_values: boolean | null
+          financial_give_without_addiction: boolean | null
+          financial_removes_consequence: boolean | null
+          first_violation_response: string | null
+          id: string
+          most_violated_value: string | null
+          problem_behavior: string | null
+          second_violation_response: string | null
+          self_reflection: string | null
+          unity_resolution: string | null
+          unity_status: string | null
+          updated_at: string
+          user_id: string
+          values_list: string[] | null
+          willing_to_follow_through: string | null
+        }
+        Insert: {
+          boundary_about_me?: boolean | null
+          boundary_clear?: boolean | null
+          boundary_enforceable?: boolean | null
+          boundary_specific?: boolean | null
+          boundary_statement?: string | null
+          coaching_phase?: string | null
+          communication_script?: string | null
+          created_at?: string
+          enforcement_avoid_arguing?: boolean | null
+          enforcement_follow_through?: boolean | null
+          enforcement_repeat_once?: boolean | null
+          enforcement_seek_support?: boolean | null
+          enforcement_stay_calm?: boolean | null
+          fear_emotional_or_factual?: string | null
+          fear_other?: string | null
+          fear_sentence?: string | null
+          fears?: string[] | null
+          final_consequence?: string | null
+          financial_acting_from_fear?: boolean | null
+          financial_aligns_values?: boolean | null
+          financial_give_without_addiction?: boolean | null
+          financial_removes_consequence?: boolean | null
+          first_violation_response?: string | null
+          id?: string
+          most_violated_value?: string | null
+          problem_behavior?: string | null
+          second_violation_response?: string | null
+          self_reflection?: string | null
+          unity_resolution?: string | null
+          unity_status?: string | null
+          updated_at?: string
+          user_id: string
+          values_list?: string[] | null
+          willing_to_follow_through?: string | null
+        }
+        Update: {
+          boundary_about_me?: boolean | null
+          boundary_clear?: boolean | null
+          boundary_enforceable?: boolean | null
+          boundary_specific?: boolean | null
+          boundary_statement?: string | null
+          coaching_phase?: string | null
+          communication_script?: string | null
+          created_at?: string
+          enforcement_avoid_arguing?: boolean | null
+          enforcement_follow_through?: boolean | null
+          enforcement_repeat_once?: boolean | null
+          enforcement_seek_support?: boolean | null
+          enforcement_stay_calm?: boolean | null
+          fear_emotional_or_factual?: string | null
+          fear_other?: string | null
+          fear_sentence?: string | null
+          fears?: string[] | null
+          final_consequence?: string | null
+          financial_acting_from_fear?: boolean | null
+          financial_aligns_values?: boolean | null
+          financial_give_without_addiction?: boolean | null
+          financial_removes_consequence?: boolean | null
+          first_violation_response?: string | null
+          id?: string
+          most_violated_value?: string | null
+          problem_behavior?: string | null
+          second_violation_response?: string | null
+          self_reflection?: string | null
+          unity_resolution?: string | null
+          unity_status?: string | null
+          updated_at?: string
+          user_id?: string
+          values_list?: string[] | null
+          willing_to_follow_through?: string | null
+        }
+        Relationships: []
+      }
       consultation_bookings: {
         Row: {
           amount_paid: number

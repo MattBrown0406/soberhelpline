@@ -9,10 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Monitor } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, DollarSign, Video, User, Trash2, Plus, Monitor, FileText } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
+import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -26,6 +28,7 @@ const ConsultationProviderDashboard = () => {
   const [payouts, setPayouts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdminView, setIsAdminView] = useState(false);
+  const [clientWorksheets, setClientWorksheets] = useState<any[]>([]);
 
   // New slot form
   const [newSlot, setNewSlot] = useState({ dayOfWeek: "1", startTime: "09:00", endTime: "10:00" });
@@ -41,13 +44,9 @@ const ConsultationProviderDashboard = () => {
     const adminViewUserId = searchParams.get("admin_view");
     let resolvedProvider: any = null;
 
-    // If admin_view param is present, check if current user is admin
     if (adminViewUserId) {
       const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
-      if (!roles || roles.length === 0) {
-        navigate("/");
-        return;
-      }
+      if (!roles || roles.length === 0) { navigate("/"); return; }
 
       const { data: providerData } = await supabase
         .from("consultation_providers")
@@ -86,6 +85,32 @@ const ConsultationProviderDashboard = () => {
     setAvailability(availRes.data || []);
     setBookings(bookRes.data || []);
     setPayouts(payRes.data || []);
+
+    // Load client worksheets - get unique client user IDs from bookings
+    const clientUserIds = [...new Set((bookRes.data || []).map((b: any) => b.client_user_id))];
+    if (clientUserIds.length > 0) {
+      const { data: worksheets } = await supabase
+        .from("boundary_clarity_worksheets")
+        .select("*")
+        .in("user_id", clientUserIds)
+        .order("updated_at", { ascending: false });
+
+      // Enrich with client names from bookings
+      const clientNameMap: Record<string, string> = {};
+      (bookRes.data || []).forEach((b: any) => {
+        if (!clientNameMap[b.client_user_id]) {
+          clientNameMap[b.client_user_id] = b.client_name;
+        }
+      });
+
+      setClientWorksheets(
+        (worksheets || []).map((w: any) => ({
+          ...w,
+          client_name: clientNameMap[w.user_id] || "Unknown Client",
+        }))
+      );
+    }
+
     setLoading(false);
   };
 
@@ -162,6 +187,7 @@ const ConsultationProviderDashboard = () => {
           <TabsList className="flex-wrap h-auto gap-1">
             <TabsTrigger value="availability" className="gap-2"><Calendar className="h-4 w-4" />Availability</TabsTrigger>
             <TabsTrigger value="bookings" className="gap-2"><Video className="h-4 w-4" />Bookings</TabsTrigger>
+            <TabsTrigger value="documents" className="gap-2"><FileText className="h-4 w-4" />Client Documents</TabsTrigger>
             <TabsTrigger value="payouts" className="gap-2"><DollarSign className="h-4 w-4" />Payouts</TabsTrigger>
             <TabsTrigger value="profile" className="gap-2"><User className="h-4 w-4" />Profile</TabsTrigger>
           </TabsList>
@@ -173,7 +199,6 @@ const ConsultationProviderDashboard = () => {
                 <CardDescription>Set your recurring weekly availability for consultation sessions.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {/* Add new slot */}
                 <div className="flex flex-wrap gap-3 items-end p-4 bg-muted/50 rounded-lg">
                   <div className="space-y-1">
                     <Label className="text-xs">Day</Label>
@@ -195,7 +220,6 @@ const ConsultationProviderDashboard = () => {
                   <Button onClick={addSlot} size="sm" className="gap-1"><Plus className="h-4 w-4" />Add Slot</Button>
                 </div>
 
-                {/* Existing slots */}
                 {availability.length === 0 ? (
                   <p className="text-muted-foreground text-center py-4">No availability set. Add your first time slot above.</p>
                 ) : (
@@ -214,8 +238,7 @@ const ConsultationProviderDashboard = () => {
                           <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>
                       </div>
-                    ))
-                    }
+                    ))}
                   </div>
                 )}
               </CardContent>
@@ -279,6 +302,43 @@ const ConsultationProviderDashboard = () => {
                       </div>
                     ))}
                   </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="documents">
+            <Card>
+              <CardHeader>
+                <CardTitle>Client Documents</CardTitle>
+                <CardDescription>View worksheets and assessments completed by your clients.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {clientWorksheets.length === 0 ? (
+                  <p className="text-muted-foreground text-center py-8">No client documents yet. Documents will appear here when clients complete worksheets.</p>
+                ) : (
+                  <Accordion type="single" collapsible className="space-y-2">
+                    {clientWorksheets.map((worksheet) => (
+                      <AccordionItem key={worksheet.id} value={worksheet.id} className="border rounded-lg px-4">
+                        <AccordionTrigger className="hover:no-underline">
+                          <div className="flex items-center gap-3 text-left">
+                            <FileText className="h-5 w-5 text-primary shrink-0" />
+                            <div>
+                              <p className="font-semibold">{worksheet.client_name}</p>
+                              <p className="text-xs text-muted-foreground">
+                                Boundary Clarity Worksheet™ · Updated {new Date(worksheet.updated_at).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="pt-2">
+                            <BoundaryClarityWorksheet readOnly worksheetData={worksheet} />
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
                 )}
               </CardContent>
             </Card>
