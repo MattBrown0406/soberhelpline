@@ -89,7 +89,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 </Link>
                 <Link to="/consultation-provider-dashboard" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-4">
-                    Coaching Provider Login
+                    Provider Login
                   </Button>
                 </Link>
                 <a 
