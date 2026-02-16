@@ -109,10 +109,124 @@ export default function FamilyCoaching() {
                       </span>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6">
-                      <p className="text-lg text-muted-foreground mt-3">
-                        Designed for families who feel stuck in cycles of crisis, enabling, and guilt. Across four sessions you map the family roles, set and practice new boundaries, build a relapse/overdose safety plan, and coordinate treatment or next‑step options, with email check‑ins between sessions.
+                      <p className="text-xl font-semibold text-amber-700 dark:text-amber-400 mt-3">
+                        A 4-Week Structured Reset for Families in Crisis
                       </p>
-                      <div className="mt-4">
+                      <p className="text-muted-foreground mt-3">
+                        When addiction escalates, families often shift into survival mode.
+                      </p>
+                      <p className="text-muted-foreground mt-2">
+                        Arguments increase.<br />
+                        Sleep decreases.<br />
+                        Financial decisions become reactive.<br />
+                        Threats are made but not enforced.<br />
+                        Everyone feels exhausted.
+                      </p>
+                      <p className="text-muted-foreground mt-3">
+                        The Family Stabilization Intensive™ is a focused 4-week coaching program designed for families experiencing active chaos, instability, or emotional overwhelm.
+                      </p>
+                      <p className="text-muted-foreground mt-2 font-medium">
+                        This is not long-term coaching.<br />
+                        This is not venting support.
+                      </p>
+                      <p className="text-muted-foreground mt-2 font-semibold italic">
+                        This is immediate structure.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">Who This Program Is For</h3>
+                      <p className="text-muted-foreground mt-2">This program is appropriate if:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Your loved one is actively using</li>
+                        <li>There has been a recent relapse</li>
+                        <li>Boundaries are unclear or inconsistent</li>
+                        <li>You feel emotionally reactive or panicked</li>
+                        <li>Financial decisions are being made under pressure</li>
+                        <li>You and your partner are not aligned</li>
+                        <li>You feel like you are constantly "putting out fires"</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 italic">
+                        If your household feels unstable, this is your starting point.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">The Goal of Stabilization</h3>
+                      <p className="text-muted-foreground mt-2">
+                        The goal is not to fix your loved one.
+                      </p>
+                      <p className="text-muted-foreground mt-2 font-semibold">
+                        The goal is to stabilize the family system.
+                      </p>
+                      <p className="text-muted-foreground mt-2">Over four structured weeks, we focus on:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Reducing emotional volatility</li>
+                        <li>Identifying enabling patterns</li>
+                        <li>Establishing one or two enforceable boundaries</li>
+                        <li>Clarifying financial limits</li>
+                        <li>Creating a short-term crisis response plan</li>
+                        <li>Aligning decision-makers inside the household</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium italic">
+                        Before long-term change can happen, the chaos must stop escalating.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">What Happens During the 4 Weeks</h3>
+                      <div className="mt-4 space-y-4">
+                        <div className="pl-4 border-l-4 border-red-400/50">
+                          <p className="font-semibold text-red-700 dark:text-red-400">Week 1: System Assessment & Pattern Identification</p>
+                          <p className="text-muted-foreground text-sm mt-1">We identify destabilizing behaviors and map the current family dynamic.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-amber-400/50">
+                          <p className="font-semibold text-amber-700 dark:text-amber-400">Week 2: Emotional Regulation & Conflict Containment</p>
+                          <p className="text-muted-foreground text-sm mt-1">You learn how to reduce reactive decision-making and regain calm authority.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-emerald-400/50">
+                          <p className="font-semibold text-emerald-700 dark:text-emerald-400">Week 3: Boundary Implementation</p>
+                          <p className="text-muted-foreground text-sm mt-1">We design and implement one enforceable, value-based boundary.</p>
+                        </div>
+                        <div className="pl-4 border-l-4 border-blue-400/50">
+                          <p className="font-semibold text-blue-700 dark:text-blue-400">Week 4: Crisis Response Plan</p>
+                          <p className="text-muted-foreground text-sm mt-1">You leave with a written structure for handling relapse, manipulation, or escalation.</p>
+                        </div>
+                      </div>
+                      <p className="text-muted-foreground mt-4 font-medium">
+                        This is focused, practical, and action-oriented.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">What You Leave With</h3>
+                      <p className="text-muted-foreground mt-2">By the end of the intensive, families typically experience:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>Reduced conflict intensity</li>
+                        <li>Clearer financial limits</li>
+                        <li>Increased confidence enforcing boundaries</li>
+                        <li>Improved alignment between partners</li>
+                        <li>A written crisis stabilization plan</li>
+                        <li>A measurable reduction in chaos</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium">
+                        Even if your loved one does not change immediately, your household will.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">What This Program Is Not</h3>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>It is not therapy.</li>
+                        <li>It does not replace medical or psychiatric care.</li>
+                        <li>It does not guarantee sobriety.</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-semibold">
+                        It restores structure and clarity to a destabilized system.
+                      </p>
+
+                      <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">After Stabilization</h3>
+                      <p className="text-muted-foreground mt-2">Families who complete this program may transition into:</p>
+                      <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                        <li>The 12-Week Parallel Recovery Program™</li>
+                        <li>Ongoing Long-Term Family Support</li>
+                        <li>Or continue independently with the structure built during the intensive</li>
+                      </ul>
+                      <p className="text-muted-foreground mt-3 font-medium italic">
+                        Stabilization is the first step toward sustainable recovery — for the entire family.
+                      </p>
+
+                      <div className="mt-6">
                         <Link to="/book-consultation?plan=stabilization">
                           <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
                             <Calendar className="h-4 w-4" />
