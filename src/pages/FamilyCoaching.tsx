@@ -342,6 +342,49 @@ export default function FamilyCoaching() {
               </CardContent>
             </Card>
 
+            {/* Coaching Phase Guide Table */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="text-lg text-primary">Coaching Phase Guide</CardTitle>
+                <CardDescription>Understanding where your family is in the parallel recovery journey.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-left py-3 px-4 font-semibold text-primary">Phase</th>
+                        <th className="text-left py-3 px-4 font-semibold text-primary">Family Experience</th>
+                        <th className="text-left py-3 px-4 font-semibold text-primary">Coaching Focus</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-border/50 bg-red-50/50 dark:bg-red-950/20">
+                        <td className="py-3 px-4 font-medium">Stabilization</td>
+                        <td className="py-3 px-4 text-muted-foreground">Panic, chaos, fear, crisis management</td>
+                        <td className="py-3 px-4 text-muted-foreground">Emotional regulation, crisis boundaries</td>
+                      </tr>
+                      <tr className="border-b border-border/50 bg-amber-50/50 dark:bg-amber-950/20">
+                        <td className="py-3 px-4 font-medium">Transition</td>
+                        <td className="py-3 px-4 text-muted-foreground">Letting go of control, guilt, resistance</td>
+                        <td className="py-3 px-4 text-muted-foreground">Detachment with love, communication reset</td>
+                      </tr>
+                      <tr className="border-b border-border/50 bg-emerald-50/50 dark:bg-emerald-950/20">
+                        <td className="py-3 px-4 font-medium">Maintenance</td>
+                        <td className="py-3 px-4 text-muted-foreground">Rebuilding trust slowly</td>
+                        <td className="py-3 px-4 text-muted-foreground">Consistency, values alignment</td>
+                      </tr>
+                      <tr className="bg-blue-50/50 dark:bg-blue-950/20">
+                        <td className="py-3 px-4 font-medium">Long-Term Support</td>
+                        <td className="py-3 px-4 text-muted-foreground">Fear of relapse, hypervigilance</td>
+                        <td className="py-3 px-4 text-muted-foreground">Sustainable independence, identity rebuilding</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+
             <Accordion type="multiple" className="space-y-4">
               {/* Intake Assessment */}
               <AccordionItem value="intake" className="border rounded-lg overflow-hidden">
