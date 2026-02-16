@@ -79,12 +79,12 @@ export default function FamilyCoaching() {
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
                   <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
-                    The Emergency Game Plan
+                    The Emergency Game Plan™
                   </h2>
                   <span className="text-xl font-bold text-primary">— $150</span>
                 </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3 italic">
-                  You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan session gives your family immediate, steady guidance so you don't have to figure this out alone.
+                  You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan™ session gives your family immediate, steady guidance so you don't have to figure this out alone.
                 </p>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
                   In one focused 60‑minute call, we'll clarify what's really happening, identify the biggest risks right now, and map out a concrete 7–14‑day plan. You'll leave knowing what to say (and what not to say), which options make sense for treatment or next steps, and how to set boundaries you can actually keep.
@@ -105,7 +105,7 @@ export default function FamilyCoaching() {
                   <AccordionItem value="stabilization" className="border-2 border-amber-500/20 rounded-lg overflow-hidden">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-amber-50 to-transparent dark:from-amber-950/20 [&[data-state=open]>svg]:rotate-180">
                       <span className="flex flex-col md:flex-row items-center gap-2 text-lg font-semibold text-amber-700 dark:text-amber-400">
-                        Family Stabilization Plan <span className="text-primary font-bold">— $500</span>
+                        Family Stabilization Plan™ <span className="text-primary font-bold">— $500</span>
                       </span>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6">
