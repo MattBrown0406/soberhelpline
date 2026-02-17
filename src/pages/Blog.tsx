@@ -85,12 +85,297 @@ import readinessAddictionFamiliesImg from "@/assets/blog-readiness-addiction-fam
 import emotionalWhiplashFamiliesImg from "@/assets/blog-emotional-whiplash-families.png";
 import sobrietyVsRecoveryFamiliesImg from "@/assets/blog-sobriety-vs-recovery-families.png";
 import relapseProcessStagesGuideImg from "@/assets/blog-relapse-process-stages-guide.png";
+import personalityChangesAddictionImg from "@/assets/blog-personality-changes-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 84,
+    title: "Personality Changes in Addiction: What's Temporary, What's Not, and What Families Should Expect",
+    excerpt: "Families often say, 'They're not the same person anymore.' Addiction frequently produces noticeable personality changes—but not all of them are permanent. Understanding which changes are temporary, which require treatment, and what early recovery looks like helps families respond with clarity instead of fear.",
+    author: "Sober Helpline",
+    date: "2026-02-17",
+    category: "Family Education",
+    image: personalityChangesAddictionImg,
+    slug: "personality-changes-in-addiction",
+    seoTitle: "Personality Changes in Addiction: What's Temporary & What's Not",
+    metaDescription: "Addiction alters personality—but not all changes are permanent. Learn which shifts are substance-induced, which reveal co-occurring disorders, and what families should expect in early recovery.",
+    keywords: ["personality changes in addiction", "addiction behavior changes", "substance-induced personality shifts", "early recovery mood swings", "co-occurring disorders addiction", "family expectations recovery"],
+    content: `**Personality Changes in Addiction: What's Temporary, What's Not, and What Families Should Expect**
+
+Families often say, "They're not the same person anymore." Irritability replaces warmth. Secrecy replaces openness. Apathy replaces engagement. Addiction frequently produces noticeable personality changes—but not all of them are permanent. Some shifts are substance-induced. Others reveal underlying mental health conditions. Understanding which changes are temporary, which require treatment, and what early recovery looks like helps families respond with clarity instead of fear.
+
+**Why Addiction Alters Behavior So Dramatically**
+
+Addiction affects multiple brain systems, including those regulating:
+
+Impulse control
+
+Emotional regulation
+
+Stress response
+
+Reward processing
+
+Decision-making
+
+When substances repeatedly alter these systems, personality traits can appear to shift.
+
+This may include:
+
+Increased irritability
+
+Defensiveness
+
+Emotional volatility
+
+Social withdrawal
+
+Risk-taking behavior
+
+Dishonesty
+
+Families often interpret these changes as moral decline.
+
+In reality, neurochemical disruption plays a significant role.
+
+**Substance-Induced Personality Shifts**
+
+Many behavioral changes are directly linked to active use.
+
+Substances can produce:
+
+Paranoia
+
+Mood swings
+
+Impulsivity
+
+Aggression
+
+Depression
+
+Apathy
+
+When use stops and the brain begins to stabilize, some of these changes gradually improve.
+
+However, early recovery does not produce immediate emotional balance.
+
+Families must adjust expectations accordingly.
+
+**Early Recovery Is Emotionally Uneven**
+
+During early sobriety, individuals may experience:
+
+Irritability
+
+Anxiety
+
+Low frustration tolerance
+
+Emotional numbness
+
+Hypersensitivity
+
+These are not necessarily permanent personality traits.
+
+They often reflect:
+
+Withdrawal effects
+
+Dopamine recalibration
+
+Unprocessed emotional backlog
+
+Stress of lifestyle change
+
+Emotional volatility during early recovery is common—but should gradually stabilize with structure and support.
+
+**What Might Not Be Temporary**
+
+Some personality changes reveal underlying mental health conditions that were previously masked by substance use.
+
+Common co-occurring disorders include:
+
+Major depressive disorder
+
+Generalized anxiety disorder
+
+Bipolar disorder
+
+Trauma-related disorders
+
+Personality disorders
+
+In these cases, substance use may have been an attempt at self-medication.
+
+When substances are removed, symptoms become more visible.
+
+This does not mean recovery is failing.
+
+It means comprehensive treatment may be necessary.
+
+**The Difference Between Character and Condition**
+
+Families sometimes ask:
+
+"Is this who they really are?"
+
+That question is understandable—but often premature.
+
+Addiction distorts behavior. Withdrawal destabilizes emotion. Early recovery challenges identity.
+
+Time and treatment clarify which traits persist and which fade.
+
+Patience and observation are essential before drawing permanent conclusions.
+
+**The Shame-Reactivity Cycle**
+
+Addiction often creates shame.
+
+Shame fuels defensiveness.
+
+Defensiveness increases irritability.
+
+Irritability strains relationships.
+
+Strained relationships increase shame.
+
+This cycle can make personality changes feel permanent.
+
+Breaking the shame-reactivity loop requires structure, accountability, and emotional safety—not avoidance.
+
+**When to Seek Psychiatric Evaluation**
+
+Families should consider professional evaluation when:
+
+Mood instability persists beyond early recovery
+
+Symptoms are severe
+
+There are signs of psychosis
+
+Suicidal ideation appears
+
+Emotional swings are extreme and sustained
+
+Addiction treatment alone may not address co-occurring disorders.
+
+Comprehensive care improves long-term outcomes.
+
+**Why Families Sometimes Panic Too Early**
+
+It is common for families to expect a full personality "reset" once sobriety begins.
+
+When irritability or emotional distance continues, they may fear permanent damage.
+
+But recovery unfolds in phases.
+
+Early stabilization. Emotional adjustment. Behavioral restructuring. Gradual identity repair.
+
+Personality often softens as stability increases.
+
+**The Risk of Over-Excusing**
+
+While patience is important, families should not excuse ongoing harmful behavior indefinitely.
+
+Understanding personality changes does not require tolerating:
+
+Abuse
+
+Manipulation
+
+Chronic dishonesty
+
+Financial exploitation
+
+Boundaries remain essential—even when behavior has neurological roots.
+
+Compassion and accountability must coexist.
+
+**How Families Can Respond Constructively**
+
+Families can:
+
+Educate themselves about withdrawal and recovery phases
+
+Avoid labeling behavior too quickly
+
+Encourage psychiatric evaluation when appropriate
+
+Maintain boundaries consistently
+
+Seek their own support
+
+Recovery affects the entire system—not just the individual.
+
+**Realistic Expectations Matter**
+
+Expect:
+
+Emotional unevenness in early sobriety
+
+Gradual—not instant—improvement
+
+Moments of regression
+
+Continued need for structure
+
+Do not expect:
+
+Immediate emotional maturity
+
+Perfect communication
+
+Instant trust repair
+
+Rapid personality transformation
+
+Recovery is developmental. It unfolds over time.
+
+**When Professional Guidance Helps**
+
+If families are unsure whether they are seeing:
+
+Early recovery volatility
+
+Substance-induced mood disturbance
+
+Or underlying psychiatric illness
+
+Consulting with addiction professionals provides clarity.
+
+Interventionists and treatment specialists help families:
+
+Differentiate patterns
+
+Align expectations
+
+Avoid premature judgments
+
+Identify when deeper assessment is necessary
+
+Outside perspective reduces confusion.
+
+**A Grounded Takeaway**
+
+Personality changes in addiction are real—but not always permanent.
+
+Some behaviors reflect neurochemical disruption. Some reveal untreated mental health conditions. Some improve steadily with sustained recovery work.
+
+Families benefit from balanced expectations:
+
+Patience without denial. Compassion without enabling. Boundaries without hostility.
+
+If you are unsure whether what you're seeing is temporary instability or deeper psychiatric concern, professional consultation provides clarity.
+
+Addiction changes behavior.
+
+Recovery reshapes it—over time, with structure, and with sustained support.`
+  },
   {
     id: 83,
     title: "Understanding Relapse as a Process, Not an Event",
