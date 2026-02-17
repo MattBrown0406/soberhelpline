@@ -373,6 +373,13 @@ export default function FamilyCoaching() {
                   </AccordionItem>
                 </Accordion>
               </div>
+
+              {/* Disclaimer */}
+              <div className="mt-6 p-4 bg-amber-50/50 dark:bg-amber-950/10 border border-amber-200/50 dark:border-amber-800/30 rounded-lg">
+                <p className="text-sm text-muted-foreground italic text-center">
+                  We always encourage starting with hourly sessions and will never try to upsell anyone on a package. While we believe our multi-session plans offer additional value to the families we work with, we want every family to select the tier of service that fits their needs.
+                </p>
+              </div>
             </div>
 
             {/* Family Readiness Assessment */}
