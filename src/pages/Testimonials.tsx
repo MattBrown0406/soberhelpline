@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Star, Send, Quote } from "lucide-react";
+import testimonialsHero from "@/assets/testimonials-hero.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -109,14 +110,18 @@ const Testimonials = () => {
 
       <div className="min-h-screen bg-background">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary)/0.8)] text-primary-foreground py-16 md:py-24">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">Real Families. Real Stories.</h1>
-            <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-6">
+        <section className="relative py-20 md:py-28 overflow-hidden">
+          <div className="absolute inset-0">
+            <img src={testimonialsHero} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg">Real Families. Real Stories.</h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-6 drop-shadow">
               Hear from families who took the first step toward stability, clarity, and hope.
             </p>
             {testimonials.length > 0 && (
-              <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center justify-center gap-3 text-white">
                 <StarRating rating={Math.round(Number(avgRating))} />
                 <span className="text-xl font-semibold">{avgRating}</span>
                 <span className="opacity-75">({testimonials.length} review{testimonials.length !== 1 ? 's' : ''})</span>
