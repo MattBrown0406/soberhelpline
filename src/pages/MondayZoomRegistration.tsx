@@ -18,7 +18,7 @@ const registrationSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Please enter a valid email address").max(255),
   phone: z.string().trim().min(1, "Phone number is required").max(20),
-  question: z.string().trim().min(10, "Please write a complete question (at least 10 characters)").max(1000),
+  question: z.string().trim().max(1000).optional().default(""),
 });
 
 export default function MondayZoomRegistration() {
@@ -425,7 +425,7 @@ export default function MondayZoomRegistration() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="question">Your Question for the Group *</Label>
+                    <Label htmlFor="question">Your Question for the Group (Optional)</Label>
                     <p className="text-sm text-muted-foreground">
                       Please write out a complete question you'd like discussed during the meeting—not just a topic or keyword. 
                       For example, instead of "boundaries," write something like: "How do I set a boundary with my son about 
