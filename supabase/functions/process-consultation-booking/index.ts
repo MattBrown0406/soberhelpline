@@ -122,6 +122,12 @@ async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessio
           <a href="${bookingUrl}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Schedule Next Session</a>
         </div>
 
+        <div style="background: #faf5ff; border: 1px solid #d8b4fe; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+          <h2 style="color: #7e22ce; margin: 0 0 12px; font-size: 18px;">⭐ Share Your Experience</h2>
+          <p style="margin: 0 0 16px; color: #374151;">Your story could encourage another family to take their first step. We'd love to hear how coaching is impacting your journey.</p>
+          <a href="https://soberhelpline.lovable.app/testimonials" style="display: inline-block; padding: 12px 24px; background-color: #7e22ce; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Write a Testimonial</a>
+        </div>
+
         <p style="color: #6b7280; font-size: 14px;">If you have any questions or need to discuss anything before your next session, call us at <strong>(541) 241-5886</strong>.</p>
         <p style="color: #6b7280; font-size: 12px; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
       </div>

@@ -1952,6 +1952,48 @@ export type Database = {
         }
         Relationships: []
       }
+      testimonials: {
+        Row: {
+          city: string
+          created_at: string
+          experience: string
+          first_name: string
+          id: string
+          is_approved: boolean
+          last_initial: string
+          rating: number
+          state: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          experience: string
+          first_name: string
+          id?: string
+          is_approved?: boolean
+          last_initial: string
+          rating: number
+          state: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          experience?: string
+          first_name?: string
+          id?: string
+          is_approved?: boolean
+          last_initial?: string
+          rating?: number
+          state?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_forum_badges: {
         Row: {
           awarded_at: string
