@@ -2133,6 +2133,9 @@ export type Database = {
           meeting_date: string
           name: string
           phone: string
+          preferred_contact_date: string | null
+          preferred_contact_time: string | null
+          preferred_timezone: string | null
           question: string
           request_follow_up: boolean
           user_id: string
@@ -2145,6 +2148,9 @@ export type Database = {
           meeting_date?: string
           name: string
           phone: string
+          preferred_contact_date?: string | null
+          preferred_contact_time?: string | null
+          preferred_timezone?: string | null
           question: string
           request_follow_up?: boolean
           user_id: string
@@ -2157,6 +2163,9 @@ export type Database = {
           meeting_date?: string
           name?: string
           phone?: string
+          preferred_contact_date?: string | null
+          preferred_contact_time?: string | null
+          preferred_timezone?: string | null
           question?: string
           request_follow_up?: boolean
           user_id?: string
