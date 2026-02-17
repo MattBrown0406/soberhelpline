@@ -1646,6 +1646,53 @@ export type Database = {
           },
         ]
       }
+      provider_date_overrides: {
+        Row: {
+          created_at: string
+          end_time: string | null
+          id: string
+          is_available: boolean
+          notes: string | null
+          override_date: string
+          provider_id: string
+          start_time: string | null
+          timezone: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_time?: string | null
+          id?: string
+          is_available?: boolean
+          notes?: string | null
+          override_date: string
+          provider_id: string
+          start_time?: string | null
+          timezone?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string | null
+          id?: string
+          is_available?: boolean
+          notes?: string | null
+          override_date?: string
+          provider_id?: string
+          start_time?: string | null
+          timezone?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_date_overrides_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       provider_submissions: {
         Row: {
           accepts_mat_residents: boolean | null

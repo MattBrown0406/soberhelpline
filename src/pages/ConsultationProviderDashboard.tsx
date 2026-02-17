@@ -17,6 +17,7 @@ import SEOHead from "@/components/SEOHead";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
+import ProviderDateCalendar from "@/components/ProviderDateCalendar";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -269,6 +270,13 @@ const ConsultationProviderDashboard = () => {
                 )}
               </CardContent>
             </Card>
+
+            {provider && (
+              <ProviderDateCalendar
+                providerId={provider.id}
+                timezone={provider.timezone || "America/Los_Angeles"}
+              />
+            )}
           </TabsContent>
 
           <TabsContent value="bookings">
