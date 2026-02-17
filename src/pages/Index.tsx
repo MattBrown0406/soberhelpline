@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, Camera, Volume2, Mic, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, Star, AlertTriangle, MessageSquare, Scale, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import bannerLogo from "@/assets/banner-logo.png";
 
-import raybanMetaWayfarer from "@/assets/rayban-meta-wayfarer-new.png";
+
 import MobileNav from "@/components/MobileNav";
 import { blogPosts } from "@/pages/Blog";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
@@ -269,61 +269,6 @@ const Index = () => {
       </section>
 
 
-      {/* RayBan Meta Wayfarer Giveaway Banner */}
-      <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-y border-slate-700/50 overflow-hidden">
-        <div className="container mx-auto px-4 py-5 md:py-6">
-          <Link to="/family-membership" className="flex flex-col items-center justify-center gap-4 md:flex-row md:gap-8 group">
-            {/* Image with animated feature indicators */}
-            <div className="relative flex-shrink-0">
-              <img 
-                src={raybanMetaWayfarer} 
-                alt="Ray-Ban Meta Wayfarer Smart Glasses" 
-                className="w-40 h-24 md:w-56 md:h-32 object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-300"
-              />
-              {/* Animated feature indicators */}
-              <div className="absolute top-1 left-4 md:left-6 animate-pulse">
-                <div className="flex items-center gap-1 bg-amber-500/90 text-slate-900 px-1.5 py-0.5 rounded-full text-[8px] md:text-[10px] font-bold">
-                  <Camera className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                  <span>12MP</span>
-                </div>
-              </div>
-              <div className="absolute top-1 right-4 md:right-6 animate-pulse" style={{ animationDelay: '0.5s' }}>
-                <div className="flex items-center gap-1 bg-amber-500/90 text-slate-900 px-1.5 py-0.5 rounded-full text-[8px] md:text-[10px] font-bold">
-                  <Volume2 className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                  <span>Audio</span>
-                </div>
-              </div>
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '1s' }}>
-                <div className="flex items-center gap-1 bg-amber-500/90 text-slate-900 px-1.5 py-0.5 rounded-full text-[8px] md:text-[10px] font-bold">
-                  <Mic className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                  <span>Meta AI</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="text-center md:text-left">
-              <div className="flex items-center gap-2 justify-center md:justify-start mb-1.5">
-                <div className="px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-900 text-[10px] md:text-xs font-bold uppercase tracking-wide animate-pulse">
-                  Giveaway
-                </div>
-                <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-amber-400 animate-spin" style={{ animationDuration: '3s' }} />
-              </div>
-              <p className="font-bold text-white text-base md:text-xl leading-tight">
-                Win Ray-Ban Meta Wayfarer Smart Glasses!
-              </p>
-              <p className="text-xs md:text-sm text-slate-300 mt-1 max-w-sm">
-                Camera, speakers, & Meta AI built-in — All active subscribers on <span className="text-amber-400 font-semibold">March 1st</span> entered to win
-              </p>
-            </div>
-            
-            <Button variant="outline" size="sm" className="gap-2 border-amber-500/50 text-amber-400 hover:bg-amber-500/20 hover:text-amber-300 group-hover:gap-3 transition-all text-xs md:text-sm flex-shrink-0">
-              Subscribe Now
-              <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
 
       {/* Peek Inside the Curriculum - Membership Conversion Section */}
       <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
