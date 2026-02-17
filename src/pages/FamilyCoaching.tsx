@@ -438,7 +438,7 @@ export default function FamilyCoaching() {
                   </div>
                   <div>
                     <CardTitle className="text-lg text-orange-700 dark:text-orange-400">Coaching Phase Guide</CardTitle>
-                    <CardDescription>Understanding where your family is in the parallel recovery journey.</CardDescription>
+                    <CardDescription>Understanding which coaching tier fits your family's current situation.</CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -447,31 +447,31 @@ export default function FamilyCoaching() {
                   <table className="w-full text-sm border-collapse">
                     <thead>
                       <tr className="border-b-2 border-orange-200 dark:border-orange-800/50">
-                        <th className="text-left py-3 px-4 font-semibold text-orange-700 dark:text-orange-400">Phase</th>
+                        <th className="text-left py-3 px-4 font-semibold text-orange-700 dark:text-orange-400">Service Tier</th>
                         <th className="text-left py-3 px-4 font-semibold text-orange-700 dark:text-orange-400">Family Experience</th>
                         <th className="text-left py-3 px-4 font-semibold text-orange-700 dark:text-orange-400">Coaching Focus</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b border-border/50 bg-red-50/50 dark:bg-red-950/20">
-                        <td className="py-3 px-4 font-medium text-red-700 dark:text-red-400">Stabilization</td>
-                        <td className="py-3 px-4 text-muted-foreground">Panic, chaos, fear, crisis management</td>
-                        <td className="py-3 px-4 text-muted-foreground">Emotional regulation, crisis boundaries</td>
-                      </tr>
                       <tr className="border-b border-border/50 bg-amber-50/50 dark:bg-amber-950/20">
-                        <td className="py-3 px-4 font-medium text-amber-700 dark:text-amber-400">Transition</td>
-                        <td className="py-3 px-4 text-muted-foreground">Letting go of control, guilt, resistance</td>
-                        <td className="py-3 px-4 text-muted-foreground">Detachment with love, communication reset</td>
+                        <td className="py-3 px-4 font-medium text-amber-700 dark:text-amber-400">Hourly Session</td>
+                        <td className="py-3 px-4 text-muted-foreground">Specific questions, check-ins, or single-issue guidance</td>
+                        <td className="py-3 px-4 text-muted-foreground">Targeted support on one concern at a time</td>
+                      </tr>
+                      <tr className="border-b border-border/50 bg-red-50/50 dark:bg-red-950/20">
+                        <td className="py-3 px-4 font-medium text-red-700 dark:text-red-400">Emergency Game Plan™</td>
+                        <td className="py-3 px-4 text-muted-foreground">Panic, chaos, fear, immediate crisis</td>
+                        <td className="py-3 px-4 text-muted-foreground">Emotional regulation, crisis boundaries, 7–14 day action plan</td>
                       </tr>
                       <tr className="border-b border-border/50 bg-emerald-50/50 dark:bg-emerald-950/20">
-                        <td className="py-3 px-4 font-medium text-emerald-700 dark:text-emerald-400">Maintenance</td>
-                        <td className="py-3 px-4 text-muted-foreground">Rebuilding trust slowly</td>
-                        <td className="py-3 px-4 text-muted-foreground">Consistency, values alignment</td>
+                        <td className="py-3 px-4 font-medium text-emerald-700 dark:text-emerald-400">Family Stabilization Plan™</td>
+                        <td className="py-3 px-4 text-muted-foreground">Enabling cycles, guilt, loss of control, family conflict</td>
+                        <td className="py-3 px-4 text-muted-foreground">System assessment, boundary implementation, communication reset</td>
                       </tr>
                       <tr className="bg-blue-50/50 dark:bg-blue-950/20">
-                        <td className="py-3 px-4 font-medium text-blue-700 dark:text-blue-400">Long-Term Support</td>
-                        <td className="py-3 px-4 text-muted-foreground">Fear of relapse, hypervigilance</td>
-                        <td className="py-3 px-4 text-muted-foreground">Sustainable independence, identity rebuilding</td>
+                        <td className="py-3 px-4 font-medium text-blue-700 dark:text-blue-400">Parallel Recovery Program™</td>
+                        <td className="py-3 px-4 text-muted-foreground">Long-term instability, hypervigilance, identity loss</td>
+                        <td className="py-3 px-4 text-muted-foreground">Detachment with love, accountability structures, sustainable independence</td>
                       </tr>
                     </tbody>
                   </table>
