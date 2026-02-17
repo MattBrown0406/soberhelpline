@@ -46,6 +46,12 @@ export default function FamilyCoaching() {
                     Webinars
                   </Button>
                 </Link>
+                <Link to="/monday-zoom-registration">
+                  <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                    <Calendar className="h-4 w-4" />
+                    Monday Night Zoom
+                  </Button>
+                </Link>
               </div>
             </div>
 

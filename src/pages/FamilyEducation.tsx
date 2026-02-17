@@ -323,6 +323,12 @@ export default function FamilyEducation() {
                       Coaching
                     </Button>
                   </Link>
+                  <Link to="/monday-zoom-registration">
+                    <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
+                      <Video className="h-4 w-4" />
+                      Monday Night Zoom
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-1.5 border border-border/50">
