@@ -284,9 +284,8 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
                     />
                   </div>
 
-                  <Button onClick={addOverride} size="sm" className="gap-1">
-                    <Plus className="h-4 w-4" />
-                    {actionMode === "add" ? "Add Time Slot" : actionMode === "remove" ? "Remove Time Slot" : "Block Day"}
+                  <Button onClick={addOverride} size="sm">
+                    Save Changes
                   </Button>
                 </div>
               </div>
