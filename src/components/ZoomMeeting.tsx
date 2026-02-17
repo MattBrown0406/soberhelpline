@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Loader2, Video, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 interface ZoomMeetingProps {
   meetingNumber: string;
@@ -134,20 +135,27 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
   }
 
   return (
-    <div className="relative">
-      <Button
-        onClick={leaveMeeting}
-        variant="destructive"
-        size="sm"
-        className="absolute top-2 right-2 z-10 gap-1"
-      >
-        <X className="h-3 w-3" />
-        Leave
-      </Button>
-      <div
-        ref={meetingRef}
-        className="w-full min-h-[500px] rounded-xl overflow-hidden border bg-black"
-      />
+    <div className="flex flex-col items-center gap-4">
+      <img src={logo} alt="Sober Helpline" className="h-20 md:h-24 object-contain" />
+      <div className="relative w-full">
+        <Button
+          onClick={leaveMeeting}
+          variant="destructive"
+          size="sm"
+          className="absolute top-2 right-2 z-10 gap-1"
+        >
+          <X className="h-3 w-3" />
+          Leave
+        </Button>
+        <div
+          ref={meetingRef}
+          className="w-full min-h-[500px] rounded-xl overflow-hidden border-2 border-primary/30 bg-black"
+        />
+      </div>
+      <div className="text-center">
+        <p className="text-xl md:text-2xl font-bold text-foreground">Leave the Chaos Behind.</p>
+        <p className="text-xl md:text-2xl font-bold text-primary">Find Clarity Ahead.</p>
+      </div>
     </div>
   );
 };
