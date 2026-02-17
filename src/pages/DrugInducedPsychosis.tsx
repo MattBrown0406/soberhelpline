@@ -18,19 +18,6 @@ const DrugInducedPsychosis = () => {
         <meta name="description" content="A comprehensive guide for families to understand drug-induced psychosis, recognize warning signs, and distinguish between THC and methamphetamine psychosis." />
       </Helmet>
 
-      {/* Header - Hidden when printing */}
-      <header className="bg-primary text-primary-foreground py-4 px-6 print:hidden">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link to="/">
-            <img src={logo} alt="Sober Helpline Logo" className="h-12" />
-          </Link>
-          <a href="tel:1-844-962-3744" className="flex items-center gap-2 text-lg font-semibold hover:opacity-80 transition-opacity">
-            <Phone className="h-5 w-5" />
-            1-844-962-3744
-          </a>
-        </div>
-      </header>
-
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Navigation - Hidden when printing */}
         <div className="flex items-center justify-between mb-8 print:hidden">
