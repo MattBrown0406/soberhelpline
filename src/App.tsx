@@ -161,7 +161,7 @@ const App = () => (
             <Route path="/family-forum" element={<FamilyForum />} />
             <Route path="/family-forum/:topicId" element={<ForumTopic />} />
             <Route path="/family-consultation" element={<FamilyConsultation />} />
-            <Route path="/monday-zoom-meeting" element={<MondayZoomRegistration />} />
+            <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
             <Route path="/family-webinars" element={<FamilyWebinars />} />
             <Route path="/treatment-questions" element={<TreatmentQuestions />} />
             <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
