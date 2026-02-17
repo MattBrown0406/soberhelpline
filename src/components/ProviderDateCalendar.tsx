@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
+// Switch removed - using button toggles instead
 import { Trash2, Plus, CalendarDays, Clock, Ban } from "lucide-react";
 import { format, isSameDay, startOfMonth, endOfMonth, addMonths, subMonths } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -35,9 +35,12 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
   const [loading, setLoading] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
+  // Action mode: "add" = add available slot, "remove" = remove a recurring slot, "block" = block entire day
+  type ActionMode = "add" | "remove" | "block";
+  const [actionMode, setActionMode] = useState<ActionMode>("add");
+
   // Form state for new override
   const [newOverride, setNewOverride] = useState({
-    isAvailable: true,
     startTime: "09:00",
     endTime: "10:00",
     notes: "",
@@ -68,18 +71,25 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
     if (!selectedDate) return;
 
     const dateStr = format(selectedDate, "yyyy-MM-dd");
+    const isAvailable = actionMode === "add";
+    const isRemoveSlot = actionMode === "remove";
 
     const insertData: any = {
       provider_id: providerId,
       override_date: dateStr,
-      is_available: newOverride.isAvailable,
+      is_available: isAvailable,
       timezone,
       notes: newOverride.notes || null,
     };
 
-    if (newOverride.isAvailable) {
+    if (isAvailable || isRemoveSlot) {
       insertData.start_time = newOverride.startTime;
       insertData.end_time = newOverride.endTime;
+    }
+
+    // For "remove" mode, mark as unavailable but with specific times
+    if (isRemoveSlot) {
+      insertData.is_available = false;
     }
 
     const { error } = await supabase.from("provider_date_overrides").insert(insertData);
@@ -87,8 +97,9 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
     if (error) {
       toast({ title: "Error", description: error.message.includes("unique") ? "A slot with that time already exists for this date." : "Failed to save override.", variant: "destructive" });
     } else {
-      toast({ title: newOverride.isAvailable ? "Available slot added" : "Day marked unavailable" });
-      setNewOverride({ isAvailable: true, startTime: "09:00", endTime: "10:00", notes: "" });
+      const msg = actionMode === "add" ? "Available slot added" : actionMode === "remove" ? "Time slot removed" : "Day marked unavailable";
+      toast({ title: msg });
+      setNewOverride({ startTime: "09:00", endTime: "10:00", notes: "" });
       loadOverrides();
     }
   };
@@ -181,6 +192,14 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
                                 {o.start_time?.slice(0, 5)} – {o.end_time?.slice(0, 5)}
                               </span>
                             </>
+                          ) : o.start_time ? (
+                            <>
+                              <Badge variant="secondary" className="text-xs">Slot Removed</Badge>
+                              <span className="text-sm flex items-center gap-1 line-through text-muted-foreground">
+                                <Clock className="h-3 w-3" />
+                                {o.start_time?.slice(0, 5)} – {o.end_time?.slice(0, 5)}
+                              </span>
+                            </>
                           ) : (
                             <Badge variant="destructive" className="text-xs flex items-center gap-1">
                               <Ban className="h-3 w-3" /> Unavailable All Day
@@ -198,15 +217,34 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
 
                 {/* Add new override form */}
                 <div className="p-4 bg-muted/50 rounded-lg space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Switch
-                      checked={newOverride.isAvailable}
-                      onCheckedChange={(v) => setNewOverride({ ...newOverride, isAvailable: v })}
-                    />
-                    <Label>{newOverride.isAvailable ? "Add available time slot" : "Mark as unavailable"}</Label>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      variant={actionMode === "add" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setActionMode("add")}
+                      className="gap-1"
+                    >
+                      <Plus className="h-3 w-3" /> Add Available Time Slot
+                    </Button>
+                    <Button
+                      variant={actionMode === "remove" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setActionMode("remove")}
+                      className="gap-1"
+                    >
+                      <Clock className="h-3 w-3" /> Remove Available Time Slot
+                    </Button>
+                    <Button
+                      variant={actionMode === "block" ? "destructive" : "outline"}
+                      size="sm"
+                      onClick={() => setActionMode("block")}
+                      className="gap-1"
+                    >
+                      <Ban className="h-3 w-3" /> Block Entire Day
+                    </Button>
                   </div>
 
-                  {newOverride.isAvailable && (
+                  {actionMode !== "block" && (
                     <div className="flex gap-3">
                       <div className="space-y-1">
                         <Label className="text-xs">Start</Label>
@@ -229,6 +267,14 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
                     </div>
                   )}
 
+                  {actionMode === "block" && (
+                    <p className="text-sm text-muted-foreground">This will mark the entire day as unavailable, overriding any recurring schedule.</p>
+                  )}
+
+                  {actionMode === "remove" && (
+                    <p className="text-sm text-muted-foreground">This will remove a specific recurring time slot for this date only.</p>
+                  )}
+
                   <div className="space-y-1">
                     <Label className="text-xs">Notes (optional)</Label>
                     <Input
@@ -240,7 +286,7 @@ const ProviderDateCalendar = ({ providerId, timezone }: ProviderDateCalendarProp
 
                   <Button onClick={addOverride} size="sm" className="gap-1">
                     <Plus className="h-4 w-4" />
-                    {newOverride.isAvailable ? "Add Time Slot" : "Mark Unavailable"}
+                    {actionMode === "add" ? "Add Time Slot" : actionMode === "remove" ? "Remove Time Slot" : "Block Day"}
                   </Button>
                 </div>
               </div>
