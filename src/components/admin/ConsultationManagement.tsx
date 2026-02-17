@@ -307,7 +307,7 @@ export const ConsultationManagement = () => {
                       <Button size="sm" variant="outline" onClick={() => setSelectedProvider(p)} className="gap-1">
                         <Eye className="h-3 w-3" />View
                       </Button>
-                      <a href={`/consultation-provider-dashboard?admin_view=${p.user_id}`} target="_blank" rel="noopener noreferrer">
+                      <a href={`/consultation-provider-dashboard?admin_view=${p.user_id}`}>
                         <Button size="sm" variant="outline" className="gap-1">
                           <ExternalLink className="h-3 w-3" />Dashboard
                         </Button>
