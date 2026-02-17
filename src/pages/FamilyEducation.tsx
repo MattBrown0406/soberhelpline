@@ -395,7 +395,7 @@ export default function FamilyEducation() {
                     <span className="text-sm font-medium">12 Guided Meditations</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-logo-green" />
+                    <Brain className="h-5 w-5 text-logo-green" />
                     <span className="text-sm font-medium">6 AI Tools</span>
                   </div>
                 </div>
