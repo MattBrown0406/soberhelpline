@@ -21,13 +21,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, Shield, AlertTriangle, FileText, Video, CalendarCheck, UserPlus } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
 import { FamilyMemberManagement } from "@/components/admin/FamilyMemberManagement";
-import { ModeratorManagement } from "@/components/admin/ModeratorManagement";
-import { MemberWarningsManagement } from "@/components/admin/MemberWarningsManagement";
 import { GuideAnalytics } from "@/components/admin/GuideAnalytics";
 import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
 import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
@@ -192,14 +190,6 @@ const Admin = () => {
             <TabsTrigger value="family-members" className="gap-2">
               <Users className="h-4 w-4" />
               Family Members
-            </TabsTrigger>
-            <TabsTrigger value="moderators" className="gap-2">
-              <Shield className="h-4 w-4" />
-              Moderators
-            </TabsTrigger>
-            <TabsTrigger value="warnings" className="gap-2">
-              <AlertTriangle className="h-4 w-4" />
-              Warnings
             </TabsTrigger>
             <TabsTrigger value="analytics" className="gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -385,33 +375,6 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="moderators">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="h-5 w-5" />
-                  Moderator Management
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ModeratorManagement />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="warnings">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5" />
-                  Member Warnings & Removal Recommendations
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <MemberWarningsManagement />
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value="analytics">
             <Card>
