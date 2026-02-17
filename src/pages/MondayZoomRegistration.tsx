@@ -39,6 +39,9 @@ export default function MondayZoomRegistration() {
     question: "",
     requestFollowUp: false,
     consentEmailList: false,
+    preferredContactDate: "",
+    preferredContactTime: "",
+    preferredTimezone: "America/Los_Angeles",
   });
 
   useEffect(() => {
@@ -147,6 +150,9 @@ export default function MondayZoomRegistration() {
         request_follow_up: formData.requestFollowUp,
         consent_email_list: formData.consentEmailList,
         meeting_date: meetingDate,
+        preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
+        preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
+        preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
       });
 
       if (error) throw error;
@@ -456,7 +462,7 @@ export default function MondayZoomRegistration() {
                     {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
                   </div>
 
-                  <div className="space-y-4 pt-2">
+                   <div className="space-y-4 pt-2">
                     <div className="flex items-start space-x-3">
                       <Checkbox
                         id="followUp"
@@ -469,6 +475,52 @@ export default function MondayZoomRegistration() {
                         I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
                       </Label>
                     </div>
+
+                    {formData.requestFollowUp && (
+                      <div className="ml-6 space-y-4 p-4 rounded-lg border border-border bg-muted/30">
+                        <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="contactDate">Preferred Date</Label>
+                            <Input
+                              id="contactDate"
+                              type="date"
+                              min={new Date().toISOString().split("T")[0]}
+                              value={formData.preferredContactDate}
+                              onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="contactTime">Preferred Time</Label>
+                            <Input
+                              id="contactTime"
+                              type="time"
+                              value={formData.preferredContactTime}
+                              onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="timezone">Your Timezone</Label>
+                          <select
+                            id="timezone"
+                            value={formData.preferredTimezone}
+                            onChange={(e) => setFormData((p) => ({ ...p, preferredTimezone: e.target.value }))}
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          >
+                            <option value="America/New_York">Eastern (ET)</option>
+                            <option value="America/Chicago">Central (CT)</option>
+                            <option value="America/Denver">Mountain (MT)</option>
+                            <option value="America/Los_Angeles">Pacific (PT)</option>
+                            <option value="America/Anchorage">Alaska (AKT)</option>
+                            <option value="Pacific/Honolulu">Hawaii (HT)</option>
+                            <option value="America/Phoenix">Arizona (MST - no DST)</option>
+                            <option value="America/Halifax">Atlantic (AT)</option>
+                            <option value="America/St_Johns">Newfoundland (NT)</option>
+                          </select>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="flex items-start space-x-3">
                       <Checkbox
