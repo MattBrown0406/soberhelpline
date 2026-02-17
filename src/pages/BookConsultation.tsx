@@ -173,10 +173,10 @@ const BookConsultation = () => {
         .eq("is_active", true)
         .order("day_of_week")
         .order("start_time"),
+      // Fetch ALL confirmed/pending bookings across ALL providers for Zoom conflict detection
       supabase
         .from("consultation_bookings")
-        .select("booking_date, start_time, end_time")
-        .eq("provider_id", provider.id)
+        .select("booking_date, start_time, end_time, provider_id, timezone")
         .in("status", ["confirmed", "pending"]),
     ]);
     setAvailability(availRes.data || []);
@@ -245,10 +245,26 @@ const BookConsultation = () => {
         const providerStartTime = `${slotStartH}:${slotStartM}:00`;
         const providerEndTime = `${slotEndH}:${slotEndM}:00`;
 
-        // Check if this slot is already booked (in provider timezone)
-        const isBooked = bookedSlots.some(
-          (b) => b.booking_date === dateStr && b.start_time === providerStartTime
-        );
+        // Check if this slot overlaps with ANY existing booking across all providers (shared Zoom account)
+        const slotStartMin = parseInt(slotStartH) * 60 + parseInt(slotStartM);
+        const slotEndMin = slotStartMin + duration;
+        const isBooked = bookedSlots.some((b) => {
+          if (b.booking_date !== dateStr) return false;
+          // Convert booked slot times to provider timezone for comparison
+          const bookedTz = (b as any).timezone || providerTz;
+          let bookedStartStr = b.start_time?.slice(0, 5) || "00:00";
+          let bookedEndStr = b.end_time?.slice(0, 5) || "01:00";
+          if (bookedTz !== providerTz) {
+            bookedStartStr = convertTime(bookedStartStr, dateStr, bookedTz, providerTz).time;
+            bookedEndStr = convertTime(bookedEndStr, dateStr, bookedTz, providerTz).time;
+          }
+          const [bsH, bsM] = bookedStartStr.split(":").map(Number);
+          const [beH, beM] = bookedEndStr.split(":").map(Number);
+          const bookedStartMin = bsH * 60 + bsM;
+          const bookedEndMin = beH * 60 + beM;
+          // Check for any overlap
+          return slotStartMin < bookedEndMin && slotEndMin > bookedStartMin;
+        });
         if (!isBooked) {
           // Convert to client timezone for display
           const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
