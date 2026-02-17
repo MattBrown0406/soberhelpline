@@ -384,7 +384,7 @@ export default function FamilyEducation() {
                 <div className="flex flex-wrap justify-center gap-6 mt-6">
                   <div className="flex items-center gap-2">
                     <Target className="h-5 w-5 text-logo-green" />
-                    <span className="text-sm font-medium">60+ Resources</span>
+                    <span className="text-sm font-medium">62 Resources</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Activity className="h-5 w-5 text-logo-green" />
@@ -392,7 +392,11 @@ export default function FamilyEducation() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Headphones className="h-5 w-5 text-logo-green" />
-                    <span className="text-sm font-medium">6 Guided Meditations</span>
+                    <span className="text-sm font-medium">12 Guided Meditations</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-logo-green" />
+                    <span className="text-sm font-medium">6 AI Tools</span>
                   </div>
                 </div>
               </div>
