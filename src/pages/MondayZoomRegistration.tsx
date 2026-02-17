@@ -210,51 +210,33 @@ export default function MondayZoomRegistration() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-          </div>
-        </header>
-        <main className="container py-16 text-center">
-          <Video className="h-12 w-12 text-primary mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-foreground mb-4">Member Access Required</h1>
-          <p className="text-muted-foreground mb-6">Please log in to access the Monday night Zoom meeting registration.</p>
-          <div className="flex gap-4 justify-center">
-            <Link to="/auth">
-              <Button>Log In</Button>
-            </Link>
-            <Link to="/family-membership">
-              <Button variant="outline">Become a Member</Button>
-            </Link>
-          </div>
-        </main>
+      <div className="container py-16 text-center">
+        <Video className="h-12 w-12 text-primary mx-auto mb-4" />
+        <h1 className="text-2xl font-bold text-foreground mb-4">Member Access Required</h1>
+        <p className="text-muted-foreground mb-6">Please log in to access the Monday night Zoom meeting registration.</p>
+        <div className="flex gap-4 justify-center">
+          <Link to="/auth">
+            <Button>Log In</Button>
+          </Link>
+          <Link to="/family-membership">
+            <Button variant="outline">Become a Member</Button>
+          </Link>
+        </div>
       </div>
     );
   }
 
   if (!hasMembership) {
     return (
-      <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-          </div>
-        </header>
-        <main className="container py-16 text-center">
-          <Video className="h-12 w-12 text-primary mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-foreground mb-4">Premium Members Only</h1>
-          <p className="text-muted-foreground mb-6">
-            The Monday night family support Zoom meeting is available exclusively to premium members.
-          </p>
-          <Link to="/family-membership">
-            <Button size="lg">Become a Member - $14.99/month</Button>
-          </Link>
-        </main>
+      <div className="container py-16 text-center">
+        <Video className="h-12 w-12 text-primary mx-auto mb-4" />
+        <h1 className="text-2xl font-bold text-foreground mb-4">Premium Members Only</h1>
+        <p className="text-muted-foreground mb-6">
+          The Monday night family support Zoom meeting is available exclusively to premium members.
+        </p>
+        <Link to="/family-membership">
+          <Button size="lg">Become a Member - $14.99/month</Button>
+        </Link>
       </div>
     );
   }
@@ -262,52 +244,43 @@ export default function MondayZoomRegistration() {
   if (submitted) {
 
     return (
-      <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-          </div>
-        </header>
-        <main className="container py-16 max-w-2xl mx-auto text-center">
-          <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-foreground mb-4">You're Registered!</h1>
-          <p className="text-muted-foreground text-lg mb-8">
-            Thank you for registering for the Monday night family support Zoom meeting. 
-            When it's time, join directly from this page — no need to leave the site.
-          </p>
+      <div className="container py-16 max-w-2xl mx-auto text-center">
+        <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
+        <h1 className="text-3xl font-bold text-foreground mb-4">You're Registered!</h1>
+        <p className="text-muted-foreground text-lg mb-8">
+          Thank you for registering for the Monday night family support Zoom meeting. 
+          When it's time, join directly from this page — no need to leave the site.
+        </p>
 
-          {meetingInfo ? (
-            <div className="space-y-4">
-              <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
-                <Button size="lg" className="gap-2">
-                  <Monitor className="h-5 w-5" />
-                  Join Monday Night Meeting
-                </Button>
-              </Link>
-              <p className="text-sm text-muted-foreground">
-                The meeting is every Monday at 6:00 PM PST. You can join up to 30 minutes early.
-              </p>
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              You'll receive the meeting details via email before the meeting.
-            </p>
-          )}
-
-          <div className="flex gap-4 justify-center mt-8">
-            <Link to="/family-support">
-              <Button variant="outline">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Family Support
+        {meetingInfo ? (
+          <div className="space-y-4">
+            <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
+              <Button size="lg" className="gap-2">
+                <Monitor className="h-5 w-5" />
+                Join Monday Night Meeting
               </Button>
             </Link>
-            <Link to="/family-education">
-              <Button variant="outline">Explore Education Resources</Button>
-            </Link>
+            <p className="text-sm text-muted-foreground">
+              The meeting is every Monday at 6:00 PM PST. You can join up to 30 minutes early.
+            </p>
           </div>
-        </main>
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            You'll receive the meeting details via email before the meeting.
+          </p>
+        )}
+
+        <div className="flex gap-4 justify-center mt-8">
+          <Link to="/family-support">
+            <Button variant="outline">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Family Support
+            </Button>
+          </Link>
+          <Link to="/family-education">
+            <Button variant="outline">Explore Education Resources</Button>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -320,18 +293,6 @@ export default function MondayZoomRegistration() {
       />
 
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-              <Phone className="h-4 w-4" />
-              (541) 241-5886
-            </a>
-          </div>
-        </header>
-
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-wrap items-center gap-3 mb-6">
