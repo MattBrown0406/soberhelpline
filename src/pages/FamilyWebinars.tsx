@@ -259,6 +259,16 @@ export default function FamilyWebinars() {
                   Family Coaching
                 </Button>
               </Link>
+              <Link to="/family-education">
+                <Button variant="outline" size="sm" className="gap-2">
+                  Family Education
+                </Button>
+              </Link>
+              <Link to="/family-forum">
+                <Button variant="outline" size="sm" className="gap-2">
+                  Family Forum
+                </Button>
+              </Link>
             </div>
 
             <div className="mb-8">
