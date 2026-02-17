@@ -193,17 +193,6 @@ export default function CommunicationGuide() {
           <title>Communication Guide | Sober Helpline</title>
         </Helmet>
         <div className="min-h-screen bg-background">
-          <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
-            <div className="container flex h-16 items-center justify-between">
-              <Link to="/" className="flex items-center">
-                <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-              </Link>
-              <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-                <Phone className="h-4 w-4" />
-                (541) 241-5886
-              </a>
-            </div>
-          </header>
           <main className="container py-12">
             <Card className="max-w-md mx-auto">
               <CardHeader className="text-center">
@@ -241,18 +230,6 @@ export default function CommunicationGuide() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-              <Phone className="h-4 w-4" />
-              (541) 241-5886
-            </a>
-          </div>
-        </header>
-
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-6 print:hidden">

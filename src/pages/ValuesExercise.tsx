@@ -38,18 +38,6 @@ const ValuesExercise = () => {
       </Helmet>
       
       <div className="min-h-screen bg-background">
-        {/* Header - Hidden in print */}
-        <header className="bg-primary text-primary-foreground py-4 print:hidden">
-          <div className="container mx-auto px-4 flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a href="tel:1-800-555-0199" className="text-lg font-semibold hover:underline">
-              1-800-555-0199
-            </a>
-          </div>
-        </header>
-
         <main className="container mx-auto px-4 py-8 max-w-4xl">
           {/* Navigation - Hidden in print */}
           <div className="mb-6 flex justify-between items-center print:hidden">
