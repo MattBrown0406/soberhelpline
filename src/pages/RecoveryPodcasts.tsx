@@ -8,7 +8,7 @@ import partyWreckersLogo from "@/assets/party-wreckers-logo-2026.png";
 import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
 import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
 import primaryPurposePejLogo from "@/assets/primary-purpose-pej-logo.jpeg";
-import logo from "@/assets/logo.png";
+
 import SEOHead from "@/components/SEOHead";
 
 interface Episode {
@@ -134,17 +134,7 @@ const RecoveryPodcasts = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-6 sm:py-8 relative z-10">
-          <div className="flex justify-between items-center mb-6 sm:mb-8 gap-2">
-            <Link to="/">
-              <Button variant="ghost" size="sm" className="gap-1 sm:gap-2 text-white hover:bg-white/10 px-2 sm:px-4">
-                <ArrowLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Back to Home</span>
-                <span className="sm:hidden">Back</span>
-              </Button>
-            </Link>
-            <img src={logo} alt="Sober Helpline" className="h-12 sm:h-16 w-auto" />
-          </div>
+          <div className="container mx-auto px-4 py-6 sm:py-8 relative z-10">
 
         <div className="text-center py-6">
             <div className="inline-flex items-center justify-center gap-3 mb-4 bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full">

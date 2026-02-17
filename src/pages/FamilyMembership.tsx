@@ -19,7 +19,7 @@ import { ArrowLeft, Phone, Check, Loader2, Tag, CheckCircle2, Heart, UserCircle,
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { User, Session } from "@supabase/supabase-js";
-import logo from "@/assets/logo.png";
+
 import { usePayPalSubscription } from "@/hooks/usePayPalSubscription";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -311,17 +311,6 @@ export default function FamilyMembership() {
           <title>Membership Activated | Sober Helpline</title>
         </Helmet>
         <div className="min-h-screen bg-background">
-          <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-            <div className="container flex h-16 items-center justify-between">
-              <Link to="/" className="flex items-center">
-                <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-              </Link>
-              <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-                <Phone className="h-4 w-4" />
-                (541) 241-5886
-              </a>
-            </div>
-          </header>
           <main className="container py-12">
             <Card className="max-w-md mx-auto border-green-500">
               <CardHeader className="text-center">
@@ -359,18 +348,6 @@ export default function FamilyMembership() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-              <Phone className="h-4 w-4" />
-              (541) 241-5886
-            </a>
-          </div>
-        </header>
 
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
