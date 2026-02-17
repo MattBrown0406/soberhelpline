@@ -387,24 +387,26 @@ export default function FamilyCoaching() {
             </div>
 
             {/* Family Readiness Assessment */}
-            <Card className="mb-8 border-2 border-violet-500/30 overflow-hidden">
-              <CardHeader className="bg-gradient-to-br from-violet-50 to-transparent dark:from-violet-950/20">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-violet-500/10">
-                    <ClipboardCheck className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+            <Accordion type="single" collapsible className="mb-8">
+              <AccordionItem value="readiness" className="border-2 border-violet-500/30 rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-br from-violet-50 to-transparent dark:from-violet-950/20 [&[data-state=open]>svg]:rotate-180">
+                  <div className="flex items-start gap-3 text-left">
+                    <div className="p-2 rounded-lg bg-violet-500/10">
+                      <ClipboardCheck className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                    <div>
+                      <p className="text-lg font-semibold text-violet-700 dark:text-violet-400">Family Readiness Assessment™</p>
+                      <p className="text-sm text-muted-foreground font-normal">
+                        Not sure where to start? This quick assessment can help you determine what level of coaching may be right for your family.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle className="text-lg text-violet-700 dark:text-violet-400">Family Readiness Assessment™</CardTitle>
-                    <CardDescription>
-                      Not sure where to start? This quick assessment can help you determine what level of coaching may be right for your family.
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <FamilyReadinessAssessment />
-              </CardContent>
-            </Card>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <FamilyReadinessAssessment />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             {/* Book a Session CTA */}
             <Card className="mb-8 border-2 border-amber-500/30 overflow-hidden hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
