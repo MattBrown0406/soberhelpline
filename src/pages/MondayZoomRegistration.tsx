@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor } from "lucide-react";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -322,10 +322,32 @@ export default function MondayZoomRegistration() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
-            <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 mb-6 group">
-              <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
-              Back to Family Support
-            </Link>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 group">
+                <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
+                Back
+              </Link>
+              <div className="flex flex-wrap gap-2">
+                <Link to="/family-education">
+                  <Button variant="outline" size="sm" className="gap-2 border-logo-green/50 text-logo-green hover:bg-logo-green/10">
+                    <BookOpen className="h-4 w-4" />
+                    Education
+                  </Button>
+                </Link>
+                <Link to="/family-forum">
+                  <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+                    <MessagesSquare className="h-4 w-4" />
+                    Forum
+                  </Button>
+                </Link>
+                <Link to="/family-webinars">
+                  <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
+                    <Calendar className="h-4 w-4" />
+                    Webinars
+                  </Button>
+                </Link>
+              </div>
+            </div>
 
             {/* Hero Banner */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
