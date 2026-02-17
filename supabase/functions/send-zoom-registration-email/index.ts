@@ -94,7 +94,7 @@ serve(async (req: Request) => {
     const meetingId = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value || "";
     const passcode = settings?.find((s: any) => s.key === "monday_zoom_passcode")?.value || "";
 
-    const siteUrl = "https://soberhelpline.lovable.app";
+    const siteUrl = "https://soberhelpline.com";
     const joinUrl = meetingId
       ? `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`
       : "";

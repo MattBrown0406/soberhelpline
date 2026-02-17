@@ -151,20 +151,12 @@ export default function MondayZoomRegistration() {
 
       if (error) throw error;
 
-      // Fetch the current Zoom link
-      const { data: settingData } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key", "monday_zoom_link")
-        .maybeSingle();
-
-      // Send confirmation email with Zoom link
+      // Send confirmation email (edge function fetches meeting info from site_settings)
       try {
         await supabase.functions.invoke("send-zoom-registration-email", {
           body: {
             name: formData.name.trim(),
             email: formData.email.trim(),
-            zoomLink: settingData?.value || "",
           },
         });
       } catch (emailErr) {
@@ -275,7 +267,7 @@ export default function MondayZoomRegistration() {
                 </Button>
               </Link>
               <p className="text-sm text-muted-foreground">
-                The meeting opens every Monday at 6:00 PM PST. You can join a few minutes early.
+                The meeting is every Monday at 6:00 PM PST. You can join up to 30 minutes early.
               </p>
             </div>
           ) : (
