@@ -386,6 +386,26 @@ export default function FamilyCoaching() {
               </div>
             </div>
 
+            {/* Family Readiness Assessment */}
+            <Card className="mb-8 border-2 border-violet-500/30 overflow-hidden">
+              <CardHeader className="bg-gradient-to-br from-violet-50 to-transparent dark:from-violet-950/20">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-violet-500/10">
+                    <ClipboardCheck className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-violet-700 dark:text-violet-400">Family Readiness Assessment™</CardTitle>
+                    <CardDescription>
+                      Not sure where to start? This quick assessment can help you determine what level of coaching may be right for your family.
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <FamilyReadinessAssessment />
+              </CardContent>
+            </Card>
+
             {/* Book a Session CTA */}
             <Card className="mb-8 border-2 border-amber-500/30 overflow-hidden hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
               <CardHeader className="bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 pb-4">
@@ -477,24 +497,6 @@ export default function FamilyCoaching() {
                     Complete this confidential assessment so your coach can understand where your family is in the recovery journey. Estimated time: 12–15 minutes.
                   </p>
                   <CoachingIntakeAssessment />
-                </AccordionContent>
-              </AccordionItem>
-
-              {/* Family Readiness Assessment */}
-              <AccordionItem value="readiness" className="border-2 border-violet-500/30 rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-6 py-4 hover:no-underline bg-gradient-to-r from-violet-50 to-transparent dark:from-violet-950/20 [&[data-state=open]>svg]:rotate-180">
-                  <span className="flex items-center gap-2 text-lg font-semibold text-violet-700 dark:text-violet-400">
-                    <div className="p-1.5 rounded-lg bg-violet-500/10">
-                      <ClipboardCheck className="h-5 w-5" />
-                    </div>
-                    Family Readiness Assessment™
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground text-sm mb-6">
-                    Estimated time: 7–10 minutes &bull; Understand where your family is in your parallel recovery journey.
-                  </p>
-                  <FamilyReadinessAssessment />
                 </AccordionContent>
               </AccordionItem>
 
