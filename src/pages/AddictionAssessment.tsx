@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Phone } from "lucide-react";
-import logo from "@/assets/logo.png";
+
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
 
@@ -96,15 +96,6 @@ const AddictionAssessment = () => {
         speakableSelectors={["h1", ".assessment-intro", ".severity-result"]}
       />
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between mb-4">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <img src={logo} alt="Sober Helpline" className="w-24 md:w-32 h-auto" />
-        </div>
 
         <div className="text-center mb-4">
           <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">

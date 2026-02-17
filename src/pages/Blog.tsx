@@ -3,7 +3,7 @@ import { ArrowLeft, Phone, Calendar, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import logo from "@/assets/logo.png";
+
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
 import supportLovedOneImg from "@/assets/blog-support-loved-one.png";
@@ -9037,22 +9037,6 @@ const Blog = () => {
         </script>
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <Link to="/">
-            <Button variant="outline" className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-              <Phone className="w-5 h-5" />
-              <span className="font-medium">(541) 241-5886</span>
-            </a>
-            <img src={logo} alt="Sober Helpline" className="h-16 w-auto" />
-          </div>
-        </div>
 
         {/* Page Title */}
         <div className="text-center mb-12">

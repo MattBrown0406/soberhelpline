@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Home, ArrowLeft } from "lucide-react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Home, ArrowLeft, Phone } from "lucide-react";
 import Footer from "./Footer";
 import { useNativeBackButton } from "@/hooks/useNativeBackButton";
+import logo from "@/assets/logo.png";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,23 +26,40 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       {!isHome && (
         <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40">
-          <div className="container mx-auto px-4 flex items-center gap-2 h-12">
-            <button
-              onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
-              aria-label="Go back"
+          <div className="container mx-auto px-4 flex items-center h-14">
+            {/* Logo */}
+            <Link to="/" className="flex items-center mr-4 shrink-0">
+              <img src={logo} alt="Sober Helpline" className="h-10 w-auto" />
+            </Link>
+
+            {/* Back / Home navigation */}
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => navigate(-1)}
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
+                aria-label="Go back"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="hidden sm:inline">Back</span>
+              </button>
+              <button
+                onClick={() => navigate("/")}
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
+                aria-label="Go home"
+              >
+                <Home className="w-4 h-4" />
+                <span className="hidden sm:inline">Home</span>
+              </button>
+            </div>
+
+            {/* Phone number */}
+            <a
+              href="tel:541-241-5886"
+              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
             >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Back</span>
-            </button>
-            <button
-              onClick={() => navigate("/")}
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
-              aria-label="Go home"
-            >
-              <Home className="w-4 h-4" />
-              <span className="hidden sm:inline">Home</span>
-            </button>
+              <Phone className="h-4 w-4" />
+              <span className="hidden sm:inline">(541) 241-5886</span>
+            </a>
           </div>
         </div>
       )}

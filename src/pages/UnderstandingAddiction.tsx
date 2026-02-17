@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb, Users, TrendingUp } from "lucide-react";
-import logo from "@/assets/logo.png";
+
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
 
@@ -35,26 +35,6 @@ export default function UnderstandingAddiction() {
         speakableSelectors={["h1", "main p:first-of-type", "section h2"]}
       />
 
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/" className="flex items-center gap-2 text-primary hover:text-primary/80">
-                <ArrowLeft className="h-4 w-4" />
-                Back
-              </Link>
-            </div>
-            <Link to="/">
-              <img src={logo} alt="Sober Helpline" className="h-12 md:h-16" />
-            </Link>
-            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80">
-              <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">(541) 241-5886</span>
-            </a>
-          </div>
-        </div>
-      </header>
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">

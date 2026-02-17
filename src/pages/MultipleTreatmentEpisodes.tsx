@@ -4,7 +4,7 @@ import { Phone, ArrowLeft, Printer, AlertTriangle, Heart, Target, Shield, Refres
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import logo from "@/assets/logo.png";
+
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 
 export default function MultipleTreatmentEpisodes() {
@@ -21,17 +21,6 @@ export default function MultipleTreatmentEpisodes() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur print:hidden">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a href="tel:541-241-5886" className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold">
-              <Phone className="h-4 w-4" />
-              (541) 241-5886
-            </a>
-          </div>
-        </header>
 
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
@@ -51,7 +40,7 @@ export default function MultipleTreatmentEpisodes() {
 
             {/* Printable Header */}
             <div className="hidden print:block mb-6">
-              <img src={logo} alt="Sober Helpline" className="h-10 w-auto mb-2" />
+              <p className="text-lg font-bold">Sober Helpline</p>
               <p className="text-sm text-muted-foreground">(541) 241-5886</p>
             </div>
 

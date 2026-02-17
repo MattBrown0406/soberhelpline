@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, Heart, Users, Shield, BookOpen, MessageCircle, Video, Calendar, MessagesSquare, Lock, Loader2, Presentation, FileText, Headphones, ClipboardCheck, Scale, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import logo from "@/assets/logo.png";
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
@@ -80,21 +80,6 @@ export default function FamilySupport() {
       />
 
       <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
-            </Link>
-            <a
-              href="tel:541-241-5886"
-              className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold"
-            >
-              <Phone className="h-4 w-4" />
-              (541) 241-5886
-            </a>
-          </div>
-        </header>
 
         {/* Premium Header Banner */}
         <div className="bg-primary text-primary-foreground py-4 text-center">

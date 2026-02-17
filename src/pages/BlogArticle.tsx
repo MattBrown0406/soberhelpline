@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import logo from "@/assets/logo.png";
+
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import { blogPosts, imageMap } from "./Blog";
 
@@ -190,23 +190,6 @@ const BlogArticle = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
-          <Link to="/blog">
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Back to Blog</span>
-              <span className="sm:hidden">Back</span>
-            </Button>
-          </Link>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <a href="tel:5412415886" className="flex items-center gap-1 sm:gap-2 text-foreground hover:text-primary transition-colors">
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="font-medium text-sm sm:text-base">(541) 241-5886</span>
-            </a>
-            <img src={logo} alt="Sober Helpline" className="h-12 sm:h-16 w-auto" />
-          </div>
-        </div>
 
         {/* Article */}
         <article className="max-w-3xl mx-auto">
