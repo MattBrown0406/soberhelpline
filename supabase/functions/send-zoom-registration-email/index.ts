@@ -68,7 +68,7 @@ serve(async (req: Request) => {
       });
     }
 
-    const { name, email, zoomLink } = await req.json();
+    const { name, email } = await req.json();
 
     if (!name || !email) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -80,24 +80,43 @@ serve(async (req: Request) => {
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
 
-    const hasLink = zoomLink && zoomLink.trim() !== "";
+    // Fetch meeting credentials from site_settings to build in-site join link
+    const adminSupabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+
+    const { data: settings } = await adminSupabase
+      .from("site_settings")
+      .select("key, value")
+      .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode"]);
+
+    const meetingId = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value || "";
+    const passcode = settings?.find((s: any) => s.key === "monday_zoom_passcode")?.value || "";
+
+    const siteUrl = "https://soberhelpline.lovable.app";
+    const joinUrl = meetingId
+      ? `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`
+      : "";
+
+    const hasLink = joinUrl !== "";
 
     const zoomSection = hasLink
       ? `
         <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
-          <h2 style="margin: 0 0 10px 0; color: #166534;">🎥 Your Zoom Meeting Link</h2>
-          <p style="margin: 0 0 15px 0; color: #15803d;">Join us Monday evening using the link below:</p>
-          <a href="${escapeHtml(zoomLink)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
-            Join Zoom Meeting
+          <h2 style="margin: 0 0 10px 0; color: #166534;">🎥 Join the Meeting</h2>
+          <p style="margin: 0 0 15px 0; color: #15803d;">Join us Monday evening using the link below — no Zoom app needed:</p>
+          <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+            Join Meeting on SoberHelpline.com
           </a>
           <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
-            Link: ${escapeHtml(zoomLink)}
+            The meeting opens directly in your browser on our website.
           </p>
         </div>
       `
       : `
         <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <p style="margin: 0; color: #854d0e;">The Zoom meeting link will be sent to you before the meeting. Please check your email on Monday.</p>
+          <p style="margin: 0; color: #854d0e;">The meeting link will be sent to you before the meeting. Please check your email on Monday.</p>
         </div>
       `;
 
