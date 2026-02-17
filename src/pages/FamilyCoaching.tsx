@@ -454,22 +454,22 @@ export default function FamilyCoaching() {
                     </thead>
                     <tbody>
                       <tr className="border-b border-border/50 bg-amber-50/50 dark:bg-amber-950/20">
-                        <td className="py-3 px-4 font-medium text-amber-700 dark:text-amber-400">Hourly Session</td>
+                        <td className="py-3 px-4 font-medium text-amber-700 dark:text-amber-400">Hourly Session<span className="block text-xs font-normal text-muted-foreground mt-0.5">1 session</span></td>
                         <td className="py-3 px-4 text-muted-foreground">Specific questions, check-ins, or single-issue guidance</td>
                         <td className="py-3 px-4 text-muted-foreground">Targeted support on one concern at a time</td>
                       </tr>
                       <tr className="border-b border-border/50 bg-red-50/50 dark:bg-red-950/20">
-                        <td className="py-3 px-4 font-medium text-red-700 dark:text-red-400">Emergency Game Plan™</td>
+                        <td className="py-3 px-4 font-medium text-red-700 dark:text-red-400">Emergency Game Plan™<span className="block text-xs font-normal text-muted-foreground mt-0.5">1 session</span></td>
                         <td className="py-3 px-4 text-muted-foreground">Panic, chaos, fear, immediate crisis</td>
                         <td className="py-3 px-4 text-muted-foreground">Emotional regulation, crisis boundaries, 7–14 day action plan</td>
                       </tr>
                       <tr className="border-b border-border/50 bg-emerald-50/50 dark:bg-emerald-950/20">
-                        <td className="py-3 px-4 font-medium text-emerald-700 dark:text-emerald-400">Family Stabilization Plan™</td>
+                        <td className="py-3 px-4 font-medium text-emerald-700 dark:text-emerald-400">Family Stabilization Plan™<span className="block text-xs font-normal text-muted-foreground mt-0.5">4 sessions</span></td>
                         <td className="py-3 px-4 text-muted-foreground">Enabling cycles, guilt, loss of control, family conflict</td>
                         <td className="py-3 px-4 text-muted-foreground">System assessment, boundary implementation, communication reset</td>
                       </tr>
                       <tr className="bg-blue-50/50 dark:bg-blue-950/20">
-                        <td className="py-3 px-4 font-medium text-blue-700 dark:text-blue-400">Parallel Recovery Program™</td>
+                        <td className="py-3 px-4 font-medium text-blue-700 dark:text-blue-400">Parallel Recovery Program™<span className="block text-xs font-normal text-muted-foreground mt-0.5">12 sessions</span></td>
                         <td className="py-3 px-4 text-muted-foreground">Long-term instability, hypervigilance, identity loss</td>
                         <td className="py-3 px-4 text-muted-foreground">Detachment with love, accountability structures, sustainable independence</td>
                       </tr>
