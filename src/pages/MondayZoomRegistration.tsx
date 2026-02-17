@@ -163,6 +163,20 @@ export default function MondayZoomRegistration() {
         console.error("Email sending failed (registration still saved):", emailErr);
       }
 
+      // Add to Mailchimp if consent given (handles duplicates automatically)
+      if (formData.consentEmailList) {
+        try {
+          const nameParts = formData.name.trim().split(" ");
+          const firstName = nameParts[0] || "";
+          const lastName = nameParts.slice(1).join(" ") || "";
+          await supabase.functions.invoke("add-to-mailchimp", {
+            body: { email: formData.email.trim(), firstName, lastName },
+          });
+        } catch (mcErr) {
+          console.error("Mailchimp add failed (registration still saved):", mcErr);
+        }
+      }
+
       setSubmitted(true);
       toast({
         title: "Registration Submitted!",
