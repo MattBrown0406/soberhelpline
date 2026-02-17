@@ -95,6 +95,40 @@ async function processPayPalPayout(paypalEmail: string, amount: number, bookingI
   return payoutData.batch_header?.payout_batch_id;
 }
 
+async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessions: number, provider: any) {
+  const remaining = plan.total_sessions - completedSessions;
+  const planLabel = plan.plan_type === 'parallel-recovery' ? 'Parallel Recovery Program™' : 'Family Stabilization Plan™';
+  const bookingUrl = 'https://soberhelpline.lovable.app/book-consultation?plan=' + (plan.plan_type === 'parallel-recovery' ? 'parallel' : 'stabilization');
+
+  await sendEmail(booking.client_email, `Your Session is Complete — ${remaining} Session${remaining !== 1 ? 's' : ''} Remaining`, `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
+      <div style="background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%); padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
+        <h1 style="color: white; margin: 0; font-size: 22px;">We Hope You Got More Than Expected</h1>
+      </div>
+      <div style="padding: 30px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0 0 12px 12px;">
+        <p>Hi ${booking.client_name},</p>
+        <p>Thank you for showing up today — that takes real courage. We hope your session with ${provider.full_name} gave you more clarity, more confidence, and more direction than you expected walking in.</p>
+        
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0;">
+          <h2 style="color: #166534; margin: 0 0 8px; font-size: 18px;">📊 Your Progress</h2>
+          <p style="margin: 4px 0;"><strong>Plan:</strong> ${planLabel}</p>
+          <p style="margin: 4px 0;"><strong>Sessions Completed:</strong> ${completedSessions} of ${plan.total_sessions}</p>
+          <p style="margin: 4px 0;"><strong>Sessions Remaining:</strong> ${remaining}</p>
+        </div>
+
+        <div style="background: #eff6ff; border: 1px solid #93c5fd; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+          <h2 style="color: #1e40af; margin: 0 0 12px; font-size: 18px;">📅 Book Your Next Session</h2>
+          <p style="margin: 0 0 16px; color: #374151;">Keep your momentum going. The work you're doing matters — for you and for your family.</p>
+          <a href="${bookingUrl}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Schedule Next Session</a>
+        </div>
+
+        <p style="color: #6b7280; font-size: 14px;">If you have any questions or need to discuss anything before your next session, call us at <strong>(541) 241-5886</strong>.</p>
+        <p style="color: #6b7280; font-size: 12px; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
+      </div>
+    </div>
+  `);
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
@@ -156,6 +190,11 @@ Deno.serve(async (req) => {
             const newCompleted = (plan.completed_sessions || 0) + 1;
             const newStatus = newCompleted >= plan.total_sessions ? 'completed' : 'active';
             await adminClient.from('coaching_plans').update({ completed_sessions: newCompleted, status: newStatus }).eq('id', plan.id);
+
+            // Send follow-up email for multi-session plans with remaining sessions
+            if (newCompleted < plan.total_sessions) {
+              await sendSessionFollowUpEmail(booking, plan, newCompleted, provider);
+            }
           }
         }
         return new Response(JSON.stringify({ success: true, skipped: true, reason: 'Owner provider - no payout needed' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
@@ -184,6 +223,11 @@ Deno.serve(async (req) => {
               status: newStatus,
             })
             .eq('id', plan.id);
+
+          // Send follow-up email for multi-session plans with remaining sessions
+          if (newCompleted < plan.total_sessions) {
+            await sendSessionFollowUpEmail(booking, plan, newCompleted, provider);
+          }
         }
       }
 
