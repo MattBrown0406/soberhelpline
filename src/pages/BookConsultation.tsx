@@ -64,6 +64,19 @@ const formatTime12h = (time24: string) => {
 };
 
 // Intake questionnaire sections
+const SESSION_REASONS = [
+  "Emergency Game Plan",
+  "Family Intervention Coaching",
+  "Finding a Treatment Program",
+  "Following Aftercare Plans",
+  "Boundaries and Enabling",
+  "Family Communication Strategies",
+  "Relapse Response Planning",
+  "Understanding Addiction & Mental Health",
+  "Supporting a Loved One in Recovery",
+  "Other",
+];
+
 const intakeSections = [
   {
     title: "Contact Information",
@@ -71,6 +84,7 @@ const intakeSections = [
       { id: "client_name", label: "Your Full Name", type: "text", required: true },
       { id: "client_email", label: "Email Address", type: "email", required: true },
       { id: "client_phone", label: "Phone Number", type: "tel", required: false },
+      { id: "session_reason", label: "Primary Reason for This Session", type: "select", required: true, options: SESSION_REASONS, singleSessionOnly: true },
       { id: "relationship", label: "Your Relationship to the Individual", type: "select", required: true, options: ["Parent", "Spouse/Partner", "Adult Child", "Sibling", "Close Friend", "Employer", "Other"] },
     ],
   },
@@ -176,7 +190,8 @@ const BookConsultation = () => {
 
   const validateSection = (sectionIndex: number) => {
     const section = intakeSections[sectionIndex];
-    for (const field of section.fields) {
+    const visibleFields = section.fields.filter((f) => !((f as any).singleSessionOnly && isMultiSession));
+    for (const field of visibleFields) {
       if (field.required && !intakeData[field.id]?.trim()) {
         toast({ title: "Required field", description: `Please fill in "${field.label}"`, variant: "destructive" });
         return false;
@@ -552,7 +567,7 @@ const BookConsultation = () => {
                 <CardDescription>Section {step - 1} of 3</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {intakeSections[step - 2].fields.map((field) => (
+                {intakeSections[step - 2].fields.filter((f: any) => !(f.singleSessionOnly && isMultiSession)).map((field: any) => (
                   <div key={field.id} className="space-y-2">
                     <Label htmlFor={field.id}>{field.label} {field.required && "*"}</Label>
                     {field.type === "select" ? (
