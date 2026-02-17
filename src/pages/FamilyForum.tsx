@@ -463,6 +463,12 @@ export default function FamilyForum() {
                   Family Coaching
                 </Button>
               </Link>
+              <Link to="/monday-zoom-registration">
+                <Button variant="default" className="gap-2 bg-blue-600 hover:bg-blue-600/90 text-white">
+                  <Video className="h-4 w-4" />
+                  Monday Night Zoom
+                </Button>
+              </Link>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
