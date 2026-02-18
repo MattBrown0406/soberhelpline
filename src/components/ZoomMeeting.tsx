@@ -100,7 +100,6 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <img src={logo} alt="Sober Helpline" className="h-20 md:h-24 object-contain" />
 
       {status === "idle" && (
         <div className="flex flex-col items-center gap-4 p-8 bg-muted/30 rounded-xl border w-full">
@@ -157,9 +156,12 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         className={`w-full min-h-[500px] rounded-xl overflow-hidden border-2 border-primary/30 bg-black ${status !== "joined" ? "hidden" : ""}`}
       />
 
-      <div className="text-center">
-        <p className="text-xl md:text-2xl font-bold text-foreground">Leave the Chaos Behind.</p>
-        <p className="text-xl md:text-2xl font-bold text-primary">Find Clarity Ahead.</p>
+      <div className="flex flex-col md:flex-row items-center gap-4 mt-2">
+        <img src={logo} alt="Sober Helpline" className="h-16 md:h-20 object-contain" />
+        <div className="text-center md:text-left">
+          <p className="text-xl md:text-2xl font-bold text-foreground">Leave the Chaos Behind.</p>
+          <p className="text-xl md:text-2xl font-bold text-primary">Find Clarity Ahead.</p>
+        </div>
       </div>
     </div>
   );
