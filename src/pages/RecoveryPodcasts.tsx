@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import partyWreckersLogo from "@/assets/party-wreckers-logo-2026.png";
 import whenGodIntervenesLogo from "@/assets/when-god-intervenes-logo.jpeg";
-import unbrokenPodcastLogo from "@/assets/unbroken-podcast-logo.png";
+
 import primaryPurposePejLogo from "@/assets/primary-purpose-pej-logo.jpeg";
 
 import SEOHead from "@/components/SEOHead";
@@ -31,16 +31,6 @@ const podcasts = [
     accentColor: "bg-purple-500",
     applePodcastsUrl: "https://podcasts.apple.com/us/podcast/the-party-wreckers/id1611904917",
     spotifyUrl: "https://open.spotify.com/show/4YJLvnFuZr5EkcGs9b47fn?si=630de0950ea34b41",
-  },
-  {
-    name: "The Unbroken with Sam Davis",
-    description: "Inspiring stories and conversations about recovery, personal growth, and overcoming life's challenges.",
-    host: "Sam Davis",
-    link: "https://manroadmedia.com/",
-    rssFeed: "https://feed.podbean.com/Manroadmedia/feed.xml",
-    logo: unbrokenPodcastLogo,
-    gradient: "from-cyan-500 via-blue-500 to-purple-600",
-    accentColor: "bg-cyan-500",
   },
   {
     name: "When God Intervenes",
@@ -215,7 +205,7 @@ const RecoveryPodcasts = () => {
                             </Button>
                           </a>
                         )}
-                        {podcast.name !== "The Unbroken with Sam Davis" && podcast.link && (
+                        {podcast.link && (
                           <a 
                             href={podcast.link} 
                             target="_blank" 
