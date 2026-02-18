@@ -56,6 +56,9 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
 
       const { signature, sdkKey } = response.data;
 
+      // Set joined before calling join so the container is visible
+      setStatus("joined");
+
       // Join the meeting
       await client.join({
         signature,
@@ -64,8 +67,6 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         password,
         userName,
       });
-
-      setStatus("joined");
     } catch (err: any) {
       console.error("Zoom meeting error:", err);
       setErrorMessage(err.message || "Failed to join meeting");
