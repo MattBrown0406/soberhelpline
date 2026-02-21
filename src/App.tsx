@@ -154,6 +154,7 @@ const App = () => (
             <Route path="/understanding-relapse-process-not-event" element={<BlogArticle />} />
             <Route path="/personality-changes-in-addiction" element={<BlogArticle />} />
             <Route path="/triggers-explained-addiction" element={<BlogArticle />} />
+            <Route path="/sleep-and-addiction-recovery" element={<BlogArticle />} />
             <Route path="/addiction-assessment" element={<AddictionAssessment />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/family-support" element={<FamilySupport />} />
