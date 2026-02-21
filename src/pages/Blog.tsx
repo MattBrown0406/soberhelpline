@@ -87,12 +87,195 @@ import sobrietyVsRecoveryFamiliesImg from "@/assets/blog-sobriety-vs-recovery-fa
 import relapseProcessStagesGuideImg from "@/assets/blog-relapse-process-stages-guide.png";
 import personalityChangesAddictionImg from "@/assets/blog-personality-changes-addiction.png";
 import triggersExplainedImg from "@/assets/blog-triggers-explained.png";
+import sleepAddictionRecoveryImg from "@/assets/blog-sleep-addiction-recovery.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 86,
+    title: "Sleep and Addiction: Why Disrupted Sleep Fuels Relapse Risk",
+    excerpt: "Sleep problems are one of the most overlooked relapse risk factors in addiction recovery. Insomnia, fragmented sleep, vivid dreams, and exhaustion often persist long after detox. Poor sleep increases emotional volatility, reduces impulse control, and intensifies craving. Understanding this connection helps families support recovery more effectively.",
+    author: "Sober Helpline",
+    date: "2026-02-21",
+    category: "Family Education",
+    image: sleepAddictionRecoveryImg,
+    slug: "sleep-and-addiction-recovery",
+    seoTitle: "Sleep & Addiction Recovery: Why Disrupted Sleep Fuels Relapse",
+    metaDescription: "Discover how disrupted sleep fuels relapse risk in addiction recovery. Learn why insomnia persists after detox and how families can support healthy sleep structure.",
+    keywords: ["sleep and addiction recovery", "insomnia in early recovery", "sleep deprivation relapse risk", "substance use sleep disruption", "recovery sleep cycle", "preventing relapse through sleep"],
+    content: `**Sleep and Addiction: Why Disrupted Sleep Fuels Relapse Risk**
+
+Sleep problems are one of the most overlooked relapse risk factors in addiction recovery. Insomnia, fragmented sleep, vivid dreams, and exhaustion often persist long after detox. Families may assume sleep disruption is temporary or unrelated to recovery stability. In reality, sleep and addiction recovery are deeply connected. Poor sleep increases emotional volatility, reduces impulse control, and intensifies craving. Understanding this connection helps families support recovery more effectively.
+
+**How Substances Disrupt Sleep Architecture**
+
+Different substances affect sleep in different ways:
+
+Alcohol suppresses REM sleep.
+
+Stimulants reduce total sleep time.
+
+Opioids fragment sleep cycles.
+
+Cannabis alters deep sleep patterns.
+
+While substances may initially create sedation, long-term use disrupts normal sleep architecture. The brain adapts to these disruptions. When substances are removed, sleep often becomes unstable before it improves.
+
+**Why Detox Doesn't Fix Sleep Immediately**
+
+Detox addresses physical dependence. Sleep regulation is neurological and behavioral.
+
+In early recovery, individuals frequently experience:
+
+Difficulty falling asleep
+
+Frequent waking
+
+Intense dreams or nightmares
+
+Restlessness
+
+Early morning awakening
+
+These disruptions can last weeks or even months depending on the substance and duration of use. Families often underestimate how destabilizing this can be.
+
+**Sleep Deprivation and Impulse Control**
+
+Sleep plays a critical role in executive functioning.
+
+When sleep is impaired:
+
+Decision-making weakens
+
+Emotional regulation decreases
+
+Irritability increases
+
+Stress tolerance declines
+
+Cravings intensify
+
+Sleep deprivation reduces the brain's ability to override impulsive urges. In early recovery, that vulnerability matters.
+
+**The Emotional Instability Link**
+
+Poor sleep amplifies anxiety, depression, anger, frustration, and hopelessness.
+
+Families sometimes interpret early recovery mood swings as resistance or regression. In many cases, sleep disruption is contributing significantly. Addressing sleep improves emotional stability.
+
+**The REM Rebound Effect**
+
+After alcohol or sedative use, individuals often experience REM rebound in early recovery.
+
+REM rebound can include:
+
+Intense dreams
+
+Nightmares
+
+Emotional dream content
+
+Disrupted rest
+
+These vivid dreams may increase anxiety and fear of relapse. Understanding that this phase is common can reduce panic. It is often temporary.
+
+**Why Exhaustion Increases Craving**
+
+When someone is exhausted, the brain seeks relief. Substances previously served as quick relief.
+
+In a sleep-deprived state, the brain may recall:
+
+How alcohol induced sleep
+
+How opioids numbed discomfort
+
+How stimulants masked fatigue
+
+Cravings often increase when the body is depleted. Sleep stabilization is a relapse prevention strategy.
+
+**The "I Just Can't Sleep" Frustration**
+
+Many individuals in early recovery feel discouraged by persistent insomnia.
+
+They may say:
+
+"This isn't worth it."
+"I feel worse sober."
+"I can't function like this."
+
+Families should understand: sleep often improves gradually—not instantly. Encouraging patience and structure during this phase is critical.
+
+**Healthy Sleep Structure in Recovery**
+
+Sleep stabilization often requires behavioral adjustment:
+
+Consistent bedtime and wake time
+
+Reducing screen exposure before bed
+
+Avoiding caffeine late in the day
+
+Incorporating exercise
+
+Creating a calm sleep environment
+
+Structure matters more than quick fixes. Recovery-friendly routines support neurological recalibration.
+
+**The Risk of Replacing Substances With Sleep Aids**
+
+Some individuals attempt to replace substances with over-the-counter or unmonitored sleep aids.
+
+While short-term medical guidance may be appropriate in some cases, self-medicating sleep problems can introduce new risks. Families should encourage consultation with qualified professionals rather than experimentation. Sleep support should align with long-term recovery goals.
+
+**When Sleep Issues Signal Deeper Concerns**
+
+Persistent sleep disruption may indicate:
+
+Untreated anxiety disorders
+
+Depression
+
+Trauma-related conditions
+
+Co-occurring psychiatric disorders
+
+If sleep remains severely impaired beyond early recovery, professional evaluation is warranted. Treating underlying conditions improves stability.
+
+**What Families Can Do**
+
+Families can:
+
+Avoid minimizing sleep complaints
+
+Encourage structured sleep routines
+
+Reduce late-night conflict
+
+Support healthy daily rhythms
+
+Seek professional input if insomnia persists
+
+Compassion and consistency strengthen recovery resilience.
+
+**Why Sleep Deserves More Attention**
+
+In addiction recovery, families often focus on meetings, therapy, accountability, and boundaries. Sleep is sometimes overlooked. But without adequate rest, every other recovery tool becomes harder to sustain. Sleep supports emotional regulation, cognitive clarity, and stress management. It is foundational—not optional.
+
+**A Grounded Takeaway**
+
+Sleep and addiction recovery are closely connected.
+
+Disrupted sleep increases relapse risk. Exhaustion weakens impulse control. Emotional volatility intensifies.
+
+Families who understand the role of sleep can respond with informed support rather than frustration.
+
+If sleep instability persists or worsens, professional consultation can clarify whether additional treatment is needed.
+
+Recovery requires structure. Sleep is part of that structure. Stabilizing sleep strengthens the entire recovery process.`
+  },
   {
     id: 85,
     title: "Triggers Explained: Why Certain People, Places, and Emotions Carry More Risk",
