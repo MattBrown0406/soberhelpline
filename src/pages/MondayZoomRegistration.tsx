@@ -17,7 +17,7 @@ import { z } from "zod";
 const registrationSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Please enter a valid email address").max(255),
-  phone: z.string().trim().min(1, "Phone number is required").max(20),
+  phone: z.string().trim().max(20).optional().default(""),
   question: z.string().trim().max(1000).optional().default(""),
 });
 
@@ -392,11 +392,10 @@ export default function MondayZoomRegistration() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
                     <Input
                       id="phone"
                       type="tel"
-                      required
                       placeholder="(555) 123-4567"
                       value={formData.phone}
                       onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
