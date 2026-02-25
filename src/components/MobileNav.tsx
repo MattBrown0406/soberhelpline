@@ -69,6 +69,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Understanding Addiction as a Disease
                   </Button>
                 </Link>
+                <Link to="/recovery-resources" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Find Recovery Resources
+                  </Button>
+                </Link>
               </div>
               
               <a href="#partnership" onClick={closeMenu}>
