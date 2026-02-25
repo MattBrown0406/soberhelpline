@@ -88,12 +88,271 @@ import relapseProcessStagesGuideImg from "@/assets/blog-relapse-process-stages-g
 import personalityChangesAddictionImg from "@/assets/blog-personality-changes-addiction.png";
 import triggersExplainedImg from "@/assets/blog-triggers-explained.png";
 import sleepAddictionRecoveryImg from "@/assets/blog-sleep-addiction-recovery.png";
+import attachmentStylesAddictionImg from "@/assets/blog-attachment-styles-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 87,
+    title: "Attachment Styles and Addiction: How Relationship Patterns Influence Recovery",
+    excerpt: "Addiction does not develop in a vacuum. Relationship patterns—especially attachment styles—play a powerful role in how substance use begins, escalates, and responds to treatment. Understanding attachment styles and addiction provides families with a deeper framework for navigating resistance, relapse risk, and relational repair.",
+    author: "Sober Helpline",
+    date: "2026-02-25",
+    category: "Family Education",
+    image: attachmentStylesAddictionImg,
+    slug: "attachment-styles-and-addiction",
+    seoTitle: "Attachment Styles & Addiction: Relationship Patterns in Recovery",
+    metaDescription: "Learn how attachment styles influence addiction, treatment resistance, and relapse risk. Understand anxious, avoidant, and disorganized attachment patterns in recovery.",
+    keywords: ["attachment styles and addiction", "insecure attachment addiction", "trauma bonding substance use", "anxious attachment recovery", "avoidant attachment treatment resistance", "family dynamics addiction recovery"],
+    content: `**Attachment Styles and Addiction: How Relationship Patterns Influence Recovery**
+
+Addiction does not develop in a vacuum. Relationship patterns—especially attachment styles—play a powerful role in how substance use begins, escalates, and responds to treatment. Families often focus on the substance itself, but underlying attachment insecurity can shape coping strategies, emotional regulation, and recovery engagement. Understanding attachment styles and addiction provides families with a deeper framework for navigating resistance, relapse risk, and relational repair.
+
+**What Are Attachment Styles?**
+
+Attachment theory suggests that early relational experiences shape how individuals connect, regulate emotion, and handle stress.
+
+While attachment patterns exist on a spectrum, they are often described as:
+
+Secure attachment
+
+Anxious attachment
+
+Avoidant attachment
+
+Disorganized attachment
+
+These patterns influence how people respond to conflict, abandonment fears, and emotional discomfort—factors closely tied to addiction vulnerability.
+
+**Secure Attachment and Resilience**
+
+Individuals with relatively secure attachment tend to:
+
+Regulate emotion more effectively
+
+Seek help when needed
+
+Maintain stable relationships
+
+Tolerate distress without extreme avoidance
+
+Secure attachment does not eliminate addiction risk—but it often strengthens recovery engagement once help begins.
+
+Recovery requires connection.
+Secure attachment supports connection.
+
+**Anxious Attachment and Emotional Intensity**
+
+Anxious attachment often involves:
+
+Fear of abandonment
+
+Heightened emotional sensitivity
+
+Strong desire for reassurance
+
+Intense relationship focus
+
+Substances may become a coping tool for:
+
+Emotional overwhelm
+
+Rejection fears
+
+Relationship instability
+
+In recovery, individuals with anxious attachment may:
+
+Fear losing support systems
+
+Struggle with perceived rejection
+
+Experience intense emotional swings
+
+Family reassurance must be balanced with structure and accountability.
+
+**Avoidant Attachment and Treatment Resistance**
+
+Avoidant attachment patterns often include:
+
+Emotional distancing
+
+Self-reliance
+
+Discomfort with vulnerability
+
+Minimizing emotional needs
+
+Substance use can function as a private regulation tool.
+
+In recovery, individuals with avoidant tendencies may:
+
+Resist group therapy
+
+Minimize the need for help
+
+Downplay emotional distress
+
+Appear detached from consequences
+
+Families may misinterpret detachment as indifference.
+
+Often, it reflects discomfort with emotional exposure.
+
+**Disorganized Attachment and Trauma Links**
+
+Disorganized attachment frequently involves:
+
+Trauma history
+
+Unpredictable relational experiences
+
+Difficulty regulating emotions
+
+Conflicted relationship patterns
+
+Substances may serve as:
+
+Emotional numbing
+
+Dissociation
+
+Control in chaotic environments
+
+In these cases, trauma-informed care is essential.
+
+Treating addiction without addressing attachment-related trauma increases relapse vulnerability.
+
+**Trauma Bonding in Addiction Systems**
+
+Trauma bonding can develop in relationships marked by:
+
+Cycles of crisis and reconciliation
+
+Emotional intensity
+
+Intermittent reinforcement
+
+Instability followed by closeness
+
+These cycles can resemble addiction patterns.
+
+Families may find themselves emotionally attached to crisis intensity.
+
+Understanding trauma bonding reduces confusion about why separation or boundaries feel so difficult.
+
+**How Attachment Influences Recovery Engagement**
+
+Attachment style shapes:
+
+Willingness to seek treatment
+
+Comfort in group settings
+
+Response to accountability
+
+Reaction to confrontation
+
+Emotional resilience during stress
+
+For example:
+
+Anxiously attached individuals may fear losing family if they relapse.
+Avoidantly attached individuals may withdraw further under pressure.
+
+Understanding these patterns allows families to respond strategically rather than emotionally.
+
+**The Risk of Misinterpreting Attachment as Character**
+
+Families sometimes label behavior as:
+
+"Cold"
+
+"Needy"
+
+"Manipulative"
+
+"Detached"
+
+Attachment patterns are not moral failings.
+
+They are relational adaptations.
+
+Addiction often amplifies these adaptations.
+
+Compassion informed by knowledge reduces unnecessary conflict.
+
+**Rebuilding Secure Attachment in Recovery**
+
+Recovery offers opportunities to rebuild more secure patterns through:
+
+Consistent boundaries
+
+Predictable communication
+
+Accountability with empathy
+
+Stable routines
+
+Professional support
+
+Secure attachment grows through reliability.
+
+Reliability supports long-term sobriety.
+
+**When Professional Evaluation Is Important**
+
+If attachment-related trauma or relational instability is severe, comprehensive treatment may include:
+
+Trauma-informed therapy
+
+Family therapy
+
+Attachment-focused modalities
+
+Psychiatric evaluation if needed
+
+Addiction rarely exists independently of relational history.
+
+Holistic assessment strengthens outcomes.
+
+**What Families Can Do**
+
+Families can:
+
+Educate themselves about attachment patterns
+
+Avoid personalizing defensive behaviors
+
+Maintain steady boundaries
+
+Encourage structured recovery engagement
+
+Seek professional guidance when relational conflict intensifies
+
+Recovery involves relational recalibration—not just substance removal.
+
+**A Grounded Takeaway**
+
+Attachment styles and addiction are closely connected.
+
+Relationship insecurity influences coping strategies.
+Coping strategies influence substance use.
+Substance use reshapes relational patterns.
+
+Understanding attachment reduces confusion and improves strategic response.
+
+If relational conflict continues despite sobriety efforts, professional consultation can clarify whether attachment dynamics are influencing recovery.
+
+Addiction affects the brain.
+
+Attachment affects the bond.
+
+Addressing both strengthens long-term stability.`
+  },
   {
     id: 86,
     title: "Sleep and Addiction: Why Disrupted Sleep Fuels Relapse Risk",
