@@ -662,33 +662,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Mission Statement */}
-          <Card className="bg-gradient-to-br from-foreground to-foreground/90 text-background border-0 shadow-xl">
-            <CardContent className="p-5 md:p-10 flex flex-col justify-center h-full">
-              <div className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs md:text-sm font-medium mb-4 md:mb-6 w-fit">
-                <Heart className="w-3 h-3 md:w-4 md:h-4" />
-                Our Promise
-              </div>
-              <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">Our Mission</h2>
-              <div className="space-y-3 md:space-y-4 text-gray-300 leading-relaxed text-sm md:text-base mission-statement">
-                <p>
-                  At Sober Helpline, we are dedicated to providing families of addicted loved ones with ethical, proven providers of recovery and therapeutic services that have been vetted and meet rigorous criteria.
-                </p>
-                <p className="hidden sm:block">
-                  Our provider directory is completely free to use—search for trusted treatment centers, therapists, interventionists, and recovery resources at no cost. For families seeking deeper support, our Family Forum and Education Center offer 60+ interactive tools, guides, and videos for a small monthly fee of $14.99.
-                </p>
-                <p className="font-semibold text-white">
-                  Treatment centers are not charged a fee for listing their programs. Only trusted providers who meet our standards are invited to be a part of our database. We take no commissions or payments for referred clients—patient brokering is something we will never do.
-                </p>
-              </div>
-              <Link to="/blog" className="mt-5 md:mt-8">
-                <Button variant="secondary" className="gap-2 bg-white text-foreground hover:bg-white/90 text-sm md:text-base">
-                  Visit Our Blog
-                  <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
