@@ -178,6 +178,9 @@ const Index = () => {
                     <DropdownMenuItem asChild>
                       <Link to="/understanding-addiction" className="cursor-pointer">Understanding Addiction</Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/recovery-resources" className="cursor-pointer">Find Recovery Resources</Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DropdownMenu>
@@ -593,34 +596,6 @@ const Index = () => {
         <FamilyBridgeBanner />
       </section>
 
-      {/* Browse Categories */}
-      <section className="container mx-auto px-4 py-10 md:py-16">
-        <div className="text-center mb-6 md:mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Find the Right Support</h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
-            Browse our directory of vetted treatment providers and recovery professionals
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4">
-          {categories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <Link key={category.name} to={category.path}>
-                <Card className="h-full hover:shadow-lg hover:shadow-logo-green/10 hover:border-logo-green/30 transition-all duration-300 group cursor-pointer">
-                  <CardContent className="p-3 md:p-6 flex flex-col items-center text-center">
-                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-logo-green/10 flex items-center justify-center mb-2 md:mb-4 group-hover:bg-logo-green/20 group-hover:scale-110 transition-all">
-                      <Icon className="w-5 h-5 md:w-7 md:h-7 text-logo-green" />
-                    </div>
-                    <h3 className="font-semibold text-foreground text-xs md:text-base mb-0.5 md:mb-1 leading-tight">{category.name}</h3>
-                    <p className="text-[10px] md:text-xs text-muted-foreground hidden sm:block">{category.description}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
 
       {/* Featured Articles & Mission */}
       <section className="container mx-auto px-4 py-10 md:py-16">
