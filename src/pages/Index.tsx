@@ -597,71 +597,71 @@ const Index = () => {
       </section>
 
 
-      {/* Featured Articles & Mission */}
+      {/* Featured Articles */}
       <section className="container mx-auto px-4 py-10 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-4 md:gap-8 items-stretch">
-          {/* Featured Articles Carousel */}
-          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[500px] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
-            {featuredArticles.map((article, index) => (
-              <Link
-                key={article.id}
-                to={`/blog/${article.id}`}
-                className={`absolute inset-0 transition-opacity duration-1000 ${
-                  index === currentArticleIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
-              >
-                <div className="relative w-full h-full">
-                  {article.image && (
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover"
-                      fetchPriority={index === 0 ? "high" : "low"}
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
-                    <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-logo-green text-white text-[10px] md:text-xs font-medium rounded-full mb-2 md:mb-3">
-                      {article.category}
-                    </span>
-                    <h3 className="text-lg md:text-2xl font-bold text-white mb-1.5 md:mb-2 line-clamp-2 leading-tight">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-200 text-sm line-clamp-2 mb-4 hidden md:block">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-gray-300">
-                      <div className="flex items-center gap-1">
-                        <UserIcon className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                        <span>{article.author}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                        <span>{new Date(article.date).toLocaleDateString()}</span>
-                      </div>
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Latest from Our Blog</h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Expert insights on addiction, recovery, and family support</p>
+        </div>
+        <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
+          {featuredArticles.map((article, index) => (
+            <Link
+              key={article.id}
+              to={`/blog/${article.id}`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentArticleIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            >
+              <div className="relative w-full h-full">
+                {article.image && (
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover"
+                    fetchPriority={index === 0 ? "high" : "low"}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-10">
+                  <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-logo-green text-white text-[10px] md:text-xs font-medium rounded-full mb-2 md:mb-3">
+                    {article.category}
+                  </span>
+                  <h3 className="text-lg md:text-3xl font-bold text-white mb-1.5 md:mb-2 line-clamp-2 leading-tight max-w-3xl">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-200 text-sm md:text-base line-clamp-2 mb-4 hidden md:block max-w-2xl">
+                    {article.excerpt}
+                  </p>
+                  <div className="flex items-center gap-3 md:gap-4 text-[10px] md:text-xs text-gray-300">
+                    <div className="flex items-center gap-1">
+                      <UserIcon className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                      <span>{article.author}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                      <span>{new Date(article.date).toLocaleDateString()}</span>
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
+            </Link>
+          ))}
+          {/* Carousel indicators */}
+          <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
+            {featuredArticles.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentArticleIndex(index);
+                }}
+                className={`h-1.5 md:h-2 rounded-full transition-all ${
+                  index === currentArticleIndex ? 'bg-white w-4 md:w-6' : 'bg-white/50 w-1.5 md:w-2'
+                }`}
+                aria-label={`Go to article ${index + 1}`}
+              />
             ))}
-            {/* Carousel indicators */}
-            <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
-              {featuredArticles.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentArticleIndex(index);
-                  }}
-                  className={`h-1.5 md:h-2 rounded-full transition-all ${
-                    index === currentArticleIndex ? 'bg-white w-4 md:w-6' : 'bg-white/50 w-1.5 md:w-2'
-                  }`}
-                  aria-label={`Go to article ${index + 1}`}
-                />
-              ))}
-            </div>
           </div>
-
         </div>
       </section>
 
