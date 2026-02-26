@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function SiblingExperience() {
   useGuideTracking("/sibling-experience", "The Sibling Experience in Addiction");
@@ -463,7 +464,9 @@ export default function SiblingExperience() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/sibling-experience" />
+</main>
       </div>
     </>
   );

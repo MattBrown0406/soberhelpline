@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import EatingDisorderScreening from '@/components/EatingDisorderScreening';
+import RelatedResources from "@/components/RelatedResources";
 
 const EatingDisordersGuide = () => {
   useGuideTracking("Understanding Eating Disorders", "/eating-disorders-guide");
@@ -443,7 +444,9 @@ const EatingDisordersGuide = () => {
             </p>
           </section>
         </div>
-      </main>
+      
+          <RelatedResources currentPath="/eating-disorders-guide" />
+</main>
     </div>
   );
 };

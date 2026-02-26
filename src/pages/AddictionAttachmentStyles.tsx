@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function AddictionAttachmentStyles() {
   useGuideTracking("How Addiction Shapes Attachment Styles", "/addiction-attachment-styles");
@@ -361,7 +362,9 @@ export default function AddictionAttachmentStyles() {
               Back to Family Education
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/addiction-attachment-styles" />
+</main>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, XCircle, CheckCircle, ListOrdered, Heart, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const MentalHealthDelaysRecovery = () => {
   useGuideTracking("/mental-health-delays-recovery", "Why Focusing Only on Mental Health Can Delay Recovery");
@@ -439,7 +440,9 @@ const MentalHealthDelaysRecovery = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/mental-health-delays-recovery" />
+</Layout>
   );
 };
 

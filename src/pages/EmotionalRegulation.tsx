@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function EmotionalRegulation() {
   useGuideTracking("Emotional Regulation Tools for Families", "/emotional-regulation");
@@ -486,7 +487,9 @@ export default function EmotionalRegulation() {
               </div>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/emotional-regulation" />
+</main>
       </div>
     </>
   );

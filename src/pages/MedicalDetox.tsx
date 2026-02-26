@@ -18,6 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
 import logo from "@/assets/logo.png";
+import RelatedResources from "@/components/RelatedResources";
 
 const insuranceProviders = [
   "All",
@@ -532,6 +533,7 @@ const MedicalDetox = () => {
         )}
       </div>
     </div>
+      <RelatedResources currentPath="/medical-detox" />
     </>
   );
 };

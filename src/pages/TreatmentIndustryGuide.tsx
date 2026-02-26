@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function TreatmentIndustryGuide() {
   useGuideTracking("/treatment-industry-guide", "How the Treatment Industry Actually Works");
@@ -555,7 +556,9 @@ export default function TreatmentIndustryGuide() {
               </ul>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/treatment-industry-guide" />
+</main>
       </div>
     </>
   );

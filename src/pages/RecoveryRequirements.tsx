@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function RecoveryRequirements() {
   useGuideTracking("/recovery-requirements", "What Recovery Actually Requires From Families");
@@ -366,7 +367,9 @@ export default function RecoveryRequirements() {
               </Button>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/recovery-requirements" />
+</main>
       </div>
 
       {/* Print Styles */}

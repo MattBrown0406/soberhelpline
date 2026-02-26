@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function TwelveStepsExplained() {
   useGuideTracking("/twelve-steps-explained", "The 12 Steps Explained for Families");
@@ -617,7 +618,9 @@ export default function TwelveStepsExplained() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/twelve-steps-explained" />
+</main>
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const masterPrompt = `Relapse Response Coach — Master Prompt
 
@@ -729,7 +730,9 @@ const AIRelapseResponseGuide = () => {
               </CardContent>
             </Card>
           </section>
-        </main>
+        
+          <RelatedResources currentPath="/ai-relapse-response-guide" />
+</main>
       </div>
     </>
   );

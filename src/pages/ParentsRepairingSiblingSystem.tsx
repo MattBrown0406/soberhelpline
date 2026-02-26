@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, XCircle, MessageCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const ParentsRepairingSiblingSystem = () => {
   useGuideTracking("/parents-repairing-sibling-system", "Parents: Repairing the Sibling System");
@@ -546,7 +547,9 @@ const ParentsRepairingSiblingSystem = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/parents-repairing-sibling-system" />
+</Layout>
   );
 };
 

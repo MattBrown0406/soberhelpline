@@ -19,6 +19,7 @@ import {
   CheckSquare
 } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const WhyChangeDoesntHappen = () => {
   useGuideTracking("/why-change-doesnt-happen", "Why Change Doesn't Happen When Families Try Harder");
@@ -455,6 +456,7 @@ const WhyChangeDoesntHappen = () => {
           </Button>
         </div>
       </div>
+      <RelatedResources currentPath="/why-change-doesnt-happen" />
     </div>
   );
 };

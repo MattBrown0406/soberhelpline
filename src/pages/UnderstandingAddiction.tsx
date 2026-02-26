@@ -3,6 +3,7 @@ import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb, Users, Trendi
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function UnderstandingAddiction() {
   useGuideTracking("/understanding-addiction", "Addiction: A Chronic Disease, Not a Choice");
@@ -199,7 +200,9 @@ export default function UnderstandingAddiction() {
             </Link>
           </div>
         </div>
-      </main>
+      
+          <RelatedResources currentPath="/understanding-addiction" />
+</main>
     </div>
   );
 }

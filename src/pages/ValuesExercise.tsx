@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const ValuesExercise = () => {
   useGuideTracking("/values-exercise", "Family Values Exercise");
@@ -324,7 +325,9 @@ const ValuesExercise = () => {
               </ul>
             </section>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/values-exercise" />
+</main>
       </div>
     </>
   );

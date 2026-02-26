@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function LivingWellRegardless() {
   useGuideTracking("/living-well-regardless", "Living Well Regardless of Outcome");
@@ -613,7 +614,9 @@ export default function LivingWellRegardless() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/living-well-regardless" />
+</main>
       </div>
     </>
   );

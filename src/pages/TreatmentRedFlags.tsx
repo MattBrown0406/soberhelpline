@@ -9,6 +9,7 @@ import { ArrowLeft, Printer, AlertTriangle, Shield, DollarSign, MessageSquare, U
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const TreatmentRedFlags = () => {
   useGuideTracking("/treatment-red-flags", "Treatment Red Flags Checklist");
@@ -491,7 +492,9 @@ const TreatmentRedFlags = () => {
           </CardContent>
         </Card>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/treatment-red-flags" />
+</Layout>
   );
 };
 

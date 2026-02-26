@@ -3,6 +3,7 @@ import { ArrowLeft, Heart, BookOpen, Users, MessageCircle, ClipboardList, Compas
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
+import RelatedResources from "@/components/RelatedResources";
 
 const siblingResources = [
   { title: "The Sibling Experience", href: "/sibling-experience", description: "Understanding the unique pain siblings carry when addiction enters the family." },
@@ -133,7 +134,9 @@ export default function SiblingSupport() {
               </Link>
             </div>
           </section>
-        </main>
+        
+          <RelatedResources currentPath="/sibling-support" />
+</main>
       </div>
     </>
   );

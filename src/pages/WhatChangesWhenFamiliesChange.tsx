@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function WhatChangesWhenFamiliesChange() {
   useGuideTracking("/what-changes-when-families-change", "What Changes When Families Change");
@@ -578,7 +579,9 @@ export default function WhatChangesWhenFamiliesChange() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/what-changes-when-families-change" />
+</main>
       </div>
     </>
   );

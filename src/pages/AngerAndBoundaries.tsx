@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function AngerAndBoundaries() {
   useGuideTracking("Anger and Boundaries Are Not the Same Thing", "/anger-and-boundaries");
@@ -396,7 +397,9 @@ export default function AngerAndBoundaries() {
               Back to Family Education
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/anger-and-boundaries" />
+</main>
       </div>
     </>
   );

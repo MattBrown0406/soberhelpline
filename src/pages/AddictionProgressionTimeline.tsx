@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const AddictionProgressionTimeline = () => {
   useGuideTracking("Addiction Progression Timeline", "/addiction-progression-timeline");
@@ -611,7 +612,9 @@ const AddictionProgressionTimeline = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/addiction-progression-timeline" />
+</Layout>
   );
 };
 

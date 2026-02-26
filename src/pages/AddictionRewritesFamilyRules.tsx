@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, AlertCircle, HelpCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const AddictionRewritesFamilyRules = () => {
   useGuideTracking("How Addiction Rewrites Family Rules", "/addiction-rewrites-family-rules");
@@ -584,7 +585,9 @@ const AddictionRewritesFamilyRules = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/addiction-rewrites-family-rules" />
+</Layout>
   );
 };
 

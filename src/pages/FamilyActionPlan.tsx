@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function FamilyActionPlan() {
   useGuideTracking("Family Action Plan", "/family-action-plan");
@@ -548,7 +549,9 @@ export default function FamilyActionPlan() {
               </Button>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/family-action-plan" />
+</main>
       </div>
 
       {/* Print Styles */}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function GuiltReliefResentmentCycle() {
   useGuideTracking("The Guilt-Relief-Resentment Cycle", "/guilt-relief-resentment-cycle");
@@ -452,7 +453,9 @@ export default function GuiltReliefResentmentCycle() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/guilt-relief-resentment" />
+</main>
       </div>
     </>
   );

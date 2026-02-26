@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function SiblingGuiltAngerLoyalty() {
   useGuideTracking("/sibling-guilt-anger-loyalty", "Sibling Guilt, Anger, and Loyalty Conflicts");
@@ -479,7 +480,9 @@ export default function SiblingGuiltAngerLoyalty() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/sibling-guilt-anger-loyalty" />
+</main>
       </div>
     </>
   );

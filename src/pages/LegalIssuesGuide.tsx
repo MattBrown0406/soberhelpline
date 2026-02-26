@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const LegalIssuesGuide = () => {
   useGuideTracking("/legal-issues-guide", "Legal Issues Families Should Understand");
@@ -597,6 +598,7 @@ const LegalIssuesGuide = () => {
           </div>
         </div>
       </div>
+      <RelatedResources currentPath="/legal-issues-guide" />
     </>
   );
 };

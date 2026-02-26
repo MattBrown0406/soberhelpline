@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function SafeToOpenUp() {
   useGuideTracking("/safe-to-open-up", "Is It Safe to Open Up Again? (Guide for Injured Spouses)");
@@ -657,7 +658,9 @@ export default function SafeToOpenUp() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/safe-to-open-up" />
+</main>
       </div>
     </>
   );

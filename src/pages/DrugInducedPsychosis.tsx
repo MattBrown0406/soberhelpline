@@ -4,6 +4,7 @@ import { ArrowLeft, Phone, Printer, AlertTriangle, Brain, Activity, Shield } fro
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const DrugInducedPsychosis = () => {
   useGuideTracking("Understanding Drug-Induced Psychosis", "/drug-induced-psychosis");
@@ -470,7 +471,9 @@ const DrugInducedPsychosis = () => {
             </p>
           </footer>
         </div>
-      </main>
+      
+          <RelatedResources currentPath="/drug-induced-psychosis" />
+</main>
     </div>
   );
 };

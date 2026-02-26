@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function IntergenerationalEnabling() {
   useGuideTracking("Intergenerational Enabling", "/intergenerational-enabling");
@@ -521,7 +522,9 @@ export default function IntergenerationalEnabling() {
               </Button>
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/intergenerational-enabling" />
+</main>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function GriefForFamily() {
   useGuideTracking("Grief for the Family You Thought You'd Have", "/grief-for-family");
@@ -305,7 +306,9 @@ export default function GriefForFamily() {
               Back to Family Education
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/grief-for-family" />
+</main>
       </div>
     </>
   );

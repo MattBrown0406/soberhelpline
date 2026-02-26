@@ -6,6 +6,7 @@ import { ArrowLeft, Phone } from "lucide-react";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
+import RelatedResources from "@/components/RelatedResources";
 
 const questions = [
   "Has my loved one tried to cut back or stop using substances but failed repeatedly?",
@@ -201,6 +202,7 @@ const AddictionAssessment = () => {
           </div>
         </div>
       </div>
+      <RelatedResources currentPath="/addiction-assessment" />
     </div>
   );
 };

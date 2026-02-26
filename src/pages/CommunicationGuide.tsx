@@ -11,6 +11,7 @@ import { User } from "@supabase/supabase-js";
 import { Loader2, Lock } from "lucide-react";
 import { CardDescription } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 interface CommunicationSection {
   title: string;
@@ -482,7 +483,9 @@ export default function CommunicationGuide() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/communication-guide" />
+</main>
       </div>
     </>
   );

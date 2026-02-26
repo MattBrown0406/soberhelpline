@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const masterPrompt = `Boundary Builder GPT — Master Prompt
 
@@ -546,7 +547,9 @@ const AIBoundaryBuilderCoach = () => {
               </Link>
             </div>
           </section>
-        </main>
+        
+          <RelatedResources currentPath="/ai-boundary-builder-coach" />
+</main>
       </div>
     </>
   );

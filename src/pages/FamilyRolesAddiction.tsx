@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, ArrowRight } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const FamilyRolesAddiction = () => {
   useGuideTracking("Family Roles in Addiction", "/family-roles-addiction");
@@ -610,7 +611,9 @@ const FamilyRolesAddiction = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/family-roles-addiction" />
+</Layout>
   );
 };
 

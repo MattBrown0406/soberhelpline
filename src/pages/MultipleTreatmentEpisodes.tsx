@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function MultipleTreatmentEpisodes() {
   useGuideTracking("/multiple-treatment-episodes", "Why Multiple Treatment Episodes Don't Mean Failure");
@@ -571,7 +572,9 @@ export default function MultipleTreatmentEpisodes() {
               <p>Sober Helpline | (541) 241-5886 | www.soberhelpline.com</p>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/multiple-treatment-episodes" />
+</main>
       </div>
 
       <style>{`

@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const masterPrompt = `Addiction Reality Translator — Master Prompt
 
@@ -730,7 +731,9 @@ const AIAddictionRealityTranslator = () => {
               </CardContent>
             </Card>
           </section>
-        </main>
+        
+          <RelatedResources currentPath="/ai-addiction-reality-translator" />
+</main>
 
         {/* Footer */}
         <footer className="border-t py-8 bg-card/50">

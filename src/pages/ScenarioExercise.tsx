@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 interface Scenario1State {
   isEmergency: string;
@@ -607,7 +608,9 @@ export default function ScenarioExercise() {
             </div>
 
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/scenario-exercise" />
+</main>
       </div>
 
       {/* Print Styles */}

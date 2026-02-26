@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const checklistItems = {
   section1: [
@@ -403,7 +404,9 @@ export default function ReadinessChecklist() {
               </div>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/readiness-checklist" />
+</main>
       </div>
     </>
   );

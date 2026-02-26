@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function CrisisChaos() {
   useGuideTracking("Crisis vs. Chaos Decision Guide", "/crisis-chaos");
@@ -414,7 +415,9 @@ export default function CrisisChaos() {
               </div>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/crisis-chaos" />
+</main>
       </div>
     </>
   );

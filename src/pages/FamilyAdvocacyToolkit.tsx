@@ -9,6 +9,7 @@ import { ArrowLeft, Printer, Shield, Users, FileText, MessageSquare, AlertTriang
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const FamilyAdvocacyToolkit = () => {
   useGuideTracking("Family Advocacy Toolkit", "/family-advocacy-toolkit");
@@ -665,7 +666,9 @@ const FamilyAdvocacyToolkit = () => {
           </CardContent>
         </Card>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/family-advocacy-toolkit" />
+</Layout>
   );
 };
 

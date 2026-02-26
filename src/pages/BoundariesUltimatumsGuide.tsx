@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function BoundariesUltimatumsGuide() {
   useGuideTracking("Requests, Demands, Ultimatums & Boundaries", "/boundaries-ultimatums-guide");
@@ -592,7 +593,9 @@ export default function BoundariesUltimatumsGuide() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/boundaries-ultimatums" />
+</main>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function FamilyUnityLiability() {
   useGuideTracking("When Family Unity Becomes a Liability", "/family-unity-liability");
@@ -538,7 +539,9 @@ export default function FamilyUnityLiability() {
               </Button>
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/family-unity-liability" />
+</main>
       </div>
     </>
   );

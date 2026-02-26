@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, AlertTriangle, HelpCircle, XCircle, CheckCircle, Shield, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const MisunderstoodDiagnoses = () => {
   useGuideTracking("/misunderstood-diagnoses", "Commonly Misunderstood Diagnoses in Addiction");
@@ -540,7 +541,9 @@ const MisunderstoodDiagnoses = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/misunderstood-diagnoses" />
+</Layout>
   );
 };
 

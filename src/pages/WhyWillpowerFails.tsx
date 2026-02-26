@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, Zap, Shield, XCircle, CheckCircle, RefreshCw, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const WhyWillpowerFails = () => {
   useGuideTracking("/why-willpower-fails", "Why Willpower Fails (and What Actually Works)");
@@ -390,7 +391,9 @@ const WhyWillpowerFails = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/why-willpower-fails" />
+</Layout>
   );
 };
 

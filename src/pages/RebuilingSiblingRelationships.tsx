@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Clock, Users, CheckCircle, AlertCircle, HelpCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const RebuildingSiblingRelationships = () => {
   useGuideTracking("/rebuilding-sibling-relationships", "Rebuilding Sibling Relationships in Recovery");
@@ -542,7 +543,9 @@ const RebuildingSiblingRelationships = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/rebuilding-sibling-relationships" />
+</Layout>
   );
 };
 

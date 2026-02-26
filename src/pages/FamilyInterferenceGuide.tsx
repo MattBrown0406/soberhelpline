@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function FamilyInterferenceGuide() {
   useGuideTracking("How Families Accidentally Interfere with Recovery", "/family-interference-guide");
@@ -512,7 +513,9 @@ export default function FamilyInterferenceGuide() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/family-interference" />
+</main>
       </div>
     </>
   );

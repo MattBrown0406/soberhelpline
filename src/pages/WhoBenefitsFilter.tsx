@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function WhoBenefitsFilter() {
   useGuideTracking("/who-benefits-filter", "The Who Benefits Filter");
@@ -473,7 +474,9 @@ export default function WhoBenefitsFilter() {
               </Button>
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/who-benefits-filter" />
+</main>
       </div>
     </>
   );

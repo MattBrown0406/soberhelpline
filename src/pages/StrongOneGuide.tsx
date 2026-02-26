@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function StrongOneGuide() {
   useGuideTracking("/strong-one-guide", "The Hidden Cost of Being the Strong One");
@@ -432,7 +433,9 @@ export default function StrongOneGuide() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/strong-one" />
+</main>
       </div>
     </>
   );

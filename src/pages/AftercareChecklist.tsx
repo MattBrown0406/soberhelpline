@@ -9,6 +9,7 @@ import { ArrowLeft, Printer, AlertTriangle, CheckCircle2, Clock, Users, Home, Sh
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const AftercareChecklist = () => {
   useGuideTracking("Aftercare Checklist", "/aftercare-checklist");
@@ -457,7 +458,9 @@ const AftercareChecklist = () => {
           </CardContent>
         </Card>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/aftercare-checklist" />
+</Layout>
   );
 };
 

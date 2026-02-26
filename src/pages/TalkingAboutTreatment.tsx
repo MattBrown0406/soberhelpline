@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function TalkingAboutTreatment() {
   useGuideTracking("/talking-about-treatment", "How to Talk to Your Loved One About Treatment");
@@ -366,7 +367,9 @@ export default function TalkingAboutTreatment() {
               </Button>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/talking-about-treatment" />
+</main>
       </div>
     </>
   );

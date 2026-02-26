@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function FlexibilityVsInstability() {
   useGuideTracking("The Difference Between Flexibility and Instability", "/flexibility-vs-instability");
@@ -317,7 +318,9 @@ export default function FlexibilityVsInstability() {
               Back to Family Education
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/flexibility-vs-instability" />
+</main>
       </div>
     </>
   );

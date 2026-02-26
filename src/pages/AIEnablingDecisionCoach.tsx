@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const masterPrompt = `Helping vs. Enabling Decision Coach — Master Prompt
 
@@ -499,7 +500,9 @@ const AIEnablingDecisionCoach = () => {
               </Link>
             </div>
           </section>
-        </main>
+        
+          <RelatedResources currentPath="/ai-enabling-decision-coach" />
+</main>
       </div>
     </>
   );

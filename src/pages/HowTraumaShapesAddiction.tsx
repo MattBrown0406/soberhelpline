@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function HowTraumaShapesAddiction() {
   useGuideTracking("How Trauma Shapes Addiction", "/how-trauma-shapes-addiction");
@@ -521,7 +522,9 @@ export default function HowTraumaShapesAddiction() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/how-trauma-shapes-addiction" />
+</main>
       </div>
     </>
   );

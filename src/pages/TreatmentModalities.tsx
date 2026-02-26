@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function TreatmentModalities() {
   useGuideTracking("/treatment-modalities", "Treatment Modalities Explained");
@@ -581,7 +582,9 @@ export default function TreatmentModalities() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/treatment-modalities" />
+</main>
       </div>
     </>
   );

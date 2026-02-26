@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, Heart, Shield, Clock, Target, Users, Lightbulb, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const AddictionAsStressDisorder = () => {
   const navigate = useNavigate();
@@ -505,6 +506,7 @@ const AddictionAsStressDisorder = () => {
           </CardContent>
         </Card>
       </div>
+      <RelatedResources currentPath="/addiction-as-stress-disorder" />
     </div>
   );
 };

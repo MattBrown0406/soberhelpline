@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Heart, AlertTriangle, Shield, XCircle, CheckCircle, Scale, HelpCircle, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const TraumaVsExcuses = () => {
   useGuideTracking("/trauma-vs-excuses", "Trauma vs. Excuses: A Necessary Distinction");
@@ -452,7 +453,9 @@ const TraumaVsExcuses = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/trauma-vs-excuses" />
+</Layout>
   );
 };
 

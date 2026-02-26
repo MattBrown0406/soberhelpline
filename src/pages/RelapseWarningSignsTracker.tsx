@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Printer, AlertTriangle, Clock, TrendingDown, RefreshCw, Info, Heart, Brain, Users, Shield } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const RelapseWarningSignsTracker = () => {
   useGuideTracking("/relapse-warning-signs-tracker", "Relapse Warning Signs Tracker");
@@ -434,7 +435,9 @@ ${notes || '(None recorded)'}
           </CardContent>
         </Card>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/relapse-warning-signs" />
+</Layout>
   );
 };
 

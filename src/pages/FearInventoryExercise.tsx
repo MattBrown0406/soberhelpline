@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import { Helmet } from "react-helmet-async";
+import RelatedResources from "@/components/RelatedResources";
 
 interface Fear {
   id: string;
@@ -588,6 +589,7 @@ const FearInventoryExercise = () => {
           </div>
         </div>
       </div>
+      <RelatedResources currentPath="/fear-inventory-exercise" />
     </>
   );
 };

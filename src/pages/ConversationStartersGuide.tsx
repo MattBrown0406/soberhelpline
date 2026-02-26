@@ -4,6 +4,7 @@ import { ArrowLeft, MessageSquare, Heart, AlertTriangle, Shield, Lightbulb, Paus
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GuidePageWrapper from "@/components/GuidePageWrapper";
+import RelatedResources from "@/components/RelatedResources";
 
 const ConversationStartersGuide = () => {
   return (
@@ -292,7 +293,9 @@ const ConversationStartersGuide = () => {
           </div>
         </div>
       </div>
-    </GuidePageWrapper>
+    
+          <RelatedResources currentPath="/conversation-starters" />
+        </GuidePageWrapper>
   );
 };
 

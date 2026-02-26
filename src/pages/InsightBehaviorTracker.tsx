@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function InsightBehaviorTracker() {
   useGuideTracking("Insight vs. Behavior Tracker", "/insight-behavior-tracker");
@@ -644,7 +645,9 @@ export default function InsightBehaviorTracker() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/insight-behavior-tracker" />
+</main>
       </div>
     </>
   );

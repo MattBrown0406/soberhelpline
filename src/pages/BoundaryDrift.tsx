@@ -4,6 +4,7 @@ import { Phone, ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function BoundaryDrift() {
   useGuideTracking("Boundary Drift: How Limits Slowly Erode", "/boundary-drift");
@@ -377,7 +378,9 @@ export default function BoundaryDrift() {
               Back to Family Education
             </Link>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/boundary-drift" />
+</main>
       </div>
     </>
   );

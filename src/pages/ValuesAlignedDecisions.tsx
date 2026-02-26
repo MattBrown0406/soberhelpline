@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function ValuesAlignedDecisions() {
   useGuideTracking("/values-aligned-decisions", "Values-Aligned Decision Making");
@@ -660,7 +661,9 @@ export default function ValuesAlignedDecisions() {
               </Link>
             </div>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/values-aligned-decisions" />
+</main>
       </div>
     </>
   );

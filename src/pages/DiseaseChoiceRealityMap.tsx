@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Brain, Scale, AlertTriangle, Heart, CheckCircle, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 const DiseaseChoiceRealityMap = () => {
   useGuideTracking("The Disease vs. Choice Reality Map", "/disease-choice-reality-map");
@@ -332,7 +333,9 @@ const DiseaseChoiceRealityMap = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    
+          <RelatedResources currentPath="/disease-choice-reality-map" />
+</Layout>
   );
 };
 

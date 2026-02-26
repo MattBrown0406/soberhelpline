@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import RelatedResources from "@/components/RelatedResources";
 
 export default function GrowingUpShadowAddiction() {
   useGuideTracking("Growing Up in the Shadow of Addiction", "/growing-up-shadow-addiction");
@@ -415,7 +416,9 @@ export default function GrowingUpShadowAddiction() {
               </CardContent>
             </Card>
           </div>
-        </main>
+        
+          <RelatedResources currentPath="/growing-up-shadow" />
+</main>
       </div>
     </>
   );
