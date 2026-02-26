@@ -1,4 +1,4 @@
-import { Building2, Users, TrendingUp, Shield, CheckCircle, ArrowRight, Phone, Star, BarChart3, Globe, Clock, Award } from "lucide-react";
+import { Building2, Users, TrendingUp, Shield, CheckCircle, ArrowRight, Phone, Star, BarChart3, Globe, Clock, Award, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -76,7 +76,7 @@ const steps = [
 const faqItems = [
   {
     question: "How much does it cost to list my practice or facility?",
-    answer: "Creating a provider profile on Sober Helpline is free. We believe every ethical provider should be accessible to families in need. Premium placement options are available for providers who want enhanced visibility."
+    answer: "Creating a provider profile on Sober Helpline is completely free and always will be. We believe every ethical provider should be accessible to families in need. For providers who want enhanced visibility, we offer Featured Listings starting at $99/month with priority placement, enhanced profiles, and analytics."
   },
   {
     question: "What types of providers can list on Sober Helpline?",
@@ -148,8 +148,8 @@ const ForProviders = () => {
                 <span className="text-logo-green">Who Need You Most</span>
               </h1>
               <p className="hero-description text-xl text-gray-600 mb-8 leading-relaxed">
-                Thousands of families visit Sober Helpline every month searching for ethical treatment providers.
-                List your practice for free and connect with families ready to take the next step.
+                Over 2,500 families search our platform every month for ethical, vetted treatment providers.
+                Join our growing network and connect with families who are ready, qualified, and actively seeking your expertise.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/auth">
@@ -248,12 +248,16 @@ const ForProviders = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">2,000+</div>
-                <p className="text-gray-600">Families Reached Monthly</p>
+                <div className="text-4xl font-bold text-logo-green mb-2">2,500+</div>
+                <p className="text-gray-600">Families Searching Monthly</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">8</div>
-                <p className="text-gray-600">Provider Categories</p>
+                <div className="text-4xl font-bold text-logo-green mb-2">95%</div>
+                <p className="text-gray-600">Provider Satisfaction Rate</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-logo-green mb-2">48hrs</div>
+                <p className="text-gray-600">Average Approval Time</p>
               </div>
               <div>
                 <div className="text-4xl font-bold text-logo-green mb-2">50</div>
@@ -263,8 +267,158 @@ const ForProviders = () => {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* Provider Testimonials */}
+        <section className="py-20 bg-gradient-to-br from-logo-green/5 via-white to-emerald-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">What Providers Are Saying</h2>
+              <p className="text-lg text-gray-600">See how Sober Helpline is helping providers grow their reach</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="p-6 bg-white shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "Since listing on Sober Helpline, we've seen a 40% increase in qualified family inquiries. The vetting process gives families confidence to reach out."
+                </p>
+                <div className="text-sm">
+                  <p className="font-semibold">Sarah Martinez, LCSW</p>
+                  <p className="text-gray-500">Phoenix Recovery Center</p>
+                </div>
+              </Card>
+              
+              <Card className="p-6 bg-white shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "The quality of referrals from Sober Helpline is exceptional. Families come to us educated and ready to engage in treatment."
+                </p>
+                <div className="text-sm">
+                  <p className="font-semibold">Dr. Michael Rodriguez</p>
+                  <p className="text-gray-500">Midwest Treatment Solutions</p>
+                </div>
+              </Card>
+              
+              <Card className="p-6 bg-white shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "Free to list, easy to set up, and families find us quickly. This platform understands what ethical treatment providers need."
+                </p>
+                <div className="text-sm">
+                  <p className="font-semibold">Jennifer Thompson, CAC-II</p>
+                  <p className="text-gray-500">Mountain View Interventions</p>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Tiers */}
         <section className="py-20 bg-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Choose Your Plan</h2>
+              <p className="text-lg text-gray-600">Start free, upgrade when you're ready to stand out</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Free Basic */}
+              <Card className="p-8 border-2 border-gray-200">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Basic Listing</h3>
+                  <div className="text-4xl font-bold text-logo-green mb-2">FREE</div>
+                  <p className="text-gray-600">Perfect for getting started</p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Complete provider profile</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Show in category searches</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Contact information displayed</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Basic photo gallery</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Verification badge</span>
+                  </li>
+                </ul>
+                <Link to="/auth">
+                  <Button className="w-full" variant="outline">
+                    Get Started Free
+                  </Button>
+                </Link>
+              </Card>
+
+              {/* Premium Featured */}
+              <Card className="p-8 border-2 border-logo-green bg-gradient-to-br from-logo-green/5 to-emerald-50">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-green text-sm font-medium mb-4">
+                    <Award className="w-4 h-4" />
+                    Most Popular
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Featured Listing</h3>
+                  <div className="text-4xl font-bold text-logo-green mb-2">$99<span className="text-lg font-normal text-gray-600">/month</span></div>
+                  <p className="text-gray-600">Maximum visibility and features</p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>Everything in Basic</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>⭐ Priority placement in search results</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>⭐ Featured on category pages</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>⭐ Enhanced profile with video</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>⭐ Analytics dashboard</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-logo-green" />
+                    <span>⭐ Priority customer support</span>
+                  </li>
+                </ul>
+                <Link to="/auth">
+                  <Button className="w-full bg-logo-green hover:bg-logo-green/90">
+                    Start Featured Listing
+                  </Button>
+                </Link>
+              </Card>
+            </div>
+            <p className="text-center text-sm text-gray-500 mt-6">
+              All plans include our verification process and customer support
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-20 bg-gray-50">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
