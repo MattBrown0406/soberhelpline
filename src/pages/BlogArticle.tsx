@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import { blogPosts, imageMap } from "./Blog";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const BlogArticle = () => {
   const { id } = useParams();
@@ -310,6 +311,11 @@ const BlogArticle = () => {
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* FamilyBridge CTA */}
+          <div className="mt-8">
+            <FamilyBridgeCTA variant="card" />
           </div>
         </article>
       </div>

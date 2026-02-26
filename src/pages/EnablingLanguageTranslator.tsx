@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 export default function EnablingLanguageTranslator() {
   useGuideTracking("Enabling Language Translator", "/enabling-language-translator");
@@ -74,6 +75,11 @@ export default function EnablingLanguageTranslator() {
           <Link to="/family-education">
             <Button variant="ghost" className="mb-6 gap-2">
               <ArrowLeft className="h-4 w-4" />
+            {/* FamilyBridge CTA */}
+            <div className="my-8">
+              <FamilyBridgeCTA variant="post-completion" />
+            </div>
+
               Back to Family Education
             </Button>
           </Link>
@@ -392,6 +398,11 @@ export default function EnablingLanguageTranslator() {
             <Link to="/family-education">
               <Button variant="outline" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
+            {/* FamilyBridge CTA */}
+            <div className="my-8">
+              <FamilyBridgeCTA variant="post-completion" />
+            </div>
+
                 Back to Family Education
               </Button>
             </Link>

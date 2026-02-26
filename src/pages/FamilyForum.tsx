@@ -19,6 +19,7 @@ import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
 import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 function relativeTime(dateStr: string): string {
   const now = Date.now();
@@ -654,6 +655,9 @@ export default function FamilyForum() {
                     )}
                   </CardContent>
                 </Card>
+
+                {/* FamilyBridge CTA */}
+                <FamilyBridgeCTA variant="forum" className="mb-4" />
 
                 {/* Forum Guidelines */}
                 <Card className="bg-primary/5 border-primary/20">

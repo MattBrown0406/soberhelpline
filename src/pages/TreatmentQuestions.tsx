@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 export default function TreatmentQuestions() {
   useGuideTracking("/treatment-questions", "Questions to Ask a Treatment Center");

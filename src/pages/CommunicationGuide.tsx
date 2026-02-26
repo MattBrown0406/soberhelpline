@@ -12,6 +12,7 @@ import { Loader2, Lock } from "lucide-react";
 import { CardDescription } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 interface CommunicationSection {
   title: string;

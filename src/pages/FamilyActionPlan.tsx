@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 export default function FamilyActionPlan() {
   useGuideTracking("Family Action Plan", "/family-action-plan");
