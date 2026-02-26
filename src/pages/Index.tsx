@@ -283,7 +283,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Monday Night Zoom Announcement */}
+      {/* Monday Night Zoom Announcement — temporarily hidden, uncomment to restore
       <section className="container mx-auto px-4 pt-6 md:pt-10">
         <Link to="/monday-zoom-registration" className="block">
           <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
@@ -308,6 +308,7 @@ const Index = () => {
           </div>
         </Link>
       </section>
+      */}
 
       {/* Peek Inside the Curriculum - Membership Conversion Section */}
       <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
