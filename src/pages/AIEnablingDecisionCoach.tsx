@@ -5,6 +5,7 @@ import { ArrowLeft, Scale, Copy, Check, AlertTriangle, Target, Shield, Eye, Comp
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 
@@ -250,20 +251,8 @@ const AIEnablingDecisionCoach = () => {
             </p>
           </div>
 
-          {/* Disclaimer */}
-          <Card className="mb-8 border-amber-500/30 bg-amber-500/5">
-            <CardContent className="py-5">
-              <div className="flex gap-3">
-                <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-amber-800 dark:text-amber-400 mb-1">Important Disclaimer</h3>
-                  <p className="text-sm text-muted-foreground">
-                    This tool is intended for educational and self-reflection purposes only. It is not a replacement for licensed medical, legal, or therapeutic resources. For clinical guidance, please consult with a licensed therapist, interventionist, or healthcare provider.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Safety Disclaimer */}
+          <AIDisclaimerCard />
 
           {/* What This Tool Does */}
           <section className="mb-10">

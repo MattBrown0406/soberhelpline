@@ -5,6 +5,7 @@ import { ArrowLeft, Sparkles, Copy, Check, AlertTriangle, Clock, Heart, Shield, 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 
@@ -234,20 +235,8 @@ const AILifeCoach = () => {
             </p>
           </div>
 
-          {/* Important Disclaimer */}
-          <Card className="mb-8 border-amber-500/50 bg-amber-50/50 dark:bg-amber-950/20">
-            <CardContent className="py-6">
-              <div className="flex gap-4">
-                <AlertTriangle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h2 className="font-semibold text-amber-800 dark:text-amber-400 mb-2">Important Disclaimer</h2>
-                  <p className="text-amber-900/80 dark:text-amber-100/80 text-sm leading-relaxed">
-                    This AI tool is intended for <strong>educational and supportive purposes only</strong>. It is not a replacement for licensed medical professionals, therapists, addiction counselors, legal advisors, or any other qualified human support. If you are in crisis, experiencing a medical emergency, or need professional intervention, please contact appropriate emergency services or a licensed professional immediately.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Safety Disclaimer */}
+          <AIDisclaimerCard />
 
           {/* Purpose Section */}
           <section className="mb-10">
