@@ -19,6 +19,7 @@ import SelfCareWorksheet from "@/components/SelfCareWorksheet";
 import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAssessment";
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
+import StartHereGuide from "@/components/StartHereGuide";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -389,6 +390,9 @@ export default function FamilyEducation() {
 
             {/* Progress Tracking */}
             <EducationProgressBar />
+
+            {/* Guided Starting Path for New Members */}
+            <StartHereGuide />
 
             {/* Main Content Tabs - Prominent Section Navigation */}
             <div className="mb-8">
