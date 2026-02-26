@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -281,6 +281,35 @@ const BlogArticle = () => {
           {/* Content */}
           <div className="prose prose-sm sm:prose-lg max-w-none">
             {post.content && renderContent(post.content)}
+          </div>
+
+          {/* Membership CTA */}
+          <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-logo-green/5 via-emerald-50 to-white border border-logo-green/20">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-green text-xs font-semibold mb-3">
+                <BookOpen className="w-3 h-3" />
+                Member Resource
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                This is just one of 62+ resources available to members
+              </h3>
+              <p className="text-gray-600 text-sm sm:text-base mb-4 max-w-lg mx-auto">
+                Get access to interactive tools, guided meditations, AI coaching, our private family forum, and weekly Monday Night Zoom sessions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link to="/family-membership">
+                  <Button className="bg-logo-green hover:bg-logo-green/90 text-white px-6">
+                    <Lock className="w-4 h-4 mr-2" />
+                    Unlock Full Access — $14.99/mo
+                  </Button>
+                </Link>
+                <Link to="/free-guide">
+                  <Button variant="outline" className="px-6">
+                    Get Free Guide First
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </article>
       </div>
