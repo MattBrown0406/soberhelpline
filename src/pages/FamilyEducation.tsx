@@ -388,6 +388,24 @@ export default function FamilyEducation() {
               </div>
             </div>
 
+            {/* Onboarding Quiz Prompt */}
+            {!localStorage.getItem("onboarding_quiz_completed") && (
+              <Link to="/onboarding-quiz">
+                <Card className="mb-6 bg-gradient-to-r from-emerald-900/20 to-teal-900/20 border-emerald-800/40 hover:border-emerald-600/60 transition-colors cursor-pointer">
+                  <CardContent className="p-4 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Sparkles className="w-5 h-5 text-emerald-400" />
+                      <div>
+                        <p className="font-semibold text-sm text-foreground">Not sure where to start?</p>
+                        <p className="text-xs text-muted-foreground">Take our 2-minute quiz for a personalized resource path.</p>
+                      </div>
+                    </div>
+                    <span className="text-emerald-400 text-sm font-medium whitespace-nowrap ml-3">Take Quiz →</span>
+                  </CardContent>
+                </Card>
+              </Link>
+            )}
+
             {/* Progress Tracking */}
             <EducationProgressBar />
 

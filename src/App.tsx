@@ -112,6 +112,7 @@ import FamilyCoaching from "./pages/FamilyCoaching";
 import CoachingOnboarding from "./pages/CoachingOnboarding";
 import Testimonials from "./pages/Testimonials";
 import RecoveryResources from "./pages/RecoveryResources";
+import OnboardingQuiz from "./pages/OnboardingQuiz";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -248,6 +249,7 @@ const App = () => (
             <Route path="/coaching-onboarding" element={<CoachingOnboarding />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/recovery-resources" element={<RecoveryResources />} />
+            <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
