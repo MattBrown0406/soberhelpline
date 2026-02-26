@@ -177,13 +177,28 @@ const meditations = [
   { title: "Connecting With Your Inner Child", file: "connecting-with-your-inner-child-meditation.mp3", color: "fuchsia" },
 ];
 
-const getColorClasses = (color: string) => ({
-  border: `border-${color}-500/50`,
-  text: `text-${color}-700 dark:text-${color}-400`,
-  hover: `hover:bg-${color}-50 dark:hover:bg-${color}-950/30`,
-  bg: `bg-${color}-50 dark:bg-${color}-950/20`,
-  ring: `ring-${color}-500/30`,
-});
+// Static color map — Tailwind JIT needs full class strings at build time
+const colorMap: Record<string, { border: string; text: string; hover: string; bg: string; bgGradient: string; borderLight: string; borderHeavy: string; iconText: string; hoverBorder: string }> = {
+  emerald: { border: "border-emerald-500/50", text: "text-emerald-700 dark:text-emerald-400", hover: "hover:bg-emerald-50 dark:hover:bg-emerald-950/30", bg: "bg-emerald-50 dark:bg-emerald-950/20", bgGradient: "bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/10", borderLight: "border-emerald-500/20", borderHeavy: "border-emerald-500/30", iconText: "text-emerald-600 dark:text-emerald-400", hoverBorder: "hover:border-emerald-500/40" },
+  rose: { border: "border-rose-500/50", text: "text-rose-700 dark:text-rose-400", hover: "hover:bg-rose-50 dark:hover:bg-rose-950/30", bg: "bg-rose-50 dark:bg-rose-950/20", bgGradient: "bg-gradient-to-br from-rose-50/50 to-transparent dark:from-rose-950/10", borderLight: "border-rose-500/20", borderHeavy: "border-rose-500/30", iconText: "text-rose-600 dark:text-rose-400", hoverBorder: "hover:border-rose-500/40" },
+  violet: { border: "border-violet-500/50", text: "text-violet-700 dark:text-violet-400", hover: "hover:bg-violet-50 dark:hover:bg-violet-950/30", bg: "bg-violet-50 dark:bg-violet-950/20", bgGradient: "bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/10", borderLight: "border-violet-500/20", borderHeavy: "border-violet-500/30", iconText: "text-violet-600 dark:text-violet-400", hoverBorder: "hover:border-violet-500/40" },
+  blue: { border: "border-blue-500/50", text: "text-blue-700 dark:text-blue-400", hover: "hover:bg-blue-50 dark:hover:bg-blue-950/30", bg: "bg-blue-50 dark:bg-blue-950/20", bgGradient: "bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/10", borderLight: "border-blue-500/20", borderHeavy: "border-blue-500/30", iconText: "text-blue-600 dark:text-blue-400", hoverBorder: "hover:border-blue-500/40" },
+  amber: { border: "border-amber-500/50", text: "text-amber-700 dark:text-amber-400", hover: "hover:bg-amber-50 dark:hover:bg-amber-950/30", bg: "bg-amber-50 dark:bg-amber-950/20", bgGradient: "bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/10", borderLight: "border-amber-500/20", borderHeavy: "border-amber-500/30", iconText: "text-amber-600 dark:text-amber-400", hoverBorder: "hover:border-amber-500/40" },
+  teal: { border: "border-teal-500/50", text: "text-teal-700 dark:text-teal-400", hover: "hover:bg-teal-50 dark:hover:bg-teal-950/30", bg: "bg-teal-50 dark:bg-teal-950/20", bgGradient: "bg-gradient-to-br from-teal-50/50 to-transparent dark:from-teal-950/10", borderLight: "border-teal-500/20", borderHeavy: "border-teal-500/30", iconText: "text-teal-600 dark:text-teal-400", hoverBorder: "hover:border-teal-500/40" },
+  slate: { border: "border-slate-500/50", text: "text-slate-700 dark:text-slate-400", hover: "hover:bg-slate-50 dark:hover:bg-slate-950/30", bg: "bg-slate-50 dark:bg-slate-950/20", bgGradient: "bg-gradient-to-br from-slate-50/50 to-transparent dark:from-slate-950/10", borderLight: "border-slate-500/20", borderHeavy: "border-slate-500/30", iconText: "text-slate-600 dark:text-slate-400", hoverBorder: "hover:border-slate-500/40" },
+  red: { border: "border-red-500/50", text: "text-red-700 dark:text-red-400", hover: "hover:bg-red-50 dark:hover:bg-red-950/30", bg: "bg-red-50 dark:bg-red-950/20", bgGradient: "bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-950/10", borderLight: "border-red-500/20", borderHeavy: "border-red-500/30", iconText: "text-red-600 dark:text-red-400", hoverBorder: "hover:border-red-500/40" },
+  fuchsia: { border: "border-fuchsia-500/50", text: "text-fuchsia-700 dark:text-fuchsia-400", hover: "hover:bg-fuchsia-50 dark:hover:bg-fuchsia-950/30", bg: "bg-fuchsia-50 dark:bg-fuchsia-950/20", bgGradient: "bg-gradient-to-br from-fuchsia-50/50 to-transparent dark:from-fuchsia-950/10", borderLight: "border-fuchsia-500/20", borderHeavy: "border-fuchsia-500/30", iconText: "text-fuchsia-600 dark:text-fuchsia-400", hoverBorder: "hover:border-fuchsia-500/40" },
+  purple: { border: "border-purple-500/50", text: "text-purple-700 dark:text-purple-400", hover: "hover:bg-purple-50 dark:hover:bg-purple-950/30", bg: "bg-purple-50 dark:bg-purple-950/20", bgGradient: "bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/10", borderLight: "border-purple-500/20", borderHeavy: "border-purple-500/30", iconText: "text-purple-600 dark:text-purple-400", hoverBorder: "hover:border-purple-500/40" },
+  indigo: { border: "border-indigo-500/50", text: "text-indigo-700 dark:text-indigo-400", hover: "hover:bg-indigo-50 dark:hover:bg-indigo-950/30", bg: "bg-indigo-50 dark:bg-indigo-950/20", bgGradient: "bg-gradient-to-br from-indigo-50/50 to-transparent dark:from-indigo-950/10", borderLight: "border-indigo-500/20", borderHeavy: "border-indigo-500/30", iconText: "text-indigo-600 dark:text-indigo-400", hoverBorder: "hover:border-indigo-500/40" },
+  cyan: { border: "border-cyan-500/50", text: "text-cyan-700 dark:text-cyan-400", hover: "hover:bg-cyan-50 dark:hover:bg-cyan-950/30", bg: "bg-cyan-50 dark:bg-cyan-950/20", bgGradient: "bg-gradient-to-br from-cyan-50/50 to-transparent dark:from-cyan-950/10", borderLight: "border-cyan-500/20", borderHeavy: "border-cyan-500/30", iconText: "text-cyan-600 dark:text-cyan-400", hoverBorder: "hover:border-cyan-500/40" },
+  orange: { border: "border-orange-500/50", text: "text-orange-700 dark:text-orange-400", hover: "hover:bg-orange-50 dark:hover:bg-orange-950/30", bg: "bg-orange-50 dark:bg-orange-950/20", bgGradient: "bg-gradient-to-br from-orange-50/50 to-transparent dark:from-orange-950/10", borderLight: "border-orange-500/20", borderHeavy: "border-orange-500/30", iconText: "text-orange-600 dark:text-orange-400", hoverBorder: "hover:border-orange-500/40" },
+  pink: { border: "border-pink-500/50", text: "text-pink-700 dark:text-pink-400", hover: "hover:bg-pink-50 dark:hover:bg-pink-950/30", bg: "bg-pink-50 dark:bg-pink-950/20", bgGradient: "bg-gradient-to-br from-pink-50/50 to-transparent dark:from-pink-950/10", borderLight: "border-pink-500/20", borderHeavy: "border-pink-500/30", iconText: "text-pink-600 dark:text-pink-400", hoverBorder: "hover:border-pink-500/40" },
+  lime: { border: "border-lime-500/50", text: "text-lime-700 dark:text-lime-400", hover: "hover:bg-lime-50 dark:hover:bg-lime-950/30", bg: "bg-lime-50 dark:bg-lime-950/20", bgGradient: "bg-gradient-to-br from-lime-50/50 to-transparent dark:from-lime-950/10", borderLight: "border-lime-500/20", borderHeavy: "border-lime-500/30", iconText: "text-lime-600 dark:text-lime-400", hoverBorder: "hover:border-lime-500/40" },
+  sky: { border: "border-sky-500/50", text: "text-sky-700 dark:text-sky-400", hover: "hover:bg-sky-50 dark:hover:bg-sky-950/30", bg: "bg-sky-50 dark:bg-sky-950/20", bgGradient: "bg-gradient-to-br from-sky-50/50 to-transparent dark:from-sky-950/10", borderLight: "border-sky-500/20", borderHeavy: "border-sky-500/30", iconText: "text-sky-600 dark:text-sky-400", hoverBorder: "hover:border-sky-500/40" },
+  green: { border: "border-green-500/50", text: "text-green-700 dark:text-green-400", hover: "hover:bg-green-50 dark:hover:bg-green-950/30", bg: "bg-green-50 dark:bg-green-950/20", bgGradient: "bg-gradient-to-br from-green-50/50 to-transparent dark:from-green-950/10", borderLight: "border-green-500/20", borderHeavy: "border-green-500/30", iconText: "text-green-600 dark:text-green-400", hoverBorder: "hover:border-green-500/40" },
+};
+
+const c = (color: string) => colorMap[color] || colorMap.slate;
 
 export default function FamilyEducation() {
   const navigate = useNavigate();
@@ -267,7 +282,7 @@ export default function FamilyEducation() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $14.99/month to access our complete library of educational resources.
+                  Join our family support membership for just $10/month to access our complete library of educational resources.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">
@@ -420,7 +435,7 @@ export default function FamilyEducation() {
               </div>
               
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-3 gap-2">
                   <TabsTrigger 
                     value="tools" 
                     className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
@@ -460,18 +475,7 @@ export default function FamilyEducation() {
                     </div>
                   </TabsTrigger>
                   
-                  <TabsTrigger 
-                    value="videos" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
-                  >
-                    <div className="p-2 rounded-full bg-indigo-500/20">
-                      <Video className="h-5 w-5 text-indigo-600" />
-                    </div>
-                    <div className="text-center sm:text-left">
-                      <div className="font-semibold text-sm">Video Library</div>
-                      <div className="text-xs opacity-70 hidden sm:block">Expert-Led Content</div>
-                    </div>
-                  </TabsTrigger>
+
                 </TabsList>
 
               {/* Interactive Tools Tab */}
@@ -619,15 +623,15 @@ export default function FamilyEducation() {
                     <AccordionItem 
                       key={pillar.id} 
                       value={pillar.id}
-                      className={`border-2 border-${pillar.color}-500/30 rounded-lg overflow-hidden bg-gradient-to-br from-${pillar.color}-50/50 to-transparent dark:from-${pillar.color}-950/10`}
+                      className={`border-2 ${c(pillar.color).borderHeavy} rounded-lg overflow-hidden ${c(pillar.color).bgGradient}`}
                     >
                       <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/30">
                         <div className="flex items-center gap-4 text-left">
-                          <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-${pillar.color}-500/20 flex items-center justify-center`}>
-                            <span className={`text-lg font-bold text-${pillar.color}-600 dark:text-${pillar.color}-400`}>{pillar.number}</span>
+                          <div className={`flex-shrink-0 w-10 h-10 rounded-full ${c(pillar.color).bg} flex items-center justify-center`}>
+                            <span className={`text-lg font-bold ${c(pillar.color).iconText}`}>{pillar.number}</span>
                           </div>
                           <div className="flex items-center gap-3">
-                            <pillar.icon className={`h-5 w-5 text-${pillar.color}-600 dark:text-${pillar.color}-400`} />
+                            <pillar.icon className={`h-5 w-5 ${c(pillar.color).iconText}`} />
                             <div>
                               <h3 className="font-semibold text-foreground">{pillar.title}</h3>
                               <p className="text-sm text-muted-foreground">{pillar.subtitle}</p>
@@ -652,7 +656,7 @@ export default function FamilyEducation() {
                                       <Button 
                                         variant="outline" 
                                         size="sm" 
-                                        className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
+                                        className={`gap-2 ${c(resource.color).border} ${c(resource.color).text} ${c(resource.color).hover} transition-all`}
                                       >
                                         <FileText className="h-3 w-3" />
                                         {resource.title}
@@ -683,7 +687,7 @@ export default function FamilyEducation() {
                                     <Button 
                                       variant="outline" 
                                       size="sm" 
-                                      className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
+                                      className={`gap-2 ${c(resource.color).border} ${c(resource.color).text} ${c(resource.color).hover} transition-all`}
                                     >
                                       <Brain className="h-3 w-3" />
                                       {resource.title}
@@ -696,7 +700,7 @@ export default function FamilyEducation() {
                                   <Button 
                                     variant="outline" 
                                     size="sm" 
-                                    className={`gap-2 border-${resource.color}-500/50 text-${resource.color}-700 hover:bg-${resource.color}-50 dark:text-${resource.color}-400 dark:hover:bg-${resource.color}-950/30 transition-all`}
+                                    className={`gap-2 ${c(resource.color).border} ${c(resource.color).text} ${c(resource.color).hover} transition-all`}
                                   >
                                     <FileText className="h-3 w-3" />
                                     {resource.title}
@@ -876,40 +880,7 @@ export default function FamilyEducation() {
                 </div>
               </TabsContent>
 
-              {/* Video Library Tab */}
-              <TabsContent value="videos" className="space-y-8 animate-fade-in">
-                <div className="text-center">
-                  <div className="inline-flex items-center gap-3 mb-4">
-                    <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
-                      <Video className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-                    </div>
-                    <div className="text-left">
-                      <h3 className="text-2xl font-semibold text-logo-green">Video Library</h3>
-                      <p className="text-sm text-muted-foreground">Expert-led educational content</p>
-                    </div>
-                  </div>
-                </div>
 
-                <Card className="border-2 border-indigo-500/20 bg-gradient-to-br from-indigo-50/50 to-transparent dark:from-indigo-950/10">
-                  <CardContent className="py-16 text-center">
-                    <div className="relative inline-block mb-6">
-                      <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-xl animate-pulse" />
-                      <Video className="relative h-20 w-20 text-indigo-500/60 mx-auto" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-foreground mb-3">Coming Soon</h3>
-                    <p className="text-muted-foreground max-w-lg mx-auto mb-6">
-                      We're developing a comprehensive library of expert-led video content covering understanding addiction, setting boundaries, effective communication, treatment navigation, and family recovery.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-2 text-sm text-muted-foreground">
-                      <span className="px-3 py-1 rounded-full bg-muted">Understanding Addiction</span>
-                      <span className="px-3 py-1 rounded-full bg-muted">Setting Boundaries</span>
-                      <span className="px-3 py-1 rounded-full bg-muted">Communication Strategies</span>
-                      <span className="px-3 py-1 rounded-full bg-muted">Treatment Navigation</span>
-                      <span className="px-3 py-1 rounded-full bg-muted">Family Recovery</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
             </Tabs>
             </div>
           </div>

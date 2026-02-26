@@ -3,6 +3,8 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Home, ArrowLeft, Phone } from "lucide-react";
 import Footer from "./Footer";
 import SiteSearch from "./SiteSearch";
+import Breadcrumbs from "./Breadcrumbs";
+import { getBreadcrumbs } from "@/data/breadcrumbMap";
 import { useNativeBackButton } from "@/hooks/useNativeBackButton";
 import logo from "@/assets/logo.png";
 
@@ -22,9 +24,18 @@ const Layout = ({ children }: LayoutProps) => {
   }, [pathname]);
 
   const isHome = pathname === "/";
+  const breadcrumbs = getBreadcrumbs(pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Skip to main content - visually hidden until focused */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm focus:font-medium focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        Skip to main content
+      </a>
+
       {!isHome && (
         <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40">
           <div className="container mx-auto px-4 flex items-center h-14">
@@ -66,9 +77,10 @@ const Layout = ({ children }: LayoutProps) => {
               </a>
             </div>
           </div>
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         </div>
       )}
-      <main className="flex-1 pb-safe">
+      <main id="main-content" className="flex-1 pb-safe">
         {children}
       </main>
       <Footer />

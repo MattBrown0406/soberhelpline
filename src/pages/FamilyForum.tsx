@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { CodeOfConductDialog } from "@/components/forum/CodeOfConductDialog";
@@ -19,6 +19,21 @@ import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
 import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
+
+function relativeTime(dateStr: string): string {
+  const now = Date.now();
+  const then = new Date(dateStr).getTime();
+  const diffMs = now - then;
+  const minutes = Math.floor(diffMs / 60000);
+  if (minutes < 1) return "just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
 
 interface ForumTopic {
   id: string;
@@ -123,6 +138,7 @@ export default function FamilyForum() {
   }>>([]);
   const [totalMembers, setTotalMembers] = useState(0);
   const [onlineMembers, setOnlineMembers] = useState(0);
+  const [topicStats, setTopicStats] = useState<Record<string, { count: number; lastActive: string | null }>>({});
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -277,6 +293,37 @@ export default function FamilyForum() {
     fetchRecentPosts();
   }, [hasMembership]);
 
+  // Fetch topic post counts
+  useEffect(() => {
+    const fetchTopicStats = async () => {
+      if (!hasMembership) return;
+      try {
+        const { data, error } = await supabase
+          .from('forum_posts')
+          .select('topic_id, created_at');
+
+        if (error) throw error;
+        if (!data) return;
+
+        const stats: Record<string, { count: number; lastActive: string | null }> = {};
+        for (const post of data) {
+          const tid = post.topic_id;
+          if (!stats[tid]) {
+            stats[tid] = { count: 0, lastActive: null };
+          }
+          stats[tid].count++;
+          if (!stats[tid].lastActive || post.created_at > stats[tid].lastActive!) {
+            stats[tid].lastActive = post.created_at;
+          }
+        }
+        setTopicStats(stats);
+      } catch (error) {
+        console.error("Error fetching topic stats:", error);
+      }
+    };
+    fetchTopicStats();
+  }, [hasMembership]);
+
   // Fetch total members count and track online presence
   useEffect(() => {
     const fetchMemberCount = async () => {
@@ -383,7 +430,7 @@ export default function FamilyForum() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to connect with other families in our discussion forum.
+                  Join our family support membership for just $14.99/month to connect with other families in our discussion forum.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">
@@ -437,38 +484,31 @@ export default function FamilyForum() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center gap-4 mb-6">
+            <div className="flex flex-col gap-3 mb-6">
               <Link
                 to="/family-support"
-                className="inline-flex items-center text-primary hover:text-primary/80"
+                className="inline-flex items-center text-primary hover:text-primary/80 w-fit"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Family Support
               </Link>
-              <Link to="/family-education">
-                <Button variant="default" className="gap-2 bg-logo-green hover:bg-logo-green/90">
-                  <Video className="h-4 w-4" />
-                  Education Videos & Resources
-                </Button>
-              </Link>
-              <Link to="/family-webinars">
-                <Button variant="default" className="gap-2 bg-primary hover:bg-primary/90">
-                  <CalendarDays className="h-4 w-4" />
-                  Monthly Webinar Registration
-                </Button>
-              </Link>
-              <Link to="/family-coaching">
-                <Button variant="default" className="gap-2 bg-amber-600 hover:bg-amber-600/90 text-white">
-                  <Users className="h-4 w-4" />
-                  Family Coaching
-                </Button>
-              </Link>
-              <Link to="/monday-zoom-registration">
-                <Button variant="default" className="gap-2 bg-blue-600 hover:bg-blue-600/90 text-white">
-                  <Video className="h-4 w-4" />
-                  Monday Night Zoom
-                </Button>
-              </Link>
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { to: "/family-education", label: "Education" },
+                  { to: "/family-webinars", label: "Webinars" },
+                  { to: "/family-coaching", label: "Coaching" },
+                  { to: "/monday-zoom-registration", label: "Monday Zoom" },
+                  { to: "/sibling-support", label: "Sibling Support" },
+                ].map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
@@ -543,6 +583,18 @@ export default function FamilyForum() {
                                 <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                               </div>
                               <p className="text-sm text-muted-foreground mt-1">{topic.description}</p>
+                              {topicStats[topic.id] && (
+                                <div className="flex items-center gap-2 mt-2">
+                                  <Badge variant="secondary" className="text-xs font-normal">
+                                    {topicStats[topic.id].count} {topicStats[topic.id].count === 1 ? 'post' : 'posts'}
+                                  </Badge>
+                                  {topicStats[topic.id].lastActive && (
+                                    <span className="text-xs text-muted-foreground">
+                                      Last active {relativeTime(topicStats[topic.id].lastActive!)}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CardContent>
@@ -593,7 +645,7 @@ export default function FamilyForum() {
                           <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
                             <span>{post.username}</span>
                             <span>•</span>
-                            <span>{new Date(post.created_at).toLocaleDateString()}</span>
+                            <span>{relativeTime(post.created_at)}</span>
                           </div>
                         </Link>
                       ))

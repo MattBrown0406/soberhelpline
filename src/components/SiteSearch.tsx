@@ -31,6 +31,8 @@ export default function SiteSearch() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
 
   const results = useMemo(() => {
@@ -62,6 +64,8 @@ export default function SiteSearch() {
   const closeSearch = useCallback(() => {
     setOpen(false);
     setQuery("");
+    // Restore focus to the trigger button
+    setTimeout(() => triggerRef.current?.focus(), 0);
   }, []);
 
   const selectItem = useCallback(
@@ -115,12 +119,36 @@ export default function SiteSearch() {
   // Reset selection on query change
   useEffect(() => setSelectedIndex(0), [query]);
 
+  // Focus trap: keep focus within the dialog when open
+  useEffect(() => {
+    if (!open) return;
+    const handleFocusTrap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleFocusTrap);
+    return () => document.removeEventListener("keydown", handleFocusTrap);
+  }, [open]);
+
   let flatIdx = -1;
 
   return (
     <>
       {/* Trigger button */}
       <button
+        ref={triggerRef}
         onClick={openSearch}
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
         aria-label="Search site"
@@ -143,6 +171,10 @@ export default function SiteSearch() {
 
           {/* Dialog */}
           <div
+            ref={dialogRef}
+            role="dialog"
+            aria-label="Site search"
+            aria-modal="true"
             className="relative w-full max-w-lg bg-background border border-border rounded-xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
