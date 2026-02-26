@@ -1,119 +1,124 @@
+import React, { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
-import ProviderInfo from "./pages/ProviderInfo";
-import RecoveryPodcasts from "./pages/RecoveryPodcasts";
-import InpatientTreatment from "./pages/InpatientTreatment";
-import OutpatientTreatment from "./pages/OutpatientTreatment";
-import MedicalDetox from "./pages/MedicalDetox";
-import Interventionists from "./pages/Interventionists";
-import SoberCoachesCompanions from "./pages/SoberCoachesCompanions";
-import SoberLiving from "./pages/SoberLiving";
-import Therapists from "./pages/Therapists";
-import Psychiatrists from "./pages/Psychiatrists";
-import Auth from "./pages/Auth";
-import NotFound from "./pages/NotFound";
-import Admin from "./pages/Admin";
-import SubscriptionSuccess from "./pages/SubscriptionSuccess";
-import SubscriptionCancel from "./pages/SubscriptionCancel";
-import Blog from "./pages/Blog";
-import BlogArticle from "./pages/BlogArticle";
-import AddictionAssessment from "./pages/AddictionAssessment";
-import FAQs from "./pages/FAQs";
-import FamilySupport from "./pages/FamilySupport";
-import UnderstandingAddiction from "./pages/UnderstandingAddiction";
-import FamilyMembership from "./pages/FamilyMembership";
-import FamilyEducation from "./pages/FamilyEducation";
-import FamilyForum from "./pages/FamilyForum";
-import FamilyConsultation from "./pages/FamilyConsultation";
-import MondayZoomRegistration from "./pages/MondayZoomRegistration";
-import FamilyWebinars from "./pages/FamilyWebinars";
-import ForumTopic from "./pages/ForumTopic";
-import TreatmentQuestions from "./pages/TreatmentQuestions";
-import RecoveryRequirements from "./pages/RecoveryRequirements";
-import FamilyActionPlan from "./pages/FamilyActionPlan";
-import ScenarioExercise from "./pages/ScenarioExercise";
-import CrisisChaos from "./pages/CrisisChaos";
-import EmotionalRegulation from "./pages/EmotionalRegulation";
-import ValuesExercise from "./pages/ValuesExercise";
-import TalkingAboutTreatment from "./pages/TalkingAboutTreatment";
-import ReadinessChecklist from "./pages/ReadinessChecklist";
-import RelapseWarningSignsTracker from "./pages/RelapseWarningSignsTracker";
-import CommunicationGuide from "./pages/CommunicationGuide";
-import AftercareChecklist from "./pages/AftercareChecklist";
-import TreatmentRedFlags from "./pages/TreatmentRedFlags";
-import FamilyAdvocacyToolkit from "./pages/FamilyAdvocacyToolkit";
-import WhyChangeDoesntHappen from "./pages/WhyChangeDoesntHappen";
-import TreatmentIndustryGuide from "./pages/TreatmentIndustryGuide";
-import DrugInducedPsychosis from "./pages/DrugInducedPsychosis";
-import MultipleTreatmentEpisodes from "./pages/MultipleTreatmentEpisodes";
-import LegalIssuesGuide from "./pages/LegalIssuesGuide";
-import DiseaseChoiceRealityMap from "./pages/DiseaseChoiceRealityMap";
-import WhyWillpowerFails from "./pages/WhyWillpowerFails";
-import AddictionProgressionTimeline from "./pages/AddictionProgressionTimeline";
-import MentalHealthVsSubstanceInduced from "./pages/MentalHealthVsSubstanceInduced";
-import MisunderstoodDiagnoses from "./pages/MisunderstoodDiagnoses";
-import MentalHealthDelaysRecovery from "./pages/MentalHealthDelaysRecovery";
-import TraumaVsExcuses from "./pages/TraumaVsExcuses";
-import HowTraumaShapesAddiction from "./pages/HowTraumaShapesAddiction";
-import TreatmentModalities from "./pages/TreatmentModalities";
-import MatchingModality from "./pages/MatchingModality";
-import TherapyTimingGuide from "./pages/TherapyTimingGuide";
-import FamilyInterferenceGuide from "./pages/FamilyInterferenceGuide";
-import BoundariesUltimatumsGuide from "./pages/BoundariesUltimatumsGuide";
-import WhatChangesWhenFamiliesChange from "./pages/WhatChangesWhenFamiliesChange";
-import InsightBehaviorTracker from "./pages/InsightBehaviorTracker";
-import ValuesAlignedDecisions from "./pages/ValuesAlignedDecisions";
-import LivingWellRegardless from "./pages/LivingWellRegardless";
-import BrainSpiritualRecovery from "./pages/BrainSpiritualRecovery";
-import TwelveStepsExplained from "./pages/TwelveStepsExplained";
-import NonTwelveStepModalities from "./pages/NonTwelveStepModalities";
-import NoNegotiationGuide from "./pages/NoNegotiationGuide";
-import StrongOneGuide from "./pages/StrongOneGuide";
-import GuiltReliefResentmentCycle from "./pages/GuiltReliefResentmentCycle";
-import SiblingExperience from "./pages/SiblingExperience";
-import GrowingUpShadowAddiction from "./pages/GrowingUpShadowAddiction";
-import SiblingGuiltAngerLoyalty from "./pages/SiblingGuiltAngerLoyalty";
-import RebuildingSiblingRelationships from "./pages/RebuilingSiblingRelationships";
-import ParentsRepairingSiblingSystem from "./pages/ParentsRepairingSiblingSystem";
-import SiblingSupport from "./pages/SiblingSupport";
-import FamilyRolesAddiction from "./pages/FamilyRolesAddiction";
-import AddictionRewritesFamilyRules from "./pages/AddictionRewritesFamilyRules";
-import CostOfSecrecy from "./pages/CostOfSecrecy";
-import BoundaryDrift from "./pages/BoundaryDrift";
-import AngerAndBoundaries from "./pages/AngerAndBoundaries";
-import FlexibilityVsInstability from "./pages/FlexibilityVsInstability";
-import AddictionAttachmentStyles from "./pages/AddictionAttachmentStyles";
-import GriefForFamily from "./pages/GriefForFamily";
-import EnablingLanguageTranslator from "./pages/EnablingLanguageTranslator";
-import IntergenerationalEnabling from "./pages/IntergenerationalEnabling";
-import WhoBenefitsFilter from "./pages/WhoBenefitsFilter";
-import FamilyUnityLiability from "./pages/FamilyUnityLiability";
-import SafeToOpenUp from "./pages/SafeToOpenUp";
-import AddictionAsStressDisorder from "./pages/AddictionAsStressDisorder";
-import FearInventoryExercise from "./pages/FearInventoryExercise";
-import ConversationStartersGuide from "./pages/ConversationStartersGuide";
-import AILifeCoach from "./pages/AILifeCoach";
-import AIEnablingDecisionCoach from "./pages/AIEnablingDecisionCoach";
-import AIBoundaryBuilderCoach from "./pages/AIBoundaryBuilderCoach";
-import AITreatmentNavigator from "./pages/AITreatmentNavigator";
-import AIRelapseResponseGuide from "./pages/AIRelapseResponseGuide";
-import AIAddictionRealityTranslator from "./pages/AIAddictionRealityTranslator";
-import EatingDisordersGuide from "./pages/EatingDisordersGuide";
-import FreeGuide from "./pages/FreeGuide";
-import ConsultationProviderDashboard from "./pages/ConsultationProviderDashboard";
-import ForProviders from "./pages/ForProviders";
-import BookConsultation from "./pages/BookConsultation";
-import JoinMeeting from "./pages/JoinMeeting";
-import FamilyCoaching from "./pages/FamilyCoaching";
-import CoachingOnboarding from "./pages/CoachingOnboarding";
-import Testimonials from "./pages/Testimonials";
-import RecoveryResources from "./pages/RecoveryResources";
-import OnboardingQuiz from "./pages/OnboardingQuiz";
+
+// Lazy-loaded page components
+const ProviderInfo = React.lazy(() => import("./pages/ProviderInfo"));
+const RecoveryPodcasts = React.lazy(() => import("./pages/RecoveryPodcasts"));
+const InpatientTreatment = React.lazy(() => import("./pages/InpatientTreatment"));
+const OutpatientTreatment = React.lazy(() => import("./pages/OutpatientTreatment"));
+const MedicalDetox = React.lazy(() => import("./pages/MedicalDetox"));
+const Interventionists = React.lazy(() => import("./pages/Interventionists"));
+const SoberCoachesCompanions = React.lazy(() => import("./pages/SoberCoachesCompanions"));
+const SoberLiving = React.lazy(() => import("./pages/SoberLiving"));
+const Therapists = React.lazy(() => import("./pages/Therapists"));
+const Psychiatrists = React.lazy(() => import("./pages/Psychiatrists"));
+const Auth = React.lazy(() => import("./pages/Auth"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Admin = React.lazy(() => import("./pages/Admin"));
+const SubscriptionSuccess = React.lazy(() => import("./pages/SubscriptionSuccess"));
+const SubscriptionCancel = React.lazy(() => import("./pages/SubscriptionCancel"));
+const Blog = React.lazy(() => import("./pages/Blog"));
+const BlogArticle = React.lazy(() => import("./pages/BlogArticle"));
+const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment"));
+const FAQs = React.lazy(() => import("./pages/FAQs"));
+const FamilySupport = React.lazy(() => import("./pages/FamilySupport"));
+const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAddiction"));
+const FamilyMembership = React.lazy(() => import("./pages/FamilyMembership"));
+const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
+const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
+const FamilyConsultation = React.lazy(() => import("./pages/FamilyConsultation"));
+const MondayZoomRegistration = React.lazy(() => import("./pages/MondayZoomRegistration"));
+const FamilyWebinars = React.lazy(() => import("./pages/FamilyWebinars"));
+const ForumTopic = React.lazy(() => import("./pages/ForumTopic"));
+const TreatmentQuestions = React.lazy(() => import("./pages/TreatmentQuestions"));
+const RecoveryRequirements = React.lazy(() => import("./pages/RecoveryRequirements"));
+const FamilyActionPlan = React.lazy(() => import("./pages/FamilyActionPlan"));
+const ScenarioExercise = React.lazy(() => import("./pages/ScenarioExercise"));
+const CrisisChaos = React.lazy(() => import("./pages/CrisisChaos"));
+const EmotionalRegulation = React.lazy(() => import("./pages/EmotionalRegulation"));
+const ValuesExercise = React.lazy(() => import("./pages/ValuesExercise"));
+const TalkingAboutTreatment = React.lazy(() => import("./pages/TalkingAboutTreatment"));
+const ReadinessChecklist = React.lazy(() => import("./pages/ReadinessChecklist"));
+const RelapseWarningSignsTracker = React.lazy(() => import("./pages/RelapseWarningSignsTracker"));
+const CommunicationGuide = React.lazy(() => import("./pages/CommunicationGuide"));
+const AftercareChecklist = React.lazy(() => import("./pages/AftercareChecklist"));
+const TreatmentRedFlags = React.lazy(() => import("./pages/TreatmentRedFlags"));
+const FamilyAdvocacyToolkit = React.lazy(() => import("./pages/FamilyAdvocacyToolkit"));
+const WhyChangeDoesntHappen = React.lazy(() => import("./pages/WhyChangeDoesntHappen"));
+const TreatmentIndustryGuide = React.lazy(() => import("./pages/TreatmentIndustryGuide"));
+const DrugInducedPsychosis = React.lazy(() => import("./pages/DrugInducedPsychosis"));
+const MultipleTreatmentEpisodes = React.lazy(() => import("./pages/MultipleTreatmentEpisodes"));
+const LegalIssuesGuide = React.lazy(() => import("./pages/LegalIssuesGuide"));
+const DiseaseChoiceRealityMap = React.lazy(() => import("./pages/DiseaseChoiceRealityMap"));
+const WhyWillpowerFails = React.lazy(() => import("./pages/WhyWillpowerFails"));
+const AddictionProgressionTimeline = React.lazy(() => import("./pages/AddictionProgressionTimeline"));
+const MentalHealthVsSubstanceInduced = React.lazy(() => import("./pages/MentalHealthVsSubstanceInduced"));
+const MisunderstoodDiagnoses = React.lazy(() => import("./pages/MisunderstoodDiagnoses"));
+const MentalHealthDelaysRecovery = React.lazy(() => import("./pages/MentalHealthDelaysRecovery"));
+const TraumaVsExcuses = React.lazy(() => import("./pages/TraumaVsExcuses"));
+const HowTraumaShapesAddiction = React.lazy(() => import("./pages/HowTraumaShapesAddiction"));
+const TreatmentModalities = React.lazy(() => import("./pages/TreatmentModalities"));
+const MatchingModality = React.lazy(() => import("./pages/MatchingModality"));
+const TherapyTimingGuide = React.lazy(() => import("./pages/TherapyTimingGuide"));
+const FamilyInterferenceGuide = React.lazy(() => import("./pages/FamilyInterferenceGuide"));
+const BoundariesUltimatumsGuide = React.lazy(() => import("./pages/BoundariesUltimatumsGuide"));
+const WhatChangesWhenFamiliesChange = React.lazy(() => import("./pages/WhatChangesWhenFamiliesChange"));
+const InsightBehaviorTracker = React.lazy(() => import("./pages/InsightBehaviorTracker"));
+const ValuesAlignedDecisions = React.lazy(() => import("./pages/ValuesAlignedDecisions"));
+const LivingWellRegardless = React.lazy(() => import("./pages/LivingWellRegardless"));
+const BrainSpiritualRecovery = React.lazy(() => import("./pages/BrainSpiritualRecovery"));
+const TwelveStepsExplained = React.lazy(() => import("./pages/TwelveStepsExplained"));
+const NonTwelveStepModalities = React.lazy(() => import("./pages/NonTwelveStepModalities"));
+const NoNegotiationGuide = React.lazy(() => import("./pages/NoNegotiationGuide"));
+const StrongOneGuide = React.lazy(() => import("./pages/StrongOneGuide"));
+const GuiltReliefResentmentCycle = React.lazy(() => import("./pages/GuiltReliefResentmentCycle"));
+const SiblingExperience = React.lazy(() => import("./pages/SiblingExperience"));
+const GrowingUpShadowAddiction = React.lazy(() => import("./pages/GrowingUpShadowAddiction"));
+const SiblingGuiltAngerLoyalty = React.lazy(() => import("./pages/SiblingGuiltAngerLoyalty"));
+const RebuildingSiblingRelationships = React.lazy(() => import("./pages/RebuilingSiblingRelationships"));
+const ParentsRepairingSiblingSystem = React.lazy(() => import("./pages/ParentsRepairingSiblingSystem"));
+const SiblingSupport = React.lazy(() => import("./pages/SiblingSupport"));
+const FamilyRolesAddiction = React.lazy(() => import("./pages/FamilyRolesAddiction"));
+const AddictionRewritesFamilyRules = React.lazy(() => import("./pages/AddictionRewritesFamilyRules"));
+const CostOfSecrecy = React.lazy(() => import("./pages/CostOfSecrecy"));
+const BoundaryDrift = React.lazy(() => import("./pages/BoundaryDrift"));
+const AngerAndBoundaries = React.lazy(() => import("./pages/AngerAndBoundaries"));
+const FlexibilityVsInstability = React.lazy(() => import("./pages/FlexibilityVsInstability"));
+const AddictionAttachmentStyles = React.lazy(() => import("./pages/AddictionAttachmentStyles"));
+const GriefForFamily = React.lazy(() => import("./pages/GriefForFamily"));
+const EnablingLanguageTranslator = React.lazy(() => import("./pages/EnablingLanguageTranslator"));
+const IntergenerationalEnabling = React.lazy(() => import("./pages/IntergenerationalEnabling"));
+const WhoBenefitsFilter = React.lazy(() => import("./pages/WhoBenefitsFilter"));
+const FamilyUnityLiability = React.lazy(() => import("./pages/FamilyUnityLiability"));
+const SafeToOpenUp = React.lazy(() => import("./pages/SafeToOpenUp"));
+const AddictionAsStressDisorder = React.lazy(() => import("./pages/AddictionAsStressDisorder"));
+const FearInventoryExercise = React.lazy(() => import("./pages/FearInventoryExercise"));
+const ConversationStartersGuide = React.lazy(() => import("./pages/ConversationStartersGuide"));
+const AILifeCoach = React.lazy(() => import("./pages/AILifeCoach"));
+const AIEnablingDecisionCoach = React.lazy(() => import("./pages/AIEnablingDecisionCoach"));
+const AIBoundaryBuilderCoach = React.lazy(() => import("./pages/AIBoundaryBuilderCoach"));
+const AITreatmentNavigator = React.lazy(() => import("./pages/AITreatmentNavigator"));
+const AIRelapseResponseGuide = React.lazy(() => import("./pages/AIRelapseResponseGuide"));
+const AIAddictionRealityTranslator = React.lazy(() => import("./pages/AIAddictionRealityTranslator"));
+const EatingDisordersGuide = React.lazy(() => import("./pages/EatingDisordersGuide"));
+const FreeGuide = React.lazy(() => import("./pages/FreeGuide"));
+const ConsultationProviderDashboard = React.lazy(() => import("./pages/ConsultationProviderDashboard"));
+const ForProviders = React.lazy(() => import("./pages/ForProviders"));
+const BookConsultation = React.lazy(() => import("./pages/BookConsultation"));
+const JoinMeeting = React.lazy(() => import("./pages/JoinMeeting"));
+const FamilyCoaching = React.lazy(() => import("./pages/FamilyCoaching"));
+const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
+const Testimonials = React.lazy(() => import("./pages/Testimonials"));
+const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
+const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -123,138 +128,140 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/for-providers" element={<ForProviders />} />
-            <Route path="/provider-info" element={<ProviderInfo />} />
-            <Route path="/recovery-podcasts" element={<RecoveryPodcasts />} />
-            <Route path="/inpatient-treatment" element={<InpatientTreatment />} />
-            <Route path="/outpatient-treatment" element={<OutpatientTreatment />} />
-            <Route path="/medical-detox" element={<MedicalDetox />} />
-            <Route path="/interventionists" element={<Interventionists />} />
-            <Route path="/sober-coaches-companions" element={<SoberCoachesCompanions />} />
-            <Route path="/sober-living" element={<SoberLiving />} />
-            <Route path="/therapists" element={<Therapists />} />
-            <Route path="/psychiatrists" element={<Psychiatrists />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/subscription/success" element={<SubscriptionSuccess />} />
-            <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogArticle />} />
-            <Route path="/fentanyl-overdose-signs-safety-plan" element={<BlogArticle />} />
-            <Route path="/parents-addicted-adult-children" element={<BlogArticle />} />
-            <Route path="/addiction-grandchildren-boundaries" element={<BlogArticle />} />
-            <Route path="/how-addiction-affects-the-brain" element={<BlogArticle />} />
-            <Route path="/addiction-and-mental-health" element={<BlogArticle />} />
-            <Route path="/relapse-process-addiction" element={<BlogArticle />} />
-            <Route path="/relapse-warning-signs-family-education" element={<BlogArticle />} />
-            <Route path="/early-recovery-symptoms-family-education" element={<BlogArticle />} />
-            <Route path="/treatment-to-home-transition-family-education" element={<BlogArticle />} />
-            <Route path="/motivation-vs-capacity-addiction-family-education" element={<BlogArticle />} />
-            <Route path="/stability-vs-recovery-families-healing" element={<BlogArticle />} />
-            <Route path="/readiness-for-addiction-treatment-families" element={<BlogArticle />} />
-            <Route path="/emotional-whiplash-addiction-families" element={<BlogArticle />} />
-            <Route path="/sobriety-vs-recovery-families" element={<BlogArticle />} />
-            <Route path="/understanding-relapse-process-not-event" element={<BlogArticle />} />
-            <Route path="/personality-changes-in-addiction" element={<BlogArticle />} />
-            <Route path="/triggers-explained-addiction" element={<BlogArticle />} />
-            <Route path="/sleep-and-addiction-recovery" element={<BlogArticle />} />
-            <Route path="/attachment-styles-and-addiction" element={<BlogArticle />} />
-            <Route path="/addiction-assessment" element={<AddictionAssessment />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/family-support" element={<FamilySupport />} />
-            <Route path="/family-membership" element={<FamilyMembership />} />
-            <Route path="/family-education" element={<FamilyEducation />} />
-            <Route path="/family-forum" element={<FamilyForum />} />
-            <Route path="/family-forum/:topicId" element={<ForumTopic />} />
-            <Route path="/family-consultation" element={<FamilyConsultation />} />
-            <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
-            <Route path="/family-webinars" element={<FamilyWebinars />} />
-            <Route path="/treatment-questions" element={<TreatmentQuestions />} />
-            <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
-            <Route path="/family-action-plan" element={<FamilyActionPlan />} />
-            <Route path="/scenario-exercise" element={<ScenarioExercise />} />
-            <Route path="/crisis-chaos" element={<CrisisChaos />} />
-            <Route path="/emotional-regulation" element={<EmotionalRegulation />} />
-            <Route path="/values-exercise" element={<ValuesExercise />} />
-            <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
-            <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
-            <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
-            <Route path="/communication-guide" element={<CommunicationGuide />} />
-            <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
-            <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
-            <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />
-            <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
-            <Route path="/why-change-doesnt-happen" element={<WhyChangeDoesntHappen />} />
-            <Route path="/treatment-industry-guide" element={<TreatmentIndustryGuide />} />
-            <Route path="/drug-induced-psychosis" element={<DrugInducedPsychosis />} />
-            <Route path="/multiple-treatment-episodes" element={<MultipleTreatmentEpisodes />} />
-            <Route path="/legal-issues-guide" element={<LegalIssuesGuide />} />
-            <Route path="/disease-choice-reality-map" element={<DiseaseChoiceRealityMap />} />
-            <Route path="/why-willpower-fails" element={<WhyWillpowerFails />} />
-            <Route path="/addiction-progression-timeline" element={<AddictionProgressionTimeline />} />
-            <Route path="/mental-health-vs-substance-induced" element={<MentalHealthVsSubstanceInduced />} />
-            <Route path="/misunderstood-diagnoses" element={<MisunderstoodDiagnoses />} />
-            <Route path="/mental-health-delays-recovery" element={<MentalHealthDelaysRecovery />} />
-            <Route path="/trauma-vs-excuses" element={<TraumaVsExcuses />} />
-            <Route path="/how-trauma-shapes-addiction" element={<HowTraumaShapesAddiction />} />
-            <Route path="/treatment-modalities" element={<TreatmentModalities />} />
-            <Route path="/matching-modality" element={<MatchingModality />} />
-            <Route path="/therapy-timing" element={<TherapyTimingGuide />} />
-            <Route path="/family-interference" element={<FamilyInterferenceGuide />} />
-            <Route path="/boundaries-ultimatums" element={<BoundariesUltimatumsGuide />} />
-            <Route path="/what-changes-when-families-change" element={<WhatChangesWhenFamiliesChange />} />
-            <Route path="/insight-behavior-tracker" element={<InsightBehaviorTracker />} />
-            <Route path="/values-aligned-decisions" element={<ValuesAlignedDecisions />} />
-            <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
-            <Route path="/brain-spiritual-recovery" element={<BrainSpiritualRecovery />} />
-            <Route path="/twelve-steps-explained" element={<TwelveStepsExplained />} />
-            <Route path="/non-twelve-step-modalities" element={<NonTwelveStepModalities />} />
-            <Route path="/no-negotiation" element={<NoNegotiationGuide />} />
-            <Route path="/strong-one" element={<StrongOneGuide />} />
-            <Route path="/guilt-relief-resentment" element={<GuiltReliefResentmentCycle />} />
-            <Route path="/sibling-experience" element={<SiblingExperience />} />
-            <Route path="/growing-up-shadow" element={<GrowingUpShadowAddiction />} />
-            <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
-            <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
-            <Route path="/parents-repairing-sibling-system" element={<ParentsRepairingSiblingSystem />} />
-            <Route path="/sibling-support" element={<SiblingSupport />} />
-            <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
-            <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
-            <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
-            <Route path="/boundary-drift" element={<BoundaryDrift />} />
-            <Route path="/anger-and-boundaries" element={<AngerAndBoundaries />} />
-            <Route path="/flexibility-vs-instability" element={<FlexibilityVsInstability />} />
-            <Route path="/addiction-attachment-styles" element={<AddictionAttachmentStyles />} />
-            <Route path="/grief-for-family" element={<GriefForFamily />} />
-            <Route path="/enabling-language-translator" element={<EnablingLanguageTranslator />} />
-            <Route path="/intergenerational-enabling" element={<IntergenerationalEnabling />} />
-            <Route path="/who-benefits-filter" element={<WhoBenefitsFilter />} />
-            <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
-            <Route path="/safe-to-open-up" element={<SafeToOpenUp />} />
-            <Route path="/addiction-as-stress-disorder" element={<AddictionAsStressDisorder />} />
-            <Route path="/fear-inventory-exercise" element={<FearInventoryExercise />} />
-            <Route path="/conversation-starters" element={<ConversationStartersGuide />} />
-            <Route path="/ai-life-coach" element={<AILifeCoach />} />
-            <Route path="/ai-enabling-decision-coach" element={<AIEnablingDecisionCoach />} />
-            <Route path="/ai-boundary-builder-coach" element={<AIBoundaryBuilderCoach />} />
-            <Route path="/ai-treatment-navigator" element={<AITreatmentNavigator />} />
-            <Route path="/ai-relapse-response-guide" element={<AIRelapseResponseGuide />} />
-            <Route path="/ai-addiction-reality-translator" element={<AIAddictionRealityTranslator />} />
-            <Route path="/eating-disorders-guide" element={<EatingDisordersGuide />} />
-            <Route path="/free-guide" element={<FreeGuide />} />
-            <Route path="/consultation-provider-dashboard" element={<ConsultationProviderDashboard />} />
-            <Route path="/book-consultation" element={<BookConsultation />} />
-            <Route path="/join-meeting" element={<JoinMeeting />} />
-            <Route path="/family-coaching" element={<FamilyCoaching />} />
-            <Route path="/coaching-onboarding" element={<CoachingOnboarding />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/recovery-resources" element={<RecoveryResources />} />
-            <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/for-providers" element={<ForProviders />} />
+              <Route path="/provider-info" element={<ProviderInfo />} />
+              <Route path="/recovery-podcasts" element={<RecoveryPodcasts />} />
+              <Route path="/inpatient-treatment" element={<InpatientTreatment />} />
+              <Route path="/outpatient-treatment" element={<OutpatientTreatment />} />
+              <Route path="/medical-detox" element={<MedicalDetox />} />
+              <Route path="/interventionists" element={<Interventionists />} />
+              <Route path="/sober-coaches-companions" element={<SoberCoachesCompanions />} />
+              <Route path="/sober-living" element={<SoberLiving />} />
+              <Route path="/therapists" element={<Therapists />} />
+              <Route path="/psychiatrists" element={<Psychiatrists />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/subscription/success" element={<SubscriptionSuccess />} />
+              <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogArticle />} />
+              <Route path="/fentanyl-overdose-signs-safety-plan" element={<BlogArticle />} />
+              <Route path="/parents-addicted-adult-children" element={<BlogArticle />} />
+              <Route path="/addiction-grandchildren-boundaries" element={<BlogArticle />} />
+              <Route path="/how-addiction-affects-the-brain" element={<BlogArticle />} />
+              <Route path="/addiction-and-mental-health" element={<BlogArticle />} />
+              <Route path="/relapse-process-addiction" element={<BlogArticle />} />
+              <Route path="/relapse-warning-signs-family-education" element={<BlogArticle />} />
+              <Route path="/early-recovery-symptoms-family-education" element={<BlogArticle />} />
+              <Route path="/treatment-to-home-transition-family-education" element={<BlogArticle />} />
+              <Route path="/motivation-vs-capacity-addiction-family-education" element={<BlogArticle />} />
+              <Route path="/stability-vs-recovery-families-healing" element={<BlogArticle />} />
+              <Route path="/readiness-for-addiction-treatment-families" element={<BlogArticle />} />
+              <Route path="/emotional-whiplash-addiction-families" element={<BlogArticle />} />
+              <Route path="/sobriety-vs-recovery-families" element={<BlogArticle />} />
+              <Route path="/understanding-relapse-process-not-event" element={<BlogArticle />} />
+              <Route path="/personality-changes-in-addiction" element={<BlogArticle />} />
+              <Route path="/triggers-explained-addiction" element={<BlogArticle />} />
+              <Route path="/sleep-and-addiction-recovery" element={<BlogArticle />} />
+              <Route path="/attachment-styles-and-addiction" element={<BlogArticle />} />
+              <Route path="/addiction-assessment" element={<AddictionAssessment />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/family-support" element={<FamilySupport />} />
+              <Route path="/family-membership" element={<FamilyMembership />} />
+              <Route path="/family-education" element={<FamilyEducation />} />
+              <Route path="/family-forum" element={<FamilyForum />} />
+              <Route path="/family-forum/:topicId" element={<ForumTopic />} />
+              <Route path="/family-consultation" element={<FamilyConsultation />} />
+              <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
+              <Route path="/family-webinars" element={<FamilyWebinars />} />
+              <Route path="/treatment-questions" element={<TreatmentQuestions />} />
+              <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
+              <Route path="/family-action-plan" element={<FamilyActionPlan />} />
+              <Route path="/scenario-exercise" element={<ScenarioExercise />} />
+              <Route path="/crisis-chaos" element={<CrisisChaos />} />
+              <Route path="/emotional-regulation" element={<EmotionalRegulation />} />
+              <Route path="/values-exercise" element={<ValuesExercise />} />
+              <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
+              <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
+              <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
+              <Route path="/communication-guide" element={<CommunicationGuide />} />
+              <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
+              <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
+              <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />
+              <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
+              <Route path="/why-change-doesnt-happen" element={<WhyChangeDoesntHappen />} />
+              <Route path="/treatment-industry-guide" element={<TreatmentIndustryGuide />} />
+              <Route path="/drug-induced-psychosis" element={<DrugInducedPsychosis />} />
+              <Route path="/multiple-treatment-episodes" element={<MultipleTreatmentEpisodes />} />
+              <Route path="/legal-issues-guide" element={<LegalIssuesGuide />} />
+              <Route path="/disease-choice-reality-map" element={<DiseaseChoiceRealityMap />} />
+              <Route path="/why-willpower-fails" element={<WhyWillpowerFails />} />
+              <Route path="/addiction-progression-timeline" element={<AddictionProgressionTimeline />} />
+              <Route path="/mental-health-vs-substance-induced" element={<MentalHealthVsSubstanceInduced />} />
+              <Route path="/misunderstood-diagnoses" element={<MisunderstoodDiagnoses />} />
+              <Route path="/mental-health-delays-recovery" element={<MentalHealthDelaysRecovery />} />
+              <Route path="/trauma-vs-excuses" element={<TraumaVsExcuses />} />
+              <Route path="/how-trauma-shapes-addiction" element={<HowTraumaShapesAddiction />} />
+              <Route path="/treatment-modalities" element={<TreatmentModalities />} />
+              <Route path="/matching-modality" element={<MatchingModality />} />
+              <Route path="/therapy-timing" element={<TherapyTimingGuide />} />
+              <Route path="/family-interference" element={<FamilyInterferenceGuide />} />
+              <Route path="/boundaries-ultimatums" element={<BoundariesUltimatumsGuide />} />
+              <Route path="/what-changes-when-families-change" element={<WhatChangesWhenFamiliesChange />} />
+              <Route path="/insight-behavior-tracker" element={<InsightBehaviorTracker />} />
+              <Route path="/values-aligned-decisions" element={<ValuesAlignedDecisions />} />
+              <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
+              <Route path="/brain-spiritual-recovery" element={<BrainSpiritualRecovery />} />
+              <Route path="/twelve-steps-explained" element={<TwelveStepsExplained />} />
+              <Route path="/non-twelve-step-modalities" element={<NonTwelveStepModalities />} />
+              <Route path="/no-negotiation" element={<NoNegotiationGuide />} />
+              <Route path="/strong-one" element={<StrongOneGuide />} />
+              <Route path="/guilt-relief-resentment" element={<GuiltReliefResentmentCycle />} />
+              <Route path="/sibling-experience" element={<SiblingExperience />} />
+              <Route path="/growing-up-shadow" element={<GrowingUpShadowAddiction />} />
+              <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
+              <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
+              <Route path="/parents-repairing-sibling-system" element={<ParentsRepairingSiblingSystem />} />
+              <Route path="/sibling-support" element={<SiblingSupport />} />
+              <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
+              <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
+              <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
+              <Route path="/boundary-drift" element={<BoundaryDrift />} />
+              <Route path="/anger-and-boundaries" element={<AngerAndBoundaries />} />
+              <Route path="/flexibility-vs-instability" element={<FlexibilityVsInstability />} />
+              <Route path="/addiction-attachment-styles" element={<AddictionAttachmentStyles />} />
+              <Route path="/grief-for-family" element={<GriefForFamily />} />
+              <Route path="/enabling-language-translator" element={<EnablingLanguageTranslator />} />
+              <Route path="/intergenerational-enabling" element={<IntergenerationalEnabling />} />
+              <Route path="/who-benefits-filter" element={<WhoBenefitsFilter />} />
+              <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
+              <Route path="/safe-to-open-up" element={<SafeToOpenUp />} />
+              <Route path="/addiction-as-stress-disorder" element={<AddictionAsStressDisorder />} />
+              <Route path="/fear-inventory-exercise" element={<FearInventoryExercise />} />
+              <Route path="/conversation-starters" element={<ConversationStartersGuide />} />
+              <Route path="/ai-life-coach" element={<AILifeCoach />} />
+              <Route path="/ai-enabling-decision-coach" element={<AIEnablingDecisionCoach />} />
+              <Route path="/ai-boundary-builder-coach" element={<AIBoundaryBuilderCoach />} />
+              <Route path="/ai-treatment-navigator" element={<AITreatmentNavigator />} />
+              <Route path="/ai-relapse-response-guide" element={<AIRelapseResponseGuide />} />
+              <Route path="/ai-addiction-reality-translator" element={<AIAddictionRealityTranslator />} />
+              <Route path="/eating-disorders-guide" element={<EatingDisordersGuide />} />
+              <Route path="/free-guide" element={<FreeGuide />} />
+              <Route path="/consultation-provider-dashboard" element={<ConsultationProviderDashboard />} />
+              <Route path="/book-consultation" element={<BookConsultation />} />
+              <Route path="/join-meeting" element={<JoinMeeting />} />
+              <Route path="/family-coaching" element={<FamilyCoaching />} />
+              <Route path="/coaching-onboarding" element={<CoachingOnboarding />} />
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/recovery-resources" element={<RecoveryResources />} />
+              <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </BrowserRouter>
     </TooltipProvider>
