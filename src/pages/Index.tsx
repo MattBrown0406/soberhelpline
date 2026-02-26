@@ -230,54 +230,56 @@ const Index = () => {
         <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
         <div className="absolute bottom-0 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
         
-        <div className="container mx-auto px-4 py-8 md:py-20 relative">
-          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
+        <div className="container mx-auto px-4 py-10 md:py-24 relative">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4 md:mb-6">
               <Heart className="w-3 h-3 md:w-4 md:h-4" />
               For Families Affected by Addiction
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight px-2">
-              Leave the Chaos Behind.
-              <span className="block text-logo-green">Find Clarity Ahead.</span>
+              Your loved one is struggling with addiction.
+              <span className="block text-logo-green mt-2">You don't have to figure this out alone.</span>
             </h1>
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2 hero-description">
-              When addiction takes over your family, confusion becomes constant. We help you see clearly, act confidently, and reclaim your peace—whether or not your loved one chooses recovery.
+            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10 px-2 hero-description">
+              Join thousands of families who've found clarity, support, and a path forward through expert-created education, interactive tools, and a community that understands.
             </p>
             
-            {/* Primary CTA */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 md:mb-8 px-4">
-              <Link to={user ? "/family-forum" : "/family-membership"}>
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 md:mb-6 px-4">
+              <Link to="/onboarding-quiz">
                 <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <Users className="w-4 h-4 md:w-5 md:h-5" />
-                  {user ? "Go to Family Forum" : "Join Families Who Get It"}
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
+                  Take Our 2-Minute Quiz
                 </Button>
               </Link>
-              {!user && (
-                <Link to="/free-guide">
-                  <Button size="lg" variant="outline" className="gap-2 px-6 py-5 md:py-6 text-base md:text-lg">
-                    Get Free Guide First
-                  </Button>
-                </Link>
-              )}
+              <Link to="/family-education">
+                <Button size="lg" variant="outline" className="gap-2 px-6 py-5 md:py-6 text-base md:text-lg">
+                  <GraduationCap className="w-4 h-4 md:w-5 md:h-5" />
+                  Explore the Education Center
+                </Button>
+              </Link>
             </div>
-
-            {/* Outcome-focused trust indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground">
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
-                <span>End the Confusion</span>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
-                <span>Break the Cycle</span>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <Check className="w-3 h-3 md:w-4 md:h-4 text-logo-green" />
-                <span>Reclaim Your Peace</span>
-              </div>
-            </div>
+            <Link to="/free-guide" className="inline-flex items-center gap-1 text-sm text-logo-green hover:text-logo-green/80 transition-colors font-medium">
+              Or start with our free guide <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
+        </div>
+      </section>
 
+      {/* Social Proof Strip */}
+      <section className="border-y border-border/40 bg-muted/30">
+        <div className="container mx-auto px-4 py-4 md:py-5">
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
+            <span>62 Resources</span>
+            <span className="text-border">•</span>
+            <span>12 Guided Meditations</span>
+            <span className="text-border">•</span>
+            <span>6 AI Support Tools</span>
+            <span className="text-border">•</span>
+            <span>Active Family Forum</span>
+            <span className="text-border">•</span>
+            <span>Weekly Live Zoom</span>
+          </div>
         </div>
       </section>
 
@@ -750,6 +752,37 @@ const Index = () => {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Provider Directory */}
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
+            <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            Ethical Provider Directory
+          </div>
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+            Find Vetted Treatment Providers
+          </h2>
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            No referral fees. No kickbacks. Just honest, vetted providers.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {categories.map((category) => (
+            <Link key={category.path} to={category.path}>
+              <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
+                <CardContent className="p-4 md:p-6 text-center">
+                  <div className="w-12 h-12 mx-auto rounded-xl bg-logo-green/10 flex items-center justify-center mb-3 group-hover:bg-logo-green/20 transition-colors">
+                    <category.icon className="w-6 h-6 text-logo-green" />
+                  </div>
+                  <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
+                  <p className="text-xs text-muted-foreground hidden md:block">{category.description}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </section>
 
