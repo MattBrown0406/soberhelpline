@@ -8,7 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const STORAGE_KEY = "leadMagnetDismissed";
-const SHOW_DELAY = 8000; // 8 seconds
+const SHOW_DELAY = 15000; // 15 seconds minimum before showing
+const SCROLL_THRESHOLD = 0.3; // Show after scrolling 30% of page
 
 const LeadMagnetPopup = () => {
   const navigate = useNavigate();
@@ -26,12 +27,38 @@ const LeadMagnetPopup = () => {
     const dismissed = localStorage.getItem(STORAGE_KEY);
     if (dismissed) return;
 
-    // Show popup after delay
+    let timeReady = false;
+    let scrollReady = false;
+    let shown = false;
+
+    const tryShow = () => {
+      if (timeReady && scrollReady && !shown) {
+        shown = true;
+        setIsVisible(true);
+      }
+    };
+
+    // Time-based gate: must wait at least SHOW_DELAY
     const timer = setTimeout(() => {
-      setIsVisible(true);
+      timeReady = true;
+      tryShow();
     }, SHOW_DELAY);
 
-    return () => clearTimeout(timer);
+    // Scroll-based gate: must scroll 30% of page
+    const handleScroll = () => {
+      const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPercent >= SCROLL_THRESHOLD) {
+        scrollReady = true;
+        tryShow();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleDismiss = () => {
