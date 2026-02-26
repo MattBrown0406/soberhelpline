@@ -293,7 +293,7 @@ export default function FamilyMembership() {
 
       // Create the subscription
       const result = await createSubscription({
-        planType: billingCycle,
+        planType: billingCycle === 'trial' ? 'monthly' : billingCycle,
         amount: selectedPlan.price,
         discountCode: discountCode.trim() || undefined,
       });

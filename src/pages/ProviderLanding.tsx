@@ -78,7 +78,6 @@ const ProviderLanding = () => {
       <SEOHead
         title="List Your Recovery Services | Sober Helpline Provider Directory"
         description="Join our vetted provider directory and connect with families seeking quality addiction recovery services. No referral fees, ethical standards, high-quality leads."
-        keywords="addiction treatment providers, recovery service directory, treatment center listing, interventionist directory, sober living listing"
       />
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
