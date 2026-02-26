@@ -9,7 +9,8 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
 
 // Lazy-loaded page components
-const ProviderInfo = React.lazy(() => import("./pages/ProviderInfo"));
+const ProviderLanding = React.lazy(() => import("./pages/ProviderLanding"));
+const ProviderApplication = React.lazy(() => import("./pages/ProviderApplication"));
 const RecoveryPodcasts = React.lazy(() => import("./pages/RecoveryPodcasts"));
 const InpatientTreatment = React.lazy(() => import("./pages/InpatientTreatment"));
 const OutpatientTreatment = React.lazy(() => import("./pages/OutpatientTreatment"));
@@ -132,7 +133,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/for-providers" element={<ForProviders />} />
-              <Route path="/provider-info" element={<ProviderInfo />} />
+              <Route path="/provider-info" element={<ProviderLanding />} />
+              <Route path="/provider-application" element={<ProviderApplication />} />
               <Route path="/recovery-podcasts" element={<RecoveryPodcasts />} />
               <Route path="/inpatient-treatment" element={<InpatientTreatment />} />
               <Route path="/outpatient-treatment" element={<OutpatientTreatment />} />
