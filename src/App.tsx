@@ -80,6 +80,7 @@ import GrowingUpShadowAddiction from "./pages/GrowingUpShadowAddiction";
 import SiblingGuiltAngerLoyalty from "./pages/SiblingGuiltAngerLoyalty";
 import RebuildingSiblingRelationships from "./pages/RebuilingSiblingRelationships";
 import ParentsRepairingSiblingSystem from "./pages/ParentsRepairingSiblingSystem";
+import SiblingSupport from "./pages/SiblingSupport";
 import FamilyRolesAddiction from "./pages/FamilyRolesAddiction";
 import AddictionRewritesFamilyRules from "./pages/AddictionRewritesFamilyRules";
 import CostOfSecrecy from "./pages/CostOfSecrecy";
@@ -218,6 +219,7 @@ const App = () => (
             <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
             <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
             <Route path="/parents-repairing-sibling-system" element={<ParentsRepairingSiblingSystem />} />
+            <Route path="/sibling-support" element={<SiblingSupport />} />
             <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
             <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
             <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
