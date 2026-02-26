@@ -105,6 +105,7 @@ import AIAddictionRealityTranslator from "./pages/AIAddictionRealityTranslator";
 import EatingDisordersGuide from "./pages/EatingDisordersGuide";
 import FreeGuide from "./pages/FreeGuide";
 import ConsultationProviderDashboard from "./pages/ConsultationProviderDashboard";
+import ForProviders from "./pages/ForProviders";
 import BookConsultation from "./pages/BookConsultation";
 import JoinMeeting from "./pages/JoinMeeting";
 import FamilyCoaching from "./pages/FamilyCoaching";
@@ -122,6 +123,7 @@ const App = () => (
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/for-providers" element={<ForProviders />} />
             <Route path="/provider-info" element={<ProviderInfo />} />
             <Route path="/recovery-podcasts" element={<RecoveryPodcasts />} />
             <Route path="/inpatient-treatment" element={<InpatientTreatment />} />

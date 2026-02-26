@@ -192,6 +192,9 @@ const Index = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     <DropdownMenuItem asChild>
+                      <Link to="/for-providers" className="cursor-pointer">List Your Practice</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link to="/provider-info" className="cursor-pointer">Provider Application</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>

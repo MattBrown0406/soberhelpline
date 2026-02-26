@@ -18,7 +18,7 @@ const FamilyBridgeBanner = () => {
       rel="noopener noreferrer"
       className="block w-full group"
     >
-      <div className="bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30">
+      <div className="bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30 overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
           {/* Logo and Main Text */}
           <div className="flex items-center gap-4 lg:gap-5">
@@ -46,17 +46,17 @@ const FamilyBridgeBanner = () => {
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-white/95">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-white/95 min-w-0 flex-shrink">
             {features.map((feature, index) => (
               <div key={index} className="flex items-start gap-2">
                 <Check className="h-4 w-4 text-white/80 flex-shrink-0 mt-0.5" />
-                <span className="text-xs md:text-sm">{feature}</span>
+                <span className="text-xs md:text-sm leading-tight">{feature}</span>
               </div>
             ))}
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0">
+          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0 self-center">
             <span className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
               Start Your Journey
             </span>

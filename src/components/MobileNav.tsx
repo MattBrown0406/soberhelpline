@@ -87,6 +87,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
                   For Providers
                 </div>
+                <Link to="/for-providers" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-4">
+                    List Your Practice
+                  </Button>
+                </Link>
                 <Link to="/provider-info" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-4">
                     Provider Application
