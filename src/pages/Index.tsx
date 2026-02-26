@@ -594,6 +594,60 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">What Families Are Saying</h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Real stories from families who found clarity and support</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              quote: "For the first time in years, I don't feel alone in this. The education center helped me understand what my son is going through — and what I can actually do about it.",
+              name: "Sarah M.",
+              location: "Portland, OR",
+              context: "Mother of adult son in recovery"
+            },
+            {
+              quote: "The Monday Night Zoom sessions changed everything for our family. Hearing other families share their stories made us realize we weren't crazy — we were just uninformed.",
+              name: "David R.",
+              location: "Austin, TX",
+              context: "Father & husband"
+            },
+            {
+              quote: "I wish I had found Sober Helpline years ago. The boundary worksheets and AI coaching tools gave me the language and confidence I needed to stop enabling.",
+              name: "Jennifer K.",
+              location: "Chicago, IL",
+              context: "Wife of recovering spouse"
+            }
+          ].map((testimonial, index) => (
+            <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow bg-white">
+              <CardContent className="p-6">
+                <div className="flex gap-1 mb-3">
+                  {[1,2,3,4,5].map(s => (
+                    <Star key={s} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <blockquote className="text-sm md:text-base text-foreground/80 leading-relaxed mb-4 italic">
+                  "{testimonial.quote}"
+                </blockquote>
+                <div>
+                  <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                  <p className="text-xs text-muted-foreground">{testimonial.context} • {testimonial.location}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <div className="text-center mt-6">
+          <Link to="/testimonials">
+            <Button variant="outline" className="text-sm">
+              Read More Stories <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* Family Bridge Banner */}
       <section className="container mx-auto px-4 pt-10 md:pt-16">
         <FamilyBridgeBanner />
