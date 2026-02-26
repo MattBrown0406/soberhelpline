@@ -526,6 +526,51 @@ export default function FamilyEducation() {
                   </Card>
                 </div>
 
+                {/* Standalone Tool Links */}
+                <div className="grid gap-6 md:grid-cols-2">
+                  <Link to="/fear-inventory-exercise">
+                    <Card className="h-full overflow-hidden border-2 border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 cursor-pointer group">
+                      <CardHeader className="bg-gradient-to-br from-indigo-50 to-transparent dark:from-indigo-950/20 pb-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded-lg bg-indigo-500/10">
+                            <Eye className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-lg text-logo-green group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">Fear Inventory Exercise</CardTitle>
+                            <CardDescription>Identify and examine the fears driving your decisions</CardDescription>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <p className="text-sm text-muted-foreground">
+                          A structured exercise to uncover the fears beneath your reactions—so you can respond from clarity instead of anxiety.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+
+                  <Link to="/conversation-starters">
+                    <Card className="h-full overflow-hidden border-2 border-teal-500/30 hover:shadow-lg hover:shadow-teal-500/10 transition-all duration-300 cursor-pointer group">
+                      <CardHeader className="bg-gradient-to-br from-teal-50 to-transparent dark:from-teal-950/20 pb-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded-lg bg-teal-500/10">
+                            <Users className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-lg text-logo-green group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Conversation Starters</CardTitle>
+                            <CardDescription>Scripts and frameworks for difficult conversations</CardDescription>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <p className="text-sm text-muted-foreground">
+                          Ready-to-use conversation frameworks for talking to your loved one about treatment, boundaries, and recovery.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </div>
+
                 {/* Trauma Assessment */}
                 <Card id="trauma-assessment" className="overflow-hidden border-2 border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 scroll-mt-24">
                   <CardHeader className="bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-950/20">
@@ -732,14 +777,14 @@ export default function FamilyEducation() {
                   
                   <div className="grid gap-4 md:grid-cols-2">
                     {meditations.map((meditation, idx) => (
-                      <Card key={idx} className={`overflow-hidden border-2 border-${meditation.color}-500/30 hover:shadow-lg transition-all`}>
-                        <CardHeader className={`bg-gradient-to-br from-${meditation.color}-50 to-transparent dark:from-${meditation.color}-950/20 py-3`}>
+                      <Card key={idx} className={`overflow-hidden border-2 ${c(meditation.color).borderHeavy} hover:shadow-lg transition-all`}>
+                        <CardHeader className={`${c(meditation.color).bgGradient} py-3`}>
                           <div className="flex items-center justify-between">
-                            <CardTitle className={`text-sm font-medium text-${meditation.color}-700 dark:text-${meditation.color}-400`}>
+                            <CardTitle className={`text-sm font-medium ${c(meditation.color).text}`}>
                               {meditation.title}
                             </CardTitle>
                             <a href={`/audio/${meditation.file}`} download className="shrink-0">
-                              <Button variant="ghost" size="sm" className={`gap-1 text-${meditation.color}-600 hover:text-${meditation.color}-700 dark:text-${meditation.color}-400`}>
+                              <Button variant="ghost" size="sm" className={`gap-1 ${c(meditation.color).iconText}`}>
                                 <Download className="h-4 w-4" />
                               </Button>
                             </a>
