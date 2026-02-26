@@ -117,7 +117,7 @@ const Index = () => {
   const homepageFaqItems = [
     { question: "What is Sober Helpline?", answer: "Sober Helpline connects families with ethical, vetted addiction treatment providers nationwide, offering free resources, education, and support for those affected by addiction." },
     { question: "How do I find a treatment center near me?", answer: "Use our interactive maps to search by state, or enter your zip code to find inpatient treatment, outpatient programs, medical detox, and sober living homes in your area." },
-    { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer premium family membership with additional support features." },
+    { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer a 7-day free trial of our premium family membership, followed by optional paid membership with advanced support features." },
     { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5886 to speak with someone who can help you understand your options." }
   ];
 
@@ -619,10 +619,13 @@ const Index = () => {
               </p>
               <Link to="/family-membership">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
-                  <Lock className="w-4 h-4" />
-                  Unlock Full Access — $14.99/month
+                  <Sparkles className="w-4 h-4" />
+                  Try Free for 7 Days
                 </Button>
               </Link>
+              <p className="text-xs text-muted-foreground mt-2">
+                No payment required • Then just $14.99/month • Cancel anytime
+              </p>
             </div>
           </div>
         </div>
@@ -750,9 +753,9 @@ const Index = () => {
               </Button>
             </a>
             <Link to="/family-membership" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base">
-                <Lock className="w-4 h-4 md:w-5 md:h-5" />
-                Join Membership
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-green hover:bg-logo-green hover:text-white">
+                <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
+                Try Free for 7 Days
               </Button>
             </Link>
           </div>

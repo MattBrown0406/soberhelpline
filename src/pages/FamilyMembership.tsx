@@ -90,6 +90,13 @@ const canadianProvinces = [
 ];
 
 const membershipPlans = {
+  trial: {
+    id: 'family-membership-trial',
+    name: 'Free Trial',
+    price: '0',
+    period: '/7 days',
+    billingCycle: 'trial' as const,
+  },
   monthly: {
     id: 'family-membership-monthly',
     name: 'Family Support Membership',
@@ -106,13 +113,24 @@ const membershipPlans = {
   },
 };
 
-const membershipFeatures = [
-  'Access to premium family resources',
-  'Exclusive support group access',
-  'Educational webinars & content',
-  'Direct support from our team',
-  'Cancel anytime',
-];
+const membershipFeatures = {
+  trial: [
+    'Access to 1 pillar of family education',
+    'Read-only forum access (view discussions)',
+    'Basic educational content',
+    '7 days to explore the platform',
+    'No payment required',
+  ],
+  paid: [
+    'Full access to all 4 pillars of family education',
+    'Full interactive forum participation',
+    'Exclusive support group access',
+    'Live educational webinars & sessions',
+    'Direct support from our team',
+    'Premium tools and assessments',
+    'Cancel anytime',
+  ]
+};
 
 const MONTHLY_ANNUAL_COST = 14.99 * 12; // $179.88
 const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 149; // $30.88
@@ -128,7 +146,7 @@ export default function FamilyMembership() {
   const [freeListingActivated, setFreeListingActivated] = useState(false);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [webinarRemindersOptIn, setWebinarRemindersOptIn] = useState(false);
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  const [billingCycle, setBillingCycle] = useState<'trial' | 'monthly' | 'annual'>('trial');
   
   const selectedPlan = membershipPlans[billingCycle];
   
@@ -585,46 +603,77 @@ export default function FamilyMembership() {
                     </div>
                     
                     {/* Billing Cycle Toggle */}
-                    <div className="flex gap-2 mt-3">
+                    <div className="space-y-3 mt-3">
+                      {/* Free Trial - Most Prominent */}
                       <Button
                         type="button"
-                        variant={billingCycle === 'monthly' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setBillingCycle('monthly')}
-                        className="flex-1"
+                        variant={billingCycle === 'trial' ? 'default' : 'outline'}
+                        size="lg"
+                        onClick={() => setBillingCycle('trial')}
+                        className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0"
                       >
-                        Monthly
-                      </Button>
-                      <Button
-                        type="button"
-                        variant={billingCycle === 'annual' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setBillingCycle('annual')}
-                        className="flex-1"
-                      >
-                        Annual
-                        <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 text-xs">
-                          Save ${ANNUAL_SAVINGS.toFixed(0)}
+                        🎉 Try Free for 7 Days
+                        <Badge variant="secondary" className="ml-2 bg-white/20 text-white text-xs border-0">
+                          Most Popular
                         </Badge>
                       </Button>
+                      
+                      {/* Paid Options */}
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant={billingCycle === 'monthly' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setBillingCycle('monthly')}
+                          className="flex-1"
+                        >
+                          Monthly
+                        </Button>
+                        <Button
+                          type="button"
+                          variant={billingCycle === 'annual' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setBillingCycle('annual')}
+                          className="flex-1"
+                        >
+                          Annual
+                          <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 text-xs">
+                            Save ${ANNUAL_SAVINGS.toFixed(0)}
+                          </Badge>
+                        </Button>
+                      </div>
                     </div>
 
                     <CardDescription className="pt-4">
-                      <span className="text-3xl font-bold text-foreground">${selectedPlan.price}</span>
-                      <span className="text-muted-foreground">{selectedPlan.period}</span>
-                      {billingCycle === 'annual' && (
-                        <div className="mt-2">
-                          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                            Save ${ANNUAL_SAVINGS.toFixed(2)} vs monthly (${MONTHLY_ANNUAL_COST.toFixed(2)}/year)
-                          </Badge>
+                      {billingCycle === 'trial' ? (
+                        <div className="text-center">
+                          <div className="text-4xl font-bold text-green-600 mb-2">FREE</div>
+                          <div className="text-lg text-muted-foreground">7-Day Trial</div>
+                          <div className="mt-2 p-2 bg-green-50 rounded-lg">
+                            <p className="text-sm text-green-700 font-medium">
+                              No payment required • Cancel anytime • Full access after trial for just $14.99/month
+                            </p>
+                          </div>
                         </div>
+                      ) : (
+                        <>
+                          <span className="text-3xl font-bold text-foreground">${selectedPlan.price}</span>
+                          <span className="text-muted-foreground">{selectedPlan.period}</span>
+                          {billingCycle === 'annual' && (
+                            <div className="mt-2">
+                              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                                Save ${ANNUAL_SAVINGS.toFixed(2)} vs monthly (${MONTHLY_ANNUAL_COST.toFixed(2)}/year)
+                              </Badge>
+                            </div>
+                          )}
+                        </>
                       )}
                     </CardDescription>
                   </CardHeader>
 
                   <CardContent className="space-y-4">
                     <ul className="space-y-2">
-                      {membershipFeatures.map((feature, index) => (
+                      {(billingCycle === 'trial' ? membershipFeatures.trial : membershipFeatures.paid).map((feature, index) => (
                         <li key={index} className="flex items-center gap-2">
                           <Check className="h-4 w-4 flex-shrink-0 text-green-500" />
                           <span className="text-sm text-muted-foreground">{feature}</span>
@@ -670,7 +719,7 @@ export default function FamilyMembership() {
                             Processing...
                           </>
                         ) : (
-                          <>Subscribe with PayPal</>
+                          <>{billingCycle === 'trial' ? 'Start Free Trial' : 'Subscribe with PayPal'}</>
                         )}
                       </Button>
                     )}
