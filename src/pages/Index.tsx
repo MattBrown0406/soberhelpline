@@ -241,7 +241,7 @@ const Index = () => {
               <span className="block text-logo-green mt-2">You don't have to figure this out alone.</span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10 px-2 hero-description">
-              Join thousands of families who've found clarity, support, and a path forward through expert-created education, interactive tools, and a community that understands.
+              Join families who've found clarity, support, and a path forward through expert-created education, interactive tools, and a community that understands.
             </p>
             
             {/* CTAs */}
