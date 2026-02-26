@@ -19,9 +19,9 @@ const FamilyBridgeBanner = () => {
       className="block w-full group"
     >
       <div className="bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30 overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
           {/* Logo and Main Text */}
-          <div className="flex items-center gap-4 lg:gap-5">
+          <div className="flex items-center gap-4 lg:gap-5 flex-shrink-0">
             <div className="bg-white rounded-lg p-2.5 shadow-md flex-shrink-0">
               <img 
                 src={familyBridgeLogo} 
@@ -29,8 +29,8 @@ const FamilyBridgeBanner = () => {
                 className="h-14 w-14 md:h-16 md:w-16 object-contain"
               />
             </div>
-            <div className="text-white text-center lg:text-left">
-              <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
+            <div className="text-white text-center xl:text-left">
+              <div className="flex items-center gap-2 justify-center xl:justify-start mb-1">
                 <h3 className="font-bold text-xl md:text-2xl">
                   FamilyBridge
                 </h3>
@@ -46,17 +46,17 @@ const FamilyBridgeBanner = () => {
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-white/95 min-w-0 flex-shrink">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-white/95 min-w-0 flex-grow max-w-2xl">
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-2">
+              <div key={index} className="flex items-start gap-2 min-w-0">
                 <Check className="h-4 w-4 text-white/80 flex-shrink-0 mt-0.5" />
-                <span className="text-xs md:text-sm leading-tight">{feature}</span>
+                <span className="text-xs md:text-sm leading-tight break-words">{feature}</span>
               </div>
             ))}
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0 self-center">
+          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0">
             <span className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
               Start Your Journey
             </span>
