@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Home, ArrowLeft, Phone } from "lucide-react";
 import Footer from "./Footer";
+import SiteSearch from "./SiteSearch";
 import { useNativeBackButton } from "@/hooks/useNativeBackButton";
 import logo from "@/assets/logo.png";
 
@@ -52,14 +53,18 @@ const Layout = ({ children }: LayoutProps) => {
               </button>
             </div>
 
-            {/* Phone number */}
-            <a
-              href="tel:541-241-5886"
-              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
-            >
+            {/* Search */}
+            <div className="ml-auto flex items-center gap-2">
+              <SiteSearch />
+              {/* Phone number */}
+              <a
+                href="tel:541-241-5886"
+                className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
+              >
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">(541) 241-5886</span>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
       )}
