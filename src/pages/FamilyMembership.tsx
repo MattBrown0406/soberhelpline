@@ -650,9 +650,9 @@ export default function FamilyMembership() {
                           <div className="text-4xl font-bold text-green-600 mb-2">FREE</div>
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
-                            <p className="text-sm text-green-700 font-medium">
+                            <span className="text-sm text-green-700 font-medium block">
                               No payment required • Cancel anytime • Full access after trial for just $14.99/month
-                            </p>
+                            </span>
                           </div>
                         </div>
                       ) : (
