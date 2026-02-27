@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe } from "lucide-react";
 import logo from "@/assets/logo.png";
+import providerHeadshot from "@/assets/provider-headshot.jpg";
 import SEOHead from "@/components/SEOHead";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -445,9 +446,7 @@ const BookConsultation = () => {
                     <Card key={p.id} className="cursor-pointer hover:border-primary transition-colors" onClick={() => selectProvider(p)}>
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <User className="w-8 h-8 text-primary" />
-                          </div>
+                          <img src={providerHeadshot} alt={p.full_name} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
                           <div className="flex-1">
                             <h3 className="font-semibold text-lg">{p.full_name}</h3>
                             {p.title && <p className="text-sm text-muted-foreground">{p.title}</p>}
