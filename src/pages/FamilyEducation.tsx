@@ -572,22 +572,9 @@ export default function FamilyEducation() {
                 </div>
 
                 {/* Trauma Assessment */}
-                <Card id="trauma-assessment" className="overflow-hidden border-2 border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 scroll-mt-24">
-                  <CardHeader className="bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-950/20">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-purple-500/10">
-                        <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-lg text-logo-green">Trauma & Hypervigilance Self-Assessment</CardTitle>
-                        <CardDescription>Understand how chronic stress affects you</CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <TraumaHypervigilanceAssessment />
-                  </CardContent>
-                </Card>
+                <div id="trauma-assessment" className="scroll-mt-24">
+                  <TraumaHypervigilanceAssessment />
+                </div>
 
                 {/* User-specific worksheets */}
                 {user && (
