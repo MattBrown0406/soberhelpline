@@ -296,7 +296,7 @@ const Index = () => {
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">🎉 Launching March 2026</p>
                   <h3 className="text-base md:text-lg font-bold">Monday Night Zoom — Free Weekly Family Support</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PT. Connect with families who understand.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Connect with families who understand.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">

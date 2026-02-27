@@ -261,7 +261,7 @@ export default function MondayZoomRegistration() {
               </Button>
             </Link>
             <p className="text-sm text-muted-foreground">
-              The meeting is every Monday at 6:00 PM PST. You can join up to 30 minutes early.
+              The meeting is every Monday at 7:00 PM PST. You can join up to 30 minutes early.
             </p>
           </div>
         ) : (
@@ -342,7 +342,7 @@ export default function MondayZoomRegistration() {
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
                     { icon: Calendar, label: "Every Monday" },
-                    { icon: Clock, label: "6:00 PM PST" },
+                    { icon: Clock, label: "7:00 PM PST" },
                     { icon: Users, label: "Free for Members" },
                     { icon: Video, label: "Via Zoom" },
                   ].map(({ icon: Icon, label }) => (
