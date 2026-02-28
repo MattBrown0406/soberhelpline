@@ -170,6 +170,42 @@ const App = () => (
               <Route path="/triggers-explained-addiction" element={<BlogArticle />} />
               <Route path="/sleep-and-addiction-recovery" element={<BlogArticle />} />
               <Route path="/attachment-styles-and-addiction" element={<BlogArticle />} />
+              <Route path="/shame-and-addiction-secrecy-resistance" element={<BlogArticle />} />
+              <Route path="/family-roles-addiction-divided-dynamics" element={<BlogArticle />} />
+              <Route path="/holding-boundaries-addiction-families" element={<BlogArticle />} />
+              <Route path="/detach-with-love-addiction-families" element={<BlogArticle />} />
+              <Route path="/conflicting-professional-advice-addiction" element={<BlogArticle />} />
+              <Route path="/addiction-mental-health-treatment-separation" element={<BlogArticle />} />
+              <Route path="/addiction-treatment-relapse" element={<BlogArticle />} />
+              <Route path="/levels-of-care-addiction-treatment" element={<BlogArticle />} />
+              <Route path="/addiction-mental-health-or-both" element={<BlogArticle />} />
+              <Route path="/understanding-addiction-in-families" element={<BlogArticle />} />
+              <Route path="/bipolar-disorder-and-substance-use" element={<BlogArticle />} />
+              <Route path="/depression-and-addiction-family-confusion" element={<BlogArticle />} />
+              <Route path="/understanding-addiction-confusion-families" element={<BlogArticle />} />
+              <Route path="/early-intervention-reducing-family-damage" element={<BlogArticle />} />
+              <Route path="/early-intervention-family-changes-first" element={<BlogArticle />} />
+              <Route path="/early-intervention-family-skill-not-crisis-response" element={<BlogArticle />} />
+              <Route path="/early-intervention-stabilizing-family-first" element={<BlogArticle />} />
+              <Route path="/early-intervention-families-waiting-for-crisis-weakens-everyone" element={<BlogArticle />} />
+              <Route path="/early-intervention-starts-with-family" element={<BlogArticle />} />
+              <Route path="/early-intervention-strengthening-family-before-crisis" element={<BlogArticle />} />
+              <Route path="/alcoholism-in-the-home-why-children-adapt-long-before-adults-notice" element={<BlogArticle />} />
+              <Route path="/why-families-need-support-even-when-loved-one-refuses-help" element={<BlogArticle />} />
+              <Route path="/why-families-struggle-to-trust-change-after-repeated-relapses" element={<BlogArticle />} />
+              <Route path="/why-families-feel-guilty-for-being-angry" element={<BlogArticle />} />
+              <Route path="/why-alcohol-problems-confusing-social-drinking" element={<BlogArticle />} />
+              <Route path="/why-education-not-urgency-first-thing-families-need" element={<BlogArticle />} />
+              <Route path="/quiet-grief-families-experience-before-addiction-acknowledged" element={<BlogArticle />} />
+              <Route path="/why-families-need-education-before-answers" element={<BlogArticle />} />
+              <Route path="/mental-health-cost-families-pay-waiting-for-change" element={<BlogArticle />} />
+              <Route path="/what-families-need-understand-addiction-before-crisis" element={<BlogArticle />} />
+              <Route path="/families-sense-trouble-before-addiction-obvious" element={<BlogArticle />} />
+              <Route path="/understanding-addiction-without-crisis-education-matters" element={<BlogArticle />} />
+              <Route path="/reiner-family-tragedy-addiction-intervention" element={<BlogArticle />} />
+              <Route path="/addiction-anxiety-family-burnout" element={<BlogArticle />} />
+              <Route path="/tms-depression-addiction-recovery" element={<BlogArticle />} />
+              <Route path="/addiction-marriage-family-protection" element={<BlogArticle />} />
               <Route path="/addiction-assessment" element={<AddictionAssessment />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/family-support" element={<FamilySupport />} />
