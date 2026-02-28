@@ -179,6 +179,9 @@ const Index = () => {
                       <Link to="/understanding-addiction" className="cursor-pointer">Understanding Addiction</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
+                      <Link to="/boundary-setting-worksheet" className="cursor-pointer">Boundary Setting Worksheet</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link to="/recovery-resources" className="cursor-pointer">Find Recovery Resources</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>

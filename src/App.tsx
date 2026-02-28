@@ -119,6 +119,7 @@ const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding")
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
 const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
+const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettingWorksheet"));
 
 const queryClient = new QueryClient();
 
@@ -260,6 +261,7 @@ const App = () => (
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/recovery-resources" element={<RecoveryResources />} />
               <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
+              <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
