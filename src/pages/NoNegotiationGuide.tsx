@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function NoNegotiationGuide() {
   useGuideTracking("/no-negotiation-guide", "We Don't Negotiate with Terrorists");
@@ -27,15 +28,11 @@ export default function NoNegotiationGuide() {
               Back to Family Education
             </Link>
 
-            <div className="text-center mb-10">
-              <ShieldAlert className="h-12 w-12 text-red-600 mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                We Don't Negotiate with Terrorists
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Why Negotiating with Active Addiction Makes Things Worse—and What to Do Instead
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="We Don't Negotiate with Terrorists"
+              subtitle="Why negotiating with active addiction makes things worse — and what families can do instead to protect themselves while supporting recovery."
+              clinicalNote="Grounded in CRAFT research and addiction medicine principles. Addiction hijacks the brain's reward system, making negotiation with the disease ineffective."
+            />
 
             {/* Why This Guide Exists */}
             <Card className="mb-8 border-primary/20">

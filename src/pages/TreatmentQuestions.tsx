@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TreatmentQuestions() {
   useGuideTracking("/treatment-questions", "Questions to Ask a Treatment Center");
@@ -42,16 +43,11 @@ export default function TreatmentQuestions() {
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <FileText className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Questions to Ask a Treatment Center
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  A Practical Guide for Families Seeking Ethical, Effective Care
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="Questions to Ask a Treatment Center"
+                subtitle="A practical guide for families seeking ethical, effective care. Slow down, ask the right questions, and protect your loved one from rushed placements."
+                clinicalNote="Aligned with ASAM (American Society of Addiction Medicine) criteria and SAMHSA's treatment facility evaluation standards."
+              />
 
               {/* Purpose Section */}
               <section className="mb-8">

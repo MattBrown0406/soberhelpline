@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function SafeToOpenUp() {
   useGuideTracking("/safe-to-open-up", "Is It Safe to Open Up Again? (Guide for Injured Spouses)");
@@ -39,17 +40,11 @@ export default function SafeToOpenUp() {
               </Button>
             </div>
 
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-900/30 mb-4">
-                <Heart className="h-8 w-8 text-rose-600 dark:text-rose-400" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Is It Safe to Open Up Again?
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                A Practical Guide for Injured Spouses Considering Trust After Addiction
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Is It Safe to Open Up Again?"
+              subtitle="A practical guide for injured spouses considering trust after addiction. Learning how to assess safety before reopening emotionally."
+              clinicalNote="Based on Gottman's Trust Revival Method and clinical frameworks for betrayal trauma recovery. Trust is rebuilt through consistent behavior over time, not promises."
+            />
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-rose-200 dark:border-rose-800">

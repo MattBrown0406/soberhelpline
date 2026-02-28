@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GriefForFamily() {
   useGuideTracking("Grief for the Family You Thought You'd Have", "/grief-for-family");
@@ -36,13 +37,12 @@ export default function GriefForFamily() {
             </Button>
           </div>
 
+          <ToolBrandHeader
+            title="Grief for the Family You Thought You'd Have"
+            subtitle="Naming the loss no one prepared you for. Understanding ambiguous grief in families affected by addiction and finding permission to grieve what was never yours to control."
+            clinicalNote="Informed by Pauline Boss's theory of Ambiguous Loss and grief counseling frameworks adapted for addiction-affected families."
+          />
           <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-              Grief for the Family You Thought You'd Have
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Naming the Loss No One Prepared You For
-            </p>
 
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Why This Guide Matters</h2>

@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TherapyTimingGuide() {
   useGuideTracking("/therapy-timing-guide", "Why Some Therapies Fail at the Wrong Time");
@@ -38,15 +39,11 @@ export default function TherapyTimingGuide() {
               </Button>
             </div>
 
-            <div className="text-center mb-8">
-              <Clock className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Why Some Therapies Fail at the Wrong Time
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Understanding Timing, Readiness, and the Stages of Recovery
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Why Some Therapies Fail at the Wrong Time"
+              subtitle="Understanding timing, readiness, and the stages of recovery. Why good therapies can fail when applied too early — and how to match the intervention to the moment."
+              clinicalNote="Based on ASAM placement criteria, stages of change model (Prochaska & DiClemente), and SAMHSA's recovery-oriented systems of care framework."
+            />
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">

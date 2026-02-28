@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function AngerAndBoundaries() {
   useGuideTracking("Anger and Boundaries Are Not the Same Thing", "/anger-and-boundaries");
@@ -35,13 +36,12 @@ export default function AngerAndBoundaries() {
             </Button>
           </div>
 
+          <ToolBrandHeader
+            title="Anger and Boundaries Are Not the Same Thing"
+            subtitle="Why limits built on anger collapse — and what holds them instead. Understanding the difference between reactive anger and values-based boundaries."
+            clinicalNote="Informed by emotion regulation research (Linehan, DBT) and Al-Anon principles of detachment with love."
+          />
           <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-              Anger and Boundaries Are Not the Same Thing
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Why Limits Built on Anger Collapse—and What Holds Them Instead
-            </p>
 
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Why This Guide Matters</h2>

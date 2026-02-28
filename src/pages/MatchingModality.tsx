@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function MatchingModality() {
   useGuideTracking("/matching-modality", "Matching the Modality to the Problem");
@@ -38,15 +39,11 @@ export default function MatchingModality() {
               </Button>
             </div>
 
-            <div className="text-center mb-8">
-              <Target className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Matching the Modality to the Problem
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                How to Choose the Right Type of Help—Without Guesswork
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Matching the Modality to the Problem"
+              subtitle="How to choose the right type of help — without guesswork. Understanding which treatment approaches work for which problems and at which stages."
+              clinicalNote="Based on ASAM treatment matching criteria and evidence-based practice guidelines from NIDA (National Institute on Drug Abuse)."
+            />
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">

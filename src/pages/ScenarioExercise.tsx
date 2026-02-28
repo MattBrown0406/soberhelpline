@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface Scenario1State {
   isEmergency: string;
@@ -144,16 +145,11 @@ export default function ScenarioExercise() {
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <Target className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Family Recovery Scenario Exercise
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Practicing Recovery-Centered Decisions Before a Crisis Hits
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="Family Recovery Scenario Exercise"
+                subtitle="Practicing recovery-centered decisions before a crisis hits. Prepare responses from clarity — not fear, guilt, or urgency."
+                clinicalNote="Based on CRAFT rehearsal techniques and cognitive-behavioral relapse prevention strategies. Practicing responses in advance builds confidence and reduces reactive decision-making."
+              />
 
               {/* Purpose Section */}
               <section className="mb-8">

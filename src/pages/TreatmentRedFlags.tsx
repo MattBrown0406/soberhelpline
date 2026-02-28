@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const TreatmentRedFlags = () => {
   useGuideTracking("/treatment-red-flags", "Treatment Red Flags Checklist");
@@ -205,10 +206,11 @@ const TreatmentRedFlags = () => {
           Back to Family Resources
         </Link>
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Treatment Industry Red Flags Guide</h1>
-          <p className="text-xl text-muted-foreground">How to Identify Unethical Marketing, Referrals, and Placement Pressure</p>
-        </div>
+        <ToolBrandHeader
+          title="Treatment Industry Red Flags Guide"
+          subtitle="How to identify unethical marketing, referrals, and placement pressure. Protect your family from predatory practices in the treatment industry."
+          clinicalNote="Informed by NAATP (National Association of Addiction Treatment Providers) ethics standards and SAMHSA treatment locator guidelines."
+        />
 
         {/* Purpose Section */}
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">

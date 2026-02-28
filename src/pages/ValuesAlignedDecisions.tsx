@@ -12,6 +12,7 @@ import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function ValuesAlignedDecisions() {
   useGuideTracking("/values-aligned-decisions", "Values-Aligned Decision Making");
@@ -72,17 +73,11 @@ export default function ValuesAlignedDecisions() {
               Back to Family Education
             </Link>
 
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Compass className="h-10 w-10 text-primary" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
-                  Values-Aligned Decision Making Exercise
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground">
-                Choosing Actions That Reflect Who You Are—Not Just What You're Afraid Of
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Values-Aligned Decision Making Exercise"
+              subtitle="Choosing actions that reflect who you are — not just what you're afraid of. An interactive tool for making decisions from clarity rather than crisis."
+              clinicalNote="Informed by Acceptance and Commitment Therapy (ACT) and CRAFT principles. Decisions made from values lead to less regret and more sustainable boundaries."
+            />
 
             {/* Why This Exercise Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">

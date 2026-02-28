@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BoundariesUltimatumsGuide() {
   useGuideTracking("Requests, Demands, Ultimatums & Boundaries", "/boundaries-ultimatums-guide");
@@ -30,17 +31,11 @@ export default function BoundariesUltimatumsGuide() {
               Back to Family Education
             </Link>
 
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Shield className="h-10 w-10 text-primary" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
-                  Requests, Demands, Ultimatums & Boundaries
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground">
-                Advanced Application for Families Impacted by Addiction
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Requests, Demands, Ultimatums & Boundaries"
+              subtitle="Advanced application for families impacted by addiction. Learn when and how to use each tool effectively — and why most families confuse them."
+              clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) principles and clinical boundary-setting frameworks used in family systems therapy."
+            />
 
             {/* Why Families Need an Advanced Guide */}
             <Card className="mb-8 border-primary/30 bg-primary/5">

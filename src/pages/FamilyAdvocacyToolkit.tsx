@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const FamilyAdvocacyToolkit = () => {
   useGuideTracking("Family Advocacy Toolkit", "/family-advocacy-toolkit");
@@ -128,10 +129,11 @@ const FamilyAdvocacyToolkit = () => {
           Back to Family Resources
         </Link>
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Family Advocacy Toolkit</h1>
-          <p className="text-xl text-muted-foreground">How to Advocate Effectively Without Burning Out or Overstepping</p>
-        </div>
+        <ToolBrandHeader
+          title="Family Advocacy Toolkit"
+          subtitle="How to advocate effectively without burning out or overstepping. Clear frameworks, scripts, and decision tools for families navigating the treatment system."
+          clinicalNote="Based on patient advocacy best practices, NAATP family engagement standards, and clinical ethics in addiction medicine."
+        />
 
         {/* Purpose Section */}
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
