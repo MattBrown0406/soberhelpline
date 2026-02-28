@@ -376,7 +376,32 @@ Deno.serve(async (req) => {
       }
     } catch (syncError) {
       console.error('Error syncing consultation to Notion:', syncError);
-      // Don't fail the booking if Notion sync fails
+    }
+
+    // Add/update contact in Mailchimp with "Coaching Clients" tag
+    try {
+      const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
+      const mcResponse = await fetch(`${supabaseUrl}/functions/v1/add-to-mailchimp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`
+        },
+        body: JSON.stringify({
+          email: booking.client_email,
+          firstName: booking.client_name?.split(' ')[0] || '',
+          lastName: booking.client_name?.split(' ').slice(1).join(' ') || '',
+          tags: ['Coaching Clients']
+        })
+      });
+
+      if (mcResponse.ok) {
+        console.log('Successfully added contact to Mailchimp');
+      } else {
+        console.error('Failed to add to Mailchimp:', await mcResponse.text());
+      }
+    } catch (mcError) {
+      console.error('Error adding to Mailchimp:', mcError);
     }
 
     return new Response(JSON.stringify({ success: true, zoomUrl: zoomData?.join_url }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
