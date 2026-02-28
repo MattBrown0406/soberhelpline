@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function WhoBenefitsFilter() {
   useGuideTracking("/who-benefits-filter", "The Who Benefits Filter");
@@ -59,6 +60,12 @@ export default function WhoBenefitsFilter() {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title='"Who Benefits From This?" Decision Filter'
+            subtitle="A simple question that prevents enabling before it starts. Before acting, pause and ask: who does this really serve?"
+            clinicalNote="Based on CRAFT decision-making frameworks and Al-Anon's emphasis on examining motives before taking action."
+          />
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function CrisisChaos() {
   useGuideTracking("Crisis vs. Chaos Decision Guide", "/crisis-chaos");
@@ -40,6 +41,12 @@ export default function CrisisChaos() {
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
+              <ToolBrandHeader
+                title="Crisis vs. Chaos"
+                subtitle="A decision guide for families impacted by addiction. Learning to distinguish true emergencies from emotionally charged chaos changes everything."
+                clinicalNote="Based on crisis intervention theory, SAMHSA's crisis response guidelines, and Al-Anon principles of detachment with love."
+              />
+
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b">
                 <AlertTriangle className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function IntergenerationalEnabling() {
   useGuideTracking("Intergenerational Enabling", "/intergenerational-enabling");
@@ -34,6 +35,12 @@ export default function IntergenerationalEnabling() {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="Breaking Intergenerational Enabling"
+            subtitle="How patterns get passed down — and how families choose something different. The cycle doesn't have to continue."
+            clinicalNote="Based on intergenerational trauma research (Murray Bowen), epigenetic inheritance patterns, and family-of-origin work in addiction counseling."
+          />
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">

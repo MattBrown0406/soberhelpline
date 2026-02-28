@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FamilyUnityLiability() {
   useGuideTracking("When Family Unity Becomes a Liability", "/family-unity-liability");
@@ -34,6 +35,12 @@ export default function FamilyUnityLiability() {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="When Family Unity (or the Lack of It) Becomes a Liability"
+            subtitle="How togetherness and division can both undermine recovery — and what actually helps. Functional alignment, not forced agreement, is the goal."
+            clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) alignment principles and family systems research on differentiation vs. enmeshment."
+          />
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">

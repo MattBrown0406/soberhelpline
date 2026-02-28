@@ -6,6 +6,7 @@ import { ArrowLeft, Printer, Brain, Scale, AlertTriangle, Heart, CheckCircle, He
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const DiseaseChoiceRealityMap = () => {
   useGuideTracking("The Disease vs. Choice Reality Map", "/disease-choice-reality-map");
@@ -37,6 +38,12 @@ const DiseaseChoiceRealityMap = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="The Disease vs. Choice Reality Map"
+          subtitle="Understanding where addiction limits choice — and where responsibility still exists. This guide helps families move past the binary debate and into actionable clarity."
+          clinicalNote="Informed by ASAM's definition of addiction, NIDA's brain disease model, and the biopsychosocial framework used in modern addiction medicine."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">

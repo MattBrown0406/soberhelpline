@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FamilyInterferenceGuide() {
   useGuideTracking("How Families Accidentally Interfere with Recovery", "/family-interference-guide");
@@ -37,6 +38,12 @@ export default function FamilyInterferenceGuide() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="How Families Accidentally Interfere with Recovery"
+              subtitle="When love, fear, and urgency work against change. Understanding interference patterns is the first step to supporting recovery instead of undermining it."
+              clinicalNote="Based on CRAFT research, family interference patterns identified in clinical addiction treatment, and the concept of 'helping that hurts' from Al-Anon literature."
+            />
 
             <div className="text-center mb-8">
               <Heart className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />

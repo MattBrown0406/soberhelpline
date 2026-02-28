@@ -6,6 +6,7 @@ import { ArrowLeft, Printer, Brain, AlertTriangle, HelpCircle, XCircle, CheckCir
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const MisunderstoodDiagnoses = () => {
   useGuideTracking("/misunderstood-diagnoses", "Commonly Misunderstood Diagnoses in Addiction");
@@ -37,6 +38,12 @@ const MisunderstoodDiagnoses = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Commonly Misunderstood Diagnoses in Addiction"
+          subtitle="What families need to know — and what to be careful not to assume. Psychiatric labels can help or harm depending on how they're used."
+          clinicalNote="Informed by DSM-5 diagnostic criteria, ASAM's guidelines on co-occurring disorders, and clinical best practices for differential diagnosis in active substance use."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">

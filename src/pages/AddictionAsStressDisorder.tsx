@@ -5,6 +5,7 @@ import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, Heart, Shield, Clo
 import { useNavigate } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionAsStressDisorder = () => {
   const navigate = useNavigate();
@@ -41,6 +42,12 @@ const AddictionAsStressDisorder = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Addiction as a Stress-Regulation Disorder"
+          subtitle="A reframe for families seeking to understand why their loved one keeps returning to substances despite consequences. This isn't about weakness — it's about a nervous system that learned to survive in harmful ways."
+          clinicalNote="Based on Dr. Gabor Maté's stress-regulation framework, Polyvagal Theory (Stephen Porges), and ACE (Adverse Childhood Experiences) research."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

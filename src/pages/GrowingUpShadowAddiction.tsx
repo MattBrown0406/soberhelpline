@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GrowingUpShadowAddiction() {
   useGuideTracking("Growing Up in the Shadow of Addiction", "/growing-up-shadow-addiction");
@@ -36,6 +37,12 @@ export default function GrowingUpShadowAddiction() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="Growing Up in the Shadow of Addiction"
+              subtitle="How childhood adaptation shapes adult life — and how to reclaim yourself. What you learned to survive doesn't have to define how you live."
+              clinicalNote="Based on Janet Woititz's Adult Children of Alcoholics research, Claudia Black's 'It Will Never Happen to Me,' and developmental trauma frameworks."
+            />
 
             <div className="text-center mb-8">
               <Leaf className="h-12 w-12 text-primary mx-auto mb-4" />

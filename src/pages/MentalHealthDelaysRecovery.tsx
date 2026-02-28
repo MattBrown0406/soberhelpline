@@ -6,6 +6,7 @@ import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, XCircle, CheckCirc
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const MentalHealthDelaysRecovery = () => {
   useGuideTracking("/mental-health-delays-recovery", "Why Focusing Only on Mental Health Can Delay Recovery");
@@ -37,6 +38,12 @@ const MentalHealthDelaysRecovery = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Why Focusing Only on Mental Health Can Delay Recovery"
+          subtitle="Understanding sequence, not severity. When families prioritize psychiatric treatment while substance use continues unchecked, both conditions worsen."
+          clinicalNote="Based on ASAM's integrated treatment guidelines and SAMHSA's TIP 42: Substance Abuse Treatment for Persons With Co-Occurring Disorders."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">

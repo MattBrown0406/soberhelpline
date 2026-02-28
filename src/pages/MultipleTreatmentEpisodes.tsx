@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, Printer, AlertTriangle, Heart, Target, Shield, RefreshCw, CheckCircle, XCircle, Lightbulb, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
@@ -44,6 +45,12 @@ export default function MultipleTreatmentEpisodes() {
               <p className="text-lg font-bold">Sober Helpline</p>
               <p className="text-sm text-muted-foreground">(541) 241-5886</p>
             </div>
+
+            <ToolBrandHeader
+              title="Why Multiple Treatment Episodes Don't Mean Failure"
+              subtitle="A reality-based guide for families navigating repeated attempts at recovery. Multiple treatment episodes are not a sign of failure — they are a recognized part of the chronic disease process."
+              clinicalNote="Based on NIDA's Principles of Drug Addiction Treatment and the chronic disease management model endorsed by ASAM (American Society of Addiction Medicine)."
+            />
 
             <div className="space-y-8">
               {/* Title */}

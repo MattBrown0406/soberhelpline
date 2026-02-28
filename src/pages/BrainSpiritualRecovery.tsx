@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BrainSpiritualRecovery() {
   useGuideTracking("Addiction, the Brain, and Spiritual Recovery", "/brain-spiritual-recovery");
@@ -26,6 +27,12 @@ export default function BrainSpiritualRecovery() {
               <ArrowLeft className="h-4 w-4 mr-1" />
               Back to Family Education
             </Link>
+
+            <ToolBrandHeader
+              title="Addiction, the Brain, and the Role of Spiritual Recovery"
+              subtitle="How a medical condition heals through neurobiology, behavior, and the 12 Steps. This guide bridges the gap between science and spirituality for families."
+              clinicalNote="Informed by Dr. Marc Lewis's neuroplasticity research, NIDA's brain disease model, and the 12-Step spiritual framework as described in Alcoholics Anonymous (Big Book)."
+            />
 
             <div className="text-center mb-10">
               <div className="flex justify-center gap-3 mb-4">

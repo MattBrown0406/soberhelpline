@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function SiblingGuiltAngerLoyalty() {
   useGuideTracking("/sibling-guilt-anger-loyalty", "Sibling Guilt, Anger, and Loyalty Conflicts");
@@ -36,6 +37,12 @@ export default function SiblingGuiltAngerLoyalty() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="Sibling Guilt, Anger, and Loyalty Conflicts"
+              subtitle="Understanding the emotional double bind in families affected by addiction. You can love your sibling and still feel rage, relief, and grief — all at once."
+              clinicalNote="Informed by family systems literature on triangulation, loyalty conflicts (Ivan Boszormenyi-Nagy), and sibling relational dynamics in addiction."
+            />
 
             <div className="text-center mb-8">
               <Scale className="h-12 w-12 text-primary mx-auto mb-4" />

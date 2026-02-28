@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function CostOfSecrecy() {
   useGuideTracking("The Cost of Secrecy", "/cost-of-secrecy");
@@ -34,6 +35,12 @@ export default function CostOfSecrecy() {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="The Cost of Secrecy"
+            subtitle="How silence protects addiction — and what honesty makes possible. Understanding the difference between privacy and secrecy in families affected by addiction."
+            clinicalNote="Based on Claudia Black's 'Don't Talk' rules, Al-Anon principles of honesty, and family systems research on secrecy as a maintaining factor in addiction."
+          />
 
           <article className="prose prose-slate dark:prose-invert max-w-none">
             <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">

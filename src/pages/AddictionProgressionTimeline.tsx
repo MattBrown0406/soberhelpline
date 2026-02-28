@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionProgressionTimeline = () => {
   useGuideTracking("Addiction Progression Timeline", "/addiction-progression-timeline");
@@ -66,6 +67,12 @@ const AddictionProgressionTimeline = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Addiction Progression Timeline"
+          subtitle="Understanding addiction as a process, not a series of failures. This interactive tool helps families map the trajectory of their loved one's substance use and their own responses over time."
+          clinicalNote="Based on Jellinek's disease model of alcoholism progression and the ASAM continuum of care framework."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
