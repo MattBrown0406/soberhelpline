@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TalkingAboutTreatment() {
   useGuideTracking("/talking-about-treatment", "How to Talk to Your Loved One About Treatment");
@@ -37,13 +38,11 @@ export default function TalkingAboutTreatment() {
               </Button>
             </div>
 
-            <div className="text-center mb-8">
-              <MessageCircle className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                How to Talk to Your Loved One About Treatment
-              </h1>
-              <p className="text-xl text-muted-foreground">A Calm, Clear, and Effective Approach</p>
-            </div>
+            <ToolBrandHeader
+              title="How to Talk to Your Loved One About Treatment"
+              subtitle="A calm, clear, and effective approach to discussing treatment. Communicate without enabling, negotiating, or threatening."
+              clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) and Motivational Interviewing principles for engaging resistant individuals."
+            />
 
             {/* Purpose */}
             <Card className="mb-6">

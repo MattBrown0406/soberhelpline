@@ -10,6 +10,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FamilyActionPlan() {
   useGuideTracking("Family Action Plan", "/family-action-plan");
@@ -100,16 +101,11 @@ export default function FamilyActionPlan() {
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <ClipboardList className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Family Recovery Action Plan
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  A Practical Roadmap for Stability, Boundaries, and Healing
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="Family Recovery Action Plan"
+                subtitle="A practical roadmap for stability, boundaries, and healing. Build a unified family plan that holds up under pressure."
+                clinicalNote="Structured around CRAFT principles, family systems theory, and evidence-based recovery planning frameworks."
+              />
 
               {/* Purpose Section */}
               <section className="mb-8">

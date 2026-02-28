@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GuidePageWrapper from "@/components/GuidePageWrapper";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const ConversationStartersGuide = () => {
   return (
@@ -23,16 +24,11 @@ const ConversationStartersGuide = () => {
             </Button>
           </Link>
 
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <MessageSquare className="w-8 h-8 text-primary" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-                Conversation Starters for Families
-              </h1>
-            </div>
-          </div>
+          <ToolBrandHeader
+            title="Conversation Starters for Families"
+            subtitle="Practical phrases designed to reduce defensiveness and help families speak from a calmer, steadier place when discussing addiction."
+            clinicalNote="Based on Motivational Interviewing (Miller & Rollnick) and CRAFT communication principles."
+          />
 
           {/* Introduction */}
           <Card className="mb-8 border-primary/20">

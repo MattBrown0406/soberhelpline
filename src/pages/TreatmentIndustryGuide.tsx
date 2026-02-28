@@ -8,6 +8,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TreatmentIndustryGuide() {
   useGuideTracking("/treatment-industry-guide", "How the Treatment Industry Actually Works");
@@ -45,15 +46,11 @@ export default function TreatmentIndustryGuide() {
               </Button>
             </div>
 
-            <div className="text-center mb-8 print:mb-4">
-              <Building2 className="h-12 w-12 text-primary mx-auto mb-4 print:h-8 print:w-8" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2 print:text-2xl">
-                How the Treatment Industry Actually Works
-              </h1>
-              <p className="text-xl text-muted-foreground print:text-base">
-                What Families Need to Know Before Making Critical Decisions
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="How the Treatment Industry Actually Works"
+              subtitle="What families need to know before making critical decisions. Understanding the business of treatment so you can advocate effectively."
+              clinicalNote="Based on SAMHSA industry reports, NAATP ethical guidelines, and investigative journalism on treatment industry practices."
+            />
 
             {/* Who This Is For */}
             <Card className="mb-6 print:mb-4 print:shadow-none print:border">

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FlexibilityVsInstability() {
   useGuideTracking("The Difference Between Flexibility and Instability", "/flexibility-vs-instability");
@@ -36,13 +37,12 @@ export default function FlexibilityVsInstability() {
             </Button>
           </div>
 
+          <ToolBrandHeader
+            title="The Difference Between Flexibility and Instability"
+            subtitle="Why adaptability supports recovery — and inconsistency undermines it. Learning to adjust without abandoning your boundaries."
+            clinicalNote="Grounded in family systems theory and CRAFT-based approaches. Healthy flexibility preserves structure; instability erodes it."
+          />
           <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-              The Difference Between Flexibility and Instability
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Why Adaptability Supports Recovery—and Inconsistency Undermines It
-            </p>
 
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Why This Guide Matters</h2>

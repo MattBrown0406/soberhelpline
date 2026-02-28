@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function EmotionalRegulation() {
   useGuideTracking("Emotional Regulation Tools for Families", "/emotional-regulation");
@@ -40,16 +41,11 @@ export default function EmotionalRegulation() {
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <Heart className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Emotional Regulation Tools for Families
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Staying Grounded When Addiction Triggers Chaos
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="Emotional Regulation Tools for Families"
+                subtitle="Staying grounded when addiction triggers chaos. Practical tools for responding with intention instead of impulse."
+                clinicalNote="Based on Dialectical Behavior Therapy (DBT) distress tolerance skills and Polyvagal theory (Porges). Adapted for family members of those with substance use disorders."
+              />
 
               {/* Purpose Section */}
               <section className="mb-8">

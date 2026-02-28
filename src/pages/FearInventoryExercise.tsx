@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import { Helmet } from "react-helmet-async";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface Fear {
   id: string;
@@ -160,11 +161,15 @@ const FearInventoryExercise = () => {
       case 0:
         return (
           <div className="space-y-6">
+            <ToolBrandHeader
+              title="Fear Inventory Exercise"
+              subtitle="Identify the fears holding you back, examine whether they're based in reality, and choose courage over fear-driven paralysis."
+              clinicalNote="Inspired by the 4th Step inventory process from 12-Step recovery and adapted with CBT fear-hierarchy techniques for family members."
+            />
             <div className="prose dark:prose-invert max-w-none">
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Every family facing a loved one's addiction wrestles with fear. These fears feel protective—they seem to keep us safe from conflict, rejection, or worse outcomes. But too often, <strong>fear becomes the very thing that prevents us from taking actions that could save a life.</strong>
               </p>
-              
               <Card className="border-logo-green/30 bg-logo-green/5 my-6">
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-foreground flex items-center gap-2 mb-3">

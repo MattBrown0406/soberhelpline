@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function LivingWellRegardless() {
   useGuideTracking("/living-well-regardless", "Living Well Regardless of Outcome");
@@ -27,17 +28,11 @@ export default function LivingWellRegardless() {
               Back to Family Education
             </Link>
 
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Sun className="h-10 w-10 text-primary" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
-                  Living Well Regardless of Outcome
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground">
-                How Families Reclaim Their Lives Without Giving Up Hope
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Living Well Regardless of Outcome"
+              subtitle="How families reclaim their lives without giving up hope. Learning to live fully while caring deeply, regardless of your loved one's recovery outcome."
+              clinicalNote="Grounded in Al-Anon's principles of detachment with love and acceptance-based approaches (ACT). Recovery for families is not contingent on another person's choices."
+            />
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">

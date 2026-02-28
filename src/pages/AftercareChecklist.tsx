@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AftercareChecklist = () => {
   useGuideTracking("Aftercare Checklist", "/aftercare-checklist");
@@ -197,10 +198,11 @@ const AftercareChecklist = () => {
           Back to Family Resources
         </Link>
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4">Aftercare Readiness Checklist</h1>
-          <p className="text-xl text-muted-foreground">Preventing Discharge-to-Relapse Patterns</p>
-        </div>
+        <ToolBrandHeader
+          title="Aftercare Readiness Checklist"
+          subtitle="Preventing discharge-to-relapse patterns. Assess actual readiness based on confirmed plans and observable behaviors — not hope or insurance timelines."
+          clinicalNote="Based on ASAM continuing care guidelines and Gorski's relapse prevention model. Discharge should be a clinical transition, not a relief milestone."
+        />
 
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
           <AlertTriangle className="h-5 w-5 text-logo-green" />

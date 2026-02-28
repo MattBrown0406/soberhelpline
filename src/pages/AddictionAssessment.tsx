@@ -7,6 +7,7 @@ import { ArrowLeft, Phone } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const questions = [
   "Has my loved one tried to cut back or stop using substances but failed repeatedly?",
@@ -98,15 +99,14 @@ const AddictionAssessment = () => {
       />
       <div className="container mx-auto px-4 py-4">
 
-        <div className="text-center mb-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Addiction Assessment
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
-            In the United States, about 54.2 million people needed treatment for a substance use disorder in 2023, but only about 23% (12.5 million) of those received treatment during the past year. This gap (41.7 million) demonstrates how most people struggling with addiction do not get the help they need.
-          </p>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mt-4">
-            Use the questions below to assess whether your loved one may be struggling with substance use disorder.
+        <div className="max-w-4xl mx-auto">
+          <ToolBrandHeader
+            title="Addiction Assessment"
+            subtitle="Use the questions below to assess whether your loved one may be struggling with substance use disorder. Based on DSM-5 diagnostic criteria for substance use disorders."
+            clinicalNote="Adapted from the DSM-5 (Diagnostic and Statistical Manual of Mental Disorders, 5th Edition) criteria for Substance Use Disorders. This is an educational screening tool, not a clinical diagnosis."
+          />
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base mb-4">
+            In the United States, about 54.2 million people needed treatment for a substance use disorder in 2023, but only about 23% (12.5 million) received treatment during the past year.
           </p>
         </div>
 

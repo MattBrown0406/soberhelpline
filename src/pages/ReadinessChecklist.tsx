@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const checklistItems = {
   section1: [
@@ -161,7 +162,11 @@ export default function ReadinessChecklist() {
               </Button>
             </div>
 
-            {/* Interactive Score Card - Sticky on desktop */}
+            <ToolBrandHeader
+              title="Readiness for Change Checklist"
+              subtitle="Assess your loved one's readiness for recovery based on actions, not promises. A practical tool to measure observable behavior change."
+              clinicalNote="Based on the Transtheoretical Model of Change (Prochaska & DiClemente) and behavioral indicators of treatment readiness from ASAM criteria."
+            />
             <div className={`mb-6 p-4 rounded-lg border-2 ${readiness.bgColor} ${readiness.borderColor} print:hidden sticky top-4 z-10 shadow-lg`}>
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-3">

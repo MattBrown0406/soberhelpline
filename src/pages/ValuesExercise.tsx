@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const ValuesExercise = () => {
   useGuideTracking("/values-exercise", "Family Values Exercise");
@@ -57,10 +58,11 @@ const ValuesExercise = () => {
           {/* Printable Content */}
           <div className="bg-card rounded-lg border p-8 print:border-none print:p-0 print:bg-white">
             {/* Title */}
-            <div className="text-center mb-8 border-b pb-6">
-              <h1 className="text-3xl font-bold text-logo-green mb-2">Values Clarification Exercise</h1>
-              <p className="text-xl text-muted-foreground italic">Making Decisions from What Matters, Not What Hurts</p>
-            </div>
+            <ToolBrandHeader
+              title="Values Clarification Exercise"
+              subtitle="Making decisions from what matters, not what hurts. Reconnect with who you want to be — regardless of what your loved one chooses."
+              clinicalNote="Based on Acceptance and Commitment Therapy (ACT) values clarification and adapted for families affected by substance use disorders."
+            />
 
             {/* Purpose */}
             <section className="mb-8">

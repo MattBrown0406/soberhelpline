@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function WhatChangesWhenFamiliesChange() {
   useGuideTracking("/what-changes-when-families-change", "What Changes When Families Change");
@@ -27,17 +28,11 @@ export default function WhatChangesWhenFamiliesChange() {
               Back to Family Education
             </Link>
 
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <RefreshCw className="h-10 w-10 text-primary" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
-                  What Changes When Families Change
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground">
-                Even If the Addicted Person Doesn't
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="What Changes When Families Change"
+              subtitle="How family change creates system change — even if the addicted person doesn't change immediately. Your recovery matters regardless of theirs."
+              clinicalNote="Grounded in Bowen Family Systems Theory and CRAFT research showing that family behavior changes can positively influence treatment engagement rates by up to 64%."
+            />
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
