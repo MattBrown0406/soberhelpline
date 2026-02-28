@@ -5,7 +5,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 };
 
-function base64url(source: ArrayBuffer): string {
+function base64url(source: ArrayBuffer | Uint8Array): string {
   let str = '';
   const bytes = new Uint8Array(source);
   for (let i = 0; i < bytes.byteLength; i++) {
