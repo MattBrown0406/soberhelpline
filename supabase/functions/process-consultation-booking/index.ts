@@ -357,6 +357,28 @@ Deno.serve(async (req) => {
       client_notified: true,
     }).eq('id', bookingId);
 
+    // Sync consultation to Notion CRM (async, don't block response)
+    try {
+      const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
+      const syncResponse = await fetch(`${supabaseUrl}/functions/v1/sync-consultation-to-notion`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`
+        },
+        body: JSON.stringify({ bookingId })
+      });
+      
+      if (syncResponse.ok) {
+        console.log('Successfully synced consultation to Notion CRM');
+      } else {
+        console.error('Failed to sync consultation to Notion:', await syncResponse.text());
+      }
+    } catch (syncError) {
+      console.error('Error syncing consultation to Notion:', syncError);
+      // Don't fail the booking if Notion sync fails
+    }
+
     return new Response(JSON.stringify({ success: true, zoomUrl: zoomData?.join_url }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (error) {
     console.error('Error processing booking:', error);
