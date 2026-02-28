@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TwelveStepsExplained() {
   useGuideTracking("/twelve-steps-explained", "The 12 Steps Explained for Families");
@@ -36,6 +37,12 @@ export default function TwelveStepsExplained() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="The 12 Steps Explained for Families"
+              subtitle="What each step is really doing — and why it matters in recovery. This guide helps families understand the purpose behind the process."
+              clinicalNote="Based on the original Twelve Steps of Alcoholics Anonymous and adapted family guidance from Al-Anon Family Groups. Clinical context informed by Stephanie Brown's developmental model of recovery."
+            />
 
             <div className="text-center mb-10">
               <div className="flex justify-center mb-4">

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, AlertCircle, HelpCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionRewritesFamilyRules = () => {
   useGuideTracking("How Addiction Rewrites Family Rules", "/addiction-rewrites-family-rules");
@@ -29,6 +30,12 @@ const AddictionRewritesFamilyRules = () => {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="How Addiction Rewrites Family Rules"
+            subtitle="The unspoken codes that keep families stuck — and how to change them. Every family has rules. Addiction rewrites them without anyone noticing."
+            clinicalNote="Based on Murray Bowen's family systems theory and Claudia Black's research on unspoken family rules in addiction ('Don't talk, don't trust, don't feel')."
+          />
 
           {/* Title Section */}
           <div className="text-center mb-12">

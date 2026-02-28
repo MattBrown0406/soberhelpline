@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, ArrowRight } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const FamilyRolesAddiction = () => {
   useGuideTracking("Family Roles in Addiction", "/family-roles-addiction");
@@ -29,6 +30,12 @@ const FamilyRolesAddiction = () => {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="Family Roles in Addiction (Beyond the Clichés)"
+            subtitle="How survival strategies form — and how families outgrow them. These roles are not character flaws; they are adaptive responses to an unstable system."
+            clinicalNote="Based on Sharon Wegscheider-Cruse's family systems model and Virginia Satir's family roles framework, adapted for addiction contexts."
+          />
 
           {/* Title Section */}
           <div className="text-center mb-12">

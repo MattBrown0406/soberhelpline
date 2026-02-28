@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function StrongOneGuide() {
   useGuideTracking("/strong-one-guide", "The Hidden Cost of Being the Strong One");
@@ -37,6 +38,12 @@ export default function StrongOneGuide() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title='The Hidden Cost of Being the "Strong One"'
+              subtitle="When competence becomes a survival strategy — and a liability. The family member who holds it together often pays the highest price in silence."
+              clinicalNote="Based on codependency research by Pia Mellody, caretaker burnout literature, and Al-Anon's emphasis on self-care as a recovery practice."
+            />
 
             <div className="text-center mb-8">
               <Shield className="h-12 w-12 text-primary mx-auto mb-4" />

@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const WhyChangeDoesntHappen = () => {
   useGuideTracking("/why-change-doesnt-happen", "Why Change Doesn't Happen When Families Try Harder");
@@ -35,6 +36,12 @@ const WhyChangeDoesntHappen = () => {
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
+
+        <ToolBrandHeader
+          title="Why Change Doesn't Happen When Families Try Harder"
+          subtitle="Understanding what actually drives recovery. Effort, love, and sacrifice — while admirable — are not what create lasting change in addiction."
+          clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) research and the Johnson Institute's family intervention model."
+        />
 
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

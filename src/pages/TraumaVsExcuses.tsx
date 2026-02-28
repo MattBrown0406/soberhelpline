@@ -6,6 +6,7 @@ import { ArrowLeft, Printer, Heart, AlertTriangle, Shield, XCircle, CheckCircle,
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const TraumaVsExcuses = () => {
   useGuideTracking("/trauma-vs-excuses", "Trauma vs. Excuses: A Necessary Distinction");
@@ -37,6 +38,12 @@ const TraumaVsExcuses = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Trauma vs. Excuses: A Necessary Distinction"
+          subtitle="How to hold compassion for trauma without justifying harm. Trauma explains behavior — it does not excuse it. Both things can be true."
+          clinicalNote="Informed by trauma-informed care principles (SAMHSA), ACE research, and accountability frameworks used in evidence-based addiction treatment."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function SiblingExperience() {
   useGuideTracking("/sibling-experience", "The Sibling Experience in Addiction");
@@ -36,6 +37,12 @@ export default function SiblingExperience() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="The Sibling Experience in Addiction"
+              subtitle="The invisible impact on brothers and sisters in addicted families. Siblings carry unique grief, anger, and loss that often goes unrecognized."
+              clinicalNote="Informed by research on non-identified patients in family systems, sibling relational trauma, and ACOA (Adult Children of Alcoholics) literature."
+            />
 
             <div className="text-center mb-8">
               <Users className="h-12 w-12 text-primary mx-auto mb-4" />

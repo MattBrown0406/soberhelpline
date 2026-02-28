@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 export default function EnablingLanguageTranslator() {
@@ -83,6 +84,12 @@ export default function EnablingLanguageTranslator() {
               Back to Family Education
             </Button>
           </Link>
+
+          <ToolBrandHeader
+            title="Enabling Language Translator"
+            subtitle="How to shift from emotional rescue to clear boundaries — without being cold. The words we use matter more than we realize."
+            clinicalNote="Based on Motivational Interviewing techniques, CRAFT communication strategies, and boundary language frameworks from Al-Anon Family Groups."
+          />
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">

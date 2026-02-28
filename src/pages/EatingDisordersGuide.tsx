@@ -6,6 +6,7 @@ import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import EatingDisorderScreening from '@/components/EatingDisorderScreening';
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const EatingDisordersGuide = () => {
   useGuideTracking("Understanding Eating Disorders", "/eating-disorders-guide");
@@ -36,6 +37,12 @@ const EatingDisordersGuide = () => {
 
         {/* Printable Content */}
         <div className="print:text-black print:bg-white">
+          <ToolBrandHeader
+            title="Understanding Eating Disorders"
+            subtitle="A family guide to recognition, risk factors, and treatment. Eating disorders often co-occur with substance use disorders and require specialized, integrated care."
+            clinicalNote="Based on NEDA (National Eating Disorders Association) clinical guidelines and DSM-5 diagnostic criteria for Anorexia Nervosa, Bulimia Nervosa, and Binge Eating Disorder."
+          />
+
           {/* Title Section */}
           <div className="text-center mb-8 pb-6 border-b-2 border-primary print:border-black">
             <div className="flex justify-center mb-4">

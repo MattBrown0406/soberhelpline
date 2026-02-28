@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Clock, Users, CheckCircle, AlertCircle, HelpCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const RebuildingSiblingRelationships = () => {
   useGuideTracking("/rebuilding-sibling-relationships", "Rebuilding Sibling Relationships in Recovery");
@@ -29,6 +30,12 @@ const RebuildingSiblingRelationships = () => {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="Rebuilding Sibling Relationships in Recovery"
+            subtitle="What healing can look like — without pressure, pretending, or forced forgiveness. Reconnection is a process, not an event."
+            clinicalNote="Informed by family reconciliation research, Al-Anon's principles of detachment and self-care, and restorative justice frameworks adapted for family systems."
+          />
 
           {/* Title Section */}
           <div className="text-center mb-12">

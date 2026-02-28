@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GuiltReliefResentmentCycle() {
   useGuideTracking("The Guilt-Relief-Resentment Cycle", "/guilt-relief-resentment-cycle");
@@ -37,6 +38,12 @@ export default function GuiltReliefResentmentCycle() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="The Guilt–Relief–Resentment Cycle"
+              subtitle="How good intentions turn into chronic burnout — and how to break the loop. Understanding this cycle is the first step toward interrupting it."
+              clinicalNote="Informed by codependency literature (Melody Beattie), Al-Anon's detachment principles, and compassion fatigue research in family systems."
+            />
 
             <div className="text-center mb-8">
               <RefreshCw className="h-12 w-12 text-primary mx-auto mb-4" />

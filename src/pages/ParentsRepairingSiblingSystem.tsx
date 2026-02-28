@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, XCircle, MessageCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const ParentsRepairingSiblingSystem = () => {
   useGuideTracking("/parents-repairing-sibling-system", "Parents: Repairing the Sibling System");
@@ -29,6 +30,12 @@ const ParentsRepairingSiblingSystem = () => {
               Print Guide
             </Button>
           </div>
+
+          <ToolBrandHeader
+            title="Parents: Repairing the Sibling System"
+            subtitle="How to acknowledge unequal impact, restore trust, and support healing between siblings. This may be the most important work parents do after the crisis stabilizes."
+            clinicalNote="Based on family systems therapy principles, sibling relational repair frameworks, and the developmental needs of non-identified patients in addiction families."
+          />
 
           {/* Title Section */}
           <div className="text-center mb-12">

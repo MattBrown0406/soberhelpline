@@ -12,6 +12,7 @@ import { Loader2, Lock } from "lucide-react";
 import { CardDescription } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 interface CommunicationSection {
@@ -247,6 +248,12 @@ export default function CommunicationGuide() {
                 Print Guide
               </Button>
             </div>
+
+            <ToolBrandHeader
+              title="What to Say / What Not to Say"
+              subtitle="A practical communication library for families affected by addiction. Ready-to-use language that lowers defensiveness and supports accountability."
+              clinicalNote="Based on Motivational Interviewing (Miller & Rollnick), CRAFT communication strategies, and Al-Anon's principles of loving detachment."
+            />
 
             {/* Header */}
             <div className="text-center mb-8">

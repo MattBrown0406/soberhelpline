@@ -6,6 +6,7 @@ import { ArrowLeft, Printer, Brain, Zap, Shield, XCircle, CheckCircle, RefreshCw
 import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const WhyWillpowerFails = () => {
@@ -44,6 +45,12 @@ const WhyWillpowerFails = () => {
             Print Guide
           </Button>
         </div>
+
+        <ToolBrandHeader
+          title="Why Willpower Fails (and What Actually Works)"
+          subtitle="Understanding motivation, craving, and why effort alone isn't enough. This guide helps families stop blaming willpower and start understanding brain science."
+          clinicalNote="Based on neuroscience of the prefrontal cortex and mesolimbic dopamine system, as well as Prochaska & DiClemente's Stages of Change model."
+        />
 
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">

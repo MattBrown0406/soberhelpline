@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function HowTraumaShapesAddiction() {
   useGuideTracking("How Trauma Shapes Addiction", "/how-trauma-shapes-addiction");
@@ -26,6 +27,12 @@ export default function HowTraumaShapesAddiction() {
               <ArrowLeft className="h-4 w-4 mr-1" />
               Back to Family Education
             </Link>
+
+            <ToolBrandHeader
+              title="How Trauma Shapes Addiction"
+              subtitle="Understanding how trauma increases vulnerability to addiction without making it the whole story. A balanced, clinical perspective for families."
+              clinicalNote="Based on ACE (Adverse Childhood Experiences) research, Bessel van der Kolk's work on trauma and the body, and SAMHSA's trauma-informed care framework."
+            />
 
             <div className="text-center mb-10">
               <Brain className="h-12 w-12 text-primary mx-auto mb-4" />

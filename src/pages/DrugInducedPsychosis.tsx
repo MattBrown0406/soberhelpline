@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const DrugInducedPsychosis = () => {
   useGuideTracking("Understanding Drug-Induced Psychosis", "/drug-induced-psychosis");
@@ -34,6 +35,12 @@ const DrugInducedPsychosis = () => {
 
         {/* Printable Content */}
         <div className="print:text-black print:bg-white">
+          <ToolBrandHeader
+            title="Understanding Drug-Induced Psychosis"
+            subtitle="What families need to know — and how to tell the difference between THC and methamphetamine psychosis. Early recognition can save lives."
+            clinicalNote="Based on DSM-5 criteria for Substance/Medication-Induced Psychotic Disorder and emergency psychiatric guidelines from SAMHSA."
+          />
+
           {/* Title Section */}
           <div className="text-center mb-8 pb-6 border-b-2 border-primary print:border-black">
             <div className="flex justify-center mb-4">
