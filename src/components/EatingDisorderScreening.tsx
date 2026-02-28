@@ -15,6 +15,7 @@ import {
   Utensils,
   Activity
 } from 'lucide-react';
+import ToolBrandHeader from '@/components/ToolBrandHeader';
 import {
   Accordion,
   AccordionContent,
@@ -204,17 +205,13 @@ export default function EatingDisorderScreening() {
 
   const renderIntro = () => (
     <div className="space-y-6">
+      <ToolBrandHeader
+        title="Eating Disorder Family Screening Tool"
+        subtitle="This screening tool helps family members recognize potential warning signs of eating disorders in a loved one. It is not a diagnostic tool but can help you identify patterns that may warrant professional evaluation."
+        clinicalNote="Based on recognized clinical indicators from the DSM-5 and NEDA (National Eating Disorders Association) guidelines. Signs are organized across six categories."
+      />
       <div className="bg-primary/5 border border-primary/20 rounded-lg p-6">
-        <h3 className="font-semibold text-lg text-foreground mb-3 flex items-center gap-2">
-          <Heart className="w-5 h-5 text-primary" />
-          About This Screening Tool
-        </h3>
         <div className="space-y-4 text-muted-foreground">
-          <p>
-            This screening tool helps family members recognize potential warning signs of eating disorders 
-            in a loved one. It is <strong>not a diagnostic tool</strong> but can help you identify patterns 
-            that may warrant professional evaluation.
-          </p>
           <p>
             The signs are organized into six categories covering eating behaviors, physical symptoms, 
             emotional changes, body image concerns, social impacts, and compensatory behaviors.

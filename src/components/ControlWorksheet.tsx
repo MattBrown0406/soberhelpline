@@ -7,6 +7,7 @@ import { User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { ChevronDown, ChevronUp, FileText, History } from "lucide-react";
 import { format } from "date-fns";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface WorksheetResult {
   id: string;
@@ -205,15 +206,11 @@ export default function ControlWorksheet({ user }: Props) {
           {/* Step 0: Introduction */}
           {currentStep === 0 && (
             <div className="space-y-4">
-              <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                <h4 className="font-semibold text-logo-green mb-2">Purpose</h4>
-                <p className="text-sm text-muted-foreground">
-                  One of the most painful parts of loving someone with addiction is feeling responsible for outcomes you do not control. This worksheet helps you separate responsibility from influence, reduce emotional burnout, and redirect energy toward what actually supports recovery — yours and theirs.
-                </p>
-                <p className="text-sm font-medium mt-3 text-primary italic">
-                  This is not about giving up. It is about letting go of what was never yours to carry.
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="What I Can & Cannot Control"
+                subtitle="One of the most painful parts of loving someone with addiction is feeling responsible for outcomes you do not control. This worksheet helps you separate responsibility from influence, reduce emotional burnout, and redirect energy toward what actually supports recovery — yours and theirs."
+                clinicalNote="Rooted in the Serenity Prayer and evidence-based detachment principles from Al-Anon and CRAFT. This is not about giving up — it is about letting go of what was never yours to carry."
+              />
 
               <div className="p-4 bg-muted/50 rounded-lg">
                 <h4 className="font-semibold mb-2">Instructions</h4>

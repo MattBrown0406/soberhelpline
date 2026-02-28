@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, ArrowLeft, FileText, Brain, CheckCircle, Eye, Activity, AlertTriangle, HelpCircle } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -112,15 +113,11 @@ export default function InsightBehaviorTracker() {
             </Link>
 
             <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Activity className="h-10 w-10 text-primary" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
-                  Insight vs. Behavior Tracker
-                </h1>
-              </div>
-              <p className="text-xl text-muted-foreground">
-                Promises vs Patterns: How to Measure Progress Without Relying on Promises
-              </p>
+              <ToolBrandHeader
+                title="Insight vs. Behavior Tracker"
+                subtitle="Promises vs Patterns: How to Measure Progress Without Relying on Promises. Families are often encouraged by insightful conversations, apologies, and emotional honesty — but insight without behavior change is not recovery."
+                clinicalNote="Based on behavioral indicators used in clinical addiction treatment. True recovery is measured by sustained behavioral change, not verbal acknowledgment."
+              />
             </div>
 
             {/* Why This Tracker Matters */}

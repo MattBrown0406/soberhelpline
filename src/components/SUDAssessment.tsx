@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp, ClipboardList, ChevronRight, RotateCcw, AlertTriangle, CheckCircle2, Info } from "lucide-react";
 import { Link } from "react-router-dom";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const timeframeOptions = [
   { value: "never", label: "Never", score: 0 },
@@ -199,22 +200,11 @@ export default function SUDAssessment() {
 
   const renderIntro = () => (
     <div className="space-y-6">
-      <div className="bg-muted/50 p-4 rounded-lg">
-        <h3 className="font-semibold text-lg mb-2">About This Assessment</h3>
-        <p className="text-sm text-muted-foreground mb-4">
-          This assessment is based on the <strong>DSM-5 criteria for Substance Use Disorder (SUD)</strong>, 
-          the diagnostic standard used by healthcare professionals. It helps families understand whether 
-          their loved one's substance use may meet clinical criteria for a diagnosis.
-        </p>
-        <div className="flex items-start gap-2 text-sm bg-amber-50 dark:bg-amber-950/30 p-3 rounded border border-amber-200 dark:border-amber-800">
-          <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-          <p>
-            <strong>Important:</strong> This is a screening tool for family members, not a clinical diagnosis. 
-            Only a qualified healthcare professional can provide an official diagnosis. Your observations 
-            are valuable, but may not capture the full picture.
-          </p>
-        </div>
-      </div>
+      <ToolBrandHeader
+        title="Substance Use Disorder Assessment"
+        subtitle="This assessment is based on the DSM-5 criteria for Substance Use Disorder (SUD), the diagnostic standard used by healthcare professionals. It helps families understand whether their loved one's substance use may meet clinical criteria for a diagnosis."
+        clinicalNote="This is a family screening tool, not a clinical diagnosis. Only a qualified healthcare professional can provide an official diagnosis. Your observations are valuable but may not capture the full picture."
+      />
       
       <div className="space-y-3">
         <h4 className="font-medium">What you'll assess:</h4>

@@ -9,6 +9,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { User } from "@supabase/supabase-js";
 import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer, ChevronDown, Gavel } from "lucide-react";
 import { Link } from "react-router-dom";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface ScenarioWorksheetProps {
   user: User;
@@ -194,16 +195,11 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent className="space-y-6">
-        {/* Purpose Section */}
-        <div className="bg-muted/50 p-4 rounded-lg border">
-          <h3 className="font-semibold text-foreground mb-2">Purpose</h3>
-          <p className="text-muted-foreground text-sm mb-3">
-            Most families know what they should do—until emotions take over. These scenarios help you practice values-based, recovery-aligned responses before you are under pressure.
-          </p>
-          <p className="text-foreground font-medium italic">
-            There are no perfect answers. There are consistent ones.
-          </p>
-        </div>
+        <ToolBrandHeader
+          title={'"What Would You Do?" — Scenario Exercises'}
+          subtitle="Most families know what they should do — until emotions take over. These scenarios help you practice values-based, recovery-aligned responses before you are under pressure."
+          clinicalNote="Based on CRAFT principles and motivational interviewing techniques. There are no perfect answers — there are consistent ones."
+        />
 
         {/* How to Use */}
         <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">

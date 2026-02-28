@@ -8,6 +8,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { User } from "@supabase/supabase-js";
 import { Heart, ChevronDown, Printer, Brain, Shield, Users, Moon, Flame, RefreshCw, CheckCircle2, AlertTriangle, Sparkles } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 
@@ -400,19 +401,11 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <Progress value={progress} className="h-2" />
             </div>
 
-            {/* Purpose Section */}
-            <div className="bg-rose-50 dark:bg-rose-950/20 p-4 rounded-lg border border-rose-200 dark:border-rose-800">
-              <h3 className="font-semibold text-rose-800 dark:text-rose-300 mb-2">Why This Worksheet Exists</h3>
-              <p className="text-sm text-rose-700 dark:text-rose-400 mb-3">
-                When families hear "self-care," many feel irritated, guilty, or dismissed. Bubble baths and "take a break" advice often feel out of touch, impossible during crisis, or selfish when someone else is suffering.
-              </p>
-              <p className="text-rose-800 dark:text-rose-300 font-medium">
-                The truth is: Most families don't need indulgence. They need stability.
-              </p>
-              <p className="text-sm text-rose-700 dark:text-rose-400 mt-2">
-                This worksheet reframes self-care as protecting your capacity to function, think clearly, and live meaningfully—regardless of whether your loved one changes.
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Self-Care That Actually Helps"
+              subtitle={'When families hear "self-care," many feel irritated, guilty, or dismissed. This worksheet reframes self-care as protecting your capacity to function, think clearly, and live meaningfully — regardless of whether your loved one changes.'}
+              clinicalNote="Grounded in nervous system regulation, trauma-informed care, and family recovery research. Most families don't need indulgence — they need stability."
+            />
 
             {/* Step 0: Understanding Your Beliefs About Self-Care */}
             {currentStep === 0 && (

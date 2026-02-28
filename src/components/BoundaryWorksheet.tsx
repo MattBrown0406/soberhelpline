@@ -8,6 +8,7 @@ import { User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { ChevronDown, ChevronUp, Shield, History } from "lucide-react";
 import { format } from "date-fns";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface WorksheetResult {
   id: string;
@@ -238,15 +239,11 @@ export default function BoundaryWorksheet({ user }: Props) {
           {/* Step 0: Introduction */}
           {currentStep === 0 && (
             <div className="space-y-4">
-              <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                <h4 className="font-semibold text-logo-green mb-2">Purpose</h4>
-                <p className="text-sm text-muted-foreground">
-                  Boundaries are not punishments, threats, or ultimatums. They are clear statements of what you will and will not participate in. This worksheet helps you define boundaries that are fair, enforceable, and grounded in self-respect rather than fear or anger.
-                </p>
-                <p className="text-sm font-medium mt-3 text-primary italic">
-                  Boundaries are about your behavior, not controlling someone else's.
-                </p>
-              </div>
+              <ToolBrandHeader
+                title="Boundary Setting Worksheet"
+                subtitle="Boundaries are not punishments, threats, or ultimatums. They are clear statements of what you will and will not participate in. This worksheet helps you define boundaries that are fair, enforceable, and grounded in self-respect rather than fear or anger."
+                clinicalNote="Aligned with the CRAFT model and Al-Anon principles. Boundaries are about your behavior, not controlling someone else's."
+              />
 
               <Button onClick={() => setCurrentStep(1)} className="w-full">
                 Begin Worksheet

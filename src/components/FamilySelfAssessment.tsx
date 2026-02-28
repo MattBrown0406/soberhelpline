@@ -7,6 +7,7 @@ import { User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { ChevronDown, ChevronUp, ClipboardCheck, History, TrendingDown, TrendingUp, Minus } from "lucide-react";
 import { format } from "date-fns";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface AssessmentResult {
   id: string;
@@ -309,13 +310,11 @@ export default function FamilySelfAssessment({ user }: Props) {
           {/* Step 0: Introduction */}
           {currentStep === 0 && (
             <div className="space-y-4">
-              <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                <h4 className="font-semibold text-logo-green mb-2">Purpose</h4>
-                <p className="text-sm text-muted-foreground">
-                  This self-assessment is not about blame or shame. Enabling behaviors almost always come from love, fear, exhaustion, or a desire to keep things from getting worse. The goal of this assessment is to help you identify patterns, increase awareness, and begin shifting from reactive helping to healthy support.
-                </p>
-                <p className="text-sm font-medium mt-2 text-primary">Be honest. This is for you.</p>
-              </div>
+              <ToolBrandHeader
+                title="Enabling Self-Assessment"
+                subtitle="This self-assessment is not about blame or shame. Enabling behaviors almost always come from love, fear, exhaustion, or a desire to keep things from getting worse. The goal is to help you identify patterns, increase awareness, and begin shifting from reactive helping to healthy support."
+                clinicalNote="Grounded in family systems theory and the CRAFT (Community Reinforcement and Family Training) model. Be honest — this is for you."
+              />
               
               <div className="p-4 bg-muted/50 rounded-lg">
                 <h4 className="font-semibold mb-2">How to Use This Assessment</h4>

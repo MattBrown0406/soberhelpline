@@ -10,6 +10,7 @@ import { Printer, AlertTriangle, Clock, TrendingDown, RefreshCw, Info, Heart, Br
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const RelapseWarningSignsTracker = () => {
   useGuideTracking("/relapse-warning-signs-tracker", "Relapse Warning Signs Tracker");
@@ -192,10 +193,11 @@ ${notes || '(None recorded)'}
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Relapse Warning Signs Tracker</h1>
-          <p className="text-muted-foreground">
-            Use this tracker to notice patterns over time. Check items that have been consistently present over the last 1–2 weeks.
-          </p>
+          <ToolBrandHeader
+            title="Relapse Warning Signs Tracker"
+            subtitle="Use this tracker to notice patterns over time. Check items that have been consistently present over the last 1–2 weeks. Return to substance use is the end of a process — not the beginning."
+            clinicalNote="Based on Gorski's relapse prevention model and Terence Gorski's clinical framework for identifying emotional, mental, and physical relapse stages."
+          />
         </div>
 
         {/* Critical Understanding Alert */}

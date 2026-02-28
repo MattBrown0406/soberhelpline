@@ -10,6 +10,7 @@ import { User } from "@supabase/supabase-js";
 import { Scale, ChevronDown, Printer, FileText, Heart, AlertTriangle, Shield, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface GuiltResponsibilityWorksheetProps {
   user: User;
@@ -186,16 +187,11 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
         </CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent className="space-y-8">
-            {/* Purpose Section */}
-            <div className="bg-muted/50 p-4 rounded-lg border">
-              <h3 className="font-semibold text-foreground mb-2">Purpose</h3>
-              <p className="text-muted-foreground text-sm mb-3">
-                This worksheet helps you identify when guilt is driving your decisions—and how to shift back into responsibility, boundaries, and self-respect. It is not about eliminating guilt; it is about not letting guilt make the decisions.
-              </p>
-              <p className="text-foreground font-medium italic">
-                Use this worksheet before or after emotionally charged situations.
-              </p>
-            </div>
+            <ToolBrandHeader
+              title="Guilt vs. Responsibility Worksheet"
+              subtitle="This worksheet helps you identify when guilt is driving your decisions — and how to shift back into responsibility, boundaries, and self-respect. It is not about eliminating guilt; it is about not letting guilt make the decisions."
+              clinicalNote="Informed by cognitive-behavioral approaches and family recovery principles. Use this worksheet before or after emotionally charged situations."
+            />
 
             {/* Part 1: Recognizing Guilt */}
             <div className="space-y-4">

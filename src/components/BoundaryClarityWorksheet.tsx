@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ChevronRight, FileCheck, Printer, Save, Loader2 } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -200,18 +201,14 @@ export default function BoundaryClarityWorksheet({ readOnly = false, worksheetDa
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-primary mb-1 flex items-center gap-2">
-          <FileCheck className="h-6 w-6" />
-          Boundary Clarity Worksheet™
-        </h2>
-        <p className="text-muted-foreground text-sm">
-          Define boundaries that are clear, enforceable, and aligned with your values — not reactive, emotional, or punitive.
-        </p>
-        {existingId && !readOnly && (
-          <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">✓ Previously saved worksheet loaded</p>
-        )}
-      </div>
+      <ToolBrandHeader
+        title="Boundary Clarity Worksheet™"
+        subtitle="Define boundaries that are clear, enforceable, and aligned with your values — not reactive, emotional, or punitive."
+        clinicalNote="Based on values-driven boundary work used in CRAFT and family systems therapy. Boundaries rooted in values feel grounded; boundaries without values feel harsh."
+      />
+      {existingId && !readOnly && (
+        <p className="text-xs text-emerald-600 dark:text-emerald-400 -mt-4">✓ Previously saved worksheet loaded</p>
+      )}
 
       {/* PART 1 */}
       <Card>
