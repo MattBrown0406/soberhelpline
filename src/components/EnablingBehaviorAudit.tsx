@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ChevronRight, ShieldAlert, Save, Loader2 } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -262,18 +263,11 @@ export default function EnablingBehaviorAudit({ readOnly = false, auditData }: E
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-primary mb-1 flex items-center gap-2">
-          <ShieldAlert className="h-6 w-6" />
-          Enabling Behavior Audit™
-        </h2>
-        <p className="text-muted-foreground text-sm mb-2">
-          This audit is not about blame. It is about awareness.
-        </p>
-        <p className="text-sm text-muted-foreground italic">
-          Enabling often comes from love, fear, guilt, or exhaustion — not weakness. Answer based on the past 90 days.
-        </p>
-      </div>
+      <ToolBrandHeader
+        title="Enabling Behavior Audit™"
+        subtitle="This audit is not about blame — it is about awareness. Enabling often comes from love, fear, guilt, or exhaustion, not weakness. Answer honestly based on the past 90 days."
+        clinicalNote="Based on evidence-informed family systems and codependency research. Identifying enabling patterns is the first step toward healthier support."
+      />
 
       {!showResults ? (
         <>

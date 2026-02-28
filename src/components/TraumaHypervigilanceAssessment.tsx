@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertTriangle, Brain, Heart, Shield, Moon, Users, RotateCcw, CheckCircle, Info } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 interface Question {
   id: string;
@@ -187,15 +188,13 @@ export default function TraumaHypervigilanceAssessment() {
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-6 pb-6">
+          <ToolBrandHeader
+            title="Family Trauma & Hypervigilance Self-Assessment"
+            subtitle={"Families living with addiction often say: \"I'm always on edge,\" \"I can't relax,\" \"I'm waiting for the next crisis.\" These are not personality flaws \u2014 they are trauma responses."}
+            clinicalNote="Informed by polyvagal theory and ACE (Adverse Childhood Experiences) research. Understanding your nervous system's response is the first step toward healing."
+          />
           {/* Introduction */}
           <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
-            <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-              <Info className="h-4 w-4 text-purple-600" />
-              Why This Assessment Matters
-            </h4>
-            <p className="text-sm text-muted-foreground mb-3">
-              Families living with addiction often say: <em>"I'm always on edge," "I can't relax," "I'm waiting for the next crisis," "I don't trust calm anymore."</em>
-            </p>
             <p className="text-sm text-muted-foreground mb-3">
               <strong>These are not personality flaws. They are trauma responses.</strong>
             </p>

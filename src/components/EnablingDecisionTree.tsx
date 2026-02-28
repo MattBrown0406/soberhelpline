@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { 
   ChevronRight, 
   ChevronLeft, 
@@ -284,9 +285,9 @@ export default function EnablingDecisionTree() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground mb-4">
-            When families are stressed, they often respond quickly to requests—especially requests wrapped 
+            When families are stressed, they often respond quickly to requests — especially requests wrapped 
             in urgency, guilt, or crisis language. This decision tree helps you pause, think clearly, and 
-            choose responses that support recovery, safety, and your well-being—not the addiction cycle.
+            choose responses that support recovery, safety, and your well-being.
           </p>
           <div className="flex items-center gap-4 mb-4 p-3 bg-muted/50 rounded-lg text-sm">
             <div className="flex items-center gap-2">
@@ -311,6 +312,11 @@ export default function EnablingDecisionTree() {
       case 0:
         return (
           <div className="space-y-6">
+            <ToolBrandHeader
+              title="Is This Help or Enabling? — Decision Tree"
+              subtitle="This step-by-step guide helps you pause before responding to requests, distinguish true crisis from chaos, and make decisions aligned with recovery and your own well-being."
+              clinicalNote="Based on CRAFT principles and healthy detachment practices. Helping supports responsibility. Enabling removes it."
+            />
             <div className="text-center p-6 bg-primary/5 rounded-lg border border-primary/20">
               <Pause className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-4">Before You Start: The 10-Second Pause</h3>

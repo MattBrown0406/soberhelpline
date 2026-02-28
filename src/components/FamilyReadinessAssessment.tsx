@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ChevronRight, ClipboardCheck, Save, Loader2 } from "lucide-react";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -367,6 +368,11 @@ export default function FamilyReadinessAssessment({ readOnly = false, assessment
 
   return (
     <div className="space-y-6">
+      <ToolBrandHeader
+        title="Family Readiness Assessment™"
+        subtitle="This assessment helps you understand where your family stands right now — not to judge, but to guide. Knowing your current phase helps us recommend the right support and next steps."
+        clinicalNote="Based on the four-phase clinical framework: Crisis Stabilization, Stabilization, Transition, and Maintenance. Used in CRAFT-informed family coaching."
+      />
       {!showResults ? (
         <>
           <div className="mb-6">
