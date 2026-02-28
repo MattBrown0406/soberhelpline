@@ -91,17 +91,6 @@ export default function EnablingLanguageTranslator() {
             clinicalNote="Based on Motivational Interviewing techniques, CRAFT communication strategies, and boundary language frameworks from Al-Anon Family Groups."
           />
 
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <MessageSquare className="h-6 w-6 text-primary" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">Enabling Language Translator</h1>
-            </div>
-            <p className="text-xl text-muted-foreground">
-              How to Shift from Emotional Rescue to Clear Boundaries—Without Being Cold
-            </p>
-          </div>
 
           <Card className="mb-8 border-primary/20 bg-primary/5">
             <CardHeader>

@@ -255,16 +255,6 @@ export default function CommunicationGuide() {
               clinicalNote="Based on Motivational Interviewing (Miller & Rollnick), CRAFT communication strategies, and Al-Anon's principles of loving detachment."
             />
 
-            {/* Header */}
-            <div className="text-center mb-8">
-              <MessageSquare className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                What to Say / What Not to Say
-              </h1>
-              <p className="text-xl text-muted-foreground mb-4">
-                A Practical Communication Library for Families Affected by Addiction
-              </p>
-            </div>
 
             {/* Purpose */}
             <Card className="mb-8">

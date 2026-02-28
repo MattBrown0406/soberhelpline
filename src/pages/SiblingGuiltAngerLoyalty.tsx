@@ -44,15 +44,6 @@ export default function SiblingGuiltAngerLoyalty() {
               clinicalNote="Informed by family systems literature on triangulation, loyalty conflicts (Ivan Boszormenyi-Nagy), and sibling relational dynamics in addiction."
             />
 
-            <div className="text-center mb-8">
-              <Scale className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Sibling Guilt, Anger, and Loyalty Conflicts
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Understanding the Emotional Double Bind in Families Affected by Addiction
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-6">

@@ -43,14 +43,6 @@ const EatingDisordersGuide = () => {
             clinicalNote="Based on NEDA (National Eating Disorders Association) clinical guidelines and DSM-5 diagnostic criteria for Anorexia Nervosa, Bulimia Nervosa, and Binge Eating Disorder."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-8 pb-6 border-b-2 border-primary print:border-black">
-            <div className="flex justify-center mb-4">
-              <Heart className="h-16 w-16 text-primary print:text-black" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Understanding Eating Disorders</h1>
-            <p className="text-xl text-muted-foreground italic">A Family Guide to Recognition, Risk Factors, and Treatment</p>
-          </div>
 
           {/* Screening Tool */}
           <EatingDisorderScreening />

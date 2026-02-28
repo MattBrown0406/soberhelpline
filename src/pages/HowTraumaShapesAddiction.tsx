@@ -34,15 +34,6 @@ export default function HowTraumaShapesAddiction() {
               clinicalNote="Based on ACE (Adverse Childhood Experiences) research, Bessel van der Kolk's work on trauma and the body, and SAMHSA's trauma-informed care framework."
             />
 
-            <div className="text-center mb-10">
-              <Brain className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                How Trauma Shapes Addiction
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Without Making It the Whole Story
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20">

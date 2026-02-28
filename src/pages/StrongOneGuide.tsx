@@ -45,15 +45,6 @@ export default function StrongOneGuide() {
               clinicalNote="Based on codependency research by Pia Mellody, caretaker burnout literature, and Al-Anon's emphasis on self-care as a recovery practice."
             />
 
-            <div className="text-center mb-8">
-              <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                The Hidden Cost of Being the "Strong One"
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                When Competence Becomes a Survival Strategy—and a Liability
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-6">

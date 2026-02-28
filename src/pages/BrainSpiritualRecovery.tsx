@@ -34,18 +34,6 @@ export default function BrainSpiritualRecovery() {
               clinicalNote="Informed by Dr. Marc Lewis's neuroplasticity research, NIDA's brain disease model, and the 12-Step spiritual framework as described in Alcoholics Anonymous (Big Book)."
             />
 
-            <div className="text-center mb-10">
-              <div className="flex justify-center gap-3 mb-4">
-                <Brain className="h-12 w-12 text-primary" />
-                <Heart className="h-12 w-12 text-rose-500" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Addiction, the Brain, and the Role of Spiritual Recovery
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                How a Medical Condition Heals Through Neurobiology, Behavior, and the 12 Steps
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20">

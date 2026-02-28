@@ -42,17 +42,6 @@ export default function FamilyUnityLiability() {
             clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) alignment principles and family systems research on differentiation vs. enmeshment."
           />
 
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">When Family Unity (or the Lack of It) Becomes a Liability</h1>
-            </div>
-            <p className="text-xl text-muted-foreground">
-              How Togetherness and Division Can Both Undermine Recovery—and What Actually Helps
-            </p>
-          </div>
 
           <Card className="mb-8 border-primary/20 bg-primary/5">
             <CardHeader>

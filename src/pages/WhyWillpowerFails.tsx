@@ -52,14 +52,6 @@ const WhyWillpowerFails = () => {
           clinicalNote="Based on neuroscience of the prefrontal cortex and mesolimbic dopamine system, as well as Prochaska & DiClemente's Stages of Change model."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Why Willpower Fails (and What Actually Works)
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Understanding Motivation, Craving, and Why Effort Alone Isn't Enough
-          </p>
-        </div>
 
         {/* Why This Guide Matters */}
         <Card className="mb-6">

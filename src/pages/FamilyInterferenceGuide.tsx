@@ -45,15 +45,6 @@ export default function FamilyInterferenceGuide() {
               clinicalNote="Based on CRAFT research, family interference patterns identified in clinical addiction treatment, and the concept of 'helping that hurts' from Al-Anon literature."
             />
 
-            <div className="text-center mb-8">
-              <Heart className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                How Families Accidentally Interfere with Recovery
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                When Love, Fear, and Urgency Work Against Change
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">

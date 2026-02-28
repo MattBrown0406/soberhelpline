@@ -37,15 +37,6 @@ const ParentsRepairingSiblingSystem = () => {
             clinicalNote="Based on family systems therapy principles, sibling relational repair frameworks, and the developmental needs of non-identified patients in addiction families."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 print:text-3xl">
-              Parents: Repairing the Sibling System
-            </h1>
-            <p className="text-xl text-blue-700 font-medium">
-              How to Acknowledge Unequal Impact, Restore Trust, and Support Healing Between Siblings
-            </p>
-          </div>
 
           {/* Why This Guide Matters */}
           <Card className="mb-8 border-blue-200 bg-blue-50 print:border print:shadow-none">

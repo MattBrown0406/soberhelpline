@@ -47,16 +47,6 @@ export default function CrisisChaos() {
                 clinicalNote="Based on crisis intervention theory, SAMHSA's crisis response guidelines, and Al-Anon principles of detachment with love."
               />
 
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <AlertTriangle className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Crisis vs. Chaos
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  A Decision Guide for Families Impacted by Addiction
-                </p>
-              </div>
 
               {/* Purpose Section */}
               <section className="mb-8">

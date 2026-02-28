@@ -43,14 +43,6 @@ const WhyChangeDoesntHappen = () => {
           clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) research and the Johnson Institute's family intervention model."
         />
 
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Why Change Doesn't Happen When Families Try Harder
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Understanding What Actually Drives Recovery
-          </p>
-        </div>
 
         {/* Purpose Section */}
         <Card className="mb-8 border-l-4 border-l-primary">

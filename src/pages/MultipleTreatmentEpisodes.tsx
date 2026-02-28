@@ -53,16 +53,6 @@ export default function MultipleTreatmentEpisodes() {
             />
 
             <div className="space-y-8">
-              {/* Title */}
-              <div className="text-center">
-                <RefreshCw className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                  Why Multiple Treatment Episodes Don't Mean Failure
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  A Reality-Based Guide for Families Navigating Repeated Attempts at Recovery
-                </p>
-              </div>
 
               {/* Why This Guide Matters */}
               <Card>

@@ -190,16 +190,6 @@ export default function ReadinessChecklist() {
 
             {/* Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              {/* Header */}
-              <div className="text-center mb-8 pb-6 border-b">
-                <ClipboardCheck className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-                  Readiness for Change Checklist
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Assessing Actions, Not Promises
-                </p>
-              </div>
 
               {/* Print Score Summary */}
               <div className="hidden print:block mb-6 p-4 border rounded-lg">

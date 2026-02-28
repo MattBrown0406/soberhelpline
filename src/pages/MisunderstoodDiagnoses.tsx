@@ -45,14 +45,6 @@ const MisunderstoodDiagnoses = () => {
           clinicalNote="Informed by DSM-5 diagnostic criteria, ASAM's guidelines on co-occurring disorders, and clinical best practices for differential diagnosis in active substance use."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Commonly Misunderstood Diagnoses in Addiction
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            What Families Need to Know—and What to Be Careful Not to Assume
-          </p>
-        </div>
 
         {/* Why This Guide Matters */}
         <Card className="mb-6">

@@ -45,14 +45,6 @@ const MentalHealthVsSubstanceInduced = () => {
           clinicalNote="Based on DSM-5 differential diagnosis criteria and ASAM guidelines for co-occurring disorder assessment."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Mental Health vs. Substance-Induced Symptoms
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            How to Tell the Difference—and Why It Matters
-          </p>
-        </div>
 
         {/* Why Families Need This Guide */}
         <Card className="mb-6">

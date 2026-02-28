@@ -45,14 +45,6 @@ const DiseaseChoiceRealityMap = () => {
           clinicalNote="Informed by ASAM's definition of addiction, NIDA's brain disease model, and the biopsychosocial framework used in modern addiction medicine."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            The Disease vs. Choice Reality Map
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Understanding Where Addiction Limits Choice—and Where Responsibility Still Exists
-          </p>
-        </div>
 
         {/* Why Families Get Stuck */}
         <Card className="mb-6">

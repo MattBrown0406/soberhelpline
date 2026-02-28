@@ -37,15 +37,6 @@ const AddictionRewritesFamilyRules = () => {
             clinicalNote="Based on Murray Bowen's family systems theory and Claudia Black's research on unspoken family rules in addiction ('Don't talk, don't trust, don't feel')."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 print:text-3xl">
-              How Addiction Rewrites Family Rules
-            </h1>
-            <p className="text-xl text-teal-700 font-medium">
-              The Unspoken Codes That Keep Families Stuck—and How to Change Them
-            </p>
-          </div>
 
           {/* Why This Guide Matters */}
           <Card className="mb-8 border-teal-200 bg-teal-50 print:border print:shadow-none">

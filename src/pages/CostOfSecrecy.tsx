@@ -43,12 +43,6 @@ export default function CostOfSecrecy() {
           />
 
           <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-              The Cost of Secrecy
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              How Silence Protects Addiction—and What Honesty Makes Possible
-            </p>
 
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Why This Guide Matters</h2>

@@ -37,15 +37,6 @@ const FamilyRolesAddiction = () => {
             clinicalNote="Based on Sharon Wegscheider-Cruse's family systems model and Virginia Satir's family roles framework, adapted for addiction contexts."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 print:text-3xl">
-              Family Roles in Addiction (Beyond the Clichés)
-            </h1>
-            <p className="text-xl text-violet-700 font-medium">
-              How Survival Strategies Form—and How Families Outgrow Them
-            </p>
-          </div>
 
           {/* Why This Guide Matters */}
           <Card className="mb-8 border-violet-200 bg-violet-50 print:border print:shadow-none">
