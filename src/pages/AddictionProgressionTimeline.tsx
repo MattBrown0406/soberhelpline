@@ -74,14 +74,6 @@ const AddictionProgressionTimeline = () => {
           clinicalNote="Based on Jellinek's disease model of alcoholism progression and the ASAM continuum of care framework."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Addiction Progression Timeline
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Understanding Addiction as a Process, Not a Series of Failures
-          </p>
-        </div>
 
         {/* Why Families Need This */}
         <Card className="mb-6">

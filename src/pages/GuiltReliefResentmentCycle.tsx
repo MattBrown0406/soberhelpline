@@ -45,15 +45,6 @@ export default function GuiltReliefResentmentCycle() {
               clinicalNote="Informed by codependency literature (Melody Beattie), Al-Anon's detachment principles, and compassion fatigue research in family systems."
             />
 
-            <div className="text-center mb-8">
-              <RefreshCw className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                The Guilt–Relief–Resentment Cycle
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                How Good Intentions Turn Into Chronic Burnout—and How to Break the Loop
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-6">

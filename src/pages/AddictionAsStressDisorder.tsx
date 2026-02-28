@@ -49,14 +49,6 @@ const AddictionAsStressDisorder = () => {
           clinicalNote="Based on Dr. Gabor Maté's stress-regulation framework, Polyvagal Theory (Stephen Porges), and ACE (Adverse Childhood Experiences) research."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Addiction as a Stress-Regulation Disorder
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            A Reframe for Families Seeking to Understand
-          </p>
-        </div>
 
         {/* Why This Guide Matters */}
         <Card className="mb-6 print:break-inside-avoid print:shadow-none print:border">

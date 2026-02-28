@@ -43,12 +43,6 @@ export default function AddictionAttachmentStyles() {
           />
 
           <article className="prose prose-slate dark:prose-invert max-w-none">
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
-              How Addiction Shapes Attachment Styles
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Why Relationships Feel Hard—and How Understanding Attachment Creates Change
-            </p>
 
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Why This Guide Matters</h2>

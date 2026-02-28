@@ -45,14 +45,6 @@ const TraumaVsExcuses = () => {
           clinicalNote="Informed by trauma-informed care principles (SAMHSA), ACE research, and accountability frameworks used in evidence-based addiction treatment."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Trauma vs. Excuses: A Necessary Distinction
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            How to Hold Compassion Without Justifying Harm
-          </p>
-        </div>
 
         {/* Why This Guide Matters */}
         <Card className="mb-6">

@@ -67,17 +67,6 @@ export default function WhoBenefitsFilter() {
             clinicalNote="Based on CRAFT decision-making frameworks and Al-Anon's emphasis on examining motives before taking action."
           />
 
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Filter className="h-6 w-6 text-primary" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">"Who Benefits From This?" Decision Filter</h1>
-            </div>
-            <p className="text-xl text-muted-foreground">
-              A Simple Question That Prevents Enabling Before It Starts
-            </p>
-          </div>
 
           <Card className="mb-8 border-primary/20 bg-primary/5">
             <CardHeader>

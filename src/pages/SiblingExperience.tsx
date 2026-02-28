@@ -44,15 +44,6 @@ export default function SiblingExperience() {
               clinicalNote="Informed by research on non-identified patients in family systems, sibling relational trauma, and ACOA (Adult Children of Alcoholics) literature."
             />
 
-            <div className="text-center mb-8">
-              <Users className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                The Sibling Experience in Addiction
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                The Invisible Impact on Brothers and Sisters in Addicted Families
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-6">

@@ -45,14 +45,6 @@ const MentalHealthDelaysRecovery = () => {
           clinicalNote="Based on ASAM's integrated treatment guidelines and SAMHSA's TIP 42: Substance Abuse Treatment for Persons With Co-Occurring Disorders."
         />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Why Focusing Only on Mental Health Can Delay Recovery
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Understanding Sequence, Not Severity
-          </p>
-        </div>
 
         {/* Why This Guide Matters */}
         <Card className="mb-6">

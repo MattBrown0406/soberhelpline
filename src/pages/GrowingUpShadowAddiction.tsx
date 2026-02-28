@@ -44,15 +44,6 @@ export default function GrowingUpShadowAddiction() {
               clinicalNote="Based on Janet Woititz's Adult Children of Alcoholics research, Claudia Black's 'It Will Never Happen to Me,' and developmental trauma frameworks."
             />
 
-            <div className="text-center mb-8">
-              <Leaf className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                Growing Up in the Shadow of Addiction
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                How Childhood Adaptation Shapes Adult Life—and How to Reclaim Yourself
-              </p>
-            </div>
 
             {/* Why This Guide Matters */}
             <Card className="mb-6">

@@ -37,15 +37,6 @@ const RebuildingSiblingRelationships = () => {
             clinicalNote="Informed by family reconciliation research, Al-Anon's principles of detachment and self-care, and restorative justice frameworks adapted for family systems."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 print:text-3xl">
-              Rebuilding Sibling Relationships in Recovery
-            </h1>
-            <p className="text-xl text-purple-700 font-medium">
-              What Healing Can Look Like—Without Pressure, Pretending, or Forced Forgiveness
-            </p>
-          </div>
 
           {/* Why This Guide Matters */}
           <Card className="mb-8 border-purple-200 bg-purple-50 print:border print:shadow-none">

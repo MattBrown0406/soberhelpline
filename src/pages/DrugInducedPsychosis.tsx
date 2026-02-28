@@ -41,14 +41,6 @@ const DrugInducedPsychosis = () => {
             clinicalNote="Based on DSM-5 criteria for Substance/Medication-Induced Psychotic Disorder and emergency psychiatric guidelines from SAMHSA."
           />
 
-          {/* Title Section */}
-          <div className="text-center mb-8 pb-6 border-b-2 border-primary print:border-black">
-            <div className="flex justify-center mb-4">
-              <Brain className="h-16 w-16 text-primary print:text-black" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Understanding Drug-Induced Psychosis</h1>
-            <p className="text-xl text-muted-foreground italic">What Families Need to Know — and How to Tell the Difference Between THC and Methamphetamine Psychosis</p>
-          </div>
 
           {/* Purpose Section */}
           <section className="mb-8">

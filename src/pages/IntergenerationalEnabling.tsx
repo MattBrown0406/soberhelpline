@@ -42,17 +42,6 @@ export default function IntergenerationalEnabling() {
             clinicalNote="Based on intergenerational trauma research (Murray Bowen), epigenetic inheritance patterns, and family-of-origin work in addiction counseling."
           />
 
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">Breaking Intergenerational Enabling</h1>
-            </div>
-            <p className="text-xl text-muted-foreground">
-              How Patterns Get Passed Down—and How Families Choose Something Different
-            </p>
-          </div>
 
           <Card className="mb-8 border-primary/20 bg-primary/5">
             <CardHeader>

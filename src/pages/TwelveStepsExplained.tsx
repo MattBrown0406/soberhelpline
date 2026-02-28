@@ -44,19 +44,6 @@ export default function TwelveStepsExplained() {
               clinicalNote="Based on the original Twelve Steps of Alcoholics Anonymous and adapted family guidance from Al-Anon Family Groups. Clinical context informed by Stephanie Brown's developmental model of recovery."
             />
 
-            <div className="text-center mb-10">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-primary">12</span>
-                </div>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
-                The 12 Steps Explained for Families
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                What Each Step Is Really Doing—and Why It Matters in Recovery
-              </p>
-            </div>
 
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20">
