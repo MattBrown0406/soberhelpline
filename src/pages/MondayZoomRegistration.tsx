@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare } from "lucide-react";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Star, Shield, GraduationCap, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -21,10 +21,52 @@ const registrationSchema = z.object({
   question: z.string().trim().max(1000).optional().default(""),
 });
 
+function MembershipPromoBanner() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-green/10 via-primary/5 to-amber-500/10 border-2 border-logo-green/30 p-6 md:p-8 mb-8">
+      <div className="absolute -top-12 -right-12 h-48 w-48 rounded-full bg-logo-green/10 blur-3xl" />
+      <div className="relative z-10">
+        <div className="flex items-center gap-2 mb-3">
+          <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+          <span className="text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Premium Membership</span>
+        </div>
+        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+          Get Even More Support for Your Family
+        </h3>
+        <p className="text-muted-foreground mb-5 max-w-xl">
+          The Monday Zoom is just the beginning. Members get access to our full suite of family recovery tools:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          {[
+            { icon: GraduationCap, label: "60+ Education Guides & Worksheets", desc: "Evidence-based family recovery curriculum" },
+            { icon: MessageCircle, label: "Private Family Forum", desc: "Connect with families who understand" },
+            { icon: Video, label: "Recorded Webinars & Workshops", desc: "Learn at your own pace" },
+            { icon: Shield, label: "AI-Powered Recovery Tools", desc: "Boundary builder, enabling coach & more" },
+          ].map(({ icon: Icon, label, desc }) => (
+            <div key={label} className="flex items-start gap-3 bg-background/60 rounded-lg p-3 border border-border/50">
+              <div className="w-8 h-8 rounded-full bg-logo-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Icon className="w-4 h-4 text-logo-green" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">{label}</p>
+                <p className="text-xs text-muted-foreground">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link to="/family-membership">
+          <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white shadow-lg shadow-logo-green/25">
+            Explore Membership — Starting at $14.99/mo
+            <ArrowRight className="w-4 h-4" />
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasMembership, setHasMembership] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -53,36 +95,6 @@ export default function MondayZoomRegistration() {
     });
     return () => subscription.unsubscribe();
   }, []);
-
-  useEffect(() => {
-    const checkMembership = async () => {
-      if (!user) {
-        setHasMembership(false);
-        setIsLoading(false);
-        return;
-      }
-      try {
-        const { data, error } = await supabase
-          .from("provider_subscriptions")
-          .select("*")
-          .eq("user_id", user.id)
-          .eq("status", "active")
-          .is("provider_submission_id", null)
-          .limit(1);
-
-        if (error) {
-          setHasMembership(false);
-        } else {
-          setHasMembership(data && data.length > 0);
-        }
-      } catch {
-        setHasMembership(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkMembership();
-  }, [user]);
 
   // Pre-fill email from user profile
   useEffect(() => {
@@ -140,9 +152,9 @@ export default function MondayZoomRegistration() {
     const meetingDate = nextMonday.toISOString().split("T")[0];
 
     try {
-      // Save registration
+      // Save registration (user_id is optional now)
       const { error } = await supabase.from("zoom_meeting_registrations").insert({
-        user_id: user!.id,
+        user_id: user?.id || null,
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
@@ -157,7 +169,7 @@ export default function MondayZoomRegistration() {
 
       if (error) throw error;
 
-      // Send confirmation email (edge function fetches meeting info from site_settings)
+      // Send confirmation email
       try {
         await supabase.functions.invoke("send-zoom-registration-email", {
           body: {
@@ -169,7 +181,7 @@ export default function MondayZoomRegistration() {
         console.error("Email sending failed (registration still saved):", emailErr);
       }
 
-      // Add to Mailchimp if consent given (handles duplicates automatically)
+      // Add to Mailchimp if consent given
       if (formData.consentEmailList) {
         try {
           const nameParts = formData.name.trim().split(" ");
@@ -200,49 +212,7 @@ export default function MondayZoomRegistration() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="container py-16 text-center">
-        <Video className="h-12 w-12 text-primary mx-auto mb-4" />
-        <h1 className="text-2xl font-bold text-foreground mb-4">Member Access Required</h1>
-        <p className="text-muted-foreground mb-6">Please log in to access the Monday night Zoom meeting registration.</p>
-        <div className="flex gap-4 justify-center">
-          <Link to="/auth">
-            <Button>Log In</Button>
-          </Link>
-          <Link to="/family-membership">
-            <Button variant="outline">Become a Member</Button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  if (!hasMembership) {
-    return (
-      <div className="container py-16 text-center">
-        <Video className="h-12 w-12 text-primary mx-auto mb-4" />
-        <h1 className="text-2xl font-bold text-foreground mb-4">Premium Members Only</h1>
-        <p className="text-muted-foreground mb-6">
-          The Monday night family support Zoom meeting is available exclusively to premium members.
-        </p>
-        <Link to="/family-membership">
-          <Button size="lg">Become a Member - $14.99/month</Button>
-        </Link>
-      </div>
-    );
-  }
-
   if (submitted) {
-
     return (
       <div className="container py-16 max-w-2xl mx-auto text-center">
         <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
@@ -270,15 +240,16 @@ export default function MondayZoomRegistration() {
           </p>
         )}
 
+        <div className="mt-10">
+          <MembershipPromoBanner />
+        </div>
+
         <div className="flex gap-4 justify-center mt-8">
-          <Link to="/family-support">
+          <Link to="/">
             <Button variant="outline">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Family Support
+              Back to Home
             </Button>
-          </Link>
-          <Link to="/family-education">
-            <Button variant="outline">Explore Education Resources</Button>
           </Link>
         </div>
       </div>
@@ -296,30 +267,10 @@ export default function MondayZoomRegistration() {
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <Link to="/family-support" className="inline-flex items-center text-primary hover:text-primary/80 group">
+              <Link to="/" className="inline-flex items-center text-primary hover:text-primary/80 group">
                 <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
                 Back
               </Link>
-              <div className="flex flex-wrap gap-2">
-                <Link to="/family-education">
-                  <Button variant="outline" size="sm" className="gap-2 border-logo-green/50 text-logo-green hover:bg-logo-green/10">
-                    <BookOpen className="h-4 w-4" />
-                    Education
-                  </Button>
-                </Link>
-                <Link to="/family-forum">
-                  <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
-                    <MessagesSquare className="h-4 w-4" />
-                    Forum
-                  </Button>
-                </Link>
-                <Link to="/family-webinars">
-                  <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
-                    <Calendar className="h-4 w-4" />
-                    Webinars
-                  </Button>
-                </Link>
-              </div>
             </div>
 
             {/* Hero Banner */}
@@ -337,13 +288,13 @@ export default function MondayZoomRegistration() {
                   FREE Monday Night<br />Family Support Zoom Meeting
                 </h1>
                 <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-                  Join other families navigating addiction for a supportive, guided group session every Monday night.
+                  Join other families navigating addiction for a supportive, guided group session every Monday night. No membership required.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
                     { icon: Calendar, label: "Every Monday" },
                     { icon: Clock, label: "7:00 PM PST" },
-                    { icon: Users, label: "Free for Members" },
+                    { icon: Users, label: "Open to Everyone" },
                     { icon: Video, label: "Via Zoom" },
                   ].map(({ icon: Icon, label }) => (
                     <span key={label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium">
@@ -353,6 +304,9 @@ export default function MondayZoomRegistration() {
                 </div>
               </div>
             </div>
+
+            {/* Membership Promo Banner */}
+            <MembershipPromoBanner />
 
             {/* Registration Form */}
             <Card className="border-2 shadow-lg">
