@@ -297,7 +297,7 @@ const Index = () => {
                   <Calendar className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="text-xs md:text-sm font-medium text-white/80">🎉 Every Monday Night</p>
+                  <p className="text-xs md:text-sm font-medium text-white/80">🎉 Starting March 9th — Every Monday Night</p>
                   <h3 className="text-base md:text-lg font-bold">Monday Night Zoom — Free Weekly Family Support</h3>
                   <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
                 </div>
