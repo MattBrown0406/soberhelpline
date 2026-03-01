@@ -247,6 +247,11 @@ export default function FamilyWebinars() {
                   Family Forum
                 </Button>
               </Link>
+              <Link to="/zoom-recordings">
+                <Button variant="outline" size="sm" className="gap-2">
+                  Past Recordings
+                </Button>
+              </Link>
             </div>
 
             <div className="mb-8">

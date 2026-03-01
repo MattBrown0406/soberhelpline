@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -30,6 +30,7 @@ import { GuideAnalytics } from "@/components/admin/GuideAnalytics";
 import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
 import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
 import ConsultationProviderCreator from "@/components/admin/ConsultationProviderCreator";
+import { RecordingManagement } from "@/components/admin/RecordingManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -210,6 +211,10 @@ const Admin = () => {
             <TabsTrigger value="add-provider" className="gap-2">
               <UserPlus className="h-4 w-4" />
               Add Provider
+            </TabsTrigger>
+            <TabsTrigger value="recordings" className="gap-2">
+              <Film className="h-4 w-4" />
+              Recordings
             </TabsTrigger>
           </TabsList>
 
@@ -442,6 +447,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ConsultationProviderCreator />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="recordings">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Film className="h-5 w-5" />
+                  Zoom Recording Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <RecordingManagement />
               </CardContent>
             </Card>
           </TabsContent>
