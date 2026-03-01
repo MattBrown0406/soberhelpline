@@ -286,7 +286,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Monday Night Zoom Announcement — temporarily hidden, uncomment to restore
+      {/* Monday Night Zoom Announcement */}
       <section className="container mx-auto px-4 pt-6 md:pt-10">
         <Link to="/monday-zoom-registration" className="block">
           <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
@@ -297,9 +297,9 @@ const Index = () => {
                   <Calendar className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="text-xs md:text-sm font-medium text-white/80">🎉 Launching March 2026</p>
+                  <p className="text-xs md:text-sm font-medium text-white/80">🎉 Every Monday Night</p>
                   <h3 className="text-base md:text-lg font-bold">Monday Night Zoom — Free Weekly Family Support</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Connect with families who understand.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
@@ -311,7 +311,6 @@ const Index = () => {
           </div>
         </Link>
       </section>
-      */}
 
       {/* Peek Inside the Curriculum - Membership Conversion Section */}
       <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">

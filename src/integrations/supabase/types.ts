@@ -2138,7 +2138,7 @@ export type Database = {
           preferred_timezone: string | null
           question: string
           request_follow_up: boolean
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           consent_email_list?: boolean
@@ -2153,7 +2153,7 @@ export type Database = {
           preferred_timezone?: string | null
           question: string
           request_follow_up?: boolean
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           consent_email_list?: boolean
@@ -2168,7 +2168,7 @@ export type Database = {
           preferred_timezone?: string | null
           question?: string
           request_follow_up?: boolean
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
