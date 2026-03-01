@@ -346,6 +346,12 @@ export default function FamilyEducation() {
                       Monday Night Zoom
                     </Button>
                   </Link>
+                  <Link to="/zoom-recordings">
+                    <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
+                      <Video className="h-4 w-4" />
+                      Past Recordings
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-1.5 border border-border/50">

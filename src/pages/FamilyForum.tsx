@@ -499,6 +499,7 @@ export default function FamilyForum() {
                   { to: "/family-webinars", label: "Webinars" },
                   { to: "/family-coaching", label: "Coaching" },
                   { to: "/monday-zoom-registration", label: "Monday Zoom" },
+                  { to: "/zoom-recordings", label: "Past Recordings" },
                   { to: "/sibling-support", label: "Sibling Support" },
                 ].map((link) => (
                   <Link
