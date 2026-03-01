@@ -447,6 +447,11 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Community", path: "/family-support" },
     { label: "Monday Zoom Registration", path: "/monday-zoom-registration" },
   ],
+  "/zoom-recordings": [
+    { label: "Home", path: "/" },
+    { label: "Community", path: "/family-support" },
+    { label: "Past Meeting Recordings", path: "/zoom-recordings" },
+  ],
   "/family-webinars": [
     { label: "Home", path: "/" },
     { label: "Community", path: "/family-support" },
