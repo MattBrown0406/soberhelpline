@@ -74,6 +74,16 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Find Recovery Resources
                   </Button>
                 </Link>
+                <Link to="/family-coaching" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Family Coaching
+                  </Button>
+                </Link>
+                <Link to="/monday-zoom-registration" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Free Monday Zoom Meeting
+                  </Button>
+                </Link>
               </div>
               
               <a href="#partnership" onClick={closeMenu}>

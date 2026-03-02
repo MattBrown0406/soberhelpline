@@ -184,6 +184,12 @@ const Index = () => {
                     <DropdownMenuItem asChild>
                       <Link to="/recovery-resources" className="cursor-pointer">Find Recovery Resources</Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/family-coaching" className="cursor-pointer">Family Coaching</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/monday-zoom-registration" className="cursor-pointer">Free Monday Zoom Meeting</Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DropdownMenu>
