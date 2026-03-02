@@ -348,6 +348,14 @@ const Index = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>No live support when a crisis hits at night or on weekends</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span>Waiting weeks for a therapist who may not understand addiction</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
                     <span>Wondering if you're overreacting—or not doing enough</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -384,6 +392,14 @@ const Index = () => {
                   <h3 className="text-lg md:text-xl font-bold text-foreground">With Our Community</h3>
                 </div>
                 <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>Free Monday night Zoom calls with other families who get it</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                    <span>On-demand hourly coaching sessions when you need guidance now</span>
+                  </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
                     <span>Clear education that explains what you're seeing</span>
