@@ -172,6 +172,7 @@ const App = () => (
               <Route path="/sleep-and-addiction-recovery" element={<BlogArticle />} />
               <Route path="/attachment-styles-and-addiction" element={<BlogArticle />} />
               <Route path="/shame-and-addiction-secrecy-resistance" element={<BlogArticle />} />
+              <Route path="/healing-circle-families-support-addiction-recovery" element={<BlogArticle />} />
               <Route path="/family-roles-addiction-divided-dynamics" element={<BlogArticle />} />
               <Route path="/holding-boundaries-addiction-families" element={<BlogArticle />} />
               <Route path="/detach-with-love-addiction-families" element={<BlogArticle />} />
