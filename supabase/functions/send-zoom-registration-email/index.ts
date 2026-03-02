@@ -130,6 +130,12 @@ serve(async (req: Request) => {
           <p>This is a free, supportive space for families navigating addiction. You'll have the opportunity to ask questions, share experiences, and connect with others who understand.</p>
           
           ${zoomSection}
+
+          <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
+            <p style="margin: 0; color: #1e40af; font-size: 14px;">
+              <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting — a spouse, sibling, parent, or adult child — feel free to forward this email. Anyone with the link above can join. The more of your family that shows up, the more you'll all get out of it.
+            </p>
+          </div>
           
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
             If you have any questions, call us at <strong>(541) 241-5886</strong>.

@@ -240,6 +240,12 @@ export default function MondayZoomRegistration() {
           </p>
         )}
 
+        <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-left">
+          <p className="text-sm text-blue-800 dark:text-blue-200">
+            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting — a spouse, sibling, parent, or adult child — forward the confirmation email you just received. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
+          </p>
+        </div>
+
         <div className="mt-10">
           <MembershipPromoBanner />
         </div>
