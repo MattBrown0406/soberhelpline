@@ -45,11 +45,14 @@ export function ZoomLinkSettings() {
   const [loadingRegistrations, setLoadingRegistrations] = useState(true);
   const [followUps, setFollowUps] = useState<Registration[]>([]);
   const [loadingFollowUps, setLoadingFollowUps] = useState(true);
+  const [archivedWeeks, setArchivedWeeks] = useState<Record<string, Registration[]>>({});
+  const [loadingArchive, setLoadingArchive] = useState(true);
 
   useEffect(() => {
     fetchZoomLink();
     fetchRegistrations();
     fetchFollowUps();
+    fetchArchive();
   }, []);
 
   const fetchZoomLink = async () => {
@@ -108,6 +111,36 @@ export function ZoomLinkSettings() {
     }
   };
 
+  const fetchArchive = async () => {
+    try {
+      const nextMonday = getNextMonday();
+      const { data, error } = await supabase
+        .from("zoom_meeting_registrations")
+        .select("*")
+        .lt("meeting_date", nextMonday)
+        .order("meeting_date", { ascending: false })
+        .order("created_at", { ascending: true });
+
+      if (error) throw error;
+
+      // Group by meeting_date and deduplicate by email within each week
+      const grouped: Record<string, Registration[]> = {};
+      (data || []).forEach((r: Registration) => {
+        if (!grouped[r.meeting_date]) grouped[r.meeting_date] = [];
+        const isDuplicate = grouped[r.meeting_date].some(
+          (existing) => existing.email.toLowerCase() === r.email.toLowerCase()
+        );
+        if (!isDuplicate) {
+          grouped[r.meeting_date].push(r);
+        }
+      });
+      setArchivedWeeks(grouped);
+    } catch (err) {
+      console.error("Error fetching archive:", err);
+    } finally {
+      setLoadingArchive(false);
+    }
+  };
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -420,6 +453,73 @@ export function ZoomLinkSettings() {
               </div>
             );
           })()
+        )}
+      </div>
+
+      <Separator />
+
+      {/* Weekly Registration Archive */}
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <History className="h-5 w-5" />
+            Weekly Registration Archive
+          </h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            Past meeting registrations grouped by week. Duplicates are removed.
+          </p>
+        </div>
+
+        {loadingArchive ? (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          </div>
+        ) : Object.keys(archivedWeeks).length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
+            No past meeting registrations yet.
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {Object.entries(archivedWeeks).map(([date, regs]) => (
+              <Collapsible key={date}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="ghost" className="w-full justify-between text-foreground hover:bg-muted/50 border border-border rounded-lg px-4 py-3 h-auto">
+                    <span className="flex items-center gap-2">
+                      <CalendarDays className="h-4 w-4 text-primary" />
+                      <span className="font-medium">{formatDate(date)}</span>
+                      <Badge variant="secondary" className="text-xs">{regs.length} registrant{regs.length !== 1 ? "s" : ""}</Badge>
+                    </span>
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-2 pt-2 pl-4">
+                  {regs.map((r, i) => (
+                    <div key={r.id} className="border border-border rounded-lg p-3 bg-muted/20 space-y-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-center gap-2">
+                          <span className="flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
+                          <span className="font-medium text-foreground text-sm">{r.name}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
+                          <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
+                          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground pl-7 line-clamp-2">{r.question}</p>
+                      <div className="flex gap-3 pl-7">
+                        {r.request_follow_up && (
+                          <span className="text-xs text-destructive flex items-center gap-1"><UserCheck className="h-3 w-3" />Follow-up requested</span>
+                        )}
+                        {r.consent_email_list && (
+                          <span className="text-xs text-muted-foreground flex items-center gap-1"><Mail className="h-3 w-3" />Email opt-in</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
+            ))}
+          </div>
         )}
       </div>
     </div>
