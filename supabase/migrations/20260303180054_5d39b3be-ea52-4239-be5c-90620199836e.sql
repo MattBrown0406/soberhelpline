@@ -1,0 +1,1 @@
+GRANT SELECT ON public.provider_submissions_public TO anon, authenticated;
