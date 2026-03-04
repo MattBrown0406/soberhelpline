@@ -283,7 +283,7 @@ const Index = () => {
             <span className="text-border">•</span>
             <span>1,000+ Families Helped</span>
             <span className="text-border">•</span>
-            <span>All 50 States</span>
+            <span>Worldwide in English & Spanish</span>
             <span className="text-border">•</span>
             <span>24/7 Crisis Support Tools</span>
             <span className="text-border">•</span>
