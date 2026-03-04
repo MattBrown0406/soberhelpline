@@ -98,7 +98,7 @@ export default function FamilyCoaching() {
                   <h2 className="text-xl md:text-2xl font-bold text-amber-700 dark:text-amber-400">
                     The Emergency Game Plan™
                   </h2>
-                  <span className="text-xl font-bold text-primary">— $150</span>
+                  <span className="text-xl font-bold text-primary">— $150</span> <span className="text-sm font-medium text-muted-foreground">($125 for members)</span>
                 </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3 italic">
                   You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan™ session gives your family immediate, steady guidance so you don't have to figure this out alone.
@@ -113,7 +113,7 @@ export default function FamilyCoaching() {
                   <Link to="/book-consultation?plan=emergency">
                     <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
                       <Calendar className="h-4 w-4" />
-                      Book an Emergency Session — $150
+                      Book an Emergency Session — $150 ($125 for members)
                     </Button>
                   </Link>
                 </div>
@@ -440,7 +440,7 @@ export default function FamilyCoaching() {
                     <Calendar className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150</CardTitle>
+                    <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150 <span className="text-sm font-medium text-muted-foreground">($125 for members)</span></CardTitle>
                     <CardDescription>
                       Schedule a one-on-one session with one of our family recovery coaches for personalized support.
                     </CardDescription>
