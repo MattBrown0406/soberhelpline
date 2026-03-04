@@ -331,7 +331,7 @@ const Index = () => {
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">1-on-1 Support for Families</p>
                   <h3 className="text-base md:text-lg font-bold">Family Coaching — From Crisis to Clarity</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Boundaries, enabling patterns, and a real plan — with a coach who's been there. Sessions start at $150.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Boundaries, enabling patterns, and a real plan — with a coach who's been there. Sessions start at $150 — <span className="text-yellow-300 font-semibold">members save $25 per session</span>.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
