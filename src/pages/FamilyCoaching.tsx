@@ -62,8 +62,8 @@ export default function FamilyCoaching() {
             </div>
 
             {/* Member Discount Banner */}
-            <div className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6">
-              <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+            <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
+              <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
                 <Crown className="w-4.5 h-4.5 text-primary" />
               </div>
               <div className="flex-1">
@@ -71,10 +71,11 @@ export default function FamilyCoaching() {
                   Members save $25 on every coaching session — <span className="text-primary">$125/hr instead of $150</span>
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  <Link to="/family-membership" className="text-primary hover:underline font-medium">Become a member</Link> to unlock your coaching discount plus education, forum access, and more.
+                  Become a member to unlock your coaching discount plus education, forum access, and more.
                 </p>
               </div>
-            </div>
+              <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+            </Link>
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 via-background to-orange-500/5 border border-amber-500/20 p-8 md:p-12 mb-10">
