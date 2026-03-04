@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Star, Shield, GraduationCap, MessageCircle, ArrowRight } from "lucide-react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Star, Shield, GraduationCap, MessageCircle, ArrowRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -71,6 +71,8 @@ export default function MondayZoomRegistration() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
+  const [searchParams] = useSearchParams();
+  const isMemberQuestion = searchParams.get("member") === "true";
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -96,12 +98,26 @@ export default function MondayZoomRegistration() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Pre-fill email from user profile
+  // Pre-fill from user profile for members
   useEffect(() => {
     if (user?.email) {
       setFormData((prev) => ({ ...prev, email: user.email || "" }));
     }
-  }, [user]);
+    if (user && isMemberQuestion) {
+      const fetchProfile = async () => {
+        const { data } = await supabase
+          .from("profiles")
+          .select("first_name, last_name")
+          .eq("id", user.id)
+          .maybeSingle();
+        if (data) {
+          const fullName = [data.first_name, data.last_name].filter(Boolean).join(" ");
+          if (fullName) setFormData((prev) => ({ ...prev, name: fullName }));
+        }
+      };
+      fetchProfile();
+    }
+  }, [user, isMemberQuestion]);
 
   // Fetch Monday meeting info when submitted
   useEffect(() => {
@@ -216,10 +232,13 @@ export default function MondayZoomRegistration() {
     return (
       <div className="container py-16 max-w-2xl mx-auto text-center">
         <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
-        <h1 className="text-3xl font-bold text-foreground mb-4">You're Registered!</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-4">
+          {isMemberQuestion ? "Question Submitted!" : "You're Registered!"}
+        </h1>
         <p className="text-muted-foreground text-lg mb-8">
-          Thank you for registering for the Monday night family support Zoom meeting. 
-          When it's time, join directly from this page — no need to leave the site.
+          {isMemberQuestion
+            ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
+            : "Thank you for registering for the Monday night family support Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
         </p>
 
         {meetingInfo ? (
@@ -246,15 +265,17 @@ export default function MondayZoomRegistration() {
           </p>
         </div>
 
-        <div className="mt-10">
-          <MembershipPromoBanner />
-        </div>
+        {!isMemberQuestion && (
+          <div className="mt-10">
+            <MembershipPromoBanner />
+          </div>
+        )}
 
         <div className="flex gap-4 justify-center mt-8">
-          <Link to="/">
+          <Link to={isMemberQuestion ? "/family-education" : "/"}>
             <Button variant="outline">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
+              {isMemberQuestion ? "Back to Education Center" : "Back to Home"}
             </Button>
           </Link>
         </div>
@@ -265,7 +286,7 @@ export default function MondayZoomRegistration() {
   return (
     <>
       <SEOHead
-        title="Monday Night Family Support Zoom Meeting | Sober Helpline"
+        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Monday Night Family Support Zoom Meeting | Sober Helpline"}
         description="Register for our free Monday night family support Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
       />
 
@@ -273,96 +294,119 @@ export default function MondayZoomRegistration() {
         <main className="container py-8 md:py-12">
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <Link to="/" className="inline-flex items-center text-primary hover:text-primary/80 group">
+              <Link to={isMemberQuestion ? "/family-education" : "/"} className="inline-flex items-center text-primary hover:text-primary/80 group">
                 <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
                 Back
               </Link>
             </div>
 
-            {/* Hero Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
-              <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
-              <div className="absolute -top-12 -left-12 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-              <div className="relative z-10 text-center">
-                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/25 backdrop-blur-sm mb-5 ring-2 ring-white/40 shadow-lg shadow-black/10">
-                  <Video className="h-8 w-8 drop-shadow" />
-                </div>
-                <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
-                  FREE Monday Night<br />Family Support Zoom Meeting
-                </h1>
-                <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-                  Join other families navigating addiction for a supportive, guided group session every Monday night. No membership required.
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {[
-                    { icon: Calendar, label: "Every Monday" },
-                    { icon: Clock, label: "7:00 PM PST" },
-                    { icon: Users, label: "Open to Everyone" },
-                    { icon: Video, label: "Via Zoom" },
-                  ].map(({ icon: Icon, label }) => (
-                    <span key={label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium">
-                      <Icon className="h-4 w-4" /> {label}
-                    </span>
-                  ))}
+            {isMemberQuestion ? (
+              /* Simplified Member Question Header */
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 p-8 md:p-10 mb-8">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-primary/15 mb-4">
+                    <Crown className="h-7 w-7 text-primary" />
+                  </div>
+                  <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                    Submit a Question for Tonight's Meeting
+                  </h1>
+                  <p className="text-muted-foreground max-w-lg mx-auto">
+                    As a member, you're already registered. Submit a question below and we'll do our best to address it during tonight's session at 7:00 PM PST.
+                  </p>
                 </div>
               </div>
-            </div>
+            ) : (
+              <>
+                {/* Hero Banner */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
+                  <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
+                  <div className="absolute -top-12 -left-12 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+                  <div className="relative z-10 text-center">
+                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/25 backdrop-blur-sm mb-5 ring-2 ring-white/40 shadow-lg shadow-black/10">
+                      <Video className="h-8 w-8 drop-shadow" />
+                    </div>
+                    <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
+                      FREE Monday Night<br />Family Support Zoom Meeting
+                    </h1>
+                    <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
+                      Join other families navigating addiction for a supportive, guided group session every Monday night. No membership required.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {[
+                        { icon: Calendar, label: "Every Monday" },
+                        { icon: Clock, label: "7:00 PM PST" },
+                        { icon: Users, label: "Open to Everyone" },
+                        { icon: Video, label: "Via Zoom" },
+                      ].map(({ icon: Icon, label }) => (
+                        <span key={label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium">
+                          <Icon className="h-4 w-4" /> {label}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
 
-            {/* Membership Promo Banner */}
-            <MembershipPromoBanner />
+                {/* Membership Promo Banner */}
+                <MembershipPromoBanner />
+              </>
+            )}
 
-            {/* Registration Form */}
+            {/* Registration / Question Form */}
             <Card className="border-2 shadow-lg">
               <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
                 <CardTitle className="text-xl text-foreground flex items-center gap-2">
                   <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  Register for the Meeting
+                  {isMemberQuestion ? "Your Question" : "Register for the Meeting"}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name *</Label>
-                    <Input
-                      id="name"
-                      required
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                      className={errors.name ? "border-destructive" : ""}
-                    />
-                    {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-                  </div>
+                  {!isMemberQuestion && (
+                    <>
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          required
+                          placeholder="Your full name"
+                          value={formData.name}
+                          onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
+                          className={errors.name ? "border-destructive" : ""}
+                        />
+                        {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                      className={errors.email ? "border-destructive" : ""}
-                    />
-                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                  </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          required
+                          placeholder="your@email.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                          className={errors.email ? "border-destructive" : ""}
+                        />
+                        {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-                      className={errors.phone ? "border-destructive" : ""}
-                    />
-                    {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
-                  </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="(555) 123-4567"
+                          value={formData.phone}
+                          onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
+                          className={errors.phone ? "border-destructive" : ""}
+                        />
+                        {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                      </div>
+                    </>
+                  )}
 
                   <div className="space-y-2">
                     <Label htmlFor="question">Your Question for the Group (Optional)</Label>
@@ -382,6 +426,7 @@ export default function MondayZoomRegistration() {
                     {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
                   </div>
 
+                  {!isMemberQuestion && (
                    <div className="space-y-4 pt-2">
                     <div className="flex items-start space-x-3">
                       <Checkbox
@@ -455,6 +500,7 @@ export default function MondayZoomRegistration() {
                       </Label>
                     </div>
                   </div>
+                  )}
 
                   <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? (
@@ -463,7 +509,7 @@ export default function MondayZoomRegistration() {
                         Submitting...
                       </>
                     ) : (
-                      "Register for Monday Night Meeting"
+                      isMemberQuestion ? "Submit My Question" : "Register for Monday Night Meeting"
                     )}
                   </Button>
                 </form>

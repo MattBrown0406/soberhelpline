@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Video, ExternalLink } from "lucide-react";
+import { Video, ExternalLink, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -45,12 +45,20 @@ const MemberZoomBanner = () => {
             As a member, you can join directly — no registration needed.
           </p>
         </div>
-        <Link to={joinUrl}>
-          <Button size="sm" variant={isMonday ? "default" : "outline"} className="gap-2 flex-shrink-0">
-            <ExternalLink className="w-3.5 h-3.5" />
-            {isMonday ? "Join Now" : "Join Meeting"}
-          </Button>
-        </Link>
+        <div className="flex gap-2 flex-shrink-0">
+          <Link to="/monday-zoom-registration?member=true">
+            <Button size="sm" variant="outline" className="gap-2">
+              <MessageCircle className="w-3.5 h-3.5" />
+              Submit Question
+            </Button>
+          </Link>
+          <Link to={joinUrl}>
+            <Button size="sm" variant={isMonday ? "default" : "outline"} className="gap-2">
+              <ExternalLink className="w-3.5 h-3.5" />
+              {isMonday ? "Join Now" : "Join Meeting"}
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
