@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ClipboardCheck, Calendar, ShieldAlert, FileText, Compass, Users, BookOpen, Video, Crown } from "lucide-react";
+import { ArrowLeft, ClipboardCheck, Calendar, ShieldAlert, FileText, Compass, Users, BookOpen, Video, Crown, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -9,8 +9,14 @@ import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 export default function FamilyCoaching() {
+  const { isMember } = useMembershipStatus();
+
+  // Gated pages redirect non-members to membership signup
+  const gatedLink = (path: string) => isMember ? path : "/family-membership";
+
   return (
     <>
       <SEOHead
@@ -28,22 +34,25 @@ export default function FamilyCoaching() {
                 Back
               </Link>
               <div className="flex flex-wrap gap-2">
-                <Link to="/family-education">
+                <Link to={gatedLink("/family-education")}>
                   <Button variant="outline" size="sm" className="gap-2 border-logo-green/50 text-logo-green hover:bg-logo-green/10">
                     <BookOpen className="h-4 w-4" />
                     Education
+                    {!isMember && <Lock className="h-3 w-3 ml-0.5 opacity-60" />}
                   </Button>
                 </Link>
-                <Link to="/family-forum">
+                <Link to={gatedLink("/family-forum")}>
                   <Button variant="outline" size="sm" className="gap-2 border-emerald-500/50 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
                     <Users className="h-4 w-4" />
                     Forum
+                    {!isMember && <Lock className="h-3 w-3 ml-0.5 opacity-60" />}
                   </Button>
                 </Link>
-                <Link to="/family-webinars">
+                <Link to={gatedLink("/family-webinars")}>
                   <Button variant="outline" size="sm" className="gap-2 border-purple-500/50 text-purple-700 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-950/30">
                     <Video className="h-4 w-4" />
                     Webinars
+                    {!isMember && <Lock className="h-3 w-3 ml-0.5 opacity-60" />}
                   </Button>
                 </Link>
                 <Link to="/monday-zoom-registration">
@@ -52,10 +61,11 @@ export default function FamilyCoaching() {
                     Monday Night Zoom
                   </Button>
                 </Link>
-                <Link to="/zoom-recordings">
+                <Link to={gatedLink("/zoom-recordings")}>
                   <Button variant="outline" size="sm" className="gap-2 border-rose-500/50 text-rose-700 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">
                     <Video className="h-4 w-4" />
                     Past Recordings
+                    {!isMember && <Lock className="h-3 w-3 ml-0.5 opacity-60" />}
                   </Button>
                 </Link>
               </div>
