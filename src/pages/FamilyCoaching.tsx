@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ClipboardCheck, Calendar, ShieldAlert, FileText, Compass, Users, BookOpen, Video } from "lucide-react";
+import { ArrowLeft, ClipboardCheck, Calendar, ShieldAlert, FileText, Compass, Users, BookOpen, Video, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -58,6 +58,21 @@ export default function FamilyCoaching() {
                     Past Recordings
                   </Button>
                 </Link>
+              </div>
+            </div>
+
+            {/* Member Discount Banner */}
+            <div className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6">
+              <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+                <Crown className="w-4.5 h-4.5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-foreground">
+                  Members save $25 on every coaching session — <span className="text-primary">$125/hr instead of $150</span>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  <Link to="/family-membership" className="text-primary hover:underline font-medium">Become a member</Link> to unlock your coaching discount plus education, forum access, and more.
+                </p>
               </div>
             </div>
 
