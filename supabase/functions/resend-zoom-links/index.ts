@@ -40,53 +40,65 @@ serve(async (req: Request) => {
 
     const siteUrl = "https://soberhelpline.com";
     const joinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
+    const registerUrl = `${siteUrl}/monday-zoom-registration`;
 
-    // Parse optional meeting_date from body, default to next Monday
-    let targetDate: string;
-    try {
-      const body = await req.json();
-      targetDate = body.meeting_date || "";
-    } catch {
-      targetDate = "";
+    let body: any = {};
+    try { body = await req.json(); } catch {}
+
+    // If custom recipients provided, use those. Otherwise fall back to meeting_date lookup.
+    let recipients: { name: string; email: string }[] = [];
+
+    if (body.recipients && Array.isArray(body.recipients)) {
+      recipients = body.recipients;
+    } else {
+      let targetDate = body.meeting_date || "";
+      if (!targetDate) {
+        const now = new Date();
+        const day = now.getUTCDay();
+        const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
+        const nextMonday = new Date(now);
+        nextMonday.setUTCDate(now.getUTCDate() + daysUntilMonday);
+        targetDate = nextMonday.toISOString().split("T")[0];
+      }
+
+      const { data: registrants, error } = await adminSupabase
+        .from("zoom_meeting_registrations")
+        .select("name, email")
+        .eq("meeting_date", targetDate);
+
+      if (error) throw error;
+      recipients = registrants || [];
     }
 
-    // If no date provided, calculate next Monday
-    if (!targetDate) {
-      const now = new Date();
-      const day = now.getUTCDay();
-      const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
-      const nextMonday = new Date(now);
-      nextMonday.setUTCDate(now.getUTCDate() + daysUntilMonday);
-      targetDate = nextMonday.toISOString().split("T")[0];
-    }
-
-    console.log("Resending links for meeting_date:", targetDate);
-
-    // Get registrants for that date
-    const { data: registrants, error } = await adminSupabase
-      .from("zoom_meeting_registrations")
-      .select("name, email")
-      .eq("meeting_date", targetDate);
-
-    if (error) throw error;
-    if (!registrants || registrants.length === 0) {
-      return new Response(JSON.stringify({ message: "No registrants found", sent: 0 }), {
+    if (recipients.length === 0) {
+      return new Response(JSON.stringify({ message: "No recipients found", sent: 0 }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
+    // Deduplicate by email
+    const seen = new Set<string>();
+    const unique: { name: string; email: string }[] = [];
+    for (const r of recipients) {
+      const key = r.email.toLowerCase();
+      if (!seen.has(key)) {
+        seen.add(key);
+        unique.push(r);
+      }
+    }
+
     let sent = 0;
     let failed = 0;
 
-    for (const reg of registrants) {
+    for (const reg of unique) {
       const safeName = escapeHtml(reg.name);
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">Updated Meeting Link</h1>
+          <h1 style="color: #166534;">This Monday: Family Support Meeting</h1>
           <p>Hi ${safeName},</p>
-          <p>We've updated the link for this Monday's <strong>Family Support Zoom Meeting</strong> at <strong>7:00 PM PST</strong>. Please use the new link below to join:</p>
+          <p>Here is your link for this Monday's <strong>Family Support Zoom Meeting</strong> at <strong>7:00 PM PST</strong>.</p>
           
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
@@ -95,6 +107,16 @@ serve(async (req: Request) => {
             <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
               The meeting opens directly in your browser — no Zoom app needed.
             </p>
+          </div>
+
+          <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+            <p style="margin: 0 0 12px 0; color: #854d0e; font-size: 14px;">
+              <strong>💬 Have a question for Monday's meeting?</strong><br/>
+              Submit it ahead of time and we'll do our best to address it.
+            </p>
+            <a href="${escapeHtml(registerUrl)}?member=true" style="display: inline-block; padding: 10px 24px; background-color: #d97706; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+              Submit a Question
+            </a>
           </div>
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
@@ -121,7 +143,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: "📍 Updated Link — Monday Night Family Support Meeting",
+          subject: "📍 This Monday — Family Support Meeting at 7 PM PST",
           content: [{ type: "text/html", value: html }],
         }),
       });
@@ -135,7 +157,7 @@ serve(async (req: Request) => {
       }
     }
 
-    return new Response(JSON.stringify({ success: true, sent, failed, targetDate }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, total: unique.length }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
