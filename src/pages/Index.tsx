@@ -279,7 +279,7 @@ const Index = () => {
       <section className="border-y border-border/40 bg-muted/30">
         <div className="container mx-auto px-4 py-4 md:py-5">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
-            <span>20+ Years Experience</span>
+            <span>22+ Years Experience</span>
             <span className="text-border">•</span>
             <span>Worldwide in English & Spanish</span>
             <span className="text-border">•</span>
