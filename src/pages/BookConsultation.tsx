@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown } from "lucide-react";
 import logo from "@/assets/logo.png";
 import providerHeadshot from "@/assets/provider-headshot.jpg";
 import SEOHead from "@/components/SEOHead";
@@ -109,6 +110,7 @@ const intakeSections = [
 ];
 
 const BookConsultation = () => {
+  const { isMember } = useMembershipStatus();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
@@ -351,7 +353,9 @@ const BookConsultation = () => {
         coachingPlanId = newPlan.id;
       }
 
-      const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : selectedProvider.session_rate;
+      const memberRate = 125;
+      const singleSessionRate = isMember ? memberRate : selectedProvider.session_rate;
+      const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
       const amountPaid = totalAmount;
 
       // Create all bookings
@@ -437,7 +441,7 @@ const BookConsultation = () => {
           {step === 0 && (
             <>
               <h1 className="text-2xl font-bold mb-2 text-center">{isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}</h1>
-              <p className="text-muted-foreground text-center mb-6">{isParallelRecovery ? `Choose a provider for your 12-session program ($1,500)` : isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : "Choose a provider to schedule your 60-minute video consultation ($150)"}</p>
+              <p className="text-muted-foreground text-center mb-6">{isParallelRecovery ? `Choose a provider for your 12-session program ($1,500)` : isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : `Choose a provider to schedule your 60-minute video consultation${isMember ? " ($125 — Member Rate)" : " ($150)"}`}</p>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
@@ -456,7 +460,18 @@ const BookConsultation = () => {
                                 <Badge key={i} variant="secondary" className="text-xs">{s}</Badge>
                               ))}
                             </div>
-                            <p className="text-sm font-medium mt-2 text-primary">${p.session_rate} / {p.session_duration_minutes} min</p>
+                            <p className="text-sm font-medium mt-2 text-primary">
+                              {isMember && !isMultiSession ? (
+                                <span className="flex items-center gap-1.5">
+                                  <Crown className="w-3.5 h-3.5" />
+                                  <span className="line-through text-muted-foreground">${p.session_rate}</span>{" "}
+                                  $125 / {p.session_duration_minutes} min
+                                  <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">Member</span>
+                                </span>
+                              ) : (
+                                <span>${p.session_rate} / {p.session_duration_minutes} min</span>
+                              )}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -658,7 +673,17 @@ const BookConsultation = () => {
                       <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
                       <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
                       <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{selectedProvider?.session_duration_minutes} minutes</span></div>
-                      <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${selectedProvider?.session_rate}</span></div>
+                      {isMember ? (
+                        <div className="flex justify-between border-t pt-2 mt-2">
+                          <span className="font-semibold flex items-center gap-1.5"><Crown className="w-4 h-4 text-primary" />Member Rate</span>
+                          <span className="font-bold text-primary">
+                            <span className="line-through text-muted-foreground text-sm mr-1">${selectedProvider?.session_rate}</span>
+                            $125
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex justify-between border-t pt-2 mt-2"><span className="font-semibold">Total</span><span className="font-bold text-primary">${selectedProvider?.session_rate}</span></div>
+                      )}
                     </>
                   )}
                 </div>
@@ -672,7 +697,7 @@ const BookConsultation = () => {
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => setStep(4)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button onClick={handleBooking} disabled={isSubmitting} size="lg">
-                    {isSubmitting ? "Booking..." : isMultiSession ? `Book & Pay $${isParallelRecovery ? "1,500" : "500"}` : `Book & Pay $${selectedProvider?.session_rate}`}
+                    {isSubmitting ? "Booking..." : isMultiSession ? `Book & Pay $${isParallelRecovery ? "1,500" : "500"}` : `Book & Pay $${isMember ? "125" : selectedProvider?.session_rate}`}
                   </Button>
                 </div>
               </CardContent>
