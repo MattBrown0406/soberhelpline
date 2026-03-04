@@ -107,6 +107,8 @@ serve(async (req: Request) => {
       const firstName = profileMap.get(pp.user_id) || "Friend";
       const safeName = escapeHtml(firstName);
 
+      const questionUrl = `${siteUrl}/monday-zoom-registration?member=true`;
+
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Tonight's Monday Night Meeting</h1>
@@ -121,6 +123,16 @@ serve(async (req: Request) => {
             <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
               The meeting opens directly in your browser — no Zoom app needed.
             </p>
+          </div>
+
+          <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+            <p style="margin: 0 0 12px 0; color: #854d0e; font-size: 14px;">
+              <strong>💬 Have a question for tonight?</strong><br/>
+              Submit your question ahead of time and we'll do our best to address it during the meeting.
+            </p>
+            <a href="${escapeHtml(questionUrl)}" style="display: inline-block; padding: 10px 24px; background-color: #d97706; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+              Submit a Question
+            </a>
           </div>
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
