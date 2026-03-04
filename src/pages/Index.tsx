@@ -281,8 +281,6 @@ const Index = () => {
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
             <span>20+ Years Experience</span>
             <span className="text-border">•</span>
-            <span>1,000+ Families Helped</span>
-            <span className="text-border">•</span>
             <span>Worldwide in English & Spanish</span>
             <span className="text-border">•</span>
             <span>24/7 Crisis Support Tools</span>
