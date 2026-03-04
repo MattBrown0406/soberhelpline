@@ -87,7 +87,7 @@ const JoinMeeting = () => {
           password={password}
           userName={userName}
           role={role}
-          onMeetingEnd={() => navigate(-1)}
+          onMeetingEnd={() => navigate("/testimonials?from=zoom")}
         />
       </div>
     </>
