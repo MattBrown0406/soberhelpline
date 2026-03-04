@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
+import MembershipPromoBanner from "@/components/MembershipPromoBanner";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 const US_STATES = [
   "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD",
@@ -41,6 +43,7 @@ const StarRating = ({ rating, onRate, interactive = false }: { rating: number; o
 );
 
 const Testimonials = () => {
+  const { isMember } = useMembershipStatus();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
@@ -239,6 +242,9 @@ const Testimonials = () => {
               ))}
             </div>
           )}
+
+          {/* Membership Promotion Banner - only show to non-members */}
+          {!isMember && <MembershipPromoBanner />}
         </div>
       </div>
     </>
