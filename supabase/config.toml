@@ -47,3 +47,6 @@ verify_jwt = false
 
 [functions.send-member-zoom-reminder]
 verify_jwt = false
+
+[functions.resend-zoom-links]
+verify_jwt = false
