@@ -39,30 +39,28 @@ async function getZoomAccessToken(): Promise<string> {
 }
 
 function getNextMondayAt7pmPST(): string {
-  // Get current time in PST
   const now = new Date();
-  
-  // Calculate next Monday
   const day = now.getUTCDay();
-  // We want the current Monday if called on Monday, otherwise next Monday
+  
   let daysUntilMonday: number;
   if (day === 1) {
-    daysUntilMonday = 0; // It's Monday
+    daysUntilMonday = 0;
   } else if (day === 0) {
-    daysUntilMonday = 1; // Sunday -> next day
+    daysUntilMonday = 1;
   } else {
-    daysUntilMonday = 8 - day; // Tuesday-Saturday -> next Monday
+    daysUntilMonday = 8 - day;
   }
   
   const nextMonday = new Date(now);
   nextMonday.setUTCDate(now.getUTCDate() + daysUntilMonday);
   
-  // Set to 7:00 PM PST = 03:00 UTC (next day)
-  // PST is UTC-8, so 7 PM PST = 3 AM UTC Tuesday
-  nextMonday.setUTCDate(nextMonday.getUTCDate() + 1); // Move to Tuesday UTC
-  nextMonday.setUTCHours(3, 0, 0, 0); // 3:00 AM UTC = 7:00 PM PST Monday
+  // Return as local time string for the timezone specified in the Zoom API call
+  const year = nextMonday.getUTCFullYear();
+  const month = String(nextMonday.getUTCMonth() + 1).padStart(2, '0');
+  const date = String(nextMonday.getUTCDate()).padStart(2, '0');
   
-  return nextMonday.toISOString();
+  // 7:00 PM local time (America/Los_Angeles) — Zoom will interpret this in the meeting timezone
+  return `${year}-${month}-${date}T19:00:00`;
 }
 
 serve(async (req) => {
