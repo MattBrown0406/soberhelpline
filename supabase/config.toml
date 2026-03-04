@@ -44,3 +44,6 @@ verify_jwt = false
 
 [functions.send-cancellation-email]
 verify_jwt = false
+
+[functions.send-member-zoom-reminder]
+verify_jwt = false
