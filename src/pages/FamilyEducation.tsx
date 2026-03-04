@@ -20,6 +20,7 @@ import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAss
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import StartHereGuide from "@/components/StartHereGuide";
+import MemberZoomBanner from "@/components/MemberZoomBanner";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -358,6 +359,8 @@ export default function FamilyEducation() {
                 <GoogleTranslate />
               </div>
             </div>
+
+            <MemberZoomBanner />
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-green/10 via-background to-primary/5 border border-logo-green/20 p-8 md:p-12 mb-10">

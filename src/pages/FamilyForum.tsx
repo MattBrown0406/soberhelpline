@@ -20,6 +20,7 @@ import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import MemberZoomBanner from "@/components/MemberZoomBanner";
 
 function relativeTime(dateStr: string): string {
   const now = Date.now();
@@ -512,6 +513,8 @@ export default function FamilyForum() {
                 ))}
               </div>
             </div>
+
+            <MemberZoomBanner />
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
               <div>
