@@ -9,7 +9,7 @@ const stages = [
   { emoji: "🔴", name: "Suspicion", desc: "Something is off but I'm not sure", active: true, path: "/roadmap/suspicion" },
   { emoji: "🟠", name: "Confirmation", desc: "I know they're using, I don't know what to do", active: true, path: "/roadmap/assessment" },
   { emoji: "🟡", name: "Crisis", desc: "Things are falling apart right now", active: true, path: "/roadmap/crisis" },
-  { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to do something but need help", active: false },
+  { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to do something but need help", active: true, path: "/roadmap/pre-intervention" },
   { emoji: "🟣", name: "Treatment", desc: "They're in treatment, now what?", active: false },
   { emoji: "🟢", name: "Early Recovery", desc: "They're home — how do we do this?", active: false },
   { emoji: "⚪", name: "Long-Term Recovery", desc: "It's been 6+ months, how do we rebuild?", active: false },
