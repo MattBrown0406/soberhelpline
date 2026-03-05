@@ -462,7 +462,7 @@ function PreInterventionCard({
 
                 {showSpecialCta === "research-treatment" && (
                   <p className="text-xs text-amber-700 dark:text-amber-400 bg-amber-500/10 p-2 rounded-md">
-                    ⚠️ Avoid treatment centers that cold-call you or offer free flights. These are red flags for patient brokering — a predatory practice that puts profit over care.
+                    ⚠️ Avoid treatment centers that cold-call you or offer free flights. These are red flags for patient brokering — a predatory practice that puts profit over care. Also avoid programs that offer to have one of their own interventionists provide intervention services instead of giving you numbers of trusted partners. It is unethical for treatment centers to provide their own intervention services — it removes the objectivity from the process and only focuses on getting your loved one into THEIR program, not the RIGHT program.
                   </p>
                 )}
               </CollapsibleContent>
