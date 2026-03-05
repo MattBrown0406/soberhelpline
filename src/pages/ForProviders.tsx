@@ -267,61 +267,6 @@ const ForProviders = () => {
           </div>
         </section>
 
-        {/* Provider Testimonials */}
-        <section className="py-20 bg-gradient-to-br from-logo-green/5 via-white to-emerald-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">What Providers Are Saying</h2>
-              <p className="text-lg text-gray-600">See how Sober Helpline is helping providers grow their reach</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="p-6 bg-white shadow-lg">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Since listing on Sober Helpline, we've seen a 40% increase in qualified family inquiries. The vetting process gives families confidence to reach out."
-                </p>
-                <div className="text-sm">
-                  <p className="font-semibold">Sarah Martinez, LCSW</p>
-                  <p className="text-gray-500">Phoenix Recovery Center</p>
-                </div>
-              </Card>
-              
-              <Card className="p-6 bg-white shadow-lg">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "The quality of referrals from Sober Helpline is exceptional. Families come to us educated and ready to engage in treatment."
-                </p>
-                <div className="text-sm">
-                  <p className="font-semibold">Dr. Michael Rodriguez</p>
-                  <p className="text-gray-500">Midwest Treatment Solutions</p>
-                </div>
-              </Card>
-              
-              <Card className="p-6 bg-white shadow-lg">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Free to list, easy to set up, and families find us quickly. This platform understands what ethical treatment providers need."
-                </p>
-                <div className="text-sm">
-                  <p className="font-semibold">Jennifer Thompson, CAC-II</p>
-                  <p className="text-gray-500">Mountain View Interventions</p>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </section>
 
         {/* Pricing Tiers */}
         <section className="py-20 bg-white">
