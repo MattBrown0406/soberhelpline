@@ -233,7 +233,7 @@ const Index = () => {
       {/* Recovery Roadmap Banner */}
       <Link to="/roadmap" className="block bg-gradient-to-r from-logo-green/10 via-logo-green/5 to-logo-green/10 border-b border-logo-green/20 hover:from-logo-green/15 hover:via-logo-green/10 hover:to-logo-green/15 transition-all group">
         <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-2 md:gap-3">
-          <Compass className="w-4 h-4 text-logo-green" />
+          <Compass className="w-4 h-4 text-amber-500" />
           <p className="text-xs md:text-sm font-medium text-foreground">
             <span className="font-bold text-logo-green">NEW:</span> Take our free 5-minute assessment and get your personalized Recovery Roadmap
           </p>
