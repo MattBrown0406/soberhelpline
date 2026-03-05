@@ -191,12 +191,26 @@ const RoadmapAssessment = () => {
     if (!email.trim()) return;
     setSaving(true);
     const redirectPath = getRedirectPath();
+    const assignedStage = getStageAssigned();
     try {
       await supabase.from("roadmap_users").insert({
         email: email.trim(),
         assessment_id: assessmentId,
-        current_stage: getStageAssigned(),
+        current_stage: assignedStage,
       });
+
+      // Fire-and-forget Mailchimp sync — don't block user flow
+      supabase.functions.invoke("roadmap-mailchimp-sync", {
+        body: {
+          email: email.trim(),
+          stage: assignedStage,
+          relationship: answers.relationship,
+          substances: answers.substances,
+        },
+      }).then(({ error }) => {
+        if (error) console.error("Mailchimp sync failed:", error);
+      });
+
       navigate(redirectPath);
     } catch {
       navigate(redirectPath);
