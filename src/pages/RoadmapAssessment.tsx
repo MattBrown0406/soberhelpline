@@ -125,6 +125,9 @@ const RoadmapAssessment = () => {
     if (situation === "I think something might be wrong but I'm not sure yet") {
       return "suspicion";
     }
+    if (situation === "I've been trying to help but things keep getting worse") {
+      return "pre-intervention";
+    }
     if (situation === "Things are in crisis right now — I need help immediately") {
       return "crisis";
     }
@@ -134,6 +137,7 @@ const RoadmapAssessment = () => {
   const getRedirectPath = () => {
     const stage = getStageAssigned();
     if (stage === "suspicion") return "/roadmap/suspicion";
+    if (stage === "pre-intervention") return "/roadmap/pre-intervention";
     if (stage === "crisis") return "/roadmap/crisis";
     return "/roadmap/confirmation";
   };

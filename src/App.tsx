@@ -126,6 +126,7 @@ const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
 const RoadmapConfirmation = React.lazy(() => import("./pages/RoadmapConfirmation"));
 const RoadmapCrisis = React.lazy(() => import("./pages/RoadmapCrisis"));
 const RoadmapSuspicion = React.lazy(() => import("./pages/RoadmapSuspicion"));
+const RoadmapPreIntervention = React.lazy(() => import("./pages/RoadmapPreIntervention"));
 
 const queryClient = new QueryClient();
 
@@ -312,6 +313,7 @@ const App = () => (
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
               <Route path="/roadmap/crisis" element={<RoadmapCrisis />} />
               <Route path="/roadmap/suspicion" element={<RoadmapSuspicion />} />
+              <Route path="/roadmap/pre-intervention" element={<RoadmapPreIntervention />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
