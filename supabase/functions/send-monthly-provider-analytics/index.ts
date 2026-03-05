@@ -179,7 +179,7 @@ function generateEmailHtml(
                 We're here to help. Reach out anytime at:
               </p>
               <p style="margin: 12px 0 0 0;">
-                <a href="tel:541-241-5886" style="color: #16a34a; text-decoration: none; font-weight: 600;">541-241-5886</a>
+                <a href="tel:541-241-9151" style="color: #16a34a; text-decoration: none; font-weight: 600;">541-241-9151</a>
                 <span style="color: #cbd5e1; margin: 0 8px;">|</span>
                 <a href="mailto:support@soberhelpline.com" style="color: #16a34a; text-decoration: none; font-weight: 600;">support@soberhelpline.com</a>
               </p>

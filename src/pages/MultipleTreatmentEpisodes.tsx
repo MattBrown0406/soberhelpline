@@ -43,7 +43,7 @@ export default function MultipleTreatmentEpisodes() {
             {/* Printable Header */}
             <div className="hidden print:block mb-6">
               <p className="text-lg font-bold">Sober Helpline</p>
-              <p className="text-sm text-muted-foreground">(541) 241-5886</p>
+              <p className="text-sm text-muted-foreground">(541) 241-9151</p>
             </div>
 
             <ToolBrandHeader
@@ -566,7 +566,7 @@ export default function MultipleTreatmentEpisodes() {
 
             {/* Print Footer */}
             <div className="hidden print:block mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
-              <p>Sober Helpline | (541) 241-5886 | www.soberhelpline.com</p>
+              <p>Sober Helpline | (541) 241-9151 | www.soberhelpline.com</p>
             </div>
           </div>
         
