@@ -130,6 +130,7 @@ const RoadmapPreIntervention = React.lazy(() => import("./pages/RoadmapPreInterv
 const RoadmapTreatment = React.lazy(() => import("./pages/RoadmapTreatment"));
 const RoadmapEarlyRecovery = React.lazy(() => import("./pages/RoadmapEarlyRecovery"));
 const RoadmapLongTermRecovery = React.lazy(() => import("./pages/RoadmapLongTermRecovery"));
+const RoadmapRelapse = React.lazy(() => import("./pages/RoadmapRelapse"));
 
 const queryClient = new QueryClient();
 
@@ -320,6 +321,7 @@ const App = () => (
               <Route path="/roadmap/treatment" element={<RoadmapTreatment />} />
               <Route path="/roadmap/early-recovery" element={<RoadmapEarlyRecovery />} />
               <Route path="/roadmap/long-term-recovery" element={<RoadmapLongTermRecovery />} />
+              <Route path="/roadmap/relapse" element={<RoadmapRelapse />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
