@@ -245,6 +245,29 @@ const RoadmapTreatment = () => {
           </CardContent>
         </Card>
 
+        {/* ─── Nervous System Warning ─── */}
+        <Card className="border-amber-500/30 bg-amber-500/5">
+          <CardContent className="p-6 md:p-8">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-6 h-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-1" />
+              <div>
+                <h2 className="text-xl font-bold text-foreground mb-3">
+                  ⚠️ Warning: Your Nervous System Doesn't Know the Crisis Is Over
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-3">
+                  Your body and mind have been in crisis mode for so long that you may not know how to function without one. When the chaos suddenly stops — when they're safely in treatment and the phone isn't ringing at 3 AM — something strange happens: your nervous system looks for a new crisis. Because crisis has become your normal.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-3">
+                  You may pick fights with your spouse or partner over things that don't matter. You may find yourself silently criticizing the treatment team — looking for signs they aren't doing it "right," latching onto the first thing that feels off as proof that your loved one isn't being properly cared for. You may feel an overwhelming urge to call the facility, challenge the counselors, or micromanage the process.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  This is not you being difficult. This is your nervous system doing the only thing it knows how to do. Recognize it for what it is — and resist the urge to act on it. This is the time to turn toward your own recovery process. Let the professionals care for your loved one. Your job right now is to start caring for yourself.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* ─── First 72 Hours ─── */}
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
