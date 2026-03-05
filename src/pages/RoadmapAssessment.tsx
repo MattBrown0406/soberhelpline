@@ -134,6 +134,9 @@ const RoadmapAssessment = () => {
     if (situation === "They're currently in treatment or recently completed treatment") {
       return "treatment";
     }
+    if (situation === "They've been sober for a while but I'm worried about relapse") {
+      return "long-term-recovery";
+    }
     return "confirmation";
   };
 
@@ -143,6 +146,7 @@ const RoadmapAssessment = () => {
     if (stage === "pre-intervention") return "/roadmap/pre-intervention";
     if (stage === "crisis") return "/roadmap/crisis";
     if (stage === "treatment") return "/roadmap/treatment";
+    if (stage === "long-term-recovery") return "/roadmap/long-term-recovery";
     return "/roadmap/confirmation";
   };
 

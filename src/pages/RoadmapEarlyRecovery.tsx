@@ -362,10 +362,12 @@ const RoadmapEarlyRecovery = () => {
                     <p className="text-sm text-muted-foreground mb-4">
                       If you've made it 90 days with consistent sobriety, meeting attendance, and honest communication — breathe. You're building something real. The next stage is about the long game: rebuilding trust, processing the past, and creating a new normal.
                     </p>
-                    <Button size="sm" onClick={() => openComingSoon("Long-Term Recovery Stage")}>
-                      Move to Long-Term Recovery
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                    <Link to="/roadmap/long-term-recovery">
+                      <Button size="sm">
+                        Move to Long-Term Recovery
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
