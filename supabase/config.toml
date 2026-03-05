@@ -50,3 +50,6 @@ verify_jwt = false
 
 [functions.resend-zoom-links]
 verify_jwt = false
+
+[functions.quo-to-notion]
+verify_jwt = false
