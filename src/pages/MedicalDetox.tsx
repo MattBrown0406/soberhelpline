@@ -91,7 +91,7 @@ const MedicalDetox = () => {
       let query = supabase
         .from("provider_submissions_public")
         .select("*")
-        .eq("category", "Medical Detox")
+        .or('category.eq.Medical Detox,detox_available.eq.true')
         .eq("status", "approved")
         .eq("state", state);
 
@@ -137,7 +137,7 @@ const MedicalDetox = () => {
       let query = supabase
         .from("provider_submissions_public")
         .select("*")
-        .eq("category", "Medical Detox")
+        .or('category.eq.Medical Detox,detox_available.eq.true')
         .eq("status", "approved")
         .not("state", "eq", selectedStateName);
 
@@ -257,7 +257,7 @@ const MedicalDetox = () => {
       let query = supabase
         .from("provider_submissions_public")
         .select("*")
-        .eq("category", "Medical Detox")
+        .or('category.eq.Medical Detox,detox_available.eq.true')
         .eq("status", "approved");
 
       const searchInsurance = insuranceSearch === "Other" ? customInsurance.trim() : insuranceSearch;
