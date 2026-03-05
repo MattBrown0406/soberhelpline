@@ -390,16 +390,19 @@ export default function FamilySupport() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-green">
-                    <MessageCircle className="h-5 w-5 text-logo-green" />
-                    Professional Intervention Help
+                    <Video className="h-5 w-5 text-logo-green" />
+                    Monday Night Family Support Zoom
                   </CardTitle>
                   <CardDescription>
-                    When you need expert guidance for your family
+                    Free weekly meeting every Monday at 7:00 PM PST
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Link to="/interventionists" className="block text-primary hover:underline">
-                    Find an Interventionist →
+                  <p className="text-muted-foreground text-sm">
+                    Join our free weekly Zoom meeting led by a certified interventionist. Ask questions, get guidance, and connect with other families — no membership required.
+                  </p>
+                  <Link to="/monday-zoom-registration" className="block text-primary hover:underline">
+                    Register for This Monday's Meeting →
                   </Link>
                 </CardContent>
               </Card>
