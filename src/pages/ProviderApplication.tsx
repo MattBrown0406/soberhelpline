@@ -265,17 +265,23 @@ const ProviderApplication = () => {
   const [forceNewApplication, setForceNewApplication] = useState(false);
 
   useEffect(() => {
+    let initialSessionChecked = false;
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setIsLoading(false);
+        // Only update from listener after initial session check completes
+        if (initialSessionChecked) {
+          setSession(session);
+          setUser(session?.user ?? null);
+          setIsLoading(false);
+        }
       }
     );
 
-    // THEN check for existing session
+    // THEN check for existing session — this is the authoritative first check
     supabase.auth.getSession().then(({ data: { session } }) => {
+      initialSessionChecked = true;
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
