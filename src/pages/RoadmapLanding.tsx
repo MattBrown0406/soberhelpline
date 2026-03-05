@@ -57,18 +57,25 @@ const RoadmapLanding = () => {
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <Card key={i} className="text-center border-border/50 bg-card">
-                <CardContent className="pt-8 pb-6 px-6">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <step.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <div className="text-sm font-semibold text-primary mb-2">Step {i + 1}</div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
+            {steps.map((step, i) => {
+              const cardContent = (
+                <Card key={i} className={`text-center border-border/50 bg-card ${i === 0 ? "hover:shadow-md transition-shadow cursor-pointer group" : ""}`}>
+                  <CardContent className="pt-8 pb-6 px-6">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                      <step.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <div className="text-sm font-semibold text-primary mb-2">Step {i + 1}</div>
+                    <h3 className="text-xl font-bold text-foreground mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground">{step.desc}</p>
+                  </CardContent>
+                </Card>
+              );
+              return i === 0 ? (
+                <Link key={i} to="/roadmap/assessment">{cardContent}</Link>
+              ) : (
+                <div key={i}>{cardContent}</div>
+              );
+            })}
           </div>
         </div>
       </section>
