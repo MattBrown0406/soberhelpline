@@ -119,9 +119,18 @@ const RoadmapAssessment = () => {
     }
   };
 
+  const getStageAssigned = () => {
+    const situation = answers.current_situation as string;
+    if (situation === "Things are in crisis right now — I need help immediately") {
+      return "crisis";
+    }
+    return "confirmation";
+  };
+
   const saveAssessment = async () => {
     setSaving(true);
     try {
+      const stage = getStageAssigned();
       const newAssessmentId = crypto.randomUUID();
 
       const { error } = await supabase
@@ -135,7 +144,7 @@ const RoadmapAssessment = () => {
           current_situation: answers.current_situation as string,
           safety_concerns: answers.safety_concerns as string,
           desired_help: answers.desired_help as string,
-          stage_assigned: "confirmation",
+          stage_assigned: stage,
         });
 
       if (error) throw error;
@@ -154,19 +163,23 @@ const RoadmapAssessment = () => {
     }
   };
 
+  const getRedirectPath = () => {
+    return getStageAssigned() === "crisis" ? "/roadmap/crisis" : "/roadmap/confirmation";
+  };
+
   const handleEmailSubmit = async () => {
     if (!email.trim()) return;
     setSaving(true);
+    const redirectPath = getRedirectPath();
     try {
       await supabase.from("roadmap_users").insert({
         email: email.trim(),
         assessment_id: assessmentId,
-        current_stage: "confirmation",
+        current_stage: getStageAssigned(),
       });
-      navigate("/roadmap/confirmation");
+      navigate(redirectPath);
     } catch {
-      // If email already exists, just continue
-      navigate("/roadmap/confirmation");
+      navigate(redirectPath);
     } finally {
       setSaving(false);
     }
@@ -260,7 +273,7 @@ const RoadmapAssessment = () => {
               </Button>
             </div>
             <button
-              onClick={() => navigate("/roadmap/confirmation")}
+              onClick={() => navigate(getRedirectPath())}
               className="text-sm text-muted-foreground hover:text-foreground underline transition-colors"
             >
               Continue without saving

@@ -7,8 +7,8 @@ import providerHeadshot from "@/assets/provider-headshot.jpg";
 
 const stages = [
   { emoji: "🔴", name: "Suspicion", desc: "Something is off but I'm not sure", active: false },
-  { emoji: "🟠", name: "Confirmation", desc: "I know they're using, I don't know what to do", active: true },
-  { emoji: "🟡", name: "Crisis", desc: "Things are falling apart right now", active: false },
+  { emoji: "🟠", name: "Confirmation", desc: "I know they're using, I don't know what to do", active: true, path: "/roadmap/assessment" },
+  { emoji: "🟡", name: "Crisis", desc: "Things are falling apart right now", active: true, path: "/roadmap/crisis" },
   { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to do something but need help", active: false },
   { emoji: "🟣", name: "Treatment", desc: "They're in treatment, now what?", active: false },
   { emoji: "🟢", name: "Early Recovery", desc: "They're home — how do we do this?", active: false },
@@ -84,7 +84,7 @@ const RoadmapLanding = () => {
             {stages.map((stage, i) => (
               <div key={i} className="relative">
                 {stage.active ? (
-                  <Link to="/roadmap/assessment">
+                  <Link to={stage.path || "/roadmap/assessment"}>
                     <div className="flex items-center gap-4 p-4 md:p-5 rounded-xl bg-card border-2 border-primary/30 shadow-sm hover:shadow-md transition-all cursor-pointer group">
                       <span className="text-2xl flex-shrink-0">{stage.emoji}</span>
                       <div className="flex-1 min-w-0">
