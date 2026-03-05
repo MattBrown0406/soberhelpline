@@ -252,10 +252,6 @@ const ForProviders = () => {
                 <p className="text-gray-600">Families Searching Monthly</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">95%</div>
-                <p className="text-gray-600">Provider Satisfaction Rate</p>
-              </div>
-              <div>
                 <div className="text-4xl font-bold text-logo-green mb-2">48hrs</div>
                 <p className="text-gray-600">Average Approval Time</p>
               </div>
