@@ -1978,6 +1978,83 @@ export type Database = {
           },
         ]
       }
+      roadmap_assessments: {
+        Row: {
+          created_at: string | null
+          current_situation: string | null
+          desired_help: string | null
+          duration: string | null
+          id: string
+          prior_treatment: string | null
+          relationship: string | null
+          safety_concerns: string | null
+          stage_assigned: string | null
+          substances: string[] | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_situation?: string | null
+          desired_help?: string | null
+          duration?: string | null
+          id?: string
+          prior_treatment?: string | null
+          relationship?: string | null
+          safety_concerns?: string | null
+          stage_assigned?: string | null
+          substances?: string[] | null
+        }
+        Update: {
+          created_at?: string | null
+          current_situation?: string | null
+          desired_help?: string | null
+          duration?: string | null
+          id?: string
+          prior_treatment?: string | null
+          relationship?: string | null
+          safety_concerns?: string | null
+          stage_assigned?: string | null
+          substances?: string[] | null
+        }
+        Relationships: []
+      }
+      roadmap_users: {
+        Row: {
+          assessment_id: string | null
+          checklist_progress: Json | null
+          created_at: string | null
+          current_stage: string | null
+          email: string
+          id: string
+          last_checkin: string | null
+        }
+        Insert: {
+          assessment_id?: string | null
+          checklist_progress?: Json | null
+          created_at?: string | null
+          current_stage?: string | null
+          email: string
+          id?: string
+          last_checkin?: string | null
+        }
+        Update: {
+          assessment_id?: string | null
+          checklist_progress?: Json | null
+          created_at?: string | null
+          current_stage?: string | null
+          email?: string
+          id?: string
+          last_checkin?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "roadmap_users_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "roadmap_assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       site_settings: {
         Row: {
           key: string

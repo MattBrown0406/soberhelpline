@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Phone, LogIn, Headphones, Heart, X } from "lucide-react";
+import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 
 interface MobileNavProps {
@@ -32,8 +32,15 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
             </Button>
           </div>
           
-          <nav className="flex-1 overflow-y-auto p-4">
-            <div className="space-y-2">
+            <nav className="flex-1 overflow-y-auto p-4">
+              <div className="space-y-2">
+                <Link to="/roadmap" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
+                    <MapIcon className="w-4 h-4" />
+                    Recovery Roadmap
+                  </Button>
+                </Link>
+                <div className="border-t my-2" />
               <div className="space-y-1">
                 <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground flex items-center gap-2">
                   <Headphones className="w-4 h-4" />

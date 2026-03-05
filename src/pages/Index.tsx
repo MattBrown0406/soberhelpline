@@ -152,6 +152,11 @@ const Index = () => {
                 <img src={bannerLogo} alt="Sober Helpline" className="h-10 w-auto" />
               </Link>
               <nav className="flex items-center gap-1">
+                <Link to="/roadmap">
+                  <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
+                    Recovery Roadmap
+                  </Button>
+                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="gap-1 text-foreground/80 hover:text-foreground">
