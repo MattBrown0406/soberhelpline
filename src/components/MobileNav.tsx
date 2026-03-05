@@ -102,11 +102,6 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     List Your Practice
                   </Button>
                 </Link>
-                <Link to="/provider-info" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full justify-start pl-4">
-                    Provider Application
-                  </Button>
-                </Link>
                 <Link to="/consultation-provider-dashboard" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-4">
                     Provider Login
