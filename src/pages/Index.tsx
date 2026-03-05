@@ -152,11 +152,6 @@ const Index = () => {
                 <img src={bannerLogo} alt="Sober Helpline" className="h-10 w-auto" />
               </Link>
               <nav className="flex items-center gap-1">
-                <Link to="/roadmap">
-                  <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
-                    Recovery Roadmap
-                  </Button>
-                </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="gap-1 text-foreground/80 hover:text-foreground">
@@ -234,6 +229,17 @@ const Index = () => {
           </div>
         </div>
       </header>
+
+      {/* Recovery Roadmap Banner */}
+      <Link to="/roadmap" className="block bg-gradient-to-r from-logo-green/10 via-logo-green/5 to-logo-green/10 border-b border-logo-green/20 hover:from-logo-green/15 hover:via-logo-green/10 hover:to-logo-green/15 transition-all group">
+        <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-2 md:gap-3">
+          <span className="text-lg">🗺️</span>
+          <p className="text-xs md:text-sm font-medium text-foreground">
+            <span className="font-bold text-logo-green">NEW:</span> Take our free 5-minute assessment and get your personalized Recovery Roadmap
+          </p>
+          <ArrowRight className="w-3.5 h-3.5 text-logo-green group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
+        </div>
+      </Link>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden">
