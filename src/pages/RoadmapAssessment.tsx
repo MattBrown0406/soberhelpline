@@ -42,6 +42,7 @@ const questions: Question[] = [
     id: "current_situation",
     question: "Which of these best describes your current situation?",
     options: [
+      "I think something might be wrong but I'm not sure yet",
       "I've confirmed they're using but haven't confronted them yet",
       "We've talked about it but nothing has changed",
       "I've been trying to help but things keep getting worse",
@@ -121,10 +122,20 @@ const RoadmapAssessment = () => {
 
   const getStageAssigned = () => {
     const situation = answers.current_situation as string;
+    if (situation === "I think something might be wrong but I'm not sure yet") {
+      return "suspicion";
+    }
     if (situation === "Things are in crisis right now — I need help immediately") {
       return "crisis";
     }
     return "confirmation";
+  };
+
+  const getRedirectPath = () => {
+    const stage = getStageAssigned();
+    if (stage === "suspicion") return "/roadmap/suspicion";
+    if (stage === "crisis") return "/roadmap/crisis";
+    return "/roadmap/confirmation";
   };
 
   const saveAssessment = async () => {
@@ -163,9 +174,6 @@ const RoadmapAssessment = () => {
     }
   };
 
-  const getRedirectPath = () => {
-    return getStageAssigned() === "crisis" ? "/roadmap/crisis" : "/roadmap/confirmation";
-  };
 
   const handleEmailSubmit = async () => {
     if (!email.trim()) return;

@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import providerHeadshot from "@/assets/provider-headshot.jpg";
 
 const stages = [
-  { emoji: "🔴", name: "Suspicion", desc: "Something is off but I'm not sure", active: false },
+  { emoji: "🔴", name: "Suspicion", desc: "Something is off but I'm not sure", active: true, path: "/roadmap/suspicion" },
   { emoji: "🟠", name: "Confirmation", desc: "I know they're using, I don't know what to do", active: true, path: "/roadmap/assessment" },
   { emoji: "🟡", name: "Crisis", desc: "Things are falling apart right now", active: true, path: "/roadmap/crisis" },
   { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to do something but need help", active: false },
