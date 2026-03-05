@@ -15,7 +15,11 @@ function getNextMonday(): string {
   const daysUntilMonday = day <= 1 ? 1 - day : 8 - day;
   const next = new Date(now);
   next.setDate(now.getDate() + daysUntilMonday);
-  return next.toISOString().split("T")[0];
+  // Use local date parts to avoid UTC shift
+  const yyyy = next.getFullYear();
+  const mm = String(next.getMonth() + 1).padStart(2, '0');
+  const dd = String(next.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 function formatDate(dateStr: string): string {
