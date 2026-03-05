@@ -385,10 +385,12 @@ const RoadmapTreatment = () => {
                     <p className="text-sm text-muted-foreground mb-4">
                       They made it through. The next stage — Early Recovery — is about what happens when they come home. It's harder than treatment in many ways, but you're more prepared than you think.
                     </p>
-                    <Button size="sm" onClick={() => openComingSoon("Early Recovery Stage")}>
-                      Move to Early Recovery Stage
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                    <Link to="/roadmap/early-recovery">
+                      <Button size="sm">
+                        Move to Early Recovery Stage
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
