@@ -121,6 +121,9 @@ const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
 const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
 const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettingWorksheet"));
 const ZoomRecordings = React.lazy(() => import("./pages/ZoomRecordings"));
+const RoadmapLanding = React.lazy(() => import("./pages/RoadmapLanding"));
+const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
+const RoadmapConfirmation = React.lazy(() => import("./pages/RoadmapConfirmation"));
 
 const queryClient = new QueryClient();
 
@@ -302,6 +305,9 @@ const App = () => (
               <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
               <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
               <Route path="/zoom-recordings" element={<ZoomRecordings />} />
+              <Route path="/roadmap" element={<RoadmapLanding />} />
+              <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
+              <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
