@@ -308,14 +308,12 @@ const RoadmapLongTermRecovery = () => {
                         Call for Support
                       </Button>
                     </a>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setShowComingSoon(true)}
-                    >
-                      Go to Relapse Stage
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Button>
+                    <Link to="/roadmap/relapse">
+                      <Button size="sm" variant="outline">
+                        Go to Relapse Stage
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

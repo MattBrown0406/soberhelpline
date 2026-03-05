@@ -13,7 +13,7 @@ const stages = [
   { emoji: "🟣", name: "Treatment", desc: "They're in treatment, now what?", active: true, path: "/roadmap/treatment" },
   { emoji: "🟢", name: "Early Recovery", desc: "They're home — how do we do this?", active: true, path: "/roadmap/early-recovery" },
   { emoji: "⚪", name: "Long-Term Recovery", desc: "It's been 6+ months, how do we rebuild?", active: true, path: "/roadmap/long-term-recovery" },
-  { emoji: "🔴", name: "Relapse", desc: "It happened again", active: false },
+  { emoji: "🔴", name: "Relapse", desc: "It happened again", active: true, path: "/roadmap/relapse" },
 ];
 
 const steps = [
