@@ -248,10 +248,27 @@ const RoadmapEarlyRecovery = () => {
           </CardContent>
         </Card>
 
-        {/* ─── First Week Home ─── */}
+        {/* ─── Aftercare Disclaimer ─── */}
+        <Card className="border-amber-500/30 bg-amber-500/5">
+          <CardContent className="p-6 md:p-8">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-6 h-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-1" />
+              <div>
+                <h2 className="text-lg font-bold text-foreground mb-2">
+                  ⚠️ Important: Follow Your Treatment Team's Aftercare Plan
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  The guidance on this page is designed to support your family — but it does not replace the aftercare recommendations from your loved one's professional treatment team. If the treatment team recommended sober living, IOP (Intensive Outpatient Program), PHP (Partial Hospitalization), continued therapy, or any other step-down level of care — those recommendations should be followed. Treatment professionals build aftercare plans based on clinical assessment and your loved one's specific needs. Skipping recommended levels of care to "just come home" is one of the most common and most costly mistakes families make. Trust the professionals who know your case.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* ─── First Week After Treatment ─── */}
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-            🏠 First Week Home — Immediate Priorities
+            🏠 First Week After Treatment — Immediate Priorities
           </h2>
           <div className="space-y-3">
             {firstWeekItems.map((item) => (
