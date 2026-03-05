@@ -275,10 +275,12 @@ const RoadmapPreIntervention = () => {
                     <p className="text-sm text-muted-foreground mb-4">
                       This is the beginning. Not the end — the beginning. The hard work starts now, for them AND for you. Your next stage is the Treatment Stage — what to do while they're getting help.
                     </p>
-                    <Button size="sm" onClick={() => setShowComingSoon(true)}>
-                      Go to Treatment Stage
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                    <Link to="/roadmap/treatment">
+                      <Button size="sm">
+                        Go to Treatment Stage
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
