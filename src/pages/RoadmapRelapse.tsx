@@ -282,8 +282,8 @@ const RoadmapRelapse = () => {
               <Phone className="w-3.5 h-3.5" /> Poison Control
             </a>
             <span className="text-muted-foreground">|</span>
-            <a href="tel:5038362136" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
-              <Phone className="w-3.5 h-3.5" /> (503) 836-2136
+            <a href="tel:5412419151" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+              <Phone className="w-3.5 h-3.5" /> (541) 241-9151
             </a>
           </CardContent>
         </Card>
@@ -395,7 +395,7 @@ const RoadmapRelapse = () => {
                     </div>
                   )}
                   {path.phone && (
-                    <a href="tel:5038362136">
+                    <a href="tel:5412419151">
                       <Button size="sm" className="w-full">
                         <Phone className="w-4 h-4 mr-1" />
                         Talk to an Interventionist
@@ -447,11 +447,11 @@ const RoadmapRelapse = () => {
                 This is exactly when you need to show up.
               </p>
               <a
-                href="tel:5038362136"
+                href="tel:5412419151"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Freedom Interventions: (503) 836-2136
+                Talk to Someone: (541) 241-9151
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Relapse response is what we do. Call anytime.
@@ -522,10 +522,10 @@ function RelapseCard({
                 )}
 
                 {item.ctaPhone && (
-                  <a href="tel:5038362136">
+                  <a href="tel:5412419151">
                     <Button size="sm" variant="outline">
                       <Phone className="w-4 h-4 mr-1" />
-                      Call: (503) 836-2136
+                      Call: (541) 241-9151
                     </Button>
                   </a>
                 )}

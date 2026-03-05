@@ -302,7 +302,7 @@ const RoadmapLongTermRecovery = () => {
                     Relapse after long-term sobriety is devastating — but it's not back to square one. Everything they've learned, everything you've built, the support networks, the skills — those don't disappear. But you need to act quickly and firmly. Relapse after a long period of sobriety can be more dangerous because tolerance has dropped.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <a href="tel:5038362136">
+                    <a href="tel:5412419151">
                       <Button size="sm" variant="outline">
                         <Phone className="w-4 h-4 mr-1" />
                         Call for Support
@@ -359,11 +359,11 @@ const RoadmapLongTermRecovery = () => {
                 Recovery is a long game. So is support.
               </p>
               <a
-                href="tel:5038362136"
+                href="tel:5412419151"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (503) 836-2136
+                Talk to Someone: (541) 241-9151
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Long-term support. Not just crisis response.
@@ -386,7 +386,7 @@ const RoadmapLongTermRecovery = () => {
             <Button variant="outline" onClick={() => setShowComingSoon(false)}>
               Close
             </Button>
-            <a href="tel:5038362136">
+            <a href="tel:5412419151">
               <Button>
                 <Phone className="w-4 h-4 mr-1" />
                 Call for Guidance
