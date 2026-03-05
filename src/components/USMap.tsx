@@ -141,10 +141,17 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
     const fetchProviderLocations = async () => {
       if (!category) return;
 
-      const { data, error } = await supabase
+      let query = supabase
         .from('provider_submissions_public')
-        .select('id, state, zip_code, city, provider_name')
-        .eq('category', category)
+        .select('id, state, zip_code, city, provider_name');
+
+      if (category === 'Medical Detox') {
+        query = query.or('category.eq.Medical Detox,detox_available.eq.true');
+      } else {
+        query = query.eq('category', category);
+      }
+
+      const { data, error } = await query
         .eq('status', 'approved')
         .not('state', 'is', null);
 
