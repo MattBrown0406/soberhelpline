@@ -232,10 +232,14 @@ const ForProviders = () => {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-12">
-              <Link to="/auth">
-                <Button size="lg" className="bg-logo-green hover:bg-logo-green/90 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-logo-green/25">
-                  Get Started Now — It's Free
+            <div className="text-center mt-16 bg-gradient-to-br from-logo-green/10 to-emerald-50 rounded-2xl p-10 border-2 border-logo-green/20">
+              <h3 className="text-2xl font-bold text-foreground mb-3">Ready to Get Listed?</h3>
+              <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+                Complete our provider application to get your practice verified and in front of families who need your help.
+              </p>
+              <Link to="/provider-application">
+                <Button size="lg" className="bg-logo-green hover:bg-logo-green/90 text-white px-10 py-7 text-xl rounded-xl shadow-lg shadow-logo-green/25">
+                  Start Your Provider Application
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
