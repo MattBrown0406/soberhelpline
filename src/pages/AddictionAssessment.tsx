@@ -193,10 +193,10 @@ const AddictionAssessment = () => {
             <p className="text-muted-foreground mb-6">
               Professional assessment is the next step for intervention and support.
             </p>
-            <a href="tel:5412415886">
+            <a href="tel:5412419151">
               <Button size="lg" className="font-semibold flex items-center gap-2 mx-auto">
                 <Phone className="w-4 h-4" />
-                Call Us: (541) 241-5886
+                Call Us: (541) 241-9151
               </Button>
             </a>
           </div>

@@ -723,9 +723,9 @@ const AIAddictionRealityTranslator = () => {
                       Schedule a Family Consultation
                     </Button>
                   </Link>
-                  <a href="tel:541-241-5886">
+                  <a href="tel:541-241-9151">
                     <Button variant="outline">
-                      Call 541-241-5886
+                      Call 541-241-9151
                     </Button>
                   </a>
                 </div>

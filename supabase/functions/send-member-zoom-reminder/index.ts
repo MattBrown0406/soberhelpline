@@ -142,7 +142,7 @@ serve(async (req: Request) => {
           </div>
 
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-            Thank you for being a Sober Helpline member. If you have any questions, call us at <strong>(541) 241-5886</strong>.
+            Thank you for being a Sober Helpline member. If you have any questions, call us at <strong>(541) 241-9151</strong>.
           </p>
           <p style="color: #6b7280; font-size: 12px;">
             Sober Helpline — Supporting Families Through Recovery
