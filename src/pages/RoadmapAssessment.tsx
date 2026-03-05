@@ -122,9 +122,12 @@ const RoadmapAssessment = () => {
   const saveAssessment = async () => {
     setSaving(true);
     try {
-      const { data, error } = await supabase
+      const newAssessmentId = crypto.randomUUID();
+
+      const { error } = await supabase
         .from("roadmap_assessments")
         .insert({
+          id: newAssessmentId,
           relationship: answers.relationship as string,
           substances: answers.substances as string[],
           duration: answers.duration as string,
@@ -133,12 +136,10 @@ const RoadmapAssessment = () => {
           safety_concerns: answers.safety_concerns as string,
           desired_help: answers.desired_help as string,
           stage_assigned: "confirmation",
-        })
-        .select("id")
-        .single();
+        });
 
       if (error) throw error;
-      setAssessmentId(data.id);
+      setAssessmentId(newAssessmentId);
 
       if (hasSafetyConcern()) {
         setShowCrisis(true);
