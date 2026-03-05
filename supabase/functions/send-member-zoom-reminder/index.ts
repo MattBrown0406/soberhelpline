@@ -45,6 +45,15 @@ serve(async (req: Request) => {
   }
 
   try {
+    // Check for optional flag to include all members (not just active)
+    let includeAllStatuses = false;
+    try {
+      const body = await req.json();
+      includeAllStatuses = body?.include_all_statuses === true;
+    } catch {
+      // No body or invalid JSON — default behavior (active only)
+    }
+
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -69,23 +78,34 @@ serve(async (req: Request) => {
     const siteUrl = "https://soberhelpline.com";
     const joinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
 
-    // Get all active family members (provider_submission_id IS NULL = family membership)
-    const { data: activeSubs, error: subsError } = await adminSupabase
+    // Get family members (provider_submission_id IS NULL = family membership)
+    let subsQuery = adminSupabase
       .from("provider_subscriptions")
       .select("user_id")
-      .eq("status", "active")
       .is("provider_submission_id", null);
+
+    if (!includeAllStatuses) {
+      subsQuery = subsQuery.eq("status", "active");
+    } else {
+      // Include active, cancelled, and expired — exclude pending
+      subsQuery = subsQuery.in("status", ["active", "cancelled", "expired"]);
+    }
+
+    const { data: activeSubs, error: subsError } = await subsQuery;
 
     if (subsError) throw subsError;
 
-    if (!activeSubs || activeSubs.length === 0) {
-      return new Response(JSON.stringify({ message: "No active members found", sent: 0 }), {
+    // Deduplicate by user_id (a user may have multiple subscription records)
+    const uniqueUserIds = [...new Set((activeSubs || []).map((s: any) => s.user_id))];
+
+    if (uniqueUserIds.length === 0) {
+      return new Response(JSON.stringify({ message: "No members found", sent: 0 }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const userIds = activeSubs.map((s: any) => s.user_id);
+    const userIds = uniqueUserIds;
 
     // Get member emails and names from profile_private + profiles
     const { data: privateProfiles } = await adminSupabase
