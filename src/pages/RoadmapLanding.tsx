@@ -128,7 +128,7 @@ const RoadmapLanding = () => {
                   "Built on 20+ years of intervention experience and thousands of families helped."
                 </p>
                 <p className="text-sm font-semibold text-foreground">Matt Brown</p>
-                <p className="text-sm text-muted-foreground">Founder, Sober Helpline &amp; Freedom Interventions</p>
+                <p className="text-sm text-muted-foreground">Founder, Sober Helpline</p>
               </div>
             </CardContent>
           </Card>
