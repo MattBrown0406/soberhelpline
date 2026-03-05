@@ -131,6 +131,9 @@ const RoadmapAssessment = () => {
     if (situation === "Things are in crisis right now — I need help immediately") {
       return "crisis";
     }
+    if (situation === "They're currently in treatment or recently completed treatment") {
+      return "treatment";
+    }
     return "confirmation";
   };
 
@@ -139,6 +142,7 @@ const RoadmapAssessment = () => {
     if (stage === "suspicion") return "/roadmap/suspicion";
     if (stage === "pre-intervention") return "/roadmap/pre-intervention";
     if (stage === "crisis") return "/roadmap/crisis";
+    if (stage === "treatment") return "/roadmap/treatment";
     return "/roadmap/confirmation";
   };
 
