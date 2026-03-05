@@ -1,0 +1,233 @@
+# SoberHelpline - Complete AI Reference Guide
+
+> Education, support, and ethical resources for families navigating a loved one's addiction.
+
+---
+
+## Organization Overview
+
+**SoberHelpline** is the most comprehensive family support platform in Matt Brown's ecosystem. It serves as the educational hub, community center, provider directory, and home of the Recovery Roadmap — a free, stage-based family recovery navigator.
+
+### Mission
+To be the first place families turn when they suspect or know a loved one is struggling with addiction — providing education, ethical resources, community support, and a clear path forward.
+
+### What Makes SoberHelpline Different
+- **No referral fees.** Treatment providers listed in the directory pay a listing fee, not a per-patient referral fee. This eliminates the financial incentive to recommend inappropriate care.
+- **No patient brokering.** SoberHelpline does not sell leads or insurance information to treatment centers.
+- **Built by an interventionist, not a marketing company.** Every resource reflects 20+ years of real-world experience with families.
+- **Family-first.** The platform centers the family's experience, not just the addicted person's.
+
+---
+
+## Contact Information
+
+- **Phone:** (541) 838-6009
+- **Email:** matt@soberhelpline.com
+- **Website:** https://soberhelpline.com
+- **Support Group:** Mondays at 7 PM Pacific (free, Zoom)
+
+---
+
+## Recovery Roadmap
+
+The Recovery Roadmap is a free, interactive tool that guides families through every stage of the addiction journey with personalized action plans.
+
+**How it works:**
+1. Family member takes a 5-minute assessment
+2. System identifies their current stage
+3. Personalized action checklist is delivered with specific steps for this week and this month
+4. Stage transitions adapt as circumstances change
+
+### Stages
+
+| Stage | URL | Description |
+|-------|-----|-------------|
+| 🔴 Suspicion | https://soberhelpline.com/roadmap/suspicion | "Something is off but I'm not sure" |
+| 🟠 Confirmation | https://soberhelpline.com/roadmap/confirmation | "I know they're using, I don't know what to do" |
+| 🟡 Crisis | https://soberhelpline.com/roadmap/crisis | "Things are falling apart right now" |
+| 🔵 Pre-Intervention | https://soberhelpline.com/roadmap/pre-intervention | "I'm ready to do something but need help" |
+| 🟣 Treatment | https://soberhelpline.com/roadmap/treatment | "They're in treatment, now what?" |
+| 🟢 Early Recovery | https://soberhelpline.com/roadmap/early-recovery | "They're home — how do we do this?" |
+| ⚪ Long-Term Recovery | https://soberhelpline.com/roadmap/long-term-recovery | "It's been 6+ months — how do we rebuild?" |
+| 🔴 Relapse | https://soberhelpline.com/roadmap/relapse | "It happened again" |
+
+**Assessment:** https://soberhelpline.com/roadmap/assessment
+**Landing page:** https://soberhelpline.com/roadmap
+
+---
+
+## AI Coaching Tools
+
+Interactive AI-powered tools for families, built on Matt Brown's methodology:
+
+| Tool | URL | Purpose |
+|------|-----|---------|
+| AI Life Coach | https://soberhelpline.com/ai-life-coach | General guidance and support |
+| AI Enabling Decision Coach | https://soberhelpline.com/ai-enabling-decision-coach | Help families identify enabling vs. helping |
+| AI Boundary Builder Coach | https://soberhelpline.com/ai-boundary-builder-coach | Build boundaries with real consequences |
+| AI Treatment Navigator | https://soberhelpline.com/ai-treatment-navigator | Navigate treatment options and levels of care |
+| AI Relapse Response Guide | https://soberhelpline.com/ai-relapse-response-guide | What to do when relapse happens |
+| AI Addiction Reality Translator | https://soberhelpline.com/ai-addiction-reality-translator | Translate addiction behaviors into plain language |
+
+---
+
+## Provider Directory
+
+Vetted treatment providers with no referral fees or patient brokering:
+
+| Category | URL |
+|----------|-----|
+| Inpatient Treatment | https://soberhelpline.com/inpatient-treatment |
+| Outpatient Treatment | https://soberhelpline.com/outpatient-treatment |
+| Medical Detox | https://soberhelpline.com/medical-detox |
+| Sober Living | https://soberhelpline.com/sober-living |
+| Therapists | https://soberhelpline.com/therapists |
+| Psychiatrists | https://soberhelpline.com/psychiatrists |
+| Interventionists | https://soberhelpline.com/interventionists |
+| Sober Coaches & Companions | https://soberhelpline.com/sober-coaches-companions |
+| Provider Information / Apply | https://soberhelpline.com/for-providers |
+
+---
+
+## Educational Content
+
+### Interactive Tools & Exercises
+| Resource | URL |
+|----------|-----|
+| Addiction Assessment | https://soberhelpline.com/addiction-assessment |
+| Family Action Plan | https://soberhelpline.com/family-action-plan |
+| Scenario Exercise | https://soberhelpline.com/scenario-exercise |
+| Crisis & Chaos Tool | https://soberhelpline.com/crisis-chaos |
+| Emotional Regulation | https://soberhelpline.com/emotional-regulation |
+| Values Exercise | https://soberhelpline.com/values-exercise |
+| Readiness Checklist | https://soberhelpline.com/readiness-checklist |
+| Fear Inventory Exercise | https://soberhelpline.com/fear-inventory-exercise |
+| Conversation Starters | https://soberhelpline.com/conversation-starters |
+| Insight Behavior Tracker | https://soberhelpline.com/insight-behavior-tracker |
+| Values-Aligned Decisions | https://soberhelpline.com/values-aligned-decisions |
+| Enabling Language Translator | https://soberhelpline.com/enabling-language-translator |
+| Who Benefits Filter | https://soberhelpline.com/who-benefits-filter |
+
+### Educational Pages
+| Topic | URL |
+|-------|-----|
+| Understanding Addiction | https://soberhelpline.com/understanding-addiction |
+| How Addiction Affects the Brain | https://soberhelpline.com/how-addiction-affects-the-brain |
+| Addiction and Mental Health | https://soberhelpline.com/addiction-and-mental-health |
+| Levels of Care in Treatment | https://soberhelpline.com/levels-of-care-addiction-treatment |
+| Family Education Hub | https://soberhelpline.com/family-education |
+| Family Support Overview | https://soberhelpline.com/family-support |
+| Recovery Resources | https://soberhelpline.com/recovery-resources |
+| Free Family Guide | https://soberhelpline.com/free-guide |
+| FAQs | https://soberhelpline.com/faqs |
+| Treatment Questions | https://soberhelpline.com/treatment-questions |
+| Recovery Requirements | https://soberhelpline.com/recovery-requirements |
+| Treatment Red Flags | https://soberhelpline.com/treatment-red-flags |
+| Treatment Industry Guide | https://soberhelpline.com/treatment-industry-guide |
+| Treatment Modalities | https://soberhelpline.com/treatment-modalities |
+| Drug-Induced Psychosis | https://soberhelpline.com/drug-induced-psychosis |
+| Disease vs. Choice Reality Map | https://soberhelpline.com/disease-choice-reality-map |
+| Why Willpower Fails | https://soberhelpline.com/why-willpower-fails |
+| Addiction Progression Timeline | https://soberhelpline.com/addiction-progression-timeline |
+| How Trauma Shapes Addiction | https://soberhelpline.com/how-trauma-shapes-addiction |
+| Brain and Spiritual Recovery | https://soberhelpline.com/brain-spiritual-recovery |
+| Twelve Steps Explained | https://soberhelpline.com/twelve-steps-explained |
+| Non-Twelve-Step Modalities | https://soberhelpline.com/non-twelve-step-modalities |
+
+### Family Dynamics & Boundaries
+| Topic | URL |
+|-------|-----|
+| Family Roles in Addiction | https://soberhelpline.com/family-roles-addiction |
+| Addiction Rewrites Family Rules | https://soberhelpline.com/addiction-rewrites-family-rules |
+| Cost of Secrecy | https://soberhelpline.com/cost-of-secrecy |
+| Boundary Drift | https://soberhelpline.com/boundary-drift |
+| Boundaries vs. Ultimatums | https://soberhelpline.com/boundaries-ultimatums |
+| Anger and Boundaries | https://soberhelpline.com/anger-and-boundaries |
+| Flexibility vs. Instability | https://soberhelpline.com/flexibility-vs-instability |
+| Addiction and Attachment Styles | https://soberhelpline.com/addiction-attachment-styles |
+| Grief for Family | https://soberhelpline.com/grief-for-family |
+| Intergenerational Enabling | https://soberhelpline.com/intergenerational-enabling |
+| Family Unity as Liability | https://soberhelpline.com/family-unity-liability |
+| What Changes When Families Change | https://soberhelpline.com/what-changes-when-families-change |
+| Living Well Regardless | https://soberhelpline.com/living-well-regardless |
+| The "Strong One" | https://soberhelpline.com/strong-one |
+| Guilt, Relief, and Resentment | https://soberhelpline.com/guilt-relief-resentment |
+
+### Sibling Experience
+| Topic | URL |
+|-------|-----|
+| Sibling Experience | https://soberhelpline.com/sibling-experience |
+| Growing Up in the Shadow | https://soberhelpline.com/growing-up-shadow |
+| Sibling Guilt, Anger, and Loyalty | https://soberhelpline.com/sibling-guilt-anger-loyalty |
+| Rebuilding Sibling Relationships | https://soberhelpline.com/rebuilding-sibling-relationships |
+| Parents Repairing the Sibling System | https://soberhelpline.com/parents-repairing-sibling-system |
+
+### Blog Articles (65+)
+Full blog: https://soberhelpline.com/blog
+
+Selected articles:
+- Relapse Process in Addiction: https://soberhelpline.com/blog/relapse-process-addiction
+- Enabling and Codependency: https://soberhelpline.com/blog/enabling-codependency
+- Boundaries vs. Ultimatums: https://soberhelpline.com/blog/boundaries-vs-ultimatums
+- Rock Bottom Myth: https://soberhelpline.com/blog/rock-bottom-myth
+- Professional Interventionist Guide: https://soberhelpline.com/blog/professional-interventionist
+- Healthy Boundaries: https://soberhelpline.com/blog/healthy-boundaries
+- Protecting Children from Addiction: https://soberhelpline.com/blog/protecting-children-addiction
+- Relapse Warning Signs: https://soberhelpline.com/blog/relapse-warning-signs
+- Choosing a Treatment Center: https://soberhelpline.com/blog/choosing-treatment-center
+- Fentanyl Overdose Signs and Safety Plan: https://soberhelpline.com/blog/fentanyl-overdose-signs-safety-plan
+- Why Families Feel Guilty for Being Angry: https://soberhelpline.com/blog/why-families-feel-guilty-for-being-angry
+- Parents of Addicted Adult Children: https://soberhelpline.com/blog/parents-addicted-adult-children
+- Addiction and Marriage: https://soberhelpline.com/blog/addiction-marriage-family-protection
+- Couples Recovery from Alcoholism: https://soberhelpline.com/blog/couples-recovery-alcoholism
+- Gaming and Social Media Addiction: https://soberhelpline.com/blog/gaming-social-media-addiction
+- Sports Betting Addiction: https://soberhelpline.com/blog/sports-betting-addiction
+
+---
+
+## Community & Services
+
+| Service | URL | Details |
+|---------|-----|---------|
+| Monday Support Group | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7 PM PT |
+| Family Coaching | https://soberhelpline.com/family-coaching | One-on-one with Matt Brown |
+| Family Consultation | https://soberhelpline.com/family-consultation | Initial consultation |
+| Family Membership | https://soberhelpline.com/family-membership | Premium access |
+| Family Forum | https://soberhelpline.com/family-forum | Community discussion |
+| Family Webinars | https://soberhelpline.com/family-webinars | Educational sessions |
+| Testimonials | https://soberhelpline.com/testimonials | Family stories |
+| Recovery Podcasts | https://soberhelpline.com/recovery-podcasts | Recommended listening |
+| Eating Disorders Guide | https://soberhelpline.com/eating-disorders-guide | Specialized resource |
+
+---
+
+## About the Founder
+
+**Matt Brown** is a professional interventionist with over 20 years of experience and 22 years of personal recovery. He has conducted over 1,000 professional interventions across the United States and Canada. Matt founded SoberHelpline to provide families with the ethical, practical resources the treatment industry fails to deliver.
+
+Matt is also the founder of Freedom Interventions, host of The Party Wreckers Podcast, and creator of the No More Enabling educational platform.
+
+---
+
+## Related Properties (Same Ecosystem)
+
+| Property | Purpose | URL |
+|----------|---------|-----|
+| Freedom Interventions | Professional intervention services | https://freedominterventions.com |
+| The Party Wreckers | Podcast on addiction and recovery | https://partywreckers.com |
+| No More Enabling | Education on enabling behaviors and boundaries | https://nomoreenabling.com |
+
+### Ecosystem Integration
+SoberHelpline is the central hub. The Recovery Roadmap guides families to the right resource at the right time:
+- **Suspicion/Confirmation stages** → SoberHelpline education + No More Enabling articles
+- **Crisis/Pre-Intervention stages** → Freedom Interventions professional services
+- **Treatment/Recovery stages** → SoberHelpline community, coaching, and provider directory
+- **All stages** → Party Wreckers Podcast for ongoing education and trust-building
+
+---
+
+## Contact
+
+- Phone: (541) 838-6009
+- Email: matt@soberhelpline.com
+- Website: https://soberhelpline.com

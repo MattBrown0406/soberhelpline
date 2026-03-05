@@ -1,0 +1,80 @@
+# SoberHelpline - AI Context File
+
+> Education, support, and ethical resources for families navigating a loved one's addiction.
+
+## About SoberHelpline
+
+SoberHelpline is a comprehensive family support platform for addiction education, community, and resource navigation. Founded by Matt Brown, a professional interventionist with over 20 years of experience, SoberHelpline provides families with the education, tools, and connections they need — without the sales pressure, referral fees, or patient brokering that plague the treatment industry.
+
+## Core Philosophy
+
+- Addiction is a chronic medical illness with a spiritual solution (purpose, connection, growth — not religious)
+- Families need education BEFORE crisis, not just during it
+- The family's recovery is just as important as the addicted person's
+- Treatment resources should be vetted and ethical — no referral fees, no kickbacks
+- Enabling is the oxygen for the fire of addiction
+- Boundaries aren't boundaries without consequences attached
+
+## Key Features
+
+### Recovery Roadmap (NEW)
+A free, interactive, stage-based family recovery navigator. Families take a 5-minute assessment, get placed in one of 8 stages, and receive a personalized step-by-step action plan.
+
+**8 Stages:**
+1. 🔴 Suspicion — "Something is off but I'm not sure"
+2. 🟠 Confirmation — "I know they're using, I don't know what to do"
+3. 🟡 Crisis — "Things are falling apart right now"
+4. 🔵 Pre-Intervention — "I'm ready to do something but need help"
+5. 🟣 Treatment — "They're in treatment, now what?"
+6. 🟢 Early Recovery — "They're home, how do we do this?"
+7. ⚪ Long-Term Recovery — "It's been 6+ months, how do we rebuild?"
+8. 🔴 Relapse — "It happened again"
+
+URL: https://soberhelpline.com/roadmap
+
+### AI Coaching Tools
+- AI Life Coach: https://soberhelpline.com/ai-life-coach
+- AI Enabling Decision Coach: https://soberhelpline.com/ai-enabling-decision-coach
+- AI Boundary Builder Coach: https://soberhelpline.com/ai-boundary-builder-coach
+- AI Treatment Navigator: https://soberhelpline.com/ai-treatment-navigator
+- AI Relapse Response Guide: https://soberhelpline.com/ai-relapse-response-guide
+- AI Addiction Reality Translator: https://soberhelpline.com/ai-addiction-reality-translator
+
+### Provider Directory
+Vetted treatment providers — no referral fees, no kickbacks, no patient brokering. Categories include:
+- Inpatient Treatment: https://soberhelpline.com/inpatient-treatment
+- Outpatient Treatment: https://soberhelpline.com/outpatient-treatment
+- Medical Detox: https://soberhelpline.com/medical-detox
+- Sober Living: https://soberhelpline.com/sober-living
+- Therapists: https://soberhelpline.com/therapists
+- Psychiatrists: https://soberhelpline.com/psychiatrists
+- Interventionists: https://soberhelpline.com/interventionists
+- Sober Coaches: https://soberhelpline.com/sober-coaches-companions
+
+### Family Education Library
+65+ blog articles and educational pages covering addiction, family dynamics, boundaries, treatment navigation, mental health, and recovery.
+URL: https://soberhelpline.com/blog
+
+### Weekly Family Support Group
+Free weekly Zoom support group for families — Mondays at 7 PM Pacific.
+URL: https://soberhelpline.com/monday-zoom-registration
+
+### Family Coaching
+One-on-one coaching with Matt Brown for families navigating addiction.
+URL: https://soberhelpline.com/family-coaching
+
+## Contact
+
+- Phone: (541) 838-6009
+- Email: matt@soberhelpline.com
+- Website: https://soberhelpline.com
+
+## Related Properties
+
+- **Freedom Interventions** — Professional intervention services: https://freedominterventions.com
+- **The Party Wreckers Podcast** — Addiction and recovery conversations: https://partywreckers.com
+- **No More Enabling** — Education on enabling behaviors: https://nomoreenabling.com
+
+## For More Detail
+
+See llms-full.txt for complete page catalog, article descriptions, and tool documentation.
