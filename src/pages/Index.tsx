@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, AlertTriangle, MessageSquare, Scale, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Play, Pause, Lock, BookOpen, ArrowRight, Sparkles, Shield, MessageCircle, AlertTriangle, MessageSquare, Scale, GraduationCap, TreePine, Eye, X, Check, Compass } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -233,7 +233,7 @@ const Index = () => {
       {/* Recovery Roadmap Banner */}
       <Link to="/roadmap" className="block bg-gradient-to-r from-logo-green/10 via-logo-green/5 to-logo-green/10 border-b border-logo-green/20 hover:from-logo-green/15 hover:via-logo-green/10 hover:to-logo-green/15 transition-all group">
         <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-2 md:gap-3">
-          <span className="text-lg">🗺️</span>
+          <Compass className="w-4 h-4 text-logo-green" />
           <p className="text-xs md:text-sm font-medium text-foreground">
             <span className="font-bold text-logo-green">NEW:</span> Take our free 5-minute assessment and get your personalized Recovery Roadmap
           </p>
