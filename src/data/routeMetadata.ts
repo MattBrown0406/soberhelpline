@@ -50,11 +50,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/addiction-assessment': {
     title: 'Free Addiction Assessment for Families | Sober Helpline',
-    description: 'Take our free, confidential addiction assessment to understand what you\'re dealing with and get personalized guidance for your family\'s next steps.',
+    description: 'Take our free, confidential addiction assessment to understand your situation and get personalized guidance for your family\'s next steps.',
   },
   '/family-coaching': {
     title: 'Family Addiction Coaching — 1-on-1 Support | Sober Helpline',
-    description: 'Work directly with an experienced addiction professional. Family coaching helps you set boundaries, reduce enabling, and navigate recovery.',
+    description: 'Work directly with an experienced addiction professional. Family coaching helps you set boundaries, reduce enabling, and navigate recovery with confidence.',
   },
   '/family-consultation': {
     title: 'Free Family Consultation — Talk to an Expert | Sober Helpline',
@@ -66,15 +66,15 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/family-education': {
     title: 'Addiction Education for Families | Sober Helpline',
-    description: 'Learn what addiction really is, how it affects families, and what you can do about it. Evidence-based education designed for families, not clinicians.',
+    description: 'Learn what addiction really is, how it affects families, and what you can do. Evidence-based education designed for families, not clinicians.',
   },
   '/family-membership': {
     title: 'Family Membership — Premium Support & Tools | Sober Helpline',
-    description: 'Get access to premium family resources, coaching sessions, exclusive content, and community support. Invest in your family\'s recovery journey.',
+    description: 'Premium family resources, coaching sessions, exclusive content, and community support. Invest in your family\'s recovery journey.',
   },
   '/family-webinars': {
     title: 'Free Family Webinars on Addiction & Recovery | Sober Helpline',
-    description: 'Join live and recorded webinars covering boundaries, enabling, treatment navigation, and family recovery. Free for all families.',
+    description: 'Live and recorded webinars on boundaries, enabling, treatment navigation, and family recovery. Free for all families.',
   },
   '/family-forum': {
     title: 'Family Support Forum — Connect with Families | Sober Helpline',
@@ -98,7 +98,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/testimonials': {
     title: 'Family Success Stories & Testimonials | Sober Helpline',
-    description: 'Real stories from families who found their way through addiction. See how education, boundaries, and the right support changed everything.',
+    description: 'Real stories from families who navigated addiction and found their way. See how education, boundaries, and the right support changed everything.',
   },
   '/for-providers': {
     title: 'For Treatment Providers — Partner with Us | Sober Helpline',
@@ -114,15 +114,15 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/monday-zoom-registration': {
     title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
-    description: 'Join our free weekly family support group every Monday at 7 PM PT. Connect with other families, get guidance, and feel less alone.',
+    description: 'Free weekly family support group every Monday at 7 PM PT. Connect with other families, get guidance, and feel less alone.',
   },
   '/conversation-starters': {
     title: 'How to Talk About Addiction with a Loved One | Sober Helpline',
-    description: 'Conversation starters for the hardest talk you\'ll ever have. Approach your loved one about addiction with compassion and clarity.',
+    description: 'Conversation starters for the hardest talk you\'ll ever have. How to approach your loved one about addiction with compassion and clarity.',
   },
   '/fear-inventory-exercise': {
     title: 'Fear Inventory Exercise for Families | Sober Helpline',
-    description: 'Identify and work through the fears that keep you stuck. This exercise helps families move from paralysis to action.',
+    description: 'Identify the fears that keep you stuck. This exercise helps families move from paralysis to action in dealing with addiction.',
   },
   '/boundaries-ultimatums': {
     title: 'Boundaries vs. Ultimatums — Know the Difference | Sober Helpline',
@@ -130,7 +130,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/communication-guide': {
     title: 'Addiction Communication Guide for Families | Sober Helpline',
-    description: 'How to communicate effectively with an addicted loved one. Stop the arguments, reduce the chaos, and start conversations that matter.',
+    description: 'How to communicate with an addicted loved one. Stop the arguments, reduce the chaos, and start conversations that matter.',
   },
   '/enabling-language-translator': {
     title: 'Enabling Language Translator — AI Tool | Sober Helpline',
@@ -142,7 +142,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/ai-enabling-decision-coach': {
     title: 'Am I Enabling? — AI Decision Coach | Sober Helpline',
-    description: 'Describe your situation and our AI will help you determine if you\'re enabling, helping, or somewhere in between.',
+    description: 'Describe your situation and our AI will help you determine if you\'re enabling, helping, or somewhere in between. Free tool.',
   },
   '/ai-addiction-reality-translator': {
     title: 'Addiction Reality Translator — AI Tool | Sober Helpline',
@@ -150,11 +150,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/ai-treatment-navigator': {
     title: 'AI Treatment Navigator — Find the Right Care | Sober Helpline',
-    description: 'Answer a few questions and our AI will help you understand what level of care your loved one might need.',
+    description: 'Answer a few questions and our AI will help you understand what level of care your loved one might need. Free, confidential.',
   },
   '/ai-relapse-response-guide': {
     title: 'Relapse Response Guide — AI Support Tool | Sober Helpline',
-    description: 'Your loved one relapsed. Now what? Our AI guide walks you through immediate steps and boundary enforcement.',
+    description: 'Your loved one relapsed. Now what? Our AI guide walks you through immediate steps, boundaries, and what to do next.',
   },
   '/ai-life-coach': {
     title: 'AI Life Coach for Families of Addicts | Sober Helpline',
@@ -162,19 +162,19 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/medical-detox': {
     title: 'Medical Detox — What Families Need to Know | Sober Helpline',
-    description: 'What is medical detox? How long does it take? What to expect. A family-focused guide to the first step of addiction treatment.',
+    description: 'What is medical detox? How long does it take? A family-focused guide to the first step of addiction treatment.',
   },
   '/inpatient-treatment': {
     title: 'Inpatient Treatment — Family Guide | Sober Helpline',
-    description: 'Everything families need to know about inpatient addiction treatment: what it is, how long it lasts, what to look for, and what to avoid.',
+    description: 'Everything families need to know about inpatient addiction treatment: what it is, how long it lasts, and what to look for.',
   },
   '/outpatient-treatment': {
     title: 'Outpatient Treatment Programs — Family Guide | Sober Helpline',
-    description: 'Understand outpatient addiction treatment options: IOP, PHP, and standard outpatient. When it\'s appropriate and what families should know.',
+    description: 'Outpatient addiction treatment options explained: IOP, PHP, and standard outpatient. When it\'s appropriate and what families should know.',
   },
   '/sober-living': {
     title: 'Sober Living Homes — What Families Should Know | Sober Helpline',
-    description: 'A family guide to sober living: what it is, how it works, what to look for, and why it\'s often a critical step in recovery.',
+    description: 'A family guide to sober living homes: what they are, how they work, and why they\'re often critical between treatment and independence.',
   },
   '/levels-of-care-addiction-treatment': {
     title: 'Levels of Care in Addiction Treatment | Sober Helpline',
@@ -206,7 +206,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/family-roles-addiction': {
     title: 'Family Roles in Addiction — Who Plays What Part | Sober Helpline',
-    description: 'The hero, the scapegoat, the lost child, the mascot. Understand the dysfunctional roles families adopt around addiction.',
+    description: 'The hero, the scapegoat, the lost child, the mascot. Understand the roles families adopt around addiction and how to break free.',
   },
   '/sibling-experience': {
     title: 'The Sibling Experience — Growing Up with Addiction | Sober Helpline',
@@ -222,7 +222,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/cost-of-secrecy': {
     title: 'The Cost of Secrecy in Addiction | Sober Helpline',
-    description: 'Family secrets don\'t protect anyone — they protect the addiction. Understanding why secrecy is dangerous and how to break the cycle.',
+    description: 'Family secrets don\'t protect anyone — they protect the addiction. Why secrecy is dangerous and how to break the cycle.',
   },
   '/guilt-relief-resentment': {
     title: 'Guilt, Relief & Resentment in Addiction | Sober Helpline',
@@ -494,8 +494,9 @@ export function getRouteMetadata(pathname: string): RouteMetadata {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  const topic = formattedTitle || 'Addiction Recovery';
   return {
     title: formattedTitle ? `${formattedTitle} | Sober Helpline` : 'Sober Helpline',
-    description: 'Free addiction education and family support resources. Helping families navigate addiction with confidence. Visit Sober Helpline.',
+    description: `Learn about ${topic} — free family addiction support and education at Sober Helpline.`,
   };
 }

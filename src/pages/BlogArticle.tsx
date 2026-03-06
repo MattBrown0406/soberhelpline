@@ -129,15 +129,25 @@ const BlogArticle = () => {
 
   const fullImageUrl = `https://soberhelpline.com${post.image}`;
   const canonicalUrl = (post as any).slug 
-    ? `https://soberhelpline.com/blog/${(post as any).slug}`
+    ? `https://soberhelpline.com/${(post as any).slug}`
     : `https://soberhelpline.com/blog/${post.id}`;
+
+  // Build SEO title with brand suffix
+  const baseSeoTitle = (post as any).seoTitle || post.title;
+  const seoTitle = (() => {
+    const suffix = ' | Sober Helpline';
+    if (baseSeoTitle.includes('Sober Helpline')) return baseSeoTitle;
+    const maxLen = 60 - suffix.length;
+    return baseSeoTitle.length > maxLen ? `${baseSeoTitle.substring(0, maxLen - 3)}...${suffix}` : `${baseSeoTitle}${suffix}`;
+  })();
+  const seoDescription = (post as any).metaDescription || post.excerpt;
   
   // JSON-LD Article Schema with AEO speakable support
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
-    "description": (post as any).metaDescription || post.excerpt,
+    "description": seoDescription,
     "image": fullImageUrl,
     "author": {
       "@type": "Person",
@@ -147,10 +157,7 @@ const BlogArticle = () => {
     "publisher": {
       "@type": "Organization",
       "name": "Sober Helpline",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://soberhelpline.com/og-image.png"
-      }
+      "url": "https://soberhelpline.com"
     },
     "datePublished": post.date,
     "dateModified": post.date,
@@ -170,20 +177,22 @@ const BlogArticle = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{(post as any).seoTitle || post.title}</title>
-        <meta name="description" content={(post as any).metaDescription || post.excerpt} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:title" content={(post as any).seoTitle || post.title} />
-        <meta property="og:description" content={(post as any).metaDescription || post.excerpt} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
         <meta property="og:image" content={fullImageUrl} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Sober Helpline" />
         <meta property="article:published_time" content={post.date} />
         <meta property="article:author" content={post.author} />
         <meta property="article:section" content={post.category} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={(post as any).seoTitle || post.title} />
-        <meta name="twitter:description" content={(post as any).metaDescription || post.excerpt} />
+        <meta name="twitter:site" content="@SoberHelpline" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
         <meta name="twitter:image" content={fullImageUrl} />
         <script type="application/ld+json">
           {JSON.stringify(articleSchema)}

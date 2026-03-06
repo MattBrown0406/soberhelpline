@@ -13,6 +13,7 @@ export default function DefaultSEO() {
   const { pathname } = useLocation();
   const { title, description } = getRouteMetadata(pathname);
   const canonicalUrl = `${BASE_URL}${pathname === '/' ? '' : pathname}`;
+  const ogType = pathname.startsWith('/blog/') ? 'article' : 'website';
 
   return (
     <Helmet defaultTitle="Sober Helpline" prioritizeSeoTags>
@@ -21,7 +22,7 @@ export default function DefaultSEO() {
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
