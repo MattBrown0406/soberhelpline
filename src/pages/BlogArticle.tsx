@@ -20,9 +20,14 @@ const BlogArticle = () => {
   
   // Check for slug-based route first, then fall back to id-based
   const currentPath = window.location.pathname;
-  const post = blogPosts.find(p => 
-    (p as any).slug && `/${(p as any).slug}` === currentPath
-  ) || blogPosts.find(p => p.id.toString() === id);
+  const post = blogPosts.find(p => {
+    const slug = (p as any).slug;
+    if (slug) {
+      // Match both /blog/slug and /slug patterns
+      if (currentPath === `/${slug}` || currentPath === `/blog/${slug}`) return true;
+    }
+    return false;
+  }) || (id ? blogPosts.find(p => p.id?.toString() === id) : undefined);
 
   useEffect(() => {
     if (!post) {
