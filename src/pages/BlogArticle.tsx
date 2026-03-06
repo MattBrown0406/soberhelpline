@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -13,33 +13,53 @@ const BASE_URL = "https://soberhelpline.com";
 
 const BlogArticle = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const { setOverridden } = useSEOOverride();
-  
+
   // Generate a slug from a title for fallback matching
-  const generateSlug = (title: string) => 
+  const generateSlug = (title: string) =>
     title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-  // Match by explicit slug, generated slug from title, or numeric id
-  const currentPath = window.location.pathname;
-  const post = blogPosts.find(p => {
-    const slug = (p as any).slug;
-    const titleSlug = generateSlug(p.title || '');
-    // Match against route param
-    if (id && (id === slug || id === titleSlug)) return true;
-    // Match against full path patterns (for top-level slug routes)
-    if (slug && (currentPath === `/${slug}` || currentPath === `/blog/${slug}`)) return true;
-    if (titleSlug && (currentPath === `/${titleSlug}` || currentPath === `/blog/${titleSlug}`)) return true;
-    return false;
-  }) || (id ? blogPosts.find(p => p.id?.toString() === id) : undefined);
+  // Derive a short slug from image filename (e.g. blog-rock-bottom-myth.png)
+  const getImageSlug = (image?: string) => {
+    if (!image) return '';
+    const fileName = image.split('/').pop()?.toLowerCase() || '';
+    const noExt = fileName.replace(/\.[a-z0-9]+$/i, '');
+    if (!noExt.startsWith('blog-')) return '';
 
-  useEffect(() => {
-    if (!post) {
-      navigate('/blog');
+    const segments = noExt.replace(/^blog-/, '').split('-');
+    const lastSegment = segments[segments.length - 1];
+
+    // Strip Vite hash-like suffixes only when they contain digits (e.g. -a1b2c3d4)
+    if (lastSegment && lastSegment.length >= 8 && /\d/.test(lastSegment)) {
+      segments.pop();
     }
-  }, [post, navigate]);
+
+    return segments.join('-');
+  };
+
+  // Match by explicit slug, title slug, image slug, or numeric id
+  const currentPath = window.location.pathname;
+  const normalizedRouteParam = (id || '').toLowerCase();
+  const pathSlug = currentPath.replace(/^\/blog\//, '').replace(/^\//, '').toLowerCase();
+  const post = blogPosts.find((p) => {
+    const slug = ((p as any).slug || '').toLowerCase();
+    const titleSlug = generateSlug(p.title || '');
+    const imageSlug = getImageSlug(p.image);
+    const imagePath = (p.image || '').toLowerCase();
+
+    const candidates = [slug, titleSlug, imageSlug].filter(Boolean);
+
+    if (normalizedRouteParam && candidates.includes(normalizedRouteParam)) return true;
+    if (pathSlug && candidates.includes(pathSlug)) return true;
+    if (normalizedRouteParam && imagePath.includes(`blog-${normalizedRouteParam}`)) return true;
+    if (pathSlug && imagePath.includes(`blog-${pathSlug}`)) return true;
+
+    if (candidates.some((candidate) => currentPath === `/${candidate}` || currentPath === `/blog/${candidate}`)) return true;
+
+    return false;
+  }) || (id ? blogPosts.find((p) => p.id != null && p.id.toString() === id) : undefined);
 
   // Direct DOM manipulation for SEO — bypasses react-helmet-async override issues
   // Tell DefaultSEO to skip — BlogArticle manages its own SEO
@@ -51,8 +71,9 @@ const BlogArticle = () => {
   useEffect(() => {
     if (!post) return;
 
-    const postSlug = (post as any).slug || `blog/${id || post.id}`;
-    const canonicalUrl = `${BASE_URL}/${postSlug}`;
+    const fallbackSlug = generateSlug(post.title || '') || id || post.id?.toString() || '';
+    const postSlug = (post as any).slug || getImageSlug(post.image) || fallbackSlug;
+    const canonicalUrl = `${BASE_URL}/blog/${postSlug}`;
     const seoDescription = (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
     const fullImageUrl = post.image?.startsWith('http') ? post.image : `${BASE_URL}${post.image}`;
 
@@ -152,7 +173,18 @@ const BlogArticle = () => {
     };
   }, [post]);
 
-  if (!post) return null;
+  if (!post) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-10">
+          <article className="max-w-3xl mx-auto">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Post not found</h1>
+            <p className="text-muted-foreground">We couldn’t find this article.</p>
+          </article>
+        </div>
+      </div>
+    );
+  }
 
   const copyLink = async () => {
     const url = window.location.href;
