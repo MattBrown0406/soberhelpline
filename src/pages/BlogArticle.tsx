@@ -18,14 +18,20 @@ const BlogArticle = () => {
   const [linkCopied, setLinkCopied] = useState(false);
   const { setOverridden } = useSEOOverride();
   
-  // Check for slug-based route first, then fall back to id-based
+  // Generate a slug from a title for fallback matching
+  const generateSlug = (title: string) => 
+    title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  // Match by explicit slug, generated slug from title, or numeric id
   const currentPath = window.location.pathname;
   const post = blogPosts.find(p => {
     const slug = (p as any).slug;
-    if (slug) {
-      // Match both /blog/slug and /slug patterns
-      if (currentPath === `/${slug}` || currentPath === `/blog/${slug}`) return true;
-    }
+    const titleSlug = generateSlug(p.title || '');
+    // Match against route param
+    if (id && (id === slug || id === titleSlug)) return true;
+    // Match against full path patterns (for top-level slug routes)
+    if (slug && (currentPath === `/${slug}` || currentPath === `/blog/${slug}`)) return true;
+    if (titleSlug && (currentPath === `/${titleSlug}` || currentPath === `/blog/${titleSlug}`)) return true;
     return false;
   }) || (id ? blogPosts.find(p => p.id?.toString() === id) : undefined);
 
@@ -45,8 +51,8 @@ const BlogArticle = () => {
   useEffect(() => {
     if (!post) return;
 
-    const slug = (post as any).slug || `blog/${post.id}`;
-    const canonicalUrl = `${BASE_URL}/${slug}`;
+    const postSlug = (post as any).slug || `blog/${id || post.id}`;
+    const canonicalUrl = `${BASE_URL}/${postSlug}`;
     const seoDescription = (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
     const fullImageUrl = post.image?.startsWith('http') ? post.image : `${BASE_URL}${post.image}`;
 
