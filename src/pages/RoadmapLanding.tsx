@@ -26,8 +26,20 @@ const RoadmapLanding = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Recovery Roadmap — Family Recovery Guide | Sober Helpline"
-        description="A stage-based family recovery navigator with real steps, not just advice. Find where you are and get your personalized roadmap."
+        title="Recovery Roadmap — 8-Stage Family Guide | Sober Helpline"
+        description="Find your stage in the family recovery journey. From first suspicion to long-term recovery — personalized guidance, resources, and support at every step."
+        howToName="Recovery Roadmap — 8-Stage Family Recovery Guide"
+        howToDescription="Navigate your family's recovery journey through 8 stages, from first suspicion to long-term recovery."
+        howToSteps={[
+          { name: "Suspicion", text: "You sense something is wrong but aren't sure. Learn the signs and what to look for." },
+          { name: "Confirmation", text: "You know there's a problem. Learn what to do next — and what NOT to do." },
+          { name: "Crisis", text: "Emergency situations require immediate action. Know what to do right now." },
+          { name: "Pre-Intervention", text: "You're ready to take action. Prepare yourself and your family for the conversation." },
+          { name: "Treatment", text: "Your loved one is in treatment. What families should do during this critical time." },
+          { name: "Early Recovery", text: "The first year of recovery. How families can support without enabling." },
+          { name: "Long-Term Recovery", text: "Building a sustainable new normal for the whole family." },
+          { name: "Relapse", text: "When relapse happens, respond with boundaries, compassion, and a clear plan forward." },
+        ]}
       />
 
       {/* Hero */}

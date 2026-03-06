@@ -140,9 +140,9 @@ const BlogArticle = () => {
     "description": (post as any).metaDescription || post.excerpt,
     "image": fullImageUrl,
     "author": {
-      "@type": "Organization",
+      "@type": "Person",
       "name": post.author,
-      "url": "https://soberhelpline.com"
+      "url": "https://freedominterventions.com/interventionist"
     },
     "publisher": {
       "@type": "Organization",
