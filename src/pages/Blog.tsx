@@ -92,12 +92,137 @@ import attachmentStylesAddictionImg from "@/assets/blog-attachment-styles-addict
 import shameAddictionSecrecyImg from "@/assets/blog-shame-addiction-secrecy.png";
 import healingCircleFamilySupportImg from "@/assets/blog-healing-circle-family-support.png";
 import crossAddictionSubstitutionImg from "@/assets/blog-cross-addiction-substitution.png";
+import addictionSignsLovedOneImg from "@/assets/blog-addiction-signs-loved-one.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts = [
+  {
+    id: 91,
+    title: "12 Signs of Addiction in a Loved One — And What to Do Next",
+    excerpt: "Something feels off. Maybe it's the unexplained absences, the money disappearing, or the personality shifts. This guide breaks down the 12 most common signs of addiction in a loved one and offers clear next steps for families.",
+    author: "Sober Helpline",
+    date: "2025-03-06",
+    category: "Family Support",
+    image: addictionSignsLovedOneImg,
+    slug: "addiction-signs-loved-one",
+    seoTitle: "12 Signs of Addiction in a Loved One — What to Do Next",
+    metaDescription: "Recognize the 12 most common signs of addiction in a loved one. Learn what each sign means and get clear next steps for families who want to help.",
+    keywords: ["signs of addiction", "addiction warning signs", "how to tell if someone is addicted", "addiction in a loved one", "family addiction support", "recognizing substance abuse", "what to do if loved one is addicted"],
+    content: `Something feels off. Maybe it's the unexplained absences. The money disappearing without explanation. The personality shifts that seem to come out of nowhere. You're not sure if you're overreacting — but you can't shake the feeling that the person you love is struggling with something serious.
+
+You may be witnessing the early or middle stages of addiction, and recognizing it is one of the most important steps you can take.
+
+"The sooner a family recognizes the signs of addiction, the sooner a loved one can access life-changing treatment. Early identification isn't intrusive — it's an act of love."
+
+This guide breaks down the 12 most common signs of addiction in a loved one, explains why each matters, and offers clear next steps for families who want to help.
+
+**Why Recognizing the Signs Early Matters**
+
+Addiction rarely announces itself. It typically begins quietly — with recreational use that gradually becomes compulsive, or with prescribed medication taken in ways it wasn't intended. By the time the signs become obvious, the condition may already be significantly entrenched.
+
+Research from the National Institute on Drug Abuse (NIDA) shows that the earlier someone enters treatment, the better their long-term outcomes. Families who recognize the warning signs — even imperfectly — can be the catalyst that connects a loved one to help before the consequences become more severe.
+
+**12 Signs of Addiction to Watch For**
+
+Not every person with a substance use disorder will show all of these signs. But patterns matter — and the more signs you recognize, the more important it becomes to act.
+
+**1. Increasing Secrecy and Withdrawal**
+
+A loved one who was once open and social begins pulling away. They are vague about where they've been, who they were with, or how they spent money. Secretiveness is one of the earliest behavioral signals of substance use disorder — people in active addiction often go to great lengths to hide their use out of shame or fear of consequences.
+
+**2. Noticeable Mood or Personality Changes**
+
+Unexpected irritability, anxiety, euphoria, or emotional flatness — especially in cycles — can signal that substances are affecting brain chemistry. You may notice your loved one seems like a different person than they were even six months ago.
+
+**3. Neglecting Responsibilities**
+
+Missing work, skipping school, falling behind on bills, or losing interest in obligations they previously took seriously are common signs that substance use has begun to take priority over everyday life.
+
+**4. Financial Problems Without Clear Explanation**
+
+Addiction is expensive. Unexplained financial difficulties — borrowing money frequently, items going missing from the home, or a sudden inability to cover basic expenses — can point to significant spending on substances.
+
+**5. Changes in Physical Appearance**
+
+Rapid weight loss or gain, bloodshot eyes, poor hygiene, unusual smells on breath or clothing, or unexplained marks on the skin can all be physical indicators of substance use disorder. These changes often appear gradually, which is why photos from 12–18 months ago can sometimes make them easier to notice.
+
+**6. New Social Circle and Disappearing Friends**
+
+A person in active addiction may abandon long-term friendships and replace them with a new social group — one that may also be engaged in substance use. They may become defensive or evasive when asked about new friends.
+
+**7. Loss of Interest in Hobbies and Activities**
+
+When a loved one who once loved hiking, painting, cooking, or reading suddenly loses all interest in those activities, it can indicate that their brain's reward system has been significantly altered by substance use — making previously enjoyable activities feel dull or pointless.
+
+**8. Unusual Sleep Patterns**
+
+Sleeping far more than usual, being awake for extended periods, or having a dramatically shifted sleep schedule (sleeping all day, awake all night) are common signs associated with various forms of substance use, including stimulants, opioids, and alcohol.
+
+**9. Increased Risk-Taking Behavior**
+
+Driving under the influence, engaging in unsafe sexual behavior, stealing, or taking other risks they previously would not have considered can indicate impaired judgment associated with active addiction.
+
+**10. Defensiveness When Substance Use Is Mentioned**
+
+If a simple, caring question — "Have you been drinking more lately?" — triggers an outsized angry or dismissive reaction, that defensiveness itself can be telling. People in active addiction are often acutely aware, on some level, that their use has become problematic.
+
+**11. Signs of Withdrawal When Not Using**
+
+Shaking hands, sweating, nausea, extreme irritability, or flu-like symptoms that appear when your loved one hasn't used a substance can indicate physical dependence — a hallmark of addiction. Withdrawal is a medical issue and should be taken seriously.
+
+**12. Continuing to Use Despite Clear Negative Consequences**
+
+Perhaps the most defining sign of addiction: the inability to stop using even when the consequences — job loss, relationship damage, health problems, legal issues — are clear and significant. This is not a character flaw. It reflects the neurological reality that addiction fundamentally alters the brain's decision-making circuitry.
+
+**What to Do If You Recognize These Signs**
+
+Recognizing the signs is the first step. Here's how to move forward with care and effectiveness:
+
+Educate yourself first. Understanding addiction as a medical condition — not a moral failure — will help you approach your loved one with compassion rather than blame.
+
+Choose the right moment. Conversations about addiction are most effective when your loved one is sober, calm, and not in crisis. Avoid confrontations when either of you is emotionally flooded.
+
+Use "I" statements. "I've noticed you seem different lately and I'm worried" lands very differently than "You have a problem."
+
+Consider professional guidance. A licensed interventionist or addiction counselor can help you plan and facilitate a conversation that is more likely to lead to treatment.
+
+Get support for yourself. Al-Anon, Nar-Anon, and SMART Recovery Family & Friends offer community and guidance for family members — regardless of whether your loved one has accepted help yet.
+
+"You cannot force someone into recovery. But you can create conditions that make choosing recovery more likely — and you can take care of yourself in the process."
+
+**Frequently Asked Questions**
+
+**What is the most common sign of addiction?**
+
+Continuing to use a substance despite clear and significant negative consequences is widely considered the defining feature of addiction. Other common early signs include secrecy, mood changes, and neglecting responsibilities.
+
+**Can someone have an addiction without showing obvious physical signs?**
+
+Yes. Many people — particularly in the early and middle stages of addiction — do not show dramatic physical signs. Behavioral and emotional changes are often more telling than physical appearance alone.
+
+**What should I do if my loved one denies having a problem?**
+
+Denial is extremely common in addiction. It does not mean you are wrong in your concern, and it doesn't mean recovery is impossible. Focus on setting healthy boundaries, seeking support for yourself, and keeping the lines of communication open. A professional interventionist can also be a valuable resource.
+
+**You Are Not Alone in This**
+
+Loving someone with addiction is one of the most difficult experiences a family can face. But you don't have to navigate it without support, without information, or without hope.
+
+Recognizing the signs is not a betrayal of your loved one — it is the beginning of helping them. The road to recovery often starts with someone who cared enough to notice.
+
+**Resources & Support**
+
+SAMHSA National Helpline: 1-800-662-4357 (free, confidential, 24/7)
+
+Al-Anon Family Groups: [LINK:al-anon.org:https://al-anon.org]
+
+Nar-Anon Family Groups: [LINK:nar-anon.org:https://www.nar-anon.org]
+
+Crisis Text Line: Text HOME to 741741`
+  },
   {
     id: 90,
     title: "Understanding Cross-Addiction: Why One Substance Often Replaces Another",
