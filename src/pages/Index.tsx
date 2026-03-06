@@ -125,8 +125,8 @@ const Index = () => {
     <>
       <LeadMagnetPopup />
       <SEOHead
-        title="Sober Helpline - Find Addiction Recovery Help"
-        description="Connect with ethical addiction treatment providers. Free family support resources, vetted rehabs, interventionists, and recovery coaches nationwide."
+        title="Family Addiction Support & Education | Sober Helpline"
+        description="Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, AI tools, coaching, and a community that understands."
         jsonLd={homepageSchema}
         faqItems={homepageFaqItems}
         speakableSelectors={["h1", ".hero-description", ".mission-statement"]}

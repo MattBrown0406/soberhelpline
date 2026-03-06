@@ -20,8 +20,21 @@ export default function FamilyCoaching() {
   return (
     <>
       <SEOHead
-        title="Family Coaching & Readiness Assessment | Sober Helpline"
-        description="Take the Family Readiness Assessment to understand where your family is in the parallel recovery journey. Book a coaching session for personalized guidance."
+        title="Family Addiction Coaching — 1-on-1 Support | Sober Helpline"
+        description="Work directly with an experienced addiction professional. Family coaching helps you set boundaries, reduce enabling, and navigate recovery with confidence."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Family Addiction Coaching",
+          "provider": {
+            "@type": "Organization",
+            "name": "Sober Helpline",
+            "url": "https://soberhelpline.com"
+          },
+          "serviceType": "Coaching",
+          "description": "1-on-1 family coaching to help you set boundaries, reduce enabling, and navigate your loved one's addiction with confidence.",
+          "url": "https://soberhelpline.com/family-coaching"
+        }}
       />
       <div className="min-h-screen bg-background">
 

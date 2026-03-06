@@ -27,6 +27,20 @@ const AddictionAssessment = () => {
   useGuideTracking("Addiction Assessment", "/addiction-assessment");
   const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
 
+  const assessmentSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Addiction Assessment for Families",
+    "url": "https://soberhelpline.com/addiction-assessment",
+    "applicationCategory": "HealthApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Free, confidential addiction assessment to help families understand their situation and find the right next steps."
+  };
+
   const handleCheckChange = (index: number, checked: boolean) => {
     const newCheckedItems = [...checkedItems];
     newCheckedItems[index] = checked;
@@ -89,8 +103,9 @@ const AddictionAssessment = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Addiction Assessment Tool | Sober Helpline"
-        description="Use our free addiction assessment tool to evaluate if your loved one may be struggling with substance use disorder. Get personalized care level recommendations."
+        title="Free Addiction Assessment for Families | Sober Helpline"
+        description="Take our free, confidential addiction assessment to understand what you're dealing with and get personalized guidance for your family's next steps."
+        jsonLd={assessmentSchema}
         faqItems={faqItems}
         howToSteps={howToSteps}
         howToName="How to Assess if Someone Has a Substance Use Disorder"
