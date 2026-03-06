@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useSEOOverride } from "@/contexts/SEOOverrideContext";
 
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import { blogPosts, imageMap } from "./Blog";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+
+const BASE_URL = "https://soberhelpline.com";
 
 const BlogArticle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const { setOverridden } = useSEOOverride();
   
   // Check for slug-based route first, then fall back to id-based
   const currentPath = window.location.pathname;
@@ -26,6 +29,117 @@ const BlogArticle = () => {
       navigate('/blog');
     }
   }, [post, navigate]);
+
+  // Direct DOM manipulation for SEO — bypasses react-helmet-async override issues
+  // Tell DefaultSEO to skip — BlogArticle manages its own SEO
+  useEffect(() => {
+    setOverridden(true);
+    return () => setOverridden(false);
+  }, [setOverridden]);
+
+  useEffect(() => {
+    if (!post) return;
+
+    const slug = (post as any).slug || `blog/${post.id}`;
+    const canonicalUrl = `${BASE_URL}/${slug}`;
+    const seoDescription = (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
+    const fullImageUrl = post.image?.startsWith('http') ? post.image : `${BASE_URL}${post.image}`;
+
+    // Build truncated title
+    const suffix = ' | Sober Helpline';
+    const baseSeoTitle = (post as any).seoTitle || post.title;
+    const maxLen = 60 - suffix.length;
+    const seoTitle = baseSeoTitle.includes('Sober Helpline')
+      ? baseSeoTitle
+      : baseSeoTitle.length > maxLen
+        ? `${baseSeoTitle.substring(0, maxLen - 3)}...${suffix}`
+        : `${baseSeoTitle}${suffix}`;
+
+    // 1. Title
+    document.title = seoTitle;
+
+    // Helper: set or create a meta tag
+    const setMeta = (attr: string, key: string, content: string) => {
+      let el = document.querySelector(`meta[${attr}="${key}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    // 2. Meta description
+    setMeta('name', 'description', seoDescription);
+
+    // 3. Canonical
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', canonicalUrl);
+
+    // 4. OG tags
+    setMeta('property', 'og:title', seoTitle);
+    setMeta('property', 'og:description', seoDescription);
+    setMeta('property', 'og:url', canonicalUrl);
+    setMeta('property', 'og:type', 'article');
+    setMeta('property', 'og:image', fullImageUrl);
+    setMeta('property', 'og:site_name', 'Sober Helpline');
+    setMeta('property', 'article:published_time', post.date);
+    setMeta('property', 'article:author', post.author);
+    setMeta('property', 'article:section', post.category);
+
+    // 5. Twitter tags
+    setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:site', '@SoberHelpline');
+    setMeta('name', 'twitter:title', seoTitle);
+    setMeta('name', 'twitter:description', seoDescription);
+    setMeta('name', 'twitter:image', fullImageUrl);
+
+    // 6. Article JSON-LD schema
+    const existingArticleSchema = document.querySelector('script[data-schema="article"]');
+    if (existingArticleSchema) existingArticleSchema.remove();
+
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.setAttribute('data-schema', 'article');
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.title,
+      "description": seoDescription,
+      "image": fullImageUrl,
+      "author": {
+        "@type": "Person",
+        "name": post.author,
+        "url": "https://freedominterventions.com/interventionist"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sober Helpline",
+        "url": "https://soberhelpline.com"
+      },
+      "datePublished": post.date,
+      "dateModified": post.date,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalUrl
+      },
+      "articleSection": post.category,
+      "isAccessibleForFree": true,
+      "keywords": (post as any).keywords || [post.category, "addiction recovery", "family support"]
+    });
+    document.head.appendChild(schema);
+
+    // Cleanup on unmount
+    return () => {
+      const articleSchema = document.querySelector('script[data-schema="article"]');
+      if (articleSchema) articleSchema.remove();
+    };
+  }, [post]);
 
   if (!post) return null;
 
@@ -127,78 +241,8 @@ const BlogArticle = () => {
     });
   };
 
-  const fullImageUrl = `https://soberhelpline.com${post.image}`;
-  const canonicalUrl = (post as any).slug 
-    ? `https://soberhelpline.com/${(post as any).slug}`
-    : `https://soberhelpline.com/blog/${post.id}`;
-
-  // Build SEO title with brand suffix
-  const baseSeoTitle = (post as any).seoTitle || post.title;
-  const seoTitle = (() => {
-    const suffix = ' | Sober Helpline';
-    if (baseSeoTitle.includes('Sober Helpline')) return baseSeoTitle;
-    const maxLen = 60 - suffix.length;
-    return baseSeoTitle.length > maxLen ? `${baseSeoTitle.substring(0, maxLen - 3)}...${suffix}` : `${baseSeoTitle}${suffix}`;
-  })();
-  const seoDescription = (post as any).metaDescription || post.excerpt;
-  
-  // JSON-LD Article Schema with AEO speakable support
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": post.title,
-    "description": seoDescription,
-    "image": fullImageUrl,
-    "author": {
-      "@type": "Person",
-      "name": post.author,
-      "url": "https://freedominterventions.com/interventionist"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Sober Helpline",
-      "url": "https://soberhelpline.com"
-    },
-    "datePublished": post.date,
-    "dateModified": post.date,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalUrl
-    },
-    "articleSection": post.category,
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": ["article h1", "article h2", "article p:first-of-type", ".article-summary"]
-    },
-    "isAccessibleForFree": true,
-    "keywords": (post as any).keywords || [post.category, "addiction recovery", "family support"]
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDescription} />
-        <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDescription} />
-        <meta property="og:image" content={fullImageUrl} />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Sober Helpline" />
-        <meta property="article:published_time" content={post.date} />
-        <meta property="article:author" content={post.author} />
-        <meta property="article:section" content={post.category} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@SoberHelpline" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={fullImageUrl} />
-        <script type="application/ld+json">
-          {JSON.stringify(articleSchema)}
-        </script>
-      </Helmet>
-
       <div className="container mx-auto px-4 py-6 sm:py-8">
 
         {/* Article */}

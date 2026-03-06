@@ -7,6 +7,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import { getBreadcrumbs } from "@/data/breadcrumbMap";
 import { useNativeBackButton } from "@/hooks/useNativeBackButton";
 import DefaultSEO from "./DefaultSEO";
+import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
 
 interface LayoutProps {
@@ -28,6 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
   const breadcrumbs = getBreadcrumbs(pathname);
 
   return (
+    <SEOOverrideProvider>
     <div className="min-h-screen flex flex-col">
       <DefaultSEO />
       {/* Skip to main content - visually hidden until focused */}
@@ -87,6 +89,7 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <Footer />
     </div>
+    </SEOOverrideProvider>
   );
 };
 
