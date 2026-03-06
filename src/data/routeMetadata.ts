@@ -50,11 +50,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/addiction-assessment': {
     title: 'Free Addiction Assessment for Families | Sober Helpline',
-    description: 'Take our free, confidential addiction assessment to understand your situation and get personalized guidance for your family\'s next steps.',
+    description: 'Free, confidential addiction assessment to understand your situation and get personalized guidance for your family\'s next steps.',
   },
   '/family-coaching': {
     title: 'Family Addiction Coaching — 1-on-1 Support | Sober Helpline',
-    description: 'Work directly with an experienced addiction professional. Family coaching helps you set boundaries, reduce enabling, and navigate recovery with confidence.',
+    description: 'Work directly with an experienced addiction professional. Boundaries, enabling, communication — 1-on-1 coaching for families.',
   },
   '/family-consultation': {
     title: 'Free Family Consultation — Talk to an Expert | Sober Helpline',
@@ -62,11 +62,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/family-support': {
     title: 'Family Support Resources for Addiction | Sober Helpline',
-    description: 'Support resources for families dealing with a loved one\'s addiction. Education, community, coaching, and tools to help you take healthy action.',
+    description: 'Support resources for families dealing with a loved one\'s addiction. Education, community, coaching, and tools to help you take action.',
   },
   '/family-education': {
     title: 'Addiction Education for Families | Sober Helpline',
-    description: 'Learn what addiction really is, how it affects families, and what you can do. Evidence-based education designed for families, not clinicians.',
+    description: 'Learn what addiction really is, how it affects families, and what you can do. Evidence-based education designed for families.',
   },
   '/family-membership': {
     title: 'Family Membership — Premium Support & Tools | Sober Helpline',
@@ -86,7 +86,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/understanding-addiction': {
     title: 'Understanding Addiction — A Family Guide | Sober Helpline',
-    description: 'Addiction isn\'t a choice or a moral failure. Learn what addiction really is, how it changes the brain, and what families need to know.',
+    description: 'Addiction isn\'t a choice or a moral failure. Learn what it really is, how it changes the brain, and what families need to know.',
   },
   '/how-addiction-affects-the-brain': {
     title: 'How Addiction Affects the Brain | Sober Helpline',
@@ -94,7 +94,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/faqs': {
     title: 'Addiction & Recovery FAQs for Families | Sober Helpline',
-    description: 'Answers to common questions families have about addiction, intervention, treatment, recovery, and how to help a loved one who is struggling.',
+    description: 'Answers to common questions families have about addiction, intervention, treatment, recovery, and how to help a loved one.',
   },
   '/testimonials': {
     title: 'Family Success Stories & Testimonials | Sober Helpline',
@@ -102,7 +102,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/for-providers': {
     title: 'For Treatment Providers — Partner with Us | Sober Helpline',
-    description: 'Join our vetted provider directory. We connect ethical treatment providers with families who need help. No referral fees — just quality care.',
+    description: 'Join our vetted provider directory. Ethical treatment providers connecting with families who need help. No referral fees.',
   },
   '/interventionists': {
     title: 'Find a Professional Interventionist | Sober Helpline',
@@ -110,7 +110,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/recovery-resources': {
     title: 'Addiction Recovery Resources for Families | Sober Helpline',
-    description: 'Comprehensive recovery resources: treatment guides, support tools, boundary exercises, and more. Everything a family needs in one place.',
+    description: 'Comprehensive recovery resources: treatment guides, support tools, boundary exercises, and more — all in one place.',
   },
   '/monday-zoom-registration': {
     title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
@@ -118,7 +118,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/conversation-starters': {
     title: 'How to Talk About Addiction with a Loved One | Sober Helpline',
-    description: 'Conversation starters for the hardest talk you\'ll ever have. How to approach your loved one about addiction with compassion and clarity.',
+    description: 'Conversation starters for the hardest talk about addiction. Approach your loved one with compassion and clarity.',
   },
   '/fear-inventory-exercise': {
     title: 'Fear Inventory Exercise for Families | Sober Helpline',
@@ -126,7 +126,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/boundaries-ultimatums': {
     title: 'Boundaries vs. Ultimatums — Know the Difference | Sober Helpline',
-    description: 'Boundaries protect you. Ultimatums try to control them. Learn the critical difference and how to set boundaries that work.',
+    description: 'Boundaries protect you. Ultimatums try to control them. Learn the difference and how to set boundaries that work.',
   },
   '/communication-guide': {
     title: 'Addiction Communication Guide for Families | Sober Helpline',
@@ -138,11 +138,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/ai-boundary-builder-coach': {
     title: 'AI Boundary Builder — Free Coaching Tool | Sober Helpline',
-    description: 'Build personalized boundaries for your specific situation. Our AI coach helps you create boundaries with real consequences.',
+    description: 'Build personalized boundaries for your specific situation. Free AI coaching tool for families dealing with addiction.',
   },
   '/ai-enabling-decision-coach': {
     title: 'Am I Enabling? — AI Decision Coach | Sober Helpline',
-    description: 'Describe your situation and our AI will help you determine if you\'re enabling, helping, or somewhere in between. Free tool.',
+    description: 'Are you enabling? Describe your situation and find out. Free AI tool for families of addicted loved ones.',
   },
   '/ai-addiction-reality-translator': {
     title: 'Addiction Reality Translator — AI Tool | Sober Helpline',
@@ -150,11 +150,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/ai-treatment-navigator': {
     title: 'AI Treatment Navigator — Find the Right Care | Sober Helpline',
-    description: 'Answer a few questions and our AI will help you understand what level of care your loved one might need. Free, confidential.',
+    description: 'Find the right level of care for your loved one. Free AI treatment navigator — no personal info required.',
   },
   '/ai-relapse-response-guide': {
     title: 'Relapse Response Guide — AI Support Tool | Sober Helpline',
-    description: 'Your loved one relapsed. Now what? Our AI guide walks you through immediate steps, boundaries, and what to do next.',
+    description: 'Your loved one relapsed. Our AI guide walks you through what to do right now — boundaries, safety, and next steps.',
   },
   '/ai-life-coach': {
     title: 'AI Life Coach for Families of Addicts | Sober Helpline',
@@ -166,7 +166,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/inpatient-treatment': {
     title: 'Inpatient Treatment — Family Guide | Sober Helpline',
-    description: 'Everything families need to know about inpatient addiction treatment: what it is, how long it lasts, and what to look for.',
+    description: 'Everything families need to know about inpatient addiction treatment: what it is, how long, and what to look for.',
   },
   '/outpatient-treatment': {
     title: 'Outpatient Treatment Programs — Family Guide | Sober Helpline',
@@ -186,7 +186,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/treatment-red-flags': {
     title: 'Treatment Center Red Flags — What to Watch For | Sober Helpline',
-    description: 'How to spot unethical treatment centers. Red flags every family should know before choosing an addiction treatment provider.',
+    description: 'Red flags every family should know before choosing an addiction treatment center. Protect your family from bad actors.',
   },
   '/treatment-questions': {
     title: 'Questions to Ask a Treatment Center | Sober Helpline',

@@ -16,7 +16,7 @@ export default function DefaultSEO() {
   const ogType = pathname.startsWith('/blog/') ? 'article' : 'website';
 
   return (
-    <Helmet defaultTitle="Sober Helpline" prioritizeSeoTags>
+    <Helmet defaultTitle="Sober Helpline">
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
