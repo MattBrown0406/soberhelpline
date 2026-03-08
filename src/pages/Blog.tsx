@@ -99,6 +99,7 @@ export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
+export const blogPosts: any[] = [
   {
     id: 92,
     title: "How to Help a Family Member with Addiction (Without Enabling)",
