@@ -219,6 +219,7 @@ const App = () => (
               <Route path="/addiction-anxiety-family-burnout" element={<BlogArticle />} />
               <Route path="/tms-depression-addiction-recovery" element={<BlogArticle />} />
               <Route path="/addiction-marriage-family-protection" element={<BlogArticle />} />
+              <Route path="/help-family-member-addiction" element={<BlogArticle />} />
               <Route path="/addiction-assessment" element={<AddictionAssessment />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/family-support" element={<FamilySupport />} />
