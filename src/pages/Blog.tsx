@@ -8996,6 +8996,7 @@ Sobriety is not about perfection. It is about consistency, accountability, and g
   },
   {
     id: 30,
+    slug: "enabling-codependency",
     title: "When Help Hurts: How Enabling and Codependency Sustain Addiction—and What Families Can Do Instead",
     excerpt: "Families coping with addiction often find themselves trapped in a painful paradox: the more they try to help, the worse the situation becomes. This dynamic is not a failure of love or intelligence—it is the predictable outcome of enabling and codependency.",
     author: "Sober Helpline",
