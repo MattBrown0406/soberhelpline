@@ -8763,6 +8763,7 @@ You don't have to choose between loving them and protecting yourself. You can do
   },
   {
     id: 33,
+    slug: "treating-whole-person-recovery",
     title: "Why Sobriety Alone Is Not Enough — The Importance of Treating the Whole Person in Recovery",
     excerpt: "For many families, the goal of addiction treatment seems straightforward: get their loved one to stop using drugs or alcohol. While abstinence is a critical first step, sobriety alone is rarely enough to produce lasting recovery.",
     author: "Sober Helpline",
@@ -8827,6 +8828,7 @@ When sobriety is paired with emotional growth, self-awareness, and family healin
   },
   {
     id: 32,
+    slug: "sober-helpline-first-step-family-guidance",
     title: "When Sobriety Feels Out of Reach: How a Sober Helpline Can Be the First Step Toward Real Recovery",
     excerpt: "For families living with addiction, there is often a moment when everything feels urgent and overwhelming at once. A loved one may be spiraling, refusing help, or facing consequences that can no longer be ignored.",
     author: "Sober Helpline",
@@ -8994,6 +8996,7 @@ Sobriety is not about perfection. It is about consistency, accountability, and g
   },
   {
     id: 30,
+    slug: "enabling-codependency",
     title: "When Help Hurts: How Enabling and Codependency Sustain Addiction—and What Families Can Do Instead",
     excerpt: "Families coping with addiction often find themselves trapped in a painful paradox: the more they try to help, the worse the situation becomes. This dynamic is not a failure of love or intelligence—it is the predictable outcome of enabling and codependency.",
     author: "Sober Helpline",
@@ -9969,6 +9972,7 @@ Understanding these criteria helps families and friends recognize when someone m
   },
   {
     id: 2,
+    slug: "aa-meetings",
     title: "The Lifeline After Treatment: Why AA Meetings Matter Most Once Rehab Ends",
     excerpt: "Completing inpatient treatment is an enormous accomplishment, but the transition back to everyday life brings new challenges. Discover why AA meetings become the single most consistent support system in lifelong recovery.",
     author: "Sober Helpline Team",
