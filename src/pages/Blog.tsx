@@ -8828,6 +8828,7 @@ When sobriety is paired with emotional growth, self-awareness, and family healin
   },
   {
     id: 32,
+    slug: "sober-helpline-first-step-family-guidance",
     title: "When Sobriety Feels Out of Reach: How a Sober Helpline Can Be the First Step Toward Real Recovery",
     excerpt: "For families living with addiction, there is often a moment when everything feels urgent and overwhelming at once. A loved one may be spiraling, refusing help, or facing consequences that can no longer be ignored.",
     author: "Sober Helpline",
