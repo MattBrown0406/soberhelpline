@@ -1,0 +1,1 @@
+UPDATE public.zoom_meeting_registrations SET meeting_date = '2026-03-09' WHERE id = '73f1f2de-91e3-44ed-919c-979e9d6d47f0';
