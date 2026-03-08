@@ -8763,6 +8763,7 @@ You don't have to choose between loving them and protecting yourself. You can do
   },
   {
     id: 33,
+    slug: "treating-whole-person-recovery",
     title: "Why Sobriety Alone Is Not Enough — The Importance of Treating the Whole Person in Recovery",
     excerpt: "For many families, the goal of addiction treatment seems straightforward: get their loved one to stop using drugs or alcohol. While abstinence is a critical first step, sobriety alone is rarely enough to produce lasting recovery.",
     author: "Sober Helpline",
