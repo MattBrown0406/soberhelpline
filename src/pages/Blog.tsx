@@ -9972,6 +9972,7 @@ Understanding these criteria helps families and friends recognize when someone m
   },
   {
     id: 2,
+    slug: "aa-meetings",
     title: "The Lifeline After Treatment: Why AA Meetings Matter Most Once Rehab Ends",
     excerpt: "Completing inpatient treatment is an enormous accomplishment, but the transition back to everyday life brings new challenges. Discover why AA meetings become the single most consistent support system in lifelong recovery.",
     author: "Sober Helpline Team",
