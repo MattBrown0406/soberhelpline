@@ -102,6 +102,86 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 93,
+    title: "Sober Helpline: Free, Confidential Support Available 24/7",
+    excerpt: "If you or someone you love is struggling with addiction, you don't have to figure it out alone. A sober helpline is one of the most immediate and accessible resources available — a phone call or chat that connects you with a trained counselor who can listen without judgment.",
+    author: "Sober Helpline",
+    date: "2026-03-09",
+    category: "Getting Help",
+    image: soberHelplineFreeSupport,
+    slug: "sober-helpline-free-confidential-support",
+    seoTitle: "Sober Helpline: Free, Confidential Addiction Support 24/7",
+    metaDescription: "Call the Sober Helpline for free, confidential addiction support available 24/7. Trained counselors help with substance use, treatment referrals, and family guidance.",
+    keywords: ["sober helpline", "addiction helpline", "free addiction support", "drug and alcohol helpline", "substance abuse hotline", "24/7 addiction help", "confidential addiction support"],
+    content: `If you or someone you love is struggling with addiction, you don't have to figure it out alone. A sober helpline is one of the most immediate and accessible resources available — a phone call or chat that connects you with a trained counselor who can listen without judgment, answer your questions, and help you find the right path forward. At SoberHelpline.com, our goal is simple: make it easier for anyone dealing with substance use disorder to get real help, right now. Whether you're not sure if your drinking has become a problem, you're watching a family member spiral, or you're ready to enter treatment today, we're here.
+
+**What Is a Sober Helpline?**
+
+A sober helpline — also called an addiction helpline, drug and alcohol helpline, or substance abuse hotline — is a dedicated phone line or chat service staffed by counselors trained in substance use disorder. Callers can access support any time of day or night, completely free of charge and in total confidence.
+
+Helplines are not the same as emergency services or crisis lines, though they may connect you with those resources if needed. They exist specifically to provide compassionate, non-judgmental listening; accurate information about addiction and treatment options; help navigating insurance, rehab, and recovery resources; support for family members of people struggling with addiction; and guidance through the first steps toward sobriety.
+
+**Who Should Call a Sober Helpline?**
+
+There is no threshold you need to reach before you deserve support. You don't have to hit rock bottom. You don't have to be in crisis. If substances are causing problems in your life — or in the life of someone you care about — that's reason enough to reach out.
+
+People Who Are Questioning Their Use: Maybe you've started to notice that drinking or drug use is affecting your sleep, your work, or your relationships. Maybe you've tried to cut back and found it harder than you expected. A counselor can help you get an honest picture of where you are and what options are available.
+
+People Ready to Start Treatment: If you've made the decision to get sober and want help finding a detox center, rehab program, or outpatient treatment, we can help you navigate those options — including understanding insurance coverage, what to expect in treatment, and how to take the first step today.
+
+Family Members and Loved Ones: Addiction affects the whole family. If you're watching someone you love struggle, a sober helpline can help you understand what you're dealing with, learn how to set healthy boundaries, and find out how to encourage your loved one toward treatment — without enabling their use or burning yourself out in the process.
+
+People in Early Recovery: Recovery doesn't end when treatment does. If you're newly sober and struggling — craving, lonely, anxious, or unsure what to do next — reaching out to a helpline can provide grounding support and connect you with ongoing community resources.
+
+**What Happens When You Call a Sober Helpline?**
+
+Many people hesitate to call because they don't know what to expect. Here's what a typical call looks like:
+
+First, a trained counselor will answer — a real person, not a recording. They'll ask a few gentle questions to understand your situation: what you're using, how long it's been going on, what you're hoping to find. You're never required to share more than you're comfortable with.
+
+From there, the conversation goes where you need it to. Some callers want to talk through their feelings. Others want specific referrals to local treatment programs. Some are calling on behalf of a loved one and need guidance on how to approach a difficult conversation.
+
+Whatever you need, there's no script, no pressure, and no judgment. Calls are confidential. We will never share your information without your consent.
+
+**Is Calling a Helpline Enough to Get Sober?**
+
+A helpline is a starting point, not a complete treatment program. Addiction — formally called Substance Use Disorder (SUD) — is a chronic condition that affects brain chemistry and behavior. Most people with moderate to severe addiction benefit from structured treatment, which may include medically supervised detox, inpatient or outpatient rehabilitation, and ongoing support like therapy or peer recovery groups.
+
+That said, the phone call matters enormously. Research shows that early engagement with support — even just one conversation — increases the likelihood that someone will follow through on treatment. Simply making the call is a meaningful act of self-advocacy, and counselors are experienced at helping callers take that next step.
+
+**Types of Addiction Help Available Through a Helpline**
+
+When you call SoberHelpline.com, counselors can connect you with a wide range of treatment and recovery resources, including medical detox programs for safe withdrawal from alcohol, opioids, benzodiazepines, and other substances; inpatient rehab providing intensive, structured care; outpatient programs (IOP/PHP) you can attend while living at home; Medication-Assisted Treatment (MAT) using FDA-approved medications like buprenorphine or naltrexone; sober living homes for supportive housing during early recovery; 12-step and non-12-step support groups including AA, NA, SMART Recovery, and others; mental health co-occurring treatment for addiction alongside anxiety, depression, trauma, or other conditions; and family support programs including Al-Anon, Nar-Anon, and family therapy.
+
+**How to Know What Kind of Help Is Right for You**
+
+Addiction treatment is not one-size-fits-all. The right level of care depends on several factors: the substance involved, the severity of use, co-occurring mental health conditions, your home environment, your work or family responsibilities, and your treatment history.
+
+Counselors on our helpline are trained to help you understand these factors and identify what level and type of care is the best fit for your situation. You don't need to come in with all the answers. You just need to make the call.
+
+**Frequently Asked Questions**
+
+Is the sober helpline really free? Yes. Calling SoberHelpline.com costs nothing. There is no charge to speak with a counselor, receive referrals, or access information about treatment options.
+
+Is my call confidential? Absolutely. Your call is completely confidential. We do not share your information with employers, family members, or any third parties without your explicit consent. The only exception would be if there is an imminent risk of harm to yourself or others.
+
+What if I'm not ready for rehab — can I still call? Yes. You don't have to be ready to commit to treatment to call. Many people call simply to talk through their situation, understand their options, or figure out how to help a loved one. Wherever you are in your journey, there's no wrong time to reach out.
+
+Can a family member call on behalf of someone with addiction? Yes. Family members, friends, and concerned loved ones call helplines regularly. Counselors can help you understand how to approach your loved one, how to set healthy limits, how to stage an intervention, and how to care for your own wellbeing while supporting someone in addiction.
+
+What if I've tried treatment before and relapsed? Relapse is a common part of the recovery process — not a sign of failure. The National Institute on Drug Abuse estimates that 40 to 60 percent of people in recovery experience at least one relapse. Counselors understand this, and there's no judgment. They can help you reassess your treatment plan and find a stronger path forward.
+
+Do you help with all types of substance use? Yes. Our counselors are trained to assist with all forms of substance use disorder, including alcohol, opioids (heroin, prescription painkillers), stimulants (meth, cocaine), benzodiazepines, marijuana, and more. We also provide support for people dealing with multiple substances.
+
+**You Deserve Support — Right Now**
+
+Asking for help is not weakness. It is, in fact, one of the most courageous things a person can do. Addiction is a medical condition — not a character flaw, not a choice, and not something you should have to navigate on your own.
+
+Whether you're taking the first step, navigating a relapse, supporting a loved one, or just trying to understand what's happening, SoberHelpline.com is here. Free. Confidential. Available right now.
+
+Make the call. You're not alone in this.`
+  },
+  {
     id: 92,
     title: "How to Help a Family Member with Addiction (Without Enabling)",
     excerpt: "If you've found yourself searching for how to help a family member with addiction, you're already doing something important: you're looking for answers instead of looking away. This guide walks you through practical steps families can take right now.",
