@@ -94,6 +94,7 @@ import healingCircleFamilySupportImg from "@/assets/blog-healing-circle-family-s
 import crossAddictionSubstitutionImg from "@/assets/blog-cross-addiction-substitution.png";
 import addictionSignsLovedOneImg from "@/assets/blog-addiction-signs-loved-one.png";
 import helpFamilyMemberAddictionImg from "@/assets/blog-help-family-member-addiction.png";
+import soberHelplineFreeSupport from "@/assets/blog-sober-helpline-free-support.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
