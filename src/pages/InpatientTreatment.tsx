@@ -582,7 +582,7 @@ const InpatientTreatment = () => {
             "@type": "Organization",
             "name": "Sober Helpline",
             "url": "https://soberhelpline.com",
-            "telephone": "+1-541-241-9151"
+            "telephone": "+1-541-241-5886"
           }
         }}
       />
