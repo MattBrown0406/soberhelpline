@@ -124,9 +124,9 @@ const ForProviders = () => {
               <span className="font-semibold text-lg hidden sm:inline">Sober Helpline</span>
             </Link>
             <div className="flex items-center gap-4">
-              <a href="tel:5412419151" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+              <a href="tel:5412415886" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
                 <Phone className="w-4 h-4" />
-                <span className="hidden sm:inline">(541) 241-9151</span>
+                <span className="hidden sm:inline">(541) 241-5886</span>
               </a>
               <Link to="/auth">
                 <Button variant="outline">Provider Login</Button>
