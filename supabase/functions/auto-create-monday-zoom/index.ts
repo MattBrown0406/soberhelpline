@@ -39,27 +39,30 @@ async function getZoomAccessToken(): Promise<string> {
 }
 
 function getNextMondayAt7pmPST(): string {
+  // Calculate current time in PST/PDT (America/Los_Angeles)
   const now = new Date();
-  const day = now.getUTCDay();
+  const pstString = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+  const pstNow = new Date(pstString);
   
+  const day = pstNow.getDay(); // 0=Sun, 1=Mon, ...
+  
+  // Always schedule for NEXT Monday (at least 1 day ahead, never today)
   let daysUntilMonday: number;
-  if (day === 1) {
-    daysUntilMonday = 0;
-  } else if (day === 0) {
-    daysUntilMonday = 1;
+  if (day === 0) {
+    daysUntilMonday = 1; // Sunday → tomorrow
   } else {
+    // Mon(1)→7, Tue(2)→6, Wed(3)→5, Thu(4)→4, Fri(5)→3, Sat(6)→2
     daysUntilMonday = 8 - day;
   }
   
-  const nextMonday = new Date(now);
-  nextMonday.setUTCDate(now.getUTCDate() + daysUntilMonday);
+  const nextMonday = new Date(pstNow);
+  nextMonday.setDate(pstNow.getDate() + daysUntilMonday);
   
-  // Return as local time string for the timezone specified in the Zoom API call
-  const year = nextMonday.getUTCFullYear();
-  const month = String(nextMonday.getUTCMonth() + 1).padStart(2, '0');
-  const date = String(nextMonday.getUTCDate()).padStart(2, '0');
+  const year = nextMonday.getFullYear();
+  const month = String(nextMonday.getMonth() + 1).padStart(2, '0');
+  const date = String(nextMonday.getDate()).padStart(2, '0');
   
-  // 7:00 PM local time (America/Los_Angeles) — Zoom will interpret this in the meeting timezone
+  // 7:00 PM PST — Zoom interprets this in the meeting timezone (America/Los_Angeles)
   return `${year}-${month}-${date}T19:00:00`;
 }
 
