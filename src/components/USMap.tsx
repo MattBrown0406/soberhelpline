@@ -134,7 +134,7 @@ const USMap = ({ onStateClick, selectedState, category }: USMapProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [providerLocations, setProviderLocations] = useState<ProviderLocation[]>([]);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Fetch provider locations when category changes
   useEffect(() => {
