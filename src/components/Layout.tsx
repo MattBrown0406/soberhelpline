@@ -73,11 +73,11 @@ const Layout = ({ children }: LayoutProps) => {
               <SiteSearch />
               {/* Phone number */}
               <a
-                href="tel:541-241-9151"
+                href="tel:5412415886"
                 className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
               >
               <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">(541) 241-9151</span>
+              <span className="hidden sm:inline">(541) 241-5886</span>
               </a>
             </div>
           </div>
