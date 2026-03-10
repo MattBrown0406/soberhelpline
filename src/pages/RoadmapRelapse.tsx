@@ -291,8 +291,8 @@ const RoadmapRelapse = () => {
               <Phone className="w-3.5 h-3.5" /> Poison Control
             </a>
             <span className="text-muted-foreground">|</span>
-            <a href="tel:5412419151" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
-              <Phone className="w-3.5 h-3.5" /> (541) 241-9151
+            <a href="tel:5412415886" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+              <Phone className="w-3.5 h-3.5" /> (541) 241-5886
             </a>
           </CardContent>
         </Card>
