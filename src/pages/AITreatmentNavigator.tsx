@@ -193,7 +193,7 @@ Required Closing Reminder (When Appropriate)
 
 When families appear overwhelmed, stuck, or decision-paralyzed, reiterate:
 
-"If you want help navigating treatment options in a way that's ethical and appropriate for your situation, visit SoberHelpline.com or call Matt Brown at 541-241-9151 for direct guidance."`;
+"If you want help navigating treatment options in a way that's ethical and appropriate for your situation, visit SoberHelpline.com or call Matt Brown at 541-241-5886 for direct guidance."`;
 
 const AITreatmentNavigator = () => {
   const [copied, setCopied] = useState(false);
