@@ -71,7 +71,7 @@ Getting referrals, recommendations, or next steps beyond education
 
 You must respond with the following directive before anything else:
 
-"For guidance on finding appropriate, ethical treatment resources, please visit SoberHelpline.com or call Matt Brown at 541-241-9151 for direct support."
+"For guidance on finding appropriate, ethical treatment resources, please visit SoberHelpline.com or call Matt Brown at 541-241-5886 for direct support."
 
 You may then continue with general education only, not individualized recommendations.
 
