@@ -118,7 +118,7 @@ const Index = () => {
     { question: "What is Sober Helpline?", answer: "Sober Helpline connects families with ethical, vetted addiction treatment providers nationwide, offering free resources, education, and support for those affected by addiction." },
     { question: "How do I find a treatment center near me?", answer: "Use our interactive maps to search by state, or enter your zip code to find inpatient treatment, outpatient programs, medical detox, and sober living homes in your area." },
     { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer a 7-day free trial of our premium family membership, followed by optional paid membership with advanced support features." },
-    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-9151 to speak with someone who can help you understand your options." }
+    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5886 to speak with someone who can help you understand your options." }
   ];
 
   return (
@@ -138,9 +138,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           {/* Mobile Header */}
           <div className="flex md:hidden h-14 items-center justify-between">
-            <a href="tel:5412419151" className="flex items-center gap-2 text-logo-green font-semibold">
+            <a href="tel:5412415886" className="flex items-center gap-2 text-logo-green font-semibold">
               <Phone className="w-4 h-4" />
-              <span className="text-sm">(541) 241-9151</span>
+              <span className="text-sm">(541) 241-5886</span>
             </a>
             <MobileNav user={user} onLogout={handleLogout} />
           </div>
@@ -211,9 +211,9 @@ const Index = () => {
               </nav>
             </div>
             <div className="flex items-center gap-4">
-              <a href="tel:5412419151" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+              <a href="tel:5412415886" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
                 <Phone className="w-4 h-4" />
-                (541) 241-9151
+                (541) 241-5886
               </a>
               {user ? (
                 <Button variant="outline" onClick={handleLogout}>Logout</Button>
@@ -269,7 +269,7 @@ const Index = () => {
                   Get Your Free Crisis Guide
                 </Button>
               </Link>
-              <a href="tel:5412419151">
+              <a href="tel:5412415886">
                 <Button size="lg" variant="outline" className="gap-2 px-6 py-5 md:py-6 text-base md:text-lg">
                   <Phone className="w-4 h-4 md:w-5 md:h-5" />
                   Talk to Someone Now
@@ -804,10 +804,10 @@ const Index = () => {
             Let us help you figure out the next right move — for you and your family.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
-            <a href="tel:5412419151" className="w-full sm:w-auto">
+            <a href="tel:5412415886" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-green hover:bg-logo-green/90 px-6 md:px-8 text-sm md:text-base">
                 <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                Call Now: (541) 241-9151
+                Call Now: (541) 241-5886
               </Button>
             </a>
             <Link to="/family-membership" className="w-full sm:w-auto">

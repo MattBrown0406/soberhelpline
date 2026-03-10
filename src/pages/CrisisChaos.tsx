@@ -408,7 +408,7 @@ export default function CrisisChaos() {
               {/* Footer */}
               <div className="text-center text-sm text-muted-foreground pt-6 border-t print:mt-8">
                 <p className="font-medium">Sober Helpline</p>
-                <p>(541) 241-9151 | www.soberhelpline.com</p>
+                <p>(541) 241-5886 | www.soberhelpline.com</p>
               </div>
             </div>
           </div>

@@ -399,10 +399,10 @@ export default function FamilySupport() {
                   Our team is here to help you find the right resources for your family. 
                   Call us for compassionate, judgment-free guidance.
                 </p>
-                <a href="tel:541-241-9151">
+                <a href="tel:541-241-5886">
                   <Button size="lg" className="gap-2">
                     <Phone className="h-4 w-4" />
-                    Call (541) 241-9151
+                    Call (541) 241-5886
                   </Button>
                 </a>
               </CardContent>

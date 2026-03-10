@@ -128,7 +128,7 @@ async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessio
           <a href="https://soberhelpline.lovable.app/testimonials" style="display: inline-block; padding: 12px 24px; background-color: #7e22ce; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Write a Testimonial</a>
         </div>
 
-        <p style="color: #6b7280; font-size: 14px;">If you have any questions or need to discuss anything before your next session, call us at <strong>(541) 241-9151</strong>.</p>
+        <p style="color: #6b7280; font-size: 14px;">If you have any questions or need to discuss anything before your next session, call us at <strong>(541) 241-5886</strong>.</p>
         <p style="color: #6b7280; font-size: 12px; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
       </div>
     </div>
@@ -315,7 +315,7 @@ Deno.serve(async (req) => {
           <p><strong>Zoom Link:</strong> <a href="${zoomLink}">${zoomLink}</a></p>
           ${zoomPasscode ? `<p><strong>Passcode:</strong> ${zoomPasscode}</p>` : ''}
         </div>
-        <p>Please join the Zoom meeting a few minutes early. If you need to reschedule, please contact us at (541) 241-9151.</p>
+        <p>Please join the Zoom meeting a few minutes early. If you need to reschedule, please contact us at (541) 241-5886.</p>
         <p>— Sober Helpline Team</p>
       </div>
     `);

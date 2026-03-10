@@ -18,9 +18,9 @@ const Footer = () => {
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
               Education and support for families affected by addiction. You don't have to go through this alone.
             </p>
-            <a href="tel:5412419151" className="flex items-center gap-2 text-logo-green font-semibold hover:text-logo-green/80 transition-colors">
+            <a href="tel:5412415886" className="flex items-center gap-2 text-logo-green font-semibold hover:text-logo-green/80 transition-colors">
               <Phone className="w-4 h-4" />
-              (541) 241-9151
+              (541) 241-5886
             </a>
           </div>
 
