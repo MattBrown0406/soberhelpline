@@ -282,10 +282,10 @@ const RoadmapCrisis = () => {
             <p className="text-sm text-muted-foreground">
               If you've been in crisis mode for weeks and nothing is changing, it may be time for a professional intervention. This is what interventionists do — they break through when the family can't.
             </p>
-            <a href="tel:5412419151">
+            <a href="tel:5412415886">
               <Button variant="destructive" size="sm" className="mt-3">
                 <Phone className="w-4 h-4 mr-1" />
-                Call Now: (541) 241-9151
+                Call Now: (541) 241-5886
               </Button>
             </a>
           </AlertDescription>
