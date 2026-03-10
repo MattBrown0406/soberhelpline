@@ -454,10 +454,10 @@ function PreInterventionCard({
                 )}
 
                 {showSpecialCta === "decide-approach" && (
-                  <a href="tel:5412419151">
+                  <a href="tel:5412415886">
                     <Button size="sm" className="mt-1">
                       <Phone className="w-4 h-4 mr-1" />
-                      Schedule a Free Consultation: (541) 241-9151
+                      Schedule a Free Consultation: (541) 241-5886
                     </Button>
                   </a>
                 )}

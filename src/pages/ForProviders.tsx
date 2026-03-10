@@ -396,10 +396,10 @@ const ForProviders = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <a href="tel:5412419151">
+              <a href="tel:5412415886">
                 <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-xl border-gray-600 text-white hover:bg-gray-700">
                   <Phone className="mr-2 w-5 h-5" />
-                  (541) 241-9151
+                  (541) 241-5886
                 </Button>
               </a>
             </div>

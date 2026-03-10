@@ -43,7 +43,7 @@ export default function MultipleTreatmentEpisodes() {
             {/* Printable Header */}
             <div className="hidden print:block mb-6">
               <p className="text-lg font-bold">Sober Helpline</p>
-              <p className="text-sm text-muted-foreground">(541) 241-9151</p>
+              <p className="text-sm text-muted-foreground">(541) 241-5886</p>
             </div>
 
             <ToolBrandHeader
