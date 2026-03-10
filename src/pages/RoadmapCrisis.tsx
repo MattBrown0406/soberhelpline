@@ -327,7 +327,7 @@ const RoadmapCrisis = () => {
               <CrisisPhone label="Domestic Violence Hotline" number="1-800-799-7233" tel="18007997233" />
               <CrisisPhone label="SAMHSA National Helpline" number="1-800-662-4357" tel="18006624357" />
               <CrisisPhone label="Poison Control (overdose)" number="1-800-222-1222" tel="18002221222" />
-              <CrisisPhone label="Professional Help (24/7)" number="(541) 241-9151" tel="5412419151" />
+              <CrisisPhone label="Professional Help (24/7)" number="(541) 241-5886" tel="5412415886" />
             </CardContent>
           </Card>
 
