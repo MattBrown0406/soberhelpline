@@ -97,7 +97,7 @@ serve(async (req) => {
         topic: 'Monday Night Family Support Meeting',
         type: 2, // Scheduled meeting
         start_time: startTime,
-        duration: 90,
+        duration: 60,
         timezone: 'America/Los_Angeles',
         settings: {
           host_video: true,
