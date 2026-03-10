@@ -245,9 +245,9 @@ const RoadmapConfirmation = () => {
             <CardContent className="space-y-2">
               <ResourceLink label="Recovery Podcasts" to="/recovery-podcasts" />
               <ResourceLink label="Join Our Weekly Support Group" to="/monday-zoom-registration" />
-              <a href="tel:5412419151" className="flex items-center gap-2 text-sm text-primary hover:underline py-1">
+              <a href="tel:5412415886" className="flex items-center gap-2 text-sm text-primary hover:underline py-1">
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (541) 241-9151
+                Talk to Someone: (541) 241-5886
               </a>
             </CardContent>
           </Card>
