@@ -64,8 +64,8 @@ const immediateActions = [
       "You've been trying to handle this alone. That's over. A professional interventionist has been in this exact situation hundreds of times. They will not judge you. They will not sell you something you don't need. They will tell you exactly what to do next based on YOUR specific situation. One phone call. 15 minutes. It can change everything.",
     cta: {
       type: "phone" as const,
-      label: "Call Now: (541) 241-9151",
-      href: "tel:5412419151",
+      label: "Call Now: (541) 241-5886",
+      href: "tel:5412415886",
     },
     secondaryCta: {
       label: "Or schedule a video consultation",
