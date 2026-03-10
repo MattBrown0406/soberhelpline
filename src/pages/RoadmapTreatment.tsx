@@ -464,11 +464,11 @@ const RoadmapTreatment = () => {
                 Weekly Support Group — Monday 7 PM PT
               </Link>
               <a
-                href="tel:5412419151"
+                href="tel:5412415886"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (541) 241-9151
+                Talk to Someone: (541) 241-5886
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Questions during treatment? We're still here.
