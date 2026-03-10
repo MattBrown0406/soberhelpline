@@ -526,10 +526,10 @@ const AITreatmentNavigator = () => {
                       Visit SoberHelpline.com
                     </Button>
                   </a>
-                  <a href="tel:541-241-9151">
+                  <a href="tel:541-241-5886">
                     <Button className="gap-2 bg-blue-600 hover:bg-blue-700">
                       <Phone className="h-4 w-4" />
-                      Call 541-241-9151
+                      Call 541-241-5886
                     </Button>
                   </a>
                 </div>

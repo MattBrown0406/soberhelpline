@@ -262,7 +262,7 @@ const ProviderLanding = () => {
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Questions? Call us at <a href="tel:5412419151" className="text-primary hover:underline">(541) 241-9151</a>
+              Questions? Call us at <a href="tel:5412415886" className="text-primary hover:underline">(541) 241-5886</a>
             </p>
           </div>
         </div>

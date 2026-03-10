@@ -315,7 +315,7 @@ Deno.serve(async (req) => {
           <p><strong>Zoom Link:</strong> <a href="${zoomLink}">${zoomLink}</a></p>
           ${zoomPasscode ? `<p><strong>Passcode:</strong> ${zoomPasscode}</p>` : ''}
         </div>
-        <p>Please join the Zoom meeting a few minutes early. If you need to reschedule, please contact us at (541) 241-9151.</p>
+        <p>Please join the Zoom meeting a few minutes early. If you need to reschedule, please contact us at (541) 241-5886.</p>
         <p>— Sober Helpline Team</p>
       </div>
     `);
