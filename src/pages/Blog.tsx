@@ -95,12 +95,65 @@ import crossAddictionSubstitutionImg from "@/assets/blog-cross-addiction-substit
 import addictionSignsLovedOneImg from "@/assets/blog-addiction-signs-loved-one.png";
 import helpFamilyMemberAddictionImg from "@/assets/blog-help-family-member-addiction.png";
 import soberHelplineFreeSupport from "@/assets/blog-sober-helpline-free-support.png";
+import usingInsuranceAddictionTreatmentImg from "@/assets/blog-using-insurance-addiction-treatment.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 94,
+    title: "How to Use Health Insurance to Pay for Addiction Treatment: A Practical Guide for Families",
+    excerpt: "Most health insurance plans cover addiction treatment, but understanding your benefits can save thousands. This guide walks you through verifying coverage, navigating denials, and finding care — even without insurance.",
+    author: "Matt Brown",
+    date: "2026-03-10",
+    category: "Treatment & Recovery",
+    image: usingInsuranceAddictionTreatmentImg,
+    slug: "using-insurance-for-addiction-treatment",
+    seoTitle: "How to Use Insurance for Addiction Treatment | Family Guide",
+    metaDescription: "Learn how to use health insurance to pay for addiction treatment. Verify benefits, navigate denials, understand in-network vs out-of-network, and find affordable rehab options.",
+    keywords: ["insurance for addiction treatment", "health insurance rehab", "paying for rehab", "insurance cover rehab", "addiction treatment cost", "mental health parity", "verify insurance benefits"],
+    content: `When addiction touches your family, the path forward can feel overwhelming. You want help for yourself or your loved one—and you know treatment works. But there's another barrier standing in the way: the cost. If you have health insurance, the good news is that most plans cover addiction treatment, and understanding how to use them can save thousands of dollars while removing one more obstacle to recovery. This guide walks you through every step, from verifying your benefits to navigating denials and finding care.
+
+**Does Health Insurance Cover Drug and Alcohol Rehab?**
+
+Yes, the vast majority of health insurance plans cover some form of addiction treatment, whether it's detox, inpatient rehab, outpatient counseling, or medication-assisted treatment. The Mental Health Parity and Addiction Equity Act (MHPAEA) requires most insurers to cover substance use disorder treatment similarly to how they cover other medical conditions. That means your insurance doesn't get to treat addiction as optional or less worthy of coverage.
+
+However, "covered" doesn't always mean "free." Your out-of-pocket costs depend on your specific plan: your deductible, copays, and coinsurance. A $5,000 deductible might apply before your plan pays anything. Or your plan might cover 80% of inpatient care while you pay 20%. Understanding your exact coverage upfront prevents shock bills later.
+
+**How Do I Verify My Insurance Benefits Before Treatment?**
+
+Verification is your first step. Before you or your loved one enters any program, call your insurance company and ask these specific questions: What is my deductible and have I met it? What is my copay or coinsurance for mental health and substance use services? Are there limits on the number of treatment days or visits? Does my plan require prior authorization for inpatient rehab? Which facilities and programs are in-network? Do I have coverage for detox, inpatient rehab, and outpatient care?
+
+Write down the name and employee ID of the benefits representative you speak with, the date, and the confirmation number. This documentation protects you if there's a billing dispute later. If you're unsure about any answer, ask them to send confirmation in writing or note it in your account.
+
+**In-Network vs. Out-of-Network Treatment: What's the Difference?**
+
+In-network providers have negotiated rates with your insurance company, which means lower costs for you and the insurer. Your plan pays a larger percentage, and your copay or coinsurance is predictable. Out-of-network providers don't have those agreements, so costs are typically much higher. Your plan might cover only 50% instead of 80%, leaving you with a significant bill.
+
+When possible, use in-network treatment. But don't let a lack of in-network options delay recovery. If the best program for your situation is out-of-network, talk to your insurance company about whether they offer exceptions or will increase coverage under their "out-of-network benefit." Some plans do negotiate special rates for specialized treatment.
+
+**What Should I Say When I Call My Insurance Company?**
+
+Knowing what to say takes the guesswork out of the call. Have your insurance card and ID number ready. Start with: "I need to verify my benefits for substance use disorder treatment." Be specific about the type of care you're interested in—detox, 30-day inpatient rehab, outpatient therapy—because coverage varies.
+
+If the representative seems dismissive or unclear, ask to speak with a supervisor. You can also ask if a treatment facility's benefits specialist can call on your behalf; many rehab programs have staff dedicated to navigating insurance. And remember, you have the right to take your time understanding the information. Take notes, ask questions to be repeated, and don't rush.
+
+**What If Your Insurance Denies Coverage?**
+
+A denial doesn't mean the end of the road. Insurance companies sometimes deny claims because the facility didn't request prior authorization, the program didn't meet medical necessity criteria, or paperwork was incomplete. You have the right to appeal.
+
+Ask for the denial in writing and understand the specific reason. Then work with your treatment provider (or hire an advocate) to file an appeal. Present evidence that the treatment is medically necessary—clinical notes, a doctor's recommendation, previous failed attempts at less intensive care. Many denials are overturned on appeal because the insurer's initial decision lacked complete information.
+
+**What If You Don't Have Insurance?**
+
+No insurance doesn't mean no options. Federally qualified health centers and community health centers offer sliding-scale treatment based on income. SAMHSA (Substance Abuse and Mental Health Services Administration) maintains a free helpline and treatment locator. Many nonprofits offer scholarships or free programs. Some treatment facilities offer extended payment plans that break the cost into manageable installments.
+
+If you're uninsured or underinsured, be direct about it when looking for treatment. Many programs are equipped to work with you. And if you're uninsured, you may qualify for Medicaid or marketplace insurance during the application process—timing that right can get coverage in place before treatment begins.
+
+Recovery is possible, and you don't have to navigate this alone. Understanding your insurance coverage removes one layer of stress and puts the focus where it belongs—on healing. Whether you're making calls, filing appeals, or exploring alternatives, you're taking action. That itself is a victory.`
+  },
   {
     id: 93,
     title: "Sober Helpline: Free, Confidential Support Available 24/7",
