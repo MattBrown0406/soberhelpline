@@ -269,7 +269,7 @@ const Index = () => {
                   Get Your Free Crisis Guide
                 </Button>
               </Link>
-              <a href="tel:5412419151">
+              <a href="tel:5412415886">
                 <Button size="lg" variant="outline" className="gap-2 px-6 py-5 md:py-6 text-base md:text-lg">
                   <Phone className="w-4 h-4 md:w-5 md:h-5" />
                   Talk to Someone Now
