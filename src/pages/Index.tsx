@@ -138,9 +138,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           {/* Mobile Header */}
           <div className="flex md:hidden h-14 items-center justify-between">
-            <a href="tel:5412419151" className="flex items-center gap-2 text-logo-green font-semibold">
+            <a href="tel:5412415886" className="flex items-center gap-2 text-logo-green font-semibold">
               <Phone className="w-4 h-4" />
-              <span className="text-sm">(541) 241-9151</span>
+              <span className="text-sm">(541) 241-5886</span>
             </a>
             <MobileNav user={user} onLogout={handleLogout} />
           </div>
