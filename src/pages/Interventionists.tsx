@@ -304,9 +304,9 @@ const Interventionists = () => {
             <CategoryNav />
           </div>
           <div className="flex items-center gap-4">
-            <a href="tel:5412419151" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+            <a href="tel:5412415886" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
-              <span className="font-medium">(541) 241-9151</span>
+              <span className="font-medium">(541) 241-5886</span>
             </a>
             <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
           </div>

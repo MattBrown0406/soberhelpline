@@ -109,10 +109,10 @@ const RecoveryResources = () => {
                   Take the Assessment
                 </Button>
               </Link>
-              <a href="tel:5412419151">
+              <a href="tel:5412415886">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
                   <Phone className="w-4 h-4" />
-                  (541) 241-9151
+                  (541) 241-5886
                 </Button>
               </a>
             </div>

@@ -804,10 +804,10 @@ const Index = () => {
             Let us help you figure out the next right move — for you and your family.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
-            <a href="tel:5412419151" className="w-full sm:w-auto">
+            <a href="tel:5412415886" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-green hover:bg-logo-green/90 px-6 md:px-8 text-sm md:text-base">
                 <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                Call Now: (541) 241-9151
+                Call Now: (541) 241-5886
               </Button>
             </a>
             <Link to="/family-membership" className="w-full sm:w-auto">
