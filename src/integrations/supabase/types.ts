@@ -1383,6 +1383,33 @@ export type Database = {
         }
         Relationships: []
       }
+      pending_free_memberships: {
+        Row: {
+          claimed_at: string | null
+          created_at: string
+          email: string
+          id: string
+          invited_by: string | null
+          status: string
+        }
+        Insert: {
+          claimed_at?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          invited_by?: string | null
+          status?: string
+        }
+        Update: {
+          claimed_at?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          invited_by?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       pending_topic_requests: {
         Row: {
           admin_notes: string | null
