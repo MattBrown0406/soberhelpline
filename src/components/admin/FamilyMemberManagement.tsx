@@ -39,6 +39,7 @@ import {
   RefreshCw,
   Pencil,
   RotateCw,
+  UserPlus,
 } from "lucide-react";
 
 interface FamilyMember {
@@ -78,6 +79,9 @@ export function FamilyMemberManagement() {
     phone_number: "",
   });
   const [saving, setSaving] = useState(false);
+  const [showGrantDialog, setShowGrantDialog] = useState(false);
+  const [grantEmail, setGrantEmail] = useState("");
+  const [granting, setGranting] = useState(false);
 
   useEffect(() => {
     fetchFamilyMembers();
@@ -259,6 +263,66 @@ export function FamilyMemberManagement() {
     }
   };
 
+  const handleGrantFreeMembership = async () => {
+    if (!grantEmail.trim()) return;
+    setGranting(true);
+    try {
+      // Look up user by email in profile_private
+      const { data: privateProfile, error: lookupError } = await supabase
+        .from('profile_private')
+        .select('user_id')
+        .eq('email', grantEmail.trim().toLowerCase())
+        .maybeSingle();
+
+      if (lookupError) throw lookupError;
+      if (!privateProfile) {
+        toast.error("No user found with that email address");
+        setGranting(false);
+        return;
+      }
+
+      // Check if they already have an active family membership
+      const { data: existing } = await supabase
+        .from('provider_subscriptions')
+        .select('id')
+        .eq('user_id', privateProfile.user_id)
+        .is('provider_submission_id', null)
+        .eq('status', 'active')
+        .maybeSingle();
+
+      if (existing) {
+        toast.error("This user already has an active family membership");
+        setGranting(false);
+        return;
+      }
+
+      // Create free membership
+      const { error: insertError } = await supabase
+        .from('provider_subscriptions')
+        .insert({
+          user_id: privateProfile.user_id,
+          provider_submission_id: null,
+          plan_type: 'free',
+          status: 'active',
+          amount: 0,
+          start_date: new Date().toISOString(),
+          paypal_subscription_id: null,
+        });
+
+      if (insertError) throw insertError;
+
+      toast.success("Free family membership granted!");
+      setShowGrantDialog(false);
+      setGrantEmail("");
+      fetchFamilyMembers();
+    } catch (error) {
+      console.error("Error granting membership:", error);
+      toast.error("Failed to grant membership");
+    } finally {
+      setGranting(false);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       active: "default",
@@ -282,10 +346,16 @@ export function FamilyMemberManagement() {
         <p className="text-sm text-muted-foreground">
           {members.length} family member{members.length !== 1 ? 's' : ''} found
         </p>
-        <Button variant="outline" size="sm" onClick={fetchFamilyMembers}>
-          <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="default" size="sm" onClick={() => setShowGrantDialog(true)}>
+            <UserPlus className="h-4 w-4 mr-2" />
+            Grant Free Membership
+          </Button>
+          <Button variant="outline" size="sm" onClick={fetchFamilyMembers}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -489,6 +559,48 @@ export function FamilyMemberManagement() {
                 </>
               ) : (
                 'Save Changes'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Grant Free Membership Dialog */}
+      <Dialog open={showGrantDialog} onOpenChange={setShowGrantDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Grant Free Family Membership</DialogTitle>
+            <DialogDescription>
+              Enter the email address of a registered user to grant them a free family membership with no subscription fee.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="grant-email">User Email</Label>
+              <Input
+                id="grant-email"
+                type="email"
+                value={grantEmail}
+                onChange={(e) => setGrantEmail(e.target.value)}
+                placeholder="user@example.com"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setShowGrantDialog(false); setGrantEmail(""); }}>
+              Cancel
+            </Button>
+            <Button onClick={handleGrantFreeMembership} disabled={granting || !grantEmail.trim()}>
+              {granting ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Granting...
+                </>
+              ) : (
+                <>
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Grant Membership
+                </>
               )}
             </Button>
           </DialogFooter>
