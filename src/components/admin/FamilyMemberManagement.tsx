@@ -263,6 +263,66 @@ export function FamilyMemberManagement() {
     }
   };
 
+  const handleGrantFreeMembership = async () => {
+    if (!grantEmail.trim()) return;
+    setGranting(true);
+    try {
+      // Look up user by email in profile_private
+      const { data: privateProfile, error: lookupError } = await supabase
+        .from('profile_private')
+        .select('user_id')
+        .eq('email', grantEmail.trim().toLowerCase())
+        .maybeSingle();
+
+      if (lookupError) throw lookupError;
+      if (!privateProfile) {
+        toast.error("No user found with that email address");
+        setGranting(false);
+        return;
+      }
+
+      // Check if they already have an active family membership
+      const { data: existing } = await supabase
+        .from('provider_subscriptions')
+        .select('id')
+        .eq('user_id', privateProfile.user_id)
+        .is('provider_submission_id', null)
+        .eq('status', 'active')
+        .maybeSingle();
+
+      if (existing) {
+        toast.error("This user already has an active family membership");
+        setGranting(false);
+        return;
+      }
+
+      // Create free membership
+      const { error: insertError } = await supabase
+        .from('provider_subscriptions')
+        .insert({
+          user_id: privateProfile.user_id,
+          provider_submission_id: null,
+          plan_type: 'free',
+          status: 'active',
+          amount: 0,
+          start_date: new Date().toISOString(),
+          paypal_subscription_id: null,
+        });
+
+      if (insertError) throw insertError;
+
+      toast.success("Free family membership granted!");
+      setShowGrantDialog(false);
+      setGrantEmail("");
+      fetchFamilyMembers();
+    } catch (error) {
+      console.error("Error granting membership:", error);
+      toast.error("Failed to grant membership");
+    } finally {
+      setGranting(false);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive"> = {
       active: "default",
