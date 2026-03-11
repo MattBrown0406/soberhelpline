@@ -266,52 +266,84 @@ export function FamilyMemberManagement() {
   const handleGrantFreeMembership = async () => {
     if (!grantEmail.trim()) return;
     setGranting(true);
+    const email = grantEmail.trim().toLowerCase();
     try {
       // Look up user by email in profile_private
       const { data: privateProfile, error: lookupError } = await supabase
         .from('profile_private')
         .select('user_id')
-        .eq('email', grantEmail.trim().toLowerCase())
+        .eq('email', email)
         .maybeSingle();
 
       if (lookupError) throw lookupError;
-      if (!privateProfile) {
-        toast.error("No user found with that email address");
-        setGranting(false);
-        return;
-      }
 
-      // Check if they already have an active family membership
-      const { data: existing } = await supabase
-        .from('provider_subscriptions')
-        .select('id')
-        .eq('user_id', privateProfile.user_id)
-        .is('provider_submission_id', null)
-        .eq('status', 'active')
-        .maybeSingle();
+      if (privateProfile) {
+        // User exists — check if they already have an active family membership
+        const { data: existing } = await supabase
+          .from('provider_subscriptions')
+          .select('id')
+          .eq('user_id', privateProfile.user_id)
+          .is('provider_submission_id', null)
+          .eq('status', 'active')
+          .maybeSingle();
 
-      if (existing) {
-        toast.error("This user already has an active family membership");
-        setGranting(false);
-        return;
-      }
+        if (existing) {
+          toast.error("This user already has an active family membership");
+          setGranting(false);
+          return;
+        }
 
-      // Create free membership
-      const { error: insertError } = await supabase
-        .from('provider_subscriptions')
-        .insert({
-          user_id: privateProfile.user_id,
-          provider_submission_id: null,
-          plan_type: 'free',
-          status: 'active',
-          amount: 0,
-          start_date: new Date().toISOString(),
-          paypal_subscription_id: null,
+        // Get their profile for the email
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('first_name')
+          .eq('id', privateProfile.user_id)
+          .maybeSingle();
+
+        // Create free membership
+        const { error: insertError } = await supabase
+          .from('provider_subscriptions')
+          .insert({
+            user_id: privateProfile.user_id,
+            provider_submission_id: null,
+            plan_type: 'free',
+            status: 'active',
+            amount: 0,
+            start_date: new Date().toISOString(),
+            paypal_subscription_id: null,
+          });
+
+        if (insertError) throw insertError;
+
+        // Send welcome email to existing user
+        await supabase.functions.invoke("send-free-membership-email", {
+          body: { email, type: "existing_user", firstName: profile?.first_name || "" },
         });
 
-      if (insertError) throw insertError;
+        toast.success("Free membership granted and welcome email sent!");
+      } else {
+        // No account exists — save pending invitation and send signup email
+        const { error: pendingError } = await supabase
+          .from('pending_free_memberships')
+          .insert({ email, status: 'pending' });
 
-      toast.success("Free family membership granted!");
+        if (pendingError) {
+          if (pendingError.code === '23505') {
+            toast.error("An invitation has already been sent to this email address");
+            setGranting(false);
+            return;
+          }
+          throw pendingError;
+        }
+
+        // Send invitation email to new user
+        await supabase.functions.invoke("send-free-membership-email", {
+          body: { email, type: "new_user" },
+        });
+
+        toast.success("Invitation email sent! Membership will activate automatically when they create an account.");
+      }
+
       setShowGrantDialog(false);
       setGrantEmail("");
       fetchFamilyMembers();
