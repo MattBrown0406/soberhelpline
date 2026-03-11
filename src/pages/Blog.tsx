@@ -97,12 +97,109 @@ import helpFamilyMemberAddictionImg from "@/assets/blog-help-family-member-addic
 import soberHelplineFreeSupport from "@/assets/blog-sober-helpline-free-support.png";
 import usingInsuranceAddictionTreatmentImg from "@/assets/blog-using-insurance-addiction-treatment.png";
 import brainDiseaseModelAddictionImg from "@/assets/blog-brain-disease-model-addiction.png";
+import cychlorphineOpioidDangerImg from "@/assets/blog-cychlorphine-opioid-danger.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 96,
+    title: "A New Drug Is Killing People — And Most Families Have Never Heard of It",
+    excerpt: "A synthetic opioid called cychlorphine — ten times more potent than fentanyl — has quietly spread across nine U.S. states. Here's what families need to know to protect the people they love.",
+    author: "Matt Brown",
+    date: "2026-03-12",
+    category: "Opioid Awareness",
+    image: cychlorphineOpioidDangerImg,
+    slug: "cychlorphine-opioid-danger",
+    seoTitle: "Cychlorphine: The New Opioid Threat Families Must Know About",
+    metaDescription: "Cychlorphine is a synthetic opioid 10x more potent than fentanyl now spreading across the U.S. Learn what families need to know about this deadly new drug and how to protect your loved one.",
+    keywords: ["cychlorphine", "synthetic opioid", "fentanyl alternative", "opioid crisis 2026", "drug overdose prevention", "naloxone", "family addiction support", "orphine analogue"],
+    content: `If you love someone who is struggling with addiction, you already know what it means to live with fear. Every missed call. Every late night. Every moment of silence that stretches too long. You have learned to be vigilant in ways you never imagined — and yet the landscape of the opioid crisis keeps shifting beneath your feet.
+
+Now there is something new — and you deserve to know about it clearly, without sensationalism, and with honest guidance on what you can do. A synthetic opioid called cychlorphine has quietly spread across nine U.S. states since mid-2025. It is approximately ten times more potent than fentanyl. It is largely invisible to standard drug detection. And it is already being linked to fatal overdoses.
+
+This article is not meant to multiply your fear. It is meant to give you the knowledge that could help save the person you love.
+
+**What Is Cychlorphine?**
+
+Cychlorphine — technically known as N-Propionitrile chlorphine — is a novel synthetic opioid in a class called "orphine analogues," which also includes drugs like brorphine and chlorphine. It is not an accident of nature; it is a deliberately engineered compound, most likely produced in illegal chemical laboratories, first detected by forensic scientists in mid-2024.
+
+By mid-2025, it had made its way into the U.S. drug supply. As of early 2026, it has been confirmed in toxicology cases across nine states and three Canadian provinces, and has also appeared in cases in the United Kingdom, France, and Germany. The epicenter right now is East Tennessee and Kentucky, where it has been linked to at least 19 confirmed and suspected deaths — but the numbers are growing, and the geography is expanding.
+
+**Here Is the Most Important Thing to Understand About How It Got Here**
+
+Cychlorphine surged in the U.S. drug supply almost immediately after China imposed regulatory controls on another class of synthetic opioids — nitazenes — in July 2025. When one door closes in the illicit drug market, manufacturers find another. This is a pattern we have seen before.
+
+"When China cracked down on nitazenes in July 2025, cychlorphine positivity surged almost immediately — a market substitution that mirrors the early rise of fentanyl."
+
+**Why Is This So Alarming?**
+
+To understand the danger, some context: fentanyl — the drug that has driven tens of thousands of overdose deaths — is already approximately 50 to 100 times more potent than heroin. Cychlorphine is estimated to be ten times more potent than fentanyl. That means an amount smaller than a few grains of salt can be fatal.
+
+Several factors make this particularly dangerous for people who use drugs — and for their families:
+
+It is being mixed into other drug supplies. Cychlorphine has been detected alongside fentanyl, methamphetamine, and novel benzodiazepines. A person buying what they believe is a familiar substance may have no idea they are taking something exponentially more powerful.
+
+Standard fentanyl test strips will not detect it. The harm-reduction tools that many families and individuals rely on — strips that test for fentanyl in a drug sample — are blind to cychlorphine entirely.
+
+Naloxone (Narcan) may not fully reverse an overdose. Naloxone remains the gold-standard emergency response and should always be used. However, due to cychlorphine's potency, a single dose may not be enough. Multiple doses, given rapidly, may be needed.
+
+People may seek it out directly. In 11 of 25 confirmed fatal cases, cychlorphine was the only opioid detected — suggesting that some individuals are obtaining and using it knowingly, not just encountering it as an adulterant.
+
+Detection gaps in the medical system. Most routine toxicology panels are not yet built to detect cychlorphine. When a death occurs and this compound is not on the panel, it may go unidentified — making the true scope of the crisis harder to measure.
+
+**What Families Need to Know — and Do**
+
+If someone you love is actively using opioids or stimulants, this information is urgent and practical. Here is what matters most right now:
+
+**Know the Signs of Opioid Overdose**
+
+An opioid overdose can look like deep sleep at first. Signs include: very slow, shallow, or stopped breathing; blue or gray lips or fingertips; unresponsive to voice or touch; gurgling or choking sounds; and extremely small ("pinpoint") pupils. Do not wait to be certain — if you suspect an overdose, act immediately.
+
+**Always Call 911 First**
+
+Call 911 immediately. Most states have Good Samaritan laws that offer legal protection to people who call for help during an overdose — fear of legal consequences should never be a reason to delay a call.
+
+**Use Naloxone — and Use More Than One Dose**
+
+Administer naloxone (Narcan or a generic equivalent) as quickly as possible. Given cychlorphine's potency, have a second — or even third — dose ready. Naloxone is available without a prescription at most pharmacies. If your loved one uses opioids, having naloxone in your home is not pessimism; it is preparation.
+
+**Talk to Your Loved One — Directly and Without Judgment**
+
+If your loved one is currently using drugs, share this information with them. The goal is not to lecture — it is to make sure they know that fentanyl test strips will not catch this drug, that Narcan may need to be given multiple times, and that the drug supply right now is more unpredictable than ever. This is life-or-death information, not a moral argument.
+
+**There Is Still Reason for Hope**
+
+As devastating as this news is, it is critical that families hear this: recovery is possible, treatment works, and help is available right now.
+
+**Medications for Opioid Use Disorder**
+
+Medications for opioid use disorder — including buprenorphine (Suboxone) and methadone — work by occupying the same receptors in the brain that cychlorphine and other opioids target. People who are stabilized on these medications have a powerful layer of biological protection. If your loved one is not yet in treatment, getting them there may be the most important thing you can do.
+
+Professional intervention has helped thousands of families navigate moments exactly like this one — when love alone does not seem to be enough, when every conversation escalates, when you feel helpless. A structured, compassionate intervention can be the turning point that opens a door your loved one has not been willing to walk through alone.
+
+You do not have to figure this out by yourself. Whether you need to talk to someone right now, understand your options, or take the next step toward getting your loved one help, these resources exist for you:
+
+You can reach out even if you're not sure what to say — someone will guide you.
+
+Treatment options exist for every circumstance, including people who have tried before and struggled to stay in recovery.
+
+Families are not bystanders in this — you are often the most powerful force for change in your loved one's life.
+
+**Get Help Today**
+
+If you or someone you love needs support, please reach out now. These resources are here for you:
+
+Sober Helpline — [LINK:SoberHelpline.com:https://soberhelpline.com] — Free, confidential guidance for families and individuals navigating addiction and recovery.
+
+Freedom Interventions — [LINK:FreedomInterventions.com:https://freedominterventions.com] — Professional intervention services to help families take meaningful, compassionate action.
+
+Recovery is not a matter of willpower alone — it is a medical process that requires support, structure, and the right help at the right moment. That moment can be now.
+
+Sober Helpline is committed to providing accurate, compassionate resources for families affected by addiction. This article was reviewed for clinical accuracy as of March 2026. If you are experiencing a medical emergency, call 911 immediately.`
+  },
   {
     id: 95,
     title: "Understanding the Brain Disease Model of Addiction: Why Your Loved One Can't Just Stop",
