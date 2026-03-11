@@ -346,10 +346,16 @@ export function FamilyMemberManagement() {
         <p className="text-sm text-muted-foreground">
           {members.length} family member{members.length !== 1 ? 's' : ''} found
         </p>
-        <Button variant="outline" size="sm" onClick={fetchFamilyMembers}>
-          <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="default" size="sm" onClick={() => setShowGrantDialog(true)}>
+            <UserPlus className="h-4 w-4 mr-2" />
+            Grant Free Membership
+          </Button>
+          <Button variant="outline" size="sm" onClick={fetchFamilyMembers}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
