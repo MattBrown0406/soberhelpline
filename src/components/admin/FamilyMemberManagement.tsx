@@ -79,6 +79,9 @@ export function FamilyMemberManagement() {
     phone_number: "",
   });
   const [saving, setSaving] = useState(false);
+  const [showGrantDialog, setShowGrantDialog] = useState(false);
+  const [grantEmail, setGrantEmail] = useState("");
+  const [granting, setGranting] = useState(false);
 
   useEffect(() => {
     fetchFamilyMembers();
