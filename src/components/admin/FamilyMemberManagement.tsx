@@ -564,6 +564,48 @@ export function FamilyMemberManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Grant Free Membership Dialog */}
+      <Dialog open={showGrantDialog} onOpenChange={setShowGrantDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Grant Free Family Membership</DialogTitle>
+            <DialogDescription>
+              Enter the email address of a registered user to grant them a free family membership with no subscription fee.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="grant-email">User Email</Label>
+              <Input
+                id="grant-email"
+                type="email"
+                value={grantEmail}
+                onChange={(e) => setGrantEmail(e.target.value)}
+                placeholder="user@example.com"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setShowGrantDialog(false); setGrantEmail(""); }}>
+              Cancel
+            </Button>
+            <Button onClick={handleGrantFreeMembership} disabled={granting || !grantEmail.trim()}>
+              {granting ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Granting...
+                </>
+              ) : (
+                <>
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Grant Membership
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
