@@ -53,6 +53,8 @@ verify_jwt = false
 
 [functions.quo-to-notion]
 verify_jwt = false
-
 [functions.roadmap-mailchimp-sync]
 verify_jwt = false
+
+[functions.send-free-membership-email]
+verify_jwt = true
