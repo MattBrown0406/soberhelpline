@@ -606,8 +606,6 @@ export function FamilyMemberManagement() {
               Enter an email address to grant a free membership. If the user already has an account, they'll receive a welcome email. If not, they'll receive an invitation to create an account and their membership will activate automatically upon signup.
             </DialogDescription>
           </DialogHeader>
-            </DialogDescription>
-          </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="grant-email">User Email</Label>
