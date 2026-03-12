@@ -89,6 +89,7 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
+      <StickyContactForm />
     </div>
     </SEOOverrideProvider>
   );
