@@ -106,6 +106,68 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 97,
+    title: "Understanding Co-Occurring Disorders: How Mental Health Issues Fuel Addiction in Your Loved One",
+    excerpt: "More than half of people with addiction also have a mental health condition. Understanding this connection can change how you approach your loved one's care and improve their chances of lasting recovery.",
+    author: "Matt Brown",
+    date: "2026-03-12",
+    category: "Mental Health & Addiction",
+    image: coOccurringDisordersAddictionImg,
+    slug: "co-occurring-disorders-addiction",
+    seoTitle: "Co-Occurring Disorders & Addiction: What Families Need to Know",
+    metaDescription: "Learn how co-occurring mental health disorders fuel addiction, why dual diagnosis treatment matters, and how families can support a loved one with both conditions.",
+    keywords: ["co-occurring disorders", "dual diagnosis", "mental health and addiction", "comorbid conditions", "PTSD and addiction", "depression and substance use", "integrated treatment", "family support addiction"],
+    content: `If your loved one is struggling with addiction, you may have noticed that the substance use doesn't seem to be the whole story. Maybe they've been dealing with anxiety for years, or they go through periods of deep depression that seem to drive them toward drinking or drug use. You might be wondering: which came first? And does it matter? The answer to that last question is yes — it matters a great deal. What you're likely observing is something clinicians call a co-occurring disorder, sometimes referred to as a dual diagnosis. Understanding this dynamic can change the way you approach your loved one's care, and it can significantly improve the chances of lasting recovery.
+
+**What Are Co-Occurring Disorders?**
+
+Co-occurring disorders — also called dual diagnosis or comorbid conditions — refer to the presence of both a substance use disorder and a mental health condition at the same time. Research from the Substance Abuse and Mental Health Services Administration (SAMHSA) has consistently found that more than half of people with a substance use disorder also have a diagnosable mental health condition. These aren't coincidences.
+
+Common mental health conditions that co-occur with addiction include depression and major depressive disorder, anxiety disorders (generalized anxiety, social anxiety, panic disorder), post-traumatic stress disorder (PTSD), bipolar disorder, ADHD, borderline personality disorder, and schizophrenia and other psychotic disorders.
+
+The co-occurrence of these conditions isn't just a complication — it's often central to why the addiction developed and why it's so difficult to stop without proper treatment.
+
+**Why Do Mental Health Issues and Addiction Go Together So Often?**
+
+The connection between mental health and substance use runs deep, and there are several reasons why these conditions so frequently appear together.
+
+Self-medication is common. Many people begin using substances to cope with uncomfortable emotions or mental health symptoms they don't fully understand. Someone with undiagnosed PTSD might drink to quiet intrusive memories. A person struggling with social anxiety might use alcohol or marijuana to feel calm in social situations. Over time, this pattern of self-medication can become a full-blown substance use disorder — even if the person never intended for it to go that far.
+
+Substances can trigger or worsen mental illness. Regular use of alcohol, stimulants, and other drugs can alter brain chemistry in ways that produce or intensify depression, anxiety, paranoia, and other symptoms. Someone who seemed emotionally stable before they started using may look very different after months or years of heavy substance use.
+
+Both often share underlying roots. Trauma, chronic stress, genetic vulnerability, and adverse childhood experiences can predispose someone to both mental illness and addiction. When these root causes aren't addressed in treatment, both conditions tend to persist regardless of how hard the person tries to get better.
+
+**How Can You Tell If Your Loved One Has a Co-Occurring Disorder?**
+
+Recognizing the signs of a co-occurring disorder can feel difficult when you're already overwhelmed by the addiction itself. However, there are patterns that families often notice.
+
+Your loved one may have a co-occurring disorder if they use substances at predictable times (before social events, after conflict, during periods of low mood), show dramatic mood changes even when not under the influence, express feelings of hopelessness, worthlessness, or intense fear that seem disproportionate to their circumstances, have a history of mental health treatment or have family members with mental illness, or report using substances to "feel normal" or "take the edge off."
+
+You don't need to diagnose your loved one yourself — that's what clinicians are for. But recognizing these signs can help you ask better questions when evaluating treatment options, and it can help you push for a thorough assessment when the time comes.
+
+**What Does Co-Occurring Disorder Treatment Look Like?**
+
+When addiction and a mental health condition exist together, treating only one at a time rarely works. This is one of the most important things families need to understand: a program that focuses exclusively on sobriety while ignoring the underlying mental health condition is likely to fall short.
+
+Integrated dual diagnosis treatment addresses both conditions simultaneously with a coordinated care team. This typically includes psychiatric evaluation and medication management when appropriate, evidence-based therapies like Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), or EMDR for trauma, and substance use counseling alongside mental health support.
+
+**How Families Can Support a Loved One with Co-Occurring Disorders**
+
+Understanding that your loved one is dealing with more than just a bad habit — that there is a real mental health component involved — can shift how you show up for them. Here are some practical ways families can help.
+
+Learn about both conditions. When you understand how anxiety, depression, or trauma affects behavior, it becomes easier to separate the person from the disorder. This doesn't mean making excuses for harmful behavior, but it does allow for more compassionate and strategic communication.
+
+Encourage comprehensive assessment. When your loved one is ready to seek help, advocate for a thorough evaluation that screens for both substance use and mental health conditions. Not all treatment centers do this automatically, so it's worth asking specifically.
+
+Take care of your own mental health. Families of people with co-occurring disorders often carry enormous stress themselves. Therapy, Al-Anon, and family support groups can provide the tools and community you need to stay grounded through the process.
+
+Set realistic expectations. Recovery from co-occurring disorders is possible — but it often takes longer and involves more complexity than recovery from addiction alone. Being informed about this reality helps families stay engaged without burning out.
+
+Learning that your loved one may be dealing with both addiction and a mental health condition can feel overwhelming. But it can also be clarifying. It helps explain a lot of what you've been witnessing — and it opens the door to more effective, targeted help. Recovery from co-occurring disorders happens every day, with the right support. You don't have to figure this out alone.
+
+[LINK:SoberHelpline.com:https://soberhelpline.com] is here to support families every step of the way — with education, coaching, and resources designed to help you navigate addiction with confidence and clarity. Explore our site to learn more about co-occurring disorders, how to find the right treatment, and how to take care of yourself while supporting someone you love.`
+  },
+  {
     id: 96,
     title: "A New Drug Is Killing People — And Most Families Have Never Heard of It",
     excerpt: "A synthetic opioid called cychlorphine — ten times more potent than fentanyl — has quietly spread across nine U.S. states. Here's what families need to know to protect the people they love.",
