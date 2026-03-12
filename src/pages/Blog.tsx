@@ -98,6 +98,7 @@ import soberHelplineFreeSupport from "@/assets/blog-sober-helpline-free-support.
 import usingInsuranceAddictionTreatmentImg from "@/assets/blog-using-insurance-addiction-treatment.png";
 import brainDiseaseModelAddictionImg from "@/assets/blog-brain-disease-model-addiction.png";
 import cychlorphineOpioidDangerImg from "@/assets/blog-cychlorphine-opioid-danger.png";
+import coOccurringDisordersAddictionImg from "@/assets/blog-co-occurring-disorders-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
