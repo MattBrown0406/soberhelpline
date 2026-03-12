@@ -254,8 +254,8 @@ const Index = () => {
               For Families Affected by Addiction
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight px-2">
-              Your loved one is struggling with addiction.
-              <span className="block text-logo-green mt-2">Here's what to do next.</span>
+               Your loved one is struggling with addiction.
+               <span className="block text-logo-green mt-2">You don't have to face this alone.</span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10 px-2 hero-description">
               You're exhausted from walking on eggshells, wondering if you're helping or making it worse. We'll show you exactly what to do — whether they're ready for help or not.
