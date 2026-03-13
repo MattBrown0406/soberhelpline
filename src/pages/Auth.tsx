@@ -229,7 +229,7 @@ const Auth = () => {
                 <CardDescription>
                   {showForgotPassword 
                     ? "Enter your email to receive a password reset link" 
-                    : "Log in to submit provider applications"}
+                    : "Log in to access your family support resources"}
                 </CardDescription>
               </CardHeader>
               <CardContent>
