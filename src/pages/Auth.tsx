@@ -130,7 +130,7 @@ const Auth = () => {
       } else {
         toast({
           title: "Error",
-          description: "Failed to create account. Please try again.",
+          description: (error as Error)?.message || "Failed to create account. Please try again.",
           variant: "destructive",
         });
       }
