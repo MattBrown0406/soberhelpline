@@ -107,14 +107,18 @@ const Auth = () => {
             variant: "destructive",
           });
         } else {
-          throw error;
+          toast({
+            title: "Signup Error",
+            description: error.message || "Failed to create account. Please try again.",
+            variant: "destructive",
+          });
         }
       } else {
         toast({
-          title: "Account created!",
-          description: "You can now submit provider applications.",
+          title: "Account created! 🎉",
+          description: "Please check your email inbox (and spam folder) for a verification link. You must verify your email before logging in.",
+          duration: 10000,
         });
-        navigate("/");
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -126,7 +130,7 @@ const Auth = () => {
       } else {
         toast({
           title: "Error",
-          description: "Failed to create account. Please try again.",
+          description: (error as Error)?.message || "Failed to create account. Please try again.",
           variant: "destructive",
         });
       }
@@ -225,7 +229,7 @@ const Auth = () => {
                 <CardDescription>
                   {showForgotPassword 
                     ? "Enter your email to receive a password reset link" 
-                    : "Log in to submit provider applications"}
+                    : "Log in to access your family support resources"}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -303,7 +307,7 @@ const Auth = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Create Account</CardTitle>
-                <CardDescription>Sign up to submit provider applications</CardDescription>
+                <CardDescription>Sign up to access family support resources, education guides, and more</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4" autoComplete="on">
