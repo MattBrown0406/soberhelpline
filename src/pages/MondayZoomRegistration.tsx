@@ -165,7 +165,10 @@ export default function MondayZoomRegistration() {
     const daysUntilMonday = day <= 1 ? 1 - day : 8 - day;
     const nextMonday = new Date(now);
     nextMonday.setDate(now.getDate() + daysUntilMonday);
-    const meetingDate = nextMonday.toISOString().split("T")[0];
+    const yyyy = nextMonday.getFullYear();
+    const mm = String(nextMonday.getMonth() + 1).padStart(2, '0');
+    const dd = String(nextMonday.getDate()).padStart(2, '0');
+    const meetingDate = `${yyyy}-${mm}-${dd}`;
 
     try {
       // Save registration (user_id is optional now)
