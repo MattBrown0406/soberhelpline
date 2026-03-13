@@ -307,7 +307,7 @@ const Auth = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Create Account</CardTitle>
-                <CardDescription>Sign up to submit provider applications</CardDescription>
+                <CardDescription>Sign up to access family support resources, education guides, and more</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4" autoComplete="on">
