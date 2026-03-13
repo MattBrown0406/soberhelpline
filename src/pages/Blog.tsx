@@ -99,6 +99,7 @@ import usingInsuranceAddictionTreatmentImg from "@/assets/blog-using-insurance-a
 import brainDiseaseModelAddictionImg from "@/assets/blog-brain-disease-model-addiction.png";
 import cychlorphineOpioidDangerImg from "@/assets/blog-cychlorphine-opioid-danger.png";
 import coOccurringDisordersAddictionImg from "@/assets/blog-co-occurring-disorders-addiction.png";
+import denialAddictionCantStopImg from "@/assets/blog-denial-addiction-cant-stop.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
