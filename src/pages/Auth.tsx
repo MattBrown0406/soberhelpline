@@ -107,14 +107,18 @@ const Auth = () => {
             variant: "destructive",
           });
         } else {
-          throw error;
+          toast({
+            title: "Signup Error",
+            description: error.message || "Failed to create account. Please try again.",
+            variant: "destructive",
+          });
         }
       } else {
         toast({
-          title: "Account created!",
-          description: "You can now submit provider applications.",
+          title: "Account created! 🎉",
+          description: "Please check your email inbox (and spam folder) for a verification link. You must verify your email before logging in.",
+          duration: 10000,
         });
-        navigate("/");
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
