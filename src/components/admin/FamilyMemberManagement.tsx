@@ -401,10 +401,6 @@ export function FamilyMemberManagement() {
             <TableHead>Username</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Code of Conduct</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Account Created</TableHead>
             <TableHead>Last Login</TableHead>
             <TableHead>Member Since</TableHead>
             <TableHead>Actions</TableHead>
@@ -420,26 +416,6 @@ export function FamilyMemberManagement() {
                 {member.first_name} {member.last_name}
               </TableCell>
               <TableCell>{member.contact?.email || '-'}</TableCell>
-              <TableCell>{member.contact?.phone_number || '-'}</TableCell>
-              <TableCell>
-                {member.agreed_to_code_of_conduct ? (
-                  <div className="flex items-center gap-1 text-green-600">
-                    <CheckCircle className="h-4 w-4" />
-                    <span className="text-xs">Agreed</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <XCircle className="h-4 w-4" />
-                    <span className="text-xs">Not yet</span>
-                  </div>
-                )}
-              </TableCell>
-              <TableCell>
-                {member.subscription ? getStatusBadge(member.subscription.status) : (
-                  <Badge variant="secondary">No subscription</Badge>
-                )}
-              </TableCell>
-              <TableCell className="text-sm">{formatDate(member.account_created_at)}</TableCell>
               <TableCell className="text-sm">{formatDateTime(member.last_sign_in_at)}</TableCell>
               <TableCell className="text-sm">
                 {member.subscription?.created_at 
