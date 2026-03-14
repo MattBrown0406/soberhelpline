@@ -42,17 +42,17 @@ The Recovery Roadmap is a free, interactive tool that guides families through ev
 
 | Stage | URL | Description |
 |-------|-----|-------------|
-| 🔴 Suspicion | https://soberhelpline.com/roadmap/suspicion | "Something is off but I'm not sure" |
-| 🟠 Confirmation | https://soberhelpline.com/roadmap/confirmation | "I know they're using, I don't know what to do" |
-| 🟡 Crisis | https://soberhelpline.com/roadmap/crisis | "Things are falling apart right now" |
-| 🔵 Pre-Intervention | https://soberhelpline.com/roadmap/pre-intervention | "I'm ready to do something but need help" |
-| 🟣 Treatment | https://soberhelpline.com/roadmap/treatment | "They're in treatment, now what?" |
-| 🟢 Early Recovery | https://soberhelpline.com/roadmap/early-recovery | "They're home — how do we do this?" |
-| ⚪ Long-Term Recovery | https://soberhelpline.com/roadmap/long-term-recovery | "It's been 6+ months — how do we rebuild?" |
-| 🔴 Relapse | https://soberhelpline.com/roadmap/relapse | "It happened again" |
+| 🔴 Suspicion | /roadmap/suspicion | "Something is off but I'm not sure" |
+| 🟠 Confirmation | /roadmap/confirmation | "I know they're using, I don't know what to do" |
+| 🟡 Crisis | /roadmap/crisis | "Things are falling apart right now" |
+| 🔵 Pre-Intervention | /roadmap/pre-intervention | "I'm ready to do something but need help" |
+| 🟣 Treatment | /roadmap/treatment | "They're in treatment, now what?" |
+| 🟢 Early Recovery | /roadmap/early-recovery | "They're home — how do we do this?" |
+| ⚪ Long-Term Recovery | /roadmap/long-term-recovery | "It's been 6+ months — how do we rebuild?" |
+| 🔴 Relapse | /roadmap/relapse | "It happened again" |
 
-**Assessment:** https://soberhelpline.com/roadmap/assessment
-**Landing page:** https://soberhelpline.com/roadmap
+**Assessment:** /roadmap/assessment
+**Landing page:** /roadmap
 
 ---
 
@@ -62,12 +62,59 @@ Interactive AI-powered tools for families, built on Matt Brown's methodology:
 
 | Tool | URL | Purpose |
 |------|-----|---------|
-| AI Life Coach | https://soberhelpline.com/ai-life-coach | General guidance and support |
-| AI Enabling Decision Coach | https://soberhelpline.com/ai-enabling-decision-coach | Help families identify enabling vs. helping |
-| AI Boundary Builder Coach | https://soberhelpline.com/ai-boundary-builder-coach | Build boundaries with real consequences |
-| AI Treatment Navigator | https://soberhelpline.com/ai-treatment-navigator | Navigate treatment options and levels of care |
-| AI Relapse Response Guide | https://soberhelpline.com/ai-relapse-response-guide | What to do when relapse happens |
-| AI Addiction Reality Translator | https://soberhelpline.com/ai-addiction-reality-translator | Translate addiction behaviors into plain language |
+| AI Life Coach | /ai-life-coach | General guidance and support |
+| AI Enabling Decision Coach | /ai-enabling-decision-coach | Help families identify enabling vs. helping |
+| AI Boundary Builder Coach | /ai-boundary-builder-coach | Build boundaries with real consequences |
+| AI Treatment Navigator | /ai-treatment-navigator | Navigate treatment options and levels of care |
+| AI Relapse Response Guide | /ai-relapse-response-guide | What to do when relapse happens |
+| AI Addiction Reality Translator | /ai-addiction-reality-translator | Translate addiction behaviors into plain language |
+| Enabling Language Translator | /enabling-language-translator | Analyze communication for enabling patterns |
+
+---
+
+## Interactive Tools & Worksheets
+
+| Tool | URL | Purpose |
+|------|-----|---------|
+| Boundary Setting Worksheet | /boundary-setting-worksheet | Step-by-step boundary definition, communication, and enforcement |
+| Family Action Plan | /family-action-plan | Personalized step-by-step family recovery plan |
+| Scenario Practice Exercise | /scenario-exercise | Practice boundary-setting through realistic scenarios |
+| Insight vs. Behavior Tracker | /insight-behavior-tracker | Track whether insight translates to behavioral change |
+| Values Clarification Exercise | /values-exercise | Identify core values to guide decisions |
+| Values-Aligned Decision Making | /values-aligned-decisions | Make decisions that align with identified values |
+| Readiness for Change Checklist | /readiness-checklist | Evaluate signs of readiness in a loved one |
+| Relapse Warning Signs Tracker | /relapse-warning-signs | Identify early warning signs before relapse happens |
+| Emotional Regulation Tools | /emotional-regulation | Manage intense emotions as a family member |
+| Crisis vs. Chaos Decision Guide | /crisis-chaos | Distinguish real crisis from chronic chaos |
+| Fear Inventory Exercise | /fear-inventory-exercise | Identify fears keeping families stuck |
+| Conversation Starters Guide | /conversation-starters | Scripts for the hardest conversations about addiction |
+| Communication Guide | /communication-guide | What to say and what not to say |
+| Aftercare Readiness Checklist | /aftercare-checklist | Post-treatment planning and relapse prevention |
+| Family Advocacy Toolkit | /family-advocacy-toolkit | Scripts and tools for navigating the treatment system |
+| "Who Benefits?" Decision Filter | /who-benefits-filter | Evaluate if actions help or enable |
+| Addiction Assessment | /addiction-assessment | Free confidential assessment for families |
+| Onboarding Quiz | /onboarding-quiz | Personalized experience based on family situation |
+
+---
+
+## Guided Meditations
+
+12 guided meditation audio tracks designed specifically for families navigating addiction:
+
+| Meditation | Theme |
+|-----------|-------|
+| Allowing Hope & Happiness | Permission to feel joy despite circumstances |
+| Connecting with Your Inner Child | Healing childhood wounds from addiction exposure |
+| Finding Steadiness (Holiday) | Staying grounded during holiday triggers |
+| Guided Inner Dialogue | Processing internal conflict about a loved one |
+| Letting Go — Not About You | Releasing the belief that their addiction is your fault |
+| Loving Enough to Let Go | Finding strength to stop rescuing |
+| Regaining Calm | Returning to center after chaos |
+| Releasing Sadness & Guilt | Processing grief and guilt |
+| Staying Grounded When They Won't Accept Help | Maintaining peace when they refuse treatment |
+| Talking to the Part That Wants to Rescue | Addressing the rescuer within |
+| What I Can Control Today | Focusing on actionable, controllable steps |
+| You Are Allowed to Say No | Permission to set and hold boundaries |
 
 ---
 
@@ -77,111 +124,190 @@ Vetted treatment providers with no referral fees or patient brokering:
 
 | Category | URL |
 |----------|-----|
-| Inpatient Treatment | https://soberhelpline.com/inpatient-treatment |
-| Outpatient Treatment | https://soberhelpline.com/outpatient-treatment |
-| Medical Detox | https://soberhelpline.com/medical-detox |
-| Sober Living | https://soberhelpline.com/sober-living |
-| Therapists | https://soberhelpline.com/therapists |
-| Psychiatrists | https://soberhelpline.com/psychiatrists |
-| Interventionists | https://soberhelpline.com/interventionists |
-| Sober Coaches & Companions | https://soberhelpline.com/sober-coaches-companions |
-| Provider Information / Apply | https://soberhelpline.com/for-providers |
+| Inpatient Treatment | /inpatient-treatment |
+| Outpatient Treatment | /outpatient-treatment |
+| Medical Detox | /medical-detox |
+| Sober Living | /sober-living |
+| Therapists | /therapists |
+| Psychiatrists | /psychiatrists |
+| Interventionists | /interventionists |
+| Sober Coaches & Companions | /sober-coaches-companions |
+| Provider Information / Apply | /for-providers |
+| Provider Application | /provider-application |
 
 ---
 
 ## Educational Content
 
-### Interactive Tools & Exercises
-| Resource | URL |
-|----------|-----|
-| Addiction Assessment | https://soberhelpline.com/addiction-assessment |
-| Family Action Plan | https://soberhelpline.com/family-action-plan |
-| Scenario Exercise | https://soberhelpline.com/scenario-exercise |
-| Crisis & Chaos Tool | https://soberhelpline.com/crisis-chaos |
-| Emotional Regulation | https://soberhelpline.com/emotional-regulation |
-| Values Exercise | https://soberhelpline.com/values-exercise |
-| Readiness Checklist | https://soberhelpline.com/readiness-checklist |
-| Fear Inventory Exercise | https://soberhelpline.com/fear-inventory-exercise |
-| Conversation Starters | https://soberhelpline.com/conversation-starters |
-| Insight Behavior Tracker | https://soberhelpline.com/insight-behavior-tracker |
-| Values-Aligned Decisions | https://soberhelpline.com/values-aligned-decisions |
-| Enabling Language Translator | https://soberhelpline.com/enabling-language-translator |
-| Who Benefits Filter | https://soberhelpline.com/who-benefits-filter |
-
-### Educational Pages
+### Pillar 1 — Understanding Addiction
 | Topic | URL |
 |-------|-----|
-| Understanding Addiction | https://soberhelpline.com/understanding-addiction |
-| How Addiction Affects the Brain | https://soberhelpline.com/how-addiction-affects-the-brain |
-| Addiction and Mental Health | https://soberhelpline.com/addiction-and-mental-health |
-| Levels of Care in Treatment | https://soberhelpline.com/levels-of-care-addiction-treatment |
-| Family Education Hub | https://soberhelpline.com/family-education |
-| Family Support Overview | https://soberhelpline.com/family-support |
-| Recovery Resources | https://soberhelpline.com/recovery-resources |
-| Free Family Guide | https://soberhelpline.com/free-guide |
-| FAQs | https://soberhelpline.com/faqs |
-| Treatment Questions | https://soberhelpline.com/treatment-questions |
-| Recovery Requirements | https://soberhelpline.com/recovery-requirements |
-| Treatment Red Flags | https://soberhelpline.com/treatment-red-flags |
-| Treatment Industry Guide | https://soberhelpline.com/treatment-industry-guide |
-| Treatment Modalities | https://soberhelpline.com/treatment-modalities |
-| Drug-Induced Psychosis | https://soberhelpline.com/drug-induced-psychosis |
-| Disease vs. Choice Reality Map | https://soberhelpline.com/disease-choice-reality-map |
-| Why Willpower Fails | https://soberhelpline.com/why-willpower-fails |
-| Addiction Progression Timeline | https://soberhelpline.com/addiction-progression-timeline |
-| How Trauma Shapes Addiction | https://soberhelpline.com/how-trauma-shapes-addiction |
-| Brain and Spiritual Recovery | https://soberhelpline.com/brain-spiritual-recovery |
-| Twelve Steps Explained | https://soberhelpline.com/twelve-steps-explained |
-| Non-Twelve-Step Modalities | https://soberhelpline.com/non-twelve-step-modalities |
+| Understanding Addiction | /understanding-addiction |
+| The Disease vs. Choice Reality Map | /disease-choice-reality-map |
+| Why Willpower Fails | /why-willpower-fails |
+| Addiction Progression Timeline | /addiction-progression-timeline |
+| How Trauma Shapes Addiction | /how-trauma-shapes-addiction |
+| Addiction, the Brain & Spiritual Recovery | /brain-spiritual-recovery |
+| The 12 Steps Explained for Families | /twelve-steps-explained |
+| Non-12-Step Recovery Modalities | /non-twelve-step-modalities |
+| Addiction as a Stress-Regulation Disorder | /addiction-as-stress-disorder |
+| Why Change Doesn't Happen When Families Try Harder | /why-change-doesnt-happen |
+| Multiple Treatment Episodes | /multiple-treatment-episodes |
 
-### Family Dynamics & Boundaries
+### Pillar 2 — Mental Health & Dual Diagnosis
 | Topic | URL |
 |-------|-----|
-| Family Roles in Addiction | https://soberhelpline.com/family-roles-addiction |
-| Addiction Rewrites Family Rules | https://soberhelpline.com/addiction-rewrites-family-rules |
-| Cost of Secrecy | https://soberhelpline.com/cost-of-secrecy |
-| Boundary Drift | https://soberhelpline.com/boundary-drift |
-| Boundaries vs. Ultimatums | https://soberhelpline.com/boundaries-ultimatums |
-| Anger and Boundaries | https://soberhelpline.com/anger-and-boundaries |
-| Flexibility vs. Instability | https://soberhelpline.com/flexibility-vs-instability |
-| Addiction and Attachment Styles | https://soberhelpline.com/addiction-attachment-styles |
-| Grief for Family | https://soberhelpline.com/grief-for-family |
-| Intergenerational Enabling | https://soberhelpline.com/intergenerational-enabling |
-| Family Unity as Liability | https://soberhelpline.com/family-unity-liability |
-| What Changes When Families Change | https://soberhelpline.com/what-changes-when-families-change |
-| Living Well Regardless | https://soberhelpline.com/living-well-regardless |
-| The "Strong One" | https://soberhelpline.com/strong-one |
-| Guilt, Relief, and Resentment | https://soberhelpline.com/guilt-relief-resentment |
+| Drug-Induced Psychosis | /drug-induced-psychosis |
+| Mental Health vs. Substance-Induced Symptoms | /mental-health-vs-substance-induced |
+| Commonly Misunderstood Diagnoses | /misunderstood-diagnoses |
+| Why Focusing Only on Mental Health Delays Recovery | /mental-health-delays-recovery |
+| Trauma vs. Excuses: A Necessary Distinction | /trauma-vs-excuses |
+| Eating Disorders & Addiction | /eating-disorders-guide |
 
-### Sibling Experience
+### Pillar 3 — Family Systems & Enabling
 | Topic | URL |
 |-------|-----|
-| Sibling Experience | https://soberhelpline.com/sibling-experience |
-| Growing Up in the Shadow | https://soberhelpline.com/growing-up-shadow |
-| Sibling Guilt, Anger, and Loyalty | https://soberhelpline.com/sibling-guilt-anger-loyalty |
-| Rebuilding Sibling Relationships | https://soberhelpline.com/rebuilding-sibling-relationships |
-| Parents Repairing the Sibling System | https://soberhelpline.com/parents-repairing-sibling-system |
+| Family Roles in Addiction | /family-roles-addiction |
+| How Addiction Rewrites Family Rules | /addiction-rewrites-family-rules |
+| The Cost of Secrecy | /cost-of-secrecy |
+| How Addiction Shapes Attachment Styles | /addiction-attachment-styles |
+| The Hidden Cost of Being the "Strong One" | /strong-one |
+| The Guilt–Relief–Resentment Cycle | /guilt-relief-resentment |
+| When Family Unity Becomes a Liability | /family-unity-liability |
+| Breaking Intergenerational Enabling | /intergenerational-enabling |
+| How Families Accidentally Interfere with Recovery | /family-interference |
+| What Changes When Families Change | /what-changes-when-families-change |
+| Living Well Regardless of Outcome | /living-well-regardless |
+| Is It Safe to Open Up Again? | /safe-to-open-up |
+| Grief for the Family You Thought You'd Have | /grief-for-family |
+
+### Pillar 4 — Treatment Literacy
+| Topic | URL |
+|-------|-----|
+| 40 Questions to Ask a Treatment Center | /treatment-questions |
+| How the Treatment Industry Works | /treatment-industry-guide |
+| Treatment Red Flags | /treatment-red-flags |
+| How to Talk About Treatment | /talking-about-treatment |
+| Treatment Modalities Explained | /treatment-modalities |
+| Matching the Modality to the Problem | /matching-modality |
+| Why Some Therapies Fail at the Wrong Time | /therapy-timing |
+| Legal Issues Families Should Understand | /legal-issues-guide |
+| Levels of Care in Treatment | /levels-of-care-addiction-treatment |
+| Recovery Requirements | /recovery-requirements |
+
+### Pillar 5 — Boundaries & Consequences
+| Topic | URL |
+|-------|-----|
+| Requests, Demands, Ultimatums & Boundaries | /boundaries-ultimatums |
+| We Don't Negotiate with Terrorists | /no-negotiation |
+| Boundary Drift: How Limits Slowly Erode | /boundary-drift |
+| Anger and Boundaries Are Not the Same Thing | /anger-and-boundaries |
+| The Difference Between Flexibility and Instability | /flexibility-vs-instability |
+
+### Pillar 6 — Family Recovery
+| Topic | URL |
+|-------|-----|
+| What Recovery Requires From Families | /recovery-requirements |
+| What Changes When Families Change | /what-changes-when-families-change |
+| Living Well Regardless of Outcome | /living-well-regardless |
+| Grief for the Family You Thought You'd Have | /grief-for-family |
+| Is It Safe to Open Up Again? | /safe-to-open-up |
+
+### Sibling Experience Series
+| Topic | URL |
+|-------|-----|
+| The Sibling Experience | /sibling-experience |
+| Growing Up in the Shadow of Addiction | /growing-up-shadow |
+| Sibling Guilt, Anger, and Loyalty Conflicts | /sibling-guilt-anger-loyalty |
+| Rebuilding Sibling Relationships in Recovery | /rebuilding-sibling-relationships |
+| Parents: Repairing the Sibling System | /parents-repairing-sibling-system |
+| Sibling Support Resources | /sibling-support |
 
 ### Blog Articles (65+)
-Full blog: https://soberhelpline.com/blog
+Full blog: /blog
 
-Selected articles:
-- Relapse Process in Addiction: https://soberhelpline.com/blog/relapse-process-addiction
-- Enabling and Codependency: https://soberhelpline.com/blog/enabling-codependency
-- Boundaries vs. Ultimatums: https://soberhelpline.com/blog/boundaries-vs-ultimatums
-- Rock Bottom Myth: https://soberhelpline.com/blog/rock-bottom-myth
-- Professional Interventionist Guide: https://soberhelpline.com/blog/professional-interventionist
-- Healthy Boundaries: https://soberhelpline.com/blog/healthy-boundaries
-- Protecting Children from Addiction: https://soberhelpline.com/blog/protecting-children-addiction
-- Relapse Warning Signs: https://soberhelpline.com/blog/relapse-warning-signs
-- Choosing a Treatment Center: https://soberhelpline.com/blog/choosing-treatment-center
-- Fentanyl Overdose Signs and Safety Plan: https://soberhelpline.com/blog/fentanyl-overdose-signs-safety-plan
-- Why Families Feel Guilty for Being Angry: https://soberhelpline.com/blog/why-families-feel-guilty-for-being-angry
-- Parents of Addicted Adult Children: https://soberhelpline.com/blog/parents-addicted-adult-children
-- Addiction and Marriage: https://soberhelpline.com/blog/addiction-marriage-family-protection
-- Couples Recovery from Alcoholism: https://soberhelpline.com/blog/couples-recovery-alcoholism
-- Gaming and Social Media Addiction: https://soberhelpline.com/blog/gaming-social-media-addiction
-- Sports Betting Addiction: https://soberhelpline.com/blog/sports-betting-addiction
+Selected articles by category:
+
+**Family Dynamics & Boundaries:**
+- Enabling and Codependency: /blog/enabling-codependency
+- Boundaries vs. Ultimatums: /blog/boundaries-vs-ultimatums
+- Healthy Boundaries: /blog/healthy-boundaries
+- Holding Boundaries in Addiction: /blog/holding-boundaries-addiction-families
+- Detach with Love: /blog/detach-with-love-addiction-families
+- Family Roles — Divided Dynamics: /blog/family-roles-addiction-divided-dynamics
+- Protecting Children from Addiction: /blog/protecting-children-addiction
+- Parents of Addicted Adult Children: /blog/parents-addicted-adult-children
+- Addiction and Marriage: /blog/addiction-marriage-family-protection
+- Couples Recovery from Alcoholism: /blog/couples-recovery-alcoholism
+- Why Families Feel Guilty for Being Angry: /blog/why-families-feel-guilty-for-being-angry
+- Emotional Whiplash for Families: /blog/emotional-whiplash-addiction-families
+- Quiet Grief Before Acknowledgment: /blog/quiet-grief-families-experience-before-addiction-acknowledged
+- Conflicting Professional Advice: /blog/conflicting-professional-advice-addiction
+
+**Understanding Addiction:**
+- Rock Bottom Myth: /blog/rock-bottom-myth
+- Brain Disease Model: /blog/brain-disease-model-addiction
+- Relapse Process in Addiction: /blog/relapse-process-addiction
+- Relapse Warning Signs: /blog/relapse-warning-signs
+- Personality Changes in Addiction: /blog/personality-changes-in-addiction
+- Triggers Explained: /blog/triggers-explained-addiction
+- Sleep and Addiction: /blog/sleep-and-addiction-recovery
+- Attachment Styles and Addiction: /blog/attachment-styles-and-addiction
+- Shame and Secrecy: /blog/shame-and-addiction-secrecy-resistance
+- Cross-Addiction & Substitution: /blog/cross-addiction-substance-substitution-recovery
+- Denial — Why They Can't Stop: /blog/denial-addiction-cant-stop
+- Childhood Trauma and Addiction: /blog/childhood-trauma-addiction
+- Alcoholism — Why Children Adapt First: /blog/alcoholism-in-the-home-why-children-adapt-long-before-adults-notice
+
+**Treatment Navigation:**
+- Choosing a Treatment Center: /blog/choosing-treatment-center
+- Professional Interventionist Guide: /blog/professional-interventionist
+- Using Insurance for Treatment: /blog/using-insurance-addiction-treatment
+- Levels of Care: /blog/levels-of-care-addiction-treatment
+- Aftercare in Recovery: /blog/aftercare-recovery
+- Co-Occurring Disorders: /blog/co-occurring-disorders-addiction
+- Multiple Treatment & Relapse: /blog/addiction-treatment-relapse
+
+**Mental Health:**
+- Bipolar and Substance Use: /blog/bipolar-disorder-and-substance-use
+- Depression and Addiction: /blog/depression-and-addiction-family-confusion
+- Mental Health vs. Addiction Debate: /blog/addiction-mental-health-or-both
+- TMS for Depression: /blog/tms-depression-addiction-recovery
+
+**Emerging Threats:**
+- Fentanyl Overdose Safety: /blog/fentanyl-overdose-signs-safety-plan
+- Cychlorphine — Synthetic Opioid Danger: /blog/cychlorphine-opioid-danger
+- Meth Psychosis: /blog/meth-psychosis
+- Delta-8 & Synthetic Dangers: /blog/delta8-synthetic-dangers
+- Kratom Hidden Threat: /blog/kratom-hidden-threat
+- CHS & THC Danger: /blog/chs-thc-danger
+- Youth Vaping Recovery 2025: /blog/youth-vaping-recovery-2025
+- Ozempic & Eating Disorders: /blog/ozempic-eating-disorders
+- Sports Betting Addiction: /blog/sports-betting-addiction
+- Gaming and Social Media Addiction: /blog/gaming-social-media-addiction
+
+**Early Intervention Series:**
+- Early Intervention Starts with Family: /blog/early-intervention-starts-with-family
+- Family Changes First: /blog/early-intervention-family-changes-first
+- Stabilizing Family First: /blog/early-intervention-stabilizing-family-first
+- Family Skill Not Crisis Response: /blog/early-intervention-family-skill-not-crisis-response
+- Strengthening Family Before Crisis: /blog/early-intervention-strengthening-family-before-crisis
+- Reducing Family Damage: /blog/early-intervention-reducing-family-damage
+- Waiting for Crisis Weakens Everyone: /blog/early-intervention-families-waiting-for-crisis-weakens-everyone
+
+**Family Support & Education:**
+- Why Families Need Support Even When Loved One Refuses: /blog/why-families-need-support-even-when-loved-one-refuses-help
+- Why Families Struggle to Trust After Relapse: /blog/why-families-struggle-to-trust-change-after-repeated-relapses
+- Why Education Not Urgency Is First: /blog/why-education-not-urgency-first-thing-families-need
+- Families Need Education Before Answers: /blog/why-families-need-education-before-answers
+- Understanding Addiction Without Crisis: /blog/understanding-addiction-without-crisis-education-matters
+- Mental Health Cost of Waiting: /blog/mental-health-cost-families-pay-waiting-for-change
+- Families Sense Trouble Before Obvious: /blog/families-sense-trouble-before-addiction-obvious
+- Sober Helpline Free Support: /blog/sober-helpline-free-confidential-support
+- Reiner Family Tragedy: /blog/reiner-family-tragedy-addiction-intervention
+- Help Family Member Addiction: /blog/help-family-member-addiction
+- Anxiety and Family Burnout: /blog/addiction-anxiety-family-burnout
+- Healing Circle Family Support: /blog/healing-circle-families-support-addiction-recovery
 
 ---
 
@@ -189,15 +315,22 @@ Selected articles:
 
 | Service | URL | Details |
 |---------|-----|---------|
-| Monday Support Group | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7 PM PT |
-| Family Coaching | https://soberhelpline.com/family-coaching | One-on-one with Matt Brown |
-| Family Consultation | https://soberhelpline.com/family-consultation | Initial consultation |
-| Family Membership | https://soberhelpline.com/family-membership | Premium access |
-| Family Forum | https://soberhelpline.com/family-forum | Community discussion |
-| Family Webinars | https://soberhelpline.com/family-webinars | Educational sessions |
-| Testimonials | https://soberhelpline.com/testimonials | Family stories |
-| Recovery Podcasts | https://soberhelpline.com/recovery-podcasts | Recommended listening |
-| Eating Disorders Guide | https://soberhelpline.com/eating-disorders-guide | Specialized resource |
+| Monday Support Group | /monday-zoom-registration | Free, weekly, Mondays 7 PM PT |
+| Family Coaching | /family-coaching | One-on-one with Matt Brown |
+| Book a Consultation | /book-consultation | Schedule a consultation session |
+| Coaching Onboarding | /coaching-onboarding | Complete intake for coaching |
+| Family Consultation | /family-consultation | Initial consultation |
+| Family Membership | /family-membership | Premium access to all resources |
+| Family Forum | /family-forum | Community discussion for members |
+| Family Webinars | /family-webinars | Educational sessions |
+| Zoom Recordings | /zoom-recordings | Past support group recordings |
+| Testimonials | /testimonials | Family stories |
+| Recovery Podcasts | /recovery-podcasts | Recommended listening |
+| Recovery Resources | /recovery-resources | Curated resource directory |
+| Free Family Guide | /free-guide | Downloadable guide |
+| Family Education Hub | /family-education | Complete education library |
+| Family Support Overview | /family-support | All support services |
+| FAQs | /faqs | Common questions answered |
 
 ---
 
@@ -206,6 +339,24 @@ Selected articles:
 **Matt Brown** is a professional interventionist with over 20 years of experience and 22 years of personal recovery. He has conducted over 1,000 professional interventions across the United States and Canada. Matt founded SoberHelpline to provide families with the ethical, practical resources the treatment industry fails to deliver.
 
 Matt is also the founder of Freedom Interventions, host of The Party Wreckers Podcast, and creator of the No More Enabling educational platform.
+
+---
+
+## Platform Architecture
+
+### Content Organization (6 Education Pillars)
+1. **Understanding Addiction** — Brain science, progression, disease model, 12-step and alternatives
+2. **Mental Health & Dual Diagnosis** — Co-occurring disorders, psychosis, trauma, misdiagnosis
+3. **Family Systems & Enabling** — Roles, rules, attachment, secrecy, intergenerational patterns
+4. **Treatment Literacy** — Levels of care, modalities, red flags, advocacy, legal issues
+5. **Boundaries & Consequences** — Setting, holding, drift, anger, flexibility, no-negotiation
+6. **Family Recovery** — Values, grief, self-care, living well, sibling experience
+
+### User Journey Flow
+- New visitors → Onboarding Quiz or Recovery Roadmap Assessment
+- Assessment → Stage placement → Personalized action plan
+- Education → Interactive tools → AI coaching → Community support
+- Free tier → Family Membership for premium access
 
 ---
 
