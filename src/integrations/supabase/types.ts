@@ -2717,6 +2717,14 @@ export type Database = {
           username: string
         }[]
       }
+      get_user_last_sign_in: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          created_at: string
+          last_sign_in_at: string
+          user_id: string
+        }[]
+      }
       has_active_provider_subscription: {
         Args: { _provider_id: string; _user_id: string }
         Returns: boolean
