@@ -17,7 +17,7 @@ SoberHelpline is a comprehensive family support platform for addiction education
 
 ## Key Features
 
-### Recovery Roadmap
+### Recovery Roadmap (NEW)
 A free, interactive, stage-based family recovery navigator. Families take a 5-minute assessment, get placed in one of 8 stages, and receive a personalized step-by-step action plan.
 
 **8 Stages:**
@@ -39,36 +39,6 @@ URL: https://soberhelpline.com/roadmap
 - AI Treatment Navigator: https://soberhelpline.com/ai-treatment-navigator
 - AI Relapse Response Guide: https://soberhelpline.com/ai-relapse-response-guide
 - AI Addiction Reality Translator: https://soberhelpline.com/ai-addiction-reality-translator
-- Enabling Language Translator: https://soberhelpline.com/enabling-language-translator
-
-### Interactive Tools & Worksheets
-- Boundary Setting Worksheet: https://soberhelpline.com/boundary-setting-worksheet
-- Family Action Plan: https://soberhelpline.com/family-action-plan
-- Scenario Practice Exercise: https://soberhelpline.com/scenario-exercise
-- Insight vs. Behavior Tracker: https://soberhelpline.com/insight-behavior-tracker
-- Values Clarification Exercise: https://soberhelpline.com/values-exercise
-- Values-Aligned Decision Making: https://soberhelpline.com/values-aligned-decisions
-- Readiness for Change Checklist: https://soberhelpline.com/readiness-checklist
-- Relapse Warning Signs Tracker: https://soberhelpline.com/relapse-warning-signs
-- Emotional Regulation Tools: https://soberhelpline.com/emotional-regulation
-- Crisis vs. Chaos Decision Guide: https://soberhelpline.com/crisis-chaos
-- Fear Inventory Exercise: https://soberhelpline.com/fear-inventory-exercise
-- Conversation Starters Guide: https://soberhelpline.com/conversation-starters
-- Communication Guide: https://soberhelpline.com/communication-guide
-- Aftercare Readiness Checklist: https://soberhelpline.com/aftercare-checklist
-- Family Advocacy Toolkit: https://soberhelpline.com/family-advocacy-toolkit
-- "Who Benefits?" Decision Filter: https://soberhelpline.com/who-benefits-filter
-- Addiction Assessment: https://soberhelpline.com/addiction-assessment
-
-### Guided Meditations
-12 guided meditation audio tracks for families, including:
-- Allowing Hope & Happiness
-- Connecting with Your Inner Child
-- Regaining Calm
-- Releasing Sadness & Guilt
-- Staying Grounded When They Won't Accept Help
-- You Are Allowed to Say No
-- What I Can Control Today
 
 ### Provider Directory
 Vetted treatment providers — no referral fees, no kickbacks, no patient brokering. Categories include:
@@ -82,21 +52,16 @@ Vetted treatment providers — no referral fees, no kickbacks, no patient broker
 - Sober Coaches: https://soberhelpline.com/sober-coaches-companions
 
 ### Family Education Library
-65+ blog articles and 50+ educational pages covering addiction science, family dynamics, boundaries, treatment navigation, mental health, sibling experience, and recovery.
+65+ blog articles and educational pages covering addiction, family dynamics, boundaries, treatment navigation, mental health, and recovery.
 URL: https://soberhelpline.com/blog
-
-### Family Coaching & Consultation
-- One-on-one coaching with Matt Brown: https://soberhelpline.com/family-coaching
-- Book a consultation: https://soberhelpline.com/book-consultation
-- Coaching onboarding: https://soberhelpline.com/coaching-onboarding
 
 ### Weekly Family Support Group
 Free weekly Zoom support group for families — Mondays at 7 PM Pacific.
 URL: https://soberhelpline.com/monday-zoom-registration
 
-### Family Membership
-Premium membership with full access to community forum, zoom recordings, webinars, and exclusive content.
-URL: https://soberhelpline.com/family-membership
+### Family Coaching
+One-on-one coaching with Matt Brown for families navigating addiction.
+URL: https://soberhelpline.com/family-coaching
 
 ## Contact
 
