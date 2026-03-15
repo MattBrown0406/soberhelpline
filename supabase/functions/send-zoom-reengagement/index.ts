@@ -59,6 +59,18 @@ serve(async (req: Request) => {
       }
     }
 
+    // Add manual recipients
+    const manualRecipients = [
+      { name: "Matt", email: "matt@freedominterventions.com" },
+    ];
+    for (const r of manualRecipients) {
+      const key = r.email.toLowerCase();
+      if (!thisWeekEmails.has(key) && !seen.has(key)) {
+        seen.add(key);
+        targets.push(r);
+      }
+    }
+
     if (targets.length === 0) {
       return new Response(JSON.stringify({ message: "No re-engagement targets found", sent: 0 }), {
         status: 200,
