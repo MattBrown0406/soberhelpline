@@ -115,6 +115,15 @@ serve(async (req: Request) => {
               <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting — a spouse, sibling, parent, or adult child — feel free to forward this email. Anyone with the link above can join. The more of your family that shows up, the more you'll all get out of it.
             </p>
           </div>
+
+          <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
+            <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
+              <strong>⭐ Did you know?</strong> Sober Helpline members don't need to register each week. Just log in to your account and join the meeting instantly — no registration required.
+            </p>
+            <a href="${siteUrl}/family-membership" style="display: inline-block; margin-top: 4px; padding: 8px 20px; background-color: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;">
+              Learn About Membership
+            </a>
+          </div>
           
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
             If you have any questions, call us at <strong>(541) 241-5886</strong>.
