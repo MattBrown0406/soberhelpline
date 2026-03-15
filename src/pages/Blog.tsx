@@ -101,6 +101,7 @@ import cychlorphineOpioidDangerImg from "@/assets/blog-cychlorphine-opioid-dange
 import coOccurringDisordersAddictionImg from "@/assets/blog-co-occurring-disorders-addiction.png";
 import denialAddictionCantStopImg from "@/assets/blog-denial-addiction-cant-stop.png";
 import childhoodTraumaAddictionImg from "@/assets/blog-childhood-trauma-addiction.png";
+import geneticRiskFactorsAddictionImg from "@/assets/blog-genetic-risk-factors-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
