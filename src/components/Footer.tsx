@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Sober Helpline" className="h-10 w-10 rounded-lg" />
+              <img src={logo} alt="Sober Helpline" className="h-12 w-12 rounded-lg" />
               <span className="font-semibold text-white text-lg">Sober Helpline</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
