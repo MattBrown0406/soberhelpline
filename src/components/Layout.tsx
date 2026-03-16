@@ -46,7 +46,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="container mx-auto px-4 flex items-center h-14">
             {/* Logo */}
             <Link to="/" className="flex items-center mr-4 shrink-0">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-auto" />
+              <img src={logo} alt="Sober Helpline" className="h-14 w-auto" />
             </Link>
 
             {/* Back / Home navigation */}
