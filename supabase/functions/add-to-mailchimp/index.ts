@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-
+import { crypto as stdCrypto } from "https://deno.land/std@0.190.0/crypto/mod.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -104,7 +104,7 @@ serve(async (req: Request): Promise<Response> => {
 async function createMD5Hash(input: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest("MD5", data);
+  const hashBuffer = await stdCrypto.subtle.digest("MD5", data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
