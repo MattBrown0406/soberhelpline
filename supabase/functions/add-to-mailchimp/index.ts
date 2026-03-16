@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Md5 } from "https://deno.land/std@0.190.0/hash/md5.ts";
+import md5 from "https://esm.sh/blueimp-md5@2.19.0";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
