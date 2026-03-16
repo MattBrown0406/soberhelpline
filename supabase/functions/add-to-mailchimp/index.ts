@@ -37,7 +37,7 @@ serve(async (req: Request): Promise<Response> => {
     }
 
     // MD5 hash of lowercase email for upsert
-    const emailHash = await createMD5Hash(email.toLowerCase().trim());
+    const emailHash = createMD5Hash(email.toLowerCase().trim());
     const datacenter = apiKey.split("-").pop();
     const url = `https://${datacenter}.api.mailchimp.com/3.0/lists/${audienceId}/members/${emailHash}`;
 
