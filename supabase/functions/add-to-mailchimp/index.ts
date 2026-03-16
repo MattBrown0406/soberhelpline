@@ -101,10 +101,6 @@ serve(async (req: Request): Promise<Response> => {
   }
 });
 
-async function createMD5Hash(input: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest("MD5", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+function createMD5Hash(input: string): string {
+  return new Md5().update(input).toString("hex");
 }
