@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createHash } from "https://deno.land/std@0.190.0/hash/mod.ts";
+import { crypto } from "https://deno.land/std@0.190.0/crypto/mod.ts";
+import { encodeHex } from "https://deno.land/std@0.190.0/encoding/hex.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
