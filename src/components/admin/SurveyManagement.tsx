@@ -27,7 +27,7 @@ interface SurveyQuestion {
   survey_id: string;
   question_text: string;
   question_type: string;
-  options: string[] | null;
+  options: unknown;
   is_standard: boolean;
   display_order: number;
 }
