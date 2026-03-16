@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
