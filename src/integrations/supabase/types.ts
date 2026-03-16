@@ -2103,6 +2103,106 @@ export type Database = {
         }
         Relationships: []
       }
+      survey_questions: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_standard: boolean
+          options: Json | null
+          question_text: string
+          question_type: string
+          survey_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_standard?: boolean
+          options?: Json | null
+          question_text: string
+          question_type?: string
+          survey_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_standard?: boolean
+          options?: Json | null
+          question_text?: string
+          question_type?: string
+          survey_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_questions_survey_id_fkey"
+            columns: ["survey_id"]
+            isOneToOne: false
+            referencedRelation: "surveys"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      survey_responses: {
+        Row: {
+          answers: Json
+          id: string
+          submitted_at: string
+          survey_id: string
+        }
+        Insert: {
+          answers?: Json
+          id?: string
+          submitted_at?: string
+          survey_id: string
+        }
+        Update: {
+          answers?: Json
+          id?: string
+          submitted_at?: string
+          survey_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "survey_responses_survey_id_fkey"
+            columns: ["survey_id"]
+            isOneToOne: false
+            referencedRelation: "surveys"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      surveys: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_active: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           city: string
