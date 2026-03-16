@@ -161,6 +161,9 @@ const Index = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-56">
                     <DropdownMenuItem asChild>
+                      <Link to="/roadmap" className="cursor-pointer font-semibold text-logo-green">🗺️ Recovery Roadmap</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link to="/family-support" className="cursor-pointer">Family Education</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
@@ -233,17 +236,6 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Recovery Roadmap Banner */}
-      <Link to="/roadmap" className="block bg-gradient-to-r from-logo-green/10 via-logo-green/5 to-logo-green/10 border-b border-logo-green/20 hover:from-logo-green/15 hover:via-logo-green/10 hover:to-logo-green/15 transition-all group">
-        <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-2 md:gap-3">
-          <Compass className="w-4 h-4 text-amber-500" />
-          <p className="text-xs md:text-sm font-medium text-foreground">
-            <span className="font-bold text-logo-green">NEW:</span> Take our free 5-minute assessment and get your personalized Recovery Roadmap
-          </p>
-          <ArrowRight className="w-3.5 h-3.5 text-logo-green group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
-        </div>
-      </Link>
-
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-logo-green/5 via-background to-primary/5" />
@@ -264,24 +256,32 @@ const Index = () => {
               You're exhausted from walking on eggshells, wondering if you're helping or making it worse. We'll show you exactly what to do — whether they're ready for help or not.
             </p>
             
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 md:mb-6 px-4">
-              <Link to="/free-guide">
+            {/* Primary CTA — Roadmap */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3 px-4">
+              <Link to="/roadmap/assessment">
                 <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
-                  Get Your Free Crisis Guide
+                  <Compass className="w-4 h-4 md:w-5 md:h-5" />
+                  Find My Stage on the Recovery Roadmap
+                </Button>
+              </Link>
+            </div>
+
+            {/* Secondary CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 px-4">
+              <Link to="/free-guide">
+                <Button size="lg" variant="outline" className="gap-2 px-6 py-4 text-sm md:text-base">
+                  <Sparkles className="w-4 h-4" />
+                  Get Free Crisis Guide
                 </Button>
               </Link>
               <a href="tel:5412415886">
-                <Button size="lg" variant="outline" className="gap-2 px-6 py-5 md:py-6 text-base md:text-lg">
-                  <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                  Talk to Someone Now
+                <Button size="lg" variant="ghost" className="gap-2 px-6 py-4 text-sm md:text-base text-muted-foreground hover:text-foreground">
+                  <Phone className="w-4 h-4" />
+                  Talk to Someone · (541) 241-5886
                 </Button>
               </a>
             </div>
-            <Link to="/family-education" className="inline-flex items-center gap-1 text-sm text-logo-green hover:text-logo-green/80 transition-colors font-medium">
-              Or explore our Family Education Center <ArrowRight className="w-4 h-4" />
-            </Link>
+            <p className="text-xs text-muted-foreground">Free 5-minute assessment · No account required</p>
           </div>
         </div>
       </section>
@@ -301,56 +301,54 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Monday Night Zoom Announcement */}
-      <section className="container mx-auto px-4 pt-6 md:pt-10">
-        <Link to="/monday-zoom-registration" className="block">
-          <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <div className="text-center md:text-left">
-                  <p className="text-xs md:text-sm font-medium text-white/80">📅 Every Monday Night</p>
-                  <h3 className="text-base md:text-lg font-bold">Monday Night Zoom — Free Weekly Family Support</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
-                </div>
-              </div>
-              <div className="flex-shrink-0">
-                <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                  Register Now <ArrowRight className="w-4 h-4" />
-                </span>
-              </div>
-            </div>
+      {/* Recovery Roadmap — Full Section */}
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="text-center mb-8 md:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
+            <Compass className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            Free · No Account Required
           </div>
-        </Link>
-      </section>
-
-      {/* Family Coaching CTA Banner */}
-      <section className="container mx-auto px-4 pt-4 md:pt-6">
-        <Link to="/family-coaching" className="block">
-          <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <div className="text-center md:text-left">
-                  <p className="text-xs md:text-sm font-medium text-white/80">1-on-1 Support for Families</p>
-                  <h3 className="text-base md:text-lg font-bold">Family Coaching — From Crisis to Clarity</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Boundaries, enabling patterns, and a real plan — with a coach who's been there. Sessions start at $150 — <span className="text-yellow-300 font-semibold">members save $25 per session</span>.</p>
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+            Where Are You in the Recovery Journey?
+          </h2>
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
+            The Recovery Roadmap meets you exactly where you are — with a personalized action plan, resources, and next steps for your stage.
+          </p>
+        </div>
+        {/* Stage Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
+          {[
+            { emoji: "🔴", name: "Suspicion", desc: "Something feels off", path: "/roadmap/suspicion", color: "border-red-300/50 hover:border-red-400/70 hover:bg-red-50/50 dark:hover:bg-red-950/20" },
+            { emoji: "🟠", name: "Confirmation", desc: "I know there's a problem", path: "/roadmap/assessment", color: "border-orange-300/50 hover:border-orange-400/70 hover:bg-orange-50/50 dark:hover:bg-orange-950/20" },
+            { emoji: "🟡", name: "Crisis", desc: "Things are falling apart", path: "/roadmap/crisis", color: "border-yellow-300/50 hover:border-yellow-400/70 hover:bg-yellow-50/50 dark:hover:bg-yellow-950/20" },
+            { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to act", path: "/roadmap/pre-intervention", color: "border-blue-300/50 hover:border-blue-400/70 hover:bg-blue-50/50 dark:hover:bg-blue-950/20" },
+            { emoji: "🟣", name: "Treatment", desc: "They're in treatment", path: "/roadmap/treatment", color: "border-purple-300/50 hover:border-purple-400/70 hover:bg-purple-50/50 dark:hover:bg-purple-950/20" },
+            { emoji: "🟢", name: "Early Recovery", desc: "They're home — now what?", path: "/roadmap/early-recovery", color: "border-green-300/50 hover:border-green-400/70 hover:bg-green-50/50 dark:hover:bg-green-950/20" },
+            { emoji: "⚪", name: "Long-Term Recovery", desc: "6+ months in, rebuilding", path: "/roadmap/long-term-recovery", color: "border-slate-300/50 hover:border-slate-400/70 hover:bg-slate-50/50 dark:hover:bg-slate-950/20" },
+            { emoji: "🔴", name: "Relapse", desc: "It happened again", path: "/roadmap/relapse", color: "border-rose-300/50 hover:border-rose-400/70 hover:bg-rose-50/50 dark:hover:bg-rose-950/20" },
+          ].map((stage) => (
+            <Link key={stage.path} to={stage.path}>
+              <div className={`rounded-xl border-2 bg-card p-4 md:p-5 text-center cursor-pointer transition-all hover:shadow-md group ${stage.color}`}>
+                <div className="text-2xl md:text-3xl mb-2">{stage.emoji}</div>
+                <div className="font-semibold text-sm md:text-base text-foreground mb-1">{stage.name}</div>
+                <div className="text-xs text-muted-foreground leading-snug">{stage.desc}</div>
+                <div className="mt-3 inline-flex items-center gap-1 text-xs text-logo-green font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  Start here <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
-              <div className="flex-shrink-0">
-                <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                  Learn More <ArrowRight className="w-4 h-4" />
-                </span>
-              </div>
-            </div>
-          </div>
-        </Link>
+            </Link>
+          ))}
+        </div>
+        {/* Single CTA */}
+        <div className="text-center">
+          <Link to="/roadmap/assessment">
+            <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-10 py-6 text-base md:text-lg shadow-lg shadow-logo-green/20">
+              <Compass className="w-5 h-5" />
+              Take the 5-Minute Assessment →
+            </Button>
+          </Link>
+          <p className="text-xs text-muted-foreground mt-2">Tells you your stage and gives you a personalized plan</p>
+        </div>
       </section>
 
       {/* Peek Inside the Curriculum - Membership Conversion Section */}
@@ -692,6 +690,89 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Monday Night Zoom Announcement */}
+      <section className="container mx-auto px-4 pt-6 md:pt-10">
+        <Link to="/monday-zoom-registration" className="block">
+          <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <Calendar className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="text-xs md:text-sm font-medium text-white/80">📅 Every Monday Night</p>
+                  <h3 className="text-base md:text-lg font-bold">Monday Night Zoom — Free Weekly Family Support</h3>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
+                  Register Now <ArrowRight className="w-4 h-4" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* Family Coaching CTA Banner */}
+      <section className="container mx-auto px-4 pt-4 md:pt-6">
+        <Link to="/family-coaching" className="block">
+          <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="text-xs md:text-sm font-medium text-white/80">1-on-1 Support for Families</p>
+                  <h3 className="text-base md:text-lg font-bold">Family Coaching — From Crisis to Clarity</h3>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Boundaries, enabling patterns, and a real plan — with a coach who's been there. Sessions start at $150 — <span className="text-yellow-300 font-semibold">members save $25 per session</span>.</p>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
+                  Learn More <ArrowRight className="w-4 h-4" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* Provider Directory */}
+      <section className="container mx-auto px-4 py-10 md:py-16">
+        <div className="text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
+            <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            Ethical Provider Directory
+          </div>
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+            Find Vetted Treatment Providers
+          </h2>
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            No referral fees. No kickbacks. Just honest, vetted providers.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {categories.map((category) => (
+            <Link key={category.path} to={category.path}>
+              <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
+                <CardContent className="p-4 md:p-6 text-center">
+                  <div className="w-12 h-12 mx-auto rounded-xl bg-logo-green/10 flex items-center justify-center mb-3 group-hover:bg-logo-green/20 transition-colors">
+                    <category.icon className="w-6 h-6 text-logo-green" />
+                  </div>
+                  <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
+                  <p className="text-xs text-muted-foreground hidden md:block">{category.description}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Testimonials — removed placeholder reviews, will add real ones later */}
 
       {/* Family Bridge Banner */}
@@ -765,37 +846,6 @@ const Index = () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Provider Directory */}
-      <section className="container mx-auto px-4 py-10 md:py-16">
-        <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
-            <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
-            Ethical Provider Directory
-          </div>
-          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-            Find Vetted Treatment Providers
-          </h2>
-          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            No referral fees. No kickbacks. Just honest, vetted providers.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {categories.map((category) => (
-            <Link key={category.path} to={category.path}>
-              <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
-                <CardContent className="p-4 md:p-6 text-center">
-                  <div className="w-12 h-12 mx-auto rounded-xl bg-logo-green/10 flex items-center justify-center mb-3 group-hover:bg-logo-green/20 transition-colors">
-                    <category.icon className="w-6 h-6 text-logo-green" />
-                  </div>
-                  <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
-                  <p className="text-xs text-muted-foreground hidden md:block">{category.description}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
         </div>
       </section>
 
