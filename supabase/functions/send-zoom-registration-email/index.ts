@@ -137,6 +137,34 @@ serve(async (req: Request) => {
 
     console.log("Zoom registration email sent:", emailResult);
 
+    // Sync to Mailchimp with "Zoom Meeting Registrant" tag
+    try {
+      const nameParts = name.trim().split(/\s+/);
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+
+      const mailchimpRes = await fetch(
+        `${Deno.env.get("SUPABASE_URL")}/functions/v1/add-to-mailchimp`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          },
+          body: JSON.stringify({
+            email: email.toLowerCase().trim(),
+            firstName,
+            lastName,
+            tags: ["Zoom Meeting Registrant"],
+          }),
+        }
+      );
+      const mailchimpData = await mailchimpRes.json();
+      console.log("Mailchimp sync result:", mailchimpData);
+    } catch (mcError) {
+      console.error("Mailchimp sync failed (non-blocking):", mcError);
+    }
+
     // Also notify admin
     await sendEmail(
       ["matt@soberhelpline.com"],
