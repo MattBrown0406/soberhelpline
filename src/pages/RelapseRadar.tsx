@@ -230,7 +230,7 @@ export default function RelapseRadar() {
       <SEOHead
         title="Relapse Radar — Early Warning Signs Assessment | Sober Helpline"
         description="Identify potential relapse risks before a crisis happens. Free interactive assessment tool for families navigating addiction recovery."
-        canonical="https://soberhelpline.com/relapse-radar"
+        
       />
 
       <div className="min-h-screen bg-background">
