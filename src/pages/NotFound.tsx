@@ -14,7 +14,7 @@ const NotFound = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted/50 px-4">
       <div className="text-center max-w-lg">
-        <img src={logo} alt="Sober Helpline" className="h-16 w-16 mx-auto mb-6 rounded-xl" />
+        <img src={logo} alt="Sober Helpline" className="h-20 w-20 mx-auto mb-6 rounded-xl" />
         <h1 className="mb-2 text-6xl font-bold text-logo-green">404</h1>
         <p className="mb-2 text-xl font-semibold text-foreground">Page Not Found</p>
         <p className="mb-8 text-muted-foreground">

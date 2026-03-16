@@ -14,7 +14,7 @@ export default function ToolBrandHeader({ title, subtitle, clinicalNote, classNa
         <img 
           src={logoImg} 
           alt="Sober Helpline" 
-          className="h-12 w-auto rounded-md shadow-sm flex-shrink-0 mt-0.5" 
+          className="h-14 w-auto rounded-md shadow-sm flex-shrink-0 mt-0.5" 
         />
         <div className="flex-1 min-w-0">
           <h3 className="text-lg font-semibold text-foreground leading-snug">{title}</h3>
