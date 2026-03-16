@@ -133,6 +133,7 @@ export const searchIndex: SearchEntry[] = [
   { title: "The Difference Between Helping and Enabling", path: "/blog/helping-vs-enabling", description: "How to know when your help is actually making things worse.", category: "blog", keywords: ["helping", "enabling", "difference", "support"] },
   { title: "What Is an Intervention?", path: "/blog/what-is-an-intervention", description: "Understanding the intervention process and what to expect.", category: "blog", keywords: ["intervention", "process", "what to expect", "family"] },
   { title: "Navigating Insurance for Addiction Treatment", path: "/blog/navigating-insurance-treatment", description: "How to work with insurance companies for treatment coverage.", category: "blog", keywords: ["insurance", "coverage", "treatment", "paying", "cost"] },
+  { title: "Relapse Radar — Early Warning Signs Assessment", path: "/relapse-radar", description: "Assess potential relapse risks for a loved one in recovery before a crisis happens.", category: "tool", keywords: ["relapse", "radar", "warning signs", "risk", "assessment", "recovery"] },
 ];
 
 export const categoryLabels: Record<string, string> = {

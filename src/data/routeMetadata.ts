@@ -468,6 +468,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Provider Application — Join Our Directory | Sober Helpline',
     description: 'Apply to join Sober Helpline\'s vetted provider directory. We connect ethical treatment providers with families who need help.',
   },
+  '/relapse-radar': {
+    title: 'Relapse Radar — Early Warning Signs Assessment | Sober Helpline',
+    description: 'Identify potential relapse risks before a crisis happens. Free interactive assessment tool for families navigating addiction recovery.',
+  },
 };
 
 /**

@@ -540,6 +540,14 @@ export function getBreadcrumbs(pathname: string): BreadcrumbItem[] | null {
     ];
   }
 
+  if (pathname === "/relapse-radar") {
+    return [
+      { label: "Home", path: "/" },
+      { label: "Family Education", path: "/family-education" },
+      { label: "Relapse Radar", path: "/relapse-radar" },
+    ];
+  }
+
   // Known blog slug routes (top-level slugs that render BlogArticle)
   const blogSlugs = [
     "/fentanyl-overdose-signs-safety-plan",
