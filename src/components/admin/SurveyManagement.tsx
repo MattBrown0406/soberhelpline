@@ -242,7 +242,7 @@ export const SurveyManagement = () => {
   // Compute aggregated results for rating questions
   const getRatingStats = (questionId: string) => {
     const vals = responses
-      .map((r) => Number(r.answers[questionId]))
+      .map((r) => Number((r.answers as Record<string, string>)[questionId]))
       .filter((v) => !isNaN(v));
     if (vals.length === 0) return { avg: 0, count: 0, distribution: {} as Record<number, number> };
     const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
@@ -253,7 +253,7 @@ export const SurveyManagement = () => {
 
   const getTextResponses = (questionId: string) => {
     return responses
-      .map((r) => r.answers[questionId])
+      .map((r) => (r.answers as Record<string, string>)[questionId])
       .filter((v) => v && v.trim());
   };
 
