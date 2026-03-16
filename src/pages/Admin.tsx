@@ -469,6 +469,20 @@ const Admin = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="surveys">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ClipboardList className="h-5 w-5" />
+                  Monthly Survey Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <SurveyManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
         <EditSubmissionDialog
