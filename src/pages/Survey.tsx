@@ -14,7 +14,7 @@ interface SurveyQuestion {
   id: string;
   question_text: string;
   question_type: string;
-  options: string[] | null;
+  options: unknown;
   display_order: number;
 }
 
