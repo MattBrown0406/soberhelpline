@@ -260,7 +260,7 @@ export const SurveyManagement = () => {
   const getMultipleChoiceStats = (questionId: string) => {
     const counts: Record<string, number> = {};
     responses.forEach((r) => {
-      const val = r.answers[questionId];
+      const val = (r.answers as Record<string, string>)[questionId];
       if (val) counts[val] = (counts[val] || 0) + 1;
     });
     return counts;

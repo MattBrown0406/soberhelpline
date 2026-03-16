@@ -213,7 +213,7 @@ const Survey = () => {
                     }
                     className="space-y-2"
                   >
-                    {(question.options as string[]).map((option, i) => (
+                    {(question.options as string[]).map((option: string, i: number) => (
                       <div key={i} className="flex items-center space-x-2">
                         <RadioGroupItem value={option} id={`${question.id}-opt-${i}`} />
                         <Label htmlFor={`${question.id}-opt-${i}`} className="cursor-pointer text-sm">
