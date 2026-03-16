@@ -153,7 +153,7 @@ const Survey = () => {
         description="Share your feedback on Monday Night Family Support meetings."
       />
       <div className="container mx-auto px-4 py-8 max-w-2xl">
-        <Breadcrumbs />
+        <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Survey", path: "/survey" }]} />
 
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium mb-4">

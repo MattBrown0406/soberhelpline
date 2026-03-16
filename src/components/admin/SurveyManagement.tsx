@@ -35,7 +35,7 @@ interface SurveyQuestion {
 interface SurveyResponse {
   id: string;
   survey_id: string;
-  answers: Record<string, string>;
+  answers: Record<string, string> | unknown;
   submitted_at: string;
 }
 
