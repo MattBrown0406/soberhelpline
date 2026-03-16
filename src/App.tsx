@@ -132,6 +132,7 @@ const RoadmapEarlyRecovery = React.lazy(() => import("./pages/RoadmapEarlyRecove
 const RoadmapLongTermRecovery = React.lazy(() => import("./pages/RoadmapLongTermRecovery"));
 const RoadmapRelapse = React.lazy(() => import("./pages/RoadmapRelapse"));
 const RelapseRadar = React.lazy(() => import("./pages/RelapseRadar"));
+const Survey = React.lazy(() => import("./pages/Survey"));
 
 const queryClient = new QueryClient();
 
