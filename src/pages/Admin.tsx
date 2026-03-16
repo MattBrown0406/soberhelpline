@@ -217,6 +217,10 @@ const Admin = () => {
               <Film className="h-4 w-4" />
               Recordings
             </TabsTrigger>
+            <TabsTrigger value="surveys" className="gap-2">
+              <ClipboardList className="h-4 w-4" />
+              Surveys
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="submissions">
