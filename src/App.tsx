@@ -329,6 +329,7 @@ const App = () => (
               <Route path="/roadmap/long-term-recovery" element={<RoadmapLongTermRecovery />} />
               <Route path="/roadmap/relapse" element={<RoadmapRelapse />} />
               <Route path="/relapse-radar" element={<RelapseRadar />} />
+              <Route path="/survey" element={<Survey />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
