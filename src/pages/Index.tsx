@@ -190,6 +190,9 @@ const Index = () => {
                     <DropdownMenuItem asChild>
                       <Link to="/monday-zoom-registration" className="cursor-pointer">Free Monday Zoom Meeting</Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/relapse-radar" className="cursor-pointer">Relapse Radar</Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DropdownMenu>
