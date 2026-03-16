@@ -31,6 +31,7 @@ import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
 import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
 import ConsultationProviderCreator from "@/components/admin/ConsultationProviderCreator";
 import { RecordingManagement } from "@/components/admin/RecordingManagement";
+import { SurveyManagement } from "@/components/admin/SurveyManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
