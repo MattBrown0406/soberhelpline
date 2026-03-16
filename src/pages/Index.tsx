@@ -149,7 +149,7 @@ const Index = () => {
           <div className="hidden md:flex h-16 items-center justify-between">
             <div className="flex items-center gap-6">
               <Link to="/" className="flex items-center">
-                <img src={bannerLogo} alt="Sober Helpline" className="h-10 w-auto" />
+                <img src={bannerLogo} alt="Sober Helpline" className="h-12 w-auto" />
               </Link>
               <nav className="flex items-center gap-1">
                 <DropdownMenu>
