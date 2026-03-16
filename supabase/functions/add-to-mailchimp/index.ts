@@ -102,5 +102,5 @@ serve(async (req: Request): Promise<Response> => {
 });
 
 function createMD5Hash(input: string): string {
-  return new Md5().update(input).toString("hex");
+  return md5(input);
 }
