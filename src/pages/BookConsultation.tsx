@@ -270,7 +270,7 @@ const BookConsultation = () => {
     const dates: string[] = [];
     const today = new Date();
     const daysAhead = isParallelRecovery ? 90 : 30;
-    for (let i = 1; i <= daysAhead; i++) {
+    for (let i = 0; i <= daysAhead; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() + i);
       const dayOfWeek = d.getDay();
