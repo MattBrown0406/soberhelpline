@@ -170,7 +170,22 @@ export function FamilyMemberManagement() {
     }
   };
 
-  const activeMembers = members.filter(m => m.subscription?.status === 'active');
+  const sortByNextBilling = (list: FamilyMember[]) => {
+    return [...list].sort((a, b) => {
+      const aIsFree = a.subscription?.plan_type === 'free' || a.subscription?.amount === 0;
+      const bIsFree = b.subscription?.plan_type === 'free' || b.subscription?.amount === 0;
+      // Free memberships always go to the end
+      if (aIsFree && !bIsFree) return 1;
+      if (!aIsFree && bIsFree) return -1;
+      if (aIsFree && bIsFree) return 0;
+      // Sort by next_billing_date ascending (1st of month first)
+      const aDate = a.subscription?.next_billing_date ? new Date(a.subscription.next_billing_date).getTime() : Infinity;
+      const bDate = b.subscription?.next_billing_date ? new Date(b.subscription.next_billing_date).getTime() : Infinity;
+      return aDate - bDate;
+    });
+  };
+
+  const activeMembers = sortByNextBilling(members.filter(m => m.subscription?.status === 'active'));
   const archivedMembers = members.filter(m => m.subscription?.status === 'cancelled' || m.subscription?.status === 'expired');
   const otherMembers = members.filter(m => m.subscription?.status !== 'active' && m.subscription?.status !== 'cancelled' && m.subscription?.status !== 'expired');
 
