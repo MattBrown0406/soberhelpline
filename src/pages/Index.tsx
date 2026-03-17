@@ -742,6 +742,11 @@ const Index = () => {
         </Link>
       </section>
 
+      {/* Free Consultation CTA */}
+      <section className="container mx-auto px-4 pt-4 md:pt-6">
+        <FreeConsultationCTA compact />
+      </section>
+
       {/* Provider Directory */}
       <section className="container mx-auto px-4 py-10 md:py-16">
         <div className="text-center mb-8 md:mb-12">
