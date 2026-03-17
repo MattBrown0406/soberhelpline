@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import SEOHead from "@/components/SEOHead";
+import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 
 export default function FamilySupport() {
   const [user, setUser] = useState<User | null>(null);
