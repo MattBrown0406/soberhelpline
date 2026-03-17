@@ -270,7 +270,7 @@ const BookConsultation = () => {
     const dates: string[] = [];
     const today = new Date();
     const daysAhead = isParallelRecovery ? 90 : 30;
-    for (let i = 1; i <= daysAhead; i++) {
+    for (let i = 0; i <= daysAhead; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() + i);
       const dayOfWeek = d.getDay();
@@ -322,6 +322,14 @@ const BookConsultation = () => {
           return slotStartMin < bookedEndMin && slotEndMin > bookedStartMin;
         });
         if (!isBooked) {
+          // Filter out past slots for today
+          const todayStr = new Date().toISOString().split("T")[0];
+          if (dateStr === todayStr) {
+            const now = new Date();
+            const providerNow = new Date(now.toLocaleString("en-US", { timeZone: providerTz }));
+            const nowMinutes = providerNow.getHours() * 60 + providerNow.getMinutes();
+            if (slotStartMin <= nowMinutes) continue;
+          }
           const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
           const convertedEnd = convertTime(`${slotEndH}:${slotEndM}`, dateStr, providerTz, clientTimezone);
           slots.push({
