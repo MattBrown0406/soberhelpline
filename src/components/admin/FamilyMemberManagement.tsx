@@ -154,6 +154,7 @@ export function FamilyMemberManagement() {
             amount: activeSub.amount,
             created_at: activeSub.created_at,
             paypal_subscription_id: activeSub.paypal_subscription_id,
+            next_billing_date: activeSub.next_billing_date || null,
           } : null,
           last_sign_in_at: signIn?.last_sign_in_at || null,
           account_created_at: signIn?.created_at || null,
