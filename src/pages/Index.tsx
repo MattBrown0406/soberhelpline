@@ -23,6 +23,7 @@ import SEOHead from "@/components/SEOHead";
 
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
+import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },

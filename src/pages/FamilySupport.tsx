@@ -101,6 +101,10 @@ export default function FamilySupport() {
         {/* Main Content */}
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
+            {/* Free Consultation CTA */}
+            <div className="mb-8">
+              <FreeConsultationCTA />
+            </div>
             
             {/* Premium Member Content Section */}
             {isLoading ? (
