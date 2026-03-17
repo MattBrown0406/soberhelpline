@@ -434,6 +434,13 @@ export function FamilyMemberManagement() {
                 {member.first_name} {member.last_name}
               </TableCell>
               <TableCell>{member.contact?.email || '-'}</TableCell>
+              <TableCell className="text-sm">
+                {member.subscription?.plan_type === 'free' || member.subscription?.amount === 0
+                  ? <Badge variant="secondary">Free</Badge>
+                  : member.subscription?.next_billing_date
+                    ? formatDate(member.subscription.next_billing_date)
+                    : '-'}
+              </TableCell>
               <TableCell className="text-sm">{formatDateTime(member.last_sign_in_at)}</TableCell>
               <TableCell className="text-sm">
                 {member.subscription?.created_at 
