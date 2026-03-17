@@ -266,6 +266,13 @@ const BookConsultation = () => {
     setStep(step + 1);
   };
 
+  const toLocalDateStr = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const getAvailableDates = () => {
     const dates: string[] = [];
     const today = new Date();
@@ -275,7 +282,7 @@ const BookConsultation = () => {
       d.setDate(d.getDate() + i);
       const dayOfWeek = d.getDay();
       if (availability.some((a) => a.day_of_week === dayOfWeek)) {
-        dates.push(d.toISOString().split("T")[0]);
+        dates.push(toLocalDateStr(d));
       }
     }
     return dates;
@@ -323,7 +330,7 @@ const BookConsultation = () => {
         });
         if (!isBooked) {
           // Filter out past slots for today
-          const todayStr = new Date().toISOString().split("T")[0];
+          const todayStr = toLocalDateStr(new Date());
           if (dateStr === todayStr) {
             const now = new Date();
             const providerNow = new Date(now.toLocaleString("en-US", { timeZone: providerTz }));
