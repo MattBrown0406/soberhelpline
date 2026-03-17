@@ -60,6 +60,7 @@ interface FamilyMember {
     amount: number;
     created_at: string;
     paypal_subscription_id: string | null;
+    next_billing_date: string | null;
   } | null;
   contact?: {
     email: string;
@@ -153,6 +154,7 @@ export function FamilyMemberManagement() {
             amount: activeSub.amount,
             created_at: activeSub.created_at,
             paypal_subscription_id: activeSub.paypal_subscription_id,
+            next_billing_date: activeSub.next_billing_date || null,
           } : null,
           last_sign_in_at: signIn?.last_sign_in_at || null,
           account_created_at: signIn?.created_at || null,
@@ -168,7 +170,22 @@ export function FamilyMemberManagement() {
     }
   };
 
-  const activeMembers = members.filter(m => m.subscription?.status === 'active');
+  const sortByNextBilling = (list: FamilyMember[]) => {
+    return [...list].sort((a, b) => {
+      const aIsFree = a.subscription?.plan_type === 'free' || a.subscription?.amount === 0;
+      const bIsFree = b.subscription?.plan_type === 'free' || b.subscription?.amount === 0;
+      // Free memberships always go to the end
+      if (aIsFree && !bIsFree) return 1;
+      if (!aIsFree && bIsFree) return -1;
+      if (aIsFree && bIsFree) return 0;
+      // Sort by next_billing_date ascending (1st of month first)
+      const aDate = a.subscription?.next_billing_date ? new Date(a.subscription.next_billing_date).getTime() : Infinity;
+      const bDate = b.subscription?.next_billing_date ? new Date(b.subscription.next_billing_date).getTime() : Infinity;
+      return aDate - bDate;
+    });
+  };
+
+  const activeMembers = sortByNextBilling(members.filter(m => m.subscription?.status === 'active'));
   const archivedMembers = members.filter(m => m.subscription?.status === 'cancelled' || m.subscription?.status === 'expired');
   const otherMembers = members.filter(m => m.subscription?.status !== 'active' && m.subscription?.status !== 'cancelled' && m.subscription?.status !== 'expired');
 
@@ -401,6 +418,7 @@ export function FamilyMemberManagement() {
             <TableHead>Username</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
+            <TableHead>Next Payment</TableHead>
             <TableHead>Last Login</TableHead>
             <TableHead>Member Since</TableHead>
             <TableHead>Actions</TableHead>
@@ -416,6 +434,13 @@ export function FamilyMemberManagement() {
                 {member.first_name} {member.last_name}
               </TableCell>
               <TableCell>{member.contact?.email || '-'}</TableCell>
+              <TableCell className="text-sm">
+                {member.subscription?.plan_type === 'free' || member.subscription?.amount === 0
+                  ? <Badge variant="secondary">Free</Badge>
+                  : member.subscription?.next_billing_date
+                    ? formatDate(member.subscription.next_billing_date)
+                    : '-'}
+              </TableCell>
               <TableCell className="text-sm">{formatDateTime(member.last_sign_in_at)}</TableCell>
               <TableCell className="text-sm">
                 {member.subscription?.created_at 
