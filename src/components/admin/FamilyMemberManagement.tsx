@@ -60,6 +60,7 @@ interface FamilyMember {
     amount: number;
     created_at: string;
     paypal_subscription_id: string | null;
+    next_billing_date: string | null;
   } | null;
   contact?: {
     email: string;
