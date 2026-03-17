@@ -309,7 +309,7 @@ export type Database = {
           client_name: string
           client_notified: boolean | null
           client_phone: string | null
-          client_user_id: string
+          client_user_id: string | null
           coaching_plan_id: string | null
           created_at: string
           end_time: string
@@ -333,7 +333,7 @@ export type Database = {
           client_name: string
           client_notified?: boolean | null
           client_phone?: string | null
-          client_user_id: string
+          client_user_id?: string | null
           coaching_plan_id?: string | null
           created_at?: string
           end_time: string
@@ -357,7 +357,7 @@ export type Database = {
           client_name?: string
           client_notified?: boolean | null
           client_phone?: string | null
-          client_user_id?: string
+          client_user_id?: string | null
           coaching_plan_id?: string | null
           created_at?: string
           end_time?: string
@@ -2750,6 +2750,16 @@ export type Database = {
       }
     }
     Functions: {
+      get_booking_slots: {
+        Args: never
+        Returns: {
+          booking_date: string
+          end_time: string
+          provider_id: string
+          start_time: string
+          timezone: string
+        }[]
+      }
       get_guide_analytics: {
         Args: never
         Returns: {

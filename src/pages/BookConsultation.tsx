@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown, Users } from "lucide-react";
 import logo from "@/assets/logo.png";
 import providerHeadshot from "@/assets/provider-headshot.jpg";
 import SEOHead from "@/components/SEOHead";
@@ -30,29 +30,22 @@ const TIMEZONE_OPTIONS = [
 
 const getTimezoneLabel = (tz: string) => TIMEZONE_OPTIONS.find((t) => t.value === tz)?.label || tz;
 
-// Convert a time string (HH:MM) from one timezone to another on a given date
 const convertTime = (timeStr: string, dateStr: string, fromTz: string, toTz: string): { time: string; dayOffset: number } => {
   const [h, m] = timeStr.split(":").map(Number);
-  // Build a date-time in the source timezone using Intl
-  const sourceDateStr = `${dateStr}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
-  
-  // Get UTC offset for both timezones
   const getOffset = (tz: string, date: Date) => {
     const utc = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
     const local = new Date(date.toLocaleString("en-US", { timeZone: tz }));
     return (local.getTime() - utc.getTime()) / 60000;
   };
-  
+  const sourceDateStr = `${dateStr}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
   const refDate = new Date(sourceDateStr);
   const fromOffset = getOffset(fromTz, refDate);
   const toOffset = getOffset(toTz, refDate);
   const diffMinutes = toOffset - fromOffset;
-  
   let totalMinutes = h * 60 + m + diffMinutes;
   let dayOffset = 0;
   while (totalMinutes < 0) { totalMinutes += 1440; dayOffset--; }
   while (totalMinutes >= 1440) { totalMinutes -= 1440; dayOffset++; }
-  
   const newH = String(Math.floor(totalMinutes / 60)).padStart(2, "0");
   const newM = String(totalMinutes % 60).padStart(2, "0");
   return { time: `${newH}:${newM}`, dayOffset };
@@ -65,7 +58,6 @@ const formatTime12h = (time24: string) => {
   return `${h12}:${String(m).padStart(2, "0")} ${period}`;
 };
 
-// Intake questionnaire sections
 const SESSION_REASONS = [
   "Emergency Game Plan",
   "Family Intervention Coaching",
@@ -83,8 +75,8 @@ const intakeSections = [
   {
     title: "Contact Information",
     fields: [
-      { id: "client_name", label: "Your Full Name", type: "text", required: true },
       { id: "client_email", label: "Email Address", type: "email", required: true },
+      { id: "client_name", label: "Your Full Name", type: "text", required: true },
       { id: "client_phone", label: "Phone Number", type: "tel", required: false },
       { id: "session_reason", label: "Primary Reason for This Session", type: "select", required: true, options: SESSION_REASONS, singleSessionOnly: true },
       { id: "relationship", label: "Your Relationship to the Individual", type: "select", required: true, options: ["Parent", "Spouse/Partner", "Adult Child", "Sibling", "Close Friend", "Employer", "Other"] },
@@ -110,7 +102,7 @@ const intakeSections = [
 ];
 
 const BookConsultation = () => {
-  const { isMember } = useMembershipStatus();
+  const { isMember: isMemberViaAuth } = useMembershipStatus();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
@@ -132,8 +124,16 @@ const BookConsultation = () => {
     } catch { return "America/Los_Angeles"; }
   });
 
+  // Membership detection state
+  const [isMemberViaEmail, setIsMemberViaEmail] = useState(false);
+  const [memberCheckDone, setMemberCheckDone] = useState(false);
+  const [memberCheckLoading, setMemberCheckLoading] = useState(false);
+
+  // Combined membership status
+  const isMember = isMemberViaAuth || isMemberViaEmail;
+
   const urlParams = new URLSearchParams(window.location.search);
-  const planType = urlParams.get("plan"); // 'emergency', 'stabilization', 'parallel-recovery', or null
+  const planType = urlParams.get("plan");
   const isStabilization = planType === "stabilization";
   const isParallelRecovery = planType === "parallel-recovery";
   const isMultiSession = isStabilization || isParallelRecovery;
@@ -143,17 +143,40 @@ const BookConsultation = () => {
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
   useEffect(() => {
-    checkAuth();
+    loadInit();
   }, []);
 
-  const checkAuth = async () => {
+  const loadInit = async () => {
+    // Check if user is logged in (optional, not required)
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      toast({ title: "Please log in to book a consultation", variant: "destructive" });
-      navigate("/auth");
-      return;
+    if (user) {
+      setUser(user);
+      // Pre-fill email from profile if available
+      const { data: profile } = await supabase
+        .from("profile_private")
+        .select("email, phone_number")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (profile) {
+        setIntakeData((prev) => ({
+          ...prev,
+          client_email: profile.email || "",
+          client_phone: profile.phone_number || "",
+        }));
+      }
+      // Pre-fill name from profiles
+      const { data: pubProfile } = await supabase
+        .from("profiles")
+        .select("first_name, last_name")
+        .eq("id", user.id)
+        .maybeSingle();
+      if (pubProfile) {
+        setIntakeData((prev) => ({
+          ...prev,
+          client_name: `${pubProfile.first_name} ${pubProfile.last_name}`.trim(),
+        }));
+      }
     }
-    setUser(user);
     loadProviders();
   };
 
@@ -166,6 +189,43 @@ const BookConsultation = () => {
     setLoading(false);
   };
 
+  // Email-based membership check (debounced)
+  const checkMembershipByEmail = useCallback(async (email: string) => {
+    if (!email || !email.includes("@")) {
+      setIsMemberViaEmail(false);
+      setMemberCheckDone(false);
+      return;
+    }
+    setMemberCheckLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("check-membership-email", {
+        body: { email: email.trim() },
+      });
+      if (!error && data) {
+        setIsMemberViaEmail(data.isMember === true);
+      } else {
+        setIsMemberViaEmail(false);
+      }
+    } catch {
+      setIsMemberViaEmail(false);
+    } finally {
+      setMemberCheckDone(true);
+      setMemberCheckLoading(false);
+    }
+  }, []);
+
+  // Debounce email check
+  useEffect(() => {
+    const email = intakeData.client_email;
+    if (!email || !email.includes("@")) {
+      setMemberCheckDone(false);
+      setIsMemberViaEmail(false);
+      return;
+    }
+    const timer = setTimeout(() => checkMembershipByEmail(email), 600);
+    return () => clearTimeout(timer);
+  }, [intakeData.client_email, checkMembershipByEmail]);
+
   const selectProvider = async (provider: any) => {
     setSelectedProvider(provider);
     const [availRes, bookingsRes] = await Promise.all([
@@ -176,11 +236,7 @@ const BookConsultation = () => {
         .eq("is_active", true)
         .order("day_of_week")
         .order("start_time"),
-      // Fetch ALL confirmed/pending bookings across ALL providers for Zoom conflict detection
-      supabase
-        .from("consultation_bookings")
-        .select("booking_date, start_time, end_time, provider_id, timezone")
-        .in("status", ["confirmed", "pending"]),
+      supabase.rpc("get_booking_slots"),
     ]);
     setAvailability(availRes.data || []);
     setBookedSlots(bookingsRes.data || []);
@@ -248,12 +304,10 @@ const BookConsultation = () => {
         const providerStartTime = `${slotStartH}:${slotStartM}:00`;
         const providerEndTime = `${slotEndH}:${slotEndM}:00`;
 
-        // Check if this slot overlaps with ANY existing booking across all providers (shared Zoom account)
         const slotStartMin = parseInt(slotStartH) * 60 + parseInt(slotStartM);
         const slotEndMin = slotStartMin + duration;
         const isBooked = bookedSlots.some((b) => {
           if (b.booking_date !== dateStr) return false;
-          // Convert booked slot times to provider timezone for comparison
           const bookedTz = (b as any).timezone || providerTz;
           let bookedStartStr = b.start_time?.slice(0, 5) || "00:00";
           let bookedEndStr = b.end_time?.slice(0, 5) || "01:00";
@@ -265,14 +319,11 @@ const BookConsultation = () => {
           const [beH, beM] = bookedEndStr.split(":").map(Number);
           const bookedStartMin = bsH * 60 + bsM;
           const bookedEndMin = beH * 60 + beM;
-          // Check for any overlap
           return slotStartMin < bookedEndMin && slotEndMin > bookedStartMin;
         });
         if (!isBooked) {
-          // Convert to client timezone for display
           const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
           const convertedEnd = convertTime(`${slotEndH}:${slotEndM}`, dateStr, providerTz, clientTimezone);
-          
           slots.push({
             id: `${a.id}-${providerStartTime}`,
             start_time: providerStartTime,
@@ -286,14 +337,11 @@ const BookConsultation = () => {
         }
       }
     });
-
     return slots;
   };
 
-  // Add a slot for stabilization plan
   const addStabilizationSlot = () => {
     if (!selectedDate || !selectedSlot) return;
-    // Check for duplicate
     const isDuplicate = stabilizationSlots.some(
       (s) => s.date === selectedDate && s.slot.id === selectedSlot.id
     );
@@ -311,7 +359,7 @@ const BookConsultation = () => {
   };
 
   const handleBooking = async () => {
-    if (!selectedProvider || !user) return;
+    if (!selectedProvider) return;
 
     const slotsToBook = isMultiSession
       ? stabilizationSlots.map((s) => ({ date: s.date, slot: s.slot }))
@@ -331,71 +379,35 @@ const BookConsultation = () => {
         });
       });
 
-      let coachingPlanId: string | null = null;
-
-      // For stabilization plan, create the coaching plan
-      if (isMultiSession) {
-        const planConfig = isParallelRecovery
-          ? { plan_type: "parallel-recovery", total_sessions: 12, total_amount: 1500, provider_payout_per_session: 100 }
-          : { plan_type: "stabilization", total_sessions: 4, total_amount: 500, provider_payout_per_session: 100 };
-
-        const { data: newPlan, error: planError } = await supabase
-          .from("coaching_plans")
-          .insert({
-            client_user_id: user.id,
-            provider_id: selectedProvider.id,
-            ...planConfig,
-          } as any)
-          .select()
-          .single();
-
-        if (planError) throw planError;
-        coachingPlanId = newPlan.id;
-      }
-
-      const memberRate = 125;
-      const singleSessionRate = isMember ? memberRate : selectedProvider.session_rate;
-      const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
-      const amountPaid = totalAmount;
-
-      // Create all bookings
-      const bookingInserts = slotsToBook.map((s, index) => ({
-        provider_id: selectedProvider.id,
-        client_user_id: user.id,
+      // Use server-side booking creation for validated pricing
+      const bookings = slotsToBook.map((s) => ({
         booking_date: s.date,
         start_time: s.slot.start_time,
         end_time: s.slot.end_time,
         timezone: s.slot.timezone || "America/Los_Angeles",
-        amount_paid: isMultiSession ? (index === 0 ? totalAmount : 0) : amountPaid,
-        intake_responses: intakeResponses,
-        client_name: intakeData.client_name,
-        client_email: intakeData.client_email,
-        client_phone: intakeData.client_phone || null,
-        status: "confirmed",
-        coaching_plan_id: coachingPlanId,
       }));
 
-      const { data: bookingsData, error } = await supabase
-        .from("consultation_bookings")
-        .insert(bookingInserts as any)
-        .select();
+      const { data, error } = await supabase.functions.invoke("book-consultation", {
+        body: {
+          provider_id: selectedProvider.id,
+          bookings,
+          intake_responses: intakeResponses,
+          client_name: intakeData.client_name,
+          client_email: intakeData.client_email,
+          client_phone: intakeData.client_phone || null,
+          plan_type: planType || "single",
+        },
+      });
 
       if (error) throw error;
-
-      // Trigger edge function for each booking (Zoom + emails)
-      for (const booking of (bookingsData || [])) {
-        const { error: fnError } = await supabase.functions.invoke("process-consultation-booking", {
-          body: { bookingId: booking.id },
-        });
-        if (fnError) console.error("Edge function error for booking:", booking.id, fnError);
-      }
+      if (data?.error) throw new Error(data.error);
 
       const planName = isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan";
       toast({
         title: isMultiSession ? `${planName} Booked!` : "Consultation Booked!",
         description: isMultiSession
           ? `All ${requiredSlots} sessions have been scheduled. Check your email for confirmation details.`
-          : "Your session is confirmed. You can join from this site when it's time.",
+          : "Your session is confirmed. Check your email for the Zoom link and details.",
       });
 
       const onboardingPlan = planType || "single";
@@ -407,6 +419,9 @@ const BookConsultation = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Price display helpers
+  const displayRate = isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
@@ -436,12 +451,44 @@ const BookConsultation = () => {
           </div>
         )}
 
+        {/* Member Badge - persistent across steps */}
+        {memberCheckDone && !isMultiSession && (
+          <div className="max-w-2xl mx-auto mb-4">
+            {isMember ? (
+              <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-lg px-4 py-2.5">
+                <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                  ✅ Member discount applied — $125/session
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2.5">
+                <Users className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-sm text-muted-foreground">
+                  Members save $25 per session —{" "}
+                  <Link to="/family-membership" className="text-primary hover:underline font-medium">
+                    Join for $19.99/mo
+                  </Link>
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="max-w-2xl mx-auto">
           {/* Step 0: Browse Providers */}
           {step === 0 && (
             <>
-              <h1 className="text-2xl font-bold mb-2 text-center">{isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}</h1>
-              <p className="text-muted-foreground text-center mb-6">{isParallelRecovery ? `Choose a provider for your 12-session program ($1,500)` : isStabilization ? "Choose a provider for your 4-session stabilization plan ($500)" : `Choose a provider to schedule your 60-minute video consultation${isMember ? " ($125 — Member Rate)" : " ($150)"}`}</p>
+              <h1 className="text-2xl font-bold mb-2 text-center">
+                {isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}
+              </h1>
+              <p className="text-muted-foreground text-center mb-6">
+                {isParallelRecovery
+                  ? `Choose a provider for your 12-session program ($1,500)`
+                  : isStabilization
+                  ? "Choose a provider for your 4-session stabilization plan ($500)"
+                  : `Choose a provider to schedule your 60-minute video consultation${isMember ? " ($125 — Member Rate)" : " ($150)"}`}
+              </p>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
@@ -488,13 +535,12 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle>{isMultiSession ? `Select ${requiredSlots} Session Times` : "Select Date & Time"}</CardTitle>
                 <CardDescription>
-                  {isMultiSession 
+                  {isMultiSession
                     ? `Choose dates and times for all ${requiredSlots} sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of ${requiredSlots} selected.`
                     : `Choose an available date and time slot with ${selectedProvider?.full_name}`}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Show already selected slots for stabilization */}
                 {isMultiSession && stabilizationSlots.length > 0 && (
                   <div className="space-y-2">
                     <Label>Selected Sessions</Label>
@@ -520,7 +566,6 @@ const BookConsultation = () => {
                   </div>
                 )}
 
-                {/* Show slot picker if more slots are needed */}
                 {(!isMultiSession || stabilizationSlots.length < requiredSlots) && (
                   <>
                     <div className="space-y-2">
@@ -578,8 +623,8 @@ const BookConsultation = () => {
 
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => { setStep(0); setStabilizationSlots([]); }}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
-                  <Button 
-                    onClick={goNext} 
+                  <Button
+                    onClick={goNext}
                     disabled={isMultiSession ? stabilizationSlots.length < requiredSlots : !selectedSlot}
                   >
                     Next<ArrowRight className="w-4 h-4 ml-1" />
@@ -604,7 +649,7 @@ const BookConsultation = () => {
                       <Select value={intakeData[field.id] || ""} onValueChange={(v) => handleIntakeChange(field.id, v)}>
                         <SelectTrigger><SelectValue placeholder="Select..." /></SelectTrigger>
                         <SelectContent>
-                          {field.options?.map((opt) => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
+                          {field.options?.map((opt: string) => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
                         </SelectContent>
                       </Select>
                     ) : field.type === "textarea" ? (
@@ -623,6 +668,25 @@ const BookConsultation = () => {
                         onChange={(e) => handleIntakeChange(field.id, e.target.value)}
                         placeholder={field.placeholder}
                       />
+                    )}
+                    {/* Show membership badge right after email field */}
+                    {field.id === "client_email" && memberCheckDone && !isMultiSession && (
+                      <div className="mt-1">
+                        {isMember ? (
+                          <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                            <Crown className="w-3.5 h-3.5" />
+                            <span className="text-xs font-medium">✅ Member discount applied — $125/session</span>
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">
+                            Members save $25/session —{" "}
+                            <Link to="/family-membership" className="text-primary hover:underline">Join for $19.99/mo</Link>
+                          </p>
+                        )}
+                      </div>
+                    )}
+                    {field.id === "client_email" && memberCheckLoading && (
+                      <p className="text-xs text-muted-foreground">Checking membership...</p>
                     )}
                   </div>
                 ))}
@@ -644,12 +708,14 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-primary" />
-                   {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Booking"}
+                  {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Booking"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="bg-muted/50 rounded-lg p-4 space-y-2">
                   <div className="flex justify-between"><span className="text-muted-foreground">Provider</span><span className="font-medium">{selectedProvider?.full_name}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Client</span><span className="font-medium">{intakeData.client_name}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Email</span><span className="font-medium">{intakeData.client_email}</span></div>
                   {isMultiSession ? (
                     <>
                       <div className="flex justify-between"><span className="text-muted-foreground">Plan</span><span className="font-medium">{isParallelRecovery ? "Parallel Recovery Program™ (12 sessions)" : "Family Stabilization Plan (4 sessions)"}</span></div>
@@ -689,9 +755,9 @@ const BookConsultation = () => {
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  {isMultiSession 
+                  {isMultiSession
                     ? `Zoom meetings will be created for each session. You'll receive confirmation emails with join links for all ${requiredSlots} sessions.`
-                    : "A video session will be created automatically. After booking, you'll be able to join the session directly from this site — no downloads required. You'll also receive a confirmation email."}
+                    : "A video session will be created automatically. You'll receive a confirmation email with your Zoom link and details."}
                 </p>
 
                 <div className="flex justify-between pt-4">
