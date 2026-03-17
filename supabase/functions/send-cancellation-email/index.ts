@@ -11,10 +11,14 @@ serve(async (req: Request) => {
   }
 
   try {
-    const { to, name } = await req.json();
+    const { to, name, accessUntilDate } = await req.json();
 
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
+
+    const accessMessage = accessUntilDate
+      ? `<li>You will continue to have full access to the Family Forum and member resources until <strong>${accessUntilDate}</strong>.</li>`
+      : `<li>Your access to the Family Forum and member resources has been removed.</li>`;
 
     const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
       method: "POST",
@@ -38,7 +42,7 @@ serve(async (req: Request) => {
               
               <p>Please note the following:</p>
               <ul>
-                <li>Your access to the Family Forum and member resources has been removed.</li>
+                ${accessMessage}
                 <li>If you have an active PayPal subscription, please also cancel it directly through your PayPal account to stop future billing.</li>
                 <li>Any content you posted in the forum will remain unless you'd like it removed — just let us know.</li>
               </ul>
