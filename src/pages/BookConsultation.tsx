@@ -28,6 +28,15 @@ const TIMEZONE_OPTIONS = [
   { value: "Pacific/Honolulu", label: "Hawaii Time (HT)" },
 ];
 
+interface ProviderDateOverride {
+  id: string;
+  override_date: string;
+  is_available: boolean;
+  start_time: string | null;
+  end_time: string | null;
+  timezone: string | null;
+}
+
 const getTimezoneLabel = (tz: string) => TIMEZONE_OPTIONS.find((t) => t.value === tz)?.label || tz;
 
 const convertTime = (timeStr: string, dateStr: string, fromTz: string, toTz: string): { time: string; dayOffset: number } => {
@@ -57,6 +66,40 @@ const formatTime12h = (time24: string) => {
   const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
   return `${h12}:${String(m).padStart(2, "0")} ${period}`;
 };
+
+const formatDateInTimezone = (date: Date, timeZone: string) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const year = parts.find((part) => part.type === "year")?.value || "0000";
+  const month = parts.find((part) => part.type === "month")?.value || "01";
+  const day = parts.find((part) => part.type === "day")?.value || "01";
+
+  return `${year}-${month}-${day}`;
+};
+
+const addDaysToDateStr = (dateStr: string, days: number) => {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().split("T")[0];
+};
+
+const getDayOfWeekFromDateStr = (dateStr: string) => {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+};
+
+const timeToMinutes = (timeStr: string) => {
+  const [hours, minutes] = timeStr.slice(0, 5).split(":").map(Number);
+  return hours * 60 + minutes;
+};
+
+const rangesOverlap = (startA: number, endA: number, startB: number, endB: number) => startA < endB && endA > startB;
 
 const SESSION_REASONS = [
   "Emergency Game Plan",
@@ -111,6 +154,7 @@ const BookConsultation = () => {
   const [selectedProvider, setSelectedProvider] = useState<any>(null);
   const [availability, setAvailability] = useState<any[]>([]);
   const [bookedSlots, setBookedSlots] = useState<any[]>([]);
+  const [dateOverrides, setDateOverrides] = useState<ProviderDateOverride[]>([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [stabilizationSlots, setStabilizationSlots] = useState<Array<{ date: string; slot: any }>>([]);
@@ -227,8 +271,12 @@ const BookConsultation = () => {
   }, [intakeData.client_email, checkMembershipByEmail]);
 
   const selectProvider = async (provider: any) => {
+    const providerTz = provider.timezone || "America/Los_Angeles";
+    const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
+    const windowEnd = addDaysToDateStr(providerTodayStr, isParallelRecovery ? 90 : 30);
+
     setSelectedProvider(provider);
-    const [availRes, bookingsRes] = await Promise.all([
+    const [availRes, bookingsRes, overridesRes] = await Promise.all([
       supabase
         .from("provider_availability")
         .select("*")
@@ -237,9 +285,21 @@ const BookConsultation = () => {
         .order("day_of_week")
         .order("start_time"),
       supabase.rpc("get_booking_slots"),
+      supabase
+        .from("provider_date_overrides")
+        .select("id, override_date, is_available, start_time, end_time, timezone")
+        .eq("provider_id", provider.id)
+        .gte("override_date", providerTodayStr)
+        .lte("override_date", windowEnd)
+        .order("override_date")
+        .order("start_time"),
     ]);
+
     setAvailability(availRes.data || []);
     setBookedSlots(bookingsRes.data || []);
+    setDateOverrides((overridesRes.data || []) as ProviderDateOverride[]);
+    setSelectedDate("");
+    setSelectedSlot(null);
     setStep(1);
   };
 
@@ -266,93 +326,110 @@ const BookConsultation = () => {
     setStep(step + 1);
   };
 
-  const toLocalDateStr = (d: Date) => {
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
-  const getAvailableDates = () => {
-    const dates: string[] = [];
-    const today = new Date();
-    const daysAhead = isParallelRecovery ? 90 : 30;
-    for (let i = 0; i <= daysAhead; i++) {
-      const d = new Date(today);
-      d.setDate(d.getDate() + i);
-      const dayOfWeek = d.getDay();
-      if (availability.some((a) => a.day_of_week === dayOfWeek)) {
-        dates.push(toLocalDateStr(d));
-      }
-    }
-    return dates;
-  };
-
   const getSlotsForDate = (dateStr: string) => {
-    const d = new Date(dateStr + "T00:00:00");
-    const dayOfWeek = d.getDay();
+    const providerTz = selectedProvider?.timezone || "America/Los_Angeles";
+    const dayOfWeek = getDayOfWeekFromDateStr(dateStr);
     const dayAvailability = availability.filter((a) => a.day_of_week === dayOfWeek);
     const duration = selectedProvider?.session_duration_minutes || 60;
-    const providerTz = selectedProvider?.timezone || "America/Los_Angeles";
+    const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
+    const providerNow = new Date(new Date().toLocaleString("en-US", { timeZone: providerTz }));
+    const providerNowMinutes = providerNow.getHours() * 60 + providerNow.getMinutes();
+    const overridesForDate = dateOverrides.filter((override) => override.override_date === dateStr);
+    const isDayBlocked = overridesForDate.some((override) => !override.is_available && !override.start_time && !override.end_time);
+    const removedOverrides = overridesForDate.filter((override) => !override.is_available && override.start_time && override.end_time);
+    const addedOverrides = overridesForDate.filter((override) => override.is_available && override.start_time && override.end_time);
     const slots: { id: string; start_time: string; end_time: string; provider_start_time: string; provider_end_time: string; display_start: string; display_end: string; timezone: string }[] = [];
 
-    dayAvailability.forEach((a) => {
-      const [startH, startM] = a.start_time.split(":").map(Number);
-      const [endH, endM] = a.end_time.split(":").map(Number);
-      const startMinutes = startH * 60 + startM;
-      const endMinutes = endH * 60 + endM;
+    if (isDayBlocked) return [];
 
-      for (let m = startMinutes; m + duration <= endMinutes; m += duration) {
-        const slotStartH = String(Math.floor(m / 60)).padStart(2, "0");
-        const slotStartM = String(m % 60).padStart(2, "0");
-        const slotEndTotal = m + duration;
+    const pushSlotsFromRange = (rangeId: string, startTime: string, endTime: string, timezone?: string | null) => {
+      const startMinutes = timeToMinutes(startTime);
+      const endMinutes = timeToMinutes(endTime);
+
+      for (let minutes = startMinutes; minutes + duration <= endMinutes; minutes += duration) {
+        const slotStartH = String(Math.floor(minutes / 60)).padStart(2, "0");
+        const slotStartM = String(minutes % 60).padStart(2, "0");
+        const slotEndTotal = minutes + duration;
         const slotEndH = String(Math.floor(slotEndTotal / 60)).padStart(2, "0");
         const slotEndM = String(slotEndTotal % 60).padStart(2, "0");
         const providerStartTime = `${slotStartH}:${slotStartM}:00`;
         const providerEndTime = `${slotEndH}:${slotEndM}:00`;
+        const slotStartMin = minutes;
+        const slotEndMin = minutes + duration;
 
-        const slotStartMin = parseInt(slotStartH) * 60 + parseInt(slotStartM);
-        const slotEndMin = slotStartMin + duration;
-        const isBooked = bookedSlots.some((b) => {
-          if (b.booking_date !== dateStr) return false;
-          const bookedTz = (b as any).timezone || providerTz;
-          let bookedStartStr = b.start_time?.slice(0, 5) || "00:00";
-          let bookedEndStr = b.end_time?.slice(0, 5) || "01:00";
+        const isRemoved = removedOverrides.some((override) => {
+          const removedStart = timeToMinutes(override.start_time || "00:00");
+          const removedEnd = timeToMinutes(override.end_time || "00:00");
+          return rangesOverlap(slotStartMin, slotEndMin, removedStart, removedEnd);
+        });
+
+        if (isRemoved) continue;
+
+        const isBooked = bookedSlots.some((booking) => {
+          if (booking.booking_date !== dateStr) return false;
+          const bookedTz = (booking as any).timezone || providerTz;
+          let bookedStartStr = booking.start_time?.slice(0, 5) || "00:00";
+          let bookedEndStr = booking.end_time?.slice(0, 5) || "01:00";
+
           if (bookedTz !== providerTz) {
             bookedStartStr = convertTime(bookedStartStr, dateStr, bookedTz, providerTz).time;
             bookedEndStr = convertTime(bookedEndStr, dateStr, bookedTz, providerTz).time;
           }
-          const [bsH, bsM] = bookedStartStr.split(":").map(Number);
-          const [beH, beM] = bookedEndStr.split(":").map(Number);
-          const bookedStartMin = bsH * 60 + bsM;
-          const bookedEndMin = beH * 60 + beM;
-          return slotStartMin < bookedEndMin && slotEndMin > bookedStartMin;
+
+          const bookedStartMin = timeToMinutes(bookedStartStr);
+          const bookedEndMin = timeToMinutes(bookedEndStr);
+          return rangesOverlap(slotStartMin, slotEndMin, bookedStartMin, bookedEndMin);
         });
-        if (!isBooked) {
-          // Filter out past slots for today
-          const todayStr = toLocalDateStr(new Date());
-          if (dateStr === todayStr) {
-            const now = new Date();
-            const providerNow = new Date(now.toLocaleString("en-US", { timeZone: providerTz }));
-            const nowMinutes = providerNow.getHours() * 60 + providerNow.getMinutes();
-            if (slotStartMin <= nowMinutes) continue;
-          }
-          const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
-          const convertedEnd = convertTime(`${slotEndH}:${slotEndM}`, dateStr, providerTz, clientTimezone);
-          slots.push({
-            id: `${a.id}-${providerStartTime}`,
-            start_time: providerStartTime,
-            end_time: providerEndTime,
-            provider_start_time: providerStartTime,
-            provider_end_time: providerEndTime,
-            display_start: formatTime12h(convertedStart.time),
-            display_end: formatTime12h(convertedEnd.time),
-            timezone: a.timezone || providerTz,
-          });
-        }
+
+        if (isBooked) continue;
+        if (dateStr === providerTodayStr && slotStartMin <= providerNowMinutes) continue;
+
+        const convertedStart = convertTime(`${slotStartH}:${slotStartM}`, dateStr, providerTz, clientTimezone);
+        const convertedEnd = convertTime(`${slotEndH}:${slotEndM}`, dateStr, providerTz, clientTimezone);
+        const slotId = `${dateStr}-${providerStartTime}-${providerEndTime}`;
+
+        if (slots.some((slot) => slot.id === slotId)) continue;
+
+        slots.push({
+          id: slotId,
+          start_time: providerStartTime,
+          end_time: providerEndTime,
+          provider_start_time: providerStartTime,
+          provider_end_time: providerEndTime,
+          display_start: formatTime12h(convertedStart.time),
+          display_end: formatTime12h(convertedEnd.time),
+          timezone: timezone || providerTz,
+        });
       }
+    };
+
+    dayAvailability.forEach((range) => {
+      pushSlotsFromRange(range.id, range.start_time, range.end_time, range.timezone);
     });
-    return slots;
+
+    addedOverrides.forEach((override) => {
+      pushSlotsFromRange(`override-${override.id}`, override.start_time || "00:00", override.end_time || "00:00", override.timezone || providerTz);
+    });
+
+    return slots.sort((a, b) => a.start_time.localeCompare(b.start_time));
+  };
+
+  const getAvailableDates = () => {
+    if (!selectedProvider) return [];
+
+    const providerTz = selectedProvider.timezone || "America/Los_Angeles";
+    const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
+    const daysAhead = isParallelRecovery ? 90 : 30;
+    const dates: string[] = [];
+
+    for (let i = 0; i <= daysAhead; i++) {
+      const dateStr = addDaysToDateStr(providerTodayStr, i);
+      if (getSlotsForDate(dateStr).length > 0) {
+        dates.push(dateStr);
+      }
+    }
+
+    return dates;
   };
 
   const addStabilizationSlot = () => {
