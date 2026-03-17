@@ -2750,6 +2750,16 @@ export type Database = {
       }
     }
     Functions: {
+      get_booking_slots: {
+        Args: never
+        Returns: {
+          booking_date: string
+          end_time: string
+          provider_id: string
+          start_time: string
+          timezone: string
+        }[]
+      }
       get_guide_analytics: {
         Args: never
         Returns: {
