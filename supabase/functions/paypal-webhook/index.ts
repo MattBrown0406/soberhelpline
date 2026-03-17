@@ -218,8 +218,45 @@ Deno.serve(async (req) => {
         if (billingAgreementId) {
           console.log(`Payment completed for subscription: ${billingAgreementId}`);
           
-          // We could update next_billing_date here if PayPal provides it
-          // For now, just log it
+          // Fetch latest subscription details from PayPal to get updated next_billing_time
+          try {
+            const accessToken = await getPayPalAccessToken();
+            const subResponse = await fetch(
+              `${PAYPAL_API_BASE}/v1/billing/subscriptions/${billingAgreementId}`,
+              {
+                headers: {
+                  'Authorization': `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+                },
+              }
+            );
+
+            if (subResponse.ok) {
+              const subDetails = await subResponse.json();
+              const nextBillingTime = subDetails.billing_info?.next_billing_time;
+
+              if (nextBillingTime) {
+                const { error: updateError } = await supabaseClient
+                  .from('provider_subscriptions')
+                  .update({
+                    next_billing_date: nextBillingTime,
+                    status: 'active',
+                    updated_at: new Date().toISOString(),
+                  })
+                  .eq('paypal_subscription_id', billingAgreementId);
+
+                if (updateError) {
+                  console.error('Error updating next_billing_date:', updateError);
+                } else {
+                  console.log(`Updated next_billing_date to ${nextBillingTime} for ${billingAgreementId}`);
+                }
+              }
+            } else {
+              console.error('Failed to fetch subscription details after payment:', await subResponse.text());
+            }
+          } catch (fetchErr) {
+            console.error('Error fetching subscription details after payment:', fetchErr);
+          }
         }
         break;
       }
