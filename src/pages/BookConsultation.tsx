@@ -236,10 +236,7 @@ const BookConsultation = () => {
         .eq("is_active", true)
         .order("day_of_week")
         .order("start_time"),
-      supabase
-        .from("consultation_bookings")
-        .select("booking_date, start_time, end_time, provider_id, timezone")
-        .in("status", ["confirmed", "pending"]),
+      supabase.rpc("get_booking_slots"),
     ]);
     setAvailability(availRes.data || []);
     setBookedSlots(bookingsRes.data || []);
