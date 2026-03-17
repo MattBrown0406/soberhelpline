@@ -61,3 +61,9 @@ verify_jwt = true
 
 [functions.send-survey-emails]
 verify_jwt = true
+
+[functions.book-consultation]
+verify_jwt = false
+
+[functions.check-membership-email]
+verify_jwt = false

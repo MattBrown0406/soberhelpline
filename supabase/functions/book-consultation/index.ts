@@ -113,7 +113,7 @@ Deno.serve(async (req) => {
       const { data: newPlan, error: planError } = await adminClient
         .from('coaching_plans')
         .insert({
-          client_user_id: userId || client_email, // use email as fallback identifier
+          client_user_id: userId || null, // null for guest bookings (client_user_id must be UUID)
           provider_id: provider.id,
           ...planConfig,
         })
