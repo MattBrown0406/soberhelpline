@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
+import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
@@ -99,6 +100,11 @@ export default function FamilyCoaching() {
               </div>
               <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
             </Link>
+
+            {/* Free Consultation CTA */}
+            <div className="mb-8">
+              <FreeConsultationCTA />
+            </div>
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 via-background to-orange-500/5 border border-amber-500/20 p-8 md:p-12 mb-10">

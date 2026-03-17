@@ -23,6 +23,7 @@ import SEOHead from "@/components/SEOHead";
 
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
+import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -740,6 +741,11 @@ const Index = () => {
             </div>
           </div>
         </Link>
+      </section>
+
+      {/* Free Consultation CTA */}
+      <section className="container mx-auto px-4 pt-4 md:pt-6">
+        <FreeConsultationCTA compact />
       </section>
 
       {/* Provider Directory */}
