@@ -330,7 +330,7 @@ const BookConsultation = () => {
         });
         if (!isBooked) {
           // Filter out past slots for today
-          const todayStr = new Date().toISOString().split("T")[0];
+          const todayStr = toLocalDateStr(new Date());
           if (dateStr === todayStr) {
             const now = new Date();
             const providerNow = new Date(now.toLocaleString("en-US", { timeZone: providerTz }));
