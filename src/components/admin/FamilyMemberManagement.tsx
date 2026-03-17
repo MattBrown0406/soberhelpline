@@ -418,6 +418,7 @@ export function FamilyMemberManagement() {
             <TableHead>Username</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
+            <TableHead>Next Payment</TableHead>
             <TableHead>Last Login</TableHead>
             <TableHead>Member Since</TableHead>
             <TableHead>Actions</TableHead>
