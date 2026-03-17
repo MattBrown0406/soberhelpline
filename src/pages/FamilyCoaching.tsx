@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
+import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
