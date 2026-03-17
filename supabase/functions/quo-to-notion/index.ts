@@ -237,7 +237,8 @@ serve(async (req: Request) => {
       const txData = await quoFetch(`/calls/${callId}/transcription`);
       transcript = txData?.data?.text || txData?.text || txData?.transcript || "";
     } catch (e) {
-      console.log("No transcript available:", e.message);
+      const message = e instanceof Error ? e.message : String(e);
+      console.log("No transcript available:", message);
     }
 
     // Extract call info
