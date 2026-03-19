@@ -56,6 +56,86 @@ function getNextMonday(): string {
   return `${year}-${month}-${date}`;
 }
 
+function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string): string {
+  return `
+    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
+      <h1 style="color: #166534; font-size: 24px;">Reminder: Monday Night Family Support Meeting</h1>
+      <p>Hi ${safeName},</p>
+      <p>Just a quick reminder — our <strong>Monday Night Family Support Meeting</strong> is this Monday at <strong>7:00 PM PST</strong>.</p>
+      
+      <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0;">
+        <p style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #166534;">
+          ✅ As a member, you don't need to register!
+        </p>
+        <p style="margin: 0 0 16px 0; font-size: 14px; color: #374151;">
+          Simply <strong>log into your account</strong> on our site right before the meeting starts and you'll be able to join directly — no registration needed.
+        </p>
+        <div style="text-align: center;">
+          <a href="${escapeHtml(siteUrl)}/auth" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+            Log In to Your Account
+          </a>
+        </div>
+      </div>
+
+      <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+        <p style="margin: 0 0 12px 0; color: #854d0e; font-size: 14px;">
+          <strong>💬 Have a question for Monday's meeting?</strong><br/>
+          Submit it ahead of time so I can be ready to address it.
+        </p>
+        <a href="${escapeHtml(questionUrl)}" style="display: inline-block; padding: 10px 24px; background-color: #d97706; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+          Submit a Question
+        </a>
+      </div>
+
+      <p>The meeting opens directly in your browser — no Zoom app needed.</p>
+      <p>I look forward to seeing you there.</p>
+      <p style="margin-top: 8px;">— Matt</p>
+
+      <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+        Questions? Call us at <strong>(541) 241-5886</strong>.
+      </p>
+      <p style="color: #6b7280; font-size: 12px;">
+        Sober Helpline — Supporting Families Through Recovery
+      </p>
+    </div>
+  `;
+}
+
+function buildNonMemberHtml(safeName: string, registerUrl: string): string {
+  return `
+    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
+      <h1 style="color: #166534; font-size: 24px;">You're Invited: Monday Night Family Support Meeting</h1>
+      <p>Hi ${safeName},</p>
+      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>Monday Night Family Support Meeting</strong>.</p>
+      <p>Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
+      
+      <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
+        <p style="margin: 0 0 16px 0; font-size: 16px; font-weight: bold; color: #166534;">
+          📅 This Monday at 7:00 PM PST
+        </p>
+        <a href="${escapeHtml(registerUrl)}" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+          Register for Monday's Meeting
+        </a>
+        <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
+          Registration takes less than a minute. You can also submit a question ahead of time so I can be prepared to answer it during the meeting.
+        </p>
+      </div>
+
+      <p>The meeting is <strong>free and open to everyone</strong>. You can join directly from your browser — no Zoom app needed.</p>
+
+      <p>I look forward to seeing you there.</p>
+      <p style="margin-top: 8px;">— Matt</p>
+
+      <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+        Questions? Call us at <strong>(541) 241-5886</strong>.
+      </p>
+      <p style="color: #6b7280; font-size: 12px;">
+        Sober Helpline — Supporting Families Through Recovery
+      </p>
+    </div>
+  `;
+}
+
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -72,8 +152,9 @@ serve(async (req: Request) => {
 
     const siteUrl = "https://soberhelpline.com";
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
+    const questionUrl = `${siteUrl}/monday-zoom-registration?member=true`;
 
-    // 1. Get emails of people already registered for this upcoming Monday
+    // 1. Get emails already registered for this upcoming Monday
     const { data: currentRegistrations } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email")
@@ -84,7 +165,7 @@ serve(async (req: Request) => {
     );
     console.log(`Already registered for ${nextMonday}: ${alreadyRegisteredEmails.size}`);
 
-    // 2. Get all active family members' emails
+    // 2. Get all active family members
     const { data: activeSubs } = await adminSupabase
       .from("provider_subscriptions")
       .select("user_id")
@@ -105,14 +186,27 @@ serve(async (req: Request) => {
 
     const memberNameMap = new Map(memberProfiles?.map((p: any) => [p.id, p.first_name]) || []);
 
-    // 3. Get all previous zoom registrants (unique by email)
+    // Track member emails for differentiated messaging
+    const memberEmailSet = new Set<string>();
+    const recipientMap = new Map<string, { name: string; isMember: boolean }>();
+
+    // Add members
+    for (const mp of (memberPrivate || [])) {
+      const email = mp.email.toLowerCase();
+      memberEmailSet.add(email);
+      if (!alreadyRegisteredEmails.has(email)) {
+        const name = memberNameMap.get(mp.user_id) || "Friend";
+        recipientMap.set(email, { name, isMember: true });
+      }
+    }
+
+    // 3. Get all previous zoom registrants
     const { data: allPastRegistrants } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email, name")
       .neq("meeting_date", nextMonday)
       .order("created_at", { ascending: false });
 
-    // Build a deduplicated map of past registrant emails → name (most recent name)
     const pastRegistrantMap = new Map<string, string>();
     for (const r of (allPastRegistrants || [])) {
       const email = r.email.toLowerCase();
@@ -121,22 +215,10 @@ serve(async (req: Request) => {
       }
     }
 
-    // 4. Build the final recipient list (members + past registrants, minus already registered)
-    const recipientMap = new Map<string, string>(); // email → name
-
-    // Add members
-    for (const mp of (memberPrivate || [])) {
-      const email = mp.email.toLowerCase();
-      if (!alreadyRegisteredEmails.has(email)) {
-        const name = memberNameMap.get(mp.user_id) || "Friend";
-        recipientMap.set(email, name);
-      }
-    }
-
-    // Add past registrants (don't overwrite member names)
+    // Add past registrants (don't overwrite members)
     for (const [email, name] of pastRegistrantMap) {
       if (!alreadyRegisteredEmails.has(email) && !recipientMap.has(email)) {
-        recipientMap.set(email, name);
+        recipientMap.set(email, { name, isMember: memberEmailSet.has(email) });
       }
     }
 
@@ -149,65 +231,51 @@ serve(async (req: Request) => {
       });
     }
 
-    // 5. Send emails
+    // 4. Send emails with differentiated content
     let sent = 0;
     let failed = 0;
+    let membersSent = 0;
+    let nonMembersSent = 0;
 
-    for (const [email, name] of recipientMap) {
+    for (const [email, { name, isMember }] of recipientMap) {
       const safeName = escapeHtml(name.split(' ')[0] || "Friend");
 
-      const html = `
-        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534; font-size: 24px;">You're Invited: Monday Night Family Support Meeting</h1>
-          <p>Hi ${safeName},</p>
-          <p>I'm excited to meet with you next week at our <strong>Monday Night Family Support Meeting</strong>!</p>
-          <p>Every Monday at <strong>7:00 PM PST</strong>, we come together as a community of families navigating addiction. Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
-          
-          <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
-            <p style="margin: 0 0 16px 0; font-size: 16px; font-weight: bold; color: #166534;">
-              📅 This Monday at 7:00 PM PST
-            </p>
-            <a href="${escapeHtml(registerUrl)}" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
-              Register for Monday's Meeting
-            </a>
-            <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
-              Registration takes less than a minute. You can also submit a question ahead of time.
-            </p>
-          </div>
+      const html = isMember
+        ? buildMemberHtml(safeName, siteUrl, questionUrl)
+        : buildNonMemberHtml(safeName, registerUrl);
 
-          <p>The meeting is <strong>free and open to everyone</strong>. You can join directly from your browser — no Zoom app needed.</p>
+      const subject = isMember
+        ? "🔔 Reminder: Monday Night Family Support Meeting — Just Log In to Join"
+        : "📅 You're Invited: Monday Night Family Support Meeting — Register Now";
 
-          <p>I look forward to seeing you there.</p>
-          <p style="margin-top: 8px;">— Matt</p>
+      const success = await sendEmail(email, subject, html);
 
-          <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-            Questions? Call us at <strong>(541) 241-5886</strong>.
-          </p>
-          <p style="color: #6b7280; font-size: 12px;">
-            Sober Helpline — Supporting Families Through Recovery
-          </p>
-        </div>
-      `;
-
-      const success = await sendEmail(
-        email,
-        "📅 You're Invited: Monday Night Family Support Meeting — Register Now",
-        html
-      );
-
-      if (success) sent++;
-      else failed++;
+      if (success) {
+        sent++;
+        if (isMember) membersSent++;
+        else nonMembersSent++;
+      } else {
+        failed++;
+      }
     }
 
-    console.log(`Zoom invitation outreach: sent=${sent}, failed=${failed}`);
+    console.log(`Zoom invitation outreach: sent=${sent} (members=${membersSent}, nonMembers=${nonMembersSent}), failed=${failed}`);
 
-    return new Response(JSON.stringify({ success: true, sent, failed, totalRecipients: recipientMap.size }), {
+    return new Response(JSON.stringify({
+      success: true,
+      sent,
+      membersSent,
+      nonMembersSent,
+      failed,
+      totalRecipients: recipientMap.size,
+    }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
     console.error("Error sending zoom invitation outreach:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
