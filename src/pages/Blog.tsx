@@ -122,7 +122,7 @@ export const blogPosts: any[] = [
     date: "2026-03-18",
     category: "Family Support",
     image: stopEnablingAddictionImg,
-    content: \`**How to Stop Enabling Addiction: A Family Guide to Helping Without Hurting**
+    content: `**How to Stop Enabling Addiction: A Family Guide to Helping Without Hurting**
 
 If you've been trying to help someone you love who struggles with addiction, there's a good chance you've heard the word "enabling." It can feel like an accusation — as if the very acts of love and support you've been offering are actually making things worse. But understanding enabling isn't about blame. It's about learning a more effective way to love someone through addiction.
 
