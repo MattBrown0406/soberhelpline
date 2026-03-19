@@ -229,7 +229,7 @@ Absolutely — and it's one of the most important things you can do, both for yo
 
 **How do I know when I've crossed the line from supporting to enabling?**
 
-A helpful question to ask is: "Does this action help them face their addiction, or does it help them avoid the consequences of it?" If your help makes it easier for their substance use to continue without disruption, it's likely enabling. If it opens a path toward treatment or accountability, it's support. When in doubt, talking with a family coach or counselor can help you think through specific situations.\`
+A helpful question to ask is: "Does this action help them face their addiction, or does it help them avoid the consequences of it?" If your help makes it easier for their substance use to continue without disruption, it's likely enabling. If it opens a path toward treatment or accountability, it's support. When in doubt, talking with a family coach or counselor can help you think through specific situations.`
   },
   {
     id: 100,
