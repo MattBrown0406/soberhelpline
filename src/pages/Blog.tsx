@@ -103,6 +103,7 @@ import denialAddictionCantStopImg from "@/assets/blog-denial-addiction-cant-stop
 import childhoodTraumaAddictionImg from "@/assets/blog-childhood-trauma-addiction.png";
 import geneticRiskFactorsAddictionImg from "@/assets/blog-genetic-risk-factors-addiction.png";
 import talkingLovedOneAddictionImg from "@/assets/blog-talking-loved-one-addiction.png";
+import stopEnablingAddictionImg from "@/assets/blog-stop-enabling-addiction.png";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
