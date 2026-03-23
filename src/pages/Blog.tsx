@@ -105,6 +105,7 @@ import geneticRiskFactorsAddictionImg from "@/assets/blog-genetic-risk-factors-a
 import talkingLovedOneAddictionImg from "@/assets/blog-talking-loved-one-addiction.png";
 import stopEnablingAddictionImg from "@/assets/blog-stop-enabling-addiction.png";
 import alAnonFamilySupportGroupsImg from "@/assets/blog-al-anon-family-support-groups.png";
+import therapyFamilyMembersAddictsImg from "@/assets/blog-therapy-family-members-addicts.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
