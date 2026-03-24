@@ -106,6 +106,7 @@ import talkingLovedOneAddictionImg from "@/assets/blog-talking-loved-one-addicti
 import stopEnablingAddictionImg from "@/assets/blog-stop-enabling-addiction.png";
 import alAnonFamilySupportGroupsImg from "@/assets/blog-al-anon-family-support-groups.png";
 import therapyFamilyMembersAddictsImg from "@/assets/blog-therapy-family-members-addicts.jpg";
+import detachmentWithLoveAddictionFamilyImg from "@/assets/blog-detachment-with-love-addiction-family.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
