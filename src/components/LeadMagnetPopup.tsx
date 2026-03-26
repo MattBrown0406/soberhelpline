@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { X, Gift, Download, CheckCircle, Loader2, Phone } from "lucide-react";
+import { X, ArrowRight, ClipboardList } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 
 const STORAGE_KEY = "leadMagnetDismissed";
 const SHOW_DELAY = 15000; // 15 seconds minimum before showing
@@ -14,16 +10,8 @@ const SCROLL_THRESHOLD = 0.3; // Show after scrolling 30% of page
 const LeadMagnetPopup = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [smsOptIn, setSmsOptIn] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { toast } = useToast();
 
   useEffect(() => {
-    // Check if already dismissed
     const dismissed = localStorage.getItem(STORAGE_KEY);
     if (dismissed) return;
 
@@ -38,13 +26,11 @@ const LeadMagnetPopup = () => {
       }
     };
 
-    // Time-based gate: must wait at least SHOW_DELAY
     const timer = setTimeout(() => {
       timeReady = true;
       tryShow();
     }, SHOW_DELAY);
 
-    // Scroll-based gate: must scroll 30% of page
     const handleScroll = () => {
       const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       if (scrollPercent >= SCROLL_THRESHOLD) {
@@ -66,49 +52,9 @@ const LeadMagnetPopup = () => {
     localStorage.setItem(STORAGE_KEY, "true");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email || !firstName) {
-      toast({
-        title: "Please fill in all fields",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const { data, error } = await supabase.functions.invoke("lead-magnet-signup", {
-        body: { 
-          email, 
-          firstName, 
-          phoneNumber: smsOptIn ? phoneNumber : undefined,
-          smsOptIn,
-          source: "homepage-popup" 
-        },
-      });
-
-      if (error) throw error;
-
-      setIsSuccess(true);
-      localStorage.setItem(STORAGE_KEY, "true");
-      
-      // Auto-close after showing success
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 4000);
-    } catch (err: any) {
-      console.error("Lead magnet signup error:", err);
-      toast({
-        title: "Something went wrong",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleStart = () => {
+    handleDismiss();
+    navigate("/family-situation-assessment");
   };
 
   if (!isVisible) return null;
@@ -116,6 +62,7 @@ const LeadMagnetPopup = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="relative w-full max-w-md bg-background rounded-2xl shadow-2xl border overflow-hidden animate-in zoom-in-95 duration-300">
+
         {/* Close button */}
         <button
           onClick={handleDismiss}
@@ -125,135 +72,54 @@ const LeadMagnetPopup = () => {
           <X className="w-5 h-5 text-muted-foreground" />
         </button>
 
-        {/* Header with gradient */}
+        {/* Header */}
         <div className="bg-gradient-to-br from-primary/20 via-logo-green/20 to-primary/10 px-6 pt-8 pb-6">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-              <Gift className="w-8 h-8 text-primary" />
+              <ClipboardList className="w-8 h-8 text-primary" />
             </div>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-center text-foreground">
-            Free Guide for Families
+            Not sure where to start?
           </h2>
           <p className="text-center text-muted-foreground mt-2 text-sm">
-            5 Things Every Family Wishes They Knew Sooner About Addiction
+            Answer 6 quick questions and we'll tell you exactly what your family needs next.
           </p>
         </div>
 
         {/* Content */}
         <div className="px-6 py-6">
-          {isSuccess ? (
-            <div className="text-center py-4">
-              <CheckCircle className="w-12 h-12 text-logo-green mx-auto mb-3" />
-              <h3 className="font-semibold text-lg mb-2">You're In!</h3>
-              <p className="text-muted-foreground text-sm mb-4">
-                Your free guide is ready! Click below to read it now.
-              </p>
-              <div className="flex flex-col gap-2">
-                <Button 
-                  onClick={() => {
-                    setIsVisible(false);
-                    navigate("/free-guide?access=granted");
-                  }} 
-                  className="gap-2"
-                >
-                  <Download className="w-4 h-4" />
-                  Read My Free Guide
-                </Button>
-                <Button onClick={handleDismiss} variant="ghost" size="sm">
-                  I'll read it later
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <>
-              <ul className="space-y-2 mb-6 text-sm">
-                <li className="flex items-start gap-2">
-                  <Download className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <span>Instant PDF download</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Download className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <span>Weekly tips to support your journey</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Download className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <span>No spam, unsubscribe anytime</span>
-                </li>
-              </ul>
+          <ul className="space-y-3 mb-6 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+              <span>Identify enabling patterns that are keeping things stuck</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+              <span>Understand how serious the situation really is</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+              <span>Get a personalized recommendation — free, no sales pitch</span>
+            </li>
+          </ul>
 
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <Input
-                  type="text"
-                  placeholder="First name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="h-11"
-                  disabled={isSubmitting}
-                />
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-11"
-                  disabled={isSubmitting}
-                />
-                
-                {/* SMS Opt-in Section */}
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="sms-optin"
-                      checked={smsOptIn}
-                      onCheckedChange={(checked) => setSmsOptIn(checked === true)}
-                      disabled={isSubmitting}
-                    />
-                    <label
-                      htmlFor="sms-optin"
-                      className="text-sm text-muted-foreground cursor-pointer"
-                    >
-                      Get SMS updates & reminders
-                    </label>
-                  </div>
-                  
-                  {smsOptIn && (
-                    <div className="flex items-center gap-2">
-                      <Phone className="w-4 h-4 text-muted-foreground shrink-0" />
-                      <Input
-                        type="tel"
-                        placeholder="(555) 123-4567"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="h-10"
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  )}
-                </div>
+          <Button
+            onClick={handleStart}
+            className="w-full h-11 gap-2 bg-logo-green hover:bg-logo-green/90 text-white"
+          >
+            <ClipboardList className="w-4 h-4" />
+            Take the Free 2-Minute Assessment
+          </Button>
 
-                <Button 
-                  type="submit" 
-                  className="w-full h-11 bg-primary hover:bg-primary/90"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    "Get My Free Guide"
-                  )}
-                </Button>
-              </form>
-
-              <p className="text-xs text-muted-foreground text-center mt-4">
-                Join 2,000+ families getting weekly support
-              </p>
-            </>
-          )}
+          <button
+            onClick={handleDismiss}
+            className="w-full text-xs text-muted-foreground hover:text-foreground mt-3 text-center transition-colors"
+          >
+            No thanks, I'll figure it out on my own
+          </button>
         </div>
+
       </div>
     </div>
   );

@@ -257,32 +257,32 @@ const Index = () => {
               You're exhausted from walking on eggshells, wondering if you're helping or making it worse. We'll show you exactly what to do — whether they're ready for help or not.
             </p>
             
-            {/* Primary CTA — Roadmap */}
+            {/* Primary CTA — Family Situation Assessment */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3 px-4">
-              <Link to="/roadmap/assessment">
+              <Link to="/family-situation-assessment">
                 <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <Compass className="w-4 h-4 md:w-5 md:h-5" />
-                  Find My Stage on the Recovery Roadmap
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                  Take the Free Family Assessment
                 </Button>
               </Link>
             </div>
 
             {/* Secondary CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 px-4">
-              <Link to="/free-guide">
+              <Link to="/monday-zoom-registration">
                 <Button size="lg" variant="outline" className="gap-2 px-6 py-4 text-sm md:text-base">
-                  <Sparkles className="w-4 h-4" />
-                  Get Free Crisis Guide
+                  <Calendar className="w-4 h-4" />
+                  Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415886">
+              <a href="tel:5418386009">
                 <Button size="lg" variant="ghost" className="gap-2 px-6 py-4 text-sm md:text-base text-muted-foreground hover:text-foreground">
                   <Phone className="w-4 h-4" />
-                  Talk to Someone · (541) 241-5886
+                  Talk to Someone · (541) 838-6009
                 </Button>
               </a>
             </div>
-            <p className="text-xs text-muted-foreground">Free 5-minute assessment · No account required</p>
+            <p className="text-xs text-muted-foreground">2 minutes · Free · No account required</p>
           </div>
         </div>
       </section>
