@@ -28,6 +28,7 @@ const SubscriptionCancel = React.lazy(() => import("./pages/SubscriptionCancel")
 const Blog = React.lazy(() => import("./pages/Blog"));
 const BlogArticle = React.lazy(() => import("./pages/BlogArticle"));
 const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment"));
+const FamilySituationAssessment = React.lazy(() => import("./pages/FamilySituationAssessment"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
 const FamilySupport = React.lazy(() => import("./pages/FamilySupport"));
 const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAddiction"));
@@ -279,6 +280,7 @@ const App = () => (
               <Route path="/genetic-risk-factors-for-addiction" element={<BlogArticle />} />
               <Route path="/how-to-talk-to-loved-one-about-addiction" element={<BlogArticle />} />
               <Route path="/addiction-assessment" element={<AddictionAssessment />} />
+              <Route path="/family-situation-assessment" element={<FamilySituationAssessment />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/family-support" element={<FamilySupport />} />
               <Route path="/family-membership" element={<FamilyMembership />} />
