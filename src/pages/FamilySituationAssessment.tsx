@@ -45,9 +45,11 @@ const steps = [
     options: [
       { value: "alcohol", label: "Alcohol" },
       { value: "opioids", label: "Opioids / Prescription Pills / Heroin" },
-      { value: "meth", label: "Meth / Stimulants / Cocaine" },
+      { value: "meth", label: "Meth / Stimulants" },
+      { value: "cocaine", label: "Cocaine / Crack" },
       { value: "fentanyl", label: "Fentanyl / Unknown substances" },
       { value: "cannabis", label: "Cannabis" },
+      { value: "kratom", label: "Kratom" },
       { value: "multiple", label: "Multiple substances" },
     ],
   },
