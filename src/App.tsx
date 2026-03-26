@@ -135,6 +135,14 @@ const RelapseRadar = React.lazy(() => import("./pages/RelapseRadar"));
 const Survey = React.lazy(() => import("./pages/Survey"));
 const OregonFamilySupport = React.lazy(() => import("./pages/OregonFamilySupport"));
 const OregonPortlandFamilySupport = React.lazy(() => import("./pages/OregonPortlandFamilySupport"));
+const WashingtonFamilySupport = React.lazy(() => import("./pages/WashingtonFamilySupport"));
+const WashingtonSeattleFamilySupport = React.lazy(() => import("./pages/WashingtonSeattleFamilySupport"));
+const WashingtonTacomaFamilySupport = React.lazy(() => import("./pages/WashingtonTacomaFamilySupport"));
+const WashingtonSpokaneFamilySupport = React.lazy(() => import("./pages/WashingtonSpokaneFamilySupport"));
+const WashingtonBellevueFamilySupport = React.lazy(() => import("./pages/WashingtonBellevueFamilySupport"));
+const WashingtonEverettFamilySupport = React.lazy(() => import("./pages/WashingtonEverettFamilySupport"));
+const WashingtonOlympiaFamilySupport = React.lazy(() => import("./pages/WashingtonOlympiaFamilySupport"));
+const WashingtonVancouverFamilySupport = React.lazy(() => import("./pages/WashingtonVancouverFamilySupport"));
 const OregonSalemFamilySupport = React.lazy(() => import("./pages/OregonSalemFamilySupport"));
 const OregonEugeneFamilySupport = React.lazy(() => import("./pages/OregonEugeneFamilySupport"));
 const OregonBendFamilySupport = React.lazy(() => import("./pages/OregonBendFamilySupport"));
@@ -338,6 +346,15 @@ const App = () => (
               <Route path="/roadmap/relapse" element={<RoadmapRelapse />} />
               <Route path="/relapse-radar" element={<RelapseRadar />} />
               <Route path="/survey" element={<Survey />} />
+              {/* Washington Family Support SEO Pages */}
+              <Route path="/washington-family-support" element={<WashingtonFamilySupport />} />
+              <Route path="/washington/seattle" element={<WashingtonSeattleFamilySupport />} />
+              <Route path="/washington/tacoma" element={<WashingtonTacomaFamilySupport />} />
+              <Route path="/washington/spokane" element={<WashingtonSpokaneFamilySupport />} />
+              <Route path="/washington/bellevue" element={<WashingtonBellevueFamilySupport />} />
+              <Route path="/washington/everett" element={<WashingtonEverettFamilySupport />} />
+              <Route path="/washington/olympia" element={<WashingtonOlympiaFamilySupport />} />
+              <Route path="/washington/vancouver" element={<WashingtonVancouverFamilySupport />} />
               {/* Oregon Family Support SEO Pages */}
               <Route path="/oregon-family-support" element={<OregonFamilySupport />} />
               <Route path="/oregon/portland" element={<OregonPortlandFamilySupport />} />
