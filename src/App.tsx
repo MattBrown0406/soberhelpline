@@ -149,6 +149,14 @@ const OregonBendFamilySupport = React.lazy(() => import("./pages/OregonBendFamil
 const OregonMedfordFamilySupport = React.lazy(() => import("./pages/OregonMedfordFamilySupport"));
 const OregonGreshamFamilySupport = React.lazy(() => import("./pages/OregonGreshamFamilySupport"));
 const OregonHillsboroFamilySupport = React.lazy(() => import("./pages/OregonHillsboroFamilySupport"));
+const CaliforniaFamilySupport = React.lazy(() => import("./pages/CaliforniaFamilySupport"));
+const CaliforniaSacramentoFamilySupport = React.lazy(() => import("./pages/CaliforniaSacramentoFamilySupport"));
+const CaliforniaSanFranciscoFamilySupport = React.lazy(() => import("./pages/CaliforniaSanFranciscoFamilySupport"));
+const CaliforniaOaklandFamilySupport = React.lazy(() => import("./pages/CaliforniaOaklandFamilySupport"));
+const CaliforniaSanJoseFamilySupport = React.lazy(() => import("./pages/CaliforniaSanJoseFamilySupport"));
+const CaliforniaLosAngelesFamilySupport = React.lazy(() => import("./pages/CaliforniaLosAngelesFamilySupport"));
+const CaliforniaLongBeachFamilySupport = React.lazy(() => import("./pages/CaliforniaLongBeachFamilySupport"));
+const CaliforniaOrangeCountyFamilySupport = React.lazy(() => import("./pages/CaliforniaOrangeCountyFamilySupport"));
 
 const queryClient = new QueryClient();
 
@@ -355,6 +363,15 @@ const App = () => (
               <Route path="/washington/everett" element={<WashingtonEverettFamilySupport />} />
               <Route path="/washington/olympia" element={<WashingtonOlympiaFamilySupport />} />
               <Route path="/washington/vancouver" element={<WashingtonVancouverFamilySupport />} />
+              {/* California Family Support SEO Pages */}
+              <Route path="/california-family-support" element={<CaliforniaFamilySupport />} />
+              <Route path="/california/sacramento" element={<CaliforniaSacramentoFamilySupport />} />
+              <Route path="/california/san-francisco" element={<CaliforniaSanFranciscoFamilySupport />} />
+              <Route path="/california/oakland" element={<CaliforniaOaklandFamilySupport />} />
+              <Route path="/california/san-jose" element={<CaliforniaSanJoseFamilySupport />} />
+              <Route path="/california/los-angeles" element={<CaliforniaLosAngelesFamilySupport />} />
+              <Route path="/california/long-beach" element={<CaliforniaLongBeachFamilySupport />} />
+              <Route path="/california/orange-county" element={<CaliforniaOrangeCountyFamilySupport />} />
               {/* Oregon Family Support SEO Pages */}
               <Route path="/oregon-family-support" element={<OregonFamilySupport />} />
               <Route path="/oregon/portland" element={<OregonPortlandFamilySupport />} />
