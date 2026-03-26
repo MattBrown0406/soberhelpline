@@ -157,6 +157,22 @@ const CaliforniaSanJoseFamilySupport = React.lazy(() => import("./pages/Californ
 const CaliforniaLosAngelesFamilySupport = React.lazy(() => import("./pages/CaliforniaLosAngelesFamilySupport"));
 const CaliforniaLongBeachFamilySupport = React.lazy(() => import("./pages/CaliforniaLongBeachFamilySupport"));
 const CaliforniaOrangeCountyFamilySupport = React.lazy(() => import("./pages/CaliforniaOrangeCountyFamilySupport"));
+const IdahoFamilySupport = React.lazy(() => import("./pages/IdahoFamilySupport"));
+const IdahoBoiseFamilySupport = React.lazy(() => import("./pages/IdahoBoiseFamilySupport"));
+const IdahoNampaFamilySupport = React.lazy(() => import("./pages/IdahoNampaFamilySupport"));
+const IdahoMeridianFamilySupport = React.lazy(() => import("./pages/IdahoMeridianFamilySupport"));
+const UtahFamilySupport = React.lazy(() => import("./pages/UtahFamilySupport"));
+const UtahSaltLakeCityFamilySupport = React.lazy(() => import("./pages/UtahSaltLakeCityFamilySupport"));
+const UtahProvoFamilySupport = React.lazy(() => import("./pages/UtahProvoFamilySupport"));
+const UtahOgdenFamilySupport = React.lazy(() => import("./pages/UtahOgdenFamilySupport"));
+const NevadaFamilySupport = React.lazy(() => import("./pages/NevadaFamilySupport"));
+const NevadaLasVegasFamilySupport = React.lazy(() => import("./pages/NevadaLasVegasFamilySupport"));
+const NevadaHendersonFamilySupport = React.lazy(() => import("./pages/NevadaHendersonFamilySupport"));
+const NevadaRenoFamilySupport = React.lazy(() => import("./pages/NevadaRenoFamilySupport"));
+const ArizonaFamilySupport = React.lazy(() => import("./pages/ArizonaFamilySupport"));
+const ArizonaPhoenixFamilySupport = React.lazy(() => import("./pages/ArizonaPhoenixFamilySupport"));
+const ArizonaTucsonFamilySupport = React.lazy(() => import("./pages/ArizonaTucsonFamilySupport"));
+const ArizonaScottsdaleFamilySupport = React.lazy(() => import("./pages/ArizonaScottsdaleFamilySupport"));
 
 const queryClient = new QueryClient();
 
@@ -372,6 +388,26 @@ const App = () => (
               <Route path="/california/los-angeles" element={<CaliforniaLosAngelesFamilySupport />} />
               <Route path="/california/long-beach" element={<CaliforniaLongBeachFamilySupport />} />
               <Route path="/california/orange-county" element={<CaliforniaOrangeCountyFamilySupport />} />
+              {/* Idaho Family Support SEO Pages */}
+              <Route path="/idaho-family-support" element={<IdahoFamilySupport />} />
+              <Route path="/idaho/boise" element={<IdahoBoiseFamilySupport />} />
+              <Route path="/idaho/nampa" element={<IdahoNampaFamilySupport />} />
+              <Route path="/idaho/meridian" element={<IdahoMeridianFamilySupport />} />
+              {/* Utah Family Support SEO Pages */}
+              <Route path="/utah-family-support" element={<UtahFamilySupport />} />
+              <Route path="/utah/salt-lake-city" element={<UtahSaltLakeCityFamilySupport />} />
+              <Route path="/utah/provo" element={<UtahProvoFamilySupport />} />
+              <Route path="/utah/ogden" element={<UtahOgdenFamilySupport />} />
+              {/* Nevada Family Support SEO Pages */}
+              <Route path="/nevada-family-support" element={<NevadaFamilySupport />} />
+              <Route path="/nevada/las-vegas" element={<NevadaLasVegasFamilySupport />} />
+              <Route path="/nevada/henderson" element={<NevadaHendersonFamilySupport />} />
+              <Route path="/nevada/reno" element={<NevadaRenoFamilySupport />} />
+              {/* Arizona Family Support SEO Pages */}
+              <Route path="/arizona-family-support" element={<ArizonaFamilySupport />} />
+              <Route path="/arizona/phoenix" element={<ArizonaPhoenixFamilySupport />} />
+              <Route path="/arizona/tucson" element={<ArizonaTucsonFamilySupport />} />
+              <Route path="/arizona/scottsdale" element={<ArizonaScottsdaleFamilySupport />} />
               {/* Oregon Family Support SEO Pages */}
               <Route path="/oregon-family-support" element={<OregonFamilySupport />} />
               <Route path="/oregon/portland" element={<OregonPortlandFamilySupport />} />

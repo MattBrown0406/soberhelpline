@@ -68,6 +68,10 @@ const Footer = () => {
               <li><Link to="/california-family-support" className="text-sm hover:text-white transition-colors">California Family Support</Link></li>
               <li><Link to="/oregon-family-support" className="text-sm hover:text-white transition-colors">Oregon Family Support</Link></li>
               <li><Link to="/washington-family-support" className="text-sm hover:text-white transition-colors">Washington Family Support</Link></li>
+              <li><Link to="/idaho-family-support" className="text-sm hover:text-white transition-colors">Idaho Family Support</Link></li>
+              <li><Link to="/utah-family-support" className="text-sm hover:text-white transition-colors">Utah Family Support</Link></li>
+              <li><Link to="/nevada-family-support" className="text-sm hover:text-white transition-colors">Nevada Family Support</Link></li>
+              <li><Link to="/arizona-family-support" className="text-sm hover:text-white transition-colors">Arizona Family Support</Link></li>
             </ul>
             <div className="mt-6 p-4 bg-gray-800 rounded-lg">
               <p className="text-sm font-medium text-white mb-1">Need Help Now?</p>
