@@ -133,6 +133,14 @@ const RoadmapLongTermRecovery = React.lazy(() => import("./pages/RoadmapLongTerm
 const RoadmapRelapse = React.lazy(() => import("./pages/RoadmapRelapse"));
 const RelapseRadar = React.lazy(() => import("./pages/RelapseRadar"));
 const Survey = React.lazy(() => import("./pages/Survey"));
+const OregonFamilySupport = React.lazy(() => import("./pages/OregonFamilySupport"));
+const OregonPortlandFamilySupport = React.lazy(() => import("./pages/OregonPortlandFamilySupport"));
+const OregonSalemFamilySupport = React.lazy(() => import("./pages/OregonSalemFamilySupport"));
+const OregonEugeneFamilySupport = React.lazy(() => import("./pages/OregonEugeneFamilySupport"));
+const OregonBendFamilySupport = React.lazy(() => import("./pages/OregonBendFamilySupport"));
+const OregonMedfordFamilySupport = React.lazy(() => import("./pages/OregonMedfordFamilySupport"));
+const OregonGreshamFamilySupport = React.lazy(() => import("./pages/OregonGreshamFamilySupport"));
+const OregonHillsboroFamilySupport = React.lazy(() => import("./pages/OregonHillsboroFamilySupport"));
 
 const queryClient = new QueryClient();
 
@@ -330,6 +338,15 @@ const App = () => (
               <Route path="/roadmap/relapse" element={<RoadmapRelapse />} />
               <Route path="/relapse-radar" element={<RelapseRadar />} />
               <Route path="/survey" element={<Survey />} />
+              {/* Oregon Family Support SEO Pages */}
+              <Route path="/oregon-family-support" element={<OregonFamilySupport />} />
+              <Route path="/oregon/portland" element={<OregonPortlandFamilySupport />} />
+              <Route path="/oregon/salem" element={<OregonSalemFamilySupport />} />
+              <Route path="/oregon/eugene" element={<OregonEugeneFamilySupport />} />
+              <Route path="/oregon/bend" element={<OregonBendFamilySupport />} />
+              <Route path="/oregon/medford" element={<OregonMedfordFamilySupport />} />
+              <Route path="/oregon/gresham" element={<OregonGreshamFamilySupport />} />
+              <Route path="/oregon/hillsboro" element={<OregonHillsboroFamilySupport />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
