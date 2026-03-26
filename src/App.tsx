@@ -173,6 +173,19 @@ const ArizonaFamilySupport = React.lazy(() => import("./pages/ArizonaFamilySuppo
 const ArizonaPhoenixFamilySupport = React.lazy(() => import("./pages/ArizonaPhoenixFamilySupport"));
 const ArizonaTucsonFamilySupport = React.lazy(() => import("./pages/ArizonaTucsonFamilySupport"));
 const ArizonaScottsdaleFamilySupport = React.lazy(() => import("./pages/ArizonaScottsdaleFamilySupport"));
+const ColoradoFamilySupport = React.lazy(() => import("./pages/ColoradoFamilySupport"));
+const ColoradoDenverFamilySupport = React.lazy(() => import("./pages/ColoradoDenverFamilySupport"));
+const ColoradoColoradoSpringsFamilySupport = React.lazy(() => import("./pages/ColoradoColoradoSpringsFamilySupport"));
+const ColoradoFortCollinsFamilySupport = React.lazy(() => import("./pages/ColoradoFortCollinsFamilySupport"));
+const NewMexicoFamilySupport = React.lazy(() => import("./pages/NewMexicoFamilySupport"));
+const NewMexicoAlbuquerqueFamilySupport = React.lazy(() => import("./pages/NewMexicoAlbuquerqueFamilySupport"));
+const NewMexicoSantaFeFamilySupport = React.lazy(() => import("./pages/NewMexicoSantaFeFamilySupport"));
+const NewMexicoLasCrucesFamilySupport = React.lazy(() => import("./pages/NewMexicoLasCrucesFamilySupport"));
+const TexasFamilySupport = React.lazy(() => import("./pages/TexasFamilySupport"));
+const TexasHoustonFamilySupport = React.lazy(() => import("./pages/TexasHoustonFamilySupport"));
+const TexasDallasFamilySupport = React.lazy(() => import("./pages/TexasDallasFamilySupport"));
+const TexasAustinFamilySupport = React.lazy(() => import("./pages/TexasAustinFamilySupport"));
+const TexasSanAntonioFamilySupport = React.lazy(() => import("./pages/TexasSanAntonioFamilySupport"));
 
 const queryClient = new QueryClient();
 
@@ -408,6 +421,22 @@ const App = () => (
               <Route path="/arizona/phoenix" element={<ArizonaPhoenixFamilySupport />} />
               <Route path="/arizona/tucson" element={<ArizonaTucsonFamilySupport />} />
               <Route path="/arizona/scottsdale" element={<ArizonaScottsdaleFamilySupport />} />
+              {/* Colorado Family Support SEO Pages */}
+              <Route path="/colorado-family-support" element={<ColoradoFamilySupport />} />
+              <Route path="/colorado/denver" element={<ColoradoDenverFamilySupport />} />
+              <Route path="/colorado/colorado-springs" element={<ColoradoColoradoSpringsFamilySupport />} />
+              <Route path="/colorado/fort-collins" element={<ColoradoFortCollinsFamilySupport />} />
+              {/* New Mexico Family Support SEO Pages */}
+              <Route path="/new-mexico-family-support" element={<NewMexicoFamilySupport />} />
+              <Route path="/new-mexico/albuquerque" element={<NewMexicoAlbuquerqueFamilySupport />} />
+              <Route path="/new-mexico/santa-fe" element={<NewMexicoSantaFeFamilySupport />} />
+              <Route path="/new-mexico/las-cruces" element={<NewMexicoLasCrucesFamilySupport />} />
+              {/* Texas Family Support SEO Pages */}
+              <Route path="/texas-family-support" element={<TexasFamilySupport />} />
+              <Route path="/texas/houston" element={<TexasHoustonFamilySupport />} />
+              <Route path="/texas/dallas" element={<TexasDallasFamilySupport />} />
+              <Route path="/texas/austin" element={<TexasAustinFamilySupport />} />
+              <Route path="/texas/san-antonio" element={<TexasSanAntonioFamilySupport />} />
               {/* Oregon Family Support SEO Pages */}
               <Route path="/oregon-family-support" element={<OregonFamilySupport />} />
               <Route path="/oregon/portland" element={<OregonPortlandFamilySupport />} />
