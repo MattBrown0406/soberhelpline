@@ -35,6 +35,7 @@ const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAdd
 const FamilyMembership = React.lazy(() => import("./pages/FamilyMembership"));
 const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
+const FamilyForumLanding = React.lazy(() => import("./pages/FamilyForumLanding"));
 const FamilyConsultation = React.lazy(() => import("./pages/FamilyConsultation"));
 const MondayZoomRegistration = React.lazy(() => import("./pages/MondayZoomRegistration"));
 const FamilyWebinars = React.lazy(() => import("./pages/FamilyWebinars"));
@@ -286,6 +287,7 @@ const App = () => (
               <Route path="/family-membership" element={<FamilyMembership />} />
               <Route path="/family-education" element={<FamilyEducation />} />
               <Route path="/family-forum" element={<FamilyForum />} />
+              <Route path="/family-support-forum" element={<FamilyForumLanding />} />
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
               <Route path="/family-consultation" element={<FamilyConsultation />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
