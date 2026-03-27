@@ -102,7 +102,6 @@ export default function FamilyForumLanding() {
       <SEOHead
         title="Family Addiction Support Forum | Connect with Families Who Understand | Sober Helpline"
         description="Join a professionally moderated sober support forum for families navigating addiction. Anonymous, judgment-free, available 24/7. Connect with families who understand. Free to explore."
-        keywords="sober forum, family addiction forum, addiction support forum, sober support community, family recovery forum, addiction family support group online, sober helpline forum, family forum addiction, online support group addiction families"
         jsonLd={[localBusinessSchema, faqSchema] as any}
       />
 

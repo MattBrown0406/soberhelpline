@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Heart, Users, MapPin, Calendar, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
+import { Phone, Heart, Users, MapPin, Calendar, ChevronRight, ExternalLink, CheckCircle2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
