@@ -571,7 +571,19 @@ const BookConsultation = () => {
   // Price display helpers
   const displayRate = isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading || paymentProcessing) return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      {paymentProcessing ? (
+        <>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <p className="text-lg font-medium">Processing your payment...</p>
+          <p className="text-sm text-muted-foreground">Please don't close this page.</p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-background">
