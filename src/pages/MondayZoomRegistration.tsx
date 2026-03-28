@@ -515,6 +515,12 @@ export default function MondayZoomRegistration() {
                       isMemberQuestion ? "Submit My Question" : "Register for Monday Night Meeting"
                     )}
                   </Button>
+
+                  {!isMemberQuestion && (
+                    <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+                      *By registering, you acknowledge that this meeting will be recorded and archived. Recordings are made available exclusively to paid members of Sober Helpline in the membership section of the website.
+                    </p>
+                  )}
                 </form>
               </CardContent>
             </Card>
