@@ -67,3 +67,6 @@ verify_jwt = false
 
 [functions.check-membership-email]
 verify_jwt = false
+
+[functions.consultation-payment]
+verify_jwt = false

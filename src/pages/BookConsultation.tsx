@@ -161,6 +161,7 @@ const BookConsultation = () => {
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [clientTimezone, setClientTimezone] = useState(() => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -185,6 +186,57 @@ const BookConsultation = () => {
 
   const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
+
+  // Handle PayPal return - capture payment after redirect back
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paypalToken = params.get("token");
+    const paypalOrderId = params.get("paypal_order_id") || paypalToken;
+    if (paypalOrderId && !paymentProcessing) {
+      capturePayment(paypalOrderId);
+    }
+  }, []);
+
+  const capturePayment = async (orderId: string) => {
+    setPaymentProcessing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("consultation-payment", {
+        body: { action: "capture-order", orderId },
+      });
+
+      if (error) throw error;
+      if (data?.error) {
+        if (data.paymentCaptured) {
+          toast({
+            title: "Payment Received",
+            description: data.error,
+          });
+        } else {
+          throw new Error(data.error);
+        }
+      } else {
+        toast({
+          title: "Booking Confirmed!",
+          description: "Payment received and your session is booked. Check your email for the Zoom link.",
+        });
+      }
+
+      // Clean up URL and navigate to onboarding
+      const storedPlan = localStorage.getItem("consultation_plan_type") || "single";
+      localStorage.removeItem("consultation_plan_type");
+      navigate(`/coaching-onboarding?plan=${storedPlan}`, { replace: true });
+    } catch (err) {
+      console.error("Payment capture error:", err);
+      toast({
+        title: "Payment Error",
+        description: "There was an issue processing your payment. Please contact us at matt@soberhelpline.com",
+        variant: "destructive",
+      });
+      // Clear URL params
+      window.history.replaceState({}, '', window.location.pathname);
+      setPaymentProcessing(false);
+    }
+  };
 
   useEffect(() => {
     loadInit();
@@ -471,7 +523,6 @@ const BookConsultation = () => {
         });
       });
 
-      // Use server-side booking creation for validated pricing
       const bookings = slotsToBook.map((s) => ({
         booking_date: s.date,
         start_time: s.slot.start_time,
@@ -479,8 +530,16 @@ const BookConsultation = () => {
         timezone: s.slot.timezone || "America/Los_Angeles",
       }));
 
-      const { data, error } = await supabase.functions.invoke("book-consultation", {
+      // Store plan type for after PayPal redirect
+      localStorage.setItem("consultation_plan_type", planType || "single");
+
+      const returnUrl = `${window.location.origin}/book-consultation?paypal_success=true`;
+      const cancelUrl = `${window.location.origin}/book-consultation${planType ? `?plan=${planType}` : ""}`;
+
+      // Create PayPal order
+      const { data, error } = await supabase.functions.invoke("consultation-payment", {
         body: {
+          action: "create-order",
           provider_id: selectedProvider.id,
           bookings,
           intake_responses: intakeResponses,
@@ -488,26 +547,23 @@ const BookConsultation = () => {
           client_email: intakeData.client_email,
           client_phone: intakeData.client_phone || null,
           plan_type: planType || "single",
+          return_url: returnUrl,
+          cancel_url: cancelUrl,
         },
       });
 
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
 
-      const planName = isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan";
-      toast({
-        title: isMultiSession ? `${planName} Booked!` : "Consultation Booked!",
-        description: isMultiSession
-          ? `All ${requiredSlots} sessions have been scheduled. Check your email for confirmation details.`
-          : "Your session is confirmed. Check your email for the Zoom link and details.",
-      });
-
-      const onboardingPlan = planType || "single";
-      navigate(`/coaching-onboarding?plan=${onboardingPlan}`);
+      if (data?.approvalUrl) {
+        // Redirect to PayPal for payment
+        window.location.href = data.approvalUrl;
+      } else {
+        throw new Error("No payment URL received");
+      }
     } catch (error) {
       console.error("Booking error:", error);
       toast({ title: "Booking failed", description: "Please try again.", variant: "destructive" });
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -515,7 +571,19 @@ const BookConsultation = () => {
   // Price display helpers
   const displayRate = isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading || paymentProcessing) return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      {paymentProcessing ? (
+        <>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <p className="text-lg font-medium">Processing your payment...</p>
+          <p className="text-sm text-muted-foreground">Please don't close this page.</p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-background">
