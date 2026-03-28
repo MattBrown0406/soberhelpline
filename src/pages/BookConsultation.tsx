@@ -161,6 +161,7 @@ const BookConsultation = () => {
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [clientTimezone, setClientTimezone] = useState(() => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -185,6 +186,57 @@ const BookConsultation = () => {
 
   const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
+
+  // Handle PayPal return - capture payment after redirect back
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paypalToken = params.get("token");
+    const paypalOrderId = params.get("paypal_order_id") || paypalToken;
+    if (paypalOrderId && !paymentProcessing) {
+      capturePayment(paypalOrderId);
+    }
+  }, []);
+
+  const capturePayment = async (orderId: string) => {
+    setPaymentProcessing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("consultation-payment", {
+        body: { action: "capture-order", orderId },
+      });
+
+      if (error) throw error;
+      if (data?.error) {
+        if (data.paymentCaptured) {
+          toast({
+            title: "Payment Received",
+            description: data.error,
+          });
+        } else {
+          throw new Error(data.error);
+        }
+      } else {
+        toast({
+          title: "Booking Confirmed!",
+          description: "Payment received and your session is booked. Check your email for the Zoom link.",
+        });
+      }
+
+      // Clean up URL and navigate to onboarding
+      const storedPlan = localStorage.getItem("consultation_plan_type") || "single";
+      localStorage.removeItem("consultation_plan_type");
+      navigate(`/coaching-onboarding?plan=${storedPlan}`, { replace: true });
+    } catch (err) {
+      console.error("Payment capture error:", err);
+      toast({
+        title: "Payment Error",
+        description: "There was an issue processing your payment. Please contact us at matt@soberhelpline.com",
+        variant: "destructive",
+      });
+      // Clear URL params
+      window.history.replaceState({}, '', window.location.pathname);
+      setPaymentProcessing(false);
+    }
+  };
 
   useEffect(() => {
     loadInit();
