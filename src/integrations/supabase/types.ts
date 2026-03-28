@@ -1383,6 +1383,30 @@ export type Database = {
         }
         Relationships: []
       }
+      pending_consultation_orders: {
+        Row: {
+          booking_payload: Json
+          created_at: string | null
+          id: string
+          paypal_order_id: string | null
+          status: string | null
+        }
+        Insert: {
+          booking_payload: Json
+          created_at?: string | null
+          id?: string
+          paypal_order_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          booking_payload?: Json
+          created_at?: string | null
+          id?: string
+          paypal_order_id?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       pending_free_memberships: {
         Row: {
           claimed_at: string | null
