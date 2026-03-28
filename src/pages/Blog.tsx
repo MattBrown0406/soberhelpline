@@ -109,12 +109,137 @@ import therapyFamilyMembersAddictsImg from "@/assets/blog-therapy-family-members
 import detachmentWithLoveAddictionFamilyImg from "@/assets/blog-detachment-with-love-addiction-family.jpg";
 import aftercarePlanningFamilyGuideImg from "@/assets/blog-aftercare-planning-family-guide.jpg";
 import soberLivingHomesFamilyGuideImg from "@/assets/blog-sober-living-homes-family-guide.jpg";
+import whatToDoWhileInRehabImg from "@/assets/blog-what-to-do-while-loved-one-is-in-rehab.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 106,
+    slug: "what-to-do-while-loved-one-is-in-rehab",
+    seoTitle: "What to Do While Your Loved One Is in Rehab: Family Guide",
+    metaDescription: "A practical family action guide for what to do while your loved one is in treatment. Learn how to prepare your home, support recovery, and do your own healing work.",
+    title: "What to Do While Your Loved One Is in Rehab: A Family's Action Guide",
+    excerpt: "The weeks your loved one spends in treatment are not a waiting room. They are one of the most important windows of opportunity in the entire recovery process — for them and for you.",
+    content: `The day your loved one enters a treatment program, you may feel a complicated mix of relief, worry, and something that's almost hard to name — a sudden quiet after months or years of chaos. The crisis that consumed your household has, at least for now, paused. And you're left wondering: what am I supposed to do while they're in rehab?
+
+That question matters more than most families realize. The weeks your loved one spends in treatment are not a waiting room. They are one of the most important windows of opportunity in the entire recovery process — for them and for you.
+
+This guide will walk you through exactly what to do while your loved one is in rehab, how to support their recovery from the outside, and why doing your own work during this time is just as important as anything happening inside the treatment center.
+
+**Why What You Do During Treatment Matters**
+
+Addiction doesn't happen in a vacuum, and recovery doesn't either. Research consistently shows that family involvement during and after treatment significantly improves long-term outcomes. What your loved one comes home to — the emotional environment, the boundaries, the level of support — plays a major role in whether they stay sober.
+
+That means the work you do right now, while they're in treatment, is not just keeping busy. It's building the foundation for sustainable recovery. Families who show up prepared — emotionally, practically, and relationally — give their loved ones a far better chance at lasting sobriety.
+
+Think of it this way: the treatment center is working on your loved one. You are working on the world they're returning to.
+
+**How to Stay Connected While Respecting the Treatment Process**
+
+Most residential programs have structured visitation and communication policies for good reason. Early treatment often requires a "blackout" period — usually the first week to two weeks — where outside contact is limited so your loved one can stabilize, detox safely, and begin to engage with the program without distraction.
+
+This can be painful for families. But it is not rejection. It is protection.
+
+What communication usually looks like: Week 1–2 involves little to no contact in most residential programs. This is normal and expected. Week 3 and beyond, phone calls, letters, or scheduled visits typically begin, depending on the program's structure and your loved one's progress.
+
+Many programs offer family therapy sessions during treatment. Participate in every one you are offered. If allowed, a brief, warm, non-guilt-laden letter during the blackout period can mean the world. Keep it simple: "I love you. I'm proud of you. Focus on your work."
+
+When you do communicate, resist the urge to discuss logistics, finances, or problems at home. Your loved one's only job right now is to heal. Protect that space.
+
+**Do Your Own Work: This Is Your Recovery Too**
+
+This is where most families fall short — not out of laziness, but out of misdirection. All the energy that went into managing your loved one's addiction now has nowhere to go, and it's tempting to pour it back into monitoring their treatment progress, calling the facility repeatedly, or researching the next step before they've even finished the first one.
+
+But the most important thing you can do right now is turn some of that focus inward.
+
+Start or deepen your own support system. [LINK:Al-Anon or Nar-Anon:/blog/al-anon-family-support-groups-addiction] — these free, peer-support programs are specifically designed for families of people with addiction. They provide community, perspective, and tools you cannot get anywhere else. If you've never tried a meeting, now is the time.
+
+[LINK:Family therapy:/blog/therapy-for-family-members-of-addicts] — work with a therapist who understands addiction and family systems. This isn't about fixing your loved one — it's about understanding your own patterns, codependency, and how you may have unknowingly contributed to the dynamic.
+
+Caregiver support groups — many treatment centers offer family programs or support groups for parents, spouses, and siblings. Ask the admissions team what's available.
+
+Get honest about your own role. This is not about blame. It is about awareness. Many families who live with active addiction develop their own unhealthy patterns — enabling behaviors, hypervigilance, people-pleasing, or emotional shutdown. A good therapist or Al-Anon sponsor can help you identify these patterns and begin changing them before your loved one comes home.
+
+The family that does its own work during treatment becomes the recovery-supportive environment that makes relapse less likely.
+
+**Prepare Your Home and Life for Their Return**
+
+Coming home from treatment is one of the highest-risk moments in early recovery. Familiar environments, familiar people, and familiar stress can all trigger cravings powerfully. The more thoughtfully you prepare your home and household, the safer that transition will be.
+
+Practical steps to take now: First, remove alcohol and substances from the home. This includes prescription medications that are not currently needed, and yes — your own wine rack or beer fridge if your loved one will be living with you. This is not about you giving up your life. It is about reducing unnecessary risk during early recovery.
+
+Second, lock up or secure prescription medications. Opioids, benzodiazepines, and stimulants should be stored in a locked box. Do not leave them accessible.
+
+Third, think through the physical environment. Is there a space where they can have privacy and calm? Are there triggers — certain rooms, items, or old friends who may reach out — you can proactively address?
+
+Fourth, establish some household structure. Recovery thrives on routine. Work with your loved one's treatment team or case manager to understand what kind of daily structure they're being asked to maintain and how you can support it.
+
+Fifth, clarify your [LINK:boundaries:/blog/boundaries-ultimatums-guide] now, not later. What will you accept and what won't you? What happens if they relapse? What are your non-negotiables? These conversations are far easier to have before they come home than during a crisis moment.
+
+**Educate Yourself on What Recovery Actually Looks Like**
+
+One of the most valuable things you can do during this time is simply learn. Most families enter a loved one's return from treatment with unrealistic expectations — either expecting instant transformation or bracing for immediate relapse. Neither extreme is helpful.
+
+Recovery is not a switch that gets flipped on when someone leaves treatment. It is a process — often messy, nonlinear, and humbling. Understanding what to realistically expect will help you respond with patience instead of panic, and with encouragement instead of pressure.
+
+Key things to understand before they come home: Mood fluctuations are normal in early recovery. The brain is still healing from the chemical effects of addiction. Your loved one may be irritable, anxious, flat, or emotionally raw for weeks or months. This is not a sign of failure.
+
+Triggers are everywhere. Stress, boredom, certain people, certain places, and even positive emotions can trigger cravings. This is why a strong continuing care plan — therapy, meetings, and outpatient support — is critical.
+
+Relapse is a risk, not an inevitability. Having a plan for what to do if relapse occurs is not being pessimistic. It is being prepared. Ask the treatment team what a relapse protocol looks like and how you should respond.
+
+Your relationship will need to be rebuilt over time. Trust was eroded. It comes back through consistent action — on both sides — not through a single conversation or a moment of emotional catharsis.
+
+**Participate in the Treatment Process Wherever Possible**
+
+You are not a bystander in your loved one's recovery. Most quality treatment programs want families involved — not because they think you caused the addiction, but because they know recovery is stronger when the whole system heals.
+
+Ask the treatment team directly: What can we do as a family to support this? Are there family therapy sessions we should attend? Is there educational material we should read? What does a good [LINK:aftercare plan:/blog/aftercare-planning-addiction-recovery-family-guide] look like for someone returning to our household?
+
+The families who ask these questions and show up to family sessions consistently are the ones who report the most positive outcomes — for their loved one and for themselves. This is not passive waiting. This is active partnership in the recovery process.
+
+**You're Not Just Waiting — You're Preparing**
+
+The days your loved one spends in treatment are a gift — to them, and to you. Use this time intentionally. Get support. Do your own work. Prepare your home. Learn everything you can. Build your own stability so that when they come back, you're not just relieved — you're ready.
+
+Recovery takes a village. You are part of that village. And the stronger, healthier, and more prepared you are, the more powerful your role in it becomes.
+
+At SoberHelpline.com, we work with families at every stage of this journey — from the moment a loved one enters treatment through the long process of rebuilding life in recovery. Explore our family coaching resources, educational content, and support programs to get the guidance you need right now.
+
+**Frequently Asked Questions**
+
+**Can I call my loved one while they're in rehab?**
+
+It depends on the program and the stage of treatment. Many residential programs limit or restrict contact during the first one to two weeks to allow your loved one to stabilize. After that, scheduled calls and visits are typically allowed. Always follow the facility's communication guidelines and ask the treatment team what's best for your loved one's specific situation.
+
+**What should I do if I feel helpless while my loved one is in treatment?**
+
+Helplessness is a very common feeling for families during this time, and it makes sense — you've spent months or years trying to fix a problem that isn't yours to fix. The most productive thing you can do is shift that energy toward your own healing: find an Al-Anon meeting, connect with a therapist, and begin preparing your home and mindset for their return.
+
+**How do I prepare my house for someone returning from rehab?**
+
+Start by removing or securing alcohol, drugs, and unnecessary prescription medications from the home. Think about the physical and emotional environment: Is it calm? Is there structure? Are known triggers present? Talk to your loved one's treatment team about what kind of home environment best supports early recovery, and clarify your own boundaries before they return.
+
+**Should I attend family sessions at the treatment center?**
+
+Yes — absolutely. Family therapy sessions during treatment are one of the most valuable tools available to you. They help the treatment team understand the family system, give you tools to communicate differently, and allow everyone to begin repairing relationships in a safe, supported environment. Make every session a priority.
+
+**What if my loved one relapses after coming home from rehab?**
+
+Relapse is a real risk in early recovery, and having a plan in place before it happens is wise. Talk to the treatment team before discharge about what a relapse protocol looks like: when to call for help, what level of care might be needed, and how to respond without enabling. A relapse is not the end of the story — but it does require a clear, boundaried response.
+
+**How long does recovery take?**
+
+Recovery is a lifelong process, not a fixed timeline. The risk of relapse is highest in the first 90 days after treatment, and the first year is generally the most vulnerable period. That said, many people do achieve long-term, stable sobriety — and families who stay involved, educated, and boundaried significantly improve those odds.`,
+    image: whatToDoWhileInRehabImg,
+    author: "Matt Brown",
+    date: "2026-03-28",
+    category: "Family Support",
+    keywords: ["what to do while loved one is in rehab", "family support during treatment", "preparing for return from rehab", "family recovery", "addiction treatment family guide"]
+  },
   {
     id: 105,
     slug: "detachment-with-love-addiction-family",
