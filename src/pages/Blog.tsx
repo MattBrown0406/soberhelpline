@@ -234,7 +234,7 @@ Relapse is a real risk in early recovery, and having a plan in place before it h
 **How long does recovery take?**
 
 Recovery is a lifelong process, not a fixed timeline. The risk of relapse is highest in the first 90 days after treatment, and the first year is generally the most vulnerable period. That said, many people do achieve long-term, stable sobriety — and families who stay involved, educated, and boundaried significantly improve those odds.`,
-    image: "/assets/blog-what-to-do-while-loved-one-is-in-rehab.jpg",
+    image: whatToDoWhileInRehabImg,
     author: "Matt Brown",
     date: "2026-03-28",
     category: "Family Support",
