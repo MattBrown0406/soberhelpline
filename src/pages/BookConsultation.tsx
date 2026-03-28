@@ -523,7 +523,6 @@ const BookConsultation = () => {
         });
       });
 
-      // Use server-side booking creation for validated pricing
       const bookings = slotsToBook.map((s) => ({
         booking_date: s.date,
         start_time: s.slot.start_time,
@@ -531,8 +530,16 @@ const BookConsultation = () => {
         timezone: s.slot.timezone || "America/Los_Angeles",
       }));
 
-      const { data, error } = await supabase.functions.invoke("book-consultation", {
+      // Store plan type for after PayPal redirect
+      localStorage.setItem("consultation_plan_type", planType || "single");
+
+      const returnUrl = `${window.location.origin}/book-consultation?paypal_success=true`;
+      const cancelUrl = `${window.location.origin}/book-consultation${planType ? `?plan=${planType}` : ""}`;
+
+      // Create PayPal order
+      const { data, error } = await supabase.functions.invoke("consultation-payment", {
         body: {
+          action: "create-order",
           provider_id: selectedProvider.id,
           bookings,
           intake_responses: intakeResponses,
@@ -540,26 +547,23 @@ const BookConsultation = () => {
           client_email: intakeData.client_email,
           client_phone: intakeData.client_phone || null,
           plan_type: planType || "single",
+          return_url: returnUrl,
+          cancel_url: cancelUrl,
         },
       });
 
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
 
-      const planName = isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan";
-      toast({
-        title: isMultiSession ? `${planName} Booked!` : "Consultation Booked!",
-        description: isMultiSession
-          ? `All ${requiredSlots} sessions have been scheduled. Check your email for confirmation details.`
-          : "Your session is confirmed. Check your email for the Zoom link and details.",
-      });
-
-      const onboardingPlan = planType || "single";
-      navigate(`/coaching-onboarding?plan=${onboardingPlan}`);
+      if (data?.approvalUrl) {
+        // Redirect to PayPal for payment
+        window.location.href = data.approvalUrl;
+      } else {
+        throw new Error("No payment URL received");
+      }
     } catch (error) {
       console.error("Booking error:", error);
       toast({ title: "Booking failed", description: "Please try again.", variant: "destructive" });
-    } finally {
       setIsSubmitting(false);
     }
   };
