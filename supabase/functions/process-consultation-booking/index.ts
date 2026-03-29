@@ -333,7 +333,7 @@ Deno.serve(async (req) => {
       .eq('user_id', provider.user_id)
       .single();
 
-    const providerEmail = providerPrivate?.email || provider.paypal_email;
+    const providerEmail = providerPrivate?.email || provider.notification_email || provider.paypal_email;
 
     if (providerEmail) {
       await sendEmail(providerEmail, `New Session Booked – ${formattedDate} - Sober Helpline`, `
