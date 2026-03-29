@@ -448,6 +448,7 @@ export type Database = {
           created_at: string
           full_name: string
           id: string
+          notification_email: string | null
           paypal_email: string
           photo_url: string | null
           session_duration_minutes: number
@@ -464,6 +465,7 @@ export type Database = {
           created_at?: string
           full_name: string
           id?: string
+          notification_email?: string | null
           paypal_email: string
           photo_url?: string | null
           session_duration_minutes?: number
@@ -480,6 +482,7 @@ export type Database = {
           created_at?: string
           full_name?: string
           id?: string
+          notification_email?: string | null
           paypal_email?: string
           photo_url?: string | null
           session_duration_minutes?: number
