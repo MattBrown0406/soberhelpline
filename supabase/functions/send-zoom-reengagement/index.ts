@@ -27,18 +27,9 @@ serve(async (req: Request) => {
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
-    const previousDate = "2026-03-09";
-    const upcomingDate = "2026-03-16";
+    const upcomingDate = "2026-03-30";
 
-    // Get last week's registrants
-    const { data: lastWeek, error: e1 } = await adminSupabase
-      .from("zoom_meeting_registrations")
-      .select("name, email")
-      .eq("meeting_date", previousDate);
-
-    if (e1) throw e1;
-
-    // Get this week's registrants
+    // Get this week's registrants (to exclude)
     const { data: thisWeek, error: e2 } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email")
@@ -48,24 +39,49 @@ serve(async (req: Request) => {
 
     const thisWeekEmails = new Set((thisWeek || []).map((r: any) => r.email.toLowerCase()));
 
-    // Filter to last week's people who haven't registered this week
+    // Get all active family members (to exclude)
+    const { data: activeSubs } = await adminSupabase
+      .from("provider_subscriptions")
+      .select("user_id")
+      .is("provider_submission_id", null)
+      .eq("status", "active");
+
+    const memberUserIds = [...new Set((activeSubs || []).map((s: any) => s.user_id))];
+
+    const { data: memberPrivate } = await adminSupabase
+      .from("profile_private")
+      .select("email")
+      .in("user_id", memberUserIds);
+
+    const memberEmails = new Set((memberPrivate || []).map((m: any) => m.email.toLowerCase()));
+
+    // Get ALL previous registrants (not just last week)
+    const { data: allPast, error: e1 } = await adminSupabase
+      .from("zoom_meeting_registrations")
+      .select("name, email")
+      .neq("meeting_date", upcomingDate)
+      .order("created_at", { ascending: false });
+
+    if (e1) throw e1;
+
+    // Filter: not already registered, not a member, deduplicated
     const targets: { name: string; email: string }[] = [];
     const seen = new Set<string>();
-    for (const r of (lastWeek || [])) {
+    for (const r of (allPast || [])) {
       const key = r.email.toLowerCase();
-      if (!thisWeekEmails.has(key) && !seen.has(key)) {
+      if (!thisWeekEmails.has(key) && !memberEmails.has(key) && !seen.has(key)) {
         seen.add(key);
         targets.push(r);
       }
     }
 
-    // Add manual recipients
+    // Add manual recipients (non-member test)
     const manualRecipients = [
       { name: "Matt", email: "matt@freedominterventions.com" },
     ];
     for (const r of manualRecipients) {
       const key = r.email.toLowerCase();
-      if (!thisWeekEmails.has(key) && !seen.has(key)) {
+      if (!thisWeekEmails.has(key) && !memberEmails.has(key) && !seen.has(key)) {
         seen.add(key);
         targets.push(r);
       }
