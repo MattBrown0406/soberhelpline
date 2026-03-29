@@ -105,11 +105,12 @@ serve(async (req: Request) => {
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">We Don't Want to Miss You Tomorrow!</h1>
+          <h1 style="color: #166534; font-size: 24px;">We Haven't Seen Your Name Yet — Join Us Tomorrow!</h1>
           <p>Hi ${safeName},</p>
-          <p>We noticed you joined us for last Monday's Family Support Zoom Meeting — and we loved having you there.</p>
-          <p>Tomorrow night's meeting is at <strong>7:00 PM PST</strong>, and we'd hate for you to miss it. If you haven't registered yet, it only takes a moment:</p>
-          
+          <p>We noticed you haven't registered for tomorrow's <strong>Monday Night Family Support Meeting</strong> yet, and we'd love to see you there.</p>
+          <p>Consistency is the key to staying ahead of addiction. We know it can be exhausting — and sometimes just showing up is the hardest part. But being part of something bigger can give you the strength and education you need to keep going for your loved one.</p>
+          <p>Tomorrow night at <strong>7:00 PM PST</strong>, we'll be here for you.</p>
+
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(registerUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
               Register for Tomorrow's Meeting
@@ -119,14 +120,29 @@ serve(async (req: Request) => {
             </p>
           </div>
 
+          <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 20px; margin: 20px 0;">
+            <div style="text-align: center; margin-bottom: 12px;">
+              <img src="https://static.showit.co/800/l0Mb_Xc-P-SzU-s9UQyL4A/240702/katiebarr2.jpg" alt="Katie Barr" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #d97706;" />
+            </div>
+            <p style="margin: 0 0 8px 0; color: #854d0e; font-size: 15px; text-align: center;">
+              <strong>🎉 Exciting News: Welcome Katie Barr to the Team!</strong>
+            </p>
+            <p style="margin: 0; color: #713f12; font-size: 14px; text-align: center;">
+              We're thrilled to announce that <strong>Katie Barr</strong>, a Certified Intervention Professional from Barr Interventions &amp; Consulting, is joining our Sober Helpline team. Katie brings years of experience supporting families through addiction and recovery. We can't wait for you to meet her!
+            </p>
+          </div>
+
           <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
-              <strong>⭐ Did you know?</strong> Sober Helpline members don't need to register each week. Just log in to your account and join the meeting instantly — no registration required.
+              <strong>⭐ Want more than Monday nights?</strong> Sober Helpline membership is just <strong>$14.99/month</strong> and includes a <strong>$25 discount on coaching sessions</strong> plus full access to the member section of the site.
             </p>
             <a href="${siteUrl}/family-membership" style="display: inline-block; margin-top: 4px; padding: 8px 20px; background-color: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;">
               Learn About Membership
             </a>
           </div>
+
+          <p>We're excited to see you tomorrow night. 💚</p>
+          <p style="margin-top: 8px;">— Matt &amp; the Sober Helpline Team</p>
 
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
             If you have any questions, call us at <strong>(541) 241-5886</strong>.
