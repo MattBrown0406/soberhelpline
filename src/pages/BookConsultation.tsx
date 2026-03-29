@@ -281,7 +281,16 @@ const BookConsultation = () => {
       .from("consultation_providers")
       .select("*")
       .eq("status", "active");
-    setProviders(data || []);
+
+    const sortedProviders = [...(data || [])].sort((a, b) => {
+      if (a.full_name === "Matt Brown") return -1;
+      if (b.full_name === "Matt Brown") return 1;
+      if (a.full_name === "Katie Barr") return -1;
+      if (b.full_name === "Katie Barr") return 1;
+      return a.full_name.localeCompare(b.full_name);
+    });
+
+    setProviders(sortedProviders);
     setLoading(false);
   };
 
@@ -657,7 +666,7 @@ const BookConsultation = () => {
                     <Card key={p.id} className="cursor-pointer hover:border-primary transition-colors" onClick={() => selectProvider(p)}>
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <img src={providerHeadshot} alt={p.full_name} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                          <img src={p.photo_url || "/placeholder.svg"} alt={p.full_name} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
                           <div className="flex-1">
                             <h3 className="font-semibold text-lg">{p.full_name}</h3>
                             {p.title && <p className="text-sm text-muted-foreground">{p.title}</p>}
