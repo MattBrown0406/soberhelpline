@@ -162,7 +162,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: "😊 We'd love to see you tomorrow — register for Monday's meeting",
+          subject: "📅 You haven't registered yet — join us tomorrow night!",
           content: [{ type: "text/html", value: html }],
         }),
       });
