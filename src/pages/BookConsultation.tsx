@@ -14,7 +14,7 @@ import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown, Users } from "lucide-react";
 import logo from "@/assets/logo.png";
-import providerHeadshot from "@/assets/provider-headshot.jpg";
+
 import SEOHead from "@/components/SEOHead";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
