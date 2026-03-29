@@ -666,7 +666,7 @@ const BookConsultation = () => {
                     <Card key={p.id} className="cursor-pointer hover:border-primary transition-colors" onClick={() => selectProvider(p)}>
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <img src={p.photo_url || "/placeholder.svg"} alt={p.full_name} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                          <img src={p.photo_url || "/placeholder.svg"} alt={p.full_name} className="w-16 h-16 rounded-full object-cover object-top flex-shrink-0" />
                           <div className="flex-1">
                             <h3 className="font-semibold text-lg">{p.full_name}</h3>
                             {p.title && <p className="text-sm text-muted-foreground">{p.title}</p>}
