@@ -34,7 +34,7 @@ export default function OregonSalemFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Salem, Oregon | Sober Helpline"
-        description="Families in Salem struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Salem struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -210,10 +210,10 @@ export default function OregonSalemFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Salem families join every Monday night for free support led by certified interventionist Matt Brown. 
+                      Salem families join every Monday for free support led by certified interventionist Matt Brown. 
                       No treatment center names. No sales pitch. Just real guidance.
                     </p>
                     <ul className="space-y-2 mb-4">
@@ -323,7 +323,7 @@ export default function OregonSalemFamilySupport() {
               Salem Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Free support every Monday night. Coaching available now. You don't have to figure this out alone.
+              Free support every Monday. Coaching available now. You don't have to figure this out alone.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">

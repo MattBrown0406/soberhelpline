@@ -101,11 +101,11 @@ serve(async (req: Request) => {
 
     const emailResult = await sendEmail(
       [email],
-      "You're Registered! Monday Night Family Support Zoom Meeting",
+      "You're Registered! The Family Squares Zoom Meeting",
       `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Welcome, ${safeName}!</h1>
-          <p>Thank you for registering for the <strong>Monday Night Family Support Zoom Meeting</strong>.</p>
+          <p>Thank you for registering for the <strong>The Family Squares Zoom Meeting</strong>.</p>
           <p>This is a free, supportive space for families navigating addiction. You'll have the opportunity to ask questions, share experiences, and connect with others who understand.</p>
           
           ${zoomSection}
@@ -170,7 +170,7 @@ serve(async (req: Request) => {
       ["matt@soberhelpline.com"],
       `New Zoom Meeting Registration: ${safeName}`,
       `
-        <h2>New Monday Night Zoom Registration</h2>
+        <h2>New The Family Squares Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>

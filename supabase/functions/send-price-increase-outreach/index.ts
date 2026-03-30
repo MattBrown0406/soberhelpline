@@ -67,7 +67,7 @@ function buildHtml(safeName: string): string {
         <li>Full access to the <strong>member section</strong> of the site — education guides, AI tools, interactive worksheets, and more</li>
         <li><strong>$25 discount</strong> on every coaching session ($125 instead of $150)</li>
         <li>Access to the <strong>private family forum</strong> — connect with other families going through the same thing</li>
-        <li>Join <strong>Monday Night Family Support Meetings</strong> without needing to register — just log in and join</li>
+        <li>Join <strong>The Family Squaress</strong> without needing to register — just log in and join</li>
         <li>Access to <strong>meeting recordings</strong> so you never miss a session</li>
       </ul>
 

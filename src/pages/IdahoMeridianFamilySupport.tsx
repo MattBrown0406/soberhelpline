@@ -33,7 +33,7 @@ export default function IdahoMeridianFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Meridian, Idaho | Sober Helpline"
-        description="Families in Meridian struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Meridian struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -213,10 +213,10 @@ export default function IdahoMeridianFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Meridian families join families from across Idaho every Monday night for free, judgment-free support.
+                      Meridian families join families from across Idaho every Monday for free, judgment-free support.
                       Led by certified interventionist Matt Brown — no treatment center names, no sales pressure.
                     </p>
                     <ul className="space-y-2 mb-4">

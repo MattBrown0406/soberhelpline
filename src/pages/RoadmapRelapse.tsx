@@ -80,11 +80,11 @@ const triageItems: ChecklistItem[] = [
   },
   {
     id: "join-zoom-support",
-    title: "Join Monday Night Family Support — if you haven't been coming",
+    title: "Join The Family Squares — if you haven't been coming",
     description:
-      "If you've been skipping the Monday night calls — or you've never joined one — this is the week to show up. You don't have to talk. You don't have to share what happened. You just need to be in a room (even a virtual one) with people who understand exactly what you're going through. Every Monday at 7:00 PM PST, families just like yours log on. Some are in crisis. Some are months into recovery. Some have been through relapse before and came out the other side. There is no judgment. There is no advice you didn't ask for. Just people who get it. This is exactly when you need community most — not when things are going well, but when everything just fell apart.",
+      "If you've been skipping the The Family Squares calls — or you've never joined one — this is the week to show up. You don't have to talk. You don't have to share what happened. You just need to be in a room (even a virtual one) with people who understand exactly what you're going through. Every Monday at 7:00 PM PST, families just like yours log on. Some are in crisis. Some are months into recovery. Some have been through relapse before and came out the other side. There is no judgment. There is no advice you didn't ask for. Just people who get it. This is exactly when you need community most — not when things are going well, but when everything just fell apart.",
     icon: Video,
-    linkText: "Register for Monday Night Support",
+    linkText: "Register for The Family Squares",
     linkUrl: "/monday-zoom-registration",
   },
 ];

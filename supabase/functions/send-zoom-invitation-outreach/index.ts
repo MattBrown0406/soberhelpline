@@ -59,9 +59,9 @@ function getNextMonday(): string {
 function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-      <h1 style="color: #166534; font-size: 24px;">Reminder: Monday Night Family Support Meeting</h1>
+      <h1 style="color: #166534; font-size: 24px;">Reminder: The Family Squares</h1>
       <p>Hi ${safeName},</p>
-      <p>Just a quick reminder — our <strong>Monday Night Family Support Meeting</strong> is this Monday at <strong>7:00 PM PST</strong>.</p>
+      <p>Just a quick reminder — our <strong>The Family Squares</strong> is this Monday at <strong>7:00 PM PST</strong>.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0;">
         <p style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #166534;">
@@ -104,9 +104,9 @@ function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string)
 function buildNonMemberHtml(safeName: string, registerUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-      <h1 style="color: #166534; font-size: 24px;">You're Invited: Monday Night Family Support Meeting</h1>
+      <h1 style="color: #166534; font-size: 24px;">You're Invited: The Family Squares</h1>
       <p>Hi ${safeName},</p>
-      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>Monday Night Family Support Meeting</strong>.</p>
+      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>The Family Squares</strong>.</p>
       <p>Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
@@ -245,8 +245,8 @@ serve(async (req: Request) => {
         : buildNonMemberHtml(safeName, registerUrl);
 
       const subject = isMember
-        ? "🔔 Reminder: Monday Night Family Support Meeting — Just Log In to Join"
-        : "📅 You're Invited: Monday Night Family Support Meeting — Register Now";
+        ? "🔔 Reminder: The Family Squares — Just Log In to Join"
+        : "📅 You're Invited: The Family Squares — Register Now";
 
       const success = await sendEmail(email, subject, html);
 

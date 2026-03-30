@@ -33,7 +33,7 @@ export default function NevadaRenoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Reno, Nevada | Sober Helpline"
-        description="Families in Reno struggling with a loved one's addiction get expert support from Sober Helpline. Free Monday night Zoom every Monday 7PM PST. (541) 838-6009."
+        description="Families in Reno struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -213,10 +213,10 @@ export default function NevadaRenoFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Reno families join families from across Nevada every Monday night for free, 
+                      Reno families join families from across Nevada every Monday for free, 
                       judgment-free support. Led by certified interventionist Matt Brown — no treatment center 
                       names, no sales pressure, no agenda except helping your family.
                     </p>

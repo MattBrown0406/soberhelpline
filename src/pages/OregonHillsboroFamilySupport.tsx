@@ -34,7 +34,7 @@ export default function OregonHillsboroFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Hillsboro, Oregon | Sober Helpline"
-        description="Families in Hillsboro struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Hillsboro struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -211,7 +211,7 @@ export default function OregonHillsboroFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Hillsboro families join every Monday for free support from a certified interventionist. 
@@ -321,7 +321,7 @@ export default function OregonHillsboroFamilySupport() {
               Hillsboro Families: Confidential Help Is Here
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Addiction doesn't discriminate by zip code. Free Monday night Zoom every week. Private coaching available now.
+              Addiction doesn't discriminate by zip code. Free The Family Squares every week. Private coaching available now.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">

@@ -16,7 +16,7 @@ const membershipBenefits = `
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 16px;">
     <tr>
       <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-        <strong style="color: #1e40af;">📅 Free Monday Night Zoom Support Calls</strong><br/>
+        <strong style="color: #1e40af;">📅 Free The Family Squares Support Calls</strong><br/>
         <span style="color: #6b7280; font-size: 14px;">Live weekly group support calls led by professionals — connect with other families who understand</span>
       </td>
     </tr>
@@ -168,7 +168,7 @@ function buildExistingUserEmail(firstName: string): string {
       <p style="color: #1e40af; font-weight: bold; margin-top: 0;">🚀 Quick Start Suggestions:</p>
       <ul style="color: #374151; font-size: 14px; line-height: 1.8; padding-left: 20px; margin-bottom: 0;">
         <li><a href="https://soberhelpline.com/family-education" style="color: #1e40af;">Browse the Education Library</a> — Start with the guides most relevant to your situation</li>
-        <li><a href="https://soberhelpline.com/monday-zoom" style="color: #1e40af;">Register for Monday Night Zoom</a> — Join our weekly live support call</li>
+        <li><a href="https://soberhelpline.com/monday-zoom" style="color: #1e40af;">Register for The Family Squares</a> — Join our weekly live support call</li>
         <li><a href="https://soberhelpline.com/family-forum" style="color: #1e40af;">Visit the Family Forum</a> — Introduce yourself and connect with others</li>
         <li><a href="https://soberhelpline.com/ai-boundary-coach" style="color: #1e40af;">Try the AI Boundary Coach</a> — Get personalized boundary-setting guidance</li>
       </ul>

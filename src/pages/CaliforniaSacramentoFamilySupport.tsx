@@ -38,7 +38,7 @@ export default function CaliforniaSacramentoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Sacramento, California | Sober Helpline"
-        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free Monday night Zoom every Monday 7PM PST. (541) 838-6009."
+        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -111,7 +111,7 @@ export default function CaliforniaSacramentoFamilySupport() {
               </p>
               <p>
                 Sacramento families don't need more bureaucracy — they need practical guidance. Sober Helpline
-                provides direct access to an experienced interventionist through our free Monday night Zoom
+                provides direct access to an experienced interventionist through our free The Family Squares
                 and one-on-one hourly coaching, so you can take action without waiting for the system.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function CaliforniaSacramentoFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Zoom for Sacramento Families
+                  Free Family Squares Zoom for Sacramento Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST — join families from Sacramento and across California for a free

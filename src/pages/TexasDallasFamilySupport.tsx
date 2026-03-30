@@ -34,7 +34,7 @@ export default function TexasDallasFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Dallas, Texas | Sober Helpline"
-        description="Families in Dallas struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Dallas struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -225,7 +225,7 @@ export default function TexasDallasFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Family Support Zoom
+                  Free The Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, Dallas families join a free Zoom call led by Matt Brown —

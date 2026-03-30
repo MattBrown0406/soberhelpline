@@ -33,7 +33,7 @@ export default function UtahProvoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Provo, Utah | Sober Helpline"
-        description="Families in Provo struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Provo struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -112,7 +112,7 @@ export default function UtahProvoFamilySupport() {
             </div>
             <p className="text-muted-foreground text-sm">
               In Provo, the fear of community judgment can be as destructive as the addiction itself. Families often
-              protect their loved one's secret at great personal cost. Sober Helpline's anonymous Monday night Zoom
+              protect their loved one's secret at great personal cost. Sober Helpline's anonymous The Family Squares
               gives Provo families a safe space to break that silence and get real help.
             </p>
           </div>
@@ -212,10 +212,10 @@ export default function UtahProvoFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Provo families join families from across Utah every Monday night for free, anonymous, judgment-free support.
+                      Provo families join families from across Utah every Monday for free, anonymous, judgment-free support.
                       Led by certified interventionist Matt Brown — no treatment center names, no religious framework imposed.
                     </p>
                     <ul className="space-y-2 mb-4">

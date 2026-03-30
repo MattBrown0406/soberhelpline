@@ -212,7 +212,7 @@ export default function RelapseRadar() {
       });
     });
     content += "\n\nFor more support visit SoberHelpline.com\n";
-    content += "Monday Night Family Support — Every Monday at 7:00 PM PST\n";
+    content += "The Family Squares — Every Monday at 7:00 PM PST\n";
 
     const blob = new Blob([content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
@@ -457,9 +457,9 @@ export default function RelapseRadar() {
                   <CardContent className="pt-6 text-center space-y-3">
                     <h3 className="text-lg font-semibold text-foreground">Need guidance from families who understand?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Join our <strong>Monday Night Family Support Meeting</strong>
+                      Join our <strong>The Family Squares</strong>
                     </p>
-                    <p className="text-xs text-muted-foreground">Every Monday Night • 7:00 PM PST</p>
+                    <p className="text-xs text-muted-foreground">Every Monday • 7:00 PM PST</p>
                     <Link to="/monday-zoom-registration">
                       <Button className="gap-2 mt-2">
                         <Video className="w-4 h-4" />

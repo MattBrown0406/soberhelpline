@@ -38,7 +38,7 @@ export default function CaliforniaLongBeachFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Long Beach, California | Sober Helpline"
-        description="Families in Long Beach struggling with a loved one's addiction get expert support from Sober Helpline. Free Monday night Zoom every Monday 7PM PST. (541) 838-6009."
+        description="Families in Long Beach struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -112,7 +112,7 @@ export default function CaliforniaLongBeachFamilySupport() {
               </p>
               <p>
                 Sober Helpline offers Long Beach families direct access to an experienced interventionist
-                through our free Monday night Zoom and hourly coaching — practical tools to stop
+                through our free The Family Squares and hourly coaching — practical tools to stop
                 enabling, set real boundaries, and guide your loved one toward treatment.
               </p>
             </div>
@@ -217,7 +217,7 @@ export default function CaliforniaLongBeachFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Zoom for Long Beach Families
+                  Free Family Squares Zoom for Long Beach Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST — join families from Long Beach and across Southern California

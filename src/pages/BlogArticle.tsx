@@ -373,7 +373,7 @@ const BlogArticle = () => {
                 This is just one of 62+ resources available to members
               </h3>
               <p className="text-gray-600 text-sm sm:text-base mb-4 max-w-lg mx-auto">
-                Get access to interactive tools, guided meditations, AI coaching, our private family forum, and weekly Monday Night Zoom sessions.
+                Get access to interactive tools, guided meditations, AI coaching, our private family forum, and weekly The Family Squares sessions.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link to="/family-membership">
