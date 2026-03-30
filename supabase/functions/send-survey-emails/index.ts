@@ -110,7 +110,7 @@ Deno.serve(async (req) => {
                 </div>
                 <p style="font-size: 16px; color: #374151;">Hi ${firstName},</p>
                 <p style="font-size: 16px; color: #374151; line-height: 1.6;">
-                  Thank you for being part of our The Family Squares meetings. 
+                  Thank you for being part of our “The Family Squares” meetings. 
                   Your experience and feedback help us make these sessions better for everyone.
                 </p>
                 <p style="font-size: 16px; color: #374151; line-height: 1.6;">
@@ -127,7 +127,7 @@ Deno.serve(async (req) => {
                 </p>
                 <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
                 <p style="font-size: 12px; color: #9ca3af; text-align: center;">
-                  SoberHelpline.com — The Family Squares<br>
+                  SoberHelpline.com — “The Family Squares”<br>
                   Every Monday at 7:00 PM PST
                 </p>
               </div>

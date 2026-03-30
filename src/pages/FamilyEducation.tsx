@@ -344,7 +344,7 @@ export default function FamilyEducation() {
                   <Link to="/monday-zoom-registration">
                     <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30">
                       <Video className="h-4 w-4" />
-                      The Family Squares
+                      “The Family Squares”
                     </Button>
                   </Link>
                   <Link to="/zoom-recordings">

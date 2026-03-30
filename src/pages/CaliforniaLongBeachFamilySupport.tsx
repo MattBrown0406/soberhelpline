@@ -38,7 +38,7 @@ export default function CaliforniaLongBeachFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Long Beach, California | Sober Helpline"
-        description="Families in Long Beach struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in Long Beach struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -112,7 +112,7 @@ export default function CaliforniaLongBeachFamilySupport() {
               </p>
               <p>
                 Sober Helpline offers Long Beach families direct access to an experienced interventionist
-                through our free The Family Squares and hourly coaching — practical tools to stop
+                through our free “The Family Squares” and hourly coaching — practical tools to stop
                 enabling, set real boundaries, and guide your loved one toward treatment.
               </p>
             </div>

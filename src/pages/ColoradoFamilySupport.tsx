@@ -8,12 +8,12 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in Colorado?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Colorado families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Families can also connect with Al-Anon Colorado, Nar-Anon Colorado, and Sober Helpline's free The Family Squares calls for ongoing support. Colorado Crisis Services (1-844-493-8255) offers 24/7 support statewide. If your loved one is resistant to treatment, a professional intervention coach can guide you step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Colorado families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Families can also connect with Al-Anon Colorado, Nar-Anon Colorado, and Sober Helpline's free “The Family Squares” calls for ongoing support. Colorado Crisis Services (1-844-493-8255) offers 24/7 support statewide. If your loved one is resistant to treatment, a professional intervention coach can guide you step by step.",
   },
   {
     question: "Are there free family support groups for addiction in Colorado?",
     answer:
-      "Yes. Colorado has Al-Anon and Nar-Anon meetings across the state, including Denver, Colorado Springs, Fort Collins, Boulder, and Pueblo. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free The Family Squares call every week at 7PM PST — led by a certified interventionist — open to any Colorado family, no sign-up fees or treatment center referrals.",
+      "Yes. Colorado has Al-Anon and Nar-Anon meetings across the state, including Denver, Colorado Springs, Fort Collins, Boulder, and Pueblo. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Colorado family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What makes Colorado's addiction crisis different from other states?",
@@ -43,7 +43,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Sober Helpline",
   description:
-    "Family support and intervention coaching for families affected by addiction. Serving Colorado families with free resources, The Family Squares, and hourly coaching.",
+    "Family support and intervention coaching for families affected by addiction. Serving Colorado families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com/colorado-family-support",
   telephone: "+15418386009",
   address: {
@@ -387,7 +387,7 @@ export default function ColoradoFamilySupport() {
           </div>
         </section>
 
-        {/* The Family Squares */}
+        {/* “The Family Squares” */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -397,7 +397,7 @@ export default function ColoradoFamilySupport() {
                   Every Monday — 7:00 PM PST
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
-                  Free The Family Squares Zoom
+                  Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, families across Colorado (and nationwide) join a free Zoom call
@@ -427,7 +427,7 @@ export default function ColoradoFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">The Family Squares</div>
+                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">

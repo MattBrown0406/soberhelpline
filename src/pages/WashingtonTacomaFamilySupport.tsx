@@ -38,7 +38,7 @@ export default function WashingtonTacomaFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Tacoma, Washington | Sober Helpline"
-        description="Families in Tacoma struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free The Family Squares. (541) 838-6009."
+        description="Families in Tacoma struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -109,7 +109,7 @@ export default function WashingtonTacomaFamilySupport() {
               </p>
               <p>
                 Tacoma families navigating a loved one's addiction need education, strategy, and support before
-                a crisis hits. Sober Helpline's free The Family Squares and hourly coaching are designed exactly
+                a crisis hits. Sober Helpline's free “The Family Squares” and hourly coaching are designed exactly
                 for that: equipping families before things spiral further.
               </p>
             </div>

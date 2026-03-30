@@ -419,7 +419,7 @@ const Admin = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Video className="h-5 w-5" />
-                  The Family Squares Zoom Meeting Settings
+                  “The Family Squares” Zoom Meeting Settings
                 </CardTitle>
               </CardHeader>
               <CardContent>

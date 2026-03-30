@@ -38,7 +38,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in San Francisco, California | Sober Helpline"
-        description="Families in San Francisco struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in San Francisco struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -110,7 +110,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
               </p>
               <p>
                 Sober Helpline gives San Francisco families direct access to an experienced interventionist
-                through our free The Family Squares and hourly one-on-one coaching. We help families stop
+                through our free “The Family Squares” and hourly one-on-one coaching. We help families stop
                 enabling, set real boundaries, and create conditions where treatment becomes the logical choice.
               </p>
             </div>

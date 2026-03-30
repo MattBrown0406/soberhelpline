@@ -72,7 +72,7 @@ const benefits = [
   {
     icon: Star,
     title: "Part of a Bigger Support System",
-    desc: "Membership includes the forum, 60+ education guides, recorded webinars, AI tools, and access to the free The Family Squares. You're not just joining a forum — you're joining a full recovery support system.",
+    desc: "Membership includes the forum, 60+ education guides, recorded webinars, AI tools, and access to the free “The Family Squares”. You're not just joining a forum — you're joining a full recovery support system.",
   },
 ];
 

@@ -38,7 +38,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Orange County, California | Sober Helpline"
-        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />

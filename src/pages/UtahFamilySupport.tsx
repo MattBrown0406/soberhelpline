@@ -8,12 +8,12 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in Utah?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Utah families can also connect with Al-Anon, USARA, and Sober Helpline's free The Family Squares calls for ongoing support. In Utah's LDS-influenced culture, the shame around addiction can be especially isolating — it's important to find a judgment-free space to get real help.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Utah families can also connect with Al-Anon, USARA, and Sober Helpline's free “The Family Squares” calls for ongoing support. In Utah's LDS-influenced culture, the shame around addiction can be especially isolating — it's important to find a judgment-free space to get real help.",
   },
   {
     question: "Are there free family support groups for addiction in Utah?",
     answer:
-      "Yes. Utah has Al-Anon meetings statewide (al-anon.org/find-a-meeting), Nar-Anon groups, SMART Recovery Family & Friends meetings, and USARA (Utah Support Advocates for Recovery Awareness). Valley Behavioral Health also provides community resources. Sober Helpline offers a free The Family Squares call every week at 7PM PST — led by a certified interventionist — open to any Utah family, no sign-up fees or treatment center referrals.",
+      "Yes. Utah has Al-Anon meetings statewide (al-anon.org/find-a-meeting), Nar-Anon groups, SMART Recovery Family & Friends meetings, and USARA (Utah Support Advocates for Recovery Awareness). Valley Behavioral Health also provides community resources. Sober Helpline offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Utah family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What is enabling and how do I stop it?",
@@ -23,12 +23,12 @@ const faqItems = [
   {
     question: "How does Utah's LDS community culture affect addiction and family support?",
     answer:
-      "Utah's predominantly LDS culture creates unique dynamics around addiction. There is often significant shame associated with substance use — both for the person struggling and for family members who fear judgment from their congregation or community. This can lead to delayed help-seeking, hidden problems, and family systems that protect appearances rather than address the real issue. Sober Helpline's The Family Squares is completely anonymous and judgment-free — a safe space where Utah families can get real help without anyone in their community finding out.",
+      "Utah's predominantly LDS culture creates unique dynamics around addiction. There is often significant shame associated with substance use — both for the person struggling and for family members who fear judgment from their congregation or community. This can lead to delayed help-seeking, hidden problems, and family systems that protect appearances rather than address the real issue. Sober Helpline's “The Family Squares” is completely anonymous and judgment-free — a safe space where Utah families can get real help without anyone in their community finding out.",
   },
   {
     question: "How do I find addiction treatment for my loved one in Utah?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also call the Utah Crisis Line at 1-800-273-8255, contact Valley Behavioral Health (valleybehavioralhealth.org), or reach USARA for peer support resources. Our The Family Squares is a great place to ask questions about Utah treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also call the Utah Crisis Line at 1-800-273-8255, contact Valley Behavioral Health (valleybehavioralhealth.org), or reach USARA for peer support resources. Our “The Family Squares” is a great place to ask questions about Utah treatment options in a judgment-free environment.",
   },
 ];
 
@@ -43,7 +43,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Sober Helpline",
   description:
-    "Family support and intervention coaching for families affected by addiction. Serving Utah families with free resources, The Family Squares, and hourly coaching.",
+    "Family support and intervention coaching for families affected by addiction. Serving Utah families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
   telephone: "+15418386009",
   address: {
@@ -339,7 +339,7 @@ export default function UtahFamilySupport() {
           </div>
         </section>
 
-        {/* The Family Squares */}
+        {/* “The Family Squares” */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -349,7 +349,7 @@ export default function UtahFamilySupport() {
                   Every Monday — 7:00 PM PST
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
-                  Free The Family Squares Zoom
+                  Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, families across Utah (and nationwide) join a free Zoom call
@@ -379,7 +379,7 @@ export default function UtahFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">The Family Squares</div>
+                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" />Open to all Utah families</div>

@@ -38,7 +38,7 @@ export default function WashingtonSeattleFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Seattle, Washington | Sober Helpline"
-        description="Families in Seattle struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free The Family Squares. (541) 838-6009."
+        description="Families in Seattle struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />

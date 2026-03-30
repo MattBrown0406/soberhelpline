@@ -457,7 +457,7 @@ export default function RelapseRadar() {
                   <CardContent className="pt-6 text-center space-y-3">
                     <h3 className="text-lg font-semibold text-foreground">Need guidance from families who understand?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Join our <strong>The Family Squares</strong>
+                      Join our <strong>“The Family Squares”</strong>
                     </p>
                     <p className="text-xs text-muted-foreground">Every Monday • 7:00 PM PST</p>
                     <Link to="/monday-zoom-registration">

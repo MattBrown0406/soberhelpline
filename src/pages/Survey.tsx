@@ -110,7 +110,7 @@ const Survey = () => {
       <div className="min-h-screen bg-background">
         <SEOHead
           title="Survey | SoberHelpline"
-          description="Share your feedback on The Family Squares meetings."
+          description="Share your feedback on “The Family Squares” meetings."
         />
         <div className="container mx-auto px-4 py-16 max-w-2xl text-center">
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
@@ -121,7 +121,7 @@ const Survey = () => {
             Your feedback has been submitted anonymously.
           </p>
           <p className="text-sm text-muted-foreground">
-            Your input helps us improve the The Family Squares experience for everyone.
+            Your input helps us improve the “The Family Squares” experience for everyone.
           </p>
         </div>
       </div>
@@ -133,7 +133,7 @@ const Survey = () => {
       <div className="min-h-screen bg-background">
         <SEOHead
           title="Survey | SoberHelpline"
-          description="Share your feedback on The Family Squares meetings."
+          description="Share your feedback on “The Family Squares” meetings."
         />
         <div className="container mx-auto px-4 py-16 max-w-2xl text-center">
           <ClipboardList className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
@@ -150,7 +150,7 @@ const Survey = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title={`${survey.title} | SoberHelpline`}
-        description="Share your feedback on The Family Squares meetings."
+        description="Share your feedback on “The Family Squares” meetings."
       />
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Survey", path: "/survey" }]} />

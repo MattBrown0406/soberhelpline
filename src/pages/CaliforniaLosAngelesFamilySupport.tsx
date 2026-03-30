@@ -38,7 +38,7 @@ export default function CaliforniaLosAngelesFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Los Angeles, California | Sober Helpline"
-        description="Families in Los Angeles struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in Los Angeles struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />

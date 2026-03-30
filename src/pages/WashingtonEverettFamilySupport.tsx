@@ -38,7 +38,7 @@ export default function WashingtonEverettFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Everett, Washington | Sober Helpline"
-        description="Families in Everett struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free The Family Squares. (541) 838-6009."
+        description="Families in Everett struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />

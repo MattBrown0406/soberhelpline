@@ -48,7 +48,7 @@ interface ActionItem {
 const actionItems: ActionItem[] = [
   {
     id: "join-zoom",
-    title: "Join the free The Family Squares Zoom call",
+    title: "Join the free “The Family Squares” Zoom call",
     description:
       "Every Monday at 7 PM PST, families just like yours come together for a free, live support call. You'll hear from others who've been exactly where you are — and from professionals who can help. You don't have to talk. Just showing up is a step.",
     icon: Video,

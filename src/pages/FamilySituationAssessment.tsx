@@ -149,7 +149,7 @@ function scoreAnswers(answers: Answers): {
     primaryCTA = "coaching";
   } else if (urgency === "moderate") {
     headline = "You're at a turning point — this is the right time to act.";
-    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. The The Family Squares is a great place to start: ask real questions, hear from other families, and get guidance from a certified interventionist at no cost.`;
+    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. The “The Family Squares” is a great place to start: ask real questions, hear from other families, and get guidance from a certified interventionist at no cost.`;
     primaryCTA = "zoom";
   } else {
     headline = "You're in the right place — support makes all the difference.";
