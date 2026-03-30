@@ -1,0 +1,2 @@
+ALTER TABLE public.provider_subscriptions DROP CONSTRAINT provider_subscriptions_plan_type_check;
+ALTER TABLE public.provider_subscriptions ADD CONSTRAINT provider_subscriptions_plan_type_check CHECK (plan_type = ANY (ARRAY['monthly'::text, 'annual'::text, 'free'::text]));
