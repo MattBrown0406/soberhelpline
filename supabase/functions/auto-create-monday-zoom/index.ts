@@ -72,7 +72,7 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Auto-creating The Family Squares meeting...');
+    console.log('Auto-creating “The Family Squares” meeting...');
 
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -94,7 +94,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        topic: 'The Family Squares',
+        topic: '“The Family Squares”',
         type: 2, // Scheduled meeting
         start_time: startTime,
         duration: 60,

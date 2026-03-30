@@ -34,7 +34,7 @@ export default function OregonMedfordFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Medford, Oregon | Sober Helpline"
-        description="Families in Medford struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
+        description="Families in Medford struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -210,7 +210,7 @@ export default function OregonMedfordFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free The Family Squares Zoom
+                      Free “The Family Squares” Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       For Medford families dealing with rural isolation, the Monday Zoom is a lifeline. 

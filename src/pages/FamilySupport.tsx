@@ -306,7 +306,7 @@ export default function FamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-green">
                     <Video className="h-5 w-5 text-logo-green" />
-                    The Family Squares Zoom
+                    “The Family Squares” Zoom
                   </CardTitle>
                   <CardDescription>
                     Free weekly meeting every Monday at 7:00 PM PST

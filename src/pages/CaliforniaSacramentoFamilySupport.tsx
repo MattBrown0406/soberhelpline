@@ -38,7 +38,7 @@ export default function CaliforniaSacramentoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Sacramento, California | Sober Helpline"
-        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -111,7 +111,7 @@ export default function CaliforniaSacramentoFamilySupport() {
               </p>
               <p>
                 Sacramento families don't need more bureaucracy — they need practical guidance. Sober Helpline
-                provides direct access to an experienced interventionist through our free The Family Squares
+                provides direct access to an experienced interventionist through our free “The Family Squares”
                 and one-on-one hourly coaching, so you can take action without waiting for the system.
               </p>
             </div>

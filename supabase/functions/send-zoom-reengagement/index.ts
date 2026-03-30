@@ -107,7 +107,7 @@ serve(async (req: Request) => {
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534; font-size: 24px;">We Haven't Seen Your Name Yet — Join Us Tomorrow!</h1>
           <p>Hi ${safeName},</p>
-          <p>We noticed you haven't registered for tomorrow's <strong>The Family Squares</strong> yet, and we'd love to see you there.</p>
+          <p>We noticed you haven't registered for tomorrow's <strong>“The Family Squares”</strong> yet, and we'd love to see you there.</p>
           <p>Consistency is the key to staying ahead of addiction. We know it can be exhausting — and sometimes just showing up is the hardest part. But being part of something bigger can give you the strength and education you need to keep going for your loved one.</p>
           <p>Tomorrow night at <strong>7:00 PM PST</strong>, we'll be here for you.</p>
 
@@ -134,7 +134,7 @@ serve(async (req: Request) => {
 
           <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
-              <strong>⭐ Want more than The Family Squares?</strong> Sober Helpline membership is just <strong>$14.99/month</strong> and includes a <strong>$25 discount on coaching sessions</strong> plus full access to the member section of the site.
+              <strong>⭐ Want more than “The Family Squares”?</strong> Sober Helpline membership is just <strong>$14.99/month</strong> and includes a <strong>$25 discount on coaching sessions</strong> plus full access to the member section of the site.
             </p>
             <a href="${siteUrl}/family-membership" style="display: inline-block; margin-top: 4px; padding: 8px 20px; background-color: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;">
               Learn About Membership

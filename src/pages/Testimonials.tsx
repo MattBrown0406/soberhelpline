@@ -146,7 +146,7 @@ const Testimonials = () => {
               </div>
               <h2 className="text-xl font-bold text-foreground mb-2">Thank You for Joining Tonight's Meeting!</h2>
               <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-                Your presence matters. Would you take a moment to share how these The Family Squares meetings are helping you? Your words encourage other families to take that first step.
+                Your presence matters. Would you take a moment to share how these “The Family Squares” meetings are helping you? Your words encourage other families to take that first step.
               </p>
             </div>
           )}
@@ -168,7 +168,7 @@ const Testimonials = () => {
             <Card className="mb-12 border-primary/20">
               <CardContent className="pt-6">
                 <h2 className="text-xl font-bold text-foreground mb-4">
-                  {fromZoom ? "How Are the The Family Squaress Helping You?" : "Share Your Coaching Experience"}
+                  {fromZoom ? "How Are the “The Family Squares”s Helping You?" : "Share Your Coaching Experience"}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -198,7 +198,7 @@ const Testimonials = () => {
                   </div>
                   <div>
                     <Label htmlFor="experience">Your Experience</Label>
-                    <Textarea id="experience" maxLength={2000} rows={5} value={form.experience} onChange={(e) => setForm(p => ({ ...p, experience: e.target.value }))} placeholder={fromZoom ? "How have the The Family Squares meetings been helping you and your family?" : "Tell us about your coaching experience..."} required />
+                    <Textarea id="experience" maxLength={2000} rows={5} value={form.experience} onChange={(e) => setForm(p => ({ ...p, experience: e.target.value }))} placeholder={fromZoom ? "How have the “The Family Squares” meetings been helping you and your family?" : "Tell us about your coaching experience..."} required />
                     <p className="text-xs text-muted-foreground mt-1">{form.experience.length}/2000</p>
                   </div>
                   <Button type="submit" disabled={submitting} className="w-full">

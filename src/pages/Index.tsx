@@ -428,7 +428,7 @@ const Index = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
-                    <span>Free The Family Squares calls with other families who get it</span>
+                    <span>Free “The Family Squares” calls with other families who get it</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
@@ -691,7 +691,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* The Family Squares Announcement */}
+      {/* “The Family Squares” Announcement */}
       <section className="container mx-auto px-4 pt-6 md:pt-10">
         <Link to="/monday-zoom-registration" className="block">
           <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
@@ -703,7 +703,7 @@ const Index = () => {
                 </div>
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">📅 Every Monday</p>
-                  <h3 className="text-base md:text-lg font-bold">The Family Squares — Free Weekly Support</h3>
+                  <h3 className="text-base md:text-lg font-bold">“The Family Squares” — Free Weekly Support</h3>
                   <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
                 </div>
               </div>

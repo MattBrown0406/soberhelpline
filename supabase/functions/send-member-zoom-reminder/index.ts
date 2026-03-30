@@ -131,9 +131,9 @@ serve(async (req: Request) => {
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">Tonight's The Family Squares</h1>
+          <h1 style="color: #166534;">Tonight's “The Family Squares”</h1>
           <p>Hi ${safeName},</p>
-          <p>This is your weekly reminder that tonight's <strong>The Family Squares</strong> starts at <strong>7:00 PM PST</strong>.</p>
+          <p>This is your weekly reminder that tonight's <strong>“The Family Squares”</strong> starts at <strong>7:00 PM PST</strong>.</p>
           <p>As a member, you don't need to register — just click the link below to join:</p>
           
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
@@ -172,7 +172,7 @@ serve(async (req: Request) => {
 
       const success = await sendEmail(
         pp.email,
-        "🔔 Tonight: The Family Squares — 7 PM PST",
+        "🔔 Tonight: “The Family Squares” — 7 PM PST",
         html
       );
 

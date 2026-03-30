@@ -33,7 +33,7 @@ export default function NevadaHendersonFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Henderson, Nevada | Sober Helpline"
-        description="Families in Henderson struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
+        description="Families in Henderson struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -209,7 +209,7 @@ export default function NevadaHendersonFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free The Family Squares Zoom
+                      Free “The Family Squares” Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Henderson families join families from across Nevada every Monday for free, 

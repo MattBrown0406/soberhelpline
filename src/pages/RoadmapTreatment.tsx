@@ -264,14 +264,14 @@ const RoadmapTreatment = () => {
                   This is not you being difficult. This is your nervous system doing the only thing it knows how to do. Recognize it for what it is — and resist the urge to act on it. This is the time to turn toward your own recovery process. Let the professionals care for your loved one. Your job right now is to start caring for yourself.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you haven't already, this may be the perfect time to join our free The Family Squares Zoom. You'll be with other families who understand exactly what you're feeling — many of them in this same stage. You don't have to talk. You just have to show up.
+                  If you haven't already, this may be the perfect time to join our free “The Family Squares” Zoom. You'll be with other families who understand exactly what you're feeling — many of them in this same stage. You don't have to talk. You just have to show up.
                 </p>
                 <Link
                   to="/monday-zoom-registration"
                   className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2"
                 >
                   <Video className="w-4 h-4" />
-                  Register for The Family Squares — 7 PM PT
+                  Register for “The Family Squares” — 7 PM PT
                 </Link>
               </div>
             </div>

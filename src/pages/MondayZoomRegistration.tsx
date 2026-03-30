@@ -241,7 +241,7 @@ export default function MondayZoomRegistration() {
         <p className="text-muted-foreground text-lg mb-8">
           {isMemberQuestion
             ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
-            : "Thank you for registering for the The Family Squares Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
+            : "Thank you for registering for the “The Family Squares” Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
         </p>
 
         {meetingInfo ? (
@@ -249,7 +249,7 @@ export default function MondayZoomRegistration() {
             <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
               <Button size="lg" className="gap-2">
                 <Monitor className="h-5 w-5" />
-                Join The Family Squares
+                Join “The Family Squares”
               </Button>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -290,7 +290,7 @@ export default function MondayZoomRegistration() {
     <>
       <SEOHead
         title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "The Family Squares Zoom Meeting | Sober Helpline"}
-        description="Register for our free The Family Squares Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
+        description="Register for our free “The Family Squares” Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
       />
 
       <div className="min-h-screen bg-background">

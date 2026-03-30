@@ -8,12 +8,12 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in Oregon?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Oregon families can also connect with Al-Anon, Nar-Anon, and Sober Helpline's free The Family Squares calls for ongoing support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Oregon families can also connect with Al-Anon, Nar-Anon, and Sober Helpline's free “The Family Squares” calls for ongoing support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
   },
   {
     question: "Are there free family support groups for addiction in Oregon?",
     answer:
-      "Yes. Oregon has Al-Anon meetings across the state (oregonal-anon.org), Nar-Anon groups for families of narcotics users (nar-anon.org), and SMART Recovery Family & Friends meetings. Sober Helpline also offers a free The Family Squares call every week at 7PM PST — led by a certified interventionist — open to any Oregon family, no sign-up fees or treatment center referrals.",
+      "Yes. Oregon has Al-Anon meetings across the state (oregonal-anon.org), Nar-Anon groups for families of narcotics users (nar-anon.org), and SMART Recovery Family & Friends meetings. Sober Helpline also offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Oregon family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What is enabling and how do I stop it?",
@@ -28,7 +28,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Oregon?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the Oregon Health Authority (oregon.gov/oha) for state-funded treatment options, or call Lines for Life at 1-800-273-8255 for crisis support and referrals. Our The Family Squares is a great place to ask questions about Oregon treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the Oregon Health Authority (oregon.gov/oha) for state-funded treatment options, or call Lines for Life at 1-800-273-8255 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Oregon treatment options in a judgment-free environment.",
   },
 ];
 
@@ -47,7 +47,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Sober Helpline",
   description:
-    "Family support and intervention coaching for families affected by addiction. Serving Oregon families with free resources, The Family Squares, and hourly coaching.",
+    "Family support and intervention coaching for families affected by addiction. Serving Oregon families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
   telephone: "+15418386009",
   address: {
@@ -389,7 +389,7 @@ export default function OregonFamilySupport() {
           </div>
         </section>
 
-        {/* The Family Squares */}
+        {/* “The Family Squares” */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -399,7 +399,7 @@ export default function OregonFamilySupport() {
                   Every Monday — 7:00 PM PST
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
-                  Free The Family Squares Zoom
+                  Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, families across Oregon (and nationwide) join a free Zoom call 
@@ -429,7 +429,7 @@ export default function OregonFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">The Family Squares</div>
+                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">

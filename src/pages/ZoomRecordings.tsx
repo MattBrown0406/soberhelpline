@@ -107,7 +107,7 @@ export default function ZoomRecordings() {
       <>
         <SEOHead
           title="Past Meeting Recordings | Sober Helpline"
-          description="Watch past The Family Squares Zoom recordings. Members-only access to our archive of family support sessions."
+          description="Watch past “The Family Squares” Zoom recordings. Members-only access to our archive of family support sessions."
         />
         <div className="min-h-screen bg-background">
           <div className="container mx-auto px-4 py-12 max-w-2xl">
@@ -128,7 +128,7 @@ export default function ZoomRecordings() {
               <CardContent className="space-y-4">
                 <div className="grid gap-3">
                   {[
-                    { icon: Video, text: "Full archive of past The Family Squares recordings" },
+                    { icon: Video, text: "Full archive of past “The Family Squares” recordings" },
                     { icon: BookOpen, text: "50+ educational guides across 6 pillars" },
                     { icon: MessageCircle, text: "Private family support forum" },
                     { icon: Shield, text: "AI-powered coaching tools" },
@@ -168,7 +168,7 @@ export default function ZoomRecordings() {
     <>
       <SEOHead
         title="Past Meeting Recordings | Sober Helpline"
-        description="Watch past The Family Squares Zoom recordings."
+        description="Watch past “The Family Squares” Zoom recordings."
       />
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -183,7 +183,7 @@ export default function ZoomRecordings() {
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-foreground">Past Meeting Recordings</h1>
-                <p className="text-muted-foreground text-sm">Catch up on The Family Squares sessions you missed</p>
+                <p className="text-muted-foreground text-sm">Catch up on “The Family Squares” sessions you missed</p>
               </div>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function ZoomRecordings() {
                 <Video className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Recordings Yet</h3>
                 <p className="text-muted-foreground">
-                  Recordings from our The Family Squares sessions will appear here soon.
+                  Recordings from our “The Family Squares” sessions will appear here soon.
                   Join us live every Monday at 7 PM PST!
                 </p>
                 <Link to="/monday-zoom-registration" className="mt-4 inline-block">
