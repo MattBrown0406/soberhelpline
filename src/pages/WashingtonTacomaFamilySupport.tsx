@@ -38,7 +38,7 @@ export default function WashingtonTacomaFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Tacoma, Washington | Sober Helpline"
-        description="Families in Tacoma struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Tacoma struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -109,7 +109,7 @@ export default function WashingtonTacomaFamilySupport() {
               </p>
               <p>
                 Tacoma families navigating a loved one's addiction need education, strategy, and support before
-                a crisis hits. Sober Helpline's free Monday night Zoom and hourly coaching are designed exactly
+                a crisis hits. Sober Helpline's free The Family Squares and hourly coaching are designed exactly
                 for that: equipping families before things spiral further.
               </p>
             </div>
@@ -208,7 +208,7 @@ export default function WashingtonTacomaFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Zoom for Tacoma Families
+                  Free Family Squares Zoom for Tacoma Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST — join families from Tacoma and across Washington for a free

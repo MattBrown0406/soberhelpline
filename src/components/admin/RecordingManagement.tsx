@@ -217,7 +217,7 @@ export function RecordingManagement() {
           <div className="space-y-4">
             <div>
               <Label>Title *</Label>
-              <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. Monday Night Zoom — March 9, 2026" />
+              <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. The Family Squares — March 9, 2026" />
             </div>
             <div>
               <Label>YouTube URL *</Label>

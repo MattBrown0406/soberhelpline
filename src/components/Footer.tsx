@@ -33,7 +33,7 @@ const Footer = () => {
               <li><Link to="/family-education" className="text-sm hover:text-white transition-colors">Education Center</Link></li>
               <li><Link to="/blog" className="text-sm hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/family-coaching" className="text-sm hover:text-white transition-colors">Coaching</Link></li>
-              <li><Link to="/monday-zoom-registration" className="text-sm hover:text-white transition-colors">Monday Night Zoom</Link></li>
+              <li><Link to="/monday-zoom-registration" className="text-sm hover:text-white transition-colors">The Family Squares</Link></li>
               <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>
               <li><Link to="/free-guide" className="text-sm hover:text-white transition-colors">Free Guide</Link></li>

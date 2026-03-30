@@ -170,7 +170,7 @@ serve(async (req: Request) => {
       ["matt@soberhelpline.com"],
       `New Zoom Meeting Registration: ${safeName}`,
       `
-        <h2>New Monday Night Zoom Registration</h2>
+        <h2>New The Family Squares Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>

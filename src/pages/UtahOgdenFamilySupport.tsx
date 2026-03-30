@@ -33,7 +33,7 @@ export default function UtahOgdenFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Ogden, Utah | Sober Helpline"
-        description="Families in Ogden struggling with a loved one's addiction get expert support from Sober Helpline. Free Monday night Zoom every Monday 7PM PST. (541) 838-6009."
+        description="Families in Ogden struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 

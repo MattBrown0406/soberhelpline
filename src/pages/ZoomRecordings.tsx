@@ -128,7 +128,7 @@ export default function ZoomRecordings() {
               <CardContent className="space-y-4">
                 <div className="grid gap-3">
                   {[
-                    { icon: Video, text: "Full archive of past Monday Night Zoom recordings" },
+                    { icon: Video, text: "Full archive of past The Family Squares recordings" },
                     { icon: BookOpen, text: "50+ educational guides across 6 pillars" },
                     { icon: MessageCircle, text: "Private family support forum" },
                     { icon: Shield, text: "AI-powered coaching tools" },
@@ -227,7 +227,7 @@ export default function ZoomRecordings() {
                 <Video className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Recordings Yet</h3>
                 <p className="text-muted-foreground">
-                  Recordings from our Monday Night Zoom sessions will appear here soon.
+                  Recordings from our The Family Squares sessions will appear here soon.
                   Join us live every Monday at 7 PM PST!
                 </p>
                 <Link to="/monday-zoom-registration" className="mt-4 inline-block">

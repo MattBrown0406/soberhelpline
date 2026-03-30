@@ -33,7 +33,7 @@ export default function NewMexicoSantaFeFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Santa Fe, New Mexico | Sober Helpline"
-        description="Families in Santa Fe struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Santa Fe struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 

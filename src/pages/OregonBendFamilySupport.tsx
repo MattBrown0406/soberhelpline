@@ -34,7 +34,7 @@ export default function OregonBendFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Bend, Oregon | Sober Helpline"
-        description="Families in Bend struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Bend struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -319,7 +319,7 @@ export default function OregonBendFamilySupport() {
               Bend Families: Take the Next Step
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Free Monday night Zoom every week. Coaching available now. You don't have to figure this out alone.
+              Free The Family Squares every week. Coaching available now. You don't have to figure this out alone.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">

@@ -8,12 +8,12 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in Texas?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Texas families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Texas families can also connect with Al-Anon Texas, Nar-Anon Texas, and Sober Helpline's free Monday night Zoom calls for ongoing support. Texas HHSC (hhs.texas.gov) provides state-funded treatment access. If your loved one is resistant, a professional intervention coach can guide you step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Texas families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Texas families can also connect with Al-Anon Texas, Nar-Anon Texas, and Sober Helpline's free The Family Squares calls for ongoing support. Texas HHSC (hhs.texas.gov) provides state-funded treatment access. If your loved one is resistant, a professional intervention coach can guide you step by step.",
   },
   {
     question: "Are there free family support groups for addiction in Texas?",
     answer:
-      "Yes. Texas has Al-Anon and Nar-Anon meetings across the state, including Houston, Dallas, Austin, San Antonio, Fort Worth, and hundreds of smaller communities. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free Monday night Zoom call every week at 7PM PST — led by a certified interventionist — open to any Texas family, no sign-up fees or treatment center referrals.",
+      "Yes. Texas has Al-Anon and Nar-Anon meetings across the state, including Houston, Dallas, Austin, San Antonio, Fort Worth, and hundreds of smaller communities. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free The Family Squares call every week at 7PM PST — led by a certified interventionist — open to any Texas family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What makes Texas's addiction crisis different from other states?",
@@ -44,7 +44,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Sober Helpline",
   description:
-    "Family support and intervention coaching for families affected by addiction. Serving Texas families with free resources, Monday night Zoom, and hourly coaching.",
+    "Family support and intervention coaching for families affected by addiction. Serving Texas families with free resources, The Family Squares, and hourly coaching.",
   url: "https://soberhelpline.com/texas-family-support",
   telephone: "+15418386009",
   address: {

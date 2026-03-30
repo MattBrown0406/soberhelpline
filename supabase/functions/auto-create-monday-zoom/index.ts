@@ -72,7 +72,7 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Auto-creating Monday night Zoom meeting...');
+    console.log('Auto-creating The Family Squares meeting...');
 
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',

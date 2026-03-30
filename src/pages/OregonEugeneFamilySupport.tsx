@@ -34,7 +34,7 @@ export default function OregonEugeneFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Eugene, Oregon | Sober Helpline"
-        description="Families in Eugene struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Eugene struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
@@ -321,7 +321,7 @@ export default function OregonEugeneFamilySupport() {
               Eugene Families: Real Help, Right Now
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Join our free Monday night Zoom or call to get started with coaching. No judgment. No agenda. Just help.
+              Join our free The Family Squares or call to get started with coaching. No judgment. No agenda. Just help.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">

@@ -34,7 +34,7 @@ export default function TexasHoustonFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Houston, Texas | Sober Helpline"
-        description="Families in Houston struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Houston struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 

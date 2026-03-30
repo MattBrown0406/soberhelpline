@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
 
   <h2 style="color: #1a1a1a; font-size: 22px;">Thank You for Joining Us, ${firstName}!</h2>
   
-  <p style="line-height: 1.7; font-size: 15px;">It was great having you on our Monday Night Zoom call. We hope you found it valuable and felt the support of the community around you.</p>
+  <p style="line-height: 1.7; font-size: 15px;">It was great having you on our The Family Squares call. We hope you found it valuable and felt the support of the community around you.</p>
   
   <p style="line-height: 1.7; font-size: 15px;">I wanted to let you know about everything Sober Helpline has to offer beyond our weekly calls. As a <strong>Sober Helpline member</strong>, you get access to:</p>
   
@@ -70,7 +70,7 @@ Deno.serve(async (req) => {
   
   <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
   
-  <p style="font-size: 12px; color: #999; text-align: center;">You're receiving this email because you registered for our Monday Night Zoom call. If you have any questions, reply to this email or visit <a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a>.</p>
+  <p style="font-size: 12px; color: #999; text-align: center;">You're receiving this email because you registered for our The Family Squares call. If you have any questions, reply to this email or visit <a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a>.</p>
 </div>
             `
           }]

@@ -34,7 +34,7 @@ export default function OregonGreshamFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Gresham, Oregon | Sober Helpline"
-        description="Families in Gresham struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Gresham struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 

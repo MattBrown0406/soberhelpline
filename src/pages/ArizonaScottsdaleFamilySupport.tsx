@@ -33,7 +33,7 @@ export default function ArizonaScottsdaleFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Scottsdale, Arizona | Sober Helpline"
-        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free Monday night Zoom every Monday 7PM PST. (541) 838-6009."
+        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free The Family Squares every Monday 7PM PST. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 

@@ -38,7 +38,7 @@ export default function WashingtonSeattleFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Seattle, Washington | Sober Helpline"
-        description="Families in Seattle struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Seattle struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -210,7 +210,7 @@ export default function WashingtonSeattleFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Zoom for Seattle Families
+                  Free Family Squares Zoom for Seattle Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST — join families from Seattle and across Washington for a free

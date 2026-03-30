@@ -33,7 +33,7 @@ export default function UtahSaltLakeCityFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Salt Lake City, Utah | Sober Helpline"
-        description="Families in Salt Lake City struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Monday night Zoom. (541) 838-6009."
+        description="Families in Salt Lake City struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free The Family Squares. (541) 838-6009."
         jsonLd={localBusinessSchema}
       />
 
