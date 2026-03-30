@@ -96,9 +96,9 @@ serve(async (req: Request) => {
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">This Monday: Family Support Meeting</h1>
+          <h1 style="color: #166534;">This Monday: The Family Squares</h1>
           <p>Hi ${safeName},</p>
-          <p>Here is your link for this Monday's <strong>Family Support Zoom Meeting</strong> at <strong>7:00 PM PST</strong>.</p>
+          <p>Here is your link for this Monday's <strong>The Family Squares Zoom</strong> at <strong>7:00 PM PST</strong>.</p>
           
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
@@ -152,7 +152,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: "📍 This Monday — Family Support Meeting at 7 PM PST",
+          subject: "📍 This Monday — The Family Squares at 7 PM PST",
           content: [{ type: "text/html", value: html }],
         }),
       });
