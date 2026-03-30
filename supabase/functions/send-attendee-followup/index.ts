@@ -55,7 +55,7 @@ Deno.serve(async (req) => {
     <li>📚 <strong>Education & Support Materials</strong> — 62+ guides, interactive tools, worksheets, and guided meditations designed specifically for families</li>
     <li>🤖 <strong>AI-Powered Coaching Tools</strong> — Boundary builders, enabling behavior coaches, and treatment navigators available 24/7</li>
     <li>💰 <strong>$25 Discount on Coaching Sessions</strong> — Members pay $125/hour instead of $150 for 1-on-1 coaching (the membership more than pays for itself!)</li>
-    <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past Monday Night calls anytime</li>
+    <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past The Family Squares calls anytime</li>
   </ul>
   
   <p style="line-height: 1.7; font-size: 15px;">All of this for just <strong>$14.99/month</strong> — less than the cost of a single cup of coffee a week. And with the $25 coaching discount, your membership pays for itself with just one session.</p>

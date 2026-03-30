@@ -131,7 +131,7 @@ serve(async (req: Request) => {
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">Tonight's Monday Night Meeting</h1>
+          <h1 style="color: #166534;">Tonight's The Family Squares</h1>
           <p>Hi ${safeName},</p>
           <p>This is your weekly reminder that tonight's <strong>The Family Squares</strong> starts at <strong>7:00 PM PST</strong>.</p>
           <p>As a member, you don't need to register — just click the link below to join:</p>

@@ -214,7 +214,7 @@ export default function OregonEugeneFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Eugene families join every Monday night for free, judgment-free support with certified interventionist Matt Brown.
+                      Eugene families join every Monday for free, judgment-free support with certified interventionist Matt Brown.
                       Great for parents of young adults who aren't sure what to do next.
                     </p>
                     <ul className="space-y-2 mb-4">

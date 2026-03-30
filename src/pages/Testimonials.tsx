@@ -168,7 +168,7 @@ const Testimonials = () => {
             <Card className="mb-12 border-primary/20">
               <CardContent className="pt-6">
                 <h2 className="text-xl font-bold text-foreground mb-4">
-                  {fromZoom ? "How Are the Monday Night Meetings Helping You?" : "Share Your Coaching Experience"}
+                  {fromZoom ? "How Are the The Family Squaress Helping You?" : "Share Your Coaching Experience"}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

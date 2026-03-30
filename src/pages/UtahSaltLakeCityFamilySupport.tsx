@@ -214,7 +214,7 @@ export default function UtahSaltLakeCityFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Salt Lake City families join families from across Utah every Monday night for free, judgment-free support.
+                      Salt Lake City families join families from across Utah every Monday for free, judgment-free support.
                       Led by certified interventionist Matt Brown — no treatment center names, no sales pressure.
                     </p>
                     <ul className="space-y-2 mb-4">

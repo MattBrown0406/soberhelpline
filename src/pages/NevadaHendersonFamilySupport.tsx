@@ -212,7 +212,7 @@ export default function NevadaHendersonFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Henderson families join families from across Nevada every Monday night for free, 
+                      Henderson families join families from across Nevada every Monday for free, 
                       judgment-free support. Led by certified interventionist Matt Brown — no treatment center 
                       names, no sales pressure, no agenda except helping your family.
                     </p>

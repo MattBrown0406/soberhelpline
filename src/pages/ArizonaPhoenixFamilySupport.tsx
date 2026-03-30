@@ -217,7 +217,7 @@ export default function ArizonaPhoenixFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Phoenix families join families from across Arizona every Monday night for free, 
+                      Phoenix families join families from across Arizona every Monday for free, 
                       judgment-free support. Led by certified interventionist Matt Brown — no treatment center 
                       names, no sales pressure.
                     </p>

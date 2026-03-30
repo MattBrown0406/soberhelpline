@@ -215,7 +215,7 @@ export default function UtahProvoFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Provo families join families from across Utah every Monday night for free, anonymous, judgment-free support.
+                      Provo families join families from across Utah every Monday for free, anonymous, judgment-free support.
                       Led by certified interventionist Matt Brown — no treatment center names, no religious framework imposed.
                     </p>
                     <ul className="space-y-2 mb-4">

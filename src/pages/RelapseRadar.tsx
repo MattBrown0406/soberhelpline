@@ -459,7 +459,7 @@ export default function RelapseRadar() {
                     <p className="text-sm text-muted-foreground">
                       Join our <strong>The Family Squares</strong>
                     </p>
-                    <p className="text-xs text-muted-foreground">Every Monday Night • 7:00 PM PST</p>
+                    <p className="text-xs text-muted-foreground">Every Monday • 7:00 PM PST</p>
                     <Link to="/monday-zoom-registration">
                       <Button className="gap-2 mt-2">
                         <Video className="w-4 h-4" />

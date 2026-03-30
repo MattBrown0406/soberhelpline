@@ -271,7 +271,7 @@ const RoadmapTreatment = () => {
                   className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2"
                 >
                   <Video className="w-4 h-4" />
-                  Register for Monday Night Support — 7 PM PT
+                  Register for The Family Squares — 7 PM PT
                 </Link>
               </div>
             </div>

@@ -216,7 +216,7 @@ export default function NevadaRenoFamilySupport() {
                       Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Reno families join families from across Nevada every Monday night for free, 
+                      Reno families join families from across Nevada every Monday for free, 
                       judgment-free support. Led by certified interventionist Matt Brown — no treatment center 
                       names, no sales pressure, no agenda except helping your family.
                     </p>

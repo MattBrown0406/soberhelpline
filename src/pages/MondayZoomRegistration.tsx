@@ -249,7 +249,7 @@ export default function MondayZoomRegistration() {
             <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
               <Button size="lg" className="gap-2">
                 <Monitor className="h-5 w-5" />
-                Join Monday Night Meeting
+                Join The Family Squares
               </Button>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -332,10 +332,10 @@ export default function MondayZoomRegistration() {
                       <Video className="h-8 w-8 drop-shadow" />
                     </div>
                     <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
-                      FREE Monday Night<br />Family Support Zoom Meeting
+                      FREE The Family Squares<br />Family Support Zoom Meeting
                     </h1>
                     <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-                      Join other families navigating addiction for a supportive, guided group session every Monday night. No membership required.
+                      Join other families navigating addiction for a supportive, guided group session every Monday. No membership required.
                     </p>
                     <div className="flex flex-wrap justify-center gap-3">
                       {[
@@ -512,7 +512,7 @@ export default function MondayZoomRegistration() {
                         Submitting...
                       </>
                     ) : (
-                      isMemberQuestion ? "Submit My Question" : "Register for Monday Night Meeting"
+                      isMemberQuestion ? "Submit My Question" : "Register for The Family Squares"
                     )}
                   </Button>
 
