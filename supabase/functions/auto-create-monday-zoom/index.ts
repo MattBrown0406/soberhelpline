@@ -94,7 +94,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        topic: 'Monday Night Family Support Meeting',
+        topic: 'The Family Squares',
         type: 2, // Scheduled meeting
         start_time: startTime,
         duration: 60,

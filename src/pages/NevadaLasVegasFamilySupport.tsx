@@ -212,7 +212,7 @@ export default function NevadaLasVegasFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Las Vegas families join families from across Nevada every Monday night for free, judgment-free 

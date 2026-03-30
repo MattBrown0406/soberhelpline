@@ -226,7 +226,7 @@ export default function ColoradoFortCollinsFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl font-bold text-logo-green mb-4">
-                  Free Monday Night Family Support Zoom
+                  Free The Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, Fort Collins families join a free Zoom call led by Matt Brown —

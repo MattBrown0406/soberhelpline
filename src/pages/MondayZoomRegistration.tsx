@@ -241,7 +241,7 @@ export default function MondayZoomRegistration() {
         <p className="text-muted-foreground text-lg mb-8">
           {isMemberQuestion
             ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
-            : "Thank you for registering for the Monday night family support Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
+            : "Thank you for registering for the The Family Squares Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
         </p>
 
         {meetingInfo ? (
@@ -289,8 +289,8 @@ export default function MondayZoomRegistration() {
   return (
     <>
       <SEOHead
-        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Monday Night Family Support Zoom Meeting | Sober Helpline"}
-        description="Register for our free Monday night family support Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
+        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "The Family Squares Zoom Meeting | Sober Helpline"}
+        description="Register for our free The Family Squares Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
       />
 
       <div className="min-h-screen bg-background">

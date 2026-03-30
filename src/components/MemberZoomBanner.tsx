@@ -39,7 +39,7 @@ const MemberZoomBanner = () => {
         </div>
         <div className="flex-1 text-center sm:text-left">
           <p className="text-sm font-semibold text-foreground">
-            {isMonday ? "🔴 Tonight: Monday Night Family Support — 7:00 PM PST" : "Monday Night Family Support — Every Monday at 7:00 PM PST"}
+            {isMonday ? "🔴 Tonight: The Family Squares — 7:00 PM PST" : "The Family Squares — Every Monday at 7:00 PM PST"}
           </p>
           <p className="text-xs text-muted-foreground">
             As a member, you can join directly — no registration needed.

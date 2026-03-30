@@ -211,7 +211,7 @@ export default function OregonHillsboroFamilySupport() {
                       Every Monday — 7:00 PM PST
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
-                      Free Monday Night Family Support Zoom
+                      Free The Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Hillsboro families join every Monday for free support from a certified interventionist. 

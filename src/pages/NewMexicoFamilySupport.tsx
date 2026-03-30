@@ -396,7 +396,7 @@ export default function NewMexicoFamilySupport() {
                   Every Monday — 7:00 PM PST
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
-                  Free Monday Night Family Support Zoom
+                  Free The Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7PM PST, families across New Mexico (and nationwide) join a free Zoom call

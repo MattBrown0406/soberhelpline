@@ -202,7 +202,7 @@ export function ZoomLinkSettings() {
         </style>
       </head>
       <body>
-        <h1>Monday Night Family Support Zoom — Questions</h1>
+        <h1>The Family Squares Zoom — Questions</h1>
         <p class="subtitle">${nextMondayFormatted}</p>
         <p class="count">${questionsOnly.length} question${questionsOnly.length !== 1 ? "s" : ""} submitted</p>
         ${questionsOnly.length > 0 ? questionsHtml : "<p>No questions submitted for this meeting.</p>"}
@@ -227,7 +227,7 @@ export function ZoomLinkSettings() {
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Meeting Settings</h3>
         <p className="text-sm text-muted-foreground">
-          Configure the Zoom meeting credentials for the Monday night family support meeting.
+          Configure the Zoom meeting credentials for the The Family Squares meeting.
           The Meeting ID and Passcode power the in-browser embedded experience. The external link is a fallback.
         </p>
 
