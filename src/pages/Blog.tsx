@@ -110,6 +110,7 @@ import detachmentWithLoveAddictionFamilyImg from "@/assets/blog-detachment-with-
 import aftercarePlanningFamilyGuideImg from "@/assets/blog-aftercare-planning-family-guide.jpg";
 import soberLivingHomesFamilyGuideImg from "@/assets/blog-sober-living-homes-family-guide.jpg";
 import whatToDoWhileInRehabImg from "@/assets/blog-what-to-do-while-loved-one-is-in-rehab.jpg";
+import supportingFirstYearRecoveryImg from "@/assets/blog-supporting-loved-one-first-year-recovery.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
