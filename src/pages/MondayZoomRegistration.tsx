@@ -332,7 +332,7 @@ export default function MondayZoomRegistration() {
                       <Video className="h-8 w-8 drop-shadow" />
                     </div>
                     <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
-                      FREE The Family Squares<br />Family Support Zoom Meeting
+                      FREE<br />"The Family Squares"<br />Family Support Zoom Meeting
                     </h1>
                     <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
                       Join other families navigating addiction for a supportive, guided group session every Monday. No membership required.
