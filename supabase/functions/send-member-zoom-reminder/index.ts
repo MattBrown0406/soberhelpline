@@ -63,10 +63,11 @@ serve(async (req: Request) => {
     const { data: settings } = await adminSupabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode"]);
+      .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode", "monday_zoom_link"]);
 
     const meetingId = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value || "";
     const passcode = settings?.find((s: any) => s.key === "monday_zoom_passcode")?.value || "";
+    const externalZoomLink = settings?.find((s: any) => s.key === "monday_zoom_link")?.value || "";
 
     if (!meetingId) {
       return new Response(JSON.stringify({ error: "No Zoom meeting configured" }), {
