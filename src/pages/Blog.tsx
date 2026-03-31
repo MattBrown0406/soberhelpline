@@ -111,6 +111,7 @@ import aftercarePlanningFamilyGuideImg from "@/assets/blog-aftercare-planning-fa
 import soberLivingHomesFamilyGuideImg from "@/assets/blog-sober-living-homes-family-guide.jpg";
 import whatToDoWhileInRehabImg from "@/assets/blog-what-to-do-while-loved-one-is-in-rehab.jpg";
 import supportingFirstYearRecoveryImg from "@/assets/blog-supporting-loved-one-first-year-recovery.jpg";
+import recoveryFriendlyHomeImg from "@/assets/blog-recovery-friendly-home-after-rehab.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
