@@ -81,6 +81,20 @@ serve(async (req: Request) => {
 
     const hasLink = joinUrl !== "";
 
+    const externalFallback = externalZoomLink
+      ? `
+        <div style="margin-top: 12px; text-align: center;">
+          <p style="font-size: 13px; color: #6b7280; margin: 0 0 8px 0;">
+            Having trouble? You can also join directly through Zoom:
+          </p>
+          <a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 10px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
+            Join via Zoom App
+          </a>
+          ${passcode ? `<p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} &nbsp;|&nbsp; Passcode: ${escapeHtml(passcode)}</p>` : ''}
+        </div>
+      `
+      : (passcode ? `<p style="font-size: 12px; color: #9ca3af; margin-top: 8px; text-align: center;">Meeting ID: ${escapeHtml(meetingId)} &nbsp;|&nbsp; Passcode: ${escapeHtml(passcode)}</p>` : '');
+
     const zoomSection = hasLink
       ? `
         <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
@@ -92,6 +106,7 @@ serve(async (req: Request) => {
           <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
             The meeting opens directly in your browser on our website.
           </p>
+          ${externalFallback}
         </div>
       `
       : `
