@@ -31,10 +31,11 @@ serve(async (req: Request) => {
     const { data: settings } = await adminSupabase
       .from("site_settings")
       .select("key, value")
-      .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode"]);
+      .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode", "monday_zoom_link"]);
 
     const meetingId = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value || "";
     const passcode = settings?.find((s: any) => s.key === "monday_zoom_passcode")?.value || "";
+    const externalZoomLink = settings?.find((s: any) => s.key === "monday_zoom_link")?.value || "";
 
     if (!meetingId) throw new Error("No meeting ID configured");
 
@@ -107,6 +108,17 @@ serve(async (req: Request) => {
             <p style="margin-top: 12px; font-size: 13px; color: #6b7280;">
               The meeting opens directly in your browser — no Zoom app needed.
             </p>
+            ${externalZoomLink ? `
+            <div style="margin-top: 12px;">
+              <p style="font-size: 13px; color: #6b7280; margin: 0 0 8px 0;">
+                Having trouble? You can also join directly through Zoom:
+              </p>
+              <a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 10px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
+                Join via Zoom App
+              </a>
+              ${passcode ? `<p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} &nbsp;|&nbsp; Passcode: ${escapeHtml(passcode)}</p>` : ''}
+            </div>
+            ` : ''}
           </div>
 
           <div style="background-color: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
