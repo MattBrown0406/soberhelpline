@@ -28,13 +28,21 @@ const JoinMeeting = () => {
           return;
         }
 
+        // For unauthenticated guests, fetch the external Zoom link and auto-redirect
         const { data: settings } = await supabase
           .from("site_settings")
           .select("key, value")
           .in("key", ["monday_zoom_link"]);
 
         const externalZoomLink = settings?.find((setting) => setting.key === "monday_zoom_link")?.value || null;
-        setGuestJoinUrl(externalZoomLink);
+        
+        // Auto-redirect guests directly to Zoom — no intermediate page
+        if (externalZoomLink) {
+          window.location.href = externalZoomLink;
+          return;
+        }
+        
+        setGuestJoinUrl(null);
         setLoading(false);
         return;
       }
