@@ -12767,7 +12767,7 @@ At [LINK:SoberHelpline.com:https://soberhelpline.com], we help families navigate
         answer: "Ask about total cost after insurance, scholarship or financial assistance programs, payment plan options, minimum down payment to secure a bed, and whether there are interest charges on a payment plan. Get all financial agreements in writing before admission."
       }
     ]
-  }
+  },
   {
     id: 111,
     slug: "prior-authorization-addiction-treatment",
