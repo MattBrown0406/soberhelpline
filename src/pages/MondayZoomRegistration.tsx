@@ -172,7 +172,7 @@ export default function MondayZoomRegistration() {
 
     try {
       // Save registration (user_id is optional now)
-      const { error } = await supabase.from("zoom_meeting_registrations").insert({
+      const { data: insertedReg, error } = await supabase.from("zoom_meeting_registrations").insert({
         user_id: user?.id || null,
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -184,7 +184,7 @@ export default function MondayZoomRegistration() {
         preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
         preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
         preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
-      });
+      }).select("id").single();
 
       if (error) throw error;
 
@@ -194,6 +194,7 @@ export default function MondayZoomRegistration() {
           body: {
             name: formData.name.trim(),
             email: formData.email.trim(),
+            registration_id: insertedReg?.id || null,
           },
         });
       } catch (emailErr) {
