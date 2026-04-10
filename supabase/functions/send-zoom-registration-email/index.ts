@@ -47,7 +47,7 @@ serve(async (req: Request) => {
   try {
     // No auth required - this is triggered by registration form (users may be unauthenticated)
 
-    const { name, email } = await req.json();
+    const { name, email, registration_id } = await req.json();
 
     if (!name || !email) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -75,9 +75,17 @@ serve(async (req: Request) => {
     const externalZoomLink = settings?.find((s: any) => s.key === "monday_zoom_link")?.value || "";
 
     const siteUrl = "https://soberhelpline.com";
-    const joinUrl = meetingId
-      ? `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`
-      : "";
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    
+    // Use tracking redirect if we have a registration ID, otherwise direct link
+    let joinUrl: string;
+    if (registration_id) {
+      joinUrl = `${supabaseUrl}/functions/v1/track-zoom-click?rid=${encodeURIComponent(registration_id)}`;
+    } else if (meetingId) {
+      joinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
+    } else {
+      joinUrl = "";
+    }
 
     const hasLink = joinUrl !== "";
 
