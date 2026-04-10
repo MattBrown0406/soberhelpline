@@ -412,15 +412,10 @@ export default function MondayZoomRegistration() {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="question">Your Question for the Group (Optional)</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Please write out a complete question you'd like discussed during the meeting—not just a topic or keyword. 
-                      For example, instead of "boundaries," write something like: "How do I set a boundary with my son about 
-                      not lending him money without damaging our relationship?"
-                    </p>
+                    <Label htmlFor="question">What is one thing you would like to get out of the meeting this week? (Optional)</Label>
                     <Textarea
                       id="question"
-                      placeholder="Write your full question here..."
+                      placeholder="Share what you're hoping to learn or discuss..."
                       rows={4}
                       value={formData.question}
                       onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))}
