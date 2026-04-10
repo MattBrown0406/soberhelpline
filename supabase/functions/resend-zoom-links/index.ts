@@ -40,14 +40,15 @@ serve(async (req: Request) => {
     if (!meetingId) throw new Error("No meeting ID configured");
 
     const siteUrl = "https://soberhelpline.com";
-    const joinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const baseJoinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
 
     let body: any = {};
     try { body = await req.json(); } catch {}
 
     // If custom recipients provided, use those. Otherwise fall back to meeting_date lookup.
-    let recipients: { name: string; email: string }[] = [];
+    let recipients: { name: string; email: string; id?: string }[] = [];
 
     if (body.recipients && Array.isArray(body.recipients)) {
       recipients = body.recipients;
@@ -64,7 +65,7 @@ serve(async (req: Request) => {
 
       const { data: registrants, error } = await adminSupabase
         .from("zoom_meeting_registrations")
-        .select("name, email")
+        .select("id, name, email")
         .eq("meeting_date", targetDate);
 
       if (error) throw error;
@@ -80,7 +81,7 @@ serve(async (req: Request) => {
 
     // Deduplicate by email
     const seen = new Set<string>();
-    const unique: { name: string; email: string }[] = [];
+    const unique: { name: string; email: string; id?: string }[] = [];
     for (const r of recipients) {
       const key = r.email.toLowerCase();
       if (!seen.has(key)) {
@@ -95,11 +96,16 @@ serve(async (req: Request) => {
     for (const reg of unique) {
       const safeName = escapeHtml(reg.name);
 
+      // Use tracking link if we have a registration ID
+      const joinUrl = reg.id
+        ? `${supabaseUrl}/functions/v1/track-zoom-click?rid=${encodeURIComponent(reg.id)}`
+        : baseJoinUrl;
+
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">This Monday: “The Family Squares”</h1>
+          <h1 style="color: #166534;">This Monday: "The Family Squares"</h1>
           <p>Hi ${safeName},</p>
-          <p>Here is your link for this Monday's <strong>“The Family Squares” Zoom</strong> at <strong>7:00 PM PST</strong>.</p>
+          <p>Here is your link for this Monday's <strong>"The Family Squares" Zoom</strong> at <strong>7:00 PM PST</strong>.</p>
           
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
@@ -164,7 +170,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: "📍 This Monday — “The Family Squares” at 7 PM PST",
+          subject: "📍 This Monday — "The Family Squares" at 7 PM PST",
           content: [{ type: "text/html", value: html }],
         }),
       });

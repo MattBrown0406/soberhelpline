@@ -70,3 +70,9 @@ verify_jwt = false
 
 [functions.consultation-payment]
 verify_jwt = false
+
+[functions.track-zoom-click]
+verify_jwt = false
+
+[functions.sync-zoom-attendance]
+verify_jwt = false

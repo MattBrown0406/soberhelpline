@@ -2355,6 +2355,63 @@ export type Database = {
         }
         Relationships: []
       }
+      zoom_attendance: {
+        Row: {
+          created_at: string
+          duration_minutes: number | null
+          id: string
+          join_time: string
+          leave_time: string | null
+          meeting_date: string
+          participant_email: string | null
+          participant_name: string
+          referral_registration_id: string | null
+          registration_id: string | null
+          zoom_meeting_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          join_time: string
+          leave_time?: string | null
+          meeting_date: string
+          participant_email?: string | null
+          participant_name: string
+          referral_registration_id?: string | null
+          registration_id?: string | null
+          zoom_meeting_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          join_time?: string
+          leave_time?: string | null
+          meeting_date?: string
+          participant_email?: string | null
+          participant_name?: string
+          referral_registration_id?: string | null
+          registration_id?: string | null
+          zoom_meeting_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zoom_attendance_referral_registration_id_fkey"
+            columns: ["referral_registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "zoom_attendance_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       zoom_call_recordings: {
         Row: {
           created_at: string
@@ -2393,6 +2450,47 @@ export type Database = {
           youtube_url?: string
         }
         Relationships: []
+      }
+      zoom_link_clicks: {
+        Row: {
+          clicked_at: string
+          id: string
+          ip_address: string | null
+          meeting_date: string
+          registration_email: string
+          registration_id: string | null
+          registration_name: string
+          user_agent: string | null
+        }
+        Insert: {
+          clicked_at?: string
+          id?: string
+          ip_address?: string | null
+          meeting_date: string
+          registration_email: string
+          registration_id?: string | null
+          registration_name: string
+          user_agent?: string | null
+        }
+        Update: {
+          clicked_at?: string
+          id?: string
+          ip_address?: string | null
+          meeting_date?: string
+          registration_email?: string
+          registration_id?: string | null
+          registration_name?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zoom_link_clicks_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zoom_meeting_registrations: {
         Row: {

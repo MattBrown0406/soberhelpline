@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History } from "lucide-react";
+import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History, MousePointerClick, Users, UserX, Share2, RefreshCw } from "lucide-react";
 
 function getNextMonday(): string {
   const now = new Date();
@@ -462,6 +462,278 @@ export function ZoomLinkSettings() {
           </div>
         )}
       </div>
+
+      <Separator />
+
+      {/* Attendance Tracking Section */}
+      <AttendanceTracking nextMonday={nextMonday} />
+    </div>
+  );
+}
+
+interface ClickRecord {
+  id: string;
+  registration_name: string;
+  registration_email: string;
+  meeting_date: string;
+  clicked_at: string;
+}
+
+interface AttendanceRecord {
+  id: string;
+  participant_name: string;
+  participant_email: string | null;
+  meeting_date: string;
+  join_time: string;
+  leave_time: string | null;
+  duration_minutes: number;
+  registration_id: string | null;
+}
+
+function AttendanceTracking({ nextMonday }: { nextMonday: string }) {
+  const [clicks, setClicks] = useState<ClickRecord[]>([]);
+  const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(nextMonday);
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedDate]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [clicksRes, attendanceRes] = await Promise.all([
+        supabase
+          .from("zoom_link_clicks")
+          .select("*")
+          .eq("meeting_date", selectedDate)
+          .order("clicked_at", { ascending: false }),
+        supabase
+          .from("zoom_attendance")
+          .select("*")
+          .eq("meeting_date", selectedDate)
+          .order("join_time", { ascending: true }),
+      ]);
+
+      setClicks((clicksRes.data as ClickRecord[]) || []);
+      setAttendance((attendanceRes.data as AttendanceRecord[]) || []);
+    } catch (err) {
+      console.error("Error fetching attendance data:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSyncAttendance = async () => {
+    setSyncing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("sync-zoom-attendance", {
+        body: { meeting_date: selectedDate },
+      });
+      if (error) throw error;
+      toast.success(`Synced ${data.synced} participants. ${data.no_shows?.length || 0} no-shows detected.`);
+      fetchData();
+    } catch (err: any) {
+      console.error("Sync error:", err);
+      toast.error(err.message || "Failed to sync attendance");
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  // Deduplicate clicks by email to get unique clickers
+  const uniqueClickers = new Map<string, ClickRecord>();
+  clicks.forEach(c => {
+    if (!uniqueClickers.has(c.registration_email.toLowerCase())) {
+      uniqueClickers.set(c.registration_email.toLowerCase(), c);
+    }
+  });
+
+  // Detect potential sharing: registration emails with 2+ clicks
+  const clickCountByEmail = new Map<string, number>();
+  clicks.forEach(c => {
+    const key = c.registration_email.toLowerCase();
+    clickCountByEmail.set(key, (clickCountByEmail.get(key) || 0) + 1);
+  });
+  const sharingIndicators = Array.from(clickCountByEmail.entries())
+    .filter(([_, count]) => count >= 2)
+    .map(([email, count]) => {
+      const click = clicks.find(c => c.registration_email.toLowerCase() === email);
+      return { name: click?.registration_name || email, email, clicks: count };
+    });
+
+  // Get available dates for the dropdown
+  const [availableDates, setAvailableDates] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchDates = async () => {
+      const { data } = await supabase
+        .from("zoom_meeting_registrations")
+        .select("meeting_date")
+        .order("meeting_date", { ascending: false });
+      const dates = [...new Set((data || []).map((d: any) => d.meeting_date))];
+      if (!dates.includes(nextMonday)) dates.unshift(nextMonday);
+      setAvailableDates(dates);
+    };
+    fetchDates();
+  }, [nextMonday]);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <MousePointerClick className="h-5 w-5" />
+            Attendance Tracking
+          </h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            Track who clicked the join link and who actually attended.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="flex h-9 rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {availableDates.map(d => (
+              <option key={d} value={d}>{formatDate(d)}{d === nextMonday ? " (Upcoming)" : ""}</option>
+            ))}
+          </select>
+          <Button variant="outline" size="sm" onClick={handleSyncAttendance} disabled={syncing}>
+            {syncing ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4 mr-1" />}
+            Sync from Zoom
+          </Button>
+        </div>
+      </div>
+
+      {loading ? (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+        </div>
+      ) : (
+        <>
+          {/* Summary Stats */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="border border-border rounded-lg p-3 text-center">
+              <MousePointerClick className="h-5 w-5 mx-auto mb-1 text-primary" />
+              <p className="text-2xl font-bold text-foreground">{uniqueClickers.size}</p>
+              <p className="text-xs text-muted-foreground">Link Clicks</p>
+            </div>
+            <div className="border border-border rounded-lg p-3 text-center">
+              <Users className="h-5 w-5 mx-auto mb-1 text-primary" />
+              <p className="text-2xl font-bold text-foreground">{attendance.length}</p>
+              <p className="text-xs text-muted-foreground">Attendees</p>
+            </div>
+            <div className="border border-border rounded-lg p-3 text-center">
+              <UserX className="h-5 w-5 mx-auto mb-1 text-destructive" />
+              <p className="text-2xl font-bold text-foreground">
+                {Math.max(0, uniqueClickers.size - attendance.length)}
+              </p>
+              <p className="text-xs text-muted-foreground">Clicked, Didn't Join</p>
+            </div>
+            <div className="border border-border rounded-lg p-3 text-center">
+              <Share2 className="h-5 w-5 mx-auto mb-1 text-primary" />
+              <p className="text-2xl font-bold text-foreground">{sharingIndicators.length}</p>
+              <p className="text-xs text-muted-foreground">Shared Links</p>
+            </div>
+          </div>
+
+          {/* Family Sharing Alerts */}
+          {sharingIndicators.length > 0 && (
+            <div className="border border-primary/30 bg-primary/5 rounded-lg p-4">
+              <h4 className="font-medium text-foreground flex items-center gap-2 mb-2">
+                <Share2 className="h-4 w-4 text-primary" />
+                Family Sharing Detected
+              </h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                These registrants appear to have shared their link — multiple clicks detected from the same registration.
+              </p>
+              <div className="space-y-2">
+                {sharingIndicators.map(s => (
+                  <div key={s.email} className="flex items-center justify-between bg-background rounded p-2 border border-border">
+                    <div>
+                      <span className="font-medium text-sm text-foreground">{s.name}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{s.email}</span>
+                    </div>
+                    <Badge variant="secondary" className="text-xs">{s.clicks} clicks</Badge>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Link Clicks */}
+          {clicks.length > 0 && (
+            <Collapsible>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" className="w-full justify-between text-foreground hover:bg-muted/50 border border-border rounded-lg px-4 py-3 h-auto">
+                  <span className="flex items-center gap-2">
+                    <MousePointerClick className="h-4 w-4 text-primary" />
+                    <span className="font-medium">Link Clicks</span>
+                    <Badge variant="secondary" className="text-xs">{clicks.length} total</Badge>
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="space-y-2 pt-2 pl-4">
+                {clicks.map(c => (
+                  <div key={c.id} className="border border-border rounded-lg p-3 bg-muted/20 flex items-center justify-between">
+                    <div>
+                      <span className="font-medium text-sm text-foreground">{c.registration_name}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{c.registration_email}</span>
+                    </div>
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(c.clicked_at).toLocaleString()}
+                    </span>
+                  </div>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+          )}
+
+          {/* Zoom Attendance */}
+          {attendance.length > 0 && (
+            <Collapsible defaultOpen>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" className="w-full justify-between text-foreground hover:bg-muted/50 border border-border rounded-lg px-4 py-3 h-auto">
+                  <span className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    <span className="font-medium">Zoom Participants</span>
+                    <Badge variant="secondary" className="text-xs">{attendance.length} attendees</Badge>
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="space-y-2 pt-2 pl-4">
+                {attendance.map(a => (
+                  <div key={a.id} className="border border-border rounded-lg p-3 bg-muted/20">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="font-medium text-sm text-foreground">{a.participant_name}</span>
+                        {a.participant_email && <span className="text-xs text-muted-foreground ml-2">{a.participant_email}</span>}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={a.registration_id ? "default" : "outline"} className="text-xs">
+                          {a.registration_id ? "Registered" : "Walk-in"}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">{a.duration_minutes} min</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+          )}
+
+          {clicks.length === 0 && attendance.length === 0 && (
+            <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
+              No tracking data yet for this date. Click "Sync from Zoom" after the meeting ends to pull attendance.
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }
