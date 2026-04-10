@@ -354,8 +354,8 @@ export default function MondayZoomRegistration() {
                   </div>
                 </div>
 
-                {/* Membership Promo Banner */}
-                <MembershipPromoBanner />
+                {/* Testimonial Carousel */}
+                <TestimonialCarousel />
               </>
             )}
 
