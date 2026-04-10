@@ -41,6 +41,7 @@ export default function MondayZoomRegistration() {
     question: "",
     requestFollowUp: false,
     consentEmailList: false,
+    autoRegister: false,
     preferredContactDate: "",
     preferredContactTime: "",
     preferredTimezone: "America/Los_Angeles",
