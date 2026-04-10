@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History } from "lucide-react";
+import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History, MousePointerClick, Users, UserX, Share2, RefreshCw } from "lucide-react";
 
 function getNextMonday(): string {
   const now = new Date();
