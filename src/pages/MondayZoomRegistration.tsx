@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { z } from "zod";
 
 const registrationSchema = z.object({
