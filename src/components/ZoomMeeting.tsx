@@ -56,6 +56,13 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
 
       const { signature, sdkKey } = response.data;
 
+      // Listen for meeting end (host ends for all, or connection drops)
+      client.on("connection-change", (payload: { state: string }) => {
+        if (payload.state === "Closed") {
+          onMeetingEnd?.();
+        }
+      });
+
       // Set joined before calling join so the container is visible
       setStatus("joined");
 
