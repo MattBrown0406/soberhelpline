@@ -2494,6 +2494,7 @@ export type Database = {
       }
       zoom_meeting_registrations: {
         Row: {
+          auto_register: boolean
           consent_email_list: boolean
           created_at: string
           email: string
@@ -2509,6 +2510,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          auto_register?: boolean
           consent_email_list?: boolean
           created_at?: string
           email: string
@@ -2524,6 +2526,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          auto_register?: boolean
           consent_email_list?: boolean
           created_at?: string
           email?: string
