@@ -115,6 +115,7 @@ import recoveryFriendlyHomeImg from "@/assets/blog-recovery-friendly-home-after-
 import howLongRehabLastImg from "@/assets/blog-how-long-should-rehab-last.jpg";
 import howToPayForRehabImg from "@/assets/blog-how-to-pay-for-rehab-insurance.jpg";
 import priorAuthorizationImg from "@/assets/blog-prior-authorization-addiction-treatment.jpg";
+import verifyInsuranceBenefitsImg from "@/assets/blog-verify-insurance-benefits-addiction-treatment.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -12880,6 +12881,128 @@ While the treatment center handles most of the administrative work, families can
       { question: "Does the Mental Health Parity Act protect against prior authorization denials?", answer: "Yes, the MHPAEA requires insurers to apply the same prior authorization standards to addiction treatment as they do for comparable medical or surgical care." },
       { question: "What is a concurrent review in addiction treatment?", answer: "A concurrent review is an ongoing review during treatment to determine whether continued care at the current level remains medically necessary. Authorization is typically granted in short increments." },
       { question: "Do I need to do anything as a family member to help with prior authorization?", answer: "Families can help by verifying insurance benefits before admission, keeping detailed records of all communications with the insurer, and advocating for a peer-to-peer review or filing a formal appeal if a denial is issued." }
+    ]
+  },
+  {
+    id: 112,
+    slug: "verify-insurance-benefits-addiction-treatment",
+    seoTitle: "How to Verify Insurance Benefits for Addiction Treatment",
+    title: "How to Verify Your Insurance Benefits for Addiction Treatment (Before You Call a Rehab)",
+    metaDescription: "Learn how to verify your insurance benefits for addiction treatment before calling rehab. A step-by-step guide for families — so you understand your coverage and avoid costly surprises.",
+    excerpt: "If you verify your insurance benefits for addiction treatment before you start calling rehabs, you'll save yourself hours of confusion, avoid unexpected bills, and be in a much stronger position to make a real decision.",
+    content: `When someone you love needs addiction treatment, the process of getting them help can feel overwhelming enough without having to navigate insurance paperwork. But here's the thing: if you verify your insurance benefits for addiction treatment before you start calling rehabs, you'll save yourself hours of confusion, avoid unexpected bills, and be in a much stronger position to make a real decision.
+
+Most families skip this step. They call a treatment center first, fall in love with the program, and then discover their insurance doesn't cover it — or covers far less than they expected. That's a painful position to be in when emotions are already running high.
+
+This guide will walk you through exactly how to verify your benefits, what questions to ask, and what the answers actually mean — in plain language, not insurance-speak.
+
+**Why Verifying Benefits First Matters So Much**
+
+Verifying your insurance benefits before contacting treatment centers puts you in the driver's seat. You'll know your deductible, your out-of-pocket maximum, whether a specific level of care is covered, and roughly what you'll owe. That information changes every conversation you have with a rehab program.
+
+Treatment centers will often offer to verify your benefits for you — and that's fine, they do it all the time. But their verification serves their admissions process. Doing your own check first means you have an independent understanding of your coverage, so you're not relying entirely on what a facility's billing department tells you.
+
+Think of it like getting a second opinion. No one is trying to mislead you, but you deserve to understand the numbers yourself.
+
+**Step 1: Gather Your Insurance Information**
+
+Before you make any calls, pull together the basics. You'll need the insurance card for the person seeking treatment — not yours, unless you're the one who needs help. You want their member ID number, group number, and the customer service phone number on the back of the card.
+
+If your loved one is on your plan as a dependent, you'll be the one calling. If they have their own insurance through an employer or Medicaid/Medicare, they may need to be the one on the call — or they'll need to give verbal authorization for you to speak on their behalf.
+
+You'll also want to know what type of insurance plan it is: HMO, PPO, EPO, or HDHP. PPO plans typically offer more flexibility for out-of-network treatment. HMO plans often require a referral and prefer in-network providers. This matters when you start comparing programs.
+
+**Step 2: Call and Ask These Specific Questions**
+
+Call the behavioral health or mental health/substance use disorder benefits line — it's often a separate number from general member services and is listed on your insurance card or the insurer's website. When you get a representative, ask to verify benefits for substance use disorder treatment. Be specific. Here's what to ask:
+
+Is substance use disorder (SUD) treatment covered under my plan? What levels of care are covered? (Ask specifically about: detox, residential/inpatient, partial hospitalization [PHP], intensive outpatient [IOP], and outpatient.) What is my deductible, and how much of it has been met this year? What is my out-of-pocket maximum for behavioral health? What percentage does the plan pay after the deductible — and does it differ for in-network vs. out-of-network providers? Is [LINK:prior authorization:/blog/prior-authorization-addiction-treatment] required before treatment begins? Are there limits on the number of days or sessions covered per year? How do I find in-network treatment providers?
+
+Write down the name of the representative, the date, and a reference number for the call. You may need this later if there's a billing dispute.
+
+**Step 3: Decode What They Tell You**
+
+Insurance language is deliberately confusing. Here are the terms you'll hear most often, translated into plain English.
+
+Deductible: This is the amount you pay out of pocket before your insurance starts covering costs. If your deductible is $3,000 and your loved one hasn't used any insurance this year, you'll pay the first $3,000 of treatment costs before coverage kicks in.
+
+Out-of-Pocket Maximum: This is the most you'll pay in a calendar year for covered services. Once you hit it, insurance pays 100% of covered costs. For families facing residential treatment, understanding this number is critical — it tells you the worst-case scenario.
+
+Coinsurance: After your deductible is met, you often still pay a percentage of costs. An 80/20 coinsurance means insurance pays 80%, you pay 20%. In a 30-day residential program, that 20% can still add up quickly.
+
+[LINK:Prior Authorization:/blog/prior-authorization-addiction-treatment]: Some plans require pre-approval before treatment begins — especially for residential or inpatient care. If you skip this step, your claim can be denied. If a facility tells you they'll handle prior auth, confirm it in writing.
+
+In-Network vs. Out-of-Network: In-network providers have contracts with your insurer and usually cost you less. Out-of-network providers may still be covered, but at a higher cost to you. Some plans (HMO, EPO) don't cover out-of-network at all, except in emergencies.
+
+**Step 4: Document Everything and Follow Up**
+
+Once you have your benefits information, write it down in one place. A simple notes document or a piece of paper with the key numbers is enough. Include: your deductible and how much is remaining, your out-of-pocket max, which levels of care are covered, whether prior auth is required, and the rep's name and call reference number.
+
+When you then call treatment centers, lead with what you know. Tell them: "I have a PPO through Blue Cross, my deductible is $2,000 with $800 remaining, and I understand IOP is covered at 80% in-network after deductible." A good admissions coordinator will be able to give you a much more accurate estimate of your costs when you walk in with this information.
+
+If you're considering an out-of-network program, ask them directly: "Can you give me a written estimate of what my total cost would be based on my benefits?" Any reputable program will provide this before you commit.
+
+**What to Do If Coverage Is Limited**
+
+Sometimes you verify benefits and discover the coverage is thin — a high deductible, a narrow network, or no coverage for the level of care you need. That's hard to hear, but it's still better to know early.
+
+Here's where to look if insurance falls short:
+
+State-funded treatment: Every state has publicly funded programs for residents who are uninsured or underinsured. Quality varies, but options exist.
+
+Sliding-scale nonprofit programs: Many nonprofit treatment centers adjust fees based on income.
+
+Payment plans: Many residential programs offer internal financing or work with third-party lenders.
+
+Employee Assistance Programs (EAPs): If your loved one is employed, their workplace may offer free, confidential sessions with a counselor who can help navigate treatment access.
+
+Federal parity laws: Under the Mental Health Parity and Addiction Equity Act, insurers must cover substance use disorder treatment at the same level as other medical conditions. If you're being denied coverage that seems unjust, you have the right to appeal.
+
+You're not out of options just because insurance doesn't cover everything. It means you need a different conversation — but that conversation is still worth having. For more on financing options, see our guide on [LINK:how to pay for rehab when insurance isn't enough:/blog/how-to-pay-for-rehab-when-insurance-isnt-enough].
+
+**You Don't Have to Figure This Out Alone**
+
+Navigating addiction treatment financing is genuinely complicated, and it changes constantly. What we know for certain is that families who go in prepared — who've done the benefit verification work, who know their numbers — make better decisions and feel less panicked in the process.
+
+If you're in this right now and you'd like help thinking through your options, SoberHelpline.com offers [LINK:family coaching:/family-coaching] and education designed exactly for moments like this. You don't have to decode it all alone.
+
+**Frequently Asked Questions**
+
+**How do I verify insurance benefits for addiction treatment?**
+
+Call the behavioral health line on the back of your insurance card and ask specifically about substance use disorder (SUD) coverage. Ask about your deductible, out-of-pocket maximum, covered levels of care, and whether prior authorization is required. Write down everything the representative tells you, including their name and a reference number.
+
+**Will my insurance cover a 30-day rehab program?**
+
+It depends on your plan and the clinical determination of what level of care is medically necessary. Many plans cover residential treatment, but may require prior authorization and can limit the number of days covered. The only way to know for sure is to call your insurer directly and ask before committing to a program.
+
+**What if my insurance denies coverage for treatment?**
+
+You have the right to appeal. Request a written explanation of the denial, then file a formal appeal — most insurers must respond within a set timeframe. You can also request an independent external review. Federal parity laws require insurers to cover addiction treatment comparably to other medical conditions.
+
+**Can a treatment center verify my benefits for me?**
+
+Yes, and many do this routinely as part of their admissions process. However, doing your own verification first gives you an independent understanding of your coverage and puts you in a stronger position when evaluating cost estimates from different programs.
+
+**What is prior authorization for rehab, and how does it work?**
+
+[LINK:Prior authorization:/blog/prior-authorization-addiction-treatment] means your insurer must approve the level of care before treatment begins. Without it, your claim can be denied even if the treatment itself is covered. If a rehab program tells you they'll handle prior auth, ask for written confirmation that it has been approved before your loved one's admission date.
+
+**Does insurance cover detox and residential treatment differently?**
+
+Often, yes. Detox is typically considered medically necessary and is frequently covered, sometimes at a higher rate than standard residential treatment. Residential (inpatient) treatment usually requires prior authorization and may have day limits. Intensive outpatient (IOP) is often easier to get covered and can be a cost-effective option when clinically appropriate.`,
+    image: verifyInsuranceBenefitsImg,
+    author: "Matt Brown",
+    date: "2026-04-08",
+    category: "Insurance & Financial",
+    keywords: ["verify insurance benefits", "addiction treatment", "insurance coverage", "rehab", "deductible", "prior authorization", "family support", "treatment financing"],
+    faqs: [
+      { question: "How do I verify insurance benefits for addiction treatment?", answer: "Call the behavioral health line on the back of your insurance card and ask specifically about substance use disorder (SUD) coverage. Ask about your deductible, out-of-pocket maximum, covered levels of care, and whether prior authorization is required." },
+      { question: "Will my insurance cover a 30-day rehab program?", answer: "It depends on your plan and the clinical determination of what level of care is medically necessary. Many plans cover residential treatment, but may require prior authorization and can limit the number of days covered." },
+      { question: "What if my insurance denies coverage for treatment?", answer: "You have the right to appeal. Request a written explanation of the denial, then file a formal appeal. You can also request an independent external review. Federal parity laws require insurers to cover addiction treatment comparably to other medical conditions." },
+      { question: "Can a treatment center verify my benefits for me?", answer: "Yes, and many do this routinely as part of their admissions process. However, doing your own verification first gives you an independent understanding of your coverage." },
+      { question: "What is prior authorization for rehab, and how does it work?", answer: "Prior authorization means your insurer must approve the level of care before treatment begins. Without it, your claim can be denied even if the treatment itself is covered." },
+      { question: "Does insurance cover detox and residential treatment differently?", answer: "Often, yes. Detox is typically considered medically necessary and is frequently covered at a higher rate. Residential treatment usually requires prior authorization and may have day limits." }
     ]
   },
 ];
