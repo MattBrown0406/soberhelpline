@@ -38,7 +38,7 @@ const TestimonialCarousel = () => {
     if (testimonials.length <= 1) return;
     const interval = setInterval(() => {
       setCurrent((c) => (c + 1) % testimonials.length);
-    }, 6000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
