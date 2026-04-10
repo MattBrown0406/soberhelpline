@@ -162,18 +162,6 @@ const Testimonials = () => {
             </div>
           )}
 
-          {/* CTA to write */}
-          <div className="text-center mb-12">
-            <Button
-              size="lg"
-              onClick={() => user ? setShowForm(!showForm) : navigate('/auth')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              <Send className="w-4 h-4 mr-2" />
-              Share Your Experience
-            </Button>
-          </div>
-
           {/* Submission Form */}
           {showForm && (
             <Card className="mb-12 border-primary/20">
