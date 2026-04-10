@@ -140,6 +140,7 @@ export default function MondayZoomRegistration() {
         request_follow_up: formData.requestFollowUp,
         consent_email_list: formData.consentEmailList,
         meeting_date: meetingDate,
+        auto_register: formData.autoRegister,
         preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
         preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
         preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
@@ -444,6 +445,19 @@ export default function MondayZoomRegistration() {
                         </div>
                       </div>
                     )}
+
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="autoRegister"
+                        checked={formData.autoRegister}
+                        onCheckedChange={(checked) =>
+                          setFormData((p) => ({ ...p, autoRegister: checked === true }))
+                        }
+                      />
+                      <Label htmlFor="autoRegister" className="text-sm leading-snug cursor-pointer">
+                        Automatically register me for future meetings and send me the new link each week.
+                      </Label>
+                    </div>
 
                     <div className="flex items-start space-x-3">
                       <Checkbox
