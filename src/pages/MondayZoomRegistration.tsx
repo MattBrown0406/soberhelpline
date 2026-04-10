@@ -1,5 +1,5 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Star, Shield, GraduationCap, MessageCircle, ArrowRight, Crown } from "lucide-react";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Shield, ArrowRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -22,49 +22,6 @@ const registrationSchema = z.object({
   question: z.string().trim().max(1000).optional().default(""),
 });
 
-function MembershipPromoBanner() {
-  return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-green/10 via-primary/5 to-amber-500/10 border-2 border-logo-green/30 p-6 md:p-8 mb-8">
-      <div className="absolute -top-12 -right-12 h-48 w-48 rounded-full bg-logo-green/10 blur-3xl" />
-      <div className="relative z-10">
-        <div className="flex items-center gap-2 mb-3">
-          <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-          <span className="text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Premium Membership</span>
-        </div>
-        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-          Get Even More Support for Your Family
-        </h3>
-        <p className="text-muted-foreground mb-5 max-w-xl">
-          The Monday Zoom is just the beginning. Members get access to our full suite of family recovery tools:
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-          {[
-            { icon: GraduationCap, label: "60+ Education Guides & Worksheets", desc: "Evidence-based family recovery curriculum" },
-            { icon: MessageCircle, label: "Private Family Forum", desc: "Connect with families who understand" },
-            { icon: Video, label: "Recorded Webinars & Workshops", desc: "Learn at your own pace" },
-            { icon: Shield, label: "AI-Powered Recovery Tools", desc: "Boundary builder, enabling coach & more" },
-          ].map(({ icon: Icon, label, desc }) => (
-            <div key={label} className="flex items-start gap-3 bg-background/60 rounded-lg p-3 border border-border/50">
-              <div className="w-8 h-8 rounded-full bg-logo-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Icon className="w-4 h-4 text-logo-green" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">{label}</p>
-                <p className="text-xs text-muted-foreground">{desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Link to="/family-membership">
-          <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white shadow-lg shadow-logo-green/25">
-            Explore Membership — Starting at $14.99/mo
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </Link>
-      </div>
-    </div>
-  );
-}
 
 export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
