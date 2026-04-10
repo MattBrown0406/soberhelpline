@@ -170,7 +170,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: "📍 This Monday — "The Family Squares" at 7 PM PST",
+          subject: '📍 This Monday — "The Family Squares" at 7 PM PST',
           content: [{ type: "text/html", value: html }],
         }),
       });
