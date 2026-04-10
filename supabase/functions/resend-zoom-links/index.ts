@@ -40,14 +40,15 @@ serve(async (req: Request) => {
     if (!meetingId) throw new Error("No meeting ID configured");
 
     const siteUrl = "https://soberhelpline.com";
-    const joinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const baseJoinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
 
     let body: any = {};
     try { body = await req.json(); } catch {}
 
     // If custom recipients provided, use those. Otherwise fall back to meeting_date lookup.
-    let recipients: { name: string; email: string }[] = [];
+    let recipients: { name: string; email: string; id?: string }[] = [];
 
     if (body.recipients && Array.isArray(body.recipients)) {
       recipients = body.recipients;
@@ -64,7 +65,7 @@ serve(async (req: Request) => {
 
       const { data: registrants, error } = await adminSupabase
         .from("zoom_meeting_registrations")
-        .select("name, email")
+        .select("id, name, email")
         .eq("meeting_date", targetDate);
 
       if (error) throw error;
