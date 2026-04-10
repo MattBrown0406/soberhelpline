@@ -272,7 +272,7 @@ export default function MondayZoomRegistration() {
 
         {!isMemberQuestion && (
           <div className="mt-10">
-            <MembershipPromoBanner />
+            <TestimonialCarousel />
           </div>
         )}
 
