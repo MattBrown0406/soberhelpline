@@ -285,7 +285,6 @@ const Index = () => {
                 </Button>
               </a>
             </div>
-            <p className="text-xs text-muted-foreground">2 minutes · Free · No account required</p>
           </div>
         </div>
       </section>
