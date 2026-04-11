@@ -99,6 +99,23 @@ const faqSchema = {
 };
 
 export default function FamilyForumLanding() {
+  const [featuredThread, setFeaturedThread] = useState<{ id: string; title: string; created_at: string; topic_id: string } | null>(null);
+
+  useEffect(() => {
+    const fetchFeaturedThread = async () => {
+      const { data } = await supabase
+        .from('forum_posts')
+        .select('id, title, created_at, topic_id')
+        .eq('topic_id', 'share-story')
+        .eq('is_pinned', true)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      setFeaturedThread(data);
+    };
+    fetchFeaturedThread();
+  }, []);
+
   return (
     <>
       <SEOHead
