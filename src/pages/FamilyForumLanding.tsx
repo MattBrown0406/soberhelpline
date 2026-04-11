@@ -187,6 +187,36 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
+        {/* Post-Meeting Thread Callout */}
+        {featuredThread && (
+          <section className="pt-8 pb-0">
+            <div className="container max-w-6xl mx-auto px-4">
+              <div className="rounded-xl border-2 border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800 p-4 flex items-start gap-3">
+                <div className="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-white text-sm">🟢</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold text-green-700 dark:text-green-400 uppercase tracking-wide mb-0.5">
+                    This Week's Meeting Thread
+                  </p>
+                  <p className="font-semibold text-foreground text-sm leading-snug line-clamp-2">
+                    {featuredThread.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Share your takeaways, questions, or reflections from Monday's session
+                  </p>
+                </div>
+                <Link
+                  to={`/family-forum/${featuredThread.topic_id}?post=${featuredThread.id}`}
+                  className="flex-shrink-0 text-xs font-semibold text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-900/50 hover:bg-green-200 dark:hover:bg-green-900 px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  Join Thread →
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Why Join Section */}
         <section className="py-16 md:py-24">
           <div className="container max-w-6xl mx-auto px-4">
