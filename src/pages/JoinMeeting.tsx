@@ -12,7 +12,6 @@ const JoinMeeting = () => {
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [redirecting, setRedirecting] = useState(false);
 
   const meetingNumber = searchParams.get("mn") || "";
   const password = searchParams.get("pwd") || "";
@@ -27,23 +26,7 @@ const JoinMeeting = () => {
           navigate("/auth");
           return;
         }
-
-        // For unauthenticated guests, auto-redirect to external Zoom link
-        setRedirecting(true);
-        const { data: settings } = await supabase
-          .from("site_settings")
-          .select("key, value")
-          .in("key", ["monday_zoom_link"]);
-
-        const externalZoomLink = settings?.find((setting) => setting.key === "monday_zoom_link")?.value || null;
-        
-        if (externalZoomLink) {
-          window.location.href = externalZoomLink;
-          return;
-        }
-        
-        // Fallback: no link available
-        setRedirecting(false);
+        // No session but role=0 — allow them through as a guest
         setLoading(false);
         return;
       }
@@ -65,13 +48,11 @@ const JoinMeeting = () => {
     checkAccess();
   }, [navigate, role]);
 
-  if (loading || redirecting) {
+  if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-3">
         <Loader2 className="h-8 w-8 text-primary animate-spin" />
-        <p className="text-muted-foreground">
-          {redirecting ? "Redirecting you to the meeting..." : "Loading..."}
-        </p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
@@ -85,38 +66,6 @@ const JoinMeeting = () => {
           Go Back
         </Button>
       </div>
-    );
-  }
-
-  if (!user && role === 0) {
-    return (
-      <>
-        <SEOHead
-          title="Join The Family Squares | Sober Helpline"
-          description="Join tonight's meeting with the direct Zoom link."
-        />
-        <div className="container mx-auto px-4 py-8 max-w-3xl">
-          <Button
-            onClick={() => navigate(-1)}
-            variant="ghost"
-            size="sm"
-            className="gap-2 mb-4"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back
-          </Button>
-
-          <div className="rounded-xl border bg-card p-8 text-center space-y-4">
-            <h1 className="text-2xl font-semibold text-foreground">Join "The Family Squares"</h1>
-            <p className="text-muted-foreground">
-              The direct Zoom link is not available right now. Please use the Zoom link from your registration email to join.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              If you need help, call us at <strong>(541) 241-5886</strong>.
-            </p>
-          </div>
-        </div>
-      </>
     );
   }
 

@@ -41,14 +41,17 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         leaveOnPageUnload: true,
       });
 
-      // Get signature from edge function
+      // Get session (optional for role=0 guests)
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        throw new Error("You must be logged in to join a meeting");
+
+      if (role !== 0 && !session) {
+        throw new Error("You must be logged in to start a meeting as host");
       }
 
+      // Get signature from edge function
       const response = await supabase.functions.invoke("generate-zoom-signature", {
         body: { meetingNumber, role },
+        ...(session ? { headers: { Authorization: `Bearer ${session.access_token}` } } : {}),
       });
 
       if (response.error) {
@@ -86,7 +89,7 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         meetingNumber,
         password,
         userName,
-        userEmail: session.user.email,
+        ...(session?.user?.email ? { userEmail: session.user.email } : {}),
       });
     } catch (err: any) {
       console.error("Zoom meeting error:", err);
