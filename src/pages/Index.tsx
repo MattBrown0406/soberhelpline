@@ -270,9 +270,9 @@ const Index = () => {
             {/* Secondary CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 px-4">
               <Link to="/monday-zoom-registration">
-                <Button size="lg" variant="outline" className="gap-2 px-6 py-4 text-sm md:text-base">
+                <Button size="lg" className="gap-2 px-6 py-4 text-sm md:text-base bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all">
                   <Calendar className="w-4 h-4" />
-                  Join Free Monday Zoom
+                  Register for the Free Monday Zoom
                 </Button>
               </Link>
               <a href="tel:5418386009">
