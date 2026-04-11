@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   Users, Heart, MessageCircle, Shield, CheckCircle2, ChevronRight,
   Phone, Calendar, Lock, Star, MessagesSquare, BookOpen, Sparkles
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
