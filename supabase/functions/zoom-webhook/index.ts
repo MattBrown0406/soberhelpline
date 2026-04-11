@@ -11,6 +11,14 @@
 //      - recording.completed
 //
 // 3. Zoom will send a validation request to your endpoint — the function handles this automatically.
+//
+// POST-MEETING THREAD SETUP:
+// 1. In Supabase Dashboard → Auth → Users, find the admin account UUID
+// 2. In Supabase Dashboard → Edge Functions → zoom-webhook → Secrets, add:
+//    FORUM_BOT_USER_ID = <admin user UUID>
+// 3. The thread auto-creates when meeting.ended fires via the Zoom webhook
+// 4. It pins itself in the "Share Your Story" forum category for 7 days
+// 5. To update the Google Review link, edit the content string in this file
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -114,10 +122,106 @@ serve(async (req) => {
     console.log(`Participant left: ${p.user_name}, duration: ${p.duration}s`);
   }
 
-  // --- Meeting ended ---
+  // --- Meeting ended → create post-meeting forum thread ---
   if (event.event === 'meeting.ended') {
     const meetingId = String(event.payload.object.id);
+    const meetingTopic = event.payload.object.topic ?? 'The Family Squares';
+    const endTime = event.payload.object.end_time ?? new Date().toISOString();
     console.log(`Meeting ended: ${meetingId}`);
+
+    const botUserId = Deno.env.get('FORUM_BOT_USER_ID');
+    if (!botUserId) {
+      console.warn('FORUM_BOT_USER_ID not set — skipping forum thread creation');
+    } else {
+      // Unpin old post-meeting threads (older than 7 days)
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      await supabase
+        .from('forum_posts')
+        .update({ is_pinned: false })
+        .eq('topic_id', 'share-story')
+        .eq('is_pinned', true)
+        .lt('created_at', sevenDaysAgo.toISOString());
+
+      // Format meeting date for display e.g. "Monday, July 14"
+      const meetingDate = new Date(endTime);
+      const formattedDate = meetingDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'America/Los_Angeles',
+      });
+
+      // Check if a thread for this meeting date already exists to avoid duplicates
+      const dateKey = meetingDate.toISOString().split('T')[0];
+      const { data: existing } = await supabase
+        .from('forum_posts')
+        .select('id')
+        .eq('topic_id', 'share-story')
+        .eq('is_pinned', true)
+        .gte('created_at', `${dateKey}T00:00:00.000Z`)
+        .maybeSingle();
+
+      if (existing) {
+        console.log('Post-meeting thread already exists for today — skipping');
+      } else {
+        const title = `🟢 The Family Squares — ${formattedDate} — Share Your Takeaways`;
+
+        const content = `Tonight's meeting just wrapped up. Thank you to everyone who showed up — whether you were on camera, listening quietly, or joined late, your presence matters.
+
+Use this thread to share anything that resonated, a question you're still sitting with, or something you want to hold onto this week.
+
+---
+
+**A few prompts to get you started:**
+
+💡 What's one thing from tonight you want to hold onto this week?
+
+🤔 Was there a moment during the meeting where you thought "that's exactly my situation"?
+
+🛠️ Is there something you heard tonight that you want to try differently with your family?
+
+🙋 Couldn't make it tonight? Drop in anyway — what's on your mind this week?
+
+---
+
+*Posting anonymously is always an option — click the toggle when you reply.*
+
+---
+
+**Enjoyed tonight's meeting?**
+
+Become a member to access every recording, 40+ education guides, worksheets, AI coaching tools, and this private community — starting at $14.99/month.
+
+👉 [Start your free 7-day trial](https://soberhelpline.com/family-membership)
+
+---
+
+**Did tonight help your family?**
+
+A 5-star review takes 30 seconds and helps other families find us when they need it most. ⭐⭐⭐⭐⭐
+
+👉 [Leave a Google Review](https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review)`;
+
+        const { error: postError } = await supabase
+          .from('forum_posts')
+          .insert({
+            title,
+            content,
+            topic_id: 'share-story',
+            user_id: botUserId,
+            is_pinned: true,
+            is_anonymous: false,
+            needs_support: false,
+          });
+
+        if (postError) {
+          console.error('Failed to create post-meeting forum thread:', postError);
+        } else {
+          console.log(`Post-meeting forum thread created for ${formattedDate}`);
+        }
+      }
+    }
   }
 
   // --- Cloud recording completed → auto-insert to zoom_call_recordings ---
