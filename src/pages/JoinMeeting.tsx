@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import ZoomMeeting from "@/components/ZoomMeeting";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Video } from "lucide-react";
 
 const JoinMeeting = () => {
   const [searchParams] = useSearchParams();
@@ -90,11 +90,28 @@ const JoinMeeting = () => {
           Back
         </Button>
 
+        <div className="mb-6 rounded-xl border bg-card p-5">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Video className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-foreground">"The Family Squares"</h1>
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
+                <span>Every Monday at 7:00 PM PST</span>
+                <span>·</span>
+                <span>Free & open to all</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
         <ZoomMeeting
           meetingNumber={meetingNumber}
           password={password}
           userName={userName}
           role={role}
+          isAuthenticated={!!user}
           onMeetingEnd={() => navigate("/testimonials?from=zoom")}
         />
       </div>
