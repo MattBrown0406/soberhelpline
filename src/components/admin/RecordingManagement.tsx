@@ -12,7 +12,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Video, ExternalLink } from "lucide-react";
+import { Plus, Pencil, Trash2, Video, ExternalLink, CheckCircle } from "lucide-react";
 import { format } from "date-fns";
 
 interface Recording {
@@ -73,6 +73,9 @@ export function RecordingManagement() {
   useEffect(() => {
     fetchRecordings();
   }, []);
+
+  const pendingRecordings = recordings.filter(r => !r.is_published);
+  const publishedRecordings = recordings.filter(r => r.is_published);
 
   const openNew = () => {
     setEditingId(null);
@@ -151,7 +154,50 @@ export function RecordingManagement() {
     }
   };
 
+  const publishRecording = async (id: string) => {
+    const { error } = await supabase
+      .from("zoom_call_recordings")
+      .update({ is_published: true, updated_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) {
+      toast.error("Failed to publish recording");
+    } else {
+      toast.success("Recording published — now visible to members");
+      fetchRecordings();
+    }
+  };
+
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading recordings...</div>;
+
+  const renderRecordingRow = (r: Recording, showPublishButton: boolean) => (
+    <TableRow key={r.id}>
+      <TableCell className="font-medium max-w-[200px] truncate">{r.title}</TableCell>
+      <TableCell>{format(new Date(r.recording_date), "MMM d, yyyy")}</TableCell>
+      <TableCell>{r.duration_minutes ? `${r.duration_minutes} min` : "—"}</TableCell>
+      <TableCell>{r.is_published ? "✅" : "❌"}</TableCell>
+      <TableCell>
+        <div className="flex gap-1">
+          {showPublishButton && (
+            <Button variant="default" size="sm" className="gap-1 h-8 text-xs" onClick={() => publishRecording(r.id)}>
+              <CheckCircle className="h-3.5 w-3.5" />
+              Publish
+            </Button>
+          )}
+          <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => openEdit(r)}>
+            <Pencil className="h-3.5 w-3.5" />
+          </Button>
+          <a href={r.youtube_url} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="icon" className="h-8 w-8">
+              <ExternalLink className="h-3.5 w-3.5" />
+            </Button>
+          </a>
+          <Button variant="outline" size="icon" className="h-8 w-8 text-destructive hover:text-destructive" onClick={() => handleDelete(r.id)}>
+            <Trash2 className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
 
   return (
     <div className="space-y-4">
@@ -163,49 +209,59 @@ export function RecordingManagement() {
         </Button>
       </div>
 
-      {recordings.length === 0 ? (
+      {pendingRecordings.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-foreground">Pending Review</h3>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 font-medium">
+              {pendingRecordings.length} pending
+            </span>
+          </div>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Title</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Duration</TableHead>
+                  <TableHead>Published</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pendingRecordings.map((r) => renderRecordingRow(r, true))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      )}
+
+      {publishedRecordings.length === 0 && pendingRecordings.length === 0 ? (
         <div className="text-center py-8 text-muted-foreground">
           <Video className="h-10 w-10 mx-auto mb-2 opacity-50" />
           <p>No recordings yet. Click "Add Recording" to get started.</p>
         </div>
-      ) : (
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Duration</TableHead>
-                <TableHead>Published</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recordings.map((r) => (
-                <TableRow key={r.id}>
-                  <TableCell className="font-medium max-w-[200px] truncate">{r.title}</TableCell>
-                  <TableCell>{format(new Date(r.recording_date), "MMM d, yyyy")}</TableCell>
-                  <TableCell>{r.duration_minutes ? `${r.duration_minutes} min` : "—"}</TableCell>
-                  <TableCell>{r.is_published ? "✅" : "❌"}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-1">
-                      <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => openEdit(r)}>
-                        <Pencil className="h-3.5 w-3.5" />
-                      </Button>
-                      <a href={r.youtube_url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="icon" className="h-8 w-8">
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </Button>
-                      </a>
-                      <Button variant="outline" size="icon" className="h-8 w-8 text-destructive hover:text-destructive" onClick={() => handleDelete(r.id)}>
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </Button>
-                    </div>
-                  </TableCell>
+      ) : publishedRecordings.length > 0 && (
+        <div className="space-y-2">
+          {pendingRecordings.length > 0 && (
+            <h3 className="text-sm font-semibold text-foreground">Published</h3>
+          )}
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Title</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Duration</TableHead>
+                  <TableHead>Published</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {publishedRecordings.map((r) => renderRecordingRow(r, false))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       )}
 
@@ -217,7 +273,7 @@ export function RecordingManagement() {
           <div className="space-y-4">
             <div>
               <Label>Title *</Label>
-              <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. “The Family Squares” — March 9, 2026" />
+              <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder={'e.g. "The Family Squares" — March 9, 2026'} />
             </div>
             <div>
               <Label>YouTube URL *</Label>

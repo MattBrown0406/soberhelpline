@@ -21,6 +21,12 @@ interface Recording {
   created_at: string;
 }
 
+function getRecordingType(url: string): 'youtube' | 'zoom' | 'other' {
+  if (/youtu\.be\/|youtube\.com\//.test(url)) return 'youtube';
+  if (/zoom\.us\/rec\/|zoomgov\.com\/rec\//.test(url)) return 'zoom';
+  return 'other';
+}
+
 function getYouTubeEmbedUrl(url: string): string {
   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/);
   return match ? `https://www.youtube.com/embed/${match[1]}` : url;
@@ -107,7 +113,7 @@ export default function ZoomRecordings() {
       <>
         <SEOHead
           title="Past Meeting Recordings | Sober Helpline"
-          description="Watch past “The Family Squares” Zoom recordings. Members-only access to our archive of family support sessions."
+          description='Watch past "The Family Squares" Zoom recordings. Members-only access to our archive of family support sessions.'
         />
         <div className="min-h-screen bg-background">
           <div className="container mx-auto px-4 py-12 max-w-2xl">
@@ -128,7 +134,7 @@ export default function ZoomRecordings() {
               <CardContent className="space-y-4">
                 <div className="grid gap-3">
                   {[
-                    { icon: Video, text: "Full archive of past “The Family Squares” recordings" },
+                    { icon: Video, text: 'Full archive of past "The Family Squares" recordings' },
                     { icon: BookOpen, text: "50+ educational guides across 6 pillars" },
                     { icon: MessageCircle, text: "Private family support forum" },
                     { icon: Shield, text: "AI-powered coaching tools" },
@@ -168,7 +174,7 @@ export default function ZoomRecordings() {
     <>
       <SEOHead
         title="Past Meeting Recordings | Sober Helpline"
-        description="Watch past “The Family Squares” Zoom recordings."
+        description='Watch past "The Family Squares" Zoom recordings.'
       />
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -183,7 +189,7 @@ export default function ZoomRecordings() {
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-foreground">Past Meeting Recordings</h1>
-                <p className="text-muted-foreground text-sm">Catch up on “The Family Squares” sessions you missed</p>
+                <p className="text-muted-foreground text-sm">Catch up on &ldquo;The Family Squares&rdquo; sessions you missed</p>
               </div>
             </div>
           </div>
@@ -193,15 +199,37 @@ export default function ZoomRecordings() {
               <Button variant="ghost" size="sm" onClick={() => setSelectedRecording(null)} className="gap-2">
                 <ArrowLeft className="w-4 h-4" /> Back to all recordings
               </Button>
-              <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                <iframe
-                  src={getYouTubeEmbedUrl(selectedRecording.youtube_url)}
-                  title={selectedRecording.title}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
+
+              {getRecordingType(selectedRecording.youtube_url) === 'youtube' ? (
+                <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                  <iframe
+                    src={getYouTubeEmbedUrl(selectedRecording.youtube_url)}
+                    title={selectedRecording.title}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-4 border-2 border-primary/20">
+                  <Video className="w-16 h-16 text-primary/40" />
+                  <div className="text-center space-y-2">
+                    <p className="font-semibold text-foreground">Watch this recording</p>
+                    <p className="text-sm text-muted-foreground">Opens in a new tab</p>
+                  </div>
+                  <a
+                    href={selectedRecording.youtube_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="gap-2">
+                      <Play className="w-4 h-4" />
+                      Watch Recording
+                    </Button>
+                  </a>
+                </div>
+              )}
+
               <div>
                 <h2 className="text-xl font-bold text-foreground">{selectedRecording.title}</h2>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mt-1">
@@ -227,7 +255,7 @@ export default function ZoomRecordings() {
                 <Video className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Recordings Yet</h3>
                 <p className="text-muted-foreground">
-                  Recordings from our “The Family Squares” sessions will appear here soon.
+                  Recordings from our "The Family Squares" sessions will appear here soon.
                   Join us live every Monday at 7 PM PST!
                 </p>
                 <Link to="/monday-zoom-registration" className="mt-4 inline-block">
@@ -241,7 +269,10 @@ export default function ZoomRecordings() {
           ) : (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {recordings.map((recording) => {
-                const thumbnail = recording.thumbnail_url || getYouTubeThumbnail(recording.youtube_url);
+                const thumbnail = recording.thumbnail_url ||
+                  (getRecordingType(recording.youtube_url) === 'youtube'
+                    ? getYouTubeThumbnail(recording.youtube_url)
+                    : null);
                 return (
                   <Card
                     key={recording.id}
@@ -252,8 +283,11 @@ export default function ZoomRecordings() {
                       {thumbnail ? (
                         <img src={thumbnail} alt={recording.title} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-primary/5">
-                          <Video className="w-12 h-12 text-primary/30" />
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-primary/5 gap-2">
+                          <Video className="w-10 h-10 text-primary/30" />
+                          <span className="text-sm font-semibold text-primary/50">
+                            {format(new Date(recording.recording_date), 'MMM d, yyyy')}
+                          </span>
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
