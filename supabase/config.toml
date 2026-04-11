@@ -79,3 +79,6 @@ verify_jwt = false
 
 [functions.auto-register-zoom]
 verify_jwt = false
+
+[functions.zoom-webhook]
+verify_jwt = false

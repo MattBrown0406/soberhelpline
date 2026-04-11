@@ -64,9 +64,9 @@ async function createZoomMeeting(accessToken: string, meeting: ZoomMeetingReques
         participant_video: true,
         join_before_host: false,
         mute_upon_entry: false,
-        waiting_room: true,
-        audio: 'both',
-        auto_recording: 'none',
+          waiting_room: false,
+          audio: 'both',
+          auto_recording: 'cloud',
       },
     }),
   });

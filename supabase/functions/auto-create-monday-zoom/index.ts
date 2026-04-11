@@ -104,9 +104,9 @@ serve(async (req) => {
           participant_video: true,
           join_before_host: false,
           mute_upon_entry: false,
-          waiting_room: true,
+          waiting_room: false,
           audio: 'both',
-          auto_recording: 'none',
+          auto_recording: 'cloud',
         },
       }),
     });
