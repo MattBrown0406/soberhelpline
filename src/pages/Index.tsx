@@ -260,9 +260,12 @@ const Index = () => {
             {/* Primary CTA — Family Situation Assessment */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3 px-4">
               <Link to="/family-situation-assessment">
-                <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                  Take the Free Family Assessment
+                <Button size="lg" className="gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-8 md:px-10 py-5 md:py-6 text-base md:text-lg shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all flex flex-col items-center h-auto">
+                  <span className="flex items-center gap-2 md:gap-3">
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    Take the Free Family Assessment
+                  </span>
+                  <span className="text-xs md:text-sm font-normal opacity-90 mt-1">2 minutes · Free · No account required</span>
                 </Button>
               </Link>
             </div>
