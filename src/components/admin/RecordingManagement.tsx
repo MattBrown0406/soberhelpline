@@ -222,6 +222,9 @@ export function RecordingManagement() {
             <div>
               <Label>YouTube URL *</Label>
               <Input value={form.youtube_url} onChange={(e) => setForm({ ...form, youtube_url: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
+              <p className="text-xs text-muted-foreground mt-1">
+                Auto-captured recordings from Zoom will have a Zoom share URL here. Replace it with a YouTube URL once you've uploaded the recording to YouTube, then toggle Published to make it visible to members.
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>

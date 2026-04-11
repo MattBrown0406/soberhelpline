@@ -15,6 +15,7 @@ interface ZoomMeetingProps {
 const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeetingEnd }: ZoomMeetingProps) => {
   const [status, setStatus] = useState<"idle" | "loading" | "joined" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [participantCount, setParticipantCount] = useState(0);
   const meetingRef = useRef<HTMLDivElement>(null);
   const clientRef = useRef<any>(null);
 
@@ -63,6 +64,18 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         }
       });
 
+      client.on('user-added', (payload: any) => {
+        setParticipantCount(prev => prev + (Array.isArray(payload) ? payload.length : 1));
+      });
+
+      client.on('user-removed', (payload: any) => {
+        setParticipantCount(prev => Math.max(0, prev - (Array.isArray(payload) ? payload.length : 1)));
+      });
+
+      client.on('recording-change', (payload: any) => {
+        console.log('Recording state changed:', payload.state);
+      });
+
       // Set joined before calling join so the container is visible
       setStatus("joined");
 
@@ -73,6 +86,7 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
         meetingNumber,
         password,
         userName,
+        userEmail: session.user.email,
       });
     } catch (err: any) {
       console.error("Zoom meeting error:", err);
@@ -144,12 +158,17 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, onMeeti
       )}
 
       {status === "joined" && (
-        <div className="relative w-full">
+        <div className="relative w-full flex items-center justify-end gap-2">
+          {participantCount > 0 && (
+            <span className="text-xs px-2.5 py-1 rounded-full bg-foreground/10 text-foreground font-medium">
+              {participantCount} in meeting
+            </span>
+          )}
           <Button
             onClick={leaveMeeting}
             variant="destructive"
             size="sm"
-            className="absolute top-2 right-2 z-10 gap-1"
+            className="gap-1"
           >
             <X className="h-3 w-3" />
             Leave
