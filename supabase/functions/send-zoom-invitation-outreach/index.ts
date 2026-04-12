@@ -13,9 +13,14 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-async function sendEmail(to: string, subject: string, htmlContent: string) {
+async function sendEmail(to: string, subject: string, htmlContent: string, ccEmail?: string) {
   const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
   if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const personalization: any = { to: [{ email: to }] };
+  if (ccEmail) {
+    personalization.cc = [{ email: ccEmail }];
+  }
 
   const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
@@ -24,7 +29,7 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
+      personalizations: [personalization],
       from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
       subject,
       content: [{ type: "text/html", value: htmlContent }],
@@ -104,9 +109,9 @@ function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string)
 function buildNonMemberHtml(safeName: string, registerUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-      <h1 style="color: #166534; font-size: 24px;">You're Invited: “The Family Squares”</h1>
+      <h1 style="color: #166534; font-size: 24px;">You're Invited: "The Family Squares"</h1>
       <p>Hi ${safeName},</p>
-      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>“The Family Squares”</strong>.</p>
+      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>"The Family Squares"</strong>.</p>
       <p>Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
@@ -123,7 +128,13 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
 
       <p>The meeting is <strong>free and open to everyone</strong>. You can join directly from your browser — no Zoom app needed.</p>
 
-      <p>I look forward to seeing you there.</p>
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
+        <p style="margin: 0; color: #1e40af; font-size: 14px;">
+          <strong>📨 Know someone who could benefit?</strong> Feel free to forward this email to a spouse, sibling, parent, or adult child. The more of your family that shows up, the more you'll all get out of it.
+        </p>
+      </div>
+
+      <p>We hope to see you there — it's always good to have you in the room.</p>
       <p style="margin-top: 8px;">— Matt</p>
 
       <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
@@ -135,20 +146,24 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
     </div>
   `;
 }
-
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    let body: any = {};
+    try { body = await req.json(); } catch {}
+    const excludeMembers = body.excludeMembers === true;
+    const ccEmail = body.ccEmail || null;
+
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
     const nextMonday = getNextMonday();
-    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}`);
+    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}. excludeMembers=${excludeMembers}, ccEmail=${ccEmail}`);
 
     const siteUrl = "https://soberhelpline.com";
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
@@ -190,11 +205,11 @@ serve(async (req: Request) => {
     const memberEmailSet = new Set<string>();
     const recipientMap = new Map<string, { name: string; isMember: boolean }>();
 
-    // Add members
+    // Add members (only if not excluding them)
     for (const mp of (memberPrivate || [])) {
       const email = mp.email.toLowerCase();
       memberEmailSet.add(email);
-      if (!alreadyRegisteredEmails.has(email)) {
+      if (!excludeMembers && !alreadyRegisteredEmails.has(email)) {
         const name = memberNameMap.get(mp.user_id) || "Friend";
         recipientMap.set(email, { name, isMember: true });
       }
@@ -215,14 +230,16 @@ serve(async (req: Request) => {
       }
     }
 
-    // Add past registrants (don't overwrite members)
+    // Add past registrants (skip members if excluding)
     for (const [email, name] of pastRegistrantMap) {
       if (!alreadyRegisteredEmails.has(email) && !recipientMap.has(email)) {
-        recipientMap.set(email, { name, isMember: memberEmailSet.has(email) });
+        const isMember = memberEmailSet.has(email);
+        if (excludeMembers && isMember) continue;
+        recipientMap.set(email, { name, isMember });
       }
     }
 
-    console.log(`Total recipients (excluding already registered): ${recipientMap.size}`);
+    console.log(`Total recipients (excluding already registered${excludeMembers ? ' and members' : ''}): ${recipientMap.size}`);
 
     if (recipientMap.size === 0) {
       return new Response(JSON.stringify({ message: "No recipients to email", sent: 0 }), {
@@ -245,10 +262,10 @@ serve(async (req: Request) => {
         : buildNonMemberHtml(safeName, registerUrl);
 
       const subject = isMember
-        ? "🔔 Reminder: “The Family Squares” — Just Log In to Join"
-        : "📅 You're Invited: “The Family Squares” — Register Now";
+        ? "🔔 Reminder: \u201CThe Family Squares\u201D — Just Log In to Join"
+        : "📅 You're Invited: \u201CThe Family Squares\u201D — Register Now";
 
-      const success = await sendEmail(email, subject, html);
+      const success = await sendEmail(email, subject, html, ccEmail || undefined);
 
       if (success) {
         sent++;
