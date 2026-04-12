@@ -109,9 +109,9 @@ function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string)
 function buildNonMemberHtml(safeName: string, registerUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-      <h1 style="color: #166534; font-size: 24px;">You're Invited: “The Family Squares”</h1>
+      <h1 style="color: #166534; font-size: 24px;">You're Invited: "The Family Squares"</h1>
       <p>Hi ${safeName},</p>
-      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>“The Family Squares”</strong>.</p>
+      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>"The Family Squares"</strong>.</p>
       <p>Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
@@ -128,7 +128,13 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
 
       <p>The meeting is <strong>free and open to everyone</strong>. You can join directly from your browser — no Zoom app needed.</p>
 
-      <p>I look forward to seeing you there.</p>
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
+        <p style="margin: 0; color: #1e40af; font-size: 14px;">
+          <strong>📨 Know someone who could benefit?</strong> Feel free to forward this email to a spouse, sibling, parent, or adult child. The more of your family that shows up, the more you'll all get out of it.
+        </p>
+      </div>
+
+      <p>We hope to see you there — it's always good to have you in the room.</p>
       <p style="margin-top: 8px;">— Matt</p>
 
       <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
@@ -140,7 +146,6 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
     </div>
   `;
 }
-
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
