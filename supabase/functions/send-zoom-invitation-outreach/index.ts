@@ -13,9 +13,14 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-async function sendEmail(to: string, subject: string, htmlContent: string) {
+async function sendEmail(to: string, subject: string, htmlContent: string, ccEmail?: string) {
   const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
   if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
+
+  const personalization: any = { to: [{ email: to }] };
+  if (ccEmail) {
+    personalization.cc = [{ email: ccEmail }];
+  }
 
   const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
@@ -24,7 +29,7 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
+      personalizations: [personalization],
       from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
       subject,
       content: [{ type: "text/html", value: htmlContent }],
