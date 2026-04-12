@@ -152,13 +152,18 @@ serve(async (req: Request) => {
   }
 
   try {
+    let body: any = {};
+    try { body = await req.json(); } catch {}
+    const excludeMembers = body.excludeMembers === true;
+    const ccEmail = body.ccEmail || null;
+
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
     const nextMonday = getNextMonday();
-    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}`);
+    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}. excludeMembers=${excludeMembers}, ccEmail=${ccEmail}`);
 
     const siteUrl = "https://soberhelpline.com";
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
@@ -200,11 +205,11 @@ serve(async (req: Request) => {
     const memberEmailSet = new Set<string>();
     const recipientMap = new Map<string, { name: string; isMember: boolean }>();
 
-    // Add members
+    // Add members (only if not excluding them)
     for (const mp of (memberPrivate || [])) {
       const email = mp.email.toLowerCase();
       memberEmailSet.add(email);
-      if (!alreadyRegisteredEmails.has(email)) {
+      if (!excludeMembers && !alreadyRegisteredEmails.has(email)) {
         const name = memberNameMap.get(mp.user_id) || "Friend";
         recipientMap.set(email, { name, isMember: true });
       }
@@ -225,14 +230,16 @@ serve(async (req: Request) => {
       }
     }
 
-    // Add past registrants (don't overwrite members)
+    // Add past registrants (skip members if excluding)
     for (const [email, name] of pastRegistrantMap) {
       if (!alreadyRegisteredEmails.has(email) && !recipientMap.has(email)) {
-        recipientMap.set(email, { name, isMember: memberEmailSet.has(email) });
+        const isMember = memberEmailSet.has(email);
+        if (excludeMembers && isMember) continue;
+        recipientMap.set(email, { name, isMember });
       }
     }
 
-    console.log(`Total recipients (excluding already registered): ${recipientMap.size}`);
+    console.log(`Total recipients (excluding already registered${excludeMembers ? ' and members' : ''}): ${recipientMap.size}`);
 
     if (recipientMap.size === 0) {
       return new Response(JSON.stringify({ message: "No recipients to email", sent: 0 }), {
@@ -255,10 +262,10 @@ serve(async (req: Request) => {
         : buildNonMemberHtml(safeName, registerUrl);
 
       const subject = isMember
-        ? "🔔 Reminder: “The Family Squares” — Just Log In to Join"
-        : "📅 You're Invited: “The Family Squares” — Register Now";
+        ? "🔔 Reminder: \u201CThe Family Squares\u201D — Just Log In to Join"
+        : "📅 You're Invited: \u201CThe Family Squares\u201D — Register Now";
 
-      const success = await sendEmail(email, subject, html);
+      const success = await sendEmail(email, subject, html, ccEmail || undefined);
 
       if (success) {
         sent++;
