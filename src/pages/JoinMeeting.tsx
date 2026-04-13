@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import ZoomMeeting from "@/components/ZoomMeeting";
@@ -13,20 +13,21 @@ const JoinMeeting = () => {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const meetingNumber = searchParams.get("mn") || "";
-  const password = searchParams.get("pwd") || "";
+  const meetingNumber = (searchParams.get("mn") || "").replace(/\D/g, "");
+  const password = (searchParams.get("pwd") || "").trim();
   const role = Number(searchParams.get("role") || "0");
+  const requiresAuth = role === 1;
 
   useEffect(() => {
-    const checkAccess = async () => {
+    const loadSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
-        if (role !== 0) {
-          navigate("/auth");
+        if (requiresAuth) {
+          navigate(`/auth?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
           return;
         }
-        // No session but role=0 — allow them through as a guest
+
         setLoading(false);
         return;
       }
@@ -42,11 +43,20 @@ const JoinMeeting = () => {
       if (profileData) {
         setProfile(profileData);
       }
+
       setLoading(false);
     };
 
-    checkAccess();
-  }, [navigate, role]);
+    void loadSession();
+  }, [navigate, requiresAuth]);
+
+  const userName = useMemo(() => {
+    const profileName = profile
+      ? `${profile.first_name || ""} ${profile.last_name || ""}`.trim()
+      : "";
+
+    return profileName || user?.email || "Guest";
+  }, [profile, user?.email]);
 
   if (loading) {
     return (
@@ -69,10 +79,6 @@ const JoinMeeting = () => {
     );
   }
 
-  const userName = profile
-    ? `${profile.first_name} ${profile.last_name}`.trim()
-    : user?.email || "Guest";
-
   return (
     <>
       <SEOHead
@@ -80,12 +86,7 @@ const JoinMeeting = () => {
         description="Join your video session directly in your browser."
       />
       <div className="container mx-auto px-4 py-8 max-w-5xl">
-        <Button
-          onClick={() => navigate(-1)}
-          variant="ghost"
-          size="sm"
-          className="gap-2 mb-4"
-        >
+        <Button onClick={() => navigate(-1)} variant="ghost" size="sm" className="gap-2 mb-4">
           <ArrowLeft className="h-4 w-4" />
           Back
         </Button>
@@ -96,11 +97,11 @@ const JoinMeeting = () => {
               <Video className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-foreground">"The Family Squares"</h1>
+              <h1 className="text-lg font-semibold text-foreground">The Family Squares</h1>
               <p className="text-sm text-muted-foreground flex items-center gap-2">
                 <span>Every Monday at 7:00 PM PST</span>
                 <span>·</span>
-                <span>Free & open to all</span>
+                <span>Free and open to all</span>
               </p>
             </div>
           </div>
@@ -112,6 +113,7 @@ const JoinMeeting = () => {
           userName={userName}
           role={role}
           isAuthenticated={!!user}
+          requireAuth={requiresAuth}
           onMeetingEnd={() => navigate("/testimonials?from=zoom")}
         />
       </div>

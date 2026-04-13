@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Shield, ArrowRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,16 +22,15 @@ const registrationSchema = z.object({
   question: z.string().trim().max(1000).optional().default(""),
 });
 
-
 export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
+  const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
   const [searchParams] = useSearchParams();
   const isMemberQuestion = searchParams.get("member") === "true";
-  const navigate = useNavigate();
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -57,7 +56,6 @@ export default function MondayZoomRegistration() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Pre-fill from user profile for members
   useEffect(() => {
     if (user?.email) {
       setFormData((prev) => ({ ...prev, email: user.email || "" }));
@@ -78,29 +76,31 @@ export default function MondayZoomRegistration() {
     }
   }, [user, isMemberQuestion]);
 
-  // Fetch Monday meeting info when submitted
   useEffect(() => {
-    if (!submitted) return;
     const fetchMeetingInfo = async () => {
-      const { data: meetingIdSetting } = await supabase
+      const { data, error } = await supabase
         .from("site_settings")
-        .select("value")
-        .eq("key", "monday_zoom_meeting_id")
-        .maybeSingle();
-      const { data: passcodeSetting } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key", "monday_zoom_passcode")
-        .maybeSingle();
-      if (meetingIdSetting?.value) {
-        setMeetingInfo({
-          meetingId: meetingIdSetting.value,
-          passcode: passcodeSetting?.value || "",
-        });
+        .select("key, value")
+        .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode"]);
+
+      if (error) {
+        console.error("Failed to fetch Monday meeting info:", error);
+        setIsMeetingInfoLoaded(true);
+        return;
       }
+
+      const meetingId = data?.find((setting) => setting.key === "monday_zoom_meeting_id")?.value;
+      const passcode = data?.find((setting) => setting.key === "monday_zoom_passcode")?.value || "";
+
+      if (meetingId) {
+        setMeetingInfo({ meetingId, passcode });
+      }
+
+      setIsMeetingInfoLoaded(true);
     };
-    fetchMeetingInfo();
-  }, [submitted]);
+
+    void fetchMeetingInfo();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,73 +118,61 @@ export default function MondayZoomRegistration() {
 
     setIsSubmitting(true);
 
-    // Calculate next Monday date
     const now = new Date();
     const day = now.getDay();
     const daysUntilMonday = day <= 1 ? 1 - day : 8 - day;
     const nextMonday = new Date(now);
     nextMonday.setDate(now.getDate() + daysUntilMonday);
     const yyyy = nextMonday.getFullYear();
-    const mm = String(nextMonday.getMonth() + 1).padStart(2, '0');
-    const dd = String(nextMonday.getDate()).padStart(2, '0');
+    const mm = String(nextMonday.getMonth() + 1).padStart(2, "0");
+    const dd = String(nextMonday.getDate()).padStart(2, "0");
     const meetingDate = `${yyyy}-${mm}-${dd}`;
 
     try {
-      // Save registration (user_id is optional now)
-      const { data: insertedReg, error } = await supabase.from("zoom_meeting_registrations").insert({
-        user_id: user?.id || null,
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        question: formData.question.trim(),
-        request_follow_up: formData.requestFollowUp,
-        consent_email_list: formData.consentEmailList,
-        meeting_date: meetingDate,
-        auto_register: formData.autoRegister,
-        preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
-        preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
-        preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
-      }).select("id").single();
+      const { data: insertedReg, error } = await supabase
+        .from("zoom_meeting_registrations")
+        .insert({
+          user_id: user?.id || null,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          question: formData.question.trim(),
+          request_follow_up: formData.requestFollowUp,
+          consent_email_list: formData.consentEmailList,
+          meeting_date: meetingDate,
+          auto_register: formData.autoRegister,
+          preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
+          preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
+          preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+        })
+        .select("id")
+        .single();
 
       if (error) throw error;
 
-      // Send confirmation email
-      try {
-        await supabase.functions.invoke("send-zoom-registration-email", {
-          body: {
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            registration_id: insertedReg?.id || null,
-          },
-        });
-      } catch (emailErr) {
-        console.error("Email sending failed (registration still saved):", emailErr);
-      }
-
-      // Add to Mailchimp if consent given
-      if (formData.consentEmailList) {
-        try {
-          const nameParts = formData.name.trim().split(" ");
-          const firstName = nameParts[0] || "";
-          const lastName = nameParts.slice(1).join(" ") || "";
-          await supabase.functions.invoke("add-to-mailchimp", {
-            body: { email: formData.email.trim(), firstName, lastName },
-          });
-        } catch (mcErr) {
-          console.error("Mailchimp add failed (registration still saved):", mcErr);
-        }
-      }
-
       setSubmitted(true);
+
+      void supabase.functions.invoke("send-zoom-registration-email", {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          registration_id: insertedReg?.id || null,
+          consentEmailList: formData.consentEmailList,
+        },
+      }).catch((emailErr) => {
+        console.error("Email sending failed (registration still saved):", emailErr);
+      });
+
       toast({
         title: "Registration Submitted!",
         description: "You're registered! Check your email for the Zoom meeting link.",
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Registration error:", err);
+      const description = err instanceof Error ? err.message : "Something went wrong. Please try again.";
       toast({
         title: "Registration Failed",
-        description: "Something went wrong. Please try again.",
+        description,
         variant: "destructive",
       });
     } finally {
@@ -202,7 +190,7 @@ export default function MondayZoomRegistration() {
         <p className="text-muted-foreground text-lg mb-8">
           {isMemberQuestion
             ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
-            : "Thank you for registering for the “The Family Squares” Zoom meeting. When it's time, join directly from this page — no need to leave the site."}
+            : "Thank you for registering for the “The Family Squares” Zoom meeting. When it's time, join directly from this page, no need to leave the site."}
         </p>
 
         {meetingInfo ? (
@@ -217,15 +205,20 @@ export default function MondayZoomRegistration() {
               The meeting is every Monday at 7:00 PM PST. You can join up to 30 minutes early.
             </p>
           </div>
-        ) : (
+        ) : isMeetingInfoLoaded ? (
           <p className="text-sm text-muted-foreground">
             You'll receive the meeting details via email before the meeting.
           </p>
+        ) : (
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Loading meeting details...
+          </div>
         )}
 
         <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-left">
           <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting — a spouse, sibling, parent, or adult child — forward the confirmation email you just received. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
+            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting, a spouse, sibling, parent, or adult child, forward the confirmation email you just received. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
           </p>
         </div>
 
@@ -265,7 +258,6 @@ export default function MondayZoomRegistration() {
             </div>
 
             {isMemberQuestion ? (
-              /* Simplified Member Question Header */
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 p-8 md:p-10 mb-8">
                 <div className="text-center">
                   <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-primary/15 mb-4">
@@ -281,7 +273,6 @@ export default function MondayZoomRegistration() {
               </div>
             ) : (
               <>
-                {/* Hero Banner */}
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
@@ -313,12 +304,10 @@ export default function MondayZoomRegistration() {
                   </div>
                 </div>
 
-                {/* Testimonial Carousel */}
                 <TestimonialCarousel />
               </>
             )}
 
-            {/* Registration / Question Form */}
             <Card className="border-2 shadow-lg">
               <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
                 <CardTitle className="text-xl text-foreground flex items-center gap-2">
@@ -332,41 +321,19 @@ export default function MondayZoomRegistration() {
                     <>
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          required
-                          placeholder="Your full name"
-                          value={formData.name}
-                          onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                          className={errors.name ? "border-destructive" : ""}
-                        />
+                        <Input id="name" required placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} className={errors.name ? "border-destructive" : ""} />
                         {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          required
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                          className={errors.email ? "border-destructive" : ""}
-                        />
+                        <Input id="email" type="email" required placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} className={errors.email ? "border-destructive" : ""} />
                         {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          value={formData.phone}
-                          onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-                          className={errors.phone ? "border-destructive" : ""}
-                        />
+                        <Input id="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} className={errors.phone ? "border-destructive" : ""} />
                         {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                       </div>
                     </>
@@ -374,104 +341,63 @@ export default function MondayZoomRegistration() {
 
                   <div className="space-y-2">
                     <Label htmlFor="question">What is one thing you would like to get out of the meeting this week? (Optional)</Label>
-                    <Textarea
-                      id="question"
-                      placeholder="Share what you're hoping to learn or discuss..."
-                      rows={4}
-                      value={formData.question}
-                      onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))}
-                      className={errors.question ? "border-destructive" : ""}
-                    />
+                    <Textarea id="question" placeholder="Share what you're hoping to learn or discuss..." rows={4} value={formData.question} onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))} className={errors.question ? "border-destructive" : ""} />
                     {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
                   </div>
 
                   {!isMemberQuestion && (
                     <div className="space-y-4 pt-2">
-                     <div className="flex items-start space-x-3">
-                       <Checkbox
-                         id="autoRegister"
-                         checked={formData.autoRegister}
-                         onCheckedChange={(checked) =>
-                           setFormData((p) => ({ ...p, autoRegister: checked === true }))
-                         }
-                       />
-                       <Label htmlFor="autoRegister" className="text-sm leading-snug cursor-pointer">
-                         Automatically register me for future meetings and send me the new link each week.
-                       </Label>
-                     </div>
+                      <div className="flex items-start space-x-3">
+                        <Checkbox id="autoRegister" checked={formData.autoRegister} onCheckedChange={(checked) => setFormData((p) => ({ ...p, autoRegister: checked === true }))} />
+                        <Label htmlFor="autoRegister" className="text-sm leading-snug cursor-pointer">
+                          Automatically register me for future meetings and send me the new link each week.
+                        </Label>
+                      </div>
 
-                     <div className="flex items-start space-x-3">
-                       <Checkbox
-                         id="followUp"
-                         checked={formData.requestFollowUp}
-                         onCheckedChange={(checked) =>
-                           setFormData((p) => ({ ...p, requestFollowUp: checked === true }))
-                         }
-                       />
-                       <Label htmlFor="followUp" className="text-sm leading-snug cursor-pointer">
-                         I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
-                       </Label>
-                     </div>
+                      <div className="flex items-start space-x-3">
+                        <Checkbox id="followUp" checked={formData.requestFollowUp} onCheckedChange={(checked) => setFormData((p) => ({ ...p, requestFollowUp: checked === true }))} />
+                        <Label htmlFor="followUp" className="text-sm leading-snug cursor-pointer">
+                          I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
+                        </Label>
+                      </div>
 
-                     {formData.requestFollowUp && (
-                       <div className="ml-6 space-y-4 p-4 rounded-lg border border-border bg-muted/30">
-                         <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
-                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                           <div className="space-y-2">
-                             <Label htmlFor="contactDate">Preferred Date</Label>
-                             <Input
-                               id="contactDate"
-                               type="date"
-                               min={new Date().toISOString().split("T")[0]}
-                               value={formData.preferredContactDate}
-                               onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))}
-                             />
-                           </div>
-                           <div className="space-y-2">
-                             <Label htmlFor="contactTime">Preferred Time</Label>
-                             <Input
-                               id="contactTime"
-                               type="time"
-                               value={formData.preferredContactTime}
-                               onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))}
-                             />
-                           </div>
-                         </div>
-                         <div className="space-y-2">
-                           <Label htmlFor="timezone">Your Timezone</Label>
-                           <select
-                             id="timezone"
-                             value={formData.preferredTimezone}
-                             onChange={(e) => setFormData((p) => ({ ...p, preferredTimezone: e.target.value }))}
-                             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                           >
-                             <option value="America/New_York">Eastern (ET)</option>
-                             <option value="America/Chicago">Central (CT)</option>
-                             <option value="America/Denver">Mountain (MT)</option>
-                             <option value="America/Los_Angeles">Pacific (PT)</option>
-                             <option value="America/Anchorage">Alaska (AKT)</option>
-                             <option value="Pacific/Honolulu">Hawaii (HT)</option>
-                             <option value="America/Phoenix">Arizona (MST - no DST)</option>
-                             <option value="America/Halifax">Atlantic (AT)</option>
-                             <option value="America/St_Johns">Newfoundland (NT)</option>
-                           </select>
-                         </div>
-                       </div>
-                     )}
+                      {formData.requestFollowUp && (
+                        <div className="ml-6 space-y-4 p-4 rounded-lg border border-border bg-muted/30">
+                          <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="contactDate">Preferred Date</Label>
+                              <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="contactTime">Preferred Time</Label>
+                              <Input id="contactTime" type="time" value={formData.preferredContactTime} onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))} />
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="timezone">Your Timezone</Label>
+                            <select id="timezone" value={formData.preferredTimezone} onChange={(e) => setFormData((p) => ({ ...p, preferredTimezone: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                              <option value="America/New_York">Eastern (ET)</option>
+                              <option value="America/Chicago">Central (CT)</option>
+                              <option value="America/Denver">Mountain (MT)</option>
+                              <option value="America/Los_Angeles">Pacific (PT)</option>
+                              <option value="America/Anchorage">Alaska (AKT)</option>
+                              <option value="Pacific/Honolulu">Hawaii (HT)</option>
+                              <option value="America/Phoenix">Arizona (MST - no DST)</option>
+                              <option value="America/Halifax">Atlantic (AT)</option>
+                              <option value="America/St_Johns">Newfoundland (NT)</option>
+                            </select>
+                          </div>
+                        </div>
+                      )}
 
-                     <div className="flex items-start space-x-3">
-                       <Checkbox
-                         id="emailConsent"
-                         checked={formData.consentEmailList}
-                         onCheckedChange={(checked) =>
-                           setFormData((p) => ({ ...p, consentEmailList: checked === true }))
-                         }
-                       />
-                       <Label htmlFor="emailConsent" className="text-sm leading-snug cursor-pointer">
-                         I consent to being added to the email list for updates on special events, resources, or services.
-                       </Label>
-                     </div>
-                   </div>
+                      <div className="flex items-start space-x-3">
+                        <Checkbox id="emailConsent" checked={formData.consentEmailList} onCheckedChange={(checked) => setFormData((p) => ({ ...p, consentEmailList: checked === true }))} />
+                        <Label htmlFor="emailConsent" className="text-sm leading-snug cursor-pointer">
+                          I consent to being added to the email list for updates on special events, resources, or services.
+                        </Label>
+                      </div>
+                    </div>
                   )}
 
                   <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>

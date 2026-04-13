@@ -11,10 +11,19 @@ interface ZoomMeetingProps {
   userName: string;
   role?: number; // 0 = participant, 1 = host
   isAuthenticated?: boolean;
+  requireAuth?: boolean;
   onMeetingEnd?: () => void;
 }
 
-const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthenticated = false, onMeetingEnd }: ZoomMeetingProps) => {
+const ZoomMeeting = ({
+  meetingNumber,
+  password = "",
+  userName,
+  role = 0,
+  isAuthenticated = false,
+  requireAuth = false,
+  onMeetingEnd,
+}: ZoomMeetingProps) => {
   const [status, setStatus] = useState<"idle" | "loading" | "joined" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [participantCount, setParticipantCount] = useState(0);
@@ -22,22 +31,24 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
   const meetingRef = useRef<HTMLDivElement>(null);
   const clientRef = useRef<any>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sanitizedPassword = password.trim();
+  const fallbackJoinUrl = `https://zoom.us/wc/join/${encodeURIComponent(meetingNumber)}${sanitizedPassword ? `?pwd=${encodeURIComponent(sanitizedPassword)}` : ""}`;
 
   const joinMeeting = async () => {
     setStatus("loading");
     setErrorMessage("");
 
     try {
-      // Set up a 45-second timeout
       timeoutRef.current = setTimeout(() => {
         if (clientRef.current) {
-          try { clientRef.current.leaveMeeting(); } catch {}
+          try {
+            clientRef.current.leaveMeeting();
+          } catch {}
         }
         setErrorMessage("Connection is taking too long. Please check your internet connection and try again.");
         setStatus("error");
       }, 45000);
 
-      // Dynamically import the Zoom SDK
       const ZoomMtgEmbedded = (await import("@zoom/meetingsdk/embedded")).default;
       const client = ZoomMtgEmbedded.createClient();
       clientRef.current = client;
@@ -46,7 +57,6 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
         throw new Error("Meeting container not ready. Please try again.");
       }
 
-      // Initialize the SDK
       await client.init({
         zoomAppRoot: meetingRef.current,
         language: "en-US",
@@ -54,14 +64,11 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
         leaveOnPageUnload: true,
       });
 
-      // Get session (optional for role=0 guests)
       const { data: { session } } = await supabase.auth.getSession();
-
-      if (role !== 0 && !session) {
-        throw new Error("You must be logged in to start a meeting as host");
+      if (requireAuth && !session) {
+        throw new Error("You must be logged in to join this meeting");
       }
 
-      // Get signature from edge function
       const response = await supabase.functions.invoke("generate-zoom-signature", {
         body: { meetingNumber, role },
         ...(session ? { headers: { Authorization: `Bearer ${session.access_token}` } } : {}),
@@ -73,40 +80,36 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
 
       const { signature, sdkKey } = response.data;
 
-      // Listen for meeting end (host ends for all, or connection drops)
       client.on("connection-change", (payload: { state: string }) => {
         if (payload.state === "Closed") {
           onMeetingEnd?.();
         }
       });
 
-      client.on('user-added', (payload: any) => {
-        setParticipantCount(prev => prev + (Array.isArray(payload) ? payload.length : 1));
+      client.on("user-added", (payload: any) => {
+        setParticipantCount((prev) => prev + (Array.isArray(payload) ? payload.length : 1));
       });
 
-      client.on('user-removed', (payload: any) => {
-        setParticipantCount(prev => Math.max(0, prev - (Array.isArray(payload) ? payload.length : 1)));
+      client.on("user-removed", (payload: any) => {
+        setParticipantCount((prev) => Math.max(0, prev - (Array.isArray(payload) ? payload.length : 1)));
       });
 
-      client.on('recording-change', (payload: any) => {
-        console.log('Recording state changed:', payload.state);
+      client.on("recording-change", (payload: any) => {
+        console.log("Recording state changed:", payload.state);
       });
 
-      // Determine the name to use
-      const finalUserName = (!isAuthenticated && guestName.trim().length >= 2)
+      const finalUserName = !isAuthenticated && guestName.trim().length >= 2
         ? guestName.trim()
-        : userName;
+        : (userName.trim() || "Guest");
 
-      // Clear timeout and mark joined
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setStatus("joined");
 
-      // Join the meeting
       await client.join({
         signature,
         sdkKey,
         meetingNumber,
-        password,
+        password: sanitizedPassword,
         userName: finalUserName,
         ...(session?.user?.email ? { userEmail: session.user.email } : {}),
       });
@@ -114,19 +117,23 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
       console.error("Zoom meeting error:", err);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-      const msg = (err.message || err.reason || String(err)).toLowerCase();
-
+      const rawMessage = err?.message || err?.reason || String(err);
+      const lower = rawMessage.toLowerCase();
       const notStarted =
-        msg.includes("not start") ||
-        msg.includes("not exist") ||
-        msg.includes("meeting not") ||
-        msg.includes("3001") ||
-        msg.includes("invalid meeting");
+        lower.includes("not start") ||
+        lower.includes("not exist") ||
+        lower.includes("meeting not") ||
+        lower.includes("3001") ||
+        lower.includes("invalid meeting");
+      const needsPasscodeHelp = /passcode|password/i.test(rawMessage);
 
-      const notStartedMessage =
-        "The meeting hasn't started yet. Please wait a few minutes and try again — the host will open the room shortly.";
-
-      setErrorMessage(notStarted ? notStartedMessage : (err.message || "Failed to join meeting. Please try refreshing the page."));
+      setErrorMessage(
+        notStarted
+          ? "The meeting hasn't started yet. Please wait a few minutes and try again, the host will open the room shortly."
+          : needsPasscodeHelp
+            ? "We couldn't launch the embedded meeting cleanly. Use the fallback join button below if Zoom asks for a passcode."
+            : rawMessage || "Failed to join meeting. Please try refreshing the page."
+      );
       setStatus("error");
     }
   };
@@ -156,9 +163,11 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
     };
   }, []);
 
+  const showGuestPrompt = !isAuthenticated && role === 0;
+  const isNotStartedState = errorMessage.includes("hasn't started yet");
+
   return (
     <div className="flex flex-col items-center gap-4">
-
       {status === "idle" && (
         <div className="flex flex-col items-center gap-4 p-8 bg-muted/30 rounded-xl border w-full">
           <Video className="h-12 w-12 text-primary" />
@@ -167,13 +176,14 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
             Click below to join the video session directly in your browser. No downloads required.
           </p>
 
-          {!isAuthenticated && (
+          {showGuestPrompt && (
             <div className="w-full max-w-xs space-y-1">
               <Input
                 placeholder="Your first name"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
                 className="text-center"
+                maxLength={100}
               />
               <p className="text-xs text-muted-foreground text-center">No account needed</p>
             </div>
@@ -183,7 +193,7 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
             onClick={joinMeeting}
             size="lg"
             className="gap-2"
-            disabled={!isAuthenticated && guestName.trim().length < 2}
+            disabled={showGuestPrompt && guestName.trim().length < 2}
           >
             <Video className="h-4 w-4" />
             Join Meeting
@@ -200,20 +210,26 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
 
       {status === "error" && (
         <div className={`flex flex-col items-center gap-4 p-8 rounded-xl border w-full ${
-          errorMessage.includes("hasn't started")
+          isNotStartedState
             ? "bg-amber-500/5 border-amber-500/20"
             : "bg-destructive/5 border-destructive/20"
         }`}>
-          {errorMessage.includes("hasn't started") && (
-            <Clock className="h-10 w-10 text-amber-500" />
-          )}
-          <p className={errorMessage.includes("hasn't started") ? "text-amber-700 font-medium text-center" : "text-destructive font-medium text-center"}>
+          {isNotStartedState && <Clock className="h-10 w-10 text-amber-500" />}
+          <p className={`${isNotStartedState ? "text-amber-700" : "text-destructive"} font-medium text-center`}>
             {errorMessage}
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             <Button onClick={joinMeeting} variant="outline">Try Again</Button>
+            <Button asChild>
+              <a href={fallbackJoinUrl} target="_blank" rel="noreferrer">Open Zoom Fallback</a>
+            </Button>
             <Button onClick={() => setStatus("idle")} variant="ghost">Cancel</Button>
           </div>
+          {sanitizedPassword && !isNotStartedState && (
+            <p className="text-xs text-muted-foreground text-center max-w-md">
+              If Zoom still prompts for a passcode, the fallback link above includes it automatically.
+            </p>
+          )}
         </div>
       )}
 
@@ -224,19 +240,13 @@ const ZoomMeeting = ({ meetingNumber, password = "", userName, role = 0, isAuthe
               {participantCount} in meeting
             </span>
           )}
-          <Button
-            onClick={leaveMeeting}
-            variant="destructive"
-            size="sm"
-            className="gap-1"
-          >
+          <Button onClick={leaveMeeting} variant="destructive" size="sm" className="gap-1">
             <X className="h-3 w-3" />
             Leave
           </Button>
         </div>
       )}
 
-      {/* Always mounted so the Zoom SDK can attach to it */}
       <div
         ref={meetingRef}
         className={`w-full min-h-[400px] md:min-h-[600px] lg:min-h-[680px] rounded-xl overflow-hidden border-2 border-primary/30 bg-black ${status !== "joined" ? "hidden" : ""}`}
