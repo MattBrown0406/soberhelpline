@@ -29,7 +29,7 @@ const faqs: FAQ[] = [
         • Giving up activities they once enjoyed{"\n"}
         • Failed attempts to cut back or stop
         {"\n\n"}
-        If substance use is causing problems in their life and they continue anyway, it's likely more than just "partying." The DSM-5 criteria suggest that meeting 2 or more of 11 specific criteria over a 12-month period indicates a substance use disorder. Our <Link to="/addiction-assessment" className="text-primary hover:underline font-medium">Addiction Assessment</Link> tool can help you identify these warning signs.
+        If substance use keeps creating problems and they keep returning to it anyway, this is likely more than stress or a rough phase. You do not need a perfect label to take the situation seriously. Our <Link to="/addiction-assessment" className="text-primary hover:underline font-medium">Addiction Assessment</Link> can help you look at the pattern more clearly.
       </>
     )
   },
@@ -37,16 +37,14 @@ const faqs: FAQ[] = [
     question: "What is the first step I should take if I'm worried about their drinking or drug use?",
     answer: (
       <>
-        The first step is to educate yourself about addiction and gather support for yourself. Consider:
+        The first step is to get honest about what you are seeing and stop trying to manage it alone. Consider:
         {"\n\n"}
-        • Learning about addiction as a disease, not a moral failing{"\n"}
-        • Documenting specific incidents and patterns you've observed{"\n"}
-        • Reaching out to a professional interventionist or addiction counselor for guidance{"\n"}
-        • Connecting with support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> for families{"\n"}
-        • Planning a calm, private conversation when they're sober
-        • Planning a calm, private conversation when they're sober
+        • Paying attention to specific incidents and recurring patterns{"\n"}
+        • Talking with an interventionist, therapist, or experienced guide{"\n"}
+        • Connecting with support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a>{"\n"}
+        • Planning a calm, private conversation when they are sober
         {"\n\n"}
-        Avoid confronting them when they're intoxicated or in a public setting. Having professional guidance before your first conversation can make a significant difference in the outcome.
+        You do not need to have every answer before you begin. You just need a clearer view of the problem and support around you.
       </>
     )
   },
@@ -63,7 +61,7 @@ const faqs: FAQ[] = [
 • Have treatment options ready to present
 • Set a clear boundary about what happens if they refuse
 
-Remember, you cannot force someone into recovery, but you can create conditions that make choosing recovery easier than continuing to use.`
+You cannot control their choice, but you can change the environment around that choice. A calm, prepared conversation usually does more than panic, pleading, or pressure.`
   },
   {
     question: "What is an intervention, and how does it actually work?",
@@ -79,7 +77,7 @@ Remember, you cannot force someone into recovery, but you can create conditions 
 
 Who attends: Close family members, friends, and sometimes employers who are directly affected. The interventionist helps determine who should participate.
 
-Professional interventionists bring experience, objectivity, and proven techniques like ARISE, Johnson Model, or Invitational approaches. They help manage emotions and increase the likelihood of acceptance.`
+A good interventionist brings structure, steadiness, and objectivity. They help the family stay clear, keep emotions from taking over, and improve the odds that help is accepted.`
   },
   {
     question: "What are my options for treatment, and how do I choose the right program?",
@@ -121,7 +119,7 @@ A professional can help assess the appropriate level of care based on your loved
         • Maintaining your own boundaries and well-being{"\n"}
         • Expressing love while refusing to participate in their addiction
         {"\n\n"}
-        Stopping enabling is NOT abandoning them. It's allowing reality to become their teacher. This is incredibly difficult, and working with a therapist or attending family support groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> can help you navigate this transition.
+        Stopping enabling is not abandonment. It is stepping out of the way of reality and refusing to keep the cycle comfortable. That shift is hard, and support from a therapist or groups like <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> can make it more manageable.
       </>
     )
   },
@@ -139,12 +137,12 @@ A professional can help assess the appropriate level of care based on your loved
 **Keys to Following Through:**
 • Write down your boundaries so you remember them in emotional moments
 • Communicate them clearly when your loved one is sober
-• Expect pushback—they will test your limits
-• Have a support system to help you stay strong
-• Understand that boundaries are an act of love, not punishment
-• Seek therapy or support groups to process your own feelings
+• Expect pushback, especially if the old pattern has been in place for a long time
+• Have support around you so you are not trying to hold boundaries alone
+• Understand that boundaries are meant to create clarity, not punishment
+• Seek therapy or support groups to help you stay steady
 
-Remember: A boundary without a consequence is just a suggestion. Be prepared to follow through, even when it's heartbreaking.`
+Remember: A boundary without follow-through will not protect anyone. Decide what you can actually hold, then hold it.`
   },
   {
     question: "What do I do if my addicted loved one doesn't have insurance?",
@@ -210,7 +208,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
     question: "What can I do for myself while my loved one is using or in treatment?",
     answer: (
       <>
-        You deserve support regardless of what your loved one chooses. Prioritizing your own well-being is not selfish—it's essential.
+        You deserve support no matter what your loved one chooses. Taking care of yourself is not selfish. It is part of staying grounded enough to respond wisely.
         {"\n\n"}
         **Self-Care Actions:**{"\n"}
         • Attend <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Al-Anon</a> or <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Nar-Anon</a> family support groups{"\n"}
@@ -226,7 +224,7 @@ Remember: A boundary without a consequence is just a suggestion. Be prepared to 
         • You cannot cure their addiction{"\n"}
         • You CAN focus on your own recovery and growth
         {"\n\n"}
-        Many families find that their own healing journey transforms their relationships and creates conditions more conducive to their loved one's recovery.
+        Many families find that when they get healthier, clearer, and more consistent, the whole situation begins to change, even before their loved one is fully ready.
       </>
     )
   },
@@ -329,7 +327,7 @@ export default function FAQs() {
             Frequently Asked Questions
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Answers to common questions families have about addiction, intervention, treatment, and supporting a loved one in recovery.
+            Straight answers for families trying to understand addiction, treatment, boundaries, and what real help looks like.
           </p>
         </div>
 
@@ -353,25 +351,31 @@ export default function FAQs() {
         {/* Call to Action */}
         <div className="mt-12 bg-primary/10 rounded-lg p-6 md:p-8 text-center">
           <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3">
-            Need More Help?
+            Need More Support?
           </h2>
           <p className="text-muted-foreground mb-4">
-            Our team is here to guide you through the process of finding the right help for your loved one.
+            Start with the Monday family Zoom if you want calm, practical guidance. If you need something more personal after that, we can help you look at next options.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="tel:541-241-5668"
+            <Link
+              to="/monday-zoom-registration"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              <Phone className="h-5 w-5" />
-              Call (541) 241-5668
-            </a>
+              Join the Monday Zoom
+            </Link>
             <Link
               to="/addiction-assessment"
               className="inline-flex items-center justify-center gap-2 bg-card border border-border text-foreground px-6 py-3 rounded-lg hover:bg-accent transition-colors"
             >
               Take the Addiction Assessment
             </Link>
+            <a 
+              href="tel:541-241-5668"
+              className="inline-flex items-center justify-center gap-2 bg-card border border-border text-foreground px-6 py-3 rounded-lg hover:bg-accent transition-colors"
+            >
+              <Phone className="h-5 w-5" />
+              Call (541) 241-5668
+            </a>
           </div>
         </div>
       </main>

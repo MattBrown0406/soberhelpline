@@ -6,30 +6,30 @@ import SEOHead from "@/components/SEOHead";
 import providerHeadshot from "@/assets/provider-headshot.jpg";
 
 const stages = [
-  { emoji: "🔴", name: "Suspicion", desc: "Something is off but I'm not sure", active: true, path: "/roadmap/suspicion" },
-  { emoji: "🟠", name: "Confirmation", desc: "I know they're using, I don't know what to do", active: true, path: "/roadmap/assessment" },
-  { emoji: "🟡", name: "Crisis", desc: "Things are falling apart right now", active: true, path: "/roadmap/crisis" },
-  { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to do something but need help", active: true, path: "/roadmap/pre-intervention" },
-  { emoji: "🟣", name: "Treatment", desc: "They're in treatment, now what?", active: true, path: "/roadmap/treatment" },
-  { emoji: "🟢", name: "Early Recovery", desc: "They're home — how do we do this?", active: true, path: "/roadmap/early-recovery" },
-  { emoji: "⚪", name: "Long-Term Recovery", desc: "It's been 6+ months, how do we rebuild?", active: true, path: "/roadmap/long-term-recovery" },
-  { emoji: "🔴", name: "Relapse", desc: "It happened again", active: true, path: "/roadmap/relapse" },
+  { emoji: "🔴", name: "Suspicion", desc: "Something feels off, but you do not have clarity yet", active: true, path: "/roadmap/suspicion" },
+  { emoji: "🟠", name: "Confirmation", desc: "You know there is a problem, and you need a next step", active: true, path: "/roadmap/assessment" },
+  { emoji: "🟡", name: "Crisis", desc: "Things feel unstable and you need clear direction now", active: true, path: "/roadmap/crisis" },
+  { emoji: "🔵", name: "Pre-Intervention", desc: "You are ready to act, but you want to do it wisely", active: true, path: "/roadmap/pre-intervention" },
+  { emoji: "🟣", name: "Treatment", desc: "They are in treatment, and the family still needs a plan", active: true, path: "/roadmap/treatment" },
+  { emoji: "🟢", name: "Early Recovery", desc: "They are home, and everyone is learning what support should look like now", active: true, path: "/roadmap/early-recovery" },
+  { emoji: "⚪", name: "Long-Term Recovery", desc: "Recovery is underway, and it is time to rebuild with steadiness", active: true, path: "/roadmap/long-term-recovery" },
+  { emoji: "🔴", name: "Relapse", desc: "Use has returned, and you need a grounded response", active: true, path: "/roadmap/relapse" },
 ];
 
 const steps = [
-  { icon: ClipboardCheck, title: "Tell Us Where You Are", desc: "Take a 5-minute assessment" },
-  { icon: Map, title: "Get Your Roadmap", desc: "Personalized action plan for your stage" },
-  { icon: Footprints, title: "Take the Next Step", desc: "Guided actions, check-ins, and support" },
+  { icon: ClipboardCheck, title: "Tell Us What Is Happening", desc: "Start with a short assessment" },
+  { icon: Map, title: "See Your Roadmap", desc: "Get guidance that fits the stage you are in" },
+  { icon: Footprints, title: "Take One Clear Next Step", desc: "Move forward with practical support, not guesswork" },
 ];
 
 const RoadmapLanding = () => {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Recovery Roadmap — 8-Stage Family Guide | Sober Helpline"
-        description="Find your stage in the family recovery journey. From first suspicion to long-term recovery — personalized guidance, resources, and support at every step."
-        howToName="Recovery Roadmap — 8-Stage Family Recovery Guide"
-        howToDescription="Navigate your family's recovery journey through 8 stages, from first suspicion to long-term recovery."
+        title="Recovery Roadmap, A Family Guide for What Comes Next | Sober Helpline"
+        description="Find the stage your family is in and get clear, steady guidance for what to do next, from first suspicion to relapse and long-term recovery."
+        howToName="Recovery Roadmap, An 8-Stage Family Guide"
+        howToDescription="Understand where your family is in the recovery process and what the next wise step looks like."
         howToSteps={[
           { name: "Suspicion", text: "You sense something is wrong but aren't sure. Learn the signs and what to look for." },
           { name: "Confirmation", text: "You know there's a problem. Learn what to do next — and what NOT to do." },
@@ -50,14 +50,14 @@ const RoadmapLanding = () => {
             Recovery Roadmap
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-            You Don't Have to Figure This Out Alone
+            Clear Guidance for Families in the Middle of Addiction
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            The Recovery Roadmap guides you through every stage of your family's journey — with real steps, not just advice.
+            If things feel confusing, urgent, or exhausting, this roadmap helps you see where you are and what to do next, one step at a time.
           </p>
           <Link to="/roadmap/assessment">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-7 text-lg rounded-xl shadow-lg shadow-primary/20">
-              Find Where You Are
+Find Your Starting Point
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
@@ -95,9 +95,9 @@ const RoadmapLanding = () => {
       {/* Stage Overview */}
       <section className="py-16 md:py-20 bg-muted/30">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl font-bold text-center text-foreground mb-4">Your Recovery Journey</h2>
+          <h2 className="text-3xl font-bold text-center text-foreground mb-4">The Stages Families Move Through</h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Every family's path is different, but the stages are predictable. Find where you are.
+            Every story has its own details, but there are patterns. When you can name the stage, it becomes easier to make a calmer decision.
           </p>
           <div className="space-y-3">
             {stages.map((stage, i) => (
@@ -144,7 +144,7 @@ const RoadmapLanding = () => {
               />
               <div>
                 <p className="text-lg text-foreground leading-relaxed mb-3">
-                  "Built on 20+ years of intervention experience and thousands of families helped."
+                  "Families do better when they stop guessing and start responding with clarity. That is what this roadmap is built to support."
                 </p>
                 <p className="text-sm font-semibold text-foreground">Matt Brown</p>
                 <p className="text-sm text-muted-foreground">Founder, Sober Helpline</p>
@@ -154,7 +154,7 @@ const RoadmapLanding = () => {
           <div className="text-center mt-10">
             <Link to="/roadmap/assessment">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-xl">
-                Start Your Assessment
+Start the Assessment
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
