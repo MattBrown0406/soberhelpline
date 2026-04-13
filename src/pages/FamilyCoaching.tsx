@@ -22,7 +22,7 @@ export default function FamilyCoaching() {
     <>
       <SEOHead
         title="Family Addiction Coaching — 1-on-1 Support | Sober Helpline"
-        description="Work directly with an experienced addiction professional. Family coaching helps you set boundaries, reduce enabling, and navigate recovery with confidence."
+        description="Work directly with an experienced addiction professional. Family coaching helps you set clearer boundaries, reduce enabling, and make steadier decisions under stress."
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
@@ -89,9 +89,9 @@ export default function FamilyCoaching() {
               <CardContent className="p-5 md:p-6">
                 <div className="flex flex-col gap-4 text-center md:text-left">
                   <div>
-                    <p className="text-sm font-semibold text-primary mb-1">How to use support without overcomplicating it</p>
+                    <p className="text-sm font-semibold text-primary mb-1">The simplest path usually works best</p>
                     <h2 className="text-xl font-bold text-logo-green">Start with the Monday Zoom, then membership, then private coaching</h2>
-                    <p className="text-sm text-muted-foreground mt-2">Coaching is here when you need one-on-one help, but it is not the first public step.</p>
+                    <p className="text-sm text-muted-foreground mt-2">Private coaching is here when you need one-on-one help, but for most families it makes sense after the free Zoom and membership.</p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link to="/monday-zoom-registration"><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
@@ -137,7 +137,7 @@ export default function FamilyCoaching() {
                     <h1 className="text-3xl md:text-4xl font-bold text-amber-700 dark:text-amber-400">
                       Family Coaching
                     </h1>
-                    <p className="text-muted-foreground">Personalized guidance for your parallel recovery journey</p>
+                    <p className="text-muted-foreground">Calm, direct guidance for families living with addiction</p>
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 mt-6 max-w-3xl mx-auto">
@@ -147,13 +147,13 @@ export default function FamilyCoaching() {
                   <span className="text-xl font-bold text-primary">— $150</span> <span className="text-sm font-medium text-muted-foreground">($125 for members)</span>
                 </div>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-3 italic">
-                  You're scared, exhausted, and out of ideas. Your loved one is using again, and every conversation seems to make things worse, not better. The Emergency Game Plan™ session gives your family immediate, steady guidance so you don't have to figure this out alone.
+                  If things are unraveling and your family needs clear direction fast, this is where private coaching can help.
                 </p>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                  In one focused 60‑minute call, we'll clarify what's really happening, identify the biggest risks right now, and map out a concrete 7–14‑day plan. You'll leave knowing what to say (and what not to say), which options make sense for treatment or next steps, and how to set boundaries you can actually keep.
+                  In one focused 60-minute call, we sort out what is happening, look at the biggest immediate risks, and build a practical plan for the next 7 to 14 days. You leave with clearer language, better boundaries, and a steadier sense of what to do next.
                 </p>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4 font-medium">
-                  This is for families who can't wait weeks for help and need clear direction in the next 24 hours.
+                  This is for families who need calm, experienced guidance now, not a long wait and not more guessing.
                 </p>
                 <div className="mt-4">
                   <Link to="/book-consultation?plan=emergency">
@@ -173,27 +173,16 @@ export default function FamilyCoaching() {
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6">
                       <p className="text-xl font-semibold text-amber-700 dark:text-amber-400 mt-3">
-                        A 4-Week Structured Reset for Families in Crisis
+                        A 4-week reset for families in active chaos
                       </p>
                       <p className="text-muted-foreground mt-3">
-                        When addiction escalates, families often shift into survival mode.
-                      </p>
-                      <p className="text-muted-foreground mt-2">
-                        Arguments increase.<br />
-                        Sleep decreases.<br />
-                        Financial decisions become reactive.<br />
-                        Threats are made but not enforced.<br />
-                        Everyone feels exhausted.
+                        When addiction escalates, families usually end up in survival mode. Sleep gets worse. Arguments get sharper. Money decisions get reactive. Everyone feels stretched thin.
                       </p>
                       <p className="text-muted-foreground mt-3">
-                        The Family Stabilization Intensive™ is a focused 4-week coaching program designed for families experiencing active chaos, instability, or emotional overwhelm.
-                      </p>
-                      <p className="text-muted-foreground mt-2 font-medium">
-                        This is not long-term coaching.<br />
-                        This is not venting support.
+                        The Family Stabilization Plan™ is a focused 4-week coaching program for families who need structure, alignment, and a calmer way to respond.
                       </p>
                       <p className="text-muted-foreground mt-2 font-semibold italic">
-                        This is immediate structure.
+                        This is short-term, practical support meant to settle the chaos and help your family regain its footing.
                       </p>
 
                       <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">Who This Program Is For</h3>
@@ -208,15 +197,15 @@ export default function FamilyCoaching() {
                         <li>You feel like you are constantly "putting out fires"</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 italic">
-                        If your household feels unstable, this is your starting point.
+                        If your household feels unstable, this is often the right place to start.
                       </p>
 
                       <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">The Goal of Stabilization</h3>
                       <p className="text-muted-foreground mt-2">
-                        The goal is not to fix your loved one.
+                        The goal is not to control your loved one.
                       </p>
                       <p className="text-muted-foreground mt-2 font-semibold">
-                        The goal is to stabilize the family system.
+                        The goal is to stabilize your family and stop the chaos from running the house.
                       </p>
                       <p className="text-muted-foreground mt-2">Over four structured weeks, we focus on:</p>
                       <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
@@ -251,7 +240,7 @@ export default function FamilyCoaching() {
                         </div>
                       </div>
                       <p className="text-muted-foreground mt-4 font-medium">
-                        This is focused, practical, and action-oriented.
+                        The work is focused, practical, and grounded in what your family can actually follow through on.
                       </p>
 
                       <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">What You Leave With</h3>
@@ -265,7 +254,7 @@ export default function FamilyCoaching() {
                         <li>A measurable reduction in chaos</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-medium">
-                        Even if your loved one does not change immediately, your household will.
+                        Even if your loved one does not change right away, your home can still become calmer and clearer.
                       </p>
 
                       <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">What This Program Is Not</h3>
@@ -275,7 +264,7 @@ export default function FamilyCoaching() {
                         <li>It does not guarantee sobriety.</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-semibold">
-                        It restores structure and clarity to a destabilized system.
+                        It helps your family get structure and clarity back.
                       </p>
 
                       <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mt-6">After Stabilization</h3>
@@ -286,7 +275,7 @@ export default function FamilyCoaching() {
                         <li>Or continue independently with the structure built during the intensive</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-medium italic">
-                        Stabilization is the first step toward sustainable recovery — for the entire family.
+                        Stabilization comes first. From there, longer-term recovery work has something solid to stand on.
                       </p>
 
                       <div className="mt-6">
@@ -308,27 +297,27 @@ export default function FamilyCoaching() {
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-6">
                       <p className="text-xl font-semibold text-emerald-700 dark:text-emerald-400 mt-3">
-                        A 12-Week Structured Coaching Path for Families of Addicted Loved Ones
+                        A 12-week coaching path for families who want real change at home
                       </p>
                       <p className="text-muted-foreground mt-3">
                         When someone you love struggles with addiction, your life changes too.
                       </p>
                       <p className="text-muted-foreground mt-3">
-                        Most families focus entirely on getting their loved one sober. But what often gets overlooked is this:
+                        Most families put all of their focus on getting their loved one sober. What gets missed is that addiction changes the whole family.
                       </p>
                       <p className="text-muted-foreground mt-2 font-semibold italic">
-                        Addiction destabilizes the entire system — not just the individual.
+                        If the family never changes its patterns, everyone stays stuck.
                       </p>
                       <p className="text-muted-foreground mt-3">
-                        The Parallel Recovery Program™ is a structured 12-week coaching experience designed specifically for families. This is not therapy. It is not crisis consulting. And it is not advice-by-the-hour.
+                        The Parallel Recovery Program™ is a structured 12-week coaching experience for families who want more than a single session, but do not need endless open-ended support.
                       </p>
                       <p className="text-muted-foreground mt-2 font-medium">
-                        It is a step-by-step framework that helps families move from chaos and reactivity to clarity, consistency, and confidence.
+                        It gives you a step-by-step way to move from chaos and reactivity toward clarity, consistency, and follow-through.
                       </p>
 
                       <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">Why "Parallel Recovery"?</h3>
                       <p className="text-muted-foreground mt-2">
-                        Because families must recover alongside their loved one.
+                        Because families have their own recovery work to do alongside their loved one.
                       </p>
                       <p className="text-muted-foreground mt-2">While your loved one works on sobriety, you work on:</p>
                       <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
@@ -340,7 +329,7 @@ export default function FamilyCoaching() {
                         <li>Rebuilding trust gradually and safely</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-medium italic">
-                        Recovery is not one person's journey. It is systemic.
+                        Recovery is not just about one person. The whole family needs a different way to live.
                       </p>
 
                       <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">What You Can Expect</h3>
@@ -389,7 +378,7 @@ export default function FamilyCoaching() {
                         <li>Relapse response planning</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-medium">
-                        This is not open-ended support. It is structured transformation.
+                        This is structured support with a clear beginning, a clear focus, and a clear path forward.
                       </p>
 
                       <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">What Changes by Week 12</h3>
@@ -403,7 +392,7 @@ export default function FamilyCoaching() {
                         <li>Greater confidence responding to relapse or resistance</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-medium">
-                        Most importantly, they no longer feel controlled by addiction — even if their loved one is still struggling.
+                        Most importantly, addiction no longer dictates every decision in the home, even if their loved one is still struggling.
                       </p>
 
                       <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">This Program Does Not</h3>
@@ -413,23 +402,23 @@ export default function FamilyCoaching() {
                         <li>Guarantee sobriety</li>
                       </ul>
                       <p className="text-muted-foreground mt-3 font-semibold">
-                        It strengthens the one factor you can control:
+                        It strengthens the part you actually can influence:
                       </p>
                       <p className="text-emerald-700 dark:text-emerald-400 font-bold text-lg mt-1">
-                        The health and stability of your family system.
+                        the health and stability of your family.
                       </p>
 
                       <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mt-6">The Result</h3>
                       <p className="text-muted-foreground mt-2 font-semibold italic">
-                        When families stabilize, addiction loses leverage.
+                        When families get steadier, addiction loses some of its grip.
                       </p>
                       <p className="text-muted-foreground mt-2">
-                        You move from reacting to managing.<br />
+                        You move from reacting to responding.<br />
                         From rescuing to supporting.<br />
-                        From panic to structure.
+                        From panic to a plan.
                       </p>
                       <p className="text-muted-foreground mt-3 font-medium">
-                        Recovery becomes sustainable — for everyone.
+                        That gives everyone a better chance at something sustainable.
                       </p>
 
                       <p className="text-muted-foreground mt-6 font-semibold">
@@ -451,7 +440,7 @@ export default function FamilyCoaching() {
               {/* Disclaimer */}
               <div className="mt-6 p-4 bg-amber-50/50 dark:bg-amber-950/10 border border-amber-200/50 dark:border-amber-800/30 rounded-lg">
                 <p className="text-sm text-muted-foreground italic text-center">
-                  We always encourage starting with hourly sessions and will never try to upsell anyone on a package. While we believe our multi-session plans offer additional value to the families we work with, we want every family to select the tier of service that fits their needs.
+                  We usually recommend starting with an hourly session. We will not push your family into a package you do not need. If a longer plan makes sense, we will say so plainly. If it does not, we will say that too.
                 </p>
               </div>
             </div>
@@ -467,7 +456,7 @@ export default function FamilyCoaching() {
                     <div>
                       <p className="text-lg font-semibold text-violet-700 dark:text-violet-400">Family Readiness Assessment™</p>
                       <p className="text-sm text-muted-foreground font-normal">
-                        Not sure where to start? This quick assessment can help you determine what level of coaching may be right for your family.
+                        Not sure what level of support makes sense? This quick assessment can help point you in the right direction.
                       </p>
                     </div>
                   </div>
@@ -488,7 +477,7 @@ export default function FamilyCoaching() {
                   <div>
                     <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150 <span className="text-sm font-medium text-muted-foreground">($125 for members)</span></CardTitle>
                     <CardDescription>
-                      Schedule a one-on-one session with one of our family recovery coaches for personalized support.
+                      Book a one-on-one session for calm, direct support around boundaries, next steps, and family decisions.
                     </CardDescription>
                   </div>
                 </div>
@@ -512,7 +501,7 @@ export default function FamilyCoaching() {
                   </div>
                   <div>
                     <CardTitle className="text-lg text-orange-700 dark:text-orange-400">Coaching Phase Guide</CardTitle>
-                    <CardDescription>Understanding which coaching tier fits your family's current situation.</CardDescription>
+                    <CardDescription>A simple guide to which level of coaching may fit your family's current situation.</CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -566,7 +555,7 @@ export default function FamilyCoaching() {
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-6">
                   <p className="text-muted-foreground text-sm mb-6">
-                    Complete this confidential assessment so your coach can understand where your family is in the recovery journey. Estimated time: 12–15 minutes.
+                    Complete this confidential assessment so your coach can understand what your family is dealing with right now. Estimated time: 12–15 minutes.
                   </p>
                   <CoachingIntakeAssessment />
                 </AccordionContent>

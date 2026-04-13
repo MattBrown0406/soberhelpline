@@ -364,7 +364,7 @@ export default function FamilyMembership() {
     <>
       <SEOHead
         title="Family Support Membership | Sober Helpline"
-        description="Join Sober Helpline membership for family education, practical tools, community support, and a calmer plan when addiction has your home upside down."
+        description="Join Sober Helpline membership for family education, practical tools, community support, and steadier support when addiction has your family stretched thin."
       />
 
       <div className="min-h-screen bg-background">
@@ -385,10 +385,10 @@ export default function FamilyMembership() {
                 Family Support Membership
               </h1>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                Get practical education, steady support, and tools that help your family make clearer decisions under stress.
+                Membership gives your family a steadier place to learn, ask better questions, and make calmer decisions when things feel heavy.
               </p>
               <p className="text-sm text-muted-foreground max-w-xl mx-auto mt-3">
-                Start with the free Monday Zoom if you want a no-cost first step. Membership is the next layer of support, and coaching comes after that when private help is needed.
+                If you want the simplest first step, start with the free Monday Zoom. Membership is the next layer of support. Private coaching is there later when you want one-on-one help.
               </p>
             </div>
 
@@ -397,7 +397,7 @@ export default function FamilyMembership() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Member Information</CardTitle>
-                    <CardDescription>A few details to set up your account and protect your privacy in the forum</CardDescription>
+                    <CardDescription>A few details to set up your account and help protect your privacy in the forum.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Username Field */}
@@ -417,7 +417,7 @@ export default function FamilyMembership() {
                             <div className="flex items-start gap-2 mt-2">
                               <Info className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
                               <p className="text-xs text-muted-foreground">
-                                Your username shows in the forum instead of your real name, so you can participate without putting all of your personal information out front.
+                                Your username appears in the forum instead of your real name, so you can take part without putting your personal information on display.
                               </p>
                             </div>
                             <FormMessage />
@@ -481,7 +481,7 @@ export default function FamilyMembership() {
                           htmlFor="webinar-reminders" 
                           className="text-sm font-normal cursor-pointer"
                         >
-                          Send me reminders for upcoming webinars and special education sessions
+                          Send me reminders about upcoming webinars and special education sessions
                         </Label>
                         <p className="text-xs text-muted-foreground">
                           You can unsubscribe at any time from your account settings.
@@ -604,7 +604,7 @@ export default function FamilyMembership() {
                 <Card className="border-primary">
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">Complete Your Membership</CardTitle>
+                      <CardTitle className="text-lg">Choose Your Membership</CardTitle>
                     </div>
                     
                     {/* Billing Cycle Toggle */}
@@ -656,7 +656,7 @@ export default function FamilyMembership() {
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
                             <span className="text-sm text-green-700 font-medium block">
-                              No payment required to start • Cancel anytime • Full access continues at $14.99/month after trial
+                              No payment required to start. Cancel anytime. Full access continues at $14.99/month after the trial.
                             </span>
                           </div>
                         </div>
@@ -704,7 +704,7 @@ export default function FamilyMembership() {
                       <div className="w-full p-4 bg-muted rounded-lg text-center space-y-3">
                         <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
                         <p className="text-sm font-medium text-foreground">
-                          Redirecting you to PayPal...
+                          Taking you to PayPal...
                         </p>
                         <p className="text-xs text-muted-foreground">
                           If you're not redirected automatically, <a href={paypalUrl} className="underline text-primary">click here</a>.
@@ -729,7 +729,7 @@ export default function FamilyMembership() {
                       </Button>
                     )}
                     <p className="text-sm text-muted-foreground text-center">
-                      Secure payment through PayPal. Cancel anytime.
+                      Secure checkout through PayPal. Cancel anytime.
                     </p>
                   </CardContent>
                 </Card>

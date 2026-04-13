@@ -123,7 +123,7 @@ const Index = () => {
       <LeadMagnetPopup />
       <SEOHead
         title="Family Addiction Support & Education | Sober Helpline"
-        description="Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, AI tools, coaching, and a community that understands."
+        description="Free education, support, and ethical resources for families affected by addiction. Clear guidance, practical tools, and support that helps you think straight again."
         jsonLd={homepageSchema}
         faqItems={homepageFaqItems}
         speakableSelectors={["h1", ".hero-description", ".mission-statement"]}
@@ -250,7 +250,7 @@ const Index = () => {
                <span className="block text-logo-green mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl">You don't have to face this alone.</span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10 px-2 hero-description">
-              You're tired of guessing, second-guessing, and carrying this by yourself. We'll help you understand what's happening, what actually helps, and what your next step can be, whether they're ready for help or not.
+              You are probably tired, confused, and trying not to make things worse. We help families understand what they are dealing with, what actually helps, and what the next right step might be, whether their loved one is ready for help or not.
             </p>
             
             {/* Primary CTA — Family Situation Assessment */}
@@ -275,7 +275,7 @@ const Index = () => {
               <a href="tel:5412415668">
                 <Button size="lg" variant="ghost" className="gap-2 px-6 py-4 text-sm md:text-base text-muted-foreground hover:text-foreground">
                   <Phone className="w-4 h-4" />
-                  Talk to Someone, (541) 241-5668
+                  Call 541-241-5668
                 </Button>
               </a>
             </div>
@@ -291,9 +291,9 @@ const Index = () => {
             <span className="text-border">•</span>
             <span>Support in English & Spanish</span>
             <span className="text-border">•</span>
-            <span>Practical crisis tools</span>
+            <span>Practical guidance for hard moments</span>
             <span className="text-border">•</span>
-            <span>Family community support</span>
+            <span>Support for families, not just the person using</span>
           </div>
         </div>
       </section>
@@ -309,7 +309,7 @@ const Index = () => {
             Where Are You in the Recovery Journey?
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
-            The Recovery Roadmap helps you get oriented quickly, with clear next steps, useful resources, and a plan that fits the stage you're actually in.
+            The Recovery Roadmap helps you get oriented quickly, with clear next steps and resources that fit the stage you are actually in.
           </p>
         </div>
         {/* Stage Cards Grid */}
@@ -360,7 +360,7 @@ const Index = () => {
               The Situations We Help You Navigate
             </h2>
             <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Straight answers for the moments that leave families stuck, scared, or worn out.
+              Clear help for the moments that leave families stuck, scared, or worn down.
             </p>
           </div>
 
@@ -373,40 +373,40 @@ const Index = () => {
                   <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center">
                     <X className="w-5 h-5 text-destructive" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-foreground">Going It Alone</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">Trying to Handle It Alone</h3>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>No live support when a crisis hits at night or on weekends</span>
+                    <span>No real support when things blow up at night or over the weekend</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Waiting weeks for a therapist who may not understand addiction</span>
+                    <span>Waiting weeks for help from someone who may not really understand addiction</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Wondering if you're overreacting—or not doing enough</span>
+                    <span>Wondering if you are overreacting or not doing enough</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Googling at 2am with no one to talk to</span>
+                    <span>Searching online at 2 a.m. with no one to talk it through with</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Walking on eggshells, afraid to make it worse</span>
+                    <span>Walking on eggshells because you are afraid of making it worse</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Feeling judged by friends who don't understand</span>
+                    <span>Feeling judged by people who have never lived through this</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Enabling without realizing it—then feeling guilty</span>
+                    <span>Helping in ways that may actually keep the cycle going, then feeling guilty</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <X className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
-                    <span>Exhausted from carrying the weight alone</span>
+                    <span>Getting worn down from carrying too much by yourself</span>
                   </li>
                 </ul>
               </CardContent>
@@ -419,7 +419,7 @@ const Index = () => {
                   <div className="w-10 h-10 rounded-full bg-logo-green/20 flex items-center justify-center">
                     <Check className="w-5 h-5 text-logo-green" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-foreground">With Real Support</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">With Steady Support</h3>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -428,7 +428,7 @@ const Index = () => {
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
-                    <span>On-demand hourly coaching sessions when you need guidance now</span>
+                    <span>Hourly coaching when you need one-on-one guidance</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
@@ -440,11 +440,11 @@ const Index = () => {
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
-                    <span>Practical tools for boundaries that actually work</span>
+                    <span>Practical tools for boundaries you can actually hold</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
-                    <span>Guided meditations for when the stress overwhelms</span>
+                    <span>Guided meditations for the moments when stress takes over</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
@@ -452,7 +452,7 @@ const Index = () => {
                   </li>
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
-                    <span>The confidence to respond instead of react</span>
+                    <span>More clarity, so you can respond instead of react</span>
                   </li>
                 </ul>
               </CardContent>
@@ -463,16 +463,16 @@ const Index = () => {
           <div className="text-center mb-8 md:mb-12">
             <div className="inline-block bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 rounded-2xl p-6 md:p-8 border border-logo-green/20">
               <p className="text-sm md:text-base text-muted-foreground mb-4">
-                <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get steady support, practical tools, and a place to think clearly again.
+                <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get practical tools, steady support, and a place to think more clearly again.
               </p>
               <Link to="/family-membership">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
                   <Sparkles className="w-4 h-4" />
-                  Start the 7-Day Free Trial
+                  Explore Membership
                 </Button>
               </Link>
               <p className="text-xs text-muted-foreground mt-2">
-                No payment required to start, then $14.99/month. Cancel anytime.
+                Start with a 7-day free trial, then $14.99/month. Cancel anytime.
               </p>
             </div>
           </div>
@@ -726,7 +726,7 @@ const Index = () => {
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">Step 2, Ongoing Support</p>
                   <h3 className="text-base md:text-lg font-bold">Family Membership for Practical Support Between Mondays</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, and member pricing on coaching. Start with the free meeting, then use membership for steadier support.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, and member pricing on coaching. Start with the free Monday meeting, then use membership for more consistent support.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
@@ -752,7 +752,7 @@ const Index = () => {
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">Step 3, Private Help</p>
                   <h3 className="text-base md:text-lg font-bold">Family Coaching When You Need One-on-One Guidance</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Private coaching is available when the Monday meeting and membership are not enough. Calm, direct help for boundaries, next steps, and family decisions.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Private coaching is there when the Monday meeting and membership are not enough. Calm, direct help with boundaries, next steps, and hard family decisions.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
@@ -781,7 +781,7 @@ const Index = () => {
             Find Vetted Treatment Providers
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            No referral fees. No kickbacks. Just honest, vetted providers.
+            No referral fees. No kickbacks. Just vetted providers and honest guidance.
           </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -882,7 +882,7 @@ const Index = () => {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">You Have Been Carrying Too Much for Too Long.</h2>
           <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
-            Let us help you get clear on the next right move for you and your family.
+            Let us help you get clear on the next right step for you and your family.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
             <Link to="/monday-zoom-registration" className="w-full sm:w-auto">
