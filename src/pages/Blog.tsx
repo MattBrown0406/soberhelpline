@@ -5,6 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { blogPosts } from "@/data/blogPosts";
 
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Addiction Recovery Blog",
+  "url": "https://soberhelpline.com/blog",
+  "description": "Expert guidance on addiction recovery, treatment options, family support, and helping loved ones find healing.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sober Helpline"
+  }
+};
+
 const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
