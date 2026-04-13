@@ -37,14 +37,90 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
   return true;
 }
 
+function buildApologyTrialEmail(firstName: string, email: string): string {
+  return `
+<div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#1f2937;">
+  <h1 style="color:#1e3a5f;">Hi ${escapeHtml(firstName)},</h1>
+
+  <p>I want to personally apologize for the inconvenience you experienced during the registration process for <strong>"The Family Squares"</strong> meeting tonight. That's not the experience we want for anyone, and I'm sorry for the trouble.</p>
+
+  <p>To make it right, <strong>I'd like to offer you a complimentary 3-month membership to Sober Helpline</strong> — completely free, no payment information required.</p>
+
+  <div style="background-color:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:20px;margin:24px 0;text-align:center;">
+    <h2 style="margin:0 0 10px;color:#166534;">🎉 Your 3-Month Free Trial</h2>
+    <p style="margin:0 0 15px;color:#15803d;">You have <strong>90 days of full access</strong> to explore everything the Sober Helpline member section has to offer.</p>
+  </div>
+
+  <div style="background-color:#f0fdf4;border-radius:8px;padding:24px;margin:20px 0;">
+    <h3 style="color:#166534;margin-top:0;">What You Get Access To:</h3>
+    <ul style="color:#374151;font-size:14px;line-height:2;padding-left:20px;">
+      <li><strong>📅 Free "The Family Squares" Support Calls</strong> — Weekly live group support</li>
+      <li><strong>📚 60+ Family Education Guides</strong> — Boundaries, enabling, communication & more</li>
+      <li><strong>🛠️ Interactive Worksheets & Assessments</strong> — Boundary-setting, enabling audits, readiness assessments</li>
+      <li><strong>🤖 AI-Powered Support Tools</strong> — Boundary Coach, Treatment Navigator, Life Coach (24/7)</li>
+      <li><strong>💬 Private Family Support Forum</strong> — A safe, moderated community</li>
+      <li><strong>🎥 Zoom Meeting Recordings</strong> — Watch past sessions on your schedule</li>
+      <li><strong>📋 On-Demand Coaching</strong> — Book 1-on-1 sessions with recovery coaches</li>
+    </ul>
+  </div>
+
+  <div style="background-color:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:20px;margin:24px 0;">
+    <h3 style="margin:0 0 10px;color:#1e40af;">📝 How to Get Started</h3>
+    <ol style="color:#374151;font-size:14px;line-height:1.8;padding-left:20px;margin-bottom:0;">
+      <li>Go to <a href="https://soberhelpline.com/auth" style="color:#1e40af;">soberhelpline.com/auth</a></li>
+      <li>Click <strong>"Sign Up"</strong> and use this email: <strong>${escapeHtml(email)}</strong></li>
+      <li>Enter your name and create a password</li>
+      <li>Verify your email, log in, and your membership will activate automatically</li>
+    </ol>
+  </div>
+
+  <div style="background-color:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:16px;margin:20px 0;">
+    <p style="margin:0;color:#854d0e;font-size:14px;">
+      <strong>After 3 months:</strong> You'll have the option to continue with a paid membership at $14.99/month, or simply let the trial end — no pressure, no automatic charges. This is about giving you a chance to see if it's helpful for you and your family.
+    </p>
+  </div>
+
+  <p>Again, I'm truly sorry for the hassle tonight. I hope this trial gives you a chance to explore everything we offer and find it valuable.</p>
+
+  <p>We're here for you. 💙</p>
+
+  <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
+
+  <hr style="border:none;border-top:1px solid #e5e7eb;margin:30px 0;" />
+  <p style="color:#9ca3af;font-size:12px;text-align:center;">
+    Sober Helpline — Supporting Families Through Recovery<br/>
+    <a href="https://soberhelpline.com" style="color:#9ca3af;">soberhelpline.com</a>
+  </p>
+</div>`;
+}
+
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { recipients } = await req.json();
+    const body = await req.json();
+    const { recipients, mode } = body;
 
+    if (mode === "apology_trial") {
+      const results: Record<string, boolean> = {};
+      for (const r of recipients) {
+        const firstName = (r.name || "").split(/\s+/)[0] || "there";
+        const html = buildApologyTrialEmail(firstName, r.email);
+        const success = await sendEmail(
+          r.email,
+          "Our Apology + A Gift: 3-Month Free Sober Helpline Membership",
+          html
+        );
+        results[r.email] = success;
+      }
+      return new Response(JSON.stringify({ success: true, results }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Default legacy mode — original apology/reregistration email
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -73,63 +149,19 @@ serve(async (req: Request) => {
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Hi ${safeName},</h1>
-          
-          <p>Thank you for joining us — or trying to join us — for <strong>"The Family Squares"</strong> Zoom meeting last night. I want to sincerely apologize that the joining link didn't work as it was supposed to. I know how frustrating that must have been, especially when you took the time to show up for yourself and your family.</p>
-
-          <p><strong>The issue has been identified and corrected</strong>, so this won't happen again going forward.</p>
-
+          <p>Thank you for joining us — or trying to join us — for <strong>"The Family Squares"</strong> Zoom meeting. I want to sincerely apologize that the joining link didn't work as it was supposed to.</p>
+          <p><strong>The issue has been identified and corrected.</strong></p>
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 24px 0; text-align: center;">
-            <h2 style="margin: 0 0 10px 0; color: #166534;">✅ You're Pre-Registered for April 6th!</h2>
-            <p style="margin: 0 0 15px 0; color: #15803d;">You've been automatically registered for the next <strong>"The Family Squares"</strong> meeting on <strong>Monday, April 6th at 7:00 PM PST</strong>. No action needed — just show up!</p>
-            
-            <p style="font-size: 14px; color: #374151; margin-bottom: 16px;">Here are your joining options:</p>
-
-            ${joinUrl ? `
-            <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-bottom: 12px;">
-              Join on SoberHelpline.com
-            </a>
-            <p style="font-size: 13px; color: #6b7280; margin: 8px 0 16px 0;">Opens directly in your browser (requires a free account)</p>
-            ` : ''}
-
-            ${externalZoomLink ? `
-            <a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 12px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
-              Join via Zoom App
-            </a>
-            <p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} &nbsp;|&nbsp; Passcode: ${escapeHtml(passcode)}</p>
-            ` : ''}
+            <h2 style="margin: 0 0 10px 0; color: #166534;">✅ You're Pre-Registered!</h2>
+            <p style="margin: 0 0 15px 0; color: #15803d;">You've been automatically registered for the next meeting.</p>
+            ${joinUrl ? `<a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Join on SoberHelpline.com</a>` : ''}
+            ${externalZoomLink ? `<div style="margin-top:12px"><a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 12px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">Join via Zoom App</a><p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} | Passcode: ${escapeHtml(passcode)}</p></div>` : ''}
           </div>
-
-          <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin: 24px 0;">
-            <h3 style="margin: 0 0 10px 0; color: #1e40af;">💬 What Would You Like to Discuss?</h3>
-            <p style="margin: 0 0 12px 0; color: #1e40af; font-size: 14px;">
-              We want "The Family Squares" to be as helpful as possible for <em>you</em>. Is there a topic you'd like us to cover? A question you're struggling with? Let us know and we'll work it into an upcoming meeting.
-            </p>
-            <a href="mailto:matt@soberhelpline.com?subject=Topic%20Suggestion%20for%20The%20Family%20Squares&body=Hi%20Matt%2C%0A%0AI'd%20like%20to%20suggest%20the%20following%20topic%20or%20question%20for%20an%20upcoming%20meeting%3A%0A%0A" style="display: inline-block; padding: 10px 24px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
-              Submit a Topic or Question
-            </a>
-          </div>
-
-          <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
-            <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
-              <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting — a spouse, sibling, parent, or adult child — feel free to forward this email. The more of your family that shows up, the more you'll all get out of it.
-            </p>
-          </div>
-
-          <p>We hope to see you on April 6th. These meetings exist because of families like yours, and we don't take that lightly.</p>
-
           <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
+          <p style="color: #6b7280; font-size: 12px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
+        </div>`;
 
-          <p style="color: #6b7280; font-size: 12px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-            Sober Helpline — Supporting Families Through Recovery
-          </p>
-        </div>
-      `;
-
-      const success = await sendEmail(
-        email,
-        "We're Sorry — You're Pre-Registered for April 6th \"The Family Squares\" Meeting",
-        html
-      );
+      const success = await sendEmail(email, "We're Sorry — You're Pre-Registered for The Family Squares", html);
       results[email] = success;
     }
 
