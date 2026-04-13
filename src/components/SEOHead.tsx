@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useSEOOverride } from "@/contexts/SEOOverrideContext";
 
 interface SEOHeadProps {
   title: string;
@@ -41,7 +43,13 @@ export default function SEOHead({
   howToDescription,
 }: SEOHeadProps) {
   const location = useLocation();
+  const { setOverridden } = useSEOOverride();
   const canonicalUrl = `${BASE_URL}${location.pathname}`;
+
+  useEffect(() => {
+    setOverridden(true);
+    return () => setOverridden(false);
+  }, [setOverridden]);
   const fullImageUrl = image.startsWith("http") ? image : `${BASE_URL}${image}`;
 
   // Ensure title is under 60 chars and description under 160 chars

@@ -355,7 +355,7 @@ export default function RecoveryRequirements() {
 
               {/* Footer for print */}
               <div className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground print:block hidden">
-                <p>Sober Helpline | (541) 241-5886 | www.soberhelpline.com</p>
+                <p>Sober Helpline | (541) 241-5668 | www.soberhelpline.com</p>
               </div>
             </div>
 

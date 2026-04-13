@@ -7,7 +7,7 @@ import { useSEOOverride } from "@/contexts/SEOOverrideContext";
 import { Helmet } from "react-helmet-async";
 
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
-import { blogPosts, imageMap } from "./Blog";
+import { blogPosts, imageMap } from "@/data/blogPosts";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const BASE_URL = "https://soberhelpline.com";

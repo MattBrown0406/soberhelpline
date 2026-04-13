@@ -49,7 +49,7 @@ const localBusinessSchema = {
   description:
     "Family support and intervention coaching for families affected by addiction. Serving California families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressRegion: "CA",
@@ -184,9 +184,9 @@ export default function CaliforniaFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:5418386009" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:5412415668" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
-                    (541) 838-6009
+                    (541) 241-5668
                   </a>
                 </div>
               </div>
@@ -520,10 +520,10 @@ export default function CaliforniaFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:5418386009">
+                  <a href="tel:5412415668">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      Call (541) 838-6009
+                      Call (541) 241-5668
                     </Button>
                   </a>
                 </div>
@@ -633,10 +633,10 @@ export default function CaliforniaFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </Button>
               </a>
             </div>

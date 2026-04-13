@@ -84,7 +84,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family addiction support forum and community for families navigating a loved one's addiction. Professionally moderated, anonymous, available 24/7.",
   url: "https://soberhelpline.com/family-support-forum",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   sameAs: ["https://soberhelpline.com"],
 };
 
@@ -152,20 +152,20 @@ export default function FamilyForumLanding() {
                 Judgment-free. Anonymous. Always available.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/family-membership">
+                <Link to="/monday-zoom-registration">
                   <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8">
-                    <Users className="h-4 w-4" />
-                    Join the Community — $14.99/mo
+                    <Calendar className="h-4 w-4" />
+                    Start with the Free Monday Zoom
                   </Button>
                 </Link>
-                <Link to="/monday-zoom-registration">
+                <Link to="/family-membership">
                   <Button size="lg" variant="outline" className="gap-2">
-                    <Calendar className="h-4 w-4" />
-                    Try the Free Monday Zoom First
+                    <Users className="h-4 w-4" />
+                    Then Join Membership
                   </Button>
                 </Link>
               </div>
-              <p className="text-xs text-muted-foreground mt-4">Cancel anytime · No contracts · Includes full membership access</p>
+              <p className="text-xs text-muted-foreground mt-4">Free Zoom first · Membership for ongoing support · Coaching only if you need a private plan</p>
             </div>
           </div>
         </section>
@@ -392,16 +392,22 @@ export default function FamilyForumLanding() {
               You can join them today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/family-membership">
+              <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8">
-                  <Users className="h-4 w-4" />
-                  Join the Community
+                  <Calendar className="h-4 w-4" />
+                  Join the Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <Link to="/family-membership">
+                <Button size="lg" variant="outline" className="gap-2">
+                  <Users className="h-4 w-4" />
+                  Join Membership
+                </Button>
+              </Link>
+              <a href="tel:5412415668">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </Button>
               </a>
             </div>

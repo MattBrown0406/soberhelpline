@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Scottsdale, Arizona affected by addiction.",
   url: "https://soberhelpline.com/arizona/scottsdale",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Scottsdale",
@@ -33,7 +33,7 @@ export default function ArizonaScottsdaleFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Scottsdale, Arizona | Sober Helpline"
-        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 838-6009."
+        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 241-5668."
         jsonLd={localBusinessSchema}
       />
 
@@ -71,9 +71,9 @@ export default function ArizonaScottsdaleFamilySupport() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a href="tel:+15418386009">
+                <a href="tel:+15412415668">
                   <Phone className="mr-2 h-5 w-5" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </a>
               </Button>
             </div>
@@ -194,9 +194,9 @@ export default function ArizonaScottsdaleFamilySupport() {
                     <Link to="/coaching">Start Coaching →</Link>
                   </Button>
                   <Button asChild variant="outline">
-                    <a href="tel:+15418386009">
+                    <a href="tel:+15412415668">
                       <Phone className="mr-2 h-4 w-4" />
-                      Call (541) 838-6009
+                      Call (541) 241-5668
                     </a>
                   </Button>
                 </div>

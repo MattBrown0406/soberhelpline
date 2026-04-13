@@ -343,23 +343,28 @@ export default function FamilySituationAssessment() {
               {result.primaryCTA === "coaching" && (
                 <Card className="border-primary/30 bg-primary/5">
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-green mb-2">Recommended: Talk to an Interventionist</h2>
+                    <h2 className="text-xl font-bold text-logo-green mb-2">Recommended Order: Start with the Monday Zoom, then move into private help if needed</h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      One-on-one hourly coaching with Matt Brown — a certified interventionist with 20+ years of experience.
-                      No treatment center sales pitch. Just real guidance for your specific situation.
+                      Based on what you shared, private coaching may be useful, but the clearest first step is still the Monday Zoom. If you want more structure after that, membership comes next. Coaching is there when you need one-on-one guidance for your specific situation.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/family-coaching">
+                      <Link to="/monday-zoom-registration">
                         <Button size="lg" className="gap-2 w-full sm:w-auto">
-                          <Phone className="h-4 w-4" />
-                          Schedule a Coaching Session
+                          <Calendar className="h-4 w-4" />
+                          Start with Monday Zoom
                         </Button>
                       </Link>
-                      <a href="tel:5418386009">
+                      <Link to="/family-membership">
                         <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                          Call (541) 838-6009
+                          Membership Next
                         </Button>
-                      </a>
+                      </Link>
+                      <Link to="/family-coaching">
+                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                          <Phone className="h-4 w-4" />
+                          Explore Coaching
+                        </Button>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>

@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families affected by addiction in Bellevue, Washington.",
   url: "https://soberhelpline.com/washington/bellevue",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bellevue",
@@ -38,7 +38,7 @@ export default function WashingtonBellevueFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Bellevue, Washington | Sober Helpline"
-        description="Families in Bellevue struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
+        description="Families in Bellevue struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (541) 241-5668."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -78,10 +78,10 @@ export default function WashingtonBellevueFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </Button>
               </a>
             </div>
@@ -315,10 +315,10 @@ export default function WashingtonBellevueFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </Button>
               </a>
             </div>

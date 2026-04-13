@@ -32,10 +32,10 @@ const RecoveryResources = () => {
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
               Browse our directory of vetted treatment providers and recovery professionals. Every provider meets our ethical standards—no commissions, no patient brokering.
             </p>
-            <a href="tel:5412415886">
+            <a href="tel:5412415668">
               <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
                 <Phone className="w-4 h-4" />
-                Call Us: (541) 241-5886
+                Call Us: (541) 241-5668
               </Button>
             </a>
           </div>
@@ -109,10 +109,10 @@ const RecoveryResources = () => {
                   Take the Assessment
                 </Button>
               </Link>
-              <a href="tel:5412415886">
+              <a href="tel:5412415668">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
                   <Phone className="w-4 h-4" />
-                  (541) 241-5886
+                  (541) 241-5668
                 </Button>
               </a>
             </div>

@@ -33,7 +33,7 @@ const FreeGuide = () => {
               <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
               <h1 className="text-xl font-bold mb-2">Access Required</h1>
               <p className="text-muted-foreground mb-6">
-                Sign up with your email to get instant access to this free guide.
+                Share your email and we'll send you straight to the guide.
               </p>
               <Link to="/">
                 <Button>Go to Homepage</Button>
@@ -92,7 +92,7 @@ const FreeGuide = () => {
               5 Things Every Family Wishes They Knew Sooner About Addiction
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              A practical guide for families navigating a loved one's substance use
+              A practical guide for families trying to get clearer, steadier, and less reactive
             </p>
             <div className="mt-8 text-sm text-muted-foreground">
               From Sober Helpline • soberhelpline.com
@@ -102,14 +102,13 @@ const FreeGuide = () => {
           {/* Introduction */}
           <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
             <p className="text-lg leading-relaxed">
-              If you're reading this, you're likely exhausted, confused, and wondering what went wrong. 
-              You've probably tried everything you can think of—pleading, reasoning, threatening, rescuing—and 
-              nothing seems to work. You're not alone, and this isn't your fault.
+              If you're reading this, you're probably tired, confused, and wondering how things got this far. 
+              You've likely tried pleading, reasoning, threatening, rescuing, and second-guessing yourself the whole time. 
+              You're not alone, and this is not a sign that you have failed.
             </p>
             <p className="text-lg leading-relaxed">
-              This guide shares the five most important lessons families learn on their journey—lessons that 
-              most wish they'd known from the start. These insights won't fix everything overnight, but they 
-              will help you stop spinning in circles and start moving forward with clarity.
+              This guide shares five lessons families usually learn the hard way. They will not solve everything overnight, 
+              but they can help you stop spinning and start making calmer, clearer decisions.
             </p>
           </div>
 
@@ -123,9 +122,8 @@ const FreeGuide = () => {
                 <div>
                   <h2 className="text-xl font-bold mb-3">You Didn't Cause It, You Can't Cure It, and You Can't Control It</h2>
                   <p className="text-muted-foreground mb-4">
-                    This is the foundational truth of family recovery, often called the "3 C's." Addiction is not 
-                    a result of bad parenting, not enough love, or something you did wrong. It's a complex condition 
-                    involving genetics, brain chemistry, trauma, and environment.
+                    This is one of the most important truths a family can learn. Addiction is not the result of bad parenting, 
+                    not enough love, or one wrong move you made. A lot of forces shape it, and not all of them are in your control.
                   </p>
                   <div className="bg-muted/50 rounded-lg p-4">
                     <p className="text-sm font-medium mb-2">What this means practically:</p>
@@ -193,8 +191,7 @@ const FreeGuide = () => {
                     </ul>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    <strong>The question to ask:</strong> "Am I doing this to help them, or to make myself 
-                    feel less anxious?"
+                    <strong>A better question:</strong> "Does this actually help, or does it only help me feel less panicked for the next hour?"
                   </p>
                 </div>
               </div>
@@ -211,10 +208,8 @@ const FreeGuide = () => {
                 <div>
                   <h2 className="text-xl font-bold mb-3">Your Recovery Matters Just as Much as Theirs</h2>
                   <p className="text-muted-foreground mb-4">
-                    Living with addiction in the family changes you. The constant stress, hypervigilance, 
-                    broken promises, and emotional chaos take a toll. You've likely developed your own 
-                    unhealthy patterns—obsessive worry, controlling behaviors, neglecting your own needs—that 
-                    require healing.
+                    Living with addiction in the family changes you. The stress, broken promises, vigilance, and chaos take a real toll. 
+                    You may have started living in reaction mode, neglecting your own needs, and confusing constant worry with love.
                   </p>
                   <div className="bg-muted/50 rounded-lg p-4">
                     <p className="text-sm font-medium mb-2">What family recovery looks like:</p>
@@ -256,9 +251,8 @@ const FreeGuide = () => {
                     </ul>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    <strong>Hold onto hope—but hold it loosely.</strong> Recovery is possible, and your 
-                    loved one's story isn't over. But hope shouldn't prevent you from living your own life 
-                    in the meantime.
+                    <strong>Hold onto hope, but keep both feet on the ground.</strong> Recovery is possible, and your 
+                    loved one's story is not over. But hope should not require you to abandon your own life in the meantime.
                   </p>
                 </div>
               </div>
@@ -269,8 +263,7 @@ const FreeGuide = () => {
           <div className="bg-gradient-to-br from-primary/5 via-logo-green/5 to-primary/5 rounded-2xl p-8 mb-12 print-break">
             <h2 className="text-2xl font-bold text-center mb-4">What Now?</h2>
             <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto">
-              Reading this guide is a first step. But real change comes from ongoing support, 
-              education, and community. You don't have to figure this out alone.
+              Reading this guide is a solid first step. The next part is support, education, and people who can help you stay steady when things get messy.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="text-center p-4">
@@ -307,8 +300,7 @@ const FreeGuide = () => {
           <div className="no-print text-center border-t pt-12">
             <h3 className="text-xl font-bold mb-3">Ready for More Support?</h3>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              Join our family membership for access to the full education curriculum, 
-              private community forum, live webinars, and more.
+              If you want more support, the family membership gives you the full curriculum, private forum, live webinars, and other tools you can actually use.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/family-membership">

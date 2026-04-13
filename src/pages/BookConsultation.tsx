@@ -653,10 +653,10 @@ const BookConsultation = () => {
               </h1>
               <p className="text-muted-foreground text-center mb-6">
                 {isParallelRecovery
-                  ? `Choose a provider for your 12-session program ($1,500)`
+                  ? `Choose the provider who feels like the best fit for your 12-session program ($1,500)`
                   : isStabilization
                   ? "Choose a provider for your 4-session stabilization plan ($500)"
-                  : `Choose a provider to schedule your 60-minute video consultation${isMember ? " ($125 — Member Rate)" : " ($150)"}`}
+                  : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150)"}`}
               </p>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
@@ -702,11 +702,11 @@ const BookConsultation = () => {
           {step === 1 && (
             <Card>
               <CardHeader>
-                <CardTitle>{isMultiSession ? `Select ${requiredSlots} Session Times` : "Select Date & Time"}</CardTitle>
+                <CardTitle>{isMultiSession ? `Select ${requiredSlots} Session Times` : "Choose a Date and Time"}</CardTitle>
                 <CardDescription>
                   {isMultiSession
                     ? `Choose dates and times for all ${requiredSlots} sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of ${requiredSlots} selected.`
-                    : `Choose an available date and time slot with ${selectedProvider?.full_name}`}
+                    : `Pick an available time with ${selectedProvider?.full_name}. We'll keep it simple.`}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -877,7 +877,7 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-primary" />
-                  {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Booking"}
+                  {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Consultation"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -926,7 +926,7 @@ const BookConsultation = () => {
                 <p className="text-sm text-muted-foreground">
                   {isMultiSession
                     ? `Zoom meetings will be created for each session. You'll receive confirmation emails with join links for all ${requiredSlots} sessions.`
-                    : "A video session will be created automatically. You'll receive a confirmation email with your Zoom link and details."}
+                    : "Your video session will be created automatically, and you'll get the Zoom link and details by email right away."}
                 </p>
 
                 <div className="flex justify-between pt-4">

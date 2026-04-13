@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Hillsboro, Oregon affected by addiction.",
   url: "https://soberhelpline.com/oregon/hillsboro",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Hillsboro",
@@ -34,7 +34,7 @@ export default function OregonHillsboroFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Hillsboro, Oregon | Sober Helpline"
-        description="Families in Hillsboro struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
+        description="Families in Hillsboro struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 241-5668."
         jsonLd={localBusinessSchema}
       />
 
@@ -240,8 +240,8 @@ export default function OregonHillsboroFamilySupport() {
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
                     <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
                     <div className="mt-4 text-sm text-muted-foreground">Questions? Call:</div>
-                    <a href="tel:5418386009" className="text-primary font-semibold text-lg hover:underline">
-                      (541) 838-6009
+                    <a href="tel:5412415668" className="text-primary font-semibold text-lg hover:underline">
+                      (541) 241-5668
                     </a>
                   </div>
                 </div>
@@ -282,10 +282,10 @@ export default function OregonHillsboroFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:5418386009">
+                <a href="tel:5412415668">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
-                    Call (541) 838-6009
+                    Call (541) 241-5668
                   </Button>
                 </a>
               </div>
@@ -330,10 +330,10 @@ export default function OregonHillsboroFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  (541) 838-6009
+                  (541) 241-5668
                 </Button>
               </a>
             </div>

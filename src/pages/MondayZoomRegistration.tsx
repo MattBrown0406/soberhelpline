@@ -243,8 +243,35 @@ export default function MondayZoomRegistration() {
   return (
     <>
       <SEOHead
-        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "The Family Squares Zoom Meeting | Sober Helpline"}
-        description="Register for our free “The Family Squares” Zoom meeting. Connect with other families, ask questions, and get guidance from experienced professionals."
+        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Free Monday Family Addiction Support Meeting | Sober Helpline"}
+        description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for the free Monday Family Squares Zoom meeting. Get practical support, ask questions, and hear from families who understand addiction up close."}
+        jsonLd={isMemberQuestion ? undefined : {
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: "The Family Squares",
+          description: "A free weekly Zoom support meeting for families affected by addiction.",
+          eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+          eventStatus: "https://schema.org/EventScheduled",
+          location: {
+            "@type": "VirtualLocation",
+            url: "https://soberhelpline.com/monday-zoom-registration"
+          },
+          organizer: {
+            "@type": "Organization",
+            name: "Sober Helpline",
+            url: "https://soberhelpline.com",
+            telephone: "+1-541-241-5668"
+          },
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: "https://soberhelpline.com/monday-zoom-registration"
+          },
+          recurrence: "https://schema.org/Weekly",
+          isAccessibleForFree: true
+        }}
       />
 
       <div className="min-h-screen bg-background">
@@ -287,7 +314,10 @@ export default function MondayZoomRegistration() {
                       FREE<br />"The Family Squares"<br />Family Support Zoom Meeting
                     </h1>
                     <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-                      Join other families navigating addiction for a supportive, guided group session every Monday. No membership required.
+                      Join other families living with addiction for a steady, practical Monday reset. No membership required.
+                    </p>
+                    <p className="text-foreground/70 text-sm max-w-xl mx-auto mb-6">
+                      Best next-step order: come to the meeting first, use membership if you want ongoing support, and only move into coaching if you need private guidance.
                     </p>
                     <div className="flex flex-wrap justify-center gap-3">
                       {[
@@ -305,6 +335,21 @@ export default function MondayZoomRegistration() {
                 </div>
 
                 <TestimonialCarousel />
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <Link to="/family-membership">
+                    <Button variant="outline" className="w-full gap-2">
+                      <Crown className="h-4 w-4" />
+                      Explore Membership After the Meeting
+                    </Button>
+                  </Link>
+                  <Link to="/family-coaching">
+                    <Button variant="outline" className="w-full gap-2">
+                      <Phone className="h-4 w-4" />
+                      Private Coaching if You Need More Help
+                    </Button>
+                  </Link>
+                </div>
               </>
             )}
 
@@ -340,7 +385,7 @@ export default function MondayZoomRegistration() {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="question">What is one thing you would like to get out of the meeting this week? (Optional)</Label>
+                    <Label htmlFor="question">What would make this meeting useful for you this week? (Optional)</Label>
                     <Textarea id="question" placeholder="Share what you're hoping to learn or discuss..." rows={4} value={formData.question} onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))} className={errors.question ? "border-destructive" : ""} />
                     {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
                   </div>
@@ -413,7 +458,7 @@ export default function MondayZoomRegistration() {
 
                   {!isMemberQuestion && (
                     <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-                      *By registering, you acknowledge that this meeting will be recorded and archived. Recordings are made available exclusively to paid members of Sober Helpline in the membership section of the website.
+                      By registering, you acknowledge that this meeting is recorded and archived. Recordings are available to paid Sober Helpline members inside the membership area.
                     </p>
                   )}
                 </form>

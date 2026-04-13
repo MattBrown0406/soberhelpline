@@ -45,7 +45,7 @@ const localBusinessSchema = {
   description:
     "Family support and intervention coaching for families affected by addiction. Serving Utah families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressRegion: "UT",
@@ -179,9 +179,9 @@ export default function UtahFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:5418386009" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:5412415668" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
-                    (541) 838-6009
+                    (541) 241-5668
                   </a>
                 </div>
               </div>
@@ -432,8 +432,8 @@ export default function UtahFamilySupport() {
                   <Link to="/family-coaching">
                     <Button size="lg" className="gap-2"><Phone className="h-4 w-4" />Schedule Coaching</Button>
                   </Link>
-                  <a href="tel:5418386009">
-                    <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (541) 838-6009</Button>
+                  <a href="tel:5412415668">
+                    <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (541) 241-5668</Button>
                   </a>
                 </div>
               </div>
@@ -533,8 +533,8 @@ export default function UtahFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button>
               </Link>
-              <a href="tel:5418386009">
-                <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (541) 838-6009</Button>
+              <a href="tel:5412415668">
+                <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (541) 241-5668</Button>
               </a>
             </div>
           </div>

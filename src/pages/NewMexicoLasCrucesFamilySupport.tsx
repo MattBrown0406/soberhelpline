@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Las Cruces, New Mexico affected by addiction.",
   url: "https://soberhelpline.com/new-mexico/las-cruces",
-  telephone: "+15418386009",
+  telephone: "+15412415668",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Las Cruces",
@@ -33,7 +33,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Las Cruces, New Mexico | Sober Helpline"
-        description="Families in Las Cruces struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 838-6009."
+        description="Families in Las Cruces struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 241-5668."
         jsonLd={localBusinessSchema}
       />
 
@@ -254,10 +254,10 @@ export default function NewMexicoLasCrucesFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:5418386009">
+                  <a href="tel:5412415668">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      (541) 838-6009
+                      (541) 241-5668
                     </Button>
                   </a>
                 </div>
@@ -323,10 +323,10 @@ export default function NewMexicoLasCrucesFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 838-6009
+                  Call (541) 241-5668
                 </Button>
               </a>
             </div>

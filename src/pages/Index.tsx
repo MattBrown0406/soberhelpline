@@ -15,7 +15,7 @@ import bannerLogo from "@/assets/banner-logo.png";
 
 
 import MobileNav from "@/components/MobileNav";
-import { blogPosts } from "@/pages/Blog";
+import { featuredBlogPosts } from "@/data/featuredBlogPosts";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
 import EatingDisorderScreening from "@/components/EatingDisorderScreening";
@@ -40,11 +40,7 @@ const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
 
-  const featuredArticles = useMemo(() => {
-    return [...blogPosts]
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 5);
-  }, []);
+  const featuredArticles = useMemo(() => featuredBlogPosts, []);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -119,7 +115,7 @@ const Index = () => {
     { question: "What is Sober Helpline?", answer: "Sober Helpline connects families with ethical, vetted addiction treatment providers nationwide, offering free resources, education, and support for those affected by addiction." },
     { question: "How do I find a treatment center near me?", answer: "Use our interactive maps to search by state, or enter your zip code to find inpatient treatment, outpatient programs, medical detox, and sober living homes in your area." },
     { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer a 7-day free trial of our premium family membership, followed by optional paid membership with advanced support features." },
-    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5886 to speak with someone who can help you understand your options." }
+    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5668 to speak with someone who can help you understand your options." }
   ];
 
   return (
@@ -139,9 +135,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           {/* Mobile Header */}
           <div className="flex md:hidden h-14 items-center justify-between">
-            <a href="tel:5412415886" className="flex items-center gap-2 text-logo-green font-semibold">
+            <a href="tel:5412415668" className="flex items-center gap-2 text-logo-green font-semibold">
               <Phone className="w-4 h-4" />
-              <span className="text-sm">(541) 241-5886</span>
+              <span className="text-sm">(541) 241-5668</span>
             </a>
             <MobileNav user={user} onLogout={handleLogout} />
           </div>
@@ -218,9 +214,9 @@ const Index = () => {
               </nav>
             </div>
             <div className="flex items-center gap-4">
-              <a href="tel:5412415886" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+              <a href="tel:5412415668" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
                 <Phone className="w-4 h-4" />
-                (541) 241-5886
+                (541) 241-5668
               </a>
               {user ? (
                 <Button variant="outline" onClick={handleLogout}>Logout</Button>
@@ -254,7 +250,7 @@ const Index = () => {
                <span className="block text-logo-green mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl">You don't have to face this alone.</span>
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10 px-2 hero-description">
-              You're exhausted from walking on eggshells, wondering if you're helping or making it worse. We'll show you exactly what to do — whether they're ready for help or not.
+              You're tired of guessing, second-guessing, and carrying this by yourself. We'll help you understand what's happening, what actually helps, and what your next step can be, whether they're ready for help or not.
             </p>
             
             {/* Primary CTA — Family Situation Assessment */}
@@ -273,13 +269,13 @@ const Index = () => {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 px-6 py-4 text-sm md:text-base bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all">
                   <Calendar className="w-4 h-4" />
-                  Register for the Free Monday Zoom
+                  Join the Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5418386009">
+              <a href="tel:5412415668">
                 <Button size="lg" variant="ghost" className="gap-2 px-6 py-4 text-sm md:text-base text-muted-foreground hover:text-foreground">
                   <Phone className="w-4 h-4" />
-                  Talk to Someone · (541) 838-6009
+                  Talk to Someone, (541) 241-5668
                 </Button>
               </a>
             </div>
@@ -293,11 +289,11 @@ const Index = () => {
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
             <span>22+ Years Experience</span>
             <span className="text-border">•</span>
-            <span>Worldwide in English & Spanish</span>
+            <span>Support in English & Spanish</span>
             <span className="text-border">•</span>
-            <span>24/7 Crisis Support Tools</span>
+            <span>Practical crisis tools</span>
             <span className="text-border">•</span>
-            <span>Active Family Forum</span>
+            <span>Family community support</span>
           </div>
         </div>
       </section>
@@ -313,7 +309,7 @@ const Index = () => {
             Where Are You in the Recovery Journey?
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
-            The Recovery Roadmap meets you exactly where you are — with a personalized action plan, resources, and next steps for your stage.
+            The Recovery Roadmap helps you get oriented quickly, with clear next steps, useful resources, and a plan that fits the stage you're actually in.
           </p>
         </div>
         {/* Stage Cards Grid */}
@@ -364,7 +360,7 @@ const Index = () => {
               The Situations We Help You Navigate
             </h2>
             <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Real answers for the hardest moments — from someone who's helped over 1,000 families through this.
+              Straight answers for the moments that leave families stuck, scared, or worn out.
             </p>
           </div>
 
@@ -423,7 +419,7 @@ const Index = () => {
                   <div className="w-10 h-10 rounded-full bg-logo-green/20 flex items-center justify-center">
                     <Check className="w-5 h-5 text-logo-green" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-foreground">With Our Community</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">With Real Support</h3>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -467,16 +463,16 @@ const Index = () => {
           <div className="text-center mb-8 md:mb-12">
             <div className="inline-block bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 rounded-2xl p-6 md:p-8 border border-logo-green/20">
               <p className="text-sm md:text-base text-muted-foreground mb-4">
-                <span className="font-semibold text-foreground">You don't have to figure this out alone.</span> Join families who are learning to heal together.
+                <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get steady support, practical tools, and a place to think clearly again.
               </p>
               <Link to="/family-membership">
                 <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
                   <Sparkles className="w-4 h-4" />
-                  Try Free for 7 Days
+                  Start the 7-Day Free Trial
                 </Button>
               </Link>
               <p className="text-xs text-muted-foreground mt-2">
-                No payment required • Then just $14.99/month • Cancel anytime
+                No payment required to start, then $14.99/month. Cancel anytime.
               </p>
             </div>
           </div>
@@ -654,7 +650,7 @@ const Index = () => {
 
           {/* Also Includes */}
           <div className="bg-background/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 mb-8 md:mb-10 border border-border/50">
-            <h3 className="text-lg md:text-xl font-semibold text-foreground text-center mb-6">Tools That Work When You Need Them Most</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-foreground text-center mb-6">Support You Can Actually Use</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               <div className="text-center">
                 <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
@@ -704,7 +700,7 @@ const Index = () => {
                 <div className="text-center md:text-left">
                   <p className="text-xs md:text-sm font-medium text-white/80">📅 Every Monday</p>
                   <h3 className="text-base md:text-lg font-bold">“The Family Squares” — Free Weekly Support</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group sessions every Monday at 7 PM PST. Open to everyone — no membership required.</p>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group support every Monday at 7 PM PST. Open to any family member, no membership required.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
@@ -717,9 +713,9 @@ const Index = () => {
         </Link>
       </section>
 
-      {/* Family Coaching CTA Banner */}
+      {/* Membership CTA Banner */}
       <section className="container mx-auto px-4 pt-4 md:pt-6">
-        <Link to="/family-coaching" className="block">
+        <Link to="/family-membership" className="block">
           <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
@@ -728,14 +724,40 @@ const Index = () => {
                   <Shield className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="text-xs md:text-sm font-medium text-white/80">1-on-1 Support for Families</p>
-                  <h3 className="text-base md:text-lg font-bold">Family Coaching — From Crisis to Clarity</h3>
-                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Boundaries, enabling patterns, and a real plan — with a coach who's been there. Sessions start at $150 — <span className="text-yellow-300 font-semibold">members save $25 per session</span>.</p>
+                  <p className="text-xs md:text-sm font-medium text-white/80">Step 2, Ongoing Support</p>
+                  <h3 className="text-base md:text-lg font-bold">Family Membership for Practical Support Between Mondays</h3>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, and member pricing on coaching. Start with the free meeting, then use membership for steadier support.</p>
                 </div>
               </div>
               <div className="flex-shrink-0">
                 <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                  Learn More <ArrowRight className="w-4 h-4" />
+                  Explore Membership <ArrowRight className="w-4 h-4" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* Family Coaching CTA Banner */}
+      <section className="container mx-auto px-4 pt-4 md:pt-6">
+        <Link to="/family-coaching" className="block">
+          <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="text-xs md:text-sm font-medium text-white/80">Step 3, Private Help</p>
+                  <h3 className="text-base md:text-lg font-bold">Family Coaching When You Need One-on-One Guidance</h3>
+                  <p className="text-xs md:text-sm text-white/70 mt-0.5">Private coaching is available when the Monday meeting and membership are not enough. Calm, direct help for boundaries, next steps, and family decisions.</p>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
+                  See Coaching Options <ArrowRight className="w-4 h-4" />
                 </span>
               </div>
             </div>
@@ -791,13 +813,13 @@ const Index = () => {
       <section className="container mx-auto px-4 py-10 md:py-16">
         <div className="text-center mb-6 md:mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Latest from Our Blog</h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Expert insights on addiction, recovery, and family support</p>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Practical articles on addiction, recovery, and what families can do next</p>
         </div>
         <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
           {featuredArticles.map((article, index) => (
             <Link
-              key={article.id}
-              to={`/blog/${article.id}`}
+              key={article.slug}
+              to={`/blog/${article.slug}`}
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentArticleIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
@@ -858,21 +880,27 @@ const Index = () => {
       {/* Footer CTA */}
       <section className="container mx-auto px-4 py-10 md:py-16 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">You've Been Carrying This Alone Long Enough.</h2>
+          <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">You Have Been Carrying Too Much for Too Long.</h2>
           <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
-            Let us help you figure out the next right move — for you and your family.
+            Let us help you get clear on the next right move for you and your family.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
-            <a href="tel:5412415886" className="w-full sm:w-auto">
+            <Link to="/monday-zoom-registration" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-green hover:bg-logo-green/90 px-6 md:px-8 text-sm md:text-base">
-                <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                Call Now: (541) 241-5886
+                <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+                Join Monday's Free Zoom
               </Button>
-            </a>
+            </Link>
             <Link to="/family-membership" className="w-full sm:w-auto">
               <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-green hover:bg-logo-green hover:text-white">
                 <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
-                Try Free for 7 Days
+                Start Membership
+              </Button>
+            </Link>
+            <Link to="/family-coaching" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base">
+                <Phone className="w-4 h-4 md:w-5 md:h-5" />
+                Explore Coaching
               </Button>
             </Link>
           </div>

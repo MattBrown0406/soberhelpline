@@ -84,15 +84,14 @@ export default function FamilySupport() {
 
         {/* Premium Header Banner */}
         <div className="bg-primary text-primary-foreground py-4 text-center">
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Premium Family Support Resources</h2>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Family support, without the noise</h2>
           <p className="text-primary-foreground/90 text-sm md:text-base max-w-2xl mx-auto px-4 mb-3">
-            Supporting a loved one through addiction is challenging. You don't have to do it alone. 
-            Find resources, guidance, and community support to help you and your family navigate this journey.
+            If addiction has taken over the emotional weather in your home, start here. Find clear guidance, practical tools, and support that helps you think straight again.
           </p>
           {!hasMembership && (
-            <Link to="/family-membership">
+            <Link to="/monday-zoom-registration">
               <Button variant="secondary" size="sm" className="font-semibold">
-                Create a Member Account
+                Join the Free Monday Zoom
               </Button>
             </Link>
           )}
@@ -101,9 +100,36 @@ export default function FamilySupport() {
         {/* Main Content */}
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            {/* Free Consultation CTA */}
+            {/* Start Here CTA */}
             <div className="mb-8">
-              <FreeConsultationCTA />
+              <Card className="border-primary/20 bg-primary/5">
+                <CardContent className="p-6 md:p-8 text-center">
+                  <h2 className="text-2xl font-bold text-logo-green mb-3">Start Here, in This Order</h2>
+                  <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                    If things feel confusing, keep it simple. Start with the free Monday Zoom, use membership for ongoing support, and reach for private coaching when you need more direct help.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Link to="/monday-zoom-registration">
+                      <Button size="lg" className="gap-2 w-full sm:w-auto">
+                        <Calendar className="h-4 w-4" />
+                        Join the Free Monday Zoom
+                      </Button>
+                    </Link>
+                    <Link to="/family-membership">
+                      <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                        <Users className="h-4 w-4" />
+                        Explore Membership
+                      </Button>
+                    </Link>
+                    <Link to="/family-coaching">
+                      <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                        <Phone className="h-4 w-4" />
+                        Explore Coaching
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
             
             {/* Premium Member Content Section */}
@@ -118,7 +144,7 @@ export default function FamilySupport() {
                     Welcome, Member!
                   </h2>
                   <p className="text-muted-foreground">
-                    Access your exclusive premium resources below.
+                    Your resources are below, ready when you need them.
                   </p>
                 </div>
 
@@ -162,7 +188,7 @@ export default function FamilySupport() {
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
                         <p className="text-sm text-muted-foreground">
-                          Join monthly live webinars with experts and access our library of past recordings.
+                          Join monthly live sessions with specialists and revisit past recordings when you need a refresher.
                         </p>
                       </div>
                       <Link to="/family-webinars">
@@ -187,7 +213,7 @@ export default function FamilySupport() {
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
                         <p className="text-sm text-muted-foreground">
-                          Join our community forum to share experiences, ask questions, and connect with families who understand.
+                          Talk with other families, ask honest questions, and be around people who actually understand this terrain.
                         </p>
                       </div>
                       <Link to="/family-forum">
@@ -213,10 +239,10 @@ export default function FamilySupport() {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-logo-green mb-2">
-                          Unlock Premium Member Services (Over 60 Different Exercises, Videos and Guides)
+                          Get the full family support library
                         </h3>
                         <p className="text-muted-foreground mb-6">
-                          Join our family support membership for just $14.99/month to access exclusive resources designed to help you navigate your loved one's addiction journey:
+                          If you want more structure and support, membership gives you practical tools, education, and community designed for real family life under stress.
                         </p>
                         
                         {/* Premium offerings grid */}
@@ -225,56 +251,56 @@ export default function FamilySupport() {
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Education Videos & Resources</span>
-                              <p className="text-sm text-muted-foreground">Expert-led video courses on addiction, recovery, and family healing</p>
+                              <p className="text-sm text-muted-foreground">Clear video lessons on addiction, recovery, and what families can do differently</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Monthly Live Webinars</span>
-                              <p className="text-sm text-muted-foreground">Interactive sessions with addiction specialists and counselors</p>
+                              <p className="text-sm text-muted-foreground">Live sessions with addiction specialists you can actually learn from</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Private Discussion Forum</span>
-                              <p className="text-sm text-muted-foreground">Connect with families who understand your journey</p>
+                              <p className="text-sm text-muted-foreground">A place to talk with families who understand what this does to a home</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
-                              <span className="font-medium text-foreground">1-on-1 Consultations</span>
-                              <p className="text-sm text-muted-foreground">Schedule private calls with certified interventionists</p>
+                              <span className="font-medium text-foreground">Member Coaching Savings</span>
+                              <p className="text-sm text-muted-foreground">Membership comes before coaching, and members save when private support is needed</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Interactive Worksheets</span>
-                              <p className="text-sm text-muted-foreground">Boundary setting, self-care, and family action planning tools</p>
+                              <p className="text-sm text-muted-foreground">Worksheets for boundaries, self-trust, and next-step planning</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Guided Meditations</span>
-                              <p className="text-sm text-muted-foreground">Calming audio exercises for stress relief and emotional balance</p>
+                              <p className="text-sm text-muted-foreground">Simple audio support for the moments when your nervous system is shot</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Decision-Making Tools</span>
-                              <p className="text-sm text-muted-foreground">Is This Help or Enabling? assessments and scenario exercises</p>
+                              <p className="text-sm text-muted-foreground">Decision tools that help you tell the difference between helping and rescuing</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Treatment Navigation Guides</span>
-                              <p className="text-sm text-muted-foreground">Checklists and resources for choosing the right care</p>
+                              <p className="text-sm text-muted-foreground">Straight guidance for sorting through treatment options without getting spun around</p>
                             </div>
                           </div>
                         </div>
@@ -282,7 +308,7 @@ export default function FamilySupport() {
                         <div className="text-center">
                           <Link to="/family-membership">
                             <Button size="lg">
-                              Become a Member - $14.99/month
+                              Start membership, $14.99/month
                             </Button>
                           </Link>
                         </div>
@@ -314,7 +340,7 @@ export default function FamilySupport() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <p className="text-muted-foreground text-sm">
-                    Join our free weekly Zoom meeting led by a certified interventionist. Ask questions, get guidance, and connect with other families — no membership required.
+                    Join our free weekly Zoom meeting led by a certified interventionist. Bring your questions, hear what helps, and connect with other families. No membership required.
                   </p>
                   <Link to="/monday-zoom-registration" className="block text-primary hover:underline">
                     Register for This Monday's Meeting →
@@ -329,7 +355,7 @@ export default function FamilySupport() {
                     Educational Resources
                   </CardTitle>
                   <CardDescription>
-                    Learn about addiction and how to best support your loved one
+                    Learn what addiction does to families and what support can look like now
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -357,8 +383,7 @@ export default function FamilySupport() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground text-sm mb-3">
-                    Setting boundaries is one of the most loving things you can do for your addicted loved one. 
-                    Boundaries protect your well-being while encouraging them to seek help.
+                    Boundaries are not punishment. They protect your well-being, reduce confusion, and make it easier to stop rescuing in the name of love.
                   </p>
                   <Link to="/blog/14" className="text-primary hover:underline text-sm">
                     Read: Defending Your Castle from Addiction →
@@ -393,23 +418,40 @@ export default function FamilySupport() {
               </Card>
             </div>
 
+            <div className="mb-8">
+              <FreeConsultationCTA />
+            </div>
+
             {/* Call to Action */}
             <Card className="bg-primary/5 border-primary/20">
               <CardContent className="p-6 md:p-8 text-center">
                 <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
                 <h2 className="text-xl md:text-2xl font-semibold text-logo-green mb-3">
-                  Need Help Right Now?
+                  Need a Private Next Step?
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                  Our team is here to help you find the right resources for your family. 
-                  Call us for compassionate, judgment-free guidance.
+                  Start with the Monday Zoom if you can. If you need more support after that, membership is the next layer. If the situation is urgent or too specific for a group setting, private coaching is available.
                 </p>
-                <a href="tel:541-241-5886">
-                  <Button size="lg" className="gap-2">
-                    <Phone className="h-4 w-4" />
-                    Call (541) 241-5886
-                  </Button>
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link to="/monday-zoom-registration">
+                    <Button size="lg" className="gap-2 w-full sm:w-auto">
+                      <Calendar className="h-4 w-4" />
+                      Join Monday Zoom
+                    </Button>
+                  </Link>
+                  <Link to="/family-membership">
+                    <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                      <Users className="h-4 w-4" />
+                      Start Membership
+                    </Button>
+                  </Link>
+                  <a href="tel:541-241-5668">
+                    <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                      <Phone className="h-4 w-4" />
+                      Call (541) 241-5668
+                    </Button>
+                  </a>
+                </div>
               </CardContent>
             </Card>
           </div>

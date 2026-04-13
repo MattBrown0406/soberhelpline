@@ -85,6 +85,23 @@ export default function FamilyCoaching() {
               </div>
             </div>
 
+            <Card className="border-primary/20 bg-primary/5 mb-6">
+              <CardContent className="p-5 md:p-6">
+                <div className="flex flex-col gap-4 text-center md:text-left">
+                  <div>
+                    <p className="text-sm font-semibold text-primary mb-1">How to use support without overcomplicating it</p>
+                    <h2 className="text-xl font-bold text-logo-green">Start with the Monday Zoom, then membership, then private coaching</h2>
+                    <p className="text-sm text-muted-foreground mt-2">Coaching is here when you need one-on-one help, but it is not the first public step.</p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link to="/monday-zoom-registration"><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
+                    <Link to="/family-membership"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Users className="h-4 w-4" />Explore Membership</Button></Link>
+                    <Link to="/book-consultation"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Coaching</Button></Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Member Discount Banner */}
             <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
               <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
@@ -101,7 +118,7 @@ export default function FamilyCoaching() {
               <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            {/* Free Consultation CTA */}
+            {/* Family Assessment CTA */}
             <div className="mb-8">
               <FreeConsultationCTA />
             </div>

@@ -23,7 +23,7 @@ import { User, Session } from "@supabase/supabase-js";
 import { usePayPalSubscription } from "@/hooks/usePayPalSubscription";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 
 const referralSources = [
   "Facebook",
@@ -325,9 +325,11 @@ export default function FamilyMembership() {
   if (freeListingActivated) {
     return (
       <>
-        <Helmet>
-          <title>Membership Activated | Sober Helpline</title>
-        </Helmet>
+        <SEOHead
+          title="Membership Activated | Sober Helpline"
+          description="Your Sober Helpline family membership is active and ready to use."
+          noIndex={true}
+        />
         <div className="min-h-screen bg-background">
           <main className="container py-12">
             <Card className="max-w-md mx-auto border-green-500">
@@ -360,10 +362,10 @@ export default function FamilyMembership() {
 
   return (
     <>
-      <Helmet>
-        <title>Family Support Membership | Sober Helpline</title>
-        <meta name="description" content="Join our family support membership program for access to premium resources, support groups, and expert guidance." />
-      </Helmet>
+      <SEOHead
+        title="Family Support Membership | Sober Helpline"
+        description="Join Sober Helpline membership for family education, practical tools, community support, and a calmer plan when addiction has your home upside down."
+      />
 
       <div className="min-h-screen bg-background">
 
@@ -383,7 +385,10 @@ export default function FamilyMembership() {
                 Family Support Membership
               </h1>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                Get access to premium resources, support groups, and expert guidance to help your family through this journey.
+                Get practical education, steady support, and tools that help your family make clearer decisions under stress.
+              </p>
+              <p className="text-sm text-muted-foreground max-w-xl mx-auto mt-3">
+                Start with the free Monday Zoom if you want a no-cost first step. Membership is the next layer of support, and coaching comes after that when private help is needed.
               </p>
             </div>
 
@@ -392,7 +397,7 @@ export default function FamilyMembership() {
                 <Card>
                   <CardHeader>
                     <CardTitle>Member Information</CardTitle>
-                    <CardDescription>Please provide your contact details</CardDescription>
+                    <CardDescription>A few details to set up your account and protect your privacy in the forum</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Username Field */}
@@ -412,7 +417,7 @@ export default function FamilyMembership() {
                             <div className="flex items-start gap-2 mt-2">
                               <Info className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
                               <p className="text-xs text-muted-foreground">
-                                Your username will be displayed in the forum instead of your real name to protect your privacy.
+                                Your username shows in the forum instead of your real name, so you can participate without putting all of your personal information out front.
                               </p>
                             </div>
                             <FormMessage />
@@ -612,7 +617,7 @@ export default function FamilyMembership() {
                         onClick={() => setBillingCycle('trial')}
                         className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0"
                       >
-                        🎉 Try Free for 7 Days
+                        🎉 Start Free for 7 Days
                         <Badge variant="secondary" className="ml-2 bg-white/20 text-white text-xs border-0">
                           Most Popular
                         </Badge>
@@ -651,7 +656,7 @@ export default function FamilyMembership() {
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
                             <span className="text-sm text-green-700 font-medium block">
-                              No payment required • Cancel anytime • Full access after trial for just $14.99/month
+                              No payment required to start • Cancel anytime • Full access continues at $14.99/month after trial
                             </span>
                           </div>
                         </div>
@@ -716,15 +721,15 @@ export default function FamilyMembership() {
                         {paypalLoading || processingPayment || isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Processing...
+                            Setting things up...
                           </>
                         ) : (
-                          <>{billingCycle === 'trial' ? 'Start Free Trial' : 'Subscribe with PayPal'}</>
+                          <>{billingCycle === 'trial' ? 'Start Free Trial' : 'Continue to PayPal'}</>
                         )}
                       </Button>
                     )}
                     <p className="text-sm text-muted-foreground text-center">
-                      Secure payment powered by PayPal. Cancel anytime.
+                      Secure payment through PayPal. Cancel anytime.
                     </p>
                   </CardContent>
                 </Card>
