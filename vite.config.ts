@@ -21,10 +21,9 @@ export default defineConfig(({ mode }) => ({
         manualChunks(id) {
           if (id.includes('@zoom/meetingsdk/embedded')) return 'zoom-embedded';
           if (id.includes('zipcodes') || id.includes('react-simple-maps')) return 'maps-and-geo';
-          if (id.includes('node_modules')) {
+          if (id.includes('node_modules') && !id.includes('recharts')) {
             if (id.includes('react-router') || id.includes('react-dom') || id.includes('/react/')) return 'react-core';
             if (id.includes('@supabase') || id.includes('@tanstack/react-query')) return 'data-layer';
-            if (id.includes('recharts')) return 'charts';
           }
         },
       },
