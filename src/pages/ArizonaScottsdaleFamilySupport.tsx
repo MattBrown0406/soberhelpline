@@ -163,7 +163,7 @@ export default function ArizonaScottsdaleFamilySupport() {
                   Scottsdale families often find that connecting with others in similar situations — regardless of zip code or income — is one of the most powerful steps they can take.
                 </p>
                 <Button asChild>
-                  <Link to="/monday-night-zoom">Join the Monday Zoom →</Link>
+                  <Link to="/monday-zoom-registration">Join the Monday Zoom →</Link>
                 </Button>
               </CardContent>
             </Card>

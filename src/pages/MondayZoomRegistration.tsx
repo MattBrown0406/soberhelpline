@@ -15,9 +15,16 @@ import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { z } from "zod";
 
-const registrationSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Please enter a valid email address").max(255),
+const buildRegistrationSchema = (options: { requireName: boolean; requireEmail: boolean }) => z.object({
+  name: options.requireName
+    ? z.string().trim().min(1, "Name is required").max(100)
+    : z.string().trim().max(100).optional().default(""),
+  email: options.requireEmail
+    ? z.string().trim().email("Please enter a valid email address").max(255)
+    : z.union([
+        z.literal(""),
+        z.string().trim().email("Please enter a valid email address").max(255),
+      ]).default(""),
   phone: z.string().trim().max(20).optional().default(""),
   question: z.string().trim().max(1000).optional().default(""),
 });
@@ -45,6 +52,12 @@ export default function MondayZoomRegistration() {
     preferredContactTime: "",
     preferredTimezone: "America/Los_Angeles",
   });
+
+  const trimmedName = formData.name.trim();
+  const trimmedEmail = formData.email.trim();
+  const hasUserEmail = Boolean(user?.email?.trim());
+  const requireName = !isMemberQuestion || !user || !trimmedName;
+  const requireEmail = !isMemberQuestion || !hasUserEmail;
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -106,7 +119,13 @@ export default function MondayZoomRegistration() {
     e.preventDefault();
     setErrors({});
 
-    const result = registrationSchema.safeParse(formData);
+    const payload = {
+      ...formData,
+      name: trimmedName,
+      email: trimmedEmail || user?.email?.trim() || "",
+    };
+
+    const result = buildRegistrationSchema({ requireName, requireEmail }).safeParse(payload);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
@@ -133,10 +152,10 @@ export default function MondayZoomRegistration() {
         .from("zoom_meeting_registrations")
         .insert({
           user_id: user?.id || null,
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim(),
-          question: formData.question.trim(),
+          name: result.data.name,
+          email: result.data.email,
+          phone: result.data.phone,
+          question: result.data.question,
           request_follow_up: formData.requestFollowUp,
           consent_email_list: formData.consentEmailList,
           meeting_date: meetingDate,
@@ -154,8 +173,8 @@ export default function MondayZoomRegistration() {
 
       void supabase.functions.invoke("send-zoom-registration-email", {
         body: {
-          name: formData.name.trim(),
-          email: formData.email.trim(),
+          name: result.data.name,
+          email: result.data.email,
           registration_id: insertedReg?.id || null,
           consentEmailList: formData.consentEmailList,
         },
@@ -362,26 +381,28 @@ export default function MondayZoomRegistration() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {(!isMemberQuestion || requireName) && (
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Full Name {requireName ? "*" : ""}</Label>
+                      <Input id="name" required={requireName} placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} className={errors.name ? "border-destructive" : ""} />
+                      {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                    </div>
+                  )}
+
+                  {(!isMemberQuestion || requireEmail) && (
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address {requireEmail ? "*" : ""}</Label>
+                      <Input id="email" type="email" required={requireEmail} placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} className={errors.email ? "border-destructive" : ""} />
+                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                    </div>
+                  )}
+
                   {!isMemberQuestion && (
-                    <>
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input id="name" required placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} className={errors.name ? "border-destructive" : ""} />
-                        {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input id="email" type="email" required placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} className={errors.email ? "border-destructive" : ""} />
-                        {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
-                        <Input id="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} className={errors.phone ? "border-destructive" : ""} />
-                        {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
-                      </div>
-                    </>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
+                      <Input id="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} className={errors.phone ? "border-destructive" : ""} />
+                      {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                    </div>
                   )}
 
                   <div className="space-y-2">
