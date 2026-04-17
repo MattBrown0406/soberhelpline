@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { X, ArrowRight, ClipboardList } from "lucide-react";
+import { X, ArrowRight, Calendar, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "leadMagnetDismissed";
@@ -54,7 +54,7 @@ const LeadMagnetPopup = () => {
 
   const handleStart = () => {
     handleDismiss();
-    navigate("/family-situation-assessment");
+    navigate("/monday-zoom-registration");
   };
 
   if (!isVisible) return null;
@@ -76,14 +76,14 @@ const LeadMagnetPopup = () => {
         <div className="bg-gradient-to-br from-primary/20 via-logo-green/20 to-primary/10 px-6 pt-8 pb-6">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-              <ClipboardList className="w-8 h-8 text-primary" />
+              <Calendar className="w-8 h-8 text-primary" />
             </div>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-center text-foreground">
-            Not sure where to start?
+            Join the Free Monday Night Zoom
           </h2>
           <p className="text-center text-muted-foreground mt-2 text-sm">
-            Answer 6 quick questions and we'll tell you exactly what your family needs next.
+            Get live guidance from Matt Brown and connect with families who understand what you are carrying right now.
           </p>
         </div>
 
@@ -92,15 +92,15 @@ const LeadMagnetPopup = () => {
           <ul className="space-y-3 mb-6 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span>Identify enabling patterns that are keeping things stuck</span>
+              <span>Ask urgent questions in real time and leave with clearer next steps</span>
             </li>
             <li className="flex items-start gap-2">
               <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span>Understand how serious the situation really is</span>
+              <span>Join a live Monday night conversation built for families affected by addiction</span>
             </li>
             <li className="flex items-start gap-2">
               <ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span>Get a personalized recommendation — free, no sales pitch</span>
+              <span>Free to attend, no membership required</span>
             </li>
           </ul>
 
@@ -108,15 +108,19 @@ const LeadMagnetPopup = () => {
             onClick={handleStart}
             className="w-full h-11 gap-2 bg-logo-green hover:bg-logo-green/90 text-white"
           >
-            <ClipboardList className="w-4 h-4" />
-            Take the Free 2-Minute Assessment
+            <Video className="w-4 h-4" />
+            Reserve Your Free Monday Spot
           </Button>
+
+          <p className="text-xs text-muted-foreground mt-3 text-center">
+            Every Monday night, led by Matt Brown
+          </p>
 
           <button
             onClick={handleDismiss}
             className="w-full text-xs text-muted-foreground hover:text-foreground mt-3 text-center transition-colors"
           >
-            No thanks, I'll figure it out on my own
+            Not right now
           </button>
         </div>
 

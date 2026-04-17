@@ -412,6 +412,46 @@ export default function FamilyEducation() {
               </div>
             </div>
 
+            <Card className="mb-6 border-amber-500/30 bg-gradient-to-r from-amber-50/80 via-background to-orange-50/80 dark:from-amber-950/20 dark:via-background dark:to-orange-950/20">
+              <CardContent className="p-5 md:p-6">
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="max-w-3xl">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-300 mb-3">
+                      <AlertTriangle className="h-3.5 w-3.5" />
+                      Need help right now?
+                    </div>
+                    <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                      Start with a private consult if things are actively escalating
+                    </h2>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      The education library is here to help you think clearly, but if your family needs a calmer direct plan first, start with a Crisis Family Consult. If you want a free first step, join the Monday night Zoom and come back to the resources after that.
+                    </p>
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mt-4">
+                      <span className="font-semibold text-foreground">Private consults from $150</span>
+                      <span className="text-border">•</span>
+                      <span>$125 for members</span>
+                      <span className="text-border">•</span>
+                      <span>Free Monday Zoom available every week</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row lg:min-w-[260px]">
+                    <Link to="/family-consultation">
+                      <Button className="w-full gap-2 bg-amber-600 hover:bg-amber-700 text-white">
+                        <Compass className="h-4 w-4" />
+                        Book Crisis Family Consult
+                      </Button>
+                    </Link>
+                    <Link to="/monday-zoom-registration">
+                      <Button variant="outline" className="w-full gap-2 border-blue-500/40 text-blue-700 hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-950/30">
+                        <Calendar className="h-4 w-4" />
+                        Join Free Monday Zoom
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Onboarding Quiz Prompt */}
             {!localStorage.getItem("onboarding_quiz_completed") && (
               <Link to="/onboarding-quiz">

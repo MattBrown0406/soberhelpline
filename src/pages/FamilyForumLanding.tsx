@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Users, Heart, MessageCircle, Shield, CheckCircle2, ChevronRight,
-  Phone, Calendar, Lock, Star, MessagesSquare, BookOpen, Sparkles
+  Phone, Calendar, Lock, Star, MessagesSquare, BookOpen, Sparkles, AlertTriangle, Clock3
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import healingCircle from "@/assets/blog-healing-circle-family-support.png";
 const faqItems = [
   {
     question: "Who is the forum for?",
-    answer: "The forum is for family members — spouses, parents, siblings, adult children — who are supporting a loved one through addiction. It doesn't matter where they are in the journey: active use, treatment, early recovery, or relapse. If addiction is affecting your family, you belong here.",
+    answer: "The forum is for family members, spouses, parents, siblings, adult children, who are supporting a loved one through addiction. It doesn't matter where they are in the journey: active use, treatment, early recovery, or relapse. If addiction is affecting your family, you belong here.",
   },
   {
     question: "Is it really anonymous?",
@@ -22,11 +22,11 @@ const faqItems = [
   },
   {
     question: "Who moderates the forum?",
-    answer: "The forum is moderated by certified professionals with direct experience in addiction intervention and family recovery. There are no automated-only moderation systems — a real human reviews flagged content and maintains the tone of the community.",
+    answer: "The forum is moderated by certified professionals with direct experience in addiction intervention and family recovery. There are no automated-only moderation systems, a real human reviews flagged content and maintains the tone of the community.",
   },
   {
     question: "What's the difference between the forum and the Monday Zoom?",
-    answer: "The Monday Zoom is a live, real-time call led by Matt Brown — great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. Both are included with membership.",
+    answer: "The Monday Zoom is a live, real-time call led by Matt Brown, great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. Both are included with membership.",
   },
   {
     question: "What does membership cost?",
@@ -41,7 +41,7 @@ const topics = [
   { icon: Shield, label: "Setting Boundaries", desc: "Strategies that actually work.", color: "bg-orange-500" },
   { icon: MessagesSquare, label: "Intervention Discussions", desc: "Planning or considering an intervention.", color: "bg-red-500" },
   { icon: BookOpen, label: "Treatment Discussions", desc: "Navigating rehab, IOP & sober living.", color: "bg-cyan-500" },
-  { icon: Heart, label: "Recovery Wins", desc: "Celebrate progress — big and small.", color: "bg-yellow-500" },
+  { icon: Heart, label: "Recovery Wins", desc: "Celebrate progress, big and small.", color: "bg-yellow-500" },
   { icon: Sparkles, label: "Self-Care & Wellness", desc: "Because you matter too.", color: "bg-purple-500" },
 ];
 
@@ -49,7 +49,7 @@ const benefits = [
   {
     icon: Users,
     title: "Families Who Truly Understand",
-    desc: "No explaining. No justifying. Everyone here knows what it's like to love someone struggling with addiction. You'll find people who get it — because they're living it too.",
+    desc: "No explaining. No justifying. Everyone here knows what it's like to love someone struggling with addiction. You'll find people who get it, because they're living it too.",
   },
   {
     icon: Shield,
@@ -63,18 +63,18 @@ const benefits = [
   },
   {
     icon: Calendar,
-    title: "Available 24/7 — Not Just Monday Nights",
+    title: "Available 24/7, Not Just Monday Nights",
     desc: "Crises don't wait for scheduled calls. Post at 2am when you can't sleep. Read when you need perspective. The community is always there.",
   },
   {
     icon: Heart,
     title: "Judgment-Free Zone",
-    desc: "No shame. No 'you should have done this sooner.' Families in this forum have made every mistake in the book — and they're here to help you avoid them, not judge you for them.",
+    desc: "No shame. No 'you should have done this sooner.' Families in this forum have made every mistake in the book, and they're here to help you avoid them, not judge you for them.",
   },
   {
     icon: Star,
     title: "Part of a Bigger Support System",
-    desc: "Membership includes the forum, 60+ education guides, recorded webinars, AI tools, and access to the free “The Family Squares”. You're not just joining a forum — you're joining a full recovery support system.",
+    desc: "Membership includes the forum, 60+ education guides, recorded webinars, AI tools, and access to the free “The Family Squares”. You're not just joining a forum, you're joining a full recovery support system.",
   },
 ];
 
@@ -104,11 +104,11 @@ export default function FamilyForumLanding() {
   useEffect(() => {
     const fetchFeaturedThread = async () => {
       const { data } = await supabase
-        .from('forum_posts')
-        .select('id, title, created_at, topic_id')
-        .eq('topic_id', 'share-story')
-        .eq('is_pinned', true)
-        .order('created_at', { ascending: false })
+        .from("forum_posts")
+        .select("id, title, created_at, topic_id")
+        .eq("topic_id", "share-story")
+        .eq("is_pinned", true)
+        .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
       setFeaturedThread(data);
@@ -120,15 +120,12 @@ export default function FamilyForumLanding() {
     <>
       <SEOHead
         title="Family Addiction Support Forum | Connect with Families Who Understand | Sober Helpline"
-        description="Join a professionally moderated sober support forum for families navigating addiction. Anonymous, judgment-free, available 24/7. Connect with families who understand. Free to explore."
+        description="Join a professionally moderated sober support forum for families navigating addiction. Anonymous, judgment-free, available 24/7. Or book a private crisis family consult if you need one-on-one help now."
         jsonLd={[localBusinessSchema, faqSchema] as any}
       />
 
       <div className="min-h-screen bg-background">
-
-        {/* Hero Section */}
         <section className="relative min-h-[520px] flex items-center overflow-hidden">
-          {/* Hero Image */}
           <div className="absolute inset-0">
             <img
               src={familyHero}
@@ -165,12 +162,52 @@ export default function FamilyForumLanding() {
                   </Button>
                 </Link>
               </div>
-              <p className="text-xs text-muted-foreground mt-4">Free Zoom first · Membership for ongoing support · Coaching only if you need a private plan</p>
+              <p className="text-xs text-muted-foreground mt-4">Free Zoom first, membership for ongoing support, coaching only if you need a private plan</p>
             </div>
           </div>
         </section>
 
-        {/* Social Proof Strip */}
+        <section className="relative -mt-8 md:-mt-10 z-20">
+          <div className="container max-w-6xl mx-auto px-4">
+            <div className="rounded-3xl border border-logo-green/20 bg-background/95 backdrop-blur shadow-xl p-5 md:p-7">
+              <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300 text-xs font-semibold mb-3">
+                    <AlertTriangle className="w-3.5 h-3.5" />
+                    Need private help now?
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Book a Crisis Family Consult before joining the community</h2>
+                  <p className="text-sm md:text-base text-muted-foreground max-w-2xl">
+                    If things are actively escalating and you need one-on-one guidance, start with a private consult. The forum and Monday Zoom are excellent support layers, but some families need a calmer, direct plan first.
+                  </p>
+                </div>
+                <div className="grid gap-3">
+                  <div className="rounded-2xl border bg-muted/30 p-4">
+                    <div className="flex items-center gap-2 font-semibold text-logo-green mb-1">
+                      <Clock3 className="w-4 h-4" />
+                      Emergency Game Plan consult
+                    </div>
+                    <p className="text-sm text-muted-foreground">60-minute private coaching session for immediate next steps</p>
+                    <p className="text-xl font-bold text-foreground mt-2">$150 <span className="text-sm font-normal text-muted-foreground">or $125 for members</span></p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link to="/family-consultation" className="flex-1">
+                      <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">
+                        Book a Crisis Family Consult
+                      </Button>
+                    </Link>
+                    <Link to="/book-consultation?plan=emergency" className="flex-1">
+                      <Button variant="outline" className="w-full">
+                        Go straight to booking
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="border-y border-border/40 bg-muted/30 py-4">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm text-muted-foreground font-medium">
@@ -187,7 +224,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* Post-Meeting Thread Callout */}
         {featuredThread && (
           <section className="pt-8 pb-0">
             <div className="container max-w-6xl mx-auto px-4">
@@ -217,13 +253,12 @@ export default function FamilyForumLanding() {
           </section>
         )}
 
-        {/* Why Join Section */}
         <section className="py-16 md:py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">Why Families Join This Forum</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Most support for addiction families is focused on the person struggling. This community is built for you — the family member carrying it all.
+                Most support for addiction families is focused on the person struggling. This community is built for you, the family member carrying it all.
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -242,7 +277,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* Image + Copy Split Section */}
         <section className="py-16 bg-muted/30">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -265,11 +299,11 @@ export default function FamilyForumLanding() {
                   </p>
                   <p>
                     This forum exists because families deserve a place where they don't have to explain themselves.
-                    Where "I paid his rent again even though I swore I wouldn't" isn't judged — it's understood.
+                    Where "I paid his rent again even though I swore I wouldn't" isn't judged, it's understood.
                     Where you can ask "am I enabling?" at midnight and get a real, thoughtful answer.
                   </p>
                   <p>
-                    The forum is professionally moderated by certified addiction intervention specialists —
+                    The forum is professionally moderated by certified addiction intervention specialists,
                     not volunteers, not bots. Real professionals who keep conversations grounded
                     and ensure the community stays safe and constructive.
                   </p>
@@ -287,7 +321,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* Forum Topics Preview */}
         <section className="py-16 md:py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="text-center mb-10">
@@ -319,7 +352,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* What's Included */}
         <section className="py-16 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="text-center mb-10">
@@ -329,7 +361,7 @@ export default function FamilyForumLanding() {
             <div className="grid sm:grid-cols-2 gap-4 mb-10">
               {[
                 { icon: MessagesSquare, label: "Private Family Forum", desc: "Anonymous, professionally moderated, always open" },
-                { icon: Calendar, label: "The Family Squares", desc: "Live weekly call with Matt Brown — free for members" },
+                { icon: Calendar, label: "The Family Squares", desc: "Live weekly call with Matt Brown, free for members" },
                 { icon: BookOpen, label: "60+ Education Guides", desc: "Evidence-based curriculum for family recovery" },
                 { icon: Sparkles, label: "AI-Powered Tools", desc: "Boundary builder, enabling coach, treatment navigator" },
                 { icon: Heart, label: "Recorded Webinars", desc: "Watch past sessions on your schedule" },
@@ -349,7 +381,7 @@ export default function FamilyForumLanding() {
             <div className="text-center">
               <div className="inline-block bg-background rounded-2xl border border-primary/20 px-8 py-6 shadow-sm">
                 <p className="text-4xl font-bold text-logo-green mb-1">$14.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
-                <p className="text-sm text-muted-foreground mb-4">Everything above · Cancel anytime</p>
+                <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
                 <Link to="/family-membership">
                   <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-10">
                     <Users className="h-4 w-4" />
@@ -361,7 +393,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* FAQ Section */}
         <section className="py-16 md:py-24">
           <div className="container max-w-3xl mx-auto px-4">
             <h2 className="text-3xl font-bold text-logo-green mb-10 text-center">Common Questions</h2>
@@ -380,7 +411,6 @@ export default function FamilyForumLanding() {
           </div>
         </section>
 
-        {/* Final CTA */}
         <section className="py-16 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
@@ -388,7 +418,7 @@ export default function FamilyForumLanding() {
               The Conversation You've Been Needing Is Already Happening
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
-              Families just like yours are in the forum right now — sharing, asking questions, and supporting each other.
+              Families just like yours are in the forum right now, sharing, asking questions, and supporting each other.
               You can join them today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -404,19 +434,18 @@ export default function FamilyForumLanding() {
                   Join Membership
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <Link to="/family-consultation">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Book Private Help Now
                 </Button>
-              </a>
+              </Link>
             </div>
             <p className="text-xs text-muted-foreground mt-4">
-              Not ready to join? The <Link to="/monday-zoom-registration" className="text-primary hover:underline">free Monday Zoom</Link> is open to everyone — no membership required.
+              Not ready to join? The <Link to="/monday-zoom-registration" className="text-primary hover:underline">free Monday Zoom</Link> is open to everyone, no membership required.
             </p>
           </div>
         </section>
-
       </div>
     </>
   );

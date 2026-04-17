@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon } from "lucide-react";
+import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon, AlertTriangle, Calendar } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 
 interface MobileNavProps {
@@ -31,29 +31,54 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
               <X className="h-5 w-5" />
             </Button>
           </div>
-          
-            <nav className="flex-1 overflow-y-auto p-4">
-              <div className="space-y-2">
-                <Link to="/roadmap" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
-                    <MapIcon className="w-4 h-4" />
-                    Recovery Roadmap
-                  </Button>
-                </Link>
-                <div className="border-t my-2" />
+
+          <nav className="flex-1 overflow-y-auto p-4">
+            <div className="space-y-2">
+              <Link to="/book-consultation?plan=emergency" onClick={closeMenu}>
+                <Button className="w-full justify-start gap-2 bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
+                  <AlertTriangle className="w-4 h-4" />
+                  Get Help Now
+                </Button>
+              </Link>
+              <Link to="/family-consultation" onClick={closeMenu}>
+                <Button variant="outline" className="w-full justify-start gap-2 border-logo-green/30 text-logo-green">
+                  <Phone className="w-4 h-4" />
+                  Crisis Family Consult
+                </Button>
+              </Link>
+              <Link to="/monday-zoom-registration" onClick={closeMenu}>
+                <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
+                  <Calendar className="w-4 h-4" />
+                  Free Support Group
+                </Button>
+              </Link>
+              <Link to="/roadmap/crisis" onClick={closeMenu}>
+                <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
+                  <MapIcon className="w-4 h-4" />
+                  Crisis Roadmap
+                </Button>
+              </Link>
+
+              <div className="border-t my-2" />
+
               <div className="space-y-1">
                 <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground flex items-center gap-2">
                   <Headphones className="w-4 h-4" />
-                  Addiction Education Resources
+                  Family Options
                 </div>
-                <Link to="/recovery-podcasts" onClick={closeMenu}>
+                <Link to="/family-support" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-6">
-                    Recovery Podcasts
+                    Free Family Support
                   </Button>
                 </Link>
-                <Link to="/addiction-assessment" onClick={closeMenu}>
+                <Link to="/family-coaching" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-6">
-                    Addiction Assessment
+                    Private Coaching Options
+                  </Button>
+                </Link>
+                <Link to="/recovery-resources" onClick={closeMenu}>
+                  <Button variant="ghost" className="w-full justify-start pl-6">
+                    Treatment Options Directory
                   </Button>
                 </Link>
                 <Link to="/blog" onClick={closeMenu}>
@@ -66,40 +91,30 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     FAQs
                   </Button>
                 </Link>
-                <Link to="/family-support" onClick={closeMenu}>
+                <Link to="/addiction-assessment" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-6">
-                    Family Support
+                    Addiction Assessment
                   </Button>
                 </Link>
                 <Link to="/understanding-addiction" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-6">
-                    Understanding Addiction as a Disease
+                    Understanding Addiction
                   </Button>
                 </Link>
-                <Link to="/recovery-resources" onClick={closeMenu}>
+                <Link to="/recovery-podcasts" onClick={closeMenu}>
                   <Button variant="ghost" className="w-full justify-start pl-6">
-                    Find Recovery Resources
-                  </Button>
-                </Link>
-                <Link to="/family-coaching" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full justify-start pl-6">
-                    Family Coaching
-                  </Button>
-                </Link>
-                <Link to="/monday-zoom-registration" onClick={closeMenu}>
-                  <Button variant="ghost" className="w-full justify-start pl-6">
-                    Free Monday Zoom Meeting
+                    Recovery Podcasts
                   </Button>
                 </Link>
               </div>
-              
+
               <a href="#partnership" onClick={closeMenu}>
                 <Button variant="ghost" className="w-full justify-start gap-2">
                   <Heart className="w-4 h-4" />
                   Family Education & Support
                 </Button>
               </a>
-              
+
               <div className="space-y-1">
                 <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
                   For Providers
@@ -114,9 +129,9 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                     Provider Login
                   </Button>
                 </Link>
-                <a 
-                  href="https://gratis-class-d1c.notion.site/2bb286dad2cf8169863de855ab9a22c4?pvs=105" 
-                  target="_blank" 
+                <a
+                  href="https://gratis-class-d1c.notion.site/2bb286dad2cf8169863de855ab9a22c4?pvs=105"
+                  target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
                 >
@@ -126,9 +141,9 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 </a>
               </div>
             </div>
-            
+
             <div className="border-t my-4" />
-            
+
             <div className="space-y-2">
               {user ? (
                 <Button variant="outline" className="w-full" onClick={() => { onLogout(); closeMenu(); }}>
@@ -144,7 +159,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
               )}
             </div>
           </nav>
-          
+
           <div className="p-4 border-t bg-muted/50">
             <a href="tel:5412415668" className="flex items-center justify-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
