@@ -369,10 +369,6 @@ const Index = () => {
           <div className="max-w-5xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background text-logo-green text-xs md:text-sm font-medium mb-4 border border-logo-green/20">
-                  <Phone className="w-4 h-4" />
-                  Private support near the top of the funnel
-                </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Need private help before the free group can help?</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   Start with a crisis family consult if things are escalating now. Then use the free Monday Zoom and membership for continued support if that makes sense for your family.
@@ -389,7 +385,7 @@ const Index = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link to="/family-consultation" className="flex-1">
-                    <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">Book a Crisis Family Consult</Button>
+                    <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">Learn More</Button>
                   </Link>
                   <Link to="/book-consultation?plan=emergency" className="flex-1">
                     <Button variant="outline" className="w-full">Book Now</Button>
