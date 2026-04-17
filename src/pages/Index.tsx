@@ -369,7 +369,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Need private help before the free group can help?</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Need help before the next free family support Zoom meeting?</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   Start with a crisis family consult if things are escalating now. Then use the free Monday Zoom and membership for continued support if that makes sense for your family.
                 </p>
