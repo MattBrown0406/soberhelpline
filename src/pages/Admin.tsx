@@ -447,6 +447,20 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="abandoned-bookings">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MailWarning className="h-5 w-5" />
+                  Abandoned Bookings
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AbandonedBookingsManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="add-provider">
             <Card>
               <CardHeader>
