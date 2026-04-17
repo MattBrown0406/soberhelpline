@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -32,6 +32,7 @@ import { ConsultationManagement } from "@/components/admin/ConsultationManagemen
 import ConsultationProviderCreator from "@/components/admin/ConsultationProviderCreator";
 import { RecordingManagement } from "@/components/admin/RecordingManagement";
 import { SurveyManagement } from "@/components/admin/SurveyManagement";
+import { AbandonedBookingsManagement } from "@/components/admin/AbandonedBookingsManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -208,6 +209,10 @@ const Admin = () => {
             <TabsTrigger value="consultations" className="gap-2">
               <CalendarCheck className="h-4 w-4" />
               Consultations
+            </TabsTrigger>
+            <TabsTrigger value="abandoned-bookings" className="gap-2">
+              <MailWarning className="h-4 w-4" />
+              Abandoned Bookings
             </TabsTrigger>
             <TabsTrigger value="add-provider" className="gap-2">
               <UserPlus className="h-4 w-4" />
@@ -438,6 +443,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ConsultationManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="abandoned-bookings">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MailWarning className="h-5 w-5" />
+                  Abandoned Bookings
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AbandonedBookingsManagement />
               </CardContent>
             </Card>
           </TabsContent>
