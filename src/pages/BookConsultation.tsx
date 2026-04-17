@@ -651,13 +651,23 @@ const BookConsultation = () => {
               <h1 className="text-2xl font-bold mb-2 text-center">
                 {isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}
               </h1>
-              <p className="text-muted-foreground text-center mb-6">
+              <p className="text-muted-foreground text-center mb-3">
                 {isParallelRecovery
                   ? `Choose the provider who feels like the best fit for your 12-session program ($1,500)`
                   : isStabilization
                   ? "Choose a provider for your 4-session stabilization plan ($500)"
-                  : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150)"}`}
+                  : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150, or $125 for members)"}`}
               </p>
+              {!isMultiSession && !isMember && (
+                <div className="flex justify-center mb-6">
+                  <Button asChild variant="outline" size="sm" className="gap-1.5">
+                    <Link to="/family-membership">
+                      <Crown className="w-4 h-4" />
+                      Join membership to save $25 per session
+                    </Link>
+                  </Button>
+                </div>
+              )}
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
@@ -685,7 +695,14 @@ const BookConsultation = () => {
                                   <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">Member</span>
                                 </span>
                               ) : (
-                                <span>${p.session_rate} / {p.session_duration_minutes} min</span>
+                                <span>
+                                  ${p.session_rate} / {p.session_duration_minutes} min
+                                  {!isMultiSession && (
+                                    <span className="ml-2 text-xs text-muted-foreground font-normal">
+                                      (or $125 for members)
+                                    </span>
+                                  )}
+                                </span>
                               )}
                             </p>
                           </div>
