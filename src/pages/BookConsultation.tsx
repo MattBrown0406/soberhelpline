@@ -224,6 +224,21 @@ const BookConsultation = () => {
         });
       }
 
+      // Mark abandoned booking as completed (so we don't follow up)
+      if (abandonedBookingId) {
+        await supabase
+          .from("abandoned_bookings")
+          .update({ completed: true })
+          .eq("id", abandonedBookingId);
+      } else if (intakeData.client_email) {
+        // No id (e.g. payment captured after redirect on fresh page load) — mark by email
+        await supabase
+          .from("abandoned_bookings")
+          .update({ completed: true })
+          .eq("client_email", intakeData.client_email.toLowerCase())
+          .eq("completed", false);
+      }
+
       // Clean up URL and navigate to onboarding
       const storedPlan = localStorage.getItem("consultation_plan_type") || "single";
       localStorage.removeItem("consultation_plan_type");
