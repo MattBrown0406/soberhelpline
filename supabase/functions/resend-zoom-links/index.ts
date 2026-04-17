@@ -79,12 +79,18 @@ serve(async (req: Request) => {
       });
     }
 
-    // Deduplicate by email
+    // Get suppression list
+    const { data: suppressed } = await adminSupabase
+      .from("email_suppression_list")
+      .select("email");
+    const suppressedEmails = new Set((suppressed || []).map((s: any) => s.email.toLowerCase()));
+
+    // Deduplicate by email and exclude suppressed addresses
     const seen = new Set<string>();
     const unique: { name: string; email: string; id?: string }[] = [];
     for (const r of recipients) {
       const key = r.email.toLowerCase();
-      if (!seen.has(key)) {
+      if (!seen.has(key) && !suppressedEmails.has(key)) {
         seen.add(key);
         unique.push(r);
       }

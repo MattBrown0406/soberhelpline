@@ -83,11 +83,18 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Deduplicate by email
+    // Get suppression list
+    const { data: suppressed } = await supabase
+      .from("email_suppression_list")
+      .select("email");
+    const suppressedEmails = new Set((suppressed || []).map((s: any) => s.email.toLowerCase()));
+
+    // Deduplicate by email and exclude suppressed
     const uniqueEmails = new Map<string, string>();
     registrants.forEach((r) => {
-      if (r.email && !uniqueEmails.has(r.email.toLowerCase())) {
-        uniqueEmails.set(r.email.toLowerCase(), r.first_name || "Friend");
+      const key = r.email?.toLowerCase();
+      if (key && !uniqueEmails.has(key) && !suppressedEmails.has(key)) {
+        uniqueEmails.set(key, r.first_name || "Friend");
       }
     });
 
