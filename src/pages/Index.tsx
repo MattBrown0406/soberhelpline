@@ -293,7 +293,7 @@ const Index = () => {
             <span className="text-border">•</span>
             <span>Practical guidance for hard moments</span>
             <span className="text-border">•</span>
-            <span>Support for families, not just the person using</span>
+            <span>Support specifically for families</span>
           </div>
         </div>
       </section>
