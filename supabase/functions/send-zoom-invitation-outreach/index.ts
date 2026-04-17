@@ -169,15 +169,24 @@ serve(async (req: Request) => {
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
     const questionUrl = `${siteUrl}/monday-zoom-registration?member=true`;
 
+    // 0. Get suppression list (emails to exclude from all bulk distributions)
+    const { data: suppressed } = await adminSupabase
+      .from("email_suppression_list")
+      .select("email");
+    const suppressedEmails = new Set(
+      (suppressed || []).map((s: any) => s.email.toLowerCase())
+    );
+
     // 1. Get emails already registered for this upcoming Monday
     const { data: currentRegistrations } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email")
       .eq("meeting_date", nextMonday);
 
-    const alreadyRegisteredEmails = new Set(
-      (currentRegistrations || []).map((r: any) => r.email.toLowerCase())
-    );
+    const alreadyRegisteredEmails = new Set([
+      ...(currentRegistrations || []).map((r: any) => r.email.toLowerCase()),
+      ...suppressedEmails,
+    ]);
     console.log(`Already registered for ${nextMonday}: ${alreadyRegisteredEmails.size}`);
 
     // 2. Get all active family members

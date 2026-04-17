@@ -64,7 +64,15 @@ serve(async (req: Request) => {
 
     if (e2) throw e2;
 
-    const thisWeekEmails = new Set((thisWeek || []).map((r: any) => r.email.toLowerCase()));
+    const { data: suppressed } = await adminSupabase
+      .from("email_suppression_list")
+      .select("email");
+    const suppressedEmails = new Set((suppressed || []).map((s: any) => s.email.toLowerCase()));
+
+    const thisWeekEmails = new Set([
+      ...(thisWeek || []).map((r: any) => r.email.toLowerCase()),
+      ...suppressedEmails,
+    ]);
 
     // Get all active family members (to exclude — they get separate reminders)
     const { data: activeSubs } = await adminSupabase

@@ -152,7 +152,18 @@ serve(async (req: Request) => {
       }
     }
 
-    // 4. Get all zoom registrants not already in the map and not active members
+    // 4. Get suppression list
+    const { data: suppressed } = await adminSupabase
+      .from("email_suppression_list")
+      .select("email");
+    const suppressedEmails = new Set((suppressed || []).map((s: any) => s.email.toLowerCase()));
+
+    // Remove any suppressed emails already added to recipientMap
+    for (const email of [...recipientMap.keys()]) {
+      if (suppressedEmails.has(email)) recipientMap.delete(email);
+    }
+
+    // 5. Get all zoom registrants not already in the map and not active members
     const { data: allRegistrants } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email, name")
@@ -160,7 +171,7 @@ serve(async (req: Request) => {
 
     for (const r of (allRegistrants || [])) {
       const email = r.email.toLowerCase();
-      if (!recipientMap.has(email) && !activeMemberEmails.has(email)) {
+      if (!recipientMap.has(email) && !activeMemberEmails.has(email) && !suppressedEmails.has(email)) {
         const firstName = (r.name || "Friend").split(' ')[0];
         recipientMap.set(email, firstName);
       }
