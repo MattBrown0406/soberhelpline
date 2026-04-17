@@ -266,7 +266,7 @@ const Index = () => {
                   <Link to="/family-consultation" className="w-full sm:w-auto">
                     <Button size="lg" className="w-full gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-6 md:px-8 py-4 text-sm md:text-base shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
                       <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                      Book a Crisis Family Consult
+                      Learn more about a Crisis Family Consult
                     </Button>
                   </Link>
                   <Link to="/book-consultation?plan=emergency" className="w-full sm:w-auto">
