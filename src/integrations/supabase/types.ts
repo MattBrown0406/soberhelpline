@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      abandoned_bookings: {
+        Row: {
+          client_email: string
+          client_name: string | null
+          client_phone: string | null
+          completed: boolean
+          created_at: string
+          followup_sent_at: string | null
+          id: string
+          last_step: number | null
+          plan_type: string | null
+          provider_id: string | null
+          provider_name: string | null
+          selected_date: string | null
+          selected_time: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          client_email: string
+          client_name?: string | null
+          client_phone?: string | null
+          completed?: boolean
+          created_at?: string
+          followup_sent_at?: string | null
+          id?: string
+          last_step?: number | null
+          plan_type?: string | null
+          provider_id?: string | null
+          provider_name?: string | null
+          selected_date?: string | null
+          selected_time?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          client_email?: string
+          client_name?: string | null
+          client_phone?: string | null
+          completed?: boolean
+          created_at?: string
+          followup_sent_at?: string | null
+          id?: string
+          last_step?: number | null
+          plan_type?: string | null
+          provider_id?: string | null
+          provider_name?: string | null
+          selected_date?: string | null
+          selected_time?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       boundary_clarity_worksheets: {
         Row: {
           boundary_about_me: boolean | null
