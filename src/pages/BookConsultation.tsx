@@ -334,6 +334,59 @@ const BookConsultation = () => {
     return () => clearTimeout(timer);
   }, [intakeData.client_email, checkMembershipByEmail]);
 
+  // Capture/update abandoned booking record (debounced) — for follow-up emails
+  useEffect(() => {
+    const email = intakeData.client_email?.trim();
+    if (!email || !email.includes("@") || email.length < 5) return;
+
+    const timer = setTimeout(async () => {
+      const payload = {
+        client_email: email.toLowerCase(),
+        client_name: intakeData.client_name || null,
+        client_phone: intakeData.client_phone || null,
+        plan_type: planType || "single",
+        provider_id: selectedProvider?.id || null,
+        provider_name: selectedProvider?.full_name || null,
+        selected_date: selectedDate || null,
+        selected_time: selectedSlot?.start_time || null,
+        last_step: step,
+        user_id: user?.id || null,
+      };
+
+      try {
+        if (abandonedBookingId) {
+          await supabase
+            .from("abandoned_bookings")
+            .update(payload)
+            .eq("id", abandonedBookingId);
+        } else {
+          const { data } = await supabase
+            .from("abandoned_bookings")
+            .insert(payload)
+            .select("id")
+            .single();
+          if (data?.id) setAbandonedBookingId(data.id);
+        }
+      } catch (e) {
+        // Silent — never block the booking flow
+        console.warn("Abandoned booking tracking failed:", e);
+      }
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [
+    intakeData.client_email,
+    intakeData.client_name,
+    intakeData.client_phone,
+    planType,
+    selectedProvider?.id,
+    selectedDate,
+    selectedSlot?.start_time,
+    step,
+    abandonedBookingId,
+    user?.id,
+  ]);
+
   const selectProvider = async (provider: any) => {
     const providerTz = provider.timezone || "America/Los_Angeles";
     const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
