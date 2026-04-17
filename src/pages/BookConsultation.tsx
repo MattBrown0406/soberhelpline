@@ -177,6 +177,9 @@ const BookConsultation = () => {
   // Combined membership status
   const isMember = isMemberViaAuth || isMemberViaEmail;
 
+  // Abandoned booking tracking — capture email and progress so we can follow up
+  const [abandonedBookingId, setAbandonedBookingId] = useState<string | null>(null);
+
   const urlParams = new URLSearchParams(window.location.search);
   const planType = urlParams.get("plan");
   const isStabilization = planType === "stabilization";
