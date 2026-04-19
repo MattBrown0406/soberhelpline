@@ -115,12 +115,132 @@ import addictionTriggersCravingsFamilyImg from "@/assets/blog-addiction-triggers
 import dopamineAddictionBrainScienceImg from "@/assets/blog-dopamine-addiction-brain-science.jpg";
 import whatToSayLovedOneRelapsesImg from "@/assets/blog-what-to-say-loved-one-relapses.jpg";
 import talkingToChildrenAboutAddictionImg from "@/assets/blog-talking-to-children-about-addiction.jpg";
+import lovedOneLyingAddictionImg from "@/assets/blog-loved-one-lying-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 108,
+    slug: "what-to-do-when-loved-one-lies-about-drinking-drug-use",
+    seoTitle: "When a Loved One Lies About Drinking or Drug Use: What to Do",
+    metaDescription: "When a loved one lies about drinking or drug use, it's painful and confusing. Learn why it happens, what to say, and how to respond in a way that actually helps.",
+    title: "What to Do When a Loved One Lies About Their Drinking or Drug Use",
+    excerpt: "You found the empty bottles. You noticed the missing money. You confronted them — and they looked you in the eye and said it wasn't what you thought. If your loved one is lying about their drinking or drug use, you're not alone.",
+    content: `You found the empty bottles. You noticed the missing money. You confronted them — and they looked you in the eye and said it wasn't what you thought. Maybe they had an explanation that almost made sense. Maybe they turned it around on you. Either way, you walked away knowing the truth, but feeling strangely like the one who did something wrong.
+
+If your loved one is lying about their drinking or drug use, you're not alone. Deception is one of the most painful and disorienting parts of addiction — for the family. It's also one of the most misunderstood. Learning why it happens, and how to respond without shutting down the possibility of change, can make a real difference in where this goes.
+
+This article will walk you through exactly that: the psychology behind the lies, what to say (and what not to say), and how to stay clear-headed when someone you love is telling you not to trust what you know.
+
+**Why People With Addiction Lie — It's Not Just About You**
+
+Lying about addiction is not primarily a character flaw. That's worth saying clearly, because the lie feels deeply personal — and sometimes it is personal. But most of the time, the deception is driven by a combination of shame, self-preservation, and the way addiction reshapes the brain's priorities.
+
+Here's what's usually happening beneath the surface:
+
+* **Shame is unbearable.** Most people who struggle with addiction already know something is wrong. Admitting it out loud — especially to someone they love — can feel like standing in front of a judge. The lie is a shield against that level of exposure.
+* **Addiction protects itself.** The addicted brain will rationalize, minimize, and deny in order to protect continued access to the substance. This is neurological, not just moral. Denial is a symptom.
+* **They're afraid of the consequences.** Loss of relationship, loss of housing, loss of trust — the stakes feel enormous. The lie buys time, even when it creates a bigger problem.
+
+None of this means the lying is okay, or that you have to accept it. It means you're dealing with a sick person making poor decisions — not a fundamentally dishonest one who can never be trusted again.
+
+**How to Respond When a Loved One Lies About Their Drug Use or Drinking**
+
+The worst responses — though completely understandable — are the ones that either explode or completely shut down. A shouting match rarely breaks through denial. Neither does cold silence. What tends to work is calm, specific, and grounded.
+
+**Stay Connected to What You Actually Know**
+
+Don't argue about feelings or intent. Stick to observable facts: what you saw, what you found, what changed. "I found these" is harder to argue with than "I think you're lying to me." When you make it about evidence rather than accusation, you take the escape hatch of "you don't trust me" off the table.
+
+**Don't Demand a Confession**
+
+Many families get into an exhausting cycle of trying to get their loved one to admit the truth. The confession feels like it would be a breakthrough — a starting point. But it rarely comes on demand. And pursuing it puts the entire conversation on your loved one's terms: either they capitulate or they dig in deeper.
+
+Instead of "Just admit it," try: "I'm not asking you to agree with me. I'm telling you what I've seen, and what I need to happen from here." That shifts the conversation from debate to direction.
+
+**Be Clear About What Changes**
+
+This is the part families most often skip. After naming what you've observed, be specific about what you need and what will happen if things don't change. Vague statements like "this can't go on" don't register. Specific statements do: "If I find out you've been drinking and driving again, I'm not going to be able to let you borrow my car."
+
+That's not a threat. That's a [LINK:limit:/blog/boundaries-ultimatums-guide]. There's a difference — and your loved one will feel it.
+
+**What Not to Say When a Loved One Is Lying About Addiction**
+
+A few phrases that feel natural in the moment but almost always backfire:
+
+* **"You always do this."** Makes it about pattern and character, not the current moment. Invites defensiveness.
+* **"How could you lie to my face?"** Frames the issue as a personal betrayal. Shifts focus from the addiction to the relationship damage — which matters, but isn't the leverage point right now.
+* **"I'm done."** Only say this if you mean it. Empty threats destroy your credibility and teach your loved one that consequences aren't real.
+* **"Why do you keep lying to me?"** Asks them to explain something they may not fully understand themselves. Usually produces either deflection or a non-answer.
+
+The goal of the conversation isn't to win. It's to stay honest yourself, stay grounded in what you know, and leave the door to change open — without keeping it open at your own expense.
+
+**When the Lying Feels Like Gaslighting**
+
+Sometimes it goes beyond denying a specific incident. Sometimes your loved one questions your memory, tells you you're imagining things, or implies you're the one with the problem. This is gaslighting — and it can do serious damage to your sense of reality over time.
+
+A few things worth knowing if this is your situation:
+
+First, trust your observations. You don't need a confession to know what you saw. Write things down if it helps — dates, what you found, what was said. A log anchors your reality when conversations start to blur.
+
+Second, talk to someone outside the situation. A therapist, a trusted friend, a coach — someone who can reflect your reality back to you accurately. Isolation makes gaslighting more effective. Connection makes it less so.
+
+Third, the fact that they're working hard to convince you that nothing is wrong is, in itself, meaningful information. People who aren't struggling don't need to work that hard.
+
+**How to Take Care of Yourself When You Can't Trust What They're Saying**
+
+Living with chronic dishonesty is exhausting. Over time, it erodes your peace, your confidence, and your ability to trust your own instincts. That's not a minor side effect — that's a real injury that deserves real attention.
+
+A few things that actually help families in this situation:
+
+* **Stop trying to catch them.** Surveillance is exhausting and rarely leads anywhere useful. Set limits based on what you need to feel okay — not based on gathering evidence.
+* **Decide what you're going to do — regardless of what they do.** Your plan shouldn't depend on whether they come clean. It should be based on what you need and what you can live with.
+* **Get your own support.** [LINK:Al-Anon](https://al-anon.org/) or [LINK:Nar-Anon](https://www.nar-anon.org/), a family therapist, or a coach who works with families in these situations can help you process what you're experiencing without carrying it alone.
+
+You don't have to wait for them to get honest before you start taking care of yourself.
+
+**You Can Stay Clear Without Giving Up on Them**
+
+Here's the truth: you can love someone deeply and still refuse to pretend that what's happening isn't happening. You can stay connected while also being honest about what you see. You can hold onto hope for their recovery and still stop accepting things that aren't okay.
+
+Being clear doesn't mean being cold. It means having enough respect for both of you to stop dancing around the obvious. And sometimes, that clarity — delivered without anger and without ultimatums — is exactly what creates the opening for change.
+
+If you're navigating this and want support from people who understand it, SoberHelpline.com exists for exactly this. Our family coaching, Monday night support calls, and member community are all designed for families who are trying to figure out what to do — not families in crisis, but families in the hard middle, doing the best they can. You're welcome here.
+
+**Frequently Asked Questions**
+
+**Why does my loved one lie about their addiction even when I already know the truth?**
+
+Lying about addiction is usually driven by shame, fear of consequences, and the brain's compulsion to protect access to the substance. Even when the evidence is obvious, the addicted person may not be able to admit the truth because doing so feels like losing everything at once. It's a symptom of the disease — not a reflection of how much they care about you.
+
+**What should I say when I catch my loved one in a lie about drinking or drugs?**
+
+Stay factual, stay calm, and be specific about what you observed. Avoid demanding a confession — instead, state what you know and what you need to happen from here. Something like: "I found this, and I need us to talk about what's next" is more effective than "Why did you lie to me?" It keeps the conversation focused on action rather than defense.
+
+**Is it gaslighting when someone denies their addiction?**
+
+It can be. When a loved one not only denies their substance use but actively tries to make you question your own perception — telling you that you're imagining things, that you're overreacting, or that you're the problem — that's gaslighting. It's worth taking seriously. Writing down what you observe, talking to a trusted third party, and getting your own support can help you stay grounded in reality.
+
+**How do I stop enabling the lies while still keeping the relationship?**
+
+The key is separating your behavior from theirs. You can stop covering for them, stop making excuses, and stop pretending everything is fine — without cutting them off. Set clear limits based on what you can live with, and follow through on them consistently. Limits protect you and create real consequences that matter; lectures and arguments usually don't.
+
+**Should I confront my loved one about lying, or wait until they're ready?**
+
+You don't have to wait for them to be ready to be honest with yourself about what's happening. Confrontations can be done poorly (heated, accusatory, focused on winning) or done well (calm, factual, focused on your needs and next steps). Timing matters — choose a moment when neither of you is impaired or in the middle of an argument. But don't wait indefinitely for a perfect moment that never comes.
+
+**Where can I get support as a family member dealing with a loved one's addiction and lying?**
+
+[LINK:Al-Anon](https://al-anon.org/) and [LINK:Nar-Anon](https://www.nar-anon.org/) offer peer support from others who have been in your position. A therapist who specializes in family systems and addiction can help you process the impact on you personally. SoberHelpline.com offers family coaching and a member community specifically for people navigating exactly this kind of situation — you can start with a free Monday night Family Squares call to get a feel for the support that's available.`,
+    image: lovedOneLyingAddictionImg,
+    author: "Matt Brown",
+    date: "2026-04-19",
+    category: "Family Support",
+    keywords: ["loved one lying about addiction", "addict lying", "spouse lying about drinking", "denial in addiction", "gaslighting and addiction", "family addiction support"]
+  },
   {
     id: 107,
     slug: "how-to-talk-to-children-about-a-parents-addiction",
