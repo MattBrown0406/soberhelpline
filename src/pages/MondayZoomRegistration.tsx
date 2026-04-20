@@ -137,54 +137,32 @@ export default function MondayZoomRegistration() {
 
     setIsSubmitting(true);
 
-    const now = new Date();
-    const day = now.getDay();
-    const daysUntilMonday = day <= 1 ? 1 - day : 8 - day;
-    const nextMonday = new Date(now);
-    nextMonday.setDate(now.getDate() + daysUntilMonday);
-    const yyyy = nextMonday.getFullYear();
-    const mm = String(nextMonday.getMonth() + 1).padStart(2, "0");
-    const dd = String(nextMonday.getDate()).padStart(2, "0");
-    const meetingDate = `${yyyy}-${mm}-${dd}`;
-
     try {
-      const { data: insertedReg, error } = await supabase
-        .from("zoom_meeting_registrations")
-        .insert({
-          user_id: user?.id || null,
+      const { data, error } = await supabase.functions.invoke("register-zoom-meeting", {
+        body: {
           name: result.data.name,
           email: result.data.email,
           phone: result.data.phone,
           question: result.data.question,
-          request_follow_up: formData.requestFollowUp,
-          consent_email_list: formData.consentEmailList,
-          meeting_date: meetingDate,
-          auto_register: formData.autoRegister,
-          preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
-          preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
-          preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
-        })
-        .select("id")
-        .single();
+          requestFollowUp: formData.requestFollowUp,
+          consentEmailList: formData.consentEmailList,
+          autoRegister: formData.autoRegister,
+          preferredContactDate: formData.requestFollowUp ? formData.preferredContactDate || null : null,
+          preferredContactTime: formData.requestFollowUp ? formData.preferredContactTime || null : null,
+          preferredTimezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+        },
+      });
 
       if (error) throw error;
+      if (data?.error) throw new Error(typeof data.error === "string" ? data.error : "Registration failed.");
 
       setSubmitted(true);
 
-      void supabase.functions.invoke("send-zoom-registration-email", {
-        body: {
-          name: result.data.name,
-          email: result.data.email,
-          registration_id: insertedReg?.id || null,
-          consentEmailList: formData.consentEmailList,
-        },
-      }).catch((emailErr) => {
-        console.error("Email sending failed (registration still saved):", emailErr);
-      });
-
       toast({
         title: "Registration Submitted!",
-        description: "You're registered! Check your email for the Zoom meeting link.",
+        description: data?.emailSent === false
+          ? "You're registered. If the email is delayed, you can still join from this page."
+          : "You're registered! Check your email for the Zoom meeting link.",
       });
     } catch (err: unknown) {
       console.error("Registration error:", err);

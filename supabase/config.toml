@@ -80,5 +80,11 @@ verify_jwt = false
 [functions.auto-register-zoom]
 verify_jwt = false
 
+[functions.register-zoom-meeting]
+verify_jwt = false
+
+[functions.send-apology-reregistration]
+verify_jwt = false
+
 [functions.zoom-webhook]
 verify_jwt = false
