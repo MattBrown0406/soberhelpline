@@ -149,19 +149,20 @@ serve(async (req: Request) => {
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Hi ${safeName},</h1>
-          <p>Thank you for joining us — or trying to join us — for <strong>"The Family Squares"</strong> Zoom meeting. I want to sincerely apologize that the joining link didn't work as it was supposed to.</p>
+          <p>Thank you for trying to register for <strong>"The Family Squares"</strong>. I want to sincerely apologize for the technical issues that prevented some people from registering properly.</p>
           <p><strong>The issue has been identified and corrected.</strong></p>
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 24px 0; text-align: center;">
             <h2 style="margin: 0 0 10px 0; color: #166534;">✅ You're Pre-Registered!</h2>
-            <p style="margin: 0 0 15px 0; color: #15803d;">You've been automatically registered for the next meeting.</p>
+            <p style="margin: 0 0 15px 0; color: #15803d;">You've been automatically registered and your meeting link is below.</p>
             ${joinUrl ? `<a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Join on SoberHelpline.com</a>` : ''}
             ${externalZoomLink ? `<div style="margin-top:12px"><a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 12px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">Join via Zoom App</a><p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} | Passcode: ${escapeHtml(passcode)}</p></div>` : ''}
           </div>
+          <p>I hope to see you tonight.</p>
           <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
           <p style="color: #6b7280; font-size: 12px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
         </div>`;
 
-      const success = await sendEmail(email, "We're Sorry — You're Pre-Registered for The Family Squares", html);
+      const success = await sendEmail(email, "We're Sorry + Your Registration Link for Tonight", html);
       results[email] = success;
     }
 
