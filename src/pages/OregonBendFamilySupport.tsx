@@ -80,12 +80,6 @@ export default function OregonBendFamilySupport() {
                   Get Coaching
                 </Button>
               </Link>
-              <Link to="/central-oregon-family-program">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <Users className="h-4 w-4" />
-                  Central Oregon Family Program
-                </Button>
-              </Link>
             </div>
           </div>
         </section>
