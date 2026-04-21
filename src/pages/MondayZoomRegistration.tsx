@@ -138,31 +138,30 @@ export default function MondayZoomRegistration() {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("register-zoom-meeting", {
+      const { error } = await supabase.functions.invoke("public-register-monday-zoom", {
         body: {
+          user_id: user?.id || null,
           name: result.data.name,
           email: result.data.email,
           phone: result.data.phone,
           question: result.data.question,
-          requestFollowUp: formData.requestFollowUp,
-          consentEmailList: formData.consentEmailList,
-          autoRegister: formData.autoRegister,
-          preferredContactDate: formData.requestFollowUp ? formData.preferredContactDate || null : null,
-          preferredContactTime: formData.requestFollowUp ? formData.preferredContactTime || null : null,
-          preferredTimezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+          request_follow_up: formData.requestFollowUp,
+          consent_email_list: formData.consentEmailList,
+          meeting_date: meetingDate,
+          auto_register: formData.autoRegister,
+          preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
+          preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
+          preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
         },
       });
 
       if (error) throw error;
-      if (data?.error) throw new Error(typeof data.error === "string" ? data.error : "Registration failed.");
 
       setSubmitted(true);
 
       toast({
         title: "Registration Submitted!",
-        description: data?.emailSent === false
-          ? "You're registered. If the email is delayed, you can still join from this page."
-          : "You're registered! Check your email for the Zoom meeting link.",
+        description: "You're registered! Check your email for the Zoom meeting link.",
       });
     } catch (err: unknown) {
       console.error("Registration error:", err);

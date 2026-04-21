@@ -33,6 +33,9 @@ verify_jwt = false
 [functions.send-zoom-registration-email]
 verify_jwt = false
 
+[functions.public-register-monday-zoom]
+verify_jwt = false
+
 [functions.process-consultation-booking]
 verify_jwt = false
 
@@ -87,4 +90,7 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.zoom-webhook]
+verify_jwt = false
+
+[functions.central-oregon-family-intake]
 verify_jwt = false
