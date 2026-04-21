@@ -819,11 +819,33 @@ export default function FamilyEducation() {
                             <CardTitle className={`text-sm font-medium ${c(meditation.color).text}`}>
                               {meditation.title}
                             </CardTitle>
-                            <a href={`/audio/${meditation.file}`} download className="shrink-0">
-                              <Button variant="ghost" size="sm" className={`gap-1 ${c(meditation.color).iconText}`}>
-                                <Download className="h-4 w-4" />
-                              </Button>
-                            </a>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className={`gap-1 shrink-0 ${c(meditation.color).iconText}`}
+                              onClick={async () => {
+                                const url = `/audio/${meditation.file}`;
+                                try {
+                                  const response = await fetch(url);
+                                  if (!response.ok) throw new Error("Download failed");
+                                  const blob = await response.blob();
+                                  const blobUrl = URL.createObjectURL(blob);
+                                  const a = document.createElement("a");
+                                  a.href = blobUrl;
+                                  a.download = meditation.file;
+                                  document.body.appendChild(a);
+                                  a.click();
+                                  document.body.removeChild(a);
+                                  URL.revokeObjectURL(blobUrl);
+                                } catch {
+                                  window.open(url, "_blank");
+                                }
+                              }}
+                              aria-label={`Download ${meditation.title}`}
+                            >
+                              <Download className="h-4 w-4" />
+                            </Button>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-3 pb-4">
