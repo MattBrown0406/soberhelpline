@@ -127,6 +127,10 @@ const RoadmapLanding = React.lazy(() => import("./pages/RoadmapLanding"));
 const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
 const RoadmapConfirmation = React.lazy(() => import("./pages/RoadmapConfirmation"));
 const RoadmapCrisis = React.lazy(() => import("./pages/RoadmapCrisis"));
+const CentralOregonFamilyProgram = React.lazy(() => import("./pages/CentralOregonFamilyProgram"));
+const CentralOregonFamilyProgramIntake = React.lazy(() => import("./pages/CentralOregonFamilyProgramIntake"));
+const CentralOregonFamilyProgramSeatRequest = React.lazy(() => import("./pages/CentralOregonFamilyProgramSeatRequest"));
+const CentralOregonFamilyProgramScholarship = React.lazy(() => import("./pages/CentralOregonFamilyProgramScholarship"));
 const RoadmapSuspicion = React.lazy(() => import("./pages/RoadmapSuspicion"));
 const RoadmapPreIntervention = React.lazy(() => import("./pages/RoadmapPreIntervention"));
 const RoadmapTreatment = React.lazy(() => import("./pages/RoadmapTreatment"));
@@ -382,6 +386,10 @@ const App = () => (
               <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
               <Route path="/roadmap/crisis" element={<RoadmapCrisis />} />
+              <Route path="/central-oregon-family-program" element={<CentralOregonFamilyProgram />} />
+              <Route path="/central-oregon-family-program/intake" element={<CentralOregonFamilyProgramIntake />} />
+              <Route path="/central-oregon-family-program/seat-request" element={<CentralOregonFamilyProgramSeatRequest />} />
+              <Route path="/central-oregon-family-program/scholarship" element={<CentralOregonFamilyProgramScholarship />} />
               <Route path="/roadmap/suspicion" element={<RoadmapSuspicion />} />
               <Route path="/roadmap/pre-intervention" element={<RoadmapPreIntervention />} />
               <Route path="/roadmap/treatment" element={<RoadmapTreatment />} />
