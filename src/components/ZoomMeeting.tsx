@@ -64,7 +64,7 @@ const ZoomMeeting = ({
         leaveOnPageUnload: true,
         customize: {
           video: {
-            defaultViewType: "gallery",
+            defaultViewType: "gallery" as any,
           },
         },
       });
