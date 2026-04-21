@@ -160,7 +160,7 @@ export default function MondayZoomRegistration() {
           question: result.data.question,
           request_follow_up: formData.requestFollowUp,
           consent_email_list: formData.consentEmailList,
-          meeting_date: meetingDate,
+          meeting_date: getNextMeetingDate(),
           auto_register: formData.autoRegister,
           preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
           preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
