@@ -15,6 +15,19 @@ import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { z } from "zod";
 
+const getNextMeetingDate = () => {
+  const now = new Date();
+  const pstNow = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+  const day = pstNow.getDay();
+  const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
+  const nextMonday = new Date(pstNow);
+  nextMonday.setDate(pstNow.getDate() + daysUntilMonday);
+  const year = nextMonday.getFullYear();
+  const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
+  const date = String(nextMonday.getDate()).padStart(2, "0");
+  return `${year}-${month}-${date}`;
+};
+
 const buildRegistrationSchema = (options: { requireName: boolean; requireEmail: boolean }) => z.object({
   name: options.requireName
     ? z.string().trim().min(1, "Name is required").max(100)
