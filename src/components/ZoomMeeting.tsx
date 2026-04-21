@@ -62,6 +62,11 @@ const ZoomMeeting = ({
         language: "en-US",
         patchJsMedia: true,
         leaveOnPageUnload: true,
+        customize: {
+          video: {
+            defaultViewType: "gallery" as any,
+          },
+        },
       });
 
       const { data: { session } } = await supabase.auth.getSession();
