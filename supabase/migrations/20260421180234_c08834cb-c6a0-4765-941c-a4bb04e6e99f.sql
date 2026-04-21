@@ -1,0 +1,1 @@
+GRANT INSERT ON TABLE public.zoom_meeting_registrations TO anon, authenticated;
