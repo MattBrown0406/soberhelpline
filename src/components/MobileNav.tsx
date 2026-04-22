@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon, AlertTriangle, Calendar } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 interface MobileNavProps {
   user: User | null;
@@ -12,6 +13,7 @@ interface MobileNavProps {
 
 const MobileNav = ({ user, onLogout }: MobileNavProps) => {
   const [open, setOpen] = useState(false);
+  const { isMember } = useMembershipStatus();
 
   const closeMenu = () => setOpen(false);
 
@@ -34,6 +36,14 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
 
           <nav className="flex-1 overflow-y-auto p-4">
             <div className="space-y-2">
+              {user && isMember && (
+                <Link to="/family-education" onClick={closeMenu}>
+                  <Button className="w-full justify-start gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-sm">
+                    <Heart className="w-4 h-4" />
+                    My Family Hub
+                  </Button>
+                </Link>
+              )}
               <Link to="/book-consultation?plan=emergency" onClick={closeMenu}>
                 <Button className="w-full justify-start gap-2 bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
                   <AlertTriangle className="w-4 h-4" />
