@@ -15,6 +15,7 @@ import bannerLogo from "@/assets/banner-logo.png";
 import mattBrownTrust from "@/assets/matt-brown-trust.jpg";
 
 import MobileNav from "@/components/MobileNav";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
 import SUDAssessment from "@/components/SUDAssessment";
@@ -65,6 +66,7 @@ const startHereOptions = [
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
+  const { isMember } = useMembershipStatus();
 
   const featuredArticles = useMemo(() => featuredBlogPosts, []);
 
@@ -228,7 +230,17 @@ const Index = () => {
                   </Button>
                 </Link>
                 {user ? (
-                  <Button variant="outline" onClick={handleLogout}>Logout</Button>
+                  <>
+                    {isMember && (
+                      <Link to="/family-education">
+                        <Button variant="default" className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+                          <Heart className="w-4 h-4" />
+                          My Family Hub
+                        </Button>
+                      </Link>
+                    )}
+                    <Button variant="outline" onClick={handleLogout}>Logout</Button>
+                  </>
                 ) : (
                   <Link to="/auth">
                     <Button variant="outline" className="gap-2">
