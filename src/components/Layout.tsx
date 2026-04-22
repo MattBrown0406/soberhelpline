@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { Home, ArrowLeft, Phone } from "lucide-react";
+import { Home, ArrowLeft, Phone, Heart } from "lucide-react";
 import Footer from "./Footer";
 import SiteSearch from "./SiteSearch";
 import Breadcrumbs from "./Breadcrumbs";
@@ -10,6 +10,7 @@ import DefaultSEO from "./DefaultSEO";
 import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
 import StickyContactForm from "./StickyContactForm";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,7 +19,8 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  
+  const { isMember } = useMembershipStatus();
+
   // Handle native back button for mobile apps
   useNativeBackButton();
 
@@ -72,6 +74,16 @@ const Layout = ({ children }: LayoutProps) => {
             {/* Search */}
             <div className="ml-auto flex items-center gap-2">
               <SiteSearch />
+              {isMember && pathname !== "/family-education" && (
+                <Link
+                  to="/family-education"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
+                  aria-label="Go to My Family Hub"
+                >
+                  <Heart className="h-4 w-4" />
+                  <span>My Family Hub</span>
+                </Link>
+              )}
               {/* Phone number */}
               <a
                 href="tel:5412415668"
