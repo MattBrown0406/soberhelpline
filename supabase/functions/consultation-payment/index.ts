@@ -120,11 +120,16 @@ Deno.serve(async (req) => {
       }
 
       // Determine amount server-side
+      const isReadinessIntensive = plan_type === 'family-readiness-intensive';
       const isStabilization = plan_type === 'stabilization';
       const isParallelRecovery = plan_type === 'parallel-recovery';
       const isMultiSession = isStabilization || isParallelRecovery;
       const memberRate = 125;
-      const singleSessionRate = isMember ? memberRate : provider.session_rate;
+      const readinessStandardRate = 2500;
+      const readinessMemberRate = 2250;
+      const singleSessionRate = isReadinessIntensive
+        ? (isMember ? readinessMemberRate : readinessStandardRate)
+        : isMember ? memberRate : provider.session_rate;
       const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
 
       // Store full booking payload for later
@@ -140,6 +145,8 @@ Deno.serve(async (req) => {
         ? 'Parallel Recovery Program (12 sessions)'
         : isStabilization
         ? 'Family Stabilization Plan (4 sessions)'
+        : isReadinessIntensive
+        ? 'Family Readiness Intensive (90 min)'
         : 'Coaching Consultation (60 min)';
 
       const orderResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {

@@ -109,10 +109,10 @@ export default function FamilyCoaching() {
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-foreground">
-                  Members save $25 on every coaching session — <span className="text-primary">$125/hr instead of $150</span>
+                  Members save on private coaching, including <span className="text-primary">10% off the Family Readiness Intensive</span>
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Become a member to unlock your coaching discount plus education, forum access, and more.
+                  Coaching sessions are $125 instead of $150, and the intensive drops from $2,500 to $2,250 for members.
                 </p>
               </div>
               <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />

@@ -182,6 +182,7 @@ const BookConsultation = () => {
 
   const urlParams = new URLSearchParams(window.location.search);
   const planType = urlParams.get("plan");
+  const isReadinessIntensive = planType === "family-readiness-intensive";
   const isStabilization = planType === "stabilization";
   const isParallelRecovery = planType === "parallel-recovery";
   const isMultiSession = isStabilization || isParallelRecovery;
@@ -649,7 +650,7 @@ const BookConsultation = () => {
   };
 
   // Price display helpers
-  const displayRate = isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
+  const displayRate = isReadinessIntensive ? (isMember ? 2250 : 2500) : isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
 
   if (loading || paymentProcessing) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4">
@@ -698,7 +699,7 @@ const BookConsultation = () => {
               <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-lg px-4 py-2.5">
                 <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                 <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
-                  ✅ Member discount applied — $125/session
+                  ✅ Member discount applied — {isReadinessIntensive ? "$2,250 for the intensive" : "$125/session"}
                 </span>
               </div>
             ) : (
@@ -720,16 +721,18 @@ const BookConsultation = () => {
           {step === 0 && (
             <>
               <h1 className="text-2xl font-bold mb-2 text-center">
-                {isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}
+                {isReadinessIntensive ? "Book the Family Readiness Intensive" : isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}
               </h1>
               <p className="text-muted-foreground text-center mb-3">
-                {isParallelRecovery
+                {isReadinessIntensive
+                  ? `Choose a provider for your 90-minute Family Readiness Intensive${isMember ? " ($2,250 member rate)" : " ($2,500, or $2,250 for members)"}`
+                  : isParallelRecovery
                   ? `Choose the provider who feels like the best fit for your 12-session program ($1,500)`
                   : isStabilization
                   ? "Choose a provider for your 4-session stabilization plan ($500)"
                   : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150, or $125 for members)"}`}
               </p>
-              {!isMultiSession && !isMember && (
+              {!isMultiSession && !isMember && !isReadinessIntensive && (
                 <div className="flex justify-center mb-6">
                   <Button asChild variant="outline" size="sm" className="gap-1.5">
                     <Link to="/family-membership">
@@ -758,7 +761,17 @@ const BookConsultation = () => {
                               ))}
                             </div>
                             <p className="text-sm font-medium mt-2 text-primary">
-                              {isMember && !isMultiSession ? (
+                              {isReadinessIntensive ? (
+                                <span>
+                                  ${isMember ? "2,250" : "2,500"} / 90 min
+                                  {isMember && (
+                                    <>
+                                      <span className="line-through text-muted-foreground ml-2">$2,500</span>
+                                      <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">Member</span>
+                                    </>
+                                  )}
+                                </span>
+                              ) : isMember && !isMultiSession ? (
                                 <span className="flex items-center gap-1.5">
                                   <Crown className="w-3.5 h-3.5" />
                                   <span className="line-through text-muted-foreground">${p.session_rate}</span>{" "}
@@ -794,6 +807,8 @@ const BookConsultation = () => {
                 <CardDescription>
                   {isMultiSession
                     ? `Choose dates and times for all ${requiredSlots} sessions with ${selectedProvider?.full_name}. ${stabilizationSlots.length} of ${requiredSlots} selected.`
+                    : isReadinessIntensive
+                    ? `Pick an available 90-minute time with ${selectedProvider?.full_name} for the Family Readiness Intensive.`
                     : `Pick an available time with ${selectedProvider?.full_name}. We'll keep it simple.`}
                 </CardDescription>
               </CardHeader>
@@ -932,7 +947,7 @@ const BookConsultation = () => {
                         {isMember ? (
                           <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
                             <Crown className="w-3.5 h-3.5" />
-                            <span className="text-xs font-medium">✅ Member discount applied — $125/session</span>
+                            <span className="text-xs font-medium">✅ Member discount applied — {isReadinessIntensive ? "$2,250 for the intensive" : "$125/session"}</span>
                           </div>
                         ) : (
                           <p className="text-xs text-muted-foreground">
@@ -965,7 +980,7 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-primary" />
-                  {isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Consultation"}
+                  {isReadinessIntensive ? "Confirm Your Family Readiness Intensive" : isMultiSession ? `Confirm Your ${isParallelRecovery ? "Parallel Recovery Program" : "Stabilization Plan"}` : "Confirm Your Consultation"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -995,8 +1010,19 @@ const BookConsultation = () => {
                     <>
                       <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
                       <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{selectedProvider?.session_duration_minutes} minutes</span></div>
-                      {isMember ? (
+                      <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{isReadinessIntensive ? "90" : selectedProvider?.session_duration_minutes} minutes</span></div>
+                      {isReadinessIntensive && (
+                        <div className="flex justify-between"><span className="text-muted-foreground">Service</span><span className="font-medium">Family Readiness Intensive</span></div>
+                      )}
+                      {isReadinessIntensive ? (
+                        <div className="flex justify-between border-t pt-2 mt-2">
+                          <span className="font-semibold flex items-center gap-1.5">{isMember ? <><Crown className="w-4 h-4 text-primary" />Member Rate</> : "Total"}</span>
+                          <span className="font-bold text-primary">
+                            {isMember && <span className="line-through text-muted-foreground text-sm mr-1">$2500</span>}
+                            ${isMember ? "2250" : "2500"}
+                          </span>
+                        </div>
+                      ) : isMember ? (
                         <div className="flex justify-between border-t pt-2 mt-2">
                           <span className="font-semibold flex items-center gap-1.5"><Crown className="w-4 h-4 text-primary" />Member Rate</span>
                           <span className="font-bold text-primary">
@@ -1020,7 +1046,7 @@ const BookConsultation = () => {
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => setStep(4)}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button onClick={handleBooking} disabled={isSubmitting} size="lg">
-                    {isSubmitting ? "Booking..." : isMultiSession ? `Book & Pay $${isParallelRecovery ? "1,500" : "500"}` : `Book & Pay $${isMember ? "125" : selectedProvider?.session_rate}`}
+                    {isSubmitting ? "Booking..." : isReadinessIntensive ? `Book & Pay $${isMember ? "2,250" : "2,500"}` : isMultiSession ? `Book & Pay $${isParallelRecovery ? "1,500" : "500"}` : `Book & Pay $${isMember ? "125" : selectedProvider?.session_rate}`}
                   </Button>
                 </div>
               </CardContent>
