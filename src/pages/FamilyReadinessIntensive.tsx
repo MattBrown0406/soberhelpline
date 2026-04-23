@@ -8,7 +8,7 @@ const FamilyReadinessIntensive = () => {
   const faqs = [
     {
       question: "Who is the Family Readiness Intensive for?",
-      answer: "It is for families who are scared, divided, exhausted, or unsure what to do next. If you need clarity before deciding on a full intervention, this is the right starting point.",
+      answer: "It is for families who are scared, divided, exhausted, or unsure what to do next. If you need clarity before deciding on a full intervention, this is the right starting point. The intensive also helps assess whether your family truly needs a professionally led intervention, or whether you can be coached by a professional interventionist to carry out a DIY intervention yourselves.",
     },
     {
       question: "Does this mean we are not ready for an intervention?",
