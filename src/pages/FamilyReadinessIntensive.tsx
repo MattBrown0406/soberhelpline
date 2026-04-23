@@ -29,7 +29,7 @@ const FamilyReadinessIntensive = () => {
       <SEOHead
         title="Family Readiness Intensive | Sober Helpline"
         description="A focused 90-minute strategy session for families who need expert clarity before deciding on a full intervention. Stop guessing. Get a real plan."
-        canonical="https://soberhelpline.com/family-readiness-intensive"
+        
       />
 
       <div className="min-h-screen bg-background">
