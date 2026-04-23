@@ -117,6 +117,7 @@ const ForProviders = React.lazy(() => import("./pages/ForProviders"));
 const BookConsultation = React.lazy(() => import("./pages/BookConsultation"));
 const JoinMeeting = React.lazy(() => import("./pages/JoinMeeting"));
 const FamilyCoaching = React.lazy(() => import("./pages/FamilyCoaching"));
+const FamilyReadinessIntensive = React.lazy(() => import("./pages/FamilyReadinessIntensive"));
 const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
@@ -372,6 +373,7 @@ const App = () => (
               <Route path="/book-consultation" element={<BookConsultation />} />
               <Route path="/join-meeting" element={<JoinMeeting />} />
               <Route path="/family-coaching" element={<FamilyCoaching />} />
+              <Route path="/family-readiness-intensive" element={<FamilyReadinessIntensive />} />
               <Route path="/coaching-onboarding" element={<CoachingOnboarding />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/recovery-resources" element={<RecoveryResources />} />

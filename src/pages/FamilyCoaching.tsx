@@ -511,12 +511,19 @@ export default function FamilyCoaching() {
                   <p className="text-sm text-muted-foreground">
                     Includes the live intensive session plus 7 days of follow-up support by Zoom, phone, text, or email.
                   </p>
-                  <Link to="/book-consultation?plan=family-readiness-intensive">
-                    <Button className="gap-2 bg-violet-600 hover:bg-violet-700 text-white">
-                      <Calendar className="h-4 w-4" />
-                      Book the Intensive
-                    </Button>
-                  </Link>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link to="/family-readiness-intensive">
+                      <Button variant="outline" className="gap-2 border-violet-500/40 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/30">
+                        Learn More
+                      </Button>
+                    </Link>
+                    <Link to="/book-consultation?plan=family-readiness-intensive">
+                      <Button className="gap-2 bg-violet-600 hover:bg-violet-700 text-white">
+                        <Calendar className="h-4 w-4" />
+                        Book the Intensive
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
             </div>
