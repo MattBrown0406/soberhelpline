@@ -17,7 +17,7 @@ Deno.serve(async (req) => {
       client_name,
       client_email,
       client_phone,
-      plan_type, // 'single', 'stabilization', 'parallel-recovery'
+      plan_type, // 'single', 'stabilization', 'parallel-recovery', 'family-readiness-intensive'
     } = body;
 
     if (!provider_id || !bookings?.length || !client_name || !client_email) {
@@ -95,12 +95,17 @@ Deno.serve(async (req) => {
     }
 
     // Determine pricing server-side
+    const isReadinessIntensive = plan_type === 'family-readiness-intensive';
     const isStabilization = plan_type === 'stabilization';
     const isParallelRecovery = plan_type === 'parallel-recovery';
     const isMultiSession = isStabilization || isParallelRecovery;
 
     const memberRate = 125;
-    const singleSessionRate = isMember ? memberRate : provider.session_rate;
+    const readinessStandardRate = 2500;
+    const readinessMemberRate = 2250;
+    const singleSessionRate = isReadinessIntensive
+      ? (isMember ? readinessMemberRate : readinessStandardRate)
+      : isMember ? memberRate : provider.session_rate;
 
     let coachingPlanId: string | null = null;
 
@@ -135,10 +140,13 @@ Deno.serve(async (req) => {
       client_user_id: userId, // null for guests
       booking_date: b.booking_date,
       start_time: b.start_time,
-      end_time: b.end_time,
+      end_time: isReadinessIntensive ? b.end_time : b.end_time,
       timezone: b.timezone || 'America/Los_Angeles',
       amount_paid: isMultiSession ? (index === 0 ? totalAmount : 0) : totalAmount,
-      intake_responses: intake_responses || null,
+      intake_responses: intake_responses ? {
+        ...intake_responses,
+        service_type: isReadinessIntensive ? 'family-readiness-intensive' : intake_responses.service_type,
+      } : (isReadinessIntensive ? { service_type: 'family-readiness-intensive' } : null),
       client_name,
       client_email: client_email.toLowerCase().trim(),
       client_phone: client_phone || null,

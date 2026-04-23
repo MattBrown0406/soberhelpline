@@ -468,29 +468,58 @@ export default function FamilyCoaching() {
             </Accordion>
 
             {/* Book a Session CTA */}
-            <Card className="mb-8 border-2 border-amber-500/30 overflow-hidden hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
-              <CardHeader className="bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 pb-4">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-amber-500/10">
-                    <Calendar className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+            <div className="grid gap-6 mb-8 lg:grid-cols-2">
+              <Card className="border-2 border-amber-500/30 overflow-hidden hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300">
+                <CardHeader className="bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 pb-4">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-amber-500/10">
+                      <Calendar className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150 <span className="text-sm font-medium text-muted-foreground">($125 for members)</span></CardTitle>
+                      <CardDescription>
+                        Book a one-on-one session for calm, direct support around boundaries, next steps, and family decisions.
+                      </CardDescription>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle className="text-lg text-amber-700 dark:text-amber-400">Book a Coaching Session — $150 <span className="text-sm font-medium text-muted-foreground">($125 for members)</span></CardTitle>
-                    <CardDescription>
-                      Book a one-on-one session for calm, direct support around boundaries, next steps, and family decisions.
-                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Link to="/book-consultation">
+                    <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
+                      <Calendar className="h-4 w-4" />
+                      Schedule a Session
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-violet-500/30 overflow-hidden hover:shadow-lg hover:shadow-violet-500/10 transition-all duration-300">
+                <CardHeader className="bg-gradient-to-br from-violet-50 to-transparent dark:from-violet-950/20 pb-4">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-violet-500/10">
+                      <Compass className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg text-violet-700 dark:text-violet-400">Family Readiness Intensive — $2,500 <span className="text-sm font-medium text-muted-foreground">($2,250 for members)</span></CardTitle>
+                      <CardDescription>
+                        A focused 90-minute private session for families who need a serious readiness plan, clearer strategy, and immediate next steps.
+                      </CardDescription>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Link to="/book-consultation">
-                  <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white">
-                    <Calendar className="h-4 w-4" />
-                    Schedule a Session
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Includes the live intensive session plus 7 days of follow-up support by Zoom, phone, text, or email.
+                  </p>
+                  <Link to="/book-consultation?plan=family-readiness-intensive">
+                    <Button className="gap-2 bg-violet-600 hover:bg-violet-700 text-white">
+                      <Calendar className="h-4 w-4" />
+                      Book the Intensive
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Coaching Phase Guide Table */}
             <Card className="mb-8 border-2 border-orange-500/30 overflow-hidden">
@@ -530,6 +559,11 @@ export default function FamilyCoaching() {
                         <td className="py-3 px-4 font-medium text-emerald-700 dark:text-emerald-400">Family Stabilization Plan™<span className="block text-xs font-normal text-muted-foreground mt-0.5">4 sessions</span></td>
                         <td className="py-3 px-4 text-muted-foreground">Enabling cycles, guilt, loss of control, family conflict</td>
                         <td className="py-3 px-4 text-muted-foreground">System assessment, boundary implementation, communication reset</td>
+                      </tr>
+                      <tr className="border-b border-border/50 bg-violet-50/50 dark:bg-violet-950/20">
+                        <td className="py-3 px-4 font-medium text-violet-700 dark:text-violet-400">Family Readiness Intensive<span className="block text-xs font-normal text-muted-foreground mt-0.5">90 minutes + 7 days follow-up</span></td>
+                        <td className="py-3 px-4 text-muted-foreground">A serious family decision point, treatment planning, intervention readiness, or high-stakes alignment problem</td>
+                        <td className="py-3 px-4 text-muted-foreground">Intensive strategy, readiness mapping, decision alignment, and a concrete action plan</td>
                       </tr>
                       <tr className="bg-blue-50/50 dark:bg-blue-950/20">
                         <td className="py-3 px-4 font-medium text-blue-700 dark:text-blue-400">Parallel Recovery Program™<span className="block text-xs font-normal text-muted-foreground mt-0.5">12 sessions</span></td>

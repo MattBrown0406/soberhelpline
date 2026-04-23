@@ -268,12 +268,17 @@ Deno.serve(async (req) => {
 
     // DEFAULT ACTION: Create Zoom meeting and send notification emails
     const meetingDate = new Date(`${booking.booking_date}T${booking.start_time}`);
-    const meetingTopic = `Sober Helpline Consultation - ${booking.client_name} & ${provider.full_name}`;
+    const intakeResponses = (booking.intake_responses as Record<string, string> | null) || null;
+    const serviceType = intakeResponses?.service_type;
+    const isReadinessIntensive = serviceType === 'family-readiness-intensive';
+    const meetingDuration = isReadinessIntensive ? 90 : provider.session_duration_minutes;
+    const meetingLabel = isReadinessIntensive ? 'Family Readiness Intensive' : 'Consultation';
+    const meetingTopic = `Sober Helpline ${meetingLabel} - ${booking.client_name} & ${provider.full_name}`;
 
     let zoomData: any = null;
     try {
       const accessToken = await getZoomAccessToken();
-      zoomData = await createZoomMeeting(accessToken, meetingTopic, meetingDate.toISOString(), provider.session_duration_minutes);
+      zoomData = await createZoomMeeting(accessToken, meetingTopic, meetingDate.toISOString(), meetingDuration);
 
       await adminClient.from('consultation_bookings').update({
         zoom_meeting_url: zoomData.join_url,
@@ -291,13 +296,15 @@ Deno.serve(async (req) => {
 
     // Build intake summary for provider email
     let intakeSummary = '';
-    if (booking.intake_responses) {
-      const responses = booking.intake_responses as Record<string, string>;
-      intakeSummary = Object.entries(responses).map(([q, a]) => `<p><strong>${q}:</strong> ${a}</p>`).join('');
+    if (intakeResponses) {
+      intakeSummary = Object.entries(intakeResponses)
+        .filter(([q]) => q !== 'service_type')
+        .map(([q, a]) => `<p><strong>${q}:</strong> ${a}</p>`)
+        .join('');
     }
 
     // Determine plan context for emails
-    let planContext = '';
+    let planContext = isReadinessIntensive ? '<p><strong>Service:</strong> Family Readiness Intensive</p>' : '';
     if (booking.coaching_plan_id) {
       const { data: plan } = await adminClient.from('coaching_plans').select('*').eq('id', booking.coaching_plan_id).single();
       if (plan) {
@@ -307,17 +314,17 @@ Deno.serve(async (req) => {
     }
 
     // Email to client
-    await sendEmail(booking.client_email, 'Your Consultation is Confirmed - Sober Helpline', `
+    await sendEmail(booking.client_email, `Your ${meetingLabel} is Confirmed - Sober Helpline`, `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1a365d;">Your Consultation is Confirmed</h2>
+        <h2 style="color: #1a365d;">Your ${meetingLabel} is Confirmed</h2>
         <p>Hi ${booking.client_name},</p>
-        <p>Your consultation has been booked successfully.</p>
+        <p>Your ${meetingLabel.toLowerCase()} has been booked successfully.</p>
         <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin: 16px 0;">
           <p><strong>Provider:</strong> ${provider.full_name}</p>
           ${planContext}
           <p><strong>Date:</strong> ${formattedDate}</p>
           <p><strong>Time:</strong> ${formattedTime} (Pacific)</p>
-          <p><strong>Duration:</strong> ${provider.session_duration_minutes} minutes</p>
+          <p><strong>Duration:</strong> ${meetingDuration} minutes</p>
           <p><strong>Zoom Link:</strong> <a href="${zoomLink}">${zoomLink}</a></p>
           ${zoomPasscode ? `<p><strong>Passcode:</strong> ${zoomPasscode}</p>` : ''}
         </div>
@@ -336,17 +343,17 @@ Deno.serve(async (req) => {
     const providerEmail = providerPrivate?.email || provider.notification_email || provider.paypal_email;
 
     if (providerEmail) {
-      await sendEmail(providerEmail, `New Session Booked – ${formattedDate} - Sober Helpline`, `
+      await sendEmail(providerEmail, `New ${meetingLabel} Booked – ${formattedDate} - Sober Helpline`, `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #1a365d;">New Consultation Session Booked</h2>
+          <h2 style="color: #1a365d;">New ${meetingLabel} Booked</h2>
           <p>Hi ${provider.full_name},</p>
-          <p>A new consultation session has been booked with you. Here are the details:</p>
+          <p>A new ${meetingLabel.toLowerCase()} has been booked with you. Here are the details:</p>
           <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p><strong>Client Name:</strong> ${booking.client_name}</p>
             ${planContext}
             <p><strong>Date:</strong> ${formattedDate}</p>
             <p><strong>Time:</strong> ${formattedTime} (Pacific)</p>
-            <p><strong>Duration:</strong> ${provider.session_duration_minutes} minutes</p>
+            <p><strong>Duration:</strong> ${meetingDuration} minutes</p>
             <p><strong>Zoom Link:</strong> <a href="${zoomLink}">${zoomLink}</a></p>
             ${zoomPasscode ? `<p><strong>Passcode:</strong> ${zoomPasscode}</p>` : ''}
           </div>
