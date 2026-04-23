@@ -92,6 +92,9 @@ const FamilyReadinessIntensive = () => {
                     <p>
                       The Family Readiness Intensive is for the moment before the full yes. It gives your family a structured way to stop spinning, understand what is actually happening, and decide what the right next move should be.
                     </p>
+                    <p>
+                      Not every family needs a professionally led intervention. With the help of professional coaching, many families are able to carry out their own successful DIY intervention. That is one of the reasons this intensive can be such a good place to start, you leave knowing which path actually fits your family.
+                    </p>
                   </div>
                 </div>
 
