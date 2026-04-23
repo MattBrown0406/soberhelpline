@@ -275,16 +275,16 @@ const Index = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-3 max-w-2xl">
-                  <Link to="/family-consultation" className="w-full sm:w-auto">
+                  <Link to="/family-readiness-intensive" className="w-full sm:w-auto">
                     <Button size="lg" className="w-full gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-6 md:px-8 py-4 text-sm md:text-base shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
                       <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                      Learn more about a Crisis Family Consult
+                      Family Readiness Intensive
                     </Button>
                   </Link>
-                  <Link to="/book-consultation?plan=emergency" className="w-full sm:w-auto">
+                  <Link to="/family-consultation" className="w-full sm:w-auto">
                     <Button size="lg" variant="outline" className="w-full gap-2 px-6 py-4 text-sm md:text-base border-logo-green/30 text-logo-green hover:bg-logo-green/5">
                       <Clock3 className="w-4 h-4" />
-                      Go straight to booking
+                      Crisis Family Consult
                     </Button>
                   </Link>
                 </div>
