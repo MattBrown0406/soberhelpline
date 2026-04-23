@@ -20,7 +20,7 @@ const FamilyReadinessIntensive = () => {
     },
     {
       question: "Can the fee apply toward a full intervention?",
-      answer: "Yes. If your family moves forward with a full intervention within 30 days, part of the intensive fee can be credited toward the intervention cost.",
+      answer: "Yes. If your family moves forward with a full intervention within 30 days, $1,500 of the intensive fee will be credited toward the cost of the intervention.",
     },
   ];
 
