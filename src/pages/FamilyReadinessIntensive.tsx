@@ -71,6 +71,13 @@ const FamilyReadinessIntensive = () => {
                 <p className="mt-4 text-sm text-muted-foreground">
                   $2,500 includes a confidential 90-minute Zoom session and 7 days of follow-up support by Zoom, phone, text, or email, with a partial credit available toward a full intervention.
                 </p>
+                <div className="mt-6">
+                  <Link to="/book-consultation?plan=family-readiness-intensive">
+                    <Button variant="outline" size="lg" className="border-violet-500/40 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/30">
+                      Book the Intensive Now
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </section>
 
@@ -143,6 +150,13 @@ const FamilyReadinessIntensive = () => {
                       <p className="text-sm text-muted-foreground mt-3">
                         Members receive 10% off, bringing the intensive to $2,250.
                       </p>
+                      <div className="mt-5">
+                        <Link to="/book-consultation?plan=family-readiness-intensive">
+                          <Button className="bg-violet-600 hover:bg-violet-700 text-white">
+                            Book the Intensive
+                          </Button>
+                        </Link>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>

@@ -657,7 +657,7 @@ const Index = () => {
           </Link>
         </section>
 
-        <section className="container mx-auto px-4 pt-4 md:pt-6">
+        <section className="container mx-auto px-4 pt-4 md:pt-6 space-y-4">
           <Link to="/family-coaching" className="block">
             <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
@@ -675,6 +675,29 @@ const Index = () => {
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
                     See Coaching Options <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link to="/family-readiness-intensive" className="block">
+            <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-violet-700 via-fuchsia-600 to-violet-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
+              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-5 h-5 md:w-6 md:h-6" />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <p className="text-xs md:text-sm font-medium text-white/80">High-stakes planning</p>
+                    <h3 className="text-base md:text-lg font-bold">Family Readiness Intensive for major family decisions</h3>
+                    <p className="text-xs md:text-sm text-white/70 mt-0.5">A 90-minute strategy session plus 7 days of follow-up support for families who need clarity fast.</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
+                    Explore the Intensive <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
               </div>

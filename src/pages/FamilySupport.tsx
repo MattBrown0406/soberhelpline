@@ -108,7 +108,7 @@ export default function FamilySupport() {
                   <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                     If things feel confusing, keep it simple. Start with the free Monday Zoom, use membership for ongoing support, and reach for private coaching when you need more direct help.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
                     <Link to="/monday-zoom-registration">
                       <Button size="lg" className="gap-2 w-full sm:w-auto">
                         <Calendar className="h-4 w-4" />
@@ -125,6 +125,11 @@ export default function FamilySupport() {
                       <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                         <Phone className="h-4 w-4" />
                         Explore Coaching
+                      </Button>
+                    </Link>
+                    <Link to="/family-readiness-intensive">
+                      <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto border-violet-500/40 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/30">
+                        Family Readiness Intensive
                       </Button>
                     </Link>
                   </div>
