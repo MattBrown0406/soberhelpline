@@ -116,6 +116,7 @@ import dopamineAddictionBrainScienceImg from "@/assets/blog-dopamine-addiction-b
 import whatToSayLovedOneRelapsesImg from "@/assets/blog-what-to-say-loved-one-relapses.jpg";
 import talkingToChildrenAboutAddictionImg from "@/assets/blog-talking-to-children-about-addiction.jpg";
 import lovedOneLyingAddictionImg from "@/assets/blog-loved-one-lying-addiction.jpg";
+import whatToExpectInterventionImg from "@/assets/blog-what-to-expect-during-intervention.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
