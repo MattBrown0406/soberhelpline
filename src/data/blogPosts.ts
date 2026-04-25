@@ -116,12 +116,137 @@ import dopamineAddictionBrainScienceImg from "@/assets/blog-dopamine-addiction-b
 import whatToSayLovedOneRelapsesImg from "@/assets/blog-what-to-say-loved-one-relapses.jpg";
 import talkingToChildrenAboutAddictionImg from "@/assets/blog-talking-to-children-about-addiction.jpg";
 import lovedOneLyingAddictionImg from "@/assets/blog-loved-one-lying-addiction.jpg";
+import whatToExpectInterventionImg from "@/assets/blog-what-to-expect-during-intervention.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 109,
+    slug: "what-to-expect-during-an-intervention",
+    seoTitle: "What to Expect During an Intervention: A Real Guide for Families",
+    metaDescription: "Wondering what actually happens during a drug or alcohol intervention? This step-by-step guide walks families through intervention day so you can walk in prepared, not panicked.",
+    title: "What to Expect During an Intervention: A Real Guide for Families",
+    excerpt: "Most of what families fear about intervention day simply doesn't happen. Here is a clear, step-by-step look at what really takes place — from preparation to the conversation to what comes next.",
+    content: `The phone call to schedule an intervention is one of the hardest things a family will ever do. You've probably replayed the conversation a hundred times in your head — what will happen, what your loved one will say, whether it will work. The fear of the unknown can feel almost as paralyzing as watching someone you love disappear into their addiction.
+
+Here's what I've learned after more than two decades of doing this work: most of what families fear about intervention day simply doesn't happen. What does happen — when the process is handled with care — is often nothing short of transformational.
+
+This guide walks you through what to expect during an intervention, from the morning preparation to the conversation itself to what comes next. The more clearly you can see the process, the more grounded you'll feel walking into it.
+
+**What Is a Formal Intervention, and Why Does It Look the Way It Does?**
+
+A formal intervention is a structured, planned conversation in which family members, close friends, and sometimes colleagues come together — guided by a professional interventionist — to ask a loved one to accept help for their addiction. It is not a confrontation. It is not an ambush. At its best, it is an act of organized love.
+
+The structure exists for a reason. Addiction is a condition that thrives in chaos, deflection, and emotional reactivity. A well-prepared intervention removes those escape routes — not through force, but through clarity. When everyone in the room has prepared what they want to say, and when the path to treatment is already arranged, the person who is struggling has the clearest possible picture of two things: how much they are loved, and what help looks like right now.
+
+Most interventions use a structured approach — commonly known as the ARISE model, the Johnson Intervention model, or a hybrid of both. Regardless of the specific method your interventionist recommends, the emotional foundation is the same: speak from love, not anger; describe impact, not blame; and have a concrete treatment option ready to go.
+
+**The Day Before: Preparation Is Where the Intervention Actually Happens**
+
+By the morning of the intervention, most of the real work is already done. A good interventionist will have spent several hours — often spread across multiple meetings — preparing your family for exactly this moment.
+
+Here's what that preparation typically includes:
+
+* **Writing and rehearsing personal impact statements.** Each participant writes a letter describing how their loved one's addiction has affected them — not a list of grievances, but honest, specific observations delivered with love. These letters are practiced out loud, usually with the interventionist present, until they feel natural rather than rehearsed.
+* **Confirming a treatment placement.** The intervention is only as strong as what you're asking your loved one to do. By intervention day, a treatment program should already be selected, a bed should be reserved, and the logistics of getting there — packing, travel, insurance — should be sorted.
+* **Establishing each participant's bottom line.** Every family member decides in advance what they are no longer willing to do if their loved one refuses help. This is not a threat — it is a commitment to their own health and [LINK:boundaries:/blog/boundaries-ultimatums-guide], stated with love and without ultimatum energy.
+* **Rehearsing how to respond if things get emotional.** Your interventionist will walk you through how to stay regulated when your loved one cries, argues, shuts down, or tries to leave. You practice staying grounded — not because you won't feel anything, but because you'll have a plan for what to do when you do.
+
+The preparation phase is where families discover something surprising: the process of writing those letters and saying those things out loud often begins to shift their own relationship with the situation. They start to feel clearer. More resolved. Less alone.
+
+**What Actually Happens During the Intervention Conversation**
+
+The intervention itself — the actual conversation — typically lasts between 60 and 120 minutes, though it can vary. Here is a realistic picture of how it tends to unfold.
+
+**The Opening**
+
+Your loved one is brought into the room — this is handled differently depending on the approach your interventionist recommends. In some cases, the family gathers without telling the person in advance. In others (especially the ARISE approach), the person knows a family meeting is happening and may have even been invited to participate. Either way, the first moments are handled by the interventionist, who sets the tone: this is a conversation of love, not judgment.
+
+**The Letters**
+
+One by one, each family member reads or speaks their prepared statement. The letters are personal and specific — "I was scared when you didn't come home last Thanksgiving," not "You always ruin the holidays." They describe real moments, real fear, and real love. Most people in the room — including the person being intervened on — will cry at some point. This is normal. It is not a sign that things are going wrong.
+
+**The Ask**
+
+After the statements, the interventionist presents the treatment option that has already been arranged. This is specific: not "we think you should get help" but "there is a bed available at [name of program], we've already spoken with admissions, and we're ready to take you today." Specificity matters — it removes the most common escape route, which is "I'll do it later."
+
+**The Response**
+
+Your loved one will respond. Sometimes they say yes quickly and with relief. More often there is some negotiation — they want a day to think, they want a different program, they want to say goodbye to someone. Your interventionist helps the family navigate these responses with both compassion and clarity. They'll also help if the person gets angry or tries to leave — which, in my experience, happens far less often than families fear.
+
+**The Resolution**
+
+Most interventions end with some form of agreement, even if it takes time to get there. National outcome data consistently shows that professional interventions result in treatment acceptance rates between 80 and 90 percent. That does not mean the road after acceptance is smooth — but it means the conversation works far more often than it doesn't.
+
+**What Happens If Your Loved One Says No?**
+
+This is the question that keeps most families up at night. The honest answer is: it happens, and the world does not end.
+
+If your loved one declines treatment at the intervention, two things matter immediately. First, each family member needs to follow through on their stated bottom line — not as punishment, but because those commitments represent genuine changes in how the family will operate going forward. Second, the door to treatment remains open. A "no" today is not a "no forever." Many people who decline in the moment reach back out within days or weeks, especially once they see that the family's commitments are real.
+
+The seed of the intervention — the letters, the specific offer of help, the image of everyone gathered in love — does not disappear when the person walks out the door. It stays with them. I have taken calls from people months after an intervention who said, "I've been thinking about what my dad said in that room. I'm ready."
+
+**How to Take Care of Yourself After Intervention Day**
+
+Whether the intervention ends in a "yes" or a "not yet," the family needs support afterward. This is often overlooked.
+
+If your loved one goes to treatment, the weeks that follow can feel disorienting — relief mixed with anxiety, the strange quiet of a household that has been running on crisis for years. This is normal. Use the time to begin working on your own recovery: [LINK:Al-Anon](https://al-anon.org/), [LINK:Nar-Anon](https://www.nar-anon.org/), family therapy, or a coach who specializes in addiction — whatever feels right.
+
+If your loved one doesn't go to treatment, grief is appropriate. Let yourself feel it. Then, when you're ready, take the next small step. Not a grand gesture. Just one thing you can do today to take better care of yourself and maintain the changes you committed to.
+
+In either case, your interventionist should remain a resource. A good interventionist doesn't disappear after the initial conversation — they stay available as the family navigates what comes next.
+
+**Practical Steps Before Intervention Day**
+
+1. Call a professional interventionist before you do anything else — not after you've already tried to confront your loved one on your own.
+2. Give yourself enough lead time: a well-prepared intervention typically takes 5–10 days to plan from first call to execution.
+3. Make sure a treatment placement is confirmed before the intervention happens — not after.
+4. Prepare your letter in writing. Saying it out loud is much harder than thinking it — practice matters.
+5. Decide your bottom line before you walk into the room, and be honest with yourself about whether you can actually hold it.
+6. Get support for yourself. The intervention is for your whole family, not just the person with the addiction.
+
+**You Don't Have to Keep Waiting**
+
+If you've been living alongside someone's addiction — absorbing the chaos, managing the fear, holding your breath — you may have started to believe that nothing will ever change. That belief is one of addiction's most reliable tools. It keeps families frozen.
+
+An intervention won't fix everything. It won't undo the years that have already passed. But it gives your loved one — and your family — a fighting chance at something different. That chance is real. It shows up in rooms across the country every single week. And it starts with someone deciding to make the call.
+
+If you're ready to take that step, Sober Helpline is here to walk through it with you. You can start with a [LINK:Crisis Coaching Session:/family-consultation] or the [LINK:Family Readiness Intensive:/family-readiness-intensive] to talk through your situation, get expert guidance, and figure out what makes sense for your family.
+
+**Frequently Asked Questions**
+
+**How long does an intervention take?**
+
+Most intervention conversations last between 60 and 120 minutes, though the full process — including preparation meetings with the family — typically unfolds over 5–10 days. The preparation phase is not optional; it is where the success of the intervention is built.
+
+**Does the person know an intervention is happening?**
+
+It depends on the approach. The Johnson Intervention model is unannounced; the ARISE model involves inviting the person into the process from the beginning. A professional interventionist will help you decide which approach is most appropriate for your specific situation.
+
+**What if my loved one gets angry or leaves during the intervention?**
+
+This is one of the most common fears families have — and one of the least common outcomes. A trained interventionist is skilled at de-escalating emotional reactions and keeping the conversation moving forward. If your loved one does leave, the process doesn't end; your interventionist will guide you on what to do next.
+
+**What is the success rate of professional interventions?**
+
+Research consistently shows that professional interventions lead to treatment acceptance in 80–90% of cases. This is significantly higher than families attempting unguided conversations on their own. The structure, preparation, and presence of a skilled interventionist make a measurable difference.
+
+**What happens after the intervention if my loved one agrees to go to treatment?**
+
+If your loved one agrees, the goal is to leave for treatment the same day — or as close to immediately as possible. The window of acceptance is real but fragile; delays allow second-guessing to creep in. Packing, travel arrangements, and admissions paperwork should all be handled in advance so the family can move quickly once a yes is given.
+
+**Do I need a professional interventionist, or can we do this ourselves?**
+
+Families can and do attempt interventions without professional support — but the outcomes are significantly less predictable. Untrained interventions are more likely to become emotionally reactive, lose focus, or end without a clear ask. A trained interventionist provides structure, keeps the conversation on track, and has navigated these situations hundreds of times. For something this important, professional guidance is worth it. If you're not sure whether your family is ready for a full intervention, the [LINK:Family Readiness Intensive:/family-readiness-intensive] is often the right place to start.`,
+    image: whatToExpectInterventionImg,
+    author: "Matt Brown",
+    date: "2026-04-24",
+    category: "Intervention",
+    keywords: ["what to expect during an intervention", "drug intervention", "alcohol intervention", "professional interventionist", "ARISE intervention", "Johnson intervention model", "family intervention guide"]
+  },
   {
     id: 108,
     slug: "what-to-do-when-loved-one-lies-about-drinking-drug-use",
