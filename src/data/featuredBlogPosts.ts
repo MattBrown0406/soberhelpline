@@ -3,8 +3,19 @@ import earlyInterventionFamilySkillImg from "@/assets/blog-early-intervention-fa
 import earlyInterventionStabilizingFamilyImg from "@/assets/blog-early-intervention-stabilizing-family.png";
 import addictionConfusionFamiliesImg from "@/assets/blog-addiction-confusion-families.png";
 import depressionAddictionFamiliesImg from "@/assets/blog-depression-addiction-families.png";
+import whatToExpectInterventionImg from "@/assets/blog-what-to-expect-during-intervention.jpg";
 
 export const featuredBlogPosts = [
+  {
+    id: 109,
+    slug: "what-to-expect-during-an-intervention",
+    title: "What to Expect During an Intervention: A Real Guide for Families",
+    excerpt: "Most of what families fear about intervention day simply doesn't happen. Here is a clear, step-by-step look at what really takes place — from preparation to the conversation to what comes next.",
+    author: "Matt Brown",
+    date: "2026-04-24",
+    category: "Intervention",
+    image: whatToExpectInterventionImg,
+  },
   {
     id: 74,
     slug: "depression-and-addiction-family-confusion",
