@@ -68,6 +68,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Addiction Education for Families | Sober Helpline',
     description: 'Learn what addiction really is, how it affects families, and what you can do. Evidence-based education designed for families.',
   },
+  '/family-education/tracks': {
+    title: 'Curated Family Education Tracks | Sober Helpline',
+    description: 'Guided family education tracks for crisis, boundaries, treatment decisions, relapse, family systems, and more.',
+  },
   '/family-membership': {
     title: 'Family Membership — Premium Support & Tools | Sober Helpline',
     description: 'Premium family resources, coaching sessions, exclusive content, and community support. Invest in your family\'s recovery journey.',

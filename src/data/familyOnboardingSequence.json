@@ -1,0 +1,100 @@
+[
+  {
+    "day": 1,
+    "slug": "day-1-start-here",
+    "subject": "Welcome to Sober Helpline — start here",
+    "preview": "Your first step: calm the chaos and focus on what matters most.",
+    "trackSlug": "crisis-first-72-hours",
+    "headline": "Start Here",
+    "intro": [
+      "Welcome to Sober Helpline. You do not need to solve everything today.",
+      "If addiction is affecting your family, the first goal is not perfection — it is stabilization. This track will help you slow things down, stop reacting blindly, and focus on the next right step."
+    ],
+    "forumPrompt": "What feels most urgent in your family right now?",
+    "forumTopicId": "ask-community"
+  },
+  {
+    "day": 2,
+    "slug": "day-2-boundaries",
+    "subject": "The boundary problem almost every family faces",
+    "preview": "Clear boundaries are not cruelty. They are structure you can actually hold.",
+    "trackSlug": "boundary-setting",
+    "headline": "Boundaries",
+    "intro": [
+      "Most families know they need boundaries long before they know how to hold them.",
+      "Today's track will help you separate healthy limits from fear, anger, rescuing, and emotional ultimatums."
+    ],
+    "forumPrompt": "What boundary do you know you need to set, but haven't yet?",
+    "forumTopicId": "boundaries"
+  },
+  {
+    "day": 3,
+    "slug": "day-3-treatment-decisions",
+    "subject": "Before you say yes to treatment, read this",
+    "preview": "Families deserve better than guessing and getting sold.",
+    "trackSlug": "treatment-decision",
+    "headline": "Treatment Decisions",
+    "intro": [
+      "Treatment decisions are hard enough without mixed messages, pressure, and marketing.",
+      "This track will help you ask better questions, spot red flags, and think more clearly about what kind of help is actually needed."
+    ],
+    "forumPrompt": "What confuses you most about treatment options right now?",
+    "forumTopicId": "treatment-discussions"
+  },
+  {
+    "day": 4,
+    "slug": "day-4-relapse-response",
+    "subject": "If relapse happens, do this next",
+    "preview": "Relapse is painful, but chaos does not have to take over again.",
+    "trackSlug": "relapse-response",
+    "headline": "Relapse Response",
+    "intro": [
+      "Relapse can trigger panic, rage, and deep disappointment in a family system.",
+      "This track is about responding more strategically so you are not just repeating the same cycle again."
+    ],
+    "forumPrompt": "How has your family usually responded after relapse?",
+    "forumTopicId": "ask-community"
+  },
+  {
+    "day": 5,
+    "slug": "day-5-family-patterns",
+    "subject": "The painful patterns that keep families stuck",
+    "preview": "Sometimes the family adapts around addiction without realizing it.",
+    "trackSlug": "family-systems-enabling",
+    "headline": "Family Patterns",
+    "intro": [
+      "Addiction does not just affect one person. It reshapes the whole family system.",
+      "This track will help you see the hidden roles, loyalty conflicts, and enabling patterns that can keep everyone stuck."
+    ],
+    "forumPrompt": "What pattern keeps repeating in your family no matter how hard everyone tries?",
+    "forumTopicId": "share-story"
+  },
+  {
+    "day": 6,
+    "slug": "day-6-your-recovery-matters-too",
+    "subject": "Your life cannot stay on hold forever",
+    "preview": "Your recovery matters too — even if your loved one is still struggling.",
+    "trackSlug": "spouse-partner",
+    "headline": "Your Recovery Matters Too",
+    "intro": [
+      "Families often put their own lives on hold while they wait for someone else to change.",
+      "Today's track is about reclaiming your footing, your values, and your peace — even in the middle of uncertainty."
+    ],
+    "forumPrompt": "What part of your own life has addiction pushed to the side?",
+    "forumTopicId": "self-care"
+  },
+  {
+    "day": 7,
+    "slug": "day-7-choose-your-path",
+    "subject": "Choose the track that fits your family best",
+    "preview": "Now choose the education path that fits your family's stage.",
+    "trackSlug": "parent-track",
+    "headline": "Choose Your Path",
+    "intro": [
+      "You have seen the shape of the library this week. Now it is time to choose the track that fits your family best.",
+      "You may need crisis help, boundaries, treatment guidance, relapse support, or a deeper look at family patterns. Start where the pressure is highest."
+    ],
+    "forumPrompt": "Which track fits your situation best right now: crisis, boundaries, treatment, relapse, or family patterns?",
+    "forumTopicId": "introductions"
+  }
+]

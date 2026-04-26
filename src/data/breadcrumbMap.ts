@@ -9,6 +9,11 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
   ],
+  "/family-education/tracks": [
+    { label: "Home", path: "/" },
+    { label: "Family Education", path: "/family-education" },
+    { label: "Guided Tracks", path: "/family-education/tracks" },
+  ],
   "/understanding-addiction": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },

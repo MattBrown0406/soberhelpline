@@ -1,0 +1,160 @@
+[
+  {
+    "slug": "crisis-first-72-hours",
+    "title": "Crisis / First 72 Hours",
+    "summary": "For families in immediate chaos who need to slow things down and make safer decisions.",
+    "goal": "Help families stabilize, stop reacting blindly, and choose their next step with more clarity.",
+    "audience": "Families dealing with active use, emotional escalation, or immediate fear.",
+    "resourcePaths": [
+      { "title": "Crisis vs. Chaos Decision Guide", "path": "/crisis-chaos" },
+      { "title": "Roadmap: Crisis", "path": "/roadmap-crisis" },
+      { "title": "Communication Guide", "path": "/communication-guide" },
+      { "title": "Who Benefits From This?", "path": "/who-benefits-filter" },
+      { "title": "We Don't Negotiate With Terrorists", "path": "/no-negotiation" }
+    ],
+    "forumTopic": {
+      "topicId": "ask-community",
+      "topicTitle": "Ask the Community",
+      "prompt": "What feels most urgent in your family right now — and what decision are you afraid to make?"
+    }
+  },
+  {
+    "slug": "boundary-setting",
+    "title": "Boundary-Setting",
+    "summary": "For families who know they need change but keep collapsing under pressure.",
+    "goal": "Teach clear, enforceable boundaries without rage, rescuing, or inconsistency.",
+    "audience": "Parents, spouses, and siblings who feel trapped in repeating patterns.",
+    "resourcePaths": [
+      { "title": "Requests, Demands, Ultimatums & Boundaries", "path": "/boundaries-ultimatums" },
+      { "title": "Boundary Drift", "path": "/boundary-drift" },
+      { "title": "Anger and Boundaries", "path": "/anger-and-boundaries" },
+      { "title": "Flexibility vs. Instability", "path": "/flexibility-vs-instability" },
+      { "title": "Boundary Setting Worksheet", "path": "/boundary-setting-worksheet" },
+      { "title": "Scenario Practice Exercise", "path": "/scenario-exercise" }
+    ],
+    "forumTopic": {
+      "topicId": "boundaries",
+      "topicTitle": "Setting Boundaries",
+      "prompt": "What boundary do you know you need to set — and what keeps making it hard to hold?"
+    }
+  },
+  {
+    "slug": "treatment-decision",
+    "title": "Treatment Decision",
+    "summary": "For families trying to figure out what kind of help is actually needed.",
+    "goal": "Make families smarter consumers so they stop guessing and stop getting sold.",
+    "audience": "Families comparing detox, inpatient, outpatient, sober living, and next-step options.",
+    "resourcePaths": [
+      { "title": "40 Questions to Ask a Treatment Center", "path": "/treatment-questions" },
+      { "title": "Treatment Industry Red Flags", "path": "/treatment-red-flags" },
+      { "title": "How the Treatment Industry Works", "path": "/treatment-industry-guide" },
+      { "title": "Treatment Modalities Explained", "path": "/treatment-modalities" },
+      { "title": "Matching the Modality to the Problem", "path": "/matching-modality" },
+      { "title": "Why Some Therapies Fail at the Wrong Time", "path": "/therapy-timing" }
+    ],
+    "forumTopic": {
+      "topicId": "treatment-discussions",
+      "topicTitle": "Treatment Discussions",
+      "prompt": "What part of treatment planning feels most confusing right now — level of care, timing, cost, or trust?"
+    }
+  },
+  {
+    "slug": "relapse-response",
+    "title": "Relapse Response",
+    "summary": "For families dealing with return-to-use, denial, or repeated failed attempts.",
+    "goal": "Shift from panic and disappointment into a more strategic response.",
+    "audience": "Families who have already tried treatment, promises, or multiple recovery attempts.",
+    "resourcePaths": [
+      { "title": "Relapse Warning Signs Tracker", "path": "/relapse-warning-signs-tracker" },
+      { "title": "Roadmap: Relapse", "path": "/roadmap-relapse" },
+      { "title": "Why Multiple Treatment Episodes Don't Mean Failure", "path": "/multiple-treatment-episodes" },
+      { "title": "Insight vs. Behavior Tracker", "path": "/insight-behavior-tracker" },
+      { "title": "Readiness for Change Checklist", "path": "/readiness-checklist" },
+      { "title": "What Changes When Families Change", "path": "/what-changes-when-families-change" }
+    ],
+    "forumTopic": {
+      "topicId": "ask-community",
+      "topicTitle": "Ask the Community",
+      "prompt": "How has your family usually responded after relapse — and what do you want to do differently next time?"
+    }
+  },
+  {
+    "slug": "family-systems-enabling",
+    "title": "Family Systems / Enabling",
+    "summary": "For families stuck in the same painful loop and ready to understand the pattern underneath it.",
+    "goal": "Show how the family system adapts around addiction and how to stop feeding it.",
+    "audience": "Families noticing secrecy, rescuing, resentment, role confusion, and chronic chaos.",
+    "resourcePaths": [
+      { "title": "Family Roles in Addiction", "path": "/family-roles-addiction" },
+      { "title": "How Addiction Rewrites Family Rules", "path": "/addiction-rewrites-family-rules" },
+      { "title": "Breaking Intergenerational Enabling", "path": "/intergenerational-enabling" },
+      { "title": "How Families Accidentally Interfere With Recovery", "path": "/family-interference" },
+      { "title": "Enabling Language Translator", "path": "/enabling-language-translator" },
+      { "title": "The Guilt–Relief–Resentment Cycle", "path": "/guilt-relief-resentment" }
+    ],
+    "forumTopic": {
+      "topicId": "share-story",
+      "topicTitle": "Share Your Story",
+      "prompt": "What pattern keeps repeating in your family no matter how hard everyone tries?"
+    }
+  },
+  {
+    "slug": "spouse-partner",
+    "title": "Spouse / Partner",
+    "summary": "For partners dealing with exhaustion, mistrust, anger, confusion, and grief.",
+    "goal": "Help spouses regain clarity, dignity, and emotional footing.",
+    "audience": "Spouses and partners who feel emotionally worn down by addiction.",
+    "resourcePaths": [
+      { "title": "Is It Safe to Open Up Again?", "path": "/safe-to-open-up" },
+      { "title": "Living Well Regardless of Outcome", "path": "/living-well-regardless" },
+      { "title": "Values-Aligned Decisions", "path": "/values-aligned-decisions" },
+      { "title": "Emotional Regulation Tools", "path": "/emotional-regulation" },
+      { "title": "Grief for the Family You Thought You'd Have", "path": "/grief-for-family" },
+      { "title": "Trauma vs. Excuses", "path": "/trauma-vs-excuses" }
+    ],
+    "forumTopic": {
+      "topicId": "self-care",
+      "topicTitle": "Self-Care & Wellness",
+      "prompt": "What has addiction pushed to the edges of your own life — sleep, peace, friendships, work, or trust in yourself?"
+    }
+  },
+  {
+    "slug": "parent-track",
+    "title": "Parent",
+    "summary": "For parents trying to help without controlling everything.",
+    "goal": "Move parents from fear-driven rescuing to steadier leadership.",
+    "audience": "Parents of teens, young adults, or adult children dealing with substance use.",
+    "resourcePaths": [
+      { "title": "The Hidden Cost of Being the Strong One", "path": "/strong-one" },
+      { "title": "What Changes When Families Change", "path": "/what-changes-when-families-change" },
+      { "title": "Why Change Doesn't Happen When Families Try Harder", "path": "/why-change-doesnt-happen" },
+      { "title": "How to Talk About Treatment", "path": "/talking-about-treatment" },
+      { "title": "Family Recovery Action Plan", "path": "/family-action-plan" },
+      { "title": "What Recovery Requires From Families", "path": "/recovery-requirements" }
+    ],
+    "forumTopic": {
+      "topicId": "ask-community",
+      "topicTitle": "Ask the Community",
+      "prompt": "As a parent, where do you feel the pull to rescue the most — money, housing, emotional fallout, or fear of what happens if you stop?"
+    }
+  },
+  {
+    "slug": "sibling-track",
+    "title": "Sibling",
+    "summary": "For siblings who often get ignored in addiction recovery content.",
+    "goal": "Give siblings language for grief, anger, invisibility, and repair.",
+    "audience": "Brothers and sisters navigating loyalty conflicts, family role shifts, and long-term resentment.",
+    "resourcePaths": [
+      { "title": "The Sibling Experience in Addiction", "path": "/sibling-experience" },
+      { "title": "Sibling Guilt, Anger, and Loyalty Conflicts", "path": "/sibling-guilt-anger-loyalty" },
+      { "title": "Growing Up in the Shadow of Addiction", "path": "/growing-up-shadow" },
+      { "title": "Rebuilding Sibling Relationships in Recovery", "path": "/rebuilding-sibling-relationships" },
+      { "title": "Parents: Repairing the Sibling System", "path": "/parents-repairing-sibling-system" }
+    ],
+    "forumTopic": {
+      "topicId": "share-story",
+      "topicTitle": "Share Your Story",
+      "prompt": "What do you wish someone understood about being the sibling in a family shaped by addiction?"
+    }
+  }
+]

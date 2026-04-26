@@ -476,6 +476,39 @@ export default function FamilyEducation() {
             {/* Guided Starting Path for New Members */}
             <StartHereGuide />
 
+            <Card className="mb-6 border-2 border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5">
+              <CardContent className="p-5 md:p-6">
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="max-w-3xl">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1 text-xs font-semibold text-logo-green mb-3">
+                      <Compass className="h-3.5 w-3.5" />
+                      Need a clearer starting point?
+                    </div>
+                    <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                      Start with a curated track instead of wandering the whole library
+                    </h2>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      We grouped the best family education pages into guided tracks for crisis, boundaries, treatment decisions, relapse, family systems, spouses, parents, and siblings. Each track also points you to the right forum discussion so you can ask better questions faster.
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row lg:min-w-[280px]">
+                    <Link to="/family-education/tracks">
+                      <Button className="w-full gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
+                        <BookOpen className="h-4 w-4" />
+                        Explore Guided Tracks
+                      </Button>
+                    </Link>
+                    <Link to="/family-support-forum">
+                      <Button variant="outline" className="w-full gap-2 border-purple-500/40 text-purple-700 hover:bg-purple-50 dark:text-purple-300 dark:hover:bg-purple-950/30">
+                        <Users className="h-4 w-4" />
+                        Visit Family Forum
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Main Content Tabs - Prominent Section Navigation */}
             <div className="mb-8">
               <div className="text-center mb-6">
