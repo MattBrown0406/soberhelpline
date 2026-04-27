@@ -82,7 +82,7 @@ export function AbandonedBookingsManagement() {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Follow-up emails are sent automatically every hour for records older than 4 hours that aren't completed.
+        Follow-up emails are ready to send for records older than 4 hours that aren't completed. Use the manual button here, or schedule the Supabase function to run hourly in production.
       </p>
 
       <Table>
