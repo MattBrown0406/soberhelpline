@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon, AlertTriangle, Calendar } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 
 interface MobileNavProps {
   user: User | null;
@@ -44,7 +45,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                   </Button>
                 </Link>
               )}
-              <Link to="/book-consultation?plan=emergency" onClick={closeMenu}>
+              <Link to="/book-consultation?plan=emergency" onClick={() => { trackConversionEvent("coaching_click", { source: "mobile_nav_get_help" }); closeMenu(); }}>
                 <Button className="w-full justify-start gap-2 bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
                   <AlertTriangle className="w-4 h-4" />
                   Get Help Now
@@ -56,10 +57,16 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                   Crisis Family Consult
                 </Button>
               </Link>
-              <Link to="/monday-zoom-registration" onClick={closeMenu}>
+              <Link to="/monday-zoom-registration" onClick={() => { trackConversionEvent("monday_zoom_click", { source: "mobile_nav" }); closeMenu(); }}>
                 <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
                   <Calendar className="w-4 h-4" />
                   Free Support Group
+                </Button>
+              </Link>
+              <Link to="/intervention-help" onClick={() => { trackConversionEvent("intervention_readiness_click", { source: "mobile_nav" }); closeMenu(); }}>
+                <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
+                  <AlertTriangle className="w-4 h-4" />
+                  Intervention Help
                 </Button>
               </Link>
               <Link to="/roadmap/crisis" onClick={closeMenu}>

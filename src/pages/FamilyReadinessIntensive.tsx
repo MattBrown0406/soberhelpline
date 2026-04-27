@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 const FamilyReadinessIntensive = () => {
   const faqs = [
@@ -72,13 +73,13 @@ const FamilyReadinessIntensive = () => {
                   If your loved one is spiraling and your family is scared, divided, or exhausted, the Family Readiness Intensive gives you professional guidance, a clear recommendation, and a real next-step plan before the situation gets worse.
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/book-consultation?plan=family-readiness-intensive">
+                  <Link to="/book-consultation?plan=family-readiness-intensive" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "readiness_intensive_hero" })}>
                     <Button size="lg" className="bg-violet-600 hover:bg-violet-700 text-white">
                       Reserve the Intensive
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
-                  <a href="tel:+15412415668">
+                  <a href="tel:+15412415668" onClick={() => trackPhoneClick("readiness_intensive_hero")}>
                     <Button variant="outline" size="lg">
                       <PhoneCall className="mr-2 h-5 w-5" />
                       Call (541) 241-5668
@@ -89,7 +90,7 @@ const FamilyReadinessIntensive = () => {
                   $2,500 includes a confidential 90-minute Zoom session and 7 days of follow-up support by Zoom, phone, text, or email, with a partial credit available toward a full intervention.
                 </p>
                 <div className="mt-6">
-                  <Link to="/book-consultation?plan=family-readiness-intensive">
+                  <Link to="/book-consultation?plan=family-readiness-intensive" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "readiness_intensive_secondary" })}>
                     <Button variant="outline" size="lg" className="border-violet-500/40 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/30">
                       Book the Intensive Now
                     </Button>
@@ -177,7 +178,7 @@ const FamilyReadinessIntensive = () => {
                         Members receive 10% off, bringing the intensive to $2,250.
                       </p>
                       <div className="mt-5">
-                        <Link to="/book-consultation?plan=family-readiness-intensive">
+                        <Link to="/book-consultation?plan=family-readiness-intensive" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "readiness_intensive_investment" })}>
                           <Button className="bg-violet-600 hover:bg-violet-700 text-white">
                             Book the Intensive
                           </Button>
@@ -211,7 +212,7 @@ const FamilyReadinessIntensive = () => {
                 Get expert clarity now, while your family still has options, leverage, and a chance to move from chaos to a plan.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/book-consultation?plan=family-readiness-intensive">
+                <Link to="/book-consultation?plan=family-readiness-intensive" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "readiness_intensive_final" })}>
                   <Button size="lg" className="bg-violet-600 hover:bg-violet-700 text-white">
                     Reserve the Family Readiness Intensive
                     <ArrowRight className="ml-2 h-4 w-4" />

@@ -11,6 +11,7 @@ import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 export default function FamilyCoaching() {
@@ -109,9 +110,9 @@ export default function FamilyCoaching() {
                     <p className="text-sm text-muted-foreground mt-2">Private coaching is here when you need one-on-one help, but for most families it makes sense after the free Zoom and membership.</p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Link to="/monday-zoom-registration"><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
+                    <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "family_coaching_top_path" })}><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
                     <Link to="/family-membership"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Users className="h-4 w-4" />Explore Membership</Button></Link>
-                    <Link to="/book-consultation"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Coaching</Button></Link>
+                    <Link to="/book-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "family_coaching_top_path" })}><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Coaching</Button></Link>
                   </div>
                 </div>
               </CardContent>

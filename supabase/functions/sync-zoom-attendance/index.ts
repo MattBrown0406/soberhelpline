@@ -165,8 +165,8 @@ serve(async (req: Request) => {
       }
 
       // Try to match to a registration
-      let matchedReg = regByEmail.get(pEmail) || regByName.get(pName.toLowerCase());
-      let referralRegId: string | null = null;
+      const matchedReg = regByEmail.get(pEmail) || regByName.get(pName.toLowerCase());
+      const referralRegId: string | null = null;
 
       if (!matchedReg && pEmail) {
         // Check if this email matches any registration (could be a family member)

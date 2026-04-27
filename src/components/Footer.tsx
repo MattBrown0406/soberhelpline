@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,15 +12,15 @@ const Footer = () => {
         <div className="mb-10 rounded-lg border border-gray-800 bg-gray-800/60 p-5">
           <p className="text-sm font-semibold text-logo-green mb-2">Families usually need one clear next step</p>
           <div className="grid gap-3 md:grid-cols-3">
-            <Link to="/family-consultation" className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
+            <Link to="/family-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
               <p className="font-semibold text-white">Private coaching</p>
               <p className="mt-1 text-sm text-gray-400">Book a Crisis Coaching Session for direct family guidance.</p>
             </Link>
-            <Link to="/monday-zoom-registration" className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
+            <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
               <p className="font-semibold text-white">Monday Family Squares</p>
               <p className="mt-1 text-sm text-gray-400">Join the free Monday night family support Zoom.</p>
             </Link>
-            <Link to="/family-readiness-intensive" className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
+            <Link to="/intervention-help" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
               <p className="font-semibold text-white">Intervention planning</p>
               <p className="mt-1 text-sm text-gray-400">Assess readiness for a professional Freedom Interventions path.</p>
             </Link>
@@ -36,7 +37,7 @@ const Footer = () => {
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
               Education and support for families affected by addiction. You don't have to go through this alone.
             </p>
-            <a href="tel:5412415668" className="flex items-center gap-2 text-logo-green font-semibold hover:text-logo-green/80 transition-colors">
+            <a href="tel:5412415668" onClick={() => trackPhoneClick("footer_brand")} className="flex items-center gap-2 text-logo-green font-semibold hover:text-logo-green/80 transition-colors">
               <Phone className="w-4 h-4" />
               (541) 241-5668
             </a>
@@ -52,7 +53,7 @@ const Footer = () => {
               <li><Link to="/blog" className="text-sm hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/family-coaching" className="text-sm hover:text-white transition-colors">Coaching</Link></li>
               <li><Link to="/family-consultation" className="text-sm hover:text-white transition-colors">Crisis Coaching Session</Link></li>
-              <li><Link to="/family-readiness-intensive" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
+              <li><Link to="/intervention-help" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
               <li><Link to="/monday-zoom-registration" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
               <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>

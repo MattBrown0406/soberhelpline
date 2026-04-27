@@ -8,7 +8,7 @@ const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs offering 24/7 support in a structured environment" },
   { name: "Outpatient Treatment", icon: Building2, path: "/outpatient-treatment", description: "Flexible treatment options that allow individuals to maintain daily responsibilities" },
   { name: "Medical Detox", icon: Pill, path: "/medical-detox", description: "Safe, medically supervised withdrawal management" },
-  { name: "Interventionists", icon: Users, path: "/interventionists", description: "Professional guidance to help families initiate the recovery conversation" },
+  { name: "Intervention Help", icon: Users, path: "/intervention-help", description: "Professional guidance to help families decide if intervention planning is the right next step" },
   { name: "Sober Coaches", icon: UserCheck, path: "/sober-coaches-companions", description: "Personal recovery support and accountability partners" },
   { name: "Sober Living", icon: Bed, path: "/sober-living", description: "Structured transitional living environments for sustained recovery" },
   { name: "Therapists", icon: Brain, path: "/therapists", description: "Licensed mental health professionals specializing in addiction and family therapy" },

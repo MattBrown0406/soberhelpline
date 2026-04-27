@@ -251,7 +251,7 @@ const FearInventoryExercise = () => {
           </div>
         );
 
-      case 2:
+      case 2: {
         const selectedFearObjects = getSelectedFearObjects();
         
         if (selectedFearObjects.length === 0) {
@@ -269,7 +269,6 @@ const FearInventoryExercise = () => {
             </div>
           );
         }
-
         return (
           <div className="space-y-8">
             <p className="text-muted-foreground">
@@ -316,6 +315,7 @@ const FearInventoryExercise = () => {
             ))}
           </div>
         );
+      }
 
       case 3:
         return (

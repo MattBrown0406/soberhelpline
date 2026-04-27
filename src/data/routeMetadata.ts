@@ -64,6 +64,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Family Readiness Intensive for Intervention Planning | Sober Helpline',
     description: 'A focused intervention readiness strategy session for families who need clarity before moving into a professional intervention with Freedom Interventions.',
   },
+  '/intervention-help': {
+    title: 'Intervention Help for Families | Sober Helpline',
+    description: 'Not sure if your family needs a professional intervention? Learn the warning signs, next steps, and how Sober Helpline connects families with Freedom Interventions.',
+  },
   '/family-support': {
     title: 'Family Support Resources for Addiction | Sober Helpline',
     description: 'Support resources for families dealing with a loved one\'s addiction. Education, community, coaching, and tools to help you take action.',

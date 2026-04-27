@@ -2,6 +2,7 @@ import { ExternalLink, MessageSquareMore, Shield, Users, ArrowRight } from "luci
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import familyBridgeLogo from "@/assets/family-bridge-logo.png";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 
 interface FamilyBridgeCTAProps {
   variant?: "banner" | "card" | "inline" | "post-completion" | "forum" | "coaching";
@@ -10,13 +11,7 @@ interface FamilyBridgeCTAProps {
 
 const FamilyBridgeCTA = ({ variant = "card", className = "" }: FamilyBridgeCTAProps) => {
   const handleClick = () => {
-    // Track the CTA click for analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click', {
-        event_category: 'familybridge_cta',
-        event_label: variant
-      });
-    }
+    trackConversionEvent("coaching_click", { source: "familybridge_cta", label: variant });
     window.open('https://familybridgeapp.com', '_blank', 'noopener,noreferrer');
   };
 

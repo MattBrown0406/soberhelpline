@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
 
 const getNextMeetingDate = () => {
@@ -171,6 +172,11 @@ export default function MondayZoomRegistration() {
       });
 
       if (error) throw error;
+
+      trackConversionEvent("monday_zoom_registration_submit", {
+        source: isMemberQuestion ? "member_question_form" : "public_registration_form",
+        label: getNextMeetingDate(),
+      });
 
       setSubmitted(true);
 

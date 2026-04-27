@@ -11,6 +11,7 @@ import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
 import StickyContactForm from "./StickyContactForm";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
+import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -76,18 +77,21 @@ const Layout = ({ children }: LayoutProps) => {
               <nav className="hidden xl:flex items-center gap-1" aria-label="Family support paths">
                 <Link
                   to="/family-consultation"
+                  onClick={() => trackConversionEvent("coaching_click", { source: "desktop_header" })}
                   className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   Coaching
                 </Link>
                 <Link
                   to="/monday-zoom-registration"
+                  onClick={() => trackConversionEvent("monday_zoom_click", { source: "desktop_header" })}
                   className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   Monday Zoom
                 </Link>
                 <Link
-                  to="/family-readiness-intensive"
+                  to="/intervention-help"
+                  onClick={() => trackConversionEvent("intervention_readiness_click", { source: "desktop_header" })}
                   className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   Intervention?
@@ -107,6 +111,7 @@ const Layout = ({ children }: LayoutProps) => {
               {/* Phone number */}
               <a
                 href="tel:5412415668"
+                onClick={() => trackPhoneClick("layout_header")}
                 className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
               >
               <Phone className="h-4 w-4" />

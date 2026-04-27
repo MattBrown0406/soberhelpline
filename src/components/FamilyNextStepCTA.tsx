@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Compass, PhoneCall, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 type FamilyNextStepCTAProps = {
   className?: string;
@@ -17,6 +18,7 @@ const paths = [
     description: "For families who need a calm, specific plan around boundaries, treatment options, money, relapse, or what to say next.",
     cta: "Book a coaching session",
     to: "/book-consultation?plan=emergency",
+    eventName: "coaching_click" as const,
     tone: "border-amber-500/30 bg-amber-50/70 text-amber-700 dark:bg-amber-950/20 dark:text-amber-300",
   },
   {
@@ -26,6 +28,7 @@ const paths = [
     description: "A free Monday night Zoom for families who want support, education, and a steadier way to respond this week.",
     cta: "Register for Monday Zoom",
     to: "/monday-zoom-registration",
+    eventName: "monday_zoom_click" as const,
     tone: "border-blue-500/30 bg-blue-50/70 text-blue-700 dark:bg-blue-950/20 dark:text-blue-300",
   },
   {
@@ -34,7 +37,8 @@ const paths = [
     title: "Talk through intervention options",
     description: "For higher-risk situations where your family may need a professionally guided intervention through Freedom Interventions.",
     cta: "Start intervention planning",
-    to: "/family-readiness-intensive",
+    to: "/intervention-help",
+    eventName: "intervention_readiness_click" as const,
     tone: "border-violet-500/30 bg-violet-50/70 text-violet-700 dark:bg-violet-950/20 dark:text-violet-300",
   },
 ];
@@ -54,7 +58,7 @@ export default function FamilyNextStepCTA({
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{subheading}</p>
         </div>
-        <a href="tel:5412415668" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+        <a href="tel:5412415668" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
           <Calendar className="h-4 w-4" />
           Call (541) 241-5668
         </a>
@@ -67,6 +71,7 @@ export default function FamilyNextStepCTA({
             <Link
               key={path.title}
               to={path.to}
+              onClick={() => trackConversionEvent(path.eventName, { source: "family_next_step_cta", label: path.title })}
               className={cn("group rounded-lg border p-4 transition-colors hover:border-primary hover:bg-muted/30", path.tone)}
             >
               <div className="flex items-start gap-3">

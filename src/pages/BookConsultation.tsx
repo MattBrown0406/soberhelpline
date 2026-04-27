@@ -16,6 +16,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monit
 import logo from "@/assets/logo.png";
 
 import SEOHead from "@/components/SEOHead";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -409,6 +410,11 @@ const BookConsultation = () => {
     const windowEnd = addDaysToDateStr(providerTodayStr, isParallelRecovery ? 90 : 30);
 
     setSelectedProvider(provider);
+    trackConversionEvent("booking_provider_selected", {
+      source: "book_consultation",
+      planType,
+      providerName: provider.full_name,
+    });
     const [availRes, bookingsRes, overridesRes] = await Promise.all([
       supabase
         .from("provider_availability")
@@ -456,6 +462,11 @@ const BookConsultation = () => {
     if (step >= 2 && step <= 4) {
       if (!validateSection(step - 2)) return;
     }
+    trackConversionEvent("booking_step_continue", {
+      source: "book_consultation",
+      planType,
+      value: step + 1,
+    });
     setStep(step + 1);
   };
 
@@ -613,6 +624,12 @@ const BookConsultation = () => {
 
       // Store plan type for after PayPal redirect
       localStorage.setItem("consultation_plan_type", planType || "single");
+      trackConversionEvent("booking_payment_start", {
+        source: "book_consultation",
+        planType,
+        providerName: selectedProvider.full_name,
+        value: displayRate,
+      });
 
       const returnUrl = `${window.location.origin}/book-consultation?paypal_success=true`;
       const cancelUrl = `${window.location.origin}/book-consultation${planType ? `?plan=${planType}` : ""}`;

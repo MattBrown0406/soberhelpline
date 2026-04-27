@@ -11,6 +11,7 @@ import USMap from "@/components/USMap";
 import StateMap from "@/components/StateMap";
 import ProviderCard from "@/components/ProviderCard";
 import ProviderFilters from "@/components/ProviderFilters";
+import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
 import MobileStateSelector from "@/components/MobileStateSelector";
@@ -320,6 +321,13 @@ const Interventionists = () => {
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             A professional interventionist can help unite the support system behind the common goal of getting your loved one the help they need. They will help you choose the correct treatment experience. They will educate and guide your family to overcome the resistance you currently face from your loved one and create change.
           </p>
+        </div>
+
+        <div className="max-w-5xl mx-auto mb-6">
+          <FamilyNextStepCTA
+            heading="Need help deciding before you search?"
+            subheading="If your family is not sure whether this calls for coaching, a free support meeting, or a professional intervention path, start with this quick decision lane."
+          />
         </div>
 
         <div className="mb-4 md:mb-6">

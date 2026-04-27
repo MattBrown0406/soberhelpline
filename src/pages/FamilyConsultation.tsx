@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 export default function FamilyConsultation() {
   return (
@@ -96,7 +97,7 @@ export default function FamilyConsultation() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-              <Link to="/book-consultation" className="w-full sm:w-auto">
+              <Link to="/book-consultation" className="w-full sm:w-auto" onClick={() => trackConversionEvent("coaching_click", { source: "family_consultation_primary" })}>
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
                   Book Your Crisis Coaching Session
@@ -114,7 +115,7 @@ export default function FamilyConsultation() {
                   The Crisis Coaching Session is the right starting point for most families. If your situation calls for deeper work, these options are available after, or instead of, that first session:
                 </p>
                 <div className="grid gap-3 md:grid-cols-3">
-                  <Link to="/family-readiness-intensive" className="rounded-xl border p-4 hover:border-primary hover:bg-muted/30 transition-colors">
+                  <Link to="/intervention-help" className="rounded-xl border p-4 hover:border-primary hover:bg-muted/30 transition-colors" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "family_consultation_options" })}>
                     <h3 className="font-semibold mb-1">Family Readiness Intensive</h3>
                     <p className="text-sm text-muted-foreground">A multi-session deep dive to assess whether you need a professionally led intervention or can run a coached DIY one.</p>
                   </Link>
@@ -137,7 +138,7 @@ export default function FamilyConsultation() {
             />
 
             <p className="text-sm text-center text-muted-foreground">
-              Need to talk now instead? Call <a href="tel:5412415668" className="text-primary hover:underline">(541) 241-5668</a>.
+              Need to talk now instead? Call <a href="tel:5412415668" onClick={() => trackPhoneClick("family_consultation_footer")} className="text-primary hover:underline">(541) 241-5668</a>.
             </p>
           </div>
         </main>

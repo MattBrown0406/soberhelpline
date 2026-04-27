@@ -44,6 +44,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Readiness Intensive</h1><p>Get professional clarity before deciding whether your family needs a full intervention, coached family action, or another treatment next step.</p><p><a href="https://soberhelpline.com/book-consultation?plan=family-readiness-intensive">Book the intensive</a> · <a href="https://freedominterventions.com">Freedom Interventions</a></p></main>'
   },
   {
+    route: '/intervention-help',
+    title: 'Intervention Help for Families | Sober Helpline',
+    description: 'Not sure if your family needs a professional intervention? Learn the warning signs, next steps, and how Sober Helpline connects families with Freedom Interventions.',
+    noscriptHtml: '<main><h1>Intervention Help for Families</h1><p>Learn when addiction has become intervention-level and choose between readiness planning, free family support, or direct help through Freedom Interventions.</p><p><a href="https://soberhelpline.com/book-consultation?plan=family-readiness-intensive">Book readiness planning</a> · <a href="https://freedominterventions.com">Freedom Interventions</a></p></main>'
+  },
+  {
     route: '/interventionists',
     title: 'Find a Professional Interventionist | Sober Helpline',
     description: 'Connect with vetted addiction interventionists and learn when professional intervention support may be the right step for your family.',
@@ -65,6 +71,7 @@ export const sitemapPriority = new Map([
   ['/family-coaching', '0.9'],
   ['/family-consultation', '0.85'],
   ['/family-readiness-intensive', '0.85'],
+  ['/intervention-help', '0.9'],
   ['/interventionists', '0.8'],
   ['/book-consultation', '0.85'],
   ['/family-education', '0.85'],
@@ -81,6 +88,7 @@ export const sitemapChangefreq = new Map([
   ['/family-coaching', 'weekly'],
   ['/family-consultation', 'weekly'],
   ['/family-readiness-intensive', 'weekly'],
+  ['/intervention-help', 'weekly'],
   ['/interventionists', 'weekly'],
   ['/book-consultation', 'weekly'],
 ]);

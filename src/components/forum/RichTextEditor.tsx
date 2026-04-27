@@ -258,7 +258,7 @@ export function RichTextEditor({
 // Parse markdown-like syntax to React elements
 export function parseRichText(content: string): React.ReactNode {
   // First handle mentions
-  let parts = content.split(/(@\w+)/g);
+  const parts = content.split(/(@\w+)/g);
   
   return parts.map((part, index) => {
     if (part.startsWith('@')) {

@@ -39,7 +39,7 @@ export default function EnablingLanguageTranslator() {
     },
     {
       enabling: '"You don\'t have anywhere else to go."',
-      communicates: "I\'m responsible for preventing consequences.",
+      communicates: "I'm responsible for preventing consequences.",
       boundary: '"I\'m not able to provide housing while substances are involved."'
     },
     {

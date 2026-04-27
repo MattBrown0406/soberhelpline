@@ -287,6 +287,11 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Provider Directory", path: "/provider-info" },
     { label: "Interventionists", path: "/interventionists" },
   ],
+  "/intervention-help": [
+    { label: "Home", path: "/" },
+    { label: "Family Support", path: "/family-support" },
+    { label: "Intervention Help", path: "/intervention-help" },
+  ],
   "/sober-coaches-companions": [
     { label: "Home", path: "/" },
     { label: "Provider Directory", path: "/provider-info" },
