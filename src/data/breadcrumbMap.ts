@@ -4,6 +4,10 @@ export interface BreadcrumbItem {
 }
 
 const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
+  "/start-here": [
+    { label: "Home", path: "/" },
+    { label: "Start Here", path: "/start-here" },
+  ],
   // Family Education guides
   "/family-education": [
     { label: "Home", path: "/" },

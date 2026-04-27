@@ -48,6 +48,7 @@ const Footer = () => {
             <h4 className="font-semibold text-white mb-4">For Families</h4>
             <ul className="space-y-2">
               <li><Link to="/family-membership" className="text-sm hover:text-white transition-colors">Membership</Link></li>
+              <li><Link to="/start-here" className="text-sm hover:text-white transition-colors">Start Here</Link></li>
               <li><Link to="/family-forum" className="text-sm hover:text-white transition-colors">Family Forum</Link></li>
               <li><Link to="/family-education" className="text-sm hover:text-white transition-colors">Education Center</Link></li>
               <li><Link to="/blog" className="text-sm hover:text-white transition-colors">Blog</Link></li>

@@ -61,6 +61,11 @@ export default function FamilyProofStrip() {
             </p>
           </div>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row md:mt-0">
+            <Button asChild variant="secondary">
+              <Link to="/start-here">
+                Start here
+              </Link>
+            </Button>
             <Button asChild>
               <Link to="/book-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "family_proof_strip" })}>
                 Book coaching

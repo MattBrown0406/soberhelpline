@@ -26,6 +26,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Support for Addiction</h1><p>Free support, education, and guidance for families dealing with a loved one\'s substance use, denial, relapse, or treatment resistance.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a> · <a href="https://soberhelpline.com/family-coaching">Explore family coaching</a></p></main>'
   },
   {
+    route: '/start-here',
+    title: 'Start Here for Family Addiction Help | Sober Helpline',
+    description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
+    noscriptHtml: '<main><h1>Start Here for Family Addiction Help</h1><p>Choose the right next step for your family: free Monday support, private coaching, or intervention readiness help.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
     route: '/family-coaching',
     title: 'Family Coaching for Addiction | Sober Helpline',
     description: 'Private family coaching for addiction-related crisis, boundaries, communication, treatment decisions, and next-step planning.',
@@ -128,6 +134,7 @@ export const sitemapPriority = new Map([
   ['/monday-zoom-registration', '0.95'],
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
+  ['/start-here', '0.95'],
   ['/family-coaching', '0.9'],
   ['/family-consultation', '0.85'],
   ['/family-readiness-intensive', '0.85'],
@@ -155,6 +162,7 @@ export const sitemapChangefreq = new Map([
   ['/monday-zoom-registration', 'weekly'],
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],
+  ['/start-here', 'weekly'],
   ['/family-coaching', 'weekly'],
   ['/family-consultation', 'weekly'],
   ['/family-readiness-intensive', 'weekly'],

@@ -76,6 +76,12 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="ml-auto flex items-center gap-2">
               <nav className="hidden xl:flex items-center gap-1" aria-label="Family support paths">
                 <Link
+                  to="/start-here"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-accent hover:text-primary/80"
+                >
+                  Start Here
+                </Link>
+                <Link
                   to="/family-consultation"
                   onClick={() => trackConversionEvent("coaching_click", { source: "desktop_header" })}
                   className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"

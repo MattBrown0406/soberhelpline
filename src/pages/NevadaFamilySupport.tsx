@@ -3,6 +3,7 @@ import { Phone, Heart, Users, MapPin, Calendar, Shield, BookOpen, ChevronRight, 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
+import FamilyProofStrip from "@/components/FamilyProofStrip";
 
 const faqItems = [
   {
@@ -102,6 +103,8 @@ export default function NevadaFamilySupport() {
             </div>
           </div>
         </section>
+
+        <FamilyProofStrip />
 
         {/* Nevada Stats */}
         <section className="py-12 bg-muted/40">

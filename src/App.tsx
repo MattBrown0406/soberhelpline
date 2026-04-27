@@ -31,6 +31,7 @@ const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment
 const FamilySituationAssessment = React.lazy(() => import("./pages/FamilySituationAssessment"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
 const FamilySupport = React.lazy(() => import("./pages/FamilySupport"));
+const StartHere = React.lazy(() => import("./pages/StartHere"));
 const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAddiction"));
 const FamilyMembership = React.lazy(() => import("./pages/FamilyMembership"));
 const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
@@ -288,6 +289,7 @@ const App = () => (
               <Route path="/family-situation-assessment" element={<FamilySituationAssessment />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/family-support" element={<FamilySupport />} />
+              <Route path="/start-here" element={<StartHere />} />
               <Route path="/family-membership" element={<FamilyMembership />} />
               <Route path="/family-education" element={<FamilyEducation />} />
               <Route path="/family-education/tracks" element={<FamilyEducationTracks />} />
