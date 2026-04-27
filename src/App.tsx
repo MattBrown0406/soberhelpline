@@ -9,6 +9,61 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
 import MondayZoomRegistration from "./pages/MondayZoomRegistration";
 
+type RouteErrorBoundaryProps = {
+  children: React.ReactNode;
+};
+
+type RouteErrorBoundaryState = {
+  hasError: boolean;
+};
+
+class RouteErrorBoundary extends React.Component<RouteErrorBoundaryProps, RouteErrorBoundaryState> {
+  state: RouteErrorBoundaryState = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    const message = error?.message || "";
+    const isPageLoadError =
+      message.includes("Failed to fetch dynamically imported module") ||
+      message.includes("Importing a module script failed") ||
+      message.includes("Loading chunk") ||
+      message.includes("ChunkLoadError");
+
+    if (isPageLoadError && sessionStorage.getItem("route-reload-attempted") !== "true") {
+      sessionStorage.setItem("route-reload-attempted", "true");
+      window.location.reload();
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="mx-auto max-w-xl px-6 py-20 text-center">
+          <h1 className="mb-3 text-2xl font-semibold text-foreground">This page needs a quick refresh</h1>
+          <p className="mb-6 text-muted-foreground">
+            We updated the site and your browser may still be holding an older version.
+          </p>
+          <button
+            type="button"
+            className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+            onClick={() => {
+              sessionStorage.removeItem("route-reload-attempted");
+              window.location.reload();
+            }}
+          >
+            Refresh page
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 // Lazy-loaded page components
 const ProviderLanding = React.lazy(() => import("./pages/ProviderLanding"));
 const ProviderApplication = React.lazy(() => import("./pages/ProviderApplication"));
@@ -202,8 +257,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Layout>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
+          <RouteErrorBoundary>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/for-providers" element={<ForProviders />} />
               <Route path="/provider-info" element={<ProviderLanding />} />
@@ -463,8 +519,9 @@ const App = () => (
               <Route path="/oregon/hillsboro" element={<OregonHillsboroFamilySupport />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+              </Routes>
+            </Suspense>
+          </RouteErrorBoundary>
         </Layout>
       </BrowserRouter>
     </TooltipProvider>
