@@ -21,7 +21,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks(id) {
           if (!id.includes("node_modules")) return;
           if (id.includes("@zoom/meetingsdk")) return "vendor-zoom";
-          if (id.includes("zipcodes") || id.includes("react-simple-maps") || id.includes("d3-")) return "vendor-maps";
           if (id.includes("@supabase")) return "vendor-supabase";
           if (id.includes("@radix-ui")) return "vendor-radix";
           if (id.includes("react") || id.includes("@tanstack")) return "vendor-react";
