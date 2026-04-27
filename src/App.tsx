@@ -8,6 +8,14 @@ import Layout from "./components/Layout";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
 import MondayZoomRegistration from "./pages/MondayZoomRegistration";
+import FamilySupport from "./pages/FamilySupport";
+import StartHere from "./pages/StartHere";
+import FamilyMembership from "./pages/FamilyMembership";
+import FamilyConsultation from "./pages/FamilyConsultation";
+import BookConsultation from "./pages/BookConsultation";
+import FamilyCoaching from "./pages/FamilyCoaching";
+import FamilyReadinessIntensive from "./pages/FamilyReadinessIntensive";
+import InterventionHelp from "./pages/InterventionHelp";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -86,15 +94,15 @@ const BlogArticle = React.lazy(() => import("./pages/BlogArticle"));
 const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment"));
 const FamilySituationAssessment = React.lazy(() => import("./pages/FamilySituationAssessment"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
-const FamilySupport = React.lazy(() => import("./pages/FamilySupport"));
-const StartHere = React.lazy(() => import("./pages/StartHere"));
+const FamilySupportPage = FamilySupport;
+const StartHerePage = StartHere;
 const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAddiction"));
-const FamilyMembership = React.lazy(() => import("./pages/FamilyMembership"));
+const FamilyMembershipPage = FamilyMembership;
 const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
 const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTracks"));
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
 const FamilyForumLanding = React.lazy(() => import("./pages/FamilyForumLanding"));
-const FamilyConsultation = React.lazy(() => import("./pages/FamilyConsultation"));
+const FamilyConsultationPage = FamilyConsultation;
 const FamilyWebinars = React.lazy(() => import("./pages/FamilyWebinars"));
 const ForumTopic = React.lazy(() => import("./pages/ForumTopic"));
 const TreatmentQuestions = React.lazy(() => import("./pages/TreatmentQuestions"));
@@ -171,11 +179,11 @@ const EatingDisordersGuide = React.lazy(() => import("./pages/EatingDisordersGui
 const FreeGuide = React.lazy(() => import("./pages/FreeGuide"));
 const ConsultationProviderDashboard = React.lazy(() => import("./pages/ConsultationProviderDashboard"));
 const ForProviders = React.lazy(() => import("./pages/ForProviders"));
-const BookConsultation = React.lazy(() => import("./pages/BookConsultation"));
+const BookConsultationPage = BookConsultation;
 const JoinMeeting = React.lazy(() => import("./pages/JoinMeeting"));
-const FamilyCoaching = React.lazy(() => import("./pages/FamilyCoaching"));
-const FamilyReadinessIntensive = React.lazy(() => import("./pages/FamilyReadinessIntensive"));
-const InterventionHelp = React.lazy(() => import("./pages/InterventionHelp"));
+const FamilyCoachingPage = FamilyCoaching;
+const FamilyReadinessIntensivePage = FamilyReadinessIntensive;
+const InterventionHelpPage = InterventionHelp;
 const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
@@ -344,15 +352,15 @@ const App = () => (
               <Route path="/addiction-assessment" element={<AddictionAssessment />} />
               <Route path="/family-situation-assessment" element={<FamilySituationAssessment />} />
               <Route path="/faqs" element={<FAQs />} />
-              <Route path="/family-support" element={<FamilySupport />} />
-              <Route path="/start-here" element={<StartHere />} />
-              <Route path="/family-membership" element={<FamilyMembership />} />
+              <Route path="/family-support" element={<FamilySupportPage />} />
+              <Route path="/start-here" element={<StartHerePage />} />
+              <Route path="/family-membership" element={<FamilyMembershipPage />} />
               <Route path="/family-education" element={<FamilyEducation />} />
               <Route path="/family-education/tracks" element={<FamilyEducationTracks />} />
               <Route path="/family-forum" element={<FamilyForum />} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
-              <Route path="/family-consultation" element={<FamilyConsultation />} />
+              <Route path="/family-consultation" element={<FamilyConsultationPage />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />
               <Route path="/monday-night-zoom" element={<MondayZoomRegistration />} />
@@ -431,11 +439,11 @@ const App = () => (
               <Route path="/eating-disorders-guide" element={<EatingDisordersGuide />} />
               <Route path="/free-guide" element={<FreeGuide />} />
               <Route path="/consultation-provider-dashboard" element={<ConsultationProviderDashboard />} />
-              <Route path="/book-consultation" element={<BookConsultation />} />
+              <Route path="/book-consultation" element={<BookConsultationPage />} />
               <Route path="/join-meeting" element={<JoinMeeting />} />
-              <Route path="/family-coaching" element={<FamilyCoaching />} />
-              <Route path="/family-readiness-intensive" element={<FamilyReadinessIntensive />} />
-              <Route path="/intervention-help" element={<InterventionHelp />} />
+              <Route path="/family-coaching" element={<FamilyCoachingPage />} />
+              <Route path="/family-readiness-intensive" element={<FamilyReadinessIntensivePage />} />
+              <Route path="/intervention-help" element={<InterventionHelpPage />} />
               <Route path="/coaching-onboarding" element={<CoachingOnboarding />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/recovery-resources" element={<RecoveryResources />} />
