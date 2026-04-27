@@ -60,6 +60,24 @@ Deno.serve(async (req) => {
 
     const meetingDate = getTonightMeetingDatePT();
 
+    // DST guard: only send if it's actually 8 PM hour Pacific Time, unless ?force=1
+    const url = new URL(req.url);
+    const force = url.searchParams.get("force") === "1";
+    const ptHour = parseInt(
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        hour: "2-digit",
+        hour12: false,
+      }).format(new Date()),
+      10
+    );
+    if (!force && ptHour !== 20) {
+      return new Response(
+        JSON.stringify({ skipped: true, reason: `PT hour is ${ptHour}, expected 20`, meetingDate }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     // All registrants for tonight
     const { data: tonightRows, error: tonightErr } = await supabase
       .from("zoom_meeting_registrations")
