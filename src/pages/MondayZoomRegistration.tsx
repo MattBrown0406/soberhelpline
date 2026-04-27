@@ -318,8 +318,8 @@ export default function MondayZoomRegistration() {
       />
 
       <div className="min-h-screen bg-background">
-        <main className="container py-8 md:py-12">
-          <div className="max-w-2xl mx-auto">
+        <main className="container py-6 md:py-12">
+          <div className="mx-auto max-w-5xl">
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Link to={isMemberQuestion ? "/family-education" : "/"} className="inline-flex items-center text-primary hover:text-primary/80 group">
                 <ArrowLeft className="h-4 w-4 mr-1 transition-transform group-hover:-translate-x-1" />
@@ -343,41 +343,45 @@ export default function MondayZoomRegistration() {
               </div>
             ) : (
               <>
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary p-8 md:p-12 mb-8 text-foreground shadow-2xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.4),transparent_50%)]" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--accent)/0.3),transparent_50%)]" />
-                  <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
-                  <div className="absolute -top-12 -left-12 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-                  <div className="relative z-10 text-center">
-                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/25 backdrop-blur-sm mb-5 ring-2 ring-white/40 shadow-lg shadow-black/10">
-                      <Video className="h-8 w-8 drop-shadow" />
+                <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg md:p-8">
+                  <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+                    <div>
+                      <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                        <Video className="h-4 w-4" />
+                        Free weekly family support
+                      </div>
+                      <h1 className="text-3xl font-extrabold tracking-normal text-foreground md:text-5xl md:leading-tight">
+                        The Family Squares Monday Zoom
+                      </h1>
+                      <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                        Join other families living with addiction for a steady, practical Monday reset. No membership required.
+                      </p>
+                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                        Best next-step order: come to the meeting first, use membership if you want ongoing support, and move into coaching if you need private guidance.
+                      </p>
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight drop-shadow-md">
-                      FREE<br />"The Family Squares"<br />Family Support Zoom Meeting
-                    </h1>
-                    <p className="text-foreground/80 text-lg max-w-xl mx-auto mb-6 leading-relaxed">
-                      Join other families living with addiction for a steady, practical Monday reset. No membership required.
-                    </p>
-                    <p className="text-foreground/70 text-sm max-w-xl mx-auto mb-6">
-                      Best next-step order: come to the meeting first, use membership if you want ongoing support, and only move into coaching if you need private guidance.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-3">
+
+                    <div className="grid gap-3 rounded-lg border bg-muted/30 p-4">
                       {[
                         { icon: Calendar, label: "Every Monday" },
-                        { icon: Clock, label: "7:00 PM PST" },
-                        { icon: Users, label: "Open to Everyone" },
-                        { icon: Video, label: "Via Zoom" },
+                        { icon: Clock, label: "7:00 PM Pacific" },
+                        { icon: Users, label: "Open to everyone" },
+                        { icon: Video, label: "Live on Zoom" },
                       ].map(({ icon: Icon, label }) => (
-                        <span key={label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium">
-                          <Icon className="h-4 w-4" /> {label}
-                        </span>
+                        <div key={label} className="flex items-center gap-3 text-sm font-semibold text-foreground">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          {label}
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <TestimonialCarousel />
+                <div className="mt-6">
+                  <TestimonialCarousel />
+                </div>
 
                 <FamilyNextStepCTA
                   className="mt-6 mb-6"
@@ -402,7 +406,7 @@ export default function MondayZoomRegistration() {
               </>
             )}
 
-            <Card className="border-2 shadow-lg">
+            <Card className="mx-auto max-w-2xl border-2 shadow-lg">
               <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
                 <CardTitle className="text-xl text-foreground flex items-center gap-2">
                   <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
