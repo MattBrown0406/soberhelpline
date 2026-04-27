@@ -57,8 +57,12 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Work directly with an experienced addiction professional. Boundaries, enabling, communication — 1-on-1 coaching for families.',
   },
   '/family-consultation': {
-    title: 'Free Family Consultation — Talk to an Expert | Sober Helpline',
-    description: 'Schedule a free, confidential consultation about your family\'s situation. No pressure, no sales — just honest guidance from someone who understands.',
+    title: 'Crisis Coaching Session for Families | Sober Helpline',
+    description: 'Book a private 60-minute Crisis Coaching Session with a professional family interventionist. Get a clear, calm next step for addiction-related family crisis.',
+  },
+  '/family-readiness-intensive': {
+    title: 'Family Readiness Intensive for Intervention Planning | Sober Helpline',
+    description: 'A focused intervention readiness strategy session for families who need clarity before moving into a professional intervention with Freedom Interventions.',
   },
   '/family-support': {
     title: 'Family Support Resources for Addiction | Sober Helpline',

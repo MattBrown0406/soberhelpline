@@ -10,6 +10,7 @@ import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
+import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 export default function FamilyCoaching() {
@@ -23,6 +24,20 @@ export default function FamilyCoaching() {
       <SEOHead
         title="Family Addiction Coaching — 1-on-1 Support | Sober Helpline"
         description="Work directly with an experienced addiction professional. Family coaching helps you set clearer boundaries, reduce enabling, and make steadier decisions under stress."
+        faqItems={[
+          {
+            question: "What is family addiction coaching?",
+            answer: "Family addiction coaching is private, practical guidance that helps families respond to addiction with clearer boundaries, less enabling, and a calmer plan.",
+          },
+          {
+            question: "Should we start with coaching or the Monday Zoom?",
+            answer: "Many families start with the free Monday Family Squares Zoom. Private coaching is best when the situation is urgent, private, complex, or needs a specific plan.",
+          },
+          {
+            question: "When is an intervention a better fit?",
+            answer: "If safety risk, treatment refusal, family division, or repeated crisis is escalating, the Family Readiness Intensive can help determine whether Freedom Interventions is the right next step.",
+          },
+        ]}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
@@ -122,6 +137,8 @@ export default function FamilyCoaching() {
             <div className="mb-8">
               <FreeConsultationCTA />
             </div>
+
+            <FamilyNextStepCTA className="mb-8" />
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 via-background to-orange-500/5 border border-amber-500/20 p-8 md:p-12 mb-10">

@@ -52,10 +52,6 @@ export default function SEOHead({
   }, [setOverridden]);
   const fullImageUrl = image.startsWith("http") ? image : `${BASE_URL}${image}`;
 
-  // Ensure title is under 60 chars and description under 160 chars
-  const truncatedTitle = title.length > 60 ? `${title.substring(0, 57)}...` : title;
-  const truncatedDescription = description.length > 160 ? `${description.substring(0, 157)}...` : description;
-
   // Build speakable schema for voice assistants
   const speakableSchema = speakableSelectors?.length ? {
     "@type": "SpeakableSpecification",
@@ -97,29 +93,33 @@ export default function SEOHead({
   } : null;
 
   return (
-    <Helmet>
+      <Helmet>
       {/* Primary Meta Tags */}
-      <title>{truncatedTitle}</title>
-      <meta name="description" content={truncatedDescription} />
+      <title>{title}</title>
+      <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
       
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content={truncatedTitle} />
-      <meta property="og:description" content={truncatedDescription} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Sober Helpline family addiction support resources" />
       <meta property="og:site_name" content="Sober Helpline" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@SoberHelpline" />
       <meta name="twitter:url" content={canonicalUrl} />
-      <meta name="twitter:title" content={truncatedTitle} />
-      <meta name="twitter:description" content={truncatedDescription} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
+      <meta name="twitter:image:alt" content="Sober Helpline family addiction support resources" />
 
       {/* Article-specific meta tags */}
       {type === "article" && article && (

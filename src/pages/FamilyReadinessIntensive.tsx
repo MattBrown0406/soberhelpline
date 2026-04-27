@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ShieldCheck, Users, PhoneCall } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
+import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 
 const FamilyReadinessIntensive = () => {
   const faqs = [
@@ -29,7 +30,23 @@ const FamilyReadinessIntensive = () => {
       <SEOHead
         title="Family Readiness Intensive | Sober Helpline"
         description="A focused 90-minute strategy session for families who need expert clarity before deciding on a full intervention. Stop guessing. Get a real plan."
-        
+        faqItems={faqs}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Family Readiness Intensive",
+          provider: {
+            "@type": "Organization",
+            name: "Sober Helpline",
+            url: "https://soberhelpline.com",
+            telephone: "+1-541-241-5668",
+            sameAs: "https://freedominterventions.com"
+          },
+          areaServed: "US",
+          serviceType: "Family intervention readiness planning",
+          description: "A focused strategy session for families who need expert clarity before deciding on a full intervention.",
+          url: "https://soberhelpline.com/family-readiness-intensive"
+        }}
       />
 
       <div className="min-h-screen bg-background">
@@ -61,10 +78,10 @@ const FamilyReadinessIntensive = () => {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
-                  <a href="tel:+15412415886">
+                  <a href="tel:+15412415668">
                     <Button variant="outline" size="lg">
                       <PhoneCall className="mr-2 h-5 w-5" />
-                      Call (541) 241-5886
+                      Call (541) 241-5668
                     </Button>
                   </a>
                 </div>
@@ -80,6 +97,12 @@ const FamilyReadinessIntensive = () => {
                 </div>
               </div>
             </section>
+
+            <FamilyNextStepCTA
+              className="mt-8"
+              heading="Not sure whether this is the right level of help?"
+              subheading="The readiness intensive is for serious intervention questions. If your family needs a lighter first step, start with a coaching session or the free Monday Family Squares Zoom."
+            />
 
             <section className="py-16 md:py-20">
               <div className="max-w-4xl mx-auto space-y-12">

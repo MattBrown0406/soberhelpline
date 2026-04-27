@@ -73,6 +73,26 @@ const Layout = ({ children }: LayoutProps) => {
 
             {/* Search */}
             <div className="ml-auto flex items-center gap-2">
+              <nav className="hidden xl:flex items-center gap-1" aria-label="Family support paths">
+                <Link
+                  to="/family-consultation"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                  Coaching
+                </Link>
+                <Link
+                  to="/monday-zoom-registration"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                  Monday Zoom
+                </Link>
+                <Link
+                  to="/family-readiness-intensive"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                  Intervention?
+                </Link>
+              </nav>
               <SiteSearch />
               {isMember && pathname !== "/family-education" && (
                 <Link

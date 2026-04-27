@@ -38,6 +38,18 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Consultation for Addiction Support</h1><p>Get direct guidance on treatment options, family strategy, and the next right step for your situation.</p><p><a href="https://soberhelpline.com/book-consultation">Book your consultation</a></p></main>'
   },
   {
+    route: '/family-readiness-intensive',
+    title: 'Family Readiness Intensive for Intervention Planning | Sober Helpline',
+    description: 'A focused intervention readiness strategy session for families who need clarity before moving into a professional intervention with Freedom Interventions.',
+    noscriptHtml: '<main><h1>Family Readiness Intensive</h1><p>Get professional clarity before deciding whether your family needs a full intervention, coached family action, or another treatment next step.</p><p><a href="https://soberhelpline.com/book-consultation?plan=family-readiness-intensive">Book the intensive</a> · <a href="https://freedominterventions.com">Freedom Interventions</a></p></main>'
+  },
+  {
+    route: '/interventionists',
+    title: 'Find a Professional Interventionist | Sober Helpline',
+    description: 'Connect with vetted addiction interventionists and learn when professional intervention support may be the right step for your family.',
+    noscriptHtml: '<main><h1>Find a Professional Interventionist</h1><p>Learn when a professional intervention may be appropriate and how to choose ethical help for your family.</p><p><a href="https://soberhelpline.com/family-readiness-intensive">Assess intervention readiness</a></p></main>'
+  },
+  {
     route: '/book-consultation',
     title: 'Book an Addiction Family Consultation | Sober Helpline',
     description: 'Book a consultation with Sober Helpline for addiction-related family guidance, treatment direction, and practical next steps.',
@@ -52,6 +64,8 @@ export const sitemapPriority = new Map([
   ['/family-support', '0.9'],
   ['/family-coaching', '0.9'],
   ['/family-consultation', '0.85'],
+  ['/family-readiness-intensive', '0.85'],
+  ['/interventionists', '0.8'],
   ['/book-consultation', '0.85'],
   ['/family-education', '0.85'],
   ['/roadmap', '0.9'],
@@ -66,6 +80,8 @@ export const sitemapChangefreq = new Map([
   ['/family-support', 'weekly'],
   ['/family-coaching', 'weekly'],
   ['/family-consultation', 'weekly'],
+  ['/family-readiness-intensive', 'weekly'],
+  ['/interventionists', 'weekly'],
   ['/book-consultation', 'weekly'],
 ]);
 

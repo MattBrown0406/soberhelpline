@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, Compass, Phone, Shield, Users }
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
+import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 
 export default function FamilyConsultation() {
   return (
@@ -10,6 +11,20 @@ export default function FamilyConsultation() {
       <SEOHead
         title="Crisis Coaching Session | Sober Helpline"
         description="Book a private 60-minute Crisis Coaching Session with a professional family interventionist. Get a clear, calm next step for your family today."
+        faqItems={[
+          {
+            question: "When should a family book a Crisis Coaching Session?",
+            answer: "A Crisis Coaching Session is best when your family needs a focused private conversation about boundaries, treatment decisions, relapse, money, safety, or what to do in the next few days.",
+          },
+          {
+            question: "Is this the same as a full intervention?",
+            answer: "No. A coaching session helps your family understand the situation and decide the next right step. If a full intervention is needed, the session can help clarify readiness and planning.",
+          },
+          {
+            question: "Can this lead to Freedom Interventions?",
+            answer: "Yes. When a professionally led intervention appears appropriate, the Family Readiness Intensive can help your family prepare for that next step with Freedom Interventions.",
+          },
+        ]}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
@@ -114,6 +129,12 @@ export default function FamilyConsultation() {
                 </div>
               </CardContent>
             </Card>
+
+            <FamilyNextStepCTA
+              className="mb-6"
+              heading="If coaching is only one piece of the plan"
+              subheading="Some families need one private session. Others need free weekly support, ongoing coaching, or a readiness plan for a professional intervention. These paths keep the next step clear."
+            />
 
             <p className="text-sm text-center text-muted-foreground">
               Need to talk now instead? Call <a href="tel:5412415668" className="text-primary hover:underline">(541) 241-5668</a>.

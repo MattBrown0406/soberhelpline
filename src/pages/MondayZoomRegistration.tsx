@@ -13,6 +13,7 @@ import { User } from "@supabase/supabase-js";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import { z } from "zod";
 
 const getNextMeetingDate = () => {
@@ -71,6 +72,7 @@ export default function MondayZoomRegistration() {
   const hasUserEmail = Boolean(user?.email?.trim());
   const requireName = !isMemberQuestion || !user || !trimmedName;
   const requireEmail = !isMemberQuestion || !hasUserEmail;
+  const nextMeetingDate = getNextMeetingDate();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -160,7 +162,7 @@ export default function MondayZoomRegistration() {
           question: result.data.question,
           request_follow_up: formData.requestFollowUp,
           consent_email_list: formData.consentEmailList,
-          meeting_date: getNextMeetingDate(),
+          meeting_date: nextMeetingDate,
           auto_register: formData.autoRegister,
           preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
           preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
@@ -234,6 +236,11 @@ export default function MondayZoomRegistration() {
         {!isMemberQuestion && (
           <div className="mt-10">
             <TestimonialCarousel />
+            <FamilyNextStepCTA
+              className="mt-8 text-left"
+              heading="Need more than the Monday meeting?"
+              subheading="The free Zoom is a strong first step. If your situation feels urgent, private, or high-risk, these paths help you move from group support into direct coaching or intervention planning."
+            />
           </div>
         )}
 
@@ -278,9 +285,30 @@ export default function MondayZoomRegistration() {
             availability: "https://schema.org/InStock",
             url: "https://soberhelpline.com/monday-zoom-registration"
           },
-          recurrence: "https://schema.org/Weekly",
+          startDate: `${nextMeetingDate}T19:00:00-07:00`,
+          eventSchedule: {
+            "@type": "Schedule",
+            repeatFrequency: "P1W",
+            byDay: "https://schema.org/Monday",
+            startTime: "19:00:00",
+            scheduleTimezone: "America/Los_Angeles"
+          },
           isAccessibleForFree: true
         }}
+        faqItems={[
+          {
+            question: "Is the Monday Family Squares Zoom free?",
+            answer: "Yes. The Monday Family Squares Zoom is free for families affected by addiction, and no membership is required to attend.",
+          },
+          {
+            question: "What if my family needs private help before Monday?",
+            answer: "Families who need private guidance can book a Crisis Coaching Session or request intervention follow-up during registration.",
+          },
+          {
+            question: "Can this lead to intervention help?",
+            answer: "Yes. If your situation may require a professional intervention, Sober Helpline can help you assess readiness and connect the next step with Freedom Interventions.",
+          },
+        ]}
       />
 
       <div className="min-h-screen bg-background">
@@ -344,6 +372,12 @@ export default function MondayZoomRegistration() {
                 </div>
 
                 <TestimonialCarousel />
+
+                <FamilyNextStepCTA
+                  className="mt-6 mb-6"
+                  heading="Pick the support level that fits this week"
+                  subheading="You can register for the free meeting below, or move directly into private coaching or intervention planning if your family is dealing with urgent risk."
+                />
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <Link to="/family-membership">
