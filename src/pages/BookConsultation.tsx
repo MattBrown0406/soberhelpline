@@ -17,6 +17,7 @@ import logo from "@/assets/logo.png";
 
 import SEOHead from "@/components/SEOHead";
 import { trackConversionEvent } from "@/lib/conversionTracking";
+import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -688,6 +689,7 @@ const BookConsultation = () => {
       <SEOHead
         title="Book a Consultation | Sober Helpline"
         description="Book a one-on-one video consultation with an addiction and family recovery specialist."
+        personJsonLd={mattBrownPersonSchema}
       />
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between mb-4">
@@ -759,6 +761,14 @@ const BookConsultation = () => {
                   </Button>
                 </div>
               )}
+              <Card className="mb-6 border-primary/20 bg-primary/5">
+                <CardContent className="p-4 text-sm text-muted-foreground">
+                  <p className="font-semibold text-foreground">You are not booking into a sales funnel.</p>
+                  <p className="mt-1">
+                    This is a private family strategy session with an addiction professional. The goal is a clear next step, whether that means coaching, Monday support, treatment planning, or intervention readiness.
+                  </p>
+                </CardContent>
+              </Card>
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (

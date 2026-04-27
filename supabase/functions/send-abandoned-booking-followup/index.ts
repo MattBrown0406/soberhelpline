@@ -7,15 +7,51 @@ const corsHeaders = {
 
 const SITE_URL = "https://soberhelpline.com";
 
+function getPlanFollowup(planType: string | null) {
+  const plans: Record<string, { label: string; subject: string; reassurance: string; alternatePath: string }> = {
+    emergency: {
+      label: "Emergency Game Plan",
+      subject: "Still need a game plan today? - Matt at Sober Helpline",
+      reassurance: "If things still feel urgent, the goal is not to sell you a big package. It is to help you slow the room down and choose the safest next move.",
+      alternatePath: "If booking feels like too much right now, reply with the word \"urgent\" and a sentence about what is happening. I will point you toward the next practical step.",
+    },
+    stabilization: {
+      label: "Family Stabilization Plan",
+      subject: "Want help steadying the situation? - Matt at Sober Helpline",
+      reassurance: "If the home feels chaotic, the stabilization plan is meant to help your family align around boundaries, communication, and near-term decisions.",
+      alternatePath: "If a full plan does not feel right yet, reply and tell me where the family is stuck. I can help you decide whether one private session, Monday support, or another path makes more sense.",
+    },
+    "parallel-recovery": {
+      label: "Parallel Recovery Program",
+      subject: "Parallel recovery can wait until you feel clear - Matt",
+      reassurance: "Longer-term family recovery works best when the fit is clear. If you paused because you are unsure, that is worth listening to.",
+      alternatePath: "You can reply with what your family is trying to change over the next month, and I will help you sort whether ongoing coaching is the right level of support.",
+    },
+    parallel: {
+      label: "Parallel Recovery Program",
+      subject: "Parallel recovery can wait until you feel clear - Matt",
+      reassurance: "Longer-term family recovery works best when the fit is clear. If you paused because you are unsure, that is worth listening to.",
+      alternatePath: "You can reply with what your family is trying to change over the next month, and I will help you sort whether ongoing coaching is the right level of support.",
+    },
+    "family-readiness-intensive": {
+      label: "Family Readiness Intensive",
+      subject: "Still weighing intervention help? - Matt at Sober Helpline",
+      reassurance: "If your family is weighing a formal intervention, it is normal to pause. The intensive exists to help you decide what is actually appropriate before anyone rushes into a major step.",
+      alternatePath: "If you are not sure whether this is intervention-level, reply with what has changed recently. I can help you decide whether readiness planning, free Monday support, or Freedom Interventions is the better next conversation.",
+    },
+  };
+
+  return plans[planType || ""] || {
+    label: "Crisis Family Consult",
+    subject: "Did something get in the way? - Matt at Sober Helpline",
+    reassurance: "The goal is one calm conversation that gives your family a clearer next step, even if that next step is a free resource or a different kind of help.",
+    alternatePath: "If booking a session does not feel right, reply to this email and tell me what is going on. I read every message personally and will point you toward whatever help makes the most sense.",
+  };
+}
+
 function buildEmailHtml(name: string | null, planType: string | null) {
   const greeting = name ? `Hi ${name.split(' ')[0]},` : "Hi there,";
-  const planLabel = planType === "emergency"
-    ? "Emergency Game Plan"
-    : planType === "stabilization"
-    ? "Family Stabilization Plan"
-    : planType === "parallel"
-    ? "Parallel Recovery Program"
-    : "Crisis Family Consult";
+  const plan = getPlanFollowup(planType);
 
   const resumeUrl = `${SITE_URL}/book-consultation${planType ? `?plan=${planType}` : ""}`;
 
@@ -25,9 +61,11 @@ function buildEmailHtml(name: string | null, planType: string | null) {
 <body style="font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif; max-width: 580px; margin: 0 auto; padding: 24px; color: #1f2937; line-height: 1.6;">
   <p>${greeting}</p>
 
-  <p>I noticed you started booking a <strong>${planLabel}</strong> with us a few hours ago but didn't get a chance to finish.</p>
+  <p>I noticed you started booking a <strong>${plan.label}</strong> with us a few hours ago but didn't get a chance to finish.</p>
 
   <p>I want you to know — that's completely normal. Most families who reach this page are in the middle of a really hard moment, and life often interrupts. Phone rings. Loved one walks in. The weight of it all hits and you need to step away. I get it.</p>
+
+  <p>${plan.reassurance}</p>
 
   <p>If you still need help, I'd love to talk. You can pick up right where you left off here:</p>
 
@@ -35,7 +73,7 @@ function buildEmailHtml(name: string | null, planType: string | null) {
     <a href="${resumeUrl}" style="background: #0f766e; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">Finish Booking</a>
   </p>
 
-  <p>And if booking a session doesn't feel right, that's okay too. Just hit reply to this email and tell me what's going on — I read every message personally and I'll point you toward whatever help makes the most sense, even if it's free resources or a different path entirely.</p>
+  <p>${plan.alternatePath}</p>
 
   <p>You don't have to figure this out alone.</p>
 
@@ -115,6 +153,7 @@ Deno.serve(async (req) => {
         continue;
       }
 
+      const plan = getPlanFollowup(record.plan_type);
       const html = buildEmailHtml(record.client_name, record.plan_type);
 
       const sgRes = await fetch('https://api.sendgrid.com/v3/mail/send', {
@@ -129,7 +168,7 @@ Deno.serve(async (req) => {
           }],
           from: { email: 'matt@soberhelpline.com', name: 'Matt Brown | Sober Helpline' },
           reply_to: { email: 'matt@soberhelpline.com', name: 'Matt Brown' },
-          subject: 'Did something get in the way? — Matt at Sober Helpline',
+          subject: plan.subject,
           content: [{ type: 'text/html', value: html }],
         }),
       });

@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 export default function FamilyConsultation() {
   return (
@@ -40,6 +42,7 @@ export default function FamilyConsultation() {
           serviceType: "Family addiction crisis coaching",
           url: "https://soberhelpline.com/family-consultation"
         }}
+        personJsonLd={mattBrownPersonSchema}
       />
 
       <div className="min-h-screen bg-background">
@@ -136,6 +139,10 @@ export default function FamilyConsultation() {
               heading="If coaching is only one piece of the plan"
               subheading="Some families need one private session. Others need free weekly support, ongoing coaching, or a readiness plan for a professional intervention. These paths keep the next step clear."
             />
+
+            <div className="mb-6">
+              <TestimonialCarousel />
+            </div>
 
             <p className="text-sm text-center text-muted-foreground">
               Need to talk now instead? Call <a href="tel:5412415668" onClick={() => trackPhoneClick("family_consultation_footer")} className="text-primary hover:underline">(541) 241-5668</a>.

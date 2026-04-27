@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -33,6 +33,7 @@ import ConsultationProviderCreator from "@/components/admin/ConsultationProvider
 import { RecordingManagement } from "@/components/admin/RecordingManagement";
 import { SurveyManagement } from "@/components/admin/SurveyManagement";
 import { AbandonedBookingsManagement } from "@/components/admin/AbandonedBookingsManagement";
+import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -213,6 +214,10 @@ const Admin = () => {
             <TabsTrigger value="abandoned-bookings" className="gap-2">
               <MailWarning className="h-4 w-4" />
               Abandoned Bookings
+            </TabsTrigger>
+            <TabsTrigger value="lead-pipeline" className="gap-2">
+              <Filter className="h-4 w-4" />
+              Lead Pipeline
             </TabsTrigger>
             <TabsTrigger value="add-provider" className="gap-2">
               <UserPlus className="h-4 w-4" />
@@ -457,6 +462,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <AbandonedBookingsManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="lead-pipeline">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Funnel className="h-5 w-5" />
+                  Family Lead Pipeline
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeadPipelineManagement />
               </CardContent>
             </Card>
           </TabsContent>

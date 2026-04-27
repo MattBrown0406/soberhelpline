@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const FamilyReadinessIntensive = () => {
   const faqs = [
@@ -48,6 +50,7 @@ const FamilyReadinessIntensive = () => {
           description: "A focused strategy session for families who need expert clarity before deciding on a full intervention.",
           url: "https://soberhelpline.com/family-readiness-intensive"
         }}
+        personJsonLd={mattBrownPersonSchema}
       />
 
       <div className="min-h-screen bg-background">
@@ -104,6 +107,10 @@ const FamilyReadinessIntensive = () => {
               heading="Not sure whether this is the right level of help?"
               subheading="The readiness intensive is for serious intervention questions. If your family needs a lighter first step, start with a coaching session or the free Monday Family Squares Zoom."
             />
+
+            <section className="mt-10">
+              <TestimonialCarousel />
+            </section>
 
             <section className="py-16 md:py-20">
               <div className="max-w-4xl mx-auto space-y-12">

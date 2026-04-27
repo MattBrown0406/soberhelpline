@@ -12,6 +12,7 @@ import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import { trackConversionEvent } from "@/lib/conversionTracking";
+import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 export default function FamilyCoaching() {
@@ -52,6 +53,7 @@ export default function FamilyCoaching() {
           "description": "1-on-1 family coaching to help you set boundaries, reduce enabling, and navigate your loved one's addiction with confidence.",
           "url": "https://soberhelpline.com/family-coaching"
         }}
+        personJsonLd={mattBrownPersonSchema}
       />
       <div className="min-h-screen bg-background">
 

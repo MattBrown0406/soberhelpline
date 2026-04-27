@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { AlertTriangle, ArrowRight, Calendar, CheckCircle2, ExternalLink, PhoneCall, ShieldCheck, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const warningSigns = [
   "Your loved one refuses treatment or keeps agreeing and backing out.",
@@ -69,6 +71,7 @@ export default function InterventionHelp() {
           serviceType: "Addiction intervention planning",
           url: "https://soberhelpline.com/intervention-help",
         }}
+        personJsonLd={mattBrownPersonSchema}
       />
 
       <div className="min-h-screen bg-background">
@@ -128,6 +131,10 @@ export default function InterventionHelp() {
                   </div>
                 </CardContent>
               </Card>
+            </section>
+
+            <section className="mt-10">
+              <TestimonialCarousel />
             </section>
 
             <section className="mt-10 grid gap-4 md:grid-cols-3">

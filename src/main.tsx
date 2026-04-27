@@ -5,6 +5,7 @@ import { StatusBar, Style } from "@capacitor/status-bar";
 import { SplashScreen } from "@capacitor/splash-screen";
 import App from "./App.tsx";
 import "./index.css";
+import AnalyticsScripts from "@/components/AnalyticsScripts";
 
 // Initialize Capacitor plugins when running as native app
 const initializeApp = async () => {
@@ -23,6 +24,7 @@ const initializeApp = async () => {
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
+    <AnalyticsScripts />
     <App />
   </HelmetProvider>
 );

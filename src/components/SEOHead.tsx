@@ -24,6 +24,7 @@ interface SEOHeadProps {
   howToSteps?: Array<{ name: string; text: string }>;
   howToName?: string;
   howToDescription?: string;
+  personJsonLd?: Record<string, unknown>;
 }
 
 const BASE_URL = "https://soberhelpline.com";
@@ -41,6 +42,7 @@ export default function SEOHead({
   howToSteps,
   howToName,
   howToDescription,
+  personJsonLd,
 }: SEOHeadProps) {
   const location = useLocation();
   const { setOverridden } = useSEOOverride();
@@ -157,6 +159,12 @@ export default function SEOHead({
       {howToSchema && (
         <script type="application/ld+json">
           {JSON.stringify(howToSchema)}
+        </script>
+      )}
+
+      {personJsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(personJsonLd)}
         </script>
       )}
     </Helmet>

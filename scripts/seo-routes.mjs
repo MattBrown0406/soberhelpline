@@ -56,6 +56,66 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Find a Professional Interventionist</h1><p>Learn when a professional intervention may be appropriate and how to choose ethical help for your family.</p><p><a href="https://soberhelpline.com/family-readiness-intensive">Assess intervention readiness</a></p></main>'
   },
   {
+    route: '/oregon-family-support',
+    title: 'Family Support for Addiction in Oregon | Sober Helpline',
+    description: 'Oregon families can find addiction support, Monday family Zoom calls, coaching, treatment direction, and intervention planning through Sober Helpline.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Oregon</h1><p>Resources for Oregon families dealing with addiction, enabling, relapse, treatment resistance, and intervention decisions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/california-family-support',
+    title: 'Family Support for Addiction in California | Sober Helpline',
+    description: 'California families can get addiction support, weekly family Zoom help, private coaching, and intervention readiness guidance.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in California</h1><p>Guidance for California families navigating fentanyl, alcohol, meth, relapse, boundaries, treatment choices, and intervention planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/washington-family-support',
+    title: 'Family Support for Addiction in Washington | Sober Helpline',
+    description: 'Washington families can access addiction family education, Monday Zoom support, coaching sessions, and intervention planning help.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Washington</h1><p>Support for Washington families dealing with addiction, treatment refusal, relapse, family conflict, and intervention-level concerns.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/texas-family-support',
+    title: 'Family Support for Addiction in Texas | Sober Helpline',
+    description: 'Texas families can find addiction family support, coaching, Monday Zoom meetings, treatment guidance, and intervention readiness help.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Texas</h1><p>Practical support for Texas families facing addiction, crisis decisions, enabling patterns, treatment planning, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/arizona-family-support',
+    title: 'Family Support for Addiction in Arizona | Sober Helpline',
+    description: 'Arizona families can use Sober Helpline for addiction support, free Monday Zoom meetings, private coaching, and intervention planning.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Arizona</h1><p>Guidance for Arizona families managing addiction crisis, treatment resistance, boundaries, family alignment, and intervention readiness.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/colorado-family-support',
+    title: 'Family Support for Addiction in Colorado | Sober Helpline',
+    description: 'Colorado families can find addiction family resources, Monday support Zoom, private coaching, and professional intervention guidance.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Colorado</h1><p>Resources for Colorado families navigating addiction, boundaries, relapse, treatment questions, and possible intervention needs.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/idaho-family-support',
+    title: 'Family Support for Addiction in Idaho | Sober Helpline',
+    description: 'Idaho families can get addiction family support, free weekly Zoom help, coaching sessions, and intervention readiness planning.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Idaho</h1><p>Support for Idaho families dealing with addiction, treatment refusal, enabling, family conflict, and next-step planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/nevada-family-support',
+    title: 'Family Support for Addiction in Nevada | Sober Helpline',
+    description: 'Nevada families can use Sober Helpline for addiction education, Monday Zoom support, family coaching, and intervention planning.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Nevada</h1><p>Guidance for Nevada families facing addiction crisis, enabling patterns, treatment decisions, and possible professional intervention.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/utah-family-support',
+    title: 'Family Support for Addiction in Utah | Sober Helpline',
+    description: 'Utah families can find addiction support, Monday Zoom calls, coaching, treatment planning help, and intervention readiness guidance.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Utah</h1><p>Practical support for Utah families dealing with addiction, family boundaries, treatment resistance, relapse, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
+    route: '/new-mexico-family-support',
+    title: 'Family Support for Addiction in New Mexico | Sober Helpline',
+    description: 'New Mexico families can access addiction family support, Monday Zoom meetings, coaching, and intervention readiness planning.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in New Mexico</h1><p>Support for New Mexico families navigating addiction, overdose risk, treatment refusal, boundaries, and intervention planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+  },
+  {
     route: '/book-consultation',
     title: 'Book an Addiction Family Consultation | Sober Helpline',
     description: 'Book a consultation with Sober Helpline for addiction-related family guidance, treatment direction, and practical next steps.',
@@ -73,6 +133,16 @@ export const sitemapPriority = new Map([
   ['/family-readiness-intensive', '0.85'],
   ['/intervention-help', '0.9'],
   ['/interventionists', '0.8'],
+  ['/oregon-family-support', '0.85'],
+  ['/california-family-support', '0.85'],
+  ['/washington-family-support', '0.85'],
+  ['/texas-family-support', '0.85'],
+  ['/arizona-family-support', '0.8'],
+  ['/colorado-family-support', '0.8'],
+  ['/idaho-family-support', '0.8'],
+  ['/nevada-family-support', '0.8'],
+  ['/utah-family-support', '0.8'],
+  ['/new-mexico-family-support', '0.8'],
   ['/book-consultation', '0.85'],
   ['/family-education', '0.85'],
   ['/roadmap', '0.9'],
@@ -90,6 +160,16 @@ export const sitemapChangefreq = new Map([
   ['/family-readiness-intensive', 'weekly'],
   ['/intervention-help', 'weekly'],
   ['/interventionists', 'weekly'],
+  ['/oregon-family-support', 'weekly'],
+  ['/california-family-support', 'weekly'],
+  ['/washington-family-support', 'weekly'],
+  ['/texas-family-support', 'weekly'],
+  ['/arizona-family-support', 'weekly'],
+  ['/colorado-family-support', 'weekly'],
+  ['/idaho-family-support', 'weekly'],
+  ['/nevada-family-support', 'weekly'],
+  ['/utah-family-support', 'weekly'],
+  ['/new-mexico-family-support', 'weekly'],
   ['/book-consultation', 'weekly'],
 ]);
 
