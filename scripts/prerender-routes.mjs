@@ -15,6 +15,19 @@ const escapeHtml = (value) => value
 
 for (const page of prerenderPages) {
   const canonicalUrl = `${SITE_URL}${page.route === '/' ? '/' : page.route}`;
+  const targetDir = page.route === '/' ? distDir : path.join(distDir, page.route.replace(/^\//, ''));
+  const targetPath = path.join(targetDir, 'index.html');
+
+  try {
+    const existingHtml = await fs.readFile(targetPath, 'utf8');
+    if (existingHtml.includes('data-preserve-static-route="true"')) {
+      console.log(`Preserved static HTML shell for ${page.route}`);
+      continue;
+    }
+  } catch {
+    // No existing static page for this route; generate the normal crawlable shell.
+  }
+
   let html = baseTemplate
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(page.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="description")/, `<meta name="description" content="${escapeHtml(page.description)}">`)
@@ -26,8 +39,7 @@ for (const page of prerenderPages) {
     .replace(/<meta name="twitter:description" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="twitter:description")/, `<meta name="twitter:description" content="${escapeHtml(page.description)}">`)
     .replace('</body>', `<noscript>${page.noscriptHtml}</noscript></body>`);
 
-  const targetDir = page.route === '/' ? distDir : path.join(distDir, page.route.replace(/^\//, ''));
   await fs.mkdir(targetDir, { recursive: true });
-  await fs.writeFile(path.join(targetDir, 'index.html'), html);
+  await fs.writeFile(targetPath, html);
   console.log(`Generated crawlable HTML shell for ${page.route}`);
 }
