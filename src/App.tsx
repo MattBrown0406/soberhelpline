@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
+import MondayZoomRegistration from "./pages/MondayZoomRegistration";
 
 // Lazy-loaded page components
 const ProviderLanding = React.lazy(() => import("./pages/ProviderLanding"));
@@ -39,7 +40,6 @@ const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTr
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
 const FamilyForumLanding = React.lazy(() => import("./pages/FamilyForumLanding"));
 const FamilyConsultation = React.lazy(() => import("./pages/FamilyConsultation"));
-const MondayZoomRegistration = React.lazy(() => import("./pages/MondayZoomRegistration"));
 const FamilyWebinars = React.lazy(() => import("./pages/FamilyWebinars"));
 const ForumTopic = React.lazy(() => import("./pages/ForumTopic"));
 const TreatmentQuestions = React.lazy(() => import("./pages/TreatmentQuestions"));
