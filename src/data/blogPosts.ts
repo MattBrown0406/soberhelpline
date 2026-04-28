@@ -117,6 +117,7 @@ import whatToSayLovedOneRelapsesImg from "@/assets/blog-what-to-say-loved-one-re
 import talkingToChildrenAboutAddictionImg from "@/assets/blog-talking-to-children-about-addiction.jpg";
 import lovedOneLyingAddictionImg from "@/assets/blog-loved-one-lying-addiction.jpg";
 import whatToExpectInterventionImg from "@/assets/blog-what-to-expect-during-intervention.jpg";
+import rebuildingTrustAfterAddictionImg from "@/assets/blog-rebuilding-trust-after-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
