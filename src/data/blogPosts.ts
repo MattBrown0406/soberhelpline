@@ -120,12 +120,127 @@ import whatToExpectInterventionImg from "@/assets/blog-what-to-expect-during-int
 import rebuildingTrustAfterAddictionImg from "@/assets/blog-rebuilding-trust-after-addiction.jpg";
 import continuingCareAfterRehabImg from "@/assets/blog-continuing-care-after-rehab.jpg";
 import medicationAssistedTreatmentFamiliesImg from "@/assets/blog-medication-assisted-treatment-families.jpg";
+import questionsToAskTreatmentCenterImg from "@/assets/blog-questions-to-ask-treatment-center.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 113,
+    slug: "questions-to-ask-treatment-center",
+    seoTitle: "Questions to Ask a Treatment Center Before You Say Yes",
+    metaDescription: "Not sure which rehab program is right for your loved one? Here are the most important questions to ask a treatment center before committing — and the red flags to watch for.",
+    title: "Questions to Ask a Treatment Center Before You Say Yes",
+    category: "Treatment & Recovery",
+    author: "Matt Brown",
+    date: "2026-05-01",
+    image: questionsToAskTreatmentCenterImg,
+    keywords: ["questions to ask a treatment center", "choosing a rehab", "treatment center red flags", "how to evaluate rehab", "addiction treatment questions", "family guide treatment center"],
+    excerpt: "You've found a few programs. Maybe your loved one has finally agreed to go. Either way, you're wondering: how do I know which one is actually good? Here are the questions that matter — and the red flags to watch for.",
+    content: `You've done the search. You've found a few programs. Maybe your loved one has finally agreed to go, or maybe you're preparing for the moment when they will. Either way, you're staring at a list of treatment centers wondering: how do I know which one is actually good?
+
+It's one of the most important questions a family can ask — and one of the hardest to answer. The addiction treatment industry is largely unregulated compared to other areas of healthcare, which means the quality, approach, and ethics of programs can vary dramatically. A polished website and a compassionate-sounding admissions rep don't tell you much about what actually happens inside.
+
+This guide will walk you through the most important questions to ask a treatment center before you commit. These aren't trick questions or gotchas — they're the ones that matter. And a good program will welcome every single one of them.
+
+## Why Asking the Right Questions to a Treatment Center Actually Matters
+
+Treatment is not one-size-fits-all. The right program for one person may be completely wrong for another. Factors like the type of substance, the length of use, any co-occurring mental health conditions, family dynamics, and personal history all influence what kind of care is most likely to help.
+
+When you ask informed questions, you're not being difficult. You're being a good advocate. You're also giving the program a chance to demonstrate transparency and clinical integrity. Programs that get defensive or vague when asked basic questions are telling you something important.
+
+The goal isn't to catch anyone out. It's to gather enough real information to make a genuinely informed decision during one of the most high-stakes moments your family may face.
+
+## Questions to Ask About Clinical Approach and Staff Credentials
+
+Start with the clinical foundation. A reputable program should be able to answer these questions clearly and without hesitation.
+
+### What treatment model do you use?
+
+Look for evidence-based approaches: Cognitive Behavioral Therapy (CBT), Motivational Interviewing (MI), Dialectical Behavior Therapy (DBT), and trauma-informed care are all considered best practices in the field. Be cautious of programs that rely exclusively on 12-Step programming without any licensed clinical therapy component, or programs that dismiss <a href="/blog/medication-assisted-treatment-mat-addiction-families">medication-assisted treatment (MAT)</a> for opioid or alcohol use disorders without a clear clinical reason.
+
+### What are the credentials of your clinical staff?
+
+Ask specifically about the therapists and counselors — not just the medical director. Are they licensed? What licenses do they hold? How many licensed clinicians are on staff relative to the number of clients? A ratio of more than eight clients per therapist is worth asking about.
+
+### Do you treat co-occurring mental health conditions?
+
+It's estimated that more than half of people with a substance use disorder also have a co-occurring mental health condition — depression, anxiety, PTSD, ADHD, and others are common. A program that only addresses addiction without assessing and treating mental health is missing a critical piece of the picture. Ask whether they have a licensed psychiatrist on staff or available for evaluation.
+
+## Questions to Ask About the Program Structure
+
+Understanding what a typical day looks like helps you assess whether a program is genuinely therapeutic — or simply structured housing with a wellness veneer.
+
+Ask these questions about the day-to-day structure:
+
+- How many hours per day are dedicated to clinical programming — therapy groups, individual sessions, education?
+- What is the typical length of stay, and how is that determined?
+- How are family members involved during treatment — are there family sessions, workshops, or family therapy?
+- What does a typical week look like for a client?
+- What is your policy if my loved one wants to leave against medical advice?
+
+High-quality residential programs typically offer four to six hours of structured clinical programming per day. If a program can't clearly describe what a client does during the day, that's worth noting.
+
+## Questions to Ask About Aftercare and Discharge Planning
+
+What happens after treatment is often more important than treatment itself. Relapse rates for substance use disorders are comparable to other chronic illnesses — this is expected, not a sign of failure. What matters is that there's a clear, realistic plan for what comes next.
+
+Ask the treatment center: What does your discharge planning process look like? Do you work with sober living homes, outpatient programs, or therapists in the client's home community? How long does your team stay involved after discharge — and in what capacity?
+
+A program that discharges clients without a clear, individualized aftercare plan is leaving them exposed at one of the most vulnerable points in early recovery. Expect a real, specific answer here — not just a general assurance that they "handle it."
+
+For more on what continuing care should look like, see our guide on <a href="/blog/continuing-care-after-rehab-family-guide">continuing care after rehab</a>.
+
+## Red Flags to Watch For When Evaluating a Treatment Center
+
+Not every program that looks good on paper deserves your trust. Here are some warning signs worth taking seriously:
+
+- They create urgency or pressure around admissions ("we only have one bed left — you need to decide today")
+- They can't clearly describe their clinical model or the credentials of their staff
+- They promise outcomes they can't guarantee ("we have a 90% success rate")
+- They discourage or prohibit family involvement during treatment
+- They dismiss medication-assisted treatment without a clinical rationale
+- They ask for large upfront cash payments before insurance has been verified
+- They're evasive or defensive when asked basic questions about their program
+
+None of these are automatic disqualifiers on their own. But any of them warrant a follow-up conversation — or a closer look at another program.
+
+## You Deserve Real Answers — And So Does Your Loved One
+
+Finding the right treatment program takes time and energy you may feel you don't have. But taking a few hours to ask the right questions now can make a meaningful difference in what happens next.
+
+Good programs welcome informed families. They understand that recovery doesn't happen in isolation — it happens in the context of real relationships, real support systems, and real life. When you show up prepared and engaged, you're modeling exactly what recovery asks of everyone in it: honest, courageous participation.
+
+If you're not sure where to start, or if you'd like support evaluating a specific program, SoberHelpline.com is here to help. Our <a href="/coaching">coaching team</a> works with families throughout the treatment search process — providing education, honest feedback, and the kind of steady guidance that helps you make decisions you can stand behind. Explore our resources, join our family community, or book a coaching session whenever you're ready.
+
+## Frequently Asked Questions
+
+### What are the most important questions to ask a treatment center?
+
+The most important questions cover their clinical approach (what therapy models they use), the credentials of their staff, how they handle co-occurring mental health conditions, what a typical day looks like for clients, and what the aftercare plan includes. A good program will answer all of these clearly and without defensiveness.
+
+### How do I know if a rehab program is legitimate?
+
+Look for state licensure, accreditation from bodies like The Joint Commission or CARF, licensed clinical staff, and evidence-based treatment methods. Be cautious of programs that make guaranteed outcome promises, create urgency around admissions, or can't clearly explain their therapeutic approach.
+
+### Should family members be involved in choosing a treatment center?
+
+Yes — and a quality program will welcome it. Families often have important context about a loved one's history, mental health, and previous treatment experiences that helps the clinical team provide better care. Many programs also include family therapy and education as a core component of their model.
+
+### What is a red flag when looking at treatment centers?
+
+Red flags include high-pressure admissions tactics, vague or defensive answers about clinical programming, promises of guaranteed outcomes, a lack of licensed clinical staff, no family involvement in treatment, and reluctance to discuss their approach in detail. If something feels off, ask more questions — or consider looking elsewhere.
+
+### What should aftercare look like after residential treatment?
+
+Good aftercare includes a transition to a lower level of care (such as an intensive outpatient program or partial hospitalization program), a connection to outpatient therapy, consideration of <a href="/sober-living">sober living</a> if the home environment is high-risk, and a plan for ongoing recovery support. Ask about this before your loved one is admitted, not the week before they leave.
+
+### Does it matter if a treatment center is 12-Step based?
+
+It depends on the person and the program. <a href="/twelve-steps-explained">12-Step programming</a> can be a genuinely valuable component of recovery for many people — but it should be one part of a broader clinical model, not the entire program. Programs that rely exclusively on peer support without licensed individual therapy miss important evidence-based treatment components.`
+  },
   {
     id: 112,
     slug: "medication-assisted-treatment-mat-addiction-families",
