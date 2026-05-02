@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || "G-8VLPQVGME4";
 const GTM_ID = import.meta.env.VITE_GTM_ID;
 const PLAUSIBLE_DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN;
 
