@@ -1,7 +1,11 @@
+import { supabase } from "@/integrations/supabase/client";
+
 type ConversionEventName =
   | "coaching_click"
   | "monday_zoom_click"
+  | "monday_zoom_registration_view"
   | "monday_zoom_registration_submit"
+  | "monday_zoom_registration_success"
   | "intervention_readiness_click"
   | "freedom_interventions_click"
   | "lead_magnet_signup"
@@ -9,7 +13,12 @@ type ConversionEventName =
   | "phone_click"
   | "booking_provider_selected"
   | "booking_step_continue"
-  | "booking_payment_start";
+  | "booking_payment_start"
+  | "nme_bridge_arrival"
+  | "nme_bridge_family_squares_click"
+  | "nme_bridge_lane_click"
+  | "nme_bridge_coaching_click"
+  | "nme_bridge_intervention_click";
 
 type ConversionEventPayload = {
   label?: string;
@@ -82,6 +91,8 @@ export const captureInboundSource = () => {
   }
 };
 
+export const getInboundSource = () => getStoredInboundSource();
+
 export const trackConversionEvent = (eventName: ConversionEventName, payload: ConversionEventPayload = {}) => {
   if (typeof window === "undefined") return;
   const inboundSource = getStoredInboundSource();
@@ -97,6 +108,27 @@ export const trackConversionEvent = (eventName: ConversionEventName, payload: Co
   window.gtag?.("event", eventName, eventPayload);
   window.plausible?.(eventName, { props: eventPayload });
   window.dataLayer?.push({ event: eventName, ...eventPayload });
+
+  void supabase.functions.invoke("track-conversion-event", {
+    body: {
+      event_name: eventName,
+      page_path: eventPayload.page_path,
+      page_title: document.title,
+      source: eventPayload.source,
+      label: eventPayload.event_label,
+      target_href: eventPayload.targetHref,
+      utm_source: eventPayload.utm_source,
+      utm_medium: eventPayload.utm_medium,
+      utm_campaign: eventPayload.utm_campaign,
+      utm_content: eventPayload.utm_content,
+      utm_term: eventPayload.utm_term,
+      referrer: eventPayload.referrer || document.referrer || undefined,
+      first_landing_path: eventPayload.first_landing_path,
+      metadata: eventPayload,
+    },
+  }).catch(() => {
+    // First-party measurement should never interrupt someone trying to get help.
+  });
 
   try {
     const existing = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "[]") as unknown[];

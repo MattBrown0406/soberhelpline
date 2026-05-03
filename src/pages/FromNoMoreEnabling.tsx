@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Calendar, CheckCircle2, ExternalLink, Mail, Phone, Shield, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
@@ -56,6 +56,40 @@ export default function FromNoMoreEnabling() {
   const [selectedLane, setSelectedLane] = useState("family-squares");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const arrivalTracked = useRef(false);
+
+  useEffect(() => {
+    if (arrivalTracked.current) return;
+    arrivalTracked.current = true;
+
+    trackConversionEvent("nme_bridge_arrival", {
+      source: "from_no_more_enabling",
+      label: "NME bridge page arrival",
+    });
+  }, []);
+
+  const trackBridgeLaneClick = (lane: (typeof supportLanes)[number], source: string) => {
+    const eventName =
+      lane.value === "family-squares"
+        ? "nme_bridge_family_squares_click"
+        : lane.value === "intervention"
+          ? "nme_bridge_intervention_click"
+          : "nme_bridge_coaching_click";
+
+    trackConversionEvent(eventName, {
+      source,
+      lane: lane.value,
+      label: lane.title,
+      targetHref: lane.to,
+    });
+
+    trackConversionEvent("nme_bridge_lane_click", {
+      source,
+      lane: lane.value,
+      label: lane.title,
+      targetHref: lane.to,
+    });
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -156,13 +190,19 @@ export default function FromNoMoreEnabling() {
                   No More Enabling helps families see what keeps the cycle alive. Sober Helpline is where that insight turns into live support, private coaching, treatment direction, or intervention readiness.
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild size="lg" onClick={() => trackConversionEvent("monday_zoom_click", { source: "nme_bridge_hero" })}>
+                  <Button asChild size="lg" onClick={() => {
+                    trackBridgeLaneClick(supportLanes[0], "nme_bridge_hero");
+                    trackConversionEvent("monday_zoom_click", { source: "nme_bridge_hero" });
+                  }}>
                     <Link to="/family-squares?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=hero">
                       Join Family Squares
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" onClick={() => trackConversionEvent("coaching_click", { source: "nme_bridge_hero" })}>
+                  <Button asChild variant="outline" size="lg" onClick={() => {
+                    trackBridgeLaneClick(supportLanes[1], "nme_bridge_hero");
+                    trackConversionEvent("coaching_click", { source: "nme_bridge_hero" });
+                  }}>
                     <Link to="/family-addiction-consult?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=hero">
                       Private family consult
                     </Link>
@@ -283,7 +323,10 @@ export default function FromNoMoreEnabling() {
                       <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</p>
                       <h3 className="mt-1 text-xl font-semibold text-foreground">{lane.title}</h3>
                       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{lane.description}</p>
-                      <Button asChild variant="outline" className="mt-5 justify-between" onClick={() => trackConversionEvent(lane.value === "family-squares" ? "monday_zoom_click" : lane.value === "intervention" ? "intervention_readiness_click" : "coaching_click", { source: "nme_bridge_lane", lane: lane.value })}>
+                      <Button asChild variant="outline" className="mt-5 justify-between" onClick={() => {
+                        trackBridgeLaneClick(lane, "nme_bridge_lane");
+                        trackConversionEvent(lane.value === "family-squares" ? "monday_zoom_click" : lane.value === "intervention" ? "intervention_readiness_click" : "coaching_click", { source: "nme_bridge_lane", lane: lane.value });
+                      }}>
                         <Link to={lane.to}>
                           {lane.cta}
                           <ArrowRight className="h-4 w-4" />

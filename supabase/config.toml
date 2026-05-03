@@ -36,6 +36,9 @@ verify_jwt = false
 [functions.public-register-monday-zoom]
 verify_jwt = false
 
+[functions.track-conversion-event]
+verify_jwt = false
+
 [functions.process-consultation-booking]
 verify_jwt = false
 

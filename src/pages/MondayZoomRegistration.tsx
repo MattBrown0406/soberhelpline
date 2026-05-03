@@ -7,14 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import logo from "@/assets/logo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
-import { trackConversionEvent } from "@/lib/conversionTracking";
+import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
 
 const getNextMeetingDate = () => {
@@ -75,6 +75,7 @@ export default function MondayZoomRegistration() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
+  const registrationViewTracked = useRef(false);
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const isMemberQuestion = searchParams.get("member") === "true";
@@ -100,6 +101,23 @@ export default function MondayZoomRegistration() {
   const requireName = !isMemberQuestion || !user || !trimmedName;
   const requireEmail = !isMemberQuestion || !hasUserEmail;
   const nextMeetingDate = getNextMeetingDate();
+
+  useEffect(() => {
+    if (registrationViewTracked.current) return;
+    registrationViewTracked.current = true;
+
+    const inboundSource = getInboundSource();
+    const cameFromNme =
+      searchParams.get("utm_source") === "nomoreenabling" ||
+      inboundSource.utm_source === "nomoreenabling" ||
+      inboundSource.first_landing_path === "/from-no-more-enabling";
+
+    trackConversionEvent("monday_zoom_registration_view", {
+      source: cameFromNme ? "nme_family_squares_registration" : isMemberQuestion ? "member_question_form" : "public_registration_form",
+      label: isFamilySquaresLanding ? "/family-squares" : "/monday-zoom-registration",
+      fromNme: cameFromNme,
+    });
+  }, [isFamilySquaresLanding, isMemberQuestion, searchParams]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -202,6 +220,14 @@ export default function MondayZoomRegistration() {
       trackConversionEvent("monday_zoom_registration_submit", {
         source: isMemberQuestion ? "member_question_form" : "public_registration_form",
         label: getNextMeetingDate(),
+      });
+
+      trackConversionEvent("monday_zoom_registration_success", {
+        source: isMemberQuestion ? "member_question_form" : "public_registration_form",
+        label: getNextMeetingDate(),
+        requestFollowUp: formData.requestFollowUp,
+        autoRegister: formData.autoRegister,
+        consentEmailList: formData.consentEmailList,
       });
 
       setSubmitted(true);
