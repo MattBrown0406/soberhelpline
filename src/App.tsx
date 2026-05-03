@@ -16,6 +16,7 @@ import BookConsultation from "./pages/BookConsultation";
 import FamilyCoaching from "./pages/FamilyCoaching";
 import FamilyReadinessIntensive from "./pages/FamilyReadinessIntensive";
 import InterventionHelp from "./pages/InterventionHelp";
+import FromNoMoreEnabling from "./pages/FromNoMoreEnabling";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -184,6 +185,7 @@ const JoinMeeting = React.lazy(() => import("./pages/JoinMeeting"));
 const FamilyCoachingPage = FamilyCoaching;
 const FamilyReadinessIntensivePage = FamilyReadinessIntensive;
 const InterventionHelpPage = InterventionHelp;
+const FromNoMoreEnablingPage = FromNoMoreEnabling;
 const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
@@ -361,6 +363,7 @@ const App = () => (
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
               <Route path="/family-consultation" element={<FamilyConsultationPage />} />
+              <Route path="/from-no-more-enabling" element={<FromNoMoreEnablingPage />} />
               <Route path="/family-squares" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />

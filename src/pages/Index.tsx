@@ -432,6 +432,12 @@ const Index = () => {
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
+                <Button asChild variant="outline" className="mt-5 border-logo-green/30 text-logo-green hover:bg-logo-green/5">
+                  <Link to="/from-no-more-enabling">
+                    Follow the guided bridge
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
               <div className="grid gap-3">
                 {funnelLanes.map((lane) => (

@@ -60,6 +60,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Crisis Coaching Session for Families | Sober Helpline',
     description: 'Book a private 60-minute Crisis Coaching Session with a professional family interventionist. Get a clear, calm next step for addiction-related family crisis.',
   },
+  '/from-no-more-enabling': {
+    title: 'Coming From No More Enabling? | Sober Helpline',
+    description: 'A guided next step for No More Enabling readers: free Family Squares support, private family coaching, intervention readiness, and ethical treatment guidance.',
+  },
   '/family-readiness-intensive': {
     title: 'Family Readiness Intensive for Intervention Planning | Sober Helpline',
     description: 'A focused intervention readiness strategy session for families who need clarity before moving into a professional intervention with Freedom Interventions.',

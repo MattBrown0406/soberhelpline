@@ -14,6 +14,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Register for Family Squares</h1><p>Join Sober Helpline\'s free Monday Zoom for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
   },
   {
+    route: '/from-no-more-enabling',
+    title: 'Coming From No More Enabling? | Sober Helpline',
+    description: 'A guided next step for No More Enabling readers: free Family Squares support, private family coaching, intervention readiness, and ethical treatment guidance.',
+    noscriptHtml: '<main><h1>Coming From No More Enabling?</h1><p>Choose the right next step after reading No More Enabling: free Family Squares support, private family coaching, intervention readiness, or treatment direction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-consultation">Private family consult</a> · <a href="https://soberhelpline.com/intervention-help">Intervention readiness</a></p></main>'
+  },
+  {
     route: '/monday-zoom-registration',
     title: 'Monday Family Support Zoom | Sober Helpline',
     description: 'Register for Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
@@ -138,6 +144,7 @@ export const prerenderPages = [
 export const sitemapPriority = new Map([
   ['/', '1.0'],
   ['/family-squares', '0.98'],
+  ['/from-no-more-enabling', '0.95'],
   ['/monday-zoom-registration', '0.95'],
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
@@ -167,6 +174,7 @@ export const sitemapChangefreq = new Map([
   ['/', 'weekly'],
   ['/blog', 'daily'],
   ['/family-squares', 'weekly'],
+  ['/from-no-more-enabling', 'weekly'],
   ['/monday-zoom-registration', 'weekly'],
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],

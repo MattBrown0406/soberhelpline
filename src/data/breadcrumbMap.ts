@@ -4,6 +4,10 @@ export interface BreadcrumbItem {
 }
 
 const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
+  "/from-no-more-enabling": [
+    { label: "Home", path: "/" },
+    { label: "No More Enabling Reader Path", path: "/from-no-more-enabling" },
+  ],
   "/start-here": [
     { label: "Home", path: "/" },
     { label: "Start Here", path: "/start-here" },

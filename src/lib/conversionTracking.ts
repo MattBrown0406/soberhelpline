@@ -4,6 +4,8 @@ type ConversionEventName =
   | "monday_zoom_registration_submit"
   | "intervention_readiness_click"
   | "freedom_interventions_click"
+  | "lead_magnet_signup"
+  | "partner_page_click"
   | "phone_click"
   | "booking_provider_selected"
   | "booking_step_continue"
