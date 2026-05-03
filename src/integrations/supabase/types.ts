@@ -967,6 +967,65 @@ export type Database = {
         }
         Relationships: []
       }
+      family_squares_followup_queue: {
+        Row: {
+          body_html: string
+          created_at: string
+          email: string
+          error_message: string | null
+          id: string
+          lead_tier: string
+          name: string | null
+          registration_id: string | null
+          revenue_path: string
+          scheduled_for: string
+          sent_at: string | null
+          sequence_step: number
+          skipped_at: string | null
+          subject: string
+        }
+        Insert: {
+          body_html: string
+          created_at?: string
+          email: string
+          error_message?: string | null
+          id?: string
+          lead_tier?: string
+          name?: string | null
+          registration_id?: string | null
+          revenue_path?: string
+          scheduled_for: string
+          sent_at?: string | null
+          sequence_step: number
+          skipped_at?: string | null
+          subject: string
+        }
+        Update: {
+          body_html?: string
+          created_at?: string
+          email?: string
+          error_message?: string | null
+          id?: string
+          lead_tier?: string
+          name?: string | null
+          registration_id?: string | null
+          revenue_path?: string
+          scheduled_for?: string
+          sent_at?: string | null
+          sequence_step?: number
+          skipped_at?: string | null
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_followup_queue_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       forum_badges: {
         Row: {
           color: string
@@ -2633,15 +2692,24 @@ export type Database = {
           consent_email_list: boolean
           created_at: string
           email: string
+          followup_sequence_status: string
           id: string
+          last_followup_at: string | null
+          lead_reasons: string[]
+          lead_score: number
+          lead_tier: string
           meeting_date: string
           name: string
+          next_followup_at: string | null
+          next_revenue_action: string
+          nme_attributed: boolean
           phone: string
           preferred_contact_date: string | null
           preferred_contact_time: string | null
           preferred_timezone: string | null
           question: string
           request_follow_up: boolean
+          revenue_path: string
           user_id: string | null
         }
         Insert: {
@@ -2649,15 +2717,24 @@ export type Database = {
           consent_email_list?: boolean
           created_at?: string
           email: string
+          followup_sequence_status?: string
           id?: string
+          last_followup_at?: string | null
+          lead_reasons?: string[]
+          lead_score?: number
+          lead_tier?: string
           meeting_date?: string
           name: string
+          next_followup_at?: string | null
+          next_revenue_action?: string
+          nme_attributed?: boolean
           phone: string
           preferred_contact_date?: string | null
           preferred_contact_time?: string | null
           preferred_timezone?: string | null
           question: string
           request_follow_up?: boolean
+          revenue_path?: string
           user_id?: string | null
         }
         Update: {
@@ -2665,15 +2742,24 @@ export type Database = {
           consent_email_list?: boolean
           created_at?: string
           email?: string
+          followup_sequence_status?: string
           id?: string
+          last_followup_at?: string | null
+          lead_reasons?: string[]
+          lead_score?: number
+          lead_tier?: string
           meeting_date?: string
           name?: string
+          next_followup_at?: string | null
+          next_revenue_action?: string
+          nme_attributed?: boolean
           phone?: string
           preferred_contact_date?: string | null
           preferred_contact_time?: string | null
           preferred_timezone?: string | null
           question?: string
           request_follow_up?: boolean
+          revenue_path?: string
           user_id?: string | null
         }
         Relationships: []

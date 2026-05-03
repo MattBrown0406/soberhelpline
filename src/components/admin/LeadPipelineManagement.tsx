@@ -84,7 +84,7 @@ const formatRevenuePath = (path: string | null) => {
   if (path === "crisis_coaching") return "Crisis Coaching";
   if (path === "family_membership") return "Family Membership";
   if (path === "family_squares") return "Family Squares";
-  return path.replaceAll("_", " ");
+  return path.split("_").join(" ");
 };
 
 const formatLeadTier = (tier: string) => {
@@ -93,7 +93,7 @@ const formatLeadTier = (tier: string) => {
   if (tier === "support_nurture") return "Support nurture";
   if (tier === "booked") return "Booked";
   if (tier === "booking_started") return "Booking started";
-  return tier.replaceAll("_", " ");
+  return tier.split("_").join(" ");
 };
 
 export function LeadPipelineManagement() {
