@@ -550,6 +550,63 @@ export type Database = {
         }
         Relationships: []
       }
+      conversion_events: {
+        Row: {
+          created_at: string
+          event_name: string
+          first_landing_path: string | null
+          id: string
+          label: string | null
+          metadata: Json
+          page_path: string | null
+          page_title: string | null
+          referrer: string | null
+          source: string | null
+          target_href: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_name: string
+          first_landing_path?: string | null
+          id?: string
+          label?: string | null
+          metadata?: Json
+          page_path?: string | null
+          page_title?: string | null
+          referrer?: string | null
+          source?: string | null
+          target_href?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_name?: string
+          first_landing_path?: string | null
+          id?: string
+          label?: string | null
+          metadata?: Json
+          page_path?: string | null
+          page_title?: string | null
+          referrer?: string | null
+          source?: string | null
+          target_href?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
       education_bookmarks: {
         Row: {
           created_at: string

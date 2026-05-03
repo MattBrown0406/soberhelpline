@@ -116,7 +116,7 @@ export const trackConversionEvent = (eventName: ConversionEventName, payload: Co
       page_title: document.title,
       source: eventPayload.source,
       label: eventPayload.event_label,
-      target_href: eventPayload.targetHref,
+      target_href: payload.targetHref as string | undefined,
       utm_source: eventPayload.utm_source,
       utm_medium: eventPayload.utm_medium,
       utm_campaign: eventPayload.utm_campaign,
