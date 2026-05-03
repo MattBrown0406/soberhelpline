@@ -17,6 +17,8 @@ import FamilyCoaching from "./pages/FamilyCoaching";
 import FamilyReadinessIntensive from "./pages/FamilyReadinessIntensive";
 import InterventionHelp from "./pages/InterventionHelp";
 import FromNoMoreEnabling from "./pages/FromNoMoreEnabling";
+import IntentLandingPage from "./pages/IntentLandingPage";
+import PartnerWithSoberHelpline from "./pages/PartnerWithSoberHelpline";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -186,6 +188,8 @@ const FamilyCoachingPage = FamilyCoaching;
 const FamilyReadinessIntensivePage = FamilyReadinessIntensive;
 const InterventionHelpPage = InterventionHelp;
 const FromNoMoreEnablingPage = FromNoMoreEnabling;
+const IntentLandingPageComponent = IntentLandingPage;
+const PartnerWithSoberHelplinePage = PartnerWithSoberHelpline;
 const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
@@ -364,6 +368,10 @@ const App = () => (
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
               <Route path="/family-consultation" element={<FamilyConsultationPage />} />
               <Route path="/from-no-more-enabling" element={<FromNoMoreEnablingPage />} />
+              <Route path="/family-addiction-consult" element={<IntentLandingPageComponent />} />
+              <Route path="/intervention-readiness-consult" element={<IntentLandingPageComponent />} />
+              <Route path="/addiction-family-coaching" element={<IntentLandingPageComponent />} />
+              <Route path="/partner-with-sober-helpline" element={<PartnerWithSoberHelplinePage />} />
               <Route path="/family-squares" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />

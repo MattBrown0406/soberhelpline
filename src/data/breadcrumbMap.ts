@@ -8,6 +8,22 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "No More Enabling Reader Path", path: "/from-no-more-enabling" },
   ],
+  "/family-addiction-consult": [
+    { label: "Home", path: "/" },
+    { label: "Family Addiction Consult", path: "/family-addiction-consult" },
+  ],
+  "/intervention-readiness-consult": [
+    { label: "Home", path: "/" },
+    { label: "Intervention Readiness Consult", path: "/intervention-readiness-consult" },
+  ],
+  "/addiction-family-coaching": [
+    { label: "Home", path: "/" },
+    { label: "Addiction Family Coaching", path: "/addiction-family-coaching" },
+  ],
+  "/partner-with-sober-helpline": [
+    { label: "Home", path: "/" },
+    { label: "Partner With Sober Helpline", path: "/partner-with-sober-helpline" },
+  ],
   "/start-here": [
     { label: "Home", path: "/" },
     { label: "Start Here", path: "/start-here" },

@@ -64,6 +64,22 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Coming From No More Enabling? | Sober Helpline',
     description: 'A guided next step for No More Enabling readers: free Family Squares support, private family coaching, intervention readiness, and ethical treatment guidance.',
   },
+  '/family-addiction-consult': {
+    title: 'Family Addiction Consult | Sober Helpline',
+    description: 'A private family addiction consult for parents, spouses, and loved ones who need help choosing the next right step.',
+  },
+  '/intervention-readiness-consult': {
+    title: 'Intervention Readiness Consult | Sober Helpline',
+    description: 'A private consult for families deciding whether treatment refusal, relapse, or escalating risk may require professional intervention planning.',
+  },
+  '/addiction-family-coaching': {
+    title: 'Addiction Family Coaching | Sober Helpline',
+    description: 'Private addiction family coaching for boundaries, relapse, communication, treatment decisions, and family alignment.',
+  },
+  '/partner-with-sober-helpline': {
+    title: 'Partner With Sober Helpline | Audience & Family Support',
+    description: 'A quiet partner overview for ethical providers, sponsors, and recovery-aligned brands interested in Sober Helpline family addiction support.',
+  },
   '/family-readiness-intensive': {
     title: 'Family Readiness Intensive for Intervention Planning | Sober Helpline',
     description: 'A focused intervention readiness strategy session for families who need clarity before moving into a professional intervention with Freedom Interventions.',

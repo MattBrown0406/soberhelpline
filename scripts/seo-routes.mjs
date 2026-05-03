@@ -20,6 +20,30 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Coming From No More Enabling?</h1><p>Choose the right next step after reading No More Enabling: free Family Squares support, private family coaching, intervention readiness, or treatment direction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-consultation">Private family consult</a> · <a href="https://soberhelpline.com/intervention-help">Intervention readiness</a></p></main>'
   },
   {
+    route: '/family-addiction-consult',
+    title: 'Family Addiction Consult | Sober Helpline',
+    description: 'A private family addiction consult for parents, spouses, and loved ones who need help choosing the next right step.',
+    noscriptHtml: '<main><h1>Family Addiction Consult</h1><p>Private next-step guidance for families dealing with addiction, relapse, boundaries, treatment questions, or intervention uncertainty.</p><p><a href="https://soberhelpline.com/book-consultation">Book a consultation</a> · <a href="https://soberhelpline.com/family-squares">Join Family Squares</a></p></main>'
+  },
+  {
+    route: '/intervention-readiness-consult',
+    title: 'Intervention Readiness Consult | Sober Helpline',
+    description: 'A private consult for families deciding whether treatment refusal, relapse, or escalating risk may require professional intervention planning.',
+    noscriptHtml: '<main><h1>Intervention Readiness Consult</h1><p>Private guidance for families deciding whether treatment refusal, relapse, safety concerns, or escalating consequences require a professional intervention plan.</p><p><a href="https://soberhelpline.com/book-consultation?plan=family-readiness-intensive">Book readiness planning</a> · <a href="https://soberhelpline.com/intervention-help">Review warning signs</a></p></main>'
+  },
+  {
+    route: '/addiction-family-coaching',
+    title: 'Addiction Family Coaching | Sober Helpline',
+    description: 'Private addiction family coaching for boundaries, relapse, communication, treatment decisions, and family alignment.',
+    noscriptHtml: '<main><h1>Addiction Family Coaching</h1><p>Coaching for families who need help with boundaries, relapse response, treatment decisions, communication, and follow-through.</p><p><a href="https://soberhelpline.com/family-consultation">See coaching options</a> · <a href="https://soberhelpline.com/family-squares">Join free Monday support</a></p></main>'
+  },
+  {
+    route: '/partner-with-sober-helpline',
+    title: 'Partner With Sober Helpline | Audience & Family Support',
+    description: 'A quiet partner overview for ethical providers, sponsors, and recovery-aligned brands interested in Sober Helpline family addiction support.',
+    noscriptHtml: '<main><h1>Partner With Sober Helpline</h1><p>Sober Helpline reaches families looking for addiction support, treatment direction, intervention readiness, and practical next steps.</p><p><a href="https://soberhelpline.com/for-providers">Provider information</a></p></main>'
+  },
+  {
     route: '/monday-zoom-registration',
     title: 'Monday Family Support Zoom | Sober Helpline',
     description: 'Register for Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
@@ -145,6 +169,10 @@ export const sitemapPriority = new Map([
   ['/', '1.0'],
   ['/family-squares', '0.98'],
   ['/from-no-more-enabling', '0.95'],
+  ['/family-addiction-consult', '0.9'],
+  ['/intervention-readiness-consult', '0.9'],
+  ['/addiction-family-coaching', '0.9'],
+  ['/partner-with-sober-helpline', '0.75'],
   ['/monday-zoom-registration', '0.95'],
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
@@ -175,6 +203,10 @@ export const sitemapChangefreq = new Map([
   ['/blog', 'daily'],
   ['/family-squares', 'weekly'],
   ['/from-no-more-enabling', 'weekly'],
+  ['/family-addiction-consult', 'weekly'],
+  ['/intervention-readiness-consult', 'weekly'],
+  ['/addiction-family-coaching', 'weekly'],
+  ['/partner-with-sober-helpline', 'monthly'],
   ['/monday-zoom-registration', 'weekly'],
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],

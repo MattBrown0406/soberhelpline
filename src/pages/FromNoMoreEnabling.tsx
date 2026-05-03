@@ -26,7 +26,7 @@ const supportLanes = [
     eyebrow: "Private help",
     title: "Book a crisis family consult",
     description: "Use a private session when the family needs a calm plan, better boundaries, or help deciding what to do this week.",
-    to: "/family-consultation?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=coaching",
+    to: "/family-addiction-consult?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=coaching",
     cta: "See private coaching options",
     icon: Phone,
   },
@@ -35,7 +35,7 @@ const supportLanes = [
     eyebrow: "Higher-risk situation",
     title: "Check intervention readiness",
     description: "Use this path when refusal, relapse, safety risk, or family division may require a more formal intervention plan.",
-    to: "/intervention-help?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=intervention",
+    to: "/intervention-readiness-consult?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=intervention",
     cta: "Review intervention next steps",
     icon: Shield,
   },
@@ -163,7 +163,7 @@ export default function FromNoMoreEnabling() {
                     </Link>
                   </Button>
                   <Button asChild variant="outline" size="lg" onClick={() => trackConversionEvent("coaching_click", { source: "nme_bridge_hero" })}>
-                    <Link to="/family-consultation?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=hero">
+                    <Link to="/family-addiction-consult?utm_source=nomoreenabling&utm_medium=bridge&utm_campaign=soberhelpline_funnel&utm_content=hero">
                       Private family consult
                     </Link>
                   </Button>
@@ -319,7 +319,7 @@ export default function FromNoMoreEnabling() {
               </div>
               <div className="md:col-span-2">
                 <Button asChild variant="outline" onClick={() => trackConversionEvent("partner_page_click", { source: "nme_bridge_partner_section" })}>
-                  <Link to="/for-providers">
+                  <Link to="/partner-with-sober-helpline">
                     Professional partner information
                     <ExternalLink className="h-4 w-4" />
                   </Link>
