@@ -57,10 +57,10 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                   Crisis Family Consult
                 </Button>
               </Link>
-              <Link to="/monday-zoom-registration" onClick={() => { trackConversionEvent("monday_zoom_click", { source: "mobile_nav" }); closeMenu(); }}>
+              <Link to="/family-squares" onClick={() => { trackConversionEvent("monday_zoom_click", { source: "mobile_nav" }); closeMenu(); }}>
                 <Button variant="ghost" className="w-full justify-start gap-2 font-semibold text-primary">
                   <Calendar className="w-4 h-4" />
-                  Free Support Group
+                  Family Squares
                 </Button>
               </Link>
               <Link to="/intervention-help" onClick={() => { trackConversionEvent("intervention_readiness_click", { source: "mobile_nav" }); closeMenu(); }}>

@@ -27,15 +27,17 @@ const nextSteps = [
     title: "Talk to Freedom Interventions",
     description: "For families who already know they need a professional intervention team and want to move directly into that conversation.",
     cta: "Visit Freedom Interventions",
-    href: "https://freedominterventions.com",
+    href: "https://freedominterventions.com/?utm_source=soberhelpline&utm_medium=intervention_help&utm_campaign=intervention_consult",
   },
   {
     title: "Use free support while you decide",
     description: "If the situation is not immediate, join the Monday Family Squares Zoom and bring your intervention questions.",
     cta: "Register for Monday Zoom",
-    to: "/monday-zoom-registration",
+    to: "/family-squares",
   },
 ];
+
+const freedomInterventionsHref = "https://freedominterventions.com/?utm_source=soberhelpline&utm_medium=intervention_help&utm_campaign=intervention_consult&utm_content=hero";
 
 export default function InterventionHelp() {
   return (
@@ -97,7 +99,7 @@ export default function InterventionHelp() {
                     </Link>
                   </Button>
                   <Button asChild variant="outline" size="lg" onClick={() => trackConversionEvent("freedom_interventions_click", { source: "intervention_help_hero" })}>
-                    <a href="https://freedominterventions.com" target="_blank" rel="noopener noreferrer">
+                    <a href={freedomInterventionsHref} target="_blank" rel="noopener noreferrer">
                       Freedom Interventions
                       <ExternalLink className="h-4 w-4" />
                     </a>

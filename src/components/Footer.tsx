@@ -16,7 +16,7 @@ const Footer = () => {
               <p className="font-semibold text-white">Private coaching</p>
               <p className="mt-1 text-sm text-gray-400">Book a Crisis Coaching Session for direct family guidance.</p>
             </Link>
-            <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
+            <Link to="/family-squares" onClick={() => trackConversionEvent("monday_zoom_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
               <p className="font-semibold text-white">Monday Family Squares</p>
               <p className="mt-1 text-sm text-gray-400">Join the free Monday night family support Zoom.</p>
             </Link>
@@ -55,7 +55,7 @@ const Footer = () => {
               <li><Link to="/family-coaching" className="text-sm hover:text-white transition-colors">Coaching</Link></li>
               <li><Link to="/family-consultation" className="text-sm hover:text-white transition-colors">Crisis Coaching Session</Link></li>
               <li><Link to="/intervention-help" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
-              <li><Link to="/monday-zoom-registration" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
+              <li><Link to="/family-squares" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
               <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>
               <li><Link to="/free-guide" className="text-sm hover:text-white transition-colors">Free Guide</Link></li>

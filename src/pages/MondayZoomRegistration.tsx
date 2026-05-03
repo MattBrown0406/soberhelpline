@@ -1,5 +1,5 @@
-import { Link, useSearchParams } from "react-router-dom";
-import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, BookOpen, MessagesSquare, Shield, ArrowRight, Crown } from "lucide-react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Phone, ArrowLeft, Video, Users, Clock, Calendar, Loader2, CheckCircle2, Monitor, MessagesSquare, Shield, ArrowRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -44,6 +44,30 @@ const buildRegistrationSchema = (options: { requireName: boolean; requireEmail: 
   question: z.string().trim().max(1000).optional().default(""),
 });
 
+const meetingExpectations = [
+  {
+    icon: Users,
+    title: "A room for family members",
+    description: "Parents, spouses, siblings, adult children, and close supporters can bring what they are carrying.",
+  },
+  {
+    icon: MessagesSquare,
+    title: "Practical questions, not lectures",
+    description: "Use the question box to name what is happening this week so the conversation can stay useful.",
+  },
+  {
+    icon: Shield,
+    title: "Support before pressure",
+    description: "You do not have to be ready for coaching, treatment decisions, or intervention planning to attend.",
+  },
+];
+
+const afterRegistrationSteps = [
+  "Check your email for the Zoom details.",
+  "Forward the confirmation to another family member who should be in the same conversation.",
+  "Bring one real situation you want help thinking through this week.",
+];
+
 export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,8 +75,10 @@ export default function MondayZoomRegistration() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const isMemberQuestion = searchParams.get("member") === "true";
+  const isFamilySquaresLanding = location.pathname === "/family-squares";
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -265,8 +291,8 @@ export default function MondayZoomRegistration() {
   return (
     <>
       <SEOHead
-        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Free Monday Family Addiction Support Meeting | Sober Helpline"}
-        description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for the free Monday Family Squares Zoom meeting. Get practical support, ask questions, and hear from families who understand addiction up close."}
+        title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Family Squares Free Monday Support Meeting | Sober Helpline"}
+        description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for Family Squares, the free Monday Zoom meeting for families affected by addiction. Get live support, ask practical questions, and find the next right step."}
         jsonLd={isMemberQuestion ? undefined : {
           "@context": "https://schema.org",
           "@type": "Event",
@@ -276,7 +302,7 @@ export default function MondayZoomRegistration() {
           eventStatus: "https://schema.org/EventScheduled",
           location: {
             "@type": "VirtualLocation",
-            url: "https://soberhelpline.com/monday-zoom-registration"
+            url: `https://soberhelpline.com${isFamilySquaresLanding ? "/family-squares" : "/monday-zoom-registration"}`
           },
           organizer: {
             "@type": "Organization",
@@ -289,7 +315,7 @@ export default function MondayZoomRegistration() {
             price: "0",
             priceCurrency: "USD",
             availability: "https://schema.org/InStock",
-            url: "https://soberhelpline.com/monday-zoom-registration"
+            url: `https://soberhelpline.com${isFamilySquaresLanding ? "/family-squares" : "/monday-zoom-registration"}`
           },
           startDate: `${nextMeetingDate}T19:00:00-07:00`,
           eventSchedule: {
@@ -351,13 +377,13 @@ export default function MondayZoomRegistration() {
                         Free weekly family support
                       </div>
                       <h1 className="text-3xl font-extrabold tracking-normal text-foreground md:text-5xl md:leading-tight">
-                        The Family Squares Monday Zoom
+                        Family Squares Monday Zoom
                       </h1>
                       <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                        Join other families living with addiction for a steady, practical Monday reset. No membership required.
+                        The weekly soft landing for families affected by addiction. Bring the pattern you are seeing, the conversation you are dreading, or the decision you keep avoiding.
                       </p>
                       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                        Best next-step order: come to the meeting first, use membership if you want ongoing support, and move into coaching if you need private guidance.
+                        Best next-step order: come to the meeting first, use membership if you want ongoing support, and move into coaching or intervention readiness only if your situation needs more structure.
                       </p>
                     </div>
 
@@ -381,6 +407,39 @@ export default function MondayZoomRegistration() {
 
                 <div className="mt-6">
                   <TestimonialCarousel />
+                </div>
+
+                <div className="mt-6 grid gap-4 md:grid-cols-3">
+                  {meetingExpectations.map((item) => (
+                    <Card key={item.title} className="border-primary/15 bg-primary/5">
+                      <CardContent className="p-5">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-background text-primary">
+                          <item.icon className="h-5 w-5" />
+                        </div>
+                        <h2 className="mt-4 font-semibold text-foreground">{item.title}</h2>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-xl border border-logo-green/20 bg-logo-green/5 p-5">
+                  <div className="grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-wide text-logo-green">After you register</p>
+                      <h2 className="mt-1 text-2xl font-bold text-foreground">Make the meeting easier to use</h2>
+                    </div>
+                    <div className="space-y-3">
+                      {afterRegistrationSteps.map((step, index) => (
+                        <div key={step} className="flex gap-3 text-sm text-muted-foreground">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-logo-green text-xs font-bold text-white">
+                            {index + 1}
+                          </span>
+                          <span>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 <FamilyNextStepCTA

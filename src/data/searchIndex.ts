@@ -106,7 +106,7 @@ export const searchIndex: SearchEntry[] = [
   // COMMUNITY & KEY PAGES
   // ──────────────────────────────────────────────
   { title: "Family Forum", path: "/family-forum", description: "Connect with other families navigating addiction in our supportive community.", category: "community", keywords: ["forum", "community", "support", "families", "discussion"] },
-  { title: "The Family Squares", path: "/monday-zoom-registration", description: "Weekly live Zoom meeting for families dealing with addiction.", category: "community", keywords: ["zoom", "monday", "meeting", "live", "weekly", "group"] },
+  { title: "The Family Squares", path: "/family-squares", description: "Weekly live Zoom meeting for families dealing with addiction.", category: "community", keywords: ["zoom", "monday", "meeting", "live", "weekly", "group"] },
   { title: "Family Coaching", path: "/family-coaching", description: "One-on-one coaching for families affected by addiction.", category: "community", keywords: ["coaching", "one-on-one", "support", "family"] },
   { title: "Intervention Help", path: "/intervention-help", description: "Warning signs and next steps for families considering a professional intervention.", category: "page", keywords: ["intervention", "freedom interventions", "readiness", "professional interventionist", "treatment refusal"] },
   { title: "Family Webinars", path: "/family-webinars", description: "Educational webinars for families on addiction-related topics.", category: "community", keywords: ["webinars", "education", "live", "learning"] },

@@ -54,7 +54,7 @@ const LeadMagnetPopup = () => {
 
   const handleStart = () => {
     handleDismiss();
-    navigate("/monday-zoom-registration");
+    navigate("/family-squares");
   };
 
   if (!isVisible) return null;

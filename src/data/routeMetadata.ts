@@ -128,6 +128,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Addiction Recovery Resources for Families | Sober Helpline',
     description: 'Comprehensive recovery resources: treatment guides, support tools, boundary exercises, and more — all in one place.',
   },
+  '/family-squares': {
+    title: 'Family Squares Free Monday Support Meeting | Sober Helpline',
+    description: 'Free Monday support meeting for families affected by addiction. Register for Family Squares, ask practical questions, and find a calmer next step.',
+  },
   '/monday-zoom-registration': {
     title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
     description: 'Free weekly family support group every Monday at 7 PM PT. Connect with other families, get guidance, and feel less alone.',

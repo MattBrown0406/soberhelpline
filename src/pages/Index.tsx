@@ -38,28 +38,63 @@ const categories = [
 
 const startHereOptions = [
   {
-    title: "Urgent help now",
+    title: "Free Family Squares",
+    description: "Join the Monday group for support, perspective, and a place to start without pressure.",
+    icon: Calendar,
+    to: "/family-squares",
+    cta: "Register for Monday",
+    accent: "border-blue-200 bg-blue-50/70 hover:bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/20",
+  },
+  {
+    title: "Private family coaching",
     description: "If the situation is blowing up, start with a private consult and a same-direction next step.",
     icon: AlertTriangle,
     to: "/family-consultation",
     cta: "Book a crisis consult",
-    accent: "border-red-200 bg-red-50/70 hover:bg-red-50 dark:border-red-900/50 dark:bg-red-950/20",
+    accent: "border-amber-200 bg-amber-50/70 hover:bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20",
   },
   {
-    title: "Free support",
-    description: "Join the free Monday group if you need support, perspective, and a place to start without pressure.",
-    icon: Calendar,
-    to: "/monday-zoom-registration",
-    cta: "Join free support",
-    accent: "border-blue-200 bg-blue-50/70 hover:bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/20",
+    title: "Intervention readiness",
+    description: "Use this path when refusal, relapse, risk, or family division may require a formal intervention.",
+    icon: Shield,
+    to: "/intervention-help",
+    cta: "Check readiness",
+    accent: "border-violet-200 bg-violet-50/70 hover:bg-violet-50 dark:border-violet-900/50 dark:bg-violet-950/20",
   },
   {
     title: "Treatment options",
     description: "Search vetted treatment resources and levels of care without referral pressure or industry games.",
-    icon: Shield,
+    icon: Building2,
     to: "/recovery-resources",
     cta: "See treatment options",
     accent: "border-emerald-200 bg-emerald-50/70 hover:bg-emerald-50 dark:border-emerald-900/50 dark:bg-emerald-950/20",
+  },
+];
+
+const funnelLanes = [
+  {
+    eyebrow: "Soft landing",
+    title: "Family Squares",
+    description: "The free Monday room for families who need live support before they are ready to buy anything.",
+    to: "/family-squares",
+    cta: "Join free Monday support",
+    icon: Calendar,
+  },
+  {
+    eyebrow: "Private guidance",
+    title: "Coaching and consults",
+    description: "A paid next step when the family needs a calm plan, direct feedback, or help deciding what to do this week.",
+    to: "/family-consultation",
+    cta: "See private help",
+    icon: Phone,
+  },
+  {
+    eyebrow: "High-risk path",
+    title: "Intervention readiness",
+    description: "A bridge toward Freedom Interventions when refusal, safety, relapse, or family conflict has crossed the line.",
+    to: "/intervention-help",
+    cta: "Assess intervention fit",
+    icon: Shield,
   },
 ];
 
@@ -176,9 +211,14 @@ const Index = () => {
                       Crisis Consult
                     </Button>
                   </Link>
-                  <Link to="/monday-zoom-registration">
+                  <Link to="/family-squares">
                     <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
-                      Free Support
+                      Family Squares
+                    </Button>
+                  </Link>
+                  <Link to="/intervention-help">
+                    <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
+                      Intervention
                     </Button>
                   </Link>
                   <Link to="/recovery-resources">
@@ -224,11 +264,11 @@ const Index = () => {
                   <Phone className="w-4 h-4" />
                   (541) 241-5668
                 </a>
-                <Link to="/book-consultation?plan=emergency">
-                  <Button className="bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
-                    Get Help Now
-                  </Button>
-                </Link>
+                  <Link to="/family-squares">
+                    <Button className="bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
+                      Join Free Monday
+                    </Button>
+                  </Link>
                 {user ? (
                   <>
                     {isMember && (
@@ -264,21 +304,21 @@ const Index = () => {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300 text-xs md:text-sm font-medium mb-4 md:mb-6">
                   <AlertTriangle className="w-3 h-3 md:w-4 md:h-4" />
-                  Addiction crisis support for families
+                  Free live support and next-step guidance for families
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
-                  Your family is in crisis.
-                  <span className="block text-logo-green mt-2">Get a calm, clear next step today.</span>
+                  Get out of search mode.
+                  <span className="block text-logo-green mt-2">Step into the right support lane.</span>
                 </h1>
                 <p className="text-base md:text-xl text-muted-foreground max-w-3xl mb-6 md:mb-8 hero-description">
-                  If addiction is escalating and you are scared of making the wrong move, start with direct guidance. Sober Helpline helps families slow the chaos down, understand their options, and decide what to do next without pressure or industry games.
+                  Sober Helpline is the live support layer for families who have been reading, worrying, and trying to decide what to do next. Start with the free Family Squares meeting, step into private coaching when needed, or move toward intervention readiness when risk is rising.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-3 max-w-2xl">
-                  <Link to="/family-readiness-intensive" className="w-full sm:w-auto">
+                  <Link to="/family-squares" className="w-full sm:w-auto">
                     <Button size="lg" className="w-full gap-2 md:gap-3 bg-logo-green hover:bg-logo-green/90 text-white px-6 md:px-8 py-4 text-sm md:text-base shadow-lg shadow-logo-green/25 hover:shadow-xl hover:shadow-logo-green/30 transition-all">
-                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                      Family Readiness Intensive
+                      <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+                      Join Free Family Squares
                     </Button>
                   </Link>
                   <Link to="/family-consultation" className="w-full sm:w-auto">
@@ -287,12 +327,18 @@ const Index = () => {
                       Crisis Family Consult
                     </Button>
                   </Link>
+                  <Link to="/intervention-help" className="w-full sm:w-auto">
+                    <Button size="lg" variant="outline" className="w-full gap-2 px-6 py-4 text-sm md:text-base border-violet-400/40 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/20">
+                      <Shield className="w-4 h-4" />
+                      Intervention Readiness
+                    </Button>
+                  </Link>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5 text-sm text-muted-foreground mb-6 md:mb-8">
-                  <span className="font-semibold text-foreground">Private consult offer from $150</span>
+                  <span className="font-semibold text-foreground">Free Monday support at 7 PM Pacific</span>
                   <span className="hidden sm:inline text-border">•</span>
-                  <span>Leave with a clear next-step plan</span>
+                  <span>Private consults still available from $150</span>
                   <span className="hidden sm:inline text-border">•</span>
                   <a href="tel:5412415668" className="inline-flex items-center gap-2 text-logo-green hover:underline">
                     <Phone className="w-4 h-4" />
@@ -300,7 +346,7 @@ const Index = () => {
                   </a>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 max-w-3xl">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-4xl">
                   {startHereOptions.map((option) => (
                     <Link key={option.title} to={option.to}>
                       <Card className={`h-full border transition-all hover:shadow-md ${option.accent}`}>
@@ -348,10 +394,10 @@ const Index = () => {
                     <div className="flex items-start gap-3">
                       <BadgeDollarSign className="w-5 h-5 text-amber-700 dark:text-amber-300 mt-0.5" />
                       <div>
-                        <p className="font-semibold text-foreground">Front-end private help, with visible pricing</p>
-                        <p className="text-sm text-muted-foreground mt-1">Emergency Game Plan consults start at <span className="font-semibold text-foreground">$150</span>, with deeper family stabilization support available if needed.</p>
-                        <Link to="/family-coaching" className="inline-flex items-center gap-1 text-sm font-medium text-logo-green mt-2 hover:underline">
-                          See consult and coaching options
+                        <p className="font-semibold text-foreground">A soft landing before a paid decision</p>
+                        <p className="text-sm text-muted-foreground mt-1">Most families should start with Family Squares, then move into coaching or intervention readiness only if the situation calls for more structure.</p>
+                        <Link to="/family-squares" className="inline-flex items-center gap-1 text-sm font-medium text-logo-green mt-2 hover:underline">
+                          Register for Family Squares
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
@@ -378,31 +424,34 @@ const Index = () => {
         </section>
 
         <section className="container mx-auto px-4 py-10 md:py-14">
-          <div className="max-w-5xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
+          <div className="max-w-6xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Need help before the next free family support Zoom meeting?</h2>
+                <p className="text-sm font-semibold uppercase tracking-wide text-logo-green mb-2">Coming from No More Enabling?</p>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">This is where reading turns into live support.</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
-                  Start with a crisis family consult if things are escalating now. Then use the free Monday Zoom and membership for continued support if that makes sense for your family.
+                  No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
               </div>
               <div className="grid gap-3">
-                <div className="rounded-2xl border bg-background/80 p-4">
-                  <div className="flex items-center gap-2 text-logo-green font-semibold mb-1">
-                    <Clock3 className="w-4 h-4" />
-                    Emergency Game Plan
-                  </div>
-                  <p className="text-sm text-muted-foreground">60-minute private coaching session for immediate clarity</p>
-                  <p className="text-xl font-bold text-foreground mt-2">$150 <span className="text-sm font-normal text-muted-foreground">or $125 for members</span></p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Link to="/family-consultation" className="flex-1">
-                    <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">Learn More</Button>
+                {funnelLanes.map((lane) => (
+                  <Link key={lane.title} to={lane.to} className="rounded-2xl border bg-background/80 p-4 transition-all hover:border-logo-green/40 hover:shadow-sm">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-logo-green/10 text-logo-green">
+                        <lane.icon className="h-5 w-5" />
+                      </span>
+                      <span>
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</span>
+                        <span className="block font-semibold text-foreground">{lane.title}</span>
+                        <span className="mt-1 block text-sm text-muted-foreground">{lane.description}</span>
+                        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-logo-green">
+                          {lane.cta}
+                          <ArrowRight className="h-4 w-4" />
+                        </span>
+                      </span>
+                    </div>
                   </Link>
-                  <Link to="/book-consultation?plan=emergency" className="flex-1">
-                    <Button variant="outline" className="w-full">Book Now</Button>
-                  </Link>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -608,7 +657,7 @@ const Index = () => {
         </section>
 
         <section className="container mx-auto px-4 pt-6 md:pt-10">
-          <Link to="/monday-zoom-registration" className="block">
+          <Link to="/family-squares" className="block">
             <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
               <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
@@ -819,7 +868,7 @@ const Index = () => {
                   Book a Crisis Family Consult
                 </Button>
               </Link>
-              <Link to="/monday-zoom-registration" className="w-full sm:w-auto">
+              <Link to="/family-squares" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-green hover:bg-logo-green hover:text-white">
                   <Calendar className="w-4 h-4 md:w-5 md:h-5" />
                   Join Monday's Free Zoom

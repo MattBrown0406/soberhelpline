@@ -361,6 +361,7 @@ const App = () => (
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
               <Route path="/family-consultation" element={<FamilyConsultationPage />} />
+              <Route path="/family-squares" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />
               <Route path="/monday-night-zoom" element={<MondayZoomRegistration />} />

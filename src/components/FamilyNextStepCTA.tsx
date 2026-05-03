@@ -27,7 +27,7 @@ const paths = [
     title: "Join Monday Family Squares",
     description: "A free Monday night Zoom for families who want support, education, and a steadier way to respond this week.",
     cta: "Register for Monday Zoom",
-    to: "/monday-zoom-registration",
+    to: "/family-squares",
     eventName: "monday_zoom_click" as const,
     tone: "border-blue-500/30 bg-blue-50/70 text-blue-700 dark:bg-blue-950/20 dark:text-blue-300",
   },

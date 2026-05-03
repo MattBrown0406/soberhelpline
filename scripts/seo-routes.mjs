@@ -5,7 +5,13 @@ export const prerenderPages = [
     route: '/',
     title: 'Family Addiction Support & Education | Sober Helpline',
     description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, coaching, and practical next steps for families under strain.',
-    noscriptHtml: '<main><h1>Family Addiction Support and Education</h1><p>Sober Helpline offers family support, coaching, Monday Zoom meetings, and practical next steps for families facing addiction.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a> · <a href="https://soberhelpline.com/family-membership">Explore family membership</a> · <a href="https://soberhelpline.com/book-consultation">Book a consultation</a></p></main>'
+    noscriptHtml: '<main><h1>Family Addiction Support and Education</h1><p>Sober Helpline offers family support, coaching, Monday Zoom meetings, and practical next steps for families facing addiction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-membership">Explore family membership</a> · <a href="https://soberhelpline.com/book-consultation">Book a consultation</a></p></main>'
+  },
+  {
+    route: '/family-squares',
+    title: 'Family Squares Free Monday Support Meeting | Sober Helpline',
+    description: 'Register for Family Squares, Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
+    noscriptHtml: '<main><h1>Register for Family Squares</h1><p>Join Sober Helpline\'s free Monday Zoom for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
   },
   {
     route: '/monday-zoom-registration',
@@ -23,13 +29,13 @@ export const prerenderPages = [
     route: '/family-support',
     title: 'Family Support for Addiction | Sober Helpline',
     description: 'Free family addiction support resources, education, and next-step guidance for families dealing with a loved one\'s substance use.',
-    noscriptHtml: '<main><h1>Family Support for Addiction</h1><p>Free support, education, and guidance for families dealing with a loved one\'s substance use, denial, relapse, or treatment resistance.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a> · <a href="https://soberhelpline.com/family-coaching">Explore family coaching</a></p></main>'
+    noscriptHtml: '<main><h1>Family Support for Addiction</h1><p>Free support, education, and guidance for families dealing with a loved one\'s substance use, denial, relapse, or treatment resistance.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-coaching">Explore family coaching</a></p></main>'
   },
   {
     route: '/start-here',
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
-    noscriptHtml: '<main><h1>Start Here for Family Addiction Help</h1><p>Choose the right next step for your family: free Monday support, private coaching, or intervention readiness help.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    noscriptHtml: '<main><h1>Start Here for Family Addiction Help</h1><p>Choose the right next step for your family: free Monday support, private coaching, or intervention readiness help.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/book-consultation">Book coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
     route: '/family-coaching',
@@ -131,6 +137,7 @@ export const prerenderPages = [
 
 export const sitemapPriority = new Map([
   ['/', '1.0'],
+  ['/family-squares', '0.98'],
   ['/monday-zoom-registration', '0.95'],
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
@@ -159,6 +166,7 @@ export const sitemapPriority = new Map([
 export const sitemapChangefreq = new Map([
   ['/', 'weekly'],
   ['/blog', 'daily'],
+  ['/family-squares', 'weekly'],
   ['/monday-zoom-registration', 'weekly'],
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],
