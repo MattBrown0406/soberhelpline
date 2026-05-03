@@ -8,6 +8,11 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "No More Enabling Reader Path", path: "/from-no-more-enabling" },
   ],
+  "/family-squares-next-step": [
+    { label: "Home", path: "/" },
+    { label: "Family Squares", path: "/family-squares" },
+    { label: "Next Step", path: "/family-squares-next-step" },
+  ],
   "/family-addiction-consult": [
     { label: "Home", path: "/" },
     { label: "Family Addiction Consult", path: "/family-addiction-consult" },

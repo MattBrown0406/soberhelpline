@@ -39,6 +39,12 @@ verify_jwt = false
 [functions.track-conversion-event]
 verify_jwt = false
 
+[functions.score-family-squares-registration]
+verify_jwt = false
+
+[functions.process-family-squares-followups]
+verify_jwt = false
+
 [functions.process-consultation-booking]
 verify_jwt = false
 

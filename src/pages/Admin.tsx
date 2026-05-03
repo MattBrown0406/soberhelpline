@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -35,6 +35,7 @@ import { SurveyManagement } from "@/components/admin/SurveyManagement";
 import { AbandonedBookingsManagement } from "@/components/admin/AbandonedBookingsManagement";
 import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagement";
 import { NmeFunnelReport } from "@/components/admin/NmeFunnelReport";
+import { RevenueCommandCenter } from "@/components/admin/RevenueCommandCenter";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -203,6 +204,10 @@ const Admin = () => {
             <TabsTrigger value="nme-funnel" className="gap-2">
               <Route className="h-4 w-4" />
               NME Funnel
+            </TabsTrigger>
+            <TabsTrigger value="revenue" className="gap-2">
+              <BadgeDollarSign className="h-4 w-4" />
+              Revenue
             </TabsTrigger>
             <TabsTrigger value="guide-analytics" className="gap-2">
               <FileText className="h-4 w-4" />
@@ -425,6 +430,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <NmeFunnelReport />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="revenue">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BadgeDollarSign className="h-5 w-5" />
+                  Revenue Command Center
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <RevenueCommandCenter />
               </CardContent>
             </Card>
           </TabsContent>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BadgeDollarSign, BarChart3, CheckCircle2, HeartHandshake, ShieldCheck, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import RevenueLadder from "@/components/RevenueLadder";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent } from "@/lib/conversionTracking";
@@ -17,6 +18,29 @@ const sponsorFit = [
   "Family support tools, apps, courses, and education",
   "Recovery, prevention, and aftercare resources",
   "Professional services that help families make clearer decisions",
+];
+
+const proofMetrics = [
+  {
+    label: "Tracked education handoffs",
+    value: "NME → SH",
+    detail: "No More Enabling readers can be measured as they move into Sober Helpline support lanes.",
+  },
+  {
+    label: "High-intent registration signal",
+    value: "Family Squares",
+    detail: "Registrants show active family need before paid coaching or intervention conversations begin.",
+  },
+  {
+    label: "Revenue paths",
+    value: "$150-$2,500",
+    detail: "The funnel distinguishes free support, coaching, stabilization, and readiness-intensive intent.",
+  },
+  {
+    label: "Sponsor safety",
+    value: "Curated",
+    detail: "Partner inventory can be priced around useful family context without confusing it with clinical advice.",
+  },
 ];
 
 export default function PartnerWithSoberHelpline() {
@@ -116,6 +140,35 @@ export default function PartnerWithSoberHelpline() {
                 ))}
               </div>
             </div>
+          </section>
+
+          <section className="container px-4 py-10 md:py-14">
+            <div className="mx-auto max-w-6xl">
+              <div className="mb-6 max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-wide text-primary">Advertiser proof package</p>
+                <h2 className="mt-2 text-3xl font-bold tracking-normal text-foreground">
+                  The sellable asset is not generic pageviews. It is measured family decision traffic.
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  This page now frames future sponsor conversations around first-party measurement, family intent, and clear separation between free support and paid offers.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-4">
+                {proofMetrics.map((metric) => (
+                  <Card key={metric.label} className="border-primary/15">
+                    <CardContent className="p-5">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{metric.label}</p>
+                      <p className="mt-2 text-2xl font-bold text-foreground">{metric.value}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{metric.detail}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="container px-4 pb-10 md:pb-14">
+            <RevenueLadder compact source="partner_page_revenue_ladder" />
           </section>
 
           <section className="container px-4 py-10 md:py-14">

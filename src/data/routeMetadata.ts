@@ -64,6 +64,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Coming From No More Enabling? | Sober Helpline',
     description: 'A guided next step for No More Enabling readers: free Family Squares support, private family coaching, intervention readiness, and ethical treatment guidance.',
   },
+  '/family-squares-next-step': {
+    title: 'After Family Squares: Choose the Right Next Step | Sober Helpline',
+    description: 'Choose the right next step after Family Squares: continued free support, family membership, private coaching, or intervention readiness.',
+  },
   '/family-addiction-consult': {
     title: 'Family Addiction Consult | Sober Helpline',
     description: 'A private family addiction consult for parents, spouses, and loved ones who need help choosing the next right step.',

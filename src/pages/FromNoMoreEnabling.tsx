@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Calendar, CheckCircle2, ExternalLink, Mail, Phone, Shield, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import RevenueLadder from "@/components/RevenueLadder";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -337,6 +338,10 @@ export default function FromNoMoreEnabling() {
                 ))}
               </div>
             </div>
+          </section>
+
+          <section className="container px-4 pb-10 md:pb-14">
+            <RevenueLadder compact source="nme_bridge_revenue_ladder" />
           </section>
 
           <section className="border-y bg-muted/30">

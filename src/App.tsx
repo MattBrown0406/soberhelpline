@@ -17,6 +17,7 @@ import FamilyCoaching from "./pages/FamilyCoaching";
 import FamilyReadinessIntensive from "./pages/FamilyReadinessIntensive";
 import InterventionHelp from "./pages/InterventionHelp";
 import FromNoMoreEnabling from "./pages/FromNoMoreEnabling";
+import FamilySquaresNextStep from "./pages/FamilySquaresNextStep";
 import IntentLandingPage from "./pages/IntentLandingPage";
 import PartnerWithSoberHelpline from "./pages/PartnerWithSoberHelpline";
 
@@ -188,6 +189,7 @@ const FamilyCoachingPage = FamilyCoaching;
 const FamilyReadinessIntensivePage = FamilyReadinessIntensive;
 const InterventionHelpPage = InterventionHelp;
 const FromNoMoreEnablingPage = FromNoMoreEnabling;
+const FamilySquaresNextStepPage = FamilySquaresNextStep;
 const IntentLandingPageComponent = IntentLandingPage;
 const PartnerWithSoberHelplinePage = PartnerWithSoberHelpline;
 const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding"));
@@ -368,6 +370,7 @@ const App = () => (
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
               <Route path="/family-consultation" element={<FamilyConsultationPage />} />
               <Route path="/from-no-more-enabling" element={<FromNoMoreEnablingPage />} />
+              <Route path="/family-squares-next-step" element={<FamilySquaresNextStepPage />} />
               <Route path="/family-addiction-consult" element={<IntentLandingPageComponent />} />
               <Route path="/intervention-readiness-consult" element={<IntentLandingPageComponent />} />
               <Route path="/addiction-family-coaching" element={<IntentLandingPageComponent />} />

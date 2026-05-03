@@ -20,6 +20,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Coming From No More Enabling?</h1><p>Choose the right next step after reading No More Enabling: free Family Squares support, private family coaching, intervention readiness, or treatment direction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-consultation">Private family consult</a> · <a href="https://soberhelpline.com/intervention-help">Intervention readiness</a></p></main>'
   },
   {
+    route: '/family-squares-next-step',
+    title: 'After Family Squares: Choose the Right Next Step | Sober Helpline',
+    description: 'Choose the right next step after Family Squares: continued free support, family membership, private coaching, or intervention readiness.',
+    noscriptHtml: '<main><h1>After Family Squares</h1><p>Choose the support level that matches the pressure: continue with free Family Squares, join family membership, book private coaching, or review intervention readiness.</p><p><a href="https://soberhelpline.com/book-consultation?plan=emergency">Book private coaching</a> · <a href="https://soberhelpline.com/family-readiness-intensive">Review readiness intensive</a></p></main>'
+  },
+  {
     route: '/family-addiction-consult',
     title: 'Family Addiction Consult | Sober Helpline',
     description: 'A private family addiction consult for parents, spouses, and loved ones who need help choosing the next right step.',
@@ -169,6 +175,7 @@ export const sitemapPriority = new Map([
   ['/', '1.0'],
   ['/family-squares', '0.98'],
   ['/from-no-more-enabling', '0.95'],
+  ['/family-squares-next-step', '0.9'],
   ['/family-addiction-consult', '0.9'],
   ['/intervention-readiness-consult', '0.9'],
   ['/addiction-family-coaching', '0.9'],
@@ -203,6 +210,7 @@ export const sitemapChangefreq = new Map([
   ['/blog', 'daily'],
   ['/family-squares', 'weekly'],
   ['/from-no-more-enabling', 'weekly'],
+  ['/family-squares-next-step', 'weekly'],
   ['/family-addiction-consult', 'weekly'],
   ['/intervention-readiness-consult', 'weekly'],
   ['/addiction-family-coaching', 'weekly'],
