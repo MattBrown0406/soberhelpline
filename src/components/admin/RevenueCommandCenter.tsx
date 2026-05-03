@@ -330,7 +330,7 @@ export function RevenueCommandCenter() {
               {report.topPaths.length === 0 && <p className="text-sm text-muted-foreground">No scored paths yet.</p>}
               {report.topPaths.map((path) => (
                 <div key={path.path} className="flex items-center justify-between rounded-lg border p-3">
-                  <span className="text-sm font-medium text-foreground">{tierLabel[path.path] || path.path.replaceAll("_", " ")}</span>
+                  <span className="text-sm font-medium text-foreground">{tierLabel[path.path] || path.path.split("_").join(" ")}</span>
                   <Badge>{path.count}</Badge>
                 </div>
               ))}
