@@ -18,22 +18,40 @@ const warningSigns = [
 
 const nextSteps = [
   {
-    title: "Start with a readiness intensive",
-    description: "A private strategy session to assess risk, align decision makers, and decide whether a formal intervention is the right path.",
-    cta: "Book readiness intensive",
-    to: "/book-consultation?plan=family-readiness-intensive",
+    title: "Unsure if this is intervention-level?",
+    description: "Use the readiness page first if you need to understand whether your family needs coached planning, a DIY intervention, or a formal intervention team.",
+    cta: "Review readiness intensive",
+    to: "/family-readiness-intensive",
+    eventName: "intervention_readiness_click" as const,
   },
   {
-    title: "Talk to Freedom Interventions",
+    title: "Already know you need a formal intervention?",
     description: "For families who already know they need a professional intervention team and want to move directly into that conversation.",
     cta: "Visit Freedom Interventions",
     href: "https://freedominterventions.com/?utm_source=soberhelpline&utm_medium=intervention_help&utm_campaign=intervention_consult",
+    eventName: "freedom_interventions_click" as const,
   },
   {
-    title: "Use free support while you decide",
+    title: "Need support while you decide?",
     description: "If the situation is not immediate, join the Monday Family Squares Zoom and bring your intervention questions.",
     cta: "Register for Monday Zoom",
     to: "/family-squares",
+    eventName: "monday_zoom_click" as const,
+  },
+];
+
+const interventionDecisionRules = [
+  {
+    title: "Book readiness planning",
+    description: "Best when treatment refusal, repeated relapse, safety risk, or family division is escalating but you are not sure whether a full intervention is the right move.",
+  },
+  {
+    title: "Go directly to Freedom Interventions",
+    description: "Best when the family is already aligned, the loved one is refusing help, and you need a professional intervention process built around logistics, treatment options, and the formal ask.",
+  },
+  {
+    title: "Use Family Squares first",
+    description: "Best when the situation is painful but not immediate, and you need a free live room to ask questions before committing to private planning.",
   },
 ];
 
@@ -86,15 +104,15 @@ export default function InterventionHelp() {
                   Freedom Interventions bridge
                 </div>
                 <h1 className="text-4xl font-bold tracking-normal text-foreground md:text-5xl">
-                  When family coaching is not enough, intervention planning may be the next step.
+                  When family coaching is not enough, get clear about intervention readiness.
                 </h1>
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-                  Some families need education and coaching. Others need a professionally led intervention process with preparation, treatment planning, and a clear ask. This page helps you sort out which path fits your situation.
+                  Some families need education and coaching. Others need a professionally led intervention process with preparation, treatment planning, and a clear ask. This page helps you decide whether to book readiness planning, talk directly with Freedom Interventions, or use free Family Squares support while you decide.
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Button asChild size="lg" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "intervention_help_hero" })}>
-                    <Link to="/book-consultation?plan=family-readiness-intensive">
-                      Book Readiness Intensive
+                    <Link to="/family-readiness-intensive">
+                      Check Readiness Fit
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
@@ -135,6 +153,23 @@ export default function InterventionHelp() {
               </Card>
             </section>
 
+            <section className="mt-10 rounded-xl border bg-card p-6 md:p-8">
+              <div className="mb-5 max-w-3xl">
+                <h2 className="text-2xl font-bold text-foreground">Which intervention path fits right now?</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Intervention work should not be rushed blindly, but families also should not wait in confusion when risk is rising.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {interventionDecisionRules.map((rule) => (
+                  <div key={rule.title} className="rounded-lg border bg-background p-4">
+                    <h3 className="font-semibold text-foreground">{rule.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{rule.description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             <section className="mt-10">
               <TestimonialCarousel />
             </section>
@@ -146,14 +181,14 @@ export default function InterventionHelp() {
                     <h2 className="text-lg font-semibold text-foreground">{step.title}</h2>
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
                     {"href" in step ? (
-                      <Button asChild variant="outline" className="mt-4" onClick={() => trackConversionEvent("freedom_interventions_click", { source: "intervention_help_card" })}>
+                      <Button asChild variant="outline" className="mt-4" onClick={() => trackConversionEvent(step.eventName, { source: "intervention_help_card" })}>
                         <a href={step.href} target="_blank" rel="noopener noreferrer">
                           {step.cta}
                           <ExternalLink className="h-4 w-4" />
                         </a>
                       </Button>
                     ) : (
-                      <Button asChild variant="outline" className="mt-4" onClick={() => trackConversionEvent(step.to.includes("monday") ? "monday_zoom_click" : "intervention_readiness_click", { source: "intervention_help_card" })}>
+                      <Button asChild variant="outline" className="mt-4" onClick={() => trackConversionEvent(step.eventName, { source: "intervention_help_card" })}>
                         <Link to={step.to}>
                           {step.cta}
                           <ArrowRight className="h-4 w-4" />

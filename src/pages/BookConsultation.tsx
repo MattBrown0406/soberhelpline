@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown, Users } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, Calendar, Clock, User, CheckCircle, Phone, Monitor, Globe, Crown, Users } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 import SEOHead from "@/components/SEOHead";
@@ -144,6 +144,12 @@ const intakeSections = [
       { id: "goals", label: "What Do You Hope to Gain From This Consultation?", type: "textarea", required: true, placeholder: "What questions do you have? What outcomes are you looking for?" },
     ],
   },
+];
+
+const bookingUrgencySignals = [
+  "You need a plan before the next family conversation.",
+  "The family is divided and the situation is escalating.",
+  "You are stuck between free support, coaching, treatment options, and intervention readiness.",
 ];
 
 const BookConsultation = () => {
@@ -769,6 +775,29 @@ const BookConsultation = () => {
                   </p>
                 </CardContent>
               </Card>
+              {!isMultiSession && !isReadinessIntensive && (
+                <Card className="mb-6 border-amber-300/70 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/20">
+                  <CardContent className="p-4">
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700 dark:text-amber-300" />
+                      <div>
+                        <p className="font-semibold text-foreground">Can't wait until Monday?</p>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Book a session and get answers now. This is the right step when the family needs direction before the next blowup, argument, relapse response, or treatment conversation.
+                        </p>
+                        <div className="mt-3 grid gap-2">
+                          {bookingUrgencySignals.map((signal) => (
+                            <div key={signal} className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <CheckCircle className="h-4 w-4 text-amber-700 dark:text-amber-300" />
+                              {signal}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
               {providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (

@@ -8,6 +8,14 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
+const bookNowSignals = [
+  "You cannot wait until Monday to ask the question that is keeping you up.",
+  "Relapse, treatment refusal, money, lying, safety, or family division is escalating.",
+  "The family is arguing about what to do and needs one calm outside read.",
+  "You need language for the next conversation before it happens.",
+  "You are unsure whether this is coaching, treatment navigation, or intervention readiness.",
+];
+
 export default function FamilyConsultation() {
   return (
     <>
@@ -62,9 +70,40 @@ export default function FamilyConsultation() {
                 Crisis Coaching Session
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                A private 60-minute session with a professional family interventionist. For most families, this is the best place to start, one focused conversation to steady the situation and map a clear next step.
+                A private 60-minute session with a professional family interventionist. If your family cannot wait until Monday, this is where you get answers now and leave with a clear next step.
               </p>
             </div>
+
+            <Card className="mb-6 border-amber-300/70 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Clock className="h-5 w-5 text-amber-700 dark:text-amber-300" />
+                  Who should book now?
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <div className="grid gap-3 md:grid-cols-2">
+                  {bookNowSignals.map((signal) => (
+                    <div key={signal} className="flex gap-3 rounded-lg border bg-background/80 p-3">
+                      <Shield className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" />
+                      <p className="text-sm leading-relaxed text-muted-foreground">{signal}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-3 rounded-lg border border-amber-300/70 bg-background p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="font-semibold text-foreground">Can't wait until Monday?</p>
+                    <p className="text-sm text-muted-foreground">Book a session and get answers now.</p>
+                  </div>
+                  <Button asChild onClick={() => trackConversionEvent("coaching_click", { source: "family_consultation_book_now_block" })}>
+                    <Link to="/book-consultation?plan=emergency">
+                      Book a Session
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
 
             <Card className="border-primary/20 shadow-sm mb-6">
               <CardHeader>
@@ -118,7 +157,7 @@ export default function FamilyConsultation() {
                   The Crisis Coaching Session is the right starting point for most families. If your situation calls for deeper work, these options are available after, or instead of, that first session:
                 </p>
                 <div className="grid gap-3 md:grid-cols-3">
-                  <Link to="/intervention-help" className="rounded-xl border p-4 hover:border-primary hover:bg-muted/30 transition-colors" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "family_consultation_options" })}>
+                  <Link to="/family-readiness-intensive" className="rounded-xl border p-4 hover:border-primary hover:bg-muted/30 transition-colors" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "family_consultation_options" })}>
                     <h3 className="font-semibold mb-1">Family Readiness Intensive</h3>
                     <p className="text-sm text-muted-foreground">A multi-session deep dive to assess whether you need a professionally led intervention or can run a coached DIY one.</p>
                   </Link>
