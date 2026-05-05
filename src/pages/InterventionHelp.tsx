@@ -6,6 +6,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { freedomBridgeUrl } from "@/lib/freedomBridge";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const warningSigns = [
@@ -28,7 +29,7 @@ const nextSteps = [
     title: "Already know you need a formal intervention?",
     description: "For families who already know they need a professional intervention team and want to move directly into that conversation.",
     cta: "Visit Freedom Interventions",
-    href: "https://freedominterventions.com/?utm_source=soberhelpline&utm_medium=intervention_help&utm_campaign=intervention_consult",
+    href: freedomBridgeUrl({ campaign: "intervention_help", content: "decision_card" }),
     eventName: "freedom_interventions_click" as const,
   },
   {
@@ -55,7 +56,7 @@ const interventionDecisionRules = [
   },
 ];
 
-const freedomInterventionsHref = "https://freedominterventions.com/?utm_source=soberhelpline&utm_medium=intervention_help&utm_campaign=intervention_consult&utm_content=hero";
+const freedomInterventionsHref = freedomBridgeUrl({ campaign: "intervention_help", content: "hero" });
 
 export default function InterventionHelp() {
   return (

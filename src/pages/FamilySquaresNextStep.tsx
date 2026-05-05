@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, CheckCircle2, PhoneCall, ShieldCheck } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle2, ExternalLink, PhoneCall, ShieldCheck } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import RevenueLadder from "@/components/RevenueLadder";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
@@ -7,6 +7,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { freedomBridgeUrl } from "@/lib/freedomBridge";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const decisionFilters = [
@@ -16,6 +17,8 @@ const decisionFilters = [
 ];
 
 export default function FamilySquaresNextStep() {
+  const freedomNextStepUrl = freedomBridgeUrl({ campaign: "family_squares_next_step", content: "hero" });
+
   return (
     <>
       <SEOHead
@@ -55,6 +58,12 @@ export default function FamilySquaresNextStep() {
                   </Button>
                   <Button asChild variant="outline" size="lg" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "family_squares_next_step_hero" })}>
                     <Link to="/family-readiness-intensive">Review readiness intensive</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" onClick={() => trackConversionEvent("freedom_interventions_click", { source: "family_squares_next_step_hero", targetHref: freedomNextStepUrl })}>
+                    <a href={freedomNextStepUrl} target="_blank" rel="noopener noreferrer">
+                      Talk to Freedom
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   </Button>
                 </div>
                 <a

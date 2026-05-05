@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ShieldCheck, Users, PhoneCall } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, ShieldCheck, Users, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { freedomReadinessUrl } from "@/lib/freedomBridge";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 
 const FamilyReadinessIntensive = () => {
+  const freedomReadinessHeroUrl = freedomReadinessUrl({ content: "readiness_intensive_hero" });
+  const freedomReadinessFinalUrl = freedomReadinessUrl({ content: "readiness_intensive_final" });
   const faqs = [
     {
       question: "Who is the Family Readiness Intensive for?",
@@ -82,6 +85,17 @@ const FamilyReadinessIntensive = () => {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
+                  <a
+                    href={freedomReadinessHeroUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackConversionEvent("freedom_interventions_click", { source: "readiness_intensive_hero", targetHref: freedomReadinessHeroUrl })}
+                  >
+                    <Button variant="outline" size="lg">
+                      Talk to Freedom Interventions
+                      <ExternalLink className="ml-2 h-5 w-5" />
+                    </Button>
+                  </a>
                   <a href="tel:+15412415668" onClick={() => trackPhoneClick("readiness_intensive_hero")}>
                     <Button variant="outline" size="lg">
                       <PhoneCall className="mr-2 h-5 w-5" />
@@ -225,6 +239,17 @@ const FamilyReadinessIntensive = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
+                <a
+                  href={freedomReadinessFinalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackConversionEvent("freedom_interventions_click", { source: "readiness_intensive_final", targetHref: freedomReadinessFinalUrl })}
+                >
+                  <Button variant="outline" size="lg">
+                    Start with Freedom
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
                 <Link to="/family-coaching">
                   <Button variant="outline" size="lg">
                     Ask a Question First
