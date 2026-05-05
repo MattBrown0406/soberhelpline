@@ -122,6 +122,7 @@ import continuingCareAfterRehabImg from "@/assets/blog-continuing-care-after-reh
 import medicationAssistedTreatmentFamiliesImg from "@/assets/blog-medication-assisted-treatment-families.jpg";
 import questionsToAskTreatmentCenterImg from "@/assets/blog-questions-to-ask-treatment-center.jpg";
 import twelveStepVsNonTwelveStepImg from "@/assets/blog-12-step-vs-non-12-step-addiction-treatment.jpg";
+import medicalDetoxFamilyGuideImg from "@/assets/blog-what-is-medical-detox-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
