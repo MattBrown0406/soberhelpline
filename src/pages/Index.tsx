@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, MessageCircle, AlertTriangle, BookOpen, ArrowRight, Sparkles, GraduationCap, TreePine, Eye, X, Check, Compass, BadgeDollarSign, Clock3 } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, MessageCircle, AlertTriangle, BookOpen, ArrowRight, Sparkles, GraduationCap, TreePine, Eye, X, Check, BadgeDollarSign, Clock3 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -475,52 +475,6 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="container mx-auto px-4 py-10 md:py-16">
-          <div className="text-center mb-8 md:mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
-              <Compass className="w-3.5 h-3.5 md:w-4 md:h-4" />
-              Free roadmap, lower-pressure next step
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-              Not sure how urgent this is?
-            </h2>
-            <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
-              The Recovery Roadmap is still here if you need to get oriented. We moved it below the crisis help so you can choose urgency first, then education.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
-            {[
-              { emoji: "🔴", name: "Suspicion", desc: "Something feels off", path: "/roadmap/suspicion", color: "border-red-300/50 hover:border-red-400/70 hover:bg-red-50/50 dark:hover:bg-red-950/20" },
-              { emoji: "🟠", name: "Confirmation", desc: "I know there's a problem", path: "/roadmap/assessment", color: "border-orange-300/50 hover:border-orange-400/70 hover:bg-orange-50/50 dark:hover:bg-orange-950/20" },
-              { emoji: "🟡", name: "Crisis", desc: "Things are falling apart", path: "/roadmap/crisis", color: "border-yellow-300/50 hover:border-yellow-400/70 hover:bg-yellow-50/50 dark:hover:bg-yellow-950/20" },
-              { emoji: "🔵", name: "Pre-Intervention", desc: "I'm ready to act", path: "/roadmap/pre-intervention", color: "border-blue-300/50 hover:border-blue-400/70 hover:bg-blue-50/50 dark:hover:bg-blue-950/20" },
-              { emoji: "🟣", name: "Treatment", desc: "They're in treatment", path: "/roadmap/treatment", color: "border-purple-300/50 hover:border-purple-400/70 hover:bg-purple-50/50 dark:hover:bg-purple-950/20" },
-              { emoji: "🟢", name: "Early Recovery", desc: "They're home, now what?", path: "/roadmap/early-recovery", color: "border-green-300/50 hover:border-green-400/70 hover:bg-green-50/50 dark:hover:bg-green-950/20" },
-              { emoji: "⚪", name: "Long-Term Recovery", desc: "6+ months in, rebuilding", path: "/roadmap/long-term-recovery", color: "border-slate-300/50 hover:border-slate-400/70 hover:bg-slate-50/50 dark:hover:bg-slate-950/20" },
-              { emoji: "🔴", name: "Relapse", desc: "It happened again", path: "/roadmap/relapse", color: "border-rose-300/50 hover:border-rose-400/70 hover:bg-rose-50/50 dark:hover:bg-rose-950/20" },
-            ].map((stage) => (
-              <Link key={stage.path} to={stage.path}>
-                <div className={`rounded-xl border-2 bg-card p-4 md:p-5 text-center cursor-pointer transition-all hover:shadow-md group ${stage.color}`}>
-                  <div className="text-2xl md:text-3xl mb-2">{stage.emoji}</div>
-                  <div className="font-semibold text-sm md:text-base text-foreground mb-1">{stage.name}</div>
-                  <div className="text-xs text-muted-foreground leading-snug">{stage.desc}</div>
-                  <div className="mt-3 inline-flex items-center gap-1 text-xs text-logo-green font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                    Start here <ArrowRight className="w-3 h-3" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link to="/roadmap/assessment">
-              <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-10 py-6 text-base md:text-lg shadow-lg shadow-logo-green/20">
-                <Compass className="w-5 h-5" />
-                Take the 5-Minute Assessment
-              </Button>
-            </Link>
-            <p className="text-xs text-muted-foreground mt-2">Tells you your stage and gives you a more grounded plan</p>
-          </div>
-        </section>
 
         <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
           <div className="container mx-auto px-4">
