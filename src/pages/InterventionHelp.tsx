@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AlertTriangle, ArrowRight, Calendar, CheckCircle2, ExternalLink, PhoneCall, ShieldCheck, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
@@ -223,6 +224,7 @@ export default function InterventionHelp() {
             <FamilyNextStepCTA className="mt-10" />
           </div>
         </main>
+        <FamilyFunnelDecisionMatrix source="intervention_help_decision_matrix" />
       </div>
     </>
   );

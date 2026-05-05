@@ -23,6 +23,7 @@ import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
+import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 
@@ -431,6 +432,8 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        <FamilyFunnelDecisionMatrix source="homepage_decision_matrix" />
 
         <section className="container mx-auto px-4 py-10 md:py-14">
           <div className="max-w-6xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
