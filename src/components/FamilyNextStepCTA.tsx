@@ -78,7 +78,7 @@ export default function FamilyNextStepCTA({
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background/80">
                   <Icon className="h-5 w-5" />
                 </span>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-wide opacity-80">{path.eyebrow}</p>
                   <h3 className="mt-1 font-semibold text-foreground">{path.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{path.description}</p>
