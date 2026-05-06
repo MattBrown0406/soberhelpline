@@ -39,6 +39,9 @@ verify_jwt = false
 [functions.track-conversion-event]
 verify_jwt = false
 
+[functions.sober-helpline-revenue-report]
+verify_jwt = false
+
 [functions.score-family-squares-registration]
 verify_jwt = false
 
