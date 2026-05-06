@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Compass, PhoneCall, Users } from "lucide-react";
+import { ArrowRight, Compass, PhoneCall, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
@@ -58,8 +58,8 @@ export default function FamilyNextStepCTA({
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{subheading}</p>
         </div>
-        <a href="tel:5412415668" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-          <Calendar className="h-4 w-4" />
+        <a href="tel:5412415668" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline shrink-0">
+          <PhoneCall className="h-4 w-4" />
           Call (541) 241-5668
         </a>
       </div>
@@ -72,7 +72,7 @@ export default function FamilyNextStepCTA({
               key={path.title}
               to={path.to}
               onClick={() => trackConversionEvent(path.eventName, { source: "family_next_step_cta", label: path.title })}
-              className={cn("group rounded-lg border p-4 transition-colors hover:border-primary hover:bg-muted/30", path.tone)}
+              className={cn("group rounded-lg border p-4 transition-colors hover:border-primary hover:bg-muted/30 overflow-hidden", path.tone)}
             >
               <div className="flex items-start gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background/80">
