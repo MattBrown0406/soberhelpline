@@ -116,7 +116,7 @@ const Footer = () => {
             © {currentYear} Sober Helpline. All rights reserved.
           </p>
           <p className="text-xs text-gray-500 flex items-center gap-1">
-            Made with <Heart className="w-3 h-3 text-red-400" /> for families who never give up
+            Made with <Link to="/admin"><Heart className="w-3 h-3 text-red-400 cursor-pointer" /></Link> for families who never give up
           </p>
         </div>
       </div>
