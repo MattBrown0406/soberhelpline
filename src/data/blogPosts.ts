@@ -124,6 +124,7 @@ import questionsToAskTreatmentCenterImg from "@/assets/blog-questions-to-ask-tre
 import twelveStepVsNonTwelveStepImg from "@/assets/blog-12-step-vs-non-12-step-addiction-treatment.jpg";
  import medicalDetoxFamilyGuideImg from "@/assets/blog-what-is-medical-detox-family-guide.jpg";
 import healthInsuranceDrugRehabImg from "@/assets/blog-health-insurance-drug-rehab.jpg";
+import mentalHealthParityLawImg from "@/assets/blog-mental-health-parity-law.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
