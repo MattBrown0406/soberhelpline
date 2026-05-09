@@ -21,6 +21,7 @@ import FamilySquaresNextStep from "./pages/FamilySquaresNextStep";
 import IntentLandingPage from "./pages/IntentLandingPage";
 import PartnerWithSoberHelpline from "./pages/PartnerWithSoberHelpline";
 import FamilyAddictionAnswers from "./pages/FamilyAddictionAnswers";
+import FamilyAddictionAnswerDetail from "./pages/FamilyAddictionAnswerDetail";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -364,6 +365,7 @@ const App = () => (
               <Route path="/family-support" element={<FamilySupportPage />} />
               <Route path="/start-here" element={<StartHerePage />} />
               <Route path="/family-addiction-answers" element={<FamilyAddictionAnswers />} />
+              <Route path="/family-addiction-answers/:answerSlug" element={<FamilyAddictionAnswerDetail />} />
               <Route path="/family-membership" element={<FamilyMembershipPage />} />
               <Route path="/family-education" element={<FamilyEducation />} />
               <Route path="/family-education/tracks" element={<FamilyEducationTracks />} />

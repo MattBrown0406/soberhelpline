@@ -6,37 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
-
-const answerCards = [
-  {
-    question: "Where should a family start when addiction is causing chaos?",
-    answer:
-      "Start with the least intense support that is still honest about the risk: free Family Squares for support and education, private coaching for a specific family plan, or intervention readiness if safety and refusal are escalating.",
-    to: "/start-here",
-    cta: "Use Start Here",
-  },
-  {
-    question: "What is the free Monday Family Squares meeting for?",
-    answer:
-      "Family Squares is for parents, spouses, siblings, and loved ones who need support, education, and steadier thinking before making the next decision.",
-    to: "/family-squares",
-    cta: "Join Family Squares",
-  },
-  {
-    question: "When should we book a private coaching session?",
-    answer:
-      "Book coaching when the situation is too personal, urgent, or complicated for a group meeting and you need a direct plan for boundaries, treatment questions, relapse, or family alignment.",
-    to: "/book-consultation",
-    cta: "Book a session",
-  },
-  {
-    question: "When is this intervention-level?",
-    answer:
-      "It may be intervention-level when treatment is refused, overdose risk is present, the family is divided, consequences are escalating, or repeated promises keep turning into the same crisis.",
-    to: "/intervention-help",
-    cta: "Check readiness",
-  },
-];
+import { familyAddictionAnswers, familyAddictionAnswerPath } from "@/data/familyAddictionAnswers";
 
 const howToSteps = [
   {
@@ -53,9 +23,15 @@ const howToSteps = [
   },
 ];
 
-const faqItems = answerCards.map(({ question, answer }) => ({ question, answer }));
+const faqItems = familyAddictionAnswers.slice(0, 8).map(({ question, shortAnswer }) => ({ question, answer: shortAnswer }));
 
 export default function FamilyAddictionAnswers() {
+  const featuredAnswers = familyAddictionAnswers.slice(0, 4);
+  const groupedAnswers = familyAddictionAnswers.reduce<Record<string, typeof familyAddictionAnswers>>((acc, answer) => {
+    acc[answer.category] = [...(acc[answer.category] || []), answer];
+    return acc;
+  }, {});
+
   return (
     <>
       <SEOHead
@@ -174,17 +150,64 @@ export default function FamilyAddictionAnswers() {
               </h2>
             </div>
             <div className="grid gap-4">
-              {answerCards.map((item) => (
-                <Card key={item.question}>
+              {featuredAnswers.map((item) => (
+                <Card key={item.slug}>
                   <CardContent className="p-6">
                     <h3 className="aeo-direct-answer text-xl font-semibold text-foreground">{item.question}</h3>
-                    <p className="mt-3 leading-relaxed text-muted-foreground">{item.answer}</p>
+                    <p className="mt-3 leading-relaxed text-muted-foreground">{item.shortAnswer}</p>
                     <Button asChild className="mt-5" variant="outline">
-                      <Link to={item.to}>
-                        {item.cta}
+                      <Link
+                        to={familyAddictionAnswerPath(item)}
+                        onClick={() => trackConversionEvent("family_answer_hub_click", {
+                          source: "family_addiction_answers_featured",
+                          answer_slug: item.slug,
+                          targetHref: familyAddictionAnswerPath(item),
+                        })}
+                      >
+                        Read the full answer
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="mb-7 max-w-3xl">
+              <p className="text-sm font-semibold text-primary">Answer library</p>
+              <h2 className="mt-1 text-2xl font-bold tracking-normal text-logo-green md:text-3xl">
+                Short answers that route families to the right next step
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                These pages are built for answer engines and real families: free support first, private help when needed, intervention readiness when risk is rising.
+              </p>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {Object.entries(groupedAnswers).map(([category, answers]) => (
+                <Card key={category} className="border-primary/15">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-foreground">{category}</h3>
+                    <div className="mt-4 space-y-3">
+                      {answers.map((answer) => (
+                        <Link
+                          key={answer.slug}
+                          to={familyAddictionAnswerPath(answer)}
+                          onClick={() => trackConversionEvent("family_answer_hub_click", {
+                            source: "family_addiction_answers_library",
+                            answer_slug: answer.slug,
+                            targetHref: familyAddictionAnswerPath(answer),
+                          })}
+                          className="block rounded-lg border border-border bg-background p-4 transition-colors hover:border-primary/40"
+                        >
+                          <p className="font-medium text-foreground">{answer.question}</p>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{answer.shortAnswer}</p>
+                        </Link>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               ))}

@@ -25,6 +25,9 @@ const allowedEvents = new Set([
   "nme_bridge_lane_click",
   "nme_bridge_coaching_click",
   "nme_bridge_intervention_click",
+  "family_answer_view",
+  "family_answer_click",
+  "family_answer_hub_click",
 ]);
 
 const trimText = (value: unknown, maxLength = 500) => {

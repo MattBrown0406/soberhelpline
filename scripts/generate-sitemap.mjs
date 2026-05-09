@@ -5,6 +5,7 @@ import { SITE_URL, sitemapPriority, sitemapChangefreq, excludedSitemapRoutes } f
 const root = process.cwd();
 const appPath = path.join(root, 'src', 'App.tsx');
 const blogPath = path.join(root, 'src', 'data', 'blogPosts.ts');
+const familyAnswersPath = path.join(root, 'src', 'data', 'familyAddictionAnswers.ts');
 const outPath = path.join(root, 'public', 'sitemap.xml');
 const now = new Date().toISOString().slice(0, 10);
 
@@ -20,8 +21,11 @@ const routes = [...new Set(routeMatches)]
 
 const blogSource = fs.readFileSync(blogPath, 'utf8');
 const blogSlugs = [...blogSource.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => `/blog/${m[1]}`);
+const familyAnswersSource = fs.readFileSync(familyAnswersPath, 'utf8');
+const familyAnswerRoutes = [...familyAnswersSource.matchAll(/slug:\s*"([^"]+)"/g)]
+  .map((m) => `/family-addiction-answers/${m[1]}`);
 
-const urls = [...new Set([...routes, ...blogSlugs])].sort((a, b) => {
+const urls = [...new Set([...routes, ...blogSlugs, ...familyAnswerRoutes])].sort((a, b) => {
   if (a === '/') return -1;
   if (b === '/') return 1;
   if (a === '/blog') return -1;

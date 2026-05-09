@@ -18,7 +18,10 @@ type ConversionEventName =
   | "nme_bridge_family_squares_click"
   | "nme_bridge_lane_click"
   | "nme_bridge_coaching_click"
-  | "nme_bridge_intervention_click";
+  | "nme_bridge_intervention_click"
+  | "family_answer_view"
+  | "family_answer_click"
+  | "family_answer_hub_click";
 
 type ConversionEventPayload = {
   label?: string;

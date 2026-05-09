@@ -6,6 +6,7 @@ const root = process.cwd();
 const distDir = path.join(root, 'dist');
 const baseTemplatePath = path.join(distDir, 'index.html');
 const baseTemplate = await fs.readFile(baseTemplatePath, 'utf8');
+const familyAnswersPath = path.join(root, 'src', 'data', 'familyAddictionAnswers.ts');
 
 const escapeHtml = (value) => value
   .replaceAll('&', '&amp;')
@@ -13,7 +14,25 @@ const escapeHtml = (value) => value
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;');
 
-for (const page of prerenderPages) {
+const familyAnswersSource = await fs.readFile(familyAnswersPath, 'utf8');
+const familyAnswerPages = [...familyAnswersSource.matchAll(/slug:\s*"([^"]+)"[\s\S]*?question:\s*"([^"]+)"[\s\S]*?shortAnswer:\s*\n?\s*"([^"]+)"/g)]
+  .map(([, slug, question, shortAnswer]) => {
+    const title = `${question} | Sober Helpline`;
+    const description = shortAnswer;
+    const escapedQuestion = escapeHtml(question);
+    const escapedAnswer = escapeHtml(shortAnswer);
+
+    return {
+      route: `/family-addiction-answers/${slug}`,
+      title,
+      description,
+      noscriptHtml: `<main><h1>${escapedQuestion}</h1><p>${escapedAnswer}</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> <a href="https://soberhelpline.com/book-consultation">Book a private session</a> <a href="https://soberhelpline.com/intervention-help">Check intervention readiness</a></p></main>`,
+    };
+  });
+
+const allPrerenderPages = [...prerenderPages, ...familyAnswerPages];
+
+for (const page of allPrerenderPages) {
   const canonicalUrl = `${SITE_URL}${page.route === '/' ? '/' : page.route}`;
   const targetDir = page.route === '/' ? distDir : path.join(distDir, page.route.replace(/^\//, ''));
   const targetPath = path.join(targetDir, 'index.html');
