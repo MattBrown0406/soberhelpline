@@ -117,6 +117,7 @@ Vetted treatment providers with no referral fees or patient brokering:
 | Levels of Care in Treatment | https://soberhelpline.com/levels-of-care-addiction-treatment |
 | Family Education Hub | https://soberhelpline.com/family-education |
 | Family Support Overview | https://soberhelpline.com/family-support |
+| Family Addiction Answers | https://soberhelpline.com/family-addiction-answers |
 | Recovery Resources | https://soberhelpline.com/recovery-resources |
 | Free Family Guide | https://soberhelpline.com/free-guide |
 | FAQs | https://soberhelpline.com/faqs |
@@ -190,6 +191,7 @@ Selected articles:
 | Service | URL | Details |
 |---------|-----|---------|
 | Monday Support Group | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7 PM PT |
+| Family Addiction Answers | https://soberhelpline.com/family-addiction-answers | Answer center routing families to Family Squares, coaching, or intervention readiness |
 | Family Coaching | https://soberhelpline.com/family-coaching | One-on-one with Matt Brown |
 | Family Consultation | https://soberhelpline.com/family-consultation | Initial consultation |
 | Family Membership | https://soberhelpline.com/family-membership | Premium access |

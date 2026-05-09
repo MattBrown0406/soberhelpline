@@ -20,6 +20,7 @@ import FromNoMoreEnabling from "./pages/FromNoMoreEnabling";
 import FamilySquaresNextStep from "./pages/FamilySquaresNextStep";
 import IntentLandingPage from "./pages/IntentLandingPage";
 import PartnerWithSoberHelpline from "./pages/PartnerWithSoberHelpline";
+import FamilyAddictionAnswers from "./pages/FamilyAddictionAnswers";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -362,6 +363,7 @@ const App = () => (
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/family-support" element={<FamilySupportPage />} />
               <Route path="/start-here" element={<StartHerePage />} />
+              <Route path="/family-addiction-answers" element={<FamilyAddictionAnswers />} />
               <Route path="/family-membership" element={<FamilyMembershipPage />} />
               <Route path="/family-education" element={<FamilyEducation />} />
               <Route path="/family-education/tracks" element={<FamilyEducationTracks />} />
