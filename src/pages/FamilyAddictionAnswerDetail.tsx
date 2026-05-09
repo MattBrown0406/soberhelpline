@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, HelpCircle, PhoneCall, ShieldAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, HelpCircle, PhoneCall, ShieldAlert } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,12 @@ const nextStepLabels = {
     title: "Check intervention readiness",
     description: "Use this when treatment refusal, relapse, safety, or family division may require professional intervention planning.",
   },
+};
+
+const intentNotes = {
+  family_squares: "This question can usually start with free live support before the family pays for private help.",
+  private_coaching: "This question has enough timing or privacy pressure that a paid session may save the family from another improvised conversation.",
+  intervention_readiness: "This question is close to the high-risk path. Use readiness guidance before the family waits through another dangerous cycle.",
 };
 
 export default function FamilyAddictionAnswerDetail() {
@@ -65,6 +71,34 @@ export default function FamilyAddictionAnswerDetail() {
   const canonicalUrl = `https://soberhelpline.com${canonicalPath}`;
   const relatedAnswers = getRelatedFamilyAddictionAnswers(answer);
   const nextStep = nextStepLabels[answer.bestNextStep];
+  const nextQuestion = relatedAnswers[0];
+  const escalationQuestion = relatedAnswers.find((related) => related.bestNextStep === "intervention_readiness") || relatedAnswers[1];
+  const ctaLadder = [
+    {
+      rank: "1",
+      label: "Join the Free Family Squares Support Meeting",
+      description: "Best when the family needs a trustworthy room, live support, and a no-pressure first step.",
+      href: "/family-squares",
+      clickType: "family_squares",
+      icon: Calendar,
+    },
+    {
+      rank: "2",
+      label: "Can't wait until Monday? Book a session and get answers now.",
+      description: "Best when the next conversation, boundary, relapse response, or treatment decision needs private guidance.",
+      href: "/book-consultation",
+      clickType: "private_coaching",
+      icon: PhoneCall,
+    },
+    {
+      rank: "3",
+      label: "Check intervention readiness",
+      description: "Best when treatment is refused, risk is rising, or the family may need Freedom Interventions-level structure.",
+      href: "/intervention-help",
+      clickType: "intervention_readiness",
+      icon: ShieldAlert,
+    },
+  ];
 
   const trackClick = (clickType: string, targetHref: string) => {
     trackConversionEvent("family_answer_click", {
@@ -125,6 +159,9 @@ export default function FamilyAddictionAnswerDetail() {
                   <p className="aeo-next-step text-sm font-semibold uppercase tracking-wide text-primary">{nextStep.eyebrow}</p>
                   <h2 className="mt-2 text-2xl font-bold text-logo-green">{nextStep.title}</h2>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{nextStep.description}</p>
+                  <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm leading-relaxed text-foreground">
+                    {intentNotes[answer.bestNextStep]}
+                  </div>
                   <Button asChild className="mt-5 w-full" size="lg">
                     <Link to={answer.nextStepHref} onClick={() => trackClick(answer.bestNextStep, answer.nextStepHref)}>
                       {answer.nextStepLabel}
@@ -166,24 +203,35 @@ export default function FamilyAddictionAnswerDetail() {
                     <ShieldAlert className="h-5 w-5" />
                     <p className="text-sm font-semibold uppercase tracking-wide">Use the Sober Helpline hierarchy</p>
                   </div>
+                  <h2 className="mt-3 text-2xl font-bold text-logo-green">The next step should match the pressure level.</h2>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                    Keep the free meeting as the soft landing, but move faster when the question is private, urgent, or intervention-level.
+                  </p>
                   <div className="mt-5 grid gap-3 md:grid-cols-3">
-                    {[
-                      { label: "1. Free support", href: "/family-squares", cta: "Join Family Squares", icon: Calendar },
-                      { label: "2. Private answers now", href: "/book-consultation", cta: "Book a session", icon: PhoneCall },
-                      { label: "3. Intervention readiness", href: "/intervention-help", cta: "Check readiness", icon: CheckCircle2 },
-                    ].map((item) => {
+                    {ctaLadder.map((item) => {
                       const Icon = item.icon;
+                      const isRecommended = item.clickType === answer.bestNextStep;
                       return (
                         <Link
-                          key={item.label}
+                          key={item.rank}
                           to={item.href}
-                          onClick={() => trackClick(item.label, item.href)}
-                          className="rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/40"
+                          onClick={() => trackClick(`cta_ladder_${item.clickType}`, item.href)}
+                          className={`rounded-xl border bg-background p-4 transition-colors hover:border-primary/40 ${
+                            isRecommended ? "border-primary/50 shadow-sm ring-1 ring-primary/20" : "border-border"
+                          }`}
                         >
-                          <Icon className="h-5 w-5 text-primary" />
-                          <p className="mt-3 text-sm font-semibold text-foreground">{item.label}</p>
-                          <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                            {item.cta}
+                          <div className="flex items-center justify-between gap-2">
+                            <Icon className="h-5 w-5 text-primary" />
+                            {isRecommended && (
+                              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-semibold text-primary">
+                                Recommended
+                              </span>
+                            )}
+                          </div>
+                          <p className="mt-3 text-sm font-semibold text-foreground">{item.rank}. {item.label}</p>
+                          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{item.description}</p>
+                          <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                            Open path
                             <ArrowRight className="h-4 w-4" />
                           </p>
                         </Link>
@@ -192,6 +240,39 @@ export default function FamilyAddictionAnswerDetail() {
                   </div>
                 </CardContent>
               </Card>
+
+              {(nextQuestion || escalationQuestion) && (
+                <Card>
+                  <CardContent className="p-6 md:p-8">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-primary">Keep the visit moving</p>
+                    <h2 className="mt-2 text-2xl font-bold text-logo-green">Answer the next likely question.</h2>
+                    <div className="mt-5 grid gap-3 md:grid-cols-2">
+                      {nextQuestion && (
+                        <Link
+                          to={familyAddictionAnswerPath(nextQuestion)}
+                          onClick={() => trackClick("next_question", familyAddictionAnswerPath(nextQuestion))}
+                          className="rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/40"
+                        >
+                          <p className="text-sm font-semibold text-primary">Next question</p>
+                          <p className="mt-2 font-medium text-foreground">{nextQuestion.question}</p>
+                          <p className="mt-2 text-sm text-muted-foreground">{nextQuestion.shortAnswer}</p>
+                        </Link>
+                      )}
+                      {escalationQuestion && escalationQuestion.slug !== nextQuestion?.slug && (
+                        <Link
+                          to={familyAddictionAnswerPath(escalationQuestion)}
+                          onClick={() => trackClick("escalation_question", familyAddictionAnswerPath(escalationQuestion))}
+                          className="rounded-xl border border-primary/20 bg-primary/5 p-4 transition-colors hover:border-primary/40"
+                        >
+                          <p className="text-sm font-semibold text-primary">If risk is rising</p>
+                          <p className="mt-2 font-medium text-foreground">{escalationQuestion.question}</p>
+                          <p className="mt-2 text-sm text-muted-foreground">{escalationQuestion.shortAnswer}</p>
+                        </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
 
             <aside className="space-y-5">

@@ -187,7 +187,12 @@ export function RevenueCommandCenter() {
     ).length;
     const answerInterventionClicks = events.filter((event) =>
       event.event_name === "family_answer_click" &&
-      ((event.target_href || "").includes("intervention-help") || metadataText(event.metadata, "targetHref")?.includes("intervention-help")),
+      (
+        (event.target_href || "").includes("intervention-help") ||
+        (event.target_href || "").includes("freedominterventions.com") ||
+        metadataText(event.metadata, "targetHref")?.includes("intervention-help") ||
+        metadataText(event.metadata, "targetHref")?.includes("freedominterventions.com")
+      ),
     ).length;
     const topAnswerPages = Object.entries(
       answerEvents.reduce<Record<string, { views: number; clicks: number }>>((acc, event) => {
@@ -201,6 +206,13 @@ export function RevenueCommandCenter() {
       .map(([slug, counts]) => ({ slug, ...counts }))
       .sort((a, b) => b.views + b.clicks - (a.views + a.clicks))
       .slice(0, 6);
+    const topAnswerCandidate = topAnswerPages[0] || null;
+    const answerConversionRate = answerViews > 0 ? Math.round((answerCtaClicks / answerViews) * 100) : 0;
+    const answerRecommendedAction = topAnswerCandidate
+      ? topAnswerCandidate.clicks > 0
+        ? `Feature "${answerLabel(topAnswerCandidate.slug)}" on homepage and Start Here; it is already producing answer clicks.`
+        : `Feature "${answerLabel(topAnswerCandidate.slug)}" with a stronger CTA; it has views but needs more movement into the ladder.`
+      : "Let answer-page traffic accumulate, then feature the highest-view/highest-click answer on homepage and Start Here.";
     const topPaths = Object.entries(
       registrations.reduce<Record<string, number>>((acc, lead) => {
         const key = lead.revenue_path || "family_squares";
@@ -234,6 +246,9 @@ export function RevenueCommandCenter() {
       answerCoachingClicks,
       answerInterventionClicks,
       topAnswerPages,
+      topAnswerCandidate,
+      answerConversionRate,
+      answerRecommendedAction,
       topPaths,
       offerValuePipeline,
       registrations: registrations.length,
@@ -409,10 +424,14 @@ export function RevenueCommandCenter() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
+              <Badge variant="outline">{report.answerConversionRate}% answer CTA rate</Badge>
               <Badge variant="outline">{report.answerFamilySquaresClicks} Family Squares</Badge>
               <Badge variant="outline">{report.answerCoachingClicks} Coaching</Badge>
               <Badge variant="outline">{report.answerInterventionClicks} Intervention</Badge>
             </div>
+          </div>
+          <div className="mb-4 rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm text-foreground">
+            <span className="font-semibold">Next content move:</span> {report.answerRecommendedAction}
           </div>
           {report.topAnswerPages.length === 0 ? (
             <p className="text-sm text-muted-foreground">No answer-page activity yet.</p>
