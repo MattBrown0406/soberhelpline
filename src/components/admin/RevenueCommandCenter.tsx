@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { BadgeDollarSign, CalendarCheck, Crown, Handshake, RefreshCw, Target, TrendingUp, Users } from "lucide-react";
+import { BadgeDollarSign, CalendarCheck, Crown, Handshake, HelpCircle, MousePointerClick, RefreshCw, Target, TrendingUp, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { revenueLadder } from "@/data/revenueLadder";
 import { Badge } from "@/components/ui/badge";
@@ -42,6 +42,9 @@ interface ConversionEventRow {
   utm_source: string | null;
   page_path: string | null;
   source: string | null;
+  label: string | null;
+  target_href: string | null;
+  metadata: Record<string, unknown> | null;
 }
 
 interface QueryResult<T> {
@@ -78,6 +81,13 @@ const tierLabel: Record<string, string> = {
   coaching_likely: "Coaching likely",
   support_nurture: "Support nurture",
 };
+
+const metadataText = (metadata: Record<string, unknown> | null, key: string) => {
+  const value = metadata?.[key];
+  return typeof value === "string" && value.trim().length > 0 ? value.trim() : null;
+};
+
+const answerLabel = (slug: string) => slug.split("-").join(" ");
 
 export function RevenueCommandCenter() {
   const [timeRange, setTimeRange] = useState<TimeRange>("30d");
@@ -126,7 +136,7 @@ export function RevenueCommandCenter() {
       applyRange(
         db
           .from<ConversionEventRow>("conversion_events")
-          .select("id, created_at, event_name, utm_source, page_path, source"),
+          .select("id, created_at, event_name, utm_source, page_path, source, label, target_href, metadata"),
       )
         .order("created_at", { ascending: false })
         .limit(1000),
@@ -163,6 +173,34 @@ export function RevenueCommandCenter() {
     const requestedFollowup = registrations.filter((lead) => lead.request_follow_up).length;
     const sponsorSignals = events.filter((event) => event.event_name === "partner_page_click").length;
     const abandonedOpen = abandonedBookings.filter((booking) => !booking.completed).length;
+    const answerEvents = events.filter((event) => event.event_name.startsWith("family_answer_"));
+    const answerViews = events.filter((event) => event.event_name === "family_answer_view").length;
+    const answerCtaClicks = events.filter((event) => event.event_name === "family_answer_click").length;
+    const answerHubClicks = events.filter((event) => event.event_name === "family_answer_hub_click").length;
+    const answerFamilySquaresClicks = events.filter((event) =>
+      event.event_name === "family_answer_click" &&
+      ((event.target_href || "").includes("family-squares") || metadataText(event.metadata, "targetHref")?.includes("family-squares")),
+    ).length;
+    const answerCoachingClicks = events.filter((event) =>
+      event.event_name === "family_answer_click" &&
+      ((event.target_href || "").includes("book-consultation") || metadataText(event.metadata, "targetHref")?.includes("book-consultation")),
+    ).length;
+    const answerInterventionClicks = events.filter((event) =>
+      event.event_name === "family_answer_click" &&
+      ((event.target_href || "").includes("intervention-help") || metadataText(event.metadata, "targetHref")?.includes("intervention-help")),
+    ).length;
+    const topAnswerPages = Object.entries(
+      answerEvents.reduce<Record<string, { views: number; clicks: number }>>((acc, event) => {
+        const slug = metadataText(event.metadata, "answer_slug") || event.page_path?.split("/").filter(Boolean).pop() || "unknown";
+        if (!acc[slug]) acc[slug] = { views: 0, clicks: 0 };
+        if (event.event_name === "family_answer_view") acc[slug].views += 1;
+        if (event.event_name === "family_answer_click" || event.event_name === "family_answer_hub_click") acc[slug].clicks += 1;
+        return acc;
+      }, {}),
+    )
+      .map(([slug, counts]) => ({ slug, ...counts }))
+      .sort((a, b) => b.views + b.clicks - (a.views + a.clicks))
+      .slice(0, 6);
     const topPaths = Object.entries(
       registrations.reduce<Record<string, number>>((acc, lead) => {
         const key = lead.revenue_path || "family_squares";
@@ -189,6 +227,13 @@ export function RevenueCommandCenter() {
       requestedFollowup,
       sponsorSignals,
       abandonedOpen,
+      answerViews,
+      answerCtaClicks,
+      answerHubClicks,
+      answerFamilySquaresClicks,
+      answerCoachingClicks,
+      answerInterventionClicks,
+      topAnswerPages,
       topPaths,
       offerValuePipeline,
       registrations: registrations.length,
@@ -233,6 +278,18 @@ export function RevenueCommandCenter() {
       note: "Partner page clicks",
       icon: Handshake,
     },
+    {
+      label: "Answer views",
+      value: report.answerViews.toString(),
+      note: `${report.answerHubClicks} hub/internal answer clicks`,
+      icon: HelpCircle,
+    },
+    {
+      label: "Answer CTA clicks",
+      value: report.answerCtaClicks.toString(),
+      note: "Clicks from answers into money paths",
+      icon: MousePointerClick,
+    },
   ];
 
   if (loading) {
@@ -274,7 +331,7 @@ export function RevenueCommandCenter() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {cards.map((card) => {
           const Icon = card.icon;
           return (
@@ -341,6 +398,38 @@ export function RevenueCommandCenter() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardContent className="p-5">
+          <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h3 className="font-semibold text-foreground">Family answer performance</h3>
+              <p className="text-sm text-muted-foreground">
+                Shows whether AEO traffic is moving into Family Squares, private coaching, or intervention readiness.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline">{report.answerFamilySquaresClicks} Family Squares</Badge>
+              <Badge variant="outline">{report.answerCoachingClicks} Coaching</Badge>
+              <Badge variant="outline">{report.answerInterventionClicks} Intervention</Badge>
+            </div>
+          </div>
+          {report.topAnswerPages.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No answer-page activity yet.</p>
+          ) : (
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              {report.topAnswerPages.map((answer) => (
+                <div key={answer.slug} className="rounded-lg border p-3">
+                  <p className="text-sm font-medium capitalize text-foreground">{answerLabel(answer.slug)}</p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {answer.views} views · {answer.clicks} clicks
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <Card>
         <CardContent className="p-5">

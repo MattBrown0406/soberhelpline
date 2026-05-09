@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
+import CommonFamilyQuestions from "@/components/CommonFamilyQuestions";
 
 const paths = [
   {
@@ -166,6 +167,13 @@ export default function StartHere() {
               </div>
             </div>
           </section>
+
+          <CommonFamilyQuestions
+            source="start_here_common_family_questions"
+            eyebrow="Answer the question underneath the crisis"
+            title="If one of these questions sounds familiar, start there."
+            description="Each answer is written to help the family choose the lowest-pressure useful next step: Family Squares, private coaching, or intervention readiness."
+          />
 
           <FamilyProofStrip />
         </main>

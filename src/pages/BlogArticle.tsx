@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import { blogPosts, imageMap } from "@/data/blogPosts";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
+import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
 
 const BASE_URL = "https://soberhelpline.com";
 
@@ -361,6 +362,15 @@ const BlogArticle = () => {
           <div className="prose prose-sm sm:prose-lg max-w-none">
             {post.content && renderContent(post.content)}
           </div>
+
+          <RelatedFamilyAnswerLinks
+            post={{
+              slug: (post as any).slug || seoData?.postSlug,
+              title: post.title,
+              category: post.category,
+              excerpt: post.excerpt,
+            }}
+          />
 
           {/* Membership CTA */}
           <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-logo-green/5 via-emerald-50 to-white border border-logo-green/20">

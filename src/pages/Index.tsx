@@ -25,6 +25,7 @@ import SEOHead from "@/components/SEOHead";
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
+import CommonFamilyQuestions from "@/components/CommonFamilyQuestions";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 
 const categories = [
@@ -434,6 +435,13 @@ const Index = () => {
         </section>
 
         <FamilyFunnelDecisionMatrix source="homepage_decision_matrix" />
+
+        <CommonFamilyQuestions
+          source="homepage_common_family_questions"
+          eyebrow="Questions families ask before they act"
+          title="Turn the search into the right next step."
+          description="Families often arrive with one urgent question. These answers guide them toward Family Squares, private coaching, or intervention readiness without disrupting the free meeting path."
+        />
 
         <section className="container mx-auto px-4 py-10 md:py-14">
           <div className="max-w-6xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">

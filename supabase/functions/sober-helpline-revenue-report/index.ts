@@ -119,10 +119,27 @@ serve(async (req: Request) => {
     let revenueIntentClicks = 0;
     let consultationRequests = 0;
     let interventionReadinessClicks = 0;
+    let answerPageViews = 0;
+    let answerPageClicks = 0;
+    let answerFamilySquaresClicks = 0;
+    let answerCoachingClicks = 0;
+    let answerInterventionClicks = 0;
+    const answerPages = new Map<string, { views: number; clicks: number }>();
+
+    const incrementAnswer = (slug: string, key: "views" | "clicks") => {
+      const clean = slug.trim() || "unknown";
+      const current = answerPages.get(clean) || { views: 0, clicks: 0 };
+      current[key] += 1;
+      answerPages.set(clean, current);
+    };
 
     events.forEach((event) => {
       const eventName = event.event_name || "unknown";
       const destination = eventDestination(event);
+      const answerSlug =
+        metadataValue(event.metadata, ["answer_slug"]) ||
+        event.page_path?.split("/").filter(Boolean).pop() ||
+        "unknown";
       const intentText = [
         eventName,
         event.page_path,
@@ -140,7 +157,26 @@ serve(async (req: Request) => {
       if (includesAny(intentText, revenueIntentTerms)) revenueIntentClicks += 1;
       if (includesAny(intentText, ["book", "booking", "consultation", "coaching"])) consultationRequests += 1;
       if (includesAny(intentText, readinessTerms)) interventionReadinessClicks += 1;
+
+      if (eventName === "family_answer_view") {
+        answerPageViews += 1;
+        incrementAnswer(answerSlug, "views");
+      }
+
+      if (eventName === "family_answer_click" || eventName === "family_answer_hub_click") {
+        answerPageClicks += 1;
+        incrementAnswer(answerSlug, "clicks");
+      }
+
+      if (eventName === "family_answer_click" && includesAny(intentText, ["family-squares", "family_squares"])) answerFamilySquaresClicks += 1;
+      if (eventName === "family_answer_click" && includesAny(intentText, ["book-consultation", "coaching", "private"])) answerCoachingClicks += 1;
+      if (eventName === "family_answer_click" && includesAny(intentText, ["intervention-help", "intervention_readiness", "readiness"])) answerInterventionClicks += 1;
     });
+
+    const topAnswerPages = [...answerPages.entries()]
+      .map(([slug, counts]) => ({ slug, ...counts }))
+      .sort((a, b) => b.views + b.clicks - (a.views + a.clicks))
+      .slice(0, 10);
 
     const response = {
       window_days: 30,
@@ -153,10 +189,16 @@ serve(async (req: Request) => {
         advertiser_inquiries: 0,
         registrations: registrationsResult.count || 0,
         family_followups_queued: followupsResult.error ? 0 : followupsResult.count || 0,
+        answer_page_views: answerPageViews,
+        answer_page_clicks: answerPageClicks,
+        answer_family_squares_clicks: answerFamilySquaresClicks,
+        answer_coaching_clicks: answerCoachingClicks,
+        answer_intervention_clicks: answerInterventionClicks,
       },
       by_event: toTopList(byEvent),
       top_pages: toTopList(topPages),
       top_destinations: toTopList(topDestinations),
+      top_answer_pages: topAnswerPages,
       latest_events: events.slice(0, 25).map((event) => ({
         event_name: event.event_name,
         page_path: event.page_path,
