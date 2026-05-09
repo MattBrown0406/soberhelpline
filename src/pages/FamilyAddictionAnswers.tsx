@@ -1,5 +1,6 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, ClipboardCheck, HeartPulse, PhoneCall, ShieldAlert, Users } from "lucide-react";
+import { ArrowRight, Calendar, ClipboardCheck, HeartPulse, PhoneCall, Search, ShieldAlert, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
 import { Button } from "@/components/ui/button";
@@ -26,8 +27,28 @@ const howToSteps = [
 const faqItems = familyAddictionAnswers.slice(0, 8).map(({ question, shortAnswer }) => ({ question, answer: shortAnswer }));
 
 export default function FamilyAddictionAnswers() {
+  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
   const featuredAnswers = familyAddictionAnswers.slice(0, 4);
-  const groupedAnswers = familyAddictionAnswers.reduce<Record<string, typeof familyAddictionAnswers>>((acc, answer) => {
+  const categories = useMemo(() => ["All", ...Array.from(new Set(familyAddictionAnswers.map((answer) => answer.category)))], []);
+  const filteredAnswers = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    return familyAddictionAnswers.filter((answer) => {
+      const matchesCategory = activeCategory === "All" || answer.category === activeCategory;
+      const searchableText = [
+        answer.question,
+        answer.shortAnswer,
+        answer.category,
+        answer.bestNextStep,
+        ...answer.keywords,
+      ].join(" ").toLowerCase();
+      const matchesQuery = !normalizedQuery || searchableText.includes(normalizedQuery);
+
+      return matchesCategory && matchesQuery;
+    });
+  }, [activeCategory, query]);
+  const groupedAnswers = filteredAnswers.reduce<Record<string, typeof familyAddictionAnswers>>((acc, answer) => {
     acc[answer.category] = [...(acc[answer.category] || []), answer];
     return acc;
   }, {});
@@ -186,8 +207,48 @@ export default function FamilyAddictionAnswers() {
                 These pages are built for answer engines and real families: free support first, private help when needed, intervention readiness when risk is rising.
               </p>
             </div>
+            <div className="mb-6 rounded-xl border border-primary/15 bg-card p-4">
+              <label htmlFor="family-answer-search" className="text-sm font-semibold text-foreground">
+                Ask the family question
+              </label>
+              <div className="mt-3 flex items-center gap-3 rounded-lg border border-border bg-background px-3 py-2">
+                <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <input
+                  id="family-answer-search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search relapse, spouse, intervention, money, treatment, adult child..."
+                  className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                    className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+                      activeCategory === category
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-primary"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="grid gap-5 md:grid-cols-2">
-              {Object.entries(groupedAnswers).map(([category, answers]) => (
+              {filteredAnswers.length === 0 ? (
+                <Card className="md:col-span-2">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-foreground">No exact match yet</h3>
+                    <p className="mt-2 text-muted-foreground">
+                      Try a simpler phrase like relapse, money, spouse, treatment, intervention, or adult child.
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : Object.entries(groupedAnswers).map(([category, answers]) => (
                 <Card key={category} className="border-primary/15">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold text-foreground">{category}</h3>

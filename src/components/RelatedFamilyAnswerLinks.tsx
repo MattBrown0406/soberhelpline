@@ -15,19 +15,27 @@ type BlogLikePost = {
 const rules = [
   {
     terms: ["intervention", "readiness", "refused", "refuses", "denial"],
-    slugs: ["when-is-addiction-intervention-level", "what-if-loved-one-refuses-treatment", "where-should-family-start-addiction-chaos"],
+    slugs: ["should-we-stage-an-intervention", "when-is-addiction-intervention-level", "what-if-loved-one-refuses-treatment"],
+  },
+  {
+    terms: ["overdose", "fentanyl", "opioid", "withdrawal", "danger", "safety"],
+    slugs: ["what-if-im-afraid-they-will-overdose", "when-is-addiction-intervention-level", "does-our-family-need-freedom-interventions"],
   },
   {
     terms: ["relapse", "aftercare", "early recovery", "warning"],
-    slugs: ["what-should-family-do-after-relapse", "when-book-private-family-coaching", "what-if-we-cannot-wait-until-monday"],
+    slugs: ["what-do-i-say-when-they-relapse", "what-should-family-do-after-relapse", "what-if-they-leave-treatment-early"],
   },
   {
     terms: ["enabling", "boundary", "boundaries", "money", "detach"],
-    slugs: ["should-we-stop-giving-money-addiction", "how-do-we-set-boundaries-with-adult-child", "what-if-loved-one-refuses-treatment"],
+    slugs: ["should-we-stop-giving-money-addiction", "should-i-give-an-ultimatum", "how-do-we-set-boundaries-with-adult-child"],
+  },
+  {
+    terms: ["spouse", "marriage", "husband", "wife", "partner", "children"],
+    slugs: ["how-do-i-get-my-spouse-into-treatment", "how-do-we-talk-without-starting-a-fight", "should-we-stage-an-intervention"],
   },
   {
     terms: ["treatment", "rehab", "detox", "insurance", "level of care"],
-    slugs: ["where-should-family-start-addiction-chaos", "when-book-private-family-coaching", "when-is-addiction-intervention-level"],
+    slugs: ["is-this-bad-enough-for-treatment", "should-we-call-treatment-center-first", "should-we-pay-for-rehab"],
   },
   {
     terms: ["family", "support", "confusion", "chaos", "help"],

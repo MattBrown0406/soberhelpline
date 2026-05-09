@@ -199,6 +199,21 @@ serve(async (req: Request) => {
       top_pages: toTopList(topPages),
       top_destinations: toTopList(topDestinations),
       top_answer_pages: topAnswerPages,
+      owner_email_summary: {
+        headline: "Sober Helpline answer-engine funnel",
+        answer_metrics: [
+          { label: "Answer page views", value: answerPageViews },
+          { label: "Answer page clicks", value: answerPageClicks },
+          { label: "Family Squares clicks from answers", value: answerFamilySquaresClicks },
+          { label: "Coaching clicks from answers", value: answerCoachingClicks },
+          { label: "Intervention clicks from answers", value: answerInterventionClicks },
+        ],
+        top_answer_pages: topAnswerPages.slice(0, 5),
+        recommended_action:
+          topAnswerPages.length > 0
+            ? `Feature ${topAnswerPages[0].slug} on the homepage and Start Here page this week.`
+            : "Let answer-page traffic accumulate, then feature the highest-view/highest-click answer on the homepage.",
+      },
       latest_events: events.slice(0, 25).map((event) => ({
         event_name: event.event_name,
         page_path: event.page_path,

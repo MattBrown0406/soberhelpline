@@ -6,11 +6,11 @@ import { familyAddictionAnswerPath, getFamilyAddictionAnswer } from "@/data/fami
 import { trackConversionEvent } from "@/lib/conversionTracking";
 
 const featuredQuestionSlugs = [
-  "where-should-family-start-addiction-chaos",
-  "what-is-family-squares-meeting",
+  "should-we-stage-an-intervention",
   "what-if-we-cannot-wait-until-monday",
-  "when-is-addiction-intervention-level",
-  "should-we-stop-giving-money-addiction",
+  "how-do-i-get-my-spouse-into-treatment",
+  "what-if-im-afraid-they-will-overdose",
+  "is-this-bad-enough-for-treatment",
   "what-should-family-do-after-relapse",
 ];
 
@@ -19,6 +19,7 @@ interface CommonFamilyQuestionsProps {
   eyebrow?: string;
   title?: string;
   description?: string;
+  slugs?: string[];
 }
 
 export default function CommonFamilyQuestions({
@@ -26,8 +27,9 @@ export default function CommonFamilyQuestions({
   eyebrow = "Common family questions",
   title = "Get a direct answer, then choose the right next step.",
   description = "These short answers help families move toward free Family Squares support, private coaching, or intervention readiness without getting lost in another search spiral.",
+  slugs = featuredQuestionSlugs,
 }: CommonFamilyQuestionsProps) {
-  const questions = featuredQuestionSlugs
+  const questions = slugs
     .map((slug) => getFamilyAddictionAnswer(slug))
     .filter(Boolean);
 
