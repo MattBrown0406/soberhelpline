@@ -79,6 +79,65 @@ URL: https://soberhelpline.com/family-coaching
 - **The Party Wreckers Podcast** — Addiction and recovery conversations: https://partywreckers.com
 - **No More Enabling** — Education on enabling behaviors: https://nomoreenabling.com
 
+## Pages
+
+- [Home](/): Family addiction support, education, and ethical resources.
+- [Start Here](/start-here): Choose the right next step for your family.
+- [Recovery Roadmap](/roadmap): Free 5-minute assessment placing families in 1 of 8 stages.
+- [Family Addiction Answers](/family-addiction-answers): Answer-engine summary routing families to the right support level.
+- [Family Squares](/family-squares): Free Monday 7 PM Pacific Zoom support meeting.
+- [Monday Zoom Registration](/monday-zoom-registration): Register for the weekly family support Zoom.
+- [Family Membership](/family-membership): Structured ongoing family addiction support.
+- [Family Support](/family-support): Free family addiction support resources and education.
+- [Family Coaching](/family-coaching): Private one-on-one family coaching with Matt Brown.
+- [Family Consultation](/family-consultation): Book a private consultation about your family's situation.
+- [Family Readiness Intensive](/family-readiness-intensive): Focused intervention readiness strategy session.
+- [Intervention Help](/intervention-help): Warning signs and next steps for professional intervention.
+- [Interventionists](/interventionists): Find a vetted professional interventionist.
+- [Family Education](/family-education): Member education library — Six Pillars curriculum.
+- [Blog](/blog): 65+ articles on addiction, family dynamics, boundaries, and recovery.
+- [FAQs](/faqs): Frequently asked questions about family addiction support.
+- [Testimonials](/testimonials): Family member reviews and feedback.
+
+## Provider Directory
+
+- [Inpatient Treatment](/inpatient-treatment): Vetted inpatient rehab facilities.
+- [Outpatient Treatment](/outpatient-treatment): Outpatient treatment programs.
+- [Medical Detox](/medical-detox): Medically supervised detox providers.
+- [Sober Living](/sober-living): Sober living homes and recovery housing.
+- [Therapists](/therapists): Addiction-aware therapists.
+- [Psychiatrists](/psychiatrists): Addiction psychiatry providers.
+- [Sober Coaches & Companions](/sober-coaches-companions): Recovery coaches and sober companions.
+- [Recovery Resources](/recovery-resources): Browse all provider categories.
+
+## AI Coaching Tools
+
+- [AI Life Coach](/ai-life-coach): On-demand life coaching for family members.
+- [AI Enabling Decision Coach](/ai-enabling-decision-coach): Decide whether an action is enabling.
+- [AI Boundary Builder Coach](/ai-boundary-builder-coach): Build boundaries with consequences.
+- [AI Treatment Navigator](/ai-treatment-navigator): Navigate treatment options.
+- [AI Relapse Response Guide](/ai-relapse-response-guide): Respond to relapse situations.
+- [AI Addiction Reality Translator](/ai-addiction-reality-translator): Translate addiction behavior into reality.
+
+## State Family Support
+
+- [Oregon](/oregon-family-support): Oregon family addiction support.
+- [California](/california-family-support): California family addiction support.
+- [Washington](/washington-family-support): Washington family addiction support.
+- [Texas](/texas-family-support): Texas family addiction support.
+- [Arizona](/arizona-family-support): Arizona family addiction support.
+- [Colorado](/colorado-family-support): Colorado family addiction support.
+- [Idaho](/idaho-family-support): Idaho family addiction support.
+- [Nevada](/nevada-family-support): Nevada family addiction support.
+- [Utah](/utah-family-support): Utah family addiction support.
+- [New Mexico](/new-mexico-family-support): New Mexico family addiction support.
+
+## Optional
+
+- [For Providers](/for-providers): Information for treatment providers.
+- [Partner With Sober Helpline](/partner-with-sober-helpline): Partnership overview for ethical providers.
+- [Zoom Recordings](/zoom-recordings): Member-only library of past Monday Zoom recordings.
+
 ## For More Detail
 
 See llms-full.txt for complete page catalog, article descriptions, and tool documentation.
