@@ -19,18 +19,20 @@ const RecoveryResources = () => {
   return (
     <>
       <SEOHead
-        title="Find Recovery Resources | Sober Helpline"
-        description="Browse our directory of vetted addiction treatment providers and recovery professionals. Find inpatient treatment, outpatient programs, interventionists, therapists, and more."
+        title="Recovery Resources for Families | Treatment, Detox, Intervention Help"
+        description="Find recovery resources for addiction families: detox, inpatient treatment, outpatient care, intervention help, sober living, therapists, and sober coaches."
       />
       <div className="min-h-screen bg-background">
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-br from-logo-green/5 via-background to-primary/5 py-12 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-              Find the Right Support
+              Recovery Resources for Families Trying to Find the Right Help
             </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-              Browse our directory of vetted treatment providers and recovery professionals. Every provider meets our ethical standards—no commissions, no patient brokering.
+              Browse vetted treatment providers and recovery professionals by the kind of help your family needs now:
+              detox, inpatient treatment, outpatient care, intervention help, sober living, therapy, psychiatry, and sober coaching.
+              No commissions. No patient brokering.
             </p>
             <a href="tel:5412415668">
               <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">

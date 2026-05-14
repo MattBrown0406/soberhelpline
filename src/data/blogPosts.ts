@@ -1089,15 +1089,17 @@ Families can and do attempt interventions without professional support — but t
   {
     id: 108,
     slug: "what-to-do-when-loved-one-lies-about-drinking-drug-use",
-    seoTitle: "When a Loved One Lies About Drinking or Drug Use: What to Do",
-    metaDescription: "When a loved one lies about drinking or drug use, it's painful and confusing. Learn why it happens, what to say, and how to respond in a way that actually helps.",
-    title: "What to Do When a Loved One Lies About Their Drinking or Drug Use",
-    excerpt: "You found the empty bottles. You noticed the missing money. You confronted them — and they looked you in the eye and said it wasn't what you thought. If your loved one is lying about their drinking or drug use, you're not alone.",
-    content: `You found the empty bottles. You noticed the missing money. You confronted them — and they looked you in the eye and said it wasn't what you thought. Maybe they had an explanation that almost made sense. Maybe they turned it around on you. Either way, you walked away knowing the truth, but feeling strangely like the one who did something wrong.
+    seoTitle: "Loved One Lying About Drinking or Drug Use? What to Do Next",
+    metaDescription: "If your loved one lies about drinking or drug use, learn what to say, what not to say, and when families should get outside help or coaching.",
+    title: "Loved One Lying About Drinking or Drug Use? What to Do Next",
+    excerpt: "If your loved one keeps lying about drinking or drug use, stop chasing a confession. Learn how to respond with facts, boundaries, and a clearer next step.",
+    content: `If your loved one keeps lying about drinking or drug use, the first mistake is usually trying to force a confession. You may already know enough. The real question is what you will do with what you know: what you will say, what boundary needs to change, and whether your family needs outside help before this turns into another circular fight.
+
+You found the empty bottles. You noticed the missing money. You confronted them — and they looked you in the eye and said it wasn't what you thought. Maybe they had an explanation that almost made sense. Maybe they turned it around on you. Either way, you walked away knowing the truth, but feeling strangely like the one who did something wrong.
 
 If your loved one is lying about their drinking or drug use, you're not alone. Deception is one of the most painful and disorienting parts of addiction — for the family. It's also one of the most misunderstood. Learning why it happens, and how to respond without shutting down the possibility of change, can make a real difference in where this goes.
 
-This article will walk you through exactly that: the psychology behind the lies, what to say (and what not to say), and how to stay clear-headed when someone you love is telling you not to trust what you know.
+This article will walk you through exactly that: the psychology behind the lies, what to say (and what not to say), how to set a boundary without making an empty threat, and when to bring in family coaching or intervention guidance.
 
 **Why People With Addiction Lie — It's Not Just About You**
 
@@ -1114,6 +1116,12 @@ None of this means the lying is okay, or that you have to accept it. It means yo
 **How to Respond When a Loved One Lies About Their Drug Use or Drinking**
 
 The worst responses — though completely understandable — are the ones that either explode or completely shut down. A shouting match rarely breaks through denial. Neither does cold silence. What tends to work is calm, specific, and grounded.
+
+**Use This Script Instead of Chasing the Truth**
+
+Try something this direct: "I am not going to argue about whether this happened. I know what I saw, and I am taking it seriously. I love you, and I am willing to talk about real help. I am not willing to keep pretending this is not affecting the family."
+
+That kind of language does three useful things. It stops the debate, keeps the relationship from becoming the only issue, and moves the conversation toward a next step. If your family cannot hold that line alone, [LINK:family addiction coaching:/addiction-family-coaching] can help you prepare before the next conversation.
 
 **Stay Connected to What You Actually Know**
 
@@ -15004,4 +15012,3 @@ const blogSchema = {
     "url": `https://soberhelpline.com/blog/${post.id}`
   }))
 };
-

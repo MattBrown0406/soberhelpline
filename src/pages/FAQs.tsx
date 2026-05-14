@@ -299,16 +299,16 @@ export default function FAQs() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Addiction & Recovery FAQs | Sober Helpline</title>
-        <meta name="description" content="Get answers to common questions about addiction, intervention, treatment options, enabling vs. helping, and supporting a loved one in recovery." />
+        <title>Addiction Help FAQs for Families | Sober Helpline</title>
+        <meta name="description" content="Straight answers for families worried about addiction: warning signs, treatment options, intervention help, boundaries, enabling, relapse, and what to do next." />
         <link rel="canonical" href="https://soberhelpline.com/faqs" />
-        <meta property="og:title" content="Addiction & Recovery FAQs | Sober Helpline" />
-        <meta property="og:description" content="Get answers to common questions about addiction, intervention, treatment options, enabling vs. helping, and supporting a loved one in recovery." />
+        <meta property="og:title" content="Addiction Help FAQs for Families | Sober Helpline" />
+        <meta property="og:description" content="Straight answers for families worried about addiction, treatment, intervention, boundaries, enabling, relapse, and what to do next." />
         <meta property="og:url" content="https://soberhelpline.com/faqs" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Addiction & Recovery FAQs | Sober Helpline" />
-        <meta name="twitter:description" content="Get answers to common questions about addiction, intervention, treatment options, and supporting a loved one in recovery." />
+        <meta name="twitter:title" content="Addiction Help FAQs for Families | Sober Helpline" />
+        <meta name="twitter:description" content="Straight answers for families worried about addiction, treatment, intervention, boundaries, relapse, and next steps." />
         <script type="application/ld+json">
           {JSON.stringify(faqSchema)}
         </script>
@@ -324,10 +324,11 @@ export default function FAQs() {
 
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Frequently Asked Questions
+            Addiction Help FAQs for Families
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Straight answers for families trying to understand addiction, treatment, boundaries, and what real help looks like.
+            Straight answers for families trying to understand warning signs, treatment options, intervention help, relapse,
+            boundaries, enabling, and what real help looks like.
           </p>
         </div>
 
