@@ -9,7 +9,8 @@
     "build": "vite build && node scripts/prerender-routes.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gsc:weekly:sh": "GSC_SITE_URL=sc-domain:soberhelpline.com GSC_REPORTS_DIR=\"/Users/matthewbrown/Desktop/SH/SEO\" node scripts/gsc-weekly-report.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.1",
