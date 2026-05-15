@@ -77,8 +77,8 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'A private consult for families deciding whether treatment refusal, relapse, or escalating risk may require professional intervention planning.',
   },
   '/addiction-family-coaching': {
-    title: 'Family Addiction Coaching for Parents, Spouses, and Siblings',
-    description: 'Private family addiction coaching for boundaries, relapse, lying, treatment decisions, and family alignment.',
+    title: 'Family Addiction Coaching for Parents, Spouses & Siblings | Sober Helpline',
+    description: 'Private family addiction coaching for parents, spouses, and siblings dealing with lying, relapse, boundaries, treatment refusal, and family alignment.',
   },
   '/partner-with-sober-helpline': {
     title: 'Partner With Sober Helpline | Audience & Family Support',
