@@ -13,6 +13,19 @@ import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
 
 const BASE_URL = "https://soberhelpline.com";
 
+const highIntentBlogOverrides: Record<string, { title: string; excerpt: string; seoTitle: string; metaDescription: string; conversionPrompt: string }> = {
+  "what-to-do-when-loved-one-lies-about-drinking-drug-use": {
+    title: "Loved One Lying About Drinking or Drug Use? What Families Can Do Next",
+    excerpt:
+      "If your loved one keeps lying about drinking or drug use, stop chasing a confession. Use a calmer script, hold the boundary, and know when to get outside help.",
+    seoTitle: "Loved One Lying About Drinking or Drug Use? Family Next Steps",
+    metaDescription:
+      "If your loved one lies about drinking or drug use, learn what to say tonight, what not to say, and when to get family coaching or intervention help.",
+    conversionPrompt:
+      "If the lying has already turned into another crisis at home, you do not have to wait until everyone is calm to get help. Book a private family consult or start with family addiction coaching so the next conversation has structure instead of becoming another interrogation.",
+  },
+};
+
 const BlogArticle = () => {
   const { id } = useParams();
   const [showShareOptions, setShowShareOptions] = useState(false);
@@ -63,6 +76,11 @@ const BlogArticle = () => {
     return false;
   }) || (id ? blogPosts.find((p) => p.id != null && p.id.toString() === id) : undefined);
 
+  const fallbackPostSlug = post
+    ? ((post as any).slug || getImageSlug(post.image) || generateSlug(post.title || '') || id || post.id?.toString() || '').toLowerCase()
+    : '';
+  const blogOverride = fallbackPostSlug ? highIntentBlogOverrides[fallbackPostSlug] : undefined;
+
   // Tell DefaultSEO to skip — BlogArticle manages its own SEO
   useEffect(() => {
     setOverridden(true);
@@ -74,12 +92,13 @@ const BlogArticle = () => {
     if (!post) return null;
     const fallbackSlug = generateSlug(post.title || '') || id || post.id?.toString() || '';
     const postSlug = (post as any).slug || getImageSlug(post.image) || fallbackSlug;
+    const override = highIntentBlogOverrides[postSlug.toLowerCase()];
     const canonicalUrl = `${BASE_URL}/blog/${postSlug}`;
-    const seoDescription = (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
+    const seoDescription = override?.metaDescription || (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
     const fullImageUrl = post.image?.startsWith('http') ? post.image : `${BASE_URL}${post.image}`;
 
     const suffix = ' | Sober Helpline';
-    const baseSeoTitle = (post as any).seoTitle || post.title;
+    const baseSeoTitle = override?.seoTitle || (post as any).seoTitle || post.title;
     const maxLen = 60 - suffix.length;
     const seoTitle = baseSeoTitle.includes('Sober Helpline')
       ? baseSeoTitle
@@ -103,7 +122,7 @@ const BlogArticle = () => {
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": post.title,
+      "headline": blogOverride?.title || post.title,
       "description": seoData.seoDescription,
       "image": seoData.fullImageUrl,
       "author": {
@@ -132,7 +151,7 @@ const BlogArticle = () => {
       const articleSchema = document.querySelector('script[data-schema="article"]');
       if (articleSchema) articleSchema.remove();
     };
-  }, [post, seoData]);
+  }, [post, seoData, blogOverride]);
 
   if (!post) {
     return (
@@ -161,8 +180,8 @@ const BlogArticle = () => {
 
   const getShareUrls = () => {
     const pageUrl = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(post.title);
-    const text = encodeURIComponent(post.excerpt);
+    const title = encodeURIComponent(blogOverride?.title || post.title);
+    const text = encodeURIComponent(blogOverride?.excerpt || post.excerpt);
     
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
@@ -176,8 +195,8 @@ const BlogArticle = () => {
   const handleNativeShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: post.title,
-        text: post.excerpt,
+        title: blogOverride?.title || post.title,
+        text: blogOverride?.excerpt || post.excerpt,
         url: window.location.href,
       }).catch(() => {});
     }
@@ -274,7 +293,7 @@ const BlogArticle = () => {
         {/* Article */}
         <article className="max-w-3xl mx-auto">
           <div className="text-sm text-primary font-medium mb-2">{post.category}</div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">{post.title}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">{blogOverride?.title || post.title}</h1>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-6">
             <div className="flex items-center gap-1">
               <User className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -353,22 +372,35 @@ const BlogArticle = () => {
           {post.image && (
             <img 
               src={post.image} 
-              alt={post.title} 
+              alt={blogOverride?.title || post.title} 
               className="w-full h-48 sm:h-72 md:h-96 object-cover rounded-lg mb-6 sm:mb-8"
             />
           )}
 
           {/* Content */}
           <div className="prose prose-sm sm:prose-lg max-w-none">
+            {blogOverride?.conversionPrompt && (
+              <div className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-5">
+                <p className="text-foreground font-medium leading-relaxed">{blogOverride.conversionPrompt}</p>
+                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                  <Link to="/family-consultation">
+                    <Button>Book a private family consult</Button>
+                  </Link>
+                  <Link to="/addiction-family-coaching">
+                    <Button variant="outline">Family addiction coaching</Button>
+                  </Link>
+                </div>
+              </div>
+            )}
             {post.content && renderContent(post.content)}
           </div>
 
           <RelatedFamilyAnswerLinks
             post={{
               slug: (post as any).slug || seoData?.postSlug,
-              title: post.title,
+              title: blogOverride?.title || post.title,
               category: post.category,
-              excerpt: post.excerpt,
+              excerpt: blogOverride?.excerpt || post.excerpt,
             }}
           />
 
