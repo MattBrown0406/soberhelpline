@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Mail, Copy, Check, Lock, BookOpen } from "lucide-react";
+import { ArrowLeft, Phone, Calendar, User, Share2, Facebook, Twitter, Linkedin, Mail, Copy, Check, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSEOOverride } from "@/contexts/SEOOverrideContext";
@@ -81,7 +81,7 @@ const BlogArticle = () => {
     : '';
   const blogOverride = fallbackPostSlug ? highIntentBlogOverrides[fallbackPostSlug] : undefined;
 
-  // Tell DefaultSEO to skip — BlogArticle manages its own SEO
+  // Tell DefaultSEO to skip - BlogArticle manages its own SEO
   useEffect(() => {
     setOverridden(true);
     return () => setOverridden(false);
@@ -166,9 +166,12 @@ const BlogArticle = () => {
     );
   }
 
+  const sharePageUrl = seoData?.canonicalUrl || `${BASE_URL}/blog/${fallbackPostSlug}`;
+  const shareTitle = blogOverride?.title || post.title;
+  const shareText = blogOverride?.excerpt || post.excerpt;
+
   const copyLink = async () => {
-    const url = window.location.href;
-    const textToCopy = `${post.title} - Sober Helpline\n${url}`;
+    const textToCopy = `${shareTitle} - Sober Helpline\n${sharePageUrl}`;
     try {
       await navigator.clipboard.writeText(textToCopy);
       setLinkCopied(true);
@@ -179,14 +182,15 @@ const BlogArticle = () => {
   };
 
   const getShareUrls = () => {
-    const pageUrl = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(blogOverride?.title || post.title);
-    const text = encodeURIComponent(blogOverride?.excerpt || post.excerpt);
+    const pageUrl = encodeURIComponent(sharePageUrl);
+    const title = encodeURIComponent(shareTitle);
+    const text = encodeURIComponent(shareText);
     
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
       twitter: `https://x.com/intent/tweet?url=${pageUrl}&text=${title}`,
-      email: `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0ARead more: ${decodeURIComponent(pageUrl)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`,
+      email: `mailto:?subject=${title}&body=${title}%0A%0A${text}%0A%0ARead more: ${sharePageUrl}`,
     };
   };
 
@@ -195,9 +199,9 @@ const BlogArticle = () => {
   const handleNativeShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: blogOverride?.title || post.title,
-        text: blogOverride?.excerpt || post.excerpt,
-        url: window.location.href,
+        title: shareTitle,
+        text: shareText,
+        url: sharePageUrl,
       }).catch(() => {});
     }
   };
@@ -332,6 +336,7 @@ const BlogArticle = () => {
                   <a 
                     href={shareUrls.facebook}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Facebook className="w-4 h-4" />
@@ -340,10 +345,20 @@ const BlogArticle = () => {
                   <a 
                     href={shareUrls.twitter}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                   >
                     <Twitter className="w-4 h-4" />
                     X
+                  </a>
+                  <a 
+                    href={shareUrls.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
                   </a>
                   <a 
                     href={shareUrls.email}
@@ -352,7 +367,7 @@ const BlogArticle = () => {
                     <Mail className="w-4 h-4" />
                     Email
                   </a>
-                  {navigator.share && (
+                  {typeof navigator !== "undefined" && navigator.share && (
                     <Button 
                       size="sm" 
                       variant="outline" 
