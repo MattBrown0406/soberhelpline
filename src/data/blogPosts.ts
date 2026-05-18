@@ -130,6 +130,7 @@ import brainRecoveryNeuroplasticityImg from "@/assets/blog-brain-recovery-neurop
 import shameAddictionCycleFamilyImg from "@/assets/blog-shame-addiction-cycle-family.jpg";
 import physicalDependenceVsAddictionImg from "@/assets/blog-physical-dependence-vs-addiction.jpg";
 import addictionChronicDiseaseFamilyImg from "@/assets/blog-addiction-chronic-disease-family.jpg";
+import healthyBoundariesAddictedFamilyImg from "@/assets/blog-healthy-boundaries-addicted-family-member.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
