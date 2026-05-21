@@ -132,6 +132,7 @@ import physicalDependenceVsAddictionImg from "@/assets/blog-physical-dependence-
 import addictionChronicDiseaseFamilyImg from "@/assets/blog-addiction-chronic-disease-family.jpg";
 import healthyBoundariesAddictedFamilyImg from "@/assets/blog-healthy-boundaries-addicted-family-member.jpg";
 import productiveConversationAboutAddictionImg from "@/assets/blog-productive-conversation-about-addiction.jpg";
+import ambiguousGriefLovingSomeoneAddictionImg from "@/assets/blog-ambiguous-grief-loving-someone-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -15279,6 +15280,93 @@ If you've been having the same exhausting conversations with nothing changing, y
       { question: "What if my loved one refuses to talk about their addiction at all?", answer: "Don't force it. Pushing a closed door usually makes it close harder. Say what you need to say briefly and leave space: 'I'm not going anywhere. I love you. When you're ready to talk, I'm here.' Then work with a family coach or therapist to stay grounded while you wait." },
       { question: "How do I stay calm during a hard conversation about addiction?", answer: "Prepare in advance — know what you want to say before you say it. Take breaks if you feel emotionally flooded. Have someone to debrief with afterward. You don't have to be emotionless, but having a plan keeps you from going off-script in ways you'll later regret." },
       { question: "Is it worth trying to talk to someone who is actively using?", answer: "Generally, no — at least not about anything substantive. Substances impair the parts of the brain most needed for this kind of conversation: emotional regulation, reasoning, and empathy. Wait until your loved one is sober before attempting the real conversation." }
+    ]
+  },
+  {
+    id: 123,
+    slug: "grieving-someone-still-alive-ambiguous-loss-addiction",
+    title: "Grieving Someone Who Is Still Alive: How Families Can Cope With Ambiguous Loss in Addiction",
+    excerpt: "Are you grieving a loved one who is still alive? Learn about ambiguous grief in addiction families — what it is, why it's normal, and how to heal without losing hope.",
+    author: "Matt Brown",
+    date: "2026-05-21",
+    category: "Family Education",
+    content: `Nobody warned you that you could grieve someone who is still breathing, still texting you occasionally, still showing up at holidays — but not really there. Not the person you knew. If you love someone who is struggling with addiction, you may have spent months or years carrying a sadness you can't quite name. It doesn't feel like the grief you learned about. There's no funeral. There's no clear ending. And yet the loss is real.
+
+This kind of grief even has a name: ambiguous grief, or ambiguous loss. It's one of the most common and least talked-about experiences that families of people with addiction go through. Understanding what it is — and knowing you're not alone in feeling it — is one of the most healing things you can do for yourself right now.
+
+**What Is Ambiguous Grief in the Context of Addiction?**
+
+Ambiguous grief is the experience of mourning a loss that has no clear boundaries — where the person is physically present but psychologically, emotionally, or behaviorally absent. It was first described by family therapist Dr. Pauline Boss in the 1970s, and it fits the addiction experience precisely.
+
+When a loved one is deep in addiction, the person in front of you is often a changed version of who they were. The parent who was once your anchor may now be unreliable. The spouse who was your partner may feel like a stranger. The child you raised with such care may be unrecognizable in their behavior. You are losing something enormous — but you cannot point to it the way you would a death or a divorce. There's no defined moment when the grief started. There may be no clear moment when it ends.
+
+This in-between space — where someone is lost and not lost at the same time — is what makes ambiguous grief so disorienting. It also makes it very hard to get support. People around you may not understand why you're sad. "But they're still alive," they might say. That's exactly why this grief is so lonely.
+
+**Why Does Grief When a Loved One Is Addicted Feel So Different?**
+
+Traditional grief follows loss. Ambiguous grief exists alongside ongoing uncertainty — and that uncertainty is what makes it so exhausting. You may find yourself oscillating between hope and despair multiple times in a single day. A good morning text from your loved one lifts you. A canceled plan, a slurred phone call, a disappeared check — drops you back down.
+
+This grief is different in several important ways. It has no socially recognized rituals — there's no casserole on your doorstep, no bereavement leave from work. It is interrupted constantly by hope; every time your loved one has a good day, the grief pauses, then resumes, often harder when things go wrong again. It carries guilt — families often feel guilty for grieving someone who is still alive, or for feeling angry at someone who is sick. And it coexists with love. You are not grieving because you stopped loving them. You are grieving because you love them so much, and the loss still keeps happening.
+
+If any of this sounds familiar, let it land: what you are feeling makes complete sense. You are not being dramatic. You are not giving up. You are experiencing one of the most complicated emotional landscapes a human being can navigate.
+
+**What Does Ambiguous Loss Actually Look Like for Families?**
+
+Ambiguous grief can show up in ways that families often misidentify as depression, anxiety, anger, numbness, or just feeling "off." Knowing what to look for helps you name it — and naming it is the beginning of healing.
+
+Common signs you may be experiencing ambiguous grief include feeling sad without being able to explain why, even on days when your loved one seems okay; mourning who your loved one used to be — the person before the addiction took hold; difficulty making plans or feeling joy, because everything feels temporary or fragile; feeling guilty for having good days, laughing, or enjoying something; dreaming about your loved one as they once were, or as you hoped they would become; a persistent low-grade sadness that never fully lifts, even during periods of relative calm; and grief and anger mixed together in a way that feels shameful.
+
+You may also be grieving specific things: the relationship you thought you would have, milestones that passed with pain instead of celebration, dreams you had for them (or for yourself), and the version of your own life that addiction interrupted.
+
+**How to Begin Healing From Ambiguous Grief**
+
+There is no single path through ambiguous grief, and there is no finish line. But there are practices and perspectives that genuinely help families move from surviving to living again — even while the situation remains unresolved.
+
+**1. Name the Loss Out Loud**
+
+One of the most powerful things you can do is say, plainly: "I am grieving." Not "I'm worried about him" or "I'm stressed about the situation." Grief. Naming it as grief gives it a shape you can work with. It also gives you permission to seek support.
+
+**2. Find People Who Understand This Specific Kind of Loss**
+
+Well-meaning friends and family members who haven't lived this often offer comfort that inadvertently minimizes the pain — "At least he's alive," "She'll get through it." Seek out people who understand. [LINK:Al-Anon:https://al-anon.org] groups, family support groups, and professional therapists who specialize in addiction are the spaces where ambiguous grief is recognized and met with genuine compassion.
+
+**3. Allow Yourself to Mourn Specific Losses**
+
+Rather than holding one giant unnamed grief, try naming individual losses. The relationship you once had. The holidays that went sideways. The dreams you let go of. Specific losses are more workable than a vast generalized sadness. They can be processed, acknowledged, and, over time, held with more peace.
+
+**4. Hold Both Truths at the Same Time**
+
+Ambiguous grief asks you to hold two true things simultaneously: your loved one is struggling deeply AND you have a right to your own life. You love them AND you cannot save them. There is real loss AND there is real hope. This is not contradiction — it is the lived reality of loving someone with addiction. Practicing this kind of both/and thinking, often with the help of a therapist, can reduce the internal conflict that keeps many families exhausted.
+
+**5. Invest in Your Own Life — On Purpose**
+
+One of the most counterintuitive but necessary moves in healing ambiguous grief is choosing to live fully — even while your loved one is still struggling. Not abandoning them. Not giving up. Choosing your own joy, your own health, and your own relationships as an act of self-preservation. Your grief does not prove your love. Your life matters too.
+
+**When to Seek Professional Support for Your Grief**
+
+Some grief can be worked through with peer support, community, and self-reflection. Other grief needs professional help — and there is absolutely no shame in that.
+
+Consider reaching out to a therapist or counselor if your grief is interfering with your ability to work, sleep, or care for yourself or your children; if you are experiencing hopelessness that feels persistent and heavy — not just sadness; if you are isolating from people who care about you; if you are using substances, food, or other behaviors to manage the pain; or if the grief has become entangled with your own sense of identity and worth.
+
+A therapist who understands family systems and addiction can help you separate your story from your loved one's story, rebuild your own foundation, and grieve in a way that leads somewhere — rather than circling the same pain indefinitely. Our [LINK:family coaching team:/family-coaching] specializes in exactly this kind of support.
+
+**You Are Allowed to Grieve — and You Are Allowed to Heal**
+
+Ambiguous grief asks something very hard of families: to stay present with loss that has no clean edges, no closure, and no guaranteed end. That is genuinely one of the hardest emotional positions a person can be in.
+
+But you don't have to carry it silently, or alone, or until the situation resolves. You can grieve what has been lost. You can acknowledge the love that makes this hard. You can take care of yourself right now — not as a betrayal of your loved one, but as a commitment to your own life and the people who depend on you.
+
+If you're looking for a place where your grief is understood — where you can connect with others who get it, access coaching from someone who has been in the middle of this work for 20+ years, and find practical support at every step — SoberHelpline.com was built for exactly this. Join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to connect with other families who genuinely understand. You don't have to wait for things to get better over there before things get better for you.`,
+    image: ambiguousGriefLovingSomeoneAddictionImg,
+    keywords: ["grief when loved one is addicted", "ambiguous grief addiction", "ambiguous loss addiction", "grieving someone still alive", "family grief addiction"],
+    tags: ["family education", "grief", "ambiguous loss", "addiction", "mental health"],
+    faqItems: [
+      { question: "Is it normal to grieve a loved one who is still alive?", answer: "Yes — this is called ambiguous grief, and it's extremely common among families navigating a loved one's addiction. You can experience deep mourning for the person they once were, the relationship you expected to have, and the future you imagined together — all while they are still alive. This grief is real, valid, and deserves care." },
+      { question: "How do I explain ambiguous loss to people who don't understand?", answer: "You might say: 'I'm grieving who they used to be and the relationship I thought we'd have. The person is here, but so much of what we had is gone — and I don't know when or if it will come back.' Most people can connect with the feeling of losing something they can't point to. You don't owe anyone a perfect explanation." },
+      { question: "Can grief over a loved one's addiction cause depression?", answer: "Prolonged ambiguous grief can absolutely contribute to depression, anxiety, and secondary traumatic stress. If you notice persistent low mood, loss of interest in activities you once enjoyed, or difficulty functioning, speak with a mental health professional. Grief that goes unnamed and unsupported tends to grow heavier over time." },
+      { question: "Should I go to Al-Anon or therapy — which is better for grief?", answer: "Both can be helpful, and they often work well together. Al-Anon provides community, shared experience, and practical tools for living alongside addiction. Therapy offers a private, deeper space to process your specific history, relationships, and grief. Many families find that a combination of both gives them the most support." },
+      { question: "How do I stop feeling guilty for moving on with my life?", answer: "Living your own life is not abandonment — it's survival. Your wellbeing does not make things worse for your loved one, and it often makes things better: a stable, grounded family member is actually more helpful than a depleted one. The guilt is understandable, but it is not an accurate signal. You are allowed to have joy, health, and hope — regardless of what is happening for them." },
+      { question: "Where can I find support for families of people with addiction?", answer: "SoberHelpline.com offers family education, one-on-one coaching, and a community of people who understand exactly what you're going through. Al-Anon (al-anon.org) holds free meetings worldwide. SMART Recovery Family & Friends and Nar-Anon (nar-anon.org) are also excellent options. You don't have to navigate this alone." }
     ]
   },
 ];
