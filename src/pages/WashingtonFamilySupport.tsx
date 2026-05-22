@@ -50,7 +50,7 @@ const localBusinessSchema = {
   description:
     "Family support and intervention coaching for families affected by addiction. Serving Washington State families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
-  telephone: "+15412415668",
+  telephone: "+14582027900",
   address: {
     "@type": "PostalAddress",
     addressRegion: "WA",
@@ -186,9 +186,9 @@ export default function WashingtonFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:5412415668" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:4582027900" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
-                    (541) 241-5668
+                    (458) 202-7900
                   </a>
                 </div>
               </div>
@@ -520,10 +520,10 @@ export default function WashingtonFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:5412415668">
+                  <a href="tel:4582027900">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      Call (541) 241-5668
+                      Call (458) 202-7900
                     </Button>
                   </a>
                 </div>
@@ -633,10 +633,10 @@ export default function WashingtonFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>

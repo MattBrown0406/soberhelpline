@@ -187,11 +187,11 @@ export default function UnderstandingAddiction() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="tel:541-241-5668"
+              href="tel:458-202-7900"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
               <Phone className="h-5 w-5" />
-              Call (541) 241-5668
+              Call (458) 202-7900
             </a>
             <Link
               to="/addiction-assessment"

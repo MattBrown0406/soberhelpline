@@ -47,7 +47,7 @@ const localBusinessSchema = {
   description:
     "Family support and intervention coaching for families affected by addiction. Serving Texas families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com/texas-family-support",
-  telephone: "+15412415668",
+  telephone: "+14582027900",
   address: {
     "@type": "PostalAddress",
     addressRegion: "TX",
@@ -94,10 +94,10 @@ export default function TexasFamilySupport() {
                   Join Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>
@@ -249,10 +249,10 @@ export default function TexasFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:5412415668">
+                  <a href="tel:4582027900">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      (541) 241-5668
+                      (458) 202-7900
                     </Button>
                   </a>
                 </div>
@@ -291,10 +291,10 @@ export default function TexasFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>

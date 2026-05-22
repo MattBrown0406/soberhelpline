@@ -21,7 +21,7 @@ export const mattBrownPersonSchema = {
     },
   ],
   url: "https://soberhelpline.com/family-consultation",
-  telephone: "+1-541-241-5668",
+  telephone: "+1-458-202-7900",
   knowsAbout: [
     "family addiction support",
     "intervention planning",

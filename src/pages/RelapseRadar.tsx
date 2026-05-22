@@ -483,11 +483,11 @@ export default function RelapseRadar() {
                 {/* Phone CTA */}
                 <div className="text-center py-4">
                   <a
-                    href="tel:5412415668"
+                    href="tel:4582027900"
                     className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold"
                   >
                     <Phone className="w-5 h-5" />
-                    (541) 241-5668
+                    (458) 202-7900
                   </a>
                   <p className="text-xs text-muted-foreground mt-1">Free confidential support</p>
                 </div>

@@ -89,9 +89,9 @@ const ProviderLanding = () => {
                 Back to Home
               </Button>
             </Link>
-            <a href="tel:5412415668" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+            <a href="tel:4582027900" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
-              <span className="font-medium">(541) 241-5668</span>
+              <span className="font-medium">(458) 202-7900</span>
             </a>
           </div>
 
@@ -262,7 +262,7 @@ const ProviderLanding = () => {
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Questions? Call us at <a href="tel:5412415668" className="text-primary hover:underline">(541) 241-5668</a>
+              Questions? Call us at <a href="tel:4582027900" className="text-primary hover:underline">(458) 202-7900</a>
             </p>
           </div>
         </div>

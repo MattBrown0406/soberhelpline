@@ -356,11 +356,11 @@ const RoadmapSuspicion = () => {
                 Weekly Support Group — Monday 7 PM PT
               </Link>
               <a
-                href="tel:5412415668"
+                href="tel:4582027900"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (541) 241-5668
+                Talk to Someone: (458) 202-7900
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Even if you're not sure yet. Especially if you're not sure yet.
@@ -422,10 +422,10 @@ function SuspicionActionCard({
                 )}
 
                 {showSpecialCta === "professional-consultation" && (
-                  <a href="tel:5412415668">
+                  <a href="tel:4582027900">
                     <Button size="sm" className="mt-1">
                       <Phone className="w-4 h-4 mr-1" />
-                      Schedule a Free Consultation: (541) 241-5668
+                      Schedule a Free Consultation: (458) 202-7900
                     </Button>
                   </a>
                 )}

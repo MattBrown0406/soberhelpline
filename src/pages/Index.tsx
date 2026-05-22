@@ -178,7 +178,7 @@ const Index = () => {
     { question: "What is Sober Helpline?", answer: "Sober Helpline connects families with ethical, vetted addiction treatment providers nationwide, offering free resources, education, and support for those affected by addiction." },
     { question: "How do I find a treatment center near me?", answer: "Use our interactive maps to search by state, or enter your zip code to find inpatient treatment, outpatient programs, medical detox, and sober living homes in your area." },
     { question: "Is Sober Helpline free to use?", answer: "Yes, searching our provider directory and accessing educational resources is completely free. We also offer free support resources and optional paid private consultation and coaching options." },
-    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (541) 241-5668 to speak with someone who can help you understand your options." }
+    { question: "How do I know if my loved one needs treatment?", answer: "Take our free Addiction Assessment to evaluate warning signs, or call us at (458) 202-7900 to speak with someone who can help you understand your options." }
   ];
 
   return (
@@ -196,9 +196,9 @@ const Index = () => {
         <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
             <div className="flex md:hidden h-14 items-center justify-between">
-              <a href="tel:5412415668" className="flex items-center gap-2 text-logo-green font-semibold">
+              <a href="tel:4582027900" className="flex items-center gap-2 text-logo-green font-semibold">
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">(541) 241-5668</span>
+                <span className="text-sm">(458) 202-7900</span>
               </a>
               <MobileNav user={user} onLogout={handleLogout} />
             </div>
@@ -263,9 +263,9 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:5412415668" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+                <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
                   <Phone className="w-4 h-4" />
-                  (541) 241-5668
+                  (458) 202-7900
                 </a>
                   <Link to="/family-squares">
                     <Button className="bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
@@ -343,9 +343,9 @@ const Index = () => {
                   <span className="hidden sm:inline text-border">•</span>
                   <span>Private sessions available from $150 when Monday is too far away</span>
                   <span className="hidden sm:inline text-border">•</span>
-                  <a href="tel:5412415668" className="inline-flex items-center gap-2 text-logo-green hover:underline">
+                  <a href="tel:4582027900" className="inline-flex items-center gap-2 text-logo-green hover:underline">
                     <Phone className="w-4 h-4" />
-                    Call 541-241-5668
+                    Call 458-202-7900
                   </a>
                 </div>
 

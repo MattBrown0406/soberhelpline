@@ -29,10 +29,10 @@ const NotFound = () => {
               Go Home
             </Button>
           </Link>
-          <a href="tel:5412415668">
+          <a href="tel:4582027900">
             <Button variant="outline" className="gap-2 w-full sm:w-auto">
               <Phone className="w-4 h-4" />
-              Call (541) 241-5668
+              Call (458) 202-7900
             </Button>
           </a>
         </div>

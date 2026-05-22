@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Las Vegas, Nevada affected by addiction.",
   url: "https://soberhelpline.com/nevada/las-vegas",
-  telephone: "+15412415668",
+  telephone: "+14582027900",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Las Vegas",
@@ -33,7 +33,7 @@ export default function NevadaLasVegasFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Las Vegas, Nevada | Sober Helpline"
-        description="Families in Las Vegas struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 241-5668."
+        description="Families in Las Vegas struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 202-7900."
         jsonLd={localBusinessSchema}
       />
 
@@ -243,8 +243,8 @@ export default function NevadaLasVegasFamilySupport() {
                     <div className="mt-4 text-sm text-muted-foreground">
                       Questions? Call us directly:
                     </div>
-                    <a href="tel:5412415668" className="text-primary font-semibold text-lg hover:underline">
-                      (541) 241-5668
+                    <a href="tel:4582027900" className="text-primary font-semibold text-lg hover:underline">
+                      (458) 202-7900
                     </a>
                   </div>
                 </div>
@@ -285,10 +285,10 @@ export default function NevadaLasVegasFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:5412415668">
+                <a href="tel:4582027900">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
-                    Call (541) 241-5668
+                    Call (458) 202-7900
                   </Button>
                 </a>
               </div>
@@ -337,10 +337,10 @@ export default function NevadaLasVegasFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  (541) 241-5668
+                  (458) 202-7900
                 </Button>
               </a>
             </div>
