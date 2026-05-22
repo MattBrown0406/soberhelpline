@@ -384,7 +384,7 @@ const RoadmapEarlyRecovery = () => {
                       Relapse is not failure. It's a setback in a chronic illness. What matters is how fast you respond and how firmly you hold your boundaries. You already have a plan — use it.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <a href="tel:5412415668">
+                      <a href="tel:4582027900">
                         <Button size="sm" variant="outline">
                           <Phone className="w-4 h-4 mr-1" />
                           Call for Support
@@ -442,11 +442,11 @@ const RoadmapEarlyRecovery = () => {
                 You need this more now than you did during crisis.
               </p>
               <a
-                href="tel:5412415668"
+                href="tel:4582027900"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (541) 241-5668
+                Talk to Someone: (458) 202-7900
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Post-treatment support. We don't disappear after the intervention.
@@ -469,7 +469,7 @@ const RoadmapEarlyRecovery = () => {
             <Button variant="outline" onClick={() => setShowComingSoon(false)}>
               Close
             </Button>
-            <a href="tel:5412415668">
+            <a href="tel:4582027900">
               <Button>
                 <Phone className="w-4 h-4 mr-1" />
                 Call for Guidance

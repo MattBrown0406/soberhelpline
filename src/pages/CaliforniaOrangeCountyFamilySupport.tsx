@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families affected by addiction in Orange County, California.",
   url: "https://soberhelpline.com/california/orange-county",
-  telephone: "+15412415668",
+  telephone: "+14582027900",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Orange County",
@@ -38,7 +38,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Orange County, California | Sober Helpline"
-        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (541) 241-5668."
+        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 202-7900."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -79,10 +79,10 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>
@@ -370,10 +370,10 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>

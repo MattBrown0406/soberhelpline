@@ -169,9 +169,9 @@ export default function FamilyAddictionAnswerDetail() {
                     </Link>
                   </Button>
                   <Button asChild className="mt-3 w-full" size="lg" variant="outline">
-                    <a href="tel:5412415668" onClick={() => {
+                    <a href="tel:4582027900" onClick={() => {
                       trackPhoneClick(`family_answer_${answer.slug}`);
-                      trackClick("phone", "tel:5412415668");
+                      trackClick("phone", "tel:4582027900");
                     }}>
                       <PhoneCall className="h-4 w-4" />
                       Call Sober Helpline

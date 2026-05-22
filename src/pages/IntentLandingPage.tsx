@@ -152,7 +152,7 @@ export default function IntentLandingPage() {
             "@type": "Organization",
             name: "Sober Helpline",
             url: "https://soberhelpline.com",
-            telephone: "+1-541-241-5668",
+            telephone: "+1-458-202-7900",
           },
           areaServed: "US",
           serviceType: config.serviceType,
@@ -188,12 +188,12 @@ export default function IntentLandingPage() {
                   </Button>
                 </div>
                 <a
-                  href="tel:5412415668"
+                  href="tel:4582027900"
                   onClick={() => trackPhoneClick(config.path)}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                 >
                   <Phone className="h-4 w-4" />
-                  Call 541-241-5668
+                  Call 458-202-7900
                 </a>
               </div>
 

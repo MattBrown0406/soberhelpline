@@ -356,7 +356,7 @@ export default function MondayZoomRegistration() {
             "@type": "Organization",
             name: "Sober Helpline",
             url: "https://soberhelpline.com",
-            telephone: "+1-541-241-5668"
+            telephone: "+1-458-202-7900"
           },
           offers: {
             "@type": "Offer",

@@ -291,7 +291,7 @@ const faqSchema = {
     "@type": "Organization",
     "name": "Sober Helpline",
     "url": "https://soberhelpline.com",
-    "telephone": "+1-541-241-5668"
+    "telephone": "+1-458-202-7900"
   }
 };
 
@@ -371,11 +371,11 @@ export default function FAQs() {
               Take the Addiction Assessment
             </Link>
             <a 
-              href="tel:541-241-5668"
+              href="tel:458-202-7900"
               className="inline-flex items-center justify-center gap-2 bg-card border border-border text-foreground px-6 py-3 rounded-lg hover:bg-accent transition-colors"
             >
               <Phone className="h-5 w-5" />
-              Call (541) 241-5668
+              Call (458) 202-7900
             </a>
           </div>
         </div>

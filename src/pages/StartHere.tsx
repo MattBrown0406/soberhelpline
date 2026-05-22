@@ -95,9 +95,9 @@ export default function StartHere() {
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline">
-                    <a href="tel:5412415668" onClick={() => trackPhoneClick("start_here_hero")}>
+                    <a href="tel:4582027900" onClick={() => trackPhoneClick("start_here_hero")}>
                       <PhoneCall className="h-4 w-4" />
-                      Call (541) 241-5668
+                      Call (458) 202-7900
                     </a>
                   </Button>
                 </div>

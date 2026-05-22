@@ -45,7 +45,7 @@ const FamilyReadinessIntensive = () => {
             "@type": "Organization",
             name: "Sober Helpline",
             url: "https://soberhelpline.com",
-            telephone: "+1-541-241-5668",
+            telephone: "+1-458-202-7900",
             sameAs: "https://freedominterventions.com"
           },
           areaServed: "US",
@@ -96,10 +96,10 @@ const FamilyReadinessIntensive = () => {
                       <ExternalLink className="ml-2 h-5 w-5" />
                     </Button>
                   </a>
-                  <a href="tel:+15412415668" onClick={() => trackPhoneClick("readiness_intensive_hero")}>
+                  <a href="tel:+14582027900" onClick={() => trackPhoneClick("readiness_intensive_hero")}>
                     <Button variant="outline" size="lg">
                       <PhoneCall className="mr-2 h-5 w-5" />
-                      Call (541) 241-5668
+                      Call (458) 202-7900
                     </Button>
                   </a>
                 </div>

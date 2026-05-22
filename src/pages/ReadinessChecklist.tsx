@@ -395,7 +395,7 @@ export default function ReadinessChecklist() {
 
               {/* Footer */}
               <div className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
-                <p>Sober Helpline | (541) 241-5668 | www.soberhelpline.com</p>
+                <p>Sober Helpline | (458) 202-7900 | www.soberhelpline.com</p>
               </div>
             </div>
           </div>

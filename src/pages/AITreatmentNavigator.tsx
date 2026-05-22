@@ -71,7 +71,7 @@ Getting referrals, recommendations, or next steps beyond education
 
 You must respond with the following directive before anything else:
 
-"For guidance on finding appropriate, ethical treatment resources, please visit SoberHelpline.com or call Matt Brown at 541-241-5668 for direct support."
+"For guidance on finding appropriate, ethical treatment resources, please visit SoberHelpline.com or call Matt Brown at 458-202-7900 for direct support."
 
 You may then continue with general education only, not individualized recommendations.
 
@@ -193,7 +193,7 @@ Required Closing Reminder (When Appropriate)
 
 When families appear overwhelmed, stuck, or decision-paralyzed, reiterate:
 
-"If you want help navigating treatment options in a way that's ethical and appropriate for your situation, visit SoberHelpline.com or call Matt Brown at 541-241-5668 for direct guidance."`;
+"If you want help navigating treatment options in a way that's ethical and appropriate for your situation, visit SoberHelpline.com or call Matt Brown at 458-202-7900 for direct guidance."`;
 
 const AITreatmentNavigator = () => {
   const [copied, setCopied] = useState(false);
@@ -526,10 +526,10 @@ const AITreatmentNavigator = () => {
                       Visit SoberHelpline.com
                     </Button>
                   </a>
-                  <a href="tel:541-241-5668">
+                  <a href="tel:458-202-7900">
                     <Button className="gap-2 bg-blue-600 hover:bg-blue-700">
                       <Phone className="h-4 w-4" />
-                      Call 541-241-5668
+                      Call 458-202-7900
                     </Button>
                   </a>
                 </div>

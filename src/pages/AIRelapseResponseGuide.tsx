@@ -722,9 +722,9 @@ const AIRelapseResponseGuide = () => {
                       Schedule a Consultation
                     </Button>
                   </Link>
-                  <a href="tel:541-241-5668">
+                  <a href="tel:458-202-7900">
                     <Button size="lg" variant="outline" className="border-logo-green text-logo-green hover:bg-logo-green/10">
-                      Call 541-241-5668
+                      Call 458-202-7900
                     </Button>
                   </a>
                 </div>

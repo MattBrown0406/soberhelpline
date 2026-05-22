@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Santa Fe, New Mexico affected by addiction.",
   url: "https://soberhelpline.com/new-mexico/santa-fe",
-  telephone: "+15412415668",
+  telephone: "+14582027900",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Santa Fe",
@@ -33,7 +33,7 @@ export default function NewMexicoSantaFeFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Santa Fe, New Mexico | Sober Helpline"
-        description="Families in Santa Fe struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (541) 241-5668."
+        description="Families in Santa Fe struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 202-7900."
         jsonLd={localBusinessSchema}
       />
 
@@ -252,10 +252,10 @@ export default function NewMexicoSantaFeFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:5412415668">
+                  <a href="tel:4582027900">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      (541) 241-5668
+                      (458) 202-7900
                     </Button>
                   </a>
                 </div>
@@ -321,10 +321,10 @@ export default function NewMexicoSantaFeFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:5412415668">
+              <a href="tel:4582027900">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (541) 241-5668
+                  Call (458) 202-7900
                 </Button>
               </a>
             </div>
