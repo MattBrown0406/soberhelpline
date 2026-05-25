@@ -33,7 +33,7 @@ export default function AnalyticsScripts() {
               function gtag(){dataLayer.push(arguments);}
               window.gtag = window.gtag || gtag;
               gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+              gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
             `}
           </script>
         </>

@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 
 const secretsDir = process.env.GSC_SECRETS_DIR || "/Users/matthewbrown/Secrets";
-const tokenPath = process.env.GSC_TOKEN_PATH || path.join(secretsDir, "freedominterventions-gsc-token.json");
+const tokenPath = process.env.GSC_TOKEN_PATH || path.join(secretsDir, "soberhelpline-gsc-token.json");
 const reportsDir = process.env.GSC_REPORTS_DIR || "/Users/matthewbrown/Desktop/SH/SEO";
 const defaultSiteUrl = "sc-domain:soberhelpline.com";
 const scope = "https://www.googleapis.com/auth/webmasters.readonly";
