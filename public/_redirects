@@ -1,1 +1,8 @@
+# Canonicalize Sober Helpline URLs for search engines.
+# Cloudflare Pages / Netlify-style hosts read this file at deploy time.
+
+http://soberhelpline.com/* https://soberhelpline.com/:splat 301
+http://www.soberhelpline.com/* https://soberhelpline.com/:splat 301
+https://www.soberhelpline.com/* https://soberhelpline.com/:splat 301
+
 /* /index.html 200
