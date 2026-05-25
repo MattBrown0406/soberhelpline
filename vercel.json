@@ -1,8 +1,21 @@
 {
-  "rewrites": [
+  "cleanUrls": true,
+  "redirects": [
     {
-      "source": "/((?!assets/|favicon.ico|robots.txt|sitemap.xml|llms.txt|llms-full.txt).*)",
-      "destination": "/index.html"
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.soberhelpline.com" }],
+      "destination": "https://soberhelpline.com/:path*",
+      "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/auth/:path*", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/provider-application/:path*", "destination": "/index.html" },
+    { "source": "/provider-info/:path*", "destination": "/index.html" },
+    { "source": "/consultation-provider-dashboard/:path*", "destination": "/index.html" },
+    { "source": "/join-meeting/:path*", "destination": "/index.html" },
+    { "source": "/subscription/:path*", "destination": "/index.html" },
+    { "source": "/survey/:path*", "destination": "/index.html" }
   ]
 }

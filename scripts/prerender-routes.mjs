@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { prerenderPages, SITE_URL } from './seo-routes.mjs';
+import { prerenderPages, SITE_URL, excludedSitemapRoutes } from './seo-routes.mjs';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
@@ -8,6 +8,9 @@ const baseTemplatePath = path.join(distDir, 'index.html');
 const baseTemplate = await fs.readFile(baseTemplatePath, 'utf8');
 const familyAnswersPath = path.join(root, 'src', 'data', 'familyAddictionAnswers.ts');
 const blogPostsPath = path.join(root, 'src', 'data', 'blogPosts.ts');
+const appPath = path.join(root, 'src', 'App.tsx');
+const routeMetadataPath = path.join(root, 'src', 'data', 'routeMetadata.ts');
+const pagesDir = path.join(root, 'src', 'pages');
 const distAssetsDir = path.join(distDir, 'assets');
 
 const escapeHtml = (value) => String(value || '')
@@ -120,7 +123,100 @@ const familyAnswerPages = [...familyAnswersSource.matchAll(/slug:\s*"([^"]+)"[\s
   });
 
 const blogPostPages = await getBlogPostPages();
-const allPrerenderPages = [...prerenderPages, ...blogPostPages, ...familyAnswerPages];
+
+const titleCaseFromRoute = (route) => route
+  .replace(/^\//, '')
+  .split('/')
+  .pop()
+  ?.split('-')
+  .filter(Boolean)
+  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ') || 'Sober Helpline';
+
+const getRouteMetadataPages = async () => {
+  let appSource = '';
+  let metadataSource = '';
+
+  try {
+    appSource = await fs.readFile(appPath, 'utf8');
+    metadataSource = await fs.readFile(routeMetadataPath, 'utf8');
+  } catch {
+    return [];
+  }
+
+  const componentFiles = new Map();
+
+  for (const [, component, pageFile] of appSource.matchAll(/import\s+([A-Za-z0-9_]+)\s+from\s+["']\.\/pages\/([^"']+)["']/g)) {
+    componentFiles.set(component, pageFile);
+  }
+
+  for (const [, component, pageFile] of appSource.matchAll(/const\s+([A-Za-z0-9_]+)\s*=\s*React\.lazy\(\(\)\s*=>\s*import\(["']\.\/pages\/([^"']+)["']\)\)/g)) {
+    componentFiles.set(component, pageFile);
+  }
+
+  for (const [, alias, target] of appSource.matchAll(/const\s+([A-Za-z0-9_]+)\s*=\s*([A-Za-z0-9_]+);/g)) {
+    if (componentFiles.has(target)) {
+      componentFiles.set(alias, componentFiles.get(target));
+    }
+  }
+
+  const metadataByRoute = new Map();
+  for (const [, route, block] of metadataSource.matchAll(/['"]([^'"]+)['"]:\s*\{([\s\S]*?)\n\s*\}/g)) {
+    const title = getStringField(block, 'title');
+    const description = getStringField(block, 'description');
+    if (title && description) {
+      metadataByRoute.set(route, { title, description });
+    }
+  }
+
+  const pages = [];
+  const seen = new Set();
+
+  for (const [, route, component] of appSource.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<([A-Za-z0-9_]+)/g)) {
+    if (!route.startsWith('/') || route.includes(':') || excludedSitemapRoutes.has(route) || route.startsWith('/subscription/')) continue;
+    if (seen.has(route)) continue;
+    seen.add(route);
+
+    const pageFile = componentFiles.get(component);
+    const pagePath = pageFile ? path.join(pagesDir, `${pageFile}.tsx`) : '';
+    let pageSource = '';
+    try {
+      pageSource = pagePath ? await fs.readFile(pagePath, 'utf8') : '';
+    } catch {
+      pageSource = '';
+    }
+
+    const seoBlock = pageSource.match(/<SEOHead\b([\s\S]*?)(?:\/?>)/)?.[1] || '';
+    const helmetTitle = pageSource.match(/<title>\s*([^<]+?)\s*<\/title>/)?.[1] || '';
+    const h1 = pageSource.match(/<h1[^>]*>\s*([^<]+?)\s*<\/h1>/)?.[1] || '';
+    const title = getStringField(seoBlock, 'title')
+      || helmetTitle
+      || metadataByRoute.get(route)?.title
+      || `${titleCaseFromRoute(route)} | Sober Helpline`;
+    const description = getStringField(seoBlock, 'description')
+      || metadataByRoute.get(route)?.description
+      || `Sober Helpline resources and family addiction support for ${titleCaseFromRoute(route)}.`;
+    const heading = h1 || title.replace(/\s*\|\s*Sober Helpline\s*$/i, '');
+
+    pages.push({
+      route,
+      title,
+      description: truncateDescription(description),
+      noscriptHtml: `<main><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(description)}</p><p><a href="${SITE_URL}${route === '/' ? '/' : route}">Open this Sober Helpline page</a></p></main>`,
+    });
+  }
+
+  return pages;
+};
+
+const appRoutePages = await getRouteMetadataPages();
+const explicitPrerenderRoutes = new Set([...prerenderPages, ...blogPostPages, ...familyAnswerPages].map((page) => page.route));
+const allPrerenderPages = [
+  ...prerenderPages,
+  ...appRoutePages.filter((page) => !explicitPrerenderRoutes.has(page.route)),
+  ...blogPostPages,
+  ...familyAnswerPages,
+];
 
 const socialImageTags = (page) => page.image ? `
     <meta property="og:image" content="${escapeHtml(page.image)}">
@@ -140,11 +236,20 @@ for (const page of allPrerenderPages) {
   const canonicalUrl = `${SITE_URL}${page.route === '/' ? '/' : page.route}`;
   const targetDir = page.route === '/' ? distDir : path.join(distDir, page.route.replace(/^\//, ''));
   const targetPath = path.join(targetDir, 'index.html');
+  const cleanUrlPath = page.route === '/' ? null : `${targetDir}.html`;
 
   try {
     const existingHtml = await fs.readFile(targetPath, 'utf8');
     if (existingHtml.includes('data-preserve-static-route="true"')) {
-      console.log(`Preserved static HTML shell for ${page.route}`);
+      const normalizedHtml = existingHtml
+        .replace(/\s*<link rel="canonical" href="[^"]*"\s*\/?>(?![\s\S]*<link rel="canonical")/g, '')
+        .replace('</head>', `    <link rel="canonical" href="${canonicalUrl}">\n</head>`);
+      await fs.writeFile(targetPath, normalizedHtml);
+      if (cleanUrlPath) {
+        await fs.mkdir(path.dirname(cleanUrlPath), { recursive: true });
+        await fs.writeFile(cleanUrlPath, normalizedHtml);
+      }
+      console.log(`Preserved static HTML shell for ${page.route} with canonical ${canonicalUrl}`);
       continue;
     }
   } catch {
@@ -152,20 +257,24 @@ for (const page of allPrerenderPages) {
   }
 
   let html = baseTemplate
+    .replace(/\s*<link rel="canonical" href="[^"]*"\s*\/?>(?![\s\S]*<link rel="canonical")/g, '')
     .replace(/\s*<meta property="og:image[^>]*>\n?/g, '')
     .replace(/\s*<meta name="twitter:image[^>]*>\n?/g, '')
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(page.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="description")/, `<meta name="description" content="${escapeHtml(page.description)}">`)
-    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>(?![\s\S]*<link rel="canonical")/, `<link rel="canonical" href="${canonicalUrl}">`)
     .replace(/<meta property="og:url" content="[^"]*"\s*\/?>(?![\s\S]*<meta property="og:url")/, `<meta property="og:url" content="${canonicalUrl}">`)
     .replace(/<meta property="og:title" content="[^"]*"\s*\/?>(?![\s\S]*<meta property="og:title")/, `<meta property="og:title" content="${escapeHtml(page.title)}">`)
     .replace(/<meta property="og:description" content="[^"]*"\s*\/?>(?![\s\S]*<meta property="og:description")/, `<meta property="og:description" content="${escapeHtml(page.description)}">`)
     .replace(/<meta name="twitter:title" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="twitter:title")/, `<meta name="twitter:title" content="${escapeHtml(page.title)}">`)
     .replace(/<meta name="twitter:description" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="twitter:description")/, `<meta name="twitter:description" content="${escapeHtml(page.description)}">`)
-    .replace('</head>', `${socialImageTags(page)}${articleTags(page)}\n</head>`)
+    .replace('</head>', `    <link rel="canonical" href="${canonicalUrl}">${socialImageTags(page)}${articleTags(page)}\n</head>`)
     .replace('</body>', `<noscript>${page.noscriptHtml}</noscript></body>`);
 
   await fs.mkdir(targetDir, { recursive: true });
   await fs.writeFile(targetPath, html);
+  if (cleanUrlPath) {
+    await fs.mkdir(path.dirname(cleanUrlPath), { recursive: true });
+    await fs.writeFile(cleanUrlPath, html);
+  }
   console.log(`Generated crawlable HTML shell for ${page.route}`);
 }
