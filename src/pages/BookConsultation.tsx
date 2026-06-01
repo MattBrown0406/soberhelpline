@@ -312,8 +312,6 @@ const BookConsultation = () => {
     const sortedProviders = [...(data || [])].sort((a, b) => {
       if (a.full_name === "Matt Brown") return -1;
       if (b.full_name === "Matt Brown") return 1;
-      if (a.full_name === "Katie Barr") return -1;
-      if (b.full_name === "Katie Barr") return 1;
       return a.full_name.localeCompare(b.full_name);
     });
 
