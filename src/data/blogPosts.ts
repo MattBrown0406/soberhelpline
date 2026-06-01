@@ -141,6 +141,119 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 117,
+    slug: "rebuilding-identity-after-living-with-addiction",
+    seoTitle: "Rebuilding Identity After Living With Addiction | Sober Helpline",
+    metaDescription: "Lost yourself while supporting a loved one's addiction? Learn how to rebuild your identity, rediscover your sense of self, and reclaim your life — one step at a time.",
+    title: "Rebuilding Your Identity After Years of Living Around Someone's Addiction",
+    category: "Family Recovery",
+    author: "Matt Brown",
+    date: "2026-05-25",
+    image: rebuildingIdentityAfterAddictionImg,
+    keywords: ["rebuilding identity after living with addiction", "losing yourself to a loved one's addiction", "family recovery identity", "caretaker burnout addiction", "reclaiming self after addiction", "enmeshment addiction family"],
+    excerpt: "When a loved one struggles with addiction, the people around them slowly disappear. Here's how to rebuild your identity, reclaim your sense of self, and come back to your own life — one small step at a time.",
+    content: `When a loved one struggles with addiction, something quiet and gradual happens to the people around them: they slowly disappear.
+
+Not physically — you're still there, still showing up, still trying. But somewhere along the way, your own interests, friendships, dreams, and even preferences got set aside. Your mental energy became consumed by their next crisis. Your schedule was built around their needs. Your emotional bandwidth was used up before you ever got to yourself. Rebuilding your identity after living around addiction is one of the least-discussed aspects of family recovery — and one of the most important.
+
+If you've been a caretaker, a worrier, an enabler, or a fixer for someone struggling with addiction, there's a good chance you've lost touch with who you are outside of that role. This article is about finding your way back.
+
+## How Living with Addiction Gradually Erodes Your Sense of Self
+
+Identity erosion in families affected by addiction is rarely dramatic. It happens in small steps, over years, in ways that feel reasonable at the time.
+
+You cancel plans because something came up. You stop pursuing a hobby because you're too tired or too worried. You don't talk about what's going on with friends because it feels complicated — or disloyal. You reshape your mood, your schedule, and your choices around the unpredictability of someone else's behavior.
+
+Over time, these adjustments compound. Psychologists sometimes call this "enmeshment" — a blurring of boundaries between your emotional state and someone else's. In enmeshed relationships, you feel good when they're doing well and devastated when they're struggling. Your identity becomes tethered to theirs.
+
+This isn't weakness. It's a natural response to chronic stress within a close relationship. But it does leave families in a painful place: when the loved one gets help — or even when they don't — family members often realize they don't quite know who they are anymore.
+
+## Signs You've Lost Touch with Your Own Identity
+
+How do you know if this has happened to you? These are some of the most common signs that your sense of self has become defined by your role as a caretaker:
+
+- You struggle to answer the question "What do I enjoy?" or "What do I want?"
+- Most of your conversations — even with friends — circle back to your loved one's situation
+- Your sense of worth is closely tied to whether your loved one is doing well or poorly
+- You feel guilty when you do something just for yourself
+- You've stopped pursuing friendships, hobbies, or personal goals
+- When you imagine the future, you can't picture it without your loved one's addiction as a central factor
+
+None of these signs mean you're broken or have done something wrong. They mean you've been under enormous, sustained stress — and that rebuilding your identity after living with addiction is now part of your own healing.
+
+## Why Reclaiming Who You Are Is Not Selfish — It's Essential
+
+Many family members resist focusing on themselves because it feels like a betrayal. If my loved one is still suffering, how can I go take a painting class or reconnect with old friends?
+
+Here's the reframe: you cannot be a sustainable source of support for anyone if you have no self left. Caretakers who have lost their identity are more likely to burn out, make reactive decisions, enable harmful behavior, and eventually reach a point of total depletion.
+
+Rebuilding your identity isn't about abandoning your loved one — it's about becoming someone who has the stability and groundedness to actually help them long-term. It also models something crucial: that recovery and growth are possible, that a full life is available, that there is more to existence than the addiction.
+
+In [Al-Anon](https://al-anon.org/) and other family support programs, this concept is often called "keeping the focus on yourself." It sounds counterintuitive. But it works — for you and, indirectly, for them.
+
+## Practical Steps to Rediscover Your Identity
+
+Rebuilding a sense of self doesn't happen through one big revelation. It happens through small, repeated choices to show up for your own life. Here's where to start:
+
+### Start with curiosity, not pressure
+
+Instead of asking yourself "Who am I?" — which can feel enormous — ask smaller questions: What did I used to love doing before all of this? What have I been quietly curious about? When was the last time I felt like myself, and what was I doing? These questions open doors without demanding immediate answers.
+
+### Reclaim small pieces of time as your own
+
+Even 20 to 30 minutes a day that belongs entirely to you — a walk, a book, a neglected hobby — begins to rebuild the neural pathways associated with pleasure, autonomy, and self-direction. Start small. Protect that time like it matters, because it does.
+
+### Reconnect with relationships outside the addiction dynamic
+
+Isolation is one of the most damaging side effects of living around addiction. Friendships wither because you don't know what to say, because you're exhausted, or because your life feels defined by something you can't easily explain. Reach back out. You don't have to explain everything. Just showing up is enough.
+
+### Work with a therapist or family coach who focuses on you
+
+Family-focused support — whether through individual therapy, a family coach, or a program like Sober Helpline — can help you begin to separate your story from your loved one's story. This is not about assigning blame; it's about recognizing that you have a life that deserves attention and direction.
+
+### Consider a support group for family members
+
+Being around other people who understand what you've been through — without judgment — is extraordinarily restorative. Programs like [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/) help you realize you're not alone, not crazy, and not too far gone to reclaim yourself. The shared experience of others who've walked this path is one of the most underused tools available to family members.
+
+## What Identity Recovery Actually Looks Like Over Time
+
+It's rarely linear, and it rarely feels dramatic from the inside. Rebuilding identity after addiction's impact is slow, quiet work. One week you realize you've started cooking again and genuinely enjoyed it. A month later, you notice you've gone a whole afternoon without checking your phone for updates on your loved one. Eventually, you find yourself making a decision — about your own life — based on what you actually want.
+
+These moments matter. They are evidence that you're coming back to yourself.
+
+You may also encounter grief in this process — grief for the years that felt consumed, for the version of yourself you set aside, for the life you imagined. That grief is real and worth honoring. It's not self-pity; it's acknowledgment of what this has cost you. And acknowledging it is part of moving through it.
+
+## You Still Have a Life to Live
+
+Living around addiction can make it feel like your own story is on hold — waiting for your loved one to get better, waiting for the next crisis to pass, waiting until it's safe to want things again. The hard truth is that waiting doesn't work. Your life is happening right now, regardless of what your loved one is doing.
+
+Rebuilding your identity after years of living around addiction is not a luxury — it's a necessity. And it's available to you, starting today, with whatever small step you can take. You don't have to know exactly who you are yet. You just have to be willing to find out.
+
+Sober Helpline offers family coaching, education, and community support for people exactly like you — people who have given so much of themselves and are ready to start coming back. Explore our free Monday night Family Squares calls, our membership community, and one-on-one coaching sessions. You deserve support too.
+
+## Frequently Asked Questions
+
+### How do I start rebuilding my identity after a loved one's addiction?
+
+Start with small acts of curiosity and self-reclamation. Revisit activities you used to enjoy, reconnect with friends you've drifted from, and carve out even brief daily time that belongs entirely to you. Working with a therapist or family coach can also help you begin separating your identity from your caretaking role.
+
+### Is it normal to feel like I've lost myself while supporting someone with addiction?
+
+Yes — and it's far more common than people realize. When you live close to someone with addiction, chronic stress and emotional enmeshment can gradually erode your sense of self. Recognizing this is the first step toward reclaiming it. You haven't lost yourself permanently; you've just set yourself aside.
+
+### Can I focus on myself while my loved one is still struggling with addiction?
+
+Not only can you — you should. Focusing on your own healing, identity, and well-being does not mean abandoning your loved one. It means becoming a more grounded, stable, and sustainable source of support. Family members who neglect themselves are more likely to burn out, enable harmful behavior, and make fear-based decisions.
+
+### How long does it take to rebuild your sense of self after living with addiction?
+
+There's no fixed timeline. Identity recovery is gradual and nonlinear — some weeks feel like progress, others feel like regression. Most people begin noticing meaningful shifts within a few months of consistently prioritizing their own well-being, especially when supported by therapy, coaching, or a peer community like [Al-Anon](https://al-anon.org/).
+
+### What resources help families of addicted individuals reconnect with themselves?
+
+[Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/) groups offer peer support from people who deeply understand this experience. Individual therapy, family coaching programs like those at Sober Helpline, and structured self-care practices all contribute to identity recovery. The most important ingredient is the willingness to treat your own life as worth investing in.`,
+  },
+  {
     id: 116,
     slug: "how-addiction-affects-decision-making-brain",
     seoTitle: "How Addiction Affects Decision-Making in the Brain",
