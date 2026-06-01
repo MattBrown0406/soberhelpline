@@ -1,5 +1,6 @@
-import { ExternalLink, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import familyBridgeLogo from "@/assets/family-bridge-logo.png";
+import AppStoreBadge from "@/components/AppStoreBadge";
 
 const FamilyBridgeBanner = () => {
   const features = [
@@ -12,12 +13,7 @@ const FamilyBridgeBanner = () => {
   ];
 
   return (
-    <a
-      href="https://FamilyBridgeApp.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full group"
-    >
+    <div className="block w-full">
       <div className="bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30 overflow-hidden">
         <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
           {/* Logo and Main Text */}
@@ -56,15 +52,12 @@ const FamilyBridgeBanner = () => {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0">
-            <span className="text-white font-semibold text-sm md:text-base whitespace-nowrap">
-              Start Your Journey
-            </span>
-            <ExternalLink className="h-4 w-4 text-white" />
+          <div className="flex-shrink-0">
+            <AppStoreBadge height={44} />
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 

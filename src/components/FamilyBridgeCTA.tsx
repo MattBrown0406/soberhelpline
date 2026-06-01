@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import familyBridgeLogo from "@/assets/family-bridge-logo.png";
 import { trackConversionEvent } from "@/lib/conversionTracking";
+import AppStoreBadge from "@/components/AppStoreBadge";
 
 interface FamilyBridgeCTAProps {
   variant?: "banner" | "card" | "inline" | "post-completion" | "forum" | "coaching";
@@ -18,7 +19,7 @@ const FamilyBridgeCTA = ({ variant = "card", className = "" }: FamilyBridgeCTAPr
   // Banner variant (used on homepage)
   if (variant === "banner") {
     return (
-      <div className={`bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30 cursor-pointer group ${className}`} onClick={handleClick}>
+      <div className={`bg-gradient-to-r from-[#1a8a8a] via-[#1f9e9e] to-[#1a8a8a] rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#2bb3b3]/30 ${className}`}>
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="flex items-center gap-4 flex-shrink-0">
             <div className="bg-white rounded-lg p-3 shadow-md">
@@ -35,9 +36,8 @@ const FamilyBridgeCTA = ({ variant = "card", className = "" }: FamilyBridgeCTAPr
               Our AI-powered FIIS technology provides real-time conversation coaching and recovery tracking.
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-5 py-2.5 transition-colors group-hover:scale-105 duration-200 flex-shrink-0">
-            <span className="text-white font-semibold text-sm whitespace-nowrap">Try FamilyBridge</span>
-            <ExternalLink className="h-4 w-4 text-white" />
+          <div className="flex-shrink-0">
+            <AppStoreBadge height={44} />
           </div>
         </div>
       </div>
