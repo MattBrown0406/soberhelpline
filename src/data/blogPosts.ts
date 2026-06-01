@@ -133,6 +133,7 @@ import addictionChronicDiseaseFamilyImg from "@/assets/blog-addiction-chronic-di
 import healthyBoundariesAddictedFamilyImg from "@/assets/blog-healthy-boundaries-addicted-family-member.jpg";
 import productiveConversationAboutAddictionImg from "@/assets/blog-productive-conversation-about-addiction.jpg";
 import ambiguousGriefLovingSomeoneAddictionImg from "@/assets/blog-ambiguous-grief-loving-someone-addiction.jpg";
+import rebuildingIdentityAfterAddictionImg from "@/assets/blog-rebuilding-identity-after-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
