@@ -304,10 +304,18 @@ const BookConsultation = () => {
   };
 
   const loadProviders = async () => {
-    const { data } = await supabase
+    // Anonymous visitors only have column-level SELECT access to public-safe
+    // provider fields. Selecting "*" includes private payout/notification
+    // columns and causes PostgREST to reject the whole query, which made the
+    // public booking page show "No providers are currently available."
+    const { data, error } = await supabase
       .from("consultation_providers")
-      .select("*")
+      .select("id, user_id, full_name, title, bio, photo_url, specialties, session_rate, session_duration_minutes, status, created_at, updated_at, timezone")
       .eq("status", "active");
+
+    if (error) {
+      console.error("Failed to load consultation providers", error);
+    }
 
     const sortedProviders = [...(data || [])].sort((a, b) => {
       if (a.full_name === "Matt Brown") return -1;
