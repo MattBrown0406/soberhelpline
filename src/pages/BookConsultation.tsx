@@ -311,7 +311,8 @@ const BookConsultation = () => {
     const { data, error } = await supabase
       .from("consultation_providers")
       .select("id, user_id, full_name, title, bio, photo_url, specialties, session_rate, session_duration_minutes, status, created_at, updated_at, timezone")
-      .eq("status", "active");
+      .eq("status", "active")
+      .neq("full_name", "Katie Barr");
 
     if (error) {
       console.error("Failed to load consultation providers", error);
