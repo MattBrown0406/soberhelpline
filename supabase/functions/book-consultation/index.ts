@@ -164,11 +164,11 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Failed to create booking' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
 
-    // Process each booking (Zoom + emails) by calling the existing edge function logic
-    // We'll do it inline here using the same approach
+    // Process each booking (Zoom + emails). If processing fails, the paid booking
+    // remains recorded but the response carries a warning, and the recovery job will retry.
+    const processingResults: any[] = [];
     for (const booking of (bookingsData || [])) {
       try {
-        // Call process-consultation-booking with service role
         const processUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/process-consultation-booking`;
         const res = await fetch(processUrl, {
           method: 'POST',
@@ -178,13 +178,22 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({ bookingId: booking.id }),
         });
+        const text = await res.text();
+        let payload: any = null;
+        try { payload = text ? JSON.parse(text) : null; } catch { payload = { raw: text }; }
+
+        processingResults.push({ bookingId: booking.id, ok: res.ok, status: res.status, payload });
         if (!res.ok) {
-          console.error('Process booking error:', await res.text());
+          console.error('Process booking error:', text);
         }
       } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        processingResults.push({ bookingId: booking.id, ok: false, status: 0, error: message });
         console.error('Process booking call error:', err);
       }
     }
+
+    const processingFailed = processingResults.some((r) => !r.ok);
 
     return new Response(
       JSON.stringify({
@@ -193,6 +202,11 @@ Deno.serve(async (req) => {
         isMember,
         amountCharged: totalAmount,
         coachingPlanId,
+        processingComplete: !processingFailed,
+        processingResults,
+        warning: processingFailed
+          ? 'Booking/payment succeeded, but Zoom/email processing needs retry. Client was not sent a fake Zoom link.'
+          : undefined,
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
