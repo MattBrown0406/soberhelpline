@@ -135,12 +135,114 @@ import productiveConversationAboutAddictionImg from "@/assets/blog-productive-co
 import ambiguousGriefLovingSomeoneAddictionImg from "@/assets/blog-ambiguous-grief-loving-someone-addiction.jpg";
 import rebuildingIdentityAfterAddictionImg from "@/assets/blog-rebuilding-identity-after-addiction.jpg";
 import evidenceBasedAddictionTreatmentImg from "@/assets/blog-evidence-based-addiction-treatment.jpg";
+import evaluateAlumniAftercareRehabImg from "@/assets/blog-evaluate-alumni-aftercare-rehab.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 119,
+    slug: "how-to-evaluate-alumni-aftercare-support-rehab",
+    seoTitle: "How to Evaluate Alumni & Aftercare Support at Rehab | Sober Helpline",
+    metaDescription: "Learn how to evaluate a rehab's alumni and aftercare programs before you choose — because long-term recovery depends on what happens after discharge.",
+    title: "How to Evaluate a Rehab's Alumni and Aftercare Support Before You Choose",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-06-04",
+    image: evaluateAlumniAftercareRehabImg,
+    keywords: ["how to evaluate alumni support at rehab", "rehab aftercare programs", "alumni program addiction treatment", "discharge planning rehab", "questions to ask a treatment center", "relapse prevention after rehab"],
+    excerpt: "When families compare rehabs, they rarely ask about what happens after discharge — but alumni and aftercare support may be the strongest predictor of long-term recovery.",
+    content: `When families start searching for addiction treatment, they spend most of their energy on the front end: Does this place take our insurance? What does the facility look like? How soon can my loved one get in? Those are reasonable questions. But there's one area families almost never think to ask about — and it may matter more than anything else when it comes to long-term recovery.
+
+Alumni support and aftercare programming. What a treatment center offers your loved one after discharge is one of the strongest predictors of whether treatment sticks. If you're comparing rehabs and you haven't asked about this yet, keep reading.
+
+**Why Aftercare Is Where Recovery Actually Begins**
+
+Most people think of the treatment stay as the hard part and assume things get easier once a person comes home. In reality, the first 30 to 90 days after discharge are statistically the highest-risk period for relapse. The brain is still healing. Old environments and relationships come back into the picture. The structured support of inpatient or residential care is suddenly gone.
+
+A strong aftercare plan is what bridges the gap between the controlled environment of treatment and real life. This isn't a bonus feature — it's a clinical necessity. Research consistently shows that longer engagement in continuing care following treatment is associated with better outcomes. The length of sobriety after treatment correlates less with what happened inside rehab and more with what support was in place when someone got out.
+
+This is why evaluating a treatment center's aftercare and alumni program before you commit to a facility is one of the smartest things a family can do.
+
+**What Does a Strong Aftercare Plan Actually Look Like?**
+
+Not all aftercare is created equal. A solid aftercare plan is personalized, specific, and already in motion before the person walks out the door. Here's what to look for:
+
+- Step-down programming: A good facility will help transition your loved one from a higher level of care (like residential treatment) to a lower one (like an intensive outpatient program, or IOP) rather than discharging straight to home. This gradual step-down is standard in quality programs.
+- Outpatient follow-up services: Does the facility offer its own IOP or partial hospitalization program (PHP) after residential care? Or do they have strong referral relationships with outpatient providers in your loved one's home community?
+- Relapse prevention planning: Before discharge, the clinical team should sit down with your loved one — and ideally your family — to identify specific triggers, high-risk situations, and a written plan for what to do if cravings hit or a relapse occurs.
+- Sober living connections: For many people, going directly home after treatment isn't the right move. Ask if the center has sober living referrals they trust, and whether they help coordinate that placement.
+- Connection to community support: Whether it's [LINK:AA:https://www.aa.org/], [LINK:NA:https://na.org/], SMART Recovery, or faith-based groups, the best facilities make sure someone is connected to ongoing peer support before they leave.
+
+**What Should You Ask About the Alumni Program?**
+
+An alumni program is the ongoing community a treatment center maintains with people who have completed their program. Strong alumni programs are a sign that a facility is invested in long-term outcomes, not just filling beds.
+
+Here are specific questions to ask when evaluating any program:
+
+- Do you have a formal alumni program, and how active is it?
+- How do you stay in contact with alumni after discharge? (Phone check-ins? App? Email?)
+- Do alumni have access to ongoing support groups, events, or reunions?
+- What percentage of your alumni remain engaged with the program at 90 days? At one year?
+- Do you track long-term recovery outcomes, and can you share that data?
+- If someone relapses after leaving your program, what support do you offer?
+
+A program that can't answer these questions — or that deflects — is telling you something. Quality programs track their alumni because they're invested in what happens after discharge. They'll be able to speak to this clearly and with specific examples.
+
+**Red Flags to Watch For in Aftercare Planning**
+
+Some facilities are better at marketing their amenities than at doing the actual clinical work of preparing someone for life after treatment. Watch for these warning signs:
+
+- Vague answers about aftercare: If the admissions team can't describe a specific, individualized discharge process, the program likely doesn't have one.
+- One-size-fits-all discharge plans: Every person's situation is different. A plan that looks identical for every client is a plan that wasn't really made for your loved one.
+- No tracking of alumni outcomes: If a program doesn't follow up with patients after discharge, they have no real idea whether their treatment works long-term.
+- Discharge to home with no step-down: Jumping from residential treatment straight to an unsupported home environment — especially in the early weeks — is high-risk and should be clinically justified, not automatic.
+- Pressure to "trust the process" without specifics: Confidence is good. Vagueness is not. You should be able to get clear answers about what the aftercare plan looks like.
+
+**How Families Fit Into the Aftercare Picture**
+
+One more thing families often overlook: your role in the aftercare plan. The best treatment centers don't just prepare your loved one for discharge — they prepare the family as well.
+
+Ask whether the program includes family therapy sessions before discharge. Ask whether they offer education on what to expect in early recovery — what's normal, what's a warning sign, and how to respond rather than react. Ask whether the aftercare plan includes guidance for you, not just your loved one.
+
+Recovery is a family process. The most effective treatment centers treat it that way. If a program seems focused entirely on the individual in treatment and doesn't account for the people they're going home to, that's worth noting. Programs like [LINK:Al-Anon:https://al-anon.org/] and [LINK:Nar-Anon:https://www.nar-anon.org/] can also provide ongoing family support after discharge.
+
+**The Bottom Line**
+
+Choosing a treatment center based on amenities, location, or bed availability is understandable — especially when you're in crisis mode. But the facilities that produce the best long-term outcomes are the ones that treat discharge as a beginning, not an ending.
+
+Ask hard questions about what happens after. A good program will welcome them. And if you'd like help thinking through what to ask — or what the answers mean — that's exactly what we're here for at Sober Helpline. Our coaches have walked families through this process hundreds of times. You don't have to figure it out alone.
+
+**Frequently Asked Questions**
+
+**What is aftercare in addiction treatment?**
+
+Aftercare refers to the support, programming, and services a person receives after completing a primary treatment program. This can include outpatient counseling, sober living, peer support groups, alumni check-ins, and relapse prevention planning. Strong aftercare is a key predictor of long-term recovery success.
+
+**How do I know if a rehab has a good alumni program?**
+
+Ask directly: Does the center track outcomes after discharge? Do alumni have access to ongoing support groups or events? Does the program proactively reach out to alumni in the weeks and months after they leave? A quality program will be able to answer these questions with specifics, not vague reassurances.
+
+**What should a discharge plan include?**
+
+A good discharge plan should include a step-down level of care (such as an IOP), connection to community support groups, a written relapse prevention plan, and referrals to ongoing outpatient therapy or psychiatry if needed. It should be personalized — not a generic template.
+
+**Is it a red flag if a treatment center doesn't track alumni outcomes?**
+
+Yes. Programs that don't follow up with former patients have no real data on whether their approach works long-term. It's not a guarantee of quality, but facilities that do track outcomes — and are willing to share them — demonstrate a genuine investment in long-term recovery rather than short-term placement.
+
+**How long should aftercare continue?**
+
+Most addiction specialists recommend at least a year of active continuing care following primary treatment, with particular intensity in the first 90 days. Recovery is not a 30-day process. The longer someone stays engaged in structured support, the better their outcomes tend to be.
+
+**What role can families play in aftercare?**
+
+Families play a critical role. Understanding what to expect in early recovery, participating in family therapy, knowing how to respond (not react) to early warning signs, and taking care of your own mental health are all part of an effective aftercare plan. The best programs support the whole family system, not just the individual.
+
+If you're in the process of evaluating treatment options and want a second set of eyes, [LINK:Sober Helpline:https://soberhelpline.com] offers family coaching with experienced professionals who can help you ask the right questions and understand what you're hearing.`,
+  },
   {
     id: 118,
     slug: "what-does-evidence-based-addiction-treatment-mean",
