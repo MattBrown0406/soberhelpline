@@ -136,6 +136,7 @@ import ambiguousGriefLovingSomeoneAddictionImg from "@/assets/blog-ambiguous-gri
 import rebuildingIdentityAfterAddictionImg from "@/assets/blog-rebuilding-identity-after-addiction.jpg";
 import evidenceBasedAddictionTreatmentImg from "@/assets/blog-evidence-based-addiction-treatment.jpg";
 import evaluateAlumniAftercareRehabImg from "@/assets/blog-evaluate-alumni-aftercare-rehab.jpg";
+import hsaFsaAddictionTreatmentImg from "@/assets/blog-hsa-fsa-addiction-treatment.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
