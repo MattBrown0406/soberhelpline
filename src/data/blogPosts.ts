@@ -136,12 +136,146 @@ import ambiguousGriefLovingSomeoneAddictionImg from "@/assets/blog-ambiguous-gri
 import rebuildingIdentityAfterAddictionImg from "@/assets/blog-rebuilding-identity-after-addiction.jpg";
 import evidenceBasedAddictionTreatmentImg from "@/assets/blog-evidence-based-addiction-treatment.jpg";
 import evaluateAlumniAftercareRehabImg from "@/assets/blog-evaluate-alumni-aftercare-rehab.jpg";
+import hsaFsaAddictionTreatmentImg from "@/assets/blog-hsa-fsa-addiction-treatment.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 120,
+    slug: "using-hsa-fsa-for-addiction-treatment",
+    seoTitle: "Using HSA or FSA for Addiction Treatment | Sober Helpline",
+    metaDescription: "Can you use an HSA or FSA to pay for drug and alcohol rehab? Yes. Here's exactly what qualifies, how to submit claims, and how to maximize your tax-advantaged benefits for addiction treatment.",
+    title: "Can You Use an HSA or FSA to Pay for Addiction Treatment? Yes—Here's How",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-06-06",
+    image: hsaFsaAddictionTreatmentImg,
+    keywords: ["using HSA or FSA for addiction treatment", "HSA rehab", "FSA rehab", "pay for rehab with HSA", "tax-advantaged addiction treatment", "qualified medical expenses rehab"],
+    excerpt: "Your HSA or FSA can pay for rehab, detox, therapy, and MAT with pre-tax dollars. Here's what qualifies, how to submit claims, and how to plan ahead to maximize the benefit.",
+    content: `When families start looking at the cost of addiction treatment, they're often focused on insurance coverage and out-of-pocket maximums. What many miss is money they may already have set aside: a Health Savings Account (HSA) or Flexible Spending Account (FSA).
+
+Using an HSA or FSA for addiction treatment is not only allowed — it can significantly reduce what your family pays out of pocket. These tax-advantaged accounts let you pay for qualified medical expenses with pre-tax dollars, effectively giving you a discount equal to your tax rate. For a family in the 22% federal tax bracket, that's a meaningful saving.
+
+The catch is knowing what qualifies, how to document it properly, and how to plan ahead so you're not scrambling when the bills arrive. This guide covers all of it — clearly and without the fine print maze.
+
+**What Is an HSA vs. an FSA — and Which Do You Have?**
+
+Both HSAs and FSAs let you set aside pre-tax dollars for qualified medical expenses, but they work differently. Knowing which one you have affects how you plan.
+
+*Health Savings Account (HSA)*
+
+An HSA is available only if you're enrolled in a High Deductible Health Plan (HDHP). It's owned by you — not your employer — and the money rolls over every year with no "use it or lose it" rule. HSA funds can be invested and grow tax-free. In 2026, the contribution limit is $4,300 for individuals and $8,550 for families. Once you reach age 65, you can withdraw for any purpose without penalty (though non-medical withdrawals are taxed as income).
+
+*Flexible Spending Account (FSA)*
+
+An FSA is employer-sponsored and typically has a "use it or lose it" rule — funds not used by the plan year deadline may be forfeited (though some plans offer a grace period or limited rollover). You don't need an HDHP to have an FSA. In 2026, the contribution limit is $3,300. Unlike HSAs, FSA funds are available immediately at the start of the plan year, even before you've contributed the full amount.
+
+Not sure which one you have? Check your pay stub or benefits portal — look for "HSA" or "FSA" deductions. Your HR department can also confirm which account type is available to you.
+
+**What Addiction Treatment Expenses Qualify for HSA and FSA Reimbursement?**
+
+The IRS allows HSA and FSA funds to be used for any medical expense that would qualify as a deduction under IRS Publication 502 — and addiction treatment qualifies broadly.
+
+Eligible expenses include:
+
+- Inpatient rehab programs (residential treatment): The full cost of a licensed residential treatment program qualifies, including room, board, and clinical services.
+- Medical detox: Medically supervised withdrawal services are eligible as a medical expense.
+- Outpatient treatment programs: PHP, IOP, and standard outpatient treatment sessions all qualify.
+- Therapy and counseling: Individual therapy sessions with a licensed therapist or counselor qualify.
+- Psychiatric evaluation and medication management: If your loved one receives a psychiatric evaluation or medication management as part of treatment, those costs qualify.
+- Medication-Assisted Treatment (MAT): Medications like Suboxone, Vivitrol, and methadone are eligible when prescribed by a licensed provider.
+- Transportation to and from treatment: Mileage, bus fare, or rideshare costs to reach treatment appointments can qualify.
+- Nicotine cessation programs: If tobacco is part of the picture, these programs typically qualify as well.
+
+What generally does NOT qualify:
+
+- Sober living house rent (the residential component without clinical services — housing itself is not a medical expense)
+- General wellness retreats or programs without a clinical component
+- Life coaching (unless provided by a licensed clinical professional as part of a treatment plan)
+
+**How to Use Your HSA or FSA to Pay for Rehab: The Practical Steps**
+
+Using your HSA or FSA for addiction treatment is simpler than it sounds. Here's how to do it without running into problems.
+
+*Step 1: Confirm the Treatment Center Is a Qualified Provider*
+
+The treatment program should be a licensed medical or clinical facility. Most accredited treatment centers (JCAHO, CARF, or state-licensed) qualify. Ask the admissions team to confirm that their services are classified as medical or clinical services under their billing codes.
+
+*Step 2: Get an Itemized Receipt or Explanation of Benefits*
+
+For HSA reimbursements, you need to keep records showing the expense was medically necessary — though you typically don't submit them to the IRS unless audited. For FSA claims, you'll often need to submit an itemized receipt or Explanation of Benefits (EOB) from your insurance company. Make sure the receipt includes: the provider's name, date of service, description of service, and the amount paid.
+
+*Step 3: Pay Directly from Your Account or Reimburse Yourself*
+
+Most HSA and FSA accounts come with a debit card. You can often pay the treatment center directly. If you pay out-of-pocket first, you can reimburse yourself from your HSA or FSA at any time after the expense is incurred. For HSAs, there's no time limit on reimbursement — you can pay now and reimburse yourself years later, as long as you have the documentation.
+
+*Step 4: Keep Your Documentation*
+
+The IRS can audit HSA distributions years after the fact. Keep itemized receipts, EOBs, and any letters from your provider for at least three years. Digital copies stored in a dedicated folder work fine.
+
+**Coordinating HSA and FSA Funds with Insurance Coverage**
+
+HSA and FSA funds work alongside your insurance — they don't replace it. Here's how they fit together:
+
+- Insurance pays its portion first: Your insurer pays its share based on your plan's coverage. The remaining balance — your deductible, coinsurance, and copays — is what you pay out of pocket.
+- HSA/FSA covers your out-of-pocket costs: The portion your insurance doesn't cover can often be paid with your HSA or FSA funds. This effectively makes your out-of-pocket costs pre-tax.
+- Use HSA/FSA for non-covered services: If a service isn't covered by insurance at all (e.g., a specific therapy modality or a non-covered medication), HSA/FSA funds can still pay for it if it's a qualified medical expense.
+
+Example: If your insurance covers 70% of an IOP after your deductible and you owe $2,000 out-of-pocket, you can pay that $2,000 from your HSA or FSA with pre-tax dollars. In the 22% tax bracket, that saves you $440 in taxes.
+
+**Planning Ahead: How to Maximize Your HSA or FSA Before Treatment Starts**
+
+If treatment isn't an emergency — if you have some runway to plan — there are ways to maximize what you can put toward it tax-free.
+
+*For HSAs: Maximize Your Annual Contribution*
+
+If you're enrolled in an HDHP and have an HSA, contribute the maximum allowed ($8,550 for families in 2026) before the tax year ends. You can claim the deduction on your taxes even if you contribute right before the deadline. If your employer contributes to your HSA, that counts toward the limit but reduces how much you can add yourself.
+
+*For FSAs: Elect the Maximum During Open Enrollment*
+
+FSA elections must be made during open enrollment before the plan year begins — you typically can't change your election mid-year unless you have a qualifying life event. If you know treatment is on the horizon, elect the maximum ($3,300 in 2026) during the next open enrollment period. Remember: FSA funds are front-loaded, so you can access the full amount on day one of the plan year.
+
+*Consider a Medical FSA Alongside an HSA (Carefully)*
+
+Generally, you can't have both an HSA and a standard health FSA at the same time — the FSA would disqualify your HSA. However, some employers offer a "limited-purpose FSA" that can be used alongside an HSA for dental and vision only. Check with your HR department before enrolling in both.
+
+**Every Dollar Helps — Use the Ones You've Already Set Aside**
+
+When a family is navigating addiction treatment, money is one of the real barriers. The HSA and FSA dollars you've been quietly contributing all year are there for exactly this kind of moment. Using them is not gaming the system — it's using a benefit you've earned.
+
+If you're not sure how your accounts work or whether a specific expense qualifies, your HSA or FSA administrator has a customer service line dedicated to answering exactly these questions. Your HR benefits team is another resource. And the treatment center's financial counselor — most programs have one — can also help you understand how to submit claims.
+
+At [LINK:Sober Helpline:https://soberhelpline.com], we help families navigate every aspect of the path to treatment — including the financial pieces that often feel overwhelming. You don't have to figure this out alone. Explore our resources, connect with a family coach, or join us on a free Monday night Family Squares call to ask questions and hear from other families who've been where you are.
+
+**Frequently Asked Questions: HSA, FSA, and Addiction Treatment**
+
+*Can I use my HSA to pay for a drug or alcohol rehab program?*
+
+Yes. Licensed residential treatment programs for substance use disorders qualify as eligible medical expenses under IRS rules. This includes the cost of clinical services provided at the facility. Keep itemized receipts from the program in case you're ever asked to document the expense.
+
+*Does sober living housing qualify for HSA or FSA reimbursement?*
+
+Generally, no — at least not the housing portion. Sober living is considered a residential expense rather than a medical service. However, if clinical services (therapy, counseling, case management) are billed separately by a licensed provider, those components may qualify. Ask the sober living house how their services are structured and billed.
+
+*Can I use an FSA to pay for Suboxone or Vivitrol?*
+
+Yes. Prescription medications used in Medication-Assisted Treatment (MAT), including buprenorphine (Suboxone) and naltrexone (Vivitrol), are eligible FSA and HSA expenses when prescribed by a licensed provider. You can use your FSA or HSA debit card at the pharmacy or submit the receipt for reimbursement.
+
+*What if I don't have enough in my HSA or FSA to cover the cost?*
+
+HSA and FSA funds can be combined with insurance coverage and other payment methods — they don't have to cover the whole bill. Use your HSA/FSA for out-of-pocket costs after insurance pays. For remaining balances, many treatment centers offer payment plans or financial assistance programs. Personal loans and healthcare financing options (like CareCredit) are also worth exploring.
+
+*Is therapy for a family member covered by my HSA or FSA?*
+
+Yes, if that family member is covered under your health plan or qualifies as your dependent for tax purposes. Licensed therapy and counseling for spouses, children, or other eligible dependents are qualified medical expenses. This can include therapy that helps family members cope with a loved one's addiction — family therapy or individual therapy for a spouse or child.
+
+*Can I use my HSA funds for transportation to a treatment center?*
+
+Yes. Transportation costs that are primarily for and essential to medical care qualify. This includes mileage (reimbursed at the IRS medical mileage rate), bus or rideshare fares, and parking at a medical facility. Keep records of the dates, destination, and purpose of each trip.`,
+  },
   {
     id: 119,
     slug: "how-to-evaluate-alumni-aftercare-support-rehab",
