@@ -347,7 +347,7 @@ const RoadmapPreIntervention = () => {
             </CardHeader>
             <CardContent className="space-y-2">
               <ResourceLink label="Understanding Addiction" to="/understanding-addiction" />
-              <ResourceLink label="Choosing the Right Treatment Center" to="/choosing-treatment-center" />
+              <ResourceLink label="Choosing the Right Treatment Center" to="/treatment-questions" />
               <ResourceLink label="Family Support Resources" to="/family-support" />
               <ResourceLink label="Blog: Latest Articles" to="/blog" />
             </CardContent>

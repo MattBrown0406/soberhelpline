@@ -65,7 +65,7 @@ export default function ArizonaScottsdaleFamilySupport() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
-                <Link to="/coaching">
+                <Link to="/family-coaching">
                   <Calendar className="mr-2 h-5 w-5" />
                   Get Intervention Coaching
                 </Link>
@@ -191,7 +191,7 @@ export default function ArizonaScottsdaleFamilySupport() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button asChild>
-                    <Link to="/coaching">Start Coaching →</Link>
+                    <Link to="/family-coaching">Start Coaching →</Link>
                   </Button>
                   <Button asChild variant="outline">
                     <a href="tel:+14582027900">

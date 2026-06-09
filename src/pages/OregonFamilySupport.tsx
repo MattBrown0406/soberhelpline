@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Oregon?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the Oregon Health Authority (oregon.gov/oha) for state-funded treatment options, or call Lines for Life at 1-800-273-8255 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Oregon treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also contact the Oregon Health Authority (oregon.gov/oha) for state-funded treatment options, or call Lines for Life at 1-800-273-8255 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Oregon treatment options in a judgment-free environment.",
   },
 ];
 

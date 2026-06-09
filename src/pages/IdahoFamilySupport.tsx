@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Idaho?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the Idaho Department of Health and Welfare (healthandwelfare.idaho.gov) for state-funded treatment options, or call the Idaho CareLine at 211 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Idaho treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also contact the Idaho Department of Health and Welfare (healthandwelfare.idaho.gov) for state-funded treatment options, or call the Idaho CareLine at 211 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Idaho treatment options in a judgment-free environment.",
   },
 ];
 

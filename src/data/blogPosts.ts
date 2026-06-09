@@ -464,7 +464,7 @@ Navigating the treatment industry as a family member is genuinely hard. You're o
 
 Ask the questions above. Don't accept vague answers. A reputable program will welcome an informed family member. And if a program makes you feel like you're asking too much by wanting to understand how they treat people, that tells you something important.
 
-At Sober Helpline, we help families understand the treatment landscape — not just the terminology. If you're trying to sort through your options, our [family coaching](/coaching) and education resources are here to help you evaluate programs and make a confident decision. You don't have to figure this out alone.
+At Sober Helpline, we help families understand the treatment landscape — not just the terminology. If you're trying to sort through your options, our [family coaching](/family-coaching) and education resources are here to help you evaluate programs and make a confident decision. You don't have to figure this out alone.
 
 ## Frequently Asked Questions
 
@@ -490,7 +490,7 @@ Some elements of treatment — peer support, community, spiritual practice — h
 
 ### Where can families get help evaluating treatment centers?
 
-Sober Helpline offers [family coaching](/coaching), educational resources, and direct support for families navigating treatment decisions. A coach can help you evaluate specific programs, formulate questions, and make a decision you feel confident about.`,
+Sober Helpline offers [family coaching](/family-coaching), educational resources, and direct support for families navigating treatment decisions. A coach can help you evaluate specific programs, formulate questions, and make a decision you feel confident about.`,
   },
   {
     id: 117,
@@ -1045,7 +1045,7 @@ Finding the right treatment program takes time and energy you may feel you don't
 
 Good programs welcome informed families. They understand that recovery doesn't happen in isolation — it happens in the context of real relationships, real support systems, and real life. When you show up prepared and engaged, you're modeling exactly what recovery asks of everyone in it: honest, courageous participation.
 
-If you're not sure where to start, or if you'd like support evaluating a specific program, SoberHelpline.com is here to help. Our <a href="/coaching">coaching team</a> works with families throughout the treatment search process — providing education, honest feedback, and the kind of steady guidance that helps you make decisions you can stand behind. Explore our resources, join our family community, or book a coaching session whenever you're ready.
+If you're not sure where to start, or if you'd like support evaluating a specific program, SoberHelpline.com is here to help. Our <a href="/family-coaching">coaching team</a> works with families throughout the treatment search process — providing education, honest feedback, and the kind of steady guidance that helps you make decisions you can stand behind. Explore our resources, join our family community, or book a coaching session whenever you're ready.
 
 ## Frequently Asked Questions
 
@@ -1357,7 +1357,7 @@ On your side, trust-building looks like:
 
 * Allowing your loved one the opportunity to demonstrate reliability — not micromanaging every interaction
 * Acknowledging when they do follow through, rather than constantly bracing for the next failure
-* Working through your own grief, anger, and hypervigilance with support (a therapist, [LINK:Al-Anon](https://al-anon.org/), [LINK:Nar-Anon](https://www.nar-anon.org/), or a [LINK:family coach:/coaching])
+* Working through your own grief, anger, and hypervigilance with support (a therapist, [LINK:Al-Anon](https://al-anon.org/), [LINK:Nar-Anon](https://www.nar-anon.org/), or a [LINK:family coach:/family-coaching])
 * Communicating clearly about what you need to feel safe, rather than waiting for your loved one to guess
 
 **Setting Clear Expectations Without Issuing Ultimatums**
@@ -1399,7 +1399,7 @@ Your recovery from the impact of your loved one's addiction is just as real and 
 
 Rebuilding trust after addiction is not a short road. It unfolds over months and, honestly, years. But it does unfold — one reliable conversation, one kept commitment, one honest moment at a time. The families who make it through this process are not the ones who trusted blindly or who waited for a guarantee that could never come. They're the ones who kept showing up: carefully, honestly, and with clear enough boundaries that they could stay present without burning out.
 
-You don't have to figure all of this out alone. At Sober Helpline, we work with families in exactly this stage of the journey — navigating the tender, complicated process of what comes after treatment. Whether you need [LINK:family education:/family-education], [LINK:one-on-one coaching:/coaching], or simply a [LINK:community of people who understand:/family-membership] what you're carrying, we're here.
+You don't have to figure all of this out alone. At Sober Helpline, we work with families in exactly this stage of the journey — navigating the tender, complicated process of what comes after treatment. Whether you need [LINK:family education:/family-education], [LINK:one-on-one coaching:/family-coaching], or simply a [LINK:community of people who understand:/family-membership] what you're carrying, we're here.
 
 **Frequently Asked Questions About Rebuilding Trust After Addiction**
 

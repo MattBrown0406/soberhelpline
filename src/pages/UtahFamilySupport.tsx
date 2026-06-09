@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Utah?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also call the Utah Crisis Line at 1-800-273-8255, contact Valley Behavioral Health (valleybehavioralhealth.org), or reach USARA for peer support resources. Our “The Family Squares” is a great place to ask questions about Utah treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also call the Utah Crisis Line at 1-800-273-8255, contact Valley Behavioral Health (valleybehavioralhealth.org), or reach USARA for peer support resources. Our “The Family Squares” is a great place to ask questions about Utah treatment options in a judgment-free environment.",
   },
 ];
 

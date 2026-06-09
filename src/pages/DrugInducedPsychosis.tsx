@@ -451,7 +451,7 @@ const DrugInducedPsychosis = () => {
               <Link to="/family-advocacy-toolkit" className="p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors print:border print:border-black block">
                 <span className="font-semibold text-foreground">Family Advocacy Toolkit</span>
               </Link>
-              <Link to="/relapse-warning-signs-tracker" className="p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors print:border print:border-black block">
+              <Link to="/relapse-warning-signs" className="p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors print:border print:border-black block">
                 <span className="font-semibold text-foreground">Relapse Warning Signs Tracker</span>
               </Link>
               <Link to="/family-education" className="p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors print:border print:border-black block md:col-span-2">

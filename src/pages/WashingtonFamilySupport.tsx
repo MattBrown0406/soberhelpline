@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Washington State?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the Washington State Department of Health (doh.wa.gov/substance-use) for state-funded treatment options, or call the Washington Recovery Help Line at 1-866-789-1511 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Washington treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also contact the Washington State Department of Health (doh.wa.gov/substance-use) for state-funded treatment options, or call the Washington Recovery Help Line at 1-866-789-1511 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Washington treatment options in a judgment-free environment.",
   },
 ];
 

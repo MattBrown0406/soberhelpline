@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in California?",
     answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/treatment-finder — a vetted directory of ethical providers with no referral fees. You can also contact the California Department of Health Care Services (dhcs.ca.gov) for state-funded and Medi-Cal covered treatment options, or call SAMHSA's National Helpline at 1-800-662-4357 for 24/7 crisis support and referrals. Our “The Family Squares” is a great place to ask questions about California treatment options in a judgment-free environment.",
+      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also contact the California Department of Health Care Services (dhcs.ca.gov) for state-funded and Medi-Cal covered treatment options, or call SAMHSA's National Helpline at 1-800-662-4357 for 24/7 crisis support and referrals. Our “The Family Squares” is a great place to ask questions about California treatment options in a judgment-free environment.",
   },
 ];
 

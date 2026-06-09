@@ -517,10 +517,10 @@ const RebuildingSiblingRelationships = () => {
                 <Link to="/sibling-guilt-anger-loyalty" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">
                   → Sibling Guilt, Anger, and Loyalty Conflicts
                 </Link>
-                <Link to="/growing-up-shadow-addiction" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">
+                <Link to="/growing-up-shadow" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">
                   → Growing Up in the Shadow of Addiction
                 </Link>
-                <Link to="/trauma-hypervigilance-assessment" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">
+                <Link to="/how-trauma-shapes-addiction" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">
                   → Family Trauma & Hypervigilance Self-Assessment
                 </Link>
                 <Link to="/living-well-regardless" className="text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-2">

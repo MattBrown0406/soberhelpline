@@ -65,7 +65,7 @@
     "goal": "Shift from panic and disappointment into a more strategic response.",
     "audience": "Families who have already tried treatment, promises, or multiple recovery attempts.",
     "resourcePaths": [
-      { "title": "Relapse Warning Signs Tracker", "path": "/relapse-warning-signs-tracker" },
+      { "title": "Relapse Warning Signs Tracker", "path": "/relapse-warning-signs" },
       { "title": "Roadmap: Relapse", "path": "/roadmap-relapse" },
       { "title": "Why Multiple Treatment Episodes Don't Mean Failure", "path": "/multiple-treatment-episodes" },
       { "title": "Insight vs. Behavior Tracker", "path": "/insight-behavior-tracker" },

@@ -218,12 +218,17 @@ const allPrerenderPages = [
   ...familyAnswerPages,
 ];
 
-const socialImageTags = (page) => page.image ? `
-    <meta property="og:image" content="${escapeHtml(page.image)}">
-    <meta property="og:image:secure_url" content="${escapeHtml(page.image)}">
+const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/og-image.png`;
+
+const socialImageTags = (page) => {
+  const image = page.image || DEFAULT_SOCIAL_IMAGE;
+  return `
+    <meta property="og:image" content="${escapeHtml(image)}">
+    <meta property="og:image:secure_url" content="${escapeHtml(image)}">
     <meta property="og:image:alt" content="${escapeHtml(page.title)}">
-    <meta name="twitter:image" content="${escapeHtml(page.image)}">
-    <meta name="twitter:image:alt" content="${escapeHtml(page.title)}">` : '';
+    <meta name="twitter:image" content="${escapeHtml(image)}">
+    <meta name="twitter:image:alt" content="${escapeHtml(page.title)}">`;
+};
 
 const articleTags = (page) => page.ogType === 'article' ? `
     <meta property="og:type" content="article">

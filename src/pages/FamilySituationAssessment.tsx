@@ -427,7 +427,7 @@ export default function FamilySituationAssessment() {
               {[
                 { label: "Enabling Quiz", desc: "See which behaviors to stop first", to: "/enabling-language-translator" },
                 { label: "Addiction Assessment", desc: "Understand severity level", to: "/addiction-assessment" },
-                { label: "Treatment Finder", desc: "Vetted providers near you", to: "/treatment-finder" },
+                { label: "Treatment Finder", desc: "Vetted providers near you", to: "/recovery-resources" },
               ].map((item) => (
                 <Link key={item.to} to={item.to}>
                   <Card className="hover:border-primary/50 hover:shadow-sm transition-all h-full">

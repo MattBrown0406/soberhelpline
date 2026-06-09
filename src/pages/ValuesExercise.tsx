@@ -306,7 +306,7 @@ const ValuesExercise = () => {
             <section className="border-t pt-6">
               <h2 className="text-lg font-semibold text-logo-green mb-3">Suggested Companion Resources</h2>
               <div className="flex flex-wrap gap-2 print:hidden">
-                <Link to="/boundary-worksheet">
+                <Link to="/boundary-setting-worksheet">
                   <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
                 </Link>
                 <Link to="/family-action-plan">

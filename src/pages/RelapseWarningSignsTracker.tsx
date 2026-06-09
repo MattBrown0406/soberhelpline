@@ -13,7 +13,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const RelapseWarningSignsTracker = () => {
-  useGuideTracking("/relapse-warning-signs-tracker", "Relapse Warning Signs Tracker");
+  useGuideTracking("/relapse-warning-signs", "Relapse Warning Signs Tracker");
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
   const [notes, setNotes] = useState("");
 

@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Home, Phone, Search, Users, BookOpen, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
@@ -12,7 +13,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted/50 px-4">
+    <>
+      <Helmet>
+        <title>Page Not Found | Sober Helpline</title>
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://soberhelpline.com/404" />
+      </Helmet>
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted/50 px-4">
       <div className="text-center max-w-lg">
         <img src={logo} alt="Sober Helpline" className="h-20 w-20 mx-auto mb-6 rounded-xl" />
         <h1 className="mb-2 text-6xl font-bold text-logo-green">404</h1>
@@ -59,7 +66,8 @@ const NotFound = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

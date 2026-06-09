@@ -29,6 +29,11 @@ interface SEOHeadProps {
 
 const BASE_URL = "https://soberhelpline.com";
 
+const normalizePath = (pathname: string) => {
+  if (!pathname || pathname === "/") return "";
+  return pathname.replace(/\/+$/, "");
+};
+
 export default function SEOHead({
   title,
   description,
@@ -46,7 +51,7 @@ export default function SEOHead({
 }: SEOHeadProps) {
   const location = useLocation();
   const { setOverridden } = useSEOOverride();
-  const canonicalUrl = `${BASE_URL}${location.pathname}`;
+  const canonicalUrl = `${BASE_URL}${normalizePath(location.pathname)}`;
 
   useEffect(() => {
     setOverridden(true);
@@ -102,6 +107,10 @@ export default function SEOHead({
       <link rel="canonical" href={canonicalUrl} />
       
       <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
+      <meta name="ai:description" content={`${description} Sober Helpline helps families choose between free Family Squares support, private consultation, intervention readiness, and ethical treatment navigation.`} />
+      <meta name="llm:description" content={`${description} Sober Helpline helps families choose between free Family Squares support, private consultation, intervention readiness, and ethical treatment navigation.`} />
+      <link rel="ai-context" href={`${BASE_URL}/llms.txt`} />
+      <link rel="ai-context-full" href={`${BASE_URL}/llms-full.txt`} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
