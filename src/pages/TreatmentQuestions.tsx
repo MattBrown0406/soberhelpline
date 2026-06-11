@@ -51,7 +51,7 @@ export default function TreatmentQuestions() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Choosing a treatment center can feel overwhelming, especially when families are in crisis and desperate for help. This guide is designed to help you slow the process down, ask the right questions, and identify whether a program is focused on clinical integrity and long-term recovery, not just admissions and occupancy.
                 </p>
@@ -73,7 +73,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 1 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   1. Clinical Assessment & Individualized Care
                 </h2>
                 
@@ -110,7 +110,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 2 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   2. Mental Health & Dual Diagnosis Treatment
                 </h2>
                 
@@ -147,7 +147,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 3 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   3. Staff Credentials & Program Structure
                 </h2>
                 
@@ -184,7 +184,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 4 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   4. Treatment Philosophy & Approach
                 </h2>
                 
@@ -221,7 +221,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 5 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   5. Length of Stay & Continuum of Care
                 </h2>
                 
@@ -258,7 +258,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 6 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   6. Family Involvement & Education
                 </h2>
                 
@@ -295,7 +295,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 7 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   7. Aftercare & Long-Term Planning
                 </h2>
                 
@@ -332,7 +332,7 @@ export default function TreatmentQuestions() {
 
               {/* Section 8 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   8. Ethics, Transparency & Financial Practices
                 </h2>
                 
@@ -369,7 +369,7 @@ export default function TreatmentQuestions() {
 
               {/* Final Reflection */}
               <section className="mb-8 p-6 bg-muted/50 rounded-lg print:bg-gray-100">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Final Reflection for Families</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">Final Reflection for Families</h2>
                 <p className="mb-3 font-medium">After speaking with the center, ask yourself:</p>
                 <ul className="space-y-2 text-sm">
                   <li>• Did I feel informed or pressured?</li>
@@ -382,7 +382,7 @@ export default function TreatmentQuestions() {
 
               {/* Important Reminder */}
               <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-green mb-3">Important Reminder</h2>
+                <h2 className="text-lg font-bold text-logo-blue mb-3">Important Reminder</h2>
                 <p className="text-muted-foreground mb-3">
                   A quality treatment center will not rush you, pressure you, or promise miracles.
                 </p>

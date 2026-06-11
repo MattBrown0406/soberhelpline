@@ -44,7 +44,7 @@ export default function FamilyFunnelDecisionMatrix({ source, className = "" }: F
     <section className={`container mx-auto px-4 py-10 md:py-14 ${className}`}>
       <div className="mx-auto max-w-6xl rounded-2xl border border-logo-green/20 bg-card p-5 shadow-sm md:p-7">
         <div className="mb-6 max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-logo-green">Choose by pressure level</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">Choose by pressure level</p>
           <h2 className="mt-2 text-2xl font-bold tracking-normal text-foreground md:text-3xl">
             Free support, private answers, or intervention help?
           </h2>
@@ -58,13 +58,13 @@ export default function FamilyFunnelDecisionMatrix({ source, className = "" }: F
             const Icon = lane.icon;
             const card = (
               <div className="flex h-full flex-col rounded-xl border bg-background p-5 transition-colors hover:border-logo-green/40">
-                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-green/10 text-logo-green">
+                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-green/10 text-logo-blue">
                   <Icon className="h-5 w-5" />
                 </span>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</p>
                 <h3 className="mt-1 text-xl font-semibold text-foreground">{lane.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{lane.description}</p>
-                <Button variant="link" className="mt-3 h-auto justify-start p-0 text-logo-green">
+                <Button variant="link" className="mt-3 h-auto justify-start p-0 text-logo-blue">
                   {lane.cta}
                   {"href" in lane ? <ExternalLink className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
                 </Button>

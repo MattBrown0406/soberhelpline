@@ -41,7 +41,7 @@ export default function TreatmentModalities() {
 
             <div className="text-center mb-8">
               <FileText className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
                 Treatment Modalities Explained
               </h1>
               <p className="text-xl text-muted-foreground">
@@ -52,7 +52,7 @@ export default function TreatmentModalities() {
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Why Families Need This Guide</CardTitle>
+                <CardTitle className="text-logo-blue">Why Families Need This Guide</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families are often told:</p>
@@ -113,7 +113,7 @@ export default function TreatmentModalities() {
 
             {/* Treatment Modalities Accordion */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-logo-green mb-4">Treatment Modalities</h2>
+              <h2 className="text-2xl font-bold text-logo-blue mb-4">Treatment Modalities</h2>
               <Accordion type="single" collapsible className="space-y-2">
                 {/* CBT */}
                 <AccordionItem value="cbt" className="border rounded-lg px-4">
@@ -524,7 +524,7 @@ export default function TreatmentModalities() {
             {/* Final Thought */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Understanding treatment modalities helps families:</p>
@@ -544,7 +544,7 @@ export default function TreatmentModalities() {
             {/* Companion Resources */}
             <Card className="border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

@@ -49,7 +49,7 @@ export default function FamilyInterferenceGuide() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Why This Guide Matters</CardTitle>
+                <CardTitle className="text-logo-blue">Why This Guide Matters</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families affected by addiction often hear:</p>
@@ -92,7 +92,7 @@ export default function FamilyInterferenceGuide() {
 
             {/* Seven Ways Families Interfere */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-logo-green mb-4">How Interference Happens</h2>
+              <h2 className="text-2xl font-bold text-logo-blue mb-4">How Interference Happens</h2>
               <Accordion type="single" collapsible className="space-y-2">
                 {/* 1. Over-Functioning */}
                 <AccordionItem value="over-functioning" className="border rounded-lg px-4">
@@ -452,7 +452,7 @@ export default function FamilyInterferenceGuide() {
             {/* Final Thought */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -469,7 +469,7 @@ export default function FamilyInterferenceGuide() {
                   <p className="text-foreground font-medium">
                     When families change how they respond, the system changes—even if the addicted person resists at first.
                   </p>
-                  <p className="text-lg font-semibold text-logo-green mt-2">
+                  <p className="text-lg font-semibold text-logo-blue mt-2">
                     That shift often creates the conditions where recovery becomes possible.
                   </p>
                 </div>
@@ -479,7 +479,7 @@ export default function FamilyInterferenceGuide() {
             {/* Companion Resources */}
             <Card className="border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

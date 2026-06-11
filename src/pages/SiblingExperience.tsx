@@ -48,7 +48,7 @@ export default function SiblingExperience() {
             {/* Why This Guide Matters */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -83,7 +83,7 @@ export default function SiblingExperience() {
             {/* A Core Truth */}
             <Card className="mb-6 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Eye className="h-5 w-5" />
                   A Core Truth Families Often Miss
                 </CardTitle>
@@ -109,7 +109,7 @@ export default function SiblingExperience() {
             {/* Common Sibling Roles */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Users className="h-5 w-5" />
                   Common Sibling Roles in Addicted Families
                 </CardTitle>
@@ -215,7 +215,7 @@ export default function SiblingExperience() {
             {/* How Addiction Alters Sibling Relationships */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <AlertTriangle className="h-5 w-5" />
                   How Addiction Alters Sibling Relationships
                 </CardTitle>
@@ -287,7 +287,7 @@ export default function SiblingExperience() {
             {/* What Parents Often Don't Realize */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Eye className="h-5 w-5" />
                   What Parents Often Don't Realize
                 </CardTitle>
@@ -347,7 +347,7 @@ export default function SiblingExperience() {
             {/* How Families Can Support Siblings */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   How Families Can Support Siblings Now
                 </CardTitle>
@@ -424,7 +424,7 @@ export default function SiblingExperience() {
             {/* Final Thought */}
             <Card className="mb-6 border-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -448,7 +448,7 @@ export default function SiblingExperience() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

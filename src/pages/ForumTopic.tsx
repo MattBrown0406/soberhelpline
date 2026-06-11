@@ -510,7 +510,7 @@ export default function ForumTopic() {
                   <MessageCircle className="h-6 w-6" />
                 </div>
                 <div className="flex-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-logo-green mb-2">
+                  <h1 className="text-2xl md:text-3xl font-bold text-logo-blue mb-2">
                     {topicConfig.title}
                   </h1>
                   <p className="text-muted-foreground">{topicConfig.description}</p>
@@ -604,7 +604,7 @@ export default function ForumTopic() {
                         <div className="flex items-start justify-between gap-2">
                           <div>
                             {post.title && (
-                              <h3 className="font-semibold text-lg text-logo-green mb-1">
+                              <h3 className="font-semibold text-lg text-logo-blue mb-1">
                                 {post.title}
                               </h3>
                             )}

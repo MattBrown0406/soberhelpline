@@ -155,7 +155,7 @@ const AftercareChecklist = () => {
     <Card className="mb-6">
       <CardHeader>
         <CardTitle className="text-lg flex items-center gap-2">
-          <Icon className="h-5 w-5 text-logo-green" />
+          <Icon className="h-5 w-5 text-logo-blue" />
           {title}
         </CardTitle>
       </CardHeader>
@@ -193,7 +193,7 @@ const AftercareChecklist = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-education" className="inline-flex items-center text-logo-green hover:underline mb-6">
+        <Link to="/family-education" className="inline-flex items-center text-logo-blue hover:underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
@@ -205,7 +205,7 @@ const AftercareChecklist = () => {
         />
 
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
-          <AlertTriangle className="h-5 w-5 text-logo-green" />
+          <AlertTriangle className="h-5 w-5 text-logo-blue" />
           <AlertDescription className="text-foreground">
             <strong>Purpose:</strong> Leaving treatment is not the finish line—it is the most vulnerable transition in recovery. 
             This checklist helps you assess actual readiness, not hope, fatigue, or insurance timelines.
@@ -311,7 +311,7 @@ const AftercareChecklist = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Brain className="h-5 w-5 text-logo-green" />
+              <Brain className="h-5 w-5 text-logo-blue" />
               Section 7: Emotional & Readiness Reality Check
             </CardTitle>
           </CardHeader>

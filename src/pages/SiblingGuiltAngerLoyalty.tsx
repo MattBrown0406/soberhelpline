@@ -48,7 +48,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* Why This Guide Matters */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -78,7 +78,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* The Core Conflict */}
             <Card className="mb-6 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Scale className="h-5 w-5" />
                   The Core Conflict Siblings Face
                 </CardTitle>
@@ -275,7 +275,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* Why Families Often Miss This */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <HelpCircle className="h-5 w-5" />
                   Why Families Often Miss This
                 </CardTitle>
@@ -337,7 +337,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* Reframing Loyalty */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Scale className="h-5 w-5" />
                   Reframing Loyalty in a Healthier Way
                 </CardTitle>
@@ -396,7 +396,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* For Parents and Families */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Users className="h-5 w-5" />
                   For Parents and Families Reading This
                 </CardTitle>
@@ -434,7 +434,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* Final Thought */}
             <Card className="mb-6 border-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -458,7 +458,7 @@ export default function SiblingGuiltAngerLoyalty() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

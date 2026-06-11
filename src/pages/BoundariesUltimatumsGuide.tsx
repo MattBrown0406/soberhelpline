@@ -40,7 +40,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Why Families Need an Advanced Guide */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Why Families Need an Advanced Guide
                 </CardTitle>
@@ -110,7 +110,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Comparison Table */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Quick High-Level Comparison</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Quick High-Level Comparison</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -373,7 +373,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Advanced Application */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Advanced Application: Matching Tool to Situation</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Advanced Application: Matching Tool to Situation</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -435,7 +435,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Family Nervous System Factor */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   The Family Nervous System Factor
                 </CardTitle>
@@ -504,7 +504,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Reflection Questions */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Advanced Reflection Questions</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Advanced Reflection Questions</CardTitle>
               </CardHeader>
               <CardContent>
                 <ol className="space-y-3 list-decimal list-inside text-muted-foreground">
@@ -539,7 +539,7 @@ export default function BoundariesUltimatumsGuide() {
             {/* Companion Resources */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Suggested Companion Resources
                 </CardTitle>

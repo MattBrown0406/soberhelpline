@@ -154,7 +154,7 @@ export function NewPostDialog({ open, onOpenChange, userId, forumTopics }: NewPo
     }}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-logo-green">Create New Post</DialogTitle>
+          <DialogTitle className="text-logo-blue">Create New Post</DialogTitle>
           <DialogDescription>
             Share your thoughts with the community. Choose an existing topic or request a new one.
           </DialogDescription>

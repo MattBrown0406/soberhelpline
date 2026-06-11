@@ -58,6 +58,7 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         "logo-green": "hsl(var(--logo-green))",
+        "logo-blue": "#1f2c44",
         "brand-navy": "#1f2c44",
         "brand-amber": "#e8a73a",
         "brand-cream": "#ede4cf",

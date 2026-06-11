@@ -83,7 +83,7 @@ export default function CaliforniaFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               California Family Addiction Resources
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
               Family Support for Addiction in California: Resources, Help &amp; Hope
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -113,7 +113,7 @@ export default function CaliforniaFamilySupport() {
         {/* California Stats */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               California's Addiction Crisis Is a Family Crisis
             </h2>
             <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
@@ -123,21 +123,21 @@ export default function CaliforniaFamilySupport() {
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">10,000+</div>
-                  <div className="font-semibold text-logo-green mb-1">Overdose Deaths Annually</div>
+                  <div className="font-semibold text-logo-blue mb-1">Overdose Deaths Annually</div>
                   <div className="text-sm text-muted-foreground">California leads all 50 states in total drug overdose deaths — the highest in the nation</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">75%+</div>
-                  <div className="font-semibold text-logo-green mb-1">Fentanyl-Driven Deaths</div>
+                  <div className="font-semibold text-logo-blue mb-1">Fentanyl-Driven Deaths</div>
                   <div className="text-sm text-muted-foreground">fentanyl now drives over three-quarters of overdose fatalities statewide — every use event is a risk</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">1,800+</div>
-                  <div className="font-semibold text-logo-green mb-1">LA County Deaths/Year</div>
+                  <div className="font-semibold text-logo-blue mb-1">LA County Deaths/Year</div>
                   <div className="text-sm text-muted-foreground">Los Angeles County alone records over 1,800 overdose deaths per year — more than most states</div>
                 </CardContent>
               </Card>
@@ -150,7 +150,7 @@ export default function CaliforniaFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   You Are Not Alone
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -200,7 +200,7 @@ export default function CaliforniaFamilySupport() {
         {/* California Family Resources */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               California Family Addiction Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -209,7 +209,7 @@ export default function CaliforniaFamilySupport() {
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Al-Anon California
                   </CardTitle>
@@ -232,7 +232,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Nar-Anon California
                   </CardTitle>
@@ -255,7 +255,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <BookOpen className="h-4 w-4 text-primary" />
                     SMART Recovery Family &amp; Friends
                   </CardTitle>
@@ -278,7 +278,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Shield className="h-4 w-4 text-primary" />
                     CA Dept. of Health Care Services
                   </CardTitle>
@@ -301,7 +301,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     SAMHSA National Helpline — 24/7
                   </CardTitle>
@@ -323,7 +323,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     LA County Crisis Line &amp; Bay Area Crisis Line
                   </CardTitle>
@@ -351,7 +351,7 @@ export default function CaliforniaFamilySupport() {
         {/* CRAFT vs Traditional */}
         <section className="py-12">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               What Works: CRAFT vs. Traditional Approaches
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -387,7 +387,7 @@ export default function CaliforniaFamilySupport() {
 
               <Card className="border-primary/30 bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
+                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
                   <CardDescription>Evidence-based family intervention model</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -427,7 +427,7 @@ export default function CaliforniaFamilySupport() {
                   <Calendar className="h-3.5 w-3.5" />
                   Every Monday — 7:00 PM PST
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -458,7 +458,7 @@ export default function CaliforniaFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
@@ -488,7 +488,7 @@ export default function CaliforniaFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Hourly Intervention Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -533,7 +533,7 @@ export default function CaliforniaFamilySupport() {
               </div>
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-logo-green mb-3">Who This Is For</h3>
+                  <h3 className="font-semibold text-logo-blue mb-3">Who This Is For</h3>
                   <ul className="space-y-3">
                     {[
                       "You've tried talking to them and nothing works",
@@ -566,7 +566,7 @@ export default function CaliforniaFamilySupport() {
         {/* City Cards */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               California City &amp; Region-Specific Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -585,7 +585,7 @@ export default function CaliforniaFamilySupport() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-logo-green group-hover:text-primary transition-colors">
+                            <span className="font-semibold text-logo-blue group-hover:text-primary transition-colors">
                               {city.name}
                             </span>
                           </div>
@@ -604,7 +604,7 @@ export default function CaliforniaFamilySupport() {
         {/* FAQ Section */}
         <section className="py-12">
           <div className="container max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
@@ -622,7 +622,7 @@ export default function CaliforniaFamilySupport() {
         <section className="py-12 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
               California Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

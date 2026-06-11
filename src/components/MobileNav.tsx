@@ -52,7 +52,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 </Button>
               </Link>
               <Link to="/family-consultation" onClick={closeMenu}>
-                <Button variant="outline" className="w-full justify-start gap-2 border-logo-green/30 text-logo-green">
+                <Button variant="outline" className="w-full justify-start gap-2 border-logo-green/30 text-logo-blue">
                   <Phone className="w-4 h-4" />
                   Crisis Family Consult
                 </Button>

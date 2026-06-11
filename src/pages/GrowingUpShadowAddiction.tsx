@@ -48,7 +48,7 @@ export default function GrowingUpShadowAddiction() {
             {/* Why This Guide Matters */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -84,7 +84,7 @@ export default function GrowingUpShadowAddiction() {
             {/* A Core Truth */}
             <Card className="mb-6 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Eye className="h-5 w-5" />
                   A Core Truth
                 </CardTitle>
@@ -103,7 +103,7 @@ export default function GrowingUpShadowAddiction() {
             {/* How Children Adapt */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Brain className="h-5 w-5" />
                   How Children Adapt in Addicted Homes
                 </CardTitle>
@@ -158,7 +158,7 @@ export default function GrowingUpShadowAddiction() {
             {/* Common Adult Patterns */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Brain className="h-5 w-5" />
                   Common Adult Patterns Linked to Childhood Addiction Exposure
                 </CardTitle>
@@ -219,7 +219,7 @@ export default function GrowingUpShadowAddiction() {
             {/* Why Minimization Is Common */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Eye className="h-5 w-5" />
                   Why "It Wasn't That Bad" Is So Common
                 </CardTitle>
@@ -301,7 +301,7 @@ export default function GrowingUpShadowAddiction() {
             {/* What Healing Looks Like */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Leaf className="h-5 w-5" />
                   What Healing Looks Like in Adulthood
                 </CardTitle>
@@ -369,7 +369,7 @@ export default function GrowingUpShadowAddiction() {
             {/* Final Thought */}
             <Card className="mb-6 border-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -397,7 +397,7 @@ export default function GrowingUpShadowAddiction() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

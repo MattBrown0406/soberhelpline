@@ -124,7 +124,7 @@ const FamilyAdvocacyToolkit = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-education" className="inline-flex items-center text-logo-green hover:underline mb-6 print:hidden">
+        <Link to="/family-education" className="inline-flex items-center text-logo-blue hover:underline mb-6 print:hidden">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
@@ -137,7 +137,7 @@ const FamilyAdvocacyToolkit = () => {
 
         {/* Purpose Section */}
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
-          <Shield className="h-5 w-5 text-logo-green" />
+          <Shield className="h-5 w-5 text-logo-blue" />
           <AlertDescription className="text-foreground">
             <strong>Purpose:</strong> Families often know something is wrong—but don't know how to speak up, what to ask for, or when to push back. 
             This toolkit provides clear frameworks, scripts, and decision tools to help families advocate ethically, calmly, and effectively—while still respecting professional roles and boundaries.
@@ -157,7 +157,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Target className="h-5 w-5 text-logo-green" />
+              <Target className="h-5 w-5 text-logo-blue" />
               Section 1: The Advocacy Mindset
             </CardTitle>
           </CardHeader>
@@ -197,7 +197,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Scale className="h-5 w-5 text-logo-green" />
+              <Scale className="h-5 w-5 text-logo-blue" />
               Section 2: Know Your Role (Critical)
             </CardTitle>
             <p className="text-sm text-muted-foreground">Families are most effective advocates when they stay in the right lane.</p>
@@ -267,7 +267,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <ClipboardList className="h-5 w-5 text-logo-green" />
+              <ClipboardList className="h-5 w-5 text-logo-blue" />
               Section 3: Advocacy Preparation Checklist
             </CardTitle>
             <p className="text-sm text-muted-foreground">Before any important call, meeting, or decision:</p>
@@ -384,7 +384,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8 bg-muted/30">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <FileText className="h-5 w-5 text-logo-green" />
+              <FileText className="h-5 w-5 text-logo-blue" />
               Section 5: Advocacy Scripts (Use Calm, Neutral Language)
             </CardTitle>
           </CardHeader>
@@ -514,7 +514,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Shield className="h-5 w-5 text-logo-green" />
+              <Shield className="h-5 w-5 text-logo-blue" />
               Section 9: When to Escalate Advocacy
             </CardTitle>
           </CardHeader>
@@ -576,7 +576,7 @@ const FamilyAdvocacyToolkit = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Target className="h-5 w-5 text-logo-green" />
+              <Target className="h-5 w-5 text-logo-blue" />
               Section 11: Advocacy Values Anchor
             </CardTitle>
             <p className="text-sm text-muted-foreground">Before and after advocating, ask:</p>

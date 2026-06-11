@@ -94,7 +94,7 @@ export default function RelatedFamilyAnswerLinks({ post }: { post: BlogLikePost 
                 <CardContent className="p-4">
                   <p className="text-xs font-semibold uppercase tracking-wide text-primary">{answer.category}</p>
                   <p className="mt-1 font-semibold leading-snug text-foreground">{answer.question}</p>
-                  <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-logo-green">
+                  <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-logo-blue">
                     Read the direct answer
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </p>

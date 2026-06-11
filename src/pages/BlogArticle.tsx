@@ -422,7 +422,7 @@ const BlogArticle = () => {
           {/* Membership CTA */}
           <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-logo-green/5 via-emerald-50 to-white border border-logo-green/20">
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-green text-xs font-semibold mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-xs font-semibold mb-3">
                 <BookOpen className="w-3 h-3" />
                 Member Resource
               </div>

@@ -196,7 +196,7 @@ const Index = () => {
         <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
             <div className="flex md:hidden h-14 items-center justify-between">
-              <a href="tel:4582027900" className="flex items-center gap-2 text-logo-green font-semibold">
+              <a href="tel:4582027900" className="flex items-center gap-2 text-logo-blue font-semibold">
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">(458) 202-7900</span>
               </a>
@@ -238,7 +238,7 @@ const Index = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="w-56">
                       <DropdownMenuItem asChild>
-                        <Link to="/roadmap" className="cursor-pointer font-semibold text-logo-green">Recovery Roadmap</Link>
+                        <Link to="/roadmap" className="cursor-pointer font-semibold text-logo-blue">Recovery Roadmap</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link to="/family-support" className="cursor-pointer">Family Education</Link>
@@ -263,7 +263,7 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+                <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue font-semibold hover:bg-logo-green/20 transition-colors">
                   <Phone className="w-4 h-4" />
                   (458) 202-7900
                 </a>
@@ -311,7 +311,7 @@ const Index = () => {
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
                   Stop guessing what to do next.
-                  <span className="block text-logo-green mt-2">Get the right level of family addiction help.</span>
+                  <span className="block text-logo-blue mt-2">Get the right level of family addiction help.</span>
                 </h1>
                 <p className="text-base md:text-xl text-muted-foreground max-w-3xl mb-6 md:mb-8 hero-description">
                   Sober Helpline helps families move from worry into action. Join the free Family Squares support meeting, book a private session if you cannot wait until Monday, or check whether the situation is moving toward intervention readiness.
@@ -343,7 +343,7 @@ const Index = () => {
                   <span className="hidden sm:inline text-border">•</span>
                   <span>Private sessions available from $150 when Monday is too far away</span>
                   <span className="hidden sm:inline text-border">•</span>
-                  <a href="tel:4582027900" className="inline-flex items-center gap-2 text-logo-green hover:underline">
+                  <a href="tel:4582027900" className="inline-flex items-center gap-2 text-logo-blue hover:underline">
                     <Phone className="w-4 h-4" />
                     Call 458-202-7900
                   </a>
@@ -363,11 +363,11 @@ const Index = () => {
                       <Card className={`h-full border transition-all hover:shadow-md ${option.accent}`}>
                         <CardContent className="p-4 md:p-5">
                           <div className="w-10 h-10 rounded-xl bg-background/80 flex items-center justify-center mb-3 border border-border/40">
-                            <option.icon className="w-5 h-5 text-logo-green" />
+                            <option.icon className="w-5 h-5 text-logo-blue" />
                           </div>
                           <h2 className="font-semibold text-foreground mb-2">{option.title}</h2>
                           <p className="text-sm text-muted-foreground mb-3 leading-relaxed">{option.description}</p>
-                          <div className="inline-flex items-center gap-1 text-sm font-medium text-logo-green">
+                          <div className="inline-flex items-center gap-1 text-sm font-medium text-logo-blue">
                             {option.cta}
                             <ArrowRight className="w-4 h-4" />
                           </div>
@@ -385,7 +385,7 @@ const Index = () => {
                       <img src={mattBrownTrust} alt="Matt Brown" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-green text-xs font-semibold mb-3">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-xs font-semibold mb-3">
                         <Shield className="w-3.5 h-3.5" />
                         Trusted, private, family-first guidance
                       </div>
@@ -394,9 +394,9 @@ const Index = () => {
                         Matt has 22+ years of experience helping families respond to addiction with more clarity and less panic. He helps families think straight in hard moments, evaluate treatment options ethically, and stop getting pushed around by the industry.
                       </p>
                       <div className="space-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-green" />Private consults and family coaching</div>
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-green" />Ethical treatment navigation for families</div>
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-green" />Support in English and Spanish</div>
+                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Private consults and family coaching</div>
+                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Ethical treatment navigation for families</div>
+                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Support in English and Spanish</div>
                       </div>
                     </div>
                   </div>
@@ -407,7 +407,7 @@ const Index = () => {
                       <div>
                         <p className="font-semibold text-foreground">Start free. Move faster when the situation calls for it.</p>
                         <p className="text-sm text-muted-foreground mt-1">If Monday support is enough, begin with Family Squares. If your family needs answers now, book a private session or check intervention readiness.</p>
-                        <Link to="/family-squares" className="inline-flex items-center gap-1 text-sm font-medium text-logo-green mt-2 hover:underline">
+                        <Link to="/family-squares" className="inline-flex items-center gap-1 text-sm font-medium text-logo-blue mt-2 hover:underline">
                           Register for Family Squares
                           <ArrowRight className="w-4 h-4" />
                         </Link>
@@ -447,12 +447,12 @@ const Index = () => {
           <div className="max-w-6xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-logo-green mb-2">Coming from No More Enabling?</p>
+                <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Coming from No More Enabling?</p>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">This is where reading turns into live support.</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
-                <Button asChild variant="outline" className="mt-5 border-logo-green/30 text-logo-green hover:bg-logo-green/5">
+                <Button asChild variant="outline" className="mt-5 border-logo-green/30 text-logo-blue hover:bg-logo-green/5">
                   <Link to="/from-no-more-enabling">
                     Follow the guided bridge
                     <ArrowRight className="h-4 w-4" />
@@ -463,14 +463,14 @@ const Index = () => {
                 {funnelLanes.map((lane) => (
                   <Link key={lane.title} to={lane.to} className="rounded-2xl border bg-background/80 p-4 transition-all hover:border-logo-green/40 hover:shadow-sm">
                     <div className="flex items-start gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-logo-green/10 text-logo-green">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-logo-green/10 text-logo-blue">
                         <lane.icon className="h-5 w-5" />
                       </span>
                       <span>
                         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</span>
                         <span className="block font-semibold text-foreground">{lane.title}</span>
                         <span className="mt-1 block text-sm text-muted-foreground">{lane.description}</span>
-                        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-logo-green">
+                        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-logo-blue">
                           {lane.cta}
                           <ArrowRight className="h-4 w-4" />
                         </span>
@@ -532,7 +532,7 @@ const Index = () => {
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-full bg-logo-green/20 flex items-center justify-center">
-                      <Check className="w-5 h-5 text-logo-green" />
+                      <Check className="w-5 h-5 text-logo-blue" />
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-foreground">With Steady Support</h3>
                   </div>
@@ -548,7 +548,7 @@ const Index = () => {
                       "More clarity, so you can respond instead of react",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <Check className="w-4 h-4 text-logo-green mt-0.5 flex-shrink-0" />
+                        <Check className="w-4 h-4 text-logo-blue mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -597,7 +597,7 @@ const Index = () => {
                     <CardContent className="p-5 md:p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 rounded-xl bg-background/70 flex items-center justify-center flex-shrink-0 border border-border/40">
-                          <pillar.icon className={`w-6 h-6 ${colorMap[pillar.color as keyof typeof colorMap].includes("text-") ? colorMap[pillar.color as keyof typeof colorMap].split(" ").slice(-2).join(" ") : "text-logo-green"}`} />
+                          <pillar.icon className={`w-6 h-6 ${colorMap[pillar.color as keyof typeof colorMap].includes("text-") ? colorMap[pillar.color as keyof typeof colorMap].split(" ").slice(-2).join(" ") : "text-logo-blue"}`} />
                         </div>
                         <div>
                           <h3 className="font-semibold text-foreground mb-2">{pillar.title}</h3>
@@ -736,7 +736,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16">
           <div className="text-center mb-8 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-green text-xs md:text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-blue text-xs md:text-sm font-medium mb-4">
               <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
               Ethical Provider Directory
             </div>
@@ -753,7 +753,7 @@ const Index = () => {
                 <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
                   <CardContent className="p-4 md:p-6 text-center">
                     <div className="w-12 h-12 mx-auto rounded-xl bg-logo-green/10 flex items-center justify-center mb-3 group-hover:bg-logo-green/20 transition-colors">
-                      <category.icon className="w-6 h-6 text-logo-green" />
+                      <category.icon className="w-6 h-6 text-logo-blue" />
                     </div>
                     <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
                     <p className="text-xs text-muted-foreground hidden md:block">{category.description}</p>
@@ -849,7 +849,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/family-consultation" className="w-full sm:w-auto" onClick={() => trackConversionEvent("coaching_click", { source: "homepage_bottom_cta" })}>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-green hover:bg-logo-green hover:text-white">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-blue hover:bg-logo-green hover:text-white">
                   <Phone className="w-4 h-4 md:w-5 md:h-5" />
                   Book a Session Now
                 </Button>

@@ -49,7 +49,7 @@ export default function EmotionalRegulation() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Addiction dysregulates everyone it touches. Families often respond from fear, anger, guilt, or urgency—then regret their reactions later. Emotional regulation is not about suppressing feelings; it is about responding with intention instead of impulse.
                 </p>
@@ -72,7 +72,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 1 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 1: The Pause (Interrupting Reactivity)
                 </h2>
 
@@ -105,7 +105,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 2 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 2: Name It to Tame It (Labeling Emotions)
                 </h2>
 
@@ -132,7 +132,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 3 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 3: Grounding in the Present (5–4–3–2–1)
                 </h2>
 
@@ -176,7 +176,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 4 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 4: The Boundary Script (Reducing Emotional Escalation)
                 </h2>
 
@@ -203,7 +203,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 5 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 5: Reality Check (Thought Reframing)
                 </h2>
 
@@ -242,7 +242,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 6 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 6: Emotional Containment (Not Absorbing the Chaos)
                 </h2>
 
@@ -270,7 +270,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 7 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 7: Post-Interaction Reset
                 </h2>
 
@@ -297,7 +297,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 8 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 8: Values-Based Decision Check
                 </h2>
 
@@ -331,7 +331,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 9 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 9: Guilt vs. Responsibility Test
                 </h2>
 
@@ -368,7 +368,7 @@ export default function EmotionalRegulation() {
 
               {/* Tool 10 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Tool 10: Build a Regulation Routine
                 </h2>
 
@@ -407,7 +407,7 @@ export default function EmotionalRegulation() {
 
               {/* Quick Reference */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Quick Reference: What Regulation Is and Isn't
                 </h2>
 
@@ -436,7 +436,7 @@ export default function EmotionalRegulation() {
 
               {/* Final Reframe */}
               <section className="mb-8 p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-green mb-3">Final Reframe</h2>
+                <h2 className="text-lg font-bold text-logo-blue mb-3">Final Reframe</h2>
                 <p className="text-center text-lg mb-4">
                   You do not need to be perfectly calm to be effective.<br />
                   <strong className="text-primary">You need to be regulated enough to choose your response.</strong>
@@ -448,7 +448,7 @@ export default function EmotionalRegulation() {
 
               {/* Suggested Resources */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Suggested Companion Resources
                 </h2>
                 <ul className="space-y-2">

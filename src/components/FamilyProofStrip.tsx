@@ -28,7 +28,7 @@ export default function FamilyProofStrip() {
       <div className="container max-w-5xl mx-auto px-4">
         <div className="mb-6 max-w-3xl">
           <p className="text-sm font-semibold text-primary">What families are looking for</p>
-          <h2 className="mt-1 text-2xl md:text-3xl font-bold tracking-normal text-logo-green">
+          <h2 className="mt-1 text-2xl md:text-3xl font-bold tracking-normal text-logo-blue">
             Support that turns panic into a next step
           </h2>
           <p className="mt-3 text-muted-foreground">

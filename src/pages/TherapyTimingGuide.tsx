@@ -48,7 +48,7 @@ export default function TherapyTimingGuide() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Why This Guide Matters</CardTitle>
+                <CardTitle className="text-logo-blue">Why This Guide Matters</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families are often told:</p>
@@ -92,7 +92,7 @@ export default function TherapyTimingGuide() {
             {/* Three Broad Stages */}
             <Card className="mb-8 border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green flex items-center gap-2">
+                <CardTitle className="text-logo-blue flex items-center gap-2">
                   <Layers className="h-5 w-5" />
                   The Three Broad Stages to Keep in Mind
                 </CardTitle>
@@ -150,7 +150,7 @@ export default function TherapyTimingGuide() {
 
             {/* Why Specific Therapies Fail */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-logo-green mb-4">Why Specific Therapies Fail at the Wrong Time</h2>
+              <h2 className="text-2xl font-bold text-logo-blue mb-4">Why Specific Therapies Fail at the Wrong Time</h2>
               <Accordion type="single" collapsible className="space-y-2">
                 {/* Insight-Based Therapy */}
                 <AccordionItem value="insight" className="border rounded-lg px-4">
@@ -448,7 +448,7 @@ export default function TherapyTimingGuide() {
             {/* Final Thought */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Therapy is powerful—but only when:</p>
@@ -463,7 +463,7 @@ export default function TherapyTimingGuide() {
                     Families don't fail because therapy didn't work.<br />
                     They struggle because the right help arrived too early—or too late.
                   </p>
-                  <p className="text-lg font-semibold text-logo-green mt-2">
+                  <p className="text-lg font-semibold text-logo-blue mt-2">
                     Understanding timing restores hope—and strategy.
                   </p>
                 </div>
@@ -473,7 +473,7 @@ export default function TherapyTimingGuide() {
             {/* Companion Resources */}
             <Card className="border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

@@ -173,7 +173,7 @@ const FearInventoryExercise = () => {
               <Card className="border-logo-green/30 bg-logo-green/5 my-6">
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-foreground flex items-center gap-2 mb-3">
-                    <Shield className="w-5 h-5 text-logo-green" />
+                    <Shield className="w-5 h-5 text-logo-blue" />
                     What This Exercise Will Help You Do
                   </h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -292,7 +292,7 @@ const FearInventoryExercise = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="bg-logo-green/5 border border-logo-green/20 rounded-lg p-4">
-                    <h4 className="font-medium text-logo-green flex items-center gap-2 mb-2">
+                    <h4 className="font-medium text-logo-blue flex items-center gap-2 mb-2">
                       <Lightbulb className="w-4 h-4" />
                       Reality Check
                     </h4>
@@ -356,7 +356,7 @@ const FearInventoryExercise = () => {
               <Card className="border-logo-green/30">
                 <CardContent className="p-6">
                   <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-logo-green" />
+                    <Heart className="w-5 h-5 text-logo-blue" />
                     Love Says:
                   </h4>
                   <ul className="space-y-2 text-muted-foreground text-sm">
@@ -402,7 +402,7 @@ const FearInventoryExercise = () => {
           <div className="space-y-8">
             <div className="text-center pb-6">
               <div className="w-16 h-16 rounded-full bg-logo-green/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-logo-green" />
+                <CheckCircle2 className="w-8 h-8 text-logo-blue" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground mb-2">Your Commitment</h3>
               <p className="text-muted-foreground max-w-lg mx-auto">
@@ -448,7 +448,7 @@ const FearInventoryExercise = () => {
             {showResults && (
               <Card className="border-logo-green bg-logo-green/5">
                 <CardContent className="p-6 text-center space-y-4">
-                  <CheckCircle2 className="w-12 h-12 text-logo-green mx-auto" />
+                  <CheckCircle2 className="w-12 h-12 text-logo-blue mx-auto" />
                   <h4 className="text-xl font-semibold text-foreground">Exercise Complete</h4>
                   <p className="text-muted-foreground">
                     You've taken an important step in understanding how fear affects your decisions. Remember: courage isn't the absence of fear—it's taking action despite fear.
@@ -526,7 +526,7 @@ const FearInventoryExercise = () => {
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                     isComplete ? 'bg-logo-green text-white' :
-                    isActive ? 'bg-logo-green/20 text-logo-green border-2 border-logo-green' :
+                    isActive ? 'bg-logo-green/20 text-logo-blue border-2 border-logo-green' :
                     'bg-muted text-muted-foreground'
                   }`}>
                     {isComplete ? <CheckCircle2 className="w-5 h-5" /> : <Icon className="w-5 h-5" />}

@@ -153,7 +153,7 @@ export default function ScenarioExercise() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Families often abandon boundaries and action plans during emotional moments. This exercise allows you to practice responses in advance, so decisions are made from clarity—not fear, guilt, or urgency.
                 </p>
@@ -175,7 +175,7 @@ export default function ScenarioExercise() {
 
               {/* Scenario 1 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Scenario 1: The Late-Night Crisis Call
                 </h2>
 
@@ -268,7 +268,7 @@ export default function ScenarioExercise() {
 
               {/* Scenario 2 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Scenario 2: The Promise to Change
                 </h2>
 
@@ -346,7 +346,7 @@ export default function ScenarioExercise() {
 
               {/* Scenario 3 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Scenario 3: Treatment Resistance
                 </h2>
 
@@ -417,7 +417,7 @@ export default function ScenarioExercise() {
 
               {/* Scenario 4 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Scenario 4: Early Recovery Slips
                 </h2>
 
@@ -484,7 +484,7 @@ export default function ScenarioExercise() {
 
               {/* Scenario 5 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Scenario 5: Family Disagreement
                 </h2>
 
@@ -544,7 +544,7 @@ export default function ScenarioExercise() {
 
               {/* Reflection */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Reflection: Patterns & Growth
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Answer honestly:</p>
@@ -587,7 +587,7 @@ export default function ScenarioExercise() {
 
               {/* Skill-Building Reframe */}
               <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-green mb-3">Skill-Building Reframe</h2>
+                <h2 className="text-lg font-bold text-logo-blue mb-3">Skill-Building Reframe</h2>
                 <p className="text-lg font-semibold text-center mb-4">
                   You don't rise to the level of your intentions in a crisis.<br />
                   <span className="text-primary">You fall to the level of your preparation.</span>

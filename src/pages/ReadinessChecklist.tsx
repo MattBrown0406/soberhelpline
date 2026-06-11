@@ -116,7 +116,7 @@ export default function ReadinessChecklist() {
 
   const renderSection = (sectionKey: keyof typeof checklistItems, title: string, items: string[]) => (
     <section className="mb-8">
-      <h2 className="text-xl font-bold text-logo-green mb-4">{title}</h2>
+      <h2 className="text-xl font-bold text-logo-blue mb-4">{title}</h2>
       <div className="space-y-3">
         {items.map((item, index) => (
           <label key={index} className="flex items-start gap-3 cursor-pointer">
@@ -199,7 +199,7 @@ export default function ReadinessChecklist() {
 
               {/* Instructions */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Instructions</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Instructions</h2>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
                   <li>Complete this checklist based on what you have observed over the past 2–4 weeks, not what was said during emotional moments or crises.</li>
                   <li>Check items that are consistently true, not occasional.</li>
@@ -216,7 +216,7 @@ export default function ReadinessChecklist() {
 
               {/* Scoring Guide */}
               <section className="mb-8 p-6 bg-muted/30 rounded-lg border">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Scoring Guide</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">Scoring Guide</h2>
                 <p className="text-sm text-muted-foreground mb-4">(Use as a Reference, Not a Rule)</p>
                 
                 <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function ReadinessChecklist() {
 
               {/* Family Reality Check */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Family Reality Check</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">Family Reality Check</h2>
                 <p className="text-muted-foreground mb-4">Answer honestly:</p>
                 
                 <div className="space-y-4">
@@ -316,7 +316,7 @@ export default function ReadinessChecklist() {
 
               {/* Action Based on Current Readiness */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Action Based on Current Readiness</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">Action Based on Current Readiness</h2>
                 <div className="space-y-3">
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" className="mt-1 h-5 w-5 rounded border-gray-300" />
@@ -349,7 +349,7 @@ export default function ReadinessChecklist() {
 
               {/* Key Reminder */}
               <section className="mb-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Key Reminder</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Key Reminder</h2>
                 <p className="text-foreground font-medium mb-2">
                   Readiness is proven through effort, not emotion.
                 </p>
@@ -363,7 +363,7 @@ export default function ReadinessChecklist() {
 
               {/* Suggested Companion Tools */}
               <section className="mb-4">
-                <h2 className="text-xl font-bold text-logo-green mb-4">Suggested Companion Tools</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">Suggested Companion Tools</h2>
                 <ul className="space-y-2">
                   <li>
                     <Link to="/family-action-plan" className="text-primary hover:underline">

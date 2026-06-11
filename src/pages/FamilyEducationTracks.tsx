@@ -77,11 +77,11 @@ export default function FamilyEducationTracks() {
 
           <div className="rounded-3xl border border-logo-green/20 bg-gradient-to-br from-logo-green/10 via-background to-primary/5 p-8 md:p-10 mb-8">
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-xs font-semibold text-logo-green mb-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-xs font-semibold text-logo-blue mb-4">
                 <BookOpen className="h-3.5 w-3.5" />
                 Guided Paths for New Members
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-3">Curated Family Education Tracks</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-3">Curated Family Education Tracks</h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-4">
                 Instead of dropping families into a giant library and hoping they find the right article, these tracks give them a clear starting point based on what they are actually facing.
               </p>
@@ -107,10 +107,10 @@ export default function FamilyEducationTracks() {
                     <CardHeader>
                       <div className="flex items-start gap-3">
                         <div className="rounded-xl bg-logo-green/10 p-2.5 border border-logo-green/20">
-                          <Icon className="h-5 w-5 text-logo-green" />
+                          <Icon className="h-5 w-5 text-logo-blue" />
                         </div>
                         <div>
-                          <CardTitle className="text-xl text-logo-green">{track.title}</CardTitle>
+                          <CardTitle className="text-xl text-logo-blue">{track.title}</CardTitle>
                           <CardDescription className="mt-1 text-sm">{track.summary}</CardDescription>
                         </div>
                       </div>
@@ -144,7 +144,7 @@ export default function FamilyEducationTracks() {
                         <p className="font-medium text-foreground mb-1">{track.forumTopic.topicTitle}</p>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-3">{track.forumTopic.prompt}</p>
                         <Link to={`/family-forum/${track.forumTopic.topicId}`}>
-                          <Button variant="ghost" className="px-0 h-auto text-logo-green hover:text-logo-green/80">
+                          <Button variant="ghost" className="px-0 h-auto text-logo-blue hover:text-logo-blue/80">
                             Open forum topic <ChevronRight className="h-4 w-4 ml-1" />
                           </Button>
                         </Link>
@@ -171,7 +171,7 @@ export default function FamilyEducationTracks() {
                     <div key={day.day} className="rounded-2xl border bg-background/80 p-4 md:p-5">
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
                         <div>
-                          <p className="text-xs font-semibold uppercase tracking-wide text-logo-green mb-1">Day {day.day}</p>
+                          <p className="text-xs font-semibold uppercase tracking-wide text-logo-blue mb-1">Day {day.day}</p>
                           <h3 className="text-lg font-semibold text-foreground">{day.subject}</h3>
                           <p className="text-sm text-muted-foreground mt-1">{day.preview}</p>
                         </div>

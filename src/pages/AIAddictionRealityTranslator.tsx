@@ -262,7 +262,7 @@ const AIAddictionRealityTranslator = () => {
             <div className="inline-flex items-center justify-center p-4 bg-indigo-500/10 rounded-full mb-4">
               <Eye className="h-12 w-12 text-indigo-600" />
             </div>
-            <h1 className="text-4xl font-bold text-logo-green mb-4">
+            <h1 className="text-4xl font-bold text-logo-blue mb-4">
               AI Addiction Reality Translator
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -275,7 +275,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* What This Tool Does */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">What This Tool Does</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">What This Tool Does</h2>
             <p className="text-muted-foreground mb-6">
               This specialized prompt transforms your AI chatbot into a reality translator that helps you <strong>see clearly when addiction creates confusion</strong>. It distinguishes explanations from excuses, names avoidance patterns, and anchors you in observable behavior rather than speculation.
             </p>
@@ -284,7 +284,7 @@ const AIAddictionRealityTranslator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Eye className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Eye className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Translates Behavior to Reality</h3>
                       <p className="text-sm text-muted-foreground">
@@ -298,7 +298,7 @@ const AIAddictionRealityTranslator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Target className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Target className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Detects Loopholes & Rationalizations</h3>
                       <p className="text-sm text-muted-foreground">
@@ -312,7 +312,7 @@ const AIAddictionRealityTranslator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Brain className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Brain className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Weighs Mental Health Context</h3>
                       <p className="text-sm text-muted-foreground">
@@ -326,7 +326,7 @@ const AIAddictionRealityTranslator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Scale className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Scale className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Separates Explanations from Excuses</h3>
                       <p className="text-sm text-muted-foreground">
@@ -341,7 +341,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Core Orientation */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Core Orientation</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Core Orientation</h2>
             <Card className="bg-indigo-50/50 dark:bg-indigo-950/10 border-indigo-500/20">
               <CardContent className="py-6">
                 <p className="text-lg text-center italic text-muted-foreground mb-4">
@@ -375,33 +375,33 @@ const AIAddictionRealityTranslator = () => {
 
           {/* When to Use This Tool */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">When to Use This Tool</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">When to Use This Tool</h2>
             <p className="text-muted-foreground mb-4">
               This AI reality translator is especially useful when:
             </p>
             <ul className="space-y-2 text-muted-foreground mb-6">
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're confused about whether behavior is "really addiction" or something else</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You find yourself making excuses for harmful behavior</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>Mental health diagnoses are being used to avoid addiction accountability</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're personalizing addiction behavior (thinking it's about you)</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're hearing "they can't help it" and wondering if that's true</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You need help distinguishing compassion from collusion</span>
               </li>
             </ul>
@@ -409,7 +409,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* AI Advantages */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Why AI Can Help Cut Through Confusion</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Why AI Can Help Cut Through Confusion</h2>
             <p className="text-muted-foreground mb-6">
               While AI should never replace professional guidance, it can offer unique advantages when you're lost in the fog of addiction's impact on your family:
             </p>
@@ -455,7 +455,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Translation Framework */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">The Translation Framework</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">The Translation Framework</h2>
             <p className="text-muted-foreground mb-4">
               Every response follows this structure to help you see clearly:
             </p>
@@ -489,7 +489,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* How to Use */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">How to Use This Tool</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Tool</h2>
             <div className="space-y-4">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-8 h-8 bg-logo-green text-white rounded-full flex items-center justify-center font-semibold">
@@ -572,7 +572,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Full Prompt Reference */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Full Prompt Reference</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Full Prompt Reference</h2>
             <Card>
               <CardContent className="py-6">
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-mono bg-muted/50 p-4 rounded-lg overflow-x-auto max-h-96 overflow-y-auto">
@@ -584,7 +584,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* What This Tool Does NOT Do */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">What This Tool Does NOT Do</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">What This Tool Does NOT Do</h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Card className="border-red-200 dark:border-red-900/30">
                 <CardContent className="py-4">
@@ -623,7 +623,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Sample Conversation Starters */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Sample Conversation Starters</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Sample Conversation Starters</h2>
             <p className="text-muted-foreground mb-4">
               After pasting the master prompt, try starting with messages like:
             </p>
@@ -673,13 +673,13 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Related Resources */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Related Resources</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Related Resources</h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Link to="/ai-boundary-builder-coach">
                 <Card className="hover:border-logo-green/40 hover:shadow-lg transition-all cursor-pointer h-full">
                   <CardContent className="py-5">
                     <div className="flex gap-3">
-                      <Shield className="h-5 w-5 text-logo-green flex-shrink-0" />
+                      <Shield className="h-5 w-5 text-logo-blue flex-shrink-0" />
                       <div>
                         <h3 className="font-medium mb-1">AI Boundary Builder Coach</h3>
                         <p className="text-sm text-muted-foreground">
@@ -695,7 +695,7 @@ const AIAddictionRealityTranslator = () => {
                 <Card className="hover:border-logo-green/40 hover:shadow-lg transition-all cursor-pointer h-full">
                   <CardContent className="py-5">
                     <div className="flex gap-3">
-                      <Compass className="h-5 w-5 text-logo-green flex-shrink-0" />
+                      <Compass className="h-5 w-5 text-logo-blue flex-shrink-0" />
                       <div>
                         <h3 className="font-medium mb-1">AI Enabling Decision Coach</h3>
                         <p className="text-sm text-muted-foreground">

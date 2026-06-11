@@ -55,7 +55,7 @@ export default function FamilyAddictionAnswerDetail() {
     return (
       <main className="min-h-screen bg-background py-20">
         <div className="container mx-auto max-w-3xl px-4 text-center">
-          <h1 className="text-3xl font-bold text-logo-green">Answer not found</h1>
+          <h1 className="text-3xl font-bold text-logo-blue">Answer not found</h1>
           <Button asChild className="mt-6" variant="outline">
             <Link to="/family-addiction-answers">
               <ArrowLeft className="h-4 w-4" />
@@ -147,7 +147,7 @@ export default function FamilyAddictionAnswerDetail() {
                   <HelpCircle className="h-4 w-4" />
                   {answer.category}
                 </div>
-                <h1 className="text-4xl font-bold tracking-normal text-logo-green md:text-5xl">{answer.question}</h1>
+                <h1 className="text-4xl font-bold tracking-normal text-logo-blue md:text-5xl">{answer.question}</h1>
                 <div className="aeo-short-answer mt-6 rounded-xl border border-primary/20 bg-card p-6">
                   <p className="text-sm font-semibold uppercase tracking-wide text-primary">Direct answer</p>
                   <p className="mt-3 text-xl leading-relaxed text-foreground">{answer.shortAnswer}</p>
@@ -157,7 +157,7 @@ export default function FamilyAddictionAnswerDetail() {
               <Card className="border-primary/20">
                 <CardContent className="p-6">
                   <p className="aeo-next-step text-sm font-semibold uppercase tracking-wide text-primary">{nextStep.eyebrow}</p>
-                  <h2 className="mt-2 text-2xl font-bold text-logo-green">{nextStep.title}</h2>
+                  <h2 className="mt-2 text-2xl font-bold text-logo-blue">{nextStep.title}</h2>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{nextStep.description}</p>
                   <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm leading-relaxed text-foreground">
                     {intentNotes[answer.bestNextStep]}
@@ -203,7 +203,7 @@ export default function FamilyAddictionAnswerDetail() {
                     <ShieldAlert className="h-5 w-5" />
                     <p className="text-sm font-semibold uppercase tracking-wide">Use the Sober Helpline hierarchy</p>
                   </div>
-                  <h2 className="mt-3 text-2xl font-bold text-logo-green">The next step should match the pressure level.</h2>
+                  <h2 className="mt-3 text-2xl font-bold text-logo-blue">The next step should match the pressure level.</h2>
                   <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
                     Keep the free meeting as the soft landing, but move faster when the question is private, urgent, or intervention-level.
                   </p>
@@ -245,7 +245,7 @@ export default function FamilyAddictionAnswerDetail() {
                 <Card>
                   <CardContent className="p-6 md:p-8">
                     <p className="text-sm font-semibold uppercase tracking-wide text-primary">Keep the visit moving</p>
-                    <h2 className="mt-2 text-2xl font-bold text-logo-green">Answer the next likely question.</h2>
+                    <h2 className="mt-2 text-2xl font-bold text-logo-blue">Answer the next likely question.</h2>
                     <div className="mt-5 grid gap-3 md:grid-cols-2">
                       {nextQuestion && (
                         <Link
@@ -278,7 +278,7 @@ export default function FamilyAddictionAnswerDetail() {
             <aside className="space-y-5">
               <Card>
                 <CardContent className="p-6">
-                  <h2 className="text-2xl font-bold text-logo-green">Related answers</h2>
+                  <h2 className="text-2xl font-bold text-logo-blue">Related answers</h2>
                   <div className="mt-4 space-y-3">
                     {relatedAnswers.map((related) => (
                       <Link

@@ -62,7 +62,7 @@ const StartHereGuide = () => {
     <div className="bg-gradient-to-br from-logo-green/5 via-white to-emerald-50 rounded-2xl border border-logo-green/20 p-6 md:p-8 mb-8">
       <div className="flex items-center gap-3 mb-2">
         <div className="p-2 rounded-lg bg-logo-green/10">
-          <BookOpen className="w-5 h-5 text-logo-green" />
+          <BookOpen className="w-5 h-5 text-logo-blue" />
         </div>
         <h2 className="text-xl md:text-2xl font-bold text-gray-900">New Here? Start With This Path</h2>
       </div>
@@ -86,7 +86,7 @@ const StartHereGuide = () => {
             {/* Content */}
             <div className="flex-1 pb-4">
               <div className="flex items-center gap-2 mb-1">
-                <step.icon className="w-4 h-4 text-logo-green" />
+                <step.icon className="w-4 h-4 text-logo-blue" />
                 <h3 className="font-semibold text-gray-900">{step.title}</h3>
               </div>
               <p className="text-sm text-gray-600 mb-3">{step.description}</p>

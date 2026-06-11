@@ -382,7 +382,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="flex items-center gap-3">
                 <Heart className="h-6 w-6 text-rose-500" />
                 <div>
-                  <CardTitle className="text-logo-green">Self-Care That Actually Helps</CardTitle>
+                  <CardTitle className="text-logo-blue">Self-Care That Actually Helps</CardTitle>
                   <CardDescription>What Families Need When Loving Someone With Addiction</CardDescription>
                 </div>
               </div>
@@ -412,7 +412,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5 text-amber-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 1: Why Self-Care Feels Wrong</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 1: Why Self-Care Feels Wrong</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Families impacted by addiction often hold beliefs that prevent them from taking care of themselves. These beliefs come from love mixed with fear, not selfishness.
@@ -474,7 +474,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Brain className="h-5 w-5 text-purple-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 2: Nervous System Care (The Foundation)</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 2: Nervous System Care (The Foundation)</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Families living with addiction are often in chronic fight-or-flight. A dysregulated nervous system cannot make good decisions. <strong>Calm is not complacency. It is capacity.</strong>
@@ -546,7 +546,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Flame className="h-5 w-5 text-orange-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 3: Emotional Self-Care (Not Suppression)</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 3: Emotional Self-Care (Not Suppression)</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Families are often told to "stay strong," which leads to bottled emotions, emotional numbness, and sudden overwhelm.
@@ -620,7 +620,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 4: Boundary-Based Self-Care</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 4: Boundary-Based Self-Care</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Boundaries are one of the most effective forms of self-care. Families often feel guilty setting boundaries—but boundaries reduce resentment and burnout.
@@ -685,7 +685,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-yellow-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 5: Identity Recovery</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 5: Identity Recovery</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Addiction quietly takes over a family's identity. Many families stop asking: What do I want? What brings me meaning? Who am I outside of this crisis?
@@ -745,7 +745,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Brain className="h-5 w-5 text-indigo-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 6: Mental Self-Care (Reducing Overthinking)</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 6: Mental Self-Care (Reducing Overthinking)</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Families often live in mental overdrive. This is not denial—it's mental containment.
@@ -817,7 +817,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-teal-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 7: Relational Self-Care</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 7: Relational Self-Care</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Families often isolate or over-explain. You don't owe everyone access to your pain.
@@ -873,7 +873,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <RefreshCw className="h-5 w-5 text-cyan-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 8: Self-Care During Crisis vs. Calm</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 8: Self-Care During Crisis vs. Calm</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Self-care changes with context—and that's okay. What you need during a crisis is different from what you need during calm periods.
@@ -947,7 +947,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Heart className="h-5 w-5 text-pink-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 9: What Self-Care Looks Like in Real Life</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 9: What Self-Care Looks Like in Real Life</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Real self-care is often small, unglamorous, and invisible to others. None of this is selfish.
@@ -997,7 +997,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 10: A Reality-Based Self-Care Check</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 10: A Reality-Based Self-Care Check</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Use these questions to evaluate whether an action truly counts as self-care for you.
@@ -1067,7 +1067,7 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-amber-500" />
-                  <h3 className="text-lg font-semibold text-logo-green">Part 11: Your Self-Care Commitment</h3>
+                  <h3 className="text-lg font-semibold text-logo-blue">Part 11: Your Self-Care Commitment</h3>
                 </div>
 
                 <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800">

@@ -259,7 +259,7 @@ export default function CommunicationGuide() {
             {/* Purpose */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-logo-green">Purpose</CardTitle>
+                <CardTitle className="text-logo-blue">Purpose</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -292,7 +292,7 @@ export default function CommunicationGuide() {
             {/* General Communication Principles */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">General Communication Principles (Read First)</CardTitle>
+                <CardTitle className="text-logo-blue">General Communication Principles (Read First)</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Before we break this down by scenario, remember:</p>
@@ -312,7 +312,7 @@ export default function CommunicationGuide() {
             {communicationSections.map((section, index) => (
               <Card key={index} className="mb-6 break-inside-avoid">
                 <CardHeader>
-                  <CardTitle className="text-logo-green">{section.title}</CardTitle>
+                  <CardTitle className="text-logo-blue">{section.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
@@ -355,7 +355,7 @@ export default function CommunicationGuide() {
 
                   <div className="bg-muted/50 p-4 rounded-lg">
                     <p className="text-sm">
-                      <strong className="text-logo-green">Why This Works:</strong>{" "}
+                      <strong className="text-logo-blue">Why This Works:</strong>{" "}
                       <span className="text-muted-foreground">{section.whyItWorks}</span>
                     </p>
                   </div>
@@ -366,7 +366,7 @@ export default function CommunicationGuide() {
             {/* Quick Reference Table */}
             <Card className="mb-8 break-inside-avoid">
               <CardHeader>
-                <CardTitle className="text-logo-green">Quick Reference: What Language Does</CardTitle>
+                <CardTitle className="text-logo-blue">Quick Reference: What Language Does</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -431,7 +431,7 @@ export default function CommunicationGuide() {
             {/* Final Reframe */}
             <Card className="mb-8 bg-logo-green/10 border-logo-green/30 break-inside-avoid">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Reframe</CardTitle>
+                <CardTitle className="text-logo-blue">Final Reframe</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-lg font-semibold text-foreground">
@@ -440,15 +440,15 @@ export default function CommunicationGuide() {
                 <p className="text-muted-foreground">Clear language protects:</p>
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-logo-green flex-shrink-0" />
+                    <Check className="h-4 w-4 text-logo-blue flex-shrink-0" />
                     <span>Your emotional health</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-logo-green flex-shrink-0" />
+                    <Check className="h-4 w-4 text-logo-blue flex-shrink-0" />
                     <span>Your boundaries</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-logo-green flex-shrink-0" />
+                    <Check className="h-4 w-4 text-logo-blue flex-shrink-0" />
                     <span>The possibility of real change</span>
                   </li>
                 </ul>
@@ -458,7 +458,7 @@ export default function CommunicationGuide() {
             {/* Companion Resources */}
             <Card className="break-inside-avoid">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">

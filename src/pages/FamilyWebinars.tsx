@@ -255,7 +255,7 @@ export default function FamilyWebinars() {
             </div>
 
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-2">
                 Monthly Webinars
               </h1>
               <p className="text-muted-foreground">
@@ -277,7 +277,7 @@ export default function FamilyWebinars() {
               <CardContent className="p-6 md:p-8">
                 <div className="flex flex-col lg:flex-row gap-6">
                   <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-logo-green mb-3">
+                    <h2 className="text-2xl font-bold text-logo-blue mb-3">
                       {upcomingWebinar.title}
                     </h2>
                     <p className="text-muted-foreground mb-4">
@@ -336,7 +336,7 @@ export default function FamilyWebinars() {
 
             {/* Past Recordings */}
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-logo-green mb-2">Past Recordings</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-2">Past Recordings</h2>
               <p className="text-muted-foreground text-sm">
                 Missed a webinar? Watch the recording anytime.
               </p>
@@ -355,7 +355,7 @@ export default function FamilyWebinars() {
             <Card className="mt-10 bg-muted/30">
               <CardContent className="p-6 text-center">
                 <Calendar className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-logo-green mb-2">Coming Up in 2026</h3>
+                <h3 className="font-semibold text-logo-blue mb-2">Coming Up in 2026</h3>
                 <div className="text-sm text-muted-foreground space-y-1 max-w-md mx-auto">
                   <p><strong>February:</strong> TBD</p>
                   <p><strong>March:</strong> TBD</p>

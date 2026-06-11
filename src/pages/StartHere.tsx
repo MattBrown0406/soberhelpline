@@ -81,7 +81,7 @@ export default function StartHere() {
                   <HeartPulse className="h-4 w-4" />
                   Family addiction triage
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold tracking-normal text-logo-green">
+                <h1 className="text-4xl md:text-5xl font-bold tracking-normal text-logo-blue">
                   Start here if your family is scared and not sure what to do next.
                 </h1>
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
@@ -109,7 +109,7 @@ export default function StartHere() {
             <div className="container max-w-5xl mx-auto px-4">
               <div className="mb-6 max-w-3xl">
                 <p className="text-sm font-semibold text-primary">Choose by pressure level</p>
-                <h2 className="mt-1 text-2xl md:text-3xl font-bold tracking-normal text-logo-green">
+                <h2 className="mt-1 text-2xl md:text-3xl font-bold tracking-normal text-logo-blue">
                   Which path fits today?
                 </h2>
               </div>
@@ -146,7 +146,7 @@ export default function StartHere() {
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Compass className="h-6 w-6" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-logo-green">You do not have to diagnose the whole situation today.</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-logo-blue">You do not have to diagnose the whole situation today.</h2>
                   <p className="mt-3 text-muted-foreground">
                     Families often wait because they are trying to pick the perfect answer. A better first move is to get enough support to stop reacting from panic.
                   </p>

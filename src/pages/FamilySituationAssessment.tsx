@@ -312,7 +312,7 @@ export default function FamilySituationAssessment() {
               {urgencyLabels[result.urgency]}
             </div>
 
-            <h1 className="text-3xl font-bold text-logo-green mb-4 leading-tight">{result.headline}</h1>
+            <h1 className="text-3xl font-bold text-logo-blue mb-4 leading-tight">{result.headline}</h1>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">{result.summary}</p>
 
             {/* Enabling Score */}
@@ -343,7 +343,7 @@ export default function FamilySituationAssessment() {
               {result.primaryCTA === "coaching" && (
                 <Card className="border-primary/30 bg-primary/5">
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-green mb-2">Recommended Order: Start with the Monday Zoom, then move into private help if needed</h2>
+                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended Order: Start with the Monday Zoom, then move into private help if needed</h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Based on what you shared, private coaching may be useful, but the clearest first step is still the Monday Zoom. If you want more structure after that, membership comes next. Coaching is there when you need one-on-one guidance for your specific situation.
                     </p>
@@ -373,7 +373,7 @@ export default function FamilySituationAssessment() {
               {result.primaryCTA === "zoom" && (
                 <Card className="border-primary/30 bg-primary/5">
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-green mb-2">Recommended: Join the Free Monday Zoom</h2>
+                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended: Join the Free Monday Zoom</h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Every Monday at 7PM PST. Ask real questions, hear from other families, get guidance from a certified
                       interventionist. Free — no commitment required.
@@ -399,7 +399,7 @@ export default function FamilySituationAssessment() {
               {result.primaryCTA === "resources" && (
                 <Card className="border-primary/30 bg-primary/5">
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-green mb-2">Recommended: Start with the Monday Zoom & Resources</h2>
+                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended: Start with the Monday Zoom & Resources</h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       You're thinking ahead — that's powerful. The Monday Zoom and our free education library are the right
                       starting point. Come with questions. Leave with a plan.
@@ -432,7 +432,7 @@ export default function FamilySituationAssessment() {
                 <Link key={item.to} to={item.to}>
                   <Card className="hover:border-primary/50 hover:shadow-sm transition-all h-full">
                     <CardContent className="p-4">
-                      <p className="font-medium text-logo-green text-sm mb-1">{item.label}</p>
+                      <p className="font-medium text-logo-blue text-sm mb-1">{item.label}</p>
                       <p className="text-xs text-muted-foreground">{item.desc}</p>
                       <ChevronRight className="h-4 w-4 text-primary mt-2" />
                     </CardContent>
@@ -465,7 +465,7 @@ export default function FamilySituationAssessment() {
           <div className="container max-w-lg mx-auto px-4 py-12">
             <div className="text-center mb-8">
               <CheckCircle2 className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-logo-green mb-2">Your assessment is ready.</h1>
+              <h1 className="text-2xl font-bold text-logo-blue mb-2">Your assessment is ready.</h1>
               <p className="text-muted-foreground">
                 Enter your name and email to see your personalized results and recommended next step.
                 We'll also send a copy to your inbox.
@@ -568,7 +568,7 @@ export default function FamilySituationAssessment() {
                   <Heart className="h-4 w-4 text-primary" />
                   <span className="text-xs text-primary font-medium uppercase tracking-wide">Free Assessment</span>
                 </div>
-                <h1 className="text-2xl font-bold text-logo-green mb-2">{currentStep.question}</h1>
+                <h1 className="text-2xl font-bold text-logo-blue mb-2">{currentStep.question}</h1>
                 <p className="text-muted-foreground text-sm">{currentStep.subtitle}</p>
               </div>
 
@@ -589,7 +589,7 @@ export default function FamilySituationAssessment() {
                       }
                       className={`w-full text-left px-4 py-3.5 rounded-lg border-2 transition-all flex items-center gap-3
                         ${isSelected
-                          ? "border-primary bg-primary/5 text-logo-green font-medium"
+                          ? "border-primary bg-primary/5 text-logo-blue font-medium"
                           : "border-border hover:border-primary/40 text-foreground"
                         }`}
                     >

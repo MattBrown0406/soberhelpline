@@ -79,7 +79,7 @@ export default function NewMexicoFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               New Mexico Family Addiction Resources
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
               Family Support for Addiction in New Mexico: Resources, Help &amp; Hope
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -109,7 +109,7 @@ export default function NewMexicoFamilySupport() {
         {/* New Mexico Stats */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               New Mexico's Addiction Crisis Is a Family Crisis
             </h2>
             <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
@@ -119,21 +119,21 @@ export default function NewMexicoFamilySupport() {
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">#1</div>
-                  <div className="font-semibold text-logo-green mb-1">Highest Overdose Rate</div>
+                  <div className="font-semibold text-logo-blue mb-1">Highest Overdose Rate</div>
                   <div className="text-sm text-muted-foreground">New Mexico has the highest drug overdose death rate per capita in the entire United States</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">40+</div>
-                  <div className="font-semibold text-logo-green mb-1">Deaths Per 100K</div>
+                  <div className="font-semibold text-logo-blue mb-1">Deaths Per 100K</div>
                   <div className="text-sm text-muted-foreground">Over 40 overdose deaths per 100,000 residents annually — more than double the national average</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">Top 5</div>
-                  <div className="font-semibold text-logo-green mb-1">Albuquerque Overdose Rate</div>
+                  <div className="font-semibold text-logo-blue mb-1">Albuquerque Overdose Rate</div>
                   <div className="text-sm text-muted-foreground">Albuquerque ranks in the top 5 US cities for overdose deaths — fentanyl, meth, and heroin driving the crisis</div>
                 </CardContent>
               </Card>
@@ -146,7 +146,7 @@ export default function NewMexicoFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   You Are Not Alone
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -195,7 +195,7 @@ export default function NewMexicoFamilySupport() {
         {/* New Mexico Family Resources */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               New Mexico Family Addiction Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -204,7 +204,7 @@ export default function NewMexicoFamilySupport() {
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Al-Anon New Mexico
                   </CardTitle>
@@ -227,7 +227,7 @@ export default function NewMexicoFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Nar-Anon New Mexico
                   </CardTitle>
@@ -250,7 +250,7 @@ export default function NewMexicoFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <BookOpen className="h-4 w-4 text-primary" />
                     SMART Recovery Family &amp; Friends
                   </CardTitle>
@@ -273,7 +273,7 @@ export default function NewMexicoFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Shield className="h-4 w-4 text-primary" />
                     NM Behavioral Health Services Division
                   </CardTitle>
@@ -296,7 +296,7 @@ export default function NewMexicoFamilySupport() {
 
               <Card className="md:col-span-2">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     New Mexico Crisis Line — 24/7
                   </CardTitle>
@@ -322,7 +322,7 @@ export default function NewMexicoFamilySupport() {
         {/* CRAFT vs Traditional */}
         <section className="py-12">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               What Works: CRAFT vs. Traditional Approaches
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -358,7 +358,7 @@ export default function NewMexicoFamilySupport() {
 
               <Card className="border-primary/30 bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
+                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
                   <CardDescription>Evidence-based family intervention model</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -398,7 +398,7 @@ export default function NewMexicoFamilySupport() {
                   <Calendar className="h-3.5 w-3.5" />
                   Every Monday — 7:00 PM PST
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -429,7 +429,7 @@ export default function NewMexicoFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
@@ -459,7 +459,7 @@ export default function NewMexicoFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Hourly Intervention Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -504,7 +504,7 @@ export default function NewMexicoFamilySupport() {
               </div>
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-logo-green mb-3">Who This Is For</h3>
+                  <h3 className="font-semibold text-logo-blue mb-3">Who This Is For</h3>
                   <ul className="space-y-3">
                     {[
                       "You've tried talking to them and nothing works",
@@ -537,7 +537,7 @@ export default function NewMexicoFamilySupport() {
         {/* City Cards */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               New Mexico City-Specific Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -556,7 +556,7 @@ export default function NewMexicoFamilySupport() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-logo-green group-hover:text-primary transition-colors">
+                            <span className="font-semibold text-logo-blue group-hover:text-primary transition-colors">
                               {city.name}
                             </span>
                           </div>
@@ -575,7 +575,7 @@ export default function NewMexicoFamilySupport() {
         {/* FAQ Section */}
         <section className="py-12">
           <div className="container max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
@@ -593,7 +593,7 @@ export default function NewMexicoFamilySupport() {
         <section className="py-12 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
               New Mexico Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

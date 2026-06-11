@@ -63,7 +63,7 @@ export default function CaliforniaOaklandFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Oakland, California
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-5 leading-tight">
               Addiction Family Support in Oakland, California
             </h1>
             <p className="hero-description text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -91,7 +91,7 @@ export default function CaliforniaOaklandFamilySupport() {
         {/* City Context */}
         <section className="py-12">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
               Oakland's Addiction Crisis and Its Impact on Families
             </h2>
             <div className="prose prose-sm max-w-none text-muted-foreground space-y-4">
@@ -122,13 +122,13 @@ export default function CaliforniaOaklandFamilySupport() {
         {/* Local Resources */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               Oakland &amp; East Bay Addiction Family Resources
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base flex items-center gap-2">
+                  <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-primary" />
                     Highland Hospital — Addiction Services
                   </CardTitle>
@@ -148,7 +148,7 @@ export default function CaliforniaOaklandFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base flex items-center gap-2">
+                  <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-primary" />
                     Alameda County Behavioral Health
                   </CardTitle>
@@ -167,7 +167,7 @@ export default function CaliforniaOaklandFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base flex items-center gap-2">
+                  <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-primary" />
                     Clean &amp; Sober — Oakland
                   </CardTitle>
@@ -186,7 +186,7 @@ export default function CaliforniaOaklandFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base flex items-center gap-2">
+                  <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
                     Bay Area Crisis Line &amp; SAMHSA — 24/7
                   </CardTitle>
@@ -216,7 +216,7 @@ export default function CaliforniaOaklandFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h2 className="text-2xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">
                   Free Family Squares Zoom for Oakland Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -244,7 +244,7 @@ export default function CaliforniaOaklandFamilySupport() {
                 </Link>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">
                   Hourly Intervention Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -278,7 +278,7 @@ export default function CaliforniaOaklandFamilySupport() {
         {/* Other CA Cities */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green text-center mb-6">
+            <h2 className="text-2xl font-bold text-logo-blue text-center mb-6">
               Support for Other California Families
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -292,7 +292,7 @@ export default function CaliforniaOaklandFamilySupport() {
                     <CardContent className="p-4 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <MapPin className="h-3.5 w-3.5 text-primary" />
-                        <span className="text-sm font-medium text-logo-green group-hover:text-primary transition-colors">{city.name}</span>
+                        <span className="text-sm font-medium text-logo-blue group-hover:text-primary transition-colors">{city.name}</span>
                       </div>
                       <ChevronRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                     </CardContent>
@@ -312,7 +312,7 @@ export default function CaliforniaOaklandFamilySupport() {
         <section className="py-12 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-logo-green mb-3">
+            <h2 className="text-2xl font-bold text-logo-blue mb-3">
               Oakland Families: You Don't Have to Do This Alone
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

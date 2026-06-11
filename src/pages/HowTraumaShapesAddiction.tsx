@@ -38,7 +38,7 @@ export default function HowTraumaShapesAddiction() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <HelpCircle className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -272,7 +272,7 @@ export default function HowTraumaShapesAddiction() {
             {/* Why Trauma Alone Does Not Sustain Addiction */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <HelpCircle className="h-5 w-5" />
                   Why Trauma Alone Does Not Sustain Addiction
                 </CardTitle>
@@ -456,7 +456,7 @@ export default function HowTraumaShapesAddiction() {
             {/* Final Thought */}
             <Card className="mb-8 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -478,7 +478,7 @@ export default function HowTraumaShapesAddiction() {
             {/* Companion Resources */}
             <Card className="mb-8 border-slate-500/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

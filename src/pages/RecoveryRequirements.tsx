@@ -42,7 +42,7 @@ export default function RecoveryRequirements() {
               {/* Header */}
               <div className="text-center mb-8 pb-6 border-b">
                 <Heart className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-2">
                   What Recovery Actually Requires From Families
                 </h1>
                 <p className="text-lg text-muted-foreground">
@@ -52,7 +52,7 @@ export default function RecoveryRequirements() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Families are often told to "be supportive," without being told what that actually means. This guide clarifies the active, ongoing role families play in recovery—while also naming what families are <em>not</em> responsible for.
                 </p>
@@ -63,7 +63,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 1 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   1. A Shift in Expectations
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -88,7 +88,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 2 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   2. Consistent Boundaries (Not Emotional Reactions)
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -127,7 +127,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 3 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   3. Emotional Regulation, Not Control
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -160,7 +160,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 4 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   4. Education and Reality-Based Thinking
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -194,7 +194,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 5 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   5. Allowing Natural Consequences
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -221,7 +221,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 6 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   6. Participation in Their Own Recovery
                 </h2>
                 <p className="text-lg font-semibold text-center my-4 p-4 bg-primary/10 rounded-lg print:bg-gray-100">
@@ -248,7 +248,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 7 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   7. Patience Without Passivity
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -282,7 +282,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 8 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   8. Letting Go of Outcomes
                 </h2>
                 <p className="text-lg font-semibold text-center my-4 p-4 bg-muted/50 rounded-lg print:bg-gray-100">
@@ -318,7 +318,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 9 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   9. What Families Are NOT Required to Do
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -338,7 +338,7 @@ export default function RecoveryRequirements() {
 
               {/* Section 10 - Final Reframe */}
               <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-xl font-bold text-logo-green mb-4">10. A Final Reframe</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-4">10. A Final Reframe</h2>
                 <p className="text-muted-foreground mb-4">
                   Recovery is not about saving someone.<br />
                   It is about creating conditions where change is possible.

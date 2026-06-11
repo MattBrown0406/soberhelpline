@@ -57,7 +57,7 @@ export default function NevadaHendersonFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Henderson, Nevada — Clark County
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-5 leading-tight">
               Addiction Family Support in Henderson, Nevada
             </h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
@@ -87,7 +87,7 @@ export default function NevadaHendersonFamilySupport() {
         {/* Henderson Context */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-4">
+            <h2 className="text-2xl font-bold text-logo-blue mb-4">
               Henderson's Addiction Challenge &amp; What Families Face
             </h2>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -121,13 +121,13 @@ export default function NevadaHendersonFamilySupport() {
         {/* Local Resources */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-6">
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">
               Henderson Local Addiction Family Resources
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Heart className="h-4 w-4 text-primary" />
                     St. Rose Dominican Hospital
                   </CardTitle>
@@ -145,7 +145,7 @@ export default function NevadaHendersonFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Heart className="h-4 w-4 text-primary" />
                     Montevista Hospital
                   </CardTitle>
@@ -163,7 +163,7 @@ export default function NevadaHendersonFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Users className="h-4 w-4 text-primary" />
                     WestCare Nevada
                   </CardTitle>
@@ -181,7 +181,7 @@ export default function NevadaHendersonFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
                     Henderson Mental Health Center
                   </CardTitle>
@@ -208,7 +208,7 @@ export default function NevadaHendersonFamilySupport() {
                       <Calendar className="h-3.5 w-3.5" />
                       Every Monday — 7:00 PM PST
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
+                    <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
                       Free “The Family Squares” Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
@@ -254,7 +254,7 @@ export default function NevadaHendersonFamilySupport() {
         {/* Coaching */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-4">
+            <h2 className="text-2xl font-bold text-logo-blue mb-4">
               One-on-One Intervention Coaching for Henderson Families
             </h2>
             <p className="text-muted-foreground mb-6">
@@ -297,7 +297,7 @@ export default function NevadaHendersonFamilySupport() {
         {/* Other Cities */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-logo-green mb-4">Other Nevada Cities</h2>
+            <h2 className="text-xl font-bold text-logo-blue mb-4">Other Nevada Cities</h2>
             <div className="grid grid-cols-2 gap-3 max-w-xs">
               {otherCities.map((city) => (
                 <Link
@@ -321,7 +321,7 @@ export default function NevadaHendersonFamilySupport() {
         <section className="py-10 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
-            <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-2">
+            <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-2">
               Henderson Families: You Don't Have to Do This Alone
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">

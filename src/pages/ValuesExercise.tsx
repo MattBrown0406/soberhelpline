@@ -66,7 +66,7 @@ const ValuesExercise = () => {
 
             {/* Purpose */}
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-logo-green mb-3 flex items-center gap-2">
+              <h2 className="text-xl font-semibold text-logo-blue mb-3 flex items-center gap-2">
                 <FileText className="h-5 w-5" />
                 Purpose
               </h2>
@@ -83,22 +83,22 @@ const ValuesExercise = () => {
 
             {/* How to Use */}
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">How to Use This Exercise</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">How to Use This Exercise</h2>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <CheckSquare className="h-4 w-4 mt-1 text-logo-green flex-shrink-0" />
+                  <CheckSquare className="h-4 w-4 mt-1 text-logo-blue flex-shrink-0" />
                   <span>Complete this exercise when you are relatively calm.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckSquare className="h-4 w-4 mt-1 text-logo-green flex-shrink-0" />
+                  <CheckSquare className="h-4 w-4 mt-1 text-logo-blue flex-shrink-0" />
                   <span>Answer honestly—there are no "right" values.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckSquare className="h-4 w-4 mt-1 text-logo-green flex-shrink-0" />
+                  <CheckSquare className="h-4 w-4 mt-1 text-logo-blue flex-shrink-0" />
                   <span>Revisit this exercise regularly as circumstances change.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckSquare className="h-4 w-4 mt-1 text-logo-green flex-shrink-0" />
+                  <CheckSquare className="h-4 w-4 mt-1 text-logo-blue flex-shrink-0" />
                   <span>Values guide behavior; they are not tools for control.</span>
                 </li>
               </ul>
@@ -106,7 +106,7 @@ const ValuesExercise = () => {
 
             {/* Part 1 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 1: Recognizing Value Drift</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 1: Recognizing Value Drift</h2>
               <p className="text-muted-foreground mb-4">Addiction often pulls families away from their values.</p>
               <p className="font-medium mb-4">Answer briefly:</p>
               
@@ -135,7 +135,7 @@ const ValuesExercise = () => {
 
             {/* Part 2 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 2: Identifying Core Values</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 2: Identifying Core Values</h2>
               <p className="text-muted-foreground mb-4">Below is a list of common values. Circle or highlight <strong>10</strong> that feel important to you right now.</p>
               
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
@@ -155,7 +155,7 @@ const ValuesExercise = () => {
 
             {/* Part 3 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 3: Narrowing to What Matters Most</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 3: Narrowing to What Matters Most</h2>
               <p className="text-muted-foreground mb-4">From the list above, choose <strong>5 core values</strong> that you want to guide your decisions moving forward.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 mb-4">
@@ -181,14 +181,14 @@ const ValuesExercise = () => {
 
             {/* Part 4 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 4: Defining Your Values in Action</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 4: Defining Your Values in Action</h2>
               <p className="text-muted-foreground mb-4">Values only matter if they guide behavior.</p>
               <p className="font-medium mb-4">For each value, answer the following:</p>
               
               {[0, 1, 2, 3, 4].map((index) => (
                 <div key={index} className="mb-6 p-4 bg-muted/20 rounded-lg border">
                   <h3 className="font-semibold mb-3">
-                    Value #{index + 1}: <span className="text-logo-green">{coreValues[index] || <span className="text-muted-foreground italic">Not yet entered</span>}</span>
+                    Value #{index + 1}: <span className="text-logo-blue">{coreValues[index] || <span className="text-muted-foreground italic">Not yet entered</span>}</span>
                   </h3>
                   <div className="space-y-3">
                     <div>
@@ -210,7 +210,7 @@ const ValuesExercise = () => {
 
             {/* Part 5 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 5: Values vs. Fear Check</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 5: Values vs. Fear Check</h2>
               <p className="text-muted-foreground mb-4">For each statement, decide whether it reflects fear-based action or values-based action.</p>
               
               <div className="space-y-4">
@@ -244,7 +244,7 @@ const ValuesExercise = () => {
 
             {/* Part 6 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 6: Applying Values to Real Decisions</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 6: Applying Values to Real Decisions</h2>
               <p className="text-muted-foreground mb-4">Choose one current challenge and answer:</p>
               
               <div className="space-y-4">
@@ -269,7 +269,7 @@ const ValuesExercise = () => {
 
             {/* Part 7 */}
             <section className="mb-8 page-break-inside-avoid">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Part 7: Values-Based Commitment</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Part 7: Values-Based Commitment</h2>
               <p className="text-muted-foreground mb-4">Complete the statements:</p>
               
               <div className="space-y-4">
@@ -290,7 +290,7 @@ const ValuesExercise = () => {
 
             {/* Final Reframe */}
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-logo-green mb-3">Final Reframe</h2>
+              <h2 className="text-xl font-semibold text-logo-blue mb-3">Final Reframe</h2>
               <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/30 text-center">
                 <p className="font-medium text-lg italic mb-2">
                   Values do not eliminate pain.<br />
@@ -304,7 +304,7 @@ const ValuesExercise = () => {
 
             {/* Companion Resources */}
             <section className="border-t pt-6">
-              <h2 className="text-lg font-semibold text-logo-green mb-3">Suggested Companion Resources</h2>
+              <h2 className="text-lg font-semibold text-logo-blue mb-3">Suggested Companion Resources</h2>
               <div className="flex flex-wrap gap-2 print:hidden">
                 <Link to="/boundary-setting-worksheet">
                   <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>

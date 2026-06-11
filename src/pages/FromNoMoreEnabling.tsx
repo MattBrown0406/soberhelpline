@@ -180,7 +180,7 @@ export default function FromNoMoreEnabling() {
           <section className="border-b bg-gradient-to-br from-logo-green/10 via-background to-amber-50/80 dark:to-amber-950/20">
             <div className="container grid gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-14">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-sm font-semibold text-logo-green">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-sm font-semibold text-logo-blue">
                   <BookOpen className="h-4 w-4" />
                   No More Enabling reader path
                 </div>
@@ -212,7 +212,7 @@ export default function FromNoMoreEnabling() {
                 <a
                   href="tel:4582027900"
                   onClick={() => trackPhoneClick("nme_bridge_hero")}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-logo-green hover:underline"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-logo-blue hover:underline"
                 >
                   <Phone className="h-4 w-4" />
                   Call 458-202-7900
@@ -222,7 +222,7 @@ export default function FromNoMoreEnabling() {
               <Card className="border-logo-green/20 bg-background/95 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-xl">
-                    <Mail className="h-5 w-5 text-logo-green" />
+                    <Mail className="h-5 w-5 text-logo-blue" />
                     Keep the next step clear
                   </CardTitle>
                 </CardHeader>
@@ -230,7 +230,7 @@ export default function FromNoMoreEnabling() {
                   {submitted ? (
                     <div className="rounded-lg border border-logo-green/25 bg-logo-green/10 p-4">
                       <div className="flex gap-3">
-                        <CheckCircle2 className="mt-0.5 h-5 w-5 text-logo-green" />
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 text-logo-blue" />
                         <div>
                           <p className="font-semibold text-foreground">Saved.</p>
                           <p className="mt-1 text-sm text-muted-foreground">
@@ -311,14 +311,14 @@ export default function FromNoMoreEnabling() {
           <section className="container px-4 py-10 md:py-14">
             <div className="mx-auto max-w-6xl">
               <div className="mb-6 max-w-2xl">
-                <p className="text-sm font-semibold uppercase tracking-wide text-logo-green">Choose the lane</p>
+                <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">Choose the lane</p>
                 <h2 className="mt-2 text-3xl font-bold text-foreground">Three ways to move from reading to action</h2>
               </div>
               <div className="grid gap-4 md:grid-cols-3">
                 {supportLanes.map((lane) => (
                   <Card key={lane.value} className="border-border transition-all hover:border-logo-green/40 hover:shadow-md">
                     <CardContent className="flex h-full flex-col p-5">
-                      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-green/10 text-logo-green">
+                      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-green/10 text-logo-blue">
                         <lane.icon className="h-5 w-5" />
                       </span>
                       <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</p>
@@ -359,7 +359,7 @@ export default function FromNoMoreEnabling() {
                 {trustPoints.map((point) => (
                   <div key={point} className="rounded-lg border bg-background p-4">
                     <div className="flex gap-3">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-logo-green" />
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-logo-blue" />
                       <p className="text-sm leading-relaxed text-muted-foreground">{point}</p>
                     </div>
                   </div>

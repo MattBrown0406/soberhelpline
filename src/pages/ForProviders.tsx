@@ -124,7 +124,7 @@ const ForProviders = () => {
               <span className="font-semibold text-lg hidden sm:inline">Sober Helpline</span>
             </Link>
             <div className="flex items-center gap-4">
-              <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green font-semibold hover:bg-logo-green/20 transition-colors">
+              <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue font-semibold hover:bg-logo-green/20 transition-colors">
                 <Phone className="w-4 h-4" />
                 <span className="hidden sm:inline">(458) 202-7900</span>
               </a>
@@ -139,13 +139,13 @@ const ForProviders = () => {
         <section className="relative bg-gradient-to-br from-logo-green/5 via-white to-emerald-50 py-20 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-green text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-6">
                 <Building2 className="w-4 h-4" />
                 For Treatment Providers
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
                 Get Found by Families{" "}
-                <span className="text-logo-green">Who Need You Most</span>
+                <span className="text-logo-blue">Who Need You Most</span>
               </h1>
               <p className="hero-description text-xl text-gray-600 mb-8 leading-relaxed">
                 Over 2,500 families search our platform every month for ethical, vetted treatment providers.
@@ -180,7 +180,7 @@ const ForProviders = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {providerTypes.map((type) => (
                 <div key={type} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-logo-green/5 transition-colors">
-                  <CheckCircle className="w-5 h-5 text-logo-green flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-logo-blue flex-shrink-0" />
                   <span className="text-sm font-medium text-gray-700">{type}</span>
                 </div>
               ))}
@@ -200,7 +200,7 @@ const ForProviders = () => {
                 <Card key={benefit.title} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
                     <div className="w-12 h-12 rounded-xl bg-logo-green/10 flex items-center justify-center mb-4">
-                      <benefit.icon className="w-6 h-6 text-logo-green" />
+                      <benefit.icon className="w-6 h-6 text-logo-blue" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
@@ -252,15 +252,15 @@ const ForProviders = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">2,500+</div>
+                <div className="text-4xl font-bold text-logo-blue mb-2">2,500+</div>
                 <p className="text-gray-600">Families Searching Monthly</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">48hrs</div>
+                <div className="text-4xl font-bold text-logo-blue mb-2">48hrs</div>
                 <p className="text-gray-600">Average Approval Time</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-logo-green mb-2">50</div>
+                <div className="text-4xl font-bold text-logo-blue mb-2">50</div>
                 <p className="text-gray-600">States Covered</p>
               </div>
             </div>
@@ -280,28 +280,28 @@ const ForProviders = () => {
               <Card className="p-8 border-2 border-gray-200">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Basic Listing</h3>
-                  <div className="text-4xl font-bold text-logo-green mb-2">FREE</div>
+                  <div className="text-4xl font-bold text-logo-blue mb-2">FREE</div>
                   <p className="text-gray-600">Perfect for getting started</p>
                 </div>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Complete provider profile</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Show in category searches</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Contact information displayed</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Basic photo gallery</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Verification badge</span>
                   </li>
                 </ul>
@@ -315,37 +315,37 @@ const ForProviders = () => {
               {/* Premium Featured */}
               <Card className="p-8 border-2 border-logo-green bg-gradient-to-br from-logo-green/5 to-emerald-50">
                 <div className="text-center mb-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-green text-sm font-medium mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-4">
                     <Award className="w-4 h-4" />
                     Most Popular
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Featured Listing</h3>
-                  <div className="text-4xl font-bold text-logo-green mb-2">$99<span className="text-lg font-normal text-gray-600">/month</span></div>
+                  <div className="text-4xl font-bold text-logo-blue mb-2">$99<span className="text-lg font-normal text-gray-600">/month</span></div>
                   <p className="text-gray-600">Maximum visibility and features</p>
                 </div>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>Everything in Basic</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>⭐ Priority placement in search results</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>⭐ Featured on category pages</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>⭐ Enhanced profile with video</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>⭐ Analytics dashboard</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-logo-green" />
+                    <Check className="w-5 h-5 text-logo-blue" />
                     <span>⭐ Priority customer support</span>
                   </li>
                 </ul>
@@ -382,7 +382,7 @@ const ForProviders = () => {
         {/* Final CTA */}
         <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Award className="w-12 h-12 text-logo-green mx-auto mb-6" />
+            <Award className="w-12 h-12 text-logo-blue mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Families Are Searching for Help Right Now
             </h2>

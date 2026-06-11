@@ -12393,7 +12393,7 @@ Helpful resources include:
 • Structured family education programs
 • Individual therapy focused on boundary-setting and self-care
 • Intervention professionals when resistance is high
-• Peer support groups such as <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" class="text-logo-green hover:underline">Al-Anon</a> and <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" class="text-logo-green hover:underline">Nar-Anon</a> for families affected by addiction
+• Peer support groups such as <a href="https://al-anon.org/" target="_blank" rel="noopener noreferrer" class="text-logo-blue hover:underline">Al-Anon</a> and <a href="https://www.nar-anon.org/" target="_blank" rel="noopener noreferrer" class="text-logo-blue hover:underline">Nar-Anon</a> for families affected by addiction
 
 This support helps families move from reactive decision-making to intentional action.
 

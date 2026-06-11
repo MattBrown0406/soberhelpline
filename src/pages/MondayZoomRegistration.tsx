@@ -474,7 +474,7 @@ export default function MondayZoomRegistration() {
                 <div className="mt-6 rounded-xl border border-logo-green/20 bg-logo-green/5 p-5">
                   <div className="grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-start">
                     <div>
-                      <p className="text-sm font-semibold uppercase tracking-wide text-logo-green">After you register</p>
+                      <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">After you register</p>
                       <h2 className="mt-1 text-2xl font-bold text-foreground">Make the meeting easier to use</h2>
                     </div>
                     <div className="space-y-3">

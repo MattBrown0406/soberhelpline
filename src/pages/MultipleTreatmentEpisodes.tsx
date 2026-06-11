@@ -57,7 +57,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Why This Guide Matters */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Heart className="h-5 w-5" />
                     Why This Guide Matters
                   </CardTitle>
@@ -88,7 +88,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* A Necessary Truth */}
               <Card className="border-primary/50 bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Lightbulb className="h-5 w-5" />
                     First, a Necessary Truth
                   </CardTitle>
@@ -121,7 +121,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* The Myth of One-and-Done */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <XCircle className="h-5 w-5 text-destructive" />
                     The Myth of "One-and-Done" Treatment
                   </CardTitle>
@@ -173,7 +173,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Why Treatment Sometimes Doesn't Stick */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <AlertTriangle className="h-5 w-5" />
                     Why Treatment Sometimes Doesn't "Stick"
                   </CardTitle>
@@ -270,7 +270,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* What Repeated Episodes Tell Us */}
               <Card className="border-primary/50">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <RefreshCw className="h-5 w-5" />
                     What Repeated Episodes Actually Tell Us
                   </CardTitle>
@@ -337,7 +337,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* What Families Can Do Differently */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Target className="h-5 w-5" />
                     What Families Can Do Differently After Multiple Attempts
                   </CardTitle>
@@ -408,7 +408,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* When Multiple Attempts Signal Change */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <RefreshCw className="h-5 w-5" />
                     When Multiple Attempts Do Signal a Need for Change
                   </CardTitle>
@@ -438,7 +438,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Critical Reframe */}
               <Card className="border-primary bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Lightbulb className="h-5 w-5" />
                     A Critical Reframe for Families
                   </CardTitle>
@@ -467,7 +467,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Holding Hope */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Heart className="h-5 w-5" />
                     Holding Hope Without Illusion
                   </CardTitle>
@@ -503,7 +503,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Final Thought */}
               <Card className="bg-logo-green/10 border-logo-green/30">
                 <CardHeader>
-                  <CardTitle className="text-center text-logo-green">Final Thought</CardTitle>
+                  <CardTitle className="text-center text-logo-blue">Final Thought</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 text-center">
                   <p className="text-lg font-semibold">
@@ -518,7 +518,7 @@ export default function MultipleTreatmentEpisodes() {
                       "Families must protect themselves"
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-logo-green flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-logo-blue flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -532,7 +532,7 @@ export default function MultipleTreatmentEpisodes() {
               {/* Companion Resources */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <BookOpen className="h-5 w-5" />
                     Suggested Companion Resources
                   </CardTitle>

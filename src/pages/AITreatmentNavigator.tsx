@@ -243,7 +243,7 @@ const AITreatmentNavigator = () => {
             <div className="inline-flex items-center justify-center p-4 bg-blue-500/10 rounded-full mb-4">
               <Navigation className="h-12 w-12 text-blue-600" />
             </div>
-            <h1 className="text-4xl font-bold text-logo-green mb-4">
+            <h1 className="text-4xl font-bold text-logo-blue mb-4">
               AI Treatment Reality Navigator
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -256,7 +256,7 @@ const AITreatmentNavigator = () => {
 
           {/* What This Tool Does */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">What This Tool Does</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">What This Tool Does</h2>
             <p className="text-muted-foreground mb-6">
               This specialized prompt transforms your AI chatbot into a treatment educator that helps families <strong>slow down, reality-test, and make informed decisions</strong> rather than reactive ones. It counters marketing myths and magical thinking about treatment.
             </p>
@@ -265,7 +265,7 @@ const AITreatmentNavigator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <BookOpen className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <BookOpen className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Explains Levels of Care</h3>
                       <p className="text-sm text-muted-foreground">
@@ -279,7 +279,7 @@ const AITreatmentNavigator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <ShieldAlert className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <ShieldAlert className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Counters Magical Thinking</h3>
                       <p className="text-sm text-muted-foreground">
@@ -293,7 +293,7 @@ const AITreatmentNavigator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <HelpCircle className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <HelpCircle className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Reality-Tests Expectations</h3>
                       <p className="text-sm text-muted-foreground">
@@ -307,7 +307,7 @@ const AITreatmentNavigator = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Phone className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Phone className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Directs to Real Guidance</h3>
                       <p className="text-sm text-muted-foreground">
@@ -322,7 +322,7 @@ const AITreatmentNavigator = () => {
 
           {/* Common Myths It Addresses */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Common Treatment Myths It Addresses</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Common Treatment Myths It Addresses</h2>
             <Card className="bg-blue-50/50 dark:bg-blue-950/10 border-blue-500/20">
               <CardContent className="py-6">
                 <ul className="space-y-3 text-muted-foreground">
@@ -353,33 +353,33 @@ const AITreatmentNavigator = () => {
 
           {/* When to Use This Tool */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">When to Use This Tool</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">When to Use This Tool</h2>
             <p className="text-muted-foreground mb-4">
               This AI treatment educator is especially useful when:
             </p>
             <ul className="space-y-2 text-muted-foreground mb-6">
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're researching treatment options and feeling overwhelmed by marketing</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>Your loved one has been to treatment before and you're wondering "what went wrong"</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're not sure if your expectations about treatment are realistic</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You want to understand the difference between detox, residential, PHP, and IOP</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're feeling urgency to "do something" and need to slow down</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You want to prepare for what happens after treatment, not just during</span>
               </li>
             </ul>
@@ -387,7 +387,7 @@ const AITreatmentNavigator = () => {
 
           {/* AI Advantages */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Why AI Can Help in Difficult Moments</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Why AI Can Help in Difficult Moments</h2>
             <p className="text-muted-foreground mb-6">
               While AI should never replace professional guidance, it can offer unique advantages when you're trying to understand treatment options:
             </p>
@@ -433,7 +433,7 @@ const AITreatmentNavigator = () => {
 
           {/* How to Use Section */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">How to Use This Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Prompt</h2>
             <ol className="space-y-3 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">1</span>
@@ -477,7 +477,7 @@ const AITreatmentNavigator = () => {
 
           {/* The Prompt */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">The Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">The Prompt</h2>
             <Card className="border-2 border-blue-500/30">
               <CardContent className="py-6">
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-mono leading-relaxed overflow-x-auto">
@@ -489,7 +489,7 @@ const AITreatmentNavigator = () => {
 
           {/* Example Use Cases */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Example Questions to Ask</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Example Questions to Ask</h2>
             <Card className="bg-muted/50">
               <CardContent className="py-6">
                 <ul className="space-y-3 text-muted-foreground">
@@ -539,7 +539,7 @@ const AITreatmentNavigator = () => {
 
           {/* Companion Resources */}
           <section className="mt-10 border-t pt-6">
-            <h2 className="text-lg font-semibold text-logo-green mb-3">Suggested Companion Resources</h2>
+            <h2 className="text-lg font-semibold text-logo-blue mb-3">Suggested Companion Resources</h2>
             <div className="flex flex-wrap gap-2">
               <Link to="/treatment-industry-guide">
                 <Button variant="outline" size="sm">Treatment Industry Guide</Button>

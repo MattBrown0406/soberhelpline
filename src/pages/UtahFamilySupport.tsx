@@ -79,7 +79,7 @@ export default function UtahFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Utah Family Addiction Resources
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
               Family Support for Addiction in Utah: Resources, Help &amp; Hope
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -109,7 +109,7 @@ export default function UtahFamilySupport() {
         {/* Utah Stats */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Utah's Addiction Crisis Is a Family Crisis
             </h2>
             <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
@@ -119,21 +119,21 @@ export default function UtahFamilySupport() {
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">3x</div>
-                  <div className="font-semibold text-logo-green mb-1">Opioid Deaths Tripled</div>
+                  <div className="font-semibold text-logo-blue mb-1">Opioid Deaths Tripled</div>
                   <div className="text-sm text-muted-foreground">Utah opioid overdose deaths have tripled since 2010, with no signs of slowing</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">#1</div>
-                  <div className="font-semibold text-logo-green mb-1">Mountain West Rx Abuse</div>
+                  <div className="font-semibold text-logo-blue mb-1">Mountain West Rx Abuse</div>
                   <div className="text-sm text-muted-foreground">Utah has historically ranked highest in the Mountain West for prescription drug misuse</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">Stigma</div>
-                  <div className="font-semibold text-logo-green mb-1">Cultural Barriers</div>
+                  <div className="font-semibold text-logo-blue mb-1">Cultural Barriers</div>
                   <div className="text-sm text-muted-foreground">LDS community dynamics can deepen shame and delay help-seeking for Utah families</div>
                 </CardContent>
               </Card>
@@ -146,7 +146,7 @@ export default function UtahFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   You Are Not Alone
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -195,7 +195,7 @@ export default function UtahFamilySupport() {
         {/* Utah Family Resources */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Utah Family Addiction Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -204,7 +204,7 @@ export default function UtahFamilySupport() {
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     Utah Crisis Line — 24/7
                   </CardTitle>
@@ -223,7 +223,7 @@ export default function UtahFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Al-Anon Utah
                   </CardTitle>
@@ -241,7 +241,7 @@ export default function UtahFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     USARA — Utah Support Advocates for Recovery Awareness
                   </CardTitle>
@@ -259,7 +259,7 @@ export default function UtahFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Shield className="h-4 w-4 text-primary" />
                     Valley Behavioral Health
                   </CardTitle>
@@ -277,7 +277,7 @@ export default function UtahFamilySupport() {
 
               <Card className="md:col-span-2">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <BookOpen className="h-4 w-4 text-primary" />
                     SAMHSA National Helpline — 24/7
                   </CardTitle>
@@ -300,7 +300,7 @@ export default function UtahFamilySupport() {
         {/* CRAFT vs Traditional */}
         <section className="py-12">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               What Works: CRAFT vs. Traditional Approaches
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -323,7 +323,7 @@ export default function UtahFamilySupport() {
               </Card>
               <Card className="border-primary/30 bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
+                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
                   <CardDescription>Evidence-based family intervention model</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -351,7 +351,7 @@ export default function UtahFamilySupport() {
                   <Calendar className="h-3.5 w-3.5" />
                   Every Monday — 7:00 PM PST
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -382,7 +382,7 @@ export default function UtahFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" />Open to all Utah families</div>
@@ -403,7 +403,7 @@ export default function UtahFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Hourly Intervention Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -442,7 +442,7 @@ export default function UtahFamilySupport() {
               </div>
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-logo-green mb-3">Who This Is For</h3>
+                  <h3 className="font-semibold text-logo-blue mb-3">Who This Is For</h3>
                   <ul className="space-y-3">
                     {[
                       "You've tried talking to them and nothing works",
@@ -475,7 +475,7 @@ export default function UtahFamilySupport() {
         {/* City Cards */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Utah City-Specific Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -490,7 +490,7 @@ export default function UtahFamilySupport() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-logo-green group-hover:text-primary transition-colors">{city.name}</span>
+                            <span className="font-semibold text-logo-blue group-hover:text-primary transition-colors">{city.name}</span>
                           </div>
                           <p className="text-xs text-muted-foreground">{city.description}</p>
                         </div>
@@ -507,7 +507,7 @@ export default function UtahFamilySupport() {
         {/* FAQ Section */}
         <section className="py-12">
           <div className="container max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
@@ -525,7 +525,7 @@ export default function UtahFamilySupport() {
         <section className="py-12 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
               Utah Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

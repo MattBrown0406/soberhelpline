@@ -381,7 +381,7 @@ export default function FamilyMembership() {
 
             <div className="text-center mb-8">
               <Heart className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
                 Family Support Membership
               </h1>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto">

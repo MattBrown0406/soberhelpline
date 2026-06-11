@@ -177,7 +177,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
               <div className="flex items-center gap-3">
                 <Scale className="h-6 w-6 text-primary" />
                 <div>
-                  <CardTitle className="text-logo-green">Guilt vs. Responsibility Worksheet</CardTitle>
+                  <CardTitle className="text-logo-blue">Guilt vs. Responsibility Worksheet</CardTitle>
                   <CardDescription>Making Decisions from Integrity, Not Emotional Pressure</CardDescription>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-orange-500" />
-                <h3 className="text-lg font-semibold text-logo-green">Part 1: Recognizing Guilt in Real Time</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 1: Recognizing Guilt in Real Time</h3>
               </div>
               <p className="text-sm text-muted-foreground">Answer honestly.</p>
 
@@ -274,7 +274,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Heart className="h-5 w-5 text-red-500" />
-                <h3 className="text-lg font-semibold text-logo-green">Part 2: What Guilt Pushes Me to Do</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 2: What Guilt Pushes Me to Do</h3>
               </div>
 
               <div>
@@ -384,7 +384,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-green-600" />
-                <h3 className="text-lg font-semibold text-logo-green">Part 3: Separating Guilt from Responsibility</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 3: Separating Guilt from Responsibility</h3>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -463,7 +463,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Scale className="h-5 w-5 text-purple-600" />
-                <h3 className="text-lg font-semibold text-logo-green">Part 4: The Guilt vs. Responsibility Test</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 4: The Guilt vs. Responsibility Test</h3>
               </div>
               <p className="text-sm text-muted-foreground">Before responding to a request, answer the following:</p>
 
@@ -550,7 +550,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
 
             {/* Part 5: Reframing the Guilt Thought */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-logo-green">Part 5: Reframing the Guilt Thought</h3>
+              <h3 className="text-lg font-semibold text-logo-blue">Part 5: Reframing the Guilt Thought</h3>
 
               <div>
                 <Label htmlFor="guilt-thought">Write the guilt-based thought:</Label>
@@ -587,7 +587,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
 
             {/* Part 6: Values Check */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-logo-green">Part 6: Values Check</h3>
+              <h3 className="text-lg font-semibold text-logo-blue">Part 6: Values Check</h3>
 
               <div>
                 <Label className="text-sm font-medium">Which value do I want guiding this decision?</Label>
@@ -631,7 +631,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
 
             {/* Part 7: Boundary Anchor */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-logo-green">Part 7: Boundary Anchor</h3>
+              <h3 className="text-lg font-semibold text-logo-blue">Part 7: Boundary Anchor</h3>
 
               <div>
                 <Label htmlFor="commitment">"Even when I feel guilty, I commit to ____________________________."</Label>
@@ -671,7 +671,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
 
             {/* Part 8: After-the-Fact Reflection */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-logo-green">Part 8: After-the-Fact Reflection (Optional)</h3>
+              <h3 className="text-lg font-semibold text-logo-blue">Part 8: After-the-Fact Reflection (Optional)</h3>
               <p className="text-sm text-muted-foreground">Use this section after a difficult interaction.</p>
 
               <div>
@@ -713,7 +713,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
 
             {/* Final Reminder */}
             <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/20 text-center">
-              <h3 className="font-bold text-logo-green text-lg mb-3">Final Reminder</h3>
+              <h3 className="font-bold text-logo-blue text-lg mb-3">Final Reminder</h3>
               <p className="text-foreground mb-2">
                 <strong>Guilt is information—not instruction.</strong>
               </p>

@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-gray-300 mt-auto">
       <div className="container mx-auto px-4 py-12">
         <div className="mb-10 rounded-lg border border-gray-800 bg-gray-800/60 p-5">
-          <p className="text-sm font-semibold text-logo-green mb-2">Families usually need one clear next step</p>
+          <p className="text-sm font-semibold text-logo-blue mb-2">Families usually need one clear next step</p>
           <div className="grid gap-3 md:grid-cols-3">
             <Link to="/family-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "footer_path_card" })} className="rounded-md border border-gray-700 p-4 transition-colors hover:border-logo-green hover:bg-gray-800">
               <p className="font-semibold text-white">Private coaching</p>
@@ -37,7 +37,7 @@ const Footer = () => {
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
               Education and support for families affected by addiction. You don't have to go through this alone.
             </p>
-            <a href="tel:4582027900" onClick={() => trackPhoneClick("footer_brand")} className="flex items-center gap-2 text-logo-green font-semibold hover:text-logo-green/80 transition-colors">
+            <a href="tel:4582027900" onClick={() => trackPhoneClick("footer_brand")} className="flex items-center gap-2 text-logo-blue font-semibold hover:text-logo-blue/80 transition-colors">
               <Phone className="w-4 h-4" />
               (458) 202-7900
             </a>
@@ -102,7 +102,7 @@ const Footer = () => {
             <div className="mt-6 p-4 bg-gray-800 rounded-lg">
               <p className="text-sm font-medium text-white mb-1">Need Help Now?</p>
               <p className="text-xs text-gray-400 mb-2">SAMHSA National Helpline</p>
-              <a href="tel:18006624357" className="text-logo-green font-semibold text-sm hover:text-logo-green/80 transition-colors">
+              <a href="tel:18006624357" className="text-logo-blue font-semibold text-sm hover:text-logo-blue/80 transition-colors">
                 1-800-662-4357
               </a>
               <p className="text-xs text-gray-500 mt-1">Free, confidential, 24/7</p>

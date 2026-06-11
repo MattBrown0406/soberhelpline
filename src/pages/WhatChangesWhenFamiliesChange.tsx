@@ -37,7 +37,7 @@ export default function WhatChangesWhenFamiliesChange() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -92,7 +92,7 @@ export default function WhatChangesWhenFamiliesChange() {
             </Card>
 
             {/* What Actually Changes */}
-            <h2 className="text-2xl font-bold text-logo-green mb-6">What Actually Changes When Families Change</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">What Actually Changes When Families Change</h2>
 
             {/* 1. Chaos Decreases */}
             <Card className="mb-6">
@@ -373,7 +373,7 @@ export default function WhatChangesWhenFamiliesChange() {
             {/* Why Family Change Feels Worse */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Why Family Change Often Feels Worse Before It Feels Better</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Why Family Change Often Feels Worse Before It Feels Better</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families may experience:</p>
@@ -439,7 +439,7 @@ export default function WhatChangesWhenFamiliesChange() {
             {/* What Family Change Looks Like */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">What Family Change Looks Like in Practice</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">What Family Change Looks Like in Practice</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
@@ -477,7 +477,7 @@ export default function WhatChangesWhenFamiliesChange() {
             {/* Reflection Questions */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Reflection Questions for Families
                 </CardTitle>
@@ -524,7 +524,7 @@ export default function WhatChangesWhenFamiliesChange() {
             {/* Companion Resources */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Suggested Companion Resources
                 </CardTitle>

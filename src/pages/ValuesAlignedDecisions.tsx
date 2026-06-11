@@ -82,7 +82,7 @@ export default function ValuesAlignedDecisions() {
             {/* Why This Exercise Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Heart className="h-5 w-5" />
                   Why This Exercise Matters
                 </CardTitle>
@@ -274,7 +274,7 @@ export default function ValuesAlignedDecisions() {
             {/* Step 5 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-lg text-logo-green">
+                <CardTitle className="text-lg text-logo-blue">
                   Step 5: Compare Possible Responses
                 </CardTitle>
               </CardHeader>
@@ -411,7 +411,7 @@ export default function ValuesAlignedDecisions() {
             {/* Step 7 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-lg text-logo-green flex items-center gap-2">
+                <CardTitle className="text-lg text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Step 7: Long-Term Impact Reflection
                 </CardTitle>
@@ -501,7 +501,7 @@ export default function ValuesAlignedDecisions() {
             {/* Step 10 */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-lg text-logo-green">
+                <CardTitle className="text-lg text-logo-blue">
                   Step 10: Boundary or Action Statement (Optional)
                 </CardTitle>
               </CardHeader>
@@ -551,7 +551,7 @@ export default function ValuesAlignedDecisions() {
             {/* When to Use */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">When to Use This Exercise</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">When to Use This Exercise</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
@@ -606,7 +606,7 @@ export default function ValuesAlignedDecisions() {
             {/* Companion Resources */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Suggested Companion Resources
                 </CardTitle>
