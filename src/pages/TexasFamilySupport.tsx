@@ -80,7 +80,7 @@ export default function TexasFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Texas Family Addiction Resources
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-logo-green mb-5 leading-tight hero-description">
+            <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight hero-description">
               Family Support for Addiction in Texas: Resources, Help & Hope
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto hero-description">
@@ -109,7 +109,7 @@ export default function TexasFamilySupport() {
         {/* Stats */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-6 text-center">Texas Addiction Crisis: The Reality</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-6 text-center">Texas Addiction Crisis: The Reality</h2>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <Card className="text-center">
                 <CardContent className="p-5">
@@ -144,7 +144,7 @@ export default function TexasFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
                 <Shield className="h-8 w-8 text-primary mb-3" />
-                <h2 className="text-2xl font-bold text-logo-green mb-4">What Actually Helps Texas Families</h2>
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">What Actually Helps Texas Families</h2>
                 <p className="text-muted-foreground mb-4">
                   CRAFT (Community Reinforcement and Family Training) is the most evidence-based approach for
                   families. It teaches you to stop enabling, set real boundaries, and motivate your loved one
@@ -167,7 +167,7 @@ export default function TexasFamilySupport() {
               </div>
               <div>
                 <BookOpen className="h-8 w-8 text-primary mb-3" />
-                <h2 className="text-2xl font-bold text-logo-green mb-4">Texas Crisis Resources</h2>
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">Texas Crisis Resources</h2>
                 <div className="space-y-3">
                   {[
                     { name: "Texas Crisis Line", detail: "1-800-273-8255 — 24/7 statewide crisis support" },
@@ -178,7 +178,7 @@ export default function TexasFamilySupport() {
                   ].map((resource) => (
                     <Card key={resource.name}>
                       <CardContent className="p-4">
-                        <p className="font-medium text-logo-green text-sm">{resource.name}</p>
+                        <p className="font-medium text-logo-blue text-sm">{resource.name}</p>
                         <p className="text-xs text-muted-foreground mt-1">{resource.detail}</p>
                       </CardContent>
                     </Card>
@@ -192,7 +192,7 @@ export default function TexasFamilySupport() {
         {/* City Cards */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-6">Texas Cities We Serve</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">Texas Cities We Serve</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {cities.map((city) => (
                 <Link key={city.slug} to={`/texas/${city.slug}`} className="block group">
@@ -202,7 +202,7 @@ export default function TexasFamilySupport() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-logo-green group-hover:text-primary transition-colors">{city.name}</span>
+                            <span className="font-semibold text-logo-blue group-hover:text-primary transition-colors">{city.name}</span>
                           </div>
                           <p className="text-xs text-muted-foreground">{city.description}</p>
                         </div>
@@ -221,7 +221,7 @@ export default function TexasFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-2xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -259,7 +259,7 @@ export default function TexasFamilySupport() {
               </div>
               <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
                 <Heart className="h-8 w-8 text-primary mb-3" />
-                <h3 className="font-semibold text-logo-green mb-2">Need More Than a Group?</h3>
+                <h3 className="font-semibold text-logo-blue mb-2">Need More Than a Group?</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Hourly one-on-one coaching with a certified interventionist. Create a real plan,
                   set boundaries that work, and stop letting addiction run your family.
@@ -279,7 +279,7 @@ export default function TexasFamilySupport() {
         <section className="py-10 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-logo-green mb-3">Texas Families: Help Is Here</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-3">Texas Families: Help Is Here</h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               You don't have to wait for a crisis. You don't have to figure this out alone.
               Real support is available right now.

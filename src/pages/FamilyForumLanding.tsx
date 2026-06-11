@@ -183,7 +183,7 @@ export default function FamilyForumLanding() {
                 </div>
                 <div className="grid gap-3">
                   <div className="rounded-2xl border bg-muted/30 p-4">
-                    <div className="flex items-center gap-2 font-semibold text-logo-green mb-1">
+                    <div className="flex items-center gap-2 font-semibold text-logo-blue mb-1">
                       <Clock3 className="w-4 h-4" />
                       Emergency Game Plan consult
                     </div>
@@ -256,7 +256,7 @@ export default function FamilyForumLanding() {
         <section className="py-16 md:py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">Why Families Join This Forum</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">Why Families Join This Forum</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Most support for addiction families is focused on the person struggling. This community is built for you, the family member carrying it all.
               </p>
@@ -268,7 +268,7 @@ export default function FamilyForumLanding() {
                     <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                       <benefit.icon className="h-5 w-5 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-logo-green mb-2">{benefit.title}</h3>
+                    <h3 className="font-semibold text-logo-blue mb-2">{benefit.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
                   </CardContent>
                 </Card>
@@ -288,7 +288,7 @@ export default function FamilyForumLanding() {
                 />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-logo-green mb-5 leading-tight">
+                <h2 className="text-3xl font-bold text-logo-blue mb-5 leading-tight">
                   The Forum Other Families Wish They'd Found Sooner
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -324,7 +324,7 @@ export default function FamilyForumLanding() {
         <section className="py-16 md:py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-logo-green mb-3">What Families Talk About</h2>
+              <h2 className="text-3xl font-bold text-logo-blue mb-3">What Families Talk About</h2>
               <p className="text-muted-foreground">8 discussion categories covering every part of the journey.</p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
@@ -334,7 +334,7 @@ export default function FamilyForumLanding() {
                     <div className={`w-10 h-10 ${topic.color} rounded-xl flex items-center justify-center mb-3`}>
                       <topic.icon className="h-5 w-5 text-white" />
                     </div>
-                    <h3 className="font-semibold text-logo-green text-sm mb-1">{topic.label}</h3>
+                    <h3 className="font-semibold text-logo-blue text-sm mb-1">{topic.label}</h3>
                     <p className="text-xs text-muted-foreground">{topic.desc}</p>
                   </CardContent>
                 </Card>
@@ -355,7 +355,7 @@ export default function FamilyForumLanding() {
         <section className="py-16 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-logo-green mb-3">Membership Includes Everything</h2>
+              <h2 className="text-3xl font-bold text-logo-blue mb-3">Membership Includes Everything</h2>
               <p className="text-muted-foreground">The forum is just the beginning.</p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4 mb-10">
@@ -372,7 +372,7 @@ export default function FamilyForumLanding() {
                     <item.icon className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <p className="font-medium text-logo-green text-sm">{item.label}</p>
+                    <p className="font-medium text-logo-blue text-sm">{item.label}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
                   </div>
                 </div>
@@ -380,7 +380,7 @@ export default function FamilyForumLanding() {
             </div>
             <div className="text-center">
               <div className="inline-block bg-background rounded-2xl border border-primary/20 px-8 py-6 shadow-sm">
-                <p className="text-4xl font-bold text-logo-green mb-1">$14.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
+                <p className="text-4xl font-bold text-logo-blue mb-1">$14.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
                 <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
                 <Link to="/family-membership">
                   <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-10">
@@ -395,12 +395,12 @@ export default function FamilyForumLanding() {
 
         <section className="py-16 md:py-24">
           <div className="container max-w-3xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-logo-green mb-10 text-center">Common Questions</h2>
+            <h2 className="text-3xl font-bold text-logo-blue mb-10 text-center">Common Questions</h2>
             <div className="space-y-4">
               {faqItems.map((item) => (
                 <Card key={item.question}>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base text-logo-green">{item.question}</CardTitle>
+                    <CardTitle className="text-base text-logo-blue">{item.question}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground leading-relaxed">{item.answer}</p>
@@ -414,7 +414,7 @@ export default function FamilyForumLanding() {
         <section className="py-16 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-3xl font-bold text-logo-green mb-3">
+            <h2 className="text-3xl font-bold text-logo-blue mb-3">
               The Conversation You've Been Needing Is Already Happening
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">

@@ -45,7 +45,7 @@ export default function SiblingSupport() {
             <div className="inline-flex items-center justify-center p-3 rounded-full bg-teal-500/10 mb-4">
               <Heart className="h-10 w-10 text-teal-500" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
               The Sibling Experience
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -55,7 +55,7 @@ export default function SiblingSupport() {
 
           {/* Your Experience is Valid */}
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Your Experience is Valid</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Your Experience is Valid</h2>
             <p className="text-muted-foreground leading-relaxed mb-3">
               Siblings of people struggling with addiction are among the most underserved members of the family system. The attention, resources, and emotional energy of the household often get funneled toward the person in crisis — leaving brothers and sisters to figure things out on their own.
             </p>
@@ -66,7 +66,7 @@ export default function SiblingSupport() {
 
           {/* Sibling-Specific Resources */}
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-logo-green mb-6 flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-logo-blue mb-6 flex items-center gap-2">
               <BookOpen className="h-6 w-6" /> Sibling-Specific Resources
             </h2>
             <div className="grid gap-4">
@@ -85,7 +85,7 @@ export default function SiblingSupport() {
 
           {/* Recommended for You */}
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-logo-green mb-6 flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-logo-blue mb-6 flex items-center gap-2">
               <Compass className="h-6 w-6" /> Recommended for You
             </h2>
             <div className="grid md:grid-cols-2 gap-4">

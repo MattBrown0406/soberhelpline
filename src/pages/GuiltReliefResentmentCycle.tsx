@@ -49,7 +49,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* Why This Guide Matters */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -84,7 +84,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* The Three Stages */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <RefreshCw className="h-5 w-5" />
                   The Three Stages of the Cycle
                 </CardTitle>
@@ -185,7 +185,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* Why Families Get Stuck */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Brain className="h-5 w-5" />
                   Why Families Get Stuck in the Cycle
                 </CardTitle>
@@ -233,7 +233,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* The Moment That Matters Most */}
             <Card className="mb-6 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Pause className="h-5 w-5" />
                   The Moment That Matters Most
                 </CardTitle>
@@ -316,7 +316,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* What Replaces the Cycle */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   What Replaces the Cycle
                 </CardTitle>
@@ -339,7 +339,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* Common Misunderstandings */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <HelpCircle className="h-5 w-5" />
                   Common Misunderstandings
                 </CardTitle>
@@ -409,7 +409,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* Final Thought */}
             <Card className="mb-6 border-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -434,7 +434,7 @@ export default function GuiltReliefResentmentCycle() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

@@ -50,7 +50,7 @@ export default function CrisisChaos() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Addiction creates constant urgency. Families are often trained—by repeated emergencies—to respond to everything as a crisis. This guide helps you distinguish between true emergencies and emotionally charged chaos, so you can respond in ways that support safety, boundaries, and long-term recovery.
                 </p>
@@ -70,7 +70,7 @@ export default function CrisisChaos() {
 
               {/* Step 1 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 1: Pause Before You Decide
                 </h2>
                 <p className="text-muted-foreground mb-4">Before responding, ask yourself:</p>
@@ -95,7 +95,7 @@ export default function CrisisChaos() {
 
               {/* Step 2 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 2: Identify a TRUE Crisis
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -148,7 +148,7 @@ export default function CrisisChaos() {
 
               {/* Step 3 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 3: Identify CHAOS (Commonly Mistaken for Crisis)
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -174,7 +174,7 @@ export default function CrisisChaos() {
 
               {/* Step 4 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 4: The Crisis vs. Chaos Decision Chart
                 </h2>
                 <p className="text-muted-foreground mb-4">Ask yourself:</p>
@@ -240,7 +240,7 @@ export default function CrisisChaos() {
 
               {/* Step 5 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 5: How to Respond to CHAOS
                 </h2>
                 <p className="text-muted-foreground mb-4">When it is chaos:</p>
@@ -281,7 +281,7 @@ export default function CrisisChaos() {
 
               {/* Step 6 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 6: How to Respond to a CRISIS
                 </h2>
                 <p className="text-muted-foreground mb-4">When it is a crisis:</p>
@@ -315,7 +315,7 @@ export default function CrisisChaos() {
 
               {/* Step 7 */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Step 7: Post-Event Reflection
                 </h2>
                 <p className="text-muted-foreground mb-4">After any intense situation, ask:</p>
@@ -347,7 +347,7 @@ export default function CrisisChaos() {
 
               {/* Common Traps */}
               <section className="mb-8 page-break-inside-avoid">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Common Family Traps to Watch For
                 </h2>
 
@@ -366,7 +366,7 @@ export default function CrisisChaos() {
 
               {/* Key Reframe */}
               <section className="mb-8 p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-green mb-3">Key Reframe</h2>
+                <h2 className="text-lg font-bold text-logo-blue mb-3">Key Reframe</h2>
                 <p className="text-center text-lg mb-4">
                   You are not responsible for preventing every bad outcome.<br />
                   <strong className="text-primary">You are responsible for responding with clarity and integrity.</strong>
@@ -378,7 +378,7 @@ export default function CrisisChaos() {
 
               {/* Suggested Resources */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Suggested Companion Resources
                 </h2>
                 <ul className="space-y-2">

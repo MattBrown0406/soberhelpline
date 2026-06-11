@@ -37,7 +37,7 @@ export default function NoNegotiationGuide() {
             {/* Why This Guide Exists */}
             <Card className="mb-8 border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Why This Guide Exists</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Why This Guide Exists</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families often believe they are being reasonable when they negotiate:</p>
@@ -429,7 +429,7 @@ export default function NoNegotiationGuide() {
             {/* Final Thought */}
             <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Shield className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -452,7 +452,7 @@ export default function NoNegotiationGuide() {
                     You contain them, remove leverage, and protect the system.
                   </p>
                 </div>
-                <p className="text-center font-semibold text-logo-green mt-4">
+                <p className="text-center font-semibold text-logo-blue mt-4">
                   That is not heartless.<br />
                   That is how recovery becomes possible.
                 </p>

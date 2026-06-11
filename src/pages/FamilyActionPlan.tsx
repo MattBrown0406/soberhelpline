@@ -109,7 +109,7 @@ export default function FamilyActionPlan() {
 
               {/* Purpose Section */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-3">Purpose</h2>
+                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
                 <p className="text-muted-foreground mb-4">
                   Addiction creates chaos, urgency, and emotional reactivity. This action plan helps families move from crisis management to intentional, values-based decisions—regardless of whether their loved one is currently sober, in treatment, or actively using.
                 </p>
@@ -131,7 +131,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 1 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 1: Define Your Current Reality
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Answer honestly.</p>
@@ -176,7 +176,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 2 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 2: Clarify Your Values & Non-Negotiables
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Recovery decisions should align with values, not fear.</p>
@@ -224,7 +224,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 3 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 3: Identify Enabling Patterns to Stop
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Based on education and reflection, identify behaviors you are committed to changing.</p>
@@ -263,7 +263,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 4 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 4: Boundaries & Consequences Plan
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">For each boundary, be specific.</p>
@@ -310,7 +310,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 5 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 5: Crisis Response Plan
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Emotions are highest during crises. Decide now.</p>
@@ -361,7 +361,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 6 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 6: Family Self-Care & Support Plan
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Recovery requires sustained support for families.</p>
@@ -412,7 +412,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 7 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 7: Communication Guidelines
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">To reduce conflict and manipulation:</p>
@@ -443,7 +443,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 8 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 8: Review & Accountability
                 </h2>
 
@@ -487,7 +487,7 @@ export default function FamilyActionPlan() {
 
               {/* Part 9 */}
               <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-green mb-4 pb-2 border-b">
+                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
                   Part 9: Commitment Statement
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">Read and sign:</p>
@@ -522,7 +522,7 @@ export default function FamilyActionPlan() {
 
               {/* Final Perspective */}
               <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-green mb-3">Final Perspective</h2>
+                <h2 className="text-lg font-bold text-logo-blue mb-3">Final Perspective</h2>
                 <p className="text-muted-foreground mb-4">
                   Families do not heal by waiting for someone else to change.<br />
                   They heal by reclaiming their lives, integrity, and peace.

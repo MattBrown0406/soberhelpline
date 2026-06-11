@@ -29,7 +29,7 @@ export default function NonTwelveStepModalities() {
 
             <div className="text-center mb-10">
               <BookOpen className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
                 Non–12-Step Recovery Modalities Explained for Families
               </h1>
               <p className="text-xl text-muted-foreground">
@@ -40,7 +40,7 @@ export default function NonTwelveStepModalities() {
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Why Families Need This Guide</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Why Families Need This Guide</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families often hear:</p>
@@ -528,7 +528,7 @@ export default function NonTwelveStepModalities() {
             {/* A Grounding Reframe */}
             <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">A Grounding Reframe for Families</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">A Grounding Reframe for Families</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-lg text-center">
@@ -544,7 +544,7 @@ export default function NonTwelveStepModalities() {
                     "Ask about structure, not beliefs"
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-logo-green flex-shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-logo-blue flex-shrink-0" />
                       <span>{item}</span>
                     </div>
                   ))}

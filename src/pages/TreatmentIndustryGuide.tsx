@@ -522,7 +522,7 @@ export default function TreatmentIndustryGuide() {
 
             {/* Companion Resources */}
             <div className="p-6 bg-muted/30 rounded-lg border print:bg-white">
-              <h3 className="font-semibold text-lg text-logo-green mb-4">Suggested Companion Resources</h3>
+              <h3 className="font-semibold text-lg text-logo-blue mb-4">Suggested Companion Resources</h3>
               <div className="flex flex-wrap gap-3 print:hidden">
                 <Link to="/treatment-red-flags">
                   <Button variant="outline" size="sm" className="gap-2">

@@ -43,7 +43,7 @@ export const GuidePageWrapper = ({ guideName, guidePath, guideType = "guide", ch
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 {completed ? (
-                  <CheckCircle className="w-6 h-6 text-logo-green flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-logo-blue flex-shrink-0" />
                 ) : (
                   <Circle className="w-6 h-6 text-gray-300 flex-shrink-0" />
                 )}

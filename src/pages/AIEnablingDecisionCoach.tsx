@@ -245,7 +245,7 @@ const AIEnablingDecisionCoach = () => {
             <div className="inline-flex items-center justify-center p-4 bg-amber-500/10 rounded-full mb-4">
               <Scale className="h-12 w-12 text-amber-600" />
             </div>
-            <h1 className="text-4xl font-bold text-logo-green mb-4">
+            <h1 className="text-4xl font-bold text-logo-blue mb-4">
               AI Helping vs. Enabling Decision Coach
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -258,7 +258,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* What This Tool Does */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">What This Tool Does</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">What This Tool Does</h2>
             <p className="text-muted-foreground mb-6">
               This specialized prompt transforms your AI chatbot into a decision coach focused on one critical question: <strong>Is what I'm about to do helping—or enabling?</strong>
             </p>
@@ -267,7 +267,7 @@ const AIEnablingDecisionCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Target className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Target className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Applies Decision Filters</h3>
                       <p className="text-sm text-muted-foreground">
@@ -281,7 +281,7 @@ const AIEnablingDecisionCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Eye className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Eye className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Identifies Patterns</h3>
                       <p className="text-sm text-muted-foreground">
@@ -295,7 +295,7 @@ const AIEnablingDecisionCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Shield className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Shield className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Grounds Reactive Decisions</h3>
                       <p className="text-sm text-muted-foreground">
@@ -309,7 +309,7 @@ const AIEnablingDecisionCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Compass className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Compass className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Offers Clean Alternatives</h3>
                       <p className="text-sm text-muted-foreground">
@@ -324,33 +324,33 @@ const AIEnablingDecisionCoach = () => {
 
           {/* When to Use This Tool */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">When to Use This Tool</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">When to Use This Tool</h2>
             <p className="text-muted-foreground mb-4">
               This AI decision coach is especially useful when:
             </p>
             <ul className="space-y-2 text-muted-foreground mb-6">
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're facing a request from your loved one and aren't sure if helping would actually hurt</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You've made the same decision before and suspect it might be part of a pattern</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You feel pressure, guilt, or urgency to act immediately</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>Other family members disagree about what the "right" thing to do is</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You need to process a decision before discussing it with a therapist or sponsor</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>It's late at night or a moment when professional support isn't available</span>
               </li>
             </ul>
@@ -358,7 +358,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* AI Advantages */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Why AI Can Help in Difficult Moments</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Why AI Can Help in Difficult Moments</h2>
             <p className="text-muted-foreground mb-6">
               While AI should never replace professional guidance, it can offer unique advantages when you're facing difficult decisions in real-time:
             </p>
@@ -404,7 +404,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* How to Use Section */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">How to Use This Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Prompt</h2>
             <ol className="space-y-3 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">1</span>
@@ -448,7 +448,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* The Prompt */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">The Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">The Prompt</h2>
             <Card className="border-2 border-amber-500/30">
               <CardContent className="py-6">
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-mono leading-relaxed overflow-x-auto">
@@ -460,7 +460,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* Example Use Cases */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Example Questions to Ask</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Example Questions to Ask</h2>
             <Card className="bg-muted/50">
               <CardContent className="py-6">
                 <ul className="space-y-3 text-muted-foreground">
@@ -485,7 +485,7 @@ const AIEnablingDecisionCoach = () => {
 
           {/* Companion Resources */}
           <section className="mt-10 border-t pt-6">
-            <h2 className="text-lg font-semibold text-logo-green mb-3">Suggested Companion Resources</h2>
+            <h2 className="text-lg font-semibold text-logo-blue mb-3">Suggested Companion Resources</h2>
             <div className="flex flex-wrap gap-2">
               <Link to="/who-benefits-filter">
                 <Button variant="outline" size="sm">Who Benefits Filter</Button>

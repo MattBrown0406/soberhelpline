@@ -38,7 +38,7 @@ export default function BrainSpiritualRecovery() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Why This Guide Matters</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Why This Guide Matters</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -429,7 +429,7 @@ export default function BrainSpiritualRecovery() {
             {/* Final Thought */}
             <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -443,7 +443,7 @@ export default function BrainSpiritualRecovery() {
                   "Why can't they just stop?"
                 </p>
                 <p className="text-muted-foreground text-center">and start asking:</p>
-                <p className="text-lg font-medium text-center text-logo-green">
+                <p className="text-lg font-medium text-center text-logo-blue">
                   "What supports long-term brain healing?"
                 </p>
                 <p className="text-center font-semibold text-foreground mt-4">

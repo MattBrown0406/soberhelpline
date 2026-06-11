@@ -57,7 +57,7 @@ export default function ColoradoDenverFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Denver, Colorado — Denver County
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-5 leading-tight">
               Addiction Family Support in Denver, Colorado
             </h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
@@ -86,7 +86,7 @@ export default function ColoradoDenverFamilySupport() {
         {/* Denver Context */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-4">Denver's Addiction Landscape</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-4">Denver's Addiction Landscape</h2>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <Card className="text-center">
                 <CardContent className="p-5">
@@ -119,11 +119,11 @@ export default function ColoradoDenverFamilySupport() {
         {/* Denver Resources */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-6">Denver Family Addiction Resources</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">Denver Family Addiction Resources</h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Denver Health Behavioral Health
                   </CardTitle>
@@ -142,7 +142,7 @@ export default function ColoradoDenverFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     AllHealth Network
                   </CardTitle>
@@ -161,7 +161,7 @@ export default function ColoradoDenverFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     WellPower (Mental Health Center of Denver)
                   </CardTitle>
@@ -180,7 +180,7 @@ export default function ColoradoDenverFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Colorado Coalition for the Homeless
                   </CardTitle>
@@ -199,7 +199,7 @@ export default function ColoradoDenverFamilySupport() {
 
               <Card className="md:col-span-2">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     Colorado Crisis Services — 24/7
                   </CardTitle>
@@ -225,7 +225,7 @@ export default function ColoradoDenverFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-2xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -263,7 +263,7 @@ export default function ColoradoDenverFamilySupport() {
               </div>
               <div className="bg-primary/5 rounded-xl p-6 border border-primary/20">
                 <Heart className="h-8 w-8 text-primary mb-3" />
-                <h3 className="font-semibold text-logo-green mb-2">Need More Than a Group?</h3>
+                <h3 className="font-semibold text-logo-blue mb-2">Need More Than a Group?</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Hourly one-on-one coaching with a certified interventionist. Create a real plan,
                   set boundaries that work, and stop letting addiction run your family.
@@ -282,7 +282,7 @@ export default function ColoradoDenverFamilySupport() {
         {/* Other Colorado Cities */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-logo-green mb-4">Other Colorado Cities</h2>
+            <h2 className="text-xl font-bold text-logo-blue mb-4">Other Colorado Cities</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {otherCities.map((city) => (
                 <Link key={city.slug} to={`/colorado/${city.slug}`} className="block group">
@@ -290,7 +290,7 @@ export default function ColoradoDenverFamilySupport() {
                     <CardContent className="p-4 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-primary" />
-                        <span className="font-medium text-logo-green group-hover:text-primary transition-colors">{city.name}</span>
+                        <span className="font-medium text-logo-blue group-hover:text-primary transition-colors">{city.name}</span>
                       </div>
                       <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </CardContent>
@@ -310,7 +310,7 @@ export default function ColoradoDenverFamilySupport() {
         <section className="py-10 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-logo-green mb-3">Denver Families: Help Is Here</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-3">Denver Families: Help Is Here</h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               You don't have to wait for a crisis. You don't have to figure this out alone.
               Real support is available right now.

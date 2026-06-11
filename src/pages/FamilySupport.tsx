@@ -104,7 +104,7 @@ export default function FamilySupport() {
             <div className="mb-8">
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6 md:p-8 text-center">
-                  <h2 className="text-2xl font-bold text-logo-green mb-3">Start Here, in This Order</h2>
+                  <h2 className="text-2xl font-bold text-logo-blue mb-3">Start Here, in This Order</h2>
                   <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                     If things feel confusing, keep it simple. Start with the free Monday Zoom, use membership for ongoing support, and reach for private coaching when you need more direct help.
                   </p>
@@ -145,7 +145,7 @@ export default function FamilySupport() {
             ) : hasMembership ? (
               <div className="mb-12">
                 <div className="text-center mb-8">
-                  <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-2">
                     Welcome, Member!
                   </h2>
                   <p className="text-muted-foreground">
@@ -157,7 +157,7 @@ export default function FamilySupport() {
                   {/* Family Education Videos */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                      <CardTitle className="flex items-center gap-2 text-logo-blue">
                         <Video className="h-5 w-5 text-primary" />
                         Education Videos and Resources
                       </CardTitle>
@@ -182,7 +182,7 @@ export default function FamilySupport() {
                   {/* Monthly Webinars */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                      <CardTitle className="flex items-center gap-2 text-logo-blue">
                         <Presentation className="h-5 w-5 text-primary" />
                         Monthly Webinars
                       </CardTitle>
@@ -207,7 +207,7 @@ export default function FamilySupport() {
                   {/* Discussion Forum */}
                   <Card className="border-primary/30 bg-primary/5">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-logo-green">
+                      <CardTitle className="flex items-center gap-2 text-logo-blue">
                         <MessagesSquare className="h-5 w-5 text-primary" />
                         Discussion Forum
                       </CardTitle>
@@ -243,7 +243,7 @@ export default function FamilySupport() {
                         <Lock className="h-6 w-6 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-logo-green mb-2">
+                        <h3 className="text-lg font-semibold text-logo-blue mb-2">
                           Get the full family support library
                         </h3>
                         <p className="text-muted-foreground mb-6">
@@ -253,56 +253,56 @@ export default function FamilySupport() {
                         {/* Premium offerings grid */}
                         <div className="grid gap-4 md:grid-cols-2 mb-6">
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Education Videos & Resources</span>
                               <p className="text-sm text-muted-foreground">Clear video lessons on addiction, recovery, and what families can do differently</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Monthly Live Webinars</span>
                               <p className="text-sm text-muted-foreground">Live sessions with addiction specialists you can actually learn from</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Private Discussion Forum</span>
                               <p className="text-sm text-muted-foreground">A place to talk with families who understand what this does to a home</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Member Coaching Savings</span>
                               <p className="text-sm text-muted-foreground">Membership comes before coaching, and members save when private support is needed</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Interactive Worksheets</span>
                               <p className="text-sm text-muted-foreground">Worksheets for boundaries, self-trust, and next-step planning</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Guided Meditations</span>
                               <p className="text-sm text-muted-foreground">Simple audio support for the moments when your nervous system is shot</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Decision-Making Tools</span>
                               <p className="text-sm text-muted-foreground">Decision tools that help you tell the difference between helping and rescuing</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
                               <span className="font-medium text-foreground">Treatment Navigation Guides</span>
                               <p className="text-sm text-muted-foreground">Straight guidance for sorting through treatment options without getting spun around</p>
@@ -326,7 +326,7 @@ export default function FamilySupport() {
 
             {/* Free Resources Section */}
             <div className="text-center mb-10">
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
                 Free Family Support Resources
               </h1>
             </div>
@@ -335,8 +335,8 @@ export default function FamilySupport() {
             <div className="grid gap-6 md:grid-cols-2 mb-10">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
-                    <Video className="h-5 w-5 text-logo-green" />
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
+                    <Video className="h-5 w-5 text-logo-blue" />
                     “The Family Squares” Zoom
                   </CardTitle>
                   <CardDescription>
@@ -355,8 +355,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
-                    <BookOpen className="h-5 w-5 text-logo-green" />
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
+                    <BookOpen className="h-5 w-5 text-logo-blue" />
                     Educational Resources
                   </CardTitle>
                   <CardDescription>
@@ -378,8 +378,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
-                    <Shield className="h-5 w-5 text-logo-green" />
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
+                    <Shield className="h-5 w-5 text-logo-blue" />
                     Setting Boundaries
                   </CardTitle>
                   <CardDescription>
@@ -398,8 +398,8 @@ export default function FamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green">
-                    <Users className="h-5 w-5 text-logo-green" />
+                  <CardTitle className="flex items-center gap-2 text-logo-blue">
+                    <Users className="h-5 w-5 text-logo-blue" />
                     Family Support Groups
                   </CardTitle>
                   <CardDescription>
@@ -431,7 +431,7 @@ export default function FamilySupport() {
             <Card className="bg-primary/5 border-primary/20">
               <CardContent className="p-6 md:p-8 text-center">
                 <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-                <h2 className="text-xl md:text-2xl font-semibold text-logo-green mb-3">
+                <h2 className="text-xl md:text-2xl font-semibold text-logo-blue mb-3">
                   Need a Private Next Step?
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

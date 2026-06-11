@@ -143,7 +143,7 @@ const FreeGuide = () => {
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-logo-green/10 flex items-center justify-center shrink-0">
-                  <span className="text-xl font-bold text-logo-green">2</span>
+                  <span className="text-xl font-bold text-logo-blue">2</span>
                 </div>
                 <div>
                   <h2 className="text-xl font-bold mb-3">Love Is Not Enough—And That's Okay</h2>
@@ -277,7 +277,7 @@ const FreeGuide = () => {
               </div>
               <div className="text-center p-4">
                 <div className="w-12 h-12 rounded-full bg-logo-green/10 flex items-center justify-center mx-auto mb-3">
-                  <Brain className="w-6 h-6 text-logo-green" />
+                  <Brain className="w-6 h-6 text-logo-blue" />
                 </div>
                 <h3 className="font-semibold mb-1">Keep Learning</h3>
                 <p className="text-sm text-muted-foreground">

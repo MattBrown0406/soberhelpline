@@ -48,7 +48,7 @@ export default function MatchingModality() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green">Why This Guide Matters</CardTitle>
+                <CardTitle className="text-logo-blue">Why This Guide Matters</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families are often overwhelmed by recommendations:</p>
@@ -449,7 +449,7 @@ export default function MatchingModality() {
             {/* Quick Matching Guide */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-logo-green flex items-center gap-2">
+                <CardTitle className="text-logo-blue flex items-center gap-2">
                   <Layers className="h-5 w-5" />
                   A Quick Matching Guide (At a Glance)
                 </CardTitle>
@@ -550,7 +550,7 @@ export default function MatchingModality() {
             {/* Companion Resources */}
             <Card className="border-primary/30">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

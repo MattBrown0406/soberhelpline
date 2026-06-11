@@ -15,10 +15,10 @@ const EducationProgressBar = () => {
         <div className="flex-1 w-full">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-logo-green" />
+              <TrendingUp className="w-4 h-4 text-logo-blue" />
               <span className="text-sm font-semibold text-gray-900">Your Progress</span>
             </div>
-            <span className="text-sm font-bold text-logo-green">
+            <span className="text-sm font-bold text-logo-blue">
               {stats.totalCompleted}/{stats.totalResources} completed
             </span>
           </div>

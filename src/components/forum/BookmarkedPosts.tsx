@@ -108,7 +108,7 @@ export function BookmarkedPosts({ userId }: BookmarkedPostsProps) {
                   <CardContent className="p-3">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-sm text-logo-green truncate">
+                        <h4 className="font-medium text-sm text-logo-blue truncate">
                           {post.title || 'Untitled Post'}
                         </h4>
                         <p className="text-xs text-muted-foreground line-clamp-2 mt-1">

@@ -37,7 +37,7 @@ export default function LivingWellRegardless() {
             {/* Why This Guide Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -137,7 +137,7 @@ export default function LivingWellRegardless() {
             {/* What Living Well Does Not Mean */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">What "Living Well" Does Not Mean</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">What "Living Well" Does Not Mean</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -188,7 +188,7 @@ export default function LivingWellRegardless() {
             </Card>
 
             {/* What Changes When Families Stop Waiting */}
-            <h2 className="text-2xl font-bold text-logo-green mb-6">What Changes When Families Stop Waiting</h2>
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">What Changes When Families Stop Waiting</h2>
 
             <Card className="mb-6">
               <CardHeader className="bg-blue-50 dark:bg-blue-950/30 rounded-t-lg">
@@ -330,7 +330,7 @@ export default function LivingWellRegardless() {
             {/* Living Well Is Not Passive */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Shield className="h-5 w-5" />
                   Living Well Is Not Passive
                 </CardTitle>
@@ -368,7 +368,7 @@ export default function LivingWellRegardless() {
             {/* What You Can Control */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">What You Can Control (And What You Cannot)</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">What You Can Control (And What You Cannot)</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -509,7 +509,7 @@ export default function LivingWellRegardless() {
             {/* Reflection Questions */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Reflection Questions for Families
                 </CardTitle>
@@ -559,7 +559,7 @@ export default function LivingWellRegardless() {
             {/* Companion Resources */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Suggested Companion Resources
                 </CardTitle>

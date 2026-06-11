@@ -49,7 +49,7 @@ export default function StrongOneGuide() {
             {/* Why This Guide Matters */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Heart className="h-5 w-5" />
                   Why This Guide Matters
                 </CardTitle>
@@ -81,7 +81,7 @@ export default function StrongOneGuide() {
             {/* How the Role Develops */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Brain className="h-5 w-5" />
                   How the "Strong One" Role Develops
                 </CardTitle>
@@ -113,7 +113,7 @@ export default function StrongOneGuide() {
             {/* Why Families Reinforce This Role */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Users className="h-5 w-5" />
                   Why Families (Unintentionally) Reinforce This Role
                 </CardTitle>
@@ -243,7 +243,7 @@ export default function StrongOneGuide() {
             {/* Common Signs */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <HelpCircle className="h-5 w-5" />
                   Common Signs You're in the "Strong One" Role
                 </CardTitle>
@@ -264,7 +264,7 @@ export default function StrongOneGuide() {
             {/* Why Letting Go Feels So Scary */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Brain className="h-5 w-5" />
                   Why Letting Go Feels So Scary
                 </CardTitle>
@@ -314,7 +314,7 @@ export default function StrongOneGuide() {
             {/* Reclaiming Strength */}
             <Card className="mb-6 border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Shield className="h-5 w-5" />
                   Reclaiming Strength (In a New Way)
                 </CardTitle>
@@ -387,7 +387,7 @@ export default function StrongOneGuide() {
             {/* Final Thought */}
             <Card className="mb-6 border-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <CheckCircle className="h-5 w-5" />
                   Final Thought
                 </CardTitle>
@@ -417,7 +417,7 @@ export default function StrongOneGuide() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

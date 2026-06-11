@@ -42,7 +42,7 @@ export default function CommonFamilyQuestions({
               <HelpCircle className="h-4 w-4" />
               {eyebrow}
             </div>
-            <h2 className="text-2xl font-bold tracking-normal text-logo-green md:text-3xl">{title}</h2>
+            <h2 className="text-2xl font-bold tracking-normal text-logo-blue md:text-3xl">{title}</h2>
             <p className="mt-3 text-muted-foreground">{description}</p>
           </div>
           <Button asChild variant="outline">
@@ -82,7 +82,7 @@ export default function CommonFamilyQuestions({
                     <p className="text-sm font-semibold text-primary">{answer.category}</p>
                     <h3 className="mt-2 text-lg font-semibold leading-snug text-foreground">{answer.question}</h3>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{answer.shortAnswer}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-logo-green">
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-logo-blue">
                       Read answer
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>

@@ -518,7 +518,7 @@ export default function FamilyForum() {
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-2">
                   Family Discussion Forum
                 </h1>
                 <p className="text-muted-foreground">
@@ -572,7 +572,7 @@ export default function FamilyForum() {
             <div className="grid gap-8 lg:grid-cols-3">
               {/* Forum Topics */}
               <div className="lg:col-span-2 space-y-4">
-                <h2 className="text-xl font-semibold text-logo-green mb-4">Forum Topics</h2>
+                <h2 className="text-xl font-semibold text-logo-blue mb-4">Forum Topics</h2>
                 <div className="grid gap-4">
                   {forumTopics.map((topic) => (
                     <Link key={topic.id} to={`/family-forum/${topic.id}`}>
@@ -584,7 +584,7 @@ export default function FamilyForum() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between gap-2">
-                                <h3 className="font-semibold text-logo-green">{topic.title}</h3>
+                                <h3 className="font-semibold text-logo-blue">{topic.title}</h3>
                                 <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                               </div>
                               <p className="text-sm text-muted-foreground mt-1">{topic.description}</p>
@@ -644,7 +644,7 @@ export default function FamilyForum() {
                           to={`/family-forum/${post.topic_id}`}
                           className="block border-b border-border last:border-0 pb-3 last:pb-0"
                         >
-                          <h4 className="text-sm font-medium text-logo-green line-clamp-2 hover:underline">
+                          <h4 className="text-sm font-medium text-logo-blue line-clamp-2 hover:underline">
                             {post.title || "Untitled Post"}
                           </h4>
                           <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">

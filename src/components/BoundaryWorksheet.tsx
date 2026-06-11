@@ -187,7 +187,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           <div className="flex items-center gap-3">
             <Shield className="h-6 w-6 text-primary" />
             <div>
-              <CardTitle className="text-xl text-logo-green">Boundary Setting Worksheet</CardTitle>
+              <CardTitle className="text-xl text-logo-blue">Boundary Setting Worksheet</CardTitle>
               <CardDescription>Protecting Recovery, Safety, and Sanity</CardDescription>
             </div>
           </div>
@@ -255,7 +255,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 1: Boundary Mindset Check</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 1: Boundary Mindset Check</h3>
                 <p className="text-sm text-muted-foreground">Before writing any boundary, answer honestly</p>
               </div>
 
@@ -331,7 +331,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 2: Identify the Problem Behavior</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 2: Identify the Problem Behavior</h3>
                 <p className="text-sm text-muted-foreground">
                   Boundaries are responses to specific, repeated behaviors, not general frustrations.
                 </p>
@@ -422,7 +422,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 3: Clarify Your Boundary</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 3: Clarify Your Boundary</h3>
                 <p className="text-sm text-muted-foreground">
                   A healthy boundary is: Clear, Specific, Enforceable, About your actions
                 </p>
@@ -463,7 +463,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 4 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 4: Define the Consequence (Follow-Through)</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 4: Define the Consequence (Follow-Through)</h3>
                 <p className="text-sm text-muted-foreground">
                   Consequences are not punishments. They are natural results of your boundary.
                 </p>
@@ -561,7 +561,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 5 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 5: Anticipate Pushback</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 5: Anticipate Pushback</h3>
                 <p className="text-sm text-muted-foreground">
                   Boundaries often trigger emotional reactions. Prepare now.
                 </p>
@@ -623,7 +623,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 6 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 6: Boundary Support Plan</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 6: Boundary Support Plan</h3>
                 <p className="text-sm text-muted-foreground">
                   Boundaries are difficult to maintain alone.
                 </p>
@@ -677,7 +677,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 7 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 7: Commitment</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 7: Commitment</h3>
                 <p className="text-sm text-muted-foreground">Read and sign</p>
               </div>
 
@@ -716,7 +716,7 @@ export default function BoundaryWorksheet({ user }: Props) {
           {currentStep === 8 && (
             <div className="space-y-6">
               <div className="text-center p-6 bg-primary/5 rounded-lg border border-primary/20">
-                <h3 className="text-xl font-semibold text-logo-green mb-4">Boundary Worksheet Complete</h3>
+                <h3 className="text-xl font-semibold text-logo-blue mb-4">Boundary Worksheet Complete</h3>
                 <p className="text-muted-foreground">
                   Your boundary has been documented and your commitment recorded.
                 </p>
@@ -737,7 +737,7 @@ export default function BoundaryWorksheet({ user }: Props) {
               )}
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-logo-green mb-2">Important Reminder</h4>
+                <h4 className="font-semibold text-logo-blue mb-2">Important Reminder</h4>
                 <p className="text-sm text-muted-foreground mb-3">
                   Inconsistent boundaries teach people not to take you seriously.
                   <br />

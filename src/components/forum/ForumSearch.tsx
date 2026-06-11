@@ -109,7 +109,7 @@ export function ForumSearch() {
                 <Link key={result.id} to={`/family-forum/${result.topic_id}`}>
                   <Card className="hover:shadow-md transition-shadow cursor-pointer">
                     <CardContent className="p-4">
-                      <h4 className="font-medium text-logo-green mb-1">
+                      <h4 className="font-medium text-logo-blue mb-1">
                         {result.title || 'Untitled Post'}
                       </h4>
                       <p className="text-sm text-muted-foreground mb-2">{result.content}</p>

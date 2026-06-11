@@ -53,11 +53,11 @@ const RecoveryResources = () => {
                   <Card className="h-full hover:shadow-lg hover:shadow-logo-green/10 hover:border-logo-green/30 transition-all duration-300 group cursor-pointer">
                     <CardContent className="p-6 flex flex-col items-center text-center">
                       <div className="w-14 h-14 rounded-2xl bg-logo-green/10 flex items-center justify-center mb-4 group-hover:bg-logo-green/20 group-hover:scale-110 transition-all">
-                        <Icon className="w-7 h-7 text-logo-green" />
+                        <Icon className="w-7 h-7 text-logo-blue" />
                       </div>
                       <h2 className="font-semibold text-foreground text-base mb-2">{category.name}</h2>
                       <p className="text-sm text-muted-foreground">{category.description}</p>
-                      <div className="mt-4 flex items-center gap-1 text-sm text-logo-green font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="mt-4 flex items-center gap-1 text-sm text-logo-blue font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                         Browse <ArrowRight className="w-4 h-4" />
                       </div>
                     </CardContent>

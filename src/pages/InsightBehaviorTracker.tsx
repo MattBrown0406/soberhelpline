@@ -123,7 +123,7 @@ export default function InsightBehaviorTracker() {
             {/* Why This Tracker Matters */}
             <Card className="mb-8 border-primary/30 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <HelpCircle className="h-5 w-5" />
                   Why This Tracker Matters
                 </CardTitle>
@@ -154,7 +154,7 @@ export default function InsightBehaviorTracker() {
             {/* How to Use */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">How to Use This Tracker</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">How to Use This Tracker</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
@@ -184,7 +184,7 @@ export default function InsightBehaviorTracker() {
             {/* Timeframe Input */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-lg text-logo-green">Assessment Timeframe</CardTitle>
+                <CardTitle className="text-lg text-logo-blue">Assessment Timeframe</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
@@ -290,7 +290,7 @@ export default function InsightBehaviorTracker() {
             {/* Section 3: Pattern Comparison */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Section 3: Pattern Comparison
                 </CardTitle>
@@ -445,7 +445,7 @@ export default function InsightBehaviorTracker() {
             {/* Section 5: Stage-Based Interpretation */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Section 5: Stage-Based Interpretation</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Section 5: Stage-Based Interpretation</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground italic mb-6">
@@ -491,7 +491,7 @@ export default function InsightBehaviorTracker() {
             {/* Section 6: Family Grounding Questions */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Brain className="h-5 w-5" />
                   Section 6: Family Grounding Questions
                 </CardTitle>
@@ -533,7 +533,7 @@ export default function InsightBehaviorTracker() {
             {/* What This Tracker Helps Prevent */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">What This Tracker Helps Prevent</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">What This Tracker Helps Prevent</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
@@ -592,7 +592,7 @@ export default function InsightBehaviorTracker() {
             {/* Companion Resources */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green flex items-center gap-2">
+                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Suggested Companion Resources
                 </CardTitle>

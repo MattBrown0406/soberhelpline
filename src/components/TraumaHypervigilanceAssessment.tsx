@@ -182,7 +182,7 @@ export default function TraumaHypervigilanceAssessment() {
           <div className="flex items-center gap-3">
             <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             <div className="text-left">
-              <h3 className="text-lg font-semibold text-logo-green">Family Trauma & Hypervigilance Self-Assessment</h3>
+              <h3 className="text-lg font-semibold text-logo-blue">Family Trauma & Hypervigilance Self-Assessment</h3>
               <p className="text-sm text-muted-foreground font-normal">Understanding How Addiction Impacts Your Nervous System</p>
             </div>
           </div>
@@ -319,7 +319,7 @@ export default function TraumaHypervigilanceAssessment() {
                 {/* Section Breakdown */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-logo-green">Section Breakdown</CardTitle>
+                    <CardTitle className="text-logo-blue">Section Breakdown</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {sections.map((section) => {
@@ -355,7 +355,7 @@ export default function TraumaHypervigilanceAssessment() {
                 {/* Reflection Questions */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-logo-green flex items-center gap-2">
+                    <CardTitle className="text-logo-blue flex items-center gap-2">
                       <Heart className="h-5 w-5 text-rose-500" />
                       Reflection Questions (Most Important Part)
                     </CardTitle>

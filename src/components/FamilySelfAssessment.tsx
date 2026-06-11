@@ -210,7 +210,7 @@ export default function FamilySelfAssessment({ user }: Props) {
   ) => (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-logo-green">{title}</h3>
+        <h3 className="text-lg font-semibold text-logo-blue">{title}</h3>
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
       <div className="space-y-4">
@@ -250,7 +250,7 @@ export default function FamilySelfAssessment({ user }: Props) {
           <div className="flex items-center gap-3">
             <ClipboardCheck className="h-6 w-6 text-primary" />
             <div>
-              <CardTitle className="text-xl text-logo-green">Enabling Self-Assessment</CardTitle>
+              <CardTitle className="text-xl text-logo-blue">Enabling Self-Assessment</CardTitle>
               <CardDescription>Understanding How Love, Fear, and Good Intentions Can Reinforce Addiction</CardDescription>
             </div>
           </div>
@@ -416,7 +416,7 @@ export default function FamilySelfAssessment({ user }: Props) {
           {currentStep === 5 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Reflection Questions</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Reflection Questions</h3>
                 <p className="text-sm text-muted-foreground">Take a few minutes to write brief responses. Do not skip this section.</p>
               </div>
               <div className="space-y-4">
@@ -482,7 +482,7 @@ export default function FamilySelfAssessment({ user }: Props) {
               </div>
 
               <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                <h4 className="font-semibold text-logo-green mb-2">Important Reframe</h4>
+                <h4 className="font-semibold text-logo-blue mb-2">Important Reframe</h4>
                 <p className="text-sm text-muted-foreground italic">
                   Enabling is not about loving too much. It's about loving in ways that no longer work.
                 </p>

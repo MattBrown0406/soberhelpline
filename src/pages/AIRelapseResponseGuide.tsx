@@ -286,7 +286,7 @@ const AIRelapseResponseGuide = () => {
             <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 rounded-full mb-4">
               <RefreshCw className="h-12 w-12 text-orange-600" />
             </div>
-            <h1 className="text-4xl font-bold text-logo-green mb-4">
+            <h1 className="text-4xl font-bold text-logo-blue mb-4">
               AI Relapse Response Guide
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -299,7 +299,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* What This Tool Does */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">What This Tool Does</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">What This Tool Does</h2>
             <p className="text-muted-foreground mb-6">
               This specialized prompt transforms your AI chatbot into a relapse response coach that helps you <strong>respond with consistency, not drama</strong>. It guides you through emotional regulation, reality-testing common myths, and making grounded decisions when everything feels urgent.
             </p>
@@ -308,7 +308,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Heart className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Heart className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Emotional Containment First</h3>
                       <p className="text-sm text-muted-foreground">
@@ -322,7 +322,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Target className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Target className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Reality-Tests Common Myths</h3>
                       <p className="text-sm text-muted-foreground">
@@ -336,7 +336,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Shield className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Shield className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Names Family Patterns at Risk</h3>
                       <p className="text-sm text-muted-foreground">
@@ -350,7 +350,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Compass className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Compass className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Provides Grounded Options</h3>
                       <p className="text-sm text-muted-foreground">
@@ -365,7 +365,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* Core Orientation */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Core Orientation</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Core Orientation</h2>
             <Card className="bg-orange-50/50 dark:bg-orange-950/10 border-orange-500/20">
               <CardContent className="py-6">
                 <p className="text-lg text-center italic text-muted-foreground mb-4">
@@ -399,33 +399,33 @@ const AIRelapseResponseGuide = () => {
 
           {/* When to Use This Tool */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">When to Use This Tool</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">When to Use This Tool</h2>
             <p className="text-muted-foreground mb-4">
               This AI relapse response guide is especially useful when:
             </p>
             <ul className="space-y-2 text-muted-foreground mb-6">
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You just found out your loved one relapsed and don't know what to do</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're feeling panicked, angry, or desperate to take action</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're not sure if you should hold your boundaries or change them</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You're tempted to rescue, threaten, or lecture</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You need help distinguishing compassion from rescuing</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-logo-green">•</span>
+                <span className="text-logo-blue">•</span>
                 <span>You want to respond in a way you won't regret later</span>
               </li>
             </ul>
@@ -433,7 +433,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* AI Advantages */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Why AI Can Help During a Relapse Crisis</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Why AI Can Help During a Relapse Crisis</h2>
             <p className="text-muted-foreground mb-6">
               While AI should never replace professional guidance, it can offer unique advantages when you're in the emotional storm of a relapse:
             </p>
@@ -479,12 +479,12 @@ const AIRelapseResponseGuide = () => {
 
           {/* How to Use */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">How to Use This Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Prompt</h2>
             <div className="space-y-4">
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-green font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
                       1
                     </div>
                     <div>
@@ -500,7 +500,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-green font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
                       2
                     </div>
                     <div>
@@ -516,7 +516,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-green font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
                       3
                     </div>
                     <div>
@@ -532,7 +532,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-green font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
                       4
                     </div>
                     <div>
@@ -552,7 +552,7 @@ const AIRelapseResponseGuide = () => {
             <Card className="border-logo-green/30 bg-logo-green/5">
               <CardContent className="py-6">
                 <div className="text-center mb-4">
-                  <h3 className="text-xl font-semibold text-logo-green mb-2">Ready to Get Started?</h3>
+                  <h3 className="text-xl font-semibold text-logo-blue mb-2">Ready to Get Started?</h3>
                   <p className="text-muted-foreground">
                     Copy this prompt and paste it into your AI chatbot to begin.
                   </p>
@@ -582,7 +582,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* The Full Prompt */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">The Full Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">The Full Prompt</h2>
             <Card>
               <CardContent className="py-6">
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-mono bg-muted/50 p-4 rounded-lg overflow-x-auto max-h-96 overflow-y-auto">
@@ -594,7 +594,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* Example Questions */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Example Questions to Ask</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Example Questions to Ask</h2>
             <p className="text-muted-foreground mb-4">
               Once you've pasted the prompt, you can start with questions like:
             </p>
@@ -646,7 +646,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* Companion Resources */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Companion Resources</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Companion Resources</h2>
             <p className="text-muted-foreground mb-4">
               These guides pair well with the AI Relapse Response Guide:
             </p>
@@ -710,7 +710,7 @@ const AIRelapseResponseGuide = () => {
           <section className="text-center py-8">
             <Card className="bg-gradient-to-br from-logo-green/10 to-transparent border-logo-green/20">
               <CardContent className="py-8">
-                <h2 className="text-2xl font-semibold text-logo-green mb-3">
+                <h2 className="text-2xl font-semibold text-logo-blue mb-3">
                   Need Human Guidance?
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
@@ -723,7 +723,7 @@ const AIRelapseResponseGuide = () => {
                     </Button>
                   </Link>
                   <a href="tel:458-202-7900">
-                    <Button size="lg" variant="outline" className="border-logo-green text-logo-green hover:bg-logo-green/10">
+                    <Button size="lg" variant="outline" className="border-logo-green text-logo-blue hover:bg-logo-green/10">
                       Call 458-202-7900
                     </Button>
                   </a>

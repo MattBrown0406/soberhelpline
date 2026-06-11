@@ -22,7 +22,7 @@ const NotFound = () => {
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted/50 px-4">
       <div className="text-center max-w-lg">
         <img src={logo} alt="Sober Helpline" className="h-20 w-20 mx-auto mb-6 object-contain" />
-        <h1 className="mb-2 text-6xl font-bold text-logo-green">404</h1>
+        <h1 className="mb-2 text-6xl font-bold text-logo-blue">404</h1>
         <p className="mb-2 text-xl font-semibold text-foreground">Page Not Found</p>
         <p className="mb-8 text-muted-foreground">
           The page you're looking for doesn't exist or may have moved. 
@@ -48,19 +48,19 @@ const NotFound = () => {
           <p className="text-sm font-medium text-muted-foreground mb-4">Looking for something specific?</p>
           <div className="grid grid-cols-2 gap-3 text-sm">
             <Link to="/family-membership" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
-              <Users className="w-4 h-4 text-logo-green" />
+              <Users className="w-4 h-4 text-logo-blue" />
               <span>Family Membership</span>
             </Link>
             <Link to="/inpatient-treatment" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
-              <Search className="w-4 h-4 text-logo-green" />
+              <Search className="w-4 h-4 text-logo-blue" />
               <span>Find Treatment</span>
             </Link>
             <Link to="/blog" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
-              <BookOpen className="w-4 h-4 text-logo-green" />
+              <BookOpen className="w-4 h-4 text-logo-blue" />
               <span>Blog & Resources</span>
             </Link>
             <Link to="/for-providers" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
-              <Heart className="w-4 h-4 text-logo-green" />
+              <Heart className="w-4 h-4 text-logo-blue" />
               <span>For Providers</span>
             </Link>
           </div>

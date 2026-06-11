@@ -157,7 +157,7 @@ export default function ControlWorksheet({ user }: Props) {
           <div className="flex items-center gap-3">
             <FileText className="h-6 w-6 text-primary" />
             <div>
-              <CardTitle className="text-xl text-logo-green">What I Can Control vs. What I Can't</CardTitle>
+              <CardTitle className="text-xl text-logo-blue">What I Can Control vs. What I Can't</CardTitle>
               <CardDescription>Reclaiming Stability in the Midst of Addiction</CardDescription>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 1: The Reality Check</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 1: The Reality Check</h3>
                 <p className="text-sm text-muted-foreground">Answer briefly</p>
               </div>
 
@@ -282,7 +282,7 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 2: What I Cannot Control</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 2: What I Cannot Control</h3>
                 <p className="text-sm text-muted-foreground">
                   These are areas that families commonly try to control — unsuccessfully. Write specific examples from your life.
                 </p>
@@ -340,7 +340,7 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 3: What I Can Control</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 3: What I Can Control</h3>
                 <p className="text-sm text-muted-foreground">
                   These are the areas where your choices genuinely matter.
                 </p>
@@ -389,7 +389,7 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 4 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 4: The Shift</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 4: The Shift</h3>
                 <p className="text-sm text-muted-foreground">
                   For each item below, rewrite it as a control shift.
                 </p>
@@ -489,7 +489,7 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 5 && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-logo-green">Part 5: Your Personal Commitment</h3>
+                <h3 className="text-lg font-semibold text-logo-blue">Part 5: Your Personal Commitment</h3>
                 <p className="text-sm text-muted-foreground">Complete the statements</p>
               </div>
 
@@ -544,14 +544,14 @@ export default function ControlWorksheet({ user }: Props) {
           {currentStep === 6 && (
             <div className="space-y-6">
               <div className="text-center p-6 bg-primary/5 rounded-lg border border-primary/20">
-                <h3 className="text-xl font-semibold text-logo-green mb-4">Worksheet Complete</h3>
+                <h3 className="text-xl font-semibold text-logo-blue mb-4">Worksheet Complete</h3>
                 <p className="text-muted-foreground">
                   Your responses have been saved. You can return to this worksheet anytime to revisit your commitments or complete it again as your situation evolves.
                 </p>
               </div>
 
               <div className="p-4 bg-muted/50 rounded-lg">
-                <h4 className="font-semibold text-logo-green mb-2">Important Reminder</h4>
+                <h4 className="font-semibold text-logo-blue mb-2">Important Reminder</h4>
                 <p className="text-sm text-muted-foreground italic mb-3">
                   Letting go of control is not the same as giving up. It is choosing sanity, stability, and integrity over constant crisis management.
                 </p>

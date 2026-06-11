@@ -185,7 +185,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
               <div className="flex items-center gap-3">
                 <Brain className="h-6 w-6 text-primary" />
                 <div>
-                  <CardTitle className="text-logo-green">"What Would You Do?"</CardTitle>
+                  <CardTitle className="text-logo-blue">"What Would You Do?"</CardTitle>
                   <CardDescription>Scenario-Based Exercises for Family Recovery</CardDescription>
                 </div>
               </div>
@@ -855,7 +855,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
         {/* Reflection Section */}
         <Card className="border-primary/20 bg-primary/5">
           <CardHeader>
-            <CardTitle className="text-lg text-logo-green">Reflection: Your Patterns</CardTitle>
+            <CardTitle className="text-lg text-logo-blue">Reflection: Your Patterns</CardTitle>
             <CardDescription>Answer honestly:</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -896,7 +896,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
 
         {/* Key Reframe */}
         <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/20 text-center">
-          <h3 className="font-bold text-logo-green text-lg mb-3">Key Reframe</h3>
+          <h3 className="font-bold text-logo-blue text-lg mb-3">Key Reframe</h3>
           <p className="text-foreground mb-2">
             You don't build confidence by getting it right every time.
           </p>

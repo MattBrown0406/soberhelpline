@@ -370,10 +370,10 @@ export default function FamilyEducation() {
               <div className="relative text-center">
                 <div className="flex flex-col items-center gap-3 mb-4">
                   <div className="p-3 rounded-xl bg-logo-green/10 border border-logo-green/20">
-                    <BookOpen className="h-8 w-8 text-logo-green" />
+                    <BookOpen className="h-8 w-8 text-logo-blue" />
                   </div>
                   <div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-logo-green">
+                    <h1 className="text-3xl md:text-4xl font-bold text-logo-blue">
                       Family Education Center
                     </h1>
                     <p className="text-muted-foreground">Expert-created resources for your journey</p>
@@ -393,19 +393,19 @@ export default function FamilyEducation() {
                 {/* Quick Stats */}
                 <div className="flex flex-wrap justify-center gap-6 mt-6">
                   <div className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-logo-green" />
+                    <Target className="h-5 w-5 text-logo-blue" />
                     <span className="text-sm font-medium">62 Resources</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Activity className="h-5 w-5 text-logo-green" />
+                    <Activity className="h-5 w-5 text-logo-blue" />
                     <span className="text-sm font-medium">8 Interactive Tools</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Headphones className="h-5 w-5 text-logo-green" />
+                    <Headphones className="h-5 w-5 text-logo-blue" />
                     <span className="text-sm font-medium">12 Guided Meditations</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Brain className="h-5 w-5 text-logo-green" />
+                    <Brain className="h-5 w-5 text-logo-blue" />
                     <span className="text-sm font-medium">6 AI Tools</span>
                   </div>
                 </div>
@@ -480,7 +480,7 @@ export default function FamilyEducation() {
               <CardContent className="p-5 md:p-6">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                   <div className="max-w-3xl">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1 text-xs font-semibold text-logo-green mb-3">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1 text-xs font-semibold text-logo-blue mb-3">
                       <Compass className="h-3.5 w-3.5" />
                       Need a clearer starting point?
                     </div>
@@ -571,7 +571,7 @@ export default function FamilyEducation() {
                           <Scale className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg text-logo-green">Enabling vs. Helping Decision Tree</CardTitle>
+                          <CardTitle className="text-lg text-logo-blue">Enabling vs. Helping Decision Tree</CardTitle>
                           <CardDescription>Navigate difficult situations with clarity</CardDescription>
                         </div>
                       </div>
@@ -589,7 +589,7 @@ export default function FamilyEducation() {
                           <AlertTriangle className="h-6 w-6 text-rose-600 dark:text-rose-400" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg text-logo-green">Relapse Warning Signs Tracker</CardTitle>
+                          <CardTitle className="text-lg text-logo-blue">Relapse Warning Signs Tracker</CardTitle>
                           <CardDescription>Identify early warning signs before crisis</CardDescription>
                         </div>
                       </div>
@@ -618,7 +618,7 @@ export default function FamilyEducation() {
                             <Eye className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
                           </div>
                           <div>
-                            <CardTitle className="text-lg text-logo-green group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">Fear Inventory Exercise</CardTitle>
+                            <CardTitle className="text-lg text-logo-blue group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">Fear Inventory Exercise</CardTitle>
                             <CardDescription>Identify and examine the fears driving your decisions</CardDescription>
                           </div>
                         </div>
@@ -639,7 +639,7 @@ export default function FamilyEducation() {
                             <Users className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                           </div>
                           <div>
-                            <CardTitle className="text-lg text-logo-green group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Conversation Starters</CardTitle>
+                            <CardTitle className="text-lg text-logo-blue group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Conversation Starters</CardTitle>
                             <CardDescription>Scripts and frameworks for difficult conversations</CardDescription>
                           </div>
                         </div>
@@ -661,7 +661,7 @@ export default function FamilyEducation() {
                 {/* User-specific worksheets */}
                 {user && (
                   <div className="space-y-6">
-                    <h3 className="text-xl font-semibold text-logo-green flex items-center gap-2">
+                    <h3 className="text-xl font-semibold text-logo-blue flex items-center gap-2">
                       <FileText className="h-5 w-5" />
                       Your Personal Worksheets
                     </h3>
@@ -839,7 +839,7 @@ export default function FamilyEducation() {
                       <Headphones className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-logo-green">Guided Meditations</h3>
+                      <h3 className="text-xl font-semibold text-logo-blue">Guided Meditations</h3>
                       <p className="text-sm text-muted-foreground">Audio resources to help you stay grounded</p>
                     </div>
                   </div>
@@ -899,7 +899,7 @@ export default function FamilyEducation() {
                       <Sparkles className="h-6 w-6 text-violet-600 dark:text-violet-400" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-logo-green">AI Tools</h3>
+                      <h3 className="text-xl font-semibold text-logo-blue">AI Tools</h3>
                       <p className="text-sm text-muted-foreground">Intelligent support for your journey</p>
                     </div>
                   </div>

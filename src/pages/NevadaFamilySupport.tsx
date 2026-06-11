@@ -79,7 +79,7 @@ export default function NevadaFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Nevada Family Addiction Resources
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
               Family Support for Addiction in Nevada: Resources, Help &amp; Hope
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -109,7 +109,7 @@ export default function NevadaFamilySupport() {
         {/* Nevada Stats */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Nevada's Addiction Crisis Is a Family Crisis
             </h2>
             <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
@@ -119,21 +119,21 @@ export default function NevadaFamilySupport() {
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">800+</div>
-                  <div className="font-semibold text-logo-green mb-1">Overdose Deaths/Year</div>
+                  <div className="font-semibold text-logo-blue mb-1">Overdose Deaths/Year</div>
                   <div className="text-sm text-muted-foreground">Nevada ranks among the highest overdose death rates per capita in the United States</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">Fentanyl</div>
-                  <div className="font-semibold text-logo-green mb-1">Clark County Crisis</div>
+                  <div className="font-semibold text-logo-blue mb-1">Clark County Crisis</div>
                   <div className="text-sm text-muted-foreground">Fentanyl has overtaken heroin and is now present in most street drugs in Las Vegas and Clark County</div>
                 </CardContent>
               </Card>
               <Card className="text-center">
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-primary mb-2">24/7</div>
-                  <div className="font-semibold text-logo-green mb-1">Culture of Use</div>
+                  <div className="font-semibold text-logo-blue mb-1">Culture of Use</div>
                   <div className="text-sm text-muted-foreground">Gaming and entertainment normalize alcohol and drug use, making it harder for families to recognize addiction</div>
                 </CardContent>
               </Card>
@@ -146,7 +146,7 @@ export default function NevadaFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   You Are Not Alone
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -195,7 +195,7 @@ export default function NevadaFamilySupport() {
         {/* Nevada Resources */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Nevada Family Addiction Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -204,7 +204,7 @@ export default function NevadaFamilySupport() {
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     Nevada 2-1-1
                   </CardTitle>
@@ -227,7 +227,7 @@ export default function NevadaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Al-Anon Nevada
                   </CardTitle>
@@ -250,7 +250,7 @@ export default function NevadaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Nar-Anon Nevada
                   </CardTitle>
@@ -273,7 +273,7 @@ export default function NevadaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <BookOpen className="h-4 w-4 text-primary" />
                     SMART Recovery Family &amp; Friends
                   </CardTitle>
@@ -296,7 +296,7 @@ export default function NevadaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Shield className="h-4 w-4 text-primary" />
                     Nevada Division of Public and Behavioral Health
                   </CardTitle>
@@ -319,7 +319,7 @@ export default function NevadaFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-green text-base">
+                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
                     Crisis Support Services of Nevada — 24/7
                   </CardTitle>
@@ -345,7 +345,7 @@ export default function NevadaFamilySupport() {
         {/* CRAFT vs Traditional */}
         <section className="py-12">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               What Works: CRAFT vs. Traditional Approaches
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -381,7 +381,7 @@ export default function NevadaFamilySupport() {
 
               <Card className="border-primary/30 bg-primary/5">
                 <CardHeader>
-                  <CardTitle className="text-logo-green text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
+                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
                   <CardDescription>Evidence-based family intervention model</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -421,7 +421,7 @@ export default function NevadaFamilySupport() {
                   <Calendar className="h-3.5 w-3.5" />
                   Every Monday — 7:00 PM PST
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -452,7 +452,7 @@ export default function NevadaFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-green mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
@@ -482,7 +482,7 @@ export default function NevadaFamilySupport() {
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Hourly Intervention Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
@@ -527,7 +527,7 @@ export default function NevadaFamilySupport() {
               </div>
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-logo-green mb-3">Who This Is For</h3>
+                  <h3 className="font-semibold text-logo-blue mb-3">Who This Is For</h3>
                   <ul className="space-y-3">
                     {[
                       "You've tried talking to them and nothing works",
@@ -551,7 +551,7 @@ export default function NevadaFamilySupport() {
         {/* City Cards */}
         <section className="py-12 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
               Nevada City-Specific Resources
             </h2>
             <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -570,7 +570,7 @@ export default function NevadaFamilySupport() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-semibold text-logo-green group-hover:text-primary transition-colors">
+                            <span className="font-semibold text-logo-blue group-hover:text-primary transition-colors">
                               {city.name}
                             </span>
                           </div>
@@ -589,7 +589,7 @@ export default function NevadaFamilySupport() {
         {/* FAQ Section */}
         <section className="py-12">
           <div className="container max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
@@ -607,7 +607,7 @@ export default function NevadaFamilySupport() {
         <section className="py-12 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-green mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
               Nevada Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">

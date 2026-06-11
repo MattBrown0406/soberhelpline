@@ -201,7 +201,7 @@ const TreatmentRedFlags = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-education" className="inline-flex items-center text-logo-green hover:underline mb-6 print:hidden">
+        <Link to="/family-education" className="inline-flex items-center text-logo-blue hover:underline mb-6 print:hidden">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Family Resources
         </Link>
@@ -214,7 +214,7 @@ const TreatmentRedFlags = () => {
 
         {/* Purpose Section */}
         <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
-          <Shield className="h-5 w-5 text-logo-green" />
+          <Shield className="h-5 w-5 text-logo-blue" />
           <AlertDescription className="text-foreground">
             <strong>Purpose:</strong> When families are scared, overwhelmed, and desperate for help, the treatment industry can feel impossible to navigate. 
             While many ethical, high-quality programs exist, there are also business practices that prioritize admissions over outcomes.
@@ -236,7 +236,7 @@ const TreatmentRedFlags = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Users className="h-5 w-5 text-logo-green" />
+              <Users className="h-5 w-5 text-logo-blue" />
               Why Families Are Vulnerable
             </CardTitle>
           </CardHeader>
@@ -402,7 +402,7 @@ const TreatmentRedFlags = () => {
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Users className="h-5 w-5 text-logo-green" />
+              <Users className="h-5 w-5 text-logo-blue" />
               Family Reality Check
             </CardTitle>
             <p className="text-sm text-muted-foreground mt-1">

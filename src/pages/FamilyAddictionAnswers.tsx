@@ -86,7 +86,7 @@ export default function FamilyAddictionAnswers() {
                 <HeartPulse className="h-4 w-4" />
                 Family addiction answer center
               </div>
-              <h1 className="text-4xl font-bold tracking-normal text-logo-green md:text-5xl">
+              <h1 className="text-4xl font-bold tracking-normal text-logo-blue md:text-5xl">
                 Answers for families who need a next step, not more confusion.
               </h1>
               <p className="aeo-answer-summary mt-5 text-lg leading-relaxed text-muted-foreground">
@@ -166,7 +166,7 @@ export default function FamilyAddictionAnswers() {
           <div className="container mx-auto max-w-5xl px-4">
             <div className="mb-7 max-w-3xl">
               <p className="text-sm font-semibold text-primary">Direct answers</p>
-              <h2 className="mt-1 text-2xl font-bold tracking-normal text-logo-green md:text-3xl">
+              <h2 className="mt-1 text-2xl font-bold tracking-normal text-logo-blue md:text-3xl">
                 What families ask before they register, book, or check readiness
               </h2>
             </div>
@@ -200,7 +200,7 @@ export default function FamilyAddictionAnswers() {
           <div className="container mx-auto max-w-6xl px-4">
             <div className="mb-7 max-w-3xl">
               <p className="text-sm font-semibold text-primary">Answer library</p>
-              <h2 className="mt-1 text-2xl font-bold tracking-normal text-logo-green md:text-3xl">
+              <h2 className="mt-1 text-2xl font-bold tracking-normal text-logo-blue md:text-3xl">
                 Short answers that route families to the right next step
               </h2>
               <p className="mt-3 text-muted-foreground">
@@ -285,7 +285,7 @@ export default function FamilyAddictionAnswers() {
                     <ClipboardCheck className="h-5 w-5" />
                     <span className="text-sm font-semibold uppercase tracking-wide">Use the hierarchy</span>
                   </div>
-                  <h2 className="text-2xl font-bold text-logo-green md:text-3xl">Free support first, private answers when needed, intervention readiness when risk is rising.</h2>
+                  <h2 className="text-2xl font-bold text-logo-blue md:text-3xl">Free support first, private answers when needed, intervention readiness when risk is rising.</h2>
                   <p className="mt-3 text-muted-foreground">
                     That keeps the funnel honest. Families can receive help without pressure, but the site still gives urgent situations a clear path to coaching or professional intervention.
                   </p>

@@ -60,7 +60,7 @@ const Free6PromoBanner = () => {
               Get <span className="text-amber-600 dark:text-amber-400">6 Months FREE</span> Family Membership!
             </p>
             <p className="text-xs md:text-sm text-muted-foreground mt-0.5">
-              Use code <span className="font-bold text-logo-green bg-logo-green/10 px-2 py-0.5 rounded">FAMILY6</span> at checkout — Access forum, education & live webinars
+              Use code <span className="font-bold text-logo-blue bg-logo-green/10 px-2 py-0.5 rounded">FAMILY6</span> at checkout — Access forum, education & live webinars
             </p>
           </div>
           

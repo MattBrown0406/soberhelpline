@@ -231,7 +231,7 @@ const AILifeCoach = () => {
             <div className="inline-flex items-center justify-center p-3 rounded-full bg-violet-500/10 mb-4">
               <Sparkles className="h-10 w-10 text-violet-600 dark:text-violet-400" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-3">AI Life Coach</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-3">AI Life Coach</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Transform any AI chatbot into a seasoned recovery guide and life coach
             </p>
@@ -242,7 +242,7 @@ const AILifeCoach = () => {
 
           {/* Purpose Section */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">Purpose of This Guide</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">Purpose of This Guide</h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
               This guide provides a carefully crafted prompt that you can copy and paste into ChatGPT, Claude, or any other AI chatbot. Once pasted, the AI will take on the role of a highly experienced life coach and recovery guide—one with deep expertise in addiction, family systems, codependency, and long-term recovery.
             </p>
@@ -253,7 +253,7 @@ const AILifeCoach = () => {
 
           {/* Why AI Can Help Section */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-6">Why AI Support Matters</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-6">Why AI Support Matters</h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               While professional support is irreplaceable, there are many moments when it simply isn't available—late at night, during holidays, in the middle of a crisis, or when you just need to process something before your next therapy session. AI can fill those gaps in meaningful ways:
             </p>
@@ -262,7 +262,7 @@ const AILifeCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Clock className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Clock className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">24/7 Availability</h3>
                       <p className="text-sm text-muted-foreground">
@@ -276,7 +276,7 @@ const AILifeCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Heart className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Heart className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Non-Judgmental Processing</h3>
                       <p className="text-sm text-muted-foreground">
@@ -290,7 +290,7 @@ const AILifeCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Shield className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Shield className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Boundary Practice</h3>
                       <p className="text-sm text-muted-foreground">
@@ -304,7 +304,7 @@ const AILifeCoach = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-3">
-                    <Brain className="h-5 w-5 text-logo-green flex-shrink-0 mt-0.5" />
+                    <Brain className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-medium mb-1">Pattern Recognition</h3>
                       <p className="text-sm text-muted-foreground">
@@ -319,7 +319,7 @@ const AILifeCoach = () => {
 
           {/* How to Use Section */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">How to Use This Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Prompt</h2>
             <ol className="space-y-3 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">1</span>
@@ -363,7 +363,7 @@ const AILifeCoach = () => {
 
           {/* The Prompt */}
           <section className="mb-10">
-            <h2 className="text-2xl font-semibold text-logo-green mb-4">The Prompt</h2>
+            <h2 className="text-2xl font-semibold text-logo-blue mb-4">The Prompt</h2>
             <Card className="border-2 border-violet-500/30">
               <CardContent className="py-6">
                 <pre className="whitespace-pre-wrap text-sm text-muted-foreground font-mono leading-relaxed overflow-x-auto">
@@ -384,7 +384,7 @@ const AILifeCoach = () => {
 
           {/* Companion Resources */}
           <section className="mt-10 border-t pt-6">
-            <h2 className="text-lg font-semibold text-logo-green mb-3">Suggested Companion Resources</h2>
+            <h2 className="text-lg font-semibold text-logo-blue mb-3">Suggested Companion Resources</h2>
             <div className="flex flex-wrap gap-2">
               <Link to="/values-exercise">
                 <Button variant="outline" size="sm">Values Clarification Exercise</Button>

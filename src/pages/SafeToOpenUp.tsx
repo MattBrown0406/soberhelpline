@@ -107,7 +107,7 @@ export default function SafeToOpenUp() {
             {/* What Trust Actually Is */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-logo-green">
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
                   <Eye className="h-5 w-5" />
                   What Trust Actually Is (And What It Is Not)
                 </CardTitle>
@@ -353,7 +353,7 @@ export default function SafeToOpenUp() {
             {/* Guarded vs Unsafe */}
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="text-logo-green">
+                <CardTitle className="text-logo-blue">
                   The Difference Between Guarded and Unsafe
                 </CardTitle>
               </CardHeader>
@@ -626,7 +626,7 @@ export default function SafeToOpenUp() {
             {/* Companion Resources */}
             <Card className="border-muted">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">

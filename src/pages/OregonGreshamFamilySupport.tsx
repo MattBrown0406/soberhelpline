@@ -58,7 +58,7 @@ export default function OregonGreshamFamilySupport() {
               <MapPin className="h-3.5 w-3.5" />
               Gresham, Oregon — East Multnomah County
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-logo-green mb-5 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-5 leading-tight">
               Addiction Family Support in Gresham, Oregon
             </h1>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
@@ -87,7 +87,7 @@ export default function OregonGreshamFamilySupport() {
         {/* Gresham Context */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-4">
+            <h2 className="text-2xl font-bold text-logo-blue mb-4">
               Gresham's Addiction Landscape
             </h2>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -121,13 +121,13 @@ export default function OregonGreshamFamilySupport() {
         {/* Local Resources */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-6">
+            <h2 className="text-2xl font-bold text-logo-blue mb-6">
               Gresham Local Addiction Family Resources
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Users className="h-4 w-4 text-primary" />
                     Al-Anon East Multnomah County
                   </CardTitle>
@@ -144,7 +144,7 @@ export default function OregonGreshamFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Heart className="h-4 w-4 text-primary" />
                     Cascadia Behavioral Healthcare
                   </CardTitle>
@@ -162,7 +162,7 @@ export default function OregonGreshamFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
                     Multnomah County SUD Services
                   </CardTitle>
@@ -179,7 +179,7 @@ export default function OregonGreshamFamilySupport() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base text-logo-green flex items-center gap-2">
+                  <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
                     Lines for Life — 24/7 Crisis Line
                   </CardTitle>
@@ -209,7 +209,7 @@ export default function OregonGreshamFamilySupport() {
                       <Calendar className="h-3.5 w-3.5" />
                       Every Monday — 7:00 PM PST
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-3">
+                    <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
                       Free “The Family Squares” Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
@@ -252,7 +252,7 @@ export default function OregonGreshamFamilySupport() {
         {/* Coaching */}
         <section className="py-10 bg-muted/40">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-logo-green mb-4">
+            <h2 className="text-2xl font-bold text-logo-blue mb-4">
               Intervention Coaching for Gresham Families
             </h2>
             <p className="text-muted-foreground mb-6">
@@ -295,7 +295,7 @@ export default function OregonGreshamFamilySupport() {
         {/* Other Cities */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-logo-green mb-4">Other Oregon Cities</h2>
+            <h2 className="text-xl font-bold text-logo-blue mb-4">Other Oregon Cities</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
               {otherCities.map((city) => (
                 <Link key={city.slug} to={`/oregon/${city.slug}`}
@@ -316,7 +316,7 @@ export default function OregonGreshamFamilySupport() {
         <section className="py-10 bg-primary/5 border-t border-primary/10">
           <div className="container max-w-3xl mx-auto px-4 text-center">
             <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
-            <h2 className="text-xl md:text-2xl font-bold text-logo-green mb-2">
+            <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-2">
               Gresham Families: Free Help Is Here
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">

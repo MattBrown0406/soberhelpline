@@ -48,7 +48,7 @@ export default function TwelveStepsExplained() {
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Why Families Need This Guide</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Why Families Need This Guide</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Families often hear phrases like:</p>
@@ -554,7 +554,7 @@ export default function TwelveStepsExplained() {
             {/* Final Thought */}
             <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
               <CardHeader>
-                <CardTitle className="text-xl text-logo-green">Final Thought</CardTitle>
+                <CardTitle className="text-xl text-logo-blue">Final Thought</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -568,7 +568,7 @@ export default function TwelveStepsExplained() {
                   "Is this working?"
                 </p>
                 <p className="text-muted-foreground text-center">and start asking:</p>
-                <p className="text-lg font-medium text-center text-logo-green">
+                <p className="text-lg font-medium text-center text-logo-blue">
                   "Is there consistent movement toward honesty, responsibility, and connection?"
                 </p>
                 <p className="text-center font-semibold text-foreground mt-4">

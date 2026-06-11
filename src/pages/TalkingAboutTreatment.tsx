@@ -47,7 +47,7 @@ export default function TalkingAboutTreatment() {
             {/* Purpose */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Purpose</CardTitle>
+                <CardTitle className="text-logo-blue">Purpose</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-foreground leading-relaxed">
@@ -62,7 +62,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 1 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">1. Prepare Yourself Before the Conversation</CardTitle>
+                <CardTitle className="text-logo-blue">1. Prepare Yourself Before the Conversation</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -92,7 +92,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 2 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">2. Choose the Right Timing and Setting</CardTitle>
+                <CardTitle className="text-logo-blue">2. Choose the Right Timing and Setting</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -125,7 +125,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 3 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">3. Lead with Observations, Not Accusations</CardTitle>
+                <CardTitle className="text-logo-blue">3. Lead with Observations, Not Accusations</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground">Use observable facts, not judgments.</p>
@@ -154,7 +154,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 4 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">4. Express Impact Without Blame</CardTitle>
+                <CardTitle className="text-logo-blue">4. Express Impact Without Blame</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground">Share how the situation affects you and the family.</p>
@@ -173,7 +173,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 5 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">5. State the Need for Treatment Clearly</CardTitle>
+                <CardTitle className="text-logo-blue">5. State the Need for Treatment Clearly</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground font-semibold">Clarity is kindness.</p>
@@ -200,7 +200,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 6 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">6. Present Options, Not Endless Choices</CardTitle>
+                <CardTitle className="text-logo-blue">6. Present Options, Not Endless Choices</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground">Offer clear, limited options that align with recovery.</p>
@@ -219,7 +219,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 7 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">7. Communicate Boundaries Calmly and Briefly</CardTitle>
+                <CardTitle className="text-logo-blue">7. Communicate Boundaries Calmly and Briefly</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground font-semibold">Boundaries are not threats. They are decisions.</p>
@@ -241,7 +241,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 8 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">8. Expect Resistance—and Don't Take the Bait</CardTitle>
+                <CardTitle className="text-logo-blue">8. Expect Resistance—and Don't Take the Bait</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -268,7 +268,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 9 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">9. End the Conversation with Clarity</CardTitle>
+                <CardTitle className="text-logo-blue">9. End the Conversation with Clarity</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground">Do not linger or negotiate.</p>
@@ -287,7 +287,7 @@ export default function TalkingAboutTreatment() {
             {/* Section 10 */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">10. After the Conversation: What Families Must Do</CardTitle>
+                <CardTitle className="text-logo-blue">10. After the Conversation: What Families Must Do</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="list-disc list-inside text-foreground space-y-2 ml-2">
@@ -322,7 +322,7 @@ export default function TalkingAboutTreatment() {
             {/* Final Reframe */}
             <Card className="mb-6 bg-primary/5 border-primary/20">
               <CardHeader>
-                <CardTitle className="text-logo-green">Final Reframe</CardTitle>
+                <CardTitle className="text-logo-blue">Final Reframe</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground text-lg">
@@ -339,7 +339,7 @@ export default function TalkingAboutTreatment() {
             {/* Companion Resources */}
             <Card className="mb-6">
               <CardHeader>
-                <CardTitle className="text-logo-green">Suggested Companion Resources</CardTitle>
+                <CardTitle className="text-logo-blue">Suggested Companion Resources</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">

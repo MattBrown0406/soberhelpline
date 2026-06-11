@@ -19,7 +19,7 @@ const MembershipPromoBanner = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto mb-6">
         <div className="flex items-start gap-3 bg-background/60 rounded-lg p-3">
-          <BookOpen className="w-5 h-5 text-logo-green mt-0.5 flex-shrink-0" />
+          <BookOpen className="w-5 h-5 text-logo-blue mt-0.5 flex-shrink-0" />
           <div>
             <p className="text-sm font-medium text-foreground">Education Center</p>
             <p className="text-xs text-muted-foreground">Guided videos, worksheets & meditations</p>
