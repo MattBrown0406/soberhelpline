@@ -138,12 +138,105 @@ import evidenceBasedAddictionTreatmentImg from "@/assets/blog-evidence-based-add
 import evaluateAlumniAftercareRehabImg from "@/assets/blog-evaluate-alumni-aftercare-rehab.jpg";
 import hsaFsaAddictionTreatmentImg from "@/assets/blog-hsa-fsa-addiction-treatment.jpg";
 import medicalNecessityAddictionTreatmentImg from "@/assets/blog-medical-necessity-addiction-treatment.jpg";
+import sudSeverityLevelsImg from "@/assets/blog-substance-use-disorder-severity-levels.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 122,
+    slug: "substance-use-disorder-severity-levels-family-guide",
+    seoTitle: "Mild, Moderate, Severe SUD: What It Means for Families | Sober Helpline",
+    metaDescription: "Mild, moderate, severe — what these substance use disorder severity levels actually mean, and why the label matters less than the next right step for your family.",
+    title: "Mild, Moderate, Severe: What Substance Use Disorder Severity Actually Means for Your Family",
+    category: "Family Support",
+    author: "Matt Brown",
+    date: "2026-06-11",
+    image: sudSeverityLevelsImg,
+    keywords: ["substance use disorder severity", "mild moderate severe SUD", "DSM-5 substance use disorder", "SUD diagnosis family", "levels of care addiction"],
+    excerpt: "Mild, moderate, severe SUD is a clinical tool for treatment planning — not a verdict. Here's what the labels mean and what families should actually do with them.",
+    content: `If you've spent any time reading about addiction, you've probably run into the terms "mild," "moderate," and "severe" substance use disorder. Maybe a doctor used one of these words about your loved one. Maybe you read it in an assessment and felt a wave of relief — or dread — depending on which word showed up.
+
+Here's the short version: substance use disorder severity is a clinical tool, not a verdict. It's based on how many specific criteria someone meets out of eleven, and it can change — in either direction — over time. It's useful for treatment planning. It's not useful as a label for who your loved one is.
+
+Let's walk through what these severity levels mean, where they come from, and — more importantly — what they should and shouldn't change about how your family responds.
+
+**Where Do "Mild, Moderate, and Severe" Come From?**
+
+These severity levels come from the DSM-5, the diagnostic manual clinicians use to assess substance use disorders. Instead of separate categories like "abuse" and "dependence" (the old system), the DSM-5 uses a single diagnosis — substance use disorder — measured on a spectrum.
+
+A clinician looks at eleven criteria across four areas: impaired control, social impairment, risky use, and physical effects like tolerance and withdrawal. The number of criteria someone meets in the past 12 months determines the severity level.
+
+- Mild: 2–3 criteria met
+- Moderate: 4–5 criteria met
+- Severe: 6 or more criteria met
+
+Examples of these criteria include things like: drinking or using more than intended, unsuccessful efforts to cut back, cravings, continued use despite relationship problems, giving up activities, using in physically hazardous situations, and needing more of the substance to get the same effect (tolerance).
+
+**Does the Severity Level Predict What Happens Next?**
+
+Not as cleanly as you'd hope. A "mild" diagnosis doesn't mean someone is fine and doesn't need help. A "severe" diagnosis doesn't mean someone is beyond help. Severity at one point in time is a snapshot — it describes a pattern over the last year, not a life sentence.
+
+What severity level does predict, generally, is the intensity of support that tends to be most helpful. Someone with a mild substance use disorder might respond well to outpatient counseling, a structured program like SMART Recovery, or coaching support. Someone with a severe substance use disorder more often needs medical detox, residential treatment, or a higher [level of care](/level-of-care) before outpatient support can really take hold.
+
+This is useful information for treatment planning. It is far less useful as a way to decide how worried you should be, or how much your loved one "really" has a problem. We've talked with families whose loved one technically met criteria for "mild" use disorder and whose lives were falling apart around them — and families whose loved one was assessed as "severe" and went on to build a strong, stable recovery.
+
+**Why the Label Can Become a Trap**
+
+Severity labels can quietly do two unhelpful things in families.
+
+First, a "mild" label can become permission to wait. If the assessment says mild, it's tempting to think there's plenty of time, that things aren't that bad yet, that you can hold off on having the hard conversation or looking into support. Meanwhile, the pattern doesn't pause while you wait for it to get worse.
+
+Second, a "severe" label can become an identity. Loved ones sometimes hear "severe substance use disorder" and internalize it as "I am severely broken," which can feed shame — and shame is one of the most reliable fuels for continued substance use. Families can fall into the same trap, treating the label as the whole story about who their loved one is.
+
+The label is one data point. It belongs in a conversation with a treatment provider about levels of care. It does not belong in your internal narrative about your loved one's character or your family's future.
+
+**What Should Your Family Actually Do With This Information?**
+
+If you're holding an assessment with one of these words on it — or you're trying to figure out where your loved one might fall — here's what's actually useful to do with it.
+
+- Use it to inform the level of care conversation, not to delay or accelerate based on fear
+- Remember it's based on the past 12 months — patterns can and do shift
+- Don't repeat the label back to your loved one as a way to win an argument
+- Focus on observable behavior and your own boundaries, not on diagnostic categories
+- Bring it to a professional — a coach, counselor, or treatment provider — who can translate it into next steps
+
+If no formal assessment exists yet, that's okay too. You don't need a clinical severity rating to take a next step. You need a clear-eyed look at what's actually happening — what's true right now — and one specific, doable action your family can take this week.
+
+**The Bottom Line**
+
+Mild, moderate, and severe are clinical shorthand for treatment planning — useful for matching someone to the right level of care, and not much else. They don't predict outcomes, they don't define character, and they shouldn't set the emotional temperature in your home.
+
+What matters more than the label is what your family does next: getting clear on what's true, getting support for yourselves, and taking the next right step — whether that's a conversation, an assessment, or a call to someone who can help you sort through the options.
+
+**You Don't Have to Sort This Out Alone**
+
+If you're trying to understand where your loved one's situation fits and what kind of support actually makes sense, that's exactly the kind of thing a coaching conversation can help untangle. SoberHelpline.com offers [family coaching](/family-coaching), a [member community](/family-membership), and free [Monday night Family Squares calls](/monday-zoom-registration) — a place to bring your specific situation and get grounded, practical guidance instead of guesswork.
+
+**Frequently Asked Questions**
+
+**Is a "mild" substance use disorder still serious?**
+
+Yes. "Mild" describes the number of diagnostic criteria met, not how serious the impact is on someone's life or family. A mild substance use disorder can still involve real risk and real consequences, and it's worth addressing rather than waiting for it to become "moderate" or "severe."
+
+**Can someone move from severe to mild substance use disorder, or the other way around?**
+
+Yes. Severity is based on the past 12 months, so it's reassessed over time. Someone in early recovery with reduced use might shift toward a milder classification, while someone whose use is escalating could move toward a more severe one. It's a moving snapshot, not a fixed diagnosis.
+
+**Does severity level determine what type of treatment someone needs?**
+
+It's one factor among several. Severity level, along with medical history, mental health, living situation, and past treatment attempts, helps a clinician recommend a level of care — from outpatient counseling up through medical detox and residential treatment. It's a starting point for that conversation, not the whole answer.
+
+**Should I tell my loved one their severity level?**
+
+Generally, this is better left to a professional during an assessment or treatment planning conversation. Sharing a diagnostic label yourself — especially in the middle of a conflict — tends to land as judgment rather than information, even if that's not how you mean it.
+
+**What if my loved one refuses to get an assessment?**
+
+You can still take meaningful steps without one. Focus on what you're observing, what you're willing to do or not do going forward, and getting support for yourself. A coach or counselor can help you think through next steps even before your loved one is ready for a formal evaluation.`,
+  },
   {
     id: 121,
     slug: "how-insurance-determines-medical-necessity-addiction-treatment",
