@@ -120,7 +120,7 @@ const ForProviders = () => {
         <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="Sober Helpline" className="h-12 w-12 rounded-lg" />
+              <img src={logo} alt="Sober Helpline" className="h-12 w-12 object-contain" />
               <span className="font-semibold text-lg hidden sm:inline">Sober Helpline</span>
             </Link>
             <div className="flex items-center gap-4">
