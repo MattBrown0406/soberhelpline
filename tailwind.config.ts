@@ -58,6 +58,26 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         "logo-green": "hsl(var(--logo-green))",
+        "brand-navy": "#1f2c44",
+        "brand-amber": "#e8a73a",
+        "brand-cream": "#ede4cf",
+        // Shift emerald palette toward the logo's navy-blue so existing
+        // `emerald-*` classes across the app pick up the new brand color
+        // without touching every component. Greens (green-*, logo-green)
+        // remain untouched so some green accents stay.
+        emerald: {
+          50:  "#eef2f8",
+          100: "#dbe3ee",
+          200: "#b6c5dc",
+          300: "#8ba3c4",
+          400: "#5f7fa8",
+          500: "#3d5f8c",
+          600: "#2c4970",
+          700: "#22395a",
+          800: "#1f2c44",
+          900: "#161f31",
+          950: "#0d131f",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
