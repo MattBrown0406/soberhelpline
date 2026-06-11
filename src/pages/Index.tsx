@@ -11,7 +11,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
-import bannerLogo from "@/assets/banner-logo.png";
+import bannerLogo from "@/assets/logo.png";
 import mattBrownTrust from "@/assets/matt-brown-trust.jpg";
 
 import MobileNav from "@/components/MobileNav";
