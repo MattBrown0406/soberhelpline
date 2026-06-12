@@ -218,9 +218,9 @@ const SoberCoachesCompanions = () => {
   return (
     <>
       <SEOHead
-        title="Find Sober Coaches & Companions | Sober Helpline"
-        description="Search vetted sober coaches and recovery companions. Find personal recovery support professionals near you."
-        jsonLd={{ "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "Sober Coaches Directory", "url": "https://soberhelpline.com/sober-coaches-companions", "publisher": { "@type": "Organization", "name": "Sober Helpline" } }}
+        title="Find a Sober Coach Near You | Sober Coaches & Companions"
+        description="Find a sober coach, sober companion, or sober living coach for recovery support. Search by state or ZIP code and learn what kind of support fits."
+        jsonLd={{ "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "Sober Coaches and Companions Directory", "url": "https://soberhelpline.com/sober-coaches-companions", "publisher": { "@type": "Organization", "name": "Sober Helpline" } }}
       />
       <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-4">
@@ -262,12 +262,23 @@ const SoberCoachesCompanions = () => {
         <div className="text-center mb-4 md:mb-6">
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-2">
             <UserCheck className="w-8 h-8 md:w-10 md:h-10 text-primary" />
-            <h1 className="text-xl md:text-4xl font-bold text-foreground">Sober Coaches/Companions</h1>
+            <h1 className="text-xl md:text-4xl font-bold text-foreground">Find a Sober Coach or Recovery Companion</h1>
           </div>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-            Find qualified sober coaches and companions to support your recovery journey.
+            Find qualified sober coaches, sober companions, and sober living support professionals by state or ZIP code.
           </p>
         </div>
+
+        <section className="max-w-4xl mx-auto mb-6 rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Direct answer</p>
+          <h2 className="mt-2 text-2xl font-bold text-foreground">What does a sober coach do?</h2>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            A sober coach provides practical recovery support outside of treatment: accountability, relapse-prevention planning, help returning home after rehab, sober transportation, and day-to-day structure when early recovery is fragile. A sober companion may provide more intensive in-person support during travel, transitions, or high-risk periods.
+          </p>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            If you are trying to find a sober coach, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help.
+          </p>
+        </section>
 
         <div className="mb-4 md:mb-6">
           <h2 className="text-lg md:text-2xl font-semibold text-center mb-3 md:mb-4">

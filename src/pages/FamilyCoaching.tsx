@@ -24,8 +24,8 @@ export default function FamilyCoaching() {
   return (
     <>
       <SEOHead
-        title="Family Addiction Coaching — 1-on-1 Support | Sober Helpline"
-        description="Work directly with an experienced addiction professional. Family coaching helps you set clearer boundaries, reduce enabling, and make steadier decisions under stress."
+        title="Family Addiction Coaching for Boundaries & Enabling | Sober Helpline"
+        description="Private family addiction coaching for parents, spouses, and loved ones who need a clear plan for boundaries, enabling, relapse, treatment refusal, and next steps."
         faqItems={[
           {
             question: "What is family addiction coaching?",
@@ -120,6 +120,16 @@ export default function FamilyCoaching() {
               </CardContent>
             </Card>
 
+            <Card className="border-primary/20 bg-primary/5 mb-6">
+              <CardContent className="p-5 md:p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Direct answer</p>
+                <h2 className="text-2xl font-bold text-logo-blue">What is family addiction coaching?</h2>
+                <p className="text-muted-foreground mt-3 leading-relaxed">
+                  Family addiction coaching is practical guidance for parents, spouses, siblings, and loved ones who need help responding to addiction without more panic or enabling. It focuses on boundaries, communication, relapse decisions, treatment refusal, money requests, and the next step the family can actually hold.
+                </p>
+              </CardContent>
+            </Card>
+
             {/* Member Discount Banner */}
             <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
               <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
@@ -155,7 +165,7 @@ export default function FamilyCoaching() {
                   </div>
                   <div>
                     <h1 className="text-3xl md:text-4xl font-bold text-amber-700 dark:text-amber-400">
-                      Family Coaching
+                      Family Addiction Coaching
                     </h1>
                     <p className="text-muted-foreground">Calm, direct guidance for families living with addiction</p>
                   </div>
