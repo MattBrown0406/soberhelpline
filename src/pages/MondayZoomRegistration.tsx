@@ -402,7 +402,7 @@ export default function MondayZoomRegistration() {
             </div>
 
             {isMemberQuestion ? (
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 p-8 md:p-10 mb-8">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 border border-logo-blue/20 p-8 md:p-10 mb-8">
                 <div className="text-center">
                   <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-primary/15 mb-4">
                     <Crown className="h-7 w-7 text-primary" />

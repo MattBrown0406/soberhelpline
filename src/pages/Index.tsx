@@ -298,7 +298,7 @@ const Index = () => {
         </header>
 
         <section className="relative overflow-hidden border-b border-border/40">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-green/5 dark:from-red-950/20 dark:via-background dark:to-logo-green/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-blue/5 dark:from-red-950/20 dark:via-background dark:to-logo-blue/10" />
           <div className="absolute top-0 right-0 w-[340px] md:w-[560px] h-[340px] md:h-[560px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-[220px] md:w-[420px] h-[220px] md:h-[420px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
@@ -558,7 +558,7 @@ const Index = () => {
             </div>
 
             <div className="text-center mb-8 md:mb-12">
-              <div className="inline-block bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 rounded-2xl p-6 md:p-8 border border-logo-green/20">
+              <div className="inline-block bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 rounded-2xl p-6 md:p-8 border border-logo-blue/20">
                 <p className="text-sm md:text-base text-muted-foreground mb-4">
                   <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get practical tools, steady support, and a place to think more clearly again.
                 </p>

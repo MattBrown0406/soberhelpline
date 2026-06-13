@@ -136,7 +136,7 @@ const ForProviders = () => {
         </header>
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-logo-green/5 via-white to-emerald-50 py-20 lg:py-28">
+        <section className="relative bg-gradient-to-br from-logo-blue/5 via-white to-blue-50 py-20 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-6">
@@ -232,7 +232,7 @@ const ForProviders = () => {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-16 bg-gradient-to-br from-logo-green/10 to-emerald-50 rounded-2xl p-10 border-2 border-logo-green/20">
+            <div className="text-center mt-16 bg-gradient-to-br from-logo-blue/10 to-blue-50 rounded-2xl p-10 border-2 border-logo-blue/20">
               <h3 className="text-2xl font-bold text-foreground mb-3">Ready to Get Listed?</h3>
               <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
                 Complete our provider application to get your practice verified and in front of families who need your help.
@@ -248,7 +248,7 @@ const ForProviders = () => {
         </section>
 
         {/* Social Proof / Stats */}
-        <section className="py-16 bg-gradient-to-br from-logo-green/5 to-emerald-50">
+        <section className="py-16 bg-gradient-to-br from-logo-blue/5 to-blue-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
@@ -313,7 +313,7 @@ const ForProviders = () => {
               </Card>
 
               {/* Premium Featured */}
-              <Card className="p-8 border-2 border-logo-green bg-gradient-to-br from-logo-green/5 to-emerald-50">
+              <Card className="p-8 border-2 border-logo-blue bg-gradient-to-br from-logo-blue/5 to-blue-50">
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-4">
                     <Award className="w-4 h-4" />

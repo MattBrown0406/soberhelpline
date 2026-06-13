@@ -75,7 +75,7 @@ export default function FamilyEducationTracks() {
             </Link>
           </div>
 
-          <div className="rounded-3xl border border-logo-green/20 bg-gradient-to-br from-logo-green/10 via-background to-primary/5 p-8 md:p-10 mb-8">
+          <div className="rounded-3xl border border-logo-blue/20 bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 p-8 md:p-10 mb-8">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-xs font-semibold text-logo-blue mb-4">
                 <BookOpen className="h-3.5 w-3.5" />
