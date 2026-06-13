@@ -353,6 +353,13 @@ export type Database = {
             referencedRelation: "consultation_providers"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "coaching_plans_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       consultation_bookings: {
@@ -443,6 +450,13 @@ export type Database = {
             referencedRelation: "consultation_providers"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "consultation_bookings_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       consultation_payouts: {
@@ -492,6 +506,13 @@ export type Database = {
             columns: ["provider_id"]
             isOneToOne: false
             referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultation_payouts_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers_public"
             referencedColumns: ["id"]
           },
         ]
@@ -1838,6 +1859,13 @@ export type Database = {
             referencedRelation: "consultation_providers"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "provider_availability_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       provider_clicks: {
@@ -1937,6 +1965,13 @@ export type Database = {
             columns: ["provider_id"]
             isOneToOne: false
             referencedRelation: "consultation_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_date_overrides_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "consultation_providers_public"
             referencedColumns: ["id"]
           },
         ]
@@ -2766,6 +2801,54 @@ export type Database = {
       }
     }
     Views: {
+      consultation_providers_public: {
+        Row: {
+          bio: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string | null
+          photo_url: string | null
+          session_duration_minutes: number | null
+          session_rate: number | null
+          specialties: string[] | null
+          status: string | null
+          timezone: string | null
+          title: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          session_duration_minutes?: number | null
+          session_rate?: number | null
+          specialties?: string[] | null
+          status?: string | null
+          timezone?: string | null
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          session_duration_minutes?: number | null
+          session_rate?: number | null
+          specialties?: string[] | null
+          status?: string | null
+          timezone?: string | null
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       forum_posts_secure: {
         Row: {
           content: string | null
