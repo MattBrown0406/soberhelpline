@@ -58,8 +58,8 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         "logo-green": "hsl(var(--logo-green))",
-        "logo-blue": "#1f2c44",
-        "brand-navy": "#1f2c44",
+        "logo-blue": "#071c3c",
+        "brand-navy": "#071c3c",
         "brand-amber": "#e8a73a",
         "brand-cream": "#ede4cf",
         // Shift emerald palette toward the logo's navy-blue so existing
