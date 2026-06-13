@@ -291,7 +291,7 @@ const ValuesExercise = () => {
             {/* Final Reframe */}
             <section className="mb-8">
               <h2 className="text-xl font-semibold text-logo-blue mb-3">Final Reframe</h2>
-              <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/30 text-center">
+              <div className="bg-logo-blue/10 p-6 rounded-lg border border-logo-green/30 text-center">
                 <p className="font-medium text-lg italic mb-2">
                   Values do not eliminate pain.<br />
                   They prevent regret.

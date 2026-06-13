@@ -152,7 +152,7 @@ export default function UnderstandingAddiction() {
           </section>
 
           {/* Hope for Recovery */}
-          <section className="bg-logo-green/10 border border-logo-green/20 rounded-lg p-6 md:p-8">
+          <section className="bg-logo-blue/10 border border-logo-green/20 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <TrendingUp className="h-6 w-6 text-logo-blue" />
               <h2 className="text-xl md:text-2xl font-semibold text-logo-blue">Hope for Recovery</h2>

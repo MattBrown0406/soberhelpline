@@ -263,12 +263,12 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue font-semibold hover:bg-logo-green/20 transition-colors">
+                <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                   <Phone className="w-4 h-4" />
                   (458) 202-7900
                 </a>
                   <Link to="/family-squares">
-                    <Button className="bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
+                    <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white font-semibold shadow-sm">
                       Join Free Monday
                     </Button>
                   </Link>
@@ -299,7 +299,7 @@ const Index = () => {
 
         <section className="relative overflow-hidden border-b border-border/40">
           <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-blue/5 dark:from-red-950/20 dark:via-background dark:to-logo-blue/10" />
-          <div className="absolute top-0 right-0 w-[340px] md:w-[560px] h-[340px] md:h-[560px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute top-0 right-0 w-[340px] md:w-[560px] h-[340px] md:h-[560px] bg-logo-blue/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-[220px] md:w-[420px] h-[220px] md:h-[420px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
           <div className="container mx-auto px-4 py-10 md:py-16 relative">
@@ -319,7 +319,7 @@ const Index = () => {
 
                 <div className="grid gap-3 mb-3 max-w-4xl md:grid-cols-3">
                   <Link to="/family-squares" className="w-full" onClick={() => trackConversionEvent("monday_zoom_click", { source: "homepage_hero_primary" })}>
-                    <Button size="lg" className="h-full min-h-[64px] w-full gap-2 md:gap-3 whitespace-normal bg-logo-green px-5 py-4 text-sm leading-snug text-white shadow-lg shadow-logo-green/25 transition-all hover:bg-logo-green/90 hover:shadow-xl hover:shadow-logo-green/30 md:text-base">
+                    <Button size="lg" className="h-full min-h-[64px] w-full gap-2 md:gap-3 whitespace-normal bg-logo-blue px-5 py-4 text-sm leading-snug text-white shadow-lg shadow-logo-blue/25 transition-all hover:bg-logo-blue/90 hover:shadow-xl hover:shadow-logo-blue/30 md:text-base">
                       <Calendar className="w-4 h-4 md:w-5 md:h-5" />
                       Join the Free Family Squares Support Meeting
                     </Button>
@@ -385,7 +385,7 @@ const Index = () => {
                       <img src={mattBrownTrust} alt="Matt Brown" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-xs font-semibold mb-3">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-xs font-semibold mb-3">
                         <Shield className="w-3.5 h-3.5" />
                         Trusted, private, family-first guidance
                       </div>
@@ -531,7 +531,7 @@ const Index = () => {
               <Card className="border-2 border-logo-green/40 bg-gradient-to-br from-logo-green/5 to-transparent">
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-logo-green/20 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-logo-blue/20 flex items-center justify-center">
                       <Check className="w-5 h-5 text-logo-blue" />
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-foreground">With Steady Support</h3>
@@ -563,7 +563,7 @@ const Index = () => {
                   <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get practical tools, steady support, and a place to think more clearly again.
                 </p>
                 <Link to="/family-membership">
-                  <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8 shadow-lg shadow-logo-green/25">
+                  <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8 shadow-lg shadow-logo-blue/25">
                     <Sparkles className="w-4 h-4" />
                     Explore Membership
                   </Button>
@@ -736,7 +736,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16">
           <div className="text-center mb-8 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-green/10 text-logo-blue text-xs md:text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-logo-blue/10 text-logo-blue text-xs md:text-sm font-medium mb-4">
               <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
               Ethical Provider Directory
             </div>
@@ -752,7 +752,7 @@ const Index = () => {
               <Link key={category.path} to={category.path}>
                 <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
                   <CardContent className="p-4 md:p-6 text-center">
-                    <div className="w-12 h-12 mx-auto rounded-xl bg-logo-green/10 flex items-center justify-center mb-3 group-hover:bg-logo-green/20 transition-colors">
+                    <div className="w-12 h-12 mx-auto rounded-xl bg-logo-blue/10 flex items-center justify-center mb-3 group-hover:bg-logo-blue/20 transition-colors">
                       <category.icon className="w-6 h-6 text-logo-blue" />
                     </div>
                     <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
@@ -793,7 +793,7 @@ const Index = () => {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 md:p-10">
-                    <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-logo-green text-white text-[10px] md:text-xs font-medium rounded-full mb-2 md:mb-3">
+                    <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-logo-blue text-white text-[10px] md:text-xs font-medium rounded-full mb-2 md:mb-3">
                       {article.category}
                     </span>
                     <h3 className="text-lg md:text-3xl font-bold text-white mb-1.5 md:mb-2 line-clamp-2 leading-tight max-w-3xl">
@@ -843,13 +843,13 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
               <Link to="/family-squares" className="w-full sm:w-auto" onClick={() => trackConversionEvent("monday_zoom_click", { source: "homepage_bottom_cta" })}>
-                <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-green hover:bg-logo-green/90 px-6 md:px-8 text-sm md:text-base">
+                <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-blue hover:bg-logo-blue/90 px-6 md:px-8 text-sm md:text-base">
                   <Calendar className="w-4 h-4 md:w-5 md:h-5" />
                   Join Free Family Squares
                 </Button>
               </Link>
               <Link to="/family-consultation" className="w-full sm:w-auto" onClick={() => trackConversionEvent("coaching_click", { source: "homepage_bottom_cta" })}>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-blue hover:bg-logo-green hover:text-white">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 px-6 md:px-8 text-sm md:text-base border-logo-green text-logo-blue hover:bg-logo-blue hover:text-white">
                   <Phone className="w-4 h-4 md:w-5 md:h-5" />
                   Book a Session Now
                 </Button>

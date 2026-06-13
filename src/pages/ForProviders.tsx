@@ -124,7 +124,7 @@ const ForProviders = () => {
               <span className="font-semibold text-lg hidden sm:inline">Sober Helpline</span>
             </Link>
             <div className="flex items-center gap-4">
-              <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue font-semibold hover:bg-logo-green/20 transition-colors">
+              <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                 <Phone className="w-4 h-4" />
                 <span className="hidden sm:inline">(458) 202-7900</span>
               </a>
@@ -139,7 +139,7 @@ const ForProviders = () => {
         <section className="relative bg-gradient-to-br from-logo-blue/5 via-white to-blue-50 py-20 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue text-sm font-medium mb-6">
                 <Building2 className="w-4 h-4" />
                 For Treatment Providers
               </div>
@@ -153,7 +153,7 @@ const ForProviders = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/auth">
-                  <Button size="lg" className="bg-logo-green hover:bg-logo-green/90 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-logo-green/25">
+                  <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-logo-blue/25">
                     List Your Practice — Free
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
@@ -179,7 +179,7 @@ const ForProviders = () => {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {providerTypes.map((type) => (
-                <div key={type} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-logo-green/5 transition-colors">
+                <div key={type} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-logo-blue/5 transition-colors">
                   <CheckCircle className="w-5 h-5 text-logo-blue flex-shrink-0" />
                   <span className="text-sm font-medium text-gray-700">{type}</span>
                 </div>
@@ -199,7 +199,7 @@ const ForProviders = () => {
               {benefits.map((benefit) => (
                 <Card key={benefit.title} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-logo-green/10 flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-logo-blue/10 flex items-center justify-center mb-4">
                       <benefit.icon className="w-6 h-6 text-logo-blue" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
@@ -221,11 +221,11 @@ const ForProviders = () => {
             <div className="grid md:grid-cols-4 gap-8">
               {steps.map((step, index) => (
                 <div key={step.number} className="relative text-center">
-                  <div className="w-16 h-16 rounded-full bg-logo-green text-white text-2xl font-bold flex items-center justify-center mx-auto mb-4 shadow-lg shadow-logo-green/25">
+                  <div className="w-16 h-16 rounded-full bg-logo-blue text-white text-2xl font-bold flex items-center justify-center mx-auto mb-4 shadow-lg shadow-logo-blue/25">
                     {step.number}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-logo-green/20" />
+                    <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-logo-blue/20" />
                   )}
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{step.title}</h3>
                   <p className="text-gray-600 text-sm">{step.description}</p>
@@ -238,7 +238,7 @@ const ForProviders = () => {
                 Complete our provider application to get your practice verified and in front of families who need your help.
               </p>
               <Link to="/provider-application">
-                <Button size="lg" className="bg-logo-green hover:bg-logo-green/90 text-white px-10 py-7 text-xl rounded-xl shadow-lg shadow-logo-green/25">
+                <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90 text-white px-10 py-7 text-xl rounded-xl shadow-lg shadow-logo-blue/25">
                   Start Your Provider Application
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -315,7 +315,7 @@ const ForProviders = () => {
               {/* Premium Featured */}
               <Card className="p-8 border-2 border-logo-blue bg-gradient-to-br from-logo-blue/5 to-blue-50">
                 <div className="text-center mb-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-sm font-medium mb-4">
                     <Award className="w-4 h-4" />
                     Most Popular
                   </div>
@@ -350,7 +350,7 @@ const ForProviders = () => {
                   </li>
                 </ul>
                 <Link to="/auth">
-                  <Button className="w-full bg-logo-green hover:bg-logo-green/90">
+                  <Button className="w-full bg-logo-blue hover:bg-logo-blue/90">
                     Start Featured Listing
                   </Button>
                 </Link>
@@ -391,7 +391,7 @@ const ForProviders = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/auth">
-                <Button size="lg" className="bg-logo-green hover:bg-logo-green/90 text-white px-8 py-6 text-lg rounded-xl">
+                <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90 text-white px-8 py-6 text-lg rounded-xl">
                   List Your Practice — Free
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

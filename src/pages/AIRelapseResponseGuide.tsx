@@ -484,7 +484,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-blue/10 flex items-center justify-center text-logo-blue font-semibold">
                       1
                     </div>
                     <div>
@@ -500,7 +500,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-blue/10 flex items-center justify-center text-logo-blue font-semibold">
                       2
                     </div>
                     <div>
@@ -516,7 +516,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-blue/10 flex items-center justify-center text-logo-blue font-semibold">
                       3
                     </div>
                     <div>
@@ -532,7 +532,7 @@ const AIRelapseResponseGuide = () => {
               <Card>
                 <CardContent className="py-5">
                   <div className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-green/10 flex items-center justify-center text-logo-blue font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-logo-blue/10 flex items-center justify-center text-logo-blue font-semibold">
                       4
                     </div>
                     <div>
@@ -549,7 +549,7 @@ const AIRelapseResponseGuide = () => {
 
           {/* Copy Button */}
           <section className="mb-10">
-            <Card className="border-logo-green/30 bg-logo-green/5">
+            <Card className="border-logo-green/30 bg-logo-blue/5">
               <CardContent className="py-6">
                 <div className="text-center mb-4">
                   <h3 className="text-xl font-semibold text-logo-blue mb-2">Ready to Get Started?</h3>
@@ -561,7 +561,7 @@ const AIRelapseResponseGuide = () => {
                   <Button
                     onClick={handleCopy}
                     size="lg"
-                    className="gap-2 bg-logo-green hover:bg-logo-green/90"
+                    className="gap-2 bg-logo-blue hover:bg-logo-blue/90"
                   >
                     {copied ? (
                       <>
@@ -718,12 +718,12 @@ const AIRelapseResponseGuide = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link to="/family-consultation">
-                    <Button size="lg" className="bg-logo-green hover:bg-logo-green/90">
+                    <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90">
                       Schedule a Consultation
                     </Button>
                   </Link>
                   <a href="tel:458-202-7900">
-                    <Button size="lg" variant="outline" className="border-logo-green text-logo-blue hover:bg-logo-green/10">
+                    <Button size="lg" variant="outline" className="border-logo-green text-logo-blue hover:bg-logo-blue/10">
                       Call 458-202-7900
                     </Button>
                   </a>

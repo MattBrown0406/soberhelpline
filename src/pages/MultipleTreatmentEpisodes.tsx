@@ -501,7 +501,7 @@ export default function MultipleTreatmentEpisodes() {
               </Card>
 
               {/* Final Thought */}
-              <Card className="bg-logo-green/10 border-logo-green/30">
+              <Card className="bg-logo-blue/10 border-logo-green/30">
                 <CardHeader>
                   <CardTitle className="text-center text-logo-blue">Final Thought</CardTitle>
                 </CardHeader>

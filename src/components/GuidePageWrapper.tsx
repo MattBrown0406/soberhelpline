@@ -61,7 +61,7 @@ export const GuidePageWrapper = ({ guideName, guidePath, guideType = "guide", ch
               {!completed && (
                 <Button 
                   onClick={handleComplete}
-                  className="bg-logo-green hover:bg-logo-green/90 text-white flex-shrink-0"
+                  className="bg-logo-blue hover:bg-logo-blue/90 text-white flex-shrink-0"
                   size="sm"
                 >
                   <CheckCircle className="w-4 h-4 mr-1.5" />

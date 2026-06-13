@@ -492,7 +492,7 @@ const AIAddictionRealityTranslator = () => {
             <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Tool</h2>
             <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-logo-green text-white rounded-full flex items-center justify-center font-semibold">
+                <div className="flex-shrink-0 w-8 h-8 bg-logo-blue text-white rounded-full flex items-center justify-center font-semibold">
                   1
                 </div>
                 <div>
@@ -504,7 +504,7 @@ const AIAddictionRealityTranslator = () => {
               </div>
               
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-logo-green text-white rounded-full flex items-center justify-center font-semibold">
+                <div className="flex-shrink-0 w-8 h-8 bg-logo-blue text-white rounded-full flex items-center justify-center font-semibold">
                   2
                 </div>
                 <div>
@@ -516,7 +516,7 @@ const AIAddictionRealityTranslator = () => {
               </div>
               
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-logo-green text-white rounded-full flex items-center justify-center font-semibold">
+                <div className="flex-shrink-0 w-8 h-8 bg-logo-blue text-white rounded-full flex items-center justify-center font-semibold">
                   3
                 </div>
                 <div>
@@ -528,7 +528,7 @@ const AIAddictionRealityTranslator = () => {
               </div>
               
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-logo-green text-white rounded-full flex items-center justify-center font-semibold">
+                <div className="flex-shrink-0 w-8 h-8 bg-logo-blue text-white rounded-full flex items-center justify-center font-semibold">
                   4
                 </div>
                 <div>
@@ -711,7 +711,7 @@ const AIAddictionRealityTranslator = () => {
 
           {/* Professional Help CTA */}
           <section className="mb-10">
-            <Card className="bg-logo-green/5 border-logo-green/20">
+            <Card className="bg-logo-blue/5 border-logo-green/20">
               <CardContent className="py-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">Need Human Support?</h3>
                 <p className="text-muted-foreground mb-4">
@@ -719,7 +719,7 @@ const AIAddictionRealityTranslator = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link to="/family-consultation">
-                    <Button variant="default" className="bg-logo-green hover:bg-logo-green/90">
+                    <Button variant="default" className="bg-logo-blue hover:bg-logo-blue/90">
                       Schedule a Family Consultation
                     </Button>
                   </Link>

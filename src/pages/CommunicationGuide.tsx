@@ -429,7 +429,7 @@ export default function CommunicationGuide() {
             </Card>
 
             {/* Final Reframe */}
-            <Card className="mb-8 bg-logo-green/10 border-logo-green/30 break-inside-avoid">
+            <Card className="mb-8 bg-logo-blue/10 border-logo-green/30 break-inside-avoid">
               <CardHeader>
                 <CardTitle className="text-logo-blue">Final Reframe</CardTitle>
               </CardHeader>

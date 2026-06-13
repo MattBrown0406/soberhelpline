@@ -364,12 +364,12 @@ export default function FamilyEducation() {
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 border border-logo-blue/20 p-8 md:p-12 mb-10">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-logo-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-logo-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
               
               <div className="relative text-center">
                 <div className="flex flex-col items-center gap-3 mb-4">
-                  <div className="p-3 rounded-xl bg-logo-green/10 border border-logo-green/20">
+                  <div className="p-3 rounded-xl bg-logo-blue/10 border border-logo-green/20">
                     <BookOpen className="h-8 w-8 text-logo-blue" />
                   </div>
                   <div>
@@ -480,7 +480,7 @@ export default function FamilyEducation() {
               <CardContent className="p-5 md:p-6">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                   <div className="max-w-3xl">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1 text-xs font-semibold text-logo-blue mb-3">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-logo-blue/10 px-3 py-1 text-xs font-semibold text-logo-blue mb-3">
                       <Compass className="h-3.5 w-3.5" />
                       Need a clearer starting point?
                     </div>
@@ -493,7 +493,7 @@ export default function FamilyEducation() {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row lg:min-w-[280px]">
                     <Link to="/family-education/tracks">
-                      <Button className="w-full gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
+                      <Button className="w-full gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                         <BookOpen className="h-4 w-4" />
                         Explore Guided Tracks
                       </Button>
@@ -520,7 +520,7 @@ export default function FamilyEducation() {
               <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-3 gap-2">
                   <TabsTrigger 
                     value="tools" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
                   >
                     <div className="p-2 rounded-full bg-amber-500/20">
                       <Lightbulb className="h-5 w-5 text-amber-600" />
@@ -533,7 +533,7 @@ export default function FamilyEducation() {
                   
                   <TabsTrigger 
                     value="pillars" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
                   >
                     <div className="p-2 rounded-full bg-blue-500/20">
                       <BookOpen className="h-5 w-5 text-blue-600" />
@@ -546,7 +546,7 @@ export default function FamilyEducation() {
                   
                   <TabsTrigger 
                     value="wellness" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-green data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-green/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
                   >
                     <div className="p-2 rounded-full bg-rose-500/20">
                       <Heart className="h-5 w-5 text-rose-600" />

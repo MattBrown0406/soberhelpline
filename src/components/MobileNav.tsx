@@ -46,7 +46,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                 </Link>
               )}
               <Link to="/book-consultation?plan=emergency" onClick={() => { trackConversionEvent("coaching_click", { source: "mobile_nav_get_help" }); closeMenu(); }}>
-                <Button className="w-full justify-start gap-2 bg-logo-green hover:bg-logo-green/90 text-white font-semibold shadow-sm">
+                <Button className="w-full justify-start gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white font-semibold shadow-sm">
                   <AlertTriangle className="w-4 h-4" />
                   Get Help Now
                 </Button>

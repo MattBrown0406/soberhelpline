@@ -895,7 +895,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
         </Card>
 
         {/* Key Reframe */}
-        <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/20 text-center">
+        <div className="bg-logo-blue/10 p-6 rounded-lg border border-logo-green/20 text-center">
           <h3 className="font-bold text-logo-blue text-lg mb-3">Key Reframe</h3>
           <p className="text-foreground mb-2">
             You don't build confidence by getting it right every time.

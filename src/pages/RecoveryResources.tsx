@@ -35,7 +35,7 @@ const RecoveryResources = () => {
               No commissions. No patient brokering.
             </p>
             <a href="tel:4582027900">
-              <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
+              <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                 <Phone className="w-4 h-4" />
                 Call Us: (458) 202-7900
               </Button>
@@ -50,9 +50,9 @@ const RecoveryResources = () => {
               const Icon = category.icon;
               return (
                 <Link key={category.name} to={category.path}>
-                  <Card className="h-full hover:shadow-lg hover:shadow-logo-green/10 hover:border-logo-green/30 transition-all duration-300 group cursor-pointer">
+                  <Card className="h-full hover:shadow-lg hover:shadow-logo-blue/10 hover:border-logo-green/30 transition-all duration-300 group cursor-pointer">
                     <CardContent className="p-6 flex flex-col items-center text-center">
-                      <div className="w-14 h-14 rounded-2xl bg-logo-green/10 flex items-center justify-center mb-4 group-hover:bg-logo-green/20 group-hover:scale-110 transition-all">
+                      <div className="w-14 h-14 rounded-2xl bg-logo-blue/10 flex items-center justify-center mb-4 group-hover:bg-logo-blue/20 group-hover:scale-110 transition-all">
                         <Icon className="w-7 h-7 text-logo-blue" />
                       </div>
                       <h2 className="font-semibold text-foreground text-base mb-2">{category.name}</h2>
@@ -112,7 +112,7 @@ const RecoveryResources = () => {
                 </Button>
               </Link>
               <a href="tel:4582027900">
-                <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
+                <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                   <Phone className="w-4 h-4" />
                   (458) 202-7900
                 </Button>

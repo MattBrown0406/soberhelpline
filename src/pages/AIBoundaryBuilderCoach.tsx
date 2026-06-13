@@ -454,19 +454,19 @@ const AIBoundaryBuilderCoach = () => {
             <h2 className="text-2xl font-semibold text-logo-blue mb-4">How to Use This Prompt</h2>
             <ol className="space-y-3 text-muted-foreground">
               <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">1</span>
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-blue text-white text-sm flex items-center justify-center font-medium">1</span>
                 <span>Click the "Copy Prompt" button below to copy the entire prompt to your clipboard.</span>
               </li>
               <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">2</span>
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-blue text-white text-sm flex items-center justify-center font-medium">2</span>
                 <span>Open your preferred AI chatbot (ChatGPT, Claude, Gemini, etc.).</span>
               </li>
               <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">3</span>
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-blue text-white text-sm flex items-center justify-center font-medium">3</span>
                 <span>Create a Custom GPT, Project, or Workspace (depending on your platform) and paste the prompt into the system instructions or custom instructions field.</span>
               </li>
               <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-green text-white text-sm flex items-center justify-center font-medium">4</span>
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-logo-blue text-white text-sm flex items-center justify-center font-medium">4</span>
                 <span>Save your custom configuration. The AI will now act as your personal Boundary Builder Coach every time you use that project or workspace.</span>
               </li>
             </ol>
@@ -522,7 +522,7 @@ const AIBoundaryBuilderCoach = () => {
           </section>
 
           {/* Final Note */}
-          <Card className="bg-logo-green/5 border-logo-green/20">
+          <Card className="bg-logo-blue/5 border-logo-green/20">
             <CardContent className="py-6 text-center">
               <p className="text-muted-foreground italic">
                 "Most people don't fail at boundaries because they don't know what to say. They fail because they are trying to manage other people's reactions. This tool helps you stop negotiating your integrity."
