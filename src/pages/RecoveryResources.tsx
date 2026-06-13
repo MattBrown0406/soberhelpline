@@ -24,7 +24,7 @@ const RecoveryResources = () => {
       />
       <div className="min-h-screen bg-background">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-logo-green/5 via-background to-primary/5 py-12 md:py-20">
+        <section className="relative overflow-hidden bg-gradient-to-br from-logo-blue/5 via-background to-logo-blue/10 py-12 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
               Recovery Resources for Families Trying to Find the Right Help
