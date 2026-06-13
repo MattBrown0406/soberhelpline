@@ -309,7 +309,7 @@ const BookConsultation = () => {
     // columns and causes PostgREST to reject the whole query, which made the
     // public booking page show "No providers are currently available."
     const { data, error } = await supabase
-      .from("consultation_providers")
+      .from("consultation_providers_public")
       .select("id, user_id, full_name, title, bio, photo_url, specialties, session_rate, session_duration_minutes, status, created_at, updated_at, timezone")
       .eq("status", "active")
       .neq("full_name", "Katie Barr");
