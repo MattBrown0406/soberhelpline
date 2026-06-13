@@ -136,7 +136,7 @@ const ForProviders = () => {
         </header>
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-logo-green/5 via-white to-emerald-50 py-20 lg:py-28">
+        <section className="relative bg-gradient-to-br from-logo-blue/5 via-white to-blue-50 py-20 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-6">
