@@ -131,7 +131,7 @@ export default function FamilyCoaching() {
             </Card>
 
             {/* Member Discount Banner */}
-            <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-logo-green/5 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
+            <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-blue-400/10 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
               <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
                 <Crown className="w-4.5 h-4.5 text-primary" />
               </div>
