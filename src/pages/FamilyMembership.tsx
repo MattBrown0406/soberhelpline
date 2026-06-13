@@ -615,7 +615,7 @@ export default function FamilyMembership() {
                         variant={billingCycle === 'trial' ? 'default' : 'outline'}
                         size="lg"
                         onClick={() => setBillingCycle('trial')}
-                        className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0"
+                        className="w-full bg-gradient-to-r from-logo-blue to-blue-700 hover:from-logo-blue/90 hover:to-blue-800 text-white border-0"
                       >
                         🎉 Start Free for 7 Days
                         <Badge variant="secondary" className="ml-2 bg-white/20 text-white text-xs border-0">
