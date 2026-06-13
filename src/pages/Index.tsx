@@ -444,7 +444,7 @@ const Index = () => {
         />
 
         <section className="container mx-auto px-4 py-10 md:py-14">
-          <div className="max-w-6xl mx-auto rounded-3xl border border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5 p-6 md:p-8 shadow-sm">
+          <div className="max-w-6xl mx-auto rounded-3xl border border-logo-blue/20 bg-gradient-to-r from-logo-blue/10 via-background to-logo-blue/5 p-6 md:p-8 shadow-sm">
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Coming from No More Enabling?</p>
@@ -452,7 +452,7 @@ const Index = () => {
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
-                <Button asChild variant="outline" className="mt-5 border-logo-green/30 text-logo-blue hover:bg-logo-green/5">
+                <Button asChild variant="outline" className="mt-5 border-logo-blue/30 text-logo-blue hover:bg-logo-blue/5">
                   <Link to="/from-no-more-enabling">
                     Follow the guided bridge
                     <ArrowRight className="h-4 w-4" />
@@ -461,9 +461,9 @@ const Index = () => {
               </div>
               <div className="grid gap-3">
                 {funnelLanes.map((lane) => (
-                  <Link key={lane.title} to={lane.to} className="rounded-2xl border bg-background/80 p-4 transition-all hover:border-logo-green/40 hover:shadow-sm">
+                  <Link key={lane.title} to={lane.to} className="rounded-2xl border bg-gradient-to-br from-logo-blue/5 via-background to-logo-blue/10 p-4 transition-all hover:border-logo-blue/40 hover:shadow-md">
                     <div className="flex items-start gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-logo-green/10 text-logo-blue">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-logo-blue/20 to-logo-blue/5 text-logo-blue">
                         <lane.icon className="h-5 w-5" />
                       </span>
                       <span>
