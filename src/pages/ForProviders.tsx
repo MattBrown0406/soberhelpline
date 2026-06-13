@@ -232,7 +232,7 @@ const ForProviders = () => {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-16 bg-gradient-to-br from-logo-green/10 to-emerald-50 rounded-2xl p-10 border-2 border-logo-green/20">
+            <div className="text-center mt-16 bg-gradient-to-br from-logo-blue/10 to-blue-50 rounded-2xl p-10 border-2 border-logo-blue/20">
               <h3 className="text-2xl font-bold text-foreground mb-3">Ready to Get Listed?</h3>
               <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
                 Complete our provider application to get your practice verified and in front of families who need your help.
