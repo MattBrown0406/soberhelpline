@@ -298,7 +298,7 @@ const Index = () => {
         </header>
 
         <section className="relative overflow-hidden border-b border-border/40">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-green/5 dark:from-red-950/20 dark:via-background dark:to-logo-green/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-blue/5 dark:from-red-950/20 dark:via-background dark:to-logo-blue/10" />
           <div className="absolute top-0 right-0 w-[340px] md:w-[560px] h-[340px] md:h-[560px] bg-logo-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-[220px] md:w-[420px] h-[220px] md:h-[420px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
