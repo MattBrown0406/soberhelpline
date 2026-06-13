@@ -67,17 +67,17 @@ export default {
         // without touching every component. Greens (green-*, logo-green)
         // remain untouched so some green accents stay.
         emerald: {
-          50:  "#eef2f8",
-          100: "#dbe3ee",
-          200: "#b6c5dc",
-          300: "#8ba3c4",
-          400: "#5f7fa8",
-          500: "#3d5f8c",
-          600: "#2c4970",
-          700: "#22395a",
-          800: "#1f2c44",
-          900: "#161f31",
-          950: "#0d131f",
+          50:  "#eaeef5",
+          100: "#cdd5e4",
+          200: "#9aabc8",
+          300: "#6781ac",
+          400: "#3d5a87",
+          500: "#1f3a66",
+          600: "#152b4f",
+          700: "#0e2042",
+          800: "#091c3c",
+          900: "#071c3c",
+          950: "#040f22",
         },
       },
       borderRadius: {
