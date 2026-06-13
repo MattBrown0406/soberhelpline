@@ -77,7 +77,7 @@ export default function FamilyEducationTracks() {
 
           <div className="rounded-3xl border border-logo-blue/20 bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 p-8 md:p-10 mb-8">
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-logo-green/10 px-3 py-1.5 text-xs font-semibold text-logo-blue mb-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-logo-blue/10 px-3 py-1.5 text-xs font-semibold text-logo-blue mb-4">
                 <BookOpen className="h-3.5 w-3.5" />
                 Guided Paths for New Members
               </div>
@@ -106,7 +106,7 @@ export default function FamilyEducationTracks() {
                   <Card key={track.slug} className="border-2 border-logo-green/10 hover:border-logo-green/30 transition-colors">
                     <CardHeader>
                       <div className="flex items-start gap-3">
-                        <div className="rounded-xl bg-logo-green/10 p-2.5 border border-logo-green/20">
+                        <div className="rounded-xl bg-logo-blue/10 p-2.5 border border-logo-green/20">
                           <Icon className="h-5 w-5 text-logo-blue" />
                         </div>
                         <div>
@@ -206,7 +206,7 @@ export default function FamilyEducationTracks() {
                           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Discussion forum topic</p>
                           <p className="text-sm font-medium text-foreground mb-2">{day.forumPrompt}</p>
                           <Link to={`/family-forum/${day.forumTopicId}`}>
-                            <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">
+                            <Button className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white">
                               Join the discussion
                             </Button>
                           </Link>

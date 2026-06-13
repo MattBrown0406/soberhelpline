@@ -471,7 +471,7 @@ export default function MondayZoomRegistration() {
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-xl border border-logo-green/20 bg-logo-green/5 p-5">
+                <div className="mt-6 rounded-xl border border-logo-green/20 bg-logo-blue/5 p-5">
                   <div className="grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-start">
                     <div>
                       <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">After you register</p>
@@ -480,7 +480,7 @@ export default function MondayZoomRegistration() {
                     <div className="space-y-3">
                       {afterRegistrationSteps.map((step, index) => (
                         <div key={step} className="flex gap-3 text-sm text-muted-foreground">
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-logo-green text-xs font-bold text-white">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-logo-blue text-xs font-bold text-white">
                             {index + 1}
                           </span>
                           <span>{step}</span>

@@ -136,7 +136,7 @@ const FamilyAdvocacyToolkit = () => {
         />
 
         {/* Purpose Section */}
-        <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
+        <Alert className="mb-8 border-logo-green/30 bg-logo-blue/5">
           <Shield className="h-5 w-5 text-logo-blue" />
           <AlertDescription className="text-foreground">
             <strong>Purpose:</strong> Families often know something is wrong—but don't know how to speak up, what to ask for, or when to push back. 
@@ -605,7 +605,7 @@ const FamilyAdvocacyToolkit = () => {
         </Card>
 
         {/* Final Reframe */}
-        <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
+        <Card className="mb-8 bg-logo-blue/5 border-logo-green/30">
           <CardContent className="pt-6 text-center">
             <h3 className="text-lg font-semibold mb-4">Final Reframe</h3>
             <p className="text-lg font-medium text-foreground mb-4">

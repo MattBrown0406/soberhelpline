@@ -170,7 +170,7 @@ const FearInventoryExercise = () => {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Every family facing a loved one's addiction wrestles with fear. These fears feel protective—they seem to keep us safe from conflict, rejection, or worse outcomes. But too often, <strong>fear becomes the very thing that prevents us from taking actions that could save a life.</strong>
               </p>
-              <Card className="border-logo-green/30 bg-logo-green/5 my-6">
+              <Card className="border-logo-green/30 bg-logo-blue/5 my-6">
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-foreground flex items-center gap-2 mb-3">
                     <Shield className="w-5 h-5 text-logo-blue" />
@@ -291,7 +291,7 @@ const FearInventoryExercise = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="bg-logo-green/5 border border-logo-green/20 rounded-lg p-4">
+                  <div className="bg-logo-blue/5 border border-logo-green/20 rounded-lg p-4">
                     <h4 className="font-medium text-logo-blue flex items-center gap-2 mb-2">
                       <Lightbulb className="w-4 h-4" />
                       Reality Check
@@ -380,7 +380,7 @@ const FearInventoryExercise = () => {
               </p>
             </div>
 
-            <Card className="border-logo-green/30 bg-logo-green/5">
+            <Card className="border-logo-green/30 bg-logo-blue/5">
               <CardContent className="p-6">
                 <h4 className="font-semibold text-foreground mb-3">The Paradox of Loving Action</h4>
                 <p className="text-muted-foreground">
@@ -401,7 +401,7 @@ const FearInventoryExercise = () => {
         return (
           <div className="space-y-8">
             <div className="text-center pb-6">
-              <div className="w-16 h-16 rounded-full bg-logo-green/10 flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full bg-logo-blue/10 flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-8 h-8 text-logo-blue" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground mb-2">Your Commitment</h3>
@@ -436,7 +436,7 @@ const FearInventoryExercise = () => {
               <div className="text-center">
                 <Button 
                   size="lg" 
-                  className="bg-logo-green hover:bg-logo-green/90"
+                  className="bg-logo-blue hover:bg-logo-blue/90"
                   onClick={() => setShowResults(true)}
                 >
                   Complete Exercise
@@ -446,7 +446,7 @@ const FearInventoryExercise = () => {
             )}
 
             {showResults && (
-              <Card className="border-logo-green bg-logo-green/5">
+              <Card className="border-logo-green bg-logo-blue/5">
                 <CardContent className="p-6 text-center space-y-4">
                   <CheckCircle2 className="w-12 h-12 text-logo-blue mx-auto" />
                   <h4 className="text-xl font-semibold text-foreground">Exercise Complete</h4>
@@ -459,7 +459,7 @@ const FearInventoryExercise = () => {
                       Start Over
                     </Button>
                     <Button 
-                      className="bg-logo-green hover:bg-logo-green/90"
+                      className="bg-logo-blue hover:bg-logo-blue/90"
                       onClick={() => window.print()}
                     >
                       Print Your Work
@@ -525,8 +525,8 @@ const FearInventoryExercise = () => {
                   } ${index > currentStep ? 'opacity-40' : 'cursor-pointer'}`}
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                    isComplete ? 'bg-logo-green text-white' :
-                    isActive ? 'bg-logo-green/20 text-logo-blue border-2 border-logo-green' :
+                    isComplete ? 'bg-logo-blue text-white' :
+                    isActive ? 'bg-logo-blue/20 text-logo-blue border-2 border-logo-green' :
                     'bg-muted text-muted-foreground'
                   }`}>
                     {isComplete ? <CheckCircle2 className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
@@ -562,7 +562,7 @@ const FearInventoryExercise = () => {
               <Button
                 onClick={() => setCurrentStep(prev => prev + 1)}
                 disabled={currentStep === steps.length - 1}
-                className="bg-logo-green hover:bg-logo-green/90"
+                className="bg-logo-blue hover:bg-logo-blue/90"
               >
                 Next
                 <ArrowRight className="w-4 h-4 ml-2" />

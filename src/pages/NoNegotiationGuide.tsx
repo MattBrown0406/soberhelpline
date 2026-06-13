@@ -427,7 +427,7 @@ export default function NoNegotiationGuide() {
             </Card>
 
             {/* Final Thought */}
-            <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
+            <Card className="mb-8 bg-logo-blue/5 border-logo-green/30">
               <CardHeader>
                 <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
                   <Shield className="h-5 w-5" />

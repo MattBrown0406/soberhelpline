@@ -150,7 +150,7 @@ export default function FamilyForumLanding() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/monday-zoom-registration">
-                  <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8">
+                  <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8">
                     <Calendar className="h-4 w-4" />
                     Start with the Free Monday Zoom
                   </Button>
@@ -192,7 +192,7 @@ export default function FamilyForumLanding() {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link to="/family-consultation" className="flex-1">
-                      <Button className="w-full bg-logo-green hover:bg-logo-green/90 text-white">
+                      <Button className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white">
                         Book a Crisis Family Consult
                       </Button>
                     </Link>
@@ -310,7 +310,7 @@ export default function FamilyForumLanding() {
                 </div>
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Link to="/family-membership">
-                    <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white">
+                    <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                       Join the Community
                       <ChevronRight className="h-4 w-4" />
                     </Button>
@@ -383,7 +383,7 @@ export default function FamilyForumLanding() {
                 <p className="text-4xl font-bold text-logo-blue mb-1">$14.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
                 <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
                 <Link to="/family-membership">
-                  <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-10">
+                  <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-10">
                     <Users className="h-4 w-4" />
                     Join the Community
                   </Button>
@@ -423,7 +423,7 @@ export default function FamilyForumLanding() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
-                <Button size="lg" className="gap-2 bg-logo-green hover:bg-logo-green/90 text-white px-8">
+                <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8">
                   <Calendar className="h-4 w-4" />
                   Join the Free Monday Zoom
                 </Button>

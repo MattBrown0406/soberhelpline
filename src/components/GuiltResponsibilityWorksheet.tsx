@@ -712,7 +712,7 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
             </div>
 
             {/* Final Reminder */}
-            <div className="bg-logo-green/10 p-6 rounded-lg border border-logo-green/20 text-center">
+            <div className="bg-logo-blue/10 p-6 rounded-lg border border-logo-green/20 text-center">
               <h3 className="font-bold text-logo-blue text-lg mb-3">Final Reminder</h3>
               <p className="text-foreground mb-2">
                 <strong>Guilt is information—not instruction.</strong>

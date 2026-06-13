@@ -67,7 +67,7 @@ export default function FamilyCoaching() {
               </Link>
               <div className="flex flex-wrap gap-2">
                 <Link to={gatedLink("/family-education")}>
-                  <Button variant="outline" size="sm" className="gap-2 border-logo-green/50 text-logo-blue hover:bg-logo-green/10">
+                  <Button variant="outline" size="sm" className="gap-2 border-logo-green/50 text-logo-blue hover:bg-logo-blue/10">
                     <BookOpen className="h-4 w-4" />
                     Education
                     {!isMember && <Lock className="h-3 w-3 ml-0.5 opacity-60" />}

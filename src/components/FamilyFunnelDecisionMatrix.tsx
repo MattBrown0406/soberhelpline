@@ -58,7 +58,7 @@ export default function FamilyFunnelDecisionMatrix({ source, className = "" }: F
             const Icon = lane.icon;
             const card = (
               <div className="flex h-full flex-col rounded-xl border bg-background p-5 transition-colors hover:border-logo-green/40">
-                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-green/10 text-logo-blue">
+                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-logo-blue/10 text-logo-blue">
                   <Icon className="h-5 w-5" />
                 </span>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</p>

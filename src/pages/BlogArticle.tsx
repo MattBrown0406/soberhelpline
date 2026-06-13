@@ -422,7 +422,7 @@ const BlogArticle = () => {
           {/* Membership CTA */}
           <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-blue-50 to-white border border-primary/20">
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-xs font-semibold mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-xs font-semibold mb-3">
                 <BookOpen className="w-3 h-3" />
                 Member Resource
               </div>
@@ -434,7 +434,7 @@ const BlogArticle = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link to="/family-membership">
-                  <Button className="bg-logo-green hover:bg-logo-green/90 text-white px-6">
+                  <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white px-6">
                     <Lock className="w-4 h-4 mr-2" />
                     Unlock Full Access — $14.99/mo
                   </Button>

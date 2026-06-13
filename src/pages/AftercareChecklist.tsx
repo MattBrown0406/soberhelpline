@@ -204,7 +204,7 @@ const AftercareChecklist = () => {
           clinicalNote="Based on ASAM continuing care guidelines and Gorski's relapse prevention model. Discharge should be a clinical transition, not a relief milestone."
         />
 
-        <Alert className="mb-8 border-logo-green/30 bg-logo-green/5">
+        <Alert className="mb-8 border-logo-green/30 bg-logo-blue/5">
           <AlertTriangle className="h-5 w-5 text-logo-blue" />
           <AlertDescription className="text-foreground">
             <strong>Purpose:</strong> Leaving treatment is not the finish line—it is the most vulnerable transition in recovery. 
@@ -421,7 +421,7 @@ const AftercareChecklist = () => {
         </div>
 
         {/* Key Reframe */}
-        <Card className="mb-8 bg-logo-green/5 border-logo-green/30">
+        <Card className="mb-8 bg-logo-blue/5 border-logo-green/30">
           <CardContent className="pt-6 text-center">
             <h3 className="text-lg font-semibold mb-2">Key Reframe</h3>
             <p className="text-muted-foreground mb-2">

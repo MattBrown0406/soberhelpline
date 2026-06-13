@@ -106,7 +106,7 @@ const LeadMagnetPopup = () => {
 
           <Button
             onClick={handleStart}
-            className="w-full h-11 gap-2 bg-logo-green hover:bg-logo-green/90 text-white"
+            className="w-full h-11 gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white"
           >
             <Video className="w-4 h-4" />
             Reserve Your Free Monday Spot
