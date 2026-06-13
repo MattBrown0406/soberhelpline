@@ -476,7 +476,7 @@ export default function FamilyEducation() {
             {/* Guided Starting Path for New Members */}
             <StartHereGuide />
 
-            <Card className="mb-6 border-2 border-logo-green/20 bg-gradient-to-r from-logo-green/10 via-background to-primary/5">
+            <Card className="mb-6 border-2 border-logo-blue/20 bg-gradient-to-r from-logo-blue/10 via-background to-logo-blue/5">
               <CardContent className="p-5 md:p-6">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                   <div className="max-w-3xl">
