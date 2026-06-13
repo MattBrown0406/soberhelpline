@@ -260,7 +260,7 @@ const FreeGuide = () => {
           </Card>
 
           {/* Closing */}
-          <div className="bg-gradient-to-br from-primary/5 via-logo-green/5 to-primary/5 rounded-2xl p-8 mb-12 print-break">
+          <div className="bg-gradient-to-br from-logo-blue/5 via-logo-blue/10 to-logo-blue/5 rounded-2xl p-8 mb-12 print-break">
             <h2 className="text-2xl font-bold text-center mb-4">What Now?</h2>
             <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto">
               Reading this guide is a solid first step. The next part is support, education, and people who can help you stay steady when things get messy.
