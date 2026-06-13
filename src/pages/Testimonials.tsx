@@ -138,7 +138,7 @@ const Testimonials = () => {
         <div className="container mx-auto px-4 py-12 max-w-4xl">
           {/* Post-Zoom Banner with Membership CTA */}
           {fromZoom && (
-            <div className="bg-gradient-to-r from-primary/10 via-logo-green/10 to-primary/10 border border-primary/20 rounded-xl p-6 mb-8 text-center">
+            <div className="bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 border border-logo-blue/20 rounded-xl p-6 mb-8 text-center">
               <div className="flex justify-center mb-3">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                   <Video className="w-6 h-6 text-primary" />
