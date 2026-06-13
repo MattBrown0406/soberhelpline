@@ -558,7 +558,7 @@ const Index = () => {
             </div>
 
             <div className="text-center mb-8 md:mb-12">
-              <div className="inline-block bg-gradient-to-r from-logo-green/10 via-primary/10 to-logo-green/10 rounded-2xl p-6 md:p-8 border border-logo-green/20">
+              <div className="inline-block bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 rounded-2xl p-6 md:p-8 border border-logo-blue/20">
                 <p className="text-sm md:text-base text-muted-foreground mb-4">
                   <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get practical tools, steady support, and a place to think more clearly again.
                 </p>
