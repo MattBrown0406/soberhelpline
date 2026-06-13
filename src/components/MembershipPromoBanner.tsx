@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const MembershipPromoBanner = () => {
   return (
-    <div className="bg-gradient-to-br from-primary/5 via-logo-green/5 to-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 my-10">
+    <div className="bg-gradient-to-br from-primary/5 via-blue-400/10 to-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 my-10">
       <div className="text-center mb-6">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-4">
           <Crown className="w-7 h-7 text-primary" />

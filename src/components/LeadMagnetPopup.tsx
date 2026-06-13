@@ -73,7 +73,7 @@ const LeadMagnetPopup = () => {
         </button>
 
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary/20 via-logo-green/20 to-primary/10 px-6 pt-8 pb-6">
+        <div className="bg-gradient-to-br from-primary/20 via-blue-400/20 to-primary/10 px-6 pt-8 pb-6">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
               <Calendar className="w-8 h-8 text-primary" />

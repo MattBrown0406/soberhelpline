@@ -24,7 +24,7 @@ const EducationProgressBar = () => {
           </div>
           <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-logo-green to-emerald-400 rounded-full transition-all duration-700 ease-out"
+              className="h-full bg-gradient-to-r from-primary to-blue-400 rounded-full transition-all duration-700 ease-out"
               style={{ width: `${Math.max(stats.completionPercentage, 2)}%` }}
             />
           </div>
