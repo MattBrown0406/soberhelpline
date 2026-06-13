@@ -313,7 +313,7 @@ const ForProviders = () => {
               </Card>
 
               {/* Premium Featured */}
-              <Card className="p-8 border-2 border-logo-green bg-gradient-to-br from-logo-green/5 to-emerald-50">
+              <Card className="p-8 border-2 border-logo-blue bg-gradient-to-br from-logo-blue/5 to-blue-50">
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-green/10 text-logo-blue text-sm font-medium mb-4">
                     <Award className="w-4 h-4" />
