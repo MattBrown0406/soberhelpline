@@ -425,7 +425,7 @@ const FearInventoryExercise = () => {
               </CardContent>
             </Card>
 
-            <div className="bg-gradient-to-br from-logo-green/10 to-primary/10 rounded-lg p-6 border border-logo-green/20">
+            <div className="bg-gradient-to-br from-logo-blue/10 to-logo-blue/5 rounded-lg p-6 border border-logo-blue/20">
               <h4 className="font-semibold text-foreground mb-4 text-center">An Affirmation for Families</h4>
               <p className="text-center text-foreground italic text-lg">
                 "I choose to act from love, not fear. I cannot control outcomes, but I can control my willingness to do what's right. I release the need for certainty and embrace the courage to try."
