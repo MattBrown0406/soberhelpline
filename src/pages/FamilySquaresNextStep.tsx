@@ -36,7 +36,7 @@ export default function FamilySquaresNextStep() {
 
       <div className="min-h-screen bg-background">
         <main>
-          <section className="border-b bg-gradient-to-br from-primary/10 via-background to-logo-green/10">
+          <section className="border-b bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5">
             <div className="container grid gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-14">
               <div>
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary">
