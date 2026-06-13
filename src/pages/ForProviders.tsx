@@ -248,7 +248,7 @@ const ForProviders = () => {
         </section>
 
         {/* Social Proof / Stats */}
-        <section className="py-16 bg-gradient-to-br from-logo-green/5 to-emerald-50">
+        <section className="py-16 bg-gradient-to-br from-logo-blue/5 to-blue-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
