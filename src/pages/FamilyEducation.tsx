@@ -363,7 +363,7 @@ export default function FamilyEducation() {
             <MemberZoomBanner />
 
             {/* Hero Section */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-green/10 via-background to-primary/5 border border-logo-green/20 p-8 md:p-12 mb-10">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 border border-logo-blue/20 p-8 md:p-12 mb-10">
               <div className="absolute top-0 right-0 w-64 h-64 bg-logo-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
               
