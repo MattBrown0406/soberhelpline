@@ -109,6 +109,9 @@ const UnderstandingAddiction = React.lazy(() => import("./pages/UnderstandingAdd
 const FamilyMembershipPage = FamilyMembership;
 const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
 const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTracks"));
+const SSO = React.lazy(() => import("./pages/SSO"));
+const AppSubscriberGate = React.lazy(() => import("./components/AppSubscriberGate"));
+
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
 const FamilyForumLanding = React.lazy(() => import("./pages/FamilyForumLanding"));
 const FamilyConsultationPage = FamilyConsultation;
