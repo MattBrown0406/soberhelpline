@@ -311,7 +311,7 @@ const Index = () => {
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
                   Stop guessing what to do next.
-                  <span className="block text-logo-blue mt-2">Get the right level of family addiction help.</span>
+                  <span className="block mt-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Get the right level of family addiction help.</span>
                 </h1>
                 <p className="text-base md:text-xl text-muted-foreground max-w-3xl mb-6 md:mb-8 hero-description">
                   Sober Helpline helps families move from worry into action. Join the free Family Squares support meeting, book a private session if you cannot wait until Monday, or check whether the situation is moving toward intervention readiness.
@@ -389,7 +389,7 @@ const Index = () => {
                         <Shield className="w-3.5 h-3.5" />
                         Trusted, private, family-first guidance
                       </div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Work with Matt Brown</h2>
+                      <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Work with Matt Brown</h2>
                       <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                         Matt has 22+ years of experience helping families respond to addiction with more clarity and less panic. He helps families think straight in hard moments, evaluate treatment options ethically, and stop getting pushed around by the industry.
                       </p>
@@ -448,7 +448,7 @@ const Index = () => {
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Coming from No More Enabling?</p>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">This is where reading turns into live support.</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">This is where reading turns into live support.</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
@@ -491,7 +491,7 @@ const Index = () => {
                 <Eye className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 What You'll Learn to Handle
               </div>
-              <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">
                 The Situations We Help You Navigate
               </h2>
               <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -740,7 +740,7 @@ const Index = () => {
               <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
               Ethical Provider Directory
             </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">
               Find Vetted Treatment Providers
             </h2>
             <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -770,7 +770,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16">
           <div className="text-center mb-6 md:mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Latest from Our Blog</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-3 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Latest from Our Blog</h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Practical articles on addiction, recovery, and what families can do next</p>
           </div>
           <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
@@ -837,7 +837,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">You do not have to keep guessing.</h2>
+            <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">You do not have to keep guessing.</h2>
             <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
               Start with the free Monday meeting, move into a private session when you cannot wait, or check intervention readiness when refusal, relapse, or risk is escalating.
             </p>
