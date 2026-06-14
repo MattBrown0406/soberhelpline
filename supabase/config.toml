@@ -109,3 +109,7 @@ verify_jwt = false
 
 [functions.recover-consultation-zoom-links]
 verify_jwt = false
+
+[functions.validate-sso-token]
+verify_jwt = false
+
