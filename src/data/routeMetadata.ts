@@ -96,6 +96,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Family Support Resources for Addiction | Sober Helpline',
     description: 'Support resources for families dealing with a loved one\'s addiction. Education, community, coaching, and tools to help you take action.',
   },
+  '/support': {
+    title: 'SoberHelpline App Support | Sober Helpline',
+    description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
+  },
   '/start-here': {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',

@@ -68,6 +68,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Support for Addiction</h1><p>Free support, education, and guidance for families dealing with a loved one\'s substance use, denial, relapse, or treatment resistance.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-coaching">Explore family coaching</a></p></main>'
   },
   {
+    route: '/support',
+    title: 'SoberHelpline App Support | Sober Helpline',
+    description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
+    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582027900">458-202-7900</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
+  },
+  {
     route: '/start-here',
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
@@ -189,6 +195,7 @@ export const sitemapPriority = new Map([
   ['/monday-zoom-registration', '0.95'],
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
+  ['/support', '0.5'],
   ['/start-here', '0.95'],
   ['/family-addiction-answers', '0.92'],
   ['/family-coaching', '0.9'],
@@ -225,6 +232,7 @@ export const sitemapChangefreq = new Map([
   ['/monday-zoom-registration', 'weekly'],
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],
+  ['/support', 'monthly'],
   ['/start-here', 'weekly'],
   ['/family-addiction-answers', 'weekly'],
   ['/family-coaching', 'weekly'],
