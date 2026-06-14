@@ -100,6 +100,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'SoberHelpline App Support | Sober Helpline',
     description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
   },
+  '/privacy': {
+    title: 'Privacy Policy | Sober Helpline',
+    description: 'Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
+  },
   '/start-here': {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',

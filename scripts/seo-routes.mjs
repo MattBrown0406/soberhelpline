@@ -74,6 +74,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582027900">458-202-7900</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
   },
   {
+    route: '/privacy',
+    title: 'Privacy Policy | Sober Helpline',
+    description: 'Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
+    noscriptHtml: '<main><h1>Sober Helpline Privacy Policy</h1><p>This policy explains how Sober Helpline and the SoberHelpline mobile app collect, use, share, protect, retain, and delete information.</p><p>For privacy requests, data access, correction, or account deletion, email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p><p>Sober Helpline does not sell personal information and is not emergency medical, psychiatric, legal, or crisis response care.</p></main>'
+  },
+  {
     route: '/start-here',
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
@@ -196,6 +202,7 @@ export const sitemapPriority = new Map([
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
   ['/support', '0.5'],
+  ['/privacy', '0.5'],
   ['/start-here', '0.95'],
   ['/family-addiction-answers', '0.92'],
   ['/family-coaching', '0.9'],
@@ -233,6 +240,7 @@ export const sitemapChangefreq = new Map([
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],
   ['/support', 'monthly'],
+  ['/privacy', 'monthly'],
   ['/start-here', 'weekly'],
   ['/family-addiction-answers', 'weekly'],
   ['/family-coaching', 'weekly'],
