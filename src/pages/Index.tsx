@@ -311,7 +311,7 @@ const Index = () => {
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
                   Stop guessing what to do next.
-                  <span className="block text-logo-blue mt-2">Get the right level of family addiction help.</span>
+                  <span className="block mt-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Get the right level of family addiction help.</span>
                 </h1>
                 <p className="text-base md:text-xl text-muted-foreground max-w-3xl mb-6 md:mb-8 hero-description">
                   Sober Helpline helps families move from worry into action. Join the free Family Squares support meeting, book a private session if you cannot wait until Monday, or check whether the situation is moving toward intervention readiness.
