@@ -389,7 +389,7 @@ const Index = () => {
                         <Shield className="w-3.5 h-3.5" />
                         Trusted, private, family-first guidance
                       </div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Work with Matt Brown</h2>
+                      <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Work with Matt Brown</h2>
                       <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                         Matt has 22+ years of experience helping families respond to addiction with more clarity and less panic. He helps families think straight in hard moments, evaluate treatment options ethically, and stop getting pushed around by the industry.
                       </p>
