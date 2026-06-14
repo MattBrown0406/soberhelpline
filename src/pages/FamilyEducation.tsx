@@ -363,7 +363,7 @@ export default function FamilyEducation() {
             <MemberZoomBanner />
 
             {/* Hero Section */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 border border-logo-blue/20 p-8 md:p-12 mb-10">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-background to-logo-blue/5 border border-logo-blue/20 p-5 sm:p-8 md:p-12 mb-10">
               <div className="absolute top-0 right-0 w-64 h-64 bg-logo-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
               
@@ -517,42 +517,42 @@ export default function FamilyEducation() {
               </div>
               
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="w-full h-auto p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-3 gap-2">
+              <TabsList className="w-full h-auto p-1.5 sm:p-2 bg-muted/50 border-2 border-logo-green/20 rounded-xl grid grid-cols-3 gap-1.5 sm:gap-2">
                   <TabsTrigger 
                     value="tools" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 py-2.5 px-2 sm:py-4 sm:px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200 h-full"
                   >
-                    <div className="p-2 rounded-full bg-amber-500/20">
-                      <Lightbulb className="h-5 w-5 text-amber-600" />
+                    <div className="p-1.5 sm:p-2 rounded-full bg-amber-500/20">
+                      <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />
                     </div>
-                    <div className="text-center sm:text-left">
-                      <div className="font-semibold text-sm">Interactive Tools</div>
+                    <div className="text-center sm:text-left min-w-0">
+                      <div className="font-semibold text-[11px] leading-tight sm:text-sm">Interactive Tools</div>
                       <div className="text-xs opacity-70 hidden sm:block">Worksheets & Assessments</div>
                     </div>
                   </TabsTrigger>
                   
                   <TabsTrigger 
                     value="pillars" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 py-2.5 px-2 sm:py-4 sm:px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200 h-full"
                   >
-                    <div className="p-2 rounded-full bg-blue-500/20">
-                      <BookOpen className="h-5 w-5 text-blue-600" />
+                    <div className="p-1.5 sm:p-2 rounded-full bg-blue-500/20">
+                      <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                     </div>
-                    <div className="text-center sm:text-left">
-                      <div className="font-semibold text-sm">Six Pillars</div>
+                    <div className="text-center sm:text-left min-w-0">
+                      <div className="font-semibold text-[11px] leading-tight sm:text-sm">Six Pillars</div>
                       <div className="text-xs opacity-70 hidden sm:block">60+ Educational Guides</div>
                     </div>
                   </TabsTrigger>
                   
                   <TabsTrigger 
                     value="wellness" 
-                    className="flex flex-col sm:flex-row items-center gap-2 py-4 px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 py-2.5 px-2 sm:py-4 sm:px-4 rounded-lg data-[state=active]:bg-logo-blue data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-logo-blue/25 transition-all duration-200 h-full"
                   >
-                    <div className="p-2 rounded-full bg-rose-500/20">
-                      <Heart className="h-5 w-5 text-rose-600" />
+                    <div className="p-1.5 sm:p-2 rounded-full bg-rose-500/20">
+                      <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-rose-600" />
                     </div>
-                    <div className="text-center sm:text-left">
-                      <div className="font-semibold text-sm">Wellness & AI Tools</div>
+                    <div className="text-center sm:text-left min-w-0">
+                      <div className="font-semibold text-[11px] leading-tight sm:text-sm">Wellness &amp; AI</div>
                       <div className="text-xs opacity-70 hidden sm:block">Meditations, Self-Care & AI Coaches</div>
                     </div>
                   </TabsTrigger>
@@ -739,21 +739,21 @@ export default function FamilyEducation() {
                       value={pillar.id}
                       className={`border-2 ${c(pillar.color).borderHeavy} rounded-lg overflow-hidden ${c(pillar.color).bgGradient}`}
                     >
-                      <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/30">
-                        <div className="flex items-center gap-4 text-left">
-                          <div className={`flex-shrink-0 w-10 h-10 rounded-full ${c(pillar.color).bg} flex items-center justify-center`}>
-                            <span className={`text-lg font-bold ${c(pillar.color).iconText}`}>{pillar.number}</span>
+                      <AccordionTrigger className="px-4 sm:px-6 py-4 hover:no-underline hover:bg-muted/30">
+                        <div className="flex items-center gap-3 sm:gap-4 text-left min-w-0">
+                          <div className={`flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full ${c(pillar.color).bg} flex items-center justify-center`}>
+                            <span className={`text-base sm:text-lg font-bold ${c(pillar.color).iconText}`}>{pillar.number}</span>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <pillar.icon className={`h-5 w-5 ${c(pillar.color).iconText}`} />
-                            <div>
-                              <h3 className="font-semibold text-foreground">{pillar.title}</h3>
-                              <p className="text-sm text-muted-foreground">{pillar.subtitle}</p>
+                          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                            <pillar.icon className={`hidden sm:block h-5 w-5 flex-shrink-0 ${c(pillar.color).iconText}`} />
+                            <div className="min-w-0">
+                              <h3 className="font-semibold text-foreground text-sm sm:text-base leading-tight">{pillar.title}</h3>
+                              <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{pillar.subtitle}</p>
                             </div>
                           </div>
                         </div>
                       </AccordionTrigger>
-                      <AccordionContent className="px-6 pb-6">
+                      <AccordionContent className="px-4 sm:px-6 pb-6">
                         <p className="text-muted-foreground mb-4">{pillar.description}</p>
                         
                         {pillar.subcategories ? (
