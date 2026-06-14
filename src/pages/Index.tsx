@@ -740,7 +740,7 @@ const Index = () => {
               <Shield className="w-3.5 h-3.5 md:w-4 md:h-4" />
               Ethical Provider Directory
             </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">
               Find Vetted Treatment Providers
             </h2>
             <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto">
