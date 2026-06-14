@@ -448,7 +448,7 @@ const Index = () => {
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Coming from No More Enabling?</p>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">This is where reading turns into live support.</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">This is where reading turns into live support.</h2>
                 <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
                   No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
                 </p>
