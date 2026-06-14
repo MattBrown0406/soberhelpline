@@ -770,7 +770,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16">
           <div className="text-center mb-6 md:mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 md:mb-3">Latest from Our Blog</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-3 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Latest from Our Blog</h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Practical articles on addiction, recovery, and what families can do next</p>
           </div>
           <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">
