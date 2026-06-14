@@ -111,6 +111,8 @@ const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
 const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTracks"));
 const SSO = React.lazy(() => import("./pages/SSO"));
 const AppSubscriberGate = React.lazy(() => import("./components/AppSubscriberGate"));
+const SubscriberRoute = React.lazy(() => import("./components/SubscriberRoute"));
+
 
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
 const FamilyForumLanding = React.lazy(() => import("./pages/FamilyForumLanding"));
@@ -376,8 +378,10 @@ const App = () => (
               <Route path="/family-addiction-answers" element={<FamilyAddictionAnswers />} />
               <Route path="/family-addiction-answers/:answerSlug" element={<FamilyAddictionAnswerDetail />} />
               <Route path="/family-membership" element={<FamilyMembershipPage />} />
-              <Route path="/family-education" element={<FamilyEducation />} />
-              <Route path="/family-education/tracks" element={<FamilyEducationTracks />} />
+              <Route path="/family-education" element={<SubscriberRoute><FamilyEducation /></SubscriberRoute>} />
+              <Route path="/family-education/tracks" element={<SubscriberRoute><FamilyEducationTracks /></SubscriberRoute>} />
+              <Route path="/sso" element={<SSO />} />
+
               <Route path="/family-forum" element={<FamilyForum />} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
               <Route path="/family-forum/:topicId" element={<ForumTopic />} />
