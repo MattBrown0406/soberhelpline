@@ -837,7 +837,7 @@ const Index = () => {
 
         <section className="container mx-auto px-4 py-10 md:py-16 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">You do not have to keep guessing.</h2>
+            <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">You do not have to keep guessing.</h2>
             <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
               Start with the free Monday meeting, move into a private session when you cannot wait, or check intervention readiness when refusal, relapse, or risk is escalating.
             </p>
