@@ -52,6 +52,14 @@ export function hasAppSubscriberCookie(): boolean {
   return getCookie(COOKIE_KEY) === "true";
 }
 
+export function hasAppSubscriberSessionCookie(): boolean {
+  return getCookie(SESSION_COOKIE_KEY) === "1";
+}
+
+export function setAppSubscriberSessionCookie() {
+  setSessionCookie(SESSION_COOKIE_KEY, "1", SESSION_COOKIE_MAX_AGE_SECONDS);
+}
+
 export function readWebSession(): WebSession | null {
   if (typeof window === "undefined") return null;
   const activeMemorySession = getActiveMemorySession();
