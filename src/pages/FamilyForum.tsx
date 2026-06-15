@@ -413,7 +413,7 @@ export default function FamilyForum() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
     return (
       <>
         <SEOHead
