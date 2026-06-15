@@ -203,12 +203,20 @@ const colorMap: Record<string, { border: string; text: string; hover: string; bg
 const c = (color: string) => colorMap[color] || colorMap.slate;
 
 export default function FamilyEducation() {
+  // DEBUG: confirm sso_token presence at the very start of the page lifecycle
+  if (typeof window !== "undefined") {
+    const _ssoTokenDebug = new URLSearchParams(window.location.search).get("sso_token");
+    // eslint-disable-next-line no-console
+    console.log("[FamilyEducation] mount — url:", window.location.href, "sso_token:", _ssoTokenDebug);
+  }
+
   const navigate = useNavigate();
   const { isSubscriber: isAppSubscriber } = useWebSession();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
   const [activeTab, setActiveTab] = useState("tools");
+
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
