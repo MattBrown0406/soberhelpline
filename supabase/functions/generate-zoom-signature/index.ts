@@ -64,14 +64,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    if (normalizedRole === 1) {
-      if (!authHeader?.startsWith("Bearer ")) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-
+    // Check signed-in user's email against the meeting blocklist (if any)
+    if (authHeader?.startsWith("Bearer ")) {
       const supabase = createClient(
         Deno.env.get("SUPABASE_URL")!,
         Deno.env.get("SUPABASE_ANON_KEY")!,
@@ -80,12 +74,39 @@ Deno.serve(async (req) => {
 
       const token = authHeader.replace("Bearer ", "");
       const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
-      if (claimsError || !claimsData?.claims) {
+
+      if (normalizedRole === 1 && (claimsError || !claimsData?.claims)) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
+
+      const email = claimsData?.claims?.email as string | undefined;
+      if (email) {
+        const adminClient = createClient(
+          Deno.env.get("SUPABASE_URL")!,
+          Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+        );
+        const { data: blocked } = await adminClient
+          .from("meeting_blocklist")
+          .select("id")
+          .ilike("email", email)
+          .maybeSingle();
+
+        if (blocked) {
+          console.warn(`Blocked SDK signature request for ${email}`);
+          return new Response(JSON.stringify({ error: "You are not able to join this meeting. Please contact matt@soberhelpline.com." }), {
+            status: 403,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+      }
+    } else if (normalizedRole === 1) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     if (!meetingNumber) {
