@@ -28,7 +28,7 @@ export function useWebSession(): UseWebSessionResult {
   }, []);
 
   return {
-    isSubscriber: !!session || hasAppSubscriberCookie(),
+    isSubscriber: !!session || hasAppSubscriberCookie() || hasAppSubscriberSessionCookie(),
     tier: session?.tier ?? null,
     firstName: session?.firstName ?? null,
     loading,
