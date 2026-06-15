@@ -40,15 +40,14 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
-    // Blocklist check — silently accept but do not register or email
-    const { data: blocked } = await adminSupabase
-      .from("meeting_blocklist")
-      .select("id")
-      .ilike("email", email)
-      .maybeSingle();
+    // Blocklist check (email OR last name) — silently accept but do not register or email
+    const { data: blockedFlag } = await adminSupabase.rpc("is_meeting_blocked", {
+      _email: email,
+      _name: name,
+    });
 
-    if (blocked) {
-      console.warn(`Blocked public meeting registration attempt: ${email}`);
+    if (blockedFlag === true) {
+      console.warn(`Blocked public meeting registration attempt: ${email} / ${name}`);
       return new Response(JSON.stringify({ success: true, registration: null }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
