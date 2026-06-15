@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign, Ban } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -36,6 +36,7 @@ import { AbandonedBookingsManagement } from "@/components/admin/AbandonedBooking
 import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagement";
 import { NmeFunnelReport } from "@/components/admin/NmeFunnelReport";
 import { RevenueCommandCenter } from "@/components/admin/RevenueCommandCenter";
+import { MeetingBlocklistManagement } from "@/components/admin/MeetingBlocklistManagement";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -216,6 +217,10 @@ const Admin = () => {
             <TabsTrigger value="zoom-settings" className="gap-2">
               <Video className="h-4 w-4" />
               Zoom Meeting
+            </TabsTrigger>
+            <TabsTrigger value="meeting-blocklist" className="gap-2">
+              <Ban className="h-4 w-4" />
+              Meeting Blocklist
             </TabsTrigger>
             <TabsTrigger value="consultations" className="gap-2">
               <CalendarCheck className="h-4 w-4" />
@@ -475,6 +480,21 @@ const Admin = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="meeting-blocklist">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Ban className="h-5 w-5" />
+                  Meeting Blocklist
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <MeetingBlocklistManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
 
           <TabsContent value="consultations">
             <Card>

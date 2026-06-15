@@ -121,10 +121,21 @@ serve(async (req: Request) => {
 
     const profileMap = new Map(profiles?.map((p: any) => [p.id, p.first_name]) || []);
 
+    const { data: blockRows } = await adminSupabase
+      .from("meeting_blocklist")
+      .select("email");
+    const blockedSet = new Set((blockRows || []).map((r: any) => String(r.email).toLowerCase().trim()));
+
     let sent = 0;
     let failed = 0;
+    let skippedBlocked = 0;
 
     for (const pp of (privateProfiles || [])) {
+      if (pp.email && blockedSet.has(String(pp.email).toLowerCase().trim())) {
+        skippedBlocked++;
+        console.warn(`Skipping blocked member email: ${pp.email}`);
+        continue;
+      }
       const firstName = profileMap.get(pp.user_id) || "Friend";
       const safeName = escapeHtml(firstName);
 
@@ -192,9 +203,9 @@ serve(async (req: Request) => {
       else failed++;
     }
 
-    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}`);
+    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}, skippedBlocked=${skippedBlocked}`);
 
-    return new Response(JSON.stringify({ success: true, sent, failed }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, skippedBlocked }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
