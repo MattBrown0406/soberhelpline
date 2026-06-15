@@ -177,7 +177,7 @@ export default function FamilyWebinars() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
     return (
       <>
         <Helmet>
