@@ -83,7 +83,28 @@ export function ZoomLinkSettings() {
   useEffect(() => {
     fetchZoomLink();
     fetchAllRegistrations();
+    fetchBlocklist();
   }, []);
+
+  const fetchBlocklist = async () => {
+    const { data } = await supabase
+      .from("meeting_blocklist")
+      .select("email, blocked_last_name");
+    const emails = new Set<string>();
+    const lastNames = new Set<string>();
+    (data || []).forEach((b: any) => {
+      if (b.email) emails.add(String(b.email).toLowerCase().trim());
+      if (b.blocked_last_name) lastNames.add(String(b.blocked_last_name).toLowerCase().trim());
+    });
+    setBlocklist({ emails, lastNames });
+  };
+
+  const isRegistrantBlocked = (r: Registration) => {
+    if (blocklist.emails.has((r.email || "").toLowerCase().trim())) return true;
+    const tokens = (r.name || "").trim().split(/\s+/).filter(Boolean);
+    const last = tokens.length ? tokens[tokens.length - 1].toLowerCase() : "";
+    return last !== "" && blocklist.lastNames.has(last);
+  };
 
   const fetchZoomLink = async () => {
     try {
@@ -460,7 +481,7 @@ export function ZoomLinkSettings() {
                   </CollapsibleTrigger>
                   <CollapsibleContent className="space-y-2 pt-2 pl-4">
                     {regs.map((r, i) => (
-                      <RegistrantCard key={r.id} r={r} index={i} />
+                      <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
                     ))}
                   </CollapsibleContent>
                 </Collapsible>
