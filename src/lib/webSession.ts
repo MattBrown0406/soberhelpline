@@ -99,6 +99,7 @@ export function writeWebSession(s: WebSession) {
     // iOS Safari can restrict storage in some app handoff contexts; inline SSO should still unlock immediately.
   }
   setCookie(COOKIE_KEY, "true", s.expiresAt);
+  setSessionCookie(SESSION_COOKIE_KEY, "1", SESSION_COOKIE_MAX_AGE_SECONDS);
 }
 
 export function clearWebSession() {
@@ -109,6 +110,7 @@ export function clearWebSession() {
     // Ignore storage cleanup failures.
   }
   deleteCookie(COOKIE_KEY);
+  deleteCookie(SESSION_COOKIE_KEY);
 }
 
 export const WEB_SESSION_STORAGE_KEY = STORAGE_KEY;
