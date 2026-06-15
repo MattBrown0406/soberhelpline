@@ -71,6 +71,21 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    // Blocklist check — do not email blocked addresses
+    const { data: blocked } = await adminSupabase
+      .from("meeting_blocklist")
+      .select("id")
+      .ilike("email", email)
+      .maybeSingle();
+
+    if (blocked) {
+      console.warn(`Suppressed zoom registration email to blocked address: ${email}`);
+      return new Response(JSON.stringify({ success: true, suppressed: true }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { data: settings } = await adminSupabase
       .from("site_settings")
       .select("key, value")

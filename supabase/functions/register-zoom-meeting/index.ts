@@ -97,6 +97,28 @@ serve(async (req: Request) => {
 
     const adminSupabase = createClient(supabaseUrl, serviceRoleKey);
 
+    // Blocklist check — silently accept but do not register or email
+    const { data: blocked } = await adminSupabase
+      .from("meeting_blocklist")
+      .select("id")
+      .ilike("email", email)
+      .maybeSingle();
+
+    if (blocked) {
+      console.warn(`Blocked meeting registration attempt: ${email}`);
+      return new Response(JSON.stringify({
+        success: true,
+        registrationId: null,
+        meetingDate,
+        alreadyRegistered: true,
+        emailSent: false,
+        emailError: null,
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { data: existingRows, error: existingError } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("id, user_id, auto_register")
