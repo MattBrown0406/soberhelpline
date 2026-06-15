@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { readWebSession, WEB_SESSION_STORAGE_KEY } from "@/lib/webSession";
+import { readWebSession, WEB_SESSION_STORAGE_KEY, hasAppSubscriberCookie } from "@/lib/webSession";
 
 export interface UseWebSessionResult {
   isSubscriber: boolean;
@@ -13,15 +13,22 @@ export function useWebSession(): UseWebSessionResult {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setSession(readWebSession());
+
+    const onFocus = () => setSession(readWebSession());
     const onStorage = (e: StorageEvent) => {
       if (e.key === WEB_SESSION_STORAGE_KEY) setSession(readWebSession());
     };
+    window.addEventListener("focus", onFocus);
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
   return {
-    isSubscriber: !!session,
+    isSubscriber: !!session || hasAppSubscriberCookie(),
     tier: session?.tier ?? null,
     firstName: session?.firstName ?? null,
     loading,
