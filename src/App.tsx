@@ -382,9 +382,9 @@ const App = () => (
               <Route path="/family-education/tracks" element={<SubscriberRoute><FamilyEducationTracks /></SubscriberRoute>} />
               <Route path="/sso" element={<SSO />} />
 
-              <Route path="/family-forum" element={<FamilyForum />} />
+              <Route path="/family-forum" element={<SubscriberRoute><FamilyForum /></SubscriberRoute>} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
-              <Route path="/family-forum/:topicId" element={<ForumTopic />} />
+              <Route path="/family-forum/:topicId" element={<SubscriberRoute><ForumTopic /></SubscriberRoute>} />
               <Route path="/family-consultation" element={<FamilyConsultationPage />} />
               <Route path="/from-no-more-enabling" element={<FromNoMoreEnablingPage />} />
               <Route path="/family-squares-next-step" element={<FamilySquaresNextStepPage />} />
@@ -396,7 +396,7 @@ const App = () => (
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />
               <Route path="/monday-night-zoom" element={<MondayZoomRegistration />} />
-              <Route path="/family-webinars" element={<FamilyWebinars />} />
+              <Route path="/family-webinars" element={<SubscriberRoute><FamilyWebinars /></SubscriberRoute>} />
               <Route path="/treatment-questions" element={<TreatmentQuestions />} />
               <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
               <Route path="/family-action-plan" element={<FamilyActionPlan />} />
