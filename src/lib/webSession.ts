@@ -10,6 +10,17 @@ export interface WebSession {
   expiresAt: number;
 }
 
+let memorySession: WebSession | null = null;
+
+function getActiveMemorySession(): WebSession | null {
+  if (!memorySession) return null;
+  if (memorySession.expiresAt < Date.now()) {
+    memorySession = null;
+    return null;
+  }
+  return memorySession;
+}
+
 function setCookie(name: string, value: string, expiresAt: number) {
   if (typeof document === "undefined") return;
   const expires = new Date(expiresAt).toUTCString();
@@ -35,6 +46,8 @@ export function hasAppSubscriberCookie(): boolean {
 
 export function readWebSession(): WebSession | null {
   if (typeof window === "undefined") return null;
+  const activeMemorySession = getActiveMemorySession();
+  if (activeMemorySession) return activeMemorySession;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
@@ -55,19 +68,30 @@ export function readWebSession(): WebSession | null {
       deleteCookie(COOKIE_KEY);
       return null;
     }
+    memorySession = parsed;
     return parsed;
   } catch {
-    return null;
+    return getActiveMemorySession();
   }
 }
 
 export function writeWebSession(s: WebSession) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  memorySession = s;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  } catch {
+    // iOS Safari can restrict storage in some app handoff contexts; inline SSO should still unlock immediately.
+  }
   setCookie(COOKIE_KEY, "true", s.expiresAt);
 }
 
 export function clearWebSession() {
-  localStorage.removeItem(STORAGE_KEY);
+  memorySession = null;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Ignore storage cleanup failures.
+  }
   deleteCookie(COOKIE_KEY);
 }
 
