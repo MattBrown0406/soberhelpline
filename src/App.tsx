@@ -481,7 +481,7 @@ const App = () => (
               <Route path="/recovery-resources" element={<RecoveryResources />} />
               <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
               <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
-              <Route path="/zoom-recordings" element={<ZoomRecordings />} />
+              <Route path="/zoom-recordings" element={<SubscriberRoute><ZoomRecordings /></SubscriberRoute>} />
               <Route path="/roadmap" element={<RoadmapLanding />} />
               <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
