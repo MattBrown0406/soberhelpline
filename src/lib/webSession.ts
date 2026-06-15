@@ -1,5 +1,7 @@
 const STORAGE_KEY = "sh_web_session";
 const COOKIE_KEY = "app_subscriber";
+const SESSION_COOKIE_KEY = "app_subscriber_session";
+const SESSION_COOKIE_MAX_AGE_SECONDS = 60 * 60; // 1 hour rolling session
 
 export const WEB_SESSION_DURATION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
