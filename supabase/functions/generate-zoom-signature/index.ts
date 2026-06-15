@@ -54,7 +54,8 @@ Deno.serve(async (req) => {
 
   try {
     const authHeader = req.headers.get("Authorization");
-    const { meetingNumber, role = 0 } = await req.json();
+    const body = await req.json();
+    const { meetingNumber, role = 0, guestEmail, guestName } = body ?? {};
     const normalizedRole = Number(role);
 
     if (![0, 1].includes(normalizedRole)) {
@@ -64,7 +65,15 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Check signed-in user's email against the meeting blocklist (if any)
+    const adminClient = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+
+    let emailToCheck: string | undefined;
+    let nameToCheck: string | undefined;
+
+    // Try to resolve a real signed-in user first
     if (authHeader?.startsWith("Bearer ")) {
       const supabase = createClient(
         Deno.env.get("SUPABASE_URL")!,
@@ -82,32 +91,37 @@ Deno.serve(async (req) => {
         });
       }
 
-      const email = claimsData?.claims?.email as string | undefined;
-      if (email) {
-        const adminClient = createClient(
-          Deno.env.get("SUPABASE_URL")!,
-          Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-        );
-        const { data: blocked } = await adminClient
-          .from("meeting_blocklist")
-          .select("id")
-          .ilike("email", email)
-          .maybeSingle();
-
-        if (blocked) {
-          console.warn(`Blocked SDK signature request for ${email}`);
-          return new Response(JSON.stringify({ error: "You are not able to join this meeting. Please contact matt@soberhelpline.com." }), {
-            status: 403,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-      }
+      emailToCheck = claimsData?.claims?.email as string | undefined;
     } else if (normalizedRole === 1) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    // For guests (no auth user), use the email/name they typed on the join page
+    if (!emailToCheck && typeof guestEmail === "string") {
+      emailToCheck = guestEmail.trim();
+    }
+    if (typeof guestName === "string") {
+      nameToCheck = guestName.trim();
+    }
+
+    if (emailToCheck || nameToCheck) {
+      const { data: blockedFlag } = await adminClient.rpc("is_meeting_blocked", {
+        _email: emailToCheck ?? "",
+        _name: nameToCheck ?? "",
+      });
+
+      if (blockedFlag === true) {
+        console.warn(`Blocked SDK signature request: email=${emailToCheck} name=${nameToCheck}`);
+        return new Response(JSON.stringify({ error: "You are not able to join this meeting. Please contact matt@soberhelpline.com." }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+
 
     if (!meetingNumber) {
       return new Response(JSON.stringify({ error: "meetingNumber is required" }), {
