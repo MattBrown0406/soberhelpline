@@ -481,6 +481,21 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="meeting-blocklist">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Ban className="h-5 w-5" />
+                  Meeting Blocklist
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <MeetingBlocklistManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+
           <TabsContent value="consultations">
             <Card>
               <CardHeader>
