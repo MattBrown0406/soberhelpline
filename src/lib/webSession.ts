@@ -62,12 +62,20 @@ export function readWebSession(): WebSession | null {
 }
 
 export function writeWebSession(s: WebSession) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  } catch {
+    // iOS Safari can restrict storage in some app handoff contexts; inline SSO should still unlock immediately.
+  }
   setCookie(COOKIE_KEY, "true", s.expiresAt);
 }
 
 export function clearWebSession() {
-  localStorage.removeItem(STORAGE_KEY);
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Ignore storage cleanup failures.
+  }
   deleteCookie(COOKIE_KEY);
 }
 
