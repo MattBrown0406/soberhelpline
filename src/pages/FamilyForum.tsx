@@ -13,6 +13,7 @@ import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
 import { NewPostDialog } from "@/components/forum/NewPostDialog";
+import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 import { ForumSearch } from "@/components/forum/ForumSearch";
 import { DailyPrompt } from "@/components/forum/DailyPrompt";
 import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
