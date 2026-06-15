@@ -3,9 +3,13 @@ import { useSearchParams } from "react-router-dom";
 import { useWebSession } from "@/hooks/useWebSession";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { writeWebSession, WEB_SESSION_DURATION_MS } from "@/lib/webSession";
-import { supabase } from "@/integrations/supabase/client";
 import AppSubscriberGate from "@/components/AppSubscriberGate";
 import { Loader2 } from "lucide-react";
+
+// The app's Supabase project (different from the website's). The validate-sso-token
+// edge function lives here and is deployed with --no-verify-jwt, so no auth header is needed.
+const VALIDATE_SSO_TOKEN_URL =
+  "https://rjlkbxqxshohgjmomyro.supabase.co/functions/v1/validate-sso-token";
 
 type InlineSsoStatus = "idle" | "validating" | "valid" | "invalid";
 
@@ -22,7 +26,6 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
   const [inlineSsoStatus, setInlineSsoStatus] = useState<InlineSsoStatus>("idle");
   const ssoToken = params.get("sso_token") ?? "";
 
-  // DEBUG: confirm what the route guard sees on every render
   // eslint-disable-next-line no-console
   console.log("[SubscriberRoute] render", {
     url: typeof window !== "undefined" ? window.location.href : "",
@@ -38,23 +41,30 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
 
     (async () => {
       // eslint-disable-next-line no-console
-      console.log("[SubscriberRoute] calling validate-sso-token", { ssoToken });
+      console.log("[SubscriberRoute] calling validate-sso-token", {
+        url: VALIDATE_SSO_TOKEN_URL,
+        ssoToken,
+      });
       setInlineSsoStatus("validating");
       try {
-        const { data, error } = await supabase.functions.invoke("validate-sso-token", {
-          body: { token_id: ssoToken, next: "/family-education" },
+        const res = await fetch(VALIDATE_SSO_TOKEN_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: ssoToken }),
         });
+        const data = await res.json().catch(() => ({}));
         // eslint-disable-next-line no-console
-        console.log("[SubscriberRoute] validate-sso-token response", { data, error });
+        console.log("[SubscriberRoute] validate-sso-token response", { status: res.status, data });
+
         if (cancelled) return;
 
-        if (error || !data?.ok) {
+        if (!res.ok || !data?.valid) {
           setInlineSsoStatus("invalid");
           return;
         }
 
         writeWebSession({
-          accountId: data.account_id,
+          accountId: data.account_id ?? "",
           tier: data.tier ?? null,
           firstName: data.first_name ?? null,
           expiresAt: Date.now() + WEB_SESSION_DURATION_MS,
