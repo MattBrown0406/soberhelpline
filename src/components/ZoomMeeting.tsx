@@ -27,7 +27,9 @@ const ZoomMeeting = ({
   const [status, setStatus] = useState<"idle" | "loading" | "joined" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [participantCount, setParticipantCount] = useState(0);
-  const [guestName, setGuestName] = useState("");
+  const [guestFirstName, setGuestFirstName] = useState("");
+  const [guestLastName, setGuestLastName] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
   const meetingRef = useRef<HTMLDivElement>(null);
   const clientRef = useRef<any>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -74,13 +76,25 @@ const ZoomMeeting = ({
         throw new Error("You must be logged in to join this meeting");
       }
 
+      const guestFullName = `${guestFirstName.trim()} ${guestLastName.trim()}`.trim();
+      const cleanGuestEmail = guestEmail.trim().toLowerCase();
+
       const response = await supabase.functions.invoke("generate-zoom-signature", {
-        body: { meetingNumber, role },
+        body: {
+          meetingNumber,
+          role,
+          ...(!isAuthenticated ? { guestEmail: cleanGuestEmail, guestName: guestFullName } : {}),
+        },
         ...(session ? { headers: { Authorization: `Bearer ${session.access_token}` } } : {}),
       });
 
       if (response.error) {
-        throw new Error(response.error.message || "Failed to get meeting signature");
+        // Surface 403/blocklist errors as a clear message
+        const msg = (response.error as any).message || "Failed to get meeting signature";
+        if (/not able to join/i.test(msg)) {
+          throw new Error("You are not able to join this meeting. Please contact matt@soberhelpline.com.");
+        }
+        throw new Error(msg);
       }
 
       const { signature, sdkKey } = response.data;
@@ -103,9 +117,10 @@ const ZoomMeeting = ({
         console.log("Recording state changed:", payload.state);
       });
 
-      const finalUserName = !isAuthenticated && guestName.trim().length >= 2
-        ? guestName.trim()
+      const finalUserName = !isAuthenticated && guestFullName.length >= 2
+        ? guestFullName
         : (userName.trim() || "Guest");
+      const finalUserEmail = session?.user?.email || (!isAuthenticated ? cleanGuestEmail : "");
 
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setStatus("joined");
@@ -116,7 +131,7 @@ const ZoomMeeting = ({
         meetingNumber,
         password: sanitizedPassword,
         userName: finalUserName,
-        ...(session?.user?.email ? { userEmail: session.user.email } : {}),
+        ...(finalUserEmail ? { userEmail: finalUserEmail } : {}),
       });
     } catch (err: any) {
       console.error("Zoom meeting error:", err);
@@ -182,15 +197,29 @@ const ZoomMeeting = ({
           </p>
 
           {showGuestPrompt && (
-            <div className="w-full max-w-xs space-y-1">
+            <div className="w-full max-w-xs space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <Input
+                  placeholder="First name"
+                  value={guestFirstName}
+                  onChange={(e) => setGuestFirstName(e.target.value)}
+                  maxLength={50}
+                />
+                <Input
+                  placeholder="Last name"
+                  value={guestLastName}
+                  onChange={(e) => setGuestLastName(e.target.value)}
+                  maxLength={50}
+                />
+              </div>
               <Input
-                placeholder="Your first name"
-                value={guestName}
-                onChange={(e) => setGuestName(e.target.value)}
-                className="text-center"
-                maxLength={100}
+                type="email"
+                placeholder="Email address"
+                value={guestEmail}
+                onChange={(e) => setGuestEmail(e.target.value)}
+                maxLength={255}
               />
-              <p className="text-xs text-muted-foreground text-center">No account needed</p>
+              <p className="text-xs text-muted-foreground text-center">No account needed — required to join</p>
             </div>
           )}
 
@@ -198,7 +227,12 @@ const ZoomMeeting = ({
             onClick={joinMeeting}
             size="lg"
             className="gap-2"
-            disabled={showGuestPrompt && guestName.trim().length < 2}
+            disabled={
+              showGuestPrompt &&
+              (guestFirstName.trim().length < 1 ||
+                guestLastName.trim().length < 1 ||
+                !/^\S+@\S+\.\S+$/.test(guestEmail.trim()))
+            }
           >
             <Video className="h-4 w-4" />
             Join Meeting
