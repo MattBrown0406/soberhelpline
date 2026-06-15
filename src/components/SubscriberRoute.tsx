@@ -3,11 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { useWebSession } from "@/hooks/useWebSession";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { writeWebSession, WEB_SESSION_DURATION_MS } from "@/lib/webSession";
+import { supabase } from "@/integrations/supabase/client";
 import AppSubscriberGate from "@/components/AppSubscriberGate";
 import { Loader2 } from "lucide-react";
-
-const PROJECT_ID = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-const FN_URL = `https://${PROJECT_ID}.supabase.co/functions/v1/validate-sso-token`;
 
 type InlineSsoStatus = "idle" | "validating" | "valid" | "invalid";
 
@@ -24,29 +22,33 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
   const [inlineSsoStatus, setInlineSsoStatus] = useState<InlineSsoStatus>("idle");
   const ssoToken = params.get("sso_token") ?? "";
 
+  // DEBUG: confirm what the route guard sees on every render
+  // eslint-disable-next-line no-console
+  console.log("[SubscriberRoute] render", {
+    url: typeof window !== "undefined" ? window.location.href : "",
+    ssoToken,
+    isSubscriber,
+    isMember,
+    inlineSsoStatus,
+  });
+
   useEffect(() => {
     let cancelled = false;
-
-    if (!ssoToken || isSubscriber) {
-      setInlineSsoStatus("idle");
-      return;
-    }
+    if (!ssoToken) return;
 
     (async () => {
+      // eslint-disable-next-line no-console
+      console.log("[SubscriberRoute] calling validate-sso-token", { ssoToken });
       setInlineSsoStatus("validating");
       try {
-        const res = await fetch(FN_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          },
-          body: JSON.stringify({ token_id: ssoToken, next: "/family-education" }),
+        const { data, error } = await supabase.functions.invoke("validate-sso-token", {
+          body: { token_id: ssoToken, next: "/family-education" },
         });
-        const data = await res.json();
+        // eslint-disable-next-line no-console
+        console.log("[SubscriberRoute] validate-sso-token response", { data, error });
         if (cancelled) return;
 
-        if (!res.ok || !data?.ok) {
+        if (error || !data?.ok) {
           setInlineSsoStatus("invalid");
           return;
         }
@@ -59,7 +61,9 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
         });
         removeSsoTokenFromUrl();
         setInlineSsoStatus("valid");
-      } catch {
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error("[SubscriberRoute] validate-sso-token threw", err);
         if (!cancelled) setInlineSsoStatus("invalid");
       }
     })();
@@ -67,10 +71,13 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [ssoToken, isSubscriber]);
+  }, [ssoToken]);
 
   const hasInlineSsoAccess = inlineSsoStatus === "valid";
-  const isCheckingAccess = (!isSubscriber && !hasInlineSsoAccess && loading) || inlineSsoStatus === "validating";
+  const isCheckingAccess =
+    inlineSsoStatus === "validating" ||
+    (!!ssoToken && inlineSsoStatus === "idle") ||
+    (!isSubscriber && !hasInlineSsoAccess && loading);
 
   if (isCheckingAccess) {
     return (
