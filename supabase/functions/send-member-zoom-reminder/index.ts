@@ -203,9 +203,9 @@ serve(async (req: Request) => {
       else failed++;
     }
 
-    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}`);
+    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}, skippedBlocked=${skippedBlocked}`);
 
-    return new Response(JSON.stringify({ success: true, sent, failed }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, skippedBlocked }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
