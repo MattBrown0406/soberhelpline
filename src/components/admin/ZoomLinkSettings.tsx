@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History, MousePointerClick, Users, UserX, Share2, RefreshCw } from "lucide-react";
+import { Loader2, Save, Video, ExternalLink, Printer, MessageSquare, Phone, Mail, UserCheck, CalendarDays, ChevronDown, History, MousePointerClick, Users, UserX, Share2, RefreshCw, ShieldAlert } from "lucide-react";
 
 function getNextMonday(): string {
   const now = new Date();
@@ -38,13 +38,19 @@ interface Registration {
   meeting_date: string;
 }
 
-function RegistrantCard({ r, index }: { r: Registration; index: number }) {
+function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
   return (
-    <div className="border border-border rounded-lg p-3 bg-muted/20 space-y-1">
+    <div className={`border rounded-lg p-3 space-y-1 ${isBlocked ? "border-destructive bg-destructive/10" : "border-border bg-muted/20"}`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary text-xs font-bold">{index + 1}</span>
           <span className="font-medium text-foreground text-sm">{r.name}</span>
+          {isBlocked && (
+            <Badge variant="destructive" className="text-[10px] gap-1">
+              <ShieldAlert className="h-3 w-3" />
+              BLOCKED — DO NOT ADMIT
+            </Badge>
+          )}
         </div>
         <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
           <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
@@ -72,6 +78,7 @@ export function ZoomLinkSettings() {
   const [saving, setSaving] = useState(false);
   const [allRegistrations, setAllRegistrations] = useState<Registration[]>([]);
   const [loadingRegistrations, setLoadingRegistrations] = useState(true);
+  const [blocklist, setBlocklist] = useState<{ emails: Set<string>; lastNames: Set<string> }>({ emails: new Set(), lastNames: new Set() });
 
   useEffect(() => {
     fetchZoomLink();
