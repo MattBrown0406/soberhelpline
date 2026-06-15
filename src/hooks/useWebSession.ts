@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { readWebSession, WEB_SESSION_STORAGE_KEY, hasAppSubscriberCookie } from "@/lib/webSession";
+import { readWebSession, WEB_SESSION_STORAGE_KEY, hasAppSubscriberCookie, hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 export interface UseWebSessionResult {
   isSubscriber: boolean;
