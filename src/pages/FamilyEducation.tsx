@@ -21,6 +21,7 @@ import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import StartHereGuide from "@/components/StartHereGuide";
 import MemberZoomBanner from "@/components/MemberZoomBanner";
+import { useWebSession } from "@/hooks/useWebSession";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -203,6 +204,7 @@ const c = (color: string) => colorMap[color] || colorMap.slate;
 
 export default function FamilyEducation() {
   const navigate = useNavigate();
+  const { isSubscriber: isAppSubscriber } = useWebSession();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
@@ -224,6 +226,12 @@ export default function FamilyEducation() {
 
   useEffect(() => {
     const checkMembership = async () => {
+      if (isAppSubscriber) {
+        setHasMembership(true);
+        setIsLoading(false);
+        return;
+      }
+
       if (!user) {
         setHasMembership(false);
         setIsLoading(false);
@@ -254,7 +262,7 @@ export default function FamilyEducation() {
     };
 
     checkMembership();
-  }, [user]);
+  }, [user, isAppSubscriber]);
 
   if (isLoading) {
     return (

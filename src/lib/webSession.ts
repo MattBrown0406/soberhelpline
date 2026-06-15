@@ -14,7 +14,7 @@ function setCookie(name: string, value: string, expiresAt: number) {
   if (typeof document === "undefined") return;
   const expires = new Date(expiresAt).toUTCString();
   const secure = location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax${secure}`;
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax${secure}`;
 }
 
 function deleteCookie(name: string) {
@@ -22,9 +22,15 @@ function deleteCookie(name: string) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
 }
 
-function hasCookie(name: string): boolean {
-  if (typeof document === "undefined") return false;
-  return document.cookie.split("; ").some((c) => c.startsWith(`${name}=`));
+function getCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const prefix = `${name}=`;
+  const match = document.cookie.split("; ").find((c) => c.startsWith(prefix));
+  return match ? decodeURIComponent(match.slice(prefix.length)) : null;
+}
+
+export function hasAppSubscriberCookie(): boolean {
+  return getCookie(COOKIE_KEY) === "true";
 }
 
 export function readWebSession(): WebSession | null {
@@ -33,7 +39,7 @@ export function readWebSession(): WebSession | null {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       // Cookie fallback (e.g. session cleared but cookie still valid)
-      if (hasCookie(COOKIE_KEY)) {
+      if (hasAppSubscriberCookie()) {
         return {
           accountId: "",
           tier: null,
