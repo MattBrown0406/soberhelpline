@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { readWebSession, WEB_SESSION_STORAGE_KEY, hasAppSubscriberCookie } from "@/lib/webSession";
+import { readWebSession, WEB_SESSION_STORAGE_KEY, hasAppSubscriberCookie, hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 export interface UseWebSessionResult {
   isSubscriber: boolean;
@@ -28,7 +28,7 @@ export function useWebSession(): UseWebSessionResult {
   }, []);
 
   return {
-    isSubscriber: !!session || hasAppSubscriberCookie(),
+    isSubscriber: !!session || hasAppSubscriberCookie() || hasAppSubscriberSessionCookie(),
     tier: session?.tier ?? null,
     firstName: session?.firstName ?? null,
     loading,

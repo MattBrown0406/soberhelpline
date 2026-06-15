@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -176,7 +177,7 @@ export default function FamilyWebinars() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
     return (
       <>
         <Helmet>

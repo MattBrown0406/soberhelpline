@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { format } from "date-fns";
+import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 interface Recording {
   id: string;
@@ -86,7 +87,7 @@ export default function ZoomRecordings() {
 
   useEffect(() => {
     const fetchRecordings = async () => {
-      if (!hasMembership) return;
+      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
       const { data, error } = await supabase
         .from('zoom_call_recordings')
         .select('*')
@@ -108,7 +109,7 @@ export default function ZoomRecordings() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
     return (
       <>
         <SEOHead
