@@ -1556,6 +1556,36 @@ export type Database = {
         }
         Relationships: []
       }
+      meeting_blocklist: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          email: string
+          id: string
+          notes: string | null
+          reason: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          email: string
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          email?: string
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       member_warnings: {
         Row: {
           admin_notes: string | null
@@ -3273,6 +3303,7 @@ export type Database = {
         Returns: boolean
       }
       is_active_family_member: { Args: { _user_id: string }; Returns: boolean }
+      is_email_meeting_blocked: { Args: { _email: string }; Returns: boolean }
       use_promo_code: { Args: { promo_code: string }; Returns: Json }
     }
     Enums: {
