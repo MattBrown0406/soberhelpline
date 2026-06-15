@@ -87,7 +87,7 @@ export default function ZoomRecordings() {
 
   useEffect(() => {
     const fetchRecordings = async () => {
-      if (!hasMembership) return;
+      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
       const { data, error } = await supabase
         .from('zoom_call_recordings')
         .select('*')
