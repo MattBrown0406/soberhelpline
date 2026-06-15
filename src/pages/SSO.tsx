@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import { writeWebSession } from "@/lib/webSession";
+import { writeWebSession, WEB_SESSION_DURATION_MS } from "@/lib/webSession";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const EIGHT_HOURS_MS = 8 * 60 * 60 * 1000;
 const PROJECT_ID = import.meta.env.VITE_SUPABASE_PROJECT_ID;
 const FN_URL = `https://${PROJECT_ID}.supabase.co/functions/v1/validate-sso-token`;
 
@@ -43,7 +42,7 @@ export default function SSO() {
           accountId: data.account_id,
           tier: data.tier ?? null,
           firstName: data.first_name ?? null,
-          expiresAt: Date.now() + EIGHT_HOURS_MS,
+          expiresAt: Date.now() + WEB_SESSION_DURATION_MS,
         });
         navigate(safeNext, { replace: true });
       } catch (e) {
