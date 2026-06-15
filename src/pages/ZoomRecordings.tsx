@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { format } from "date-fns";
+import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 interface Recording {
   id: string;
