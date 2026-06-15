@@ -109,7 +109,7 @@ export default function ZoomRecordings() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
     return (
       <>
         <SEOHead
