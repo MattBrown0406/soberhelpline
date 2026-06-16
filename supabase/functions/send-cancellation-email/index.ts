@@ -1,5 +1,10 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
@@ -16,8 +21,11 @@ serve(async (req: Request) => {
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
-    const accessMessage = accessUntilDate
-      ? `<li>You will continue to have full access to the Family Forum and member resources until <strong>${accessUntilDate}</strong>.</li>`
+    const safeName = escapeHtml(String(name ?? ""));
+    const safeAccessDate = accessUntilDate ? escapeHtml(String(accessUntilDate)) : null;
+
+    const accessMessage = safeAccessDate
+      ? `<li>You will continue to have full access to the Family Forum and member resources until <strong>${safeAccessDate}</strong>.</li>`
       : `<li>Your access to the Family Forum and member resources has been removed.</li>`;
 
     const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
@@ -36,7 +44,7 @@ serve(async (req: Request) => {
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #1a365d; font-size: 24px;">Membership Cancellation Confirmation</h1>
               
-              <p>Dear ${name},</p>
+              <p>Dear ${safeName},</p>
               
               <p>This email is to confirm that your Sober Helpline Family Membership has been successfully cancelled per your request.</p>
               

@@ -264,6 +264,7 @@ export const sitemapChangefreq = new Map([
 export const excludedSitemapRoutes = new Set([
   '/auth',
   '/admin',
+  '/sso',
   '/provider-application',
   '/provider-info',
   '/consultation-provider-dashboard',
@@ -271,4 +272,5 @@ export const excludedSitemapRoutes = new Set([
   '/subscription/success',
   '/subscription/cancel',
   '/survey',
+  '/roadmap/confirmation',
 ]);
