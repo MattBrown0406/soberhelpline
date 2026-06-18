@@ -158,8 +158,20 @@ export default function MemberLearningPaths() {
                 <Card key={path.id} className="overflow-hidden">
                   <CardHeader className="pb-3">
                     <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-${path.color}-100 dark:bg-${path.color}-900/30`}>
-                        <PathIcon className={`w-6 h-6 text-${path.color}-600 dark:text-${path.color}-400`} />
+                      <div className={[
+                        "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
+                        path.id === "just-found-out"          && "bg-amber-100 dark:bg-amber-900/30",
+                        path.id === "considering-intervention" && "bg-blue-100  dark:bg-blue-900/30",
+                        path.id === "supporting-recovery"      && "bg-green-100 dark:bg-green-900/30",
+                        path.id === "taking-care-of-yourself"  && "bg-rose-100  dark:bg-rose-900/30",
+                      ].filter(Boolean).join(" ")}>
+                        <PathIcon className={[
+                          "w-6 h-6",
+                          path.id === "just-found-out"          && "text-amber-600 dark:text-amber-400",
+                          path.id === "considering-intervention" && "text-blue-600  dark:text-blue-400",
+                          path.id === "supporting-recovery"      && "text-green-600 dark:text-green-400",
+                          path.id === "taking-care-of-yourself"  && "text-rose-600  dark:text-rose-400",
+                        ].filter(Boolean).join(" ")} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 mb-1">

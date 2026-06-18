@@ -24,8 +24,8 @@ const startingPath = [
     icon: Heart,
     color: "rose",
     resources: [
-      { name: "Enabling vs Helping Decision Tree", path: "/family-action-plan" },
-      { name: "Enabling Self-Assessment", path: "/enabling-language-translator" },
+      { name: "Enabling vs Helping Decision Tree", path: "/family-education" },
+      { name: "Enabling Self-Assessment", path: "/family-education" },
       { name: "What Changes When Families Change", path: "/what-changes-when-families-change" },
     ]
   },
@@ -37,7 +37,7 @@ const startingPath = [
     color: "blue",
     resources: [
       { name: "Boundaries vs Ultimatums", path: "/boundaries-ultimatums" },
-      { name: "Boundary Setting Worksheet", path: "/family-action-plan" },
+      { name: "Boundary Setting Worksheet", path: "/boundary-setting-worksheet" },
       { name: "Anger & Boundaries", path: "/anger-and-boundaries" },
     ]
   },

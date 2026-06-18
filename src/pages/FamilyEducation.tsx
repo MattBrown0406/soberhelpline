@@ -514,7 +514,7 @@ export default function FamilyEducation() {
                         Explore Guided Tracks
                       </Button>
                     </Link>
-                    <Link to="/family-support-forum">
+                    <Link to="/family-forum">
                       <Button variant="outline" className="w-full gap-2 border-purple-500/40 text-purple-700 hover:bg-purple-50 dark:text-purple-300 dark:hover:bg-purple-950/30">
                         <Users className="h-4 w-4" />
                         Visit Family Forum

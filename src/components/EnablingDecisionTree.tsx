@@ -377,8 +377,7 @@ export default function EnablingDecisionTree() {
                 <Checkbox
                   id="other"
                   checked={stepData.requestOther.length > 0}
-                  onCheckedChange={() => {}}
-                  disabled
+                  onCheckedChange={(checked) => { if (!checked) updateStepData("requestOther", ""); }}
                 />
                 <div className="flex-1">
                   <Input

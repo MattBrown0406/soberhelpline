@@ -276,7 +276,7 @@ export default function BoundaryWorksheet({ user }: Props) {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       checked={otherDifficulty.length > 0}
-                      onCheckedChange={() => {}}
+                      onCheckedChange={(checked) => { if (!checked) setOtherDifficulty(""); }}
                     />
                     <span className="text-sm">Other:</span>
                     <input

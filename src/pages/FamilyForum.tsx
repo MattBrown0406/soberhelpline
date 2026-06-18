@@ -261,8 +261,8 @@ export default function FamilyForum() {
   // Fetch recent posts
   useEffect(() => {
     const fetchRecentPosts = async () => {
-      if (!hasMembership) return;
-      
+      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+
       try {
         const { data: posts, error } = await supabase
           .from('forum_posts')
@@ -299,7 +299,7 @@ export default function FamilyForum() {
   // Fetch topic post counts
   useEffect(() => {
     const fetchTopicStats = async () => {
-      if (!hasMembership) return;
+      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
       try {
         const { data, error } = await supabase
           .from('forum_posts')
@@ -330,8 +330,8 @@ export default function FamilyForum() {
   // Fetch total members count and track online presence
   useEffect(() => {
     const fetchMemberCount = async () => {
-      if (!hasMembership) return;
-      
+      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+
       try {
         const { count, error } = await supabase
           .from('provider_subscriptions')
