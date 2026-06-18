@@ -1589,6 +1589,39 @@ export type Database = {
         }
         Relationships: []
       }
+      meeting_qa_archive: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          is_published: boolean
+          meeting_date: string | null
+          question: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          meeting_date?: string | null
+          question: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          meeting_date?: string | null
+          question?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       member_warnings: {
         Row: {
           admin_notes: string | null
@@ -2617,6 +2650,33 @@ export type Database = {
         }
         Relationships: []
       }
+      worksheet_responses: {
+        Row: {
+          created_at: string
+          id: string
+          responses: Json
+          updated_at: string
+          user_id: string
+          worksheet_key: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          responses?: Json
+          updated_at?: string
+          user_id: string
+          worksheet_key: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          responses?: Json
+          updated_at?: string
+          user_id?: string
+          worksheet_key?: string
+        }
+        Relationships: []
+      }
       zoom_attendance: {
         Row: {
           created_at: string
@@ -2681,7 +2741,10 @@ export type Database = {
           duration_minutes: number | null
           id: string
           is_published: boolean
+          key_timestamps: Json
           recording_date: string
+          show_notes: string | null
+          tags: string[]
           thumbnail_url: string | null
           title: string
           updated_at: string
@@ -2693,7 +2756,10 @@ export type Database = {
           duration_minutes?: number | null
           id?: string
           is_published?: boolean
+          key_timestamps?: Json
           recording_date: string
+          show_notes?: string | null
+          tags?: string[]
           thumbnail_url?: string | null
           title: string
           updated_at?: string
@@ -2705,7 +2771,10 @@ export type Database = {
           duration_minutes?: number | null
           id?: string
           is_published?: boolean
+          key_timestamps?: Json
           recording_date?: string
+          show_notes?: string | null
+          tags?: string[]
           thumbnail_url?: string | null
           title?: string
           updated_at?: string

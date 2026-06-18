@@ -11,7 +11,7 @@ export interface WorksheetPersistence<T> {
   saveStatus: SaveStatus;
 }
 
-export function useWorksheetPersistence<T extends object>(
+export function useWorksheetPersistence<T = any>(
   worksheetKey: string,
   user: User | null | undefined
 ): WorksheetPersistence<T> {
@@ -54,9 +54,9 @@ export function useWorksheetPersistence<T extends object>(
           {
             user_id: user.id,
             worksheet_key: worksheetKey,
-            responses: data,
+            responses: data as any,
             updated_at: new Date().toISOString(),
-          },
+          } as any,
           { onConflict: "user_id,worksheet_key" }
         );
         if (error) {

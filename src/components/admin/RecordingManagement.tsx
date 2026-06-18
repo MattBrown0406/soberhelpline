@@ -87,7 +87,7 @@ export function RecordingManagement() {
     if (error) {
       toast.error("Failed to load recordings");
     } else {
-      setRecordings(data || []);
+      setRecordings((data || []) as unknown as Recording[]);
     }
     setLoading(false);
   };
@@ -160,8 +160,8 @@ export function RecordingManagement() {
     };
 
     const { error } = editingId
-      ? await supabase.from("zoom_call_recordings").update(payload).eq("id", editingId)
-      : await supabase.from("zoom_call_recordings").insert(payload);
+      ? await supabase.from("zoom_call_recordings").update(payload as any).eq("id", editingId)
+      : await supabase.from("zoom_call_recordings").insert(payload as any);
 
     if (error) {
       toast.error(editingId ? "Failed to update recording" : "Failed to add recording");
