@@ -18,21 +18,47 @@ function todayPacificDate(): string {
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
-  try {
-    const adminClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+  const authHeader = req.headers.get('Authorization') ?? '';
 
-    let limit = 25;
-    try {
-      const body = await req.json();
-      if (Number.isFinite(Number(body?.limit))) {
-        limit = Math.min(Math.max(Number(body.limit), 1), 50);
-      }
-    } catch {
-      // Cron calls do not need a body.
+  const adminClient = createClient(
+    Deno.env.get('SUPABASE_URL') ?? '',
+    serviceKey
+  );
+
+  // Accept: service-role key in Authorization header (admin/edge-fn calls)
+  // OR a cron_secret in the request body (pg_cron call, validated against site_settings)
+  let authorized = serviceKey !== '' && authHeader === `Bearer ${serviceKey}`;
+
+  let limit = 25;
+  let cronSecret: string | undefined;
+  try {
+    const body = await req.json();
+    if (Number.isFinite(Number(body?.limit))) {
+      limit = Math.min(Math.max(Number(body.limit), 1), 50);
     }
+    cronSecret = body?.cron_secret;
+  } catch {
+    // no body is fine
+  }
+
+  if (!authorized && cronSecret) {
+    const { data: setting } = await adminClient
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'cron_secret')
+      .maybeSingle();
+    authorized = setting?.value != null && setting.value === cronSecret;
+  }
+
+  if (!authorized) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
+  try {
 
     const today = todayPacificDate();
 

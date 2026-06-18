@@ -273,4 +273,7 @@ export const excludedSitemapRoutes = new Set([
   '/subscription/cancel',
   '/survey',
   '/roadmap/confirmation',
+  '/zoom-recordings',
+  '/member-learning-paths',
+  '/member-qa',
 ]);

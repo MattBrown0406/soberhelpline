@@ -207,6 +207,8 @@ const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
 const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
 const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettingWorksheet"));
 const ZoomRecordings = React.lazy(() => import("./pages/ZoomRecordings"));
+const MemberLearningPaths = React.lazy(() => import("./pages/MemberLearningPaths"));
+const MemberQandA = React.lazy(() => import("./pages/MemberQandA"));
 const RoadmapLanding = React.lazy(() => import("./pages/RoadmapLanding"));
 const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
 const RoadmapConfirmation = React.lazy(() => import("./pages/RoadmapConfirmation"));
@@ -481,6 +483,8 @@ const App = () => (
               <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
               <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
               <Route path="/zoom-recordings" element={<SubscriberRoute><ZoomRecordings /></SubscriberRoute>} />
+              <Route path="/member-learning-paths" element={<SubscriberRoute><MemberLearningPaths /></SubscriberRoute>} />
+              <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
               <Route path="/roadmap" element={<RoadmapLanding />} />
               <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />

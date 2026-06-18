@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign, Ban } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign, Ban, MessageSquare } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -31,6 +31,7 @@ import { ZoomLinkSettings } from "@/components/admin/ZoomLinkSettings";
 import { ConsultationManagement } from "@/components/admin/ConsultationManagement";
 import ConsultationProviderCreator from "@/components/admin/ConsultationProviderCreator";
 import { RecordingManagement } from "@/components/admin/RecordingManagement";
+import { QandAManagement } from "@/components/admin/QandAManagement";
 import { SurveyManagement } from "@/components/admin/SurveyManagement";
 import { AbandonedBookingsManagement } from "@/components/admin/AbandonedBookingsManagement";
 import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagement";
@@ -241,6 +242,10 @@ const Admin = () => {
             <TabsTrigger value="recordings" className="gap-2">
               <Film className="h-4 w-4" />
               Recordings
+            </TabsTrigger>
+            <TabsTrigger value="qa-archive" className="gap-2">
+              <MessageSquare className="h-4 w-4" />
+              Q&amp;A Archive
             </TabsTrigger>
             <TabsTrigger value="surveys" className="gap-2">
               <ClipboardList className="h-4 w-4" />
@@ -562,6 +567,20 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <RecordingManagement />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="qa-archive">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Q&amp;A Archive
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <QandAManagement />
               </CardContent>
             </Card>
           </TabsContent>
