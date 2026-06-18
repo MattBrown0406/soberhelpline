@@ -11,7 +11,7 @@ export interface WorksheetPersistence<T> {
   saveStatus: SaveStatus;
 }
 
-export function useWorksheetPersistence<T extends object>(
+export function useWorksheetPersistence<T = any>(
   worksheetKey: string,
   user: User | null | undefined
 ): WorksheetPersistence<T> {

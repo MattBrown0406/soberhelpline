@@ -1589,6 +1589,39 @@ export type Database = {
         }
         Relationships: []
       }
+      meeting_qa_archive: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          is_published: boolean
+          meeting_date: string | null
+          question: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          meeting_date?: string | null
+          question: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          meeting_date?: string | null
+          question?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       member_warnings: {
         Row: {
           admin_notes: string | null
