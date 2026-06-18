@@ -115,11 +115,11 @@ const StartHereGuide = () => {
 
       {/* Quiz banner */}
       <Link to="/onboarding-quiz" className="block mt-6">
-        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-800/40 hover:border-emerald-600/60 transition-colors">
+        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 border border-emerald-200 dark:border-emerald-800/40 hover:border-emerald-300 dark:hover:border-emerald-600/60 transition-colors">
           <div className="flex items-center gap-3">
-            <Sparkles className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-            <span className="text-sm text-gray-200">
-              Want a more personalized path? <span className="font-semibold text-emerald-400">Take our 2-minute quiz →</span>
+            <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+            <span className="text-sm text-gray-700 dark:text-gray-200">
+              Want a more personalized path? <span className="font-semibold text-emerald-600 dark:text-emerald-400">Take our 2-minute quiz →</span>
             </span>
           </div>
         </div>

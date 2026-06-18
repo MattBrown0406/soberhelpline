@@ -52,6 +52,13 @@ export default function FamilyWebinars() {
   const [userProfile, setUserProfile] = useState<{ first_name: string; last_name: string; email: string } | null>(null);
   const userEmail = user?.email ?? "";
 
+  // Restore registration state from localStorage so it survives page reload
+  useEffect(() => {
+    if (!user) return;
+    const key = `webinar_reg_${user.id}_${upcomingWebinar.id}`;
+    setIsRegistered(localStorage.getItem(key) === "true");
+  }, [user]);
+
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
@@ -123,22 +130,13 @@ export default function FamilyWebinars() {
   const { toast } = useToast();
 
   const handleWebinarRegistration = async () => {
-    if (!userProfile) {
-      toast({
-        title: "Profile not found",
-        description: "Please complete your profile to register.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsRegistering(true);
     try {
       const { error } = await supabase.functions.invoke('add-to-webinar-list', {
         body: {
-          email: userProfile.email,
-          firstName: userProfile.first_name,
-          lastName: userProfile.last_name,
+          email: userProfile?.email ?? userEmail,
+          firstName: userProfile?.first_name ?? "",
+          lastName: userProfile?.last_name ?? "",
           webinarTitle: upcomingWebinar.title,
         },
       });
@@ -152,6 +150,9 @@ export default function FamilyWebinars() {
         });
       } else {
         setIsRegistered(true);
+        if (user) {
+          localStorage.setItem(`webinar_reg_${user.id}_${upcomingWebinar.id}`, "true");
+        }
         toast({
           title: "Registration successful!",
           description: "You'll receive a reminder before the webinar.",
@@ -356,12 +357,10 @@ export default function FamilyWebinars() {
             <Card className="mt-10 bg-muted/30">
               <CardContent className="p-6 text-center">
                 <Calendar className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold text-logo-blue mb-2">Coming Up in 2026</h3>
-                <div className="text-sm text-muted-foreground space-y-1 max-w-md mx-auto">
-                  <p><strong>February:</strong> TBD</p>
-                  <p><strong>March:</strong> TBD</p>
-                  <p><strong>April:</strong> TBD</p>
-                </div>
+                <h3 className="font-semibold text-logo-blue mb-2">Upcoming Schedule</h3>
+                <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                  Webinar topics and dates will be announced here and emailed to all registered members. Register above to get notified.
+                </p>
               </CardContent>
             </Card>
           </div>

@@ -216,6 +216,7 @@ export default function FamilyEducation() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
   const [activeTab, setActiveTab] = useState("tools");
+  const [openPillar, setOpenPillar] = useState<string | undefined>(undefined);
 
 
   useEffect(() => {
@@ -742,16 +743,39 @@ export default function FamilyEducation() {
 
               {/* Six Pillars Tab */}
               <TabsContent value="pillars" className="animate-fade-in">
-                <div className="mb-6">
-                  <p className="text-muted-foreground">
+                <div className="mb-4">
+                  <p className="text-muted-foreground mb-4">
                     Our curriculum is organized into six foundational pillars, each building upon the last to create a comprehensive understanding of addiction and family recovery.
                   </p>
+                  {/* Quick-jump strip */}
+                  <div className="flex flex-wrap gap-2 pb-2 border-b border-border">
+                    {pillars.map((pillar) => (
+                      <button
+                        key={pillar.id}
+                        onClick={() => {
+                          setOpenPillar(openPillar === pillar.id ? undefined : pillar.id);
+                          setTimeout(() => {
+                            document.getElementById(pillar.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                          }, 80);
+                        }}
+                        className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
+                          openPillar === pillar.id
+                            ? "bg-logo-blue text-white border-logo-blue"
+                            : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
+                        }`}
+                      >
+                        <span className="font-bold">{pillar.number}</span>
+                        <span className="hidden sm:inline">{pillar.title}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <Accordion type="single" collapsible className="space-y-4">
+                <Accordion type="single" collapsible value={openPillar} onValueChange={setOpenPillar} className="space-y-4">
                   {pillars.map((pillar) => (
-                    <AccordionItem 
-                      key={pillar.id} 
+                    <AccordionItem
+                      key={pillar.id}
+                      id={pillar.id}
                       value={pillar.id}
                       className={`border-2 ${c(pillar.color).borderHeavy} rounded-lg overflow-hidden ${c(pillar.color).bgGradient}`}
                     >

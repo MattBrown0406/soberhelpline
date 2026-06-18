@@ -206,6 +206,11 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
                 </div>
               </div>
               <div className="flex items-center gap-3">
+                {!isOpen && savedData && (
+                  <span className="hidden sm:inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-700">
+                    In progress
+                  </span>
+                )}
                 <WorksheetSaveStatus status={saveStatus} />
                 <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
               </div>

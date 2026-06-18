@@ -574,6 +574,21 @@ export default function FamilyForum() {
               {/* Forum Topics */}
               <div className="lg:col-span-2 space-y-4">
                 <h2 className="text-xl font-semibold text-logo-blue mb-4">Forum Topics</h2>
+
+                {/* First-post empty state */}
+                {Object.keys(topicStats).length === 0 && !isLoading && (
+                  <div className="rounded-xl border-2 border-dashed border-primary/30 bg-primary/5 p-6 text-center mb-4">
+                    <Users className="h-10 w-10 text-primary/50 mx-auto mb-3" />
+                    <p className="font-semibold text-foreground mb-1">Be the first to post</p>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      This community is just getting started. Introduce yourself or share where you are in your journey — you never know who needs to hear it.
+                    </p>
+                    <Button size="sm" onClick={() => setShowNewPostDialog(true)}>
+                      Start the conversation
+                    </Button>
+                  </div>
+                )}
+
                 <div className="grid gap-4">
                   {forumTopics.map((topic) => (
                     <Link key={topic.id} to={`/family-forum/${topic.id}`}>

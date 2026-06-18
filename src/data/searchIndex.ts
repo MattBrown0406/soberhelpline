@@ -141,6 +141,17 @@ export const searchIndex: SearchEntry[] = [
   { title: "What Is an Intervention?", path: "/blog/what-is-an-intervention", description: "Understanding the intervention process and what to expect.", category: "blog", keywords: ["intervention", "process", "what to expect", "family"] },
   { title: "Navigating Insurance for Addiction Treatment", path: "/blog/navigating-insurance-treatment", description: "How to work with insurance companies for treatment coverage.", category: "blog", keywords: ["insurance", "coverage", "treatment", "paying", "cost"] },
   { title: "Relapse Radar — Early Warning Signs Assessment", path: "/relapse-radar", description: "Assess potential relapse risks for a loved one in recovery before a crisis happens.", category: "tool", keywords: ["relapse", "radar", "warning signs", "risk", "assessment", "recovery"] },
+
+  // ──────────────────────────────────────────────
+  // MEMBER AREA
+  // ──────────────────────────────────────────────
+  { title: "Member Home", path: "/member-home", description: "Your personal dashboard — progress, saved worksheets, and next steps.", category: "community", keywords: ["dashboard", "home", "progress", "member", "overview"] },
+  { title: "Learning Paths", path: "/member-learning-paths", description: "Curated reading sequences organized by where you are in your journey.", category: "community", keywords: ["learning path", "curated", "sequence", "just found out", "intervention", "recovery", "self-care"] },
+  { title: "Q&A Archive", path: "/member-qa", description: "Questions and answers from Monday night meetings — searchable by topic.", category: "community", keywords: ["Q&A", "questions", "answers", "Monday meeting", "archive"] },
+  { title: "Past Meeting Recordings", path: "/zoom-recordings", description: "Recordings from past Monday night family support meetings.", category: "community", keywords: ["recordings", "video", "Monday meeting", "zoom", "past sessions", "replay"] },
+  { title: "Family Discussion Forum", path: "/family-forum", description: "Connect with other families navigating addiction — share, ask, and find support.", category: "community", keywords: ["forum", "community", "discuss", "families", "support group", "connect"] },
+  { title: "Monthly Webinars", path: "/family-webinars", description: "Live sessions with addiction specialists and past webinar recordings.", category: "community", keywords: ["webinar", "live", "specialist", "event", "register"] },
+  { title: "Education Center", path: "/family-education", description: "60+ guides, worksheets, assessments, and interactive tools for families.", category: "community", keywords: ["education", "guides", "worksheets", "pillars", "library", "family", "learn"] },
 ];
 
 export const categoryLabels: Record<string, string> = {
