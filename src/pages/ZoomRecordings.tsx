@@ -140,7 +140,7 @@ export default function ZoomRecordings() {
         .select('*')
         .eq('is_published', true)
         .order('recording_date', { ascending: false });
-      if (!error && data) setRecordings(data);
+      if (!error && data) setRecordings(data as unknown as Recording[]);
     };
     fetchRecordings();
   }, [hasMembership]);

@@ -54,9 +54,9 @@ export function useWorksheetPersistence<T = any>(
           {
             user_id: user.id,
             worksheet_key: worksheetKey,
-            responses: data,
+            responses: data as any,
             updated_at: new Date().toISOString(),
-          },
+          } as any,
           { onConflict: "user_id,worksheet_key" }
         );
         if (error) {
