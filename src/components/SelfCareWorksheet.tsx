@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { User } from "@supabase/supabase-js";
 import { Heart, ChevronDown, Printer, Brain, Shield, Users, Moon, Flame, RefreshCw, CheckCircle2, AlertTriangle, Sparkles } from "lucide-react";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { useWorksheetPersistence } from "@/hooks/useWorksheetPersistence";
+import WorksheetSaveStatus from "@/components/WorksheetSaveStatus";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 
@@ -266,6 +268,31 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
     affirmation: ""
   });
 
+  const { savedData, save, saveStatus } = useWorksheetPersistence(
+    "self_care_worksheet",
+    user
+  );
+
+  useEffect(() => {
+    if (!savedData) return;
+    if (savedData.beliefs)       setBeliefs(savedData.beliefs);
+    if (savedData.nervousSystem) setNervousSystem(savedData.nervousSystem);
+    if (savedData.emotional)     setEmotional(savedData.emotional);
+    if (savedData.boundary)      setBoundary(savedData.boundary);
+    if (savedData.identity)      setIdentity(savedData.identity);
+    if (savedData.mental)        setMental(savedData.mental);
+    if (savedData.relational)    setRelational(savedData.relational);
+    if (savedData.crisis)        setCrisis(savedData.crisis);
+    if (savedData.realLife)      setRealLife(savedData.realLife);
+    if (savedData.check)         setCheck(savedData.check);
+    if (savedData.commitment)    setCommitment(savedData.commitment);
+    if (savedData.currentStep != null) setCurrentStep(savedData.currentStep);
+  }, [savedData]);
+
+  useEffect(() => {
+    save({ beliefs, nervousSystem, emotional, boundary, identity, mental, relational, crisis, realLife, check, commitment, currentStep });
+  }, [beliefs, nervousSystem, emotional, boundary, identity, mental, relational, crisis, realLife, check, commitment, currentStep]);
+
   const handleCheckboxToggle = (value: string, current: string[], setter: (values: string[]) => void) => {
     if (current.includes(value)) {
       setter(current.filter(v => v !== value));
@@ -386,7 +413,10 @@ export default function SelfCareWorksheet({ user }: SelfCareWorksheetProps) {
                   <CardDescription>What Families Need When Loving Someone With Addiction</CardDescription>
                 </div>
               </div>
-              <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <div className="flex items-center gap-3">
+                <WorksheetSaveStatus status={saveStatus} />
+                <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              </div>
             </div>
           </CardHeader>
         </CollapsibleTrigger>

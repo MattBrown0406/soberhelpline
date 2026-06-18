@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,8 @@ import { User } from "@supabase/supabase-js";
 import { Brain, AlertTriangle, DollarSign, MessageSquare, Heart, Users, RotateCcw, Frown, FileText, Printer, ChevronDown, Gavel } from "lucide-react";
 import { Link } from "react-router-dom";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { useWorksheetPersistence } from "@/hooks/useWorksheetPersistence";
+import WorksheetSaveStatus from "@/components/WorksheetSaveStatus";
 
 interface ScenarioWorksheetProps {
   user: User;
@@ -159,6 +161,31 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
   });
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const { savedData, save, saveStatus } = useWorksheetPersistence(
+    "scenario_worksheet",
+    user
+  );
+
+  // Restore state when saved data loads
+  useEffect(() => {
+    if (!savedData) return;
+    if (savedData.scenario1) setScenario1(savedData.scenario1);
+    if (savedData.scenario2) setScenario2(savedData.scenario2);
+    if (savedData.scenario3) setScenario3(savedData.scenario3);
+    if (savedData.scenario4) setScenario4(savedData.scenario4);
+    if (savedData.scenario5) setScenario5(savedData.scenario5);
+    if (savedData.scenario6) setScenario6(savedData.scenario6);
+    if (savedData.scenario7) setScenario7(savedData.scenario7);
+    if (savedData.scenario8) setScenario8(savedData.scenario8);
+    if (savedData.reflection) setReflection(savedData.reflection);
+  }, [savedData]);
+
+  // Auto-save on change (debounced inside hook)
+  useEffect(() => {
+    save({ scenario1, scenario2, scenario3, scenario4, scenario5, scenario6, scenario7, scenario8, reflection });
+  }, [scenario1, scenario2, scenario3, scenario4, scenario5, scenario6, scenario7, scenario8, reflection]);
+
   const handleEmotionToggle = (emotion: string, current: string[], setter: (emotions: string[]) => void) => {
     if (current.includes(emotion)) {
       setter(current.filter(e => e !== emotion));
@@ -189,7 +216,10 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
                   <CardDescription>Scenario-Based Exercises for Family Recovery</CardDescription>
                 </div>
               </div>
-              <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <div className="flex items-center gap-3">
+                <WorksheetSaveStatus status={saveStatus} />
+                <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              </div>
             </div>
           </CardHeader>
         </CollapsibleTrigger>

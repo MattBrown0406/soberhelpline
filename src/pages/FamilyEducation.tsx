@@ -671,7 +671,7 @@ export default function FamilyEducation() {
 
                 {/* Trauma Assessment */}
                 <div id="trauma-assessment" className="scroll-mt-24">
-                  <TraumaHypervigilanceAssessment />
+                  <TraumaHypervigilanceAssessment user={user ?? undefined} />
                 </div>
 
                 {/* User-specific worksheets */}

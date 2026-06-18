@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertTriangle, Brain, Heart, Shield, Moon, Users, RotateCcw, CheckCircle, Info } from "lucide-react";
+import { User } from "@supabase/supabase-js";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { useWorksheetPersistence } from "@/hooks/useWorksheetPersistence";
+import WorksheetSaveStatus from "@/components/WorksheetSaveStatus";
 
 interface Question {
   id: string;
@@ -142,11 +145,30 @@ const getScoreInterpretation = (score: number): ScoreInterpretation => {
   }
 };
 
-export default function TraumaHypervigilanceAssessment() {
+interface TraumaHypervigilanceAssessmentProps {
+  user?: User;
+}
+
+export default function TraumaHypervigilanceAssessment({ user }: TraumaHypervigilanceAssessmentProps) {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [reflections, setReflections] = useState<Record<number, string>>({});
   const [showResults, setShowResults] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
+
+  const { savedData, save, saveStatus } = useWorksheetPersistence(
+    "trauma_hypervigilance_assessment",
+    user
+  );
+
+  useEffect(() => {
+    if (!savedData) return;
+    if (savedData.answers)     setAnswers(savedData.answers);
+    if (savedData.reflections) setReflections(savedData.reflections);
+  }, [savedData]);
+
+  useEffect(() => {
+    save({ answers, reflections });
+  }, [answers, reflections]);
 
   const allQuestions = sections.flatMap((s) => s.questions);
   const totalQuestions = allQuestions.length;
@@ -179,12 +201,15 @@ export default function TraumaHypervigilanceAssessment() {
     <Accordion type="single" collapsible className="mb-10">
       <AccordionItem value="trauma-assessment" className="border-2 border-purple-500 rounded-lg bg-gradient-to-br from-purple-50 to-transparent dark:from-purple-950/20 dark:to-transparent ring-2 ring-purple-500/30">
         <AccordionTrigger className="px-6 py-4 hover:no-underline">
-          <div className="flex items-center gap-3">
-            <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-            <div className="text-left">
-              <h3 className="text-lg font-semibold text-logo-blue">Family Trauma & Hypervigilance Self-Assessment</h3>
-              <p className="text-sm text-muted-foreground font-normal">Understanding How Addiction Impacts Your Nervous System</p>
+          <div className="flex items-center justify-between w-full pr-2">
+            <div className="flex items-center gap-3">
+              <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+              <div className="text-left">
+                <h3 className="text-lg font-semibold text-logo-blue">Family Trauma & Hypervigilance Self-Assessment</h3>
+                <p className="text-sm text-muted-foreground font-normal">Understanding How Addiction Impacts Your Nervous System</p>
+              </div>
             </div>
+            <WorksheetSaveStatus status={saveStatus} />
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-6 pb-6">

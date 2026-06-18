@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +11,8 @@ import { Scale, ChevronDown, Printer, FileText, Heart, AlertTriangle, Shield, Ch
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { useWorksheetPersistence } from "@/hooks/useWorksheetPersistence";
+import WorksheetSaveStatus from "@/components/WorksheetSaveStatus";
 
 interface GuiltResponsibilityWorksheetProps {
   user: User;
@@ -133,6 +135,28 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
     protectingFrom: ""
   });
 
+  const { savedData, save, saveStatus } = useWorksheetPersistence(
+    "guilt_responsibility_worksheet",
+    user
+  );
+
+  useEffect(() => {
+    if (!savedData) return;
+    if (savedData.part1) setPart1(savedData.part1);
+    if (savedData.part2) setPart2(savedData.part2);
+    if (savedData.part3) setPart3(savedData.part3);
+    if (savedData.part4) setPart4(savedData.part4);
+    if (savedData.part5) setPart5(savedData.part5);
+    if (savedData.part6) setPart6(savedData.part6);
+    if (savedData.part7) setPart7(savedData.part7);
+    if (savedData.part8) setPart8(savedData.part8);
+    if (savedData.additionalInsights) setAdditionalInsights(savedData.additionalInsights);
+  }, [savedData]);
+
+  useEffect(() => {
+    save({ part1, part2, part3, part4, part5, part6, part7, part8, additionalInsights });
+  }, [part1, part2, part3, part4, part5, part6, part7, part8, additionalInsights]);
+
   const handleCheckboxToggle = (value: string, current: string[], setter: (values: string[]) => void) => {
     if (current.includes(value)) {
       setter(current.filter(v => v !== value));
@@ -181,7 +205,10 @@ export default function GuiltResponsibilityWorksheet({ user }: GuiltResponsibili
                   <CardDescription>Making Decisions from Integrity, Not Emotional Pressure</CardDescription>
                 </div>
               </div>
-              <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <div className="flex items-center gap-3">
+                <WorksheetSaveStatus status={saveStatus} />
+                <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              </div>
             </div>
           </CardHeader>
         </CollapsibleTrigger>
