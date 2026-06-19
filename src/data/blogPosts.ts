@@ -143,6 +143,7 @@ import stagesOfAddictionFamilyGuideImg from "@/assets/blog-stages-of-addiction-f
 import relapseBrainFamilyGuideImg from "@/assets/blog-relapse-brain-family-guide.jpg";
 import toleranceWithdrawalFamilyGuideImg from "@/assets/blog-tolerance-withdrawal-family-guide.jpg";
 import talkToAdultChildAboutAddictionImg from "@/assets/blog-talk-to-adult-child-about-addiction.jpg";
+import howToTalkToSiblingAboutAddictionImg from "@/assets/blog-how-to-talk-to-sibling-about-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
