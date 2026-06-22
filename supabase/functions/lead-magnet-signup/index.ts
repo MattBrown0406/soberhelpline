@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { enqueueSpineEvent } from "../_shared/spine.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -124,6 +125,12 @@ serve(async (req: Request): Promise<Response> => {
         }
         
         console.log("Member already exists, updated with SMS opt-in");
+        await enqueueSpineEvent("lead_captured", {
+          email: email.toLowerCase().trim(),
+          phone: smsOptIn && phoneNumber ? phoneNumber.trim() : null,
+          name: firstName.trim(),
+          props: { source, sms_opt_in: smsOptIn ?? false },
+        });
         return new Response(
           JSON.stringify({ success: true, message: "Welcome back! Here's your guide." }),
           { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -135,6 +142,13 @@ serve(async (req: Request): Promise<Response> => {
     }
 
     console.log("Successfully added lead:", data.id, smsOptIn ? "(with SMS opt-in)" : "");
+
+    await enqueueSpineEvent("lead_captured", {
+      email: email.toLowerCase().trim(),
+      phone: smsOptIn && phoneNumber ? phoneNumber.trim() : null,
+      name: firstName.trim(),
+      props: { source, sms_opt_in: smsOptIn ?? false },
+    });
 
     return new Response(
       JSON.stringify({ success: true, message: "You're in! Check your email." }),

@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { enqueueSpineEvent } from "../_shared/spine.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -545,6 +546,27 @@ Deno.serve(async (req) => {
       }
     } catch (mcError) {
       console.error('Error adding to Mailchimp:', mcError);
+    }
+
+    // Enqueue session_booked + payment to ecosystem spine hub
+    await enqueueSpineEvent("session_booked", {
+      email: booking.client_email,
+      name:  booking.client_name,
+      phone: booking.client_phone ?? null,
+      props: { booking_id: bookingId, provider: provider?.full_name ?? null },
+    }, adminClient);
+    if (booking.amount_paid > 0) {
+      await enqueueSpineEvent("payment", {
+        email: booking.client_email,
+        name:  booking.client_name,
+        phone: booking.client_phone ?? null,
+        payment: {
+          id:           bookingId,
+          processor:    "paypal",
+          amount_cents: Math.round(Number(booking.amount_paid) * 100),
+          kind:         "consultation",
+        },
+      }, adminClient);
     }
 
     return new Response(JSON.stringify({
