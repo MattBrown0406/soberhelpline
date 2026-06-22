@@ -228,6 +228,13 @@ serve(async (req) => {
   }
 
   try {
+    if (!(await isAdmin(req))) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Forbidden" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) {
       throw new Error("SENDGRID_API_KEY is not configured");

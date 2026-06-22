@@ -250,17 +250,22 @@ export default function FamilySituationAssessment() {
       console.error("Assessment save error:", err);
     }
 
-    // Add to Mailchimp
+    // Add to Mailchimp — only for authenticated users adding their own
+    // email. Anonymous submissions are skipped to prevent arbitrary
+    // address abuse via the function. The assessment record is still saved.
     try {
-      const nameParts = captureData.name.trim().split(" ");
-      await supabase.functions.invoke("add-to-mailchimp", {
-        body: {
-          email: captureData.email.trim(),
-          firstName: nameParts[0] || "",
-          lastName: nameParts.slice(1).join(" ") || "",
-          tags: scored.tags,
-        },
-      });
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email?.toLowerCase().trim() === captureData.email.trim().toLowerCase()) {
+        const nameParts = captureData.name.trim().split(" ");
+        await supabase.functions.invoke("add-to-mailchimp", {
+          body: {
+            email: captureData.email.trim(),
+            firstName: nameParts[0] || "",
+            lastName: nameParts.slice(1).join(" ") || "",
+            tags: scored.tags,
+          },
+        });
+      }
     } catch (err) {
       console.error("Mailchimp error:", err);
     }
