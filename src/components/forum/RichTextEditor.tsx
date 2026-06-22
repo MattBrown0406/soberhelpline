@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import DOMPurify from "dompurify";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Bold, Italic, Link, List } from "lucide-react";
@@ -255,11 +256,35 @@ export function RichTextEditor({
   );
 }
 
-// Parse markdown-like syntax to React elements
+// Escape HTML so user-supplied text cannot inject tags before we apply our
+// own markdown-like transformations.
+function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Only allow http(s) and mailto links — reject javascript:, data:, vbscript:, etc.
+function safeUrl(raw: string): string {
+  const trimmed = raw.trim();
+  try {
+    const url = new URL(trimmed, "https://soberhelpline.com");
+    const allowed = ["http:", "https:", "mailto:"];
+    if (!allowed.includes(url.protocol)) return "#";
+    return url.toString();
+  } catch {
+    return "#";
+  }
+}
+
+// Parse markdown-like syntax to React elements, sanitizing all HTML output.
 export function parseRichText(content: string): React.ReactNode {
   // First handle mentions
   const parts = content.split(/(@\w+)/g);
-  
+
   return parts.map((part, index) => {
     if (part.startsWith('@')) {
       return (
@@ -268,18 +293,33 @@ export function parseRichText(content: string): React.ReactNode {
         </span>
       );
     }
-    
+
+    // Escape raw HTML first — only our own markup is allowed
+    let html = escapeHtml(part);
     // Handle bold
-    part = part.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     // Handle italic
-    part = part.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    // Handle links
-    part = part.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>');
-    // Handle bullet points
-    part = part.replace(/^• /gm, '• ');
-    
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    // Handle links — validate URL protocol before emitting the anchor
+    html = html.replace(/\[(.+?)\]\((.+?)\)/g, (_m, label: string, rawUrl: string) => {
+      const decodedUrl = rawUrl
+        .replace(/&amp;/g, "&")
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">");
+      const url = escapeHtml(safeUrl(decodedUrl));
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${label}</a>`;
+    });
+
+    const clean = DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ['strong', 'em', 'a', 'br'],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
+      ALLOWED_URI_REGEXP: /^(?:https?:|mailto:|#)/i,
+    });
+
     return (
-      <span key={index} dangerouslySetInnerHTML={{ __html: part }} />
+      <span key={index} dangerouslySetInnerHTML={{ __html: clean }} />
     );
   });
 }
