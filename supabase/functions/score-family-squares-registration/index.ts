@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret",
 };
 
 interface AttributionPayload {
@@ -185,6 +185,19 @@ serve(async (req: Request) => {
   }
 
   try {
+    // This function is only safe to call from trusted server-side code
+    // (the public-register-monday-zoom edge function and cron jobs). Require
+    // a shared secret so the public can't manipulate lead scoring or queue
+    // arbitrary follow-up emails for any registration_id.
+    const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
+    const providedSecret = req.headers.get("x-automation-secret");
+    if (!expectedSecret || providedSecret !== expectedSecret) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { registration_id, attribution = {} } = await req.json();
     if (!registration_id) {
       return new Response(JSON.stringify({ error: "registration_id is required" }), {
