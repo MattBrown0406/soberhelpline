@@ -144,12 +144,115 @@ import relapseBrainFamilyGuideImg from "@/assets/blog-relapse-brain-family-guide
 import toleranceWithdrawalFamilyGuideImg from "@/assets/blog-tolerance-withdrawal-family-guide.jpg";
 import talkToAdultChildAboutAddictionImg from "@/assets/blog-talk-to-adult-child-about-addiction.jpg";
 import howToTalkToSiblingAboutAddictionImg from "@/assets/blog-how-to-talk-to-sibling-about-addiction.jpg";
+import howToTalkToExtendedFamilyAboutAddictionImg from "@/assets/blog-how-to-talk-to-extended-family-about-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 128,
+    slug: "how-to-talk-to-extended-family-about-a-loved-ones-addiction",
+    seoTitle: "How to Talk to Extended Family About a Loved One's Addiction",
+    metaDescription: "Wondering who to tell about a loved one's addiction? Learn how to decide what to share with extended family and friends, and how to handle their reactions.",
+    title: "How to Talk to Extended Family and Friends About a Loved One's Addiction",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-06-20",
+    image: howToTalkToExtendedFamilyAboutAddictionImg,
+    keywords: ["how to talk to extended family about a loved one's addiction", "what to tell family about addiction", "talking to relatives about addiction", "addiction privacy family", "addiction boundaries with family", "explaining addiction to friends"],
+    excerpt: "Not everyone needs the full story. Here's how to decide what to share with extended family and friends about a loved one's addiction — and how to handle the reactions when you do.",
+    content: `At some point, someone outside your immediate household is going to ask. A grandparent notices your son hasn't been around. A sibling wonders why you skipped the family barbecue. A close friend asks why you sound exhausted. And you're left standing there, deciding in real time how to talk to extended family about a loved one's addiction — how much to say, to whom, and why it matters either way.
+
+There's no universal script for this. But there is a way to think it through that protects your loved one's dignity, protects your own energy, and still lets the people who genuinely care about you show up in a way that actually helps.
+
+**Who Actually Needs to Know?**
+
+Not everyone needs the full picture. Before you say anything, ask what role this person plays in your daily life and your loved one's recovery. That answer tells you how much detail is actually useful to share.
+
+A few categories worth separating in your mind:
+
+- **Daily support** — people who see your loved one regularly or help you carry the load (a co-parent, a sibling who lives nearby, a close friend who shows up).
+- **Occasional contact** — relatives or friends who will notice absences or changes but aren't in the day-to-day (extended family, distant cousins, casual friends).
+- **No functional need to know** — people whose only role would be reacting, not helping.
+
+The first group usually needs real information so they can support you well. The second group often needs a short, honest explanation. The third group doesn't need details — a boundary is a complete answer.
+
+**How Much Should You Share?**
+
+You can be honest without being exhaustive. "He's going through something hard with substance use, and we're working on it as a family" is a true, complete sentence. It doesn't require a timeline, a diagnosis, or a list of incidents.
+
+A useful rule: share what someone needs in order to interact with your loved one appropriately, and stop there. A grandparent who's hosting Thanksgiving needs to know not to offer a drink. They don't need to know what happened last March.
+
+Your loved one's story belongs to them first. You're allowed to take care of yourself by talking about your own experience — the stress, the decisions, the fear — but the specific facts of their struggle are theirs to share or not share.
+
+**What Do You Say When Someone Asks Directly?**
+
+When someone asks a direct question, answer with a direct, short response rather than a long explanation. Long explanations invite long debates. Short, calm statements close the loop and let you move forward.
+
+A few you can borrow and adjust:
+
+- "Yeah, it's been a tough season. We're taking it seriously and getting help."
+- "I appreciate you asking. I'm not going into detail, but I'll let you know if there's something specific you can do."
+- "We're working with a counselor and have a plan. I'd rather talk about how everyone's doing than relive the details."
+
+Each of these does two things at once: it confirms reality instead of pretending nothing's happening, and it sets the boundary on how far the conversation goes.
+
+**How Do You Handle Unhelpful Advice or Judgment?**
+
+Expect opinions. Some will be useful. Some will be outdated, judgmental, or based on a TV version of addiction rather than the real one. You don't have to argue, and you don't have to absorb the judgment as truth.
+
+When someone says something like "just cut them off" or "they need to want it more," you don't owe them a debate about the brain science of addiction. A short redirect works better:
+
+- "I hear that you're worried. We've got a plan we're following, and I'm not looking for advice right now — just support."
+
+Repeat it as many times as needed, in the same calm tone, until the topic changes. You're not trying to win the conversation. You're trying to protect your own clarity.
+
+**Build a Simple Communication Plan So You're Not Starting From Scratch Every Time**
+
+Decide once, ahead of time, what your standard answer is — then reuse it. This saves enormous energy. Instead of improvising under pressure at a family dinner, you already know what you're going to say.
+
+A simple plan has three parts:
+
+- One sentence that's true and appropriately vague for casual contacts.
+- One paragraph of real information for the few people who are actually helping you.
+- One boundary line you repeat when someone pushes past what you've offered.
+
+It also helps to agree on this with your immediate family so everyone's telling a consistent, calm version of the truth instead of contradicting each other at the next holiday gathering.
+
+**You Get to Decide the Terms of This Conversation**
+
+You don't have to explain everything to everyone. You don't have to defend your loved one, your decisions, or your family to people who are reacting instead of helping. The goal isn't secrecy — it's appropriate honesty that protects everyone's dignity, including your own.
+
+If you want support thinking through what to say to a specific person, or you're looking for steady, judgment-free guidance through the harder conversations, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for this. You may also find these helpful: [setting boundaries with an addicted loved one](/blog/setting-boundaries-addicted-loved-one) and [how to talk to a spouse about addiction](/blog/how-to-talk-to-spouse-about-addiction). For ongoing peer support, [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) are excellent resources. You don't have to figure it out alone.`,
+    faqItems: [
+      {
+        question: "Should I tell extended family that a loved one is in addiction treatment?",
+        answer: "You can share that your loved one is getting help without disclosing specifics. A short, true statement like \"they're getting treatment and we're hopeful\" is usually enough for anyone outside your immediate circle of support."
+      },
+      {
+        question: "How do I tell my parents that my spouse or child has a substance use problem?",
+        answer: "Choose a calm moment, not a crisis moment, and lead with the facts you're comfortable sharing rather than every detail. Let them ask questions, answer what feels appropriate, and be clear about what kind of support would actually help you."
+      },
+      {
+        question: "What if my family doesn't believe addiction is a real problem?",
+        answer: "You don't need their agreement to take it seriously yourself. State what you know to be true, point them toward reputable resources if they're open to learning, and focus your energy on people who are willing to support rather than debate."
+      },
+      {
+        question: "How much should I tell my kids about a family member's addiction?",
+        answer: "Age-appropriate honesty works better than silence. Children usually sense something is wrong even when no one explains it, and a simple, calm explanation reduces fear and confusion more than secrecy does."
+      },
+      {
+        question: "What do I say to friends who ask why I seem stressed or distant?",
+        answer: "You can acknowledge the stress without naming the cause: \"Things have been hard at home, and I'm managing it.\" True friends will respect a boundary, and that response keeps the door open without requiring disclosure."
+      },
+      {
+        question: "Is it okay to ask family members to stop asking about the situation?",
+        answer: "Yes. A clear, kind boundary — \"I'll update you if anything changes, but I'd rather not discuss it every time we talk\" — is a reasonable request, and repeating it consistently is not rude. It's necessary."
+      }
+    ]
+  },
   {
     id: 127,
     slug: "how-to-talk-to-a-sibling-about-addiction",
