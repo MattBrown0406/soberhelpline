@@ -128,7 +128,7 @@ const ForProviders = () => {
                 <Phone className="w-4 h-4" />
                 <span className="hidden sm:inline">(458) 202-7900</span>
               </a>
-              <Link to="/auth">
+              <Link to="/auth?redirect=/provider-application">
                 <Button variant="outline">Provider Login</Button>
               </Link>
             </div>
@@ -152,7 +152,7 @@ const ForProviders = () => {
                 Join our growing network and connect with families who are ready, qualified, and actively seeking your expertise.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/auth">
+                <Link to="/auth?redirect=/provider-application">
                   <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-logo-blue/25">
                     List Your Practice — Free
                     <ArrowRight className="ml-2 w-5 h-5" />
@@ -305,7 +305,7 @@ const ForProviders = () => {
                     <span>Verification badge</span>
                   </li>
                 </ul>
-                <Link to="/auth">
+                <Link to="/auth?redirect=/provider-application">
                   <Button className="w-full" variant="outline">
                     Get Started Free
                   </Button>
@@ -349,7 +349,7 @@ const ForProviders = () => {
                     <span>⭐ Priority customer support</span>
                   </li>
                 </ul>
-                <Link to="/auth">
+                <Link to="/auth?redirect=/provider-application">
                   <Button className="w-full bg-logo-blue hover:bg-logo-blue/90">
                     Start Featured Listing
                   </Button>
@@ -390,7 +390,7 @@ const ForProviders = () => {
               Don't let them pass you by. List your practice on Sober Helpline and start connecting with families who need your expertise.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/auth">
+              <Link to="/auth?redirect=/provider-application">
                 <Button size="lg" className="bg-logo-blue hover:bg-logo-blue/90 text-white px-8 py-6 text-lg rounded-xl">
                   List Your Practice — Free
                   <ArrowRight className="ml-2 w-5 h-5" />

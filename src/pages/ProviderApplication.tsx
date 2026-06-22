@@ -298,7 +298,7 @@ const ProviderApplication = () => {
         description: "Please log in to submit a provider application.",
         variant: "destructive",
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/provider-application");
     }
   }, [user, isLoading, navigate, toast]);
   
@@ -563,7 +563,7 @@ const ProviderApplication = () => {
         description: "Your session has expired. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/provider-application");
       return;
     }
 
@@ -576,7 +576,7 @@ const ProviderApplication = () => {
         description: "Unable to verify your identity. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/provider-application");
       return;
     }
 
@@ -715,7 +715,7 @@ const ProviderApplication = () => {
         description: "Your session has expired. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/provider-application");
       return;
     }
 
@@ -728,7 +728,7 @@ const ProviderApplication = () => {
         description: "Unable to verify your identity. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth");
+      navigate("/auth?redirect=/provider-application");
       return;
     }
 
@@ -922,7 +922,7 @@ const ProviderApplication = () => {
           description: "We couldn't verify your login. Please log in again and resubmit.",
           variant: "destructive",
         });
-        navigate("/auth");
+        navigate("/auth?redirect=/provider-application");
         return null;
       }
 

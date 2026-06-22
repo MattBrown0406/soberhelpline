@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,12 +25,29 @@ const loginSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
+const getSafeRedirectPath = (redirect: string | null) => {
+  if (!redirect) return null;
+
+  // Only allow same-site app paths. This prevents open redirects and avoids
+  // sending users straight back to the auth screen after login.
+  if (!redirect.startsWith("/") || redirect.startsWith("//") || redirect.startsWith("/auth")) {
+    return null;
+  }
+
+  return redirect;
+};
+
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  const redirectPath = useMemo(
+    () => getSafeRedirectPath(searchParams.get("redirect")),
+    [searchParams]
+  );
 
   // Signup form state
   const [signupData, setSignupData] = useState({
@@ -46,6 +63,16 @@ const Auth = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (!redirectPath) return;
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        navigate(redirectPath, { replace: true });
+      }
+    });
+  }, [navigate, redirectPath]);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,9 +110,9 @@ const Auth = () => {
       // Validate input
       signupSchema.parse(signupData);
 
-      const redirectUrl = `${window.location.origin}/`;
+      const redirectUrl = `${window.location.origin}${redirectPath || "/"}`;
 
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: signupData.email,
         password: signupData.password,
         options: {
@@ -114,11 +141,19 @@ const Auth = () => {
           });
         }
       } else {
-        toast({
-          title: "Account created! 🎉",
-          description: "Please check your email inbox (and spam folder) for a verification link. You must verify your email before logging in.",
-          duration: 10000,
-        });
+        if (data.session?.user) {
+          toast({
+            title: "Account created! 🎉",
+            description: "You are signed in and can continue.",
+          });
+          navigate(redirectPath || "/", { replace: true });
+        } else {
+          toast({
+            title: "Account created! 🎉",
+            description: "If a confirmation email is required for this account, check your inbox and spam folder. Otherwise, log in to continue.",
+            duration: 10000,
+          });
+        }
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -177,8 +212,10 @@ const Auth = () => {
           .is('provider_submission_id', null)
           .maybeSingle();
         
-        // Redirect family members to family education page, others to home
-        if (subscription) {
+        // Preserve the page the user was trying to reach, especially provider applications.
+        if (redirectPath) {
+          navigate(redirectPath, { replace: true });
+        } else if (subscription) {
           navigate("/family-education");
         } else {
           navigate("/");
