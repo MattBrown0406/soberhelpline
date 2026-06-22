@@ -1,5 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { crypto as stdCrypto } from "https://deno.land/std@0.190.0/crypto/mod.ts";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -10,6 +12,35 @@ interface MailchimpRequest {
   firstName: string;
   lastName: string;
   tags?: string[];
+}
+
+async function isAuthorized(req: Request, submittedEmail: string): Promise<boolean> {
+  // Trusted server-to-server calls (other edge functions) pass the
+  // service-role key as Authorization.
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  const authHeader = req.headers.get("Authorization") ?? "";
+  if (serviceKey && authHeader === `Bearer ${serviceKey}`) return true;
+
+  if (!authHeader.startsWith("Bearer ")) return false;
+  const token = authHeader.replace("Bearer ", "");
+
+  const adminClient = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    serviceKey,
+  );
+  const { data, error } = await adminClient.auth.getUser(token);
+  if (error || !data?.user) return false;
+
+  // Admins can add any address; everyone else can only add their own.
+  const { data: roleRow } = await adminClient
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", data.user.id)
+    .eq("role", "admin")
+    .maybeSingle();
+  if (roleRow) return true;
+
+  return (data.user.email || "").toLowerCase().trim() === submittedEmail.toLowerCase().trim();
 }
 
 serve(async (req: Request): Promise<Response> => {
@@ -24,6 +55,13 @@ serve(async (req: Request): Promise<Response> => {
       return new Response(
         JSON.stringify({ error: "Email is required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!(await isAuthorized(req, email))) {
+      return new Response(
+        JSON.stringify({ error: "Forbidden" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 

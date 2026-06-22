@@ -1,10 +1,34 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
 };
+
+async function isAdmin(req: Request): Promise<boolean> {
+  const authHeader = req.headers.get("Authorization") ?? "";
+  if (!authHeader.startsWith("Bearer ")) return false;
+  const token = authHeader.replace("Bearer ", "");
+
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  if (serviceKey && authHeader === `Bearer ${serviceKey}`) return true;
+
+  const adminClient = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    serviceKey,
+  );
+  const { data, error } = await adminClient.auth.getUser(token);
+  if (error || !data?.user) return false;
+  const { data: roleRow } = await adminClient
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", data.user.id)
+    .eq("role", "admin")
+    .maybeSingle();
+  return !!roleRow;
+}
 
 const SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send";
 
