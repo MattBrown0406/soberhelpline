@@ -328,7 +328,11 @@ const BookConsultation = () => {
     setLoading(false);
   };
 
-  // Email-based membership check (debounced)
+  // Email-based membership check (debounced).
+  // Only runs for authenticated users checking their OWN email — the
+  // check-membership-email function rejects anonymous lookups and other
+  // people's emails to avoid leaking membership status (sensitive in an
+  // addiction-recovery context).
   const checkMembershipByEmail = useCallback(async (email: string) => {
     if (!email || !email.includes("@")) {
       setIsMemberViaEmail(false);
@@ -337,6 +341,12 @@ const BookConsultation = () => {
     }
     setMemberCheckLoading(true);
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setIsMemberViaEmail(false);
+        setMemberCheckDone(true);
+        return;
+      }
       const { data, error } = await supabase.functions.invoke("check-membership-email", {
         body: { email: email.trim() },
       });

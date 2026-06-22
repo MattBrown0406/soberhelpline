@@ -224,20 +224,13 @@ export default function MondayZoomRegistration() {
           preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
           preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
           preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+          // Lead scoring runs server-side from public-register-monday-zoom now;
+          // pass attribution along instead of calling the score function directly.
+          attribution: !isMemberQuestion ? getRegistrationAttribution() : null,
         },
       });
 
       if (error) throw error;
-
-      const registrationId = registrationResult?.registration?.id;
-      if (registrationId && !isMemberQuestion) {
-        void supabase.functions.invoke("score-family-squares-registration", {
-          body: {
-            registration_id: registrationId,
-            attribution: getRegistrationAttribution(),
-          },
-        });
-      }
 
       trackConversionEvent("monday_zoom_registration_submit", {
         source: isMemberQuestion ? "member_question_form" : "public_registration_form",
