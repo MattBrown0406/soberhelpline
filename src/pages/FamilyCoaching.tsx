@@ -25,8 +25,8 @@ export default function FamilyCoaching() {
   return (
     <>
       <SEOHead
-        title="Family Addiction Coaching for Boundaries & Enabling | Sober Helpline"
-        description="Private family addiction coaching for parents, spouses, and loved ones who need a clear plan for boundaries, enabling, relapse, treatment refusal, and next steps."
+        title="Family Addiction Coaching & Private Sessions | Sober Helpline"
+        description="Book private family addiction coaching for boundaries, enabling, relapse, treatment refusal, and a clear next step. Free Monday Zoom is available when coaching can wait."
         faqItems={[
           {
             question: "What is family addiction coaching?",
@@ -108,14 +108,14 @@ export default function FamilyCoaching() {
               <CardContent className="p-5 md:p-6">
                 <div className="flex flex-col gap-4 text-center md:text-left">
                   <div>
-                    <p className="text-sm font-semibold text-primary mb-1">The simplest path usually works best</p>
-                    <h2 className="text-xl font-bold text-logo-blue">Start with the Monday Zoom, then membership, then private coaching</h2>
-                    <p className="text-sm text-muted-foreground mt-2">Private coaching is here when you need one-on-one help, but for most families it makes sense after the free Zoom and membership.</p>
+                    <p className="text-sm font-semibold text-primary mb-1">Choose the right level of help</p>
+                    <h2 className="text-xl font-bold text-logo-blue">If your family needs a plan now, book private family addiction coaching</h2>
+                    <p className="text-sm text-muted-foreground mt-2">Use coaching for urgent, private, or complex situations. If the question can wait, start with the free Monday Family Squares Zoom and bring one specific family decision.</p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "family_coaching_top_path" })}><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
+                    <Link to="/book-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "family_coaching_top_path" })}><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Private Coaching</Button></Link>
+                    <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "family_coaching_top_path" })}><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
                     <Link to="/family-membership"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Users className="h-4 w-4" />Explore Membership</Button></Link>
-                    <Link to="/book-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "family_coaching_top_path" })}><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Coaching</Button></Link>
                   </div>
                 </div>
               </CardContent>

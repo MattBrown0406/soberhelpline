@@ -53,8 +53,8 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Free, confidential addiction assessment to understand your situation and get personalized guidance for your family\'s next steps.',
   },
   '/family-coaching': {
-    title: 'Family Addiction Coaching for Boundaries & Enabling | Sober Helpline',
-    description: 'Private family addiction coaching for parents, spouses, and loved ones who need a clear plan for boundaries, enabling, relapse, treatment refusal, and next steps.',
+    title: 'Family Addiction Coaching & Private Sessions | Sober Helpline',
+    description: 'Book private family addiction coaching for boundaries, enabling, relapse, treatment refusal, and a clear next step. Free Monday Zoom is available when coaching can wait.',
   },
   '/family-consultation': {
     title: 'Crisis Coaching Session for Families | Sober Helpline',
@@ -285,8 +285,8 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Articles, guides, and insights for families dealing with a loved one\'s addiction. Written by a professional interventionist with 20+ years experience.',
   },
   '/sober-coaches-companions': {
-    title: 'Find a Sober Coach or Sober Companion | Sober Helpline',
-    description: 'Find a sober coach, sober companion, or sober living coach for recovery support. Search by state or ZIP code, or call Sober Helpline for help choosing the next step.',
+    title: 'Find a Sober Coach Near You | Sober Helpline',
+    description: 'Find sober coach services, sober companions, and sober living support by state or ZIP code. If your family is unsure, call or book a consultation before hiring.',
   },
   '/therapists': {
     title: 'Find an Addiction Therapist | Sober Helpline',

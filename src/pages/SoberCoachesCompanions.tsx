@@ -218,8 +218,8 @@ const SoberCoachesCompanions = () => {
   return (
     <>
       <SEOHead
-        title="Find a Sober Coach or Sober Companion | Sober Helpline"
-        description="Find a sober coach, sober companion, or sober living coach for recovery support. Search by state or ZIP code, or call Sober Helpline for help choosing the next step."
+        title="Find a Sober Coach Near You | Sober Helpline"
+        description="Find sober coach services, sober companions, and sober living support by state or ZIP code. If your family is unsure, call or book a consultation before hiring."
         faqItems={[
           {
             question: "How do I find a sober coach?",
@@ -275,7 +275,7 @@ const SoberCoachesCompanions = () => {
             <h1 className="text-xl md:text-4xl font-bold text-foreground">Find a Sober Coach or Sober Companion</h1>
           </div>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-            Search sober coach services by state or ZIP code, then choose the support that matches your loved one's actual recovery stage.
+            Search sober coach services, sober companions, and sober living support by state or ZIP code, then choose the support that matches your loved one's actual recovery stage.
           </p>
         </div>
 
@@ -286,13 +286,13 @@ const SoberCoachesCompanions = () => {
             A sober coach provides practical recovery support outside of treatment: accountability, relapse-prevention planning, help returning home after rehab, sober transportation, and day-to-day structure when early recovery is fragile. A sober companion may provide more intensive in-person support during travel, transitions, or high-risk periods.
           </p>
           <p className="mt-3 text-muted-foreground leading-relaxed">
-            If you are trying to find a sober coach, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help.
+            If you are trying to find a sober coach near you, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
             <a href="tel:4582027900">
               <Button className="gap-2 w-full sm:w-auto">
                 <Phone className="h-4 w-4" />
-                Call Sober Helpline
+                Call before hiring a coach
               </Button>
             </a>
             <Link to="/family-consultation">
@@ -306,7 +306,7 @@ const SoberCoachesCompanions = () => {
         <section className="max-w-4xl mx-auto mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 md:p-6">
           <h2 className="text-xl font-bold text-foreground">What should the family do next?</h2>
           <p className="mt-2 text-muted-foreground leading-relaxed">
-            If your loved one is already willing to stay sober, use the directory below to compare sober coaches, companions, and sober living support. If they are refusing help, relapsing repeatedly, or the family is divided, start with a private consultation first so you do not hire the wrong level of support.
+            If your loved one is already willing to stay sober, use the directory below to compare sober coaches, companions, and sober living support. If they are refusing help, relapsing repeatedly, or the family is divided, book a family consultation first so you do not hire the wrong level of support.
           </p>
           <div className="mt-4 flex flex-col sm:flex-row gap-3">
             <Link to="/intervention-help">

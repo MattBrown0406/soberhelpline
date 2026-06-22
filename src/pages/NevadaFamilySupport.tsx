@@ -63,8 +63,8 @@ export default function NevadaFamilySupport() {
   return (
     <>
       <SEOHead
-        title="Family Support for Addiction in Nevada | Sober Helpline"
-        description="Nevada families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance. Free resources available."
+        title="Nevada Family Addiction Support & Intervention Help | Sober Helpline"
+        description="Nevada families can get addiction support, Monday Zoom help, and guidance from an alcohol interventionist when treatment refusal or crisis is escalating."
         faqItems={faqItems}
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
@@ -80,12 +80,12 @@ export default function NevadaFamilySupport() {
               Nevada Family Addiction Resources
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
-              Family Support for Addiction in Nevada: Resources, Help &amp; Hope
+              Family Addiction Support and Intervention Help in Nevada
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Nevada's addiction crisis hides behind neon lights and entertainment — but behind closed doors,
-              families are suffering. If someone you love is struggling, you don't have to figure this out alone.
-              Free guidance, evidence-based strategies, and real support are available right now.
+              If someone you love is drinking, using drugs, refusing treatment, or cycling through relapse,
+              your next step is not another lecture. Nevada families can start with free Monday support, book family coaching,
+              or speak with an alcohol interventionist when the situation is becoming unsafe.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
@@ -97,7 +97,7 @@ export default function NevadaFamilySupport() {
               <Link to="/family-coaching">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Get Intervention Coaching
+                  Talk With an Interventionist
                 </Button>
               </Link>
             </div>
