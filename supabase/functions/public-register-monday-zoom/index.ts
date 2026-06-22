@@ -26,6 +26,7 @@ serve(async (req: Request) => {
       preferred_contact_date = null,
       preferred_contact_time = null,
       preferred_timezone = null,
+      attribution = null,
     } = payload ?? {};
 
     if (!name || !email || !meeting_date) {
@@ -92,6 +93,27 @@ serve(async (req: Request) => {
     }).catch((emailErr) => {
       console.error("Zoom registration email failed (registration saved):", emailErr);
     });
+
+    // Trigger lead scoring server-side so the score function can stay locked
+    // behind a shared secret (no longer callable directly from the browser).
+    const followupSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
+    if (registration?.id && followupSecret) {
+      void fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/score-family-squares-registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          "x-automation-secret": followupSecret,
+        },
+        body: JSON.stringify({
+          registration_id: registration.id,
+          attribution: attribution ?? {},
+        }),
+      }).catch((scoreErr) => {
+        console.error("Lead scoring trigger failed (registration saved):", scoreErr);
+      });
+    }
+
 
     return new Response(JSON.stringify({ success: true, registration }), {
       status: 200,
