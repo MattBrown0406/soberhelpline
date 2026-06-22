@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 function escapeHtml(text: string): string {
@@ -39,12 +39,47 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
   return true;
 }
 
+async function isAuthorized(req: Request, adminSupabase: ReturnType<typeof createClient>): Promise<boolean> {
+  // Path 1: shared cron/automation secret
+  const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
+  const providedSecret = req.headers.get("x-automation-secret");
+  if (expectedSecret && providedSecret && providedSecret === expectedSecret) {
+    return true;
+  }
+
+  // Path 2: authenticated admin JWT
+  const authHeader = req.headers.get("Authorization") ?? "";
+  if (!authHeader.startsWith("Bearer ")) return false;
+  const token = authHeader.replace("Bearer ", "");
+  const { data, error } = await adminSupabase.auth.getUser(token);
+  if (error || !data?.user) return false;
+  const { data: roleRow } = await adminSupabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", data.user.id)
+    .eq("role", "admin")
+    .maybeSingle();
+  return !!roleRow;
+}
+
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    const adminSupabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+
+    if (!(await isAuthorized(req, adminSupabase))) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Check for optional flag to include all members (not just active)
     let includeAllStatuses = false;
     try {
@@ -53,11 +88,6 @@ serve(async (req: Request) => {
     } catch {
       // No body or invalid JSON — default behavior (active only)
     }
-
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
 
     // Get the current Zoom meeting link
     const { data: settings } = await adminSupabase

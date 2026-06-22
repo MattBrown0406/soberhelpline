@@ -39,7 +39,8 @@ serve(async (req: Request) => {
     const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
     const providedSecret = req.headers.get("x-automation-secret");
 
-    if (expectedSecret && providedSecret !== expectedSecret) {
+    // Fail closed: if the secret env var is unset, reject every caller.
+    if (!expectedSecret || providedSecret !== expectedSecret) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

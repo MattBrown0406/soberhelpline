@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 // Get Zoom OAuth token using server-to-server credentials
@@ -56,6 +56,29 @@ async function getZoomParticipants(meetingId: string, token: string): Promise<an
   return allParticipants;
 }
 
+async function isAuthorized(req: Request, adminSupabase: ReturnType<typeof createClient>): Promise<boolean> {
+  // Path 1: shared cron secret
+  const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
+  const providedSecret = req.headers.get("x-automation-secret");
+  if (expectedSecret && providedSecret && providedSecret === expectedSecret) {
+    return true;
+  }
+
+  // Path 2: authenticated admin JWT
+  const authHeader = req.headers.get("Authorization") ?? "";
+  if (!authHeader.startsWith("Bearer ")) return false;
+  const token = authHeader.replace("Bearer ", "");
+  const { data, error } = await adminSupabase.auth.getUser(token);
+  if (error || !data?.user) return false;
+  const { data: roleRow } = await adminSupabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", data.user.id)
+    .eq("role", "admin")
+    .maybeSingle();
+  return !!roleRow;
+}
+
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -66,6 +89,13 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
+
+    if (!(await isAuthorized(req, adminSupabase))) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     // Get the meeting ID from site_settings
     const { data: settings } = await adminSupabase
@@ -168,12 +198,6 @@ serve(async (req: Request) => {
       const matchedReg = regByEmail.get(pEmail) || regByName.get(pName.toLowerCase());
       const referralRegId: string | null = null;
 
-      if (!matchedReg && pEmail) {
-        // Check if this email matches any registration (could be a family member)
-        // who joined via a shared link
-        // We can't directly tell, but if we have click tracking data, we check later
-      }
-
       const record: any = {
         meeting_date: meetingDate,
         zoom_meeting_id: meetingId,
@@ -199,14 +223,12 @@ serve(async (req: Request) => {
       }
     }
 
-    // Detect family sharing: registrations where multiple people joined
-    // This is detected by looking at click tracking - multiple clicks from same registration
+    // Detect family sharing via click tracking
     const { data: clickGroups } = await adminSupabase
       .from("zoom_link_clicks")
       .select("registration_id, registration_name, registration_email")
       .eq("meeting_date", meetingDate);
 
-    // Count clicks per registration
     const clickCounts = new Map<string, { name: string; count: number }>();
     for (const c of (clickGroups || [])) {
       if (!c.registration_id) continue;
@@ -218,8 +240,7 @@ serve(async (req: Request) => {
       }
     }
 
-    // Registrations with 2+ clicks suggest sharing
-    for (const [regId, info] of clickCounts) {
+    for (const [, info] of clickCounts) {
       if (info.count >= 2) {
         familySharing.push({
           registrant: info.name,
