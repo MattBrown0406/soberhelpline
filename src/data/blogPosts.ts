@@ -250,8 +250,9 @@ If you want steady, judgment-free guidance as you set guilt down and rebuild you
       }
     ]
   },
-
+  {
     id: 128,
+
     slug: "how-to-talk-to-extended-family-about-a-loved-ones-addiction",
     seoTitle: "How to Talk to Extended Family About a Loved One's Addiction",
     metaDescription: "Wondering who to tell about a loved one's addiction? Learn how to decide what to share with extended family and friends, and how to handle their reactions.",
