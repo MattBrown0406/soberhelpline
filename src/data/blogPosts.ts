@@ -147,12 +147,120 @@ import howToTalkToSiblingAboutAddictionImg from "@/assets/blog-how-to-talk-to-si
 import howToTalkToExtendedFamilyAboutAddictionImg from "@/assets/blog-how-to-talk-to-extended-family-about-addiction.jpg";
 import lettingGoGuiltFamiliesAddictionImg from "@/assets/blog-letting-go-guilt-families-addiction.png";
 import socialIsolationFamiliesAddictionImg from "@/assets/blog-social-isolation-families-addiction.jpg";
+import managingAngerResentmentFamiliesAddictionImg from "@/assets/blog-managing-anger-resentment-families-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 131,
+    slug: "managing-anger-resentment-when-loved-one-has-addiction",
+    seoTitle: "Managing Anger and Resentment When a Loved One Has Addiction | Sober Helpline",
+    metaDescription: "Anger and resentment are normal when you love someone with addiction. Learn practical, compassionate ways to manage these feelings and protect your well-being.",
+    title: "How to Manage Anger and Resentment When You Love Someone With Addiction",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-06-25",
+    image: managingAngerResentmentFamiliesAddictionImg,
+    keywords: ["managing anger and resentment when a loved one has addiction", "family anger addiction", "resentment addiction family", "how to stop resenting addicted family member", "anger family recovery", "letting go resentment addiction"],
+    excerpt: "If you are angry at someone you love because of their addiction, you are not a bad person — you are a tired one. Here's how to manage anger and resentment without letting them run your life.",
+    content: `If you are angry at someone you love because of their addiction, you are not a bad person. You are a tired one. Managing anger and resentment when a loved one has addiction is one of the hardest, least-talked-about parts of being a family member, and almost no one warns you it is coming. You expected fear. You expected worry. The bitterness caught you off guard.
+
+The anger is real, and it makes sense. You have watched promises break. You have covered for someone, lent money, lost sleep, and made excuses to people who stopped believing them. Resentment is what builds up when you keep giving and the giving does not seem to change anything. This article is about what to do with those feelings so they do not quietly run your life.
+
+**Why Do I Feel So Angry at My Addicted Loved One?**
+
+You feel angry because something genuinely unfair is happening to you, and your anger is trying to protect you. Anger is a signal, not a character flaw. It usually means a boundary has been crossed, a need has gone unmet, or you have been carrying more than any one person should.
+
+Resentment is anger that has been swallowed instead of spoken. It is what happens when you say "it's fine" while keeping a private ledger of everything that is not fine. Over months and years, that ledger gets heavy. It leaks out as sarcasm, distance, or a short fuse over small things that have nothing to do with the addiction.
+
+A few specific drivers tend to fuel the anger families feel:
+
+- **Broken trust** — repeated promises that did not hold.
+- **Imbalance** — you are doing the work of recovery while they are still in the problem.
+- **Grief in disguise** — you are mourning the person you remember, and grief often arrives dressed as rage.
+- **Helplessness** — you cannot make someone want to change, and powerlessness is infuriating.
+
+Naming the real driver matters. "I'm furious he relapsed" is often closer to "I'm terrified, and exhausted, and I don't know how much more I can take." The anger is the top layer. Underneath it is usually something more tender.
+
+**Is It Normal to Resent Someone You Love?**
+
+Yes. Resenting someone you love is one of the most common experiences for families affected by addiction, and feeling it does not mean you love them any less. Two true things can sit side by side: you would do anything for this person, and you are deeply angry at what their addiction has cost you.
+
+The trouble starts when we believe the resentment makes us bad, so we hide it. Hidden anger does not disappear. It goes underground and comes back as physical tension, trouble sleeping, a tight jaw, or a coldness you did not choose. The goal is not to stop feeling angry. The goal is to handle the anger honestly so it stops handling you.
+
+Give yourself permission to feel it without acting on every impulse it produces. Feeling angry and being cruel are not the same thing. You can be honest about your resentment in your own heart, with a counselor, or in a support group, long before you decide what, if anything, to say to your loved one.
+
+**How Do I Stop Anger From Controlling My Reactions?**
+
+You manage anger in the moment by creating space between the feeling and your response. Anger moves fast, but you can slow it down with a few practiced habits that keep you from saying the thing you cannot unsay.
+
+Try these in real time, when the heat rises:
+
+- **Pause before responding.** A simple "I need a minute" is a complete sentence. Walk away and come back.
+- **Name it to yourself.** "I am angry right now" lowers the intensity more than you would expect.
+- **Breathe long and slow.** A few exhales longer than your inhales signal your body that it is safe to settle.
+- **Wait before sending.** Do not text or call in the spike. Draft it, sleep on it, decide in the morning.
+
+Outside the moment, the most reliable way to lower your daily anger is to move some of the load off your shoulders. Resentment grows in proportion to how much you are carrying. When you stop doing for your loved one what they can do for themselves, you remove the daily fuel that keeps the fire lit. Letting go of a task is not abandonment. It is refusing to take responsibility for a life that is not yours to run.
+
+**What Can I Do With the Anger I'm Already Carrying?**
+
+You release stored anger by giving it somewhere to go besides your body and your closest relationships. Anger that is never expressed does not stay neutral; it hardens. The work is to move it out in healthy ways and on purpose.
+
+Practical outlets that actually help:
+
+- **Move your body.** Walking, lifting, or any honest physical effort burns off the stress chemistry anger runs on.
+- **Write it down.** Put the unfiltered version on paper, where it can be true without being aimed at anyone.
+- **Talk to people who get it.** [Al-Anon](https://al-anon.org), a therapist, or a trusted friend who will not flinch lets you say the hard thing out loud.
+- **Grieve on purpose.** Let yourself mourn the relationship you wanted. Resentment often softens once the grief underneath it is allowed.
+
+Forgiveness, when it comes, is not the starting point and it is not for them. It is something you do for your own freedom, on your own timeline, often long before the other person has earned it. You do not have to force it. You only have to stop feeding the resentment and keep doing your own work, and lighter tends to follow.
+
+**How Do I Protect the Relationship While I'm Still Angry?**
+
+You protect the relationship by being honest about your limits instead of punishing through silence. Resentment damages relationships most when it goes unspoken and comes out sideways. Clear, calm honesty protects connection better than swallowed anger ever could.
+
+When you do speak, lead with your own experience rather than an accusation. "I feel exhausted and I need some things to change" lands differently than "You always ruin everything." One opens a door. The other slams it. You are allowed to be honest about the cost without using it as a weapon.
+
+And remember that protecting the relationship includes protecting yourself inside it. You are not required to be endlessly available to someone who is actively hurting you. Stepping back to steady yourself is not the end of love. Often it is what keeps love possible at all.
+
+**You Are Allowed to Take Care of Yourself**
+
+The anger you feel is evidence that you have been showing up, again and again, for someone you love. It is not proof that something is wrong with you. It is proof that you are human and that you have been carrying a heavy thing for a long time.
+
+You do not have to resolve all of it today. Pick one small step — a walk, a journal entry, one honest conversation, one task you hand back — and start there. Managing anger and resentment when a loved one has addiction is not a single decision; it is a practice you return to. Be as patient with yourself as you have been with everyone else.
+
+If the anger and resentment feel like too much to manage by yourself, that is exactly what ongoing support is for. SoberHelpline.com offers family education, one-on-one [family coaching](/family-coaching), and a community of people who understand what you are living through. You may also find these helpful: [letting go of guilt when a loved one has an addiction](/blog/letting-go-of-guilt-when-loved-one-has-addiction) and our guide on [setting healthy boundaries](/boundary-setting-worksheet). Explore our free resources, join a Monday night family support call, or book a coaching session to get steady, practical guidance for your situation. You have spent enough time taking care of everyone else — let us help you take care of you.`,
+    faqItems: [
+      {
+        question: "Is it normal to feel angry at someone with an addiction?",
+        answer: "Yes. Anger and resentment are among the most common feelings families experience. They usually signal that a boundary has been crossed or that you have been carrying too much for too long. Feeling angry does not mean you love the person less or that you are doing anything wrong."
+      },
+      {
+        question: "How do I stop resenting my addicted family member?",
+        answer: "You reduce resentment by giving the anger a healthy outlet and by setting limits so you stop carrying what is not yours to carry. Talk to a counselor or support group, move your body, and hand back tasks your loved one can do themselves. Resentment shrinks when the daily load gets lighter."
+      },
+      {
+        question: "Should I tell my loved one I'm angry with them?",
+        answer: "Often, yes, if you can do it calmly. Lead with your own experience using 'I feel' statements rather than accusations. Honest, non-attacking conversation protects the relationship better than silent resentment, which tends to leak out sideways as coldness or sarcasm."
+      },
+      {
+        question: "Why do I feel angry even when my loved one is doing better?",
+        answer: "Anger can surface during recovery because you finally have room to feel everything you suppressed during the crisis. The backlog of grief, exhaustion, and unmet needs does not vanish just because things improved. This is normal, and it is a sign you need your own support and care."
+      },
+      {
+        question: "Where can families get help for the anger addiction causes?",
+        answer: "Support groups like Al-Anon and Nar-Anon, individual therapy, and family coaching all give you a safe place to process anger without harming your relationships. SoberHelpline.com offers education, coaching, and a family support community designed specifically for people navigating these feelings."
+      },
+      {
+        question: "How is resentment different from anger?",
+        answer: "Anger is the immediate signal that something is wrong; resentment is anger that has been swallowed and stored over time. Resentment tends to leak out as sarcasm, distance, or a short fuse over unrelated things. Naming and expressing anger honestly is what keeps it from hardening into resentment."
+      }
+    ]
+  },
   {
     id: 130,
     slug: "social-isolation-when-loved-one-has-addiction",
