@@ -147,6 +147,7 @@ import howToTalkToSiblingAboutAddictionImg from "@/assets/blog-how-to-talk-to-si
 import howToTalkToExtendedFamilyAboutAddictionImg from "@/assets/blog-how-to-talk-to-extended-family-about-addiction.jpg";
 import lettingGoGuiltFamiliesAddictionImg from "@/assets/blog-letting-go-guilt-families-addiction.png";
 import socialIsolationFamiliesAddictionImg from "@/assets/blog-social-isolation-families-addiction.jpg";
+import managingAngerResentmentFamiliesAddictionImg from "@/assets/blog-managing-anger-resentment-families-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
