@@ -148,12 +148,128 @@ import howToTalkToExtendedFamilyAboutAddictionImg from "@/assets/blog-how-to-tal
 import lettingGoGuiltFamiliesAddictionImg from "@/assets/blog-letting-go-guilt-families-addiction.png";
 import socialIsolationFamiliesAddictionImg from "@/assets/blog-social-isolation-families-addiction.jpg";
 import managingAngerResentmentFamiliesAddictionImg from "@/assets/blog-managing-anger-resentment-families-addiction.jpg";
+import whatIsRecoveryCoachFamilyGuideImg from "@/assets/blog-what-is-a-recovery-coach-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 132,
+    slug: "what-is-a-recovery-coach-family-guide",
+    seoTitle: "What Is a Recovery Coach? A Family Guide to Peer Recovery Support | Sober Helpline",
+    metaDescription: "What is a recovery coach? Learn how peer recovery support helps your loved one stay on track after treatment — and gives your family real, practical relief.",
+    title: "What Is a Recovery Coach? How Peer Recovery Support Can Help Your Loved One and Your Family",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-06-26",
+    image: whatIsRecoveryCoachFamilyGuideImg,
+    keywords: ["what is a recovery coach", "recovery coach", "peer recovery support specialist", "peer recovery support", "recovery coach vs sponsor", "recovery coach for family", "aftercare recovery coach"],
+    excerpt: "After treatment ends, the structure disappears overnight. A recovery coach helps fill that gap — and gives your family permission to step out of the enforcer role.",
+    content: `If your loved one has finished treatment, you may have noticed a quiet but real problem: the structure is gone. The daily groups, the counselors, the schedule that held everything together — all of it ends the day they walk out the door. So what is a recovery coach, and could one fill that gap? In simple terms, a recovery coach is a trained guide, usually someone in long-term recovery themselves, who walks alongside your loved one day to day and helps them turn good intentions into consistent action.
+
+This matters because the months right after treatment are often the most fragile. Your loved one is ready to do the work — but readiness and a plan are two different things. A recovery coach helps bridge that gap. And here is the part families tend to miss: a good coach takes pressure off you, too. You get to go back to being a parent, a spouse, or a sibling instead of acting as the unofficial case manager.
+
+**What Is a Recovery Coach, Exactly?**
+
+A recovery coach is a non-clinical support person who helps someone build and maintain a life in recovery. They are not therapists, sponsors, or doctors. Instead, they focus on the practical, day-to-day work of staying on track — and they do it as a partner, not an authority.
+
+Most recovery coaches have lived experience with addiction and recovery, which gives them credibility your loved one can feel immediately. They have been where your loved one is. That shared experience often opens doors a clinical relationship cannot.
+
+A recovery coach typically helps with things like:
+
+- Setting realistic weekly goals and following up on them
+- Finding and getting to support meetings, appointments, or sober activities
+- Building structure into days that used to revolve around using
+- Talking through cravings, triggers, and rough moments in real time
+- Connecting your loved one to resources — housing, work, treatment, healthcare
+
+The role is sometimes called a "peer recovery support specialist" or "recovery support specialist." The titles vary by state and program, but the heart of the work is the same: consistent, judgment-free support from someone who gets it.
+
+**How Is a Recovery Coach Different From a Therapist or Sponsor?**
+
+A recovery coach is not a replacement for therapy or a 12-step sponsor — they fill a different space. A therapist treats underlying mental health conditions and works on the "why." A sponsor guides someone through a specific program of recovery, usually for free and from a particular tradition. A recovery coach focuses on the "how" and the "what now" of daily life, and works across any pathway your loved one chooses.
+
+Here is a simple way to hold the difference:
+
+- A therapist asks, "What is driving this, and how do we heal it?"
+- A sponsor asks, "Are you working the steps?"
+- A recovery coach asks, "What does this week look like, and what is one thing you'll actually do?"
+
+Recovery coaches are also flexible about approach. Whether your loved one leans on [AA](https://www.aa.org), [NA](https://www.na.org), SMART Recovery, medication-assisted treatment, faith, or some combination, a good coach meets them where they are instead of pushing one model. That flexibility is a real strength for families who don't want to fight about which path is "right."
+
+**How Does a Recovery Coach Help Your Family?**
+
+A recovery coach helps your family by giving the support role to a trained outsider — which lets you step out of a job you were never meant to do. When a coach is handling check-ins, accountability, and logistics, you are no longer the one nagging about meetings or scanning for signs of relapse every day. That single shift can change the whole emotional climate of a home.
+
+Families often carry an exhausting double duty: love the person and police the recovery. Those two roles work against each other. The more you monitor, the more your loved one feels watched, and the more distance grows between you. A recovery coach absorbs much of the accountability work so you can return to the relationship itself.
+
+Specific ways a recovery coach eases the load on families:
+
+- They take over the day-to-day accountability so you don't have to be the enforcer.
+- They give you a knowledgeable point of contact when you're worried or unsure.
+- They model healthy boundaries — and can help you hold yours.
+- They reduce the isolation your loved one feels, which lowers relapse risk for everyone.
+
+This is helpful as a second set of hands — not a replacement for your judgment or your relationship. You still matter enormously. You just don't have to carry the whole thing alone.
+
+**When Should a Family Consider a Recovery Coach?**
+
+A recovery coach is worth considering any time your loved one has the willingness to recover but lacks the structure to sustain it. The classic moment is the transition out of treatment, when supports drop away suddenly. But coaches also help at other turning points.
+
+Consider bringing in a recovery coach when:
+
+1. Your loved one is leaving a treatment program and re-entering ordinary life.
+2. They are willing to get help but keep stalling on the practical steps.
+3. You've become the default accountability person and it's straining the relationship.
+4. They've had a relapse and need help rebuilding momentum without shame.
+5. They are early in recovery and the days feel unstructured or empty.
+
+Notice the common thread: this works best when your loved one is at least somewhat open to support. Recovery coaching is not crisis intervention, and it is not a tool for forcing someone who flatly refuses help. If you are facing hard resistance or a true emergency, that calls for a different conversation — and we can help you think that through.
+
+**How Do You Find a Good Recovery Coach?**
+
+You can find a good recovery coach through treatment centers, recovery community organizations, peer support networks, and reputable online directories. The key is to look past the title and ask about training, experience, and fit. Not all coaching is equal, and your loved one's comfort with the person matters as much as their credentials.
+
+Questions worth asking before you commit:
+
+- What training or certification do you have? (Many states certify peer recovery specialists.)
+- How long have you been doing this work, and what's your own recovery background?
+- How often will you meet or check in, and how — in person, by phone, by text?
+- Do you work with families, or only the individual?
+- What's your approach when someone slips or relapses?
+
+Trust your read on the relationship. The best credentials in the world won't help if your loved one doesn't feel safe being honest with the person. A short trial period is reasonable. The right coach should feel like a steady ally, not another obligation to dread.
+
+**A Steady Hand for the Long Walk**
+
+Recovery is not won in treatment — it's lived out in the ordinary weeks that follow. A recovery coach gives your loved one a steady hand for that walk, and gives you permission to be family again instead of the full-time supervisor. That trade is worth a lot.
+
+You don't have to figure all of this out alone, and you don't have to get it perfect. Start with one step: a conversation, a question, a name. If you want help thinking through [aftercare planning after treatment](/aftercare-checklist), [setting healthy boundaries with a loved one](/boundary-setting-worksheet), or whether [family coaching sessions](/family-coaching) might be the right next move for your household, SoberHelpline.com is here for that. Stay decided about supporting recovery, make the next move small, and let the right people help carry the weight with you.`,
+    faqItems: [
+      {
+        question: "What does a recovery coach do?",
+        answer: "A recovery coach helps someone build and maintain daily life in recovery. They set goals, provide accountability, connect the person to resources and meetings, and offer real-time support through cravings and rough patches. They are a practical guide, not a therapist or doctor."
+      },
+      {
+        question: "How much does a recovery coach cost?",
+        answer: "Costs vary widely. Some recovery community organizations and treatment programs offer peer recovery support at low or no cost, while private recovery coaches may charge an hourly or monthly rate. Ask about pricing up front, and check whether your treatment center or local recovery organization offers free peer support."
+      },
+      {
+        question: "Is a recovery coach the same as a sponsor?",
+        answer: "No. A sponsor guides someone through a specific 12-step program, usually for free and within that tradition. A recovery coach works across any recovery pathway, focuses on practical day-to-day life, and is often a trained or certified role. Many people in recovery benefit from having both."
+      },
+      {
+        question: "Can a recovery coach help the family, not just the person in recovery?",
+        answer: "Yes. Many recovery coaches work with families directly, helping you set healthy boundaries, understand the recovery process, and step out of the exhausting role of enforcer. Even when the coach focuses on your loved one, the relief to the family is real and immediate."
+      },
+      {
+        question: "Do you need a recovery coach if your loved one is in therapy?",
+        answer: "Not necessarily, but they often work well together. Therapy addresses the underlying causes and mental health. A recovery coach handles the practical, daily structure of staying on track. They serve different purposes, and many people in early recovery use both."
+      }
+    ]
+  },
   {
     id: 131,
     slug: "managing-anger-resentment-when-loved-one-has-addiction",
