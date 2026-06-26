@@ -568,24 +568,22 @@ const ProviderApplication = () => {
     
     if (!authenticatedUserId) {
       toast({
-        title: "Authentication required",
-        description: "Your session has expired. Please log in again.",
+        title: "Create an account to save a draft",
+        description: "Add a password in the form below and submit, or log in, to save your progress.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
       return;
     }
 
     // Verify user
     const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
-    
+
     if (userError || !currentUser) {
       toast({
-        title: "Authentication required",
-        description: "Unable to verify your identity. Please log in again.",
+        title: "Create an account to save a draft",
+        description: "Add a password in the form below and submit, or log in, to save your progress.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
       return;
     }
 
