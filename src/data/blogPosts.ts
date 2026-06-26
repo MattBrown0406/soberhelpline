@@ -148,6 +148,7 @@ import howToTalkToExtendedFamilyAboutAddictionImg from "@/assets/blog-how-to-tal
 import lettingGoGuiltFamiliesAddictionImg from "@/assets/blog-letting-go-guilt-families-addiction.png";
 import socialIsolationFamiliesAddictionImg from "@/assets/blog-social-isolation-families-addiction.jpg";
 import managingAngerResentmentFamiliesAddictionImg from "@/assets/blog-managing-anger-resentment-families-addiction.jpg";
+import whatIsRecoveryCoachFamilyGuideImg from "@/assets/blog-what-is-a-recovery-coach-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
