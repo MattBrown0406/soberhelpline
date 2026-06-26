@@ -140,6 +140,8 @@ const providerFormSchema = z.object({
   zipCode: z.string().regex(/^\d{5}$/, "Valid 5-digit zip code is required"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
+  password: z.string().optional(),
+  confirmPassword: z.string().optional(),
   website: z.string().optional(),
   yearStarted: z.string().regex(/^\d{4}$/, "Please enter a valid 4-digit year").refine((val) => {
     const year = parseInt(val);
@@ -248,6 +250,16 @@ const providerFormSchema = z.object({
 }, {
   message: "Please enter a valid website URL",
   path: ["website"],
+}).refine((data) => {
+  // If a password is provided (new account signup), confirmPassword must match
+  if (data.password && data.password.length > 0) {
+    if (data.password.length < 8) return false;
+    return data.password === data.confirmPassword;
+  }
+  return true;
+}, {
+  message: "Passwords must match and be at least 8 characters",
+  path: ["confirmPassword"],
 });
 
 type ProviderFormValues = z.infer<typeof providerFormSchema>;
@@ -290,17 +302,10 @@ const ProviderApplication = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Redirect to auth page if not logged in
-  useEffect(() => {
-    if (!isLoading && !user) {
-      toast({
-        title: "Authentication required",
-        description: "Please log in to submit a provider application.",
-        variant: "destructive",
-      });
-      navigate("/auth?redirect=/provider-application");
-    }
-  }, [user, isLoading, navigate, toast]);
+  // Note: This page is intentionally public so prospective providers can complete the application
+  // without logging in first. Account creation (email + password) is collected within the form
+  // for new users; existing users remain logged in and skip the password fields.
+
   
   const form = useForm<ProviderFormValues>({
     resolver: zodResolver(providerFormSchema),
@@ -312,6 +317,8 @@ const ProviderApplication = () => {
       zipCode: "",
       phoneNumber: "",
       email: "",
+      password: "",
+      confirmPassword: "",
       website: "",
       yearStarted: "",
       interventionModalities: [],
@@ -466,6 +473,27 @@ const ProviderApplication = () => {
     loadExistingSubmission();
   }, [user, form, forceNewApplication]);
 
+  // Restore any pending application captured before email confirmation
+  useEffect(() => {
+    if (!user) return;
+    try {
+      const raw = localStorage.getItem("provider_application_pending");
+      if (!raw) return;
+      const pending = JSON.parse(raw);
+      // Strip the password fields before restoring
+      delete pending.password;
+      delete pending.confirmPassword;
+      form.reset({ ...form.getValues(), ...pending });
+      localStorage.removeItem("provider_application_pending");
+      toast({
+        title: "Welcome back!",
+        description: "We restored your application. Review and submit when ready.",
+      });
+    } catch {
+      // ignore
+    }
+  }, [user, form, toast]);
+
   const startNewApplication = () => {
     setForceNewApplication(true);
     setExistingSubmission(null);
@@ -478,6 +506,8 @@ const ProviderApplication = () => {
       zipCode: "",
       phoneNumber: "",
       email: "",
+      password: "",
+      confirmPassword: "",
       website: "",
       yearStarted: "",
       interventionModalities: [],
@@ -559,24 +589,22 @@ const ProviderApplication = () => {
     
     if (!authenticatedUserId) {
       toast({
-        title: "Authentication required",
-        description: "Your session has expired. Please log in again.",
+        title: "Create an account to save a draft",
+        description: "Add a password in the form below and submit, or log in, to save your progress.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
       return;
     }
 
     // Verify user
     const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
-    
+
     if (userError || !currentUser) {
       toast({
-        title: "Authentication required",
-        description: "Unable to verify your identity. Please log in again.",
+        title: "Create an account to save a draft",
+        description: "Add a password in the form below and submit, or log in, to save your progress.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
       return;
     }
 
@@ -709,26 +737,82 @@ const ProviderApplication = () => {
       }
     }
     
+    // If no session exists, attempt to create an account inline using the
+    // email + password collected in the form.
     if (!authenticatedUserId) {
-      toast({
-        title: "Authentication required",
-        description: "Your session has expired. Please log in again.",
-        variant: "destructive",
+      if (!data.password || data.password.length < 8) {
+        toast({
+          title: "Password required",
+          description: "Please create a password (8+ characters) to submit your application.",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (data.password !== data.confirmPassword) {
+        toast({
+          title: "Passwords don't match",
+          description: "Please confirm your password.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/provider-application`,
+          data: { first_name: data.providerName },
+        },
       });
-      navigate("/auth?redirect=/provider-application");
-      return;
+
+      if (signUpError) {
+        // If account already exists, prompt them to log in.
+        const msg = signUpError.message || "";
+        if (/registered|already/i.test(msg)) {
+          toast({
+            title: "Email already registered",
+            description: "An account with this email exists. Please log in to continue.",
+            variant: "destructive",
+          });
+          navigate(`/auth?redirect=/provider-application&email=${encodeURIComponent(data.email)}`);
+          return;
+        }
+        toast({
+          title: "Account creation failed",
+          description: msg || "Could not create your account. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (signUpData?.session?.user) {
+        authenticatedUserId = signUpData.session.user.id;
+      } else {
+        // Email confirmation is required; cache form values so the user can resume after confirming.
+        try {
+          localStorage.setItem("provider_application_pending", JSON.stringify(data));
+        } catch {
+          // ignore storage errors
+        }
+        toast({
+          title: "Confirm your email to finish",
+          description: "We sent a confirmation link to your email. Click it, then return here to finish submitting your application.",
+        });
+        return;
+      }
     }
 
     // Double-check with getUser to ensure token is valid
     const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
-    
+
     if (userError || !currentUser || currentUser.id !== authenticatedUserId) {
       toast({
         title: "Authentication required",
         description: "Unable to verify your identity. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
+      navigate(`/auth?redirect=/provider-application&email=${encodeURIComponent(data.email)}`);
       return;
     }
 
@@ -1020,10 +1104,6 @@ const ProviderApplication = () => {
         <div className="flex items-center justify-center min-h-screen">
           <p className="text-lg text-muted-foreground">Loading...</p>
         </div>
-      ) : !user ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <p className="text-lg text-muted-foreground">Redirecting to login...</p>
-        </div>
       ) : (
         <>
           <div className="container mx-auto px-4 py-8">
@@ -1290,6 +1370,50 @@ const ProviderApplication = () => {
                   )}
                 />
               </div>
+
+              {!user && (
+                <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-4">
+                  <div>
+                    <h3 className="font-semibold">Create your account</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We'll use the email above plus the password below to create your provider account so you can edit
+                      or update your listing later. Already have an account?{" "}
+                      <Link to="/auth?redirect=/provider-application" className="text-primary underline">
+                        Log in
+                      </Link>
+                      .
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" autoComplete="new-password" placeholder="At least 8 characters" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" autoComplete="new-password" placeholder="Re-enter password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              )}
 
               <FormField
                 control={form.control}
