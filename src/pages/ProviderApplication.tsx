@@ -250,6 +250,16 @@ const providerFormSchema = z.object({
 }, {
   message: "Please enter a valid website URL",
   path: ["website"],
+}).refine((data) => {
+  // If a password is provided (new account signup), confirmPassword must match
+  if (data.password && data.password.length > 0) {
+    if (data.password.length < 8) return false;
+    return data.password === data.confirmPassword;
+  }
+  return true;
+}, {
+  message: "Passwords must match and be at least 8 characters",
+  path: ["confirmPassword"],
 });
 
 type ProviderFormValues = z.infer<typeof providerFormSchema>;
