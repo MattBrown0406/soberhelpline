@@ -317,6 +317,8 @@ const ProviderApplication = () => {
       zipCode: "",
       phoneNumber: "",
       email: "",
+      password: "",
+      confirmPassword: "",
       website: "",
       yearStarted: "",
       interventionModalities: [],
