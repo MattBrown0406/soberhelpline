@@ -473,6 +473,27 @@ const ProviderApplication = () => {
     loadExistingSubmission();
   }, [user, form, forceNewApplication]);
 
+  // Restore any pending application captured before email confirmation
+  useEffect(() => {
+    if (!user) return;
+    try {
+      const raw = localStorage.getItem("provider_application_pending");
+      if (!raw) return;
+      const pending = JSON.parse(raw);
+      // Strip the password fields before restoring
+      delete pending.password;
+      delete pending.confirmPassword;
+      form.reset({ ...form.getValues(), ...pending });
+      localStorage.removeItem("provider_application_pending");
+      toast({
+        title: "Welcome back!",
+        description: "We restored your application. Review and submit when ready.",
+      });
+    } catch {
+      // ignore
+    }
+  }, [user, form, toast]);
+
   const startNewApplication = () => {
     setForceNewApplication(true);
     setExistingSubmission(null);
