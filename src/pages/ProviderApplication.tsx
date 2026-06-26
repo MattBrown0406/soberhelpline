@@ -140,6 +140,8 @@ const providerFormSchema = z.object({
   zipCode: z.string().regex(/^\d{5}$/, "Valid 5-digit zip code is required"),
   phoneNumber: z.string().regex(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Valid phone number is required"),
   email: z.string().email("Valid email is required").max(255),
+  password: z.string().optional(),
+  confirmPassword: z.string().optional(),
   website: z.string().optional(),
   yearStarted: z.string().regex(/^\d{4}$/, "Please enter a valid 4-digit year").refine((val) => {
     const year = parseInt(val);
