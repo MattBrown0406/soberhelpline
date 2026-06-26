@@ -1375,6 +1375,50 @@ const ProviderApplication = () => {
                 />
               </div>
 
+              {!user && (
+                <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-4">
+                  <div>
+                    <h3 className="font-semibold">Create your account</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We'll use the email above plus the password below to create your provider account so you can edit
+                      or update your listing later. Already have an account?{" "}
+                      <Link to="/auth?redirect=/provider-application" className="text-primary underline">
+                        Log in
+                      </Link>
+                      .
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" autoComplete="new-password" placeholder="At least 8 characters" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" autoComplete="new-password" placeholder="Re-enter password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              )}
+
               <FormField
                 control={form.control}
                 name="website"
