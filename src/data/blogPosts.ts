@@ -270,7 +270,7 @@ You don't have to figure all of this out alone, and you don't have to get it per
       }
     ]
   },
-
+  {
     id: 131,
     slug: "managing-anger-resentment-when-loved-one-has-addiction",
     seoTitle: "Managing Anger and Resentment When a Loved One Has Addiction | Sober Helpline",
