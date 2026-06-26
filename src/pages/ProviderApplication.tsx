@@ -302,17 +302,10 @@ const ProviderApplication = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Redirect to auth page if not logged in
-  useEffect(() => {
-    if (!isLoading && !user) {
-      toast({
-        title: "Authentication required",
-        description: "Please log in to submit a provider application.",
-        variant: "destructive",
-      });
-      navigate("/auth?redirect=/provider-application");
-    }
-  }, [user, isLoading, navigate, toast]);
+  // Note: This page is intentionally public so prospective providers can complete the application
+  // without logging in first. Account creation (email + password) is collected within the form
+  // for new users; existing users remain logged in and skip the password fields.
+
   
   const form = useForm<ProviderFormValues>({
     resolver: zodResolver(providerFormSchema),
