@@ -1104,10 +1104,6 @@ const ProviderApplication = () => {
         <div className="flex items-center justify-center min-h-screen">
           <p className="text-lg text-muted-foreground">Loading...</p>
         </div>
-      ) : !user ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <p className="text-lg text-muted-foreground">Redirecting to login...</p>
-        </div>
       ) : (
         <>
           <div className="container mx-auto px-4 py-8">
