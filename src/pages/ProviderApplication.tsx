@@ -716,26 +716,82 @@ const ProviderApplication = () => {
       }
     }
     
+    // If no session exists, attempt to create an account inline using the
+    // email + password collected in the form.
     if (!authenticatedUserId) {
-      toast({
-        title: "Authentication required",
-        description: "Your session has expired. Please log in again.",
-        variant: "destructive",
+      if (!data.password || data.password.length < 8) {
+        toast({
+          title: "Password required",
+          description: "Please create a password (8+ characters) to submit your application.",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (data.password !== data.confirmPassword) {
+        toast({
+          title: "Passwords don't match",
+          description: "Please confirm your password.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/provider-application`,
+          data: { first_name: data.providerName },
+        },
       });
-      navigate("/auth?redirect=/provider-application");
-      return;
+
+      if (signUpError) {
+        // If account already exists, prompt them to log in.
+        const msg = signUpError.message || "";
+        if (/registered|already/i.test(msg)) {
+          toast({
+            title: "Email already registered",
+            description: "An account with this email exists. Please log in to continue.",
+            variant: "destructive",
+          });
+          navigate(`/auth?redirect=/provider-application&email=${encodeURIComponent(data.email)}`);
+          return;
+        }
+        toast({
+          title: "Account creation failed",
+          description: msg || "Could not create your account. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (signUpData?.session?.user) {
+        authenticatedUserId = signUpData.session.user.id;
+      } else {
+        // Email confirmation is required; cache form values so the user can resume after confirming.
+        try {
+          localStorage.setItem("provider_application_pending", JSON.stringify(data));
+        } catch {
+          // ignore storage errors
+        }
+        toast({
+          title: "Confirm your email to finish",
+          description: "We sent a confirmation link to your email. Click it, then return here to finish submitting your application.",
+        });
+        return;
+      }
     }
 
     // Double-check with getUser to ensure token is valid
     const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser();
-    
+
     if (userError || !currentUser || currentUser.id !== authenticatedUserId) {
       toast({
         title: "Authentication required",
         description: "Unable to verify your identity. Please log in again.",
         variant: "destructive",
       });
-      navigate("/auth?redirect=/provider-application");
+      navigate(`/auth?redirect=/provider-application&email=${encodeURIComponent(data.email)}`);
       return;
     }
 
