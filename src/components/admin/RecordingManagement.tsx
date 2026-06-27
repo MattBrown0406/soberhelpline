@@ -32,6 +32,7 @@ interface Recording {
   title: string;
   description: string | null;
   youtube_url: string;
+  zoom_passcode: string | null;
   recording_date: string;
   duration_minutes: number | null;
   thumbnail_url: string | null;
@@ -47,6 +48,7 @@ interface RecordingForm {
   title: string;
   description: string;
   youtube_url: string;
+  zoom_passcode: string;
   recording_date: string;
   duration_minutes: string;
   thumbnail_url: string;
@@ -60,6 +62,7 @@ const emptyForm: RecordingForm = {
   title: "",
   description: "",
   youtube_url: "",
+  zoom_passcode: "",
   recording_date: new Date().toISOString().split("T")[0],
   duration_minutes: "",
   thumbnail_url: "",
