@@ -145,15 +145,17 @@ export function RecordingManagement() {
 
   const handleSave = async () => {
     if (!form.title || !form.youtube_url || !form.recording_date) {
-      toast.error("Title, YouTube URL, and date are required");
+      toast.error("Title, Recording URL, and date are required");
       return;
     }
     setSaving(true);
 
+    const trimmedPasscode = form.zoom_passcode.trim();
     const payload = {
       title: form.title,
       description: form.description || null,
       youtube_url: form.youtube_url,
+      zoom_passcode: trimmedPasscode ? trimmedPasscode : null,
       recording_date: form.recording_date,
       duration_minutes: form.duration_minutes ? parseInt(form.duration_minutes) : null,
       thumbnail_url: form.thumbnail_url || null,
