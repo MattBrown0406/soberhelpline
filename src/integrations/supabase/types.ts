@@ -2749,6 +2749,7 @@ export type Database = {
           title: string
           updated_at: string
           youtube_url: string
+          zoom_passcode: string | null
         }
         Insert: {
           created_at?: string
@@ -2764,6 +2765,7 @@ export type Database = {
           title: string
           updated_at?: string
           youtube_url: string
+          zoom_passcode?: string | null
         }
         Update: {
           created_at?: string
@@ -2779,6 +2781,7 @@ export type Database = {
           title?: string
           updated_at?: string
           youtube_url?: string
+          zoom_passcode?: string | null
         }
         Relationships: []
       }
