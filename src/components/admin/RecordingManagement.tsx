@@ -32,6 +32,7 @@ interface Recording {
   title: string;
   description: string | null;
   youtube_url: string;
+  zoom_passcode: string | null;
   recording_date: string;
   duration_minutes: number | null;
   thumbnail_url: string | null;
@@ -47,6 +48,7 @@ interface RecordingForm {
   title: string;
   description: string;
   youtube_url: string;
+  zoom_passcode: string;
   recording_date: string;
   duration_minutes: string;
   thumbnail_url: string;
@@ -60,6 +62,7 @@ const emptyForm: RecordingForm = {
   title: "",
   description: "",
   youtube_url: "",
+  zoom_passcode: "",
   recording_date: new Date().toISOString().split("T")[0],
   duration_minutes: "",
   thumbnail_url: "",
@@ -110,6 +113,7 @@ export function RecordingManagement() {
       title: r.title,
       description: r.description || "",
       youtube_url: r.youtube_url,
+      zoom_passcode: r.zoom_passcode || "",
       recording_date: r.recording_date,
       duration_minutes: r.duration_minutes?.toString() || "",
       thumbnail_url: r.thumbnail_url || "",
@@ -141,15 +145,17 @@ export function RecordingManagement() {
 
   const handleSave = async () => {
     if (!form.title || !form.youtube_url || !form.recording_date) {
-      toast.error("Title, YouTube URL, and date are required");
+      toast.error("Title, Recording URL, and date are required");
       return;
     }
     setSaving(true);
 
+    const trimmedPasscode = form.zoom_passcode.trim();
     const payload = {
       title: form.title,
       description: form.description || null,
       youtube_url: form.youtube_url,
+      zoom_passcode: trimmedPasscode ? trimmedPasscode : null,
       recording_date: form.recording_date,
       duration_minutes: form.duration_minutes ? parseInt(form.duration_minutes) : null,
       thumbnail_url: form.thumbnail_url || null,
@@ -300,9 +306,18 @@ export function RecordingManagement() {
               <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder={'"The Family Squares" — March 9, 2026'} />
             </div>
             <div>
-              <Label>YouTube URL *</Label>
-              <Input value={form.youtube_url} onChange={(e) => setForm({ ...form, youtube_url: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
-              <p className="text-xs text-muted-foreground mt-1">Replace a Zoom share URL with a YouTube URL once uploaded, then toggle Published.</p>
+              <Label>Recording URL *</Label>
+              <Input value={form.youtube_url} onChange={(e) => setForm({ ...form, youtube_url: e.target.value })} placeholder="https://youtube.com/watch?v=... or https://zoom.us/rec/..." />
+              <p className="text-xs text-muted-foreground mt-1">YouTube URLs embed in the page. Zoom cloud recording URLs open in a new tab.</p>
+            </div>
+            <div>
+              <Label>Zoom Recording Passcode</Label>
+              <Input
+                value={form.zoom_passcode}
+                onChange={(e) => setForm({ ...form, zoom_passcode: e.target.value })}
+                placeholder="Optional — only for Zoom recordings that require a password"
+              />
+              <p className="text-xs text-muted-foreground mt-1">If provided, it will be appended to the Zoom URL so members aren't prompted for a password.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>

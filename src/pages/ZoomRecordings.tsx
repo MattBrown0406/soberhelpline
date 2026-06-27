@@ -22,6 +22,7 @@ interface Recording {
   title: string;
   description: string | null;
   youtube_url: string;
+  zoom_passcode: string | null;
   recording_date: string;
   duration_minutes: number | null;
   thumbnail_url: string | null;
@@ -36,6 +37,19 @@ function getRecordingType(url: string): 'youtube' | 'zoom' | 'other' {
   if (/youtu\.be\/|youtube\.com\//.test(url)) return 'youtube';
   if (/zoom\.us\/rec\/|zoomgov\.com\/rec\//.test(url)) return 'zoom';
   return 'other';
+}
+
+function getZoomRecordingUrl(url: string, passcode?: string | null): string {
+  const trimmedPasscode = passcode?.trim();
+  if (!trimmedPasscode || /[?&](pwd|passcode)=/.test(url)) return url;
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set('pwd', trimmedPasscode);
+    return parsed.toString();
+  } catch {
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}pwd=${encodeURIComponent(trimmedPasscode)}`;
+  }
 }
 
 function getYouTubeEmbedUrl(url: string): string {
@@ -272,11 +286,20 @@ export default function ZoomRecordings() {
                   />
                 </div>
               ) : (
-                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-4 border-2 border-primary/20">
+                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-3 border-2 border-primary/20">
                   <Video className="w-16 h-16 text-primary/40" />
-                  <a href={selectedRecording.youtube_url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={getZoomRecordingUrl(selectedRecording.youtube_url, selectedRecording.zoom_passcode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button className="gap-2"><Play className="w-4 h-4" />Watch Recording</Button>
                   </a>
+                  {getRecordingType(selectedRecording.youtube_url) === 'zoom' && selectedRecording.zoom_passcode?.trim() && (
+                    <p className="text-xs text-muted-foreground text-center px-4">
+                      If Zoom still asks, enter passcode: <span className="font-mono font-semibold text-foreground">{selectedRecording.zoom_passcode.trim()}</span>
+                    </p>
+                  )}
                 </div>
               )}
 

@@ -245,7 +245,7 @@ const OnboardingQuiz = () => {
           status: "completed",
           progress_percentage: 100,
           completed_at: new Date().toISOString(),
-          notes: JSON.stringify(data),
+          
         }, { onConflict: "user_id,resource_path" });
       }
     } catch (e) {
