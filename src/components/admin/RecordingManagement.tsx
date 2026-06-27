@@ -224,8 +224,18 @@ export function RecordingManagement() {
       }
       fetchRecordings();
     } catch (error) {
-      console.error("Failed to publish recording", error);
-      toast.error("Failed to publish recording");
+      console.error("Zoom passcode sync failed while publishing", error);
+      const { error: publishError } = await supabase
+        .from("zoom_call_recordings")
+        .update({ is_published: true, updated_at: new Date().toISOString() })
+        .eq("id", id);
+
+      if (publishError) {
+        toast.error("Failed to publish recording");
+      } else {
+        toast.warning("Recording published, but Zoom passcode auto-sync failed. Add it manually if Zoom prompts members.");
+        fetchRecordings();
+      }
     } finally {
       setPublishingId(null);
     }
