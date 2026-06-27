@@ -306,9 +306,18 @@ export function RecordingManagement() {
               <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder={'"The Family Squares" — March 9, 2026'} />
             </div>
             <div>
-              <Label>YouTube URL *</Label>
-              <Input value={form.youtube_url} onChange={(e) => setForm({ ...form, youtube_url: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
-              <p className="text-xs text-muted-foreground mt-1">Replace a Zoom share URL with a YouTube URL once uploaded, then toggle Published.</p>
+              <Label>Recording URL *</Label>
+              <Input value={form.youtube_url} onChange={(e) => setForm({ ...form, youtube_url: e.target.value })} placeholder="https://youtube.com/watch?v=... or https://zoom.us/rec/..." />
+              <p className="text-xs text-muted-foreground mt-1">YouTube URLs embed in the page. Zoom cloud recording URLs open in a new tab.</p>
+            </div>
+            <div>
+              <Label>Zoom Recording Passcode</Label>
+              <Input
+                value={form.zoom_passcode}
+                onChange={(e) => setForm({ ...form, zoom_passcode: e.target.value })}
+                placeholder="Optional — only for Zoom recordings that require a password"
+              />
+              <p className="text-xs text-muted-foreground mt-1">If provided, it will be appended to the Zoom URL so members aren't prompted for a password.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
