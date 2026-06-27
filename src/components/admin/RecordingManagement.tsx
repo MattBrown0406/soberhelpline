@@ -113,6 +113,7 @@ export function RecordingManagement() {
       title: r.title,
       description: r.description || "",
       youtube_url: r.youtube_url,
+      zoom_passcode: r.zoom_passcode || "",
       recording_date: r.recording_date,
       duration_minutes: r.duration_minutes?.toString() || "",
       thumbnail_url: r.thumbnail_url || "",
