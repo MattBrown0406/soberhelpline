@@ -286,11 +286,20 @@ export default function ZoomRecordings() {
                   />
                 </div>
               ) : (
-                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-4 border-2 border-primary/20">
+                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-3 border-2 border-primary/20">
                   <Video className="w-16 h-16 text-primary/40" />
-                  <a href={selectedRecording.youtube_url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={getZoomRecordingUrl(selectedRecording.youtube_url, selectedRecording.zoom_passcode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button className="gap-2"><Play className="w-4 h-4" />Watch Recording</Button>
                   </a>
+                  {getRecordingType(selectedRecording.youtube_url) === 'zoom' && selectedRecording.zoom_passcode?.trim() && (
+                    <p className="text-xs text-muted-foreground text-center px-4">
+                      If Zoom still asks, enter passcode: <span className="font-mono font-semibold text-foreground">{selectedRecording.zoom_passcode.trim()}</span>
+                    </p>
+                  )}
                 </div>
               )}
 
