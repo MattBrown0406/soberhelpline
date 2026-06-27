@@ -22,6 +22,7 @@ interface Recording {
   title: string;
   description: string | null;
   youtube_url: string;
+  zoom_passcode: string | null;
   recording_date: string;
   duration_minutes: number | null;
   thumbnail_url: string | null;
@@ -36,6 +37,19 @@ function getRecordingType(url: string): 'youtube' | 'zoom' | 'other' {
   if (/youtu\.be\/|youtube\.com\//.test(url)) return 'youtube';
   if (/zoom\.us\/rec\/|zoomgov\.com\/rec\//.test(url)) return 'zoom';
   return 'other';
+}
+
+function getZoomRecordingUrl(url: string, passcode?: string | null): string {
+  const trimmedPasscode = passcode?.trim();
+  if (!trimmedPasscode || /[?&](pwd|passcode)=/.test(url)) return url;
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set('pwd', trimmedPasscode);
+    return parsed.toString();
+  } catch {
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}pwd=${encodeURIComponent(trimmedPasscode)}`;
+  }
 }
 
 function getYouTubeEmbedUrl(url: string): string {
