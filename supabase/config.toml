@@ -98,6 +98,9 @@ verify_jwt = false
 [functions.register-zoom-meeting]
 verify_jwt = false
 
+[functions.sync-zoom-recording-passcode]
+verify_jwt = true
+
 [functions.send-apology-reregistration]
 verify_jwt = false
 

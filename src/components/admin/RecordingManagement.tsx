@@ -79,6 +79,7 @@ export function RecordingManagement() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<RecordingForm>(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [publishingId, setPublishingId] = useState<string | null>(null);
   const [newTimestamp, setNewTimestamp] = useState<KeyTimestamp>({ time: "", label: "" });
 
   const fetchRecordings = async () => {
@@ -143,6 +144,15 @@ export function RecordingManagement() {
     setForm(f => ({ ...f, key_timestamps: f.key_timestamps.filter((_, i) => i !== idx) }));
   };
 
+  const syncZoomPasscode = async (recordingId: string, publish = false) => {
+    const { data, error } = await supabase.functions.invoke("sync-zoom-recording-passcode", {
+      body: { recordingId, publish },
+    });
+
+    if (error) throw error;
+    return data as { synced?: boolean; reason?: string; published?: boolean } | null;
+  };
+
   const handleSave = async () => {
     if (!form.title || !form.youtube_url || !form.recording_date) {
       toast.error("Title, Recording URL, and date are required");
@@ -165,14 +175,26 @@ export function RecordingManagement() {
       key_timestamps: form.key_timestamps,
     };
 
-    const { error } = editingId
-      ? await supabase.from("zoom_call_recordings").update(payload as any).eq("id", editingId)
-      : await supabase.from("zoom_call_recordings").insert(payload as any);
+    const mutation = editingId
+      ? await supabase.from("zoom_call_recordings").update(payload as any).eq("id", editingId).select("id").single()
+      : await supabase.from("zoom_call_recordings").insert(payload as any).select("id").single();
+
+    const { data: savedRecording, error } = mutation;
 
     if (error) {
       toast.error(editingId ? "Failed to update recording" : "Failed to add recording");
     } else {
-      toast.success(editingId ? "Recording updated" : "Recording added");
+      if (payload.is_published && savedRecording?.id) {
+        try {
+          const syncResult = await syncZoomPasscode(savedRecording.id, false);
+          toast.success(syncResult?.synced ? "Recording saved and Zoom passcode synced" : editingId ? "Recording updated" : "Recording added");
+        } catch (syncError) {
+          console.error("Zoom passcode sync failed", syncError);
+          toast.warning("Recording saved, but Zoom passcode auto-sync failed. Add it manually if Zoom prompts for one.");
+        }
+      } else {
+        toast.success(editingId ? "Recording updated" : "Recording added");
+      }
     }
 
     setSaving(false);
@@ -188,12 +210,25 @@ export function RecordingManagement() {
   };
 
   const publishRecording = async (id: string) => {
-    const { error } = await supabase
-      .from("zoom_call_recordings")
-      .update({ is_published: true, updated_at: new Date().toISOString() })
-      .eq("id", id);
-    if (error) toast.error("Failed to publish recording");
-    else { toast.success("Recording published — now visible to members"); fetchRecordings(); }
+    setPublishingId(id);
+    try {
+      const syncResult = await syncZoomPasscode(id, true);
+      if (syncResult?.synced) {
+        toast.success("Recording published — Zoom passcode synced automatically");
+      } else if (syncResult?.reason === "not_zoom") {
+        toast.success("Recording published — now visible to members");
+      } else if (syncResult?.reason === "already_has_passcode") {
+        toast.success("Recording published — existing Zoom passcode preserved");
+      } else {
+        toast.warning("Recording published, but no matching Zoom passcode was found. Add it manually if Zoom prompts members.");
+      }
+      fetchRecordings();
+    } catch (error) {
+      console.error("Failed to publish recording", error);
+      toast.error("Failed to publish recording");
+    } finally {
+      setPublishingId(null);
+    }
   };
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading recordings...</div>;
@@ -217,9 +252,9 @@ export function RecordingManagement() {
       <TableCell>
         <div className="flex gap-1">
           {showPublish && (
-            <Button variant="default" size="sm" className="gap-1 h-8 text-xs" onClick={() => publishRecording(r.id)}>
+            <Button variant="default" size="sm" className="gap-1 h-8 text-xs" onClick={() => publishRecording(r.id)} disabled={publishingId === r.id}>
               <CheckCircle className="h-3.5 w-3.5" />
-              Publish
+              {publishingId === r.id ? "Publishing..." : "Publish"}
             </Button>
           )}
           <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => openEdit(r)}>
