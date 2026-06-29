@@ -2042,6 +2042,48 @@ export type Database = {
           },
         ]
       }
+      provider_inquiries: {
+        Row: {
+          best_time: string | null
+          created_at: string
+          email: string | null
+          id: string
+          note: string | null
+          phone: string | null
+          provider_id: string | null
+          provider_name: string | null
+          relationship: string | null
+          requester_name: string | null
+          status: string
+        }
+        Insert: {
+          best_time?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          note?: string | null
+          phone?: string | null
+          provider_id?: string | null
+          provider_name?: string | null
+          relationship?: string | null
+          requester_name?: string | null
+          status?: string
+        }
+        Update: {
+          best_time?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          note?: string | null
+          phone?: string | null
+          provider_id?: string | null
+          provider_name?: string | null
+          relationship?: string | null
+          requester_name?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       provider_submissions: {
         Row: {
           accepts_mat_residents: boolean | null
