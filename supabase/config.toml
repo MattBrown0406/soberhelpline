@@ -119,3 +119,6 @@ verify_jwt = false
 
 [functions.drain-spine-outbox]
 verify_jwt = false
+
+[functions.submit-provider-inquiry]
+verify_jwt = false
