@@ -146,6 +146,17 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
         </p>
       </div>
 
+      <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+        <p style="margin: 0 0 12px 0; color: #111827; font-size: 14px;">
+          <strong>📱 Download the Sober Helpline App</strong><br/>
+          Free iOS app with tools, guides, and support in your pocket.
+        </p>
+        <a href="https://apps.apple.com/us/app/sober-helpline/id6780034996" style="display: inline-block; padding: 10px 24px; background-color: #111827; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+          Get the App
+        </a>
+      </div>
+
+
       <p>We hope to see you there — it's always good to have you in the room.</p>
       <p style="margin-top: 8px;">— Matt</p>
 
