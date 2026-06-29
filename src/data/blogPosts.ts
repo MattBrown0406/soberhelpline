@@ -1,4 +1,5 @@
 
+import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
 import supportLovedOneImg from "@/assets/blog-support-loved-one.png";
@@ -155,6 +156,120 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 133,
+    slug: "supporting-loved-one-recovery-during-summer",
+    seoTitle: "Supporting a Loved One in Recovery During Summer | Sober Helpline",
+    metaDescription: "Summer gatherings and social pressure can challenge recovery. Learn how families can support a loved one's sobriety this summer with practical, compassionate strategies.",
+    title: "Supporting a Loved One's Recovery Through Summer: A Family Guide to Social Events and Seasonal Triggers",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-06-29",
+    image: supportingRecoverySummerImg,
+    keywords: ["supporting loved one in recovery during summer", "summer recovery triggers", "sober summer family", "recovery and summer parties", "family support recovery summer"],
+    excerpt: "Summer's barbecues, vacations, and unstructured time can quietly destabilize recovery. Here's how families can plan, show up, and help build a sober-friendly summer together.",
+    content: `Summer is full of celebrations — barbecues, beach trips, family reunions, Fourth of July parties. For most people, these events are a chance to relax and reconnect. For someone in recovery from addiction, they can also be a minefield.
+
+If your loved one is working on their sobriety, summer's social calendar can feel like a long list of situations to navigate carefully. As a family member, your role in those moments matters more than you might realize — and knowing what to do (and what not to do) can make a genuine difference in how your loved one experiences the season.
+
+This guide is designed to help you show up well — not as a watchdog, but as a source of steady support.
+
+**Why Summer Can Be Challenging for People in Recovery**
+
+Summer creates a perfect storm of triggers for people in recovery: unstructured time, alcohol-centered events, social pressure, disrupted routines, and travel.
+
+Recovery thrives on structure and routine. Regular meetings, therapy appointments, work schedules, and daily habits form a kind of scaffolding that supports sobriety. Summer tends to knock that scaffolding loose — vacations break routines, late nights become more common, and the ordinary weekdays that usually hold someone accountable turn into open-ended stretches of free time.
+
+At the same time, alcohol is everywhere in summer social culture. Beer at the cookout. Wine at the wedding. Cocktails at the beach. For someone in early recovery especially, repeated exposure to substance-centered environments can wear down resolve — not because they're weak, but because the brain's reward system is still recalibrating.
+
+Understanding this isn't about being afraid of summer. It's about going in with your eyes open.
+
+**How to Plan Ahead for Summer Gatherings**
+
+The most effective thing a family can do is plan — ideally with their loved one, not for them.
+
+Before a summer event, have a brief, low-pressure conversation. Ask questions like:
+
+- "Do you feel comfortable coming to this? What would make it easier?"
+- "Is there anything I can do before or during the event to help?"
+- "Do you want a signal if you need an out?"
+
+These conversations do two things: they give your loved one agency, and they let them know you're on their team. That sense of not being alone in a crowd is often exactly what someone in recovery needs.
+
+It's also worth making practical preparations. Offer to drive so your loved one can leave when they're ready. Make sure there are non-alcoholic beverages available — and don't call attention to it. A quiet word to the host in advance can go a long way.
+
+**What to Say (and Not Say) When Alcohol Is Present**
+
+Family members sometimes try so hard to be helpful that they end up drawing more attention to the sobriety than necessary.
+
+Here's a simple rule: match your loved one's energy, not the event's. If they seem fine, there's no need to check in every twenty minutes. If they seem withdrawn or uncomfortable, a quiet "Do you want to take a walk for a minute?" is more useful than a public check-in.
+
+Avoid:
+
+- "Are you sure you're okay being here with all this drinking?"
+- "Are you tempted right now?"
+- "I'm so proud of you for not drinking." (in front of others)
+- Pointing out every time someone offers your loved one alcohol
+
+These comments, however well-meaning, shift focus to the very thing your loved one is trying to move past. They can also feel patronizing — a reminder that their sobriety is visible to everyone in the room.
+
+What works better:
+
+- Normal conversation. Include them. Ask about their life.
+- Be willing to step outside with them if they need air.
+- Have a pre-agreed exit strategy so they don't feel stuck.
+
+**Creating Sober-Friendly Summer Memories Together**
+
+One of the most powerful things a family can do in recovery is help build a new normal — one where fun doesn't have to include alcohol or other substances.
+
+Summer actually offers a lot of room to do this. Camping trips, hiking, paddleboarding, fishing, outdoor concerts, road trips, farmers markets, cooking out — none of these require a drink in hand to be enjoyable. When families invest in [sober-friendly activities as a family](/recovery-friendly-home-after-rehab) like these, they do something important: they show that connection and joy are available in sobriety.
+
+This isn't about avoiding everything. It's about expanding the definition of a good time.
+
+If your loved one is working the 12-step program, ask about sober events in your area — most recovery communities, including [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) family groups, have summer activities, retreats, and cookouts of their own. These can be a great way to normalize that a full social life is possible in recovery.
+
+**When to Be Concerned vs. When to Trust the Process**
+
+Families often struggle with this: how much attention is enough, and how much is too much?
+
+The honest answer is that anxiety about your loved one's recovery is normal — especially in summer when there are more social variables. But [hypervigilance in recovery](/hypervigilance-families-addiction-recovery) can damage the relationship and undermine your loved one's sense of their own competence.
+
+Be concerned if you notice:
+
+- Withdrawal from their recovery community or support system
+- Unexplained changes in mood, sleep, or behavior
+- Reconnecting with people or places associated with past use
+- Defensiveness about their schedule or whereabouts
+- Lying or significant secrecy
+
+These are worth noting and, if needed, gently raising with your loved one or their counselor.
+
+Trust the process when:
+
+- They're attending meetings or therapy and engaged in their recovery
+- They're being honest about struggles without acting on them
+- They're setting their own limits and communicating them
+- They're reaching out to their support network
+
+Recovery is not the absence of temptation. It's the ability to face temptation and make a different choice. Your job isn't to prevent every difficult moment — it's to make sure your loved one knows they don't face those moments alone.
+
+**You Don't Have to Figure This Out Alone**
+
+Navigating your loved one's recovery — through summer, holidays, and every ordinary Tuesday in between — is one of the hardest things a family can do. It requires patience with your loved one and with yourself.
+
+If you're looking for ongoing education, support, and practical guidance, SoberHelpline.com is here for you. From [family coaching sessions](/family-coaching) to a supportive membership community and our free Monday night ["The Family Squares"](/monday-zoom-registration) call, you'll find real help from people who understand what you're going through.
+
+This summer can be different. For your loved one — and for your whole family.`,
+    faqItems: [
+      { question: "Should I avoid having alcohol at family gatherings if someone in recovery will be there?", answer: "This is a thoughtful question to consider, but the decision ultimately belongs to the host and your loved one. If your loved one is comfortable attending, you don't need to eliminate alcohol entirely — but offering plenty of non-alcoholic options and avoiding pressure to drink is important. Talk to your loved one beforehand to get their input." },
+      { question: "What if my loved one doesn't want to come to summer events at all?", answer: "Respecting that decision is important. Avoiding situations that feel unsafe is a legitimate recovery strategy, not a failure. Over time, as sobriety strengthens, many people become more comfortable in social settings. Don't push — ask what they'd prefer and meet them there." },
+      { question: "How do I explain my loved one's sobriety to others at family gatherings?", answer: "You don't have to. Unless your loved one has chosen to be open about their recovery, it's not your information to share. A simple 'they're not drinking right now' is sufficient if anyone asks — and most people won't push further." },
+      { question: "Is it normal for someone in recovery to struggle more during the summer?", answer: "Yes. The change in routine, increased social exposure, and unstructured time create genuine challenges. This doesn't mean relapse is inevitable — but it does mean that recovery supports (meetings, therapy, sponsor check-ins) become even more important during this season." },
+      { question: "What should I do if I think my loved one is struggling this summer but they won't talk to me?", answer: "Reach out without pressure. Let them know you're available without demanding a conversation. If you have serious concerns, speak with their therapist or counselor if possible, or reach out to a family support resource like SoberHelpline.com for guidance on how to approach the situation." }
+    ],
+    tags: ["family education", "summer recovery", "social events", "triggers", "sobriety support"]
+  },
   {
     id: 132,
     slug: "what-is-a-recovery-coach-family-guide",
