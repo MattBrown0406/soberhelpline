@@ -2379,8 +2379,10 @@ export type Database = {
           prior_treatment: string | null
           relationship: string | null
           safety_concerns: string | null
+          session_token: string | null
           stage_assigned: string | null
           substances: string[] | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string | null
@@ -2391,8 +2393,10 @@ export type Database = {
           prior_treatment?: string | null
           relationship?: string | null
           safety_concerns?: string | null
+          session_token?: string | null
           stage_assigned?: string | null
           substances?: string[] | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string | null
@@ -2403,8 +2407,10 @@ export type Database = {
           prior_treatment?: string | null
           relationship?: string | null
           safety_concerns?: string | null
+          session_token?: string | null
           stage_assigned?: string | null
           substances?: string[] | null
+          user_id?: string | null
         }
         Relationships: []
       }
