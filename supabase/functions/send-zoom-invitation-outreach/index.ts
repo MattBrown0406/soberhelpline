@@ -93,8 +93,20 @@ function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string)
       </div>
 
       <p>The meeting opens directly in your browser — no Zoom app needed.</p>
+
+      <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+        <p style="margin: 0 0 12px 0; color: #1e40af; font-size: 14px;">
+          <strong>📱 Take Sober Helpline with you</strong><br/>
+          Download our free iOS app for support, tools, and resources anytime.
+        </p>
+        <a href="https://apps.apple.com/us/app/sober-helpline/id6780034996" style="display: inline-block; padding: 10px 24px; background-color: #111827; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+          Download the Sober Helpline App
+        </a>
+      </div>
+
       <p>I look forward to seeing you there.</p>
       <p style="margin-top: 8px;">— Matt</p>
+
 
       <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
         Questions? Call us at <strong>(541) 241-5886</strong>.
