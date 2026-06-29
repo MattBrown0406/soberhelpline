@@ -64,7 +64,7 @@ export default function NevadaFamilySupport() {
     <>
       <SEOHead
         title="Nevada Family Addiction Support & Intervention Help | Sober Helpline"
-        description="Nevada families can get addiction support, Monday Zoom help, and guidance from an alcohol interventionist when treatment refusal or crisis is escalating."
+        description="Nevada families can get addiction support, Monday Zoom help, and alcohol interventionist guidance when treatment refusal, relapse, or crisis is escalating."
         faqItems={faqItems}
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
@@ -105,6 +105,34 @@ export default function NevadaFamilySupport() {
         </section>
 
         <FamilyProofStrip />
+
+        <section className="py-10 bg-background">
+          <div className="container max-w-4xl mx-auto px-4">
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Direct answer</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
+                Need an alcohol interventionist in Nevada?
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-5">
+                If your loved one is drinking, using drugs, refusing treatment, or cycling through relapse, start with a private family coaching call or call Sober Helpline before staging a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or free Monday support.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href="tel:4582027900">
+                  <Button size="lg" className="gap-2 w-full sm:w-auto">
+                    <Phone className="h-4 w-4" />
+                    Call (458) 202-7900
+                  </Button>
+                </a>
+                <Link to="/family-coaching">
+                  <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                    <Calendar className="h-4 w-4" />
+                    Book family coaching
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Nevada Stats */}
         <section className="py-12 bg-muted/40">

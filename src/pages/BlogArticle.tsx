@@ -14,6 +14,16 @@ import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
 const BASE_URL = "https://soberhelpline.com";
 
 const highIntentBlogOverrides: Record<string, { title: string; excerpt: string; seoTitle: string; metaDescription: string; conversionPrompt: string }> = {
+  "what-to-expect-during-an-intervention": {
+    title: "What to Expect During an Intervention: A Real Guide for Families",
+    excerpt:
+      "A clear, step-by-step look at intervention day — how preparation works, what the conversation sounds like, and what the family should do next.",
+    seoTitle: "What to Expect During an Intervention | Family Guide",
+    metaDescription:
+      "Wondering what happens during a drug or alcohol intervention? Learn the steps, what families should prepare, and when to call an interventionist.",
+    conversionPrompt:
+      "If you are already considering an intervention, do not start with a surprise confrontation. The safer next step is a private family consult so you can decide whether intervention planning, family coaching, or treatment navigation is the right level of help.",
+  },
   "what-to-do-when-loved-one-lies-about-drinking-drug-use": {
     title: "Loved One Lying About Drinking or Drug Use? What Families Can Do Next",
     excerpt:

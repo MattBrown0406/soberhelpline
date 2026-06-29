@@ -14,6 +14,7 @@ import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
 import MobileStateSelector from "@/components/MobileStateSelector";
+import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
@@ -218,16 +219,16 @@ const SoberCoachesCompanions = () => {
   return (
     <>
       <SEOHead
-        title="Find a Sober Coach Near You | Sober Helpline"
-        description="Find sober coach services, sober companions, and sober living support by state or ZIP code. If your family is unsure, call or book a consultation before hiring."
+        title="Find a Sober Coach or Companion Near You | Sober Helpline"
+        description="Find sober coach and sober companion services by state or ZIP code. Call first if relapse risk, treatment refusal, or family confusion means you need guidance before hiring."
         faqItems={[
           {
             question: "How do I find a sober coach?",
-            answer: "Start by searching sober coaches and sober companions by state or ZIP code. If you are unsure whether coaching, sober living, treatment, or family support is the right next step, call Sober Helpline or book a family consultation before you hire someone.",
+            answer: "Start by searching sober coaches and sober companions by state or ZIP code. If relapse risk, treatment refusal, sober living, or family conflict makes the next step unclear, call Sober Helpline or book a family consultation before you hire someone.",
           },
           {
             question: "When should a family consider a sober coach or sober companion?",
-            answer: "A sober coach or companion may help after treatment, during a high-risk transition, after relapse, or when daily accountability is needed. If the person is still refusing help or the family is in crisis, family consultation or intervention guidance may be a better first step.",
+            answer: "A sober coach or companion may help after treatment, during a high-risk transition, after relapse, or when daily accountability is needed. If the person is still refusing help, detox is needed, or the family is in crisis, family consultation or intervention guidance is usually a better first step.",
           },
         ]}
         jsonLd={{ "@context": "https://schema.org", "@type": "MedicalWebPage", "name": "Sober Coaches and Companions Directory", "url": "https://soberhelpline.com/sober-coaches-companions", "publisher": { "@type": "Organization", "name": "Sober Helpline" } }}
@@ -272,10 +273,10 @@ const SoberCoachesCompanions = () => {
         <div className="text-center mb-4 md:mb-6">
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-2">
             <UserCheck className="w-8 h-8 md:w-10 md:h-10 text-primary" />
-            <h1 className="text-xl md:text-4xl font-bold text-foreground">Find a Sober Coach or Sober Companion</h1>
+            <h1 className="text-xl md:text-4xl font-bold text-foreground">Find a Sober Coach or Sober Companion Near You</h1>
           </div>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-            Search sober coach services, sober companions, and sober living support by state or ZIP code, then choose the support that matches your loved one's actual recovery stage.
+            Search sober coach services, sober companions, and sober living support by state or ZIP code, then choose the support that matches your loved one's actual recovery stage instead of guessing under pressure.
           </p>
         </div>
 
@@ -286,7 +287,7 @@ const SoberCoachesCompanions = () => {
             A sober coach provides practical recovery support outside of treatment: accountability, relapse-prevention planning, help returning home after rehab, sober transportation, and day-to-day structure when early recovery is fragile. A sober companion may provide more intensive in-person support during travel, transitions, or high-risk periods.
           </p>
           <p className="mt-3 text-muted-foreground leading-relaxed">
-            If you are trying to find a sober coach near you, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help.
+            If you are trying to find a sober coach near you, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help. If your loved one is not willing to stay sober yet, talk with someone before you spend money on coaching.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
             <a href="tel:4582027900">
@@ -301,6 +302,10 @@ const SoberCoachesCompanions = () => {
               </Button>
             </Link>
           </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto mb-6">
+          <FamilyBridgeCTA variant="coaching" />
         </section>
 
         <section className="max-w-4xl mx-auto mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 md:p-6">
