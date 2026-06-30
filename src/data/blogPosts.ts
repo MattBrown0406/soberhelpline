@@ -1,4 +1,5 @@
 
+import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery-milestones-family-guide.jpg";
 import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
