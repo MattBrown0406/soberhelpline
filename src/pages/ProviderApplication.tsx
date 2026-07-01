@@ -885,7 +885,7 @@ const ProviderApplication = () => {
 
         // Generate unique filename
         const fileExt = 'jpg'; // Always save as jpg after resize
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const fileName = `${authenticatedUserId}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
         
         // Upload to storage
         const { data: uploadData, error: uploadError } = await supabase.storage
