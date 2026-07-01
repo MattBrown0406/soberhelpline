@@ -235,17 +235,29 @@ const BookConsultation = () => {
 
       // Mark abandoned booking as completed (so we don't follow up)
       if (abandonedBookingId) {
-        await supabase
-          .from("abandoned_bookings")
-          .update({ completed: true })
-          .eq("id", abandonedBookingId);
-      } else if (intakeData.client_email) {
-        // No id (e.g. payment captured after redirect on fresh page load) — mark by email
-        await supabase
-          .from("abandoned_bookings")
-          .update({ completed: true })
-          .eq("client_email", intakeData.client_email.toLowerCase())
-          .eq("completed", false);
+        const token = localStorage.getItem(`ab_token_${abandonedBookingId}`);
+        if (user) {
+          await supabase
+            .from("abandoned_bookings")
+            .update({ completed: true })
+            .eq("id", abandonedBookingId);
+        } else if (token) {
+          await supabase.rpc("update_abandoned_booking", {
+            _id: abandonedBookingId,
+            _edit_token: token,
+            _client_email: null,
+            _client_name: null,
+            _client_phone: null,
+            _plan_type: null,
+            _provider_id: null,
+            _provider_name: null,
+            _selected_date: null,
+            _selected_time: null,
+            _last_step: null,
+            _completed: true,
+          });
+        }
+        if (abandonedBookingId) localStorage.removeItem(`ab_token_${abandonedBookingId}`);
       }
 
       // Clean up URL and navigate to onboarding
