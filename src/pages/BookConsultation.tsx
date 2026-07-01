@@ -408,17 +408,41 @@ const BookConsultation = () => {
 
       try {
         if (abandonedBookingId) {
-          await supabase
-            .from("abandoned_bookings")
-            .update(payload)
-            .eq("id", abandonedBookingId);
+          if (user) {
+            await supabase
+              .from("abandoned_bookings")
+              .update(payload)
+              .eq("id", abandonedBookingId);
+          } else {
+            const token = localStorage.getItem(`ab_token_${abandonedBookingId}`);
+            if (token) {
+              await supabase.rpc("update_abandoned_booking", {
+                _id: abandonedBookingId,
+                _edit_token: token,
+                _client_email: payload.client_email,
+                _client_name: payload.client_name,
+                _client_phone: payload.client_phone,
+                _plan_type: payload.plan_type,
+                _provider_id: payload.provider_id,
+                _provider_name: payload.provider_name,
+                _selected_date: payload.selected_date,
+                _selected_time: payload.selected_time,
+                _last_step: payload.last_step,
+                _completed: false,
+              });
+            }
+          }
         } else {
+          const editToken = (crypto as any).randomUUID();
           const { data } = await supabase
             .from("abandoned_bookings")
-            .insert(payload)
+            .insert({ ...payload, edit_token: editToken })
             .select("id")
             .single();
-          if (data?.id) setAbandonedBookingId(data.id);
+          if (data?.id) {
+            setAbandonedBookingId(data.id);
+            localStorage.setItem(`ab_token_${data.id}`, editToken);
+          }
         }
       } catch (e) {
         // Silent — never block the booking flow
