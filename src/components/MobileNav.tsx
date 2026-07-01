@@ -6,6 +6,7 @@ import { Menu, Phone, LogIn, Headphones, Heart, X, Map as MapIcon, AlertTriangle
 import { User } from "@supabase/supabase-js";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent } from "@/lib/conversionTracking";
+import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 
 interface MobileNavProps {
   user: User | null;
@@ -75,6 +76,11 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
                   Crisis Roadmap
                 </Button>
               </Link>
+
+              <div className="rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-3">
+                <p className="mb-2 text-sm font-semibold text-foreground">Sober Helpline App</p>
+                <SoberHelplineAppStoreBadge height={38} source="mobile_nav" />
+              </div>
 
               <div className="border-t my-2" />
 

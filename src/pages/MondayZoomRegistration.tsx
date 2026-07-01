@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
 
@@ -442,6 +443,10 @@ export default function MondayZoomRegistration() {
                           {label}
                         </div>
                       ))}
+                      <div className="mt-2 border-t pt-4">
+                        <p className="mb-2 text-xs font-semibold text-muted-foreground">Get the Sober Helpline app</p>
+                        <SoberHelplineAppStoreBadge height={40} source="monday_zoom_hero" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -505,6 +510,11 @@ export default function MondayZoomRegistration() {
                 </div>
               </>
             )}
+
+            <div className="mx-auto mb-6 max-w-2xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-4 text-center shadow-sm">
+              <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your phone before the meeting starts.</p>
+              <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
+            </div>
 
             <Card className="mx-auto max-w-2xl border-2 shadow-lg">
               <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">

@@ -24,6 +24,7 @@ import SEOHead from "@/components/SEOHead";
 
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
+import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import CommonFamilyQuestions from "@/components/CommonFamilyQuestions";
 import { trackConversionEvent } from "@/lib/conversionTracking";
@@ -272,6 +273,9 @@ const Index = () => {
                       Join Free Monday
                     </Button>
                   </Link>
+                  <div className="hidden xl:block">
+                    <SoberHelplineAppStoreBadge height={30} source="desktop_nav" />
+                  </div>
                 {user ? (
                   <>
                     {isMember && (
@@ -336,6 +340,16 @@ const Index = () => {
                       Check Intervention Readiness
                     </Button>
                   </Link>
+                </div>
+
+                <div className="mb-6 md:mb-8 rounded-2xl border border-logo-blue/20 bg-background/80 p-4 shadow-sm backdrop-blur-sm">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Sober Helpline is now on the App Store</p>
+                      <p className="text-xs text-muted-foreground">Keep family recovery tools, education, and support close when things get hard.</p>
+                    </div>
+                    <SoberHelplineAppStoreBadge className="shrink-0" height={42} source="homepage_hero_app_card" />
+                  </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5 text-sm text-muted-foreground mb-6 md:mb-8">
@@ -860,6 +874,10 @@ const Index = () => {
                   Check Intervention Readiness
                 </Button>
               </Link>
+            </div>
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <p className="text-sm font-semibold text-foreground">Prefer help in your pocket?</p>
+              <SoberHelplineAppStoreBadge height={44} source="homepage_bottom_cta" />
             </div>
           </div>
         </section>
