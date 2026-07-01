@@ -273,9 +273,6 @@ const Index = () => {
                       Join Free Monday
                     </Button>
                   </Link>
-                  <div className="hidden xl:block">
-                    <SoberHelplineAppStoreBadge height={30} source="desktop_nav" />
-                  </div>
                 {user ? (
                   <>
                     {isMember && (
