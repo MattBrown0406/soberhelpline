@@ -21,6 +21,7 @@ export type Database = {
           client_phone: string | null
           completed: boolean
           created_at: string
+          edit_token: string | null
           followup_sent_at: string | null
           id: string
           last_step: number | null
@@ -38,6 +39,7 @@ export type Database = {
           client_phone?: string | null
           completed?: boolean
           created_at?: string
+          edit_token?: string | null
           followup_sent_at?: string | null
           id?: string
           last_step?: number | null
@@ -55,6 +57,7 @@ export type Database = {
           client_phone?: string | null
           completed?: boolean
           created_at?: string
+          edit_token?: string | null
           followup_sent_at?: string | null
           id?: string
           last_step?: number | null
@@ -3430,6 +3433,23 @@ export type Database = {
       is_meeting_blocked: {
         Args: { _email: string; _name: string }
         Returns: boolean
+      }
+      update_abandoned_booking: {
+        Args: {
+          _client_email: string
+          _client_name: string
+          _client_phone: string
+          _completed?: boolean
+          _edit_token: string
+          _id: string
+          _last_step: number
+          _plan_type: string
+          _provider_id: string
+          _provider_name: string
+          _selected_date: string
+          _selected_time: string
+        }
+        Returns: undefined
       }
       use_promo_code: { Args: { promo_code: string }; Returns: Json }
     }
