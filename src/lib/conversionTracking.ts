@@ -21,7 +21,8 @@ type ConversionEventName =
   | "nme_bridge_intervention_click"
   | "family_answer_view"
   | "family_answer_click"
-  | "family_answer_hub_click";
+  | "family_answer_hub_click"
+  | "sober_helpline_app_store_click";
 
 type ConversionEventPayload = {
   label?: string;
