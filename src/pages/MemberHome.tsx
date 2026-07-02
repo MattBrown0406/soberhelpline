@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   BookOpen, Video, MessageCircle, Users, Calendar, ArrowRight,
-  CheckCircle, Clock, FileText, TrendingUp, Heart, Loader2,
+  CheckCircle, Clock, FileText, TrendingUp, Heart, Loader2, CreditCard,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -83,6 +83,7 @@ export default function MemberHome() {
     { to: "/member-qa",              icon: MessageCircle,  label: "Q&A Archive",       desc: "Meeting Q&As" },
     { to: "/family-forum",           icon: Users,          label: "Forum",             desc: "Connect with families" },
     { to: "/family-webinars",        icon: Calendar,       label: "Webinars",          desc: "Live sessions" },
+    { to: "/member-billing",         icon: CreditCard,     label: "Membership & Billing", desc: "Manage or cancel your membership" },
   ];
 
   return (

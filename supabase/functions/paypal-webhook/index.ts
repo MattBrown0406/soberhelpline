@@ -12,8 +12,10 @@ const SUBSCRIPTION_SUSPENDED = 'BILLING.SUBSCRIPTION.SUSPENDED';
 const SUBSCRIPTION_EXPIRED = 'BILLING.SUBSCRIPTION.EXPIRED';
 const PAYMENT_COMPLETED = 'PAYMENT.SALE.COMPLETED';
 
-// PayPal API base URL (use sandbox for testing, live for production)
-const PAYPAL_API_BASE = 'https://api-m.paypal.com';
+// PayPal API base URL — sandbox when PAYPAL_MODE=sandbox, live otherwise
+const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
+  ? 'https://api-m.sandbox.paypal.com'
+  : 'https://api-m.paypal.com';
 
 async function getPayPalAccessToken(): Promise<string> {
   const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
