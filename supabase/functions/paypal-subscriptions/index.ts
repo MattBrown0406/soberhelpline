@@ -596,21 +596,25 @@ Deno.serve(async (req) => {
       }
 
       case 'cancel-subscription': {
-        const { subscriptionId, reason } = params;
-        
-        if (!subscriptionId) {
+        const { subscriptionId, reason, source } = params;
+
+        if (!subscriptionId || typeof subscriptionId !== 'string') {
           throw new Error('Missing subscription ID');
         }
 
-        // Verify the authenticated user owns this subscription
+        // Fetch the row; require ownership. Include provider_submission_id + next_billing_date
+        // so we can (a) block cross-context cancellation and (b) preserve paid-through access.
         const { data: subscription, error: fetchError } = await supabaseClient
           .from('provider_subscriptions')
-          .select('user_id')
+          .select('id, user_id, provider_submission_id, status, next_billing_date, paypal_subscription_id')
           .eq('paypal_subscription_id', subscriptionId)
-          .single();
+          .maybeSingle();
 
         if (fetchError || !subscription) {
-          throw new Error('Subscription not found');
+          return new Response(
+            JSON.stringify({ error: 'Subscription not found' }),
+            { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
         if (subscription.user_id !== authenticatedUserId) {
@@ -620,36 +624,112 @@ Deno.serve(async (req) => {
           );
         }
 
-        const response = await fetch(
-          `${PAYPAL_API_BASE}/v1/billing/subscriptions/${subscriptionId}/cancel`,
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ reason: reason || 'User requested cancellation' }),
-          }
-        );
-
-        if (!response.ok && response.status !== 204) {
-          const error = await response.text();
-          console.error('PayPal cancel error:', error);
-          throw new Error('Failed to cancel subscription');
+        // Determine cancellation source. The member billing page always sends
+        // 'member_portal' or omits it (default). Family cancellations must not
+        // accidentally cancel provider listings and vice versa.
+        const cancellationSource = typeof source === 'string' ? source : 'member_portal';
+        if (
+          cancellationSource === 'member_portal' &&
+          subscription.provider_submission_id !== null
+        ) {
+          return new Response(
+            JSON.stringify({
+              error: 'This subscription is a provider listing, not a family membership. Provider listings must be cancelled from the provider dashboard.',
+            }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
-        // Update database
+        // Idempotent: if already cancelled, just return success.
+        if (subscription.status === 'cancelled') {
+          return new Response(
+            JSON.stringify({ success: true, alreadyCancelled: true }),
+            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        const nowIso = new Date().toISOString();
+        const isFreeBypass = /^(FREE-|FAMILY6-|FREELIST-|FREE6-|FREEMONTH-|HELPLINE-)/i.test(subscriptionId);
+
+        let paypalConfirmedAt: string | null = null;
+
+        if (!isFreeBypass) {
+          // Real PayPal recurring agreement — call PayPal cancel.
+          const cancelResp = await fetch(
+            `${PAYPAL_API_BASE}/v1/billing/subscriptions/${subscriptionId}/cancel`,
+            {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ reason: reason || 'User requested cancellation' }),
+            }
+          );
+
+          if (cancelResp.status === 204) {
+            paypalConfirmedAt = nowIso;
+          } else {
+            // Treat "already cancelled" as success by re-checking status via GET.
+            const errText = await cancelResp.text();
+            console.error('PayPal cancel error:', cancelResp.status, errText);
+
+            let treatAsAlreadyCancelled = false;
+            try {
+              const details = await getSubscriptionDetails(accessToken, subscriptionId);
+              const paypalStatus = String(details?.status || '').toUpperCase();
+              if (paypalStatus === 'CANCELLED' || paypalStatus === 'EXPIRED') {
+                treatAsAlreadyCancelled = true;
+                paypalConfirmedAt = nowIso;
+              }
+            } catch (verifyErr) {
+              console.error('PayPal status recheck failed:', verifyErr);
+            }
+
+            if (!treatAsAlreadyCancelled) {
+              // Do NOT update local status. Surface the failure to the caller.
+              return new Response(
+                JSON.stringify({
+                  error: 'PayPal cancellation failed. Your membership was NOT cancelled. Please try again or contact matt@soberhelpline.com.',
+                }),
+                { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+              );
+            }
+          }
+        }
+
+        // Preserve paid-through access when we know when the next charge would have been.
+        const accessEndsAt = subscription.next_billing_date || null;
+
         const { error: dbError } = await supabaseClient
           .from('provider_subscriptions')
-          .update({ status: 'cancelled' })
-          .eq('paypal_subscription_id', subscriptionId);
+          .update({
+            status: 'cancelled',
+            cancelled_at: nowIso,
+            cancellation_reason: reason || null,
+            cancellation_source: cancellationSource,
+            paypal_cancel_confirmed_at: paypalConfirmedAt,
+            access_ends_at: accessEndsAt,
+            updated_at: nowIso,
+          })
+          .eq('id', subscription.id);
 
         if (dbError) {
-          console.error('Database error:', dbError);
+          console.error('Database error while marking cancelled:', dbError);
+          return new Response(
+            JSON.stringify({
+              error: 'Cancelled with PayPal but failed to update local record. Please contact matt@soberhelpline.com.',
+            }),
+            { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
         return new Response(
-          JSON.stringify({ success: true }),
+          JSON.stringify({
+            success: true,
+            paypalCancelled: !isFreeBypass,
+            accessEndsAt,
+          }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
