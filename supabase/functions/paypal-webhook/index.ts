@@ -12,8 +12,10 @@ const SUBSCRIPTION_SUSPENDED = 'BILLING.SUBSCRIPTION.SUSPENDED';
 const SUBSCRIPTION_EXPIRED = 'BILLING.SUBSCRIPTION.EXPIRED';
 const PAYMENT_COMPLETED = 'PAYMENT.SALE.COMPLETED';
 
-// PayPal API base URL (use sandbox for testing, live for production)
-const PAYPAL_API_BASE = 'https://api-m.paypal.com';
+// PayPal API base URL — sandbox when PAYPAL_MODE=sandbox, live otherwise
+const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
+  ? 'https://api-m.sandbox.paypal.com'
+  : 'https://api-m.paypal.com';
 
 async function getPayPalAccessToken(): Promise<string> {
   const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
@@ -186,18 +188,38 @@ Deno.serve(async (req) => {
       case SUBSCRIPTION_SUSPENDED:
       case SUBSCRIPTION_EXPIRED: {
         const subscriptionId = resource.id;
-        const newStatus = eventType === SUBSCRIPTION_CANCELLED ? 'cancelled' 
-          : eventType === SUBSCRIPTION_SUSPENDED ? 'suspended' 
+        const newStatus = eventType === SUBSCRIPTION_CANCELLED ? 'cancelled'
+          : eventType === SUBSCRIPTION_SUSPENDED ? 'suspended'
           : 'expired';
 
         console.log(`Updating subscription ${subscriptionId} to ${newStatus}`);
 
+        // Preserve paid-through access for cancellations that arrive via webhook
+        // (e.g. member cancelled directly in PayPal).
+        const nowIso = new Date().toISOString();
+        const updatePayload: Record<string, unknown> = {
+          status: newStatus,
+          updated_at: nowIso,
+        };
+        if (newStatus === 'cancelled') {
+          updatePayload.cancelled_at = nowIso;
+          updatePayload.paypal_cancel_confirmed_at = nowIso;
+          updatePayload.cancellation_source = 'paypal_webhook';
+        }
+
+        const { data: existing } = await supabaseClient
+          .from('provider_subscriptions')
+          .select('next_billing_date, access_ends_at')
+          .eq('paypal_subscription_id', subscriptionId)
+          .maybeSingle();
+
+        if (newStatus === 'cancelled' && existing && !existing.access_ends_at) {
+          updatePayload.access_ends_at = existing.next_billing_date || null;
+        }
+
         const { error } = await supabaseClient
           .from('provider_subscriptions')
-          .update({
-            status: newStatus,
-            updated_at: new Date().toISOString(),
-          })
+          .update(updatePayload)
           .eq('paypal_subscription_id', subscriptionId);
 
         if (error) {

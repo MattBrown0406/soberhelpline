@@ -2317,10 +2317,15 @@ export type Database = {
       }
       provider_subscriptions: {
         Row: {
+          access_ends_at: string | null
           amount: number
+          cancellation_reason: string | null
+          cancellation_source: string | null
+          cancelled_at: string | null
           created_at: string
           id: string
           next_billing_date: string | null
+          paypal_cancel_confirmed_at: string | null
           paypal_subscription_id: string | null
           plan_type: string
           provider_submission_id: string | null
@@ -2330,10 +2335,15 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          access_ends_at?: string | null
           amount: number
+          cancellation_reason?: string | null
+          cancellation_source?: string | null
+          cancelled_at?: string | null
           created_at?: string
           id?: string
           next_billing_date?: string | null
+          paypal_cancel_confirmed_at?: string | null
           paypal_subscription_id?: string | null
           plan_type: string
           provider_submission_id?: string | null
@@ -2343,10 +2353,15 @@ export type Database = {
           user_id: string
         }
         Update: {
+          access_ends_at?: string | null
           amount?: number
+          cancellation_reason?: string | null
+          cancellation_source?: string | null
+          cancelled_at?: string | null
           created_at?: string
           id?: string
           next_billing_date?: string | null
+          paypal_cancel_confirmed_at?: string | null
           paypal_subscription_id?: string | null
           plan_type?: string
           provider_submission_id?: string | null
