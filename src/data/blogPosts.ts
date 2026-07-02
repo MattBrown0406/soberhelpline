@@ -1,4 +1,5 @@
 
+import rehabAdmissionsProcessImg from "@/assets/blog-rehab-admissions-process-family-guide.jpg";
 import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-mean.jpg";
 import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery-milestones-family-guide.jpg";
 import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
@@ -159,6 +160,89 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 136,
+    slug: "rehab-admissions-process-family-guide",
+    seoTitle: "Rehab Admissions Process: A Family's Step-by-Step Guide",
+    metaDescription: "A calm, step-by-step guide to the rehab admissions process — what to expect, what to prepare, and how families can make intake day less overwhelming.",
+    title: "The Rehab Admissions Process: A Family's Step-by-Step Guide to What Happens Next",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-07-02",
+    image: rehabAdmissionsProcessImg,
+    keywords: ["rehab admissions process", "how to get someone into rehab", "rehab intake day", "insurance verification rehab", "what to bring to rehab"],
+    excerpt: "If your loved one has said yes to treatment, you are standing in a hopeful and slightly terrifying place. Here is what happens between \"yes\" and \"admitted\" — and how to help without carrying all of it yourself.",
+    content: `If your loved one has said yes to treatment, you are standing in a hopeful and slightly terrifying place. The decision is made, but now there is a whole process you have never navigated — and no one handed you a map. This guide walks you through the rehab admissions process from the first phone call to the first day inside, so you know what is coming and can help without carrying all of it yourself.
+
+Most families do not need a crisis-level intervention to get here. Sometimes a loved one is simply tired enough to accept help, and the window can be short. Knowing the steps ahead of time lets you move quickly and calmly when it opens.
+
+**What is the rehab admissions process?**
+
+The rehab admissions process is the series of steps a treatment center uses to evaluate someone, confirm coverage, and bring them into care. It usually takes anywhere from a few hours to a few days, depending on urgency and insurance. The goal is to match the person to the right level of care and get them admitted safely.
+
+At a high level, admissions moves through five stages: the first contact, a clinical assessment, insurance or payment verification, pre-admission planning, and intake day itself. Some centers move through all of this in a single afternoon when a bed is available and the situation is urgent. Others schedule an admission date days out. Either way, the sequence is roughly the same.
+
+Understanding the sequence matters for one reason: the time between "yes" and "admitted" is when many people change their minds. The smoother the process, the less room there is for second-guessing.
+
+**What happens during the first phone call to a treatment center?**
+
+The first call is a screening conversation, not a commitment. An admissions coordinator will ask about the substance being used, how much and how often, medical history, mental health, and what has been tried before. This helps them decide whether the person needs medical detox first, and what level of care fits.
+
+It is completely normal for the person struggling — or you, on their behalf — to make this call. Many centers accept calls from family members, though they will need the person's consent and participation to move forward.
+
+A few things to have ready before you dial: the substances involved, rough amounts, and the date and time of last use; any current medications, diagnoses, and major medical conditions; insurance information — the member ID and the name of the plan; and a short history of past treatment, if any.
+
+Write down the coordinator's name and direct line. You will likely speak with several people, and having one contact keeps things from getting lost.
+
+**What is a clinical assessment and why does it matter?**
+
+A clinical assessment is a structured evaluation — sometimes by phone, sometimes in person — that determines the right level of care. A licensed clinician asks detailed questions about substance use, physical health, mental health, and living situation. The answers decide whether someone starts with detox, residential treatment, or an outpatient program.
+
+This step protects your loved one. Someone with a heavy alcohol or benzodiazepine habit can face dangerous withdrawal and needs medically supervised detox first. A good center will not skip or rush this.
+
+Encourage honesty here, even though the instinct is to minimize. Under-reporting use can land someone in a level of care that is not safe for them. This is one place where the messier, more honest version is the one that actually helps. Our [LINK:treatment questions guide:/treatment-questions] can help you think through what to ask before you commit to a program.
+
+**How does insurance verification work during admissions?**
+
+Insurance verification is when the treatment center contacts your insurer to confirm what your plan covers and what you will owe. Most centers do this for you at no charge, and it usually takes a few hours to a day. You will get an estimate of covered days, your deductible, and any out-of-pocket costs before admission.
+
+Ask for that estimate in writing. Verbal quotes get forgotten, and the number you hear on day one is the number you want to be able to point back to later.
+
+A few questions worth asking during this stage: Is this center in-network or out-of-network for my plan? How many days are authorized to start, and how are additional days approved? What is my estimated out-of-pocket cost, including deductible and coinsurance? If insurance denies coverage, what are the payment options?
+
+If your loved one is uninsured or underinsured, do not assume the door is closed. Ask about sliding-scale fees, scholarships, payment plans, and state-funded programs. Many centers have options they do not advertise until you ask. Watch out for the [LINK:red flags of predatory treatment programs:/treatment-red-flags] while you compare centers.
+
+**What should you prepare before intake day?**
+
+Once admission is confirmed, there is a short pre-admission window to handle logistics. Handling these in advance removes excuses and lowers anxiety on the day itself. Think of it as clearing the runway so nothing gets in the way of "yes."
+
+Practical things to sort out ahead of time: ask the center for its packing list (most have rules about what is and is not allowed — no mouthwash with alcohol, limited electronics, no outside medications without approval); arrange transportation and know the arrival time and address (if travel is involved, confirm who is driving or flying with them); handle work, school, and childcare coverage (a short conversation with an employer under the Family and Medical Leave Act often protects a job); gather ID, insurance cards, a list of medications, and any legal or court paperwork if relevant; and plan for pets, bills, and mail so those worries do not pull the person back home in week one.
+
+Keep the emotional temperature low the day before. This is not the moment for a long talk about everything that went wrong. It is the moment to say, plainly, that you are proud they are going and you will be here.
+
+**What happens on the first day of treatment?**
+
+Intake day involves paperwork, a health check, a search of belongings, and an orientation to the program. The person will meet staff, get assigned a room, and begin a more detailed medical and psychological evaluation. Expect it to take several hours and to feel clinical and a little overwhelming — that is normal.
+
+Most centers limit or pause outside contact for the first few days so the person can settle in without distraction. This is not punishment, and it is not a sign something is wrong. Ask the admissions team about the communication policy so you are not left guessing when you do not hear anything.
+
+For families, the hardest part is often the drive home. That quiet can feel like loss, but it is actually the beginning of you getting your own life back. This is a good moment to line up your own support — a call to a friend, an [LINK:Al-Anon:https://al-anon.org] meeting, or a coaching session.
+
+**You have done the hard part**
+
+Getting someone to the point of admission takes more than most people realize. If that day is close, take a breath: the process is more predictable than it feels right now. You do not have to know everything — just take the next step, and then the one after that.
+
+Stay decided. The center's job is to treat your loved one. Your job is to hand them off well and then take care of yourself so you can be steady for the long road of recovery ahead. If you want a place to land after that drive home, join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call or talk with our [LINK:family coaching team:/family-coaching] — they have walked this exact stretch with hundreds of families.`,
+    tags: ["treatment", "rehab admissions", "family support", "intake day", "insurance"],
+    faqItems: [
+      { question: "How long does the rehab admissions process take?", answer: "It can take anywhere from a few hours to a few days. When a bed is available and the situation is urgent, some centers admit the same day. Insurance verification and clinical assessment are usually what determine the timeline." },
+      { question: "Can a family member start the admissions process?", answer: "Yes. Family members regularly make the first call and gather information. However, the person entering treatment must eventually consent and participate in the assessment, and privacy laws limit what the center can share without their permission." },
+      { question: "What do you need to bring to rehab?", answer: "Every center provides a packing list, but common items include a photo ID, insurance card, a list of current medications, comfortable clothing, and basic toiletries without alcohol. Avoid valuables, and confirm the rules on phones and electronics before you go." },
+      { question: "Does insurance cover the rehab admissions process?", answer: "Verifying benefits is typically free, and most insurance plans cover some level of addiction treatment thanks to mental health parity laws. Coverage amounts vary widely, so ask for a written estimate of authorized days and out-of-pocket costs before admission." },
+      { question: "What if my loved one changes their mind before intake day?", answer: "This is common, because the space between deciding and going is where fear creeps in. Keep the timeline short, handle logistics in advance, and stay calm rather than argumentative. If they still refuse, a professional interventionist or coach can help you find the next best step." },
+      { question: "Can I contact my loved one after they are admitted?", answer: "Usually there is a short blackout period of a few days so the person can settle in. After that, most centers allow scheduled calls and, later, family visits or family programming. Ask the admissions team for the specific communication policy so you know what to expect." }
+    ]
+  },
   {
     id: 135,
     slug: "rehab-success-rates-what-they-mean",
