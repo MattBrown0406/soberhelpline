@@ -23,39 +23,49 @@ Deno.serve(async (req) => {
       return jsonResponse({ isMember: false });
     }
 
-    const authHeader = req.headers.get('Authorization') ?? '';
-    if (!authHeader.startsWith('Bearer ')) {
-      return jsonResponse({ isMember: false }, 401);
-    }
-    const token = authHeader.replace('Bearer ', '');
-
     const adminClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Verify the caller's JWT
-    const { data: userData, error: userError } = await adminClient.auth.getUser(token);
-    if (userError || !userData?.user) {
-      return jsonResponse({ isMember: false }, 401);
-    }
-
     const normalizedEmail = email.toLowerCase().trim();
-    const callerEmail = (userData.user.email || '').toLowerCase().trim();
 
-    // Only allow checking your own email — prevents enumeration / oracle abuse.
-    // Admins are still allowed to look up any address.
-    let isAdmin = false;
-    const { data: roleRow } = await adminClient
-      .from('user_roles')
-      .select('role')
-      .eq('user_id', userData.user.id)
-      .eq('role', 'admin')
-      .maybeSingle();
-    if (roleRow) isAdmin = true;
+    // Server-to-server bypass: mobile backend sends x-membership-sync-secret.
+    // Only honored when MEMBERSHIP_SYNC_SECRET is configured non-empty and matches exactly.
+    const syncSecret = Deno.env.get('MEMBERSHIP_SYNC_SECRET') ?? '';
+    const providedSyncSecret = req.headers.get('x-membership-sync-secret') ?? '';
+    const isServerToServer =
+      syncSecret.length > 0 && providedSyncSecret === syncSecret;
 
-    if (!isAdmin && normalizedEmail !== callerEmail) {
-      return jsonResponse({ isMember: false }, 403);
+    if (!isServerToServer) {
+      const authHeader = req.headers.get('Authorization') ?? '';
+      if (!authHeader.startsWith('Bearer ')) {
+        return jsonResponse({ isMember: false }, 401);
+      }
+      const token = authHeader.replace('Bearer ', '');
+
+      // Verify the caller's JWT
+      const { data: userData, error: userError } = await adminClient.auth.getUser(token);
+      if (userError || !userData?.user) {
+        return jsonResponse({ isMember: false }, 401);
+      }
+
+      const callerEmail = (userData.user.email || '').toLowerCase().trim();
+
+      // Only allow checking your own email — prevents enumeration / oracle abuse.
+      // Admins are still allowed to look up any address.
+      let isAdmin = false;
+      const { data: roleRow } = await adminClient
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userData.user.id)
+        .eq('role', 'admin')
+        .maybeSingle();
+      if (roleRow) isAdmin = true;
+
+      if (!isAdmin && normalizedEmail !== callerEmail) {
+        return jsonResponse({ isMember: false }, 403);
+      }
     }
 
     // Find user_id by email in profile_private
