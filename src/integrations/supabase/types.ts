@@ -2382,7 +2382,7 @@ export type Database = {
           prior_treatment: string | null
           relationship: string | null
           safety_concerns: string | null
-          session_token: string | null
+          session_token: string
           stage_assigned: string | null
           substances: string[] | null
           user_id: string | null
@@ -2396,7 +2396,7 @@ export type Database = {
           prior_treatment?: string | null
           relationship?: string | null
           safety_concerns?: string | null
-          session_token?: string | null
+          session_token?: string
           stage_assigned?: string | null
           substances?: string[] | null
           user_id?: string | null
@@ -2410,7 +2410,7 @@ export type Database = {
           prior_treatment?: string | null
           relationship?: string | null
           safety_concerns?: string | null
-          session_token?: string | null
+          session_token?: string
           stage_assigned?: string | null
           substances?: string[] | null
           user_id?: string | null
@@ -2457,18 +2457,21 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          is_public: boolean
           key: string
           updated_at: string
           updated_by: string | null
           value: string
         }
         Insert: {
+          is_public?: boolean
           key: string
           updated_at?: string
           updated_by?: string | null
           value: string
         }
         Update: {
+          is_public?: boolean
           key?: string
           updated_at?: string
           updated_by?: string | null
