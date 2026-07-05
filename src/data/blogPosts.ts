@@ -1,4 +1,5 @@
 
+import verifyRehabAccreditationImg from "@/assets/blog-verify-rehab-accreditation-licensing.jpg";
 import rehabAdmissionsProcessImg from "@/assets/blog-rehab-admissions-process-family-guide.jpg";
 import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-mean.jpg";
 import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery-milestones-family-guide.jpg";
