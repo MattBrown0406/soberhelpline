@@ -162,7 +162,90 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
-    id: 136,
+    id: 137,
+    slug: "verify-rehab-accreditation-licensing",
+    seoTitle: "Rehab Accreditation: How to Verify a Treatment Center | Sober Helpline",
+    metaDescription: "Learn how to verify a rehab's accreditation, state license, and staff credentials before you commit. A practical checklist for families choosing treatment.",
+    title: "Rehab Accreditation: How to Verify a Treatment Center Is Legitimate Before You Commit",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-07-05",
+    image: verifyRehabAccreditationImg,
+    keywords: ["rehab accreditation", "verify rehab license", "Joint Commission rehab", "CARF accreditation", "choosing a treatment center"],
+    excerpt: "Verifying a rehab's accreditation, license, and staff credentials takes less than an hour and no special expertise. Here is exactly what to check, where to check it, and what the answers mean.",
+    content: `When your loved one finally says yes to treatment, the last thing you want to do is slow down. But choosing a treatment center is one of the most important decisions your family will make, and rehab accreditation is one of the clearest signals that a program meets real standards of care. The good news: verifying a center's accreditation, state license, and staff credentials takes less than an hour, and you don't need any special expertise to do it.
+
+This guide walks you through exactly what to check, where to check it, and what the answers mean — so you can move quickly without moving blindly.
+
+**What Is Rehab Accreditation and Why Does It Matter?**
+
+Rehab accreditation is a voluntary, independent review process in which an outside organization evaluates a treatment center against nationally recognized standards for safety, clinical quality, and ethics. The two major accrediting bodies in addiction treatment are The Joint Commission and CARF (the Commission on Accreditation of Rehabilitation Facilities). Accreditation is different from a state license, which is the legal minimum a facility needs to operate.
+
+Think of it this way: a state license means the facility is allowed to open its doors. Accreditation means someone with no financial stake in the program has walked through those doors, reviewed clinical records, interviewed staff, and confirmed the program does what it says it does.
+
+Accreditation doesn't guarantee a perfect experience. But its absence at a residential treatment center is worth asking about, because most reputable programs pursue it — and many insurance companies require it before they'll pay for care.
+
+**How Do You Check a Treatment Center's State License?**
+
+Every state licenses addiction treatment facilities through a state agency, usually the department of health or a behavioral health division, and most states offer a free online license lookup. Search the state name plus "substance use disorder treatment facility license verification" and you'll typically land on the right database within a minute or two.
+
+When you find the listing, check three things:
+
+- The license is current and active — not expired, suspended, or provisional.
+- The licensed services match what the program is selling you. A facility licensed only for outpatient care should not be offering residential treatment or detox.
+- The name and address on the license match the facility you're actually considering. Some marketing websites funnel families to different facilities than the one pictured.
+
+If you can't find the facility in the state database, call the state licensing agency directly. That phone call costs you nothing, and it has saved families from serious mistakes.
+
+**The Joint Commission vs. CARF: What's the Difference?**
+
+Both The Joint Commission and CARF are legitimate, nationally respected accrediting bodies, and a treatment center only needs one of them. The Joint Commission (you may see its Gold Seal of Approval on a program's website) comes from the hospital world and puts strong emphasis on health, safety, and medical standards. CARF grew up in rehabilitation and behavioral health, and its reviews focus heavily on clinical programming and measurable outcomes.
+
+For your purposes as a family, the differences matter less than the verification itself. Both organizations offer free public lookup tools: The Joint Commission's Quality Check website and CARF's provider search. Enter the facility's name and confirm the accreditation is current and covers the level of care your loved one needs — for example, residential treatment versus outpatient.
+
+One caution: a logo on a website is not verification. Facilities occasionally display seals for accreditations that have lapsed, or that apply to a sister facility under the same brand. Always confirm through the accreditor's own site.
+
+**Who Will Actually Treat Your Loved One? Checking Staff Credentials**
+
+A beautiful campus doesn't provide therapy — people do, and staff credentials tell you who those people are. Quality programs employ licensed clinicians, and they're proud to tell you about them. When you call admissions, ask directly:
+
+- Who is your medical director, and are they board-certified in addiction medicine or addiction psychiatry?
+- Are your therapists independently licensed (for example, LCSW, LMFT, LPC, or licensed psychologists), or are they interns and counselors-in-training?
+- What is your staff-to-client ratio, and how many individual therapy sessions does a client receive each week?
+- Is nursing available on-site, and during what hours?
+
+You can verify individual licenses the same way you verified the facility: every state has a public license lookup for doctors, nurses, and therapists. A program that hesitates to name its clinical leadership, or gets vague when you ask about individual therapy frequency, is telling you something important.
+
+Certified peer support staff and counselors in training have a real place in good treatment — recovery experience matters. The question is whether they're supplementing licensed clinicians or substituting for them.
+
+**A Simple Verification Checklist Before You Commit**
+
+Before signing paperwork or paying a deposit, work through this checklist. It takes about an hour, and every item is free:
+
+- Confirm the state license is active and matches the services offered.
+- Verify current accreditation through The Joint Commission's Quality Check or CARF's provider search.
+- Confirm the medical director's board certification and the licenses of key clinical staff.
+- Ask how many individual therapy sessions per week are included, and who provides them.
+- Search the facility's name alongside words like "complaint," "lawsuit," and "citation," and read the results with a level head — one angry review means little, but patterns matter.
+- Call your insurance company to confirm the facility is in-network, or to understand your out-of-network costs.
+
+If a center pressures you to commit before you've had time to verify — especially with urgency tactics like "this bed won't be available tomorrow" — treat that as a red flag, not a reason to hurry. Our [LINK:questions to ask a treatment center:/treatment-questions] guide walks through exactly what to bring to that conversation, and our overview of [LINK:predatory treatment red flags:/treatment-red-flags] can help you spot patient brokering before it costs you.
+
+**You Can Move Fast and Still Verify**
+
+Families often feel they have to choose between acting quickly and acting carefully. You don't. Every check in this article can be completed in a single afternoon, and a legitimate treatment center will respect you more for asking. Your loved one's willingness to get help is precious — and it deserves to land somewhere worthy of it. Trust your questions. They are not obstacles to treatment; they are part of loving someone well.
+
+If you'd like help evaluating a specific program or thinking through the next step, our [LINK:family coaching and support:/family-coaching] team and [LINK:family membership community:/family-membership] were built for exactly this moment. You don't have to figure this out alone.`,
+    tags: ["treatment", "rehab accreditation", "choosing rehab", "family support", "licensing"],
+    faqItems: [
+      { question: "Is rehab accreditation legally required?", answer: "No. Accreditation is voluntary, while a state license is legally required. However, many insurance plans will only cover treatment at accredited facilities, and most reputable residential programs hold accreditation from The Joint Commission or CARF." },
+      { question: "How do I check if a rehab is accredited?", answer: "Use the accreditor's own free lookup tool: The Joint Commission's Quality Check website or CARF's provider search. Enter the facility's legal name and confirm the accreditation is current and covers the specific level of care being offered." },
+      { question: "What's the difference between a licensed and an accredited treatment center?", answer: "A license is the legal minimum from the state that allows a facility to operate. Accreditation is an independent review against national quality standards. The strongest programs have both — licensing tells you it's legal, accreditation suggests it's good." },
+      { question: "What credentials should rehab staff have?", answer: "Look for a medical director board-certified in addiction medicine or psychiatry, independently licensed therapists (LCSW, LMFT, LPC, or psychologists), and on-site nursing appropriate to the level of care. Peer support staff add value, but they should supplement licensed clinicians, not replace them." },
+      { question: "What are red flags that a rehab isn't legitimate?", answer: "Warning signs include no verifiable state license or accreditation, refusal to name clinical leadership, guarantees of success, offers to cover your flights or waive all costs, and high-pressure urgency tactics. Legitimate programs answer verification questions openly." }
+    ]
+  },
+  {
     slug: "rehab-admissions-process-family-guide",
     seoTitle: "Rehab Admissions Process: A Family's Step-by-Step Guide",
     metaDescription: "A calm, step-by-step guide to the rehab admissions process — what to expect, what to prepare, and how families can make intake day less overwhelming.",
