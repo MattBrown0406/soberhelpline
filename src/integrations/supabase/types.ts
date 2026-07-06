@@ -182,6 +182,27 @@ export type Database = {
         }
         Relationships: []
       }
+      cancelled_meeting_dates: {
+        Row: {
+          created_at: string
+          meeting_date: string
+          reason: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          meeting_date: string
+          reason?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          meeting_date?: string
+          reason?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       coaching_intake_assessments: {
         Row: {
           anxiety_level: string | null
@@ -700,6 +721,95 @@ export type Database = {
           time_spent_seconds?: number | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      email_poll_votes: {
+        Row: {
+          choice: number | null
+          created_at: string
+          email_sent_at: string | null
+          id: string
+          poll_id: string
+          recipient_email: string
+          recipient_name: string | null
+          token: string
+          updated_at: string
+          voted_at: string | null
+        }
+        Insert: {
+          choice?: number | null
+          created_at?: string
+          email_sent_at?: string | null
+          id?: string
+          poll_id: string
+          recipient_email: string
+          recipient_name?: string | null
+          token?: string
+          updated_at?: string
+          voted_at?: string | null
+        }
+        Update: {
+          choice?: number | null
+          created_at?: string
+          email_sent_at?: string | null
+          id?: string
+          poll_id?: string
+          recipient_email?: string
+          recipient_name?: string | null
+          token?: string
+          updated_at?: string
+          voted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_poll_votes_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "email_polls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_polls: {
+        Row: {
+          closed_at: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          meeting_date: string | null
+          option_1_label: string
+          option_2_label: string
+          question: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          closed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meeting_date?: string | null
+          option_1_label: string
+          option_2_label: string
+          question: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          closed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meeting_date?: string | null
+          option_1_label?: string
+          option_2_label?: string
+          question?: string
+          slug?: string
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -3350,6 +3460,16 @@ export type Database = {
       }
     }
     Functions: {
+      cast_poll_vote: {
+        Args: { _choice: number; _token: string }
+        Returns: {
+          current_choice: number
+          option_1_count: number
+          option_2_count: number
+          poll_id: string
+          total_votes: number
+        }[]
+      }
       get_booking_slots: {
         Args: never
         Returns: {
@@ -3380,6 +3500,24 @@ export type Database = {
           isOneToOne: false
           isSetofReturn: true
         }
+      }
+      get_poll_by_token: {
+        Args: { _token: string }
+        Returns: {
+          closed_at: string
+          current_choice: number
+          meeting_date: string
+          option_1_count: number
+          option_1_label: string
+          option_2_count: number
+          option_2_label: string
+          poll_id: string
+          question: string
+          recipient_name: string
+          title: string
+          total_votes: number
+          voted_at: string
+        }[]
       }
       get_promo_remaining: { Args: { promo_code: string }; Returns: number }
       get_provider_click_analytics_admin: {
