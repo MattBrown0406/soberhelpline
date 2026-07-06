@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can view active availability for scheduling" ON public.provider_availability;
