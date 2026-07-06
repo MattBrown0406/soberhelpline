@@ -205,6 +205,17 @@ export default function MondayZoomRegistration() {
     e.preventDefault();
     setErrors({});
 
+    if (cancellationReason) {
+      toast({
+        title: "Meeting cancelled",
+        description: cancellationReason,
+        variant: "destructive",
+      });
+      return;
+    }
+
+
+
     const payload = {
       ...formData,
       name: trimmedName,
