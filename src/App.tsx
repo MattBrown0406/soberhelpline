@@ -401,6 +401,8 @@ const App = () => (
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />
               <Route path="/monday-night-zoom" element={<MondayZoomRegistration />} />
+              <Route path="/poll/:token" element={<PollVote />} />
+              <Route path="/admin/meeting-cancellation" element={<AdminMeetingCancellation />} />
               <Route path="/family-webinars" element={<SubscriberRoute><FamilyWebinars /></SubscriberRoute>} />
               <Route path="/treatment-questions" element={<TreatmentQuestions />} />
               <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
