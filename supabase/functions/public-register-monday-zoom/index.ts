@@ -42,6 +42,28 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    // Reject registrations for cancelled meeting dates with a user-facing message
+    const { data: cancelledRow } = await adminSupabase
+      .from("cancelled_meeting_dates")
+      .select("reason")
+      .eq("meeting_date", meeting_date)
+      .maybeSingle();
+
+    if (cancelledRow) {
+      return new Response(
+        JSON.stringify({
+          error:
+            cancelledRow.reason ||
+            "This meeting has been cancelled. Please check back next Monday at 7 PM PT.",
+          cancelled: true,
+        }),
+        {
+          status: 409,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
     // Blocklist check (email OR last name) — silently accept but do not register or email
     const { data: blockedFlag } = await adminSupabase.rpc("is_meeting_blocked", {
       _email: email,
