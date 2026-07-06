@@ -106,38 +106,47 @@ serve(async (req: Request) => {
     });
   }
 
-  // Admin-only: require caller to be an authenticated admin.
-  const authHeader = req.headers.get("Authorization") ?? "";
-  const token = authHeader.replace(/^Bearer\s+/i, "");
-  if (!token) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
+  // Auth: allow either (a) admin user JWT, or (b) shared-secret header for server-side trigger.
+  const sharedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
+  const providedSecret = req.headers.get("x-cron-secret") ?? "";
+  const secretOk = !!sharedSecret && providedSecret === sharedSecret;
 
-  const userClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!, {
-    global: { headers: { Authorization: `Bearer ${token}` } },
-  });
-  const { data: userData, error: userErr } = await userClient.auth.getUser();
-  if (userErr || !userData?.user) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+  if (!secretOk) {
+    const authHeader = req.headers.get("Authorization") ?? "";
+    const token = authHeader.replace(/^Bearer\s+/i, "");
+    if (!token) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const userClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      global: { headers: { Authorization: `Bearer ${token}` } },
     });
+    const { data: userData, error: userErr } = await userClient.auth.getUser();
+    if (userErr || !userData?.user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const adminCheck = createClient(supabaseUrl, serviceKey);
+    const { data: isAdmin } = await adminCheck.rpc("has_role", {
+      _user_id: userData.user.id,
+      _role: "admin",
+    });
+    if (!isAdmin) {
+      return new Response(JSON.stringify({ error: "Admin only" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
   }
 
   const admin = createClient(supabaseUrl, serviceKey);
-  const { data: isAdmin } = await admin.rpc("has_role", {
-    _user_id: userData.user.id,
-    _role: "admin",
-  });
-  if (!isAdmin) {
-    return new Response(JSON.stringify({ error: "Admin only" }), {
-      status: 403,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
+
 
   try {
     const body = await req.json().catch(() => ({}));
