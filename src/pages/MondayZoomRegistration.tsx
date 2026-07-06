@@ -189,6 +189,18 @@ export default function MondayZoomRegistration() {
     void fetchMeetingInfo();
   }, []);
 
+  useEffect(() => {
+    const checkCancellation = async () => {
+      const { data } = await supabase
+        .from("cancelled_meeting_dates")
+        .select("reason")
+        .eq("meeting_date", nextMeetingDate)
+        .maybeSingle();
+      setCancellationReason(data?.reason ?? null);
+    };
+    void checkCancellation();
+  }, [nextMeetingDate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
