@@ -540,7 +540,22 @@ export default function MondayZoomRegistration() {
               <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
             </div>
 
+            {cancellationReason ? (
+              <div className="mx-auto mb-6 max-w-2xl rounded-xl border-2 border-destructive/40 bg-destructive/5 p-5 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+                    <Calendar className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="mb-1 font-semibold text-foreground">This week's meeting is cancelled</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{cancellationReason}</p>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
             <Card className="mx-auto max-w-2xl border-2 shadow-lg">
+
               <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
                 <CardTitle className="text-xl text-foreground flex items-center gap-2">
                   <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
