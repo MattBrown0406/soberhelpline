@@ -76,6 +76,7 @@ export default function MondayZoomRegistration() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
+  const [cancellationReason, setCancellationReason] = useState<string | null>(null);
   const registrationViewTracked = useRef(false);
   const location = useLocation();
   const [searchParams] = useSearchParams();
