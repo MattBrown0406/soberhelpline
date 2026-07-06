@@ -25,8 +25,8 @@ export default function FamilyCoaching() {
   return (
     <>
       <SEOHead
-        title="Family Addiction Coaching for Parents & Spouses | Sober Helpline"
-        description="Book private family addiction coaching for boundaries, enabling, relapse, treatment refusal, and a clear next step. Start with coaching or the free Monday Zoom."
+        title="Family Coaching for Addiction | Private Family Addiction Coaching"
+        description="Private family coaching for addiction: boundaries, enabling, relapse, treatment refusal, and a clear next step. Book coaching or join the free Monday Zoom."
         faqItems={[
           {
             question: "What is family addiction coaching?",
@@ -109,7 +109,7 @@ export default function FamilyCoaching() {
                 <div className="flex flex-col gap-4 text-center md:text-left">
                   <div>
                     <p className="text-sm font-semibold text-primary mb-1">Choose the right level of help</p>
-                    <h2 className="text-xl font-bold text-logo-blue">If your family needs a plan now, book private family addiction coaching</h2>
+                    <h2 className="text-xl font-bold text-logo-blue">If your family needs a plan now, book private family coaching for addiction</h2>
                     <p className="text-sm text-muted-foreground mt-2">Use coaching for urgent, private, or complex situations: enabling, boundaries, relapse, treatment refusal, money requests, and family conflict. If the question can wait, start with the free Monday Family Squares Zoom and bring one specific family decision.</p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -171,7 +171,7 @@ export default function FamilyCoaching() {
                   </div>
                   <div>
                     <h1 className="text-3xl md:text-4xl font-bold text-amber-700 dark:text-amber-400">
-                      Family Addiction Coaching
+                      Family Coaching for Addiction
                     </h1>
                     <p className="text-muted-foreground">Calm, direct guidance for families living with addiction</p>
                   </div>

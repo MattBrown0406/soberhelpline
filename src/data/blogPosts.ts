@@ -627,16 +627,16 @@ This summer can be different. For your loved one — and for your whole family.`
   {
     id: 132,
     slug: "what-is-a-recovery-coach-family-guide",
-    seoTitle: "What Is a Recovery Coach? A Family Guide to Peer Recovery Support | Sober Helpline",
-    metaDescription: "What is a recovery coach? Learn how peer recovery support helps your loved one stay on track after treatment — and gives your family real, practical relief.",
-    title: "What Is a Recovery Coach? How Peer Recovery Support Can Help Your Loved One and Your Family",
+    seoTitle: "What Is a Recovery Coach or Sober Coach? Family Guide | Sober Helpline",
+    metaDescription: "What is a recovery coach or sober coach? Learn when coaching helps after treatment, when it does not, and what your family should do next.",
+    title: "What Is a Recovery Coach or Sober Coach? How Peer Recovery Support Can Help Your Loved One and Your Family",
     category: "Family Education",
     author: "Matt Brown",
     date: "2026-06-26",
     image: whatIsRecoveryCoachFamilyGuideImg,
     keywords: ["what is a recovery coach", "recovery coach", "peer recovery support specialist", "peer recovery support", "recovery coach vs sponsor", "recovery coach for family", "aftercare recovery coach"],
-    excerpt: "After treatment ends, the structure disappears overnight. A recovery coach helps fill that gap — and gives your family permission to step out of the enforcer role.",
-    content: `If your loved one has finished treatment, you may have noticed a quiet but real problem: the structure is gone. The daily groups, the counselors, the schedule that held everything together — all of it ends the day they walk out the door. So what is a recovery coach, and could one fill that gap? In simple terms, a recovery coach is a trained guide, usually someone in long-term recovery themselves, who walks alongside your loved one day to day and helps them turn good intentions into consistent action.
+    excerpt: "After treatment ends, the structure disappears overnight. A recovery coach or sober coach helps fill that gap — and gives your family permission to step out of the enforcer role.",
+    content: `If your loved one has finished treatment, you may have noticed a quiet but real problem: the structure is gone. The daily groups, the counselors, the schedule that held everything together — all of it ends the day they walk out the door. So what is a recovery coach or sober coach, and could one fill that gap? In simple terms, a recovery coach is a trained guide, usually someone in long-term recovery themselves, who walks alongside your loved one day to day and helps them turn good intentions into consistent action.
 
 This matters because the months right after treatment are often the most fragile. Your loved one is ready to do the work — but readiness and a plan are two different things. A recovery coach helps bridge that gap. And here is the part families tend to miss: a good coach takes pressure off you, too. You get to go back to being a parent, a spouse, or a sibling instead of acting as the unofficial case manager.
 
@@ -715,11 +715,11 @@ Trust your read on the relationship. The best credentials in the world won't hel
 
 Recovery is not won in treatment — it's lived out in the ordinary weeks that follow. A recovery coach gives your loved one a steady hand for that walk, and gives you permission to be family again instead of the full-time supervisor. That trade is worth a lot.
 
-You don't have to figure all of this out alone, and you don't have to get it perfect. Start with one step: a conversation, a question, a name. If you want help thinking through [aftercare planning after treatment](/aftercare-checklist), [setting healthy boundaries with a loved one](/boundary-setting-worksheet), or whether [family coaching sessions](/family-coaching) might be the right next move for your household, SoberHelpline.com is here for that. Stay decided about supporting recovery, make the next move small, and let the right people help carry the weight with you.`,
+You don't have to figure all of this out alone, and you don't have to get it perfect. Start with one step: a conversation, a question, a name. If your loved one is willing and needs day-to-day recovery structure, use the [sober coach and sober companion directory](/sober-coaches-companions). If they are refusing help, relapsing, or the family is divided, start with [family coaching sessions](/family-coaching) before you hire support. For the daily communication and boundary follow-through between appointments, [FamilyBridge](https://familybridgeapp.com) can help your family practice calmer responses at home. Stay decided about supporting recovery, make the next move small, and let the right people help carry the weight with you.`,
     faqItems: [
       {
         question: "What does a recovery coach do?",
-        answer: "A recovery coach helps someone build and maintain daily life in recovery. They set goals, provide accountability, connect the person to resources and meetings, and offer real-time support through cravings and rough patches. They are a practical guide, not a therapist or doctor."
+        answer: "A recovery coach or sober coach helps someone build and maintain daily life in recovery. They set goals, provide accountability, connect the person to resources and meetings, and offer real-time support through cravings and rough patches. They are a practical guide, not a therapist or doctor."
       },
       {
         question: "How much does a recovery coach cost?",

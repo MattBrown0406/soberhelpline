@@ -285,8 +285,8 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Articles, guides, and insights for families dealing with a loved one\'s addiction. Written by a professional interventionist with 20+ years experience.',
   },
   '/sober-coaches-companions': {
-    title: 'Find a Sober Coach or Companion Near You | Sober Helpline',
-    description: 'Find sober coach and sober companion services by state or ZIP code. Call first if relapse risk, treatment refusal, or family confusion means you need guidance before hiring.',
+    title: 'Find a Sober Coach Near You | Sober Coach & Companion Directory',
+    description: 'Find a sober coach or sober companion by state or ZIP code. If relapse, treatment refusal, or family conflict is active, call before you hire the wrong support.',
   },
   '/therapists': {
     title: 'Find an Addiction Therapist | Sober Helpline',

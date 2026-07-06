@@ -63,8 +63,8 @@ export default function IdahoFamilySupport() {
   return (
     <>
       <SEOHead
-        title="Family Support for Addiction in Idaho | Sober Helpline"
-        description="Idaho families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance."
+        title="Alcohol Interventionist in Idaho | Family Addiction Support"
+        description="Need an alcohol interventionist in Idaho? Get family addiction coaching, Monday Zoom support, and clear next steps for relapse, treatment refusal, or crisis."
         faqItems={faqItems}
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
@@ -80,12 +80,11 @@ export default function IdahoFamilySupport() {
               Idaho Family Addiction Resources
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
-              Family Support for Addiction in Idaho: Resources, Help &amp; Hope
+              Alcohol Interventionist and Family Addiction Support in Idaho
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Idaho is facing a rapidly escalating addiction crisis — and families in rural communities are bearing
-              the heaviest weight. From the Treasure Valley to the panhandle, meth and fentanyl are tearing families
-              apart. You don't have to figure this out alone. Free guidance and real support are available right now.
+              If someone you love is drinking, using drugs, refusing treatment, or relapsing, your family needs a clear next step.
+              Idaho families can start with the free Monday Zoom, book private coaching, or call when the situation may require intervention planning.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
@@ -97,7 +96,7 @@ export default function IdahoFamilySupport() {
               <Link to="/family-coaching">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Get Intervention Coaching
+                  Talk With an Interventionist
                 </Button>
               </Link>
             </div>
@@ -105,6 +104,33 @@ export default function IdahoFamilySupport() {
         </section>
 
         <FamilyProofStrip />
+        <section className="py-10 bg-background">
+          <div className="container max-w-4xl mx-auto px-4">
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Direct answer</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
+                Need an alcohol interventionist in Idaho?
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-5">
+                If your loved one is refusing treatment, drinking or using despite consequences, or cycling through relapse, start with a private family coaching call or call Sober Helpline before planning a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or Monday night family support.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href="tel:4582027900">
+                  <Button size="lg" className="gap-2 w-full sm:w-auto">
+                    <Phone className="h-4 w-4" />
+                    Call (458) 202-7900
+                  </Button>
+                </a>
+                <Link to="/family-coaching">
+                  <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                    <Calendar className="h-4 w-4" />
+                    Book family coaching
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Idaho Stats */}
         <section className="py-12 bg-muted/40">
