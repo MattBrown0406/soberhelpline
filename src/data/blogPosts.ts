@@ -1,5 +1,6 @@
 
 import verifyRehabAccreditationImg from "@/assets/blog-verify-rehab-accreditation-licensing.jpg";
+import fmlaRehabJobProtectionImg from "@/assets/blog-fmla-rehab-job-protection.jpg";
 import parentificationAddictedFamiliesImg from "@/assets/blog-parentification-addicted-families.jpg";
 import rehabAdmissionsProcessImg from "@/assets/blog-rehab-admissions-process-family-guide.jpg";
 import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-mean.jpg";
