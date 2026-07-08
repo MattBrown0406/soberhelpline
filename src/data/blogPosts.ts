@@ -1,5 +1,6 @@
 
 import verifyRehabAccreditationImg from "@/assets/blog-verify-rehab-accreditation-licensing.jpg";
+import fmlaRehabJobProtectionImg from "@/assets/blog-fmla-rehab-job-protection.jpg";
 import parentificationAddictedFamiliesImg from "@/assets/blog-parentification-addicted-families.jpg";
 import rehabAdmissionsProcessImg from "@/assets/blog-rehab-admissions-process-family-guide.jpg";
 import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-mean.jpg";
@@ -162,6 +163,86 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 139,
+    slug: "fmla-for-rehab-job-protection-addiction-treatment",
+    seoTitle: "FMLA for Rehab: Protect Your Job While Getting Addiction Treatment",
+    metaDescription: "Worried about losing your job if you go to rehab? Learn how FMLA for rehab works, who qualifies, and how EAPs and other benefits protect you.",
+    title: "FMLA for Rehab: How to Protect Your Job While Getting Addiction Treatment",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-07-08",
+    image: fmlaRehabJobProtectionImg,
+    keywords: ["FMLA for rehab", "job protection rehab", "can I be fired for going to rehab", "EAP addiction treatment", "short-term disability rehab"],
+    excerpt: "Fear of losing a job keeps millions of people out of treatment — but federal law and most employer benefits are built to protect it. Here is exactly how FMLA for rehab works and what other benefits can help.",
+    content: `One of the most common reasons people delay addiction treatment has nothing to do with willingness. It's fear of losing a job. Maybe you're the one considering treatment, or maybe you're a family member watching your loved one say, "I can't go to rehab — I'll get fired." Here's the truth: for millions of American workers, FMLA for rehab provides real, legally enforceable job protection while they get help. The Family and Medical Leave Act was written for exactly this kind of situation.
+
+**Does FMLA Cover Rehab and Addiction Treatment?**
+
+Yes. Under the Family and Medical Leave Act, substance use disorder is considered a serious health condition, and eligible employees can take up to 12 weeks of unpaid, job-protected leave per year to receive treatment. That includes inpatient rehab, residential programs, and ongoing outpatient treatment provided by a healthcare provider.
+
+There's one important requirement: the leave must be for treatment. FMLA protects time off to get help — it does not protect absences caused by substance use itself. Missing work because of a hangover isn't covered. Checking into a licensed treatment program is.
+
+Job-protected means exactly that. When the leave ends, the employer must restore the employee to the same position or an equivalent one — same pay, same benefits, same terms.
+
+Health insurance also continues during FMLA leave under the same conditions as if the person were still working, which matters enormously when that same insurance is paying for treatment.
+
+**Who Qualifies for FMLA Leave for Rehab?**
+
+Not every employee at every company is covered. To qualify for FMLA leave, three conditions must be met:
+
+- You've worked for your employer for at least 12 months (they don't have to be consecutive).
+- You've worked at least 1,250 hours in the 12 months before the leave — roughly 24 hours per week.
+- Your employer has 50 or more employees within 75 miles of your worksite.
+
+Public agencies and public schools are covered regardless of size. If you work for a small private employer that falls under the 50-employee threshold, FMLA may not apply — but don't stop reading. Some states have their own family leave laws with broader coverage, and the other benefits discussed below may still be available.
+
+One more provision worth knowing: FMLA leave can also be used to care for a spouse, child, or parent with a serious health condition. That means a wife can take protected leave to support her husband through treatment, or a parent can take leave to help an adult child who is still their dependent get admitted to a program.
+
+**How Do You Request FMLA Leave for Treatment?**
+
+The process is more straightforward than most people expect, and you do not have to disclose every detail of your situation. Here's how it typically works:
+
+1. Notify your employer or HR department that you need medical leave. If the treatment is planned, give 30 days' notice when possible; if it's urgent, notify them as soon as you practically can.
+2. You are not required to say "rehab" or "addiction." You can simply state that you need leave for a serious health condition requiring treatment.
+3. Your employer may request medical certification. Your treatment provider completes a standard form confirming that care is medically necessary — it does not need to spell out your diagnosis in detail to coworkers or managers.
+4. HR must keep your medical information confidential and separate from your personnel file.
+5. Coordinate the timing with the treatment program's admissions team. Good programs handle FMLA paperwork every week and will help you complete it.
+
+If you're a family member helping a loved one prepare for treatment, this is one of the most practical ways to help: gather the FMLA paperwork, connect the admissions team with the employer's HR contact, and take that logistical weight off your loved one's shoulders during an already overwhelming time.
+
+**Can You Be Fired for Going to Rehab?**
+
+If you qualify for FMLA and follow the process, your employer cannot legally fire you for taking leave to attend treatment. Retaliation for using FMLA is prohibited. In addition, the Americans with Disabilities Act (ADA) protects people in recovery and those seeking treatment from discrimination, as long as they are not currently using illegal drugs.
+
+There's an honest caveat here, and it's better to know it upfront: these laws protect treatment, not misconduct. If someone violates workplace policy — showing up impaired, failing a drug test, or breaking a signed last-chance agreement — entering rehab afterward doesn't erase the violation. The timing matters. Getting into treatment before a workplace crisis forces the issue is both safer for the job and better for recovery.
+
+This is often the reframe a hesitant loved one needs to hear: waiting doesn't protect the job. Waiting is what puts the job at risk.
+
+**What Other Employer Benefits Can Help Pay for Treatment?**
+
+FMLA protects the job, but the leave itself is unpaid. Several other workplace benefits can fill the financial gap, and many people don't know they have them.
+
+**Employee Assistance Programs (EAPs).** Most mid-size and large employers offer an EAP — a free, confidential benefit that typically includes assessments, short-term counseling, and referrals to treatment. EAP counselors can help verify insurance, recommend programs, and in some cases advocate for coverage. EAP use is confidential; your employer learns only aggregate usage numbers, not names.
+
+**Short-Term Disability Insurance.** If you have short-term disability coverage through work, addiction treatment often qualifies as a covered condition. That can replace 50 to 70 percent of your income during treatment — turning unpaid FMLA leave into partially paid leave.
+
+**PTO, Sick Time, and Health Insurance.** Employers can require (or you can choose) to run accrued PTO and sick time concurrently with FMLA leave, which keeps paychecks coming for part of the stay. And remember that the employer-sponsored health insurance itself continues during FMLA leave — so the plan paying for treatment stays active while you're away.
+
+**You Have More Protection Than You Think**
+
+Fear of job loss keeps people sick. But the reality is that federal law, state law, and most employer benefit packages are built to support treatment, not punish it. If you or someone you love has been putting off getting help because of work, the path is clearer than it feels: confirm FMLA eligibility, loop in the EAP, verify short-term disability, and let the treatment program's admissions team handle the paperwork alongside you. People go to treatment and return to their careers every single day. Recovery and employment are not competing goals — protecting one is how you protect the other.
+
+Navigating leave, insurance, and treatment decisions is a lot to carry alone — and you don't have to. Our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] help families build a plan that protects your loved one, your family, and your future. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or explore our guide to [LINK:questions to ask a treatment center:/treatment-questions] before you commit. Peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org] can also help family members through this stretch.`,
+    tags: ["treatment", "FMLA", "job protection", "insurance", "family support"],
+    faqItems: [
+      { question: "Does FMLA cover going to rehab?", answer: "Yes. Substance use disorder is a serious health condition under FMLA, and eligible employees can take up to 12 weeks of unpaid, job-protected leave for inpatient or outpatient addiction treatment provided by a healthcare provider." },
+      { question: "Do I have to tell my boss I'm going to rehab?", answer: "No. You must give enough information for your employer to know the leave qualifies as medical leave, but you are not required to disclose your diagnosis. Medical certification goes through HR and must be kept confidential." },
+      { question: "Can I use FMLA to help a family member go to treatment?", answer: "Yes. FMLA covers leave to care for a spouse, child, or parent with a serious health condition, including substance use disorder. Many family members use this to support a loved one through detox, admission, and early treatment." },
+      { question: "Is FMLA leave for rehab paid?", answer: "FMLA itself is unpaid, but you can often layer paid benefits on top of it — accrued PTO, sick time, or short-term disability insurance, which may replace 50 to 70 percent of income during treatment. Some states also have paid family and medical leave programs." },
+      { question: "Can my employer fire me while I'm in rehab?", answer: "Not for taking qualified FMLA leave — that's illegal retaliation. However, FMLA doesn't shield prior policy violations like failing a drug test or working while impaired. Entering treatment before a workplace crisis occurs offers the strongest protection." }
+    ]
+  },
   {
     id: 138,
     slug: "parentification-when-children-become-caretakers-addiction-families",
