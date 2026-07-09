@@ -165,6 +165,90 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 140,
+    slug: "in-network-vs-out-of-network-rehab-family-guide",
+    seoTitle: "In-Network vs Out-of-Network Rehab: What Families Need to Know",
+    metaDescription: "In-network vs out-of-network rehab explained for families: cost differences, when out-of-network is worth it, and how to request a single case agreement.",
+    title: "In-Network vs. Out-of-Network Rehab: What Families Need to Know Before Choosing a Treatment Center",
+    category: "Treatment",
+    author: "Matt Brown",
+    date: "2026-07-09",
+    image: inNetworkVsOutOfNetworkRehabImg,
+    keywords: ["in-network vs out-of-network rehab", "single case agreement rehab", "out of network rehab cost", "insurance coverage rehab", "network gap exception"],
+    excerpt: "The difference between in-network and out-of-network rehab can mean tens of thousands of dollars. Here is what families need to know before choosing a program — including a little-known tool called a single case agreement.",
+    content: `If you have started calling treatment centers for a loved one, you have probably heard the question already: "What insurance do you have, and are we in-network?" For many families, this is where the search gets confusing. The difference between in-network vs out-of-network rehab can mean tens of thousands of dollars, and most families have never had a reason to learn how any of this works until now.
+
+Here is the good news: you do not need to become an insurance expert. This guide walks you through what network status actually means, when paying more for an out-of-network program makes sense, and how a tool called a single case agreement can sometimes bridge the gap.
+
+**What Does In-Network vs. Out-of-Network Mean for Rehab?**
+
+An in-network rehab has a contract with your insurance company that sets negotiated rates for treatment, which usually means lower out-of-pocket costs for you. An out-of-network rehab has no contract with your insurer, so your plan pays less of the bill, or in some cases nothing at all.
+
+When a treatment center joins an insurance network, it agrees to accept the insurer's negotiated rate as payment, and your share of the cost is calculated from that discounted rate. Out-of-network providers set their own prices, your insurer decides how much of that price it considers "reasonable," and whatever the plan does not cover, the treatment center can bill to you. That gap is where families get surprised.
+
+One important detail: your plan type matters. PPO plans typically include some out-of-network coverage, usually with a separate, higher deductible. HMO and EPO plans often cover out-of-network care only in emergencies. Before you compare programs, find out which type of plan you have — it is printed on your insurance card or in your member portal.
+
+**How Much More Does Out-of-Network Rehab Cost?**
+
+Out-of-network rehab often costs families two to five times more out of pocket than a comparable in-network program. The exact difference depends on your plan's out-of-network deductible, coinsurance rate, and whether the program balance-bills the difference.
+
+Here is a simplified example. Suppose residential treatment costs $30,000 for 30 days. In-network, after your deductible and coinsurance you might owe $3,000 to $6,000. Out-of-network, your plan might only recognize part of the charge, pay 50 percent of that after a higher deductible, and leave you responsible for $20,000 or more.
+
+A few cost factors to check before assuming anything:
+
+- **Out-of-network deductible:** Usually separate from, and higher than, your in-network deductible — and it starts at zero even if you have met your in-network deductible this year.
+- **Coinsurance:** Many plans pay 80 to 90 percent in-network but only 50 to 60 percent out-of-network.
+- **Out-of-pocket maximum:** Some plans have no out-of-network cap at all, which means your costs are not limited.
+- **Balance billing:** Ask whether the program bills patients for the difference between its charges and what insurance pays, or accepts the insurance payment plus your cost share as payment in full.
+
+**When Is Out-of-Network Treatment Worth Considering?**
+
+Out-of-network rehab is worth considering when the in-network options cannot meet your loved one's specific clinical needs, when specialized care is required, or when in-network programs have long waitlists during a window when your loved one is willing to go. The right program at the right time is often worth more than the network discount.
+
+The in-network list is not the whole universe of options — it is simply the list of programs with contracts with your insurer. Legitimate reasons to look beyond it include:
+
+- **Specialized clinical needs,** such as co-occurring mental health conditions, trauma-focused care, or programs designed for a specific age group or profession.
+- **Availability.** If in-network programs have a three-week waitlist and your loved one is ready to accept help today, that delay carries real risk.
+- **Quality and fit.** Network participation says nothing about how good a program is. Some excellent programs stay out of network; some mediocre ones are in every network.
+
+That said, expensive does not mean better. An out-of-network price tag is not evidence of quality, and some of the industry's worst actors are cash-pay programs with beautiful websites. Whatever a program's network status, verify its licensing, accreditation, and clinical staffing.
+
+**What Is a Single Case Agreement and How Do You Get One?**
+
+A single case agreement, sometimes called an SCA or network gap exception, is a one-time contract between your insurance company and an out-of-network provider that allows the treatment to be covered at your in-network rate. It is the most useful tool most families have never heard of.
+
+Insurers grant single case agreements when they agree that no in-network provider can adequately meet the patient's needs. Common grounds include:
+
+- No in-network program offers the required level of care or specialty, such as adolescent residential treatment or dual diagnosis care, within a reasonable distance.
+- In-network programs have no availability within a clinically appropriate timeframe.
+- Continuity of care, when your loved one has an established relationship with a provider.
+
+To request one, call the member services number on the insurance card and ask for a "single case agreement" or "network gap exception" by name, and document who you spoke with and when. The out-of-network program's admissions team can usually help — many do this regularly and will handle the clinical justification your insurer wants to see. Approval is not guaranteed, but a well-documented request showing you searched the network and found no appropriate option has a real chance. If denied, you can appeal, and mental health parity laws give you leverage when a plan's network is too thin to deliver the care it promises on paper.
+
+**Questions to Ask Before You Commit to Any Program**
+
+A ten-minute phone call to your insurer and a few direct questions to the treatment center can prevent most billing surprises. Before committing, work through this list:
+
+1. Ask your insurer: "Is this facility in-network for my specific plan?" Network status varies by plan, not just by insurance company, so do not rely on the treatment center's answer alone.
+2. Ask about your out-of-network deductible, coinsurance, and out-of-pocket maximum if you are considering an out-of-network program.
+3. Ask the treatment center for a written estimate of your total out-of-pocket cost for the full recommended length of stay, not just the first week.
+4. Ask whether the program balance-bills, and get the answer in writing.
+5. Ask whether services like lab work, psychiatry, or medications are billed separately, and whether those providers are in-network.
+6. If out-of-network, ask the admissions team whether they will help you pursue a single case agreement before admission.
+
+Navigating in-network vs out-of-network rehab decisions can feel like a second full-time job at the worst possible moment. Take a breath. You do not have to get every detail perfect — ask direct questions, write down the answers, and choose the best available option for your loved one and your finances. The fact that you are researching this carefully means your loved one already has an advocate most people never get.
+
+If you want help thinking through treatment options, insurance questions, or how to talk with your loved one about getting help, our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] offer ongoing education and one-on-one support built for families exactly where you are. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or connect with peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org]. You do not have to figure this out alone.`,
+    tags: ["treatment", "insurance", "rehab costs", "single case agreement", "family support"],
+    faqItems: [
+      { question: "Is out-of-network rehab covered by insurance?", answer: "Sometimes. PPO plans usually include out-of-network benefits with a higher deductible and coinsurance, while HMO and EPO plans generally cover out-of-network treatment only in emergencies. Call member services to confirm before assuming coverage either way." },
+      { question: "How do I find out if a rehab is in-network with my insurance?", answer: "Call the member services number on your insurance card and ask about the specific facility and your specific plan. Online provider directories are frequently out of date, so always confirm by phone." },
+      { question: "What is a single case agreement for rehab?", answer: "A single case agreement is a one-time contract that lets your insurance cover an out-of-network treatment center at in-network rates. Insurers grant them when no in-network program can adequately meet the patient's clinical needs within a reasonable time and distance." },
+      { question: "Why would a good treatment center be out-of-network?", answer: "Some high-quality programs stay out of network because insurer-negotiated rates do not support their staffing model or length of stay. Network status reflects a business contract, not clinical quality, so evaluate every program's licensing, accreditation, and outcomes independently." },
+      { question: "Can a rehab bill me for what insurance doesn't pay?", answer: "Out-of-network programs generally can, through a practice called balance billing. Before your loved one admits, ask in writing whether the program balance-bills or accepts your insurance payment plus your cost share as payment in full." }
+    ]
+  },
+  {
     id: 139,
     slug: "fmla-for-rehab-job-protection-addiction-treatment",
     seoTitle: "FMLA for Rehab: Protect Your Job While Getting Addiction Treatment",
