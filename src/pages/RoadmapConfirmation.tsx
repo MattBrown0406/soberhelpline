@@ -245,9 +245,9 @@ const RoadmapConfirmation = () => {
             <CardContent className="space-y-2">
               <ResourceLink label="Recovery Podcasts" to="/recovery-podcasts" />
               <ResourceLink label="Join Our Weekly Support Group" to="/monday-zoom-registration" />
-              <a href="tel:4582027900" className="flex items-center gap-2 text-sm text-primary hover:underline py-1">
+              <a href="tel:4582988008" className="flex items-center gap-2 text-sm text-primary hover:underline py-1">
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (458) 202-7900
+                Talk to Someone: (458) 298-8008
               </a>
             </CardContent>
           </Card>
@@ -273,7 +273,7 @@ const RoadmapConfirmation = () => {
             </div>
             <div className="p-3 rounded-lg bg-muted">
               <p className="font-semibold text-foreground">Professional Intervention Help</p>
-              <a href="tel:4582027900" className="text-primary hover:underline font-medium">(458) 202-7900</a>
+              <a href="tel:4582988008" className="text-primary hover:underline font-medium">(458) 298-8008</a>
             </div>
           </div>
         </DialogContent>
@@ -320,10 +320,10 @@ function ActionCard({
                   </Link>
                 )}
                 {item.id === "schedule-consultation" && (
-                  <a href="tel:4582027900">
+                  <a href="tel:4582988008">
                     <Button size="sm" className="mt-1">
                       <Phone className="w-4 h-4 mr-1" />
-                      Call (458) 202-7900
+                      Call (458) 298-8008
                     </Button>
                   </a>
                 )}

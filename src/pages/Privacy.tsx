@@ -236,7 +236,7 @@ export default function Privacy() {
                 <p>
                   <strong>Sober Helpline</strong><br />
                   Email: <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a><br />
-                  Phone: <a className="font-semibold text-primary underline" href="tel:4582027900">458-202-7900</a>
+                  Phone: <a className="font-semibold text-primary underline" href="tel:4582988008">458-298-8008</a>
                 </p>
                 <p>
                   For app support rather than privacy questions, use the <Link className="font-semibold text-primary underline" to="/support">SoberHelpline App Support</Link> page.

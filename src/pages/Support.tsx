@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 const supportFaqs = [
   {
     question: "How do I get help with the SoberHelpline app?",
-    answer: "Email support@soberhelpline.com or call 458-202-7900 with your device type, the email on your account, and a short description of what is not working.",
+    answer: "Email support@soberhelpline.com or call 458-298-8008 with your device type, the email on your account, and a short description of what is not working.",
   },
   {
     question: "Is SoberHelpline emergency or medical care?",
@@ -50,9 +50,9 @@ export default function Support() {
                   </a>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="gap-2">
-                  <a href="tel:4582027900">
+                  <a href="tel:4582988008">
                     <Phone className="h-4 w-4" />
-                    Call 458-202-7900
+                    Call 458-298-8008
                   </a>
                 </Button>
               </div>

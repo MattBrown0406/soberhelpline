@@ -134,7 +134,7 @@ export default function SmsTerms() {
                 </p>
                 <ul className="list-disc space-y-1 pl-6">
                   <li>Email: <a className="text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a></li>
-                  <li>Phone: <a className="text-primary underline" href="tel:4582027900">(458) 202-7900</a></li>
+                  <li>Phone: <a className="text-primary underline" href="tel:4582988008">(458) 298-8008</a></li>
                 </ul>
               </CardContent>
             </Card>
@@ -191,7 +191,7 @@ export default function SmsTerms() {
               <CardContent className="space-y-2 text-muted-foreground">
                 <p>Sober Helpline</p>
                 <p>Email: <a className="text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a></p>
-                <p>Phone: <a className="text-primary underline" href="tel:4582027900">(458) 202-7900</a></p>
+                <p>Phone: <a className="text-primary underline" href="tel:4582988008">(458) 298-8008</a></p>
               </CardContent>
             </Card>
           </div>

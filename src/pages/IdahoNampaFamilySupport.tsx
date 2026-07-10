@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Nampa, Idaho affected by addiction.",
   url: "https://soberhelpline.com/idaho/nampa",
-  telephone: "+14582027900",
+  telephone: "+14582988008",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Nampa",
@@ -33,7 +33,7 @@ export default function IdahoNampaFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Nampa, Idaho | Sober Helpline"
-        description="Families in Nampa struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 202-7900."
+        description="Families in Nampa struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -239,8 +239,8 @@ export default function IdahoNampaFamilySupport() {
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
                     <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
                     <div className="mt-4 text-sm text-muted-foreground">Questions? Call us directly:</div>
-                    <a href="tel:4582027900" className="text-primary font-semibold text-lg hover:underline">
-                      (458) 202-7900
+                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
+                      (458) 298-8008
                     </a>
                   </div>
                 </div>
@@ -281,10 +281,10 @@ export default function IdahoNampaFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:4582027900">
+                <a href="tel:4582988008">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
-                    Call (458) 202-7900
+                    Call (458) 298-8008
                   </Button>
                 </a>
               </div>
@@ -333,10 +333,10 @@ export default function IdahoNampaFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  (458) 202-7900
+                  (458) 298-8008
                 </Button>
               </a>
             </div>

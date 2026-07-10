@@ -291,8 +291,8 @@ const RoadmapRelapse = () => {
               <Phone className="w-3.5 h-3.5" /> Poison Control
             </a>
             <span className="text-muted-foreground">|</span>
-            <a href="tel:4582027900" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
-              <Phone className="w-3.5 h-3.5" /> (458) 202-7900
+            <a href="tel:4582988008" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+              <Phone className="w-3.5 h-3.5" /> (458) 298-8008
             </a>
           </CardContent>
         </Card>
@@ -404,7 +404,7 @@ const RoadmapRelapse = () => {
                     </div>
                   )}
                   {path.phone && (
-                    <a href="tel:4582027900">
+                    <a href="tel:4582988008">
                       <Button size="sm" className="w-full">
                         <Phone className="w-4 h-4 mr-1" />
                         Talk to an Interventionist
@@ -456,11 +456,11 @@ const RoadmapRelapse = () => {
                 This is exactly when you need to show up.
               </p>
               <a
-                href="tel:4582027900"
+                href="tel:4582988008"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
-                Talk to Someone: (458) 202-7900
+                Talk to Someone: (458) 298-8008
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
                 Relapse response is what we do. Call anytime.
@@ -531,10 +531,10 @@ function RelapseCard({
                 )}
 
                 {item.ctaPhone && (
-                  <a href="tel:4582027900">
+                  <a href="tel:4582988008">
                     <Button size="sm" variant="outline">
                       <Phone className="w-4 h-4 mr-1" />
-                      Call: (458) 202-7900
+                      Call: (458) 298-8008
                     </Button>
                   </a>
                 )}

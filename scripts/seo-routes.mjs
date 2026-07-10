@@ -71,7 +71,7 @@ export const prerenderPages = [
     route: '/support',
     title: 'SoberHelpline App Support | Sober Helpline',
     description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
-    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582027900">458-202-7900</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
+    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582988008">458-298-8008</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
   },
   {
     route: '/privacy',
