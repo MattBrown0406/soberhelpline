@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families affected by addiction in Sacramento, California.",
   url: "https://soberhelpline.com/california/sacramento",
-  telephone: "+14582027900",
+  telephone: "+14582988008",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Sacramento",
@@ -38,7 +38,7 @@ export default function CaliforniaSacramentoFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Sacramento, California | Sober Helpline"
-        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 202-7900."
+        description="Families in Sacramento struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 298-8008."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -78,10 +78,10 @@ export default function CaliforniaSacramentoFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Call (458) 202-7900
+                  Call (458) 298-8008
                 </Button>
               </a>
             </div>
@@ -339,10 +339,10 @@ export default function CaliforniaSacramentoFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (458) 202-7900
+                  Call (458) 298-8008
                 </Button>
               </a>
             </div>

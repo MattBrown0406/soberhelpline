@@ -1114,9 +1114,9 @@ const ProviderApplication = () => {
                   Back to Home
                 </Button>
               </Link>
-              <a href="tel:4582027900" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+              <a href="tel:4582988008" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
                 <Phone className="w-5 h-5" />
-                <span className="font-medium">(458) 202-7900</span>
+                <span className="font-medium">(458) 298-8008</span>
               </a>
             </div>
 

@@ -34,10 +34,10 @@ const RecoveryResources = () => {
               detox, inpatient treatment, outpatient care, intervention help, sober living, therapy, psychiatry, and sober coaching.
               No commissions. No patient brokering.
             </p>
-            <a href="tel:4582027900">
+            <a href="tel:4582988008">
               <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                 <Phone className="w-4 h-4" />
-                Call Us: (458) 202-7900
+                Call Us: (458) 298-8008
               </Button>
             </a>
           </div>
@@ -111,10 +111,10 @@ const RecoveryResources = () => {
                   Take the Assessment
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                   <Phone className="w-4 h-4" />
-                  (458) 202-7900
+                  (458) 298-8008
                 </Button>
               </a>
             </div>

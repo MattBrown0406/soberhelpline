@@ -84,7 +84,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family addiction support forum and community for families navigating a loved one's addiction. Professionally moderated, anonymous, available 24/7.",
   url: "https://soberhelpline.com/family-support-forum",
-  telephone: "+14582027900",
+  telephone: "+14582988008",
   sameAs: ["https://soberhelpline.com"],
 };
 

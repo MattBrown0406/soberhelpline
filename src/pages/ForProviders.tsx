@@ -124,9 +124,9 @@ const ForProviders = () => {
               <span className="font-semibold text-lg hidden sm:inline">Sober Helpline</span>
             </Link>
             <div className="flex items-center gap-4">
-              <a href="tel:4582027900" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
+              <a href="tel:4582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                 <Phone className="w-4 h-4" />
-                <span className="hidden sm:inline">(458) 202-7900</span>
+                <span className="hidden sm:inline">(458) 298-8008</span>
               </a>
               <Link to="/auth?redirect=/provider-application">
                 <Button variant="outline">Provider Login</Button>
@@ -158,7 +158,7 @@ const ForProviders = () => {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <a href="tel:4582027900">
+                <a href="tel:4582988008">
                   <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-xl">
                     <Phone className="mr-2 w-5 h-5" />
                     Call Us to Learn More
@@ -396,10 +396,10 @@ const ForProviders = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-xl border-gray-600 text-white hover:bg-gray-700">
                   <Phone className="mr-2 w-5 h-5" />
-                  (458) 202-7900
+                  (458) 298-8008
                 </Button>
               </a>
             </div>

@@ -46,7 +46,7 @@ const localBusinessSchema = {
   description:
     "Family support and intervention coaching for families affected by addiction. Serving Idaho families with free resources, “The Family Squares”, and hourly coaching.",
   url: "https://soberhelpline.com",
-  telephone: "+14582027900",
+  telephone: "+14582988008",
   address: {
     "@type": "PostalAddress",
     addressRegion: "ID",
@@ -115,10 +115,10 @@ export default function IdahoFamilySupport() {
                 If your loved one is refusing treatment, drinking or using despite consequences, or cycling through relapse, start with a private family coaching call or call Sober Helpline before planning a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or Monday night family support.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="tel:4582027900">
+                <a href="tel:4582988008">
                   <Button size="lg" className="gap-2 w-full sm:w-auto">
                     <Phone className="h-4 w-4" />
-                    Call (458) 202-7900
+                    Call (458) 298-8008
                   </Button>
                 </a>
                 <Link to="/family-coaching">
@@ -208,9 +208,9 @@ export default function IdahoFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:4582027900" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:4582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
-                    (458) 202-7900
+                    (458) 298-8008
                   </a>
                 </div>
               </div>
@@ -519,10 +519,10 @@ export default function IdahoFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:4582027900">
+                  <a href="tel:4582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      Call (458) 202-7900
+                      Call (458) 298-8008
                     </Button>
                   </a>
                 </div>
@@ -632,10 +632,10 @@ export default function IdahoFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (458) 202-7900
+                  Call (458) 298-8008
                 </Button>
               </a>
             </div>

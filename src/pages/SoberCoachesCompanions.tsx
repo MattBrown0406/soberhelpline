@@ -243,9 +243,9 @@ const SoberCoachesCompanions = () => {
               Home
             </Button>
           </Link>
-          <a href="tel:4582027900" className="flex items-center gap-1 text-foreground hover:text-primary transition-colors">
+          <a href="tel:4582988008" className="flex items-center gap-1 text-foreground hover:text-primary transition-colors">
             <Phone className="w-4 h-4" />
-            <span className="font-medium text-sm">(458) 202-7900</span>
+            <span className="font-medium text-sm">(458) 298-8008</span>
           </a>
           <CategoryMobileNav />
         </div>
@@ -262,9 +262,9 @@ const SoberCoachesCompanions = () => {
             <CategoryNav />
           </div>
           <div className="flex items-center gap-4">
-            <a href="tel:4582027900" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+            <a href="tel:4582988008" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
-              <span className="font-medium">(458) 202-7900</span>
+              <span className="font-medium">(458) 298-8008</span>
             </a>
             <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
           </div>
@@ -290,7 +290,7 @@ const SoberCoachesCompanions = () => {
             If you are trying to find a sober coach near you, start by choosing your state or searching by ZIP code below. If no local provider appears, nearby or remote options may still help. If your loved one is still refusing help, relapsing repeatedly, or the family is divided, book family coaching or call before you spend money on coaching.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="tel:4582027900">
+            <a href="tel:4582988008">
               <Button className="gap-2 w-full sm:w-auto">
                 <Phone className="h-4 w-4" />
                 Call before hiring a coach

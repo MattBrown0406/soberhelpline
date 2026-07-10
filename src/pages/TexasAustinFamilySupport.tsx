@@ -10,7 +10,7 @@ const localBusinessSchema = {
   name: "Sober Helpline",
   description: "Family support and intervention coaching for families in Austin, Texas affected by addiction.",
   url: "https://soberhelpline.com/texas/austin",
-  telephone: "+14582027900",
+  telephone: "+14582988008",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Austin",
@@ -34,7 +34,7 @@ export default function TexasAustinFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Austin, Texas | Sober Helpline"
-        description="Families in Austin struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 202-7900."
+        description="Families in Austin struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -252,10 +252,10 @@ export default function TexasAustinFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:4582027900">
+                  <a href="tel:4582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
-                      (458) 202-7900
+                      (458) 298-8008
                     </Button>
                   </a>
                 </div>
@@ -321,10 +321,10 @@ export default function TexasAustinFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582027900">
+              <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
-                  Call (458) 202-7900
+                  Call (458) 298-8008
                 </Button>
               </a>
             </div>
