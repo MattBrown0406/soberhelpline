@@ -7,6 +7,7 @@ import rehabAdmissionsProcessImg from "@/assets/blog-rehab-admissions-process-fa
 import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-mean.jpg";
 import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery-milestones-family-guide.jpg";
 import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
+import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-family.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
@@ -3136,6 +3137,88 @@ No. Vivitrol (naltrexone) fully blocks opioid receptors and has no abuse potenti
 **How can I tell if a MAT program is reputable?**
 
 Look for programs accredited by CARF or The Joint Commission that integrate both medication management and behavioral therapies — counseling alone isn't enough. Be cautious of programs that have blanket policies against MAT or pressure people to stop medication before they're clinically ready to do so. A coach from our [family coaching team](/family-coaching) can help you evaluate your options and ask the right questions.`,
+  },
+  {
+    id: 112,
+    slug: "euphoric-recall-in-addiction-family-guide",
+    seoTitle: "Euphoric Recall in Addiction: Why Loved Ones Remember Using Fondly",
+    metaDescription: "Euphoric recall in addiction explains why your loved one remembers using fondly while forgetting the pain. Learn how it works and how families can respond.",
+    title: "Euphoric Recall in Addiction: Why Your Loved One Remembers Using So Differently Than You Do",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-07-11",
+    image: euphoricRecallFamilyImg,
+    keywords: ["euphoric recall in addiction", "euphoric recall", "addiction memory", "relapse prevention", "family addiction support"],
+    excerpt: "Your loved one remembers using like it was the best time of their life while you remember the worst of yours. There's a name for that gap — euphoric recall — and understanding it changes how you respond.",
+    content: `You remember the missed holidays, the 2 a.m. phone calls, the fear. Your loved one remembers laughing with friends and feeling free. If you have ever listened to someone talk about their drinking or drug use like it was the best time of their life — while you were living through the worst of yours — you are not imagining the gap. There is a name for it: euphoric recall in addiction. Understanding it will not erase your frustration, but it will help you stop taking it personally and respond in a way that actually helps.
+
+This is one of the most confusing things families encounter, during active addiction and in recovery alike. The good news: it is well understood, and there are practical ways to respond.
+
+**What Is Euphoric Recall in Addiction?**
+
+Euphoric recall is the brain's tendency to remember substance use in a distorted, overwhelmingly positive way — vividly recalling the pleasure while minimizing or forgetting the consequences. The person is not lying to you. Their memory system is genuinely serving up an edited version of the past.
+
+Think of it as a highlight reel. The brain replays the warm first hour of the night and quietly deletes the blackout, the argument, and the shame the next morning. When your loved one says "it wasn't that bad" or talks wistfully about "the good old days," euphoric recall is often doing the talking.
+
+This matters because euphoric recall is one of the most common drivers of relapse. Months into recovery, under stress or boredom, the brain offers a single compelling memory: relief. Recognizing that pattern is the first step in defending against it.
+
+**Why Does the Brain Remember Substance Use So Positively?**
+
+The short answer: because addiction changes how memories are recorded, not just how decisions are made. Substances that flood the brain's reward system with dopamine don't just create pleasure in the moment — they tag the experience as important. The brain files it under "remember this; do it again."
+
+Three things stack on top of each other. First, dopamine tags memories as significant. Drugs and alcohol trigger dopamine surges far beyond natural rewards, so memories of use get stamped with outsized importance and emotional intensity. Second, everyone's painful memories fade faster. Psychologists call this the fading affect bias — the emotional sting of negative memories fades more quickly than the glow of positive ones. It is normal, but addiction supercharges it. Third, consequences often happened while impaired. Blackouts, sedation, and intoxication mean the worst moments were often poorly recorded in the first place. You remember that night clearly because you were sober for it. They may not remember it at all.
+
+Put those together and you get a memory bank that is genuinely lopsided. Willpower alone can't fix a distorted file system — which is why simply reminding someone of the wreckage rarely changes their mind. For a deeper look at the biology at play, see our guide on [LINK:how addiction rewires the brain:/blog/addiction-rewires-brain].
+
+**How Does Euphoric Recall Show Up at Home?**
+
+Euphoric recall usually shows up as romanticizing, minimizing, or nostalgia — and it appears both during active addiction and well into recovery. Knowing the common forms helps you spot it without panicking.
+
+Romanticizing sounds like warm stories about using days, told with a smile that makes your stomach drop. Minimizing sounds like "I never got a DUI," "I always made it to work," or "It wasn't as bad as you make it sound." Selective nostalgia in recovery shows up as missing "the fun" during stressful or celebratory moments — holidays, weddings, summer barbecues. And rewriting the ending sounds like remembering that quitting was their idea, or that things "were getting better" right before treatment.
+
+Here's the part families often miss: hearing your loved one romanticize the past does not mean recovery is failing. It means their brain is doing what addicted brains do. What matters is whether they have tools to answer that voice — and whether the people around them respond in ways that help rather than harden defenses.
+
+**What Can Families Do When a Loved One Romanticizes Their Addiction?**
+
+The most useful response is to stay calm, stay factual, and avoid turning memory into a courtroom battle. You will not win an argument against someone's own recollection, and trying usually produces defensiveness, not insight.
+
+Don't prosecute the memory. Instead of "That's not how it happened," try "I remember that time differently — I was really scared." Speak from your experience rather than correcting theirs. Help them play the tape forward. Recovery programs teach people to follow the memory past the first drink to what reliably came next. You can gently support this: "And then what usually happened?" asked with curiosity, not sarcasm. Name it without shaming it. If your loved one is in recovery and open to it, it's fair to say, "That sounds like the highlight reel talking." Light touch. One sentence. Then let it go. Take nostalgia seriously as a signal, not a crisis. Frequent romanticizing — especially paired with pulling away from meetings, sponsors, or support — is worth a direct, caring conversation about what support they need right now. The [LINK:Relapse Radar assessment:/relapse-radar] can help you gauge how concerned to be.
+
+And keep your own footing. Watching someone fondly recall the era that nearly broke your family is painful. Your memories are valid — you can hold them and heal from them without needing your loved one to co-sign your version of history. If you need help finding the right words, [LINK:what to say when a loved one relapses:/blog/what-do-i-say-when-they-relapse] is a companion piece worth reading.
+
+**How Treatment and Recovery Address Euphoric Recall**
+
+Good treatment doesn't erase euphoric recall — it teaches people to recognize and outmaneuver it. This is a core piece of relapse prevention, and it's one reason ongoing support matters long after detox.
+
+Cognitive behavioral therapy helps people catch distorted memories and complete them: the whole night, not just the first hour. Group settings and 12-step meetings add something families can't provide alone — a room full of people who lovingly finish each other's stories with "...and how did that end?" Programs like [LINK:Al-Anon:https://al-anon.org/] and [LINK:Nar-Anon:https://www.nar-anon.org/] offer the family side of that same peer wisdom. Over time, with sustained sobriety, the brain's reward system recalibrates and the pull of those memories genuinely weakens. Honest recall doesn't return overnight, but it does return.
+
+If you take one thing from this article, let it be this: euphoric recall is a symptom, not a character flaw. Your loved one's rosy memories are not proof they don't care about what you went through — they are proof that addiction rewires memory itself. Families who understand this stop fighting over the past and start supporting the future. That shift, more than any argument you could win, is what helps people stay well.
+
+**Frequently Asked Questions**
+
+**What is euphoric recall in addiction?**
+
+Euphoric recall is the tendency to remember alcohol or drug use in an exaggeratedly positive way — vividly recalling the pleasure while minimizing the consequences. It is a recognized memory distortion in addiction, not deliberate dishonesty, and it is a major contributor to relapse.
+
+**Is my loved one lying when they say their addiction "wasn't that bad"?**
+
+Usually not in the deliberate sense. Their brain recorded and retrieves those memories differently than yours did — intoxication blurred the worst moments, and dopamine amplified the good ones. It feels true to them, which is exactly what makes it dangerous.
+
+**Does romanticizing the past mean my loved one is about to relapse?**
+
+Not automatically. Occasional nostalgia is normal, even years into recovery. It becomes concerning when it's frequent, intense, or paired with warning signs like skipping meetings or isolating. Treat it as a signal to check in, not a verdict.
+
+**What is "playing the tape forward"?**
+
+It's a relapse-prevention technique where a person deliberately follows a tempting memory past the first drink or hit to what reliably came next — the blackout, the fight, the shame. It counters euphoric recall by completing the edited memory.
+
+**How long does euphoric recall last in recovery?**
+
+It tends to be strongest in the first year, when the brain's reward system is still recalibrating, and fades gradually with sustained sobriety and active recovery work. Many people report the pull weakening significantly after the first one to two years, though stress can revive it at any stage.
+
+**You Don't Have to Figure This Out Alone**
+
+Understanding how addiction works in the brain changes how families respond — and how families respond changes outcomes. At Sober Helpline, we help families move from confusion to clarity with ongoing education, one-on-one [LINK:family coaching:/family-coaching], and a [LINK:membership community:/family-membership] that understands what you're navigating. Join our free [LINK:Monday night Family Squares support call:/monday-zoom-registration], or explore coaching and membership at [LINK:Sober Helpline:/]. You don't need all the answers today — just the next step.`,
   },
   {
     id: 111,
