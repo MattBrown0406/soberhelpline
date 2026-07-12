@@ -8,6 +8,7 @@ import rehabSuccessRatesImg from "@/assets/blog-rehab-success-rates-what-they-me
 import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery-milestones-family-guide.jpg";
 import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
 import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-family.jpg";
+import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addiction-family.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
