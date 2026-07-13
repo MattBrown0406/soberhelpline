@@ -12,7 +12,7 @@ const corsHeaders = {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
-  const callbackUrl = Deno.env.get("SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL");
+  const callbackUrl = Deno.env.get("APP_PAYMENT_CALLBACK_URL");
   const secret = Deno.env.get("APP_PAYMENT_BRIDGE_SECRET");
 
   const admin = createClient(
