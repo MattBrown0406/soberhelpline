@@ -97,6 +97,7 @@ const Auth = React.lazy(() => import("./pages/Auth"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const Admin = React.lazy(() => import("./pages/Admin"));
 const SubscriptionSuccess = React.lazy(() => import("./pages/SubscriptionSuccess"));
+const CoachingCheckout = React.lazy(() => import("./pages/CoachingCheckout"));
 const SubscriptionCancel = React.lazy(() => import("./pages/SubscriptionCancel"));
 const Blog = React.lazy(() => import("./pages/Blog"));
 const BlogArticle = React.lazy(() => import("./pages/BlogArticle"));
@@ -310,6 +311,7 @@ const App = () => (
               <Route path="/admin" element={<Admin />} />
               <Route path="/subscription/success" element={<SubscriptionSuccess />} />
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
+              <Route path="/coaching-checkout" element={<CoachingCheckout />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogArticle />} />
               <Route path="/fentanyl-overdose-signs-safety-plan" element={<BlogArticle />} />

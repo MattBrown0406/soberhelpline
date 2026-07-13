@@ -122,3 +122,18 @@ verify_jwt = false
 
 [functions.submit-provider-inquiry]
 verify_jwt = false
+
+[functions.paypal-verify-auth]
+verify_jwt = true
+
+[functions.coaching-checkout-resolve]
+verify_jwt = false
+
+[functions.coaching-order-create]
+verify_jwt = false
+
+[functions.coaching-order-capture]
+verify_jwt = false
+
+[functions.deliver-app-payment-callback]
+verify_jwt = false
