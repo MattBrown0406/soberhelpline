@@ -132,25 +132,24 @@ Deno.serve(async (req) => {
       networkError = true;
     }
 
-    if (networkError || (capResp && capResp.status >= 500) || (capResp && capResp.status === 408)) {
-      // Ambiguous: PayPal may or may not have captured. Do NOT mark failed.
-      // Fetch authoritative order to see if a capture actually landed.
+    const retryableStatus = capResp && (
+      capResp.status >= 500 ||
+      capResp.status === 408 ||
+      capResp.status === 409 ||
+      capResp.status === 422 ||
+      capResp.status === 429
+    );
+
+    if (networkError || retryableStatus) {
+      // Ambiguous / retryable. Fetch authoritative order to see if a capture landed.
       captureJson = await fetchOrder();
       if (!captureJson) {
         return new Response(JSON.stringify({ ok: false, code: "paypal_capture_ambiguous" }), {
           status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-    } else if (capResp && capResp.status === 422) {
-      // ORDER_ALREADY_CAPTURED or similar — reconcile via order GET (ambiguous, do not fail).
-      captureJson = await fetchOrder();
-      if (!captureJson) {
-        return new Response(JSON.stringify({ ok: false, code: "paypal_reconcile_failed" }), {
-          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
     } else if (capResp && !capResp.ok) {
-      // Definitive client-side failure (4xx other than 408/422): mark failed.
+      // Definitive client-side failure (4xx other than retryable set above): mark failed.
       console.log("coaching-order-capture: capture failed status", capResp.status);
       await admin.from("coaching_checkout_orders")
         .update({ status: "failed", failed_at: new Date().toISOString() })
@@ -159,9 +158,20 @@ Deno.serve(async (req) => {
         status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     } else if (capResp) {
-      captureJson = await capResp.json();
+      try {
+        captureJson = await capResp.json();
+      } catch {
+        // Malformed body from PayPal — treat as ambiguous, do NOT mark failed.
+        captureJson = await fetchOrder();
+        if (!captureJson) {
+          return new Response(JSON.stringify({ ok: false, code: "paypal_capture_ambiguous" }), {
+            status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+      }
     }
   }
+
 
   // Verify capture: status COMPLETED, amount 150.00, currency USD, custom_id == session id.
   const pu = captureJson?.purchase_units?.[0];
@@ -172,8 +182,18 @@ Deno.serve(async (req) => {
   const cur = cap?.amount?.currency_code;
   const customId = pu?.custom_id ?? pu?.reference_id;
 
-  if (!capId || amt !== "150.00" || cur !== "USD" || customId !== row.id) {
-    console.log("coaching-order-capture: verification failed (shape/amount/currency)");
+  // No capture object yet (order APPROVED/PENDING/etc.) — retryable, do NOT mark failed.
+  if (!cap || !capId) {
+    return new Response(JSON.stringify({
+      ok: false, code: "capture_pending", order_status: captureJson?.status ?? null,
+    }), {
+      status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  // A capture exists — now validate amount/currency/custom_id against it.
+  if (amt !== "150.00" || cur !== "USD" || customId !== row.id) {
+    console.log("coaching-order-capture: verification failed (amount/currency/custom_id mismatch)");
     await admin.from("coaching_checkout_orders")
       .update({ status: "failed", failed_at: new Date().toISOString() })
       .eq("id", row.id);
@@ -183,8 +203,8 @@ Deno.serve(async (req) => {
   }
 
   if (capStatus !== "COMPLETED") {
-    // PENDING / DECLINED / etc. — do NOT mark failed on transient states.
-    // Only DECLINED is definitive; PENDING is retryable.
+    // PENDING — retryable, do NOT mark failed.
+    // DECLINED / FAILED — definitive failure.
     if (capStatus === "DECLINED" || capStatus === "FAILED") {
       await admin.from("coaching_checkout_orders")
         .update({ status: "failed", failed_at: new Date().toISOString() })
@@ -197,6 +217,7 @@ Deno.serve(async (req) => {
       status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
 
   // Atomic finalize: updates order + inserts outbox in one transaction.
   // Include PayPal's capture-id + nonce for idempotency uniqueness.

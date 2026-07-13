@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
   const rows: Array<{ id: string; event_id: string; payload: unknown; attempt_count: number; lease_id: string }> =
     (claimed ?? []) as any;
 
-  let delivered = 0, failed = 0;
+  let delivered = 0, failed = 0, releaseFailed = 0;
 
   for (const row of rows) {
     const bodyText = JSON.stringify(row.payload);
@@ -89,6 +89,12 @@ Deno.serve(async (req) => {
     let ok = false;
     let httpStatus: number | null = null;
     let errMsg: string | null = null;
+
+    // Finite fetch timeout, well under the 120s lease so the lease is always
+    // released (or explicitly not) before it can expire mid-flight.
+    const CALLBACK_TIMEOUT_MS = 30_000;
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), CALLBACK_TIMEOUT_MS);
 
     try {
       const resp = await fetch(callbackUrl, {
@@ -101,20 +107,22 @@ Deno.serve(async (req) => {
           "X-Signature": sig,
         },
         body: bodyText,
+        signal: ac.signal,
       });
       httpStatus = resp.status;
       ok = resp.ok;
       if (!ok) errMsg = `http_${resp.status}`;
-      // Drain body to avoid resource leak
       try { await resp.text(); } catch { /* ignore */ }
     } catch (e) {
-      errMsg = "network_error";
+      errMsg = (e as any)?.name === "AbortError" ? "callback_timeout" : "network_error";
+    } finally {
+      clearTimeout(timer);
     }
 
     const attempt = row.attempt_count + 1;
+    let releaseArgs: Record<string, unknown>;
     if (ok) {
-      delivered++;
-      await admin.rpc("release_app_payment_outbox_lease", {
+      releaseArgs = {
         p_lease_id: row.lease_id,
         p_id: row.id,
         p_delivered: true,
@@ -122,12 +130,11 @@ Deno.serve(async (req) => {
         p_next_attempt_at: new Date().toISOString(),
         p_last_error: null,
         p_last_response_status: httpStatus,
-      });
+      };
     } else {
-      failed++;
       const backoffMin = Math.min(60 * 6, Math.pow(2, attempt)); // cap 6h
       const nextAt = new Date(Date.now() + backoffMin * 60 * 1000).toISOString();
-      await admin.rpc("release_app_payment_outbox_lease", {
+      releaseArgs = {
         p_lease_id: row.lease_id,
         p_id: row.id,
         p_delivered: false,
@@ -135,11 +142,31 @@ Deno.serve(async (req) => {
         p_next_attempt_at: nextAt,
         p_last_error: errMsg,
         p_last_response_status: httpStatus,
-      });
+      };
+    }
+
+    const { error: relErr } = await admin.rpc(
+      "release_app_payment_outbox_lease",
+      releaseArgs,
+    );
+    if (relErr) {
+      // Lease release failed. Row remains held under its lease and becomes
+      // eligible again automatically once the lease expires — safe to retry.
+      console.log("deliver-app-payment-callback: lease release failed", relErr.message);
+      releaseFailed++;
+    } else if (ok) {
+      delivered++;
+    } else {
+      failed++;
     }
   }
 
+  const runOk = releaseFailed === 0;
   return new Response(JSON.stringify({
-    ok: true, delivered, failed, considered: rows.length,
-  }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    ok: runOk, delivered, failed, release_failed: releaseFailed, considered: rows.length,
+  }), {
+    status: runOk ? 200 : 500,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
 });
+
