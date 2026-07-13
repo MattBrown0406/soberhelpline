@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
   const rows: Array<{ id: string; event_id: string; payload: unknown; attempt_count: number; lease_id: string }> =
     (claimed ?? []) as any;
 
-  let delivered = 0, failed = 0;
+  let delivered = 0, failed = 0, releaseFailed = 0;
 
   for (const row of rows) {
     const bodyText = JSON.stringify(row.payload);
