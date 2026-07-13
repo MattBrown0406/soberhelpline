@@ -149,10 +149,30 @@ Deno.serve(async (req) => {
     });
   }
 
-  await admin
+  // Guarded update: only persist paypal_order_id if the row is still non-terminal
+  // and does not already have a different order id pinned. If update fails or
+  // touches zero rows, do NOT return the order id — the browser must not begin
+  // approval/capture against an orphaned order.
+  const { data: updatedRows, error: persistErr } = await admin
     .from("coaching_checkout_orders")
     .update({ paypal_order_id: paypalOrderId, status: "pending" })
-    .eq("id", row.id);
+    .eq("id", row.id)
+    .is("paypal_order_id", null)
+    .not("status", "in", "(captured,refunded,reversed,failed)")
+    .select("id");
+
+  if (persistErr) {
+    console.log("coaching-order-create: persist failed", persistErr.message);
+    return new Response(JSON.stringify({ ok: false, code: "order_persist_failed" }), {
+      status: 503, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+  if (!updatedRows || updatedRows.length !== 1) {
+    console.log("coaching-order-create: guarded update matched 0 rows");
+    return new Response(JSON.stringify({ ok: false, code: "order_persist_conflict" }), {
+      status: 503, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
 
   return new Response(JSON.stringify({ ok: true, order_id: paypalOrderId }), {
     status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -155,7 +155,8 @@ Deno.serve(async (req) => {
       try { capBody = await capResp.clone().json(); } catch { /* ignore */ }
       const errName = capBody?.name ?? capBody?.details?.[0]?.issue;
       const DEFINITIVE = new Set([
-        "PAYER_ACTION_REQUIRED",
+        // NOTE: PAYER_ACTION_REQUIRED intentionally omitted — it is a recoverable
+        // user-action state that must remain reconcilable via order GET.
         "INSTRUMENT_DECLINED",
         "PAYER_CANNOT_PAY",
         "TRANSACTION_REFUSED",
@@ -164,10 +165,11 @@ Deno.serve(async (req) => {
       if (errName && DEFINITIVE.has(errName)) {
         console.log("coaching-order-capture: definitive failure", capResp.status, errName);
         // Predicated update: only mark failed if the row is still in a non-terminal state.
-        await admin.from("coaching_checkout_orders")
+        const { error: defErr } = await admin.from("coaching_checkout_orders")
           .update({ status: "failed", failed_at: new Date().toISOString() })
           .eq("id", row.id)
           .not("status", "in", "(captured,refunded,reversed,failed)");
+        if (defErr) console.log("definitive update err (safe):", defErr.message);
         return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed", http_status: capResp.status, name: errName }), {
           status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });

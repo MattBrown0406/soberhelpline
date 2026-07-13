@@ -63,11 +63,11 @@ Deno.serve(async (req) => {
   }
 
   // Atomic lease claim. Overlapping invocations get disjoint rows.
-  // Lease MUST be longer than worst-case sequential delivery:
-  //   25 rows * 30s callback timeout = 12.5 min → use 15 min (900s).
+  // Bounded worst-case: batch 5 × 20s callback timeout = 100s per run,
+  // well under the 180s lease and Edge Function wall-clock budget.
   const { data: claimed, error: claimErr } = await admin.rpc(
     "claim_app_payment_outbox_batch",
-    { p_batch_size: 25, p_lease_seconds: 900 },
+    { p_batch_size: 5, p_lease_seconds: 180 },
   );
 
 
@@ -93,9 +93,9 @@ Deno.serve(async (req) => {
     let httpStatus: number | null = null;
     let errMsg: string | null = null;
 
-    // Finite fetch timeout, well under the 120s lease so the lease is always
+    // Finite fetch timeout well under the 180s lease so the lease is always
     // released (or explicitly not) before it can expire mid-flight.
-    const CALLBACK_TIMEOUT_MS = 30_000;
+    const CALLBACK_TIMEOUT_MS = 20_000;
     const ac = new AbortController();
     const timer = setTimeout(() => ac.abort(), CALLBACK_TIMEOUT_MS);
 
@@ -148,14 +148,18 @@ Deno.serve(async (req) => {
       };
     }
 
-    const { error: relErr } = await admin.rpc(
+    const { data: releaseOk, error: relErr } = await admin.rpc(
       "release_app_payment_outbox_lease",
       releaseArgs,
     );
-    if (relErr) {
-      // Lease release failed. Row remains held under its lease and becomes
-      // eligible again automatically once the lease expires — safe to retry.
-      console.log("deliver-app-payment-callback: lease release failed", relErr.message);
+    // A successful RPC returning false means the caller no longer owns the lease
+    // (expired or reclaimed). Never count that as delivered — leave the row for
+    // safe retry after the lease naturally frees.
+    if (relErr || releaseOk !== true) {
+      console.log(
+        "deliver-app-payment-callback: lease release not owned/failed",
+        relErr?.message ?? `data=${JSON.stringify(releaseOk)}`,
+      );
       releaseFailed++;
     } else if (ok) {
       delivered++;

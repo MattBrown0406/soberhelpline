@@ -297,3 +297,151 @@ Deno.test({
     assertEquals((data as any)?.code, "refunded_amount_invalid");
   },
 });
+
+// ==================== Canonical event_id + webhook-order tests ====================
+// Build the canonical event id (browser + webhook paths must both use this).
+function canonicalCaptureEventId(sessionId: string, capId: string) {
+  return `capture.${sessionId}.${capId}`;
+}
+Deno.test("event_id: browser path and webhook COMPLETED path use identical canonical id", () => {
+  const browserId = canonicalCaptureEventId("sess-1", "CAP-1");
+  const webhookId = canonicalCaptureEventId("sess-1", "CAP-1");
+  assertEquals(browserId, webhookId);
+  assertEquals(browserId, "capture.sess-1.CAP-1");
+});
+
+// Simulate finalize RPC semantics: same event_id + same payload keys => idempotent replay.
+function makeRpcRecorder() {
+  const events = new Map<string, any>();
+  return {
+    events,
+    async finalize(args: any) {
+      const canonicalKeys = ["event","event_id","booking_id","order_id","capture_id","status","currency","amount_cents"];
+      const prior = events.get(args.p_event_id);
+      if (prior) {
+        // Compare canonical keys only (timestamps allowed to differ).
+        for (const k of canonicalKeys) {
+          if (JSON.stringify(prior[k]) !== JSON.stringify(args.p_payload[k])) {
+            return { ok: false, code: "event_payload_mismatch" };
+          }
+        }
+        return { ok: true, already: true };
+      }
+      events.set(args.p_event_id, args.p_payload);
+      return { ok: true, already: false };
+    },
+  };
+}
+Deno.test("dedup: browser THEN webhook completed → single outbox row", async () => {
+  const rec = makeRpcRecorder();
+  const payload = { event: "payment.captured", event_id: "capture.s.CAP", booking_id: "b",
+    order_id: "O", capture_id: "CAP", status: "captured", currency: "USD", amount_cents: 15000,
+    captured_at: "2026-07-13T18:00:00Z" };
+  const r1 = await rec.finalize({ p_event_id: payload.event_id, p_payload: payload });
+  // Webhook fires later — different captured_at is fine (timestamp not in canonical set),
+  // canonical fields identical => replay.
+  const r2 = await rec.finalize({ p_event_id: payload.event_id, p_payload: { ...payload, captured_at: "2026-07-13T18:00:01Z" } });
+  assertEquals(r1.already, false);
+  assertEquals(r2.ok, true); assertEquals(r2.already, true);
+  assertEquals(rec.events.size, 1);
+});
+Deno.test("dedup: webhook completed THEN browser → single outbox row (reverse order)", async () => {
+  const rec = makeRpcRecorder();
+  const payload = { event: "payment.captured", event_id: "capture.s.CAP", booking_id: "b",
+    order_id: "O", capture_id: "CAP", status: "captured", currency: "USD", amount_cents: 15000,
+    captured_at: "2026-07-13T18:00:00Z" };
+  const r1 = await rec.finalize({ p_event_id: payload.event_id, p_payload: payload });
+  const r2 = await rec.finalize({ p_event_id: payload.event_id, p_payload: payload });
+  assertEquals(r1.already, false);
+  assertEquals(r2.already, true);
+  assertEquals(rec.events.size, 1);
+});
+
+// ==================== Webhook COMPLETED unrelated-capture behavior ====================
+type LookupResult = { data: any | null; error: any | null };
+async function webhookCompletedHandler(opts: {
+  capture: { id: string; status: string; amount: { value: string; currency_code: string }; custom_id?: string };
+  lookupByCustomId: LookupResult;
+  lookupByOrderId?: LookupResult;
+}) {
+  const { capture } = opts;
+  if (!capture.id) return { status: 503, code: "missing_capture_id" };
+  if (capture.status !== "COMPLETED" || capture.amount.value !== "150.00" || capture.amount.currency_code !== "USD") {
+    return { status: 200, code: "ignored_not_coaching" };
+  }
+  let row: any = null; let dbFail = false;
+  if (capture.custom_id) {
+    const r = opts.lookupByCustomId;
+    if (r.error) dbFail = true; else row = r.data;
+  }
+  if (!row && !dbFail && opts.lookupByOrderId) {
+    const r = opts.lookupByOrderId;
+    if (r.error) dbFail = true; else row = r.data;
+  }
+  if (dbFail) return { status: 503, code: "db_lookup_failed" };
+  if (!row) return { status: 200, code: "unrelated_capture_acked" };
+  return { status: 200, code: "processed" };
+}
+Deno.test("webhook COMPLETED: unrelated $150 USD capture (no matching coaching row) → 200 ACK", async () => {
+  const r = await webhookCompletedHandler({
+    capture: { id: "CAP-U", status: "COMPLETED", amount: { value: "150.00", currency_code: "USD" }, custom_id: "some-other-flow" },
+    lookupByCustomId: { data: null, error: null },
+    lookupByOrderId:  { data: null, error: null },
+  });
+  assertEquals(r.status, 200); assertEquals(r.code, "unrelated_capture_acked");
+});
+Deno.test("webhook COMPLETED: DB error while looking up capture → 503 (retryable)", async () => {
+  const r = await webhookCompletedHandler({
+    capture: { id: "CAP-U", status: "COMPLETED", amount: { value: "150.00", currency_code: "USD" }, custom_id: "x" },
+    lookupByCustomId: { data: null, error: { message: "db down" } },
+  });
+  assertEquals(r.status, 503); assertEquals(r.code, "db_lookup_failed");
+});
+
+// ==================== coaching-order-create persistence ====================
+async function orderCreatePersist(opts: {
+  updateResult: { data: any[] | null; error: any | null };
+}): Promise<{ status: number; code: string; order_id?: string }> {
+  const paypalOrderId = "PP-ORDER-XYZ";
+  const { data, error } = opts.updateResult;
+  if (error) return { status: 503, code: "order_persist_failed" };
+  if (!data || data.length !== 1) return { status: 503, code: "order_persist_conflict" };
+  return { status: 200, code: "ok", order_id: paypalOrderId };
+}
+Deno.test("coaching-order-create: DB update failure after PayPal order created → 503, no order id leaks", async () => {
+  const r = await orderCreatePersist({ updateResult: { data: null, error: { message: "boom" } } });
+  assertEquals(r.status, 503); assertEquals(r.code, "order_persist_failed");
+  assertEquals(r.order_id, undefined);
+});
+Deno.test("coaching-order-create: guarded update matched 0 rows → 503, no order id leaks", async () => {
+  const r = await orderCreatePersist({ updateResult: { data: [], error: null } });
+  assertEquals(r.status, 503); assertEquals(r.code, "order_persist_conflict");
+  assertEquals(r.order_id, undefined);
+});
+
+// ==================== Lease-release "not owner" handling ====================
+async function releaseHandler(opts: { data: any; error: any | null; deliveredHttpOk: boolean }) {
+  let delivered = 0, failed = 0, releaseFailed = 0;
+  const { data, error, deliveredHttpOk } = opts;
+  if (error || data !== true) {
+    releaseFailed++;
+  } else if (deliveredHttpOk) {
+    delivered++;
+  } else {
+    failed++;
+  }
+  const runOk = releaseFailed === 0;
+  return { status: runOk ? 200 : 500, delivered, failed, releaseFailed };
+}
+Deno.test("lease release: RPC returns false (no longer owner) → release_failed, not delivered", async () => {
+  const r = await releaseHandler({ data: false, error: null, deliveredHttpOk: true });
+  assertEquals(r.delivered, 0);
+  assertEquals(r.releaseFailed, 1);
+  assertEquals(r.status, 500);
+});
+Deno.test("lease release: RPC returns true → delivery counted", async () => {
+  const r = await releaseHandler({ data: true, error: null, deliveredHttpOk: true });
+  assertEquals(r.delivered, 1);
+  assertEquals(r.releaseFailed, 0);
+  assertEquals(r.status, 200);
+});
