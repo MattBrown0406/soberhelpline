@@ -1,62 +1,66 @@
-## What I'll build
+# PayPal Rotation + iOS Coaching Checkout — Implementation Plan
 
-**1. Cancel the 7/6 meeting + block new registrations for that date**
+## Status of Task 1 (done)
+- Confirmed PayPal credentials are read only inside Edge Functions via `Deno.env.get(...)`. No `VITE_PAYPAL_*` exists; no frontend file references PayPal API hosts. Frontend calls only go through `supabase.functions.invoke(...)`.
+- Rotated `PAYPAL_CLIENT_ID` and `PAYPAL_SECRET_KEY` via the secure form (values never seen or logged).
+- Set `PAYPAL_MODE=live` explicitly (existing code already treated non-"sandbox" as live, so behavior is unchanged; this just removes ambiguity).
+- No existing secret was deleted. No merchant account changes.
 
-- Add a `cancelled_meeting_dates` table (just a list of dates flagged as cancelled, with an optional message).
-- Insert `2026-07-06` into it.
-- Update the Monday Zoom registration flow so that if someone tries to register for a cancelled date, they see:
-  > "Tonight's Monday meeting (July 6) has been cancelled — Matt is traveling to Texas to help a family with an intervention. Please join us next Monday at 7 PM PT for the regularly scheduled meeting."
-- Registration for all other Mondays keeps working normally.
+Nothing else has been changed yet.
 
-**2. Poll infrastructure**
+## Task 2 — Verify Live auth (no customer charge)
+Add a tiny admin-only Edge Function `paypal-verify-auth` that:
+- Requires an authenticated admin (`has_role(auth.uid(), 'admin')`).
+- Calls `POST /v1/oauth2/token` against `api-m.paypal.com`.
+- Returns `{ ok: true, mode: "live", token_type, expires_in, app_id_last4 }` — no token, no secret, no Basic header echoed.
+- On failure, returns a sanitized error (status + PayPal `error` code only, never `error_description` contents that could echo credentials).
+I'll then invoke it once from the tool harness (as your admin session) to confirm Live auth works. If auth fails, we stop and re-check the pasted values before touching anything else.
 
-- Two tables:
-  - `email_polls` — the poll itself (question + created_at).
-  - `email_poll_votes` — one row per recipient, with a unique `token` (UUID), the recipient email, the meeting date it relates to, and the chosen option (nullable until they vote).
-- Public page `/poll/:token` where clicking a vote button records the choice and shows a thank-you + live tally. No login required; the token is the auth. One vote per token; changing vote is allowed until poll closes.
+## Task 3 — `/coaching-checkout` route (website side only)
+New pieces:
+- Edge function `coaching-checkout-resolve` (verify_jwt=false): accepts `{ token }`, validates HMAC signature + expiry + nonce against `APP_PAYMENT_BRIDGE_SECRET`, resolves to a server-owned record. Returns only display-safe fields (service name, amount label, expiry). Never returns the raw booking/account IDs to the browser beyond an opaque session id.
+- Edge function `coaching-order-create` (verify_jwt=false, token-gated): creates the PayPal order server-side. Amount pinned to `15000` cents USD server-side; ignores anything the browser sends. Uses `PayPal-Request-Id = sha256(token_nonce)` for idempotency.
+- Edge function `coaching-order-capture` (verify_jwt=false, token-gated): captures, then re-fetches order from PayPal and verifies `status=COMPLETED`, `amount.value="150.00"`, `currency_code=USD`, `custom_id` matches booking, capture id not already used. Only then marks paid.
+- Frontend route `src/pages/CoachingCheckout.tsx` — pure presentation, PayPal JS SDK button rendered with server-provided order id. No amount, no email, no booking id in query string beyond the opaque token.
 
-**3. Send the cancellation + poll email**
+New table `coaching_checkout_orders` (via migration):
+- `id uuid pk`, `token_nonce text unique`, `app_booking_ref text`, `app_account_ref text`, `amount_cents int check (=15000)`, `currency text check (='USD')`, `service_type text`, `paypal_order_id text unique`, `paypal_capture_id text unique nullable`, `status text` (`pending|approved|captured|failed|refunded|reversed`), timestamps for `created_at/approved_at/captured_at/refunded_at/failed_at/token_expires_at`.
+- RLS enabled, no anon/authenticated policies (edge-function-only via service role). Explicit `GRANT` to `service_role`.
 
-- New edge function `send-meeting-cancellation-poll`:
-  - Pulls all 35 registrants for 2026-07-06.
-  - Creates one poll and one `email_poll_votes` row per unique email (dedupes).
-  - Sends a personalized email via SendGrid (already configured) with your apology, the reason (family intervention in Texas), and two big buttons:
-    1. **Wait until next Monday (July 13, 7 PM PT)**
-    2. **Move to Thursday July 9 at 7 PM PT**
-  - Each button links to `/poll/<token>?choice=1` (or 2) so one click = one vote.
-- Admin-triggered from an existing admin page (I'll add a small "Send cancellation poll" button on the Zoom admin area), so nothing sends until you click it.
+## Task 4 — Idempotency guarantees
+- Unique constraints on `paypal_order_id` and `paypal_capture_id`.
+- `PayPal-Request-Id` header on create/capture derived from `token_nonce`.
+- Capture path is a `SELECT ... FOR UPDATE` on the order row so a double-click can't double-capture.
+- Never mark paid from the browser return; only from server-verified capture response and webhook.
 
-**4. Admin view of results**
+## Task 5 — App payment bridge (prepared, not shipped live)
+- New secrets requested: `SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL`, `APP_PAYMENT_BRIDGE_SECRET`. Requested via secure form only when you say go.
+- New table `app_payment_bridge_outbox`: queued signed callbacks with `attempt_count`, `next_attempt_at`, `event_id unique` (idempotency).
+- New function `deliver-app-payment-callback` (cron every 5 min): posts canonical `{ts}.{nonce}.{sha256(body)}` signed with HMAC-SHA256, `X-Signature`/`X-Timestamp`/`X-Event-Id` headers. Retries with backoff.
+- Callback body carries only: `booking_id, order_id, capture_id, amount_cents, currency, status, captured_at, event_id`. No PII, no health data.
+- Deployment: I'll leave `SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL` unset until your app endpoint exists; the outbox will queue but not send. You confirm before we flip it on.
 
-- Small results panel on the admin page showing live vote counts and the list of who voted for what, so you can decide the reschedule.
+## Task 6 — Webhook hardening
+- `paypal-webhook` already verifies signatures via PayPal's verify endpoint — good. I'll extend the switch to also handle `PAYMENT.CAPTURE.COMPLETED`, `PAYMENT.CAPTURE.DENIED`, `PAYMENT.CAPTURE.REVERSED`, `PAYMENT.CAPTURE.REFUNDED`, and `CUSTOMER.DISPUTE.CREATED` for coaching orders.
+- Refunds/reversals update `coaching_checkout_orders.status` and enqueue a signed callback event so the iOS app can't schedule against stale state.
+- No return-page trust: URL redirect only navigates the UI; state comes from webhook + server capture.
 
-## Email copy I'll use (you can edit before sending)
+## Task 7 — Privacy & logging pass
+- Sweep all PayPal-touching functions: strip any `console.log(JSON.stringify(resource))` that could dump customer data (currently `paypal-webhook` logs the full resource — I'll reduce that to ids + event type).
+- PayPal `description` on new orders: fixed generic string "Coaching session".
+- No auth headers, tokens, or raw webhook bodies logged. Errors return sanitized shape `{code, message}` only.
 
-> Subject: Monday Meeting Cancelled — Quick Vote on Reschedule
->
-> Hi {first_name},
->
-> I'm so sorry to do this on short notice — I have to cancel tonight's 7 PM Monday meeting. I'll be on a plane to Texas during our normal meeting time to help a family with an intervention. I hate letting you down, and I truly appreciate your understanding.
->
-> To make it up to everyone, I'd like to hear from you. Would you rather:
->
-> [ Wait until next Monday, July 13 ]   [ Move it to Thursday, July 9 at 7 PM PT ]
->
-> One click above records your vote. I'll go with whatever the group prefers.
->
-> Thank you for your patience,
-> Matt
+## Task 8 — Tests
+Add Deno tests under `supabase/functions/coaching-*/index.test.ts` and a Vitest suite for the checkout page. Covers every scenario you listed (tampered amount, expired token, replayed nonce, wrong currency, duplicate capture, refund, invalid signature, callback replay, retry). Runs alongside existing tests; existing PayPal flows get a smoke regression test that mocks PayPal's API.
 
-## Technical details
+## Task 9 — Handoff guarantees
+- Zero edits to existing `paypal-subscriptions`, `consultation-payment`, `process-consultation-booking`, `paypal-admin-sync`, `paypal-sync-all` beyond a logging-privacy trim in Task 7 (I'll show the diff before applying).
+- No destructive migrations. New table only.
+- No real charge will be made. Live auth verification uses `oauth2/token` only.
+- Rollback: delete the four new edge functions, drop the two new tables, remove the `/coaching-checkout` route. Existing checkout is untouched, so rollback is additive-only.
 
-- Poll tables: RLS locked to admins for reads; public vote goes through a `SECURITY DEFINER` RPC that only accepts a valid token.
-- Cancellation table: public SELECT (needed to render the cancellation message on the registration page); admin-only writes.
-- Email sending: reuses existing SendGrid setup via a new dedicated edge function (not `send-custom-email`) so retries, logging, and the poll-token join stay clean.
-- Nothing sends automatically — you click "Send cancellation poll" in admin, we send to all 35, then you watch results roll in.
-
-## What I need from you before building
-
-Just confirm two things:
-
-1. Target meeting date is **Monday July 6, 2026 (7 PM PT)** — the 35-registrant meeting. ✅ or correct me.
-2. Reply-to on the email — use your usual `matt@soberhelpline.com` / support address, or a different one?
+## What I need from you to proceed
+1. Approve this plan (or edit scope).
+2. Confirm you want me to run the Live-auth verification (Task 2) now.
+3. Confirm the token/HMAC contract in Task 3 matches what your iOS/app backend team can produce, or ask me to draft the exact spec doc first.
+4. Later, when your app callback endpoint exists, I'll request `SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL` + `APP_PAYMENT_BRIDGE_SECRET`.
