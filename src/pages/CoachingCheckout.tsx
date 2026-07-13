@@ -47,13 +47,13 @@ function loadPayPalSdk(clientId: string): Promise<void> {
 export default function CoachingCheckout() {
   const [params] = useSearchParams();
   const token = params.get("token") ?? "";
-  const paypalClientId = session?.paypal_client_id ?? "";
 
   const [state, setState] = useState<"loading" | "ready" | "processing" | "captured" | "error">("loading");
   const [errorCode, setErrorCode] = useState<string | null>(null);
   const [session, setSession] = useState<ResolvedSession | null>(null);
   const buttonsHost = useRef<HTMLDivElement | null>(null);
   const buttonsMounted = useRef(false);
+  const paypalClientId = session?.paypal_client_id ?? "";
 
   useEffect(() => {
     let cancelled = false;
