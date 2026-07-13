@@ -287,51 +287,85 @@ Deno.serve(async (req) => {
       case 'PAYMENT.CAPTURE.REFUNDED':
       case 'PAYMENT.CAPTURE.REVERSED':
       case 'PAYMENT.CAPTURE.DENIED': {
-        // Coaching orders: look up by capture id and mark refunded/reversed.
-        const captureId = resource?.id;
-        const linkedCaptureId = resource?.links?.find((l: any) => l.rel === 'up')?.href?.split('/').pop();
-        const idForLookup = captureId ?? linkedCaptureId;
-        if (idForLookup) {
-          const newStatus = eventType === 'PAYMENT.CAPTURE.REFUNDED' ? 'refunded'
-            : eventType === 'PAYMENT.CAPTURE.REVERSED' ? 'reversed'
-            : 'failed';
-          const { data: coachingRow } = await supabaseClient
-            .from('coaching_checkout_orders')
-            .select('id, app_booking_ref, paypal_order_id')
-            .eq('paypal_capture_id', idForLookup)
-            .maybeSingle();
-          if (coachingRow) {
-            const nowIso = new Date().toISOString();
-            const updates: Record<string, unknown> = { status: newStatus };
-            if (newStatus === 'refunded') updates.refunded_at = nowIso;
-            if (newStatus === 'failed') updates.failed_at = nowIso;
-            await supabaseClient
-              .from('coaching_checkout_orders')
-              .update(updates)
-              .eq('id', coachingRow.id);
+        // Correlate to the ORIGINAL capture id (not the refund/reversal id).
+        // For REFUNDED, resource.id is the refund id — the original capture is the `up` link.
+        // For REVERSED/DENIED, resource.id is the capture id; `up` link is a fallback.
+        const links: any[] = Array.isArray(resource?.links) ? resource.links : [];
+        const upHref: string | undefined = links.find((l: any) => l?.rel === 'up')?.href;
+        const upId = upHref ? upHref.split('/').pop() : undefined;
+        const resourceId: string | undefined = resource?.id;
 
-            const eventUid = `${eventType}.${coachingRow.id}.${idForLookup}`;
-            await supabaseClient.from('app_payment_bridge_outbox').insert({
-              event_id: eventUid,
-              coaching_order_id: coachingRow.id,
-              payload: {
-                event: newStatus === 'refunded' ? 'payment.refunded'
-                  : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied',
-                booking_id: coachingRow.app_booking_ref,
-                order_id: coachingRow.paypal_order_id,
-                capture_id: idForLookup,
-                amount_cents: 15000,
-                currency: 'USD',
-                status: newStatus,
-                event_id: eventUid,
-                occurred_at: nowIso,
-              },
-            });
-            console.log(`Coaching capture ${idForLookup} -> ${newStatus}`);
-          }
+        let originalCaptureId: string | undefined;
+        if (eventType === 'PAYMENT.CAPTURE.REFUNDED') {
+          originalCaptureId = upId; // refund id must NOT be used as capture id
+        } else {
+          originalCaptureId = resourceId ?? upId;
         }
+
+        const eventBrief = `${eventType}:${body?.id ?? 'no-event-id'}`;
+        if (!originalCaptureId) {
+          console.error('Cannot determine original capture id for', eventBrief);
+          return new Response(
+            JSON.stringify({ error: 'missing_original_capture_id' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        const newStatus = eventType === 'PAYMENT.CAPTURE.REFUNDED' ? 'refunded'
+          : eventType === 'PAYMENT.CAPTURE.REVERSED' ? 'reversed'
+          : 'failed';
+        const outEvent = newStatus === 'refunded' ? 'payment.refunded'
+          : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied';
+
+        // Check first that this capture belongs to a coaching order. If not, treat as unrelated (200).
+        const { data: coachingRow } = await supabaseClient
+          .from('coaching_checkout_orders')
+          .select('id, app_booking_ref, paypal_order_id')
+          .eq('paypal_capture_id', originalCaptureId)
+          .maybeSingle();
+        if (!coachingRow) {
+          console.log('No coaching order for capture; ignoring', eventBrief);
+          break;
+        }
+
+        const nowIso = new Date().toISOString();
+        const eventUid = `${eventType}.${coachingRow.id}.${originalCaptureId}`;
+        const payload = {
+          event: outEvent,
+          booking_id: coachingRow.app_booking_ref,
+          order_id: coachingRow.paypal_order_id,
+          capture_id: originalCaptureId,
+          amount_cents: 15000,
+          currency: 'USD',
+          status: newStatus,
+          event_id: eventUid,
+          occurred_at: nowIso,
+        };
+
+        const { data: rpcData, error: rpcErr } = await supabaseClient.rpc(
+          'finalize_coaching_refund_or_reversal',
+          {
+            p_original_capture_id: originalCaptureId,
+            p_new_status: newStatus,
+            p_event_id: eventUid,
+            p_payload: payload,
+            p_occurred_at: nowIso,
+          }
+        );
+
+        if (rpcErr || !rpcData || (rpcData as any).ok !== true) {
+          const code = (rpcData as any)?.code ?? rpcErr?.message ?? 'rpc_failed';
+          console.error('Coaching refund/reversal RPC failed', eventBrief, code);
+          // Return retryable 5xx so PayPal redelivers.
+          return new Response(
+            JSON.stringify({ error: 'coaching_finalize_failed' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+        console.log(`Coaching capture ${originalCaptureId} -> ${newStatus}`);
         break;
       }
+
 
       default:
         console.log(`Unhandled webhook event type: ${eventType}`);
