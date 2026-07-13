@@ -268,7 +268,7 @@ Deno.serve(async (req) => {
     p_service_type: "plan_review_coaching",
     p_amount_cents: 15000,
     p_currency: "USD",
-    p_captured_at: nowIso,
+    p_captured_at: capturedAtIso,
     p_event_id: eventId,
     p_payload: payload,
   });
