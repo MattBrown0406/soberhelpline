@@ -71,6 +71,56 @@ export type Database = {
         }
         Relationships: []
       }
+      app_payment_bridge_outbox: {
+        Row: {
+          attempt_count: number
+          coaching_order_id: string
+          created_at: string
+          delivered_at: string | null
+          event_id: string
+          id: string
+          last_error: string | null
+          last_response_status: number | null
+          next_attempt_at: string
+          payload: Json
+          updated_at: string
+        }
+        Insert: {
+          attempt_count?: number
+          coaching_order_id: string
+          created_at?: string
+          delivered_at?: string | null
+          event_id: string
+          id?: string
+          last_error?: string | null
+          last_response_status?: number | null
+          next_attempt_at?: string
+          payload: Json
+          updated_at?: string
+        }
+        Update: {
+          attempt_count?: number
+          coaching_order_id?: string
+          created_at?: string
+          delivered_at?: string | null
+          event_id?: string
+          id?: string
+          last_error?: string | null
+          last_response_status?: number | null
+          next_attempt_at?: string
+          payload?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "app_payment_bridge_outbox_coaching_order_id_fkey"
+            columns: ["coaching_order_id"]
+            isOneToOne: false
+            referencedRelation: "coaching_checkout_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       boundary_clarity_worksheets: {
         Row: {
           boundary_about_me: boolean | null
@@ -199,6 +249,66 @@ export type Database = {
           created_at?: string
           meeting_date?: string
           reason?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      coaching_checkout_orders: {
+        Row: {
+          amount_cents: number
+          app_account_ref: string
+          app_booking_ref: string
+          approved_at: string | null
+          captured_at: string | null
+          created_at: string
+          currency: string
+          failed_at: string | null
+          id: string
+          paypal_capture_id: string | null
+          paypal_order_id: string | null
+          refunded_at: string | null
+          service_type: string
+          status: string
+          token_expires_at: string
+          token_nonce: string
+          updated_at: string
+        }
+        Insert: {
+          amount_cents?: number
+          app_account_ref: string
+          app_booking_ref: string
+          approved_at?: string | null
+          captured_at?: string | null
+          created_at?: string
+          currency?: string
+          failed_at?: string | null
+          id?: string
+          paypal_capture_id?: string | null
+          paypal_order_id?: string | null
+          refunded_at?: string | null
+          service_type?: string
+          status?: string
+          token_expires_at: string
+          token_nonce: string
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          app_account_ref?: string
+          app_booking_ref?: string
+          approved_at?: string | null
+          captured_at?: string | null
+          created_at?: string
+          currency?: string
+          failed_at?: string | null
+          id?: string
+          paypal_capture_id?: string | null
+          paypal_order_id?: string | null
+          refunded_at?: string | null
+          service_type?: string
+          status?: string
+          token_expires_at?: string
+          token_nonce?: string
           updated_at?: string
         }
         Relationships: []
