@@ -93,9 +93,9 @@ Deno.serve(async (req) => {
     let httpStatus: number | null = null;
     let errMsg: string | null = null;
 
-    // Finite fetch timeout, well under the 120s lease so the lease is always
+    // Finite fetch timeout well under the 180s lease so the lease is always
     // released (or explicitly not) before it can expire mid-flight.
-    const CALLBACK_TIMEOUT_MS = 30_000;
+    const CALLBACK_TIMEOUT_MS = 20_000;
     const ac = new AbortController();
     const timer = setTimeout(() => ac.abort(), CALLBACK_TIMEOUT_MS);
 
