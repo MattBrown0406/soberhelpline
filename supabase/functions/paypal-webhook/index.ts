@@ -407,7 +407,20 @@ Deno.serve(async (req) => {
 
   } catch (error) {
     console.error('Webhook processing error:', error);
-    // Still return 200 to prevent PayPal from retrying
+    // If the error occurred while processing a recognized payment-processing
+    // event, return retryable 5xx so PayPal redelivers. Unknown/parse errors
+    // still ack 200 because retrying them will not help.
+    const handledPaymentEvents = new Set<string>([
+      SUBSCRIPTION_ACTIVATED, SUBSCRIPTION_CANCELLED, SUBSCRIPTION_SUSPENDED,
+      SUBSCRIPTION_EXPIRED, PAYMENT_COMPLETED,
+      'PAYMENT.CAPTURE.REFUNDED', 'PAYMENT.CAPTURE.REVERSED', 'PAYMENT.CAPTURE.DENIED',
+    ]);
+    if (handledEventType && handledPaymentEvents.has(handledEventType)) {
+      return new Response(
+        JSON.stringify({ error: 'processing_error', retryable: true }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     return new Response(
       JSON.stringify({ received: true, error: 'Processing error' }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
