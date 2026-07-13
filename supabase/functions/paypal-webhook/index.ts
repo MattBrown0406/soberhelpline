@@ -284,6 +284,55 @@ Deno.serve(async (req) => {
         break;
       }
 
+      case 'PAYMENT.CAPTURE.REFUNDED':
+      case 'PAYMENT.CAPTURE.REVERSED':
+      case 'PAYMENT.CAPTURE.DENIED': {
+        // Coaching orders: look up by capture id and mark refunded/reversed.
+        const captureId = resource?.id;
+        const linkedCaptureId = resource?.links?.find((l: any) => l.rel === 'up')?.href?.split('/').pop();
+        const idForLookup = captureId ?? linkedCaptureId;
+        if (idForLookup) {
+          const newStatus = eventType === 'PAYMENT.CAPTURE.REFUNDED' ? 'refunded'
+            : eventType === 'PAYMENT.CAPTURE.REVERSED' ? 'reversed'
+            : 'failed';
+          const { data: coachingRow } = await supabaseClient
+            .from('coaching_checkout_orders')
+            .select('id, app_booking_ref, paypal_order_id')
+            .eq('paypal_capture_id', idForLookup)
+            .maybeSingle();
+          if (coachingRow) {
+            const nowIso = new Date().toISOString();
+            const updates: Record<string, unknown> = { status: newStatus };
+            if (newStatus === 'refunded') updates.refunded_at = nowIso;
+            if (newStatus === 'failed') updates.failed_at = nowIso;
+            await supabaseClient
+              .from('coaching_checkout_orders')
+              .update(updates)
+              .eq('id', coachingRow.id);
+
+            const eventUid = `${eventType}.${coachingRow.id}.${idForLookup}`;
+            await supabaseClient.from('app_payment_bridge_outbox').insert({
+              event_id: eventUid,
+              coaching_order_id: coachingRow.id,
+              payload: {
+                event: newStatus === 'refunded' ? 'payment.refunded'
+                  : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied',
+                booking_id: coachingRow.app_booking_ref,
+                order_id: coachingRow.paypal_order_id,
+                capture_id: idForLookup,
+                amount_cents: 15000,
+                currency: 'USD',
+                status: newStatus,
+                event_id: eventUid,
+                occurred_at: nowIso,
+              },
+            });
+            console.log(`Coaching capture ${idForLookup} -> ${newStatus}`);
+          }
+        }
+        break;
+      }
+
       default:
         console.log(`Unhandled webhook event type: ${eventType}`);
     }
