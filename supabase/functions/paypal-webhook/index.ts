@@ -107,6 +107,11 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Track which handled event type we entered so the outer catch can decide
+  // between retryable 5xx (recognized payment-processing failure) and 200
+  // (unrelated / already committed).
+  let handledEventType: string | null = null;
+
   try {
     // Read body as text first for signature verification
     const bodyText = await req.text();
@@ -127,6 +132,7 @@ Deno.serve(async (req) => {
     const body = JSON.parse(bodyText);
     const eventType = body.event_type;
     const resource = body.resource;
+    handledEventType = typeof eventType === 'string' ? eventType : null;
 
     // Log event type + safe identifiers only. Never log the full resource
     // (it can contain payer name/email and other customer details).
@@ -137,6 +143,7 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
 
     switch (eventType) {
       case SUBSCRIPTION_ACTIVATED: {
