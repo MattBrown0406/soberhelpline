@@ -317,19 +317,40 @@ Deno.serve(async (req) => {
         const outEvent = newStatus === 'refunded' ? 'payment.refunded'
           : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied';
 
-        // Check first that this capture belongs to a coaching order. If not, treat as unrelated (200).
-        const { data: coachingRow } = await supabaseClient
+        // Distinguish DB error vs unrelated. On DB failure, return retryable 5xx.
+        const { data: coachingRow, error: lookupErr } = await supabaseClient
           .from('coaching_checkout_orders')
           .select('id, app_booking_ref, paypal_order_id')
           .eq('paypal_capture_id', originalCaptureId)
           .maybeSingle();
+        if (lookupErr) {
+          console.error('DB lookup failed for capture', eventBrief, lookupErr.message);
+          return new Response(
+            JSON.stringify({ error: 'db_lookup_failed' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
         if (!coachingRow) {
+          // Successful query with no matching coaching order = conclusively unrelated.
           console.log('No coaching order for capture; ignoring', eventBrief);
           break;
         }
 
+        // PayPal event uid MUST include body.id so two distinct PayPal events for
+        // the same capture do not collapse into one outbox event_id.
+        const paypalEventId = typeof body?.id === 'string' && body.id.length > 0
+          ? body.id
+          : null;
+        if (!paypalEventId) {
+          console.error('Missing PayPal body.id — cannot form unique event_id', eventBrief);
+          return new Response(
+            JSON.stringify({ error: 'missing_paypal_event_id' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         const nowIso = new Date().toISOString();
-        const eventUid = `${eventType}.${coachingRow.id}.${originalCaptureId}`;
+        const eventUid = `${eventType}.${coachingRow.id}.${originalCaptureId}.${paypalEventId}`;
         const payload = {
           event: outEvent,
           booking_id: coachingRow.app_booking_ref,
