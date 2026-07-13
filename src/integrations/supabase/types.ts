@@ -3741,6 +3741,10 @@ export type Database = {
         Args: { _email: string; _name: string }
         Returns: boolean
       }
+      outbox_payload_matches: {
+        Args: { a: Json; b: Json; keys: string[] }
+        Returns: boolean
+      }
       release_app_payment_outbox_lease: {
         Args: {
           p_attempt_count: number
@@ -3753,6 +3757,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      safe_jsonb_int: { Args: { j: Json; k: string }; Returns: number }
       update_abandoned_booking: {
         Args: {
           _client_email: string
