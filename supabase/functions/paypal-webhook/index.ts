@@ -562,8 +562,10 @@ Deno.serve(async (req) => {
     const handledPaymentEvents = new Set<string>([
       SUBSCRIPTION_ACTIVATED, SUBSCRIPTION_CANCELLED, SUBSCRIPTION_SUSPENDED,
       SUBSCRIPTION_EXPIRED, PAYMENT_COMPLETED,
+      'PAYMENT.CAPTURE.COMPLETED',
       'PAYMENT.CAPTURE.REFUNDED', 'PAYMENT.CAPTURE.REVERSED', 'PAYMENT.CAPTURE.DENIED',
     ]);
+
     if (handledEventType && handledPaymentEvents.has(handledEventType)) {
       return new Response(
         JSON.stringify({ error: 'processing_error', retryable: true }),
