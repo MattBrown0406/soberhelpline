@@ -311,10 +311,10 @@ Deno.serve(async (req) => {
         })();
         const paypalEventIdC = typeof body?.id === 'string' ? body.id : null;
 
-        if (!capId || !paypalEventIdC) {
-          console.error('COMPLETED missing capture id or event id', eventBriefC);
+        if (!capId) {
+          console.error('COMPLETED missing capture id', eventBriefC);
           return new Response(
-            JSON.stringify({ error: 'missing_capture_or_event_id' }),
+            JSON.stringify({ error: 'missing_capture_id' }),
             { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
           );
         }
@@ -326,7 +326,11 @@ Deno.serve(async (req) => {
         }
 
         // Correlate to coaching_checkout_orders. Prefer custom_id (session id we set on the order).
+        // We must validate coaching correlation before treating a $150 USD capture as coaching:
+        // the website has other payment flows and only rows persisted by coaching-order-create
+        // count as coaching. A clean lookup with no row -> unrelated capture, ACK 200.
         let coachingRowC: any = null;
+        let dbLookupFailed = false;
         if (customId) {
           const { data, error } = await supabaseClient
             .from('coaching_checkout_orders')
@@ -335,14 +339,12 @@ Deno.serve(async (req) => {
             .maybeSingle();
           if (error) {
             console.error('COMPLETED lookup by custom_id failed', eventBriefC, error.message);
-            return new Response(
-              JSON.stringify({ error: 'db_lookup_failed' }),
-              { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-            );
+            dbLookupFailed = true;
+          } else {
+            coachingRowC = data ?? null;
           }
-          coachingRowC = data ?? null;
         }
-        if (!coachingRowC && orderIdFromLinks) {
+        if (!coachingRowC && !dbLookupFailed && orderIdFromLinks) {
           const { data, error } = await supabaseClient
             .from('coaching_checkout_orders')
             .select('id, app_booking_ref, paypal_order_id, service_type, status')
@@ -350,35 +352,37 @@ Deno.serve(async (req) => {
             .maybeSingle();
           if (error) {
             console.error('COMPLETED lookup by order_id failed', eventBriefC, error.message);
-            return new Response(
-              JSON.stringify({ error: 'db_lookup_failed' }),
-              { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-            );
+            dbLookupFailed = true;
+          } else {
+            coachingRowC = data ?? null;
           }
-          coachingRowC = data ?? null;
         }
 
-        // Not visible yet: could be race with browser-side order write. Retryable.
-        if (!coachingRowC) {
-          console.log('COMPLETED: coaching order not visible yet; requesting retry', eventBriefC);
+        // Only DB errors are retryable; a successful "no match" means the capture
+        // belongs to another website payment flow (consultation/subscription/etc.).
+        if (dbLookupFailed) {
           return new Response(
-            JSON.stringify({ error: 'coaching_order_not_visible' }),
+            JSON.stringify({ error: 'db_lookup_failed' }),
             { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
           );
+        }
+        if (!coachingRowC) {
+          console.log('COMPLETED: no coaching row for this capture; acknowledging as unrelated', eventBriefC);
+          break;
         }
         if (coachingRowC.service_type !== 'plan_review_coaching') {
           console.log('COMPLETED: not plan_review_coaching; ignoring', eventBriefC);
           break;
         }
-        if (!orderIdFromLinks || coachingRowC.paypal_order_id !== orderIdFromLinks) {
-          // If order id was found from links and doesn't match, this is a mismatched event; ignore.
-          if (orderIdFromLinks) {
-            console.log('COMPLETED: order id mismatch; ignoring', eventBriefC);
-            break;
-          }
+        if (orderIdFromLinks && coachingRowC.paypal_order_id !== orderIdFromLinks) {
+          // Mismatched event for a real coaching row; ignore.
+          console.log('COMPLETED: order id mismatch; ignoring', eventBriefC);
+          break;
         }
 
-        const eventUidC = `PAYMENT.CAPTURE.COMPLETED.${coachingRowC.id}.${capId}.${paypalEventIdC}`;
+        // Canonical event id — identical to the browser capture path so retries
+        // from either side deduplicate at the outbox and app-side event log.
+        const eventUidC = `capture.${coachingRowC.id}.${capId}`;
         const capturedAtIso = captureCreateTime || body?.create_time || new Date().toISOString();
         const payloadC = {
           event: 'payment.captured',
@@ -413,6 +417,7 @@ Deno.serve(async (req) => {
         console.log(`COMPLETED finalized coaching capture ${capId} (already=${(rpcC as any).already})`);
         break;
       }
+
 
       case 'PAYMENT.CAPTURE.REFUNDED':
       case 'PAYMENT.CAPTURE.REVERSED':
