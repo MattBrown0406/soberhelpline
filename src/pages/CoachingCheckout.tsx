@@ -12,6 +12,8 @@ interface ResolvedSession {
   currency: string;
   status: string;
   expires_at: string;
+  paypal_client_id: string | null;
+  paypal_env: "live" | "sandbox";
 }
 
 declare global {
@@ -45,7 +47,7 @@ function loadPayPalSdk(clientId: string): Promise<void> {
 export default function CoachingCheckout() {
   const [params] = useSearchParams();
   const token = params.get("token") ?? "";
-  const paypalClientId = (import.meta.env.VITE_PAYPAL_PUBLIC_CLIENT_ID as string | undefined) ?? "";
+  const paypalClientId = session?.paypal_client_id ?? "";
 
   const [state, setState] = useState<"loading" | "ready" | "processing" | "captured" | "error">("loading");
   const [errorCode, setErrorCode] = useState<string | null>(null);

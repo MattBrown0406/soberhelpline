@@ -90,6 +90,9 @@ Deno.serve(async (req) => {
       currency: "USD",
       status,
       expires_at: tokenExpiresAt,
+      // PayPal client_id is publishable — required by the browser JS SDK.
+      paypal_client_id: Deno.env.get("PAYPAL_CLIENT_ID") ?? null,
+      paypal_env: Deno.env.get("PAYPAL_MODE") === "sandbox" ? "sandbox" : "live",
     }),
     { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
   );
