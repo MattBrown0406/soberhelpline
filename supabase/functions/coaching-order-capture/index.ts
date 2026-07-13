@@ -149,19 +149,40 @@ Deno.serve(async (req) => {
         });
       }
     } else if (capResp && !capResp.ok) {
-      // Definitive client-side failure (4xx other than retryable set above): mark failed.
-      console.log("coaching-order-capture: capture failed status", capResp.status);
-      await admin.from("coaching_checkout_orders")
-        .update({ status: "failed", failed_at: new Date().toISOString() })
-        .eq("id", row.id);
-      return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed", http_status: capResp.status }), {
-        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      // Only treat as terminal if PayPal returns a known-definitive error name.
+      // Otherwise reconcile via authoritative order fetch (retryable).
+      let capBody: any = null;
+      try { capBody = await capResp.clone().json(); } catch { /* ignore */ }
+      const errName = capBody?.name ?? capBody?.details?.[0]?.issue;
+      const DEFINITIVE = new Set([
+        "PAYER_ACTION_REQUIRED",
+        "INSTRUMENT_DECLINED",
+        "PAYER_CANNOT_PAY",
+        "TRANSACTION_REFUSED",
+        "COMPLIANCE_VIOLATION",
+      ]);
+      if (errName && DEFINITIVE.has(errName)) {
+        console.log("coaching-order-capture: definitive failure", capResp.status, errName);
+        // Predicated update: only mark failed if the row is still in a non-terminal state.
+        await admin.from("coaching_checkout_orders")
+          .update({ status: "failed", failed_at: new Date().toISOString() })
+          .eq("id", row.id)
+          .not("status", "in", "(captured,refunded,reversed,failed)");
+        return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed", http_status: capResp.status, name: errName }), {
+          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      // Unknown/auth/rate-limit — reconcile via order GET (retryable).
+      captureJson = await fetchOrder();
+      if (!captureJson) {
+        return new Response(JSON.stringify({ ok: false, code: "paypal_capture_ambiguous" }), {
+          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     } else if (capResp) {
       try {
         captureJson = await capResp.json();
       } catch {
-        // Malformed body from PayPal — treat as ambiguous, do NOT mark failed.
         captureJson = await fetchOrder();
         if (!captureJson) {
           return new Response(JSON.stringify({ ok: false, code: "paypal_capture_ambiguous" }), {
@@ -171,6 +192,7 @@ Deno.serve(async (req) => {
       }
     }
   }
+
 
 
   // Verify capture: status COMPLETED, amount 150.00, currency USD, custom_id == session id.
