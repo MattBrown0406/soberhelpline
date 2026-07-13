@@ -185,7 +185,7 @@ export default function CoachingCheckout() {
               <CheckCircle2 className="h-10 w-10 text-green-600 mx-auto mb-2" />
               <p className="font-medium">Payment received</p>
               <p className="text-sm text-muted-foreground">
-                Your coaching session is confirmed. You can now close this window and return to the app.
+                Payment received. Your coaching request is awaiting scheduling confirmation. You can now return to the app.
               </p>
             </div>
           )}
