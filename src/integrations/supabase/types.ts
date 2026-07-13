@@ -3580,6 +3580,30 @@ export type Database = {
           total_votes: number
         }[]
       }
+      finalize_coaching_capture: {
+        Args: {
+          p_amount_cents: number
+          p_capture_id: string
+          p_captured_at: string
+          p_currency: string
+          p_event_id: string
+          p_payload: Json
+          p_paypal_order_id: string
+          p_service_type: string
+          p_session_id: string
+        }
+        Returns: Json
+      }
+      finalize_coaching_refund_or_reversal: {
+        Args: {
+          p_event_id: string
+          p_new_status: string
+          p_occurred_at: string
+          p_original_capture_id: string
+          p_payload: Json
+        }
+        Returns: Json
+      }
       get_booking_slots: {
         Args: never
         Returns: {
