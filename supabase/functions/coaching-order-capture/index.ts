@@ -148,42 +148,42 @@ Deno.serve(async (req) => {
     }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }
 
-  // Unique-index on paypal_capture_id prevents finalizing the same capture on another booking.
+  // Atomic finalize: updates order + inserts outbox in one transaction.
   const nowIso = new Date().toISOString();
-  const { error: updErr } = await admin
-    .from("coaching_checkout_orders")
-    .update({
-      paypal_capture_id: capId,
-      status: "captured",
-      approved_at: nowIso,
-      captured_at: nowIso,
-    })
-    .eq("id", row.id)
-    .neq("status", "captured");
-  if (updErr) {
-    console.log("coaching-order-capture: db update failed");
-    return new Response(JSON.stringify({ ok: false, code: "db_update_failed" }), {
+  const eventId = `capture.${row.id}.${capId}`;
+  const payload = {
+    event: "payment.captured",
+    booking_id: row.app_booking_ref,
+    order_id: orderId,
+    capture_id: capId,
+    amount_cents: 15000,
+    currency: "USD",
+    status: "captured",
+    captured_at: nowIso,
+    event_id: eventId,
+  };
+
+  const { data: rpcData, error: rpcErr } = await admin.rpc("finalize_coaching_capture", {
+    p_session_id: row.id,
+    p_paypal_order_id: orderId,
+    p_capture_id: capId,
+    p_service_type: "plan_review_coaching",
+    p_amount_cents: 15000,
+    p_currency: "USD",
+    p_captured_at: nowIso,
+    p_event_id: eventId,
+    p_payload: payload,
+  });
+
+  if (rpcErr || !rpcData || (rpcData as any).ok !== true) {
+    console.log("coaching-order-capture: finalize failed", (rpcData as any)?.code ?? rpcErr?.message);
+    return new Response(JSON.stringify({
+      ok: false,
+      code: (rpcData as any)?.code ?? "db_update_failed",
+    }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
-
-  // Enqueue signed callback for the iOS app backend (delivered by a separate function).
-  const eventId = `capture.${row.id}.${capId}`;
-  await admin.from("app_payment_bridge_outbox").insert({
-    event_id: eventId,
-    coaching_order_id: row.id,
-    payload: {
-      event: "payment.captured",
-      booking_id: row.app_booking_ref,
-      order_id: orderId,
-      capture_id: capId,
-      amount_cents: 15000,
-      currency: "USD",
-      status: "captured",
-      captured_at: nowIso,
-      event_id: eventId,
-    },
-  });
 
   return new Response(JSON.stringify({ ok: true, capture_id: capId, status: "captured" }), {
     status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
