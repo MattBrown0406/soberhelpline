@@ -172,8 +172,18 @@ Deno.serve(async (req) => {
   const cur = cap?.amount?.currency_code;
   const customId = pu?.custom_id ?? pu?.reference_id;
 
-  if (!capId || amt !== "150.00" || cur !== "USD" || customId !== row.id) {
-    console.log("coaching-order-capture: verification failed (shape/amount/currency)");
+  // No capture object yet (order APPROVED/PENDING/etc.) — retryable, do NOT mark failed.
+  if (!cap || !capId) {
+    return new Response(JSON.stringify({
+      ok: false, code: "capture_pending", order_status: captureJson?.status ?? null,
+    }), {
+      status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  // A capture exists — now validate amount/currency/custom_id against it.
+  if (amt !== "150.00" || cur !== "USD" || customId !== row.id) {
+    console.log("coaching-order-capture: verification failed (amount/currency/custom_id mismatch)");
     await admin.from("coaching_checkout_orders")
       .update({ status: "failed", failed_at: new Date().toISOString() })
       .eq("id", row.id);
@@ -183,8 +193,8 @@ Deno.serve(async (req) => {
   }
 
   if (capStatus !== "COMPLETED") {
-    // PENDING / DECLINED / etc. — do NOT mark failed on transient states.
-    // Only DECLINED is definitive; PENDING is retryable.
+    // PENDING — retryable, do NOT mark failed.
+    // DECLINED / FAILED — definitive failure.
     if (capStatus === "DECLINED" || capStatus === "FAILED") {
       await admin.from("coaching_checkout_orders")
         .update({ status: "failed", failed_at: new Date().toISOString() })
@@ -197,6 +207,7 @@ Deno.serve(async (req) => {
       status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
 
   // Atomic finalize: updates order + inserts outbox in one transaction.
   // Include PayPal's capture-id + nonce for idempotency uniqueness.
