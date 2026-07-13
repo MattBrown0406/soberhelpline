@@ -148,14 +148,18 @@ Deno.serve(async (req) => {
       };
     }
 
-    const { error: relErr } = await admin.rpc(
+    const { data: releaseOk, error: relErr } = await admin.rpc(
       "release_app_payment_outbox_lease",
       releaseArgs,
     );
-    if (relErr) {
-      // Lease release failed. Row remains held under its lease and becomes
-      // eligible again automatically once the lease expires — safe to retry.
-      console.log("deliver-app-payment-callback: lease release failed", relErr.message);
+    // A successful RPC returning false means the caller no longer owns the lease
+    // (expired or reclaimed). Never count that as delivered — leave the row for
+    // safe retry after the lease naturally frees.
+    if (relErr || releaseOk !== true) {
+      console.log(
+        "deliver-app-payment-callback: lease release not owned/failed",
+        relErr?.message ?? `data=${JSON.stringify(releaseOk)}`,
+      );
       releaseFailed++;
     } else if (ok) {
       delivered++;
