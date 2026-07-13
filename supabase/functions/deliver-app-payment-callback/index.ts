@@ -1,5 +1,5 @@
 // Delivers queued signed callbacks to the iOS app backend.
-// Idle no-op when SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL is unset (endpoint not deployed yet).
+// Idle no-op when APP_PAYMENT_CALLBACK_URL is unset (endpoint not deployed yet).
 // Idempotent: uses event_id header; retries with exponential backoff.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { signBridgeCallback } from "../_shared/coachingToken.ts";
