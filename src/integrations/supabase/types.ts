@@ -81,6 +81,8 @@ export type Database = {
           id: string
           last_error: string | null
           last_response_status: number | null
+          lease_id: string | null
+          leased_until: string | null
           next_attempt_at: string
           payload: Json
           updated_at: string
@@ -94,6 +96,8 @@ export type Database = {
           id?: string
           last_error?: string | null
           last_response_status?: number | null
+          lease_id?: string | null
+          leased_until?: string | null
           next_attempt_at?: string
           payload: Json
           updated_at?: string
@@ -107,6 +111,8 @@ export type Database = {
           id?: string
           last_error?: string | null
           last_response_status?: number | null
+          lease_id?: string | null
+          leased_until?: string | null
           next_attempt_at?: string
           payload?: Json
           updated_at?: string
@@ -3580,6 +3586,17 @@ export type Database = {
           total_votes: number
         }[]
       }
+      claim_app_payment_outbox_batch: {
+        Args: { p_batch_size?: number; p_lease_seconds?: number }
+        Returns: {
+          attempt_count: number
+          event_id: string
+          id: string
+          lease_id: string
+          leased_until: string
+          payload: Json
+        }[]
+      }
       finalize_coaching_capture: {
         Args: {
           p_amount_cents: number
@@ -3722,6 +3739,18 @@ export type Database = {
       is_email_meeting_blocked: { Args: { _email: string }; Returns: boolean }
       is_meeting_blocked: {
         Args: { _email: string; _name: string }
+        Returns: boolean
+      }
+      release_app_payment_outbox_lease: {
+        Args: {
+          p_attempt_count: number
+          p_delivered: boolean
+          p_id: string
+          p_last_error: string
+          p_last_response_status: number
+          p_lease_id: string
+          p_next_attempt_at: string
+        }
         Returns: boolean
       }
       update_abandoned_booking: {
