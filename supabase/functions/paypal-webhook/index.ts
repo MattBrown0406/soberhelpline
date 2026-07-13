@@ -107,6 +107,11 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Track which handled event type we entered so the outer catch can decide
+  // between retryable 5xx (recognized payment-processing failure) and 200
+  // (unrelated / already committed).
+  let handledEventType: string | null = null;
+
   try {
     // Read body as text first for signature verification
     const bodyText = await req.text();
@@ -127,6 +132,7 @@ Deno.serve(async (req) => {
     const body = JSON.parse(bodyText);
     const eventType = body.event_type;
     const resource = body.resource;
+    handledEventType = typeof eventType === 'string' ? eventType : null;
 
     // Log event type + safe identifiers only. Never log the full resource
     // (it can contain payer name/email and other customer details).
@@ -137,6 +143,7 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
 
     switch (eventType) {
       case SUBSCRIPTION_ACTIVATED: {
@@ -317,19 +324,40 @@ Deno.serve(async (req) => {
         const outEvent = newStatus === 'refunded' ? 'payment.refunded'
           : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied';
 
-        // Check first that this capture belongs to a coaching order. If not, treat as unrelated (200).
-        const { data: coachingRow } = await supabaseClient
+        // Distinguish DB error vs unrelated. On DB failure, return retryable 5xx.
+        const { data: coachingRow, error: lookupErr } = await supabaseClient
           .from('coaching_checkout_orders')
           .select('id, app_booking_ref, paypal_order_id')
           .eq('paypal_capture_id', originalCaptureId)
           .maybeSingle();
+        if (lookupErr) {
+          console.error('DB lookup failed for capture', eventBrief, lookupErr.message);
+          return new Response(
+            JSON.stringify({ error: 'db_lookup_failed' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
         if (!coachingRow) {
+          // Successful query with no matching coaching order = conclusively unrelated.
           console.log('No coaching order for capture; ignoring', eventBrief);
           break;
         }
 
+        // PayPal event uid MUST include body.id so two distinct PayPal events for
+        // the same capture do not collapse into one outbox event_id.
+        const paypalEventId = typeof body?.id === 'string' && body.id.length > 0
+          ? body.id
+          : null;
+        if (!paypalEventId) {
+          console.error('Missing PayPal body.id — cannot form unique event_id', eventBrief);
+          return new Response(
+            JSON.stringify({ error: 'missing_paypal_event_id' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         const nowIso = new Date().toISOString();
-        const eventUid = `${eventType}.${coachingRow.id}.${originalCaptureId}`;
+        const eventUid = `${eventType}.${coachingRow.id}.${originalCaptureId}.${paypalEventId}`;
         const payload = {
           event: outEvent,
           booking_id: coachingRow.app_booking_ref,
@@ -379,7 +407,20 @@ Deno.serve(async (req) => {
 
   } catch (error) {
     console.error('Webhook processing error:', error);
-    // Still return 200 to prevent PayPal from retrying
+    // If the error occurred while processing a recognized payment-processing
+    // event, return retryable 5xx so PayPal redelivers. Unknown/parse errors
+    // still ack 200 because retrying them will not help.
+    const handledPaymentEvents = new Set<string>([
+      SUBSCRIPTION_ACTIVATED, SUBSCRIPTION_CANCELLED, SUBSCRIPTION_SUSPENDED,
+      SUBSCRIPTION_EXPIRED, PAYMENT_COMPLETED,
+      'PAYMENT.CAPTURE.REFUNDED', 'PAYMENT.CAPTURE.REVERSED', 'PAYMENT.CAPTURE.DENIED',
+    ]);
+    if (handledEventType && handledPaymentEvents.has(handledEventType)) {
+      return new Response(
+        JSON.stringify({ error: 'processing_error', retryable: true }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     return new Response(
       JSON.stringify({ received: true, error: 'Processing error' }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
