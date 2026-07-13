@@ -128,8 +128,9 @@ Deno.serve(async (req) => {
     const eventType = body.event_type;
     const resource = body.resource;
 
-    console.log('PayPal webhook received:', eventType);
-    console.log('Resource:', JSON.stringify(resource, null, 2));
+    // Log event type + safe identifiers only. Never log the full resource
+    // (it can contain payer name/email and other customer details).
+    console.log('PayPal webhook received:', eventType, 'resource_id:', resource?.id ?? null);
 
     // Create Supabase client with service role for database operations
     const supabaseClient = createClient(
