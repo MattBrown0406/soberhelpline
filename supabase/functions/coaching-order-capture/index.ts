@@ -78,15 +78,13 @@ Deno.serve(async (req) => {
       status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
-  if (row.status === "captured" && row.paypal_capture_id) {
-    return new Response(JSON.stringify({
-      ok: true, already_captured: true, capture_id: row.paypal_capture_id,
-    }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
-  }
+  // NOTE: no early-exit on captured. Continue so the RPC can repair a missing
+  // outbox event even for an already-captured order (idempotent replay).
 
   let token: string;
   try { token = await getAccessToken(); }
   catch {
+    // Ambiguous auth failure — retryable, do NOT mark order failed.
     return new Response(JSON.stringify({ ok: false, code: "paypal_auth_failed" }), {
       status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
@@ -94,39 +92,75 @@ Deno.serve(async (req) => {
 
   const requestId = (await sha256Hex(`capture.${row.token_nonce}`)).slice(0, 64);
 
-  const capResp = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "PayPal-Request-Id": requestId,
-      Prefer: "return=representation",
-    },
-  });
+  // Fetch the authoritative order state up front when we already have a capture
+  // (recovery path) OR after any ambiguous capture failure.
+  async function fetchOrder(): Promise<any | null> {
+    try {
+      const r = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!r.ok) return null;
+      return await r.json();
+    } catch { return null; }
+  }
 
-  // 422 with ORDER_ALREADY_CAPTURED -> re-fetch order to reconcile.
-  let captureJson: any;
-  if (capResp.status === 422) {
-    const getResp = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!getResp.ok) {
-      console.log("coaching-order-capture: reconcile fetch failed");
-      return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed" }), {
+  let captureJson: any = null;
+  let capResp: Response | null = null;
+  let networkError = false;
+
+  // If we already believe the order is captured, skip re-capturing and go
+  // straight to authoritative order fetch. This is the recovery path.
+  if (row.status === "captured" && row.paypal_capture_id) {
+    captureJson = await fetchOrder();
+    if (!captureJson) {
+      return new Response(JSON.stringify({ ok: false, code: "paypal_reconcile_failed" }), {
         status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    captureJson = await getResp.json();
-  } else if (!capResp.ok) {
-    console.log("coaching-order-capture: capture failed status", capResp.status);
-    await admin.from("coaching_checkout_orders")
-      .update({ status: "failed", failed_at: new Date().toISOString() })
-      .eq("id", row.id);
-    return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed", http_status: capResp.status }), {
-      status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
   } else {
-    captureJson = await capResp.json();
+    try {
+      capResp = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "PayPal-Request-Id": requestId,
+          Prefer: "return=representation",
+        },
+      });
+    } catch {
+      networkError = true;
+    }
+
+    if (networkError || (capResp && capResp.status >= 500) || (capResp && capResp.status === 408)) {
+      // Ambiguous: PayPal may or may not have captured. Do NOT mark failed.
+      // Fetch authoritative order to see if a capture actually landed.
+      captureJson = await fetchOrder();
+      if (!captureJson) {
+        return new Response(JSON.stringify({ ok: false, code: "paypal_capture_ambiguous" }), {
+          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    } else if (capResp && capResp.status === 422) {
+      // ORDER_ALREADY_CAPTURED or similar — reconcile via order GET (ambiguous, do not fail).
+      captureJson = await fetchOrder();
+      if (!captureJson) {
+        return new Response(JSON.stringify({ ok: false, code: "paypal_reconcile_failed" }), {
+          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    } else if (capResp && !capResp.ok) {
+      // Definitive client-side failure (4xx other than 408/422): mark failed.
+      console.log("coaching-order-capture: capture failed status", capResp.status);
+      await admin.from("coaching_checkout_orders")
+        .update({ status: "failed", failed_at: new Date().toISOString() })
+        .eq("id", row.id);
+      return new Response(JSON.stringify({ ok: false, code: "paypal_capture_failed", http_status: capResp.status }), {
+        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    } else if (capResp) {
+      captureJson = await capResp.json();
+    }
   }
 
   // Verify capture: status COMPLETED, amount 150.00, currency USD, custom_id == session id.
@@ -138,17 +172,34 @@ Deno.serve(async (req) => {
   const cur = cap?.amount?.currency_code;
   const customId = pu?.custom_id ?? pu?.reference_id;
 
-  if (!capId || capStatus !== "COMPLETED" || amt !== "150.00" || cur !== "USD" || customId !== row.id) {
-    console.log("coaching-order-capture: verification failed");
+  if (!capId || amt !== "150.00" || cur !== "USD" || customId !== row.id) {
+    console.log("coaching-order-capture: verification failed (shape/amount/currency)");
     await admin.from("coaching_checkout_orders")
       .update({ status: "failed", failed_at: new Date().toISOString() })
       .eq("id", row.id);
-    return new Response(JSON.stringify({
-      ok: false, code: "capture_verification_failed",
-    }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return new Response(JSON.stringify({ ok: false, code: "capture_verification_failed" }), {
+      status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
+  if (capStatus !== "COMPLETED") {
+    // PENDING / DECLINED / etc. — do NOT mark failed on transient states.
+    // Only DECLINED is definitive; PENDING is retryable.
+    if (capStatus === "DECLINED" || capStatus === "FAILED") {
+      await admin.from("coaching_checkout_orders")
+        .update({ status: "failed", failed_at: new Date().toISOString() })
+        .eq("id", row.id);
+      return new Response(JSON.stringify({ ok: false, code: "capture_declined", capture_status: capStatus }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    return new Response(JSON.stringify({ ok: false, code: "capture_pending", capture_status: capStatus }), {
+      status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 
   // Atomic finalize: updates order + inserts outbox in one transaction.
+  // Include PayPal's capture-id + nonce for idempotency uniqueness.
   const nowIso = new Date().toISOString();
   const eventId = `capture.${row.id}.${capId}`;
   const payload = {
@@ -178,14 +229,16 @@ Deno.serve(async (req) => {
   if (rpcErr || !rpcData || (rpcData as any).ok !== true) {
     console.log("coaching-order-capture: finalize failed", (rpcData as any)?.code ?? rpcErr?.message);
     return new Response(JSON.stringify({
-      ok: false,
-      code: (rpcData as any)?.code ?? "db_update_failed",
+      ok: false, code: (rpcData as any)?.code ?? "db_update_failed",
     }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 
-  return new Response(JSON.stringify({ ok: true, capture_id: capId, status: "captured" }), {
+  return new Response(JSON.stringify({
+    ok: true, capture_id: capId, status: "captured",
+    already: (rpcData as any).already === true,
+  }), {
     status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });
