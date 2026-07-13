@@ -155,7 +155,8 @@ Deno.serve(async (req) => {
       try { capBody = await capResp.clone().json(); } catch { /* ignore */ }
       const errName = capBody?.name ?? capBody?.details?.[0]?.issue;
       const DEFINITIVE = new Set([
-        "PAYER_ACTION_REQUIRED",
+        // NOTE: PAYER_ACTION_REQUIRED intentionally omitted — it is a recoverable
+        // user-action state that must remain reconcilable via order GET.
         "INSTRUMENT_DECLINED",
         "PAYER_CANNOT_PAY",
         "TRANSACTION_REFUSED",
