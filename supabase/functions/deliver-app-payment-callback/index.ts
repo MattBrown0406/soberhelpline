@@ -63,11 +63,11 @@ Deno.serve(async (req) => {
   }
 
   // Atomic lease claim. Overlapping invocations get disjoint rows.
-  // Lease MUST be longer than worst-case sequential delivery:
-  //   25 rows * 30s callback timeout = 12.5 min → use 15 min (900s).
+  // Bounded worst-case: batch 5 × 20s callback timeout = 100s per run,
+  // well under the 180s lease and Edge Function wall-clock budget.
   const { data: claimed, error: claimErr } = await admin.rpc(
     "claim_app_payment_outbox_batch",
-    { p_batch_size: 25, p_lease_seconds: 900 },
+    { p_batch_size: 5, p_lease_seconds: 180 },
   );
 
 
