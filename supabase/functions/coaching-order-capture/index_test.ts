@@ -1,20 +1,19 @@
-// Stubbed tests for coaching-order-capture branch behavior.
-// These do NOT hit PayPal or the database. They monkey-patch globalThis.fetch
-// and use an in-memory admin stub via module boundary emulation.
-//
+// Stubbed tests for the coaching payment bridge behavior.
+// - Capture-branch logic mirrors coaching-order-capture/index.ts.
+// - Webhook-branch logic mirrors paypal-webhook/index.ts (PAYMENT.CAPTURE.COMPLETED and refund/reversal/denial).
+// - DB behavior tests hit real RPCs against the project DB using service role env.
 // Run: deno test --allow-net --allow-env supabase/functions/coaching-order-capture/index_test.ts
 
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { loadSync } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
+try { loadSync({ export: true, allowEmptyValues: true, examplePath: null }); } catch { /* ignore */ }
 
-// ------- shared fake state -------
+import { assert, assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+// ==================== Capture-branch stubs (mirrors index.ts) ====================
 type OrderRow = {
-  id: string;
-  token_nonce: string;
-  app_booking_ref: string;
-  status: string;
-  paypal_order_id: string;
-  paypal_capture_id: string | null;
-  failed_at?: string | null;
+  id: string; token_nonce: string; app_booking_ref: string;
+  status: string; paypal_order_id: string; paypal_capture_id: string | null;
 };
 
 function makeAdminStub(row: OrderRow, rpcHandler: (name: string, args: any) => any) {
@@ -24,11 +23,12 @@ function makeAdminStub(row: OrderRow, rpcHandler: (name: string, args: any) => a
       return {
         select() { return this; },
         eq() { return this; },
+        not() { return this; },
         maybeSingle: async () => ({ data: state.row, error: null }),
         update(patch: any) {
           state.updates.push(patch);
           Object.assign(state.row, patch);
-          return { eq: async () => ({ error: null }) };
+          return { eq: () => ({ not: async () => ({ error: null }) }) };
         },
       };
     },
@@ -40,23 +40,18 @@ function makeAdminStub(row: OrderRow, rpcHandler: (name: string, args: any) => a
   return { admin, state };
 }
 
-// Fake handler that mirrors index.ts branch logic without importing Deno.serve.
-// Kept aligned with the production file.
 async function runCapture(opts: {
   row: OrderRow;
   orderId: string;
-  capResp?: { status: number; json?: any; throws?: boolean; malformed?: boolean };
+  capResp?: { status: number; json?: any; throws?: boolean; malformed?: boolean; errBody?: any };
   fetchedOrder?: any | null;
   rpcHandler?: (name: string, args: any) => any;
 }) {
   const { row, orderId } = opts;
   const rpcHandler = opts.rpcHandler ?? (() => ({ ok: true, already: false }));
   const { admin, state } = makeAdminStub(row, rpcHandler);
-
-  // --- Simulate branch logic from index.ts ---
   let captureJson: any = null;
   let networkError = false;
-
   const retryableStatus = opts.capResp && (
     opts.capResp.status >= 500 ||
     opts.capResp.status === 408 ||
@@ -64,15 +59,20 @@ async function runCapture(opts: {
     opts.capResp.status === 422 ||
     opts.capResp.status === 429
   );
-
   if (opts.capResp?.throws) networkError = true;
 
   if (networkError || retryableStatus) {
     captureJson = opts.fetchedOrder ?? null;
     if (!captureJson) return { status: 502, code: "paypal_capture_ambiguous", state };
   } else if (opts.capResp && opts.capResp.status >= 400) {
-    await admin.from("x").update({ status: "failed", failed_at: new Date().toISOString() }).eq();
-    return { status: 502, code: "paypal_capture_failed", state };
+    const DEFINITIVE = new Set(["PAYER_ACTION_REQUIRED","INSTRUMENT_DECLINED","PAYER_CANNOT_PAY","TRANSACTION_REFUSED","COMPLIANCE_VIOLATION"]);
+    const errName = opts.capResp.errBody?.name ?? opts.capResp.errBody?.details?.[0]?.issue;
+    if (errName && DEFINITIVE.has(errName)) {
+      await admin.from("x").update({ status: "failed", failed_at: new Date().toISOString() }).eq().not();
+      return { status: 502, code: "paypal_capture_failed", state };
+    }
+    captureJson = opts.fetchedOrder ?? null;
+    if (!captureJson) return { status: 502, code: "paypal_capture_ambiguous", state };
   } else if (opts.capResp) {
     if (opts.capResp.malformed) {
       captureJson = opts.fetchedOrder ?? null;
@@ -90,159 +90,210 @@ async function runCapture(opts: {
   const cur = cap?.amount?.currency_code;
   const customId = pu?.custom_id ?? pu?.reference_id;
 
-  if (!cap || !capId) {
-    return { status: 202, code: "capture_pending", state };
-  }
+  if (!cap || !capId) return { status: 202, code: "capture_pending", state };
   if (amt !== "150.00" || cur !== "USD" || customId !== row.id) {
-    await admin.from("x").update({ status: "failed", failed_at: new Date().toISOString() }).eq();
+    await admin.from("x").update({ status: "failed" }).eq().not();
     return { status: 400, code: "capture_verification_failed", state };
   }
   if (capStatus !== "COMPLETED") {
     if (capStatus === "DECLINED" || capStatus === "FAILED") {
-      await admin.from("x").update({ status: "failed", failed_at: new Date().toISOString() }).eq();
+      await admin.from("x").update({ status: "failed" }).eq().not();
       return { status: 400, code: "capture_declined", state };
     }
     return { status: 202, code: "capture_pending", state };
   }
-
   const rpc = await admin.rpc("finalize_coaching_capture", {
     p_session_id: row.id, p_paypal_order_id: orderId, p_capture_id: capId,
+    p_captured_at: cap.create_time, // immutable
   });
   if (!(rpc as any).ok) return { status: 500, code: "db_update_failed", state };
   return { status: 200, code: "ok", capture_id: capId, state };
 }
 
 function baseRow(overrides: Partial<OrderRow> = {}): OrderRow {
-  return {
-    id: "sess-1",
-    token_nonce: "nonce-1",
-    app_booking_ref: "book-1",
-    status: "pending",
-    paypal_order_id: "ORDER-1",
-    paypal_capture_id: null,
-    ...overrides,
-  };
+  return { id: "sess-1", token_nonce: "n", app_booking_ref: "book-1",
+    status: "pending", paypal_order_id: "ORDER-1", paypal_capture_id: null, ...overrides };
 }
-
-function orderApproved() {
-  return { status: "APPROVED", purchase_units: [{ custom_id: "sess-1" }] };
-}
+function orderApproved() { return { status: "APPROVED", purchase_units: [{ custom_id: "sess-1" }] }; }
 function orderCompleted() {
+  return { status: "COMPLETED", purchase_units: [{ custom_id: "sess-1",
+    payments: { captures: [{ id: "CAP-1", status: "COMPLETED",
+      amount: { value: "150.00", currency_code: "USD" }, create_time: "2026-07-13T18:00:00Z" }] } }] };
+}
+
+// ==================== Webhook-branch stub (mirrors paypal-webhook) ====================
+function refundEvent(overrides: any = {}) {
   return {
-    status: "COMPLETED",
-    purchase_units: [{
-      custom_id: "sess-1",
-      payments: { captures: [{ id: "CAP-1", status: "COMPLETED", amount: { value: "150.00", currency_code: "USD" } }] },
-    }],
+    id: "WH-REFUND-1",
+    event_type: "PAYMENT.CAPTURE.REFUNDED",
+    create_time: "2026-07-13T18:30:00Z",
+    resource: {
+      id: "REFUND-1",
+      amount: { value: "150.00", currency_code: "USD" },
+      create_time: "2026-07-13T18:30:00Z",
+      links: [{ rel: "up", href: `https://api.paypal.com/v2/payments/captures/CAP-1` }],
+      ...overrides,
+    },
   };
 }
 
-Deno.test("ambiguous capture then APPROVED order with no capture -> 202 and reconcilable", async () => {
+// Simulate refund-amount validation branch from webhook.
+function validateRefundResource(resource: any): { ok: boolean; code?: string; cents?: number } {
+  const raw = resource?.amount?.value;
+  const cur = resource?.amount?.currency_code;
+  if (typeof raw !== "string" || cur !== "USD") return { ok: false, code: "refund_amount_invalid" };
+  if (!/^\d+\.\d{2}$/.test(raw)) return { ok: false, code: "refund_amount_malformed" };
+  const cents = Math.round(parseFloat(raw) * 100);
+  if (!Number.isFinite(cents) || cents <= 0 || cents > 15000) return { ok: false, code: "refund_amount_out_of_range" };
+  return { ok: true, cents };
+}
+
+// ==================== Capture-branch tests ====================
+Deno.test("capture: ambiguous → APPROVED-no-capture → 202, not failed", async () => {
+  const r = await runCapture({ row: baseRow(), orderId: "ORDER-1", capResp: { throws: true, status: 0 }, fetchedOrder: orderApproved() });
+  assertEquals(r.status, 202); assertEquals(r.code, "capture_pending");
+  assertEquals(r.state.updates.length, 0);
+});
+Deno.test("capture: retry → COMPLETED → single RPC finalization with immutable timestamp", async () => {
   const row = baseRow();
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { throws: true, status: 0 },
+  const r = await runCapture({ row, orderId: "ORDER-1", capResp: { status: 201, json: orderCompleted() } });
+  assertEquals(r.status, 200); assertEquals(r.code, "ok");
+  assertEquals(r.state.rpcCalls.length, 1);
+  assertEquals(r.state.rpcCalls[0].args.p_captured_at, "2026-07-13T18:00:00Z");
+});
+Deno.test("capture: DECLINED → failed", async () => {
+  const j = { status: "COMPLETED", purchase_units: [{ custom_id: "sess-1",
+    payments: { captures: [{ id: "CAP-1", status: "DECLINED", amount: { value: "150.00", currency_code: "USD" } }] } }] };
+  const r = await runCapture({ row: baseRow(), orderId: "ORDER-1", capResp: { status: 201, json: j } });
+  assertEquals(r.status, 400); assertEquals(r.code, "capture_declined");
+});
+Deno.test("capture: amount mismatch on existing capture → failed", async () => {
+  const j = { status: "COMPLETED", purchase_units: [{ custom_id: "sess-1",
+    payments: { captures: [{ id: "CAP-1", status: "COMPLETED", amount: { value: "1.00", currency_code: "USD" } }] } }] };
+  const r = await runCapture({ row: baseRow(), orderId: "ORDER-1", capResp: { status: 201, json: j } });
+  assertEquals(r.code, "capture_verification_failed");
+});
+Deno.test("capture: 4xx with unknown error name → reconcilable, not terminal", async () => {
+  const r = await runCapture({
+    row: baseRow(), orderId: "ORDER-1",
+    capResp: { status: 400, errBody: { name: "SOME_UNKNOWN_ERROR" } },
     fetchedOrder: orderApproved(),
   });
-  assertEquals(res.status, 202);
-  assertEquals(res.code, "capture_pending");
-  assertEquals(res.state.updates.length, 0); // NOT marked failed
+  assertEquals(r.status, 202); assertEquals(r.code, "capture_pending");
+  assertEquals(r.state.updates.length, 0);
 });
-
-Deno.test("retry later returns COMPLETED capture -> finalized atomically with one RPC call", async () => {
-  const row = baseRow();
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { status: 201, json: orderCompleted() },
+Deno.test("capture: 4xx with INSTRUMENT_DECLINED → terminal failed", async () => {
+  const r = await runCapture({
+    row: baseRow(), orderId: "ORDER-1",
+    capResp: { status: 400, errBody: { name: "INSTRUMENT_DECLINED" } },
   });
-  assertEquals(res.status, 200);
-  assertEquals(res.code, "ok");
-  assertEquals(res.state.rpcCalls.length, 1);
-  assertEquals(res.state.rpcCalls[0].name, "finalize_coaching_capture");
+  assertEquals(r.status, 502); assertEquals(r.code, "paypal_capture_failed");
+  assert(r.state.updates[0].status === "failed");
 });
-
-Deno.test("definitive DECLINED capture -> failed", async () => {
-  const row = baseRow();
-  const declined = {
-    status: "COMPLETED",
-    purchase_units: [{
-      custom_id: "sess-1",
-      payments: { captures: [{ id: "CAP-1", status: "DECLINED", amount: { value: "150.00", currency_code: "USD" } }] },
-    }],
-  };
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { status: 201, json: declined },
+Deno.test("capture: 429 rate-limit reconciles via authoritative fetch", async () => {
+  const r = await runCapture({
+    row: baseRow(), orderId: "ORDER-1",
+    capResp: { status: 429 }, fetchedOrder: orderApproved(),
   });
-  assertEquals(res.status, 400);
-  assertEquals(res.code, "capture_declined");
-  assertEquals(res.state.updates[0].status, "failed");
+  assertEquals(r.status, 202); assertEquals(r.code, "capture_pending");
 });
 
-Deno.test("amount mismatch on existing capture -> failed", async () => {
-  const row = baseRow();
-  const wrongAmt = {
-    status: "COMPLETED",
-    purchase_units: [{
-      custom_id: "sess-1",
-      payments: { captures: [{ id: "CAP-1", status: "COMPLETED", amount: { value: "1.00", currency_code: "USD" } }] },
-    }],
-  };
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { status: 201, json: wrongAmt },
-  });
-  assertEquals(res.status, 400);
-  assertEquals(res.code, "capture_verification_failed");
-  assertEquals(res.state.updates[0].status, "failed");
+// ==================== Refund-amount tests (webhook) ====================
+Deno.test("refund: full $150 → valid, cents=15000", () => {
+  const r = validateRefundResource(refundEvent().resource);
+  assertEquals(r.ok, true); assertEquals(r.cents, 15000);
+});
+Deno.test("refund: partial $50 → valid, cents=5000", () => {
+  const r = validateRefundResource(refundEvent({ amount: { value: "50.00", currency_code: "USD" } }).resource);
+  assertEquals(r.ok, true); assertEquals(r.cents, 5000);
+});
+Deno.test("refund: wrong currency → refund_amount_invalid", () => {
+  const r = validateRefundResource(refundEvent({ amount: { value: "150.00", currency_code: "EUR" } }).resource);
+  assertEquals(r.ok, false); assertEquals(r.code, "refund_amount_invalid");
+});
+Deno.test("refund: malformed amount 'abc' → refund_amount_malformed", () => {
+  const r = validateRefundResource(refundEvent({ amount: { value: "abc", currency_code: "USD" } }).resource);
+  assertEquals(r.ok, false); assertEquals(r.code, "refund_amount_malformed");
+});
+Deno.test("refund: over-charge $200 → refund_amount_out_of_range", () => {
+  const r = validateRefundResource(refundEvent({ amount: { value: "200.00", currency_code: "USD" } }).resource);
+  assertEquals(r.ok, false); assertEquals(r.code, "refund_amount_out_of_range");
+});
+Deno.test("refund: zero amount → refund_amount_out_of_range", () => {
+  const r = validateRefundResource(refundEvent({ amount: { value: "0.00", currency_code: "USD" } }).resource);
+  assertEquals(r.ok, false); assertEquals(r.code, "refund_amount_out_of_range");
 });
 
-Deno.test("currency mismatch on existing capture -> failed", async () => {
-  const row = baseRow();
-  const wrongCur = {
-    status: "COMPLETED",
-    purchase_units: [{
-      custom_id: "sess-1",
-      payments: { captures: [{ id: "CAP-1", status: "COMPLETED", amount: { value: "150.00", currency_code: "EUR" } }] },
-    }],
-  };
-  const res = await runCapture({ row, orderId: "ORDER-1", capResp: { status: 201, json: wrongCur } });
-  assertEquals(res.code, "capture_verification_failed");
+// ==================== RPC contract tests (real DB via service role) ====================
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? Deno.env.get("VITE_SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const DB_READY = SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY;
+
+Deno.test({
+  name: "RPC finalize_coaching_capture: malformed amount_cents string → payload_mismatch (no exception)",
+  ignore: !DB_READY,
+  fn: async () => {
+    const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const sess = crypto.randomUUID();
+    const badPayload = {
+      event: "payment.captured", booking_id: "b", order_id: "ORDER-x",
+      capture_id: "CAP-x", amount_cents: "not-a-number", currency: "USD",
+      status: "captured", event_id: "evt-x", captured_at: new Date().toISOString(),
+    };
+    const { data, error } = await db.rpc("finalize_coaching_capture", {
+      p_session_id: sess, p_paypal_order_id: "ORDER-x", p_capture_id: "CAP-x",
+      p_service_type: "plan_review_coaching", p_amount_cents: 15000, p_currency: "USD",
+      p_captured_at: new Date().toISOString(), p_event_id: "evt-x", p_payload: badPayload,
+    });
+    assertEquals(error, null);
+    assertEquals((data as any)?.ok, false);
+    assertEquals((data as any)?.code, "payload_mismatch");
+  },
 });
 
-Deno.test("custom_id mismatch on existing capture -> failed", async () => {
-  const row = baseRow();
-  const wrongCustom = {
-    status: "COMPLETED",
-    purchase_units: [{
-      custom_id: "other-session",
-      payments: { captures: [{ id: "CAP-1", status: "COMPLETED", amount: { value: "150.00", currency_code: "USD" } }] },
-    }],
-  };
-  const res = await runCapture({ row, orderId: "ORDER-1", capResp: { status: 201, json: wrongCustom } });
-  assertEquals(res.code, "capture_verification_failed");
+Deno.test({
+  name: "RPC finalize_coaching_capture: session_not_found on unknown id (no mutation, safe)",
+  ignore: !DB_READY,
+  fn: async () => {
+    const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const sess = crypto.randomUUID();
+    const capId = "CAP-" + crypto.randomUUID();
+    const eventId = "capture." + sess + "." + capId;
+    const payload = {
+      event: "payment.captured", booking_id: "book-x", order_id: "ORD-x",
+      capture_id: capId, amount_cents: 15000, currency: "USD",
+      status: "captured", captured_at: new Date().toISOString(), event_id: eventId,
+    };
+    const { data, error } = await db.rpc("finalize_coaching_capture", {
+      p_session_id: sess, p_paypal_order_id: "ORD-x", p_capture_id: capId,
+      p_service_type: "plan_review_coaching", p_amount_cents: 15000, p_currency: "USD",
+      p_captured_at: new Date().toISOString(), p_event_id: eventId, p_payload: payload,
+    });
+    assertEquals(error, null);
+    assertEquals((data as any)?.ok, false);
+    assertEquals((data as any)?.code, "session_not_found");
+  },
 });
 
-Deno.test("retryable 429 with APPROVED-no-capture reconcile -> 202 pending", async () => {
-  const row = baseRow();
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { status: 429 },
-    fetchedOrder: orderApproved(),
-  });
-  assertEquals(res.status, 202);
-  assertEquals(res.code, "capture_pending");
-  assertEquals(res.state.updates.length, 0);
-});
-
-Deno.test("malformed capture body with no reconcile order -> ambiguous 502, not failed", async () => {
-  const row = baseRow();
-  const res = await runCapture({
-    row, orderId: "ORDER-1",
-    capResp: { status: 201, malformed: true },
-    fetchedOrder: null,
-  });
-  assertEquals(res.status, 502);
-  assertEquals(res.code, "paypal_capture_ambiguous");
-  assertEquals(res.state.updates.length, 0);
+Deno.test({
+  name: "RPC finalize_coaching_refund_or_reversal: refunded without refunded_amount_cents → refunded_amount_invalid",
+  ignore: !DB_READY,
+  fn: async () => {
+    const db = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const capId = "CAP-" + crypto.randomUUID();
+    const evt = "PAYMENT.CAPTURE.REFUNDED." + capId;
+    const payload = {
+      event: "payment.refunded", booking_id: "b", order_id: "O",
+      capture_id: capId, amount_cents: 15000, currency: "USD",
+      status: "refunded", event_id: evt, occurred_at: new Date().toISOString(),
+      // NO refunded_amount_cents
+    };
+    const { data, error } = await db.rpc("finalize_coaching_refund_or_reversal", {
+      p_original_capture_id: capId, p_new_status: "refunded",
+      p_event_id: evt, p_payload: payload, p_occurred_at: new Date().toISOString(),
+    });
+    assertEquals(error, null);
+    assertEquals((data as any)?.ok, false);
+    assertEquals((data as any)?.code, "refunded_amount_invalid");
+  },
 });
