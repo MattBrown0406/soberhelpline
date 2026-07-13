@@ -23,6 +23,7 @@ type IntentLandingConfig = {
   fit: string[];
   outcomes: string[];
   routeNotes: string[];
+  canonicalPath?: string;
 };
 
 const landingPages: IntentLandingConfig[] = [
@@ -88,6 +89,7 @@ const landingPages: IntentLandingConfig[] = [
   },
   {
     path: "/addiction-family-coaching",
+    canonicalPath: "/family-coaching",
     title: "Family Addiction Coaching for Parents, Spouses, and Siblings",
     description: "Private family addiction coaching for parents, spouses, and siblings who need help with boundaries, relapse, lying, treatment decisions, and family alignment.",
     eyebrow: "Ongoing family support",
@@ -130,6 +132,7 @@ export default function IntentLandingPage() {
       <SEOHead
         title={config.title}
         description={config.description}
+        canonicalPath={config.canonicalPath}
         faqItems={[
           {
             question: `Who is ${config.serviceType.toLowerCase()} for?`,
@@ -156,7 +159,7 @@ export default function IntentLandingPage() {
           },
           areaServed: "US",
           serviceType: config.serviceType,
-          url: `https://soberhelpline.com${config.path}`,
+          url: `https://soberhelpline.com${config.canonicalPath ?? config.path}`,
         }}
         personJsonLd={mattBrownPersonSchema}
       />

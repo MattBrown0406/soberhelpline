@@ -25,6 +25,8 @@ interface SEOHeadProps {
   howToName?: string;
   howToDescription?: string;
   personJsonLd?: Record<string, unknown>;
+  /** Override the current route when this page is an intentional alternate of a primary URL. */
+  canonicalPath?: string;
 }
 
 const BASE_URL = "https://soberhelpline.com";
@@ -48,10 +50,11 @@ export default function SEOHead({
   howToName,
   howToDescription,
   personJsonLd,
+  canonicalPath,
 }: SEOHeadProps) {
   const location = useLocation();
   const { setOverridden } = useSEOOverride();
-  const canonicalUrl = `${BASE_URL}${normalizePath(location.pathname)}`;
+  const canonicalUrl = `${BASE_URL}${normalizePath(canonicalPath ?? location.pathname)}`;
 
   useEffect(() => {
     setOverridden(true);

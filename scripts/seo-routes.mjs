@@ -39,6 +39,7 @@ export const prerenderPages = [
   },
   {
     route: '/addiction-family-coaching',
+    canonicalPath: '/family-coaching',
     title: 'Addiction Family Coaching | Sober Helpline',
     description: 'Private addiction family coaching for boundaries, relapse, communication, treatment decisions, and family alignment.',
     noscriptHtml: '<main><h1>Addiction Family Coaching</h1><p>Coaching for families who need help with boundaries, relapse response, treatment decisions, communication, and follow-through.</p><p><a href="https://soberhelpline.com/family-consultation">See coaching options</a> · <a href="https://soberhelpline.com/family-squares">Join free Monday support</a></p></main>'
@@ -265,6 +266,7 @@ export const excludedSitemapRoutes = new Set([
   '/auth',
   '/admin',
   '/sso',
+  '/addiction-family-coaching',
   '/provider-application',
   '/provider-info',
   '/consultation-provider-dashboard',

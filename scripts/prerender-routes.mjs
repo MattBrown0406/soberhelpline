@@ -238,7 +238,8 @@ const articleTags = (page) => page.ogType === 'article' ? `
     ${page.section ? `<meta property="article:section" content="${escapeHtml(page.section)}">` : ''}` : '';
 
 for (const page of allPrerenderPages) {
-  const canonicalUrl = `${SITE_URL}${page.route === '/' ? '/' : page.route}`;
+  const canonicalRoute = page.canonicalPath ?? page.route;
+  const canonicalUrl = `${SITE_URL}${canonicalRoute === '/' ? '/' : canonicalRoute}`;
   const targetDir = page.route === '/' ? distDir : path.join(distDir, page.route.replace(/^\//, ''));
   const targetPath = path.join(targetDir, 'index.html');
   const cleanUrlPath = page.route === '/' ? null : `${targetDir}.html`;

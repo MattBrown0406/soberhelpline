@@ -504,8 +504,8 @@ If you'd like help evaluating a specific program or thinking through the next st
   },
   {
     slug: "rehab-admissions-process-family-guide",
-    seoTitle: "Rehab Admissions Process: A Family's Step-by-Step Guide",
-    metaDescription: "A calm, step-by-step guide to the rehab admissions process — what to expect, what to prepare, and how families can make intake day less overwhelming.",
+    seoTitle: "Rehab Admissions Process: 5 Steps for Families",
+    metaDescription: "Learn the 5 steps in the rehab admissions process, what to prepare before intake, how long admission takes, and what your family should do next.",
     title: "The Rehab Admissions Process: A Family's Step-by-Step Guide to What Happens Next",
     category: "Treatment",
     author: "Matt Brown",
