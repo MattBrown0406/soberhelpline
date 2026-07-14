@@ -179,6 +179,9 @@ export default function Support() {
                   For account access, data, or privacy-related requests, email <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> from the email connected to your account.
                 </p>
                 <p>
+                  To delete a SoberHelpline app account, use the in-app Settings screen or follow the steps on our <Link className="font-semibold text-primary underline" to="/delete-account">account deletion page</Link>.
+                </p>
+                <p>
                   If you are looking for family addiction resources rather than app support, start with the <Link className="font-semibold text-primary underline" to="/start-here">Start Here</Link> page or the free <Link className="font-semibold text-primary underline" to="/family-squares">Family Squares</Link> meeting.
                 </p>
               </CardContent>

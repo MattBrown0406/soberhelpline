@@ -104,6 +104,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Privacy Policy | Sober Helpline',
     description: 'Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
   },
+  '/delete-account': {
+    title: 'Delete Your SoberHelpline Account | Sober Helpline',
+    description: 'Delete your SoberHelpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
+  },
   '/start-here': {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',

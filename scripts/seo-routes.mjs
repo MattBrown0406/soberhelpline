@@ -81,6 +81,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Sober Helpline Privacy Policy</h1><p>This policy explains how Sober Helpline and the SoberHelpline mobile app collect, use, share, protect, retain, and delete information.</p><p>For privacy requests, data access, correction, or account deletion, email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p><p>Sober Helpline does not sell personal information and is not emergency medical, psychiatric, legal, or crisis response care.</p></main>'
   },
   {
+    route: '/delete-account',
+    title: 'Delete Your SoberHelpline Account | Sober Helpline',
+    description: 'Delete your SoberHelpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
+    noscriptHtml: '<main><h1>Delete Your SoberHelpline Account</h1><p>Delete your account in the SoberHelpline app under Settings, or initiate a deletion request by emailing <a href="mailto:support@soberhelpline.com?subject=Account%20Deletion%20Request">support@soberhelpline.com</a> from the address connected to your account.</p><p>Account-linked app data is deleted or de-identified unless limited retention is required for legal, transaction, fraud-prevention, or security purposes. Cancel any active Apple App Store or Google Play subscription separately.</p></main>'
+  },
+  {
     route: '/start-here',
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
