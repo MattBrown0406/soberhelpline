@@ -108,6 +108,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Delete Your SoberHelpline Account | Sober Helpline',
     description: 'Delete your SoberHelpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
   },
+  '/app-terms': {
+    title: 'SoberHelpline App Terms of Use | Sober Helpline',
+    description: 'Terms governing use of the SoberHelpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
+  },
   '/start-here': {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',

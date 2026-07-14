@@ -87,6 +87,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Delete Your SoberHelpline Account</h1><p>Delete your account in the SoberHelpline app under Settings, or initiate a deletion request by emailing <a href="mailto:support@soberhelpline.com?subject=Account%20Deletion%20Request">support@soberhelpline.com</a> from the address connected to your account.</p><p>Account-linked app data is deleted or de-identified unless limited retention is required for legal, transaction, fraud-prevention, or security purposes. Cancel any active Apple App Store or Google Play subscription separately.</p></main>'
   },
   {
+    route: '/app-terms',
+    title: 'SoberHelpline App Terms of Use | Sober Helpline',
+    description: 'Terms governing use of the SoberHelpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
+    noscriptHtml: '<main><h1>SoberHelpline App Terms of Use</h1><p>These Terms govern use of the SoberHelpline mobile app, accounts, subscriptions, educational tools, family-support features, and related services.</p><p>SoberHelpline is not emergency, medical, psychiatric, detox, or legal care. Digital subscriptions are billed and managed by Apple App Store or Google Play.</p><p>Questions: <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p></main>'
+  },
+  {
     route: '/start-here',
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',

@@ -107,6 +107,7 @@ const FAQs = React.lazy(() => import("./pages/FAQs"));
 const Support = React.lazy(() => import("./pages/Support"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
 const DeleteAccount = React.lazy(() => import("./pages/DeleteAccount"));
+const AppTerms = React.lazy(() => import("./pages/AppTerms"));
 const SmsTerms = React.lazy(() => import("./pages/SmsTerms"));
 const FamilySupportPage = FamilySupport;
 const StartHerePage = StartHere;
@@ -383,6 +384,7 @@ const App = () => (
               <Route path="/support" element={<Support />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/delete-account" element={<DeleteAccount />} />
+              <Route path="/app-terms" element={<AppTerms />} />
               <Route path="/sms-terms" element={<SmsTerms />} />
               <Route path="/family-support" element={<FamilySupportPage />} />
               <Route path="/start-here" element={<StartHerePage />} />
