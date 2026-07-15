@@ -161,6 +161,7 @@ import socialIsolationFamiliesAddictionImg from "@/assets/blog-social-isolation-
 import managingAngerResentmentFamiliesAddictionImg from "@/assets/blog-managing-anger-resentment-families-addiction.jpg";
 import whatIsRecoveryCoachFamilyGuideImg from "@/assets/blog-what-is-a-recovery-coach-family-guide.jpg";
 import highFunctioningAddictionFamilyGuideImg from "@/assets/blog-high-functioning-addiction-family-guide.jpg";
+import crossAddictionAddictionTransferFamilyGuideImg from "@/assets/blog-cross-addiction-addiction-transfer-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
