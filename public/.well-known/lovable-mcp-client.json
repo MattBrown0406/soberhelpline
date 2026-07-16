@@ -1,0 +1,18 @@
+{
+  "client_id": "https://soberhelpline.com/.well-known/lovable-mcp-client.json",
+  "client_name": "Hermes Agent for Sober Helpline",
+  "client_uri": "https://soberhelpline.com",
+  "logo_uri": "https://soberhelpline.com/og-image.png",
+  "redirect_uris": [
+    "http://127.0.0.1:8765/callback"
+  ],
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "none",
+  "application_type": "native"
+}
