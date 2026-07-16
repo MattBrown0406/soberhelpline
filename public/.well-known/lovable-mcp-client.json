@@ -1,5 +1,5 @@
 {
-  "client_id": "https://soberhelpline.com/.well-known/lovable-mcp-client.json",
+  "client_id": "https://raw.githubusercontent.com/MattBrown0406/soberhelpline/main/public/.well-known/lovable-mcp-client.json",
   "client_name": "Hermes Agent for Sober Helpline",
   "client_uri": "https://soberhelpline.com",
   "logo_uri": "https://soberhelpline.com/og-image.png",
