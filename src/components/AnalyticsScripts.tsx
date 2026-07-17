@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import { captureInboundSource } from "@/lib/conversionTracking";
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || "G-8VLPQVGME4";
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || "G-YFGSJD0F35";
 const GTM_ID = import.meta.env.VITE_GTM_ID;
 const PLAUSIBLE_DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN;
 
