@@ -9,6 +9,7 @@ import celebratingRecoveryMilestonesImg from "@/assets/blog-celebrating-recovery
 import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summer-family-guide.jpg";
 import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-family.jpg";
 import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addiction-family.jpg";
+import familyMeetingAboutAddictionImg from "@/assets/blog-family-meeting-about-addiction-guide.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
@@ -168,6 +169,98 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 143,
+    slug: "family-meeting-about-addiction-guide",
+    seoTitle: "How to Hold a Family Meeting About Addiction: Step-by-Step Guide",
+    metaDescription: "Learn how to hold a family meeting about addiction: how to prepare, what to say, what to avoid, and how to follow through as a united, loving family.",
+    title: "How to Hold a Family Meeting About Addiction: A Step-by-Step Guide for Families",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-07-17",
+    image: familyMeetingAboutAddictionImg,
+    keywords: ["family meeting about addiction", "how to talk to a loved one about addiction", "family intervention", "addiction conversation", "family recovery"],
+    excerpt: "One-on-one conversations about addiction go nowhere. A structured family meeting changes the dynamic — a calm, united, loving path forward instead of another painful argument.",
+    content: `If someone you love is struggling with drugs or alcohol, you have probably had a dozen one-on-one conversations that went nowhere. One person pleads, another lectures, someone else stays silent, and the addiction keeps moving.
+
+A family meeting about addiction changes that dynamic. Instead of scattered conversations that contradict each other, the family sits down together, speaks with one voice, and offers a clear, loving path forward. It is not an ambush and it is not an intervention. It is a structured conversation, and when it is done well, it is one of the most powerful tools a family has.
+
+This guide walks you through how to prepare, what to say, what to avoid, and what to do afterward.
+
+**What Is a Family Meeting About Addiction — and How Is It Different From an Intervention?**
+
+A family meeting about addiction is a planned, calm conversation in which family members share their concerns with a loved one and ask them to consider getting help. It differs from a formal intervention in intensity and stakes: an intervention is typically led by a professional, often involves prepared consequences, and is used when a loved one is in denial or crisis. A family meeting is a step earlier on that path.
+
+Family meetings work best when your loved one already senses something is wrong — maybe they have admitted they are drinking too much, or they have tried to cut back on their own. In those situations, they may not need to be confronted so much as invited. The meeting gives them a safe place to hear how their substance use is affecting the people they love, without shame and without a fight.
+
+If your loved one is in active crisis, has repeatedly refused help, or becomes volatile when the subject comes up, a professionally guided [LINK:intervention:/intervention-help] may be the better tool.
+
+**How Do You Prepare for a Family Meeting About Addiction?**
+
+Preparation is what separates a productive family meeting from another painful argument. Before anyone sits down, the family should agree on the message, the messengers, and the moment. Aim for at least one planning conversation without your loved one present.
+
+**Agree on One Unified Message**
+
+The single biggest mistake families make is walking in with five different agendas. Decide together, in advance, what you are asking for. A good message has three parts: we love you, we are concerned about specific things we have seen, and we are asking you to take a specific next step. That step might be a doctor's appointment, an assessment, a counseling session, or a call to a treatment program.
+
+**Choose the Right Time and Place**
+
+Choose a moment when your loved one is sober, rested, and not rushing off somewhere. Pick a private, neutral setting — a living room works better than a restaurant, and never a holiday gathering or a birthday party. Early in the day is often best, before stress and, for many people, substance use build up.
+
+**Decide Who Should Be There**
+
+Smaller is usually better. Include the people your loved one trusts and respects, and leave out anyone who cannot stay calm. Anger is understandable, but one sarcastic remark can end the meeting. A family member who can't commit to staying respectful can support from the sidelines and write a letter instead.
+
+**What Should You Say During the Meeting?**
+
+Lead with love, speak from your own experience, and stay specific. The most effective structure is simple: each person shares one or two concrete things they have observed, how those moments made them feel, and what they hope for. Then the family makes its one unified request.
+
+"I" statements work because they describe your experience instead of attacking your loved one's character. Compare "You're destroying this family" with "I was scared the night you didn't come home." The second is much harder to argue with, because it is simply true.
+
+Phrases that keep the conversation open include:
+
+- "I love you, and I've been worried about you."
+- "I noticed you seemed unlike yourself at dinner on Sunday, and it scared me."
+- "I'm not here to judge you. I'm here because I want you in my life for a long time."
+- "Would you be willing to talk to someone — just once — and see what they say?"
+
+Then do the hardest part: stop talking and listen. Your loved one may minimize, deflect, or get defensive. Let them speak without interrupting. Being heard lowers defenses faster than any argument.
+
+**What Should You Avoid Saying in a Family Meeting?**
+
+Avoid labels, lectures, ultimatums you don't intend to keep, and rehashing every past wrong. The goal of the meeting is a next step, not a conviction. Shame shuts people down, and a person who feels attacked will defend their substance use rather than examine it.
+
+Steer away from:
+
+- Labels like "addict" or "alcoholic" — describe behavior instead: "your drinking," "the pills."
+- Piling on. Two or three specific examples land harder than a twenty-item history of failures.
+- Arguing about facts. If they dispute a detail, let it go and return to your feelings, which aren't debatable.
+- Empty threats. Only state a [LINK:boundary:/boundaries-ultimatums-guide] if you are fully prepared to keep it.
+
+If the conversation turns hostile, end it gently: "This isn't going the way we hoped. We love you, and we'll try again another time." A paused meeting is not a failed meeting.
+
+**What Happens After the Family Meeting?**
+
+Follow-through is where the real work happens. If your loved one agrees to a next step, help make it easy — offer to drive them, sit in the waiting room, or make the first call together, ideally within 24 to 48 hours while the willingness is fresh.
+
+If they say no, the meeting was still not wasted. You planted a seed, you showed them the family is united, and you demonstrated that this conversation can happen without screaming. Many people say yes on the second or third conversation. In the meantime, hold your boundaries and stay consistent — consistency, more than intensity, is what changes these situations over time.
+
+Either way, the family should debrief afterward — what worked, what didn't, and what the next step is. Addiction thrives when families are divided and exhausted. It loses ground when families are organized, calm, and persistent.
+
+**You Don't Have to Get It Perfect**
+
+Here is the truth that takes the pressure off: there is no perfect script, and you will not say everything exactly right. What your loved one will remember is not your wording. It is that the people who love them sat down together, told the truth with kindness, and offered a way forward. That is something no addiction can easily argue with. Take a breath, prepare well, and trust that showing up with love and a plan is enough to begin.
+
+A family meeting is one conversation in a longer journey — and you don't have to navigate that journey alone. Explore our [LINK:family education library:/family-education], book a [LINK:family coaching session:/family-coaching], or join our free [LINK:"The Family Squares":/monday-zoom-registration] support call every Monday night. Your family's voice is stronger together — let us help you use it.`,
+    tags: ["family meeting", "addiction conversation", "family intervention", "family recovery", "boundaries"],
+    faqItems: [
+      { question: "What is the difference between a family meeting and an intervention?", answer: "A family meeting is a calm, planned conversation where the family shares concerns and asks a loved one to take a next step, such as an assessment or counseling. An intervention is a more structured, often professionally led event used when a loved one is in denial or crisis, and it typically includes specific consequences if help is refused." },
+      { question: "Should the person struggling with addiction know about the meeting in advance?", answer: "In most cases, yes. Telling your loved one, \"We'd like to sit down as a family and talk about how everyone is doing,\" respects their dignity and reduces defensiveness. Surprise works against you in a family meeting; it belongs, if anywhere, in a professionally guided intervention." },
+      { question: "How many people should attend a family meeting about addiction?", answer: "Three to six people is usually ideal. Include those your loved one trusts most, and exclude anyone who cannot stay calm and respectful. Quality of presence matters far more than headcount." },
+      { question: "What if my loved one gets angry and walks out?", answer: "Let them go without chasing or escalating. Follow up later with a short, loving message: \"We love you. The door is open whenever you're ready to talk.\" Many people return to the conversation within days once the initial defensiveness fades." },
+      { question: "What if the family meeting doesn't work?", answer: "One conversation rarely changes everything, and that's normal. Keep your boundaries, stay consistent, and consider working with a family coach or a professional interventionist for the next step. Most people accept help after repeated, calm invitations — not a single dramatic moment." }
+    ]
+  },
   {
     id: 142,
     slug: "cross-addiction-addiction-transfer-family-guide",
