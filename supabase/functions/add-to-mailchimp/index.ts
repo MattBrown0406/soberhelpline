@@ -100,8 +100,22 @@ serve(async (req: Request): Promise<Response> => {
 
     if (!response.ok) {
       console.error("Mailchimp API error:", data);
-      throw new Error(data.detail || "Failed to upsert contact in Mailchimp");
+      // Degrade gracefully: never 500 to callers (checkout, assessments, Zoom reg).
+      // Signup flows should complete even if newsletter sync fails.
+      const isAuthError = response.status === 401 || response.status === 403;
+      return new Response(
+        JSON.stringify({
+          success: false,
+          skipped: true,
+          error: isAuthError ? "MAILCHIMP_API_KEY_INVALID" : "MAILCHIMP_API_ERROR",
+          status: response.status,
+          detail: data?.detail || null,
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
+
+
 
     console.log("Mailchimp upsert success:", data.id);
 
