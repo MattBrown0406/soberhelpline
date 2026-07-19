@@ -226,7 +226,7 @@ export default function CoachingCheckout() {
                   type="button"
                   className="w-full rounded-md bg-primary text-primary-foreground py-2 text-sm font-medium hover:opacity-90"
                 >
-                  Pay ${session?.amount_label ?? "$150.00 USD"} with Card
+                  Pay {session?.amount_label ?? "$150.00 USD"} with Card
                 </button>
               </div>
             </>
