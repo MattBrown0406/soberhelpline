@@ -51,6 +51,7 @@ export default function CoachingCheckout() {
   const [state, setState] = useState<"loading" | "ready" | "processing" | "captured" | "error">("loading");
   const [errorCode, setErrorCode] = useState<string | null>(null);
   const [session, setSession] = useState<ResolvedSession | null>(null);
+  const [cardEligible, setCardEligible] = useState(false);
   const buttonsHost = useRef<HTMLDivElement | null>(null);
   const buttonsMounted = useRef(false);
   const paypalClientId = session?.paypal_client_id ?? "";
