@@ -128,33 +128,51 @@ export default function CoachingCheckout() {
           },
         }).render(buttonsHost.current);
 
-        // Hosted Card Fields (credit/debit)
-        if (window.paypal.CardFields && window.paypal.CardFields({}).isEligible?.() !== false) {
-          const cardFields = window.paypal.CardFields({
-            createOrder,
-            onApprove: (data: any) => captureOrder(data.orderID),
-            onError: () => {
-              setErrorCode("paypal_card_error");
-              setState("error");
-            },
-          });
-          if (cardFields.isEligible()) {
-            cardFields.NameField().render("#cc-name");
-            cardFields.NumberField().render("#cc-number");
-            cardFields.ExpiryField().render("#cc-expiry");
-            cardFields.CVVField().render("#cc-cvv");
+        // Hosted Card Fields (credit/debit) — only mount if actually eligible.
+        try {
+          if (window.paypal.CardFields) {
+            const cardFields = window.paypal.CardFields({
+              createOrder,
+              onApprove: (data: any) => captureOrder(data.orderID),
+              onError: () => {
+                setErrorCode("paypal_card_error");
+                setState("error");
+              },
+            });
+            if (cardFields.isEligible && cardFields.isEligible()) {
+              // Wait for the host divs to render before mounting the iframes.
+              setCardEligible(true);
+              await new Promise((r) => requestAnimationFrame(() => r(null)));
+              if (cancelled) return;
+              await Promise.all([
+                cardFields.NameField().render("#cc-name"),
+                cardFields.NumberField().render("#cc-number"),
+                cardFields.ExpiryField().render("#cc-expiry"),
+                cardFields.CVVField().render("#cc-cvv"),
+              ]);
 
-            const btn = document.getElementById("cc-submit");
-            if (btn) {
-              btn.addEventListener("click", () => {
-                setState("processing");
-                cardFields.submit().catch(() => {
-                  setErrorCode("paypal_card_error");
-                  setState("error");
+              const btn = document.getElementById("cc-submit");
+              if (btn) {
+                btn.addEventListener("click", () => {
+                  // Do NOT flip to "processing" here — that would unmount the
+                  // card field iframes before submit() completes. captureOrder
+                  // (called from onApprove) will move state to processing once
+                  // PayPal is done with the card fields.
+                  btn.setAttribute("disabled", "true");
+                  btn.classList.add("opacity-60", "cursor-not-allowed");
+                  cardFields.submit().catch(() => {
+                    btn.removeAttribute("disabled");
+                    btn.classList.remove("opacity-60", "cursor-not-allowed");
+                    setErrorCode("paypal_card_error");
+                    setState("error");
+                  });
                 });
-              });
+              }
             }
           }
+        } catch {
+          // Card fields not available — PayPal/Venmo buttons still work.
+          setCardEligible(false);
         }
       } catch {
         setErrorCode("paypal_sdk_load_failed");
