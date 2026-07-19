@@ -88,37 +88,73 @@ export default function CoachingCheckout() {
   useEffect(() => {
     if (state !== "ready" || !session || !paypalClientId || buttonsMounted.current) return;
     let cancelled = false;
+
+    const createOrder = async () => {
+      const { data, error } = await supabase.functions.invoke("coaching-order-create", {
+        body: { session_id: session.session_id },
+      });
+      if (error || !data?.ok) throw new Error(data?.code ?? "create_failed");
+      return data.order_id as string;
+    };
+
+    const captureOrder = async (orderId: string) => {
+      setState("processing");
+      const { data, error } = await supabase.functions.invoke("coaching-order-capture", {
+        body: { session_id: session.session_id, order_id: orderId },
+      });
+      if (error || !data?.ok) {
+        setErrorCode(data?.code ?? "capture_failed");
+        setState("error");
+        return;
+      }
+      setState("captured");
+    };
+
     (async () => {
       try {
         await loadPayPalSdk(paypalClientId);
         if (cancelled || !window.paypal || !buttonsHost.current) return;
         buttonsMounted.current = true;
+
+        // PayPal + Venmo smart buttons
         window.paypal.Buttons({
           style: { layout: "vertical", color: "gold", shape: "rect", label: "pay" },
-          createOrder: async () => {
-            const { data, error } = await supabase.functions.invoke("coaching-order-create", {
-              body: { session_id: session.session_id },
-            });
-            if (error || !data?.ok) throw new Error(data?.code ?? "create_failed");
-            return data.order_id as string;
-          },
-          onApprove: async (approve: any) => {
-            setState("processing");
-            const { data, error } = await supabase.functions.invoke("coaching-order-capture", {
-              body: { session_id: session.session_id, order_id: approve.orderID },
-            });
-            if (error || !data?.ok) {
-              setErrorCode(data?.code ?? "capture_failed");
-              setState("error");
-              return;
-            }
-            setState("captured");
-          },
+          createOrder,
+          onApprove: (approve: any) => captureOrder(approve.orderID),
           onError: () => {
             setErrorCode("paypal_button_error");
             setState("error");
           },
         }).render(buttonsHost.current);
+
+        // Hosted Card Fields (credit/debit)
+        if (window.paypal.CardFields && window.paypal.CardFields({}).isEligible?.() !== false) {
+          const cardFields = window.paypal.CardFields({
+            createOrder,
+            onApprove: (data: any) => captureOrder(data.orderID),
+            onError: () => {
+              setErrorCode("paypal_card_error");
+              setState("error");
+            },
+          });
+          if (cardFields.isEligible()) {
+            cardFields.NameField().render("#cc-name");
+            cardFields.NumberField().render("#cc-number");
+            cardFields.ExpiryField().render("#cc-expiry");
+            cardFields.CVVField().render("#cc-cvv");
+
+            const btn = document.getElementById("cc-submit");
+            if (btn) {
+              btn.addEventListener("click", () => {
+                setState("processing");
+                cardFields.submit().catch(() => {
+                  setErrorCode("paypal_card_error");
+                  setState("error");
+                });
+              });
+            }
+          }
+        }
       } catch {
         setErrorCode("paypal_sdk_load_failed");
         setState("error");
