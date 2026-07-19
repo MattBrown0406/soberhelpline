@@ -23,7 +23,7 @@ declare global {
 }
 
 const PAYPAL_SDK_SRC = (clientId: string) =>
-  `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=USD&intent=capture&disable-funding=credit`;
+  `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=USD&intent=capture&components=buttons,card-fields&enable-funding=venmo`;
 
 function loadPayPalSdk(clientId: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -88,37 +88,73 @@ export default function CoachingCheckout() {
   useEffect(() => {
     if (state !== "ready" || !session || !paypalClientId || buttonsMounted.current) return;
     let cancelled = false;
+
+    const createOrder = async () => {
+      const { data, error } = await supabase.functions.invoke("coaching-order-create", {
+        body: { session_id: session.session_id },
+      });
+      if (error || !data?.ok) throw new Error(data?.code ?? "create_failed");
+      return data.order_id as string;
+    };
+
+    const captureOrder = async (orderId: string) => {
+      setState("processing");
+      const { data, error } = await supabase.functions.invoke("coaching-order-capture", {
+        body: { session_id: session.session_id, order_id: orderId },
+      });
+      if (error || !data?.ok) {
+        setErrorCode(data?.code ?? "capture_failed");
+        setState("error");
+        return;
+      }
+      setState("captured");
+    };
+
     (async () => {
       try {
         await loadPayPalSdk(paypalClientId);
         if (cancelled || !window.paypal || !buttonsHost.current) return;
         buttonsMounted.current = true;
+
+        // PayPal + Venmo smart buttons
         window.paypal.Buttons({
           style: { layout: "vertical", color: "gold", shape: "rect", label: "pay" },
-          createOrder: async () => {
-            const { data, error } = await supabase.functions.invoke("coaching-order-create", {
-              body: { session_id: session.session_id },
-            });
-            if (error || !data?.ok) throw new Error(data?.code ?? "create_failed");
-            return data.order_id as string;
-          },
-          onApprove: async (approve: any) => {
-            setState("processing");
-            const { data, error } = await supabase.functions.invoke("coaching-order-capture", {
-              body: { session_id: session.session_id, order_id: approve.orderID },
-            });
-            if (error || !data?.ok) {
-              setErrorCode(data?.code ?? "capture_failed");
-              setState("error");
-              return;
-            }
-            setState("captured");
-          },
+          createOrder,
+          onApprove: (approve: any) => captureOrder(approve.orderID),
           onError: () => {
             setErrorCode("paypal_button_error");
             setState("error");
           },
         }).render(buttonsHost.current);
+
+        // Hosted Card Fields (credit/debit)
+        if (window.paypal.CardFields && window.paypal.CardFields({}).isEligible?.() !== false) {
+          const cardFields = window.paypal.CardFields({
+            createOrder,
+            onApprove: (data: any) => captureOrder(data.orderID),
+            onError: () => {
+              setErrorCode("paypal_card_error");
+              setState("error");
+            },
+          });
+          if (cardFields.isEligible()) {
+            cardFields.NameField().render("#cc-name");
+            cardFields.NumberField().render("#cc-number");
+            cardFields.ExpiryField().render("#cc-expiry");
+            cardFields.CVVField().render("#cc-cvv");
+
+            const btn = document.getElementById("cc-submit");
+            if (btn) {
+              btn.addEventListener("click", () => {
+                setState("processing");
+                cardFields.submit().catch(() => {
+                  setErrorCode("paypal_card_error");
+                  setState("error");
+                });
+              });
+            }
+          }
+        }
       } catch {
         setErrorCode("paypal_sdk_load_failed");
         setState("error");
@@ -170,7 +206,30 @@ export default function CoachingCheckout() {
           )}
 
           {state === "ready" && paypalClientId && (
-            <div ref={buttonsHost} />
+            <>
+              <div ref={buttonsHost} />
+              <div className="relative my-2">
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t" /></div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">or pay with card</span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div id="cc-name" className="min-h-[40px] rounded-md border px-2" />
+                <div id="cc-number" className="min-h-[40px] rounded-md border px-2" />
+                <div className="grid grid-cols-2 gap-2">
+                  <div id="cc-expiry" className="min-h-[40px] rounded-md border px-2" />
+                  <div id="cc-cvv" className="min-h-[40px] rounded-md border px-2" />
+                </div>
+                <button
+                  id="cc-submit"
+                  type="button"
+                  className="w-full rounded-md bg-primary text-primary-foreground py-2 text-sm font-medium hover:opacity-90"
+                >
+                  Pay {session?.amount_label ?? "$150.00 USD"} with Card
+                </button>
+              </div>
+            </>
           )}
 
           {state === "processing" && (
