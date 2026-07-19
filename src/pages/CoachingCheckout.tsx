@@ -23,7 +23,7 @@ declare global {
 }
 
 const PAYPAL_SDK_SRC = (clientId: string) =>
-  `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=USD&intent=capture&disable-funding=credit`;
+  `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=USD&intent=capture&components=buttons,card-fields&enable-funding=venmo`;
 
 function loadPayPalSdk(clientId: string): Promise<void> {
   return new Promise((resolve, reject) => {
