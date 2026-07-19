@@ -1,0 +1,1 @@
+CREATE POLICY "Public can view active providers" ON public.consultation_providers FOR SELECT TO anon, authenticated USING (status = 'active');
