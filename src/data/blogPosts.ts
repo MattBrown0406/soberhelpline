@@ -3594,9 +3594,9 @@ Look for programs accredited by CARF or The Joint Commission that integrate both
   {
     id: 112,
     slug: "euphoric-recall-in-addiction-family-guide",
-    seoTitle: "Euphoric Recall in Addiction: Why Loved Ones Remember Using Fondly",
-    metaDescription: "Euphoric recall in addiction explains why your loved one remembers using fondly while forgetting the pain. Learn how it works and how families can respond.",
-    title: "Euphoric Recall in Addiction: Why Your Loved One Remembers Using So Differently Than You Do",
+    seoTitle: "What Is Euphoric Recall? A Family Guide",
+    metaDescription: "What is euphoric recall in addiction? Learn why the brain romanticizes alcohol or drug use, how it raises relapse risk, and what families should do next.",
+    title: "What Is Euphoric Recall in Addiction? A Guide for Families",
     category: "Family Education",
     author: "Matt Brown",
     date: "2026-07-11",
@@ -3669,9 +3669,9 @@ It's a relapse-prevention technique where a person deliberately follows a tempti
 
 It tends to be strongest in the first year, when the brain's reward system is still recalibrating, and fades gradually with sustained sobriety and active recovery work. Many people report the pull weakening significantly after the first one to two years, though stress can revive it at any stage.
 
-**You Don't Have to Figure This Out Alone**
+**What Should the Family Do Next?**
 
-Understanding how addiction works in the brain changes how families respond — and how families respond changes outcomes. At Sober Helpline, we help families move from confusion to clarity with ongoing education, one-on-one [LINK:family coaching:/family-coaching], and a [LINK:membership community:/family-membership] that understands what you're navigating. Join our free [LINK:Monday night Family Squares support call:/monday-zoom-registration], or explore coaching and membership at [LINK:Sober Helpline:/]. You don't need all the answers today — just the next step.`,
+If romanticizing alcohol or drug use is frequent or appears alongside isolation, skipped recovery support, or other relapse warning signs, book [LINK:private family coaching:/family-coaching] and make a response plan before the next crisis. If there is no immediate risk and you need a place to start, join the free [LINK:Monday night Family Squares Zoom:/monday-zoom-registration] with one specific question. For ongoing help practicing calmer conversations and following through on boundaries at home, [LINK:explore the FamilyBridge app:https://familybridgeapp.com]. Choose the next step that matches the risk; do not try to argue your loved one out of euphoric recall.`,
   },
   {
     id: 111,
