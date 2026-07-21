@@ -10,6 +10,7 @@ import supportingRecoverySummerImg from "@/assets/blog-supporting-recovery-summe
 import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-family.jpg";
 import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addiction-family.jpg";
 import familyMeetingAboutAddictionImg from "@/assets/blog-family-meeting-about-addiction-guide.jpg";
+import addictionDenialHowToRespondImg from "@/assets/blog-addiction-denial-how-to-respond-family.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
