@@ -95,10 +95,10 @@ const Admin = () => {
   const fetchSubmissions = async () => {
     try {
       setSubmissionLoadError(null);
-      const { data, error } = await (supabase as any).rpc("get_provider_submissions_admin");
+      const { data, error } = await supabase.rpc("get_provider_submissions_admin");
 
       if (error) throw error;
-      setSubmissions((data as unknown as ProviderSubmission[]) || []);
+      setSubmissions((data as ProviderSubmission[]) || []);
     } catch (error) {
       console.error("Error fetching submissions:", error);
       setSubmissions([]);
