@@ -3671,6 +3671,16 @@ export type Database = {
         }[]
       }
       get_promo_remaining: { Args: { promo_code: string }; Returns: number }
+      get_provider_submissions_admin: {
+        Args: never
+        Returns: Database["public"]["Tables"]["provider_submissions"]["Row"][]
+        SetofOptions: {
+          from: "*"
+          to: "provider_submissions"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_provider_click_analytics_admin: {
         Args: never
         Returns: {

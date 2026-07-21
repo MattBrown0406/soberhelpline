@@ -42,6 +42,7 @@ import { MeetingBlocklistManagement } from "@/components/admin/MeetingBlocklistM
 const Admin = () => {
   const navigate = useNavigate();
   const [submissions, setSubmissions] = useState<ProviderSubmission[]>([]);
+  const [submissionLoadError, setSubmissionLoadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editingSubmission, setEditingSubmission] = useState<ProviderSubmission | null>(null);
@@ -93,15 +94,15 @@ const Admin = () => {
 
   const fetchSubmissions = async () => {
     try {
-      const { data, error } = await supabase
-        .from("provider_submissions")
-        .select("*")
-        .order("created_at", { ascending: false });
+      setSubmissionLoadError(null);
+      const { data, error } = await supabase.rpc("get_provider_submissions_admin");
 
       if (error) throw error;
-      setSubmissions(data || []);
+      setSubmissions((data as ProviderSubmission[]) || []);
     } catch (error) {
       console.error("Error fetching submissions:", error);
+      setSubmissions([]);
+      setSubmissionLoadError("Provider submissions could not be loaded. Please retry or check the admin data-access migration.");
       toast.error("Failed to load submissions");
     } finally {
       setLoading(false);
@@ -392,7 +393,14 @@ const Admin = () => {
                 </TableBody>
               </Table>
             </div>
-            {submissions.length === 0 && (
+            {submissionLoadError ? (
+              <div className="flex flex-col items-center gap-3 py-8 text-center">
+                <p className="text-destructive">{submissionLoadError}</p>
+                <Button variant="outline" onClick={fetchSubmissions}>
+                  Retry
+                </Button>
+              </div>
+            ) : submissions.length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
                 No provider submissions found
               </div>
