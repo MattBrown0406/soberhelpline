@@ -102,8 +102,8 @@
 }
 
 .shl-light-system {
-  --shl-lamp-x: 79.2%;
-  --shl-lamp-y: 16.4%;
+  --shl-lamp-x: 80.5%;
+  --shl-lamp-y: 22.2%;
   z-index: 2;
   inset: 0;
 }
@@ -905,7 +905,7 @@
 
 @media (max-width: 1160px) {
   .shl-cinematic-bg { object-position: 77% center; }
-  .shl-light-system { --shl-lamp-x: 82%; }
+  .shl-light-system { --shl-lamp-x: 79.3%; }
   .shl-inner { padding-inline: 30px; }
   .shl-main { grid-template-columns: minmax(0,1fr) minmax(410px,.9fr); gap: 28px; }
   .shl-hero h1 { font-size: clamp(49px,5.5vw,66px); }
@@ -929,7 +929,7 @@
       linear-gradient(180deg, rgba(4,16,29,.88) 0%, rgba(4,16,29,.64) 28%, rgba(4,16,29,.12) 48%, rgba(4,16,29,.32) 68%, rgba(4,16,29,.94) 100%),
       linear-gradient(90deg, rgba(4,16,29,.6), rgba(4,16,29,.08) 70%, rgba(4,16,29,.22));
   }
-  .shl-light-system { --shl-lamp-x: 74%; --shl-lamp-y: 644px; }
+  .shl-light-system { --shl-lamp-x: 73.1%; --shl-lamp-y: 699px; }
   .shl-inner { padding: 47px 24px 32px; }
   .shl-main { grid-template-columns: 1fr; min-height: 0; }
   .shl-copy { max-width: 760px; }
@@ -951,7 +951,7 @@
   .shl-cloud-layer { top: 0; height: 700px; }
   .shl-cloud-layer-front { opacity: .07; }
   .shl-wave-layer { top: 990px; height: 360px; }
-  .shl-light-system { --shl-lamp-x: 50.5%; --shl-lamp-y: 741px; }
+  .shl-light-system { --shl-lamp-x: 48.3%; --shl-lamp-y: 792px; }
   .shl-inner { padding: 33px 18px 26px; }
   .shl-eyebrow { align-items: center; max-width: 100%; font-size: 9px; line-height: 1.4; letter-spacing: .09em; }
   .shl-hero h1 { font-size: 42px; line-height: 1.02; }
