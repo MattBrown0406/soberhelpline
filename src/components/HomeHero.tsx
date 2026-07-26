@@ -2,7 +2,9 @@ import { ArrowRight, CalendarDays, MessageCircle, Phone, ShieldCheck } from "luc
 import { Link } from "react-router-dom";
 
 import logo from "@/assets/logo.png";
-import realisticLighthouse from "@/assets/lighthouse-realistic.webp";
+import cinematicLighthouse from "@/assets/lighthouse-cinematic-wide.webp";
+import cloudOverlay from "@/assets/lighthouse-clouds-overlay.webp";
+import waveOverlay from "@/assets/lighthouse-waves-overlay.webp";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import "./HomeHero.css";
@@ -40,8 +42,22 @@ const supportRoutes = [
 const HomeHero = () => {
   return (
     <section className="shl-hero" aria-labelledby="shl-hero-title">
-      <div className="shl-stars" aria-hidden="true" />
-      <div className="shl-horizon-glow" aria-hidden="true" />
+      <img className="shl-cinematic-bg" src={cinematicLighthouse} alt="" aria-hidden="true" />
+      <img className="shl-cloud-layer shl-cloud-layer-back" src={cloudOverlay} alt="" aria-hidden="true" />
+      <img className="shl-cloud-layer shl-cloud-layer-front" src={cloudOverlay} alt="" aria-hidden="true" />
+      <img className="shl-wave-layer shl-wave-layer-back" src={waveOverlay} alt="" aria-hidden="true" />
+      <img className="shl-wave-layer shl-wave-layer-front" src={waveOverlay} alt="" aria-hidden="true" />
+      <div className="shl-cinematic-shade" aria-hidden="true" />
+
+      <div className="shl-light-system" aria-hidden="true">
+        <div className="shl-beam shl-beam-left" />
+        <div className="shl-beam shl-beam-right" />
+        <div className="shl-beacon-haze" />
+        <div className="shl-photo-lamp">
+          <span className="shl-lamp-core" />
+          <span className="shl-lamp-flare" />
+        </div>
+      </div>
 
       <div className="shl-inner">
         <div className="shl-main">
@@ -87,20 +103,6 @@ const HomeHero = () => {
           </div>
 
           <div className="shl-scene" aria-label="An animated lighthouse casting a rotating beam across the water">
-            <img
-              className="shl-scene-photo"
-              src={realisticLighthouse}
-              alt=""
-              aria-hidden="true"
-            />
-            <div className="shl-beam shl-beam-left" aria-hidden="true" />
-            <div className="shl-beam shl-beam-right" aria-hidden="true" />
-            <div className="shl-beacon-haze" aria-hidden="true" />
-            <div className="shl-photo-lamp" aria-hidden="true">
-                <span className="shl-lamp-core" />
-                <span className="shl-lamp-flare" />
-            </div>
-
             <div className="shl-live-card">
               <span className="shl-live-dot" aria-hidden="true" />
               <span>

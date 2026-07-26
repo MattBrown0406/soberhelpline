@@ -161,7 +161,7 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
-            <div className="flex md:hidden h-14 items-center justify-between">
+            <div className="flex lg:hidden h-14 items-center justify-between">
               <a href="tel:4582988008" className="flex items-center gap-2 text-logo-blue font-semibold">
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">(458) 298-8008</span>
@@ -169,7 +169,7 @@ const Index = () => {
               <MobileNav user={user} onLogout={handleLogout} />
             </div>
 
-            <div className="hidden md:flex h-16 items-center justify-between gap-4">
+            <div className="hidden lg:flex h-16 items-center justify-between gap-4">
               <div className="flex items-center gap-6">
                 <Link to="/" className="flex items-center">
                   <img src={bannerLogo} alt="Sober Helpline" width={56} height={56} fetchPriority="high" decoding="async" className="h-14 w-auto" />
