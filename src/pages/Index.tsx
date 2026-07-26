@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, MessageCircle, AlertTriangle, BookOpen, ArrowRight, Sparkles, GraduationCap, TreePine, Eye, X, Check, BadgeDollarSign, Clock3 } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, MessageCircle, BookOpen, ArrowRight, Sparkles, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -12,9 +12,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState, useMemo } from "react";
 import { User } from "@supabase/supabase-js";
 import bannerLogo from "@/assets/logo.png";
-import mattBrownTrust from "@/assets/matt-brown-trust.jpg";
 
 import MobileNav from "@/components/MobileNav";
+import HomeHero from "@/components/HomeHero";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
@@ -38,41 +38,6 @@ const categories = [
   { name: "Sober Living", icon: Bed, path: "/sober-living", description: "Structured environments" },
   { name: "Therapists", icon: Brain, path: "/therapists", description: "Mental health support" },
   { name: "Psychiatrists", icon: Stethoscope, path: "/psychiatrists", description: "Medical expertise" },
-];
-
-const startHereOptions = [
-  {
-    title: "Free Family Squares",
-    description: "Join the free Monday support meeting for perspective, clarity, and a place to start without pressure.",
-    icon: Calendar,
-    to: "/family-squares",
-    cta: "Join the free meeting",
-    accent: "border-blue-200 bg-blue-50/70 hover:bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/20",
-  },
-  {
-    title: "Can't wait until Monday?",
-    description: "Book a private session and get answers now when the family needs a calmer plan today.",
-    icon: AlertTriangle,
-    to: "/family-consultation",
-    cta: "Book a session now",
-    accent: "border-amber-200 bg-amber-50/70 hover:bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20",
-  },
-  {
-    title: "Intervention readiness",
-    description: "Use this path when refusal, relapse, risk, or family division may require a formal intervention.",
-    icon: Shield,
-    to: "/intervention-help",
-    cta: "Check readiness",
-    accent: "border-violet-200 bg-violet-50/70 hover:bg-violet-50 dark:border-violet-900/50 dark:bg-violet-950/20",
-  },
-  {
-    title: "Treatment options",
-    description: "Search vetted treatment resources and levels of care without referral pressure or industry games.",
-    icon: Building2,
-    to: "/recovery-resources",
-    cta: "See treatment options",
-    accent: "border-emerald-200 bg-emerald-50/70 hover:bg-emerald-50 dark:border-emerald-900/50 dark:bg-emerald-950/20",
-  },
 ];
 
 const funnelLanes = [
@@ -298,138 +263,7 @@ const Index = () => {
           </div>
         </header>
 
-        <section className="relative overflow-hidden border-b border-border/40">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-background to-logo-blue/5 dark:from-red-950/20 dark:via-background dark:to-logo-blue/10" />
-          <div className="absolute top-0 right-0 w-[340px] md:w-[560px] h-[340px] md:h-[560px] bg-logo-blue/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 left-0 w-[220px] md:w-[420px] h-[220px] md:h-[420px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-
-          <div className="container mx-auto px-4 py-10 md:py-16 relative">
-            <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-10 items-center max-w-6xl mx-auto">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300 text-xs md:text-sm font-medium mb-4 md:mb-6">
-                  <AlertTriangle className="w-3 h-3 md:w-4 md:h-4" />
-                  Free live support and next-step guidance for families
-                </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
-                  Stop guessing what to do next.
-                  <span className="block mt-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Get the right level of family addiction help.</span>
-                </h1>
-                <p className="text-base md:text-xl text-muted-foreground max-w-3xl mb-6 md:mb-8 hero-description">
-                  Sober Helpline helps families move from worry into action. Join the free Family Squares support meeting, book a private session if you cannot wait until Monday, or check whether the situation is moving toward intervention readiness.
-                </p>
-
-                <div className="grid gap-3 mb-3 max-w-4xl md:grid-cols-3">
-                  <Link to="/family-squares" className="w-full" onClick={() => trackConversionEvent("monday_zoom_click", { source: "homepage_hero_primary" })}>
-                    <Button size="lg" className="h-full min-h-[64px] w-full gap-2 md:gap-3 whitespace-normal bg-logo-blue px-5 py-4 text-sm leading-snug text-white shadow-lg shadow-logo-blue/25 transition-all hover:bg-logo-blue/90 hover:shadow-xl hover:shadow-logo-blue/30 md:text-base">
-                      <Calendar className="w-4 h-4 md:w-5 md:h-5" />
-                      Join the Free Family Squares Support Meeting
-                    </Button>
-                  </Link>
-                  <Link to="/family-consultation" className="w-full" onClick={() => trackConversionEvent("coaching_click", { source: "homepage_hero_secondary" })}>
-                    <Button size="lg" variant="outline" className="h-full min-h-[64px] w-full gap-2 whitespace-normal border-amber-400/50 px-5 py-4 text-sm leading-snug text-amber-800 hover:bg-amber-50 dark:text-amber-300 dark:hover:bg-amber-950/20 md:text-base">
-                      <Clock3 className="w-4 h-4" />
-                      Can't wait until Monday? Book a session and get answers now.
-                    </Button>
-                  </Link>
-                  <Link to="/intervention-help" className="w-full" onClick={() => trackConversionEvent("intervention_readiness_click", { source: "homepage_hero_tertiary" })}>
-                    <Button size="lg" variant="outline" className="h-full min-h-[64px] w-full gap-2 whitespace-normal border-violet-400/40 px-5 py-4 text-sm leading-snug text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-950/20 md:text-base">
-                      <Shield className="w-4 h-4" />
-                      Check Intervention Readiness
-                    </Button>
-                  </Link>
-                </div>
-
-                <div className="mb-6 md:mb-8 rounded-2xl border border-logo-blue/20 bg-background/80 p-4 shadow-sm backdrop-blur-sm">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">Sober Helpline is now on the App Store</p>
-                      <p className="text-xs text-muted-foreground">Keep family recovery tools, education, and support close when things get hard.</p>
-                    </div>
-                    <SoberHelplineAppStoreBadge className="shrink-0" height={42} source="homepage_hero_app_card" />
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5 text-sm text-muted-foreground mb-6 md:mb-8">
-                  <span className="font-semibold text-foreground">Free Monday support at 7 PM Pacific</span>
-                  <span className="hidden sm:inline text-border">•</span>
-                  <span>Private sessions available from $150 when Monday is too far away</span>
-                  <span className="hidden sm:inline text-border">•</span>
-                  <a href="tel:4582988008" className="inline-flex items-center gap-2 text-logo-blue hover:underline">
-                    <Phone className="w-4 h-4" />
-                    Call 458-298-8008
-                  </a>
-                </div>
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-4xl">
-                  {startHereOptions.map((option) => (
-                    <Link
-                      key={option.title}
-                      to={option.to}
-                      onClick={() => {
-                        if (option.to === "/family-squares") trackConversionEvent("monday_zoom_click", { source: "homepage_start_here_card", label: option.title });
-                        if (option.to === "/family-consultation") trackConversionEvent("coaching_click", { source: "homepage_start_here_card", label: option.title });
-                        if (option.to === "/intervention-help") trackConversionEvent("intervention_readiness_click", { source: "homepage_start_here_card", label: option.title });
-                      }}
-                    >
-                      <Card className={`h-full border transition-all hover:shadow-md ${option.accent}`}>
-                        <CardContent className="p-4 md:p-5">
-                          <div className="w-10 h-10 rounded-xl bg-background/80 flex items-center justify-center mb-3 border border-border/40">
-                            <option.icon className="w-5 h-5 text-logo-blue" />
-                          </div>
-                          <h2 className="font-semibold text-foreground mb-2">{option.title}</h2>
-                          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">{option.description}</p>
-                          <div className="inline-flex items-center gap-1 text-sm font-medium text-logo-blue">
-                            {option.cta}
-                            <ArrowRight className="w-4 h-4" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <Card className="border-logo-green/20 shadow-xl bg-background/90 backdrop-blur">
-                <CardContent className="p-5 md:p-6">
-                  <div className="grid sm:grid-cols-[140px_1fr] gap-5 items-center">
-                    <div className="mx-auto sm:mx-0 w-32 h-40 md:w-36 md:h-44 rounded-2xl overflow-hidden border border-border/50 shadow-md bg-muted">
-                      <img src={mattBrownTrust} alt="Matt Brown" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-xs font-semibold mb-3">
-                        <Shield className="w-3.5 h-3.5" />
-                        Trusted, private, family-first guidance
-                      </div>
-                      <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">Work with Matt Brown</h2>
-                      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                        Matt has 22+ years of experience helping families respond to addiction with more clarity and less panic. He helps families think straight in hard moments, evaluate treatment options ethically, and stop getting pushed around by the industry.
-                      </p>
-                      <div className="space-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Private consults and family coaching</div>
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Ethical treatment navigation for families</div>
-                        <div className="flex items-center gap-2"><Check className="w-4 h-4 text-logo-blue" />Support in English and Spanish</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/80 dark:border-amber-900/40 dark:bg-amber-950/20 p-4">
-                    <div className="flex items-start gap-3">
-                      <BadgeDollarSign className="w-5 h-5 text-amber-700 dark:text-amber-300 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-foreground">Start free. Move faster when the situation calls for it.</p>
-                        <p className="text-sm text-muted-foreground mt-1">If Monday support is enough, begin with Family Squares. If your family needs answers now, book a private session or check intervention readiness.</p>
-                        <Link to="/family-squares" className="inline-flex items-center gap-1 text-sm font-medium text-logo-blue mt-2 hover:underline">
-                          Register for Family Squares
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
+        <HomeHero />
 
         <section className="border-y border-border/40 bg-muted/30">
           <div className="container mx-auto px-4 py-4 md:py-5">
