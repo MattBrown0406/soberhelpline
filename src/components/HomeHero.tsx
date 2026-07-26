@@ -2,6 +2,7 @@ import { ArrowRight, CalendarDays, MessageCircle, Phone, ShieldCheck } from "luc
 import { Link } from "react-router-dom";
 
 import logo from "@/assets/logo.png";
+import realisticLighthouse from "@/assets/lighthouse-realistic.webp";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import "./HomeHero.css";
@@ -86,34 +87,18 @@ const HomeHero = () => {
           </div>
 
           <div className="shl-scene" aria-label="An animated lighthouse casting a rotating beam across the water">
-            <div className="shl-moon" aria-hidden="true" />
+            <img
+              className="shl-scene-photo"
+              src={realisticLighthouse}
+              alt=""
+              aria-hidden="true"
+            />
             <div className="shl-beam shl-beam-left" aria-hidden="true" />
             <div className="shl-beam shl-beam-right" aria-hidden="true" />
             <div className="shl-beacon-haze" aria-hidden="true" />
-
-            <div className="shl-lighthouse" aria-hidden="true">
-              <div className="shl-roof"><span /></div>
-              <div className="shl-lantern-room">
+            <div className="shl-photo-lamp" aria-hidden="true">
                 <span className="shl-lamp-core" />
                 <span className="shl-lamp-flare" />
-              </div>
-              <div className="shl-railing" />
-              <div className="shl-tower">
-                <span className="shl-window shl-window-one" />
-                <span className="shl-window shl-window-two" />
-                <span className="shl-door" />
-              </div>
-            </div>
-
-            <div className="shl-cliffs" aria-hidden="true">
-              <span /><span /><span /><span />
-            </div>
-
-            <div className="shl-water" aria-hidden="true">
-              <span className="shl-wave shl-wave-one" />
-              <span className="shl-wave shl-wave-two" />
-              <span className="shl-wave shl-wave-three" />
-              <span className="shl-reflection" />
             </div>
 
             <div className="shl-live-card">
