@@ -68,7 +68,6 @@ export default function FamilyAddictionAnswerDetail() {
   }
 
   const canonicalPath = familyAddictionAnswerPath(answer);
-  const canonicalUrl = `https://soberhelpline.com${canonicalPath}`;
   const relatedAnswers = getRelatedFamilyAddictionAnswers(answer);
   const nextStep = nextStepLabels[answer.bestNextStep];
   const nextQuestion = relatedAnswers[0];
@@ -118,19 +117,6 @@ export default function FamilyAddictionAnswerDetail() {
         description={answer.shortAnswer}
         faqItems={[{ question: answer.question, answer: answer.shortAnswer }]}
         speakableSelectors={[".aeo-short-answer", ".aeo-next-step"]}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "QAPage",
-          mainEntity: {
-            "@type": "Question",
-            name: answer.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: answer.shortAnswer,
-            },
-          },
-          url: canonicalUrl,
-        }}
         personJsonLd={mattBrownPersonSchema}
       />
 

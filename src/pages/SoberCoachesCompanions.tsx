@@ -219,7 +219,7 @@ const SoberCoachesCompanions = () => {
   return (
     <>
       <SEOHead
-        title="Find a Sober Coach Near You | Sober Coach & Companion Directory"
+        title="Find a Sober Coach Near You | Sober Helpline"
         description="Find a sober coach or sober companion by state or ZIP code. If relapse, treatment refusal, or family conflict is active, call before you hire the wrong support."
         faqItems={[
           {
