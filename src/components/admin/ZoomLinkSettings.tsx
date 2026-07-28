@@ -36,6 +36,14 @@ interface Registration {
   consent_email_list: boolean;
   created_at: string;
   meeting_date: string;
+  auto_register?: boolean | null;
+}
+
+function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[]) {
+  const manual: T[] = [];
+  const auto: T[] = [];
+  list.forEach((r) => (r.auto_register ? auto.push(r) : manual.push(r)));
+  return { manual, auto };
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
@@ -322,13 +330,15 @@ export function ZoomLinkSettings() {
             No questions submitted for the upcoming Monday meeting.
           </div>
         ) : (
-          <div className="space-y-3">
-            {questionsOnly.map((r, i) => (
+          (() => {
+            const { manual, auto } = splitByRegType(questionsOnly);
+            const renderQuestion = (r: Registration, i: number) => (
               <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
                     <span className="font-medium text-foreground">{r.name}</span>
+                    {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
                   </div>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
                     <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
@@ -349,8 +359,32 @@ export function ZoomLinkSettings() {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+            return (
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                    Manual registrations <Badge variant="secondary" className="text-xs">{manual.length}</Badge>
+                  </h4>
+                  {manual.length === 0 ? (
+                    <p className="text-xs text-muted-foreground pl-1">No manual-registrant questions.</p>
+                  ) : (
+                    <div className="space-y-3">{manual.map(renderQuestion)}</div>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                    Auto-registered <Badge variant="secondary" className="text-xs">{auto.length}</Badge>
+                  </h4>
+                  {auto.length === 0 ? (
+                    <p className="text-xs text-muted-foreground pl-1">No auto-registrant questions.</p>
+                  ) : (
+                    <div className="space-y-3">{auto.map(renderQuestion)}</div>
+                  )}
+                </div>
+              </div>
+            );
+          })()
         )}
       </div>
 
@@ -386,17 +420,41 @@ export function ZoomLinkSettings() {
                   No follow-up requests for the upcoming meeting yet.
                 </div>
               ) : (
-                <div className="space-y-2 pl-6">
-                  {followUpsOnly.map((r) => (
+                (() => {
+                  const { manual, auto } = splitByRegType(followUpsOnly);
+                  const renderRow = (r: Registration) => (
                     <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <span className="font-medium text-foreground">{r.name}</span>
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        {r.name}
+                        {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                      </span>
                       <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                         <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
                         <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                  return (
+                    <div className="space-y-4 pl-6">
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                          Manual ({manual.length})
+                        </p>
+                        {manual.length === 0
+                          ? <p className="text-xs text-muted-foreground">None.</p>
+                          : <div className="space-y-2">{manual.map(renderRow)}</div>}
+                      </div>
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                          Auto-registered ({auto.length})
+                        </p>
+                        {auto.length === 0
+                          ? <p className="text-xs text-muted-foreground">None.</p>
+                          : <div className="space-y-2">{auto.map(renderRow)}</div>}
+                      </div>
+                    </div>
+                  );
+                })()
               )}
             </div>
 
@@ -479,10 +537,42 @@ export function ZoomLinkSettings() {
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="space-y-2 pt-2 pl-4">
-                    {regs.map((r, i) => (
-                      <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
-                    ))}
+                  <CollapsibleContent className="space-y-4 pt-2 pl-4">
+                    {(() => {
+                      const { manual, auto } = splitByRegType(regs);
+                      return (
+                        <>
+                          <div className="space-y-2">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                              Manual registrations ({manual.length})
+                            </p>
+                            {manual.length === 0 ? (
+                              <p className="text-xs text-muted-foreground pl-1">None.</p>
+                            ) : (
+                              <div className="space-y-2">
+                                {manual.map((r, i) => (
+                                  <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                              Auto-registered ({auto.length})
+                            </p>
+                            {auto.length === 0 ? (
+                              <p className="text-xs text-muted-foreground pl-1">None.</p>
+                            ) : (
+                              <div className="space-y-2">
+                                {auto.map((r, i) => (
+                                  <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      );
+                    })()}
                   </CollapsibleContent>
                 </Collapsible>
               );
