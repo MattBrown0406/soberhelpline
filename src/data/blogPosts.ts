@@ -174,6 +174,122 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 147,
+    slug: "first-90-days-after-rehab-family-guide",
+    seoTitle: "The First 90 Days After Rehab: A Family Guide to Early Recovery at Home",
+    metaDescription: "The first 90 days after rehab shape long-term recovery. Learn what families can expect, what actually helps, and what quietly gets in the way.",
+    title: "The First 90 Days After Rehab: A Family Guide to Early Recovery at Home",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-07-28",
+    image: first90DaysAfterRehabImg,
+    keywords: ["first 90 days after rehab", "early recovery at home", "family support after rehab", "aftercare planning", "relapse prevention family"],
+    excerpt: "The first 90 days after rehab are the highest-risk and highest-opportunity stretch of early recovery. Here's what families can expect, what actually helps, and what quietly gets in the way.",
+    content: `The first 90 days after rehab are the highest-risk and highest-opportunity stretch of early recovery. Your loved one comes home with new tools and a fragile new routine, and your family comes home to a house that hasn't figured out what normal looks like yet. If you're anxious about this window, that's not paranoia. It's accurate.
+
+Here's the good news: families have real influence during this period. Not control, but influence. People with stable housing, engaged family support, and structured post-treatment care do better than people without them. You are part of that equation.
+
+**Why Are the First 90 Days After Rehab So Critical?**
+
+This window matters because the brain is still healing while the old routines are still nearby. Most relapses happen in the first few months after treatment, when structure drops away and real life comes rushing back in.
+
+Consider what treatment provided: a schedule, accountability, a peer group, no access to substances, and someone checking in daily. On discharge day, most of that disappears at once. Your loved one goes from a highly structured environment to a house with car keys, a phone, old friends, and unstructured afternoons.
+
+Meanwhile the brain is still repairing. Sleep is erratic, mood swings are common, and focus can be foggy. That isn't a character problem or a sign treatment failed — it's a normal part of physical recovery that improves over weeks and months, not days.
+
+Expect a bumpy adjustment, not a finished product. Someone who has been home three weeks isn't "better." They are three weeks into a long process.
+
+**What the timeline often looks like**
+
+- Days 1–14: Reentry shock. Sleep and appetite are unsettled. Emotions run high in both directions.
+- Days 15–45: The routine either sticks or it doesn't. Meeting attendance, therapy, and work schedules get tested.
+- Days 46–90: Confidence grows, sometimes too fast. "I've got this" thinking leads to skipped meetings and dropped supports.
+
+**What Should Families Do in the First Week Home?**
+
+In the first week, focus on logistics and calm — not on big conversations. Get the aftercare schedule on a shared calendar, agree on a few basic household expectations, and resist the urge to relitigate the past.
+
+The instinct is to have The Talk, where everything gets addressed and the family finally clears the air. Hold that. Emotional flooding is a real relapse risk in early recovery, and it's a poor setup for a productive conversation anyway.
+
+Handle the practical items instead:
+
+1. Confirm the aftercare plan in writing — outpatient group times, therapy appointments, medication schedule, peer support contacts.
+2. Agree on transportation. Who's driving to what, and when?
+3. Quietly clear the house of leftover alcohol, unused prescriptions, and old paraphernalia, ideally before they arrive.
+4. Set two or three concrete house expectations, not fifteen.
+5. Decide what you'll tell extended family, so your loved one isn't ambushed by well-meaning questions.
+
+Keep the tone low-key. A calm, boring first week is a good first week.
+
+**What Actually Helps During the First 90 Days After Rehab?**
+
+The most useful things families do are unglamorous: protect the routine, stay consistent with boundaries, and keep your own life running. Support works best when it's steady rather than intense.
+
+**Protect the structure**
+
+Treatment worked partly because of structure, so help the new structure survive contact with real life. Treat outpatient group like a job. Don't schedule family obligations on top of therapy. You aren't responsible for making your loved one go — you're responsible for not making it harder. Our guide to [LINK:aftercare planning:/blog/aftercare-planning-family-guide] walks through how to build that scaffolding as a family.
+
+**Keep your boundaries where you set them**
+
+Early recovery is when boundaries get tested. If you said no money without a plan, that still stands at day 40. Boundaries that move under pressure teach everyone that pressure works. Say the boundary once, plainly, then live it. "I'm not able to do that" is a complete sentence.
+
+**Talk about today, not the last five years**
+
+Useful conversations are short and specific. "How was group?" beats "Are you really committed this time?" If you have a concern, name the behavior instead of the conclusion. "You've missed two meetings this week" is workable. "You're heading right back where you were" starts a fight.
+
+**Let them do their own recovery**
+
+There's a strong pull to manage — tracking attendance, monitoring moods, running the operation from the background. It comes from love and usually backfires, because it makes you the enforcer and lets your loved one outsource responsibility for their own sobriety. Your job is to be a supportive family member, not the case manager.
+
+**What Quietly Gets in the Way?**
+
+Most families don't undermine recovery through obvious mistakes. They do it through small, well-intentioned habits that soften consequences or reduce the motivation to stay engaged in treatment. Watch for these:
+
+- Walking on eggshells — avoiding all conflict teaches everyone that honesty is dangerous.
+- Over-celebrating early — declaring everything fixed at 30 days pressures your loved one to perform recovery rather than live it.
+- Surveillance as connection — checking phones and locations replaces trust-building with monitoring.
+- Absorbing responsibilities they can now handle, which slows the rebuilding of self-respect.
+- Dropping your own support. Families often quit [LINK:Al-Anon:https://al-anon.org] or therapy once their loved one comes home — usually right when they need it most.
+
+**How Should Families Handle a Slip or Relapse?**
+
+If a relapse happens, treat it as information rather than proof of failure. Respond with a plan, not a lecture. The goal is to shorten the episode and get your loved one back into care quickly.
+
+Relapse is common in early recovery, and a return to use does not erase the work that came before it. A one-day slip reported to a therapist is a very different situation than a two-month slide nobody talked about.
+
+Write a simple plan before you need one: who gets called first, what happens with living arrangements, what the next level of care would be, and what you will and won't do financially. Plans made during a crisis are plans made from fear.
+
+**How Do You Take Care of Yourself During This Time?**
+
+Your recovery matters too. Families come out of active addiction exhausted, hypervigilant, and out of practice at having their own lives. This is a good stretch to rebuild that.
+
+- Go to [LINK:Al-Anon:https://al-anon.org], [LINK:Nar-Anon:https://www.nar-anon.org], or a family support group — even when your loved one is doing well.
+- Work with a therapist or coach who understands addiction specifically.
+- Put something back on your calendar that's yours and isn't about the addiction.
+- Notice how much of your day goes to monitoring someone else's mood, and reclaim some of it.
+
+This isn't selfish. A family member who is rested and grounded is far more useful in a hard moment than one running on fumes.
+
+**The Bottom Line**
+
+The first 90 days after rehab aren't a test your family passes or fails. They're a transition — awkward, uneven, and mostly made of small ordinary days. Protect the routine. Hold your boundaries steady. Keep conversations short and honest. Get your own support in place and use it.
+
+You don't need to get this perfect. You need to stay steady and keep showing up. That's what moves the needle.
+
+**Keep Learning and Get Support**
+
+The first 90 days after rehab go better when families aren't figuring it out alone. SoberHelpline.com offers ongoing family education, coaching, and a community built for exactly this stretch. Explore our guide to [LINK:sober living homes:/blog/sober-living-homes-family-guide], join our free [LINK:Monday night Family Squares support call:/monday-zoom-registration], or book a [LINK:family coaching session:/family-coaching] to build a plan that fits your family.`,
+    tags: ["family education", "aftercare", "early recovery", "relapse prevention", "boundaries"],
+    faqItems: [
+      { question: "How long does it take for someone to stabilize after rehab?", answer: "Most people notice meaningful improvement in sleep, mood, and focus within three to six months, though it varies. The first 90 days after rehab are typically the most unsettled." },
+      { question: "Should our family talk about the past right after treatment?", answer: "Not in the first weeks. Conversations about past harm matter, but they land better once early recovery is stable and a therapist is involved. Family therapy is the right setting for those conversations — not the kitchen table on day three." },
+      { question: "Is it normal for someone to be moody or irritable after rehab?", answer: "Yes. Irritability, low energy, and trouble concentrating are common as the brain adjusts, and usually improve over weeks and months. If mood symptoms are severe or persistent, raise it with their treatment provider." },
+      { question: "What if my loved one refuses to go to aftercare?", answer: "Say your concern once, clearly and without threat, naming what you observed. Then hold your own boundaries rather than forcing attendance. Ask their provider whether the plan can be adjusted to something they'll actually do — a plan that gets followed beats a better plan that gets abandoned." },
+      { question: "Should we let our loved one live at home after rehab?", answer: "It depends on whether home is stable and substance-free and whether your family can hold clear expectations. For many people home works well. For others — especially those with a high-risk local social circle — sober living for a few months provides a safer bridge." },
+      { question: "How can families tell normal struggles from warning signs?", answer: "Normal early recovery includes bad days and emotional swings while treatment engagement stays consistent. Warning signs involve withdrawal from support: skipped meetings, secrecy, renewed contact with using friends, or dropping therapy. Behavior changes matter more than mood changes." }
+    ]
+  },
+  {
     id: 146,
     slug: "first-al-anon-meeting-what-to-expect",
     seoTitle: "What to Expect at Your First Al-Anon Meeting: A Family Guide",
