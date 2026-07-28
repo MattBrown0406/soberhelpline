@@ -166,6 +166,7 @@ import highFunctioningAddictionFamilyGuideImg from "@/assets/blog-high-functioni
 import crossAddictionAddictionTransferFamilyGuideImg from "@/assets/blog-cross-addiction-addiction-transfer-family-guide.jpg";
 import lovedOneAsksForMoneyImg from "@/assets/blog-loved-one-with-addiction-asks-for-money.jpg";
 import firstAlAnonMeetingImg from "@/assets/blog-first-al-anon-meeting-what-to-expect.jpg";
+import first90DaysAfterRehabImg from "@/assets/blog-first-90-days-after-rehab-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
