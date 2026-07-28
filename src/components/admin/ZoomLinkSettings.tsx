@@ -36,6 +36,14 @@ interface Registration {
   consent_email_list: boolean;
   created_at: string;
   meeting_date: string;
+  auto_register?: boolean | null;
+}
+
+function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[]) {
+  const manual: T[] = [];
+  const auto: T[] = [];
+  list.forEach((r) => (r.auto_register ? auto.push(r) : manual.push(r)));
+  return { manual, auto };
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
