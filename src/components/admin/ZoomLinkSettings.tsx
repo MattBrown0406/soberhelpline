@@ -537,10 +537,42 @@ export function ZoomLinkSettings() {
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="space-y-2 pt-2 pl-4">
-                    {regs.map((r, i) => (
-                      <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
-                    ))}
+                  <CollapsibleContent className="space-y-4 pt-2 pl-4">
+                    {(() => {
+                      const { manual, auto } = splitByRegType(regs);
+                      return (
+                        <>
+                          <div className="space-y-2">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                              Manual registrations ({manual.length})
+                            </p>
+                            {manual.length === 0 ? (
+                              <p className="text-xs text-muted-foreground pl-1">None.</p>
+                            ) : (
+                              <div className="space-y-2">
+                                {manual.map((r, i) => (
+                                  <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                              Auto-registered ({auto.length})
+                            </p>
+                            {auto.length === 0 ? (
+                              <p className="text-xs text-muted-foreground pl-1">None.</p>
+                            ) : (
+                              <div className="space-y-2">
+                                {auto.map((r, i) => (
+                                  <RegistrantCard key={r.id} r={r} index={i} isBlocked={isRegistrantBlocked(r)} />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      );
+                    })()}
                   </CollapsibleContent>
                 </Collapsible>
               );
