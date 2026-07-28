@@ -330,13 +330,15 @@ export function ZoomLinkSettings() {
             No questions submitted for the upcoming Monday meeting.
           </div>
         ) : (
-          <div className="space-y-3">
-            {questionsOnly.map((r, i) => (
+          (() => {
+            const { manual, auto } = splitByRegType(questionsOnly);
+            const renderQuestion = (r: Registration, i: number) => (
               <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
                     <span className="font-medium text-foreground">{r.name}</span>
+                    {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
                   </div>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
                     <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
@@ -357,8 +359,32 @@ export function ZoomLinkSettings() {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+            return (
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                    Manual registrations <Badge variant="secondary" className="text-xs">{manual.length}</Badge>
+                  </h4>
+                  {manual.length === 0 ? (
+                    <p className="text-xs text-muted-foreground pl-1">No manual-registrant questions.</p>
+                  ) : (
+                    <div className="space-y-3">{manual.map(renderQuestion)}</div>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                    Auto-registered <Badge variant="secondary" className="text-xs">{auto.length}</Badge>
+                  </h4>
+                  {auto.length === 0 ? (
+                    <p className="text-xs text-muted-foreground pl-1">No auto-registrant questions.</p>
+                  ) : (
+                    <div className="space-y-3">{auto.map(renderQuestion)}</div>
+                  )}
+                </div>
+              </div>
+            );
+          })()
         )}
       </div>
 
