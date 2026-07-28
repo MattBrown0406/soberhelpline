@@ -420,17 +420,41 @@ export function ZoomLinkSettings() {
                   No follow-up requests for the upcoming meeting yet.
                 </div>
               ) : (
-                <div className="space-y-2 pl-6">
-                  {followUpsOnly.map((r) => (
+                (() => {
+                  const { manual, auto } = splitByRegType(followUpsOnly);
+                  const renderRow = (r: Registration) => (
                     <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <span className="font-medium text-foreground">{r.name}</span>
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        {r.name}
+                        {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                      </span>
                       <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                         <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
                         <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                  return (
+                    <div className="space-y-4 pl-6">
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                          Manual ({manual.length})
+                        </p>
+                        {manual.length === 0
+                          ? <p className="text-xs text-muted-foreground">None.</p>
+                          : <div className="space-y-2">{manual.map(renderRow)}</div>}
+                      </div>
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                          Auto-registered ({auto.length})
+                        </p>
+                        {auto.length === 0
+                          ? <p className="text-xs text-muted-foreground">None.</p>
+                          : <div className="space-y-2">{auto.map(renderRow)}</div>}
+                      </div>
+                    </div>
+                  );
+                })()
               )}
             </div>
 
