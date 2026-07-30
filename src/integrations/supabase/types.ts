@@ -3631,6 +3631,32 @@ export type Database = {
           timezone: string
         }[]
       }
+      get_consultation_providers_admin: {
+        Args: never
+        Returns: {
+          bio: string | null
+          created_at: string
+          full_name: string
+          id: string
+          notification_email: string | null
+          paypal_email: string
+          photo_url: string | null
+          session_duration_minutes: number
+          session_rate: number
+          specialties: string[] | null
+          status: string
+          timezone: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "consultation_providers"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_guide_analytics: {
         Args: never
         Returns: {
@@ -3641,6 +3667,32 @@ export type Database = {
           unique_sessions: number
           unique_users: number
         }[]
+      }
+      get_my_consultation_provider: {
+        Args: { _user_id?: string }
+        Returns: {
+          bio: string | null
+          created_at: string
+          full_name: string
+          id: string
+          notification_email: string | null
+          paypal_email: string
+          photo_url: string | null
+          session_duration_minutes: number
+          session_rate: number
+          specialties: string[] | null
+          status: string
+          timezone: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "consultation_providers"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
       get_my_provider_subscriptions_with_provider: {
         Args: never

@@ -229,7 +229,7 @@ export const ConsultationManagement = () => {
 
   const loadData = async () => {
     const [provRes, bookRes, payRes] = await Promise.all([
-      supabase.from("consultation_providers").select("*").order("created_at", { ascending: false }),
+      (supabase as any).rpc("get_consultation_providers_admin"),
       supabase.from("consultation_bookings").select("*").order("created_at", { ascending: false }),
       supabase.from("consultation_payouts").select("*").order("created_at", { ascending: false }),
     ]);
