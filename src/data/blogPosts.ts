@@ -176,6 +176,127 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 149,
+    slug: "family-week-in-rehab-what-to-expect",
+    seoTitle: "Family Week in Rehab: What to Expect and How to Prepare",
+    metaDescription: "Family week in rehab explained: what happens each day, how to prepare, what to say, and how to use the week to build a solid aftercare plan.",
+    title: "Family Week in Rehab: What to Expect and How to Prepare",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-07-30",
+    image: familyWeekInRehabImg,
+    keywords: ["family week in rehab", "family program rehab", "family therapy treatment center", "aftercare planning", "what to expect family week"],
+    excerpt: "Family week is one of the most useful things a family can do, and one of the most misunderstood. Here is what actually happens, how to prepare, and how to make the week count.",
+    content: `You got the call from the treatment center. Your loved one has been in rehab a few weeks, and now the counselor is inviting you to family week. Maybe you feel relieved to finally be included. Maybe you feel a knot in your stomach. Most families feel both at once.
+
+Family week in rehab is a structured block of programming — usually two to five days — where the treatment center brings families into the clinical process. You attend education sessions, participate in family therapy, and learn how the recovery plan works after discharge. It is one of the most useful things a family can do, and one of the most misunderstood.
+
+Here is what actually happens, how to prepare, and how to make the week count.
+
+**What is family week in rehab?**
+
+Family week is a scheduled program where family members participate in education, therapy, and discharge planning alongside the person in treatment. It typically runs two to five days, often mid-to-late in a 30- to 90-day stay, once the person is stable enough to engage.
+
+It is not a trial, and it is not a graduation ceremony. Family week exists because addiction affects the whole household, and recovery that only changes one person tends not to hold.
+
+Formats vary — a multi-day workshop with other families, a single day of private sessions, sometimes virtual. Ask which format yours uses so you are not surprised.
+
+**What happens during family week?**
+
+Most programs include some version of these components:
+
+- Education on how substance use disorder works in the brain, why willpower alone is not enough, and what relapse warning signs look like.
+- Family systems work — the roles that form around addiction: caretaker, peacemaker, scapegoat, the one who disappears. Most families recognize themselves fast.
+- Joint family therapy, where specific incidents and requests get spoken out loud with a professional in the room to keep it productive.
+- Boundary work on money, housing, transportation, and covering for them — so you leave with actual sentences, not vague intentions.
+- Referrals to support for you — [LINK:Al-Anon:https://al-anon.org], [LINK:Nar-Anon:https://www.nar-anon.org], [LINK:family coaching:/family-coaching], therapy. Families skip this part more than any other. Do not skip it.
+
+**How should families prepare for family week?**
+
+Preparation is the difference between a week that produces change and a week that only produces feelings. Get clear on three things beforehand: what you want to say, what you want to know, and what you need going forward.
+
+**Write it down before you arrive**
+
+Emotion compresses memory. In the room, you will forget the thing you most wanted to ask. Bring a short written list:
+
+1. Two or three specific incidents, with dates and facts. "You missed Emma's birthday in March and said you had the flu" lands. "You are always selfish" does not.
+2. Questions about the treatment plan — diagnosis, medications, what happens if there is a relapse, who you call.
+3. What you need in order to feel okay having them home. Specific, observable, and yours to enforce.
+
+**Decide about money and housing in advance**
+
+You will be asked about financial support and living arrangements. Decide before you walk in — with the other adults involved — so you are not negotiating under emotional pressure. A boundary invented in the moment rarely survives the first hard week at home.
+
+**Expect an imperfect version of accountability**
+
+Family week is not where you get the apology you have waited years for. More often you get a person three weeks sober, still foggy and embarrassed, just beginning to see the wreckage. Early accountability sounds clumsy. That is normal, not proof of insincerity.
+
+Expect to hear things about yourself, too. Some of it is deflection. Some is true. Stay in the room for the true part.
+
+**What should you say during family sessions?**
+
+The most effective thing you can do is describe your own experience in concrete, factual terms — without diagnosing, predicting, or threatening. Facts are hard to argue with. Character judgments invite defense.
+
+Useful: "When you didn't come home on the 12th and no one could reach you, I called hospitals for four hours. I was terrified." Or: "I want to be in your life. I'm not able to loan you money anymore." Or simply: "What would be most helpful from me in the first month home?"
+
+Worth avoiding: score-keeping lists of every offense, ultimatums you have not decided you can keep, and amateur diagnosis. Stick to what you saw and how it affected you.
+
+**What if my loved one gets angry or shuts down?**
+
+It happens, and the therapist is there for exactly that. You do not have to fix it or apologize your way out of it. Let the clinician steer. Your job is to stay honest and present, not to keep everyone comfortable.
+
+**How to use family week to build the aftercare plan**
+
+The most valuable thing you take home is a written continuing care plan everyone understands. Ask for it before you leave, and make sure it answers who, what, when, and where. Good [LINK:aftercare planning:/blog/aftercare-planning-addiction-recovery-family-guide] starts here, not on discharge day.
+
+Make sure you know:
+
+- The discharge date and destination — home, sober living, or a lower level of care.
+- The outpatient schedule: which program, how many days a week, start date, transportation.
+- The therapist and prescriber by name, with the first appointment already on the calendar.
+- Medication details, including any medication for addiction treatment, and who handles refills.
+- The relapse response plan: warning signs, who gets called first, what the agreed response is. Decide this while everyone is calm.
+- Your own plan — your group, your therapist, your coaching, with a date on it.
+
+If the center cannot produce that detail, ask again. A vague aftercare plan reliably predicts a rough [LINK:first 90 days after rehab:/blog/first-90-days-after-rehab-family-guide].
+
+**Taking care of yourself during and after the week**
+
+Family week is emotionally expensive. Most people come home tired in a way sleep does not fix. Plan for it: leave the next day light, debrief with one trusted person outside the family, and start your own support before discharge rather than after the first crisis. Your recovery is not a bonus feature.
+
+And notice the win. Your loved one is in treatment and you showed up. Six months ago that may have felt out of reach.
+
+Family week often produces a few honest hours where it seems like the hard part is over. That feeling is real, and it is not the finish line. Recovery gets built in the ordinary weeks that follow — the Tuesday outpatient group, the awkward dinner, the boundary you hold when you would rather not. What you can control is showing up informed, honest, and steady. You do not need perfect words. You need to be there and tell the truth.
+
+**Frequently Asked Questions About Family Week in Rehab**
+
+**What is family week in rehab?**
+
+It is a structured two- to five-day program where family members join the treatment process through education, family therapy, boundary work, and aftercare planning. It usually happens mid-to-late in a treatment stay, and the goal is a shared plan before discharge.
+
+**Is family week mandatory?**
+
+It is rarely mandatory, though it is strongly recommended and often already included in the cost of treatment. Your loved one can decline family involvement. If they do, ask the center what family education or coaching you can access on your own.
+
+**What should I bring to family week?**
+
+A written list of specific incidents you want to name, questions about the treatment and aftercare plan, insurance information, a notebook, and any forms or releases the center requested. Leave the score-keeping list at home.
+
+**Can family week make things worse?**
+
+Old conflict can surface, and some sessions are hard. That is different from worse. With a clinician facilitating, difficult conversations usually move things forward. If you have concerns about safety or a history of abuse, tell the counselor beforehand so sessions can be structured appropriately.
+
+**What if my loved one refuses to include the family?**
+
+You still have options: attend the education portion if allowed, work with a family coach independently, and start your own support through [LINK:Al-Anon:https://al-anon.org], [LINK:Nar-Anon:https://www.nar-anon.org], or therapy. Families who get healthier often shift the dynamic even when their loved one is not participating.
+
+**Keep Learning and Get Support**
+
+Family week is a few days. The learning curve is longer, and you should not have to climb it alone. Sober Helpline offers ongoing [LINK:family education:/family-education], coaching, and a community of families walking the same road — including [LINK:free Monday night family support calls:/monday-zoom-registration] where you can ask real questions and get straight answers.
+
+If you have family week coming up and want help preparing what to say, that is what a [LINK:family coaching session:/family-coaching] is for.`,
+  },
+  {
     id: 148,
     slug: "leaving-rehab-early-family-guide",
     seoTitle: "Loved One Wants to Leave Rehab Early? A Family Guide",
