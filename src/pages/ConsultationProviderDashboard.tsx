@@ -55,21 +55,18 @@ const ConsultationProviderDashboard = () => {
       const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin");
       if (!roles || roles.length === 0) { navigate("/"); return; }
 
-      const { data: providerData } = await supabase
-        .from("consultation_providers")
-        .select("*")
-        .eq("user_id", adminViewUserId)
-        .maybeSingle();
+      const { data: providerRows } = await (supabase as any)
+        .rpc("get_my_consultation_provider", { _user_id: adminViewUserId });
+      const providerData = providerRows?.[0] ?? null;
 
       if (!providerData) { toast({ title: "Provider not found" }); navigate("/admin"); return; }
       resolvedProvider = providerData;
       setIsAdminView(true);
     } else {
-      const { data: providerData } = await supabase
-        .from("consultation_providers")
-        .select("*")
-        .eq("user_id", user.id)
-        .maybeSingle();
+      const { data: providerRows } = await (supabase as any)
+        .rpc("get_my_consultation_provider", { _user_id: null });
+      const providerData = providerRows?.[0] ?? null;
+
 
       if (!providerData) { navigate("/family-education"); return; }
       if (providerData.status !== "active") {
