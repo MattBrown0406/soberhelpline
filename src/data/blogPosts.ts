@@ -168,6 +168,7 @@ import lovedOneAsksForMoneyImg from "@/assets/blog-loved-one-with-addiction-asks
 import firstAlAnonMeetingImg from "@/assets/blog-first-al-anon-meeting-what-to-expect.jpg";
 import first90DaysAfterRehabImg from "@/assets/blog-first-90-days-after-rehab-family-guide.jpg";
 import leavingRehabEarlyImg from "@/assets/blog-leaving-rehab-early-family-guide.jpg";
+import familyWeekInRehabImg from "@/assets/blog-family-week-in-rehab-what-to-expect.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
