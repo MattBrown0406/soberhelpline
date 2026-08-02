@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link, useNavigate } from "react-router-dom";
@@ -93,6 +94,7 @@ const ProviderLanding = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(458) 298-8008</span>
             </a>
+            <WhatsAppLink source="provider_landing_header" variant="icon" />
           </div>
 
           {/* Hero Section */}

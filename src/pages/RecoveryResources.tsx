@@ -2,6 +2,7 @@ import { Building2, Home, Users, Bed, Brain, Stethoscope, UserCheck, Pill, Phone
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import SEOHead from "@/components/SEOHead";
 
 const categories = [
@@ -34,12 +35,15 @@ const RecoveryResources = () => {
               detox, inpatient treatment, outpatient care, intervention help, sober living, therapy, psychiatry, and sober coaching.
               No commissions. No patient brokering.
             </p>
-            <a href="tel:4582988008">
-              <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
-                <Phone className="w-4 h-4" />
-                Call Us: (458) 298-8008
-              </Button>
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="tel:4582988008">
+                <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
+                  <Phone className="w-4 h-4" />
+                  Call Us: (458) 298-8008
+                </Button>
+              </a>
+              <WhatsAppLink source="recovery_resources_hero" variant="button" />
+            </div>
           </div>
         </section>
 
@@ -117,6 +121,7 @@ const RecoveryResources = () => {
                   (458) 298-8008
                 </Button>
               </a>
+              <WhatsAppLink source="recovery_resources_bottom" variant="button" />
             </div>
           </div>
         </section>

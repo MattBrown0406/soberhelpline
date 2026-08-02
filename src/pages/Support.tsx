@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { AlertTriangle, CheckCircle2, Clock, Mail, Phone, Shield, Smartphone } from "lucide-react";
 
 import SEOHead from "@/components/SEOHead";
@@ -55,6 +56,7 @@ export default function Support() {
                     Call 458-298-8008
                   </a>
                 </Button>
+                <WhatsAppLink source="support_hero" variant="button" />
               </div>
             </div>
           </div>

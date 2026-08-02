@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Heart, MapPin, Calendar, ChevronRight, CheckCircle2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 
@@ -85,6 +86,8 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Call (458) 298-8008
                 </Button>
               </a>
+            <WhatsAppLink source="california_orange_county_cta_1" variant="button" className="w-full sm:w-auto" />
+            <WhatsAppLink source="california_orange_county_cta_1" variant="button" className="w-full sm:w-auto" />
             </div>
           </div>
         </section>
@@ -376,6 +379,8 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Call (458) 298-8008
                 </Button>
               </a>
+            <WhatsAppLink source="california_orange_county_cta_2" variant="button" />
+            <WhatsAppLink source="california_orange_county_cta_2" variant="button" className="" />
             </div>
           </div>
         </section>

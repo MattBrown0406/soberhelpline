@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone, ArrowLeft, X, Building2, Home, Users, Bed, Brain, Stethoscope, UserCheck, Pill } from "lucide-react";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Building2, path: "/inpatient-treatment" },
@@ -68,6 +69,7 @@ const CategoryMobileNav = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(458) 298-8008</span>
             </a>
+            <WhatsAppLink source="category_mobile_nav" variant="inline" className="mt-2 justify-center" />
           </div>
         </div>
       </SheetContent>

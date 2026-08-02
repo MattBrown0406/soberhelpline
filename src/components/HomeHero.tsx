@@ -6,6 +6,7 @@ import cinematicLighthouse from "@/assets/lighthouse-cinematic-wide.webp";
 import cloudOverlay from "@/assets/lighthouse-clouds-overlay.webp";
 import waveOverlay from "@/assets/lighthouse-waves-overlay.webp";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import "./HomeHero.css";
 
@@ -85,14 +86,22 @@ const HomeHero = () => {
                 <CalendarDays aria-hidden="true" />
                 Join free Monday support
               </Link>
-              <a
-                href="tel:4582988008"
-                className="shl-button shl-button-secondary"
-                onClick={() => trackConversionEvent("phone_click", { source: "homepage_lighthouse_hero" })}
-              >
-                <Phone aria-hidden="true" />
-                Call (458) 298-8008
-              </a>
+              <div className="flex items-center gap-3 flex-wrap">
+                <a
+                  href="tel:4582988008"
+                  className="shl-button shl-button-secondary"
+                  onClick={() => trackConversionEvent("phone_click", { source: "homepage_lighthouse_hero" })}
+                >
+                  <Phone aria-hidden="true" />
+                  Call (458) 298-8008
+                </a>
+                <WhatsAppLink
+                  source="homepage_lighthouse_hero"
+                  variant="button"
+                  className="shl-button-whatsapp"
+                  showLabel
+                />
+              </div>
             </div>
 
             <div className="shl-trust-line">

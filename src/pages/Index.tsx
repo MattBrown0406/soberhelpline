@@ -14,6 +14,7 @@ import { User } from "@supabase/supabase-js";
 import bannerLogo from "@/assets/logo.png";
 
 import MobileNav from "@/components/MobileNav";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import HomeHero from "@/components/HomeHero";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
@@ -233,6 +234,7 @@ const Index = () => {
                   <Phone className="w-4 h-4" />
                   (458) 298-8008
                 </a>
+                <WhatsAppLink source="index_header" variant="icon" />
                   <Link to="/family-squares">
                     <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white font-semibold shadow-sm">
                       Join Free Monday

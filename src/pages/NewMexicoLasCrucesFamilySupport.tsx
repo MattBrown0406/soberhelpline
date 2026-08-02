@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Heart, Users, MapPin, Calendar, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 
@@ -329,6 +330,8 @@ export default function NewMexicoLasCrucesFamilySupport() {
                   Call (458) 298-8008
                 </Button>
               </a>
+            <WhatsAppLink source="new_mexico_las_cruces_cta_1" variant="button" />
+            <WhatsAppLink source="new_mexico_las_cruces_cta_1" variant="button" className="" />
             </div>
           </div>
         </section>

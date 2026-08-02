@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Compass, HeartPulse, PhoneCall, ShieldAlert, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
@@ -100,6 +101,7 @@ export default function StartHere() {
                       Call (458) 298-8008
                     </a>
                   </Button>
+                  <WhatsAppLink source="start_here_hero" variant="button" />
                 </div>
               </div>
             </div>

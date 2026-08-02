@@ -10,7 +10,7 @@ import DefaultSEO from "./DefaultSEO";
 import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
 import StickyContactForm from "./StickyContactForm";
-import WhatsAppButton from "./WhatsAppButton";
+import WhatsAppLink from "./WhatsAppLink";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
@@ -124,6 +124,7 @@ const Layout = ({ children }: LayoutProps) => {
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">(458) 298-8008</span>
               </a>
+              <WhatsAppLink source="layout_header" variant="icon" />
             </div>
           </div>
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
@@ -134,7 +135,6 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <Footer />
       <StickyContactForm />
-      <WhatsAppButton />
     </div>
     </SEOOverrideProvider>
   );
