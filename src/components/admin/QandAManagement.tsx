@@ -27,6 +27,7 @@ interface QAEntry {
   meeting_date: string | null;
   is_published: boolean;
   created_at: string;
+  source_registration_id: string | null;
 }
 
 interface QAForm {
