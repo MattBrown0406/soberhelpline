@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
     const [regRes, attRes, recentAttRes, autoRegRes] = await Promise.all([
       supabase
         .from("zoom_meeting_registrations")
-        .select("id,name,email,auto_register,created_at")
+        .select("id,name,email,auto_register,created_at,language")
         .eq("meeting_date", meetingDate),
       supabase
         .from("zoom_attendance")
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
         .gte("meeting_date", fourWeeksAgo),
       supabase
         .from("zoom_meeting_registrations")
-        .select("name,email,meeting_date")
+        .select("name,email,meeting_date,language")
         .eq("auto_register", true)
         .gte("meeting_date", fourWeeksAgo),
     ]);
