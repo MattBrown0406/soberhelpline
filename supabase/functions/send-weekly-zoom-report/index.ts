@@ -159,17 +159,22 @@ Deno.serve(async (req) => {
     }
 
     const registeredAndAttended: Array<{ name: string; email: string; note?: string }> = [];
-    const registeredNoShow: Array<{ name: string; email: string }> = [];
+    const registeredNoShow: Array<{ name: string; email: string; note?: string }> = [];
     for (const r of registrants.values()) {
       const att = attendees.get(r.email);
+      const langNote = r.language === "es" ? "[ES]" : undefined;
       if (att || attendedRegIds.has(r.id)) {
         registeredAndAttended.push({
           name: r.name,
           email: r.email,
-          note: att?.minutes ? `(${att.minutes} min)` : undefined,
+          note: [langNote, att?.minutes ? `(${att.minutes} min)` : undefined].filter(Boolean).join(" ") || undefined,
         });
       } else {
-        registeredNoShow.push({ name: r.name, email: r.email });
+        registeredNoShow.push({
+          name: r.name,
+          email: r.email,
+          note: langNote,
+        });
       }
     }
 
