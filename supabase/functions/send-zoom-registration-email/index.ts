@@ -240,9 +240,65 @@ serve(async (req: Request) => {
 
     const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml);
 
+    const wantsFollowUp = followUp?.request_follow_up === true;
+
+    const tzLabels: Record<string, string> = {
+      "America/New_York": "Eastern (ET)",
+      "America/Chicago": "Central (CT)",
+      "America/Denver": "Mountain (MT)",
+      "America/Los_Angeles": "Pacific (PT)",
+      "America/Anchorage": "Alaska (AKT)",
+      "Pacific/Honolulu": "Hawaii (HT)",
+      "America/Phoenix": "Arizona (MST)",
+      "America/Halifax": "Atlantic (AT)",
+      "America/St_Johns": "Newfoundland (NT)",
+    };
+
+    const formatDate = (value: string | null) => {
+      if (!value) return "Not specified";
+      const [y, m, d] = value.split("-").map(Number);
+      if (!y || !m || !d) return escapeHtml(value);
+      return new Date(y, m - 1, d).toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    };
+
+    const formatTime = (value: string | null) => {
+      if (!value) return "Not specified";
+      const [h, min] = value.split(":").map(Number);
+      if (Number.isNaN(h)) return escapeHtml(value);
+      const suffix = h >= 12 ? "PM" : "AM";
+      const hour12 = h % 12 === 0 ? 12 : h % 12;
+      return `${hour12}:${String(min || 0).padStart(2, "0")} ${suffix}`;
+    };
+
+    const followUpHtml = wantsFollowUp
+      ? `
+        <div style="margin-top:16px;padding:16px;border:2px solid #b45309;border-radius:8px;background-color:#fffbeb;">
+          <h3 style="margin:0 0 8px 0;color:#92400e;">📞 Follow-Up Requested</h3>
+          <ul style="margin:0;padding-left:18px;">
+            <li><strong>Preferred date:</strong> ${formatDate(followUp?.preferred_contact_date ?? null)}</li>
+            <li><strong>Preferred time:</strong> ${formatTime(followUp?.preferred_contact_time ?? null)}</li>
+            <li><strong>Timezone:</strong> ${escapeHtml(
+              tzLabels[followUp?.preferred_timezone ?? ""] || followUp?.preferred_timezone || "Not specified",
+            )}</li>
+            <li><strong>Phone:</strong> ${escapeHtml(followUp?.phone || "Not provided")}</li>
+          </ul>
+          ${
+            followUp?.question
+              ? `<p style="margin:12px 0 0 0;"><strong>Their situation:</strong><br/>${escapeHtml(followUp.question)}</p>`
+              : ""
+          }
+        </div>
+      `
+      : "";
+
     const adminEmailPromise = sendEmail(
       ["matt@soberhelpline.com"],
-      `New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`,
+      `${wantsFollowUp ? "📞 FOLLOW-UP REQUEST — " : ""}New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`,
       `
         <h2>New “The Family Squares” Registration</h2>
         <ul>
@@ -250,6 +306,7 @@ serve(async (req: Request) => {
           <li><strong>Email:</strong> ${safeEmail}</li>
           <li><strong>Language:</strong> ${language === "es" ? "Spanish" : "English"}</li>
         </ul>
+        ${followUpHtml}
       `,
     );
 
