@@ -96,6 +96,25 @@ serve(async (req: Request) => {
     const passcode = typedSettings.find((s) => s.key === "monday_zoom_passcode")?.value || "";
     const externalZoomLink = typedSettings.find((s) => s.key === "monday_zoom_link")?.value || "";
 
+    // Pull follow-up request details so the admin notification can include them
+    let followUp: {
+      request_follow_up: boolean | null;
+      preferred_contact_date: string | null;
+      preferred_contact_time: string | null;
+      preferred_timezone: string | null;
+      phone: string | null;
+      question: string | null;
+    } | null = null;
+
+    if (registration_id) {
+      const { data: regRow } = await adminSupabase
+        .from("zoom_meeting_registrations")
+        .select("request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question")
+        .eq("id", registration_id)
+        .maybeSingle();
+      followUp = regRow ?? null;
+    }
+
     const siteUrl = "https://soberhelpline.com";
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const directJoinUrl = meetingId
