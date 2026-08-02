@@ -54,7 +54,7 @@ serve(async (req: Request) => {
   }
 
   try {
-    const { name, email, registration_id, consentEmailList = false } = await req.json();
+    const { name, email, registration_id, consentEmailList = false, language = "en" } = await req.json();
 
     if (!name || !email) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
