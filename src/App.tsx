@@ -503,6 +503,8 @@ const App = () => (
               <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
               <Route path="/member-billing" element={<MemberBilling />} />
               <Route path="/membership/billing" element={<MemberBilling />} />
+              <Route path="/cancel-membership" element={<CancelMembership />} />
+              <Route path="/cancel" element={<CancelMembership />} />
               <Route path="/roadmap" element={<RoadmapLanding />} />
               <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
