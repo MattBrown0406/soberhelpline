@@ -2,6 +2,7 @@ import { Building2, Home, Users, Bed, Brain, Stethoscope, UserCheck, Pill, Phone
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import SEOHead from "@/components/SEOHead";
 
 const categories = [
