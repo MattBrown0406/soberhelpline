@@ -221,6 +221,8 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
     const summary = {
       meeting_date: meetingDate,
       total_registrants: totalRegistrants,
+      english_registrants: englishCount,
+      spanish_registrants: spanishCount,
       total_attendees: totalAttendees,
       registered_and_attended: registeredAndAttended,
       registered_no_show: registeredNoShow,
