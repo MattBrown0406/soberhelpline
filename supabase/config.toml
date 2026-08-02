@@ -42,6 +42,9 @@ verify_jwt = false
 [functions.sober-helpline-revenue-report]
 verify_jwt = false
 
+[functions.send-weekly-zoom-report]
+verify_jwt = false
+
 [functions.score-family-squares-registration]
 verify_jwt = false
 
