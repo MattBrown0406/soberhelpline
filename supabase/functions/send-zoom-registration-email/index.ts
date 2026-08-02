@@ -149,10 +149,45 @@ serve(async (req: Request) => {
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
-    const attendeeEmailPromise = sendEmail(
-      [email],
-      "You're Registered! “The Family Squares” Zoom Meeting",
+    const isSpanish = language === "es";
+
+    const attendeeSubject = isSpanish
+      ? "¡Está registrado/a! Reunión Zoom de “The Family Squares”"
+      : "You're Registered! “The Family Squares” Zoom Meeting";
+
+    const attendeeHtml = isSpanish
+      ? `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
+          <h1 style="color: #166534;">¡Bienvenido/a, ${safeName}!</h1>
+          <p>Gracias por registrarse para la <strong>Reunión Zoom de “The Family Squares”</strong>.</p>
+          <p>Este es un espacio gratuito y de apoyo para familias que atraviesan la adicción. Tendrá la oportunidad de hacer preguntas, compartir experiencias y conectar con otras personas que entienden.</p>
+
+          ${zoomSection}
+
+          <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
+            <p style="margin: 0; color: #1e40af; font-size: 14px;">
+              <strong>📨 Comparta esto con su familia.</strong> Si hay alguien más en su familia que pueda beneficiarse de esta reunión —un cónyuge, hermano, padre o hijo/a adulto/a— siéntase libre de reenviar este correo. Cualquiera con el enlace puede unirse. Mientras más de su familia asista, más sacarán provecho todos.
+            </p>
+          </div>
+
+          <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
+            <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
+              <strong>⭐ ¿Sabía que?</strong> Los miembros de Sober Helpline no necesitan registrarse cada semana. Simplemente inicie sesión en su cuenta y únase a la reunión al instante, sin necesidad de registrarse.
+            </p>
+            <a href="${siteUrl}/family-membership" style="display: inline-block; margin-top: 4px; padding: 8px 20px; background-color: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;">
+              Conozca la Membresía
+            </a>
+          </div>
+
+          <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+            Si tiene alguna pregunta, llámenos al <strong>(458) 298-8008</strong>.
+          </p>
+          <p style="color: #6b7280; font-size: 12px;">
+            Sober Helpline — Apoyando a las Familias en la Recuperación
+          </p>
+        </div>
       `
+      : `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Welcome, ${safeName}!</h1>
           <p>Thank you for registering for the <strong>“The Family Squares” Zoom Meeting</strong>.</p>
@@ -176,23 +211,25 @@ serve(async (req: Request) => {
           </div>
 
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-            If you have any questions, call us at <strong>(541) 241-5886</strong>.
+            If you have any questions, call us at <strong>(458) 298-8008</strong>.
           </p>
           <p style="color: #6b7280; font-size: 12px;">
             Sober Helpline, Supporting Families Through Recovery
           </p>
         </div>
-      `,
-    );
+      `;
+
+    const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml);
 
     const adminEmailPromise = sendEmail(
       ["matt@soberhelpline.com"],
-      `New Zoom Meeting Registration: ${safeName}`,
+      `New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`,
       `
         <h2>New “The Family Squares” Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>
+          <li><strong>Language:</strong> ${language === "es" ? "Spanish" : "English"}</li>
         </ul>
       `,
     );
