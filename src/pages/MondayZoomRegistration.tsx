@@ -95,6 +95,7 @@ export default function MondayZoomRegistration() {
     preferredContactDate: "",
     preferredContactTime: "",
     preferredTimezone: "America/Los_Angeles",
+    language: "en",
   });
 
   const trimmedName = formData.name.trim();
