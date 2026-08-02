@@ -335,34 +335,38 @@ export function ZoomLinkSettings() {
         ) : (
           (() => {
             const { manual, auto } = splitByRegType(questionsOnly);
-            const renderQuestion = (r: Registration, i: number) => (
-              <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
-                    <span className="font-medium text-foreground">{r.name}</span>
-                    {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+            const renderQuestion = (r: Registration, i: number) => {
+              const lang = r.language === "es" ? "ES" : "EN";
+              return (
+                <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
+                      <span className="font-medium text-foreground">{r.name}</span>
+                      <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                      {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
+                      <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
+                      <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
-                    <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
-                    <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>
+                  <p className="text-sm text-foreground pl-8">{r.question}</p>
+                  <div className="flex gap-3 pl-8">
+                    {r.request_follow_up && (
+                      <span className="text-xs text-destructive flex items-center gap-1">
+                        <UserCheck className="h-3 w-3" />Requested interventionist follow-up
+                      </span>
+                    )}
+                    {r.consent_email_list && (
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Mail className="h-3 w-3" />Opted into email list
+                      </span>
+                    )}
                   </div>
                 </div>
-                <p className="text-sm text-foreground pl-8">{r.question}</p>
-                <div className="flex gap-3 pl-8">
-                  {r.request_follow_up && (
-                    <span className="text-xs text-destructive flex items-center gap-1">
-                      <UserCheck className="h-3 w-3" />Requested interventionist follow-up
-                    </span>
-                  )}
-                  {r.consent_email_list && (
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Mail className="h-3 w-3" />Opted into email list
-                    </span>
-                  )}
-                </div>
-              </div>
-            );
+              );
+            };
             return (
               <div className="space-y-6">
                 <div className="space-y-3">
