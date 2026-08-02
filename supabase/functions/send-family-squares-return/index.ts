@@ -82,19 +82,19 @@ serve(async (req: Request) => {
     // Get last week's registrants
     const { data: prev, error: prevErr } = await supabase
       .from("zoom_meeting_registrations")
-      .select("name, email, phone, user_id")
+      .select("name, email, phone, user_id, language")
       .eq("meeting_date", PREVIOUS_MEETING_DATE)
       .order("created_at", { ascending: false });
     if (prevErr) throw prevErr;
 
     // Dedup by email, keep first (most recent)
     const seen = new Set<string>();
-    const uniq: Array<{ name: string; email: string; phone: string | null; user_id: string | null }> = [];
+    const uniq: Array<{ name: string; email: string; phone: string | null; user_id: string | null; language: string | null }> = [];
     for (const r of prev || []) {
       const key = (r.email || "").toLowerCase().trim();
       if (!key || seen.has(key)) continue;
       seen.add(key);
-      uniq.push({ name: r.name, email: key, phone: r.phone, user_id: r.user_id });
+      uniq.push({ name: r.name, email: key, phone: r.phone, user_id: r.user_id, language: r.language });
     }
 
     // Check who is already registered for 7/13
@@ -119,6 +119,7 @@ serve(async (req: Request) => {
           consent_email_list: false,
           meeting_date: TARGET_MEETING_DATE,
           auto_register: true,
+          language: u.language || "en",
         });
         if (insErr) {
           console.error(`Insert failed for ${u.email}:`, insErr.message);

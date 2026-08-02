@@ -3180,6 +3180,7 @@ export type Database = {
           email: string
           followup_sequence_status: string
           id: string
+          language: string
           last_followup_at: string | null
           lead_reasons: string[]
           lead_score: number
@@ -3205,6 +3206,7 @@ export type Database = {
           email: string
           followup_sequence_status?: string
           id?: string
+          language?: string
           last_followup_at?: string | null
           lead_reasons?: string[]
           lead_score?: number
@@ -3230,6 +3232,7 @@ export type Database = {
           email?: string
           followup_sequence_status?: string
           id?: string
+          language?: string
           last_followup_at?: string | null
           lead_reasons?: string[]
           lead_score?: number

@@ -43,7 +43,7 @@ serve(async (req) => {
     // Get all unique auto_register subscribers (latest registration per email)
     const { data: autoRegistrants, error: fetchError } = await supabase
       .from('zoom_meeting_registrations')
-      .select('name, email, phone, user_id')
+      .select('name, email, phone, user_id, language')
       .eq('auto_register', true)
       .order('created_at', { ascending: false });
 
@@ -103,6 +103,7 @@ serve(async (req) => {
           consent_email_list: false,
           meeting_date: meetingDate,
           auto_register: true,
+          language: registrant.language || 'en',
         })
         .select('id')
         .single();
@@ -129,6 +130,7 @@ serve(async (req) => {
               name: registrant.name,
               email: email,
               registration_id: inserted?.id || null,
+              language: registrant.language || "en",
             }),
           }
         );

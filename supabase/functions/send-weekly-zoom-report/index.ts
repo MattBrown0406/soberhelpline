@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
     const [regRes, attRes, recentAttRes, autoRegRes] = await Promise.all([
       supabase
         .from("zoom_meeting_registrations")
-        .select("id,name,email,auto_register,created_at")
+        .select("id,name,email,auto_register,created_at,language")
         .eq("meeting_date", meetingDate),
       supabase
         .from("zoom_attendance")
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
         .gte("meeting_date", fourWeeksAgo),
       supabase
         .from("zoom_meeting_registrations")
-        .select("name,email,meeting_date")
+        .select("name,email,meeting_date,language")
         .eq("auto_register", true)
         .gte("meeting_date", fourWeeksAgo),
     ]);
@@ -128,13 +128,19 @@ Deno.serve(async (req) => {
     if (autoRegRes.error) throw autoRegRes.error;
 
     // Dedupe registrants by email (keep latest)
-    const registrants = new Map<string, { name: string; email: string; id: string }>();
+    const registrants = new Map<string, { name: string; email: string; id: string; language: string }>();
     for (const r of (regRes.data ?? []).sort((a, b) =>
       (b.created_at ?? "").localeCompare(a.created_at ?? ""),
     )) {
       const key = norm(r.email);
       if (!key || registrants.has(key)) continue;
-      registrants.set(key, { name: r.name ?? "", email: key, id: r.id });
+      registrants.set(key, { name: r.name ?? "", email: key, id: r.id, language: r.language ?? "en" });
+    }
+
+    const languageCounts = new Map<string, number>();
+    for (const r of registrants.values()) {
+      const lang = r.language || "en";
+      languageCounts.set(lang, (languageCounts.get(lang) || 0) + 1);
     }
 
     // Dedupe attendance by email (sum duration)
@@ -153,17 +159,22 @@ Deno.serve(async (req) => {
     }
 
     const registeredAndAttended: Array<{ name: string; email: string; note?: string }> = [];
-    const registeredNoShow: Array<{ name: string; email: string }> = [];
+    const registeredNoShow: Array<{ name: string; email: string; note?: string }> = [];
     for (const r of registrants.values()) {
       const att = attendees.get(r.email);
+      const langNote = r.language === "es" ? "[ES]" : undefined;
       if (att || attendedRegIds.has(r.id)) {
         registeredAndAttended.push({
           name: r.name,
           email: r.email,
-          note: att?.minutes ? `(${att.minutes} min)` : undefined,
+          note: [langNote, att?.minutes ? `(${att.minutes} min)` : undefined].filter(Boolean).join(" ") || undefined,
         });
       } else {
-        registeredNoShow.push({ name: r.name, email: r.email });
+        registeredNoShow.push({
+          name: r.name,
+          email: r.email,
+          note: langNote,
+        });
       }
     }
 
@@ -185,12 +196,16 @@ Deno.serve(async (req) => {
 
     const totalRegistrants = registrants.size;
     const totalAttendees = attendees.size;
+    const englishCount = languageCounts.get("en") || 0;
+    const spanishCount = languageCounts.get("es") || 0;
 
     const html = `<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;color:#333;line-height:1.6;">
 <h2 style="color:#111;margin-bottom:4px;">"The Family Squares" — Weekly Meeting Report</h2>
 <p style="margin-top:0;color:#666;">Meeting of ${escapeHtml(prettyDate(meetingDate))}</p>
 <div style="background:#f4f7fb;border-radius:8px;padding:16px;margin:16px 0;">
   <p style="margin:0;font-size:15px;"><strong>Total registrants:</strong> ${totalRegistrants}</p>
+  <p style="margin:4px 0 0;font-size:15px;"><strong>English registrants:</strong> ${englishCount}</p>
+  <p style="margin:4px 0 0;font-size:15px;"><strong>Spanish registrants:</strong> ${spanishCount}</p>
   <p style="margin:4px 0 0;font-size:15px;"><strong>Total attendees:</strong> ${totalAttendees}</p>
   <p style="margin:4px 0 0;font-size:15px;"><strong>Registered attendance rate:</strong> ${
     totalRegistrants ? Math.round((registeredAndAttended.length / totalRegistrants) * 100) : 0
@@ -206,6 +221,8 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
     const summary = {
       meeting_date: meetingDate,
       total_registrants: totalRegistrants,
+      english_registrants: englishCount,
+      spanish_registrants: spanishCount,
       total_attendees: totalAttendees,
       registered_and_attended: registeredAndAttended,
       registered_no_show: registeredNoShow,

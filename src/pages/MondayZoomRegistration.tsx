@@ -95,6 +95,7 @@ export default function MondayZoomRegistration() {
     preferredContactDate: "",
     preferredContactTime: "",
     preferredTimezone: "America/Los_Angeles",
+    language: "en",
   });
 
   const trimmedName = formData.name.trim();
@@ -249,6 +250,7 @@ export default function MondayZoomRegistration() {
           preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
           preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
           preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+          language: formData.language,
           // Lead scoring runs server-side from public-register-monday-zoom now;
           // pass attribution along instead of calling the score function directly.
           attribution: !isMemberQuestion ? getRegistrationAttribution() : null,
@@ -587,6 +589,15 @@ export default function MondayZoomRegistration() {
                       {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                     </div>
                   )}
+
+                  <div className="space-y-2">
+                    <Label htmlFor="language">Preferred Language / Idioma preferido</Label>
+                    <select id="language" value={formData.language} onChange={(e) => setFormData((p) => ({ ...p, language: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                      <option value="en">English</option>
+                      <option value="es">Español</option>
+                    </select>
+                    <p className="text-xs text-muted-foreground">We will send your meeting confirmation in this language.</p>
+                  </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="question">What would make this meeting useful for you this week? (Optional)</Label>

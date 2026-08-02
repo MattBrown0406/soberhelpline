@@ -37,6 +37,7 @@ interface Registration {
   created_at: string;
   meeting_date: string;
   auto_register?: boolean | null;
+  language?: string | null;
 }
 
 function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[]) {
@@ -47,12 +48,14 @@ function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[])
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
+  const lang = r.language === "es" ? "ES" : "EN";
   return (
     <div className={`border rounded-lg p-3 space-y-1 ${isBlocked ? "border-destructive bg-destructive/10" : "border-border bg-muted/20"}`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary text-xs font-bold">{index + 1}</span>
           <span className="font-medium text-foreground text-sm">{r.name}</span>
+          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
           {isBlocked && (
             <Badge variant="destructive" className="text-[10px] gap-1">
               <ShieldAlert className="h-3 w-3" />
@@ -212,15 +215,18 @@ export function ZoomLinkSettings() {
 
     const questionsHtml = questionsOnly
       .map(
-        (r, i) => `
+        (r, i) => {
+          const lang = r.language === "es" ? "ES" : "EN";
+          return `
         <div style="margin-bottom: 20px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; page-break-inside: avoid;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <strong style="font-size: 14px;">${i + 1}. ${r.name}</strong>
+            <strong style="font-size: 14px;">${i + 1}. ${r.name} (${lang})</strong>
             <span style="font-size: 12px; color: #6b7280;">${r.email} · ${r.phone}</span>
           </div>
           <p style="margin: 0; font-size: 15px; line-height: 1.5;">${r.question}</p>
           ${r.request_follow_up ? '<p style="margin: 6px 0 0; font-size: 12px; color: #dc2626;">⚑ Requested interventionist follow-up</p>' : ""}
-        </div>`
+        </div>`;
+        }
       )
       .join("");
 
@@ -332,34 +338,38 @@ export function ZoomLinkSettings() {
         ) : (
           (() => {
             const { manual, auto } = splitByRegType(questionsOnly);
-            const renderQuestion = (r: Registration, i: number) => (
-              <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
-                    <span className="font-medium text-foreground">{r.name}</span>
-                    {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+            const renderQuestion = (r: Registration, i: number) => {
+              const lang = r.language === "es" ? "ES" : "EN";
+              return (
+                <div key={r.id} className="border border-border rounded-lg p-4 space-y-2">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
+                      <span className="font-medium text-foreground">{r.name}</span>
+                      <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                      {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
+                      <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
+                      <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
-                    <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
-                    <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>
+                  <p className="text-sm text-foreground pl-8">{r.question}</p>
+                  <div className="flex gap-3 pl-8">
+                    {r.request_follow_up && (
+                      <span className="text-xs text-destructive flex items-center gap-1">
+                        <UserCheck className="h-3 w-3" />Requested interventionist follow-up
+                      </span>
+                    )}
+                    {r.consent_email_list && (
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Mail className="h-3 w-3" />Opted into email list
+                      </span>
+                    )}
                   </div>
                 </div>
-                <p className="text-sm text-foreground pl-8">{r.question}</p>
-                <div className="flex gap-3 pl-8">
-                  {r.request_follow_up && (
-                    <span className="text-xs text-destructive flex items-center gap-1">
-                      <UserCheck className="h-3 w-3" />Requested interventionist follow-up
-                    </span>
-                  )}
-                  {r.consent_email_list && (
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Mail className="h-3 w-3" />Opted into email list
-                    </span>
-                  )}
-                </div>
-              </div>
-            );
+              );
+            };
             return (
               <div className="space-y-6">
                 <div className="space-y-3">
@@ -422,18 +432,22 @@ export function ZoomLinkSettings() {
               ) : (
                 (() => {
                   const { manual, auto } = splitByRegType(followUpsOnly);
-                  const renderRow = (r: Registration) => (
-                    <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <span className="font-medium text-foreground flex items-center gap-2">
-                        {r.name}
-                        {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
-                      </span>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                        <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
-                        <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+                  const renderRow = (r: Registration) => {
+                    const lang = r.language === "es" ? "ES" : "EN";
+                    return (
+                      <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <span className="font-medium text-foreground flex items-center gap-2">
+                          {r.name}
+                          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                          {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                        </span>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                          <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
+                          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+                        </div>
                       </div>
-                    </div>
-                  );
+                    );
+                  };
                   return (
                     <div className="space-y-4 pl-6">
                       <div className="space-y-2">
