@@ -165,6 +165,7 @@ const ForProviders = () => {
                     Call Us to Learn More
                   </Button>
                 </a>
+                <WhatsAppLink source="for_providers_hero" variant="button" className="px-8 py-6 text-lg rounded-xl" />
               </div>
               <p className="mt-4 text-sm text-gray-500">No credit card required • Free to list • Live in 24-48 hours</p>
             </div>
