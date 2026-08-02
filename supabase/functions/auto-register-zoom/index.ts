@@ -103,6 +103,7 @@ serve(async (req) => {
           consent_email_list: false,
           meeting_date: meetingDate,
           auto_register: true,
+          language: registrant.language || 'en',
         })
         .select('id')
         .single();
