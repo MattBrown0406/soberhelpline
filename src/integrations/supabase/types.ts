@@ -71,6 +71,54 @@ export type Database = {
         }
         Relationships: []
       }
+      app_membership_sync_issues: {
+        Row: {
+          app_account_id: string | null
+          created_at: string
+          details: Json
+          email: string | null
+          expires_at: string | null
+          id: string
+          notes: string | null
+          reason: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: string
+          tier: string | null
+          updated_at: string
+        }
+        Insert: {
+          app_account_id?: string | null
+          created_at?: string
+          details?: Json
+          email?: string | null
+          expires_at?: string | null
+          id?: string
+          notes?: string | null
+          reason: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          tier?: string | null
+          updated_at?: string
+        }
+        Update: {
+          app_account_id?: string | null
+          created_at?: string
+          details?: Json
+          email?: string | null
+          expires_at?: string | null
+          id?: string
+          notes?: string | null
+          reason?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+          tier?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       app_payment_bridge_outbox: {
         Row: {
           attempt_count: number
@@ -2545,6 +2593,7 @@ export type Database = {
         Row: {
           access_ends_at: string | null
           amount: number
+          app_grace_until: string | null
           cancellation_reason: string | null
           cancellation_source: string | null
           cancelled_at: string | null
@@ -2563,6 +2612,7 @@ export type Database = {
         Insert: {
           access_ends_at?: string | null
           amount: number
+          app_grace_until?: string | null
           cancellation_reason?: string | null
           cancellation_source?: string | null
           cancelled_at?: string | null
@@ -2581,6 +2631,7 @@ export type Database = {
         Update: {
           access_ends_at?: string | null
           amount?: number
+          app_grace_until?: string | null
           cancellation_reason?: string | null
           cancellation_source?: string | null
           cancelled_at?: string | null
