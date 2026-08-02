@@ -22,7 +22,8 @@ type ConversionEventName =
   | "family_answer_view"
   | "family_answer_click"
   | "family_answer_hub_click"
-  | "sober_helpline_app_store_click";
+  | "sober_helpline_app_store_click"
+  | "whatsapp_click";
 
 type ConversionEventPayload = {
   label?: string;
@@ -152,4 +153,8 @@ export const trackConversionEvent = (eventName: ConversionEventName, payload: Co
 
 export const trackPhoneClick = (source: string) => {
   trackConversionEvent("phone_click", { source });
+};
+
+export const trackWhatsAppClick = (source: string) => {
+  trackConversionEvent("whatsapp_click", { source });
 };

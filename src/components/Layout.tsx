@@ -10,6 +10,7 @@ import DefaultSEO from "./DefaultSEO";
 import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
 import StickyContactForm from "./StickyContactForm";
+import WhatsAppButton from "./WhatsAppButton";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
@@ -133,6 +134,7 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <Footer />
       <StickyContactForm />
+      <WhatsAppButton />
     </div>
     </SEOOverrideProvider>
   );
