@@ -2,6 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Home, Phone, Search, Users, BookOpen, Heart } from "lucide-react";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
@@ -42,6 +43,7 @@ const NotFound = () => {
               Call (458) 298-8008
             </Button>
           </a>
+          <WhatsAppLink source="not_found" variant="button" className="w-full sm:w-auto" />
         </div>
 
         <div className="border-t pt-6">

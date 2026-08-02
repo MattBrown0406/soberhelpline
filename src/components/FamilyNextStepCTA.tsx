@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Compass, PhoneCall, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 type FamilyNextStepCTAProps = {
@@ -58,10 +59,13 @@ export default function FamilyNextStepCTA({
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{subheading}</p>
         </div>
-        <a href="tel:4582988008" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline shrink-0">
-          <PhoneCall className="h-4 w-4" />
-          Call (458) 298-8008
-        </a>
+        <div className="flex items-center gap-3 shrink-0">
+          <a href="tel:4582988008" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+            <PhoneCall className="h-4 w-4" />
+            Call (458) 298-8008
+          </a>
+          <WhatsAppLink source="family_next_step_cta" variant="icon" />
+        </div>
       </div>
 
       <div className="mt-5 grid gap-3 lg:grid-cols-3">

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 
 const Footer = () => {
@@ -42,6 +43,7 @@ const Footer = () => {
               <Phone className="w-4 h-4" />
               (458) 298-8008
             </a>
+            <WhatsAppLink source="footer_brand" variant="inline" className="mt-1 text-white/90 hover:text-white" />
             <div className="mt-5 rounded-lg border border-gray-800 bg-gray-800/70 p-3">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sober Helpline App</p>
               <SoberHelplineAppStoreBadge height={36} source="footer_brand" />

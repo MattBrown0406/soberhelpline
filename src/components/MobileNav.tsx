@@ -7,6 +7,7 @@ import { User } from "@supabase/supabase-js";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 interface MobileNavProps {
   user: User | null;
@@ -188,6 +189,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(458) 298-8008</span>
             </a>
+            <WhatsAppLink source="mobile_nav" variant="inline" className="mt-2 justify-center" />
           </div>
         </div>
       </SheetContent>

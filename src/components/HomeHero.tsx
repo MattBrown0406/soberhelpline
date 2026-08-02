@@ -6,6 +6,7 @@ import cinematicLighthouse from "@/assets/lighthouse-cinematic-wide.webp";
 import cloudOverlay from "@/assets/lighthouse-clouds-overlay.webp";
 import waveOverlay from "@/assets/lighthouse-waves-overlay.webp";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import "./HomeHero.css";
 
@@ -93,6 +94,11 @@ const HomeHero = () => {
                 <Phone aria-hidden="true" />
                 Call (458) 298-8008
               </a>
+              <WhatsAppLink
+                source="homepage_lighthouse_hero"
+                variant="button"
+                className="shl-button-whatsapp"
+              />
             </div>
 
             <div className="shl-trust-line">

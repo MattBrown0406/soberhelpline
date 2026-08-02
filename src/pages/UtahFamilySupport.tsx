@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Heart, Users, MapPin, Calendar, Shield, BookOpen, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
@@ -438,6 +439,8 @@ export default function UtahFamilySupport() {
                   <a href="tel:4582988008">
                     <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button>
                   </a>
+            <WhatsAppLink source="utah_cta_1" variant="button" />
+            <WhatsAppLink source="utah_cta_1" variant="button" className="" />
                 </div>
               </div>
               <Card className="border-primary/20 bg-primary/5">
@@ -539,6 +542,8 @@ export default function UtahFamilySupport() {
               <a href="tel:4582988008">
                 <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button>
               </a>
+            <WhatsAppLink source="utah_cta_2" variant="button" />
+            <WhatsAppLink source="utah_cta_2" variant="button" className="" />
             </div>
           </div>
         </section>

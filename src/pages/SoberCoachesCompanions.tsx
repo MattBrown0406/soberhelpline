@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { ArrowLeft, UserCheck, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -266,6 +267,7 @@ const SoberCoachesCompanions = () => {
               <Phone className="w-5 h-5" />
               <span className="font-medium">(458) 298-8008</span>
             </a>
+            <WhatsAppLink source="sobercoachescompanions_header" variant="icon" />
             <img src={logo} alt="Sober Helpline" className="h-24 w-24 object-contain" />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -1118,6 +1119,7 @@ const ProviderApplication = () => {
                 <Phone className="w-5 h-5" />
                 <span className="font-medium">(458) 298-8008</span>
               </a>
+              <WhatsAppLink source="provider_application_header" variant="icon" />
             </div>
 
 

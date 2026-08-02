@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, ClipboardCheck, HeartPulse, PhoneCall, Search, ShieldAlert, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
@@ -303,6 +304,7 @@ export default function FamilyAddictionAnswers() {
                       Call Sober Helpline
                     </a>
                   </Button>
+                  <WhatsAppLink source="family_addiction_answers_bottom" variant="button" />
                 </div>
               </div>
             </div>
