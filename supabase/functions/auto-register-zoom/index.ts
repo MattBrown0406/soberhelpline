@@ -130,6 +130,7 @@ serve(async (req) => {
               name: registrant.name,
               email: email,
               registration_id: inserted?.id || null,
+              language: registrant.language || "en",
             }),
           }
         );
