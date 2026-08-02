@@ -128,13 +128,19 @@ Deno.serve(async (req) => {
     if (autoRegRes.error) throw autoRegRes.error;
 
     // Dedupe registrants by email (keep latest)
-    const registrants = new Map<string, { name: string; email: string; id: string }>();
+    const registrants = new Map<string, { name: string; email: string; id: string; language: string }>();
     for (const r of (regRes.data ?? []).sort((a, b) =>
       (b.created_at ?? "").localeCompare(a.created_at ?? ""),
     )) {
       const key = norm(r.email);
       if (!key || registrants.has(key)) continue;
-      registrants.set(key, { name: r.name ?? "", email: key, id: r.id });
+      registrants.set(key, { name: r.name ?? "", email: key, id: r.id, language: r.language ?? "en" });
+    }
+
+    const languageCounts = new Map<string, number>();
+    for (const r of registrants.values()) {
+      const lang = r.language || "en";
+      languageCounts.set(lang, (languageCounts.get(lang) || 0) + 1);
     }
 
     // Dedupe attendance by email (sum duration)
