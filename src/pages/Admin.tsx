@@ -409,7 +409,7 @@ const Admin = () => {
         </Card>
           </TabsContent>
 
-          <TabsContent value="family-members">
+          <TabsContent value="family-members" className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -421,7 +421,9 @@ const Admin = () => {
                 <FamilyMemberManagement />
               </CardContent>
             </Card>
+            <AppMembershipSync />
           </TabsContent>
+
 
 
           <TabsContent value="analytics">
