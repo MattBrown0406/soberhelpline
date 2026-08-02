@@ -404,6 +404,7 @@ const ForProviders = () => {
                   (458) 298-8008
                 </Button>
               </a>
+              <WhatsAppLink source="for_providers_bottom" variant="button" className="px-8 py-6 text-lg rounded-xl" />
             </div>
           </div>
         </section>
