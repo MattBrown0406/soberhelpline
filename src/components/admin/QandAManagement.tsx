@@ -54,18 +54,75 @@ export function QandAManagement() {
   const [form, setForm] = useState<QAForm>(emptyForm);
   const [saving, setSaving] = useState(false);
 
+  const [importing, setImporting] = useState(false);
+
   const fetchEntries = async () => {
     const { data, error } = await supabase
       .from("meeting_qa_archive")
-      .select("id, question, answer, tags, meeting_date, is_published, created_at")
+      .select("id, question, answer, tags, meeting_date, is_published, created_at, source_registration_id")
       .order("created_at", { ascending: false });
 
     if (error) toast.error("Failed to load Q&As");
-    else setEntries(data || []);
+    else setEntries((data as QAEntry[]) || []);
     setLoading(false);
   };
 
   useEffect(() => { fetchEntries(); }, []);
+
+  const importFromRegistrations = async () => {
+    setImporting(true);
+    try {
+      const [regRes, existingRes] = await Promise.all([
+        supabase
+          .from("zoom_meeting_registrations")
+          .select("id, question, meeting_date")
+          .order("meeting_date", { ascending: false }),
+        supabase
+          .from("meeting_qa_archive")
+          .select("source_registration_id")
+          .not("source_registration_id", "is", null),
+      ]);
+
+      if (regRes.error || existingRes.error) throw regRes.error || existingRes.error;
+
+      const seen = new Set(
+        ((existingRes.data as { source_registration_id: string | null }[]) || [])
+          .map(r => r.source_registration_id)
+          .filter(Boolean) as string[]
+      );
+
+      const skip = new Set(["no question", "no question at the moment", "none", "n/a", "na", "support", "no questions"]);
+
+      const rows = (regRes.data || [])
+        .filter(r => {
+          const q = (r.question || "").trim();
+          return q.length > 12 && !skip.has(q.toLowerCase()) && !seen.has(r.id);
+        })
+        .map(r => ({
+          question: (r.question || "").trim(),
+          answer: "",
+          tags: [],
+          meeting_date: r.meeting_date,
+          is_published: false,
+          source_registration_id: r.id,
+        }));
+
+      if (rows.length === 0) {
+        toast.info("No new questions to import");
+        return;
+      }
+
+      const { error } = await supabase.from("meeting_qa_archive").insert(rows);
+      if (error) throw error;
+      toast.success(`Imported ${rows.length} question${rows.length === 1 ? "" : "s"} as unpublished drafts`);
+      fetchEntries();
+    } catch {
+      toast.error("Failed to import questions");
+    } finally {
+      setImporting(false);
+    }
+  };
+
 
   const openNew = () => {
     setEditingId(null);
