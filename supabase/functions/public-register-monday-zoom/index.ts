@@ -28,6 +28,7 @@ serve(async (req: Request) => {
       preferred_contact_time = null,
       preferred_timezone = null,
       attribution = null,
+      language = "en",
     } = payload ?? {};
 
     if (!name || !email || !meeting_date) {

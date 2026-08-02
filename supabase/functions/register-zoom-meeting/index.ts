@@ -18,6 +18,7 @@ const RegistrationSchema = z.object({
   preferredContactDate: z.string().trim().max(20).optional().nullable(),
   preferredContactTime: z.string().trim().max(20).optional().nullable(),
   preferredTimezone: z.string().trim().max(100).optional().nullable(),
+  language: z.enum(["en", "es"]).optional().default("en"),
 });
 
 function getNextMeetingDate() {
