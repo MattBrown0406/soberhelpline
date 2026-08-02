@@ -235,7 +235,7 @@ export function QandAManagement() {
             <div key={entry.id} className={`rounded-lg border p-4 ${!entry.is_published ? "border-dashed opacity-60" : "border-border"}`}>
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-foreground leading-snug line-clamp-2">{entry.question}</p>
+                  <p className="text-sm font-semibold text-foreground leading-snug">{entry.question}</p>
                   {entry.answer.trim() ? (
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{entry.answer}</p>
                   ) : (
