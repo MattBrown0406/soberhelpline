@@ -119,6 +119,7 @@ serve(async (req: Request) => {
           consent_email_list: false,
           meeting_date: TARGET_MEETING_DATE,
           auto_register: true,
+          language: u.language || "en",
         });
         if (insErr) {
           console.error(`Insert failed for ${u.email}:`, insErr.message);
