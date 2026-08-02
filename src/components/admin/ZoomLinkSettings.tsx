@@ -48,12 +48,14 @@ function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[])
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
+  const lang = r.language === "es" ? "ES" : "EN";
   return (
     <div className={`border rounded-lg p-3 space-y-1 ${isBlocked ? "border-destructive bg-destructive/10" : "border-border bg-muted/20"}`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary text-xs font-bold">{index + 1}</span>
           <span className="font-medium text-foreground text-sm">{r.name}</span>
+          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
           {isBlocked && (
             <Badge variant="destructive" className="text-[10px] gap-1">
               <ShieldAlert className="h-3 w-3" />
