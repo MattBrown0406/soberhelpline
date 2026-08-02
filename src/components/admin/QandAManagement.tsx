@@ -150,8 +150,12 @@ export function QandAManagement() {
   };
 
   const handleSave = async () => {
-    if (!form.question.trim() || !form.answer.trim()) {
-      toast.error("Question and answer are required");
+    if (!form.question.trim()) {
+      toast.error("Question is required");
+      return;
+    }
+    if (form.is_published && !form.answer.trim()) {
+      toast.error("An answer is required before publishing");
       return;
     }
     setSaving(true);
@@ -184,6 +188,10 @@ export function QandAManagement() {
   };
 
   const togglePublished = async (entry: QAEntry) => {
+    if (!entry.is_published && !entry.answer.trim()) {
+      toast.error("Add an answer before publishing this question");
+      return;
+    }
     const { error } = await supabase
       .from("meeting_qa_archive")
       .update({ is_published: !entry.is_published })
@@ -194,15 +202,27 @@ export function QandAManagement() {
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading Q&amp;As...</div>;
 
+  const needsAnswer = entries.filter(e => !e.answer.trim()).length;
+
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{entries.length} Q&amp;A(s)</p>
-        <Button onClick={openNew} size="sm" className="gap-2">
-          <Plus className="h-4 w-4" />
-          Add Q&amp;A
-        </Button>
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <p className="text-sm text-muted-foreground">
+          {entries.length} Q&amp;A(s)
+          {needsAnswer > 0 && <span className="text-amber-600"> · {needsAnswer} awaiting an answer</span>}
+        </p>
+        <div className="flex gap-2">
+          <Button onClick={importFromRegistrations} size="sm" variant="outline" className="gap-2" disabled={importing}>
+            <DownloadCloud className="h-4 w-4" />
+            {importing ? "Importing…" : "Import from registrations"}
+          </Button>
+          <Button onClick={openNew} size="sm" className="gap-2">
+            <Plus className="h-4 w-4" />
+            Add Q&amp;A
+          </Button>
+        </div>
       </div>
+
 
       {entries.length === 0 ? (
         <div className="text-center py-10 text-muted-foreground">
