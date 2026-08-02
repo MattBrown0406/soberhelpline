@@ -43,7 +43,7 @@ serve(async (req) => {
     // Get all unique auto_register subscribers (latest registration per email)
     const { data: autoRegistrants, error: fetchError } = await supabase
       .from('zoom_meeting_registrations')
-      .select('name, email, phone, user_id')
+      .select('name, email, phone, user_id, language')
       .eq('auto_register', true)
       .order('created_at', { ascending: false });
 
