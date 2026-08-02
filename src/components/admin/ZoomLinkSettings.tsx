@@ -215,15 +215,18 @@ export function ZoomLinkSettings() {
 
     const questionsHtml = questionsOnly
       .map(
-        (r, i) => `
+        (r, i) => {
+          const lang = r.language === "es" ? "ES" : "EN";
+          return `
         <div style="margin-bottom: 20px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; page-break-inside: avoid;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <strong style="font-size: 14px;">${i + 1}. ${r.name}</strong>
+            <strong style="font-size: 14px;">${i + 1}. ${r.name} (${lang})</strong>
             <span style="font-size: 12px; color: #6b7280;">${r.email} · ${r.phone}</span>
           </div>
           <p style="margin: 0; font-size: 15px; line-height: 1.5;">${r.question}</p>
           ${r.request_follow_up ? '<p style="margin: 6px 0 0; font-size: 12px; color: #dc2626;">⚑ Requested interventionist follow-up</p>' : ""}
-        </div>`
+        </div>`;
+        }
       )
       .join("");
 
