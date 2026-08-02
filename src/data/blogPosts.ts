@@ -212,7 +212,7 @@ No. There is no credible body of research showing that program cost predicts rec
 
 The factors most associated with better outcomes:
 
-- Length of engagement — 90 days or more of continuous care, across all [LINK:levels of care:/blog/understanding-levels-of-care-in-addiction-treatment], beats a short stay
+- Length of engagement — 90 days or more of continuous care, across all [LINK:levels of care:/blog/levels-of-care-addiction-treatment], beats a short stay
 - Evidence-based therapies delivered consistently, not just listed on a website
 - Access to medication for addiction treatment when appropriate, especially for opioid and alcohol use disorder
 - Treatment of co-occurring mental health conditions rather than addiction alone
