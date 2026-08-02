@@ -56,13 +56,28 @@ async function getZoomParticipants(meetingId: string, token: string): Promise<an
   return allParticipants;
 }
 
-async function isAuthorized(req: Request, adminSupabase: ReturnType<typeof createClient>): Promise<boolean> {
-  // Path 1: shared cron secret
+async function isAuthorized(
+  req: Request,
+  adminSupabase: ReturnType<typeof createClient>,
+  body: any,
+): Promise<boolean> {
+  // Path 1: shared cron secret (header)
   const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
   const providedSecret = req.headers.get("x-automation-secret");
   if (expectedSecret && providedSecret && providedSecret === expectedSecret) {
     return true;
   }
+
+  // Path 1b: cron secret in body (pg_cron cannot read edge function env vars)
+  if (body?.cron_secret) {
+    const { data: row } = await adminSupabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "cron_secret")
+      .maybeSingle();
+    if (row?.value && row.value === body.cron_secret) return true;
+  }
+
 
   // Path 2: authenticated admin JWT
   const authHeader = req.headers.get("Authorization") ?? "";
@@ -90,7 +105,10 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    if (!(await isAuthorized(req, adminSupabase))) {
+    let body: any = {};
+    try { body = await req.json(); } catch {}
+
+    if (!(await isAuthorized(req, adminSupabase, body))) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -111,22 +129,23 @@ serve(async (req: Request) => {
       });
     }
 
-    // Determine the meeting date (last Monday or today if Monday)
-    let body: any = {};
-    try { body = await req.json(); } catch {}
-    
+    // Determine the meeting date in Pacific time (last Monday, or today if Monday)
     let meetingDate: string;
     if (body.meeting_date) {
       meetingDate = body.meeting_date;
     } else {
-      const now = new Date();
-      const day = now.getDay();
-      // If today is Monday, use today. Otherwise use last Monday.
-      const daysBack = day === 1 ? 0 : day === 0 ? 6 : day - 1;
-      const lastMonday = new Date(now);
-      lastMonday.setDate(now.getDate() - daysBack);
-      meetingDate = lastMonday.toISOString().split("T")[0];
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric", month: "2-digit", day: "2-digit", weekday: "short",
+      }).formatToParts(new Date());
+      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+      const base = new Date(`${get("year")}-${get("month")}-${get("day")}T12:00:00Z`);
+      const dayMap: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      const dow = dayMap[get("weekday")] ?? base.getUTCDay();
+      base.setUTCDate(base.getUTCDate() - ((dow + 6) % 7));
+      meetingDate = base.toISOString().split("T")[0];
     }
+
 
     console.log(`Syncing attendance for meeting ${meetingId} on ${meetingDate}`);
 
