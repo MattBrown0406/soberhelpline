@@ -239,6 +239,7 @@
   background: rgba(96,212,194,.1);
 }
 
+.shl-actions .shl-button-whatsapp,
 .shl-button-whatsapp {
   display: inline-flex;
   min-height: 56px;
@@ -257,11 +258,13 @@
   transition: transform .24s ease, box-shadow .24s ease, background .24s ease;
 }
 
+.shl-actions .shl-button-whatsapp:hover,
 .shl-button-whatsapp:hover {
   transform: translateY(-3px);
   box-shadow: 0 19px 46px rgba(37, 211, 106, .36);
 }
 
+.shl-actions .shl-button-whatsapp svg,
 .shl-button-whatsapp svg {
   width: 19px;
   height: 19px;
