@@ -233,6 +233,16 @@ export default function MondayZoomRegistration() {
       return;
     }
 
+    if (formData.requestFollowUp && (!formData.preferredContactDate || !formData.preferredContactTime)) {
+      setErrors({
+        preferredContactDate: !formData.preferredContactDate ? "Please choose a date for your follow-up call." : "",
+        preferredContactTime: !formData.preferredContactTime ? "Please choose a time for your follow-up call." : "",
+      });
+      return;
+    }
+
+    setErrors({});
+
     setIsSubmitting(true);
 
     try {
