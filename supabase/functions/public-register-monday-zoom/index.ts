@@ -94,6 +94,7 @@ serve(async (req: Request) => {
         preferred_contact_date: request_follow_up ? preferred_contact_date : null,
         preferred_contact_time: request_follow_up ? preferred_contact_time : null,
         preferred_timezone: request_follow_up ? preferred_timezone : null,
+        language,
       })
       .select("id, name, email")
       .single();
@@ -113,6 +114,7 @@ serve(async (req: Request) => {
         email,
         registration_id: registration?.id || null,
         consentEmailList: consent_email_list,
+        language,
       }),
     }).catch((emailErr) => {
       console.error("Zoom registration email failed (registration saved):", emailErr);

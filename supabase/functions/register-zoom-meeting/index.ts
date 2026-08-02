@@ -145,6 +145,7 @@ serve(async (req: Request) => {
       preferred_contact_date: registration.requestFollowUp ? registration.preferredContactDate || null : null,
       preferred_contact_time: registration.requestFollowUp ? registration.preferredContactTime || null : null,
       preferred_timezone: registration.requestFollowUp ? registration.preferredTimezone || null : null,
+      language: registration.language,
     };
 
     const mutation = existingRow
@@ -181,6 +182,7 @@ serve(async (req: Request) => {
           email,
           registration_id: savedRow?.id ?? existingRow?.id ?? null,
           consentEmailList: registration.consentEmailList,
+          language: registration.language,
         }),
       });
 
