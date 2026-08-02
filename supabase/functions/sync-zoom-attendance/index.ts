@@ -27,13 +27,17 @@ async function getZoomAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-// Fetch participants from Zoom Reports API for a past meeting
-async function getZoomParticipants(meetingId: string, token: string): Promise<any[]> {
+// Fetch participants from Zoom Reports API for one past meeting/instance
+async function getZoomParticipants(meetingKey: string, token: string): Promise<any[]> {
   const allParticipants: any[] = [];
   let nextPageToken = "";
+  // UUIDs starting with "/" or containing "//" must be double URL-encoded
+  const key = meetingKey.startsWith("/") || meetingKey.includes("//")
+    ? encodeURIComponent(encodeURIComponent(meetingKey))
+    : encodeURIComponent(meetingKey);
 
   do {
-    const url = `https://api.zoom.us/v2/report/meetings/${meetingId}/participants?page_size=300${nextPageToken ? `&next_page_token=${nextPageToken}` : ""}`;
+    const url = `https://api.zoom.us/v2/report/meetings/${key}/participants?page_size=300${nextPageToken ? `&next_page_token=${encodeURIComponent(nextPageToken)}` : ""}`;
     const res = await fetch(url, {
       headers: { "Authorization": `Bearer ${token}` },
     });
@@ -42,7 +46,7 @@ async function getZoomParticipants(meetingId: string, token: string): Promise<an
       const errText = await res.text();
       // 3001 = meeting not found/not ended yet — not an error
       if (res.status === 404 || errText.includes("3001")) {
-        console.log("Meeting not found in reports (may not have ended yet)");
+        console.log(`Meeting ${meetingKey} not found in reports`);
         return [];
       }
       throw new Error(`Zoom Reports API failed: ${res.status} ${errText}`);
@@ -55,6 +59,42 @@ async function getZoomParticipants(meetingId: string, token: string): Promise<an
 
   return allParticipants;
 }
+
+// Recurring meetings: list past instances and keep those on the target Pacific date
+async function getInstanceUuidsForDate(meetingId: string, token: string, dateStr: string): Promise<string[]> {
+  const res = await fetch(`https://api.zoom.us/v2/past_meetings/${meetingId}/instances`, {
+    headers: { "Authorization": `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    console.log(`Could not list instances: ${res.status} ${await res.text()}`);
+    return [];
+  }
+  const data = await res.json();
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric", month: "2-digit", day: "2-digit",
+  });
+  return (data.meetings || [])
+    .filter((m: any) => m.start_time && fmt.format(new Date(m.start_time)) === dateStr)
+    .map((m: any) => m.uuid)
+    .filter(Boolean);
+}
+
+// Get participants for a meeting on a specific Pacific date, across all instances
+async function getParticipantsForDate(meetingId: string, token: string, dateStr: string): Promise<any[]> {
+  const uuids = await getInstanceUuidsForDate(meetingId, token, dateStr);
+  console.log(`Found ${uuids.length} instance(s) for ${dateStr}`);
+  if (uuids.length === 0) {
+    // Fall back to the meeting-id report (returns the most recent instance)
+    return await getZoomParticipants(meetingId, token);
+  }
+  const out: any[] = [];
+  for (const uuid of uuids) {
+    out.push(...(await getZoomParticipants(uuid, token)));
+  }
+  return out;
+}
+
 
 async function isAuthorized(
   req: Request,
@@ -151,7 +191,7 @@ serve(async (req: Request) => {
 
     // Get Zoom participants
     const token = await getZoomAccessToken();
-    const participants = await getZoomParticipants(meetingId, token);
+    const participants = await getParticipantsForDate(meetingId, token, meetingDate);
 
     if (participants.length === 0) {
       return new Response(JSON.stringify({ 
