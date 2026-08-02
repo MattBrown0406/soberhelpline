@@ -155,20 +155,6 @@ serve(async (req: Request) => {
       });
     }
 
-    // Get the meeting ID from site_settings
-    const { data: settings } = await adminSupabase
-      .from("site_settings")
-      .select("key, value")
-      .in("key", ["monday_zoom_meeting_id"]);
-
-    const meetingId = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value;
-    if (!meetingId) {
-      return new Response(JSON.stringify({ error: "No meeting ID configured" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
     // Determine the meeting date in Pacific time (last Monday, or today if Monday)
     let meetingDate: string;
     if (body.meeting_date) {
