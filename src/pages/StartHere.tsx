@@ -101,6 +101,7 @@ export default function StartHere() {
                       Call (458) 298-8008
                     </a>
                   </Button>
+                  <WhatsAppLink source="start_here_hero" variant="button" />
                 </div>
               </div>
             </div>
