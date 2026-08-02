@@ -11,7 +11,7 @@ const source = fs.readFileSync(blogPath, 'utf8');
 const chunks = source.split(/\n\s{4}slug:\s*"/).slice(1);
 
 const field = (chunk, name) => {
-  const match = chunk.match(new RegExp(`\\n\\s{4}${name}:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+  const match = chunk.match(new RegExp(`\\n\\s+${name}:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
   return match ? match[1].replace(/\\"/g, '"').replace(/\\\\/g, '\\') : '';
 };
 
