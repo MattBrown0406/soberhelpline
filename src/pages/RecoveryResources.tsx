@@ -121,6 +121,7 @@ const RecoveryResources = () => {
                   (458) 298-8008
                 </Button>
               </a>
+              <WhatsAppLink source="recovery_resources_bottom" variant="button" />
             </div>
           </div>
         </section>
