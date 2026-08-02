@@ -217,6 +217,7 @@ const MemberLearningPaths = React.lazy(() => import("./pages/MemberLearningPaths
 const MemberQandA = React.lazy(() => import("./pages/MemberQandA"));
 const MemberHome = React.lazy(() => import("./pages/MemberHome"));
 const MemberBilling = React.lazy(() => import("./pages/MemberBilling"));
+const CancelMembership = React.lazy(() => import("./pages/CancelMembership"));
 const RoadmapLanding = React.lazy(() => import("./pages/RoadmapLanding"));
 const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
 const RoadmapConfirmation = React.lazy(() => import("./pages/RoadmapConfirmation"));
@@ -502,6 +503,8 @@ const App = () => (
               <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
               <Route path="/member-billing" element={<MemberBilling />} />
               <Route path="/membership/billing" element={<MemberBilling />} />
+              <Route path="/cancel-membership" element={<CancelMembership />} />
+              <Route path="/cancel" element={<CancelMembership />} />
               <Route path="/roadmap" element={<RoadmapLanding />} />
               <Route path="/roadmap/assessment" element={<RoadmapAssessment />} />
               <Route path="/roadmap/confirmation" element={<RoadmapConfirmation />} />
