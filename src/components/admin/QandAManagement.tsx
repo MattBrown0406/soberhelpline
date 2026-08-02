@@ -10,7 +10,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, MessageCircle, EyeOff } from "lucide-react";
+import { Plus, Pencil, Trash2, MessageCircle, EyeOff, DownloadCloud } from "lucide-react";
 import { format } from "date-fns";
 
 const AVAILABLE_TAGS = [
