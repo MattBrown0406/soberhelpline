@@ -236,8 +236,15 @@ export function QandAManagement() {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-foreground leading-snug line-clamp-2">{entry.question}</p>
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{entry.answer}</p>
+                  {entry.answer.trim() ? (
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{entry.answer}</p>
+                  ) : (
+                    <p className="text-xs text-amber-600 mt-1 font-medium">Needs an answer</p>
+                  )}
                   <div className="flex flex-wrap items-center gap-2 mt-2">
+                    {entry.source_registration_id && (
+                      <Badge variant="outline" className="text-xs px-1.5 py-0">From registration</Badge>
+                    )}
                     {entry.tags.map(t => (
                       <Badge key={t} variant="secondary" className="text-xs px-1.5 py-0">{t}</Badge>
                     ))}
