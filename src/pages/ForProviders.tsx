@@ -2,6 +2,7 @@ import { Building2, Users, TrendingUp, Shield, CheckCircle, ArrowRight, Phone, S
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import SEOHead from "@/components/SEOHead";
 import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import logo from "@/assets/logo.png";
