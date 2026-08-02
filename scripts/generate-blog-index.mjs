@@ -15,6 +15,15 @@ const field = (chunk, name) => {
   return match ? match[1].replace(/\\"/g, '"').replace(/\\\\/g, '\\') : '';
 };
 
+// Normalize "April 16, 2026" and "2026-08-02" to ISO YYYY-MM-DD.
+const toIso = (raw) => {
+  if (!raw) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const parsed = new Date(raw);
+  if (Number.isNaN(parsed.getTime())) return '';
+  return parsed.toISOString().slice(0, 10);
+};
+
 const posts = chunks.map((chunk) => {
   const slug = chunk.slice(0, chunk.indexOf('"'));
   return {
@@ -22,12 +31,13 @@ const posts = chunks.map((chunk) => {
     title: field(chunk, 'title'),
     category: field(chunk, 'category'),
     author: field(chunk, 'author'),
-    date: field(chunk, 'date'),
+    date: toIso(field(chunk, 'date')),
     excerpt: field(chunk, 'excerpt'),
   };
 }).filter((p) => p.slug && p.title && p.date);
 
 posts.sort((a, b) => b.date.localeCompare(a.date));
+
 
 fs.writeFileSync(outPath, JSON.stringify({ generatedAt: new Date().toISOString(), posts }, null, 2));
 console.log(`Generated blog index with ${posts.length} posts -> ${path.relative(root, outPath)}`);
