@@ -10,7 +10,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, MessageCircle, EyeOff } from "lucide-react";
+import { Plus, Pencil, Trash2, MessageCircle, EyeOff, DownloadCloud } from "lucide-react";
 import { format } from "date-fns";
 
 const AVAILABLE_TAGS = [
@@ -27,6 +27,7 @@ interface QAEntry {
   meeting_date: string | null;
   is_published: boolean;
   created_at: string;
+  source_registration_id: string | null;
 }
 
 interface QAForm {
@@ -53,18 +54,75 @@ export function QandAManagement() {
   const [form, setForm] = useState<QAForm>(emptyForm);
   const [saving, setSaving] = useState(false);
 
+  const [importing, setImporting] = useState(false);
+
   const fetchEntries = async () => {
     const { data, error } = await supabase
       .from("meeting_qa_archive")
-      .select("id, question, answer, tags, meeting_date, is_published, created_at")
+      .select("id, question, answer, tags, meeting_date, is_published, created_at, source_registration_id")
       .order("created_at", { ascending: false });
 
     if (error) toast.error("Failed to load Q&As");
-    else setEntries(data || []);
+    else setEntries((data as QAEntry[]) || []);
     setLoading(false);
   };
 
   useEffect(() => { fetchEntries(); }, []);
+
+  const importFromRegistrations = async () => {
+    setImporting(true);
+    try {
+      const [regRes, existingRes] = await Promise.all([
+        supabase
+          .from("zoom_meeting_registrations")
+          .select("id, question, meeting_date")
+          .order("meeting_date", { ascending: false }),
+        supabase
+          .from("meeting_qa_archive")
+          .select("source_registration_id")
+          .not("source_registration_id", "is", null),
+      ]);
+
+      if (regRes.error || existingRes.error) throw regRes.error || existingRes.error;
+
+      const seen = new Set(
+        ((existingRes.data as { source_registration_id: string | null }[]) || [])
+          .map(r => r.source_registration_id)
+          .filter(Boolean) as string[]
+      );
+
+      const skip = new Set(["no question", "no question at the moment", "none", "n/a", "na", "support", "no questions"]);
+
+      const rows = (regRes.data || [])
+        .filter(r => {
+          const q = (r.question || "").trim();
+          return q.length > 12 && !skip.has(q.toLowerCase()) && !seen.has(r.id);
+        })
+        .map(r => ({
+          question: (r.question || "").trim(),
+          answer: "",
+          tags: [],
+          meeting_date: r.meeting_date,
+          is_published: false,
+          source_registration_id: r.id,
+        }));
+
+      if (rows.length === 0) {
+        toast.info("No new questions to import");
+        return;
+      }
+
+      const { error } = await supabase.from("meeting_qa_archive").insert(rows);
+      if (error) throw error;
+      toast.success(`Imported ${rows.length} question${rows.length === 1 ? "" : "s"} as unpublished drafts`);
+      fetchEntries();
+    } catch {
+      toast.error("Failed to import questions");
+    } finally {
+      setImporting(false);
+    }
+  };
+
 
   const openNew = () => {
     setEditingId(null);
@@ -92,8 +150,12 @@ export function QandAManagement() {
   };
 
   const handleSave = async () => {
-    if (!form.question.trim() || !form.answer.trim()) {
-      toast.error("Question and answer are required");
+    if (!form.question.trim()) {
+      toast.error("Question is required");
+      return;
+    }
+    if (form.is_published && !form.answer.trim()) {
+      toast.error("An answer is required before publishing");
       return;
     }
     setSaving(true);
@@ -126,6 +188,10 @@ export function QandAManagement() {
   };
 
   const togglePublished = async (entry: QAEntry) => {
+    if (!entry.is_published && !entry.answer.trim()) {
+      toast.error("Add an answer before publishing this question");
+      return;
+    }
     const { error } = await supabase
       .from("meeting_qa_archive")
       .update({ is_published: !entry.is_published })
@@ -136,15 +202,27 @@ export function QandAManagement() {
 
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading Q&amp;As...</div>;
 
+  const needsAnswer = entries.filter(e => !e.answer.trim()).length;
+
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{entries.length} Q&amp;A(s)</p>
-        <Button onClick={openNew} size="sm" className="gap-2">
-          <Plus className="h-4 w-4" />
-          Add Q&amp;A
-        </Button>
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <p className="text-sm text-muted-foreground">
+          {entries.length} Q&amp;A(s)
+          {needsAnswer > 0 && <span className="text-amber-600"> · {needsAnswer} awaiting an answer</span>}
+        </p>
+        <div className="flex gap-2">
+          <Button onClick={importFromRegistrations} size="sm" variant="outline" className="gap-2" disabled={importing}>
+            <DownloadCloud className="h-4 w-4" />
+            {importing ? "Importing…" : "Import from registrations"}
+          </Button>
+          <Button onClick={openNew} size="sm" className="gap-2">
+            <Plus className="h-4 w-4" />
+            Add Q&amp;A
+          </Button>
+        </div>
       </div>
+
 
       {entries.length === 0 ? (
         <div className="text-center py-10 text-muted-foreground">
@@ -158,8 +236,15 @@ export function QandAManagement() {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-foreground leading-snug line-clamp-2">{entry.question}</p>
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{entry.answer}</p>
+                  {entry.answer.trim() ? (
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{entry.answer}</p>
+                  ) : (
+                    <p className="text-xs text-amber-600 mt-1 font-medium">Needs an answer</p>
+                  )}
                   <div className="flex flex-wrap items-center gap-2 mt-2">
+                    {entry.source_registration_id && (
+                      <Badge variant="outline" className="text-xs px-1.5 py-0">From registration</Badge>
+                    )}
                     {entry.tags.map(t => (
                       <Badge key={t} variant="secondary" className="text-xs px-1.5 py-0">{t}</Badge>
                     ))}

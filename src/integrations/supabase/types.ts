@@ -1874,16 +1874,18 @@ export type Database = {
           is_published: boolean
           meeting_date: string | null
           question: string
+          source_registration_id: string | null
           tags: string[]
           updated_at: string
         }
         Insert: {
-          answer: string
+          answer?: string
           created_at?: string
           id?: string
           is_published?: boolean
           meeting_date?: string | null
           question: string
+          source_registration_id?: string | null
           tags?: string[]
           updated_at?: string
         }
@@ -1894,6 +1896,7 @@ export type Database = {
           is_published?: boolean
           meeting_date?: string | null
           question?: string
+          source_registration_id?: string | null
           tags?: string[]
           updated_at?: string
         }
