@@ -239,6 +239,34 @@
   background: rgba(96,212,194,.1);
 }
 
+.shl-button-whatsapp {
+  display: inline-flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: hsl(var(--whatsapp));
+  box-shadow: 0 15px 38px rgba(37, 211, 106, .25);
+  transition: transform .24s ease, box-shadow .24s ease, background .24s ease;
+}
+
+.shl-button-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 19px 46px rgba(37, 211, 106, .36);
+}
+
+.shl-button-whatsapp svg {
+  width: 19px;
+  height: 19px;
+}
+
 .shl-trust-line {
   display: flex;
   flex-wrap: wrap;
