@@ -56,13 +56,28 @@ async function getZoomParticipants(meetingId: string, token: string): Promise<an
   return allParticipants;
 }
 
-async function isAuthorized(req: Request, adminSupabase: ReturnType<typeof createClient>): Promise<boolean> {
-  // Path 1: shared cron secret
+async function isAuthorized(
+  req: Request,
+  adminSupabase: ReturnType<typeof createClient>,
+  body: any,
+): Promise<boolean> {
+  // Path 1: shared cron secret (header)
   const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
   const providedSecret = req.headers.get("x-automation-secret");
   if (expectedSecret && providedSecret && providedSecret === expectedSecret) {
     return true;
   }
+
+  // Path 1b: cron secret in body (pg_cron cannot read edge function env vars)
+  if (body?.cron_secret) {
+    const { data: row } = await adminSupabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "cron_secret")
+      .maybeSingle();
+    if (row?.value && row.value === body.cron_secret) return true;
+  }
+
 
   // Path 2: authenticated admin JWT
   const authHeader = req.headers.get("Authorization") ?? "";
