@@ -233,6 +233,16 @@ export default function MondayZoomRegistration() {
       return;
     }
 
+    if (formData.requestFollowUp && (!formData.preferredContactDate || !formData.preferredContactTime)) {
+      setErrors({
+        preferredContactDate: !formData.preferredContactDate ? "Please choose a date for your follow-up call." : "",
+        preferredContactTime: !formData.preferredContactTime ? "Please choose a time for your follow-up call." : "",
+      });
+      return;
+    }
+
+    setErrors({});
+
     setIsSubmitting(true);
 
     try {
@@ -626,12 +636,14 @@ export default function MondayZoomRegistration() {
                           <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                              <Label htmlFor="contactDate">Preferred Date</Label>
-                              <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} />
+                              <Label htmlFor="contactDate">Preferred Date *</Label>
+                              <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} className={errors.preferredContactDate ? "border-destructive" : ""} />
+                              {errors.preferredContactDate && <p className="text-sm text-destructive">{errors.preferredContactDate}</p>}
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="contactTime">Preferred Time</Label>
-                              <Input id="contactTime" type="time" value={formData.preferredContactTime} onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))} />
+                              <Label htmlFor="contactTime">Preferred Time *</Label>
+                              <Input id="contactTime" type="time" value={formData.preferredContactTime} onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))} className={errors.preferredContactTime ? "border-destructive" : ""} />
+                              {errors.preferredContactTime && <p className="text-sm text-destructive">{errors.preferredContactTime}</p>}
                             </div>
                           </div>
                           <div className="space-y-2">
