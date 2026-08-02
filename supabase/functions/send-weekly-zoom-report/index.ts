@@ -196,12 +196,16 @@ Deno.serve(async (req) => {
 
     const totalRegistrants = registrants.size;
     const totalAttendees = attendees.size;
+    const englishCount = languageCounts.get("en") || 0;
+    const spanishCount = languageCounts.get("es") || 0;
 
     const html = `<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;color:#333;line-height:1.6;">
 <h2 style="color:#111;margin-bottom:4px;">"The Family Squares" — Weekly Meeting Report</h2>
 <p style="margin-top:0;color:#666;">Meeting of ${escapeHtml(prettyDate(meetingDate))}</p>
 <div style="background:#f4f7fb;border-radius:8px;padding:16px;margin:16px 0;">
   <p style="margin:0;font-size:15px;"><strong>Total registrants:</strong> ${totalRegistrants}</p>
+  <p style="margin:4px 0 0;font-size:15px;"><strong>English registrants:</strong> ${englishCount}</p>
+  <p style="margin:4px 0 0;font-size:15px;"><strong>Spanish registrants:</strong> ${spanishCount}</p>
   <p style="margin:4px 0 0;font-size:15px;"><strong>Total attendees:</strong> ${totalAttendees}</p>
   <p style="margin:4px 0 0;font-size:15px;"><strong>Registered attendance rate:</strong> ${
     totalRegistrants ? Math.round((registeredAndAttended.length / totalRegistrants) * 100) : 0
