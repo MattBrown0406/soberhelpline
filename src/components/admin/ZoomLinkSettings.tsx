@@ -37,6 +37,7 @@ interface Registration {
   created_at: string;
   meeting_date: string;
   auto_register?: boolean | null;
+  language?: string | null;
 }
 
 function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[]) {
