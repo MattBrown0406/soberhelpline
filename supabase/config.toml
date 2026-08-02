@@ -138,3 +138,6 @@ verify_jwt = false
 
 [functions.deliver-app-payment-callback]
 verify_jwt = false
+
+[functions.sync-app-memberships]
+verify_jwt = false

@@ -38,6 +38,8 @@ import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagemen
 import { NmeFunnelReport } from "@/components/admin/NmeFunnelReport";
 import { RevenueCommandCenter } from "@/components/admin/RevenueCommandCenter";
 import { MeetingBlocklistManagement } from "@/components/admin/MeetingBlocklistManagement";
+import { AppMembershipSync } from "@/components/admin/AppMembershipSync";
+
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -409,7 +411,7 @@ const Admin = () => {
         </Card>
           </TabsContent>
 
-          <TabsContent value="family-members">
+          <TabsContent value="family-members" className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -421,7 +423,9 @@ const Admin = () => {
                 <FamilyMemberManagement />
               </CardContent>
             </Card>
+            <AppMembershipSync />
           </TabsContent>
+
 
 
           <TabsContent value="analytics">
