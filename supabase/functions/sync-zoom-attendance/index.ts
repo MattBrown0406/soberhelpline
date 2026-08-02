@@ -191,7 +191,7 @@ serve(async (req: Request) => {
 
     // Get Zoom participants
     const token = await getZoomAccessToken();
-    const participants = await getZoomParticipants(meetingId, token);
+    const participants = await getParticipantsForDate(meetingId, token, meetingDate);
 
     if (participants.length === 0) {
       return new Response(JSON.stringify({ 
