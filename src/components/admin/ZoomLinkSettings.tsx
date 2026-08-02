@@ -429,18 +429,22 @@ export function ZoomLinkSettings() {
               ) : (
                 (() => {
                   const { manual, auto } = splitByRegType(followUpsOnly);
-                  const renderRow = (r: Registration) => (
-                    <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <span className="font-medium text-foreground flex items-center gap-2">
-                        {r.name}
-                        {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
-                      </span>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                        <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
-                        <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+                  const renderRow = (r: Registration) => {
+                    const lang = r.language === "es" ? "ES" : "EN";
+                    return (
+                      <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <span className="font-medium text-foreground flex items-center gap-2">
+                          {r.name}
+                          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                          {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
+                        </span>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                          <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
+                          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+                        </div>
                       </div>
-                    </div>
-                  );
+                    );
+                  };
                   return (
                     <div className="space-y-4 pl-6">
                       <div className="space-y-2">
