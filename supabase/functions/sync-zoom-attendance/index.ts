@@ -172,6 +172,44 @@ serve(async (req: Request) => {
       meetingDate = base.toISOString().split("T")[0];
     }
 
+    // Resolve the meeting ID for THAT date. The Monday meeting ID rotates weekly,
+    // so prefer a historical snapshot before falling back to the current setting.
+    const datedKey = `monday_zoom_meeting_id_${meetingDate}`;
+    const { data: settings } = await adminSupabase
+      .from("site_settings")
+      .select("key, value")
+      .in("key", [datedKey, "monday_zoom_meeting_id"]);
+
+    const historical = settings?.find((s: any) => s.key === datedKey)?.value;
+    const current = settings?.find((s: any) => s.key === "monday_zoom_meeting_id")?.value;
+
+    // Third fallback: an attendance row already recorded for that date
+    let priorId: string | null = null;
+    if (!historical) {
+      const { data: priorRow } = await adminSupabase
+        .from("zoom_attendance")
+        .select("zoom_meeting_id")
+        .eq("meeting_date", meetingDate)
+        .not("zoom_meeting_id", "is", null)
+        .limit(1)
+        .maybeSingle();
+      priorId = (priorRow as any)?.zoom_meeting_id ?? null;
+    }
+
+    const meetingId = body.meeting_id || historical || priorId || current;
+    if (!meetingId) {
+      return new Response(JSON.stringify({ error: "No meeting ID configured" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Snapshot the ID for this date so later runs survive the weekly rotation
+    if (!historical) {
+      await adminSupabase
+        .from("site_settings")
+        .upsert({ key: datedKey, value: String(meetingId), is_public: false }, { onConflict: "key" });
+    }
 
     console.log(`Syncing attendance for meeting ${meetingId} on ${meetingDate}`);
 
