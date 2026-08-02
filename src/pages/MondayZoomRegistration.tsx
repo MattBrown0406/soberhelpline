@@ -250,6 +250,7 @@ export default function MondayZoomRegistration() {
           preferred_contact_date: formData.requestFollowUp ? formData.preferredContactDate || null : null,
           preferred_contact_time: formData.requestFollowUp ? formData.preferredContactTime || null : null,
           preferred_timezone: formData.requestFollowUp ? formData.preferredTimezone : null,
+          language: formData.language,
           // Lead scoring runs server-side from public-register-monday-zoom now;
           // pass attribution along instead of calling the score function directly.
           attribution: !isMemberQuestion ? getRegistrationAttribution() : null,
