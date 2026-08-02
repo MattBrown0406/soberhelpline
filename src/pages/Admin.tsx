@@ -38,6 +38,8 @@ import { LeadPipelineManagement } from "@/components/admin/LeadPipelineManagemen
 import { NmeFunnelReport } from "@/components/admin/NmeFunnelReport";
 import { RevenueCommandCenter } from "@/components/admin/RevenueCommandCenter";
 import { MeetingBlocklistManagement } from "@/components/admin/MeetingBlocklistManagement";
+import { AppMembershipSync } from "@/components/admin/AppMembershipSync";
+
 
 const Admin = () => {
   const navigate = useNavigate();
