@@ -281,7 +281,7 @@ Deno.serve(async (req) => {
       }
 
       if (appRow) {
-        await supabase
+        const { error: updErr } = await supabase
           .from("provider_subscriptions")
           .update({
             status: "active",
@@ -293,10 +293,13 @@ Deno.serve(async (req) => {
             updated_at: new Date().toISOString(),
           })
           .eq("id", appRow.id);
+        if (updErr) {
+          throw new Error(`membership update failed for ${email}: ${updErr.message}`);
+        }
         if (appRow.status === "active") summary.already_active++;
         else summary.granted++;
       } else {
-        await supabase.from("provider_subscriptions").insert({
+        const { error: insErr } = await supabase.from("provider_subscriptions").insert({
           user_id: userId,
           provider_submission_id: null,
           plan_type: "app",
@@ -306,6 +309,9 @@ Deno.serve(async (req) => {
           next_billing_date: ent.expires_at,
           app_grace_until: graceUntil,
         });
+        if (insErr) {
+          throw new Error(`membership insert failed for ${email}: ${insErr.message}`);
+        }
         summary.granted++;
       }
     }
