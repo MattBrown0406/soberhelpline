@@ -28,7 +28,8 @@ const decodeStringLiteral = (value = '') => value
   .replace(/\\u201d/g, '\u201d');
 
 const getStringField = (block, field) => {
-  const match = block.match(new RegExp(`${field}:\\s*"((?:\\\\.|[^"\\\\])*)"`));
+  const match = block.match(new RegExp(`${field}\\s*[:=]\\s*"((?:\\\\.|[^"\\\\])*)"`))
+    || block.match(new RegExp(`${field}\\s*[:=]\\s*'((?:\\\\.|[^'\\\\])*)'`));
   return match ? decodeStringLiteral(match[1]) : '';
 };
 

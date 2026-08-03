@@ -220,8 +220,8 @@ const SoberCoachesCompanions = () => {
   return (
     <>
       <SEOHead
-        title="Find a Sober Coach Near You | Sober Helpline"
-        description="Find a sober coach or sober companion by state or ZIP code. If relapse, treatment refusal, or family conflict is active, call before you hire the wrong support."
+        title="Find a Sober Coach Near You | Sober Coach Directory"
+        description="Search sober coaches and companions by state or ZIP. Compare recovery support, then call if relapse risk or treatment refusal makes the next step unclear."
         faqItems={[
           {
             question: "How do I find a sober coach?",
@@ -304,6 +304,20 @@ const SoberCoachesCompanions = () => {
               </Button>
             </Link>
           </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto mb-6 rounded-2xl border border-border bg-card p-5 md:p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Before you choose</p>
+          <h2 className="mt-2 text-2xl font-bold text-foreground">How do you choose a sober coach or companion?</h2>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            Ask each candidate who they typically support, whether services are in person or online, how often they are available, what happens after a relapse, and how they coordinate with treatment providers or a recovery plan. Confirm fees, scheduling, references, credentials, and the limits of the service directly with the provider before hiring.
+          </p>
+          <ul className="mt-4 grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
+            <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Sober coach:</strong> ongoing accountability, routines, recovery goals, and relapse-prevention support.</li>
+            <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Sober companion:</strong> more intensive in-person support during travel, transitions, or other high-risk periods.</li>
+            <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Online coaching:</strong> may fit when local options are limited and hands-on supervision is not needed.</li>
+            <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Family coaching first:</strong> choose this when the person refuses help or the family needs alignment before hiring recovery support.</li>
+          </ul>
         </section>
 
         <section className="max-w-4xl mx-auto mb-6">

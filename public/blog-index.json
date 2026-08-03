@@ -1,22 +1,6 @@
 {
-  "generatedAt": "2026-08-02T18:53:16.411Z",
+  "generatedAt": "2026-08-03T16:08:56.413Z",
   "posts": [
-    {
-      "slug": "what-to-say-when-loved-one-relapses",
-      "title": "What to Say When a Loved One Relapses: A Family Communication Guide",
-      "category": "Family Support",
-      "author": "Matt Brown",
-      "date": "April 16, 2026",
-      "excerpt": "You got the call—or you walked in and just knew. What you say in the hours after a relapse can either open a door or close one. Here's how to keep the conversation alive when it matters most."
-    },
-    {
-      "slug": "dopamine-and-addiction-brain-science-families",
-      "title": "The Role of Dopamine in Addiction: Why Your Loved One Can't Just Stop",
-      "category": "Understanding Addiction",
-      "author": "Matt Brown",
-      "date": "April 15, 2026",
-      "excerpt": "If you've ever watched someone you love choose drugs or alcohol over their family, their health, or their future — and wondered how that could possibly make sense — you're not alone. Understanding what dopamine and addiction do to the brain changes everything."
-    },
     {
       "slug": "luxury-rehab-vs-standard-rehab-cost-quality",
       "title": "Luxury Rehab vs Standard Rehab: Does a Higher Price Mean Better Treatment?",
@@ -448,6 +432,22 @@
       "author": "Matt Brown",
       "date": "2026-04-18",
       "excerpt": "Children are perceptive. They notice the tension, the hushed phone calls, the missed events. What they fill in when they don't have information is often worse than the truth."
+    },
+    {
+      "slug": "what-to-say-when-loved-one-relapses",
+      "title": "What to Say When a Loved One Relapses: A Family Communication Guide",
+      "category": "Family Support",
+      "author": "Matt Brown",
+      "date": "2026-04-16",
+      "excerpt": "You got the call—or you walked in and just knew. What you say in the hours after a relapse can either open a door or close one. Here's how to keep the conversation alive when it matters most."
+    },
+    {
+      "slug": "dopamine-and-addiction-brain-science-families",
+      "title": "The Role of Dopamine in Addiction: Why Your Loved One Can't Just Stop",
+      "category": "Understanding Addiction",
+      "author": "Matt Brown",
+      "date": "2026-04-15",
+      "excerpt": "If you've ever watched someone you love choose drugs or alcohol over their family, their health, or their future — and wondered how that could possibly make sense — you're not alone. Understanding what dopamine and addiction do to the brain changes everything."
     },
     {
       "slug": "addiction-triggers-and-cravings-family-guide",
