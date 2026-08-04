@@ -51,9 +51,9 @@ const funnelLanes = [
     icon: Calendar,
   },
   {
-    eyebrow: "Private guidance",
+    eyebrow: "Get immediate help, often same day",
     title: "Coaching and consults",
-    description: "A paid next step when the family needs a calm plan, direct feedback, or help deciding what to do this week.",
+    description: "When you can't wait until Monday, get a calm plan, direct feedback, or help deciding what to do this week.",
     to: "/family-consultation",
     cta: "See private help",
     icon: Phone,
@@ -543,9 +543,9 @@ const Index = () => {
                     <Phone className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="text-center md:text-left">
-                    <p className="text-xs md:text-sm font-medium text-white/80">Private help</p>
+                    <p className="text-xs md:text-sm font-medium text-white/80">Immediate help, often same day</p>
                     <h3 className="text-base md:text-lg font-bold">Family coaching when you need one-on-one guidance</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Private coaching is there when the group and membership are not enough. Emergency sessions start at $150.</p>
+                    <p className="text-xs md:text-sm text-white/70 mt-0.5">When the group and membership are not enough—or you can't wait until Monday—private coaching provides one-on-one guidance. Sessions start at $150.</p>
                   </div>
                 </div>
                 <div className="flex-shrink-0">
