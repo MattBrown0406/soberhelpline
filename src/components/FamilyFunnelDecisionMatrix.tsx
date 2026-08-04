@@ -21,8 +21,8 @@ const lanes = [
   },
   {
     icon: PhoneCall,
-    eyebrow: "Use this when Monday is too far away",
-    title: "Private coaching or consult",
+    eyebrow: "Get immediate help, often same day",
+    title: "When you can't wait until Monday",
     description: "Book a session when you need direct answers about boundaries, treatment options, relapse, money, housing, or what to say next.",
     cta: "Book private help",
     to: "/family-consultation",
