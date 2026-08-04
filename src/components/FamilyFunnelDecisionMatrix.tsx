@@ -49,7 +49,7 @@ export default function FamilyFunnelDecisionMatrix({ source, className = "" }: F
             Free support, private answers, or intervention help?
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-            Sober Helpline should keep the free meeting trustworthy while making the next paid or high-risk path obvious. Families can start gently, move faster, or go straight to Freedom Interventions when the situation has crossed the line.
+            Choose the level of support that fits what your family is facing today. Start with the free meeting, book a private session when you need answers sooner, or contact Freedom Interventions when risk is rising and treatment is being refused.
           </p>
         </div>
 

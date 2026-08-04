@@ -22,6 +22,7 @@ type ConversionEventName =
   | "family_answer_view"
   | "family_answer_click"
   | "family_answer_hub_click"
+  | "membership_trial_click"
   | "sober_helpline_app_store_click"
   | "whatsapp_click";
 

@@ -18,12 +18,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Phone, Check, Loader2, Tag, CheckCircle2, Heart, UserCircle, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
-import { User, Session } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 
 import { usePayPalSubscription } from "@/hooks/usePayPalSubscription";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import SEOHead from "@/components/SEOHead";
+import MembershipSalesPage from "@/components/MembershipSalesPage";
 
 const referralSources = [
   "Facebook",
@@ -115,11 +116,11 @@ const membershipPlans = {
 
 const membershipFeatures = {
   trial: [
-    'Access to 1 pillar of family education',
-    'Read-only forum access (view discussions)',
-    'Basic educational content',
-    '7 days to explore the platform',
-    'No payment required',
+    'Full family education library',
+    'Private family forum access',
+    'Recorded sessions and guided tools',
+    '$25 member discount on private coaching',
+    'No charge for the first 7 days',
   ],
   paid: [
     'Full access to all 4 pillars of family education',
@@ -140,7 +141,6 @@ export default function FamilyMembership() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [discountCode, setDiscountCode] = useState('');
   const [freeListingActivated, setFreeListingActivated] = useState(false);
@@ -155,31 +155,18 @@ export default function FamilyMembership() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
       }
     );
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      toast({
-        title: "Authentication required",
-        description: "Please log in or create an account to join.",
-        variant: "destructive",
-      });
-      navigate("/auth?redirect=/family-membership");
-    }
-  }, [user, isLoading, navigate, toast]);
 
   // Auto-redirect to PayPal when approval URL is received
   useEffect(() => {
@@ -291,11 +278,12 @@ export default function FamilyMembership() {
         }
       }
 
-      // Create the subscription
+      // The trial is a real PayPal subscription: $0 for seven days, then $14.99/month.
+      const isTrial = billingCycle === 'trial';
       const result = await createSubscription({
-        planType: billingCycle === 'trial' ? 'monthly' : billingCycle,
-        amount: selectedPlan.price,
-        discountCode: discountCode.trim() || undefined,
+        planType: isTrial ? 'monthly' : billingCycle,
+        amount: isTrial ? membershipPlans.monthly.price : selectedPlan.price,
+        discountCode: isTrial ? 'HELPLINE' : discountCode.trim() || undefined,
       });
       
       // Check if FREELIST code was used
@@ -319,6 +307,10 @@ export default function FamilyMembership() {
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
+  }
+
+  if (!user) {
+    return <MembershipSalesPage />;
   }
 
   // Show success state for free membership
@@ -656,7 +648,7 @@ export default function FamilyMembership() {
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
                             <span className="text-sm text-green-700 font-medium block">
-                              No payment required to start. Cancel anytime. Full access continues at $14.99/month after the trial.
+                              No charge today. PayPal bills $14.99/month after the seven-day trial unless you cancel first.
                             </span>
                           </div>
                         </div>
@@ -686,19 +678,21 @@ export default function FamilyMembership() {
                       ))}
                     </ul>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="discountCode" className="flex items-center gap-2">
-                        <Tag className="h-4 w-4" />
-                        Discount Code (optional)
-                      </Label>
-                      <Input
-                        id="discountCode"
-                        placeholder="Enter discount code"
-                        value={discountCode}
-                        onChange={(e) => setDiscountCode(e.target.value)}
-                        maxLength={50}
-                      />
-                    </div>
+                    {billingCycle !== 'trial' && (
+                      <div className="space-y-2">
+                        <Label htmlFor="discountCode" className="flex items-center gap-2">
+                          <Tag className="h-4 w-4" />
+                          Discount Code (optional)
+                        </Label>
+                        <Input
+                          id="discountCode"
+                          placeholder="Enter discount code"
+                          value={discountCode}
+                          onChange={(e) => setDiscountCode(e.target.value)}
+                          maxLength={50}
+                        />
+                      </div>
+                    )}
 
                     {paypalUrl ? (
                       <div className="w-full p-4 bg-muted rounded-lg text-center space-y-3">
@@ -724,12 +718,12 @@ export default function FamilyMembership() {
                             Setting things up...
                           </>
                         ) : (
-                          <>{billingCycle === 'trial' ? 'Start Free Trial' : 'Continue to PayPal'}</>
+                          <>{billingCycle === 'trial' ? 'Start Trial with PayPal' : 'Continue to PayPal'}</>
                         )}
                       </Button>
                     )}
                     <p className="text-sm text-muted-foreground text-center">
-                      Secure checkout through PayPal. Cancel anytime.
+                      Secure checkout through PayPal. The seven-day trial has no charge; recurring billing starts afterward unless you cancel.
                     </p>
                   </CardContent>
                 </Card>

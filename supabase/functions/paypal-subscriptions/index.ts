@@ -69,7 +69,7 @@ async function getPayPalAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-async function createPayPalProduct(accessToken: string): Promise<string> {
+async function createPayPalProduct(accessToken: string, isFamilyMembership: boolean): Promise<string> {
   const response = await fetch(`${PAYPAL_API_BASE}/v1/catalogs/products`, {
     method: 'POST',
     headers: {
@@ -77,8 +77,10 @@ async function createPayPalProduct(accessToken: string): Promise<string> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      name: 'Sober Helpline Provider Listing',
-      description: 'Monthly or annual listing fee for addiction recovery service providers',
+      name: isFamilyMembership ? 'Sober Helpline Family Membership' : 'Sober Helpline Provider Listing',
+      description: isFamilyMembership
+        ? 'Family education, community, guided tools, recordings, and member coaching discounts'
+        : 'Monthly or annual listing fee for addiction recovery service providers',
       type: 'SERVICE',
       category: 'SOFTWARE',
     }),
@@ -99,7 +101,8 @@ async function createPayPalPlan(
   productId: string, 
   planType: 'monthly' | 'annual',
   amount: string,
-  trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false }
+  trialConfig: { enabled: boolean; days?: number; months?: number } = { enabled: false },
+  isFamilyMembership = false,
 ): Promise<string> {
   const billingCycles = [];
 
@@ -169,8 +172,10 @@ async function createPayPalPlan(
     },
     body: JSON.stringify({
       product_id: productId,
-      name: `Provider Listing - ${planType === 'monthly' ? 'Monthly' : 'Annual'}${hasTrial ? trialDescription : ''}`,
-      description: `${planType === 'monthly' ? 'Monthly' : 'Annual'} subscription for provider listing`,
+      name: `${isFamilyMembership ? 'Family Membership' : 'Provider Listing'} - ${planType === 'monthly' ? 'Monthly' : 'Annual'}${hasTrial ? trialDescription : ''}`,
+      description: isFamilyMembership
+        ? `${planType === 'monthly' ? 'Monthly' : 'Annual'} Sober Helpline family support membership`
+        : `${planType === 'monthly' ? 'Monthly' : 'Annual'} subscription for provider listing`,
       billing_cycles: billingCycles,
       payment_preferences: {
         auto_bill_outstanding: true,
@@ -476,9 +481,17 @@ Deno.serve(async (req) => {
           trialConfig = { enabled: true, months: 1 };
         }
 
-        // Create product and plan with potentially discounted amount
-        const productId = await createPayPalProduct(accessToken);
-        const planId = await createPayPalPlan(accessToken, productId, planType, finalAmount.toFixed(2), trialConfig);
+        // Use family-facing PayPal labels when this is a family membership.
+        const isFamilyMembership = !providerSubmissionId;
+        const productId = await createPayPalProduct(accessToken, isFamilyMembership);
+        const planId = await createPayPalPlan(
+          accessToken,
+          productId,
+          planType,
+          finalAmount.toFixed(2),
+          trialConfig,
+          isFamilyMembership,
+        );
         
         // Create subscription
         const { subscriptionId, approvalUrl } = await createPayPalSubscription(
