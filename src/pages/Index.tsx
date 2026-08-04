@@ -520,7 +520,7 @@ const Index = () => {
                   <div className="text-center md:text-left">
                     <p className="text-xs md:text-sm font-medium text-white/80">Ongoing support</p>
                     <h3 className="text-base md:text-lg font-bold">Family Membership for steady support between crises</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, and member pricing on coaching.</p>
+                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, member pricing on coaching, and Essentials-level features in the Sober Helpline App.</p>
                   </div>
                 </div>
                 <div className="flex-shrink-0">
