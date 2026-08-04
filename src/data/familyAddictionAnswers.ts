@@ -96,7 +96,7 @@ export const familyAddictionAnswers: FamilyAddictionAnswer[] = [
     slug: "what-if-we-cannot-wait-until-monday",
     question: "What if our family cannot wait until Monday?",
     shortAnswer:
-      "If the situation cannot wait until Family Squares, book a private coaching session or call for guidance. Use free support for grounding, but use private help when timing, safety, or a specific decision is pressing.",
+      "Get immediate help, often the same day. If the situation cannot wait until Family Squares, book a private coaching session or call for guidance. Use free support for grounding, but use private help when timing, safety, or a specific decision is pressing.",
     category: "Private coaching",
     deeperAnswer: [
       "The free Monday meeting is a strong first step for many families, but it is not meant to replace urgent case-specific guidance. Some situations need privacy, speed, and a direct plan.",
