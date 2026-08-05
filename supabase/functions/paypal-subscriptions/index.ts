@@ -319,6 +319,9 @@ Deno.serve(async (req) => {
 
         // Apply discount if valid code provided
         let finalAmount = parseFloat(amount);
+        if (!Number.isFinite(finalAmount) || finalAmount <= 0) {
+          throw new Error('Invalid subscription amount');
+        }
         let appliedDiscount = null;
         let bypassPayment = false;
 
