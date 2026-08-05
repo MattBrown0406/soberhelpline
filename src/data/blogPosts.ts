@@ -11,6 +11,7 @@ import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-fam
 import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addiction-family.jpg";
 import familyMeetingAboutAddictionImg from "@/assets/blog-family-meeting-about-addiction-guide.jpg";
 import addictionDenialHowToRespondImg from "@/assets/blog-addiction-denial-how-to-respond-family.jpg";
+import dualDiagnosisTreatmentProgramImg from "@/assets/blog-dual-diagnosis-treatment-program-family-guide.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
