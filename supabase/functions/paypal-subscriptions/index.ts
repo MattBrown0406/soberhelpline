@@ -484,6 +484,13 @@ Deno.serve(async (req) => {
           trialConfig = { enabled: true, months: 1 };
         }
 
+        // PayPal rejects a REGULAR billing cycle priced at 0. If a discount
+        // reduced the recurring price to zero, stop before calling PayPal.
+        if (!Number.isFinite(finalAmount) || finalAmount < 0.01) {
+          console.error('Blocked $0 PayPal subscription', { planType, appliedDiscount });
+          throw new Error('This discount cannot be applied to a recurring subscription. Please contact support.');
+        }
+
         // Use family-facing PayPal labels when this is a family membership.
         const isFamilyMembership = !providerSubmissionId;
         const productId = await createPayPalProduct(accessToken, isFamilyMembership);
