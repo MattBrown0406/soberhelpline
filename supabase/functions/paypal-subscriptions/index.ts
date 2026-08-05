@@ -319,6 +319,9 @@ Deno.serve(async (req) => {
 
         // Apply discount if valid code provided
         let finalAmount = parseFloat(amount);
+        if (!Number.isFinite(finalAmount) || finalAmount <= 0) {
+          throw new Error('Invalid subscription amount');
+        }
         let appliedDiscount = null;
         let bypassPayment = false;
 
@@ -479,6 +482,13 @@ Deno.serve(async (req) => {
           trialConfig = { enabled: true, days: 7 };
         } else if (appliedDiscount === 'FREEMONTH') {
           trialConfig = { enabled: true, months: 1 };
+        }
+
+        // PayPal rejects a REGULAR billing cycle priced at 0. If a discount
+        // reduced the recurring price to zero, stop before calling PayPal.
+        if (!Number.isFinite(finalAmount) || finalAmount < 0.01) {
+          console.error('Blocked $0 PayPal subscription', { planType, appliedDiscount });
+          throw new Error('This discount cannot be applied to a recurring subscription. Please contact support.');
         }
 
         // Use family-facing PayPal labels when this is a family membership.
