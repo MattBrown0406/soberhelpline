@@ -11,6 +11,7 @@ import euphoricRecallFamilyImg from "@/assets/blog-euphoric-recall-addiction-fam
 import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addiction-family.jpg";
 import familyMeetingAboutAddictionImg from "@/assets/blog-family-meeting-about-addiction-guide.jpg";
 import addictionDenialHowToRespondImg from "@/assets/blog-addiction-denial-how-to-respond-family.jpg";
+import dualDiagnosisTreatmentProgramImg from "@/assets/blog-dual-diagnosis-treatment-program-family-guide.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
@@ -178,6 +179,112 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 153,
+    slug: "dual-diagnosis-treatment-program-family-guide",
+    seoTitle: "Dual Diagnosis Treatment Program: How to Find a Real One",
+    metaDescription: "Learn how to find a dual diagnosis treatment program that treats addiction and mental health together — key questions to ask and red flags to avoid.",
+    title: "How to Find a Dual Diagnosis Treatment Program That Actually Treats Both Conditions",
+    category: "Treatment Options",
+    author: "Matt Brown",
+    date: "2026-08-05",
+    image: dualDiagnosisTreatmentProgramImg,
+    keywords: ["dual diagnosis treatment program", "co-occurring disorder treatment", "integrated treatment addiction mental health", "questions to ask a dual diagnosis program", "dual diagnosis red flags"],
+    excerpt: "Nearly every treatment center advertises dual diagnosis care, but few truly deliver it. Here are the questions to ask, the red flags to watch for, and how families can support integrated treatment.",
+    content: `If your loved one struggles with both addiction and a mental health condition — depression, anxiety, bipolar disorder, PTSD, or something else — you've probably heard the term "dual diagnosis treatment program." You may have also noticed that nearly every treatment center's website claims to offer it. Here's the truth: a real dual diagnosis treatment program treats addiction and mental health at the same time, with equal seriousness, by clinicians qualified to do both. Many programs that advertise dual diagnosis care don't actually meet that bar.
+
+That gap matters. Roughly half of people with a substance use disorder also live with a co-occurring mental health condition. When only the addiction gets treated, the untreated depression or anxiety often pulls the person right back toward substances — because that's what they were using to cope with in the first place.
+
+The good news: you don't need a clinical degree to tell a genuine dual diagnosis program from a marketing claim. You need the right questions and the willingness to ask them. This guide gives you both.
+
+**What Is a Dual Diagnosis Treatment Program?**
+
+A dual diagnosis treatment program (sometimes called co-occurring disorder treatment or integrated treatment) addresses a substance use disorder and a mental health condition together, in the same place, by the same treatment team. It is not addiction treatment with a therapist available down the hall. Integration is the whole point.
+
+Why does this matter so much? Because the two conditions feed each other. Someone with untreated anxiety may drink to quiet their mind. Someone with bipolar disorder may use stimulants during depressive episodes. If a program gets your loved one sober but ignores the underlying condition, they leave treatment with the same pain and fewer coping tools — a setup for relapse.
+
+In a genuine dual diagnosis program, you should expect:
+
+- A full psychiatric evaluation at admission, not just an addiction assessment, so both conditions are diagnosed accurately.
+- A psychiatrist or psychiatric nurse practitioner on the treatment team who can manage medications throughout the stay — not just an on-call consultant.
+- One integrated treatment plan that addresses both conditions, with therapists trained in evidence-based approaches for each.
+
+**Why Do So Many Programs Claim Dual Diagnosis Care Without Delivering It?**
+
+The short answer is marketing. "Dual diagnosis" became a search term families use, so treatment centers added it to their websites — whether or not their clinical staffing supports it. There's no single enforcement body checking that a program's advertising matches its actual capabilities.
+
+In practice, programs fall along a spectrum. On one end are addiction-focused programs where a consulting psychiatrist visits weekly and mental health is treated as a side issue. On the other end are truly integrated programs with psychiatric staff embedded in daily treatment. Both may use the same two words on their homepage.
+
+This is why you can't rely on the website. The difference shows up in staffing, assessment practices, and how the program handles medications — all things you can ask about directly. A quality program will answer these questions gladly. Vague or defensive answers are themselves an answer.
+
+**What Questions Should You Ask a Dual Diagnosis Treatment Program?**
+
+The fastest way to evaluate a dual diagnosis treatment program is to call admissions and ask specific, concrete questions. Direct answers signal a real program; deflection signals a marketing claim. Here are the questions that matter most:
+
+- **"Who performs the psychiatric evaluation at admission, and what are their credentials?"** You want a psychiatrist, psychiatric nurse practitioner, or psychologist — and an evaluation within the first few days, not week three.
+- **"How often will my loved one see a psychiatric provider during treatment?"** Weekly or more is a good sign. "As needed" or "our consultant comes monthly" is not.
+- **"Will you continue or adjust their current psychiatric medications?"** Some programs still pressure clients to stop antidepressants or mood stabilizers. That's an immediate red flag — walk away.
+- **"What specific therapies do you use for their mental health condition?"** Listen for evidence-based answers: cognitive behavioral therapy (CBT), dialectical behavior therapy (DBT), or EMDR for trauma — not just "group and individual therapy."
+- **"What percentage of your clients have co-occurring disorders?"** Real dual diagnosis programs usually say 50 percent or more, and they know the number because they track it.
+
+Take notes during these calls, and call more than one program. Comparing answers side by side makes the differences obvious quickly. Knowing the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment] also helps you judge whether the setting matches your loved one's needs.
+
+**What Are the Red Flags in Dual Diagnosis Treatment?**
+
+Some warning signs should end the conversation, no matter how impressive the website or how kind the admissions person sounds. The biggest ones involve medication policies, staffing, and pressure tactics.
+
+- **The program discourages psychiatric medication.** Any program that frames antidepressants or mood stabilizers as "just another crutch" is operating on ideology, not medicine.
+- **No psychiatric provider on staff.** If mental health care means a referral to an outside provider after discharge, both conditions aren't being treated together.
+- **One-size-fits-all programming.** If every client follows the identical schedule regardless of diagnosis, integrated individualized treatment isn't happening.
+- **Guarantees and pressure.** Promises of a "cure," claims of implausibly high success rates, or pressure to wire a deposit today are sales tactics, not clinical care.
+- **They can't explain how the two treatment tracks connect.** Ask how the addiction and mental health teams coordinate. If there's no clear answer, there's no real coordination.
+
+One more practical check: [LINK:verify a rehab's accreditation and licensing:/blog/verify-rehab-accreditation-licensing] through The Joint Commission or CARF, and confirm its state license. Accreditation doesn't guarantee quality dual diagnosis care, but its absence tells you something.
+
+**How Can Families Support Dual Diagnosis Treatment?**
+
+Your role doesn't end when your loved one is admitted. Families who understand both conditions — and stay engaged in treatment — meaningfully improve the odds of lasting recovery.
+
+Start by participating in whatever family programming the center offers, whether that's family therapy sessions, a family education weekend, or regular calls with the treatment team. Ask the clinical team to help you understand your loved one's specific mental health diagnosis, not just the addiction. The behaviors that hurt you — the lying, the withdrawal, the volatility — often have roots in both conditions, and understanding that changes how you respond.
+
+Before discharge, make sure the aftercare plan covers both conditions: a psychiatric provider for medication management, a therapist experienced with co-occurring disorders, and recovery support like 12-step meetings or SMART Recovery. An aftercare plan that only addresses the addiction is half a plan.
+
+And keep tending to your own support. Loving someone with a dual diagnosis is a long road, and you'll walk it better with education, community, and [LINK:family coaching and support:/family-coaching] in your corner than you will alone.
+
+**The Right Program Is Worth the Extra Phone Calls**
+
+Finding a genuine dual diagnosis treatment program takes more effort than picking the first center that ranks well on Google. But that effort — a handful of phone calls, a list of pointed questions, a willingness to walk away from red flags — is one of the most valuable things you can do for your loved one right now. Treating half the problem produces half a recovery. When both conditions are treated together, your loved one gets a real chance at the stable, connected life you've been hoping for. You don't have to figure this out alone, and you're closer to a good decision than you think.
+
+**Frequently Asked Questions About Dual Diagnosis Treatment**
+
+**What does dual diagnosis mean in addiction treatment?**
+
+Dual diagnosis means a person has both a substance use disorder and a mental health condition — such as depression, anxiety, bipolar disorder, or PTSD — at the same time. A dual diagnosis treatment program treats both conditions together with one integrated plan, because treating only one usually leads to relapse of the other.
+
+**How common are co-occurring disorders?**
+
+Very common. Research consistently shows that roughly half of people with a substance use disorder also experience a mental health condition, and vice versa. That's why asking a treatment program how it handles co-occurring disorders is relevant for almost every family, not just those with a formal diagnosis in hand.
+
+**Can my loved one stay on antidepressants during rehab?**
+
+In a quality program, yes. Psychiatric medications like antidepressants and mood stabilizers are a standard part of dual diagnosis care, managed by the program's psychiatric provider. Any program that pressures clients to stop prescribed psychiatric medication is a serious red flag.
+
+**Is dual diagnosis treatment covered by insurance?**
+
+Generally, yes. Most insurance plans cover treatment for both substance use and mental health conditions, and federal parity law requires most plans to cover these at levels comparable to medical care. Have the program run a verification of benefits, and confirm the details with your insurer directly.
+
+**What's the difference between dual diagnosis and integrated treatment?**
+
+They describe the same goal from different angles. Dual diagnosis refers to the person having two conditions; integrated treatment refers to the approach of treating both together with one coordinated team. When a program says it offers dual diagnosis care, your job is to confirm the treatment is actually integrated.
+
+**What if we don't know whether there's a mental health condition underneath the addiction?**
+
+That's normal — many conditions go undiagnosed until someone gets sober and a professional can evaluate them clearly. Choose a program that performs a full psychiatric evaluation at admission and can treat whatever it finds. You don't need a diagnosis before treatment; you need a program capable of making one.
+
+**Keep Learning, Keep Moving Forward**
+
+Sorting out co-occurring conditions is one of the harder decisions families face, and you don't have to make it alone. Sober Helpline offers [LINK:family coaching:/family-coaching], ongoing [LINK:family education:/family-education], and a membership community built for families exactly where you are right now. Explore our resources, join a [LINK:free Monday night Family Squares call:/monday-zoom-registration], or connect with a coach who can help you think through your specific situation. Start free — we're here when you're ready.`,
+  },
   {
     id: 152,
     slug: "local-rehab-vs-out-of-state-treatment",
