@@ -181,6 +181,110 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 154,
+    slug: "verify-insurance-benefits-for-rehab-guide",
+    seoTitle: "How to Verify Insurance Benefits for Rehab Before Treatment",
+    metaDescription: "Learn how to verify insurance benefits for rehab before treatment starts. Step-by-step guide to coverage checks, prior authorization, and the questions to ask.",
+    title: "How to Verify Insurance Benefits for Rehab Before Treatment Starts",
+    category: "Treatment Options",
+    author: "Matt Brown",
+    date: "2026-08-06",
+    image: verifyInsuranceBenefitsRehabImg,
+    keywords: ["verify insurance benefits for rehab", "verification of benefits rehab", "prior authorization addiction treatment", "insurance questions to ask before rehab", "does insurance cover rehab"],
+    excerpt: "Verifying benefits before admission takes about thirty minutes and removes most of the financial guesswork. Here is the exact process, the questions to ask, and how to avoid a surprise bill mid-treatment.",
+    content: `If your family has decided it's time for treatment, you've already done something hard. The next step — figuring out what your insurance will actually pay for — shouldn't be the thing that stalls the momentum. Yet for many families, it is. Coverage language is confusing, phone trees are long, and the fear of a surprise bill can make people freeze right when they need to move.
+
+Here's the good news: when you verify insurance benefits for rehab before admission, you take most of the financial guesswork off the table. Verification is a specific, learnable process — usually one or two phone calls and thirty minutes of note-taking. This guide walks you through how to do it, what to ask, and how to avoid the most expensive mistakes.
+
+**What Does It Mean to Verify Insurance Benefits for Rehab?**
+
+Verifying benefits means confirming — before treatment begins — what your plan covers for addiction treatment, at which facilities and levels of care, and what you'll owe out of pocket. It's the difference between hoping treatment is covered and knowing what it will cost.
+
+There are two ways this happens. Most treatment centers will run a free verification of benefits (a "VOB") when you call their admissions line — their team contacts your insurer directly. You can also do it yourself by calling the member services number on the back of the insurance card. I recommend both: the center's VOB tells you what they expect to be paid, and your own call tells you what the insurer says you'll owe. When those answers match, you can move forward with confidence.
+
+**Why Should You Verify Benefits Before Admission?**
+
+Because the most painful financial surprises in treatment happen after admission, not before. A family assumes residential care is covered, and three weeks in, a denial letter arrives because prior authorization was never obtained or the facility was out of network. Now the family faces a large bill and an impossible choice mid-treatment.
+
+Verifying ahead of time protects you in three ways:
+
+- It confirms the facility's network status, which is usually the single biggest factor in what you'll pay. Understanding [LINK:in-network vs. out-of-network rehab:/blog/in-network-vs-out-of-network-rehab-family-guide] before you call makes that answer far more useful.
+- It surfaces requirements like prior authorization or medical necessity reviews before they can trigger a denial.
+- It gives you real numbers — deductible, copays, out-of-pocket maximum — so you can plan instead of panic.
+
+One more reason: federal parity law requires most plans to cover addiction treatment comparably to other medical conditions, so coverage is likely better than you fear. But "covered" always comes with conditions — verification is how you learn them.
+
+**What Questions Should You Ask When You Call Your Insurance Company?**
+
+Call the member services or behavioral health number on the back of the insurance card, then work through this list. Write down every answer, along with the date, time, and the representative's name.
+
+*Coverage and network questions*
+
+- Does my plan cover substance use disorder treatment, and at which levels of care — detox, residential, partial hospitalization (PHP), intensive outpatient (IOP), and outpatient?
+- Is [facility name] in network with my plan? If not, do I have out-of-network benefits, and what do they pay?
+- Are there limits on the number of covered days or sessions per year?
+
+*Cost questions*
+
+- What is my deductible, how much of it have I met this year, and does it apply to this treatment?
+- What is my copay or coinsurance for each level of care?
+- What is my out-of-pocket maximum, and how close am I to reaching it?
+
+*Process questions*
+
+- Is prior authorization required before admission? Who requests it — the facility or me?
+- How are continued stays reviewed, and how often?
+- If a claim is denied, what is the appeals process and the deadline to file?
+
+Ask for a reference number for the call before you hang up. If a dispute ever arises, that call record — with the reference number, date, and representative's name — becomes one of your strongest tools.
+
+**How Does Prior Authorization Work for Addiction Treatment?**
+
+Prior authorization (sometimes called precertification) is the insurer's approval, granted before treatment starts, agreeing that the care is medically necessary. Many plans require it for detox and residential treatment, and skipping it is one of the most common reasons claims get denied even when the benefit itself exists.
+
+In practice, the treatment center's admissions team usually handles the authorization request. They assess your loved one, submit clinical information to the insurer, and the insurer approves an initial number of days — often just a handful at first. The facility then runs "concurrent reviews," updating the insurer every few days to justify continued care. This is normal, and it happens in the background. It also helps to know [LINK:how insurance determines medical necessity:/blog/how-insurance-determines-medical-necessity-addiction-treatment] so the reviews make sense as they happen. Your job is simpler: confirm before admission that authorization was approved, and ask the facility to tell you immediately if the insurer ever stops authorizing days — you want to hear it the day it happens, not from a bill a month later.
+
+**What Should You Do With the Information Once You Have It?**
+
+Turn your notes into a simple, one-page picture of the money side of treatment. It should answer four questions: What levels of care are covered? Is the facility in network? What will we owe out of pocket, worst case? And what has to happen — authorization, referrals, paperwork — before admission day?
+
+If the numbers are workable, move forward. If they're frightening, don't stop — ask different questions. Ask the facility about payment plans or a comparable in-network program, and look at [LINK:how to pay for rehab when insurance isn't enough:/blog/how-to-pay-for-rehab-when-insurance-isnt-enough]. Ask the insurer whether a "single case agreement" is possible if no in-network facility meets your loved one's needs. Families have more options than they realize; they just have to ask.
+
+And a word of encouragement from someone who has sat with hundreds of families at this crossroads: the financial piece feels enormous, but it is solvable. The willingness your loved one is showing is the rare and precious part. The paperwork is just paperwork.
+
+**Frequently Asked Questions**
+
+**How long does it take to verify insurance benefits for rehab?**
+
+A treatment center's admissions team can usually complete a verification of benefits within a few hours, often the same day you call. Doing your own verification call to the insurer typically takes 30 to 45 minutes.
+
+**Will calling my insurance company alert my employer that my loved one needs treatment?**
+
+No. Benefit inquiries are confidential health information protected by federal privacy law. Your employer receives no notification that you called or what you asked about.
+
+**What if the treatment center says I'm covered but insurance later denies the claim?**
+
+This is why you document everything — call dates, reference numbers, and representative names. If a properly authorized claim is denied, you have the right to appeal, and your documentation strengthens that appeal significantly.
+
+**Does insurance cover the whole cost of rehab?**
+
+Rarely all of it. Most families pay something — a deductible, copays, or coinsurance — up to their plan's out-of-pocket maximum. The out-of-pocket maximum is your worst-case number for in-network care, which is why confirming network status matters so much.
+
+**Do I need a referral from a doctor before rehab is covered?**
+
+It depends on your plan type. Many PPO plans allow you to go directly to a treatment provider, while some HMO plans require a referral from a primary care physician. This is one of the specific questions to ask during your verification call.
+
+**Can I verify benefits without my loved one knowing?**
+
+If your loved one is on your policy, you can generally ask about benefits, costs, and network status without their involvement. Admission itself will require their participation if they're an adult. Verifying early simply means you're ready the moment they say yes.
+
+**You Don't Have to Figure This Out Alone**
+
+Verifying insurance benefits feels overwhelming until you've done it — then you realize it was a checklist all along. Make the calls, write everything down, and let the admissions team do the heavy lifting they do every day. Every answer you gather turns fear into a plan.
+
+If you'd like help thinking through treatment options, insurance conversations, or how to support your loved one through this next chapter, that's exactly what Sober Helpline is here for. Explore our [LINK:family education resources:/family-education], join a [LINK:free Monday night Family Squares call:/monday-zoom-registration], or book [LINK:family coaching:/family-coaching] with someone who has walked this road. You bring the willingness — we'll help you with the map.`,
+  },
+  {
     id: 153,
     slug: "dual-diagnosis-treatment-program-family-guide",
     seoTitle: "Dual Diagnosis Treatment Program: How to Find a Real One",
