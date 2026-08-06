@@ -136,6 +136,20 @@ const Testimonials = () => {
         </section>
 
         <div className="container mx-auto px-4 py-12 max-w-4xl">
+          {/* Open form CTA when form is collapsed */}
+          {!showForm && (
+            <div className="text-center mb-12">
+              <h2 className="text-2xl font-bold text-foreground mb-3">Share Your Family's Experience</h2>
+              <p className="text-muted-foreground mb-4 max-w-xl mx-auto">
+                Your story helps other families know they're not alone. Tell us how coaching, The Family Squares, or Sober Helpline has made a difference for you.
+              </p>
+              <Button onClick={() => setShowForm(true)} className="gap-2">
+                <Send className="w-4 h-4" />
+                Write a Testimonial
+              </Button>
+            </div>
+          )}
+
           {/* Post-Zoom Banner with Membership CTA */}
           {fromZoom && (
             <div className="bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 border border-logo-blue/20 rounded-xl p-6 mb-8 text-center">
