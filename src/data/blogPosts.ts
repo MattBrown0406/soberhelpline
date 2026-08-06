@@ -12,6 +12,7 @@ import selfMedicationAddictionFamilyImg from "@/assets/blog-self-medication-addi
 import familyMeetingAboutAddictionImg from "@/assets/blog-family-meeting-about-addiction-guide.jpg";
 import addictionDenialHowToRespondImg from "@/assets/blog-addiction-denial-how-to-respond-family.jpg";
 import dualDiagnosisTreatmentProgramImg from "@/assets/blog-dual-diagnosis-treatment-program-family-guide.jpg";
+import verifyInsuranceBenefitsRehabImg from "@/assets/blog-verify-insurance-benefits-for-rehab-guide.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
