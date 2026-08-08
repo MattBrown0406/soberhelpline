@@ -46,7 +46,7 @@ async function getZoomParticipants(meetingKey: string, token: string): Promise<a
       const errText = await res.text();
       // 3001 = meeting not found/not ended yet — not an error
       if (res.status === 404 || errText.includes("3001")) {
-        console.log(`Meeting ${meetingKey} not found in reports`);
+        console.log(`Meeting ${meetingKey} not found in reports [${res.status}]: ${errText}`);
         return [];
       }
       throw new Error(`Zoom Reports API failed: ${res.status} ${errText}`);
