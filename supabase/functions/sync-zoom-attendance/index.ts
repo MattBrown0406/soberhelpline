@@ -80,20 +80,60 @@ async function getInstanceUuidsForDate(meetingId: string, token: string, dateStr
     .filter(Boolean);
 }
 
+// Last-resort: scan the account's meeting report for that Pacific date and
+// return the UUIDs of every meeting instance that started on it. This survives
+// the weekly meeting-ID rotation and deleted meetings.
+async function getReportUuidsForDate(token: string, dateStr: string): Promise<string[]> {
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric", month: "2-digit", day: "2-digit",
+  });
+  // Widen by a day on each side so the UTC-based `from`/`to` window covers Pacific.
+  const d = new Date(`${dateStr}T12:00:00Z`);
+  const from = new Date(d.getTime() - 86400000).toISOString().split("T")[0];
+  const to = new Date(d.getTime() + 86400000).toISOString().split("T")[0];
+
+  const out: string[] = [];
+  let nextPageToken = "";
+  do {
+    const url = `https://api.zoom.us/v2/report/users/me/meetings?from=${from}&to=${to}&page_size=300&type=past${nextPageToken ? `&next_page_token=${encodeURIComponent(nextPageToken)}` : ""}`;
+    const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` } });
+    if (!res.ok) {
+      console.log(`Report meetings lookup failed: ${res.status} ${await res.text()}`);
+      return out;
+    }
+    const data = await res.json();
+    for (const m of (data.meetings || [])) {
+      if (m.start_time && fmt.format(new Date(m.start_time)) === dateStr && m.uuid) {
+        out.push(m.uuid);
+      }
+    }
+    nextPageToken = data.next_page_token || "";
+  } while (nextPageToken);
+  return out;
+}
+
 // Get participants for a meeting on a specific Pacific date, across all instances
 async function getParticipantsForDate(meetingId: string, token: string, dateStr: string): Promise<any[]> {
-  const uuids = await getInstanceUuidsForDate(meetingId, token, dateStr);
+  let uuids = await getInstanceUuidsForDate(meetingId, token, dateStr);
   console.log(`Found ${uuids.length} instance(s) for ${dateStr}`);
+
   if (uuids.length === 0) {
     // Fall back to the meeting-id report (returns the most recent instance)
-    return await getZoomParticipants(meetingId, token);
+    const direct = await getZoomParticipants(meetingId, token);
+    if (direct.length > 0) return direct;
+
+    uuids = await getReportUuidsForDate(token, dateStr);
+    console.log(`Report scan found ${uuids.length} meeting instance(s) on ${dateStr}`);
   }
+
   const out: any[] = [];
   for (const uuid of uuids) {
     out.push(...(await getZoomParticipants(uuid, token)));
   }
   return out;
 }
+
 
 
 async function isAuthorized(
