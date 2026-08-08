@@ -316,9 +316,13 @@ serve(async (req: Request) => {
       .select("participant_name, participant_email, join_time")
       .eq("meeting_date", meetingDate);
 
+const normTime = (t: any) => {
+      const d = new Date(t || "");
+      return isNaN(d.getTime()) ? String(t || "") : d.toISOString();
+    };
     const existingSet = new Set(
-      (existingAttendance || []).map((a: any) => 
-        `${(a.participant_email || a.participant_name || "").toLowerCase()}|${a.join_time}`
+      (existingAttendance || []).map((a: any) =>
+        `${(a.participant_email || a.participant_name || "").toLowerCase()}|${normTime(a.join_time)}`
       )
     );
 
@@ -335,11 +339,12 @@ serve(async (req: Request) => {
       const joinTime = p.join_time || new Date().toISOString();
 
       // Skip if already synced
-      const dedupeKey = `${pEmail || pName.toLowerCase()}|${joinTime}`;
+      const dedupeKey = `${pEmail || pName.toLowerCase()}|${normTime(joinTime)}`;
       if (existingSet.has(dedupeKey)) {
         skipped++;
         continue;
       }
+      existingSet.add(dedupeKey);
 
       // Try to match to a registration
       const matchedReg = regByEmail.get(pEmail) || regByName.get(pName.toLowerCase());
