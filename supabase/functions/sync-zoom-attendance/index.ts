@@ -339,11 +339,12 @@ const normTime = (t: any) => {
       const joinTime = p.join_time || new Date().toISOString();
 
       // Skip if already synced
-      const dedupeKey = `${pEmail || pName.toLowerCase()}|${joinTime}`;
+      const dedupeKey = `${pEmail || pName.toLowerCase()}|${normTime(joinTime)}`;
       if (existingSet.has(dedupeKey)) {
         skipped++;
         continue;
       }
+      existingSet.add(dedupeKey);
 
       // Try to match to a registration
       const matchedReg = regByEmail.get(pEmail) || regByName.get(pName.toLowerCase());
