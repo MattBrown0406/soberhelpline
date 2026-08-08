@@ -83,6 +83,23 @@ async function getInstanceUuidsForDate(meetingId: string, token: string, dateStr
 // Last-resort: scan the account's meeting report for that Pacific date and
 // return the UUIDs of every meeting instance that started on it. This survives
 // the weekly meeting-ID rotation and deleted meetings.
+async function listAccountUserIds(token: string): Promise<string[]> {
+  const ids: string[] = [];
+  let nextPageToken = "";
+  do {
+    const url = `https://api.zoom.us/v2/users?status=active&page_size=300${nextPageToken ? `&next_page_token=${encodeURIComponent(nextPageToken)}` : ""}`;
+    const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` } });
+    if (!res.ok) {
+      console.log(`User list lookup failed: ${res.status} ${await res.text()}`);
+      return ids;
+    }
+    const data = await res.json();
+    for (const u of (data.users || [])) if (u.id) ids.push(u.id);
+    nextPageToken = data.next_page_token || "";
+  } while (nextPageToken);
+  return ids;
+}
+
 async function getReportUuidsForDate(token: string, dateStr: string): Promise<string[]> {
   const fmt = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Los_Angeles",
@@ -93,25 +110,32 @@ async function getReportUuidsForDate(token: string, dateStr: string): Promise<st
   const from = new Date(d.getTime() - 86400000).toISOString().split("T")[0];
   const to = new Date(d.getTime() + 86400000).toISOString().split("T")[0];
 
+  // Server-to-server tokens have no "me" context — enumerate real account users.
+  const userIds = await listAccountUserIds(token);
+  console.log(`Scanning reports for ${userIds.length} account user(s)`);
+
   const out: string[] = [];
-  let nextPageToken = "";
-  do {
-    const url = `https://api.zoom.us/v2/report/users/me/meetings?from=${from}&to=${to}&page_size=300&type=past${nextPageToken ? `&next_page_token=${encodeURIComponent(nextPageToken)}` : ""}`;
-    const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` } });
-    if (!res.ok) {
-      console.log(`Report meetings lookup failed: ${res.status} ${await res.text()}`);
-      return out;
-    }
-    const data = await res.json();
-    for (const m of (data.meetings || [])) {
-      if (m.start_time && fmt.format(new Date(m.start_time)) === dateStr && m.uuid) {
-        out.push(m.uuid);
+  for (const userId of userIds) {
+    let nextPageToken = "";
+    do {
+      const url = `https://api.zoom.us/v2/report/users/${encodeURIComponent(userId)}/meetings?from=${from}&to=${to}&page_size=300&type=past${nextPageToken ? `&next_page_token=${encodeURIComponent(nextPageToken)}` : ""}`;
+      const res = await fetch(url, { headers: { "Authorization": `Bearer ${token}` } });
+      if (!res.ok) {
+        console.log(`Report meetings lookup failed for ${userId}: ${res.status} ${await res.text()}`);
+        break;
       }
-    }
-    nextPageToken = data.next_page_token || "";
-  } while (nextPageToken);
+      const data = await res.json();
+      for (const m of (data.meetings || [])) {
+        if (m.start_time && fmt.format(new Date(m.start_time)) === dateStr && m.uuid) {
+          out.push(m.uuid);
+        }
+      }
+      nextPageToken = data.next_page_token || "";
+    } while (nextPageToken);
+  }
   return out;
 }
+
 
 // Get participants for a meeting on a specific Pacific date, across all instances
 async function getParticipantsForDate(meetingId: string, token: string, dateStr: string): Promise<any[]> {
