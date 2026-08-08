@@ -193,17 +193,15 @@ export const blogPosts: any[] = [
     image: mindfulnessOrientedRecoveryImg,
     keywords: ["Mindfulness-Oriented Recovery Enhancement", "MORE addiction recovery", "mindfulness for addiction recovery", "mindfulness of craving", "savoring natural rewards", "Eric Garland MORE"],
     excerpt: "MORE is a structured recovery approach that combines mindfulness, cognitive reappraisal, and the deliberate savoring of healthy rewards. Here is what its practices actually involve and who developed them.",
-    content: `Mindfulness is often described so vaguely that it can sound like little more than sitting still and trying not to think. Mindfulness-Oriented Recovery Enhancement, usually called MORE, is much more specific. It is a manualized behavioral treatment that uses attention training to interrupt automatic habits, work differently with pain and craving, and rebuild a person's capacity to feel meaning and healthy pleasure.
+    content: `Mindfulness-Oriented Recovery Enhancement, usually called MORE, is a manualized behavioral treatment developed by University of Utah researcher Eric L. Garland, PhD, LCSW. It combines mindfulness, cognitive reappraisal, and savoring to address automatic habits, pain, craving, and reduced responsiveness to healthy rewards. Dr. Garland published the clinical manual, Mindfulness-Oriented Recovery Enhancement for Addiction, Stress, and Pain, through NASW Press in 2013.[LINK:[1]:https://naswpress.org/product/mindfulness-oriented-recovery-enhancement-for-addiction-stress-and-pain/]
 
-The approach deserves careful credit. MORE was developed by Eric L. Garland, PhD, LCSW, who directs the Center on Mindfulness and Integrative Health Intervention Development at the University of Utah. Dr. Garland published the complete clinical treatment manual, Mindfulness-Oriented Recovery Enhancement for Addiction, Stress, and Pain, through NASW Press in 2013.[LINK:[1]:https://naswpress.org/product/mindfulness-oriented-recovery-enhancement-for-addiction-stress-and-pain/]
-
-Researchers including Adam W. Hanley, Yoshio Nakamura, Anne K. Baker, Brett Froeliger, Gary W. Donaldson, Justin Hudak, and others have helped test MORE and study how it may affect attention, craving, pain, emotion, and reward processing. Sober Helpline did not create or rename this method. This article is an educational explanation of the work developed by Dr. Garland and studied by his collaborators.
+Dr. Garland developed MORE; coauthors, clinicians, and research collaborators including Adam W. Hanley, Yoshio Nakamura, Anne K. Baker, Brett Froeliger, Gary W. Donaldson, Justin Hudak, and others have helped test the intervention and study its possible mechanisms. Sober Helpline did not create or rename this method.
 
 **What makes MORE different from ordinary mindfulness practice?**
 
 MORE joins three types of practice in a deliberate sequence: mindfulness, cognitive reappraisal, and savoring. Mindfulness helps a person notice automatic reactions before acting on them. Reappraisal helps the person reconsider the meaning of a stressful event or an unhelpful thought. Savoring trains attention toward healthy experiences that can produce pleasure, connection, gratitude, or meaning.[LINK:[2]:https://pmc.ncbi.nlm.nih.gov/articles/PMC4940274/]
 
-That last piece matters in addiction recovery. Recovery cannot consist only of resisting a substance. A life built around nothing but avoidance eventually feels empty. MORE tries to strengthen a person's ability to register natural rewards again: a conversation, music, movement, sunlight, food, service, beauty, affection, or the quiet satisfaction of keeping a commitment.
+That last piece matters in addiction recovery. For many people, recovery involves more than avoiding substance use; ordinary sources of pleasure, connection, and meaning may also need attention. MORE trains people to notice natural rewards such as conversation, music, movement, service, affection, or the satisfaction of keeping a commitment.
 
 **1. Focused attention through mindful breathing**
 
@@ -215,13 +213,13 @@ This repeated movement of noticing and returning is not a failure of meditation.
 
 MORE also uses body-scan meditation. Attention moves through the body while the person observes pressure, tightness, heat, pulsing, restlessness, numbness, or other sensations. The aim is not to force discomfort away. It is to experience discomfort with more precision and less immediate interpretation.
 
-That distinction can create room between a sensation and a reaction. In the opioid and chronic-pain research, meditation on breathing and bodily sensations was used to help participants relate to pain and craving as sensory information rather than an automatic instruction to act.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
+That distinction may create room between a sensation and a reaction. In the opioid and chronic-pain research, meditation on breathing and bodily sensations was used to help participants relate to pain and craving as sensory information rather than an automatic instruction to act.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
 
 **3. Mindfulness of craving**
 
 Craving is often experienced as a command: do something now. Mindfulness of craving changes the assignment. Instead of arguing with the urge or obeying it, the person observes where it appears in the body, how intense it is, what thoughts accompany it, and whether it changes from one moment to the next.
 
-This is not passive resignation. It is a way to discover that an urge is an event occurring in awareness, not an order that must be followed. A published eight-session MORE adaptation places mindfulness of craving after participants have practiced basic attention skills and learned about automatic habit.[LINK:[5]:https://pmc.ncbi.nlm.nih.gov/articles/PMC11342816/]
+The practice treats craving as a changing experience to observe rather than an instruction to act. In the eight-session MORE-VR adaptation, mindfulness of craving follows foundational lessons about mindfulness and automatic habit.[LINK:[5]:https://pmc.ncbi.nlm.nih.gov/articles/PMC11342816/]
 
 **4. A three-minute pause before an automatic decision**
 
@@ -245,13 +243,15 @@ A person can apply that same structure to a cup of coffee, a piece of music, tim
 
 A face-to-face clinical trial delivered MORE in eight weekly two-hour group sessions and asked participants to complete about 15 minutes of guided practice each day.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/] A later eight-session virtual-reality adaptation organized its lessons around mindfulness, automatic habit and addiction, reappraisal of negative emotion, savoring natural rewards, mindfulness of craving, stress and craving, interdependence and meaning, and relapse prevention.[LINK:[5]:https://pmc.ncbi.nlm.nih.gov/articles/PMC11342816/]
 
-In a randomized clinical trial involving 250 adults with chronic pain who were misusing prescribed opioids, 45.0 percent of the participants available at the nine-month follow-up who received MORE were no longer misusing opioids, compared with 24.4 percent in supportive group psychotherapy. The MORE group also reported improvements in pain-related outcomes, emotional distress, and craving.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
+In a randomized clinical trial involving 250 adults with chronic pain who were misusing prescribed opioids, 36 of 80 participants assessed at nine months in the MORE group were no longer misusing opioids, compared with 19 of 78 assessed in supportive group psychotherapy. Ninety-two of the original 250 participants had discontinued by that point. MORE produced greater improvements than supportive group psychotherapy in pain-related outcomes, emotional distress, and craving.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
 
-Those findings are encouraging, but they should be read accurately. This was a defined clinical population receiving a structured intervention from trained clinicians. The study does not prove that a few minutes of meditation will treat every addiction, eliminate relapse risk, or replace medical care, psychotherapy, mutual-help involvement, family work, or a daily recovery program.
+For transparency, this major trial was led by MORE's developer. Its published disclosures state that Dr. Garland had received honoraria for training clinicians in MORE and royalties from MORE-related books and BehaVR.[LINK:[4]:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
+
+Those findings are encouraging, but they should be read accurately. This was a defined clinical population receiving a structured intervention from trained clinicians. The study does not prove that a few minutes of meditation will treat every addiction or eliminate relapse risk. MORE does not replace medical evaluation, clinician-directed medication treatment, medically supervised withdrawal when necessary, naloxone, psychiatric care, counseling, peer recovery support, family recovery work, or an individual's spiritual program. For a suspected opioid overdose, call 911 and administer naloxone if it is available.
 
 **Where this practice may fit in recovery**
 
-MORE offers a practical way to strengthen the pause between an internal experience and a behavior. It also addresses something recovery programs sometimes neglect: the ability to experience ordinary life as rewarding again.
+The research suggests that, within a structured program, MORE may help strengthen the pause between an internal experience and a behavior. It also pays attention to the ability to experience ordinary life as rewarding again.
 
 For a person already engaged in treatment or recovery, these skills may complement a larger plan. Families can also benefit from understanding the basic principle. A craving, fearful thought, or painful feeling can be taken seriously without allowing it to make every decision.
 
@@ -259,17 +259,17 @@ If you want to learn the full clinical model, use Dr. Garland's official manual 
 
 **Sources and credit**
 
-[LINK:[1] Garland, E. L. Mindfulness-Oriented Recovery Enhancement for Addiction, Stress, and Pain. NASW Press, 2013.:https://naswpress.org/product/mindfulness-oriented-recovery-enhancement-for-addiction-stress-and-pain/]
+[1] Garland, E. L. Mindfulness-Oriented Recovery Enhancement for Addiction, Stress, and Pain. NASW Press, 2013. [LINK:Manual publisher page:https://naswpress.org/product/mindfulness-oriented-recovery-enhancement-for-addiction-stress-and-pain/]
 
-[LINK:[2] Garland, E. L. Restructuring reward processing with Mindfulness-Oriented Recovery Enhancement. Annals of the New York Academy of Sciences, 2016.:https://pmc.ncbi.nlm.nih.gov/articles/PMC4940274/]
+[2] Garland, E. L. Restructuring reward processing with Mindfulness-Oriented Recovery Enhancement: novel therapeutic mechanisms to remediate hedonic dysregulation in addiction, stress, and pain. Annals of the New York Academy of Sciences. 2016;1373(1):25–37. doi:10.1111/nyas.13034. [LINK:Read the article:https://pmc.ncbi.nlm.nih.gov/articles/PMC4940274/]
 
-[LINK:[3] Garland, E. L., Hanley, A. W., Hudak, J., Nakamura, Y., and Froeliger, B. Mindfulness-induced endogenous theta stimulation occasions self-transcendence and inhibits addictive behavior. Science Advances, 2022.:https://pmc.ncbi.nlm.nih.gov/articles/PMC9555770/]
+[3] Garland, E. L., Hanley, A. W., Hudak, J., Nakamura, Y., and Froeliger, B. Mindfulness-induced endogenous theta stimulation occasions self-transcendence and inhibits addictive behavior. Science Advances. 2022;8(41):eabo4455. doi:10.1126/sciadv.abo4455. [LINK:Read the article:https://pmc.ncbi.nlm.nih.gov/articles/PMC9555770/]
 
-[LINK:[4] Garland, E. L., et al. Mindfulness-Oriented Recovery Enhancement vs Supportive Group Therapy for Co-occurring Opioid Misuse and Chronic Pain in Primary Care. JAMA Internal Medicine, 2022.:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
+[4] Garland, E. L., Hanley, A. W., Nakamura, Y., Barrett, J. W., Baker, A. K., Reese, S. E., Riquino, M. R., Froeliger, B., and Donaldson, G. W. Mindfulness-Oriented Recovery Enhancement vs Supportive Group Therapy for Co-occurring Opioid Misuse and Chronic Pain in Primary Care: A Randomized Clinical Trial. JAMA Internal Medicine. 2022;182(4):407–417. doi:10.1001/jamainternmed.2022.0033. [LINK:Read the trial:https://pmc.ncbi.nlm.nih.gov/articles/PMC8886485/]
 
-[LINK:[5] Garland, E. L., et al. Virtual reality-based Mindfulness-Oriented Recovery Enhancement as an adjunct to medications for opioid use disorder. Annals of Medicine, 2024.:https://pmc.ncbi.nlm.nih.gov/articles/PMC11342816/]
+[5] Garland, E. L., Recasens, M., Taple, B. J., Donaldson, G. W., and Weisberg, R. B. Virtual reality-based Mindfulness-Oriented Recovery Enhancement (MORE-VR) as an adjunct to medications for opioid use disorder: a Phase 1 trial. Annals of Medicine. 2024;56(1):2392870. doi:10.1080/07853890.2024.2392870. [LINK:Read the study:https://pmc.ncbi.nlm.nih.gov/articles/PMC11342816/]
 
-[LINK:[6] Garland, E. L., et al. Mindfulness-Oriented Recovery Enhancement remediates anhedonia in chronic opioid use by enhancing neurophysiological responses during savoring of natural rewards. Psychological Medicine, 2023.:https://pmc.ncbi.nlm.nih.gov/articles/PMC10106294/]
+[6] Garland, E. L., Fix, S. T., Hudak, J. P., Bernat, E. M., Nakamura, Y., Hanley, A. W., Donaldson, G. W., Marchand, W. R., and Froeliger, B. Mindfulness-Oriented Recovery Enhancement remediates anhedonia in chronic opioid use by enhancing neurophysiological responses during savoring of natural rewards. Psychological Medicine. 2023;53(5):2085–2094. Published online 2021. doi:10.1017/S0033291721003834. [LINK:Read the study:https://pmc.ncbi.nlm.nih.gov/articles/PMC10106294/]
 
 Educational note: MORE is a structured clinical intervention. This article does not reproduce the treatment manual and is not a substitute for individualized medical, psychiatric, or addiction care.`,
   },
