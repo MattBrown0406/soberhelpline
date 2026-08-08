@@ -316,9 +316,13 @@ serve(async (req: Request) => {
       .select("participant_name, participant_email, join_time")
       .eq("meeting_date", meetingDate);
 
+const normTime = (t: any) => {
+      const d = new Date(t || "");
+      return isNaN(d.getTime()) ? String(t || "") : d.toISOString();
+    };
     const existingSet = new Set(
-      (existingAttendance || []).map((a: any) => 
-        `${(a.participant_email || a.participant_name || "").toLowerCase()}|${a.join_time}`
+      (existingAttendance || []).map((a: any) =>
+        `${(a.participant_email || a.participant_name || "").toLowerCase()}|${normTime(a.join_time)}`
       )
     );
 
