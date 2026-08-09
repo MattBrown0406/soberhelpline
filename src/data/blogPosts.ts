@@ -183,6 +183,105 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 156,
+    slug: "ai-companion-chatbot-addiction-family-guide",
+    seoTitle: "AI Companion Addiction: Help When a Loved One Prefers a Bot",
+    metaDescription: "Is your loved one addicted to an AI companion or chatbot? Learn the warning signs of AI companion addiction and how families can help them reconnect.",
+    title: "AI Companion Addiction: How to Help When a Loved One Prefers a Chatbot to Real People",
+    category: "Family Support",
+    author: "Matt Brown",
+    date: "2026-08-09",
+    image: aiCompanionAddictionImg,
+    keywords: ["AI companion addiction", "chatbot addiction", "AI girlfriend addiction help", "behavioral addiction family", "technology addiction family help"],
+    excerpt: "AI companion apps offer connection with none of the friction of real relationships — and for a growing number of people, that comfort becomes compulsion. Here are the warning signs and what families can actually do.",
+    content: `If you're reading this, you may be watching someone you love slowly disappear into a screen — not into video games or social media, but into a relationship with something that isn't real. AI companion addiction is one of the newest behavioral addictions families are facing, and if it's happening in your home, you probably feel confused, dismissed, and very alone. How do you compete with a companion that is always available, endlessly patient, and never disagrees?
+
+You're not overreacting, and you're not the only family dealing with this. Millions of people now use AI companion apps daily, and for a growing number, that use has crossed from comfort into compulsion. This guide will help you understand what AI companion addiction is, why it's so gripping, what the warning signs look like, and what you can actually do to help.
+
+**What Is AI Companion Addiction?**
+
+AI companion addiction is the compulsive use of AI chatbot relationships — romantic partners, best friends, or confidants — to the point that it damages real-world relationships, work, sleep, or emotional health. Like gambling or gaming addiction, it's a process addiction: the person isn't hooked on a substance, but on a behavior that reliably delivers comfort and relief. Over time, the AI relationship starts replacing human connection instead of supplementing it.
+
+These apps are designed to feel personal. The AI remembers birthdays, asks about your day, offers affection, and adapts to exactly what the user wants to hear. For someone who is lonely, grieving, socially anxious, or going through a divorce or breakup, that can feel like a lifeline. The problem isn't that your loved one talks to a chatbot. The problem starts when the chatbot becomes the primary relationship in their life — and everything human gets pushed to the margins.
+
+**Why Are AI Companions So Addictive?**
+
+AI companions are addictive because they offer connection with none of the friction of real relationships. Every message is met with warmth, agreement, and undivided attention. That creates a powerful reward loop in the brain — the same dopamine-driven cycle involved in gambling and social media addiction — without any of the risk of rejection that comes with people.
+
+A few things make this particular pull so strong:
+
+- **Perfect availability.** The AI never sleeps, never gets busy, and never needs anything back. At 3 a.m., when loneliness hits hardest, it's there.
+- **Total validation.** Real people push back, get tired, and have bad days. An AI companion is engineered to keep the user engaged, which usually means telling them what they want to hear.
+- **Escape from pain.** Many people who develop AI companion addiction are using it the same way others use alcohol or pills — to numb grief, [LINK:social anxiety, depression:/blog/depression-and-addiction-family-confusion], or the ache of a marriage that's ended.
+
+This last point matters most for families. In my 23 years of recovery and two decades of intervention work, I've learned that addiction is rarely about the substance or the behavior itself. It's about what the person is trying not to feel. The chatbot is the symptom. The pain underneath it is the real story.
+
+**What Are the Warning Signs of AI Companion Addiction?**
+
+The clearest warning sign is displacement: real relationships, responsibilities, and interests shrinking while time with the AI grows. One long conversation isn't a crisis. A pattern of choosing the AI over people, sleep, and obligations is.
+
+Watch for these signs in your loved one:
+
+- Hours a day spent messaging the AI, often late into the night, with visible distress when they can't access it.
+- Withdrawing from family, friends, and activities they used to enjoy — especially declining real social invitations to stay home with the app.
+- Talking about the AI as a real relationship: "She understands me," "He's the only one who listens," or grieving intensely when an app update changes the companion's personality.
+- Secrecy and defensiveness — hiding their phone, minimizing screens, or exploding when someone questions the time they spend.
+- Declining performance at work or school, disrupted sleep, and neglected hygiene or meals.
+- Spending significant money on subscriptions, upgrades, or in-app purchases for the companion.
+
+If several of these sound familiar, trust what you're seeing. Families usually spot the problem long before the person using admits there is one.
+
+**How Does AI Companion Addiction Affect Families?**
+
+AI companion addiction hurts families in a uniquely painful way: it can feel like being left for someone who doesn't exist. Spouses describe it as an emotional affair. Parents describe watching a child choose a simulation over every living person in the house. And because the addiction looks like "just being on the phone," family members often doubt their own instincts and stay silent far too long. If you've felt that quiet pulling-away in your own home, you're not imagining it — [LINK:isolation shows up on the family's side too:/blog/social-isolation-when-loved-one-has-addiction].
+
+There's another layer families need to take seriously. People in deep AI relationships are often struggling with depression, anxiety, or isolation underneath — and an always-agreeable chatbot can reinforce distorted thinking instead of challenging it. If your loved one has expressed hopelessness or talked about not wanting to be here, don't wait this out. That's a mental health situation that needs professional support now, not just less screen time.
+
+**How Can Families Help a Loved One Addicted to an AI Companion?**
+
+The most effective way to help is to address the loneliness and pain driving the behavior — not to attack the app. Shame and ultimatums almost always push the person deeper into the one "relationship" where they never feel judged. Connection is the competition, and you want to be on the winning side of it. Here's where to start:
+
+1. **Get curious before you get critical.** Ask what the AI gives them that feels missing elsewhere. Then just listen. You may be the first human who has.
+2. **Name what you see, calmly and specifically.** "You're up until 3 a.m. most nights and you've stopped seeing your friends. I'm worried about you." Facts, not labels.
+3. **Rebuild real connection in small doses.** Invite them into low-pressure human contact — a meal, a drive, a walk. Don't demand they delete the app as the price of admission.
+4. **Address the underlying issue.** Depression, social anxiety, grief, and trauma respond to treatment. A therapist who understands behavioral addictions can help with both the compulsion and its roots.
+5. **Get professional guidance if they refuse help.** When someone can't or won't see the problem, a structured family intervention can break through in a way daily arguments never will. This is exactly the situation [LINK:interventions:/intervention-help] were built for.
+
+**There Is a Way Back to Real Connection**
+
+Here's the hopeful truth: the same longing that pulled your loved one toward an AI companion — the desire to be known, accepted, and loved — is the doorway back to real life. That need is healthy. It just got routed to something that can't truly meet it. With honest conversation, treatment for what's underneath, and a family that stays steady, people do come back. I've watched families walk through addictions of every kind and come out more connected than before the crisis started.
+
+**Frequently Asked Questions**
+
+**Is AI companion addiction a real addiction?**
+
+Yes. While it's not yet a formal diagnosis, AI companion addiction functions like other recognized behavioral addictions such as gambling disorder. It involves compulsive use, loss of control, withdrawal-like distress, and continued use despite real harm to relationships, work, and health.
+
+**Why does my loved one prefer a chatbot to real people?**
+
+Because the chatbot offers connection without risk. It never rejects, criticizes, or gets tired. People struggling with loneliness, social anxiety, grief, or depression are especially vulnerable, since the AI relieves emotional pain instantly and predictably.
+
+**Should I make my loved one delete the AI companion app?**
+
+Forcing deletion usually backfires, especially with adults — it creates secrecy and deepens their bond with the AI as the only "safe" relationship. Focus first on rebuilding trust, naming your concerns honestly, and getting help for the underlying emotional struggles.
+
+**Can you do an intervention for an AI or technology addiction?**
+
+Yes. Professional interventions work for behavioral addictions just as they do for drug and alcohol addiction. A structured intervention helps the family present their concerns with love and clear boundaries, and connects the person to treatment for the addiction and any underlying mental health conditions.
+
+**What kind of treatment helps with AI companion addiction?**
+
+Treatment typically includes therapy for the compulsive behavior — often cognitive behavioral therapy — plus care for co-occurring depression, anxiety, or trauma. Because loneliness drives this addiction, group therapy and rebuilding real-world relationships are usually central to recovery.
+
+**When should a family seek professional help?**
+
+Seek help when the AI relationship is displacing sleep, work, school, or human relationships and your loved one denies there's a problem or refuses to change. If they express hopelessness or talk about self-harm, contact a mental health professional immediately.
+
+**You Don't Have to Figure This Out Alone**
+
+If your loved one is lost in an AI relationship and won't hear your concerns, you don't have to sort through it by yourself. Explore our [LINK:family education resources:/family-education], join a [LINK:free Monday night Family Squares call:/monday-zoom-registration], or book [LINK:family coaching:/family-coaching] to talk through what's happening in your home. We'll help you understand your options and build a plan to bring your loved one back to the people who actually love them.`,
+  },
+  {
     id: 155,
     slug: "mindfulness-oriented-recovery-enhancement-more-addiction-recovery",
     seoTitle: "Mindfulness in Recovery: How MORE Works",
