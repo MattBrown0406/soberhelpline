@@ -64,8 +64,8 @@ export default function NevadaFamilySupport() {
   return (
     <>
       <SEOHead
-        title="Nevada Family Addiction Support & Intervention Help | Sober Helpline"
-        description="Nevada families can get addiction support, Monday Zoom help, and alcohol interventionist guidance when treatment refusal, relapse, or crisis is escalating."
+        title="Alcohol Interventionist Nevada | Family Addiction Help"
+        description="Need an alcohol interventionist in Nevada? Call for family guidance when treatment refusal, relapse, or risk is escalating, or join the free Monday Zoom."
         faqItems={faqItems}
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
@@ -81,24 +81,24 @@ export default function NevadaFamilySupport() {
               Nevada Family Addiction Resources
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
-              Family Addiction Support and Intervention Help in Nevada
+              Alcohol Interventionist in Nevada and Family Addiction Help
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               If someone you love is drinking, using drugs, refusing treatment, or cycling through relapse,
-              your next step is not another lecture. Nevada families can start with free Monday support, book family coaching,
-              or speak with an alcohol interventionist when the situation is becoming unsafe.
+              your next step is not another lecture. Call an alcohol interventionist for a private family conversation
+              about coaching, treatment, or intervention planning; if the question can wait, join the free Monday support meeting.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/monday-zoom-registration">
+              <a href="tel:4582988008">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
+                  <Phone className="h-4 w-4" />
+                  Call an Interventionist
+                </Button>
+              </a>
+              <Link to="/monday-zoom-registration">
+                <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
                   Join Free Monday Zoom — 7PM PST
-                </Button>
-              </Link>
-              <Link to="/family-coaching">
-                <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                  <Phone className="h-4 w-4" />
-                  Talk With an Interventionist
                 </Button>
               </Link>
             </div>
