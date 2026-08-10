@@ -184,6 +184,94 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 157,
+    slug: "employee-assistance-program-eap-addiction-treatment",
+    seoTitle: "How to Use an EAP for Addiction Treatment: Family Guide",
+    metaDescription: "Learn how an employee assistance program (EAP) can help your family access addiction treatment — free counseling, confidential referrals, and next steps.",
+    title: "How to Use an Employee Assistance Program (EAP) for Addiction Treatment: A Family Guide",
+    category: "Treatment Options",
+    author: "Matt Brown",
+    date: "2026-08-10",
+    image: eapAddictionTreatmentImg,
+    keywords: ["employee assistance program addiction treatment", "EAP addiction help", "EAP confidentiality", "EAP rehab referral", "employer benefits addiction treatment"],
+    excerpt: "One of the fastest, most confidential paths to addiction help may already be in your benefits package. Here's what an EAP covers, how privacy works, and how to use it.",
+    content: `If someone you love is struggling with drugs or alcohol, one of the most useful resources for addiction treatment may already be sitting in an employee benefits package — yours or your loved one's. An employee assistance program, or EAP, is a free, confidential benefit that can provide counseling, assessments, and treatment referrals, often within days. Most people either don't know their EAP exists or assume it's only for workplace stress. In this guide, we'll walk through what an EAP covers, how confidentiality works, and how to use this benefit to get your family moving toward help.
+
+**What Is an Employee Assistance Program (EAP)?**
+
+An employee assistance program is an employer-sponsored benefit that provides free, confidential assessments, short-term counseling, and referrals for personal problems — including substance use and addiction. It is separate from your health insurance plan, and using it typically costs you nothing. Roughly four out of five larger employers in the United States offer some form of EAP, yet usage rates remain in the single digits — mostly because people don't know it's there or don't trust that it's private.
+
+Here's the part families often miss: most EAPs cover more than just the employee. Spouses, partners, and dependent children in the household are usually eligible too — meaning you can use your own employer's EAP for support or guidance even if the person struggling doesn't work there.
+
+**What Does an EAP Cover for Addiction Treatment?**
+
+An EAP is not a treatment program itself — think of it as a well-connected front door. It can assess the situation, provide short-term counseling, and connect you to the right level of care quickly. Most programs include some combination of the following:
+
+- A confidential assessment with a licensed counselor, by phone, video, or in person, to gauge how serious the substance use is and what kind of help fits.
+- A set number of free counseling sessions — commonly three to eight per issue, per year — for the employee or eligible family members.
+- Referrals to detox, residential, or outpatient treatment programs, often matched to your health insurance network.
+- Care coordination, meaning the EAP counselor can help with paperwork, insurance questions, and follow-up after treatment.
+- Related supports many families need at the same time, such as legal consultations, financial counseling, and grief or stress counseling.
+
+The free sessions won't resolve an addiction on their own, and they aren't meant to. Their value is speed and direction: within a week, a family can go from overwhelmed to assessed, informed, and holding a short list of vetted treatment options.
+
+**Is Using an EAP Confidential? Will the Employer Find Out?**
+
+Yes, EAP services are confidential — this is the question people worry about most. EAP counselors are licensed professionals bound by the same privacy laws as any therapist, and federal confidentiality regulations add extra protection around substance use records. Employers receive only aggregate, anonymous usage data. They do not learn who called or why.
+
+Two exceptions are worth knowing. Like any counselor, an EAP clinician must act if someone is in immediate danger of harming themselves or others. And a supervisor-mandated referral — for example, after a failed workplace drug test — follows a different track where limited information (usually attendance, not content) may be shared. If you or your loved one calls voluntarily, that's a self-referral, and it stays private.
+
+**How to Access EAP Benefits for Addiction Help: Step by Step**
+
+Getting started is usually simpler than families expect. The whole process often begins with a single phone call. Here's the path:
+
+1. **Find the EAP contact information.** Check the employee benefits portal, the HR intranet, a past open-enrollment packet, or the back of the health insurance card.
+2. **Call and describe the situation plainly.** You don't need a diagnosis or the perfect words. "I'm worried about my husband's drinking and I don't know what to do" is enough to start.
+3. **Ask specific questions:** Are household members covered? How many free sessions do we get? Do you have counselors experienced with substance use disorders? Can you refer to programs that are in-network with our health plan?
+4. **Use the sessions yourself, even if your loved one won't engage yet.** Families who get support are far more effective at encouraging a loved one toward treatment.
+5. **Ask the EAP to coordinate the next step.** If treatment is needed, the counselor can help [LINK:verify your insurance benefits for treatment:/blog/verify-insurance-benefits-for-rehab-guide], identify programs with availability, and smooth the handoff.
+
+**How an EAP Works With Health Insurance and FMLA**
+
+The EAP gets you assessed and pointed in the right direction; health insurance pays for the treatment itself; and the Family and Medical Leave Act (FMLA) can protect the job while treatment happens. Understanding how these three pieces fit together turns a scary process into a manageable one.
+
+When an EAP refers your loved one to a treatment program, the cost runs through your health insurance like any other care — deductibles, copays, and network rules apply, and mental health parity laws require insurers to cover addiction treatment comparably to medical care. Many EAP counselors will help you start insurance verification and prior authorization. Separately, eligible employees can use [LINK:FMLA job protection during rehab:/blog/fmla-for-rehab-job-protection-addiction-treatment], which protects their position for up to twelve weeks — and an EAP can often walk you through that paperwork too. Together, these benefits answer the two fears that keep many people from seeking help: "How will we pay for it?" and "Will I lose my job?"
+
+**You May Be Closer to Help Than You Think**
+
+Families often assume that getting a loved one into treatment requires weeks of research and thousands of dollars just to get started. Sometimes the first real step is a free phone call to a benefit you already have. If there's a job in your household, there may be an EAP attached to it — and it may be the fastest confidential path to an assessment, a plan, and a referral. You don't have to have it all figured out before you call. That's what the call is for.
+
+**Frequently Asked Questions**
+
+**Is an employee assistance program really free?**
+
+Yes. Employers pay for EAP services as part of the benefits package, so assessments and the allotted counseling sessions cost employees and eligible family members nothing. If the EAP refers you to ongoing treatment, that treatment is billed through your health insurance, not the EAP.
+
+**Can I use my EAP if my spouse or child is the one struggling with addiction?**
+
+Usually, yes. Most EAPs cover spouses, partners, and dependents in the household, so they can receive their own assessment and counseling sessions. Even if your loved one refuses help, you can use the EAP yourself for guidance on how to respond.
+
+**Will my employer know I used the EAP for addiction help?**
+
+No. With a voluntary self-referral, employers receive only anonymous, aggregate usage statistics. The exception is a formal supervisor-mandated referral, such as after a workplace policy violation, where limited attendance information may be shared.
+
+**How many free counseling sessions does an EAP provide?**
+
+Most programs offer three to eight sessions per issue, per year, though this varies by employer — ask when you call. Family members typically receive their own session allotment rather than sharing the employee's.
+
+**Can an EAP get someone into rehab?**
+
+An EAP can't provide residential treatment itself, but it can do the next best thing: assess the severity of the problem, recommend the appropriate level of care, and refer you to specific detox, inpatient, or outpatient programs — often ones that accept your insurance.
+
+**What if there's no EAP available to us?**
+
+Check every employer in the household, plus unions and professional associations, which sometimes offer EAP-style services. If none exists, call the member services number on your health insurance card and ask for a behavioral health case manager — they can provide similar navigation help.
+
+**Keep Learning, Keep Moving**
+
+Navigating benefits is one piece of a bigger journey, and you don't have to figure out the rest alone. At Sober Helpline, we help families understand addiction and take practical steps toward recovery — through ongoing [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a supportive membership community. You can also join our [LINK:free Monday night Family Squares call:/monday-zoom-registration]. You'll leave with more clarity than you came with.`,
+  },
+  {
     id: 156,
     slug: "ai-companion-chatbot-addiction-family-guide",
     seoTitle: "AI Companion Addiction: Help When a Loved One Prefers a Bot",
