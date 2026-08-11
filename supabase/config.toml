@@ -141,3 +141,6 @@ verify_jwt = false
 
 [functions.sync-app-memberships]
 verify_jwt = false
+
+[functions.readiness-radar-family-squares-export]
+verify_jwt = false
