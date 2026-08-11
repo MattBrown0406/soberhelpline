@@ -69,7 +69,7 @@ Deno.serve(async (req: Request) => {
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
   );
 
-  let requestId = crypto.randomUUID();
+  let requestId: string = crypto.randomUUID();
   let lookbackDays = DEFAULT_LOOKBACK_DAYS;
 
   const audit = async (
