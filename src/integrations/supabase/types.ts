@@ -1324,6 +1324,115 @@ export type Database = {
           },
         ]
       }
+      family_squares_next_step_reviews: {
+        Row: {
+          generated_at: string
+          id: string
+          outreach_authorized: boolean
+          outreach_authorized_at: string | null
+          outreach_authorized_by: string | null
+          readiness_score: number
+          readiness_tier: string
+          reason_summary: string[]
+          recommendation_version: string
+          recommended_action: string
+          recommended_path: string
+          registration_id: string
+          review_status: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+        }
+        Insert: {
+          generated_at?: string
+          id?: string
+          outreach_authorized?: boolean
+          outreach_authorized_at?: string | null
+          outreach_authorized_by?: string | null
+          readiness_score: number
+          readiness_tier: string
+          reason_summary?: string[]
+          recommendation_version: string
+          recommended_action: string
+          recommended_path: string
+          registration_id: string
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+        }
+        Update: {
+          generated_at?: string
+          id?: string
+          outreach_authorized?: boolean
+          outreach_authorized_at?: string | null
+          outreach_authorized_by?: string | null
+          readiness_score?: number
+          readiness_tier?: string
+          reason_summary?: string[]
+          recommendation_version?: string
+          recommended_action?: string
+          recommended_path?: string
+          registration_id?: string
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_next_step_reviews_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_squares_weekly_checkins: {
+        Row: {
+          biggest_disagreement: string | null
+          changed_this_week: string | null
+          created_by_user_id: string | null
+          decision_facing: string | null
+          desired_help: string | null
+          id: string
+          immediate_safety_concern: boolean
+          registration_id: string
+          source: string
+          submitted_at: string
+        }
+        Insert: {
+          biggest_disagreement?: string | null
+          changed_this_week?: string | null
+          created_by_user_id?: string | null
+          decision_facing?: string | null
+          desired_help?: string | null
+          id?: string
+          immediate_safety_concern?: boolean
+          registration_id: string
+          source?: string
+          submitted_at?: string
+        }
+        Update: {
+          biggest_disagreement?: string | null
+          changed_this_week?: string | null
+          created_by_user_id?: string | null
+          decision_facing?: string | null
+          desired_help?: string | null
+          id?: string
+          immediate_safety_concern?: boolean
+          registration_id?: string
+          source?: string
+          submitted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_weekly_checkins_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       forum_badges: {
         Row: {
           color: string
@@ -2666,6 +2775,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      readiness_radar_export_audit: {
+        Row: {
+          attendance_count: number
+          caller_fingerprint: string | null
+          checkin_count: number
+          error_code: string | null
+          id: string
+          lookback_days: number
+          registration_count: number
+          request_id: string
+          requested_at: string
+          response_status: string
+        }
+        Insert: {
+          attendance_count?: number
+          caller_fingerprint?: string | null
+          checkin_count?: number
+          error_code?: string | null
+          id?: string
+          lookback_days: number
+          registration_count?: number
+          request_id: string
+          requested_at?: string
+          response_status: string
+        }
+        Update: {
+          attendance_count?: number
+          caller_fingerprint?: string | null
+          checkin_count?: number
+          error_code?: string | null
+          id?: string
+          lookback_days?: number
+          registration_count?: number
+          request_id?: string
+          requested_at?: string
+          response_status?: string
+        }
+        Relationships: []
       }
       roadmap_assessments: {
         Row: {
