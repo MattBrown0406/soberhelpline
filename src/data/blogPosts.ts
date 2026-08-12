@@ -185,6 +185,98 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 158,
+    slug: "anhedonia-early-recovery-family-guide",
+    seoTitle: "Anhedonia in Recovery: Why Nothing Feels Good After Quitting",
+    metaDescription: "Why does nothing feel good in early recovery? Learn what anhedonia in recovery is, how long it lasts, and how families can help a loved one through it.",
+    title: "Anhedonia in Recovery: Why Nothing Feels Good After Quitting — and What Families Can Do",
+    category: "Understanding Addiction",
+    author: "Matt Brown",
+    date: "2026-08-12",
+    image: anhedoniaEarlyRecoveryImg,
+    keywords: ["anhedonia in recovery", "nothing feels good after quitting", "early sobriety flat emotions", "post-acute withdrawal syndrome", "dopamine recovery timeline"],
+    excerpt: "Your loved one got sober, but they seem flat and unmotivated instead of relieved. That's anhedonia — a normal, temporary phase of brain healing. Here's what it is and how families can help.",
+    content: `Your loved one finally got sober. You expected relief, maybe even joy. Instead, they seem flat. They say things like "I don't feel anything" or "What's the point?" They're not using — but they're not happy either. If this is what you're seeing, you're likely watching anhedonia in recovery, and it's one of the most misunderstood parts of early sobriety.
+
+Anhedonia is the reduced ability to feel pleasure. It's extremely common in the first weeks and months after someone stops using drugs or alcohol, and it has a clear biological explanation. It is not a sign that treatment failed, that your loved one is ungrateful, or that recovery isn't working. Understanding what's happening in their brain — and how to respond — can make this stretch far less frightening for everyone.
+
+**What Is Anhedonia in Recovery?**
+
+Anhedonia in recovery is a temporary inability to experience normal pleasure after quitting drugs or alcohol, caused by the brain's reward system recalibrating. Food tastes bland, music falls flat, time with family feels like going through the motions. The word literally means "without pleasure."
+
+Here's why it happens. Substances flood the brain with dopamine — the chemical messenger involved in motivation and reward — at levels far beyond anything natural life produces. A good meal or a hug releases a modest amount of dopamine. Drugs and alcohol can release several times that, over and over, for years.
+
+The brain adapts to this flood by turning down its own volume. It reduces dopamine production and pulls back the receptors that receive the signal. When the substance stops, the flood ends — but the brain is still set to "low volume." Ordinary pleasures now register weakly or not at all. That flat, gray feeling is the gap between what the brain got used to and what normal life provides. If you want the deeper science, our guide to [LINK:dopamine and the brain's reward system:/blog/dopamine-and-addiction-brain-science-families] walks through it in plain language.
+
+**How Long Does Anhedonia Last After Quitting?**
+
+For most people, anhedonia improves noticeably within three to six months of sustained sobriety, though the timeline varies by substance, how long the addiction lasted, and individual factors. Stimulants like methamphetamine and cocaine tend to produce the most pronounced anhedonia; opioids and alcohol cause it too.
+
+Recovery of the reward system is gradual, not sudden. Many people describe it as color slowly returning to a black-and-white picture — a genuine laugh one week, a meal that actually tastes good the next. Anhedonia often overlaps with post-acute withdrawal syndrome (PAWS), a broader cluster of lingering symptoms that includes mood swings, sleep problems, and foggy thinking. Our guide to [LINK:tolerance and withdrawal in addiction:/blog/tolerance-and-withdrawal-in-addiction-family-guide] explains how those physical changes build over time.
+
+Two important caveats. First, if flatness is severe, worsening, or accompanied by hopelessness or talk of self-harm, that's beyond normal recovery adjustment — it needs professional evaluation, because depression and anhedonia can look similar and can coexist. Second, untreated anhedonia is one of the most common relapse drivers. When nothing feels good, the memory of what did feel good gets loud. That's exactly why families should take it seriously without panicking.
+
+**Why Is My Loved One So Flat and Unmotivated in Early Sobriety?**
+
+Because their brain's motivation machinery is offline, not because they don't care. Dopamine isn't just about pleasure — it drives the wanting that gets us off the couch. When the dopamine system is depleted, both enjoyment and drive suffer together.
+
+This is where families often misread the situation. The flatness looks like laziness, ingratitude, or depression-by-choice. You may find yourself thinking, "We went through all of this and you can't even smile?" That reaction is understandable — and it's aimed at the wrong target. Your loved one isn't withholding happiness. Their brain currently can't produce much of it.
+
+It helps to reframe what you're seeing: showing up to family dinner while feeling nothing is actually harder than showing up while feeling good. If your loved one is staying sober, going to meetings, and functioning while anhedonic, they're doing heavy lifting you can't see.
+
+**How Can Families Help With Anhedonia in Recovery?**
+
+The most useful things families can do are normalize it, lower the pressure, and support the habits that speed reward-system healing. You can't make your loved one feel pleasure again — but you can make the waiting period safer and less lonely.
+
+- **Name it without alarm.** Saying "I've read this is a normal part of early recovery and it usually improves" removes shame and fear. Many people in early sobriety secretly believe they've permanently broken their brain. They haven't.
+- **Don't demand visible happiness.** Comments like "You should be grateful" or "At least act like you're glad to be home" add pressure to perform emotions that aren't available yet. Let flat be okay for now.
+- **Support natural dopamine builders.** Exercise, regular sleep, protein-rich meals, sunlight, and new experiences all help the reward system recover. Invite, don't push: a walk together does more than a lecture about walks.
+- **Celebrate function, not feelings.** Notice effort — "You got up and went to your meeting even though you felt nothing. That matters." Recognition of the work, rather than the mood, lands better.
+- **Keep your own expectations realistic.** Early recovery is often harder to live with than families expect. If you find yourself resentful that sobriety hasn't fixed everything, that's a signal to get your own support, not a sign anything has gone wrong.
+
+**When Should You Worry Instead of Wait?**
+
+Watch for the difference between flat-but-functioning and shutting down. Anhedonia that's part of normal recovery coexists with basic functioning: attending treatment or meetings, maintaining hygiene, engaging at least minimally with life. Warning signs that call for professional help include talk of hopelessness or self-harm, stopping treatment or meetings, isolating completely, sleeping most of the day for weeks, or a history of depression that predates the substance use.
+
+If any of those appear, encourage an evaluation with a doctor or therapist who understands addiction. Depression alongside recovery is common and treatable, and treating it protects sobriety. When in doubt, ask the treatment provider — a good program would rather field an unnecessary call than miss a real problem.
+
+**The Hope Underneath the Flatness**
+
+Here's what the science consistently shows: the brain heals. Dopamine receptors regrow. Imaging studies of people in recovery show measurable improvement in reward-system function over months of sobriety. The flatness your loved one feels today is a phase of repair, not a permanent condition.
+
+Most people in long-term recovery will tell you there was a moment — often unremarkable — when something ordinary felt good again. A cup of coffee. A song. A kid's laugh. It came back. Your job as a family isn't to manufacture that moment. It's to help your loved one stay sober long enough to reach it, and to take care of yourself while you both wait. That's not passive. That's the work.
+
+**Frequently Asked Questions About Anhedonia in Recovery**
+
+**What is anhedonia in addiction recovery?**
+
+Anhedonia is a reduced ability to feel pleasure that commonly occurs after quitting drugs or alcohol. It happens because the brain lowered its natural dopamine response during active addiction, and that system takes time to recover once substances stop.
+
+**How long does anhedonia last after getting sober?**
+
+Most people see meaningful improvement within three to six months of sustained sobriety, though it can be shorter or longer depending on the substance and length of use. Stimulant recovery often involves the most pronounced anhedonia. Improvement is gradual rather than sudden.
+
+**Is anhedonia the same as depression?**
+
+No, but they overlap. Anhedonia is one symptom — loss of pleasure — while depression involves a broader pattern including hopelessness, worthlessness, and sometimes thoughts of self-harm. If flatness comes with those symptoms or keeps worsening, seek a professional evaluation.
+
+**Can anhedonia cause relapse?**
+
+Yes, it's one of the most common relapse drivers in early recovery. When nothing feels good, the brain remembers exactly what did. This is why support, structure, and treatment engagement matter most during the flat months — not after they pass.
+
+**What helps the brain recover from anhedonia faster?**
+
+Consistent sleep, regular exercise, good nutrition, sunlight, social connection, and new or novel activities all support dopamine system recovery. Time sober is the main ingredient; these habits speed it up. Continued treatment or therapy helps people stay sober while the healing happens.
+
+**Should I tell my loved one their flatness is normal?**
+
+Yes — gently. Many people in early recovery fear they've permanently damaged their brain, and hearing that anhedonia is a known, temporary phase can be a real relief. Frame it as reassurance, not a dismissal of how hard it feels.
+
+**Keep Learning, Keep Going**
+
+Early recovery asks a lot of families — including the patience to sit with a loved one who is sober but not yet okay. You don't have to figure this out alone. Sober Helpline offers ongoing [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a membership community built for exactly this stretch of the road, plus our [LINK:free Monday night Family Squares call:/monday-zoom-registration] where you can talk with other families walking the same path. The flatness is temporary. The support doesn't have to be.`,
+  },
+  {
     id: 157,
     slug: "employee-assistance-program-eap-addiction-treatment",
     seoTitle: "How to Use an EAP for Addiction Treatment: Family Guide",
