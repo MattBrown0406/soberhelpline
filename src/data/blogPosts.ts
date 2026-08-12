@@ -177,6 +177,7 @@ import luxuryRehabVsStandardImg from "@/assets/blog-luxury-rehab-vs-standard-reh
 import waitingForRehabBedImg from "@/assets/blog-waiting-for-rehab-bed.jpg";
 import localVsOutOfStateRehabImg from "@/assets/blog-local-rehab-vs-out-of-state-treatment.jpg";
 import eapAddictionTreatmentImg from "@/assets/blog-employee-assistance-program-eap-addiction-treatment.jpg";
+import anhedoniaEarlyRecoveryImg from "@/assets/blog-anhedonia-early-recovery-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
