@@ -99,6 +99,36 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Start Here for Family Addiction Help</h1><p>Choose the right next step for your family: free Monday support, private coaching, or intervention readiness help.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/book-consultation">Book coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
+    route: '/about',
+    title: 'About Sober Helpline | Free Family Support',
+    description: 'Sober Helpline is free family support, education, and a live Monday Family Squares meeting. Matt Brown, a certified interventionist, is the person behind it.',
+    noscriptHtml: '<main><h1>About Sober Helpline</h1><p>Free family support, education, and live Monday Family Squares. Sober Helpline is not a treatment center and does not sell placements.</p><p><a href="tel:+14582988008">Call (458) 298-8008</a> · <a href="https://wa.me/5038362136">WhatsApp +1 503-836-2136</a> · <a href="https://soberhelpline.com/family-squares">Family Squares Monday 7 PM Pacific</a></p></main>'
+  },
+  {
+    route: '/contact',
+    title: 'Contact Sober Helpline | Call, WhatsApp, Family Squares',
+    description: 'Reach Sober Helpline by phone at (458) 298-8008 or WhatsApp +1 503-836-2136. Join Family Squares Monday at 7 PM Pacific.',
+    noscriptHtml: '<main><h1>Contact Sober Helpline</h1><p>Call (458) 298-8008 or WhatsApp +1 503-836-2136. If it can wait, join Family Squares Monday at 7 PM Pacific.</p><p>Sober Helpline is family support, not emergency medical care. If someone is in immediate danger, call 911. For a mental-health crisis, call or text 988.</p></main>'
+  },
+  {
+    route: '/what-to-do-tonight',
+    title: 'What to Do Tonight | Sober Helpline',
+    description: 'A free tonight plan for families: safety first, what to say and not say, practical steps for money, keys, and kids, then Family Squares or a phone call.',
+    noscriptHtml: '<main><h1>What to Do Tonight</h1><p>Keep people safe, stop the argument, and hold one or two practical lines until morning. Sober Helpline is family support, not emergency medical care.</p><p>If someone is in immediate danger, call 911. If you are in a mental-health crisis, call or text 988. <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7 PM Pacific</a>.</p></main>'
+  },
+  {
+    route: '/enabling-self-assessment',
+    title: 'Enabling Self-Assessment | Sober Helpline',
+    description: 'A free enabling self-assessment for families. Name the pattern, see your result immediately, and get free next steps — no email required.',
+    noscriptHtml: '<main><h1>Enabling Self-Assessment</h1><p>A free family enabling self-assessment with an immediate result and no email gate.</p><p><a href="https://soberhelpline.com/what-to-do-tonight">What to do tonight</a> · <a href="https://soberhelpline.com/family-squares">Family Squares</a></p></main>'
+  },
+  {
+    route: '/family-situation-assessment',
+    title: 'Free Family Situation Assessment | Sober Helpline',
+    description: 'Answer 6 questions and get an immediate result that names the pattern. No email gate. Next steps are tonight, Family Squares, or a call.',
+    noscriptHtml: '<main><h1>Family Situation Assessment</h1><p>A short free assessment that names enabling patterns and points to tonight, Family Squares, or a call. No email required.</p></main>'
+  },
+  {
     route: '/family-addiction-answers',
     title: 'Family Addiction Answers | Sober Helpline',
     description: 'Clear family addiction answers that route loved ones to free Family Squares support, private coaching, or intervention readiness help.',
@@ -217,6 +247,11 @@ export const sitemapPriority = new Map([
   ['/support', '0.5'],
   ['/privacy', '0.5'],
   ['/start-here', '0.95'],
+  ['/about', '0.7'],
+  ['/contact', '0.7'],
+  ['/what-to-do-tonight', '0.9'],
+  ['/enabling-self-assessment', '0.85'],
+  ['/family-situation-assessment', '0.85'],
   ['/family-addiction-answers', '0.92'],
   ['/family-coaching', '0.9'],
   ['/family-consultation', '0.85'],
@@ -255,6 +290,11 @@ export const sitemapChangefreq = new Map([
   ['/support', 'monthly'],
   ['/privacy', 'monthly'],
   ['/start-here', 'weekly'],
+  ['/about', 'monthly'],
+  ['/contact', 'monthly'],
+  ['/what-to-do-tonight', 'weekly'],
+  ['/enabling-self-assessment', 'weekly'],
+  ['/family-situation-assessment', 'weekly'],
   ['/family-addiction-answers', 'weekly'],
   ['/family-coaching', 'weekly'],
   ['/family-consultation', 'weekly'],

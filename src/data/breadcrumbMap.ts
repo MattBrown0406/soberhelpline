@@ -33,6 +33,26 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "Start Here", path: "/start-here" },
   ],
+  "/about": [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+  ],
+  "/contact": [
+    { label: "Home", path: "/" },
+    { label: "Contact", path: "/contact" },
+  ],
+  "/what-to-do-tonight": [
+    { label: "Home", path: "/" },
+    { label: "What to Do Tonight", path: "/what-to-do-tonight" },
+  ],
+  "/enabling-self-assessment": [
+    { label: "Home", path: "/" },
+    { label: "Enabling Self-Assessment", path: "/enabling-self-assessment" },
+  ],
+  "/family-situation-assessment": [
+    { label: "Home", path: "/" },
+    { label: "Family Situation Assessment", path: "/family-situation-assessment" },
+  ],
   // Family Education guides
   "/family-education": [
     { label: "Home", path: "/" },

@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, Compass, HeartPulse, PhoneCall, ShieldAlert, User
 import SEOHead from "@/components/SEOHead";
 import FamilyProofStrip from "@/components/FamilyProofStrip";
 import WhatsAppLink from "@/components/WhatsAppLink";
+import AfterHoursSafetyStrip from "@/components/AfterHoursSafetyStrip";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
@@ -96,12 +97,35 @@ export default function StartHere() {
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline">
-                    <a href="tel:4582988008" onClick={() => trackPhoneClick("start_here_hero")}>
+                    <a href="tel:+14582988008" onClick={() => trackPhoneClick("start_here_hero")}>
                       <PhoneCall className="h-4 w-4" />
                       Call (458) 298-8008
                     </a>
                   </Button>
                   <WhatsAppLink source="start_here_hero" variant="button" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <AfterHoursSafetyStrip source="start_here_after_hours" showTonightLink />
+
+          <section className="py-8">
+            <div className="container mx-auto max-w-5xl px-4">
+              <div className="flex flex-col gap-3 rounded-xl border border-primary/15 bg-muted/30 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-muted-foreground">
+                  If you need a free next step before booking: a tonight plan, or a short assessment that names the pattern with no email gate.
+                </p>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/what-to-do-tonight">What to do tonight</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/family-situation-assessment">Am I helping or making it worse?</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/enabling-self-assessment">Enabling Self-Assessment</Link>
+                  </Button>
                 </div>
               </div>
             </div>

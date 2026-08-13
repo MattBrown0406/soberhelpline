@@ -103,6 +103,10 @@ const Blog = React.lazy(() => import("./pages/Blog"));
 const BlogArticle = React.lazy(() => import("./pages/BlogArticle"));
 const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment"));
 const FamilySituationAssessment = React.lazy(() => import("./pages/FamilySituationAssessment"));
+const EnablingSelfAssessment = React.lazy(() => import("./pages/EnablingSelfAssessment"));
+const WhatToDoTonight = React.lazy(() => import("./pages/WhatToDoTonight"));
+const About = React.lazy(() => import("./pages/About"));
+const Contact = React.lazy(() => import("./pages/Contact"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
 const Support = React.lazy(() => import("./pages/Support"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
@@ -381,7 +385,11 @@ const App = () => (
               <Route path="/how-to-talk-to-loved-one-about-addiction" element={<BlogArticle />} />
               <Route path="/addiction-assessment" element={<AddictionAssessment />} />
               <Route path="/family-situation-assessment" element={<FamilySituationAssessment />} />
+              <Route path="/enabling-self-assessment" element={<EnablingSelfAssessment />} />
+              <Route path="/what-to-do-tonight" element={<WhatToDoTonight />} />
               <Route path="/faqs" element={<FAQs />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/support" element={<Support />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/delete-account" element={<DeleteAccount />} />

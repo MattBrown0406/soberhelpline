@@ -16,6 +16,7 @@ import bannerLogo from "@/assets/logo.png";
 import MobileNav from "@/components/MobileNav";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import HomeHero from "@/components/HomeHero";
+import AfterHoursSafetyStrip from "@/components/AfterHoursSafetyStrip";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
@@ -267,6 +268,8 @@ const Index = () => {
 
         <HomeHero />
 
+        <AfterHoursSafetyStrip source="homepage_after_hours" showTonightLink />
+
         <section className="border-y border-border/40 bg-muted/30">
           <div className="container mx-auto px-4 py-4 md:py-5">
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
@@ -372,6 +375,16 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-5 flex flex-col items-start gap-2">
+                    <Link to="/what-to-do-tonight" className="inline-flex items-center gap-1 text-sm font-semibold text-logo-blue hover:underline">
+                      If it is 2 a.m., start with what to do tonight
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link to="/enabling-self-assessment" className="inline-flex items-center gap-1 text-sm font-semibold text-logo-blue hover:underline">
+                      Enabling Self-Assessment — free, no email
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -425,7 +438,7 @@ const Index = () => {
               {[
                 { color: "emerald", icon: Brain, title: "Making Sense of Their Behavior", desc: "Why willpower fails, how the brain changes, and what families need to know about the disease.", count: "7 resources" },
                 { color: "rose", icon: Heart, title: "When Mental Health Makes It Harder", desc: "How mental health conditions interact with substance use and what families should understand.", count: "8 resources" },
-                { color: "violet", icon: Users, title: "Am I Helping or Making It Worse?", desc: "Recognize patterns that keep families stuck and learn to break the cycle of enabling.", count: "19 resources" },
+                { color: "violet", icon: Users, title: "Am I Helping or Making It Worse?", desc: "Recognize patterns that keep families stuck and learn to break the cycle of enabling.", count: "Free assessment — no email", to: "/family-situation-assessment" },
                 { color: "blue", icon: GraduationCap, title: "Finding Treatment That Actually Works", desc: "Navigate the treatment system, ask the right questions, and avoid industry red flags.", count: "11 resources" },
                 { color: "amber", icon: Shield, title: "Setting Boundaries That Stick", desc: "Set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.", count: "8 resources" },
                 { color: "teal", icon: TreePine, title: "Reclaiming Your Own Life", desc: "Focus on your own healing journey regardless of your loved one's choices.", count: "9 resources" },
@@ -439,8 +452,8 @@ const Index = () => {
                   teal: "border-teal-500/30 bg-gradient-to-br from-teal-50/50 to-transparent dark:from-teal-950/20 text-teal-600 dark:text-teal-400",
                 } as const;
 
-                return (
-                  <Card key={pillar.title} className={`h-full border-2 ${colorMap[pillar.color as keyof typeof colorMap].split(" text-")[0]}`}>
+                const card = (
+                  <Card className={`h-full border-2 ${colorMap[pillar.color as keyof typeof colorMap].split(" text-")[0]}`}>
                     <CardContent className="p-5 md:p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 rounded-xl bg-background/70 flex items-center justify-center flex-shrink-0 border border-border/40">
@@ -457,6 +470,14 @@ const Index = () => {
                       </div>
                     </CardContent>
                   </Card>
+                );
+
+                return "to" in pillar && pillar.to ? (
+                  <Link key={pillar.title} to={pillar.to} className="block h-full transition-transform hover:-translate-y-0.5">
+                    {card}
+                  </Link>
+                ) : (
+                  <div key={pillar.title}>{card}</div>
                 );
               })}
             </div>

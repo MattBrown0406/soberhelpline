@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { ChevronDown, ChevronUp, ClipboardCheck, History, TrendingDown, TrendingUp, Minus } from "lucide-react";
 import { format } from "date-fns";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import FreeFamilyNextSteps from "@/components/FreeFamilyNextSteps";
 
 interface AssessmentResult {
   id: string;
@@ -73,10 +74,12 @@ const reflectionQuestions = [
 
 interface Props {
   user?: User | null;
+  defaultExpanded?: boolean;
+  hideToggle?: boolean;
 }
 
-export default function FamilySelfAssessment({ user }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export default function FamilySelfAssessment({ user, defaultExpanded = false, hideToggle = false }: Props) {
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded || hideToggle);
   const [showHistory, setShowHistory] = useState(false);
   const [currentStep, setCurrentStep] = useState(0); // 0=intro, 1-4=sections, 5=reflection, 6=results
   const [section1Answers, setSection1Answers] = useState<number[]>(Array(7).fill(-1));
@@ -242,9 +245,9 @@ export default function FamilySelfAssessment({ user }: Props) {
 
   return (
     <Card className="mb-10 border-2 border-amber-500 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 dark:to-transparent">
-      <CardHeader 
-        className="cursor-pointer" 
-        onClick={() => setIsExpanded(!isExpanded)}
+      <CardHeader
+        className={hideToggle ? undefined : "cursor-pointer"}
+        onClick={hideToggle ? undefined : () => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -254,11 +257,11 @@ export default function FamilySelfAssessment({ user }: Props) {
               <CardDescription>Understanding How Love, Fear, and Good Intentions Can Reinforce Addiction</CardDescription>
             </div>
           </div>
-          {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+          {!hideToggle && (isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />)}
         </div>
       </CardHeader>
 
-      {isExpanded && (
+      {(isExpanded || hideToggle) && (
         <CardContent className="space-y-6">
           {/* History Toggle */}
           {pastResults.length > 0 && currentStep === 0 && (
@@ -489,6 +492,14 @@ export default function FamilySelfAssessment({ user }: Props) {
                 <p className="text-sm text-muted-foreground mt-2">
                   Changing these patterns does not mean abandoning your loved one. It means giving them the dignity to experience reality — and giving yourself permission to recover as well.
                 </p>
+              </div>
+
+              <div className="rounded-lg border p-4">
+                <h4 className="mb-3 font-semibold text-logo-blue">Free next steps</h4>
+                <FreeFamilyNextSteps
+                  source="enabling_self_assessment_result"
+                  showPaidSecondary={justSubmittedScore > 50}
+                />
               </div>
 
               <Button onClick={resetAssessment} className="w-full">

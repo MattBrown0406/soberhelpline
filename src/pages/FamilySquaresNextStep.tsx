@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, CheckCircle2, ExternalLink, PhoneCall, ShieldCheck } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
-import RevenueLadder from "@/components/RevenueLadder";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { Button } from "@/components/ui/button";
@@ -67,12 +66,12 @@ export default function FamilySquaresNextStep() {
                   </Button>
                 </div>
                 <a
-                  href="tel:4582988008"
+                  href="tel:+14582988008"
                   onClick={() => trackPhoneClick("family_squares_next_step_hero")}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                 >
                   <PhoneCall className="h-4 w-4" />
-                  Call 458-298-8008
+                  Call (458) 298-8008
                 </a>
               </div>
 
@@ -91,10 +90,6 @@ export default function FamilySquaresNextStep() {
                 </CardContent>
               </Card>
             </div>
-          </section>
-
-          <section className="container px-4 py-10 md:py-14">
-            <RevenueLadder source="family_squares_next_step" />
           </section>
 
           <section className="container px-4 pb-10 md:pb-14">
