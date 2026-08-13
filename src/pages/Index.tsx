@@ -172,7 +172,7 @@ const Index = () => {
 
             <div className="hidden lg:flex h-16 items-center justify-between gap-4">
               <div className="flex items-center gap-6">
-                <Link to="/" className="flex items-center">
+                <Link to="/">
                   <img src={bannerLogo} alt="Sober Helpline" width={56} height={56} fetchPriority="high" decoding="async" className="h-14 w-auto" />
                 </Link>
                 <nav className="flex items-center gap-2">
@@ -385,7 +385,7 @@ const Index = () => {
                   </div>
                   <ul className="space-y-3">
                     {[
-                      "Free \u201cThe Family Squares\u201d calls with other families who get it",
+                      "Free “The Family Squares” calls with other families who get it",
                       "Hourly coaching when you need one-on-one guidance",
                       "Clear education that explains what you're seeing",
                       "A private forum of families who truly get it",
@@ -494,7 +494,7 @@ const Index = () => {
                   </div>
                   <div className="text-center md:text-left">
                     <p className="text-xs md:text-sm font-medium text-white/80">Free weekly support</p>
-                    <h3 className="text-base md:text-lg font-bold">\u201cThe Family Squares\u201d every Monday at 7 PM PST</h3>
+                    <h3 className="text-base md:text-lg font-bold">“The Family Squares” every Monday at 7 PM PST</h3>
                     <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group support every Monday for any family member. No membership required.</p>
                   </div>
                 </div>
