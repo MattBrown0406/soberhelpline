@@ -117,7 +117,7 @@ const Layout = ({ children }: LayoutProps) => {
               )}
               {/* Phone number */}
               <a
-                href="tel:4582988008"
+                href="tel:+14582988008"
                 onClick={() => trackPhoneClick("layout_header")}
                 className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
               >

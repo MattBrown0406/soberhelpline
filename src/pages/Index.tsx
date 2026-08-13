@@ -163,7 +163,7 @@ const Index = () => {
         <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
             <div className="flex lg:hidden h-14 items-center justify-between">
-              <a href="tel:4582988008" className="flex items-center gap-2 text-logo-blue font-semibold">
+              <a href="tel:+14582988008" className="flex items-center gap-2 text-logo-blue font-semibold">
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">(458) 298-8008</span>
               </a>
@@ -230,7 +230,7 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:4582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
+                <a href="tel:+14582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                   <Phone className="w-4 h-4" />
                   (458) 298-8008
                 </a>
