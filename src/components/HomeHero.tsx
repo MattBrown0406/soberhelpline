@@ -88,7 +88,7 @@ const HomeHero = () => {
               </Link>
               <div className="flex items-center gap-3 flex-wrap">
                 <a
-                  href="tel:4582988008"
+                  href="tel:+14582988008"
                   className="shl-button shl-button-secondary"
                   onClick={() => trackConversionEvent("phone_click", { source: "homepage_lighthouse_hero" })}
                 >

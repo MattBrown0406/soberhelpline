@@ -39,7 +39,7 @@ const Footer = () => {
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
               Education and support for families affected by addiction. You don't have to go through this alone.
             </p>
-            <a href="tel:4582988008" onClick={() => trackPhoneClick("footer_brand")} className="flex items-center gap-2 text-white font-semibold hover:text-white/80 transition-colors">
+            <a href="tel:+14582988008" onClick={() => trackPhoneClick("footer_brand")} className="flex items-center gap-2 text-white font-semibold hover:text-white/80 transition-colors">
               <Phone className="w-4 h-4" />
               (458) 298-8008
             </a>
