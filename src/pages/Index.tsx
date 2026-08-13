@@ -163,7 +163,7 @@ const Index = () => {
         <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
             <div className="flex lg:hidden h-14 items-center justify-between">
-              <a href="tel:4582988008" className="flex items-center gap-2 text-logo-blue font-semibold">
+              <a href="tel:+14582988008" className="flex items-center gap-2 text-logo-blue font-semibold">
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">(458) 298-8008</span>
               </a>
@@ -230,7 +230,7 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:4582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
+                <a href="tel:+14582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                   <Phone className="w-4 h-4" />
                   (458) 298-8008
                 </a>
@@ -385,7 +385,7 @@ const Index = () => {
                   </div>
                   <ul className="space-y-3">
                     {[
-                      "Free “The Family Squares” calls with other families who get it",
+                      "Free \u201cThe Family Squares\u201d calls with other families who get it",
                       "Hourly coaching when you need one-on-one guidance",
                       "Clear education that explains what you're seeing",
                       "A private forum of families who truly get it",
@@ -494,7 +494,7 @@ const Index = () => {
                   </div>
                   <div className="text-center md:text-left">
                     <p className="text-xs md:text-sm font-medium text-white/80">Free weekly support</p>
-                    <h3 className="text-base md:text-lg font-bold">“The Family Squares” every Monday at 7 PM PST</h3>
+                    <h3 className="text-base md:text-lg font-bold">\u201cThe Family Squares\u201d every Monday at 7 PM PST</h3>
                     <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group support every Monday for any family member. No membership required.</p>
                   </div>
                 </div>
