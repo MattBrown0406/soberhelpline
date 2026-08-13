@@ -172,7 +172,7 @@ const Index = () => {
 
             <div className="hidden lg:flex h-16 items-center justify-between gap-4">
               <div className="flex items-center gap-6">
-                <Link to="/">
+                <Link to="/" className="flex items-center">
                   <img src={bannerLogo} alt="Sober Helpline" width={56} height={56} fetchPriority="high" decoding="async" className="h-14 w-auto" />
                 </Link>
                 <nav className="flex items-center gap-2">
