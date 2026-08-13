@@ -25,7 +25,7 @@ const startingPath = [
     color: "rose",
     resources: [
       { name: "Enabling vs Helping Decision Tree", path: "/family-education" },
-      { name: "Enabling Self-Assessment", path: "/family-education" },
+      { name: "Enabling Self-Assessment", path: "/enabling-self-assessment" },
       { name: "What Changes When Families Change", path: "/what-changes-when-families-change" },
     ]
   },

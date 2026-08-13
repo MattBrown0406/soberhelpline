@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Calendar, CheckCircle2, ExternalLink, Mail, Phone, Shield, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, CheckCircle2, Phone, Shield, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
-import RevenueLadder from "@/components/RevenueLadder";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -210,13 +210,16 @@ export default function FromNoMoreEnabling() {
                   </Button>
                 </div>
                 <a
-                  href="tel:4582988008"
+                  href="tel:+14582988008"
                   onClick={() => trackPhoneClick("nme_bridge_hero")}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-logo-blue hover:underline"
                 >
                   <Phone className="h-4 w-4" />
-                  Call 458-298-8008
+                  Call (458) 298-8008
                 </a>
+                <div className="mt-2">
+                  <WhatsAppLink source="nme_bridge_hero" variant="inline" label="WhatsApp +1 503-836-2136" />
+                </div>
               </div>
 
               <Card className="border-logo-green/20 bg-background/95 shadow-lg">
@@ -340,19 +343,15 @@ export default function FromNoMoreEnabling() {
             </div>
           </section>
 
-          <section className="container px-4 pb-10 md:pb-14">
-            <RevenueLadder compact source="nme_bridge_revenue_ladder" />
-          </section>
-
           <section className="border-y bg-muted/30">
             <div className="container grid gap-6 px-4 py-10 md:grid-cols-[0.8fr_1.2fr] md:items-center md:py-12">
               <div>
                 <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Users className="h-6 w-6" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground">Built for families first, useful for ethical partners.</h2>
+                <h2 className="text-2xl font-bold text-foreground">Built for families first.</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  This bridge also gives treatment providers, intervention partners, and future sponsors a clear signal: the Sober Helpline audience is actively seeking education, support, and next-step guidance.
+                  Free live support stays separate from paid coaching. Private consult and intervention-help are named next steps when the family needs them — not a placement funnel.
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -364,14 +363,6 @@ export default function FromNoMoreEnabling() {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="md:col-span-2">
-                <Button asChild variant="outline" onClick={() => trackConversionEvent("partner_page_click", { source: "nme_bridge_partner_section" })}>
-                  <Link to="/partner-with-sober-helpline">
-                    Professional partner information
-                    <ExternalLink className="h-4 w-4" />
-                  </Link>
-                </Button>
               </div>
             </div>
           </section>

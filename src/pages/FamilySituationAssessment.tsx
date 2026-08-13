@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Heart, Shield, AlertTriangle, CheckCircle2, Phone, Calendar, ChevronRight, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowLeft, Heart, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
+import FreeFamilyNextSteps from "@/components/FreeFamilyNextSteps";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -140,20 +138,20 @@ function scoreAnswers(answers: Answers): {
   let primaryCTA: "coaching" | "zoom" | "resources" = "zoom";
 
   if (urgency === "crisis") {
-    headline = "This is a crisis — you need real help right now.";
-    summary = `What you're describing isn't something that gets better by waiting. A family in crisis needs a professional who can help you create a plan, hold it, and support you through it. One conversation with an interventionist can change the trajectory of what happens next.`;
+    headline = "This is a high-pressure night — start with safety, then a human.";
+    summary = `What you described is not something to sit with alone until it blows over. Sober Helpline is family support, not emergency medical care. If anyone is in immediate danger, call 911. If this is a mental-health crisis, call or text 988. Then use the free tonight plan, Family Squares, or a phone call — a private consult is a second door if the risk is still rising.`;
     primaryCTA = "coaching";
   } else if (urgency === "high") {
-    headline = "The situation is serious — and you're more ready than you think.";
-    summary = `Based on what you've shared, your family is caught in patterns that tend to get worse without a clear strategy. The good news: families who take action early see dramatically better outcomes. The right next step is to talk with someone who can help you map a real plan.`;
+    headline = "The pattern is serious — and you already named it.";
+    summary = `Based on what you shared, the family is caught in enabling and urgency that tend to get worse without a clearer line. Start with what you can do tonight and the free Monday room. Private help is available if you need a plan you cannot wait until Monday to make.`;
     primaryCTA = "coaching";
   } else if (urgency === "moderate") {
-    headline = "You're at a turning point — this is the right time to act.";
-    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. The “The Family Squares” is a great place to start: ask real questions, hear from other families, and get guidance from a certified interventionist at no cost.`;
+    headline = "You're at a turning point — this is the right time to get steadier.";
+    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. Family Squares on Monday at 7 PM Pacific is a free place to ask the question. Tonight, use the short plan and the phone if you need a human.`;
     primaryCTA = "zoom";
   } else {
-    headline = "You're in the right place — support makes all the difference.";
-    summary = `Being proactive matters. Families who learn early how to respond — without enabling, without confrontation — see better outcomes than those who wait for a rock bottom. Start with the Monday Zoom and explore our free resources.`;
+    headline = "You're in the right place — support makes the next night easier.";
+    summary = `Being proactive matters. Start with the free tonight plan and Family Squares. Learn how to respond without enabling and without turning every conversation into a confrontation.`;
     primaryCTA = "resources";
   }
 
@@ -163,7 +161,6 @@ function scoreAnswers(answers: Answers): {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function FamilySituationAssessment() {
-  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({
     relationship: "",
@@ -173,10 +170,6 @@ export default function FamilySituationAssessment() {
     enabling: [],
     situation: "",
   });
-  const [showCapture, setShowCapture] = useState(false);
-  const [captureData, setCaptureData] = useState({ name: "", email: "", phone: "" });
-  const [captureErrors, setCaptureErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<ReturnType<typeof scoreAnswers> | null>(null);
 
   const currentStep = steps[step];
@@ -209,69 +202,12 @@ export default function FamilySituationAssessment() {
     if (step < totalSteps - 1) {
       setStep((s) => s + 1);
     } else {
-      // All questions done → show email capture gate
-      setShowCapture(true);
+      setResult(scoreAnswers(answers));
     }
   }
 
   function handleBack() {
-    if (showCapture) { setShowCapture(false); return; }
     if (step > 0) setStep((s) => s - 1);
-  }
-
-  async function handleCapture(e: React.FormEvent) {
-    e.preventDefault();
-    const errors: Record<string, string> = {};
-    if (!captureData.name.trim()) errors.name = "Name is required";
-    if (!captureData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(captureData.email)) errors.email = "Valid email required";
-    if (Object.keys(errors).length) { setCaptureErrors(errors); return; }
-
-    setIsSubmitting(true);
-    const scored = scoreAnswers(answers);
-
-    try {
-      // Save to Supabase (enabling_behavior_audits table)
-      await supabase.from("enabling_behavior_audits").insert({
-        name: captureData.name.trim(),
-        email: captureData.email.trim(),
-        phone: captureData.phone.trim() || null,
-        relationship: answers.relationship,
-        substance: answers.substance,
-        duration: answers.duration,
-        treatment_history: answers.treatment,
-        enabling_behaviors: answers.enabling,
-        situation: answers.situation,
-        enabling_score: scored.enablingScore,
-        urgency: scored.urgency,
-        tags: scored.tags,
-      } as any);
-    } catch (err) {
-      // Non-blocking — still show results even if DB write fails
-      console.error("Assessment save error:", err);
-    }
-
-    // Add to Mailchimp — only for authenticated users adding their own
-    // email. Anonymous submissions are skipped to prevent arbitrary
-    // address abuse via the function. The assessment record is still saved.
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user?.email?.toLowerCase().trim() === captureData.email.trim().toLowerCase()) {
-        const nameParts = captureData.name.trim().split(" ");
-        await supabase.functions.invoke("add-to-mailchimp", {
-          body: {
-            email: captureData.email.trim(),
-            firstName: nameParts[0] || "",
-            lastName: nameParts.slice(1).join(" ") || "",
-            tags: scored.tags,
-          },
-        });
-      }
-    } catch (err) {
-      console.error("Mailchimp error:", err);
-    }
-
-    setResult(scored);
-    setIsSubmitting(false);
   }
 
   const assessmentSchema = {
@@ -343,200 +279,43 @@ export default function FamilySituationAssessment() {
               </Card>
             )}
 
-            {/* Primary CTA */}
-            <div className="space-y-4 mb-10">
-              {result.primaryCTA === "coaching" && (
-                <Card className="border-primary/30 bg-primary/5">
-                  <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended Order: Start with the Monday Zoom, then move into private help if needed</h2>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Based on what you shared, private coaching may be useful, but the clearest first step is still the Monday Zoom. If you want more structure after that, membership comes next. Coaching is there when you need one-on-one guidance for your specific situation.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/monday-zoom-registration">
-                        <Button size="lg" className="gap-2 w-full sm:w-auto">
-                          <Calendar className="h-4 w-4" />
-                          Start with Monday Zoom
-                        </Button>
-                      </Link>
-                      <Link to="/family-membership">
-                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                          Membership Next
-                        </Button>
-                      </Link>
-                      <Link to="/family-coaching">
-                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                          <Phone className="h-4 w-4" />
-                          Explore Coaching
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {result.primaryCTA === "zoom" && (
-                <Card className="border-primary/30 bg-primary/5">
-                  <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended: Join the Free Monday Zoom</h2>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      Every Monday at 7PM PST. Ask real questions, hear from other families, get guidance from a certified
-                      interventionist. Free — no commitment required.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/monday-zoom-registration">
-                        <Button size="lg" className="gap-2 w-full sm:w-auto">
-                          <Calendar className="h-4 w-4" />
-                          Register for Monday Zoom
-                        </Button>
-                      </Link>
-                      <Link to="/family-coaching">
-                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                          <Phone className="h-4 w-4" />
-                          Get Coaching Instead
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {result.primaryCTA === "resources" && (
-                <Card className="border-primary/30 bg-primary/5">
-                  <CardContent className="p-6">
-                    <h2 className="text-xl font-bold text-logo-blue mb-2">Recommended: Start with the Monday Zoom & Resources</h2>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      You're thinking ahead — that's powerful. The Monday Zoom and our free education library are the right
-                      starting point. Come with questions. Leave with a plan.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/monday-zoom-registration">
-                        <Button size="lg" className="gap-2 w-full sm:w-auto">
-                          <Calendar className="h-4 w-4" />
-                          Join Free Monday Zoom
-                        </Button>
-                      </Link>
-                      <Link to="/family-education">
-                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                          Browse Resources
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-
-            {/* Secondary options */}
-            <div className="grid sm:grid-cols-3 gap-3 mb-10">
-              {[
-                { label: "Enabling Quiz", desc: "See which behaviors to stop first", to: "/enabling-language-translator" },
-                { label: "Addiction Assessment", desc: "Understand severity level", to: "/addiction-assessment" },
-                { label: "Treatment Finder", desc: "Vetted providers near you", to: "/recovery-resources" },
-              ].map((item) => (
-                <Link key={item.to} to={item.to}>
-                  <Card className="hover:border-primary/50 hover:shadow-sm transition-all h-full">
-                    <CardContent className="p-4">
-                      <p className="font-medium text-logo-blue text-sm mb-1">{item.label}</p>
-                      <p className="text-xs text-muted-foreground">{item.desc}</p>
-                      <ChevronRight className="h-4 w-4 text-primary mt-2" />
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Your answers are confidential and will never be shared. If you're in immediate danger, call 911.
-              For substance use crisis support, call SAMHSA at 1-800-662-4357 (24/7, free, confidential).
-            </p>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  // ─── Email Capture Gate ───────────────────────────────────────────────────────
-
-  if (showCapture) {
-    return (
-      <>
-        <SEOHead
-          title="Family Situation Assessment | Sober Helpline"
-          description="Free family addiction assessment — personalized guidance for your next step."
-          jsonLd={assessmentSchema}
-        />
-        <div className="min-h-screen bg-background flex items-center">
-          <div className="container max-w-lg mx-auto px-4 py-12">
-            <div className="text-center mb-8">
-              <CheckCircle2 className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-logo-blue mb-2">Your assessment is ready.</h1>
-              <p className="text-muted-foreground">
-                Enter your name and email to see your personalized results and recommended next step.
-                We'll also send a copy to your inbox.
-              </p>
-            </div>
-
-            <Card>
+            <Card className="mb-10 border-primary/30 bg-primary/5">
               <CardContent className="p-6">
-                <form onSubmit={handleCapture} className="space-y-4">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="name">Your Name *</Label>
-                    <Input
-                      id="name"
-                      placeholder="Your name"
-                      value={captureData.name}
-                      onChange={(e) => setCaptureData((p) => ({ ...p, name: e.target.value }))}
-                      className={captureErrors.name ? "border-destructive" : ""}
-                    />
-                    {captureErrors.name && <p className="text-xs text-destructive">{captureErrors.name}</p>}
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={captureData.email}
-                      onChange={(e) => setCaptureData((p) => ({ ...p, email: e.target.value }))}
-                      className={captureErrors.email ? "border-destructive" : ""}
-                    />
-                    {captureErrors.email && <p className="text-xs text-destructive">{captureErrors.email}</p>}
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="phone">Phone <span className="text-muted-foreground font-normal text-xs">(Optional — for follow-up only)</span></Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="(555) 123-4567"
-                      value={captureData.phone}
-                      onChange={(e) => setCaptureData((p) => ({ ...p, phone: e.target.value }))}
-                    />
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full gap-2" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <><Loader2 className="h-4 w-4 animate-spin" /> Getting your results...</>
-                    ) : (
-                      <>See My Personalized Results <ArrowRight className="h-4 w-4" /></>
-                    )}
-                  </Button>
-
-                  <p className="text-xs text-muted-foreground text-center">
-                    Your information is private. We do not sell data or share with treatment centers.
-                  </p>
-                </form>
+                <h2 className="mb-2 text-xl font-bold text-logo-blue">Free next steps</h2>
+                <p className="mb-4 text-sm text-muted-foreground">
+                  Your result stays on this page. No email is required. Start with tonight, Family Squares, or a call.
+                </p>
+                <FreeFamilyNextSteps
+                  source="family_situation_assessment_result"
+                  showPaidSecondary={result.primaryCTA === "coaching"}
+                />
               </CardContent>
             </Card>
 
-            <button
-              onClick={handleBack}
-              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mt-6 mx-auto"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" /> Go back
-            </button>
+            <div className="mb-10 grid gap-3 sm:grid-cols-2">
+              <Link to="/enabling-self-assessment">
+                <Card className="h-full transition-all hover:border-primary/50 hover:shadow-sm">
+                  <CardContent className="p-4">
+                    <p className="mb-1 text-sm font-medium text-logo-blue">Enabling Self-Assessment</p>
+                    <p className="text-xs text-muted-foreground">A longer look at the pattern, still free, still no email gate.</p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link to="/addiction-assessment">
+                <Card className="h-full transition-all hover:border-primary/50 hover:shadow-sm">
+                  <CardContent className="p-4">
+                    <p className="mb-1 text-sm font-medium text-logo-blue">Addiction Assessment</p>
+                    <p className="text-xs text-muted-foreground">A free screening of warning signs families often notice.</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+
+            <p className="text-center text-xs text-muted-foreground">
+              Your answers stay on this page. If someone is in immediate danger, call{" "}
+              <a href="tel:911" className="font-semibold underline">911</a>. If you are in a mental-health crisis, call or text{" "}
+              <a href="tel:988" className="font-semibold underline">988</a>. Sober Helpline is family support, not emergency medical care.
+            </p>
           </div>
         </div>
       </>

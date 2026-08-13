@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, Heart } from "lucide-react";
+import { Phone, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import WhatsAppLink from "@/components/WhatsAppLink";
@@ -56,6 +56,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/family-membership" className="text-sm hover:text-white transition-colors">Membership</Link></li>
               <li><Link to="/start-here" className="text-sm hover:text-white transition-colors">Start Here</Link></li>
+              <li><Link to="/what-to-do-tonight" className="text-sm hover:text-white transition-colors">What to Do Tonight</Link></li>
               <li><Link to="/family-forum" className="text-sm hover:text-white transition-colors">Family Forum</Link></li>
               <li><Link to="/family-education" className="text-sm hover:text-white transition-colors">Education Center</Link></li>
               <li><Link to="/blog" className="text-sm hover:text-white transition-colors">Blog</Link></li>
@@ -92,6 +93,8 @@ const Footer = () => {
             <h4 className="font-semibold text-white mb-4">Resources</h4>
             <ul className="space-y-2">
               <li><Link to="/faqs" className="text-sm hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link to="/about" className="text-sm hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/contact" className="text-sm hover:text-white transition-colors">Contact</Link></li>
               <li><Link to="/support" className="text-sm hover:text-white transition-colors">App Support</Link></li>
               <li><Link to="/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link to="/cancel-membership" className="text-sm hover:text-white transition-colors">Cancel Membership</Link></li>

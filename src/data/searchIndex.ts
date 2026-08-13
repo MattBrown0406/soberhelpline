@@ -124,10 +124,13 @@ export const searchIndex: SearchEntry[] = [
   { title: "Family Membership", path: "/family-membership", description: "Join our family support membership for full access to resources.", category: "page", keywords: ["membership", "join", "subscribe", "access"] },
   { title: "Provider Directory", path: "/providers", description: "Find vetted, ethical treatment providers.", category: "provider", keywords: ["providers", "directory", "treatment", "rehab", "find"] },
   { title: "Intervention Services", path: "/intervention", description: "Professional intervention services for families in crisis.", category: "page", keywords: ["intervention", "crisis", "professional", "help"] },
-  { title: "About Matt Brown", path: "/about", description: "Learn about Matt Brown's 20+ years of experience in addiction intervention.", category: "page", keywords: ["about", "Matt Brown", "interventionist", "experience"] },
+  { title: "About Sober Helpline", path: "/about", description: "Free family support, education, and live Monday Family Squares. Matt Brown is the certified interventionist behind Sober Helpline.", category: "page", keywords: ["about", "Matt Brown", "interventionist", "family support"] },
   { title: "Blog", path: "/blog", description: "Articles on addiction, recovery, family dynamics, and treatment.", category: "blog", keywords: ["blog", "articles", "news", "education"] },
   { title: "Podcast", path: "/podcast", description: "Sober Helpline podcast episodes on addiction and recovery.", category: "page", keywords: ["podcast", "episodes", "listen", "audio"] },
-  { title: "Contact Us", path: "/contact", description: "Get in touch with Sober Helpline for help.", category: "page", keywords: ["contact", "phone", "email", "reach out"] },
+  { title: "Contact Us", path: "/contact", description: "Call (458) 298-8008, WhatsApp +1 503-836-2136, or join Family Squares Monday at 7 PM Pacific.", category: "page", keywords: ["contact", "phone", "whatsapp", "reach out"] },
+  { title: "What to Do Tonight", path: "/what-to-do-tonight", description: "A free tonight plan for families: safety first, what to say, money, keys, kids, then Family Squares or a call.", category: "page", keywords: ["tonight", "2am", "what to do", "safety", "911", "988"] },
+  { title: "Enabling Self-Assessment", path: "/enabling-self-assessment", description: "Free enabling self-assessment with an immediate result and no email gate.", category: "tool", keywords: ["enabling", "self-assessment", "helping", "making it worse"] },
+  { title: "Family Situation Assessment", path: "/family-situation-assessment", description: "A short free assessment that names the pattern and points to tonight, Family Squares, or a call.", category: "tool", keywords: ["family situation", "assessment", "enabling", "next step"] },
 
   // ──────────────────────────────────────────────
   // BLOG HIGHLIGHTS (key articles)
