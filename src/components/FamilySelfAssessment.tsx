@@ -496,7 +496,10 @@ export default function FamilySelfAssessment({ user, defaultExpanded = false, hi
 
               <div className="rounded-lg border p-4">
                 <h4 className="mb-3 font-semibold text-logo-blue">Free next steps</h4>
-                <FreeFamilyNextSteps source="enabling_self_assessment_result" />
+                <FreeFamilyNextSteps
+                  source="enabling_self_assessment_result"
+                  showPaidSecondary={justSubmittedScore > 50}
+                />
               </div>
 
               <Button onClick={resetAssessment} className="w-full">

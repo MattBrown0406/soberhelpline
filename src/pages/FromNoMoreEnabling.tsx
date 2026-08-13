@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Calendar, CheckCircle2, Phone, Shield, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, CheckCircle2, Mail, Phone, Shield, Users } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";

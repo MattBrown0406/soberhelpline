@@ -9,7 +9,7 @@ interface FreeFamilyNextStepsProps {
   showPaidSecondary?: boolean;
 }
 
-export default function FreeFamilyNextSteps({ source, showPaidSecondary = true }: FreeFamilyNextStepsProps) {
+export default function FreeFamilyNextSteps({ source, showPaidSecondary = false }: FreeFamilyNextStepsProps) {
   return (
     <div className="space-y-4">
       <div className="grid gap-3 sm:grid-cols-3">
