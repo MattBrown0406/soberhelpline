@@ -243,7 +243,7 @@ export default function IdahoBoiseFamilySupport() {
                     <div className="mt-4 text-sm text-muted-foreground">
                       Questions? Call us directly:
                     </div>
-                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
+                    <a href="tel:+14582988008" className="text-primary font-semibold text-lg hover:underline">
                       (458) 298-8008
                     </a>
                   </div>
@@ -285,7 +285,7 @@ export default function IdahoBoiseFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:4582988008">
+                <a href="tel:+14582988008">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
                     Call (458) 298-8008
@@ -337,7 +337,7 @@ export default function IdahoBoiseFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   (458) 298-8008

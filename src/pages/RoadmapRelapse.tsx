@@ -287,11 +287,11 @@ const RoadmapRelapse = () => {
               <Phone className="w-3.5 h-3.5" /> 988 Crisis Lifeline
             </a>
             <span className="text-muted-foreground">|</span>
-            <a href="tel:18002221222" className="inline-flex items-center gap-1 font-semibold text-foreground hover:underline">
+            <a href="tel:+18002221222" className="inline-flex items-center gap-1 font-semibold text-foreground hover:underline">
               <Phone className="w-3.5 h-3.5" /> Poison Control
             </a>
             <span className="text-muted-foreground">|</span>
-            <a href="tel:4582988008" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+            <a href="tel:+14582988008" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
               <Phone className="w-3.5 h-3.5" /> (458) 298-8008
             </a>
           </CardContent>
@@ -404,7 +404,7 @@ const RoadmapRelapse = () => {
                     </div>
                   )}
                   {path.phone && (
-                    <a href="tel:4582988008">
+                    <a href="tel:+14582988008">
                       <Button size="sm" className="w-full">
                         <Phone className="w-4 h-4 mr-1" />
                         Talk to an Interventionist
@@ -456,7 +456,7 @@ const RoadmapRelapse = () => {
                 This is exactly when you need to show up.
               </p>
               <a
-                href="tel:4582988008"
+                href="tel:+14582988008"
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Phone className="w-4 h-4" />
@@ -526,12 +526,12 @@ function RelapseCard({
                     <span className="text-muted-foreground">|</span>
                     <a href="tel:988" className="font-semibold text-foreground hover:underline">988 Crisis Lifeline</a>
                     <span className="text-muted-foreground">|</span>
-                    <a href="tel:18002221222" className="font-semibold text-foreground hover:underline">Poison Control: 1-800-222-1222</a>
+                    <a href="tel:+18002221222" className="font-semibold text-foreground hover:underline">Poison Control: 1-800-222-1222</a>
                   </div>
                 )}
 
                 {item.ctaPhone && (
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="sm" variant="outline">
                       <Phone className="w-4 h-4 mr-1" />
                       Call: (458) 298-8008

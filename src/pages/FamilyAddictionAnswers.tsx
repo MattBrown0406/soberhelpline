@@ -299,7 +299,7 @@ export default function FamilyAddictionAnswers() {
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline">
-                    <a href="tel:4582988008" onClick={() => trackPhoneClick("family_addiction_answers_bottom")}>
+                    <a href="tel:+14582988008" onClick={() => trackPhoneClick("family_addiction_answers_bottom")}>
                       <PhoneCall className="h-4 w-4" />
                       Call Sober Helpline
                     </a>

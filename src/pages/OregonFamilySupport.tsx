@@ -186,7 +186,7 @@ export default function OregonFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:4582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:+14582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
                     (458) 298-8008
                   </a>
@@ -311,7 +311,7 @@ export default function OregonFamilySupport() {
                     Free, confidential, available 24 hours a day. Also has an alcohol and drug helpline.
                   </p>
                   <a
-                    href="tel:18002738255"
+                    href="tel:+18002738255"
                     className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
                   >
                     <Phone className="h-4 w-4" />
@@ -498,7 +498,7 @@ export default function OregonFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call (458) 298-8008
@@ -613,7 +613,7 @@ export default function OregonFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

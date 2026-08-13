@@ -80,7 +80,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008
@@ -224,7 +224,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                     crisis region for many services; SAMHSA provides national referrals 24/7.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="tel:8008547771" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:+18008547771" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-4 w-4" />
                       Crisis Line: 800-854-7771
                     </a>
@@ -373,7 +373,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

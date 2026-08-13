@@ -234,7 +234,7 @@ export default function UtahSaltLakeCityFamilySupport() {
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
                     <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
                     <div className="mt-4 text-sm text-muted-foreground">Questions? Call us directly:</div>
-                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">(458) 298-8008</a>
+                    <a href="tel:+14582988008" className="text-primary font-semibold text-lg hover:underline">(458) 298-8008</a>
                   </div>
                 </div>
               </CardContent>
@@ -264,7 +264,7 @@ export default function UtahSaltLakeCityFamilySupport() {
               </ul>
               <div className="flex flex-col gap-3">
                 <Link to="/family-coaching"><Button size="lg" className="w-full gap-2"><Phone className="h-4 w-4" />Schedule Coaching</Button></Link>
-                <a href="tel:4582988008"><Button size="lg" variant="outline" className="w-full gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button></a>
+                <a href="tel:+14582988008"><Button size="lg" variant="outline" className="w-full gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button></a>
             <WhatsAppLink source="utah_salt_lake_city_cta_1" variant="button" />
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function UtahSaltLakeCityFamilySupport() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration"><Button className="gap-2"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
-              <a href="tel:4582988008"><Button variant="outline" className="gap-2"><Phone className="h-4 w-4" />(458) 298-8008</Button></a>
+              <a href="tel:+14582988008"><Button variant="outline" className="gap-2"><Phone className="h-4 w-4" />(458) 298-8008</Button></a>
             <WhatsAppLink source="utah_salt_lake_city_cta_2" variant="button" />
             </div>
           </div>

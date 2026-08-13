@@ -189,7 +189,7 @@ export default function OregonMedfordFamilySupport() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Free, confidential crisis line serving Southern Oregon and the entire state, 24 hours a day.
                   </p>
-                  <a href="tel:18002738255" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                  <a href="tel:+18002738255" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     1-800-273-8255
                   </a>
@@ -240,7 +240,7 @@ export default function OregonMedfordFamilySupport() {
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
                     <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
                     <div className="mt-4 text-sm text-muted-foreground">Questions? Call:</div>
-                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
+                    <a href="tel:+14582988008" className="text-primary font-semibold text-lg hover:underline">
                       (458) 298-8008
                     </a>
                   </div>
@@ -282,7 +282,7 @@ export default function OregonMedfordFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:4582988008">
+                <a href="tel:+14582988008">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
                     Call (458) 298-8008
@@ -330,7 +330,7 @@ export default function OregonMedfordFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   (458) 298-8008

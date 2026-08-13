@@ -65,7 +65,7 @@ const immediateActions = [
     cta: {
       type: "phone" as const,
       label: "Call Now: (458) 298-8008",
-      href: "tel:4582988008",
+      href: "tel:+14582988008",
     },
     secondaryCta: {
       label: "Or schedule a video consultation",
@@ -282,7 +282,7 @@ const RoadmapCrisis = () => {
             <p className="text-sm text-muted-foreground">
               If you've been in crisis mode for weeks and nothing is changing, it may be time for a professional intervention. This is what interventionists do — they break through when the family can't.
             </p>
-            <a href="tel:4582988008">
+            <a href="tel:+14582988008">
               <Button variant="destructive" size="sm" className="mt-3">
                 <Phone className="w-4 h-4 mr-1" />
                 Call Now: (458) 298-8008
@@ -370,7 +370,7 @@ const RoadmapCrisis = () => {
             <Button variant="outline" onClick={() => setShowComingSoon(false)}>
               Close
             </Button>
-            <a href="tel:4582988008">
+            <a href="tel:+14582988008">
               <Button>
                 <Phone className="w-4 h-4 mr-1" />
                 Call for Guidance
@@ -420,7 +420,7 @@ function ImmediateActionCard({
                       <Phone className="w-4 h-4 mr-1" /> 988 Crisis Lifeline
                     </Button>
                   </a>
-                  <a href="tel:18007997233">
+                  <a href="tel:+18007997233">
                     <Button variant="outline" size="sm">
                       <Phone className="w-4 h-4 mr-1" /> DV Hotline
                     </Button>
@@ -504,7 +504,7 @@ function CrisisActionCard({
                 )}
 
                 {showSpecialCta === "professional-assessment" && (
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="sm" className="mt-1">
                       <Phone className="w-4 h-4 mr-1" />
                       Schedule Assessment: (458) 298-8008

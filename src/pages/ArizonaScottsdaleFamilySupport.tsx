@@ -119,7 +119,7 @@ export default function ArizonaScottsdaleFamilySupport() {
                     { name: "Barrett Behavioral Health", desc: "Outpatient and intensive outpatient programs", url: "https://www.barrettbehavioral.com" },
                     { name: "Scottsdale Recovery Center", desc: "Inpatient and outpatient addiction treatment", url: "https://www.scottsdalerecoverycenter.com" },
                     { name: "Rosecrance (outpatient)", desc: "Evidence-based outpatient addiction services", url: "https://www.rosecrance.org" },
-                    { name: "Arizona Crisis Line", desc: "24/7 crisis support: 1-844-534-4673", url: "tel:18445344673" },
+                    { name: "Arizona Crisis Line", desc: "24/7 crisis support: 1-844-534-4673", url: "tel:+18445344673" },
                     { name: "Al-Anon Arizona", desc: "Family support groups for addiction", url: "https://www.al-anon.org/find-a-meeting" },
                   ].map((r) => (
                     <Card key={r.name} className="hover:shadow-md transition-shadow">

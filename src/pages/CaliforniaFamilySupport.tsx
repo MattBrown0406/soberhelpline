@@ -188,7 +188,7 @@ export default function CaliforniaFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:4582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:+14582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
                     (458) 298-8008
                   </a>
@@ -334,11 +334,11 @@ export default function CaliforniaFamilySupport() {
                     Regional crisis lines for Southern and Northern California families facing addiction or mental health emergencies.
                   </p>
                   <div className="space-y-2">
-                    <a href="tel:8008547771" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:+18008547771" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-3.5 w-3.5" />
                       LA County: 800-854-7771
                     </a>
-                    <a href="tel:8003092131" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:+18003092131" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-3.5 w-3.5" />
                       Bay Area: 800-309-2131
                     </a>
@@ -524,7 +524,7 @@ export default function CaliforniaFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call (458) 298-8008
@@ -639,7 +639,7 @@ export default function CaliforniaFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

@@ -36,7 +36,7 @@ const RecoveryResources = () => {
               No commissions. No patient brokering.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                   <Phone className="w-4 h-4" />
                   Call Us: (458) 298-8008
@@ -115,7 +115,7 @@ const RecoveryResources = () => {
                   Take the Assessment
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
                   <Phone className="w-4 h-4" />
                   (458) 298-8008

@@ -254,7 +254,7 @@ const RoadmapAssessment = () => {
                 <Phone className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">Professional Intervention Help</p>
-                  <a href="tel:4582988008" className="text-primary hover:underline font-medium">(458) 298-8008</a>
+                  <a href="tel:+14582988008" className="text-primary hover:underline font-medium">(458) 298-8008</a>
                 </div>
               </div>
             </div>

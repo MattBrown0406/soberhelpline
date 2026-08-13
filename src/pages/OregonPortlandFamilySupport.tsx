@@ -192,7 +192,7 @@ export default function OregonPortlandFamilySupport() {
                   <p className="text-sm text-muted-foreground mb-2">
                     Statewide crisis and substance use helpline available around the clock. Free, confidential.
                   </p>
-                  <a href="tel:18002738255" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                  <a href="tel:+18002738255" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     1-800-273-8255
                   </a>
@@ -245,7 +245,7 @@ export default function OregonPortlandFamilySupport() {
                     <div className="mt-4 text-sm text-muted-foreground">
                       Questions? Call us directly:
                     </div>
-                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
+                    <a href="tel:+14582988008" className="text-primary font-semibold text-lg hover:underline">
                       (458) 298-8008
                     </a>
                   </div>
@@ -287,7 +287,7 @@ export default function OregonPortlandFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:4582988008">
+                <a href="tel:+14582988008">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
                     Call (458) 298-8008
@@ -339,7 +339,7 @@ export default function OregonPortlandFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   (458) 298-8008

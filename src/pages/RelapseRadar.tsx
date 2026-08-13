@@ -483,7 +483,7 @@ export default function RelapseRadar() {
                 {/* Phone CTA */}
                 <div className="text-center py-4">
                   <a
-                    href="tel:4582988008"
+                    href="tel:+14582988008"
                     className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold"
                   >
                     <Phone className="w-5 h-5" />

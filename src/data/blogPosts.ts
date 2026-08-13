@@ -15448,7 +15448,7 @@ When emotional pain is no longer overwhelming, people are far more capable of ch
 
 **Take the Next Step**
 
-If you or a loved one is struggling with both depression and addiction, professional guidance can help. Call the Sober Helpline at [LINK:844-762-3734:tel:844-762-3734] for free, confidential support in finding appropriate treatment options.`
+If you or a loved one is struggling with both depression and addiction, professional guidance can help. Call the Sober Helpline at [LINK:844-762-3734:tel:+18447623734] for free, confidential support in finding appropriate treatment options.`
   },
   {
     title: "Loving Someone With Addiction Without Losing Your Marriage or Family",
@@ -15522,7 +15522,7 @@ You can care deeply without letting addiction consume your family.
 
 **Take the Next Step**
 
-If addiction is affecting your marriage or family, you don't have to navigate it alone. Call the Sober Helpline at [LINK:844-762-3734:tel:844-762-3734] for free, confidential guidance.
+If addiction is affecting your marriage or family, you don't have to navigate it alone. Call the Sober Helpline at [LINK:844-762-3734:tel:+18447623734] for free, confidential guidance.
 
 Protecting your family is not giving up—it's the most loving thing you can do.`
   },

@@ -51,7 +51,7 @@ export default function Support() {
                   </a>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="gap-2">
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Phone className="h-4 w-4" />
                     Call 458-298-8008
                   </a>
