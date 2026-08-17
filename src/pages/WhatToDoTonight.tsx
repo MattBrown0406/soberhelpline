@@ -167,6 +167,12 @@ export default function WhatToDoTonight() {
             </Card>
 
             <p className="text-sm text-muted-foreground">
+              <Link to="/two-households" className="font-semibold text-logo-blue hover:underline">
+                Two households / the other parent is running a different plan.
+              </Link>
+            </p>
+
+            <p className="text-sm text-muted-foreground">
               If the situation is higher-risk — treatment refusal, safety concerns, or the family is split — you can{" "}
               <Link
                 to="/family-consultation"

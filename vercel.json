@@ -6,6 +6,16 @@
       "has": [{ "type": "host", "value": "www.soberhelpline.com" }],
       "destination": "https://soberhelpline.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/split-house",
+      "destination": "/two-households",
+      "permanent": true
+    },
+    {
+      "source": "/divorced-parents",
+      "destination": "/two-households",
+      "permanent": true
     }
   ],
   "rewrites": [

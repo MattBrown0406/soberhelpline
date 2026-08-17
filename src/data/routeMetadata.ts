@@ -116,6 +116,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
     description: 'Not sure where to begin? Choose between free Monday support, private family coaching, or intervention readiness help.',
   },
+  '/two-households': {
+    title: 'Two Households | Sober Helpline',
+    description: 'Free tonight guidance for divorced, separated, or never-married parents when the other house is about to pay, house, or hand over the keys.',
+  },
   '/family-education': {
     title: 'Addiction Education for Families | Sober Helpline',
     description: 'Learn what addiction really is, how it affects families, and what you can do. Evidence-based education designed for families.',

@@ -117,6 +117,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>What to Do Tonight</h1><p>Keep people safe, stop the argument, and hold one or two practical lines until morning. Sober Helpline is family support, not emergency medical care.</p><p>If someone is in immediate danger, call 911. If you are in a mental-health crisis, call or text 988. <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7 PM Pacific</a>.</p></main>'
   },
   {
+    route: '/two-households',
+    title: 'Two Households | Sober Helpline',
+    description: 'Free tonight guidance for divorced, separated, or never-married parents when the other house is about to pay, house, or hand over the keys.',
+    noscriptHtml: '<main><h1>Two homes. Same night. Different rules.</h1><p>If the other parent is about to pay, house, or hand over the keys, you do not need to win the argument tonight. You need one line the two of you can both say — or a plan for the house you actually control.</p><p>Two houses. One disease. Money, housing, and contact have to be the same line in both kitchens. Kids are not messengers and not the reason to cave.</p><p>If someone is in immediate danger, call 911. If you are in a suicidal crisis, call or text 988. Family line: <a href="tel:+14582988008">(458) 298-8008</a>. <a href="https://soberhelpline.com/what-to-do-tonight">What to do tonight</a> · <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7 PM Pacific</a>.</p></main>'
+  },
+  {
     route: '/enabling-self-assessment',
     title: 'Enabling Self-Assessment | Sober Helpline',
     description: 'A free enabling self-assessment for families. Name the pattern, see your result immediately, and get free next steps — no email required.',
@@ -250,6 +256,7 @@ export const sitemapPriority = new Map([
   ['/about', '0.7'],
   ['/contact', '0.7'],
   ['/what-to-do-tonight', '0.9'],
+  ['/two-households', '0.9'],
   ['/enabling-self-assessment', '0.85'],
   ['/family-situation-assessment', '0.85'],
   ['/family-addiction-answers', '0.92'],
@@ -293,6 +300,7 @@ export const sitemapChangefreq = new Map([
   ['/about', 'monthly'],
   ['/contact', 'monthly'],
   ['/what-to-do-tonight', 'weekly'],
+  ['/two-households', 'weekly'],
   ['/enabling-self-assessment', 'weekly'],
   ['/family-situation-assessment', 'weekly'],
   ['/family-addiction-answers', 'weekly'],
@@ -315,6 +323,8 @@ export const sitemapChangefreq = new Map([
 ]);
 
 export const excludedSitemapRoutes = new Set([
+  '/split-house',
+  '/divorced-parents',
   '/auth',
   '/admin',
   '/sso',
