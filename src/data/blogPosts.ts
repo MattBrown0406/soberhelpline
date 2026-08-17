@@ -179,6 +179,7 @@ import localVsOutOfStateRehabImg from "@/assets/blog-local-rehab-vs-out-of-state
 import eapAddictionTreatmentImg from "@/assets/blog-employee-assistance-program-eap-addiction-treatment.jpg";
 import anhedoniaEarlyRecoveryImg from "@/assets/blog-anhedonia-early-recovery-family-guide.jpg";
 import brokenPromisesAddictionImg from "@/assets/blog-broken-promises-addiction-family-guide.jpg";
+import lovedOneBlamesYouImg from "@/assets/blog-loved-one-blames-you-for-their-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
