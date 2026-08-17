@@ -16,6 +16,11 @@
       "source": "/divorced-parents",
       "destination": "/two-households",
       "permanent": true
+    },
+    {
+      "source": "/addiction-family-coaching",
+      "destination": "/family-coaching",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -411,7 +411,7 @@ const BlogArticle = () => {
                   <Link to="/family-consultation">
                     <Button>Book a private family consult</Button>
                   </Link>
-                  <Link to="/addiction-family-coaching">
+                  <Link to="/family-coaching">
                     <Button variant="outline">Family addiction coaching</Button>
                   </Link>
                 </div>
