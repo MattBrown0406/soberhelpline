@@ -186,6 +186,106 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 159,
+    slug: "broken-promises-addiction-family-guide",
+    seoTitle: "Broken Promises and Addiction: When \"I'll Stop\" Doesn't Last",
+    metaDescription: "Broken promises and addiction go hand in hand. Learn why it happens, what to say, and how to build agreements you can actually verify.",
+    title: "Broken Promises and Addiction: What to Do When \"I'll Stop\" Doesn't Last",
+    category: "Family Support",
+    author: "Matt Brown",
+    date: "2026-08-16",
+    image: brokenPromisesAddictionImg,
+    keywords: ["broken promises addiction", "addicted loved one keeps lying", "promises to quit drinking", "how many chances addiction", "verifiable agreements addiction"],
+    excerpt: "\"I'm done.\" \"That was the last time.\" When promises keep breaking, the answer isn't more promises — it's specific agreements you can actually verify. Here's how.",
+    content: `You have heard the promise before. Maybe last month, maybe last night. "I'm done." "That was the last time." "I'll cut back, I swear." And for a few days, it looks true. Then it isn't.
+
+Broken promises and addiction travel together so often that most families stop counting. If you are reading this, you are probably somewhere between wanting to believe the next one and being unable to. That is not weakness or naivety. That is what happens when love and evidence keep pointing in opposite directions.
+
+There is a way to respond that does not require you to either pretend or explode. It starts with understanding what a broken promise actually is — and what it is not.
+
+**Why Do People With Addiction Break Promises They Seem to Mean?**
+
+Most broken promises in addiction are not lies at the moment they are spoken. In the moment of remorse — the morning after, the hospital room, the conversation on the porch — the intention is usually real. What is missing is the capacity to carry that intention across the next craving.
+
+Addiction changes how the brain weighs short-term relief against long-term consequence. When a person is hungover, ashamed, and clear-headed, the long term matters most, and the promise feels easy. Twelve hours later, when the discomfort shows up, the brain's reward system starts arguing for relief right now. The promise stops feeling like a promise. It starts feeling like a rule someone else made.
+
+This is why willpower-based commitments fail so consistently. A promise is a statement of intent. Recovery requires structure — support, treatment, accountability, and a plan for the exact moment intent runs out.
+
+**What Is a Broken Promise Actually Telling You?**
+
+A broken promise is information, not a character verdict. Specifically, it tells you three things:
+
+- **The problem is bigger than self-management.** If it could be handled alone, it already would have been.
+- **The plan was too vague.** "I'll drink less" has no structure, no support, and no way to know whether it is working.
+- **The pattern is stable.** One broken promise is a data point. Five is a system.
+
+**How Should You Respond When a Promise About Drinking or Drug Use Is Broken?**
+
+Respond calmly, name what you observed, skip the interrogation, and state what you are going to do next. The goal is not to win the moment. The goal is to stay credible and keep the door open for the next real conversation. Here is a sequence that works in most homes:
+
+1. **Wait until they are sober.** Nothing said to an intoxicated person is retained. This is not avoidance — it is timing.
+2. **State the observation, not the accusation.** "You said Tuesday you were done. I found the bottle Thursday." Facts are harder to argue with than character claims.
+3. **Skip the demand for a confession.** Trying to force an admission almost always produces a fight instead of the truth. You already know what you saw.
+4. **Say the impact in one sentence.** "I'm not angry. I'm scared, and I don't know what to believe anymore." Short is stronger than long.
+5. **Name your next step, not theirs.** "I'm going to talk with someone who does this for a living, because I need help figuring out how to handle this."
+
+Notice what is missing: no ultimatum, no lecture, no recital of history. You are not trying to shame someone into changing. Shame is usually the fuel, not the cure.
+
+**Replace Promises With Agreements You Can Verify**
+
+The most useful change most families make is retiring the promise entirely and replacing it with a specific, observable agreement. Promises live in the future and cannot be measured. Agreements happen this week and either occur or they do not. Compare the two:
+
+- Promise: "I'll stop drinking." Agreement: "You will attend an assessment at the clinic Thursday at 2:00, and I will drive you."
+- Promise: "I'll get help eventually." Agreement: "You will call the number on the fridge by Friday, and we will look at the calendar together Saturday."
+- Promise: "I'll be around more." Agreement: "You will be home for dinner Tuesday and Thursday this week."
+
+An agreement gives everyone a shared reality. It also ends the argument about whether someone is "trying." Trying is invisible. Showing up Thursday at 2:00 is not. When an agreement is missed, you do not need to escalate. You say, "That didn't happen. What do you want to do next?" Then you follow through on whatever you said you would do. Your consistency, repeated over weeks, does more than any speech. If holding that line is where you get stuck, our guide to [LINK:setting healthy boundaries with an addicted family member:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] walks through it step by step.
+
+**How Do You Protect Yourself From the Hope-and-Crash Cycle?**
+
+You protect yourself by resting your stability on something other than their next promise. That does not mean giving up hope. It means anchoring your life to actions you control instead of outcomes you do not. Three practical protections:
+
+- **Believe behavior on a delay.** Let change earn your confidence over weeks, not sentences. You can be warm and still wait.
+- **Keep your own calendar.** Work, exercise, friends, your own therapy or support group. When your week is only about their week, every broken promise costs you double.
+- **Tell one honest person the truth.** Isolation makes broken promises feel like personal failures. They are not.
+
+If you are the person who has been breaking the promises, the same principle applies in reverse. Stop making larger declarations to buy time, and make one small commitment you can actually keep this week. Credibility rebuilds in small, unglamorous increments.
+
+**You Are Not Being Fooled — You Are Being Human**
+
+Believing the people we love is not a defect — it is the reason the relationship is worth saving. What changes is not whether you love them. What changes is where you place your weight. Move it off promises and onto agreements, support, and structure, and the ground under your family gets steadier.
+
+**Frequently Asked Questions About Broken Promises and Addiction**
+
+**Is my loved one lying when they break a promise about drinking?**
+
+Usually not at the moment they make it. Most promises are made sincerely during remorse and are later overwhelmed by craving and withdrawal. Over time, some people do begin using promises strategically to reduce pressure. Either way the fix is the same: shift to specific, verifiable agreements instead of open-ended commitments.
+
+**How many chances should I give someone with addiction?**
+
+There is no correct number, and framing it as chances usually keeps you stuck. A more useful question is what you are willing to keep doing and what you are not. Set your limits based on what you can sustain without damaging yourself or your children, then communicate them calmly and consistently.
+
+**Should I confront my loved one right after I catch them?**
+
+Wait until they are sober. Conversations held during intoxication are rarely remembered and almost always escalate. Choose a quiet moment in the next day or two, keep it under five minutes, and stick to what you observed and what you plan to do.
+
+**What if they get angry when I stop believing their promises?**
+
+Anger is common, because your steadiness removes an easy exit from an uncomfortable conversation. You do not have to argue with it. Stay calm, avoid defending your position at length, and follow through on what you said. Anger tends to fade faster than families expect once it stops getting a reaction.
+
+**Can someone recover after breaking dozens of promises?**
+
+Yes. A long history of failed attempts is not a prediction. It is evidence that self-management alone has not worked. Many people in long-term recovery broke promises for years before the right combination of treatment, support, and accountability finally held.
+
+**How do I help without enabling?**
+
+Support the person, not the addiction. Helping with treatment logistics, transportation, childcare, or the cost of an assessment supports recovery. Covering consequences — money, legal fees, lies to an employer — usually protects the addiction. When unsure, ask whether this makes the next drink easier or harder.
+
+**One Clear Next Step Is Enough for Today**
+
+You do not have to figure out the next conversation alone. Sober Helpline offers [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a community of people who have stood exactly where you are standing. Join our [LINK:free Monday night Family Squares call:/monday-zoom-registration] and build a plan for your specific situation. One clear next step is enough for today.\`,
+  },
+  {
     id: 158,
     slug: "anhedonia-early-recovery-family-guide",
     seoTitle: "Anhedonia in Recovery: Why Nothing Feels Good After Quitting",
