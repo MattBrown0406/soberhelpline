@@ -283,7 +283,7 @@ Support the person, not the addiction. Helping with treatment logistics, transpo
 
 **One Clear Next Step Is Enough for Today**
 
-You do not have to figure out the next conversation alone. Sober Helpline offers [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a community of people who have stood exactly where you are standing. Join our [LINK:free Monday night Family Squares call:/monday-zoom-registration] and build a plan for your specific situation. One clear next step is enough for today.\`,
+You do not have to figure out the next conversation alone. Sober Helpline offers [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a community of people who have stood exactly where you are standing. Join our [LINK:free Monday night Family Squares call:/monday-zoom-registration] and build a plan for your specific situation. One clear next step is enough for today.`,
   },
   {
     id: 158,
