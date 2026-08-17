@@ -116,9 +116,12 @@ export default function StartHere() {
                 <p className="text-sm text-muted-foreground">
                   If you need a free next step before booking: a tonight plan, or a short assessment that names the pattern with no email gate.
                 </p>
-                <div className="flex flex-col gap-2 sm:flex-row">
+                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
                   <Button asChild variant="outline" size="sm">
                     <Link to="/what-to-do-tonight">What to do tonight</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/two-households">Two households / the other parent is running a different plan.</Link>
                   </Button>
                   <Button asChild variant="outline" size="sm">
                     <Link to="/family-situation-assessment">Am I helping or making it worse?</Link>

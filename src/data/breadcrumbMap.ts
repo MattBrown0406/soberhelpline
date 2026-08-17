@@ -45,6 +45,10 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "What to Do Tonight", path: "/what-to-do-tonight" },
   ],
+  "/two-households": [
+    { label: "Home", path: "/" },
+    { label: "Two Households", path: "/two-households" },
+  ],
   "/enabling-self-assessment": [
     { label: "Home", path: "/" },
     { label: "Enabling Self-Assessment", path: "/enabling-self-assessment" },

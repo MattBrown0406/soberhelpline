@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import RouteAnalytics from "./components/RouteAnalytics";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -105,6 +105,7 @@ const AddictionAssessment = React.lazy(() => import("./pages/AddictionAssessment
 const FamilySituationAssessment = React.lazy(() => import("./pages/FamilySituationAssessment"));
 const EnablingSelfAssessment = React.lazy(() => import("./pages/EnablingSelfAssessment"));
 const WhatToDoTonight = React.lazy(() => import("./pages/WhatToDoTonight"));
+const TwoHouseholds = React.lazy(() => import("./pages/TwoHouseholds"));
 const About = React.lazy(() => import("./pages/About"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
@@ -387,6 +388,9 @@ const App = () => (
               <Route path="/family-situation-assessment" element={<FamilySituationAssessment />} />
               <Route path="/enabling-self-assessment" element={<EnablingSelfAssessment />} />
               <Route path="/what-to-do-tonight" element={<WhatToDoTonight />} />
+              <Route path="/two-households" element={<TwoHouseholds />} />
+              <Route path="/split-house" element={<Navigate to="/two-households" replace />} />
+              <Route path="/divorced-parents" element={<Navigate to="/two-households" replace />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
