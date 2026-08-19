@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function StrongOneGuide() {
-  useGuideTracking("/strong-one-guide", "The Hidden Cost of Being the Strong One");
+  useGuideTracking("/strong-one", "The Hidden Cost of Being the Strong One");
   const handlePrint = () => {
     window.print();
   };

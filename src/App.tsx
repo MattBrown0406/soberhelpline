@@ -25,6 +25,7 @@ import IntentLandingPage from "./pages/IntentLandingPage";
 import PartnerWithSoberHelpline from "./pages/PartnerWithSoberHelpline";
 import FamilyAddictionAnswers from "./pages/FamilyAddictionAnswers";
 import FamilyAddictionAnswerDetail from "./pages/FamilyAddictionAnswerDetail";
+import { legacyPageRedirects } from "@/lib/legacyRedirects";
 
 type RouteErrorBoundaryProps = {
   children: React.ReactNode;
@@ -303,6 +304,9 @@ const App = () => (
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
               <Route path="/" element={<Index />} />
+              {Object.entries(legacyPageRedirects).map(([from, to]) => (
+                <Route key={from} path={from} element={<Navigate to={to} replace />} />
+              ))}
               <Route path="/for-providers" element={<ForProviders />} />
               <Route path="/provider-info" element={<ProviderLanding />} />
               <Route path="/provider-application" element={<ProviderApplication />} />

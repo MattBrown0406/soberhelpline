@@ -11,7 +11,7 @@ import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BoundariesUltimatumsGuide() {
-  useGuideTracking("Requests, Demands, Ultimatums & Boundaries", "/boundaries-ultimatums-guide");
+  useGuideTracking("Requests, Demands, Ultimatums & Boundaries", "/boundaries-ultimatums");
   return (
     <>
       <Helmet>

@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function NoNegotiationGuide() {
-  useGuideTracking("/no-negotiation-guide", "We Don't Negotiate with Terrorists");
+  useGuideTracking("/no-negotiation", "We Don't Negotiate with Terrorists");
   return (
     <>
       <Helmet>

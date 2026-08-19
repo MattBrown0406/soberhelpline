@@ -482,7 +482,7 @@ const AddictionAsStressDisorder = () => {
                 </Button>
               </li>
               <li>
-                <Button variant="link" className="p-0 h-auto" onClick={() => navigate("/guilt-relief-resentment-cycle")}>
+                <Button variant="link" className="p-0 h-auto" onClick={() => navigate("/guilt-relief-resentment")}>
                   The Guilt–Relief–Resentment Cycle
                 </Button>
               </li>

@@ -2158,7 +2158,7 @@ Steer away from:
 - Labels like "addict" or "alcoholic" — describe behavior instead: "your drinking," "the pills."
 - Piling on. Two or three specific examples land harder than a twenty-item history of failures.
 - Arguing about facts. If they dispute a detail, let it go and return to your feelings, which aren't debatable.
-- Empty threats. Only state a [LINK:boundary:/boundaries-ultimatums-guide] if you are fully prepared to keep it.
+- Empty threats. Only state a [LINK:boundary:/boundaries-ultimatums] if you are fully prepared to keep it.
 
 If the conversation turns hostile, end it gently: "This isn't going the way we hoped. We love you, and we'll try again another time." A paused meeting is not a failed meeting.
 
@@ -4031,7 +4031,7 @@ Addiction, clinically called a substance use disorder, is compulsive use that co
 
 By now the substance has been promoted from a choice to a perceived survival need. Promises to cut back are sincere in the moment and broken within days. Families often describe living with a stranger who looks like the person they love.
 
-What families can do: get professional support — for your loved one and for yourselves. Stop protecting the addiction from its own consequences, learn [how to set healthy boundaries](/boundaries-ultimatums-guide), keep expressing love for the person while refusing to fund or excuse the use, and present treatment as a door that is always open. Recovery from this stage is absolutely possible — millions of people are living proof — but it almost always requires structured help, not willpower alone.
+What families can do: get professional support — for your loved one and for yourselves. Stop protecting the addiction from its own consequences, learn [how to set healthy boundaries](/boundaries-ultimatums), keep expressing love for the person while refusing to fund or excuse the use, and present treatment as a door that is always open. Recovery from this stage is absolutely possible — millions of people are living proof — but it almost always requires structured help, not willpower alone.
 
 **Why Does Knowing the Stages of Addiction Help Families?**
 
@@ -5772,7 +5772,7 @@ Here's what that preparation typically includes:
 
 * **Writing and rehearsing personal impact statements.** Each participant writes a letter describing how their loved one's addiction has affected them — not a list of grievances, but honest, specific observations delivered with love. These letters are practiced out loud, usually with the interventionist present, until they feel natural rather than rehearsed.
 * **Confirming a treatment placement.** The intervention is only as strong as what you're asking your loved one to do. By intervention day, a treatment program should already be selected, a bed should be reserved, and the logistics of getting there — packing, travel, insurance — should be sorted.
-* **Establishing each participant's bottom line.** Every family member decides in advance what they are no longer willing to do if their loved one refuses help. This is not a threat — it is a commitment to their own health and [LINK:boundaries:/blog/boundaries-ultimatums-guide], stated with love and without ultimatum energy.
+* **Establishing each participant's bottom line.** Every family member decides in advance what they are no longer willing to do if their loved one refuses help. This is not a threat — it is a commitment to their own health and [LINK:boundaries:/boundaries-ultimatums], stated with love and without ultimatum energy.
 * **Rehearsing how to respond if things get emotional.** Your interventionist will walk you through how to stay regulated when your loved one cries, argues, shuts down, or tries to leave. You practice staying grounded — not because you won't feel anything, but because you'll have a plan for what to do when you do.
 
 The preparation phase is where families discover something surprising: the process of writing those letters and saying those things out loud often begins to shift their own relationship with the situation. They start to feel clearer. More resolved. Less alone.
@@ -5918,7 +5918,7 @@ Instead of "Just admit it," try: "I'm not asking you to agree with me. I'm telli
 
 This is the part families most often skip. After naming what you've observed, be specific about what you need and what will happen if things don't change. Vague statements like "this can't go on" don't register. Specific statements do: "If I find out you've been drinking and driving again, I'm not going to be able to let you borrow my car."
 
-That's not a threat. That's a [LINK:limit:/blog/boundaries-ultimatums-guide]. There's a difference — and your loved one will feel it.
+That's not a threat. That's a [LINK:limit:/boundaries-ultimatums]. There's a difference — and your loved one will feel it.
 
 **What Not to Say When a Loved One Is Lying About Addiction**
 
@@ -6175,7 +6175,7 @@ Third, think through the physical environment. Is there a space where they can h
 
 Fourth, establish some household structure. Recovery thrives on routine. Work with your loved one's treatment team or case manager to understand what kind of daily structure they're being asked to maintain and how you can support it.
 
-Fifth, clarify your [LINK:boundaries:/blog/boundaries-ultimatums-guide] now, not later. What will you accept and what won't you? What happens if they relapse? What are your non-negotiables? These conversations are far easier to have before they come home than during a crisis moment.
+Fifth, clarify your [LINK:boundaries:/boundaries-ultimatums] now, not later. What will you accept and what won't you? What happens if they relapse? What are your non-negotiables? These conversations are far easier to have before they come home than during a crisis moment.
 
 **Educate Yourself on What Recovery Actually Looks Like**
 
