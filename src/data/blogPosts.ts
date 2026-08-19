@@ -180,6 +180,7 @@ import eapAddictionTreatmentImg from "@/assets/blog-employee-assistance-program-
 import anhedoniaEarlyRecoveryImg from "@/assets/blog-anhedonia-early-recovery-family-guide.jpg";
 import brokenPromisesAddictionImg from "@/assets/blog-broken-promises-addiction-family-guide.jpg";
 import lovedOneBlamesYouImg from "@/assets/blog-loved-one-blames-you-for-their-addiction.jpg";
+import stopArguingAboutAddictionImg from "@/assets/blog-how-to-stop-arguing-about-addiction-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
