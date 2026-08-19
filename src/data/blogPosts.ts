@@ -317,7 +317,7 @@ Consider professional help when conversations consistently end in fights, when t
 
 You don't have to figure out these conversations alone. Sober Helpline offers [LINK:family education:/family-education], [LINK:one-on-one family coaching:/family-coaching], and a supportive community for people navigating a loved one's addiction — including the [LINK:free Monday night family support call:/monday-zoom-registration] where you can ask questions and hear from families a few steps ahead of you.
 
-Bring your real situation. We'll help you find the next right step.\`,
+Bring your real situation. We'll help you find the next right step.`,
   },
   {
     id: 160,
