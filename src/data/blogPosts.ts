@@ -181,6 +181,7 @@ import anhedoniaEarlyRecoveryImg from "@/assets/blog-anhedonia-early-recovery-fa
 import brokenPromisesAddictionImg from "@/assets/blog-broken-promises-addiction-family-guide.jpg";
 import lovedOneBlamesYouImg from "@/assets/blog-loved-one-blames-you-for-their-addiction.jpg";
 import stopArguingAboutAddictionImg from "@/assets/blog-how-to-stop-arguing-about-addiction-family-guide.jpg";
+import wontTalkToYouImg from "@/assets/blog-addicted-loved-one-wont-talk-to-you.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
@@ -188,6 +189,133 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 162,
+    slug: "addicted-loved-one-wont-talk-to-you",
+    seoTitle: "When Your Addicted Loved One Won't Talk to You",
+    metaDescription: "When your addicted loved one won't talk to you, silence feels like failure. Here's how to stay connected, respond well, and keep the door open.",
+    title: "When Your Addicted Loved One Won't Talk to You: How to Stay Connected Through the Silence",
+    category: "Family Support",
+    author: "Matt Brown",
+    date: "2026-08-20",
+    image: wontTalkToYouImg,
+    keywords: ["when your addicted loved one won't talk to you", "addicted family member cut me off", "loved one won't answer my calls", "no contact addiction family", "staying connected during addiction"],
+    excerpt: "The phone stops ringing and the texts go unanswered. Here's why people in active addiction withdraw, what to send instead of pressure, and how to be ready when they come back.",
+    content: `The phone stops ringing. Texts go unanswered for days, then weeks. Maybe they told you flat out to stop contacting them. When your addicted loved one won't talk to you, the silence can feel louder than any argument you ever had. You replay the last conversation looking for the sentence that broke it.
+
+Here's what we want you to know up front: the silence is usually about them, not about you. Withdrawal is one of the most predictable patterns in active addiction. It protects the addiction from scrutiny, and it protects them from a shame they don't know how to carry yet. That doesn't make it hurt less, but it does change what you do next.
+
+**Why Does Someone With Addiction Stop Talking to Their Family?**
+
+People in active addiction pull away for practical and emotional reasons at the same time. The practical reason is simple: you are a witness. You notice the missed dinners, the changed voice, the money that doesn't add up. Distance removes the witness.
+
+A few of the most common drivers:
+
+- **Shame avoidance.** They believe you see them as a disappointment, so they remove themselves before you can confirm it.
+- **Protecting the use.** Contact means questions. Questions mean pressure to change.
+- **Anticipating a lecture.** If the last five conversations ended in conflict, silence is a reasonable prediction on their part.
+- **New relationships and environments.** People in active addiction often build a social world that doesn't include anyone asking hard questions.
+- **Genuine anger.** Sometimes there's real relational damage on both sides that hasn't been addressed.
+
+Notice that only one of these is about you. That's worth sitting with before you decide what the silence means.
+
+**What Should You Do When Your Addicted Loved One Won't Talk to You?**
+
+Stay reachable without becoming relentless. The goal is not to force a conversation open. The goal is to make sure that on the day they are ready, they know exactly where to find a door that isn't locked.
+
+**Send Low-Demand Messages**
+
+A low-demand message is one that requires nothing from the receiver. No question mark, no request, no update on how worried everyone is. Just presence.
+
+Examples that work:
+
+- "Thinking about you today. No response needed."
+- "Saw a truck like your old one. Made me smile."
+- "I love you. That hasn't changed and it isn't going to."
+
+Compare that to "Why won't you answer me?" One of those is an open door. The other is a bill they can't pay. If you're unsure what tone to strike, our [LINK:family communication resources:/family-education] walk through more examples.
+
+**Pick a Rhythm and Keep It**
+
+Decide on a frequency you can sustain without resentment. Once a week is plenty for most families. Consistency matters more than volume, because consistency is what builds the belief that you'll still be there in six months.
+
+**Say the One Sentence That Matters**
+
+Somewhere in the first few messages, name the door plainly: "If you ever want help getting into treatment, call me any hour and I will make it happen. No lecture, no I-told-you-so."
+
+**What If They've Told You to Stop Contacting Them?**
+
+Honor the request, and say goodbye in a way that leaves the door visible. Ignoring an explicit boundary confirms their story that family doesn't respect them, and it makes reconnection harder later.
+
+Send one clear message and then stop:
+
+"I hear you, and I'm going to respect what you asked for. I'm not going away and I'm not angry. When you want to talk, I'll be right here. I love you."
+
+Then actually stop. Not as punishment, and not as a strategy to make them miss you. You stop because you said you would, and because being someone whose word holds is the most useful thing you can be to a person whose world is built on broken promises.
+
+Two exceptions worth naming. If you have real reason to believe they are in immediate danger — overdose risk, suicidal statements, a medical emergency — respect for a boundary does not override safety. Call for help. And if children are involved, their safety comes first, always.
+
+**How Do You Handle the Family Fallout During the Silence?**
+
+Get everyone on the same page before the silence turns into a second conflict. When one person goes quiet, families tend to split into camps: those who want to chase, and those who want to write them off. Both camps are usually reacting from fear.
+
+A few things that help:
+
+- **Name one point of contact.** Ten family members texting separately reads as an ambush. One steady voice reads as a person.
+- **Agree on money in advance.** Silence often ends with a request for cash. Decide now what you will and won't do, so nobody is negotiating at midnight. This is where [LINK:setting healthy boundaries with an addicted family member:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] pays off.
+- **Stop the surveillance loop.** Checking their social media eight times a day isn't connection. It's anxiety wearing a helpful costume.
+- **Keep the rest of your life running.** Show up at work. Go to your kid's game. Sleep. This is a long road and depletion helps no one.
+
+**What Do You Do While You Wait?**
+
+Use the time to get yourself ready, because the call often comes suddenly. The families who move fastest when a loved one finally says yes are the ones who did the homework during the quiet stretch.
+
+Concretely, that means:
+
+- Learn how addiction actually works, so you're not making decisions from panic.
+- Research two or three treatment options and know roughly what they cost and what your insurance covers.
+- Find your own support — [LINK:Al-Anon:https://al-anon.org], [LINK:Nar-Anon:https://www.nar-anon.org], a therapist, or [LINK:one-on-one family coaching:/family-coaching] with people who understand this specific kind of waiting.
+- Do your own repair work. If there's a real amends you owe, prepare it. Not to earn their return, but because it's true.
+
+**Hope, Honestly**
+
+Most silences end. Not all of them, and rarely on the schedule we want, but people come back far more often than families in the middle of it believe. Usually not because someone finally said the perfect thing — because someone stayed reachable long enough to be found.
+
+Keep the porch light on. Keep living your life. And get yourself ready for the day the phone rings.
+
+**Frequently Asked Questions**
+
+**How long should I keep reaching out if my addicted loved one won't talk to me?**
+
+There's no expiration date, but there is a sustainable pace. Most families do well with a short, low-pressure message once a week or every couple of weeks. If reaching out is destroying your sleep or your other relationships, scale back the frequency rather than cutting off entirely.
+
+**Is the silent treatment from an addicted person a manipulation tactic?**
+
+Sometimes, but usually it's avoidance rather than strategy. Withdrawal protects them from shame and from questions about their use. Occasionally distance is used to pressure a family member into giving money or dropping a boundary — if that's the pattern, hold the boundary and keep the tone warm.
+
+**Should I use an ultimatum to make them respond?**
+
+No. Ultimatums given in anger almost never get honored, and a broken ultimatum teaches your loved one that your words don't mean much. Boundaries stated calmly and kept consistently are far more effective than threats delivered in a moment of desperation.
+
+**What if they only contact me when they need money?**
+
+Take the call, and separate the relationship from the request. You can say, "I'm always glad to hear your voice, and I'm not giving money. If you want help getting into treatment, I'll do that today." Answering the phone is not the same as funding the addiction.
+
+**Does no contact from family help someone hit bottom faster?**
+
+There's no evidence that abandonment speeds up recovery, and plenty of evidence that connection improves outcomes. Boundaries around money, housing, and behavior are healthy. Cutting off love and contact entirely is a different thing, and it usually costs more than it gains.
+
+**When should I involve a professional?**
+
+Sooner than most families think. A family coach or interventionist can help you decide what to say, plan for the call when it comes, and get everyone aligned. You don't need a crisis to justify getting guidance — preparation during a quiet stretch is exactly when help is most useful.
+
+**You Don't Have to Wait Alone**
+
+If you're in the middle of a silence right now, you don't have to guess your way through it. Sober Helpline offers [LINK:family education:/family-education], [LINK:family coaching:/family-coaching], and a community of people who understand this exact kind of waiting — including the [LINK:free Monday night family support call:/monday-zoom-registration] where you can talk with others walking the same road.
+
+Come learn what to say, what to hold, and how to be ready when the phone rings.`,
+  },
+  {
+
     id: 161,
     slug: "how-to-stop-arguing-about-addiction-family-guide",
     seoTitle: "How to Stop Arguing About Addiction: A Family Guide",
