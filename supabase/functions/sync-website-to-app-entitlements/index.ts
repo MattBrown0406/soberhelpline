@@ -17,8 +17,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const APP_TIER = "essentials";
-const WEB_SOURCE = "website";
+const APP_TIER = "essential";
+const WEB_SOURCE = "web";
 const GRACE_DAYS = 3;
 
 const json = (body: unknown, status = 200) =>
