@@ -215,6 +215,27 @@ export default function MemberBilling() {
                   <p className="text-sm text-foreground">{cancelErr}</p>
                 </div>
               )}
+              {membership.status === "pending" && (
+                <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 flex items-start gap-3">
+                  {healing
+                    ? <Loader2 className="h-5 w-5 animate-spin text-amber-600 mt-0.5 shrink-0" />
+                    : <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />}
+                  <div className="space-y-2">
+                    <p className="text-sm text-foreground">
+                      {healing
+                        ? "Checking your payment with PayPal…"
+                        : "Your payment is still being confirmed with PayPal. If you were already charged, refresh below — access unlocks as soon as PayPal confirms."}
+                    </p>
+                    {!healing && (
+                      <Button size="sm" variant="outline" onClick={refreshFromPayPal}>
+                        Refresh payment status
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+
 
               <Card>
                 <CardHeader>
