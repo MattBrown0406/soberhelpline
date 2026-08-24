@@ -119,11 +119,15 @@ Deno.serve(async (req) => {
 
   try {
     // --- 1. Pull entitlements + accounts from the app backend --------------
-    const entitlements = await mobileRest<Entitlement[]>(
+    const allEntitlements = await mobileRest<Entitlement[]>(
       mobileUrl,
       mobileKey,
       "entitlements?select=id,account_id,source,tier,expires_at,raw&limit=5000",
     );
+    // Ignore entitlements this platform granted from a website membership,
+    // otherwise the two sync jobs would feed each other in a loop.
+    const entitlements = allEntitlements.filter((e) => e.source !== "website");
+
     const accounts = await mobileRest<{ id: string; user_id: string | null }[]>(
       mobileUrl,
       mobileKey,
