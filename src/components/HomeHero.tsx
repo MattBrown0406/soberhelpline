@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, CalendarDays, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -40,17 +41,73 @@ const supportRoutes = [
   },
 ] as const;
 
+// Position of the lantern light inside lighthouse-cinematic-wide.webp (0-1 of natural size)
+const LAMP_IMAGE_FRACTION = { x: 0.7803, y: 0.224 };
+
 const HomeHero = () => {
+  const bgRef = useRef<HTMLImageElement>(null);
+  const lightSystemRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const align = () => {
+      const img = bgRef.current;
+      const system = lightSystemRef.current;
+      if (!img || !system || !img.naturalWidth || !img.naturalHeight) return;
+
+      const imgBox = img.getBoundingClientRect();
+      const systemBox = system.getBoundingClientRect();
+      if (!imgBox.width || !imgBox.height) return;
+
+      // object-fit: cover math
+      const scale = Math.max(imgBox.width / img.naturalWidth, imgBox.height / img.naturalHeight);
+      const drawnWidth = img.naturalWidth * scale;
+      const drawnHeight = img.naturalHeight * scale;
+
+      const [posX, posY] = window
+        .getComputedStyle(img)
+        .objectPosition.split(" ")
+        .map((part) => part.trim());
+      const resolve = (value: string, container: number, drawn: number) => {
+        if (value.endsWith("%")) return ((container - drawn) * parseFloat(value)) / 100;
+        if (value.endsWith("px")) return parseFloat(value);
+        return (container - drawn) / 2;
+      };
+
+      const offsetX = resolve(posX ?? "50%", imgBox.width, drawnWidth);
+      const offsetY = resolve(posY ?? posX ?? "50%", imgBox.height, drawnHeight);
+
+      const lampX = imgBox.left + offsetX + drawnWidth * LAMP_IMAGE_FRACTION.x - systemBox.left;
+      const lampY = imgBox.top + offsetY + drawnHeight * LAMP_IMAGE_FRACTION.y - systemBox.top;
+
+      system.style.setProperty("--shl-lamp-x", `${lampX}px`);
+      system.style.setProperty("--shl-lamp-y", `${lampY}px`);
+    };
+
+    align();
+    const img = bgRef.current;
+    img?.addEventListener("load", align);
+    window.addEventListener("resize", align);
+    const observer = new ResizeObserver(align);
+    if (img) observer.observe(img);
+
+    return () => {
+      img?.removeEventListener("load", align);
+      window.removeEventListener("resize", align);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="shl-hero" aria-labelledby="shl-hero-title">
-      <img className="shl-cinematic-bg" src={cinematicLighthouse} alt="" aria-hidden="true" />
+      <img ref={bgRef} className="shl-cinematic-bg" src={cinematicLighthouse} alt="" aria-hidden="true" />
       <img className="shl-cloud-layer shl-cloud-layer-back" src={cloudOverlay} alt="" aria-hidden="true" />
       <img className="shl-cloud-layer shl-cloud-layer-front" src={cloudOverlay} alt="" aria-hidden="true" />
       <img className="shl-wave-layer shl-wave-layer-back" src={waveOverlay} alt="" aria-hidden="true" />
       <img className="shl-wave-layer shl-wave-layer-front" src={waveOverlay} alt="" aria-hidden="true" />
       <div className="shl-cinematic-shade" aria-hidden="true" />
 
-      <div className="shl-light-system" aria-hidden="true">
+      <div className="shl-light-system" ref={lightSystemRef} aria-hidden="true">
+
         <div className="shl-beam shl-beam-left" />
         <div className="shl-beam shl-beam-right" />
         <div className="shl-beacon-haze" />
