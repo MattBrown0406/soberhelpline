@@ -4093,6 +4093,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      roadmap_assessment_exists: {
+        Args: { _assessment_id: string }
+        Returns: boolean
+      }
       safe_jsonb_int: { Args: { j: Json; k: string }; Returns: number }
       update_abandoned_booking: {
         Args: {

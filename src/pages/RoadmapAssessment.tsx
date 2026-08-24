@@ -193,11 +193,12 @@ const RoadmapAssessment = () => {
     const redirectPath = getRedirectPath();
     const assignedStage = getStageAssigned();
     try {
-      await supabase.from("roadmap_users").insert({
+      const { error: insertError } = await supabase.from("roadmap_users").insert({
         email: email.trim(),
         assessment_id: assessmentId,
         current_stage: assignedStage,
       });
+      if (insertError) console.error("Roadmap signup save failed:", insertError);
 
       // Fire-and-forget Mailchimp sync — don't block user flow
       supabase.functions.invoke("roadmap-mailchimp-sync", {
