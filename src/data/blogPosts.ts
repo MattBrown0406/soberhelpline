@@ -5874,11 +5874,13 @@ Healthy accountability involves clear, mutually agreed-upon expectations — and
   {
     id: 109,
     slug: "what-to-expect-during-an-intervention",
-    seoTitle: "What to Expect During an Intervention: A Real Guide for Families",
-    metaDescription: "Wondering what actually happens during a drug or alcohol intervention? This step-by-step guide walks families through intervention day so you can walk in prepared, not panicked.",
-    title: "What to Expect During an Intervention: A Real Guide for Families",
-    excerpt: "Most of what families fear about intervention day simply doesn't happen. Here is a clear, step-by-step look at what really takes place — from preparation to the conversation to what comes next.",
-    content: `The phone call to schedule an intervention is one of the hardest things a family will ever do. You've probably replayed the conversation a hundred times in your head — what will happen, what your loved one will say, whether it will work. The fear of the unknown can feel almost as paralyzing as watching someone you love disappear into their addiction.
+    seoTitle: "What Happens During an Addiction Intervention? Family Guide",
+    metaDescription: "See what happens before, during, and after a drug or alcohol intervention. Learn the family's role and why the next step is to call before confronting.",
+    title: "What Happens During an Addiction Intervention? A Guide for Families",
+    excerpt: "See what happens before, during, and after a professional addiction intervention — and why families should call for guidance before confronting a loved one.",
+    content: `A professional addiction intervention is a planned family conversation with one clear purpose: help a loved one accept treatment. The family prepares statements and boundaries in advance, a treatment option is ready, and an interventionist guides the conversation. If you are considering one, call a professional before confronting your loved one so the family can prepare safely and choose the right level of help.
+
+The phone call to schedule an intervention is one of the hardest things a family will ever do. You've probably replayed the conversation a hundred times in your head — what will happen, what your loved one will say, whether it will work. The fear of the unknown can feel almost as paralyzing as watching someone you love disappear into their addiction.
 
 Here's what I've learned after more than two decades of doing this work: most of what families fear about intervention day simply doesn't happen. What does happen — when the process is handled with care — is often nothing short of transformational.
 
