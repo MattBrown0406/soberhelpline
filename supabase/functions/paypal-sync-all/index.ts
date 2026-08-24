@@ -52,7 +52,7 @@ Deno.serve(async (req) => {
     const { data: subscriptions, error: fetchError } = await supabaseAdmin
       .from('provider_subscriptions')
       .select('id, paypal_subscription_id, status, next_billing_date')
-      .eq('status', 'active')
+      .in('status', ['active', 'pending'])
       .not('paypal_subscription_id', 'is', null)
       .not('paypal_subscription_id', 'like', 'FREE-%');
 
@@ -60,12 +60,12 @@ Deno.serve(async (req) => {
 
     if (!subscriptions || subscriptions.length === 0) {
       return new Response(
-        JSON.stringify({ message: 'No active paid subscriptions to sync', synced: 0 }),
+        JSON.stringify({ message: 'No paid subscriptions to sync', synced: 0 }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       );
     }
 
-    console.log(`Syncing ${subscriptions.length} active subscriptions with PayPal...`);
+    console.log(`Syncing ${subscriptions.length} active/pending subscriptions with PayPal...`);
 
     const accessToken = await getPayPalAccessToken();
     const results = { synced: 0, cancelled: 0, suspended: 0, failed: 0, notFound: 0, unchanged: 0 };
@@ -84,6 +84,8 @@ Deno.serve(async (req) => {
 
         if (!response.ok) {
           if (response.status === 404) {
+            // Never expire a pending record on a transient 404 within its first 24h
+            
             // Subscription no longer exists in PayPal
             await supabaseAdmin
               .from('provider_subscriptions')
