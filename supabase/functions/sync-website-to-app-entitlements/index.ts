@@ -147,24 +147,45 @@ Deno.serve(async (req) => {
     }
 
     // --- 2. Resolve app accounts by email --------------------------------
+    // The app's `accounts` table has no email column, so map
+    // auth user email -> user_id -> account id.
     const emails = [...wanted.keys()];
     const accountIdByEmail = new Map<string, string>();
     const missingAppAccount: string[] = [];
 
-    for (let i = 0; i < emails.length; i += 100) {
-      const chunk = emails.slice(i, i + 100);
-      const { data, error } = await mobile
-        .from("accounts")
-        .select("id, email")
-        .in("email", chunk);
-      if (error) throw new Error(`app accounts lookup failed: ${error.message}`);
-      for (const row of (data ?? []) as { id: string; email: string | null }[]) {
-        if (row.email) accountIdByEmail.set(row.email.toLowerCase().trim(), row.id);
+    const { data: accountsRaw, error: accErr } = await mobile
+      .from("accounts")
+      .select("id, user_id")
+      .limit(10000);
+    if (accErr) throw new Error(`app accounts lookup failed: ${accErr.message}`);
+    const accountByUserId = new Map<string, string>();
+    for (const a of (accountsRaw ?? []) as { id: string; user_id: string | null }[]) {
+      if (a.user_id) accountByUserId.set(a.user_id, a.id);
+    }
+
+    // Page through app auth users to build email -> user_id.
+    const appUserIdByEmail = new Map<string, string>();
+    for (let page = 1; page <= 50; page++) {
+      const res = await fetch(
+        `${mobileUrl}/auth/v1/admin/users?page=${page}&per_page=1000`,
+        { headers: { apikey: mobileKey, Authorization: `Bearer ${mobileKey}` } },
+      );
+      if (!res.ok) throw new Error(`app auth users lookup failed [${res.status}]`);
+      const payload = await res.json();
+      const users: { id: string; email: string | null }[] = payload?.users ?? [];
+      for (const u of users) {
+        if (u.email) appUserIdByEmail.set(u.email.toLowerCase().trim(), u.id);
       }
+      if (users.length < 1000) break;
     }
+
     for (const email of emails) {
-      if (!accountIdByEmail.has(email)) missingAppAccount.push(email);
+      const appUserId = appUserIdByEmail.get(email);
+      const accountId = appUserId ? accountByUserId.get(appUserId) : undefined;
+      if (accountId) accountIdByEmail.set(email, accountId);
+      else missingAppAccount.push(email);
     }
+
 
     // --- 3. Existing website-sourced entitlements ------------------------
     const { data: existingRaw, error: entErr } = await mobile
