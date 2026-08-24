@@ -90,6 +90,14 @@ Deno.serve(async (req) => {
   if (!authorized) return json({ error: "unauthorized" }, 401);
 
   const dryRun = body.dry_run === true;
+
+  if ((body as { inspect?: boolean }).inspect === true) {
+    const { data } = await mobile.from("entitlements").select("source, tier").limit(200);
+    const sources = [...new Set((data ?? []).map((r: { source: string | null }) => r.source))];
+    const tiers = [...new Set((data ?? []).map((r: { tier: string | null }) => r.tier))];
+    return json({ ok: true, sources, tiers });
+  }
+
   const now = Date.now();
   const nowIso = new Date().toISOString();
 
