@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, CalendarDays, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
