@@ -60,13 +60,15 @@ function fmtAmount(amount: number | null): string {
 
 export default function MemberBilling() {
   const navigate = useNavigate();
-  const { cancelSubscription, isLoading: cancelling } = usePayPalSubscription();
+  const { cancelSubscription, activateSubscription, isLoading: cancelling } = usePayPalSubscription();
   const [membership, setMembership] = useState<MembershipRow | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [cancelErr, setCancelErr] = useState<string | null>(null);
+  const [healing, setHealing] = useState(false);
+  const [healAttempted, setHealAttempted] = useState(false);
 
   const loadMembership = useCallback(async () => {
     setLoading(true);
@@ -99,6 +101,29 @@ export default function MemberBilling() {
   }, [navigate]);
 
   useEffect(() => { loadMembership(); }, [loadMembership]);
+
+  // Self-heal: if PayPal already collected payment but the return-to-site step
+  // never completed, the row can be stuck on "pending". Re-check with PayPal.
+  const refreshFromPayPal = useCallback(async () => {
+    if (!membership?.paypal_subscription_id || isFreeBypassId(membership.paypal_subscription_id)) return;
+    setHealing(true);
+    try {
+      await activateSubscription(membership.paypal_subscription_id);
+      await loadMembership();
+    } catch {
+      /* toast handled in hook */
+    } finally {
+      setHealing(false);
+    }
+  }, [membership?.paypal_subscription_id, activateSubscription, loadMembership]);
+
+  useEffect(() => {
+    if (membership?.status === "pending" && !healAttempted && !healing) {
+      setHealAttempted(true);
+      refreshFromPayPal();
+    }
+  }, [membership?.status, healAttempted, healing, refreshFromPayPal]);
+
 
   const handleCancel = async () => {
     if (!membership?.paypal_subscription_id) return;
