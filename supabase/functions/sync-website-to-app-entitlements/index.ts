@@ -18,7 +18,7 @@ const corsHeaders = {
 };
 
 const APP_TIER = "essential";
-const WEB_SOURCE = "web";
+const WEB_SOURCE = "website";
 const GRACE_DAYS = 3;
 
 const json = (body: unknown, status = 200) =>
