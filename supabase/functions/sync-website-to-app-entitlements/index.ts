@@ -219,7 +219,12 @@ Deno.serve(async (req) => {
       const row = existingByAccount.get(accountId);
 
       if (row) {
-        const unchanged = row.tier === APP_TIER && row.expires_at === expires;
+        const sameExpiry = row.expires_at === null && expires === null
+          || Boolean(
+            row.expires_at && expires
+              && new Date(row.expires_at).getTime() === new Date(expires).getTime(),
+          );
+        const unchanged = row.tier === APP_TIER && sameExpiry;
         if (unchanged) continue;
         summary.refreshed++;
         if (dryRun) continue;
