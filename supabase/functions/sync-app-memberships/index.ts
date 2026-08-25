@@ -126,7 +126,9 @@ Deno.serve(async (req) => {
     );
     // Ignore entitlements this platform granted from a website membership,
     // otherwise the two sync jobs would feed each other in a loop.
-    const entitlements = allEntitlements.filter((e) => e.source !== "web");
+    const entitlements = allEntitlements.filter(
+      (e) => e.raw?.granted_by !== "soberhelpline_website_membership",
+    );
 
     const accounts = await mobileRest<{ id: string; user_id: string | null }[]>(
       mobileUrl,

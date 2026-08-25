@@ -3,11 +3,11 @@
 //
 // Source of truth: public.provider_subscriptions on the website
 //                  (provider_submission_id IS NULL, plan_type <> 'app').
-// Target: the app backend's `entitlements` table, rows with source = 'website'.
+// Target: the app backend's `entitlements` table. The app's source constraint
+// accepts "scholarship" for externally granted access; raw.granted_by uniquely
+// identifies website grants so unrelated scholarships are never modified.
 //
-// Rows created here are always source='website' so the nightly app -> website
-// sync can ignore them (no feedback loop). App Store / RevenueCat entitlements
-// are never modified.
+// App Store / RevenueCat entitlements and unrelated scholarships are never modified.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -18,7 +18,8 @@ const corsHeaders = {
 };
 
 const APP_TIER = "essential";
-const WEB_SOURCE = "web";
+const WEB_SOURCE = "scholarship";
+const WEB_GRANT_MARKER = "soberhelpline_website_membership";
 const GRACE_DAYS = 3;
 
 const json = (body: unknown, status = 200) =>
@@ -33,6 +34,7 @@ type MobileEntitlement = {
   source: string | null;
   tier: string | null;
   expires_at: string | null;
+  raw: Record<string, unknown> | null;
 };
 
 Deno.serve(async (req) => {
@@ -191,8 +193,9 @@ Deno.serve(async (req) => {
     // --- 3. Existing website-sourced entitlements ------------------------
     const { data: existingRaw, error: entErr } = await mobile
       .from("entitlements")
-      .select("id, account_id, source, tier, expires_at")
-      .eq("source", WEB_SOURCE);
+      .select("id, account_id, source, tier, expires_at, raw")
+      .eq("source", WEB_SOURCE)
+      .contains("raw", { granted_by: WEB_GRANT_MARKER });
     if (entErr) throw new Error(`entitlements lookup failed: ${entErr.message}`);
     const existing = (existingRaw ?? []) as MobileEntitlement[];
     const existingByAccount = new Map(existing.map((e) => [e.account_id, e]));
@@ -216,7 +219,12 @@ Deno.serve(async (req) => {
       const row = existingByAccount.get(accountId);
 
       if (row) {
-        const unchanged = row.tier === APP_TIER && row.expires_at === expires;
+        const sameExpiry = row.expires_at === null && expires === null
+          || Boolean(
+            row.expires_at && expires
+              && new Date(row.expires_at).getTime() === new Date(expires).getTime(),
+          );
+        const unchanged = row.tier === APP_TIER && sameExpiry;
         if (unchanged) continue;
         summary.refreshed++;
         if (dryRun) continue;
@@ -233,7 +241,7 @@ Deno.serve(async (req) => {
           source: WEB_SOURCE,
           tier: APP_TIER,
           expires_at: expires,
-          raw: { email, granted_by: "soberhelpline_website_membership" },
+          raw: { email, granted_by: WEB_GRANT_MARKER },
         });
         if (error) throw new Error(`entitlement insert failed (${email}): ${error.message}`);
       }
