@@ -1324,6 +1324,71 @@ export type Database = {
           },
         ]
       }
+      family_squares_kiosk_followups: {
+        Row: {
+          attempts: number
+          claimed_at: string | null
+          created_at: string
+          email: string
+          email_normalized: string
+          id: string
+          last_error: string | null
+          meeting_date: string
+          name: string
+          next_attempt_at: string | null
+          registration_id: string
+          scheduled_for: string
+          sent_at: string | null
+          status: string
+          suppressed_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          claimed_at?: string | null
+          created_at?: string
+          email: string
+          email_normalized: string
+          id?: string
+          last_error?: string | null
+          meeting_date: string
+          name: string
+          next_attempt_at?: string | null
+          registration_id: string
+          scheduled_for: string
+          sent_at?: string | null
+          status?: string
+          suppressed_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          claimed_at?: string | null
+          created_at?: string
+          email?: string
+          email_normalized?: string
+          id?: string
+          last_error?: string | null
+          meeting_date?: string
+          name?: string
+          next_attempt_at?: string | null
+          registration_id?: string
+          scheduled_for?: string
+          sent_at?: string | null
+          status?: string
+          suppressed_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_kiosk_followups_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       family_squares_next_step_reviews: {
         Row: {
           generated_at: string
@@ -3346,6 +3411,7 @@ export type Database = {
           preferred_contact_time: string | null
           preferred_timezone: string | null
           question: string
+          registration_source: string
           request_follow_up: boolean
           revenue_path: string
           user_id: string | null
@@ -3372,6 +3438,7 @@ export type Database = {
           preferred_contact_time?: string | null
           preferred_timezone?: string | null
           question: string
+          registration_source?: string
           request_follow_up?: boolean
           revenue_path?: string
           user_id?: string | null
@@ -3398,6 +3465,7 @@ export type Database = {
           preferred_contact_time?: string | null
           preferred_timezone?: string | null
           question?: string
+          registration_source?: string
           request_follow_up?: boolean
           revenue_path?: string
           user_id?: string | null
@@ -3802,6 +3870,17 @@ export type Database = {
           payload: Json
         }[]
       }
+      claim_family_squares_kiosk_followups: {
+        Args: { _limit?: number }
+        Returns: {
+          attempts: number
+          email: string
+          meeting_date: string
+          name: string
+          queue_id: string
+          registration_id: string
+        }[]
+      }
       finalize_coaching_capture: {
         Args: {
           p_amount_cents: number
@@ -4080,6 +4159,10 @@ export type Database = {
       outbox_payload_matches: {
         Args: { a: Json; b: Json; keys: string[] }
         Returns: boolean
+      }
+      queue_family_squares_kiosk_followup: {
+        Args: { _registration_id: string }
+        Returns: undefined
       }
       release_app_payment_outbox_lease: {
         Args: {
