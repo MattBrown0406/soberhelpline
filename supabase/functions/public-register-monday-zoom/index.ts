@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 import { enqueueSpineEvent, extractUtm } from "../_shared/spine.ts";
 
 const corsHeaders = {
@@ -42,6 +42,9 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
+
+    const registrationSource =
+      attribution?.pagePath === "/family-squares-kiosk" ? "kiosk" : "website";
 
     // Reject registrations for cancelled meeting dates with a user-facing message
     const { data: cancelledRow } = await adminSupabase
@@ -95,12 +98,23 @@ serve(async (req: Request) => {
         preferred_contact_time: request_follow_up ? preferred_contact_time : null,
         preferred_timezone: request_follow_up ? preferred_timezone : null,
         language,
+        registration_source: registrationSource,
       })
       .select("id, name, email")
       .single();
 
     if (insertError) {
       throw insertError;
+    }
+
+    if (registration?.id && registrationSource === "kiosk") {
+      const { error: queueError } = await adminSupabase.rpc(
+        "queue_family_squares_kiosk_followup",
+        { _registration_id: registration.id },
+      );
+      if (queueError) {
+        console.error("Kiosk Tuesday invitation could not be queued:", queueError);
+      }
     }
 
     void fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/send-zoom-registration-email`, {
@@ -147,7 +161,7 @@ serve(async (req: Request) => {
       name,
       utm: extractUtm(attribution),
       props: { source: "monday_zoom", request_follow_up, consent_email_list },
-    }, adminSupabase);
+    });
 
     return new Response(JSON.stringify({ success: true, registration }), {
       status: 200,

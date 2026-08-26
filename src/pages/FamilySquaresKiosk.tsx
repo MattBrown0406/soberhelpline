@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import logo from "@/assets/logo.png";
+import kioskLogo from "@/assets/sober-helpline-kiosk-logo.jpg";
 import { z } from "zod";
 
 const RESET_SECONDS = 8;
@@ -42,7 +42,9 @@ const getNextMeetingDate = () => {
   const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
   const weekdayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(values.weekday);
   const pacificHour = Number(values.hour);
-  const daysUntilMonday = weekdayIndex === 1 && pacificHour < 19 ? 0 : (8 - weekdayIndex) % 7 || 7;
+  // Family Squares is scheduled for 60 minutes. Keep the current meeting
+  // available through 8 PM Pacific, then roll forward to next Monday.
+  const daysUntilMonday = weekdayIndex === 1 && pacificHour < 20 ? 0 : (8 - weekdayIndex) % 7 || 7;
   const pacificDate = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
   pacificDate.setUTCDate(pacificDate.getUTCDate() + daysUntilMonday);
   return pacificDate.toISOString().slice(0, 10);
@@ -67,8 +69,9 @@ export default function FamilySquaresKiosk() {
   const [resetCountdown, setResetCountdown] = useState(RESET_SECONDS);
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const focusScrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { toast } = useToast();
-  const meetingDate = getNextMeetingDate();
+  const [meetingDate, setMeetingDate] = useState(getNextMeetingDate);
 
   useEffect(() => {
     const robotsTags = Array.from(document.head.querySelectorAll<HTMLMetaElement>('meta[name="robots"]'));
@@ -76,6 +79,43 @@ export default function FamilySquaresKiosk() {
     robotsTags.forEach((tag) => tag.setAttribute("content", "noindex, nofollow"));
     return () => robotsTags.forEach((tag, index) => tag.setAttribute("content", originalValues[index]));
   }, []);
+
+  useEffect(() => {
+    const refreshMeetingDate = () => setMeetingDate(getNextMeetingDate());
+    const timer = window.setInterval(refreshMeetingDate, 30_000);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") refreshMeetingDate();
+    };
+
+    window.addEventListener("focus", refreshMeetingDate);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", refreshMeetingDate);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  const keepFocusedFieldVisible = useCallback(() => {
+    if (focusScrollTimer.current) clearTimeout(focusScrollTimer.current);
+    focusScrollTimer.current = setTimeout(() => {
+      const activeElement = document.activeElement;
+      if (activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement) {
+        activeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+      }
+    }, 300);
+  }, []);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    viewport.addEventListener("resize", keepFocusedFieldVisible);
+    return () => {
+      viewport.removeEventListener("resize", keepFocusedFieldVisible);
+      if (focusScrollTimer.current) clearTimeout(focusScrollTimer.current);
+    };
+  }, [keepFocusedFieldVisible]);
 
   const resetForNextPerson = useCallback(() => {
     setFormData(EMPTY_FORM);
@@ -203,6 +243,11 @@ export default function FamilySquaresKiosk() {
         <main className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-3xl items-center justify-center">
           <Card className="w-full border-white/20 bg-white text-center shadow-2xl">
             <CardContent className="p-8 sm:p-12">
+              <img
+                src={kioskLogo}
+                alt="Sober Helpline — Family Addiction Support & Education"
+                className="mx-auto mb-6 w-full max-w-sm rounded-2xl shadow-lg"
+              />
               <CheckCircle2 className="mx-auto h-20 w-20 text-emerald-600" aria-hidden="true" />
               <h1 className="mt-6 text-3xl font-extrabold text-slate-900 sm:text-5xl">You're registered.</h1>
               <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
@@ -234,11 +279,15 @@ export default function FamilySquaresKiosk() {
       />
       <main className="mx-auto max-w-6xl">
         <header className="mb-5 flex items-center justify-center sm:mb-7">
-          <img src={logo} alt="Sober Helpline" className="h-20 w-auto rounded-xl bg-white px-3 shadow-lg sm:h-24" />
+          <img
+            src={kioskLogo}
+            alt="Sober Helpline — Family Addiction Support & Education"
+            className="w-full max-w-md rounded-2xl shadow-2xl"
+          />
         </header>
 
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <section className="rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <section className="min-w-0 rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-100">
               <Video className="h-5 w-5" />
               Free weekly family support
@@ -268,7 +317,7 @@ export default function FamilySquaresKiosk() {
             </div>
           </section>
 
-          <Card className="border-0 shadow-2xl">
+          <Card className="min-w-0 border-0 shadow-2xl">
             <CardContent className="p-6 sm:p-8">
               <div className="mb-6 text-center">
                 <p className="text-sm font-bold uppercase tracking-wider text-logo-blue">Upcoming meeting</p>
@@ -283,7 +332,13 @@ export default function FamilySquaresKiosk() {
                 </div>
               ) : null}
 
-              <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5" aria-label="Family Squares registration">
+              <form
+                onSubmit={handleSubmit}
+                onFocusCapture={keepFocusedFieldVisible}
+                autoComplete="off"
+                className="space-y-5"
+                aria-label="Family Squares registration"
+              >
                 <div className="space-y-2">
                   <Label htmlFor="kiosk-name" className="text-base font-bold">Full Name *</Label>
                   <Input
@@ -341,7 +396,7 @@ export default function FamilySquaresKiosk() {
                   {errors.question ? <p className="font-medium text-destructive">{errors.question}</p> : null}
                 </div>
 
-                <Button type="submit" size="lg" className="min-h-16 w-full text-xl font-bold" disabled={isSubmitting || Boolean(cancellationReason)}>
+                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl" disabled={isSubmitting || Boolean(cancellationReason)}>
                   {isSubmitting ? (
                     <><Loader2 className="mr-2 h-6 w-6 animate-spin" />Registering…</>
                   ) : (
