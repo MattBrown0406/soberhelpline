@@ -31,7 +31,19 @@ const Layout = ({ children }: LayoutProps) => {
   }, [pathname]);
 
   const isHome = pathname === "/";
+  const isSharedKiosk = pathname === "/family-squares-kiosk";
   const breadcrumbs = getBreadcrumbs(pathname);
+
+  if (isSharedKiosk) {
+    return (
+      <SEOOverrideProvider>
+        <div className="min-h-screen">
+          <DefaultSEO />
+          <main id="main-content">{children}</main>
+        </div>
+      </SEOOverrideProvider>
+    );
+  }
 
   return (
     <SEOOverrideProvider>

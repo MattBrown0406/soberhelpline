@@ -9,6 +9,7 @@ import RouteAnalytics from "./components/RouteAnalytics";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
 import MondayZoomRegistration from "./pages/MondayZoomRegistration";
+import FamilySquaresKiosk from "./pages/FamilySquaresKiosk";
 import PollVote from "./pages/PollVote";
 import AdminMeetingCancellation from "./pages/AdminMeetingCancellation";
 import FamilySupport from "./pages/FamilySupport";
@@ -423,6 +424,7 @@ const App = () => (
               <Route path="/addiction-family-coaching" element={<IntentLandingPageComponent />} />
               <Route path="/partner-with-sober-helpline" element={<PartnerWithSoberHelplinePage />} />
               <Route path="/family-squares" element={<MondayZoomRegistration />} />
+              <Route path="/family-squares-kiosk" element={<FamilySquaresKiosk />} />
               <Route path="/monday-zoom-registration" element={<MondayZoomRegistration />} />
               <Route path="/monday-zoom" element={<MondayZoomRegistration />} />
               <Route path="/monday-night-zoom" element={<MondayZoomRegistration />} />
