@@ -171,7 +171,26 @@ Deno.serve(async (req) => {
           plan_id: newPlanId,
         });
 
-        const approveLink = (revised?.links ?? []).find((l: any) => l.rel === "approve")?.href ?? null;
+        let approveLink = (revised?.links ?? []).find((l: any) => l.rel === "approve")?.href ?? null;
+        let pricingSchemeUpdated = false;
+
+        // If PayPal wants the subscriber to approve the plan swap, fall back to
+        // lowering the price on their existing plan, which applies immediately
+        // to future charges without requiring any buyer action.
+        if (approveLink) {
+          try {
+            await paypal(token, `/v1/billing/plans/${details.plan_id}/update-pricing-schemes`, "POST", {
+              pricing_schemes: [{
+                billing_cycle_sequence: regular?.sequence ?? 1,
+                pricing_scheme: { fixed_price: { value: target, currency_code: "USD" } },
+              }],
+            });
+            pricingSchemeUpdated = true;
+            approveLink = null;
+          } catch (inner) {
+            console.error(`Pricing scheme fallback failed for ${paypalId}:`, inner);
+          }
+        }
         if (approveLink) needsApproval++;
 
         await supabaseAdmin
@@ -180,7 +199,7 @@ Deno.serve(async (req) => {
           .eq("id", sub.id);
 
         repriced++;
-        results.push({ paypalId, cycle, from: currentPrice, to: target, approveLink });
+        results.push({ paypalId, cycle, from: currentPrice, to: target, approveLink, pricingSchemeUpdated });
       } catch (e) {
         failed++;
         results.push({ paypalId, error: e instanceof Error ? e.message : String(e) });
