@@ -150,3 +150,6 @@ verify_jwt = false
 
 [functions.readiness-radar-family-squares-export]
 verify_jwt = false
+
+[functions.paypal-reprice-members]
+verify_jwt = false
