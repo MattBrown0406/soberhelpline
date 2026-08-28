@@ -119,11 +119,18 @@ Deno.serve(async (req) => {
     const planCache: Record<string, string> = {};
     let productId: string | null = null;
 
-    const getPlanId = async (cycle: "monthly" | "annual") => {
-      if (planCache[cycle]) return planCache[cycle];
-      if (!productId) productId = await ensureProduct(token);
-      planCache[cycle] = await createPlan(token, productId, cycle);
-      return planCache[cycle];
+    // PayPal requires the revised plan to belong to the SAME product as the
+    // subscription's current plan, so plans are cached per product + cycle.
+    const getPlanId = async (cycle: "monthly" | "annual", existingProductId?: string | null) => {
+      const key = `${existingProductId ?? "new"}:${cycle}`;
+      if (planCache[key]) return planCache[key];
+      let pid = existingProductId ?? null;
+      if (!pid) {
+        if (!productId) productId = await ensureProduct(token);
+        pid = productId;
+      }
+      planCache[key] = await createPlan(token, pid, cycle);
+      return planCache[key];
     };
 
     const results: any[] = [];
@@ -159,7 +166,7 @@ Deno.serve(async (req) => {
           continue;
         }
 
-        const newPlanId = await getPlanId(cycle);
+        const newPlanId = await getPlanId(cycle, plan?.product_id ?? null);
         const revised = await paypal(token, `/v1/billing/subscriptions/${paypalId}/revise`, "POST", {
           plan_id: newPlanId,
         });
