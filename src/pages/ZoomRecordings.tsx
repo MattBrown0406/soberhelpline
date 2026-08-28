@@ -212,7 +212,7 @@ export default function ZoomRecordings() {
               <Link to="/family-membership">
                 <Button className="w-full" size="lg">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Become a Member — Starting at $14.99/mo
+                  Become a Member — Starting at $10/mo
                 </Button>
               </Link>
               {!user && (

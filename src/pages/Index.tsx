@@ -429,7 +429,7 @@ const Index = () => {
                   </Button>
                 </Link>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Start with a 7-day free trial, then $14.99/month. Cancel anytime.
+                  Start with a 7-day free trial, then $10/month. Cancel anytime.
                 </p>
               </div>
             </div>

@@ -433,7 +433,7 @@ export default function FamilyForum() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $14.99/month to connect with other families in our discussion forum.
+                  Join our family support membership for just $10/month to connect with other families in our discussion forum.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">

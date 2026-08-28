@@ -225,7 +225,7 @@ export function RevenueCommandCenter() {
       .slice(0, 5);
 
     const offerValuePipeline =
-      supportNurture * 14.99 +
+      supportNurture * 10 +
       coachingLikely * 150 +
       interventionPriority * 2500 +
       abandonedBookings.filter((booking) => !booking.completed && booking.plan_type === "family-readiness-intensive").length * 2500;

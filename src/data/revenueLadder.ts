@@ -34,7 +34,7 @@ export const revenueLadder: RevenueLadderStep[] = [
     icon: Crown,
     stage: "Retention",
     offer: "Family Membership",
-    price: "$14.99/mo",
+    price: "$10/mo",
     role: "Creates recurring revenue and keeps families close between meetings.",
     bestWhen: "They want recordings, education, forum access, and ongoing tools.",
     href: "/family-membership",

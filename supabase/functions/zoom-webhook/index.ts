@@ -191,7 +191,7 @@ Use this thread to share anything that resonated, a question you're still sittin
 
 **Enjoyed tonight's meeting?**
 
-Become a member to access every recording, 40+ education guides, worksheets, AI coaching tools, and this private community — starting at $14.99/month.
+Become a member to access every recording, 40+ education guides, worksheets, AI coaching tools, and this private community — starting at $10/month.
 
 👉 [Start your free 7-day trial](https://soberhelpline.com/family-membership)
 
