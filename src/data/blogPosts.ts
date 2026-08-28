@@ -312,6 +312,7 @@ Usually. Most centers now run virtual alumni meetings and maintain online alumni
 
 Families do better when they are educated, supported, and not doing this alone. Sober Helpline offers ongoing [LINK:family education:/family-education], [LINK:family coaching:/family-coaching], and a community of people who understand exactly what this stretch of road feels like. Start with our free resources, [LINK:join a Monday night family support call:/monday-zoom-registration], or book a coaching session when you are ready for a plan built around your specific situation.`,
   },
+  {
 
     id: 163,
     slug: "how-to-talk-about-loved-ones-addiction",
