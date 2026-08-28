@@ -446,7 +446,7 @@ const BlogArticle = () => {
                 <Link to="/family-membership">
                   <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white px-6">
                     <Lock className="w-4 h-4 mr-2" />
-                    Unlock Full Access — $14.99/mo
+                    Unlock Full Access — $10/mo
                   </Button>
                 </Link>
                 <Link to="/free-guide">

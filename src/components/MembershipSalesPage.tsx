@@ -74,8 +74,8 @@ const trialSteps = [
   },
   {
     label: "After day 7",
-    title: "$14.99 per month",
-    description: "Your monthly membership begins unless you cancel before the trial ends. You can also choose the $149 annual plan at checkout.",
+    title: "$10 per month",
+    description: "Your monthly membership begins unless you cancel before the trial ends. You can also choose the $100 annual plan at checkout.",
   },
 ];
 
@@ -86,7 +86,7 @@ const faqs = [
   },
   {
     question: "Will I be charged today?",
-    answer: "No. PayPal asks you to approve the subscription when you start, but the first charge is scheduled after the seven-day trial. The monthly price is $14.99.",
+    answer: "No. PayPal asks you to approve the subscription when you start, but the first charge is scheduled after the seven-day trial. The monthly price is $10.",
   },
   {
     question: "How do I cancel?",
@@ -141,7 +141,7 @@ export default function MembershipSalesPage() {
     <>
       <SEOHead
         title="Family Support Membership | 7 Days Free | Sober Helpline"
-        description="Get 60+ family addiction guides, a private forum, guided tools, recordings, and $25 off private coaching. Start with seven days free, then $14.99 per month."
+        description="Get 60+ family addiction guides, a private forum, guided tools, recordings, and $25 off private coaching. Start with seven days free, then $10 per month."
         jsonLd={faqSchema as any}
       />
 
@@ -169,7 +169,7 @@ export default function MembershipSalesPage() {
                 </div>
                 <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-logo-green" />No charge for seven days</span>
-                  <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-logo-green" />Then $14.99/month</span>
+                  <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-logo-green" />Then $10/month</span>
                   <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-logo-green" />Cancel online</span>
                 </div>
               </div>
@@ -303,10 +303,10 @@ export default function MembershipSalesPage() {
                     <div>
                       <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">Family Support Membership</p>
                       <div className="mt-2 flex items-baseline gap-2">
-                        <span className="text-4xl font-bold text-foreground">$14.99</span>
+                        <span className="text-4xl font-bold text-foreground">$10</span>
                         <span className="text-muted-foreground">per month after trial</span>
                       </div>
-                      <p className="mt-3 text-sm text-muted-foreground">Annual option: $149 per year. Save $30.88 compared with monthly billing.</p>
+                      <p className="mt-3 text-sm text-muted-foreground">Annual option: $100 per year. Save $20 compared with monthly billing.</p>
                       <p className="mt-2 text-sm text-muted-foreground">Secure checkout through PayPal. Manage or cancel recurring billing from your account.</p>
                     </div>
                     <div className="md:text-right">

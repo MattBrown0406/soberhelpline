@@ -42,7 +42,7 @@ function buildEmailHtml(name: string): string {
 <p>If you were able to make it tonight, I am so glad you came, and I truly hope you got something out of being in the room with other families who understand what you're walking through.</p>
 <p>If something came up and you weren't able to join us, no worries at all — life happens. I wanted to let you know that <strong>tonight's meeting (and every past meeting) is recorded and available to watch in the member section of the website</strong>. You can revisit them anytime, on your own schedule.</p>
 <p style="text-align: center; margin: 30px 0;"><a href="https://soberhelpline.com/family-membership" style="background-color: #2563eb; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Join the Family Membership</a></p>
-<p>Membership is currently <strong>$14.99/month</strong> (locked in for early supporters before our April 2026 price increase) and includes the full Zoom recordings library, the family education curriculum, the private forum, and more.</p>
+<p>Membership is currently <strong>$10/month</strong> (locked in for early supporters before our April 2026 price increase) and includes the full Zoom recordings library, the family education curriculum, the private forum, and more.</p>
 <p>Either way — whether we see you next Monday at 7 PM PT or you catch the recording later — I'm grateful you're here.</p>
 <p>With you in this,<br>Matt Brown<br><em>Sober Helpline</em></p>
 </div>`;

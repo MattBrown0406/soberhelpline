@@ -101,14 +101,14 @@ const membershipPlans = {
   monthly: {
     id: 'family-membership-monthly',
     name: 'Family Support Membership',
-    price: '14.99',
+    price: '10.00',
     period: '/month',
     billingCycle: 'monthly' as const,
   },
   annual: {
     id: 'family-membership-annual',
     name: 'Family Support Membership',
-    price: '149',
+    price: '100.00',
     period: '/year',
     billingCycle: 'annual' as const,
   },
@@ -133,8 +133,8 @@ const membershipFeatures = {
   ]
 };
 
-const MONTHLY_ANNUAL_COST = 14.99 * 12; // $179.88
-const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 149; // $30.88
+const MONTHLY_ANNUAL_COST = 10 * 12; // $120.00
+const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 100; // $20.00
 
 export default function FamilyMembership() {
   const { toast } = useToast();
@@ -278,7 +278,7 @@ export default function FamilyMembership() {
         }
       }
 
-      // The trial is a real PayPal subscription: $0 for seven days, then $14.99/month.
+      // The trial is a real PayPal subscription: $0 for seven days, then $10/month.
       const isTrial = billingCycle === 'trial';
       const result = await createSubscription({
         planType: isTrial ? 'monthly' : billingCycle,
@@ -648,7 +648,7 @@ export default function FamilyMembership() {
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
                             <span className="text-sm text-green-700 font-medium block">
-                              No charge today. PayPal bills $14.99/month after the seven-day trial unless you cancel first.
+                              No charge today. PayPal bills $10/month after the seven-day trial unless you cancel first.
                             </span>
                           </div>
                         </div>

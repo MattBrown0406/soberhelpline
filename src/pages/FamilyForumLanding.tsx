@@ -30,7 +30,7 @@ const faqItems = [
   },
   {
     question: "What does membership cost?",
-    answer: "Family support membership is $14.99/month. It includes the forum, the full education library (60+ guides), recorded webinars, AI-powered tools, and access to the Monday Zoom. Cancel anytime.",
+    answer: "Family support membership is $10/month. It includes the forum, the full education library (60+ guides), recorded webinars, AI-powered tools, and access to the Monday Zoom. Cancel anytime.",
   },
 ];
 
@@ -345,7 +345,7 @@ export default function FamilyForumLanding() {
               <Link to="/family-membership">
                 <Button size="lg" className="gap-2">
                   <Lock className="h-4 w-4" />
-                  Unlock Full Access — $14.99/mo
+                  Unlock Full Access — $10/mo
                 </Button>
               </Link>
             </div>
@@ -380,7 +380,7 @@ export default function FamilyForumLanding() {
             </div>
             <div className="text-center">
               <div className="inline-block bg-background rounded-2xl border border-primary/20 px-8 py-6 shadow-sm">
-                <p className="text-4xl font-bold text-logo-blue mb-1">$14.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
+                <p className="text-4xl font-bold text-logo-blue mb-1">$10<span className="text-lg font-normal text-muted-foreground">/month</span></p>
                 <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
                 <Link to="/family-membership">
                   <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-10">

@@ -76,7 +76,7 @@ function buildApologyTrialEmail(firstName: string, email: string): string {
 
   <div style="background-color:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:16px;margin:20px 0;">
     <p style="margin:0;color:#854d0e;font-size:14px;">
-      <strong>After 3 months:</strong> You'll have the option to continue with a paid membership at $14.99/month, or simply let the trial end — no pressure, no automatic charges. This is about giving you a chance to see if it's helpful for you and your family.
+      <strong>After 3 months:</strong> You'll have the option to continue with a paid membership at $10/month, or simply let the trial end — no pressure, no automatic charges. This is about giving you a chance to see if it's helpful for you and your family.
     </p>
   </div>
 

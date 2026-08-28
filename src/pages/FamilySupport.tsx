@@ -313,7 +313,7 @@ export default function FamilySupport() {
                         <div className="text-center">
                           <Link to="/family-membership">
                             <Button size="lg">
-                              Start membership, $14.99/month
+                              Start membership, $10/month
                             </Button>
                           </Link>
                         </div>
