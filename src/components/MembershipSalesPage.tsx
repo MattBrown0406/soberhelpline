@@ -75,7 +75,7 @@ const trialSteps = [
   {
     label: "After day 7",
     title: "$10 per month",
-    description: "Your monthly membership begins unless you cancel before the trial ends. You can also choose the $149 annual plan at checkout.",
+    description: "Your monthly membership begins unless you cancel before the trial ends. You can also choose the $100 annual plan at checkout.",
   },
 ];
 
@@ -306,7 +306,7 @@ export default function MembershipSalesPage() {
                         <span className="text-4xl font-bold text-foreground">$10</span>
                         <span className="text-muted-foreground">per month after trial</span>
                       </div>
-                      <p className="mt-3 text-sm text-muted-foreground">Annual option: $149 per year. Save $30.88 compared with monthly billing.</p>
+                      <p className="mt-3 text-sm text-muted-foreground">Annual option: $100 per year. Save $20 compared with monthly billing.</p>
                       <p className="mt-2 text-sm text-muted-foreground">Secure checkout through PayPal. Manage or cancel recurring billing from your account.</p>
                     </div>
                     <div className="md:text-right">

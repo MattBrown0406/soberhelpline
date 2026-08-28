@@ -108,7 +108,7 @@ const membershipPlans = {
   annual: {
     id: 'family-membership-annual',
     name: 'Family Support Membership',
-    price: '149',
+    price: '100.00',
     period: '/year',
     billingCycle: 'annual' as const,
   },
@@ -133,8 +133,8 @@ const membershipFeatures = {
   ]
 };
 
-const MONTHLY_ANNUAL_COST = 10 * 10; // $179.88
-const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 149; // $30.88
+const MONTHLY_ANNUAL_COST = 10 * 12; // $120.00
+const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 100; // $20.00
 
 export default function FamilyMembership() {
   const { toast } = useToast();
