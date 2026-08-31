@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSEOOverride } from "@/contexts/SEOOverrideContext";
+import { fitSeoDescription, fitSeoTitle } from "@/lib/seoTitle";
+import { isNoIndexRoute } from "@/lib/indexability";
 
 interface SEOHeadProps {
   title: string;
@@ -15,7 +17,7 @@ interface SEOHeadProps {
     section?: string;
   };
   noIndex?: boolean;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
   /** CSS selectors for speakable content (AEO optimization) */
   speakableSelectors?: string[];
   /** FAQ items for automatic FAQPage schema generation */
@@ -34,6 +36,27 @@ const BASE_URL = "https://soberhelpline.com";
 const normalizePath = (pathname: string) => {
   if (!pathname || pathname === "/") return "";
   return pathname.replace(/\/+$/, "");
+};
+
+// Location landing pages describe a remote/nationwide service, not a staffed
+// storefront. Do not publish LocalBusiness markup with a city-only address;
+// represent those entries as a Service provided by Sober Helpline instead.
+const normalizeJsonLdSchema = (schema: Record<string, unknown>) => {
+  if (schema["@type"] !== "LocalBusiness") return schema;
+  const address = schema.address as Record<string, unknown> | undefined;
+  if (address?.streetAddress) return schema;
+
+  const { address: _address, telephone, ...service } = schema;
+  return {
+    ...service,
+    "@type": "Service",
+    provider: {
+      "@type": "Organization",
+      name: "Sober Helpline",
+      url: BASE_URL,
+      ...(telephone ? { telephone } : {}),
+    },
+  };
 };
 
 export default function SEOHead({
@@ -55,6 +78,9 @@ export default function SEOHead({
   const location = useLocation();
   const { setOverridden } = useSEOOverride();
   const canonicalUrl = `${BASE_URL}${normalizePath(canonicalPath ?? location.pathname)}`;
+  const optimizedTitle = fitSeoTitle(title);
+  const optimizedDescription = fitSeoDescription(description);
+  const effectiveNoIndex = noIndex || isNoIndexRoute(location.pathname);
 
   useEffect(() => {
     setOverridden(true);
@@ -97,19 +123,22 @@ export default function SEOHead({
   } : null;
 
   // Merge speakable into custom jsonLd if provided
-  const enhancedJsonLd = jsonLd ? {
-    ...jsonLd,
+  const enhanceSchema = (schema: Record<string, unknown>) => ({
+    ...normalizeJsonLdSchema(schema),
     ...(speakableSchema && { speakable: speakableSchema })
-  } : null;
+  });
+  const enhancedJsonLd = jsonLd
+    ? (Array.isArray(jsonLd) ? jsonLd.map(enhanceSchema) : enhanceSchema(jsonLd))
+    : null;
 
   return (
       <Helmet>
       {/* Primary Meta Tags */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      <title>{optimizedTitle}</title>
+      <meta name="description" content={optimizedDescription} />
       <link rel="canonical" href={canonicalUrl} />
       
-      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
+      <meta name="robots" content={effectiveNoIndex ? "noindex, nofollow" : "index, follow"} />
       <meta name="ai:description" content={`${description} Sober Helpline helps families choose between free Family Squares support, private consultation, intervention readiness, and ethical treatment navigation.`} />
       <meta name="llm:description" content={`${description} Sober Helpline helps families choose between free Family Squares support, private consultation, intervention readiness, and ethical treatment navigation.`} />
       <link rel="ai-context" href={`${BASE_URL}/llms.txt`} />
@@ -118,8 +147,8 @@ export default function SEOHead({
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={optimizedTitle} />
+      <meta property="og:description" content={optimizedDescription} />
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -130,8 +159,8 @@ export default function SEOHead({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@SoberHelpline" />
       <meta name="twitter:url" content={canonicalUrl} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={optimizedTitle} />
+      <meta name="twitter:description" content={optimizedDescription} />
       <meta name="twitter:image" content={fullImageUrl} />
       <meta name="twitter:image:alt" content="Sober Helpline family addiction support resources" />
 

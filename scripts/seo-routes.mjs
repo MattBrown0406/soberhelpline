@@ -1,5 +1,16 @@
 export const SITE_URL = 'https://soberhelpline.com';
 
+// Alternate public URLs that intentionally resolve to one primary search URL.
+// These routes remain usable for bookmarks and campaigns, but only the primary
+// URL belongs in the sitemap.
+export const canonicalRouteAliases = new Map([
+  ['/addiction-family-coaching', '/family-coaching'],
+  ['/monday-zoom-registration', '/family-squares'],
+  ['/monday-zoom', '/family-squares'],
+  ['/monday-night-zoom', '/family-squares'],
+  ['/blog/understanding-addiction-confusion-families', '/blog/understanding-addiction-in-families'],
+]);
+
 export const prerenderPages = [
   {
     route: '/',
@@ -52,6 +63,7 @@ export const prerenderPages = [
   },
   {
     route: '/monday-zoom-registration',
+    canonicalPath: '/family-squares',
     title: 'Monday Family Support Zoom | Sober Helpline',
     description: 'Register for Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
     noscriptHtml: '<main><h1>Register for the Monday Family Support Zoom</h1><p>Join Sober Helpline\'s free Monday Zoom for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
@@ -327,16 +339,29 @@ export const excludedSitemapRoutes = new Set([
   '/divorced-parents',
   '/auth',
   '/admin',
+  '/admin/meeting-cancellation',
   '/sso',
   '/addiction-family-coaching',
   '/provider-application',
   '/provider-info',
   '/consultation-provider-dashboard',
   '/join-meeting',
+  '/family-squares-kiosk',
+  '/coaching-checkout',
+  '/coaching-onboarding',
+  '/onboarding-quiz',
   '/subscription/success',
   '/subscription/cancel',
+  '/member-billing',
+  '/membership/billing',
+  '/cancel-membership',
+  '/cancel',
+  '/family-education',
+  '/family-education/tracks',
+  '/family-forum',
+  '/family-webinars',
   '/survey',
-  '/roadmap/confirmation',
+
   '/zoom-recordings',
   '/member-home',
   '/member-learning-paths',

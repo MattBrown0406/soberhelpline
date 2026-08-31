@@ -371,6 +371,7 @@ export default function MondayZoomRegistration() {
       <SEOHead
         title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Family Squares Free Monday Support Meeting | Sober Helpline"}
         description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for Family Squares, the free Monday Zoom meeting for families affected by addiction. Get live support, ask practical questions, and find the next right step."}
+        canonicalPath={isMemberQuestion ? undefined : "/family-squares"}
         jsonLd={isMemberQuestion ? undefined : {
           "@context": "https://schema.org",
           "@type": "Event",

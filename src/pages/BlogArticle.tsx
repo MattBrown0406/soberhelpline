@@ -10,8 +10,12 @@ import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import { blogPosts, imageMap } from "@/data/blogPosts";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
+import { fitSeoDescription, fitSeoTitle } from "@/lib/seoTitle";
 
 const BASE_URL = "https://soberhelpline.com";
+const BLOG_CANONICAL_ALIASES: Record<string, string> = {
+  "understanding-addiction-confusion-families": "understanding-addiction-in-families",
+};
 
 const highIntentBlogOverrides: Record<string, { title: string; excerpt: string; seoTitle: string; metaDescription: string; conversionPrompt: string }> = {
   "what-to-expect-during-an-intervention": {
@@ -103,18 +107,16 @@ const BlogArticle = () => {
     const fallbackSlug = generateSlug(post.title || '') || id || post.id?.toString() || '';
     const postSlug = (post as any).slug || getImageSlug(post.image) || fallbackSlug;
     const override = highIntentBlogOverrides[postSlug.toLowerCase()];
-    const canonicalUrl = `${BASE_URL}/blog/${postSlug}`;
-    const seoDescription = override?.metaDescription || (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : '');
+    const canonicalSlug = BLOG_CANONICAL_ALIASES[postSlug] || postSlug;
+    const canonicalUrl = `${BASE_URL}/blog/${canonicalSlug}`;
+    const seoDescription = fitSeoDescription(override?.metaDescription || (post as any).metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : ''));
     const fullImageUrl = post.image?.startsWith('http') ? post.image : `${BASE_URL}${post.image}`;
 
     const suffix = ' | Sober Helpline';
     const baseSeoTitle = override?.seoTitle || (post as any).seoTitle || post.title;
-    const maxLen = 60 - suffix.length;
-    const seoTitle = baseSeoTitle.includes('Sober Helpline')
-      ? baseSeoTitle
-      : baseSeoTitle.length > maxLen
-        ? `${baseSeoTitle.substring(0, maxLen - 3)}...${suffix}`
-        : `${baseSeoTitle}${suffix}`;
+    const seoTitle = fitSeoTitle(
+      baseSeoTitle.includes('Sober Helpline') ? baseSeoTitle : `${baseSeoTitle}${suffix}`
+    );
 
     return { postSlug, canonicalUrl, seoDescription, fullImageUrl, seoTitle };
   }, [post, id]);
@@ -284,6 +286,7 @@ const BlogArticle = () => {
         <Helmet>
           <title>{seoData.seoTitle}</title>
           <meta name="description" content={seoData.seoDescription} />
+          <meta name="robots" content="index, follow" />
           <link rel="canonical" href={seoData.canonicalUrl} />
           <meta property="og:title" content={seoData.seoTitle} />
           <meta property="og:description" content={seoData.seoDescription} />

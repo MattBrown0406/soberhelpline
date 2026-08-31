@@ -2337,7 +2337,7 @@ You don't have to be perfect at this. You just have to not decide anything impor
 
 **Keep Learning and Get Support**
 
-If you are navigating treatment with someone you love, you don't have to figure it out alone. SoberHelpline.com offers [LINK:family coaching sessions:/family-coaching], structured [LINK:aftercare planning support:/blog/aftercare-planning-family-guide], and a community of people going through the same thing — plus our free [LINK:Monday night Family Squares support call:/monday-zoom-registration] where you can ask questions like this one out loud.
+If you are navigating treatment with someone you love, you don't have to figure it out alone. SoberHelpline.com offers [LINK:family coaching sessions:/family-coaching], structured [LINK:aftercare planning support:/blog/aftercare-planning-addiction-recovery-family-guide], and a community of people going through the same thing — plus our free [LINK:Monday night Family Squares support call:/monday-zoom-registration] where you can ask questions like this one out loud.
 
 Start where you are. Bring your questions. We'll help you find the next right step.`,
     tags: ["family education", "rehab", "treatment", "boundaries", "early recovery"],
@@ -2404,7 +2404,7 @@ The most useful things families do are unglamorous: protect the routine, stay co
 
 **Protect the structure**
 
-Treatment worked partly because of structure, so help the new structure survive contact with real life. Treat outpatient group like a job. Don't schedule family obligations on top of therapy. You aren't responsible for making your loved one go — you're responsible for not making it harder. Our guide to [LINK:aftercare planning:/blog/aftercare-planning-family-guide] walks through how to build that scaffolding as a family.
+Treatment worked partly because of structure, so help the new structure survive contact with real life. Treat outpatient group like a job. Don't schedule family obligations on top of therapy. You aren't responsible for making your loved one go — you're responsible for not making it harder. Our guide to [LINK:aftercare planning:/blog/aftercare-planning-addiction-recovery-family-guide] walks through how to build that scaffolding as a family.
 
 **Keep your boundaries where you set them**
 
@@ -2455,7 +2455,7 @@ You don't need to get this perfect. You need to stay steady and keep showing up.
 
 **Keep Learning and Get Support**
 
-The first 90 days after rehab go better when families aren't figuring it out alone. SoberHelpline.com offers ongoing family education, coaching, and a community built for exactly this stretch. Explore our guide to [LINK:sober living homes:/blog/sober-living-homes-family-guide], join our free [LINK:Monday night Family Squares support call:/monday-zoom-registration], or book a [LINK:family coaching session:/family-coaching] to build a plan that fits your family.`,
+The first 90 days after rehab go better when families aren't figuring it out alone. SoberHelpline.com offers ongoing family education, coaching, and a community built for exactly this stretch. Explore our guide to [LINK:sober living homes:/blog/sober-living-homes-addiction-recovery-families], join our free [LINK:Monday night Family Squares support call:/monday-zoom-registration], or book a [LINK:family coaching session:/family-coaching] to build a plan that fits your family.`,
     tags: ["family education", "aftercare", "early recovery", "relapse prevention", "boundaries"],
     faqItems: [
       { question: "How long does it take for someone to stabilize after rehab?", answer: "Most people notice meaningful improvement in sleep, mood, and focus within three to six months, though it varies. The first 90 days after rehab are typically the most unsettled." },
@@ -2538,7 +2538,7 @@ Other options worth knowing about:
 - **Individual therapy** — especially with a therapist who understands family systems and addiction. Your own healing deserves its own hour.
 - **Family coaching** — structured, practical guidance on boundaries, communication, and next steps, which is exactly what we do at SoberHelpline through our [LINK:family coaching session:/family-coaching].
 
-These aren't either/or choices. Many of the healthiest families I work with combine a weekly meeting, their own therapist or coach, and a couple of trusted friends who know the truth. Support in layers holds up better under stress than any single thread. If you're already running on empty, our guide to [LINK:compassion fatigue in families:/blog/compassion-fatigue-families-of-addiction] explains why layered support matters even more.
+These aren't either/or choices. Many of the healthiest families I work with combine a weekly meeting, their own therapist or coach, and a couple of trusted friends who know the truth. Support in layers holds up better under stress than any single thread. If you're already running on empty, our guide to [LINK:compassion fatigue in families:/blog/addiction-anxiety-family-burnout] explains why layered support matters even more.
 
 **Showing Up for Yourself Is the Starting Point**
 
@@ -4109,7 +4109,7 @@ If you take one thing from this, let it be this: the guilt you feel is proof of 
 
 Healing for your loved one may still be uncertain, but your own healing does not have to wait for theirs. You are allowed to breathe, to rest, and to build a life that holds steady no matter what happens next. That steadiness is not a betrayal of your loved one. It may be the most hopeful thing you can offer them.
 
-If you want steady, judgment-free guidance as you set guilt down and rebuild your footing, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for families walking this road. You may also find these helpful: [setting healthy boundaries with an addicted loved one](/blog/setting-boundaries-addicted-loved-one) and [caregiver burnout and self-care for families](/family-education). You do not have to figure it out alone.`,
+If you want steady, judgment-free guidance as you set guilt down and rebuild your footing, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for families walking this road. You may also find these helpful: [setting healthy boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [caregiver burnout and self-care for families](/family-education). You do not have to figure it out alone.`,
     faqItems: [
       {
         question: "Is it my fault that my loved one became addicted?",
@@ -4212,7 +4212,7 @@ It also helps to agree on this with your immediate family so everyone's telling 
 
 You don't have to explain everything to everyone. You don't have to defend your loved one, your decisions, or your family to people who are reacting instead of helping. The goal isn't secrecy — it's appropriate honesty that protects everyone's dignity, including your own.
 
-If you want support thinking through what to say to a specific person, or you're looking for steady, judgment-free guidance through the harder conversations, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for this. You may also find these helpful: [setting boundaries with an addicted loved one](/blog/setting-boundaries-addicted-loved-one) and [how to talk to a spouse about addiction](/blog/how-to-talk-to-spouse-about-addiction). For ongoing peer support, [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) are excellent resources. You don't have to figure it out alone.`,
+If you want support thinking through what to say to a specific person, or you're looking for steady, judgment-free guidance through the harder conversations, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for this. You may also find these helpful: [setting boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [how to talk to a spouse about addiction](/blog/how-to-talk-to-loved-one-about-addiction). For ongoing peer support, [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) are excellent resources. You don't have to figure it out alone.`,
     faqItems: [
       {
         question: "Should I tell extended family that a loved one is in addiction treatment?",
@@ -4522,7 +4522,7 @@ You don't need a medical degree to use this knowledge well. A few practical shif
 
 **Ask about medical detox before assuming someone can stop on their own.** If your loved one has been using heavily or for a long time — particularly alcohol, benzodiazepines, or opioids — a conversation about [LINK:medically supervised detox:/medical-detox] is worth having before any attempt to quit cold. This is a safety issue, not just a comfort issue.
 
-**Recognize that recovery is a process of re-learning, not a single event.** Because tolerance and dependence develop through repetition over time, [LINK:the brain's recovery:/blog/brain-recovery-neuroplasticity-addiction] also takes time. Cravings, mood swings, and sleep problems can persist well after the substance leaves the body. Knowing this can help families set realistic expectations for early recovery instead of expecting an immediate return to "normal."
+**Recognize that recovery is a process of re-learning, not a single event.** Because tolerance and dependence develop through repetition over time, [LINK:the brain's recovery:/blog/brain-recovery-from-addiction-neuroplasticity-families] also takes time. Cravings, mood swings, and sleep problems can persist well after the substance leaves the body. Knowing this can help families set realistic expectations for early recovery instead of expecting an immediate return to "normal."
 
 **Take care of your own nervous system too.** Watching someone you love go through withdrawal — or refuse to address a dependence you can clearly see — is exhausting. You're allowed to get support for yourself, separate from anything your loved one does or doesn't do.
 
@@ -5871,7 +5871,7 @@ Self-medication turns into addiction because the relief is real but temporary, a
 
 The problem is that the fix comes with compounding interest. As tolerance builds, the same amount of the substance produces less relief, so the person uses more. Meanwhile, the underlying condition — the anxiety, the depression, the trauma — is not getting better. In most cases, it's getting worse, because substances disrupt sleep, relationships, brain chemistry, and the very coping skills that could actually help.
 
-Eventually many people reach a painful crossroads: the substance no longer makes them feel good. It just keeps them from feeling terrible. At that point, they aren't using to escape their original pain — they're using to escape withdrawal and the wreckage the addiction itself has created. This is why "just stop" feels impossible from the inside, even when the consequences are piling up on the outside. For more on the brain science behind this, see [why willpower isn't enough](/blog/why-willpower-fails-addiction).
+Eventually many people reach a painful crossroads: the substance no longer makes them feel good. It just keeps them from feeling terrible. At that point, they aren't using to escape their original pain — they're using to escape withdrawal and the wreckage the addiction itself has created. This is why "just stop" feels impossible from the inside, even when the consequences are piling up on the outside. For more on the brain science behind this, see [why willpower isn't enough](/why-willpower-fails).
 
 ## What Conditions Commonly Drive Self-Medication?
 
@@ -6092,7 +6092,7 @@ The short answer: because addiction changes how memories are recorded, not just 
 
 Three things stack on top of each other. First, dopamine tags memories as significant. Drugs and alcohol trigger dopamine surges far beyond natural rewards, so memories of use get stamped with outsized importance and emotional intensity. Second, everyone's painful memories fade faster. Psychologists call this the fading affect bias — the emotional sting of negative memories fades more quickly than the glow of positive ones. It is normal, but addiction supercharges it. Third, consequences often happened while impaired. Blackouts, sedation, and intoxication mean the worst moments were often poorly recorded in the first place. You remember that night clearly because you were sober for it. They may not remember it at all.
 
-Put those together and you get a memory bank that is genuinely lopsided. Willpower alone can't fix a distorted file system — which is why simply reminding someone of the wreckage rarely changes their mind. For a deeper look at the biology at play, see our guide on [LINK:how addiction rewires the brain:/blog/addiction-rewires-brain].
+Put those together and you get a memory bank that is genuinely lopsided. Willpower alone can't fix a distorted file system — which is why simply reminding someone of the wreckage rarely changes their mind. For a deeper look at the biology at play, see our guide on [LINK:how addiction rewires the brain:/blog/how-addiction-affects-the-brain].
 
 **How Does Euphoric Recall Show Up at Home?**
 
@@ -6108,7 +6108,7 @@ The most useful response is to stay calm, stay factual, and avoid turning memory
 
 Don't prosecute the memory. Instead of "That's not how it happened," try "I remember that time differently — I was really scared." Speak from your experience rather than correcting theirs. Help them play the tape forward. Recovery programs teach people to follow the memory past the first drink to what reliably came next. You can gently support this: "And then what usually happened?" asked with curiosity, not sarcasm. Name it without shaming it. If your loved one is in recovery and open to it, it's fair to say, "That sounds like the highlight reel talking." Light touch. One sentence. Then let it go. Take nostalgia seriously as a signal, not a crisis. Frequent romanticizing — especially paired with pulling away from meetings, sponsors, or support — is worth a direct, caring conversation about what support they need right now. The [LINK:Relapse Radar assessment:/relapse-radar] can help you gauge how concerned to be.
 
-And keep your own footing. Watching someone fondly recall the era that nearly broke your family is painful. Your memories are valid — you can hold them and heal from them without needing your loved one to co-sign your version of history. If you need help finding the right words, [LINK:what to say when a loved one relapses:/blog/what-do-i-say-when-they-relapse] is a companion piece worth reading.
+And keep your own footing. Watching someone fondly recall the era that nearly broke your family is painful. Your memories are valid — you can hold them and heal from them without needing your loved one to co-sign your version of history. If you need help finding the right words, [LINK:what to say when a loved one relapses:/blog/what-to-say-when-loved-one-relapses] is a companion piece worth reading.
 
 **How Treatment and Recovery Address Euphoric Recall**
 
@@ -19022,7 +19022,7 @@ One of the most common mistakes families make in the first year is either over-m
 
 Talking about recovery should be natural, not interrogatory. There is a significant difference between asking "Are you still going to your meetings?" in an accusatory tone and saying "How's it going with the group you've been attending?" with genuine curiosity.
 
-A few communication principles that work in early recovery: Lead with curiosity, not surveillance — ask open-ended questions. Acknowledge their effort — recovery is hard work and it deserves recognition. Share your own feelings using "I" statements: "I feel hopeful when I see how committed you are." Don't catastrophize small setbacks or difficult days — they are normal. Know your own [LINK:warning signs for a potential relapse:/blog/relapse-warning-signs-addiction-families], and have a plan for addressing them calmly.
+A few communication principles that work in early recovery: Lead with curiosity, not surveillance — ask open-ended questions. Acknowledge their effort — recovery is hard work and it deserves recognition. Share your own feelings using "I" statements: "I feel hopeful when I see how committed you are." Don't catastrophize small setbacks or difficult days — they are normal. Know your own [LINK:warning signs for a potential relapse:/blog/relapse-warning-signs-family-education], and have a plan for addressing them calmly.
 
 If your loved one becomes defensive when you ask about their recovery, that is worth noting — but it doesn't always mean something is wrong. It may simply mean they need to feel trusted rather than watched. Continue showing up consistently and let your actions communicate your support.
 
@@ -19116,7 +19116,7 @@ The physical home matters — but the emotional climate often matters more. High
 
 Does emotional safety mean avoiding hard conversations? No. Emotional safety means hard conversations can happen without explosions. It means you can say "I'm worried about you" without it turning into a three-hour fight. Families often benefit from working with a therapist or [LINK:family coach:/family-coaching] during this period — not because something is wrong, but because everyone is adjusting to a new dynamic.
 
-Specific practices that help: Lead with curiosity before criticism — ask how they are doing before assuming the worst. Acknowledge progress out loud — early recovery is hard work, and naming what you notice reinforces positive momentum. Set limits — not ultimatums. There is a difference between a [LINK:boundary:/blog/boundaries-vs-ultimatums] (what you will do) and a threat (what you will do to punish). Boundaries protect you; they do not attempt to control. Keep your own anxiety in check — families in recovery tend to be hypervigilant. Every late text or closed door can feel alarming. Work with your own support system — [LINK:Al-Anon:/blog/al-anon-family-support-groups-addiction], therapy, coaching — to manage this.
+Specific practices that help: Lead with curiosity before criticism — ask how they are doing before assuming the worst. Acknowledge progress out loud — early recovery is hard work, and naming what you notice reinforces positive momentum. Set limits — not ultimatums. There is a difference between a [LINK:boundary:/boundaries-ultimatums] (what you will do) and a threat (what you will do to punish). Boundaries protect you; they do not attempt to control. Keep your own anxiety in check — families in recovery tend to be hypervigilant. Every late text or closed door can feel alarming. Work with your own support system — [LINK:Al-Anon:/blog/al-anon-family-support-groups-addiction], therapy, coaching — to manage this.
 
 **Step 4: Support Their Recovery Network Without Taking It Over**
 
@@ -19132,7 +19132,7 @@ Even the best recovery-friendly home will have difficult moments. Someone will m
 
 Talk with your loved one — and their treatment team if possible — about what the plan is if things get hard. Who do they call? Where do they go? What does the family do? Having this mapped out removes the panic from difficult moments and turns them into navigable situations.
 
-It also helps to educate yourself about [LINK:warning signs:/blog/relapse-warning-signs-addiction-families]. A change in mood, increased isolation, reconnecting with people associated with using, skipping therapy — these are not proof of relapse, but they are signals worth paying attention to. Raising your concern early, calmly, is far more effective than waiting until a crisis occurs.
+It also helps to educate yourself about [LINK:warning signs:/blog/relapse-warning-signs-family-education]. A change in mood, increased isolation, reconnecting with people associated with using, skipping therapy — these are not proof of relapse, but they are signals worth paying attention to. Raising your concern early, calmly, is far more effective than waiting until a crisis occurs.
 
 **You Are Not Responsible for Their Recovery — But You Matter Enormously**
 
@@ -19797,7 +19797,7 @@ Learning how dopamine and addiction reshape the brain doesn't mean giving up hop
 
 SoberHelpline.com is here to help you build that knowledge, one article at a time. Explore our library for more family education, practical guidance, and coaching support as you navigate this path.`,
     image: dopamineAddictionBrainScienceImg,
-    date: "April 15, 2026",
+    date: "2026-04-15",
     author: "Matt Brown",
     category: "Understanding Addiction",
     tags: ["dopamine", "brain science", "addiction", "family education", "neuroscience", "recovery"],
@@ -19883,7 +19883,7 @@ Knowing what to say when a loved one relapses won't make the situation easy. But
 
 SoberHelpline.com is here to help you navigate exactly this kind of moment. From family coaching to our weekly Monday night support calls, we're built for the hard conversations — and the long road.`,
     image: whatToSayLovedOneRelapsesImg,
-    date: "April 16, 2026",
+    date: "2026-04-16",
     author: "Matt Brown",
     category: "Family Support",
     tags: ["relapse", "communication", "family support", "boundaries", "addiction recovery"],
