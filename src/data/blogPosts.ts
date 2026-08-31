@@ -185,6 +185,7 @@ import wontTalkToYouImg from "@/assets/blog-addicted-loved-one-wont-talk-to-you.
 import howToTalkAboutAddictionImg from "@/assets/blog-how-to-talk-about-loved-ones-addiction.jpg";
 import alumniProgramAddictionTreatmentImg from "@/assets/blog-alumni-program-addiction-treatment-family-guide.jpg";
 import homeDrugTestingRecoveryImg from "@/assets/blog-home-drug-testing-in-recovery-family-guide.jpg";
+import alternativesToAaImg from "@/assets/blog-alternatives-to-aa-recovery-programs-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
