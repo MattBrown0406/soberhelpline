@@ -186,6 +186,7 @@ import howToTalkAboutAddictionImg from "@/assets/blog-how-to-talk-about-loved-on
 import alumniProgramAddictionTreatmentImg from "@/assets/blog-alumni-program-addiction-treatment-family-guide.jpg";
 import homeDrugTestingRecoveryImg from "@/assets/blog-home-drug-testing-in-recovery-family-guide.jpg";
 import alternativesToAaImg from "@/assets/blog-alternatives-to-aa-recovery-programs-family-guide.jpg";
+import rehabTreatmentTeamImg from "@/assets/blog-rehab-treatment-team-staff-credentials-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
