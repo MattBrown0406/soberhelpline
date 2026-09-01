@@ -186,12 +186,166 @@ import howToTalkAboutAddictionImg from "@/assets/blog-how-to-talk-about-loved-on
 import alumniProgramAddictionTreatmentImg from "@/assets/blog-alumni-program-addiction-treatment-family-guide.jpg";
 import homeDrugTestingRecoveryImg from "@/assets/blog-home-drug-testing-in-recovery-family-guide.jpg";
 import alternativesToAaImg from "@/assets/blog-alternatives-to-aa-recovery-programs-family-guide.jpg";
+import rehabTreatmentTeamImg from "@/assets/blog-rehab-treatment-team-staff-credentials-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 167,
+    slug: "rehab-treatment-team-staff-credentials-family-guide",
+    seoTitle: "Who's on the Rehab Treatment Team? Family Guide",
+    metaDescription: "Learn who's on a rehab treatment team, what each credential means, and the questions to ask so your loved one gets real clinical care.",
+    title: "Who's on the Rehab Treatment Team? A Family Guide to Treatment Center Staff and Credentials",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-09-01",
+    image: rehabTreatmentTeamImg,
+    keywords: ["rehab treatment team", "treatment center staff credentials", "licensed therapist vs addiction counselor", "dual diagnosis staffing", "how to vet a rehab"],
+    excerpt: "The people in the room matter more than the furniture. Here's how to read a rehab treatment team, decode credentials, and ask the questions that reveal real clinical care.",
+    content: `When you tour a treatment center or scroll through its website, you'll see photos of comfortable bedrooms, a chef-prepared meal, maybe a view of the mountains. What you rarely see is the one thing that actually determines whether your loved one gets better: the rehab treatment team. The people in the room matter far more than the furniture in it.
+
+If you're comparing programs right now, this is the most useful question you can learn to ask well. Two centers can charge the same, look the same, and deliver very different care depending on who is licensed, who is present, and how often your loved one actually sits across from a trained clinician. Here's how to read a treatment team so you can tell the difference.
+
+**Why does the rehab treatment team matter more than the amenities?**
+
+The treatment team is the care. Everything else is the setting. A program with strong clinicians in a plain building will outperform a beautiful facility where your loved one meets a licensed therapist once a week for 45 minutes.
+
+Addiction is a medical and psychological condition, and treating it well takes several skill sets working together: medical management of withdrawal, assessment and treatment of co-occurring mental health conditions, individual therapy, group therapy, family work, and discharge planning. No single person does all of that.
+
+So when you evaluate a program, you're really evaluating whether those roles are filled by qualified people who are actually there — not on a website, not "available upon request," not a consultant who visits monthly.
+
+**Who is typically on a rehab treatment team?**
+
+Most residential programs build their team around six core roles. Not every center has all six, and that's worth knowing before you commit.
+
+**Medical staff**
+
+A physician oversees medical care. Ideally this is a doctor certified in addiction medicine or addiction psychiatry, not a general practitioner who signs off remotely. Nurses handle daily medical needs and medication, and in a detox setting they should be on site around the clock.
+
+- Ask: Is there a physician on site, and how many days per week? Who covers nights and weekends?
+- Ask: Is your medical director board-certified in addiction medicine or addiction psychiatry?
+
+**Psychiatric providers**
+
+If your loved one lives with depression, anxiety, bipolar disorder, ADHD, PTSD, or another co-occurring condition — and most people entering treatment do — someone has to be qualified to diagnose and prescribe. That's a psychiatrist or a psychiatric nurse practitioner.
+
+- Ask: How soon after admission does a psychiatric evaluation happen, and how often will my loved one see that provider?
+
+**Licensed therapists and counselors**
+
+This is where credentials get confusing, so it's worth slowing down. A licensed clinician has completed a master's degree, thousands of supervised hours, and a state licensing exam. Common letters: LCSW (licensed clinical social worker), LPC or LPCC (licensed professional counselor), LMFT (licensed marriage and family therapist), or PhD/PsyD (psychologist).
+
+A certified addiction counselor — CADC, LADC, or CDCA, depending on the state — has specialized addiction training, which is genuinely valuable, but it's a different scope than a licensed mental health clinician. Strong programs have both.
+
+- Ask: What license does my loved one's primary therapist hold, and how many clients do they carry?
+
+**Case manager or discharge planner**
+
+This person handles the part families forget about until it's urgent: what happens after treatment. Sober living referrals, outpatient scheduling, medication continuity, sometimes legal or employment coordination. A weak discharge plan undoes a strong 30 days.
+
+**Behavioral health technicians**
+
+Techs — sometimes called BHTs or RAs — run the day. Supervision, transport, safety checks, evening structure. Many are in recovery themselves and bring real credibility. They are not clinicians, and they shouldn't be counted as such when a program quotes you its staff-to-client ratio.
+
+**Family program staff**
+
+If a center has a family program worth attending, someone specific owns it. If no name comes up when you ask who runs family services, there probably isn't a real program behind the brochure.
+
+**What credentials should I actually look for?**
+
+Look for three things: state licensure, addiction-specific certification, and a clear supervision structure. Those tell you most of what you need to know about a rehab treatment team.
+
+Here's a plain-language translation of the letters you'll see:
+
+- MD / DO — physician; look for board certification in addiction medicine.
+- PMHNP — psychiatric mental health nurse practitioner; can diagnose and prescribe.
+- RN / LPN — nursing staff; critical during detox and for medication management.
+- LCSW / LPC / LMFT — master's-level licensed therapists who can treat mental health conditions.
+- PhD / PsyD — doctoral-level psychologists; often handle testing and complex assessment.
+- CADC / LADC / CDCA — addiction-specific counseling certifications; valuable, but narrower in scope.
+- CIP — certified intervention professional; relevant if you're still working to get your loved one to treatment.
+
+One more thing worth verifying: whether clinicians are employees or contractors. Contractors come and go, and continuity matters when someone is finally telling the truth about their life for the first time in years.
+
+**What questions should I ask a rehab about staffing?**
+
+Ask specific, countable questions. Vague questions get marketing answers; numbers get you facts. Write these down and use the same list at every center you call. Our fuller list of [LINK:questions to ask a treatment center:/blog/questions-to-ask-treatment-center] pairs well with these.
+
+1. How many individual therapy sessions per week will my loved one have, and with whom?
+2. What is the ratio of licensed clinicians — not total staff — to clients?
+3. Is the medical director on site, and how often?
+4. How quickly is a psychiatric evaluation completed after admission?
+5. What has your clinical staff turnover looked like over the past year?
+6. Who leads the family program, and what are their credentials?
+7. Will my loved one keep the same primary therapist for the whole stay?
+
+Pay attention to the shape of the answers. "We have a full clinical team" is not an answer. "Two individual sessions a week with an LCSW, same therapist throughout, psychiatric eval within 72 hours" is.
+
+**What are the warning signs of a weak clinical team?**
+
+The clearest red flag is a program that answers staffing questions with amenities. If you ask about licensure and hear about the pool, you have your answer. Our guide to [LINK:treatment center red flags:/treatment-red-flags] covers the rest of the pattern.
+
+Other signals worth taking seriously:
+
+- The admissions rep can't name your loved one's likely therapist or their credential.
+- "Individual therapy" turns out to mean one 30-minute session per week.
+- Groups are consistently led by techs rather than licensed clinicians.
+- No psychiatric provider on staff, despite marketing dual diagnosis treatment.
+- High turnover, or vague answers when you ask about it.
+- The person selling you the bed is the same person promising clinical outcomes.
+
+None of this means a program is dishonest. Some are simply thinner than they appear. Your job isn't to catch anyone — it's to know what you're buying before you pay for it.
+
+**How do I verify what a treatment center tells me?**
+
+You can check most of it yourself in under an hour. Nearly every state has an online license lookup for physicians, nurses, social workers, and counselors — search your state's name plus "license verification."
+
+- Verify the medical director and clinical director by name through the state licensing board.
+- Check accreditation directly with The Joint Commission or CARF, not just the logo on the website.
+- Confirm the facility's license through your state's behavioral health or health services department.
+- Read alumni feedback with a grain of salt, but watch for repeated mentions of staff turnover.
+
+If a program hesitates to give you names and credentials, that hesitation is information.
+
+**You're allowed to ask hard questions**
+
+Families often go quiet at exactly the moment they should get specific. You're exhausted, a bed just opened up, and pressing for details feels like risking the whole thing. It isn't. Good programs expect these questions and answer them easily — a strong clinical team is the thing they're proudest of.
+
+You're not being difficult. You're doing the one piece of due diligence that reliably separates real treatment from an expensive month away. Ask the questions, write down the answers, compare them side by side. Then make your decision and stay decided. If you want a second set of eyes on a specific program, [LINK:family coaching:/family-coaching] is built for exactly this kind of decision.
+
+**Frequently Asked Questions**
+
+**What is a rehab treatment team?**
+
+A rehab treatment team is the group of professionals responsible for a client's care during treatment — typically a physician, nursing staff, a psychiatric provider, a primary therapist, addiction counselors, a case manager, and behavioral health technicians. Each role covers a different piece of care, from managing withdrawal to planning aftercare. The makeup and credentials of that team are the strongest signal of treatment quality.
+
+**How many therapy sessions should someone get in rehab?**
+
+In residential treatment, a reasonable standard is at least two individual sessions per week with a licensed therapist, plus daily group therapy. Some strong programs offer three or more. If a center offers only one brief individual session weekly, ask directly how that meets your loved one's clinical needs.
+
+**What's the difference between a licensed therapist and an addiction counselor?**
+
+A licensed therapist (LCSW, LPC, LMFT, PhD, or PsyD) holds a master's or doctoral degree and can diagnose and treat mental health conditions. A certified addiction counselor (CADC, LADC, and similar) has specialized addiction training but a narrower clinical scope. Both add real value — the best programs staff both, so co-occurring conditions don't go untreated.
+
+**Does a treatment center have to have a psychiatrist on staff?**
+
+Not legally, but any program advertising dual diagnosis or co-occurring disorder treatment should have a psychiatrist or psychiatric nurse practitioner available on a regular basis. If your loved one has a mental health diagnosis or takes psychiatric medication, treat this as a requirement rather than a preference.
+
+**How can I check whether a treatment center's staff are actually licensed?**
+
+Search your state's license verification website — most boards let you look up a clinician by name in seconds. You can also verify accreditation through The Joint Commission or CARF and confirm the facility's license with your state health department. Ask the center for names and credentials in writing; a good program provides them without friction.
+
+**Is a higher staff-to-client ratio always better?**
+
+Only if you know who's being counted. A 3:1 ratio that includes kitchen staff, drivers, and overnight techs tells you very little. Ask specifically for the ratio of licensed clinical staff to clients — that number reflects how much real therapeutic attention your loved one will actually receive.
+
+**Keep Going — You Don't Have to Sort This Out Alone**
+
+Choosing a treatment program is one of the highest-stakes decisions most families ever make, and almost nobody feels prepared for it. SoberHelpline.com exists for exactly this: family education, coaching, and a community of people who have stood where you're standing. Explore our resources, join a free Monday night family support call, or book a coaching session when you want a second set of eyes on your specific situation. You don't need every answer today — you just need the next right question.`
+  },
   {
     id: 166,
     slug: "alternatives-to-aa-recovery-programs-family-guide",
