@@ -195,6 +195,136 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 168,
+    slug: "how-to-compare-rehab-programs-family-scorecard",
+    seoTitle: "How to Compare Rehab Programs: A Family Scorecard",
+    metaDescription: "Learn how to compare rehab programs side by side with a simple family scorecard: fit, clinical quality, cost clarity, family involvement, and aftercare.",
+    title: "How to Compare Rehab Programs Side by Side: A Family Scorecard",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-09-02",
+    image: compareRehabProgramsImg,
+    keywords: ["how to compare rehab programs", "choosing a rehab", "rehab scorecard", "treatment center questions", "aftercare planning"],
+    excerpt: "Every program sounds the same on the phone. Use a five-category family scorecard — fit, clinical quality, cost clarity, family involvement, and aftercare — to compare treatment centers with facts instead of feelings.",
+    content: `You have two or three programs on your short list. Every website looks calm and hopeful. Every admissions person is kind and confident. And somehow you are more confused than when you started.
+
+That is normal. Learning how to compare rehab programs is a skill most families are forced to pick up in a week, under stress, with a loved one who may change their mind by Friday. The good news: you do not need to become an expert. You need a way to ask the same questions of each program and write down what you hear.
+
+**Why is it so hard to compare rehab programs?**
+
+It is hard because most programs describe themselves in the same language. "Individualized care," "evidence-based," "holistic," and "family-centered" appear on nearly every website, whether or not they are true in practice. Marketing has flattened the differences, so families end up comparing feelings instead of facts.
+
+A scorecard fixes that. Same questions, same categories, written answers. When the pressure is high, structure is kindness to yourself. It also helps to know the [LINK:treatment center red flags:/blog/treatment-red-flags] that should end a conversation early.
+
+**The five categories that matter**
+
+Compare programs on five things: fit for your loved one, clinical quality, cost clarity, family involvement, and aftercare. Score each category from 1 to 5 for every program you are considering. A program that scores well in all five is rare; a program that scores poorly in two or more is a warning.
+
+**1. Fit: Is this program built for someone like my loved one?**
+
+Fit is whether the population, structure, and philosophy match the actual human going there.
+
+- Who is the typical client? Age range, gender, substances, and how many are on their first treatment episode versus their fourth.
+- Does the program treat co-occurring mental health conditions on site, or refer out?
+- What is their position on medication-assisted treatment (medications like buprenorphine or naltrexone)? "We support it when appropriate" is a different answer than "we don't allow it."
+- Is the approach 12-step based, non-12-step, faith-based, or a blend? Would your loved one actually participate in that?
+
+Strong answer: specific numbers and a clear description of who they serve best, including who they are not the right fit for. Weak answer: "We treat everyone." Understanding the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment-family-guide] first will narrow your list before you ever pick up the phone.
+
+**2. Clinical quality: Who is doing the work, and how much of it?**
+
+This is the substance behind the brochure: how much real therapy happens, and who delivers it.
+
+- How many individual therapy sessions per week, and how long are they? One 50-minute session a week is common; two or more is stronger.
+- Who runs the groups: licensed clinicians, or mostly peer staff and techs?
+- Is there a psychiatrist or psychiatric nurse practitioner on staff or on site regularly?
+- Is the program licensed by the state and accredited by The Joint Commission or CARF?
+
+Strong answer: they can tell you the weekly clinical schedule without looking it up. Weak answer: vague talk about "a full continuum of therapeutic modalities."
+
+**3. Cost clarity: Do I know what this will actually cost?**
+
+You are not comparing sticker prices. You are comparing how honest each program is about money before you commit.
+
+- What is the total cost for the recommended length of stay, and what does it include?
+- What is billed separately: detox, lab work, medications, psychiatric visits, family programming?
+- Have they verified your insurance benefits and told you in writing what they expect you to owe?
+- What happens financially if your loved one leaves early, or if insurance stops authorizing days?
+
+Strong answer: a written estimate, an explanation of what could change it, and a named person to call with billing questions. Weak answer: "Don't worry, we'll work with you."
+
+**4. Family involvement: Will we be part of this, or just paying for it?**
+
+Recovery is more durable when the family is treated too. Ask what your role will be from day one.
+
+- Is there a structured family program? How many hours, how often, and is it included in the cost?
+- Will you have a family therapy session with your loved one and a clinician, or only educational groups?
+- How often will a clinician update you, and who will that be?
+- Does the program help the family plan for the return home, not just the client?
+
+Strong answer: a scheduled family program with a named coordinator and a clear communication rhythm. Weak answer: "Families are welcome to call anytime." Outside support matters here too — [LINK:Al-Anon:https://al-anon.org/] and [LINK:Nar-Anon:https://www.nar-anon.org/] meetings give you a place to process what treatment stirs up.
+
+**5. Aftercare: What happens on day 31?**
+
+The strongest programs plan the exit from the first week.
+
+- When does discharge planning start?
+- Do they help arrange the next level of care: outpatient, sober living, a therapist, a psychiatrist, and community support?
+- Do they follow up after discharge, and for how long?
+- If your loved one relapses after leaving, what is their response?
+
+Strong answer: a written aftercare plan before discharge and a real relationship with outpatient providers near your home. Weak answer: "We'll give you a list of resources."
+
+**How do you score rehab programs fairly?**
+
+Ask every program the same questions, in the same order, and write the answers down before you hang up. Score each category immediately, while it is fresh. Then sleep on it before comparing totals.
+
+Habits that keep it honest:
+
+1. Have two people on the call when you can. One asks, one writes. You will catch things the other misses.
+2. Notice how they respond when you push back. Defensive now means defensive later.
+3. Weight fit and aftercare more heavily than amenities. Nobody stays sober because the pool was nice.
+4. Do not let urgency skip steps. Most decisions can survive a 24-hour pause. If a program says the bed disappears unless you commit today, that tells you something.
+
+**What if your loved one wants a say?**
+
+Let them have one, within limits. A person who helped choose their program is more likely to stay in it. Share your top two options and ask which feels more workable.
+
+You do not have to let them veto every option or steer toward the loosest rules. Your job is to narrow the field to programs you trust. Their job is to pick from it.
+
+If you are seeking treatment for yourself, the scorecard works the same way. You deserve straight answers, and asking for them is a sign you are taking this seriously.
+
+**You do not have to get this perfect**
+
+There is no perfect program and no choice that guarantees an outcome. What you can do is make a clear-eyed decision with real information, then support it. Families who do that feel steadier afterward, whatever happens next, because they know they did the work.
+
+Use the scorecard, trust your notes more than your nerves, and remember that choosing a program is one decision in a long recovery, not the whole thing.
+
+If you want help thinking it through, Sober Helpline offers ongoing education, one-on-one [LINK:family coaching:/family-coaching], and a community of people who have sat exactly where you are sitting. You do not have to figure this out alone.
+
+**Frequently Asked Questions**
+
+**How many rehab programs should I compare before choosing?**
+
+Two to four is usually enough. Fewer than two gives you no comparison; more than four creates paralysis. Narrow the list first by insurance, location, and basic fit, then run the full scorecard on the finalists.
+
+**What is the most important factor when comparing rehab programs?**
+
+Fit and aftercare tend to matter most. A program that matches your loved one's needs and plans the transition home from the first week does more for long-term recovery than higher price tags or better amenities.
+
+**How can I tell if a rehab is high quality?**
+
+Look for state licensing, accreditation from The Joint Commission or CARF, licensed clinicians running therapy, at least weekly individual sessions, and psychiatric support on site. Then check whether they can describe their weekly schedule clearly and answer money questions in writing.
+
+**Should I choose the rehab my loved one prefers?**
+
+Give them a real choice among options you have already vetted. Their buy-in matters, but so does your judgment. If they only want the program with the fewest rules, that is worth a conversation, not automatic agreement.
+
+**What questions should I ask a rehab admissions counselor?**
+
+Ask about their typical client, weekly individual therapy hours, staff credentials, total cost in writing, family program details, and what happens after discharge. Ask the same questions of every program so you can compare the answers fairly.`
+  },
+  {
     id: 167,
     slug: "rehab-treatment-team-staff-credentials-family-guide",
     seoTitle: "Who's on the Rehab Treatment Team? Family Guide",
