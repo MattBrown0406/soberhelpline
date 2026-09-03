@@ -380,6 +380,7 @@ export default function FamilySquaresKiosk() {
                       autoComplete="off"
                       data-lpignore="true"
                       required
+                      maxLength={100}
                       value={formData.name}
                       onChange={(event) => updateField("name", event.target.value)}
                       placeholder="Your full name"
@@ -401,6 +402,7 @@ export default function FamilySquaresKiosk() {
                       autoComplete="off"
                       data-lpignore="true"
                       required
+                      maxLength={255}
                       value={formData.email}
                       onChange={(event) => updateField("email", event.target.value)}
                       placeholder="you@example.com"
@@ -424,6 +426,7 @@ export default function FamilySquaresKiosk() {
                       enterKeyHint="next"
                       autoComplete="off"
                       data-lpignore="true"
+                      maxLength={20}
                       value={formData.phone}
                       onChange={(event) => updateField("phone", event.target.value)}
                       placeholder="(555) 123-4567"
@@ -461,6 +464,7 @@ export default function FamilySquaresKiosk() {
                     name="family-squares-kiosk-question"
                     autoComplete="off"
                     data-lpignore="true"
+                    maxLength={1000}
                     value={formData.question}
                     onChange={(event) => updateField("question", event.target.value)}
                     placeholder="What would make this meeting useful for you?"
