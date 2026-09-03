@@ -229,7 +229,7 @@ Fit is whether the population, structure, and philosophy match the actual human 
 - What is their position on medication-assisted treatment (medications like buprenorphine or naltrexone)? "We support it when appropriate" is a different answer than "we don't allow it."
 - Is the approach 12-step based, non-12-step, faith-based, or a blend? Would your loved one actually participate in that?
 
-Strong answer: specific numbers and a clear description of who they serve best, including who they are not the right fit for. Weak answer: "We treat everyone." Understanding the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment-family-guide] first will narrow your list before you ever pick up the phone.
+Strong answer: specific numbers and a clear description of who they serve best, including who they are not the right fit for. Weak answer: "We treat everyone." Understanding the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment] first will narrow your list before you ever pick up the phone.
 
 **2. Clinical quality: Who is doing the work, and how much of it?**
 
