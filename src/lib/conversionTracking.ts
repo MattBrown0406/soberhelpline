@@ -24,6 +24,15 @@ type ConversionEventName =
   | "family_answer_hub_click"
   | "membership_trial_click"
   | "sober_helpline_app_store_click"
+  | "kiosk_attract_view"
+  | "kiosk_form_started"
+  | "kiosk_registration_submit"
+  | "kiosk_registration_success"
+  | "kiosk_registration_failure"
+  | "kiosk_app_qr_view"
+  | "kiosk_offline_view"
+  | "kiosk_help_view"
+  | "kiosk_form_cleared"
   | "whatsapp_click";
 
 type ConversionEventPayload = {
@@ -33,6 +42,7 @@ type ConversionEventPayload = {
   planType?: string | null;
   providerName?: string | null;
   source?: string;
+  privacySafe?: boolean;
   [key: string]: string | number | boolean | null | undefined;
 };
 
@@ -101,14 +111,15 @@ export const getInboundSource = () => getStoredInboundSource();
 
 export const trackConversionEvent = (eventName: ConversionEventName, payload: ConversionEventPayload = {}) => {
   if (typeof window === "undefined") return;
-  const inboundSource = getStoredInboundSource();
+  const { privacySafe = false, ...safePayload } = payload;
+  const inboundSource = privacySafe ? {} : getStoredInboundSource();
 
   const eventPayload = {
     event_category: "family_funnel",
-    event_label: payload.label || payload.source || eventName,
-    page_path: payload.path || window.location.pathname,
+    event_label: safePayload.label || safePayload.source || eventName,
+    page_path: safePayload.path || window.location.pathname,
     ...inboundSource,
-    ...payload,
+    ...safePayload,
   };
 
   window.gtag?.("event", eventName, eventPayload);
@@ -122,19 +133,21 @@ export const trackConversionEvent = (eventName: ConversionEventName, payload: Co
       page_title: document.title,
       source: eventPayload.source,
       label: eventPayload.event_label,
-      target_href: payload.targetHref as string | undefined,
+      target_href: safePayload.targetHref as string | undefined,
       utm_source: eventPayload.utm_source,
       utm_medium: eventPayload.utm_medium,
       utm_campaign: eventPayload.utm_campaign,
       utm_content: eventPayload.utm_content,
       utm_term: eventPayload.utm_term,
-      referrer: eventPayload.referrer || document.referrer || undefined,
+      referrer: privacySafe ? undefined : eventPayload.referrer || document.referrer || undefined,
       first_landing_path: eventPayload.first_landing_path,
       metadata: eventPayload,
     },
   }).catch(() => {
     // First-party measurement should never interrupt someone trying to get help.
   });
+
+  if (privacySafe) return;
 
   try {
     const existing = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "[]") as unknown[];

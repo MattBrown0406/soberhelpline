@@ -6,6 +6,13 @@ interface SiteSetting {
   value: string | null;
 }
 
+interface EmailAttachment {
+  content: string;
+  filename: string;
+  type: string;
+  disposition: "attachment";
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
@@ -22,7 +29,40 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-async function sendEmail(to: string[], subject: string, htmlContent: string, from = "Sober Helpline <matt@soberhelpline.com>") {
+function encodeBase64(text: string): string {
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary);
+}
+
+function escapeIcsText(text: string): string {
+  return text.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
+}
+
+function foldIcsLine(line: string): string {
+  const encoder = new TextEncoder();
+  const parts: string[] = [];
+  let current = "";
+  for (const character of line) {
+    if (encoder.encode(current + character).length > 70) {
+      parts.push(current);
+      current = ` ${character}`;
+    } else {
+      current += character;
+    }
+  }
+  parts.push(current);
+  return parts.join("\r\n");
+}
+
+async function sendEmail(
+  to: string[],
+  subject: string,
+  htmlContent: string,
+  attachments: EmailAttachment[] = [],
+  from = "Sober Helpline <matt@soberhelpline.com>",
+) {
   const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
   if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY is not configured");
 
@@ -37,6 +77,7 @@ async function sendEmail(to: string[], subject: string, htmlContent: string, fro
       from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
       subject,
       content: [{ type: "text/html", value: htmlContent }],
+      ...(attachments.length > 0 ? { attachments } : {}),
     }),
   });
 
@@ -113,12 +154,13 @@ serve(async (req: Request) => {
       preferred_timezone: string | null;
       phone: string | null;
       question: string | null;
+      meeting_date: string | null;
     } | null = null;
 
     if (registration_id) {
       const { data: regRow } = await adminSupabase
         .from("zoom_meeting_registrations")
-        .select("request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question")
+        .select("request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question, meeting_date")
         .eq("id", registration_id)
         .maybeSingle();
       followUp = regRow ?? null;
@@ -179,6 +221,80 @@ serve(async (req: Request) => {
     const lastName = nameParts.slice(1).join(" ") || "";
 
     const isSpanish = language === "es";
+    const meetingDate = followUp?.meeting_date || null;
+    const compactMeetingDate = meetingDate?.replaceAll("-", "") || "";
+    const calendarStart = compactMeetingDate ? `${compactMeetingDate}T190000` : "";
+    const calendarEnd = compactMeetingDate ? `${compactMeetingDate}T200000` : "";
+    const calendarDetails = isSpanish
+      ? "Reunión semanal gratuita de apoyo para familias. Use la información de Zoom incluida en su correo de registro."
+      : "Free weekly family support meeting. Use the Zoom information included in your registration email.";
+    const calendarDescription = `${calendarDetails}\n${isSpanish ? "Unirse por Zoom" : "Join on Zoom"}: ${joinUrl}`;
+    const googleCalendarUrl = meetingDate
+      ? `https://calendar.google.com/calendar/render?${new URLSearchParams({
+          action: "TEMPLATE",
+          text: "The Family Squares — Sober Helpline",
+          dates: `${calendarStart}/${calendarEnd}`,
+          ctz: "America/Los_Angeles",
+          details: calendarDescription,
+          location: "Online via Zoom",
+        }).toString()}`
+      : "";
+    const calendarSection = googleCalendarUrl
+      ? `
+        <div style="background-color: #eff6ff; border: 1px solid #93c5fd; border-radius: 8px; padding: 18px; margin: 20px 0; text-align: center;">
+          <h2 style="margin: 0 0 8px 0; color: #1e3a8a;">📅 ${isSpanish ? "Añádalo a su calendario" : "Add it to your calendar"}</h2>
+          <p style="margin: 0 0 14px 0; color: #1e40af;">${isSpanish ? "Guarde la reunión del lunes de 7:00 a 8:00 PM, hora del Pacífico." : "Save Monday's 7:00–8:00 PM Pacific meeting so it is easy to remember."}</p>
+          <a href="${escapeHtml(googleCalendarUrl)}" style="display: inline-block; padding: 12px 24px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">
+            ${isSpanish ? "Añadir a Google Calendar" : "Add to Google Calendar"}
+          </a>
+          <p style="margin: 12px 0 0 0; font-size: 12px; color: #6b7280;">${isSpanish ? "También adjuntamos un archivo de calendario compatible con Apple Calendar y Outlook." : "We also attached a calendar file for Apple Calendar and Outlook."}</p>
+        </div>
+      `
+      : "";
+    const calendarAttachments: EmailAttachment[] = meetingDate
+      ? [{
+          content: encodeBase64([
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//Sober Helpline//Family Squares//EN",
+            "CALSCALE:GREGORIAN",
+            "METHOD:PUBLISH",
+            "BEGIN:VTIMEZONE",
+            "TZID:America/Los_Angeles",
+            "X-LIC-LOCATION:America/Los_Angeles",
+            "BEGIN:DAYLIGHT",
+            "TZOFFSETFROM:-0800",
+            "TZOFFSETTO:-0700",
+            "TZNAME:PDT",
+            "DTSTART:19700308T020000",
+            "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+            "END:DAYLIGHT",
+            "BEGIN:STANDARD",
+            "TZOFFSETFROM:-0700",
+            "TZOFFSETTO:-0800",
+            "TZNAME:PST",
+            "DTSTART:19701101T020000",
+            "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+            "END:STANDARD",
+            "END:VTIMEZONE",
+            "BEGIN:VEVENT",
+            `UID:family-squares-${registration_id || meetingDate}@soberhelpline.com`,
+            `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z")}`,
+            `DTSTART;TZID=America/Los_Angeles:${calendarStart}`,
+            `DTEND;TZID=America/Los_Angeles:${calendarEnd}`,
+            `SUMMARY:${escapeIcsText("The Family Squares — Sober Helpline")}`,
+            `DESCRIPTION:${escapeIcsText(calendarDescription)}`,
+            "LOCATION:Online via Zoom",
+            `URL:${joinUrl}`,
+            "END:VEVENT",
+            "END:VCALENDAR",
+            "",
+          ].map(foldIcsLine).join("\r\n")),
+          filename: `family-squares-${meetingDate}.ics`,
+          type: "text/calendar; charset=UTF-8; method=PUBLISH",
+          disposition: "attachment",
+        }]
+      : [];
 
     const appDownloadSection = isSpanish
       ? `
@@ -215,6 +331,8 @@ serve(async (req: Request) => {
 
           ${zoomSection}
 
+          ${calendarSection}
+
           ${appDownloadSection}
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
@@ -248,6 +366,8 @@ serve(async (req: Request) => {
 
           ${zoomSection}
 
+          ${calendarSection}
+
           ${appDownloadSection}
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
@@ -274,7 +394,7 @@ serve(async (req: Request) => {
         </div>
       `;
 
-    const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml);
+    const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml, calendarAttachments);
 
     const wantsFollowUp = followUp?.request_follow_up === true;
 

@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { Calendar, Clock, Loader2, Mail, MessageSquare, QrCode, ShieldCheck, Smartphone, Users, Video } from "lucide-react";
+import { AlertTriangle, Calendar, CircleHelp, Clock, Eraser, Loader2, Mail, MessageSquare, RefreshCw, ShieldCheck, Smartphone, Users, Video, WifiOff } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,10 +12,47 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import kioskLogo from "@/assets/sober-helpline-kiosk-logo.jpg";
 import appStoreQrCode from "@/assets/sober-helpline-app-store-qr.png";
+import mobileRegistrationQrCode from "@/assets/family-squares-mobile-registration-qr.png";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
 
 const RESET_SECONDS = 20;
 const ATTRACT_IDLE_MS = 60 * 1000;
+const IDLE_REFRESH_MS = 15 * 60 * 1000;
+const SLOW_SUBMISSION_MS = 5 * 1000;
+const KIOSK_HELP_PHONE = "(458) 298-8008";
+
+const COMMON_EMAIL_DOMAIN_TYPOS: Record<string, string> = {
+  "gamil.com": "gmail.com",
+  "gmial.com": "gmail.com",
+  "gmail.con": "gmail.com",
+  "hotmial.com": "hotmail.com",
+  "hotmail.con": "hotmail.com",
+  "outlok.com": "outlook.com",
+  "outlook.con": "outlook.com",
+  "yahoo.con": "yahoo.com",
+  "icloud.con": "icloud.com",
+};
+
+const suggestEmailCorrection = (email: string) => {
+  const trimmed = email.trim();
+  const atIndex = trimmed.lastIndexOf("@");
+  if (atIndex <= 0) return null;
+  const localPart = trimmed.slice(0, atIndex);
+  const domain = trimmed.slice(atIndex + 1).toLowerCase();
+  const correctedDomain = COMMON_EMAIL_DOMAIN_TYPOS[domain];
+  return correctedDomain ? `${localPart}@${correctedDomain}` : null;
+};
+
+const formatPhoneInput = (value: string) => {
+  const limited = value.slice(0, 20);
+  if (limited.includes("+") || /[A-Za-z]/.test(limited)) return limited;
+  const digits = limited.replace(/\D/g, "");
+  if (digits.length > 10) return limited;
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
 
 const registrationSchema = z.object({
   name: z.string().trim().min(1, "Please enter your full name.").max(100),
@@ -76,11 +113,32 @@ export default function FamilySquaresKiosk() {
   const [isAttractMode, setIsAttractMode] = useState(false);
   const [resetCountdown, setResetCountdown] = useState(RESET_SECONDS);
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
+  const [isOnline, setIsOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine);
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+  const [emailSuggestionDismissedFor, setEmailSuggestionDismissedFor] = useState<string | null>(null);
+  const [showHelp, setShowHelp] = useState(false);
+  const [showSlowSubmission, setShowSlowSubmission] = useState(false);
+  const [offlineRetryStatus, setOfflineRetryStatus] = useState<"idle" | "checking" | "failed">("idle");
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const focusScrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slowSubmissionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const submissionAttempt = useRef(0);
+  const submissionInFlight = useRef(false);
   const confirmationButtonRef = useRef<HTMLButtonElement>(null);
+  const formStartedTracked = useRef(false);
+  const attractViewTracked = useRef(false);
+  const offlineViewTracked = useRef(false);
   const { toast } = useToast();
   const [meetingDate, setMeetingDate] = useState(getNextMeetingDate);
+
+  useEffect(() => {
+    try {
+      window.localStorage.removeItem("soberhelpline_inbound_source");
+      window.localStorage.removeItem("soberhelpline_conversion_events");
+    } catch {
+      // Shared-device privacy cleanup must never interrupt registration.
+    }
+  }, []);
 
   useEffect(() => {
     const robotsTags = Array.from(document.head.querySelectorAll<HTMLMetaElement>('meta[name="robots"]'));
@@ -104,6 +162,90 @@ export default function FamilySquaresKiosk() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
+
+  useEffect(() => {
+    let healthOffline = !navigator.onLine;
+    let healthCheckInFlight = false;
+    const clearForOffline = () => {
+      healthOffline = true;
+      submissionAttempt.current += 1;
+      if (slowSubmissionTimer.current) clearTimeout(slowSubmissionTimer.current);
+      slowSubmissionTimer.current = null;
+      setFormData(EMPTY_FORM);
+      setErrors({});
+      setEmailSuggestion(null);
+      setEmailSuggestionDismissedFor(null);
+      setShowHelp(false);
+      setShowSlowSubmission(false);
+      setIsSubmitting(false);
+      setIsOnline(false);
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    };
+    const recoverOnline = () => {
+      if (healthOffline) {
+        window.location.reload();
+        return;
+      }
+      setIsOnline(true);
+    };
+    const checkConnection = async () => {
+      if (submissionInFlight.current || healthCheckInFlight) return;
+      if (!navigator.onLine) {
+        clearForOffline();
+        return;
+      }
+      healthCheckInFlight = true;
+      try {
+        const response = await fetch(`/robots.txt?kiosk-health=${Date.now()}`, {
+          method: "HEAD",
+          cache: "no-store",
+        });
+        if (!response.ok) throw new Error(`Health check returned ${response.status}`);
+        recoverOnline();
+      } catch {
+        clearForOffline();
+      } finally {
+        healthCheckInFlight = false;
+      }
+    };
+
+    window.addEventListener("offline", clearForOffline);
+    window.addEventListener("online", recoverOnline);
+    void checkConnection();
+    const healthTimer = window.setInterval(checkConnection, 30_000);
+    return () => {
+      window.clearInterval(healthTimer);
+      window.removeEventListener("offline", clearForOffline);
+      window.removeEventListener("online", recoverOnline);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isAttractMode && !attractViewTracked.current) {
+      attractViewTracked.current = true;
+      trackConversionEvent("kiosk_attract_view", { source: "family_squares_kiosk", privacySafe: true });
+    }
+    if (!isAttractMode) attractViewTracked.current = false;
+  }, [isAttractMode]);
+
+  useEffect(() => {
+    if (!isOnline && !offlineViewTracked.current) {
+      offlineViewTracked.current = true;
+      trackConversionEvent("kiosk_offline_view", { source: "family_squares_kiosk", privacySafe: true });
+    }
+    if (isOnline) offlineViewTracked.current = false;
+  }, [isOnline]);
+
+  useEffect(() => {
+    if (!submitted) return;
+    trackConversionEvent("kiosk_app_qr_view", { source: "family_squares_kiosk", privacySafe: true });
+  }, [submitted]);
+
+  useEffect(() => {
+    if (!isAttractMode || !isOnline) return;
+    const refreshTimer = window.setTimeout(() => window.location.reload(), IDLE_REFRESH_MS);
+    return () => window.clearTimeout(refreshTimer);
+  }, [isAttractMode, isOnline]);
 
   const keepFocusedFieldVisible = useCallback(() => {
     if (focusScrollTimer.current) clearTimeout(focusScrollTimer.current);
@@ -133,15 +275,29 @@ export default function FamilySquaresKiosk() {
     setResetCountdown(RESET_SECONDS);
     setIsSubmitting(false);
     setIsAttractMode(false);
+    setEmailSuggestion(null);
+    setEmailSuggestionDismissedFor(null);
+    setShowHelp(false);
+    setShowSlowSubmission(false);
+    formStartedTracked.current = false;
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const enterAttractMode = useCallback(() => {
     // Clear abandoned entries before covering the form on this shared screen.
+    submissionAttempt.current += 1;
+    submissionInFlight.current = false;
+    if (slowSubmissionTimer.current) clearTimeout(slowSubmissionTimer.current);
+    slowSubmissionTimer.current = null;
     setFormData(EMPTY_FORM);
     setErrors({});
     setIsSubmitting(false);
+    setEmailSuggestion(null);
+    setEmailSuggestionDismissedFor(null);
+    setShowHelp(false);
+    setShowSlowSubmission(false);
+    formStartedTracked.current = false;
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     window.scrollTo({ top: 0, behavior: "auto" });
     setIsAttractMode(true);
@@ -197,14 +353,65 @@ export default function FamilySquaresKiosk() {
     return () => window.cancelAnimationFrame(animationFrame);
   }, [submitted]);
 
+  useEffect(() => () => {
+    if (slowSubmissionTimer.current) window.clearTimeout(slowSubmissionTimer.current);
+  }, []);
+
+  const trackFormStarted = () => {
+    if (formStartedTracked.current) return;
+    formStartedTracked.current = true;
+    trackConversionEvent("kiosk_form_started", { source: "family_squares_kiosk", privacySafe: true });
+  };
+
   const updateField = (field: keyof FormData, value: string) => {
+    trackFormStarted();
     setFormData((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
+    if (field === "email") {
+      setEmailSuggestion(null);
+      setEmailSuggestionDismissedFor(null);
+    }
+  };
+
+  const clearForm = () => {
+    const interruptedSubmission = submissionInFlight.current;
+    submissionAttempt.current += 1;
+    submissionInFlight.current = false;
+    if (slowSubmissionTimer.current) clearTimeout(slowSubmissionTimer.current);
+    slowSubmissionTimer.current = null;
+    setIsSubmitting(false);
+    setShowSlowSubmission(false);
+    setFormData(EMPTY_FORM);
+    setErrors({});
+    setEmailSuggestion(null);
+    setEmailSuggestionDismissedFor(null);
+    formStartedTracked.current = false;
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    trackConversionEvent("kiosk_form_cleared", { source: "family_squares_kiosk", privacySafe: true });
+    if (interruptedSubmission) {
+      toast({
+        title: "The form was cleared",
+        description: "If you already tapped Register, check your email before submitting again.",
+      });
+    }
+  };
+
+  const retryConnection = async () => {
+    setOfflineRetryStatus("checking");
+    try {
+      const response = await fetch(`/robots.txt?kiosk-retry=${Date.now()}`, { method: "HEAD", cache: "no-store" });
+      if (!response.ok) throw new Error(`Retry returned ${response.status}`);
+      window.location.reload();
+    } catch {
+      setOfflineRetryStatus("failed");
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrors({});
+
+    if (!isOnline) return;
 
     if (cancellationReason) {
       toast({ title: "This week's meeting is cancelled", description: cancellationReason, variant: "destructive" });
@@ -222,7 +429,18 @@ export default function FamilySquaresKiosk() {
       return;
     }
 
+    const suggestedEmail = suggestEmailCorrection(result.data.email);
+    if (suggestedEmail && emailSuggestionDismissedFor !== result.data.email) {
+      setEmailSuggestion(suggestedEmail);
+      return;
+    }
+
     setIsSubmitting(true);
+    submissionInFlight.current = true;
+    setShowSlowSubmission(false);
+    trackConversionEvent("kiosk_registration_submit", { source: "family_squares_kiosk", privacySafe: true });
+    const currentAttempt = ++submissionAttempt.current;
+    slowSubmissionTimer.current = setTimeout(() => setShowSlowSubmission(true), SLOW_SUBMISSION_MS);
     try {
       const { error } = await supabase.functions.invoke("public-register-monday-zoom", {
         body: {
@@ -250,22 +468,76 @@ export default function FamilySquaresKiosk() {
         },
       });
       if (error) throw error;
+      if (currentAttempt !== submissionAttempt.current) return;
 
       // Remove personal information before showing the shared-screen confirmation.
       setFormData(EMPTY_FORM);
       setSubmitted(true);
       setResetCountdown(RESET_SECONDS);
+      trackConversionEvent("kiosk_registration_success", { source: "family_squares_kiosk", privacySafe: true });
     } catch (error: unknown) {
+      if (currentAttempt !== submissionAttempt.current) return;
       console.error("Kiosk registration failed:", error);
+      trackConversionEvent("kiosk_registration_failure", { source: "family_squares_kiosk", privacySafe: true, reason: navigator.onLine ? "request_failed" : "offline" });
+      if (!navigator.onLine) {
+        setFormData(EMPTY_FORM);
+        setErrors({});
+        setEmailSuggestion(null);
+        setEmailSuggestionDismissedFor(null);
+        setIsOnline(false);
+      }
       toast({
         title: "Registration could not be completed",
         description: "Please check the internet connection and try again.",
         variant: "destructive",
       });
     } finally {
-      setIsSubmitting(false);
+      if (currentAttempt === submissionAttempt.current) {
+        if (slowSubmissionTimer.current) window.clearTimeout(slowSubmissionTimer.current);
+        slowSubmissionTimer.current = null;
+        submissionInFlight.current = false;
+        setShowSlowSubmission(false);
+        setIsSubmitting(false);
+      }
     }
   };
+
+  if (!isOnline) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 p-5 text-slate-900">
+        <SEOHead
+          title="Family Squares Registration Kiosk | Sober Helpline"
+          description="Shared-device registration for the Sober Helpline Family Squares meeting."
+          noIndex
+          canonicalPath="/family-squares"
+        />
+        <main className="grid w-full max-w-4xl items-center gap-6 rounded-3xl bg-white p-7 text-center shadow-2xl md:grid-cols-[1.15fr_0.85fr]">
+          <section className="flex flex-col items-center" role="alert" aria-live="assertive">
+            <WifiOff className="h-16 w-16 text-amber-600" aria-hidden="true" />
+            <h1 className="mt-3 text-4xl font-extrabold text-slate-950">This kiosk is temporarily offline</h1>
+            <p className="mt-4 max-w-xl text-xl leading-relaxed text-slate-600">
+              Your information has been cleared. If you already tapped Register, check your email before submitting again. Otherwise, scan the QR code and continue on your phone.
+            </p>
+            <Button type="button" size="lg" className="mt-6 min-h-14 px-8 text-lg" onClick={() => void retryConnection()} disabled={offlineRetryStatus === "checking"}>
+              <RefreshCw className={`mr-2 h-5 w-5 ${offlineRetryStatus === "checking" ? "animate-spin" : ""}`} aria-hidden="true" />
+              {offlineRetryStatus === "checking" ? "Checking Connection…" : "Retry Connection"}
+            </Button>
+            {offlineRetryStatus === "failed" ? <p role="status" className="mt-3 font-bold text-amber-700">Still offline. Please scan the QR code or try again shortly.</p> : null}
+            <p className="mt-5 text-base font-semibold text-slate-600">Need help? Call {KIOSK_HELP_PHONE} from your phone.</p>
+          </section>
+          <section className="rounded-3xl border-2 border-emerald-200 bg-emerald-50 p-5">
+            <p className="mb-3 text-xl font-extrabold text-emerald-950">Register on your phone</p>
+            <img
+              src={mobileRegistrationQrCode}
+              alt="QR code linking to online Family Squares registration"
+              className="mx-auto h-[280px] w-[280px] rounded-2xl border-8 border-white bg-white shadow-xl"
+            />
+            <p className="mt-3 whitespace-nowrap text-sm font-bold tracking-tight text-emerald-900">SoberHelpline.com/family-squares</p>
+          </section>
+        </main>
+      </div>
+    );
+  }
 
   if (isAttractMode) {
     return <FamilySquaresKioskAttract onDismiss={() => setIsAttractMode(false)} />;
@@ -273,22 +545,22 @@ export default function FamilySquaresKiosk() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 text-white">
+      <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 text-white">
         <SEOHead
           title="Family Squares Registration Kiosk | Sober Helpline"
           description="Shared-device registration for the Sober Helpline Family Squares meeting."
           noIndex
           canonicalPath="/family-squares"
         />
-        <main className="min-h-screen">
+        <main className="h-screen">
           <button
             ref={confirmationButtonRef}
             type="button"
             onClick={resetForNextPerson}
-            className="flex min-h-screen w-full items-center justify-center p-4 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-inset focus-visible:outline-emerald-300"
+            className="flex h-screen w-full items-center justify-center p-4 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-inset focus-visible:outline-emerald-300"
             aria-label="Registration complete. Scan the QR code to download the Sober Helpline app. Tap anywhere to return to registration now."
           >
-            <span className="grid w-full max-w-5xl grid-cols-1 items-center gap-5 rounded-3xl border border-white/25 bg-white p-5 text-slate-900 shadow-2xl md:grid-cols-[1.1fr_0.9fr] lg:min-h-[540px] lg:gap-7 lg:p-7">
+            <span className="grid h-full max-h-[568px] w-full max-w-5xl grid-cols-1 items-center gap-5 rounded-3xl border border-white/25 bg-white p-5 text-slate-900 shadow-2xl md:grid-cols-[1.1fr_0.9fr] lg:gap-7 lg:p-7">
               <span className="flex min-w-0 flex-col items-center text-center">
                 <img
                   src={kioskLogo}
@@ -304,25 +576,34 @@ export default function FamilySquaresKiosk() {
                   Take Sober Helpline with you
                 </span>
                 <span className="mt-2 max-w-lg text-base leading-snug text-slate-600">
-                  Scan the code to download the Sober Helpline app from the Apple App Store.
+                  Scan the code to download the Sober Helpline app for iPhone and iPad.
                 </span>
-                <span className="mt-5 rounded-full bg-emerald-50 px-5 py-2 text-sm font-bold text-emerald-900">
-                  Returning in {resetCountdown} seconds · Tap anywhere to register another person
+                <span className="mt-5 text-sm font-bold text-slate-700">
+                  Resetting in {resetCountdown} seconds
                 </span>
-                <span className="mt-3 text-xs font-semibold text-slate-500">Your personal information has been cleared.</span>
+                <span className="mt-2 h-2 w-full max-w-sm overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+                  <span
+                    className="block h-full rounded-full bg-emerald-500 transition-[width] duration-1000 ease-linear"
+                    style={{ width: `${(resetCountdown / RESET_SECONDS) * 100}%` }}
+                  />
+                </span>
+                <span className="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl bg-logo-blue px-6 text-base font-extrabold text-white shadow-md">
+                  Register Another Person Now
+                </span>
+                <span className="mt-2 text-sm font-semibold text-slate-600">Your personal information has been cleared.</span>
               </span>
 
               <span className="flex flex-col items-center justify-center rounded-3xl border-2 border-emerald-200 bg-emerald-50 p-4 shadow-inner">
                 <span className="mb-2 flex items-center gap-2 text-lg font-extrabold text-emerald-950">
-                  <QrCode className="h-6 w-6" aria-hidden="true" />
-                  Scan with your iPhone camera
+                  <Smartphone className="h-6 w-6" aria-hidden="true" />
+                  Scan with your iPhone or iPad camera
                 </span>
                 <img
                   src={appStoreQrCode}
                   alt="QR code linking to the Sober Helpline app in the Apple App Store"
                   className="h-[290px] w-[290px] rounded-2xl border-8 border-white bg-white shadow-xl"
                 />
-                <span className="mt-3 text-base font-bold text-emerald-900">Download on the Apple App Store</span>
+                <span className="mt-3 text-base font-bold text-emerald-900">Available for iPhone and iPad</span>
               </span>
             </span>
           </button>
@@ -373,9 +654,20 @@ export default function FamilySquaresKiosk() {
               ))}
             </div>
 
-            <div className="mt-7 flex gap-3 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-3 lg:gap-2 lg:rounded-xl lg:p-3 lg:text-sm">
-              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
-              <p className="leading-relaxed lg:leading-snug">Registration is private. Personal information is cleared after submission.</p>
+            <div className="mt-7 flex items-center gap-2 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-3 lg:rounded-xl lg:p-2.5 lg:text-sm">
+              <ShieldCheck className="h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
+              <p className="min-w-0 flex-1 leading-snug">Private. Personal information is cleared after submission.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowHelp(true);
+                  trackConversionEvent("kiosk_help_view", { source: "family_squares_kiosk", privacySafe: true });
+                }}
+                className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg border border-white/30 bg-white/10 px-3 font-bold hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              >
+                <CircleHelp className="h-5 w-5" aria-hidden="true" />
+                Need help?
+              </button>
             </div>
           </section>
 
@@ -458,7 +750,7 @@ export default function FamilySquaresKiosk() {
                       data-lpignore="true"
                       maxLength={20}
                       value={formData.phone}
-                      onChange={(event) => updateField("phone", event.target.value)}
+                      onChange={(event) => updateField("phone", formatPhoneInput(event.target.value))}
                       placeholder="(555) 123-4567"
                       className="h-14 text-lg md:h-12 lg:text-base"
                       aria-invalid={Boolean(errors.phone)}
@@ -473,6 +765,7 @@ export default function FamilySquaresKiosk() {
                         id="kiosk-intervention-contact"
                         checked={formData.requestFollowUp}
                         onCheckedChange={(checked) => {
+                          trackFormStarted();
                           setFormData((current) => ({ ...current, requestFollowUp: checked === true }));
                           setErrors((current) => ({ ...current, requestFollowUp: undefined }));
                         }}
@@ -505,13 +798,28 @@ export default function FamilySquaresKiosk() {
                   {errors.question ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.question}</p> : null}
                 </div>
 
-                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14 lg:min-h-12 lg:text-base" disabled={isSubmitting || Boolean(cancellationReason)}>
-                  {isSubmitting ? (
-                    <><Loader2 className="mr-2 h-6 w-6 animate-spin" />Registering…</>
-                  ) : (
-                    <><Mail className="mr-2 h-6 w-6" />Register & Email My Zoom Link</>
-                  )}
-                </Button>
+                <div className="grid grid-cols-[1fr_auto] gap-2">
+                  <Button type="submit" size="lg" className="min-h-16 whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14 lg:min-h-12 lg:text-base" disabled={isSubmitting || Boolean(cancellationReason) || !isOnline}>
+                    {isSubmitting ? (
+                      <span className="inline-flex items-center" role="status" aria-live="polite">
+                        <Loader2 className="mr-2 h-6 w-6 animate-spin" aria-hidden="true" />
+                        {showSlowSubmission ? "Still working—please keep this screen open…" : "Registering—please wait…"}
+                      </span>
+                    ) : (
+                      <><Mail className="mr-2 h-6 w-6" />Register & Email My Zoom Link</>
+                    )}
+                  </Button>
+                  <Button
+                    type="button"
+                    size="lg"
+                    variant="outline"
+                    className="min-h-16 px-4 font-bold md:min-h-14 lg:min-h-12"
+                    onClick={clearForm}
+                  >
+                    <Eraser className="mr-2 h-5 w-5" aria-hidden="true" />
+                    {isSubmitting ? "Cancel & Clear" : "Clear"}
+                  </Button>
+                </div>
 
                 <p className="text-center text-sm leading-relaxed text-slate-500 lg:text-xs lg:leading-snug">
                   This meeting is recorded and archived for Sober Helpline members. This is support and education, not emergency or medical care.
@@ -521,6 +829,59 @@ export default function FamilySquaresKiosk() {
           </Card>
         </div>
       </main>
+
+      {emailSuggestion ? (
+        <div className="fixed inset-0 z-[20000] flex items-center justify-center bg-slate-950/80 p-5" role="dialog" aria-modal="true" aria-labelledby="email-suggestion-title">
+          <div className="w-full max-w-xl rounded-3xl bg-white p-7 text-center shadow-2xl">
+            <AlertTriangle className="mx-auto h-14 w-14 text-amber-500" aria-hidden="true" />
+            <h2 id="email-suggestion-title" className="mt-3 text-3xl font-extrabold text-slate-950">Check your email address</h2>
+            <p className="mt-3 text-lg text-slate-600">Did you mean:</p>
+            <p className="mt-2 break-all text-2xl font-bold text-logo-blue">{emailSuggestion}</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <Button
+                type="button"
+                size="lg"
+                autoFocus
+                className="min-h-16 text-lg font-bold"
+                onClick={() => {
+                  setFormData((current) => ({ ...current, email: emailSuggestion }));
+                  setEmailSuggestionDismissedFor(emailSuggestion);
+                  setEmailSuggestion(null);
+                }}
+              >
+                Use This Address
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                className="min-h-16 text-lg font-bold"
+                onClick={() => {
+                  setEmailSuggestionDismissedFor(formData.email.trim());
+                  setEmailSuggestion(null);
+                }}
+              >
+                Keep What I Typed
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {showHelp ? (
+        <div className="fixed inset-0 z-[20000] flex items-center justify-center bg-slate-950/80 p-5" role="dialog" aria-modal="true" aria-labelledby="kiosk-help-title">
+          <div className="w-full max-w-xl rounded-3xl bg-white p-8 text-center shadow-2xl">
+            <CircleHelp className="mx-auto h-16 w-16 text-logo-blue" aria-hidden="true" />
+            <h2 id="kiosk-help-title" className="mt-3 text-3xl font-extrabold text-slate-950">Need help registering?</h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate-600">Use your phone to call Sober Helpline:</p>
+            <p className="mt-2 text-4xl font-extrabold tracking-wide text-logo-blue">{KIOSK_HELP_PHONE}</p>
+            <p className="mt-4 text-base text-slate-500">Your information remains private on this screen.</p>
+            <Button type="button" size="lg" autoFocus className="mt-6 min-h-16 w-full text-lg font-bold" onClick={() => setShowHelp(false)}>
+              Back to Registration
+            </Button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
