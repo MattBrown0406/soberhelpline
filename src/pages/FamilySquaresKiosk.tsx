@@ -7,13 +7,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import FamilySquaresKioskAttract from "@/components/FamilySquaresKioskAttract";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import kioskLogo from "@/assets/sober-helpline-kiosk-logo.jpg";
 import { z } from "zod";
 
 const RESET_SECONDS = 8;
-const IDLE_CLEAR_MS = 2 * 60 * 1000;
+const ATTRACT_IDLE_MS = 60 * 1000;
 
 const registrationSchema = z.object({
   name: z.string().trim().min(1, "Please enter your full name.").max(100),
@@ -71,6 +72,7 @@ export default function FamilySquaresKiosk() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isAttractMode, setIsAttractMode] = useState(false);
   const [resetCountdown, setResetCountdown] = useState(RESET_SECONDS);
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -128,30 +130,42 @@ export default function FamilySquaresKiosk() {
     setSubmitted(false);
     setResetCountdown(RESET_SECONDS);
     setIsSubmitting(false);
+    setIsAttractMode(false);
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const restartIdleTimer = useCallback(() => {
-    if (idleTimer.current) clearTimeout(idleTimer.current);
-    const hasPartialEntry = Boolean(
-      formData.name.trim() ||
-      formData.email.trim() ||
-      formData.phone.trim() ||
-      formData.question.trim() ||
-      formData.requestFollowUp,
-    );
-    if (!submitted && hasPartialEntry) {
-      idleTimer.current = setTimeout(resetForNextPerson, IDLE_CLEAR_MS);
-    }
-  }, [formData, resetForNextPerson, submitted]);
+  const enterAttractMode = useCallback(() => {
+    // Clear abandoned entries before covering the form on this shared screen.
+    setFormData(EMPTY_FORM);
+    setErrors({});
+    setIsSubmitting(false);
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    setIsAttractMode(true);
+  }, []);
 
   useEffect(() => {
-    restartIdleTimer();
+    if (submitted || isAttractMode) return;
+
+    const restartAttractTimer = () => {
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+      idleTimer.current = setTimeout(enterAttractMode, ATTRACT_IDLE_MS);
+    };
+
+    restartAttractTimer();
+    window.addEventListener("pointerdown", restartAttractTimer, true);
+    window.addEventListener("keydown", restartAttractTimer, true);
+    window.addEventListener("input", restartAttractTimer, true);
+    window.addEventListener("change", restartAttractTimer, true);
     return () => {
       if (idleTimer.current) clearTimeout(idleTimer.current);
+      window.removeEventListener("pointerdown", restartAttractTimer, true);
+      window.removeEventListener("keydown", restartAttractTimer, true);
+      window.removeEventListener("input", restartAttractTimer, true);
+      window.removeEventListener("change", restartAttractTimer, true);
     };
-  }, [restartIdleTimer]);
+  }, [enterAttractMode, isAttractMode, submitted]);
 
   useEffect(() => {
     const checkCancellation = async () => {
@@ -245,6 +259,10 @@ export default function FamilySquaresKiosk() {
     }
   };
 
+  if (isAttractMode) {
+    return <FamilySquaresKioskAttract onDismiss={() => setIsAttractMode(false)} />;
+  }
+
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-5 py-8 text-white">
@@ -284,7 +302,7 @@ export default function FamilySquaresKiosk() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-4 py-5 sm:px-6 sm:py-8 md:py-3">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-4 py-5 sm:px-6 sm:py-8 md:py-3 lg:px-4 lg:py-1">
       <SEOHead
         title="Family Squares Registration Kiosk | Sober Helpline"
         description="Shared-device registration for the Sober Helpline Family Squares meeting."
@@ -292,51 +310,51 @@ export default function FamilySquaresKiosk() {
         canonicalPath="/family-squares"
       />
       <main className="mx-auto max-w-6xl">
-        <header className="mb-5 flex items-center justify-center sm:mb-7 md:mb-3">
+        <header className="mb-5 flex items-center justify-center sm:mb-7 md:mb-3 lg:mb-2">
           <img
             src={kioskLogo}
             alt="Sober Helpline — Family Addiction Support & Education"
-            className="w-full max-w-md rounded-2xl shadow-2xl md:max-w-[190px] md:rounded-xl"
+            className="w-full max-w-md rounded-2xl shadow-2xl md:max-w-[190px] md:rounded-xl lg:max-w-[112px] lg:rounded-lg"
           />
         </header>
 
-        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-3">
-          <section className="order-2 min-w-0 rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8 lg:order-none lg:p-5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-100">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-3">
+          <section className="order-2 min-w-0 select-none rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8 lg:order-none lg:rounded-2xl lg:p-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-100 lg:px-3 lg:py-1.5 lg:text-xs">
               <Video className="h-5 w-5" />
               Free weekly family support
             </div>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:mt-3 lg:text-4xl">Join the Family Squares Zoom Meeting</h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-100 sm:text-xl lg:mt-3 lg:text-lg">
-              A compassionate Monday-night meeting for parents, spouses, siblings, adult children, and anyone affected by a loved one's addiction.
+            <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:mt-2 lg:text-3xl">Join the Family Squares Zoom Meeting</h1>
+            <p className="mt-5 text-lg leading-relaxed text-slate-100 sm:text-xl lg:mt-2 lg:text-sm lg:leading-snug">
+              Compassionate support for anyone affected by a loved one's addiction.
             </p>
 
-            <div className="mt-7 grid gap-3 lg:mt-4 lg:gap-2">
+            <div className="mt-7 grid gap-3 lg:mt-3 lg:grid-cols-2 lg:gap-2">
               {[
                 { icon: Calendar, text: "Every Monday" },
                 { icon: Clock, text: "7:00 PM Pacific" },
                 { icon: Users, text: "Open to families everywhere" },
                 { icon: MessageSquare, text: "Submit a question if you choose" },
               ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex min-h-14 items-center gap-4 rounded-2xl bg-white/10 px-4 py-3 text-lg font-semibold lg:min-h-12 lg:py-2">
-                  <Icon className="h-6 w-6 shrink-0 text-emerald-300" aria-hidden="true" />
+                <div key={text} className="flex min-h-14 items-center gap-4 rounded-2xl bg-white/10 px-4 py-3 text-lg font-semibold lg:min-h-11 lg:gap-2 lg:rounded-xl lg:px-3 lg:py-1.5 lg:text-sm">
+                  <Icon className="h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
                   {text}
                 </div>
               ))}
             </div>
 
-            <div className="mt-7 flex gap-3 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-4 lg:p-3">
-              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-300" aria-hidden="true" />
-              <p className="leading-relaxed">Registration is private. Your personal information is cleared from this shared screen after submission.</p>
+            <div className="mt-7 flex gap-3 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-3 lg:gap-2 lg:rounded-xl lg:p-3 lg:text-sm">
+              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
+              <p className="leading-relaxed lg:leading-snug">Registration is private. Personal information is cleared after submission.</p>
             </div>
           </section>
 
           <Card className="order-1 min-w-0 border-0 shadow-2xl lg:order-none">
-            <CardContent className="p-6 sm:p-8 md:p-5">
-              <div className="mb-6 text-center md:mb-3">
-                <p className="text-sm font-bold uppercase tracking-wider text-logo-blue">Upcoming meeting</p>
-                <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{formatMeetingDate(meetingDate)}</h2>
-                <p className="mt-2 text-base text-slate-600">Register below. Your Zoom link will be emailed to you.</p>
+            <CardContent className="p-6 sm:p-8 md:p-5 lg:p-4">
+              <div className="mb-6 text-center md:mb-3 lg:mb-2">
+                <p className="text-sm font-bold uppercase tracking-wider text-logo-blue lg:text-xs">Upcoming meeting</p>
+                <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-xl">{formatMeetingDate(meetingDate)}</h2>
+                <p className="mt-2 text-base text-slate-600 lg:mt-1 lg:text-sm">Register below. Your Zoom link will be emailed to you.</p>
               </div>
 
               {cancellationReason ? (
@@ -350,12 +368,12 @@ export default function FamilySquaresKiosk() {
                 onSubmit={handleSubmit}
                 onFocusCapture={keepFocusedFieldVisible}
                 autoComplete="off"
-                className="space-y-5 md:space-y-3"
+                className="space-y-5 md:space-y-3 lg:space-y-2"
                 aria-label="Family Squares registration"
               >
                 <div className="grid gap-5 md:grid-cols-2 md:gap-3">
-                  <div className="space-y-2">
-                    <Label htmlFor="kiosk-name" className="text-base font-bold">Full Name *</Label>
+                  <div className="space-y-2 lg:space-y-1">
+                    <Label htmlFor="kiosk-name" className="text-base font-bold lg:text-sm">Full Name *</Label>
                     <Input
                       id="kiosk-name"
                       name="family-squares-kiosk-name"
@@ -365,14 +383,14 @@ export default function FamilySquaresKiosk() {
                       value={formData.name}
                       onChange={(event) => updateField("name", event.target.value)}
                       placeholder="Your full name"
-                      className="h-14 text-lg md:h-12"
+                      className="h-14 text-lg md:h-12 lg:text-base"
                       aria-invalid={Boolean(errors.name)}
                     />
-                    {errors.name ? <p className="font-medium text-destructive">{errors.name}</p> : null}
+                    {errors.name ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.name}</p> : null}
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="kiosk-email" className="text-base font-bold">Email Address *</Label>
+                  <div className="space-y-2 lg:space-y-1">
+                    <Label htmlFor="kiosk-email" className="text-base font-bold lg:text-sm">Email Address *</Label>
                     <Input
                       id="kiosk-email"
                       name="family-squares-kiosk-email"
@@ -386,17 +404,17 @@ export default function FamilySquaresKiosk() {
                       value={formData.email}
                       onChange={(event) => updateField("email", event.target.value)}
                       placeholder="you@example.com"
-                      className="h-14 text-lg md:h-12"
+                      className="h-14 text-lg md:h-12 lg:text-base"
                       aria-invalid={Boolean(errors.email)}
                     />
-                    {errors.email ? <p className="font-medium text-destructive">{errors.email}</p> : null}
+                    {errors.email ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.email}</p> : null}
                   </div>
                 </div>
 
                 <div className="grid gap-3 md:grid-cols-[0.8fr_1.2fr] md:items-stretch">
-                  <div className="space-y-2">
-                    <Label htmlFor="kiosk-phone" className="text-base font-bold">
-                      Phone Number <span className="font-normal text-slate-500">(Optional for intervention contact)</span>
+                  <div className="space-y-2 lg:space-y-1">
+                    <Label htmlFor="kiosk-phone" className="text-base font-bold lg:text-sm">
+                      Phone Number <span className="font-normal text-slate-500">(Optional)</span>
                     </Label>
                     <Input
                       id="kiosk-phone"
@@ -409,15 +427,15 @@ export default function FamilySquaresKiosk() {
                       value={formData.phone}
                       onChange={(event) => updateField("phone", event.target.value)}
                       placeholder="(555) 123-4567"
-                      className="h-14 text-lg md:h-12"
+                      className="h-14 text-lg md:h-12 lg:text-base"
                       aria-invalid={Boolean(errors.phone)}
                       aria-describedby={errors.phone ? "kiosk-phone-error" : undefined}
                     />
-                    {errors.phone ? <p id="kiosk-phone-error" className="font-medium text-destructive">{errors.phone}</p> : null}
+                    {errors.phone ? <p id="kiosk-phone-error" className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.phone}</p> : null}
                   </div>
 
-                  <div className="flex items-center rounded-2xl border-2 border-slate-200 bg-slate-50 p-4 md:p-3">
-                    <div className="flex items-start gap-4">
+                  <div className="flex min-h-16 items-center rounded-2xl border-2 border-slate-200 bg-slate-50 p-4 md:p-3 lg:min-h-0 lg:rounded-xl lg:p-2">
+                    <div className="flex items-start gap-4 lg:items-center lg:gap-3">
                       <Checkbox
                         id="kiosk-intervention-contact"
                         checked={formData.requestFollowUp}
@@ -427,15 +445,15 @@ export default function FamilySquaresKiosk() {
                         }}
                         className="mt-0.5 h-7 w-7 rounded-md border-2"
                       />
-                      <Label htmlFor="kiosk-intervention-contact" className="cursor-pointer text-base font-semibold leading-relaxed text-slate-800 md:text-sm">
-                        I would like to be contacted for more information about intervention services.
+                      <Label htmlFor="kiosk-intervention-contact" className="cursor-pointer text-base font-semibold leading-relaxed text-slate-800 md:text-sm lg:leading-snug">
+                        Contact me about intervention services. <span className="font-normal text-slate-500">(Optional)</span>
                       </Label>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="kiosk-question" className="text-base font-bold">
+                <div className="space-y-2 lg:space-y-1">
+                  <Label htmlFor="kiosk-question" className="text-base font-bold lg:text-sm">
                     Question for Monday <span className="font-normal text-slate-500">(Optional)</span>
                   </Label>
                   <Textarea
@@ -446,14 +464,14 @@ export default function FamilySquaresKiosk() {
                     value={formData.question}
                     onChange={(event) => updateField("question", event.target.value)}
                     placeholder="What would make this meeting useful for you?"
-                    rows={3}
-                    className="min-h-28 text-lg md:min-h-20"
+                    rows={2}
+                    className="min-h-28 resize-none text-lg md:min-h-20 lg:min-h-14 lg:text-base"
                     aria-invalid={Boolean(errors.question)}
                   />
-                  {errors.question ? <p className="font-medium text-destructive">{errors.question}</p> : null}
+                  {errors.question ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.question}</p> : null}
                 </div>
 
-                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14" disabled={isSubmitting || Boolean(cancellationReason)}>
+                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14 lg:min-h-12 lg:text-base" disabled={isSubmitting || Boolean(cancellationReason)}>
                   {isSubmitting ? (
                     <><Loader2 className="mr-2 h-6 w-6 animate-spin" />Registering…</>
                   ) : (
@@ -461,7 +479,7 @@ export default function FamilySquaresKiosk() {
                   )}
                 </Button>
 
-                <p className="text-center text-sm leading-relaxed text-slate-500">
+                <p className="text-center text-sm leading-relaxed text-slate-500 lg:text-xs lg:leading-snug">
                   This meeting is recorded and archived for Sober Helpline members. This is support and education, not emergency or medical care.
                 </p>
               </form>

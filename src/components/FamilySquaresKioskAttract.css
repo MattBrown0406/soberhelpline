@@ -1,0 +1,166 @@
+.kiosk-attract {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0;
+  color: white;
+  background:
+    radial-gradient(circle at 50% 44%, rgb(42 157 143 / 22%), transparent 30%),
+    linear-gradient(155deg, #061321 0%, #0b2943 48%, #07505a 100%);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+.kiosk-attract:focus-visible {
+  outline: 4px solid #99f6e4;
+  outline-offset: -8px;
+}
+
+.kiosk-attract__scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.kiosk-attract__beam {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  width: 72vw;
+  height: 13vw;
+  transform-origin: 0 50%;
+  opacity: 0.2;
+  filter: blur(8px);
+  background: linear-gradient(90deg, rgb(255 244 196 / 75%), rgb(255 244 196 / 0%));
+  clip-path: polygon(0 43%, 100% 0, 100% 100%, 0 57%);
+  animation: kiosk-attract-beam 7s ease-in-out infinite alternate;
+}
+
+.kiosk-attract__beam--two {
+  opacity: 0.1;
+  animation-delay: -3.5s;
+}
+
+.kiosk-attract__wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  border-radius: 48%;
+}
+
+.kiosk-attract__wave--one {
+  bottom: -25%;
+  height: 44%;
+  background: rgb(15 105 115 / 42%);
+  animation: kiosk-attract-drift 9s ease-in-out infinite alternate;
+}
+
+.kiosk-attract__wave--two {
+  bottom: -31%;
+  height: 47%;
+  background: rgb(3 42 63 / 70%);
+  animation: kiosk-attract-drift 12s ease-in-out infinite alternate-reverse;
+}
+
+.kiosk-attract__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(90vw, 900px);
+  flex-direction: column;
+  align-items: center;
+}
+
+.kiosk-attract__brand {
+  width: clamp(210px, 28vw, 310px);
+  aspect-ratio: 3 / 2;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 38%), 0 0 45px rgb(127 226 212 / 14%);
+  animation: kiosk-attract-breathe 5s ease-in-out infinite;
+}
+
+.kiosk-attract__title {
+  margin-top: 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.kiosk-attract__subtitle {
+  margin-top: 8px;
+  color: #d5f3ef;
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 650;
+}
+
+.kiosk-attract__details {
+  margin-top: 12px;
+  color: #d6e4ec;
+  font-size: clamp(16px, 1.65vw, 21px);
+}
+
+.kiosk-attract__tap {
+  min-width: 300px;
+  margin-top: 22px;
+  padding: 15px 28px;
+  border: 2px solid rgb(167 243 232 / 72%);
+  border-radius: 999px;
+  color: #ecfffb;
+  background: rgb(16 185 129 / 18%);
+  box-shadow: 0 0 0 0 rgb(94 234 212 / 35%);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  animation: kiosk-attract-pulse 2.2s ease-out infinite;
+}
+
+@keyframes kiosk-attract-beam {
+  0% { transform: rotate(166deg); opacity: 0.08; }
+  45% { opacity: 0.28; }
+  100% { transform: rotate(14deg); opacity: 0.12; }
+}
+
+@keyframes kiosk-attract-drift {
+  from { transform: translateX(-2%) rotate(-1deg); }
+  to { transform: translateX(2%) rotate(1deg); }
+}
+
+@keyframes kiosk-attract-breathe {
+  50% {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 30px 70px rgb(0 0 0 / 40%), 0 0 65px rgb(127 226 212 / 25%);
+  }
+}
+
+@keyframes kiosk-attract-pulse {
+  65% { box-shadow: 0 0 0 18px rgb(94 234 212 / 0%); }
+  100% { box-shadow: 0 0 0 0 rgb(94 234 212 / 0%); }
+}
+
+@media (max-height: 620px) {
+  .kiosk-attract__brand { width: 230px; }
+  .kiosk-attract__title { margin-top: 14px; font-size: 42px; }
+  .kiosk-attract__subtitle { font-size: 21px; }
+  .kiosk-attract__details { margin-top: 7px; font-size: 18px; }
+  .kiosk-attract__tap { margin-top: 14px; padding: 12px 24px; font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kiosk-attract *,
+  .kiosk-attract *::before,
+  .kiosk-attract *::after {
+    animation: none !important;
+  }
+}
