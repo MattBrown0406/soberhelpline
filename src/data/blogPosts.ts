@@ -214,7 +214,7 @@ That is normal. Learning how to compare rehab programs is a skill most families 
 
 It is hard because most programs describe themselves in the same language. "Individualized care," "evidence-based," "holistic," and "family-centered" appear on nearly every website, whether or not they are true in practice. Marketing has flattened the differences, so families end up comparing feelings instead of facts.
 
-A scorecard fixes that. Same questions, same categories, written answers. When the pressure is high, structure is kindness to yourself. It also helps to know the [LINK:treatment center red flags:/blog/treatment-red-flags] that should end a conversation early.
+A scorecard fixes that. Same questions, same categories, written answers. When the pressure is high, structure is kindness to yourself. It also helps to know the [LINK:treatment center red flags:/treatment-red-flags] that should end a conversation early.
 
 **The five categories that matter**
 
@@ -229,7 +229,7 @@ Fit is whether the population, structure, and philosophy match the actual human 
 - What is their position on medication-assisted treatment (medications like buprenorphine or naltrexone)? "We support it when appropriate" is a different answer than "we don't allow it."
 - Is the approach 12-step based, non-12-step, faith-based, or a blend? Would your loved one actually participate in that?
 
-Strong answer: specific numbers and a clear description of who they serve best, including who they are not the right fit for. Weak answer: "We treat everyone." Understanding the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment-family-guide] first will narrow your list before you ever pick up the phone.
+Strong answer: specific numbers and a clear description of who they serve best, including who they are not the right fit for. Weak answer: "We treat everyone." Understanding the [LINK:levels of care in addiction treatment:/blog/levels-of-care-addiction-treatment] first will narrow your list before you ever pick up the phone.
 
 **2. Clinical quality: Who is doing the work, and how much of it?**
 
