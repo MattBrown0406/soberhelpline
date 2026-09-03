@@ -214,7 +214,7 @@ That is normal. Learning how to compare rehab programs is a skill most families 
 
 It is hard because most programs describe themselves in the same language. "Individualized care," "evidence-based," "holistic," and "family-centered" appear on nearly every website, whether or not they are true in practice. Marketing has flattened the differences, so families end up comparing feelings instead of facts.
 
-A scorecard fixes that. Same questions, same categories, written answers. When the pressure is high, structure is kindness to yourself. It also helps to know the [LINK:treatment center red flags:/blog/treatment-red-flags] that should end a conversation early.
+A scorecard fixes that. Same questions, same categories, written answers. When the pressure is high, structure is kindness to yourself. It also helps to know the [LINK:treatment center red flags:/treatment-red-flags] that should end a conversation early.
 
 **The five categories that matter**
 
