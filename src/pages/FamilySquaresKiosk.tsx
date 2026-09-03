@@ -20,6 +20,7 @@ const RESET_SECONDS = 20;
 const ATTRACT_IDLE_MS = 60 * 1000;
 const IDLE_REFRESH_MS = 15 * 60 * 1000;
 const SLOW_SUBMISSION_MS = 5 * 1000;
+const SUBMISSION_TIMEOUT_MS = 15 * 1000;
 const KIOSK_HELP_PHONE = "(458) 298-8008";
 
 const COMMON_EMAIL_DOMAIN_TYPOS: Record<string, string> = {
@@ -110,6 +111,7 @@ export default function FamilySquaresKiosk() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionUncertain, setSubmissionUncertain] = useState(false);
   const [isAttractMode, setIsAttractMode] = useState(false);
   const [resetCountdown, setResetCountdown] = useState(RESET_SECONDS);
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
@@ -237,9 +239,9 @@ export default function FamilySquaresKiosk() {
   }, [isOnline]);
 
   useEffect(() => {
-    if (!submitted) return;
+    if (!submitted || submissionUncertain) return;
     trackConversionEvent("kiosk_app_qr_view", { source: "family_squares_kiosk", privacySafe: true });
-  }, [submitted]);
+  }, [submitted, submissionUncertain]);
 
   useEffect(() => {
     if (!isAttractMode || !isOnline) return;
@@ -272,6 +274,7 @@ export default function FamilySquaresKiosk() {
     setFormData(EMPTY_FORM);
     setErrors({});
     setSubmitted(false);
+    setSubmissionUncertain(false);
     setResetCountdown(RESET_SECONDS);
     setIsSubmitting(false);
     setIsAttractMode(false);
@@ -443,6 +446,7 @@ export default function FamilySquaresKiosk() {
     slowSubmissionTimer.current = setTimeout(() => setShowSlowSubmission(true), SLOW_SUBMISSION_MS);
     try {
       const { error } = await supabase.functions.invoke("public-register-monday-zoom", {
+        timeout: SUBMISSION_TIMEOUT_MS,
         body: {
           user_id: null,
           name: result.data.name,
@@ -472,25 +476,27 @@ export default function FamilySquaresKiosk() {
 
       // Remove personal information before showing the shared-screen confirmation.
       setFormData(EMPTY_FORM);
+      setSubmissionUncertain(false);
       setSubmitted(true);
       setResetCountdown(RESET_SECONDS);
       trackConversionEvent("kiosk_registration_success", { source: "family_squares_kiosk", privacySafe: true });
     } catch (error: unknown) {
       if (currentAttempt !== submissionAttempt.current) return;
       console.error("Kiosk registration failed:", error);
-      trackConversionEvent("kiosk_registration_failure", { source: "family_squares_kiosk", privacySafe: true, reason: navigator.onLine ? "request_failed" : "offline" });
+      trackConversionEvent("kiosk_registration_failure", { source: "family_squares_kiosk", privacySafe: true, reason: navigator.onLine ? "response_unconfirmed" : "offline" });
+      // A connection can fail after the server saved the registration and sent
+      // the email. Clear shared-screen PII and never encourage a blind duplicate.
+      setFormData(EMPTY_FORM);
+      setErrors({});
+      setEmailSuggestion(null);
+      setEmailSuggestionDismissedFor(null);
       if (!navigator.onLine) {
-        setFormData(EMPTY_FORM);
-        setErrors({});
-        setEmailSuggestion(null);
-        setEmailSuggestionDismissedFor(null);
         setIsOnline(false);
+      } else {
+        setSubmissionUncertain(true);
+        setSubmitted(true);
+        setResetCountdown(RESET_SECONDS);
       }
-      toast({
-        title: "Registration could not be completed",
-        description: "Please check the internet connection and try again.",
-        variant: "destructive",
-      });
     } finally {
       if (currentAttempt === submissionAttempt.current) {
         if (slowSubmissionTimer.current) window.clearTimeout(slowSubmissionTimer.current);
@@ -558,27 +564,35 @@ export default function FamilySquaresKiosk() {
             type="button"
             onClick={resetForNextPerson}
             className="flex h-screen w-full items-center justify-center p-4 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-inset focus-visible:outline-emerald-300"
-            aria-label="Registration complete. Scan the QR code to download the Sober Helpline app. Tap anywhere to return to registration now."
+            aria-label={submissionUncertain
+              ? "Registration status could not be confirmed on this screen. Check your email before trying again. Tap anywhere to return to registration now."
+              : "Registration complete. Scan the QR code to download the Sober Helpline app. Tap anywhere to return to registration now."}
           >
             <span className="grid h-full max-h-[568px] w-full max-w-5xl grid-cols-1 items-center gap-5 rounded-3xl border border-white/25 bg-white p-5 text-slate-900 shadow-2xl md:grid-cols-[1.1fr_0.9fr] lg:gap-7 lg:p-7">
               <span className="flex min-w-0 flex-col items-center text-center">
                 <img
                   src={kioskLogo}
                   alt="Sober Helpline — Family Addiction Support & Education"
-                  className="w-full max-w-[250px] rounded-2xl shadow-lg"
+                  className={`w-full rounded-2xl shadow-lg ${submissionUncertain ? "max-w-[185px]" : "max-w-[250px]"}`}
                 />
-                <span role="status" aria-live="polite" className="mt-4 text-4xl font-extrabold leading-tight text-slate-950 lg:text-[42px]">You're registered!</span>
-                <span className="mt-3 max-w-xl text-lg leading-snug text-slate-600">
-                  Check your email for your Family Squares Zoom information.
+                <span role="status" aria-live="polite" className={`${submissionUncertain ? "mt-2 text-3xl text-amber-800 lg:text-4xl" : "mt-4 text-4xl text-slate-950 lg:text-[42px]"} font-extrabold leading-tight`}>
+                  {submissionUncertain ? "Please check your email" : "You're registered!"}
                 </span>
-                <span className="mt-4 flex items-center gap-2 text-xl font-bold text-logo-blue">
-                  <Smartphone className="h-6 w-6 shrink-0" aria-hidden="true" />
-                  Take Sober Helpline with you
+                <span className={`${submissionUncertain ? "mt-2 text-base" : "mt-3 text-lg"} max-w-xl leading-snug text-slate-600`}>
+                  {submissionUncertain
+                    ? "Your information may have gone through, but this screen did not receive the final confirmation. If the email arrived, you are registered."
+                    : "Check your email for your Family Squares Zoom information."}
                 </span>
-                <span className="mt-2 max-w-lg text-base leading-snug text-slate-600">
-                  Scan the code to download the Sober Helpline app for iPhone and iPad.
+                <span className={`${submissionUncertain ? "mt-3 text-lg" : "mt-4 text-xl"} flex items-center gap-2 font-bold text-logo-blue`}>
+                  {submissionUncertain ? <AlertTriangle className="h-6 w-6 shrink-0" aria-hidden="true" /> : <Smartphone className="h-6 w-6 shrink-0" aria-hidden="true" />}
+                  {submissionUncertain ? "Do not submit another registration" : "Take Sober Helpline with you"}
                 </span>
-                <span className="mt-5 text-sm font-bold text-slate-700">
+                <span className={`${submissionUncertain ? "mt-1 text-sm" : "mt-2 text-base"} max-w-lg leading-snug text-slate-600`}>
+                  {submissionUncertain
+                    ? "Email delivery can take a few minutes. Check your inbox and spam folder before taking any further action."
+                    : "Scan the code to download the Sober Helpline app for iPhone and iPad."}
+                </span>
+                <span className={`${submissionUncertain ? "mt-3" : "mt-5"} text-sm font-bold text-slate-700`}>
                   Resetting in {resetCountdown} seconds
                 </span>
                 <span className="mt-2 h-2 w-full max-w-sm overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
@@ -587,23 +601,36 @@ export default function FamilySquaresKiosk() {
                     style={{ width: `${(resetCountdown / RESET_SECONDS) * 100}%` }}
                   />
                 </span>
-                <span className="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl bg-logo-blue px-6 text-base font-extrabold text-white shadow-md">
-                  Register Another Person Now
+                <span className="mt-2 inline-flex min-h-11 items-center justify-center rounded-xl bg-logo-blue px-6 text-base font-extrabold text-white shadow-md">
+                  {submissionUncertain ? "Finish & Clear Screen" : "Register Another Person Now"}
                 </span>
                 <span className="mt-2 text-sm font-semibold text-slate-600">Your personal information has been cleared.</span>
               </span>
 
               <span className="flex flex-col items-center justify-center rounded-3xl border-2 border-emerald-200 bg-emerald-50 p-4 shadow-inner">
-                <span className="mb-2 flex items-center gap-2 text-lg font-extrabold text-emerald-950">
-                  <Smartphone className="h-6 w-6" aria-hidden="true" />
-                  Scan with your iPhone or iPad camera
-                </span>
-                <img
-                  src={appStoreQrCode}
-                  alt="QR code linking to the Sober Helpline app in the Apple App Store"
-                  className="h-[290px] w-[290px] rounded-2xl border-8 border-white bg-white shadow-xl"
-                />
-                <span className="mt-3 text-base font-bold text-emerald-900">Available for iPhone and iPad</span>
+                {submissionUncertain ? (
+                  <span className="flex max-w-sm flex-col items-center text-center">
+                    <Mail className="h-16 w-16 text-logo-blue" aria-hidden="true" />
+                    <span className="mt-3 text-2xl font-extrabold text-emerald-950">Look for your Sober Helpline email</span>
+                    <span className="mt-3 text-lg leading-relaxed text-slate-700">
+                      If it arrives, your registration was received. If it has not arrived after five minutes, call Sober Helpline for help.
+                    </span>
+                    <span className="mt-4 rounded-2xl bg-logo-blue px-6 py-3 text-3xl font-extrabold text-white shadow-lg">{KIOSK_HELP_PHONE}</span>
+                  </span>
+                ) : (
+                  <>
+                    <span className="mb-2 flex items-center gap-2 text-lg font-extrabold text-emerald-950">
+                      <Smartphone className="h-6 w-6" aria-hidden="true" />
+                      Scan with your iPhone or iPad camera
+                    </span>
+                    <img
+                      src={appStoreQrCode}
+                      alt="QR code linking to the Sober Helpline app in the Apple App Store"
+                      className="h-[290px] w-[290px] rounded-2xl border-8 border-white bg-white shadow-xl"
+                    />
+                    <span className="mt-3 text-base font-bold text-emerald-900">Available for iPhone and iPad</span>
+                  </>
+                )}
               </span>
             </span>
           </button>
