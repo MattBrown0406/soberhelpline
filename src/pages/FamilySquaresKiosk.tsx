@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { Calendar, CheckCircle2, Clock, Loader2, Mail, MessageSquare, RotateCcw, ShieldCheck, Users, Video } from "lucide-react";
+import { Calendar, Clock, Loader2, Mail, MessageSquare, QrCode, ShieldCheck, Smartphone, Users, Video } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,9 +11,10 @@ import FamilySquaresKioskAttract from "@/components/FamilySquaresKioskAttract";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import kioskLogo from "@/assets/sober-helpline-kiosk-logo.jpg";
+import appStoreQrCode from "@/assets/sober-helpline-app-store-qr.png";
 import { z } from "zod";
 
-const RESET_SECONDS = 8;
+const RESET_SECONDS = 20;
 const ATTRACT_IDLE_MS = 60 * 1000;
 
 const registrationSchema = z.object({
@@ -77,6 +78,7 @@ export default function FamilySquaresKiosk() {
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const focusScrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const confirmationButtonRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
   const [meetingDate, setMeetingDate] = useState(getNextMeetingDate);
 
@@ -189,6 +191,12 @@ export default function FamilySquaresKiosk() {
     return () => window.clearTimeout(timer);
   }, [resetCountdown, resetForNextPerson, submitted]);
 
+  useEffect(() => {
+    if (!submitted) return;
+    const animationFrame = window.requestAnimationFrame(() => confirmationButtonRef.current?.focus());
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [submitted]);
+
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
@@ -265,37 +273,59 @@ export default function FamilySquaresKiosk() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-5 py-8 text-white">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 text-white">
         <SEOHead
           title="Family Squares Registration Kiosk | Sober Helpline"
           description="Shared-device registration for the Sober Helpline Family Squares meeting."
           noIndex
           canonicalPath="/family-squares"
         />
-        <main className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-3xl items-center justify-center">
-          <Card className="w-full border-white/20 bg-white text-center shadow-2xl">
-            <CardContent className="p-8 sm:p-12">
-              <img
-                src={kioskLogo}
-                alt="Sober Helpline — Family Addiction Support & Education"
-                className="mx-auto mb-6 w-full max-w-sm rounded-2xl shadow-lg"
-              />
-              <CheckCircle2 className="mx-auto h-20 w-20 text-emerald-600" aria-hidden="true" />
-              <h1 className="mt-6 text-3xl font-extrabold text-slate-900 sm:text-5xl">You're registered.</h1>
-              <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-                Check your email for the Family Squares Zoom link. You may also submit your question in advance from this screen.
-              </p>
-              <div className="mx-auto mt-7 max-w-lg rounded-2xl bg-emerald-50 p-5 text-emerald-900">
-                <Mail className="mx-auto mb-2 h-7 w-7" aria-hidden="true" />
-                <p className="font-semibold">Your personal information has been cleared from this shared screen.</p>
-              </div>
-              <p className="mt-7 text-base text-slate-500">Ready for the next person in {resetCountdown} seconds.</p>
-              <Button type="button" size="lg" className="mt-5 min-h-14 w-full text-lg" onClick={resetForNextPerson}>
-                <RotateCcw className="mr-2 h-5 w-5" />
-                Register Another Person Now
-              </Button>
-            </CardContent>
-          </Card>
+        <main className="min-h-screen">
+          <button
+            ref={confirmationButtonRef}
+            type="button"
+            onClick={resetForNextPerson}
+            className="flex min-h-screen w-full items-center justify-center p-4 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-inset focus-visible:outline-emerald-300"
+            aria-label="Registration complete. Scan the QR code to download the Sober Helpline app. Tap anywhere to return to registration now."
+          >
+            <span className="grid w-full max-w-5xl grid-cols-1 items-center gap-5 rounded-3xl border border-white/25 bg-white p-5 text-slate-900 shadow-2xl md:grid-cols-[1.1fr_0.9fr] lg:min-h-[540px] lg:gap-7 lg:p-7">
+              <span className="flex min-w-0 flex-col items-center text-center">
+                <img
+                  src={kioskLogo}
+                  alt="Sober Helpline — Family Addiction Support & Education"
+                  className="w-full max-w-[250px] rounded-2xl shadow-lg"
+                />
+                <span role="status" aria-live="polite" className="mt-4 text-4xl font-extrabold leading-tight text-slate-950 lg:text-[42px]">You're registered!</span>
+                <span className="mt-3 max-w-xl text-lg leading-snug text-slate-600">
+                  Check your email for your Family Squares Zoom information.
+                </span>
+                <span className="mt-4 flex items-center gap-2 text-xl font-bold text-logo-blue">
+                  <Smartphone className="h-6 w-6 shrink-0" aria-hidden="true" />
+                  Take Sober Helpline with you
+                </span>
+                <span className="mt-2 max-w-lg text-base leading-snug text-slate-600">
+                  Scan the code to download the Sober Helpline app from the Apple App Store.
+                </span>
+                <span className="mt-5 rounded-full bg-emerald-50 px-5 py-2 text-sm font-bold text-emerald-900">
+                  Returning in {resetCountdown} seconds · Tap anywhere to register another person
+                </span>
+                <span className="mt-3 text-xs font-semibold text-slate-500">Your personal information has been cleared.</span>
+              </span>
+
+              <span className="flex flex-col items-center justify-center rounded-3xl border-2 border-emerald-200 bg-emerald-50 p-4 shadow-inner">
+                <span className="mb-2 flex items-center gap-2 text-lg font-extrabold text-emerald-950">
+                  <QrCode className="h-6 w-6" aria-hidden="true" />
+                  Scan with your iPhone camera
+                </span>
+                <img
+                  src={appStoreQrCode}
+                  alt="QR code linking to the Sober Helpline app in the Apple App Store"
+                  className="h-[290px] w-[290px] rounded-2xl border-8 border-white bg-white shadow-xl"
+                />
+                <span className="mt-3 text-base font-bold text-emerald-900">Download on the Apple App Store</span>
+              </span>
+            </span>
+          </button>
         </main>
       </div>
     );

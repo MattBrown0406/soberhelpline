@@ -54,6 +54,15 @@ serve(async (req: Request) => {
   }
 
   try {
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const authorization = req.headers.get("Authorization");
+    if (!serviceRoleKey || authorization !== `Bearer ${serviceRoleKey}`) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const { name, email, registration_id, consentEmailList = false, language = "en" } = await req.json();
 
     if (!name || !email) {
@@ -68,7 +77,7 @@ serve(async (req: Request) => {
 
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      serviceRoleKey,
     );
 
     // Blocklist check — do not email blocked addresses
@@ -116,6 +125,7 @@ serve(async (req: Request) => {
     }
 
     const siteUrl = "https://soberhelpline.com";
+    const appStoreUrl = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const directJoinUrl = meetingId
       ? `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`
@@ -170,6 +180,28 @@ serve(async (req: Request) => {
 
     const isSpanish = language === "es";
 
+    const appDownloadSection = isSpanish
+      ? `
+        <div style="background-color: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; padding: 18px; margin: 20px 0; text-align: center;">
+          <h2 style="margin: 0 0 8px 0; color: #065f46;">📱 Lleve Sober Helpline con usted</h2>
+          <p style="margin: 0 0 14px 0; color: #047857;">Si aún no tiene la aplicación Sober Helpline, le invitamos a descargarla desde la App Store de Apple.</p>
+          <a href="${appStoreUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0b2943; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">
+            Descargar Sober Helpline
+          </a>
+          <p style="margin: 12px 0 0 0; font-size: 12px; color: #6b7280; word-break: break-all;">${appStoreUrl}</p>
+        </div>
+      `
+      : `
+        <div style="background-color: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; padding: 18px; margin: 20px 0; text-align: center;">
+          <h2 style="margin: 0 0 8px 0; color: #065f46;">📱 Take Sober Helpline with you</h2>
+          <p style="margin: 0 0 14px 0; color: #047857;">If you haven't already, we invite you to download the Sober Helpline app from the Apple App Store.</p>
+          <a href="${appStoreUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0b2943; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">
+            Download Sober Helpline
+          </a>
+          <p style="margin: 12px 0 0 0; font-size: 12px; color: #6b7280; word-break: break-all;">${appStoreUrl}</p>
+        </div>
+      `;
+
     const attendeeSubject = isSpanish
       ? "¡Está registrado/a! Reunión Zoom de “The Family Squares”"
       : "You're Registered! “The Family Squares” Zoom Meeting";
@@ -182,6 +214,8 @@ serve(async (req: Request) => {
           <p>Este es un espacio gratuito y de apoyo para familias que atraviesan la adicción. Tendrá la oportunidad de hacer preguntas, compartir experiencias y conectar con otras personas que entienden.</p>
 
           ${zoomSection}
+
+          ${appDownloadSection}
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0; color: #1e40af; font-size: 14px;">
@@ -213,6 +247,8 @@ serve(async (req: Request) => {
           <p>This is a free, supportive space for families navigating addiction. You'll have the opportunity to ask questions, share experiences, and connect with others who understand.</p>
 
           ${zoomSection}
+
+          ${appDownloadSection}
 
           <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0; color: #1e40af; font-size: 14px;">
