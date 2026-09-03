@@ -3,6 +3,7 @@ import { Calendar, CheckCircle2, Clock, Loader2, Mail, MessageSquare, RotateCcw,
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +18,9 @@ const IDLE_CLEAR_MS = 2 * 60 * 1000;
 const registrationSchema = z.object({
   name: z.string().trim().min(1, "Please enter your full name.").max(100),
   email: z.string().trim().email("Please enter a valid email address.").max(255),
+  phone: z.string().trim().max(20, "Please keep your phone number under 20 characters.").optional().default(""),
   question: z.string().trim().max(1000, "Please keep your question under 1,000 characters.").optional().default(""),
+  requestFollowUp: z.boolean().default(false),
 });
 
 type FormData = z.infer<typeof registrationSchema>;
@@ -25,7 +28,9 @@ type FormData = z.infer<typeof registrationSchema>;
 const EMPTY_FORM: FormData = {
   name: "",
   email: "",
+  phone: "",
   question: "",
+  requestFollowUp: false,
 };
 
 const getNextMeetingDate = () => {
@@ -129,7 +134,14 @@ export default function FamilySquaresKiosk() {
 
   const restartIdleTimer = useCallback(() => {
     if (idleTimer.current) clearTimeout(idleTimer.current);
-    if (!submitted && Object.values(formData).some((value) => value.trim())) {
+    const hasPartialEntry = Boolean(
+      formData.name.trim() ||
+      formData.email.trim() ||
+      formData.phone.trim() ||
+      formData.question.trim() ||
+      formData.requestFollowUp,
+    );
+    if (!submitted && hasPartialEntry) {
       idleTimer.current = setTimeout(resetForNextPerson, IDLE_CLEAR_MS);
     }
   }, [formData, resetForNextPerson, submitted]);
@@ -195,9 +207,11 @@ export default function FamilySquaresKiosk() {
           user_id: null,
           name: result.data.name,
           email: result.data.email,
-          phone: "",
+          // A phone number is retained only with the visitor's affirmative
+          // intervention-contact request. Email remains the Zoom delivery path.
+          phone: result.data.requestFollowUp ? result.data.phone : "",
           question: result.data.question,
-          request_follow_up: false,
+          request_follow_up: result.data.requestFollowUp,
           consent_email_list: false,
           meeting_date: meetingDate,
           auto_register: false,
@@ -270,7 +284,7 @@ export default function FamilySquaresKiosk() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-4 py-5 sm:px-6 sm:py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-4 py-5 sm:px-6 sm:py-8 md:py-3">
       <SEOHead
         title="Family Squares Registration Kiosk | Sober Helpline"
         description="Shared-device registration for the Sober Helpline Family Squares meeting."
@@ -278,48 +292,48 @@ export default function FamilySquaresKiosk() {
         canonicalPath="/family-squares"
       />
       <main className="mx-auto max-w-6xl">
-        <header className="mb-5 flex items-center justify-center sm:mb-7">
+        <header className="mb-5 flex items-center justify-center sm:mb-7 md:mb-3">
           <img
             src={kioskLogo}
             alt="Sober Helpline — Family Addiction Support & Education"
-            className="w-full max-w-md rounded-2xl shadow-2xl"
+            className="w-full max-w-md rounded-2xl shadow-2xl md:max-w-[190px] md:rounded-xl"
           />
         </header>
 
-        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <section className="min-w-0 rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-3">
+          <section className="order-2 min-w-0 rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8 lg:order-none lg:p-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-100">
               <Video className="h-5 w-5" />
               Free weekly family support
             </div>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl">Join the Family Squares Zoom Meeting</h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-100 sm:text-xl">
+            <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:mt-3 lg:text-4xl">Join the Family Squares Zoom Meeting</h1>
+            <p className="mt-5 text-lg leading-relaxed text-slate-100 sm:text-xl lg:mt-3 lg:text-lg">
               A compassionate Monday-night meeting for parents, spouses, siblings, adult children, and anyone affected by a loved one's addiction.
             </p>
 
-            <div className="mt-7 grid gap-3">
+            <div className="mt-7 grid gap-3 lg:mt-4 lg:gap-2">
               {[
                 { icon: Calendar, text: "Every Monday" },
                 { icon: Clock, text: "7:00 PM Pacific" },
                 { icon: Users, text: "Open to families everywhere" },
                 { icon: MessageSquare, text: "Submit a question if you choose" },
               ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex min-h-14 items-center gap-4 rounded-2xl bg-white/10 px-4 py-3 text-lg font-semibold">
+                <div key={text} className="flex min-h-14 items-center gap-4 rounded-2xl bg-white/10 px-4 py-3 text-lg font-semibold lg:min-h-12 lg:py-2">
                   <Icon className="h-6 w-6 shrink-0 text-emerald-300" aria-hidden="true" />
                   {text}
                 </div>
               ))}
             </div>
 
-            <div className="mt-7 flex gap-3 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50">
+            <div className="mt-7 flex gap-3 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-4 lg:p-3">
               <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-300" aria-hidden="true" />
-              <p className="leading-relaxed">Registration is private. Your name and email are cleared from this shared screen after submission.</p>
+              <p className="leading-relaxed">Registration is private. Your personal information is cleared from this shared screen after submission.</p>
             </div>
           </section>
 
-          <Card className="min-w-0 border-0 shadow-2xl">
-            <CardContent className="p-6 sm:p-8">
-              <div className="mb-6 text-center">
+          <Card className="order-1 min-w-0 border-0 shadow-2xl lg:order-none">
+            <CardContent className="p-6 sm:p-8 md:p-5">
+              <div className="mb-6 text-center md:mb-3">
                 <p className="text-sm font-bold uppercase tracking-wider text-logo-blue">Upcoming meeting</p>
                 <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl">{formatMeetingDate(meetingDate)}</h2>
                 <p className="mt-2 text-base text-slate-600">Register below. Your Zoom link will be emailed to you.</p>
@@ -336,45 +350,88 @@ export default function FamilySquaresKiosk() {
                 onSubmit={handleSubmit}
                 onFocusCapture={keepFocusedFieldVisible}
                 autoComplete="off"
-                className="space-y-5"
+                className="space-y-5 md:space-y-3"
                 aria-label="Family Squares registration"
               >
-                <div className="space-y-2">
-                  <Label htmlFor="kiosk-name" className="text-base font-bold">Full Name *</Label>
-                  <Input
-                    id="kiosk-name"
-                    name="family-squares-kiosk-name"
-                    autoComplete="off"
-                    data-lpignore="true"
-                    required
-                    value={formData.name}
-                    onChange={(event) => updateField("name", event.target.value)}
-                    placeholder="Your full name"
-                    className="h-14 text-lg"
-                    aria-invalid={Boolean(errors.name)}
-                  />
-                  {errors.name ? <p className="font-medium text-destructive">{errors.name}</p> : null}
+                <div className="grid gap-5 md:grid-cols-2 md:gap-3">
+                  <div className="space-y-2">
+                    <Label htmlFor="kiosk-name" className="text-base font-bold">Full Name *</Label>
+                    <Input
+                      id="kiosk-name"
+                      name="family-squares-kiosk-name"
+                      autoComplete="off"
+                      data-lpignore="true"
+                      required
+                      value={formData.name}
+                      onChange={(event) => updateField("name", event.target.value)}
+                      placeholder="Your full name"
+                      className="h-14 text-lg md:h-12"
+                      aria-invalid={Boolean(errors.name)}
+                    />
+                    {errors.name ? <p className="font-medium text-destructive">{errors.name}</p> : null}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="kiosk-email" className="text-base font-bold">Email Address *</Label>
+                    <Input
+                      id="kiosk-email"
+                      name="family-squares-kiosk-email"
+                      type="email"
+                      inputMode="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      data-lpignore="true"
+                      required
+                      value={formData.email}
+                      onChange={(event) => updateField("email", event.target.value)}
+                      placeholder="you@example.com"
+                      className="h-14 text-lg md:h-12"
+                      aria-invalid={Boolean(errors.email)}
+                    />
+                    {errors.email ? <p className="font-medium text-destructive">{errors.email}</p> : null}
+                  </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="kiosk-email" className="text-base font-bold">Email Address *</Label>
-                  <Input
-                    id="kiosk-email"
-                    name="family-squares-kiosk-email"
-                    type="email"
-                    inputMode="email"
-                    autoCapitalize="none"
-                    autoCorrect="off"
-                    autoComplete="off"
-                    data-lpignore="true"
-                    required
-                    value={formData.email}
-                    onChange={(event) => updateField("email", event.target.value)}
-                    placeholder="you@example.com"
-                    className="h-14 text-lg"
-                    aria-invalid={Boolean(errors.email)}
-                  />
-                  {errors.email ? <p className="font-medium text-destructive">{errors.email}</p> : null}
+                <div className="grid gap-3 md:grid-cols-[0.8fr_1.2fr] md:items-stretch">
+                  <div className="space-y-2">
+                    <Label htmlFor="kiosk-phone" className="text-base font-bold">
+                      Phone Number <span className="font-normal text-slate-500">(Optional for intervention contact)</span>
+                    </Label>
+                    <Input
+                      id="kiosk-phone"
+                      name="family-squares-kiosk-phone"
+                      type="tel"
+                      inputMode="tel"
+                      enterKeyHint="next"
+                      autoComplete="off"
+                      data-lpignore="true"
+                      value={formData.phone}
+                      onChange={(event) => updateField("phone", event.target.value)}
+                      placeholder="(555) 123-4567"
+                      className="h-14 text-lg md:h-12"
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? "kiosk-phone-error" : undefined}
+                    />
+                    {errors.phone ? <p id="kiosk-phone-error" className="font-medium text-destructive">{errors.phone}</p> : null}
+                  </div>
+
+                  <div className="flex items-center rounded-2xl border-2 border-slate-200 bg-slate-50 p-4 md:p-3">
+                    <div className="flex items-start gap-4">
+                      <Checkbox
+                        id="kiosk-intervention-contact"
+                        checked={formData.requestFollowUp}
+                        onCheckedChange={(checked) => {
+                          setFormData((current) => ({ ...current, requestFollowUp: checked === true }));
+                          setErrors((current) => ({ ...current, requestFollowUp: undefined }));
+                        }}
+                        className="mt-0.5 h-7 w-7 rounded-md border-2"
+                      />
+                      <Label htmlFor="kiosk-intervention-contact" className="cursor-pointer text-base font-semibold leading-relaxed text-slate-800 md:text-sm">
+                        I would like to be contacted for more information about intervention services.
+                      </Label>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -389,14 +446,14 @@ export default function FamilySquaresKiosk() {
                     value={formData.question}
                     onChange={(event) => updateField("question", event.target.value)}
                     placeholder="What would make this meeting useful for you?"
-                    rows={4}
-                    className="min-h-28 text-lg"
+                    rows={3}
+                    className="min-h-28 text-lg md:min-h-20"
                     aria-invalid={Boolean(errors.question)}
                   />
                   {errors.question ? <p className="font-medium text-destructive">{errors.question}</p> : null}
                 </div>
 
-                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl" disabled={isSubmitting || Boolean(cancellationReason)}>
+                <Button type="submit" size="lg" className="min-h-16 w-full whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14" disabled={isSubmitting || Boolean(cancellationReason)}>
                   {isSubmitting ? (
                     <><Loader2 className="mr-2 h-6 w-6 animate-spin" />Registering…</>
                   ) : (
