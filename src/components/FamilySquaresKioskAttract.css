@@ -81,11 +81,12 @@
 }
 
 .kiosk-attract__brand {
-  width: clamp(210px, 28vw, 310px);
+  width: clamp(280px, 36vw, 400px);
   aspect-ratio: 3 / 2;
-  border-radius: 18px;
+  border: 3px solid rgb(255 255 255 / 88%);
+  border-radius: 22px;
   object-fit: cover;
-  box-shadow: 0 24px 60px rgb(0 0 0 / 38%), 0 0 45px rgb(127 226 212 / 14%);
+  box-shadow: 0 26px 70px rgb(0 0 0 / 48%), 0 0 70px rgb(127 226 212 / 30%);
   animation: kiosk-attract-breathe 5s ease-in-out infinite;
 }
 
@@ -150,11 +151,11 @@
 }
 
 @media (max-height: 620px) {
-  .kiosk-attract__brand { width: 230px; }
-  .kiosk-attract__title { margin-top: 14px; font-size: 42px; }
+  .kiosk-attract__brand { width: 340px; }
+  .kiosk-attract__title { margin-top: 12px; font-size: 40px; }
   .kiosk-attract__subtitle { font-size: 21px; }
   .kiosk-attract__details { margin-top: 7px; font-size: 18px; }
-  .kiosk-attract__tap { margin-top: 14px; padding: 12px 24px; font-size: 19px; }
+  .kiosk-attract__tap { margin-top: 12px; padding: 10px 24px; font-size: 19px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
