@@ -79,7 +79,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008
@@ -217,7 +217,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
                     Immediate crisis support for San Francisco and Bay Area families.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="tel:8003092131" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:+18003092131" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-4 w-4" />
                       Bay Area Crisis: 800-309-2131
                     </a>
@@ -347,7 +347,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

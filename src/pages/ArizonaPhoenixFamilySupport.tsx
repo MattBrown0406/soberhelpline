@@ -193,7 +193,7 @@ export default function ArizonaPhoenixFamilySupport() {
                     Maricopa County's behavioral health crisis line. If your loved one is in immediate danger 
                     or you need urgent guidance, call this number 24/7.
                   </p>
-                  <a href="tel:6022229444" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                  <a href="tel:+16022229444" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     602-222-9444
                   </a>
@@ -247,7 +247,7 @@ export default function ArizonaPhoenixFamilySupport() {
                     <div className="mt-4 text-sm text-muted-foreground">
                       Questions? Call us directly:
                     </div>
-                    <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
+                    <a href="tel:+14582988008" className="text-primary font-semibold text-lg hover:underline">
                       (458) 298-8008
                     </a>
                   </div>
@@ -289,7 +289,7 @@ export default function ArizonaPhoenixFamilySupport() {
                     Schedule Coaching
                   </Button>
                 </Link>
-                <a href="tel:4582988008">
+                <a href="tel:+14582988008">
                   <Button size="lg" variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" />
                     Call (458) 298-8008
@@ -341,7 +341,7 @@ export default function ArizonaPhoenixFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   (458) 298-8008

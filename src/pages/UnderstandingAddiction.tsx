@@ -187,7 +187,7 @@ export default function UnderstandingAddiction() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="tel:458-298-8008"
+              href="tel:+14582988008"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
               <Phone className="h-5 w-5" />

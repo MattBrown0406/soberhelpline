@@ -79,7 +79,7 @@ export default function WashingtonSeattleFamilySupport() {
                   Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008
@@ -140,7 +140,7 @@ export default function WashingtonSeattleFamilySupport() {
                     Crisis support for mental health and substance use emergencies in King County.
                     Available around the clock for Seattle-area families.
                   </p>
-                  <a href="tel:18664274747" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                  <a href="tel:+18664274747" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     866-427-4747
                   </a>
@@ -159,7 +159,7 @@ export default function WashingtonSeattleFamilySupport() {
                     Statewide resource and referral line for substance use disorders.
                     Connects families with treatment providers across King County.
                   </p>
-                  <a href="tel:18667891511" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                  <a href="tel:+18667891511" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     1-866-789-1511
                   </a>
@@ -322,7 +322,7 @@ export default function WashingtonSeattleFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

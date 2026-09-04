@@ -60,7 +60,7 @@ export default function FamilyNextStepCTA({
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{subheading}</p>
         </div>
         <div className="flex items-center gap-3 shrink-0">
-          <a href="tel:4582988008" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+          <a href="tel:+14582988008" onClick={() => trackPhoneClick("family_next_step_cta")} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
             <PhoneCall className="h-4 w-4" />
             Call (458) 298-8008
           </a>

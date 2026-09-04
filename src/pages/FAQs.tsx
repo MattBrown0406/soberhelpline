@@ -371,7 +371,7 @@ export default function FAQs() {
               Take the Addiction Assessment
             </Link>
             <a 
-              href="tel:458-298-8008"
+              href="tel:+14582988008"
               className="inline-flex items-center justify-center gap-2 bg-card border border-border text-foreground px-6 py-3 rounded-lg hover:bg-accent transition-colors"
             >
               <Phone className="h-5 w-5" />

@@ -84,7 +84,7 @@ export const prerenderPages = [
     route: '/support',
     title: 'SoberHelpline App Support | Sober Helpline',
     description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
-    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582988008">458-298-8008</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
+    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:+14582988008">458-298-8008</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
   },
   {
     route: '/privacy',
@@ -228,7 +228,7 @@ export const prerenderPages = [
     route: '/nevada-family-support',
     title: 'Alcohol Interventionist Nevada | Family Addiction Help',
     description: 'Need an alcohol interventionist in Nevada? Call for family guidance when treatment refusal, relapse, or risk is escalating, or join the free Monday Zoom.',
-    noscriptHtml: '<main><h1>Alcohol Interventionist in Nevada and Family Addiction Help</h1><p>Call for a private family conversation about coaching, treatment, or intervention planning when refusal, relapse, or risk is escalating.</p><p><a href="tel:4582988008">Call an interventionist: (458) 298-8008</a> · <a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a></p></main>'
+    noscriptHtml: '<main><h1>Alcohol Interventionist in Nevada and Family Addiction Help</h1><p>Call for a private family conversation about coaching, treatment, or intervention planning when refusal, relapse, or risk is escalating.</p><p><a href="tel:+14582988008">Call an interventionist: (458) 298-8008</a> · <a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a></p></main>'
   },
   {
     route: '/utah-family-support',

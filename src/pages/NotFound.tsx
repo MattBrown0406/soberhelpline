@@ -37,7 +37,7 @@ const NotFound = () => {
               Go Home
             </Button>
           </Link>
-          <a href="tel:4582988008">
+          <a href="tel:+14582988008">
             <Button variant="outline" className="gap-2 w-full sm:w-auto">
               <Phone className="w-4 h-4" />
               Call (458) 298-8008

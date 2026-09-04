@@ -95,7 +95,7 @@ export default function TexasFamilySupport() {
                   Join Free Monday Zoom — 7PM PST
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008
@@ -252,7 +252,7 @@ export default function TexasFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       (458) 298-8008
@@ -294,7 +294,7 @@ export default function TexasFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

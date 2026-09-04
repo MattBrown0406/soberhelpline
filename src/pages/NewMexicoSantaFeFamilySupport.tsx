@@ -210,7 +210,7 @@ export default function NewMexicoSantaFeFamilySupport() {
                     New Mexico's statewide crisis line is available 24/7 for mental health and substance use emergencies in Santa Fe.
                     SAMHSA National Helpline also available: 1-800-662-4357.
                   </p>
-                  <a href="tel:18556627474"
+                  <a href="tel:+18556627474"
                     className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     1-855-662-7474
@@ -253,7 +253,7 @@ export default function NewMexicoSantaFeFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       (458) 298-8008
@@ -322,7 +322,7 @@ export default function NewMexicoSantaFeFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

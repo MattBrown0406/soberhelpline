@@ -210,7 +210,7 @@ export default function ColoradoDenverFamilySupport() {
                     Denver has multiple Colorado Crisis Services walk-in centers for immediate mental health
                     and substance use crises. Call anytime for support or referrals.
                   </p>
-                  <a href="tel:18444938255"
+                  <a href="tel:+18444938255"
                     className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                     <Phone className="h-4 w-4" />
                     1-844-493-8255
@@ -254,7 +254,7 @@ export default function ColoradoDenverFamilySupport() {
                       Register for Monday Zoom
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       (458) 298-8008
@@ -323,7 +323,7 @@ export default function ColoradoDenverFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

@@ -184,7 +184,7 @@ export default function FamilyConsultation() {
             </div>
 
             <p className="text-sm text-center text-muted-foreground">
-              Need to talk now instead? Call <a href="tel:4582988008" onClick={() => trackPhoneClick("family_consultation_footer")} className="text-primary hover:underline">(458) 298-8008</a>.
+              Need to talk now instead? Call <a href="tel:+14582988008" onClick={() => trackPhoneClick("family_consultation_footer")} className="text-primary hover:underline">(458) 298-8008</a>.
             </p>
           </div>
         </main>

@@ -126,7 +126,7 @@ export default function InterventionHelp() {
                   </Button>
                 </div>
                 <a
-                  href="tel:4582988008"
+                  href="tel:+14582988008"
                   onClick={() => trackPhoneClick("intervention_help_hero")}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                 >

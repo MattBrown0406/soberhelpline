@@ -89,7 +89,7 @@ export default function NevadaFamilySupport() {
               about coaching, treatment, or intervention planning; if the question can wait, join the free Monday support meeting.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
                   Call an Interventionist
@@ -118,7 +118,7 @@ export default function NevadaFamilySupport() {
                 If your loved one is drinking, using drugs, refusing treatment, or cycling through relapse, start with a private family coaching call or call Sober Helpline before staging a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or free Monday support.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="tel:4582988008">
+                <a href="tel:+14582988008">
                   <Button size="lg" className="gap-2 w-full sm:w-auto">
                     <Phone className="h-4 w-4" />
                     Call (458) 298-8008
@@ -211,7 +211,7 @@ export default function NevadaFamilySupport() {
                 </blockquote>
                 <p className="text-sm text-muted-foreground">— Matt Brown, Certified Interventionist &amp; Founder, Sober Helpline</p>
                 <div className="mt-6">
-                  <a href="tel:4582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
+                  <a href="tel:+14582988008" className="flex items-center gap-2 text-primary font-semibold hover:underline">
                     <Phone className="h-4 w-4" />
                     (458) 298-8008
                   </a>
@@ -359,7 +359,7 @@ export default function NevadaFamilySupport() {
                     Free, confidential, available 24 hours a day.
                   </p>
                   <a
-                    href="tel:7757848090"
+                    href="tel:+17757848090"
                     className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
                   >
                     <Phone className="h-4 w-4" />
@@ -546,7 +546,7 @@ export default function NevadaFamilySupport() {
                       Schedule Coaching
                     </Button>
                   </Link>
-                  <a href="tel:4582988008">
+                  <a href="tel:+14582988008">
                     <Button size="lg" variant="outline" className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call (458) 298-8008
@@ -652,7 +652,7 @@ export default function NevadaFamilySupport() {
                   Join Free Monday Zoom
                 </Button>
               </Link>
-              <a href="tel:4582988008">
+              <a href="tel:+14582988008">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call (458) 298-8008

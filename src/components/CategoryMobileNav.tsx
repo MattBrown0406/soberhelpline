@@ -65,7 +65,7 @@ const CategoryMobileNav = () => {
           </nav>
           
           <div className="p-4 border-t bg-muted/50">
-            <a href="tel:4582988008" className="flex items-center justify-center gap-2 text-foreground hover:text-primary transition-colors">
+            <a href="tel:+14582988008" className="flex items-center justify-center gap-2 text-foreground hover:text-primary transition-colors">
               <Phone className="w-5 h-5" />
               <span className="font-medium">(458) 298-8008</span>
             </a>
