@@ -383,19 +383,21 @@ const ProviderApplication = () => {
     const loadExistingSubmission = async () => {
       if (!user || forceNewApplication) return;
       
-      // Use limit(1) instead of maybeSingle() to handle users with multiple submissions
-      const { data: submissions, error } = await supabase
-        .from('provider_submissions')
-        .select('*')
-        .eq('submitted_by', user.id)
-        .is('parent_submission_id', null) // Only get parent submissions, not child ones
-        .order('created_at', { ascending: false })
-        .limit(1);
-      
+      // Contact columns (email/phone_number) are not directly readable by clients,
+      // so load the applicant's own submissions through a secure function instead.
+      const { data: allSubmissions, error } = await supabase
+        .rpc('get_my_provider_submissions');
+
       if (error) {
         console.error('Error loading submission:', error);
         return;
       }
+
+      const submissions = (allSubmissions ?? [])
+        .filter((s: any) => s.parent_submission_id === null)
+        .sort((a: any, b: any) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
+        .slice(0, 1);
+      
       
       const data = submissions?.[0] || null;
       
@@ -693,11 +695,11 @@ const ProviderApplication = () => {
         const { data: insertedData, error: insertError } = await supabase
           .from('provider_submissions')
           .insert(draftData)
-          .select()
+          .select('id')
           .single();
         
         if (insertedData) {
-          setExistingSubmission(insertedData);
+          setExistingSubmission({ ...draftData, id: insertedData.id } as any);
           setIsEditMode(true);
         }
         error = insertError;
