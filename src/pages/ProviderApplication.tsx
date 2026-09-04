@@ -695,11 +695,11 @@ const ProviderApplication = () => {
         const { data: insertedData, error: insertError } = await supabase
           .from('provider_submissions')
           .insert(draftData)
-          .select()
+          .select('id')
           .single();
         
         if (insertedData) {
-          setExistingSubmission(insertedData);
+          setExistingSubmission({ ...draftData, id: insertedData.id } as any);
           setIsEditMode(true);
         }
         error = insertError;
