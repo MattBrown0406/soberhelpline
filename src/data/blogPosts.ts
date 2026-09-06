@@ -190,12 +190,104 @@ import alternativesToAaImg from "@/assets/blog-alternatives-to-aa-recovery-progr
 import rehabTreatmentTeamImg from "@/assets/blog-rehab-treatment-team-staff-credentials-family-guide.jpg";
 import compareRehabProgramsImg from "@/assets/blog-how-to-compare-rehab-programs-family-scorecard.jpg";
 import readRehabReviewsImg from "@/assets/blog-how-to-read-rehab-reviews-family-guide.jpg";
+import matRehabQuestionsImg from "@/assets/blog-medication-assisted-treatment-rehab-questions-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 171,
+    slug: "medication-assisted-treatment-rehab-questions-family-guide",
+    seoTitle: "Medication-Assisted Treatment in Rehab: Family Questions",
+    metaDescription: "Does the rehab you're considering support medication-assisted treatment? Learn what MAT is, why it matters, and the exact questions to ask before admission.",
+    title: "Medication-Assisted Treatment in Rehab: Questions Every Family Should Ask Before Choosing a Program",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-09-05",
+    image: matRehabQuestionsImg,
+    keywords: ["medication-assisted treatment in rehab", "MAT", "buprenorphine", "naltrexone", "methadone", "choosing a treatment program"],
+    excerpt: "Families rarely ask whether a rehab supports medications like buprenorphine or naltrexone \u2014 or quietly requires people to stop them at the door. Here are the exact questions to ask, and the red flags to watch for.",
+    content: `If you're comparing rehab programs for someone you love, one question gets skipped more than almost any other: what is this program's position on medication-assisted treatment in rehab? Families ask about cost, length of stay, and whether there's a pool. They rarely ask whether the program will support medications like buprenorphine or naltrexone, or whether it quietly requires people to stop them at the door.
+
+That gap matters. For opioid and alcohol use disorders, medication-assisted treatment (MAT) is one of the most studied and effective tools available. A program's stance on it tells you how current its clinical approach is and whether your loved one will get care that fits their situation rather than a one-size-fits-all philosophy.
+
+**What is medication-assisted treatment in rehab?**
+
+Medication-assisted treatment is the use of FDA-approved medications, combined with counseling and therapy, to treat substance use disorders. In rehab, MAT most often means buprenorphine (Suboxone, Sublocade), methadone, or naltrexone (Vivitrol) for opioid use disorder, and naltrexone, acamprosate, or disulfiram for alcohol use disorder. It is not "trading one addiction for another." It is medical treatment for a medical condition.
+
+Here is the simplest way to think about it. Opioids and alcohol change the brain in ways that create intense cravings and a high risk of relapse, especially in the first year. MAT medications reduce cravings, block the effects of the substance, or stabilize the brain enough that a person can actually participate in therapy. Someone in constant withdrawal or craving is not in a good position to do the deeper work recovery requires.
+
+The research is consistent: for opioid use disorder, people on buprenorphine or methadone are significantly less likely to overdose and die, and more likely to stay in treatment.
+
+**Why does a rehab's stance on MAT matter so much?**
+
+A program's position on medication-assisted treatment in rehab reveals whether it follows current medical evidence or a fixed philosophy. Programs that refuse MAT entirely, or pressure clients to taper quickly, may be operating from a belief system rather than clinical best practice. That doesn't automatically make them bad programs, but it does make them the wrong fit for many people with opioid or alcohol use disorders.
+
+There is a safety issue too. When someone on buprenorphine or methadone is required to stop it to enter a program, their tolerance drops. If they leave early or relapse after discharge, their overdose risk is dramatically higher than before treatment. Families often don't learn this until it's too late. A program that understands MAT plans for this risk.
+
+If your loved one doesn't want medication, that's a legitimate choice, and plenty of people recover without it. The goal isn't to force medication on anyone. It's to choose a program where the option exists and the decision is made with a doctor rather than dictated by policy. Flexibility is the sign of quality, not a particular answer.
+
+**What questions should you ask a rehab about MAT?**
+
+The most useful questions are direct and specific. Ask them of the admissions counselor first, then ask to have the same questions answered by a clinical or medical staff member. Admissions representatives are often salespeople who may give you the answer they think you want. If the two answers differ, that tells you something.
+
+Ask every program on your list:
+
+- **Do you offer medication-assisted treatment on-site, and which medications specifically?** "We support MAT" can mean anything. Get the names.
+- **If my loved one is already on buprenorphine or methadone, can they continue it during treatment?** If not, why not?
+- **Who prescribes and manages medications, and how often is that person physically on-site?** A consulting doctor who visits weekly is very different from a medical director on staff.
+- **Do you require clients to taper off MAT before discharge?** On what timeline, and who decides?
+- **How do you coordinate MAT after discharge?** Is there a warm handoff to a prescriber near home, or a two-week supply and a phone number?
+- **How do your therapists and peer staff talk about MAT in groups?** A program can offer MAT on paper while the culture on the floor quietly shames people for using it.
+
+Write the answers down. One notebook page per program, with these questions and answers side by side, will make the decision clearer than any glossy brochure. Our guide to [LINK:how to compare rehab programs:/blog/how-to-compare-rehab-programs-family-scorecard] gives you a simple scorecard for doing exactly that.
+
+**What are the red flags in a program's MAT approach?**
+
+Red flags show up in how a program talks, not just what it offers. Watch for language that frames MAT as "not real recovery," "a crutch," or something clients should "get off of as soon as possible." Watch for a blanket policy that everyone must be medication-free by discharge regardless of history. And watch for vagueness: if nobody can tell you who the prescriber is or how often they're there, the answer is probably "rarely."
+
+Other warning signs:
+
+- Requiring someone stable on buprenorphine or methadone to stop before admission, with no medical rationale.
+- No plan for continuing medication after discharge.
+- A twelve-step-only culture that discourages clients from sharing that they're on medication. Twelve-step programs and MAT can coexist, but only where the program actively supports both.
+
+None of these alone should end the conversation. Together, they describe a program that may not be equipped for someone with opioid or alcohol use disorder in 2026. If several of these show up at once, treat them the way you would any other [LINK:treatment center red flags:/treatment-red-flags].
+
+**How do families support MAT once treatment begins?**
+
+Your role is simple: be informed, be supportive, and stay out of the medical decisions. Families sometimes carry old beliefs about medication, or they've heard at a meeting that "Suboxone is just another drug." If that's you, take the question to the treatment team rather than to your loved one. Doubt voiced at the wrong moment can undermine a decision that's keeping them alive.
+
+Practically, this means helping with logistics after discharge: pharmacy access, prescriber appointments, insurance coverage. Those pieces fall apart surprisingly often in the first month home, and when they do, relapse risk climbs fast. It helps to [LINK:verify insurance benefits for rehab:/blog/verify-insurance-benefits-for-rehab-guide] early so medication coverage isn't a surprise. Before discharge, ask the team when the next prescriber appointment is and whether the prescription will be filled before your loved one leaves. A family that quietly handles the boring parts is doing something enormously valuable.
+
+Support groups such as [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org] can help you stay steady while you do it.
+
+**Moving forward with clear eyes**
+
+You don't have to become an expert in addiction medicine to choose well. You have to ask a few pointed questions and pay attention to how they're answered. A program that welcomes those questions, gives specifics, and treats medication as a clinical decision rather than a moral one is likely thinking clearly about your loved one's care in other areas too.
+
+Navigating the treatment industry is a skill, and you're building it right now. Sober Helpline offers ongoing education, [LINK:family coaching and membership:/family-coaching], and a community of people walking exactly this road. Join one of our free Monday night "The Family Squares" calls to talk it through with people who understand.
+
+**Frequently Asked Questions About MAT in Rehab**
+
+**Is medication-assisted treatment just replacing one addiction with another?**
+
+No. Addiction involves compulsive use despite harm and loss of control. A person taking a prescribed, stable dose of buprenorphine or naltrexone under medical care is not experiencing those things. Major medical organizations consider MAT the standard of care for opioid use disorder.
+
+**Can someone be in a 12-step program while on MAT?**
+
+Yes. Many people attend AA or NA while taking buprenorphine, methadone, or naltrexone. Individual groups vary in how welcoming they are, so it helps to find meetings that are openly supportive. A good treatment program will help your loved one navigate this rather than forcing a choice.
+
+**How long does someone stay on MAT?**
+
+It depends on the person. Some taper after six to twelve months; others stay on medication for years. Research shows longer time on medication is generally associated with better outcomes for opioid use disorder. The decision belongs to the patient and prescriber, not a program's fixed timeline.
+
+**What if the rehab we've chosen doesn't offer MAT?**
+
+Ask whether they'll coordinate with an outside prescriber so your loved one can continue or start medication during treatment. Some abstinence-based programs will. If they refuse and your loved one has an opioid or alcohol use disorder, it is reasonable to keep looking. Fit matters more than reputation.`
+  },
   {
     id: 170,
     slug: "substance-use-assessment-before-rehab-family-guide",
