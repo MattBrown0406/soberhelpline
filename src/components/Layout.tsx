@@ -31,6 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
   }, [pathname]);
 
   const isHome = pathname === "/";
+  const isReferralFit = pathname === "/referralfit" || pathname === "/referralfit-support";
   const isSharedKiosk = pathname === "/family-squares-kiosk";
   const breadcrumbs = getBreadcrumbs(pathname);
 
@@ -146,7 +147,7 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
-      <StickyContactForm />
+      {!isReferralFit && <StickyContactForm />}
     </div>
     </SEOOverrideProvider>
   );

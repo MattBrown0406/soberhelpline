@@ -112,6 +112,8 @@ const About = React.lazy(() => import("./pages/About"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const FAQs = React.lazy(() => import("./pages/FAQs"));
 const Support = React.lazy(() => import("./pages/Support"));
+const ReferralFit = React.lazy(() => import("./pages/ReferralFit"));
+const ReferralFitSupport = React.lazy(() => import("./pages/ReferralFitSupport"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
 const DeleteAccount = React.lazy(() => import("./pages/DeleteAccount"));
 const AppTerms = React.lazy(() => import("./pages/AppTerms"));
@@ -400,6 +402,8 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/support" element={<Support />} />
+              <Route path="/referralfit" element={<ReferralFit />} />
+              <Route path="/referralfit-support" element={<ReferralFitSupport />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/delete-account" element={<DeleteAccount />} />
               <Route path="/app-terms" element={<AppTerms />} />

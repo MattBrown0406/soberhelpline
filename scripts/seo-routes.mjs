@@ -13,6 +13,18 @@ export const canonicalRouteAliases = new Map([
 
 export const prerenderPages = [
   {
+    route: '/referralfit',
+    title: 'ReferralFit | Referral & Case Management',
+    description: 'Organize referrals, family cases, placement matches, and follow-ups with ReferralFit. Professional tools for intervention and treatment coordination.',
+    noscriptHtml: '<main><h1>ReferralFit: Keep every next step in view.</h1><p>Professional referral and case management for iPhone and iPad. Organize daily follow-ups, compare placement matches, keep family case files together, and track referral activity. Business analytics and team invitations require Pro.</p><p>Client fit comes first. Verify availability, benefits, and clinical suitability with each provider.</p><p><a href="/referralfit-support">ReferralFit support</a> · <a href="mailto:support@soberhelpline.com?subject=ReferralFit%20Information">Contact us about ReferralFit</a></p></main>',
+  },
+  {
+    route: '/referralfit-support',
+    title: 'ReferralFit Support | Sober Helpline',
+    description: 'Get help with ReferralFit sign-in, workspaces, referrals, case files, billing, and technical issues. Contact support by email or phone.',
+    noscriptHtml: '<main><h1>ReferralFit Support</h1><p>Get help with your ReferralFit account, workspace, cases, referrals, billing, and technical issues.</p><p>Email <a href="mailto:support@soberhelpline.com?subject=ReferralFit%20Support">support@soberhelpline.com</a> or call <a href="tel:+14582988008">(458) 298-8008</a>.</p><p>Include your account email, workspace name, device model, app version, and a description of the issue. Do not send passwords, verification codes, or private client records. Redact sensitive information from screenshots.</p><p>For account deletion or privacy requests, email from your account address and mention ReferralFit.</p><p><a href="/referralfit">Learn about ReferralFit</a></p></main>',
+  },
+  {
     route: '/',
     title: 'Family Addiction Support & Education | Sober Helpline',
     description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, coaching, and practical next steps for families under strain.',

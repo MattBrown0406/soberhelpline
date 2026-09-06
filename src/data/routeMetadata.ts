@@ -4,6 +4,14 @@ export interface RouteMetadata {
 }
 
 export const routeMetadata: Record<string, RouteMetadata> = {
+  '/referralfit': {
+    title: 'ReferralFit | Referral & Case Management',
+    description: 'Organize referrals, family cases, placement matches, and follow-ups with ReferralFit. Professional tools for intervention and treatment coordination.',
+  },
+  '/referralfit-support': {
+    title: 'ReferralFit Support | Sober Helpline',
+    description: 'Get help with ReferralFit sign-in, workspaces, referrals, case files, billing, and technical issues. Contact support by email or phone.',
+  },
   '/': {
     title: 'Family Addiction Support & Education | Sober Helpline',
     description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, AI tools, coaching, and a community that understands.',

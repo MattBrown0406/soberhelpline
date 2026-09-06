@@ -4,6 +4,15 @@ export interface BreadcrumbItem {
 }
 
 const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
+  "/referralfit": [
+    { label: "Home", path: "/" },
+    { label: "ReferralFit", path: "/referralfit" },
+  ],
+  "/referralfit-support": [
+    { label: "Home", path: "/" },
+    { label: "ReferralFit", path: "/referralfit" },
+    { label: "App Support", path: "/referralfit-support" },
+  ],
   "/from-no-more-enabling": [
     { label: "Home", path: "/" },
     { label: "No More Enabling Reader Path", path: "/from-no-more-enabling" },
