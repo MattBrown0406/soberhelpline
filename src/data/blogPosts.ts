@@ -190,6 +190,7 @@ import alternativesToAaImg from "@/assets/blog-alternatives-to-aa-recovery-progr
 import rehabTreatmentTeamImg from "@/assets/blog-rehab-treatment-team-staff-credentials-family-guide.jpg";
 import compareRehabProgramsImg from "@/assets/blog-how-to-compare-rehab-programs-family-scorecard.jpg";
 import readRehabReviewsImg from "@/assets/blog-how-to-read-rehab-reviews-family-guide.jpg";
+import matRehabQuestionsImg from "@/assets/blog-medication-assisted-treatment-rehab-questions-family-guide.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
