@@ -96,6 +96,7 @@ const SoberLiving = React.lazy(() => import("./pages/SoberLiving"));
 const Therapists = React.lazy(() => import("./pages/Therapists"));
 const Psychiatrists = React.lazy(() => import("./pages/Psychiatrists"));
 const Auth = React.lazy(() => import("./pages/Auth"));
+const NextStepEntry = React.lazy(() => import("./pages/NextStepEntry"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const Admin = React.lazy(() => import("./pages/Admin"));
 const SubscriptionSuccess = React.lazy(() => import("./pages/SubscriptionSuccess"));
@@ -307,6 +308,7 @@ const App = () => (
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/next-step" element={<NextStepEntry />} />
               {Object.entries(legacyPageRedirects).map(([from, to]) => (
                 <Route key={from} path={from} element={<Navigate to={to} replace />} />
               ))}

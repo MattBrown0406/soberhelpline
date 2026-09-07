@@ -267,6 +267,11 @@ const Index = () => {
         </header>
 
         <HomeHero />
+        <section className="border-b bg-muted/30 px-4 py-6 text-center" aria-label="Private next-step guide">
+          <p className="mb-3">Not ready to call? Get a practical next step without sharing contact details.</p>
+          {/* Full-document navigation drops the normal site's analytics/replay listeners. */}
+          <a href="/next-step" className="inline-flex min-h-11 items-center rounded-md border border-primary px-5 py-2 font-semibold text-primary underline underline-offset-4 focus-visible:outline focus-visible:outline-2">Make a private next-step plan</a>
+        </section>
 
         <AfterHoursSafetyStrip source="homepage_after_hours" showTonightLink />
 

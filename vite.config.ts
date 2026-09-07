@@ -19,6 +19,8 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Shared runtime helpers must not pull the Supabase SDK into React.
+          if (id.includes("commonjsHelpers") || id.includes("/tslib/")) return "vendor-helpers";
           if (!id.includes("node_modules")) return;
           if (id.includes("@zoom/meetingsdk")) return "vendor-zoom";
           if (id.includes("@supabase")) return "vendor-supabase";
