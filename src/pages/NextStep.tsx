@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import logo from "@/assets/logo.png";
 import { guideDisclaimer, nextStepPaths, urgentHelp } from "@/data/nextStepGuides";
 import "./NextStep.css";
+import NextStepFollowUp from "@/components/NextStepFollowUp";
 
 // Deliberately independent of Layout, auth, analytics, and contact widgets.
 export default function NextStep() {
@@ -59,7 +60,7 @@ export default function NextStep() {
         <p className="font-semibold text-primary">Not ready to call?</p>
         <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Make a plan for your next step</h1>
         <p className="mt-4 text-lg">You do not have to solve everything today. Choose what would help, then read a short guide. No name, email, or account needed.</p>
-        <p className="mt-4 rounded-lg border border-border bg-muted/40 p-4 text-sm" id="privacy-note">Your choices stay in this page's memory. We do not send or save them, or load analytics, session replay, chat, or popups here. Refreshing, leaving, or resetting clears them. The page visit may still appear in browser history and ordinary hosting logs. Downloaded or printed guides remain on your device or paper.</p>
+        <p className="mt-4 rounded-lg border border-border bg-muted/40 p-4 text-sm" id="privacy-note">Your choices stay in this page's memory. They are only sent to Matt if you submit the optional follow-up form and separately choose to share them. We do not load analytics, session replay, chat, or popups here. Refreshing, leaving, or resetting clears them. The page visit may still appear in browser history and ordinary hosting logs. Downloaded or printed guides remain on your device or paper.</p>
         <aside aria-labelledby="urgent-title" className="my-6 rounded-xl border border-amber-600/40 bg-amber-50 p-4 text-slate-900">
           <h2 id="urgent-title" className="font-bold">Need urgent help? Do not wait for a guide.</h2>
           <p className="mt-2">{urgentHelp}</p>
@@ -81,6 +82,7 @@ export default function NextStep() {
             <div><h3 className="font-semibold">Words you can adapt</h3><blockquote className="mt-2 border-l-4 border-primary pl-4">“{path.script}”</blockquote></div>
             <p className="text-sm text-muted-foreground">{guideDisclaimer}</p>
             <div className="next-step-controls"><p className="mb-3 text-sm">Keep a copy only if it is safe on this device. Downloading does not send an email.</p><div className="flex flex-wrap gap-3"><button type="button" className="next-step-button" onClick={download}>Download text guide</button><button type="button" className="next-step-button" onClick={() => window.print()}>Print guide</button></div></div>
+            <NextStepFollowUp key={`${pathIndex}-${choiceIndex}`} guideSummary={`${path.title}\n${choice.label}`} />
             <div className="next-step-controls border-t border-border pt-5"><h3 className="font-semibold">Want to reach a person later? Optional.</h3><p className="mt-2 mb-3 text-sm">The contact page offers phone, WhatsApp, and Family Squares options. Opening it does not send this guide, request a callback, or carry your choices over. Other site pages use the site's usual analytics. You can also stop here.</p><a className="next-step-button" href="/contact" rel="noreferrer">See contact options</a></div>
           </article>}
           <div className="next-step-controls mt-6 flex flex-wrap gap-4 border-t border-border pt-4">
