@@ -3258,6 +3258,12 @@ Keep being that person. Speak honestly, hold your boundaries, take care of yours
 
 If you have been in that spot, you are not a pushover — you are a person who loves someone and got asked an impossible question. The good news: you can decide your answer before the moment arrives. This article gives you the words.
 
+**What Should Your Family Do Before the Next Money Request?**
+
+Decide what support you can safely afford and write one calm response before the next call. For example: "I love you. I am not giving cash, but I can help with groceries today." Offer only what you can follow through on. A boundary describes what you will do; it is not a punishment or a way to force recovery.
+
+For help practicing that conversation, [LINK:get the FamilyBridge app:https://familybridgeapp.com] for AI-powered communication coaching and family accountability tools. Use it to support your family's conversations, not to replace professional care or emergency help. If money requests are dividing the family or you need help deciding on a boundary, [LINK:book private family coaching:/book-consultation] to work through your situation with a person.
+
 **Why Does a Loved One With Addiction Ask for Money So Often?**
 
 Money requests are common in addiction because substance use is expensive and it steadily crowds out the budget for everything else. Rent, food, and bills go unpaid not because your loved one doesn't care about them, but because addiction reorganizes priorities at a brain level. The request you hear is usually real — the bill probably does exist — and the money still often ends up serving the addiction.
