@@ -191,12 +191,123 @@ import rehabTreatmentTeamImg from "@/assets/blog-rehab-treatment-team-staff-cred
 import compareRehabProgramsImg from "@/assets/blog-how-to-compare-rehab-programs-family-scorecard.jpg";
 import readRehabReviewsImg from "@/assets/blog-how-to-read-rehab-reviews-family-guide.jpg";
 import matRehabQuestionsImg from "@/assets/blog-medication-assisted-treatment-rehab-questions-family-guide.jpg";
+import explanationOfBenefitsImg from "@/assets/blog-how-to-read-explanation-of-benefits-addiction-treatment.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 172,
+    slug: "how-to-read-explanation-of-benefits-addiction-treatment",
+    seoTitle: "How to Read an Explanation of Benefits for Addiction Treatment",
+    metaDescription: "Confused by the paperwork after rehab? Learn how to read an explanation of benefits for addiction treatment, spot billing errors, and avoid paying more than you owe.",
+    title: "How to Read an Explanation of Benefits for Addiction Treatment (and Catch Billing Mistakes)",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-09-07",
+    image: explanationOfBenefitsImg,
+    keywords: ["explanation of benefits for addiction treatment", "EOB", "rehab billing errors", "insurance claims", "medical necessity denial"],
+    excerpt: "Billing errors in behavioral health are common, and the family member who reads the paperwork carefully is usually the one who catches them. Here's how to read an EOB line by line.",
+    content: `Your loved one made it into treatment. Then the mail starts: envelopes from the insurance company, statements from the treatment center, pages of codes and dollar amounts that don't agree with each other. If you've ever stared at one of those pages and thought, "Do I actually owe this?" you are in good company.
+
+Learning to read an explanation of benefits for addiction treatment is one of the most practical skills a family can pick up. Billing errors in behavioral health are common, and the family member who reads the paperwork carefully is usually the one who catches them.
+
+**What is an explanation of benefits, and why isn't it a bill?**
+
+An explanation of benefits (EOB) is a statement from your insurance company showing how a claim was processed. It is not a bill. It tells you what the treatment center charged, what insurance allowed, what insurance paid, and what it calculates as your share.
+
+The actual bill comes from the treatment center, not the insurer. That matters because the two documents should match. When they don't, something needs a second look. Most EOBs say "This is not a bill" at the top, and families in crisis often toss them for that reason. Don't. The EOB is your evidence.
+
+**How do you read an explanation of benefits line by line?**
+
+Every EOB uses a slightly different layout, but they all contain the same handful of columns. Once you can name each one, the page stops looking like a foreign language.
+
+- **Date of service:** the day or range of days billed. Check that the dates match when your loved one was actually there.
+- **Provider:** who submitted the claim. Detox, residential, and outpatient may be billed under different names at the same campus.
+- **Service code:** what was done, such as detox, residential care, intensive outpatient, therapy, or lab work.
+- **Amount billed:** what the treatment center charged. Often far higher than what anyone will actually pay.
+- **Allowed amount:** what your insurance plan agreed the service is worth. For in-network providers, this is the ceiling. The provider cannot bill you above it.
+- **Plan paid:** what insurance actually sent to the provider.
+- **Your responsibility:** the deductible, copay, or coinsurance the insurer says you owe. This is the number to compare against the provider's bill.
+- **Remark codes:** short codes explaining why something was reduced or denied. The key is usually on the back page.
+
+Read the remark codes first. Phrases like "not medically necessary" or "authorization required" tell you whether a claim was paid cleanly or whether an appeal is coming. It helps to understand [how insurance determines medical necessity for addiction treatment](/blog/how-insurance-determines-medical-necessity-addiction-treatment) before you push back on a denial.
+
+**What are the most common billing errors in addiction treatment?**
+
+The most frequent mistakes are duplicate charges, wrong dates of service, and services billed at a higher level of care than what was delivered. Lab testing is another repeat offender. None of these are unusual, and most are fixable with a phone call.
+
+**Duplicate and overlapping charges**
+
+Look for the same service code on the same date more than once, and for residential days that overlap with detox days. Your loved one was in one level of care on a given day, not two.
+
+**Level of care mismatches**
+
+If your loved one stepped down from residential to outpatient on the 15th, but residential is billed through the 20th, that's a problem. Keep your own timeline of admission, step-down, and discharge dates. It becomes your reference for every statement that follows.
+
+**Lab and drug-testing charges**
+
+Drug testing is a legitimate part of treatment, but it has also been an area of abuse in this industry. If testing is billed daily or lab charges run into the thousands, ask the facility to explain the frequency and confirm the lab was in-network.
+
+**Out-of-network surprises**
+
+A facility can be in-network while a doctor, lab, or therapist working inside it is not. The federal No Surprises Act protects you from many of these bills, particularly for emergency care and for out-of-network providers working at in-network facilities. If a bill comes from a provider you never chose, question it.
+
+**What should you do when the EOB and the rehab bill don't match?**
+
+Call the treatment center's billing office first and ask them to walk you through the difference. Then call your insurer if the answer doesn't hold up. Keep notes of every call, including the date, the person's name, and what they told you. Here is a simple process that works:
+
+1. Lay the EOB and the provider statement side by side for the same dates of service.
+2. Compare the "your responsibility" figure on the EOB to the balance the provider says you owe. They should match.
+3. If an in-network provider is billing more than the EOB allows, say so plainly. In-network providers agreed not to balance bill.
+4. If a claim was denied, request the denial letter and the reason code definition in writing. This becomes the foundation for an appeal.
+5. Ask for an itemized bill if you don't have one. You're entitled to it, and it's much easier to audit than a summary.
+
+You don't need to be combative. A calm, specific question gets much further than frustration.
+
+**How can families stay organized through months of statements?**
+
+Treatment generates dozens of EOBs and statements over several months, and they rarely arrive in order. One folder, one timeline, and a habit of matching each EOB to its bill will keep you from paying anything twice.
+
+- Log each EOB as it arrives with the date of service and the amount you owe.
+- Don't pay a provider bill until you've seen the matching EOB. Providers sometimes bill before insurance has finished processing.
+- Ask the treatment center for a single point of contact in billing. One name, one extension.
+- If your loved one is an adult, make sure a signed release is on file so the facility and insurer can speak with you.
+
+Much of this gets easier if you [verify insurance benefits before rehab](/blog/verify-insurance-benefits-for-rehab-guide) so you already know your deductible, coinsurance, and authorization requirements before the first claim arrives.
+
+**Closing thoughts**
+
+Nobody signs up to become an expert in insurance paperwork. You're doing it because someone you love needed help, and you stepped up. The good news is that this skill compounds. Once you understand one EOB, you understand all of them. Read carefully, keep your timeline, ask direct questions, and don't pay what the paperwork can't justify. Your loved one's recovery deserves your energy far more than a billing error does.
+
+**Frequently Asked Questions**
+
+**What is an explanation of benefits for addiction treatment?**
+
+It's a statement from your insurance company showing how a rehab, detox, or outpatient claim was processed. It lists what was billed, what insurance allowed and paid, and what you may owe. It is not a bill, but it should match the provider's bill.
+
+**Why is the amount billed on my EOB so much higher than what insurance paid?**
+
+Treatment centers set list prices that are often far above the negotiated rate. For in-network care, the allowed amount is what matters, and the provider agreed to accept it. The billed amount is largely a starting number, not what you owe.
+
+**Can a rehab bill me more than my EOB says I owe?**
+
+An in-network provider generally cannot. They agreed to accept the allowed amount as payment in full, minus your deductible, copay, or coinsurance. If they bill above that, contact the facility and your insurer. Out-of-network providers may balance bill unless federal or state surprise billing protections apply.
+
+**What does "not medically necessary" mean on an EOB?**
+
+It means the insurer decided the level or length of care didn't meet its criteria for coverage. This is one of the most common denial reasons in addiction treatment, and it can be appealed. Ask for the denial in writing and the specific criteria used, then work with the treatment center on an appeal.
+
+**Who should I call first if a rehab bill looks wrong?**
+
+Start with the treatment center's billing department, since they submitted the claim and can correct errors. If their explanation doesn't line up with the EOB, call your insurer's member services line. Keep notes of every conversation.
+
+**Keep learning with Sober Helpline**
+
+Understanding the paperwork is one piece of a bigger picture. Our free Monday night "The Family Squares" calls are a good place to start, and [family coaching and membership](/family-membership) gives you a steady place to ask questions as treatment unfolds.`,
+  },
   {
     id: 171,
     slug: "medication-assisted-treatment-rehab-questions-family-guide",
