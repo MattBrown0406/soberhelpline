@@ -19,9 +19,12 @@ export default function NextStep() {
   useEffect(() => {
     // Do not restore a private guide from the browser's back-forward cache.
     const clear = () => { setPathIndex(null); setChoiceIndex(null); setComplete(false); setFeedback(""); };
+    const clearOnRestore = (event: PageTransitionEvent) => {
+      if (event.persisted) clear();
+    };
     window.addEventListener("pagehide", clear);
-    window.addEventListener("pageshow", clear);
-    return () => { window.removeEventListener("pagehide", clear); window.removeEventListener("pageshow", clear); };
+    window.addEventListener("pageshow", clearOnRestore);
+    return () => { window.removeEventListener("pagehide", clear); window.removeEventListener("pageshow", clearOnRestore); };
   }, []);
 
   const reset = () => {
