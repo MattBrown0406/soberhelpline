@@ -134,8 +134,49 @@ Deno.serve(async (req) => {
 
     const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
 
+    const normalizedEmail = client_email.toLowerCase().trim();
+
+    // Guard against duplicate bookings for the exact same slot (double submits / retries)
+    const { data: existingSlots } = await adminClient
+      .from('consultation_bookings')
+      .select('id, booking_date, start_time')
+      .eq('provider_id', provider.id)
+      .neq('status', 'cancelled')
+      .in('booking_date', bookings.map((b: any) => b.booking_date));
+
+    const takenKeys = new Set(
+      (existingSlots || []).map((b: any) => `${b.booking_date}|${String(b.start_time).slice(0, 5)}`)
+    );
+
+    const newBookings = bookings.filter(
+      (b: any) => !takenKeys.has(`${b.booking_date}|${String(b.start_time).slice(0, 5)}`)
+    );
+
+    if (newBookings.length === 0) {
+      const { data: already } = await adminClient
+        .from('consultation_bookings')
+        .select('id')
+        .eq('provider_id', provider.id)
+        .eq('client_email', normalizedEmail)
+        .neq('status', 'cancelled')
+        .in('booking_date', bookings.map((b: any) => b.booking_date));
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          duplicate: true,
+          bookingIds: (already || []).map((b: any) => b.id),
+          isMember,
+          amountCharged: totalAmount,
+          coachingPlanId,
+          processingComplete: true,
+        }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // Create booking records
-    const bookingInserts = bookings.map((b: any, index: number) => ({
+    const bookingInserts = newBookings.map((b: any, index: number) => ({
       provider_id: provider.id,
       client_user_id: userId, // null for guests
       booking_date: b.booking_date,
@@ -148,7 +189,7 @@ Deno.serve(async (req) => {
         service_type: isReadinessIntensive ? 'family-readiness-intensive' : intake_responses.service_type,
       } : (isReadinessIntensive ? { service_type: 'family-readiness-intensive' } : null),
       client_name,
-      client_email: client_email.toLowerCase().trim(),
+      client_email: normalizedEmail,
       client_phone: client_phone || null,
       status: 'confirmed',
       coaching_plan_id: coachingPlanId,
@@ -163,6 +204,7 @@ Deno.serve(async (req) => {
       console.error('Booking insert error:', insertError);
       return new Response(JSON.stringify({ error: 'Failed to create booking' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
+
 
     // Process each booking (Zoom + emails). If processing fails, the paid booking
     // remains recorded but the response carries a warning, and the recovery job will retry.

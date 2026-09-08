@@ -221,19 +221,37 @@ Deno.serve(async (req) => {
         });
       }
 
-      // Get pending order
-      const { data: pendingOrder, error: fetchError } = await adminClient
+      // Atomically claim the pending order so concurrent/duplicate capture calls
+      // (double-clicks, React re-mounts, PayPal retries) cannot create two bookings.
+      const { data: claimedRows } = await adminClient
         .from('pending_consultation_orders')
-        .select('*')
+        .update({ status: 'capturing' })
         .eq('paypal_order_id', orderId)
         .eq('status', 'pending')
-        .single();
+        .select('*');
 
-      if (fetchError || !pendingOrder) {
+      const pendingOrder = claimedRows?.[0];
+
+      if (!pendingOrder) {
+        // Already claimed/processed by another request — return the existing booking instead of duplicating.
+        const { data: existingBookings } = await adminClient
+          .from('consultation_bookings')
+          .select('id')
+          .eq('paypal_order_id', orderId);
+
+        if (existingBookings?.length) {
+          return new Response(JSON.stringify({
+            success: true,
+            duplicate: true,
+            bookingIds: existingBookings.map((b: any) => b.id),
+          }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        }
+
         return new Response(JSON.stringify({ error: 'Order not found or already processed' }), {
           status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
+
 
       // Capture PayPal payment
       const accessToken = await getPayPalAccessToken();

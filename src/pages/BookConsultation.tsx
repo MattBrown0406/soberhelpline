@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
@@ -199,18 +199,25 @@ const BookConsultation = () => {
   const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
-  // Handle PayPal return - capture payment after redirect back
+  // Handle PayPal return - capture payment after redirect back (exactly once)
+  const captureStartedRef = useRef(false);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const paypalToken = params.get("token");
     const paypalOrderId = params.get("paypal_order_id") || paypalToken;
-    if (paypalOrderId && !paymentProcessing) {
-      capturePayment(paypalOrderId);
-    }
+    if (!paypalOrderId) return;
+    if (captureStartedRef.current) return;
+    if (sessionStorage.getItem(`consult_capture_${paypalOrderId}`)) return;
+    captureStartedRef.current = true;
+    sessionStorage.setItem(`consult_capture_${paypalOrderId}`, "1");
+    // Remove the order token from the URL so a refresh cannot re-trigger capture
+    window.history.replaceState({}, "", window.location.pathname);
+    capturePayment(paypalOrderId);
   }, []);
 
   const capturePayment = async (orderId: string) => {
     setPaymentProcessing(true);
+
     try {
       const { data, error } = await supabase.functions.invoke("consultation-payment", {
         body: { action: "capture-order", orderId },
