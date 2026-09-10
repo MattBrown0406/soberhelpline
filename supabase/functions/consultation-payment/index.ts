@@ -266,25 +266,36 @@ Deno.serve(async (req) => {
       }
 
 
-      // Capture PayPal payment
-      const accessToken = await getPayPalAccessToken();
-      const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      // Capture PayPal payment. If anything fails before the money moves, release the
+      // claim back to 'pending' so the customer can retry instead of being locked out.
+      let captureData: any;
+      try {
+        const accessToken = await getPayPalAccessToken();
+        const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
 
-      if (!captureResponse.ok) {
-        const error = await captureResponse.text();
-        console.error('PayPal capture error:', error);
-        throw new Error('Payment capture failed');
-      }
+        if (!captureResponse.ok) {
+          const error = await captureResponse.text();
+          console.error('PayPal capture error:', error);
+          throw new Error('Payment capture failed');
+        }
 
-      const captureData = await captureResponse.json();
-      if (captureData.status !== 'COMPLETED') {
-        throw new Error(`Payment not completed. Status: ${captureData.status}`);
+        captureData = await captureResponse.json();
+        if (captureData.status !== 'COMPLETED') {
+          throw new Error(`Payment not completed. Status: ${captureData.status}`);
+        }
+      } catch (captureErr) {
+        await adminClient
+          .from('pending_consultation_orders')
+          .update({ status: 'pending' })
+          .eq('id', pendingOrder.id)
+          .eq('status', 'capturing');
+        throw captureErr;
       }
 
       console.log(`Payment captured for order ${orderId}`);
