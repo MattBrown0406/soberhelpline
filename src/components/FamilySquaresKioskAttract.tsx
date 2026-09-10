@@ -26,10 +26,10 @@ export default function FamilySquaresKioskAttract({ onDismiss }: FamilySquaresKi
           src={kioskLogo}
           alt="Sober Helpline — Family Addiction Support and Education"
         />
-        <span className="kiosk-attract__title">Free Online Family Addiction Support</span>
-        <span className="kiosk-attract__subtitle">Compassionate guidance. A community that understands.</span>
+        <span className="kiosk-attract__title">You care deeply.<br />You don’t have to figure this out alone.</span>
+        <span className="kiosk-attract__subtitle">Get education and support for the difficult decisions that come with loving someone affected by addiction.</span>
         <span className="kiosk-attract__details">Family Squares · Mondays at 7:00 PM Pacific · Open to everyone</span>
-        <span className="kiosk-attract__tap">Tap anywhere to register</span>
+        <span className="kiosk-attract__tap">Tap to take the next step.</span>
       </span>
     </button>
   );
