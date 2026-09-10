@@ -230,7 +230,20 @@ Deno.serve(async (req) => {
         .eq('status', 'pending')
         .select('*');
 
-      const pendingOrder = claimedRows?.[0];
+      let pendingOrder = claimedRows?.[0];
+
+      // Recover orders left stuck in 'capturing' by an earlier failed attempt.
+      if (!pendingOrder) {
+        const staleCutoff = new Date(Date.now() - 3 * 60 * 1000).toISOString();
+        const { data: stuckRows } = await adminClient
+          .from('pending_consultation_orders')
+          .update({ status: 'capturing' })
+          .eq('paypal_order_id', orderId)
+          .eq('status', 'capturing')
+          .lt('created_at', staleCutoff)
+          .select('*');
+        pendingOrder = stuckRows?.[0];
+      }
 
       if (!pendingOrder) {
         // Already claimed/processed by another request — return the existing booking instead of duplicating.
