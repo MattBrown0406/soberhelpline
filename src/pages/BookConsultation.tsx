@@ -210,8 +210,6 @@ const BookConsultation = () => {
     if (sessionStorage.getItem(`consult_capture_${paypalOrderId}`)) return;
     captureStartedRef.current = true;
     sessionStorage.setItem(`consult_capture_${paypalOrderId}`, "1");
-    // Remove the order token from the URL so a refresh cannot re-trigger capture
-    window.history.replaceState({}, "", window.location.pathname);
     capturePayment(paypalOrderId);
   }, []);
 
@@ -268,6 +266,7 @@ const BookConsultation = () => {
       }
 
       // Clean up URL and navigate to onboarding
+      window.history.replaceState({}, "", window.location.pathname);
       const storedPlan = localStorage.getItem("consultation_plan_type") || "single";
       localStorage.removeItem("consultation_plan_type");
       navigate(`/coaching-onboarding?plan=${storedPlan}`, { replace: true });
@@ -275,11 +274,12 @@ const BookConsultation = () => {
       console.error("Payment capture error:", err);
       toast({
         title: "Payment Error",
-        description: "There was an issue processing your payment. Please contact us at matt@soberhelpline.com",
+        description: "There was an issue processing your payment. Please refresh this page to try again, or contact us at matt@soberhelpline.com",
         variant: "destructive",
       });
-      // Clear URL params
-      window.history.replaceState({}, '', window.location.pathname);
+      // Allow the customer to retry the capture by refreshing the page
+      sessionStorage.removeItem(`consult_capture_${orderId}`);
+      captureStartedRef.current = false;
       setPaymentProcessing(false);
     }
   };

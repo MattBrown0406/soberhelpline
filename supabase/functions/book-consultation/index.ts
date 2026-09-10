@@ -139,18 +139,40 @@ Deno.serve(async (req) => {
     // Guard against duplicate bookings for the exact same slot (double submits / retries)
     const { data: existingSlots } = await adminClient
       .from('consultation_bookings')
-      .select('id, booking_date, start_time')
+      .select('id, booking_date, start_time, client_email')
       .eq('provider_id', provider.id)
       .neq('status', 'cancelled')
       .in('booking_date', bookings.map((b: any) => b.booking_date));
 
-    const takenKeys = new Set(
-      (existingSlots || []).map((b: any) => `${b.booking_date}|${String(b.start_time).slice(0, 5)}`)
+    const slotKey = (b: any) => `${b.booking_date}|${String(b.start_time).slice(0, 5)}`;
+
+    // Slots already booked by THIS client = duplicate submit (safe to skip).
+    const ownKeys = new Set(
+      (existingSlots || [])
+        .filter((b: any) => String(b.client_email || '').toLowerCase().trim() === normalizedEmail)
+        .map(slotKey)
+    );
+    // Slots taken by SOMEONE ELSE = real conflict; never silently drop them.
+    const conflictKeys = new Set(
+      (existingSlots || [])
+        .filter((b: any) => String(b.client_email || '').toLowerCase().trim() !== normalizedEmail)
+        .map(slotKey)
     );
 
-    const newBookings = bookings.filter(
-      (b: any) => !takenKeys.has(`${b.booking_date}|${String(b.start_time).slice(0, 5)}`)
-    );
+    const conflicting = bookings.filter((b: any) => conflictKeys.has(slotKey(b)));
+    if (conflicting.length > 0) {
+      console.error('Slot conflict with another client:', conflicting);
+      return new Response(
+        JSON.stringify({
+          error: 'One or more of the selected times were just booked by someone else. Our team will contact you to reschedule.',
+          slotConflict: true,
+          conflictingSlots: conflicting.map((b: any) => ({ booking_date: b.booking_date, start_time: b.start_time })),
+        }),
+        { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const newBookings = bookings.filter((b: any) => !ownKeys.has(slotKey(b)));
 
     if (newBookings.length === 0) {
       const { data: already } = await adminClient
