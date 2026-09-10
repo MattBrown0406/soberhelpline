@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { registrationSource, registrationSourceLabels, type RegistrationSource } from "@/lib/registrationSource";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +39,7 @@ interface Registration {
   meeting_date: string;
   auto_register?: boolean | null;
   language?: string | null;
+  registration_source?: string | null;
 }
 
 function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[]) {
@@ -45,6 +47,13 @@ function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[])
   const auto: T[] = [];
   list.forEach((r) => (r.auto_register ? auto.push(r) : manual.push(r)));
   return { manual, auto };
+}
+
+function SourceBadge({ r }: { r: Registration }) {
+  const source = registrationSource(r);
+  return <Badge variant={source === "kiosk" ? "default" : "outline"} aria-label={`Registration source: ${registrationSourceLabels[source]}`}>
+    {registrationSourceLabels[source]}
+  </Badge>;
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
@@ -55,7 +64,7 @@ function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: numbe
         <div className="flex items-center gap-2">
           <span className="flex items-center justify-center h-5 w-5 rounded-full bg-primary/10 text-primary text-xs font-bold">{index + 1}</span>
           <span className="font-medium text-foreground text-sm">{r.name}</span>
-          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge><SourceBadge r={r} />
           {isBlocked && (
             <Badge variant="destructive" className="text-[10px] gap-1">
               <ShieldAlert className="h-3 w-3" />
@@ -89,6 +98,8 @@ export function ZoomLinkSettings() {
   const [saving, setSaving] = useState(false);
   const [allRegistrations, setAllRegistrations] = useState<Registration[]>([]);
   const [loadingRegistrations, setLoadingRegistrations] = useState(true);
+  const [sourceFilter, setSourceFilter] = useState<"all" | RegistrationSource>("all");
+  const [registrationsError, setRegistrationsError] = useState(false);
   const [blocklist, setBlocklist] = useState<{ emails: Set<string>; lastNames: Set<string> }>({ emails: new Set(), lastNames: new Set() });
 
   useEffect(() => {
@@ -139,16 +150,27 @@ export function ZoomLinkSettings() {
 
   const fetchAllRegistrations = async () => {
     try {
-      const { data, error } = await supabase
-        .from("zoom_meeting_registrations")
-        .select("*")
-        .order("meeting_date", { ascending: false })
-        .order("created_at", { ascending: true });
-
-      if (error) throw error;
-      setAllRegistrations(data || []);
+      setLoadingRegistrations(true);
+      setRegistrationsError(false);
+      // Read every page before showing totals or applying source filters.
+      const registrations: Registration[] = [];
+      const pageSize = 500;
+      for (let offset = 0; ; offset += pageSize) {
+        const { data, error } = await supabase
+          .from("zoom_meeting_registrations")
+          .select("id,name,email,phone,question,request_follow_up,consent_email_list,created_at,meeting_date,auto_register,language,registration_source")
+          .order("meeting_date", { ascending: false })
+          .order("created_at", { ascending: true })
+          .order("id", { ascending: true })
+          .range(offset, offset + pageSize - 1);
+        if (error) throw error;
+        registrations.push(...(data || []));
+        if (!data || data.length < pageSize) break;
+      }
+      setAllRegistrations(registrations);
     } catch (err) {
-      console.error("Error fetching registrations:", err);
+      setAllRegistrations([]);
+      setRegistrationsError(true);
     } finally {
       setLoadingRegistrations(false);
     }
@@ -157,29 +179,25 @@ export function ZoomLinkSettings() {
   const nextMonday = getNextMonday();
 
   // Derive filtered lists
-  const upcomingRegistrations = allRegistrations.filter(r => r.meeting_date === nextMonday);
+  const filteredRegistrations = allRegistrations.filter(r => sourceFilter === "all" || registrationSource(r) === sourceFilter);
+  const upcomingRegistrations = filteredRegistrations.filter(r => r.meeting_date === nextMonday);
   const questionsOnly = upcomingRegistrations.filter(r => r.question && r.question.trim() !== "");
   const followUpsOnly = upcomingRegistrations.filter(r => r.request_follow_up);
 
   // Past follow-ups (grouped by date)
   const pastFollowUps: Record<string, Registration[]> = {};
-  allRegistrations.forEach(r => {
+  filteredRegistrations.forEach(r => {
     if (r.request_follow_up && r.meeting_date !== nextMonday) {
       if (!pastFollowUps[r.meeting_date]) pastFollowUps[r.meeting_date] = [];
       pastFollowUps[r.meeting_date].push(r);
     }
   });
 
-  // Archive: group all by date, dedup by email within each week
+  // Preserve individual submissions: the same email can use different sources.
   const allWeeks: Record<string, Registration[]> = {};
-  allRegistrations.forEach((r) => {
+  filteredRegistrations.forEach((r) => {
     if (!allWeeks[r.meeting_date]) allWeeks[r.meeting_date] = [];
-    const isDuplicate = allWeeks[r.meeting_date].some(
-      (existing) => existing.email.toLowerCase() === r.email.toLowerCase()
-    );
-    if (!isDuplicate) {
-      allWeeks[r.meeting_date].push(r);
-    }
+    allWeeks[r.meeting_date].push(r);
   });
 
   const handleSave = async () => {
@@ -308,6 +326,20 @@ export function ZoomLinkSettings() {
 
       <Separator />
 
+      <div className="space-y-2">
+        <Label htmlFor="registration-source-filter">Registration source</Label>
+        <select id="registration-source-filter" className="block rounded-md border border-input bg-background px-3 py-2 text-sm" value={sourceFilter}
+          onChange={event => setSourceFilter(event.target.value as "all" | RegistrationSource)}>
+          <option value="all">All sources</option>
+          <option value="kiosk">Kiosk</option>
+          <option value="automatic">Automatic</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <p className="text-sm text-muted-foreground">Source applies to each registration, not the person's original signup. Older records and default website values are Unknown because website origin was not reliably recorded.</p>
+        {registrationsError ? <div role="alert">Registrations could not be loaded. <Button variant="outline" onClick={fetchAllRegistrations}>Retry registrations</Button></div>
+          : !loadingRegistrations && <p role="status" className="text-sm">{filteredRegistrations.length} of {allRegistrations.length} registration records match. The filter applies to questions, follow-ups, and the archive below.</p>}
+      </div>
+
       {/* Questions Section — only registrants who submitted questions */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -346,7 +378,7 @@ export function ZoomLinkSettings() {
                     <div className="flex items-center gap-2">
                       <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary text-xs font-bold">{i + 1}</span>
                       <span className="font-medium text-foreground">{r.name}</span>
-                      <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                      <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge><SourceBadge r={r} />
                       {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
                     </div>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
@@ -438,7 +470,7 @@ export function ZoomLinkSettings() {
                       <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <span className="font-medium text-foreground flex items-center gap-2">
                           {r.name}
-                          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge>
+                          <Badge variant="outline" className="text-[10px] px-1.5">{lang}</Badge><SourceBadge r={r} />
                           {r.auto_register && <Badge variant="outline" className="text-[10px]">Auto</Badge>}
                         </span>
                         <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
@@ -495,7 +527,7 @@ export function ZoomLinkSettings() {
                       <div className="space-y-2 pl-6">
                         {regs.map((r) => (
                           <div key={r.id} className="border border-border rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 bg-muted/30">
-                            <span className="font-medium text-foreground">{r.name}</span>
+                            <span className="font-medium text-foreground">{r.name}<SourceBadge r={r} /></span>
                             <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                               <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
                               <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
@@ -522,7 +554,7 @@ export function ZoomLinkSettings() {
             Weekly Registration Archive
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            All registrations grouped by week. The upcoming meeting appears first. Duplicates are removed.
+            Matching registration records grouped by week. Repeat submissions are kept so no source history is hidden.
           </p>
         </div>
 
@@ -532,7 +564,7 @@ export function ZoomLinkSettings() {
           </div>
         ) : Object.keys(allWeeks).length === 0 ? (
           <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
-            No meeting registrations yet.
+            No registration records match this source filter.
           </div>
         ) : (
           <div className="space-y-3">
@@ -546,7 +578,7 @@ export function ZoomLinkSettings() {
                         <CalendarDays className="h-4 w-4 text-primary" />
                         <span className="font-medium">{formatDate(date)}</span>
                         {isUpcoming && <Badge variant="default" className="text-xs">Upcoming</Badge>}
-                        <Badge variant="secondary" className="text-xs">{regs.length} registrant{regs.length !== 1 ? "s" : ""}</Badge>
+                        <Badge variant="secondary" className="text-xs">{regs.length} registration{regs.length !== 1 ? "s" : ""}</Badge>
                       </span>
                       <ChevronDown className="h-4 w-4" />
                     </Button>
