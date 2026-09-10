@@ -193,12 +193,107 @@ import readRehabReviewsImg from "@/assets/blog-how-to-read-rehab-reviews-family-
 import matRehabQuestionsImg from "@/assets/blog-medication-assisted-treatment-rehab-questions-family-guide.jpg";
 import explanationOfBenefitsImg from "@/assets/blog-how-to-read-explanation-of-benefits-addiction-treatment.jpg";
 import insuranceStoppedPayingImg from "@/assets/blog-insurance-stopped-paying-for-rehab-mid-treatment.jpg";
+import singleCaseAgreementImg from "@/assets/blog-single-case-agreement-rehab.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 174,
+    slug: "single-case-agreement-rehab-out-of-network-insurance",
+    seoTitle: "Single Case Agreement for Rehab: Cover Out-of-Network Care",
+    metaDescription: "A single case agreement can get out-of-network rehab covered at in-network rates. Learn what it is, when insurers approve one, and how families ask for it.",
+    title: "Single Case Agreement for Rehab: How Families Get Out-of-Network Treatment Covered",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-09-10",
+    image: singleCaseAgreementImg,
+    keywords: ["single case agreement for rehab", "out-of-network rehab coverage", "gap exception", "network exception", "insurance appeal addiction treatment"],
+    excerpt: "The program that fits is out of network and the estimate takes your breath away. Before you assume it's pay full price or pick somewhere else, there is a third option most families have never heard of.",
+    content: `The program that finally feels right for your loved one is out of network. The clinical fit is good, and then the insurance estimate lands and the number takes your breath away. Before you assume the choice is "pay full price or pick a different program," there is a third option most families have never heard of: a single case agreement for rehab.
+
+A single case agreement is a one-time contract between your insurance company and an out-of-network provider that covers a specific person for a specific episode of care, usually at in-network rates. It is not guaranteed, and it takes some legwork. But families get them approved every week, and knowing the process puts you in a far stronger position.
+
+## What Is a Single Case Agreement for Rehab?
+
+A single case agreement (often called an SCA) is a negotiated contract in which your insurance plan agrees to pay an out-of-network treatment program as if it were in network, for one patient and one course of treatment. The program accepts the negotiated rate, and you are billed at your in-network cost-sharing level. It ends when that episode of care ends.
+
+Nearly every commercial plan has this mechanism, though the name varies: network exception, gap exception, or network deficiency waiver. The important shift for families is this: the SCA is not a favor. It is a standard tool the insurer already has. Your job is to show them why this case qualifies. If you are still sorting out the basics, start with [in-network vs. out-of-network rehab](/blog/in-network-vs-out-of-network-rehab-family-guide).
+
+## When Does Insurance Approve a Single Case Agreement?
+
+Insurers approve single case agreements when they are persuaded that in-network options cannot meet your loved one's clinical needs within a reasonable time and distance. The strongest requests are built on a specific gap, not a preference. "We liked this program better" will not get approved. "No in-network residential program within 100 miles treats opioid use disorder alongside an eating disorder" often will.
+
+Grounds that carry weight:
+
+- **Network inadequacy:** no in-network program offers the required level of care (detox, residential, partial hospitalization, IOP) within the plan's own distance or wait-time standards.
+- **Specialized clinical need:** a co-occurring mental health diagnosis, a medical complication, pregnancy, adolescence, or a specific medication protocol that in-network programs do not provide.
+- **Continuity of care:** your loved one is already engaged with this provider or it is the natural step-down from a facility that just discharged them.
+- **Failed in-network attempts:** prior in-network admissions that did not hold, with clinicians recommending a different type of program.
+- **Unsafe waitlist:** your loved one is in active withdrawal or recently overdosed and the in-network bed is three weeks out.
+
+## How Do You Ask for a Single Case Agreement?
+
+You ask by calling the member services number on the insurance card, stating that you are requesting a single case agreement for a specific provider, and then getting the program's admissions or billing team to carry the clinical side. In practice, the program does most of the negotiating. Your role is to open the door and keep it open.
+
+1. **Call the plan first.** Say: "I am requesting a single case agreement for out-of-network substance use treatment because no in-network provider can meet my family member's needs. What is your process and what documentation do you need?" Record the representative's name, the date, and a reference number.
+2. **Ask for the network adequacy standard.** Most plans have written rules for how far a member should travel and how long they should wait. If the in-network options fail those standards, you have your argument.
+3. **Get the list of in-network alternatives and call them.** Ask about waitlists, whether they treat the specific diagnosis, and whether they offer the required level of care. Every "we don't treat that" or "next bed is in four weeks" is evidence.
+4. **Loop in the program you want.** Share your reference number and notes. A good program has a billing or utilization review specialist who has done this many times and will submit the clinical justification and propose a rate.
+5. **Get a treating clinician on record.** A letter from a physician, psychiatrist, or therapist stating why this program is medically necessary and why in-network options are inadequate is the most persuasive document you can supply.
+6. **Follow up in writing.** After each call, send a short message through the member portal summarizing what was said. Paper trails matter if you need to appeal.
+
+Expect a few days to two weeks. If the situation is urgent, say "urgent" on every call and ask for an expedited review; many plans must decide within 72 hours when delay could seriously jeopardize health. A thorough [insurance benefits check before admission](/blog/verify-insurance-benefits-for-rehab-guide) gives you most of the numbers you will need on these calls.
+
+## What Should Families Watch For?
+
+Watch for two things: programs that promise an SCA before one exists, and agreements that leave you exposed on cost. A single case agreement is not final until you have it in writing from the insurer with approved dates, level of care, and rate. Until then, treat it as pending.
+
+Before your loved one admits, ask:
+
+- Is the agreement approved or still being negotiated? If pending, what do we owe if it is denied?
+- What exactly is covered: detox, residential, step-down levels, or only one?
+- Will we be balance billed for the difference between the program's usual rate and the negotiated rate? The correct answer is no.
+- How much of our in-network deductible and out-of-pocket maximum have we already met this year?
+
+Be cautious with any program that says "don't worry, we'll get insurance to cover it" without explaining how. Honest programs tell you the SCA is possible, not certain, and what the fallback cost looks like.
+
+If the SCA is denied, appeal it. A denial for "no clinical justification" is fixed with a stronger clinician letter. A denial for "adequate in-network options exist" is fixed by documenting that those options do not exist for this diagnosis and timeline.
+
+## You Are Allowed to Ask
+
+Families often approach insurance the way they approach their loved one's addiction: hoping that if they are patient and polite enough, the right thing will happen on its own. It rarely does. Insurance systems respond to specific, documented, persistent requests. You need a reference number, a notebook, and the willingness to make the second and third call.
+
+A single case agreement will not be the answer in every situation. But it is a real option that exists inside your plan right now, and asking costs nothing but a few phone calls. That is a trade worth making when the alternative is settling for a program that does not fit or paying a bill that was never necessary.
+
+## Frequently Asked Questions About Single Case Agreements for Rehab
+
+### What is a single case agreement in addiction treatment?
+
+A single case agreement is a one-time contract between an insurance plan and an out-of-network rehab that covers one patient for one episode of treatment, usually at in-network rates. It is used when in-network programs cannot appropriately meet the patient's needs, and it ends when that course of treatment is complete.
+
+### How long does it take to get a single case agreement approved?
+
+Most take a few days to two weeks, depending on how quickly the program submits clinical documentation. If the situation is urgent, ask for an expedited review, which many plans must decide within 72 hours.
+
+### Can I get a single case agreement if I just prefer a certain rehab?
+
+Preference alone is rarely enough. Insurers approve SCAs based on a documented gap in the network, such as no in-network program offering the required level of care, specialty, or timeline. Frame the request around what in-network programs cannot provide and support it with a clinician's letter.
+
+### Will I be balance billed under a single case agreement?
+
+You should not be. Under a properly executed SCA, the program accepts the negotiated rate as payment in full, and you pay only your in-network deductible, copay, or coinsurance. Confirm this in writing before admission.
+
+### Does a single case agreement cover sober living?
+
+Usually not. SCAs cover clinical levels of care such as detox, residential, partial hospitalization, or intensive outpatient. Sober living is generally not a covered benefit under most plans regardless of network status, so budget for it separately.
+
+## You Do Not Have to Figure This Out Alone
+
+Getting a loved one into the right treatment is hard enough without feeling outmatched by the insurance side of it. Sober Helpline exists to make that part easier. Explore the education library, join the free Monday night [Family Squares](/monday-zoom-registration) call, book [one-on-one family coaching](/family-coaching) with a specialist who has walked families through exactly this kind of call, or explore [membership](/family-membership) when you're ready.`,
+  },
   {
     id: 173,
     slug: "insurance-stopped-paying-for-rehab-mid-treatment",
