@@ -193,6 +193,7 @@ import readRehabReviewsImg from "@/assets/blog-how-to-read-rehab-reviews-family-
 import matRehabQuestionsImg from "@/assets/blog-medication-assisted-treatment-rehab-questions-family-guide.jpg";
 import explanationOfBenefitsImg from "@/assets/blog-how-to-read-explanation-of-benefits-addiction-treatment.jpg";
 import insuranceStoppedPayingImg from "@/assets/blog-insurance-stopped-paying-for-rehab-mid-treatment.jpg";
+import singleCaseAgreementImg from "@/assets/blog-single-case-agreement-rehab.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
