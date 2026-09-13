@@ -202,6 +202,108 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 175,
+    slug: "alcohol-blackouts-explained-family-guide",
+    seoTitle: "Alcohol Blackouts Explained: Why They Don't Remember",
+    metaDescription: "Alcohol blackouts explained for families: what a blackout is, why your loved one can't remember, what it says about their drinking, and how to respond.",
+    title: "Alcohol Blackouts Explained: Why Your Loved One Doesn't Remember What Happened",
+    category: "Understanding Addiction",
+    author: "Matt Brown",
+    date: "2026-09-13",
+    image: alcoholBlackoutsImg,
+    keywords: ["alcohol blackouts", "blackout drinking", "en bloc blackout", "alcohol and memory loss", "signs of alcoholism"],
+    excerpt: "They talked, agreed, apologized — and the next morning it's gone. Here is what an alcohol blackout actually is, what it says about their drinking, and how to respond.",
+    content: `You had the conversation. Maybe it was a hard one, maybe it was a good one. Then the next morning your loved one looks at you blankly and says, "What are you talking about?" They aren't stalling. They have no memory of it at all.
+
+If you're living with someone who drinks, alcohol blackouts may be one of the most confusing parts of the whole picture. They look awake. They talk, drive, argue, make promises. And then it's gone. This article explains what a blackout actually is, what it does and doesn't tell you about your loved one's drinking, and how to respond in a way that helps.
+
+## What Is an Alcohol Blackout?
+
+An alcohol blackout is a period of time when a person is awake and functioning but their brain is not recording new memories. It is not the same as passing out. Someone in a blackout can walk, talk, text, and carry on a full conversation, and later have no memory of any of it.
+
+The technical term is anterograde amnesia. Alcohol, especially when blood alcohol rises fast, interferes with the hippocampus, the part of the brain that turns short-term experiences into long-term memory. The person is still "there" in the moment. The recording just isn't being saved.
+
+There are two types. Fragmentary blackouts ("brownouts") leave pieces that may return when someone fills in details. En bloc blackouts are a complete gap that never comes back.
+
+## Why Does My Loved One Not Remember Anything?
+
+They don't remember because the memory was never stored in the first place. This is the part that's hard to accept: they are not choosing to forget, and they can't retrieve it later with effort. The information simply isn't there.
+
+Blackouts are most likely when blood alcohol rises quickly: drinking fast, on an empty stomach, or mixed with sedatives or sleep medications.
+
+This is also why the conversation you had at 11 p.m. didn't count. Your loved one may have agreed to get help, apologized sincerely, or promised to stop, and meant every word in the moment. But if the hippocampus was offline, that agreement doesn't exist for them the next day. You are holding a memory they never made.
+
+## Are Alcohol Blackouts a Sign of Alcoholism?
+
+Not by themselves, but they are a serious warning sign. A single blackout means someone drank enough, fast enough, to shut down memory formation. Repeated blackouts mean that pattern is happening over and over, and that the person is regularly drinking at a level that impairs judgment, safety, and self-awareness.
+
+Research links frequent blackouts to higher rates of alcohol use disorder and injury. If your loved one has them more than occasionally, or shrugs them off as normal, take that seriously even if they don't drink every day.
+
+## What Alcohol Blackouts Reveal About the Brain and Addiction
+
+Blackouts show, in real time, that alcohol changes [how alcohol affects the brain](/blog/dopamine-and-addiction-brain-science-for-families) while a person is still on their feet. The same drinking that erases memory also affects the prefrontal cortex, which handles judgment, impulse control, and reading the consequences of an action. So the person in a blackout is often making worse decisions and won't remember making them.
+
+For families, this explains a pattern that feels like gaslighting but often isn't. Your loved one may deny saying something cruel, driving home, or spending money because, from where they sit, it never happened. Their confidence is real. Their memory is just missing.
+
+One more thing: tolerance doesn't protect against blackouts. Someone with high tolerance can drink enough to black out while still seeming composed, so nobody notices until the next day.
+
+## How Should Families Respond to Alcohol Blackouts?
+
+Respond with facts, not accusations, and shift important conversations to sober hours. Trying to reason with someone about their drinking while they're drinking is like leaving a voicemail on a phone that's turned off.
+
+Here's what tends to work:
+
+- Have real conversations when they are sober, ideally the next day when the gap is fresh. "You don't remember our conversation last night. That scares me. Can we talk about it now?" Our guide on [how to talk to a loved one about their drinking](/blog/how-to-talk-about-loved-ones-addiction) walks through the wording.
+- Describe what happened without dramatizing it. "You called me three times, and you don't remember any of it." Facts are harder to argue with than feelings.
+- Stop re-litigating the blackout itself. Arguing about whether they said something they can't remember goes nowhere. Focus on the pattern.
+- Keep a simple, private record of dates and what happened, because memory gaps make it easy for everyone to lose track of how often this is happening.
+- Take safety seriously. Someone in a blackout can drive, fall, or end up somewhere dangerous. If blackouts are happening, plan for rides and check-ins ahead of time.
+
+What doesn't work: greeting them the next morning with a list of everything they did wrong. Shame pushes people deeper into drinking, not out of it. Calm and clear beats loud and hurt, even though loud and hurt is completely understandable.
+
+## What If They Use Blackouts as an Excuse?
+
+Some people do. "I don't remember, so it doesn't count." The answer is that the impact counts whether or not the memory does. You can say that plainly: "I believe you don't remember. I still need to talk about what happened and what changes." Not remembering explains the behavior. It doesn't erase the responsibility.
+
+## A Word to Anyone Reading This About Yourself
+
+If you're the one having blackouts: they are not a normal part of drinking. Plenty of people drink their whole lives and never have one. If you're regularly losing hours, the people who love you are carrying memories you don't have. You don't have to decide today that you have a problem. You do have to look at how often this is happening. Talking to a doctor or counselor is a reasonable next step, not an admission of failure.
+
+## Moving Forward
+
+Blackouts are frightening because they show how much alcohol can take over while the person still looks like themselves. Understanding the brain doesn't fix it, but it takes some of the personal sting out. Your loved one isn't lying about what they remember. They're drinking in a way that steals memory. Those are different problems. You can't make someone remember. You can decide how you respond, when you talk, and what you'll keep doing while you wait for them to be ready.
+
+## Frequently Asked Questions About Alcohol Blackouts
+
+### What is the difference between a blackout and passing out?
+
+Passing out means losing consciousness. A blackout means the person is awake and active but their brain isn't storing memories. Someone in a blackout can talk, walk, and make decisions, then have no recollection later.
+
+### How much alcohol causes a blackout?
+
+There's no set number. Blackouts depend more on how fast blood alcohol rises than on how much is consumed. Most occur around 0.14 percent blood alcohol or higher, but it varies by person.
+
+### Can someone in a blackout seem completely normal?
+
+Yes, and that's what makes them dangerous. People with high tolerance especially can appear composed, hold conversations, and drive while in a blackout. Often no one realizes until the next day.
+
+### Do blackouts mean someone is an alcoholic?
+
+Not automatically, but repeated blackouts are a strong warning sign and are linked to higher rates of alcohol use disorder. If they happen more than occasionally, it's worth a professional assessment.
+
+### Will memory come back after a blackout?
+
+With fragmentary blackouts, some memories may return when the person is reminded. With complete (en bloc) blackouts, the memories were never formed and won't come back.
+
+### How do I talk to my loved one about their blackouts?
+
+Wait until they're sober, describe specific facts calmly, and focus on the pattern rather than a single night. Say what you need to change rather than trying to make them feel bad about what they can't remember.
+
+## You Don't Have to Figure This Out Alone
+
+Sober Helpline exists for families living with drinking that scares them. You'll find education on how addiction works, [family coaching](/family-coaching) to help you decide what to say and when, and a community of families who know what a blackout morning feels like. Start with our free Monday night [Family Squares](/monday-zoom-registration) call, and explore [membership](/family-membership) when you're ready.\`,
+  },
+  {
     id: 174,
     slug: "single-case-agreement-rehab-out-of-network-insurance",
     seoTitle: "Single Case Agreement for Rehab: Cover Out-of-Network Care",
