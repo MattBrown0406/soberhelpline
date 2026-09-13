@@ -72,6 +72,10 @@ export default function FamilyConsultation() {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 A private 60-minute session with a professional family interventionist. If your family cannot wait until Monday, this is where you get answers now and leave with a clear next step.
               </p>
+              <p className="mt-4 text-sm text-muted-foreground max-w-2xl mx-auto">
+                Private coaching is a paid service; review current rates and availability before booking. For a free group option, see the{" "}
+                <Link to="/family-squares" className="text-primary underline underline-offset-4">Monday Family Squares meeting</Link>.
+              </p>
             </div>
 
             <Card className="mb-6 border-amber-300/70 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/20">

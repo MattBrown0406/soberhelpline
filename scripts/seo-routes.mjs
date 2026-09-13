@@ -174,7 +174,7 @@ export const prerenderPages = [
     route: '/family-consultation',
     title: 'Family Consultation for Addiction Support | Sober Helpline',
     description: 'Talk with Sober Helpline about your family\'s situation, treatment questions, and the next right step when addiction has thrown life off balance.',
-    noscriptHtml: '<main><h1>Family Consultation for Addiction Support</h1><p>Get direct guidance on treatment options, family strategy, and the next right step for your situation.</p><p><a href="https://soberhelpline.com/book-consultation">Book your consultation</a></p></main>'
+    noscriptHtml: '<main><h1>Crisis Coaching Session</h1><p>A private 60-minute session with a professional family interventionist.</p><p>Private coaching is a paid service; review current rates and availability before booking. For a free group option, see the <a href="https://soberhelpline.com/family-squares">Monday Family Squares meeting</a>.</p><p><a href="https://soberhelpline.com/book-consultation">Book your consultation</a></p></main>'
   },
   {
     route: '/family-readiness-intensive',
