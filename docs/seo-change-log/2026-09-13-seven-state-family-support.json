@@ -1,0 +1,1119 @@
+{
+  "sourceBase": "72b989b821d1a44d9c626638db3b727b6de510ba",
+  "windows": {
+    "current": [
+      "2026-08-15",
+      "2026-09-11"
+    ],
+    "previous": [
+      "2026-07-18",
+      "2026-08-14"
+    ],
+    "baseline90": [
+      "2026-06-14",
+      "2026-09-11"
+    ]
+  },
+  "states": [
+    {
+      "state": "Oregon",
+      "route": "/oregon-family-support",
+      "titleBefore": "Family Support for Addiction in Oregon | Sober Helpline",
+      "titleAfter": "Family Support for Addiction in Oregon | Sober Helpline",
+      "descriptionAfter": "Remote family support for Oregon: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Oregon: Resources, Help &amp; Hope",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Oregon",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Oregon.",
+        "url": "https://soberhelpline.com/oregon-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Oregon"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Oregon office?",
+          "answer": "This page describes remote support available to families in Oregon, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Oregon families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Oregon?",
+          "answer": "The Oregon resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Oregon can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 7,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "alcohol interventionist oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 17,
+            "ctr": 0,
+            "position": 90.52941176470588
+          },
+          {
+            "keys": [
+              "alcohol support group oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 98
+          },
+          {
+            "keys": [
+              "interventionist portland oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 91.8
+          },
+          {
+            "keys": [
+              "professional interventionist oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 95
+          }
+        ],
+        "previous": [
+          {
+            "keys": [
+              "alcohol interventionist oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 92.33333333333333
+          },
+          {
+            "keys": [
+              "interventionist portland oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 16,
+            "ctr": 0,
+            "position": 84.1875
+          }
+        ],
+        "baseline90": [
+          {
+            "keys": [
+              "alcohol interventionist oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 35,
+            "ctr": 0,
+            "position": 90.17142857142858
+          },
+          {
+            "keys": [
+              "alcohol support group oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 98
+          },
+          {
+            "keys": [
+              "interventionist portland oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 31,
+            "ctr": 0,
+            "position": 87
+          },
+          {
+            "keys": [
+              "professional interventionist oregon",
+              "https://soberhelpline.com/oregon-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 95
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": false,
+      "h1Before": "Family Support for Addiction in Oregon: Resources, Help &amp; Hope",
+      "descriptionBefore": "Oregon families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance. Free resources available.",
+      "h1Changed": false,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "Washington",
+      "route": "/washington-family-support",
+      "titleBefore": "Family Support for Addiction in Washington State | Sober Helpline",
+      "titleAfter": "Washington Family Addiction Support | Sober Helpline",
+      "descriptionAfter": "Remote family support for Washington: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Washington State: Resources, Help &amp; Hope",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Washington",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Washington.",
+        "url": "https://soberhelpline.com/washington-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Washington"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Washington office?",
+          "answer": "This page describes remote support available to families in Washington, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Washington families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Washington?",
+          "answer": "The Washington resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Washington can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 7,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "professional interventionist washington",
+              "https://soberhelpline.com/washington-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 77
+          }
+        ],
+        "previous": [],
+        "baseline90": [
+          {
+            "keys": [
+              "professional interventionist washington",
+              "https://soberhelpline.com/washington-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 77
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": true,
+      "h1Before": "Family Support for Addiction in Washington State: Resources, Help &amp; Hope",
+      "descriptionBefore": "Washington families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance. Free resources available.",
+      "h1Changed": false,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "Idaho",
+      "route": "/idaho-family-support",
+      "titleBefore": "Alcohol Interventionist in Idaho | Family Addiction Support",
+      "titleAfter": "Family Support for Addiction in Idaho | Sober Helpline",
+      "descriptionAfter": "Remote family support for Idaho: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Idaho",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Idaho",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Idaho.",
+        "url": "https://soberhelpline.com/idaho-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Idaho"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Idaho office?",
+          "answer": "This page describes remote support available to families in Idaho, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Idaho families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Idaho?",
+          "answer": "The Idaho resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Idaho can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 3,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "alcohol interventionist idaho",
+              "https://soberhelpline.com/idaho-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 68.5
+          }
+        ],
+        "previous": [
+          {
+            "keys": [
+              "alcohol interventionist idaho",
+              "https://soberhelpline.com/idaho-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 70.33333333333333
+          }
+        ],
+        "baseline90": [
+          {
+            "keys": [
+              "alcohol interventionist idaho",
+              "https://soberhelpline.com/idaho-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 31,
+            "ctr": 0,
+            "position": 72.51612903225806
+          },
+          {
+            "keys": [
+              "idaho drug and alcohol treatment for brothers",
+              "https://soberhelpline.com/idaho-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 77.66666666666667
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": true,
+      "h1Before": "Alcohol Interventionist and Family Addiction Support in Idaho",
+      "descriptionBefore": "Need an alcohol interventionist in Idaho? Get family addiction coaching, Monday Zoom support, and clear next steps for relapse, treatment refusal, or crisis.",
+      "h1Changed": true,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "California",
+      "route": "/california-family-support",
+      "titleBefore": "Family Support for Addiction in California | Sober Helpline",
+      "titleAfter": "Family Support for Addiction in California | Sober Helpline",
+      "descriptionAfter": "Remote family support for California: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in California: Resources, Help &amp; Hope",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for California",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in California.",
+        "url": "https://soberhelpline.com/california-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "California"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local California office?",
+          "answer": "This page describes remote support available to families in California, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for California families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in California?",
+          "answer": "The California resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in California can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 7,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "confidential intervention coach los angeles",
+              "https://soberhelpline.com/california-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 20
+          }
+        ],
+        "previous": [],
+        "baseline90": [
+          {
+            "keys": [
+              "confidential intervention coach los angeles",
+              "https://soberhelpline.com/california-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 20
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": false,
+      "h1Before": "Family Support for Addiction in California: Resources, Help &amp; Hope",
+      "descriptionBefore": "California families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance. Free resources available.",
+      "h1Changed": false,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "Nevada",
+      "route": "/nevada-family-support",
+      "titleBefore": "Alcohol Interventionist Nevada | Family Addiction Help",
+      "titleAfter": "Family Support for Addiction in Nevada | Sober Helpline",
+      "descriptionAfter": "Remote family support for Nevada: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Nevada",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Nevada",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Nevada.",
+        "url": "https://soberhelpline.com/nevada-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Nevada"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Nevada office?",
+          "answer": "This page describes remote support available to families in Nevada, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Nevada families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Nevada?",
+          "answer": "The Nevada resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Nevada can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 3,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "alcohol intervention nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 59,
+            "ctr": 0,
+            "position": 71.45762711864407
+          },
+          {
+            "keys": [
+              "alcohol interventionist las vegas nv",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "position": 55.111111111111114
+          },
+          {
+            "keys": [
+              "alcohol interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 52,
+            "ctr": 0,
+            "position": 35.63461538461539
+          },
+          {
+            "keys": [
+              "alcohol support group nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 70.4
+          },
+          {
+            "keys": [
+              "drug interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 76,
+            "ctr": 0,
+            "position": 47.36842105263158
+          },
+          {
+            "keys": [
+              "interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 28,
+            "ctr": 0,
+            "position": 19.071428571428573
+          },
+          {
+            "keys": [
+              "professional interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 53,
+            "ctr": 0,
+            "position": 29.339622641509433
+          }
+        ],
+        "previous": [
+          {
+            "keys": [
+              "alcohol intervention nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 78.93333333333334
+          },
+          {
+            "keys": [
+              "alcohol interventionist las vegas nv",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 27,
+            "ctr": 0,
+            "position": 67.96296296296296
+          },
+          {
+            "keys": [
+              "alcohol interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 63,
+            "ctr": 0,
+            "position": 43.53968253968254
+          },
+          {
+            "keys": [
+              "drug interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 17,
+            "ctr": 0,
+            "position": 55.88235294117647
+          },
+          {
+            "keys": [
+              "professional intervention nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 42.833333333333336
+          },
+          {
+            "keys": [
+              "professional interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 59,
+            "ctr": 0,
+            "position": 32.96610169491525
+          }
+        ],
+        "baseline90": [
+          {
+            "keys": [
+              "alcohol intervention nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 74,
+            "ctr": 0,
+            "position": 72.97297297297297
+          },
+          {
+            "keys": [
+              "alcohol interventionist las vegas nv",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 50,
+            "ctr": 0,
+            "position": 63.86
+          },
+          {
+            "keys": [
+              "alcohol interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 175,
+            "ctr": 0,
+            "position": 48
+          },
+          {
+            "keys": [
+              "alcohol support group nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 70.4
+          },
+          {
+            "keys": [
+              "drug interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 94,
+            "ctr": 0,
+            "position": 49.265957446808514
+          },
+          {
+            "keys": [
+              "interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 28,
+            "ctr": 0,
+            "position": 19.071428571428573
+          },
+          {
+            "keys": [
+              "professional intervention nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 42.833333333333336
+          },
+          {
+            "keys": [
+              "professional interventionist nevada",
+              "https://soberhelpline.com/nevada-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 138,
+            "ctr": 0,
+            "position": 32.23913043478261
+          }
+        ]
+      },
+      "recentHistory": "c0885bb0 2026-08-10 weekly SH GSC CTR optimization",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": true,
+      "h1Before": "Alcohol Interventionist in Nevada and Family Addiction Help",
+      "descriptionBefore": "Need an alcohol interventionist in Nevada? Call for family guidance when treatment refusal, relapse, or risk is escalating, or join the free Monday Zoom.",
+      "h1Changed": true,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "Arizona",
+      "route": "/arizona-family-support",
+      "titleBefore": "Family Support for Addiction in Arizona | Sober Helpline",
+      "titleAfter": "Family Support for Addiction in Arizona | Sober Helpline",
+      "descriptionAfter": "Remote family support for Arizona: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Arizona: Resources, Help &amp; Hope",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Arizona",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Arizona.",
+        "url": "https://soberhelpline.com/arizona-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Arizona"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Arizona office?",
+          "answer": "This page describes remote support available to families in Arizona, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Arizona families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Arizona?",
+          "answer": "The Arizona resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Arizona can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 3,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "family first intervention - arizona",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 41
+          },
+          {
+            "keys": [
+              "family first intervention arizona",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 41
+          },
+          {
+            "keys": [
+              "meth recovery phoenix families",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 69
+          }
+        ],
+        "previous": [
+          {
+            "keys": [
+              "family first intervention arizona",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 46
+          }
+        ],
+        "baseline90": [
+          {
+            "keys": [
+              "family first intervention - arizona",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 40.333333333333336
+          },
+          {
+            "keys": [
+              "family first intervention arizona",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 42.75
+          },
+          {
+            "keys": [
+              "meth recovery phoenix families",
+              "https://soberhelpline.com/arizona-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 69
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": false,
+      "h1Before": "Family Support for Addiction in Arizona: Resources, Help &amp; Hope",
+      "descriptionBefore": "Arizona families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance. Free resources available.",
+      "h1Changed": false,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    },
+    {
+      "state": "Utah",
+      "route": "/utah-family-support",
+      "titleBefore": "Family Support for Addiction in Utah | Sober Helpline",
+      "titleAfter": "Family Support for Addiction in Utah | Sober Helpline",
+      "descriptionAfter": "Remote family support for Utah: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+      "h1After": "Family Support for Addiction in Utah: Resources, Help &amp; Hope",
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Remote family support for Utah",
+        "serviceType": "Family education and coaching",
+        "description": "Remote family education and coaching available to families in Utah.",
+        "url": "https://soberhelpline.com/utah-family-support",
+        "provider": {
+          "@type": "Organization",
+          "name": "Sober Helpline",
+          "url": "https://soberhelpline.com"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Utah"
+        }
+      },
+      "faq": [
+        {
+          "question": "Is Sober Helpline based in a local Utah office?",
+          "answer": "This page describes remote support available to families in Utah, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
+        },
+        {
+          "question": "Which Sober Helpline support is free for Utah families?",
+          "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+        },
+        {
+          "question": "Where can I look for local resources in Utah?",
+          "answer": "The Utah resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+        }
+      ],
+      "hero": "Families in Utah can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.",
+      "existingCityCount": 3,
+      "gsc": {
+        "current": [
+          {
+            "keys": [
+              "alcohol interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 27,
+            "ctr": 0,
+            "position": 86.11111111111111
+          },
+          {
+            "keys": [
+              "professional intervention utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 71.5
+          },
+          {
+            "keys": [
+              "professional interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 80
+          },
+          {
+            "keys": [
+              "utah sober companion recovery services",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 52
+          }
+        ],
+        "previous": [
+          {
+            "keys": [
+              "alcohol interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 25,
+            "ctr": 0,
+            "position": 91.24
+          },
+          {
+            "keys": [
+              "professional intervention utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 23,
+            "ctr": 0,
+            "position": 68.65217391304348
+          },
+          {
+            "keys": [
+              "professional interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 76
+          }
+        ],
+        "baseline90": [
+          {
+            "keys": [
+              "alcohol interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 60,
+            "ctr": 0,
+            "position": 88.7
+          },
+          {
+            "keys": [
+              "intervention utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 40
+          },
+          {
+            "keys": [
+              "professional intervention utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 34,
+            "ctr": 0,
+            "position": 70.41176470588235
+          },
+          {
+            "keys": [
+              "professional interventionist utah",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 78.25
+          },
+          {
+            "keys": [
+              "utah sober companion recovery services",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 52
+          },
+          {
+            "keys": [
+              "utah support advocates for recovery awareness",
+              "https://soberhelpline.com/utah-family-support"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 38
+          }
+        ]
+      },
+      "recentHistory": "133c6d12 2026-08-02 Work in progress",
+      "bodyCooldownException": "Owner-approved factual positioning correction and removal of unsupported claims; not a ranking experiment.",
+      "metadataCooldownDays": 28,
+      "bodyCooldownDays": 60,
+      "cooldownStarts": "actual verified publication, pending",
+      "changes": [
+        "Explicit remote-service scope in opening and metadata",
+        "Explicit Service/Organization provider schema with state areaServed, no address",
+        "Free meeting vs paid membership vs separately booked coaching clarified",
+        "Unsupported statistics, efficacy comparison, coercive FAQ and stereotypes removed",
+        "Existing state resources and city routes retained",
+        "Shared support/coaching hub contextual incoming links"
+      ],
+      "metadataTitleChanged": false,
+      "h1Before": "Family Support for Addiction in Utah: Resources, Help &amp; Hope",
+      "descriptionBefore": "Utah families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance.",
+      "h1Changed": false,
+      "intendedBenefit": "More accurate service intent and user choice; easier discovery of existing regional resources, no promised ranking gain."
+    }
+  ],
+  "winnerEvidence": {
+    "current": [
+      {
+        "keys": [
+          "https://soberhelpline.com/blog/loved-one-with-addiction-asks-for-money"
+        ],
+        "clicks": 10,
+        "impressions": 186,
+        "ctr": 0.053763440860215055,
+        "position": 5.876344086021505
+      },
+      {
+        "keys": [
+          "https://soberhelpline.com/blog/what-to-do-when-loved-one-lies-about-drinking-drug-use"
+        ],
+        "clicks": 6,
+        "impressions": 114,
+        "ctr": 0.05263157894736842,
+        "position": 16.614035087719298
+      }
+    ],
+    "previous": [
+      {
+        "keys": [
+          "https://soberhelpline.com/blog/loved-one-with-addiction-asks-for-money"
+        ],
+        "clicks": 4,
+        "impressions": 49,
+        "ctr": 0.08163265306122448,
+        "position": 6.775510204081633
+      },
+      {
+        "keys": [
+          "https://soberhelpline.com/blog/what-to-do-when-loved-one-lies-about-drinking-drug-use"
+        ],
+        "clicks": 2,
+        "impressions": 70,
+        "ctr": 0.02857142857142857,
+        "position": 13
+      }
+    ]
+  },
+  "winnerAction": "Both article source bodies/titles unchanged: money article already links directly to booking/family-coaching/meeting; lying article links to existing addiction-family-coaching landing. No forced state list."
+}

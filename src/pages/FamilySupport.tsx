@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import SEOHead from "@/components/SEOHead";
+import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks";
 import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 
 export default function FamilySupport() {
@@ -460,6 +461,7 @@ export default function FamilySupport() {
               </CardContent>
             </Card>
           </div>
+            <RegionalFamilySupportLinks />
         </main>
       </div>
     </>

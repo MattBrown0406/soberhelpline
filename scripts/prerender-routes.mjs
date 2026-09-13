@@ -302,7 +302,7 @@ const articleTags = (page) => page.ogType === 'article' ? `
     ${page.section ? `<meta property="article:section" content="${escapeHtml(page.section)}" data-rh="true">` : ''}` : '';
 
 const jsonLdTags = (page) => page.jsonLd
-  ? `\n    <script type="application/ld+json"${page.jsonLd['@type'] === 'Article' ? ' data-schema="article"' : ''}>${JSON.stringify(page.jsonLd).replaceAll('<', '\\u003c')}</script>`
+  ? `\n    <script type="application/ld+json"${page.jsonLd['@type'] === 'Article' ? ' data-schema="article"' : ''}${page.jsonLd['@type'] === 'Service' && /^\/(?:oregon|washington|idaho|california|nevada|arizona|utah)-family-support$/.test(page.route) ? ' data-rh="true"' : ''}>${JSON.stringify(page.jsonLd).replaceAll('<', '\\u003c')}</script>`
   : '';
 
 const replaceOrInsertHeadTag = (html, pattern, replacement) => pattern.test(html)

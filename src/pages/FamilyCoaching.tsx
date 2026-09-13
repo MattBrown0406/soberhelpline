@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import SEOHead from "@/components/SEOHead";
+import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks";
 import EnablingBehaviorAudit from "@/components/EnablingBehaviorAudit";
 import BoundaryClarityWorksheet from "@/components/BoundaryClarityWorksheet";
 import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
@@ -669,6 +670,7 @@ export default function FamilyCoaching() {
               </AccordionItem>
             </Accordion>
           </div>
+            <RegionalFamilySupportLinks />
         </main>
       </div>
     </>

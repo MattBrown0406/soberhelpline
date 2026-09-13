@@ -195,22 +195,25 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Find a Professional Interventionist</h1><p>Learn when a professional intervention may be appropriate and how to choose ethical help for your family.</p><p><a href="https://soberhelpline.com/family-readiness-intensive">Assess intervention readiness</a></p></main>'
   },
   {
-    route: '/oregon-family-support',
-    title: 'Family Support for Addiction in Oregon | Sober Helpline',
-    description: 'Oregon families can find addiction support, Monday family Zoom calls, coaching, treatment direction, and intervention planning through Sober Helpline.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Oregon</h1><p>Resources for Oregon families dealing with addiction, enabling, relapse, treatment resistance, and intervention decisions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/oregon-family-support",
+    title: "Family Support for Addiction in Oregon | Sober Helpline",
+    description: "Remote family support for Oregon: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Oregon", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Oregon.", "url": "https://soberhelpline.com/oregon-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Oregon"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Oregon: Resources, Help & Hope</h1><p>Families in Oregon can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
-    route: '/california-family-support',
-    title: 'Family Support for Addiction in California | Sober Helpline',
-    description: 'California families can get addiction support, weekly family Zoom help, private coaching, and intervention readiness guidance.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in California</h1><p>Guidance for California families navigating fentanyl, alcohol, meth, relapse, boundaries, treatment choices, and intervention planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/california-family-support",
+    title: "Family Support for Addiction in California | Sober Helpline",
+    description: "Remote family support for California: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for California", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in California.", "url": "https://soberhelpline.com/california-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "California"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in California: Resources, Help & Hope</h1><p>Families in California can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
-    route: '/washington-family-support',
-    title: 'Family Support for Addiction in Washington | Sober Helpline',
-    description: 'Washington families can access addiction family education, Monday Zoom support, coaching sessions, and intervention planning help.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Washington</h1><p>Support for Washington families dealing with addiction, treatment refusal, relapse, family conflict, and intervention-level concerns.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/washington-family-support",
+    title: "Washington Family Addiction Support | Sober Helpline",
+    description: "Remote family support for Washington: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Washington", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Washington.", "url": "https://soberhelpline.com/washington-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Washington"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Washington State: Resources, Help & Hope</h1><p>Families in Washington can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
     route: '/texas-family-support',
@@ -219,10 +222,11 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Support for Addiction in Texas</h1><p>Practical support for Texas families facing addiction, crisis decisions, enabling patterns, treatment planning, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
-    route: '/arizona-family-support',
-    title: 'Family Support for Addiction in Arizona | Sober Helpline',
-    description: 'Arizona families can use Sober Helpline for addiction support, free Monday Zoom meetings, private coaching, and intervention planning.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Arizona</h1><p>Guidance for Arizona families managing addiction crisis, treatment resistance, boundaries, family alignment, and intervention readiness.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/arizona-family-support",
+    title: "Family Support for Addiction in Arizona | Sober Helpline",
+    description: "Remote family support for Arizona: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Arizona", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Arizona.", "url": "https://soberhelpline.com/arizona-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Arizona"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Arizona: Resources, Help & Hope</h1><p>Families in Arizona can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
     route: '/colorado-family-support',
@@ -231,22 +235,25 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Family Support for Addiction in Colorado</h1><p>Resources for Colorado families navigating addiction, boundaries, relapse, treatment questions, and possible intervention needs.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
-    route: '/idaho-family-support',
-    title: 'Family Support for Addiction in Idaho | Sober Helpline',
-    description: 'Idaho families can get addiction family support, free weekly Zoom help, coaching sessions, and intervention readiness planning.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Idaho</h1><p>Support for Idaho families dealing with addiction, treatment refusal, enabling, family conflict, and next-step planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/idaho-family-support",
+    title: "Family Support for Addiction in Idaho | Sober Helpline",
+    description: "Remote family support for Idaho: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Idaho", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Idaho.", "url": "https://soberhelpline.com/idaho-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Idaho"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Idaho</h1><p>Families in Idaho can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
-    route: '/nevada-family-support',
-    title: 'Alcohol Interventionist Nevada | Family Addiction Help',
-    description: 'Need an alcohol interventionist in Nevada? Call for family guidance when treatment refusal, relapse, or risk is escalating, or join the free Monday Zoom.',
-    noscriptHtml: '<main><h1>Alcohol Interventionist in Nevada and Family Addiction Help</h1><p>Call for a private family conversation about coaching, treatment, or intervention planning when refusal, relapse, or risk is escalating.</p><p><a href="tel:4582988008">Call an interventionist: (458) 298-8008</a> · <a href="https://soberhelpline.com/monday-zoom-registration">Join the free Monday Zoom</a></p></main>'
+    route: "/nevada-family-support",
+    title: "Family Support for Addiction in Nevada | Sober Helpline",
+    description: "Remote family support for Nevada: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Nevada", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Nevada.", "url": "https://soberhelpline.com/nevada-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Nevada"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Nevada</h1><p>Families in Nevada can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
-    route: '/utah-family-support',
-    title: 'Family Support for Addiction in Utah | Sober Helpline',
-    description: 'Utah families can find addiction support, Monday Zoom calls, coaching, treatment planning help, and intervention readiness guidance.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Utah</h1><p>Practical support for Utah families dealing with addiction, family boundaries, treatment resistance, relapse, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    route: "/utah-family-support",
+    title: "Family Support for Addiction in Utah | Sober Helpline",
+    description: "Remote family support for Utah: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office.",
+    jsonLd: {"@context": "https://schema.org", "@type": "Service", "name": "Remote family support for Utah", "serviceType": "Family education and coaching", "description": "Remote family education and coaching available to families in Utah.", "url": "https://soberhelpline.com/utah-family-support", "provider": {"@type": "Organization", "name": "Sober Helpline", "url": "https://soberhelpline.com"}, "areaServed": {"@type": "State", "name": "Utah"}},
+    noscriptHtml: "<main><h1>Family Support for Addiction in Utah: Resources, Help & Hope</h1><p>Families in Utah can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.</p><p><a href=\"https://soberhelpline.com/monday-zoom-registration\">Free Monday Family Squares</a> · <a href=\"https://soberhelpline.com/family-membership\">Paid family education membership</a> · <a href=\"https://soberhelpline.com/family-coaching\">Private family coaching</a></p></main>"
   },
   {
     route: '/new-mexico-family-support',

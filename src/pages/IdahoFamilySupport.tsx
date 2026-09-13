@@ -2,72 +2,58 @@ import { Link } from "react-router-dom";
 import { Phone, Heart, Users, MapPin, Calendar, Shield, BookOpen, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WhatsAppLink from "@/components/WhatsAppLink";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
-import FamilyProofStrip from "@/components/FamilyProofStrip";
+import RegionalFamilySupportOptions from "@/components/RegionalFamilySupportOptions";
 
 const faqItems = [
   {
-    question: "How do I help a family member with addiction in Idaho?",
-    answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Idaho families can also connect with Al-Anon, Nar-Anon, and Sober Helpline's free “The Family Squares” calls for ongoing support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
+    "question": "Is Sober Helpline based in a local Idaho office?",
+    "answer": "This page describes remote support available to families in Idaho, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
   },
   {
-    question: "Are there free family support groups for addiction in Idaho?",
-    answer:
-      "Yes. Idaho has Al-Anon meetings across the state (al-anon.org/find-a-meeting), Nar-Anon groups for families of narcotics users (nar-anon.org), and SMART Recovery Family & Friends meetings. Idaho CareLine (dial 211) connects families with county-level resources. Sober Helpline also offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Idaho family, no sign-up fees or treatment center referrals.",
+    "question": "Which Sober Helpline support is free for Idaho families?",
+    "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
   },
   {
-    question: "What is enabling and how do I stop it?",
-    answer:
-      "Enabling means taking actions that protect your loved one from the natural consequences of their addiction — paying their bills, making excuses, covering up their behavior, or bailing them out of crises. While it comes from love, enabling removes the motivation to change. To stop enabling, you set clear boundaries with real consequences attached: 'I will not pay rent if you are actively using.' This is not punishment — it's removing the safety net that lets addiction continue. Sober Helpline coaching helps families identify enabling patterns and replace them with boundary-based responses.",
-  },
-  {
-    question: "Should I stage an intervention for my loved one in Idaho?",
-    answer:
-      "An intervention may be appropriate when your loved one is in denial, has refused treatment multiple times, or when the situation is becoming dangerous. Confrontational 'surprise' interventions have mixed results. A more effective model is the family-led approach: equip yourself first, set firm boundaries, and create the conditions where treatment becomes the logical choice. Sober Helpline offers hourly intervention coaching for Idaho families — you work directly with an interventionist who helps you prepare without requiring an expensive in-person team.",
-  },
-  {
-    question: "How do I find addiction treatment for my loved one in Idaho?",
-    answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also contact the Idaho Department of Health and Welfare (healthandwelfare.idaho.gov) for state-funded treatment options, or call the Idaho CareLine at 211 for crisis support and referrals. Our “The Family Squares” is a great place to ask questions about Idaho treatment options in a judgment-free environment.",
-  },
+    "question": "Where can I look for local resources in Idaho?",
+    "answer": "The Idaho resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+  }
 ];
 
 const cities = [
-  { name: "Boise", slug: "boise", description: "Ada County — Idaho's capital and largest city" },
-  { name: "Nampa", slug: "nampa", description: "Canyon County — meth corridor, rural poverty" },
-  { name: "Meridian", slug: "meridian", description: "Ada County — fast-growing suburb" },
+  { name: "Boise", slug: "boise", description: "Ada County" },
+  { name: "Nampa", slug: "nampa", description: "Canyon County" },
+  { name: "Meridian", slug: "meridian", description: "Ada County" },
 ];
 
-const localBusinessSchema = {
+const familySupportSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Sober Helpline",
-  description:
-    "Family support and intervention coaching for families affected by addiction. Serving Idaho families with free resources, “The Family Squares”, and hourly coaching.",
-  url: "https://soberhelpline.com",
-  telephone: "+14582988008",
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "ID",
-    addressCountry: "US",
+  "@type": "Service",
+  "name": "Remote family support for Idaho",
+  "serviceType": "Family education and coaching",
+  "description": "Remote family education and coaching available to families in Idaho.",
+  "url": "https://soberhelpline.com/idaho-family-support",
+  "provider": {
+    "@type": "Organization",
+    "name": "Sober Helpline",
+    "url": "https://soberhelpline.com"
   },
-  areaServed: {
+  "areaServed": {
     "@type": "State",
-    name: "Idaho",
-  },
-  sameAs: ["https://soberhelpline.com"],
+    "name": "Idaho"
+  }
 };
 
 export default function IdahoFamilySupport() {
   return (
     <>
       <SEOHead
-        title="Alcohol Interventionist in Idaho | Family Addiction Support"
-        description="Need an alcohol interventionist in Idaho? Get family addiction coaching, Monday Zoom support, and clear next steps for relapse, treatment refusal, or crisis."
+        title="Family Support for Addiction in Idaho | Sober Helpline"
+        description="Remote family support for Idaho: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office."
+        canonicalPath="/idaho-family-support"
         faqItems={faqItems}
-        jsonLd={localBusinessSchema}
+        jsonLd={familySupportSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
 
@@ -81,92 +67,28 @@ export default function IdahoFamilySupport() {
               Idaho Family Addiction Resources
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-logo-blue mb-5 leading-tight">
-              Alcohol Interventionist and Family Addiction Support in Idaho
+              Family Support for Addiction in Idaho
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              If someone you love is drinking, using drugs, refusing treatment, or relapsing, your family needs a clear next step.
-              Idaho families can start with the free Monday Zoom, book private coaching, or call when the situation may require intervention planning.
+              Families in Idaho can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Talk With an Interventionist
+                  Explore Family Coaching
                 </Button>
               </Link>
             </div>
           </div>
         </section>
 
-        <FamilyProofStrip />
-        <section className="py-10 bg-background">
-          <div className="container max-w-4xl mx-auto px-4">
-            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Direct answer</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-3">
-                Need an alcohol interventionist in Idaho?
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-5">
-                If your loved one is refusing treatment, drinking or using despite consequences, or cycling through relapse, start with a private family coaching call or call Sober Helpline before planning a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or Monday night family support.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href="tel:4582988008">
-                  <Button size="lg" className="gap-2 w-full sm:w-auto">
-                    <Phone className="h-4 w-4" />
-                    Call (458) 298-8008
-                  </Button>
-                </a>
-                <Link to="/family-coaching">
-                  <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                    <Calendar className="h-4 w-4" />
-                    Book family coaching
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Idaho Stats */}
-        <section className="py-12 bg-muted/40">
-          <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
-              Idaho's Addiction Crisis Is a Family Crisis
-            </h2>
-            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
-              The numbers are sobering — but behind every statistic is a family that needs support.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">40%</div>
-                  <div className="font-semibold text-logo-blue mb-1">Rise in Overdose Deaths</div>
-                  <div className="text-sm text-muted-foreground">Idaho overdose deaths have risen 40% since 2019, driven by meth and fentanyl flooding the state</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">Meth &amp; Fentanyl</div>
-                  <div className="font-semibold text-logo-blue mb-1">Primary Drivers</div>
-                  <div className="text-sm text-muted-foreground">Methamphetamine and fentanyl are the leading substances behind Idaho's overdose crisis</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">Rural Gap</div>
-                  <div className="font-semibold text-logo-blue mb-1">Access Barriers</div>
-                  <div className="text-sm text-muted-foreground">Rural Idaho families face major barriers to treatment — long distances, limited providers, stigma</div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
 
         {/* You Are Not Alone */}
         <section className="py-12">
@@ -182,9 +104,7 @@ export default function IdahoFamilySupport() {
                   The shame that keeps families silent.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Idaho families face this every day — often in rural communities with few resources and nowhere to turn.
-                  Too many suffer in isolation, convinced they're the only ones, convinced nothing will change.
-                  That's not the truth. Change is possible — and it often starts with the family, not the person using.
+                  Support is available to your family in Idaho, even if you are not sure what to do next. You can ask questions about your own needs without committing to a paid service.
                 </p>
                 <ul className="space-y-3">
                   {[
@@ -345,75 +265,7 @@ export default function IdahoFamilySupport() {
           </div>
         </section>
 
-        {/* CRAFT vs Traditional */}
-        <section className="py-12">
-          <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
-              What Works: CRAFT vs. Traditional Approaches
-            </h2>
-            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Not all family approaches are equal. Research shows CRAFT outperforms confrontational interventions.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="border-destructive/30">
-                <CardHeader>
-                  <CardTitle className="text-destructive text-base">Traditional Confrontational Approaches</CardTitle>
-                  <CardDescription>What most people think of as "an intervention"</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="text-destructive mt-0.5">✗</span>
-                      Surprise ambush format increases shame and defensiveness
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-destructive mt-0.5">✗</span>
-                      Ultimatums without preparation often aren't followed through
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-destructive mt-0.5">✗</span>
-                      High-pressure tactics can damage family relationships
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-destructive mt-0.5">✗</span>
-                      Engagement rates under 30% in some studies
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/30 bg-primary/5">
-                <CardHeader>
-                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
-                  <CardDescription>Evidence-based family intervention model</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-0.5">✓</span>
-                      Teaches families to reinforce sober behavior, not the addiction
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-0.5">✓</span>
-                      Reduces enabling patterns and communication triggers
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-0.5">✓</span>
-                      64–74% treatment engagement rate in clinical trials
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-0.5">✓</span>
-                      Improves family wellbeing even if loved one doesn't immediately enter treatment
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-            <p className="text-center text-muted-foreground mt-6 text-sm">
-              Sober Helpline's coaching is grounded in CRAFT principles and 20+ years of intervention experience.
-            </p>
-          </div>
-        </section>
+        <RegionalFamilySupportOptions state="Idaho" />
 
         {/* “The Family Squares” */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
@@ -422,13 +274,13 @@ export default function IdahoFamilySupport() {
               <div>
                 <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
                   <Calendar className="h-3.5 w-3.5" />
-                  Every Monday — 7:00 PM PST
+                  Every Monday — 7:00 PM Pacific
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, families across Idaho (and nationwide) join a free Zoom call
+                  Every Monday at 7PM Pacific, families across Idaho (and nationwide) join a free Zoom call
                   led by Matt Brown — a certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">
@@ -436,8 +288,8 @@ export default function IdahoFamilySupport() {
                     "No cost. No sign-up fees. No sales pitch.",
                     "No treatment center names or referral pressure",
                     "Ask real questions, get real answers",
-                    "Connect with other Idaho families going through the same thing",
-                    "Anonymous — share only what you're comfortable with",
+                    "Connect with families joining from different places",
+                    "Share only what you're comfortable with",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
@@ -456,7 +308,7 @@ export default function IdahoFamilySupport() {
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
                   <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
-                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
+                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM Pacific</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -486,24 +338,20 @@ export default function IdahoFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
-                  Hourly Intervention Coaching
+                  Private Family Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Sometimes families need more than a support group. They need a strategy.
-                  Sober Helpline offers hourly one-on-one coaching with a certified interventionist —
-                  a practical alternative to expensive in-person intervention teams.
+                  Private coaching is a paid, one-on-one service for family members who want to discuss their situation by phone or video. Review the session details and availability before booking.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Our philosophy: <strong>equip the family first.</strong> In most cases, when families
-                  learn the right tools and set real boundaries, their loved one's motivation to seek
-                  treatment increases — no dramatic confrontation required.
+                  Coaching focuses on your questions about communication, boundaries, and next steps. It is not therapy or medical treatment, and it does not guarantee that a loved one will enter treatment.
                 </p>
                 <ul className="space-y-3 mb-6">
                   {[
                     "One-on-one coaching with Matt Brown, certified interventionist",
                     "Identify enabling patterns specific to your family situation",
-                    "Create a boundary plan with real consequences",
-                    "Learn evidence-based communication strategies (CRAFT)",
+                    "Discuss boundaries in your family situation",
+                    "Talk through communication questions",
                     "Prepare for the conversation — and what comes after",
                     "Available by phone or video — anywhere in Idaho",
                   ].map((item) => (
@@ -527,7 +375,6 @@ export default function IdahoFamilySupport() {
                     </Button>
                   </a>
             <WhatsAppLink source="idaho_cta_1" variant="button" />
-            <WhatsAppLink source="idaho_cta_1" variant="button" className="" />
                 </div>
               </div>
               <Card className="border-primary/20 bg-primary/5">
@@ -550,7 +397,7 @@ export default function IdahoFamilySupport() {
                   <div className="mt-6 border-t border-border pt-4">
                     <p className="text-sm text-muted-foreground">
                       <strong className="text-foreground">Treatment Finder:</strong> Looking for Idaho treatment options?
-                      Search our free, vetted provider directory.
+                      Browse the provider directory and confirm current services directly with each provider.
                     </p>
                     <Link to="/inpatient-treatment" className="text-primary text-sm hover:underline inline-block mt-2">
                       Browse Idaho Treatment Providers →
@@ -626,7 +473,7 @@ export default function IdahoFamilySupport() {
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               You don't have to wait for a crisis. You don't have to figure this out alone.
-              Join thousands of families who've found clarity, direction, and hope through Sober Helpline.
+              Explore the free group meeting and paid support options at your own pace.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
@@ -642,7 +489,6 @@ export default function IdahoFamilySupport() {
                 </Button>
               </a>
             <WhatsAppLink source="idaho_cta_2" variant="button" />
-            <WhatsAppLink source="idaho_cta_2" variant="button" className="" />
             </div>
           </div>
         </section>

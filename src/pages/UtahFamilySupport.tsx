@@ -2,62 +2,47 @@ import { Link } from "react-router-dom";
 import { Phone, Heart, Users, MapPin, Calendar, Shield, BookOpen, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WhatsAppLink from "@/components/WhatsAppLink";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
-import FamilyProofStrip from "@/components/FamilyProofStrip";
+import RegionalFamilySupportOptions from "@/components/RegionalFamilySupportOptions";
 
 const faqItems = [
   {
-    question: "How do I help a family member with addiction in Utah?",
-    answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Utah families can also connect with Al-Anon, USARA, and Sober Helpline's free “The Family Squares” calls for ongoing support. In Utah's LDS-influenced culture, the shame around addiction can be especially isolating — it's important to find a judgment-free space to get real help.",
+    "question": "Is Sober Helpline based in a local Utah office?",
+    "answer": "This page describes remote support available to families in Utah, not a staffed local office. Family Squares meets online, and private coaching is available by phone or video."
   },
   {
-    question: "Are there free family support groups for addiction in Utah?",
-    answer:
-      "Yes. Utah has Al-Anon meetings statewide (al-anon.org/find-a-meeting), Nar-Anon groups, SMART Recovery Family & Friends meetings, and USARA (Utah Support Advocates for Recovery Awareness). Valley Behavioral Health also provides community resources. Sober Helpline offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Utah family, no sign-up fees or treatment center referrals.",
+    "question": "Which Sober Helpline support is free for Utah families?",
+    "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
   },
   {
-    question: "What is enabling and how do I stop it?",
-    answer:
-      "Enabling means taking actions that protect your loved one from the natural consequences of their addiction — paying their bills, making excuses, covering up their behavior, or bailing them out of crises. While it comes from love, enabling removes the motivation to change. To stop enabling, you set clear boundaries with real consequences attached: 'I will not pay rent if you are actively using.' This is not punishment — it's removing the safety net that lets addiction continue. Sober Helpline coaching helps families identify enabling patterns and replace them with boundary-based responses.",
-  },
-  {
-    question: "How does Utah's LDS community culture affect addiction and family support?",
-    answer:
-      "Utah's predominantly LDS culture creates unique dynamics around addiction. There is often significant shame associated with substance use — both for the person struggling and for family members who fear judgment from their congregation or community. This can lead to delayed help-seeking, hidden problems, and family systems that protect appearances rather than address the real issue. Sober Helpline's “The Family Squares” is completely anonymous and judgment-free — a safe space where Utah families can get real help without anyone in their community finding out.",
-  },
-  {
-    question: "How do I find addiction treatment for my loved one in Utah?",
-    answer:
-      "Start with Sober Helpline's free Treatment Finder at soberhelpline.com/recovery-resources — a vetted directory of ethical providers with no referral fees. You can also call the Utah Crisis Line at 1-800-273-8255, contact Valley Behavioral Health (valleybehavioralhealth.org), or reach USARA for peer support resources. Our “The Family Squares” is a great place to ask questions about Utah treatment options in a judgment-free environment.",
-  },
+    "question": "Where can I look for local resources in Utah?",
+    "answer": "The Utah resource section below links to outside organizations and existing city guides. Check with each organization for current meeting times, eligibility, costs, and availability; these are not Sober Helpline offices."
+  }
 ];
 
 const cities = [
-  { name: "Salt Lake City", slug: "salt-lake-city", description: "Salt Lake County — Utah's capital and largest city" },
-  { name: "Provo", slug: "provo", description: "Utah County — BYU college town, LDS dynamics" },
-  { name: "Ogden", slug: "ogden", description: "Weber County — working class, meth/opioids" },
+  { name: "Salt Lake City", slug: "salt-lake-city", description: "Salt Lake County" },
+  { name: "Provo", slug: "provo", description: "Utah County" },
+  { name: "Ogden", slug: "ogden", description: "Weber County" },
 ];
 
-const localBusinessSchema = {
+const familySupportSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Sober Helpline",
-  description:
-    "Family support and intervention coaching for families affected by addiction. Serving Utah families with free resources, “The Family Squares”, and hourly coaching.",
-  url: "https://soberhelpline.com",
-  telephone: "+14582988008",
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "UT",
-    addressCountry: "US",
+  "@type": "Service",
+  "name": "Remote family support for Utah",
+  "serviceType": "Family education and coaching",
+  "description": "Remote family education and coaching available to families in Utah.",
+  "url": "https://soberhelpline.com/utah-family-support",
+  "provider": {
+    "@type": "Organization",
+    "name": "Sober Helpline",
+    "url": "https://soberhelpline.com"
   },
-  areaServed: {
+  "areaServed": {
     "@type": "State",
-    name: "Utah",
-  },
-  sameAs: ["https://soberhelpline.com"],
+    "name": "Utah"
+  }
 };
 
 export default function UtahFamilySupport() {
@@ -65,9 +50,10 @@ export default function UtahFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Utah | Sober Helpline"
-        description="Utah families struggling with a loved one's addiction get real help. Support groups, intervention resources, CRAFT therapy, and expert guidance."
+        description="Remote family support for Utah: free Monday Family Squares, paid education membership, private coaching, and state resource links. No local office."
+        canonicalPath="/utah-family-support"
         faqItems={faqItems}
-        jsonLd={localBusinessSchema}
+        jsonLd={familySupportSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
 
@@ -84,63 +70,25 @@ export default function UtahFamilySupport() {
               Family Support for Addiction in Utah: Resources, Help &amp; Hope
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Utah's opioid crisis has been quietly devastating families across the Mountain West for years.
-              Prescription drug abuse, unique cultural dynamics, and stigma keep too many families suffering in silence.
-              Real help is available. You don't have to do this alone.
+              Families in Utah can connect with Sober Helpline by phone or online for education and coaching. Start with the free Monday Family Squares meeting, compare paid support options, or use the state resource links below. This page describes remote support, not a local office.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Phone className="h-4 w-4" />
-                  Get Intervention Coaching
+                  Explore Family Coaching
                 </Button>
               </Link>
             </div>
           </div>
         </section>
 
-        <FamilyProofStrip />
-
-        {/* Utah Stats */}
-        <section className="py-12 bg-muted/40">
-          <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
-              Utah's Addiction Crisis Is a Family Crisis
-            </h2>
-            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
-              The numbers are sobering — but behind every statistic is a family that needs support.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">3x</div>
-                  <div className="font-semibold text-logo-blue mb-1">Opioid Deaths Tripled</div>
-                  <div className="text-sm text-muted-foreground">Utah opioid overdose deaths have tripled since 2010, with no signs of slowing</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">#1</div>
-                  <div className="font-semibold text-logo-blue mb-1">Mountain West Rx Abuse</div>
-                  <div className="text-sm text-muted-foreground">Utah has historically ranked highest in the Mountain West for prescription drug misuse</div>
-                </CardContent>
-              </Card>
-              <Card className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-primary mb-2">Stigma</div>
-                  <div className="font-semibold text-logo-blue mb-1">Cultural Barriers</div>
-                  <div className="text-sm text-muted-foreground">LDS community dynamics can deepen shame and delay help-seeking for Utah families</div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
 
         {/* You Are Not Alone */}
         <section className="py-12">
@@ -156,9 +104,7 @@ export default function UtahFamilySupport() {
                   The shame that keeps families silent.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  In Utah, that shame can feel even heavier. Whether you're LDS or not, the culture here often treats
-                  addiction as a moral failing — not the medical condition it is. That belief keeps families isolated
-                  and delays the help their loved one needs. Change is possible — and it often starts with the family.
+                  Support is available to your family in Utah, even if you are not sure what to do next. You can ask questions about your own needs without committing to a paid service.
                 </p>
                 <ul className="space-y-3">
                   {[
@@ -298,50 +244,7 @@ export default function UtahFamilySupport() {
           </div>
         </section>
 
-        {/* CRAFT vs Traditional */}
-        <section className="py-12">
-          <div className="container max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-3">
-              What Works: CRAFT vs. Traditional Approaches
-            </h2>
-            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Not all family approaches are equal. Research shows CRAFT outperforms confrontational interventions.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="border-destructive/30">
-                <CardHeader>
-                  <CardTitle className="text-destructive text-base">Traditional Confrontational Approaches</CardTitle>
-                  <CardDescription>What most people think of as "an intervention"</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2"><span className="text-destructive mt-0.5">✗</span>Surprise ambush format increases shame and defensiveness</li>
-                    <li className="flex items-start gap-2"><span className="text-destructive mt-0.5">✗</span>Ultimatums without preparation often aren't followed through</li>
-                    <li className="flex items-start gap-2"><span className="text-destructive mt-0.5">✗</span>High-pressure tactics can damage family relationships</li>
-                    <li className="flex items-start gap-2"><span className="text-destructive mt-0.5">✗</span>Engagement rates under 30% in some studies</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="border-primary/30 bg-primary/5">
-                <CardHeader>
-                  <CardTitle className="text-logo-blue text-base">CRAFT (Community Reinforcement &amp; Family Training)</CardTitle>
-                  <CardDescription>Evidence-based family intervention model</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2"><span className="text-primary mt-0.5">✓</span>Teaches families to reinforce sober behavior, not the addiction</li>
-                    <li className="flex items-start gap-2"><span className="text-primary mt-0.5">✓</span>Reduces enabling patterns and communication triggers</li>
-                    <li className="flex items-start gap-2"><span className="text-primary mt-0.5">✓</span>64–74% treatment engagement rate in clinical trials</li>
-                    <li className="flex items-start gap-2"><span className="text-primary mt-0.5">✓</span>Improves family wellbeing even if loved one doesn't immediately enter treatment</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-            <p className="text-center text-muted-foreground mt-6 text-sm">
-              Sober Helpline's coaching is grounded in CRAFT principles and 20+ years of intervention experience.
-            </p>
-          </div>
-        </section>
+        <RegionalFamilySupportOptions state="Utah" />
 
         {/* “The Family Squares” */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
@@ -350,13 +253,13 @@ export default function UtahFamilySupport() {
               <div>
                 <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
                   <Calendar className="h-3.5 w-3.5" />
-                  Every Monday — 7:00 PM PST
+                  Every Monday — 7:00 PM Pacific
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, families across Utah (and nationwide) join a free Zoom call
+                  Every Monday at 7PM Pacific, families across Utah (and nationwide) join a free Zoom call
                   led by Matt Brown — a certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">
@@ -364,8 +267,8 @@ export default function UtahFamilySupport() {
                     "No cost. No sign-up fees. No sales pitch.",
                     "No treatment center names or referral pressure",
                     "Ask real questions, get real answers",
-                    "Connect with other Utah families going through the same thing",
-                    "Anonymous — share only what you're comfortable with",
+                    "Connect with families joining from different places",
+                    "Share only what you're comfortable with",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
@@ -384,7 +287,7 @@ export default function UtahFamilySupport() {
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
                   <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
-                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
+                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM Pacific</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" />Open to all Utah families</div>
                     <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" />Led by certified interventionist</div>
@@ -405,24 +308,20 @@ export default function UtahFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
-                  Hourly Intervention Coaching
+                  Private Family Coaching
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Sometimes families need more than a support group. They need a strategy.
-                  Sober Helpline offers hourly one-on-one coaching with a certified interventionist —
-                  a practical alternative to expensive in-person intervention teams.
+                  Private coaching is a paid, one-on-one service for family members who want to discuss their situation by phone or video. Review the session details and availability before booking.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Our philosophy: <strong>equip the family first.</strong> In most cases, when families
-                  learn the right tools and set real boundaries, their loved one's motivation to seek
-                  treatment increases — no dramatic confrontation required.
+                  Coaching focuses on your questions about communication, boundaries, and next steps. It is not therapy or medical treatment, and it does not guarantee that a loved one will enter treatment.
                 </p>
                 <ul className="space-y-3 mb-6">
                   {[
                     "One-on-one coaching with Matt Brown, certified interventionist",
                     "Identify enabling patterns specific to your family situation",
-                    "Create a boundary plan with real consequences",
-                    "Learn evidence-based communication strategies (CRAFT)",
+                    "Discuss boundaries in your family situation",
+                    "Talk through communication questions",
                     "Prepare for the conversation — and what comes after",
                     "Available by phone or video — anywhere in Utah",
                   ].map((item) => (
@@ -440,7 +339,6 @@ export default function UtahFamilySupport() {
                     <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button>
                   </a>
             <WhatsAppLink source="utah_cta_1" variant="button" />
-            <WhatsAppLink source="utah_cta_1" variant="button" className="" />
                 </div>
               </div>
               <Card className="border-primary/20 bg-primary/5">
@@ -463,7 +361,7 @@ export default function UtahFamilySupport() {
                   <div className="mt-6 border-t border-border pt-4">
                     <p className="text-sm text-muted-foreground">
                       <strong className="text-foreground">Treatment Finder:</strong> Looking for Utah treatment options?
-                      Search our free, vetted provider directory.
+                      Browse the provider directory and confirm current services directly with each provider.
                     </p>
                     <Link to="/inpatient-treatment" className="text-primary text-sm hover:underline inline-block mt-2">
                       Browse Utah Treatment Providers →
@@ -533,7 +431,7 @@ export default function UtahFamilySupport() {
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               You don't have to wait for a crisis. You don't have to figure this out alone.
-              Join thousands of families who've found clarity, direction, and hope through Sober Helpline.
+              Explore the free group meeting and paid support options at your own pace.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
@@ -543,7 +441,6 @@ export default function UtahFamilySupport() {
                 <Button size="lg" variant="outline" className="gap-2"><Phone className="h-4 w-4" />Call (458) 298-8008</Button>
               </a>
             <WhatsAppLink source="utah_cta_2" variant="button" />
-            <WhatsAppLink source="utah_cta_2" variant="button" className="" />
             </div>
           </div>
         </section>
