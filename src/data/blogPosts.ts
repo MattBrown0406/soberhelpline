@@ -301,7 +301,7 @@ Wait until they're sober, describe specific facts calmly, and focus on the patte
 
 ## You Don't Have to Figure This Out Alone
 
-Sober Helpline exists for families living with drinking that scares them. You'll find education on how addiction works, [family coaching](/family-coaching) to help you decide what to say and when, and a community of families who know what a blackout morning feels like. Start with our free Monday night [Family Squares](/monday-zoom-registration) call, and explore [membership](/family-membership) when you're ready.\`,
+Sober Helpline exists for families living with drinking that scares them. You'll find education on how addiction works, [family coaching](/family-coaching) to help you decide what to say and when, and a community of families who know what a blackout morning feels like. Start with our free Monday night [Family Squares](/monday-zoom-registration) call, and explore [membership](/family-membership) when you're ready.`,
   },
   {
     id: 174,
