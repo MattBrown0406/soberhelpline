@@ -30,9 +30,4 @@ export const mattBrownPersonSchema = {
     "boundaries and enabling",
     "treatment readiness",
   ],
-  sameAs: [
-    "https://freedominterventions.com",
-    "https://nomoreenabling.com",
-    "https://soberhelpline.com",
-  ],
 };

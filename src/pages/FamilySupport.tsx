@@ -99,7 +99,7 @@ export default function FamilySupport() {
         </div>
 
         {/* Main Content */}
-        <main className="container py-8 md:py-12">
+        <main className="container px-4 sm:px-8 py-8 md:py-12 [&_button]:whitespace-normal [&_button]:h-auto [&_button]:min-h-11 [&_button]:py-3 [&_button]:max-w-full">
           <div className="max-w-4xl mx-auto">
             {/* Start Here CTA */}
             <div className="mb-8">
@@ -239,11 +239,11 @@ export default function FamilySupport() {
               <div className="mb-12">
                 <Card className="border-l-4 border-l-amber-400 border-t border-r border-b border-border bg-amber-50 dark:bg-amber-950/20">
                   <CardContent className="p-6 md:p-8">
-                    <div className="flex items-start gap-4">
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
                       <div className="p-3 bg-primary/10 rounded-full">
                         <Lock className="h-6 w-6 text-primary" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0 w-full">
                         <h3 className="text-lg font-semibold text-logo-blue mb-2">
                           Get the full family support library
                         </h3>
@@ -441,7 +441,7 @@ export default function FamilySupport() {
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                   Start with the Monday Zoom if you can. If you need more support after that, membership is the next layer. If the situation is urgent or too specific for a group setting, private coaching is available.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
                   <Link to="/monday-zoom-registration">
                     <Button size="lg" className="gap-2 w-full sm:w-auto">
                       <Calendar className="h-4 w-4" />

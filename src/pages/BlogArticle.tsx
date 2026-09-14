@@ -7,6 +7,7 @@ import { useSEOOverride } from "@/contexts/SEOOverrideContext";
 import { Helmet } from "react-helmet-async";
 
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
+import ArticleContent from "@/components/ArticleContent";
 import { blogPosts, imageMap } from "@/data/blogPosts";
 import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
@@ -218,68 +219,6 @@ const BlogArticle = () => {
     }
   };
 
-  const renderTextWithLinks = (text: string) => {
-    const linkRegex = /\[LINK:([^:]+):([^\]]+)\]/g;
-    const parts: (string | JSX.Element)[] = [];
-    let lastIndex = 0;
-    let match;
-
-    while ((match = linkRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
-      }
-      parts.push(
-        <a
-          key={match.index}
-          href={match[2]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline font-medium"
-        >
-          {match[1]}
-        </a>
-      );
-      lastIndex = match.index + match[0].length;
-    }
-
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
-    }
-
-    return parts.length > 0 ? parts : text;
-  };
-
-  const renderContent = (content: string) => {
-    return content.split('\n\n').map((paragraph, index) => {
-      const imageMatch = paragraph.match(/^\[IMAGE:(\w+)\]$/);
-      if (imageMatch) {
-        const imageName = imageMatch[1];
-        const imageSrc = imageMap[imageName];
-        if (imageSrc) {
-          return (
-            <div key={index} className="my-6 rounded-lg overflow-hidden shadow-lg">
-              <img src={imageSrc} alt="Article illustration" className="w-full h-auto" />
-            </div>
-          );
-        }
-        return null;
-      }
-      
-      if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-        return (
-          <h3 key={index} className="text-xl font-semibold text-foreground mt-6 mb-3">
-            {paragraph.replace(/\*\*/g, '')}
-          </h3>
-        );
-      }
-      return (
-        <p key={index} className="text-muted-foreground mb-4 leading-relaxed">
-          {renderTextWithLinks(paragraph)}
-        </p>
-      );
-    });
-  };
-
   return (
     <>
       {seoData && (
@@ -420,7 +359,7 @@ const BlogArticle = () => {
                 </div>
               </div>
             )}
-            {post.content && renderContent(post.content)}
+            {post.content && <ArticleContent content={post.content} images={imageMap} />}
           </div>
 
           <RelatedFamilyAnswerLinks

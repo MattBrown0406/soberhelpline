@@ -87,7 +87,6 @@ export default function InterventionHelp() {
             "@type": "Organization",
             name: "Sober Helpline",
             url: "https://soberhelpline.com",
-            sameAs: "https://freedominterventions.com",
           },
           areaServed: "US",
           serviceType: "Addiction intervention planning",

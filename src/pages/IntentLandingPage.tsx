@@ -217,7 +217,7 @@ export default function IntentLandingPage() {
           </section>
 
           <section className="container px-4 py-10 md:py-14">
-            <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
+            <div className={`mx-auto grid max-w-6xl gap-4 ${config.path === "/addiction-family-coaching" ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
               <Card>
                 <CardContent className="p-5">
                   <Users className="h-6 w-6 text-primary" />
@@ -244,6 +244,7 @@ export default function IntentLandingPage() {
                   </Button>
                 </CardContent>
               </Card>
+              {config.path !== "/addiction-family-coaching" && (
               <Card>
                 <CardContent className="p-5">
                   <Shield className="h-6 w-6 text-primary" />
@@ -258,6 +259,7 @@ export default function IntentLandingPage() {
                   </ul>
                 </CardContent>
               </Card>
+              )}
             </div>
           </section>
 

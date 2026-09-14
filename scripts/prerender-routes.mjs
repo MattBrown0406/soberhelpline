@@ -170,6 +170,20 @@ const familyAnswerPages = [...familyAnswersSource.matchAll(/slug:\s*"([^"]+)"[\s
   });
 
 const blogPostPages = await getBlogPostPages();
+// Compile the exact public React content renderer through Vite. No application,
+// auth, network data, or private routes enter this build-only module graph.
+const { createServer } = await import('vite');
+const articleCompiler = await createServer({ server: { middlewareMode: true }, appType: 'custom', optimizeDeps: { noDiscovery: true, include: [] } });
+try {
+  const { pilotSlugs, renderArticlePilot } = await articleCompiler.ssrLoadModule('/src/lib/articlePilot.tsx');
+  for (const slug of pilotSlugs) {
+    const page = blogPostPages.find(page => page.route === `/blog/${slug}`);
+    if (!page) throw new Error(`Missing pilot metadata: ${slug}`);
+    page.initialHtml = renderArticlePilot(slug);
+  }
+} finally {
+  await articleCompiler.close();
+}
 
 const titleCaseFromRoute = (route) => route
   .replace(/^\//, '')
@@ -384,7 +398,13 @@ for (const page of allPrerenderPages) {
     .replace(/<meta name="twitter:title" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="twitter:title")/, `<meta name="twitter:title" content="${escapeHtml(renderedTitle)}" data-rh="true">`)
     .replace(/<meta name="twitter:description" content="[^"]*"\s*\/?>(?![\s\S]*<meta name="twitter:description")/, `<meta name="twitter:description" content="${escapeHtml(renderedDescription)}" data-rh="true">`)
     .replace('</head>', `    <link rel="canonical" href="${canonicalUrl}" data-rh="true">${socialImageTags(page)}${articleTags(page)}${jsonLdTags(page)}\n</head>`)
-    .replace('</body>', `<noscript>${page.noscriptHtml}</noscript></body>`);
+    .replace('</body>', page.initialHtml ? '</body>' : `<noscript>${page.noscriptHtml}</noscript></body>`);
+  if (page.initialHtml) {
+    if (!html.includes('<div id="root"></div>')) throw new Error('Missing empty root for article pilot');
+    // React's existing createRoot replaces this public initial content on mount;
+    // do not append a second article or a hidden/noscript duplicate.
+    html = html.replace('<div id="root"></div>', `<div id="root">${page.initialHtml}</div>`);
+  }
   html = markHelmetManagedTags(html);
 
   await fs.mkdir(targetDir, { recursive: true });

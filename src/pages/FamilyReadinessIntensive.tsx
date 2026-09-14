@@ -46,7 +46,6 @@ const FamilyReadinessIntensive = () => {
             name: "Sober Helpline",
             url: "https://soberhelpline.com",
             telephone: "+1-458-298-8008",
-            sameAs: "https://freedominterventions.com"
           },
           areaServed: "US",
           serviceType: "Family intervention readiness planning",
