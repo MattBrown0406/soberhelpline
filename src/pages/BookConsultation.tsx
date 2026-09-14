@@ -241,12 +241,8 @@ const BookConsultation = () => {
       // Mark abandoned booking as completed (so we don't follow up)
       if (abandonedBookingId) {
         const token = localStorage.getItem(`ab_token_${abandonedBookingId}`);
-        if (user) {
-          await supabase
-            .from("abandoned_bookings")
-            .update({ completed: true })
-            .eq("id", abandonedBookingId);
-        } else if (token) {
+        const markCompletedByToken = async () => {
+          if (!token) return;
           await supabase.rpc("update_abandoned_booking", {
             _id: abandonedBookingId,
             _edit_token: token,
@@ -261,7 +257,20 @@ const BookConsultation = () => {
             _last_step: null,
             _completed: true,
           });
+        };
+
+        if (user) {
+          const { data: updated, error: completeError } = await supabase
+            .from("abandoned_bookings")
+            .update({ completed: true })
+            .eq("id", abandonedBookingId)
+            .select("id");
+          // Row may have been created anonymously (user_id null) — fall back to the token RPC
+          if (completeError || !updated?.length) await markCompletedByToken();
+        } else {
+          await markCompletedByToken();
         }
+
         if (abandonedBookingId) localStorage.removeItem(`ab_token_${abandonedBookingId}`);
       }
 
