@@ -408,6 +408,9 @@ export default function FamilySupport() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
+                  <Link to="/blog/first-al-anon-meeting-what-to-expect" className="block text-primary underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+                    What to expect at your first Al-Anon meeting
+                  </Link>
                   <a href="https://al-anon.org" target="_blank" rel="noopener noreferrer" className="block text-primary hover:underline">
                     Al-Anon Family Groups →
                   </a>

@@ -215,6 +215,9 @@ export default function InterventionHelp() {
                     A good intervention process starts before the actual conversation. The family needs alignment, treatment options, boundaries, logistics, and a calm plan for resistance.
                   </p>
                   <p>
+                    For a walkthrough, read <Link to="/blog/what-to-expect-during-an-intervention" className="text-primary underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">what to expect during an intervention</Link>.
+                  </p>
+                  <p>
                     Sober Helpline is the sorting and readiness layer. Freedom Interventions is the professional intervention path when the situation calls for it.
                   </p>
                 </div>

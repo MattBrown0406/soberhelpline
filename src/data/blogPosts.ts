@@ -241,7 +241,7 @@ Research links frequent blackouts to higher rates of alcohol use disorder and in
 
 ## What Alcohol Blackouts Reveal About the Brain and Addiction
 
-Blackouts show, in real time, that alcohol changes [how alcohol affects the brain](/blog/dopamine-and-addiction-brain-science-for-families) while a person is still on their feet. The same drinking that erases memory also affects the prefrontal cortex, which handles judgment, impulse control, and reading the consequences of an action. So the person in a blackout is often making worse decisions and won't remember making them.
+Blackouts show, in real time, that alcohol changes [LINK:how alcohol affects the brain:/blog/dopamine-and-addiction-brain-science-families] while a person is still on their feet. The same drinking that erases memory also affects the prefrontal cortex, which handles judgment, impulse control, and reading the consequences of an action. So the person in a blackout is often making worse decisions and won't remember making them.
 
 For families, this explains a pattern that feels like gaslighting but often isn't. Your loved one may deny saying something cruel, driving home, or spending money because, from where they sit, it never happened. Their confidence is real. Their memory is just missing.
 
