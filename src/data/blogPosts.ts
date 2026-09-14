@@ -16,6 +16,7 @@ import verifyInsuranceBenefitsRehabImg from "@/assets/blog-verify-insurance-bene
 import mindfulnessOrientedRecoveryImg from "@/assets/blog-mindfulness-oriented-recovery-enhancement-more.jpg";
 import substanceUseAssessmentImg from "@/assets/blog-substance-use-assessment-before-rehab.jpg";
 import aiCompanionAddictionImg from "@/assets/blog-ai-companion-chatbot-addiction-family-guide.jpg";
+import addictionPersonalityChangesImg from "@/assets/blog-addiction-personality-changes-family.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
