@@ -16,6 +16,7 @@ import verifyInsuranceBenefitsRehabImg from "@/assets/blog-verify-insurance-bene
 import mindfulnessOrientedRecoveryImg from "@/assets/blog-mindfulness-oriented-recovery-enhancement-more.jpg";
 import substanceUseAssessmentImg from "@/assets/blog-substance-use-assessment-before-rehab.jpg";
 import aiCompanionAddictionImg from "@/assets/blog-ai-companion-chatbot-addiction-family-guide.jpg";
+import addictionPersonalityChangesImg from "@/assets/blog-addiction-personality-changes-family.jpg";
 
 import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
@@ -201,6 +202,113 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 176,
+    slug: "addiction-personality-changes-family-guide",
+    seoTitle: "Addiction and Personality Changes: Are They Still in There?",
+    metaDescription: "Why does addiction change someone's personality? Learn what's happening in your loved one's brain, what comes back in recovery, and how families can respond.",
+    title: "Addiction and Personality Changes: Is the Person You Love Still in There?",
+    category: "Understanding Addiction",
+    author: "Matt Brown",
+    date: "2026-09-14",
+    image: addictionPersonalityChangesImg,
+    keywords: ["addiction personality changes", "does addiction change personality", "addicted loved one is mean", "personality after recovery", "addiction and the brain"],
+    excerpt: "\"I don't even recognize him anymore.\" Here is why addiction changes personality, what the brain is actually doing, and what comes back with recovery.",
+    content: `One of the most common things I hear from families is some version of this: "I don't even recognize him anymore." The son who used to call every Sunday now snaps at his mother for asking how he's doing. The wife who was the calm center of the household is now secretive, irritable, and gone for hours with no explanation. The friend who would have driven across the state for you now lies to your face without blinking.
+
+If you are living with addiction personality changes in someone you love, you are probably asking two questions at once. What happened to them? And is the real person still in there? This article answers both. The short version is that addiction does change personality, those changes have a clear explanation in the brain, and most of what you're missing does come back with sustained recovery.
+
+## Why Does Addiction Change Someone's Personality?
+
+Addiction changes personality because it rewires the parts of the brain that handle priorities, self-control, and emotional regulation. The substance becomes the brain's top survival priority, and everything else, including relationships and values, gets pushed down the list. The person hasn't chosen new values. Their brain's ranking system has been hijacked.
+
+Here's the mechanism in plain language. Every time someone uses, the brain's reward system fires a surge of dopamine far larger than anything natural life produces. Over months and years, the brain adapts by treating the substance the way it treats food, water, and safety: as something it must have. Meanwhile, the prefrontal cortex, the part of the brain responsible for judgment, impulse control, and weighing consequences, gets weaker and quieter.
+
+So you end up with a brain that has a very loud accelerator and very worn-out brakes. The traits you see, the selfishness, the irritability, the dishonesty, are what it looks like when a person's survival system is pointed at a chemical instead of at the people they love. Our guide to [LINK:how addiction changes the brain:/blog/brain-disease-model-of-addiction] goes deeper into the science.
+
+## What Personality Changes Are Common in Addiction?
+
+The most common addiction personality changes are increased irritability, secrecy and dishonesty, emotional flatness or mood swings, loss of interest in old passions, and a growing self-centeredness. Families often describe it as a Jekyll-and-Hyde pattern, where the old person shows up briefly and then disappears again.
+
+Some specific shifts families report:
+
+- **Irritability and defensiveness.** Simple questions feel like attacks, because the brain reads any threat to the substance as a threat to survival.
+- **Secrecy and lying.** The person starts protecting their use the way you'd protect something you couldn't live without. Lying becomes automatic, not deliberate cruelty. If this is your daily reality, read [LINK:why your loved one lies:/blog/what-to-do-when-loved-one-lies-about-drinking-drug-use].
+- **Emotional flatness.** Things that used to bring joy, like hobbies, family dinners, and their kids' games, stop registering. The brain's reward system has been recalibrated so that only the substance feels rewarding.
+- **Mood swings.** Intoxication, withdrawal, and craving each bring their own emotional weather, and families ride all of it.
+- **Self-focus.** Someone who used to notice everyone else's needs now seems unable to see past their own. This is one of the most painful changes for families, and one of the most reliably reversible.
+
+Not everyone shows every change, and the severity varies. But if you're nodding along to three or four of these, what you're seeing is the disease, not a new and worse version of your loved one's character.
+
+## Is the Person You Love Still in There?
+
+Yes. The person's core identity, their memories, their history with you, their underlying values, has not been erased. It has been overridden by a brain system that is currently louder than everything else. In recovery, as the brain heals, families very often say the old person "came back" over the course of months.
+
+I've watched this happen hundreds of times, and I lived it myself. Early in my own recovery, the people who loved me were meeting someone they hadn't seen in years. Not a new person. The same person, with the volume turned back down on the thing that had been running the show.
+
+There's an important caveat, though. Recovery doesn't just restore the old personality. It usually improves on it. Many people in long-term recovery are more honest, more emotionally available, and more accountable than they were before their addiction, because getting well requires building those skills on purpose. So the person who comes back may be better than the one you remember, not just the same.
+
+## How Long Does It Take for Personality to Return in Recovery?
+
+Most families notice meaningful personality changes within the first 30 to 90 days of sobriety, with continued improvement over the first one to two years. The brain's dopamine system and prefrontal cortex heal gradually, so patience matters. Expect progress that comes in waves rather than a straight line.
+
+A rough timeline many families experience:
+
+- **Weeks 1 to 4: Physical stabilization.** Mood can actually be worse here, with irritability, anxiety, and low energy, because the brain is recalibrating without the substance.
+- **Months 1 to 3: Glimpses.** Humor comes back. Eye contact returns. Your loved one starts noticing other people again.
+- **Months 3 to 12: Steadier ground.** Emotional regulation improves. Honesty becomes more consistent. Old interests start to matter again.
+- **Year 1 and beyond: Growth.** With ongoing recovery work, many people become more emotionally mature than before their addiction began.
+
+If your loved one is a few weeks sober and seems moody and distant, that is not a sign it isn't working. It is often a sign the brain is doing exactly the hard, uncomfortable work of healing. Our guide to [LINK:how the brain recovers through neuroplasticity:/blog/brain-recovery-from-addiction-neuroplasticity-families] explains what is happening underneath.
+
+## How Should Families Respond to Personality Changes?
+
+The most useful response is to separate the person from the disease in your own mind, hold firm boundaries around behavior, and stop waiting for the old personality to return before you take care of yourself. You can love the person and refuse to accept the behavior at the same time. Those are not in conflict.
+
+A few practical shifts that help:
+
+- **Name the disease, not the character.** Instead of "You've become so selfish," try "I miss you, and I'm not willing to keep living with the lying." One attacks identity; the other describes the behavior and your limit.
+- **Don't argue with the substance.** When your loved one is intoxicated or in withdrawal, you are largely talking to the disease. Save important conversations for clearer moments.
+- **Set boundaries based on behavior, not promises.** Personality changes come with a lot of "I'll be different tomorrow." Respond to what they do, not what they say they'll do.
+- **Grieve honestly.** It is normal to grieve someone who is still alive. Naming that loss out loud, with a coach, a counselor, or a support group, keeps it from turning into resentment.
+- **Get your own support.** Watching someone you love disappear is one of the most disorienting experiences a family can go through. You need people who understand it.
+
+## Moving Forward
+
+The person you love is still in there. What you're seeing is what addiction does to a human brain, and it's the same thing it does to every human brain it takes hold of. That is not an excuse for the behavior. It is an explanation, and explanations give you something to work with. When you stop trying to reason with the disease and start responding to it with clarity and boundaries, you create the conditions where recovery becomes possible and where the person you're missing has room to come back.
+
+You don't have to wait for that to start taking care of yourself, and you don't have to figure it out alone.
+
+## Frequently Asked Questions About Addiction and Personality Changes
+
+### Does addiction permanently change your personality?
+
+In most cases, no. The personality changes caused by addiction come from disrupted brain function, and much of that function recovers with sustained sobriety. Some people experience lasting effects after very long or severe use, but the traits families miss most, like warmth, honesty, and connection, usually return.
+
+### Why is my addicted loved one so mean to me?
+
+Irritability and hostility in addiction usually come from the brain treating any threat to the substance as a survival threat, plus the mood effects of intoxication and withdrawal. It isn't personal, even when it feels deeply personal. It also isn't acceptable, and you're allowed to set limits around how you're treated.
+
+### Can someone's personality come back after addiction?
+
+Yes. Families commonly report the "old person" returning within the first few months of recovery, with continued improvement over one to two years. Many people in long-term recovery become more emotionally present and accountable than they were before addiction.
+
+### Is it the drugs or is this who they really are?
+
+If the changes appeared or worsened alongside substance use, it is very likely the addiction. The best test is time in recovery. As the brain heals, you'll see which traits fade and which were there all along. Even if some difficult traits remain, recovery gives your loved one the tools to work on them.
+
+### How do I talk to someone whose personality has changed from addiction?
+
+Choose sober, calm moments. Describe specific behaviors and how they affect you rather than labeling their character. State what you're willing and unwilling to live with, and follow through. Expect defensiveness, and don't let it pull you into an argument.
+
+### Should I wait for them to be themselves again before I get help?
+
+No. Family support, coaching, and community are for you, right now, regardless of what your loved one decides. Families who get support tend to hold clearer boundaries, communicate more effectively, and burn out less, all of which improve the odds for the person struggling.
+
+## Ready for Support That Actually Helps?
+
+If you're grieving someone who is still in the room, Sober Helpline was built for you. You'll find ongoing education about how addiction works, [family coaching](/family-coaching) to help you decide what to do next, and a community of people who understand exactly what it's like to miss someone you see every day. Start with our free Monday night [Family Squares](/monday-zoom-registration) call, and explore [membership](/family-membership) when you're ready.`,
+  },
   {
     id: 175,
     slug: "alcohol-blackouts-explained-family-guide",
