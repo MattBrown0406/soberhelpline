@@ -260,13 +260,13 @@ const BookConsultation = () => {
         };
 
         if (user) {
-          const { error: completeError } = await supabase
+          const { data: updated, error: completeError } = await supabase
             .from("abandoned_bookings")
             .update({ completed: true })
             .eq("id", abandonedBookingId)
             .select("id");
           // Row may have been created anonymously (user_id null) — fall back to the token RPC
-          if (completeError) await markCompletedByToken();
+          if (completeError || !updated?.length) await markCompletedByToken();
         } else {
           await markCompletedByToken();
         }
