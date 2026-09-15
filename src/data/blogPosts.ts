@@ -196,12 +196,105 @@ import explanationOfBenefitsImg from "@/assets/blog-how-to-read-explanation-of-b
 import insuranceStoppedPayingImg from "@/assets/blog-insurance-stopped-paying-for-rehab-mid-treatment.jpg";
 import singleCaseAgreementImg from "@/assets/blog-single-case-agreement-rehab.jpg";
 import alcoholBlackoutsImg from "@/assets/blog-alcohol-blackouts-explained-family-guide.jpg";
+import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-using.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 177,
+    slug: "loved-one-wants-to-quit-but-keeps-using",
+    seoTitle: "Wants to Quit but Keeps Using: Ambivalence Explained",
+    metaDescription: "Your loved one says they want to quit but keeps using? That is not a contradiction. Learn why ambivalence is normal in addiction and how families can help.",
+    title: "Why Your Loved One Wants to Quit but Keeps Using: Understanding Ambivalence in Addiction",
+    category: "Understanding Addiction",
+    author: "Matt Brown",
+    date: "2026-09-15",
+    image: wantsToQuitKeepsUsingImg,
+    keywords: ["wants to quit but keeps using", "ambivalence in addiction", "why do addicts break promises to quit", "motivation and addiction", "family help for addiction"],
+    excerpt: "\"I'm done. I mean it this time.\" Then it happens again. Here is why ambivalence is normal in addiction, and how families can respond without starting a fight.",
+    content: `If your loved one wants to quit but keeps using, you have probably heard both sentences from the same person in the same week. "I'm done. I mean it this time." And then, a few days later, the same behavior, the same excuses, the same disappointment on your side of the table.
+
+Most families read this as lying, weakness, or manipulation. Far more often, what you are watching is ambivalence, one of the most predictable features of addiction. Your loved one is not saying one thing and secretly believing another. They believe both at once. Understanding how that is possible will change how you talk to them.
+
+## What Does It Mean When Someone Wants to Quit but Keeps Using?
+
+Ambivalence means holding two opposing wants at the same time: a real desire to stop and a real desire to keep going. In addiction, both are true, and which one wins depends on the moment, the stress level, and what the brain has been trained to reach for. This is not a character flaw. It is the normal state of almost everyone who eventually recovers.
+
+The person telling you they want to quit at 9 a.m. is being honest. The person using at 9 p.m. is also being honest about what they need in that moment. The tragedy of addiction is that the same brain produces both.
+
+## Why Does the Brain Keep Choosing the Substance?
+
+The brain keeps choosing the substance because addiction shifts decision-making away from the thoughtful, planning part of the brain and toward the automatic, habit-driven part. The prefrontal cortex, which handles long-term goals and consequences, gets quieter. The circuits that respond to cues, cravings, and stress get louder. When those two systems disagree, the louder one usually wins.
+
+This is why your loved one can make a sincere plan on a calm morning and abandon it by evening. After a hard day, a fight, a text from an old friend, or simply the time of day they always used, the automatic brain takes over. The decision does not feel like a decision. It feels like relief. This is also [why willpower isn't enough](/blog/why-willpower-fails).
+
+Three things make the pull stronger:
+
+- **Cues.** People, places, times of day, feelings, and even smells become linked to using. The brain reacts before the person has consciously thought about it.
+- **Stress.** Substances become the brain's fastest known route to feeling okay. Under pressure, the brain reaches for what has worked before, even when the person knows it hurts them.
+- **Withdrawal and discomfort.** When the substance leaves the body, anxiety, irritability, and physical symptoms show up. Using stops the discomfort, and the brain learns that lesson well.
+
+## Why Arguing Against Ambivalence Usually Backfires
+
+When families push hard on one side of the ambivalence, the loved one often ends up defending the other side. If you argue for quitting, they argue for why they can't yet. This is not because they disagree with you. It is because both positions already live inside them, and you just took one of the seats.
+
+Here is a pattern I see constantly in family coaching. Mom says, "You told me you were done. Why are you doing this again?" Son says, "It's not that bad. I've got it under control." An hour earlier, alone in his car, he was thinking about how badly he wants out. Mom's push moved him into the defensive seat.
+
+A more useful move is to let your loved one voice both sides out loud. "Part of you wants to stop and part of you doesn't. Tell me about both." When a person hears themselves say why they want to quit, in their own words, the planning brain gets a little stronger. When they only hear you say it, nothing changes.
+
+## How Can Families Help Someone Who Wants to Quit but Keeps Using?
+
+Families help most by making the recovery side of the ambivalence easier to act on and the using side harder to sustain. You cannot resolve your loved one's ambivalence for them. You can shape the environment so that when the "I want to quit" moment shows up, there is somewhere for it to go.
+
+Practical steps that hold up under real-life pressure:
+
+- **Ask open questions instead of making the case.** "What would be different if you stopped?" gives them room. "You know this is killing you" gives them a wall.
+- **Reflect the change talk you hear.** When they say "I hate waking up like this," say it back. "You're tired of waking up like this." Let it sit. Do not add a lecture.
+- **Have a next step ready.** Ambivalence tips toward action in short windows. Know the name of an assessment provider, a program, or a counselor so that "Okay, I'll go" can become an appointment the same day. Our guide to the [substance use assessment before rehab](/blog/substance-use-assessment-before-rehab-family-guide) explains what that first appointment involves.
+- **Stop cushioning the using side.** If you are covering bills, calling in sick for them, or smoothing over consequences, you are quietly making the status quo comfortable. [Setting boundaries with an addicted loved one](/blog/setting-boundaries-with-addicted-loved-one) is how families put weight on the recovery side of the scale.
+- **Keep your calm in the room.** Anger and panic push the loved one into the defensive seat.
+
+Ambivalence is not the same as refusal. A person who says "I want to quit" even while using is telling you the door is open a crack. Families who understand this stop waiting for their loved one to be 100 percent ready, because almost no one ever is.
+
+## What Does Progress Actually Look Like?
+
+Progress looks like the balance slowly shifting, not like a sudden flip. Your loved one talks about quitting more often and more specifically. They take a small step: a phone call, a meeting, a conversation with a doctor. They slip, and instead of disappearing for a week, they come back and try again sooner.
+
+If you are the one struggling, and you recognize yourself in this article, please hear this: wanting to quit and continuing to use does not make you a lost cause. The way out is not to feel more certain. It is to take the next small step while you are still uncertain. Most people who recover did exactly that.
+
+## Moving Forward
+
+The gap between wanting to quit and actually quitting is where addiction lives, and it is also where recovery begins. When your loved one says they want out, they are telling you about the part of themselves that is still fighting. Your job is not to win the argument. It is to make that part stronger, one calm conversation and one clear boundary at a time.
+
+## Frequently Asked Questions
+
+### Why does my loved one say they want to quit but keep using?
+
+Because both statements are true. Addiction creates ambivalence, where the desire to stop and the pull to keep using exist at the same time. Which one drives behavior depends on stress, cues, and cravings in the moment.
+
+### Is my loved one lying when they promise to quit?
+
+Usually not. Most promises to quit are made in a calm moment when the planning part of the brain is in charge. The promise gets broken later, when cravings or stress activate the habit-driven part of the brain. The promise was real. The follow-through was overpowered.
+
+### Should I confront my loved one about breaking their promise?
+
+Confrontation tends to push them into defending their use. A better approach is to name both sides calmly: "Part of you wants to stop and part of you doesn't." Then ask open questions and listen for their own reasons to change. Save your energy for boundaries, which matter more than arguments.
+
+### Can someone recover if they are still ambivalent about quitting?
+
+Yes. Most people enter treatment while still ambivalent. Waiting for total certainty is one of the most common reasons families delay getting help. Ambivalence is the normal starting point, not a disqualifier.
+
+### What can I do today if my loved one is stuck between wanting to quit and using?
+
+Have a concrete next step ready, such as the name of an assessment provider or program, so a moment of willingness can turn into action. Stop covering consequences that make using comfortable. And get your own support so you can stay calm enough to keep the conversation open.
+
+## You Don't Have to Figure This Out Alone
+
+Sober Helpline offers ongoing family education, [family coaching sessions](/family-coaching) to help you plan the next conversation, and a community of people walking the same road. Join a free Monday night [Family Squares](/monday-zoom-registration) call, and explore [membership](/family-membership) when you're ready for a full plan.`,
+  },
   {
     id: 176,
     slug: "addiction-personality-changes-family-guide",
