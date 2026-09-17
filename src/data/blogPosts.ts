@@ -197,12 +197,111 @@ import insuranceStoppedPayingImg from "@/assets/blog-insurance-stopped-paying-fo
 import singleCaseAgreementImg from "@/assets/blog-single-case-agreement-rehab.jpg";
 import alcoholBlackoutsImg from "@/assets/blog-alcohol-blackouts-explained-family-guide.jpg";
 import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-using.jpg";
+import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-high.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 178,
+    slug: "how-to-talk-to-loved-one-when-drunk-or-high",
+    seoTitle: "How to Talk to a Loved One When They Are Drunk or High",
+    metaDescription: "Wondering how to talk to a loved one when they are drunk or high? Learn why timing matters, what to say in the moment, and how to have the real conversation later.",
+    title: "How to Talk to a Loved One When They Are Drunk or High (and Why Waiting Usually Works Better)",
+    category: "Family Communication",
+    author: "Matt Brown",
+    date: "2026-09-17",
+    image: talkWhenDrunkOrHighImg,
+    keywords: ["how to talk to a loved one when they are drunk or high", "talking to someone who is drunk", "confronting an intoxicated loved one", "family boundaries addiction", "safety when loved one is high"],
+    excerpt: "You can keep them safe tonight, but you cannot have the real conversation tonight. Here is what to say in the moment, how to stay safe, and when to talk for real.",
+    content: `It usually happens late. Your loved one comes home slurring, or you find them on the couch with glassy eyes, and everything you have been holding in for weeks rises to the surface. If you have ever wondered how to talk to a loved one when they are drunk or high, this article is for you.
+
+Here is the short version: you can keep them safe in the moment, but you cannot have the real conversation in the moment. The person you want to reach is not fully available while they are intoxicated. That is not a judgment about their character. It is simply how the brain works under the influence.
+
+That frees you. You do not have to win the argument tonight. You only have to get through tonight well, then choose a better time to talk.
+
+## Why Is It So Hard to Talk to Someone Who Is Drunk or High?
+
+Alcohol and most drugs temporarily change how the brain processes information, emotion, and memory. The part of the brain responsible for judgment, self-reflection, and impulse control is the part most affected. So the very skills a hard conversation requires are the ones that are offline.
+
+That is why conversations with an intoxicated loved one go in circles. They may agree with everything you say and forget it by morning. They may become defensive or cruel in ways they never would sober. They may cry, promise to change, mean it completely, and still not remember the next day.
+
+A memory that only one person keeps is not a shared agreement. It is a wound for you and a blank space for them. If this sounds familiar, our guide to [LINK:alcohol blackouts:/blog/alcohol-blackouts-explained-family-guide] explains why the memory truly is not there.
+
+## What Should You Say to a Loved One When They Are Drunk or High?
+
+In the moment, your goals are narrow: keep everyone safe, keep your own dignity, and avoid saying things you will regret. Calm, brief, and boring is the standard.
+
+A few phrases that hold up well in real life:
+
+- "I love you. I'm not going to talk about this tonight. We can talk tomorrow."
+- "I'm going to bed. There's water on the counter."
+- "I'm not going to argue with you while you're drinking. That's not a punishment, it's a boundary."
+- "You don't seem safe to drive. I'll hold your keys and give them back in the morning."
+
+Notice what is missing: no lectures, no counting drinks out loud, no bringing up last month. Repeating one calm sentence, even three or four times, works better than escalating.
+
+## What if They Want to Talk Right Now?
+
+Sometimes an intoxicated loved one insists on talking immediately. Honor the feeling without taking the bait: "I can hear that you're hurting, and I want to hear all of it when you can remember it. Let's do this tomorrow." Then follow through the next day. That is what makes the boundary trustworthy.
+
+## How Do You Stay Safe When a Loved One Is Intoxicated?
+
+Safety comes before communication, every time. Decide ahead of time what your safety plan looks like so you are not inventing it at midnight.
+
+1. Do not let them drive. Hold the keys, call a ride, or let them sleep where they are.
+2. Know the signs of an overdose or alcohol poisoning: unresponsiveness, slow or irregular breathing, blue lips, vomiting while passed out. Call 911 immediately if you see them.
+3. If opioids are involved, keep naloxone (Narcan) in the house and know how to use it.
+4. If there is any history of violence, have a room you can lock or a place you can go, and do not hesitate to leave.
+5. Keep children out of the situation. Their job is not to manage an intoxicated adult.
+
+None of this is enabling. Keeping a person alive and yourself safe is the foundation any future conversation gets built on.
+
+## When Is the Right Time to Have the Real Conversation?
+
+The best time to talk is when your loved one is sober, rested, and not in the middle of a crisis. For many families that means the next morning or afternoon, before the next drink, when the memory of last night is still fresh for both of you.
+
+Mornings after are uncomfortable, and that discomfort is useful. A person who is hungover or coming down is often more open than at any other time. You are not there to pile on. You are there to be honest while the door is open.
+
+A simple structure for that conversation:
+
+- Start with one specific observation from last night, not a summary of the year. "Last night you couldn't stand up, and I had to take your keys."
+- Say how it affected you in one or two sentences. "I didn't sleep. I was scared."
+- Make one clear request or state one boundary. "I'm not going to sit up with you anymore when you drink. I'll be in bed by ten."
+- Offer a next step, not an ultimatum. "If you want help figuring out what to do, I'll help you look."
+
+Keep it short. If you are doing more than half the talking, you have slipped into a lecture. Say your piece, then listen. Our [LINK:conversation starters guide:/conversation-starters-guide] gives you language for that next-day talk.
+
+## What if They Say Last Night Was No Big Deal?
+
+Minimizing is common and it is not the end of the conversation. You do not need them to agree with your version of events. Stick to what you saw and what you will do differently. "You may not remember it that way. I do. Either way, I'm going to bed at ten from now on." Boundaries do not require permission — see our [LINK:boundary setting worksheet:/boundary-setting-worksheet] for help defining yours.
+
+## How Do You Take Care of Yourself After a Night Like That?
+
+Late-night confrontations drain families. The adrenaline, the fear, the hope, the disappointment, all of it lands on you. Recovering from those nights is part of the work.
+
+Talk to someone who understands. [LINK:Al-Anon:https://al-anon.org], [LINK:Nar-Anon:https://www.nar-anon.org], a family coach, or a community of other families can help you sort out what happened and what to do next. Writing down what you saw and said also helps, because your own memory of a stressful night can get fuzzy too.
+
+And notice the pattern. If you keep having the same 1 a.m. conversation, it is not failing because you are saying it wrong. It is failing because of when you are saying it. Change the timing, and you change the odds.
+
+## A Closing Thought
+
+You cannot reason with the substance. You can only reach the person, and the person is most reachable when they are sober. Choosing to wait is not giving up. It is choosing the version of your loved one who can actually hear you.
+
+Get through tonight calmly. Keep them safe. Then, in the daylight, say the true thing once, clearly, with love. That is how families change the pattern, one well-timed conversation at a time.
+
+If you want help preparing for that conversation, Sober Helpline offers ongoing [LINK:family coaching and support:/family-coaching], plus a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call with families who have been exactly where you are.`,
+    faqItems: [
+      { question: "Should I confront my loved one while they are drunk?", answer: "No. Confronting someone while they are intoxicated rarely leads to change and often leads to a fight they will not remember. Keep the moment brief and safe, and have the real conversation when they are sober." },
+      { question: "What do I say to someone who is high and wants to argue?", answer: "Use one calm sentence and repeat it as needed: 'I'm not going to talk about this while you're high. We can talk tomorrow.' Then step away. Refusing to argue is a boundary, not a punishment." },
+      { question: "Is it enabling to take care of my loved one when they are drunk?", answer: "No. Taking their keys or making sure they are not in danger is basic safety. Enabling is shielding them from the consequences of their use, like calling in sick for them or covering their lies." },
+      { question: "How do I bring it up the next day without starting a fight?", answer: "Stick to one specific thing you saw, say how it affected you, and state one boundary or request. Keep it short and skip old history. You are telling them the truth and what you will do, not asking them to agree." },
+      { question: "When should I call 911 for someone who is drunk or high?", answer: "Call 911 if the person is unresponsive, breathing slowly or irregularly, has blue lips or fingertips, has a seizure, or vomits while unconscious. When in doubt, call. It is always better to be embarrassed than to be too late." }
+    ],
+    tags: ["family communication", "boundaries", "safety", "alcohol", "addiction"]
+  },
   {
     id: 177,
     slug: "loved-one-wants-to-quit-but-keeps-using",
