@@ -197,6 +197,7 @@ import insuranceStoppedPayingImg from "@/assets/blog-insurance-stopped-paying-fo
 import singleCaseAgreementImg from "@/assets/blog-single-case-agreement-rehab.jpg";
 import alcoholBlackoutsImg from "@/assets/blog-alcohol-blackouts-explained-family-guide.jpg";
 import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-using.jpg";
+import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-high.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
