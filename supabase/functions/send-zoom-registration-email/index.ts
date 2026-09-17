@@ -291,7 +291,7 @@ serve(async (req: Request) => {
             "",
           ].map(foldIcsLine).join("\r\n")),
           filename: `family-squares-${meetingDate}.ics`,
-          type: "text/calendar; charset=UTF-8; method=PUBLISH",
+          type: "text/calendar",
           disposition: "attachment",
         }]
       : [];

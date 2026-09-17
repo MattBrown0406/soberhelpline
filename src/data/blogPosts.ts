@@ -328,7 +328,7 @@ The person telling you they want to quit at 9 a.m. is being honest. The person u
 
 The brain keeps choosing the substance because addiction shifts decision-making away from the thoughtful, planning part of the brain and toward the automatic, habit-driven part. The prefrontal cortex, which handles long-term goals and consequences, gets quieter. The circuits that respond to cues, cravings, and stress get louder. When those two systems disagree, the louder one usually wins.
 
-This is why your loved one can make a sincere plan on a calm morning and abandon it by evening. After a hard day, a fight, a text from an old friend, or simply the time of day they always used, the automatic brain takes over. The decision does not feel like a decision. It feels like relief. This is also [why willpower isn't enough](/blog/why-willpower-fails).
+This is why your loved one can make a sincere plan on a calm morning and abandon it by evening. After a hard day, a fight, a text from an old friend, or simply the time of day they always used, the automatic brain takes over. The decision does not feel like a decision. It feels like relief. This is also [why willpower isn't enough](/why-willpower-fails).
 
 Three things make the pull stronger:
 
@@ -353,7 +353,7 @@ Practical steps that hold up under real-life pressure:
 - **Ask open questions instead of making the case.** "What would be different if you stopped?" gives them room. "You know this is killing you" gives them a wall.
 - **Reflect the change talk you hear.** When they say "I hate waking up like this," say it back. "You're tired of waking up like this." Let it sit. Do not add a lecture.
 - **Have a next step ready.** Ambivalence tips toward action in short windows. Know the name of an assessment provider, a program, or a counselor so that "Okay, I'll go" can become an appointment the same day. Our guide to the [substance use assessment before rehab](/blog/substance-use-assessment-before-rehab-family-guide) explains what that first appointment involves.
-- **Stop cushioning the using side.** If you are covering bills, calling in sick for them, or smoothing over consequences, you are quietly making the status quo comfortable. [Setting boundaries with an addicted loved one](/blog/setting-boundaries-with-addicted-loved-one) is how families put weight on the recovery side of the scale.
+- **Stop cushioning the using side.** If you are covering bills, calling in sick for them, or smoothing over consequences, you are quietly making the status quo comfortable. [Setting boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) is how families put weight on the recovery side of the scale.
 - **Keep your calm in the room.** Anger and panic push the loved one into the defensive seat.
 
 Ambivalence is not the same as refusal. A person who says "I want to quit" even while using is telling you the door is open a crack. Families who understand this stop waiting for their loved one to be 100 percent ready, because almost no one ever is.
