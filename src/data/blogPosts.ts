@@ -272,7 +272,7 @@ A simple structure for that conversation:
 - Make one clear request or state one boundary. "I'm not going to sit up with you anymore when you drink. I'll be in bed by ten."
 - Offer a next step, not an ultimatum. "If you want help figuring out what to do, I'll help you look."
 
-Keep it short. If you are doing more than half the talking, you have slipped into a lecture. Say your piece, then listen. Our [LINK:conversation starters guide:/conversation-starters-guide] gives you language for that next-day talk.
+Keep it short. If you are doing more than half the talking, you have slipped into a lecture. Say your piece, then listen. Our [LINK:conversation starters guide:/conversation-starters] gives you language for that next-day talk.
 
 ## What if They Say Last Night Was No Big Deal?
 
