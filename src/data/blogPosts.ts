@@ -199,12 +199,85 @@ import alcoholBlackoutsImg from "@/assets/blog-alcohol-blackouts-explained-famil
 import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-using.jpg";
 import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-high.jpg";
 import talkAboutDrinkingBeforeCrisisImg from "@/assets/blog-talk-about-drinking-before-crisis.jpg";
+import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-about-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 180,
+    slug: "parents-disagree-about-how-to-handle-addiction",
+    seoTitle: "When Parents Disagree About How to Handle Addiction",
+    metaDescription: "When parents disagree about how to handle a child's addiction, the split becomes the problem. Here's how to get on the same page without one of you giving in.",
+    title: "When Parents Disagree About How to Handle Their Child's Addiction: How to Get on the Same Page",
+    category: "Family Communication",
+    author: "Matt Brown",
+    date: "2026-09-19",
+    image: parentsDisagreeAboutAddictionImg,
+    keywords: ["parents disagree about how to handle addiction", "parents disagree about rehab", "united front addiction parenting", "divorced parents child addiction", "one parent enabling"],
+    excerpt: "One of you wants to cut off the money, the other can't stand the thought of your kid sleeping in a car. Here's how parents get aligned enough to act.",
+    content: `One of you wants to cut off the money. The other one can't stand the thought of your kid sleeping in a car. One of you thinks rehab is the only answer. The other one thinks it's too soon, too expensive, or too extreme. And somewhere in the middle of that argument, the person with the addiction keeps using.
+
+If you're parents who disagree about how to handle addiction in your family, you're not unusual. In my experience, it's the rule, not the exception. Two people who love the same person almost never arrive at the same conclusion at the same time. The good news is that you don't need to agree on everything. You need to agree on a few specific things, and you need to stop working against each other on the rest.
+
+## Why Do Parents Disagree About How to Handle Addiction?
+
+Parents disagree about addiction because each of them is responding to a different fear. One parent is afraid of what happens if they don't intervene. The other is afraid of what happens if they push too hard. Both fears are reasonable, and both are usually rooted in real experiences.
+
+There's a second layer. The accommodating parent is usually the one the child goes to for help, so that parent sees the tears and the promises. The firmer parent gets the anger and the silence. You're each seeing a different version of the same person, so of course you're drawing different conclusions.
+
+Here's the part that's hard to hear: your child knows exactly where the split is. Addiction is very good at finding the path of least resistance. When parents disagree about how to handle addiction, one parent sets a limit, the other quietly covers it, and the child learns that limits are negotiable. The disagreement itself becomes something the addiction can work with.
+
+## How Do You Get on the Same Page When You Disagree About Your Child's Addiction?
+
+You get on the same page by narrowing the conversation. Stop trying to agree on the whole philosophy and start agreeing on three or four specific decisions. Alignment on a few concrete things beats agreement on everything in theory.
+
+Here is a structure that works for most families:
+
+1. **Agree on the goal before you argue about the method.** Say the goal out loud and write it down. Most parents, once they slow down, agree on the destination: "We want our son to get help and stay alive." You may disagree about the road, but you're not driving to different cities.
+2. **Separate the decisions you must agree on from the ones you don't.** You don't have to agree on whether your daughter is "really an addict." You do have to agree on what happens when she asks for money, whether she can live in your home while using, and what you'll do if she gets arrested. Make a short list of the decisions that require a joint answer.
+3. **Give each other the version you're each seeing.** Take ten minutes each, uninterrupted. The accommodating parent describes the phone calls, the crying, the moments of clarity. The firmer parent describes the pattern, the broken promises, the cost. Don't rebut. You're not debating; you're combining two partial pictures into one.
+4. **Pick a position you can both hold, even if neither of you loves it.** A boundary that one parent won't enforce is not a boundary. It's a trap. A workable middle position that both of you will actually hold is stronger than a perfect position only one of you believes in. "We will pay directly for treatment, but we will not hand over cash" is an example of a position that often satisfies both the protective instinct and the firm one.
+5. **Agree on what to say, and who says it.** Decide together on the exact words. "We've talked, and we're both on the same page about this" is one of the most powerful sentences a family can deliver, because it closes the gap the addiction has been using.
+
+If you need help turning this into a single sit-down conversation, our guide on [LINK:how to hold a family meeting about addiction:/blog/family-meeting-about-addiction-guide] walks through the structure step by step, and our guide to [LINK:setting boundaries with an addicted loved one:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] can help you write limits you'll both keep.
+
+## What Should Divorced or Separated Parents Do Differently?
+
+Divorced parents need the same alignment, but with more structure and fewer assumptions. The old conflicts from the marriage will try to show up in the addiction conversation. Your job is to keep them out.
+
+A few things that help:
+
+- Communicate about your child's substance use in writing when emotions run high. A short email or text is easier to keep on topic than a phone call.
+- Agree on a small number of non-negotiables that hold in both households. Everything else can differ.
+- Do not let your child carry messages between you. If they say, "Dad said it was fine," check with Dad.
+- Consider a neutral third party, like a family coach or therapist, to help the two of you make decisions without relitigating the divorce.
+
+If your ex refuses to participate at all, hold your own position consistently anyway. One steady parent is better than none.
+
+## How Do You Handle It When One Parent Keeps Breaking the Agreement?
+
+Treat it as information, not betrayal. When one parent keeps rescuing after agreeing not to, it usually means the agreement asked for more than that parent could deliver. Go back and build a smaller agreement that parent can keep.
+
+Ask, without sarcasm: "What made it feel impossible to hold the line in that moment?" You'll usually hear a fear you haven't addressed. Address it. Maybe the firmer parent takes the phone calls for a while. Maybe you agree on a middle step, like paying for a motel night instead of handing over cash. Maybe the accommodating parent needs their own support, because holding a line is easier when you're not holding it alone.
+
+If the pattern keeps repeating no matter what you try, that's a signal the two of you need outside help. Not because either of you failed, but because addiction is stronger than most families' communication skills.
+
+## You Don't Have to Agree on Everything to Move Forward
+
+The goal is not a perfectly united front. It's a united enough front. If you can agree on the goal, name the handful of decisions that matter, and hold a position you can both keep, you've taken away the thing the addiction was counting on. And you'll have a partner in this instead of an opponent, which matters more than most people realize when the road gets long.
+
+If you and your spouse or co-parent can't seem to get there on your own, that's exactly what [LINK:family coaching:/family-coaching] is for. At Sober Helpline, we help parents build a plan they can both stand behind, with education, coaching, and a community of families who've been where you are. Start with our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or explore [LINK:membership:/family-membership] when you're ready. You don't have to figure this out alone, and you don't have to figure it out perfectly.`,
+    faqItems: [
+      { question: "What should parents do if they disagree about sending their child to rehab?", answer: "Start by agreeing on what would need to be true for both of you to say yes. Often the hesitant parent isn't against treatment; they're against a specific fear, like cost, distance, or the child's reaction. Name those fears specifically, get real information on each one, and revisit the decision together. A consultation with a treatment professional can also give you a shared set of facts to work from." },
+      { question: "What if one parent is enabling and the other one is not?", answer: "Enabling is almost always driven by fear, not weakness, so shaming the enabling parent rarely helps. Instead, figure out what that parent is afraid will happen, address it directly, and build a smaller boundary they can actually keep. A boundary both of you will hold beats a stronger one only one of you will." },
+      { question: "How do divorced parents handle a child's addiction together?", answer: "Keep communication in writing when it's tense, agree on a short list of non-negotiables that apply in both homes, and don't let your child relay messages between you. A neutral family coach or therapist can help you make decisions without dragging in old conflicts from the marriage." },
+      { question: "Should we get counseling for ourselves as parents?", answer: "If you've had the same argument more than three times without progress, yes. Family coaching that focuses specifically on addiction can help you build a shared plan quickly. It's not an admission that your relationship is broken; it's an acknowledgment that addiction is hard to navigate without a guide." }
+    ],
+    tags: ["family communication", "parenting", "boundaries", "co-parenting", "addiction"]
+  },
   {
     id: 179,
     slug: "how-to-talk-to-someone-about-their-drinking",
