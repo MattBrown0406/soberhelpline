@@ -199,6 +199,7 @@ import alcoholBlackoutsImg from "@/assets/blog-alcohol-blackouts-explained-famil
 import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-using.jpg";
 import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-high.jpg";
 import talkAboutDrinkingBeforeCrisisImg from "@/assets/blog-talk-about-drinking-before-crisis.jpg";
+import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-about-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
