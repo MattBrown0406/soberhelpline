@@ -1,5 +1,6 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { AlertTriangle, Calendar, CircleHelp, Clock, Eraser, Loader2, Mail, MessageSquare, RefreshCw, ShieldCheck, Smartphone, Users, Video, WifiOff } from "lucide-react";
+import { AlertTriangle, CircleHelp, Eraser, Loader2, Mail, RefreshCw, Smartphone, WifiOff } from "lucide-react";
+import "./FamilySquaresKiosk.css";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -250,22 +251,38 @@ export default function FamilySquaresKiosk() {
   }, [isAttractMode, isOnline]);
 
   const keepFocusedFieldVisible = useCallback(() => {
+    // Some keyboards resize only the visual viewport, not the layout viewport.
+    const viewport = window.visualViewport;
+    document.documentElement.style.setProperty("--kiosk-keyboard-inset", `${Math.max(0,
+      window.innerHeight - (viewport?.height ?? window.innerHeight) - (viewport?.offsetTop ?? 0))}px`);
     if (focusScrollTimer.current) clearTimeout(focusScrollTimer.current);
     focusScrollTimer.current = setTimeout(() => {
       const activeElement = document.activeElement;
       if (activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement) {
-        activeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        const viewport = window.visualViewport;
+        const top = viewport?.offsetTop ?? 0;
+        const bottom = top + (viewport?.height ?? window.innerHeight);
+        const rect = activeElement.getBoundingClientRect();
+        // Do not re-center already-visible fields (or move on keyboard key taps).
+        if (rect.top < top + 12 || rect.bottom > bottom - 12) {
+          activeElement.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
+          const after = activeElement.getBoundingClientRect();
+          if (after.top < top + 12 || after.bottom > bottom - 12) {
+            window.scrollBy({ top: (after.top + after.bottom - top - bottom) / 2, behavior: "auto" });
+          }
+        }
       }
     }, 300);
   }, []);
 
   useEffect(() => {
     const viewport = window.visualViewport;
-    if (!viewport) return;
-
-    viewport.addEventListener("resize", keepFocusedFieldVisible);
+    viewport?.addEventListener("resize", keepFocusedFieldVisible);
+    window.addEventListener("resize", keepFocusedFieldVisible);
     return () => {
-      viewport.removeEventListener("resize", keepFocusedFieldVisible);
+      viewport?.removeEventListener("resize", keepFocusedFieldVisible);
+      window.removeEventListener("resize", keepFocusedFieldVisible);
+      document.documentElement.style.removeProperty("--kiosk-keyboard-inset");
       if (focusScrollTimer.current) clearTimeout(focusScrollTimer.current);
     };
   }, [keepFocusedFieldVisible]);
@@ -510,7 +527,7 @@ export default function FamilySquaresKiosk() {
 
   if (!isOnline) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 p-5 text-slate-900">
+      <div className="kiosk-offline flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 p-5 text-slate-900">
         <SEOHead
           title="Family Squares Registration Kiosk | Sober Helpline"
           description="Shared-device registration for the Sober Helpline Family Squares meeting."
@@ -551,7 +568,7 @@ export default function FamilySquaresKiosk() {
 
   if (submitted) {
     return (
-      <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 text-white">
+      <div className="kiosk-confirmation bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 text-white">
         <SEOHead
           title="Family Squares Registration Kiosk | Sober Helpline"
           description="Shared-device registration for the Sober Helpline Family Squares meeting."
@@ -640,70 +657,34 @@ export default function FamilySquaresKiosk() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950 px-4 py-5 sm:px-6 sm:py-8 md:py-3 lg:px-4 lg:py-1">
+    <div className="kiosk-registration min-h-screen bg-gradient-to-br from-slate-950 via-logo-blue to-emerald-950">
       <SEOHead
         title="Family Squares Registration Kiosk | Sober Helpline"
         description="Shared-device registration for the Sober Helpline Family Squares meeting."
         noIndex
         canonicalPath="/family-squares"
       />
-      <main className="mx-auto max-w-6xl">
-        <header className="mb-5 flex items-center justify-center sm:mb-7 md:mb-3 lg:mb-2">
-          <img
-            src={kioskLogo}
-            alt="Sober Helpline — Family Addiction Support & Education"
-            className="w-full max-w-md rounded-2xl shadow-2xl md:max-w-[190px] md:rounded-xl lg:max-w-[112px] lg:rounded-lg"
-          />
+      <main className="kiosk-shell">
+        <header className="kiosk-header">
+          <img src={kioskLogo} alt="Sober Helpline — Family Addiction Support & Education" />
+          <div className="kiosk-heading">
+            <h1>Family Squares</h1>
+            <p>Free weekly family support · Mondays at 7:00 PM Pacific</p>
+          </div>
+          <button type="button" className="kiosk-help" onClick={() => {
+            setShowHelp(true);
+            trackConversionEvent("kiosk_help_view", { source: "family_squares_kiosk", privacySafe: true });
+          }}><CircleHelp aria-hidden="true" />Need help?</button>
         </header>
 
-        <div className="grid min-w-0 gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-3">
-          <section className="order-2 min-w-0 select-none rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur sm:p-8 lg:order-none lg:rounded-2xl lg:p-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-100 lg:px-3 lg:py-1.5 lg:text-xs">
-              <Video className="h-5 w-5" />
-              Free weekly family support
-            </div>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:mt-2 lg:text-3xl">Join the Family Squares Zoom Meeting</h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-100 sm:text-xl lg:mt-2 lg:text-sm lg:leading-snug">
-              Compassionate support for anyone affected by a loved one's addiction.
-            </p>
-
-            <div className="mt-7 grid gap-3 lg:mt-3 lg:grid-cols-2 lg:gap-2">
-              {[
-                { icon: Calendar, text: "Every Monday" },
-                { icon: Clock, text: "7:00 PM Pacific" },
-                { icon: Users, text: "Open to families everywhere" },
-                { icon: MessageSquare, text: "Submit a question if you choose" },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex min-h-14 items-center gap-4 rounded-2xl bg-white/10 px-4 py-3 text-lg font-semibold lg:min-h-11 lg:gap-2 lg:rounded-xl lg:px-3 lg:py-1.5 lg:text-sm">
-                  <Icon className="h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
-                  {text}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-7 flex items-center gap-2 rounded-2xl border border-emerald-300/30 bg-emerald-950/30 p-4 text-emerald-50 lg:mt-3 lg:rounded-xl lg:p-2.5 lg:text-sm">
-              <ShieldCheck className="h-6 w-6 shrink-0 text-emerald-300 lg:h-5 lg:w-5" aria-hidden="true" />
-              <p className="min-w-0 flex-1 leading-snug">Private. Personal information is cleared after submission.</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowHelp(true);
-                  trackConversionEvent("kiosk_help_view", { source: "family_squares_kiosk", privacySafe: true });
-                }}
-                className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg border border-white/30 bg-white/10 px-3 font-bold hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              >
-                <CircleHelp className="h-5 w-5" aria-hidden="true" />
-                Need help?
-              </button>
-            </div>
-          </section>
+        <div className="kiosk-content">
 
           <Card className="order-1 min-w-0 border-0 shadow-2xl lg:order-none">
-            <CardContent className="p-6 sm:p-8 md:p-5 lg:p-4">
-              <div className="mb-6 text-center md:mb-3 lg:mb-2">
+            <CardContent className="kiosk-card-content">
+              <div className="kiosk-meeting">
                 <p className="text-sm font-bold uppercase tracking-wider text-logo-blue lg:text-xs">Upcoming meeting</p>
                 <h2 className="mt-1 text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-xl">{formatMeetingDate(meetingDate)}</h2>
-                <p className="mt-2 text-base text-slate-600 lg:mt-1 lg:text-sm">Register below. Your Zoom link will be emailed to you.</p>
+                <p className="kiosk-delivery">Your Zoom link will be emailed to you.</p>
               </div>
 
               {cancellationReason ? (
@@ -717,11 +698,11 @@ export default function FamilySquaresKiosk() {
                 onSubmit={handleSubmit}
                 onFocusCapture={keepFocusedFieldVisible}
                 autoComplete="off"
-                className="space-y-5 md:space-y-3 lg:space-y-2"
+                className="kiosk-form"
                 aria-label="Family Squares registration"
               >
-                <div className="grid gap-5 md:grid-cols-2 md:gap-3">
-                  <div className="space-y-2 lg:space-y-1">
+                <div className="kiosk-field-row">
+                  <div className="kiosk-field">
                     <Label htmlFor="kiosk-name" className="text-base font-bold lg:text-sm">Full Name *</Label>
                     <Input
                       id="kiosk-name"
@@ -739,7 +720,7 @@ export default function FamilySquaresKiosk() {
                     {errors.name ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.name}</p> : null}
                   </div>
 
-                  <div className="space-y-2 lg:space-y-1">
+                  <div className="kiosk-field">
                     <Label htmlFor="kiosk-email" className="text-base font-bold lg:text-sm">Email Address *</Label>
                     <Input
                       id="kiosk-email"
@@ -762,8 +743,8 @@ export default function FamilySquaresKiosk() {
                   </div>
                 </div>
 
-                <div className="grid gap-3 md:grid-cols-[0.8fr_1.2fr] md:items-stretch">
-                  <div className="space-y-2 lg:space-y-1">
+                <div className="kiosk-field-row">
+                  <div className="kiosk-field">
                     <Label htmlFor="kiosk-phone" className="text-base font-bold lg:text-sm">
                       Phone Number <span className="font-normal text-slate-500">(Optional)</span>
                     </Label>
@@ -796,7 +777,7 @@ export default function FamilySquaresKiosk() {
                           setFormData((current) => ({ ...current, requestFollowUp: checked === true }));
                           setErrors((current) => ({ ...current, requestFollowUp: undefined }));
                         }}
-                        className="mt-0.5 h-7 w-7 rounded-md border-2"
+                        className="h-11 w-11 shrink-0 rounded-md border-2"
                       />
                       <Label htmlFor="kiosk-intervention-contact" className="cursor-pointer text-base font-semibold leading-relaxed text-slate-800 md:text-sm lg:leading-snug">
                         Contact me about intervention services. <span className="font-normal text-slate-500">(Optional)</span>
@@ -805,7 +786,7 @@ export default function FamilySquaresKiosk() {
                   </div>
                 </div>
 
-                <div className="space-y-2 lg:space-y-1">
+                <div className="kiosk-field">
                   <Label htmlFor="kiosk-question" className="text-base font-bold lg:text-sm">
                     Question for Monday <span className="font-normal text-slate-500">(Optional)</span>
                   </Label>
@@ -825,7 +806,7 @@ export default function FamilySquaresKiosk() {
                   {errors.question ? <p className="font-medium text-destructive lg:text-xs lg:leading-tight">{errors.question}</p> : null}
                 </div>
 
-                <div className="grid grid-cols-[1fr_auto] gap-2">
+                <div className="kiosk-actions grid grid-cols-[1fr_auto] gap-2">
                   <Button type="submit" size="lg" className="min-h-16 whitespace-normal px-4 text-lg font-bold leading-tight sm:text-xl md:min-h-14 lg:min-h-12 lg:text-base" disabled={isSubmitting || Boolean(cancellationReason) || !isOnline}>
                     {isSubmitting ? (
                       <span className="inline-flex items-center" role="status" aria-live="polite">
@@ -848,13 +829,14 @@ export default function FamilySquaresKiosk() {
                   </Button>
                 </div>
 
-                <p className="text-center text-sm leading-relaxed text-slate-500 lg:text-xs lg:leading-snug">
+                <p className="kiosk-notice">
                   This meeting is recorded and archived for Sober Helpline members. This is support and education, not emergency or medical care.
                 </p>
               </form>
             </CardContent>
           </Card>
         </div>
+        <p className="kiosk-privacy">Private: cleared after submission or 60 seconds of inactivity.</p>
       </main>
 
       {emailSuggestion ? (
