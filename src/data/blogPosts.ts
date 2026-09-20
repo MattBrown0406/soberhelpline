@@ -200,6 +200,7 @@ import wantsToQuitKeepsUsingImg from "@/assets/blog-wants-to-quit-but-keeps-usin
 import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-high.jpg";
 import talkAboutDrinkingBeforeCrisisImg from "@/assets/blog-talk-about-drinking-before-crisis.jpg";
 import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-about-addiction.jpg";
+import whyLecturingBackfiresImg from "@/assets/blog-why-lecturing-backfires.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
