@@ -201,12 +201,111 @@ import talkWhenDrunkOrHighImg from "@/assets/blog-talk-to-loved-one-drunk-or-hig
 import talkAboutDrinkingBeforeCrisisImg from "@/assets/blog-talk-about-drinking-before-crisis.jpg";
 import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-about-addiction.jpg";
 import whyLecturingBackfiresImg from "@/assets/blog-why-lecturing-backfires.jpg";
+import stopObsessingWorryLoopImg from "@/assets/blog-stop-obsessing-over-addiction-worry-loop.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 182,
+    slug: "how-to-stop-obsessing-over-loved-ones-addiction",
+    seoTitle: "How to Stop Obsessing Over a Loved One's Addiction",
+    metaDescription: "Can't stop thinking about your loved one's addiction? Learn why the worry loop happens, why it doesn't help them, and five steps to get your mind back.",
+    title: "How to Stop Obsessing Over a Loved One's Addiction: Breaking the Worry Loop",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-09-21",
+    image: stopObsessingWorryLoopImg,
+    keywords: ["how to stop obsessing over a loved one's addiction", "worry loop addiction", "rumination family addiction", "anxiety about addicted loved one", "family self-care addiction"],
+    excerpt: "If your mind keeps circling your loved one's addiction, that's rumination, not a character flaw. Here's why the loop happens and five steps to break it.",
+    content: `If you're wondering how to stop obsessing over a loved one's addiction, you've probably already noticed the pattern. You're at work, and you're thinking about whether they used last night. You're in bed, and your mind is running through every possible outcome, most of them bad.
+
+This isn't a character flaw. It's what a caring brain does when someone it loves is in danger and it can't fix the problem. But there's a difference between caring about someone and being consumed by them, and most families I work with have crossed that line without noticing.
+
+The good news: the worry loop is a habit, and habits can be changed. Here's how it works, why it isn't helping the person you love, and what to do instead.
+
+## Why Can't I Stop Thinking About My Loved One's Addiction?
+
+You can't stop thinking about your loved one's addiction because your brain has classified it as an unsolved threat, and unsolved threats get replayed. Rumination is the mind's attempt to solve a problem by thinking about it harder. When the problem can't be solved by thinking, the loop never closes.
+
+Addiction is exactly that kind of problem. You can't think your way into someone else's sobriety. So the mind keeps circling: What if I'd said something different? What are they doing right now? What happens if they lose their job?
+
+There's also a payoff that's easy to miss. Worrying feels like doing something. When you're powerless over the actual outcome, constant thinking gives you a sense of involvement. It's a substitute for control. For many families this becomes a long-running state of alert that quietly drains everything else.
+
+## Is Obsessing Over Their Addiction Actually Helping Them?
+
+No. Obsessing over a loved one's addiction does not reduce their risk, change their behavior, or speed up their recovery. It mainly changes you: your sleep, your focus, your health, and your ability to respond well when a real decision point arrives.
+
+Here's the harder truth. Families who are consumed by worry tend to act from that worry, and worried action is usually reactive. It looks like calling too often, lecturing, monitoring, or swinging between rescuing and threatening. None of that builds the kind of steady, clear relationship that gives your loved one a reason to reach for help.
+
+The families who make the biggest difference are usually the ones who've learned to stay calm and consistent. That's not possible from inside a worry loop. So reducing rumination isn't just self-care for you. It's one of the most useful things you can do for them.
+
+## How to Stop Obsessing Over a Loved One's Addiction: Five Practical Steps
+
+Stopping the worry loop takes practice, not willpower. These five steps work because they give your brain a different job to do when the thoughts show up.
+
+### 1. Name the loop when you're in it
+
+The moment you notice you've been circling the same thought for ten minutes, say it, out loud if you can: "I'm in the loop." Naming a thought pattern interrupts it and moves you from being inside the worry to observing it. That small distance is where choice lives.
+
+### 2. Sort each worry into two piles
+
+Take the thought and ask one question: Is there an action I can take on this today? Then sort it.
+
+- Actionable: "I don't know what treatment options exist." You can make a call, do research, or ask a coach.
+- Not actionable: "What if they relapse next month?" There is no action to take on a future you can't see.
+
+Actionable worries get a task and a time. Not-actionable worries get acknowledged and set down.
+
+### 3. Give worry a scheduled time
+
+Pick a fifteen-minute window each day, ideally not right before bed, and make it your worry appointment. When the thoughts come outside that window, tell yourself: "Not now. I'll think about this at 5:30." Then write the thought down so your brain trusts it won't be lost.
+
+By the time the appointment arrives, half the worries have usually lost their charge.
+
+### 4. Replace the check with a plan
+
+A lot of obsessive thinking is fueled by checking: their location, their social media, their bank account, their tone of voice on the phone.
+
+Instead of checking, decide in advance what you would actually do in the scenarios you fear. If they call intoxicated, what's your response? If they ask for money, what's your answer? When you have a plan, you don't need to monitor. You already know what you'll do. Writing those answers down as [LINK:clear boundaries:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] is what turns a fear into a decision.
+
+### 5. Refill the space you've cleared
+
+Rumination fills empty time, so if you clear it out and leave the space empty, the thoughts come right back. Put something in the space on purpose. That might be a walk with a friend, a support group meeting, a project you abandoned when the crisis started, or simply a book that has nothing to do with addiction.
+
+This isn't distraction. It's reclaiming the parts of your life that got crowded out.
+
+## Signs You Need More Support
+
+If you've tried these steps for a few weeks and the thoughts are still running your days, that's a signal to bring in help, not a sign you've failed. Ongoing rumination about a loved one's addiction can shade into anxiety, depression, or trauma responses, and those respond well to treatment.
+
+Consider reaching out for more support if you notice:
+
+- You're losing sleep most nights or waking up already thinking about them.
+- You can't concentrate at work or with your other family members.
+- You've stopped doing things you used to enjoy because you don't have the mental energy.
+- Friends or family have told you they're worried about you.
+
+A therapist who understands addiction in families, our [LINK:family coaching team:/family-coaching], or a support group like [LINK:Al-Anon:https://al-anon.org] can give you tools and a place to put the thoughts down.
+
+## You Can Care Without Being Consumed
+
+The goal here isn't to stop caring about your loved one. You won't, and you shouldn't. The goal is to care from a place of steadiness instead of panic, because steadiness is what they'll need from you when they're ready to accept help.
+
+Learning how to stop obsessing over a loved one's addiction is really about learning to trust that you can respond to whatever comes without rehearsing it a thousand times first. Start with one step this week. That's enough to begin.
+
+You don't have to figure this out alone, and you don't have to wait for your loved one to change before your life gets better. Sober Helpline offers ongoing education, one-on-one family coaching, and a community of people who understand exactly what the worry loop feels like. Join a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or book a coaching session when you're ready.`,
+    tags: ["family education", "anxiety", "self-care", "boundaries", "addiction"],
+    faqItems: [
+      { question: "Why do I constantly think about my loved one's addiction?", answer: "Your brain treats their addiction as an unresolved danger and keeps replaying it in an attempt to solve it. Because you can't control their choices, the loop never closes." },
+      { question: "Is it normal to obsess over someone's drinking or drug use?", answer: "Yes. Most family members of someone with a substance use disorder report intrusive, repetitive worry. It becomes a problem when it disrupts your sleep, work, health, or relationships, which is when it's worth taking active steps to change the pattern." },
+      { question: "Does worrying about my loved one help keep them safe?", answer: "No. Worry doesn't change their behavior or reduce their risk. What helps is having a clear plan for what you'll do in specific situations and staying calm and consistent so they see you as a safe person to turn to when they're ready." },
+      { question: "How do I stop checking up on my addicted loved one?", answer: "Decide ahead of time how you'll respond to the situations you're afraid of, so you don't need real-time information to feel prepared. Then replace the checking habit with something else, like a scheduled call to a friend or a support group meeting." },
+      { question: "Should I see a therapist for my own anxiety about their addiction?", answer: "If the worry is affecting your sleep, focus, or daily functioning after a few weeks of trying to manage it on your own, yes. Therapists and family coaches who specialize in addiction can help you break the pattern and give you practical tools that work in your specific situation." }
+    ]
+  },
   {
     id: 181,
     slug: "why-lecturing-addicted-loved-one-backfires",
