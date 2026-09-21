@@ -232,7 +232,7 @@ You can't stop thinking about your loved one's addiction because your brain has 
 
 Addiction is exactly that kind of problem. You can't think your way into someone else's sobriety. So the mind keeps circling: What if I'd said something different? What are they doing right now? What happens if they lose their job?
 
-There's also a payoff that's easy to miss. Worrying feels like doing something. When you're powerless over the actual outcome, constant thinking gives you a sense of involvement. It's a substitute for control. For many families this becomes a long-running state of alert, which is worth understanding alongside [LINK:the emotional fatigue that comes with it:/blog/emotional-boundaries-caregiver-fatigue].
+There's also a payoff that's easy to miss. Worrying feels like doing something. When you're powerless over the actual outcome, constant thinking gives you a sense of involvement. It's a substitute for control. For many families this becomes a long-running state of alert that quietly drains everything else.
 
 ## Is Obsessing Over Their Addiction Actually Helping Them?
 
@@ -270,8 +270,6 @@ By the time the appointment arrives, half the worries have usually lost their ch
 A lot of obsessive thinking is fueled by checking: their location, their social media, their bank account, their tone of voice on the phone.
 
 Instead of checking, decide in advance what you would actually do in the scenarios you fear. If they call intoxicated, what's your response? If they ask for money, what's your answer? When you have a plan, you don't need to monitor. You already know what you'll do. Writing those answers down as [LINK:clear boundaries:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] is what turns a fear into a decision.
-
-## When Obsessive Thinking Means You Need More Support
 
 ### 5. Refill the space you've cleared
 
