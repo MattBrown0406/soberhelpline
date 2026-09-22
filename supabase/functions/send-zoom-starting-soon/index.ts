@@ -123,6 +123,16 @@ serve(async (req: Request) => {
             </p>
           </div>
 
+          <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+            <p style="margin: 0 0 8px 0; color: #047857; font-size: 14px;">
+              <strong>📱 Take Sober Helpline with you.</strong> If you haven't already, download the free Sober Helpline app from the Apple App Store.
+            </p>
+            <a href="https://apps.apple.com/us/app/sober-helpline/id6780034996" style="display: inline-block; padding: 10px 24px; background-color: #166534; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
+              Download Sober Helpline
+            </a>
+          </div>
+
+
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
             If you have any questions, call us at <strong>(458) 298-8008</strong>.
           </p>
