@@ -72,6 +72,11 @@ verify_jwt = false
 [functions.resend-zoom-links]
 verify_jwt = false
 
+[functions.send-zoom-starting-soon]
+verify_jwt = false
+
+
+
 [functions.quo-to-notion]
 verify_jwt = false
 [functions.roadmap-mailchimp-sync]
