@@ -202,6 +202,7 @@ import talkAboutDrinkingBeforeCrisisImg from "@/assets/blog-talk-about-drinking-
 import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-about-addiction.jpg";
 import whyLecturingBackfiresImg from "@/assets/blog-why-lecturing-backfires.jpg";
 import stopObsessingWorryLoopImg from "@/assets/blog-stop-obsessing-over-addiction-worry-loop.jpg";
+import okayToBeHappyImg from "@/assets/blog-okay-to-be-happy-loved-one-addicted.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
