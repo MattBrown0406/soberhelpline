@@ -210,6 +210,89 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
+    id: 183,
+    slug: "is-it-okay-to-be-happy-when-loved-one-still-addicted",
+    seoTitle: "Is It Okay to Be Happy When Your Loved One Is Still Addicted?",
+    metaDescription: "Feeling guilty for being happy while a loved one is still addicted? Learn why joy is not betrayal and how to rebuild your life without waiting for recovery.",
+    title: "Is It Okay to Be Happy When Your Loved One Is Still Addicted? A Family Guide to Guilt-Free Joy",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-09-22",
+    image: okayToBeHappyImg,
+    keywords: ["happy when your loved one is still addicted", "guilt family addiction", "family self-care addiction", "joy while loved one is using", "caregiver guilt addiction"],
+    excerpt: "Your joy is not a vote against your loved one, and your suffering does not buy them one more day of sobriety. Here's how to hold love and happiness at the same time.",
+    content: `You laughed at something last week, and then you caught yourself. You had a good day, and it felt wrong. If you have been asking whether it is okay to be happy when your loved one is still addicted, you are not cold or selfish. You are a person who loves someone and has quietly decided that your happiness has to wait until theirs arrives.
+
+Here is the truth right now: it does not have to wait. Your joy is not a vote against your loved one, and your suffering does not buy them one more day of sobriety. This article is about why guilt shows up when life starts to feel good again, and how to build a life that holds both love and joy at the same time.
+
+## Why Do I Feel Guilty for Being Happy When My Loved One Is Still Addicted?
+
+Guilt shows up because somewhere along the way, worry started to feel like loyalty. If you are anxious, you are paying attention. If you are happy, it can feel like you have stopped caring. That equation is understandable, and it is also wrong.
+
+Families living with addiction often develop what I call the vigilance tax. Every good moment is charged a fee: you can enjoy dinner, but only if you check your phone. You can go to the concert, but you will spend half of it scanning for a missed call. Over time, the tax gets so high that you stop spending on joy at all.
+
+There is also a quieter belief underneath: if I suffer enough, maybe the universe will even things out. Naming it is the first step to putting it down.
+
+## Does My Happiness Hurt My Loved One's Recovery?
+
+No. Your happiness does not slow down their recovery, and your misery does not speed it up. Addiction does not respond to how much pain the people around it are in. If it did, most families would have cured it years ago.
+
+In fact, the opposite is often true. When a family member starts living again, it changes the emotional weather in the house. The person struggling stops being the center of gravity. They see someone they love making choices, keeping commitments, and enjoying life without needing their permission or their progress. That is not abandonment. That is modeling.
+
+## What Does Guilt-Free Joy Actually Look Like for Families?
+
+Guilt-free joy is not pretending everything is fine. It is deciding that your life is allowed to have good things in it while a hard thing is also true. Both can exist in the same day, and in the same person.
+
+In practice, it looks small. It looks like:
+
+- Going to the birthday party and staying the whole time, phone in your pocket, not your hand.
+- Signing up for the class you keep talking about, and actually attending week three.
+- Laughing without an apology attached to it.
+- Taking the weekend trip you postponed, and letting your loved one manage their own weekend.
+
+None of these require your loved one to be sober. They require you to decide that your calendar belongs to you.
+
+## How Can I Start Enjoying My Life Again Without Waiting for Recovery?
+
+Start with one protected thing per week, and treat it like a medical appointment. Small and consistent beats big and occasional. Here is a simple way to begin:
+
+1. Pick one activity that used to bring you real pleasure. Not self-improvement. Pleasure. Fishing, music, a long lunch with a friend, an hour in the garden.
+2. Put it on the calendar with a start and end time. Vague intentions get eaten by crisis; scheduled ones survive.
+3. Tell one person you are doing it. Accountability makes it harder to cancel on yourself.
+4. Decide in advance what you will do if a call comes. Unless it is a true emergency, it can wait sixty minutes. Write that rule down.
+5. Afterward, notice the guilt without obeying it. Guilt is a feeling, not an instruction. Let it pass through and go anyway next week.
+
+If the guilt is loud, try this sentence: I can love them and enjoy this at the same time. Say it before you walk in the door.
+
+## When Guilt Is Really Grief
+
+Sometimes the feeling that blocks joy is not guilt at all. It is grief for the person you expected them to be, or for the life you thought you would have by now. Grief needs room, not a fix. If you notice sadness underneath the guilt, that is worth talking through with a counselor, a support group like [LINK:Al-Anon:https://al-anon.org], or a [LINK:family coach:/family-coaching] who understands family addiction. It does not disqualify you from joy. It usually sits right next to it.
+
+## What If My Loved One Resents Me for Living My Life?
+
+They might, and that is not a reason to stop. Someone in active addiction often benefits from the family staying stuck, because a family in crisis is easier to manage than a family with a full calendar and clear limits.
+
+If they say you do not care because you went on vacation, you can answer calmly and without defending yourself: I care about you, and I am also going to take care of my life. Both are true. You do not need them to agree.
+
+Over time, many families find that this shift is what finally changes the conversation. When the family stops orbiting the addiction, the person struggling has to reckon with it more directly. Your joy is not the enemy of their recovery. Sometimes it is the invitation.
+
+## You Are Allowed to Have a Good Life Now
+
+Twenty-three years into my own recovery, I can tell you what I remember from the people who loved me during the worst of it. I do not remember who worried the most. I remember who kept living, kept their word, and kept the door open. Their steadiness gave me something to walk toward.
+
+You are allowed to have a good life now, not later, not after, not once they are better. Start with one protected hour this week. Let the guilt show up if it wants to. Go anyway.
+
+If you want ongoing support in building a life that holds both love and joy, Sober Helpline offers family education, [LINK:one-on-one coaching:/family-coaching], and a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call with people who understand exactly where you are. You do not have to figure this out alone, and you do not have to wait.`,
+    tags: ["family education", "self-care", "guilt", "boundaries", "addiction"],
+    faqItems: [
+      { question: "Is it selfish to be happy when my loved one is still using?", answer: "No. Your happiness does not take anything away from your loved one. Living a full life while holding clear boundaries is one of the healthiest things you can model for someone in active addiction. Selfishness would be ignoring the problem; joy is simply refusing to be consumed by it." },
+      { question: "Why do I feel guilty when I have a good day?", answer: "Guilt usually comes from an unspoken belief that worry equals love, so enjoyment feels like disloyalty. It can also be grief in disguise. Recognizing the belief and naming it out loud takes away much of its power." },
+      { question: "Will my loved one recover faster if I stay focused on them?", answer: "No. Addiction does not respond to how much the family suffers or how closely they monitor. Your attention cannot substitute for their willingness. Redirecting some of that energy toward your own life often reduces conflict and creates a healthier environment for change." },
+      { question: "How do I stop checking my phone when I am trying to enjoy something?", answer: "Decide ahead of time what counts as an emergency and what can wait an hour. Write that rule down, tell one person, and keep the phone in a pocket or bag rather than your hand. Practice makes the discomfort shorter each time." },
+      { question: "What if my family says I am abandoning them by taking time for myself?", answer: "You can acknowledge their feeling without changing your plan: I hear that, and I am still going. Taking care of your own life is not abandonment. Over time, most families discover that a steadier, more rested caregiver is a better support than an exhausted one." }
+    ]
+  },
+  {
     id: 182,
     slug: "how-to-stop-obsessing-over-loved-ones-addiction",
     seoTitle: "How to Stop Obsessing Over a Loved One's Addiction",
