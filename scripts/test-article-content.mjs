@@ -23,5 +23,5 @@ try {
  assert.throws(()=>renderArticlePilot('admin'));
  const image=renderToStaticMarkup(createElement(Content,{content:'[IMAGE:cycleOfAddictionImg]',images:imageMap}));assert(image.includes('<img'));
  await fs.writeFile(`${out}/renderer-tests.json`,JSON.stringify({passed:true,posts,pilotSlugs},null,2));
- console.log(`PASS security, semantic, legacy/image fixtures; ${posts.length} article renders; exact two-pilot allowlist`);
+ console.log(`PASS security, semantic, legacy/image fixtures; ${posts.length} article renders; ${pilotSlugs.length} allowlisted full-HTML articles`);
 } finally {await server.close();}
