@@ -203,12 +203,85 @@ import parentsDisagreeAboutAddictionImg from "@/assets/blog-parents-disagree-abo
 import whyLecturingBackfiresImg from "@/assets/blog-why-lecturing-backfires.jpg";
 import stopObsessingWorryLoopImg from "@/assets/blog-stop-obsessing-over-addiction-worry-loop.jpg";
 import okayToBeHappyImg from "@/assets/blog-okay-to-be-happy-loved-one-addicted.jpg";
+import holidaysEarlyRecoveryImg from "@/assets/blog-holidays-early-recovery.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 184,
+    slug: "holidays-in-early-recovery-family-guide",
+    seoTitle: "Holidays in Early Recovery: A Family Guide",
+    metaDescription: "Practical guidance for families supporting a loved one through holidays in early recovery—planning ahead, handling gatherings, and staying steady if things go sideways.",
+    title: "Holidays in Early Recovery: A Family Guide to Supporting Your Loved One Without Losing Yourself",
+    category: "Recovery",
+    author: "Matt Brown",
+    date: "2026-09-27",
+    image: holidaysEarlyRecoveryImg,
+    keywords: ["holidays in early recovery", "sober holidays family", "holiday relapse prevention", "family gatherings early sobriety", "supporting loved one holidays recovery"],
+    tags: ["recovery", "holidays", "relapse prevention", "family support"],
+    excerpt: "Holidays in early recovery don't have to be white-knuckled. Plan ahead, make gatherings less loaded, and stay steady if things go sideways.",
+    faqItems: [{"question": "Should we remove all alcohol from holiday gatherings if someone in the family is in early recovery?", "answer": "It depends on the person and the stage of recovery, so ask directly rather than guessing. Some people in early recovery feel safer at an alcohol-free gathering, while others prefer alcohol be present but not the focus, as long as appealing non-alcoholic options are visible. The safest approach is a short conversation beforehand rather than an assumption either way."}, {"question": "How do I explain the situation to extended family without embarrassing my loved one?", "answer": "Keep it brief: \"[Name] isn't drinking this year, so let's skip the toast pressure and have plenty of other drinks on hand.\" You don't need to share the full history at the table. Most relatives will follow your lead if you stay calm and specific about what you need."}, {"question": "What if my loved one wants to skip holiday gatherings entirely this year?", "answer": "That's a reasonable boundary, and it's worth respecting rather than pushing back on. Protecting early recovery sometimes means a smaller, quieter holiday season for a year or two. You can offer a scaled-down alternative, like a short visit or a separate low-key gathering, without treating their choice as a rejection of the family."}, {"question": "Is it normal to feel resentful about how much extra planning this takes?", "answer": "Yes, and that feeling doesn't make you a bad supporter. Caregiving fatigue is common among families in recovery, and the holidays tend to amplify it. Naming the resentment to a therapist, an Al-Anon group, or a trusted friend helps you process it without adding guilt to an already full plate."}, {"question": "What should we do if a relapse happens during the holidays?", "answer": "Respond calmly, reach out to their treatment provider or recovery support quickly, and avoid making major decisions while emotions are highest. A relapse is a signal to strengthen support, not proof that recovery has failed. Revisit the aftercare plan once things are stable rather than abandoning it."}, {"question": "How far in advance should we start planning for a difficult holiday gathering?", "answer": "Two to three weeks is usually enough time to have a calm conversation, coordinate with extended family, and line up support like a sponsor, recovery coach, or counseling session around the event. Waiting until the day of the gathering to talk about expectations tends to raise stress for everyone involved."}],
+    content: `If the holidays are approaching and you're already feeling a knot in your stomach, you're not alone. For families supporting someone in early recovery, the holiday season brings a particular kind of pressure: family gatherings built around alcohol, old patterns with relatives who don't know what to say, and the quiet fear that all the progress of the last few months could unravel over a single weekend. The good news is that holidays in early recovery don't have to be something you white-knuckle through. With some planning and a shift in how you think about your role, you can support your loved one, protect your own peace, and still have a holiday that feels like a holiday.
+
+## Why Are the Holidays So Hard in Early Recovery?
+
+The holidays concentrate almost every relapse risk factor into a few weeks: stress, disrupted routines, family conflict, grief for past holidays lost to addiction, and near-constant exposure to alcohol or other substances. For someone newly sober, that combination can feel overwhelming even when they genuinely want to stay well.
+
+A hard holiday season isn't a sign that recovery isn't working. Early recovery is a period of real neurological and emotional recalibration, and high-stimulation events like holiday gatherings ask a lot of a brain still healing. Naming this out loud, to yourself and your loved one, takes some of the shame out of the difficulty.
+
+## How Can Families Prepare Before the Holiday Season Arrives?
+
+The single most useful thing a family can do is plan ahead rather than hope for the best. A short, calm conversation two or three weeks before a gathering—not in the car on the way there—gives everyone time to adjust expectations and reduces the odds of a tense surprise.
+
+Consider working through these questions together:
+- Which specific gatherings feel manageable, and which ones might be better to skip or shorten this year?
+- Will alcohol be present, and if so, is that a dealbreaker or something that can be managed with a plan?
+- Who in the family needs a heads-up about not offering drinks, making jokes about "the old days," or asking pointed questions?
+- What's the exit plan if your loved one (or you) needs to leave early?
+- Is there a sober friend, sponsor, or support meeting available that day or the day before, as an anchor?
+
+If your loved one is still in treatment or early aftercare, loop in their counselor. Many treatment teams build holiday planning into aftercare sessions and can help rehearse specific responses to pressure or questions.
+
+## What Should a Family Do During the Gathering Itself?
+
+During the event, your job is not to police your loved one's every move—it's to help the environment feel a little less loaded. Small, practical shifts make a real difference without singling anyone out.
+- Offer appealing non-alcoholic drinks visibly, so no one has to ask for them or explain a choice.
+- Position food and conversation, not the bar, as the center of the room.
+- Check in privately and briefly ("How are you doing?") rather than hovering or watching.
+- Agree on a low-key signal in advance that means "I need to step outside" or "I need to leave," so no explanation is required in the moment.
+- Have a sober-support contact's number ready, and encourage your loved one to keep theirs handy too.
+
+It also helps to prepare a neutral, ready-made response for nosy relatives: "I'm taking a break from drinking this year" is a complete sentence. Your loved one doesn't owe anyone a recovery narrative at the table.
+
+## How Do You Support Recovery Without Walking on Eggshells?
+
+There's a real difference between thoughtful accommodation and treating your loved one as fragile. Constant monitoring, whispered check-ins in front of others, or reorganizing the whole holiday around one person's sobriety can create the same pressure that recovery is trying to relieve.
+
+A useful mental model: make the environment easier, then trust the plan you built together. That might mean quietly skipping the champagne toast, but not asking your loved one every twenty minutes if they're okay. Normalcy—regular conversation, being asked about their job or kids instead of only their sobriety—is its own form of support.
+
+This is also a good season to lean on your own supports. [LINK:Al-Anon:https://al-anon.org] often runs holiday-specific meetings, and a little extra time in your own therapy or support group can help you show up calmer—which your loved one will notice more than any perfectly worded speech.
+
+## What If a Relapse Happens Over the Holidays?
+
+If a relapse happens, the most helpful family response is calm and practical, not panicked or punishing. A holiday relapse is a signal to get back to support quickly—not proof that treatment failed or that the last months didn't matter.
+1. Stay as calm as you can in the moment; a crisis reaction from you adds shame on top of an already hard situation.
+2. Contact your loved one's treatment provider, sponsor, or recovery coach as soon as possible—many have an after-hours or holiday protocol for exactly this.
+3. Avoid ultimatums delivered in anger; decisions made in a heightened moment are rarely the ones you want to hold everyone to later.
+4. Once things are stable, revisit the [LINK:aftercare plan:/aftercare-checklist] together and adjust it, rather than starting over from scratch.
+
+One difficult holiday does not erase months of progress. Families who treat a setback as information tend to help their loved one get back on track faster than families who treat it as a verdict.
+
+## Moving Through the Season Together
+
+You can't guarantee a perfect holiday, and trying to control every variable will exhaust you before the first gathering starts. What you can do is plan thoughtfully, communicate honestly, keep your own support in place, and remember that showing up—imperfectly, humanly—is what your loved one actually needs from you. That's enough.
+
+## You Don't Have to Navigate This Season Alone
+
+Every family's holiday season looks a little different, and there's no single script that works for everyone. If you want help building a plan that fits your situation, explore [LINK:family coaching:/family-coaching] or join [LINK:"The Family Squares" Monday night call:/monday-zoom-registration] for real-time support from other families.`,
+  },
   {
     id: 183,
     slug: "is-it-okay-to-be-happy-when-loved-one-still-addicted",
