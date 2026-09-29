@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -103,6 +104,7 @@ Deno.serve(async (req) => {
     let sentCount = 0;
     for (const [email, firstName] of uniqueEmails.entries()) {
       const emailBody = {
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [{ to: [{ email }] }],
         from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
         subject: `Your Feedback Matters — ${survey.title}`,

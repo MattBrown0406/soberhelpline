@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -268,6 +269,7 @@ serve(async (req: Request) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            tracking_settings: { subscription_tracking: { enable: true } },
             personalizations: [{
               to: [{ email: row.recipient_email, name: row.recipient_name || undefined }],
             }],

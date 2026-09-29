@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -19,6 +20,7 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
     method: "POST",
     headers: { "Authorization": `Bearer ${SENDGRID_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
+      tracking_settings: { subscription_tracking: { enable: true } },
       personalizations: [{ to: [{ email: to }] }],
       from: { email: "matt@soberhelpline.com", name: "Matt — Sober Helpline" },
       subject,

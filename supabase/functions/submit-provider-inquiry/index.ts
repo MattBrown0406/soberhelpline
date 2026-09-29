@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -119,6 +120,7 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [
           {
             to: [

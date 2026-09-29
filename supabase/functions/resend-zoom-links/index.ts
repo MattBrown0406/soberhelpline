@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -174,6 +175,7 @@ serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
           subject: '📍 This Monday — "The Family Squares" at 7 PM PST',

@@ -1,0 +1,1 @@
+- Every SendGrid-sending edge function imports `_shared/suppression.ts` first — it filters recipients against `email_suppression_list` and forces SendGrid unsubscribe links, so opt-outs apply everywhere.

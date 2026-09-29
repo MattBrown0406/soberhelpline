@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -246,6 +247,7 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [{ to: [{ email: REPORT_RECIPIENT }] }],
         from: { email: "matt@soberhelpline.com", name: "Sober Helpline Reports" },
         subject: `Family Squares weekly report — ${prettyDate(meetingDate)} (${totalRegistrants} registered, ${totalAttendees} attended)`,

@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -17,6 +18,7 @@ const sendEmail = async (to: string, name: string | null, subject: string, html:
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      tracking_settings: { subscription_tracking: { enable: true } },
       personalizations: [{ to: [{ email: to, name: name || undefined }] }],
       from: { email: "matt@soberhelpline.com", name: "Matt Brown | Sober Helpline" },
       subject,

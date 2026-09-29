@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 
 const JSON_HEADERS = { "Content-Type": "application/json" };
@@ -146,6 +147,7 @@ Deno.serve(async (request: Request) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            tracking_settings: { subscription_tracking: { enable: true } },
             personalizations: [{ to: [{ email: row.email, name: row.name }] }],
             from: { email: "matt@soberhelpline.com", name: "Matt Brown | Sober Helpline" },
             reply_to: { email: "matt@soberhelpline.com", name: "Matt Brown" },

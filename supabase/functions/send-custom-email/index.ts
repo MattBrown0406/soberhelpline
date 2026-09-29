@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -29,6 +30,7 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [{ to: [{ email: to_email, name: to_name }] }],
         from: { email: 'matt@soberhelpline.com', name: 'Matt Brown | Sober Helpline' },
         subject,
