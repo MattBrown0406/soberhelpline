@@ -26,6 +26,7 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      tracking_settings: { subscription_tracking: { enable: true } },
       personalizations: [{ to: [{ email: to }] }],
       from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
       subject,

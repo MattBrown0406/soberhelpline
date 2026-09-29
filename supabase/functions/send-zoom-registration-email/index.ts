@@ -73,6 +73,7 @@ async function sendEmail(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      tracking_settings: { subscription_tracking: { enable: true } },
       personalizations: [{ to: to.map((email) => ({ email })) }],
       from: { email: from.match(/<(.+)>/)?.[1] || from, name: from.match(/^(.+?)\s*</)?.[1] || "Sober Helpline" },
       subject,

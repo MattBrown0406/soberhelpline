@@ -147,6 +147,7 @@ serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
           subject: '⏰ Starting in 1 hour — "The Family Squares" at 7 PM Pacific',

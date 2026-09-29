@@ -33,6 +33,7 @@ Deno.serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{ to: [{ email: r.email, name: r.name }] }],
           from: { email: 'matt@soberhelpline.com', name: 'Matt Brown | Sober Helpline' },
           subject: 'Thank You for Joining Us Last Night',

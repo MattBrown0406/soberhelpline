@@ -163,6 +163,7 @@ Deno.serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{
             to: [{ email: record.client_email, name: record.client_name || undefined }],
           }],

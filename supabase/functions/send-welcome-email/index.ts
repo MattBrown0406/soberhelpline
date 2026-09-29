@@ -105,6 +105,7 @@ serve(async (req: Request) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [{ to: [{ email }] }],
         from: { email: "matt@soberhelpline.com", name: "Matt — Sober Helpline" },
         subject: "Welcome to Sober Helpline — here's where to start",

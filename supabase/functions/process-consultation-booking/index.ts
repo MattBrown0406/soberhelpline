@@ -58,6 +58,7 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
+      tracking_settings: { subscription_tracking: { enable: true } },
       personalizations: [{ to: [{ email: to }] }],
       from: { email: 'matt@soberhelpline.com', name: 'Sober Helpline' },
       reply_to: { email: 'matt@soberhelpline.com', name: 'Matt Brown' },

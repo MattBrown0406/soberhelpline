@@ -23,6 +23,7 @@ async function sendAdminNotification(subject: string, htmlContent: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        tracking_settings: { subscription_tracking: { enable: true } },
         personalizations: [{ to: [{ email: "matt@soberhelpline.com" }, { email: "matt@freedominterventions.com" }] }],
         from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
         subject,

@@ -146,6 +146,7 @@ Deno.serve(async (request: Request) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            tracking_settings: { subscription_tracking: { enable: true } },
             personalizations: [{ to: [{ email: row.email, name: row.name }] }],
             from: { email: "matt@soberhelpline.com", name: "Matt Brown | Sober Helpline" },
             reply_to: { email: "matt@soberhelpline.com", name: "Matt Brown" },
