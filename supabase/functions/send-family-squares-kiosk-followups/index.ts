@@ -1,3 +1,4 @@
+import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 
 const JSON_HEADERS = { "Content-Type": "application/json" };
