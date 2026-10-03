@@ -1,6 +1,8 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -51,6 +53,12 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Bulk email to past registrants: cron (cron_secret), the automation
+    // secret or an admin only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuth(req, adminSupabase, body, "send-zoom-reengagement", corsHeaders);
+    if (denied) return denied;
+
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
@@ -98,20 +106,26 @@ serve(async (req: Request) => {
       .from("zoom_meeting_registrations")
       .select("name, email")
       .lt("meeting_date", upcomingDate)
+      // App RSVPs (registration_source 'app') never opted into marketing email.
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
 
     if (e1) throw e1;
 
     // Filter: not already registered for upcoming, not a member, deduplicated
-    const targets: { name: string; email: string }[] = [];
+    const candidates: { name: string; email: string }[] = [];
     const seen = new Set<string>();
     for (const r of (allPast || [])) {
       const key = r.email.toLowerCase();
       if (!thisWeekEmails.has(key) && !memberEmails.has(key) && !seen.has(key)) {
         seen.add(key);
-        targets.push(r);
+        candidates.push(r);
       }
     }
+    // People the Sober Helpline app already reminds (or who told the app they
+    // can't come) don't also get this email. Fails open if the app can't answer.
+    const appHandled = (await appHandledEmails(candidates.map((r) => r.email), "send-zoom-reengagement")).handled;
+    const targets = candidates.filter((r) => !appHandled.has(normalizeEmail(r.email)));
 
     if (targets.length === 0) {
       return new Response(JSON.stringify({ message: "No re-engagement targets found", sent: 0 }), {

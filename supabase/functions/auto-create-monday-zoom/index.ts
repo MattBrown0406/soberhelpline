@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -72,12 +73,18 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Auto-creating “The Family Squares” meeting...');
-
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
+    // Replaces the Monday meeting in site_settings: cron (cron_secret), the
+    // automation secret or an admin only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuth(req, supabase, body, 'auto-create-monday-zoom', corsHeaders);
+    if (denied) return denied;
+
+    console.log('Auto-creating “The Family Squares” meeting...');
 
     // Get Zoom access token
     const accessToken = await getZoomAccessToken();

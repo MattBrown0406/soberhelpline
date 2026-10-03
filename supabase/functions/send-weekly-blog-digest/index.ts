@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -150,10 +151,31 @@ serve(async (req: Request) => {
       body = {};
     }
 
+    const adminSupabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+
     const isCron = body.source === "cron";
     const testEmail: string | undefined = body.test_email;
     const dryRun: boolean = body.dry_run === true;
     const daysBack: number = Number(body.days_back) || 7;
+
+    // Who may run this: the cron job (cron_secret), the automation secret or an
+    // admin. A test send goes to any address the caller names, so it requires
+    // one of those credentials now; the regular run is staged by
+    // site_settings.enforce_function_auth.
+    const verified = await hasAutomationAuth(req, adminSupabase, body);
+    if (!verified) {
+      if (testEmail) {
+        return new Response(
+          JSON.stringify({ error: "unauthorized" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const denied = await requireAutomationAuth(req, adminSupabase, body, "send-weekly-blog-digest", corsHeaders);
+      if (denied) return denied;
+    }
 
     // Cron fires at two UTC hours to cover DST; only run at 8 AM Pacific.
     if (isCron && pacificHour() !== 8) {
@@ -202,11 +224,6 @@ serve(async (req: Request) => {
       );
     }
 
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-    );
-
     const { data: suppressed } = await adminSupabase
       .from("email_suppression_list")
       .select("email");
@@ -245,6 +262,8 @@ serve(async (req: Request) => {
     const { data: pastRegs } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email, name")
+      // App RSVPs (registration_source 'app') never opted into marketing email.
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
     for (const r of pastRegs || []) {
       const email = r.email?.toLowerCase();

@@ -51,9 +51,19 @@ function splitByRegType<T extends { auto_register?: boolean | null }>(list: T[])
 
 function SourceBadge({ r }: { r: Registration }) {
   const source = registrationSource(r);
-  return <Badge variant={source === "kiosk" ? "default" : "outline"} aria-label={`Registration source: ${registrationSourceLabels[source]}`}>
+  const variant = source === "kiosk" ? "default" : source === "app" ? "secondary" : "outline";
+  return <Badge variant={variant} aria-label={`Registration source: ${registrationSourceLabels[source]}`}>
     {registrationSourceLabels[source]}
   </Badge>;
+}
+
+function escapePrintHtml(value: string | null | undefined): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: number; isBlocked?: boolean }) {
@@ -74,10 +84,10 @@ function RegistrantCard({ r, index, isBlocked }: { r: Registration; index: numbe
         </div>
         <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
           <a href={`mailto:${r.email}`} className="flex items-center gap-1 hover:text-primary"><Mail className="h-3 w-3" />{r.email}</a>
-          <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>
+          {r.phone && <a href={`tel:${r.phone}`} className="flex items-center gap-1 hover:text-primary"><Phone className="h-3 w-3" />{r.phone}</a>}
         </div>
       </div>
-      {r.question && <p className="text-xs text-muted-foreground pl-7 line-clamp-2">{r.question}</p>}
+      {r.question && <p className="text-xs text-muted-foreground pl-7 line-clamp-2 whitespace-pre-line">{r.question}</p>}
       <div className="flex gap-3 pl-7">
         {r.request_follow_up && (
           <span className="text-xs text-destructive flex items-center gap-1"><UserCheck className="h-3 w-3" />Follow-up requested</span>
@@ -231,17 +241,21 @@ export function ZoomLinkSettings() {
 
     const nextMondayFormatted = formatDate(nextMonday);
 
+    // Registrant-supplied text (website, kiosk and app) is escaped: this
+    // window shares the admin page's origin.
     const questionsHtml = questionsOnly
       .map(
         (r, i) => {
           const lang = r.language === "es" ? "ES" : "EN";
+          const sourceTag = registrationSource(r) === "app" ? " · App" : "";
+          const contact = [r.email, r.phone].filter(Boolean).map(escapePrintHtml).join(" · ");
           return `
         <div style="margin-bottom: 20px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; page-break-inside: avoid;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-            <strong style="font-size: 14px;">${i + 1}. ${r.name} (${lang})</strong>
-            <span style="font-size: 12px; color: #6b7280;">${r.email} · ${r.phone}</span>
+            <strong style="font-size: 14px;">${i + 1}. ${escapePrintHtml(r.name)} (${lang}${sourceTag})</strong>
+            <span style="font-size: 12px; color: #6b7280;">${contact}</span>
           </div>
-          <p style="margin: 0; font-size: 15px; line-height: 1.5;">${r.question}</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5; white-space: pre-line;">${escapePrintHtml(r.question)}</p>
           ${r.request_follow_up ? '<p style="margin: 6px 0 0; font-size: 12px; color: #dc2626;">⚑ Requested interventionist follow-up</p>' : ""}
         </div>`;
         }
@@ -333,9 +347,10 @@ export function ZoomLinkSettings() {
           <option value="all">All sources</option>
           <option value="kiosk">Kiosk</option>
           <option value="automatic">Automatic</option>
+          <option value="app">App</option>
           <option value="unknown">Unknown</option>
         </select>
-        <p className="text-sm text-muted-foreground">Source applies to each registration, not the person's original signup. Older records and default website values are Unknown because website origin was not reliably recorded.</p>
+        <p className="text-sm text-muted-foreground">Source applies to each registration, not the person's original signup. Older records and default website values are Unknown because website origin was not reliably recorded. App registrations are RSVPs and questions from the Sober Helpline app; when that person also registered on the website, their app questions are added to the website registration, marked "(from the app)".</p>
         {registrationsError ? <div role="alert">Registrations could not be loaded. <Button variant="outline" onClick={fetchAllRegistrations}>Retry registrations</Button></div>
           : !loadingRegistrations && <p role="status" className="text-sm">{filteredRegistrations.length} of {allRegistrations.length} registration records match. The filter applies to questions, follow-ups, and the archive below.</p>}
       </div>
@@ -383,10 +398,10 @@ export function ZoomLinkSettings() {
                     </div>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0">
                       <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{r.email}</span>
-                      <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>
+                      {r.phone && <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{r.phone}</span>}
                     </div>
                   </div>
-                  <p className="text-sm text-foreground pl-8">{r.question}</p>
+                  <p className="text-sm text-foreground pl-8 whitespace-pre-line">{r.question}</p>
                   <div className="flex gap-3 pl-8">
                     {r.request_follow_up && (
                       <span className="text-xs text-destructive flex items-center gap-1">

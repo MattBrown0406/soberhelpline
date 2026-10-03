@@ -213,11 +213,18 @@ serve(async (req: Request) => {
 
     const { data: registration, error: registrationError } = await supabase
       .from("zoom_meeting_registrations")
-      .select("id, name, email, phone, question, request_follow_up, auto_register")
+      .select("id, name, email, phone, question, request_follow_up, auto_register, registration_source")
       .eq("id", registration_id)
       .single();
 
     if (registrationError || !registration) throw registrationError || new Error("Registration not found");
+
+    // Sober Helpline app RSVPs are not sales leads: no score, no revenue sequence.
+    if (registration.registration_source === "app") {
+      return new Response(JSON.stringify({ success: true, skipped: "app_registration", queued: 0 }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const scoring = scoreRegistration(registration, attribution as AttributionPayload);
     const followups = buildFollowups(registration, scoring);

@@ -1,10 +1,12 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth } from "../_shared/automationAuth.ts";
+import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret, x-cron-secret, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 function escapeHtml(text: string): string {
@@ -35,21 +37,28 @@ async function sendEmail(to: string, subject: string, htmlContent: string) {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error(`SendGrid error for ${to}: [${response.status}] ${errorText}`);
+    console.error(`SendGrid error: [${response.status}] ${errorText.slice(0, 300)}`);
     return false;
   }
   return true;
 }
 
-async function isAuthorized(req: Request, adminSupabase: ReturnType<typeof createClient>): Promise<boolean> {
-  // Path 1: shared cron/automation secret
-  const expectedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
-  const providedSecret = req.headers.get("x-automation-secret");
-  if (expectedSecret && providedSecret && providedSecret === expectedSecret) {
-    return true;
-  }
+function adminClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  );
+}
+type AdminClient = ReturnType<typeof adminClient>;
 
-  // Path 2: authenticated admin JWT
+// Always enforced (never staged): this mails every member. Accepts everything
+// the shared helper accepts (cron_secret, FOLLOWUP_AUTOMATION_SECRET as
+// x-automation-secret or Bearer, the service role key, an admin via has_role)
+// plus the original admin check against user_roles, so it's a superset of the
+// credentials that worked before.
+async function isAuthorized(req: Request, adminSupabase: AdminClient, body: Record<string, unknown> | null): Promise<boolean> {
+  if (await hasAutomationAuth(req, adminSupabase, body)) return true;
+
   const authHeader = req.headers.get("Authorization") ?? "";
   if (!authHeader.startsWith("Bearer ")) return false;
   const token = authHeader.replace("Bearer ", "");
@@ -70,12 +79,16 @@ serve(async (req: Request) => {
   }
 
   try {
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
+    const adminSupabase = adminClient();
 
-    if (!(await isAuthorized(req, adminSupabase))) {
+    let body: Record<string, unknown> | null = null;
+    try {
+      body = await req.json();
+    } catch {
+      // No body or invalid JSON — default behavior (active only)
+    }
+
+    if (!(await isAuthorized(req, adminSupabase, body))) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -83,13 +96,10 @@ serve(async (req: Request) => {
     }
 
     // Check for optional flag to include all members (not just active)
-    let includeAllStatuses = false;
-    try {
-      const body = await req.json();
-      includeAllStatuses = body?.include_all_statuses === true;
-    } catch {
-      // No body or invalid JSON — default behavior (active only)
-    }
+    const includeAllStatuses = body?.include_all_statuses === true;
+    // Contract D: members the Sober Helpline app already reminds by push are
+    // skipped unless the caller asks to email everyone.
+    const includeAppHandled = body?.include_app_handled === true;
 
     // Get the current Zoom meeting link
     const { data: settings } = await adminSupabase
@@ -161,11 +171,24 @@ serve(async (req: Request) => {
     let sent = 0;
     let failed = 0;
     let skippedBlocked = 0;
+    let skippedApp = 0;
+
+    // Contract D: fails open (an empty set) if the app can't be reached.
+    const appHandled = includeAppHandled
+      ? new Set<string>()
+      : (await appHandledEmails(
+        (privateProfiles || []).map((pp: any) => normalizeEmail(pp.email)),
+        "send-member-zoom-reminder",
+      )).handled;
 
     for (const pp of (privateProfiles || [])) {
-      if (pp.email && blockedSet.has(String(pp.email).toLowerCase().trim())) {
+      if (!pp.email) continue;
+      if (blockedSet.has(String(pp.email).toLowerCase().trim())) {
         skippedBlocked++;
-        console.warn(`Skipping blocked member email: ${pp.email}`);
+        continue;
+      }
+      if (appHandled.has(normalizeEmail(pp.email))) {
+        skippedApp++;
         continue;
       }
       const firstName = profileMap.get(pp.user_id) || "Friend";
@@ -235,9 +258,9 @@ serve(async (req: Request) => {
       else failed++;
     }
 
-    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}, skippedBlocked=${skippedBlocked}`);
+    console.log(`Member Zoom reminder: sent=${sent}, failed=${failed}, skippedBlocked=${skippedBlocked}, skippedApp=${skippedApp}`);
 
-    return new Response(JSON.stringify({ success: true, sent, failed, skippedBlocked }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, skippedBlocked, skippedApp }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

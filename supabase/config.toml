@@ -127,6 +127,9 @@ verify_jwt = false
 [functions.app-sso-exchange]
 verify_jwt = false
 
+# Called server-to-server by the Sober Helpline app; checks x-membership-sync-secret itself.
+[functions.app-family-squares-sync]
+verify_jwt = false
 
 
 [functions.submit-provider-inquiry]

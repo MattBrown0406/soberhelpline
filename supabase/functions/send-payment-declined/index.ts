@@ -1,5 +1,12 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
+
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,7 +19,14 @@ serve(async (req: Request) => {
   }
 
   try {
-    const { to, name } = await req.json();
+    const body = await req.json();
+    const { to, name } = body;
+
+    // Sends a "payment declined, update PayPal" email from matt@ to whatever
+    // address the caller names: admin or automation credentials only.
+    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+    const denied = await requireAutomationAuthNow(req, admin, body, "send-payment-declined", corsHeaders);
+    if (denied) return denied;
 
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
@@ -34,7 +48,7 @@ serve(async (req: Request) => {
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #1a365d; font-size: 24px;">Payment Update Needed</h1>
               
-              <p>Dear ${name},</p>
+              <p>Dear ${escapeHtml(String(name ?? ""))},</p>
               
               <p>We're reaching out because your most recent membership payment was <strong>declined</strong>. This can happen for a variety of reasons — an expired card, insufficient funds, or a bank security hold.</p>
               

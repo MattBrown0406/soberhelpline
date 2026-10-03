@@ -8,7 +8,7 @@ let checks = 0;
 const check = (condition, message) => { assert.ok(condition, message); checks++; };
 const sourceModule = ts.transpileModule(readFileSync('src/lib/registrationSource.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
 const { registrationSource } = await import(`data:text/javascript;base64,${Buffer.from(sourceModule).toString('base64')}`);
-for (const [value, expected] of [['kiosk','kiosk'], ['automatic','automatic'], ['website','unknown'], [null,'unknown'], [undefined,'unknown'], ['other','unknown']]) {
+for (const [value, expected] of [['kiosk','kiosk'], ['automatic','automatic'], ['app','app'], ['website','unknown'], [null,'unknown'], [undefined,'unknown'], ['other','unknown']]) {
   check(registrationSource({registration_source:value}) === expected, `source ${value}`);
 }
 const server = await createServer({mode:'test', server:{host:'127.0.0.1', port:4188, strictPort:true}});

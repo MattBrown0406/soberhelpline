@@ -56,7 +56,17 @@ export function AppMembershipSync() {
     setSyncing(false);
 
     if (error) {
-      toast.error("Sync failed. Please try again.");
+      // The function explains failures it can name (e.g. the app's export isn't
+      // deployed yet, or the shared secret doesn't match) in `details`.
+      let details = "";
+      try {
+        const context = (error as { context?: Response }).context;
+        const payload = context ? await context.json() : null;
+        if (payload && typeof payload.details === "string") details = payload.details;
+      } catch {
+        // No readable body: fall back to the generic message.
+      }
+      toast.error(details ? `Sync failed: ${details}` : "Sync failed. Please try again.");
       return;
     }
 

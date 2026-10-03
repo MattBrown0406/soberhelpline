@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -95,6 +96,12 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Bulk email to every member and past registrant: admin or automation
+    // credentials only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuthNow(req, adminSupabase, body, "send-app-download-blast", corsHeaders);
+    if (denied) return denied;
+
     // Suppression list
     const { data: suppressed } = await adminSupabase
       .from("email_suppression_list")
@@ -134,6 +141,9 @@ serve(async (req: Request) => {
     const { data: pastRegs } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email, name")
+      // App RSVPs (registration_source 'app') never opted into marketing email
+      // (and already have the app).
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
     for (const r of pastRegs || []) {
       const email = r.email?.toLowerCase();

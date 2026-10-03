@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -12,12 +13,18 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Auto-registering recurring Zoom registrants...');
-
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
+    // Registers and emails every auto-register subscriber: cron (cron_secret),
+    // the automation secret or an admin only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuth(req, supabase, body, 'auto-register-zoom', corsHeaders);
+    if (denied) return denied;
+
+    console.log('Auto-registering recurring Zoom registrants...');
 
     // Calculate next Monday's date
     const now = new Date();
@@ -74,6 +81,9 @@ serve(async (req) => {
       .from('zoom_meeting_registrations')
       .select('email')
       .eq('meeting_date', meetingDate)
+      // An app RSVP isn't a website registration: still register (and email)
+      // auto-register subscribers; the next app sync merges into that row.
+      .neq('registration_source', 'app')
       .in('email', emails);
 
     const alreadyRegistered = new Set(

@@ -1,10 +1,12 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-automation-secret, x-cron-secret",
 };
 
 function escapeHtml(text: string): string {
@@ -24,6 +26,13 @@ function pacificDateStr(d = new Date()): string {
   }).format(d);
 }
 
+// Pacific hour 0-23 (handles PST/PDT).
+function pacificHour(d = new Date()): number {
+  return Number(new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23",
+  }).format(d));
+}
+
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -35,13 +44,31 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    let body: any = {};
+    try { body = (await req.json()) ?? {}; } catch { /* no body */ }
+
+    // Emails every registrant for the date: cron (cron_secret), the automation
+    // secret, the service role key or an admin. Staged by
+    // site_settings.enforce_function_auth (logs automation_auth_unverified until then).
+    const denied = await requireAutomationAuth(req, adminSupabase, body, "send-zoom-starting-soon", corsHeaders);
+    if (denied) return denied;
+
+    // Two cron jobs (01:00 and 02:00 UTC) cover PDT and PST. Only the run in
+    // the 6 PM Pacific hour sends "starting in 1 hour"; the other is a no-op.
+    // A manual run can pass { "force": true }.
+    if (body?.force !== true && pacificHour() !== 18) {
+      return new Response(JSON.stringify({ success: true, sent: 0, skipped: "outside_6pm_pacific" }), {
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
-    let body: any = {};
-    try { body = await req.json(); } catch { /* no body */ }
-
     const targetDate: string = body.meeting_date || pacificDateStr();
+    // Contract D: people the Sober Helpline app reminds by push are skipped
+    // unless the caller asks to email everyone.
+    const includeAppHandled = body.include_app_handled === true;
 
     const { data: settings } = await adminSupabase
       .from("site_settings")
@@ -60,7 +87,7 @@ serve(async (req: Request) => {
 
     const { data: registrants, error } = await adminSupabase
       .from("zoom_meeting_registrations")
-      .select("id, name, email")
+      .select("id, name, email, registration_source")
       .eq("meeting_date", targetDate);
 
     if (error) throw error;
@@ -70,18 +97,32 @@ serve(async (req: Request) => {
       .select("email");
     const suppressedEmails = new Set((suppressed || []).map((s: any) => s.email.toLowerCase()));
 
+    // People who registered through the Sober Helpline app already have it:
+    // no "download the app" box for them.
+    const appRegistrants = new Set(
+      (registrants || [])
+        .filter((r: any) => r.registration_source === "app")
+        .map((r: any) => normalizeEmail(r.email)),
+    );
+
     const seen = new Set<string>();
-    const unique: { id?: string; name: string; email: string }[] = [];
+    const candidates: { id?: string; name: string; email: string }[] = [];
     for (const r of registrants || []) {
       const key = (r.email || "").toLowerCase();
       if (!key || seen.has(key) || suppressedEmails.has(key)) continue;
       seen.add(key);
-      unique.push(r as any);
+      candidates.push(r as any);
     }
+
+    const appHandled = includeAppHandled
+      ? new Set<string>()
+      : (await appHandledEmails(candidates.map((r) => r.email), "send-zoom-starting-soon")).handled;
+    const unique = candidates.filter((r) => !appHandled.has(normalizeEmail(r.email)));
+    const skippedApp = candidates.length - unique.length;
 
     if (unique.length === 0) {
       return new Response(
-        JSON.stringify({ message: "No registrants for this meeting date", meeting_date: targetDate, sent: 0 }),
+        JSON.stringify({ message: "No registrants to email for this meeting date", meeting_date: targetDate, sent: 0, skippedApp }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
@@ -91,6 +132,7 @@ serve(async (req: Request) => {
 
     for (const reg of unique) {
       const safeName = escapeHtml(reg.name || "there");
+      const hasApp = appRegistrants.has(normalizeEmail(reg.email));
       const joinUrl = reg.id
         ? `${supabaseUrl}/functions/v1/track-zoom-click?rid=${encodeURIComponent(reg.id)}`
         : baseJoinUrl;
@@ -124,14 +166,14 @@ serve(async (req: Request) => {
             </p>
           </div>
 
-          <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
+          ${hasApp ? "" : `<div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
             <p style="margin: 0 0 8px 0; color: #047857; font-size: 14px;">
               <strong>📱 Take Sober Helpline with you.</strong> If you haven't already, download the free Sober Helpline app from the Apple App Store.
             </p>
             <a href="https://apps.apple.com/us/app/sober-helpline/id6780034996" style="display: inline-block; padding: 10px 24px; background-color: #166534; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
               Download Sober Helpline
             </a>
-          </div>
+          </div>`}
 
 
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
@@ -160,12 +202,14 @@ serve(async (req: Request) => {
         sent++;
       } else {
         failed++;
-        console.error(`Failed for ${reg.email}: ${await res.text()}`);
+        console.error(`SendGrid send failed [${res.status}]: ${(await res.text()).slice(0, 300)}`);
       }
     }
 
+    console.log(`send-zoom-starting-soon meeting_date=${targetDate} sent=${sent} failed=${failed} skippedApp=${skippedApp}`);
+
     return new Response(
-      JSON.stringify({ success: true, meeting_date: targetDate, sent, failed, total: unique.length }),
+      JSON.stringify({ success: true, meeting_date: targetDate, sent, failed, total: unique.length, skippedApp }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (error: any) {

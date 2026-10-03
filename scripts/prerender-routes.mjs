@@ -323,6 +323,13 @@ const replaceOrInsertHeadTag = (html, pattern, replacement) => pattern.test(html
   ? html.replace(pattern, replacement)
   : html.replace('</head>', `    ${replacement}\n</head>`);
 
+// Smart App Banner (Safari on iPhone: Open/Get for the Sober Helpline app).
+// index.html carries it; this keeps every generated shell, including the
+// preserved static ones that don't start from index.html, in step with it.
+const APPLE_ITUNES_APP_PATTERN = /<meta\s+name=["']apple-itunes-app["'][^>]*>/i;
+const APPLE_ITUNES_APP_META = '<meta name="apple-itunes-app" content="app-id=6780034996">';
+const withSmartAppBanner = (html) => replaceOrInsertHeadTag(html, APPLE_ITUNES_APP_PATTERN, APPLE_ITUNES_APP_META);
+
 const HELMET_META_KEYS = new Set([
   'description', 'robots', 'ai:description', 'llm:description',
   'og:type', 'og:url', 'og:title', 'og:description', 'og:image', 'og:image:secure_url',
@@ -371,6 +378,7 @@ for (const page of allPrerenderPages) {
       normalizedHtml = replaceOrInsertHeadTag(normalizedHtml, /<meta\s+name=["']twitter:title["'][^>]*>/i, `<meta name="twitter:title" content="${escapeHtml(renderedTitle)}" data-rh="true">`);
       normalizedHtml = replaceOrInsertHeadTag(normalizedHtml, /<meta\s+name=["']twitter:description["'][^>]*>/i, `<meta name="twitter:description" content="${escapeHtml(renderedDescription)}" data-rh="true">`);
       normalizedHtml = replaceOrInsertHeadTag(normalizedHtml, /<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${canonicalUrl}" data-rh="true">`);
+      normalizedHtml = withSmartAppBanner(normalizedHtml);
       normalizedHtml = markHelmetManagedTags(normalizedHtml);
       await fs.writeFile(targetPath, normalizedHtml);
       if (cleanUrlPath) {
@@ -405,6 +413,7 @@ for (const page of allPrerenderPages) {
     // do not append a second article or a hidden/noscript duplicate.
     html = html.replace('<div id="root"></div>', `<div id="root">${page.initialHtml}</div>`);
   }
+  html = withSmartAppBanner(html);
   html = markHelmetManagedTags(html);
 
   await fs.mkdir(targetDir, { recursive: true });

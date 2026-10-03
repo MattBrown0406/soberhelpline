@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "sonner";
 import { Mail, Phone, RefreshCw, TrendingUp } from "lucide-react";
+import { withoutAppQuestions } from "@/lib/appQuestions";
 
 type LeadStage = "Booked" | "Started Booking" | "Monday Zoom";
 
@@ -55,6 +56,7 @@ interface ZoomQueryResult {
 
 interface UntypedZoomQuery {
   select(columns: string): UntypedZoomQuery;
+  neq(column: string, value: string): UntypedZoomQuery;
   order(column: string, options: { ascending: boolean }): UntypedZoomQuery;
   limit(count: number): Promise<ZoomQueryResult>;
 }
@@ -117,6 +119,8 @@ export function LeadPipelineManagement() {
       zoomDb
         .from("zoom_meeting_registrations")
         .select("id, name, email, phone, question, request_follow_up, meeting_date, created_at, lead_score, lead_tier, revenue_path, lead_reasons, next_revenue_action, followup_sequence_status, next_followup_at, nme_attributed")
+        // App RSVPs (registration_source 'app') are not website leads.
+        .neq("registration_source", "app")
         .order("created_at", { ascending: false })
         .limit(100),
     ]);
@@ -181,7 +185,7 @@ export function LeadPipelineManagement() {
       plan: registration.request_follow_up ? "Requested intervention follow-up" : "Free Monday support",
       source: "Monday Zoom registration",
       detail: [
-        registration.question || `Meeting ${registration.meeting_date}`,
+        withoutAppQuestions(registration.question) || `Meeting ${registration.meeting_date}`,
         registration.followup_sequence_status ? `Follow-up: ${registration.followup_sequence_status}` : null,
         registration.next_followup_at ? `Next: ${new Date(registration.next_followup_at).toLocaleDateString()}` : null,
       ].filter(Boolean).join(" · "),

@@ -67,10 +67,33 @@ serve(async (req: Request) => {
 
     if (dueError) throw dueError;
 
+    // Sober Helpline app RSVPs never belong in the revenue sequence. Nothing
+    // queues them today; this is the backstop if something ever does.
+    const registrationIds = [...new Set((dueFollowups || []).map((f) => f.registration_id).filter(Boolean))];
+    const appRegistrationIds = new Set<string>();
+    if (registrationIds.length > 0) {
+      const { data: appRows, error: appError } = await supabase
+        .from("zoom_meeting_registrations")
+        .select("id")
+        .in("id", registrationIds)
+        .eq("registration_source", "app");
+      if (appError) throw appError;
+      (appRows || []).forEach((row: { id: string }) => appRegistrationIds.add(row.id));
+    }
+
     let sent = 0;
+    let skippedApp = 0;
     const errors: Array<{ id: string; message: string }> = [];
 
     for (const followup of dueFollowups || []) {
+      if (followup.registration_id && appRegistrationIds.has(followup.registration_id)) {
+        await supabase
+          .from("family_squares_followup_queue")
+          .update({ skipped_at: new Date().toISOString(), error_message: "skipped: Sober Helpline app registration" })
+          .eq("id", followup.id);
+        skippedApp += 1;
+        continue;
+      }
       try {
         await sendEmail(followup.email, followup.name, followup.subject, followup.body_html);
         const now = new Date().toISOString();
@@ -112,7 +135,7 @@ serve(async (req: Request) => {
       }
     }
 
-    return new Response(JSON.stringify({ sent, errors }), {
+    return new Response(JSON.stringify({ sent, skippedApp, errors }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error: unknown) {

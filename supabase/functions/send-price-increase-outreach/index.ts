@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -98,6 +99,11 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Bulk email to former members: admin or automation credentials only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuthNow(req, adminSupabase, body, "send-price-increase-outreach", corsHeaders);
+    if (denied) return denied;
+
     // 1. Get current active family member user_ids
     const { data: activeSubs } = await adminSupabase
       .from("provider_subscriptions")
@@ -169,6 +175,8 @@ serve(async (req: Request) => {
     const { data: allRegistrants } = await adminSupabase
       .from("zoom_meeting_registrations")
       .select("email, name")
+      // App RSVPs (registration_source 'app') never opted into marketing email.
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
 
     for (const r of (allRegistrants || [])) {

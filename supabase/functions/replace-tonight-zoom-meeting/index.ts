@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -83,6 +84,12 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
+
+    // Cancels tonight's meeting and emails every registrant: admin or
+    // automation credentials only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuthNow(req, supabase, body, "replace-tonight-zoom-meeting", corsHeaders);
+    if (denied) return denied;
 
     const accessToken = await getZoomAccessToken();
 

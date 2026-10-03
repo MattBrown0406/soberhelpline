@@ -56,6 +56,10 @@ for (const url of urls) {
   if (titles[0] && decodeHtml(titles[0]).length > 60) issues.push(`${route}: title exceeds 60 characters.`);
   if (descriptions[0] && decodeHtml(descriptions[0]).length > 160) issues.push(`${route}: description exceeds 160 characters.`);
   if (html.includes('{seoData.') || html.includes('{routeMetadata.')) issues.push(`${route}: unresolved metadata expression in prerendered HTML.`);
+  const smartAppBanners = extractAll(html, /<meta name="apple-itunes-app" content="([^"]*)"[^>]*>/g);
+  if (smartAppBanners.length !== 1 || smartAppBanners[0] !== 'app-id=6780034996') {
+    issues.push(`${route}: expected one Smart App Banner (apple-itunes-app app-id=6780034996), found ${smartAppBanners.join(', ') || 'none'}.`);
+  }
 
   if (titles[0]) titleMap.set(titles[0], [...(titleMap.get(titles[0]) || []), route]);
   if (descriptions[0]) descriptionMap.set(descriptions[0], [...(descriptionMap.get(descriptions[0]) || []), route]);

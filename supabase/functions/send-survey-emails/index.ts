@@ -7,6 +7,11 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -19,31 +24,35 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    // Verify caller is admin
+    // Verify caller is admin (a missing header is refused too, not skipped)
     const authHeader = req.headers.get("Authorization");
-    if (authHeader) {
-      const token = authHeader.replace("Bearer ", "");
-      const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-      if (authError || !user) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const token = authHeader.replace("Bearer ", "");
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
-      const { data: roleData } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .eq("role", "admin")
-        .maybeSingle();
+    const { data: roleData } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
+      .maybeSingle();
 
-      if (!roleData) {
-        return new Response(JSON.stringify({ error: "Admin access required" }), {
-          status: 403,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+    if (!roleData) {
+      return new Response(JSON.stringify({ error: "Admin access required" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     const { survey_id } = await req.json();
@@ -72,10 +81,16 @@ Deno.serve(async (req) => {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-    const { data: registrants } = await supabase
+    // The table has `name`, not `first_name` (selecting first_name made this
+    // query fail, so no survey was ever sent).
+    const { data: registrants, error: registrantsError } = await supabase
       .from("zoom_meeting_registrations")
-      .select("email, first_name")
-      .gte("created_at", thirtyDaysAgo.toISOString());
+      .select("email, name")
+      .gte("created_at", thirtyDaysAgo.toISOString())
+      // App RSVPs (registration_source 'app') never opted into email from the site.
+      .neq("registration_source", "app");
+
+    if (registrantsError) throw new Error(`registrant lookup failed: ${registrantsError.message}`);
 
     if (!registrants || registrants.length === 0) {
       return new Response(
@@ -95,7 +110,7 @@ Deno.serve(async (req) => {
     registrants.forEach((r) => {
       const key = r.email?.toLowerCase();
       if (key && !uniqueEmails.has(key) && !suppressedEmails.has(key)) {
-        uniqueEmails.set(key, r.first_name || "Friend");
+        uniqueEmails.set(key, escapeHtml((r.name || "").trim().split(/\s+/)[0] || "Friend"));
       }
     });
 

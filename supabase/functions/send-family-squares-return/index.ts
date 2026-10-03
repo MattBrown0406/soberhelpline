@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -69,6 +70,12 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    // Bulk email to a past meeting's registrants: admin or automation
+    // credentials only.
+    const body = await req.json().catch(() => null);
+    const denied = await requireAutomationAuthNow(req, supabase, body, "send-family-squares-return", corsHeaders);
+    if (denied) return denied;
+
     const { data: settings } = await supabase
       .from("site_settings")
       .select("key, value")
@@ -86,6 +93,9 @@ serve(async (req: Request) => {
       .from("zoom_meeting_registrations")
       .select("name, email, phone, user_id, language")
       .eq("meeting_date", PREVIOUS_MEETING_DATE)
+      // Never copy app RSVPs (registration_source 'app') into website
+      // registrations or email them: they never opted in here.
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
     if (prevErr) throw prevErr;
 

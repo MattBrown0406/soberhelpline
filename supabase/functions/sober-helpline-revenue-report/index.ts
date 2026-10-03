@@ -101,7 +101,9 @@ serve(async (req: Request) => {
       supabase
         .from("zoom_meeting_registrations")
         .select("id,created_at", { count: "exact", head: true })
-        .gte("created_at", sinceIso),
+        .gte("created_at", sinceIso)
+        // App RSVPs (registration_source 'app') are not website leads.
+        .neq("registration_source", "app"),
       supabase
         .from("family_squares_followup_queue")
         .select("id,created_at", { count: "exact", head: true })

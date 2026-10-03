@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth, requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -187,8 +188,24 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Who may run this: cron (cron_secret), the automation secret or an admin.
+    // ccEmail copies every invitation (and so every recipient's address) to an
+    // address the caller names. No scheduled job runs this, so every run needs
+    // one of those credentials.
+    const verified = await hasAutomationAuth(req, adminSupabase, body);
+    if (!verified) {
+      if (ccEmail) {
+        return new Response(JSON.stringify({ error: "unauthorized" }), {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      const denied = await requireAutomationAuthNow(req, adminSupabase, body, "send-zoom-invitation-outreach", corsHeaders);
+      if (denied) return denied;
+    }
+
     const nextMonday = getNextMonday();
-    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}. excludeMembers=${excludeMembers}, ccEmail=${ccEmail}`);
+    console.log(`Sending zoom invitation outreach. Next Monday: ${nextMonday}. excludeMembers=${excludeMembers}, cc=${ccEmail ? "yes" : "no"}`);
 
     const siteUrl = "https://soberhelpline.com";
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
@@ -254,6 +271,8 @@ serve(async (req: Request) => {
       .from("zoom_meeting_registrations")
       .select("email, name")
       .neq("meeting_date", nextMonday)
+      // App RSVPs (registration_source 'app') never opted into marketing email.
+      .neq("registration_source", "app")
       .order("created_at", { ascending: false });
 
     const pastRegistrantMap = new Map<string, string>();

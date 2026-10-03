@@ -124,7 +124,9 @@ async function processPayPalPayout(paypalEmail: string, amount: number, bookingI
     headers: { 'Authorization': `Bearer ${access_token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       sender_batch_header: {
-        sender_batch_id: `booking_${bookingId}_${Date.now()}`,
+        // Deterministic: if PayPal accepted a payout but the reply was lost,
+        // a retry is rejected by PayPal as a duplicate instead of paying twice.
+        sender_batch_id: `booking_${bookingId}`,
         email_subject: 'Sober Helpline - Consultation Payment',
         email_message: 'You have received a payment for a completed consultation session.',
       },
@@ -197,8 +199,10 @@ Deno.serve(async (req) => {
     // Allow service role key auth (from book-consultation edge function) or user auth
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
     const token = authHeader.replace('Bearer ', '');
-    const isServiceRole = token === serviceRoleKey;
+    const isServiceRole = serviceRoleKey.length > 0 && token === serviceRoleKey;
+    const forbidden = () => new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 
+    let callerUserId: string | null = null;
     if (!isServiceRole) {
       const supabase = createClient(
         Deno.env.get('SUPABASE_URL') ?? '',
@@ -207,6 +211,7 @@ Deno.serve(async (req) => {
       );
       const { data: { user }, error: authError } = await supabase.auth.getUser();
       if (authError || !user) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      callerUserId = user.id;
     }
 
     const { bookingId, action } = await req.json();
@@ -238,12 +243,41 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Provider not found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
 
+    // Only the system (book-consultation, the recovery job), an admin, or the
+    // people on this booking may act on it. Payouts: system, admin, or this
+    // booking's own provider — never any signed-in user.
+    let isAdmin = false;
+    if (callerUserId) {
+      const { data: adminRole } = await adminClient.rpc('has_role', { _user_id: callerUserId, _role: 'admin' });
+      isAdmin = adminRole === true;
+    }
+    const isBookingProvider = !!callerUserId && provider.user_id === callerUserId;
+    const isBookingClient = !!callerUserId && booking.client_user_id === callerUserId;
+    if (action === 'payout') {
+      if (!isServiceRole && !isAdmin && !isBookingProvider) return forbidden();
+    } else if (!isServiceRole && !isAdmin && !isBookingProvider && !isBookingClient) {
+      return forbidden();
+    }
+
     // ACTION: Process payout (called when session is marked complete)
     if (action === 'payout') {
+      if (booking.status !== 'completed') {
+        return new Response(JSON.stringify({ error: 'Booking is not completed' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      // One payout per booking. Earlier attempts (any status) also mean the
+      // coaching-plan session was already counted, so a retry doesn't count it again.
+      const { data: earlierPayouts } = await adminClient
+        .from('consultation_payouts')
+        .select('id, status')
+        .eq('booking_id', bookingId);
+      if ((earlierPayouts ?? []).some((p: { status: string }) => p.status === 'completed' || p.status === 'pending')) {
+        return new Response(JSON.stringify({ error: 'Payout already processed or in progress' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      const firstAttempt = (earlierPayouts ?? []).length === 0;
       // Skip payout for Matt Brown (owner) - it's his PayPal account
       if (provider.full_name === 'Matt Brown') {
-        // Still update coaching plan progress if applicable
-        if (booking.coaching_plan_id) {
+        // Still update coaching plan progress if applicable (once per booking)
+        if (booking.coaching_plan_id && firstAttempt) {
           const { data: plan } = await adminClient
             .from('coaching_plans')
             .select('*')
@@ -261,6 +295,13 @@ Deno.serve(async (req) => {
             }
           }
         }
+        // Record it so a repeat call doesn't count the plan session again.
+        if (firstAttempt) {
+          await adminClient.from('consultation_payouts').insert({
+            booking_id: bookingId, provider_id: provider.id, amount: 0, status: 'skipped',
+            processed_at: new Date().toISOString(), error_message: 'Owner provider - no payout needed',
+          });
+        }
         return new Response(JSON.stringify({ success: true, skipped: true, reason: 'Owner provider - no payout needed' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
       }
       // Determine payout amount based on coaching plan
@@ -275,7 +316,8 @@ Deno.serve(async (req) => {
 
         if (plan) {
           providerPayout = Number(plan.provider_payout_per_session); // $100 for stabilization plan
-
+        }
+        if (plan && firstAttempt) {
           // Increment completed sessions
           const newCompleted = (plan.completed_sessions || 0) + 1;
           const newStatus = newCompleted >= plan.total_sessions ? 'completed' : 'active';
@@ -295,25 +337,40 @@ Deno.serve(async (req) => {
         }
       }
 
+      // Claim the payout before paying, so two simultaneous requests can't both pay.
+      const { data: claim, error: claimError } = await adminClient
+        .from('consultation_payouts')
+        .insert({ booking_id: bookingId, provider_id: provider.id, amount: providerPayout, status: 'pending' })
+        .select('id, created_at')
+        .single();
+      if (claimError || !claim) {
+        return new Response(JSON.stringify({ error: 'Payout failed' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      const { data: activeClaims } = await adminClient
+        .from('consultation_payouts')
+        .select('id, created_at')
+        .eq('booking_id', bookingId)
+        .in('status', ['pending', 'completed'])
+        .order('created_at', { ascending: true })
+        .order('id', { ascending: true });
+      if ((activeClaims ?? [])[0]?.id !== claim.id) {
+        await adminClient.from('consultation_payouts').delete().eq('id', claim.id);
+        return new Response(JSON.stringify({ error: 'Payout already processed or in progress' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+
       try {
         const payoutId = await processPayPalPayout(provider.paypal_email, providerPayout, bookingId);
-        await adminClient.from('consultation_payouts').insert({
-          booking_id: bookingId,
-          provider_id: provider.id,
-          amount: providerPayout,
+        await adminClient.from('consultation_payouts').update({
           paypal_payout_id: payoutId,
           status: payoutId ? 'completed' : 'failed',
           processed_at: new Date().toISOString(),
-        });
+        }).eq('id', claim.id);
         return new Response(JSON.stringify({ success: true, payoutId, amount: providerPayout }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
       } catch (err) {
-        await adminClient.from('consultation_payouts').insert({
-          booking_id: bookingId,
-          provider_id: provider.id,
-          amount: providerPayout,
+        await adminClient.from('consultation_payouts').update({
           status: 'failed',
           error_message: err instanceof Error ? err.message : 'Unknown error',
-        });
+        }).eq('id', claim.id);
         return new Response(JSON.stringify({ error: 'Payout failed' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
       }
     }
@@ -556,19 +613,18 @@ Deno.serve(async (req) => {
       name:  booking.client_name,
       phone: booking.client_phone ?? null,
       props: { booking_id: bookingId, provider: provider?.full_name ?? null },
-    }, adminClient);
+    });
     if (booking.amount_paid > 0) {
       await enqueueSpineEvent("payment", {
         email: booking.client_email,
         name:  booking.client_name,
         phone: booking.client_phone ?? null,
         payment: {
-          id:           bookingId,
           processor:    "paypal",
           amount_cents: Math.round(Number(booking.amount_paid) * 100),
           kind:         "consultation",
         },
-      }, adminClient);
+      });
     }
 
     return new Response(JSON.stringify({

@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -105,6 +106,22 @@ serve(async (req: Request) => {
     const body = await req.json();
     const { recipients, mode } = body;
 
+    // Every mode emails the recipient list the caller sends (with the meeting
+    // link, or a free-membership offer), so only an admin or the automation
+    // credentials may call it. Enforced now, not staged: there is no scheduled
+    // caller.
+    const adminSupabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+    if (!(await hasAutomationAuth(req, adminSupabase, body))) {
+      console.warn("send-apology-reregistration: unauthorized call refused");
+      return new Response(JSON.stringify({ error: "unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     if (mode === "apology_trial") {
       const results: Record<string, boolean> = {};
       for (const r of recipients) {
@@ -123,10 +140,6 @@ serve(async (req: Request) => {
     }
 
     // Default legacy mode — original apology/reregistration email
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
 
     const { data: settings } = await adminSupabase
       .from("site_settings")

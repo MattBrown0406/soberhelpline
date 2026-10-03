@@ -1,6 +1,8 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth, requireAutomationAuthNow } from "../_shared/automationAuth.ts";
+import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,6 +27,27 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    let body: any = {};
+    try { body = await req.json(); } catch {}
+
+    // Who may run this: cron (cron_secret), the automation secret or an admin.
+    // A custom recipient list sends the meeting link and passcode to any
+    // address the caller names, so it requires one of those credentials now;
+    // the regular run (this week's registrants) needs one too: no scheduled job
+    // runs this function.
+    const customRecipients = Array.isArray(body?.recipients);
+    const verified = await hasAutomationAuth(req, adminSupabase, body);
+    if (!verified) {
+      if (customRecipients) {
+        return new Response(JSON.stringify({ error: "unauthorized" }), {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      const denied = await requireAutomationAuthNow(req, adminSupabase, body, "resend-zoom-links", corsHeaders);
+      if (denied) return denied;
+    }
+
     const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
@@ -45,13 +68,10 @@ serve(async (req: Request) => {
     const baseJoinUrl = `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`;
     const registerUrl = `${siteUrl}/monday-zoom-registration`;
 
-    let body: any = {};
-    try { body = await req.json(); } catch {}
-
     // If custom recipients provided, use those. Otherwise fall back to meeting_date lookup.
     let recipients: { name: string; email: string; id?: string }[] = [];
 
-    if (body.recipients && Array.isArray(body.recipients)) {
+    if (customRecipients) {
       recipients = body.recipients;
     } else {
       let targetDate = body.meeting_date || "";
@@ -88,14 +108,23 @@ serve(async (req: Request) => {
 
     // Deduplicate by email and exclude suppressed addresses
     const seen = new Set<string>();
-    const unique: { name: string; email: string; id?: string }[] = [];
+    const deduped: { name: string; email: string; id?: string }[] = [];
     for (const r of recipients) {
       const key = r.email.toLowerCase();
       if (!seen.has(key) && !suppressedEmails.has(key)) {
         seen.add(key);
-        unique.push(r);
+        deduped.push(r);
       }
     }
+
+    // Contract D: on the regular run (this week's registrants), people the
+    // Sober Helpline app reminds by push are skipped. An explicit recipient
+    // list, or include_app_handled: true, emails everyone. Fails open.
+    const appHandled = customRecipients || body.include_app_handled === true
+      ? new Set<string>()
+      : (await appHandledEmails(deduped.map((r) => r.email), "resend-zoom-links")).handled;
+    const unique = deduped.filter((r) => !appHandled.has(normalizeEmail(r.email)));
+    const skippedApp = deduped.length - unique.length;
 
     let sent = 0;
     let failed = 0;
@@ -192,7 +221,7 @@ serve(async (req: Request) => {
       }
     }
 
-    return new Response(JSON.stringify({ success: true, sent, failed, total: unique.length }), {
+    return new Response(JSON.stringify({ success: true, sent, failed, total: unique.length, skippedApp }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

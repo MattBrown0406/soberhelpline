@@ -1,31 +1,36 @@
 // Nightly sync: mirror Sober Helpline App subscriptions into website membership
 // access.
 //
-// Source of truth: the app backend's `entitlements` table (+ its auth users for
-// emails). Target: public.provider_subscriptions rows with plan_type = 'app'
+// Source of truth: the app's `membership-export` function (server to server,
+// x-membership-sync-secret = MEMBERSHIP_SYNC_SECRET). It returns, page by page,
+// every VERIFIED app account with active app-origin paid access:
+// { email, tier: "essential" | "premier" | "org", expires_at }. The website never
+// reads the app database directly.
+// Target: public.provider_subscriptions rows with plan_type = 'app'
 // (provider_submission_id IS NULL => is_active_family_member()).
 //
 // Rules:
-// - Only APP-ORIGIN paid access counts: tiers essential / premium / org, and never
-//   an entitlement that came from the website (source 'web', written by the app's
-//   sync-web-membership, or raw.granted_by = the website marker, written by
-//   sync-website-to-app-entitlements). Otherwise web and app grants keep each
-//   other alive forever.
+// - Only APP-ORIGIN paid access counts. The app's export already excludes
+//   entitlements that came from the website (source 'web', or granted by
+//   sync-website-to-app-entitlements), so web and app grants never keep each
+//   other alive.
 // - App users are matched to website accounts by their website LOGIN email
 //   (auth users), never by the user-editable profile_private.email.
 // - Full reconciliation: an active 'app' row whose user no longer has qualifying
 //   app access is revoked once its app_grace_until has passed. Rows created by the
 //   website's app-sso-exchange carry a short grace and are refreshed by it.
-// - Everything is paged (PostgREST and the auth admin API cap page sizes), and a
-//   run that would revoke an unusually large share of app memberships stops and
-//   reports instead. Re-run with { "allow_mass_revoke": true } after checking a
-//   { "dry_run": true } run.
+// - Everything is paged, and a run that would revoke an unusually large share of
+//   app memberships stops and reports instead. Re-run with
+//   { "allow_mass_revoke": true } after checking a { "dry_run": true } run.
+// - If the app's export can't be read completely (not deployed yet = 404, wrong
+//   secret, timeout, bad response), the run fails and changes nothing.
 //
 // Unmatched purchases are recorded in public.app_membership_sync_issues for admin
 // review and queued in pending_free_memberships with status 'app_pending' (the
 // signup trigger turns those into an app-type membership, not a free one).
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { hasAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -33,12 +38,17 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const DEFAULT_APP_SUPABASE_URL = "https://rjlkbxqxshohgjmomyro.supabase.co";
 const GRACE_DAYS = 3;
 const DAY_MS = 86_400_000;
-const APP_MEMBER_TIERS = new Set(["essential", "premium", "org"]);
-const WEB_GRANT_MARKER = "soberhelpline_website_membership";
+// The export sends "premier" for the app's premium tier; "premium" is accepted too.
+const APP_TIERS = new Set(["essential", "premier", "premium", "org"]);
 const APP_PENDING_STATUS = "app_pending";
 const PAGE_SIZE = 1000;
+// membership-export paging: up to 1000 rows per call, 30 s per call.
+const EXPORT_PAGE_LIMIT = 1000;
+const EXPORT_MAX_PAGES = 500;
+const APP_CALL_TIMEOUT_MS = 30_000;
 // Mass-revocation guard: block when a run would revoke more than this share of
 // the currently active app memberships (and more than MASS_REVOKE_MIN rows).
 const MASS_REVOKE_SHARE = 0.25;
@@ -50,13 +60,11 @@ const json = (body: unknown, status = 200) =>
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 
-type Entitlement = {
-  id: string;
-  account_id: string;
-  source: string | null;
-  tier: string | null;
+/** One app account with active app-origin paid access (from membership-export). */
+type AppMember = {
+  email: string;
+  tier: string;
   expires_at: string | null;
-  raw: Record<string, unknown> | null;
 };
 
 type FamilyRow = {
@@ -77,19 +85,11 @@ const isAdminRevoked = (r: FamilyRow) =>
 
 type Issue = {
   email: string | null;
-  app_account_id: string;
   tier: string | null;
   expires_at: string | null;
   reason: string;
   details: Record<string, unknown>;
 };
-
-/** True when this entitlement is paid access that originated in the app. */
-function isAppOriginMembership(e: Entitlement): boolean {
-  if (e.source === "web") return false;
-  if (e.raw && e.raw["granted_by"] === WEB_GRANT_MARKER) return false;
-  return e.tier !== null && APP_MEMBER_TIERS.has(e.tier);
-}
 
 const expiryRank = (iso: string | null) =>
   iso === null ? Number.MAX_SAFE_INTEGER : new Date(iso).getTime();
@@ -98,41 +98,97 @@ const sameInstant = (a: string | null, b: string | null) =>
   (a === null && b === null) ||
   (a !== null && b !== null && new Date(a).getTime() === new Date(b).getTime());
 
-/** Read every row of a PostgREST table on the app backend, page by page. */
-async function mobileRestAll<T>(
-  baseUrl: string,
-  key: string,
-  table: string,
-  select: string,
-): Promise<T[]> {
-  const out: T[] = [];
-  let total: number | null = null;
-  for (let offset = 0; ;) {
-    const res = await fetch(
-      `${baseUrl}/rest/v1/${table}?select=${select}&order=id.asc&limit=${PAGE_SIZE}&offset=${offset}`,
-      { headers: { apikey: key, Authorization: `Bearer ${key}`, Prefer: "count=exact" } },
-    );
-    if (!res.ok) {
-      throw new Error(`app REST ${table} failed [${res.status}]`);
-    }
-    if (total === null) {
-      const range = res.headers.get("content-range") ?? "";
-      const parsed = Number(range.split("/")[1]);
-      total = Number.isFinite(parsed) ? parsed : null;
-    }
-    const rows = (await res.json()) as T[];
-    out.push(...rows);
-    offset += rows.length;
-    if (rows.length === 0) break;
-    if (total !== null ? offset >= total : rows.length < PAGE_SIZE) break;
+/** A failed call to the app; `code` goes back to the caller, nothing was changed. */
+class AppCallError extends Error {
+  constructor(public code: string, message: string, public status = 502) {
+    super(message);
   }
-  if (total !== null && out.length < total) {
-    throw new Error(`app REST ${table} returned ${out.length} of ${total} rows`);
-  }
-  return out;
 }
 
-/** Every auth user (id + lowercased email) of a Supabase project, page by page. */
+/**
+ * Read every page of the app's membership-export. Throws AppCallError unless
+ * the whole list was read, so a partial read can never look like "these
+ * members lapsed".
+ */
+async function fetchAppMembers(appUrl: string, secret: string): Promise<AppMember[]> {
+  const out: AppMember[] = [];
+  const seenCursors = new Set<string>();
+  let cursor: string | null = null;
+
+  for (let page = 0; page < EXPORT_MAX_PAGES; page++) {
+    let res: Response;
+    try {
+      res = await fetch(`${appUrl}/functions/v1/membership-export`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-membership-sync-secret": secret,
+        },
+        body: JSON.stringify({ cursor, limit: EXPORT_PAGE_LIMIT }),
+        signal: AbortSignal.timeout(APP_CALL_TIMEOUT_MS),
+      });
+    } catch {
+      throw new AppCallError("app_unavailable", "The app's membership-export did not answer (timeout or network error).");
+    }
+
+    if (res.status === 404) {
+      await res.body?.cancel();
+      throw new AppCallError(
+        "app_function_missing",
+        "The app's membership-export function is not deployed yet (404). Nothing was changed; the sync will work once the app backend is released.",
+        503,
+      );
+    }
+    if (res.status === 401 || res.status === 403) {
+      await res.body?.cancel();
+      throw new AppCallError(
+        "app_unauthorized",
+        `The app refused the request (${res.status}). Check that MEMBERSHIP_SYNC_SECRET is identical on both projects.`,
+      );
+    }
+    if (!res.ok) {
+      await res.body?.cancel();
+      throw new AppCallError("app_error", `The app's membership-export failed (${res.status}).`);
+    }
+
+    const payload = await res.json().catch(() => null) as
+      | { members?: unknown; next_cursor?: unknown }
+      | null;
+    const members = payload?.members;
+    if (!payload || !Array.isArray(members)) {
+      throw new AppCallError("app_bad_response", "The app's membership-export returned an unexpected response.");
+    }
+    for (const m of members as Record<string, unknown>[]) {
+      const email = typeof m?.email === "string" ? m.email.toLowerCase().trim() : "";
+      const tier = typeof m?.tier === "string" ? m.tier : "";
+      const expires = m?.expires_at;
+      const expiresOk = expires === null || expires === undefined ||
+        (typeof expires === "string" && Number.isFinite(new Date(expires).getTime()));
+      if (!email || !APP_TIERS.has(tier) || !expiresOk) {
+        throw new AppCallError("app_bad_response", "The app's membership-export returned a malformed member row.");
+      }
+      out.push({
+        email,
+        tier: tier === "premium" ? "premier" : tier,
+        expires_at: typeof expires === "string" ? expires : null,
+      });
+    }
+
+    const next = payload.next_cursor;
+    if (next === null || (next === undefined && members.length < EXPORT_PAGE_LIMIT)) return out;
+    if (typeof next !== "string" || next === "") {
+      throw new AppCallError("app_bad_response", "The app's membership-export returned no usable next_cursor.");
+    }
+    if (seenCursors.has(next)) {
+      throw new AppCallError("app_bad_response", "The app's membership-export repeated a cursor.");
+    }
+    seenCursors.add(next);
+    cursor = next;
+  }
+  throw new AppCallError("app_bad_response", `The app's membership-export had more than ${EXPORT_MAX_PAGES} pages.`);
+}
+
+/** Every auth user (id + lowercased email) of THIS project, page by page. */
 async function listAuthUsers(
   baseUrl: string,
   key: string,
@@ -159,13 +215,14 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
-  const mobileUrl = Deno.env.get("MOBILE_SUPABASE_URL");
-  const mobileKey = Deno.env.get("MOBILE_SUPABASE_SERVICE_ROLE_KEY");
+  const appUrl = (Deno.env.get("MOBILE_SUPABASE_URL") ?? "").trim().replace(/\/+$/, "") ||
+    DEFAULT_APP_SUPABASE_URL;
+  const syncSecret = Deno.env.get("MEMBERSHIP_SYNC_SECRET") ?? "";
   const siteUrl = Deno.env.get("SUPABASE_URL");
   const siteKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-  if (!mobileUrl || !mobileKey || !siteUrl || !siteKey) {
-    console.error("Missing required environment configuration");
+  if (!syncSecret || !siteUrl || !siteKey) {
+    console.error("app membership sync: missing MEMBERSHIP_SYNC_SECRET or Supabase env");
     return json({ error: "server_misconfigured" }, 500);
   }
 
@@ -173,40 +230,14 @@ Deno.serve(async (req) => {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  // --- Auth: cron secret (body) or admin JWT -------------------------------
+  // --- Auth: cron secret, automation secret, service role or admin JWT ------
   let body: { cron_secret?: string; dry_run?: boolean; allow_mass_revoke?: boolean } = {};
   try {
-    body = await req.json();
+    body = (await req.json()) ?? {};
   } catch {
     body = {};
   }
-
-  const { data: secretRow } = await supabase
-    .from("site_settings")
-    .select("value")
-    .eq("key", "cron_secret")
-    .maybeSingle();
-  const cronSecret = secretRow?.value ?? "";
-
-  let authorized = cronSecret.length > 0 && body.cron_secret === cronSecret;
-
-  if (!authorized) {
-    const authHeader = req.headers.get("Authorization") ?? "";
-    if (authHeader.startsWith("Bearer ")) {
-      const { data: userData } = await supabase.auth.getUser(
-        authHeader.replace("Bearer ", ""),
-      );
-      if (userData?.user) {
-        const { data: isAdmin } = await supabase.rpc("has_role", {
-          _user_id: userData.user.id,
-          _role: "admin",
-        });
-        authorized = Boolean(isAdmin);
-      }
-    }
-  }
-
-  if (!authorized) return json({ error: "unauthorized" }, 401);
+  if (!(await hasAutomationAuth(req, supabase, body))) return json({ error: "unauthorized" }, 401);
 
   const dryRun = body.dry_run === true;
   const allowMassRevoke = body.allow_mass_revoke === true;
@@ -214,65 +245,27 @@ Deno.serve(async (req) => {
   const nowIso = new Date(now).toISOString();
 
   try {
-    // --- 1. Pull entitlements + accounts + auth emails from the app ----------
-    const allEntitlements = await mobileRestAll<Entitlement>(
-      mobileUrl,
-      mobileKey,
-      "entitlements",
-      "id,account_id,source,tier,expires_at,raw",
-    );
-    const entitlements = allEntitlements.filter(isAppOriginMembership);
+    // --- 1. Pull current app members from the app --------------------------
+    const appMembers = await fetchAppMembers(appUrl, syncSecret);
 
-    const accounts = await mobileRestAll<{ id: string; user_id: string | null }>(
-      mobileUrl,
-      mobileKey,
-      "accounts",
-      "id,user_id",
-    );
-    const accountUserId = new Map(accounts.map((a) => [a.id, a.user_id]));
-
-    const appUsers = await listAuthUsers(mobileUrl, mobileKey);
-    const appEmailByUserId = new Map(appUsers.map((u) => [u.id, u.email]));
-
-    // Best qualifying entitlement per account (latest expiry, null = lifetime).
-    const best = new Map<string, Entitlement>();
-    for (const ent of entitlements) {
-      const current = best.get(ent.account_id);
-      if (!current || expiryRank(ent.expires_at) > expiryRank(current.expires_at)) {
-        best.set(ent.account_id, ent);
+    // Best entry per email (latest expiry, null = no expiry).
+    const best = new Map<string, AppMember>();
+    for (const m of appMembers) {
+      const current = best.get(m.email);
+      if (!current || expiryRank(m.expires_at) > expiryRank(current.expires_at)) {
+        best.set(m.email, m);
       }
     }
 
-    // --- 2. Resolve an email for each account ------------------------------
-    const active: { email: string; ent: Entitlement }[] = [];
-    const inactive: { email: string; ent: Entitlement }[] = [];
-    const issues: Issue[] = [];
-
-    for (const ent of best.values()) {
-      const userId = accountUserId.get(ent.account_id) ?? null;
-      const authEmail = userId ? appEmailByUserId.get(userId) ?? null : null;
-      const rawEmail = ent.raw && typeof ent.raw["email"] === "string"
-        ? (ent.raw["email"] as string).toLowerCase().trim()
-        : null;
-      const email = authEmail ?? rawEmail;
-
-      if (!email) {
-        issues.push({
-          email: null,
-          app_account_id: ent.account_id,
-          tier: ent.tier,
-          expires_at: ent.expires_at,
-          reason: "no_email_on_app_account",
-          details: { entitlement_id: ent.id, source: ent.source },
-        });
-        continue;
-      }
-
-      const graceUntil = ent.expires_at
-        ? new Date(ent.expires_at).getTime() + GRACE_DAYS * DAY_MS
+    // --- 2. Active (inside expiry + grace) vs lapsed -------------------------
+    const active: AppMember[] = [];
+    const inactive: AppMember[] = [];
+    for (const m of best.values()) {
+      const graceUntil = m.expires_at
+        ? new Date(m.expires_at).getTime() + GRACE_DAYS * DAY_MS
         : null;
       const isActive = graceUntil === null || graceUntil > now;
-      (isActive ? active : inactive).push({ email, ent });
+      (isActive ? active : inactive).push(m);
     }
 
     // --- 3. Map emails to website accounts (login email only) ---------------
@@ -312,6 +305,7 @@ Deno.serve(async (req) => {
       rowsByUser.set(row.user_id, list);
     }
 
+    const issues: Issue[] = [];
     const summary = {
       dry_run: dryRun,
       app_accounts: best.size,
@@ -329,9 +323,9 @@ Deno.serve(async (req) => {
     };
 
     // --- 5. Grant / refresh access for active subscribers ------------------
-    // One target per website user: the best (latest) active entitlement.
-    const activeByUser = new Map<string, { email: string; ent: Entitlement }>();
-    const unmatched: { email: string; ent: Entitlement }[] = [];
+    // One target per website user: the best (latest) active app membership.
+    const activeByUser = new Map<string, AppMember>();
+    const unmatched: AppMember[] = [];
     for (const entry of active) {
       const userId = siteUserByEmail.get(entry.email);
       if (!userId) {
@@ -339,7 +333,7 @@ Deno.serve(async (req) => {
         continue;
       }
       const current = activeByUser.get(userId);
-      if (!current || expiryRank(entry.ent.expires_at) > expiryRank(current.ent.expires_at)) {
+      if (!current || expiryRank(entry.expires_at) > expiryRank(current.expires_at)) {
         activeByUser.set(userId, entry);
       }
     }
@@ -357,9 +351,9 @@ Deno.serve(async (req) => {
       }
     }
 
-    for (const [userId, { ent }] of activeByUser) {
-      const graceUntil = ent.expires_at
-        ? new Date(new Date(ent.expires_at).getTime() + GRACE_DAYS * DAY_MS).toISOString()
+    for (const [userId, member] of activeByUser) {
+      const graceUntil = member.expires_at
+        ? new Date(new Date(member.expires_at).getTime() + GRACE_DAYS * DAY_MS).toISOString()
         : null;
       const rows = rowsByUser.get(userId) ?? [];
 
@@ -381,7 +375,7 @@ Deno.serve(async (req) => {
       if (appRow) {
         const unchanged = appRow.status === "active" &&
           sameInstant(appRow.app_grace_until, graceUntil) &&
-          sameInstant(appRow.next_billing_date, ent.expires_at);
+          sameInstant(appRow.next_billing_date, member.expires_at);
         if (unchanged) {
           summary.already_active++;
           continue;
@@ -394,7 +388,7 @@ Deno.serve(async (req) => {
           .update({
             status: "active",
             app_grace_until: graceUntil,
-            next_billing_date: ent.expires_at,
+            next_billing_date: member.expires_at,
             cancelled_at: null,
             cancellation_reason: null,
             cancellation_source: null,
@@ -413,7 +407,7 @@ Deno.serve(async (req) => {
           status: "active",
           amount: 0,
           start_date: nowIso,
-          next_billing_date: ent.expires_at,
+          next_billing_date: member.expires_at,
           app_grace_until: graceUntil,
         });
         if (insErr) throw new Error(`membership insert failed: ${insErr.message}`);
@@ -424,14 +418,13 @@ Deno.serve(async (req) => {
     // Queue an 'app_pending' invite that the signup trigger turns into an
     // app-type membership (which this sync then keeps or revokes).
     summary.pending_invites = unmatched.length;
-    for (const { email, ent } of unmatched) {
+    for (const m of unmatched) {
       issues.push({
-        email,
-        app_account_id: ent.account_id,
-        tier: ent.tier,
-        expires_at: ent.expires_at,
+        email: m.email,
+        tier: m.tier,
+        expires_at: m.expires_at,
         reason: "no_matching_website_account",
-        details: { entitlement_id: ent.id, source: ent.source },
+        details: { source: "membership-export" },
       });
     }
     if (!dryRun && unmatched.length > 0) {
@@ -470,17 +463,16 @@ Deno.serve(async (req) => {
 
     const massLimit = Math.max(MASS_REVOKE_MIN, Math.ceil(activeAppRows.length * MASS_REVOKE_SHARE));
     const suspicious = revokeCandidates.length > massLimit ||
-      (entitlements.length === 0 && revokeCandidates.length > 0);
+      (best.size === 0 && revokeCandidates.length > 0);
     if (suspicious && !allowMassRevoke) {
       summary.revocation_blocked = true;
       console.error("app membership sync: revocation blocked by mass-revocation guard", {
         candidates: revokeCandidates.length,
         active_app_rows: activeAppRows.length,
-        app_entitlements: entitlements.length,
+        app_members: best.size,
       });
       issues.push({
         email: null,
-        app_account_id: "",
         tier: null,
         expires_at: null,
         reason: "mass_revocation_blocked",
@@ -511,52 +503,64 @@ Deno.serve(async (req) => {
 
     // --- 8. Record mismatches for admin review -----------------------------
     summary.issues = issues.length;
-    if (!dryRun && issues.length > 0) {
-      const openKeys = new Set<string>();
+    if (!dryRun) {
+      // Open issues, keyed by reason + email (older rows also carry an app
+      // account id; the export no longer sends one).
+      const openIssues: { id: string; reason: string; email: string | null }[] = [];
       for (let from = 0; ;) {
         const { data, error } = await supabase
           .from("app_membership_sync_issues")
-          .select("id, reason, app_account_id")
+          .select("id, reason, email")
           .eq("status", "open")
           .order("id", { ascending: true })
           .range(from, from + PAGE_SIZE - 1);
         if (error) throw new Error(`issue lookup failed: ${error.message}`);
-        const rows = data ?? [];
-        for (const r of rows) openKeys.add(`${r.reason}|${r.app_account_id ?? ""}`);
+        const rows = (data ?? []) as { id: string; reason: string; email: string | null }[];
+        openIssues.push(...rows);
         from += rows.length;
         if (rows.length < PAGE_SIZE) break;
       }
+      const issueKey = (reason: string, email: string | null) =>
+        `${reason}|${(email ?? "").toLowerCase().trim()}`;
+      const openKeys = new Set(openIssues.map((r) => issueKey(r.reason, r.email)));
+
       for (const issue of issues) {
-        const key = `${issue.reason}|${issue.app_account_id}`;
+        const key = issueKey(issue.reason, issue.email);
         if (openKeys.has(key)) continue;
         openKeys.add(key);
         const { error } = await supabase.from("app_membership_sync_issues").insert({
           ...issue,
-          app_account_id: issue.app_account_id || null,
+          app_account_id: null,
         });
         if (error && error.code !== "23505") {
           console.error("sync issue insert failed", error.code ?? error.message);
         }
       }
-    }
 
-    // Auto-close "no website account" issues that have since resolved.
-    if (!dryRun) {
-      const resolvedEmails = [...new Set([...active, ...inactive].map((r) => r.email))]
-        .filter((e) => siteUserByEmail.has(e));
-      for (let i = 0; i < resolvedEmails.length; i += 100) {
+      // Auto-close "no website account" issues whose email now has a website
+      // account.
+      const resolvedIds = openIssues
+        .filter((r) =>
+          r.reason === "no_matching_website_account" && r.email &&
+          siteUserByEmail.has(r.email.toLowerCase().trim())
+        )
+        .map((r) => r.id);
+      for (let i = 0; i < resolvedIds.length; i += 100) {
         await supabase
           .from("app_membership_sync_issues")
           .update({ status: "resolved", resolved_at: nowIso })
           .eq("status", "open")
-          .eq("reason", "no_matching_website_account")
-          .in("email", resolvedEmails.slice(i, i + 100));
+          .in("id", resolvedIds.slice(i, i + 100));
       }
     }
 
     console.log("app membership sync complete", summary);
     return json({ ok: true, ...summary });
   } catch (err) {
+    if (err instanceof AppCallError) {
+      console.error(`app membership sync stopped before any change: ${err.code}`);
+      return json({ ok: false, error: err.code, details: err.message, changed: false }, err.status);
+    }
     console.error("app membership sync failed", err instanceof Error ? err.message : "unknown");
     return json({ error: "sync_failed", details: err instanceof Error ? err.message : "unknown" }, 500);
   }

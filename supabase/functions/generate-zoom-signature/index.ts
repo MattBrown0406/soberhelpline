@@ -47,6 +47,35 @@ async function generateSignature(sdkKey: string, sdkSecret: string, meetingNumbe
   return `${message}.${encodedSignature}`;
 }
 
+// deno-lint-ignore no-explicit-any
+type AdminClient = any;
+
+/**
+ * Who may join as host (role 1): an admin, or the consultation provider whose
+ * booking this meeting belongs to (providers host their own sessions from the
+ * provider dashboard; those meetings don't start without a host).
+ */
+async function mayHost(adminClient: AdminClient, userId: string, meetingNumber: unknown): Promise<boolean> {
+  const { data: isAdmin } = await adminClient.rpc("has_role", { _user_id: userId, _role: "admin" });
+  if (isAdmin === true) return true;
+
+  const meetingId = String(meetingNumber ?? "").replace(/\D/g, "");
+  if (!meetingId) return false;
+  const { data: providers } = await adminClient
+    .from("consultation_providers")
+    .select("id")
+    .eq("user_id", userId);
+  const providerIds = ((providers ?? []) as { id: string }[]).map((p) => p.id);
+  if (providerIds.length === 0) return false;
+  const { data: bookings } = await adminClient
+    .from("consultation_bookings")
+    .select("id")
+    .eq("zoom_meeting_id", meetingId)
+    .in("provider_id", providerIds)
+    .limit(1);
+  return (bookings ?? []).length > 0;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -72,6 +101,9 @@ Deno.serve(async (req) => {
 
     let emailToCheck: string | undefined;
     let nameToCheck: string | undefined;
+    // Host (role 1) only for admins and the meeting's consultation provider;
+    // everyone else joins as an attendee.
+    let grantedRole = 0;
 
     // Try to resolve a real signed-in user first
     if (authHeader?.startsWith("Bearer ")) {
@@ -83,12 +115,20 @@ Deno.serve(async (req) => {
 
       const token = authHeader.replace("Bearer ", "");
       const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
+      // The public anon key is a valid JWT too, so a host request needs a real
+      // user (sub), not just valid claims.
+      const userId = claimsError ? undefined : claimsData?.claims?.sub as string | undefined;
 
-      if (normalizedRole === 1 && (claimsError || !claimsData?.claims)) {
+      if (normalizedRole === 1 && !userId) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
+      }
+
+      if (normalizedRole === 1 && userId) {
+        grantedRole = (await mayHost(adminClient, userId, meetingNumber)) ? 1 : 0;
+        if (grantedRole === 0) console.warn("generate-zoom-signature: host role refused; joining as attendee");
       }
 
       emailToCheck = claimsData?.claims?.email as string | undefined;
@@ -141,9 +181,9 @@ Deno.serve(async (req) => {
       });
     }
 
-    const signature = await generateSignature(sdkKey, sdkSecret, String(meetingNumber), normalizedRole);
+    const signature = await generateSignature(sdkKey, sdkSecret, String(meetingNumber), grantedRole);
 
-    return new Response(JSON.stringify({ signature, sdkKey }), {
+    return new Response(JSON.stringify({ signature, sdkKey, role: grantedRole }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {

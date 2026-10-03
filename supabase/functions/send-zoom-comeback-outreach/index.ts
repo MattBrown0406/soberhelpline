@@ -1,5 +1,6 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,18 +14,25 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
   try {
-    const { dry_run = false } = await req.json().catch(() => ({}));
+    const body = await req.json().catch(() => ({}));
+    const { dry_run = false } = body ?? {};
     const SENDGRID_API_KEY = Deno.env.get('SENDGRID_API_KEY');
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
+    // Bulk email to past registrants: cron (cron_secret), the automation
+    // secret or an admin only.
+    const denied = await requireAutomationAuthNow(req, supabase, body, 'send-zoom-comeback-outreach', corsHeaders);
+    if (denied) return denied;
+
     // Get the 3 most recent past meeting dates
     const { data: recentMeetings } = await supabase
       .from('zoom_meeting_registrations')
       .select('meeting_date')
       .lte('meeting_date', new Date().toISOString().split('T')[0])
+      .neq('registration_source', 'app')
       .order('meeting_date', { ascending: false })
       .limit(500);
 
@@ -36,6 +44,10 @@ Deno.serve(async (req) => {
       .from('zoom_meeting_registrations')
       .select('name, email, meeting_date, created_at')
       .lt('meeting_date', oldestRecent)
+      // App RSVPs (registration_source 'app') never opted into marketing email.
+      // (Recent app RSVPs still count as attendance below, so they're not
+      // treated as lapsed.)
+      .neq('registration_source', 'app')
       .order('created_at', { ascending: false });
 
     // Attendance in recent window

@@ -54,6 +54,7 @@ interface QueryResult<T> {
 
 interface UntypedQuery<T> {
   select(columns: string): UntypedQuery<T>;
+  neq(column: string, value: string): UntypedQuery<T>;
   gte(column: string, value: string): UntypedQuery<T>;
   order(column: string, options: { ascending: boolean }): UntypedQuery<T>;
   limit(count: number): Promise<QueryResult<T>>;
@@ -115,7 +116,9 @@ export function RevenueCommandCenter() {
       applyRange(
         db
           .from<ZoomRegistrationRow>("zoom_meeting_registrations")
-          .select("id, created_at, lead_score, lead_tier, revenue_path, nme_attributed, request_follow_up, next_revenue_action"),
+          .select("id, created_at, lead_score, lead_tier, revenue_path, nme_attributed, request_follow_up, next_revenue_action")
+          // App RSVPs (registration_source 'app') are not website leads.
+          .neq("registration_source", "app"),
       )
         .order("created_at", { ascending: false })
         .limit(1000),

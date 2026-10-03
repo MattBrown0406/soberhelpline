@@ -145,6 +145,9 @@ Deno.serve(async (req: Request) => {
           "id, name, email, phone, question, request_follow_up, auto_register, meeting_date, created_at, consent_email_list",
         )
         .gte("created_at", since)
+        // App RSVPs (registration_source 'app') are not website leads and are
+        // not exported to the lead engine.
+        .neq("registration_source", "app")
         .order("created_at", { ascending: false })
         .limit(MAX_ROWS + 1),
       supabase
@@ -159,7 +162,14 @@ Deno.serve(async (req: Request) => {
 
     if (regRes.error || attRes.error) throw new Error("source_query_failed");
 
-    const registrations = regRes.data ?? [];
+    // Questions asked in the Sober Helpline app are merged into a website
+    // registration as "• … (from the app)" lines for Matt; they are not lead
+    // data, so they never leave in this export.
+    const withoutAppQuestions = (text: unknown) =>
+      typeof text === "string"
+        ? text.split("\n").filter((line) => !line.trim().endsWith("(from the app)")).join("\n").trim() || null
+        : text;
+    const registrations = (regRes.data ?? []).map((row) => ({ ...row, question: withoutAppQuestions(row.question) }));
     const attendance = attRes.data ?? [];
 
     if (registrations.length > MAX_ROWS || attendance.length > MAX_ROWS) {

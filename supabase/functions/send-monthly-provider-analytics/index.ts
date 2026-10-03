@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -212,24 +213,41 @@ const handler = async (req: Request): Promise<Response> => {
     let testMode = false;
     let testEmail: string | null = null;
     let testProviderId: string | null = null;
+    let body: Record<string, unknown> | null = null;
 
     if (req.method === "POST") {
       try {
-        const body = await req.json();
-        testMode = body.testMode === true;
-        testEmail = body.testEmail || null;
-        testProviderId = body.providerId || null;
-        console.log(`Test mode: ${testMode}, testEmail: ${testEmail}, providerId: ${testProviderId}`);
+        body = await req.json();
+        testMode = body?.testMode === true;
+        testEmail = typeof body?.testEmail === "string" && body.testEmail ? body.testEmail : null;
+        testProviderId = typeof body?.providerId === "string" && body.providerId ? body.providerId : null;
+        console.log(`Test mode: ${testMode}, testEmail: ${testEmail ? "set" : "none"}, providerId: ${testProviderId}`);
       } catch {
         // No body or invalid JSON, continue with normal operation
       }
     }
 
-    console.log("Starting monthly provider analytics email job...");
-
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Who may run this: cron (cron_secret), the automation secret or an admin.
+    // A test send delivers provider reports to any address the caller names, so
+    // it requires one of those credentials now; the regular monthly run is
+    // staged by site_settings.enforce_function_auth.
+    const verified = await hasAutomationAuth(req, supabase, body);
+    if (!verified) {
+      if (testMode && testEmail) {
+        return new Response(JSON.stringify({ error: "unauthorized" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+      const denied = await requireAutomationAuth(req, supabase, body, "send-monthly-provider-analytics", corsHeaders);
+      if (denied) return denied;
+    }
+
+    console.log("Starting monthly provider analytics email job...");
 
     let query = supabase
       .from("provider_submissions")

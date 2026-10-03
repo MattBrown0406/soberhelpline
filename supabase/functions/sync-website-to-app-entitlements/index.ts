@@ -1,21 +1,26 @@
 // Reverse membership bridge: give active WEBSITE subscribers an "essential"
-// entitlement inside the Sober Helpline App backend.
+// entitlement inside the Sober Helpline App.
 //
 // Source of truth: public.provider_subscriptions on the website
 //                  (provider_submission_id IS NULL, plan_type <> 'app').
-// Target: the app backend's `entitlements` table. The app's source constraint
-// accepts "scholarship" for externally granted access; raw.granted_by uniquely
-// identifies website grants so unrelated scholarships are never modified.
+// Target: the app's `membership-import` function (server to server,
+// x-membership-sync-secret = MEMBERSHIP_SYNC_SECRET). The website sends the
+// COMPLETE list of current website members ({ email, expires_at }, login emails
+// only) in one call; the app matches VERIFIED app accounts, keeps one
+// website-granted entitlement per matched account (source 'scholarship', tier
+// 'essential', raw.granted_by = 'soberhelpline_website_membership'), and ends
+// website grants whose account is no longer in the list. App Store /
+// RevenueCat entitlements and unrelated scholarships are never touched. The
+// website never reads or writes the app database directly.
 //
-// App Store / RevenueCat entitlements and unrelated scholarships are never modified.
-//
-// Everything is paged (PostgREST caps responses at 1000 rows): a partial read of
-// the app's accounts used to look like "member has no app account" and revoke
-// their grant. A run that would revoke an unusually large share of website
-// grants stops and reports instead; re-run with { "allow_mass_revoke": true }
-// after checking a { "dry_run": true } run.
+// The app applies the mass-revocation guard (more than 25% of current website
+// grants, and at least 10): re-run with { "allow_mass_revoke": true } after
+// checking a { "dry_run": true } run. If the app function can't be reached (not
+// deployed yet = 404, wrong secret, bad response), the run fails and the app
+// changes nothing.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { hasAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,29 +28,19 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const APP_TIER = "essential";
-const WEB_SOURCE = "scholarship";
-const WEB_GRANT_MARKER = "soberhelpline_website_membership";
+const DEFAULT_APP_SUPABASE_URL = "https://rjlkbxqxshohgjmomyro.supabase.co";
 const GRACE_DAYS = 3;
 const DAY_MS = 86_400_000;
 const PAGE_SIZE = 1000;
-const MASS_REVOKE_SHARE = 0.25;
-const MASS_REVOKE_MIN = 10;
+// membership-import takes the complete list in one call (up to 5000 members).
+const MAX_IMPORT_MEMBERS = 5000;
+const IMPORT_TIMEOUT_MS = 120_000;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
-
-type MobileEntitlement = {
-  id: string;
-  account_id: string;
-  source: string | null;
-  tier: string | null;
-  expires_at: string | null;
-  raw: Record<string, unknown> | null;
-};
 
 type SubRow = {
   id: string;
@@ -81,7 +76,7 @@ async function selectAll<T>(
   return out;
 }
 
-/** Every auth user (id + lowercased login email) of a Supabase project, page by page. */
+/** Every auth user (id + lowercased login email) of THIS project, page by page. */
 async function listAuthUsers(
   baseUrl: string,
   key: string,
@@ -123,65 +118,112 @@ function wantedExpiry(r: SubRow, now: number): string | null | undefined {
   return null;
 }
 
+/** A failed call to the app; `code` goes back to the caller. */
+class AppCallError extends Error {
+  constructor(public code: string, message: string, public status = 502) {
+    super(message);
+  }
+}
+
+type ImportResult = {
+  ok?: unknown;
+  error?: unknown;
+  matched?: unknown;
+  granted?: unknown;
+  updated?: unknown;
+  revoked?: unknown;
+  unmatched?: unknown;
+  revocation_blocked?: unknown;
+};
+
+/** A count from the app's response (a number, or a list's length). */
+const count = (v: unknown): number =>
+  typeof v === "number" && Number.isFinite(v) ? v : Array.isArray(v) ? v.length : 0;
+
+async function importToApp(
+  appUrl: string,
+  secret: string,
+  members: { email: string; expires_at: string | null }[],
+  dryRun: boolean,
+  allowMassRevoke: boolean,
+): Promise<ImportResult> {
+  let res: Response;
+  try {
+    res = await fetch(`${appUrl}/functions/v1/membership-import`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-membership-sync-secret": secret,
+      },
+      body: JSON.stringify({
+        members,
+        complete: true,
+        dry_run: dryRun,
+        allow_mass_revoke: allowMassRevoke,
+      }),
+      signal: AbortSignal.timeout(IMPORT_TIMEOUT_MS),
+    });
+  } catch {
+    throw new AppCallError(
+      "app_unavailable",
+      "The app's membership-import did not answer (timeout or network error). It may still have applied the list; run again with dry_run to check.",
+    );
+  }
+
+  if (res.status === 404) {
+    await res.body?.cancel();
+    throw new AppCallError(
+      "app_function_missing",
+      "The app's membership-import function is not deployed yet (404). Nothing was changed; the sync will work once the app backend is released.",
+      503,
+    );
+  }
+  if (res.status === 401 || res.status === 403) {
+    await res.body?.cancel();
+    throw new AppCallError(
+      "app_unauthorized",
+      `The app refused the request (${res.status}). Check that MEMBERSHIP_SYNC_SECRET is identical on both projects.`,
+    );
+  }
+  const payload = await res.json().catch(() => null) as ImportResult | null;
+  if (!res.ok || !payload || payload.ok !== true) {
+    const reason = payload && typeof payload.error === "string" ? `: ${payload.error.slice(0, 200)}` : "";
+    throw new AppCallError("app_error", `The app's membership-import failed (${res.status})${reason}.`);
+  }
+  return payload;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
-  const mobileUrl = Deno.env.get("MOBILE_SUPABASE_URL");
-  const mobileKey = Deno.env.get("MOBILE_SUPABASE_SERVICE_ROLE_KEY");
+  const appUrl = (Deno.env.get("MOBILE_SUPABASE_URL") ?? "").trim().replace(/\/+$/, "") ||
+    DEFAULT_APP_SUPABASE_URL;
+  const syncSecret = Deno.env.get("MEMBERSHIP_SYNC_SECRET") ?? "";
   const siteUrl = Deno.env.get("SUPABASE_URL");
   const siteKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-  if (!mobileUrl || !mobileKey || !siteUrl || !siteKey) {
-    console.error("Missing required environment configuration");
+  if (!syncSecret || !siteUrl || !siteKey) {
+    console.error("website -> app sync: missing MEMBERSHIP_SYNC_SECRET or Supabase env");
     return json({ error: "server_misconfigured" }, 500);
   }
 
   const supabase = createClient(siteUrl, siteKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  const mobile = createClient(mobileUrl, mobileKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
 
-  // --- Auth: cron secret (body) or admin JWT ------------------------------
+  // --- Auth: cron secret, automation secret, service role or admin JWT ------
   let body: { cron_secret?: string; dry_run?: boolean; allow_mass_revoke?: boolean } = {};
   try {
-    body = await req.json();
+    body = (await req.json()) ?? {};
   } catch {
     body = {};
   }
-
-  const { data: secretRow } = await supabase
-    .from("site_settings")
-    .select("value")
-    .eq("key", "cron_secret")
-    .maybeSingle();
-  const cronSecret = secretRow?.value ?? "";
-  let authorized = cronSecret.length > 0 && body.cron_secret === cronSecret;
-
-  if (!authorized) {
-    const authHeader = req.headers.get("Authorization") ?? "";
-    if (authHeader.startsWith("Bearer ")) {
-      const { data: userData } = await supabase.auth.getUser(
-        authHeader.replace("Bearer ", ""),
-      );
-      if (userData?.user) {
-        const { data: isAdmin } = await supabase.rpc("has_role", {
-          _user_id: userData.user.id,
-          _role: "admin",
-        });
-        authorized = Boolean(isAdmin);
-      }
-    }
-  }
-  if (!authorized) return json({ error: "unauthorized" }, 401);
+  if (!(await hasAutomationAuth(req, supabase, body))) return json({ error: "unauthorized" }, 401);
 
   const dryRun = body.dry_run === true;
   const allowMassRevoke = body.allow_mass_revoke === true;
-
   const now = Date.now();
-  const nowIso = new Date().toISOString();
 
   try {
     // --- 1. Active website memberships -----------------------------------
@@ -220,130 +262,45 @@ Deno.serve(async (req) => {
       }
     }
 
-    // --- 2. Resolve app accounts by email --------------------------------
-    // The app's `accounts` table has no email column, so map
-    // auth user email -> user_id -> account id.
-    const emails = [...wanted.keys()];
-    const accountIdByEmail = new Map<string, string>();
-    const missingAppAccount: string[] = [];
-
-    const accountsRaw = await selectAll<{ id: string; user_id: string | null }>(
-      "app accounts lookup",
-      (from, to) =>
-        mobile
-          .from("accounts")
-          .select("id, user_id", { count: "exact" })
-          .order("id", { ascending: true })
-          .range(from, to),
-    );
-    const accountByUserId = new Map<string, string>();
-    for (const a of accountsRaw) {
-      if (a.user_id) accountByUserId.set(a.user_id, a.id);
+    // membership-import replaces the whole list in one call: never send a
+    // partial list (the app would end the grants of everyone left out).
+    if (wanted.size > MAX_IMPORT_MEMBERS) {
+      console.error(`website -> app sync: ${wanted.size} members is over the ${MAX_IMPORT_MEMBERS} import limit`);
+      return json({
+        ok: false,
+        error: "too_many_members",
+        details: `${wanted.size} website members is more than membership-import accepts in one call (${MAX_IMPORT_MEMBERS}). Nothing was sent.`,
+        changed: false,
+      }, 500);
     }
 
-    // Page through app auth users to build email -> user_id.
-    const appUserIdByEmail = new Map<string, string>();
-    for (const u of await listAuthUsers(mobileUrl, mobileKey)) {
-      if (u.email) appUserIdByEmail.set(u.email, u.id);
-    }
-
-    for (const email of emails) {
-      const appUserId = appUserIdByEmail.get(email);
-      const accountId = appUserId ? accountByUserId.get(appUserId) : undefined;
-      if (accountId) accountIdByEmail.set(email, accountId);
-      else missingAppAccount.push(email);
-    }
-
-    // --- 3. Existing website-sourced entitlements ------------------------
-    const existing = await selectAll<MobileEntitlement>("entitlements lookup", (from, to) =>
-      mobile
-        .from("entitlements")
-        .select("id, account_id, source, tier, expires_at, raw", { count: "exact" })
-        .eq("source", WEB_SOURCE)
-        .contains("raw", { granted_by: WEB_GRANT_MARKER })
-        .order("id", { ascending: true })
-        .range(from, to)
-    );
-    const existingByAccount = new Map(existing.map((e) => [e.account_id, e]));
+    // --- 2. Hand the complete list to the app ------------------------------
+    const members = [...wanted].map(([email, expires_at]) => ({ email, expires_at }));
+    const result = await importToApp(appUrl, syncSecret, members, dryRun, allowMassRevoke);
 
     const summary = {
       dry_run: dryRun,
-      website_members: emails.length,
-      matched_app_accounts: accountIdByEmail.size,
-      no_app_account: missingAppAccount.length,
-      granted: 0,
-      refreshed: 0,
-      revoke_candidates: 0,
-      revoked: 0,
-      revocation_blocked: false,
+      website_members: members.length,
+      matched_app_accounts: count(result.matched),
+      no_app_account: count(result.unmatched),
+      granted: count(result.granted),
+      refreshed: count(result.updated),
+      revoked: count(result.revoked),
+      revocation_blocked: result.revocation_blocked === true,
     };
-
-    // --- 4. Grant / refresh ----------------------------------------------
-    const keepAccounts = new Set<string>();
-    for (const [email, expires] of wanted) {
-      const accountId = accountIdByEmail.get(email);
-      if (!accountId) continue;
-      keepAccounts.add(accountId);
-      const row = existingByAccount.get(accountId);
-
-      if (row) {
-        const sameExpiry = row.expires_at === null && expires === null
-          || Boolean(
-            row.expires_at && expires
-              && new Date(row.expires_at).getTime() === new Date(expires).getTime(),
-          );
-        const unchanged = row.tier === APP_TIER && sameExpiry;
-        if (unchanged) continue;
-        summary.refreshed++;
-        if (dryRun) continue;
-        const { error } = await mobile
-          .from("entitlements")
-          .update({ tier: APP_TIER, expires_at: expires })
-          .eq("id", row.id);
-        if (error) throw new Error(`entitlement update failed (${row.id}): ${error.message}`);
-      } else {
-        summary.granted++;
-        if (dryRun) continue;
-        const { error } = await mobile.from("entitlements").insert({
-          account_id: accountId,
-          source: WEB_SOURCE,
-          tier: APP_TIER,
-          expires_at: expires,
-          raw: { email, granted_by: WEB_GRANT_MARKER },
-        });
-        if (error) throw new Error(`entitlement insert failed: ${error.message}`);
-      }
-    }
-
-    // --- 5. Revoke website-sourced entitlements for lapsed members --------
-    const currentGrants = existing.filter(
-      (row) => !row.expires_at || new Date(row.expires_at).getTime() > now,
-    );
-    const toRevoke = currentGrants.filter((row) => !keepAccounts.has(row.account_id));
-    summary.revoke_candidates = toRevoke.length;
-
-    const massLimit = Math.max(MASS_REVOKE_MIN, Math.ceil(currentGrants.length * MASS_REVOKE_SHARE));
-    if (toRevoke.length > massLimit && !allowMassRevoke) {
-      summary.revocation_blocked = true;
-      console.error("website -> app sync: revocation blocked by mass-revocation guard", {
-        candidates: toRevoke.length,
-        current_grants: currentGrants.length,
+    if (summary.revocation_blocked) {
+      console.error("website -> app sync: the app's mass-revocation guard blocked revocations", {
+        website_members: summary.website_members,
       });
-    } else {
-      for (const row of toRevoke) {
-        summary.revoked++;
-        if (dryRun) continue;
-        const { error } = await mobile
-          .from("entitlements")
-          .update({ expires_at: nowIso })
-          .eq("id", row.id);
-        if (error) throw new Error(`entitlement revoke failed: ${error.message}`);
-      }
     }
 
     console.log("website -> app entitlement sync complete", summary);
-    return json({ ok: true, ...summary, no_app_account_emails: missingAppAccount.length });
+    return json({ ok: true, ...summary, no_app_account_emails: summary.no_app_account });
   } catch (err) {
+    if (err instanceof AppCallError) {
+      console.error(`website -> app sync failed at the app: ${err.code}`);
+      return json({ ok: false, error: err.code, details: err.message }, err.status);
+    }
     console.error("website -> app entitlement sync failed", err instanceof Error ? err.message : "unknown");
     return json({ error: "sync_failed", details: err instanceof Error ? err.message : "unknown" }, 500);
   }
