@@ -3849,6 +3849,7 @@ export type Database = {
       }
     }
     Functions: {
+      auth_user_id_by_email: { Args: { p_email: string }; Returns: string }
       cast_poll_vote: {
         Args: { _choice: number; _token: string }
         Returns: {
