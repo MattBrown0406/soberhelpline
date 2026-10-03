@@ -10,7 +10,7 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in New Mexico?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches New Mexico families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. New Mexico families can also connect with Al-Anon New Mexico, Nar-Anon, and Sober Helpline's free “The Family Squares” calls for ongoing support. The NM Crisis Line (1-855-662-7474) offers 24/7 statewide crisis support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches New Mexico families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. New Mexico families can also connect with Al-Anon New Mexico, Nar-Anon, and Sober Helpline's free “The Family Squares” calls for ongoing support. The 988 Suicide & Crisis Lifeline (call or text 988) offers 24/7 statewide crisis support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
   },
   {
     question: "Why does New Mexico have such high drug overdose rates?",
@@ -30,7 +30,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in New Mexico?",
     answer:
-      "Start with the New Mexico Behavioral Health Services Division at nmhealth.org — which provides state-funded treatment resources and Medicaid-covered programs. The NM Crisis Line (1-855-662-7474) offers 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can connect you with New Mexico-specific treatment resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
+      "Start with the New Mexico Behavioral Health Services Division at nmhealth.org — which provides state-funded treatment resources and Medicaid-covered programs. The 988 Suicide & Crisis Lifeline (call or text 988) connects you to the New Mexico Crisis and Access Line for 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can connect you with New Mexico-specific treatment resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
   },
 ];
 
@@ -325,21 +325,30 @@ export default function NewMexicoFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    New Mexico Crisis Line — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    New Mexico's statewide crisis line for mental health and substance use emergencies.
-                    Free, confidential, available 24 hours a day. SAMHSA National Helpline also available: 1-800-662-4357.
+                    Call or text 988 for mental health and substance use emergencies anywhere in New Mexico.
+                    Free, confidential, available 24 hours a day. In New Mexico, 988 connects you to the New Mexico
+                    Crisis and Access Line. SAMHSA National Helpline also available: 1-800-662-4357.
                   </p>
-                  <a
-                    href="tel:18556627474"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <Phone className="h-4 w-4" />
-                    1-855-662-7474
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href="tel:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a
+                      href="sms:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

@@ -10218,7 +10218,7 @@ Al-Anon Family Groups: [LINK:al-anon.org:https://al-anon.org]
 
 Nar-Anon Family Groups: [LINK:nar-anon.org:https://www.nar-anon.org]
 
-Crisis Text Line: Text HOME to 741741`
+988 Suicide & Crisis Lifeline: Call or text 988 (free, confidential, 24/7)`
   },
   {
     id: 90,

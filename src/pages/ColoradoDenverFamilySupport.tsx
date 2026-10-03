@@ -202,19 +202,26 @@ export default function ColoradoDenverFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Colorado Crisis Services — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Denver has multiple Colorado Crisis Services walk-in centers for immediate mental health
-                    and substance use crises. Call anytime for support or referrals.
+                    Call or text 988 anytime for mental health and substance use crises in Denver. Free,
+                    confidential, 24/7. In Colorado, 988 connects you to Colorado Crisis Services, which runs
+                    multiple walk-in centers in Denver.
                   </p>
-                  <a href="tel:18444938255"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    1-844-493-8255
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a href="tel:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

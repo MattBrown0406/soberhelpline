@@ -132,18 +132,24 @@ export default function WashingtonBellevueFamilySupport() {
                 <CardHeader>
                   <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-primary" />
-                    King County Crisis Line — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Crisis support for mental health and substance use emergencies serving Bellevue
-                    and all of King County around the clock.
+                    Call or text 988 for mental health and substance use emergencies in Bellevue and all of
+                    King County. Free, confidential, around the clock. In King County, 988 connects you to
+                    Crisis Connections.
                   </p>
-                  <a href="tel:18664274747" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    866-427-4747
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
 

@@ -408,9 +408,13 @@ const EatingDisordersGuide = () => {
             <h2 className="text-2xl font-bold text-primary mb-4 print:text-black">Resources</h2>
             <div className="bg-muted p-5 rounded-lg print:border print:border-black">
               <ul className="space-y-2 text-foreground">
-                <li><strong>National Eating Disorders Association (NEDA):</strong> 1-800-931-2237 | nationaleatingdisorders.org</li>
+                <li><strong>National Eating Disorders Association (NEDA):</strong> nationaleatingdisorders.org</li>
                 <li><strong>ANAD (Anorexia Nervosa and Associated Disorders):</strong> 1-888-375-7767 | anad.org</li>
-                <li><strong>Crisis Text Line:</strong> Text "NEDA" to 741741</li>
+                <li>
+                  <strong>988 Suicide &amp; Crisis Lifeline:</strong>{" "}
+                  <a href="tel:988" className="text-primary hover:underline">Call 988</a> or{" "}
+                  <a href="sms:988" className="text-primary hover:underline">text 988</a> — free, confidential, 24/7
+                </li>
                 <li><strong>Eating Disorder Hope:</strong> eatingdisorderhope.com</li>
                 <li><strong>FEAST (Families Empowered and Supporting Treatment):</strong> feast-ed.org — Parent support for FBT</li>
               </ul>

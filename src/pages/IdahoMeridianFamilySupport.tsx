@@ -190,12 +190,18 @@ export default function IdahoMeridianFamilySupport() {
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-2">
                     Provides community mental health and crisis services in the Treasure Valley, supporting
-                    families dealing with behavioral health crises including substance use emergencies.
+                    families dealing with behavioral health crises including substance use emergencies. In a
+                    crisis, call or text the 988 Suicide &amp; Crisis Lifeline: free, confidential, 24/7.
                   </p>
-                  <a href="tel:211" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    Dial 211 to connect
-                  </a>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

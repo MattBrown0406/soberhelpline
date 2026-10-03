@@ -244,21 +244,29 @@ export default function IdahoFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Idaho Crisis Line — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Idaho's statewide crisis line for mental health and substance use emergencies.
+                    Call or text 988 for mental health and substance use emergencies anywhere in Idaho.
                     Free, confidential, available 24 hours a day, 7 days a week.
                   </p>
-                  <a
-                    href="tel:2083315010"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <Phone className="h-4 w-4" />
-                    208-331-5010
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href="tel:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a
+                      href="sms:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

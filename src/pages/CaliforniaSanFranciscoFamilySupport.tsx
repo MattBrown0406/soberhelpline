@@ -209,17 +209,21 @@ export default function CaliforniaSanFranciscoFamilySupport() {
                 <CardHeader>
                   <CardTitle className="text-logo-blue text-base flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
-                    Bay Area Crisis Line &amp; SAMHSA — 24/7
+                    988 Lifeline &amp; SAMHSA Helpline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Immediate crisis support for San Francisco and Bay Area families.
+                    Immediate crisis support for San Francisco and Bay Area families: call or text 988, free
+                    and confidential, 24/7. SAMHSA offers free treatment referrals.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="tel:8003092131" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-4 w-4" />
-                      Bay Area Crisis: 800-309-2131
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
                     </a>
                     <a href="tel:18006624357" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-4 w-4" />

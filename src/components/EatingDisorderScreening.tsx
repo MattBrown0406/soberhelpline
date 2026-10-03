@@ -391,7 +391,13 @@ export default function EatingDisorderScreening() {
               <p><strong>Immediate action recommended:</strong></p>
               <ul className="list-disc ml-5 space-y-1">
                 <li>Schedule an appointment with a healthcare provider experienced in eating disorders</li>
-                <li>Contact the National Eating Disorders Association (NEDA) helpline: 1-800-931-2237</li>
+                <li>
+                  For an emotional or mental health crisis, call or text the 988 Suicide &amp; Crisis Lifeline
+                  (free, confidential, 24/7):{" "}
+                  <a href="tel:988" className="text-primary font-medium hover:underline">Call 988</a>
+                  {" · "}
+                  <a href="sms:988" className="text-primary font-medium hover:underline">Text 988</a>
+                </li>
                 <li>If there are signs of medical emergency (fainting, chest pain, severe weakness), seek emergency care</li>
                 <li>Document specific behaviors and patterns to share with professionals</li>
               </ul>

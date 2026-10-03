@@ -271,21 +271,22 @@ export default function CaliforniaFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    LA County Crisis Line &amp; Bay Area Crisis Line
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Regional crisis lines for Southern and Northern California families facing addiction or mental health emergencies.
+                    Call or text 988 for addiction or mental health emergencies anywhere in California, from
+                    Los Angeles to the Bay Area. Free, confidential, 24/7, and connected to local crisis centers.
                   </p>
                   <div className="space-y-2">
-                    <a href="tel:8008547771" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="tel:988" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-3.5 w-3.5" />
-                      LA County: 800-854-7771
+                      Call 988
                     </a>
-                    <a href="tel:8003092131" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                    <a href="sms:988" className="flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-3.5 w-3.5" />
-                      Bay Area: 800-309-2131
+                      Text 988
                     </a>
                   </div>
                 </CardContent>

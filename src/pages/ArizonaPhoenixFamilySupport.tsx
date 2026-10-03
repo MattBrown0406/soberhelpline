@@ -185,18 +185,23 @@ export default function ArizonaPhoenixFamilySupport() {
                 <CardHeader>
                   <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
-                    Maricopa County Crisis Line — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Maricopa County's behavioral health crisis line. If your loved one is in immediate danger 
-                    or you need urgent guidance, call this number 24/7.
+                    Call or text 988 for mental health and substance use crises in Phoenix and across
+                    Maricopa County. Free, confidential, 24/7. If your loved one is in immediate danger, call 911.
                   </p>
-                  <a href="tel:6022229444" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    602-222-9444
-                  </a>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

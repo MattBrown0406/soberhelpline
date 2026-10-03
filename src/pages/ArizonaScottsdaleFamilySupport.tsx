@@ -119,18 +119,23 @@ export default function ArizonaScottsdaleFamilySupport() {
                     { name: "Barrett Behavioral Health", desc: "Outpatient and intensive outpatient programs", url: "https://www.barrettbehavioral.com" },
                     { name: "Scottsdale Recovery Center", desc: "Inpatient and outpatient addiction treatment", url: "https://www.scottsdalerecoverycenter.com" },
                     { name: "Rosecrance (outpatient)", desc: "Evidence-based outpatient addiction services", url: "https://www.rosecrance.org" },
-                    { name: "Arizona Crisis Line", desc: "24/7 crisis support: 1-844-534-4673", url: "tel:18445344673" },
+                    { name: "988 Suicide & Crisis Lifeline", desc: "Call or text 988 — free, confidential, 24/7", url: "tel:988", sms: "sms:988" },
                     { name: "Al-Anon Arizona", desc: "Family support groups for addiction", url: "https://www.al-anon.org/find-a-meeting" },
                   ].map((r) => (
                     <Card key={r.name} className="hover:shadow-md transition-shadow">
                       <CardContent className="p-4">
-                        <a href={r.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 group">
+                        <a href={r.url} target={r.url.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="flex items-start gap-2 group">
                           <ExternalLink className="h-4 w-4 text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
                           <div>
                             <div className="font-semibold text-foreground group-hover:text-primary transition-colors">{r.name}</div>
                             <div className="text-sm text-muted-foreground">{r.desc}</div>
                           </div>
                         </a>
+                        {r.sms && (
+                          <a href={r.sms} className="ml-6 mt-1 inline-block text-sm font-semibold text-primary hover:underline">
+                            Text 988
+                          </a>
+                        )}
                       </CardContent>
                     </Card>
                   ))}

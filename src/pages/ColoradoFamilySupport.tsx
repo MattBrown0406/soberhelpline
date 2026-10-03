@@ -10,7 +10,7 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in Colorado?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Colorado families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Families can also connect with Al-Anon Colorado, Nar-Anon Colorado, and Sober Helpline's free “The Family Squares” calls for ongoing support. Colorado Crisis Services (1-844-493-8255) offers 24/7 support statewide. If your loved one is resistant to treatment, a professional intervention coach can guide you step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches Colorado families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. Families can also connect with Al-Anon Colorado, Nar-Anon Colorado, and Sober Helpline's free “The Family Squares” calls for ongoing support. The 988 Suicide & Crisis Lifeline (call or text 988) offers 24/7 crisis support statewide. If your loved one is resistant to treatment, a professional intervention coach can guide you step by step.",
   },
   {
     question: "Are there free family support groups for addiction in Colorado?",
@@ -30,7 +30,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Colorado?",
     answer:
-      "Start with Colorado's Behavioral Health Administration (BHAP) at cdphe.colorado.gov for state-funded treatment and Medicaid options. Colorado Crisis Services (1-844-493-8255) provides 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can also connect you with Colorado-specific treatment resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
+      "Start with Colorado's Behavioral Health Administration (BHAP) at cdphe.colorado.gov for state-funded treatment and Medicaid options. The 988 Suicide & Crisis Lifeline (call or text 988) connects you to Colorado Crisis Services for 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can also connect you with Colorado-specific treatment resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
   },
 ];
 
@@ -299,22 +299,31 @@ export default function ColoradoFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Colorado Crisis Services — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Colorado's statewide crisis line for mental health and substance use emergencies.
-                    Free, confidential, available 24 hours a day. Walk-in crisis centers located across the state.
+                    Call or text 988 for mental health and substance use emergencies anywhere in Colorado.
+                    Free, confidential, available 24 hours a day. In Colorado, 988 connects you to Colorado Crisis
+                    Services, which also runs walk-in crisis centers across the state.
                     SAMHSA National Helpline also available statewide: 1-800-662-4357.
                   </p>
-                  <a
-                    href="tel:18444938255"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <Phone className="h-4 w-4" />
-                    1-844-493-8255
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href="tel:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a
+                      href="sms:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

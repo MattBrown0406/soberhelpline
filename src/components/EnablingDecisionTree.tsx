@@ -90,7 +90,7 @@ const requestTypes = [
 ];
 
 const crisisResponses = [
-  "Call emergency services / crisis line",
+  "Call 911 / call or text 988 (crisis line)",
   "Take them to ER / medical evaluation",
   "Contact treatment professional / clinician",
   "Safety plan for minors/vulnerable adults",

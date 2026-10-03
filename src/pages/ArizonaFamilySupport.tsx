@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Heart, Users, MapPin, Calendar, Shield, BookOpen, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
+import { Phone, Heart, Users, MapPin, Calendar, Shield, ChevronRight, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -153,21 +153,29 @@ export default function ArizonaFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Arizona Crisis Line — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Arizona's statewide crisis line for mental health and substance use emergencies.
-                    Free, confidential, available 24 hours a day. If your loved one or you need immediate help, call now.
+                    Call or text 988 for mental health and substance use emergencies anywhere in Arizona.
+                    Free, confidential, available 24 hours a day. If your loved one or you need immediate help, reach out now.
                   </p>
-                  <a
-                    href="tel:18445344673"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <Phone className="h-4 w-4" />
-                    1-844-534-4673
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a
+                      href="tel:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a
+                      href="sms:988"
+                      className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
+                    >
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -237,24 +245,6 @@ export default function ArizonaFamilySupport() {
                   >
                     azahcccs.gov <ExternalLink className="h-3 w-3" />
                   </a>
-                </CardContent>
-              </Card>
-
-              <Card className="md:col-span-2">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
-                    <BookOpen className="h-4 w-4 text-primary" />
-                    Crisis Text Line
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Free, confidential crisis support available 24/7 via text. Available to anyone in
-                    Arizona — whether it's your loved one in crisis or you needing immediate support.
-                  </p>
-                  <p className="text-primary font-semibold text-sm">
-                    Text HOME to 741741
-                  </p>
                 </CardContent>
               </Card>
             </div>

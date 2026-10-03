@@ -179,22 +179,22 @@ export default function UtahOgdenFamilySupport() {
                 <CardHeader>
                   <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
-                    Utah Crisis Line (Weber &amp; Morgan counties) — 24/7
+                    988 Suicide &amp; Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Weber Human Services answers crisis calls for Weber and Morgan counties through
-                    988, around the clock. If your loved one is in immediate danger, call 911.
+                    Call or text 988 for mental health and substance use crises, free and confidential, around
+                    the clock. In Weber and Morgan counties, 988 connects you to the Utah Crisis Line, answered
+                    by Weber Human Services. If your loved one is in immediate danger, call 911.
                   </p>
                   <div className="flex flex-wrap gap-x-4 gap-y-1">
                     <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
                       <Phone className="h-4 w-4" />
-                      Call or text 988
+                      Call 988
                     </a>
-                    <a href="tel:+18016253700" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                      <Phone className="h-4 w-4" />
-                      Weber Human Services (daytime): 801-625-3700
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
                     </a>
                   </div>
                 </CardContent>
