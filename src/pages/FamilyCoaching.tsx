@@ -12,7 +12,6 @@ import CoachingIntakeAssessment from "@/components/CoachingIntakeAssessment";
 import FreeConsultationCTA from "@/components/FreeConsultationCTA";
 import FamilyReadinessAssessment from "@/components/FamilyReadinessAssessment";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
@@ -130,7 +129,7 @@ export default function FamilyCoaching() {
                   Family addiction coaching is practical guidance for parents, spouses, siblings, and loved ones who need help responding to addiction without more panic or enabling. It focuses on boundaries, communication, relapse decisions, treatment refusal, money requests, and the next step the family can actually hold this week.
                 </p>
                 <p className="text-muted-foreground mt-3 leading-relaxed">
-                  If your family needs a person to help sort the situation, book a coaching session. If the next step is practicing better conversations and accountability between sessions, use FamilyBridge as the ongoing support tool.
+                  If your family needs a person to help sort the situation, book a coaching session.
                 </p>
               </CardContent>
             </Card>
@@ -157,8 +156,6 @@ export default function FamilyCoaching() {
             </div>
 
             <FamilyNextStepCTA className="mb-8" />
-
-            <FamilyBridgeCTA variant="coaching" className="mb-8" />
 
             {/* Hero Section */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 via-background to-orange-500/5 border border-amber-500/20 p-8 md:p-12 mb-10">

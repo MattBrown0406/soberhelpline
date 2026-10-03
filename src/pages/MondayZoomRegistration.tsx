@@ -323,7 +323,7 @@ export default function MondayZoomRegistration() {
               </Button>
             </Link>
             <p className="text-sm text-muted-foreground">
-              The meeting is every Monday at 7:00 PM PST. You can join up to 30 minutes early.
+              The meeting is every Monday at 7:00 PM Pacific. You can join up to 30 minutes early.
             </p>
           </div>
         ) : isMeetingInfoLoaded ? (
@@ -442,7 +442,7 @@ export default function MondayZoomRegistration() {
                     Submit a Question for Tonight's Meeting
                   </h1>
                   <p className="text-muted-foreground max-w-lg mx-auto">
-                    As a member, you're already registered. Submit a question below and we'll do our best to address it during tonight's session at 7:00 PM PST.
+                    As a member, you're already registered. Submit a question below and we'll do our best to address it during tonight's session at 7:00 PM Pacific.
                   </p>
                 </div>
               </div>

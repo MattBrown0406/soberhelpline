@@ -8,16 +8,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const supportFaqs = [
   {
-    question: "How do I get help with the SoberHelpline app?",
+    question: "How do I get help with the Sober Helpline app?",
     answer: "Email support@soberhelpline.com or call 458-298-8008 with your device type, the email on your account, and a short description of what is not working.",
   },
   {
-    question: "Is SoberHelpline emergency or medical care?",
-    answer: "No. SoberHelpline provides education and family support. If someone may be in immediate danger, call 911 or use 988 for mental health crisis support in the United States.",
+    question: "Is Sober Helpline emergency or medical care?",
+    answer: "No. Sober Helpline provides education and family support. If someone may be in immediate danger, call 911 or use 988 for mental health crisis support in the United States.",
   },
   {
     question: "How do I manage an Apple App Store subscription?",
-    answer: "Open iPhone Settings, tap your name, tap Subscriptions, choose SoberHelpline, then update or cancel the subscription there.",
+    answer: "Open iPhone Settings, tap your name, tap Subscriptions, choose Sober Helpline, then update or cancel the subscription there.",
   },
 ];
 
@@ -25,8 +25,8 @@ export default function Support() {
   return (
     <>
       <SEOHead
-        title="SoberHelpline App Support | Sober Helpline"
-        description="Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources."
+        title="Sober Helpline App Support | Sober Helpline"
+        description="Support for the Sober Helpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources."
         faqItems={supportFaqs}
         speakableSelectors={["h1", ".support-summary", "h2"]}
       />
@@ -35,9 +35,9 @@ export default function Support() {
         <section className="border-b bg-gradient-to-br from-primary/10 via-background to-background">
           <div className="container py-12 md:py-16">
             <div className="mx-auto max-w-4xl text-center">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">SoberHelpline app support</p>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">Sober Helpline app support</p>
               <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                Help with your SoberHelpline app account
+                Help with your Sober Helpline app account
               </h1>
               <p className="support-summary mx-auto max-w-2xl text-lg text-muted-foreground">
                 Use this page for App Store support, account access, subscriptions, billing questions, technical problems,
@@ -122,7 +122,7 @@ export default function Support() {
                   <li>Open the <strong>Settings</strong> app on your iPhone.</li>
                   <li>Tap your name at the top.</li>
                   <li>Tap <strong>Subscriptions</strong>.</li>
-                  <li>Select <strong>SoberHelpline</strong>.</li>
+                  <li>Select <strong>Sober Helpline</strong>.</li>
                   <li>Choose the change or cancellation option shown by Apple.</li>
                 </ol>
                 <p>
@@ -139,7 +139,7 @@ export default function Support() {
               <CardContent>
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />Your name and account email</li>
-                  <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />iPhone or Android device model</li>
+                  <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />iPhone model and iOS version</li>
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />What screen or feature has the problem</li>
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />A screenshot if it helps explain the issue</li>
                 </ul>
@@ -157,7 +157,7 @@ export default function Support() {
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
                 <p>
-                  SoberHelpline is not emergency medical care, psychiatric care, detox, legal advice, or a crisis response service.
+                  Sober Helpline is not emergency medical care, psychiatric care, detox, legal advice, or a crisis response service.
                   If someone is in immediate danger, call <a className="font-semibold text-primary underline" href="tel:911">911</a>.
                   For mental health crisis support in the United States, call or text <a className="font-semibold text-primary underline" href="tel:988">988</a>.
                 </p>
@@ -181,7 +181,7 @@ export default function Support() {
                   For account access, data, or privacy-related requests, email <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> from the email connected to your account.
                 </p>
                 <p>
-                  To delete a SoberHelpline app account, use the in-app Settings screen or follow the steps on our <Link className="font-semibold text-primary underline" to="/delete-account">account deletion page</Link>.
+                  To delete a Sober Helpline app account, use the in-app Settings screen or follow the steps on our <Link className="font-semibold text-primary underline" to="/delete-account">account deletion page</Link>.
                 </p>
                 <p>
                   If you are looking for family addiction resources rather than app support, start with the <Link className="font-semibold text-primary underline" to="/start-here">Start Here</Link> page or the free <Link className="font-semibold text-primary underline" to="/family-squares">Family Squares</Link> meeting.

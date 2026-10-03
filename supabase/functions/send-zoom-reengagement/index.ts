@@ -136,7 +136,7 @@ serve(async (req: Request) => {
           <h1 style="color: #166534; font-size: 24px;">We'd Love to See You Tonight!</h1>
           <p>Hi ${safeName},</p>
           <p>We noticed you haven't registered for tonight's <strong>"The Family Squares"</strong> meeting yet, and we'd love to see you there.</p>
-          <p>Every Monday at <strong>7:00 PM PST</strong>, families just like yours come together to learn, share, and support each other through the challenges of loving someone with addiction. Showing up — even when it's hard — is one of the most powerful things you can do.</p>
+          <p>Every Monday at <strong>7:00 PM Pacific</strong>, families just like yours come together to learn, share, and support each other through the challenges of loving someone with addiction. Showing up — even when it's hard — is one of the most powerful things you can do.</p>
 
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(registerUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
@@ -149,7 +149,7 @@ serve(async (req: Request) => {
 
           <div style="background-color: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0 0 8px 0; color: #5b21b6; font-size: 14px;">
-              <strong>⭐ Want more than "The Family Squares"?</strong> Sober Helpline membership is just <strong>$10/month</strong> and includes a <strong>$25 discount on coaching sessions</strong>, access to the Family Forum, recorded meetings, and our full educational curriculum.
+              <strong>⭐ Want more than "The Family Squares"?</strong> Sober Helpline membership is just <strong>$9.99/month</strong> and includes a <strong>$25 discount on coaching sessions</strong>, access to the Family Forum, recorded meetings, and our full educational curriculum.
             </p>
             <a href="${siteUrl}/family-membership" style="display: inline-block; margin-top: 4px; padding: 8px 20px; background-color: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;">
               Learn About Membership

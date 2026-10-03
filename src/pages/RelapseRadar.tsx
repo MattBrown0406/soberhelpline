@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -212,7 +211,7 @@ export default function RelapseRadar() {
       });
     });
     content += "\n\nFor more support visit SoberHelpline.com\n";
-    content += "The Family Squares — Every Monday at 7:00 PM PST\n";
+    content += "The Family Squares — Every Monday at 7:00 PM Pacific\n";
 
     const blob = new Blob([content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
@@ -459,7 +458,7 @@ export default function RelapseRadar() {
                     <p className="text-sm text-muted-foreground">
                       Join our <strong>“The Family Squares”</strong>
                     </p>
-                    <p className="text-xs text-muted-foreground">Every Monday • 7:00 PM PST</p>
+                    <p className="text-xs text-muted-foreground">Every Monday • 7:00 PM Pacific</p>
                     <Link to="/monday-zoom-registration">
                       <Button className="gap-2 mt-2">
                         <Video className="w-4 h-4" />
@@ -468,17 +467,6 @@ export default function RelapseRadar() {
                     </Link>
                   </CardContent>
                 </Card>
-
-                {/* FamilyBridge */}
-                <div className="space-y-4">
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-foreground">Track Recovery Progress Over Time</h3>
-                    <p className="text-sm text-muted-foreground mt-2 max-w-xl mx-auto">
-                      Relapse Radar provides a snapshot of current risk indicators. Families who want to track warning signs and family dynamics over time can use the <strong>FamilyBridge App</strong>, a recovery support platform designed to help families navigate addiction and early recovery.
-                    </p>
-                  </div>
-                  <FamilyBridgeBanner />
-                </div>
 
                 {/* Phone CTA */}
                 <div className="text-center py-4">
@@ -503,7 +491,7 @@ export default function RelapseRadar() {
               Families dealing with addiction are not alone.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Education, boundaries, and support can make a powerful difference in recovery outcomes. SoberHelpline exists to support families navigating addiction and recovery.
+              Education, boundaries, and support can make a powerful difference in recovery outcomes. Sober Helpline exists to support families navigating addiction and recovery.
             </p>
             <p className="text-xs text-muted-foreground italic mt-4">Hope. Help. Recovery.</p>
           </div>

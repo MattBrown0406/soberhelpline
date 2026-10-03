@@ -68,7 +68,7 @@ export default function ReferralFitSupport() {
             <h2 id="support-privacy" className="text-2xl font-bold">Account deletion and privacy requests</h2>
             <p className="mt-4 leading-relaxed text-[#38564F]">For account deletion, data access, corrections, or privacy questions, email from the address associated with your ReferralFit account. Include your workspace name and describe your request without attaching client records.</p>
             <a href="mailto:support@soberhelpline.com?subject=ReferralFit%20Account%20or%20Privacy%20Request" className="mt-5 inline-flex font-semibold text-[#1F5A49] underline underline-offset-4">Email an account or privacy request</a>
-            <p className="mt-5 text-sm leading-relaxed text-[#38564F]">Looking for support for the separate SoberHelpline family app? Visit <Link to="/support" className="font-semibold underline underline-offset-4">SoberHelpline app support</Link>.</p>
+            <p className="mt-5 text-sm leading-relaxed text-[#38564F]">Looking for support for the separate Sober Helpline family app? Visit <Link to="/support" className="font-semibold underline underline-offset-4">Sober Helpline app support</Link>.</p>
           </div>
         </section>
       </div>

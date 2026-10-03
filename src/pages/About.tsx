@@ -65,7 +65,7 @@ export default function About() {
                     <Button asChild variant="outline" onClick={() => trackConversionEvent("monday_zoom_click", { source: "about_page" })}>
                       <Link to="/family-squares">
                         <Calendar className="h-4 w-4" />
-                        Family Squares · Monday 7 PM PT
+                        Family Squares · Monday 7:00 PM Pacific
                       </Link>
                     </Button>
                   </div>

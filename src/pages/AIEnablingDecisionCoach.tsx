@@ -9,7 +9,6 @@ import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const masterPrompt = `Helping vs. Enabling Decision Coach — Master Prompt
 
@@ -502,11 +501,6 @@ const AIEnablingDecisionCoach = () => {
             </div>
           </section>
         
-
-          {/* FamilyBridge CTA */}
-          <section className="mt-8 mb-8">
-            <FamilyBridgeCTA variant="coaching" />
-          </section>
 
           <RelatedResources currentPath="/ai-enabling-decision-coach" />
 </main>

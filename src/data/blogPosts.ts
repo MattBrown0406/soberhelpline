@@ -4390,7 +4390,7 @@ Other options worth knowing about:
 
 - **SMART Recovery Family & Friends** — a secular, science-based alternative using tools from CRAFT (Community Reinforcement and Family Training).
 - **Individual therapy** — especially with a therapist who understands family systems and addiction. Your own healing deserves its own hour.
-- **Family coaching** — structured, practical guidance on boundaries, communication, and next steps, which is exactly what we do at SoberHelpline through our [LINK:family coaching session:/family-coaching].
+- **Family coaching** — structured, practical guidance on boundaries, communication, and next steps, which is exactly what we do at Sober Helpline through our [LINK:family coaching session:/family-coaching].
 
 These aren't either/or choices. Many of the healthiest families I work with combine a weekly meeting, their own therapist or coach, and a couple of trusted friends who know the truth. Support in layers holds up better under stress than any single thread. If you're already running on empty, our guide to [LINK:compassion fatigue in families:/blog/addiction-anxiety-family-burnout] explains why layered support matters even more.
 
@@ -4515,7 +4515,7 @@ If you have been in that spot, you are not a pushover — you are a person who l
 
 Decide what support you can safely afford and write one calm response before the next call. For example: "I love you. I am not giving cash, but I can help with groceries today." Offer only what you can follow through on. A boundary describes what you will do; it is not a punishment or a way to force recovery.
 
-For help practicing that conversation, [LINK:get the FamilyBridge app:https://familybridgeapp.com] for AI-powered communication coaching and family accountability tools. Use it to support your family's conversations, not to replace professional care or emergency help. If money requests are dividing the family or you need help deciding on a boundary, [LINK:book private family coaching:/book-consultation] to work through your situation with a person.
+If money requests are dividing the family or you need help deciding on a boundary, [LINK:book private family coaching:/book-consultation] to work through your situation with a person.
 
 **Why Does a Loved One With Addiction Ask for Money So Often?**
 
@@ -5661,7 +5661,7 @@ Trust your read on the relationship. The best credentials in the world won't hel
 
 Recovery is not won in treatment — it's lived out in the ordinary weeks that follow. A recovery coach gives your loved one a steady hand for that walk, and gives you permission to be family again instead of the full-time supervisor. That trade is worth a lot.
 
-You don't have to figure all of this out alone, and you don't have to get it perfect. Start with one step: a conversation, a question, a name. If your loved one is willing and needs day-to-day recovery structure, use the [sober coach and sober companion directory](/sober-coaches-companions). If they are refusing help, relapsing, or the family is divided, start with [family coaching sessions](/family-coaching) before you hire support. For the daily communication and boundary follow-through between appointments, [FamilyBridge](https://familybridgeapp.com) can help your family practice calmer responses at home. Stay decided about supporting recovery, make the next move small, and let the right people help carry the weight with you.`,
+You don't have to figure all of this out alone, and you don't have to get it perfect. Start with one step: a conversation, a question, a name. If your loved one is willing and needs day-to-day recovery structure, use the [sober coach and sober companion directory](/sober-coaches-companions). If they are refusing help, relapsing, or the family is divided, start with [family coaching sessions](/family-coaching) before you hire support. Stay decided about supporting recovery, make the next move small, and let the right people help carry the weight with you.`,
     faqItems: [
       {
         question: "What does a recovery coach do?",
@@ -8002,7 +8002,7 @@ It tends to be strongest in the first year, when the brain's reward system is st
 
 **What Should the Family Do Next?**
 
-If romanticizing alcohol or drug use is frequent or appears alongside isolation, skipped recovery support, or other relapse warning signs, book [LINK:private family coaching:/family-coaching] and make a response plan before the next crisis. If there is no immediate risk and you need a place to start, join the free [LINK:Monday night Family Squares Zoom:/monday-zoom-registration] with one specific question. For ongoing help practicing calmer conversations and following through on boundaries at home, [LINK:explore the FamilyBridge app:https://familybridgeapp.com]. Choose the next step that matches the risk; do not try to argue your loved one out of euphoric recall.`,
+If romanticizing alcohol or drug use is frequent or appears alongside isolation, skipped recovery support, or other relapse warning signs, book [LINK:private family coaching:/family-coaching] and make a response plan before the next crisis. If there is no immediate risk and you need a place to start, join the free [LINK:Monday night Family Squares Zoom:/monday-zoom-registration] with one specific question. Choose the next step that matches the risk; do not try to argue your loved one out of euphoric recall.`,
   },
   {
     id: 111,
@@ -8802,7 +8802,7 @@ When a loved one is struggling with addiction, it is common to put your own inte
 
 **5. Get Support for Yourself**
 
-Detachment is nearly impossible to sustain alone. Al-Anon Family Groups offer free, confidential support from others who understand exactly what you are going through. Individual therapy — particularly with a counselor who specializes in addiction and family systems — can help you work through guilt, grief, and codependent patterns. SoberHelpline also offers [LINK:family coaching:/family-coaching] designed to help you navigate these challenges with clarity and compassion.
+Detachment is nearly impossible to sustain alone. Al-Anon Family Groups offer free, confidential support from others who understand exactly what you are going through. Individual therapy — particularly with a counselor who specializes in addiction and family systems — can help you work through guilt, grief, and codependent patterns. Sober Helpline also offers [LINK:family coaching:/family-coaching] designed to help you navigate these challenges with clarity and compassion.
 
 **How Detachment with Love Supports Your Loved One's Recovery**
 
@@ -8820,7 +8820,7 @@ If you have spent months or years organizing your entire life around someone els
 
 You did not cause this. You cannot control it. You cannot cure it. But you can make choices that protect your wellbeing, honor your values, and keep you stable and present for the long road ahead. That is not giving up. That is wisdom.
 
-SoberHelpline is here to support you every step of the way. Whether you need [LINK:education:/family-education], coaching, or simply a space to talk through what you are experiencing, our resources are designed for families just like yours. You are not alone — and healing is possible, for your loved one and for you.
+Sober Helpline is here to support you every step of the way. Whether you need [LINK:education:/family-education], coaching, or simply a space to talk through what you are experiencing, our resources are designed for families just like yours. You are not alone — and healing is possible, for your loved one and for you.
 
 **Frequently Asked Questions About Detachment with Love and Addiction**
 
@@ -10038,7 +10038,7 @@ Healthy limits aren't punishments — they're honest agreements about what you'r
 
 Effective limits are specific, calm, and consistent. Something like: "I love you, and I won't give you cash right now — but I'll help pay for treatment directly" is both honest and caring. The critical part is follow-through. Limits you don't maintain lose their meaning quickly.
 
-If you're unsure how to establish or hold limits in your situation, a therapist who specializes in addiction or a family program at a treatment center can help. The SoberHelpline team can connect you with the right professional guidance — no cost, no obligation.
+If you're unsure how to establish or hold limits in your situation, a therapist who specializes in addiction or a family program at a treatment center can help. The Sober Helpline team can connect you with the right professional guidance — no cost, no obligation.
 
 **Step 4: Help Your Loved One Access Treatment**
 
@@ -20984,7 +20984,7 @@ Recovery does not happen inside one household. It requires a wider network — s
 
 Some families unconsciously try to become their loved one's primary support. They check in constantly, try to interpret every mood, and feel responsible for maintaining sobriety. This dynamic, though well-intentioned, can actually undermine recovery. Your loved one needs to build their own recovery muscles — and that requires space.
 
-How to support without overstepping: Help with practical logistics when asked — driving to a meeting, helping find an outpatient program, supporting a job search — these are supportive acts with clear edges. Ask what kind of support they want — some people want to talk, others need space to process. Check rather than assume. Respect confidentiality with their recovery community — AA and NA operate on anonymity. Do not ask for details about meetings or other members. Get support for yourself — [LINK:Al-Anon:/blog/al-anon-family-support-groups-addiction], [LINK:family therapy:/blog/therapy-for-family-members-of-addicts], and coaching through programs like SoberHelpline exist precisely for this reason.
+How to support without overstepping: Help with practical logistics when asked — driving to a meeting, helping find an outpatient program, supporting a job search — these are supportive acts with clear edges. Ask what kind of support they want — some people want to talk, others need space to process. Check rather than assume. Respect confidentiality with their recovery community — AA and NA operate on anonymity. Do not ask for details about meetings or other members. Get support for yourself — [LINK:Al-Anon:/blog/al-anon-family-support-groups-addiction], [LINK:family therapy:/blog/therapy-for-family-members-of-addicts], and coaching through programs like Sober Helpline exist precisely for this reason.
 
 **Step 5: Plan for Difficult Moments in Advance**
 

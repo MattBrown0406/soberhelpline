@@ -168,7 +168,7 @@ export default function MemberHome() {
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground text-center mb-3">Mondays at 7 PM PT</p>
+                <p className="text-xs text-muted-foreground text-center mb-3">Mondays at 7:00 PM Pacific</p>
                 <Link to="/monday-zoom-registration">
                   <Button size="sm" className="w-full gap-2">
                     <Calendar className="h-3.5 w-3.5" />

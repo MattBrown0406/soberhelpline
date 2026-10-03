@@ -34,7 +34,7 @@ export default function UtahOgdenFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Ogden, Utah | Sober Helpline"
-        description="Families in Ogden struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 298-8008."
+        description="Families in Ogden struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7:00 PM Pacific. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -70,7 +70,7 @@ export default function UtahOgdenFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -206,7 +206,7 @@ export default function UtahOgdenFamilySupport() {
                   <div>
                     <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-3">
                       <Calendar className="h-3.5 w-3.5" />
-                      Every Monday — 7:00 PM PST
+                      Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
                       Free “The Family Squares” Zoom
@@ -237,7 +237,7 @@ export default function UtahOgdenFamilySupport() {
                   </div>
                   <div className="text-center">
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
-                    <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
+                    <div className="text-muted-foreground text-sm">Every Monday at 7:00 PM Pacific</div>
                     <div className="mt-4 text-sm text-muted-foreground">
                       Questions? Call us directly:
                     </div>

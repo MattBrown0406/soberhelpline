@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const WhyWillpowerFails = () => {
   useGuideTracking("/why-willpower-fails", "Why Willpower Fails (and What Actually Works)");
@@ -32,11 +31,6 @@ const WhyWillpowerFails = () => {
           <Link to="/family-education">
             <Button variant="ghost" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-            {/* FamilyBridge CTA */}
-            <div className="my-8">
-              <FamilyBridgeCTA variant="post-completion" />
-            </div>
-
               Back to Family Education
             </Button>
           </Link>
@@ -391,11 +385,6 @@ const WhyWillpowerFails = () => {
           <Link to="/family-education">
             <Button variant="outline" className="flex items-center gap-2 mx-auto">
               <ArrowLeft className="h-4 w-4" />
-            {/* FamilyBridge CTA */}
-            <div className="my-8">
-              <FamilyBridgeCTA variant="post-completion" />
-            </div>
-
               Back to Family Education
             </Button>
           </Link>

@@ -39,7 +39,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Orange County, California | Sober Helpline"
-        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7PM PST. (458) 298-8008."
+        description="Families in Orange County struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7:00 PM Pacific. (458) 298-8008."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -77,7 +77,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Free Monday Zoom — 7PM PST
+                  Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -267,7 +267,7 @@ export default function CaliforniaOrangeCountyFamilySupport() {
                   Free Family Squares Zoom for OC Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST — join families from Orange County and across California for a
+                  Every Monday at 7:00 PM Pacific — join families from Orange County and across California for a
                   free support call with Matt Brown, certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">

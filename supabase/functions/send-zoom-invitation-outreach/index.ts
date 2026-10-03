@@ -68,7 +68,7 @@ function buildMemberHtml(safeName: string, siteUrl: string, questionUrl: string)
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
       <h1 style="color: #166534; font-size: 24px;">Reminder: “The Family Squares”</h1>
       <p>Hi ${safeName},</p>
-      <p>Just a quick reminder — our <strong>“The Family Squares”</strong> is this Monday at <strong>7:00 PM PST</strong>.</p>
+      <p>Just a quick reminder — our <strong>“The Family Squares”</strong> is this Monday at <strong>7:00 PM Pacific</strong>.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0;">
         <p style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #166534;">
@@ -125,12 +125,12 @@ function buildNonMemberHtml(safeName: string, registerUrl: string): string {
     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
       <h1 style="color: #166534; font-size: 24px;">You're Invited: "The Family Squares"</h1>
       <p>Hi ${safeName},</p>
-      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM PST</strong> for our weekly <strong>"The Family Squares"</strong>.</p>
+      <p>I wanted to personally invite you to join us this <strong>Monday at 7:00 PM Pacific</strong> for our weekly <strong>"The Family Squares"</strong>.</p>
       <p>Whether you're looking for guidance, support, or just a safe space to share — you're welcome here.</p>
       
       <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
         <p style="margin: 0 0 16px 0; font-size: 16px; font-weight: bold; color: #166534;">
-          📅 This Monday at 7:00 PM PST
+          📅 This Monday at 7:00 PM Pacific
         </p>
         <a href="${escapeHtml(registerUrl)}" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
           Register for Monday's Meeting

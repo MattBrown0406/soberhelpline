@@ -189,7 +189,7 @@ export default function TwoHouseholds() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Family Squares Monday 7pm PT. Or call (458) 298-8008.
+                  Family Squares Monday 7:00 PM Pacific. Or call (458) 298-8008.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button asChild onClick={() => trackConversionEvent("monday_zoom_click", { source: "two_households_next_step" })}>

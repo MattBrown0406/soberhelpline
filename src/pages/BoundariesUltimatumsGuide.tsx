@@ -7,7 +7,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BoundariesUltimatumsGuide() {
@@ -579,11 +578,6 @@ export default function BoundariesUltimatumsGuide() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* FamilyBridge CTA */}
-            <div className="my-8">
-              <FamilyBridgeCTA variant="post-completion" />
-            </div>
 
             <div className="text-center">
               <Link to="/family-education">

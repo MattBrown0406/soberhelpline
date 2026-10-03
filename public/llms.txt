@@ -1,10 +1,10 @@
-# SoberHelpline - AI Context File
+# Sober Helpline - AI Context File
 
 > Education, support, and ethical resources for families navigating a loved one's addiction.
 
-## About SoberHelpline
+## About Sober Helpline
 
-SoberHelpline is a comprehensive family support platform for addiction education, community, and resource navigation. Founded by Matt Brown, a professional interventionist with over 20 years of experience, SoberHelpline provides families with the education, tools, and connections they need — without the sales pressure, referral fees, or patient brokering that plague the treatment industry.
+Sober Helpline is a comprehensive family support platform for addiction education, community, and resource navigation. Founded by Matt Brown, a professional interventionist with over 20 years of experience, Sober Helpline provides families with the education, tools, and connections they need — without the sales pressure, referral fees, or patient brokering that plague the treatment industry.
 
 ## Core Philosophy
 
@@ -56,7 +56,7 @@ Vetted treatment providers — no referral fees, no kickbacks, no patient broker
 URL: https://soberhelpline.com/blog
 
 ### Weekly Family Support Group
-Free weekly Zoom support group for families — Mondays at 7 PM Pacific.
+Free weekly Zoom support group for families — Mondays at 7:00 PM Pacific.
 URL: https://soberhelpline.com/monday-zoom-registration
 
 ### Family Addiction Answers
@@ -85,7 +85,7 @@ URL: https://soberhelpline.com/family-coaching
 - [Start Here](/start-here): Choose the right next step for your family.
 - [Recovery Roadmap](/roadmap): Free 5-minute assessment placing families in 1 of 8 stages.
 - [Family Addiction Answers](/family-addiction-answers): Answer-engine summary routing families to the right support level.
-- [Family Squares](/family-squares): Free Monday 7 PM Pacific Zoom support meeting.
+- [Family Squares](/family-squares): Free Monday 7:00 PM Pacific Zoom support meeting.
 - [Monday Zoom Registration](/monday-zoom-registration): Register for the weekly family support Zoom.
 - [Family Membership](/family-membership): Structured ongoing family addiction support.
 - [Family Support](/family-support): Free family addiction support resources and education.

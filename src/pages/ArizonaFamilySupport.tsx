@@ -13,7 +13,7 @@ const faqItems = [
   },
   {
     "question": "Which Sober Helpline support is free for Arizona families?",
-    "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+    "answer": "Monday Family Squares is a free online family-support meeting at 7:00 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
   },
   {
     "question": "Where can I look for local resources in Arizona?",
@@ -76,7 +76,7 @@ export default function ArizonaFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM Pacific
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -276,7 +276,7 @@ export default function ArizonaFamilySupport() {
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM Pacific, families across Arizona (and nationwide) join a free Zoom call
+                  Every Monday at 7:00 PM Pacific, families across Arizona (and nationwide) join a free Zoom call
                   led by Matt Brown — a certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">

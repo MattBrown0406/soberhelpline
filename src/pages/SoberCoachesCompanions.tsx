@@ -15,7 +15,6 @@ import ProviderFilters from "@/components/ProviderFilters";
 import CategoryNav from "@/components/CategoryNav";
 import CategoryMobileNav from "@/components/CategoryMobileNav";
 import MobileStateSelector from "@/components/MobileStateSelector";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import { useToast } from "@/hooks/use-toast";
 import { stateCoordinates, calculateDistance } from "@/utils/stateCoordinates";
 import { filterProvidersByDistance, getZipCodeLocation } from "@/utils/zipCodeSearch";
@@ -318,10 +317,6 @@ const SoberCoachesCompanions = () => {
             <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Online coaching:</strong> may fit when local options are limited and hands-on supervision is not needed.</li>
             <li className="rounded-lg bg-muted/50 p-3"><strong className="text-foreground">Family coaching first:</strong> choose this when the person refuses help or the family needs alignment before hiring recovery support.</li>
           </ul>
-        </section>
-
-        <section className="max-w-4xl mx-auto mb-6">
-          <FamilyBridgeCTA variant="coaching" />
         </section>
 
         <section className="max-w-4xl mx-auto mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 md:p-6">

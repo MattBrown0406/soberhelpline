@@ -1,7 +1,7 @@
 import appStoreBadge from "@/assets/app-store-badge.svg";
-import googlePlayBadge from "@/assets/google-play-badge.png";
 
-const FAMILYBRIDGE_APP_STORE_URL = "https://apps.apple.com/app/id6744403069";
+// The Sober Helpline app is iOS-only (App Store id6780034996).
+export const SOBER_HELPLINE_APP_STORE_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
 
 interface AppStoreBadgeProps {
   appStoreUrl?: string;
@@ -9,20 +9,16 @@ interface AppStoreBadgeProps {
   className?: string;
   height?: number;
   onClick?: () => void;
-  showGooglePlay?: boolean;
 }
 
 const AppStoreBadge = ({
-  appStoreUrl = FAMILYBRIDGE_APP_STORE_URL,
-  ariaLabel = "Download on the App Store",
+  appStoreUrl = SOBER_HELPLINE_APP_STORE_URL,
+  ariaLabel = "Download the Sober Helpline app on the App Store",
   className = "",
   height = 48,
   onClick,
-  showGooglePlay = true,
 }: AppStoreBadgeProps) => {
   const iosWidth = Math.round(height * 2.9916);
-  const androidHeight = Math.round(height * 1.18);
-  const androidWidth = Math.round(androidHeight * 2.584);
 
   return (
     <div className={`inline-flex flex-wrap items-center gap-3 ${className}`}>
@@ -42,22 +38,6 @@ const AppStoreBadge = ({
           style={{ height: `${height}px`, width: "auto" }}
         />
       </a>
-      {showGooglePlay && (
-        <div className="inline-flex flex-col items-center gap-0.5">
-          <div className="relative opacity-50 grayscale cursor-not-allowed">
-            <img
-              src={googlePlayBadge}
-              alt="Get it on Google Play"
-              width={androidWidth}
-              height={androidHeight}
-              style={{ height: `${androidHeight}px`, width: "auto" }}
-            />
-          </div>
-          <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
-            Coming Soon
-          </span>
-        </div>
-      )}
     </div>
   );
 };

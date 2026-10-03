@@ -15,7 +15,7 @@ const faqItems = [
   {
     question: "Are there free family support groups for addiction in Colorado?",
     answer:
-      "Yes. Colorado has Al-Anon and Nar-Anon meetings across the state, including Denver, Colorado Springs, Fort Collins, Boulder, and Pueblo. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Colorado family, no sign-up fees or treatment center referrals.",
+      "Yes. Colorado has Al-Anon and Nar-Anon meetings across the state, including Denver, Colorado Springs, Fort Collins, Boulder, and Pueblo. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free “The Family Squares” call every week at 7:00 PM Pacific — led by a certified interventionist — open to any Colorado family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What makes Colorado's addiction crisis different from other states?",
@@ -92,7 +92,7 @@ export default function ColoradoFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -398,13 +398,13 @@ export default function ColoradoFamilySupport() {
               <div>
                 <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
                   <Calendar className="h-3.5 w-3.5" />
-                  Every Monday — 7:00 PM PST
+                  Every Monday — 7:00 PM Pacific
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, families across Colorado (and nationwide) join a free Zoom call
+                  Every Monday at 7:00 PM Pacific, families across Colorado (and nationwide) join a free Zoom call
                   led by Matt Brown — a certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">
@@ -432,7 +432,7 @@ export default function ColoradoFamilySupport() {
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
                   <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
-                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM PST</div>
+                  <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM Pacific</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-primary" />

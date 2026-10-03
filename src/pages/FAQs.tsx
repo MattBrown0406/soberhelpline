@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import {
   Accordion,
   AccordionContent,
@@ -317,11 +316,6 @@ export default function FAQs() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">
-        {/* Family Bridge Banner */}
-        <div className="mb-8">
-          <FamilyBridgeBanner />
-        </div>
-
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Addiction Help FAQs for Families

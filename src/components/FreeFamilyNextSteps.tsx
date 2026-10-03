@@ -22,7 +22,7 @@ export default function FreeFamilyNextSteps({ source, showPaidSecondary = false 
         <Button asChild variant="outline" className="h-auto justify-start whitespace-normal py-3" onClick={() => trackConversionEvent("monday_zoom_click", { source })}>
           <Link to="/family-squares">
             <Calendar className="h-4 w-4 shrink-0" />
-            Family Squares · Monday 7 PM PT
+            Family Squares · Monday 7:00 PM Pacific
           </Link>
         </Button>
         <Button asChild variant="outline" className="h-auto justify-start whitespace-normal py-3" onClick={() => trackPhoneClick(source)}>

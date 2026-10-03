@@ -13,7 +13,7 @@ export default function RegionalFamilySupportOptions({ state }: { state: string 
           You can use Sober Helpline from {state} by phone or online. This is remote family education and coaching, not a local Sober Helpline office or a treatment facility.
         </p>
         <ul className="mt-6 space-y-5 text-muted-foreground">
-          <li><Link to="/monday-zoom-registration" className={linkClass}>Free Monday Family Squares</Link>: a weekly online family-support meeting at 7 PM Pacific. Registration is free; check the registration page for the next meeting.</li>
+          <li><Link to="/monday-zoom-registration" className={linkClass}>Free Monday Family Squares</Link>: a weekly online family-support meeting at 7:00 PM Pacific. Registration is free; check the registration page for the next meeting.</li>
           <li><Link to="/family-membership" className={linkClass}>Family education membership</Link>: paid access to member resources. Review the current price, trial terms, and included resources before joining.</li>
           <li><Link to="/family-coaching" className={linkClass}>Private family coaching</Link>: one-on-one conversations about your family situation. Standard sessions are $150, or $125 for members; confirm the provider, rate, and availability on the <Link to="/book-consultation" className={linkClass}>booking page</Link>. Coaching is booked separately from membership.</li>
           <li><Link to="/family-support" className={linkClass}>Family support hub</Link>: compare resources if you are not ready to choose a paid option.</li>

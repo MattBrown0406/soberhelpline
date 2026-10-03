@@ -99,7 +99,7 @@ const JoinMeeting = () => {
             <div>
               <h1 className="text-lg font-semibold text-foreground">The Family Squares</h1>
               <p className="text-sm text-muted-foreground flex items-center gap-2">
-                <span>Every Monday at 7:00 PM PST</span>
+                <span>Every Monday at 7:00 PM Pacific</span>
                 <span>·</span>
                 <span>Free and open to all</span>
               </p>

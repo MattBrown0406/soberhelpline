@@ -77,7 +77,7 @@ serve(async (req: Request) => {
     <tr>
       <td style="padding:12px;border:1px solid #e5e7eb;border-radius:8px;">
         <strong>2. Join a Monday meeting</strong><br/>
-        Every Monday at 7 PM PT we host a live family support Zoom.
+        Every Monday at 7:00 PM Pacific we host a live family support Zoom.
         <a href="https://soberhelpline.com/monday-zoom-registration" style="color:#1a5fa8;">Get the link here.</a>
       </td>
     </tr>

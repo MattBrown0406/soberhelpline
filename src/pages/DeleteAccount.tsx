@@ -9,8 +9,8 @@ export default function DeleteAccount() {
   return (
     <>
       <SEOHead
-        title="Delete Your SoberHelpline Account | Sober Helpline"
-        description="Request deletion of your SoberHelpline mobile app account and associated personal data, and learn what may be retained for legal or security purposes."
+        title="Delete Your Sober Helpline Account | Sober Helpline"
+        description="Request deletion of your Sober Helpline mobile app account and associated personal data, and learn what may be retained for legal or security purposes."
         speakableSelectors={["h1", ".deletion-summary", "h2"]}
       />
 
@@ -18,12 +18,12 @@ export default function DeleteAccount() {
         <section className="border-b bg-gradient-to-br from-primary/10 via-background to-background">
           <div className="container py-12 md:py-16">
             <div className="mx-auto max-w-4xl text-center">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">SoberHelpline app</p>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">Sober Helpline app</p>
               <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 Delete your account and app data
               </h1>
               <p className="deletion-summary mx-auto max-w-3xl text-lg text-muted-foreground">
-                This page is the public account-deletion resource for the SoberHelpline mobile app. You may delete your account inside the app or initiate a deletion request by email.
+                This page is the public account-deletion resource for the Sober Helpline mobile app. You may delete your account inside the app or initiate a deletion request by email.
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function DeleteAccount() {
               </CardHeader>
               <CardContent className="space-y-4 text-muted-foreground">
                 <ol className="list-decimal space-y-2 pl-6">
-                  <li>Open the SoberHelpline app and sign in.</li>
+                  <li>Open the Sober Helpline app and sign in.</li>
                   <li>Open <strong>Settings</strong>.</li>
                   <li>Scroll to <strong>Delete account</strong>.</li>
                   <li>Read the warning and confirm deletion.</li>
@@ -57,7 +57,7 @@ export default function DeleteAccount() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-muted-foreground">
-                <p>Email us from the address connected to your SoberHelpline account. Use the subject line <strong>Account Deletion Request</strong>. We may ask you to verify account ownership before processing the request.</p>
+                <p>Email us from the address connected to your Sober Helpline account. Use the subject line <strong>Account Deletion Request</strong>. We may ask you to verify account ownership before processing the request.</p>
                 <Button asChild size="lg" className="gap-2">
                   <a href="mailto:support@soberhelpline.com?subject=Account%20Deletion%20Request&body=Please%20delete%20my%20SoberHelpline%20app%20account%20and%20associated%20personal%20data.%20The%20email%20address%20on%20my%20account%20is%3A%20">
                     <Mail className="h-4 w-4" />
@@ -76,14 +76,14 @@ export default function DeleteAccount() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-muted-foreground">
-                <p>When your account is deleted, SoberHelpline deletes or de-identifies account-linked app data that is not required to be retained, including:</p>
+                <p>When your account is deleted, Sober Helpline deletes or de-identifies account-linked app data that is not required to be retained, including:</p>
                 <ul className="space-y-2">
                   {[
                     "Your app login and account profile",
                     "Saved app plans, check-ins, notes, and family-support records stored in your account",
                     "App support threads, community content, and uploaded attachments associated with your account, subject to safety and legal exceptions",
                     "Push-notification tokens and app preferences associated with your account",
-                    "SoberHelpline subscription-entitlement mirror records associated with your account",
+                    "Sober Helpline subscription-entitlement mirror records associated with your account",
                   ].map((item) => (
                     <li key={item} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{item}</li>
                   ))}
@@ -112,8 +112,8 @@ export default function DeleteAccount() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
-                <p>Account deletion and app-store billing are separate. Cancel an active subscription in Apple App Store or Google Play settings to prevent future renewal. Deleting your SoberHelpline account does not issue an automatic refund.</p>
-                <p>SoberHelpline is not an emergency service. If someone is in immediate danger, call 911. For mental-health crisis support in the United States, call or text 988.</p>
+                <p>Account deletion and app-store billing are separate. Cancel an active subscription in your Apple App Store subscription settings to prevent future renewal. Deleting your Sober Helpline account does not issue an automatic refund.</p>
+                <p>Sober Helpline is not an emergency service. If someone is in immediate danger, call 911. For mental-health crisis support in the United States, call or text 988.</p>
               </CardContent>
             </Card>
 

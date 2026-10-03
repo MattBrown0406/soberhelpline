@@ -13,7 +13,6 @@ import { CardDescription } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 interface CommunicationSection {
   title: string;
@@ -207,7 +206,7 @@ export default function CommunicationGuide() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to access this communication guide.
+                  Join our family support membership for just $9.99/month to access this communication guide.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">

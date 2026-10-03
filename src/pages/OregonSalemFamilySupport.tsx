@@ -72,7 +72,7 @@ export default function OregonSalemFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -182,17 +182,22 @@ export default function OregonSalemFamilySupport() {
                 <CardHeader>
                   <CardTitle className="text-base text-logo-blue flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary" />
-                    Lines for Life — 24/7 Crisis Line
+                    988 Suicide & Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Free, confidential statewide crisis line for substance use and mental health emergencies.
+                    Free, confidential call-or-text crisis support for substance use and mental health emergencies.
                   </p>
-                  <a href="tel:18002738255" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    1-800-273-8255
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -208,7 +213,7 @@ export default function OregonSalemFamilySupport() {
                   <div>
                     <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-3">
                       <Calendar className="h-3.5 w-3.5" />
-                      Every Monday — 7:00 PM PST
+                      Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
                       Free “The Family Squares” Zoom
@@ -238,7 +243,7 @@ export default function OregonSalemFamilySupport() {
                   </div>
                   <div className="text-center">
                     <div className="text-5xl font-bold text-primary mb-2">FREE</div>
-                    <div className="text-muted-foreground text-sm">Every Monday at 7 PM PST</div>
+                    <div className="text-muted-foreground text-sm">Every Monday at 7:00 PM Pacific</div>
                     <div className="mt-4 text-sm text-muted-foreground">Questions? Call:</div>
                     <a href="tel:4582988008" className="text-primary font-semibold text-lg hover:underline">
                       (458) 298-8008

@@ -4,7 +4,6 @@ import { ArrowLeft, Phone, Brain, Heart, AlertTriangle, Lightbulb, Users, Trendi
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
 import RelatedResources from "@/components/RelatedResources";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 export default function UnderstandingAddiction() {
   useGuideTracking("/understanding-addiction", "Addiction: A Chronic Disease, Not a Choice");

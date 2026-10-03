@@ -58,7 +58,7 @@ serve(async (req: Request) => {
         JSON.stringify({
           error:
             cancelledRow.reason ||
-            "This meeting has been cancelled. Please check back next Monday at 7 PM PT.",
+            "This meeting has been cancelled. Please check back next Monday at 7:00 PM Pacific.",
           cancelled: true,
         }),
         {

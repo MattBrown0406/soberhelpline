@@ -151,7 +151,7 @@ serve(async (req: Request) => {
           tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: '⏰ Starting in 1 hour — "The Family Squares" at 7 PM Pacific',
+          subject: '⏰ Starting in 1 hour — "The Family Squares" at 7:00 PM Pacific',
           content: [{ type: "text/html", value: html }],
         }),
       });

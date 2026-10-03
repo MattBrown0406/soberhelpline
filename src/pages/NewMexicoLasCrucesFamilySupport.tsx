@@ -71,7 +71,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -231,7 +231,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, Las Cruces families join a free Zoom call led by Matt Brown —
+                  Every Monday at 7:00 PM Pacific, Las Cruces families join a free Zoom call led by Matt Brown —
                   a certified interventionist with 20+ years of experience. Especially valuable in a community
                   where in-person treatment options are limited.
                 </p>

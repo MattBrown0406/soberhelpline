@@ -61,7 +61,7 @@ function buildEmail(firstName: string, joinUrl: string, externalZoomLink: string
 <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#1f2937;">
   <h1 style="color:#1e3a5f;">Hi ${escapeHtml(firstName)},</h1>
   <p>There was a problem with the earlier Zoom link we sent for tonight's <strong>"The Family Squares"</strong> meeting. The earlier link has been cancelled.</p>
-  <p><strong>Please use the new link below to join tonight at 7:00 PM PST.</strong></p>
+  <p><strong>Please use the new link below to join tonight at 7:00 PM Pacific.</strong></p>
   <div style="background-color:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:20px;margin:24px 0;text-align:center;">
     <h2 style="margin:0 0 10px;color:#166534;">✅ Your New Meeting Link</h2>
     <a href="${escapeHtml(joinUrl)}" style="display:inline-block;padding:14px 28px;background-color:#2563eb;color:white;text-decoration:none;border-radius:8px;font-weight:bold;font-size:16px;">Join on SoberHelpline.com</a>

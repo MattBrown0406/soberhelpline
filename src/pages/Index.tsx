@@ -24,7 +24,6 @@ import SUDAssessment from "@/components/SUDAssessment";
 import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
@@ -434,7 +433,7 @@ const Index = () => {
                   </Button>
                 </Link>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Start with a 7-day free trial, then $10/month. Cancel anytime.
+                  Start with a 7-day free trial, then $9.99/month. Cancel anytime.
                 </p>
               </div>
             </div>
@@ -520,7 +519,7 @@ const Index = () => {
                   </div>
                   <div className="text-center md:text-left">
                     <p className="text-xs md:text-sm font-medium text-white/80">Free weekly support</p>
-                    <h3 className="text-base md:text-lg font-bold">“The Family Squares” every Monday at 7 PM PST</h3>
+                    <h3 className="text-base md:text-lg font-bold">“The Family Squares” every Monday at 7:00 PM Pacific</h3>
                     <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group support every Monday for any family member. No membership required.</p>
                   </div>
                 </div>
@@ -546,7 +545,7 @@ const Index = () => {
                   <div className="text-center md:text-left">
                     <p className="text-xs md:text-sm font-medium text-white/80">Ongoing support</p>
                     <h3 className="text-base md:text-lg font-bold">Family Membership for steady support between crises</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, member pricing on coaching, and Essentials-level features in the Sober Helpline App.</p>
+                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, member pricing on coaching, and Essential-level features in the Sober Helpline app.</p>
                   </div>
                 </div>
                 <div className="flex-shrink-0">
@@ -635,10 +634,6 @@ const Index = () => {
               </Link>
             ))}
           </div>
-        </section>
-
-        <section className="container mx-auto px-4 pt-10 md:pt-16">
-          <FamilyBridgeBanner />
         </section>
 
         <section className="container mx-auto px-4 py-10 md:py-16">

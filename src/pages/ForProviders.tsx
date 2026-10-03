@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import SEOHead from "@/components/SEOHead";
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 import logo from "@/assets/logo.png";
 
 const benefits = [
@@ -408,9 +407,6 @@ const ForProviders = () => {
             </div>
           </div>
         </section>
-
-        {/* FamilyBridge Banner */}
-        <FamilyBridgeBanner />
 
         {/* Footer */}
         <footer className="py-8 bg-white border-t">

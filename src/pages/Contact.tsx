@@ -11,7 +11,7 @@ export default function Contact() {
     <>
       <SEOHead
         title="Contact Sober Helpline | Call, WhatsApp, Family Squares"
-        description="Reach Sober Helpline by phone at (458) 298-8008 or WhatsApp +1 503-836-2136. Join Family Squares Monday at 7 PM Pacific. Family support, not emergency medical care."
+        description="Reach Sober Helpline by phone at (458) 298-8008 or WhatsApp +1 503-836-2136. Join Family Squares Monday at 7:00 PM Pacific. Family support, not emergency medical care."
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "ContactPage",
@@ -51,7 +51,7 @@ export default function Contact() {
                     <Button asChild size="lg" variant="outline" onClick={() => trackConversionEvent("monday_zoom_click", { source: "contact_page" })}>
                       <Link to="/family-squares">
                         <Calendar className="h-4 w-4" />
-                        Family Squares · Monday 7 PM PT
+                        Family Squares · Monday 7:00 PM Pacific
                       </Link>
                     </Button>
                   </div>

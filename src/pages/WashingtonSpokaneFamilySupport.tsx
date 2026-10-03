@@ -76,7 +76,7 @@ export default function WashingtonSpokaneFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Free Monday Zoom — 7PM PST
+                  Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -215,7 +215,7 @@ export default function WashingtonSpokaneFamilySupport() {
                   Free Family Squares Zoom for Spokane Families
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST — join families from Spokane and across Washington for a free
+                  Every Monday at 7:00 PM Pacific — join families from Spokane and across Washington for a free
                   support call with Matt Brown, certified interventionist. Geography is no barrier.
                 </p>
                 <ul className="space-y-2 mb-6">

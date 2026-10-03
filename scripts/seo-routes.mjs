@@ -94,27 +94,27 @@ export const prerenderPages = [
   },
   {
     route: '/support',
-    title: 'SoberHelpline App Support | Sober Helpline',
-    description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
-    noscriptHtml: '<main><h1>SoberHelpline App Support</h1><p>Get help with the SoberHelpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582988008">458-298-8008</a>.</p><p>SoberHelpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
+    title: 'Sober Helpline App Support | Sober Helpline',
+    description: 'Support for the Sober Helpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
+    noscriptHtml: '<main><h1>Sober Helpline App Support</h1><p>Get help with the Sober Helpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582988008">458-298-8008</a>.</p><p>Sober Helpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
   },
   {
     route: '/privacy',
     title: 'Privacy Policy | Sober Helpline',
-    description: 'Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
-    noscriptHtml: '<main><h1>Sober Helpline Privacy Policy</h1><p>This policy explains how Sober Helpline and the SoberHelpline mobile app collect, use, share, protect, retain, and delete information.</p><p>For privacy requests, data access, correction, or account deletion, email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p><p>Sober Helpline does not sell personal information and is not emergency medical, psychiatric, legal, or crisis response care.</p></main>'
+    description: 'Privacy policy for Sober Helpline and the Sober Helpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
+    noscriptHtml: '<main><h1>Sober Helpline Privacy Policy</h1><p>This policy explains how Sober Helpline and the Sober Helpline mobile app collect, use, share, protect, retain, and delete information.</p><p>For privacy requests, data access, correction, or account deletion, email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p><p>Sober Helpline does not sell personal information and is not emergency medical, psychiatric, legal, or crisis response care.</p></main>'
   },
   {
     route: '/delete-account',
-    title: 'Delete Your SoberHelpline Account | Sober Helpline',
-    description: 'Delete your SoberHelpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
-    noscriptHtml: '<main><h1>Delete Your SoberHelpline Account</h1><p>Delete your account in the SoberHelpline app under Settings, or initiate a deletion request by emailing <a href="mailto:support@soberhelpline.com?subject=Account%20Deletion%20Request">support@soberhelpline.com</a> from the address connected to your account.</p><p>Account-linked app data is deleted or de-identified unless limited retention is required for legal, transaction, fraud-prevention, or security purposes. Cancel any active Apple App Store or Google Play subscription separately.</p></main>'
+    title: 'Delete Your Sober Helpline Account | Sober Helpline',
+    description: 'Delete your Sober Helpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
+    noscriptHtml: '<main><h1>Delete Your Sober Helpline Account</h1><p>Delete your account in the Sober Helpline app under Settings, or initiate a deletion request by emailing <a href="mailto:support@soberhelpline.com?subject=Account%20Deletion%20Request">support@soberhelpline.com</a> from the address connected to your account.</p><p>Account-linked app data is deleted or de-identified unless limited retention is required for legal, transaction, fraud-prevention, or security purposes. Cancel any active Apple App Store subscription separately.</p></main>'
   },
   {
     route: '/app-terms',
-    title: 'SoberHelpline App Terms of Use | Sober Helpline',
-    description: 'Terms governing use of the SoberHelpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
-    noscriptHtml: '<main><h1>SoberHelpline App Terms of Use</h1><p>These Terms govern use of the SoberHelpline mobile app, accounts, subscriptions, educational tools, family-support features, and related services.</p><p>SoberHelpline is not emergency, medical, psychiatric, detox, or legal care. Digital subscriptions are billed and managed by Apple App Store or Google Play.</p><p>Questions: <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p></main>'
+    title: 'Sober Helpline App Terms of Use | Sober Helpline',
+    description: 'Terms governing use of the Sober Helpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
+    noscriptHtml: '<main><h1>Sober Helpline App Terms of Use</h1><p>These Terms govern use of the Sober Helpline mobile app, accounts, subscriptions, educational tools, family-support features, and related services.</p><p>Sober Helpline is not emergency, medical, psychiatric, detox, or legal care. Digital subscriptions are billed and managed by the Apple App Store.</p><p>Questions: <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a>.</p></main>'
   },
   {
     route: '/start-here',
@@ -126,25 +126,25 @@ export const prerenderPages = [
     route: '/about',
     title: 'About Sober Helpline | Free Family Support',
     description: 'Sober Helpline is free family support, education, and a live Monday Family Squares meeting. Matt Brown, a certified interventionist, is the person behind it.',
-    noscriptHtml: '<main><h1>About Sober Helpline</h1><p>Free family support, education, and live Monday Family Squares. Sober Helpline is not a treatment center and does not sell placements.</p><p><a href="tel:+14582988008">Call (458) 298-8008</a> · <a href="https://wa.me/5038362136">WhatsApp +1 503-836-2136</a> · <a href="https://soberhelpline.com/family-squares">Family Squares Monday 7 PM Pacific</a></p></main>'
+    noscriptHtml: '<main><h1>About Sober Helpline</h1><p>Free family support, education, and live Monday Family Squares. Sober Helpline is not a treatment center and does not sell placements.</p><p><a href="tel:+14582988008">Call (458) 298-8008</a> · <a href="https://wa.me/5038362136">WhatsApp +1 503-836-2136</a> · <a href="https://soberhelpline.com/family-squares">Family Squares Monday 7:00 PM Pacific</a></p></main>'
   },
   {
     route: '/contact',
     title: 'Contact Sober Helpline | Call, WhatsApp, Family Squares',
-    description: 'Reach Sober Helpline by phone at (458) 298-8008 or WhatsApp +1 503-836-2136. Join Family Squares Monday at 7 PM Pacific.',
-    noscriptHtml: '<main><h1>Contact Sober Helpline</h1><p>Call (458) 298-8008 or WhatsApp +1 503-836-2136. If it can wait, join Family Squares Monday at 7 PM Pacific.</p><p>Sober Helpline is family support, not emergency medical care. If someone is in immediate danger, call 911. For a mental-health crisis, call or text 988.</p></main>'
+    description: 'Reach Sober Helpline by phone at (458) 298-8008 or WhatsApp +1 503-836-2136. Join Family Squares Monday at 7:00 PM Pacific.',
+    noscriptHtml: '<main><h1>Contact Sober Helpline</h1><p>Call (458) 298-8008 or WhatsApp +1 503-836-2136. If it can wait, join Family Squares Monday at 7:00 PM Pacific.</p><p>Sober Helpline is family support, not emergency medical care. If someone is in immediate danger, call 911. For a mental-health crisis, call or text 988.</p></main>'
   },
   {
     route: '/what-to-do-tonight',
     title: 'What to Do Tonight | Sober Helpline',
     description: 'A free tonight plan for families: safety first, what to say and not say, practical steps for money, keys, and kids, then Family Squares or a phone call.',
-    noscriptHtml: '<main><h1>What to Do Tonight</h1><p>Keep people safe, stop the argument, and hold one or two practical lines until morning. Sober Helpline is family support, not emergency medical care.</p><p>If someone is in immediate danger, call 911. If you are in a mental-health crisis, call or text 988. <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7 PM Pacific</a>.</p></main>'
+    noscriptHtml: '<main><h1>What to Do Tonight</h1><p>Keep people safe, stop the argument, and hold one or two practical lines until morning. Sober Helpline is family support, not emergency medical care.</p><p>If someone is in immediate danger, call 911. If you are in a mental-health crisis, call or text 988. <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7:00 PM Pacific</a>.</p></main>'
   },
   {
     route: '/two-households',
     title: 'Two Households | Sober Helpline',
     description: 'Free tonight guidance for divorced, separated, or never-married parents when the other house is about to pay, house, or hand over the keys.',
-    noscriptHtml: '<main><h1>Two homes. Same night. Different rules.</h1><p>If the other parent is about to pay, house, or hand over the keys, you do not need to win the argument tonight. You need one line the two of you can both say — or a plan for the house you actually control.</p><p>Two houses. One disease. Money, housing, and contact have to be the same line in both kitchens. Kids are not messengers and not the reason to cave.</p><p>If someone is in immediate danger, call 911. If you are in a suicidal crisis, call or text 988. Family line: <a href="tel:+14582988008">(458) 298-8008</a>. <a href="https://soberhelpline.com/what-to-do-tonight">What to do tonight</a> · <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7 PM Pacific</a>.</p></main>'
+    noscriptHtml: '<main><h1>Two homes. Same night. Different rules.</h1><p>If the other parent is about to pay, house, or hand over the keys, you do not need to win the argument tonight. You need one line the two of you can both say — or a plan for the house you actually control.</p><p>Two houses. One disease. Money, housing, and contact have to be the same line in both kitchens. Kids are not messengers and not the reason to cave.</p><p>If someone is in immediate danger, call 911. If you are in a suicidal crisis, call or text 988. Family line: <a href="tel:+14582988008">(458) 298-8008</a>. <a href="https://soberhelpline.com/what-to-do-tonight">What to do tonight</a> · <a href="https://soberhelpline.com/family-squares">Join Family Squares Monday at 7:00 PM Pacific</a>.</p></main>'
   },
   {
     route: '/enabling-self-assessment',

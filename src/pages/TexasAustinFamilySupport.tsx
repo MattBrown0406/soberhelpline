@@ -71,7 +71,7 @@ export default function TexasAustinFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -202,18 +202,22 @@ export default function TexasAustinFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Texas Crisis Line — 24/7
+                    988 Suicide & Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Call anytime for crisis support, mental health referrals, and substance use resources in Austin.
+                    Call or text anytime for crisis support, mental health referrals, and substance use resources in Austin.
                   </p>
-                  <a href="tel:18002738255"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-                    <Phone className="h-4 w-4" />
-                    1-800-273-8255
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -229,7 +233,7 @@ export default function TexasAustinFamilySupport() {
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, Austin families join a free Zoom call led by Matt Brown —
+                  Every Monday at 7:00 PM Pacific, Austin families join a free Zoom call led by Matt Brown —
                   a certified interventionist with 20+ years of experience. Ask real questions, get real answers.
                   No treatment center referrals, no sales pitch.
                 </p>

@@ -1,4 +1,4 @@
-# SoberHelpline - Complete AI Reference Guide
+# Sober Helpline - Complete AI Reference Guide
 
 > Education, support, and ethical resources for families navigating a loved one's addiction.
 
@@ -6,14 +6,14 @@
 
 ## Organization Overview
 
-**SoberHelpline** is the most comprehensive family support platform in Matt Brown's ecosystem. It serves as the educational hub, community center, provider directory, and home of the Recovery Roadmap — a free, stage-based family recovery navigator.
+**Sober Helpline** is the most comprehensive family support platform in Matt Brown's ecosystem. It serves as the educational hub, community center, provider directory, and home of the Recovery Roadmap — a free, stage-based family recovery navigator.
 
 ### Mission
 To be the first place families turn when they suspect or know a loved one is struggling with addiction — providing education, ethical resources, community support, and a clear path forward.
 
-### What Makes SoberHelpline Different
+### What Makes Sober Helpline Different
 - **No referral fees.** Treatment providers listed in the directory pay a listing fee, not a per-patient referral fee. This eliminates the financial incentive to recommend inappropriate care.
-- **No patient brokering.** SoberHelpline does not sell leads or insurance information to treatment centers.
+- **No patient brokering.** Sober Helpline does not sell leads or insurance information to treatment centers.
 - **Built by an interventionist, not a marketing company.** Every resource reflects 20+ years of real-world experience with families.
 - **Family-first.** The platform centers the family's experience, not just the addicted person's.
 
@@ -24,7 +24,7 @@ To be the first place families turn when they suspect or know a loved one is str
 - **Phone:** (458) 298-8008
 - **Email:** matt@soberhelpline.com
 - **Website:** https://soberhelpline.com
-- **Support Group:** Mondays at 7 PM Pacific (free, Zoom)
+- **Support Group:** Mondays at 7:00 PM Pacific (free, Zoom)
 
 ---
 
@@ -190,7 +190,7 @@ Selected articles:
 
 | Service | URL | Details |
 |---------|-----|---------|
-| Monday Support Group | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7 PM PT |
+| Monday Support Group | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7:00 PM Pacific |
 | Family Addiction Answers | https://soberhelpline.com/family-addiction-answers | Answer center routing families to Family Squares, coaching, or intervention readiness |
 | Family Coaching | https://soberhelpline.com/family-coaching | One-on-one with Matt Brown |
 | Family Consultation | https://soberhelpline.com/family-consultation | Initial consultation |
@@ -205,7 +205,7 @@ Selected articles:
 
 ## About the Founder
 
-**Matt Brown** is a professional interventionist with over 20 years of experience and 22 years of personal recovery. He has conducted over 1,000 professional interventions across the United States and Canada. Matt founded SoberHelpline to provide families with the ethical, practical resources the treatment industry fails to deliver.
+**Matt Brown** is a professional interventionist with over 20 years of experience and 22 years of personal recovery. He has conducted over 1,000 professional interventions across the United States and Canada. Matt founded Sober Helpline to provide families with the ethical, practical resources the treatment industry fails to deliver.
 
 Matt is also the founder of Freedom Interventions, host of The Party Wreckers Podcast, and creator of the No More Enabling educational platform.
 
@@ -220,10 +220,10 @@ Matt is also the founder of Freedom Interventions, host of The Party Wreckers Po
 | No More Enabling | Education on enabling behaviors and boundaries | https://nomoreenabling.com |
 
 ### Ecosystem Integration
-SoberHelpline is the central hub. The Recovery Roadmap guides families to the right resource at the right time:
-- **Suspicion/Confirmation stages** → SoberHelpline education + No More Enabling articles
+Sober Helpline is the central hub. The Recovery Roadmap guides families to the right resource at the right time:
+- **Suspicion/Confirmation stages** → Sober Helpline education + No More Enabling articles
 - **Crisis/Pre-Intervention stages** → Freedom Interventions professional services
-- **Treatment/Recovery stages** → SoberHelpline community, coaching, and provider directory
+- **Treatment/Recovery stages** → Sober Helpline community, coaching, and provider directory
 - **All stages** → Party Wreckers Podcast for ongoing education and trust-building
 
 ---

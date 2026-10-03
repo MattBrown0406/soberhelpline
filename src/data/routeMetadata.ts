@@ -105,20 +105,20 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Support resources for families dealing with a loved one\'s addiction. Education, community, coaching, and tools to help you take action.',
   },
   '/support': {
-    title: 'SoberHelpline App Support | Sober Helpline',
-    description: 'Support for the SoberHelpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
+    title: 'Sober Helpline App Support | Sober Helpline',
+    description: 'Support for the Sober Helpline mobile app, account access, subscriptions, billing questions, technical issues, and family support resources.',
   },
   '/privacy': {
     title: 'Privacy Policy | Sober Helpline',
-    description: 'Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
+    description: 'Privacy policy for Sober Helpline and the Sober Helpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
   },
   '/delete-account': {
-    title: 'Delete Your SoberHelpline Account | Sober Helpline',
-    description: 'Delete your SoberHelpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
+    title: 'Delete Your Sober Helpline Account | Sober Helpline',
+    description: 'Delete your Sober Helpline mobile app account and associated data, or initiate an account-deletion request without access to the app.',
   },
   '/app-terms': {
-    title: 'SoberHelpline App Terms of Use | Sober Helpline',
-    description: 'Terms governing use of the SoberHelpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
+    title: 'Sober Helpline App Terms of Use | Sober Helpline',
+    description: 'Terms governing use of the Sober Helpline mobile app, subscriptions, family-support tools, accounts, acceptable use, and safety limitations.',
   },
   '/start-here': {
     title: 'Start Here for Family Addiction Help | Sober Helpline',
@@ -186,7 +186,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/monday-zoom-registration': {
     title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
-    description: 'Free weekly family support group every Monday at 7 PM PT. Connect with other families, get guidance, and feel less alone.',
+    description: 'Free weekly family support group every Monday at 7:00 PM Pacific. Connect with other families, get guidance, and feel less alone.',
   },
   '/conversation-starters': {
     title: 'How to Talk About Addiction with a Loved One | Sober Helpline',

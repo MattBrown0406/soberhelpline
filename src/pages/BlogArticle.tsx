@@ -9,7 +9,6 @@ import { Helmet } from "react-helmet-async";
 import cycleOfAddictionImg from "@/assets/blog-cycle-of-addiction.jpg";
 import ArticleContent from "@/components/ArticleContent";
 import { blogPosts, imageMap } from "@/data/blogPosts";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
 import { fitSeoDescription, fitSeoTitle } from "@/lib/seoTitle";
 
@@ -388,7 +387,7 @@ const BlogArticle = () => {
                 <Link to="/family-membership">
                   <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white px-6">
                     <Lock className="w-4 h-4 mr-2" />
-                    Unlock Full Access — $10/mo
+                    Unlock Full Access — $9.99/mo
                   </Button>
                 </Link>
                 <Link to="/free-guide">
@@ -398,11 +397,6 @@ const BlogArticle = () => {
                 </Link>
               </div>
             </div>
-          </div>
-
-          {/* FamilyBridge CTA */}
-          <div className="mt-8">
-            <FamilyBridgeCTA variant="card" />
           </div>
         </article>
       </div>

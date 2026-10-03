@@ -802,7 +802,7 @@ const BookConsultation = () => {
                 <span className="text-sm text-muted-foreground">
                   Members save $25 per session —{" "}
                   <Link to="/family-membership" className="text-primary hover:underline font-medium">
-                    Join for $10/mo
+                    Join for $9.99/mo
                   </Link>
                 </span>
               </div>
@@ -1077,7 +1077,7 @@ const BookConsultation = () => {
                         ) : (
                           <p className="text-xs text-muted-foreground">
                             Members save $25/session —{" "}
-                            <Link to="/family-membership" className="text-primary hover:underline">Join for $10/mo</Link>
+                            <Link to="/family-membership" className="text-primary hover:underline">Join for $9.99/mo</Link>
                           </p>
                         )}
                       </div>

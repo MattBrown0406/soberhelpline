@@ -147,7 +147,7 @@ function scoreAnswers(answers: Answers): {
     primaryCTA = "coaching";
   } else if (urgency === "moderate") {
     headline = "You're at a turning point — this is the right time to get steadier.";
-    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. Family Squares on Monday at 7 PM Pacific is a free place to ask the question. Tonight, use the short plan and the phone if you need a human.`;
+    summary = `You've likely tried things that haven't worked. That's not your fault — most of what families try is well-intentioned but ineffective. Family Squares on Monday at 7:00 PM Pacific is a free place to ask the question. Tonight, use the short plan and the phone if you need a human.`;
     primaryCTA = "zoom";
   } else {
     headline = "You're in the right place — support makes the next night easier.";

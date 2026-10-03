@@ -13,7 +13,7 @@ const faqItems = [
   },
   {
     "question": "Which Sober Helpline support is free for Oregon families?",
-    "answer": "Monday Family Squares is a free online family-support meeting at 7 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
+    "answer": "Monday Family Squares is a free online family-support meeting at 7:00 PM Pacific. Family education membership is paid, and private coaching is booked separately. Review current membership terms and coaching rates before purchasing."
   },
   {
     "question": "Where can I look for local resources in Oregon?",
@@ -80,7 +80,7 @@ export default function OregonFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM Pacific
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -249,21 +249,23 @@ export default function OregonFamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue text-base">
                     <Phone className="h-4 w-4 text-primary" />
-                    Lines for Life Crisis Line — 24/7
+                    988 Suicide & Crisis Lifeline — 24/7
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Oregon's statewide crisis line for mental health and substance use emergencies.
-                    Free, confidential, available 24 hours a day. Also has an alcohol and drug helpline.
+                    Call or text 988 for mental health and substance use emergencies anywhere in Oregon.
+                    Free, confidential, available 24 hours a day.
                   </p>
-                  <a
-                    href="tel:18002738255"
-                    className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline"
-                  >
-                    <Phone className="h-4 w-4" />
-                    1-800-273-8255
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a href="tel:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      <Phone className="h-4 w-4" />
+                      Call 988
+                    </a>
+                    <a href="sms:988" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+                      Text 988
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -285,7 +287,7 @@ export default function OregonFamilySupport() {
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM Pacific, families across Oregon (and nationwide) join a free Zoom call
+                  Every Monday at 7:00 PM Pacific, families across Oregon (and nationwide) join a free Zoom call
                   led by Matt Brown — a certified interventionist with 20+ years of experience.
                 </p>
                 <ul className="space-y-2 mb-6">

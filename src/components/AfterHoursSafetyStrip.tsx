@@ -37,7 +37,7 @@ export default function AfterHoursSafetyStrip({ source, showTonightLink = false 
               </a>{" "}
               (including from outside the US). If it can wait, join{" "}
               <Link to="/family-squares" className="font-semibold underline underline-offset-2">
-                Family Squares Monday at 7 PM Pacific
+                Family Squares Monday at 7:00 PM Pacific
               </Link>
               .
             </p>

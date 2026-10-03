@@ -314,7 +314,7 @@ export default function FamilySupport() {
                         <div className="text-center">
                           <Link to="/family-membership">
                             <Button size="lg">
-                              Start membership, $10/month
+                              Start membership, $9.99/month
                             </Button>
                           </Link>
                         </div>
@@ -341,7 +341,7 @@ export default function FamilySupport() {
                     “The Family Squares” Zoom
                   </CardTitle>
                   <CardDescription>
-                    Free weekly meeting every Monday at 7:00 PM PST
+                    Free weekly meeting every Monday at 7:00 PM Pacific
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">

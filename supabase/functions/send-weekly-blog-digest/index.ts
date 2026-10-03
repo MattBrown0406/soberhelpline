@@ -11,7 +11,6 @@ const SITE_URL = "https://soberhelpline.com";
 const BLOG_INDEX_URL = `${SITE_URL}/blog-index.json`;
 const ZOOM_REGISTRATION_URL = `${SITE_URL}/monday-zoom-registration`;
 const SOBER_HELPLINE_APP_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
-const FAMILY_BRIDGE_APP_URL = "https://apps.apple.com/app/id6744403069";
 const COACHING_URL = "https://www.freedominterventions.com/book-intervention-consultation#booking";
 
 interface BlogPost {
@@ -123,10 +122,8 @@ function buildHtml(safeName: string, posts: BlogPost[]): string {
       </div>
 
       <div style="background-color:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:24px; margin:24px 0; text-align:center;">
-        <p style="margin:0 0 8px 0; font-size:18px; font-weight:bold; color:#1e3a8a;">📲 The FamilyBridge App</p>
-        <p style="margin:0 0 16px 0; font-size:14px; color:#374151;">AI-guided support for the hard conversations — boundaries, relapse worries, and what to say next.</p>
-        <a href="${FAMILY_BRIDGE_APP_URL}" style="display:inline-block; padding:14px 32px; background-color:#1d4ed8; color:#ffffff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">Download FamilyBridge</a>
-        <p style="margin:20px 0 12px 0; font-size:14px; color:#374151;">Want to talk it through with me directly? Book a coaching session and we'll build a plan for your family.</p>
+        <p style="margin:0 0 8px 0; font-size:18px; font-weight:bold; color:#1e3a8a;">Private Family Coaching</p>
+        <p style="margin:0 0 16px 0; font-size:14px; color:#374151;">Want to talk it through with me directly? Book a coaching session and we'll build a plan for your family.</p>
         <a href="${COACHING_URL}" style="display:inline-block; padding:12px 28px; background-color:#ffffff; border:2px solid #1d4ed8; color:#1d4ed8; text-decoration:none; border-radius:8px; font-weight:bold; font-size:15px;">Book a Coaching Session</a>
       </div>
 

@@ -6,16 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const privacyFaqs = [
   {
-    question: "What information does SoberHelpline collect?",
-    answer: "SoberHelpline may collect account information, app usage information, support requests, subscription status, and information you choose to enter into app features or forms.",
+    question: "What information does Sober Helpline collect?",
+    answer: "Sober Helpline may collect account information, app usage information, support requests, subscription status, and information you choose to enter into app features or forms.",
   },
   {
     question: "How do I request account deletion or data access?",
     answer: "Email support@soberhelpline.com from the email address connected to your account and ask for account deletion, data access, or correction.",
   },
   {
-    question: "Does SoberHelpline sell personal information?",
-    answer: "No. SoberHelpline does not sell personal information.",
+    question: "Does Sober Helpline sell personal information?",
+    answer: "No. Sober Helpline does not sell personal information.",
   },
 ];
 
@@ -24,7 +24,7 @@ export default function Privacy() {
     <>
       <SEOHead
         title="Privacy Policy | Sober Helpline"
-        description="Privacy policy for Sober Helpline and the SoberHelpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information."
+        description="Privacy policy for Sober Helpline and the Sober Helpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information."
         faqItems={privacyFaqs}
         speakableSelectors={["h1", ".privacy-summary", "h2"]}
       />
@@ -38,7 +38,7 @@ export default function Privacy() {
                 Sober Helpline Privacy Policy
               </h1>
               <p className="privacy-summary max-w-3xl text-lg text-muted-foreground">
-                This policy explains how Sober Helpline and the SoberHelpline mobile app collect, use, share,
+                This policy explains how Sober Helpline and the Sober Helpline mobile app collect, use, share,
                 protect, retain, and delete information. It is written for families using Sober Helpline resources,
                 app features, support, subscriptions, forms, coaching, and educational tools.
               </p>
@@ -62,7 +62,7 @@ export default function Privacy() {
                   websites, and mobile app experiences operated for addiction family education and support.
                 </p>
                 <p>
-                  This policy applies to the SoberHelpline mobile app, soberhelpline.com, support requests,
+                  This policy applies to the Sober Helpline mobile app, soberhelpline.com, support requests,
                   forms, account features, membership features, educational tools, and related communications.
                 </p>
               </CardContent>
@@ -239,7 +239,7 @@ export default function Privacy() {
                   Phone: <a className="font-semibold text-primary underline" href="tel:4582988008">458-298-8008</a>
                 </p>
                 <p>
-                  For app support rather than privacy questions, use the <Link className="font-semibold text-primary underline" to="/support">SoberHelpline App Support</Link> page.
+                  For app support rather than privacy questions, use the <Link className="font-semibold text-primary underline" to="/support">Sober Helpline App Support</Link> page.
                 </p>
               </CardContent>
             </Card>

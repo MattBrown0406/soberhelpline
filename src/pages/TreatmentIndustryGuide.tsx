@@ -7,7 +7,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TreatmentIndustryGuide() {
@@ -33,11 +32,6 @@ export default function TreatmentIndustryGuide() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-            {/* FamilyBridge CTA */}
-            <div className="my-8">
-              <FamilyBridgeCTA variant="post-completion" />
-            </div>
-
                 Back to Family Education
               </Link>
               <Button onClick={handlePrint} variant="outline" className="gap-2">

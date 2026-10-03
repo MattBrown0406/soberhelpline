@@ -15,7 +15,7 @@ const supportRoutes = [
   {
     eyebrow: "START FREE",
     title: "Family Squares",
-    description: "A live room for families every Monday at 7 PM Pacific.",
+    description: "A live room for families every Monday at 7:00 PM Pacific.",
     cta: "Join Monday support",
     to: "/family-squares",
     icon: CalendarDays,
@@ -174,7 +174,7 @@ const HomeHero = () => {
               <span>
                 <small>YOUR FIRST SAFE HARBOR</small>
                 <strong>Free Family Squares</strong>
-                <em>Monday · 7 PM Pacific</em>
+                <em>Monday · 7:00 PM Pacific</em>
               </span>
             </div>
 

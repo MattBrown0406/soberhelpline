@@ -271,7 +271,7 @@ const RoadmapTreatment = () => {
                   className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2"
                 >
                   <Video className="w-4 h-4" />
-                  Register for “The Family Squares” — 7 PM PT
+                  Register for “The Family Squares” — 7:00 PM Pacific
                 </Link>
               </div>
             </div>
@@ -461,7 +461,7 @@ const RoadmapTreatment = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7 PM PT
+                Weekly Support Group — Monday 7:00 PM Pacific
               </Link>
               <a
                 href="tel:4582988008"

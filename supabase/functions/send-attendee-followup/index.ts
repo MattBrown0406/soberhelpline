@@ -60,13 +60,13 @@ Deno.serve(async (req) => {
     <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past “The Family Squares” calls anytime</li>
   </ul>
   
-  <p style="line-height: 1.7; font-size: 15px;">All of this for just <strong>$10/month</strong> — less than the cost of a single cup of coffee a week. And with the $25 coaching discount, your membership pays for itself with just one session.</p>
+  <p style="line-height: 1.7; font-size: 15px;">All of this for just <strong>$9.99/month</strong> — less than the cost of a single cup of coffee a week. And with the $25 coaching discount, your membership pays for itself with just one session.</p>
   
   <div style="text-align: center; margin: 32px 0;">
     <a href="https://soberhelpline.com/family-membership" style="background-color: #16a34a; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block;">Become a Member Today</a>
   </div>
   
-  <p style="line-height: 1.7; font-size: 15px;">We also hope to see you again next Monday at 7:00 PM PST. You're always welcome, member or not.</p>
+  <p style="line-height: 1.7; font-size: 15px;">We also hope to see you again next Monday at 7:00 PM Pacific. You're always welcome, member or not.</p>
   
   <p style="line-height: 1.7; font-size: 15px;">With care,<br><strong>Matt Brown</strong><br>Sober Helpline<br><a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a></p>
   

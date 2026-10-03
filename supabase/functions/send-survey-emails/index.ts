@@ -137,7 +137,7 @@ Deno.serve(async (req) => {
                 <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
                 <p style="font-size: 12px; color: #9ca3af; text-align: center;">
                   SoberHelpline.com — “The Family Squares”<br>
-                  Every Monday at 7:00 PM PST
+                  Every Monday at 7:00 PM Pacific
                 </p>
               </div>
             `,

@@ -15,7 +15,7 @@ const faqItems = [
   {
     question: "Are there free family support groups for addiction in Texas?",
     answer:
-      "Yes. Texas has Al-Anon and Nar-Anon meetings across the state, including Houston, Dallas, Austin, San Antonio, Fort Worth, and hundreds of smaller communities. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free “The Family Squares” call every week at 7PM PST — led by a certified interventionist — open to any Texas family, no sign-up fees or treatment center referrals.",
+      "Yes. Texas has Al-Anon and Nar-Anon meetings across the state, including Houston, Dallas, Austin, San Antonio, Fort Worth, and hundreds of smaller communities. SMART Recovery Family & Friends offers science-based meetings online and in-person. Sober Helpline also offers a free “The Family Squares” call every week at 7:00 PM Pacific — led by a certified interventionist — open to any Texas family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What makes Texas's addiction crisis different from other states?",
@@ -30,7 +30,7 @@ const faqItems = [
   {
     question: "How do I find addiction treatment for my loved one in Texas?",
     answer:
-      "Start with Texas Health and Human Services (hhs.texas.gov) for state-funded treatment and Medicaid options. The Texas Crisis Line (1-800-273-8255) provides 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can also connect you with Texas-specific resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
+      "Start with Texas Health and Human Services (hhs.texas.gov) for state-funded treatment and Medicaid options. The 988 Suicide & Crisis Lifeline (call or text 988) provides 24/7 crisis support and referrals. SAMHSA's national helpline (1-800-662-4357) can also connect you with Texas-specific resources. Sober Helpline's free Treatment Finder at soberhelpline.com is a vetted directory of ethical providers with no referral fees.",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function TexasFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7PM PST
+                  Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -173,7 +173,7 @@ export default function TexasFamilySupport() {
                 <h2 className="text-2xl font-bold text-logo-blue mb-4">Texas Crisis Resources</h2>
                 <div className="space-y-3">
                   {[
-                    { name: "Texas Crisis Line", detail: "1-800-273-8255 — 24/7 statewide crisis support" },
+                    { name: "988 Suicide & Crisis Lifeline", detail: "Call or text 988 — 24/7 crisis support" },
                     { name: "Al-Anon Texas", detail: "Free family support groups statewide" },
                     { name: "Nar-Anon Texas", detail: "Families of narcotics users — statewide meetings" },
                     { name: "Texas HHSC", detail: "hhs.texas.gov — State-funded treatment and Medicaid referrals" },
@@ -228,7 +228,7 @@ export default function TexasFamilySupport() {
                   Free “The Family Squares” Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Every Monday at 7PM PST, Texas families join a free Zoom call led by Matt Brown —
+                  Every Monday at 7:00 PM Pacific, Texas families join a free Zoom call led by Matt Brown —
                   a certified interventionist with 20+ years of experience. Ask real questions, get real answers.
                   No treatment center referrals, no sales pitch.
                 </p>

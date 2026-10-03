@@ -268,7 +268,7 @@ const OnboardingQuiz = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
       <SEOHead
-        title="Personalized Onboarding Quiz | SoberHelpline"
+        title="Personalized Onboarding Quiz | Sober Helpline"
         description="Take our 2-minute quiz to get a personalized path of resources tailored to your unique situation."
       />
 

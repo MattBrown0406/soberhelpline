@@ -436,7 +436,7 @@ const RoadmapEarlyRecovery = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7 PM PT
+                Weekly Support Group — Monday 7:00 PM Pacific
               </Link>
               <p className="text-xs text-muted-foreground italic pl-6">
                 You need this more now than you did during crisis.

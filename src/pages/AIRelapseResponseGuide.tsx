@@ -9,7 +9,6 @@ import AIDisclaimerCard from "@/components/AIDisclaimerCard";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 
 const masterPrompt = `Relapse Response Coach — Master Prompt
 
@@ -732,11 +731,6 @@ const AIRelapseResponseGuide = () => {
             </Card>
           </section>
         
-
-          {/* FamilyBridge CTA */}
-          <section className="mt-8 mb-8">
-            <FamilyBridgeCTA variant="coaching" />
-          </section>
 
           <RelatedResources currentPath="/ai-relapse-response-guide" />
 </main>

@@ -49,7 +49,7 @@ const weekItems: ChecklistItem[] = [
     id: "join-zoom",
     title: "Join the free “The Family Squares” Zoom call",
     description:
-      "Every Monday at 7 PM PST, families just like yours come together for a free, live support call. You'll hear from others who've been exactly where you are — and from professionals who can help. You don't have to talk. Just showing up is a step. You don't need proof to join. You just need a question.",
+      "Every Monday at 7:00 PM Pacific, families just like yours come together for a free, live support call. You'll hear from others who've been exactly where you are — and from professionals who can help. You don't have to talk. Just showing up is a step. You don't need proof to join. You just need a question.",
     icon: Video,
     linkText: "Register for Monday Zoom",
     linkUrl: "/monday-zoom-registration",
@@ -353,7 +353,7 @@ const RoadmapSuspicion = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7 PM PT
+                Weekly Support Group — Monday 7:00 PM Pacific
               </Link>
               <a
                 href="tel:4582988008"
