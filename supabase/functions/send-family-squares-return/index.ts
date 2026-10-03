@@ -54,7 +54,7 @@ function buildEmail(firstName: string, joinUrl: string, externalZoomLink: string
   </div>
   <p>I'm really looking forward to a great meeting on Monday. Bring your questions, bring your story, or just come to listen — whatever you need.</p>
   <p>See you Monday. 💙</p>
-  <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
+  <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(458) 298-8008</p>
   <hr style="border:none;border-top:1px solid #e5e7eb;margin:30px 0;" />
   <p style="color:#9ca3af;font-size:12px;text-align:center;">Sober Helpline — Supporting Families Through Recovery<br/><a href="https://soberhelpline.com" style="color:#9ca3af;">soberhelpline.com</a></p>
 </div>`;

@@ -78,7 +78,7 @@ function buildHtml(safeName: string): string {
       <p style="margin-top: 24px;">— Matt</p>
 
       <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-        Questions? Call us at <strong>(541) 241-5886</strong>.
+        Questions? Call us at <strong>(458) 298-8008</strong>.
       </p>
       <p style="color: #6b7280; font-size: 12px;">
         Sober Helpline — Supporting Families Through Recovery

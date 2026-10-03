@@ -17084,7 +17084,7 @@ Clarity begins when families stop trying to control the situation and start lear
 
 Support, education, and perspective are not signs of giving up—they are signs of taking the situation seriously.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 59,
@@ -17133,7 +17133,7 @@ Families who feel supported make better decisions. They set clearer boundaries. 
 
 If your family feels unsettled, divided, or worn down, early intervention can help now. Consider joining the Sober Helpline family membership to access deeper education and ongoing support. You don't need readiness to deserve help.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 58,
@@ -17178,7 +17178,7 @@ Membership is not about convincing someone else to change. It is about empowerin
 
 If your family feels unsettled or divided, early intervention can help — even if your loved one is not ready. Consider joining the Sober Helpline family membership to access deeper education and ongoing support. Strong families create better outcomes at every stage.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 57,
@@ -17231,7 +17231,7 @@ Early intervention is not premature. It is preventative care for families under 
 
 If your family feels unsettled, divided, or exhausted, consider joining the Sober Helpline family membership. The more education and support you have now, the better equipped your family will be—no matter what comes next.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 56,
@@ -17284,7 +17284,7 @@ Early intervention is not an overreaction. It is an investment in family stabili
 
 If your family is struggling, even quietly, consider joining the Sober Helpline family membership. The more support and education you have now, the stronger and more united your family will be—no matter what comes next.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 55,
@@ -17337,7 +17337,7 @@ Membership is not about forcing outcomes. It is about increasing support, clarit
 
 If your family is struggling—even quietly—early intervention can make a meaningful difference. Consider joining the Sober Helpline family membership to access deeper education and ongoing support. You don't need a crisis to deserve help.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 54,
@@ -17388,7 +17388,7 @@ Joining the family membership does not mean committing to a specific outcome. It
 
 Early intervention is not premature. It is preventative care for families under strain. If your family is struggling, even quietly, consider joining the Sober Helpline family membership to access deeper education and ongoing support.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 53,
@@ -17441,7 +17441,7 @@ Early intervention is not premature. It is preventative care for families under 
 
 If your family is struggling, even quietly, consider joining the Sober Helpline family membership. The more support and education you have now, the less damage you'll have to repair later.
 
-To learn more, call the Sober Helpline at (866) 961-3255 for confidential guidance and support.`
+To learn more, call the Sober Helpline at (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 52,
@@ -17482,7 +17482,7 @@ Support for children does not require vilifying the parent who drinks. It requir
 
 Alcoholism affects children whether it is named or not. Addressing it early, even imperfectly, gives children something invaluable: the sense that their experience matters.
 
-If you're concerned about how alcoholism may be affecting your family, the Sober Helpline is here to help. Call (866) 961-3255 for confidential guidance and support.`
+If you're concerned about how alcoholism may be affecting your family, the Sober Helpline is here to help. Call (458) 298-8008 for confidential guidance and support.`
   },
   {
     id: 51,
@@ -17533,7 +17533,7 @@ When families are supported, grounded, and informed, they make better decisions.
 
 Help for families is not secondary. It is essential.
 
-If you're waiting for the "right time" to seek support, the right time is now. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance—whether or not your loved one is ready for treatment.`
+If you're waiting for the "right time" to seek support, the right time is now. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance—whether or not your loved one is ready for treatment.`
   },
   {
     id: 50,
@@ -17574,7 +17574,7 @@ It's important for families to understand that caution is not cruelty. Protectin
 
 Families are allowed to move at their own pace. Healing relationships after relapse is a process—not a demand.
 
-If you're navigating trust issues after a loved one's relapse, you don't have to figure it out alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you're navigating trust issues after a loved one's relapse, you don't have to figure it out alone. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 49,
@@ -17619,7 +17619,7 @@ Addressing anger does not mean acting impulsively or cruelly. It means listening
 
 Families are allowed to feel angry and still be loving. Suppressing anger in the name of compassion often prolongs dysfunction. Acknowledging it honestly is often the first step toward healthier boundaries and clearer communication.
 
-If you're struggling with difficult emotions related to a loved one's addiction, you don't have to navigate them alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you're struggling with difficult emotions related to a loved one's addiction, you don't have to navigate them alone. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 48,
@@ -17656,7 +17656,7 @@ Alcohol doesn't have to cause public disasters to damage relationships. Emotiona
 
 Families are allowed to trust what they're experiencing. If alcohol repeatedly interferes with connection, honesty, and safety, it deserves attention—regardless of appearances.
 
-If you're concerned about a loved one's drinking, you don't have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you're concerned about a loved one's drinking, you don't have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 47,
@@ -17703,7 +17703,7 @@ Sober Helpline is not about rushing families toward answers. It is about helping
 
 Education is not delay. It is preparation.
 
-If you're concerned about a loved one, you don't have to wait for certainty or crisis. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you're concerned about a loved one, you don't have to wait for certainty or crisis. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 46,
@@ -17744,7 +17744,7 @@ When families allow themselves to name what they've lost—even temporarily—th
 
 Grief doesn't mean hope is gone. It means reality has already shifted. Families deserve support not only after addiction causes visible damage, but while they are quietly carrying the weight of what has already changed.
 
-If you are struggling with the emotional weight of a loved one's addiction, you do not have to carry it alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are struggling with the emotional weight of a loved one's addiction, you do not have to carry it alone. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 45,
@@ -17785,7 +17785,7 @@ Families who educate themselves early are better equipped to set boundaries, avo
 
 Clarity doesn't usually arrive all at once. It builds gradually as families understand what they're seeing. Sober Helpline helps families think clearly before fear takes over—and before options begin to narrow.
 
-If you're concerned about a loved one, you don't have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you're concerned about a loved one, you don't have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 44,
@@ -17826,7 +17826,7 @@ Families deserve support regardless of whether their loved one changes. Waiting 
 
 Often, the first meaningful shift in an addicted family system occurs not when the addicted person changes, but when the family stops disappearing while they wait.
 
-If you are struggling while waiting for a loved one to change, you do not have to wait alone. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are struggling while waiting for a loved one to change, you do not have to wait alone. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 43,
@@ -17871,7 +17871,7 @@ Perhaps most importantly, education helps families understand that they are not 
 
 Addiction is easier to address when options are still open. Sober Helpline is there to help families think clearly before those options begin to narrow.
 
-If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 42,
@@ -17916,7 +17916,7 @@ Speaking to someone who understands addiction allows families to slow down emoti
 
 You do not need certainty to ask questions. You do not need agreement from your loved one to seek education. If something feels off, that intuition matters. A sober helpline is not a commitment to action. It is a commitment to clarity.
 
-If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 41,
@@ -17993,7 +17993,7 @@ You do not need proof. You do not need agreement. You do not need disaster.
 
 If you're asking questions, something matters. A sober helpline exists to help families think clearly—before fear takes over.
 
-If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 40,
@@ -18075,7 +18075,7 @@ While no family can undo the past, many can change the future. Tragedies like th
 
 If you are worried—even if you can't fully explain why—that concern matters. Reaching out early is not pessimism. It is protection.
 
-If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (866) 961-3255 for compassionate, confidential guidance.`
+If you are concerned about a loved one, you do not have to wait for certainty. Call the Sober Helpline at (458) 298-8008 for compassionate, confidential guidance.`
   },
   {
     id: 39,
@@ -18134,7 +18134,7 @@ Recovery is not just about stopping substances. It is about restoring emotional 
 
 Families who reclaim calm, boundaries, and self-care often find they are no longer consumed by addiction—even while loving someone who struggles.
 
-If your family is caught in cycles of anxiety and addiction, you do not have to navigate this alone. Call the Sober Helpline at (866) 961-3255 for compassionate support.`
+If your family is caught in cycles of anxiety and addiction, you do not have to navigate this alone. Call the Sober Helpline at (458) 298-8008 for compassionate support.`
   },
   {
     id: 38,
@@ -18298,7 +18298,7 @@ When emotional pain is no longer overwhelming, people are far more capable of ch
 
 **Take the Next Step**
 
-If you or a loved one is struggling with both depression and addiction, professional guidance can help. Call the Sober Helpline at [LINK:844-762-3734:tel:844-762-3734] for free, confidential support in finding appropriate treatment options.`
+If you or a loved one is struggling with both depression and addiction, professional guidance can help. Call the Sober Helpline at [LINK:(458) 298-8008:tel:+14582988008] for free, confidential support in finding appropriate treatment options.`
   },
   {
     title: "Loving Someone With Addiction Without Losing Your Marriage or Family",
@@ -18372,7 +18372,7 @@ You can care deeply without letting addiction consume your family.
 
 **Take the Next Step**
 
-If addiction is affecting your marriage or family, you don't have to navigate it alone. Call the Sober Helpline at [LINK:844-762-3734:tel:844-762-3734] for free, confidential guidance.
+If addiction is affecting your marriage or family, you don't have to navigate it alone. Call the Sober Helpline at [LINK:(458) 298-8008:tel:+14582988008] for free, confidential guidance.
 
 Protecting your family is not giving up—it's the most loving thing you can do.`
   },

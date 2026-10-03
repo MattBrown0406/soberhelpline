@@ -651,7 +651,8 @@ imports it must be redeployed):
 - `deliver-app-payment-callback`
 
 Also redeploy these email/Zoom functions (copy only: "7:00 PM Pacific", the
-$9.99/month price, the 988 crisis line, FamilyBridge promotion removed):
+$9.99/month price, the 988 crisis line, FamilyBridge promotion removed, phone
+number (458) 298-8008):
 
 - `public-register-monday-zoom`
 - `replace-tonight-zoom-meeting`
@@ -667,6 +668,14 @@ $9.99/month price, the 988 crisis line, FamilyBridge promotion removed):
 - `send-zoom-reengagement`
 - `send-zoom-starting-soon`
 - `zoom-webhook`
+
+And these, which now show the one Sober Helpline phone number, (458) 298-8008:
+
+- `process-consultation-booking`
+- `send-app-download-blast`
+- `send-family-squares-return`
+- `send-monthly-provider-analytics`
+- `send-price-increase-outreach`
 
 Delete this deployed function from the project (its code and config entry were
 removed; it was public and held the app's service-role key):

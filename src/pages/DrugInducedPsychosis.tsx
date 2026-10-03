@@ -463,7 +463,7 @@ const DrugInducedPsychosis = () => {
           {/* Footer for print */}
           <footer className="mt-12 pt-6 border-t-2 border-primary print:border-black text-center">
             <p className="text-muted-foreground">
-              <strong>Sober Helpline</strong> — 24/7 Support: 1-844-962-3744
+              <strong>Sober Helpline</strong> — 24/7 Support: (458) 298-8008
             </p>
             <p className="text-sm text-muted-foreground mt-2">
               www.soberhelpline.com

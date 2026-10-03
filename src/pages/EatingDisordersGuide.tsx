@@ -439,7 +439,7 @@ const EatingDisordersGuide = () => {
               "You didn't cause it. You can't control it. You can't cure it. But you can support recovery."
             </p>
             <p className="text-center text-sm text-muted-foreground mt-4">
-              Sober Helpline | soberhelpline.com | 1-844-962-3744
+              Sober Helpline | soberhelpline.com | (458) 298-8008
             </p>
           </section>
         </div>

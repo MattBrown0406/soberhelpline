@@ -86,7 +86,7 @@ function buildApologyTrialEmail(firstName: string, email: string): string {
 
   <p>We're here for you. 💙</p>
 
-  <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
+  <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(458) 298-8008</p>
 
   <hr style="border:none;border-top:1px solid #e5e7eb;margin:30px 0;" />
   <p style="color:#9ca3af;font-size:12px;text-align:center;">
@@ -160,7 +160,7 @@ serve(async (req: Request) => {
             ${externalZoomLink ? `<div style="margin-top:12px"><a href="${escapeHtml(externalZoomLink)}" style="display: inline-block; padding: 12px 24px; background-color: #6b7280; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">Join via Zoom App</a><p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">Meeting ID: ${escapeHtml(meetingId)} | Passcode: ${escapeHtml(passcode)}</p></div>` : ''}
           </div>
           <p>I hope to see you tonight.</p>
-          <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(541) 241-5886</p>
+          <p>Warmly,<br/><strong>Matt</strong><br/>Sober Helpline<br/>(458) 298-8008</p>
           <p style="color: #6b7280; font-size: 12px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">Sober Helpline — Supporting Families Through Recovery</p>
         </div>`;
 

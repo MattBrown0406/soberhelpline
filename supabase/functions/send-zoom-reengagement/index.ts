@@ -160,7 +160,7 @@ serve(async (req: Request) => {
           <p style="margin-top: 8px;">— Matt &amp; the Sober Helpline Team</p>
 
           <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 15px;">
-            If you have any questions, call us at <strong>(541) 241-5886</strong>.
+            If you have any questions, call us at <strong>(458) 298-8008</strong>.
           </p>
           <p style="color: #6b7280; font-size: 12px;">
             Sober Helpline — Supporting Families Through Recovery
