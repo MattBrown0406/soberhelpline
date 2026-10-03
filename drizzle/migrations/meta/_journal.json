@@ -8,6 +8,20 @@
       "when": 1791003658019,
       "tag": "0000_membership_app_signin_coaching_member_price",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791043235963,
+      "tag": "0001_staged_automation_function_auth",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791043251148,
+      "tag": "0002_monday_call_app_rsvps",
+      "breakpoints": true
     }
   ]
 }
