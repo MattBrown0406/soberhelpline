@@ -1,6 +1,9 @@
-// Creates a PayPal order server-side for the $150 coaching session.
-// Amount + currency are pinned server-side. Idempotent via PayPal-Request-Id derived from the nonce.
+// Creates a PayPal order server-side for the coaching session.
+// Amount + currency are pinned server-side from the stored order row, which was
+// created from the app-signed token ($150, or $125 member price). Idempotent via
+// PayPal-Request-Id derived from the nonce.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { centsToPayPalValue, isAllowedCoachingCents } from "../_shared/coachingToken.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -82,6 +85,12 @@ Deno.serve(async (req) => {
       status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+  if (!isAllowedCoachingCents(row.amount_cents) || row.currency !== "USD") {
+    console.log("coaching-order-create: unexpected stored amount/currency");
+    return new Response(JSON.stringify({ ok: false, code: "invalid_amount" }), {
+      status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
 
   // Idempotency: reuse existing PayPal order if we already made one for this session.
   if (row.paypal_order_id) {
@@ -109,7 +118,7 @@ Deno.serve(async (req) => {
         reference_id: row.id,
         custom_id: row.id,           // maps back to our internal session
         description: "Coaching session",  // generic; no PII
-        amount: { currency_code: "USD", value: "150.00" },
+        amount: { currency_code: "USD", value: centsToPayPalValue(row.amount_cents) },
       },
     ],
     application_context: {

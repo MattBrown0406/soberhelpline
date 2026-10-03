@@ -13,14 +13,12 @@ import { ReportContentDialog } from "@/components/forum/ReportContentDialog";
 import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
 import { PrivateMessagesDialog } from "@/components/forum/PrivateMessagesDialog";
 import { NewPostDialog } from "@/components/forum/NewPostDialog";
-import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 import { ForumSearch } from "@/components/forum/ForumSearch";
 import { DailyPrompt } from "@/components/forum/DailyPrompt";
 import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
 import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { toast } from "sonner";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
-import FamilyBridgeCTA from "@/components/FamilyBridgeCTA";
 import MemberZoomBanner from "@/components/MemberZoomBanner";
 
 function relativeTime(dateStr: string): string {
@@ -168,21 +166,14 @@ export default function FamilyForum() {
       }
 
       try {
-        // Check membership
-        const { data: subData, error: subError } = await supabase
-          .from('provider_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
+        // Check membership (same rule the database uses for forum access)
+        const { data: isMemberData, error: subError } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
+        const isMember = !subError && isMemberData === true;
 
         if (subError) {
           console.error('Error checking membership:', subError);
-          setHasMembership(false);
-        } else {
-          setHasMembership(subData && subData.length > 0);
         }
+        setHasMembership(isMember);
 
         // Check code of conduct agreement
         const { data: profileData, error: profileError } = await supabase
@@ -196,7 +187,7 @@ export default function FamilyForum() {
         } else {
           const agreed = profileData?.agreed_to_code_of_conduct === true;
           setHasAgreedToCodeOfConduct(agreed);
-          if (!agreed && subData && subData.length > 0) {
+          if (!agreed && isMember) {
             setShowCodeOfConduct(true);
           }
         }
@@ -261,7 +252,7 @@ export default function FamilyForum() {
   // Fetch recent posts
   useEffect(() => {
     const fetchRecentPosts = async () => {
-      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+      if (!hasMembership) return;
 
       try {
         const { data: posts, error } = await supabase
@@ -299,7 +290,7 @@ export default function FamilyForum() {
   // Fetch topic post counts
   useEffect(() => {
     const fetchTopicStats = async () => {
-      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+      if (!hasMembership) return;
       try {
         const { data, error } = await supabase
           .from('forum_posts')
@@ -330,7 +321,7 @@ export default function FamilyForum() {
   // Fetch total members count and track online presence
   useEffect(() => {
     const fetchMemberCount = async () => {
-      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+      if (!hasMembership) return;
 
       try {
         const { count, error } = await supabase
@@ -413,7 +404,7 @@ export default function FamilyForum() {
     );
   }
 
-  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
+  if (!hasMembership) {
     return (
       <>
         <SEOHead
@@ -433,7 +424,7 @@ export default function FamilyForum() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to connect with other families in our discussion forum.
+                  Join our family support membership for just $9.99/month to connect with other families in our discussion forum.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">
@@ -675,9 +666,6 @@ export default function FamilyForum() {
                     )}
                   </CardContent>
                 </Card>
-
-                {/* FamilyBridge CTA */}
-                <FamilyBridgeCTA variant="forum" className="mb-4" />
 
                 {/* Forum Guidelines */}
                 <Card className="bg-primary/5 border-primary/20">

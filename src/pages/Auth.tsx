@@ -10,7 +10,6 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
-import FamilyBridgeBanner from "@/components/FamilyBridgeBanner";
 
 const signupSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -44,6 +43,14 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  // Arriving from a "reset password" email: let the user choose a new password.
+  // (Accounts created by signing in from the Sober Helpline app have no website
+  // password until they set one here.)
+  const [recoveryMode, setRecoveryMode] = useState(
+    () => typeof window !== "undefined" && /type=recovery/.test(window.location.hash)
+  );
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const redirectPath = useMemo(
     () => getSafeRedirectPath(searchParams.get("redirect")),
     [searchParams]
@@ -65,14 +72,62 @@ const Auth = () => {
   });
 
   useEffect(() => {
-    if (!redirectPath) return;
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") setRecoveryMode(true);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!redirectPath || recoveryMode) return;
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         navigate(redirectPath, { replace: true });
       }
     });
-  }, [navigate, redirectPath]);
+  }, [navigate, redirectPath, recoveryMode]);
+
+  const handleSetNewPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword.length < 6) {
+      toast({
+        title: "Password too short",
+        description: "Please use at least 6 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast({
+        title: "Passwords don't match",
+        description: "Please type the same password twice.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      toast({
+        title: "Password updated",
+        description: "You can now log in with your new password.",
+      });
+      setRecoveryMode(false);
+      setNewPassword("");
+      setConfirmPassword("");
+      navigate(redirectPath || "/", { replace: true });
+    } catch {
+      toast({
+        title: "Error",
+        description: "Couldn't update your password. Please request a new reset link and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -203,19 +258,20 @@ const Auth = () => {
           description: "You have successfully logged in.",
         });
         
-        // Check if user has an active family membership (subscription without provider_submission_id)
-        const { data: subscription } = await supabase
+        // Check if user has an active family membership (subscription without provider_submission_id).
+        // limit(1): a member can have more than one row (e.g. an app row and a PayPal row).
+        const { data: subscriptions } = await supabase
           .from('provider_subscriptions')
-          .select('provider_submission_id')
+          .select('id')
           .eq('user_id', authData.user?.id)
           .eq('status', 'active')
           .is('provider_submission_id', null)
-          .maybeSingle();
-        
+          .limit(1);
+
         // Preserve the page the user was trying to reach, especially provider applications.
         if (redirectPath) {
           navigate(redirectPath, { replace: true });
-        } else if (subscription) {
+        } else if ((subscriptions?.length ?? 0) > 0) {
           navigate("/family-education");
         } else {
           navigate("/");
@@ -253,6 +309,46 @@ const Auth = () => {
           <img src={logo} alt="Sober Helpline" className="h-24 w-auto" />
         </div>
 
+        {recoveryMode ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Set a new password</CardTitle>
+              <CardDescription>Choose the password you'll use to log in to the website.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSetNewPassword} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="new-password">New password</Label>
+                  <Input
+                    id="new-password"
+                    name="new-password"
+                    type="password"
+                    autoComplete="new-password"
+                    placeholder="At least 6 characters"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="confirm-password">Confirm new password</Label>
+                  <Input
+                    id="confirm-password"
+                    name="confirm-password"
+                    type="password"
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Saving..." : "Save new password"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        ) : (
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
@@ -334,6 +430,10 @@ const Auth = () => {
                     <Button type="submit" className="w-full" disabled={isLoading}>
                       {isLoading ? "Logging in..." : "Log In"}
                     </Button>
+                    <p className="text-xs text-muted-foreground text-center">
+                      Joined through the Sober Helpline app? Open this page from the app to be signed in
+                      automatically, or use “Forgot password?” to set a website password.
+                    </p>
                   </form>
                 )}
               </CardContent>
@@ -419,6 +519,7 @@ const Auth = () => {
             </Card>
           </TabsContent>
         </Tabs>
+        )}
 
         <div className="mt-4 text-center">
           <Button variant="ghost" onClick={() => navigate("/")} className="text-sm">
@@ -426,10 +527,6 @@ const Auth = () => {
           </Button>
         </div>
 
-        {/* Family Bridge Banner */}
-        <div className="mt-6">
-          <FamilyBridgeBanner />
-        </div>
       </div>
     </div>
     </>

@@ -2,16 +2,34 @@
 // Token format (compact, JWT-like):
 //   base64url(headerJson).base64url(payloadJson).base64url(hmacSha256(header + "." + payload, SECRET))
 //
-// Payload shape (all fields required):
+// Payload shape (all fields required unless noted):
 //   {
 //     bref: string,        // app booking reference
 //     aref: string,        // opaque app account reference
-//     cents: 15000,        // MUST equal 15000
+//     cents: 15000|12500,  // 15000 = standard price, 12500 = member price ($25 off)
 //     cur: "USD",          // MUST equal "USD"
 //     svc: "plan_review_coaching",
 //     nonce: string,       // unique per checkout, 16+ chars
-//     exp: number          // unix seconds
+//     exp: number,         // unix seconds
+//     member?: true        // optional; the app sets it when cents = 12500
 //   }
+//
+// The token's `cents` is the ONLY source of the amount: every function charges,
+// verifies and reports exactly that value, never a browser-supplied amount.
+
+/** Standard (non-member) coaching price in cents. */
+export const COACHING_STANDARD_CENTS = 15000;
+/** Member coaching price in cents ($25 off). */
+export const COACHING_MEMBER_CENTS = 12500;
+
+export function isAllowedCoachingCents(cents: unknown): cents is number {
+  return cents === COACHING_STANDARD_CENTS || cents === COACHING_MEMBER_CENTS;
+}
+
+/** 12500 -> "125.00" (PayPal amount.value format). */
+export function centsToPayPalValue(cents: number): string {
+  return (cents / 100).toFixed(2);
+}
 
 export interface CoachingTokenPayload {
   bref: string;
@@ -21,6 +39,7 @@ export interface CoachingTokenPayload {
   svc: string;
   nonce: string;
   exp: number;
+  member?: boolean;
 }
 
 function b64urlDecode(input: string): Uint8Array {
@@ -88,11 +107,15 @@ export async function verifyCoachingToken(
   } catch {
     return { ok: false, reason: "invalid_payload" };
   }
+  if (!payload || typeof payload !== "object") {
+    return { ok: false, reason: "invalid_payload" };
+  }
 
   if (
     typeof payload.bref !== "string" || !payload.bref ||
     typeof payload.aref !== "string" || !payload.aref ||
-    payload.cents !== 15000 ||
+    !isAllowedCoachingCents(payload.cents) ||
+    (payload.member !== undefined && typeof payload.member !== "boolean") ||
     payload.cur !== "USD" ||
     payload.svc !== "plan_review_coaching" ||
     typeof payload.nonce !== "string" || payload.nonce.length < 16 ||

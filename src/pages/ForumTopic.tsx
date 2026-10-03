@@ -157,20 +157,14 @@ export default function ForumTopic() {
       }
 
       try {
-        // Check membership
-        const { data: subData, error: subError } = await supabase
-          .from('provider_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
+        // Check membership (same rule the database uses for forum access)
+        const { data: isMember, error: subError } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
 
         if (subError) {
           console.error('Error checking membership:', subError);
           setHasMembership(false);
         } else {
-          setHasMembership(subData && subData.length > 0);
+          setHasMembership(isMember === true);
         }
 
         // Check if user can moderate

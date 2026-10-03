@@ -10,6 +10,39 @@ const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
   ? 'https://api-m.sandbox.paypal.com'
   : 'https://api-m.paypal.com';
 
+type BillingCycle = 'monthly' | 'annual';
+
+// Prices are decided HERE, never by the browser (any `amount` sent is ignored).
+// Family membership = the app's Essential tier on the web: $9.99/month or $100/year.
+const FAMILY_PRICE_CENTS: Record<BillingCycle, number> = { monthly: 999, annual: 10000 };
+
+// FAMILY6 promo: free family membership that ends after this many months.
+const FAMILY6_MONTHS = 6;
+
+// Provider listing prices by category (from the last provider checkout UI,
+// InlinePayPalCheckout). Provider listings are currently free and no page sells
+// them, so this only keeps the endpoint from trusting a browser-supplied amount.
+function providerPriceCents(category: string | null | undefined): Record<BillingCycle, number> {
+  switch (category) {
+    case 'Inpatient Treatment':
+    case 'Outpatient Treatment':
+    case 'Medical Detox':
+    case 'Sober Living':
+      return { monthly: 10000, annual: 100000 };
+    default:
+      return { monthly: 2500, annual: 25000 };
+  }
+}
+
+// Price-reducing codes (applied to the server-side base price).
+const PRICE_DISCOUNT_CODES: Record<string, { type: 'percent' | 'fixed'; value: number }> = {
+  WELCOME50: { type: 'percent', value: 50 },
+  SAVE25: { type: 'percent', value: 25 },
+  SAVE100: { type: 'fixed', value: 100 },
+};
+
+const centsToDollars = (cents: number) => (cents / 100).toFixed(2);
+
 async function sendAdminNotification(subject: string, htmlContent: string) {
   const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
   if (!SENDGRID_API_KEY) {
@@ -304,100 +337,149 @@ Deno.serve(async (req) => {
     );
 
     const { action, ...params } = await req.json();
-    console.log('PayPal action:', action, 'params:', JSON.stringify(params));
+    console.log('PayPal action:', action);
 
     const accessToken = await getPayPalAccessToken();
 
     switch (action) {
       case 'create-subscription': {
-        const { planType, amount, providerSubmissionId, discountCode, returnUrl, cancelUrl } = params;
-        
+        // The browser may still send `amount`; it is ignored. Prices are computed here.
+        const { planType, providerSubmissionId, discountCode, returnUrl, cancelUrl } = params;
+
         // Use authenticated user ID from token instead of request body
         const userId = authenticatedUserId;
-        
-        if (!planType || !amount || !returnUrl || !cancelUrl) {
+
+        if (!planType || !returnUrl || !cancelUrl) {
           throw new Error('Missing required parameters');
         }
-
-        // Apply discount if valid code provided
-        let finalAmount = parseFloat(amount);
-        if (!Number.isFinite(finalAmount) || finalAmount <= 0) {
-          throw new Error('Invalid subscription amount');
+        if (planType !== 'monthly' && planType !== 'annual') {
+          throw new Error('Invalid plan type');
         }
-        let appliedDiscount = null;
+        const billingCycle: BillingCycle = planType;
+        if (providerSubmissionId !== undefined && providerSubmissionId !== null && typeof providerSubmissionId !== 'string') {
+          throw new Error('Invalid provider listing');
+        }
+        const code = typeof discountCode === 'string' ? discountCode.trim().toUpperCase() : '';
+        const isFamilyMembership = !providerSubmissionId;
+
+        // --- Server-side base price --------------------------------------
+        let baseCents: number;
+        if (isFamilyMembership) {
+          baseCents = FAMILY_PRICE_CENTS[billingCycle];
+        } else {
+          // Provider listing: the caller must own the submission; price by category.
+          const { data: submission, error: submissionError } = await supabaseClient
+            .from('provider_submissions')
+            .select('id, category, submitted_by')
+            .eq('id', providerSubmissionId)
+            .maybeSingle();
+          if (submissionError || !submission) {
+            throw new Error('Provider listing not found');
+          }
+          if (submission.submitted_by !== userId) {
+            const { data: isAdmin } = await supabaseClient.rpc('has_role', {
+              _user_id: userId,
+              _role: 'admin',
+            });
+            if (!isAdmin) {
+              return new Response(
+                JSON.stringify({ error: 'Unauthorized - you do not own this provider listing' }),
+                { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+              );
+            }
+          }
+          baseCents = providerPriceCents(submission.category)[billingCycle];
+        }
+
+        // --- Discount codes -----------------------------------------------
+        let finalCents = baseCents;
+        let appliedDiscount: string | null = null;
         let bypassPayment = false;
 
-        // Check for FREELIST code - bypasses payment entirely (for providers)
-        if (discountCode && discountCode.toUpperCase() === 'FREELIST') {
+        // FREELIST - free provider listing (bypasses payment). Provider listings ONLY:
+        // it must never create an open-ended free family membership.
+        if (code === 'FREELIST') {
+          if (isFamilyMembership) {
+            throw new Error('This code is only valid for provider listings.');
+          }
           bypassPayment = true;
           appliedDiscount = 'FREELIST';
-          finalAmount = 0;
+          finalCents = 0;
           console.log('Applied FREELIST: Bypassing payment, free listing');
         }
-        // Check for FAMILY6 code - 6 months free for family members (bypasses payment, limited uses)
-        else if (discountCode && discountCode.toUpperCase() === 'FAMILY6') {
+        // FAMILY6 - 6 months free for family members (bypasses payment, limited uses).
+        // Family memberships only, once per account, and the membership ENDS after 6 months.
+        else if (code === 'FAMILY6') {
+          if (!isFamilyMembership) {
+            throw new Error('This code is only valid for family memberships.');
+          }
+          const { data: priorFamily6, error: priorError } = await supabaseClient
+            .from('provider_subscriptions')
+            .select('id')
+            .eq('user_id', userId)
+            .like('paypal_subscription_id', 'FAMILY6-%')
+            .limit(1);
+          if (priorError) {
+            throw new Error('Failed to validate promo code');
+          }
+          if ((priorFamily6 ?? []).length > 0) {
+            throw new Error('FAMILY6 has already been used on this account.');
+          }
+
           // Check if promo code has remaining uses
           const { data: promoResult, error: promoError } = await supabaseClient
             .rpc('use_promo_code', { promo_code: 'FAMILY6' });
-          
+
           if (promoError) {
             console.error('Promo code error:', promoError);
             throw new Error('Failed to validate promo code');
           }
-          
+
           if (!promoResult?.success) {
             throw new Error(promoResult?.error || 'Promo code is no longer available');
           }
-          
+
           bypassPayment = true;
           appliedDiscount = 'FAMILY6';
-          finalAmount = 0;
+          finalCents = 0;
           console.log('Applied FAMILY6: Bypassing payment, 6 months free family membership. Remaining:', promoResult.remaining);
         }
-        // Check for FREE6 code - 6 months free trial (for providers)
-        else if (discountCode && discountCode.toUpperCase() === 'FREE6') {
+        // FREE6 - 6 months free trial, then the regular price
+        else if (code === 'FREE6') {
           appliedDiscount = 'FREE6';
           console.log('Applied FREE6: 6 months free trial');
         }
-        // Check for HELPLINE code - 7-day free trial
-        else if (discountCode && discountCode.toUpperCase() === 'HELPLINE') {
+        // HELPLINE - 7-day free trial, then the regular price
+        else if (code === 'HELPLINE') {
           appliedDiscount = 'HELPLINE';
           console.log('Applied HELPLINE: 7-day free trial');
         }
-        // Check for free trial code (FREEMONTH) - works for both monthly and annual plans
-        else if (discountCode && discountCode.toUpperCase() === 'FREEMONTH') {
+        // FREEMONTH - first month free (monthly and annual plans)
+        else if (code === 'FREEMONTH') {
           appliedDiscount = 'FREEMONTH';
           console.log('Applied FREEMONTH: First month free trial');
-        } else if (discountCode) {
-          // Check for other valid discount codes
-          const discountCodes: Record<string, { type: 'percent' | 'fixed'; value: number }> = {
-            'WELCOME50': { type: 'percent', value: 50 },
-            'SAVE25': { type: 'percent', value: 25 },
-            'SAVE100': { type: 'fixed', value: 100 },
-          };
-
-          const discount = discountCodes[discountCode.toUpperCase()];
+        } else if (code) {
+          const discount = PRICE_DISCOUNT_CODES[code];
           if (discount) {
-            if (discount.type === 'percent') {
-              finalAmount = finalAmount * (1 - discount.value / 100);
-            } else {
-              finalAmount = Math.max(0, finalAmount - discount.value);
-            }
-            appliedDiscount = discountCode.toUpperCase();
-            console.log(`Applied discount code ${appliedDiscount}: $${amount} -> $${finalAmount.toFixed(2)}`);
+            finalCents = discount.type === 'percent'
+              ? Math.round(baseCents * (1 - discount.value / 100))
+              : Math.max(0, baseCents - discount.value * 100);
+            appliedDiscount = code;
+            console.log(`Applied discount code ${appliedDiscount}: ${centsToDollars(baseCents)} -> ${centsToDollars(finalCents)}`);
           } else {
-            console.log(`Invalid discount code attempted: ${discountCode}`);
+            console.log('Invalid discount code attempted');
           }
         }
 
         // If bypass code (FREELIST or FAMILY6), bypass PayPal entirely
         if (bypassPayment) {
-          // Calculate next billing date for FAMILY6 (6 months from now)
           const startDate = new Date();
-          let nextBillingDate = null;
+          // FAMILY6 ends 6 months from today. access_ends_at is the hard end of
+          // access; next_billing_date mirrors it for billing/admin screens.
+          let endsAt: Date | null = null;
           if (appliedDiscount === 'FAMILY6') {
-            nextBillingDate = new Date(startDate);
-            nextBillingDate.setMonth(nextBillingDate.getMonth() + 6);
+            endsAt = new Date(startDate);
+            endsAt.setMonth(endsAt.getMonth() + FAMILY6_MONTHS);
           }
 
           // Create free subscription record directly
@@ -407,11 +489,12 @@ Deno.serve(async (req) => {
               user_id: userId,
               provider_submission_id: providerSubmissionId || null,
               paypal_subscription_id: `${appliedDiscount}-${Date.now()}`,
-              plan_type: planType,
+              plan_type: billingCycle,
               status: 'active',
               amount: 0,
               start_date: startDate.toISOString(),
-              next_billing_date: nextBillingDate ? nextBillingDate.toISOString() : null,
+              next_billing_date: endsAt ? endsAt.toISOString() : null,
+              access_ends_at: endsAt ? endsAt.toISOString() : null,
             });
 
           if (dbError) {
@@ -419,7 +502,7 @@ Deno.serve(async (req) => {
             throw new Error('Failed to create free subscription');
           }
 
-          // Auto-approve the provider submission (only for FREELIST)
+          // Auto-approve the provider submission (only for FREELIST; ownership checked above)
           if (providerSubmissionId && appliedDiscount === 'FREELIST') {
             const { error: updateError } = await supabaseClient
               .from('provider_submissions')
@@ -433,8 +516,8 @@ Deno.serve(async (req) => {
             }
           }
 
-          const message = appliedDiscount === 'FAMILY6' 
-            ? '6-month free family membership activated' 
+          const message = appliedDiscount === 'FAMILY6'
+            ? '6-month free family membership activated'
             : 'Free listing activated';
 
           // Send admin notification for family membership signups (no provider_submission_id)
@@ -457,20 +540,22 @@ Deno.serve(async (req) => {
               <ul>
                 <li><strong>Name:</strong> ${memberName}</li>
                 <li><strong>Email:</strong> ${memberEmail}</li>
-                <li><strong>Plan:</strong> ${planType}</li>
+                <li><strong>Plan:</strong> ${billingCycle}</li>
                 <li><strong>Discount Code:</strong> ${appliedDiscount || 'None'}</li>
-                <li><strong>Amount:</strong> $${finalAmount.toFixed(2)}</li>
+                <li><strong>Amount:</strong> $${centsToDollars(finalCents)}</li>
+                ${endsAt ? `<li><strong>Access ends:</strong> ${endsAt.toISOString().slice(0, 10)}</li>` : ''}
               </ul>`
             );
           }
 
           return new Response(
-            JSON.stringify({ 
+            JSON.stringify({
               success: true,
               bypassPayment: true,
               appliedDiscount,
               message,
-              nextBillingDate: nextBillingDate ? nextBillingDate.toISOString() : null
+              nextBillingDate: endsAt ? endsAt.toISOString() : null,
+              accessEndsAt: endsAt ? endsAt.toISOString() : null,
             }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
           );
@@ -488,28 +573,28 @@ Deno.serve(async (req) => {
 
         // PayPal rejects a REGULAR billing cycle priced at 0. If a discount
         // reduced the recurring price to zero, stop before calling PayPal.
-        if (!Number.isFinite(finalAmount) || finalAmount < 0.01) {
-          console.error('Blocked $0 PayPal subscription', { planType, appliedDiscount });
+        if (!Number.isInteger(finalCents) || finalCents < 1) {
+          console.error('Blocked $0 PayPal subscription', { planType: billingCycle, appliedDiscount });
           throw new Error('This discount cannot be applied to a recurring subscription. Please contact support.');
         }
 
-        // Use family-facing PayPal labels when this is a family membership.
-        const isFamilyMembership = !providerSubmissionId;
+        // Each signup gets its own PayPal product + plan priced at finalCents, so the
+        // amount PayPal bills is exactly what was computed above.
         const productId = await createPayPalProduct(accessToken, isFamilyMembership);
         const planId = await createPayPalPlan(
           accessToken,
           productId,
-          planType,
-          finalAmount.toFixed(2),
+          billingCycle,
+          centsToDollars(finalCents),
           trialConfig,
           isFamilyMembership,
         );
-        
+
         // Create subscription
         const { subscriptionId, approvalUrl } = await createPayPalSubscription(
-          accessToken, 
-          planId, 
-          returnUrl, 
+          accessToken,
+          planId,
+          returnUrl,
           cancelUrl
         );
 
@@ -520,9 +605,9 @@ Deno.serve(async (req) => {
             user_id: userId,
             provider_submission_id: providerSubmissionId || null,
             paypal_subscription_id: subscriptionId,
-            plan_type: planType,
+            plan_type: billingCycle,
             status: 'pending',
-            amount: finalAmount,
+            amount: finalCents / 100,
           });
 
         if (dbError) {
@@ -550,16 +635,16 @@ Deno.serve(async (req) => {
             <ul>
               <li><strong>Name:</strong> ${memberName}</li>
               <li><strong>Email:</strong> ${memberEmail}</li>
-              <li><strong>Plan:</strong> ${planType}</li>
+              <li><strong>Plan:</strong> ${billingCycle}</li>
               <li><strong>Discount Code:</strong> ${appliedDiscount || 'None'}</li>
-              <li><strong>Amount:</strong> $${finalAmount.toFixed(2)}</li>
+              <li><strong>Amount:</strong> $${centsToDollars(finalCents)}</li>
               <li><strong>Status:</strong> Pending PayPal approval</li>
             </ul>`
           );
         }
 
         return new Response(
-          JSON.stringify({ subscriptionId, approvalUrl, appliedDiscount, finalAmount }),
+          JSON.stringify({ subscriptionId, approvalUrl, appliedDiscount, finalAmount: finalCents / 100 }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }

@@ -19,6 +19,16 @@ function unauthorized() {
   });
 }
 
+// The callback URL secret was named SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL in the
+// original Lovable plan; APP_PAYMENT_CALLBACK_URL is the canonical name. Accept either.
+function resolveCallbackUrl(): string {
+  return (Deno.env.get("APP_PAYMENT_CALLBACK_URL") ?? "").trim() ||
+    (Deno.env.get("SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL") ?? "").trim();
+}
+
+// Log the "not configured" skip once per worker, not on every cron tick.
+let loggedNotConfigured = false;
+
 function timingSafeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let diff = 0;
@@ -43,7 +53,7 @@ Deno.serve(async (req) => {
     return unauthorized();
   }
 
-  const callbackUrl = Deno.env.get("APP_PAYMENT_CALLBACK_URL");
+  const callbackUrl = resolveCallbackUrl();
   const secret = Deno.env.get("APP_PAYMENT_BRIDGE_SECRET");
 
   const admin = createClient(
@@ -53,6 +63,17 @@ Deno.serve(async (req) => {
 
   if (!callbackUrl || !secret) {
     // Not configured yet — leave events queued, but don't claim.
+    if (!loggedNotConfigured) {
+      loggedNotConfigured = true;
+      // Names only, never values.
+      console.log(
+        "deliver-app-payment-callback: skipping delivery, not configured:",
+        [
+          !callbackUrl ? "APP_PAYMENT_CALLBACK_URL (or SOBER_HELPLINE_APP_PAYMENT_CALLBACK_URL)" : null,
+          !secret ? "APP_PAYMENT_BRIDGE_SECRET" : null,
+        ].filter(Boolean).join(", ") + " missing",
+      );
+    }
     const { count } = await admin
       .from("app_payment_bridge_outbox")
       .select("id", { count: "exact", head: true })

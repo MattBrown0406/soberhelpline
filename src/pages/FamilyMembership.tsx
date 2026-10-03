@@ -101,7 +101,7 @@ const membershipPlans = {
   monthly: {
     id: 'family-membership-monthly',
     name: 'Family Support Membership',
-    price: '10.00',
+    price: '9.99',
     period: '/month',
     billingCycle: 'monthly' as const,
   },
@@ -133,8 +133,12 @@ const membershipFeatures = {
   ]
 };
 
-const MONTHLY_ANNUAL_COST = 10 * 12; // $120.00
-const ANNUAL_SAVINGS = MONTHLY_ANNUAL_COST - 100; // $20.00
+// Display only: the server (paypal-subscriptions) decides the price that is charged.
+// Work in cents so the savings math is exact: 12 x $9.99 = $119.88; annual $100 saves $19.88.
+const MONTHLY_PRICE_CENTS = 999;
+const ANNUAL_PRICE_CENTS = 10000;
+const MONTHLY_ANNUAL_COST = (MONTHLY_PRICE_CENTS * 12) / 100; // $119.88
+const ANNUAL_SAVINGS = (MONTHLY_PRICE_CENTS * 12 - ANNUAL_PRICE_CENTS) / 100; // $19.88
 
 export default function FamilyMembership() {
   const { toast } = useToast();
@@ -144,6 +148,7 @@ export default function FamilyMembership() {
   const [isLoading, setIsLoading] = useState(true);
   const [discountCode, setDiscountCode] = useState('');
   const [freeListingActivated, setFreeListingActivated] = useState(false);
+  const [freeAccessEndsAt, setFreeAccessEndsAt] = useState<string | null>(null);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [webinarRemindersOptIn, setWebinarRemindersOptIn] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'trial' | 'monthly' | 'annual'>('trial');
@@ -278,7 +283,8 @@ export default function FamilyMembership() {
         }
       }
 
-      // The trial is a real PayPal subscription: $0 for seven days, then $10/month.
+      // The trial is a real PayPal subscription: $0 for seven days, then $9.99/month.
+      // The amount sent here is ignored by the server, which sets the price itself.
       const isTrial = billingCycle === 'trial';
       const result = await createSubscription({
         planType: isTrial ? 'monthly' : billingCycle,
@@ -286,8 +292,10 @@ export default function FamilyMembership() {
         discountCode: isTrial ? 'HELPLINE' : discountCode.trim() || undefined,
       });
       
-      // Check if FREELIST code was used
+      // A promo code (FAMILY6) activated a free membership without PayPal.
       if (result?.bypassed) {
+        const endsAt = (result as { accessEndsAt?: string | null }).accessEndsAt ?? null;
+        setFreeAccessEndsAt(endsAt);
         setFreeListingActivated(true);
         toast({
           title: 'Membership Activated!',
@@ -330,6 +338,9 @@ export default function FamilyMembership() {
                 <CardTitle className="text-2xl text-green-600">Membership Activated!</CardTitle>
                 <CardDescription>
                   Your family support membership is now active.
+                  {freeAccessEndsAt && (
+                    <> Your free access runs until {new Date(freeAccessEndsAt).toLocaleDateString()}.</>
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -635,7 +646,7 @@ export default function FamilyMembership() {
                         >
                           Annual
                           <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 text-xs">
-                            Save ${ANNUAL_SAVINGS.toFixed(0)}
+                            Save ${ANNUAL_SAVINGS.toFixed(2)}
                           </Badge>
                         </Button>
                       </div>
@@ -648,7 +659,7 @@ export default function FamilyMembership() {
                           <div className="text-lg text-muted-foreground">7-Day Trial</div>
                           <div className="mt-2 p-2 bg-green-50 rounded-lg">
                             <span className="text-sm text-green-700 font-medium block">
-                              No charge today. PayPal bills $10/month after the seven-day trial unless you cancel first.
+                              No charge today. PayPal bills $9.99/month after the seven-day trial unless you cancel first.
                             </span>
                           </div>
                         </div>

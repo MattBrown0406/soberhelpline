@@ -1,4 +1,32 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, type SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
+import {
+  centsToPayPalValue,
+  COACHING_MEMBER_CENTS,
+  COACHING_STANDARD_CENTS,
+  isAllowedCoachingCents,
+} from "../_shared/coachingToken.ts";
+
+/** Rows an administrator revoked (admin panel / member warnings) must stay revoked. */
+async function hasAdminRevokedRow(
+  client: SupabaseClient,
+  paypalSubscriptionId: string,
+): Promise<boolean> {
+  const { data, error } = await client
+    .from('provider_subscriptions')
+    .select('status, cancellation_source')
+    .eq('paypal_subscription_id', paypalSubscriptionId);
+  if (error) throw new Error(`revocation lookup failed: ${error.message}`);
+  return ((data ?? []) as { status: string; cancellation_source: string | null }[]).some((r) =>
+    (r.status === 'cancelled' || r.status === 'expired') &&
+    typeof r.cancellation_source === 'string' && r.cancellation_source.startsWith('admin')
+  );
+}
+
+// PayPal amount strings a coaching capture can carry ($150 standard, $125 member price).
+const COACHING_CAPTURE_VALUES = new Set([
+  centsToPayPalValue(COACHING_STANDARD_CENTS),
+  centsToPayPalValue(COACHING_MEMBER_CENTS),
+]);
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -153,13 +181,21 @@ Deno.serve(async (req) => {
 
         console.log(`Activating subscription: ${subscriptionId}`);
 
-        // Update subscription status to active
+        if (await hasAdminRevokedRow(supabaseClient, subscriptionId)) {
+          console.log('Subscription was revoked by an administrator; not reactivating', subscriptionId);
+          break;
+        }
+
+        // Update subscription status to active. A live PayPal agreement has no
+        // access end date, so clear any stale one (membership checks treat an
+        // active row with a past access_ends_at as ended).
         const { data, error } = await supabaseClient
           .from('provider_subscriptions')
           .update({
             status: 'active',
             start_date: startTime,
             next_billing_date: nextBillingTime,
+            access_ends_at: null,
             updated_at: new Date().toISOString(),
           })
           .eq('paypal_subscription_id', subscriptionId)
@@ -266,13 +302,23 @@ Deno.serve(async (req) => {
               const nextBillingTime = subDetails.billing_info?.next_billing_time;
 
               if (nextBillingTime) {
+                // Only (re)activate when PayPal itself reports the agreement ACTIVE.
+                // A late sale on an agreement that was already cancelled must not
+                // reopen an open-ended membership; it only refreshes the billing date.
+                // ...and never when an administrator revoked the membership.
+                const paypalActive = String(subDetails.status ?? '').toUpperCase() === 'ACTIVE' &&
+                  !(await hasAdminRevokedRow(supabaseClient, billingAgreementId));
+                const saleUpdate: Record<string, unknown> = {
+                  next_billing_date: nextBillingTime,
+                  updated_at: new Date().toISOString(),
+                };
+                if (paypalActive) {
+                  saleUpdate.status = 'active';
+                  saleUpdate.access_ends_at = null;
+                }
                 const { error: updateError } = await supabaseClient
                   .from('provider_subscriptions')
-                  .update({
-                    next_billing_date: nextBillingTime,
-                    status: 'active',
-                    updated_at: new Date().toISOString(),
-                  })
+                  .update(saleUpdate)
                   .eq('paypal_subscription_id', billingAgreementId);
 
                 if (updateError) {
@@ -319,9 +365,12 @@ Deno.serve(async (req) => {
           );
         }
 
-        if (capStatus !== 'COMPLETED' || amtValue !== '150.00' || amtCur !== 'USD') {
-          // Not a coaching $150 capture (or not completed yet). Ignore quietly.
-          console.log('COMPLETED not a coaching $150 USD capture; ignoring', eventBriefC);
+        if (
+          capStatus !== 'COMPLETED' || amtCur !== 'USD' ||
+          typeof amtValue !== 'string' || !COACHING_CAPTURE_VALUES.has(amtValue)
+        ) {
+          // Not a coaching capture ($150 / $125 member price), or not completed yet. Ignore quietly.
+          console.log('COMPLETED not a coaching USD capture; ignoring', eventBriefC);
           break;
         }
 
@@ -334,7 +383,7 @@ Deno.serve(async (req) => {
         if (customId) {
           const { data, error } = await supabaseClient
             .from('coaching_checkout_orders')
-            .select('id, app_booking_ref, paypal_order_id, service_type, status')
+            .select('id, app_booking_ref, paypal_order_id, service_type, status, amount_cents')
             .eq('id', customId)
             .maybeSingle();
           if (error) {
@@ -347,7 +396,7 @@ Deno.serve(async (req) => {
         if (!coachingRowC && !dbLookupFailed && orderIdFromLinks) {
           const { data, error } = await supabaseClient
             .from('coaching_checkout_orders')
-            .select('id, app_booking_ref, paypal_order_id, service_type, status')
+            .select('id, app_booking_ref, paypal_order_id, service_type, status, amount_cents')
             .eq('paypal_order_id', orderIdFromLinks)
             .maybeSingle();
           if (error) {
@@ -379,6 +428,12 @@ Deno.serve(async (req) => {
           console.log('COMPLETED: order id mismatch; ignoring', eventBriefC);
           break;
         }
+        // The captured amount must be exactly the amount this order was created for.
+        const rowCentsC = coachingRowC.amount_cents;
+        if (!isAllowedCoachingCents(rowCentsC) || centsToPayPalValue(rowCentsC) !== amtValue) {
+          console.log('COMPLETED: captured amount does not match the coaching order; ignoring', eventBriefC);
+          break;
+        }
 
         // Canonical event id — identical to the browser capture path so retries
         // from either side deduplicate at the outbox and app-side event log.
@@ -389,7 +444,7 @@ Deno.serve(async (req) => {
           booking_id: coachingRowC.app_booking_ref,
           order_id: coachingRowC.paypal_order_id,
           capture_id: capId,
-          amount_cents: 15000,
+          amount_cents: rowCentsC,
           currency: 'USD',
           status: 'captured',
           captured_at: capturedAtIso,
@@ -401,7 +456,7 @@ Deno.serve(async (req) => {
           p_paypal_order_id: coachingRowC.paypal_order_id,
           p_capture_id: capId,
           p_service_type: 'plan_review_coaching',
-          p_amount_cents: 15000,
+          p_amount_cents: rowCentsC,
           p_currency: 'USD',
           p_captured_at: capturedAtIso,
           p_event_id: eventUidC,
@@ -450,7 +505,9 @@ Deno.serve(async (req) => {
         const outEvent = newStatus === 'refunded' ? 'payment.refunded'
           : newStatus === 'reversed' ? 'payment.reversed' : 'payment.denied';
 
-        // Refund amount validation (only for REFUNDED events; reversal/denial use $150 original).
+        // Refund amount validation (only for REFUNDED events; reversal/denial use the original amount).
+        // Range-checked against the largest coaching price here and against the
+        // order's own amount once the order row is loaded.
         let refundedAmountCents: number | null = null;
         if (eventType === 'PAYMENT.CAPTURE.REFUNDED') {
           const rAmtRaw = resource?.amount?.value;
@@ -470,7 +527,7 @@ Deno.serve(async (req) => {
             );
           }
           const parsedCents = Math.round(parseFloat(rAmtRaw) * 100);
-          if (!Number.isFinite(parsedCents) || parsedCents <= 0 || parsedCents > 15000) {
+          if (!Number.isFinite(parsedCents) || parsedCents <= 0 || parsedCents > COACHING_STANDARD_CENTS) {
             console.error('REFUNDED amount out of range', eventBrief, parsedCents);
             return new Response(
               JSON.stringify({ error: 'refund_amount_out_of_range' }),
@@ -482,7 +539,7 @@ Deno.serve(async (req) => {
 
         const { data: coachingRow, error: lookupErr } = await supabaseClient
           .from('coaching_checkout_orders')
-          .select('id, app_booking_ref, paypal_order_id')
+          .select('id, app_booking_ref, paypal_order_id, amount_cents')
           .eq('paypal_capture_id', originalCaptureId)
           .maybeSingle();
         if (lookupErr) {
@@ -495,6 +552,21 @@ Deno.serve(async (req) => {
         if (!coachingRow) {
           console.log('No coaching order for capture; ignoring', eventBrief);
           break;
+        }
+        const rowCents = coachingRow.amount_cents;
+        if (!isAllowedCoachingCents(rowCents)) {
+          console.error('Coaching order has an unexpected amount', eventBrief);
+          return new Response(
+            JSON.stringify({ error: 'coaching_amount_invalid' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+        if (refundedAmountCents !== null && refundedAmountCents > rowCents) {
+          console.error('REFUNDED amount exceeds the coaching order amount', eventBrief, refundedAmountCents);
+          return new Response(
+            JSON.stringify({ error: 'refund_amount_out_of_range' }),
+            { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
         }
 
         const paypalEventId = typeof body?.id === 'string' && body.id.length > 0 ? body.id : null;
@@ -514,7 +586,7 @@ Deno.serve(async (req) => {
           booking_id: coachingRow.app_booking_ref,
           order_id: coachingRow.paypal_order_id,
           capture_id: originalCaptureId,
-          amount_cents: 15000,
+          amount_cents: rowCents,
           currency: 'USD',
           status: newStatus,
           event_id: eventUid,

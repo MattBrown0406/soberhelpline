@@ -21,7 +21,6 @@ import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import StartHereGuide from "@/components/StartHereGuide";
 import MemberZoomBanner from "@/components/MemberZoomBanner";
-import { useWebSession } from "@/hooks/useWebSession";
 
 // Define pillar data for cleaner rendering
 const pillars = [
@@ -203,15 +202,7 @@ const colorMap: Record<string, { border: string; text: string; hover: string; bg
 const c = (color: string) => colorMap[color] || colorMap.slate;
 
 export default function FamilyEducation() {
-  // DEBUG: confirm sso_token presence at the very start of the page lifecycle
-  if (typeof window !== "undefined") {
-    const _ssoTokenDebug = new URLSearchParams(window.location.search).get("sso_token");
-    // eslint-disable-next-line no-console
-    console.log("[FamilyEducation] mount — url:", window.location.href, "sso_token:", _ssoTokenDebug);
-  }
-
   const navigate = useNavigate();
-  const { isSubscriber: isAppSubscriber } = useWebSession();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);
@@ -235,12 +226,6 @@ export default function FamilyEducation() {
 
   useEffect(() => {
     const checkMembership = async () => {
-      if (isAppSubscriber) {
-        setHasMembership(true);
-        setIsLoading(false);
-        return;
-      }
-
       if (!user) {
         setHasMembership(false);
         setIsLoading(false);
@@ -248,19 +233,13 @@ export default function FamilyEducation() {
       }
 
       try {
-        const { data, error } = await supabase
-          .from('provider_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
+        const { data: isMember, error } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
 
         if (error) {
           console.error('Error checking membership:', error);
           setHasMembership(false);
         } else {
-          setHasMembership(data && data.length > 0);
+          setHasMembership(isMember === true);
         }
       } catch (err) {
         console.error('Membership check failed:', err);
@@ -271,7 +250,7 @@ export default function FamilyEducation() {
     };
 
     checkMembership();
-  }, [user, isAppSubscriber]);
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -300,7 +279,7 @@ export default function FamilyEducation() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to access our complete library of educational resources.
+                  Join our family support membership for just $9.99/month to access our complete library of educational resources.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">

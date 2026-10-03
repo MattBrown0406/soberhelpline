@@ -1,102 +1,159 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useWebSession } from "@/hooks/useWebSession";
-import { useMembershipStatus } from "@/hooks/useMembershipStatus";
-import { writeWebSession, WEB_SESSION_DURATION_MS } from "@/lib/webSession";
-import AppSubscriberGate from "@/components/AppSubscriberGate";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { clearSsoSignIn, clearWebSession, getSsoSignedInEmail } from "@/lib/webSession";
+import { useAppSsoHandoff, type SsoNotice } from "@/hooks/useWebSession";
+import AppSubscriberGate, { SsoSignedInNotice, SsoSwitchAccountPrompt } from "@/components/AppSubscriberGate";
 
-// The app's Supabase project (different from the website's). The validate-sso-token
-// edge function lives here and is deployed with --no-verify-jwt, so no auth header is needed.
-const VALIDATE_SSO_TOKEN_URL =
-  "https://rjlkbxqxshohgjmomyro.supabase.co/functions/v1/validate-sso-token";
+type Access = "checking" | "member" | "not_member" | "signed_out";
 
-type InlineSsoStatus = "idle" | "validating" | "valid" | "invalid";
-
-function removeSsoTokenFromUrl() {
-  const url = new URL(window.location.href);
-  url.searchParams.delete("sso_token");
-  window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+interface AccessState {
+  access: Access;
+  email: string | null;
+  userId: string | null;
 }
 
+/**
+ * Members-only access is decided by the signed-in user's WEBSITE membership
+ * (the same is_active_family_member check the database uses for the forum,
+ * recordings and Q&A), never by a client-side flag.
+ */
+async function checkAccess(): Promise<AccessState> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user;
+  if (!user) return { access: "signed_out", email: null, userId: null };
+
+  const { data, error } = await supabase.rpc("is_active_family_member", { _user_id: user.id });
+  if (!error) {
+    return { access: data === true ? "member" : "not_member", email: user.email ?? null, userId: user.id };
+  }
+
+  // Fallback: the same query the member pages run themselves.
+  const { data: rows } = await supabase
+    .from("provider_subscriptions")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("status", "active")
+    .is("provider_submission_id", null)
+    .limit(1);
+  return {
+    access: (rows?.length ?? 0) > 0 ? "member" : "not_member",
+    email: user.email ?? null,
+    userId: user.id,
+  };
+}
+
+const Spinner = () => (
+  <div className="min-h-screen bg-background flex items-center justify-center" role="status" aria-label="Loading">
+    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+  </div>
+);
+
 export default function SubscriberRoute({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { isSubscriber } = useWebSession();
-  const { isMember, loading } = useMembershipStatus();
-  const [inlineSsoStatus, setInlineSsoStatus] = useState<InlineSsoStatus>("idle");
   const ssoToken = params.get("sso_token") ?? "";
 
-  // eslint-disable-next-line no-console
-  console.log("[SubscriberRoute] render", {
-    url: typeof window !== "undefined" ? window.location.href : "",
-    ssoToken,
-    isSubscriber,
-    isMember,
-    inlineSsoStatus,
-  });
+  const handoff = useAppSsoHandoff(ssoToken);
+  const [state, setState] = useState<AccessState>({ access: "checking", email: null, userId: null });
+  const [notice, setNotice] = useState<SsoNotice | null>(null);
+  const [authVersion, setAuthVersion] = useState(0);
+  const checkedUserId = useRef<string | null | undefined>(undefined);
 
+  // Where to come back to after signing in (never includes the spent token).
+  const returnPath = useMemo(() => {
+    const search = new URLSearchParams(location.search);
+    search.delete("sso_token");
+    const query = search.toString();
+    return `${location.pathname}${query ? `?${query}` : ""}${location.hash}`;
+  }, [location.pathname, location.search, location.hash]);
+
+  // Old builds stored a client-side "app subscriber" flag; it no longer grants
+  // access, so remove any leftovers.
   useEffect(() => {
+    clearWebSession();
+  }, []);
+
+  // Re-check when someone signs in or out (e.g. in another tab).
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT") return;
+      const userId = session?.user?.id ?? null;
+      if (userId === checkedUserId.current) return;
+      setAuthVersion((v) => v + 1);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Once the app sign-in is finished (or declined), drop the spent token from the URL.
+  const handoffPhase = handoff.state.phase;
+  const handoffNotice = handoff.state.phase === "done" ? handoff.state.notice : null;
+  useEffect(() => {
+    if (handoffPhase !== "done" || !ssoToken) return;
+    setNotice(handoffNotice);
+    navigate(returnPath, { replace: true });
+  }, [handoffPhase, handoffNotice, ssoToken, navigate, returnPath]);
+
+  // Membership check (only once no app sign-in is in progress).
+  useEffect(() => {
+    if (ssoToken) return;
     let cancelled = false;
-    if (!ssoToken) return;
-
-    (async () => {
-      // eslint-disable-next-line no-console
-      console.log("[SubscriberRoute] calling validate-sso-token", {
-        url: VALIDATE_SSO_TOKEN_URL,
-        ssoToken,
-      });
-      setInlineSsoStatus("validating");
-      try {
-        const res = await fetch(VALIDATE_SSO_TOKEN_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: ssoToken }),
-        });
-        const data = await res.json().catch(() => ({}));
-        // eslint-disable-next-line no-console
-        console.log("[SubscriberRoute] validate-sso-token response", { status: res.status, data });
-
+    checkAccess()
+      .then((result) => {
         if (cancelled) return;
-
-        if (!res.ok || !data?.valid) {
-          setInlineSsoStatus("invalid");
-          return;
-        }
-
-        writeWebSession({
-          accountId: data.account_id ?? "",
-          tier: data.tier ?? null,
-          firstName: data.first_name ?? null,
-          expiresAt: Date.now() + WEB_SESSION_DURATION_MS,
-        });
-        removeSsoTokenFromUrl();
-        setInlineSsoStatus("valid");
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error("[SubscriberRoute] validate-sso-token threw", err);
-        if (!cancelled) setInlineSsoStatus("invalid");
-      }
-    })();
-
+        checkedUserId.current = result.userId;
+        setState(result);
+      })
+      .catch(() => {
+        if (!cancelled) setState({ access: "signed_out", email: null, userId: null });
+      });
     return () => {
       cancelled = true;
     };
-  }, [ssoToken]);
+  }, [ssoToken, authVersion]);
 
-  const hasInlineSsoAccess = inlineSsoStatus === "valid";
-  const isCheckingAccess =
-    inlineSsoStatus === "validating" ||
-    (!!ssoToken && inlineSsoStatus === "idle") ||
-    (!isSubscriber && !hasInlineSsoAccess && loading);
+  const handleSignOut = async () => {
+    clearSsoSignIn();
+    setNotice(null);
+    await supabase.auth.signOut();
+  };
 
-  if (isCheckingAccess) {
+  if (handoff.state.phase === "confirm") {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
+      <SsoSwitchAccountPrompt
+        currentEmail={handoff.state.currentEmail}
+        appEmail={handoff.state.appEmail}
+        onContinue={handoff.continueAsAppAccount}
+        onStay={handoff.keepCurrentAccount}
+      />
     );
   }
 
-  if (!isSubscriber && !hasInlineSsoAccess && !isMember) return <AppSubscriberGate />;
-  return <>{children}</>;
+  if (ssoToken || state.access === "checking") return <Spinner />;
+
+  if (state.access === "member") {
+    const ssoEmail = getSsoSignedInEmail();
+    const showSsoNotice = !!ssoEmail && ssoEmail === state.email?.toLowerCase();
+    return (
+      <>
+        {showSsoNotice && <SsoSignedInNotice email={ssoEmail} onSignOut={handleSignOut} />}
+        {children}
+      </>
+    );
+  }
+
+  return (
+    <AppSubscriberGate
+      signedInEmail={state.access === "not_member" ? state.email : null}
+      returnPath={returnPath}
+      notice={notice}
+      onSignOut={handleSignOut}
+    />
+  );
 }

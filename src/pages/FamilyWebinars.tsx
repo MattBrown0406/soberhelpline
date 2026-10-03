@@ -5,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,19 +82,13 @@ export default function FamilyWebinars() {
 
       try {
         // Check membership
-        const { data, error } = await supabase
-          .from('provider_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
+        const { data: isMember, error } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
 
         if (error) {
           console.error('Error checking membership:', error);
           setHasMembership(false);
         } else {
-          setHasMembership(data && data.length > 0);
+          setHasMembership(isMember === true);
         }
 
         // Fetch user profile for registration (names from profiles, email from auth session)
@@ -178,7 +171,7 @@ export default function FamilyWebinars() {
     );
   }
 
-  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
+  if (!hasMembership) {
     return (
       <>
         <Helmet>
@@ -196,7 +189,7 @@ export default function FamilyWebinars() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $10/month to access live monthly webinars and our complete library of past recordings.
+                  Join our family support membership for just $9.99/month to access live monthly webinars and our complete library of past recordings.
                 </p>
                 <div className="flex flex-col gap-2">
                   <Link to="/family-membership">

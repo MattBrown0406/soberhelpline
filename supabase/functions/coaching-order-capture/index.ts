@@ -1,8 +1,10 @@
-// Captures an approved PayPal order for the $150 coaching session and
-// verifies the capture belongs to the expected session, amount, and currency.
+// Captures an approved PayPal order for the coaching session and verifies the
+// capture belongs to the expected session, amount ($150, or $125 member price —
+// always the stored order's amount_cents), and currency.
 // Only marks paid AFTER a server-verified COMPLETED capture. Enqueues a signed
-// callback event for the iOS app backend.
+// callback event for the iOS app backend carrying the captured amount_cents.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { centsToPayPalValue, isAllowedCoachingCents } from "../_shared/coachingToken.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -65,7 +67,7 @@ Deno.serve(async (req) => {
 
   const { data: row } = await admin
     .from("coaching_checkout_orders")
-    .select("id, token_nonce, app_booking_ref, status, paypal_order_id, paypal_capture_id")
+    .select("id, token_nonce, app_booking_ref, status, paypal_order_id, paypal_capture_id, amount_cents, currency")
     .eq("id", sessionId)
     .maybeSingle();
   if (!row) {
@@ -73,6 +75,14 @@ Deno.serve(async (req) => {
       status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+  if (!isAllowedCoachingCents(row.amount_cents) || row.currency !== "USD") {
+    console.log("coaching-order-capture: unexpected stored amount/currency");
+    return new Response(JSON.stringify({ ok: false, code: "invalid_amount" }), {
+      status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+  const expectedCents: number = row.amount_cents;
+  const expectedValue = centsToPayPalValue(expectedCents);
   if (row.paypal_order_id !== orderId) {
     return new Response(JSON.stringify({ ok: false, code: "order_session_mismatch" }), {
       status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -197,7 +207,7 @@ Deno.serve(async (req) => {
 
 
 
-  // Verify capture: status COMPLETED, amount 150.00, currency USD, custom_id == session id.
+  // Verify capture: status COMPLETED, amount == the order's amount, currency USD, custom_id == session id.
   const pu = captureJson?.purchase_units?.[0];
   const cap = pu?.payments?.captures?.[0];
   const capId = cap?.id;
@@ -216,7 +226,7 @@ Deno.serve(async (req) => {
   }
 
   // A capture exists — now validate amount/currency/custom_id against it.
-  if (amt !== "150.00" || cur !== "USD" || customId !== row.id) {
+  if (amt !== expectedValue || cur !== "USD" || customId !== row.id) {
     console.log("coaching-order-capture: verification failed (amount/currency/custom_id mismatch)");
     // Predicated: never overwrite a concurrently captured/refunded/reversed row.
     const { error: mismatchErr } = await admin.from("coaching_checkout_orders")
@@ -255,7 +265,7 @@ Deno.serve(async (req) => {
     booking_id: row.app_booking_ref,
     order_id: orderId,
     capture_id: capId,
-    amount_cents: 15000,
+    amount_cents: expectedCents,
     currency: "USD",
     status: "captured",
     captured_at: capturedAtIso,
@@ -268,7 +278,7 @@ Deno.serve(async (req) => {
     p_paypal_order_id: orderId,
     p_capture_id: capId,
     p_service_type: "plan_review_coaching",
-    p_amount_cents: 15000,
+    p_amount_cents: expectedCents,
     p_currency: "USD",
     p_captured_at: capturedAtIso,
     p_event_id: eventId,

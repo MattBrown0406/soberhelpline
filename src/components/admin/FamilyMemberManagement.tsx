@@ -70,6 +70,56 @@ interface FamilyMember {
   account_created_at?: string | null;
 }
 
+// Revoking must END access, not just flip the status: membership checks count a
+// cancelled row until its access_ends_at, and the app sync / app sign-in skip any
+// user whose row has a cancellation_source starting with "admin". Returns how many
+// live PayPal agreements were revoked (PayPal keeps billing until cancelled there).
+async function revokeFamilyAccess(
+  userId: string,
+  source: "admin" | "admin_moderation",
+  reason: string,
+): Promise<{ revoked: number; livePayPal: number }> {
+  const nowIso = new Date().toISOString();
+  const now = Date.now();
+  const { data: rows, error } = await supabase
+    .from("provider_subscriptions")
+    .select("id, status, access_ends_at, paypal_subscription_id")
+    .eq("user_id", userId)
+    .is("provider_submission_id", null);
+  if (error) throw error;
+
+  const live = (rows ?? []).filter((r) => ["active", "pending", "suspended"].includes(r.status));
+  const paidThrough = (rows ?? []).filter(
+    (r) => r.status === "cancelled" && r.access_ends_at && new Date(r.access_ends_at).getTime() > now,
+  );
+
+  if (live.length > 0) {
+    const { error: liveError } = await supabase
+      .from("provider_subscriptions")
+      .update({
+        status: "cancelled",
+        cancelled_at: nowIso,
+        cancellation_source: source,
+        cancellation_reason: reason,
+        access_ends_at: nowIso,
+      })
+      .in("id", live.map((r) => r.id));
+    if (liveError) throw liveError;
+  }
+  if (paidThrough.length > 0) {
+    const { error: paidError } = await supabase
+      .from("provider_subscriptions")
+      .update({ cancellation_source: source, cancellation_reason: reason, access_ends_at: nowIso })
+      .in("id", paidThrough.map((r) => r.id));
+    if (paidError) throw paidError;
+  }
+
+  return {
+    revoked: live.length + paidThrough.length,
+    livePayPal: live.filter((r) => r.paypal_subscription_id?.startsWith("I-")).length,
+  };
+}
+
 export function FamilyMemberManagement() {
   const [members, setMembers] = useState<FamilyMember[]>([]);
   const [loading, setLoading] = useState(true);
@@ -223,14 +273,14 @@ export function FamilyMemberManagement() {
 
     setRevoking(member.id);
     try {
-      const { error } = await supabase
-        .from("provider_subscriptions")
-        .update({ status: "cancelled" })
-        .eq("id", member.subscription.id);
-
-      if (error) throw error;
+      const { livePayPal } = await revokeFamilyAccess(member.id, "admin", "Revoked by an administrator");
 
       toast.success(`Membership revoked for ${member.username || member.first_name}`);
+      if (livePayPal > 0) {
+        toast.warning("PayPal billing is still active", {
+          description: "Cancel this member's subscription in PayPal too, or they will keep being charged.",
+        });
+      }
       setConfirmRevoke(null);
       fetchFamilyMembers();
     } catch (error) {

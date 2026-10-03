@@ -124,7 +124,7 @@ verify_jwt = false
 [functions.recover-consultation-zoom-links]
 verify_jwt = false
 
-[functions.validate-sso-token]
+[functions.app-sso-exchange]
 verify_jwt = false
 
 

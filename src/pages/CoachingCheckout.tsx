@@ -8,13 +8,20 @@ interface ResolvedSession {
   session_id: string;
   service_label: string;
   amount_label: string;
+  /** Exactly what the app-signed token says: 15000, or 12500 for the member price. */
   amount_cents: number;
+  member_price?: boolean;
   currency: string;
   status: string;
   expires_at: string;
   paypal_client_id: string | null;
   paypal_env: "live" | "sandbox";
 }
+
+const STANDARD_CENTS = 15000;
+const MEMBER_CENTS = 12500;
+
+const formatUsd = (cents: number) => `$${(cents / 100).toFixed(2)} USD`;
 
 declare global {
   interface Window {
@@ -55,6 +62,10 @@ export default function CoachingCheckout() {
   const buttonsHost = useRef<HTMLDivElement | null>(null);
   const buttonsMounted = useRef(false);
   const paypalClientId = session?.paypal_client_id ?? "";
+  // The amount always comes from the server (which took it from the signed token).
+  const amountLabel = session ? formatUsd(session.amount_cents) : null;
+  const isMemberPrice = session?.amount_cents === MEMBER_CENTS;
+  const memberSavings = `$${(STANDARD_CENTS - MEMBER_CENTS) / 100}`; // "$25"
 
   useEffect(() => {
     let cancelled = false;
@@ -189,6 +200,7 @@ export default function CoachingCheckout() {
       case "invalid_signature": return "This checkout link is not valid. Please return to the app and try again.";
       case "already_finalized": return "This coaching session has already been paid for.";
       case "bridge_secret_not_configured": return "Checkout is temporarily unavailable. Please try again shortly.";
+      case "member_price_unavailable": return "The member price isn't available on the website yet. Please try again shortly, or contact matt@soberhelpline.com.";
       default: return "Something went wrong. Please return to the app and try again.";
     }
   }, [errorCode]);
@@ -206,9 +218,22 @@ export default function CoachingCheckout() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="rounded-md border p-3 flex items-center justify-between">
+          <div className="rounded-md border p-3 flex items-center justify-between gap-3">
             <span className="text-sm text-muted-foreground">Total due</span>
-            <span className="text-lg font-semibold">{session?.amount_label ?? "$150.00 USD"}</span>
+            {amountLabel ? (
+              <span className="text-right">
+                <span className="text-lg font-semibold">{amountLabel}</span>
+                {isMemberPrice && (
+                  <span className="block text-xs font-medium text-green-700">
+                    — member price (you save {memberSavings})
+                  </span>
+                )}
+              </span>
+            ) : state === "error" ? (
+              <span className="text-lg font-semibold">—</span>
+            ) : (
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+            )}
           </div>
 
           {state === "loading" && (
@@ -247,7 +272,7 @@ export default function CoachingCheckout() {
                       type="button"
                       className="w-full rounded-md bg-primary text-primary-foreground py-2 text-sm font-medium hover:opacity-90"
                     >
-                      Pay {session?.amount_label ?? "$150.00 USD"} with Card
+                      Pay {amountLabel} with Card
                     </button>
                   </div>
                 </>

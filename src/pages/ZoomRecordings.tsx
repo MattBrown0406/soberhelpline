@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { format } from "date-fns";
-import { hasAppSubscriberSessionCookie } from "@/lib/webSession";
 
 interface KeyTimestamp {
   time: string;
@@ -130,13 +129,8 @@ export default function ZoomRecordings() {
     const checkMembership = async () => {
       if (!user) { setHasMembership(false); setIsLoading(false); return; }
       try {
-        const { data, error } = await supabase
-          .from('provider_subscriptions')
-          .select('id')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null);
-        setHasMembership(!error && data != null && data.length > 0);
+        const { data: isMember, error } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
+        setHasMembership(!error && isMember === true);
       } catch {
         setHasMembership(false);
       } finally {
@@ -148,7 +142,7 @@ export default function ZoomRecordings() {
 
   useEffect(() => {
     const fetchRecordings = async () => {
-      if (!hasMembership && !hasAppSubscriberSessionCookie()) return;
+      if (!hasMembership) return;
       const { data, error } = await supabase
         .from('zoom_call_recordings')
         .select('*')
@@ -167,7 +161,7 @@ export default function ZoomRecordings() {
     );
   }
 
-  if (!hasMembership && !hasAppSubscriberSessionCookie()) {
+  if (!hasMembership) {
     return (
       <>
         <SEOHead
@@ -212,7 +206,7 @@ export default function ZoomRecordings() {
               <Link to="/family-membership">
                 <Button className="w-full" size="lg">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Become a Member — Starting at $10/mo
+                  Become a Member — Starting at $9.99/mo
                 </Button>
               </Link>
               {!user && (
@@ -340,7 +334,7 @@ export default function ZoomRecordings() {
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Recordings Yet</h3>
                 <p className="text-muted-foreground">
                   Recordings from our "The Family Squares" sessions will appear here soon.
-                  Join us live every Monday at 7 PM PST!
+                  Join us live every Monday at 7:00 PM Pacific!
                 </p>
                 <Link to="/monday-zoom-registration" className="mt-4 inline-block">
                   <Button variant="outline" className="gap-2">
