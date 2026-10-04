@@ -29,6 +29,13 @@
       "when": 1791129020347,
       "tag": "0003_drop_clients_create_bookings_policy",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791136414008,
+      "tag": "0004_harden_consultation_zoom_recovery",
+      "breakpoints": true
     }
   ]
 }

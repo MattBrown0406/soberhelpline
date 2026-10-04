@@ -564,6 +564,8 @@ export type Database = {
           end_time: string
           id: string
           intake_responses: Json | null
+          last_notification_attempt_at: string | null
+          notification_error_message: string | null
           paypal_order_id: string | null
           provider_id: string
           provider_notified: boolean | null
@@ -571,9 +573,13 @@ export type Database = {
           status: string
           timezone: string
           updated_at: string
+          zoom_error_message: string | null
+          zoom_last_attempt_at: string | null
           zoom_meeting_id: string | null
           zoom_meeting_url: string | null
           zoom_passcode: string | null
+          zoom_retry_count: number
+          zoom_status: string
         }
         Insert: {
           amount_paid?: number
@@ -588,6 +594,8 @@ export type Database = {
           end_time: string
           id?: string
           intake_responses?: Json | null
+          last_notification_attempt_at?: string | null
+          notification_error_message?: string | null
           paypal_order_id?: string | null
           provider_id: string
           provider_notified?: boolean | null
@@ -595,9 +603,13 @@ export type Database = {
           status?: string
           timezone?: string
           updated_at?: string
+          zoom_error_message?: string | null
+          zoom_last_attempt_at?: string | null
           zoom_meeting_id?: string | null
           zoom_meeting_url?: string | null
           zoom_passcode?: string | null
+          zoom_retry_count?: number
+          zoom_status?: string
         }
         Update: {
           amount_paid?: number
@@ -612,6 +624,8 @@ export type Database = {
           end_time?: string
           id?: string
           intake_responses?: Json | null
+          last_notification_attempt_at?: string | null
+          notification_error_message?: string | null
           paypal_order_id?: string | null
           provider_id?: string
           provider_notified?: boolean | null
@@ -619,9 +633,13 @@ export type Database = {
           status?: string
           timezone?: string
           updated_at?: string
+          zoom_error_message?: string | null
+          zoom_last_attempt_at?: string | null
           zoom_meeting_id?: string | null
           zoom_meeting_url?: string | null
           zoom_passcode?: string | null
+          zoom_retry_count?: number
+          zoom_status?: string
         }
         Relationships: [
           {
