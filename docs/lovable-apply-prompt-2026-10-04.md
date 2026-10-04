@@ -190,9 +190,10 @@ What this change does:
     `captured_booking_failed` as before, and now also emails
     matt@soberhelpline.com with the client, amount, plan, the requested times
     and the PayPal order number, so the client can be called to pick a new time
-    or refunded. It uses the existing `SENDGRID_API_KEY`. The booking page now
-    shows the "Payment Received — our team will follow up" message in that
-    case instead of a generic error.
+    or refunded. It uses the existing `SENDGRID_API_KEY`. The booking page then
+    shows a "Payment received — we couldn't reserve your session time; Matt
+    will contact you" page (with the phone number) instead of a generic error
+    or the "Booking Confirmed" page.
 
 ## Prompt for Lovable
 
@@ -214,7 +215,7 @@ What this change does:
 >    - `send-survey-emails` (one link in an email)
 >
 >    No other function changed, and no other shared file changed.
-> 2. **One database change, with read-only checks around it.** Do these in
+> 2. **Two database changes, with read-only checks around them.** Do these in
 >    order.
 >
 >    **2a. Read-only check. Run this and paste me the full output.** It changes
@@ -268,7 +269,8 @@ What this change does:
 >    were created through the removed rule. No names or emails are printed.
 >
 >    ```sql
->    select id, created_at, booking_date, status, amount_paid, zoom_status,
+>    select id, created_at, booking_date, status, amount_paid,
+>           zoom_meeting_url is not null as has_zoom,
 >           client_notified, client_user_id is not null as has_account,
 >           coaching_plan_id is not null as in_plan
 >    from public.consultation_bookings
@@ -276,6 +278,81 @@ What this change does:
 >    order by created_at desc
 >    limit 100;
 >    ```
+>
+>    **2e. The Zoom-recovery columns that never reached this database.** The
+>    repo migration `20260605224500_harden_consultation_zoom_recovery.sql`
+>    was never applied here: `consultation_bookings` has no `zoom_status`,
+>    `zoom_retry_count`, `zoom_error_message`, `zoom_last_attempt_at`,
+>    `notification_error_message` or `last_notification_attempt_at`. So
+>    `process-consultation-booking` can't save a booking's Zoom link (its
+>    update includes `zoom_status` and fails), and
+>    `recover-consultation-zoom-links` fails on every run. First run this
+>    read-only check and paste me the output:
+>
+>    ```sql
+>    select column_name from information_schema.columns
+>    where table_schema = 'public' and table_name = 'consultation_bookings'
+>    order by 1;
+>    select jobname, schedule from cron.job where jobname like '%consultation%';
+>    ```
+>
+>    Then create and run this migration exactly as written (every statement
+>    is safe to run again):
+>
+>    ```sql
+>    -- From 20260605224500_harden_consultation_zoom_recovery.sql, which never
+>    -- reached production: explicit Zoom/notification state on bookings, so
+>    -- process-consultation-booking can save the Zoom link and the recovery
+>    -- job can retry missing links and emails.
+>    ALTER TABLE public.consultation_bookings
+>      ADD COLUMN IF NOT EXISTS zoom_status TEXT NOT NULL DEFAULT 'pending'
+>        CHECK (zoom_status IN ('pending', 'created', 'failed')),
+>      ADD COLUMN IF NOT EXISTS zoom_error_message TEXT,
+>      ADD COLUMN IF NOT EXISTS zoom_retry_count INTEGER NOT NULL DEFAULT 0,
+>      ADD COLUMN IF NOT EXISTS zoom_last_attempt_at TIMESTAMPTZ,
+>      ADD COLUMN IF NOT EXISTS notification_error_message TEXT,
+>      ADD COLUMN IF NOT EXISTS last_notification_attempt_at TIMESTAMPTZ;
+>
+>    CREATE INDEX IF NOT EXISTS idx_consultation_bookings_zoom_recovery
+>      ON public.consultation_bookings (booking_date, start_time)
+>      WHERE status = 'confirmed'
+>        AND (zoom_meeting_url IS NULL OR zoom_status = 'failed'
+>             OR client_notified = false OR provider_notified = false);
+>
+>    UPDATE public.consultation_bookings
+>    SET zoom_status = CASE
+>        WHEN zoom_meeting_url IS NOT NULL AND zoom_meeting_url <> '' THEN 'created'
+>        ELSE 'pending'
+>      END
+>    WHERE zoom_status = 'pending';
+>
+>    -- Retry missing Zoom links / emails every 15 minutes. Sends the site's
+>    -- cron secret, so it keeps working once enforce_function_auth is on.
+>    DO $$
+>    DECLARE v_job bigint;
+>    BEGIN
+>      SELECT jobid INTO v_job FROM cron.job
+>       WHERE jobname = 'recover-consultation-zoom-links-every-15-minutes';
+>      IF v_job IS NOT NULL THEN PERFORM cron.unschedule(v_job); END IF;
+>      PERFORM cron.schedule(
+>        'recover-consultation-zoom-links-every-15-minutes',
+>        '*/15 * * * *',
+>        $cron$
+>        SELECT net.http_post(
+>          url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/recover-consultation-zoom-links',
+>          headers := '{"Content-Type":"application/json"}'::jsonb,
+>          body := jsonb_build_object(
+>            'source', 'pg_cron',
+>            'cron_secret', (SELECT value FROM public.site_settings WHERE key = 'cron_secret')
+>          )
+>        );
+>        $cron$
+>      );
+>    END $$;
+>    ```
+>
+>    If `cron_secret` has no row in `site_settings`, or `pg_cron`/`pg_net`
+>    aren't available, stop and tell me instead of changing anything else.
 >
 >    Don't change any other policy, grant, table or data.
 > 3. **Publish the frontend** (Share → Publish → Update).

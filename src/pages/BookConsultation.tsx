@@ -199,6 +199,10 @@ const BookConsultation = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
+  // PayPal took the payment but the session couldn't be reserved (usually the
+  // time was taken a moment earlier). Matt has been emailed; show this instead
+  // of the "Booking Confirmed" page.
+  const [paidNotBooked, setPaidNotBooked] = useState(false);
   const [clientTimezone, setClientTimezone] = useState(() => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -263,15 +267,9 @@ const BookConsultation = () => {
         if (body?.paymentCaptured === true) result = body;
         else throw error;
       }
+      const paidButNotBooked = Boolean(result?.error && result.paymentCaptured);
       if (result?.error) {
-        if (result.paymentCaptured) {
-          toast({
-            title: "Payment Received",
-            description: String(result.error),
-          });
-        } else {
-          throw new Error(String(result.error));
-        }
+        if (!paidButNotBooked) throw new Error(String(result.error));
       } else {
         toast({
           title: "Booking Confirmed!",
@@ -317,6 +315,12 @@ const BookConsultation = () => {
 
       // Clean up URL and navigate to onboarding
       window.history.replaceState({}, "", window.location.pathname);
+      if (paidButNotBooked) {
+        localStorage.removeItem("consultation_plan_type");
+        setPaidNotBooked(true);
+        setPaymentProcessing(false);
+        return;
+      }
       const storedPlan = localStorage.getItem("consultation_plan_type") || "single";
       localStorage.removeItem("consultation_plan_type");
       navigate(`/coaching-onboarding?plan=${storedPlan}`, { replace: true });
@@ -796,6 +800,32 @@ const BookConsultation = () => {
 
   // Price display helpers
   const displayRate = isReadinessIntensive ? (isMember ? 2250 : 2500) : isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
+
+  if (paidNotBooked) return (
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-10">
+      <Card className="max-w-lg w-full">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-primary" />
+            Payment received
+          </CardTitle>
+          <CardDescription>
+            Your payment went through, but we couldn't reserve your session time, so your session isn't booked yet.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <p>
+            Matt has been notified and will contact you within one business day to pick a new time. You won't be
+            charged again.
+          </p>
+          <p>
+            Prefer to reach out now? Call <a className="font-medium underline" href="tel:+14582988008">(458) 298-8008</a>{" "}
+            or email <a className="font-medium underline" href="mailto:matt@soberhelpline.com">matt@soberhelpline.com</a>.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
 
   if (loading || paymentProcessing) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4">

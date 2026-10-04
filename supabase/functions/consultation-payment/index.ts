@@ -29,6 +29,7 @@ async function alertPaidNotBooked(details: Record<string, unknown>): Promise<voi
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(5000),
       body: JSON.stringify({
         personalizations: [{ to: [{ email: 'matt@soberhelpline.com' }] }],
         from: { email: 'matt@soberhelpline.com', name: 'Sober Helpline' },
