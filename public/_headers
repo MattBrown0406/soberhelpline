@@ -1,0 +1,5 @@
+# Response headers for Cloudflare Pages / Netlify-style hosts (like _redirects).
+# Lovable hosting does not read this file today; it serves the extensionless
+# association file as application/octet-stream, which Apple accepts.
+/.well-known/apple-app-site-association
+  Content-Type: application/json

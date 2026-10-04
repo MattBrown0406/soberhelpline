@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import RouteAnalytics from "./components/RouteAnalytics";
+import AppSsoHandoff from "./components/AppSsoHandoff";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Index from "./pages/Index";
 import MondayZoomRegistration from "./pages/MondayZoomRegistration";
@@ -127,6 +128,7 @@ const FamilyEducation = React.lazy(() => import("./pages/FamilyEducation"));
 const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTracks"));
 const SSO = React.lazy(() => import("./pages/SSO"));
 const SubscriberRoute = React.lazy(() => import("./components/SubscriberRoute"));
+const AppLinkFallback = React.lazy(() => import("./pages/AppLinkFallback"));
 
 
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
@@ -305,6 +307,8 @@ const App = () => (
         <RouteAnalytics />
         <Layout>
           <RouteErrorBoundary>
+            {/* Sign-in from the Sober Helpline app (?sso_token=) on any page, redeemed once. */}
+            <AppSsoHandoff>
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
               <Route path="/" element={<Index />} />
@@ -418,6 +422,8 @@ const App = () => (
               <Route path="/family-education" element={<SubscriberRoute><FamilyEducation /></SubscriberRoute>} />
               <Route path="/family-education/tracks" element={<SubscriberRoute><FamilyEducationTracks /></SubscriberRoute>} />
               <Route path="/sso" element={<SSO />} />
+              {/* Universal links into the iOS app; this page only shows when the app isn't installed or on desktop. */}
+              <Route path="/app/*" element={<AppLinkFallback />} />
 
               <Route path="/family-forum" element={<SubscriberRoute><FamilyForum /></SubscriberRoute>} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
@@ -608,6 +614,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
+            </AppSsoHandoff>
           </RouteErrorBoundary>
         </Layout>
       </BrowserRouter>

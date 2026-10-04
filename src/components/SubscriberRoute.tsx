@@ -1,10 +1,9 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { clearSsoSignIn, clearWebSession, getSsoSignedInEmail } from "@/lib/webSession";
-import { useAppSsoHandoff, type SsoNotice } from "@/hooks/useWebSession";
-import AppSubscriberGate, { SsoSignedInNotice, SsoSwitchAccountPrompt } from "@/components/AppSubscriberGate";
+import { clearSsoSignIn, clearWebSession, SSO_TOKEN_PARAM } from "@/lib/webSession";
+import AppSubscriberGate from "@/components/AppSubscriberGate";
 
 type Access = "checking" | "member" | "not_member" | "signed_out";
 
@@ -18,6 +17,10 @@ interface AccessState {
  * Members-only access is decided by the signed-in user's WEBSITE membership
  * (the same is_active_family_member check the database uses for the forum,
  * recordings and Q&A), never by a client-side flag.
+ *
+ * Sign-in from the app (`?sso_token=`) is handled once for the whole site by
+ * AppSsoHandoff, which doesn't render the page until it has finished, so this
+ * component only ever sees the resulting session (and never redeems a token).
  */
 async function checkAccess(): Promise<AccessState> {
   const {
@@ -54,20 +57,14 @@ const Spinner = () => (
 
 export default function SubscriberRoute({ children }: { children: ReactNode }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const ssoToken = params.get("sso_token") ?? "";
-
-  const handoff = useAppSsoHandoff(ssoToken);
   const [state, setState] = useState<AccessState>({ access: "checking", email: null, userId: null });
-  const [notice, setNotice] = useState<SsoNotice | null>(null);
   const [authVersion, setAuthVersion] = useState(0);
   const checkedUserId = useRef<string | null | undefined>(undefined);
 
-  // Where to come back to after signing in (never includes the spent token).
+  // Where to come back to after signing in (never includes an app token).
   const returnPath = useMemo(() => {
     const search = new URLSearchParams(location.search);
-    search.delete("sso_token");
+    search.delete(SSO_TOKEN_PARAM);
     const query = search.toString();
     return `${location.pathname}${query ? `?${query}` : ""}${location.hash}`;
   }, [location.pathname, location.search, location.hash]);
@@ -91,18 +88,8 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Once the app sign-in is finished (or declined), drop the spent token from the URL.
-  const handoffPhase = handoff.state.phase;
-  const handoffNotice = handoff.state.phase === "done" ? handoff.state.notice : null;
+  // Membership check.
   useEffect(() => {
-    if (handoffPhase !== "done" || !ssoToken) return;
-    setNotice(handoffNotice);
-    navigate(returnPath, { replace: true });
-  }, [handoffPhase, handoffNotice, ssoToken, navigate, returnPath]);
-
-  // Membership check (only once no app sign-in is in progress).
-  useEffect(() => {
-    if (ssoToken) return;
     let cancelled = false;
     checkAccess()
       .then((result) => {
@@ -116,43 +103,22 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [ssoToken, authVersion]);
+  }, [authVersion]);
 
   const handleSignOut = async () => {
     clearSsoSignIn();
-    setNotice(null);
     await supabase.auth.signOut();
   };
 
-  if (handoff.state.phase === "confirm") {
-    return (
-      <SsoSwitchAccountPrompt
-        currentEmail={handoff.state.currentEmail}
-        appEmail={handoff.state.appEmail}
-        onContinue={handoff.continueAsAppAccount}
-        onStay={handoff.keepCurrentAccount}
-      />
-    );
-  }
+  if (state.access === "checking") return <Spinner />;
 
-  if (ssoToken || state.access === "checking") return <Spinner />;
-
-  if (state.access === "member") {
-    const ssoEmail = getSsoSignedInEmail();
-    const showSsoNotice = !!ssoEmail && ssoEmail === state.email?.toLowerCase();
-    return (
-      <>
-        {showSsoNotice && <SsoSignedInNotice email={ssoEmail} onSignOut={handleSignOut} />}
-        {children}
-      </>
-    );
-  }
+  // The "Signed in from the Sober Helpline app as …" note comes from AppSsoHandoff.
+  if (state.access === "member") return <>{children}</>;
 
   return (
     <AppSubscriberGate
       signedInEmail={state.access === "not_member" ? state.email : null}
       returnPath={returnPath}
-      notice={notice}
       onSignOut={handleSignOut}
     />
   );

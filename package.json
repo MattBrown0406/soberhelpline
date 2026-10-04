@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-blog-index.mjs",
-    "build": "vite build && node scripts/prerender-routes.mjs",
+    "build": "vite build && node scripts/prerender-routes.mjs && node scripts/validate-app-site-association.mjs",
     "seo:validate": "node scripts/validate-seo-output.mjs",
+    "aasa:validate": "node scripts/validate-app-site-association.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",

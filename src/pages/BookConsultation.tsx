@@ -18,6 +18,7 @@ import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
+import { appVisitQuery, arrivedFromApp } from "@/lib/webSession";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -102,6 +103,34 @@ const timeToMinutes = (timeStr: string) => {
 };
 
 const rangesOverlap = (startA: number, endA: number, startB: number, endB: number) => startA < endB && endA > startB;
+
+// Plans the server accepts (supabase/functions/_shared/bookingRules.ts). Any
+// other ?plan= value books a single session, as it always has.
+const SERVER_PLAN_TYPES = new Set(["single", "emergency", "family-readiness-intensive", "stabilization", "parallel-recovery"]);
+
+/** The JSON body of a failed function call, if it sent one. */
+async function functionErrorBody(error: unknown): Promise<Record<string, unknown> | null> {
+  const context = (error as { context?: unknown } | null)?.context;
+  if (typeof Response === "undefined" || !(context instanceof Response)) return null;
+  try {
+    const body = await context.clone().json();
+    return body && typeof body === "object" ? body as Record<string, unknown> : null;
+  } catch {
+    return null;
+  }
+}
+
+/** The server's explanation when it refuses a booking (it sends { error, code }). */
+async function bookingRefusalMessage(error: unknown): Promise<string | null> {
+  const context = (error as { context?: unknown } | null)?.context;
+  if (typeof Response === "undefined" || !(context instanceof Response)) return null;
+  try {
+    const body = await context.clone().json();
+    return typeof body?.code === "string" && typeof body?.error === "string" ? body.error : null;
+  } catch {
+    return null;
+  }
+}
 
 const SESSION_REASONS = [
   "Emergency Game Plan",
@@ -199,6 +228,11 @@ const BookConsultation = () => {
   const totalSteps = 6;
   const progressPercent = ((step + 1) / totalSteps) * 100;
 
+  // Opened from the Sober Helpline app (remembered per tab by AppSsoHandoff):
+  // no membership sales here, and the app marks ride along through PayPal
+  // (which can come back in a new tab) for the confirmation page's way back.
+  const [fromApp] = useState(arrivedFromApp);
+
   // Handle PayPal return - capture payment after redirect back (exactly once)
   const captureStartedRef = useRef(false);
   useEffect(() => {
@@ -221,15 +255,22 @@ const BookConsultation = () => {
         body: { action: "capture-order", orderId },
       });
 
-      if (error) throw error;
-      if (data?.error) {
-        if (data.paymentCaptured) {
+      // Paid but the booking couldn't be made (the server answers 500 with
+      // paymentCaptured): tell her the payment went through and we'll follow up.
+      let result = data;
+      if (error) {
+        const body = await functionErrorBody(error);
+        if (body?.paymentCaptured === true) result = body;
+        else throw error;
+      }
+      if (result?.error) {
+        if (result.paymentCaptured) {
           toast({
             title: "Payment Received",
-            description: data.error,
+            description: String(result.error),
           });
         } else {
-          throw new Error(data.error);
+          throw new Error(String(result.error));
         }
       } else {
         toast({
@@ -707,8 +748,10 @@ const BookConsultation = () => {
         value: displayRate,
       });
 
-      const returnUrl = `${window.location.origin}/book-consultation?paypal_success=true`;
-      const cancelUrl = `${window.location.origin}/book-consultation${planType ? `?plan=${planType}` : ""}`;
+      const appMarks = appVisitQuery(); // from_app=1 / app_links=1 when this tab has them
+      const returnUrl = `${window.location.origin}/book-consultation?paypal_success=true${appMarks ? `&${appMarks}` : ""}`;
+      const cancelQuery = [planType ? `plan=${encodeURIComponent(planType)}` : "", appMarks].filter(Boolean).join("&");
+      const cancelUrl = `${window.location.origin}/book-consultation${cancelQuery ? `?${cancelQuery}` : ""}`;
 
       // Create PayPal order
       const { data, error } = await supabase.functions.invoke("consultation-payment", {
@@ -720,13 +763,22 @@ const BookConsultation = () => {
           client_name: intakeData.client_name,
           client_email: intakeData.client_email,
           client_phone: intakeData.client_phone || null,
-          plan_type: planType || "single",
+          plan_type: planType && SERVER_PLAN_TYPES.has(planType) ? planType : "single",
           return_url: returnUrl,
           cancel_url: cancelUrl,
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        // e.g. "One of the selected times was just booked by someone else."
+        const refusal = await bookingRefusalMessage(error);
+        if (refusal) {
+          toast({ title: "Booking not possible", description: refusal, variant: "destructive" });
+          setIsSubmitting(false);
+          return;
+        }
+        throw error;
+      }
       if (data?.error) throw new Error(data.error);
 
       if (data?.approvalUrl) {
@@ -800,10 +852,16 @@ const BookConsultation = () => {
               <div className="flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-4 py-2.5">
                 <Users className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
-                  Members save $25 per session —{" "}
-                  <Link to="/family-membership" className="text-primary hover:underline font-medium">
-                    Join for $9.99/mo
-                  </Link>
+                  Members save $25 per session
+                  {/* No website membership sales to visitors from the app (App Store guideline 3.1.1). */}
+                  {!fromApp && (
+                    <>
+                      {" "}—{" "}
+                      <Link to="/family-membership" className="text-primary hover:underline font-medium">
+                        Join for $9.99/mo
+                      </Link>
+                    </>
+                  )}
                 </span>
               </div>
             )}
@@ -827,13 +885,26 @@ const BookConsultation = () => {
                   : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150, or $125 for members)"}`}
               </p>
               {!isMultiSession && !isMember && !isReadinessIntensive && (
-                <div className="flex justify-center mb-6">
-                  <Button asChild variant="outline" size="sm" className="gap-1.5">
-                    <Link to="/family-membership">
-                      <Crown className="w-4 h-4" />
-                      Join membership to save $25 per session
-                    </Link>
-                  </Button>
+                <div className="flex flex-col items-center gap-2 mb-6">
+                  {!fromApp && (
+                    <Button asChild variant="outline" size="sm" className="gap-1.5">
+                      <Link to="/family-membership">
+                        <Crown className="w-4 h-4" />
+                        Join membership to save $25 per session
+                      </Link>
+                    </Button>
+                  )}
+                  {!user && (
+                    <p className="text-sm text-muted-foreground">
+                      Already a member?{" "}
+                      <Link
+                        to={`/auth?redirect=${encodeURIComponent(`/book-consultation${window.location.search}`)}`}
+                        className="text-primary hover:underline font-medium"
+                      >
+                        Sign in for the member rate
+                      </Link>
+                    </p>
+                  )}
                 </div>
               )}
               <Card className="mb-6 border-primary/20 bg-primary/5">
@@ -1076,8 +1147,13 @@ const BookConsultation = () => {
                           </div>
                         ) : (
                           <p className="text-xs text-muted-foreground">
-                            Members save $25/session —{" "}
-                            <Link to="/family-membership" className="text-primary hover:underline">Join for $9.99/mo</Link>
+                            Members save $25/session
+                            {!fromApp && (
+                              <>
+                                {" "}—{" "}
+                                <Link to="/family-membership" className="text-primary hover:underline">Join for $9.99/mo</Link>
+                              </>
+                            )}
                           </p>
                         )}
                       </div>

@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["4D2KRG86P2.com.soberhelplineapp"],
+        "components": [
+          { "/": "/app" },
+          { "/": "/app/*" }
+        ]
+      }
+    ]
+  }
+}

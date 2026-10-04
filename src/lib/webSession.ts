@@ -16,6 +16,100 @@ const LEGACY_COOKIE_KEYS = ["app_subscriber", "app_subscriber_session"];
 // Email of the account this tab was signed into from the app (for the
 // "Signed in as …" notice). sessionStorage: per tab, survives reloads.
 const SSO_EMAIL_KEY = "sh_app_sso_email";
+// This tab was opened from the Sober Helpline app (from_app=1, or an app
+// sign-in token): no website membership sales, and the "back to the app"
+// buttons. Per tab, like the above.
+const FROM_APP_KEY = "sh_from_app";
+// The app that opened this tab understands sober-helpline://app/... deep links
+// (app 4.0 (3)+ adds app_links=1; 4.0 (2) doesn't and shows "Unmatched Route").
+const APP_LINKS_KEY = "sh_app_links";
+
+/** Query parameters the app (4.0 (3)+) adds to every soberhelpline.com URL it opens. */
+export const FROM_APP_PARAM = "from_app";
+export const APP_LINKS_PARAM = "app_links";
+
+/** The query parameter the app adds to soberhelpline.com links. */
+export const SSO_TOKEN_PARAM = "sso_token";
+/** Legacy token parameter, only on /sso (older app builds). */
+const LEGACY_SSO_PATH = "/sso";
+const LEGACY_SSO_TOKEN_PARAM = "t";
+
+/**
+ * The one-time app token in a URL: `?sso_token=` on any page, or the legacy
+ * `/sso?t=` link. Empty string when there is none.
+ */
+export function readAppSsoToken(pathname: string, search: string): string {
+  const params = new URLSearchParams(search);
+  const token = params.get(SSO_TOKEN_PARAM)
+    ?? (pathname === LEGACY_SSO_PATH ? params.get(LEGACY_SSO_TOKEN_PARAM) : null)
+    ?? "";
+  return token.trim();
+}
+
+/** The same URL (path + query + hash) without the app token. */
+export function withoutAppSsoToken(pathname: string, search: string, hash: string): string {
+  const params = new URLSearchParams(search);
+  params.delete(SSO_TOKEN_PARAM);
+  if (pathname === LEGACY_SSO_PATH) params.delete(LEGACY_SSO_TOKEN_PARAM);
+  const query = params.toString();
+  return `${pathname}${query ? `?${query}` : ""}${hash}`;
+}
+
+function urlSays(pathname: string, search: string) {
+  const params = new URLSearchParams(search);
+  const appLinks = params.get(APP_LINKS_PARAM) === "1";
+  const fromApp = appLinks || params.get(FROM_APP_PARAM) === "1" || readAppSsoToken(pathname, search) !== "";
+  return { fromApp, appLinks };
+}
+
+function storedFlag(key: string): boolean {
+  try {
+    return sessionStorage.getItem(key) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function storeFlag(key: string) {
+  try {
+    sessionStorage.setItem(key, "1");
+  } catch {
+    // Storage can be unavailable (private mode); these marks are best-effort.
+  }
+}
+
+/**
+ * Remember what this URL says about the app, for the rest of the tab:
+ * opened from the app (from_app=1, app_links=1, or an app sign-in token) and
+ * whether that app build understands sober-helpline://app/... links.
+ * Called by AppSsoHandoff on every page.
+ */
+export function rememberAppVisit(pathname: string, search: string) {
+  const { fromApp, appLinks } = urlSays(pathname, search);
+  if (fromApp) storeFlag(FROM_APP_KEY);
+  if (appLinks) storeFlag(APP_LINKS_KEY);
+}
+
+const currentUrlSays = () =>
+  typeof window === "undefined" ? { fromApp: false, appLinks: false } : urlSays(window.location.pathname, window.location.search);
+
+/** Was this tab opened from the Sober Helpline app? (Also true on the landing URL before it's remembered.) */
+export function arrivedFromApp(): boolean {
+  return storedFlag(FROM_APP_KEY) || currentUrlSays().fromApp;
+}
+
+/** Does the app that opened this tab understand sober-helpline://app/... links? */
+export function appLinksSupported(): boolean {
+  return storedFlag(APP_LINKS_KEY) || currentUrlSays().appLinks;
+}
+
+/** Query string (without "?") that carries the app marks through a round trip (e.g. PayPal). */
+export function appVisitQuery(): string {
+  const params = new URLSearchParams();
+  if (arrivedFromApp()) params.set(FROM_APP_PARAM, "1");
+  if (appLinksSupported()) params.set(APP_LINKS_PARAM, "1");
+  return params.toString();
+}
 
 /** Remove the legacy client-side "app subscriber" flags if a browser still has them. */
 export function clearWebSession() {
@@ -92,7 +186,7 @@ const failed = (reason: AppSsoFailure): AppSsoExchange => ({
 });
 
 // One redemption per token and one sign-in per token hash: both are single-use,
-// and React may run effects twice.
+// and React may run effects twice. Only the site-wide AppSsoHandoff calls these.
 const exchanges = new Map<string, Promise<AppSsoExchange>>();
 const signIns = new Map<string, Promise<boolean>>();
 

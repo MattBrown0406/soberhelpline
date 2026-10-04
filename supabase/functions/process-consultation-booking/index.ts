@@ -152,7 +152,9 @@ async function processPayPalPayout(paypalEmail: string, amount: number, bookingI
 async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessions: number, provider: any) {
   const remaining = plan.total_sessions - completedSessions;
   const planLabel = plan.plan_type === 'parallel-recovery' ? 'Parallel Recovery Program™' : 'Family Stabilization Plan™';
-  const bookingUrl = 'https://soberhelpline.lovable.app/book-consultation?plan=' + (plan.plan_type === 'parallel-recovery' ? 'parallel' : 'stabilization');
+  // A plan's sessions are all chosen (and paid for) when it's booked, so there's
+  // nothing to book here: no link to /book-consultation, which is the checkout
+  // for a NEW plan. Changes to a time go through Matt (reply-to) or the phone.
 
   await sendEmail(booking.client_email, `Your Session is Complete — ${remaining} Session${remaining !== 1 ? 's' : ''} Remaining`, `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
@@ -160,8 +162,8 @@ async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessio
         <h1 style="color: white; margin: 0; font-size: 22px;">We Hope You Got More Than Expected</h1>
       </div>
       <div style="padding: 30px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0 0 12px 12px;">
-        <p>Hi ${booking.client_name},</p>
-        <p>Thank you for showing up today — that takes real courage. We hope your session with ${provider.full_name} gave you more clarity, more confidence, and more direction than you expected walking in.</p>
+        <p>Hi ${escapeHtml(booking.client_name)},</p>
+        <p>Thank you for showing up today — that takes real courage. We hope your session with ${escapeHtml(provider.full_name)} gave you more clarity, more confidence, and more direction than you expected walking in.</p>
         
         <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0;">
           <h2 style="color: #166534; margin: 0 0 8px; font-size: 18px;">📊 Your Progress</h2>
@@ -171,15 +173,16 @@ async function sendSessionFollowUpEmail(booking: any, plan: any, completedSessio
         </div>
 
         <div style="background: #eff6ff; border: 1px solid #93c5fd; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
-          <h2 style="color: #1e40af; margin: 0 0 12px; font-size: 18px;">📅 Book Your Next Session</h2>
-          <p style="margin: 0 0 16px; color: #374151;">Keep your momentum going. The work you're doing matters — for you and for your family.</p>
-          <a href="${bookingUrl}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Schedule Next Session</a>
+          <h2 style="color: #1e40af; margin: 0 0 12px; font-size: 18px;">📅 Your Next Session</h2>
+          <p style="margin: 0 0 12px; color: #374151;">Keep your momentum going. The work you're doing matters — for you and for your family.</p>
+          <p style="margin: 0 0 12px; color: #374151;">Your remaining sessions were scheduled when you booked your plan. Each session's confirmation email from us has its date, time and Zoom link.</p>
+          <p style="margin: 0; color: #374151;">Need to change a time? Reply to this email or call <strong>(458) 298-8008</strong>.</p>
         </div>
 
         <div style="background: #faf5ff; border: 1px solid #d8b4fe; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
           <h2 style="color: #7e22ce; margin: 0 0 12px; font-size: 18px;">⭐ Share Your Experience</h2>
           <p style="margin: 0 0 16px; color: #374151;">Your story could encourage another family to take their first step. We'd love to hear how coaching is impacting your journey.</p>
-          <a href="https://soberhelpline.lovable.app/testimonials" style="display: inline-block; padding: 12px 24px; background-color: #7e22ce; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Write a Testimonial</a>
+          <a href="https://soberhelpline.com/testimonials" style="display: inline-block; padding: 12px 24px; background-color: #7e22ce; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Write a Testimonial</a>
         </div>
 
         <p style="color: #6b7280; font-size: 14px;">If you have any questions or need to discuss anything before your next session, call us at <strong>(458) 298-8008</strong>.</p>
@@ -196,7 +199,8 @@ Deno.serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 
-    // Allow service role key auth (from book-consultation edge function) or user auth
+    // Service role key (book-consultation, the recovery job) or a signed-in user
+    // (admins; providers for their own payouts — see the checks below).
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
     const token = authHeader.replace('Bearer ', '');
     const isServiceRole = serviceRoleKey.length > 0 && token === serviceRoleKey;
@@ -243,19 +247,22 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Provider not found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
 
-    // Only the system (book-consultation, the recovery job), an admin, or the
-    // people on this booking may act on it. Payouts: system, admin, or this
-    // booking's own provider — never any signed-in user.
+    // Who may act on this booking:
+    // - payout: the system, an admin, or this booking's own provider;
+    // - the default action (create the Zoom meeting and send the "confirmed"
+    //   emails): ONLY the system (book-consultation after PayPal captured the
+    //   payment, and the recovery job) or an admin. Never the client or provider:
+    //   that would turn any row they can see into a confirmed Zoom booking, and
+    //   no page calls it that way.
     let isAdmin = false;
     if (callerUserId) {
       const { data: adminRole } = await adminClient.rpc('has_role', { _user_id: callerUserId, _role: 'admin' });
       isAdmin = adminRole === true;
     }
     const isBookingProvider = !!callerUserId && provider.user_id === callerUserId;
-    const isBookingClient = !!callerUserId && booking.client_user_id === callerUserId;
     if (action === 'payout') {
       if (!isServiceRole && !isAdmin && !isBookingProvider) return forbidden();
-    } else if (!isServiceRole && !isAdmin && !isBookingProvider && !isBookingClient) {
+    } else if (!isServiceRole && !isAdmin) {
       return forbidden();
     }
 
@@ -379,6 +386,12 @@ Deno.serve(async (req) => {
     // Invariant: never mark the client/provider notified unless a real Zoom link exists
     // and that specific email send succeeded. If Zoom fails, return a retryable error
     // and leave the booking visible to the recovery job.
+    // Only for confirmed bookings (book-consultation creates them confirmed after
+    // payment; the recovery job only retries confirmed ones): never a Zoom meeting
+    // or a "confirmed" email for a cancelled, completed or no-show booking.
+    if (booking.status !== 'confirmed') {
+      return new Response(JSON.stringify({ error: 'Booking is not confirmed' }), { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
     const meetingDate = new Date(`${booking.booking_date}T${booking.start_time}`);
     const intakeResponses = (booking.intake_responses as Record<string, string> | null) || null;
     const serviceType = intakeResponses?.service_type;

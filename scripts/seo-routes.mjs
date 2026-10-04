@@ -1,5 +1,11 @@
 export const SITE_URL = 'https://soberhelpline.com';
 
+// Universal-link namespace: https://soberhelpline.com/app and /app/* open the
+// Sober Helpline iOS app (public/.well-known/apple-app-site-association). The
+// website's /app pages are only a noindex fallback (app not installed, or a
+// desktop browser), so they are never in the sitemap and never prerendered.
+export const isAppLinkRoute = (route) => route === '/app' || route.startsWith('/app/');
+
 // Alternate public URLs that intentionally resolve to one primary search URL.
 // These routes remain usable for bookmarks and campaigns, but only the primary
 // URL belongs in the sitemap.

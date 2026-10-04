@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { prerenderPages, SITE_URL, excludedSitemapRoutes, canonicalRouteAliases } from './seo-routes.mjs';
+import { prerenderPages, SITE_URL, excludedSitemapRoutes, canonicalRouteAliases, isAppLinkRoute } from './seo-routes.mjs';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
@@ -235,6 +235,9 @@ const getRouteMetadataPages = async () => {
 
   for (const [, route, component] of appSource.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<([A-Za-z0-9_]+)/g)) {
     if (!route.startsWith('/') || route.includes(':') || component === 'BlogArticle') continue;
+    // Wildcard routes have no single URL, and /app/* is the app's universal-link
+    // fallback (noindex, client-rendered): neither gets a prerendered shell.
+    if (route.includes('*') || isAppLinkRoute(route)) continue;
     if (seen.has(route)) continue;
     seen.add(route);
 
@@ -326,6 +329,8 @@ const replaceOrInsertHeadTag = (html, pattern, replacement) => pattern.test(html
 // Smart App Banner (Safari on iPhone: Open/Get for the Sober Helpline app).
 // index.html carries it; this keeps every generated shell, including the
 // preserved static ones that don't start from index.html, in step with it.
+// No app-argument yet: app 4.0 (2) can't route https://soberhelpline.com/app
+// ("Unmatched Route"). Add it once 4.0 (3)+ is the norm (and in the validator).
 const APPLE_ITUNES_APP_PATTERN = /<meta\s+name=["']apple-itunes-app["'][^>]*>/i;
 const APPLE_ITUNES_APP_META = '<meta name="apple-itunes-app" content="app-id=6780034996">';
 const withSmartAppBanner = (html) => replaceOrInsertHeadTag(html, APPLE_ITUNES_APP_PATTERN, APPLE_ITUNES_APP_META);

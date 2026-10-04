@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import { useAppSsoHandoff } from "@/hooks/useWebSession";
-import { SsoSwitchAccountPrompt } from "@/components/AppSubscriberGate";
+import { useAppSsoNotice } from "@/components/AppSsoHandoff";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -23,37 +22,22 @@ function safeNextPath(next: string | null): string {
 
 /**
  * Legacy entry point: /sso?t=<token>&next=/path (older app builds).
- * Signs in with the app token (app-sso-exchange) — asking first if a different
- * account is already signed in — then continues to `next`. Member pages decide
- * access from website membership.
+ * The token (`t` or `sso_token`) is redeemed by the site-wide AppSsoHandoff —
+ * which signs in only after the visitor taps "Continue as …" — before this
+ * page renders. This page then continues to `next`, or explains why the
+ * sign-in failed. Member pages decide access from website membership.
  */
 export default function SSO() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
-  const token = (params.get("sso_token") ?? params.get("t") ?? "").trim();
   const next = useMemo(() => safeNextPath(params.get("next")), [params]);
-  const { state, continueAsAppAccount, keepCurrentAccount } = useAppSsoHandoff(token);
-
-  const notice = state.phase === "done" ? state.notice : null;
+  const notice = useAppSsoNotice();
   const failed = notice === "expired" || notice === "unavailable" || notice === "password_required";
 
   useEffect(() => {
-    if (!token || (state.phase === "done" && !failed)) {
-      navigate(next, { replace: true });
-    }
-  }, [token, state.phase, failed, next, navigate]);
-
-  if (state.phase === "confirm") {
-    return (
-      <SsoSwitchAccountPrompt
-        currentEmail={state.currentEmail}
-        appEmail={state.appEmail}
-        onContinue={continueAsAppAccount}
-        onStay={keepCurrentAccount}
-      />
-    );
-  }
+    if (!failed) navigate(next, { replace: true });
+  }, [failed, next, navigate]);
 
   if (failed) {
     return (

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ClipboardCheck, Calendar, ShieldAlert, FileText, Compass, Users, BookOpen, Video, Crown, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,12 +16,34 @@ import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
+import { arrivedFromApp } from "@/lib/webSession";
 
 export default function FamilyCoaching() {
   const { isMember } = useMembershipStatus();
+  // Opened from the Sober Helpline app: no website membership sales here (App
+  // Store guideline 3.1.1). Member pages explain that membership comes with the
+  // app plan instead.
+  const [fromApp] = useState(arrivedFromApp);
 
   // Gated pages redirect non-members to membership signup
-  const gatedLink = (path: string) => isMember ? path : "/family-membership";
+  const gatedLink = (path: string) => (isMember || fromApp) ? path : "/family-membership";
+
+  const memberBannerClass = "flex items-center gap-3 bg-gradient-to-r from-primary/10 via-blue-400/10 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6";
+  const memberBannerContent = (
+    <>
+      <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
+        <Crown className="w-4.5 h-4.5 text-primary" />
+      </div>
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-foreground">
+          Members save on private coaching, including <span className="text-primary">10% off the Family Readiness Intensive</span>
+        </p>
+        <p className="text-xs text-muted-foreground">
+          Coaching sessions are $125 instead of $150, and the intensive drops from $2,500 to $2,250 for members.
+        </p>
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -115,7 +138,7 @@ export default function FamilyCoaching() {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link to="/book-consultation" onClick={() => trackConversionEvent("coaching_click", { source: "family_coaching_top_path" })}><Button className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Book Private Coaching</Button></Link>
                     <Link to="/monday-zoom-registration" onClick={() => trackConversionEvent("monday_zoom_click", { source: "family_coaching_top_path" })}><Button variant="outline" className="gap-2 w-full sm:w-auto"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
-                    <Link to="/family-membership"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Users className="h-4 w-4" />Explore Membership</Button></Link>
+                    {!fromApp && <Link to="/family-membership"><Button variant="outline" className="gap-2 w-full sm:w-auto"><Users className="h-4 w-4" />Explore Membership</Button></Link>}
                   </div>
                 </div>
               </CardContent>
@@ -134,21 +157,15 @@ export default function FamilyCoaching() {
               </CardContent>
             </Card>
 
-            {/* Member Discount Banner */}
-            <Link to="/family-membership" className="flex items-center gap-3 bg-gradient-to-r from-primary/10 via-blue-400/10 to-primary/10 border border-primary/20 rounded-xl px-5 py-3.5 mb-6 hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group">
-              <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/25 transition-colors">
-                <Crown className="w-4.5 h-4.5 text-primary" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-foreground">
-                  Members save on private coaching, including <span className="text-primary">10% off the Family Readiness Intensive</span>
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Coaching sessions are $125 instead of $150, and the intensive drops from $2,500 to $2,250 for members.
-                </p>
-              </div>
-              <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            {/* Member Discount Banner (plain text for visitors from the app: no membership sales) */}
+            {fromApp ? (
+              <div className={memberBannerClass}>{memberBannerContent}</div>
+            ) : (
+              <Link to="/family-membership" className={`${memberBannerClass} hover:border-primary/40 hover:shadow-md transition-all cursor-pointer group`}>
+                {memberBannerContent}
+                <ArrowLeft className="w-4 h-4 text-primary rotate-180 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            )}
 
             {/* Family Assessment CTA */}
             <div className="mb-8">

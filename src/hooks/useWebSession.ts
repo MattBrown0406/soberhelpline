@@ -8,33 +8,45 @@ import {
   type AppSsoFailure,
 } from "@/lib/webSession";
 
-/** Why an app sign-in did not (fully) work, for the member-options page. */
+/** Why an app sign-in did not (fully) work. */
 export type SsoNotice = AppSsoFailure | "membership_pending";
 
+/** Every phase except "idle" names the token it belongs to. */
 export type AppSsoHandoffState =
   | { phase: "idle" }
-  | { phase: "working" }
-  /** A different website account is signed in: ask before switching. */
-  | { phase: "confirm"; currentEmail: string; appEmail: string }
-  | { phase: "done"; notice: SsoNotice | null };
+  /** Redeeming the token (signingIn false), or signing in after the visitor confirmed (true). */
+  | { phase: "working"; token: string; signingIn: boolean }
+  /**
+   * The link's account is known but nothing has changed yet: ask first.
+   * currentEmail is the DIFFERENT account already signed in on this browser,
+   * or null when nobody is signed in.
+   */
+  | { phase: "confirm"; token: string; currentEmail: string | null; appEmail: string }
+  | { phase: "done"; token: string; notice: SsoNotice | null };
 
 function successNotice(exchange: AppSsoExchange): SsoNotice | null {
   return exchange.appMember && !exchange.membershipReady ? "membership_pending" : null;
 }
 
 /**
- * Handles `?sso_token=` from the Sober Helpline app.
+ * Handles the one-time `sso_token` from the Sober Helpline app.
  *
- * Signs the browser in as the app user's website account, except when a
- * DIFFERENT website account is already signed in: then it stops at
- * phase "confirm" and waits for continueAsAppAccount() or keepCurrentAccount(),
- * so a link carrying someone else's token can't silently switch accounts.
+ * Redeems the token (which tells us the app account's email) and then stops at
+ * phase "confirm" until the visitor taps continueAsAppAccount() or
+ * declineAppAccount(). Only the tap signs the browser in. Without it, anyone
+ * could send a link carrying THEIR token and silently sign a visitor into their
+ * account (then see what the visitor books or writes), or switch a signed-in
+ * visitor to it. The only case that skips the question is a browser already
+ * signed in as that same account (nothing changes).
+ *
+ * Mounted once for the whole site (components/AppSsoHandoff), so each token is
+ * redeemed exactly once; pages never call this themselves.
  */
 export function useAppSsoHandoff(token: string) {
   const [state, setState] = useState<AppSsoHandoffState>(() =>
-    token ? { phase: "working" } : { phase: "idle" }
+    token ? { phase: "working", token, signingIn: false } : { phase: "idle" }
   );
-  const pending = useRef<AppSsoExchange | null>(null);
+  const pending = useRef<{ token: string; exchange: AppSsoExchange } | null>(null);
 
   useEffect(() => {
     if (!token) {
@@ -43,13 +55,13 @@ export function useAppSsoHandoff(token: string) {
       return;
     }
     let cancelled = false;
-    setState({ phase: "working" });
+    setState({ phase: "working", token, signingIn: false });
 
     (async () => {
       const exchange = await exchangeAppSsoToken(token);
       if (cancelled) return;
       if (!exchange.ok || !exchange.email) {
-        setState({ phase: "done", notice: exchange.reason ?? "unavailable" });
+        setState({ phase: "done", token, notice: exchange.reason ?? "unavailable" });
         return;
       }
 
@@ -62,24 +74,20 @@ export function useAppSsoHandoff(token: string) {
       if (session?.user && currentEmail === exchange.email) {
         // Already signed in as this account.
         rememberSsoSignIn(exchange.email);
-        setState({ phase: "done", notice: successNotice(exchange) });
-        return;
-      }
-      if (session?.user) {
-        pending.current = exchange;
-        setState({
-          phase: "confirm",
-          currentEmail: session.user.email ?? "another account",
-          appEmail: exchange.email,
-        });
+        setState({ phase: "done", token, notice: successNotice(exchange) });
         return;
       }
 
-      const signedIn = await completeAppSsoSignIn(exchange);
-      if (cancelled) return;
-      setState({ phase: "done", notice: signedIn ? successNotice(exchange) : "unavailable" });
+      // Signed out, or signed in as someone else: ask before signing in.
+      pending.current = { token, exchange };
+      setState({
+        phase: "confirm",
+        token,
+        currentEmail: session?.user ? session.user.email ?? "another account" : null,
+        appEmail: exchange.email,
+      });
     })().catch(() => {
-      if (!cancelled) setState({ phase: "done", notice: "unavailable" });
+      if (!cancelled) setState({ phase: "done", token, notice: "unavailable" });
     });
 
     return () => {
@@ -88,18 +96,25 @@ export function useAppSsoHandoff(token: string) {
   }, [token]);
 
   const continueAsAppAccount = useCallback(async () => {
-    const exchange = pending.current;
+    const held = pending.current;
     pending.current = null;
-    if (!exchange) return;
-    setState({ phase: "working" });
-    const signedIn = await completeAppSsoSignIn(exchange);
-    setState({ phase: "done", notice: signedIn ? successNotice(exchange) : "unavailable" });
+    if (!held) return;
+    setState({ phase: "working", token: held.token, signingIn: true });
+    const signedIn = await completeAppSsoSignIn(held.exchange);
+    setState({
+      phase: "done",
+      token: held.token,
+      notice: signedIn ? successNotice(held.exchange) : "unavailable",
+    });
   }, []);
 
-  const keepCurrentAccount = useCallback(() => {
+  /** "Not you?" / "Stay signed in as …": drop the link's sign-in; nothing changes. */
+  const declineAppAccount = useCallback(() => {
+    const held = pending.current;
     pending.current = null;
-    setState({ phase: "done", notice: null });
+    if (!held) return;
+    setState({ phase: "done", token: held.token, notice: null });
   }, []);
 
-  return { state, continueAsAppAccount, keepCurrentAccount };
+  return { state, continueAsAppAccount, declineAppAccount };
 }

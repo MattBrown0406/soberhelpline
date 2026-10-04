@@ -114,7 +114,7 @@ Deno.serve(async (req) => {
       }
     });
 
-    const surveyUrl = "https://soberhelpline.lovable.app/survey";
+    const surveyUrl = "https://soberhelpline.com/survey";
 
     let sentCount = 0;
     for (const [email, firstName] of uniqueEmails.entries()) {

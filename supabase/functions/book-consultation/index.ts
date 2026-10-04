@@ -1,28 +1,86 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, type SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { isActiveFamilyMember } from "../_shared/familyMembership.ts";
+import { checkBookingShape } from "../_shared/bookingRules.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+/** Constant-time string comparison. */
+function safeEqual(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  const left = new TextEncoder().encode(a);
+  const right = new TextEncoder().encode(b);
+  let diff = left.length ^ right.length;
+  for (let i = 0; i < Math.max(left.length, right.length); i += 1) diff |= (left[i] ?? 0) ^ (right[i] ?? 0);
+  return diff === 0;
+}
+
+/**
+ * The website account whose LOGIN email is `email`, only if that email is
+ * confirmed; otherwise null. Never profile_private.email: anyone can set that to
+ * someone else's address, and a linked booking (intake answers, Zoom link) shows
+ * on that account's coaching pages. Any doubt (lookup fails, unconfirmed or
+ * different email): null, and the booking stays a guest booking.
+ */
+async function confirmedAccountIdForEmail(admin: SupabaseClient, email: string): Promise<string | null> {
+  try {
+    // auth.users lookup by login email (service role only; 2026-10-02 migration).
+    const { data: id, error } = await admin.rpc('auth_user_id_by_email', { p_email: email });
+    if (error || typeof id !== 'string' || !id) return null;
+    const { data, error: userError } = await admin.auth.admin.getUserById(id);
+    const user = data?.user;
+    if (userError || !user?.email_confirmed_at) return null;
+    if (user.email?.toLowerCase().trim() !== email) return null;
+    return user.id;
+  } catch {
+    return null;
+  }
+}
+
+// Creates CONFIRMED bookings (and sends Zoom links), so it is only called by
+// consultation-payment after PayPal has captured the payment, with this
+// project's service role key. Anyone else could book without paying.
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
+
+  const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+  const bearer = (req.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+  if (!safeEqual(bearer, serviceRoleKey)) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
 
   try {
     const body = await req.json();
     const {
       provider_id,
-      bookings, // Array of { booking_date, start_time, end_time, timezone }
+      bookings: requestedBookings, // Array of { booking_date, start_time, end_time, timezone }
       intake_responses,
       client_name,
       client_email,
       client_phone,
       plan_type, // 'single', 'stabilization', 'parallel-recovery', 'family-readiness-intensive'
+      // Decided by consultation-payment when it created the PayPal order:
+      user_id, // signed-in website account, or null for a guest
+      is_member, // member price applied (is_active_family_member)
+      amount_charged, // what PayPal captured, in dollars
     } = body;
 
-    if (!provider_id || !bookings?.length || !client_name || !client_email) {
+    if (!provider_id || !requestedBookings?.length || !client_name || !client_email) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
+
+    // Exactly the plan's number of well-formed, distinct sessions (consultation-payment
+    // already checked this, and the times against the calendar, when it created the
+    // order). Orders created before that check existed may carry any plan value,
+    // which was priced as one session: accept those as one session.
+    const shape = checkBookingShape(plan_type, requestedBookings, { legacyPlans: true });
+    if (!shape.ok) {
+      console.error('book-consultation: rejected booking shape', shape.code);
+      return new Response(JSON.stringify({ error: shape.error, code: shape.code }), { status: shape.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+    const bookings = shape.bookings;
 
     const adminClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -41,57 +99,21 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: 'Provider not found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
 
-    // Check if user is logged in (optional auth)
-    let userId: string | null = null;
-    const authHeader = req.headers.get('Authorization');
-    if (authHeader) {
-      const userClient = createClient(
-        Deno.env.get('SUPABASE_URL') ?? '',
-        Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-        { global: { headers: { Authorization: authHeader } } }
-      );
-      const { data: { user } } = await userClient.auth.getUser();
-      if (user) userId = user.id;
-    }
+    // The account that paid (signed in), as recorded when the order was created.
+    let userId: string | null = typeof user_id === 'string' && user_id ? user_id : null;
 
-    // SERVER-SIDE membership check — never trust client-passed price
-    let isMember = false;
+    // Member price: consultation-payment's decision when it created the order
+    // (signed-in account + is_active_family_member). Older pending orders without
+    // it fall back to the same rule for the recorded account.
+    const isMember = typeof is_member === 'boolean'
+      ? is_member
+      : (userId ? await isActiveFamilyMember(adminClient, userId) : false);
 
-    // Check by user_id first (if logged in)
-    if (userId) {
-      const { data: sub } = await adminClient
-        .from('provider_subscriptions')
-        .select('id')
-        .eq('user_id', userId)
-        .eq('status', 'active')
-        .is('provider_submission_id', null)
-        .limit(1)
-        .maybeSingle();
-      isMember = !!sub;
-    }
-
-    // If not found by user_id, check by email
-    if (!isMember) {
-      const { data: profile } = await adminClient
-        .from('profile_private')
-        .select('user_id')
-        .eq('email', client_email.toLowerCase().trim())
-        .limit(1)
-        .maybeSingle();
-
-      if (profile) {
-        const { data: sub } = await adminClient
-          .from('provider_subscriptions')
-          .select('id')
-          .eq('user_id', profile.user_id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1)
-          .maybeSingle();
-        isMember = !!sub;
-        // Also set userId if found via email
-        if (!userId) userId = profile.user_id;
-      }
+    // Guest booking: link it to the website account that signs in with that
+    // email (confirmed), if any, so it shows on their coaching pages.
+    // (Linking only — never pricing.)
+    if (!userId) {
+      userId = await confirmedAccountIdForEmail(adminClient, String(client_email).toLowerCase().trim());
     }
 
     // Determine pricing server-side
@@ -132,7 +154,13 @@ Deno.serve(async (req) => {
       coachingPlanId = newPlan.id;
     }
 
-    const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
+    const computedAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
+    // Record what was actually charged (PayPal's captured amount) when known.
+    const chargedAmount = Number(amount_charged);
+    const totalAmount = Number.isFinite(chargedAmount) && chargedAmount > 0 ? chargedAmount : computedAmount;
+    if (totalAmount !== computedAmount) {
+      console.warn('book-consultation: charged amount differs from the computed price', { plan_type, totalAmount, computedAmount });
+    }
 
     const normalizedEmail = client_email.toLowerCase().trim();
 
@@ -142,9 +170,9 @@ Deno.serve(async (req) => {
       .select('id, booking_date, start_time, client_email')
       .eq('provider_id', provider.id)
       .neq('status', 'cancelled')
-      .in('booking_date', bookings.map((b: any) => b.booking_date));
+      .in('booking_date', bookings.map((b) => b.booking_date));
 
-    const slotKey = (b: any) => `${b.booking_date}|${String(b.start_time).slice(0, 5)}`;
+    const slotKey = (b: { booking_date: string; start_time: string }) => `${b.booking_date}|${String(b.start_time).slice(0, 5)}`;
 
     // Slots already booked by THIS client = duplicate submit (safe to skip).
     const ownKeys = new Set(
@@ -159,20 +187,20 @@ Deno.serve(async (req) => {
         .map(slotKey)
     );
 
-    const conflicting = bookings.filter((b: any) => conflictKeys.has(slotKey(b)));
+    const conflicting = bookings.filter((b) => conflictKeys.has(slotKey(b)));
     if (conflicting.length > 0) {
       console.error('Slot conflict with another client:', conflicting);
       return new Response(
         JSON.stringify({
           error: 'One or more of the selected times were just booked by someone else. Our team will contact you to reschedule.',
           slotConflict: true,
-          conflictingSlots: conflicting.map((b: any) => ({ booking_date: b.booking_date, start_time: b.start_time })),
+          conflictingSlots: conflicting.map((b) => ({ booking_date: b.booking_date, start_time: b.start_time })),
         }),
         { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const newBookings = bookings.filter((b: any) => !ownKeys.has(slotKey(b)));
+    const newBookings = bookings.filter((b) => !ownKeys.has(slotKey(b)));
 
     if (newBookings.length === 0) {
       const { data: already } = await adminClient
@@ -181,7 +209,7 @@ Deno.serve(async (req) => {
         .eq('provider_id', provider.id)
         .eq('client_email', normalizedEmail)
         .neq('status', 'cancelled')
-        .in('booking_date', bookings.map((b: any) => b.booking_date));
+        .in('booking_date', bookings.map((b) => b.booking_date));
 
       return new Response(
         JSON.stringify({
@@ -198,7 +226,7 @@ Deno.serve(async (req) => {
     }
 
     // Create booking records
-    const bookingInserts = newBookings.map((b: any, index: number) => ({
+    const bookingInserts = newBookings.map((b, index: number) => ({
       provider_id: provider.id,
       client_user_id: userId, // null for guests
       booking_date: b.booking_date,

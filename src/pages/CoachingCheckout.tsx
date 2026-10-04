@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, ShieldCheck, CheckCircle2, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import ReturnToAppButton from "@/components/ReturnToAppButton";
 
 interface ResolvedSession {
   session_id: string;
@@ -302,6 +303,14 @@ export default function CoachingCheckout() {
               <AlertTriangle className="h-4 w-4 mt-0.5 shrink-0" />
               <div>{errorMessage}</div>
             </div>
+          )}
+
+          {/* Plan-review checkout links only ever come from the app (it signs the
+              token), so the visitor has the app: once it's paid, send them back
+              (to plan-review on app 4.0 (3)+, which adds app_links=1; otherwise
+              just into the app). */}
+          {(state === "captured" || (state === "error" && errorCode === "already_finalized")) && (
+            <ReturnToAppButton destination="planReview" />
           )}
 
           <p className="text-[11px] text-muted-foreground text-center">

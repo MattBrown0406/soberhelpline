@@ -1,4 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { isActiveFamilyMember } from "../_shared/familyMembership.ts";
+import { checkBookingShape, checkSlotsBookable } from "../_shared/bookingRules.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -8,6 +10,40 @@ const corsHeaders = {
 const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
   ? 'https://api-m.sandbox.paypal.com'
   : 'https://api-m.paypal.com';
+
+function escapeHtml(value: unknown): string {
+  return String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+}
+
+/** Best effort: tell Matt a customer paid but no booking was made. Never throws. */
+async function alertPaidNotBooked(details: Record<string, unknown>): Promise<void> {
+  const apiKey = Deno.env.get('SENDGRID_API_KEY');
+  if (!apiKey) {
+    console.error('captured_booking_failed: SENDGRID_API_KEY not configured, admin not emailed');
+    return;
+  }
+  const rows = Object.entries(details)
+    .map(([key, value]) => `<tr><td><strong>${escapeHtml(key)}</strong></td><td>${escapeHtml(value)}</td></tr>`)
+    .join('');
+  try {
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: 'matt@soberhelpline.com' }] }],
+        from: { email: 'matt@soberhelpline.com', name: 'Sober Helpline' },
+        subject: 'Action needed: coaching paid but not booked',
+        content: [{
+          type: 'text/html',
+          value: `<p>A coaching payment was captured in PayPal, but the booking could not be created (usually someone else booked the same time a moment earlier). Contact the client to pick a new time, or refund the payment in PayPal.</p><table>${rows}</table>`,
+        }],
+      }),
+    });
+    if (!response.ok) console.error('captured_booking_failed: admin email failed', response.status);
+  } catch {
+    console.error('captured_booking_failed: admin email failed');
+  }
+}
 
 async function getPayPalAccessToken(): Promise<string> {
   const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
@@ -72,7 +108,26 @@ Deno.serve(async (req) => {
         });
       }
 
-      // Check membership server-side
+      // One payment buys exactly one plan's sessions, at times the provider
+      // offers: a known plan, its exact number of sessions, each in the future,
+      // on the provider's calendar and free. The price below depends only on the
+      // plan, so this is what stops "pay once, get N sessions".
+      const shape = checkBookingShape(plan_type, bookings);
+      const bookable = shape.ok ? await checkSlotsBookable(adminClient, provider, plan_type, shape.bookings) : shape;
+      if (!bookable.ok) {
+        return new Response(JSON.stringify({ error: bookable.error, code: bookable.code }), {
+          status: bookable.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      const checkedBookings = bookable.bookings;
+
+      // Member price, decided server-side (never from anything the browser sends):
+      // only for a SIGNED-IN website account that is a member under the site's one
+      // membership rule (is_active_family_member — web members, app members signed
+      // in from the Sober Helpline app, cancelled members until their paid-through
+      // date). A typed email never unlocks the member price: it would let anyone
+      // claim a member's discount and would reveal whether an email belongs to a
+      // member. Signed in from the app but not a member: the standard price.
       let isMember = false;
       let userId: string | null = null;
 
@@ -86,36 +141,7 @@ Deno.serve(async (req) => {
         const { data: { user } } = await userClient.auth.getUser();
         if (user) {
           userId = user.id;
-          const { data: sub } = await adminClient
-            .from('provider_subscriptions')
-            .select('id')
-            .eq('user_id', user.id)
-            .eq('status', 'active')
-            .is('provider_submission_id', null)
-            .limit(1)
-            .maybeSingle();
-          isMember = !!sub;
-        }
-      }
-
-      if (!isMember) {
-        const { data: profile } = await adminClient
-          .from('profile_private')
-          .select('user_id')
-          .eq('email', client_email.toLowerCase().trim())
-          .limit(1)
-          .maybeSingle();
-        if (profile) {
-          const { data: sub } = await adminClient
-            .from('provider_subscriptions')
-            .select('id')
-            .eq('user_id', profile.user_id)
-            .eq('status', 'active')
-            .is('provider_submission_id', null)
-            .limit(1)
-            .maybeSingle();
-          isMember = !!sub;
-          if (!userId) userId = profile.user_id;
+          isMember = await isActiveFamilyMember(adminClient, user.id);
         }
       }
 
@@ -132,11 +158,12 @@ Deno.serve(async (req) => {
         : isMember ? memberRate : provider.session_rate;
       const totalAmount = isParallelRecovery ? 1500 : isStabilization ? 500 : singleSessionRate;
 
-      // Store full booking payload for later
+      // Store full booking payload for later. userId / isMember / amount are the
+      // server's decisions; the booking is recorded with exactly this amount.
       const bookingPayload = {
-        provider_id, bookings, intake_responses,
+        provider_id, bookings: checkedBookings, intake_responses,
         client_name, client_email, client_phone,
-        plan_type, userId, isMember,
+        plan_type, userId, isMember, amount: totalAmount,
       };
 
       // Create PayPal order
@@ -306,8 +333,14 @@ Deno.serve(async (req) => {
         .update({ status: 'captured' })
         .eq('id', pendingOrder.id);
 
-      // Now create the actual booking via the book-consultation function
+      // Now create the actual booking via the book-consultation function, with the
+      // account, member status and amount decided when this order was created, and
+      // the amount PayPal actually captured.
       const payload = pendingOrder.booking_payload as any;
+      const capturedValue = Number(captureData?.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value);
+      const amountCharged = Number.isFinite(capturedValue) && capturedValue > 0
+        ? capturedValue
+        : (typeof payload.amount === 'number' ? payload.amount : null);
       const processUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/book-consultation`;
       const bookingRes = await fetch(processUrl, {
         method: 'POST',
@@ -323,6 +356,9 @@ Deno.serve(async (req) => {
           client_email: payload.client_email,
           client_phone: payload.client_phone,
           plan_type: payload.plan_type,
+          user_id: typeof payload.userId === 'string' ? payload.userId : null,
+          is_member: payload.isMember === true,
+          amount_charged: amountCharged,
         }),
       });
 
@@ -334,6 +370,19 @@ Deno.serve(async (req) => {
           .from('pending_consultation_orders')
           .update({ status: 'captured_booking_failed' })
           .eq('id', pendingOrder.id);
+        await alertPaidNotBooked({
+          'PayPal order': orderId,
+          'Pending order': pendingOrder.id,
+          'Amount captured': amountCharged ?? 'unknown',
+          'Plan': payload.plan_type ?? 'single',
+          'Client': payload.client_name ?? '',
+          'Client email': payload.client_email ?? '',
+          'Client phone': payload.client_phone ?? '',
+          'Requested times': Array.isArray(payload.bookings)
+            ? payload.bookings.map((b: any) => `${b?.booking_date ?? ''} ${b?.start_time ?? ''}`.trim()).join(', ')
+            : '',
+          'Reason': typeof bookingData?.code === 'string' ? bookingData.code : 'booking_failed',
+        });
 
         return new Response(JSON.stringify({
           error: 'Payment was successful but booking creation failed. Our team has been notified and will process your booking manually.',

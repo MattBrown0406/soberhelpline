@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Calendar, Users, FileText, RefreshCw, ArrowRight, Loader2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SEOHead from "@/components/SEOHead";
+import ReturnToAppButton from "@/components/ReturnToAppButton";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -24,6 +26,9 @@ const CoachingOnboarding = () => {
   const [hasIntake, setHasIntake] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
   const [allSessions, setAllSessions] = useState<any[]>([]);
+  // This tab was opened from the Sober Helpline app (booking started there):
+  // offer the way back (a deep link only for app builds that sent app_links=1).
+  const [fromApp] = useState(arrivedFromApp);
 
   const planLabels: Record<string, string> = {
     "single": "Emergency Game Plan™",
@@ -104,6 +109,11 @@ const CoachingOnboarding = () => {
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             You've taken an important step. Here's everything you need to know before your first session.
           </p>
+          {fromApp && (
+            <div className="mt-6">
+              <ReturnToAppButton destination="coachingBooked" />
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
@@ -280,6 +290,7 @@ const CoachingOnboarding = () => {
               <a href="mailto:matt@soberhelpline.com" className="text-primary underline">matt@soberhelpline.com</a>
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              {fromApp && <ReturnToAppButton destination="coachingBooked" />}
               <Link to="/family-coaching">
                 <Button variant="outline">Go to Family Coaching</Button>
               </Link>

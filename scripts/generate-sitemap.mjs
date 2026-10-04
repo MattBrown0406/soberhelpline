@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { SITE_URL, sitemapPriority, sitemapChangefreq, excludedSitemapRoutes, canonicalRouteAliases } from './seo-routes.mjs';
+import { SITE_URL, sitemapPriority, sitemapChangefreq, excludedSitemapRoutes, canonicalRouteAliases, isAppLinkRoute } from './seo-routes.mjs';
 
 const root = process.cwd();
 const appPath = path.join(root, 'src', 'App.tsx');
@@ -21,6 +21,8 @@ const legacyBlogAliasRoutes = new Set(
 const routes = [...new Set(routeMatches)]
   .filter((route) => route.startsWith('/'))
   .filter((route) => !route.includes(':'))
+  .filter((route) => !route.includes('*'))
+  .filter((route) => !isAppLinkRoute(route))
   .filter((route) => !excludedSitemapRoutes.has(route))
   .filter((route) => !canonicalRouteAliases.has(route))
   .filter((route) => !legacyBlogAliasRoutes.has(route))

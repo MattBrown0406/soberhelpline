@@ -24,9 +24,11 @@ const NOINDEX_ROUTES = new Set([
   "/member-home",
   "/member-learning-paths",
   "/member-qa",
+  // Universal links into the iOS app (pages/AppLinkFallback).
+  "/app",
 ]);
 
-const NOINDEX_PREFIXES = ["/admin/", "/family-forum/", "/poll/"];
+const NOINDEX_PREFIXES = ["/admin/", "/family-forum/", "/poll/", "/app/"];
 
 const normalizeRoutePath = (pathname: string) => {
   if (!pathname || pathname === "/") return "/";

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { SITE_URL, excludedSitemapRoutes, canonicalRouteAliases } from './seo-routes.mjs';
+import { SITE_URL, excludedSitemapRoutes, canonicalRouteAliases, isAppLinkRoute } from './seo-routes.mjs';
+import { validateAppSiteAssociation } from './validate-app-site-association.mjs';
 
 const root = process.cwd();
 const sitemapPath = path.join(root, 'public', 'sitemap.xml');
@@ -11,6 +12,11 @@ const blogSource = fs.readFileSync(path.join(root, 'src', 'data', 'blogPosts.ts'
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replaceAll('&amp;', '&'));
 const lastmods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
 const issues = [];
+
+// Smart App Banner on every page: Open/Get for the Sober Helpline app. No
+// app-argument yet: app 4.0 (2) can't route https://soberhelpline.com/app
+// ("Unmatched Route"). Add it once 4.0 (3)+ is the norm (and in prerender-routes).
+const SMART_APP_BANNER_CONTENT = 'app-id=6780034996';
 
 const extractAll = (html, regex) => [...html.matchAll(regex)].map((m) => m[1]?.trim() ?? '');
 const decodeHtml = (value) => value
@@ -57,8 +63,8 @@ for (const url of urls) {
   if (descriptions[0] && decodeHtml(descriptions[0]).length > 160) issues.push(`${route}: description exceeds 160 characters.`);
   if (html.includes('{seoData.') || html.includes('{routeMetadata.')) issues.push(`${route}: unresolved metadata expression in prerendered HTML.`);
   const smartAppBanners = extractAll(html, /<meta name="apple-itunes-app" content="([^"]*)"[^>]*>/g);
-  if (smartAppBanners.length !== 1 || smartAppBanners[0] !== 'app-id=6780034996') {
-    issues.push(`${route}: expected one Smart App Banner (apple-itunes-app app-id=6780034996), found ${smartAppBanners.join(', ') || 'none'}.`);
+  if (smartAppBanners.length !== 1 || smartAppBanners[0] !== SMART_APP_BANNER_CONTENT) {
+    issues.push(`${route}: expected one Smart App Banner (apple-itunes-app ${SMART_APP_BANNER_CONTENT}), found ${smartAppBanners.join(', ') || 'none'}.`);
   }
 
   if (titles[0]) titleMap.set(titles[0], [...(titleMap.get(titles[0]) || []), route]);
@@ -83,6 +89,18 @@ for (const [description, routes] of descriptionMap) {
 }
 
 const sitemapRoutes = new Set(urls.map((url) => new URL(url).pathname));
+
+// /app and /app/* are the app's universal links; the website pages behind them
+// are a client-rendered noindex fallback: never in the sitemap, never prerendered.
+for (const route of sitemapRoutes) {
+  if (isAppLinkRoute(route)) issues.push(`App link route is in the sitemap: ${route}`);
+}
+for (const file of [path.join(distDir, 'app', 'index.html'), path.join(distDir, 'app.html')]) {
+  if (fs.existsSync(file)) issues.push(`App link route was prerendered: ${path.relative(root, file)}`);
+}
+// Universal-link association file (also checked by `npm run build`).
+issues.push(...validateAppSiteAssociation({ root, distDir }));
+
 for (const route of excludedSitemapRoutes) {
   if (sitemapRoutes.has(route)) issues.push(`Excluded route remains in sitemap: ${route}`);
   if (canonicalRouteAliases.has(route)) continue;

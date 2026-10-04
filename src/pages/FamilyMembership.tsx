@@ -25,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import SEOHead from "@/components/SEOHead";
 import MembershipSalesPage from "@/components/MembershipSalesPage";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const referralSources = [
   "Facebook",
@@ -141,6 +142,13 @@ const MONTHLY_ANNUAL_COST = (MONTHLY_PRICE_CENTS * 12) / 100; // $119.88
 const ANNUAL_SAVINGS = (MONTHLY_PRICE_CENTS * 12 - ANNUAL_PRICE_CENTS) / 100; // $19.88
 
 export default function FamilyMembership() {
+  // Opened from the Sober Helpline app: no website membership sales (App Store
+  // guideline 3.1.1) — membership comes with the app plan.
+  const [fromApp] = useState(arrivedFromApp);
+  return fromApp ? <MembershipInTheApp /> : <FamilyMembershipCheckout />;
+}
+
+function FamilyMembershipCheckout() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -744,5 +752,31 @@ export default function FamilyMembership() {
         </main>
       </div>
     </>
+  );
+}
+
+/** For visitors who came from the Sober Helpline app: plain text, no checkout. */
+function MembershipInTheApp() {
+  return (
+    <div className="min-h-[60vh] bg-background flex items-center justify-center px-4 py-12">
+      <Card className="max-w-md w-full">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Membership is available in the Sober Helpline app</CardTitle>
+          <CardDescription className="text-base">
+            Essential and Premier plans in the app include the family education library, the private family
+            forum, past Family Squares recordings and member Q&amp;A on this website.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4 text-center text-sm text-muted-foreground">
+          <p>
+            Already have a plan? Go back to the app and open a member page from there. You'll be signed in here
+            automatically.
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <Link to="/">Go to the home page</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

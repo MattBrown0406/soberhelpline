@@ -4,9 +4,14 @@ import logo from "@/assets/logo.png";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  // Opened from the Sober Helpline app: no link to website membership sales
+  // (App Store guideline 3.1.1). Read on every render; Layout re-renders the
+  // footer on each page change.
+  const fromApp = arrivedFromApp();
   
   return (
     <footer className="bg-gray-900 text-gray-300 mt-auto">
@@ -54,7 +59,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-white mb-4">For Families</h4>
             <ul className="space-y-2">
-              <li><Link to="/family-membership" className="text-sm hover:text-white transition-colors">Membership</Link></li>
+              {!fromApp && <li><Link to="/family-membership" className="text-sm hover:text-white transition-colors">Membership</Link></li>}
               <li><Link to="/start-here" className="text-sm hover:text-white transition-colors">Start Here</Link></li>
               <li><Link to="/what-to-do-tonight" className="text-sm hover:text-white transition-colors">What to Do Tonight</Link></li>
               <li><Link to="/two-households" className="text-sm hover:text-white transition-colors">Two Households</Link></li>
