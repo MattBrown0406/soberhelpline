@@ -204,12 +204,105 @@ import whyLecturingBackfiresImg from "@/assets/blog-why-lecturing-backfires.jpg"
 import stopObsessingWorryLoopImg from "@/assets/blog-stop-obsessing-over-addiction-worry-loop.jpg";
 import okayToBeHappyImg from "@/assets/blog-okay-to-be-happy-loved-one-addicted.jpg";
 import holidaysEarlyRecoveryImg from "@/assets/blog-holidays-early-recovery.jpg";
+import openEnrollmentImg from "@/assets/blog-open-enrollment-addiction-treatment.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 185,
+    slug: "open-enrollment-health-insurance-addiction-treatment",
+    seoTitle: "Open Enrollment and Addiction Treatment: Family Guide",
+    metaDescription: "Open enrollment is your chance to pick a health plan that actually covers addiction treatment. Here's what families should compare before choosing coverage.",
+    title: "Open Enrollment and Addiction Treatment: How to Choose a Health Plan When Someone You Love Needs Help",
+    category: "Insurance & Costs",
+    author: "Matt Brown",
+    date: "2026-10-07",
+    image: openEnrollmentImg,
+    keywords: ["open enrollment addiction treatment", "health plan for rehab", "insurance coverage substance use treatment", "PPO vs HMO rehab", "special enrollment period rehab"],
+    tags: ["insurance", "open enrollment", "treatment costs", "family guide"],
+    excerpt: "The health plan you pick this fall shapes what addiction treatment is within reach next year. Here's what families should compare before enrolling.",
+    faqItems: [{"question": "Can I change health insurance during open enrollment to get better addiction treatment coverage?", "answer": "Yes. Open enrollment is the main time each year you can switch plans for any reason. If your current plan has limited addiction providers or high costs, you can choose a new plan that better fits your family's needs."}, {"question": "Do all health insurance plans cover drug and alcohol rehab?", "answer": "Most do. ACA individual and small-group plans must cover substance use disorder treatment as an essential health benefit, and parity law requires most plans to cover it comparably to medical care. However, networks, costs, and approval rules differ widely between plans."}, {"question": "Is a PPO better than an HMO for addiction treatment?", "answer": "A PPO is often more flexible because it usually offers some out-of-network coverage, which helps if the right program isn't in network. An HMO can work well and cost less if it has strong in-network addiction providers near you."}, {"question": "What happens if my loved one needs rehab after open enrollment ends?", "answer": "You'll typically use your current plan unless you qualify for a special enrollment period, such as after losing other coverage. Medicaid enrollment is open year-round for those who qualify, and treatment centers can help you check your existing benefits quickly."}, {"question": "Can my adult child use my health insurance for rehab?", "answer": "In most cases, yes, if they're under 26 and on your plan. Keep in mind that privacy laws may limit what the insurer or treatment program can share with you without your adult child's written permission."}],
+    content: `If someone in your family is struggling with alcohol or drugs, the health insurance decision you make this fall could shape what kind of help is available next year. Open enrollment and addiction treatment don't usually come up in the same conversation, but they should. The plan you choose determines which programs are in network, how much you'll pay out of pocket, and how many hoops you'll jump through before care begins.
+
+The good news is that you have more control here than it might feel like. With a little preparation, you can choose coverage that makes treatment easier to reach, whether your loved one is already open to help or you're planning ahead. This guide walks you through what to look for, what to ask, and what to do if you've missed the window.
+
+## Why Does Open Enrollment Matter for Addiction Treatment?
+
+Open enrollment is the one time each year when most people can switch health plans without a qualifying life event. If your current plan has a thin network of addiction providers or high out-of-pocket costs, this is your chance to change that before treatment is needed.
+
+Outside of open enrollment, you're usually locked into your plan for the full year. That means if a loved one becomes ready for treatment in March, you'll be working with whatever coverage you chose in the fall.
+
+Key dates to keep in mind:
+
+- Employer plans: Most companies hold open enrollment in the fall, but dates vary. Check with HR so you don't miss a short window.
+- ACA Marketplace plans: For 2027 coverage, the HealthCare.gov window is shorter than in past years, generally running November 1 through December 15. State-run marketplaces may set different deadlines, so confirm yours.
+- Medicare: The annual enrollment period runs October 15 through December 7.
+
+## What Should You Look for in a Health Plan for Addiction Treatment?
+
+The best health plan for addiction treatment is one with strong in-network behavioral health providers, coverage for every level of care, and an out-of-pocket maximum your family can realistically afford. A low monthly premium means little if the plan won't pay for the programs your loved one needs.
+
+Under the Affordable Care Act, individual and small-group plans must cover substance use disorder treatment as an essential health benefit. Federal parity law also requires most plans to cover addiction care on terms comparable to medical care. Still, plans differ a lot in how that coverage works day to day.
+
+### A strong provider network
+
+Look up specific treatment programs you might use and confirm they're in network for the exact plan you're considering, not just the insurance company in general. A plan with only a handful of in-network addiction providers can mean long waits or long drives.
+
+### Coverage for every level of care
+
+Addiction treatment isn't one service. Your loved one may need several of these, sometimes in sequence:
+
+- Medical detox (supervised withdrawal)
+- Residential or inpatient treatment
+- Partial hospitalization (PHP), a full-day program while living at home
+- Intensive outpatient (IOP), several hours a week
+- Standard outpatient counseling and therapy
+- Medications for addiction treatment, such as buprenorphine or naltrexone
+
+### PPO versus HMO or EPO
+
+PPO plans usually offer some out-of-network coverage (see [LINK:in-network vs. out-of-network rehab:/blog/in-network-vs-out-of-network-rehab-family-guide]), which can matter if the best-fit program for your loved one isn't in network. HMO and EPO plans tend to cost less each month but typically cover little or nothing out of network, except in emergencies.
+
+## How Do You Compare Health Plans for Addiction Treatment Step by Step?
+
+Start by estimating your worst-case yearly cost for each plan, then confirm network and coverage details directly with the insurer. This turns a confusing comparison into a clear picture of what you'd actually pay if treatment happens next year.
+
+1. Add up the true annual cost. Multiply the monthly premium by 12, then add the out-of-pocket maximum. If treatment is likely, that total is a more honest number than the premium alone.
+2. Read the Summary of Benefits and Coverage. Every plan must provide this standardized document. Look for mental health and substance use sections, inpatient and outpatient costs, and whether a deductible applies first.
+3. Check who manages behavioral health. Some insurers hand addiction and mental health benefits to a separate company. Get its phone number and network list too.
+4. Ask about [LINK:prior authorization for addiction treatment:/blog/prior-authorization-addiction-treatment]. Many plans require approval before residential treatment or detox. Find out how long approvals usually take and who submits the request.
+5. Review the drug formulary. If your loved one takes, or may need, medication for alcohol or opioid use disorder, make sure it's on the plan's list of covered drugs.
+
+Questions to ask the insurance company before you enroll:
+
+- Is this specific treatment program in network for this exact plan?
+- What do I pay for residential treatment, IOP, and outpatient therapy?
+- Is prior authorization required, and for which levels of care?
+- Are there day or visit limits for substance use treatment?
+
+Write down the date, the representative's name, and a reference number for every call. That record can be valuable if a claim is ever disputed.
+
+## What If You Miss Open Enrollment for Addiction Treatment Coverage?
+
+If you miss open enrollment, you may still qualify for a special enrollment period after certain life events, or for programs that allow enrollment year-round. Missing the deadline doesn't always mean you're out of options.
+
+- Losing other coverage: Losing job-based insurance usually opens a special enrollment window, typically 60 days, to choose a Marketplace plan.
+- Medicaid and CHIP: You can apply any time of year if your household income qualifies. Medicaid covers addiction treatment in every state, though the details vary.
+- Young adults: Adult children can usually stay on a parent's health plan until age 26, even if they're married, living elsewhere, or not financially dependent.
+
+If your loved one needs help right now and the timing isn't ideal, don't wait for next year. Treatment centers can usually verify your current benefits quickly, and our guide to [LINK:verifying your insurance benefits for rehab:/blog/verify-insurance-benefits-for-rehab-guide] walks you through it.
+
+## You Can Make This Decision With Confidence
+
+Choosing a health plan may not feel like an act of love, but it can be one. By taking an hour this season to compare coverage with addiction treatment in mind, you're clearing a path so that when your loved one says yes, the help is ready. You just need to ask the right questions, write down what you learn, and choose the plan that keeps the most doors open. That's a meaningful, practical step forward for your whole family.
+
+## Get Ongoing Support From Sober Helpline
+
+Insurance is just one piece of helping someone you love. At Sober Helpline, families find clear education, [LINK:one-on-one family coaching:/family-coaching], and steady support for every stage, including the free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call. If the stress of all this is wearing on you, a support group like [LINK:Al-Anon:https://al-anon.org] can help too. Take your next step with a team that understands what you're going through.`,
+  },
   {
     id: 184,
     slug: "holidays-in-early-recovery-family-guide",
