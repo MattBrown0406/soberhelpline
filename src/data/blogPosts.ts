@@ -217,7 +217,7 @@ export const blogPosts: any[] = [
     seoTitle: "Open Enrollment and Addiction Treatment: Family Guide",
     metaDescription: "Open enrollment is your chance to pick a health plan that actually covers addiction treatment. Here's what families should compare before choosing coverage.",
     title: "Open Enrollment and Addiction Treatment: How to Choose a Health Plan When Someone You Love Needs Help",
-    category: "Insurance & Costs",
+    category: "Treatment Navigation",
     author: "Matt Brown",
     date: "2026-10-07",
     image: openEnrollmentImg,
