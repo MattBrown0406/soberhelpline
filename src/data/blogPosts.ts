@@ -206,12 +206,99 @@ import okayToBeHappyImg from "@/assets/blog-okay-to-be-happy-loved-one-addicted.
 import holidaysEarlyRecoveryImg from "@/assets/blog-holidays-early-recovery.jpg";
 import openEnrollmentImg from "@/assets/blog-open-enrollment-addiction-treatment.jpg";
 import fmlaForRehabImg from "@/assets/blog-fmla-for-rehab.jpg";
+import adultChildInsuranceImg from "@/assets/blog-adult-child-rehab-parents-insurance.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 187,
+    slug: "adult-child-rehab-on-parents-insurance",
+    seoTitle: "Adult Child Rehab on Parents' Insurance: Coverage & Privacy",
+    metaDescription: "Is your adult child's rehab on your insurance? Learn what your plan covers until 26, who sees the bills, what privacy laws allow, and how to stay involved.",
+    title: "Adult Child Rehab on Parents' Insurance: What Families Need to Know About Coverage, Bills, and Privacy",
+    category: "Treatment Navigation",
+    author: "Matt Brown",
+    date: "2026-10-09",
+    image: adultChildInsuranceImg,
+    keywords: ["adult child rehab on parents insurance", "rehab insurance under 26", "HIPAA adult child rehab", "42 CFR Part 2 parents", "who pays for adult child rehab"],
+    tags: ["insurance", "privacy", "parents", "family guide"],
+    excerpt: "Paying for your adult child's rehab doesn't guarantee a seat at the table. Here's how coverage, bills, and privacy work on a parent's plan.",
+    faqItems: [{"question": "Can I put my 24-year-old's rehab on my insurance?", "answer": "Yes. If your plan offers dependent coverage, your child can stay on it until age 26 and use it for addiction treatment. Your plan's normal rules for medical necessity, prior authorization, and network still apply."}, {"question": "Will I see my adult child's rehab bills if they're on my insurance?", "answer": "As the policyholder, you'll often receive Explanation of Benefits statements showing dates of service and amounts billed. These don't include clinical details like diagnoses discussed in therapy or progress notes."}, {"question": "Can a rehab tell parents anything about an adult child's treatment?", "answer": "Not without written consent. Federal privacy rules, including HIPAA and 42 CFR Part 2, require your adult child to sign a release before the treatment center shares information with you. Many adults agree to a limited release when asked respectfully."}, {"question": "What happens if my child turns 26 during rehab?", "answer": "Coverage under your plan will end on the date your plan specifies, often the end of that birthday month. Your child can enroll in new coverage through a Special Enrollment Period, typically within 60 days. Work with the treatment center ahead of time to avoid a gap."}, {"question": "Am I legally responsible for my adult child's rehab bills?", "answer": "Generally, you're only responsible if you sign a financial responsibility or guarantor agreement. Read any admission paperwork carefully before signing. For specific legal or financial questions, consult a qualified attorney or financial professional."}],
+    content: `Your son or daughter has finally said yes to getting help. But almost immediately, a practical question follows: can your adult child's rehab go on your insurance, and if it does, what does that mean for you?
+
+Many parents are surprised to learn that being the policyholder does not automatically give them a seat at the table. You may be paying the premiums and the deductible, yet still be told, "We can't share that information." This guide walks you through how adult child rehab on parents' insurance actually works, so you can plan ahead, avoid billing surprises, and stay connected in a way that supports recovery.
+
+## Can an Adult Child's Rehab Go on a Parent's Insurance?
+
+Yes, in most cases. Under the Affordable Care Act, plans that offer dependent coverage must allow children to stay on a parent's health plan until age 26. That includes coverage for substance use disorder treatment, which is one of the essential health benefits most plans are required to cover.
+
+Your child does not need to live with you, be in school, or be financially dependent on you to stay on your plan. They can even be married. Federal parity law also requires most plans to cover addiction treatment on terms comparable to other medical care.
+
+That said, coverage is not the same as approval. Your plan will still decide which level of care is "medically necessary," which facilities are in network, and whether prior authorization is required. Call your plan before admission to confirm the details, and use our guide on [LINK:how to verify your insurance benefits for rehab:/blog/verify-insurance-benefits-for-rehab-guide] to know what to ask.
+
+## Who Pays What When an Adult Child's Rehab Is on a Parent's Insurance?
+
+When your adult child uses your insurance for rehab, the costs flow through your policy, which means your deductible, coinsurance, and out-of-pocket maximum apply. In practical terms, the financial responsibility often lands on you, even though your child is the patient.
+
+### Deductibles and Out-of-Pocket Maximums
+
+Family plans usually have both an individual deductible and a family deductible. Your child's treatment counts toward both. A residential stay can quickly reach your child's individual out-of-pocket maximum, after which the plan typically pays 100% of covered, in-network services for the rest of the plan year.
+
+Timing matters here. If treatment starts late in the year, your deductible may reset on January 1 while your child is still in care. Ask the treatment center's billing office to estimate costs on both sides of that date.
+
+### Guarantor and Financial Responsibility Forms
+
+During admissions, someone will be asked to sign a financial responsibility agreement. The person who signs as the guarantor is responsible for whatever insurance doesn't pay. Read it carefully before signing, and ask:
+- What is the estimated total cost, and what will insurance likely cover?
+- What happens to my balance if insurance denies days partway through treatment?
+- Can we set up a payment plan if needed?
+
+## Why Can't I Get Information About My Adult Child's Treatment If I'm Paying for It?
+
+Because your child is a legal adult, their health information belongs to them. Paying the bill or holding the insurance policy does not give you the right to see their medical records or talk with their treatment team without their written permission.
+
+Two layers of privacy protection are at work. HIPAA protects health information in general. On top of that, a federal regulation known as 42 CFR Part 2 adds extra confidentiality for records from most addiction treatment programs. These rules help people feel safe seeking treatment.
+- **The treatment center can't confirm details** about your child's progress, diagnosis, or discharge plans unless your child signs a release of information (often called an ROI).
+- **You may still receive Explanation of Benefits (EOB) statements** from the insurance company, since you're the policyholder. These show dates of service and amounts billed, but not therapy notes or clinical details. Here's how to [LINK:read your Explanation of Benefits:/blog/how-to-read-explanation-of-benefits-addiction-treatment].
+- **Your child can request confidential communications** from the insurer in some situations, so some mail may go to them instead of you. Rules vary by plan and state.
+
+The good news is that most adults in treatment do sign a release for at least one family member, especially when they feel supported rather than monitored. Encourage the treatment team to explain to your child why family involvement helps recovery. A limited release, such as permission to share attendance and discharge dates, is a reasonable starting point.
+
+## What Happens to Rehab Coverage When Your Adult Child Turns 26?
+
+Dependent coverage ends at 26, but the exact date depends on your plan. Many employer plans end coverage at the end of the month your child turns 26, while some marketplace plans continue through the end of the calendar year. Check your plan documents now rather than discovering the cutoff in the middle of treatment.
+
+If your child is approaching 26, plan for the transition:
+- **Special Enrollment Period:** Losing dependent coverage is a qualifying life event. Your child typically has 60 days to enroll in a marketplace plan, and many young adults qualify for subsidies.
+- **Employer coverage:** If your child has a job that offers insurance, aging off your plan allows them to enroll outside open enrollment.
+- **Medicaid:** Depending on income and state, your child may qualify for Medicaid, which covers addiction treatment.
+
+A gap in coverage during aftercare, such as intensive outpatient or therapy sessions, is one of the most avoidable risks to early recovery.
+
+## How Can Parents Stay Involved Without Overstepping?
+
+The most effective role for parents is that of a supportive partner, not a manager. Respecting your child's autonomy, including their privacy, builds lasting trust.
+
+A few practical steps help:
+1. **Have the money conversation early.** Before admission, talk openly about who is paying for what and what you expect in return, such as participation in treatment and aftercare.
+2. **Ask, don't demand, for a release of information.** Explain that you want to support their recovery, not police it.
+3. **Join the family program.** Most quality treatment centers offer family education or family therapy, and you can participate even if your child limits what's shared about their care.
+4. **Keep your own records.** Save every EOB, bill, and call reference number in one folder. If a claim is denied, you'll be ready to appeal.
+5. **Get support for yourself.** Groups like [LINK:Al-Anon:https://al-anon.org], SMART Recovery Family & Friends, and family coaching can help you navigate your own stress during this season.
+
+## You Can Support Recovery and Protect Your Family's Finances
+
+Being responsible for the bill but out of the loop can feel frustrating. That's normal. Understanding how your insurance works, what the privacy rules protect, and when coverage changes puts you on steadier ground.
+
+Most importantly, remember that your child said yes to help. Your calm, informed support is one of the strongest assets they have as they begin recovery.
+
+## Get Ongoing Support at Sober Helpline
+
+You don't have to figure out insurance, privacy, and family boundaries on your own. Sober Helpline offers ongoing education, [LINK:one-on-one family coaching:/family-coaching], and the free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to help you stay steady and connected while your loved one heals.`,
+  },
   {
     id: 186,
     slug: "fmla-for-rehab-job-protection-addiction-treatment",
