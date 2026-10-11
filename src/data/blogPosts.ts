@@ -207,12 +207,98 @@ import holidaysEarlyRecoveryImg from "@/assets/blog-holidays-early-recovery.jpg"
 import openEnrollmentImg from "@/assets/blog-open-enrollment-addiction-treatment.jpg";
 import fmlaForRehabImg from "@/assets/blog-fmla-for-rehab.jpg";
 import adultChildInsuranceImg from "@/assets/blog-adult-child-rehab-parents-insurance.jpg";
+import addictionSleepImg from "@/assets/blog-addiction-sleep-problems.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 188,
+    slug: "addiction-and-sleep-problems-family-guide",
+    seoTitle: "Addiction and Sleep Problems: Insomnia in Recovery",
+    metaDescription: "Does your loved one need a drink to fall asleep? Learn how addiction and sleep problems feed each other, and how families can help rest return in recovery.",
+    title: "Addiction and Sleep Problems: Why \"I Need It to Sleep\" Keeps the Cycle Going",
+    category: "Recovery",
+    author: "Matt Brown",
+    date: "2026-10-11",
+    image: addictionSleepImg,
+    keywords: ["addiction and sleep problems", "insomnia in recovery", "alcohol and sleep", "using dreams", "CBT-I recovery"],
+    tags: ["sleep", "early recovery", "relapse prevention", "family guide"],
+    excerpt: "\"I can't sleep without it.\" Here's how substances wreck sleep, why poor sleep fuels relapse, and how families can help rest return.",
+    faqItems: [{"question": "Does alcohol help you sleep?", "answer": "Alcohol can help you fall asleep faster, but it lowers the quality of sleep overall. As it wears off, sleep becomes lighter and more fragmented, often leading to early-morning waking. Regular use also builds tolerance, so more alcohol is needed for the same effect."}, {"question": "How long does insomnia last after quitting alcohol?", "answer": "It varies from person to person. Many people notice sleep improving within the first few weeks, but some disruption can continue for several months in early recovery. Consistent routines, CBT-I, and support from a treatment team can help sleep recover sooner."}, {"question": "Can lack of sleep cause relapse?", "answer": "Poor sleep doesn't cause relapse on its own, but it's a well-known risk factor. Exhaustion raises stress, irritability, and cravings while weakening self-control. That's why treating sleep problems is an important part of relapse prevention."}, {"question": "Should someone in recovery take sleeping pills?", "answer": "That's a decision for a doctor who knows the person's full substance use history. Some sleep medications carry a risk of dependence and may not be a good fit in recovery, while non-habit-forming options and therapy may be safer. Always be open with providers about past use."}, {"question": "Why does my loved one have vivid dreams about using?", "answer": "\"Using dreams\" are very common in early recovery, especially after stopping alcohol or cannabis, as dream sleep rebounds. They can be unsettling but are generally a normal part of the brain healing. Talking about them with a counselor or support group can make them feel less alarming."}],
+    content: `“I can’t sleep without it.” If you love someone who struggles with alcohol or drugs, you may have heard some version of that sentence. Addiction and sleep problems are closely connected, and understanding that connection can change how you see your loved one’s struggle.
+
+This guide explains, in plain language, how substances disrupt sleep, why poor sleep makes cravings and relapse more likely, and what your family can do to support healthier rest—whether your loved one is still using or newly in recovery. And if you’re the one lying awake, this guide is for you, too.
+
+## How Are Addiction and Sleep Problems Connected?
+
+Addiction and sleep problems feed each other in a loop. Many people start using alcohol or drugs to fall asleep or quiet racing thoughts, but those substances damage the quality of sleep. Poor sleep then increases stress, [cravings](/blog/addiction-triggers-and-cravings-family-guide), and the urge to use again.
+
+Sleep is when the brain does essential repair work. When sleep is disrupted night after night, the parts of the brain responsible for impulse control get weaker, while the brain’s emotional “alarm system” becomes more reactive.
+
+For someone whose brain is already shaped by addiction, that can make using feel like the only way to get through the night. The cycle often looks like this:
+1. Trouble sleeping (from stress, anxiety, pain, or depression)
+1. Using a substance to fall asleep or “turn off” the mind
+1. Lighter, more broken, lower-quality sleep
+1. Next-day fatigue, irritability, and anxiety
+1. A stronger urge to use again the next night
+
+## What Does Alcohol Actually Do to Sleep?
+
+Alcohol helps people fall asleep faster, but it makes the rest of the night worse. As the body processes alcohol, sleep becomes lighter and more fragmented, and the deep, restorative stages of sleep are disrupted.
+
+This is why so many heavy drinkers wake at 2 or 3 a.m., unable to get back to sleep. Alcohol also suppresses REM, the dreaming stage of sleep. Over time, the body adapts, so it takes more alcohol to get the same sleepy effect. That’s [tolerance](/blog/tolerance-and-withdrawal-in-addiction-family-guide) at work, and it’s one way a “harmless nightcap” quietly grows.
+
+Alcohol also relaxes throat muscles, worsening snoring and sleep apnea (breathing that repeatedly stops during sleep).
+
+## What About Other Substances?
+- Cannabis: Often used as a sleep aid, but regular use changes sleep patterns, and stopping commonly brings insomnia and vivid dreams for weeks.
+- Stimulants (cocaine, meth, misused ADHD medications): Long stretches awake followed by a “crash” throw the body clock badly off schedule.
+- Opioids: Drowsiness, but poor-quality sleep and nighttime breathing problems; withdrawal often brings severe insomnia.
+- Sedatives and sleeping pills: These can create their own dependence, and stopping suddenly can be dangerous without medical guidance.
+
+## Why Do Sleep Problems Continue in Early Recovery?
+
+Sleep often gets worse before it gets better when someone stops using. The brain has adjusted to falling asleep with a substance, and it needs time to relearn how to rest on its own. For many people, disrupted sleep lasts weeks to months into recovery.
+
+This surprises many families. Insomnia, restless nights, and vivid “using dreams” are common in early recovery. Sleep trouble is also one of the most frequent symptoms of post-acute withdrawal, the longer, lower-grade phase of healing that follows detox.
+
+These symptoms are a normal part of healing, not a sign treatment is failing. Still, they matter. Research has consistently linked ongoing sleep problems in early recovery with a higher risk of [relapse](/blog/relapse-and-the-brain-family-guide), because an exhausted, irritable person at 3 a.m. is in a vulnerable place.
+
+The encouraging news: sleep usually improves steadily with continued sobriety, and non-addictive treatments can help.
+
+## How Can Families Help a Loved One With Addiction and Sleep Problems?
+
+Families can help by taking sleep struggles seriously, encouraging professional support, and creating a calmer home. You can’t fix your loved one’s sleep for them, but you can make healthy rest easier and avoid adding fuel to the cycle.
+
+### Practical Ways to Support Better Sleep
+1. Take “I can’t sleep” seriously. Instead of dismissing it, acknowledge it: “That sounds exhausting. Let’s figure out what might help that doesn’t involve drinking.”
+1. Bring sleep into the treatment conversation. Ask whether sleep is part of the treatment plan. Make sure every provider knows the substance use history before any sleep medication is prescribed, since some sleep aids carry their own risk of dependence.
+1. Ask about CBT-I. Cognitive Behavioral Therapy for Insomnia is a short-term, structured therapy considered a first-line treatment for chronic insomnia. It retrains the brain to connect bed with sleep—without medication—and can be adapted for people in recovery.
+1. Support a steady routine. Consistent wake times (even on weekends), morning daylight, and regular meals help reset the body clock.
+1. Make evenings calmer. Late-night arguments, screens, and caffeine all work against sleep. A wind-down ritual—a walk, a warm shower, reading—can replace the nightly drink.
+1. Clear out the old “sleep aids.” If alcohol or leftover pills live in the kitchen cabinet, a sleepless night becomes a risky one.
+
+### When to Get Help Right Away
+
+Call a doctor promptly if you notice loud snoring with gasping or pauses in breathing, several nights with almost no sleep, confusion or hallucinations, or heavy shaking and sweating after someone stops alcohol or sedatives. Withdrawal from alcohol and sedatives can be medically dangerous. In an emergency, call 911. You can also call us at [458-298-8008](tel:4582988008).
+
+## What If You’re the One Who Can’t Sleep Without It?
+
+If you rely on alcohol or another substance to fall asleep, that’s important information—not a reason for shame. It often means your body has adapted to the substance, and a doctor or addiction professional can help you cut back or stop safely.
+
+Be honest with a healthcare provider about how much you use and how you sleep. Don’t stop alcohol, benzodiazepines, or other sedatives abruptly after heavy daily use without medical guidance. And know that the first rough weeks are temporary. Many people in recovery say better sleep was one of the first real gifts of sobriety.
+
+## Rest Is Part of Recovery
+
+Sleep may seem like a small piece of a big problem, but it’s one of the places where recovery becomes real, one night at a time. When you understand that restless nights are part of how addiction works—and part of how the brain heals—you can respond with patience instead of frustration. And as sleep returns, so often do clearer thinking, steadier moods, and hope.
+
+## Find Ongoing Support
+
+You don't have to figure this out alone. If sleepless nights are part of a bigger crisis at home, [family addiction coaching](/family-coaching) can help you build a plan. Join other parents and partners on our free Monday night call, “The Family Squares” ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own rest and support.`,
+  },
   {
     id: 187,
     slug: "adult-child-rehab-on-parents-insurance",
