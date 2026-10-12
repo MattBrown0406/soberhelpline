@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
@@ -81,9 +82,6 @@ serve(async (req) => {
       .from('zoom_meeting_registrations')
       .select('email')
       .eq('meeting_date', meetingDate)
-      // An app RSVP isn't a website registration: still register (and email)
-      // auto-register subscribers; the next app sync merges into that row.
-      .neq('registration_source', 'app')
       .in('email', emails);
 
     const alreadyRegistered = new Set(
@@ -118,6 +116,7 @@ serve(async (req) => {
         .select('id')
         .single();
 
+      if (isRegistrationDuplicate(insertError)) continue;
       if (insertError) {
         console.error(`Failed to auto-register ${email}:`, insertError.message);
         continue;

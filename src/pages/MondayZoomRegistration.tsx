@@ -73,6 +73,7 @@ export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
@@ -253,6 +254,7 @@ export default function MondayZoomRegistration() {
           email: result.data.email,
           phone: result.data.phone,
           question: result.data.question,
+          question_only: isMemberQuestion,
           request_follow_up: formData.requestFollowUp,
           consent_email_list: formData.consentEmailList,
           meeting_date: nextMeetingDate,
@@ -268,6 +270,18 @@ export default function MondayZoomRegistration() {
       });
 
       if (error) throw error;
+      if (registrationResult?.success !== true) throw new Error("Registration could not be completed. Please try again.");
+      if (registrationResult.questionSubmitted === true) {
+        setSubmitted(true);
+        toast({ title: "Question Submitted!", description: "We look forward to seeing you Monday evening!" });
+        return;
+      }
+      if (registrationResult.alreadyRegistered === true) {
+        setAlreadyRegistered(true);
+        setSubmitted(true);
+        toast({ title: "You’re already registered.", description: "We look forward to seeing you Monday evening!" });
+        return;
+      }
 
       trackConversionEvent("monday_zoom_registration_submit", {
         source: isMemberQuestion ? "member_question_form" : "public_registration_form",
@@ -306,10 +320,10 @@ export default function MondayZoomRegistration() {
       <div className="container py-16 max-w-2xl mx-auto text-center">
         <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-6" />
         <h1 className="text-3xl font-bold text-foreground mb-4">
-          {isMemberQuestion ? "Question Submitted!" : "You're Registered!"}
+          {alreadyRegistered ? "You’re already registered." : isMemberQuestion ? "Question Submitted!" : "You're Registered!"}
         </h1>
         <p className="text-muted-foreground text-lg mb-8">
-          {isMemberQuestion
+          {alreadyRegistered ? "We look forward to seeing you Monday evening!" : isMemberQuestion
             ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
             : "Thank you for registering for the “The Family Squares” Zoom meeting. When it's time, join directly from this page, no need to leave the site."}
         </p>

@@ -388,6 +388,7 @@ h1{font-size:37px}
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        if (submitButton.disabled) return;
         statusEl.className = "status";
         statusEl.textContent = "";
 
@@ -427,13 +428,15 @@ h1{font-size:37px}
 
           const data = await response.json().catch(() => ({}));
 
-          if (!response.ok) {
+          if (!response.ok || data.success !== true) {
             throw new Error(data.error || "Registration failed.");
           }
 
           form.reset();
           document.getElementById("email-consent").checked = true;
-          showStatus("success", "You're registered. Please check your email for the Zoom meeting link.");
+          showStatus("success", data.alreadyRegistered === true
+            ? "You’re already registered. We look forward to seeing you Monday evening!"
+            : "You're registered. Please check your email for the Zoom meeting link.");
         } catch (error) {
           showStatus(
             "error",

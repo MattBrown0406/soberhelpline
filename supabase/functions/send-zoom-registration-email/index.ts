@@ -108,7 +108,7 @@ serve(async (req: Request) => {
 
     const { name, email, registration_id, consentEmailList = false, language = "en" } = await req.json();
 
-    if (!name || !email) {
+    if (!name || !email || !registration_id) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -122,6 +122,20 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_URL")!,
       serviceRoleKey,
     );
+
+    // Atomic at-most-once claim. Never clear automatically after a timeout: the
+    // provider may have accepted the send. Operators reconcile ambiguous failures.
+    const { data: claimed, error: claimError } = await adminSupabase
+      .from("zoom_meeting_registrations")
+      .update({ confirmation_claimed_at: new Date().toISOString() })
+      .eq("id", registration_id)
+      .is("confirmation_claimed_at", null)
+      .select("id")
+      .maybeSingle();
+    if (claimError) throw claimError;
+    if (!claimed) return new Response(JSON.stringify({ success: true, suppressed: true }), {
+      status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
 
     // Blocklist check — do not email blocked addresses
     const { data: blocked } = await adminSupabase
@@ -497,6 +511,9 @@ serve(async (req: Request) => {
       mailchimpPromise,
     ]);
 
+    const { error: completedError } = await adminSupabase.from("zoom_meeting_registrations")
+      .update({ confirmation_completed_at: new Date().toISOString() }).eq("id", registration_id);
+    if (completedError) throw completedError;
     console.log("Zoom registration email sent:", emailResult);
 
     return new Response(JSON.stringify({ success: true }), {

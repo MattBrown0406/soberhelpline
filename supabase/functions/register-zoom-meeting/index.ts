@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
+import { duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -37,28 +38,6 @@ function getNextMeetingDate() {
   return `${year}-${month}-${date}`;
 }
 
-async function getAuthenticatedUserId(req: Request) {
-  const authHeader = req.headers.get("Authorization");
-  const token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) return null;
-
-  const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-  const publishableKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY") ?? "";
-
-  if (!supabaseUrl || !publishableKey) return null;
-
-  const authClient = createClient(supabaseUrl, publishableKey);
-  const { data, error } = await authClient.auth.getUser(token);
-
-  if (error || !data.user) {
-    console.warn("Unable to resolve authenticated user for zoom registration", error?.message);
-    return null;
-  }
-
-  return data.user.id;
-}
-
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -87,7 +66,7 @@ serve(async (req: Request) => {
     const meetingDate = getNextMeetingDate();
     const email = registration.email.toLowerCase().trim();
     const name = registration.name.replace(/\s+/g, " ").trim();
-    const userId = await getAuthenticatedUserId(req);
+
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
@@ -99,11 +78,12 @@ serve(async (req: Request) => {
     const adminSupabase = createClient(supabaseUrl, serviceRoleKey);
 
     // Blocklist check (email OR last name) — silently accept but do not register or email
-    const { data: blockedFlag } = await adminSupabase.rpc("is_meeting_blocked", {
+    const { data: blockedFlag, error: blockedError } = await adminSupabase.rpc("is_meeting_blocked", {
       _email: email,
       _name: name,
     });
 
+    if (blockedError) throw blockedError;
     if (blockedFlag === true) {
       console.warn(`Blocked meeting registration attempt: ${email} / ${name}`);
       return new Response(JSON.stringify({
@@ -119,21 +99,15 @@ serve(async (req: Request) => {
       });
     }
 
-    const { data: existingRows, error: existingError } = await adminSupabase
-      .from("zoom_meeting_registrations")
-      .select("id, user_id, auto_register")
-      .eq("meeting_date", meetingDate)
-      .ilike("email", email)
-      .order("created_at", { ascending: false })
-      .limit(1);
-
-    if (existingError) {
-      throw new Error(`Unable to check existing registration: ${existingError.message}`);
-    }
-
-    const existingRow = existingRows?.[0] ?? null;
+    const { data: cancelled, error: cancellationError } = await adminSupabase
+      .from("cancelled_meeting_dates").select("meeting_date").eq("meeting_date", meetingDate).maybeSingle();
+    if (cancellationError) throw cancellationError;
+    if (cancelled) return new Response(JSON.stringify({ error: "This meeting has been cancelled.", cancelled: true }), {
+      status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+    const userId = await registrationUserId(req, email, adminSupabase);
     const payload = {
-      user_id: userId ?? existingRow?.user_id ?? null,
+      user_id: userId,
       name,
       email,
       phone: registration.phone,
@@ -141,27 +115,18 @@ serve(async (req: Request) => {
       request_follow_up: registration.requestFollowUp,
       consent_email_list: registration.consentEmailList,
       meeting_date: meetingDate,
-      auto_register: registration.autoRegister || existingRow?.auto_register || false,
+      auto_register: registration.autoRegister,
       preferred_contact_date: registration.requestFollowUp ? registration.preferredContactDate || null : null,
       preferred_contact_time: registration.requestFollowUp ? registration.preferredContactTime || null : null,
       preferred_timezone: registration.requestFollowUp ? registration.preferredTimezone || null : null,
       language: registration.language,
     };
 
-    const mutation = existingRow
-      ? adminSupabase
-          .from("zoom_meeting_registrations")
-          .update(payload)
-          .eq("id", existingRow.id)
-          .select("id")
-          .single()
-      : adminSupabase
-          .from("zoom_meeting_registrations")
-          .insert(payload)
-          .select("id")
-          .single();
-
-    const { data: savedRow, error: saveError } = await mutation;
+    const { data: savedRow, error: saveError } = await adminSupabase
+      .from("zoom_meeting_registrations").insert(payload).select("id").single();
+    if (isRegistrationDuplicate(saveError)) return new Response(JSON.stringify(duplicateRegistrationResponse()), {
+      status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
 
     if (saveError) {
       throw new Error(`Unable to save registration: ${saveError.message}`);
@@ -180,7 +145,7 @@ serve(async (req: Request) => {
         body: JSON.stringify({
           name,
           email,
-          registration_id: savedRow?.id ?? existingRow?.id ?? null,
+          registration_id: savedRow?.id ?? null,
           consentEmailList: registration.consentEmailList,
           language: registration.language,
         }),
@@ -199,9 +164,10 @@ serve(async (req: Request) => {
 
     return new Response(JSON.stringify({
       success: true,
-      registrationId: savedRow?.id ?? existingRow?.id ?? null,
+      registrationId: savedRow?.id ?? null,
       meetingDate,
-      alreadyRegistered: Boolean(existingRow),
+      status: "registered",
+      alreadyRegistered: false,
       emailSent,
       emailError,
     }), {

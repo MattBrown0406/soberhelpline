@@ -24,6 +24,7 @@
 // registrations work before the SQL.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { validMeetingDate } from "../_shared/mondayRegistration.ts";
 
 const MAX_BODY_BYTES = 5_000_000;
 const MAX_ATTENDEES = 2000;
@@ -192,6 +193,38 @@ Deno.serve(async (req: Request) => {
   if (meetingDate < today || meetingDate > addDays(today, MAX_FUTURE_DAYS)) {
     return json({ ok: false, error: "meeting_date_out_of_range" }, 400);
   }
+  // Private single-person contract: the app server supplies its verified Auth
+  // email. Unlike batch RSVP mirrors, an ensured registration is durable and
+  // cannot be removed by a later app snapshot. No public status lookup exists.
+  if (payload.action === "ensure-registration") {
+    if (!validMeetingDate(meetingDate)) return json({ ok: false, error: "invalid_meeting_date" }, 400);
+    const item = payload.attendee as { email?: unknown; name?: unknown } | undefined;
+    const email = normalizeEmail(item?.email);
+    const name = typeof item?.name === "string" ? collapse(item.name) : "";
+    if (!EMAIL_RE.test(email) || email.length > 254 || !name || name.length > MAX_NAME_CHARS) {
+      return json({ ok: false, error: "invalid_attendee" }, 400);
+    }
+    const admin = adminClient();
+    try {
+      const { data: cancelled, error: cancellationError } = await admin.from("cancelled_meeting_dates")
+        .select("meeting_date").eq("meeting_date", meetingDate).maybeSingle();
+      if (cancellationError) throw cancellationError;
+      if (cancelled) return json({ ok: false, error: "meeting_cancelled" }, 409);
+      const { data: blocked, error: blockError } = await admin.rpc("is_meeting_blocked", { _email: email, _name: name });
+      if (blockError) throw blockError;
+      if (blocked) return json({ ok: false, error: "registration_unavailable" }, 403);
+      const { data: alreadyRegistered, error } = await admin.rpc("ensure_monday_registration", {
+        _email: email, _name: name, _meeting_date: meetingDate,
+      });
+      if (error || typeof alreadyRegistered !== "boolean") throw error ?? new Error("Missing registration result");
+      // App already supplies access/reminders; intentionally no website email,
+      // marketing, lead scoring or Zoom-provider registration side effects.
+      return json({ ok: true, already_registered: alreadyRegistered, meeting_date: meetingDate });
+    } catch {
+      return json({ ok: false, error: "registration_failed" }, 500);
+    }
+  }
+  if (payload.action !== undefined) return json({ ok: false, error: "invalid_action" }, 400);
   if (!Array.isArray(payload.attendees)) return json({ ok: false, error: "attendees_required" }, 400);
   if (payload.attendees.length > MAX_ATTENDEES) return json({ ok: false, error: "too_many_attendees" }, 400);
 

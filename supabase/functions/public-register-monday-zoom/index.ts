@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 import { enqueueSpineEvent, extractUtm } from "../_shared/spine.ts";
+import { duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -15,11 +16,11 @@ serve(async (req: Request) => {
   try {
     const payload = await req.json();
     const {
-      user_id = null,
       name,
-      email,
+      email: rawEmail,
       phone = "",
       question = "",
+      question_only = false,
       request_follow_up = false,
       consent_email_list = false,
       meeting_date,
@@ -31,7 +32,9 @@ serve(async (req: Request) => {
       language = "en",
     } = payload ?? {};
 
-    if (!name || !email || !meeting_date) {
+    const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : "";
+    if (typeof name !== "string" || !name.trim() || name.length > 120 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || !validMeetingDate(meeting_date)) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -43,16 +46,24 @@ serve(async (req: Request) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
+    const user_id = await registrationUserId(req, email, adminSupabase);
+    if (question_only && (!user_id || typeof question !== "string" || !question.trim() || question.length > 1000)) {
+      return new Response(JSON.stringify({ error: "Please sign in with your registration email and enter a question." }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const registrationSource =
       attribution?.pagePath === "/family-squares-kiosk" ? "kiosk" : "website";
 
     // Reject registrations for cancelled meeting dates with a user-facing message
-    const { data: cancelledRow } = await adminSupabase
+    const { data: cancelledRow, error: cancelledError } = await adminSupabase
       .from("cancelled_meeting_dates")
       .select("reason")
       .eq("meeting_date", meeting_date)
       .maybeSingle();
 
+    if (cancelledError) throw cancelledError;
     if (cancelledRow) {
       return new Response(
         JSON.stringify({
@@ -69,11 +80,12 @@ serve(async (req: Request) => {
     }
 
     // Blocklist check (email OR last name) — silently accept but do not register or email
-    const { data: blockedFlag } = await adminSupabase.rpc("is_meeting_blocked", {
+    const { data: blockedFlag, error: blockedError } = await adminSupabase.rpc("is_meeting_blocked", {
       _email: email,
       _name: name,
     });
 
+    if (blockedError) throw blockedError;
     if (blockedFlag === true) {
       console.warn(`Blocked public meeting registration attempt: ${email} / ${name}`);
       return new Response(JSON.stringify({ success: true, registration: null }), {
@@ -103,6 +115,21 @@ serve(async (req: Request) => {
       .select("id, name, email")
       .single();
 
+    if (isRegistrationDuplicate(insertError)) {
+      if (question_only && user_id) {
+        const { data: saved, error: questionError } = await adminSupabase.rpc("append_monday_registration_question", {
+          _email: email, _meeting_date: meeting_date, _question: question.trim(),
+        });
+        if (questionError || saved !== true) throw questionError ?? new Error("Question not saved");
+        return new Response(JSON.stringify({ ...duplicateRegistrationResponse(), status: "question_submitted", questionSubmitted: true }), {
+          status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      return new Response(JSON.stringify(duplicateRegistrationResponse()), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     if (insertError) {
       throw insertError;
     }
@@ -117,7 +144,7 @@ serve(async (req: Request) => {
       }
     }
 
-    void fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/send-zoom-registration-email`, {
+    await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/send-zoom-registration-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -163,13 +190,13 @@ serve(async (req: Request) => {
       props: { source: "monday_zoom", request_follow_up, consent_email_list },
     });
 
-    return new Response(JSON.stringify({ success: true, registration }), {
+    return new Response(JSON.stringify({ success: true, status: "registered", alreadyRegistered: false, registration }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error: unknown) {
     console.error("Error in public-register-monday-zoom:", error);
-    const message = error instanceof Error ? error.message : "Unknown error";
+    const message = "Registration could not be completed. Please try again.";
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

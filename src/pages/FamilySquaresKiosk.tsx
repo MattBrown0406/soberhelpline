@@ -112,6 +112,7 @@ export default function FamilySquaresKiosk() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [submissionUncertain, setSubmissionUncertain] = useState(false);
   const [isAttractMode, setIsAttractMode] = useState(false);
   const [resetCountdown, setResetCountdown] = useState(RESET_SECONDS);
@@ -291,6 +292,7 @@ export default function FamilySquaresKiosk() {
     setFormData(EMPTY_FORM);
     setErrors({});
     setSubmitted(false);
+    setAlreadyRegistered(false);
     setSubmissionUncertain(false);
     setResetCountdown(RESET_SECONDS);
     setIsSubmitting(false);
@@ -462,7 +464,7 @@ export default function FamilySquaresKiosk() {
     const currentAttempt = ++submissionAttempt.current;
     slowSubmissionTimer.current = setTimeout(() => setShowSlowSubmission(true), SLOW_SUBMISSION_MS);
     try {
-      const { error } = await supabase.functions.invoke("public-register-monday-zoom", {
+      const { data, error } = await supabase.functions.invoke("public-register-monday-zoom", {
         timeout: SUBMISSION_TIMEOUT_MS,
         body: {
           user_id: null,
@@ -489,8 +491,10 @@ export default function FamilySquaresKiosk() {
         },
       });
       if (error) throw error;
+      if (data?.success !== true) throw new Error("Registration was not confirmed");
       if (currentAttempt !== submissionAttempt.current) return;
 
+      setAlreadyRegistered(data.alreadyRegistered === true);
       // Remove personal information before showing the shared-screen confirmation.
       setFormData(EMPTY_FORM);
       setSubmissionUncertain(false);
@@ -593,12 +597,12 @@ export default function FamilySquaresKiosk() {
                   className={`w-full rounded-2xl shadow-lg ${submissionUncertain ? "max-w-[185px]" : "max-w-[250px]"}`}
                 />
                 <span role="status" aria-live="polite" className={`${submissionUncertain ? "mt-2 text-3xl text-amber-800 lg:text-4xl" : "mt-4 text-4xl text-slate-950 lg:text-[42px]"} font-extrabold leading-tight`}>
-                  {submissionUncertain ? "Please check your email" : "You're registered!"}
+                  {submissionUncertain ? "Please check your email" : alreadyRegistered ? "You’re already registered." : "You're registered!"}
                 </span>
                 <span className={`${submissionUncertain ? "mt-2 text-base" : "mt-3 text-lg"} max-w-xl leading-snug text-slate-600`}>
                   {submissionUncertain
                     ? "Your information may have gone through, but this screen did not receive the final confirmation. If the email arrived, you are registered."
-                    : "Check your email for your Family Squares Zoom information."}
+                    : alreadyRegistered ? "We look forward to seeing you Monday evening!" : "Check your email for your Family Squares Zoom information."}
                 </span>
                 <span className={`${submissionUncertain ? "mt-3 text-lg" : "mt-4 text-xl"} flex items-center gap-2 font-bold text-logo-blue`}>
                   {submissionUncertain ? <AlertTriangle className="h-6 w-6 shrink-0" aria-hidden="true" /> : <Smartphone className="h-6 w-6 shrink-0" aria-hidden="true" />}
