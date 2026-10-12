@@ -208,12 +208,101 @@ import openEnrollmentImg from "@/assets/blog-open-enrollment-addiction-treatment
 import fmlaForRehabImg from "@/assets/blog-fmla-for-rehab.jpg";
 import adultChildInsuranceImg from "@/assets/blog-adult-child-rehab-parents-insurance.jpg";
 import addictionSleepImg from "@/assets/blog-addiction-sleep-problems.jpg";
+import chooseDrugsOverFamilyImg from "@/assets/blog-why-loved-one-chooses-drugs-over-family.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 189,
+    slug: "why-does-my-loved-one-choose-drugs-over-family",
+    seoTitle: "Why Does My Loved One Choose Drugs Over Family?",
+    metaDescription: "Wondering why your loved one chooses drugs over family? Learn how addiction rewires the brain's priorities, why it isn't about love, and how families can help.",
+    title: "Why Does My Loved One Choose Drugs Over Family? What's Really Happening in the Brain",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-12",
+    image: chooseDrugsOverFamilyImg,
+    keywords: ["why does my loved one choose drugs over family", "addiction and family", "broken promises addiction", "addiction brain priorities", "CRAFT"],
+    tags: ["brain science", "family guide", "boundaries", "shame"],
+    excerpt: "It can feel like a verdict on how much you matter. It isn't. Here's how addiction rewires the brain's priorities, and how families can respond.",
+    faqItems: [{"question": "Why do people with addiction choose drugs over their children?", "answer": "Addiction rewires the brain’s reward and survival systems, so cravings can override even the deepest values, including love for one’s children. Most parents in active addiction feel intense guilt about this. Treatment can help restore the brain’s ability to act on what matters most."}, {"question": "Is addiction a choice?", "answer": "The first use is usually a choice, but addiction itself is not. Repeated use changes brain circuits involved in reward, motivation, and self-control, making it very hard to stop through willpower alone. People are still responsible for seeking help and working their recovery."}, {"question": "Does my loved one still love me if they keep using?", "answer": "Very likely, yes. Addiction doesn’t erase love; it makes love harder to act on. Many people in active addiction describe deep love for their families alongside overwhelming shame."}, {"question": "Will my loved one ever put family first again?", "answer": "Many people do. With treatment, time, and support, the brain’s reward and decision-making systems can heal, and priorities often realign. Recovery isn’t always a straight line, but real change is very possible."}, {"question": "Should I give my loved one an ultimatum: drugs or us?", "answer": "Ultimatums made in anger often backfire, especially when they aren’t followed through. Clear, calmly stated boundaries you’re prepared to keep tend to work better. A family coach can help you plan what to say and what you’ll do next."}],
+    content: `“You missed my birthday.” “You promised.” “How could you pick that over us?” If you love someone struggling with addiction, you’ve probably asked some version of this question—out loud, or in the quiet hours of the night. Asking “why does my loved one choose drugs over family?” is one of the most painful parts of this journey, because it can feel like a verdict on how much you matter.
+
+Here’s what we want you to know first: it isn’t. Addiction changes how the brain ranks what’s important, and over time a substance can climb to the top of a list that used to have you on it. Understanding why won’t erase the hurt, but it can help you stop taking it personally, protect yourself, and respond in ways that make recovery more likely.
+
+## Why Does My Loved One Choose Drugs Over Family?
+
+Addiction rewires the brain’s reward and survival systems so that the substance feels as urgent as food, water, or safety. Your loved one isn’t calmly weighing drugs against family and deciding you matter less. The part of the brain that would make that thoughtful comparison is being outvoted.
+
+Deep in the brain is a reward system built to keep us alive. When we eat, connect with people we love, or accomplish something, the brain releases [dopamine](/blog/dopamine-and-addiction-brain-science-families), a chemical messenger that says, “This matters—do it again.” Alcohol and drugs trigger that same system, but far more intensely than everyday rewards.
+
+With repeated use, the brain learns that the substance is a top priority, on par with survival. Meanwhile, the prefrontal cortex—the front part of the brain responsible for planning, judgment, and self-control—becomes less able to put on the brakes. The result is a person who may sincerely value their family yet keep acting against those values.
+
+Think of it like a smoke alarm that won’t stop blaring. Your loved one struggles to hear the quieter, more meaningful signals—your voice, their kids’ needs, their own goals—over the noise.
+
+## Does Choosing Drugs Over Family Mean They Don’t Love Me?
+
+No. Love and addiction can live in the same person at the same time. Many people in active addiction feel deep love for their families, along with overwhelming guilt about the pain they’re causing.
+
+That guilt can actually make the cycle worse. [Shame hurts](/blog/shame-addiction-cycle-family-guide), and for someone whose brain has learned that a substance relieves pain, shame becomes one more reason to use.
+
+## Why Do the Promises Keep Getting Broken?
+
+For many families, the hardest part isn’t the using—it’s the [broken promises](/blog/broken-promises-addiction-family-guide). “I’ll be there Sunday.” “This is the last time.” Researchers describe a gap between a person’s “cool” state (calm, sober, thinking clearly) and their “hot” state (craving, stressed, or in withdrawal).
+
+Promises are usually made in the cool state, and they’re often sincerely meant. But when a craving hits, the brain shifts into a mode focused on relief right now. Your loved one may not have been lying when they made the promise; they just couldn’t keep it once the craving took over. That isn’t an excuse, but it is an explanation.
+
+## Why Does Addiction Look So Selfish?
+
+Addiction narrows a person’s world. As it progresses, ordinary joys feel flatter, withdrawal feels worse, and more of daily life gets organized around getting, using, and recovering from the substance.
+
+- Natural rewards fade: The brain turns down its own sensitivity to dopamine, so family time, hobbies, and achievements stop feeling as good as they once did.
+
+- Using becomes about avoiding pain: Early on, people often use to feel good. Later, many use just to feel normal and avoid withdrawal, anxiety, or emotional pain.
+
+- Attention tunnels: Cravings take up enormous mental space, leaving little room to notice other people’s needs, plans, or feelings.
+
+From the outside, this looks like selfishness. From the inside, it often feels like being trapped.
+
+## How Should Families Respond When a Loved One Chooses Drugs Over Family?
+
+Understand the brain science, but don’t let it become a reason to accept unacceptable behavior. The most helpful approach pairs compassion for the person with clear boundaries around the addiction.
+
+1. Don’t treat it as a measure of your worth: Remind yourself, “This is the disease talking, not a verdict on me.”
+
+1. Separate the person from the behavior: You can say, “I love you, and I won’t give you money while you’re using,” in the same breath.
+
+1. Hold your boundaries anyway: Understanding why something happens doesn’t mean you have to absorb its consequences. Boundaries protect you and let natural consequences reach your loved one.
+
+1. Make sober time rewarding: Approaches like CRAFT (Community Reinforcement and Family Training) teach families to warmly reinforce sober moments—shared meals, outings, honest conversations—so recovery can compete with the substance.
+
+1. Speak to the part that still cares: Calm, specific statements like “I miss having dinner with you” often land better than accusations.
+
+1. Get support for yourself: Family therapy, [Al-Anon](https://al-anon.org), [coaching](/family-coaching), or a support group can help you carry this without losing yourself.
+
+## Can the Brain Learn to Choose Family Again?
+
+Yes. [The brain is remarkably capable of healing](/blog/brain-recovery-from-addiction-neuroplasticity-families). With treatment and sustained recovery, the reward system and decision-making areas can gradually rebalance, and many families watch their loved one’s priorities come back into focus.
+
+Brain imaging research has shown that dopamine function can recover significantly with extended abstinence, though it often takes many months and sometimes more than a year.
+
+Good treatment addresses both the brain and the life around it: medication when appropriate, therapy that rebuilds coping skills, and new routines and relationships that make sobriety rewarding. Family involvement is one of the strongest supports a person can have.
+
+## What If You’re the One Choosing Substances Over Family?
+
+If you’re reading this because you keep choosing a substance over people you love, and you hate it, that feeling matters. It’s evidence that the part of you that values your family is still there. Talking with a doctor, counselor, or helpline is a strong first step, not a sign of weakness.
+
+## You Are Not Less Important Than the Substance
+
+It’s natural to feel rejected when someone you love keeps choosing drugs or alcohol. But addiction isn’t a ranking of who matters. It’s a medical condition that hijacks the brain’s priorities—and with help, those priorities can shift back. Protect your heart, keep your boundaries, and remember that your steady, clear love can be part of what helps your loved one find their way home.
+
+## Find Ongoing Support
+
+You don't have to make sense of this alone. [Family addiction coaching](/family-coaching) can help you plan hard conversations and boundaries. Join other families on our free Monday night call, “The Family Squares” ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own support.`,
+  },
   {
     id: 188,
     slug: "addiction-and-sleep-problems-family-guide",
