@@ -36,3 +36,15 @@ export async function registrationUserId(
   const { data, error } = await client.auth.getUser(header.slice(7));
   return !error && data.user?.email?.trim().toLowerCase() === email ? data.user.id : null;
 }
+
+/** Conflict acceptance must outlive a stale app snapshot delete. The RPC
+ * atomically promotes, or recreates if deletion won first; no replay effects. */
+export async function ensureDurableRegistration(
+  client: { rpc: (name: string, args: Record<string, string>) => PromiseLike<{ data: unknown; error: unknown }> },
+  email: string, name: string, meetingDate: string,
+): Promise<void> {
+  const { data, error } = await client.rpc("ensure_monday_registration", {
+    _email: email, _name: name, _meeting_date: meetingDate,
+  });
+  if (error || typeof data !== "boolean") throw error ?? new Error("Registration not secured");
+}

@@ -45,6 +45,7 @@ print('PASS migration refuses legacy duplicates without data loss or partial DDL
 # Synthetic fixtures only: production reconciliation requires a reviewed data plan.
 sql('TRUNCATE public.zoom_meeting_registrations;')
 sql(migration)
+sql(next((root / 'supabase/migrations').glob('*_monday_registration_review_fixes.sql')).read_text())
 assert sql("SELECT has_table_privilege('anon','public.zoom_meeting_registrations','INSERT'), has_table_privilege('authenticated','public.zoom_meeting_registrations','INSERT'), has_column_privilege('authenticated','public.zoom_meeting_registrations','confirmation_claimed_at','UPDATE'), has_column_privilege('authenticated','public.zoom_meeting_registrations','question','UPDATE');")[0] == 'f|f|f|t'
 assert sql("SELECT has_function_privilege('anon','public.ensure_monday_registration(text,text,date)','EXECUTE'),has_function_privilege('authenticated','public.ensure_monday_registration(text,text,date)','EXECUTE'),has_function_privilege('service_role','public.ensure_monday_registration(text,text,date)','EXECUTE');")[0] == 'f|f|t'
 print('PASS private function grants, direct-insert denial, delivery-claim protection')
@@ -88,10 +89,11 @@ insert = "INSERT INTO public.zoom_meeting_registrations(email,name,phone,questio
 overlap(insert, insert.replace('race@example.test', ' RACE@example.test '), False, 'zoom_registration_email_meeting_unique')
 assert sql("SELECT count(*) FROM public.zoom_meeting_registrations WHERE lower(btrim(email))='race@example.test';")[0] == '1'
 overlap("SELECT public.ensure_monday_registration('bridge@example.test','Bridge','2026-10-12');", "SELECT public.ensure_monday_registration('BRIDGE@example.test','Retry','2026-10-12');", True, 't')
-sql("UPDATE public.zoom_meeting_registrations SET registration_source='app' WHERE email='bridge@example.test';")
+sql("UPDATE public.zoom_meeting_registrations SET registration_source='app', phone='private-phone', question='private-question', consent_email_list=true, auto_register=true WHERE email='bridge@example.test';")
 overlap("SELECT public.ensure_monday_registration('bridge@example.test','Bridge','2026-10-12');", "DELETE FROM public.zoom_meeting_registrations WHERE email='bridge@example.test' AND registration_source='app';", True, 'DELETE 0')
 assert sql("SELECT registration_source FROM public.zoom_meeting_registrations WHERE email='bridge@example.test';")[0] == 'website'
-print('PASS observed lock wait: stale batch deletion cannot delete ensured app mirror')
+assert sql("SELECT name,phone,question,consent_email_list,auto_register FROM public.zoom_meeting_registrations WHERE email='bridge@example.test';")[0] == 'Bridge|private-phone|private-question|t|t'
+print('PASS observed lock wait: stale batch deletion cannot delete ensured app mirror; personal/consent fields preserved')
 claim = "UPDATE public.zoom_meeting_registrations SET confirmation_claimed_at=now() WHERE email='bridge@example.test' AND confirmation_claimed_at IS NULL RETURNING id;"
 overlap(claim, claim, True, 'UPDATE 0')
 print('PASS observed real lock waits: concurrent inserts, bridge ensures, delivery claims')
@@ -100,4 +102,23 @@ assert sql("SELECT public.append_monday_registration_question('PERSON@example.te
 assert sql("SELECT question FROM public.zoom_meeting_registrations WHERE email='person@example.test' AND meeting_date='2026-10-12';")[0] == 'A question'
 assert sql("SELECT has_function_privilege('authenticated','public.append_monday_registration_question(text,date,text)','EXECUTE');")[0] == 'f'
 print('PASS authenticated-email member questions preserve one registration and dedupe retries')
+# Exact identity: a substring is a different item; multiline retries remain one item.
+sql("SELECT public.append_monday_registration_question('person@example.test','2026-10-12','question');")
+sql("SELECT public.append_monday_registration_question('person@example.test','2026-10-12',E'multi\\nline'); SELECT public.append_monday_registration_question('person@example.test','2026-10-12',E'multi\\nline');")
+assert sql("SELECT cardinality(question_items),question FROM public.zoom_meeting_registrations WHERE email='person@example.test' AND meeting_date='2026-10-12';")[0] == '3|A question\nquestion\nmulti\nline'
+for first, second in [('member first', 'batch second'), ('batch first', 'member second')]:
+    member = f"SELECT public.append_monday_registration_question('person@example.test','2026-10-12','{first if first.startswith('member') else second}');"
+    batch = f"SELECT public.merge_monday_registration_questions('person@example.test','2026-10-12',ARRAY['{second if second.startswith('batch') else first}']);"
+    overlap(member if first.startswith('member') else batch, batch if first.startswith('member') else member, True, 't')
+    text = sql("SELECT question FROM public.zoom_meeting_registrations WHERE email='person@example.test' AND meeting_date='2026-10-12';")[0]
+    assert first in text and second in text
+print('PASS observed lock waits in BOTH member/batch orderings; exact and multiline retry identity')
+# Opposite promotion/delete ordering: deletion wins first, ensure recreates durably.
+sql("UPDATE public.zoom_meeting_registrations SET registration_source='app' WHERE email='bridge@example.test';")
+overlap("DELETE FROM public.zoom_meeting_registrations WHERE email='bridge@example.test' AND registration_source='app';", "SELECT public.ensure_monday_registration('bridge@example.test','Bridge','2026-10-12');", True, 'f')
+assert sql("SELECT registration_source FROM public.zoom_meeting_registrations WHERE email='bridge@example.test';")[0] == 'website'
+assert sql("SELECT has_function_privilege('anon','public.merge_monday_registration_questions(text,date,text[],boolean)','EXECUTE'),has_function_privilege('authenticated','public.merge_monday_registration_questions(text,date,text[],boolean)','EXECUTE');")[0] == 'f|f'
+sql("SELECT public.merge_monday_registration_questions('person@example.test','2026-10-12',ARRAY['question'],true);")
+assert sql("SELECT cardinality(question_items) FROM public.zoom_meeting_registrations WHERE email='person@example.test' AND meeting_date='2026-10-12';")[0] == '7'
+print('PASS delete-first ensure durability, cross-writer exact retry identity, and shared merge private grants')
 print('PASS all database delta gates (NOT full migration replay)')

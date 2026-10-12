@@ -111,18 +111,7 @@ function cleanQuestions(value: unknown): string[] {
 }
 
 /** Question text for an app-sourced row: newest last, each prefixed "• ". */
-const formatAppQuestions = (questions: string[]) => questions.map((q) => `• ${q}`).join("\n");
-
-/** Append app questions to a website registration's text, once each. */
-function mergeIntoWebsiteQuestion(existing: string, questions: string[]): string {
-  let text = existing ?? "";
-  for (const q of questions) {
-    if (text.includes(q)) continue;
-    const line = `• ${q} ${APP_MARK}`;
-    text = text.trim() ? `${text.trimEnd()}\n${line}` : line;
-  }
-  return text;
-}
+const formatAppQuestions = (questions: string[]) => questions.map((q) => `• ${q} ${APP_MARK}`).join("\n");
 
 function lastNameToken(name: string): string {
   const tokens = name.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -293,6 +282,14 @@ Deno.serve(async (req: Request) => {
       wanted.set(attendee.email, attendee);
     }
 
+    const mergeQuestions = async (attendee: Attendee) => {
+      if (!attendee.questions.length) return;
+      const { data, error } = await admin.rpc("merge_monday_registration_questions", {
+        _email: attendee.email, _meeting_date: meetingDate,
+        _questions: attendee.questions, _from_app: true,
+      });
+      if (error || data !== true) throw error ?? new Error("Question merge target missing");
+    };
     const toDelete = new Set<string>();
     const toInsert: Record<string, unknown>[] = [];
 
@@ -304,19 +301,8 @@ Deno.serve(async (req: Request) => {
       if (websiteRows.length > 0) {
         // Keep the person's own registration; fold app questions into the newest one.
         appRows.forEach((row) => toDelete.add(row.id));
-        const target = websiteRows[websiteRows.length - 1];
-        const merged = mergeIntoWebsiteQuestion(target.question ?? "", attendee.questions);
-        if (merged !== (target.question ?? "")) {
-          const { error } = await admin
-            .from("zoom_meeting_registrations")
-            .update({ question: merged })
-            .eq("id", target.id)
-            .neq("registration_source", APP_SOURCE);
-          if (error) throw error;
-          counts.merged += 1;
-        } else {
-          counts.unchanged += 1;
-        }
+        await mergeQuestions(attendee);
+        counts.merged += 1;
         continue;
       }
 
@@ -324,10 +310,11 @@ Deno.serve(async (req: Request) => {
       if (appRows.length > 0) {
         const [keep, ...duplicates] = appRows;
         duplicates.forEach((row) => toDelete.add(row.id));
-        if (keep.name !== attendee.name || (keep.question ?? "") !== question) {
+        await mergeQuestions(attendee);
+        if (keep.name !== attendee.name) {
           const { error } = await admin
             .from("zoom_meeting_registrations")
-            .update({ name: attendee.name, question })
+            .update({ name: attendee.name })
             .eq("id", keep.id)
             .eq("registration_source", APP_SOURCE);
           if (error) throw error;
@@ -344,6 +331,7 @@ Deno.serve(async (req: Request) => {
         email: attendee.email,
         phone: "",
         question,
+        question_items: attendee.questions,
         request_follow_up: false,
         consent_email_list: false,
         auto_register: false,
@@ -370,7 +358,10 @@ Deno.serve(async (req: Request) => {
       if (!error) {
         counts.inserted += 1;
       } else if (error.code === "23505") {
-        counts.unchanged += 1; // a concurrent run already created it (unique index)
+        // A concurrent member/public writer may have won the seat. Merge into
+        // the locked current row rather than dropping this snapshot's questions.
+        await mergeQuestions(wanted.get(String(row.email))!);
+        counts.unchanged += 1;
       } else if (error.code === "23514") {
         schemaPending = true;
         counts.schema_pending += 1;

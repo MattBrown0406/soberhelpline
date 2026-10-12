@@ -302,16 +302,17 @@
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFud3Fwcm1wem1jcWJrdHRteG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMDE1MTcsImV4cCI6MjA3OTU3NzUxN30.zvikfr-0JzQwwqMgOcoZFMuU-w0VyGL28pxB3AXVj2k";
 
-      function getNextMeetingDate() {
-        const now = new Date();
-        const pacificNow = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
-        const day = pacificNow.getDay();
-        const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
-        pacificNow.setDate(pacificNow.getDate() + daysUntilMonday);
-        const year = pacificNow.getFullYear();
-        const month = String(pacificNow.getMonth() + 1).padStart(2, "0");
-        const date = String(pacificNow.getDate()).padStart(2, "0");
-        return `${year}-${month}-${date}`;
+      function getNextMeetingDate(now = new Date()) {
+        const parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+          day: "2-digit", hour: "2-digit", hourCycle: "h23",
+        }).formatToParts(now);
+        const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+        const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+        const day = date.getUTCDay();
+        const days = day === 1 && Number(values.hour) < 20 ? 0 : (8 - day) % 7 || 7;
+        date.setUTCDate(date.getUTCDate() + days);
+        return date.toISOString().slice(0, 10);
       }
 
       const form = document.getElementById("registration-form");
@@ -370,7 +371,9 @@
 
           form.reset();
           document.getElementById("email-consent").checked = true;
-          showStatus("success", "You're registered. Please check your email for the Zoom meeting link.");
+          showStatus("success", data.alreadyRegistered || data.status === "already_registered"
+            ? "You’re already registered. We look forward to seeing you Monday evening!"
+            : "You're registered. Please check your email for the Zoom meeting link.");
         } catch (error) {
           showStatus(
             "error",

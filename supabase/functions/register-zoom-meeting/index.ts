@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
-import { duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId } from "../_shared/mondayRegistration.ts";
+import { ensureDurableRegistration, duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,20 +22,17 @@ const RegistrationSchema = z.object({
   language: z.enum(["en", "es"]).optional().default("en"),
 });
 
-function getNextMeetingDate() {
-  const now = new Date();
-  const pstString = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-  const pstNow = new Date(pstString);
-  const day = pstNow.getDay();
-  const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
-  const nextMonday = new Date(pstNow);
-  nextMonday.setDate(pstNow.getDate() + daysUntilMonday);
-
-  const year = nextMonday.getFullYear();
-  const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
-  const date = String(nextMonday.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${date}`;
+function getNextMeetingDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", hourCycle: "h23",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+  const day = date.getUTCDay();
+  const days = day === 1 && Number(values.hour) < 20 ? 0 : (8 - day) % 7 || 7;
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
 }
 
 serve(async (req: Request) => {
@@ -124,9 +121,12 @@ serve(async (req: Request) => {
 
     const { data: savedRow, error: saveError } = await adminSupabase
       .from("zoom_meeting_registrations").insert(payload).select("id").single();
-    if (isRegistrationDuplicate(saveError)) return new Response(JSON.stringify(duplicateRegistrationResponse()), {
-      status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    if (isRegistrationDuplicate(saveError)) {
+      await ensureDurableRegistration(adminSupabase, email, name, meetingDate);
+      return new Response(JSON.stringify(duplicateRegistrationResponse()), {
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     if (saveError) {
       throw new Error(`Unable to save registration: ${saveError.message}`);

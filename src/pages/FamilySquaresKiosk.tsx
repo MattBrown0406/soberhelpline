@@ -74,27 +74,18 @@ const EMPTY_FORM: FormData = {
   requestFollowUp: false,
 };
 
-const getNextMeetingDate = () => {
-  const now = new Date();
+function getNextMeetingDate(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Los_Angeles",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "short",
-    hour: "2-digit",
-    hourCycle: "h23",
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", hourCycle: "h23",
   }).formatToParts(now);
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  const weekdayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(values.weekday);
-  const pacificHour = Number(values.hour);
-  // Family Squares is scheduled for 60 minutes. Keep the current meeting
-  // available through 8 PM Pacific, then roll forward to next Monday.
-  const daysUntilMonday = weekdayIndex === 1 && pacificHour < 20 ? 0 : (8 - weekdayIndex) % 7 || 7;
-  const pacificDate = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
-  pacificDate.setUTCDate(pacificDate.getUTCDate() + daysUntilMonday);
-  return pacificDate.toISOString().slice(0, 10);
-};
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+  const day = date.getUTCDay();
+  const days = day === 1 && Number(values.hour) < 20 ? 0 : (8 - day) % 7 || 7;
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
 
 const formatMeetingDate = (date: string) => {
   const [year, month, day] = date.split("-").map(Number);

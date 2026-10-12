@@ -1,12 +1,25 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
+import { ensureDurableRegistration, isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+function getNextMeetingDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", hourCycle: "h23",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+  const day = date.getUTCDay();
+  const days = day === 1 && Number(values.hour) < 20 ? 0 : (8 - day) % 7 || 7;
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -27,24 +40,7 @@ serve(async (req) => {
 
     console.log('Auto-registering recurring Zoom registrants...');
 
-    // Calculate next Monday's date
-    const now = new Date();
-    const pstString = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-    const pstNow = new Date(pstString);
-    const day = pstNow.getDay();
-
-    // From Tuesday (day=2), next Monday is in 6 days
-    let daysUntilMonday: number;
-    if (day === 0) daysUntilMonday = 1;
-    else if (day === 1) daysUntilMonday = 7;
-    else daysUntilMonday = 8 - day;
-
-    const nextMonday = new Date(pstNow);
-    nextMonday.setDate(pstNow.getDate() + daysUntilMonday);
-    const yyyy = nextMonday.getFullYear();
-    const mm = String(nextMonday.getMonth() + 1).padStart(2, '0');
-    const dd = String(nextMonday.getDate()).padStart(2, '0');
-    const meetingDate = `${yyyy}-${mm}-${dd}`;
+    const meetingDate = getNextMeetingDate();
 
     console.log('Target meeting date:', meetingDate);
 
@@ -76,28 +72,11 @@ serve(async (req) => {
       return true;
     });
 
-    // Check which emails are already registered for this meeting date
-    const emails = uniqueRegistrants.map((r) => r.email.toLowerCase().trim());
-    const { data: existingRegs } = await supabase
-      .from('zoom_meeting_registrations')
-      .select('email')
-      .eq('meeting_date', meetingDate)
-      .in('email', emails);
-
-    const alreadyRegistered = new Set(
-      (existingRegs || []).map((r) => r.email.toLowerCase().trim())
-    );
-
     // Insert new registrations and send emails
     let registered = 0;
 
     for (const registrant of uniqueRegistrants) {
       const email = registrant.email.toLowerCase().trim();
-      if (alreadyRegistered.has(email)) {
-        console.log(`Skipping ${email} — already registered for ${meetingDate}`);
-        continue;
-      }
-
       // Insert new registration
       const { data: inserted, error: insertError } = await supabase
         .from('zoom_meeting_registrations')
@@ -116,7 +95,10 @@ serve(async (req) => {
         .select('id')
         .single();
 
-      if (isRegistrationDuplicate(insertError)) continue;
+      if (isRegistrationDuplicate(insertError)) {
+        await ensureDurableRegistration(supabase, email, registrant.name, meetingDate);
+        continue;
+      }
       if (insertError) {
         console.error(`Failed to auto-register ${email}:`, insertError.message);
         continue;

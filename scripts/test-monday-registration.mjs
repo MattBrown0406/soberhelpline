@@ -5,6 +5,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { webcrypto } from 'node:crypto';
 import ts from 'typescript';
+import { execFileSync } from 'node:child_process';
 const require = createRequire(import.meta.url);
 const root = process.cwd();
 const message = 'You’re already registered. We look forward to seeing you Monday evening!';
@@ -21,7 +22,15 @@ function harness() {
       if (name === 'is_meeting_blocked') return { data: state.blocked, error: null };
       if (name === 'append_monday_registration_question') {
         const row = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
-        if (row && !(row.question ?? '').includes(args._question)) row.question = [row.question, args._question].filter(Boolean).join('\n');
+        if (row && !(row.question ?? '').split('\n').includes(args._question)) row.question = [row.question, args._question].filter(Boolean).join('\n');
+        return { data: Boolean(row), error: null };
+      }
+      if (name === 'merge_monday_registration_questions') {
+        const row = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
+        if (row) for (const q of args._questions) {
+          const rendered = args._from_app ? `• ${q} (from the app)` : q;
+          if (!(row.question ?? '').split('\n').some(item => item === q || item === rendered)) row.question = [row.question, rendered].filter(Boolean).join('\n');
+        }
         return { data: Boolean(row), error: null };
       }
       if (name === 'ensure_monday_registration') {
@@ -67,7 +76,9 @@ function harness() {
   function load(relative) {
     let handler;
     const filename = path.resolve(root, relative);
-    const source = fs.readFileSync(filename, 'utf8');
+    const source = process.env.REVIEW_BASELINE_REF
+      ? execFileSync('git', ['show', `${process.env.REVIEW_BASELINE_REF}:${relative}`], { encoding: 'utf8' })
+      : fs.readFileSync(filename, 'utf8');
     const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
     const exports = {};
     const env = { SUPABASE_URL: 'https://test.invalid', SUPABASE_SERVICE_ROLE_KEY: 'test-service', MEMBERSHIP_SYNC_SECRET: 'test-sync', SENDGRID_API_KEY: 'test-sendgrid' };
@@ -97,7 +108,7 @@ function harness() {
 }
 const payload = { name: 'Test Person', email: 'Person@example.test', meeting_date: today, user_id: 'untrusted-user-id' };
 let tests = 0;
-async function test(name, fn) { await fn(); tests++; console.log(`ok ${tests} - ${name}`); }
+async function test(name, fn) { if (process.env.REVIEW_TEST_FILTER && !name.includes(process.env.REVIEW_TEST_FILTER)) return; await fn(); tests++; console.log(`ok ${tests} - ${name}`); }
 await test('public concurrent submits, retry, auto-registration replay and next week', async () => {
   const { state, load, post } = harness(); const { handler } = load('supabase/functions/public-register-monday-zoom/index.ts');
   const results = await Promise.all([post(handler, payload), post(handler, { ...payload, email: ' person@EXAMPLE.test ' })]);
@@ -146,7 +157,7 @@ await test('overlapping auto-registration jobs and manual retry send once', asyn
   const auto = load('supabase/functions/auto-register-zoom/index.ts').handler;
   await Promise.all([post(auto, {}), post(auto, {})]); assert.equal(state.rows.length, 2); assert.equal(state.calls.length, 1);
   const manual = load('supabase/functions/public-register-monday-zoom/index.ts').handler;
-  assert.equal((await post(manual, { ...payload, meeting_date: '2026-10-19' })).body.alreadyRegistered, true); assert.equal(state.calls.length, 1);
+  assert.equal((await post(manual, payload)).body.alreadyRegistered, true); assert.equal(state.calls.length, 1);
 });
 await test('email sender service authorization plus atomic claim blocks all duplicate effects', async () => {
   const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg' });
@@ -173,5 +184,27 @@ await test('private app ensure contract: unauthorized, new, repeat, date scope, 
   state.cancelled = true; assert.equal((await post(handler, body, headers)).status, 409); state.cancelled = false;
   state.rpcError = { message: 'failed' }; assert.equal((await post(handler, body, headers)).status, 500);
   assert.equal(state.calls.length, 0); assert.equal(state.rows.length, 2);
+});
+for (const endpoint of ['public-register-monday-zoom', 'register-zoom-meeting', 'auto-register-zoom']) {
+  await test(`${endpoint} promotes transient app row without overwriting details or effects`, async () => {
+    const { state, load, post } = harness();
+    const row = { ...payload, id: 'app-seat', email: 'person@example.test', registration_source: 'app', question: 'Private question', phone: 'private', consent_email_list: false, auto_register: true };
+    state.rows.push(row); const before = { ...row, registration_source: 'website' };
+    const result = await post(load(`supabase/functions/${endpoint}/index.ts`).handler, payload);
+    assert.equal(result.status, 200); assert.deepEqual(row, before);
+    assert.equal(state.calls.length, 0); assert.equal(state.rows.length, 1);
+    if (endpoint !== 'auto-register-zoom') { assert.equal(result.body.message, message); assert.equal(result.body.registration, null); }
+  });
+}
+await test('batch app/website questions use atomic merge and preserve member text on replay', async () => {
+  for (const registration_source of ['app', 'website']) {
+    const { state, load, post } = harness();
+    state.rows.push({ ...payload, id: 'seat', email: 'person@example.test', registration_source, question: 'Member question' });
+    const body = { meeting_date: today, attendees: [{ email: 'person@example.test', name: 'Changed', rsvp: 'going', questions: ['A question', 'question'] }] };
+    const handler = load('supabase/functions/app-family-squares-sync/index.ts').handler;
+    for (let i = 0; i < 2; i++) assert.equal((await post(handler, body, { 'x-membership-sync-secret': 'test-sync' })).status, 200);
+    assert.equal(state.rows[0].question, 'Member question\n• A question (from the app)\n• question (from the app)');
+    assert.equal(state.calls.length, 0);
+  }
 });
 console.log(`PASS: ${tests} actual-handler tests (synthetic database/provider IO; SQL concurrency tested separately).`);

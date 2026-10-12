@@ -18,18 +18,18 @@ import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge"
 import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
 
-const getNextMeetingDate = () => {
-  const now = new Date();
-  const pstNow = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
-  const day = pstNow.getDay();
-  const daysUntilMonday = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
-  const nextMonday = new Date(pstNow);
-  nextMonday.setDate(pstNow.getDate() + daysUntilMonday);
-  const year = nextMonday.getFullYear();
-  const month = String(nextMonday.getMonth() + 1).padStart(2, "0");
-  const date = String(nextMonday.getDate()).padStart(2, "0");
-  return `${year}-${month}-${date}`;
-};
+function getNextMeetingDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", hourCycle: "h23",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  const date = new Date(Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)));
+  const day = date.getUTCDay();
+  const days = day === 1 && Number(values.hour) < 20 ? 0 : (8 - day) % 7 || 7;
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
 
 const buildRegistrationSchema = (options: { requireName: boolean; requireEmail: boolean }) => z.object({
   name: options.requireName

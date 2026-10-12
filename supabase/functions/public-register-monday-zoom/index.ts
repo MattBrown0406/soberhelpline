@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 import { enqueueSpineEvent, extractUtm } from "../_shared/spine.ts";
-import { duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
+import { ensureDurableRegistration, duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -116,6 +116,7 @@ serve(async (req: Request) => {
       .single();
 
     if (isRegistrationDuplicate(insertError)) {
+      await ensureDurableRegistration(adminSupabase, email, name, meeting_date);
       if (question_only && user_id) {
         const { data: saved, error: questionError } = await adminSupabase.rpc("append_monday_registration_question", {
           _email: email, _meeting_date: meeting_date, _question: question.trim(),

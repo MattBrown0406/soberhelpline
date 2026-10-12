@@ -22,7 +22,7 @@ No production mutations, sends, deployment, push or Lovable publication performe
 }
 ```
 
-The unique key is `(lower(trim(email)), meeting_date)`, not lifetime email. Normal repeated submissions do not change names, questions, consent, auto-registration preferences, identity or source, and never invoke email/marketing/scoring side effects. Public body `user_id` is ignored; only the verified request token with a matching email may link a user. There is no public email-search endpoint or new public read policy.
+The unique key is `(lower(trim(email)), meeting_date)`, not lifetime email. Normal repeated submissions do not change names, questions, consent, auto-registration preferences, identity, or durable source (a transient `app` source is promoted to `website`), and never invoke email/marketing/scoring side effects. Public body `user_id` is ignored; only the verified request token with a matching email may link a user. There is no public email-search endpoint or new public read policy.
 
 The existing signed-in member-question form explicitly sets `question_only: true`; matching verified-email requests may append a question to the existing seat through a private atomic RPC, returning `questionSubmitted: true`. It does not create another registration or email. Guests cannot use this mutation.
 
@@ -74,7 +74,7 @@ The app bridge creates no confirmation email, marketing, CRM, or Zoom-provider c
 
    If nonzero, obtain approval for a reviewed consolidation/archive migration preserving questions, consent, links, attendance, lead scores and cascading follow-up references. Do not delete rows ad hoc or deploy functions assuming the unique index exists. Production was not queried, so this gate is **unverified**.
 3. Run a complete migration-chain reset on an isolated backend. The provided SQL test is a minimal affected-table **delta** gate, not a full-chain replay or production catalog verification. Check for schema drift, historic migration collisions, privileges and all foreign keys.
-4. Apply `20261012224330_monday_registration_idempotency.sql` to the website project, then deploy `public-register-monday-zoom`, `register-zoom-meeting`, `auto-register-zoom`, `send-zoom-registration-email`, and `app-family-squares-sync` with their shared imports. Do not enable the native caller before the bridge and RPC are available.
+4. Apply `20261012224330_monday_registration_idempotency.sql` and then `20261012230630_monday_registration_review_fixes.sql` to the website project, then deploy `public-register-monday-zoom`, `register-zoom-meeting`, `auto-register-zoom`, `send-zoom-registration-email`, and `app-family-squares-sync` with their shared imports. Do not enable the native caller before the bridge and RPC are available.
 5. Publish the website separately through Lovable after approved source synchronization; app source/binary and app backend deployment are separate gates.
 6. Approved synthetic integration verification across both real project boundaries, with explicit permission before any email/provider sends. No live registration was created in this work.
 
@@ -88,9 +88,18 @@ The email claim implements **at-most-once attempts**, not guaranteed delivery. I
 
 ## Executed checks
 
-- `node scripts/test-monday-registration.mjs`: 8 tests executing actual transpiled handlers with synthetic database/provider IO (concurrency, auto/manual, retry, new week, private identity, questions, service claims, bridge and empty batch).
+- `node scripts/test-monday-registration.mjs`: 12 tests executing actual transpiled handlers with synthetic database/provider IO (concurrency, auto/manual, retry, new week, private identity, questions, service claims, bridge and empty batch).
 - `python scripts/test-monday-registration-db.py sh-monday-idempotency-test`: isolated PostgreSQL 17 delta gate; duplicate preflight rollback, index/normalized key, scoped dates, service-only grants, claim protection, real lock-wait concurrency, durable app promotion versus stale batch delete, member-question retries.
-- `node scripts/test-monday-registration-browser.mjs`: 4 Chromium cases at 390px covering static and React routes with new/duplicate responses; every external request mocked or blocked.
+- `node scripts/test-monday-registration-browser.mjs`: 8 Chromium cases at 390px covering static, React, legacy `/zoom.html`, and kiosk routes with new/duplicate responses, checking submitted occurrence at Monday 20:30 Pacific after the DST transition; every external request mocked or blocked.
 - Vite production client build, TypeScript app check, Deno checks for all five changed edge handlers, scoped ESLint, staged whitespace check.
 
 No app source was touched. The original website checkout's pre-existing changes were left in place.
+
+## Independent-review fixes (local only)
+
+- Public/manual/legacy/auto conflict acceptance now calls the same atomic ensure RPC as native. Auto no longer skips a row based on an earlier read. Promotion leaves all existing personal/consent/question fields untouched and sends no duplicate effects. If a stale delete wins first, ensure recreates a durable seat before acceptance; details of an already-deleted transient mirror cannot be recovered.
+- Batch and authenticated member questions share a row-locked merge RPC. Batch never replaces a stale question snapshot, including transient app rows; concurrent insert conflicts also merge their questions. App question histories are additive while the seat exists, rather than replacing text from snapshots.
+- Exact `question_items` equality replaces substring retry detection, retaining multiline item identity. Existing aggregate website text is preserved as one legacy item because its historic item boundaries cannot be reconstructed reliably; no text is purged.
+- All six registration occurrence helpers use Monday's 20:00 America/Los_Angeles cutoff and UTC calendar arithmetic. `node scripts/test-monday-dates.mjs` executes 288 source-helper cases across four host timezones, DST transitions, midnight, and before/at/after cutoff.
+- PostgreSQL 17 delta checks observe actual lock waits for BOTH member/batch orderings and BOTH promotion/delete orderings. Normalized occurrence uniqueness, future-week acceptance, no unsafe historical duplicate purge, private RPC grants, and at-most-once delivery constraints remain intact.
+- Local verification: 12 actual-handler tests, 8 browser cases, 288 date-helper cases, existing registration-source Chromium suite (22 checks), app TypeScript, production build, and Deno checks for five handlers. The SQL gate remains delta-only; no full-chain, production or native-device claim is made.
