@@ -145,7 +145,7 @@ function scoreMatch(recording: ZoomRecording, row: RecordingRow) {
   return score;
 }
 
-async function requireAdmin(req: Request, adminSupabase: ReturnType<typeof createClient>) {
+async function requireAdmin(req: Request, adminSupabase: any) {
   const authHeader = req.headers.get("Authorization") ?? "";
   if (!authHeader.startsWith("Bearer ")) return false;
 
