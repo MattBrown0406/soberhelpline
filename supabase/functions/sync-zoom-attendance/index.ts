@@ -162,7 +162,7 @@ async function getParticipantsForDate(meetingId: string, token: string, dateStr:
 
 async function isAuthorized(
   req: Request,
-  adminSupabase: ReturnType<typeof createClient>,
+  adminSupabase: any,
   body: any,
 ): Promise<boolean> {
   // Path 1: shared cron secret (header)
