@@ -210,12 +210,128 @@ import adultChildInsuranceImg from "@/assets/blog-adult-child-rehab-parents-insu
 import addictionSleepImg from "@/assets/blog-addiction-sleep-problems.jpg";
 import chooseDrugsOverFamilyImg from "@/assets/blog-why-loved-one-chooses-drugs-over-family.jpg";
 import drinkModeratelyImg from "@/assets/blog-alcoholic-drink-moderately-again.jpg";
+import personFirstLanguageImg from "@/assets/blog-person-first-language-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 191,
+    slug: "person-first-language-for-addiction",
+    seoTitle: "Person-First Language for Addiction: Words Matter",
+    metaDescription: "Person-first language for addiction helps families talk with less shame and more hope. Learn which words to swap, why they matter, and what to say instead.",
+    title: "Person-First Language for Addiction: How the Words Families Use Can Help a Loved One Heal",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-20",
+    image: personFirstLanguageImg,
+    keywords: ["person-first language for addiction", "addiction stigma", "family communication", "substance use disorder", "respectful language"],
+    tags: ["family guide", "communication", "stigma", "recovery"],
+    excerpt: "A few simple word swaps can help families talk about addiction with less shame and more hope, while keeping honesty and respect at the center of the conversation.",
+    faqItems: [
+      { question: "What is an example of person-first language for addiction?", answer: "An example is saying ‘a person with a substance use disorder’ instead of ‘an addict.’ Other examples include ‘person in recovery’ instead of ‘former addict’ and ‘positive drug test’ instead of ‘dirty.’ Each one puts the person ahead of the condition." },
+      { question: "Is it offensive to call someone an addict?", answer: "It can be. Many people find the word ‘addict’ shaming because it defines them entirely by their illness. Some people in recovery choose to use it for themselves, so it is best to follow their lead and avoid using it to describe others." },
+      { question: "Why shouldn’t you say ‘clean’ when talking about sobriety?", answer: "‘Clean’ suggests that a person who is using is ‘dirty,’ which adds moral judgment to a health condition. Neutral alternatives like ‘in recovery,’ ‘not using,’ or ‘negative test result’ are more accurate and less shaming." },
+      { question: "Does the language we use really affect recovery?", answer: "Yes. Stigmatizing language has been linked to harsher judgments, including among health professionals, and shame is a major reason people avoid seeking help. Respectful language makes honest conversations, and getting treatment, feel safer." },
+      { question: "How can I get my family to stop using stigmatizing words?", answer: "Start by modeling the language yourself rather than correcting others in the moment. Then have a calm, private conversation explaining why certain words can hurt and offering a few easy swaps. Most relatives respond well when they understand the goal is to help." },
+    ],
+    content: `If someone you love is struggling with drugs or alcohol, you have probably noticed how loaded the conversation can feel. One wrong word and the door slams shut. Person-first language for addiction is a simple, practical way to lower the temperature. It means describing your loved one as a person who has a problem, not as the problem itself.
+
+This is not about being politically correct or walking on eggshells. It is about choosing words that leave room for change. The language your family uses at the kitchen table shapes how your loved one sees themselves, and how they see themselves shapes whether they believe recovery is possible.
+
+The good news is that this is one of the easiest skills a family can learn. All it takes is a few swaps and a little practice.
+
+## What Is Person-First Language for Addiction?
+
+Person-first language for addiction puts the human being ahead of the diagnosis. Instead of saying “my son is an addict,” you might say “my son has a substance use disorder” or “my son is struggling with opioids.” The person comes first; the condition is something they have, not who they are.
+
+Addiction is a medical condition that changes how the brain handles reward, motivation, and self-control. Language that treats it like a character flaw (“junkie,” “drunk,” “loser”) quietly tells your loved one they are broken. Language that treats it as a health problem tells them it can be treated. Understanding [why willpower isn’t enough to overcome addiction](/why-willpower-fails) can help families approach these conversations with more compassion.
+
+## Why Do Words Matter So Much When Someone Is Struggling?
+
+Words matter because shame is one of the biggest barriers to getting help. When people feel judged or labeled, they tend to hide, minimize, and avoid the very conversations that could lead them toward treatment.
+
+Research backs this up. In one well-known study, even trained mental health professionals were more likely to view someone as deserving punishment when that person was described as a “substance abuser” rather than as someone “with a substance use disorder.” If a single label can shift how experts think, imagine how much it shapes the thoughts of a person already drowning in guilt.
+
+Stigmatizing words also affect families. When you think of your loved one as “an addict,” it becomes easier to lose sight of the funny, caring, talented person you know is still in there. Person-first language helps you hold on to that, too.
+
+## Words to Swap: A Family Guide to Less Stigmatizing Language
+
+The easiest way to start is to replace a handful of common phrases. You do not have to change everything overnight. Pick two or three swaps this week and notice how conversations feel.
+
+### Words About the Person
+
+- **“Addict,” “junkie,” or “alcoholic”** → “person with a substance use disorder,” “person struggling with alcohol,” or simply your loved one’s name
+- **“Abuser” or “user”** → “person who uses drugs” or “person with an addiction”
+- **“Former addict” or “ex-junkie”** → “person in recovery” or “person in long-term recovery”
+
+### Words About Progress and Drug Tests
+
+- **“Clean” and “dirty”** → “negative” or “positive” test result; “in recovery” or “not using”
+- **“Fell off the wagon” or “messed up again”** → “had a return to use” or “had a relapse”
+- **“Failed rehab”** → “is ready to try another approach” or “needs more support”
+
+### Words About Treatment
+
+- **“Replacing one drug with another”** → “medication for addiction treatment” (for example, buprenorphine or methadone)
+- **“Habit” or “choice”** → “addiction” or “substance use disorder,” which reflects a real health condition
+
+Notice the pattern. Words like “clean” and “dirty” imply a person is literally soiled when they are using. Swapping in neutral, medical words removes that moral judgment and keeps the focus on health.
+
+## How Do You Use Person-First Language for Addiction in Everyday Conversations?
+
+You use it naturally, the same way you would talk about any other health struggle. The goal is not perfect wording. The goal is warmth, honesty, and respect, with the right words supporting the message.
+
+Here are some practical ways to bring it into daily life:
+
+1. **Start with your own thoughts.** Before a conversation, notice the labels running through your head. Gently replace “the addict” with your loved one’s name.
+2. **Describe behavior, not identity.** “I noticed you came home at 3 a.m. and seemed intoxicated” is more helpful than “You are such a drunk.”
+3. **Use “I” statements.** “I am worried about how much you have been drinking” invites conversation. “You are an alcoholic” invites a fight.
+4. **Correct yourself kindly.** If an old word slips out, simply say, “Let me say that differently.” It shows humility and models growth.
+5. **Share the idea with family members.** A short family conversation about the words you all want to use can help everyone get on the same page without blame.
+
+For more practical examples, read [how to talk to a loved one about addiction](/blog/how-to-talk-to-loved-one-about-addiction).
+
+If you are someone seeking help for yourself, these same ideas apply to your inner voice. Talking to yourself as “a person working on my recovery” rather than “a hopeless addict” is not denial. It is a more accurate and more hopeful way of describing where you are.
+
+## What If Your Loved One Calls Themselves an “Addict” or “Alcoholic”?
+
+That is their choice, and it is worth respecting. Many people in recovery, especially in 12-step programs like Alcoholics Anonymous, introduce themselves as “an alcoholic” or “an addict” as a way of owning their story and staying honest.
+
+Person-first language is mainly a guide for how families, friends, and professionals talk about someone. It is not a rule to enforce on the person who is living the experience. If your loved one finds strength in a label, you do not need to correct them.
+
+A good rule of thumb: follow their lead when they describe themselves, and use respectful, person-first words when you describe them to others. When in doubt, you can simply ask, “How would you like me to talk about this with the rest of the family?” That one question shows enormous respect.
+
+Changing a few words may feel small, but small shifts add up. Every time you choose respectful language, you send a quiet message: You are more than this. I still see you. Recovery is possible. Families who communicate this way often find that conversations get easier, defensiveness softens, and trust has room to grow. You do not have to get it perfect. You just have to keep showing up with love, and let your words reflect the hope you carry for the person you care about.
+
+## Frequently Asked Questions About Person-First Language for Addiction
+
+### What is an example of person-first language for addiction?
+
+An example is saying “a person with a substance use disorder” instead of “an addict.” Other examples include “person in recovery” instead of “former addict” and “positive drug test” instead of “dirty.” Each one puts the person ahead of the condition.
+
+### Is it offensive to call someone an addict?
+
+It can be. Many people find the word “addict” shaming because it defines them entirely by their illness. Some people in recovery choose to use it for themselves, so it is best to follow their lead and avoid using it to describe others.
+
+### Why shouldn’t you say “clean” when talking about sobriety?
+
+“Clean” suggests that a person who is using is “dirty,” which adds moral judgment to a health condition. Neutral alternatives like “in recovery,” “not using,” or “negative test result” are more accurate and less shaming.
+
+### Does the language we use really affect recovery?
+
+Yes. Stigmatizing language has been linked to harsher judgments, including among health professionals, and shame is a major reason people avoid seeking help. Respectful language makes honest conversations, and getting treatment, feel safer.
+
+### How can I get my family to stop using stigmatizing words?
+
+Start by modeling the language yourself rather than correcting others in the moment. Then have a calm, private conversation explaining why certain words can hurt and offering a few easy swaps. Most relatives respond well when they understand the goal is to help.
+
+## Find Ongoing Support at SoberHelpline.com
+
+Ready to keep learning? Our [family coaching](/family-coaching) offers one-on-one help with communication, boundaries, and your own recovery. Join “The Family Squares,” our free [Monday night family call](/family-support), or connect with [Al-Anon](https://al-anon.org/) for ongoing peer support. Whether you are helping someone you love or looking for help for yourself, you do not have to figure this out alone. Call [458-298-8008](tel:4582988008) to talk about your next step.`,
+  },
   {
     id: 190,
     slug: "can-an-alcoholic-drink-moderately-again",
