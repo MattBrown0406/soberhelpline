@@ -211,12 +211,124 @@ import addictionSleepImg from "@/assets/blog-addiction-sleep-problems.jpg";
 import chooseDrugsOverFamilyImg from "@/assets/blog-why-loved-one-chooses-drugs-over-family.jpg";
 import drinkModeratelyImg from "@/assets/blog-alcoholic-drink-moderately-again.jpg";
 import personFirstLanguageImg from "@/assets/blog-person-first-language-addiction.jpg";
+import codependencyAddictionImg from "@/assets/blog-codependency-and-addiction.jpg";
 
 export const imageMap: Record<string, string> = {
   cycleOfAddictionImg,
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 192,
+    slug: "codependency-and-addiction",
+    seoTitle: "Codependency and Addiction: Signs and How to Recover",
+    metaDescription: "Codependency and addiction often go hand in hand. Learn the signs of codependency in families, why it happens, and 7 steps to start feeling like yourself again.",
+    title: "Codependency and Addiction: Signs You’ve Lost Yourself in a Loved One’s Struggle (and How to Find Your Way Back)",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-21",
+    image: codependencyAddictionImg,
+    keywords: ["codependency and addiction", "signs of codependency", "family recovery", "enabling", "healthy boundaries"],
+    tags: ["family guide", "codependency", "boundaries", "family recovery"],
+    excerpt: "Recognize the signs that a loved one’s addiction has taken over your life, understand why these patterns develop, and take seven practical steps toward your own recovery.",
+    faqItems: [
+      { question: "What is the difference between codependency and enabling?", answer: "Enabling refers to specific actions that make it easier for someone to keep using, like giving money or covering up problems. Codependency is the broader emotional pattern underneath, where your sense of worth and safety depends on managing another person. Most enabling behaviors grow out of codependency." },
+      { question: "Can you be codependent with an adult child who uses drugs?", answer: "Yes. Parents of adult children are especially prone to codependency because the instinct to protect a child never really turns off. Shifting from protector to supportive adult is hard, but it’s often a key step in helping an adult child take ownership of recovery." },
+      { question: "Is codependency a mental illness?", answer: "No, codependency is not a formal diagnosis in the DSM-5, the manual clinicians use to diagnose mental health conditions. However, it’s widely recognized by therapists and often overlaps with anxiety, depression, and burnout, which are worth addressing with a professional." },
+      { question: "How do I stop being codependent with an alcoholic spouse?", answer: "Start by focusing on what you can control: your own responses, boundaries, and self-care. Stop covering for your spouse, let natural consequences happen, and get support through a group like Al-Anon or a counselor who understands addiction." },
+      { question: "Can codependency be cured?", answer: "Codependency can absolutely improve with awareness, practice, and support. Many people describe recovery from codependency as an ongoing process rather than a one-time fix, much like recovery from addiction itself." },
+    ],
+    content: `If your days revolve around someone else’s drinking or drug use—checking their mood, covering for them, lying awake wondering where they are—you may be experiencing codependency. Codependency and addiction are so closely linked that many family members don’t realize how much of themselves they’ve given away until they feel completely exhausted. The good news is that codependency is learned, which means it can be unlearned.
+
+This isn’t about blame. Codependent habits usually grow out of love and a deep desire to keep the family safe. But over time, they can quietly cost you your health, your peace of mind, and even your ability to help. Here’s how to recognize codependency and start reclaiming your life.
+
+## What Is Codependency in Families Affected by Addiction?
+
+Codependency is a pattern of putting another person’s needs, moods, and problems ahead of your own to the point that your sense of worth depends on managing them. In families affected by addiction, it often shows up as constant caretaking, controlling, or rescuing. It is not a formal medical diagnosis, but therapists widely recognize it as a real and painful relational pattern.
+
+Think of it like this: addiction creates chaos, and codependency is the family’s attempt to control it. You pick up the slack and try to prevent the next crisis. The trouble is that the more you take on, the less room there is for your loved one to feel the weight of their own choices—and the less room there is for you.
+
+## What Are the Signs of Codependency With an Addicted Loved One?
+
+The most common signs of codependency are difficulty saying no, feeling responsible for another person’s behavior, and losing touch with your own needs and interests. Many family members also notice that their mood rises and falls with their loved one’s. If you recognize several of the signs below, you’re not alone—these are some of the most common experiences we hear from families.
+
+- **You feel responsible for their sobriety.** You believe that if you just say the right thing or watch closely enough, you can keep them from using.
+- **You make excuses for them.** You call in sick on their behalf, explain away missed events, or soften the truth for relatives.
+- **Your mood depends on theirs.** A good day for them is a good day for you; a bad day sends you spiraling.
+- **You struggle to say no.** Requests for money, rides, or “one more chance” feel impossible to refuse without crushing guilt.
+- **You’ve let go of your own life.** Hobbies, friendships, exercise, and rest have slipped away because there’s no time or energy left.
+- **You feel resentful but keep giving.** You’re angry and worn down, yet you can’t seem to stop rescuing.
+
+## Why Codependency Develops (It’s Not Your Fault)
+
+Codependency develops because addiction makes home feel unpredictable, and people naturally try to create safety however they can. Caretaking and controlling are survival strategies, not character flaws. Many people also learned these patterns in childhood, especially if they grew up around addiction or emotional instability.
+
+When someone you love has a substance use disorder—the medical term for addiction—their behavior can swing from loving to distant. Your nervous system adapts by staying on high alert. Over time, managing their life can start to feel like the only way to protect yours.
+
+Our culture also praises self-sacrifice, so putting yourself last can feel like simply being a good parent or partner. Understanding where these patterns come from helps replace guilt with self-compassion.
+
+## How Does Codependency Affect Addiction Recovery?
+
+Codependency can unintentionally make addiction harder to overcome by shielding your loved one from the natural consequences of their use. When someone never feels the full impact of their choices, they have less reason to change. Codependency also drains the energy and clarity families need to support recovery in healthy ways.
+
+This is where codependency and enabling overlap. Paying a bill they spent on drugs or hiding problems from others may feel like kindness, but it can keep the cycle going. Learning [how to stop enabling](/blog/how-to-stop-enabling-addiction) is an important part of changing these patterns.
+
+There’s a hopeful side to this, too. Research on family-centered approaches like CRAFT (Community Reinforcement and Family Training) shows that when family members change their own responses, their loved ones are more likely to enter treatment. In other words, your healing isn’t selfish—it’s one of the most powerful things you can do for the whole family.
+
+## How to Overcome Codependency: 7 Practical Steps
+
+Overcoming codependency starts with shifting your focus back to yourself—your feelings, needs, and choices. You can’t control another person’s addiction, but you can control how you respond to it. These steps are a practical place to begin.
+
+### Start With Awareness
+
+1. **Notice your patterns without judgment.** For one week, jot down moments when you rescue, check up on, or cover for your loved one. Awareness comes before change.
+2. **Name your own feelings.** Ask yourself, “What am I feeling right now, and what do I need?” Many family members have spent so long tracking someone else’s emotions that this question feels unfamiliar at first.
+
+### Build New Habits
+
+3. **Practice small, kind no’s.** Start with low-stakes situations. “I love you, and I’m not able to do that” is a complete sentence.
+4. **Let natural consequences happen.** Step back from fixing problems your loved one created. This isn’t punishment—it’s giving them the dignity of responsibility.
+5. **Reclaim one thing that’s yours.** Pick a hobby, friendship, or routine you’ve let go and bring it back, even for 30 minutes a week.
+
+### Get Support for Yourself
+
+6. **Join a support group.** [Al-Anon](https://al-anon.org/), [Nar-Anon](https://www.nar-anon.org/), [Co-Dependents Anonymous (CoDA)](https://coda.org/), and [SMART Recovery Family & Friends](https://smartrecovery.org/family) all offer free meetings, in person and online, with people who truly understand. Explore our guide to [family support groups](/blog/al-anon-family-support-groups-addiction).
+7. **Work with a therapist or family coach.** A professional who understands addiction can help you untangle old patterns, set boundaries, and plan for tough conversations. Our [family coaching](/family-coaching) offers support for this work.
+
+You may feel guilty or anxious as you start doing things differently. That discomfort is normal—it usually means you’re breaking an old pattern.
+
+## You Deserve a Life of Your Own
+
+Loving someone with an addiction is one of the hardest things a person can go through. If you’ve lost yourself along the way, please know that it happened because you cared deeply—and that your story isn’t over. Every small step you take toward your own well-being matters. You can love your family member and still choose peace, rest, and joy for yourself. In fact, a healthier you is often exactly what your family needs most.
+
+## Frequently Asked Questions About Codependency and Addiction
+
+### What is the difference between codependency and enabling?
+
+Enabling refers to specific actions that make it easier for someone to keep using, like giving money or covering up problems. Codependency is the broader emotional pattern underneath, where your sense of worth and safety depends on managing another person. Most enabling behaviors grow out of codependency.
+
+### Can you be codependent with an adult child who uses drugs?
+
+Yes. Parents of adult children are especially prone to codependency because the instinct to protect a child never really turns off. Shifting from protector to supportive adult is hard, but it’s often a key step in helping an adult child take ownership of recovery.
+
+### Is codependency a mental illness?
+
+No, codependency is not a formal diagnosis in the DSM-5, the manual clinicians use to diagnose mental health conditions. However, it’s widely recognized by therapists and often overlaps with anxiety, depression, and burnout, which are worth addressing with a professional.
+
+### How do I stop being codependent with an alcoholic spouse?
+
+Start by focusing on what you can control: your own responses, boundaries, and self-care. Stop covering for your spouse, let natural consequences happen, and get support through a group like [Al-Anon](https://al-anon.org/) or a counselor who understands addiction.
+
+### Can codependency be cured?
+
+Codependency can absolutely improve with awareness, practice, and support. Many people describe recovery from codependency as an ongoing process rather than a one-time fix, much like recovery from addiction itself.
+
+## Get Support for Your Family at SoberHelpline.com
+
+You don’t have to figure this out alone. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and support designed for families navigating addiction. Whether you’re just starting to recognize codependent patterns or you’re ready to build a healthier way forward, we’re here to help you take the next step.
+
+Explore [family coaching](/family-coaching), join our Monday [“The Family Squares” call](/family-support), or find peer support through [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/).`,
+  },
   {
     id: 191,
     slug: "person-first-language-for-addiction",
