@@ -1,1 +1,2 @@
 - Every SendGrid-sending edge function imports `_shared/suppression.ts` first — it filters recipients against `email_suppression_list` and forces SendGrid unsubscribe links, so opt-outs apply everywhere.
+- App owner notifications use a separate disabled, event-receipt-gated endpoint and the shared owner occurrence claim; snapshot synchronization is never treated as a real registration event, preventing historical replay and extra attendee/marketing emails.
