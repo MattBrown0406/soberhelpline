@@ -1,3 +1,4 @@
+import siblingSelfCareImg from "@/assets/blog-coping-with-sibling-addiction.jpg";
 
 import verifyRehabAccreditationImg from "@/assets/blog-verify-rehab-accreditation-licensing.jpg";
 import inNetworkVsOutOfNetworkRehabImg from "@/assets/blog-in-network-vs-out-of-network-rehab.jpg";
@@ -218,6 +219,136 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 193,
+    slug: "coping-with-a-sibling-with-addiction",
+    seoTitle: "Coping With a Sibling With Addiction: Self-Care Guide",
+    metaDescription: "Coping with a sibling with addiction? Learn why brothers and sisters get overlooked, how to protect your well-being, and practical self-care steps that help.",
+    title: "Coping With a Sibling With Addiction: A Self-Care Guide for Brothers and Sisters",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-22",
+    image: siblingSelfCareImg,
+    keywords: ["coping with a sibling with addiction", "sibling self-care", "family recovery", "boundaries", "sibling support"],
+    tags: ["family guide", "siblings", "self-care", "family recovery"],
+    excerpt: "When addiction takes over a family, brothers and sisters can feel invisible. Learn how to protect your well-being, set boundaries, and find support of your own.",
+    faqItems: [{"question": "How do I cope with a sibling who has an addiction?", "answer": "Start by acknowledging your own feelings and getting support for yourself through a family support group, therapy, or coaching. Set clear boundaries around money, time, and secrets, and keep investing in your own life. You can't control your sibling's addiction, but you can protect your well-being."}, {"question": "Is it normal to feel angry at my brother or sister for their addiction?", "answer": "Yes. Anger, resentment, guilt, and grief are all common reactions for siblings. Having these feelings doesn't mean you love your sibling any less. Talking them through with someone you trust can help you process them in a healthy way."}, {"question": "Can siblings go to Al-Anon or Nar-Anon?", "answer": "Yes. Al-Anon and Nar-Anon welcome anyone who has been affected by someone else's drinking or drug use, including brothers and sisters. Alateen offers meetings specifically for younger family members. Many groups also meet online."}, {"question": "Should I tell my parents about my sibling's drug or alcohol use?", "answer": "If your sibling's safety is at risk, it's usually best to share what you know with your parents or another trusted adult. Keeping dangerous secrets can put both you and your sibling in a difficult position. Be honest, stick to the facts, and focus on your concern for your sibling's health."}, {"question": "How can I help my sibling get into treatment?", "answer": "Encourage treatment during calm, sober moments, and share specific options when your sibling seems open. Work with your parents so the family sends a consistent message. A family coach can help you plan the conversation and prepare for next steps."}],
+    content: `When a brother or sister is struggling with drugs or alcohol, most of the attention in a family flows toward two places: the person who is using and the parents who are trying to help. Coping with a sibling with addiction often happens quietly, off to the side, with no one asking how you are doing. You may be worried, angry, embarrassed, and protective all at once, and still feel like your feelings don't count.
+
+They do count. Siblings are some of the most affected and least supported people in a family touched by addiction. This guide explains why that happens, what it can do to you over time, and the practical steps you can take to care for yourself while still loving your brother or sister.
+
+## Why Are Siblings Often Overlooked When Addiction Hits a Family?
+
+Siblings get overlooked because families naturally focus on whoever seems to be in the most danger. Parents pour their time, money, and emotional energy into the child who is using, and the other children are expected to be fine. Over time, that can leave you feeling invisible.
+
+Many brothers and sisters slip into familiar roles without realizing it. Some become the "good kid" who never causes trouble so their parents have one less thing to worry about. Others become the family peacekeeper, the messenger, or the backup parent. Adult siblings may find themselves fielding late-night calls or managing their parents' stress on top of their own lives.
+
+None of these roles are your fault, and many come from love. But when you spend years shrinking your own needs, it takes a toll.
+
+## How Does a Sibling's Addiction Affect You?
+
+A sibling's addiction can affect your mood, your sleep, your relationships, and even your sense of who you are. Because you share so much history, it can feel impossible to step away, even for a day.
+
+Common experiences for siblings include:
+
+- Grief for the relationship you used to have. You may miss the brother or sister you grew up with, even though they are still here.
+
+- Resentment. It is normal to feel angry that your sibling's choices seem to consume the whole family.
+
+- Guilt. Many siblings wonder if they should have noticed sooner, done more, or been closer.
+
+- Worry and fear. Concern for your sibling's safety can sit in the background of everything you do.
+
+These feelings are a normal response to a hard situation, not a sign that something is wrong with you. Naming them is the first step toward taking care of yourself.
+
+## Self-Care Strategies for Coping With a Sibling With Addiction
+
+The most effective self-care for siblings starts with permission: permission to have needs, to set limits, and to get support of your own. You cannot control your sibling's addiction, but you can control how much of your life it takes over.
+
+### Give Yourself Permission to Feel What You Feel
+
+You can love your sibling and be furious with them in the same breath. Mixed emotions are normal. Try writing your feelings down or talking with a trusted friend. Feelings that get acknowledged tend to loosen their grip.
+
+### Set Boundaries That Protect Your Well-Being
+
+[Set boundaries](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) that protect your well-being. A boundary is a limit you set for yourself about what you will and won't do. It isn't a punishment for your sibling. Examples might include:
+
+- "I'm not able to lend money, but I'm happy to take you to a meeting."
+
+- "I won't answer calls after 10 p.m. unless it's an emergency."
+
+- "I'm not going to keep secrets from Mom and Dad about your safety."
+
+Start small and be consistent. Boundaries tend to work best when they are calm, clear, and followed through.
+
+### Step Out of the Middle
+
+Many siblings end up as the go-between for parents and the person who is using. If you are constantly relaying messages, smoothing conflicts, or being asked to "talk some sense" into your sibling, it may be time to step back. You can gently tell your parents, "I love you both, but I can't be the messenger anymore."
+
+### Keep Your Own Life Going
+
+It is easy to put your plans, friendships, and goals on hold while your family is in crisis. Try to protect a few things that are just yours: a regular workout, a hobby, time with friends, or a standing date with your partner. Living your life is not abandoning your sibling.
+
+## Where Can You Find Support When Coping With a Sibling With Addiction?
+
+Siblings can find support through [family support groups](/blog/al-anon-family-support-groups-addiction), individual therapy, and [family coaching](/family-coaching). You do not have to wait for your brother or sister to get help before you get help for yourself.
+
+- [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/). These free peer support groups welcome anyone affected by someone else's drinking or drug use, including brothers and sisters.
+
+- [SMART Recovery Family & Friends](https://smartrecovery.org/family). A science-based option focused on practical tools, including communication strategies drawn from an approach called CRAFT (Community Reinforcement and Family Training).
+
+- Individual therapy. A counselor who understands addiction and family systems can help you sort through grief, guilt, and old family roles.
+
+- Family coaching. A family coach can help you and your parents get on the same page and respond to your sibling in healthier, more consistent ways.
+
+- Teen and young adult groups. Programs like [Alateen](https://al-anon.org/newcomers/teen-corner-alateen/) exist for younger siblings who need a space with peers who understand.
+
+## How Can You Support Your Sibling Without Losing Yourself?
+
+You can support your sibling by staying connected, encouraging treatment, and refusing to enable, all while keeping your own boundaries in place. Support and self-care are not opposites. A calm, healthy sibling can be a powerful positive influence.
+
+1. Spend sober, low-pressure time together when you can, like a walk or a meal.
+
+2. Remind your sibling that you love them and believe they can get better.
+
+3. Share information about treatment options when they seem open to it.
+
+4. Let natural consequences happen instead of rescuing your sibling from them.
+
+If your sibling ever seems to be in immediate danger, such as a possible overdose, call 911 right away. Your safety and theirs always come first.
+
+## You Matter, Too
+
+Coping with a sibling with addiction is one of the most painful and least talked-about experiences in family life. If you have spent years putting your own needs last, today is a good day to make room for them again. You deserve peace, support, and a full life of your own. Recovery is possible for your brother or sister, and healing is possible for you, too.
+
+## Frequently Asked Questions
+
+### How do I cope with a sibling who has an addiction?
+
+Start by acknowledging your own feelings and getting support for yourself through a family support group, therapy, or coaching. Set clear boundaries around money, time, and secrets, and keep investing in your own life. You can't control your sibling's addiction, but you can protect your well-being.
+
+### Is it normal to feel angry at my brother or sister for their addiction?
+
+Yes. Anger, resentment, guilt, and grief are all common reactions for siblings. Having these feelings doesn't mean you love your sibling any less. Talking them through with someone you trust can help you process them in a healthy way.
+
+### Can siblings go to [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/)?
+
+Yes. [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/) welcome anyone who has been affected by someone else's drinking or drug use, including brothers and sisters. [Alateen](https://al-anon.org/newcomers/teen-corner-alateen/) offers meetings specifically for younger family members. Many groups also meet online.
+
+### Should I tell my parents about my sibling's drug or alcohol use?
+
+If your sibling's safety is at risk, it's usually best to share what you know with your parents or another trusted adult. Keeping dangerous secrets can put both you and your sibling in a difficult position. Be honest, stick to the facts, and focus on your concern for your sibling's health.
+
+### How can I help my sibling get into treatment?
+
+Encourage treatment during calm, sober moments, and share specific options when your sibling seems open. Work with your parents so the family sends a consistent message. A family coach can help you plan the conversation and prepare for next steps.
+
+## Get Support for Yourself and Your Family
+
+You don't have to figure this out alone. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and support designed for brothers, sisters, parents, and everyone who loves someone struggling with addiction.
+
+Explore [sibling support](/sibling-support), [one-on-one family coaching](/family-coaching), or the free Monday night [“The Family Squares” support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
+  },
   {
     id: 192,
     slug: "codependency-and-addiction",
