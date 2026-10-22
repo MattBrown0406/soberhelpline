@@ -19,6 +19,11 @@ function harness() {
     auth: { getUser: async () => ({ data: { user: state.authUser }, error: null }) },
     rpc: async (name, args) => {
       if (state.rpcError) return { data: null, error: state.rpcError };
+      if (name === 'monday_notification_status') {
+        if (state.rolloutError) return { data: null, error: { message: 'unavailable' } };
+        return { data: { revision: state.wrongRevision ? 'wrong' : args._revision, enabled: !state.disabled,
+          acknowledgment: args._acknowledge ? 'probe-ack' : null }, error: null };
+      }
       if (name === 'register_monday_manual') {
         if (state.failInsert) return { data: null, error: state.failInsert };
         const p = args._registration;
@@ -378,6 +383,31 @@ await test('kiosk records manual action and new website opt-in is manual, questi
   assert.equal(state.manual.size, before); assert.equal(state.calls.length, 1);
   const missing = await post(handler, { ...payload, meeting_date: '2026-10-19', question_only: true, question: 'question' }, { Authorization: 'Bearer verified' });
   assert.equal(missing.status, 500); assert.equal(state.rows.length, 1); assert.equal(state.manual.size, before);
+});
+await test('disabled sender and authenticated revision probe have zero provider or CRM effects', async () => {
+  const { state, load, post } = harness(); state.disabled = true;
+  state.rows.push({ ...payload, id: 'reg', consent_email_list: true });
+  const { handler } = load('supabase/functions/send-zoom-registration-email/index.ts');
+  const result = await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
+  assert.equal(result.status, 200); assert.equal(result.body.success, false);
+  assert.equal(result.body.notificationDisabled, true);
+  assert.equal(state.calls.length, 0); assert.equal(state.claims.size, 0);
+  const probe = await post(handler, { rollout_probe: true }, { Authorization: 'Bearer test-service' });
+  assert.equal(probe.body.rollout.revision, 'monday-ledger-disabled-v1');
+  assert.equal(probe.body.rollout.acknowledgment, 'probe-ack');
+  state.disabled = false;
+  assert.equal((await post(handler, { rollout_probe: true }, { Authorization: 'Bearer test-service' })).status, 200);
+  assert.equal(state.calls.length, 0); assert.equal(state.claims.size, 0);
+  assert.equal((await post(handler, { rollout_probe: true }, { Authorization: 'Bearer public' })).status, 401);
+});
+await test('rollout state errors and wrong revision fail closed before any effect', async () => {
+  for (const flag of ['rolloutError', 'wrongRevision']) {
+    const { state, load, post } = harness(); state[flag] = true;
+    state.rows.push({ ...payload, id: 'reg', consent_email_list: true });
+    const { handler } = load('supabase/functions/send-zoom-registration-email/index.ts');
+    assert.equal((await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' })).status, 500);
+    assert.equal(state.calls.length, 0); assert.equal(state.claims.size, 0);
+  }
 });
 await test('duplicate-bearing sender claims occurrence not row, preserves conflicting fields and all current comments', async () => {
   const { state, load, post } = harness();

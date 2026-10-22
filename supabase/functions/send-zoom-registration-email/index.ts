@@ -113,7 +113,26 @@ serve(async (req: Request) => {
       });
     }
 
-    const { registration_id } = await req.json();
+    const { registration_id, rollout_probe } = await req.json();
+    const revision = "monday-ledger-disabled-v1";
+    const adminSupabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      serviceRoleKey,
+    );
+    // Authenticated probe has no registration/provider/CRM effects. An ACK proves
+    // this worker's revision, not that old workers can no longer receive traffic.
+    const { data: rollout, error: rolloutError } = await adminSupabase.rpc("monday_notification_status", {
+      _revision: revision, _acknowledge: rollout_probe === true,
+    });
+    if (rolloutError || !rollout || rollout.revision !== revision || typeof rollout.enabled !== "boolean") {
+      throw new Error("Notification rollout state unavailable");
+    }
+    if (rollout_probe === true || !rollout.enabled) {
+      return new Response(JSON.stringify({ success: false, rollout, notificationDisabled: !rollout.enabled }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     if (typeof registration_id !== "string" || !registration_id) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -121,11 +140,6 @@ serve(async (req: Request) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-
-    const adminSupabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      serviceRoleKey,
-    );
 
     // Persisted details are authoritative; caller fields cannot replace private notes/identity.
     const { data: followUp, error: registrationError } = await adminSupabase

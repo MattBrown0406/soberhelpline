@@ -1,5 +1,7 @@
 # Duplicate-compatible registration notification repair
 
+> This is the earlier source rollout record. On branch `fix/monday-disabled-activation`, use `docs/monday-disabled-activation-rollout.md` instead: its standalone disabled installer **supersedes**, and must not follow, the original ledger installer below. The new document includes tested routing limitations and a bounded pilot; neither source sync nor a revision probe proves all old workers have disappeared.
+
 ## Deliverable and exact boundary
 
 Branch `fix/monday-owner-compatible`, isolated worktree `/root/repos/soberhelpline-owner-compatible`, based on `origin/main` `ec0f49f246ebdff9a65895f0b6cde02705d220f6` (local `main` is older). Earlier owner/prerequisite worktrees are untouched. **No live queries, sends, migrations, deploys, pushes or cron changes were performed.**
