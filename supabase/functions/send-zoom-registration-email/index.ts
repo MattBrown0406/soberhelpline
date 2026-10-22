@@ -1,4 +1,5 @@
-import "../_shared/suppression.ts";
+import { getSuppressedRecipients } from "../_shared/suppression.ts";
+import { manualHistoryText, type ManualHistory } from "../_shared/mondayRegistrationHistory.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -83,9 +84,15 @@ async function sendEmail(
     }),
   });
 
+  if (response.headers.get("x-email-suppressed") === "true") {
+    console.warn("Monday email suppressed before provider", { recipient_kind: to[0] === "matt@soberhelpline.com" ? "owner" : "attendee" });
+    throw new Error("Recipient suppressed");
+  }
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`SendGrid API error [${response.status}]: ${errorText}`);
+    console.error("Monday email provider rejected request", {
+      recipient_kind: to[0] === "matt@soberhelpline.com" ? "owner" : "attendee", http_status: response.status,
+    });
+    throw new Error(`SendGrid rejected request (HTTP ${response.status})`);
   }
 
   return { success: true };
@@ -106,80 +113,68 @@ serve(async (req: Request) => {
       });
     }
 
-    const { name, email, registration_id, consentEmailList = false, language = "en" } = await req.json();
+    const { registration_id } = await req.json();
 
-    if (!name || !email || !registration_id) {
+    if (typeof registration_id !== "string" || !registration_id) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-
     const adminSupabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       serviceRoleKey,
     );
 
-    // Atomic at-most-once claim. Never clear automatically after a timeout: the
-    // provider may have accepted the send. Operators reconcile ambiguous failures.
-    const { data: claimed, error: claimError } = await adminSupabase
+    // Persisted details are authoritative; caller fields cannot replace private notes/identity.
+    const { data: followUp, error: registrationError } = await adminSupabase
       .from("zoom_meeting_registrations")
-      .update({ confirmation_claimed_at: new Date().toISOString() })
-      .eq("id", registration_id)
-      .is("confirmation_claimed_at", null)
-      .select("id")
-      .maybeSingle();
-    if (claimError) throw claimError;
-    if (!claimed) return new Response(JSON.stringify({ success: true, suppressed: true }), {
-      status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+      .select("id, name, email, language, consent_email_list, request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question, meeting_date, registration_source")
+      .eq("id", registration_id).maybeSingle();
+    if (registrationError || !followUp) throw new Error("Registration details unavailable");
+    const { name, email, language = "en" } = followUp;
+    const consentEmailList = followUp.consent_email_list === true;
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
 
     // Blocklist check — do not email blocked addresses
-    const { data: blocked } = await adminSupabase
+    const { data: blocked, error: blockedError } = await adminSupabase
       .from("meeting_blocklist")
       .select("id")
       .ilike("email", email)
       .maybeSingle();
 
+    if (blockedError) throw new Error("Blocklist lookup failed");
     if (blocked) {
-      console.warn(`Suppressed zoom registration email to blocked address: ${email}`);
+      console.warn("Blocked registration notification suppressed", { registration_id });
       return new Response(JSON.stringify({ success: true, suppressed: true }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const { data: settings } = await adminSupabase
+    const { data: settings, error: settingsError } = await adminSupabase
       .from("site_settings")
       .select("key, value")
       .in("key", ["monday_zoom_meeting_id", "monday_zoom_passcode", "monday_zoom_link"]);
 
+    if (settingsError) throw new Error("Meeting settings unavailable");
     const typedSettings = (settings ?? []) as SiteSetting[];
     const meetingId = typedSettings.find((s) => s.key === "monday_zoom_meeting_id")?.value || "";
     const passcode = typedSettings.find((s) => s.key === "monday_zoom_passcode")?.value || "";
     const externalZoomLink = typedSettings.find((s) => s.key === "monday_zoom_link")?.value || "";
 
-    // Pull follow-up request details so the admin notification can include them
-    let followUp: {
-      request_follow_up: boolean | null;
-      preferred_contact_date: string | null;
-      preferred_contact_time: string | null;
-      preferred_timezone: string | null;
-      phone: string | null;
-      question: string | null;
-      meeting_date: string | null;
-    } | null = null;
-
-    if (registration_id) {
-      const { data: regRow } = await adminSupabase
-        .from("zoom_meeting_registrations")
-        .select("request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question, meeting_date")
-        .eq("id", registration_id)
-        .maybeSingle();
-      followUp = regRow ?? null;
+    let history: ManualHistory | null = null;
+    try {
+      const { data, error } = await adminSupabase.rpc("monday_manual_history", {
+        _email: email, _meeting_date: followUp.meeting_date,
+      });
+      if (error || !data || !Number.isSafeInteger(data.verifiedManual) || data.verifiedManual < 0 ||
+        !Number.isSafeInteger(data.unclassified) || data.unclassified < 0) throw new Error("History query failed");
+      history = data;
+    } catch {
+      console.error("Monday registration history unavailable", { registration_id });
     }
 
     const siteUrl = "https://soberhelpline.com";
@@ -410,7 +405,7 @@ serve(async (req: Request) => {
         </div>
       `;
 
-    const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml, calendarAttachments);
+    // Render both messages before starting external sends.
 
     const wantsFollowUp = followUp?.request_follow_up === true;
 
@@ -459,28 +454,45 @@ serve(async (req: Request) => {
             )}</li>
             <li><strong>Phone:</strong> ${escapeHtml(followUp?.phone || "Not provided")}</li>
           </ul>
-          ${
-            followUp?.question
-              ? `<p style="margin:12px 0 0 0;"><strong>Their situation:</strong><br/>${escapeHtml(followUp.question)}</p>`
-              : ""
-          }
         </div>
       `
       : "";
 
-    const adminEmailPromise = sendEmail(
-      ["matt@soberhelpline.com"],
-      `${wantsFollowUp ? "📞 FOLLOW-UP REQUEST — " : ""}New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`,
-      `
+    const adminSubject = `${wantsFollowUp ? "📞 FOLLOW-UP REQUEST — " : ""}New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`;
+    const adminHtml = `
         <h2>New “The Family Squares” Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>
           <li><strong>Language:</strong> ${language === "es" ? "Spanish" : "English"}</li>
+          <li><strong>Meeting date:</strong> ${escapeHtml(followUp.meeting_date)}</li>
+          <li><strong>Prior manual registrations:</strong> ${escapeHtml(manualHistoryText(history))}</li>
         </ul>
+        <h3>Submitted question / comment</h3>
+        <div style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(followUp.question || "No question or comment submitted.")}</div>
         ${followUpHtml}
-      `,
-    );
+      `;
+    if (!Deno.env.get("SENDGRID_API_KEY")) throw new Error("Email configuration unavailable");
+
+    // Preflight before claiming; the shared wrapper rechecks at dispatch time.
+    await getSuppressedRecipients([email, "matt@soberhelpline.com"]);
+
+    // Atomic at-most-once claim. Never clear automatically after a timeout: the
+    // provider may have accepted the send. Operators reconcile ambiguous failures.
+    const { data: claimed, error: claimError } = await adminSupabase
+      .from("zoom_meeting_registrations")
+      .update({ confirmation_claimed_at: new Date().toISOString() })
+      .eq("id", registration_id)
+      .is("confirmation_claimed_at", null)
+      .select("id")
+      .maybeSingle();
+    if (claimError) throw claimError;
+    if (!claimed) return new Response(JSON.stringify({ success: true, suppressed: true }), {
+      status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+    const attendeeEmailPromise = sendEmail([email], attendeeSubject, attendeeHtml, calendarAttachments);
+    const adminEmailPromise = sendEmail(["matt@soberhelpline.com"], adminSubject, adminHtml);
 
     const mailchimpPromise = consentEmailList
       ? fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/add-to-mailchimp`, {
@@ -497,32 +509,37 @@ serve(async (req: Request) => {
           }),
         })
           .then(async (mailchimpRes) => {
-            const mailchimpData = await mailchimpRes.json();
-            console.log("Mailchimp sync result:", mailchimpData);
+            if (!mailchimpRes.ok) console.error("Mailchimp sync failed", { registration_id, http_status: mailchimpRes.status });
           })
           .catch((mcError) => {
-            console.error("Mailchimp sync failed (non-blocking):", mcError);
+            console.error("Mailchimp sync transport failed", { registration_id });
           })
       : Promise.resolve();
 
-    const [emailResult] = await Promise.all([
-      attendeeEmailPromise,
-      adminEmailPromise,
-      mailchimpPromise,
-    ]);
+    const results = await Promise.allSettled([attendeeEmailPromise, adminEmailPromise, mailchimpPromise]);
+    const delivery = {
+      attendee: results[0].status === "fulfilled" ? "accepted" : "failed_or_suppressed",
+      owner: results[1].status === "fulfilled" ? "accepted" : "failed_or_suppressed",
+    };
+    console.log("Monday registration notification outcome", { registration_id, ...delivery });
+    if (results[0].status === "rejected" || results[1].status === "rejected") {
+      return new Response(JSON.stringify({ success: false, delivery, reconciliationRequired: true }), {
+        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const { error: completedError } = await adminSupabase.from("zoom_meeting_registrations")
       .update({ confirmation_completed_at: new Date().toISOString() }).eq("id", registration_id);
     if (completedError) throw completedError;
-    console.log("Zoom registration email sent:", emailResult);
+    // Provider acceptance is not proof of inbox delivery.
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, delivery }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error: unknown) {
-    console.error("Error sending zoom registration email:", error);
-    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("Zoom registration notification failed; operator reconciliation required");
+    const message = "Notification could not be completed; operator reconciliation required.";
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

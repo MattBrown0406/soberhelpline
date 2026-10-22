@@ -14,11 +14,29 @@ const today = '2026-10-12';
 class Clock extends Date { constructor(...args) { super(...(args.length ? args : ['2026-10-12T12:00:00Z'])); } }
 
 function harness() {
-  const state = { rows: [], calls: [], cancelled: false, blocked: false, failInsert: null, authUser: null, rpcError: null, claims: new Set() };
+  const state = { manual: new Map(), settingsError: false, blocklistError: false, suppressionError: false, rows: [], calls: [], cancelled: false, blocked: false, failInsert: null, authUser: null, rpcError: null, claims: new Set(), fetchImpl: null, historyError: false, detailsError: false, logs: [], pageCap: 500 };
   const client = {
     auth: { getUser: async () => ({ data: { user: state.authUser }, error: null }) },
     rpc: async (name, args) => {
       if (state.rpcError) return { data: null, error: state.rpcError };
+      if (name === 'register_monday_manual') {
+        if (state.failInsert) return { data: null, error: state.failInsert };
+        const p = args._registration;
+        let row = state.rows.find(r => r.email.trim().toLowerCase() === p.email && r.meeting_date === p.meeting_date);
+        const existing = Boolean(row);
+        if (!row) { row = { ...p, id: String(state.rows.length + 1) }; state.rows.push(row); }
+        else if (row.registration_source === 'app') row.registration_source = 'website';
+        const key = `${p.email}|${p.meeting_date}`;
+        if (!state.manual.has(key)) state.manual.set(key, { email: p.email, meeting_date: p.meeting_date, channel: args._channel });
+        return { data: { already_registered: existing, registration: { id: row.id, name: row.name, email: row.email } }, error: null };
+      }
+      if (name === 'monday_manual_history') {
+        if (state.historyError) return { data: null, error: { message: 'unavailable' } };
+        const prior = r => r.email.trim().toLowerCase() === args._email.trim().toLowerCase() && r.meeting_date < args._meeting_date && r.meeting_date < today;
+        const manual = new Set([...state.manual.values()].filter(prior).map(r => r.meeting_date));
+        const unknown = new Set(state.rows.filter(prior).map(r => r.meeting_date).filter(d => !manual.has(d)));
+        return { data: { verifiedManual: manual.size, unclassified: unknown.size, completeSince: null }, error: null };
+      }
       if (name === 'is_meeting_blocked') return { data: state.blocked, error: null };
       if (name === 'append_monday_registration_question') {
         const row = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
@@ -42,7 +60,7 @@ function harness() {
       return { data: null, error: null };
     },
     from: (table) => {
-      let op = 'select', payload, single = false;
+      let op = 'select', payload, single = false, history = false, offset = 0, end = Infinity;
       const filters = [];
       const q = {
         select() { return q; }, insert(value) { op = 'insert'; payload = value; return q; },
@@ -50,14 +68,22 @@ function harness() {
         eq(k, v) { filters.push(r => r[k] === v); return q; },
         neq(k, v) { filters.push(r => r[k] !== v); return q; },
         is(k, v) { filters.push(r => (r[k] ?? null) === v); return q; },
-        ilike(k, v) { filters.push(r => r[k]?.toLowerCase() === v.toLowerCase()); return q; },
+        ilike(k, v) { filters.push(r => {
+          const value = v.replace(/^%|%$/g, '').replace(/\\([\\%_])/g, '$1').toLowerCase();
+          return v.startsWith('%') ? r[k]?.toLowerCase().includes(value) : r[k]?.toLowerCase() === value;
+        }); return q; },
+        lt(k, v) { history = true; filters.push(r => r[k] < v); return q; },
         in(k, v) { filters.push(r => v.includes(r[k])); return q; },
-        order() { return q; }, limit() { return q; }, range() { return q; },
+        order() { return q; }, limit() { return q; }, range(a, b) { offset = a; end = b; return q; },
         single() { single = true; return q; }, maybeSingle() { single = true; return q; },
         then(resolve, reject) {
           return Promise.resolve().then(() => {
             if (table === 'cancelled_meeting_dates') return { data: state.cancelled ? { meeting_date: today, reason: 'Cancelled' } : null, error: null };
-            if (table === 'meeting_blocklist' || table === 'site_settings') return { data: single ? null : [], error: null };
+            if (table === 'meeting_blocklist' || table === 'site_settings') {
+              const fail = table === 'site_settings' ? state.settingsError : state.blocklistError;
+              if (fail === 'throw') throw new Error('lookup failed');
+              return { data: single ? null : [], error: fail ? { message: 'lookup failed' } : null };
+            }
             assert.equal(table, 'zoom_meeting_registrations');
             if (op === 'insert') {
               if (state.failInsert) return { data: null, error: state.failInsert };
@@ -65,7 +91,8 @@ function harness() {
               const row = { ...payload, id: String(state.rows.length + 1) }; state.rows.push(row);
               return { data: single ? row : [row], error: null };
             }
-            const rows = state.rows.filter(r => filters.every(f => f(r)));
+            if ((history && state.historyError) || (!history && op === 'select' && state.detailsError)) return { data: null, error: { message: 'lookup failed' } };
+            const rows = state.rows.filter(r => filters.every(f => f(r))).slice(offset, Math.min(end + 1, offset + state.pageCap));
             if (op === 'update') rows.forEach(r => Object.assign(r, payload));
             return { data: single ? rows[0] ?? null : rows, error: null };
           }).then(resolve, reject);
@@ -84,16 +111,18 @@ function harness() {
     const env = { SUPABASE_URL: 'https://test.invalid', SUPABASE_SERVICE_ROLE_KEY: 'test-service', MEMBERSHIP_SYNC_SECRET: 'test-sync', SENDGRID_API_KEY: 'test-sendgrid' };
     vm.runInNewContext(code, {
       exports, Request, Response, URL, URLSearchParams, TextEncoder, Uint8Array, Date: Clock, btoa, crypto: webcrypto,
-      console: { log() {}, warn() {}, error() {} },
+      console: Object.fromEntries(["log", "warn", "error"].map(level => [level, (...args) => state.logs.push(args)])),
       Deno: { env: { get: key => env[key] }, serve: h => { handler = h; } },
-      fetch: async (url, options) => { state.calls.push({ url, body: JSON.parse(options.body) }); return new Response('{}', { status: 200 }); },
+      fetch: async (url, options) => { const call = { url, body: JSON.parse(options.body) }; state.calls.push(call); return state.fetchImpl ? state.fetchImpl(call) : new Response('{"success":true}', { status: 200 }); },
       require: id => {
         if (id.includes('/http/server.ts')) return { serve: h => { handler = h; } };
         if (id.includes('@supabase/supabase-js')) return { createClient: () => client };
         if (id.includes('/zod@')) return require('zod');
         if (id.endsWith('/spine.ts')) return { enqueueSpineEvent: async () => {}, extractUtm: () => ({}) };
         if (id.endsWith('/automationAuth.ts')) return { requireAutomationAuth: async () => null };
-        if (id.endsWith('/suppression.ts')) return {};
+        if (id.endsWith('/suppression.ts')) return { getSuppressedRecipients: async () => { if (state.suppressionError) throw new Error('lookup failed'); return new Set(); } };
+        if (id.endsWith('/mondayNotification.ts')) return load('supabase/functions/_shared/mondayNotification.ts').exports;
+        if (id.endsWith('/mondayRegistrationHistory.ts')) return load('supabase/functions/_shared/mondayRegistrationHistory.ts').exports;
         if (id.endsWith('/mondayRegistration.ts')) return load('supabase/functions/_shared/mondayRegistration.ts').exports;
         throw new Error(`Unexpected import ${id}`);
       },
@@ -124,6 +153,7 @@ await test('public concurrent submits, retry, auto-registration replay and next 
 await test('public invalid/cancelled/DB failure fail closed and do not send', async () => {
   const { state, load, post } = harness(); const { handler } = load('supabase/functions/public-register-monday-zoom/index.ts');
   assert.equal((await post(handler, { ...payload, meeting_date: '2026-02-30' })).status, 400);
+  assert.equal((await post(handler, { ...payload, meeting_date: '2026-10-05' })).status, 400);
   state.cancelled = true; assert.equal((await post(handler, payload)).status, 409); state.cancelled = false;
   state.failInsert = { code: '23505', message: 'unrelated constraint' }; assert.equal((await post(handler, payload)).status, 500);
   state.failInsert = null; state.rpcError = { message: 'private DB failure' }; assert.equal((await post(handler, payload)).status, 500);
@@ -160,7 +190,7 @@ await test('overlapping auto-registration jobs and manual retry send once', asyn
   assert.equal((await post(manual, payload)).body.alreadyRegistered, true); assert.equal(state.calls.length, 1);
 });
 await test('email sender service authorization plus atomic claim blocks all duplicate effects', async () => {
-  const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg' });
+  const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg', consent_email_list: true });
   const { handler } = load('supabase/functions/send-zoom-registration-email/index.ts');
   const body = { name: payload.name, email: payload.email, registration_id: 'reg', consentEmailList: true };
   assert.equal((await post(handler, body)).status, 401);
@@ -207,4 +237,124 @@ await test('batch app/website questions use atomic merge and preserve member tex
     assert.equal(state.calls.length, 0);
   }
 });
-console.log(`PASS: ${tests} actual-handler tests (synthetic database/provider IO; SQL concurrency tested separately).`);
+await test('owner receives escaped multiline comment without follow-up, persisted identity only', async () => {
+  const { state, load, post } = harness();
+  state.rows.push({ ...payload, id: 'reg', question: '<script>private & "quoted"</script>\nSecond line', request_follow_up: false });
+  const result = await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler,
+    { registration_id: 'reg', email: 'attacker@example.test', name: 'Spoofed', consentEmailList: true }, { Authorization: 'Bearer test-service' });
+  assert.equal(result.status, 200);
+  const owner = state.calls.find(c => c.body.personalizations?.[0].to[0].email === 'matt@soberhelpline.com');
+  const html = owner.body.content[0].value;
+  assert.ok(html.includes('&lt;script&gt;private &amp; &quot;quoted&quot;&lt;/script&gt;\nSecond line'));
+  assert.ok(html.includes('white-space:pre-wrap'));
+  assert.ok(html.includes('Prior manual registrations'));
+  assert.ok(!html.includes('Spoofed')); assert.ok(!html.includes('attacker@example.test'));
+  assert.equal(state.calls.length, 2); // persisted opt-in is false, not caller's true
+  assert.ok(!JSON.stringify(state.calls[0]).includes('Second line')); // attendee never gets private note
+  assert.ok(!JSON.stringify(state.logs).includes('Second line'));
+});
+await test('history uses service ledger only, normalized identity and distinct prior occurrences', async () => {
+  const { state, load, post } = harness(); state.pageCap = 2;
+  state.rows.push({ ...payload, id: 'reg', meeting_date: today });
+  const row = (id, meeting_date, registration_source, email = ' PERSON@example.test ') => ({ id, meeting_date, registration_source, email });
+  state.rows.push(row('1', '2026-09-07', 'kiosk'), row('2', '2026-09-07', 'kiosk'),
+    row('3', '2026-09-14', 'automatic'), row('4', '2026-09-21', 'app'),
+    row('5', '2026-09-28', 'website'), row('6', '2026-10-05', 'kiosk'),
+    row('7', today, 'kiosk'), row('8', '2026-10-19', 'kiosk'), row('9', '2026-08-31', 'kiosk', 'xperson@example.test'));
+  state.manual.set('first', { email: 'person@example.test', meeting_date: '2026-09-07', channel: 'public' });
+  state.manual.set('second', { email: 'person@example.test', meeting_date: '2026-10-05', channel: 'kiosk' });
+  state.rows[1].auto_register = true; // manual opt-in is NOT automatically generated
+  const result = await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
+  assert.equal(result.status, 200);
+  const html = state.calls[1].body.content[0].value;
+  assert.ok(html.includes('2 verified prior manual registration occurrence(s)'));
+  assert.ok(html.includes('3 prior occurrence(s) have unknown'));
+  assert.ok(html.includes('lower bound, not a lifetime total or attendance count'));
+});
+await test('history failure is unavailable not zero and does not lose owner notification', async () => {
+  const { state, load, post } = harness(); state.historyError = true;
+  state.rows.push({ ...payload, id: 'reg', question: 'A private note' });
+  assert.equal((await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' })).status, 200);
+  assert.ok(state.calls[1].body.content[0].value.includes('not a zero count'));
+  assert.ok(state.calls[1].body.content[0].value.includes('A private note'));
+});
+await test('details read failure does not consume claim or send partial owner context', async () => {
+  const { state, load, post } = harness(); state.detailsError = true; state.rows.push({ ...payload, id: 'reg' });
+  const result = await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
+  assert.equal(result.status, 500); assert.equal(state.calls.length, 0); assert.equal(state.rows[0].confirmation_claimed_at, undefined);
+});
+for (const failure of ['owner-http', 'attendee-http', 'owner-network', 'owner-suppressed']) {
+  await test(`notification ${failure} retains claim, waits for both, no replay or false completion`, async () => {
+    const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg' });
+    state.fetchImpl = async call => {
+      const owner = call.body.personalizations?.[0].to[0].email === 'matt@soberhelpline.com';
+      const fail = failure.startsWith('owner') ? owner : !owner;
+      if (fail && failure.endsWith('network')) throw new Error('private provider failure');
+      if (fail && failure.endsWith('suppressed')) return new Response(null, { status: 202, headers: { 'x-email-suppressed': 'true' } });
+      return new Response('{}', { status: fail ? 403 : 202 });
+    };
+    const handler = load('supabase/functions/send-zoom-registration-email/index.ts').handler;
+    const result = await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
+    assert.equal(result.status, 502); assert.equal(result.body.reconciliationRequired, true);
+    assert.equal(result.body.delivery[failure.startsWith('owner') ? 'owner' : 'attendee'], 'failed_or_suppressed');
+    assert.equal(state.calls.length, 2); assert.ok(state.rows[0].confirmation_claimed_at); assert.equal(state.rows[0].confirmation_completed_at, undefined);
+    assert.equal((await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' })).body.suppressed, true);
+    assert.equal(state.calls.length, 2);
+  });
+}
+for (const endpoint of ['public-register-monday-zoom', 'register-zoom-meeting']) {
+  await test(`${endpoint} detects HTTP email errors without losing seat or replaying effects`, async () => {
+    const { state, load, post } = harness();
+    state.fetchImpl = async () => new Response('{"error":"private provider body"}', { status: 500 });
+    const handler = load(`supabase/functions/${endpoint}/index.ts`).handler;
+    const result = await post(handler, { ...payload, question: 'Preserve my question' });
+    assert.equal(result.status, 200); assert.equal(result.body.success, true); assert.equal(result.body.emailSent, false);
+    assert.equal(state.rows[0].question, 'Preserve my question');
+    assert.equal((await post(handler, payload)).body.alreadyRegistered, true); assert.equal(state.calls.length, 1);
+    assert.ok(!JSON.stringify(state.logs).includes('private provider body'));
+  });
+}
+await test('automatic writer records automatic provenance and notification failure count', async () => {
+  const { state, load, post } = harness();
+  state.rows.push({ ...payload, id: 'old', meeting_date: '2026-10-05', auto_register: true });
+  state.fetchImpl = async () => new Response('{}', { status: 503 });
+  const result = await post(load('supabase/functions/auto-register-zoom/index.ts').handler, {});
+  assert.equal(result.body.notificationFailures, 1); assert.equal(state.rows[1].registration_source, 'automatic');
+});
+for (const failure of ['settingsError', 'blocklistError', 'suppressionError']) {
+  for (const mode of [true, 'throw']) await test(`${failure} ${mode} fails before claim and recovers once`, async () => {
+    const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg' });
+    state[failure] = mode;
+    const handler = load('supabase/functions/send-zoom-registration-email/index.ts').handler;
+    const send = () => post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
+    assert.equal((await send()).status, 500); assert.equal(state.calls.length, 0);
+    assert.equal(state.rows[0].confirmation_claimed_at, undefined);
+    state[failure] = false;
+    assert.equal((await send()).status, 200); assert.equal(state.calls.length, 2);
+    await send(); assert.equal(state.calls.length, 2);
+  });
+}
+for (const endpoint of ['public-register-monday-zoom', 'register-zoom-meeting']) {
+  await test(`${endpoint} records existing auto manual action once, never infers consent or resends`, async () => {
+    const { state, load, post } = harness();
+    state.rows.push({ ...payload, email: 'person@example.test', id: 'auto', registration_source: 'automatic', auto_register: true, question: 'original' });
+    const handler = load(`supabase/functions/${endpoint}/index.ts`).handler;
+    await Promise.all([post(handler, payload), post(handler, payload)]);
+    assert.equal(state.manual.size, 1); assert.equal(state.rows.length, 1); assert.equal(state.calls.length, 0);
+    assert.equal(state.rows[0].registration_source, 'automatic'); assert.equal(state.rows[0].question, 'original');
+    assert.equal([...state.manual.values()][0].channel, endpoint.startsWith('public') ? 'public' : 'legacy');
+  });
+}
+await test('kiosk records manual action and new website opt-in is manual, question-only is not', async () => {
+  const { state, load, post } = harness();
+  const handler = load('supabase/functions/public-register-monday-zoom/index.ts').handler;
+  await post(handler, { ...payload, auto_register: true, attribution: { pagePath: '/family-squares-kiosk' } });
+  assert.equal([...state.manual.values()][0].channel, 'kiosk'); assert.equal(state.rows[0].auto_register, true);
+  state.authUser = { id: 'verified', email: 'person@example.test' };
+  const before = state.manual.size;
+  await post(handler, { ...payload, question_only: true, question: 'question' }, { Authorization: 'Bearer verified' });
+  assert.equal(state.manual.size, before); assert.equal(state.calls.length, 1);
+  const missing = await post(handler, { ...payload, meeting_date: '2026-10-19', question_only: true, question: 'question' }, { Authorization: 'Bearer verified' });
+  assert.equal(missing.status, 500); assert.equal(state.rows.length, 1); assert.equal(state.manual.size, before);
+});
+console.log(`PASS: ${tests} actual-handler tests (synthetic database/provider IO; no live sends or database writes).`);

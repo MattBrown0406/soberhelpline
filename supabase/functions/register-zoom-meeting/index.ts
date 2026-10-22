@@ -1,7 +1,8 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
-import { ensureDurableRegistration, duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId } from "../_shared/mondayRegistration.ts";
+import { duplicateRegistrationResponse, registrationUserId } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -117,50 +118,24 @@ serve(async (req: Request) => {
       preferred_contact_time: registration.requestFollowUp ? registration.preferredContactTime || null : null,
       preferred_timezone: registration.requestFollowUp ? registration.preferredTimezone || null : null,
       language: registration.language,
+      registration_source: "website",
     };
 
-    const { data: savedRow, error: saveError } = await adminSupabase
-      .from("zoom_meeting_registrations").insert(payload).select("id").single();
-    if (isRegistrationDuplicate(saveError)) {
-      await ensureDurableRegistration(adminSupabase, email, name, meetingDate);
+    const { data: result, error: saveError } = await adminSupabase.rpc("register_monday_manual", {
+      _registration: payload, _channel: "legacy",
+    });
+    if (saveError || !result || typeof result.already_registered !== "boolean") {
+      throw new Error("Registration not secured");
+    }
+    if (result.already_registered) {
       return new Response(JSON.stringify(duplicateRegistrationResponse()), {
         status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    if (saveError) {
-      throw new Error(`Unable to save registration: ${saveError.message}`);
-    }
-
-    let emailSent = true;
-    let emailError: string | null = null;
-
-    try {
-      const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-zoom-registration-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${serviceRoleKey}`,
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          registration_id: savedRow?.id ?? null,
-          consentEmailList: registration.consentEmailList,
-          language: registration.language,
-        }),
-      });
-
-      if (!emailResponse.ok) {
-        emailSent = false;
-        emailError = await emailResponse.text();
-        console.error("Zoom registration email failed", emailError);
-      }
-    } catch (error) {
-      emailSent = false;
-      emailError = error instanceof Error ? error.message : "Unknown email error";
-      console.error("Zoom registration email request failed", emailError);
-    }
+    const savedRow = result.registration;
+    const emailSent = await notifyMondayRegistration(savedRow.id);
+    const emailError = emailSent ? null : "Registration saved; notification requires operator reconciliation.";
 
     return new Response(JSON.stringify({
       success: true,

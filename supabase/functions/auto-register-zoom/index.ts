@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { ensureDurableRegistration, isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
@@ -74,6 +75,7 @@ serve(async (req) => {
 
     // Insert new registrations and send emails
     let registered = 0;
+    let notificationFailures = 0;
 
     for (const registrant of uniqueRegistrants) {
       const email = registrant.email.toLowerCase().trim();
@@ -90,6 +92,7 @@ serve(async (req) => {
           consent_email_list: false,
           meeting_date: meetingDate,
           auto_register: true,
+          registration_source: 'automatic',
           language: registrant.language || 'en',
         })
         .select('id')
@@ -107,27 +110,7 @@ serve(async (req) => {
       registered++;
       console.log(`Auto-registered ${email} for ${meetingDate}`);
 
-      // Send confirmation email via the existing edge function
-      try {
-        await fetch(
-          `${Deno.env.get('SUPABASE_URL')}/functions/v1/send-zoom-registration-email`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`,
-            },
-            body: JSON.stringify({
-              name: registrant.name,
-              email: email,
-              registration_id: inserted?.id || null,
-              language: registrant.language || "en",
-            }),
-          }
-        );
-      } catch (emailErr) {
-        console.error(`Email failed for ${email} (registration still saved):`, emailErr);
-      }
+      if (!await notifyMondayRegistration(inserted.id)) notificationFailures++;
     }
 
     console.log(`Auto-registration complete. Registered ${registered} new entries.`);
@@ -136,6 +119,7 @@ serve(async (req) => {
       JSON.stringify({
         success: true,
         registered,
+        notificationFailures,
         meetingDate,
         totalSubscribers: uniqueRegistrants.length,
         skipped: uniqueRegistrants.length - registered,

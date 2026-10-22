@@ -1,7 +1,8 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 import { enqueueSpineEvent, extractUtm } from "../_shared/spine.ts";
-import { ensureDurableRegistration, duplicateRegistrationResponse, isRegistrationDuplicate, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
+import { duplicateRegistrationResponse, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -33,8 +34,12 @@ serve(async (req: Request) => {
     } = payload ?? {};
 
     const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : "";
+    const pacificToday = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit",
+    }).format(new Date());
     if (typeof name !== "string" || !name.trim() || name.length > 120 ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || !validMeetingDate(meeting_date)) {
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || !validMeetingDate(meeting_date) || meeting_date < pacificToday ||
+      typeof question !== "string" || question.length > 1000) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -94,9 +99,19 @@ serve(async (req: Request) => {
       });
     }
 
-    const { data: registration, error: insertError } = await adminSupabase
-      .from("zoom_meeting_registrations")
-      .insert({
+    // Question-only submissions are not manual registrations or new seats.
+    if (question_only) {
+      const { data: saved, error } = await adminSupabase.rpc("append_monday_registration_question", {
+        _email: email, _meeting_date: meeting_date, _question: question.trim(),
+      });
+      if (error || saved !== true) throw error ?? new Error("Question not saved");
+      return new Response(JSON.stringify({ ...duplicateRegistrationResponse(), status: "question_submitted", questionSubmitted: true }), {
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: result, error: insertError } = await adminSupabase.rpc("register_monday_manual", {
+      _channel: registrationSource === "kiosk" ? "kiosk" : "public",
+      _registration: {
         user_id,
         name,
         email,
@@ -111,29 +126,17 @@ serve(async (req: Request) => {
         preferred_timezone: request_follow_up ? preferred_timezone : null,
         language,
         registration_source: registrationSource,
-      })
-      .select("id, name, email")
-      .single();
-
-    if (isRegistrationDuplicate(insertError)) {
-      await ensureDurableRegistration(adminSupabase, email, name, meeting_date);
-      if (question_only && user_id) {
-        const { data: saved, error: questionError } = await adminSupabase.rpc("append_monday_registration_question", {
-          _email: email, _meeting_date: meeting_date, _question: question.trim(),
-        });
-        if (questionError || saved !== true) throw questionError ?? new Error("Question not saved");
-        return new Response(JSON.stringify({ ...duplicateRegistrationResponse(), status: "question_submitted", questionSubmitted: true }), {
-          status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+      },
+    });
+    if (insertError || !result || typeof result.already_registered !== "boolean") {
+      throw insertError ?? new Error("Registration not secured");
+    }
+    if (result.already_registered) {
       return new Response(JSON.stringify(duplicateRegistrationResponse()), {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (insertError) {
-      throw insertError;
-    }
+    const registration = result.registration;
 
     if (registration?.id && registrationSource === "kiosk") {
       const { error: queueError } = await adminSupabase.rpc(
@@ -145,22 +148,7 @@ serve(async (req: Request) => {
       }
     }
 
-    await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/send-zoom-registration-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        registration_id: registration?.id || null,
-        consentEmailList: consent_email_list,
-        language,
-      }),
-    }).catch((emailErr) => {
-      console.error("Zoom registration email failed (registration saved):", emailErr);
-    });
+    const emailSent = await notifyMondayRegistration(registration.id);
 
     // Trigger lead scoring server-side so the score function can stay locked
     // behind a shared secret (no longer callable directly from the browser).
@@ -191,7 +179,7 @@ serve(async (req: Request) => {
       props: { source: "monday_zoom", request_follow_up, consent_email_list },
     });
 
-    return new Response(JSON.stringify({ success: true, status: "registered", alreadyRegistered: false, registration }), {
+    return new Response(JSON.stringify({ success: true, status: "registered", alreadyRegistered: false, registration, emailSent }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
