@@ -194,6 +194,14 @@ begin
  insert into monday_notification_private.deliveries(email_key,meeting_date,recipient_kind,state,token,registration_id,attempted_at)
  values(lower(btrim(_email)),_meeting_date,_kind,'attempting',gen_random_uuid(),_registration_id,clock_timestamp())
  on conflict(email_key,meeting_date,recipient_kind) do nothing returning token into result;
+ -- INSERT may wait on a competing claim which then rolls back after expiry.
+ -- attempted_at was evaluated before that wait and cannot prove issuance time.
+ -- Raise (rather than return NULL) to roll back only this unissued insertion;
+ -- never delete/reset an existing attempted claim to recover from expiry.
+ if result is not null and c.claim_deadline is not null
+   and clock_timestamp()>=c.claim_deadline then
+   raise exception 'Monday notification claim deadline expired';
+ end if;
  return result;
 end $$;
 create function public.finish_monday_notification(_token uuid,_accepted boolean)

@@ -1,3 +1,8 @@
+Local expiration-race regression verification; no live actions or sends.
+Baseline f85ce6179358aba9447b596d0967712cdfe65e26 with new regression: exit_code=1
+Observed transactionid lock before deadline; failed: expired insert waiter raises and issues no token.
+
+$ python scripts/test-monday-disabled-activation.py
 PASS schema guard rolls back all DDL
 PASS all historical fields, conflicts, raw comments and seven FK row sets unchanged
 PASS legacy distinct occurrence held without invented attempt/acceptance
@@ -35,9 +40,16 @@ PASS bounded pilot rejects unrelated fresh occurrence
 PASS bounded pilot admits one occurrence owner
 PASS bounded pilot expires before unclaimed attendee; runtime cannot widen it
 PASS bounded pilot recipient claims still independent
+PASS expiration regression observed duplicate-key transaction lock before deadline
+PASS expired insert waiter raises and issues no token
+PASS expired insert waiter leaves no own unissued claim
+PASS expiration rollback preserves every existing hold and attempted claim
 PASS accidental migration replay fails closed without resetting state
 PASS standalone duplicate-bearing notification delta (not full-chain/live-schema proof)
 PASS test container removed
+exit_code=0
+
+$ node scripts/test-monday-registration.mjs
 ok 1 - public concurrent submits, retry, auto-registration replay and next week
 ok 2 - public invalid/cancelled/DB failure fail closed and do not send
 ok 3 - only verified matching Auth email links a user
@@ -78,6 +90,9 @@ ok 37 - independent owner claim failure can retry without replaying other recipi
 ok 38 - independent attendee claim failure can retry without replaying other recipient
 ok 39 - provider accepted but failed database ack never auto-replays
 PASS: 39 actual-handler tests (synthetic database/provider IO; no live sends or database writes).
+exit_code=0
+
+$ node scripts/test-monday-suppression.mjs
 ok 1 - suppressed owner on capped second page never reaches provider
 ok 2 - returned lookup failure fails closed
 ok 3 - throw lookup failure fails closed
@@ -85,5 +100,8 @@ ok 4 - later lookup failure fails closed
 ok 5 - no stale cache after new opt-out; cc/bcc filtering; unrelated fetch unaffected
 ok 6 - wildcard identity literal, malformed payload blocked, URL and Request inputs checked
 PASS 6 real suppression-wrapper tests; no live sends.
-Check file:///root/repos/soberhelpline-disabled-activation/supabase/functions/send-zoom-registration-email/index.ts
+exit_code=0
+
+$ npx --yes deno@2.5.6 check --no-lock supabase/functions/send-zoom-registration-email/index.ts
+[0m[32mCheck[0m file:///root/repos/soberhelpline-disabled-activation/supabase/functions/send-zoom-registration-email/index.ts
 exit_code=0

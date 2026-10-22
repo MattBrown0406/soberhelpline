@@ -209,6 +209,27 @@ try:
     check('bounded pilot expires before unclaimed attendee; runtime cannot widen it',sql(claim(pilot,kind='attendee',email='pilot@example.test'))=='')
     sql("update monday_notification_private.control set claim_deadline=clock_timestamp()+interval '10 minutes';")
     check('bounded pilot recipient claims still independent',bool(sql(claim(pilot,kind='attendee',email='pilot@example.test'))))
+    # A duplicate-key INSERT can wait past expiry even after both earlier checks.
+    # Observe the actual transaction-id lock before rolling back the competitor.
+    retained=sql("select jsonb_agg(to_jsonb(d) order by email_key,meeting_date,recipient_kind) from monday_notification_private.deliveries d;")
+    race=insert('expiry-race@example.test')
+    sql("update monday_notification_private.control set pilot_email_key='expiry-race@example.test',claim_deadline=clock_timestamp()+interval '4 seconds';")
+    competitor=start('expiry_competitor','begin; set role service_role;'+claim(race,email='expiry-race@example.test'),True)
+    wait('expiry_competitor','state','idle in transaction')
+    waiter=start('expiry_waiter',"set statement_timeout='15s'; set role service_role;"+claim(race,email='expiry-race@example.test'))
+    wait('expiry_waiter','wait_event','transactionid')
+    check('expiration regression observed duplicate-key transaction lock before deadline',sql("select clock_timestamp()<claim_deadline from monday_notification_private.control;")=='t')
+    deadline=time.monotonic()+10
+    while sql("select clock_timestamp()>=claim_deadline from monday_notification_private.control;")!='t':
+        assert time.monotonic()<deadline, 'pilot did not expire'
+        time.sleep(.03)
+    assert competitor.stdin is not None
+    competitor.stdin.write('rollback;\n\\q\n'); competitor.stdin.flush()
+    _,err=competitor.communicate(timeout=10); assert competitor.returncode==0,err
+    out,err=waiter.communicate(timeout=10)
+    check('expired insert waiter raises and issues no token',waiter.returncode!=0 and not out.strip() and 'Monday notification claim deadline expired' in err)
+    check('expired insert waiter leaves no own unissued claim',sql("select count(*) from monday_notification_private.deliveries where email_key='expiry-race@example.test';")=='0')
+    check('expiration rollback preserves every existing hold and attempted claim',retained==sql("select jsonb_agg(to_jsonb(d) order by email_key,meeting_date,recipient_kind) from monday_notification_private.deliveries d;"))
     sql(migration,False)
     check('accidental migration replay fails closed without resetting state',sql(f"select state from monday_notification_private.deliveries where token='{token}';")=='accepted')
     print('PASS standalone duplicate-bearing notification delta (not full-chain/live-schema proof)',flush=True)

@@ -75,6 +75,14 @@ Expect zero fabricated timestamps, runtime activation/enable false. Service has 
 
 To stop **new** claims without a registration pause, the operator can transactionally `update monday_notification_private.control set enabled=false where singleton;`. Already issued claims/provider calls are not canceled, and old code remains outside this switch. Do not clear attempts or call activation again; recovery needs an explicit reviewed decision.
 
+## Expiration-race repair (local source only)
+
+The claim RPC now rechecks `clock_timestamp() >= claim_deadline` **after** `INSERT ... ON CONFLICT` resolves and immediately before returning a nonnull token. A competing uncommitted claim can make insertion wait, then roll back after the deadline. On that path the RPC raises `Monday notification claim deadline expired`, rolling back its own unissued insertion instead of returning a token or leaving an orphan attempt. Earlier `attempted_at` values are not evidence of timely issuance: the insert evaluates them before waiting. Existing attempted/accepted claims and holds are never cleared.
+
+The real PostgreSQL regression observes the waiter's `transactionid` lock before expiration, polls the database deadline, rolls back the competing transaction only after expiry, and requires an error, no returned token, zero leftover race-key rows, and exact preservation of every prior ledger row. The new regression failed against baseline `f85ce6179358aba9447b596d0967712cdfe65e26` before the SQL fix and passes after it.
+
+This delivery authorizes no live actions. Any separately authorized source-delivery/install/no-send-probe scope must remain disabled; the illustrative pilot activation above is **not authorized** by this repair. No push, live migration, activation, or send was performed.
+
 ## Executable verification
 
 - `python scripts/test-monday-disabled-activation.py`: disposable network-disabled PostgreSQL 17.6; synthetic duplicate-bearing FORCE-RLS schema, all-field/child equality at installation **and activation**, genuine concurrent insert/activation/claim lock waits, late normalized duplicates, timestamp equality/backdating, historical replay refusal, changed old IDs, held-key deletion, next-week eligibility, independent recipient claims, token fencing, client/runtime ACL denials, and explicit mixed-version/vanished-identity counterexamples. Synthetic provider-attempt rows model the counterexample only; they are not live legacy execution or fabricated provider results.
