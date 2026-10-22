@@ -37,6 +37,27 @@ function harness() {
         const unknown = new Set(state.rows.filter(prior).map(r => r.meeting_date).filter(d => !manual.has(d)));
         return { data: { verifiedManual: manual.size, unclassified: unknown.size, completeSince: null }, error: null };
       }
+      if (name === 'monday_notification_context') {
+        if (state.historyError) return { data: null, error: { message: 'unavailable' } };
+        const row = state.rows.find(r => r.id === args._registration_id);
+        const same = r => r.email.trim().toLowerCase() === row.email.trim().toLowerCase();
+        const prior = state.rows.filter(r => same(r) && r.meeting_date < row.meeting_date && r.meeting_date < today);
+        return { data: { priorRegisteredWeeks: new Set(prior.map(r => r.meeting_date)).size,
+          weeksWithAutomaticSource: new Set(prior.filter(r => r.registration_source === 'automatic').map(r => r.meeting_date)).size,
+          comments: state.rows.filter(r => same(r) && r.meeting_date === row.meeting_date).map(r => ({ id:r.id, source:r.registration_source ?? null, question:r.question ?? null })) }, error: null };
+      }
+      if (name === 'claim_monday_notification') {
+        if (state.claimFailure === args._kind) return { data: null, error: { message: 'unavailable' } };
+        const key = `${args._email.trim().toLowerCase()}|${args._meeting_date}|${args._kind}`;
+        if (state.claims.has(key)) return { data: null, error: null };
+        state.claims.add(key);
+        return { data: key, error: null };
+      }
+      if (name === 'finish_monday_notification') {
+        if (state.finishFailure) return { data: false, error: { message: 'ack failed' } };
+        state.outcomes ??= new Map(); state.outcomes.set(args._token, args._accepted);
+        return { data: true, error: null };
+      }
       if (name === 'is_meeting_blocked') return { data: state.blocked, error: null };
       if (name === 'append_monday_registration_question') {
         const row = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
@@ -121,6 +142,7 @@ function harness() {
         if (id.endsWith('/spine.ts')) return { enqueueSpineEvent: async () => {}, extractUtm: () => ({}) };
         if (id.endsWith('/automationAuth.ts')) return { requireAutomationAuth: async () => null };
         if (id.endsWith('/suppression.ts')) return { getSuppressedRecipients: async () => { if (state.suppressionError) throw new Error('lookup failed'); return new Set(); } };
+        if (id.endsWith('/mondayNotificationContext.ts')) return load('supabase/functions/_shared/mondayNotificationContext.ts').exports;
         if (id.endsWith('/mondayNotification.ts')) return load('supabase/functions/_shared/mondayNotification.ts').exports;
         if (id.endsWith('/mondayRegistrationHistory.ts')) return load('supabase/functions/_shared/mondayRegistrationHistory.ts').exports;
         if (id.endsWith('/mondayRegistration.ts')) return load('supabase/functions/_shared/mondayRegistration.ts').exports;
@@ -198,7 +220,7 @@ await test('email sender service authorization plus atomic claim blocks all dupl
   assert.equal(results.filter(r => r.body.suppressed).length, 1);
   assert.equal(state.calls.filter(c => c.url.includes('sendgrid')).length, 2); // one attendee + one admin, NOT two confirmations
   assert.equal(state.calls.filter(c => c.url.includes('add-to-mailchimp')).length, 1);
-  assert.ok(state.rows[0].confirmation_completed_at);
+  assert.equal(state.outcomes.size, 2); assert.ok([...state.outcomes.values()].every(Boolean));
   await post(handler, body, { Authorization: 'Bearer test-service' }); assert.equal(state.calls.length, 3);
 });
 await test('private app ensure contract: unauthorized, new, repeat, date scope, failure', async () => {
@@ -247,13 +269,13 @@ await test('owner receives escaped multiline comment without follow-up, persiste
   const html = owner.body.content[0].value;
   assert.ok(html.includes('&lt;script&gt;private &amp; &quot;quoted&quot;&lt;/script&gt;\nSecond line'));
   assert.ok(html.includes('white-space:pre-wrap'));
-  assert.ok(html.includes('Prior manual registrations'));
+  assert.ok(html.includes('Prior registration history'));
   assert.ok(!html.includes('Spoofed')); assert.ok(!html.includes('attacker@example.test'));
   assert.equal(state.calls.length, 2); // persisted opt-in is false, not caller's true
   assert.ok(!JSON.stringify(state.calls[0]).includes('Second line')); // attendee never gets private note
   assert.ok(!JSON.stringify(state.logs).includes('Second line'));
 });
-await test('history uses service ledger only, normalized identity and distinct prior occurrences', async () => {
+await test('history counts all sources with qualified provenance, normalized identity and distinct prior occurrences', async () => {
   const { state, load, post } = harness(); state.pageCap = 2;
   state.rows.push({ ...payload, id: 'reg', meeting_date: today });
   const row = (id, meeting_date, registration_source, email = ' PERSON@example.test ') => ({ id, meeting_date, registration_source, email });
@@ -267,9 +289,9 @@ await test('history uses service ledger only, normalized identity and distinct p
   const result = await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
   assert.equal(result.status, 200);
   const html = state.calls[1].body.content[0].value;
-  assert.ok(html.includes('2 verified prior manual registration occurrence(s)'));
-  assert.ok(html.includes('3 prior occurrence(s) have unknown'));
-  assert.ok(html.includes('lower bound, not a lifetime total or attendance count'));
+  assert.ok(html.includes('5 prior distinct registered week(s)'));
+  assert.ok(html.includes('1 of those weeks include an explicitly automatic-source row'));
+  assert.ok(html.includes('not an exact manual-signup total or an attendance count'));
 });
 await test('history failure is unavailable not zero and does not lose owner notification', async () => {
   const { state, load, post } = harness(); state.historyError = true;
@@ -297,7 +319,7 @@ for (const failure of ['owner-http', 'attendee-http', 'owner-network', 'owner-su
     const result = await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' });
     assert.equal(result.status, 502); assert.equal(result.body.reconciliationRequired, true);
     assert.equal(result.body.delivery[failure.startsWith('owner') ? 'owner' : 'attendee'], 'failed_or_suppressed');
-    assert.equal(state.calls.length, 2); assert.ok(state.rows[0].confirmation_claimed_at); assert.equal(state.rows[0].confirmation_completed_at, undefined);
+    assert.equal(state.calls.length, 2); assert.equal(state.claims.size, 2); assert.equal(state.rows[0].confirmation_completed_at, undefined);
     assert.equal((await post(handler, { registration_id: 'reg' }, { Authorization: 'Bearer test-service' })).body.suppressed, true);
     assert.equal(state.calls.length, 2);
   });
@@ -356,5 +378,43 @@ await test('kiosk records manual action and new website opt-in is manual, questi
   assert.equal(state.manual.size, before); assert.equal(state.calls.length, 1);
   const missing = await post(handler, { ...payload, meeting_date: '2026-10-19', question_only: true, question: 'question' }, { Authorization: 'Bearer verified' });
   assert.equal(missing.status, 500); assert.equal(state.rows.length, 1); assert.equal(state.manual.size, before);
+});
+await test('duplicate-bearing sender claims occurrence not row, preserves conflicting fields and all current comments', async () => {
+  const { state, load, post } = harness();
+  state.rows.push({ ...payload, id: 'first', email: ' person@example.test ', question: '<b>first</b>\nraw', consent_email_list: false },
+    { ...payload, id: 'second', email: 'PERSON@example.test', question: 'second raw', consent_email_list: true, user_id: 'other' });
+  const before = JSON.stringify(state.rows);
+  const handler = load('supabase/functions/send-zoom-registration-email/index.ts').handler;
+  await Promise.all(state.rows.map(r => post(handler, { registration_id: r.id }, { Authorization: 'Bearer test-service' })));
+  const mails = state.calls.filter(c => c.url.includes('sendgrid'));
+  assert.equal(mails.length, 2); assert.equal(JSON.stringify(state.rows), before);
+  const owner = mails.find(c => c.body.personalizations[0].to[0].email === 'matt@soberhelpline.com');
+  assert.ok(owner.body.content[0].value.includes('&lt;b&gt;first&lt;/b&gt;\nraw'));
+  assert.ok(owner.body.content[0].value.includes('second raw'));
+  const attendee = mails.find(c => c !== owner);
+  assert.ok(!attendee.body.content[0].value.includes('second raw'));
+  assert.equal(state.calls.filter(c => c.url.includes('mailchimp')).length, 0); // no consent union
+});
+await test('legacy unknown holds send neither message nor marketing and do not claim acceptance', async () => {
+  const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'held', consent_email_list: true });
+  for (const kind of ['attendee','owner']) state.claims.add(`person@example.test|${today}|${kind}`);
+  const result = await post(load('supabase/functions/send-zoom-registration-email/index.ts').handler, { registration_id:'held' }, { Authorization:'Bearer test-service' });
+  assert.equal(state.calls.length, 0); assert.equal(result.body.reconciliationRequired, true);
+  assert.equal(result.body.delivery.owner, 'held_or_previously_attempted');
+});
+for (const kind of ['owner','attendee']) await test(`independent ${kind} claim failure can retry without replaying other recipient`, async () => {
+  const { state, load, post } = harness(); state.rows.push({ ...payload, id:'reg' }); state.claimFailure=kind;
+  const handler=load('supabase/functions/send-zoom-registration-email/index.ts').handler;
+  const send=()=>post(handler,{registration_id:'reg'},{Authorization:'Bearer test-service'});
+  assert.equal((await send()).status,502); assert.equal(state.calls.length,1);
+  state.claimFailure=null; assert.equal((await send()).status,200); assert.equal(state.calls.length,2);
+  await send(); assert.equal(state.calls.length,2);
+});
+await test('provider accepted but failed database ack never auto-replays', async () => {
+  const { state, load, post } = harness(); state.rows.push({ ...payload, id:'reg' }); state.finishFailure=true;
+  const handler=load('supabase/functions/send-zoom-registration-email/index.ts').handler;
+  const send=()=>post(handler,{registration_id:'reg'},{Authorization:'Bearer test-service'});
+  assert.equal((await send()).status,502); assert.equal(state.calls.length,2);
+  state.finishFailure=false; await send(); assert.equal(state.calls.length,2);
 });
 console.log(`PASS: ${tests} actual-handler tests (synthetic database/provider IO; no live sends or database writes).`);

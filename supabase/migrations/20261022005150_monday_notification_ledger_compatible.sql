@@ -1,0 +1,104 @@
+-- Standalone delta: apply ONLY this file, not the pending historical chain.
+-- No registration mutation, uniqueness, trigger, FK or privilege changes.
+begin;
+set local lock_timeout = '5s';
+set local statement_timeout = '60s';
+set local row_security = off;
+do $$
+declare c record;
+begin
+  if to_regnamespace('monday_notification_private') is not null then
+    raise exception 'Notification schema already exists; inspect deployment, do not replay';
+  end if;
+  for c in select * from (values ('id','uuid'),('email','text'),('name','text'),
+    ('meeting_date','date'),('question','text'),('registration_source','text'),
+    ('language','text'),('consent_email_list','boolean'),('request_follow_up','boolean'),
+    ('phone','text'),('preferred_contact_date','text'),('preferred_contact_time','text'),
+    ('preferred_timezone','text')) v(n,t)
+  loop
+    if not exists(select 1 from pg_attribute where attrelid = 'public.zoom_meeting_registrations'::regclass
+      and attname=c.n and not attisdropped and format_type(atttypid,atttypmod)=c.t) then
+      raise exception 'Required registration column/type mismatch: % expected %',c.n,c.t;
+    end if;
+  end loop;
+  if not exists(select 1 from pg_roles where rolname='service_role' and rolbypassrls) then
+    raise exception 'Expected service_role BYPASSRLS';
+  end if;
+end $$;
+-- Bound the initial hold snapshot and exclude concurrent INSERT/UPDATE/DELETE.
+lock table public.zoom_meeting_registrations in share mode;
+create schema monday_notification_private;
+revoke all on schema monday_notification_private from public, anon, authenticated;
+grant usage on schema monday_notification_private to service_role;
+create table monday_notification_private.deliveries (
+  email_key text not null check(email_key=lower(btrim(email_key)) and email_key<>''),
+  meeting_date date not null,
+  recipient_kind text not null check(recipient_kind in ('owner','attendee')),
+  state text not null check(state in ('legacy_unknown_hold','attempting','accepted','failed_or_suppressed')),
+  token uuid unique,
+  registration_id uuid, -- Deliberately not an FK: never affect legacy cleanup/reference behavior.
+  attempted_at timestamptz,
+  accepted_at timestamptz,
+  primary key(email_key,meeting_date,recipient_kind),
+  check ((state='legacy_unknown_hold' and token is null and attempted_at is null and accepted_at is null)
+    or (state<>'legacy_unknown_hold' and token is not null and attempted_at is not null
+      and (state='accepted')=(accepted_at is not null)))
+);
+alter table monday_notification_private.deliveries enable row level security;
+revoke all on monday_notification_private.deliveries from public, anon, authenticated;
+grant select,insert,update on monday_notification_private.deliveries to service_role;
+insert into monday_notification_private.deliveries(email_key,meeting_date,recipient_kind,state)
+select distinct lower(btrim(email)),meeting_date,k,'legacy_unknown_hold'
+from public.zoom_meeting_registrations cross join (values ('owner'),('attendee')) kinds(k);
+
+create function public.monday_notification_context(_registration_id uuid)
+returns jsonb language sql stable security invoker set search_path='' set row_security=off as $$
+with target as (select * from public.zoom_meeting_registrations where id=_registration_id),
+prior as (
+ select r.meeting_date, bool_or(r.registration_source='automatic') as has_automatic
+ from public.zoom_meeting_registrations r cross join target t
+ where lower(btrim(r.email))=lower(btrim(t.email))
+   and r.meeting_date<t.meeting_date
+   and r.meeting_date<(current_timestamp at time zone 'America/Los_Angeles')::date
+ group by r.meeting_date
+), notes as (
+ select coalesce(jsonb_agg(jsonb_build_object('id',r.id,'source',r.registration_source,'question',r.question)
+ order by r.id),'[]'::jsonb) as items
+ from public.zoom_meeting_registrations r cross join target t
+ where lower(btrim(r.email))=lower(btrim(t.email)) and r.meeting_date=t.meeting_date
+)
+select jsonb_build_object('priorRegisteredWeeks',(select count(*) from prior),
+ 'weeksWithAutomaticSource',(select count(*) from prior where has_automatic),
+ 'comments',(select items from notes)) from target;
+$$;
+create function public.claim_monday_notification(_registration_id uuid,_email text,_meeting_date date,_kind text)
+returns uuid language plpgsql security invoker set search_path='' set row_security=off as $$
+declare result uuid;
+begin
+ if _kind is null or _kind not in ('owner','attendee') then raise exception 'Invalid recipient kind'; end if;
+ -- Refuse a stale identity snapshot; no canonical row or consent merging.
+ perform 1 from public.zoom_meeting_registrations where id=_registration_id
+   and lower(btrim(email))=lower(btrim(_email)) and meeting_date=_meeting_date for share;
+ if not found then raise exception 'Registration identity changed or absent'; end if;
+ insert into monday_notification_private.deliveries(email_key,meeting_date,recipient_kind,state,token,registration_id,attempted_at)
+ values(lower(btrim(_email)),_meeting_date,_kind,'attempting',gen_random_uuid(),_registration_id,clock_timestamp())
+ on conflict(email_key,meeting_date,recipient_kind) do nothing returning token into result;
+ return result;
+end $$;
+create function public.finish_monday_notification(_token uuid,_accepted boolean)
+returns boolean language plpgsql security invoker set search_path='' set row_security=off as $$
+begin
+ if _accepted is null then raise exception 'Missing outcome'; end if;
+ update monday_notification_private.deliveries set
+   state=case when _accepted then 'accepted' else 'failed_or_suppressed' end,
+   accepted_at=case when _accepted then clock_timestamp() else null end
+ where token=_token and state='attempting';
+ return found;
+end $$;
+revoke all on function public.monday_notification_context(uuid) from public,anon,authenticated;
+revoke all on function public.claim_monday_notification(uuid,text,date,text) from public,anon,authenticated;
+revoke all on function public.finish_monday_notification(uuid,boolean) from public,anon,authenticated;
+grant execute on function public.monday_notification_context(uuid) to service_role;
+grant execute on function public.claim_monday_notification(uuid,text,date,text) to service_role;
+grant execute on function public.finish_monday_notification(uuid,boolean) to service_role;
+commit;
