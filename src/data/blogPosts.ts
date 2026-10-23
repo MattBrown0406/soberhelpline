@@ -1,3 +1,4 @@
+import grandparentsSelfCareImg from "@/assets/blog-grandparents-raising-grandchildren-addiction.jpg";
 import siblingSelfCareImg from "@/assets/blog-coping-with-sibling-addiction.jpg";
 
 import verifyRehabAccreditationImg from "@/assets/blog-verify-rehab-accreditation-licensing.jpg";
@@ -219,6 +220,140 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 194,
+    slug: "grandparents-raising-grandchildren-due-to-addiction",
+    seoTitle: "Grandparents Raising Grandchildren Due to Addiction",
+    metaDescription: "Grandparents raising grandchildren due to addiction carry a heavy load. Learn practical self-care steps, support resources, and how to protect your own health.",
+    title: "Grandparents Raising Grandchildren Due to Addiction: A Self-Care Guide for the Second Time Around",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-23",
+    image: grandparentsSelfCareImg,
+    keywords: ["grandparents raising grandchildren due to addiction", "grandparent self-care", "kinship care", "caregiver burnout", "family recovery"],
+    tags: ["family guide", "grandparents", "self-care", "family recovery"],
+    excerpt: "Raising grandchildren while your adult child struggles with addiction can be exhausting. Learn practical ways to protect your health, take breaks, set boundaries, and find support.",
+    faqItems: [{"question": "How common is it for grandparents to raise grandchildren because of addiction?", "answer": "It is very common. Generations United estimates that more than two million U.S. children are being raised by grandparents or other relatives without a parent in the home, and parental substance use is one of the leading reasons."}, {"question": "What support is available for grandparents raising grandchildren?", "answer": "Grandparents can find help through kinship navigator programs, local Area Agencies on Aging, grandfamily support groups, and family addiction groups like Al-Anon or Nar-Anon. Counseling for both grandparents and grandchildren can also make a big difference."}, {"question": "How do I avoid burnout while raising my grandchildren?", "answer": "Keep up with your own medical care, build regular breaks into your week, and accept offers of help. Respite care and trusted friends or family can give you time to recharge."}, {"question": "Should my grandchildren see their parent who is still using drugs or alcohol?", "answer": "It depends on safety, the child’s age, any court orders, and your adult child’s current condition. Many families allow supervised visits only when the parent is sober. A family counselor or attorney can help you set a plan that protects the children."}, {"question": "Is it normal to feel resentful about raising my grandchildren?", "answer": "Yes. Many grandparents feel love and resentment at the same time, especially when retirement plans change overnight. These feelings don’t make you a bad grandparent. Talking them through with a counselor or support group can help you process them in a healthy way."}],
+    content: `You thought your parenting years were behind you. Then addiction changed everything, and now there are lunches to pack, school forms to sign, and a grandchild who needs you more than ever. If you are one of the many grandparents raising grandchildren due to addiction, you are doing something remarkable. You are also carrying a load that would exhaust anyone.
+
+This guide is about you, not just the kids. Your health, your grief, and your energy matter, because your grandchildren are counting on you to be here for the long haul. The good news is that support exists, and small, steady changes can make this season more sustainable.
+
+## Why Is Raising Grandchildren Because of Addiction So Hard?
+
+Raising grandchildren because of a parent’s addiction is hard because you are caregiving and grieving at the same time. You are meeting a child’s daily needs while also worrying about your own son or daughter who is still struggling.
+
+Advocacy group [Generations United](https://www.gu.org/) estimates that more than two million children in the U.S. are being raised by grandparents or other relatives with no parent in the home, and parental substance use is one of the most common reasons. You are far from alone.
+
+What makes this situation unique is the mix of pressures landing on you at once:
+
+- Physical demands: Keeping up with a toddler or teenager at 60 or 70 takes real stamina.
+
+- Financial strain: Many grandparents are on fixed incomes or had planned to retire.
+
+- Complicated grief: You may mourn the retirement you pictured, the relationship you hoped to have with your adult child, and the “fun grandparent” role you gave up.
+
+- Divided loyalty: Loving your adult child while protecting your grandchild from the effects of their addiction can feel like being pulled in two directions.
+
+- Children’s big feelings: Kids affected by a parent’s addiction often carry anger, anxiety, or confusion that shows up as behavior problems.
+
+## What Are the Signs of Burnout in Grandparents Raising Grandchildren?
+
+The most common signs of burnout are constant exhaustion, irritability, pulling away from friends, and neglecting your own health. If you can’t remember the last time you saw your own doctor or did something just for you, burnout may already be setting in.
+
+[Caregiver burnout](/blog/addiction-anxiety-family-burnout) often creeps up quietly. Watch for these warning signs:
+
+- Feeling tired even after a full night’s sleep, or not sleeping well at all
+
+- Snapping at the grandchildren, then feeling guilty about it
+
+- Skipping medications, checkups, or meals
+
+- Losing interest in hobbies, church, or friendships you used to enjoy
+
+- Feeling resentful, hopeless, or numb
+
+- Getting sick more often than usual
+
+None of these mean you are failing. They mean you are running on empty, and noticing early lets you refill the tank.
+
+## How Can Grandparents Raising Grandchildren Take Care of Themselves?
+
+Grandparents raising grandchildren take care of themselves best by protecting their health, building breaks into the week, and accepting help. Self-care isn’t selfish here. It is part of the job description.
+
+### Put Your Own Health Back on the Calendar
+
+Schedule a checkup and tell your doctor about your new caregiving role. Chronic stress affects blood pressure, sleep, and immunity, and your doctor can’t help with what they don’t know about. Keep your own medications and appointments on the same family calendar as the kids’ activities so they don’t get pushed aside.
+
+### Build in Real Breaks
+
+Even an hour a week of true downtime makes a difference. Ask a trusted friend, neighbor, or church member to sit with the kids. Look into respite care programs, which offer short-term relief for caregivers. Your local Area Agency on Aging is a good place to ask, and you can find yours through the national [Eldercare Locator](https://eldercare.acl.gov/).
+
+### Make Room for Your Own Grief
+
+It is okay to feel sad, angry, or cheated by this situation. Journaling, talking with a counselor, or simply naming the feeling out loud with a trusted friend can lighten its weight. Unspoken grief tends to come out sideways as irritability or exhaustion.
+
+## Where Can Grandparents Raising Grandchildren Find Support?
+
+Support for grandparents raising grandchildren comes from three main places: [peer support groups](/blog/al-anon-family-support-groups-addiction), kinship care programs, and professional help. Connecting with even one of them can ease the isolation many grandparents feel.
+
+- Grandparent and kinship support groups: Many communities, churches, schools, and senior centers host groups specifically for grandfamilies. Sitting with people who truly get it is powerful medicine.
+
+- Kinship navigator programs: Many states offer kinship navigators who help relative caregivers find financial assistance, legal help, school resources, and counseling. Search your state’s name plus “kinship navigator.”
+
+- Family support groups for addiction: Groups like [Al-Anon](https://al-anon.org/), [Nar-Anon](https://www.nar-anon.org/), and [SMART Recovery Family & Friends](https://smartrecovery.org/family) help you cope with your adult child’s addiction, which is a separate weight from raising the kids.
+
+- Counseling for you and the children: A therapist who understands addiction and family systems can help you navigate guilt, grief, and boundaries. Kids often benefit from their own counselor, too.
+
+- Legal and financial guidance: Questions about custody, guardianship, school enrollment, medical consent, or benefits are best answered by a family law attorney or legal aid office in your state.
+
+## How Do You Set Boundaries With Your Adult Child Who Is Still Using?
+
+[Setting boundaries with your adult child](/blog/holding-boundaries-addiction-families) means deciding ahead of time what you will and won’t allow, especially around the grandchildren, and calmly sticking to it. Clear boundaries protect the kids, protect you, and give your adult child a stable picture of what recovery could restore.
+
+A few examples of healthy boundaries:
+
+- Visits with the grandchildren happen only when your adult child is sober, and in a setting you choose.
+
+- You won’t hand over money, but you will help with a treatment search or rides to an appointment.
+
+- You won’t discuss adult conflicts in front of the children.
+
+- You will keep the door open to recovery, while being honest with the kids in age-appropriate ways.
+
+Boundaries aren’t punishments. They are the guardrails that make it possible to keep loving your adult child without sacrificing your grandchildren’s safety or your own well-being.
+
+## You Don’t Have to Do This Alone
+
+Stepping in to raise your grandchildren is one of the most loving things a person can do. But love works best when the person giving it is cared for, too. Rest when you can, and ask for help before you need it. Each time you look after yourself, you are giving your grandchildren a steadier, healthier, more present grandparent. And that is a gift that will stay with them for life.
+
+## Frequently Asked Questions
+
+### How common is it for grandparents to raise grandchildren because of addiction?
+
+It is very common. [Generations United](https://www.gu.org/) estimates that more than two million U.S. children are being raised by grandparents or other relatives without a parent in the home, and parental substance use is one of the leading reasons.
+
+### What support is available for grandparents raising grandchildren?
+
+Grandparents can find help through kinship navigator programs, local Area Agencies on Aging, grandfamily support groups, and family addiction groups like [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/). Counseling for both grandparents and grandchildren can also make a big difference.
+
+### How do I avoid burnout while raising my grandchildren?
+
+Keep up with your own medical care, build regular breaks into your week, and accept offers of help. Respite care and trusted friends or family can give you time to recharge.
+
+### Should my grandchildren see their parent who is still using drugs or alcohol?
+
+It depends on safety, the child’s age, any court orders, and your adult child’s current condition. Many families allow supervised visits only when the parent is sober. A family counselor or attorney can help you set a plan that protects the children.
+
+### Is it normal to feel resentful about raising my grandchildren?
+
+Yes. Many grandparents feel love and resentment at the same time, especially when retirement plans change overnight. These feelings don’t make you a bad grandparent. Talking them through with a counselor or support group can help you process them in a healthy way.
+
+## Get Support at SoberHelpline.com
+
+Whether you are raising grandchildren, supporting a loved one in recovery, or just trying to make sense of addiction, you deserve guidance and encouragement. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and a community of families who understand what you are going through.
+
+Explore [one-on-one family coaching](/family-coaching) or the free Monday night [“The Family Squares” support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
+  },
   {
     id: 193,
     slug: "coping-with-a-sibling-with-addiction",
