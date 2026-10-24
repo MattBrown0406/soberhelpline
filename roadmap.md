@@ -1,5 +1,7 @@
 # Current tasks
 
+- [ ] Add and verify confirmed removal of followed-up abandoned bookings from the admin list without deleting history or sending emails.
+
 - [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
 - [x] Audit manual registration notifications: required notification controls/functions are absent live; recent logs cannot establish the deployed sender's exact failure.
 - [x] Activate new-registration notifications after Matt's explicit changeover-risk approval; enabled at 10:14 AM Pacific October 24 and verified through deployed no-send probe.

@@ -4,8 +4,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { RefreshCw, Send, Mail, Phone } from "lucide-react";
+import { RefreshCw, Send, Mail, Phone, Archive, Loader2 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel } from "@/components/ui/alert-dialog";
+import { closeAbandonedBooking } from "@/lib/closeAbandonedBooking";
 
 interface AbandonedBooking {
   id: string;
@@ -26,6 +28,29 @@ export function AbandonedBookingsManagement() {
   const [records, setRecords] = useState<AbandonedBooking[]>([]);
   const [loading, setLoading] = useState(true);
   const [triggering, setTriggering] = useState(false);
+  const [selected, setSelected] = useState<AbandonedBooking | null>(null);
+  const [removing, setRemoving] = useState(false);
+
+  const remove = async () => {
+    if (!selected || removing) return;
+    const id = selected.id;
+    setRemoving(true);
+    try {
+      await closeAbandonedBooking(id, async (bookingId, changes) => {
+        const { data, error } = await supabase.from("abandoned_bookings")
+          .update(changes).eq("id", bookingId).select("id, completed").maybeSingle();
+        if (error) throw error;
+        return data;
+      });
+      setRecords(current => current.filter(record => record.id !== id));
+      setSelected(null);
+      toast.success("Removed from abandoned bookings");
+    } catch {
+      toast.error("Could not remove this booking. Please try again.");
+    } finally {
+      setRemoving(false);
+    }
+  };
 
   const load = async () => {
     setLoading(true);
@@ -94,11 +119,12 @@ export function AbandonedBookingsManagement() {
             <TableHead>Progress</TableHead>
             <TableHead>Selected</TableHead>
             <TableHead>Follow-up</TableHead>
+            <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {records.length === 0 && !loading && (
-            <TableRow><TableCell colSpan={6} className="text-center text-muted-foreground py-8">No abandoned bookings</TableCell></TableRow>
+            <TableRow><TableCell colSpan={7} className="text-center text-muted-foreground py-8">No abandoned bookings</TableCell></TableRow>
           )}
           {records.map((r) => (
             <TableRow key={r.id}>
@@ -131,10 +157,32 @@ export function AbandonedBookingsManagement() {
                   <Badge variant="outline">Pending</Badge>
                 )}
               </TableCell>
+              <TableCell className="text-right">
+                <Button variant="outline" size="sm" disabled={removing} onClick={() => setSelected(r)} aria-label={`Remove abandoned booking for ${r.client_name || r.client_email}`}>
+                  <Archive className="h-4 w-4 mr-1" /> Remove
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <AlertDialog open={selected !== null} onOpenChange={open => { if (!open && !removing) setSelected(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove abandoned booking?</AlertDialogTitle>
+            <AlertDialogDescription className="break-words">
+              Finished following up with {selected?.client_name || selected?.client_email}? This will close their abandoned booking and remove it from this list and future abandoned-booking follow-ups. Contact history is kept, and paid bookings are unchanged. No email will be sent.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={removing}>Cancel</AlertDialogCancel>
+            <Button onClick={remove} disabled={removing}>
+              {removing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {removing ? "Removing..." : "Confirm removal"}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
