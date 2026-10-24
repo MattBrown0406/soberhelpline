@@ -1,6 +1,6 @@
 # Current tasks
 
-- [ ] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
+- [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
 
 - [x] Add the uploaded grandparents self-care guide, photo, and verified blog links.
 - [x] Add the uploaded sibling self-care guide and photo to the blog.
