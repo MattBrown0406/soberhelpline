@@ -1,6 +1,8 @@
 # Current tasks
 
 - [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
+- [x] Audit manual registration notifications: required notification controls/functions are absent live; recent logs cannot establish the deployed sender's exact failure.
+- [ ] Restore notifications to matt@soberhelpline.com for new manual registrations; blocked by the existing notification rollout hold and revised repair authorization.
 
 - [x] Add the uploaded grandparents self-care guide, photo, and verified blog links.
 - [x] Add the uploaded sibling self-care guide and photo to the blog.
