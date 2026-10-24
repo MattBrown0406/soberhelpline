@@ -183,8 +183,8 @@ Deno.serve(async (req: Request) => {
     return json({ ok: false, error: "meeting_date_out_of_range" }, 400);
   }
   // Private single-person contract: the app server supplies its verified Auth
-  // email. Unlike batch RSVP mirrors, an ensured registration is durable and
-  // cannot be removed by a later app snapshot. No public status lookup exists.
+  // email. A new seat is an app row (no marketing); the app saves its RSVP right
+  // after, so later batch snapshots keep it. No public status lookup exists.
   if (payload.action === "ensure-registration") {
     if (!validMeetingDate(meetingDate)) return json({ ok: false, error: "invalid_meeting_date" }, 400);
     const item = payload.attendee as { email?: unknown; name?: unknown } | undefined;
@@ -202,7 +202,7 @@ Deno.serve(async (req: Request) => {
       const { data: blocked, error: blockError } = await admin.rpc("is_meeting_blocked", { _email: email, _name: name });
       if (blockError) throw blockError;
       if (blocked) return json({ ok: false, error: "registration_unavailable" }, 403);
-      const { data: alreadyRegistered, error } = await admin.rpc("ensure_monday_registration", {
+      const { data: alreadyRegistered, error } = await admin.rpc("ensure_monday_app_registration", {
         _email: email, _name: name, _meeting_date: meetingDate,
       });
       if (error || typeof alreadyRegistered !== "boolean") throw error ?? new Error("Missing registration result");

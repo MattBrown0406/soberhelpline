@@ -83,6 +83,12 @@ function harness() {
         state.rows.push({ id: String(state.rows.length + 1), email: args._email, name: args._name, meeting_date: args._meeting_date, registration_source: 'website' });
         return { data: false, error: null };
       }
+      if (name === 'ensure_monday_app_registration') {
+        const existing = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
+        if (existing) return { data: true, error: null };
+        state.rows.push({ id: String(state.rows.length + 1), email: args._email, name: args._name, meeting_date: args._meeting_date, registration_source: 'app' });
+        return { data: false, error: null };
+      }
       return { data: null, error: null };
     },
     from: (table) => {
@@ -236,8 +242,11 @@ await test('private app ensure contract: unauthorized, new, repeat, date scope, 
   assert.deepEqual((await post(handler, body, headers)).body, { ok: true, already_registered: false, meeting_date: today });
   assert.equal((await post(handler, body, headers)).body.already_registered, true);
   assert.equal((await post(handler, { ...body, meeting_date: '2026-10-19' }, headers)).body.already_registered, false);
-  const snapshot = await post(handler, { meeting_date: today, attendees: [] }, headers);
-  assert.equal(snapshot.status, 200); assert.equal(snapshot.body.removed, 0); assert.equal(state.rows.length, 2);
+  // Ensured seats are app rows (no marketing); the app saves its RSVP right
+  // after ensuring, so its next snapshot keeps the row.
+  assert.ok(state.rows.every((row) => row.registration_source === 'app'));
+  const listed = await post(handler, { meeting_date: today, attendees: [{ email: 'person@example.test', name: 'Test Person', rsvp: 'going', questions: [] }] }, headers);
+  assert.equal(listed.status, 200); assert.equal(listed.body.removed, 0); assert.equal(state.rows.length, 2);
   state.cancelled = true; assert.equal((await post(handler, body, headers)).status, 409); state.cancelled = false;
   state.rpcError = { message: 'failed' }; assert.equal((await post(handler, body, headers)).status, 500);
   assert.equal(state.calls.length, 0); assert.equal(state.rows.length, 2);

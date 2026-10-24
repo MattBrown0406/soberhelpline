@@ -58,6 +58,33 @@ BEGIN
 END $$;
 REVOKE ALL ON FUNCTION public.ensure_monday_registration(text, text, date) FROM PUBLIC, anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.ensure_monday_registration(text, text, date) TO service_role;
+-- The app's own ensure (app-family-squares-sync). A new seat is an app row,
+-- exactly like the batch mirror's: marketing, lead scoring and follow-up
+-- exclude registration_source = 'app', and the app reminds the member itself.
+-- An existing row keeps its source. The app saves its RSVP right after this,
+-- so its next 15-minute snapshot keeps (or restores) the app row.
+CREATE FUNCTION public.ensure_monday_app_registration(_email text, _name text, _meeting_date date)
+RETURNS boolean LANGUAGE plpgsql SECURITY INVOKER SET search_path = public AS $$
+DECLARE already_registered boolean;
+BEGIN
+  IF _email IS NULL OR btrim(_email) = '' OR _name IS NULL OR btrim(_name) = ''
+     OR _meeting_date IS NULL OR extract(isodow FROM _meeting_date) <> 1 THEN
+    RAISE EXCEPTION 'Invalid registration' USING ERRCODE = '22023';
+  END IF;
+  INSERT INTO public.zoom_meeting_registrations
+    (email, name, meeting_date, user_id, registration_source, language,
+     phone, question, auto_register, consent_email_list, request_follow_up,
+     lead_reasons, next_revenue_action, followup_sequence_status)
+  VALUES (lower(btrim(_email)), btrim(_name), _meeting_date, NULL, 'app', 'en',
+    '', '', false, false, false,
+    ARRAY['Sober Helpline app RSVP'], 'none', 'not_applicable')
+  ON CONFLICT (lower(btrim(email)), meeting_date) DO UPDATE
+    SET registration_source = zoom_meeting_registrations.registration_source
+  RETURNING (xmax <> 0) INTO already_registered;
+  RETURN already_registered;
+END $$;
+REVOKE ALL ON FUNCTION public.ensure_monday_app_registration(text, text, date) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.ensure_monday_app_registration(text, text, date) TO service_role;
 -- Preserve the signed-in member question form without inserting a second seat.
 -- Only the edge handler (after verifying the account email) can call this helper.
 CREATE FUNCTION public.append_monday_registration_question(_email text, _meeting_date date, _question text)
