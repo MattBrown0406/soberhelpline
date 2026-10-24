@@ -1,3 +1,4 @@
+import spouseSelfCareImg from "@/assets/blog-coping-with-addicted-spouse.jpg";
 import grandparentsSelfCareImg from "@/assets/blog-grandparents-raising-grandchildren-addiction.jpg";
 import siblingSelfCareImg from "@/assets/blog-coping-with-sibling-addiction.jpg";
 
@@ -220,6 +221,109 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 195,
+    slug: "coping-with-an-addicted-spouse",
+    seoTitle: "Coping With an Addicted Spouse: Self-Care Guide",
+    metaDescription: "Coping with an addicted spouse is exhausting. Learn practical self-care steps for husbands, wives, and partners to protect your health, money, and kids.",
+    title: "Coping With an Addicted Spouse: A Self-Care Guide for Husbands, Wives, and Partners",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-24",
+    image: spouseSelfCareImg,
+    keywords: ["coping with an addicted spouse", "spouse of an addict", "self-care for partners", "addicted husband", "addicted wife"],
+    tags: ["family guide", "spouses", "self-care", "family recovery"],
+    excerpt: "Loving a spouse through addiction is exhausting. Learn practical ways to protect your health, finances, and children, and find support that is just for you.",
+    faqItems: [{"question": "How do I take care of myself when my husband or wife is an addict?", "answer": "Start with the basics: sleep, regular meals, and your own medical care. Then build support that is just for you, such as a family support group or individual counseling. Keeping part of your life separate from the addiction helps protect your health and identity."}, {"question": "Should I stay with a spouse who is addicted to drugs or alcohol?", "answer": "Only you can make that decision, and there's no single right answer. Many marriages survive and even grow stronger through recovery, while some partners need distance for their safety or well-being. Talking with a counselor or coach can help you decide from a clear, calm place rather than in a crisis."}, {"question": "Is it my fault my spouse drinks or uses drugs?", "answer": "No. Addiction is a complex health condition shaped by genetics, stress, mental health, and brain changes. You didn't cause it, you can't control it, and you can't cure it alone. What you can do is care for yourself and encourage healthy change."}, {"question": "Are there support groups for spouses of addicts?", "answer": "Yes. Al-Anon (for families of people who drink), Nar-Anon (for families affected by drug use), and SMART Recovery Family & Friends all welcome spouses and partners. Many meetings are available online, so you can attend from home."}, {"question": "How do I protect my money from my addicted spouse?", "answer": "Review your accounts and credit report, open an account in your own name, change passwords, and limit access to shared credit cards if needed. Keep copies of important documents in a safe place. A financial counselor or attorney can explain additional options."}],
+    content: `Coping with an addicted spouse is one of the loneliest experiences a person can face. You share a bed, a bank account, and maybe children with someone you love, and yet addiction keeps pulling them somewhere you can't follow. If you're tired, worried, and quietly wondering how much longer you can carry this, you are not weak. You're human.
+
+Here's the hopeful part: you don't have to wait for your spouse to get well before you start feeling better. This guide walks through practical, realistic ways to take care of yourself, protect your household, and stay steady, whether your partner is open to help, still on the fence, or already taking first steps toward recovery.
+
+## Why Is Coping With an Addicted Spouse So Hard?
+
+Coping with an addicted spouse is uniquely hard because your partner is supposed to be your safe place, and addiction turns that safe place into a source of stress. Unlike a sibling or adult child, a spouse is woven into every part of your daily life: money, parenting, sleep, intimacy, and plans for the future.
+
+Many partners slowly take on more and more. You cover bills, handle the kids, make excuses to friends, and lie awake listening for the car in the driveway.
+
+It also helps to remember that addiction is a health condition that changes how the brain handles reward and decision-making. That doesn't excuse hurtful behavior, but it does mean your spouse's use is not a verdict on your worth or your love. You didn't cause it, and you can't control it on your own.
+
+## What Does Self-Care Look Like When Your Spouse Is Addicted?
+
+Self-care for the spouse of someone with addiction means deliberately protecting your own physical health, emotional stability, and identity, even while your partner struggles. It isn't selfish or a luxury. Self-care also guards against [caregiver burnout](/blog/addiction-anxiety-family-burnout). A rested, supported partner makes clearer decisions and is far more helpful to a loved one than an exhausted one.
+
+### Protect Your Basics First
+
+When life feels chaotic, start small. These basics are the foundation everything else rests on:
+- **Sleep:** Keep a consistent bedtime, and if late-night arguments are common, agree not to discuss using after a set hour.
+- **Food and movement:** Regular meals and a daily walk do more for anxiety than most people expect.
+- **Your own doctor:** Stress shows up as headaches, stomach trouble, and high blood pressure. Tell your doctor what's going on at home.
+- **Limits on substances in your own life:** It's common for partners to drink more to cope. Notice it gently and honestly.
+
+### Keep a Life That Belongs to You
+
+Addiction has a way of becoming the center of the whole marriage. Choose one or two things each week that are just yours, such as coffee with a friend, a class, church, the gym, or a hobby you let slide.
+
+### Get Support That's Just for You
+
+You need people who understand. Family support groups like [Al-Anon](https://al-anon.org/), [Nar-Anon](https://www.nar-anon.org/), and [SMART Recovery Family & Friends](/blog/al-anon-family-support-groups-addiction) are free and full of spouses who have been exactly where you are. Many partners also benefit from their own counselor, separate from any couples or family therapy, so they have a private place to sort out their feelings.
+
+## How Can You Protect Your Finances and Household?
+
+You can protect your household by quietly securing the essentials: money, important documents, and a basic plan for emergencies. This isn't a betrayal of your spouse; it's responsible planning.
+1. **Know where the money is.** Review bank statements, credit reports, and recurring charges so nothing surprises you.
+2. **Open an account in your own name.** Even a small cushion for groceries and bills gives you peace of mind.
+3. **Guard access.** Change passwords and consider removing your spouse's access to shared credit cards if money is going to substances.
+4. **Keep copies of key documents.** Store birth certificates, insurance cards, and financial records somewhere safe.
+5. **Talk to a professional if needed.** A financial counselor or attorney can explain your options without you committing to anything.
+
+If you ever feel physically unsafe, your safety comes first. Leave the situation, call 911 in an emergency, or reach the National Domestic Violence Hotline at 1-800-799-7233 for confidential support.
+
+## Coping With an Addicted Spouse When You Have Children
+
+When you have children, coping with an addicted spouse means being the steady, predictable parent while still caring for yourself. Kids don't need a perfect home. They need at least one calm adult who tells them the truth in age-appropriate ways and keeps their routines intact.
+
+Keep meals, bedtimes, and school routines as consistent as you can. Let your children know that the problem is not their fault, that it's okay to talk about their feelings, and that they don't have to keep secrets. Never put them in the role of messenger, spy, or caretaker for the other parent.
+
+Make clear rules about safety, too. For example, a parent who has been drinking or using does not drive the kids anywhere. These boundaries protect your children and take a heavy decision off your shoulders in the moment.
+
+## When Should You Get More Help for Yourself and Your Marriage?
+
+You should reach out for more help when you feel stuck, overwhelmed, or unsure what to do next, which for most partners is sooner than they think. You don't need to hit a breaking point to deserve guidance.
+
+Approaches like [CRAFT (Community Reinforcement and Family Training)](/family-coaching) teach partners how to communicate in ways that reduce conflict and gently encourage a loved one toward treatment, while also improving the partner's own well-being. A family coach can help you set boundaries, prepare for honest conversations, and understand treatment options when your spouse is ready.
+
+It's also okay to take time and space to think about the future of your marriage. Whatever you decide, you can make that choice from a place of clarity rather than panic.
+
+## You Deserve Care, Too
+
+Loving someone through addiction takes enormous courage, and so does admitting that you need support. Taking care of yourself isn't giving up on your spouse; it's making sure there's still a strong, healthy you when recovery comes. Start with one small step today: a phone call, a meeting, a good night's sleep. You don't have to figure this out alone.
+
+## Frequently Asked Questions About Coping With an Addicted Spouse
+
+### How do I take care of myself when my husband or wife is an addict?
+
+Start with the basics: sleep, regular meals, and your own medical care. Then build support that is just for you, such as a family support group or individual counseling. Keeping part of your life separate from the addiction helps protect your health and identity.
+
+### Should I stay with a spouse who is addicted to drugs or alcohol?
+
+Only you can make that decision, and there's no single right answer. Many marriages survive and even grow stronger through recovery, while some partners need distance for their safety or well-being. Talking with a counselor or coach can help you decide from a clear, calm place rather than in a crisis.
+
+### Is it my fault my spouse drinks or uses drugs?
+
+No. Addiction is a complex health condition shaped by genetics, stress, mental health, and brain changes. You didn't cause it, you can't control it, and you can't cure it alone. What you can do is care for yourself and encourage healthy change.
+
+### Are there support groups for spouses of addicts?
+
+Yes. [Al-Anon](https://al-anon.org/) (for families of people who drink), [Nar-Anon](https://www.nar-anon.org/) (for families affected by drug use), and SMART Recovery Family & Friends all welcome spouses and partners. Many meetings are available online, so you can attend from home.
+
+### How do I protect my money from my addicted spouse?
+
+Review your accounts and credit report, open an account in your own name, change passwords, and limit access to shared credit cards if needed. Keep copies of important documents in a safe place. A financial counselor or attorney can explain additional options.
+
+## Find Ongoing Support at SoberHelpline.com
+
+You don't have to carry this by yourself. Explore [SoberHelpline.com](/) for ongoing education, [one-on-one family coaching](/family-coaching), and support designed for spouses and families navigating a loved one's addiction. We're here to help you take the next step with confidence.`,
+  },
   {
     id: 194,
     slug: "grandparents-raising-grandchildren-due-to-addiction",
