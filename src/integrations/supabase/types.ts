@@ -3900,6 +3900,15 @@ export type Database = {
           registration_id: string
         }[]
       }
+      claim_monday_notification: {
+        Args: {
+          _email: string
+          _kind: string
+          _meeting_date: string
+          _registration_id: string
+        }
+        Returns: string
+      }
       finalize_coaching_capture: {
         Args: {
           p_amount_cents: number
@@ -3923,6 +3932,10 @@ export type Database = {
           p_payload: Json
         }
         Returns: Json
+      }
+      finish_monday_notification: {
+        Args: { _accepted: boolean; _token: string }
+        Returns: boolean
       }
       get_booking_slots: {
         Args: never
@@ -4253,6 +4266,14 @@ export type Database = {
       is_meeting_blocked: {
         Args: { _email: string; _name: string }
         Returns: boolean
+      }
+      monday_notification_context: {
+        Args: { _registration_id: string }
+        Returns: Json
+      }
+      monday_notification_status: {
+        Args: { _acknowledge?: boolean; _revision: string }
+        Returns: Json
       }
       outbox_payload_matches: {
         Args: { a: Json; b: Json; keys: string[] }
