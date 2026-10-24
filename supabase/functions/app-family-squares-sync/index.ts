@@ -113,6 +113,25 @@ function cleanQuestions(value: unknown): string[] {
 /** Question text for an app-sourced row: newest last, each prefixed "• ". */
 const formatAppQuestions = (questions: string[]) => questions.map((q) => `• ${q} ${APP_MARK}`).join("\n");
 
+/**
+ * The October 12 registration migrations (question_items, the question-merge
+ * RPC) may not be applied on this database yet. Their absence must not fail
+ * the whole snapshot: fall back to the earlier text-only question handling.
+ */
+const missingSchema = (error: { code?: string } | null) =>
+  !!error && ["PGRST202", "PGRST204", "42703", "42883"].includes(error.code ?? "");
+
+/** Text-only merge: append app questions not already in the text, once each. */
+function appendQuestionLines(existing: string, questions: string[]): string {
+  let text = existing ?? "";
+  for (const q of questions) {
+    if (text.includes(q)) continue;
+    const line = `• ${q} ${APP_MARK}`;
+    text = text.trim() ? `${text.trimEnd()}\n${line}` : line;
+  }
+  return text;
+}
+
 function lastNameToken(name: string): string {
   const tokens = name.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return tokens.length ? tokens[tokens.length - 1] : "";
@@ -282,14 +301,31 @@ Deno.serve(async (req: Request) => {
       wanted.set(attendee.email, attendee);
     }
 
-    const mergeQuestions = async (attendee: Attendee) => {
+    let legacySchema = false;
+    const mergeQuestions = async (attendee: Attendee, target?: ExistingRow) => {
       if (!attendee.questions.length) return;
-      const { data, error } = await admin.rpc("merge_monday_registration_questions", {
-        _email: attendee.email, _meeting_date: meetingDate,
-        _questions: attendee.questions, _from_app: true,
-      });
-      if (error || data !== true) throw error ?? new Error("Question merge target missing");
+      if (!legacySchema) {
+        const { data, error } = await admin.rpc("merge_monday_registration_questions", {
+          _email: attendee.email, _meeting_date: meetingDate,
+          _questions: attendee.questions, _from_app: true,
+        });
+        if (!missingSchema(error)) {
+          if (error || data !== true) throw error ?? new Error("Question merge target missing");
+          return;
+        }
+        legacySchema = true;
+      }
+      if (!target) return;
+      const merged = appendQuestionLines(target.question ?? "", attendee.questions);
+      if (merged === (target.question ?? "")) return;
+      const { error } = await admin
+        .from("zoom_meeting_registrations")
+        .update({ question: merged })
+        .eq("id", target.id);
+      if (error) throw error;
     };
+    const insertRows = (rows: Record<string, unknown>[]) => admin.from("zoom_meeting_registrations")
+      .insert(legacySchema ? rows.map(({ question_items: _items, ...row }) => row) : rows);
     const toDelete = new Set<string>();
     const toInsert: Record<string, unknown>[] = [];
 
@@ -301,7 +337,7 @@ Deno.serve(async (req: Request) => {
       if (websiteRows.length > 0) {
         // Keep the person's own registration; fold app questions into the newest one.
         appRows.forEach((row) => toDelete.add(row.id));
-        await mergeQuestions(attendee);
+        await mergeQuestions(attendee, websiteRows[websiteRows.length - 1]);
         counts.merged += 1;
         continue;
       }
@@ -310,7 +346,7 @@ Deno.serve(async (req: Request) => {
       if (appRows.length > 0) {
         const [keep, ...duplicates] = appRows;
         duplicates.forEach((row) => toDelete.add(row.id));
-        await mergeQuestions(attendee);
+        await mergeQuestions(attendee, keep);
         if (keep.name !== attendee.name) {
           const { error } = await admin
             .from("zoom_meeting_registrations")
@@ -354,7 +390,11 @@ Deno.serve(async (req: Request) => {
     // Inserts. A check-constraint failure means the 'app' source SQL hasn't run yet.
     let schemaPending = false;
     const insertOne = async (row: Record<string, unknown>) => {
-      const { error } = await admin.from("zoom_meeting_registrations").insert(row);
+      let { error } = await insertRows([row]);
+      if (missingSchema(error) && !legacySchema) {
+        legacySchema = true;
+        ({ error } = await insertRows([row]));
+      }
       if (!error) {
         counts.inserted += 1;
       } else if (error.code === "23505") {
@@ -375,7 +415,11 @@ Deno.serve(async (req: Request) => {
         counts.schema_pending += batch.length;
         continue;
       }
-      const { error } = await admin.from("zoom_meeting_registrations").insert(batch);
+      let { error } = await insertRows(batch);
+      if (missingSchema(error) && !legacySchema) {
+        legacySchema = true;
+        ({ error } = await insertRows(batch));
+      }
       if (!error) {
         counts.inserted += batch.length;
       } else if (error.code === "23514") {

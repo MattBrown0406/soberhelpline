@@ -69,6 +69,7 @@ function harness() {
         if (row && !(row.question ?? '').split('\n').includes(args._question)) row.question = [row.question, args._question].filter(Boolean).join('\n');
         return { data: Boolean(row), error: null };
       }
+      if (name === 'merge_monday_registration_questions' && state.legacySchema) return { data: null, error: { code: 'PGRST202', message: 'Could not find the function' } };
       if (name === 'merge_monday_registration_questions') {
         const row = state.rows.find(r => r.email.trim().toLowerCase() === args._email && r.meeting_date === args._meeting_date);
         if (row) for (const q of args._questions) {
@@ -119,9 +120,11 @@ function harness() {
             assert.equal(table, 'zoom_meeting_registrations');
             if (op === 'insert') {
               if (state.failInsert) return { data: null, error: state.failInsert };
-              if (state.rows.some(r => r.email.trim().toLowerCase() === payload.email.trim().toLowerCase() && r.meeting_date === payload.meeting_date)) return { data: null, error: duplicate };
-              const row = { ...payload, id: String(state.rows.length + 1) }; state.rows.push(row);
-              return { data: single ? row : [row], error: null };
+              const items = Array.isArray(payload) ? payload : [payload];
+              if (state.legacySchema && items.some(item => 'question_items' in item)) return { data: null, error: { code: 'PGRST204', message: "Could not find the 'question_items' column" } };
+              if (items.some(item => state.rows.some(r => r.email.trim().toLowerCase() === item.email.trim().toLowerCase() && r.meeting_date === item.meeting_date))) return { data: null, error: duplicate };
+              const added = items.map(item => { const row = { ...item, id: String(state.rows.length + 1) }; state.rows.push(row); return row; });
+              return { data: single ? added[0] : added, error: null };
             }
             if ((history && state.historyError) || (!history && op === 'select' && state.detailsError)) return { data: null, error: { message: 'lookup failed' } };
             const rows = state.rows.filter(r => filters.every(f => f(r))).slice(offset, Math.min(end + 1, offset + state.pageCap));
@@ -250,6 +253,27 @@ await test('private app ensure contract: unauthorized, new, repeat, date scope, 
   state.cancelled = true; assert.equal((await post(handler, body, headers)).status, 409); state.cancelled = false;
   state.rpcError = { message: 'failed' }; assert.equal((await post(handler, body, headers)).status, 500);
   assert.equal(state.calls.length, 0); assert.equal(state.rows.length, 2);
+});
+await test('app batch still syncs when the October 12 schema is not applied', async () => {
+  const { state, load, post } = harness(); state.legacySchema = true;
+  state.rows.push({ ...payload, id: 'web', email: 'web@example.test', registration_source: 'website', question: 'Website question' });
+  state.rows.push({ ...payload, id: 'app', email: 'app@example.test', name: 'App Person', registration_source: 'app', question: '' });
+  const handler = load('supabase/functions/app-family-squares-sync/index.ts').handler;
+  const body = { meeting_date: today, attendees: [
+    { email: 'new@example.test', name: 'New Person', rsvp: 'going', questions: ['First question'] },
+    { email: 'web@example.test', name: 'Test Person', rsvp: 'going', questions: ['From app'] },
+    { email: 'app@example.test', name: 'App Person', rsvp: 'going', questions: ['App question'] },
+  ] };
+  for (let i = 0; i < 2; i++) {
+    const result = await post(handler, body, { 'x-membership-sync-secret': 'test-sync' });
+    assert.equal(result.status, 200); assert.equal(result.body.ok, true);
+  }
+  const fresh = state.rows.filter(r => r.email === 'new@example.test');
+  assert.equal(fresh.length, 1); assert.equal(fresh[0].registration_source, 'app');
+  assert.equal('question_items' in fresh[0], false); assert.equal(fresh[0].question, '• First question (from the app)');
+  assert.equal(state.rows.find(r => r.id === 'web').question, 'Website question\n• From app (from the app)');
+  assert.equal(state.rows.find(r => r.id === 'app').question, '• App question (from the app)');
+  assert.equal(state.calls.length, 0);
 });
 for (const endpoint of ['public-register-monday-zoom', 'register-zoom-meeting', 'auto-register-zoom']) {
   await test(`${endpoint} promotes transient app row without overwriting details or effects`, async () => {
