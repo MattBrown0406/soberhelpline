@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { ZoomAutoRegistrationManagement } from "@/components/admin/ZoomAutoRegistrationManagement";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -337,6 +338,10 @@ export function ZoomLinkSettings() {
           </p>
         )}
       </div>
+
+      <Separator />
+
+      <ZoomAutoRegistrationManagement registrations={allRegistrations} loading={loadingRegistrations} loadError={registrationsError} onRefresh={fetchAllRegistrations} />
 
       <Separator />
 
