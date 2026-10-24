@@ -1,6 +1,6 @@
 # Current tasks
 
-- [ ] Add and verify confirmed removal of followed-up abandoned bookings from the admin list without deleting history or sending emails.
+- [x] Add confirmed removal of followed-up abandoned bookings without deleting history or sending emails; helper tests and authenticated synthetic cancel/save/refresh flow pass, with no real leads changed.
 
 - [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
 - [x] Audit manual registration notifications: required notification controls/functions are absent live; recent logs cannot establish the deployed sender's exact failure.
