@@ -2,7 +2,8 @@
 
 - [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
 - [x] Audit manual registration notifications: required notification controls/functions are absent live; recent logs cannot establish the deployed sender's exact failure.
-- [ ] Activate notifications to matt@soberhelpline.com for new manual registrations; awaiting explicit acceptance of possible legacy-worker overlap, without test emails or historical replays.
+- [x] Activate new-registration notifications after Matt's explicit changeover-risk approval; enabled at 10:14 AM Pacific October 24 and verified through deployed no-send probe.
+- [ ] Confirm owner delivery after the next genuine eligible manual registration; blocked by no new real registration, with test emails and replays prohibited. Deployed caller flow and inbox delivery remain unverified.
 
 - [x] Add the uploaded grandparents self-care guide, photo, and verified blog links.
 - [x] Add the uploaded sibling self-care guide and photo to the blog.
