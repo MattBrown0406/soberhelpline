@@ -317,7 +317,7 @@ It's also wise to agree on a simple plan ahead of time. Talking openly, while th
 
 Caring for yourself is a key part of supporting a loved one in recovery from a distance. Worry can feel louder when you can't see someone with your own eyes, and that stress can quietly wear you down.
 
-Consider joining a family support group such as [Al-Anon](https://al-anon.org/), [Nar-Anon](https://www.nar-anon.org/), or [SMART Recovery Family & Friends](https://smartrecovery.org/family). Many meet online, which makes them easy to fit into a busy life. Talking with a therapist or [family recovery coach](/family-coaching) can also help you manage anxiety, set healthy expectations, and stay grounded when news from far away is hard to interpret.
+Consider joining a [family support group](/blog/al-anon-family-support-groups-addiction) such as [Al-Anon](https://al-anon.org/), [Nar-Anon](https://www.nar-anon.org/), or [SMART Recovery Family & Friends](https://smartrecovery.org/family). Many meet online, which makes them easy to fit into a busy life. Talking with a therapist or [family recovery coach](/family-coaching) can also help you manage anxiety, set healthy expectations, and stay grounded when news from far away is hard to interpret.
 
 Remember that your loved one's recovery is ultimately theirs. You can love, encourage, and show up, but you don't have to carry the weight of their sobriety on your shoulders.
 
