@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Add the uploaded October 26 distance-support family guide with a photo and verified links; article tests and desktop/mobile browser checks pass, including blog-card navigation.
+
 - [x] Add confirmed removal of followed-up abandoned bookings without deleting history or sending emails; helper tests and authenticated synthetic cancel/save/refresh flow pass, with no real leads changed.
 
 - [x] Add and verify searchable auto-registration removal in the Zoom Meeting admin tab without deleting registrations or changing email delivery.
