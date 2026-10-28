@@ -1,3 +1,4 @@
+import moneyEarlyRecoveryImg from "@/assets/blog-money-in-early-recovery.jpg";
 import distanceRecoverySupportImg from "@/assets/blog-supporting-recovery-from-distance.jpg";
 import spouseSelfCareImg from "@/assets/blog-coping-with-addicted-spouse.jpg";
 import grandparentsSelfCareImg from "@/assets/blog-grandparents-raising-grandchildren-addiction.jpg";
@@ -222,6 +223,126 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 197,
+    slug: "money-in-early-recovery-financial-independence",
+    seoTitle: "Money in Early Recovery: Rebuilding Financial Independence",
+    metaDescription: "How should families handle money in early recovery? Learn how to support a loved one after rehab, set fair limits, and rebuild financial independence in steps.",
+    title: "Money in Early Recovery: How Families Can Help a Loved One Rebuild Financial Independence",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-28",
+    image: moneyEarlyRecoveryImg,
+    keywords: ["money in early recovery", "financial independence after rehab", "family recovery budget", "money and relapse"],
+    tags: ["family guide", "recovery", "money", "boundaries"],
+    excerpt: "You don't have to choose between controlling every dollar and handing over the keys on day one. Learn how a shared, step-by-step plan helps your loved one rebuild financial independence.",
+    faqItems: [
+      { question: "Should I give my loved one cash after rehab?", answer: "In early recovery, it is usually wise to limit cash and pay essential bills directly. Many people find carrying large amounts of cash triggering in the first months. A small, agreed-upon amount of spending money is often a healthy middle ground." },
+      { question: "How long should families help manage money in recovery?", answer: "There is no fixed timeline, but many families use a gradual plan over roughly three to six months. The key is tying each step toward independence to recovery engagement, such as attending aftercare and staying honest, rather than to time alone." },
+      { question: "Is it controlling to monitor a loved one's finances in recovery?", answer: "It can be if the plan is imposed without input. When the person in recovery helps create the plan, agrees to it, and knows it is temporary, financial structure is usually experienced as support rather than control." },
+      { question: "Should parents pay off an adult child's debts from addiction?", answer: "Parents are generally not obligated to pay debts from active addiction, and taking responsibility for repayment is often an important part of recovery. If you do help, consider paying a specific creditor directly and agreeing on terms in writing." },
+      { question: "Can money trigger a relapse?", answer: "Money can be a trigger for some people, especially sudden access to cash such as a paycheck, tax refund, or settlement. Planning ahead for these moments, such as directing funds to bills or savings first, can reduce the risk." },
+    ],
+    content: `Your loved one is home from treatment, going to meetings, and starting to look like themselves again. Then a practical question lands on the kitchen table: who handles the money now? For many families, money in early recovery is one of the most confusing parts of the transition. You want to show trust, but you also remember the missing cash, the maxed-out cards, and the stories that never quite added up.
+
+Here is the good news. You do not have to choose between controlling every dollar and handing over the keys on day one. With a clear, shared plan, money can become one of the ways your loved one rebuilds confidence and responsibility. This guide walks you through how to do that with care.
+
+## Why Is Money Such a Sensitive Issue in Early Recovery?
+
+Money is sensitive in early recovery because it was often tied directly to the addiction, both as the means of buying substances and as a source of family conflict. Access to cash can act as a trigger, and financial stress can raise relapse risk. At the same time, being trusted with money again is a powerful sign of progress.
+
+Many people in recovery feel anxiety, or even cravings, when they suddenly have cash in hand, especially on payday. That reaction is common. The brain is still relearning old patterns.
+
+There is often an emotional layer, too. Your loved one may feel deep shame about debts, borrowed money, or things they took. Family members may carry resentment or fear. Naming those feelings openly makes planning easier.
+
+## Should Families Manage a Loved One's Money in Early Recovery?
+
+In many cases, a temporary, agreed-upon structure around money in early recovery is helpful, as long as it is built with your loved one rather than imposed on them. Think of it as scaffolding: support that holds things steady while the foundation sets, then comes down. The goal is to return full independence.
+
+The most important word here is collaborative. When your loved one helps design the plan, they are far more likely to follow it and to see it as protection for their recovery rather than punishment.
+
+### Supportive Structures That Respect Independence
+
+- **A limited cash approach:** Your loved one carries only a small amount of cash and uses a debit card for most purchases, which creates a natural record and a pause before spending.
+
+- **Bills paid directly:** Rent, phone, insurance, and treatment costs are paid directly to the provider rather than handed over as cash.
+
+- **A shared, simple budget:** Sit down together and list income, essential bills, and a modest amount of personal spending money. Leave room for coffee with a sponsor or a movie with sober friends.
+
+- **Bank alerts by choice:** Some people in recovery choose to share account alerts with a trusted family member for a set period. This should be voluntary and time-limited.
+
+## How Can Families Gradually Return Financial Independence?
+
+The best way to return financial independence is in clear, planned steps tied to recovery engagement rather than to time alone. When everyone knows what the next step is and what it depends on, money stops being a source of suspicion and becomes a shared goal.
+
+Here is one example that fits naturally with the [first 90 days after rehab](/blog/first-90-days-after-rehab-family-guide). Adjust it to fit your family and your loved one's treatment team's advice.
+
+1. **First 30 days:** Essential bills are paid directly, personal spending money is modest, and your loved one focuses on treatment, meetings, and routine.
+
+2. **Months two and three:** Your loved one manages their own paycheck with a shared budget and takes over paying one or two bills on their own.
+
+3. **Months four through six:** They handle most of their finances independently, with a monthly money check-in that feels more like a conversation than an audit.
+
+4. **Beyond six months:** Full financial independence, with any check-ins happening only if your loved one wants them.
+
+Tie each step to things that reflect real recovery: attending [aftercare](/blog/aftercare-planning-addiction-recovery-family-guide), staying connected to support, showing up for work, and being honest. If there is a setback, the plan can slow down or step back without becoming a crisis.
+
+## How Should Families Handle Old Debts and New Money Requests?
+
+Families are generally not responsible for paying off debts created during active addiction, and doing so automatically can take away an important part of your loved one's recovery. Facing old debts, making a repayment plan, and making amends where possible are often meaningful steps toward self-respect.
+
+That does not mean you can never help. If you choose to support something, consider paying the bill or provider directly, such as a sober living house, a car repair needed to get to work, or a counseling copay. This keeps help focused on recovery needs.
+
+When new requests come up (see our guide on what to do when a [loved one with addiction asks for money](/blog/loved-one-with-addiction-asks-for-money)), it can help to slow down and ask yourself a few questions:
+
+- Does this directly support recovery, work, or basic needs?
+
+- Is this a gift or a loan, and have we both agreed on what that means in writing?
+
+- Can I pay the provider directly instead of giving cash?
+
+- Would I feel resentful later if this money is not repaid?
+
+## What Money-Related Warning Signs Should Families Watch For?
+
+Changes in money habits can sometimes be an early sign that someone is struggling, but they are not proof of relapse on their own. Notice patterns, stay calm, and lead with curiosity rather than accusation.
+
+Signs worth paying attention to include frequent cash withdrawals, missing items, unexplained new debts, vague or changing explanations about spending, or a sudden reluctance to talk about money that was not there before.
+
+If you notice something, try a gentle, direct conversation: "I noticed some changes with money lately, and I care about you. Can we talk about how things are going?" This keeps the door open. If your loved one has a relapse prevention plan, revisit it together, and reach out to their care team or a [family coach](/family-coaching) for support.
+
+## Building Trust One Dollar at a Time
+
+[Rebuilding trust after addiction](/blog/rebuilding-trust-after-addiction-family-guide) around money in early recovery does not happen in a single conversation. It happens through many small, ordinary moments: a bill paid on time, an honest answer about a purchase, a first paycheck that goes toward rent instead of trouble. Each of those moments counts.
+
+Be patient with your loved one and with yourself. With a clear plan, open communication, and steady support, money can move from a source of fear to a sign of how far your family has come.
+
+## Frequently Asked Questions About Money in Early Recovery
+
+### Should I give my loved one cash after rehab?
+
+In early recovery, it is usually wise to limit cash and pay essential bills directly. Many people find carrying large amounts of cash triggering in the first months. A small, agreed-upon amount of spending money is often a healthy middle ground.
+
+### How long should families help manage money in recovery?
+
+There is no fixed timeline, but many families use a gradual plan over roughly three to six months. The key is tying each step toward independence to recovery engagement, such as attending aftercare and staying honest, rather than to time alone.
+
+### Is it controlling to monitor a loved one's finances in recovery?
+
+It can be if the plan is imposed without input. When the person in recovery helps create the plan, agrees to it, and knows it is temporary, financial structure is usually experienced as support rather than control.
+
+### Should parents pay off an adult child's debts from addiction?
+
+Parents are generally not obligated to pay debts from active addiction, and taking responsibility for repayment is often an important part of recovery. If you do help, consider paying a specific creditor directly and agreeing on terms in writing.
+
+### Can money trigger a relapse?
+
+Money can be a trigger for some people, especially sudden access to cash such as a paycheck, tax refund, or settlement. Planning ahead for these moments, such as directing funds to bills or savings first, can reduce the risk.
+
+## Find Ongoing Support at SoberHelpline.com
+
+You do not have to figure out the transition home on your own. Explore [SoberHelpline.com](/) for ongoing family education, [one-on-one coaching](/family-coaching), and support designed to help you navigate every stage of recovery with confidence and hope.`,
+  },
   {
     id: 196,
     slug: "supporting-loved-one-in-recovery-from-a-distance",
