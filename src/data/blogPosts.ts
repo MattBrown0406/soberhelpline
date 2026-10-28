@@ -317,6 +317,28 @@ If you notice something, try a gentle, direct conversation: "I noticed some chan
 
 Be patient with your loved one and with yourself. With a clear plan, open communication, and steady support, money can move from a source of fear to a sign of how far your family has come.
 
+## Frequently Asked Questions About Money in Early Recovery
+
+### Should I give my loved one cash after rehab?
+
+In early recovery, it is usually wise to limit cash and pay essential bills directly. Many people find carrying large amounts of cash triggering in the first months. A small, agreed-upon amount of spending money is often a healthy middle ground.
+
+### How long should families help manage money in recovery?
+
+There is no fixed timeline, but many families use a gradual plan over roughly three to six months. The key is tying each step toward independence to recovery engagement, such as attending aftercare and staying honest, rather than to time alone.
+
+### Is it controlling to monitor a loved one's finances in recovery?
+
+It can be if the plan is imposed without input. When the person in recovery helps create the plan, agrees to it, and knows it is temporary, financial structure is usually experienced as support rather than control.
+
+### Should parents pay off an adult child's debts from addiction?
+
+Parents are generally not obligated to pay debts from active addiction, and taking responsibility for repayment is often an important part of recovery. If you do help, consider paying a specific creditor directly and agreeing on terms in writing.
+
+### Can money trigger a relapse?
+
+Money can be a trigger for some people, especially sudden access to cash such as a paycheck, tax refund, or settlement. Planning ahead for these moments, such as directing funds to bills or savings first, can reduce the risk.
+
 ## Find Ongoing Support at SoberHelpline.com
 
 You do not have to figure out the transition home on your own. Explore [SoberHelpline.com](/) for ongoing family education, [one-on-one coaching](/family-coaching), and support designed to help you navigate every stage of recovery with confidence and hope.`,
