@@ -1,3 +1,4 @@
+import pinkCloudRecoveryImg from "@/assets/blog-pink-cloud-in-recovery.jpg";
 import moneyEarlyRecoveryImg from "@/assets/blog-money-in-early-recovery.jpg";
 import distanceRecoverySupportImg from "@/assets/blog-supporting-recovery-from-distance.jpg";
 import spouseSelfCareImg from "@/assets/blog-coping-with-addicted-spouse.jpg";
