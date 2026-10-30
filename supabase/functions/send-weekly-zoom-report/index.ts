@@ -39,6 +39,47 @@ function addDays(dateStr: string, days: number): string {
 
 const norm = (v: string | null | undefined) => (v ?? "").toLowerCase().trim();
 
+// "Patty solberg", "PATTY SOLBERG " and "kristine (she/they)" compare as plain lower-case
+// words. Only names of two words or more count as a match: "Kim" alone is too weak.
+function fullName(v: string | null | undefined): string {
+  if (!v || v.includes("@")) return "";
+  const name = v
+    .toLowerCase()
+    .replace(/\(.*?\)/g, " ")
+    .replace(/[^\p{L}\s'-]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return name.includes(" ") ? name : "";
+}
+
+type Person = { name: string; email: string; ids: string[]; language: string };
+
+// One person per registrant: registrations that share an email or a full name are
+// the same person (people often register under two or three emails).
+function groupRegistrations(
+  rows: Array<{ id: string; name: string | null; email: string | null; language?: string | null }>,
+) {
+  const people: Person[] = [];
+  const byEmail = new Map<string, Person>();
+  const byName = new Map<string, Person>();
+  const byRegId = new Map<string, Person>();
+  for (const r of rows) {
+    const email = norm(r.email);
+    const name = fullName(r.name);
+    if (!email && !name) continue;
+    let person = (email && byEmail.get(email)) || (name && byName.get(name)) || undefined;
+    if (!person) {
+      person = { name: r.name ?? "", email, ids: [], language: r.language ?? "en" };
+      people.push(person);
+    }
+    person.ids.push(r.id);
+    if (email) byEmail.set(email, person);
+    if (name) byName.set(name, person);
+    byRegId.set(r.id, person);
+  }
+  return { people, byEmail, byName, byRegId };
+}
+
 function prettyDate(dateStr: string): string {
   return new Date(`${dateStr}T12:00:00Z`).toLocaleDateString("en-US", {
     timeZone: "UTC",
@@ -114,11 +155,11 @@ Deno.serve(async (req) => {
         .eq("meeting_date", meetingDate),
       supabase
         .from("zoom_attendance")
-        .select("participant_email,meeting_date")
+        .select("participant_email,participant_name,registration_id,meeting_date")
         .gte("meeting_date", fourWeeksAgo),
       supabase
         .from("zoom_meeting_registrations")
-        .select("name,email,meeting_date,language")
+        .select("id,name,email,meeting_date,language")
         .eq("auto_register", true)
         .gte("meeting_date", fourWeeksAgo),
     ]);
@@ -128,47 +169,55 @@ Deno.serve(async (req) => {
     if (recentAttRes.error) throw recentAttRes.error;
     if (autoRegRes.error) throw autoRegRes.error;
 
-    // Dedupe registrants by email (keep latest)
-    const registrants = new Map<string, { name: string; email: string; id: string; language: string }>();
-    for (const r of (regRes.data ?? []).sort((a, b) =>
-      (b.created_at ?? "").localeCompare(a.created_at ?? ""),
-    )) {
-      const key = norm(r.email);
-      if (!key || registrants.has(key)) continue;
-      registrants.set(key, { name: r.name ?? "", email: key, id: r.id, language: r.language ?? "en" });
-    }
+    // One person per registrant (latest registration first, so its name and email show)
+    const registrants = groupRegistrations(
+      (regRes.data ?? []).sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? "")),
+    );
 
     const languageCounts = new Map<string, number>();
-    for (const r of registrants.values()) {
+    for (const r of registrants.people) {
       const lang = r.language || "en";
       languageCounts.set(lang, (languageCounts.get(lang) || 0) + 1);
     }
 
-    // Dedupe attendance by email (sum duration)
-    const attendees = new Map<string, { name: string; email: string; minutes: number }>();
-    const attendedRegIds = new Set<string>();
+    // One entry per person who joined, minutes summed over rejoins. Zoom gives most
+    // guests no email, so a row is matched to a registrant by registration, then email,
+    // then full name; anyone left over joined without registering.
+    const attendedMinutes = new Map<Person, number>();
+    const walkIns = new Map<string, { name: string; email: string; minutes: number }>();
     for (const a of attRes.data ?? []) {
-      if (a.registration_id) attendedRegIds.add(a.registration_id);
-      const key = norm(a.participant_email);
+      const email = norm(a.participant_email);
+      const name = fullName(a.participant_name);
+      const minutes = a.duration_minutes ?? 0;
+      const person =
+        (a.registration_id && registrants.byRegId.get(a.registration_id)) ||
+        (email && registrants.byEmail.get(email)) ||
+        (name && registrants.byName.get(name)) ||
+        undefined;
+      if (person) {
+        attendedMinutes.set(person, (attendedMinutes.get(person) ?? 0) + minutes);
+        continue;
+      }
+      const key = email || name || norm(a.participant_name);
       if (!key) continue;
-      const prev = attendees.get(key);
-      attendees.set(key, {
-        name: a.participant_name ?? prev?.name ?? "",
-        email: key,
-        minutes: (prev?.minutes ?? 0) + (a.duration_minutes ?? 0),
+      const prev = walkIns.get(key);
+      walkIns.set(key, {
+        name: prev?.name || a.participant_name || "",
+        email: prev?.email || email,
+        minutes: (prev?.minutes ?? 0) + minutes,
       });
     }
 
     const registeredAndAttended: Array<{ name: string; email: string; note?: string }> = [];
     const registeredNoShow: Array<{ name: string; email: string; note?: string }> = [];
-    for (const r of registrants.values()) {
-      const att = attendees.get(r.email);
+    for (const r of registrants.people) {
+      const minutes = attendedMinutes.get(r);
       const langNote = r.language === "es" ? "[ES]" : undefined;
-      if (att || attendedRegIds.has(r.id)) {
+      if (minutes !== undefined) {
         registeredAndAttended.push({
           name: r.name,
           email: r.email,
-          note: [langNote, att?.minutes ? `(${att.minutes} min)` : undefined].filter(Boolean).join(" ") || undefined,
+          note: [langNote, minutes ? `(${minutes} min)` : undefined].filter(Boolean).join(" ") || undefined,
         });
       } else {
         registeredNoShow.push({
@@ -179,24 +228,35 @@ Deno.serve(async (req) => {
       }
     }
 
-    const unregisteredAttendees = [...attendees.values()]
-      .filter((a) => !registrants.has(a.email))
-      .map((a) => ({ name: a.name, email: a.email, note: a.minutes ? `(${a.minutes} min)` : undefined }));
+    const unregisteredAttendees = [...walkIns.values()].map((a) => ({
+      name: a.name,
+      email: a.email,
+      note: a.minutes ? `(${a.minutes} min)` : undefined,
+    }));
 
-    // Auto-registrants with no attendance in the last 4 weeks
-    const recentAttendanceEmails = new Set((recentAttRes.data ?? []).map((r) => norm(r.participant_email)));
-    const autoRegistrants = new Map<string, { name: string; email: string }>();
-    for (const r of autoRegRes.data ?? []) {
-      const key = norm(r.email);
-      if (!key || autoRegistrants.has(key)) continue;
-      autoRegistrants.set(key, { name: r.name ?? "", email: key });
+    // Auto-registrants with no attendance in the last 4 weeks, this meeting included.
+    // Attendance counts when it carries one of their registrations, emails or names.
+    const recentRegIds = new Set<string>();
+    const recentEmails = new Set<string>();
+    const recentNames = new Set<string>();
+    for (const a of recentAttRes.data ?? []) {
+      if (a.registration_id) recentRegIds.add(a.registration_id);
+      const email = norm(a.participant_email);
+      if (email) recentEmails.add(email);
+      const name = fullName(a.participant_name);
+      if (name) recentNames.add(name);
     }
-    const dormantAutoRegistrants = [...autoRegistrants.values()].filter(
-      (r) => !recentAttendanceEmails.has(r.email),
-    );
+    const autoRegistrants = groupRegistrations(autoRegRes.data ?? []);
+    const hasAttended = (p: Person) =>
+      p.ids.some((id) => recentRegIds.has(id)) ||
+      [...autoRegistrants.byEmail].some(([email, q]) => q === p && recentEmails.has(email)) ||
+      [...autoRegistrants.byName].some(([name, q]) => q === p && recentNames.has(name));
+    const dormantAutoRegistrants = autoRegistrants.people
+      .filter((p) => !hasAttended(p))
+      .map((p) => ({ name: p.name, email: p.email }));
 
-    const totalRegistrants = registrants.size;
-    const totalAttendees = attendees.size;
+    const totalRegistrants = registrants.people.length;
+    const totalAttendees = registeredAndAttended.length + unregisteredAttendees.length;
     const englishCount = languageCounts.get("en") || 0;
     const spanishCount = languageCounts.get("es") || 0;
 
