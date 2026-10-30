@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
 import { enqueueSpineEvent, extractUtm } from "../_shared/spine.ts";
-import { duplicateRegistrationResponse, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
+import { appendMondayQuestion, duplicateRegistrationResponse, registerMondayManual, registrationUserId, validMeetingDate } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -101,37 +101,29 @@ serve(async (req: Request) => {
 
     // Question-only submissions are not manual registrations or new seats.
     if (question_only) {
-      const { data: saved, error } = await adminSupabase.rpc("append_monday_registration_question", {
-        _email: email, _meeting_date: meeting_date, _question: question.trim(),
-      });
-      if (error || saved !== true) throw error ?? new Error("Question not saved");
+      const saved = await appendMondayQuestion(adminSupabase, email, meeting_date, question.trim());
+      if (!saved) throw new Error("Question not saved");
       return new Response(JSON.stringify({ ...duplicateRegistrationResponse(), status: "question_submitted", questionSubmitted: true }), {
         status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    const { data: result, error: insertError } = await adminSupabase.rpc("register_monday_manual", {
-      _channel: registrationSource === "kiosk" ? "kiosk" : "public",
-      _registration: {
-        user_id,
-        name,
-        email,
-        phone,
-        question,
-        request_follow_up,
-        consent_email_list,
-        meeting_date,
-        auto_register,
-        preferred_contact_date: request_follow_up ? preferred_contact_date : null,
-        preferred_contact_time: request_follow_up ? preferred_contact_time : null,
-        preferred_timezone: request_follow_up ? preferred_timezone : null,
-        language,
-        registration_source: registrationSource,
-      },
+    const result = await registerMondayManual(adminSupabase, registrationSource === "kiosk" ? "kiosk" : "public", {
+      user_id,
+      name,
+      email,
+      phone,
+      question,
+      request_follow_up,
+      consent_email_list,
+      meeting_date,
+      auto_register,
+      preferred_contact_date: request_follow_up ? preferred_contact_date : null,
+      preferred_contact_time: request_follow_up ? preferred_contact_time : null,
+      preferred_timezone: request_follow_up ? preferred_timezone : null,
+      language,
+      registration_source: registrationSource,
     });
-    if (insertError || !result || typeof result.already_registered !== "boolean") {
-      throw insertError ?? new Error("Registration not secured");
-    }
-    if (result.already_registered) {
+    if (result.already_registered || !result.registration) {
       return new Response(JSON.stringify(duplicateRegistrationResponse()), {
         status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

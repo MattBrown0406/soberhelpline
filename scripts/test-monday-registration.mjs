@@ -19,6 +19,7 @@ function harness() {
     auth: { getUser: async () => ({ data: { user: state.authUser }, error: null }) },
     rpc: async (name, args) => {
       if (state.rpcError) return { data: null, error: state.rpcError };
+      if (state.legacySchema && ['register_monday_manual', 'append_monday_registration_question'].includes(name)) return { data: null, error: { code: 'PGRST202', message: 'Could not find the function' } };
       if (name === 'monday_notification_status') {
         if (state.rolloutError) return { data: null, error: { message: 'unavailable' } };
         return { data: { revision: state.wrongRevision ? 'wrong' : args._revision, enabled: !state.disabled,
@@ -211,6 +212,24 @@ await test('member questions append only for verified identity, without extra se
   assert.equal((await post(handler, question, headers)).body.questionSubmitted, true);
   await post(handler, question, headers);
   assert.equal(state.rows[0].question, question.question); assert.equal(state.rows.length, 1); assert.equal(state.calls.length, 1);
+});
+await test('live schema without the Oct 12/22 registration RPCs still saves, dedupes and notifies', async () => {
+  const { state, load, post } = harness(); state.legacySchema = true;
+  const { handler } = load('supabase/functions/public-register-monday-zoom/index.ts');
+  state.rows.push({ id: 'other', name: 'Other', email: 'person_x@example.test', meeting_date: today });
+  const first = await post(handler, { ...payload, email: 'person@example.test' });
+  assert.equal(first.status, 200); assert.equal(first.body.alreadyRegistered, false);
+  assert.equal(state.rows.length, 2); assert.equal(state.rows[1].registration_source, 'website');
+  assert.equal(state.calls.length, 1); assert.deepEqual(state.calls[0].body, { registration_id: state.rows[1].id });
+  const repeat = await post(handler, { ...payload, email: ' PERSON@example.test ' });
+  assert.equal(repeat.body.alreadyRegistered, true); assert.equal(state.rows.length, 2); assert.equal(state.calls.length, 1);
+  const lookalike = await post(handler, { ...payload, email: 'person-x@example.test' });
+  assert.equal(lookalike.body.alreadyRegistered, false); assert.equal(state.rows.length, 3);
+  state.authUser = { id: 'verified-user', email: 'person@example.test' };
+  const question = { ...payload, email: 'person@example.test', question_only: true, question: 'Please discuss boundaries' };
+  assert.equal((await post(handler, question, { Authorization: 'Bearer t' })).body.questionSubmitted, true);
+  await post(handler, question, { Authorization: 'Bearer t' });
+  assert.equal(state.rows[1].question, 'Please discuss boundaries'); assert.equal(state.calls.length, 2);
 });
 await test('legacy registration endpoint no longer overwrites or resends', async () => {
   const { state, load, post } = harness(); const { handler } = load('supabase/functions/register-zoom-meeting/index.ts');

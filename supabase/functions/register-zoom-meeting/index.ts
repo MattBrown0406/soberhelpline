@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
-import { duplicateRegistrationResponse, registrationUserId } from "../_shared/mondayRegistration.ts";
+import { duplicateRegistrationResponse, registrationUserId, registerMondayManual } from "../_shared/mondayRegistration.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -121,13 +121,10 @@ serve(async (req: Request) => {
       registration_source: "website",
     };
 
-    const { data: result, error: saveError } = await adminSupabase.rpc("register_monday_manual", {
-      _registration: payload, _channel: "legacy",
-    });
-    if (saveError || !result || typeof result.already_registered !== "boolean") {
+    const result = await registerMondayManual(adminSupabase, "legacy", payload).catch(() => {
       throw new Error("Registration not secured");
-    }
-    if (result.already_registered) {
+    });
+    if (result.already_registered || !result.registration) {
       return new Response(JSON.stringify(duplicateRegistrationResponse()), {
         status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

@@ -48,3 +48,65 @@ export async function ensureDurableRegistration(
   });
   if (error || typeof data !== "boolean") throw error ?? new Error("Registration not secured");
 }
+
+/** PostgREST/Postgres codes for a function or column the live database lacks. */
+export const missingSchema = (error: { code?: string } | null | undefined) =>
+  !!error && ["PGRST202", "PGRST204", "42703", "42883"].includes(error.code ?? "");
+
+const escapeLike = (value: string) => value.replace(/[\\%_]/g, (c) => `\\${c}`);
+
+type SeatRow = { id: string; name: string; email: string };
+type Client = {
+  rpc: (name: string, args: Record<string, unknown>) => PromiseLike<{ data: any; error: any }>;
+  from: (table: string) => any;
+};
+
+/**
+ * The live database has never had the Oct 12/22 registration migrations applied,
+ * so register_monday_manual does not exist there and every website/kiosk signup
+ * failed. Use the RPC when present; otherwise save the seat on the existing table,
+ * treating a same-email row for that Monday as already registered.
+ */
+export async function registerMondayManual(
+  client: Client,
+  channel: "public" | "legacy" | "kiosk",
+  registration: Record<string, unknown> & { email: string; meeting_date: string },
+): Promise<{ already_registered: boolean; registration: SeatRow | null }> {
+  const { data, error } = await client.rpc("register_monday_manual", { _channel: channel, _registration: registration });
+  if (!missingSchema(error)) {
+    if (error || !data || typeof data.already_registered !== "boolean") throw error ?? new Error("Registration not secured");
+    return data;
+  }
+  const { data: existing, error: lookupError } = await client.from("zoom_meeting_registrations")
+    .select("id, name, email").ilike("email", escapeLike(registration.email))
+    .eq("meeting_date", registration.meeting_date).limit(1);
+  if (lookupError) throw lookupError;
+  if (existing?.length) return { already_registered: true, registration: existing[0] };
+  const { data: inserted, error: insertError } = await client.from("zoom_meeting_registrations")
+    .insert(registration).select("id, name, email").single();
+  if (isRegistrationDuplicate(insertError)) return { already_registered: true, registration: null };
+  if (insertError || !inserted) throw insertError ?? new Error("Registration not secured");
+  return { already_registered: false, registration: inserted };
+}
+
+/** Same fallback for member questions when append_monday_registration_question is absent. */
+export async function appendMondayQuestion(client: Client, email: string, meetingDate: string, question: string): Promise<boolean> {
+  const { data, error } = await client.rpc("append_monday_registration_question", {
+    _email: email, _meeting_date: meetingDate, _question: question,
+  });
+  if (!missingSchema(error)) {
+    if (error) throw error;
+    return data === true;
+  }
+  const { data: rows, error: lookupError } = await client.from("zoom_meeting_registrations")
+    .select("id, question").ilike("email", escapeLike(email)).eq("meeting_date", meetingDate).limit(1);
+  if (lookupError) throw lookupError;
+  const row = rows?.[0];
+  if (!row) return false;
+  const current: string = row.question ?? "";
+  if (current.split("\n").includes(question)) return true;
+  const { error: updateError } = await client.from("zoom_meeting_registrations")
+    .update({ question: current.trim() ? `${current.trimEnd()}\n${question}` : question }).eq("id", row.id);
+  if (updateError) throw updateError;
+  return true;
+}
