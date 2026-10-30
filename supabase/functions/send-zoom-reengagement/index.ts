@@ -3,6 +3,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
+import { findDormantEmails, isFirstMondayOfMonth, isLikelyMistypedEmail } from "../_shared/familySquaresActivity.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -119,8 +120,14 @@ serve(async (req: Request) => {
       const key = r.email.toLowerCase();
       if (!thisWeekEmails.has(key) && !memberEmails.has(key) && !seen.has(key)) {
         seen.add(key);
-        candidates.push(r);
+        if (!isLikelyMistypedEmail(key)) candidates.push(r);
       }
+    }
+    // People with no attendance in the last DORMANT_WEEKS meetings get this
+    // invite on the first Monday of the month only.
+    if (!isFirstMondayOfMonth(upcomingDate)) {
+      const dormant = await findDormantEmails(adminSupabase, candidates, upcomingDate, "send-zoom-reengagement");
+      candidates.splice(0, candidates.length, ...candidates.filter((r) => !dormant.has(normalizeEmail(r.email))));
     }
     // People the Sober Helpline app already reminds (or who told the app they
     // can't come) don't also get this email. Fails open if the app can't answer.

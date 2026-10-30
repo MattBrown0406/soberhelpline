@@ -3,6 +3,7 @@ import { notifyMondayRegistration } from "../_shared/mondayNotification.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { ensureDurableRegistration, isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { activeMemberEmails, findDormantEmails, isLikelyMistypedEmail, normalizeEmail } from "../_shared/familySquaresActivity.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -73,11 +74,21 @@ serve(async (req) => {
       return true;
     });
 
+    // Skip addresses that can't deliver, and anyone (members aside) with no
+    // attendance in DORMANT_WEEKS; re-engagement invites them monthly instead.
+    const deliverable = uniqueRegistrants.filter((r) => !isLikelyMistypedEmail(r.email));
+    const members = await activeMemberEmails(supabase);
+    const dormant = members === null
+      ? new Set<string>()
+      : await findDormantEmails(supabase, deliverable.filter((r) => !members.has(normalizeEmail(r.email))), meetingDate, 'auto-register-zoom');
+    const active = deliverable.filter((r) => !dormant.has(normalizeEmail(r.email)));
+    console.log(`Skipping ${uniqueRegistrants.length - deliverable.length} mistyped and ${dormant.size} dormant auto-registrants.`);
+
     // Insert new registrations and send emails
     let registered = 0;
     let notificationFailures = 0;
 
-    for (const registrant of uniqueRegistrants) {
+    for (const registrant of active) {
       const email = registrant.email.toLowerCase().trim();
       // Insert new registration
       const { data: inserted, error: insertError } = await supabase
@@ -122,6 +133,8 @@ serve(async (req) => {
         notificationFailures,
         meetingDate,
         totalSubscribers: uniqueRegistrants.length,
+        skippedMistyped: uniqueRegistrants.length - deliverable.length,
+        skippedDormant: dormant.size,
         skipped: uniqueRegistrants.length - registered,
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
