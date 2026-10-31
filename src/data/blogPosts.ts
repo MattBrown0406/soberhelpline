@@ -226,52 +226,156 @@ export const imageMap: Record<string, string> = {
 
 export const blogPosts: any[] = [
   {
-    "id": 198,
-    "slug": "dating-in-early-recovery",
-    "seoTitle": "Dating in Early Recovery: What Families Should Know",
-    "metaDescription": "Is your loved one dating in early recovery? Learn the real risks, why the first year matters, and how families can share concerns without pushing them away.",
-    "title": "Dating in Early Recovery: What Families Should Know and How to Help",
-    "category": "Family Education",
-    "author": "Matt Brown",
-    "date": "2026-10-31",
-    "image": datingEarlyRecoveryImg,
-    "keywords": [
+    id: 198,
+    slug: "dating-in-early-recovery",
+    seoTitle: "Dating in Early Recovery: What Families Should Know",
+    metaDescription: "Is your loved one dating in early recovery? Learn the real risks, why the first year matters, and how families can share concerns without pushing them away.",
+    title: "Dating in Early Recovery: What Families Should Know and How to Help",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-10-31",
+    image: datingEarlyRecoveryImg,
+    keywords: [
         "dating in early recovery",
         "relationships in recovery",
         "one-year rule recovery",
         "family support in recovery"
     ],
-    "tags": [
+    tags: [
         "family guide",
         "recovery",
         "relationships",
         "boundaries"
     ],
-    "excerpt": "A new relationship doesn't have to derail sobriety. Learn why early recovery is delicate, what warning signs to watch for, and how to share concerns without pushing your loved one away.",
-    "faqItems": [
+    excerpt: "A new relationship doesn't have to derail sobriety. Learn why early recovery is delicate, what warning signs to watch for, and how to share concerns without pushing your loved one away.",
+    faqItems: [
         {
-            "question": "How long should someone wait to date after rehab?",
-            "answer": "Many recovery communities suggest waiting about one year after getting sober before starting a new romantic relationship. This isn't a strict rule, but it gives a person time to build coping skills and a stable routine. The right timing depends on how solid their recovery feels and what their sponsor or counselor recommends."
+            question: "How long should someone wait to date after rehab?",
+            answer: "Many recovery communities suggest waiting about one year after getting sober before starting a new romantic relationship. This isn't a strict rule, but it gives a person time to build coping skills and a stable routine. The right timing depends on how solid their recovery feels and what their sponsor or counselor recommends."
         },
         {
-            "question": "Can a new relationship cause relapse?",
-            "answer": "A new relationship doesn't directly cause relapse, but it can raise the risk. Intense emotions, a partner who uses substances, pulling away from recovery supports, or a painful breakup can all act as triggers. Staying connected to treatment and support groups helps lower that risk."
+            question: "Can a new relationship cause relapse?",
+            answer: "A new relationship doesn't directly cause relapse, but it can raise the risk. Intense emotions, a partner who uses substances, pulling away from recovery supports, or a painful breakup can all act as triggers. Staying connected to treatment and support groups helps lower that risk."
         },
         {
-            "question": "Should I tell my loved one not to date in early recovery?",
-            "answer": "Telling an adult not to date usually backfires and can damage trust. It's more effective to share your concern once, calmly, and encourage them to talk it through with their sponsor or therapist. Respecting their choices keeps communication open."
+            question: "Should I tell my loved one not to date in early recovery?",
+            answer: "Telling an adult not to date usually backfires and can damage trust. It's more effective to share your concern once, calmly, and encourage them to talk it through with their sponsor or therapist. Respecting their choices keeps communication open."
         },
         {
-            "question": "What is thirteenth stepping?",
-            "answer": "Thirteenth stepping is an informal term for when someone with more time in recovery pursues a romantic or sexual relationship with a newcomer, often at meetings. Newcomers can be emotionally vulnerable, so this can be manipulative. If you suspect it's happening, gently encourage your loved one to talk with a trusted sponsor or counselor."
+            question: "What is thirteenth stepping?",
+            answer: "Thirteenth stepping is an informal term for when someone with more time in recovery pursues a romantic or sexual relationship with a newcomer, often at meetings. Newcomers can be emotionally vulnerable, so this can be manipulative. If you suspect it's happening, gently encourage your loved one to talk with a trusted sponsor or counselor."
         },
         {
-            "question": "Is it okay to date someone in recovery?",
-            "answer": "Yes. Many people in recovery have healthy, loving relationships. The key is that both partners respect the recovery process, communicate openly, and support sobriety rather than competing with it."
+            question: "Is it okay to date someone in recovery?",
+            answer: "Yes. Many people in recovery have healthy, loving relationships. The key is that both partners respect the recovery process, communicate openly, and support sobriety rather than competing with it."
         }
     ],
-    "content": "Your loved one is a few months sober. They're going to meetings, showing up for work, and starting to sound like themselves again. Then one day they mention someone new, and your stomach drops. If you're worried about dating in early recovery, you're not alone, and your instinct to pay attention is a healthy one.\n\nThe good news is that a new relationship doesn't have to derail sobriety. With honest information and a calm approach, families can help their loved one make thoughtful choices about love and connection. This guide explains why the early months are delicate, what warning signs to watch for, and how to talk about it in a way that strengthens your relationship instead of straining it.\n\n## Why Is Dating in Early Recovery Considered Risky?\n\nDating in early recovery is risky because a new romance creates intense emotional highs and lows at the exact moment a person is still learning to manage feelings without substances. Falling in love floods the brain with feel-good chemicals, and that rush can quietly replace the work of recovery.\n\nIn active addiction, drugs or alcohol became the main way to cope with stress, loneliness, and pain. Early sobriety is when a person builds new coping skills from scratch. A powerful new relationship can become a shortcut, a way to feel better fast without doing the slower, steadier work.\n\nRecovery in the first year also takes time: meetings, therapy, and new routines. A new partner can pull energy away from all of it. And if the relationship ends badly, a painful breakup is a well-known relapse trigger.\n\n## What Is the One-Year Rule for Dating in Recovery?\n\nThe \"one-year rule\" is a common suggestion in 12-step and other recovery communities to avoid starting a new romantic relationship during the first year of sobriety. It isn't an official rule or a medical requirement, but it reflects a lot of hard-earned experience.\n\nThe idea is that the first year is for getting to know yourself sober. Many people discover they aren't sure what they want in a partner until they've had time to heal, repair other relationships, and build a stable routine. Sponsors, counselors, and recovery coaches often encourage newcomers to focus on friendships and support networks first.\n\nFor families, it helps to see the one-year guideline as a helpful benchmark rather than a hard line. What matters most is whether a relationship supports recovery or competes with it.\n\n## Warning Signs a New Relationship May Be Hurting Recovery\n\nA relationship may be hurting recovery when your loved one starts skipping the things that keep them well, such as meetings, therapy, or check-ins with a sponsor. Watch for patterns over a few weeks rather than reacting to a single moment, using a calm approach to [check in without hovering](/blog/supporting-loved-one-in-recovery-from-a-distance).\n\nHere are some signs worth noticing:\n\n- **Recovery activities fall away.** Meetings, outpatient sessions, or calls with a sponsor become less frequent.\n\n- **The partner is using.** Dating someone who drinks heavily or uses drugs makes staying sober much harder.\n\n- **Secrecy increases.** Your loved one becomes vague about where they are or who they're with.\n\n- **Emotional swings intensify.** The relationship feels like an all-consuming high followed by crashes.\n\n- **Old friends and supports disappear.** The new partner becomes their whole world, and other healthy connections fade.\n\n- **The relationship started in a vulnerable setting.** Some newcomers are pursued by more experienced members at meetings, sometimes called \"thirteenth stepping.\" This can be manipulative and is worth gently naming.\n\nNoticing these signs doesn't mean relapse is coming. It means it's a good time for an honest, caring conversation.\n\n## How to Talk to Your Loved One About Dating in Early Recovery\n\nThe best way to talk about dating in early recovery is to lead with curiosity and care rather than rules or warnings. Your loved one is an adult, and they'll be far more open if they feel respected rather than monitored.\n\nYou can't control who they date, but you can be a steady, trusted voice. These steps can help:\n\n1. **Pick a calm moment.** Avoid bringing it up right after an argument or when they're excited about a date.\n\n2. **Start with what you appreciate.** Say something like, \"I've been so proud watching you work your recovery these past few months.\"\n\n3. **Ask open questions.** Try \"How does this relationship fit with your recovery plan?\" instead of \"Don't you think it's too soon?\"\n\n4. **Share your concern once, briefly.** Use \"I\" statements: \"I care about you, and I worry about how a big relationship change could affect your sobriety.\"\n\n5. **Point them toward their own supports.** Encourage them to talk it over with their sponsor, therapist, or recovery coach, who can offer guidance without family tension.\n\n6. **Then step back.** Repeating the same warning turns concern into pressure, and pressure tends to push people away.\n\n## Supporting Healthy Relationships in Recovery\n\nFamilies can support healthy relationships in recovery by encouraging connection in all its forms, not just romance. Strong friendships, family time, and community give your loved one the stability that makes any future relationship healthier.\n\n### Encourage a Full Life\n\nLoneliness is one of the biggest drivers of rushing into romance. Invite your loved one to family dinners, sober outings, or shared hobbies. When their life feels full, a new relationship is less likely to become their only source of comfort.\n\n### If They Are Already Dating\n\nIf your loved one is already in a relationship, try to get to know the partner. Being welcoming keeps the door open. You can also ask whether the partner understands and supports their recovery, which is one of the most important questions of all.\n\n### Keep Your Own Boundaries\n\nYou're allowed to have limits too. You don't have to host a partner who drinks in your home or lend money to cover relationship expenses. Clear, kind boundaries protect your peace and model the kind of healthy relationships you hope your loved one will build.\n\n## Moving Forward With Hope\n\nLove and recovery can absolutely go together. Many people in long-term recovery build loving, lasting partnerships. Your role isn't to stand guard over your loved one's heart. It's to stay connected, speak honestly when it matters, and trust the tools they're building.\n\nBy offering patience instead of panic, you become one of the safest people in their life. That kind of steady support makes a real difference, in love and in recovery.\n\n## Frequently Asked Questions About Dating in Early Recovery\n\n### How long should someone wait to date after rehab?\n\nMany recovery communities suggest waiting about one year after getting sober before starting a new romantic relationship. This isn't a strict rule, but it gives a person time to build coping skills and a stable routine. The right timing depends on how solid their recovery feels and what their sponsor or counselor recommends.\n\n### Can a new relationship cause relapse?\n\nA new relationship doesn't directly cause relapse, but it can raise the risk. Intense emotions, a partner who uses substances, pulling away from recovery supports, or a painful breakup can all act as triggers. Staying connected to treatment and support groups helps lower that risk.\n\n### Should I tell my loved one not to date in early recovery?\n\nTelling an adult not to date usually backfires and can damage trust. It's more effective to share your concern once, calmly, and encourage them to talk it through with their sponsor or therapist. Respecting their choices keeps communication open.\n\n### What is thirteenth stepping?\n\nThirteenth stepping is an informal term for when someone with more time in recovery pursues a romantic or sexual relationship with a newcomer, often at meetings. Newcomers can be emotionally vulnerable, so this can be manipulative. If you suspect it's happening, gently encourage your loved one to talk with a trusted sponsor or counselor.\n\n### Is it okay to date someone in recovery?\n\nYes. Many people in recovery have healthy, loving relationships. The key is that both partners respect the recovery process, communicate openly, and support sobriety rather than competing with it.\n\n## Get Ongoing Support for Your Family\n\nNavigating your loved one's recovery brings up questions that don't always have easy answers. Visit [SoberHelpline.com](/) to explore family education, [one-on-one family coaching](/family-coaching), and support resources designed to help you feel more confident at every stage of recovery. You don't have to figure this out alone."
-},
+    content: `Your loved one is a few months sober. They're going to meetings, showing up for work, and starting to sound like themselves again. Then one day they mention someone new, and your stomach drops. If you're worried about dating in early recovery, you're not alone, and your instinct to pay attention is a healthy one.
+
+The good news is that a new relationship doesn't have to derail sobriety. With honest information and a calm approach, families can help their loved one make thoughtful choices about love and connection. This guide explains why the early months are delicate, what warning signs to watch for, and how to talk about it in a way that strengthens your relationship instead of straining it.
+
+## Why Is Dating in Early Recovery Considered Risky?
+
+Dating in early recovery is risky because a new romance creates intense emotional highs and lows at the exact moment a person is still learning to manage feelings without substances. Falling in love floods the brain with feel-good chemicals, and that rush can quietly replace the work of recovery.
+
+In active addiction, drugs or alcohol became the main way to cope with stress, loneliness, and pain. Early sobriety is when a person builds new coping skills from scratch. A powerful new relationship can become a shortcut, a way to feel better fast without doing the slower, steadier work.
+
+Recovery in the first year also takes time: meetings, therapy, and new routines. A new partner can pull energy away from all of it. And if the relationship ends badly, a painful breakup is a well-known relapse trigger.
+
+## What Is the One-Year Rule for Dating in Recovery?
+
+The "one-year rule" is a common suggestion in 12-step and other recovery communities to avoid starting a new romantic relationship during the first year of sobriety. It isn't an official rule or a medical requirement, but it reflects a lot of hard-earned experience.
+
+The idea is that the first year is for getting to know yourself sober. Many people discover they aren't sure what they want in a partner until they've had time to heal, repair other relationships, and build a stable routine. Sponsors, counselors, and recovery coaches often encourage newcomers to focus on friendships and support networks first.
+
+For families, it helps to see the one-year guideline as a helpful benchmark rather than a hard line. What matters most is whether a relationship supports recovery or competes with it.
+
+## Warning Signs a New Relationship May Be Hurting Recovery
+
+A relationship may be hurting recovery when your loved one starts skipping the things that keep them well, such as meetings, therapy, or check-ins with a sponsor. Watch for patterns over a few weeks rather than reacting to a single moment, using a calm approach to [check in without hovering](/blog/supporting-loved-one-in-recovery-from-a-distance).
+
+Here are some signs worth noticing:
+
+- **Recovery activities fall away.** Meetings, outpatient sessions, or calls with a sponsor become less frequent.
+
+- **The partner is using.** Dating someone who drinks heavily or uses drugs makes staying sober much harder.
+
+- **Secrecy increases.** Your loved one becomes vague about where they are or who they're with.
+
+- **Emotional swings intensify.** The relationship feels like an all-consuming high followed by crashes.
+
+- **Old friends and supports disappear.** The new partner becomes their whole world, and other healthy connections fade.
+
+- **The relationship started in a vulnerable setting.** Some newcomers are pursued by more experienced members at meetings, sometimes called "thirteenth stepping." This can be manipulative and is worth gently naming.
+
+Noticing these signs doesn't mean relapse is coming. It means it's a good time for an honest, caring conversation.
+
+## How to Talk to Your Loved One About Dating in Early Recovery
+
+The best way to talk about dating in early recovery is to lead with curiosity and care rather than rules or warnings. Your loved one is an adult, and they'll be far more open if they feel respected rather than monitored.
+
+You can't control who they date, but you can be a steady, trusted voice. These steps can help:
+
+1. **Pick a calm moment.** Avoid bringing it up right after an argument or when they're excited about a date.
+
+2. **Start with what you appreciate.** Say something like, "I've been so proud watching you work your recovery these past few months."
+
+3. **Ask open questions.** Try "How does this relationship fit with your recovery plan?" instead of "Don't you think it's too soon?"
+
+4. **Share your concern once, briefly.** Use "I" statements: "I care about you, and I worry about how a big relationship change could affect your sobriety."
+
+5. **Point them toward their own supports.** Encourage them to talk it over with their sponsor, therapist, or recovery coach, who can offer guidance without family tension.
+
+6. **Then step back.** Repeating the same warning turns concern into pressure, and pressure tends to push people away.
+
+## Supporting Healthy Relationships in Recovery
+
+Families can support healthy relationships in recovery by encouraging connection in all its forms, not just romance. Strong friendships, family time, and community give your loved one the stability that makes any future relationship healthier.
+
+### Encourage a Full Life
+
+Loneliness is one of the biggest drivers of rushing into romance. Invite your loved one to family dinners, sober outings, or shared hobbies. When their life feels full, a new relationship is less likely to become their only source of comfort.
+
+### If They Are Already Dating
+
+If your loved one is already in a relationship, try to get to know the partner. Being welcoming keeps the door open. You can also ask whether the partner understands and supports their recovery, which is one of the most important questions of all.
+
+### Keep Your Own Boundaries
+
+You're allowed to have limits too. You don't have to host a partner who drinks in your home or lend money to cover relationship expenses. Clear, kind boundaries protect your peace and model the kind of healthy relationships you hope your loved one will build.
+
+## Moving Forward With Hope
+
+Love and recovery can absolutely go together. Many people in long-term recovery build loving, lasting partnerships. Your role isn't to stand guard over your loved one's heart. It's to stay connected, speak honestly when it matters, and trust the tools they're building.
+
+By offering patience instead of panic, you become one of the safest people in their life. That kind of steady support makes a real difference, in love and in recovery.
+
+## Frequently Asked Questions About Dating in Early Recovery
+
+### How long should someone wait to date after rehab?
+
+Many recovery communities suggest waiting about one year after getting sober before starting a new romantic relationship. This isn't a strict rule, but it gives a person time to build coping skills and a stable routine. The right timing depends on how solid their recovery feels and what their sponsor or counselor recommends.
+
+### Can a new relationship cause relapse?
+
+A new relationship doesn't directly cause relapse, but it can raise the risk. Intense emotions, a partner who uses substances, pulling away from recovery supports, or a painful breakup can all act as triggers. Staying connected to treatment and support groups helps lower that risk.
+
+### Should I tell my loved one not to date in early recovery?
+
+Telling an adult not to date usually backfires and can damage trust. It's more effective to share your concern once, calmly, and encourage them to talk it through with their sponsor or therapist. Respecting their choices keeps communication open.
+
+### What is thirteenth stepping?
+
+Thirteenth stepping is an informal term for when someone with more time in recovery pursues a romantic or sexual relationship with a newcomer, often at meetings. Newcomers can be emotionally vulnerable, so this can be manipulative. If you suspect it's happening, gently encourage your loved one to talk with a trusted sponsor or counselor.
+
+### Is it okay to date someone in recovery?
+
+Yes. Many people in recovery have healthy, loving relationships. The key is that both partners respect the recovery process, communicate openly, and support sobriety rather than competing with it.
+
+## Get Ongoing Support for Your Family
+
+Navigating your loved one's recovery brings up questions that don't always have easy answers. Visit [SoberHelpline.com](/) to explore family education, [one-on-one family coaching](/family-coaching), and support resources designed to help you feel more confident at every stage of recovery. You don't have to figure this out alone.`,
+  },
   {
     id: 197,
     slug: "money-in-early-recovery-financial-independence",
