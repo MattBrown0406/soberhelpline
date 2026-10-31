@@ -13,6 +13,8 @@ const BLOG_INDEX_URL = `${SITE_URL}/blog-index.json`;
 const ZOOM_REGISTRATION_URL = `${SITE_URL}/monday-zoom-registration`;
 const SOBER_HELPLINE_APP_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
 const COACHING_URL = "https://www.freedominterventions.com/book-intervention-consultation#booking";
+// Families answer the Blueprint invite by email; replies already land in this inbox.
+const BLUEPRINT_REPLY_URL = "mailto:matt@soberhelpline.com?subject=Blueprint";
 
 interface BlogPost {
   slug: string;
@@ -114,6 +116,12 @@ function buildHtml(safeName: string, posts: BlogPost[]): string {
         <p style="margin:0 0 8px 0; font-size:18px; font-weight:bold; color:#166534;">Join "The Family Squares" Support Meeting</p>
         <p style="margin:0 0 16px 0; font-size:14px; color:#374151;">Free Monday night Zoom support for families. No cost, no pressure — just families who get it.</p>
         <a href="${ZOOM_REGISTRATION_URL}" style="display:inline-block; padding:14px 32px; background-color:#166534; color:#ffffff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">Register for Monday's Meeting</a>
+      </div>
+
+      <div style="background-color:#fffbeb; border:1px solid #fcd34d; border-radius:8px; padding:24px; margin:24px 0; text-align:center;">
+        <p style="margin:0 0 8px 0; font-size:18px; font-weight:bold; color:#1e3a8a;">The Family Recovery Blueprint</p>
+        <p style="margin:0 0 16px 0; font-size:14px; color:#374151; line-height:1.6;">Your loved one gets a treatment plan. You deserve one too. The Family Recovery Blueprint is a 3-day family program I built from 22 years of interventions. It teaches Boundaries With Integrity, how to rebuild trust in both directions, and how to measure your family's progress week by week for 13 weeks. If your loved one is in treatment, ask their program whether they offer it. Or reply to this email, tell me where they are, and I'll reach out to them.</p>
+        <a href="${BLUEPRINT_REPLY_URL}" style="display:inline-block; padding:14px 32px; background-color:#1e3a8a; color:#ffffff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">Reply "Blueprint"</a>
       </div>
 
       <div style="background-color:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:24px; margin:24px 0; text-align:center;">
