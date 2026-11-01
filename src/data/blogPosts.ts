@@ -290,7 +290,7 @@ As you compare options, look for:
 
 ## Questions to Ask a Young Adult Treatment Program
 
-When you call a young adult rehab program, ask who the program actually serves, how it handles mental health, how families are involved, and what support looks like after discharge. Clear, specific answers are a good sign; vague or pushy answers are not.
+When you call a young adult rehab program, ask who the program actually serves, how it handles mental health, how families are involved, and what support looks like after discharge. Clear, specific answers are a good sign; vague or pushy answers are not. Our guide to [questions to ask a treatment center](/blog/questions-to-ask-treatment-center) can help you prepare.
 
 1. What age range do you serve, and how many young adults are in the program right now?
 2. Is the young adult track truly separate, or are young adults mixed into the general population?
@@ -308,7 +308,7 @@ Once your child turns 18, federal privacy laws mean a treatment program generall
 
 Frame the release as a way to stay on the same team, not a way to monitor them. Releases can be limited, for example to attendance, general progress, and discharge planning.
 
-It also helps to remember that young adults tend to engage more when they feel ownership of their recovery. If cost is a concern, keep in mind that under the Affordable Care Act, young adults can generally stay on a parent's health plan until age **26**, so verify those benefits early.
+It also helps to remember that young adults tend to engage more when they feel ownership of their recovery. If cost is a concern, keep in mind that under the Affordable Care Act, young adults can generally stay on a parent's health plan until age **26**, so verify those benefits early. Learn more about [staying on a parent's health insurance for rehab](/blog/adult-child-rehab-on-parents-insurance).
 
 ## You Don't Have to Figure This Out Alone
 
