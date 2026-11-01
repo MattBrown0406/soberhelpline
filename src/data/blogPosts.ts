@@ -497,7 +497,7 @@ Money can be a trigger for some people, especially sudden access to cash such as
 You do not have to figure out the transition home on your own. Explore [SoberHelpline.com](/) for ongoing family education, [one-on-one coaching](/family-coaching), and support designed to help you navigate every stage of recovery with confidence and hope.`,
   },
   {
-    id: 197,
+    id: 199,
     slug: "pink-cloud-in-recovery",
     seoTitle: "The Pink Cloud in Recovery: A Family Guide",
     metaDescription: "What is the pink cloud in recovery? Learn the signs of this early-sobriety high, why it fades, and how families can help a loved one stay steady and supported.",
