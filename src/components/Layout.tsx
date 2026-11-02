@@ -132,9 +132,11 @@ const Layout = ({ children }: LayoutProps) => {
               <a
                 href="tel:+14582988008"
                 onClick={() => trackPhoneClick("layout_header")}
-                className="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-primary hover:text-primary/80 font-semibold text-sm shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-label="Call Sober Helpline"
               >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              <span className="sm:hidden">Call</span>
               <span className="hidden sm:inline">(458) 298-8008</span>
               </a>
               <WhatsAppLink source="layout_header" variant="icon" />
