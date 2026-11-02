@@ -2,7 +2,8 @@ import { MessageCircle } from "lucide-react";
 import { trackWhatsAppClick } from "@/lib/conversionTracking";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_NUMBER = "5038362136";
+// Matches the existing +1 503-836-2136 number displayed on the contact page.
+const WHATSAPP_NUMBER = "15038362136";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 export const getWhatsAppUrl = () => WHATSAPP_URL;
@@ -37,7 +38,7 @@ const WhatsAppLink = ({
         onClick={handleClick}
         className={cn(
           "inline-flex items-center justify-center rounded-full bg-[hsl(var(--whatsapp))] text-white shadow-sm transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1",
-          "h-9 w-9",
+          "h-11 w-11 min-h-[44px] min-w-[44px]",
           className
         )}
         aria-label="Chat on WhatsApp"
@@ -55,7 +56,7 @@ const WhatsAppLink = ({
         rel="noopener noreferrer"
         onClick={handleClick}
         className={cn(
-          "inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(var(--whatsapp))] hover:underline transition-colors",
+          "inline-flex min-h-[44px] min-w-[44px] items-center gap-1.5 text-sm font-semibold text-[hsl(var(--whatsapp))] hover:underline transition-colors",
           className
         )}
       >
@@ -73,7 +74,8 @@ const WhatsAppLink = ({
       onClick={handleClick}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-md bg-[hsl(var(--whatsapp))] text-white font-medium transition-transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-        showLabel ? "px-4 py-2 text-sm" : "h-10 w-10",
+        "min-h-[44px] min-w-[44px]",
+        showLabel ? "px-4 py-2 text-sm" : "h-11 w-11",
         className
       )}
     >

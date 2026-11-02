@@ -132,7 +132,7 @@ export const prerenderPages = [
     route: '/about',
     title: 'About Sober Helpline | Free Family Support',
     description: 'Sober Helpline is free family support, education, and a live Monday Family Squares meeting. Matt Brown, a certified interventionist, is the person behind it.',
-    noscriptHtml: '<main><h1>About Sober Helpline</h1><p>Free family support, education, and live Monday Family Squares. Sober Helpline is not a treatment center and does not sell placements.</p><p><a href="tel:+14582988008">Call (458) 298-8008</a> · <a href="https://wa.me/5038362136">WhatsApp +1 503-836-2136</a> · <a href="https://soberhelpline.com/family-squares">Family Squares Monday 7:00 PM Pacific</a></p></main>'
+    noscriptHtml: '<main><h1>About Sober Helpline</h1><p>Free family support, education, and live Monday Family Squares. Sober Helpline is not a treatment center and does not sell placements.</p><p><a href="tel:+14582988008">Call (458) 298-8008</a> · <a href="https://wa.me/15038362136">WhatsApp +1 503-836-2136</a> · <a href="https://soberhelpline.com/family-squares">Family Squares Monday 7:00 PM Pacific</a></p></main>'
   },
   {
     route: '/contact',

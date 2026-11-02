@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Calendar, Mail, PhoneCall, ShieldAlert } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
-import WhatsAppLink from "@/components/WhatsAppLink";
+import WhatsAppLink, { getWhatsAppUrl } from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
@@ -57,7 +57,7 @@ export default function Contact() {
                   </div>
                   <p className="text-sm text-muted-foreground">
                     WhatsApp works from outside the United States at{" "}
-                    <a href="https://wa.me/5038362136" className="font-semibold text-logo-blue hover:underline">https://wa.me/5038362136</a>.
+                    <a href={getWhatsAppUrl()} className="font-semibold text-logo-blue hover:underline">{getWhatsAppUrl()}</a>.
                   </p>
                 </CardContent>
               </Card>
@@ -73,7 +73,7 @@ export default function Contact() {
                     or use the{" "}
                     <Link to="/support" className="font-semibold text-logo-blue hover:underline">app support page</Link>.
                   </p>
-                  <Button asChild variant="outline">
+                  <Button asChild variant="outline" size="lg">
                     <a href="mailto:support@soberhelpline.com">
                       <Mail className="h-4 w-4" />
                       Email support

@@ -1,3 +1,4 @@
+import { getWhatsAppUrl } from "@/components/WhatsAppLink";
 import { Link } from "react-router-dom";
 import { ArrowRight, ShieldAlert } from "lucide-react";
 import { trackPhoneClick, trackWhatsAppClick } from "@/lib/conversionTracking";
@@ -27,7 +28,7 @@ export default function AfterHoursSafetyStrip({ source, showTonightLink = false 
               </a>{" "}
               or WhatsApp{" "}
               <a
-                href="https://wa.me/5038362136"
+                href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick(source)}

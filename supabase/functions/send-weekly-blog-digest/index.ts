@@ -297,7 +297,11 @@ serve(async (req: Request) => {
     let failed = 0;
     for (const [email, name] of recipients) {
       const ok = await sendEmail(email, subject, buildHtml(escapeHtml(name || "Friend"), recent));
-      ok ? sent++ : failed++;
+      if (ok) {
+        sent++;
+      } else {
+        failed++;
+      }
       await new Promise((r) => setTimeout(r, 60));
     }
 
