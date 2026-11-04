@@ -1,5 +1,6 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { firstWord, looseMatch } from "../_shared/attendeeNameMatch.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -52,7 +53,7 @@ function fullName(v: string | null | undefined): string {
   return name.includes(" ") ? name : "";
 }
 
-type Person = { name: string; email: string; ids: string[]; language: string };
+type Person = { name: string; email: string; ids: string[]; language: string; names: string[]; emails: string[] };
 
 // One person per registrant: registrations that share an email or a full name are
 // the same person (people often register under two or three emails).
@@ -69,15 +70,29 @@ function groupRegistrations(
     if (!email && !name) continue;
     let person = (email && byEmail.get(email)) || (name && byName.get(name)) || undefined;
     if (!person) {
-      person = { name: r.name ?? "", email, ids: [], language: r.language ?? "en" };
+      person = { name: r.name ?? "", email, ids: [], language: r.language ?? "en", names: [], emails: [] };
       people.push(person);
     }
     person.ids.push(r.id);
+    if (r.name && !person.names.includes(r.name)) person.names.push(r.name);
+    if (email && !person.emails.includes(email)) person.emails.push(email);
     if (email) byEmail.set(email, person);
     if (name) byName.set(name, person);
     byRegId.set(r.id, person);
   }
   return { people, byEmail, byName, byRegId };
+}
+
+/** How many different display names start with each first word. */
+function countFirstWords(names: Array<string | null | undefined>): Map<string, number> {
+  const seen = new Map<string, Set<string>>();
+  for (const n of names) {
+    const w = firstWord(n);
+    if (!w) continue;
+    if (!seen.has(w)) seen.set(w, new Set());
+    seen.get(w)!.add(norm(n));
+  }
+  return new Map([...seen].map(([w, set]) => [w, set.size]));
 }
 
 function prettyDate(dateStr: string): string {
@@ -183,17 +198,29 @@ Deno.serve(async (req) => {
     // One entry per person who joined, minutes summed over rejoins. Zoom gives most
     // guests no email, so a row is matched to a registrant by registration, then email,
     // then full name; anyone left over joined without registering.
+    // Rows still unmatched then get a loose name match ("Sara" = "Sara Vaday",
+    // "Kim Grady" = "Kim G") when exactly one registrant fits.
     const attendedMinutes = new Map<Person, number>();
     const walkIns = new Map<string, { name: string; email: string; minutes: number }>();
+    const leftover: typeof attRes.data = [];
     for (const a of attRes.data ?? []) {
       const email = norm(a.participant_email);
       const name = fullName(a.participant_name);
-      const minutes = a.duration_minutes ?? 0;
       const person =
         (a.registration_id && registrants.byRegId.get(a.registration_id)) ||
         (email && registrants.byEmail.get(email)) ||
         (name && registrants.byName.get(name)) ||
         undefined;
+      if (person) attendedMinutes.set(person, (attendedMinutes.get(person) ?? 0) + (a.duration_minutes ?? 0));
+      else leftover.push(a);
+    }
+    const leftoverFirstWords = countFirstWords(leftover.map((a) => a.participant_name));
+    for (const a of leftover) {
+      const email = norm(a.participant_email);
+      const name = fullName(a.participant_name);
+      const minutes = a.duration_minutes ?? 0;
+      const unmatched = registrants.people.filter((p) => !attendedMinutes.has(p));
+      const person = looseMatch(unmatched, a.participant_name, leftoverFirstWords.get(firstWord(a.participant_name)) === 1);
       if (person) {
         attendedMinutes.set(person, (attendedMinutes.get(person) ?? 0) + minutes);
         continue;
@@ -247,7 +274,14 @@ Deno.serve(async (req) => {
       if (name) recentNames.add(name);
     }
     const autoRegistrants = groupRegistrations(autoRegRes.data ?? []);
+    const recentFirstWords = countFirstWords((recentAttRes.data ?? []).map((a) => a.participant_name));
+    const looselyAttended = new Set<Person>();
+    for (const a of recentAttRes.data ?? []) {
+      const p = looseMatch(autoRegistrants.people, a.participant_name, recentFirstWords.get(firstWord(a.participant_name)) === 1);
+      if (p) looselyAttended.add(p);
+    }
     const hasAttended = (p: Person) =>
+      looselyAttended.has(p) ||
       p.ids.some((id) => recentRegIds.has(id)) ||
       [...autoRegistrants.byEmail].some(([email, q]) => q === p && recentEmails.has(email)) ||
       [...autoRegistrants.byName].some(([name, q]) => q === p && recentNames.has(name));
