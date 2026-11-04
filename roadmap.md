@@ -1,5 +1,6 @@
 # Current tasks
 
+- [x] Add the uploaded November 4 older-adults addiction treatment guide as article 202 with a photo and five FAQs; 225 article renders pass, blog-card navigation and suggested links verified, desktop/mobile checked without overflow, listings refreshed; not published.
 - [x] Add the uploaded November 1 young-adult rehab guide with a photo, five FAQs, verified links, and unique article number 200; 223 article renders pass, blog-card navigation and desktop/mobile article checks verified. Listing and sitemap refreshed; not published.
 - [x] Add the uploaded October 31 dating-in-early-recovery guide with a matching photo and all 5 FAQs; 222 article renders pass, desktop/mobile article appearance and linked-page responses verified. Blog listing and sitemap refreshed; blog-card click check timed out. Unavailable suggested sponsor article omitted.
 - [x] Add the uploaded October 26 distance-support family guide with a photo and verified links; article tests and desktop/mobile browser checks pass, including blog-card navigation.
