@@ -280,7 +280,7 @@ If your loved one has limited income, check Medicaid eligibility — many people
 
 The most common obstacles are prior authorization, formulary restrictions, and confusion over whether a drug is billed as a pharmacy or medical benefit. Most can be resolved with a phone call and some persistence.
 
-- **[Prior authorization](/blog/prior-authorization-addiction-treatment):** The insurer wants the doctor to justify the prescription before it will pay. Many states and insurers have reduced these requirements for buprenorphine, but some plans still use them, especially for brand-name or injectable versions.
+- [Prior authorization](/blog/prior-authorization-addiction-treatment): The insurer wants the doctor to justify the prescription before it will pay. Many states and insurers have reduced these requirements for buprenorphine, but some plans still use them, especially for brand-name or injectable versions.
 
 - **Formulary tiers:** The plan's drug list may prefer a generic over Suboxone. A generic often works just as well and costs far less.
 
