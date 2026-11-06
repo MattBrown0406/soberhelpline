@@ -16,6 +16,7 @@ import bannerLogo from "@/assets/logo.png";
 import MobileNav from "@/components/MobileNav";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import HomeHero from "@/components/HomeHero";
+import HolidayCoachingBanner from "@/components/HolidayCoachingBanner";
 import AfterHoursSafetyStrip from "@/components/AfterHoursSafetyStrip";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
@@ -266,6 +267,7 @@ const Index = () => {
         </header>
 
         <HomeHero />
+        <HolidayCoachingBanner />
         <section className="border-b bg-muted/30 px-4 py-6 text-center" aria-label="Private next-step guide">
           <p className="mb-3">Not ready to call? Get a practical next step without sharing contact details.</p>
           {/* Full-document navigation drops the normal site's analytics/replay listeners. */}
