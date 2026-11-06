@@ -1,5 +1,7 @@
 # Current tasks
 
+- [ ] Add the uploaded November 6 addiction-medication insurance guide as article 204 with a photo, five FAQs, verified available links, and refreshed listings; verify preview without publishing.
+
 - [x] Add the uploaded November 5 faith-based rehab guide as article 203 with a photo and its four FAQs; 226 article renders pass, card navigation and suggested links verified, desktop/mobile fit checked, listings refreshed; not published.
 - [x] Add the uploaded November 4 older-adults addiction treatment guide as article 202 with a photo and five FAQs; 225 article renders pass, blog-card navigation and suggested links verified, desktop/mobile checked without overflow, listings refreshed; not published.
 - [x] Add the uploaded November 1 young-adult rehab guide with a photo, five FAQs, verified links, and unique article number 200; 223 article renders pass, blog-card navigation and desktop/mobile article checks verified. Listing and sitemap refreshed; not published.
