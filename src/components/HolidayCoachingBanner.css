@@ -1,60 +1,84 @@
 .holiday-coaching {
-  background: #edf5f3;
-  border-bottom: 1px solid #c4d8d1;
-  color: #173e42;
-  padding: 32px 24px;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(110deg, #102f29, #19463b);
+  border-top: 2px solid #bca16a;
+  border-bottom: 1px solid #8d7b54;
+  color: #fff8e9;
+  padding: 52px 24px 40px;
 }
+.holiday-coaching__seasonal {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: 250px;
+  height: 89px;
+  max-width: calc(100% - 32px);
+  color: #9d895d;
+  pointer-events: none;
+  z-index: -1;
+}
+.holiday-coaching__pine { stroke: #729381; }
+.holiday-coaching__lights { fill: #fff0cc; filter: drop-shadow(0 0 3px #e9c77d); }
 .holiday-coaching__inner {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 .holiday-coaching__copy { min-width: 0; }
 .holiday-coaching__eyebrow {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 10px;
+  margin: 0 0 14px;
+  color: #e6cd97;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .1em;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 .holiday-coaching__eyebrow svg { width: 18px; height: 18px; flex-shrink: 0; }
 .holiday-coaching h2 {
   margin: 0;
-  font-size: clamp(24px, 2.3vw, 32px);
-  line-height: 1.2;
+  max-width: 650px;
+  color: #fff8e9;
+  font-size: clamp(28px, 2.7vw, 38px);
+  line-height: 1.16;
   font-weight: 700;
-  letter-spacing: -.025em;
+  letter-spacing: -.03em;
+  text-wrap: balance;
 }
-.holiday-coaching__description { margin: 12px 0 0; max-width: 680px; font-size: 16px; line-height: 1.65; }
+.holiday-coaching__description { margin: 16px 0 0; max-width: 660px; color: #e0e9df; font-size: 16px; line-height: 1.7; }
 .holiday-coaching__action { min-width: 0; align-self: center; }
 .holiday-coaching__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  min-height: 48px;
+  min-height: 54px;
   max-width: 100%;
-  padding: 14px 18px;
-  border-radius: 8px;
-  background: #174e50;
-  color: #fff;
+  padding: 16px 20px;
+  border: 1px solid #e6cd97;
+  border-radius: 9px;
+  background: #fff3d8;
+  color: #163d32;
+  box-shadow: 0 4px 16px #061e2333;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.5;
   text-decoration: none;
 }
-.holiday-coaching__link:hover { background: #103d40; }
-.holiday-coaching__link:focus-visible { outline: 3px solid #174e50; outline-offset: 4px; }
+.holiday-coaching__link:hover { background: #f4ddb0; }
+.holiday-coaching__link:focus-visible { outline: 3px solid #fff8e9; outline-offset: 5px; }
 .holiday-coaching__link svg { width: 20px; height: 20px; flex-shrink: 0; }
-.holiday-coaching__action p { max-width: 360px; margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: #406064; }
+.holiday-coaching__action p { max-width: 360px; margin: 14px 0 0; font-size: 13px; line-height: 1.65; color: #d3dfd4; }
 @media (min-width: 1024px) {
-  .holiday-coaching__inner { grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; }
+  .holiday-coaching__inner { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
+  .holiday-coaching__action { border-left: 1px solid #82937b; padding-left: 28px; }
 }
 @media (max-width: 390px) {
-  .holiday-coaching { padding: 28px 20px; }
+  .holiday-coaching { padding: 64px 20px 32px; }
+  .holiday-coaching__seasonal { width: 190px; height: 68px; }
 }
