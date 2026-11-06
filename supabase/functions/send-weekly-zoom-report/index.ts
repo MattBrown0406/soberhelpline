@@ -219,8 +219,9 @@ Deno.serve(async (req) => {
       const email = norm(a.participant_email);
       const name = fullName(a.participant_name);
       const minutes = a.duration_minutes ?? 0;
-      const unmatched = registrants.people.filter((p) => !attendedMinutes.has(p));
-      const person = looseMatch(unmatched, a.participant_name, leftoverFirstWords.get(firstWord(a.participant_name)) === 1);
+      // Attendance must not remove matching candidates: later rejoins still belong
+      // to the same registrant, and every registrant must count for ambiguity checks.
+      const person = looseMatch(registrants.people, a.participant_name, leftoverFirstWords.get(firstWord(a.participant_name)) === 1);
       if (person) {
         attendedMinutes.set(person, (attendedMinutes.get(person) ?? 0) + minutes);
         continue;
