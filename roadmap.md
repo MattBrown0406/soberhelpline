@@ -1,6 +1,6 @@
 # Current tasks
 
-- [ ] Verify and fix weekly-report duplicate attendees on loose-name rejoins with synthetic regression checks only; no deployment, database changes, or report sending.
+- [x] Confirm and fix weekly-report duplicate attendees on loose-name rejoins; real handler with synthetic rows reproduces the failure before the fix and passes rejoin-minute, exact-plus-loose, and ambiguity regressions afterward; existing name-matching tests pass. No deployment, database changes, or report sending.
 
 - [x] Add the uploaded November 6 addiction-medication insurance guide as article 204 with a photo and five FAQs; 227 article renders pass, card navigation and available suggested links verified, desktop/mobile fit checked, listings refreshed; not published. The suggested insurance-appeal article is unavailable and was not linked.
 
