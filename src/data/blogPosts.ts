@@ -1,3 +1,4 @@
+import surpriseRehabBillImg from "@/assets/blog-surprise-rehab-bill-eob.jpg";
 import insuranceAddictionMedicationImg from "@/assets/blog-insurance-coverage-addiction-medication.jpg";
 import faithBasedRehabImg from "@/assets/blog-faith-based-rehab.jpg";
 import olderAdultTreatmentImg from "@/assets/blog-addiction-treatment-older-adults.jpg";
@@ -230,6 +231,149 @@ export const imageMap: Record<string, string> = {
 };
 
 export const blogPosts: any[] = [
+  {
+    id: 205,
+    slug: "surprise-rehab-bill-eob-billing-errors",
+    seoTitle: "Surprise Rehab Bill? Read Your EOB & Dispute Errors",
+    metaDescription: "Got a surprise rehab bill? Learn how to read your insurance EOB, spot billing errors, and dispute charges so your family pays only what it truly owes.",
+    title: "Got a Surprise Rehab Bill? How to Read Your EOB and Fight Billing Errors",
+    category: "Family Education",
+    author: "Matt Brown",
+    date: "2026-11-07",
+    image: surpriseRehabBillImg,
+    keywords: ["surprise rehab bill", "explanation of benefits rehab", "rehab billing errors", "dispute rehab bill", "No Surprises Act addiction treatment"],
+    tags: ["family guide", "insurance", "billing", "treatment"],
+    excerpt: "Learn how to compare a rehab bill with your insurance EOB, spot common billing errors, dispute charges, and protect your family from unexpected costs.",
+    faqItems: [
+      { question: "Is an EOB the same as a bill?", answer: "No. An Explanation of Benefits is a summary from your insurance company showing what was billed, what insurance paid, and what you may owe. The actual bill comes from the treatment program. Always compare the two before paying." },
+      { question: "Can I negotiate a rehab bill?", answer: "Yes. Many treatment programs will reduce a balance, offer a prompt-pay discount, or set up an interest-free payment plan. It helps to ask politely, explain your situation, and get any agreement in writing." },
+      { question: "What should I do if insurance denied my loved one's rehab stay?", answer: "Ask your insurance company for the denial reason in writing, then file an appeal. Ask the treatment program to send clinical records that support the need for care. Many denials based on medical necessity are overturned on appeal." },
+      { question: "Will an unpaid rehab bill go to collections?", answer: "It can, but calling the billing office and asking that the account be placed on hold while you dispute it usually prevents that. Keep the dispute documented in writing and respond to every notice." },
+      { question: "Can I see my adult child's rehab bill?", answer: "Often only with their written permission. Addiction treatment records have strong federal privacy protections, so your adult loved one may need to sign a release allowing the program to discuss billing with you." },
+      { question: "Does the No Surprises Act apply to rehab?", answer: "It applies to emergency care, including some emergency detox, and to self-pay patients through the good faith estimate rule. Protection for non-emergency residential rehab is more limited, so check your situation carefully." }
+    ],
+    content: `Your loved one finally went to treatment. The hardest part felt like it was behind you. Then an envelope arrives with a number on it that makes your stomach drop. If you're staring at a surprise rehab bill right now, take a breath. You are not alone, and you are not powerless.
+
+Billing mistakes in addiction treatment are common, and many charges can be questioned, corrected, or reduced. This guide walks you through how to read the paperwork, spot red flags, and push back calmly and effectively, so your family pays what it truly owes and nothing more.
+
+## Why Do Families Get a Surprise Rehab Bill?
+
+Most surprise rehab bills come from one of four things: a coding error, an out-of-network charge, days the insurance company decided weren't "medically necessary," or services nobody explained up front. The good news is that each of these can be investigated.
+
+Common causes include:
+
+- **Coding errors.** A service gets entered under the wrong code, or the same service is billed twice.
+
+- **Out-of-network providers.** The program was in-network, but an outside lab or doctor was not. Understanding [in-network vs. out-of-network rehab](/blog/in-network-vs-out-of-network-rehab-family-guide) can help you ask the right questions.
+
+- **Denied days.** Insurance approved part of the stay, then stopped paying after a review.
+
+- **Excessive testing.** Some programs bill for frequent, expensive lab drug tests that go far beyond what care requires.
+
+- **Your deductible and coinsurance.** Sometimes the bill is correct, but nobody explained your share in advance.
+
+## How Do You Read an Explanation of Benefits (EOB) for Rehab?
+
+An Explanation of Benefits, or EOB, is a statement from your insurance company showing what the program charged, what insurance paid, and what it says you owe. It is not a bill, but it is the single best tool for checking whether a rehab bill is accurate.
+
+Before you pay anything, line up each EOB (by mail or in your insurer's online portal) next to the matching bill from the program.
+
+### The Key Parts of an EOB
+
+- **Dates of service:** The days care was provided. Do they match the actual stay?
+
+- **Amount billed:** What the program charged. This is often much higher than what anyone actually pays.
+
+- **Allowed amount:** The price your insurance agreed to for that service.
+
+- **Plan paid:** What insurance covered.
+
+- **Patient responsibility:** What insurance says you owe. Your bill should not be higher than this number for in-network care.
+
+- **Remark or denial codes:** Short codes explaining why something wasn't paid. The key is usually printed on the EOB itself.
+
+If the bill from the program asks for more than the "patient responsibility" line, that's your first question to ask.
+
+## How to Spot Billing Errors on a Rehab Bill
+
+The fastest way to spot errors is to request an itemized bill, a line-by-line list of every charge, and compare it to your EOB and your own records. You have the right to ask for one, and a reputable program will provide it without hesitation.
+
+Your loved one may need to sign a release form so the program can share billing details with you, especially if they are an adult. Federal privacy rules for addiction treatment records are strict, so plan for this step.
+
+Once you have the itemized bill, look for:
+
+1. Charges for dates after discharge or before admission.
+
+2. Duplicate charges for the same service on the same day.
+
+3. Services your loved one says they never received.
+
+4. Daily lab drug tests billed at hundreds of dollars each.
+
+5. "Out-of-network" charges from a program you were told was in-network.
+
+Log every call: the date, the person's name, and what they said.
+
+## How to Dispute a Surprise Rehab Bill, Step by Step
+
+To dispute a surprise rehab bill, start with a polite call to the program's billing office, then contact your insurance company, and put every request in writing.
+
+1. **Don't pay yet, but don't ignore it.** Call the billing office and ask that the account be marked "under review" while you sort things out. This helps keep it from going to collections.
+
+2. **Ask the program to explain each disputed charge.** Ask whether the claim can be corrected and resubmitted to insurance.
+
+3. **Call your insurance company.** Ask why each item was denied and whether the program billed it correctly.
+
+4. **File an appeal if a claim was denied.** If insurance denied care as not medically necessary, you have the right to appeal, and many appeals succeed when the treatment team provides supporting records.
+
+5. **Negotiate what's left.** If the balance is legitimate but unaffordable, ask for a prompt-pay discount, a reduced settlement, or an interest-free payment plan. Many programs say yes.
+
+## What If the Bill Is Still Wrong?
+
+If you're getting nowhere, you can file a complaint with your state's department of insurance or attorney general's consumer protection office. For employer health plans, the U.S. Department of Labor can also help.
+
+## Does the No Surprises Act Protect You From Rehab Bills?
+
+Sometimes. The federal No Surprises Act protects families from many unexpected out-of-network bills for emergency care, which can include an emergency room visit or emergency detox. It also protects you from out-of-network doctors who treat you at an in-network hospital.
+
+Its protections are narrower for stand-alone residential rehab programs, so don't assume it covers every situation. One part that helps many families: if you're paying out of pocket or not using insurance, providers must give you a written "good faith estimate" before care. If your final bill is $400 or more above that estimate, you can generally dispute it through a federal process, usually within 120 days of receiving the bill. You can learn more or file a complaint at [CMS.gov/nosurprises](https://www.cms.gov/nosurprises).
+
+## Protecting Your Family Going Forward
+
+A little preparation prevents most billing headaches. Before your loved one starts any new level of care, such as intensive outpatient or sober living, ask the program for a written estimate, confirm network status for the program and its lab, and ask how often drug testing is billed. Write down who told you what, and when.
+
+Billing stress can pile onto a season that already feels heavy. But remember what this money represents: your loved one getting help. Asking questions and staying organized isn't being difficult. It's being a smart, caring advocate for your family.
+
+## Frequently Asked Questions About Rehab Bills
+
+### Is an EOB the same as a bill?
+
+No. An Explanation of Benefits is a summary from your insurance company showing what was billed, what insurance paid, and what you may owe. The actual bill comes from the treatment program. Always compare the two before paying.
+
+### Can I negotiate a rehab bill?
+
+Yes. Many treatment programs will reduce a balance, offer a prompt-pay discount, or set up an interest-free payment plan. It helps to ask politely, explain your situation, and get any agreement in writing.
+
+### What should I do if insurance denied my loved one's rehab stay?
+
+Ask your insurance company for the denial reason in writing, then file an appeal. Ask the treatment program to send clinical records that support the need for care. Many denials based on "medical necessity" are overturned on appeal.
+
+### Will an unpaid rehab bill go to collections?
+
+It can, but calling the billing office and asking that the account be placed on hold while you dispute it usually prevents that. Keep the dispute documented in writing and respond to every notice.
+
+### Can I see my adult child's rehab bill?
+
+Often only with their written permission. Addiction treatment records have strong federal privacy protections, so your adult loved one may need to sign a release allowing the program to discuss billing with you.
+
+### Does the No Surprises Act apply to rehab?
+
+It applies to emergency care, including some emergency detox, and to self-pay patients through the good faith estimate rule. Protection for non-emergency residential rehab is more limited, so check your situation carefully.
+
+## Get Ongoing Support at SoberHelpline.com
+
+Navigating the money side of treatment is just one part of the journey, and you don't have to figure it out alone. Visit [SoberHelpline.com](/) for ongoing family education, one-on-one [family coaching](/family-coaching), and support to help your family make confident decisions at every stage of recovery.`,
+  },
   {
     id: 204,
     slug: "insurance-coverage-addiction-medication",
