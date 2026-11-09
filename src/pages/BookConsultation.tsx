@@ -19,10 +19,13 @@ import SEOHead from "@/components/SEOHead";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 import { appVisitQuery, arrivedFromApp } from "@/lib/webSession";
+import { bookingDateTime, bookingInstant } from "@/lib/bookingTime";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const TIMEZONE_OPTIONS = [
+  { value: "UTC", label: "UTC" },
+  { value: "Europe/London", label: "London" },
   { value: "America/New_York", label: "Eastern Time (ET)" },
   { value: "America/Chicago", label: "Central Time (CT)" },
   { value: "America/Denver", label: "Mountain Time (MT)" },
@@ -43,24 +46,10 @@ interface ProviderDateOverride {
 const getTimezoneLabel = (tz: string) => TIMEZONE_OPTIONS.find((t) => t.value === tz)?.label || tz;
 
 const convertTime = (timeStr: string, dateStr: string, fromTz: string, toTz: string): { time: string; dayOffset: number } => {
-  const [h, m] = timeStr.split(":").map(Number);
-  const getOffset = (tz: string, date: Date) => {
-    const utc = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
-    const local = new Date(date.toLocaleString("en-US", { timeZone: tz }));
-    return (local.getTime() - utc.getTime()) / 60000;
-  };
-  const sourceDateStr = `${dateStr}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
-  const refDate = new Date(sourceDateStr);
-  const fromOffset = getOffset(fromTz, refDate);
-  const toOffset = getOffset(toTz, refDate);
-  const diffMinutes = toOffset - fromOffset;
-  let totalMinutes = h * 60 + m + diffMinutes;
-  let dayOffset = 0;
-  while (totalMinutes < 0) { totalMinutes += 1440; dayOffset--; }
-  while (totalMinutes >= 1440) { totalMinutes -= 1440; dayOffset++; }
-  const newH = String(Math.floor(totalMinutes / 60)).padStart(2, "0");
-  const newM = String(totalMinutes % 60).padStart(2, "0");
-  return { time: `${newH}:${newM}`, dayOffset };
+  const instant = bookingInstant(dateStr, timeStr, fromTz);
+  const time = new Intl.DateTimeFormat('en-GB', { timeZone: toTz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(instant);
+  const localDate = formatDateInTimezone(instant, toTz);
+  return { time, dayOffset: Math.round((Date.parse(localDate) - Date.parse(dateStr)) / 86400000) };
 };
 
 const formatTime12h = (time24: string) => {
@@ -198,6 +187,10 @@ const BookConsultation = () => {
   const [intakeData, setIntakeData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [providerError, setProviderError] = useState(false);
+  const [availabilityState, setAvailabilityState] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  const availabilityRequest = useRef(0);
+  useEffect(() => () => { availabilityRequest.current++; }, []);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   // PayPal took the payment but the session couldn't be reserved (usually the
   // time was taken a moment earlier). Matt has been emailed; show this instead
@@ -220,6 +213,7 @@ const BookConsultation = () => {
 
   // Abandoned booking tracking — capture email and progress so we can follow up
   const [abandonedBookingId, setAbandonedBookingId] = useState<string | null>(null);
+  const captureInFlight = useRef(false);
 
   const urlParams = new URLSearchParams(window.location.search);
   const planType = urlParams.get("plan");
@@ -339,7 +333,7 @@ const BookConsultation = () => {
   };
 
   useEffect(() => {
-    loadInit();
+    loadInit().catch(() => loadProviders());
   }, []);
 
   const loadInit = async () => {
@@ -377,6 +371,9 @@ const BookConsultation = () => {
   };
 
   const loadProviders = async () => {
+    setLoading(true);
+    setProviderError(false);
+    try {
     // Anonymous visitors only have column-level SELECT access to public-safe
     // provider fields. Selecting "*" includes private payout/notification
     // columns and causes PostgREST to reject the whole query, which made the
@@ -387,9 +384,7 @@ const BookConsultation = () => {
       .eq("status", "active")
       .neq("full_name", "Katie Barr");
 
-    if (error) {
-      console.error("Failed to load consultation providers", error);
-    }
+    if (error || !Array.isArray(data)) throw error || new Error('Invalid provider response');
 
     const sortedProviders = [...(data || [])].sort((a, b) => {
       if (a.full_name === "Matt Brown") return -1;
@@ -398,7 +393,11 @@ const BookConsultation = () => {
     });
 
     setProviders(sortedProviders);
-    setLoading(false);
+    } catch (error) {
+      console.error('Failed to load consultation providers', error);
+      setProviders([]);
+      setProviderError(true);
+    } finally { setLoading(false); }
   };
 
   // Email-based membership check (debounced).
@@ -448,12 +447,13 @@ const BookConsultation = () => {
     return () => clearTimeout(timer);
   }, [intakeData.client_email, checkMembershipByEmail]);
 
-  // Capture/update abandoned booking record (debounced) — for follow-up emails
-  useEffect(() => {
+  // Save only on an explicit Next action, never while typing or editing.
+  const captureBookingProgress = async () => {
     const email = intakeData.client_email?.trim();
-    if (!email || !email.includes("@") || email.length < 5) return;
+    if (!email || !email.includes("@") || email.length < 5 || captureInFlight.current) return;
+    captureInFlight.current = true;
 
-    const timer = setTimeout(async () => {
+
       const payload = {
         client_email: email.toLowerCase(),
         client_name: intakeData.client_name || null,
@@ -494,7 +494,7 @@ const BookConsultation = () => {
             }
           }
         } else {
-          const editToken = (crypto as any).randomUUID();
+          const editToken = crypto.randomUUID();
           const { data } = await supabase
             .from("abandoned_bookings")
             .insert({ ...payload, edit_token: editToken })
@@ -508,24 +508,22 @@ const BookConsultation = () => {
       } catch (e) {
         // Silent — never block the booking flow
         console.warn("Abandoned booking tracking failed:", e);
-      }
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, [
-    intakeData.client_email,
-    intakeData.client_name,
-    intakeData.client_phone,
-    planType,
-    selectedProvider?.id,
-    selectedDate,
-    selectedSlot?.start_time,
-    step,
-    abandonedBookingId,
-    user?.id,
-  ]);
+      } finally { captureInFlight.current = false; }
+  };
 
   const selectProvider = async (provider: any) => {
+    const requestId = ++availabilityRequest.current;
+    const sameProvider = selectedProvider?.id === provider.id;
+    setAvailabilityState('loading');
+    setAvailability([]);
+    setBookedSlots([]);
+    setDateOverrides([]);
+    if (!sameProvider) {
+      setSelectedDate('');
+      setSelectedSlot(null);
+      setStabilizationSlots([]);
+    }
+    setStep(1);
     const providerTz = provider.timezone || "America/Los_Angeles";
     const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
     const windowEnd = addDaysToDateStr(providerTodayStr, isParallelRecovery ? 90 : 30);
@@ -536,6 +534,7 @@ const BookConsultation = () => {
       planType,
       providerName: provider.full_name,
     });
+    try {
     const [availRes, bookingsRes, overridesRes] = await Promise.all([
       supabase
         .from("provider_availability")
@@ -555,12 +554,17 @@ const BookConsultation = () => {
         .order("start_time"),
     ]);
 
+    if (requestId !== availabilityRequest.current) return;
+    if ([availRes, bookingsRes, overridesRes].some(result => result.error || !Array.isArray(result.data))) throw new Error('Required availability lookup failed');
     setAvailability(availRes.data || []);
     setBookedSlots(bookingsRes.data || []);
     setDateOverrides((overridesRes.data || []) as ProviderDateOverride[]);
-    setSelectedDate("");
-    setSelectedSlot(null);
-    setStep(1);
+    setAvailabilityState('ready');
+    } catch (error) {
+      if (requestId !== availabilityRequest.current) return;
+      console.error('Availability lookup failed', error);
+      setAvailabilityState('error');
+    }
   };
 
   const handleIntakeChange = (fieldId: string, value: string) => {
@@ -580,8 +584,19 @@ const BookConsultation = () => {
   };
 
   const goNext = () => {
+    if (step === 1 && availabilityState !== 'ready') return;
+    if (step === 1) {
+      const choices = isMultiSession ? stabilizationSlots : [{ date: selectedDate, slot: selectedSlot }];
+      if (!choices.length || choices.some(s => !s.slot || !getSlotsForDate(s.date).some(slot => slot.id === s.slot.id))) {
+        toast({ title: 'Please choose available times again', variant: 'destructive' });
+        setSelectedSlot(null);
+        setStabilizationSlots([]);
+        return;
+      }
+    }
     if (step >= 2 && step <= 4) {
       if (!validateSection(step - 2)) return;
+      void captureBookingProgress();
     }
     trackConversionEvent("booking_step_continue", {
       source: "book_consultation",
@@ -592,10 +607,11 @@ const BookConsultation = () => {
   };
 
   const getSlotsForDate = (dateStr: string) => {
+    if (availabilityState !== 'ready') return [];
     const providerTz = selectedProvider?.timezone || "America/Los_Angeles";
     const dayOfWeek = getDayOfWeekFromDateStr(dateStr);
     const dayAvailability = availability.filter((a) => a.day_of_week === dayOfWeek);
-    const duration = selectedProvider?.session_duration_minutes || 60;
+    const duration = isReadinessIntensive ? 90 : selectedProvider?.session_duration_minutes || 60;
     const providerTodayStr = formatDateInTimezone(new Date(), providerTz);
     const providerNow = new Date(new Date().toLocaleString("en-US", { timeZone: providerTz }));
     const providerNowMinutes = providerNow.getHours() * 60 + providerNow.getMinutes();
@@ -716,7 +732,7 @@ const BookConsultation = () => {
   };
 
   const handleBooking = async () => {
-    if (!selectedProvider) return;
+    if (!selectedProvider || availabilityState !== 'ready') return;
 
     const slotsToBook = isMultiSession
       ? stabilizationSlots.map((s) => ({ date: s.date, slot: s.slot }))
@@ -800,6 +816,7 @@ const BookConsultation = () => {
 
   // Price display helpers
   const displayRate = isReadinessIntensive ? (isMember ? 2250 : 2500) : isMember && !isMultiSession ? 125 : selectedProvider?.session_rate || 150;
+  const appointmentLabel = (date: string, time: string, zone = clientTimezone) => bookingDateTime(date, time, zone, selectedProvider?.timezone || 'America/Los_Angeles');
 
   if (paidNotBooked) return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-10">
@@ -899,6 +916,7 @@ const BookConsultation = () => {
         )}
 
         <div className="max-w-2xl mx-auto">
+          <Link to="/contact" className="inline-flex min-h-11 items-center underline mb-4">Need help? Contact us</Link>
           {/* Step 0: Browse Providers */}
           {step === 0 && (
             <>
@@ -917,7 +935,7 @@ const BookConsultation = () => {
               {!isMultiSession && !isMember && !isReadinessIntensive && (
                 <div className="flex flex-col items-center gap-2 mb-6">
                   {!fromApp && (
-                    <Button asChild variant="outline" size="sm" className="gap-1.5">
+                    <Button asChild variant="outline" size="sm" className="gap-1.5 whitespace-normal h-auto min-h-11 text-center max-w-full">
                       <Link to="/family-membership">
                         <Crown className="w-4 h-4" />
                         Join membership to save $25 per session
@@ -968,16 +986,16 @@ const BookConsultation = () => {
                   </CardContent>
                 </Card>
               )}
-              {providers.length === 0 ? (
+              {providerError ? <div role="alert" className="space-y-3"><p>We couldn't load providers. Please retry or contact us.</p><Button onClick={loadProviders}>Retry providers</Button></div> : providers.length === 0 ? (
                 <Card><CardContent className="py-8 text-center text-muted-foreground">No providers are currently available. Please check back soon.</CardContent></Card>
               ) : (
                 <div className="space-y-4">
                   {providers.map((p) => (
-                    <Card key={p.id} className="cursor-pointer hover:border-primary transition-colors" onClick={() => selectProvider(p)}>
+                    <Card key={p.id} className="hover:border-primary transition-colors">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <img src={p.photo_url || "/placeholder.svg"} alt={p.full_name} className="w-16 h-16 rounded-full object-cover object-top flex-shrink-0" />
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-lg">{p.full_name}</h3>
                             {p.title && <p className="text-sm text-muted-foreground">{p.title}</p>}
                             <p className="text-sm mt-2 line-clamp-2">{p.bio}</p>
@@ -1017,6 +1035,7 @@ const BookConsultation = () => {
                             </p>
                           </div>
                         </div>
+                        <Button type="button" onClick={() => selectProvider(p)} className="mt-4 w-full whitespace-normal h-auto min-h-11 focus-visible:ring-2">Choose {p.full_name}</Button>
                       </CardContent>
                     </Card>
                   ))}
@@ -1049,10 +1068,10 @@ const BookConsultation = () => {
                           <div className="flex items-center gap-2">
                             <Badge variant="secondary">Session {i + 1}</Badge>
                             <span className="text-sm font-medium">
-                              {DAYS[dateObj.getDay()]}, {dateObj.toLocaleDateString("en-US", { month: "long", day: "numeric" })}
+                              {appointmentLabel(s.date, s.slot.start_time)}
                             </span>
                             <span className="text-sm text-muted-foreground">
-                              {s.slot.display_start} - {s.slot.display_end}
+                              – {appointmentLabel(s.date, s.slot.end_time)}
                             </span>
                           </div>
                           <Button variant="ghost" size="sm" onClick={() => removeStabilizationSlot(i)} className="text-destructive hover:text-destructive">
@@ -1064,7 +1083,10 @@ const BookConsultation = () => {
                   </div>
                 )}
 
-                {(!isMultiSession || stabilizationSlots.length < requiredSlots) && (
+                {availabilityState === 'loading' && <p role="status">Checking availability…</p>}
+                {availabilityState === 'error' && <div role="alert" className="space-y-3"><p>We couldn't check availability. Your provider and date are kept. Please retry before continuing.</p><Button onClick={() => selectProvider(selectedProvider)}>Retry availability</Button></div>}
+                {availabilityState === 'ready' && getAvailableDates().length === 0 && <p role="status">No available dates in this booking window. Please contact us for help.</p>}
+                {availabilityState === 'ready' && (!isMultiSession || stabilizationSlots.length < requiredSlots) && (
                   <>
                     <div className="space-y-2">
                       <Label className="flex items-center gap-2"><Globe className="h-4 w-4" />Your Timezone</Label>
@@ -1079,7 +1101,7 @@ const BookConsultation = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>{isMultiSession ? `Select Date for Session ${stabilizationSlots.length + 1}` : "Available Dates"}</Label>
+                      <Label>{isMultiSession ? `Select Date for Session ${stabilizationSlots.length + 1}` : "Available Dates"} (provider timezone: {selectedProvider?.timezone || 'America/Los_Angeles'})</Label>
                       <Select value={selectedDate} onValueChange={(v) => { setSelectedDate(v); setSelectedSlot(null); }}>
                         <SelectTrigger><SelectValue placeholder="Select a date..." /></SelectTrigger>
                         <SelectContent>
@@ -1103,7 +1125,7 @@ const BookConsultation = () => {
                               <RadioGroupItem value={slot.id} id={slot.id} />
                               <Label htmlFor={slot.id} className="flex items-center gap-2 cursor-pointer">
                                 <Clock className="h-4 w-4" />
-                                {slot.display_start} - {slot.display_end}
+                                <span>{appointmentLabel(selectedDate, slot.start_time)} – {appointmentLabel(selectedDate, slot.end_time)}</span>
                               </Label>
                             </div>
                           ))}
@@ -1123,7 +1145,7 @@ const BookConsultation = () => {
                   <Button variant="outline" onClick={() => { setStep(0); setStabilizationSlots([]); }}><ArrowLeft className="w-4 h-4 mr-1" />Back</Button>
                   <Button
                     onClick={goNext}
-                    disabled={isMultiSession ? stabilizationSlots.length < requiredSlots : !selectedSlot}
+                    disabled={availabilityState !== 'ready' || (isMultiSession ? stabilizationSlots.length < requiredSlots : !selectedSlot)}
                   >
                     Next<ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
@@ -1138,6 +1160,7 @@ const BookConsultation = () => {
               <CardHeader>
                 <CardTitle>{intakeSections[step - 2].title}</CardTitle>
                 <CardDescription>Section {step - 1} of 3</CardDescription>
+                {step === 2 && <p id="booking-save-notice" className="text-sm text-muted-foreground">Selecting Next saves your contact details and selected appointment so we can follow up about an unfinished booking. Typing here does not save a recovery record. You have not booked or paid yet.</p>}
               </CardHeader>
               <CardContent className="space-y-4">
                 {intakeSections[step - 2].fields.filter((f: any) => !(f.singleSessionOnly && isMultiSession)).map((field: any) => (
@@ -1162,6 +1185,7 @@ const BookConsultation = () => {
                       <Input
                         id={field.id}
                         type={field.type}
+                        aria-describedby={field.id === 'client_email' ? 'booking-save-notice' : undefined}
                         value={intakeData[field.id] || ""}
                         onChange={(e) => handleIntakeChange(field.id, e.target.value)}
                         placeholder={field.placeholder}
@@ -1229,7 +1253,7 @@ const BookConsultation = () => {
                             <div key={i} className="flex justify-between text-sm">
                               <span className="text-muted-foreground">Session {i + 1}</span>
                               <span className="font-medium">
-                                {DAYS[dateObj.getDay()]}, {dateObj.toLocaleDateString("en-US", { month: "short", day: "numeric" })} — {s.slot.display_start} - {s.slot.display_end}
+                                {appointmentLabel(s.date, s.slot.start_time)} – {appointmentLabel(s.date, s.slot.end_time)}
                               </span>
                             </div>
                           );
@@ -1239,8 +1263,8 @@ const BookConsultation = () => {
                     </>
                   ) : (
                     <>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Date</span><span className="font-medium">{selectedDate && new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Time</span><span className="font-medium">{selectedSlot?.display_start} - {selectedSlot?.display_end} ({getTimezoneLabel(clientTimezone)})</span></div>
+                      <div className="space-y-1"><p className="text-muted-foreground">Your appointment</p><p className="font-medium">{selectedSlot && appointmentLabel(selectedDate, selectedSlot.start_time)} – {selectedSlot && appointmentLabel(selectedDate, selectedSlot.end_time)}</p></div>
+                      <p className="text-sm text-muted-foreground">Provider time: {selectedSlot && appointmentLabel(selectedDate, selectedSlot.start_time, selectedProvider?.timezone || 'America/Los_Angeles')}</p>
                       <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-medium">{isReadinessIntensive ? "90" : selectedProvider?.session_duration_minutes} minutes</span></div>
                       {isReadinessIntensive && (
                         <div className="flex justify-between"><span className="text-muted-foreground">Service</span><span className="font-medium">Family Readiness Intensive</span></div>
