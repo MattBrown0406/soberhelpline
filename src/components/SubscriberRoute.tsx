@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { untypedSupabase } from "@/integrations/supabase/untyped";
 import { clearSsoSignIn, clearWebSession, SSO_TOKEN_PARAM } from "@/lib/webSession";
 import AppSubscriberGate from "@/components/AppSubscriberGate";
 
@@ -104,6 +105,24 @@ export default function SubscriberRoute({ children }: { children: ReactNode }) {
       cancelled = true;
     };
   }, [authVersion]);
+
+  // Record one visit per member per (Pacific) day for the admin engagement
+  // report. Best effort: a failure here never affects the page.
+  useEffect(() => {
+    if (state.access !== "member" || !state.userId) return;
+    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(new Date());
+    const key = `member_visit_${state.userId}_${today}`;
+    try {
+      if (localStorage.getItem(key)) return;
+      localStorage.setItem(key, "1");
+    } catch {
+      // Storage unavailable (private mode): the database ignores repeat visits anyway.
+    }
+    untypedSupabase
+      .from("member_visits")
+      .insert({ user_id: state.userId, first_path: location.pathname })
+      .then(() => undefined, () => undefined);
+  }, [state.access, state.userId, location.pathname]);
 
   const handleSignOut = async () => {
     clearSsoSignIn();

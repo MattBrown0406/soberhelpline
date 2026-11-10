@@ -110,27 +110,11 @@ export function PollDisplay({ postId, userId }: PollDisplayProps) {
   };
 
   useEffect(() => {
+    // No realtime subscription: one channel per post was heavy, and vote rows
+    // carry voter ids. Results refresh after the member's own vote and when
+    // the thread list reloads.
     fetchPoll();
-
-    // Subscribe to realtime changes
-    const channel = supabase
-      .channel(`poll-votes-${postId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'forum_poll_votes'
-        },
-        () => {
-          fetchPoll();
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId, userId]);
 
   const handleVote = async (optionId: string) => {

@@ -161,3 +161,12 @@ verify_jwt = false
 
 [functions.paypal-reprice-members]
 verify_jwt = false
+
+[functions.send-welcome-email]
+verify_jwt = false
+
+[functions.send-forum-notifications]
+verify_jwt = false
+
+[functions.send-member-weekly-note]
+verify_jwt = false
