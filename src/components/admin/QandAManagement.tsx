@@ -46,6 +46,7 @@ const emptyForm: QAForm = {
   is_published: true,
 };
 
+/** Admin → Q&A Archive (meeting_qa_archive). No props. */
 export function QandAManagement() {
   const [entries, setEntries] = useState<QAEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ export function QandAManagement() {
   const [saving, setSaving] = useState(false);
 
   const [importing, setImporting] = useState(false);
+  const [view, setView] = useState<"all" | "drafts" | "published">("all");
 
   const fetchEntries = async () => {
     const { data, error } = await supabase
@@ -203,6 +205,8 @@ export function QandAManagement() {
   if (loading) return <div className="text-center py-8 text-muted-foreground">Loading Q&amp;As...</div>;
 
   const needsAnswer = entries.filter(e => !e.answer.trim()).length;
+  const drafts = entries.filter(e => !e.is_published);
+  const shown = view === "drafts" ? drafts : view === "published" ? entries.filter(e => e.is_published) : entries;
 
   return (
     <div className="space-y-4">
@@ -224,15 +228,34 @@ export function QandAManagement() {
       </div>
 
 
-      {entries.length === 0 ? (
+      {drafts.length > 0 && (
+        <div className="rounded-lg border border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30 p-3 text-sm text-amber-900 dark:text-amber-100">
+          {drafts.length} draft{drafts.length === 1 ? "" : "s"} waiting to be published. Drafts include answers saved from the
+          forum ("Save to Q&amp;A archive" in This Week's Meeting). Members don't see drafts until you publish them.
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter Q&amp;As">
+        {([
+          ["all", `All (${entries.length})`],
+          ["drafts", `Drafts (${drafts.length})`],
+          ["published", `Published (${entries.length - drafts.length})`],
+        ] as const).map(([key, label]) => (
+          <Button key={key} size="sm" variant={view === key ? "default" : "outline"} onClick={() => setView(key)}>
+            {label}
+          </Button>
+        ))}
+      </div>
+
+      {shown.length === 0 ? (
         <div className="text-center py-10 text-muted-foreground">
           <MessageCircle className="h-10 w-10 mx-auto mb-2 opacity-40" />
-          <p>No Q&amp;As yet. Add questions captured from Monday meetings.</p>
+          <p>{entries.length === 0 ? "No Q&As yet. Add questions captured from Monday meetings." : "Nothing in this view."}</p>
         </div>
       ) : (
         <div className="space-y-2">
-          {entries.map(entry => (
-            <div key={entry.id} className={`rounded-lg border p-4 ${!entry.is_published ? "border-dashed opacity-60" : "border-border"}`}>
+          {shown.map(entry => (
+            <div key={entry.id} className={`rounded-lg border p-4 ${!entry.is_published ? "border-dashed border-amber-400 dark:border-amber-700 bg-amber-50/50 dark:bg-amber-950/20" : "border-border"}`}>
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-foreground leading-snug">{entry.question}</p>
@@ -250,14 +273,14 @@ export function QandAManagement() {
                     ))}
                     {entry.meeting_date && (
                       <span className="text-xs text-muted-foreground">
-                        {format(new Date(entry.meeting_date), "MMM d, yyyy")}
+                        {format(new Date(`${entry.meeting_date.slice(0, 10)}T12:00:00`), "MMM d, yyyy")}
                       </span>
                     )}
                     {!entry.is_published && (
-                      <span className="text-xs text-amber-600 flex items-center gap-1">
+                      <Badge variant="outline" className="text-xs px-1.5 py-0 gap-1 border-amber-400 text-amber-700 dark:text-amber-300">
                         <EyeOff className="h-3 w-3" />
-                        Hidden
-                      </span>
+                        Draft, not visible to members
+                      </Badge>
                     )}
                   </div>
                 </div>
