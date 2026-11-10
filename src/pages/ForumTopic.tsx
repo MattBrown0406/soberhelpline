@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { Phone, ArrowLeft, Loader2, Plus, MessageCircle, Clock, User, Trash2, Send, Pin, EyeOff, Heart } from "lucide-react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, Archive, Loader2, Mail, MessageCircle, Plus, Shield } from "lucide-react";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,397 +17,261 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import logo from "@/assets/logo.png";
-import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { User as SupabaseUser } from "@supabase/supabase-js";
-import { toast } from "sonner";
-import { fetchPublicProfiles } from "@/lib/publicProfiles";
-import { moderateContent } from "@/lib/contentModeration";
-import { PostReactions } from "@/components/forum/PostReactions";
-import { PostBookmark } from "@/components/forum/PostBookmark";
+import { untypedSupabase } from "@/integrations/supabase/untyped";
+import { fetchUsernames, type ForumMemberMatch } from "@/lib/publicProfiles";
+import { ACTIVE_TOPICS, MEETING_TOPIC_ID, getForumTopic, sanitizeRefPath } from "@/lib/forumTopics";
 import { TopicFollow } from "@/components/forum/TopicFollow";
-import { UserBadges } from "@/components/forum/UserBadges";
-import { PollDisplay } from "@/components/forum/PollDisplay";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertTriangle } from "lucide-react";
+import { MentionNotifications } from "@/components/forum/MentionNotifications";
+import { PrivateMessagesDialog, useUnreadMessageCount } from "@/components/forum/PrivateMessagesDialog";
+import { ModeratorActionsDialog } from "@/components/forum/ModeratorActionsDialog";
+import { ForumComposer } from "@/components/forum/ForumComposer";
+import { ForumThread, type ForumViewer } from "@/components/forum/ForumThread";
+import { MeetingRoom } from "@/components/forum/MeetingRoom";
+import { formatMeetingDay, meetingWeekKey } from "@/components/forum/meetingWeek";
+import { useVisiblePolling } from "@/components/forum/useVisiblePolling";
+import { FORUM_POST_COLUMNS, type ForumPostRow, type ForumThreadData } from "@/components/forum/forumTypes";
 
-interface ForumTopicConfig {
-  id: string;
-  title: string;
-  description: string;
-  color: string;
-}
-
-const topicConfigs: Record<string, ForumTopicConfig> = {
-  "introductions": {
-    id: "introductions",
-    title: "Introductions & Welcome",
-    description: "New to the community? Introduce yourself and meet other families.",
-    color: "bg-blue-500"
-  },
-  "share-story": {
-    id: "share-story",
-    title: "Share Your Story",
-    description: "A safe space to share your experiences and journey.",
-    color: "bg-pink-500"
-  },
-  "treatment-discussions": {
-    id: "treatment-discussions",
-    title: "Treatment Center, IOP & Sober Living Discussions",
-    description: "Discuss experiences with treatment centers, intensive outpatient programs, and sober living homes.",
-    color: "bg-cyan-500"
-  },
-  "ask-community": {
-    id: "ask-community",
-    title: "Ask the Community",
-    description: "Have questions? Get advice from families who've been there.",
-    color: "bg-green-500"
-  },
-  "boundaries": {
-    id: "boundaries",
-    title: "Setting Boundaries",
-    description: "Discuss strategies for establishing healthy boundaries.",
-    color: "bg-orange-500"
-  },
-  "self-care": {
-    id: "self-care",
-    title: "Self-Care & Wellness",
-    description: "Tips and support for taking care of yourself.",
-    color: "bg-purple-500"
-  },
-  "recovery-wins": {
-    id: "recovery-wins",
-    title: "Recovery Wins & Celebrations",
-    description: "Share milestones, good news, and celebrate progress.",
-    color: "bg-yellow-500"
-  },
-  "resources": {
-    id: "resources",
-    title: "Resources & Recommendations",
-    description: "Share helpful books, articles, podcasts, and more.",
-    color: "bg-teal-500"
-  },
-  "intervention": {
-    id: "intervention",
-    title: "Intervention Discussions",
-    description: "Considering an intervention? Get advice and share experiences.",
-    color: "bg-red-500"
-  },
-};
-
-interface ForumPost {
-  id: string;
-  topic_id: string;
-  user_id: string;
-  title: string | null;
-  content: string;
-  parent_post_id: string | null;
-  created_at: string;
-  updated_at: string;
-  author?: {
-    username: string | null;
-    first_name: string;
-    last_name: string;
-  };
-  replies?: ForumPost[];
-}
+type Filter = "all" | "unanswered";
 
 export default function ForumTopic() {
-  const { topicId } = useParams<{ topicId: string }>();
-  const navigate = useNavigate();
+  const { topicId = "" } = useParams<{ topicId: string }>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topic = getForumTopic(topicId);
+  const isMeetingTopic = topicId === MEETING_TOPIC_ID;
+
   const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasMembership, setHasMembership] = useState(false);
-  const [posts, setPosts] = useState<ForumPost[]>([]);
-  const [showNewPost, setShowNewPost] = useState(false);
-  const [newPostTitle, setNewPostTitle] = useState("");
-  const [newPostContent, setNewPostContent] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [replyingTo, setReplyingTo] = useState<string | null>(null);
-  const [replyContent, setReplyContent] = useState("");
-  const [deleteConfirm, setDeleteConfirm] = useState<ForumPost | null>(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false);
   const [canModerate, setCanModerate] = useState(false);
-  const [moderationError, setModerationError] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const topicConfig = topicId ? topicConfigs[topicId] : null;
+  const [posts, setPosts] = useState<ForumPostRow[]>([]);
+  const [names, setNames] = useState<Map<string, string | null>>(new Map());
+  const [postsLoaded, setPostsLoaded] = useState(false);
+  const [filter, setFilter] = useState<Filter>("all");
 
+  const [composer, setComposer] = useState<{ open: boolean; title: string; ref: string | null; key: number }>({
+    open: false,
+    title: "",
+    ref: null,
+    key: 0,
+  });
+  const [deleteConfirm, setDeleteConfirm] = useState<{ post: ForumPostRow; replyCount: number } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [highlightId, setHighlightId] = useState<string | null>(null);
+  const [expandedThreadId, setExpandedThreadId] = useState<string | null>(null);
+  const handledPermalink = useRef<string | null>(null);
+
+  const [messagesOpen, setMessagesOpen] = useState(false);
+  const [messageRecipient, setMessageRecipient] = useState<ForumMemberMatch | null>(null);
+  const [moderatePreset, setModeratePreset] = useState<{ member: ForumMemberMatch; postContent?: string } | null>(null);
+  const [moderateOpen, setModerateOpen] = useState(false);
+  const unread = useUnreadMessageCount(user?.id);
+
+  // --- auth & access -------------------------------------------------------
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => setUser(session?.user ?? null));
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      setAuthChecked(true);
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
-    const checkAccess = async () => {
+    if (!authChecked) return;
+    let cancelled = false;
+    (async () => {
       if (!user) {
-        setHasMembership(false);
+        setHasAccess(false);
         setIsLoading(false);
         return;
       }
-
       try {
-        // Check membership (same rule the database uses for forum access)
-        const { data: isMember, error: subError } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
-
-        if (subError) {
-          console.error('Error checking membership:', subError);
-          setHasMembership(false);
-        } else {
-          setHasMembership(isMember === true);
-        }
-
-        // Check if user can moderate
-        const { data: roleData } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', user.id)
-          .in('role', ['moderator', 'admin'])
-          .limit(1);
-
-        setCanModerate(roleData && roleData.length > 0);
+        const [memberRes, rolesRes] = await Promise.all([
+          supabase.rpc("is_active_family_member", { _user_id: user.id }),
+          supabase.from("user_roles").select("role").eq("user_id", user.id).in("role", ["moderator", "admin"]),
+        ]);
+        if (cancelled) return;
+        const roles = (rolesRes.data || []).map((r) => r.role as string);
+        const staff = roles.length > 0;
+        setCanModerate(staff);
+        setIsAdmin(roles.includes("admin"));
+        setHasAccess(memberRes.data === true || staff);
       } catch (err) {
-        console.error('Check failed:', err);
-        setHasMembership(false);
+        console.error("Access check failed:", err);
+        setHasAccess(false);
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
+    })();
+    return () => {
+      cancelled = true;
     };
+  }, [user, authChecked]);
 
-    checkAccess();
-  }, [user]);
-
-  useEffect(() => {
-    if (hasMembership && topicId) {
-      fetchPosts();
-      
-      // Set up realtime subscription
-      const channel = supabase
-        .channel('forum-posts-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'forum_posts',
-            filter: `topic_id=eq.${topicId}`
-          },
-          () => {
-            fetchPosts();
-          }
-        )
-        .subscribe();
-
-      return () => {
-        supabase.removeChannel(channel);
-      };
-    }
-  }, [hasMembership, topicId]);
-
-  const fetchPosts = async () => {
-    if (!topicId) return;
-
+  // --- posts ---------------------------------------------------------------
+  const fetchPosts = useCallback(async () => {
+    if (!topic) return;
     try {
-      // Fetch all posts for this topic
-      const { data: postsData, error: postsError } = await supabase
-        .from('forum_posts')
-        .select('*')
-        .eq('topic_id', topicId)
-        .order('created_at', { ascending: false });
-
-      if (postsError) throw postsError;
-
-      if (!postsData || postsData.length === 0) {
-        setPosts([]);
-        return;
-      }
-
-      // Get unique user IDs
-      const userIds = [...new Set(postsData.map(p => p.user_id))];
-
-      // Fetch safe public display fields (no email/phone)
-      const profiles = await fetchPublicProfiles(userIds);
-
-      // Combine data and organize into threads
-      const enrichedPosts: ForumPost[] = postsData.map(post => {
-        const profile = profiles?.find(p => p.id === post.user_id);
-        return {
-          ...post,
-          author: profile
-            ? {
-                username: profile.username,
-                first_name: profile.first_name,
-                last_name: profile.last_name,
-              }
-            : undefined,
-        };
-      });
-
-      // Organize into threads (main posts with replies)
-      const mainPosts = enrichedPosts.filter(p => !p.parent_post_id);
-      const replies = enrichedPosts.filter(p => p.parent_post_id);
-
-      const threaded = mainPosts.map(post => ({
-        ...post,
-        replies: replies
-          .filter(r => r.parent_post_id === post.id)
-          .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
-      }));
-
-      setPosts(threaded);
+      const { data, error } = await untypedSupabase
+        .from("forum_posts_secure")
+        .select(FORUM_POST_COLUMNS)
+        .eq("topic_id", topic.id)
+        .order("created_at", { ascending: false })
+        .limit(1000);
+      if (error) throw error;
+      const rows = ((data as ForumPostRow[]) || []).filter((p) => !!p.id);
+      const ids = rows.filter((p) => !p.is_anonymous && p.user_id).map((p) => p.user_id as string);
+      const usernameMap = await fetchUsernames(ids).catch(() => new Map<string, string | null>());
+      setPosts(rows);
+      setNames(usernameMap);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      toast.error("Failed to load posts");
+      toast.error("Couldn't load posts. Please refresh the page.");
+    } finally {
+      setPostsLoaded(true);
     }
-  };
+  }, [topic]);
 
-  const handleCreatePost = async () => {
-    if (!user || !topicId || !newPostContent.trim()) {
-      toast.error("Please enter your post content");
+  useEffect(() => {
+    setPostsLoaded(false);
+    setPosts([]);
+    if (hasAccess && topic) void fetchPosts();
+  }, [hasAccess, topic, fetchPosts]);
+
+  // No realtime (it could carry author ids): poll every 30 seconds while visible.
+  useVisiblePolling(fetchPosts, 30_000, hasAccess && !!topic);
+
+  const threads: ForumThreadData[] = useMemo(() => {
+    const replies = new Map<string, ForumPostRow[]>();
+    for (const p of posts) {
+      if (p.parent_post_id) {
+        const list = replies.get(p.parent_post_id) ?? [];
+        list.push(p);
+        replies.set(p.parent_post_id, list);
+      }
+    }
+    return posts
+      .filter((p) => !p.parent_post_id)
+      .map((p) => ({
+        ...p,
+        replies: (replies.get(p.id) ?? []).sort(
+          (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+        ),
+      }))
+      .sort((a, b) => {
+        if (a.is_pinned !== b.is_pinned) return a.is_pinned ? -1 : 1;
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      });
+  }, [posts]);
+
+  const visibleThreads = useMemo(
+    () => (filter === "unanswered" ? threads.filter((t) => t.replies.length === 0) : threads),
+    [threads, filter],
+  );
+  const unansweredCount = useMemo(() => threads.filter((t) => t.replies.length === 0).length, [threads]);
+
+  const groups = useMemo(() => {
+    if (!isMeetingTopic) return [{ key: "all", label: null as string | null, threads: visibleThreads }];
+    const map = new Map<string, ForumThreadData[]>();
+    for (const t of visibleThreads) {
+      const key = meetingWeekKey(t.created_at);
+      const list = map.get(key) ?? [];
+      list.push(t);
+      map.set(key, list);
+    }
+    return [...map.entries()]
+      .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+      .map(([key, list]) => ({
+        key,
+        label: `For ${formatMeetingDay(key)}`,
+        threads: list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
+      }));
+  }, [visibleThreads, isMeetingTopic]);
+
+  // --- deep links: ?compose=1&title=&ref=  and  ?post=<id> ------------------
+  useEffect(() => {
+    if (!hasAccess || !topic || searchParams.get("compose") !== "1") return;
+    if (!topic.archived) {
+      setComposer((c) => ({
+        open: true,
+        title: (searchParams.get("title") || "").slice(0, 200),
+        ref: sanitizeRefPath(searchParams.get("ref")),
+        key: c.key + 1,
+      }));
+      window.setTimeout(() => document.getElementById("forum-composer")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    }
+    const next = new URLSearchParams(searchParams);
+    next.delete("compose");
+    next.delete("title");
+    next.delete("ref");
+    setSearchParams(next, { replace: true });
+  }, [hasAccess, topic, searchParams, setSearchParams]);
+
+  const permalinkId = searchParams.get("post");
+  useEffect(() => {
+    if (!permalinkId || !postsLoaded || handledPermalink.current === permalinkId) return;
+    handledPermalink.current = permalinkId;
+    const target = posts.find((p) => p.id === permalinkId);
+    if (!target) {
+      toast.info("That post isn't here any more. It may have been removed.");
       return;
     }
+    const threadId = target.parent_post_id ?? target.id;
+    setFilter("all");
+    setExpandedThreadId(threadId);
+    setHighlightId(threadId);
+    window.setTimeout(() => {
+      const el = document.getElementById(`post-${target.id}`) ?? document.getElementById(`post-${threadId}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+    window.setTimeout(() => setHighlightId((h) => (h === threadId ? null : h)), 3500);
+  }, [permalinkId, postsLoaded, posts]);
 
-    setIsSubmitting(true);
-    setModerationError(null);
-    
-    try {
-      // Check content moderation
-      const moderation = await moderateContent(newPostContent.trim(), newPostTitle.trim());
-      
-      if (!moderation.allowed) {
-        setModerationError(moderation.reason || "Please revise your message to be more respectful and try again.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const { error } = await supabase
-        .from('forum_posts')
-        .insert({
-          topic_id: topicId,
-          user_id: user.id,
-          title: newPostTitle.trim() || null,
-          content: newPostContent.trim()
-        });
-
-      if (error) throw error;
-
-      toast.success("Post created successfully!");
-      setNewPostTitle("");
-      setNewPostContent("");
-      setShowNewPost(false);
-      setModerationError(null);
-      fetchPosts();
-    } catch (error) {
-      console.error("Error creating post:", error);
-      toast.error("Failed to create post");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const openComposer = (title = "") => {
+    setComposer((c) => ({ open: true, title, ref: null, key: c.key + 1 }));
+    window.setTimeout(() => document.getElementById("forum-composer")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
 
-  const handleReply = async (parentPostId: string) => {
-    if (!user || !topicId || !replyContent.trim()) {
-      toast.error("Please enter your reply");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setModerationError(null);
-    
-    try {
-      // Check content moderation
-      const moderation = await moderateContent(replyContent.trim());
-      
-      if (!moderation.allowed) {
-        setModerationError(moderation.reason || "Please revise your reply to be more respectful and try again.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const { error } = await supabase
-        .from('forum_posts')
-        .insert({
-          topic_id: topicId,
-          user_id: user.id,
-          content: replyContent.trim(),
-          parent_post_id: parentPostId
-        });
-
-      if (error) throw error;
-
-      toast.success("Reply posted!");
-      setReplyContent("");
-      setReplyingTo(null);
-      fetchPosts();
-    } catch (error) {
-      console.error("Error posting reply:", error);
-      toast.error("Failed to post reply");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleDeletePost = async (post: ForumPost) => {
+  const handleDelete = async () => {
+    if (!deleteConfirm) return;
     setIsDeleting(true);
     try {
-      const { error } = await supabase
-        .from('forum_posts')
-        .delete()
-        .eq('id', post.id);
-
+      const { error } = await supabase.from("forum_posts").delete().eq("id", deleteConfirm.post.id);
       if (error) throw error;
-
-      toast.success("Post deleted");
+      toast.success("Deleted");
       setDeleteConfirm(null);
-      fetchPosts();
+      void fetchPosts();
     } catch (error) {
       console.error("Error deleting post:", error);
-      toast.error("Failed to delete post");
+      toast.error("Couldn't delete that. Please try again.");
     } finally {
       setIsDeleting(false);
     }
   };
 
-  const formatTimeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
-
-    if (diffMins < 1) return "Just now";
-    if (diffMins < 60) return `${diffMins} min${diffMins !== 1 ? 's' : ''} ago`;
-    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
-    if (diffDays < 7) return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
-    return date.toLocaleDateString();
-  };
-
-  const getAuthorDisplay = (author?: { username: string | null; first_name: string; last_name: string }) => {
-    if (!author) return "Anonymous";
-    return author.username || `${author.first_name} ${author.last_name.charAt(0)}.`;
-  };
-
-  if (!topicConfig) {
+  // --- render --------------------------------------------------------------
+  if (!topic) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="max-w-md">
-          <CardContent className="p-6 text-center">
-            <p className="text-muted-foreground mb-4">Topic not found</p>
-            <Link to="/family-forum">
-              <Button>Back to Forum</Button>
-            </Link>
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <Helmet>
+          <title>Conversation space not found | Sober Helpline Forum</title>
+        </Helmet>
+        <Card className="max-w-md w-full">
+          <CardContent className="p-6 text-center space-y-4">
+            <MessageCircle className="h-10 w-10 text-muted-foreground mx-auto" />
+            <p className="font-medium">We couldn't find that part of the forum.</p>
+            <p className="text-sm text-muted-foreground">
+              The link may be old. Everything is still in the forum, in three spaces: {ACTIVE_TOPICS.map((t) => t.title).join(", ")}.
+            </p>
+            <Button asChild>
+              <Link to="/family-forum">Go to the forum</Link>
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -421,29 +286,27 @@ export default function ForumTopic() {
     );
   }
 
-  if (!hasMembership) {
+  if (!hasAccess || !user) {
     return (
       <>
         <Helmet>
-          <title>{topicConfig.title} | Sober Helpline Forum</title>
+          <title>{topic.title} | Sober Helpline Forum</title>
         </Helmet>
         <div className="min-h-screen bg-background">
           <main className="container py-12">
             <Card className="max-w-md mx-auto">
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Members Only Content</CardTitle>
+                <CardTitle className="text-2xl">Members only</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-center text-muted-foreground">
-                  Join our family support membership to access the forum.
-                </p>
+                <p className="text-center text-muted-foreground">The family forum is part of the family support membership.</p>
                 <div className="flex flex-col gap-2">
-                  <Link to="/family-membership">
-                    <Button className="w-full">Become a Member</Button>
-                  </Link>
-                  <Link to="/family-forum">
-                    <Button variant="outline" className="w-full">Back to Forum</Button>
-                  </Link>
+                  <Button asChild className="w-full">
+                    <Link to="/family-membership">Become a member</Link>
+                  </Button>
+                  <Button asChild variant="outline" className="w-full">
+                    <Link to="/family-forum">Back to the forum</Link>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -453,22 +316,26 @@ export default function ForumTopic() {
     );
   }
 
+  const viewer: ForumViewer = { userId: user.id, canModerate, isAdmin };
+  const Icon = topic.icon;
+
   return (
     <>
       <Helmet>
-        <title>{topicConfig.title} | Sober Helpline Forum</title>
-        <meta name="description" content={topicConfig.description} />
+        <title>{topic.title} | Sober Helpline Forum</title>
+        <meta name="description" content={topic.description} />
+        <meta name="robots" content="noindex" />
       </Helmet>
 
-      <AlertDialog open={!!deleteConfirm} onOpenChange={() => setDeleteConfirm(null)}>
+      <AlertDialog open={!!deleteConfirm} onOpenChange={(open) => !open && setDeleteConfirm(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Post</AlertDialogTitle>
+            <AlertDialogTitle>Delete this {deleteConfirm?.post.parent_post_id ? "reply" : "post"}?</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this post? This action cannot be undone.
-              {deleteConfirm?.replies && deleteConfirm.replies.length > 0 && (
+              This can't be undone.
+              {deleteConfirm && deleteConfirm.replyCount > 0 && (
                 <span className="block mt-2 text-destructive">
-                  This will also delete {deleteConfirm.replies.length} replies.
+                  The {deleteConfirm.replyCount} {deleteConfirm.replyCount === 1 ? "reply" : "replies"} under it will be deleted too.
                 </span>
               )}
             </AlertDialogDescription>
@@ -476,7 +343,10 @@ export default function ForumTopic() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deleteConfirm && handleDeletePost(deleteConfirm)}
+              onClick={(e) => {
+                e.preventDefault();
+                void handleDelete();
+              }}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               disabled={isDeleting}
             >
@@ -486,240 +356,198 @@ export default function ForumTopic() {
         </AlertDialogContent>
       </AlertDialog>
 
-      <div className="min-h-screen bg-background">
-        <main className="container py-8 md:py-12">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-forum"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Forum
-            </Link>
+      <PrivateMessagesDialog
+        open={messagesOpen}
+        onOpenChange={(open) => {
+          setMessagesOpen(open);
+          if (!open) {
+            setMessageRecipient(null);
+            void unread.refresh();
+          }
+        }}
+        currentUserId={user.id}
+        initialRecipient={messageRecipient}
+        onMessagesChanged={() => void unread.refresh()}
+      />
 
-            {/* Topic Header */}
-            <div className="mb-8">
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-lg ${topicConfig.color} text-white`}>
-                  <MessageCircle className="h-6 w-6" />
-                </div>
-                <div className="flex-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-logo-blue mb-2">
-                    {topicConfig.title}
-                  </h1>
-                  <p className="text-muted-foreground">{topicConfig.description}</p>
-                </div>
-              </div>
-              
-              <div className="flex gap-2">
-                {user && topicId && <TopicFollow topicId={topicId} userId={user.id} />}
-                <Button onClick={() => setShowNewPost(true)} className="gap-2">
-                  <Plus className="h-4 w-4" />
-                  New Post
+      {canModerate && (
+        <ModeratorActionsDialog
+          open={moderateOpen}
+          onOpenChange={(open) => {
+            setModerateOpen(open);
+            if (!open) setModeratePreset(null);
+          }}
+          preset={moderatePreset}
+        />
+      )}
+
+      <div className="min-h-screen bg-background">
+        <main className="container px-4 py-8 md:py-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <Link to="/family-forum" className="inline-flex items-center text-primary hover:text-primary/80">
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to the forum
+              </Link>
+              <div className="flex flex-wrap gap-2">
+                <MentionNotifications userId={user.id} />
+                <Button variant="outline" size="sm" className="gap-2 relative" onClick={() => setMessagesOpen(true)}>
+                  <Mail className="h-4 w-4" />
+                  Messages
+                  {unread.count > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-600 text-white text-xs flex items-center justify-center">
+                      {unread.count > 9 ? "9+" : unread.count}
+                    </span>
+                  )}
                 </Button>
               </div>
             </div>
 
-            {/* New Post Form */}
-            {showNewPost && (
-              <Card className="mb-6">
-                <CardHeader>
-                  <CardTitle className="text-lg">Create New Post</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {moderationError && (
-                    <Alert variant="destructive">
-                      <AlertTriangle className="h-4 w-4" />
-                      <AlertDescription>{moderationError}</AlertDescription>
-                    </Alert>
-                  )}
-                  <Input
-                    placeholder="Post title (optional)"
-                    value={newPostTitle}
-                    onChange={(e) => {
-                      setNewPostTitle(e.target.value);
-                      setModerationError(null);
-                    }}
-                  />
-                  <Textarea
-                    placeholder="Share your thoughts..."
-                    value={newPostContent}
-                    onChange={(e) => {
-                      setNewPostContent(e.target.value);
-                      setModerationError(null);
-                    }}
-                    rows={4}
-                  />
-                  <div className="flex gap-2 justify-end">
-                    <Button variant="outline" onClick={() => {
-                      setShowNewPost(false);
-                      setNewPostTitle("");
-                      setNewPostContent("");
-                    }}>
-                      Cancel
-                    </Button>
-                    <Button 
-                      onClick={handleCreatePost} 
-                      disabled={isSubmitting || !newPostContent.trim()}
-                    >
-                      {isSubmitting ? (
-                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                      ) : (
-                        <Send className="h-4 w-4 mr-2" />
-                      )}
-                      Post
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+            <div className="mb-6">
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`p-3 rounded-lg shrink-0 ${topic.tileClass}`}>
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-2xl md:text-3xl font-bold text-logo-blue mb-2">{topic.title}</h1>
+                  <p className="text-muted-foreground">{topic.description}</p>
+                </div>
+              </div>
 
-            {/* Posts List */}
-            <div className="space-y-4">
-              {posts.length === 0 ? (
-                <Card>
-                  <CardContent className="py-12 text-center">
-                    <MessageCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground mb-4">
-                      No posts yet. Be the first to start a discussion!
+              {topic.archived ? (
+                <div className="rounded-lg border border-border bg-muted/40 p-4 text-sm flex gap-3">
+                  <Archive className="h-5 w-5 text-muted-foreground shrink-0" />
+                  <div>
+                    <p className="font-medium text-foreground">This is an earlier discussion space.</p>
+                    <p className="text-muted-foreground mt-1">
+                      You can read and reply to these conversations. New conversations now happen in{" "}
+                      {ACTIVE_TOPICS.map((t, i) => (
+                        <span key={t.id}>
+                          {i > 0 && (i === ACTIVE_TOPICS.length - 1 ? " and " : ", ")}
+                          <Link to={`/family-forum/${t.id}`} className="text-primary underline">
+                            {t.title}
+                          </Link>
+                        </span>
+                      ))}
+                      .
                     </p>
-                    <Button onClick={() => setShowNewPost(true)}>
-                      <Plus className="h-4 w-4 mr-2" />
-                      Create First Post
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ) : (
-                posts.map((post) => (
-                  <Card key={post.id}>
-                    <CardContent className="p-4 md:p-6">
-                      {/* Main Post */}
-                      <div className="space-y-3">
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            {post.title && (
-                              <h3 className="font-semibold text-lg text-logo-blue mb-1">
-                                {post.title}
-                              </h3>
-                            )}
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <User className="h-3 w-3" />
-                              <span>{getAuthorDisplay(post.author)}</span>
-                              <span>•</span>
-                              <Clock className="h-3 w-3" />
-                              <span>{formatTimeAgo(post.created_at)}</span>
-                            </div>
-                          </div>
-                          {(post.user_id === user?.id || canModerate) && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => setDeleteConfirm(post)}
-                              className="text-muted-foreground hover:text-destructive"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          )}
-                        </div>
-                        
-                        <p className="text-foreground whitespace-pre-wrap">{post.content}</p>
-                        
-                        {/* Poll Display */}
-                        {user && <PollDisplay postId={post.id} userId={user.id} />}
-
-                        <div className="flex items-center gap-2 pt-2 flex-wrap">
-                          {user && <PostReactions postId={post.id} userId={user.id} />}
-                          <div className="flex items-center gap-1 ml-auto">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => setReplyingTo(replyingTo === post.id ? null : post.id)}
-                              className="text-muted-foreground"
-                            >
-                              <MessageCircle className="h-4 w-4 mr-1" />
-                              Reply
-                              {post.replies && post.replies.length > 0 && (
-                                <Badge variant="secondary" className="ml-2">
-                                  {post.replies.length}
-                                </Badge>
-                              )}
-                            </Button>
-                            {user && <PostBookmark postId={post.id} userId={user.id} />}
-                          </div>
-                        </div>
-
-                        {/* Reply Form */}
-                        {replyingTo === post.id && (
-                          <div className="mt-4 pl-4 border-l-2 border-border">
-                            <Textarea
-                              placeholder="Write your reply..."
-                              value={replyContent}
-                              onChange={(e) => setReplyContent(e.target.value)}
-                              rows={2}
-                              className="mb-2"
-                            />
-                            <div className="flex gap-2 justify-end">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => {
-                                  setReplyingTo(null);
-                                  setReplyContent("");
-                                }}
-                              >
-                                Cancel
-                              </Button>
-                              <Button
-                                size="sm"
-                                onClick={() => handleReply(post.id)}
-                                disabled={isSubmitting || !replyContent.trim()}
-                              >
-                                {isSubmitting ? (
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                ) : (
-                                  "Reply"
-                                )}
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Replies */}
-                        {post.replies && post.replies.length > 0 && (
-                          <div className="mt-4 space-y-3 pl-4 border-l-2 border-border">
-                            {post.replies.map((reply) => (
-                              <div key={reply.id} className="bg-muted/50 rounded-lg p-3">
-                                <div className="flex items-start justify-between gap-2 mb-2">
-                                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                    <User className="h-3 w-3" />
-                                    <span>{getAuthorDisplay(reply.author)}</span>
-                                    <span>•</span>
-                                    <span>{formatTimeAgo(reply.created_at)}</span>
-                                  </div>
-                                  {(reply.user_id === user?.id || canModerate) && (
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() => setDeleteConfirm(reply)}
-                                      className="h-6 w-6 p-0 text-muted-foreground hover:text-destructive"
-                                    >
-                                      <Trash2 className="h-3 w-3" />
-                                    </Button>
-                                  )}
-                                </div>
-                                <p className="text-foreground text-sm whitespace-pre-wrap">
-                                  {reply.content}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
+                <div className="flex flex-wrap gap-2">
+                  <TopicFollow topicId={topic.id} userId={user.id} />
+                  {!isMeetingTopic && (
+                    <Button onClick={() => openComposer()} className="gap-2">
+                      <Plus className="h-4 w-4" />
+                      Start a conversation
+                    </Button>
+                  )}
+                </div>
+              )}
+              {canModerate && (
+                <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
+                  <Shield className="h-3 w-3" />
+                  You're seeing moderator tools.
+                </p>
               )}
             </div>
+
+            {isMeetingTopic && <MeetingRoom onAsk={() => openComposer()} />}
+
+            {composer.open && !topic.archived && (
+              <div id="forum-composer" className="scroll-mt-24">
+                <ForumComposer
+                  key={composer.key}
+                  userId={user.id}
+                  topicId={topic.id}
+                  heading={isMeetingTopic ? "Ask a question for Monday" : "Start a conversation"}
+                  titlePlaceholder={isMeetingTopic ? "Your question in a few words" : "A short title (optional)"}
+                  bodyPlaceholder={
+                    isMeetingTopic
+                      ? "Tell us what's going on, as much or as little as you like."
+                      : "Share what's on your mind…"
+                  }
+                  initialTitle={composer.title}
+                  refPath={composer.ref}
+                  onPosted={(postId) => {
+                    setComposer((c) => ({ ...c, open: false }));
+                    void fetchPosts().then(() => {
+                      setHighlightId(postId);
+                      window.setTimeout(() => document.getElementById(`post-${postId}`)?.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+                      window.setTimeout(() => setHighlightId((h) => (h === postId ? null : h)), 3500);
+                    });
+                  }}
+                  onCancel={() => setComposer((c) => ({ ...c, open: false }))}
+                />
+              </div>
+            )}
+
+            {threads.length > 0 && (
+              <Tabs value={filter} onValueChange={(v) => setFilter(v as Filter)} className="mb-4">
+                <TabsList>
+                  <TabsTrigger value="all">All</TabsTrigger>
+                  <TabsTrigger value="unanswered">Unanswered{unansweredCount > 0 ? ` (${unansweredCount})` : ""}</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            )}
+
+            {!postsLoaded ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              </div>
+            ) : visibleThreads.length === 0 ? (
+              <Card>
+                <CardContent className="py-10 text-center space-y-4">
+                  <MessageCircle className="h-10 w-10 text-muted-foreground mx-auto" />
+                  <p className="text-muted-foreground">
+                    {filter === "unanswered"
+                      ? "Every conversation here has a reply."
+                      : isMeetingTopic
+                        ? "No questions for Monday yet. Yours could be the first."
+                        : topic.archived
+                          ? "There are no conversations in this space."
+                          : "No conversations yet. You could start one."}
+                  </p>
+                  {!topic.archived && filter === "all" && (
+                    <Button onClick={() => openComposer()}>
+                      <Plus className="h-4 w-4 mr-2" />
+                      {isMeetingTopic ? "Ask a question" : "Start a conversation"}
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="space-y-8">
+                {groups.map((group) => (
+                  <section key={group.key} aria-label={group.label ?? undefined} className="space-y-4">
+                    {group.label && <h2 className="text-lg font-semibold text-logo-blue">{group.label}</h2>}
+                    {group.threads.map((thread) => (
+                      <ForumThread
+                        key={thread.id}
+                        thread={thread}
+                        topicId={topic.id}
+                        isMeetingTopic={isMeetingTopic}
+                        names={names}
+                        viewer={viewer}
+                        highlighted={highlightId === thread.id}
+                        forceExpanded={expandedThreadId === thread.id}
+                        canReply
+                        onRefresh={() => void fetchPosts()}
+                        onDelete={(post, replyCount) => setDeleteConfirm({ post, replyCount })}
+                        onMessage={(member) => {
+                          setMessageRecipient(member);
+                          setMessagesOpen(true);
+                        }}
+                        onModerate={(preset) => {
+                          setModeratePreset(preset);
+                          setModerateOpen(true);
+                        }}
+                      />
+                    ))}
+                  </section>
+                ))}
+              </div>
+            )}
           </div>
         </main>
       </div>

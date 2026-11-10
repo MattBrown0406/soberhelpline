@@ -3,7 +3,7 @@
  * Run: bun run src/data/exercises/__tests__/exercises.check.ts
  * (No test framework or new dependencies; exits non-zero on failure.)
  */
-import { EXERCISES, getExercise, OTHER_VALUE, otherKey, pruneAnswers, outputToText, describeChange, retakeDate, shortDate } from "../index";
+import { EXERCISES, getExercise, OTHER_VALUE, otherKey, pruneAnswers, outputToText, describeChange, retakeDate, shortDate, orderExercises, isDueForRetake } from "../index";
 import type { Answers, Exercise, ExerciseStep } from "../index";
 import { visibleSteps } from "../helpers";
 import { boundaryStatement } from "../boundaryScript";
@@ -263,10 +263,20 @@ eq("short date same year", shortDate(new Date(2026, 10, 3), new Date(2026, 10, 1
 eq("short date other year", shortDate(new Date(2025, 0, 9), new Date(2026, 10, 10)), "Jan 9, 2025");
 has("describe down", describeChange(20, 14, "Oct 3"), "Down 6 points since Oct 3");
 has("describe up", describeChange(10, 11, "Oct 3"), "Up 1 point since Oct 3");
+{
+  const now = new Date("2026-11-10T00:00:00Z");
+  const items = [{ id: "a" }, { id: "b" }, { id: "c" }, { id: "d" }, { id: "e" }];
+  const latest = {
+    a: { completed_at: "2026-11-01T00:00:00Z" }, // recent
+    b: { completed_at: "2026-09-01T00:00:00Z" }, // due
+    e: { completed_at: "2026-10-20T00:00:00Z" }, // recent, older than a
+  };
+  eq("grid order: in progress, new, due, recent (oldest first)", orderExercises(items, latest, new Set(["d"]), now).map((x) => x.id), ["d", "c", "b", "e", "a"]);
+  check("due exactly at 30 days", isDueForRetake("2026-10-11T00:00:00Z", now) && !isDueForRetake("2026-10-12T00:00:00Z", now));
+}
 eq("describe same", describeChange(5, 5, "Oct 3"), "The same score as Oct 3.");
 
 console.log(`${passed} passed, ${failed} failed`);
 if (failed > 0) {
-  // eslint-disable-next-line no-undef
   (globalThis as { process?: { exit: (n: number) => void } }).process?.exit(1);
 }

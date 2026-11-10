@@ -225,7 +225,6 @@ const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
 const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
 const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettingWorksheet"));
 const ZoomRecordings = React.lazy(() => import("./pages/ZoomRecordings"));
-const MemberLearningPaths = React.lazy(() => import("./pages/MemberLearningPaths"));
 const MemberQandA = React.lazy(() => import("./pages/MemberQandA"));
 const Workbook = React.lazy(() => import("./pages/Workbook"));
 const WorkbookExercise = React.lazy(() => import("./pages/WorkbookExercise"));
@@ -531,7 +530,8 @@ const App = () => (
               <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
               <Route path="/zoom-recordings" element={<SubscriberRoute><ZoomRecordings /></SubscriberRoute>} />
               <Route path="/member-home" element={<SubscriberRoute><MemberHome /></SubscriberRoute>} />
-              <Route path="/member-learning-paths" element={<SubscriberRoute><MemberLearningPaths /></SubscriberRoute>} />
+              {/* The old learning paths page: one path system now lives on the member home page. */}
+              <Route path="/member-learning-paths" element={<Navigate to="/member-home" replace />} />
               <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
               <Route path="/workbook" element={<SubscriberRoute><Workbook /></SubscriberRoute>} />
               <Route path="/workbook/:exerciseId" element={<SubscriberRoute><WorkbookExercise /></SubscriberRoute>} />

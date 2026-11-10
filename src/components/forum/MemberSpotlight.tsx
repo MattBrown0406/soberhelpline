@@ -4,12 +4,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { fetchPublicProfiles } from "@/lib/publicProfiles";
 import { UserBadges } from "./UserBadges";
+import { forumDisplayName } from "@/lib/forumTopics";
 
 interface Spotlight {
   user_id: string;
   reason: string | null;
   username: string;
-  first_name: string;
 }
 
 export function MemberSpotlight() {
@@ -32,8 +32,7 @@ export function MemberSpotlight() {
           setSpotlight({
             user_id: data.user_id,
             reason: data.reason,
-            username: profiles[0].username || '',
-            first_name: profiles[0].first_name
+            username: forumDisplayName(profiles[0].username),
           });
         }
       }
@@ -57,7 +56,7 @@ export function MemberSpotlight() {
             </h4>
             <div className="flex items-center gap-2 mb-1">
               <span className="font-semibold">
-                {spotlight.username || spotlight.first_name}
+                {spotlight.username}
               </span>
               <UserBadges userId={spotlight.user_id} />
             </div>

@@ -402,13 +402,14 @@ export function getMondayMeeting(now: Date = new Date()): MondayMeeting {
   const monday = new Date(Date.UTC(p.year, p.month - 1, p.day + daysUntilMonday));
   let start = pacificWallTime(monday.getUTCFullYear(), monday.getUTCMonth() + 1, monday.getUTCDate(), MEETING_START_HOUR);
   let end = pacificWallTime(monday.getUTCFullYear(), monday.getUTCMonth() + 1, monday.getUTCDate(), MEETING_END_HOUR);
+  // Still Monday in Pacific time and this week's meeting hasn't ended yet.
+  const isToday = p.weekday === 1 && nowMs < end;
   if (nowMs >= end) {
     const next = new Date(Date.UTC(monday.getUTCFullYear(), monday.getUTCMonth(), monday.getUTCDate() + 7));
     start = pacificWallTime(next.getUTCFullYear(), next.getUTCMonth() + 1, next.getUTCDate(), MEETING_START_HOUR);
     end = pacificWallTime(next.getUTCFullYear(), next.getUTCMonth() + 1, next.getUTCDate(), MEETING_END_HOUR);
   }
   const isLive = nowMs >= start && nowMs < end;
-  const isToday = p.weekday === 1 && nowMs < end;
   const startDate = new Date(start);
   const viewerOffsetMs = -startDate.getTimezoneOffset() * 60_000;
   return {
