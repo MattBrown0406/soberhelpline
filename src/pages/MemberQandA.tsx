@@ -111,7 +111,7 @@ export default function MemberQandA() {
                 Recordings
               </Button>
             </Link>
-            <Link to="/member-learning-paths">
+            <Link to="/member-home">
               <Button variant="outline" size="sm" className="gap-1.5">
                 <BookOpen className="h-3.5 w-3.5" />
                 Learning Paths
