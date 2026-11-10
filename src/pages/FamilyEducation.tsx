@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Lock, Loader2, FileText, Headphones, Download, BookOpen, Brain, Heart, Sparkles, AlertTriangle, Scale, Compass, Lightbulb, RefreshCw, Eye, Shield, Users, CheckCircle2, Circle, ArrowRight, NotebookPen } from "lucide-react";
-import type { ComponentType, ReactNode } from "react";
+import type { ReactNode } from "react";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";

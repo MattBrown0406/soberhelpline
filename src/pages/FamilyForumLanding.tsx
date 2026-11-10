@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
+import { ACTIVE_TOPICS, MEETING_TOPIC_ID, forumPostLink } from "@/lib/forumTopics";
 import familyHero from "@/assets/family-hero.png";
 import healingCircle from "@/assets/blog-healing-circle-family-support.png";
 
@@ -18,7 +19,7 @@ const faqItems = [
   },
   {
     question: "Is it really anonymous?",
-    answer: "Yes. You choose your own username. Your real name, email, and contact information are never visible to other members. What you share stays in the community.",
+    answer: "Yes. You choose your own username, and you can also post anonymously. Your real name, email, and contact information are never visible to other members. What you share stays in the community.",
   },
   {
     question: "Who moderates the forum?",
@@ -34,16 +35,8 @@ const faqItems = [
   },
 ];
 
-const topics = [
-  { icon: Users, label: "Introductions & Welcome", desc: "New here? Meet the community.", color: "bg-blue-500" },
-  { icon: Heart, label: "Share Your Story", desc: "A safe space for your journey.", color: "bg-pink-500" },
-  { icon: MessageCircle, label: "Ask the Community", desc: "Real answers from families who've been there.", color: "bg-green-500" },
-  { icon: Shield, label: "Setting Boundaries", desc: "Strategies that actually work.", color: "bg-orange-500" },
-  { icon: MessagesSquare, label: "Intervention Discussions", desc: "Planning or considering an intervention.", color: "bg-red-500" },
-  { icon: BookOpen, label: "Treatment Discussions", desc: "Navigating rehab, IOP & sober living.", color: "bg-cyan-500" },
-  { icon: Heart, label: "Recovery Wins", desc: "Celebrate progress, big and small.", color: "bg-yellow-500" },
-  { icon: Sparkles, label: "Self-Care & Wellness", desc: "Because you matter too.", color: "bg-purple-500" },
-];
+// The forum's three spaces (single source: src/lib/forumTopics.ts).
+const topics = ACTIVE_TOPICS.map((t) => ({ icon: t.icon, label: t.title, desc: t.description, color: t.tileClass }));
 
 const benefits = [
   {
@@ -103,15 +96,18 @@ export default function FamilyForumLanding() {
 
   useEffect(() => {
     const fetchFeaturedThread = async () => {
+      // Members only: the secure view returns nothing for visitors, so the
+      // card simply doesn't show for them.
       const { data } = await supabase
-        .from("forum_posts")
+        .from("forum_posts_secure")
         .select("id, title, created_at, topic_id")
-        .eq("topic_id", "share-story")
+        .in("topic_id", [MEETING_TOPIC_ID, "share-story"])
+        .is("parent_post_id", null)
         .eq("is_pinned", true)
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
-      setFeaturedThread(data);
+      setFeaturedThread(data && data.id && data.topic_id ? { id: data.id, title: data.title ?? "", created_at: data.created_at ?? "", topic_id: data.topic_id } : null);
     };
     fetchFeaturedThread();
   }, []);
@@ -243,7 +239,7 @@ export default function FamilyForumLanding() {
                   </p>
                 </div>
                 <Link
-                  to={`/family-forum/${featuredThread.topic_id}?post=${featuredThread.id}`}
+                  to={forumPostLink(featuredThread.topic_id, featuredThread.id)}
                   className="flex-shrink-0 text-xs font-semibold text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-900/50 hover:bg-green-200 dark:hover:bg-green-900 px-3 py-1.5 rounded-lg transition-colors"
                 >
                   Join Thread →
@@ -325,14 +321,14 @@ export default function FamilyForumLanding() {
           <div className="container max-w-6xl mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-3xl font-bold text-logo-blue mb-3">What Families Talk About</h2>
-              <p className="text-muted-foreground">8 discussion categories covering every part of the journey.</p>
+              <p className="text-muted-foreground">Three spaces, so every conversation finds people.</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
               {topics.map((topic) => (
                 <Card key={topic.label} className="hover:shadow-md transition-all border-border/50">
                   <CardContent className="p-5">
                     <div className={`w-10 h-10 ${topic.color} rounded-xl flex items-center justify-center mb-3`}>
-                      <topic.icon className="h-5 w-5 text-white" />
+                      <topic.icon className="h-5 w-5" />
                     </div>
                     <h3 className="font-semibold text-logo-blue text-sm mb-1">{topic.label}</h3>
                     <p className="text-xs text-muted-foreground">{topic.desc}</p>
@@ -341,7 +337,7 @@ export default function FamilyForumLanding() {
               ))}
             </div>
             <div className="text-center">
-              <p className="text-muted-foreground text-sm mb-4">Full access to all topics included with membership.</p>
+              <p className="text-muted-foreground text-sm mb-4">Full access to the forum is included with membership.</p>
               <Link to="/family-membership">
                 <Button size="lg" className="gap-2">
                   <Lock className="h-4 w-4" />

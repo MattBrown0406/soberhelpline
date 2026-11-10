@@ -62,6 +62,13 @@ interface FamilyMember {
   email: string;
 }
 
+// Admin-only screen: real names and emails are fine here.
+function memberLabel(m: { username: string | null; first_name: string | null; last_name: string | null }): string {
+  const name = [m.first_name, m.last_name].filter(Boolean).join(" ").trim();
+  return m.username?.trim() || name || "No name";
+}
+
+/** Admin → assign/remove forum moderators. No props. */
 export function ModeratorManagement() {
   const [moderators, setModerators] = useState<Moderator[]>([]);
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
@@ -132,40 +139,52 @@ export function ModeratorManagement() {
 
   const fetchFamilyMembers = async () => {
     try {
-      // Get all active family members
-      const { data: subscriptions, error: subError } = await supabase
+      // Current family members, by the same rule as public.is_active_family_member
+      // (active rows within their access/app-grace dates, or cancelled rows that
+      // are paid through). Admins can read every provider_subscriptions row.
+      const { data: rows, error: subError } = await supabase
         .from('provider_subscriptions')
-        .select('user_id')
+        .select('user_id, status, access_ends_at, plan_type, app_grace_until')
         .is('provider_submission_id', null)
-        .eq('status', 'active');
+        .in('status', ['active', 'cancelled']);
 
       if (subError) throw subError;
 
-      if (!subscriptions || subscriptions.length === 0) {
+      const now = Date.now();
+      const after = (iso: string | null) => !!iso && new Date(iso).getTime() > now;
+      const subscriptions = (rows || []).filter((r) =>
+        r.status === 'active'
+          ? (!r.access_ends_at || after(r.access_ends_at)) &&
+            (r.plan_type !== 'app' || !r.app_grace_until || after(r.app_grace_until))
+          : after(r.access_ends_at),
+      );
+
+      if (subscriptions.length === 0) {
         setFamilyMembers([]);
         return;
       }
 
       const userIds = [...new Set(subscriptions.map(s => s.user_id))];
 
-      const { data: profiles, error: profileError } = await supabase
-        .from('profiles')
-        .select('id, username, first_name, last_name')
-        .in('id', userIds);
+      // Fetch in batches so long id lists don't overflow the request URL.
+      const profiles: Array<{ id: string; username: string | null; first_name: string; last_name: string }> = [];
+      const contacts: Array<{ user_id: string; email: string }> = [];
+      for (let i = 0; i < userIds.length; i += 100) {
+        const batch = userIds.slice(i, i + 100);
+        const [profileRes, contactRes] = await Promise.all([
+          supabase.from('profiles').select('id, username, first_name, last_name').in('id', batch),
+          supabase.from('profile_private').select('user_id, email').in('user_id', batch),
+        ]);
+        if (profileRes.error) throw profileRes.error;
+        if (contactRes.error) throw contactRes.error;
+        profiles.push(...(profileRes.data || []));
+        contacts.push(...(contactRes.data || []));
+      }
 
-      if (profileError) throw profileError;
-
-      const { data: contacts, error: contactError } = await supabase
-        .from('profile_private')
-        .select('user_id, email')
-        .in('user_id', userIds);
-
-      if (contactError) throw contactError;
-
-      const merged: FamilyMember[] = (profiles || []).map(p => {
-        const contact = contacts?.find(c => c.user_id === p.id);
-        return { ...p, email: contact?.email || '' };
-      });
+      const emailById = new Map(contacts.map(c => [c.user_id, c.email]));
+      const merged: FamilyMember[] = profiles
+        .map(p => ({ ...p, email: emailById.get(p.id) || '' }))
+        .sort((a, b) => memberLabel(a).localeCompare(memberLabel(b)));
 
       setFamilyMembers(merged);
     } catch (error) {
@@ -216,7 +235,7 @@ export function ModeratorManagement() {
 
       if (error) throw error;
 
-      toast.success(`Moderator role removed for ${moderator.profile?.username || moderator.profile?.first_name}`);
+      toast.success(`Moderator role removed for ${moderator.profile ? memberLabel(moderator.profile) : "this member"}`);
       setConfirmRemove(null);
       fetchModerators();
     } catch (error) {
@@ -277,7 +296,7 @@ export function ModeratorManagement() {
                   {moderator.profile?.username || <span className="text-muted-foreground italic">Not set</span>}
                 </TableCell>
                 <TableCell>
-                  {moderator.profile?.first_name} {moderator.profile?.last_name}
+                  {[moderator.profile?.first_name, moderator.profile?.last_name].filter(Boolean).join(" ") || "-"}
                 </TableCell>
                 <TableCell>{moderator.contact?.email || '-'}</TableCell>
                 <TableCell>
@@ -340,7 +359,7 @@ export function ModeratorManagement() {
                 ) : (
                   availableMembers.map((member) => (
                     <SelectItem key={member.id} value={member.id}>
-                      {member.username || `${member.first_name} ${member.last_name}`} ({member.email})
+                      {memberLabel(member)}{member.email ? ` (${member.email})` : ""}
                     </SelectItem>
                   ))
                 )}
@@ -373,7 +392,7 @@ export function ModeratorManagement() {
             <AlertDialogTitle>Remove Moderator</AlertDialogTitle>
             <AlertDialogDescription>
               Are you sure you want to remove moderator permissions from{" "}
-              <strong>{confirmRemove?.profile?.username || confirmRemove?.profile?.first_name}</strong>?
+              <strong>{confirmRemove?.profile ? memberLabel(confirmRemove.profile) : "this member"}</strong>?
               They will no longer be able to warn members or recommend removals.
             </AlertDialogDescription>
           </AlertDialogHeader>
