@@ -227,6 +227,8 @@ const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettin
 const ZoomRecordings = React.lazy(() => import("./pages/ZoomRecordings"));
 const MemberLearningPaths = React.lazy(() => import("./pages/MemberLearningPaths"));
 const MemberQandA = React.lazy(() => import("./pages/MemberQandA"));
+const Workbook = React.lazy(() => import("./pages/Workbook"));
+const WorkbookExercise = React.lazy(() => import("./pages/WorkbookExercise"));
 const MemberHome = React.lazy(() => import("./pages/MemberHome"));
 const MemberBilling = React.lazy(() => import("./pages/MemberBilling"));
 const CancelMembership = React.lazy(() => import("./pages/CancelMembership"));
@@ -531,6 +533,8 @@ const App = () => (
               <Route path="/member-home" element={<SubscriberRoute><MemberHome /></SubscriberRoute>} />
               <Route path="/member-learning-paths" element={<SubscriberRoute><MemberLearningPaths /></SubscriberRoute>} />
               <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
+              <Route path="/workbook" element={<SubscriberRoute><Workbook /></SubscriberRoute>} />
+              <Route path="/workbook/:exerciseId" element={<SubscriberRoute><WorkbookExercise /></SubscriberRoute>} />
               <Route path="/member-billing" element={<MemberBilling />} />
               <Route path="/membership/billing" element={<MemberBilling />} />
               <Route path="/cancel-membership" element={<CancelMembership />} />

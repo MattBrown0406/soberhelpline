@@ -194,7 +194,7 @@ serve(async (req: Request) => {
       const firstName = profileMap.get(pp.user_id) || "Friend";
       const safeName = escapeHtml(firstName);
 
-      const questionUrl = `${siteUrl}/monday-zoom-registration?member=true`;
+      const questionUrl = "https://soberhelpline.com/family-forum/this-weeks-meeting?compose=1";
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">

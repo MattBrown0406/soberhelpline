@@ -1,31 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserBadges } from "./UserBadges";
-import { Calendar, MessageCircle, Award, User } from "lucide-react";
+import { MessageCircle, Award, User, Mail } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
+import { forumPostLink, getForumTopic } from "@/lib/forumTopics";
 
 interface MemberProfileProps {
   userId: string;
+  /** The member's username (or "Member"). Never a real name. */
   displayName: string;
-  children?: React.ReactNode;
-}
-
-interface ProfileData {
-  id: string;
-  username: string | null;
-  first_name: string;
-  created_at: string | null;
+  currentUserId?: string;
+  /** Offer "Send a private message"; omitted for anonymous authors. */
+  onMessage?: (member: { id: string; username: string }) => void;
+  children?: ReactNode;
 }
 
 interface UserPost {
   id: string;
   topic_id: string;
+  parent_post_id: string | null;
   title: string | null;
   content: string;
   created_at: string;
@@ -36,12 +35,15 @@ interface BadgeData {
   name: string;
   description: string;
   icon: string;
-  color: string;
   awarded_at: string;
 }
 
-export function MemberProfile({ userId, displayName, children }: MemberProfileProps) {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
+/**
+ * A member's forum profile: username, badges and recent posts. Anonymous posts
+ * are never listed (filtered on is_anonymous, because staff viewers receive
+ * user_id for anonymous posts from forum_posts_secure).
+ */
+export function MemberProfile({ userId, displayName, currentUserId, onMessage, children }: MemberProfileProps) {
   const [posts, setPosts] = useState<UserPost[]>([]);
   const [badges, setBadges] = useState<BadgeData[]>([]);
   const [postCount, setPostCount] = useState(0);
@@ -50,102 +52,100 @@ export function MemberProfile({ userId, displayName, children }: MemberProfilePr
 
   useEffect(() => {
     if (!isOpen) return;
-    
+    let cancelled = false;
+
     const fetchProfileData = async () => {
       setIsLoading(true);
       try {
-        // Fetch profile
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('id, username, first_name, created_at')
-          .eq('id', userId)
-          .single();
-        
-        if (profileData) {
-          setProfile(profileData);
-        }
+        const [postsRes, badgesRes] = await Promise.all([
+          supabase
+            .from("forum_posts_secure")
+            .select("id, topic_id, parent_post_id, title, content, created_at", { count: "exact" })
+            .eq("user_id", userId)
+            .eq("is_anonymous", false)
+            .order("created_at", { ascending: false })
+            .limit(10),
+          supabase
+            .from("user_forum_badges")
+            .select("awarded_at, forum_badges ( id, name, description, icon )")
+            .eq("user_id", userId),
+        ]);
+        if (cancelled) return;
 
-        // Fetch post count and recent posts
-        const { data: postsData, count } = await supabase
-          .from('forum_posts')
-          .select('id, topic_id, title, content, created_at', { count: 'exact' })
-          .eq('user_id', userId)
-          .order('created_at', { ascending: false })
-          .limit(10);
-        
-        if (postsData) {
-          setPosts(postsData);
-        }
-        if (count !== null) {
-          setPostCount(count);
-        }
+        setPosts(((postsRes.data as unknown as UserPost[]) || []).filter((p) => !!p.id));
+        setPostCount(postsRes.count ?? 0);
 
-        // Fetch badges
-        const { data: badgesData } = await supabase
-          .from('user_forum_badges')
-          .select(`
-            awarded_at,
-            forum_badges (
-              id,
-              name,
-              description,
-              icon,
-              color
-            )
-          `)
-          .eq('user_id', userId);
-        
-        if (badgesData) {
-          setBadges(badgesData.map(b => ({
-            ...b.forum_badges as any,
-            awarded_at: b.awarded_at
-          })));
-        }
+        const rows = (badgesRes.data as unknown as Array<{ awarded_at: string; forum_badges: Omit<BadgeData, "awarded_at"> | null }>) || [];
+        setBadges(
+          rows
+            .filter((b) => !!b.forum_badges)
+            .map((b) => ({ ...(b.forum_badges as Omit<BadgeData, "awarded_at">), awarded_at: b.awarded_at })),
+        );
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        console.error("Error fetching profile:", error);
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     };
 
-    fetchProfileData();
+    void fetchProfileData();
+    return () => {
+      cancelled = true;
+    };
   }, [userId, isOpen]);
 
-  const truncateContent = (content: string, maxLength: number = 100) => {
-    if (content.length <= maxLength) return content;
-    return content.substring(0, maxLength) + '...';
+  const excerpt = (content: string, maxLength = 120) => {
+    const text = content.replace(/\s+/g, " ").trim();
+    return text.length <= maxLength ? text : `${text.substring(0, maxLength)}…`;
   };
+
+  const canMessage = !!onMessage && userId !== currentUserId && displayName !== "Member";
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {children || (
-          <button className="text-primary hover:underline font-medium">
+          <button type="button" className="text-primary hover:underline font-medium">
             {displayName}
           </button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh]">
+      <DialogContent className="max-w-2xl max-h-[85vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
               <User className="h-5 w-5 text-primary" />
             </div>
-            <div>
-              <span className="text-xl">{displayName}</span>
+            <div className="min-w-0">
+              <span className="text-xl break-words">{displayName}</span>
               <UserBadges userId={userId} />
             </div>
           </DialogTitle>
+          <DialogDescription className="sr-only">Forum profile for {displayName}</DialogDescription>
         </DialogHeader>
-        
+
+        {canMessage && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2 w-fit"
+            onClick={() => {
+              setIsOpen(false);
+              onMessage?.({ id: userId, username: displayName });
+            }}
+          >
+            <Mail className="h-4 w-4" />
+            Send a private message
+          </Button>
+        )}
+
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
           </div>
         ) : (
           <div className="space-y-4">
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <Card>
                 <CardContent className="p-4 text-center">
                   <MessageCircle className="h-5 w-5 mx-auto text-primary mb-1" />
@@ -160,49 +160,33 @@ export function MemberProfile({ userId, displayName, children }: MemberProfilePr
                   <div className="text-xs text-muted-foreground">Badges</div>
                 </CardContent>
               </Card>
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Calendar className="h-5 w-5 mx-auto text-emerald-500 mb-1" />
-                  <div className="text-sm font-medium">
-                    {profile?.created_at 
-                      ? formatDistanceToNow(new Date(profile.created_at), { addSuffix: true })
-                      : 'N/A'
-                    }
-                  </div>
-                  <div className="text-xs text-muted-foreground">Joined</div>
-                </CardContent>
-              </Card>
             </div>
 
             <Tabs defaultValue="posts">
               <TabsList className="w-full">
-                <TabsTrigger value="posts" className="flex-1">Recent Posts</TabsTrigger>
+                <TabsTrigger value="posts" className="flex-1">Recent posts</TabsTrigger>
                 <TabsTrigger value="badges" className="flex-1">Badges</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="posts">
-                <ScrollArea className="h-[300px]">
+                <ScrollArea className="h-[300px] max-h-[45vh]">
                   {posts.length === 0 ? (
-                    <p className="text-center text-muted-foreground py-8">
-                      No posts yet
-                    </p>
+                    <p className="text-center text-muted-foreground py-8">No posts yet</p>
                   ) : (
-                    <div className="space-y-2">
-                      {posts.map(post => (
-                        <Link 
-                          key={post.id} 
-                          to={`/family-forum/${post.topic_id}`}
+                    <div className="space-y-2 pr-2">
+                      {posts.map((post) => (
+                        <Link
+                          key={post.id}
+                          to={forumPostLink(post.topic_id, post.id)}
                           onClick={() => setIsOpen(false)}
+                          className="block"
                         >
-                          <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+                          <Card className="hover:bg-accent/50 transition-colors">
                             <CardContent className="p-3">
-                              {post.title && (
-                                <div className="font-medium text-sm mb-1">{post.title}</div>
-                              )}
-                              <p className="text-sm text-muted-foreground">
-                                {truncateContent(post.content)}
-                              </p>
+                              {post.title && <div className="font-medium text-sm mb-1">{post.title}</div>}
+                              <p className="text-sm text-muted-foreground break-words">{excerpt(post.content)}</p>
                               <div className="text-xs text-muted-foreground mt-2">
+                                {post.parent_post_id ? "Reply" : "Conversation"} in {getForumTopic(post.topic_id)?.title ?? "the forum"} ·{" "}
                                 {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
                               </div>
                             </CardContent>
@@ -213,29 +197,22 @@ export function MemberProfile({ userId, displayName, children }: MemberProfilePr
                   )}
                 </ScrollArea>
               </TabsContent>
-              
+
               <TabsContent value="badges">
-                <ScrollArea className="h-[300px]">
+                <ScrollArea className="h-[300px] max-h-[45vh]">
                   {badges.length === 0 ? (
-                    <p className="text-center text-muted-foreground py-8">
-                      No badges earned yet
-                    </p>
+                    <p className="text-center text-muted-foreground py-8">No badges yet</p>
                   ) : (
-                    <div className="grid grid-cols-2 gap-3">
-                      {badges.map(badge => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pr-2">
+                      {badges.map((badge) => (
                         <Card key={badge.id}>
                           <CardContent className="p-3 flex items-start gap-3">
-                            <div 
-                              className="h-8 w-8 rounded-full flex items-center justify-center text-white text-lg"
-                              style={{ backgroundColor: badge.color }}
-                            >
+                            <div className="h-8 w-8 rounded-full flex items-center justify-center text-lg bg-muted shrink-0">
                               {badge.icon}
                             </div>
                             <div>
                               <div className="font-medium text-sm">{badge.name}</div>
-                              <div className="text-xs text-muted-foreground">
-                                {badge.description}
-                              </div>
+                              <div className="text-xs text-muted-foreground">{badge.description}</div>
                               <div className="text-xs text-muted-foreground mt-1">
                                 Earned {formatDistanceToNow(new Date(badge.awarded_at), { addSuffix: true })}
                               </div>

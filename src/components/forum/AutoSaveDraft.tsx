@@ -1,6 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 import { Save, Loader2 } from "lucide-react";
 
 interface AutoSaveDraftProps {
@@ -10,9 +9,19 @@ interface AutoSaveDraftProps {
   title: string;
   content: string;
   isAnonymous: boolean;
+  /** Only save while the compose form is open. */
+  enabled?: boolean;
   onDraftLoaded: (title: string, content: string, isAnonymous: boolean) => void;
 }
 
+/**
+ * Saves the compose form to forum_post_drafts two seconds after typing stops.
+ *
+ * The table's unique key is (user_id, topic_id, parent_post_id), and Postgres
+ * treats NULL parent ids as distinct, so an upsert would create a new row on
+ * every save for a new conversation. Instead we remember the draft row id and
+ * update it, inserting only when there is none yet.
+ */
 export function useAutoSaveDraft({
   userId,
   topicId,
@@ -20,136 +29,136 @@ export function useAutoSaveDraft({
   title,
   content,
   isAnonymous,
-  onDraftLoaded
+  enabled = true,
+  onDraftLoaded,
 }: AutoSaveDraftProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
-  const [hasDraft, setHasDraft] = useState(false);
+  const draftIdRef = useRef<string | null>(null);
+  const loadedRef = useRef(false);
+  const lastSavedSnapshot = useRef<string>("");
+  const onDraftLoadedRef = useRef(onDraftLoaded);
+  onDraftLoadedRef.current = onDraftLoaded;
 
-  // Load existing draft on mount
-  useEffect(() => {
-    const loadDraft = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('forum_post_drafts')
-          .select('*')
-          .eq('user_id', userId)
-          .eq('topic_id', topicId)
-        .is('parent_post_id', parentPostId === null ? null : parentPostId as unknown as boolean)
-          .maybeSingle();
-
-        if (!error && data) {
-          setHasDraft(true);
-          onDraftLoaded(data.title || '', data.content, data.is_anonymous);
-          setLastSaved(new Date(data.updated_at));
-        }
-      } catch (err) {
-        console.error('Error loading draft:', err);
-      }
-    };
-
-    if (userId && topicId) {
-      loadDraft();
-    }
+  const scopeQuery = useCallback(() => {
+    const q = supabase
+      .from("forum_post_drafts")
+      .select("id, title, content, is_anonymous, updated_at")
+      .eq("user_id", userId)
+      .eq("topic_id", topicId);
+    return parentPostId ? q.eq("parent_post_id", parentPostId) : q.is("parent_post_id", null);
   }, [userId, topicId, parentPostId]);
 
-  // Auto-save draft with debounce
-  const saveDraft = useCallback(async () => {
-    if (!content.trim() && !title.trim()) {
-      // Delete draft if empty
-      if (hasDraft) {
-        await supabase
-          .from('forum_post_drafts')
-          .delete()
-          .eq('user_id', userId)
-          .eq('topic_id', topicId)
-          .is('parent_post_id', parentPostId === null ? null : parentPostId as unknown as boolean);
-        setHasDraft(false);
+  // Load an existing draft once when the form opens.
+  useEffect(() => {
+    if (!enabled || !userId || !topicId) return;
+    loadedRef.current = false;
+    draftIdRef.current = null;
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data, error } = await scopeQuery().order("updated_at", { ascending: false }).limit(1);
+        if (cancelled) return;
+        const row = !error && data && data.length > 0 ? data[0] : null;
+        if (row) {
+          draftIdRef.current = row.id;
+          lastSavedSnapshot.current = JSON.stringify([row.title || "", row.content, row.is_anonymous]);
+          if ((row.content || "").trim() || (row.title || "").trim()) {
+            onDraftLoadedRef.current(row.title || "", row.content || "", row.is_anonymous);
+            setLastSaved(new Date(row.updated_at));
+          }
+        }
+      } catch (err) {
+        console.error("Error loading draft:", err);
+      } finally {
+        if (!cancelled) loadedRef.current = true;
       }
-      return;
-    }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [enabled, userId, topicId, scopeQuery]);
+
+  const saveDraft = useCallback(async () => {
+    if (!loadedRef.current) return;
+    const snapshot = JSON.stringify([title, content, isAnonymous]);
+    if (snapshot === lastSavedSnapshot.current) return;
+    if (!content.trim() && !title.trim()) return;
 
     setIsSaving(true);
     try {
-      const { error } = await supabase
-        .from('forum_post_drafts')
-        .upsert({
+      const fields = {
+        title: title || null,
+        content,
+        is_anonymous: isAnonymous,
+        updated_at: new Date().toISOString(),
+      };
+      if (draftIdRef.current) {
+        const { error } = await supabase.from("forum_post_drafts").update(fields).eq("id", draftIdRef.current);
+        if (error) throw error;
+      } else {
+        const id = crypto.randomUUID();
+        const { error } = await supabase.from("forum_post_drafts").insert({
+          id,
           user_id: userId,
           topic_id: topicId,
           parent_post_id: parentPostId,
-          title: title || null,
-          content,
-          is_anonymous: isAnonymous,
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id,topic_id,parent_post_id'
+          ...fields,
         });
-
-      if (!error) {
-        setLastSaved(new Date());
-        setHasDraft(true);
+        if (error) throw error;
+        draftIdRef.current = id;
       }
+      lastSavedSnapshot.current = snapshot;
+      setLastSaved(new Date());
     } catch (err) {
-      console.error('Error saving draft:', err);
+      console.error("Error saving draft:", err);
     } finally {
       setIsSaving(false);
     }
-  }, [userId, topicId, parentPostId, title, content, isAnonymous, hasDraft]);
+  }, [userId, topicId, parentPostId, title, content, isAnonymous]);
 
-  // Debounced auto-save
   useEffect(() => {
+    if (!enabled) return;
     const timer = setTimeout(() => {
-      if (content.trim() || title.trim()) {
-        saveDraft();
-      }
-    }, 2000); // Save after 2 seconds of inactivity
-
+      void saveDraft();
+    }, 2000);
     return () => clearTimeout(timer);
-  }, [title, content, isAnonymous, saveDraft]);
+  }, [enabled, saveDraft]);
 
-  // Clear draft after successful post
-  const clearDraft = async () => {
+  /** Delete the draft (after posting, or when the member discards it). */
+  const clearDraft = useCallback(async () => {
     try {
-      await supabase
-        .from('forum_post_drafts')
-        .delete()
-        .eq('user_id', userId)
-        .eq('topic_id', topicId)
-        .is('parent_post_id', parentPostId === null ? null : parentPostId as unknown as boolean);
-      setHasDraft(false);
-      setLastSaved(null);
+      const del = supabase.from("forum_post_drafts").delete().eq("user_id", userId).eq("topic_id", topicId);
+      await (parentPostId ? del.eq("parent_post_id", parentPostId) : del.is("parent_post_id", null));
     } catch (err) {
-      console.error('Error clearing draft:', err);
+      console.error("Error clearing draft:", err);
+    } finally {
+      draftIdRef.current = null;
+      lastSavedSnapshot.current = "";
+      setLastSaved(null);
     }
-  };
+  }, [userId, topicId, parentPostId]);
 
-  return {
-    isSaving,
-    lastSaved,
-    hasDraft,
-    clearDraft
-  };
+  return { isSaving, lastSaved, hasDraft: !!lastSaved, clearDraft };
 }
 
 // Status indicator component
 export function DraftStatus({ isSaving, lastSaved }: { isSaving: boolean; lastSaved: Date | null }) {
   if (isSaving) {
     return (
-      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+      <div className="flex items-center gap-1 text-xs text-muted-foreground" aria-live="polite">
         <Loader2 className="h-3 w-3 animate-spin" />
-        Saving...
+        Saving draft…
       </div>
     );
   }
-
   if (lastSaved) {
     return (
-      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+      <div className="flex items-center gap-1 text-xs text-muted-foreground" aria-live="polite">
         <Save className="h-3 w-3" />
         Draft saved
       </div>
     );
   }
-
   return null;
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Home, ArrowLeft, Phone, Heart } from "lucide-react";
 import Footer from "./Footer";
@@ -13,22 +13,37 @@ import StickyContactForm from "./StickyContactForm";
 import WhatsAppLink from "./WhatsAppLink";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import GuideMemberBar from "./GuideMemberBar";
+import { memberBarItem } from "@/data/memberLibrary";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const navigate = useNavigate();
   const { isMember } = useMembershipStatus();
+  // The member bar is dismissed for one page view at a time.
+  const [barDismissedOn, setBarDismissedOn] = useState<string | null>(null);
 
   // Handle native back button for mobile apps
   useNativeBackButton();
 
   useEffect(() => {
+    // A link to an anchor (e.g. /family-education#worksheet-scenario) is
+    // scrolled by the page itself once its content has loaded.
+    if (hash) return;
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  useEffect(() => {
+    setBarDismissedOn(null);
+  }, [pathname]);
+
+  const barItem = isMember ? memberBarItem(pathname) : undefined;
+  const showMemberBar = !!barItem && barDismissedOn !== pathname;
 
   const isHome = pathname === "/";
   const isReferralFit = pathname === "/referralfit" || pathname === "/referralfit-support";
@@ -118,9 +133,9 @@ const Layout = ({ children }: LayoutProps) => {
                 </Link>
               </nav>
               <SiteSearch />
-              {isMember && pathname !== "/family-education" && (
+              {isMember && pathname !== "/member-home" && (
                 <Link
-                  to="/family-education"
+                  to="/member-home"
                   className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
                   aria-label="Go to My Family Hub"
                 >
@@ -148,8 +163,15 @@ const Layout = ({ children }: LayoutProps) => {
       <main id="main-content" className="flex-1 pb-safe">
         {children}
       </main>
-      <Footer />
-      {!isReferralFit && <StickyContactForm />}
+      {/* Room below the footer so the member bar never covers the end of the page. */}
+      <div className={showMemberBar ? "pb-16 print:pb-0" : undefined}>
+        <Footer />
+      </div>
+      {/* Members on library pages get the member bar in place of the contact button. */}
+      {!isReferralFit && !showMemberBar && <StickyContactForm />}
+      {showMemberBar && barItem && (
+        <GuideMemberBar item={barItem} onDismiss={() => setBarDismissedOn(pathname)} />
+      )}
     </div>
     </SEOOverrideProvider>
   );

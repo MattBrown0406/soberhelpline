@@ -258,21 +258,21 @@ const Auth = () => {
           description: "You have successfully logged in.",
         });
         
-        // Check if user has an active family membership (subscription without provider_submission_id).
-        // limit(1): a member can have more than one row (e.g. an app row and a PayPal row).
-        const { data: subscriptions } = await supabase
-          .from('provider_subscriptions')
-          .select('id')
-          .eq('user_id', authData.user?.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
-
         // Preserve the page the user was trying to reach, especially provider applications.
         if (redirectPath) {
           navigate(redirectPath, { replace: true });
-        } else if ((subscriptions?.length ?? 0) > 0) {
-          navigate("/family-education");
+          return;
+        }
+
+        // Members land on their front door. Same membership rule as the member pages.
+        let isMember = false;
+        if (authData.user?.id) {
+          const { data: memberResult } = await supabase.rpc('is_active_family_member', { _user_id: authData.user.id });
+          isMember = memberResult === true;
+        }
+
+        if (isMember) {
+          navigate("/member-home");
         } else {
           navigate("/");
         }

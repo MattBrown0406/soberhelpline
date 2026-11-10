@@ -40,7 +40,7 @@ const MobileNav = ({ user, onLogout }: MobileNavProps) => {
           <nav className="flex-1 overflow-y-auto p-4">
             <div className="space-y-2">
               {user && isMember && (
-                <Link to="/family-education" onClick={closeMenu}>
+                <Link to="/member-home" onClick={closeMenu}>
                   <Button className="w-full justify-start gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-sm">
                     <Heart className="w-4 h-4" />
                     My Family Hub
