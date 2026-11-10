@@ -59,6 +59,7 @@ const ValuesExercise = () => {
           <div className="bg-card rounded-lg border p-8 print:border-none print:p-0 print:bg-white">
             {/* Title */}
             <ToolBrandHeader
+              headingAs="h1"
               title="Values Clarification Exercise"
               subtitle="Making decisions from what matters, not what hurts. Reconnect with who you want to be — regardless of what your loved one chooses."
               clinicalNote="Based on Acceptance and Commitment Therapy (ACT) values clarification and adapted for families affected by substance use disorders."
