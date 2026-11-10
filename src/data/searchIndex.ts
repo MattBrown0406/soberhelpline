@@ -148,13 +148,15 @@ export const searchIndex: SearchEntry[] = [
   // ──────────────────────────────────────────────
   // MEMBER AREA
   // ──────────────────────────────────────────────
-  { title: "Member Home", path: "/member-home", description: "Your personal dashboard — progress, saved worksheets, and next steps.", category: "community", keywords: ["dashboard", "home", "progress", "member", "overview"] },
-  { title: "Learning Paths", path: "/member-learning-paths", description: "Curated reading sequences organized by where you are in your journey.", category: "community", keywords: ["learning path", "curated", "sequence", "just found out", "intervention", "recovery", "self-care"] },
+  { title: "Member Home", path: "/member-home", description: "Your member home — this week's meeting, your learning path, and where you left off.", category: "community", keywords: ["dashboard", "home", "progress", "member", "overview", "email settings"] },
+  { title: "Learning Paths", path: "/family-education/tracks", description: "Eight short, ordered paths — crisis, boundaries, treatment, relapse, family patterns, partners, parents, siblings. Choose one.", category: "community", keywords: ["learning path", "track", "start here", "where to start", "crisis", "boundaries", "relapse", "parent", "spouse", "sibling"] },
+  { title: "Find Your Starting Path", path: "/onboarding-quiz", description: "Five short questions that suggest one learning path for your situation.", category: "tool", keywords: ["quiz", "where to start", "learning path", "recommendation"] },
+  { title: "Workbook", path: "/workbook", description: "Short guided exercises (about 5 minutes) and your saved answers.", category: "community", keywords: ["workbook", "exercises", "worksheet", "guided", "self-care", "boundary"] },
   { title: "Q&A Archive", path: "/member-qa", description: "Questions and answers from Monday night meetings — searchable by topic.", category: "community", keywords: ["Q&A", "questions", "answers", "Monday meeting", "archive"] },
   { title: "Past Meeting Recordings", path: "/zoom-recordings", description: "Recordings from past Monday night family support meetings.", category: "community", keywords: ["recordings", "video", "Monday meeting", "zoom", "past sessions", "replay"] },
   { title: "Family Discussion Forum", path: "/family-forum", description: "Connect with other families navigating addiction — share, ask, and find support.", category: "community", keywords: ["forum", "community", "discuss", "families", "support group", "connect"] },
   { title: "Monthly Webinars", path: "/family-webinars", description: "Live sessions with addiction specialists and past webinar recordings.", category: "community", keywords: ["webinar", "live", "specialist", "event", "register"] },
-  { title: "Education Center", path: "/family-education", description: "60+ guides, worksheets, assessments, and interactive tools for families.", category: "community", keywords: ["education", "guides", "worksheets", "pillars", "library", "family", "learn"] },
+  { title: "Education Center", path: "/family-education", description: "Guides, worksheets, guided exercises, meditations and interactive tools for families.", category: "community", keywords: ["education", "guides", "worksheets", "pillars", "library", "family", "learn"] },
 ];
 
 export const categoryLabels: Record<string, string> = {
