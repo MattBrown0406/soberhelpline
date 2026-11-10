@@ -22,7 +22,6 @@ const NOINDEX_ROUTES = new Set([
   "/survey",
   "/zoom-recordings",
   "/member-home",
-  "/member-learning-paths",
   "/workbook",
   "/member-qa",
   // Universal links into the iOS app (pages/AppLinkFallback).

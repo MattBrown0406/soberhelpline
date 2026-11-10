@@ -248,7 +248,7 @@ export default function ZoomRecordings() {
               </div>
             </div>
             <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border">
-              <Link to="/member-learning-paths">
+              <Link to="/member-home">
                 <Button variant="outline" size="sm" className="gap-1.5">
                   <BookOpen className="h-3.5 w-3.5" />
                   Learning Paths

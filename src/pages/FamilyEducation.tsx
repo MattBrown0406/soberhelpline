@@ -21,7 +21,7 @@ import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAss
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import MemberZoomBanner from "@/components/MemberZoomBanner";
-import ExerciseGridComponent from "@/components/workbook/ExerciseGrid";
+import ExerciseGrid from "@/components/workbook/ExerciseGrid";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
 import { useLearningPath } from "@/hooks/useLearningPath";
 import { useToast } from "@/hooks/use-toast";
@@ -32,7 +32,6 @@ import {
 
 // The workbook build owns ExerciseGrid; typed here so this page compiles before
 // and after its `limit` prop lands.
-const ExerciseGrid = ExerciseGridComponent as ComponentType<{ limit?: number }>;
 
 // Static color map — Tailwind JIT needs full class strings at build time
 const colorMap: Record<string, { border: string; text: string; hover: string; bg: string; bgGradient: string; borderLight: string; borderHeavy: string; iconText: string; hoverBorder: string }> = {

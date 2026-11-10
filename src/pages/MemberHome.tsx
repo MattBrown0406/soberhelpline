@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import NotificationSettings from "@/components/NotificationSettings";
-import ExerciseGridComponent from "@/components/workbook/ExerciseGrid";
+import ExerciseGrid from "@/components/workbook/ExerciseGrid";
 import { ASK_MONDAY_QUESTION_HREF, fetchMemberJoinUrl } from "@/components/MemberZoomBanner";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
 import { MEMBER_TRACKS, useLearningPath } from "@/hooks/useLearningPath";
@@ -28,7 +28,6 @@ import {
 
 // The workbook build owns ExerciseGrid; typed here so this page compiles before
 // and after its `limit` prop lands.
-const ExerciseGrid = ExerciseGridComponent as ComponentType<{ limit?: number }>;
 
 const RETAKE_AFTER_DAYS = 30;
 
