@@ -2,6 +2,7 @@ import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { hasAutomationAuth } from "../_shared/automationAuth.ts";
+import { isMeetingCancelled, upcomingMondayPacific } from "../_shared/cancelledMeetings.ts";
 import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
@@ -91,6 +92,16 @@ serve(async (req: Request) => {
     if (!(await isAuthorized(req, adminSupabase, body))) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // This reminder is about the coming Monday's meeting; send nothing if that
+    // meeting was cancelled.
+    const meetingDate = upcomingMondayPacific();
+    if (await isMeetingCancelled(adminSupabase, meetingDate, "send-member-zoom-reminder")) {
+      return new Response(JSON.stringify({ success: true, sent: 0, skipped: "meeting_cancelled", meetingDate }), {
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }

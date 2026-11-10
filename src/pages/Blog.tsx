@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { blogPosts } from "@/data/blogPosts";
+import { blogPostPath } from "@/lib/blogPaths";
 
 const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -55,8 +56,8 @@ const Blog = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {sortedPosts.map((post) => (
-            <Link key={post.id} to={post.content ? `/blog/${post.id}` : "#"} className={post.content ? "" : "pointer-events-none"}>
+          {sortedPosts.map((post, index) => (
+            <Link key={`${blogPostPath(post)}-${index}`} to={post.content ? blogPostPath(post) : "#"} className={post.content ? "" : "pointer-events-none"}>
               <Card className={`hover:shadow-lg transition-shadow overflow-hidden h-full ${post.content ? "cursor-pointer" : ""}`}>
                 {post.image && (
                   <div className="w-full h-48 overflow-hidden">

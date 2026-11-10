@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { firstWord, looseMatch } from "../_shared/attendeeNameMatch.ts";
+import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -156,7 +157,24 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
-    const meetingDate = url.searchParams.get("meeting_date") || getMostRecentMondayPT(new Date());
+    // The report lists registrants by name and email. Only a verified caller may
+    // ask for it on demand (preview/force) or receive those lists in the response.
+    // The scheduled run follows the staged automation rule and gets counts only.
+    const body = req.method === "POST" ? await req.json().catch(() => null) : null;
+    const verified = await hasAutomationAuth(req, supabase, body);
+    if (!verified) {
+      if (force || preview) {
+        console.warn("automation_auth_denied send-weekly-zoom-report");
+        return new Response(JSON.stringify({ error: "unauthorized" }), {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      const denied = await requireAutomationAuth(req, supabase, body, "send-weekly-zoom-report", corsHeaders);
+      if (denied) return denied;
+    }
+
+    const meetingDate = (verified && url.searchParams.get("meeting_date")) || getMostRecentMondayPT(new Date());
     const fourWeeksAgo = addDays(meetingDate, -21); // covers this meeting + 3 prior Mondays
 
     const [regRes, attRes, recentAttRes, autoRegRes] = await Promise.all([
@@ -359,7 +377,12 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
       });
     }
 
-    return new Response(JSON.stringify({ sent: true, ...summary }), {
+    const counts = {
+      meeting_date: meetingDate,
+      total_registrants: totalRegistrants,
+      total_attendees: totalAttendees,
+    };
+    return new Response(JSON.stringify({ sent: true, ...(verified ? summary : counts) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {

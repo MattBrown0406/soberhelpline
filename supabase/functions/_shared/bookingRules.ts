@@ -27,6 +27,11 @@ export const PLAN_SESSIONS: Readonly<Record<string, number>> = {
   "parallel-recovery": 12,
 };
 
+/** Plans whose session length is fixed by the plan, not by the provider. */
+export const PLAN_SESSION_MINUTES: Readonly<Record<string, number>> = {
+  "family-readiness-intensive": 90, // the booking page lists 90-minute times for it
+};
+
 export interface BookingSlot {
   booking_date: string; // YYYY-MM-DD
   start_time: string; // HH:MM:SS, in `timezone`
@@ -172,7 +177,7 @@ export async function checkSlotsBookable(
   nowMs = Date.now(),
 ): Promise<BookingCheck> {
   const providerTz = provider.timezone || DEFAULT_TZ;
-  const duration = provider.session_duration_minutes || 60;
+  const duration = PLAN_SESSION_MINUTES[planType] ?? (provider.session_duration_minutes || 60);
   const today = dateInZone(nowMs, providerTz);
   const lastDate = addDays(today, (planType === "parallel-recovery" ? 90 : 30) + 1);
   const dates = [...new Set(slots.map((s) => s.booking_date))];

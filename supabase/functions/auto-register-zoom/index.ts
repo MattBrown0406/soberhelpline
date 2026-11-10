@@ -4,6 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { ensureDurableRegistration, isRegistrationDuplicate } from "../_shared/mondayRegistration.ts";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 import { activeMemberEmails, findDormantEmails, isLikelyMistypedEmail, normalizeEmail } from "../_shared/familySquaresActivity.ts";
+import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -45,6 +46,15 @@ serve(async (req) => {
     const meetingDate = getNextMeetingDate();
 
     console.log('Target meeting date:', meetingDate);
+
+    // A cancelled Monday gets no registrations and no "You're registered" emails.
+    if (await isMeetingCancelled(supabase, meetingDate, 'auto-register-zoom')) {
+      console.log('Meeting is cancelled; nobody auto-registered.');
+      return new Response(
+        JSON.stringify({ success: true, registered: 0, skipped: 'meeting_cancelled', meetingDate }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Get all unique auto_register subscribers (latest registration per email)
     const { data: autoRegistrants, error: fetchError } = await supabase
