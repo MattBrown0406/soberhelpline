@@ -36,7 +36,7 @@ export default function AngerAndBoundaries() {
             </Button>
           </div>
 
-          <ToolBrandHeader
+          <ToolBrandHeader headingAs="h1"
             title="Anger and Boundaries Are Not the Same Thing"
             subtitle="Why limits built on anger collapse — and what holds them instead. Understanding the difference between reactive anger and values-based boundaries."
             clinicalNote="Informed by emotion regulation research (Linehan, DBT) and Al-Anon principles of detachment with love."

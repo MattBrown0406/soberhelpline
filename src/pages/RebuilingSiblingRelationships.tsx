@@ -31,7 +31,7 @@ const RebuildingSiblingRelationships = () => {
             </Button>
           </div>
 
-          <ToolBrandHeader
+          <ToolBrandHeader headingAs="h1"
             title="Rebuilding Sibling Relationships in Recovery"
             subtitle="What healing can look like — without pressure, pretending, or forced forgiveness. Reconnection is a process, not an event."
             clinicalNote="Informed by family reconciliation research, Al-Anon's principles of detachment and self-care, and restorative justice frameworks adapted for family systems."
