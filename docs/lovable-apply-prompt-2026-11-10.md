@@ -157,7 +157,7 @@ BEGIN
   -- migrations, cron, the sign-up trigger) and admins are not restricted.
   IF current_user = 'service_role'
      OR session_user = 'service_role'
-     OR coalesce(current_setting('request.jwt.claims', true)::jsonb ->> 'role', '') = 'service_role'
+     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role'
      OR auth.uid() IS NULL
      OR public.has_role(auth.uid(), 'admin'::public.app_role) THEN
     RETURN NEW;
@@ -196,7 +196,7 @@ AS $$
 BEGIN
   IF current_user = 'service_role'
      OR session_user = 'service_role'
-     OR coalesce(current_setting('request.jwt.claims', true)::jsonb ->> 'role', '') = 'service_role'
+     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role'
      OR auth.uid() IS NULL
      OR public.has_role(auth.uid(), 'admin'::public.app_role) THEN
     RETURN NEW;
@@ -234,7 +234,7 @@ AS $$
 BEGIN
   IF current_user = 'service_role'
      OR session_user = 'service_role'
-     OR coalesce(current_setting('request.jwt.claims', true)::jsonb ->> 'role', '') = 'service_role'
+     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role'
      OR auth.uid() IS NULL
      OR public.has_role(auth.uid(), 'admin'::public.app_role) THEN
     RETURN NEW;
