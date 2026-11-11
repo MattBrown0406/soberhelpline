@@ -1,6 +1,6 @@
 # Current tasks
 
-- [ ] Execute November 10 ordered audit handoff with approved separate steps: safeguards applied; no eligible memberships to restore; three cron commands repaired, all ten functions deployed unchanged and automation enforcement verified true; finish isolated guard tests and checked frontend publication.
+- [x] Execute November 10 ordered audit handoff with approved separate steps: safeguards applied and isolated PostgreSQL tests pass; zero eligible memberships to restore; three cron commands repaired, all ten functions deployed unchanged and automation enforcement verified true; article/contact/shared-rule tests and desktop/mobile non-submitting checks pass; publication requested for soberhelpline.com (live completion not yet verified).
 
 - [x] Add the uploaded November 8 insurance deductible and year-end rehab guide as article 206 with a photo and five FAQs; 229 article renders pass, card and slug navigation and suggested links verified, desktop/mobile fit checked, listings refreshed; not published.
 
