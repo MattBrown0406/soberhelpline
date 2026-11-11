@@ -303,6 +303,24 @@ All colors MUST be HSL.
   }
 }
 
+/* Library guides sit on the member area's warm background; the white cards
+   and the navy header band do the rest. (Layout marks them .guide-reading.) */
+.guide-reading {
+  background-image: linear-gradient(to bottom, rgb(237 228 207 / 0.5), rgb(237 228 207 / 0.15) 28rem, transparent 60rem);
+}
+.dark .guide-reading {
+  background-image: linear-gradient(to bottom, rgb(15 23 42 / 0.5), transparent 40rem);
+}
+.guide-reading .min-h-screen.bg-background,
+.guide-reading > .bg-background {
+  background-color: transparent;
+}
+@media print {
+  .guide-reading {
+    background-image: none;
+  }
+}
+
 /* Library reading guides: body copy large and dark enough to read comfortably
    (the guides were written with small grey text). Scoped to the guide pages
    that Layout marks with .guide-reading; small print and captions keep their size. */

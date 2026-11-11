@@ -71,7 +71,7 @@ export function SaveStatusChip({
     text = "Couldn't save just now. We'll keep trying while this page is open.";
     tone = "text-destructive";
   } else if (lastSavedAt) {
-    icon = <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />;
+    icon = <Check className="h-3.5 w-3.5 text-green-500" aria-hidden="true" />;
     text = `Saved ${savedTimeLabel(lastSavedAt)}`;
   }
 
@@ -141,6 +141,8 @@ export function ToolShell({
   }, []);
 
   return (
+    // The warm page background of the member area (see components/member/MemberUI).
+    <div className="bg-gradient-to-b from-[#ede4cf]/50 via-[#ede4cf]/15 to-background dark:from-slate-900/50 dark:via-background print:bg-none">
     <div
       ref={shellRef}
       className={cn("container mx-auto max-w-3xl px-4 py-6 sm:py-10 print:max-w-none print:px-0 print:py-0", className)}
@@ -193,27 +195,36 @@ export function ToolShell({
 
       {/* Header */}
       {/* A div, not <header>: the site print stylesheet hides header elements. */}
-      <div className="mb-8 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/[0.07] via-background to-primary/[0.03] p-5 sm:p-7 print:mb-5 print:rounded-none print:border-0 print:p-0">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-primary print:hidden">{kind}</p>
-        <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl">{title}</h1>
-        <p className="mt-3 text-base leading-relaxed text-foreground/80">{summary}</p>
-        {note && <p className="mt-3 border-t border-border/50 pt-3 text-xs italic leading-relaxed text-muted-foreground">{note}</p>}
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 print:hidden">
-          {typeof minutes === "number" && (
-            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-              About {minutes} minutes
+      <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-[#16294a] via-[#1b3560] to-[#2a4f85] p-5 text-white shadow-lg shadow-[#16294a]/20 sm:p-8 print:mb-5 print:rounded-none print:bg-none print:p-0 print:text-foreground print:shadow-none">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-14 -top-20 h-60 w-60 rounded-full bg-[#e8a73a]/25 blur-3xl print:hidden" />
+        <div className="relative">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f2c675] print:hidden">{kind}</p>
+          <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{title}</h1>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/85 print:text-foreground">{summary}</p>
+          {note && (
+            <p className="mt-3 border-t border-white/15 pt-3 text-xs italic leading-relaxed text-white/70 print:border-border print:text-muted-foreground">
+              {note}
+            </p>
+          )}
+          <div className="mt-5 flex flex-wrap items-center gap-2 print:hidden">
+            {typeof minutes === "number" && (
+              <span className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 text-xs font-medium text-white">
+                <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                About {minutes} minutes
+              </span>
+            )}
+            <span className="inline-flex min-h-8 items-center rounded-full border border-white/15 bg-white/10 px-3">
+              <SaveStatusChip status={saved.status} signedIn={saved.signedIn} lastSavedAt={saved.lastSavedAt} className="text-white" />
             </span>
-          )}
-          <SaveStatusChip status={saved.status} signedIn={saved.signedIn} lastSavedAt={saved.lastSavedAt} />
-          {!saved.signedIn && saved.loaded && (
-            <Link
-              to={`/auth?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.pathname : "/")}`}
-              className="text-xs font-medium text-primary underline-offset-2 hover:underline"
-            >
-              Sign in
-            </Link>
-          )}
+            {!saved.signedIn && saved.loaded && (
+              <Link
+                to={`/auth?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.pathname : "/")}`}
+                className="inline-flex min-h-11 items-center rounded-full px-2 text-sm font-semibold text-white underline underline-offset-4 hover:text-white/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              >
+                Sign in
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
@@ -226,6 +237,7 @@ export function ToolShell({
       <p className="mt-10 text-center text-xs text-muted-foreground print:hidden">
         What you write here is private to your account. You can come back and change it any time.
       </p>
+    </div>
     </div>
   );
 }
@@ -252,8 +264,8 @@ export function ToolSection({
   return (
     <section
       className={cn(
-        "print-flow rounded-xl border bg-card p-5 sm:p-6 print:rounded-none print:border-0 print:border-t print:p-0 print:pt-4",
-        tone === "highlight" ? "border-primary/30 bg-primary/[0.04]" : "border-border",
+        "print-flow rounded-2xl border bg-card p-5 shadow-sm shadow-slate-900/[0.04] sm:p-6 print:rounded-none print:border-0 print:border-t print:p-0 print:pt-4 print:shadow-none",
+        tone === "highlight" ? "border-[#e8a73a]/50 bg-[#e8a73a]/[0.07] dark:bg-[#e8a73a]/[0.06]" : "border-border/70",
         className,
       )}
     >

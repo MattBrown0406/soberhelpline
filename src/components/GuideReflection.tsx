@@ -28,12 +28,12 @@ function Reflection({ path }: { path: string }) {
   return (
     <section
       aria-labelledby="guide-reflection-title"
-      className="mt-10 rounded-2xl border border-primary/25 bg-primary/[0.04] p-5 sm:p-7 print:mt-6 print:break-inside-auto print:rounded-none print:border-0 print:border-t print:p-0 print:pt-4"
+      className="mt-10 rounded-3xl border border-[#e8a73a]/45 bg-[#e8a73a]/[0.08] p-5 shadow-sm shadow-slate-900/[0.04] sm:p-7 dark:bg-[#e8a73a]/[0.06] print:mt-6 print:break-inside-auto print:rounded-none print:border-0 print:border-t print:bg-transparent print:p-0 print:pt-4 print:shadow-none"
     >
       <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 print:hidden">
-            <PenLine className="h-5 w-5 text-primary" aria-hidden="true" />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#e8a73a]/25 print:hidden">
+            <PenLine className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" />
           </span>
           <div>
             <h2 id="guide-reflection-title" className="text-xl font-semibold text-foreground">
