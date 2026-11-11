@@ -973,7 +973,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
               <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>
             </Link>
             <Link to="/workbook/boundary-script">
-              <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
+              <Button variant="outline" size="sm">Write one boundary you can hold</Button>
             </Link>
             <Link to="/emotional-regulation">
               <Button variant="outline" size="sm">Emotional Regulation Tools Guide</Button>

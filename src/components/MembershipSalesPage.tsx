@@ -42,7 +42,7 @@ const benefits = [
   {
     icon: Sparkles,
     title: "Guided decision tools",
-    description: "Use the Boundary Builder, Enabling Decision Coach, Treatment Navigator, Relapse Guide, and Crisis Copilot.",
+    description: "Write a boundary you can hold, sort helping from enabling, check a treatment program for red flags, track relapse warning signs, and use Crisis Copilot in the app.",
   },
   {
     icon: Video,

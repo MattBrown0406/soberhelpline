@@ -59,11 +59,13 @@ export default function WorkbookEarlier() {
           <h1 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">Your earlier worksheets</h1>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
             These longer worksheets have been replaced by the short guided exercises in My Workbook. Anything you wrote
-            in them is still here, just as you left it. Open one to read it or carry on with it.
+            in them is still here. Some open with your answers in place. Three of them (Family Self-Assessment, Control
+            Worksheet and Boundary Worksheet) open on a fresh form: look for “View past” inside to see what you saved
+            before.
           </p>
 
           {user && (
-            <Accordion type="single" collapsible className="mt-6 space-y-3">
+            <Accordion type="multiple" className="mt-6 space-y-3">
               {sheets.map((sheet) => (
                 <AccordionItem key={sheet.id} value={sheet.id} className="rounded-xl border border-border bg-card px-4">
                   <AccordionTrigger className="min-h-12 text-left text-base font-semibold">{title(sheet.id)}</AccordionTrigger>

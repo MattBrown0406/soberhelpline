@@ -165,12 +165,10 @@ const LEVELS: Level[] = [
       </>
     ),
     next: "Increase your own support and self-care. Document patterns. Consider consulting with an addiction professional or attending a support group for families.",
-    actions: [
-      "Schedule a family conversation",
-      "Reinforce existing boundaries",
-      "Encourage additional recovery meetings",
-      "Increase check-ins and accountability",
-    ],
+    // Two of his lines for this level ("Schedule a family conversation",
+    // "Increase check-ins and accountability") are left out here: this level's
+    // own guidance says to observe without confrontation.
+    actions: ["Reinforce existing boundaries", "Encourage additional recovery meetings"],
     card: "border-yellow-300 bg-yellow-100 dark:border-yellow-800 dark:bg-yellow-950/50",
     text: "text-yellow-700 dark:text-yellow-400",
     row: "bg-yellow-100 ring-2 ring-yellow-400 dark:bg-yellow-950/50",
@@ -493,6 +491,12 @@ function ConcernResult({
                         <li key={action}>{action}</li>
                       ))}
                     </ul>
+                    {(item.id === "high" || item.id === "elevated") && (
+                      <p className="mt-2 font-medium text-foreground">
+                        If you think they have overdosed, they can't be woken, or there is any talk of suicide, call 911
+                        (or call or text 988) first. Then call a professional.
+                      </p>
+                    )}
                   </div>
                 )}
               </li>

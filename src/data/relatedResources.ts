@@ -335,7 +335,7 @@ const relatedMap: Record<string, string[]> = {
 
   // Mental Health cluster
   "/drug-induced-psychosis": ["/mental-health-vs-substance-induced", "/crisis-chaos"],
-  "/mental-health-vs-substance-induced": ["/drug-induced-psychosis"],
+  "/mental-health-vs-substance-induced": ["/drug-induced-psychosis", "/trauma-vs-excuses", "/treatment-modalities"],
   "/eating-disorders-guide": ["/mental-health-vs-substance-induced", "/trauma-vs-excuses"],
 
   // Tools & Exercises cluster

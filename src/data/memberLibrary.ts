@@ -10,6 +10,7 @@
 //
 // useEducationProgress computes its totals from this list, and GuideMemberBar
 // appears on every page whose route is in it.
+import { legacyPageRedirects } from "@/lib/legacyRedirects";
 import type { ComponentType } from "react";
 import { Brain, Heart, Users, GraduationCap, Shield, TreePine } from "lucide-react";
 import exercisesData from "../../supabase/functions/_shared/memberExercises.json";
@@ -272,7 +273,8 @@ const libraryByPath = new Map(memberLibrary.map((item) => [item.path, item]));
 /** The library item for a site path (trailing slash ignored), if any. */
 export function findLibraryItem(path: string): LibraryItem | undefined {
   const clean = path.length > 1 ? path.replace(/\/+$/, "") : path;
-  return libraryByPath.get(clean);
+  // A guide that was merged into another one resolves to the surviving page.
+  return libraryByPath.get(clean) ?? libraryByPath.get(legacyPageRedirects[clean] ?? "");
 }
 
 export const LIBRARY_TYPE_TOTALS: Record<LibraryType, number> = {

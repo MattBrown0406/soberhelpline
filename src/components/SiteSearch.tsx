@@ -18,7 +18,6 @@ const fuse = new Fuse(searchIndex, {
 const categoryColors: Record<string, string> = {
   guide: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
   tool: "bg-amber-500/20 text-amber-400 border-amber-500/30",
-  ai: "bg-violet-500/20 text-violet-400 border-violet-500/30",
   community: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   blog: "bg-rose-500/20 text-rose-400 border-rose-500/30",
   provider: "bg-teal-500/20 text-teal-400 border-teal-500/30",

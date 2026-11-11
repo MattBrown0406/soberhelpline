@@ -24985,7 +24985,7 @@ Before you say anything to your loved one, be honest with yourself. What specifi
 
 ### 2. Decide What You Will Do Instead
 
-Identify the specific action you will take when that behavior occurs. This is your boundary. It has to be something you're genuinely willing and able to do. If you're not sure you'll follow through, choose something smaller. Our [LINK:AI Boundary Builder Coach:/family-education] can help you draft a boundary that's specific and realistic.
+Identify the specific action you will take when that behavior occurs. This is your boundary. It has to be something you're genuinely willing and able to do. If you're not sure you'll follow through, choose something smaller. Our [LINK:five-minute boundary exercise:/workbook/boundary-script] can help you draft a boundary that's specific and realistic.
 
 ### 3. Communicate It Calmly and Clearly
 

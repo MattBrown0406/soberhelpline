@@ -441,12 +441,12 @@ const Index = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
               {[
-                { color: "emerald", icon: Brain, title: "Making Sense of Their Behavior", desc: "Why willpower fails, how the brain changes, and what families need to know about the disease.", count: "7 resources" },
-                { color: "rose", icon: Heart, title: "When Mental Health Makes It Harder", desc: "How mental health conditions interact with substance use and what families should understand.", count: "8 resources" },
+                { color: "emerald", icon: Brain, title: "Making Sense of Their Behavior", desc: "Why willpower fails, how the brain changes, and what families need to know about the disease.", count: "5 resources" },
+                { color: "rose", icon: Heart, title: "When Mental Health Makes It Harder", desc: "How mental health conditions interact with substance use and what families should understand.", count: "5 resources" },
                 { color: "violet", icon: Users, title: "Am I Helping or Making It Worse?", desc: "Recognize patterns that keep families stuck and learn to break the cycle of enabling.", count: "Free assessment — no email", to: "/family-situation-assessment" },
-                { color: "blue", icon: GraduationCap, title: "Finding Treatment That Actually Works", desc: "Navigate the treatment system, ask the right questions, and avoid industry red flags.", count: "11 resources" },
-                { color: "amber", icon: Shield, title: "Setting Boundaries That Stick", desc: "Set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.", count: "8 resources" },
-                { color: "teal", icon: TreePine, title: "Reclaiming Your Own Life", desc: "Focus on your own healing journey regardless of your loved one's choices.", count: "9 resources" },
+                { color: "blue", icon: GraduationCap, title: "Finding Treatment That Actually Works", desc: "Navigate the treatment system, ask the right questions, and avoid industry red flags.", count: "8 resources" },
+                { color: "amber", icon: Shield, title: "Setting Boundaries That Stick", desc: "Set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.", count: "5 resources" },
+                { color: "teal", icon: TreePine, title: "Reclaiming Your Own Life", desc: "Focus on your own healing journey regardless of your loved one's choices.", count: "6 resources" },
               ].map((pillar) => {
                 const colorMap = {
                   emerald: "border-emerald-500/30 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20 text-emerald-600 dark:text-emerald-400",
@@ -494,7 +494,7 @@ const Index = () => {
                   { icon: Headphones, title: "Guided Meditations", desc: "For stress & healing" },
                   { icon: MessageCircle, title: "Private Forum", desc: "24/7 peer support" },
                   { icon: BookOpen, title: "Interactive Worksheets", desc: "Track your progress" },
-                  { icon: Sparkles, title: "AI Coaching Tools", desc: "Personalized guidance" },
+                  { icon: Sparkles, title: "Guided Exercises", desc: "Five minutes, step by step" },
                 ].map((item) => (
                   <div key={item.title} className="text-center">
                     <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">

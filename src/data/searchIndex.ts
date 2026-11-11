@@ -2,7 +2,7 @@ export interface SearchEntry {
   title: string;
   path: string;
   description: string;
-  category: "guide" | "tool" | "ai" | "community" | "blog" | "provider" | "page";
+  category: "guide" | "tool" | "community" | "blog" | "provider" | "page";
   keywords: string[];
 }
 
@@ -65,6 +65,18 @@ export const searchIndex: SearchEntry[] = [
   // ──────────────────────────────────────────────
   { title: "What Changes When Families Change", path: "/what-changes-when-families-change", description: "How family behavioral changes can shift the entire dynamic.", category: "guide", keywords: ["family change", "system", "dynamics", "shift"] },
   { title: "Family Recovery Action Plan", path: "/family-action-plan", description: "Step-by-step plan for families beginning their own recovery.", category: "tool", keywords: ["action plan", "family recovery", "steps", "planning"] },
+
+  // Guided exercises (My Workbook) and trackers
+  { title: "Write one boundary you can hold", path: "/workbook/boundary-script", description: "Leave with a boundary in your own words, how you'll follow through, and a calm line for when they push back.", category: "tool", keywords: ["boundary", "boundaries", "script", "boundary worksheet", "say no", "exercise", "workbook"] },
+  { title: "Helping or enabling?", path: "/workbook/helping-or-enabling", description: "Before you say yes to a request, walk through it and leave with a clear answer and your next step.", category: "tool", keywords: ["enabling", "helping", "decision", "who benefits", "money", "rescue", "exercise", "workbook"] },
+  { title: "Guilt or responsibility?", path: "/workbook/guilt-check", description: "Catch one guilt thought, sort what is and isn't yours to carry, and leave with a reframe.", category: "tool", keywords: ["guilt", "responsibility", "blame", "exercise", "workbook"] },
+  { title: "What I can and can't control", path: "/workbook/control-sort", description: "Sort what's weighing on you into two lists and pick one action for this week.", category: "tool", keywords: ["control", "letting go", "powerless", "exercise", "workbook"] },
+  { title: "This week's self-care plan", path: "/workbook/weekly-self-care", description: "Three small, real commitments for this week, matched to whether you're in a crisis or a calmer stretch.", category: "tool", keywords: ["self-care", "self care", "burnout", "rest", "exercise", "workbook"] },
+  { title: "Nervous system check-in", path: "/workbook/stress-check", description: "Eight quick statements show how much stress your body is carrying. Retake monthly to see the change.", category: "tool", keywords: ["stress", "hypervigilance", "trauma", "anxiety", "nervous system", "exercise", "workbook"] },
+  { title: "Practice a hard moment", path: "/workbook/hard-moment-practice", description: "Pick a moment you dread and plan what you'll say, what you won't do, and who you'll call.", category: "tool", keywords: ["scenario", "practice", "conversation", "what to say", "crisis call", "exercise", "workbook"] },
+  { title: "Family pulse check", path: "/workbook/family-pulse", description: "Eight statements about enabling patterns: your strengths and one place to focus. Retake monthly.", category: "tool", keywords: ["family", "self-assessment", "assessment", "check-in", "exercise", "workbook"] },
+  { title: "Relapse Warning Signs Tracker", path: "/relapse-warning-signs", description: "Spot the early signs of relapse and see the pattern over time.", category: "tool", keywords: ["relapse", "warning signs", "tracker", "relapse radar", "slip"] },
+  { title: "Fear Inventory Exercise", path: "/fear-inventory-exercise", description: "Name the fears driving your decisions and examine each one.", category: "tool", keywords: ["fear", "inventory", "afraid", "worry"] },
   { title: "Emotional Regulation Tools", path: "/emotional-regulation", description: "Practical tools for managing intense emotions as a family member.", category: "tool", keywords: ["emotional regulation", "coping", "grounding", "calm"] },
   { title: "Living Well Regardless of Outcome", path: "/living-well-regardless", description: "Finding peace and purpose regardless of your loved one's choices.", category: "guide", keywords: ["living well", "detachment", "peace", "acceptance"] },
   { title: "Grief for the Family You Thought You'd Have", path: "/grief-for-family", description: "Processing grief and loss for the family life you imagined.", category: "guide", keywords: ["grief", "loss", "mourning", "expectations"] },
@@ -133,11 +145,10 @@ export const searchIndex: SearchEntry[] = [
 export const categoryLabels: Record<string, string> = {
   guide: "Guides",
   tool: "Tools & Worksheets",
-  ai: "AI Coaches",
   community: "Community",
   blog: "Blog",
   provider: "Providers",
   page: "Pages",
 };
 
-export const categoryOrder = ["ai", "guide", "tool", "community", "blog", "provider", "page"];
+export const categoryOrder = ["guide", "tool", "community", "blog", "provider", "page"];

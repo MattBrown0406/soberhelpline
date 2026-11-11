@@ -358,8 +358,8 @@ export default function FamilyForumLanding() {
               {[
                 { icon: MessagesSquare, label: "Private Family Forum", desc: "Anonymous, professionally moderated, always open" },
                 { icon: Calendar, label: "The Family Squares", desc: "Live weekly call with Matt Brown, free for members" },
-                { icon: BookOpen, label: "60+ Education Guides", desc: "Evidence-based curriculum for family recovery" },
-                { icon: Sparkles, label: "AI-Powered Tools", desc: "Boundary builder, enabling coach, treatment navigator" },
+                { icon: BookOpen, label: "60+ Guides, Tools & Meditations", desc: "Evidence-based curriculum for family recovery" },
+                { icon: Sparkles, label: "Guided Exercises & Tools", desc: "Boundary script, helping-or-enabling check, treatment program check" },
                 { icon: Heart, label: "Recorded Webinars", desc: "Watch past sessions on your schedule" },
                 { icon: Shield, label: "Expert Moderation", desc: "Certified professionals keeping the community safe" },
               ].map((item) => (

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { findLibraryItem, memberLibrary, LIBRARY_TYPE_TOTALS, type LibraryType } from "@/data/memberLibrary";
+import { legacyPageRedirects } from "@/lib/legacyRedirects";
 
 // A member's education progress (table education_progress, one row per
 // resource path). The rows live in one shared store, so the member bar, the
@@ -45,6 +46,25 @@ function setState(patch: Partial<StoreState>) {
   listeners.forEach((l) => l());
 }
 
+/**
+ * Guides that were merged into another guide keep their credit: progress
+ * recorded under a retired address counts for the page that now holds that
+ * content, unless she already has progress on that page itself.
+ */
+function withRetiredCredit(rows: ProgressEntry[]): ProgressEntry[] {
+  const have = new Set(rows.map((r) => r.resource_path));
+  const carried = new Map<string, ProgressEntry>();
+  for (const row of rows) {
+    const target = legacyPageRedirects[row.resource_path];
+    if (!target || have.has(target) || !findLibraryItem(target)) continue;
+    const already = carried.get(target);
+    if (!already || (already.status !== "completed" && row.status === "completed")) {
+      carried.set(target, { ...row, resource_path: target });
+    }
+  }
+  return carried.size ? [...rows, ...carried.values()] : rows;
+}
+
 function sortByUpdated(rows: ProgressEntry[]): ProgressEntry[] {
   return [...rows].sort((a, b) => (b.updated_at ?? "").localeCompare(a.updated_at ?? ""));
 }
@@ -72,7 +92,11 @@ async function load(force = false): Promise<void> {
       .eq("user_id", uid)
       .order("updated_at", { ascending: false });
     loadedFor = uid;
-    setState({ userId: uid, progress: !error && data ? (data as ProgressEntry[]) : [], loading: false });
+    setState({
+      userId: uid,
+      progress: !error && data ? sortByUpdated(withRetiredCredit(data as ProgressEntry[])) : [],
+      loading: false,
+    });
   })().finally(() => {
     loading = null;
   });

@@ -32,7 +32,7 @@ export default function SavedToolsList() {
         if (!cancelled) setRows([]);
         return;
       }
-      const { data } = await supabase
+      const { data, error: rowsError } = await supabase
         .from("worksheet_responses")
         .select("worksheet_key, updated_at")
         .eq("user_id", userId)
@@ -41,7 +41,9 @@ export default function SavedToolsList() {
       const saved = (data ?? []) as SavedRow[];
       setRows(saved);
       const retiredKeys = new Set(retiredWorksheets.map((w) => w.worksheetKey).filter(Boolean));
-      if (saved.some((r) => retiredKeys.has(r.worksheet_key))) {
+      // If we couldn't check, show the link: hiding the only way to her
+      // earlier writing because of a blip would be worse than an empty page.
+      if (rowsError || saved.some((r) => retiredKeys.has(r.worksheet_key))) {
         setHasEarlier(true);
         return;
       }
@@ -51,7 +53,7 @@ export default function SavedToolsList() {
           supabase.from(table).select("id", { count: "exact", head: true }).eq("user_id", userId),
         ),
       );
-      if (!cancelled && counts.some((c) => !c.error && (c.count ?? 0) > 0)) setHasEarlier(true);
+      if (!cancelled && counts.some((c) => !!c.error || (c.count ?? 0) > 0)) setHasEarlier(true);
     })();
     return () => {
       cancelled = true;

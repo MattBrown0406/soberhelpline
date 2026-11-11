@@ -35,8 +35,8 @@ const MembershipPromoBanner = () => {
         <div className="flex items-start gap-3 bg-background/60 rounded-lg p-3">
           <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
           <div>
-            <p className="text-sm font-medium text-foreground">AI-Powered Tools</p>
-            <p className="text-xs text-muted-foreground">Boundary builder, relapse guide & more</p>
+            <p className="text-sm font-medium text-foreground">Guided Exercises &amp; Tools</p>
+            <p className="text-xs text-muted-foreground">Boundary script, relapse tracker &amp; more</p>
           </div>
         </div>
         <div className="flex items-start gap-3 bg-background/60 rounded-lg p-3">
