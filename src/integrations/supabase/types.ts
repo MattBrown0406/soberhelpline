@@ -1678,6 +1678,45 @@ export type Database = {
           },
         ]
       }
+      forum_notification_log: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          post_id: string
+          recipient_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          post_id: string
+          recipient_user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          post_id?: string
+          recipient_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_notification_log_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forum_notification_log_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts_secure"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       forum_poll_options: {
         Row: {
           created_at: string
@@ -2091,6 +2130,72 @@ export type Database = {
           source_registration_id?: string | null
           tags?: string[]
           updated_at?: string
+        }
+        Relationships: []
+      }
+      member_email_log: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          period_key: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          period_key: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          period_key?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      member_learning_paths: {
+        Row: {
+          started_at: string
+          track_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          started_at?: string
+          track_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          started_at?: string
+          track_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      member_visits: {
+        Row: {
+          created_at: string
+          first_path: string | null
+          user_id: string
+          visit_date: string
+        }
+        Insert: {
+          created_at?: string
+          first_path?: string | null
+          user_id: string
+          visit_date?: string
+        }
+        Update: {
+          created_at?: string
+          first_path?: string | null
+          user_id?: string
+          visit_date?: string
         }
         Relationships: []
       }
@@ -3182,30 +3287,39 @@ export type Database = {
       user_notification_preferences: {
         Row: {
           created_at: string
+          followed_topic_notifications: boolean
           id: string
           mention_notifications: boolean
+          reply_notifications: boolean
           updated_at: string
           user_id: string
           weekly_education_nudge: boolean
           weekly_forum_digest: boolean
+          weekly_member_note: boolean
         }
         Insert: {
           created_at?: string
+          followed_topic_notifications?: boolean
           id?: string
           mention_notifications?: boolean
+          reply_notifications?: boolean
           updated_at?: string
           user_id: string
           weekly_education_nudge?: boolean
           weekly_forum_digest?: boolean
+          weekly_member_note?: boolean
         }
         Update: {
           created_at?: string
+          followed_topic_notifications?: boolean
           id?: string
           mention_notifications?: boolean
+          reply_notifications?: boolean
           updated_at?: string
           user_id?: string
           weekly_education_nudge?: boolean
           weekly_forum_digest?: boolean
+          weekly_member_note?: boolean
         }
         Relationships: []
       }
@@ -3226,6 +3340,36 @@ export type Database = {
           created_at?: string | null
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workbook_entries: {
+        Row: {
+          answers: Json
+          completed_at: string
+          exercise_id: string
+          id: string
+          output: Json
+          score: number | null
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          completed_at?: string
+          exercise_id: string
+          id?: string
+          output?: Json
+          score?: number | null
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          completed_at?: string
+          exercise_id?: string
+          id?: string
+          output?: Json
+          score?: number | null
           user_id?: string
         }
         Relationships: []
@@ -3542,10 +3686,12 @@ export type Database = {
       }
       forum_posts_secure: {
         Row: {
+          author_is_staff: boolean | null
           content: string | null
           created_at: string | null
           id: string | null
           is_anonymous: boolean | null
+          is_mine: boolean | null
           is_pinned: boolean | null
           needs_support: boolean | null
           parent_post_id: string | null
@@ -3555,10 +3701,12 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          author_is_staff?: never
           content?: string | null
           created_at?: string | null
           id?: string | null
           is_anonymous?: boolean | null
+          is_mine?: never
           is_pinned?: boolean | null
           needs_support?: boolean | null
           parent_post_id?: string | null
@@ -3568,10 +3716,12 @@ export type Database = {
           user_id?: never
         }
         Update: {
+          author_is_staff?: never
           content?: string | null
           created_at?: string | null
           id?: string | null
           is_anonymous?: boolean | null
+          is_mine?: never
           is_pinned?: boolean | null
           needs_support?: boolean | null
           parent_post_id?: string | null
@@ -3868,6 +4018,7 @@ export type Database = {
     }
     Functions: {
       auth_user_id_by_email: { Args: { p_email: string }; Returns: string }
+      can_mention_from_post: { Args: { _post_id: string }; Returns: boolean }
       cast_poll_vote: {
         Args: { _choice: number; _token: string }
         Returns: {
@@ -3933,6 +4084,13 @@ export type Database = {
         }
         Returns: Json
       }
+      find_forum_members_by_username: {
+        Args: { _usernames: string[] }
+        Returns: {
+          id: string
+          username: string
+        }[]
+      }
       finish_monday_notification: {
         Args: { _accepted: boolean; _token: string }
         Returns: boolean
@@ -3982,6 +4140,32 @@ export type Database = {
           total_views: number
           unique_sessions: number
           unique_users: number
+        }[]
+      }
+      get_member_engagement: {
+        Args: { p_weeks?: number }
+        Returns: {
+          active_members: number
+          exercises_completed: number
+          exercises_started: number
+          forum_replies: number
+          forum_threads: number
+          guides_completed: number
+          guides_started: number
+          members_visited: number
+          new_members: number
+          paths_chosen: number
+          week_start: string
+          worksheets_edited: number
+        }[]
+      }
+      get_member_engagement_breakdown: {
+        Args: { p_days?: number }
+        Returns: {
+          completed: number
+          label: string
+          section: string
+          started: number
         }[]
       }
       get_my_consultation_provider: {
@@ -4263,6 +4447,8 @@ export type Database = {
       }
       is_active_family_member: { Args: { _user_id: string }; Returns: boolean }
       is_email_meeting_blocked: { Args: { _email: string }; Returns: boolean }
+      is_forum_post_author: { Args: { _post_id: string }; Returns: boolean }
+      is_forum_staff: { Args: { _user_id: string }; Returns: boolean }
       is_meeting_blocked: {
         Args: { _email: string; _name: string }
         Returns: boolean
@@ -4300,6 +4486,13 @@ export type Database = {
         Returns: boolean
       }
       safe_jsonb_int: { Args: { j: Json; k: string }; Returns: number }
+      search_forum_members: {
+        Args: { _query: string }
+        Returns: {
+          id: string
+          username: string
+        }[]
+      }
       update_abandoned_booking: {
         Args: {
           _client_email: string
