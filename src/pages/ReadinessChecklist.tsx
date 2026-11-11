@@ -109,7 +109,7 @@ const SECTIONS = [
 const MAX_SCORE = SECTIONS.reduce((sum, section) => sum + section.items.length, 0);
 const itemId = (sectionKey: string, index: number) => `${sectionKey}-${index}`;
 
-const REALITY_QUESTIONS = [
+const REALITY_QUESTIONS: { id: string; question: string; options: { value: string; label: string }[] }[] = [
   {
     id: "behavior-hope",
     question: "Am I responding to behavior—or to hope?",
@@ -142,7 +142,7 @@ const REALITY_QUESTIONS = [
       { value: "comfort", label: "Comfort" },
     ],
   },
-] as const;
+];
 
 const ACTION_OPTIONS = [
   "Maintain boundaries",
@@ -490,7 +490,7 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-foreground">{formatDate(checkIn.date)}</p>
                   <p className="text-base text-foreground">
-                    {checkIn.score} of {MAX_SCORE} — {bandFor(checkIn.score).label}
+                    {checkIn.score} of {MAX_SCORE} — {checkIn.score > 0 ? bandFor(checkIn.score).label : "no boxes ticked"}
                   </p>
                   <p className="text-sm text-muted-foreground">{changeText(checkIn.score, previous ? previous.score : null)}</p>
                 </div>

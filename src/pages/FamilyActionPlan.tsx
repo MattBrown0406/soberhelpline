@@ -33,6 +33,8 @@ interface ActionPlan {
   trueEmergency: string;
   notEmergencies: string;
   crisisResponses: string[];
+  emergencyContacts: string;
+  naloxoneLocation: string;
   familySupports: string[];
   selfCareCommitments: string;
   burnoutSigns: string;
@@ -59,6 +61,8 @@ const blankPlan: ActionPlan = {
   trueEmergency: "",
   notEmergencies: "",
   crisisResponses: [],
+  emergencyContacts: "",
+  naloxoneLocation: "",
   familySupports: [],
   selfCareCommitments: "",
   burnoutSigns: "",
@@ -271,6 +275,18 @@ export default function FamilyActionPlan() {
               onChange={(crisisResponses) => saved.patch({ crisisResponses })}
             />
           </div>
+          <SavedTextarea
+            label="Who we call in an emergency (names and numbers):"
+            hint="911 first if anyone is in danger. Then: the people who can come, their doctor or treatment team, a sponsor, the person who can stay with the children."
+            value={plan.emergencyContacts}
+            onChange={(emergencyContacts) => saved.patch({ emergencyContacts })}
+          />
+          <SavedInput
+            label="Where our naloxone (Narcan) is kept, and who knows how to use it:"
+            hint="If opioids or pills from anywhere but a pharmacy could be involved, keep it where everyone in the house can reach it."
+            value={plan.naloxoneLocation}
+            onChange={(naloxoneLocation) => saved.patch({ naloxoneLocation })}
+          />
         </ToolSection>
 
         <ToolSection

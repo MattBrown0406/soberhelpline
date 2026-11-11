@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function BoundaryDrift() {
   useGuideTracking("/boundary-drift", "Boundary Drift: How Limits Slowly Erode");
@@ -42,6 +43,7 @@ export default function BoundaryDrift() {
             subtitle="Why boundaries don't fail in crisis — they fade in calm. Understanding how limits gradually erode and how to recognize the pattern before it's too late."
             clinicalNote="Based on relapse prevention models (Gorski) and family systems theory on homeostatic pull."
           />
+          <SafetyBox topics={["overdose", "violence"]} title="Holding a limit never means ignoring danger" />
           <article className="prose prose-slate dark:prose-invert max-w-none">
 
             <section className="mb-10">

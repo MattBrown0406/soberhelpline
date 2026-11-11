@@ -133,7 +133,7 @@ export const pillars: Pillar[] = [
     resources: [
       { title: "40 Questions to Ask a Treatment Center", path: "/treatment-questions", color: "blue" },
       { title: "How the Treatment Industry Works", path: "/treatment-industry-guide", color: "slate" },
-      { title: "Treatment Industry Red Flags Guide", path: "/treatment-red-flags", color: "red" },
+      { title: "Treatment Industry Red Flags Guide", path: "/treatment-red-flags", color: "red", tool: true },
       { title: "How to Talk About Treatment", path: "/talking-about-treatment", color: "indigo" },
       { title: "Aftercare Readiness Checklist", path: "/aftercare-checklist", color: "cyan", tool: true },
       { title: "Family Advocacy Toolkit", path: "/family-advocacy-toolkit", color: "green", tool: true },

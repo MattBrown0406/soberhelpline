@@ -49,7 +49,7 @@ export default function SafetyBox({ topics, title = "Before you use this guide: 
     >
       <div className="mb-3 flex items-center gap-2">
         <ShieldAlert className="h-5 w-5 shrink-0" aria-hidden="true" />
-        <h2 className="text-base font-semibold leading-snug">{title}</h2>
+        <p className="m-0 text-base font-semibold leading-snug">{title}</p>
       </div>
       <ul className="space-y-3">
         {topics.map((topic) => (

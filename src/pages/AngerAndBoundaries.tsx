@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function AngerAndBoundaries() {
   useGuideTracking("/anger-and-boundaries", "Anger and Boundaries Are Not the Same Thing");
@@ -42,6 +43,7 @@ export default function AngerAndBoundaries() {
             subtitle="Why limits built on anger collapse — and what holds them instead. Understanding the difference between reactive anger and values-based boundaries."
             clinicalNote="Informed by emotion regulation research (Linehan, DBT) and Al-Anon principles of detachment with love."
           />
+          <SafetyBox topics={["violence", "emergency"]} title="If their anger makes you afraid" />
           <article className="prose prose-slate dark:prose-invert max-w-none">
 
             <section className="mb-10">
