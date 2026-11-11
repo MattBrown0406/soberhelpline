@@ -106,9 +106,9 @@ function AuthorLine({
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-slate-600 dark:text-slate-400">
       {anonymous || !post.user_id ? (
-        <span className="inline-flex min-h-11 items-center gap-2.5">
+        <span className="inline-flex min-h-11 max-w-full items-center gap-2.5">
           {avatar}
-          <span className="font-medium text-foreground">{display}</span>
+          <span className="break-words font-medium text-foreground">{display}</span>
         </span>
       ) : (
         <MemberProfile
@@ -119,7 +119,7 @@ function AuthorLine({
         >
           <button
             type="button"
-            className="group inline-flex min-h-11 items-center gap-2.5 rounded-lg text-left font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group inline-flex min-h-11 max-w-full items-center gap-2.5 rounded-lg text-left font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {avatar}
             <span className="break-all group-hover:underline">{display}</span>

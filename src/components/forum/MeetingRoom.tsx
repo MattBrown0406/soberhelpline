@@ -83,7 +83,7 @@ function NextMeetingCard({ onAsk }: { onAsk: () => void }) {
             </div>
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            <Button onClick={onAsk} className="h-12 gap-2 rounded-xl px-5 text-base shadow-md shadow-[#16294a]/15">
+            <Button onClick={onAsk} className="h-12 gap-2 rounded-xl px-5 shadow-md shadow-[#16294a]/15">
               <MessageCircleQuestion className="h-4 w-4" aria-hidden="true" />
               Ask a question for Monday
             </Button>

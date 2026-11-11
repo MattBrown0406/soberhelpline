@@ -445,7 +445,7 @@ export default function FamilyForum() {
               <Plus className="h-4 w-4" aria-hidden="true" />
               Start a conversation
             </Button>
-            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
               <BookmarkedPosts userId={user.id} />
               <MentionNotifications userId={user.id} />
               <Button variant="outline" size="sm" className={TOOL_BUTTON} onClick={() => setShowMessages(true)}>

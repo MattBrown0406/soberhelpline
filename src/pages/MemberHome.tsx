@@ -2,7 +2,7 @@ import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, BookOpen, CalendarDays, Check, Compass, CreditCard, ExternalLink, FileText,
-  Loader2, Mail, MessageCircle, NotebookPen, PlayCircle, RotateCcw, Users, Video,
+  Loader2, MessageCircle, NotebookPen, PlayCircle, RotateCcw, Users, Video,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -648,8 +648,8 @@ export default function MemberHome() {
 
           <EducationProgressBar />
 
-          <section id="email-settings" aria-labelledby="email-settings-heading" className="scroll-mt-24 space-y-3">
-            <SectionHeading id="email-settings-heading" icon={Mail} tone="navy" title="Email settings" />
+          {/* The panel carries its own "Email settings" title. */}
+          <section id="email-settings" aria-label="Email settings" className="scroll-mt-24">
             <NotificationSettings />
           </section>
         </div>
