@@ -1,13 +1,14 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, BookOpen, CheckCircle2, Circle, Compass, CreditCard, ExternalLink, FileText,
+  ArrowRight, BookOpen, CalendarDays, Check, Compass, CreditCard, ExternalLink, FileText,
   Loader2, Mail, MessageCircle, NotebookPen, PlayCircle, RotateCcw, Users, Video,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import {
+  HeroStat, IconTile, KindPill, MemberHero, MemberPage, Panel, ProgressRing, SectionHeading, toneForKind, type Tone,
+} from "@/components/member/MemberUI";
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import NotificationSettings from "@/components/NotificationSettings";
@@ -108,32 +109,49 @@ function ThisWeekCard() {
     };
   }, []);
 
+  // The meeting day as a calendar tile (Pacific time, like the meeting itself).
+  const tileParts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", day: "numeric", month: "short" })
+    .formatToParts(meeting.start)
+    .reduce<Record<string, string>>((acc, part) => ({ ...acc, [part.type]: part.value }), {});
+
   return (
-    <Card className={meeting.isLive ? "border-emerald-500/40 bg-emerald-500/5" : undefined}>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-base flex items-center gap-2">
-          <Video className="h-4 w-4 text-primary" />
-          This week
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          {meeting.isLive ? (
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-emerald-600 text-white hover:bg-emerald-600">Live now</Badge>
-              <span className="font-semibold text-foreground">The Family Squares is on until 8:00 PM Pacific</span>
-            </div>
-          ) : (
-            <>
-              <p className="font-semibold text-foreground">
-                The Family Squares: {meeting.isToday ? "tonight" : formatMeetingDay(meeting.start)}, 7:00–8:00 PM Pacific
-              </p>
-              <p className="text-sm text-muted-foreground mt-0.5">
-                Starts {formatTimeUntil(meeting.msUntilStart)}
-                {meeting.viewerInOtherZone && ` (${formatViewerTime(meeting.start)} your time)`}.
-              </p>
-            </>
-          )}
+    <Panel tone={meeting.isLive ? "emerald" : undefined} className={meeting.isLive ? "bg-emerald-50/60 dark:bg-emerald-400/[0.06]" : undefined}>
+      <div className="space-y-4">
+        <div className="flex items-start gap-4">
+          <div
+            aria-hidden="true"
+            className="flex w-16 shrink-0 flex-col overflow-hidden rounded-2xl border border-[#16294a]/15 bg-card text-center shadow-sm dark:border-sky-400/25"
+          >
+            <span className="bg-[#16294a] py-1 text-[11px] font-semibold uppercase tracking-wider text-white dark:bg-sky-400/25">
+              {tileParts.weekday ?? "Mon"}
+            </span>
+            <span className="py-1 text-2xl font-bold leading-tight text-foreground">{tileParts.day ?? ""}</span>
+            <span className="pb-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{tileParts.month ?? ""}</span>
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">This week</p>
+            {meeting.isLive ? (
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <Badge className="bg-emerald-600 text-white hover:bg-emerald-600">
+                  <span className="mr-1.5 inline-block h-2 w-2 animate-pulse rounded-full bg-white motion-reduce:animate-none" aria-hidden="true" />
+                  Live now
+                </Badge>
+                <span className="text-lg font-semibold leading-snug text-foreground">The Family Squares is on until 8:00 PM Pacific</span>
+              </div>
+            ) : (
+              <>
+                <p className="mt-0.5 text-lg font-semibold leading-snug text-foreground">
+                  The Family Squares: {meeting.isToday ? "tonight" : formatMeetingDay(meeting.start)}, 7:00–8:00 PM Pacific
+                </p>
+                <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                  <span className="inline-flex items-center rounded-full bg-[#16294a]/[0.07] px-2.5 py-0.5 font-medium text-[#16294a] dark:bg-sky-400/15 dark:text-sky-200">
+                    Starts {formatTimeUntil(meeting.msUntilStart)}
+                  </span>
+                  {meeting.viewerInOtherZone && <span>{formatViewerTime(meeting.start)} your time</span>}
+                </p>
+              </>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-2">
@@ -161,7 +179,7 @@ function ThisWeekCard() {
         </div>
 
         {recording && (
-          <div className="rounded-lg border border-border bg-muted/30 p-3 text-sm">
+          <div className="rounded-xl border border-border/70 bg-muted/40 p-3.5 text-sm">
             <p className="text-muted-foreground">Last meeting, {formatRecordingDate(recording.recording_date)}</p>
             <p className="font-medium text-foreground">{recording.title}</p>
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
@@ -178,8 +196,8 @@ function ThisWeekCard() {
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </Panel>
   );
 }
 
@@ -253,80 +271,99 @@ function YourPathCard() {
   const { loading, track, steps, completedCount, totalSteps, currentStepNumber, nextStep, isFinished } = useLearningPath();
   const [changing, setChanging] = useState(false);
 
+  const pct = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
+
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-base flex items-center gap-2">
-          <Compass className="h-4 w-4 text-primary" />
-          Your path
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {loading ? (
-          <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
-        ) : !track || changing ? (
-          <PathPicker onCancel={track ? () => setChanging(false) : undefined} />
-        ) : (
-          <div className="space-y-4">
-            <div>
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="text-lg font-semibold text-foreground">{track.title}</p>
-                <p className="text-sm text-muted-foreground tabular-nums">
-                  {isFinished ? `All ${totalSteps} steps done` : `Step ${currentStepNumber} of ${totalSteps}`}
-                </p>
-              </div>
-              <Progress
-                value={totalSteps > 0 ? (completedCount / totalSteps) * 100 : 0}
-                className="h-2 mt-2"
-                aria-label={`${completedCount} of ${totalSteps} steps done`}
-              />
-            </div>
-
-            {nextStep ? (
-              <Button
-                asChild
-                size="lg"
-                className="h-auto min-h-11 w-full gap-2 whitespace-normal px-4 py-2.5 text-left sm:w-auto sm:px-8"
-              >
-                <Link to={nextStep.path}>
-                  <span>
-                    {nextStep.started ? "Continue: " : "Next: "}
-                    {nextStep.title}
-                  </span>
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </Link>
-              </Button>
-            ) : (
-              <p className="text-sm text-foreground">
-                You've finished this path. Well done taking it step by step. When you're ready, choose another one.
+    <Panel>
+      <div className="mb-4 flex items-center gap-3">
+        <IconTile icon={Compass} tone="amber" />
+        <h2 className="text-lg font-semibold text-foreground">Your path</h2>
+      </div>
+      {loading ? (
+        <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+      ) : !track || changing ? (
+        <PathPicker onCancel={track ? () => setChanging(false) : undefined} />
+      ) : (
+        <div className="space-y-5">
+          <div className="flex items-center gap-4">
+            <ProgressRing value={pct} tone="amber" label={`${completedCount} of ${totalSteps} steps done`}>
+              <span className="text-lg font-bold tabular-nums text-foreground">{completedCount}</span>
+              <span className="text-[11px] text-muted-foreground">of {totalSteps}</span>
+            </ProgressRing>
+            <div className="min-w-0">
+              <p className="text-xl font-semibold leading-snug text-foreground">{track.title}</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">
+                {isFinished ? `All ${totalSteps} steps done` : `Step ${currentStepNumber} of ${totalSteps}`}
               </p>
-            )}
+            </div>
+          </div>
 
-            <ol className="space-y-1">
-              {steps.map((s) => (
-                <li key={`${s.path}-${s.index}`}>
+          {nextStep ? (
+            <Button
+              asChild
+              size="lg"
+              className="h-auto min-h-12 w-full gap-2 whitespace-normal rounded-xl px-4 py-3 text-left shadow-md shadow-[#16294a]/15 sm:w-auto sm:px-6"
+            >
+              <Link to={nextStep.path}>
+                <span>
+                  <span className="block text-xs font-medium uppercase tracking-wide opacity-80">
+                    {nextStep.started ? "Continue" : "Next step"}
+                  </span>
+                  <span className="block text-base font-semibold leading-snug">{nextStep.title}</span>
+                </span>
+                <ArrowRight className="h-5 w-5 shrink-0" />
+              </Link>
+            </Button>
+          ) : (
+            <p className="rounded-xl bg-green-50 p-4 text-sm text-green-900 dark:bg-green-400/10 dark:text-green-100">
+              You've finished this path. Well done taking it step by step. When you're ready, choose another one.
+            </p>
+          )}
+
+          {/* The steps as a line she can follow: done, here now, still ahead. */}
+          <ol className="relative ml-1">
+            {steps.map((s, i) => {
+              const isNext = !!nextStep && s.index === nextStep.index;
+              const last = i === steps.length - 1;
+              return (
+                <li key={`${s.path}-${s.index}`} className="relative pl-9">
+                  {!last && (
+                    <span
+                      aria-hidden="true"
+                      className={`absolute left-[11px] top-7 h-[calc(100%-1.25rem)] w-0.5 ${s.completed ? "bg-green-500" : "bg-border"}`}
+                    />
+                  )}
+                  <span
+                    className={`absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${
+                      s.completed
+                        ? "bg-green-600 text-white"
+                        : isNext
+                          ? "bg-[#16294a] text-white ring-4 ring-[#16294a]/15 dark:bg-sky-300 dark:text-slate-900 dark:ring-sky-300/20"
+                          : "border-2 border-border bg-card text-muted-foreground"
+                    }`}
+                  >
+                    {s.completed ? <Check className="h-3.5 w-3.5" aria-label="Done" /> : <span aria-hidden="true">{i + 1}</span>}
+                    {!s.completed && <span className="sr-only">{isNext ? "You are here" : "Not done yet"}</span>}
+                  </span>
                   <Link
                     to={s.path}
-                    className={`flex items-start gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted/50 ${nextStep && s.index === nextStep.index ? "bg-primary/5 font-medium" : ""}`}
+                    className={`block min-h-10 rounded-lg px-2.5 py-2 text-sm transition-colors hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                      isNext ? "font-semibold text-foreground" : s.completed ? "text-muted-foreground" : "text-foreground"
+                    }`}
                   >
-                    {s.completed ? (
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" aria-label="Done" />
-                    ) : (
-                      <Circle className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-label="Not done yet" />
-                    )}
-                    <span className={s.completed ? "text-muted-foreground" : "text-foreground"}>{s.title}</span>
+                    {s.title}
                   </Link>
                 </li>
-              ))}
-            </ol>
+              );
+            })}
+          </ol>
 
-            <Button variant="ghost" size="sm" className="px-2" onClick={() => setChanging(true)}>
-              Change path
-            </Button>
-          </div>
-        )}
-      </CardContent>
-    </Card>
+          <Button variant="ghost" size="sm" className="min-h-10 px-2 text-muted-foreground" onClick={() => setChanging(true)}>
+            Change path
+          </Button>
+        </div>
+      )}
+    </Panel>
   );
 }
 
@@ -335,6 +372,8 @@ function YourPathCard() {
 // ─────────────────────────────────────────────────────────────
 
 interface ContinueItem {
+  /** Colour of the icon tile (by kind of thing). */
+  tone?: Tone;
   key: string;
   to: string;
   title: string;
@@ -457,35 +496,32 @@ function ContinueCard({ userId }: { userId: string | null }) {
   if (items.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-base flex items-center gap-2">
-          <RotateCcw className="h-4 w-4 text-primary" />
-          Continue where you left off
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        {items.slice(0, 6).map(({ key, to, title, detail, badge, icon: Icon }) => (
-          <Link
-            key={key}
-            to={to}
-            className="flex items-center justify-between gap-3 rounded-lg border border-border p-3 transition-colors hover:border-primary/40 hover:bg-muted/40"
-          >
-            <span className="flex min-w-0 items-center gap-2.5">
-              <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />
-              <span className="min-w-0">
-                <span className="block truncate text-sm font-medium text-foreground">{title}</span>
-                <span className="block text-xs text-muted-foreground">{detail}</span>
-              </span>
-            </span>
-            <span className="flex shrink-0 items-center gap-2">
-              {badge && <Badge variant="secondary" className="text-xs">{badge}</Badge>}
-              <ArrowRight className="h-4 w-4 text-muted-foreground" />
-            </span>
-          </Link>
-        ))}
-      </CardContent>
-    </Card>
+    <section aria-labelledby="continue-heading" className="space-y-3">
+      <SectionHeading id="continue-heading" icon={RotateCcw} tone="sky" title="Continue where you left off" />
+      <ul className="grid gap-2.5 sm:grid-cols-2">
+        {items.slice(0, 6).map(({ key, to, title, detail, badge, icon }) => {
+          const tone = toneForKind(badge === "Retake available" ? "Exercise" : badge ?? (to.startsWith("/workbook/") ? "Exercise" : "Guide"));
+          return (
+            <li key={key}>
+              <Link
+                to={to}
+                className="group flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-3.5 shadow-sm shadow-slate-900/[0.03] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transform-none"
+              >
+                <IconTile icon={icon} tone={tone} />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold leading-snug text-foreground">{title}</span>
+                  <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                    {detail}
+                    {badge && <KindPill tone={tone}>{badge}</KindPill>}
+                  </span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
@@ -493,18 +529,21 @@ function ContinueCard({ userId }: { userId: string | null }) {
 // Page
 // ─────────────────────────────────────────────────────────────
 
-const quickLinks = [
-  { to: "/family-education", icon: BookOpen, label: "Education Center" },
-  { to: "/workbook", icon: NotebookPen, label: "Workbook" },
-  { to: "/zoom-recordings", icon: Video, label: "Recordings" },
-  { to: "/member-qa", icon: MessageCircle, label: "Q&A" },
-  { to: "/family-forum", icon: Users, label: "Forum" },
-  { to: "/member-billing", icon: CreditCard, label: "Billing" },
+const quickLinks: { to: string; icon: ComponentType<{ className?: string }>; label: string; hint: string; tone: Tone }[] = [
+  { to: "/family-education", icon: BookOpen, label: "Education Center", hint: "Guides, tools, meditations", tone: "sky" },
+  { to: "/workbook", icon: NotebookPen, label: "My Workbook", hint: "Exercises and saved plans", tone: "emerald" },
+  { to: "/family-forum", icon: Users, label: "Forum", hint: "Families who get it", tone: "violet" },
+  { to: "/zoom-recordings", icon: Video, label: "Recordings", hint: "Past Monday meetings", tone: "navy" },
+  { to: "/member-qa", icon: MessageCircle, label: "Q&A", hint: "Questions Matt answered", tone: "teal" },
+  { to: "/member-billing", icon: CreditCard, label: "Billing", hint: "Your membership", tone: "amber" },
 ];
 
 export default function MemberHome() {
-  const { userId } = useEducationProgress();
+  const { userId, loading: progressLoading, getStats } = useEducationProgress();
+  const { track, currentStepNumber, totalSteps, isFinished } = useLearningPath();
   const [firstName, setFirstName] = useState<string | null>(null);
+  const meeting = getMondayMeeting();
+  const stats = progressLoading ? null : getStats();
 
   useEffect(() => {
     if (!userId) return;
@@ -537,55 +576,84 @@ export default function MemberHome() {
         title="Member Home | Sober Helpline"
         description="Your member home: this week's meeting, your learning path, and where you left off."
       />
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto max-w-3xl px-4 py-8 space-y-6">
-          <header>
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-              {firstName ? `Welcome back, ${firstName}` : "Welcome back"}
-            </h1>
-            <p className="text-muted-foreground mt-1">One step at a time. Here's your week.</p>
-          </header>
+      <MemberPage>
+        <div className="container mx-auto max-w-3xl space-y-8 px-4 py-6 sm:py-10">
+          <MemberHero
+            eyebrow="Your family hub"
+            title={firstName ? `Welcome back, ${firstName}` : "Welcome back"}
+            subtitle="One step at a time. Here's your week."
+          >
+            <div className="grid gap-2.5 sm:grid-cols-3">
+              <HeroStat
+                icon={CalendarDays}
+                label="Next meeting"
+                value={
+                  meeting.isLive
+                    ? "Live now"
+                    : meeting.isToday
+                      ? "Tonight, 7 PM PT"
+                      : `${new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric" }).format(meeting.start)}, 7 PM PT`
+                }
+              />
+              <HeroStat
+                icon={Compass}
+                label="Your path"
+                value={!track ? "Choose a path" : isFinished ? "Path finished" : `Step ${currentStepNumber} of ${totalSteps}`}
+              />
+              <HeroStat
+                icon={BookOpen}
+                label="Library"
+                value={stats ? `${stats.totalCompleted} of ${stats.totalResources} done` : "Guides and tools"}
+                to="/family-education"
+              />
+            </div>
+          </MemberHero>
 
           <ThisWeekCard />
           <YourPathCard />
           <ContinueCard userId={userId} />
 
           <section aria-labelledby="exercises-heading" className="space-y-3">
-            <div className="flex items-baseline justify-between gap-3">
-              <h2 id="exercises-heading" className="text-base font-semibold text-foreground">
-                Short guided exercises
-              </h2>
-              <Link to="/workbook" className="text-sm text-primary hover:underline">
-                See all
-              </Link>
-            </div>
+            <SectionHeading
+              id="exercises-heading"
+              icon={NotebookPen}
+              tone="emerald"
+              title="Short guided exercises"
+              description="About five minutes each. What you write is saved to your workbook."
+              action={{ to: "/workbook", label: "See all" }}
+            />
             <ExerciseGrid limit={3} />
+          </section>
+
+          <section aria-labelledby="member-pages-heading" className="space-y-3">
+            <h2 id="member-pages-heading" className="text-lg font-semibold text-foreground sm:text-xl">
+              Everything in your membership
+            </h2>
+            <nav aria-label="Member pages" className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+              {quickLinks.map(({ to, icon, label, hint, tone }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="group flex min-h-16 items-center gap-3 rounded-2xl border border-border/70 bg-card p-3 shadow-sm shadow-slate-900/[0.03] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transform-none"
+                >
+                  <IconTile icon={icon} tone={tone} />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold leading-snug text-foreground">{label}</span>
+                    <span className="hidden text-xs leading-snug text-muted-foreground sm:block">{hint}</span>
+                  </span>
+                </Link>
+              ))}
+            </nav>
           </section>
 
           <EducationProgressBar />
 
-          <nav aria-label="Member pages" className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {quickLinks.map(({ to, icon: Icon, label }) => (
-              <Link
-                key={to}
-                to={to}
-                className="flex items-center gap-2.5 rounded-lg border border-border px-3 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:bg-muted/40"
-              >
-                <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />
-                {label}
-              </Link>
-            ))}
-          </nav>
-
           <section id="email-settings" aria-labelledby="email-settings-heading" className="scroll-mt-24 space-y-3">
-            <h2 id="email-settings-heading" className="text-base font-semibold text-foreground flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" />
-              Email settings
-            </h2>
+            <SectionHeading id="email-settings-heading" icon={Mail} tone="navy" title="Email settings" />
             <NotificationSettings />
           </section>
         </div>
-      </div>
+      </MemberPage>
     </>
   );
 }

@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import {
+  ArrowRight, CheckCircle2, Clock, Compass, HandHeart, HeartPulse, MessagesSquare, Scale, ShieldCheck, Sparkles, Sprout, Users,
+  type LucideIcon,
+} from "lucide-react";
+import { IconTile, TONE, toneForExercise } from "@/components/member/MemberUI";
 import { exercisePath, isDueForRetake, retakeDate, shortDate, type Exercise } from "@/data/exercises";
 import type { WorkbookEntry } from "@/hooks/useWorkbook";
 
@@ -8,6 +12,17 @@ interface ExerciseCardProps {
   latest?: WorkbookEntry;
   inProgress?: boolean;
 }
+
+const EXERCISE_ICONS: Record<string, LucideIcon> = {
+  "boundary-script": ShieldCheck,
+  "helping-or-enabling": Scale,
+  "guilt-check": HandHeart,
+  "control-sort": Compass,
+  "weekly-self-care": Sprout,
+  "stress-check": HeartPulse,
+  "hard-moment-practice": MessagesSquare,
+  "family-pulse": Users,
+};
 
 /** A guided exercise as a card linking to /workbook/<id>, with its status. */
 export default function ExerciseCard({ exercise, latest, inProgress = false }: ExerciseCardProps) {
@@ -19,18 +34,23 @@ export default function ExerciseCard({ exercise, latest, inProgress = false }: E
       : `Done ${shortDate(latest.completed_at)} · retake from ${shortDate(retakeDate(latest.completed_at))}`
     : null;
 
+  const tone = toneForExercise(exercise.id);
+  const Icon = EXERCISE_ICONS[exercise.id] ?? Sparkles;
+
   return (
     <Link
       to={exercisePath(exercise.id)}
-      className="group flex h-full flex-col rounded-xl border border-border bg-card p-5 text-left shadow-sm transition-colors hover:border-primary/50 hover:bg-muted/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card p-5 text-left shadow-sm shadow-slate-900/[0.04] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transform-none"
     >
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-        <span>About {exercise.minutes} minutes</span>
-        {exercise.scored && <span aria-hidden="true">·</span>}
-        {exercise.scored && <span>Check-in</span>}
+      <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-1 ${TONE[tone].bar}`} />
+      <div className="flex items-start justify-between gap-3">
+        <IconTile icon={Icon} tone={tone} size="lg" />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+          <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+          About {exercise.minutes} min{exercise.scored ? " · Check-in" : ""}
+        </span>
       </div>
-      <h3 className="mt-2 text-lg font-semibold leading-snug text-foreground">{exercise.title}</h3>
+      <h3 className="mt-3 text-lg font-semibold leading-snug text-foreground">{exercise.title}</h3>
       <p className="mt-1 flex-1 text-sm leading-relaxed text-muted-foreground">{exercise.summary}</p>
       {status && (
         <p className="mt-3 flex items-center gap-1.5 text-sm text-foreground/80">
@@ -38,11 +58,15 @@ export default function ExerciseCard({ exercise, latest, inProgress = false }: E
           <span>{status}</span>
         </p>
       )}
-      {!status && inProgress && <p className="mt-3 text-sm text-foreground/80">In progress</p>}
-      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+      {!status && inProgress && (
+        <p className="mt-3 inline-flex w-fit items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-400/15 dark:text-amber-300">
+          In progress
+        </p>
+      )}
+      <span className={`mt-4 inline-flex items-center gap-1 text-sm font-semibold ${TONE[tone].text}`}>
         {action}
         <span className="sr-only">: {exercise.title}</span>
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
       </span>
     </Link>
   );
