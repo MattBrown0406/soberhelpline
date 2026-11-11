@@ -26,9 +26,14 @@ export function addDays(isoDate: string, days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-/** The note goes out on Tuesday in the 4 PM Pacific hour (the cron runs at two UTC hours to cover DST). */
+/**
+ * The note goes out on Tuesday from 4 PM Pacific. The window stays open until
+ * 7 PM so a long member list, or a bad half hour at the email provider, is
+ * caught up the same evening (the ledger stops anyone getting it twice).
+ */
 export function isSendWindow(now: Date): boolean {
-  return weekday(pacificDate(now)) === 2 && pacificHour(now) === 16;
+  const hour = pacificHour(now);
+  return weekday(pacificDate(now)) === 2 && hour >= 16 && hour < 19;
 }
 
 /** The Tuesday this note belongs to: today if Tuesday, else the most recent Tuesday (Pacific). */
@@ -184,13 +189,10 @@ export function renderWeeklyNote(d: WeeklyNoteData): { subject: string; html: st
   }
 
   // From the forum.
+  // No thread titles here: a title is a member's own words, and this note
+  // goes to every member's inbox.
   const threadList = d.threads.length
-    ? `<p style="margin:0 0 6px 0;">Conversations members joined this week:</p>
-       <ul style="margin:0 0 10px 0; padding-left:20px;">${
-      d.threads.map((t) =>
-        `<li style="margin-bottom:6px;">${link(`/family-forum/${encodeURIComponent(t.topicId)}?post=${encodeURIComponent(t.id)}`, t.title)}</li>`
-      ).join("")
-    }</ul>`
+    ? `<p style="margin:0 0 10px 0;">Members have been talking in the forum this week. ${link("/family-forum", "See the conversations")}</p>`
     : "";
   parts.push(block(
     "From the forum",

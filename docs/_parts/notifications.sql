@@ -97,7 +97,10 @@ DECLARE
 BEGIN
   IF NEW.status IS DISTINCT FROM 'active'
      OR NEW.provider_submission_id IS NOT NULL
-     OR NEW.plan_type IS NOT DISTINCT FROM 'app' THEN
+     OR NEW.plan_type IS NOT DISTINCT FROM 'app'
+     OR NEW.plan_type IS NOT DISTINCT FROM 'free' THEN
+    -- 'app': joined in the mobile app. 'free': granted by an admin, whose
+    -- screen already sends its own welcome (send-free-membership-email).
     RETURN NEW;
   END IF;
   IF TG_OP = 'UPDATE' AND OLD.status IS NOT DISTINCT FROM 'active' THEN
@@ -152,6 +155,12 @@ CREATE TRIGGER on_new_family_membership
 --    site_settings when each job runs (never pasted into the job).
 -- ---------------------------------------------------------------------
 
+-- Forum emails start from now: nothing posted before this moment is ever
+-- emailed (the function does nothing until this is set). Kept if already set.
+INSERT INTO public.site_settings (key, value)
+VALUES ('forum_notifications_start_at', to_char(now() AT TIME ZONE 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
+ON CONFLICT (key) DO NOTHING;
+
 -- Forum notifications: every 15 minutes.
 SELECT cron.schedule(
   'send-forum-notifications-15min',
@@ -168,11 +177,12 @@ SELECT cron.schedule(
   $cmd$
 );
 
--- Weekly member note: Tuesday 4 PM Pacific. Two UTC hours cover DST
--- (23:xx UTC Tuesday = 4 PM PDT; 00:xx UTC Wednesday = 4 PM PST); the
--- function only sends on Tuesday in the 4 PM Pacific hour, so one of the two
--- is always a no-op. Every 10 minutes inside that hour so a long member list
--- finishes over several runs (the ledger stops repeats).
+-- Weekly member note: Tuesday from 4 PM Pacific. The function only sends on
+-- Tuesday between 4 and 7 PM Pacific; these UTC hours cover that window in
+-- both seasons (PDT: 23:xx Tue to 01:xx Wed; PST: 00:xx to 02:xx Wed), and
+-- the runs outside it are no-ops. Every 10 minutes so a long member list, or
+-- a bad half hour at the email provider, is caught up the same evening (the
+-- ledger stops repeats).
 SELECT cron.schedule(
   'send-member-weekly-note-a',
   '*/10 23 * * 2',
@@ -190,7 +200,7 @@ SELECT cron.schedule(
 
 SELECT cron.schedule(
   'send-member-weekly-note-b',
-  '*/10 0 * * 3',
+  '*/10 0-2 * * 3',
   $cmd$
   select net.http_post(
     url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/send-member-weekly-note',

@@ -75,6 +75,8 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
   const key = Deno.env.get("SENDGRID_API_KEY");
   if (!key) throw new Error("SENDGRID_API_KEY is not configured");
   const res = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    // A hung request must fail (and release its claim) rather than be killed with the function.
+    signal: AbortSignal.timeout(15_000),
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({

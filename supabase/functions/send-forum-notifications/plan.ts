@@ -119,13 +119,15 @@ export function collectNotices(input: CollectInput): Notice[] {
     });
   }
 
-  // Mentions: skip self-mentions, and skip when the same post already brings
-  // (or brought) that person a reply email.
+  // Mentions: skip self-mentions, mentions from an anonymous post (the email
+  // would point at its author), and posts that already brought that person a
+  // reply email. (A reply and a mention for the same post in the same run are
+  // reduced to one email in buildEmails, after her preferences are applied.)
   for (const m of input.mentions) {
     const post = byId.get(m.post_id);
     if (!post || !m.mentioned_user_id || m.mentioned_user_id === post.user_id) continue;
-    const replyKey = ledgerKey("reply", post.id, m.mentioned_user_id);
-    if (seen.has(replyKey) || input.logged.has(replyKey)) continue;
+    if (post.is_anonymous) continue;
+    if (input.logged.has(ledgerKey("reply", post.id, m.mentioned_user_id))) continue;
     push({
       kind: "mention",
       postId: post.id,
@@ -147,6 +149,8 @@ export function collectNotices(input: CollectInput): Notice[] {
     if (p.parent_post_id) continue;
     for (const uid of followersByTopic.get(p.topic_id) ?? []) {
       if (!uid || uid === p.user_id) continue;
+      // This post already brought her a mention email.
+      if (input.logged.has(ledgerKey("mention", p.id, uid))) continue;
       push({
         kind: "followed",
         postId: p.id,
@@ -159,9 +163,14 @@ export function collectNotices(input: CollectInput): Notice[] {
     }
   }
 
-  // Host alert: new top-level posts in This Week's Meeting, to admins.
+  // Host alert: new top-level posts in This Week's Meeting, to admins. Not
+  // for threads an admin posted (including the automatic after-meeting
+  // thread, which is posted from an admin account): those aren't a member's
+  // question.
+  const adminSet = new Set(input.adminIds);
   for (const p of input.recentPosts) {
     if (p.parent_post_id || p.topic_id !== HOST_TOPIC_ID) continue;
+    if (adminSet.has(p.user_id)) continue;
     for (const adminId of input.adminIds) {
       if (!adminId || adminId === p.user_id) continue;
       push({
@@ -206,10 +215,19 @@ export function buildEmails(
   cap: number,
 ): PlannedEmail[] {
   const groups = new Map<string, PlannedEmail>();
-  const sorted = [...notices].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  const permitted = notices.filter((n) => allowed(n.kind, recipients.get(n.recipientId)));
+  // One email per person per post: a reply beats a mention, and a mention
+  // beats "new conversation in a topic you follow". Decided after her
+  // preferences, so switching replies off doesn't also silence mentions.
+  const has = new Set(permitted.map((n) => ledgerKey(n.kind, n.postId, n.recipientId)));
+  const deduped = permitted.filter((n) => {
+    if (n.kind === "mention") return !has.has(ledgerKey("reply", n.postId, n.recipientId));
+    if (n.kind === "followed") return !has.has(ledgerKey("mention", n.postId, n.recipientId));
+    return true;
+  });
+  const sorted = deduped.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   for (const n of sorted) {
     const info = recipients.get(n.recipientId);
-    if (!allowed(n.kind, info)) continue;
     const groupKey = n.kind === "followed"
       ? `followed:${n.recipientId}`
       : n.kind === "host_alert"
@@ -260,7 +278,7 @@ function layout(inner: string, footerNote: string): string {
 }
 
 const MEMBER_FOOTER =
-  "You're getting this because you're a Sober Helpline member. These emails never include what anyone wrote in a post or who wrote it.";
+  "You're getting this because you're a Sober Helpline member. These emails never include the text of anyone's post or who wrote it.";
 
 export function renderEmail(e: PlannedEmail): { subject: string; html: string } {
   const first = e.notices[0];
@@ -303,7 +321,7 @@ export function renderEmail(e: PlannedEmail): { subject: string; html: string } 
         subject: one ? "A new conversation in a topic you follow" : "New conversations in topics you follow",
         html: layout(
           `<h1 style="color:#166534; font-size:22px;">${one ? "A new conversation" : "New conversations"} in the family forum</h1>
-           <p>${one ? "A member started a conversation" : `Members started ${e.notices.length} conversations`} in a topic you follow:</p>
+           <p>${one ? "There is a new conversation" : `There are ${e.notices.length} new conversations`} in a topic you follow:</p>
            <ul style="padding-left:20px;">${items}</ul>`,
           MEMBER_FOOTER + " You follow these topics in the forum; you can unfollow them there.",
         ),

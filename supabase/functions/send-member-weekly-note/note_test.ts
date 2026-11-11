@@ -27,10 +27,15 @@ const track: Track = {
   ],
 };
 
-Deno.test("send window: Tuesday 4 PM Pacific only, both DST seasons", () => {
+Deno.test("send window: Tuesday 4 to 7 PM Pacific, both DST seasons", () => {
   assert(isSendWindow(new Date("2026-06-09T23:10:00Z")), "PDT: Tue 16:10");
-  assert(!isSendWindow(new Date("2026-06-10T00:10:00Z")), "PDT: Tue 17:10");
+  assert(isSendWindow(new Date("2026-06-10T00:10:00Z")), "PDT: Tue 17:10");
+  assert(isSendWindow(new Date("2026-06-10T01:50:00Z")), "PDT: Tue 18:50");
+  assert(!isSendWindow(new Date("2026-06-10T02:00:00Z")), "PDT: Tue 19:00");
+  assert(!isSendWindow(new Date("2026-06-09T22:50:00Z")), "PDT: Tue 15:50");
   assert(isSendWindow(new Date("2026-11-11T00:20:00Z")), "PST: Tue 16:20");
+  assert(isSendWindow(new Date("2026-11-11T02:50:00Z")), "PST: Tue 18:50");
+  assert(!isSendWindow(new Date("2026-11-11T03:00:00Z")), "PST: Tue 19:00");
   assert(!isSendWindow(new Date("2026-11-10T23:20:00Z")), "PST: Tue 15:20");
   assert(!isSendWindow(new Date("2026-11-11T16:00:00Z")), "Wednesday morning");
 });
@@ -119,5 +124,7 @@ Deno.test("rendering: blocks appear only when real, values escaped", () => {
   assert(full.includes("3 member questions") && full.includes("/member-qa"));
   assert(full.includes("https://soberhelpline.com/b"));
   assert(full.includes("/workbook/guilt-check") && full.includes("about 5 minutes"));
-  assert(full.includes("/family-forum/ask-community?post=p9"));
+  // The forum block links to the forum, without any member's thread title.
+  assert(full.includes("https://soberhelpline.com/family-forum\""));
+  assert(!full.includes("How do you say no?") && !full.includes("post=p9"));
 });

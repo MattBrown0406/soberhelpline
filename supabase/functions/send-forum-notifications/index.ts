@@ -31,6 +31,8 @@ const WINDOW_HOURS = 48;
 const MAX_EMAILS_PER_RUN = 200;
 const TIME_BUDGET_MS = 100_000;
 const LOG_TABLE = "forum_notification_log";
+/** site_settings key: ISO time forum emails were switched on. Older activity is never emailed. */
+const START_SETTING = "forum_notifications_start_at";
 const POST_COLUMNS = "id, topic_id, parent_post_id, user_id, is_anonymous, title, content, created_at";
 
 function json(body: unknown, status = 200): Response {
@@ -77,6 +79,9 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
       subject,
       content: [{ type: "text/html", value: html }],
     }),
+    // A hung request must fail (and release its claim) rather than be killed
+    // with the function, which would leave the claim behind with no email.
+    signal: AbortSignal.timeout(15_000),
   });
   if (!res.ok) {
     console.error(`SendGrid error: [${res.status}] ${(await res.text()).slice(0, 300)}`);
@@ -184,7 +189,21 @@ serve(async (req: Request) => {
     if (denied) return denied;
 
     const dryRun = body?.dry_run === true;
-    const since = new Date(Date.now() - WINDOW_HOURS * 3600_000).toISOString();
+
+    // Nothing from before go-live is ever emailed: the first run must not
+    // send two days of old activity in one burst. The start time is written
+    // once, when the scheduled job is created.
+    const { data: startRow, error: startErr } = await admin
+      .from("site_settings")
+      .select("value")
+      .eq("key", START_SETTING)
+      .maybeSingle();
+    if (startErr) throw new Error(`site_settings query failed: ${startErr.message}`);
+    const startMs = Date.parse(String(startRow?.value ?? ""));
+    if (!Number.isFinite(startMs)) {
+      return json({ success: true, sent: 0, skipped: "not_started", detail: `${START_SETTING} is not set` });
+    }
+    const since = new Date(Math.max(Date.now() - WINDOW_HOURS * 3600_000, startMs)).toISOString();
 
     // 1. Activity inside the window.
     const { data: recentData, error: recentErr } = await admin
@@ -261,7 +280,14 @@ serve(async (req: Request) => {
         notices_by_kind: byKind(notices),
         emails: emails.length,
         emails_by_kind: byKind(emails),
-        sample: emails[0] ? renderEmail({ ...emails[0], email: "member@example.com" }) : null,
+        // A made-up example of the first kind, never a real post's title or text.
+        sample: emails[0]
+          ? renderEmail({
+            ...emails[0],
+            email: "member@example.com",
+            notices: [{ ...emails[0].notices[0], title: "Example title", content: "Example question text." }],
+          })
+          : null,
       });
     }
 
