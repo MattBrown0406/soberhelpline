@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CalendarDays, ExternalLink, MessageCircleQuestion, PlayCircle, Radio } from "lucide-react";
+import { CalendarDays, ChevronDown, ExternalLink, MessageCircleQuestion, PlayCircle, Radio } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { IconTile, KindPill } from "@/components/member/MemberUI";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { formatMeetingDay, nextMeeting, previousDay, weekdayOf, type NextMeeting } from "./meetingWeek";
 
@@ -58,41 +58,43 @@ function NextMeetingCard({ onAsk }: { onAsk: () => void }) {
 
   return (
     <Card
-      className={
+      className={`rounded-2xl shadow-sm shadow-slate-900/[0.04] ${
         meeting.isLive
-          ? "border-emerald-500/50 bg-emerald-50 dark:bg-emerald-950/30"
-          : "border-primary/20 bg-primary/5"
-      }
+          ? "border-green-200 bg-green-50 dark:border-green-400/25 dark:bg-green-950/40"
+          : "border-[#16294a]/20 bg-card dark:border-sky-400/25"
+      }`}
     >
       <CardContent className="p-4 sm:p-5">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
           <div className="flex items-start gap-3 flex-1 min-w-0">
-            <div className="p-2 rounded-full bg-background/70 shrink-0">
-              {meeting.isLive ? (
-                <Radio className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-              ) : (
-                <CalendarDays className="h-5 w-5 text-primary" />
-              )}
-            </div>
+            {meeting.isLive ? (
+              <IconTile icon={Radio} tone="emerald" size="lg" />
+            ) : (
+              <IconTile icon={CalendarDays} tone="navy" size="lg" />
+            )}
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm font-medium text-foreground/80">
                 {meeting.isLive ? "The Monday meeting is live now" : "Next Monday meeting"}
               </p>
-              <p className="font-semibold text-foreground">{when}</p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-lg font-semibold leading-snug text-foreground">{when}</p>
+              <p className="mt-1 text-sm leading-relaxed text-foreground/80">
                 Post your question here before Monday. You can post anonymously.
               </p>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
-            <Button onClick={onAsk} className="gap-2">
-              <MessageCircleQuestion className="h-4 w-4" />
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+            <Button onClick={onAsk} className="h-12 gap-2 rounded-xl px-5 text-base shadow-md shadow-[#16294a]/15">
+              <MessageCircleQuestion className="h-4 w-4" aria-hidden="true" />
               Ask a question for Monday
             </Button>
             {joinUrl && (
-              <Button asChild variant={meeting.isLive ? "default" : "outline"} className="gap-2">
+              <Button
+                asChild
+                variant={meeting.isLive ? "default" : "outline"}
+                className={`h-12 gap-2 rounded-xl px-5 ${meeting.isLive ? "" : "bg-card"}`}
+              >
                 <Link to={joinUrl}>
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   {meeting.isLive ? "Join now" : "Join link"}
                 </Link>
               </Button>
@@ -155,18 +157,23 @@ function LastMeetingCard() {
   const hasNotes = !!recording.show_notes?.trim() || recording.key_timestamps.length > 0;
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">Last meeting</Badge>
-          <span className="text-sm text-muted-foreground">{formatMeetingDay(recording.recording_date)}</span>
+    <Card className="rounded-2xl border-border/70 shadow-sm shadow-slate-900/[0.04]">
+      <CardHeader className="p-4 pb-3 sm:p-5 sm:pb-3">
+        <div className="flex items-start gap-3">
+          <IconTile icon={PlayCircle} tone="navy" />
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <KindPill tone="navy">Last meeting</KindPill>
+              <span className="text-sm text-muted-foreground">{formatMeetingDay(recording.recording_date)}</span>
+            </div>
+            <h2 className="mt-1 break-words text-lg font-semibold leading-snug text-foreground">{recording.title}</h2>
+          </div>
         </div>
-        <CardTitle className="text-lg mt-1">{recording.title}</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <Button asChild variant="outline" size="sm" className="gap-2">
+      <CardContent className="space-y-3 p-4 pt-0 sm:p-5 sm:pt-0">
+        <Button asChild variant="outline" className="min-h-11 w-full gap-2 rounded-xl px-4 sm:w-auto">
           <Link to="/zoom-recordings">
-            <PlayCircle className="h-4 w-4" />
+            <PlayCircle className="h-4 w-4" aria-hidden="true" />
             Watch the recording
           </Link>
         </Button>
@@ -174,20 +181,24 @@ function LastMeetingCard() {
         {hasNotes && (
           <Collapsible>
             <CollapsibleTrigger asChild>
-              <Button variant="link" className="px-0 h-auto">
+              <Button variant="link" className="group h-auto min-h-11 gap-1 px-0 font-semibold">
                 Show notes and key moments
+                <ChevronDown
+                  className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="space-y-3 pt-2">
               {recording.show_notes?.trim() && (
-                <p className="text-sm text-muted-foreground whitespace-pre-wrap break-words">{recording.show_notes}</p>
+                <p className="max-w-prose whitespace-pre-wrap break-words text-sm leading-relaxed text-muted-foreground">{recording.show_notes}</p>
               )}
               {recording.key_timestamps.length > 0 && (
                 <ul className="space-y-1">
                   {recording.key_timestamps.map((t, i) => (
                     <li key={`${t.time}-${i}`} className="flex gap-3 text-sm">
                       <span className="font-mono text-primary font-semibold shrink-0 w-14">{t.time}</span>
-                      <span className="text-foreground">{t.label}</span>
+                      <span className="min-w-0 break-words text-foreground">{t.label}</span>
                     </li>
                   ))}
                 </ul>
@@ -197,15 +208,18 @@ function LastMeetingCard() {
         )}
 
         {qa.length > 0 && (
-          <div className="space-y-3 border-t border-border pt-3">
-            <p className="text-sm font-medium">Questions answered that night</p>
+          <div className="space-y-3 border-t border-border/70 pt-3">
+            <p className="text-sm font-semibold text-foreground">Questions answered that night</p>
             {qa.map((row) => (
               <div key={row.id} className="text-sm">
                 <p className="font-medium text-foreground break-words">{row.question}</p>
                 <p className="text-muted-foreground line-clamp-3 break-words mt-0.5">{row.answer}</p>
               </div>
             ))}
-            <Link to="/member-qa" className="text-sm text-primary underline">
+            <Link
+              to="/member-qa"
+              className="inline-flex min-h-11 items-center rounded-lg text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
               All questions and answers
             </Link>
           </div>

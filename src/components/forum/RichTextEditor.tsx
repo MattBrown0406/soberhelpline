@@ -67,18 +67,18 @@ export function RichTextEditor({
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-1 p-1 border border-input border-b-0 rounded-t-md bg-muted/30">
-        <Button type="button" variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => wrapSelection("**", "**")} disabled={disabled} title="Bold" aria-label="Bold">
+      <div className="flex items-center gap-1 rounded-t-xl border border-b-0 border-input bg-muted/40 p-1">
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={() => wrapSelection("**", "**")} disabled={disabled} title="Bold" aria-label="Bold">
           <Bold className="h-4 w-4" />
         </Button>
-        <Button type="button" variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => wrapSelection("*", "*")} disabled={disabled} title="Italic" aria-label="Italic">
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={() => wrapSelection("*", "*")} disabled={disabled} title="Italic" aria-label="Italic">
           <Italic className="h-4 w-4" />
         </Button>
-        <Button type="button" variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={handleList} disabled={disabled} title="Bullet point" aria-label="Bullet point">
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={handleList} disabled={disabled} title="Bullet point" aria-label="Bullet point">
           <List className="h-4 w-4" />
         </Button>
         {!mentionsDisabled && (
-          <span className="text-xs text-muted-foreground ml-2 truncate">Type @ and a username to mention someone</span>
+          <span className="ml-2 min-w-0 truncate text-xs text-slate-600 dark:text-slate-300">Type @ and a username to mention someone</span>
         )}
       </div>
 
@@ -89,7 +89,7 @@ export function RichTextEditor({
         onChange={mention.handleChange}
         onKeyDown={mention.handleKeyDown}
         placeholder={placeholder}
-        className={`rounded-t-none ${className ?? ""}`}
+        className={`rounded-b-xl rounded-t-none text-base leading-relaxed ${className ?? ""}`}
         style={{ minHeight }}
         disabled={disabled}
         maxLength={maxLength}

@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import {
-  ArrowRight, CheckCircle2, Clock, Compass, HandHeart, HeartPulse, MessagesSquare, Scale, ShieldCheck, Sparkles, Sprout, Users,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { IconTile, TONE, toneForExercise } from "@/components/member/MemberUI";
+import { iconForExercise } from "@/components/workbook/exerciseIcons";
 import { exercisePath, isDueForRetake, retakeDate, shortDate, type Exercise } from "@/data/exercises";
 import type { WorkbookEntry } from "@/hooks/useWorkbook";
 
@@ -12,17 +10,6 @@ interface ExerciseCardProps {
   latest?: WorkbookEntry;
   inProgress?: boolean;
 }
-
-const EXERCISE_ICONS: Record<string, LucideIcon> = {
-  "boundary-script": ShieldCheck,
-  "helping-or-enabling": Scale,
-  "guilt-check": HandHeart,
-  "control-sort": Compass,
-  "weekly-self-care": Sprout,
-  "stress-check": HeartPulse,
-  "hard-moment-practice": MessagesSquare,
-  "family-pulse": Users,
-};
 
 /** A guided exercise as a card linking to /workbook/<id>, with its status. */
 export default function ExerciseCard({ exercise, latest, inProgress = false }: ExerciseCardProps) {
@@ -35,7 +22,7 @@ export default function ExerciseCard({ exercise, latest, inProgress = false }: E
     : null;
 
   const tone = toneForExercise(exercise.id);
-  const Icon = EXERCISE_ICONS[exercise.id] ?? Sparkles;
+  const Icon = iconForExercise(exercise.id);
 
   return (
     <Link

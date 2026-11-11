@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { AlertTriangle, Loader2, Send, EyeOff } from "lucide-react";
+import { AlertTriangle, Loader2, PenLine, Send, EyeOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +15,7 @@ import { sanitizeRefPath } from "@/lib/forumTopics";
 import { RichTextEditor } from "./RichTextEditor";
 import { DraftStatus, useAutoSaveDraft } from "./AutoSaveDraft";
 import { PollCreator, type PollData } from "./PollCreator";
+import { IconTile } from "@/components/member/MemberUI";
 
 const SITE_ORIGIN = "https://soberhelpline.com";
 const MAX_CONTENT = 5000;
@@ -29,14 +30,20 @@ function AnonymousToggle({
   onCheckedChange: (value: boolean) => void;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-md border border-border bg-muted/30 p-3">
+    <div
+      className={`flex min-h-11 items-start gap-3 rounded-xl border p-3.5 ${
+        checked
+          ? "border-[#16294a]/40 bg-[#16294a]/[0.06] dark:border-sky-400/40 dark:bg-sky-400/[0.08]"
+          : "border-border bg-muted/40"
+      }`}
+    >
       <Switch id={id} checked={checked} onCheckedChange={onCheckedChange} className="mt-0.5" />
-      <Label htmlFor={id} className="cursor-pointer font-normal leading-snug">
-        <span className="flex items-center gap-1.5 font-medium">
-          <EyeOff className="h-3.5 w-3.5" />
+      <Label htmlFor={id} className="min-w-0 flex-1 cursor-pointer font-normal leading-snug">
+        <span className="flex items-center gap-1.5 text-base font-semibold text-foreground">
+          <EyeOff className="h-4 w-4 shrink-0" aria-hidden="true" />
           Post anonymously
         </span>
-        <span className="block text-xs text-muted-foreground mt-0.5">
+        <span className="mt-1 block text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           Other members will see "Anonymous member" instead of your username. Only the site's administrators can see who
           wrote it, to keep the forum safe.
         </span>
@@ -164,11 +171,14 @@ export function ForumComposer({
   };
 
   return (
-    <Card className="mb-6 border-primary/30">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg">{heading}</CardTitle>
+    <Card className="mb-6 rounded-2xl border-[#16294a]/25 shadow-md shadow-slate-900/[0.06] dark:border-sky-400/30">
+      <CardHeader className="p-4 pb-3 sm:p-6 sm:pb-3">
+        <div className="flex items-center gap-3">
+          <IconTile icon={PenLine} tone="navy" />
+          <CardTitle className="text-lg leading-snug">{heading}</CardTitle>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 p-4 pt-0 sm:p-6 sm:pt-0">
         {moderationError && (
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
@@ -190,6 +200,7 @@ export function ForumComposer({
             placeholder={titlePlaceholder}
             value={title}
             maxLength={200}
+            className="h-12 rounded-xl text-base md:text-base"
             onChange={(e) => {
               setTitle(e.target.value);
               setModerationError(null);
@@ -213,19 +224,23 @@ export function ForumComposer({
         </div>
         <AnonymousToggle id="compose-anonymous" checked={isAnonymous} onCheckedChange={setIsAnonymous} />
         <PollCreator onPollChange={setPoll} />
-        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-3 sm:justify-between">
+        <div className="flex flex-col-reverse gap-3 border-t border-border/70 pt-4 sm:flex-row sm:items-center sm:justify-between">
           <DraftStatus isSaving={draft.isSaving} lastSaved={draft.lastSaved} />
-          <div className="flex gap-2 justify-end">
-            <Button variant="outline" onClick={onCancel} disabled={isSubmitting}>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={onCancel} disabled={isSubmitting} className="h-12 rounded-xl px-5">
               Close
             </Button>
-            <Button onClick={handleSubmit} disabled={isSubmitting || !content.trim()}>
-              {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
+            <Button
+              onClick={handleSubmit}
+              disabled={isSubmitting || !content.trim()}
+              className="h-12 flex-1 rounded-xl px-8 text-base shadow-md shadow-[#16294a]/15 sm:flex-none"
+            >
+              {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" aria-hidden="true" />}
               Post
             </Button>
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">Closing keeps your draft. It will be here when you come back.</p>
+        <p className="text-sm text-muted-foreground">Closing keeps your draft. It will be here when you come back.</p>
       </CardContent>
     </Card>
   );
@@ -299,7 +314,7 @@ export function ReplyComposer({ userId, topicId, parentPostId, onPosted, onCance
   };
 
   return (
-    <div className="mt-4 pl-3 sm:pl-4 border-l-2 border-border space-y-3">
+    <div className="mt-4 space-y-3 border-l-2 border-[#16294a]/15 pl-3 dark:border-sky-400/20 sm:pl-4">
       {moderationError && (
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
@@ -319,13 +334,13 @@ export function ReplyComposer({ userId, topicId, parentPostId, onPosted, onCance
         aria-label="Your reply"
       />
       <AnonymousToggle id={`reply-anonymous-${parentPostId}`} checked={isAnonymous} onCheckedChange={setIsAnonymous} />
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <DraftStatus isSaving={draft.isSaving} lastSaved={draft.lastSaved} />
         <div className="flex gap-2 ml-auto">
-          <Button variant="outline" size="sm" onClick={onCancel} disabled={isSubmitting}>
+          <Button variant="outline" size="sm" onClick={onCancel} disabled={isSubmitting} className="min-h-11 rounded-xl px-4">
             Cancel
           </Button>
-          <Button size="sm" onClick={handleReply} disabled={isSubmitting || !content.trim()}>
+          <Button size="sm" onClick={handleReply} disabled={isSubmitting || !content.trim()} className="min-h-11 rounded-xl px-6">
             {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Reply"}
           </Button>
         </div>

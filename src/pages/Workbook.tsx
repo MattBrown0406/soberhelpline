@@ -92,7 +92,7 @@ export default function Workbook() {
             subtitle="Short guided exercises, about five minutes each, one question at a time. Each one ends with something you keep: a script, a plan, a check-in. Retake any of them after 30 days to see what has changed."
           >
             {!error && (loading || entries.length > 0) && (
-              <div className="grid gap-2.5 sm:grid-cols-3">
+              <div className={drafts.size > 0 ? "grid grid-cols-3 gap-2 sm:gap-2.5" : "grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5"}>
                 <HeroStat icon={CheckCircle2} label="Exercises done" value={loading ? "…" : `${doneCount} of ${EXERCISES.length}`} />
                 <HeroStat icon={BookHeart} label="Saved results" value={loading ? "…" : entries.length} />
                 {drafts.size > 0 && <HeroStat icon={PenLine} label="In progress" value={drafts.size} />}

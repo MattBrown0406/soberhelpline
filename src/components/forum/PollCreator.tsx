@@ -66,14 +66,14 @@ export function PollCreator({ onPollChange }: PollCreatorProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2">
+      <div className="flex min-h-11 items-center gap-3 rounded-xl border border-border bg-muted/40 px-3.5">
         <Switch
           id="add-poll"
           checked={isEnabled}
           onCheckedChange={handleToggle}
         />
-        <Label htmlFor="add-poll" className="flex items-center gap-2 cursor-pointer">
-          <BarChart3 className="h-4 w-4" />
+        <Label htmlFor="add-poll" className="flex min-h-11 flex-1 cursor-pointer items-center gap-2 text-sm font-medium text-foreground">
+          <BarChart3 className="h-4 w-4 shrink-0" aria-hidden="true" />
           Add a poll to your post
         </Label>
       </div>

@@ -104,7 +104,7 @@ function AuthorLine({
   );
 
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-muted-foreground">
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-slate-600 dark:text-slate-400">
       {anonymous || !post.user_id ? (
         <span className="inline-flex min-h-11 items-center gap-2.5">
           {avatar}
@@ -169,7 +169,7 @@ function SaveToQaButton({ thread, reply }: { thread: ForumThreadData; reply: For
   };
 
   return (
-    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-3 text-xs text-muted-foreground" onClick={save} disabled={saving || saved}>
+    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-3 text-xs text-slate-600 dark:text-slate-400" onClick={save} disabled={saving || saved}>
       <BookmarkCheck className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
       {saved ? "Saved to Q&A" : "Save to Q&A archive"}
     </Button>
@@ -349,7 +349,7 @@ export function ForumThread({
                   </div>
                   <ForumContent content={reply.content} className="max-w-prose text-[0.9375rem] leading-relaxed text-foreground" />
                   <div className="-ml-2 mt-1 flex flex-wrap items-center gap-1">
-                    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-2 text-xs text-muted-foreground" onClick={() => copyLink(topicId, reply.id)}>
+                    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-2 text-xs text-slate-600 dark:text-slate-400" onClick={() => copyLink(topicId, reply.id)}>
                       <Link2 className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
                       Copy link
                     </Button>
