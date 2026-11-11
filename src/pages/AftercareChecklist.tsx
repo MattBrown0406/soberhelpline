@@ -118,7 +118,7 @@ const COMPANION_LINKS = [
   { to: "/relapse-warning-signs", label: "Relapse Warning Signs Tracker" },
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/workbook/boundary-script", label: "Boundary Setting Worksheet" },
+  { to: "/boundary-setting-worksheet", label: "Boundary Setting Worksheet" },
   { to: "/readiness-checklist", label: "Readiness for Change Checklist" },
 ];
 

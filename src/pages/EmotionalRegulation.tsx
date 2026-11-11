@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -58,7 +59,7 @@ const GROUNDING_STEPS = [
 
 const COMPANION_LINKS = [
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/workbook/boundary-script", label: "Boundary Setting Worksheet" },
+  { to: "/boundary-setting-worksheet", label: "Boundary Setting Worksheet" },
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/scenario-exercise", label: "Scenario-Based Exercises" },
 ];
@@ -281,6 +282,11 @@ export default function EmotionalRegulation() {
 
         <ToolSection step={6} title={TOOLS[5].title}>
           <WhenToUse items={["When your loved one is emotional, intoxicated, or dysregulated"]} />
+          <SafetyBox
+            topics={["emergency", "violence"]}
+            title="Ending a conversation is not the same as leaving someone in danger"
+            className="mb-0"
+          />
           <HowTo title="How to do it:">
             <ul className="list-disc space-y-1 pl-5">
               <li>Lower your voice</li>

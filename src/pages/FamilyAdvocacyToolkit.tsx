@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -248,11 +249,12 @@ function ContactCard({
           onChange={(who) => onChange({ who })}
         />
       </div>
-      <SavedTextarea label="What was said" rows={3} value={row.said} onChange={(said) => onChange({ said })} />
+      <SavedTextarea label="What was said" rows={3} maxLength={1500} value={row.said} onChange={(said) => onChange({ said })} />
       <SavedTextarea
         label="What was agreed"
         hint="Who will do what, and by when."
         rows={2}
+        maxLength={1500}
         value={row.agreed}
         onChange={(agreed) => onChange({ agreed })}
       />
@@ -536,6 +538,7 @@ export default function FamilyAdvocacyToolkit() {
         </ToolSection>
 
         <ToolSection step={7} title="Advocacy During High-Risk Moments">
+          <SafetyBox topics={["emergency", "suicide", "overdose"]} title="In a crisis or after a relapse, safety comes first" />
           <div className="grid gap-4 md:grid-cols-3">
             <ReadingList
               title="During Crisis"

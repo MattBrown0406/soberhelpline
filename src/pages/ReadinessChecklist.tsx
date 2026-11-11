@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -210,7 +211,7 @@ const bandFor = (score: number): Band => (score <= 10 ? BANDS[0] : score <= 20 ?
 const COMPANION_TOOLS = [
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/workbook/boundary-script", label: "Boundary Setting Worksheet" },
+  { to: "/boundary-setting-worksheet", label: "Boundary Setting Worksheet" },
   { to: "/talking-about-treatment", label: '"How to Talk to Your Loved One About Treatment" Guide' },
   { to: "/scenario-exercise", label: "Scenario-Based Exercises" },
 ];
@@ -479,7 +480,7 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
   return (
     <ToolSection
       title="Earlier check-ins"
-      description="Newest first. Look at the direction over several check-ins, not at any single one."
+      description="Newest first. Look at the direction over several check-ins, not at any single one. The 24 most recent are kept."
     >
       <ul className="space-y-3">
         {history.map((checkIn, index) => {
@@ -537,7 +538,8 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
                 )}
                 {checkIn.revisitWeeks.trim() !== "" && (
                   <p className="mt-2 text-foreground/90">
-                    <span className="font-medium">Revisit in:</span> {checkIn.revisitWeeks} weeks
+                    <span className="font-medium">Revisit in:</span>{" "}
+                    {/^\d+$/.test(checkIn.revisitWeeks.trim()) ? `${checkIn.revisitWeeks.trim()} weeks` : checkIn.revisitWeeks}
                   </p>
                 )}
               </details>
@@ -624,6 +626,11 @@ export default function ReadinessChecklist() {
             Every box is about your loved one and what they are doing. Nothing here is a judgment of you.
           </p>
         </ToolNote>
+
+        <SafetyBox
+          topics={["emergency", "suicide", "overdose"]}
+          title="Low readiness is never a reason to wait in an emergency"
+        />
 
         {SECTIONS.map((section, sectionIndex) => (
           <ToolSection

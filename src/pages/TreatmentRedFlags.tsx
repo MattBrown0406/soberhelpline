@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Plus, Trash2 } from "lucide-react";
@@ -261,7 +262,8 @@ function ProgramPicker({
     >
       <h2 className="text-lg font-semibold leading-snug text-foreground">Which program are you checking?</h2>
       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-        Keep a separate sheet for each program you call. Everything below belongs to the one you pick here.
+        Keep a separate sheet for each program you call (up to {MAX_PROGRAMS}). Everything below belongs to the one you
+        pick here, and Print prints that one.
       </p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {programs.map((program, index) => {
@@ -477,6 +479,11 @@ export default function TreatmentRedFlags() {
             Unethical treatment rushes answers.
           </p>
         </ToolNote>
+
+        <SafetyBox
+          topics={["emergency", "withdrawal"]}
+          title="Slowing down is for choosing a program, not for an emergency"
+        />
 
         <ToolSection title="Why Families Are Vulnerable">
           <div className="grid gap-5 sm:grid-cols-2">

@@ -257,6 +257,14 @@ All colors MUST be HSL.
     page-break-inside: avoid;
   }
   
+  /* Long tool sections (a list of saved check-ins, a call log) flow across
+     pages instead of jumping to a new page and leaving a gap. The fields and
+     cards inside them still stay whole. */
+  section.print-flow {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     break-after: avoid;
     page-break-after: avoid;

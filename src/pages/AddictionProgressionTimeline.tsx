@@ -441,7 +441,7 @@ const AddictionProgressionTimeline = () => {
               <div key={step.title}>
                 <h4 className="font-semibold mb-3">{step.title}</h4>
                 <p className="text-sm text-muted-foreground mb-3">{step.lead}</p>
-                <div className="space-y-4">
+                <fieldset disabled={!saved.loaded} className="m-0 min-w-0 space-y-4 border-0 p-0">
                   {step.fields.map((field) => (
                     <SavedTextarea
                       key={field.key}
@@ -452,7 +452,7 @@ const AddictionProgressionTimeline = () => {
                       onChange={(value) => saved.patch({ [field.key]: value })}
                     />
                   ))}
-                </div>
+                </fieldset>
               </div>
             ))}
 

@@ -467,7 +467,7 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
   return (
     <ToolSection
       title="Earlier check-ins"
-      description="Newest first. The pattern over several check-ins tells you more than any single one."
+      description="Newest first. The pattern over several check-ins tells you more than any single one. The 24 most recent are kept."
     >
       <ul className="space-y-3">
         {history.map((checkIn, index) => {

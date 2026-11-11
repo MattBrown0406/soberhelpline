@@ -346,13 +346,16 @@ export default function SafeToOpenUp() {
                     className="print:hidden"
                   />
                 </div>
-                <div className="bg-violet-50 dark:bg-violet-950/30 p-4 rounded-lg border border-violet-200 dark:border-violet-800">
+                <fieldset
+                  disabled={!saved.loaded}
+                  className="m-0 min-w-0 bg-violet-50 dark:bg-violet-950/30 p-4 rounded-lg border border-violet-200 dark:border-violet-800"
+                >
                   <CheckList
                     options={TRUST_CHECKS}
                     selected={savedChecks}
                     onChange={(checks) => saved.patch({ checks })}
                   />
-                </div>
+                </fieldset>
                 <p className="text-sm text-muted-foreground" aria-live="polite">
                   {checkedCount > 0 && (
                     <strong className="font-semibold text-foreground">

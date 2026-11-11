@@ -13,8 +13,11 @@ import { supabase } from "@/integrations/supabase/client";
 //
 // Rules that protect what is already saved:
 // - Her saved copy is never replaced by a draft that was typed without seeing
-//   it (signed out, or while the saved copy couldn't be loaded). Such a draft
-//   only fills in answers that are still blank.
+//   it (signed out, while the saved copy couldn't be loaded, or based on an
+//   older version of it). Such a draft only fills in answers that are still
+//   blank in the saved copy.
+// - "Newer" is always decided by the server's timestamp on the saved row,
+//   never by this device's clock.
 // - A copy left on this device by one account is never shown to, or saved
 //   into, another account.
 // - If who is signed in changes while the page is open, the sheet is cleared
@@ -52,6 +55,8 @@ interface LocalCopy<T> {
   owner: string | null;
   /** Typed while her saved copy couldn't be loaded, so it may be missing most of her answers. */
   blind?: boolean;
+  /** The saved row's server timestamp (ms) this copy was based on; 0 when there was no row. */
+  base?: number;
 }
 
 function readLocal<T>(key: string): LocalCopy<T> | null {
@@ -65,15 +70,16 @@ function readLocal<T>(key: string): LocalCopy<T> | null {
       updatedAt: parsed.updatedAt,
       owner: typeof parsed.owner === "string" ? parsed.owner : null,
       blind: parsed.blind === true,
+      base: typeof parsed.base === "number" ? parsed.base : undefined,
     };
   } catch {
     return null;
   }
 }
 
-function writeLocal<T>(key: string, data: T, owner: string | null, blind: boolean) {
+function writeLocal<T>(key: string, data: T, owner: string | null, blind: boolean, base: number) {
   try {
-    const copy: LocalCopy<T> = { data, updatedAt: new Date().toISOString(), owner, blind };
+    const copy: LocalCopy<T> = { data, updatedAt: new Date().toISOString(), owner, blind, base };
     localStorage.setItem(localKey(key), JSON.stringify(copy));
   } catch {
     // Storage full or unavailable (private mode): nothing else to do.
@@ -96,17 +102,40 @@ function withDefaults<T extends object>(initial: T, saved: unknown): T {
   return isPlainObject(saved) ? ({ ...initial, ...saved } as T) : initial;
 }
 
-const isBlank = (value: unknown): boolean =>
-  value == null ||
-  value === "" ||
-  (Array.isArray(value) && value.length === 0) ||
-  (isPlainObject(value) && Object.keys(value).length === 0);
+function deepEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((v, i) => deepEqual(v, b[i]));
+  if (isPlainObject(a) && isPlainObject(b)) {
+    const keys = Object.keys(a);
+    return keys.length === Object.keys(b).length && keys.every((k) => deepEqual(a[k], b[k]));
+  }
+  return false;
+}
 
-/** The saved copy, with the draft used only where the saved copy has nothing. */
-function fillBlanks<T extends object>(saved: T, draft: T): T {
+/** Nothing written: empty text, nothing ticked, or a list/object whose every member is blank. */
+function isBlank(value: unknown): boolean {
+  if (value == null || value === "" || value === false) return true;
+  if (Array.isArray(value)) return value.every(isBlank);
+  if (isPlainObject(value)) return Object.values(value).every(isBlank);
+  return false;
+}
+
+/**
+ * The saved copy, with the draft used only where the saved copy has nothing
+ * (blank, or still exactly as the blank sheet has it). Goes into nested
+ * objects, so a note added under one heading is kept beside saved notes under
+ * another; lists are never mixed.
+ */
+function fillBlanks<T extends object>(saved: T, draft: T, initial: object): T {
   const out = { ...saved } as Record<string, unknown>;
+  const blankSheet = initial as Record<string, unknown>;
   for (const [field, value] of Object.entries(draft as Record<string, unknown>)) {
-    if (isBlank(out[field]) && !isBlank(value)) out[field] = value;
+    if (isBlank(value) || deepEqual(value, blankSheet[field])) continue;
+    const have = out[field];
+    if (isBlank(have) || deepEqual(have, blankSheet[field])) out[field] = value;
+    else if (isPlainObject(have) && isPlainObject(value)) {
+      out[field] = fillBlanks(have, value, isPlainObject(blankSheet[field]) ? (blankSheet[field] as object) : {});
+    }
   }
   return out as T;
 }
@@ -125,6 +154,9 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
   const dataRef = useRef<T>(initial);
   const userIdRef = useRef<string | null>(null);
   const loadedRef = useRef(false);
+  // True once we know who is signed in (before the saved copy has loaded).
+  const sessionKnownRef = useRef(false);
+  const savingRef = useRef(false);
   // Only write to the account once we know what is (or isn't) saved there.
   const remoteReadyRef = useRef(false);
   const loadFailedRef = useRef(false);
@@ -177,33 +209,42 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
 
     if (!dirtyRef.current) return;
     dirtyRef.current = false;
-    const at = new Date();
+    savingRef.current = true;
     if (mountedRef.current) setStatus("saving");
-    const { error } = await supabase.from("worksheet_responses").upsert(
-      {
-        user_id: uid,
-        worksheet_key: key,
-        responses: dataRef.current as any,
-        updated_at: at.toISOString(),
-      },
-      { onConflict: "user_id,worksheet_key" },
-    );
+    // The row's timestamp is set by the database; we read it back so "newer"
+    // is always judged by the server's clock.
+    const { data: savedRow, error } = await supabase
+      .from("worksheet_responses")
+      .upsert(
+        {
+          user_id: uid,
+          worksheet_key: key,
+          responses: dataRef.current as any,
+        },
+        { onConflict: "user_id,worksheet_key" },
+      )
+      .select("updated_at")
+      .single();
+    savingRef.current = false;
     // Signed out or switched account while this was in flight: not ours to finish.
     if (userIdRef.current !== uid) return;
     if (error) {
       dirtyRef.current = true;
       // Keep her own copy in this browser so nothing is lost while saving is failing.
-      writeLocal(key, dataRef.current, uid, false);
+      writeLocal(key, dataRef.current, uid, false, remoteAtRef.current);
       if (mountedRef.current) setStatus("error");
       scheduleRetry();
       return;
     }
     retryDelayRef.current = RETRY_MIN_MS;
-    remoteAtRef.current = at.getTime();
+    const savedAt = savedRow?.updated_at ? Date.parse(savedRow.updated_at) : Date.now();
+    remoteAtRef.current = savedAt;
     // Saved to her account: don't leave a copy behind on a shared computer.
+    // (If she has typed more since, that copy now rests on this saved version.)
     if (!dirtyRef.current) clearLocal(key);
+    else writeLocal(key, dataRef.current, uid, false, savedAt);
     if (mountedRef.current) {
-      setLastSavedAt(at);
+      setLastSavedAt(new Date());
       setStatus("saved");
     }
   }, [key, scheduleRetry]);
@@ -229,6 +270,29 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       setLoaded(true);
     };
 
+    // The copy on this device that this person may see: hers, or a signed-out
+    // draft. A copy left by a different account is never shown or adopted.
+    const readOwnLocal = (uid: string | null) => {
+      const copy = readLocal<T>(key);
+      if (copy && copy.owner && copy.owner !== uid) {
+        if (uid) clearLocal(key);
+        return null;
+      }
+      return copy;
+    };
+
+    const failedLoad = (uid: string | null) => {
+      // We don't know what is saved, so we must not write over it. What she
+      // types now is kept on this device and merged in once loading works.
+      remoteReadyRef.current = false;
+      loadFailedRef.current = true;
+      const copy = readOwnLocal(uid);
+      if (copy) adopt(withDefaults(initialRef.current, copy.data), null);
+      setStatus("error");
+      finish();
+      scheduleRetry();
+    };
+
     const load = async () => {
       const {
         data: { session },
@@ -236,14 +300,10 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       if (cancelled) return;
       const uid = session?.user?.id ?? null;
       userIdRef.current = uid;
+      sessionKnownRef.current = true;
       setUserId(uid);
 
-      let local = readLocal<T>(key);
-      // A copy left on this device by a different account is never shown or adopted.
-      if (local && local.owner && local.owner !== uid) {
-        if (uid) clearLocal(key);
-        local = null;
-      }
+      let local = readOwnLocal(uid);
 
       if (!uid) {
         remoteReadyRef.current = false;
@@ -263,16 +323,12 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       if (cancelled || userIdRef.current !== uid) return;
 
       if (error) {
-        // We don't know what is saved, so we must not write over it. What she
-        // types now is kept on this device and merged in once loading works.
-        remoteReadyRef.current = false;
-        loadFailedRef.current = true;
-        if (local) adopt(withDefaults(initialRef.current, local.data), null);
-        setStatus("error");
-        finish();
-        scheduleRetry();
+        failedLoad(uid);
         return;
       }
+      // She may have typed while this was loading (a retry after a failed
+      // load leaves the fields open): use the copy as it is now.
+      local = readOwnLocal(uid);
 
       loadFailedRef.current = false;
       remoteReadyRef.current = true;
@@ -290,17 +346,18 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
           // Nothing saved yet: keep the draft (hers, or typed before signing in).
           next = draft;
           upload = true;
-        } else if (mine && local.blind) {
-          // Typed while her saved copy couldn't be loaded: fill blanks only.
-          next = fillBlanks(rowData, draft);
-          upload = true;
-        } else if (mine && Date.parse(local.updatedAt) > remoteAt) {
-          // Her own latest answers that didn't reach the account.
+        } else if (mine && !local.blind && local.base === remoteAt) {
+          // Her own latest answers that didn't reach the account, and the
+          // saved copy hasn't changed since she typed them.
           next = draft;
           upload = true;
+        } else {
+          // Typed without seeing the current saved copy (signed out, load
+          // failed, or saved again from another device since): the saved copy
+          // stands and the draft only fills what is still blank in it.
+          next = fillBlanks(rowData, draft, initialRef.current);
+          upload = !deepEqual(next, rowData);
         }
-        // Otherwise (a signed-out draft, and she already has a saved copy):
-        // the saved copy stands.
         if (!upload) clearLocal(key);
       }
 
@@ -314,7 +371,10 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       }
     };
 
-    void load();
+    load().catch(() => {
+      // Reading the session itself failed: treat it like a failed load and retry.
+      if (!cancelled) failedLoad(userIdRef.current);
+    });
     return () => {
       cancelled = true;
     };
@@ -328,7 +388,7 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       const uid = session?.user?.id ?? null;
-      if (!loadedRef.current || uid === userIdRef.current) return;
+      if (!sessionKnownRef.current || uid === userIdRef.current) return;
       if (timerRef.current) {
         clearTimeout(timerRef.current);
         timerRef.current = null;
@@ -336,7 +396,9 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       const previous = userIdRef.current;
       // A signed-out draft stays on the device for the load to pick up; an
       // account's unsaved answers are kept under that account only.
-      if (previous && dirtyRef.current) writeLocal(key, dataRef.current, previous, !remoteReadyRef.current);
+      if (previous && (dirtyRef.current || savingRef.current)) {
+        writeLocal(key, dataRef.current, previous, !remoteReadyRef.current, remoteAtRef.current);
+      }
       dirtyRef.current = false;
       deletePendingRef.current = false;
       remoteReadyRef.current = false;
@@ -365,7 +427,9 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       }
       const uid = userIdRef.current;
       // In case the request doesn't finish before the tab closes.
-      if (uid && remoteReadyRef.current && dirtyRef.current) writeLocal(key, dataRef.current, uid, false);
+      if (uid && remoteReadyRef.current && (dirtyRef.current || savingRef.current)) {
+        writeLocal(key, dataRef.current, uid, false, remoteAtRef.current);
+      }
       saveRemoteRef.current();
     };
 
@@ -389,9 +453,12 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       setLastSavedAt(new Date(at));
     };
 
+    const refresh = () => {
+      queueRef.current = queueRef.current.then(refreshIfNewer).catch(() => {});
+    };
     const onVisibility = () => {
       if (document.visibilityState === "hidden") flush();
-      else queueRef.current = queueRef.current.then(refreshIfNewer).catch(() => {});
+      else refresh();
     };
     const onOnline = () => {
       if (retryTimerRef.current) {
@@ -406,10 +473,13 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pagehide", flush);
     window.addEventListener("online", onOnline);
+    // Two windows side by side never fire a visibility change.
+    window.addEventListener("focus", refresh);
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pagehide", flush);
       window.removeEventListener("online", onOnline);
+      window.removeEventListener("focus", refresh);
       if (retryTimerRef.current) {
         clearTimeout(retryTimerRef.current);
         retryTimerRef.current = null;
@@ -429,14 +499,14 @@ export function useSavedTool<T extends object>(key: string, initial: T): SavedTo
       dirtyRef.current = true;
       const uid = userIdRef.current;
       if (!uid) {
-        writeLocal(key, next, null, false);
+        writeLocal(key, next, null, false, 0);
         setStatus("local");
         return;
       }
       if (!remoteReadyRef.current) {
         // Her saved copy couldn't be loaded: keep this on the device, marked so
         // it can only fill blanks when the saved copy does load.
-        writeLocal(key, next, uid, true);
+        writeLocal(key, next, uid, true, 0);
         return;
       }
       if (timerRef.current) clearTimeout(timerRef.current);

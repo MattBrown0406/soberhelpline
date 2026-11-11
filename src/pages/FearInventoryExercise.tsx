@@ -303,6 +303,9 @@ export default function FearInventoryExercise() {
     saved.patch({ ownFears: ownFears.map((fear, i) => (i === index ? { ...fear, ...partial } : fear)) });
   const addOwnFear = () => saved.patch({ ownFears: [...ownFears, { ...blankOwnFear }] });
   const removeOwnFear = (index: number) => {
+    const fear = ownFears[index];
+    const written = !!fear && (fear.text.trim() !== "" || fear.reflection.trim() !== "");
+    if (written && !window.confirm("Remove this fear and what you wrote about it?")) return;
     const rest = ownFears.filter((_, i) => i !== index);
     saved.patch({ ownFears: rest.length > 0 ? rest : [{ ...blankOwnFear }] });
   };

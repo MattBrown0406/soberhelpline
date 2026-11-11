@@ -158,7 +158,7 @@ export function ToolShell({
           {!hideReset && saved.hasContent && (
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground">
+                <Button variant="ghost" size="sm" className="min-h-11 gap-1.5 text-muted-foreground">
                   <RotateCcw className="h-4 w-4" aria-hidden="true" />
                   Start over
                 </Button>
@@ -178,7 +178,7 @@ export function ToolShell({
               </AlertDialogContent>
             </AlertDialog>
           )}
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => window.print()}>
+          <Button variant="outline" size="sm" className="min-h-11 gap-1.5" onClick={() => window.print()}>
             <Printer className="h-4 w-4" aria-hidden="true" />
             Print
           </Button>
@@ -252,7 +252,7 @@ export function ToolSection({
   return (
     <section
       className={cn(
-        "rounded-xl border bg-card p-5 sm:p-6 print:break-inside-avoid print:rounded-none print:border-0 print:border-t print:p-0 print:pt-4",
+        "print-flow rounded-xl border bg-card p-5 sm:p-6 print:rounded-none print:border-0 print:border-t print:p-0 print:pt-4",
         tone === "highlight" ? "border-primary/30 bg-primary/[0.04]" : "border-border",
         className,
       )}
