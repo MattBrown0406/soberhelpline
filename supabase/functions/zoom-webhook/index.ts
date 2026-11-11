@@ -130,7 +130,12 @@ serve(async (req) => {
     console.log(`Meeting ended: ${meetingId}`);
 
     const botUserId = Deno.env.get('FORUM_BOT_USER_ID');
-    if (!botUserId) {
+    // Only the Monday Family Squares meeting gets a forum thread, never a
+    // private consultation or any other meeting on the account.
+    const isFamilySquares = /family squares/i.test(String(meetingTopic));
+    if (!isFamilySquares) {
+      console.log('Ended meeting is not Family Squares — no forum thread');
+    } else if (!botUserId) {
       console.warn('FORUM_BOT_USER_ID not set — skipping forum thread creation');
     } else {
       // Unpin old post-meeting threads (older than 7 days)
@@ -139,7 +144,7 @@ serve(async (req) => {
       await supabase
         .from('forum_posts')
         .update({ is_pinned: false })
-        .eq('topic_id', 'share-story')
+        .eq('topic_id', 'this-weeks-meeting')
         .eq('is_pinned', true)
         .lt('created_at', sevenDaysAgo.toISOString());
 
@@ -157,12 +162,12 @@ serve(async (req) => {
       const { data: existing } = await supabase
         .from('forum_posts')
         .select('id')
-        .eq('topic_id', 'share-story')
+        .eq('topic_id', 'this-weeks-meeting')
         .eq('is_pinned', true)
         .gte('created_at', `${dateKey}T00:00:00.000Z`)
-        .maybeSingle();
+        .limit(1);
 
-      if (existing) {
+      if (existing && existing.length > 0) {
         console.log('Post-meeting thread already exists for today — skipping');
       } else {
         const title = `🟢 The Family Squares — ${formattedDate} — Share Your Takeaways`;
@@ -189,26 +194,14 @@ Use this thread to share anything that resonated, a question you're still sittin
 
 ---
 
-**Enjoyed tonight's meeting?**
-
-Become a member to access every recording, 40+ education guides, worksheets, AI coaching tools, and this private community — starting at $9.99/month.
-
-👉 [Start your free 7-day trial](https://soberhelpline.com/family-membership)
-
----
-
-**Did tonight help your family?**
-
-A 5-star review takes 30 seconds and helps other families find us when they need it most. ⭐⭐⭐⭐⭐
-
-👉 [Leave a Google Review](https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review)`;
+*Have a question for next Monday? Start a new conversation in This Week's Meeting and we'll do our best to answer it live.*`;
 
         const { error: postError } = await supabase
           .from('forum_posts')
           .insert({
             title,
             content,
-            topic_id: 'share-story',
+            topic_id: 'this-weeks-meeting',
             user_id: botUserId,
             is_pinned: true,
             is_anonymous: false,

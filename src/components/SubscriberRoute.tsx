@@ -31,8 +31,22 @@ async function checkAccess(): Promise<AccessState> {
   if (!user) return { access: "signed_out", email: null, userId: null };
 
   const { data, error } = await supabase.rpc("is_active_family_member", { _user_id: user.id });
+  if (!error && data === true) {
+    return { access: "member", email: user.email ?? null, userId: user.id };
+  }
+
+  // Staff (admins and forum moderators) can open member pages to moderate and
+  // answer questions without holding a paid membership.
+  const [admin, moderator] = await Promise.all([
+    supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }),
+    supabase.rpc("has_role", { _user_id: user.id, _role: "moderator" }),
+  ]);
+  if (admin.data === true || moderator.data === true) {
+    return { access: "member", email: user.email ?? null, userId: user.id };
+  }
+
   if (!error) {
-    return { access: data === true ? "member" : "not_member", email: user.email ?? null, userId: user.id };
+    return { access: "not_member", email: user.email ?? null, userId: user.id };
   }
 
   // Fallback: the same query the member pages run themselves.

@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign, Ban, MessageSquare, Activity } from "lucide-react";
+import { ArrowLeft, Pencil, CheckCircle, XCircle, BarChart3, Users, FileText, Video, CalendarCheck, UserPlus, Film, ClipboardList, MailWarning, Filter, Route, BadgeDollarSign, Ban, MessageSquare, Activity, ShieldCheck } from "lucide-react";
 import { ProviderSubmission } from "@/types/provider";
 import { EditSubmissionDialog } from "@/components/admin/EditSubmissionDialog";
 import { ProviderAnalytics } from "@/components/admin/ProviderAnalytics";
@@ -40,6 +40,8 @@ import { RevenueCommandCenter } from "@/components/admin/RevenueCommandCenter";
 import { MeetingBlocklistManagement } from "@/components/admin/MeetingBlocklistManagement";
 import { AppMembershipSync } from "@/components/admin/AppMembershipSync";
 import { MemberEngagement } from "@/components/admin/MemberEngagement";
+import { ModeratorManagement } from "@/components/admin/ModeratorManagement";
+import { MemberWarningsManagement } from "@/components/admin/MemberWarningsManagement";
 
 
 const Admin = () => {
@@ -214,6 +216,10 @@ const Admin = () => {
             <TabsTrigger value="revenue" className="gap-2">
               <BadgeDollarSign className="h-4 w-4" />
               Revenue
+            </TabsTrigger>
+            <TabsTrigger value="forum-moderation" className="gap-2">
+              <ShieldCheck className="h-4 w-4" />
+              Forum Moderation
             </TabsTrigger>
             <TabsTrigger value="member-engagement" className="gap-2">
               <Activity className="h-4 w-4" />
@@ -471,6 +477,31 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <RevenueCommandCenter />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="forum-moderation" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MailWarning className="h-5 w-5" />
+                  Moderator Reports
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <MemberWarningsManagement />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5" />
+                  Moderators
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ModeratorManagement />
               </CardContent>
             </Card>
           </TabsContent>
