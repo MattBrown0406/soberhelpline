@@ -1,5 +1,7 @@
 # Current tasks
 
+- [ ] Execute November 10 ordered audit handoff: initial read-only checks, exact single migration, ten unchanged function deployments, conditional automation enforcement, checked frontend publication. Exact migration is blocked by the migration tool's prohibition on data repair; do not split without authorization.
+
 - [x] Add the uploaded November 8 insurance deductible and year-end rehab guide as article 206 with a photo and five FAQs; 229 article renders pass, card and slug navigation and suggested links verified, desktop/mobile fit checked, listings refreshed; not published.
 
 - [x] Add the uploaded November 7 surprise rehab bill guide as article 205 with a photo and all six FAQs; 228 article renders pass, card navigation and available links verified, desktop/mobile fit checked, listings refreshed; not published. The suggested insurance-appeal article is unavailable and was not linked.
