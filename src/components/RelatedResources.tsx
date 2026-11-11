@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BookOpen, ArrowRight, HelpCircle } from "lucide-react";
 import { getRelatedResources, categoryColors } from "@/data/relatedResources";
+import GuideReflection from "@/components/GuideReflection";
 
 interface RelatedResourcesProps {
   currentPath: string;
@@ -9,9 +10,11 @@ interface RelatedResourcesProps {
 export default function RelatedResources({ currentPath }: RelatedResourcesProps) {
   const resources = getRelatedResources(currentPath);
 
-  if (resources.length === 0) return null;
+  if (resources.length === 0) return <GuideReflection path={currentPath} />;
 
   return (
+    <>
+    <GuideReflection path={currentPath} />
     <section className="mt-12 mb-8 print:hidden">
       <div className="border-t border-border pt-10">
         <div className="flex items-center gap-2 mb-6">
@@ -64,5 +67,6 @@ export default function RelatedResources({ currentPath }: RelatedResourcesProps)
         </div>
       </div>
     </section>
+    </>
   );
 }
