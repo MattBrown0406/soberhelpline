@@ -319,7 +319,7 @@ export function SavedTextarea({ label, hint, value, onChange, placeholder, rows 
         maxLength={maxLength}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="block w-full resize-none overflow-hidden rounded-lg border border-input bg-background px-3.5 py-3 text-base leading-relaxed text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
+        className="block w-full resize-none overflow-hidden rounded-lg border border-input bg-card px-3.5 py-3 text-base leading-relaxed text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
       />
       {value.trim() ? (
         <p className="hidden whitespace-pre-wrap border-l-2 border-foreground/40 pl-3 text-sm leading-relaxed print:block">{value}</p>
@@ -353,7 +353,7 @@ export function SavedInput({ label, hint, value, onChange, placeholder, type = "
         maxLength={maxLength}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="block h-12 w-full rounded-lg border border-input bg-background px-3.5 text-base text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
+        className="block h-12 w-full rounded-lg border border-input bg-card px-3.5 text-base text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
       />
       {value.trim() ? (
         <p className="hidden border-b border-foreground/40 pb-1 text-sm print:block">{value}</p>

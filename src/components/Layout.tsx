@@ -76,7 +76,7 @@ const Layout = ({ children }: LayoutProps) => {
       </a>
 
       {!isHome && (
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40">
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40 print:hidden">
           <div className="container mx-auto px-4 flex items-center h-14">
             {/* Logo */}
             <Link to="/" className="flex items-center mr-4 shrink-0">
