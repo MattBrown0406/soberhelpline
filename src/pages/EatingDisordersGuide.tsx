@@ -27,7 +27,7 @@ const EatingDisordersGuide = () => {
         <div className="flex items-center justify-between mb-8 print:hidden">
           <Link to="/family-education" className="flex items-center gap-2 text-primary hover:underline">
             <ArrowLeft className="h-4 w-4" />
-            Back to Family Resources
+            Back to Family Education
           </Link>
           <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
             <Printer className="h-4 w-4" />
@@ -38,6 +38,7 @@ const EatingDisordersGuide = () => {
         {/* Printable Content */}
         <div className="print:text-black print:bg-white">
           <ToolBrandHeader
+            headingAs="h1"
             title="Understanding Eating Disorders"
             subtitle="A family guide to recognition, risk factors, and treatment. Eating disorders often co-occur with substance use disorders and require specialized, integrated care."
             clinicalNote="Based on NEDA (National Eating Disorders Association) clinical guidelines and DSM-5 diagnostic criteria for Anorexia Nervosa, Bulimia Nervosa, and Binge Eating Disorder."
@@ -447,9 +448,9 @@ const EatingDisordersGuide = () => {
             </p>
           </section>
         </div>
-      
-          <RelatedResources currentPath="/eating-disorders-guide" />
-</main>
+
+        <RelatedResources currentPath="/eating-disorders-guide" />
+      </main>
     </div>
   );
 };

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Printer, Heart, Shield, AlertCircle, HelpCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, Printer, Heart, Shield, AlertCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
@@ -14,7 +13,7 @@ const AddictionRewritesFamilyRules = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
@@ -27,11 +26,12 @@ const AddictionRewritesFamilyRules = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="How Addiction Rewrites Family Rules"
             subtitle="The unspoken codes that keep families stuck — and how to change them. Every family has rules. Addiction rewrites them without anyone noticing."
             clinicalNote="Based on Murray Bowen's family systems theory and Claudia Black's research on unspoken family rules in addiction ('Don't talk, don't trust, don't feel')."
@@ -482,38 +482,6 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
-          {/* Reflection Questions */}
-          <Card className="mb-8 border-purple-200 print:border print:shadow-none">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-purple-600" />
-                Reflection Questions for Families
-              </h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What unspoken rules shaped our family?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Which rules protected us—and which harmed us?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Who benefited from these rules?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Who paid the price?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What new rule would improve safety and clarity right now?
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
           {/* A Grounding Reframe */}
           <Card className="mb-8 border-teal-300 bg-teal-100 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -572,6 +540,8 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          <RelatedResources currentPath="/addiction-rewrites-family-rules" />
+
           {/* Back Button */}
           <div className="text-center print:hidden">
             <Link to="/family-education">
@@ -583,9 +553,7 @@ const AddictionRewritesFamilyRules = () => {
           </div>
         </div>
       </div>
-    
-          <RelatedResources currentPath="/addiction-rewrites-family-rules" />
-</Layout>
+    </>
   );
 };
 

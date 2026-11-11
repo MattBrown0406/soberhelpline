@@ -34,11 +34,12 @@ export default function SiblingGuiltAngerLoyalty() {
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Sibling Guilt, Anger, and Loyalty Conflicts"
               subtitle="Understanding the emotional double bind in families affected by addiction. You can love your sibling and still feel rage, relief, and grief — all at once."
               clinicalNote="Informed by family systems literature on triangulation, loyalty conflicts (Ivan Boszormenyi-Nagy), and sibling relational dynamics in addiction."
@@ -355,40 +356,6 @@ export default function SiblingGuiltAngerLoyalty() {
                   <li>Staying silent</li>
                   <li>Being endlessly available</li>
                   <li>Absorbing emotional fallout</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Reflection Questions */}
-            <Card className="mb-6 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Questions for Siblings
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What am I angry about that I've never named?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What guilt shows up when I consider protecting myself?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Who taught me that my feelings were less important?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What does loyalty mean to me now—not then?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What level of involvement feels sustainable and honest?
-                  </li>
                 </ul>
               </CardContent>
             </Card>

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, XCircle, MessageCircle } from "lucide-react";
+import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, XCircle, MessageCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
@@ -14,7 +13,7 @@ const ParentsRepairingSiblingSystem = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
@@ -27,11 +26,12 @@ const ParentsRepairingSiblingSystem = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="Parents: Repairing the Sibling System"
             subtitle="How to acknowledge unequal impact, restore trust, and support healing between siblings. This may be the most important work parents do after the crisis stabilizes."
             clinicalNote="Based on family systems therapy principles, sibling relational repair frameworks, and the developmental needs of non-identified patients in addiction families."
@@ -457,38 +457,6 @@ const ParentsRepairingSiblingSystem = () => {
             </CardContent>
           </Card>
 
-          {/* Reflection Questions */}
-          <Card className="mb-8 border-purple-200 print:border print:shadow-none">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-purple-600" />
-                Reflection Questions for Parents
-              </h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What did each child lose during the years of addiction?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Where did we unintentionally rely on certain children to be "easy"?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  How do we react when siblings express anger or distance?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What do we still feel defensive about—and why?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What would accountability look like without self-blame?
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
           {/* Final Thought */}
           <Card className="mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white print:bg-gray-100 print:text-gray-900">
             <CardContent className="p-8">
@@ -534,6 +502,8 @@ const ParentsRepairingSiblingSystem = () => {
             </CardContent>
           </Card>
 
+          <RelatedResources currentPath="/parents-repairing-sibling-system" />
+
           {/* Back Button */}
           <div className="text-center print:hidden">
             <Link to="/family-education">
@@ -545,9 +515,7 @@ const ParentsRepairingSiblingSystem = () => {
           </div>
         </div>
       </div>
-    
-          <RelatedResources currentPath="/parents-repairing-sibling-system" />
-</Layout>
+    </>
   );
 };
 

@@ -4,12 +4,95 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Printer, Clock, AlertTriangle, TrendingUp, Flame, RotateCcw, Split, PenLine, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import { useSavedTool } from "@/hooks/useSavedTool";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { SaveStatusChip, SavedTextarea } from "@/components/tools/ToolKit";
+
+// The mapping exercise: every answer lives in one saved sheet
+// (useSavedTool "guide:addiction-progression-timeline"), so it survives a
+// reload and prints with the guide.
+interface TimelineAnswers {
+  firstChange: string;
+  escalation: string;
+  firstConsequence: string;
+  firstTreatment: string;
+  currentStage: string;
+  whatTried: string;
+  whatHoped: string;
+  whatHappened: string;
+  effortNoResults: string;
+  boundariesMissing: string;
+  structureHelped: string;
+  presentStage: string;
+  neededNow: string;
+  notWorking: string;
+}
+
+const blankAnswers: TimelineAnswers = {
+  firstChange: "",
+  escalation: "",
+  firstConsequence: "",
+  firstTreatment: "",
+  currentStage: "",
+  whatTried: "",
+  whatHoped: "",
+  whatHappened: "",
+  effortNoResults: "",
+  boundariesMissing: "",
+  structureHelped: "",
+  presentStage: "",
+  neededNow: "",
+  notWorking: "",
+};
+
+interface ExerciseStep {
+  title: string;
+  lead: string;
+  fields: { key: keyof TimelineAnswers; label: string; placeholder: string }[];
+}
+
+const EXERCISE_STEPS: ExerciseStep[] = [
+  {
+    title: "Step 1: Identify Key Periods",
+    lead: "Write approximate dates or ages for each milestone:",
+    fields: [
+      { key: "firstChange", label: "First noticeable change", placeholder: "e.g., Age 17, started drinking at parties..." },
+      { key: "escalation", label: "Escalation point", placeholder: "e.g., Age 19, started using daily..." },
+      { key: "firstConsequence", label: "First major consequence", placeholder: "e.g., Age 20, lost job..." },
+      { key: "firstTreatment", label: "First treatment attempt", placeholder: "e.g., Age 21, 30-day program..." },
+      { key: "currentStage", label: "Current stage", placeholder: "e.g., Currently in Stage 4..." },
+    ],
+  },
+  {
+    title: "Step 2: Notice Family Responses",
+    lead: "At each stage, note:",
+    fields: [
+      { key: "whatTried", label: "What you tried", placeholder: "e.g., Talked to them, set curfews, took away car keys..." },
+      { key: "whatHoped", label: "What you hoped would happen", placeholder: "e.g., They would realize the impact and stop..." },
+      { key: "whatHappened", label: "What actually happened", placeholder: "e.g., Short improvement then return to use..." },
+    ],
+  },
+  {
+    title: "Step 3: Identify Patterns",
+    lead: "Reflect on:",
+    fields: [
+      { key: "effortNoResults", label: "Where effort increased but results didn't", placeholder: "e.g., More conversations, more monitoring..." },
+      { key: "boundariesMissing", label: "Where boundaries were missing", placeholder: "e.g., Kept paying bills, allowing them to live at home..." },
+      { key: "structureHelped", label: "Where structure helped—or was absent", placeholder: "e.g., Did better in treatment, struggled when they came home..." },
+    ],
+  },
+  {
+    title: "Step 4: Ground in the Present",
+    lead: "Answer honestly:",
+    fields: [
+      { key: "presentStage", label: "What stage are we in now?", placeholder: "e.g., Stage 4 - Loss of Control..." },
+      { key: "neededNow", label: "What is realistically needed at this stage?", placeholder: "e.g., Professional intervention, treatment, firm boundaries..." },
+      { key: "notWorking", label: "What is no longer working?", placeholder: "e.g., Conversations, warnings, hoping it will get better..." },
+    ],
+  },
+];
 
 const AddictionProgressionTimeline = () => {
   useGuideTracking("/addiction-progression-timeline", "Addiction Progression Timeline");
@@ -17,31 +100,8 @@ const AddictionProgressionTimeline = () => {
     window.print();
   };
 
-  const [timeline, setTimeline] = useState({
-    firstChange: "",
-    escalation: "",
-    firstConsequence: "",
-    firstTreatment: "",
-    currentStage: "",
-  });
-
-  const [responses, setResponses] = useState({
-    whatTried: "",
-    whatHoped: "",
-    whatHappened: "",
-  });
-
-  const [patterns, setPatterns] = useState({
-    effortNoResults: "",
-    boundariesMissing: "",
-    structureHelped: "",
-  });
-
-  const [present, setPresent] = useState({
-    currentStage: "",
-    neededNow: "",
-    notWorking: "",
-  });
+  const saved = useSavedTool<TimelineAnswers>("guide:addiction-progression-timeline", blankAnswers);
+  const answers = saved.data;
 
   return (
     <Layout>
@@ -69,6 +129,7 @@ const AddictionProgressionTimeline = () => {
         </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="Addiction Progression Timeline"
           subtitle="Understanding addiction as a process, not a series of failures. This interactive tool helps families map the trajectory of their loved one's substance use and their own responses over time."
           clinicalNote="Based on Jellinek's disease model of alcoholism progression and the ASAM continuum of care framework."
@@ -369,179 +430,43 @@ const AddictionProgressionTimeline = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6 space-y-6">
-            {/* Step 1 */}
-            <div>
-              <h4 className="font-semibold mb-3">Step 1: Identify Key Periods</h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Write approximate dates or ages for each milestone:
+            <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
+              <p className="text-sm text-muted-foreground">
+                What you write here saves as you go, so you can stop and come back. Only you can see it.
               </p>
-              <div className="space-y-3">
-                <div>
-                  <Label htmlFor="firstChange">First noticeable change</Label>
-                  <Textarea
-                    id="firstChange"
-                    placeholder="e.g., Age 17, started drinking at parties..."
-                    value={timeline.firstChange}
-                    onChange={(e) => setTimeline({ ...timeline, firstChange: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="escalation">Escalation point</Label>
-                  <Textarea
-                    id="escalation"
-                    placeholder="e.g., Age 19, started using daily..."
-                    value={timeline.escalation}
-                    onChange={(e) => setTimeline({ ...timeline, escalation: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="firstConsequence">First major consequence</Label>
-                  <Textarea
-                    id="firstConsequence"
-                    placeholder="e.g., Age 20, lost job..."
-                    value={timeline.firstConsequence}
-                    onChange={(e) => setTimeline({ ...timeline, firstConsequence: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="firstTreatment">First treatment attempt</Label>
-                  <Textarea
-                    id="firstTreatment"
-                    placeholder="e.g., Age 21, 30-day program..."
-                    value={timeline.firstTreatment}
-                    onChange={(e) => setTimeline({ ...timeline, firstTreatment: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="currentStageTimeline">Current stage</Label>
-                  <Textarea
-                    id="currentStageTimeline"
-                    placeholder="e.g., Currently in Stage 4..."
-                    value={timeline.currentStage}
-                    onChange={(e) => setTimeline({ ...timeline, currentStage: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-              </div>
+              <SaveStatusChip status={saved.status} signedIn={saved.signedIn} lastSavedAt={saved.lastSavedAt} />
             </div>
 
-            {/* Step 2 */}
-            <div>
-              <h4 className="font-semibold mb-3">Step 2: Notice Family Responses</h4>
-              <p className="text-sm text-muted-foreground mb-3">At each stage, note:</p>
-              <div className="space-y-3">
-                <div>
-                  <Label htmlFor="whatTried">What you tried</Label>
-                  <Textarea
-                    id="whatTried"
-                    placeholder="e.g., Talked to them, set curfews, took away car keys..."
-                    value={responses.whatTried}
-                    onChange={(e) => setResponses({ ...responses, whatTried: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="whatHoped">What you hoped would happen</Label>
-                  <Textarea
-                    id="whatHoped"
-                    placeholder="e.g., They would realize the impact and stop..."
-                    value={responses.whatHoped}
-                    onChange={(e) => setResponses({ ...responses, whatHoped: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="whatHappened">What actually happened</Label>
-                  <Textarea
-                    id="whatHappened"
-                    placeholder="e.g., Short improvement then return to use..."
-                    value={responses.whatHappened}
-                    onChange={(e) => setResponses({ ...responses, whatHappened: e.target.value })}
-                    className="mt-1"
-                  />
+            {EXERCISE_STEPS.map((step) => (
+              <div key={step.title}>
+                <h4 className="font-semibold mb-3">{step.title}</h4>
+                <p className="text-sm text-muted-foreground mb-3">{step.lead}</p>
+                <div className="space-y-4">
+                  {step.fields.map((field) => (
+                    <SavedTextarea
+                      key={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder}
+                      rows={2}
+                      value={answers[field.key] ?? ""}
+                      onChange={(value) => saved.patch({ [field.key]: value })}
+                    />
+                  ))}
                 </div>
               </div>
-            </div>
+            ))}
 
-            {/* Step 3 */}
-            <div>
-              <h4 className="font-semibold mb-3">Step 3: Identify Patterns</h4>
-              <p className="text-sm text-muted-foreground mb-3">Reflect on:</p>
-              <div className="space-y-3">
-                <div>
-                  <Label htmlFor="effortNoResults">Where effort increased but results didn't</Label>
-                  <Textarea
-                    id="effortNoResults"
-                    placeholder="e.g., More conversations, more monitoring..."
-                    value={patterns.effortNoResults}
-                    onChange={(e) => setPatterns({ ...patterns, effortNoResults: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="boundariesMissing">Where boundaries were missing</Label>
-                  <Textarea
-                    id="boundariesMissing"
-                    placeholder="e.g., Kept paying bills, allowing them to live at home..."
-                    value={patterns.boundariesMissing}
-                    onChange={(e) => setPatterns({ ...patterns, boundariesMissing: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="structureHelped">Where structure helped—or was absent</Label>
-                  <Textarea
-                    id="structureHelped"
-                    placeholder="e.g., Did better in treatment, struggled when they came home..."
-                    value={patterns.structureHelped}
-                    onChange={(e) => setPatterns({ ...patterns, structureHelped: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div>
-              <h4 className="font-semibold mb-3">Step 4: Ground in the Present</h4>
-              <p className="text-sm text-muted-foreground mb-3">Answer honestly:</p>
-              <div className="space-y-3">
-                <div>
-                  <Label htmlFor="currentStagePresent">What stage are we in now?</Label>
-                  <Textarea
-                    id="currentStagePresent"
-                    placeholder="e.g., Stage 4 - Loss of Control..."
-                    value={present.currentStage}
-                    onChange={(e) => setPresent({ ...present, currentStage: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="neededNow">What is realistically needed at this stage?</Label>
-                  <Textarea
-                    id="neededNow"
-                    placeholder="e.g., Professional intervention, treatment, firm boundaries..."
-                    value={present.neededNow}
-                    onChange={(e) => setPresent({ ...present, neededNow: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="notWorking">What is no longer working?</Label>
-                  <Textarea
-                    id="notWorking"
-                    placeholder="e.g., Conversations, warnings, hoping it will get better..."
-                    value={present.notWorking}
-                    onChange={(e) => setPresent({ ...present, notWorking: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-            </div>
+            {saved.loaded && !saved.signedIn && (
+              <p className="text-sm text-muted-foreground print:hidden">
+                <Link
+                  to={`/auth?redirect=${encodeURIComponent("/addiction-progression-timeline")}`}
+                  className="font-medium text-primary underline-offset-2 hover:underline"
+                >
+                  Sign in
+                </Link>{" "}
+                to save your answers to your account. Until then they stay on this device.
+              </p>
+            )}
           </CardContent>
         </Card>
 
@@ -610,10 +535,10 @@ const AddictionProgressionTimeline = () => {
             </Button>
           </Link>
         </div>
+
+        <RelatedResources currentPath="/addiction-progression-timeline" />
       </div>
-    
-          <RelatedResources currentPath="/addiction-progression-timeline" />
-</Layout>
+    </Layout>
   );
 };
 

@@ -1,12 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, Heart, Shield, Brain, CheckCircle, XCircle, AlertTriangle, RefreshCw } from "lucide-react";
+import { ArrowLeft, Printer, FileText, Heart, Shield, CheckCircle, XCircle, AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function WhatChangesWhenFamiliesChange() {
   useGuideTracking("/what-changes-when-families-change", "What Changes When Families Change");
@@ -20,15 +21,22 @@ export default function WhatChangesWhenFamiliesChange() {
       <div className="min-h-screen bg-background">
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={() => window.print()} variant="outline" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print
+              </Button>
+            </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="What Changes When Families Change"
               subtitle="How family change creates system change — even if the addicted person doesn't change immediately. Your recovery matters regardless of theirs."
               clinicalNote="Grounded in Bowen Family Systems Theory and CRAFT research showing that family behavior changes can positively influence treatment engagement rates by up to 64%."
@@ -417,6 +425,12 @@ export default function WhatChangesWhenFamiliesChange() {
               </CardContent>
             </Card>
 
+            <SafetyBox
+              topics={["overdose", "suicide"]}
+              title="If your fear is that they could die"
+              className="mb-8"
+            />
+
             {/* A Necessary Reframe */}
             <Card className="mb-8 border-2 border-primary/50 bg-primary/5">
               <CardHeader>
@@ -474,24 +488,8 @@ export default function WhatChangesWhenFamiliesChange() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
-                  <Brain className="h-5 w-5" />
-                  Reflection Questions for Families
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ol className="space-y-3 list-decimal list-inside text-muted-foreground">
-                  <li>What are we currently doing that keeps the system stuck?</li>
-                  <li>What would change if we stopped absorbing consequences?</li>
-                  <li>Where are we confusing love with rescue?</li>
-                  <li>What would family health look like—regardless of outcome?</li>
-                  <li>What do we need to protect now?</li>
-                </ol>
-              </CardContent>
-            </Card>
+            {/* "Reflection Questions for Families" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             {/* Final Thought */}
             <Card className="mb-8 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900 border-emerald-300 dark:border-emerald-700">
@@ -565,7 +563,7 @@ export default function WhatChangesWhenFamiliesChange() {
               </CardContent>
             </Card>
 
-            <div className="text-center">
+            <div className="text-center print:hidden">
               <Link to="/family-education">
                 <Button variant="outline" className="gap-2">
                   <ArrowLeft className="h-4 w-4" />

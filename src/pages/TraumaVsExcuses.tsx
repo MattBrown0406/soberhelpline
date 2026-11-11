@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 const TraumaVsExcuses = () => {
   useGuideTracking("/trauma-vs-excuses", "Trauma vs. Excuses: A Necessary Distinction");
@@ -40,6 +41,7 @@ const TraumaVsExcuses = () => {
         </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="Trauma vs. Excuses: A Necessary Distinction"
           subtitle="How to hold compassion for trauma without justifying harm. Trauma explains behavior — it does not excuse it. Both things can be true."
           clinicalNote="Informed by trauma-informed care principles (SAMHSA), ACE research, and accountability frameworks used in evidence-based addiction treatment."
@@ -249,6 +251,8 @@ const TraumaVsExcuses = () => {
           </CardContent>
         </Card>
 
+        <SafetyBox topics={["violence", "emergency"]} title="If you are afraid of them" />
+
         {/* What Boundaries Sound Like */}
         <Card className="mb-6">
           <CardHeader>
@@ -359,31 +363,6 @@ const TraumaVsExcuses = () => {
           </CardContent>
         </Card>
 
-        {/* Questions to Ask */}
-        <Card className="mb-6 border-primary">
-          <CardHeader className="bg-primary/10">
-            <CardTitle>Questions Families Can Ask Themselves</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6 space-y-3">
-            {[
-              "Does my response reduce harm—or prolong it?",
-              "Am I protecting trauma—or protecting addiction?",
-              "Does this boundary increase safety and clarity?",
-              "Would I tolerate this behavior without trauma as the explanation?"
-            ].map((question, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
-                  {index + 1}
-                </span>
-                <p>{question}</p>
-              </div>
-            ))}
-            <div className="bg-muted p-4 rounded-lg text-center mt-4">
-              <p className="font-medium">These questions restore clarity.</p>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Final Thought */}
         <Card className="mb-6 border-primary">
           <CardHeader>
@@ -451,10 +430,10 @@ const TraumaVsExcuses = () => {
             </Button>
           </Link>
         </div>
+
+        <RelatedResources currentPath="/trauma-vs-excuses" />
       </div>
-    
-          <RelatedResources currentPath="/trauma-vs-excuses" />
-</Layout>
+    </Layout>
   );
 };
 

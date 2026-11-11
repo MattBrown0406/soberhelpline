@@ -1,12 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, ShieldAlert, AlertTriangle, CheckCircle, XCircle, Target, Shield, Ban } from "lucide-react";
+import { ArrowLeft, Printer, ShieldAlert, AlertTriangle, CheckCircle, XCircle, Target, Shield, Ban } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function NoNegotiationGuide() {
   useGuideTracking("/no-negotiation", "We Don't Negotiate with Terrorists");
@@ -20,18 +21,30 @@ export default function NoNegotiationGuide() {
       <div className="min-h-screen bg-background">
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={() => window.print()} variant="outline" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print
+              </Button>
+            </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="We Don't Negotiate with Terrorists"
               subtitle="Why negotiating with active addiction makes things worse — and what families can do instead to protect themselves while supporting recovery."
               clinicalNote="Grounded in CRAFT research and addiction medicine principles. Addiction hijacks the brain's reward system, making negotiation with the disease ineffective."
+            />
+
+            <SafetyBox
+              topics={["violence", "suicide", "overdose"]}
+              title="When this advice needs a safety plan first"
             />
 
             {/* Why This Guide Exists */}
@@ -482,7 +495,7 @@ export default function NoNegotiationGuide() {
               </CardContent>
             </Card>
 
-            <div className="text-center">
+            <div className="text-center print:hidden">
               <Link to="/family-education">
                 <Button variant="outline">
                   <ArrowLeft className="h-4 w-4 mr-2" />

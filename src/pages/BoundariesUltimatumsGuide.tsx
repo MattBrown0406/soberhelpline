@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, AlertTriangle, CheckCircle, XCircle, Target, Shield, Brain } from "lucide-react";
+import { ArrowLeft, Printer, FileText, AlertTriangle, CheckCircle, XCircle, Target, Shield, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function BoundariesUltimatumsGuide() {
   useGuideTracking("/boundaries-ultimatums", "Requests, Demands, Ultimatums & Boundaries");
@@ -22,18 +23,30 @@ export default function BoundariesUltimatumsGuide() {
 
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={() => window.print()} variant="outline" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print
+              </Button>
+            </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Requests, Demands, Ultimatums & Boundaries"
               subtitle="Advanced application for families impacted by addiction. Learn when and how to use each tool effectively — and why most families confuse them."
               clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) principles and clinical boundary-setting frameworks used in family systems therapy."
+            />
+
+            <SafetyBox
+              topics={["violence", "suicide", "overdose", "emergency"]}
+              title="When this advice needs a safety plan first"
             />
 
             {/* Why Families Need an Advanced Guide */}
@@ -500,21 +513,8 @@ export default function BoundariesUltimatumsGuide() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="text-xl text-logo-blue">Advanced Reflection Questions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ol className="space-y-3 list-decimal list-inside text-muted-foreground">
-                  <li>Which tool do we overuse?</li>
-                  <li>Where do we collapse boundaries emotionally?</li>
-                  <li>What consequence are we afraid to allow?</li>
-                  <li>Are we asking for change—or planning for reality?</li>
-                  <li>What would consistency look like for 30 days?</li>
-                </ol>
-              </CardContent>
-            </Card>
+            {/* "Advanced Reflection Questions" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             {/* Final Thought */}
             <Card className="mb-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border-slate-300 dark:border-slate-700">
@@ -579,7 +579,7 @@ export default function BoundariesUltimatumsGuide() {
               </CardContent>
             </Card>
 
-            <div className="text-center">
+            <div className="text-center print:hidden">
               <Link to="/family-education">
                 <Button variant="outline" className="gap-2">
                   <ArrowLeft className="h-4 w-4" />

@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, BookOpen, Brain, Pill, Heart, Users, MessageSquare, Laptop, Shield, CheckCircle, AlertCircle, HelpCircle } from "lucide-react";
+import { ArrowLeft, Printer, Brain, Pill, Heart, Users, MessageSquare, Laptop, Shield, CheckCircle, AlertCircle, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function NonTwelveStepModalities() {
   useGuideTracking("/non-twelve-step-modalities", "Non-12-Step Recovery Modalities Explained");
@@ -19,23 +20,25 @@ export default function NonTwelveStepModalities() {
       <div className="min-h-screen bg-background">
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
-
-            <div className="text-center mb-10">
-              <BookOpen className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
-                Non–12-Step Recovery Modalities Explained for Families
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                What They Are, How They Work, and When They Help
-              </p>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={() => window.print()} variant="outline" size="sm" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print
+              </Button>
             </div>
+
+            <ToolBrandHeader
+              headingAs="h1"
+              title="Non–12-Step Recovery Modalities Explained for Families"
+              subtitle="What They Are, How They Work, and When They Help"
+            />
 
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20">
@@ -604,7 +607,7 @@ export default function NonTwelveStepModalities() {
               </CardContent>
             </Card>
 
-            <div className="text-center">
+            <div className="text-center print:hidden">
               <Link to="/family-education">
                 <Button variant="outline">
                   <ArrowLeft className="h-4 w-4 mr-2" />

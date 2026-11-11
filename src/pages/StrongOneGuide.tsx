@@ -35,11 +35,12 @@ export default function StrongOneGuide() {
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title='The Hidden Cost of Being the "Strong One"'
               subtitle="When competence becomes a survival strategy — and a liability. The family member who holds it together often pays the highest price in silence."
               clinicalNote="Based on codependency research by Pia Mellody, caretaker burnout literature, and Al-Anon's emphasis on self-care as a recovery practice."
@@ -334,40 +335,6 @@ export default function StrongOneGuide() {
                     it's how wisely you decide what's yours to carry.
                   </p>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Reflection Questions */}
-            <Card className="mb-6 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Questions
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Where did being "the strong one" protect me?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Where is it costing me now?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What am I afraid would happen if I stopped over-functioning?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What needs have I learned to ignore?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What would strength look like if it included me?
-                  </li>
-                </ul>
               </CardContent>
             </Card>
 

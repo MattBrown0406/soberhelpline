@@ -32,11 +32,12 @@ export default function BoundaryDrift() {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="Boundary Drift: How Limits Slowly Erode"
             subtitle="Why boundaries don't fail in crisis — they fade in calm. Understanding how limits gradually erode and how to recognize the pattern before it's too late."
             clinicalNote="Based on relapse prevention models (Gorski) and family systems theory on homeostatic pull."
@@ -320,16 +321,8 @@ export default function BoundaryDrift() {
               </p>
             </section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Reflection Questions for Families</h2>
-              <ol className="list-decimal pl-6 text-muted-foreground space-y-3">
-                <li>Where have our boundaries softened over time?</li>
-                <li>What emotion tends to trigger exceptions?</li>
-                <li>What consequence have we delayed or avoided?</li>
-                <li>Where are we more exhausted than intentional?</li>
-                <li>What boundary needs to be reset right now?</li>
-              </ol>
-            </section>
+            {/* "Reflection Questions for Families" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             <section className="mb-10 p-6 bg-muted/50 rounded-lg">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Final Thought</h2>

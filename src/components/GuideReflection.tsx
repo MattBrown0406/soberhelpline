@@ -45,13 +45,15 @@ function Reflection({ path }: { path: string }) {
       </div>
 
       <div className="space-y-5">
-        {prompts.map((prompt, i) => (
+        {/* Answers are stored under the question's own text, so reordering or
+            adding questions never puts an answer under the wrong question. */}
+        {prompts.map((prompt) => (
           <SavedTextarea
             key={prompt}
             label={prompt}
             rows={3}
-            value={data.answers[String(i)] ?? ""}
-            onChange={(value) => saved.setData((prev) => ({ ...prev, answers: { ...prev.answers, [String(i)]: value } }))}
+            value={data.answers?.[prompt] ?? ""}
+            onChange={(value) => saved.setData((prev) => ({ ...prev, answers: { ...(prev.answers ?? {}), [prompt]: value } }))}
           />
         ))}
         <SavedTextarea

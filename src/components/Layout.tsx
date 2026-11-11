@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Home, ArrowLeft, Phone, Heart } from "lucide-react";
 import Footer from "./Footer";
@@ -20,7 +20,22 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
+// The app wraps every route in <Layout> (App.tsx), and many older pages also
+// wrap themselves in one. A nested Layout renders only its children, so those
+// pages don't get a second header, footer and contact button.
+const InsideLayout = createContext(false);
+
 const Layout = ({ children }: LayoutProps) => {
+  const nested = useContext(InsideLayout);
+  if (nested) return <>{children}</>;
+  return (
+    <InsideLayout.Provider value={true}>
+      <SiteLayout>{children}</SiteLayout>
+    </InsideLayout.Provider>
+  );
+};
+
+const SiteLayout = ({ children }: LayoutProps) => {
   const { pathname, hash } = useLocation();
   const navigate = useNavigate();
   const { isMember } = useMembershipStatus();

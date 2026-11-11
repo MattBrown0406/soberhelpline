@@ -1,15 +1,33 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Heart, Shield, CheckCircle2, AlertTriangle, Eye, Clock, HelpCircle, Users, Activity, Target, Printer } from "lucide-react";
+import { ArrowLeft, Heart, Shield, CheckCircle2, AlertTriangle, Eye, Clock, HelpCircle, Users, Activity, Target, Printer } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
+import { useSavedTool } from "@/hooks/useSavedTool";
+import { CheckList, SaveStatusChip } from "@/components/tools/ToolKit";
+
+// The Trust Readiness Self-Check, saved to her account (or this device) and printed ticked.
+const TRUST_CHECKS = [
+  "My body feels mostly calm",
+  "I don't feel pressure to reassure them",
+  "I don't feel rushed",
+  "I don't feel responsible for their emotions",
+  "I don't feel like I'm \"risking everything\"",
+] as const;
+
+const blankSelfCheck = { checks: [] as string[] };
 
 export default function SafeToOpenUp() {
   useGuideTracking("/safe-to-open-up", "Is It Safe to Open Up Again? (Guide for Injured Spouses)");
+
+  const saved = useSavedTool("guide:safe-to-open-up", blankSelfCheck);
+  const savedChecks = Array.isArray(saved.data.checks) ? saved.data.checks : [];
+  const checkedCount = TRUST_CHECKS.filter((item) => savedChecks.includes(item)).length;
 
   const handlePrint = () => {
     window.print();
@@ -36,11 +54,12 @@ export default function SafeToOpenUp() {
               </Link>
               <Button onClick={handlePrint} variant="outline" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Is It Safe to Open Up Again?"
               subtitle="A practical guide for injured spouses considering trust after addiction. Learning how to assess safety before reopening emotionally."
               clinicalNote="Based on Gottman's Trust Revival Method and clinical frameworks for betrayal trauma recovery. Trust is rebuilt through consistent behavior over time, not promises."
@@ -174,6 +193,8 @@ export default function SafeToOpenUp() {
               </CardHeader>
               <CardContent className="space-y-6">
                 <p className="text-muted-foreground">Before opening up emotionally, all three levels should be present.</p>
+
+                <SafetyBox topics={["violence"]} title="Physical safety comes first" className="mb-0" />
 
                 {/* Behavioral Safety */}
                 <div className="bg-blue-50 dark:bg-blue-950/30 p-5 rounded-lg border border-blue-200 dark:border-blue-800">
@@ -316,33 +337,31 @@ export default function SafeToOpenUp() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">Answer honestly—no explanations required.</p>
-                <p className="font-medium">When I imagine opening up emotionally:</p>
-                <div className="bg-violet-50 dark:bg-violet-950/30 p-4 rounded-lg border border-violet-200 dark:border-violet-800">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-violet-400 rounded"></div>
-                      <span>My body feels mostly calm</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-violet-400 rounded"></div>
-                      <span>I don't feel pressure to reassure them</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-violet-400 rounded"></div>
-                      <span>I don't feel rushed</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-violet-400 rounded"></div>
-                      <span>I don't feel responsible for their emotions</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-violet-400 rounded"></div>
-                      <span>I don't feel like I'm "risking everything"</span>
-                    </li>
-                  </ul>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-medium">When I imagine opening up emotionally:</p>
+                  <SaveStatusChip
+                    status={saved.status}
+                    signedIn={saved.signedIn}
+                    lastSavedAt={saved.lastSavedAt}
+                    className="print:hidden"
+                  />
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  If you checked fewer than 3, more time and consistency are needed.
+                <div className="bg-violet-50 dark:bg-violet-950/30 p-4 rounded-lg border border-violet-200 dark:border-violet-800">
+                  <CheckList
+                    options={TRUST_CHECKS}
+                    selected={savedChecks}
+                    onChange={(checks) => saved.patch({ checks })}
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground" aria-live="polite">
+                  {checkedCount > 0 && (
+                    <strong className="font-semibold text-foreground">
+                      You checked {checkedCount} of {TRUST_CHECKS.length}.{" "}
+                    </strong>
+                  )}
+                  {checkedCount > 0 && checkedCount < 3
+                    ? "That is fewer than 3: more time and consistency are needed."
+                    : "If you checked fewer than 3, more time and consistency are needed."}
                 </p>
                 <p className="text-sm font-medium text-violet-800 dark:text-violet-300">
                   Your body often knows before your mind does.
@@ -567,39 +586,8 @@ export default function SafeToOpenUp() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-8 border-indigo-200 dark:border-indigo-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-indigo-700 dark:text-indigo-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Questions for Injured Spouses
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded">
-                    <span className="font-semibold text-indigo-600">1.</span>
-                    <span>What behaviors make me feel safer—not more hopeful?</span>
-                  </li>
-                  <li className="flex items-start gap-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded">
-                    <span className="font-semibold text-indigo-600">2.</span>
-                    <span>What happens in my body when I imagine opening up?</span>
-                  </li>
-                  <li className="flex items-start gap-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded">
-                    <span className="font-semibold text-indigo-600">3.</span>
-                    <span>Where have I overridden my instincts before?</span>
-                  </li>
-                  <li className="flex items-start gap-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded">
-                    <span className="font-semibold text-indigo-600">4.</span>
-                    <span>What pace protects me right now?</span>
-                  </li>
-                  <li className="flex items-start gap-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded">
-                    <span className="font-semibold text-indigo-600">5.</span>
-                    <span>What would self-respect look like in this season?</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+            {/* "Reflection Questions for Injured Spouses" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             {/* Final Thought */}
             <Card className="mb-8 bg-gradient-to-br from-rose-50 to-transparent dark:from-rose-950/30 dark:to-transparent border-rose-300 dark:border-rose-700">

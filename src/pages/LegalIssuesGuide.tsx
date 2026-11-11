@@ -2,18 +2,15 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Printer, Scale, AlertTriangle, Shield, FileText, Users, Heart, Gavel, Home, Brain, Lock, Phone, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useState } from "react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import SafetyBox from "@/components/SafetyBox";
 
 const LegalIssuesGuide = () => {
   useGuideTracking("/legal-issues-guide", "Legal Issues Families Should Understand");
-  const [checklist, setChecklist] = useState<string[]>([]);
-
   const checklistItems = [
     "Do we understand our legal exposure?",
     "Are we unintentionally interfering with consequences?",
@@ -21,14 +18,6 @@ const LegalIssuesGuide = () => {
     "Do we have legal counsel identified if needed?",
     "Are decisions being made from fear or clarity?",
   ];
-
-  const handleCheckboxChange = (item: string) => {
-    if (checklist.includes(item)) {
-      setChecklist(checklist.filter((i) => i !== item));
-    } else {
-      setChecklist([...checklist, item]);
-    }
-  };
 
   const handlePrint = () => {
     window.print();
@@ -56,7 +45,7 @@ const LegalIssuesGuide = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
@@ -209,6 +198,12 @@ const LegalIssuesGuide = () => {
                 </ul>
               </div>
 
+              <SafetyBox
+                topics={["withdrawal", "overdose"]}
+                title="If they are in jail or just released"
+                className="mb-0"
+              />
+
               <div className="bg-muted/50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Ask yourself:</h4>
                 <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm">
@@ -279,6 +274,12 @@ const LegalIssuesGuide = () => {
                   <li>Safety must override guilt or reconciliation pressure</li>
                 </ul>
               </div>
+
+              <SafetyBox
+                topics={["violence"]}
+                title="If you are the one who needs protection"
+                className="mb-0"
+              />
 
               <div className="bg-primary/10 p-4 rounded-lg text-center">
                 <p className="font-semibold text-foreground italic">
@@ -492,24 +493,11 @@ const LegalIssuesGuide = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground mb-4">Ask yourself:</p>
-              <div className="space-y-3">
-                {checklistItems.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <Checkbox
-                      id={`checklist-${index}`}
-                      checked={checklist.includes(item)}
-                      onCheckedChange={() => handleCheckboxChange(item)}
-                      className="mt-1"
-                    />
-                    <label
-                      htmlFor={`checklist-${index}`}
-                      className="text-foreground cursor-pointer"
-                    >
-                      {item}
-                    </label>
-                  </div>
+              <ul className="list-disc pl-6 space-y-2 text-foreground">
+                {checklistItems.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
-              </div>
+              </ul>
               
               <div className="bg-primary/10 p-4 rounded-lg text-center mt-4">
                 <p className="font-semibold text-foreground italic">

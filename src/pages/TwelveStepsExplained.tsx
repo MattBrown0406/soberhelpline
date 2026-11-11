@@ -39,6 +39,7 @@ export default function TwelveStepsExplained() {
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="The 12 Steps Explained for Families"
               subtitle="What each step is really doing — and why it matters in recovery. This guide helps families understand the purpose behind the process."
               clinicalNote="Based on the original Twelve Steps of Alcoholics Anonymous and adapted family guidance from Al-Anon Family Groups. Clinical context informed by Stephanie Brown's developmental model of recovery."
@@ -611,10 +612,10 @@ export default function TwelveStepsExplained() {
                 </Button>
               </Link>
             </div>
+
+            <RelatedResources currentPath="/twelve-steps-explained" />
           </div>
-        
-          <RelatedResources currentPath="/twelve-steps-explained" />
-</main>
+        </main>
       </div>
     </>
   );

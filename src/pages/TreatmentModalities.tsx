@@ -1,12 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, Download, Brain, Clock, Users, Pill, Heart, Home, MessageCircle, Building } from "lucide-react";
+import { ArrowLeft, FileText, Printer, Brain, Clock, Users, Pill, Heart, Home, MessageCircle, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TreatmentModalities() {
   useGuideTracking("/treatment-modalities", "Treatment Modalities Explained");
@@ -34,20 +34,16 @@ export default function TreatmentModalities() {
                 Back to Family Education
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
-                <Download className="h-4 w-4" />
-                Print Guide
+                <Printer className="h-4 w-4" />
+                Print
               </Button>
             </div>
 
-            <div className="text-center mb-8">
-              <FileText className="h-12 w-12 text-primary mx-auto mb-4 print:hidden" />
-              <h1 className="text-3xl md:text-4xl font-bold text-logo-blue mb-4">
-                Treatment Modalities Explained
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                What Different Therapies Do, When They Help, and When They Don't
-              </p>
-            </div>
+            <ToolBrandHeader
+              headingAs="h1"
+              title="Treatment Modalities Explained"
+              subtitle="What Different Therapies Do, When They Help, and When They Don't"
+            />
 
             {/* Why Families Need This Guide */}
             <Card className="mb-8 border-primary/20 bg-primary/5">
@@ -111,19 +107,17 @@ export default function TreatmentModalities() {
               </CardContent>
             </Card>
 
-            {/* Treatment Modalities Accordion */}
+            {/* Treatment Modalities: all nine shown open so they can be read straight through and printed */}
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-logo-blue mb-4">Treatment Modalities</h2>
-              <Accordion type="single" collapsible className="space-y-2">
+              <div className="space-y-4">
                 {/* CBT */}
-                <AccordionItem value="cbt" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Brain className="h-5 w-5 text-blue-600" />
-                      <span className="font-semibold text-left">Cognitive Behavioral Therapy (CBT)</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Brain className="shrink-0 h-5 w-5 text-blue-600" />
+                    Cognitive Behavioral Therapy (CBT)
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is (Plain Language)</h4>
                       <p className="text-muted-foreground">CBT helps people notice unhelpful thoughts and behaviors and practice changing them.</p>
@@ -151,18 +145,16 @@ export default function TreatmentModalities() {
                         Best Used When: The person is sober or stabilized and able to reflect and practice skills.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* DBT */}
-                <AccordionItem value="dbt" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Heart className="h-5 w-5 text-pink-600" />
-                      <span className="font-semibold text-left">Dialectical Behavior Therapy (DBT)</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Heart className="shrink-0 h-5 w-5 text-pink-600" />
+                    Dialectical Behavior Therapy (DBT)
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">DBT teaches skills for managing intense emotions and relationships.</p>
@@ -190,18 +182,16 @@ export default function TreatmentModalities() {
                         Best Used When: There are strong emotional swings and difficulty regulating behavior.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* Motivational Interviewing */}
-                <AccordionItem value="mi" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <MessageCircle className="h-5 w-5 text-green-600" />
-                      <span className="font-semibold text-left">Motivational Interviewing (MI)</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <MessageCircle className="shrink-0 h-5 w-5 text-green-600" />
+                    Motivational Interviewing (MI)
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">A conversational approach that helps people explore their own reasons for change.</p>
@@ -228,18 +218,16 @@ export default function TreatmentModalities() {
                         Best Used When: Someone is ambivalent—not ready, but not closed.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* Trauma-Informed Therapy */}
-                <AccordionItem value="trauma" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Heart className="h-5 w-5 text-purple-600" />
-                      <span className="font-semibold text-left">Trauma-Informed Therapy</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Heart className="shrink-0 h-5 w-5 text-purple-600" />
+                    Trauma-Informed Therapy
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">An approach that recognizes trauma's impact on behavior and nervous system function.</p>
@@ -266,18 +254,16 @@ export default function TreatmentModalities() {
                         Best Used When: Stability is established and substance use is addressed.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* EMDR */}
-                <AccordionItem value="emdr" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Brain className="h-5 w-5 text-indigo-600" />
-                      <span className="font-semibold text-left">EMDR (Eye Movement Desensitization and Reprocessing)</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Brain className="shrink-0 h-5 w-5 text-indigo-600" />
+                    EMDR (Eye Movement Desensitization and Reprocessing)
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">A structured therapy to process traumatic memories.</p>
@@ -304,18 +290,16 @@ export default function TreatmentModalities() {
                         Best Used When: There is sobriety, safety, and emotional regulation capacity.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* MAT */}
-                <AccordionItem value="mat" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Pill className="h-5 w-5 text-teal-600" />
-                      <span className="font-semibold text-left">Medication-Assisted Treatment (MAT)</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Pill className="shrink-0 h-5 w-5 text-teal-600" />
+                    Medication-Assisted Treatment (MAT)
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">Use of medication to reduce cravings or withdrawal (e.g., buprenorphine, naltrexone).</p>
@@ -342,18 +326,16 @@ export default function TreatmentModalities() {
                         Best Used When: Combined with counseling, accountability, and recovery supports.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* Family Systems Therapy */}
-                <AccordionItem value="family" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Users className="h-5 w-5 text-orange-600" />
-                      <span className="font-semibold text-left">Family Systems Therapy</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Users className="shrink-0 h-5 w-5 text-orange-600" />
+                    Family Systems Therapy
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">Therapy that looks at how family patterns influence behavior.</p>
@@ -381,18 +363,16 @@ export default function TreatmentModalities() {
                         Best Used When: Addiction is being addressed and families are ready to change their roles.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* Group Therapy */}
-                <AccordionItem value="group" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Users className="h-5 w-5 text-cyan-600" />
-                      <span className="font-semibold text-left">Group Therapy</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Users className="shrink-0 h-5 w-5 text-cyan-600" />
+                    Group Therapy
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">Therapy delivered in a group setting with peers.</p>
@@ -419,18 +399,16 @@ export default function TreatmentModalities() {
                         Best Used When: As part of a broader treatment plan.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* Residential / Inpatient */}
-                <AccordionItem value="residential" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <Building className="h-5 w-5 text-slate-600" />
-                      <span className="font-semibold text-left">Residential / Inpatient Treatment</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                <section className="rounded-lg border bg-card p-4 sm:p-5">
+                  <h3 className="mb-3 flex items-center gap-3 text-lg font-semibold text-foreground">
+                    <Building className="shrink-0 h-5 w-5 text-slate-600" />
+                    Residential / Inpatient Treatment
+                  </h3>
+                  <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
                       <p className="text-muted-foreground">Highly structured, immersive care away from everyday triggers.</p>
@@ -457,9 +435,9 @@ export default function TreatmentModalities() {
                         Best Used When: There is high risk, instability, or repeated failed attempts.
                       </p>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                  </div>
+                </section>
+              </div>
             </div>
 
             {/* Why Modalities Fail */}

@@ -32,11 +32,12 @@ export default function FamilyUnityLiability() {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="When Family Unity (or the Lack of It) Becomes a Liability"
             subtitle="How togetherness and division can both undermine recovery — and what actually helps. Functional alignment, not forced agreement, is the goal."
             clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) alignment principles and family systems research on differentiation vs. enmeshment."
@@ -439,28 +440,6 @@ export default function FamilyUnityLiability() {
 
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="text-lg">Reflection Questions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ol className="space-y-3">
-                {[
-                  "Where has unity silenced honesty in our family?",
-                  "Where has disunity weakened boundaries?",
-                  "What principles matter more than agreement?",
-                  "Where are we afraid to be misaligned?",
-                  "What would alignment look like right now?"
-                ].map((question, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">{index + 1}</span>
-                    <span className="text-foreground">{question}</span>
-                  </li>
-                ))}
-              </ol>
-            </CardContent>
-          </Card>
-
-          <Card className="mb-8">
-            <CardHeader>
               <CardTitle className="text-lg">Final Thought</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -511,7 +490,7 @@ export default function FamilyUnityLiability() {
                     The Guilt–Relief–Resentment Cycle
                   </Button>
                 </Link>
-                <Link to="/family-education">
+                <Link to="/family-education#worksheet-enabling-decision-tree">
                   <Button variant="outline" size="sm" className="gap-2">
                     <FileText className="h-3 w-3" />
                     Is This Help or Enabling? Decision Tree
@@ -527,7 +506,7 @@ export default function FamilyUnityLiability() {
             </CardContent>
           </Card>
 
-          <div className="text-center">
+          <div className="text-center print:hidden">
             <Link to="/family-education">
               <Button variant="outline" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />

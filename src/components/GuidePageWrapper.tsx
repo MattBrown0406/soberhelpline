@@ -17,7 +17,7 @@ interface GuidePageWrapperProps {
 }
 
 export const GuidePageWrapper = ({ guideName, guidePath, children }: GuidePageWrapperProps) => {
-  useGuideTracking(guideName, guidePath);
+  useGuideTracking(guidePath, guideName);
 
   // Pick 3 related guides from same category, deterministically based on path
   const relatedGuides = useMemo(() => {

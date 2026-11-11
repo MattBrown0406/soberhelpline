@@ -1,24 +1,21 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, MessageSquare, Check, X, Printer } from "lucide-react";
+import { ArrowLeft, Check, X, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import logo from "@/assets/logo.png";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { Loader2, Lock } from "lucide-react";
-import { CardDescription } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox, { type SafetyTopic } from "@/components/SafetyBox";
 
 interface CommunicationSection {
   title: string;
   whatToSay: string[];
   whatNotToSay: string[];
   whyItWorks: string;
+  /** Safety note shown at the end of this section. */
+  safety?: { topics: SafetyTopic[]; title: string };
 }
 
 const communicationSections: CommunicationSection[] = [
@@ -93,6 +90,7 @@ const communicationSections: CommunicationSection[] = [
       "I can't handle this again.",
     ],
     whyItWorks: "Relapse requires structure and honesty—not emotional punishment.",
+    safety: { topics: ["overdose"], title: "After a relapse" },
   },
   {
     title: "5. Boundary Pushback",
@@ -124,105 +122,9 @@ const languageEffects = [
 
 export default function CommunicationGuide() {
   useGuideTracking("/communication-guide", "What to Say / What Not to Say");
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasMembership, setHasMembership] = useState(false);
-
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const checkMembership = async () => {
-      if (!user) {
-        setHasMembership(false);
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from('provider_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('status', 'active')
-          .is('provider_submission_id', null)
-          .limit(1);
-
-        if (error) {
-          console.error('Error checking membership:', error);
-          setHasMembership(false);
-        } else {
-          setHasMembership(data && data.length > 0);
-        }
-      } catch (err) {
-        console.error('Membership check failed:', err);
-        setHasMembership(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkMembership();
-  }, [user]);
-
   const handlePrint = () => {
     window.print();
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!hasMembership) {
-    return (
-      <>
-        <Helmet>
-          <title>Communication Guide | Sober Helpline</title>
-        </Helmet>
-        <div className="min-h-screen bg-background">
-          <main className="container py-12">
-            <Card className="max-w-md mx-auto">
-              <CardHeader className="text-center">
-                <Lock className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                <CardTitle className="text-2xl">Members Only Content</CardTitle>
-                <CardDescription>
-                  This content is exclusive to family support members.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $9.99/month to access this communication guide.
-                </p>
-                <div className="flex flex-col gap-2">
-                  <Link to="/family-membership">
-                    <Button className="w-full">Become a Member</Button>
-                  </Link>
-                  <Link to="/family-support">
-                    <Button variant="outline" className="w-full">Back to Family Support</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </main>
-        </div>
-      </>
-    );
-  }
 
   return (
     <>
@@ -240,15 +142,16 @@ export default function CommunicationGuide() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Resources
+                Back to Family Education
               </Link>
-              <Button variant="outline" onClick={handlePrint} className="gap-2">
+              <Button variant="outline" size="sm" onClick={handlePrint} className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="What to Say / What Not to Say"
               subtitle="A practical communication library for families affected by addiction. Ready-to-use language that lowers defensiveness and supports accountability."
               clinicalNote="Based on Motivational Interviewing (Miller & Rollnick), CRAFT communication strategies, and Al-Anon's principles of loving detachment."
@@ -358,6 +261,10 @@ export default function CommunicationGuide() {
                       <span className="text-muted-foreground">{section.whyItWorks}</span>
                     </p>
                   </div>
+
+                  {section.safety && (
+                    <SafetyBox topics={section.safety.topics} title={section.safety.title} className="mb-0" />
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -461,7 +368,7 @@ export default function CommunicationGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/family-education">
+                  <Link to="/boundary-setting-worksheet">
                     <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
                   </Link>
                   <Link to="/emotional-regulation">
@@ -473,7 +380,7 @@ export default function CommunicationGuide() {
                   <Link to="/family-action-plan">
                     <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/family-education#worksheet-enabling-decision-tree">
                     <Button variant="outline" size="sm">"Is This Help or Enabling?" Decision Tree</Button>
                   </Link>
                 </div>

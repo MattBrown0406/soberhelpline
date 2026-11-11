@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
   ArrowLeft, 
+  Printer,
   Heart, 
   AlertTriangle, 
   Scale, 
@@ -21,6 +22,7 @@ import {
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 const WhyChangeDoesntHappen = () => {
   useGuideTracking("/why-change-doesnt-happen", "Why Change Doesn't Happen When Families Try Harder");
@@ -32,12 +34,19 @@ const WhyChangeDoesntHappen = () => {
       </Helmet>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-education" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Family Resources
-        </Link>
+        <div className="flex items-center justify-between gap-3 mb-6 print:hidden">
+          <Link to="/family-education" className="inline-flex items-center text-primary hover:text-primary/80">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Family Education
+          </Link>
+          <Button onClick={() => window.print()} variant="outline" size="sm" className="gap-2">
+            <Printer className="h-4 w-4" />
+            Print
+          </Button>
+        </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="Why Change Doesn't Happen When Families Try Harder"
           subtitle="Understanding what actually drives recovery. Effort, love, and sacrifice — while admirable — are not what create lasting change in addiction."
           clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) research and the Johnson Institute's family intervention model."
@@ -305,6 +314,11 @@ const WhyChangeDoesntHappen = () => {
               </div>
             </div>
 
+            <SafetyBox
+              topics={["emergency", "suicide", "overdose"]}
+              title="Natural consequences never include these"
+            />
+
             <p className="text-muted-foreground mb-4">
               This shift often feels terrifying at first—because families are used to being the safety net.
             </p>
@@ -422,15 +436,15 @@ const WhyChangeDoesntHappen = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">Suggested Companion Resources</h2>
             
             <div className="grid sm:grid-cols-2 gap-3">
-              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/family-education#worksheet-guilt-responsibility" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <FileText className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Guilt vs. Responsibility Deep-Dive Module</span>
               </Link>
-              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/family-education#worksheet-enabling-decision-tree" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <GitBranch className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Helping vs. Enabling Decision Tree</span>
               </Link>
-              <Link to="/family-education" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/boundary-setting-worksheet" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <ClipboardList className="h-5 w-5 text-primary" />
                 <span className="text-foreground">Boundary Setting Worksheet</span>
               </Link>
@@ -446,16 +460,17 @@ const WhyChangeDoesntHappen = () => {
           </CardContent>
         </Card>
 
-        <div className="flex justify-center">
+        <RelatedResources currentPath="/why-change-doesnt-happen" />
+
+        <div className="flex justify-center print:hidden">
           <Button asChild>
             <Link to="/family-education">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Family Resources
+              Back to Family Education
             </Link>
           </Button>
         </div>
       </div>
-      <RelatedResources currentPath="/why-change-doesnt-happen" />
     </div>
   );
 };

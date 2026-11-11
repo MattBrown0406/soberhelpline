@@ -40,6 +40,7 @@ const DiseaseChoiceRealityMap = () => {
         </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="The Disease vs. Choice Reality Map"
           subtitle="Understanding where addiction limits choice — and where responsibility still exists. This guide helps families move past the binary debate and into actionable clarity."
           clinicalNote="Informed by ASAM's definition of addiction, NIDA's brain disease model, and the biopsychosocial framework used in modern addiction medicine."
@@ -310,13 +311,13 @@ const DiseaseChoiceRealityMap = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#enabling-decision-tree" className="text-primary hover:underline">
-                  Enabling vs. Helping Decision Tree
+                <Link to="/workbook/helping-or-enabling" className="text-primary hover:underline">
+                  Helping or Enabling? (Workbook exercise)
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#boundary-worksheet" className="text-primary hover:underline">
-                  Boundary-Setting Worksheet
+                <Link to="/workbook/boundary-script" className="text-primary hover:underline">
+                  Boundary Script (Workbook exercise)
                 </Link>
               </li>
             </ul>
@@ -331,10 +332,10 @@ const DiseaseChoiceRealityMap = () => {
             </Button>
           </Link>
         </div>
+
+        <RelatedResources currentPath="/disease-choice-reality-map" />
       </div>
-    
-          <RelatedResources currentPath="/disease-choice-reality-map" />
-</Layout>
+    </Layout>
   );
 };
 

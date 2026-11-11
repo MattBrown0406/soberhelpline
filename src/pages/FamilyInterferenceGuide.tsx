@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, Download, Heart, Shield, AlertTriangle, HelpCircle, Scale, Brain, Users } from "lucide-react";
+import { Phone, ArrowLeft, FileText, Printer, Heart, Shield, AlertTriangle, HelpCircle, Scale, Brain, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function FamilyInterferenceGuide() {
   useGuideTracking("/family-interference", "How Families Accidentally Interfere with Recovery");
@@ -34,12 +34,13 @@ export default function FamilyInterferenceGuide() {
                 Back to Family Education
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
-                <Download className="h-4 w-4" />
-                Print Guide
+                <Printer className="h-4 w-4" />
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="How Families Accidentally Interfere with Recovery"
               subtitle="When love, fear, and urgency work against change. Understanding interference patterns is the first step to supporting recovery instead of undermining it."
               clinicalNote="Based on CRAFT research, family interference patterns identified in clinical addiction treatment, and the concept of 'helping that hurts' from Al-Anon literature."
@@ -93,16 +94,14 @@ export default function FamilyInterferenceGuide() {
             {/* Seven Ways Families Interfere */}
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-logo-blue mb-4">How Interference Happens</h2>
-              <Accordion type="single" collapsible className="space-y-2">
+              <div className="space-y-4">
                 {/* 1. Over-Functioning */}
-                <AccordionItem value="over-functioning" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
                       <span className="font-semibold text-left">Over-Functioning: Doing What the Person Should Be Doing</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -135,18 +134,16 @@ export default function FamilyInterferenceGuide() {
                       Recovery requires responsibility.<br />
                       Over-functioning quietly removes it.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* 2. Emotional Rescuing */}
-                <AccordionItem value="emotional-rescuing" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-pink-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-pink-600 text-white flex items-center justify-center text-xs font-bold">2</span>
                       <span className="font-semibold text-left">Emotional Rescuing</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -178,18 +175,21 @@ export default function FamilyInterferenceGuide() {
                       Discomfort is not harm.<br />
                       Avoiding all discomfort blocks change.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                    <SafetyBox
+                      topics={["emergency", "suicide"]}
+                      title="Discomfort is not harm. Danger is different."
+                      className="mb-0"
+                    />
+                  </div>
+                </section>
 
                 {/* 3. Inconsistent Boundaries */}
-                <AccordionItem value="inconsistent-boundaries" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs font-bold">3</span>
                       <span className="font-semibold text-left">Inconsistent Boundaries</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -221,18 +221,16 @@ export default function FamilyInterferenceGuide() {
                     <p className="font-semibold text-foreground bg-orange-50 dark:bg-orange-950/30 p-3 rounded-lg">
                       Consistency—not intensity—creates change.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* 4. Confusing Insight with Readiness */}
-                <AccordionItem value="insight-readiness" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">4</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">4</span>
                       <span className="font-semibold text-left">Confusing Insight with Readiness</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -263,18 +261,16 @@ export default function FamilyInterferenceGuide() {
                     <p className="font-semibold text-foreground bg-purple-50 dark:bg-purple-950/30 p-3 rounded-lg">
                       Insight is awareness—not ability.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* 5. Shielding from Consequences */}
-                <AccordionItem value="shielding" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">5</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">5</span>
                       <span className="font-semibold text-left">Shielding from Consequences</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -305,18 +301,16 @@ export default function FamilyInterferenceGuide() {
                     <p className="font-semibold text-foreground bg-red-50 dark:bg-red-950/30 p-3 rounded-lg">
                       Consequences are information—not punishment.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* 6. Focusing on Mental Health to Avoid Addiction */}
-                <AccordionItem value="mental-health-focus" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">6</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">6</span>
                       <span className="font-semibold text-left">Focusing on Mental Health to Avoid Addiction</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -347,18 +341,16 @@ export default function FamilyInterferenceGuide() {
                     <p className="font-semibold text-foreground bg-teal-50 dark:bg-teal-950/30 p-3 rounded-lg">
                       Addressing addiction first often protects mental health, not harms it.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </section>
 
                 {/* 7. Carrying the Entire Recovery Process */}
-                <AccordionItem value="carrying-recovery" className="border rounded-lg px-4">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">7</span>
+                <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
+                  <h3 className="flex items-center gap-3 text-lg">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">7</span>
                       <span className="font-semibold text-left">Carrying the Entire Recovery Process</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-4 pt-2">
+                  </h3>
+                  <div className="space-y-4 pt-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">What It Looks Like</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
@@ -390,9 +382,9 @@ export default function FamilyInterferenceGuide() {
                     <p className="font-semibold text-foreground bg-indigo-50 dark:bg-indigo-950/30 p-3 rounded-lg">
                       Families are not meant to be treatment centers.
                     </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                  </div>
+                </section>
+              </div>
             </div>
 
             {/* What Actually Helps */}
@@ -426,26 +418,6 @@ export default function FamilyInterferenceGuide() {
                 <p className="text-foreground font-medium">
                   Doing less, more consistently, is often more effective than doing more emotionally.
                 </p>
-              </CardContent>
-            </Card>
-
-            {/* Questions */}
-            <Card className="mb-8 border-indigo-500/30 bg-indigo-50/50 dark:bg-indigo-950/20">
-              <CardHeader>
-                <CardTitle className="text-indigo-700 dark:text-indigo-400 flex items-center gap-2">
-                  <HelpCircle className="h-5 w-5" />
-                  Questions Families Can Ask Themselves
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                  <li>Am I preventing discomfort—or preventing harm?</li>
-                  <li>Does my response increase responsibility or remove it?</li>
-                  <li>Would I do this if substances weren't involved?</li>
-                  <li>Is this sustainable for me?</li>
-                  <li>Does this protect recovery—or protect addiction?</li>
-                </ul>
-                <p className="text-foreground font-medium mt-4">Clarity begins with these questions.</p>
               </CardContent>
             </Card>
 
@@ -483,25 +455,25 @@ export default function FamilyInterferenceGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/family-education">
+                  <Link to="/enabling-self-assessment">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
                       Enabling Self-Assessment
                     </Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/boundary-setting-worksheet">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
                       Boundary Setting Worksheet
                     </Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/family-education#worksheet-guilt-responsibility">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
                       Guilt vs. Responsibility Module
                     </Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/family-education#trauma-assessment">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
                       Family Trauma & Hypervigilance Assessment

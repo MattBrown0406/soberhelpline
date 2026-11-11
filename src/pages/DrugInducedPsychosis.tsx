@@ -6,6 +6,7 @@ import logo from '@/assets/logo.png';
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 const DrugInducedPsychosis = () => {
   useGuideTracking("/drug-induced-psychosis", "Understanding Drug-Induced Psychosis");
@@ -25,7 +26,7 @@ const DrugInducedPsychosis = () => {
         <div className="flex items-center justify-between mb-8 print:hidden">
           <Link to="/family-education" className="flex items-center gap-2 text-primary hover:underline">
             <ArrowLeft className="h-4 w-4" />
-            Back to Family Resources
+            Back to Family Education
           </Link>
           <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
             <Printer className="h-4 w-4" />
@@ -36,11 +37,13 @@ const DrugInducedPsychosis = () => {
         {/* Printable Content */}
         <div className="print:text-black print:bg-white">
           <ToolBrandHeader
+            headingAs="h1"
             title="Understanding Drug-Induced Psychosis"
             subtitle="What families need to know — and how to tell the difference between THC and methamphetamine psychosis. Early recognition can save lives."
             clinicalNote="Based on DSM-5 criteria for Substance/Medication-Induced Psychotic Disorder and emergency psychiatric guidelines from SAMHSA."
           />
 
+          <SafetyBox topics={["emergency", "suicide", "withdrawal", "violence"]} title="If this is happening right now" />
 
           {/* Purpose Section */}
           <section className="mb-8">
@@ -470,9 +473,9 @@ const DrugInducedPsychosis = () => {
             </p>
           </footer>
         </div>
-      
-          <RelatedResources currentPath="/drug-induced-psychosis" />
-</main>
+
+        <RelatedResources currentPath="/drug-induced-psychosis" />
+      </main>
     </div>
   );
 };

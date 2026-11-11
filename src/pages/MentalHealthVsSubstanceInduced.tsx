@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 const MentalHealthVsSubstanceInduced = () => {
   useGuideTracking("/mental-health-vs-substance-induced", "Mental Health vs. Substance-Induced Symptoms");
@@ -40,11 +41,13 @@ const MentalHealthVsSubstanceInduced = () => {
         </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="Mental Health vs. Substance-Induced Symptoms"
           subtitle="How to tell the difference — and why it matters. This guide helps families navigate confusing diagnostic territory with clarity."
           clinicalNote="Based on DSM-5 differential diagnosis criteria and ASAM guidelines for co-occurring disorder assessment."
         />
 
+        <SafetyBox topics={["suicide", "emergency"]} />
 
         {/* Why Families Need This Guide */}
         <Card className="mb-6">
@@ -487,10 +490,10 @@ const MentalHealthVsSubstanceInduced = () => {
             </Button>
           </Link>
         </div>
+
+        <RelatedResources currentPath="/mental-health-vs-substance-induced" />
       </div>
-    
-          <RelatedResources currentPath="/mental-health-vs-substance-induced" />
-</Layout>
+    </Layout>
   );
 };
 
