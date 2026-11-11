@@ -209,7 +209,7 @@ export default function Workbook() {
                           ) : (
                             <OutputView output={entry.output} hideTitle tone={tone} />
                           )}
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2 print:hidden">
                             {prev && (
                               <Button
                                 type="button"
