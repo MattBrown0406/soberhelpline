@@ -272,7 +272,7 @@ export default function CommunicationGuide() {
               headingAs="h1"
               title="What to Say / What Not to Say"
               subtitle="A practical communication library for families affected by addiction. Ready-to-use language that lowers defensiveness and supports accountability."
-              clinicalNote="Based on Motivational Interviewing (Miller & Rollnick), CRAFT communication strategies, and Al-Anon's principles of loving detachment."
+              clinicalNote="Draws on Al-Anon's principles of loving detachment and the communication skills taught to families in addiction treatment: short, calm, specific statements."
             />
 
 

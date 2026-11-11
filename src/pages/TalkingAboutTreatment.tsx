@@ -43,7 +43,7 @@ export default function TalkingAboutTreatment() {
               headingAs="h1"
               title="How to Talk to Your Loved One About Treatment"
               subtitle="A calm, clear, and effective approach to discussing treatment. Communicate without enabling, negotiating, or threatening."
-              clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) and Motivational Interviewing principles for engaging resistant individuals."
+              clinicalNote="Based on how interventionists and family coaches prepare families to raise treatment: plan the conversation, stay calm, be specific, and have a next step ready."
             />
 
             <SafetyBox

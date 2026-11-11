@@ -519,6 +519,9 @@ and needs the new version to be there.
 - `send-member-zoom-reminder` (one link changed)
 - `zoom-webhook` (after-meeting thread only)
 - `send-free-membership-email` (wording only: it no longer mentions tools that were removed)
+- `send-attendee-followup`, `send-apology-reregistration`, `send-price-increase-outreach` (wording only, one
+  or two lines each: the list of member benefits no longer mentions tools that were removed; nothing about
+  who they send to or when has changed)
 
 Please do not change or redeploy any other function, and do not touch the
 Monday registration functions.

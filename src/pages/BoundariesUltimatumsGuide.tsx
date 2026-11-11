@@ -41,7 +41,7 @@ export default function BoundariesUltimatumsGuide() {
               headingAs="h1"
               title="Requests, Demands, Ultimatums & Boundaries"
               subtitle="Advanced application for families impacted by addiction. Learn when and how to use each tool effectively — and why most families confuse them."
-              clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) principles and clinical boundary-setting frameworks used in family systems therapy."
+              clinicalNote="Based on clinical boundary-setting frameworks used in family systems therapy."
             />
 
             <SafetyBox

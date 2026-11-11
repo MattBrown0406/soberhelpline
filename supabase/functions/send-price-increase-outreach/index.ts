@@ -67,7 +67,7 @@ function buildHtml(safeName: string): string {
 
       <p style="font-size: 15px; font-weight: bold; color: #1f2937;">What's included in membership:</p>
       <ul style="color: #374151; font-size: 14px; line-height: 1.8;">
-        <li>Full access to the <strong>member section</strong> of the site — education guides, AI tools, interactive worksheets, and more</li>
+        <li>Full access to the <strong>member section</strong> of the site — education guides, guided exercises, interactive worksheets, and more</li>
         <li><strong>$25 discount</strong> on every coaching session ($125 instead of $150)</li>
         <li>Access to the <strong>private family forum</strong> — connect with other families going through the same thing</li>
         <li>Join <strong>“The Family Squares”s</strong> without needing to register — just log in and join</li>

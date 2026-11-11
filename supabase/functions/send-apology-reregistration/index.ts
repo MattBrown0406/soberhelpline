@@ -58,9 +58,9 @@ function buildApologyTrialEmail(firstName: string, email: string): string {
     <h3 style="color:#166534;margin-top:0;">What You Get Access To:</h3>
     <ul style="color:#374151;font-size:14px;line-height:2;padding-left:20px;">
       <li><strong>📅 Free "The Family Squares" Support Calls</strong> — Weekly live group support</li>
-      <li><strong>📚 60+ Family Education Guides</strong> — Boundaries, enabling, communication & more</li>
+      <li><strong>📚 Family Education Library</strong> — Boundaries, enabling, communication & more</li>
       <li><strong>🛠️ Interactive Worksheets & Assessments</strong> — Boundary-setting, enabling audits, readiness assessments</li>
-      <li><strong>🤖 AI-Powered Support Tools</strong> — Boundary Coach, Treatment Navigator, Life Coach (24/7)</li>
+      <li><strong>📝 My Workbook</strong> — Short guided exercises that save what you write</li>
       <li><strong>💬 Private Family Support Forum</strong> — A safe, moderated community</li>
       <li><strong>🎥 Zoom Meeting Recordings</strong> — Watch past sessions on your schedule</li>
       <li><strong>📋 On-Demand Coaching</strong> — Book 1-on-1 sessions with recovery coaches</li>

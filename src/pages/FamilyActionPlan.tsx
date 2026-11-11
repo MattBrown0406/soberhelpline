@@ -145,7 +145,7 @@ export default function FamilyActionPlan() {
       <ToolShell
         title="Family Recovery Action Plan"
         summary="A practical roadmap for stability, boundaries, and healing. Build a unified family plan that holds up under pressure, then come back and update it as things change."
-        note="Structured around CRAFT principles, family systems theory, and evidence-based recovery planning frameworks."
+        note="Structured around family systems theory and the recovery planning used in family coaching."
         kind="Living plan"
         minutes={25}
         saved={saved}

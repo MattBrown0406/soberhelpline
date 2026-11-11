@@ -49,7 +49,7 @@ const WhyChangeDoesntHappen = () => {
           headingAs="h1"
           title="Why Change Doesn't Happen When Families Try Harder"
           subtitle="Understanding what actually drives recovery. Effort, love, and sacrifice — while admirable — are not what create lasting change in addiction."
-          clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) research and the Johnson Institute's family intervention model."
+          clinicalNote="Based on the Johnson Institute's family intervention model and family systems theory."
         />
 
 

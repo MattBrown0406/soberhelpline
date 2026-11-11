@@ -39,7 +39,7 @@ export default function NoNegotiationGuide() {
               headingAs="h1"
               title="We Don't Negotiate with Terrorists"
               subtitle="Why negotiating with active addiction makes things worse — and what families can do instead to protect themselves while supporting recovery."
-              clinicalNote="Grounded in CRAFT research and addiction medicine principles. Addiction hijacks the brain's reward system, making negotiation with the disease ineffective."
+              clinicalNote="Grounded in addiction medicine principles. Addiction hijacks the brain's reward system, making negotiation with the disease ineffective."
             />
 
             <SafetyBox

@@ -43,7 +43,7 @@ export default function FamilyInterferenceGuide() {
               headingAs="h1"
               title="How Families Accidentally Interfere with Recovery"
               subtitle="When love, fear, and urgency work against change. Understanding interference patterns is the first step to supporting recovery instead of undermining it."
-              clinicalNote="Based on CRAFT research, family interference patterns identified in clinical addiction treatment, and the concept of 'helping that hurts' from Al-Anon literature."
+              clinicalNote="Based on family interference patterns identified in clinical addiction treatment and the concept of 'helping that hurts' from Al-Anon literature."
             />
 
 

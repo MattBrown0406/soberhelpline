@@ -371,28 +371,34 @@ export default function TreatmentModalities() {
                   <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">What It Is</h4>
-                      <p className="text-muted-foreground">Use of medication to reduce cravings or withdrawal (e.g., buprenorphine, naltrexone).</p>
+                      <p className="text-muted-foreground">
+                        Prescribed medication that reduces cravings and withdrawal and lowers the risk of overdose. For opioids: buprenorphine
+                        (Suboxone), methadone, or naltrexone (Vivitrol). For alcohol: naltrexone, acamprosate, or disulfiram.
+                      </p>
                     </div>
                     <div>
                       <h4 className="font-semibold text-green-700 dark:text-green-400 mb-1">What It Helps With</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
                         <li>Reducing cravings</li>
-                        <li>Preventing overdose</li>
+                        <li>Preventing overdose (for opioid addiction it has the strongest evidence of any treatment for keeping people alive)</li>
                         <li>Stabilizing brain chemistry</li>
+                        <li>Staying in treatment long enough for other work to take hold</li>
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-red-700 dark:text-red-400 mb-1">What It Doesn't Do Well</h4>
+                      <h4 className="font-semibold text-red-700 dark:text-red-400 mb-1">What It Doesn't Do by Itself</h4>
                       <ul className="list-disc list-inside text-muted-foreground ml-2">
                         <li>Address behavior patterns</li>
                         <li>Build coping skills</li>
-                        <li>Replace therapy or structure</li>
+                        <li>Rebuild routines, relationships, or trust</li>
                       </ul>
                     </div>
                     <div className="bg-teal-50 dark:bg-teal-950/30 p-3 rounded-lg">
                       <p className="font-medium text-teal-700 dark:text-teal-400">
                         <Clock className="h-4 w-4 inline mr-1" />
-                        Best Used When: Combined with counseling, accountability, and recovery supports.
+                        Best Used When: Started early and continued for as long as the prescriber and your loved one find it helps. It works best
+                        alongside counseling, accountability, and recovery supports, but it is treatment in its own right: it should not be withheld or
+                        stopped because someone is not in counseling, and being on it is not "still using."
                       </p>
                     </div>
                   </div>

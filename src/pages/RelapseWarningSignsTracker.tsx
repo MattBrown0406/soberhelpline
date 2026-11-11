@@ -141,10 +141,16 @@ interface Level {
 const LEVELS: Level[] = [
   {
     id: "low",
-    name: "Low",
-    heading: "0-5 Signs: Low Concern",
-    guidance: null,
-    next: "Continue monitoring. These may be normal stress responses. Focus on maintaining healthy communication and your own wellbeing.",
+    name: "Lower",
+    heading: "0-5 Signs: Lower Concern",
+    guidance: (
+      <>
+        <strong>Lower concern:</strong> a few signs can be ordinary stress, but which signs you ticked matters more than
+        how many. Anything about planning to use, being around the substance again, or hopelessness deserves a
+        conversation with a professional now.
+      </>
+    ),
+    next: "Keep watching. A few signs can be ordinary stress, but which signs you ticked matters more than how many. If any of them is about planning to use, being around the substance again, or hopelessness, treat it seriously and talk to a professional now. Focus on maintaining healthy communication and your own wellbeing.",
     actions: [
       "Continue open communication with your loved one",
       "Encourage recovery meetings and support groups",

@@ -96,7 +96,7 @@ export default function CrisisChaos() {
                   </li>
                 </ul>
                 <p className="text-sm text-muted-foreground p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                  <strong>If possible, take a 10–30 minute pause before responding.</strong> Urgency is often used—consciously or unconsciously—to bypass boundaries.
+                  <strong>If no one is in immediate danger, take a 10–30 minute pause before responding.</strong> Urgency is often used—consciously or unconsciously—to bypass boundaries.
                 </p>
               </section>
 
@@ -118,7 +118,7 @@ export default function CrisisChaos() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-destructive font-bold">•</span>
-                      Credible threats of self-harm or harm to others
+                      Any threat of self-harm or harm to others (you do not have to decide whether they mean it)
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-destructive font-bold">•</span>
@@ -142,7 +142,7 @@ export default function CrisisChaos() {
                 <div className="p-4 border-2 border-primary/30 rounded-lg bg-primary/5 print:bg-gray-50">
                   <h3 className="font-semibold mb-3">Appropriate Responses to Crisis</h3>
                   <ul className="space-y-1 text-sm">
-                    <li>• Call emergency services when needed</li>
+                    <li>• Call 911 when anyone is in danger; call or text 988 for any talk of suicide</li>
                     <li>• Involve medical or psychiatric professionals</li>
                     <li>• Prioritize safety over comfort</li>
                     <li>• Follow established emergency protocols</li>
@@ -165,12 +165,12 @@ export default function CrisisChaos() {
                 <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                   <h3 className="font-semibold mb-3">Common Chaos Situations</h3>
                   <ul className="space-y-2 text-sm">
-                    <li>• Emotional distress, panic, or intoxicated phone calls</li>
+                    <li>• Emotional distress, panic, or upset phone calls (if they sound slurred, are nodding off, or can't stay awake, treat it as a possible overdose and call 911)</li>
                     <li>• Being kicked out of housing due to substance use</li>
                     <li>• Financial emergencies caused by ongoing use</li>
                     <li>• Missed work, school, or responsibilities</li>
                     <li>• Relationship conflict or emotional manipulation</li>
-                    <li>• Threats that appear dramatic but lack immediacy or credibility</li>
+                    <li>• Angry statements meant to pressure you ("you'll be sorry", "I'll never speak to you again"). A threat of suicide or violence is never in this list: treat it as a crisis.</li>
                     <li>• Requests for money, rides, or shelter during active use</li>
                   </ul>
                   <p className="mt-4 font-medium text-primary">

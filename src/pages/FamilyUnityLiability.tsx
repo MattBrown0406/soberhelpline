@@ -40,7 +40,7 @@ export default function FamilyUnityLiability() {
             headingAs="h1"
             title="When Family Unity (or the Lack of It) Becomes a Liability"
             subtitle="How togetherness and division can both undermine recovery — and what actually helps. Functional alignment, not forced agreement, is the goal."
-            clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) alignment principles and family systems research on differentiation vs. enmeshment."
+            clinicalNote="Based on family systems research on differentiation vs. enmeshment."
           />
 
 

@@ -39,7 +39,7 @@ export default function WhatChangesWhenFamiliesChange() {
               headingAs="h1"
               title="What Changes When Families Change"
               subtitle="How family change creates system change — even if the addicted person doesn't change immediately. Your recovery matters regardless of theirs."
-              clinicalNote="Grounded in Bowen Family Systems Theory and CRAFT research showing that family behavior changes can positively influence treatment engagement rates by up to 64%."
+              clinicalNote="Grounded in Bowen Family Systems Theory: when one part of a family system changes, the rest of the system has to adjust."
             />
 
             {/* Why This Guide Matters */}

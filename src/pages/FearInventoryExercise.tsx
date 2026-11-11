@@ -37,7 +37,7 @@ const commonFears: Fear[] = [
     category: "Setting Boundaries",
     fear: "They'll overdose or die if I stop helping.",
     reality:
-      "Continuing to shield someone from consequences often prolongs addiction. Recovery frequently begins when natural consequences are felt.",
+      "This fear is not irrational: overdose is a real risk, whether you help or not. Shielding someone from consequences often prolongs addiction, but stepping back never means ignoring danger. Keep naloxone (Narcan) where you can reach it, learn the signs of an overdose, and call 911 the moment you see them. You can stop paying for or covering up the addiction and still act immediately in an emergency.",
   },
   {
     id: "b3",
