@@ -480,8 +480,8 @@ export default function WhatChangesWhenFamiliesChange() {
             </Card>
 
             <SafetyBox
-              topics={["overdose", "suicide"]}
-              title="If your fear is that they could die"
+              topics={["overdose", "suicide", "violence"]}
+              title="If your fear is that they could die, or that you could be hurt"
               className="mb-8"
             />
 

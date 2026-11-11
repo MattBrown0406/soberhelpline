@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,6 +45,11 @@ const DiseaseChoiceRealityMap = () => {
           title="The Disease vs. Choice Reality Map"
           subtitle="Understanding where addiction limits choice — and where responsibility still exists. This guide helps families move past the binary debate and into actionable clarity."
           clinicalNote="Informed by ASAM's definition of addiction, NIDA's brain disease model, and the biopsychosocial framework used in modern addiction medicine."
+        />
+
+        <SafetyBox
+          topics={["emergency", "overdose", "withdrawal", "medication"]}
+          title="Structure and consequences never replace emergency or medical care"
         />
 
 

@@ -520,7 +520,7 @@ export default function TreatmentRedFlags() {
             <h3 className="text-base font-semibold text-foreground">How Treatment Centers Are Funded</h3>
             <div className="mt-3 space-y-4">
               <div>
-                <h4 className="text-sm font-semibold text-foreground">1. Insurance-Based Programs</h4>
+                <h4 className="text-sm font-semibold text-foreground">Insurance-Based Programs</h4>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">These programs rely heavily on:</p>
                 <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
                   <li>Insurance authorizations</li>
@@ -540,7 +540,7 @@ export default function TreatmentRedFlags() {
                 </div>
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-foreground">2. Private-Pay Programs</h4>
+                <h4 className="text-sm font-semibold text-foreground">Private-Pay Programs</h4>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   These programs are funded directly by families or individuals.
                 </p>

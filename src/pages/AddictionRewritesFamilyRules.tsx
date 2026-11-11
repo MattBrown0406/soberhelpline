@@ -1,3 +1,4 @@
+import SafetyBox from "@/components/SafetyBox";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -293,7 +294,6 @@ const AddictionRewritesFamilyRules = () => {
           <Card className="mb-8 border-teal-200 bg-teal-50 print:border print:shadow-none">
             <CardContent className="p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Secrecy vs. Privacy (An Essential Distinction)</h2>
-              <p className="text-gray-700 mb-4">Before going further, this distinction matters:</p>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-white p-4 rounded-lg border border-teal-200">
                   <p className="font-semibold text-gray-900 mb-2">Privacy protects dignity and boundaries.</p>
@@ -407,6 +407,8 @@ const AddictionRewritesFamilyRules = () => {
               </ul>
             </CardContent>
           </Card>
+
+          <SafetyBox topics={["violence", "emergency"]} title="Before you change the rules at home" />
 
           {/* How Families Begin Rewriting the Rules */}
           <Card className="mb-8 border-green-200 print:border print:shadow-none">

@@ -330,14 +330,6 @@ const MentalHealthVsSubstanceInduced = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p>Families are often given diagnoses—formally or informally—that seem to explain everything:</p>
-            <ul className="space-y-1 ml-4 italic text-muted-foreground">
-              <li>"They're bipolar."</li>
-              <li>"They have borderline personality disorder."</li>
-              <li>"It's ADHD."</li>
-              <li>"It's trauma."</li>
-              <li>"They're antisocial."</li>
-            </ul>
             <p>
               Sometimes these diagnoses are accurate. Sometimes they are premature, incomplete, or substance-influenced.
             </p>
@@ -538,6 +530,7 @@ const MentalHealthVsSubstanceInduced = () => {
                 <li>Symptoms fluctuate unpredictably</li>
               </ul>
             </div>
+            <SafetyBox topics={["medication"]} title="About prescribed medication" className="mb-0" />
             <div className="bg-muted p-4 rounded-lg text-center">
               <p className="font-medium text-primary">
                 Treating mental health without addressing addiction is like treating pain while ignoring infection.

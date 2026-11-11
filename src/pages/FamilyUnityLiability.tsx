@@ -454,7 +454,7 @@ export default function FamilyUnityLiability() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-foreground mb-3">Why Intergenerational Enabling Feels So Right</h4>
+                <h4 className="font-semibold text-foreground mb-3">Why Enabling Feels So Right</h4>
                 <p className="text-muted-foreground mb-3">Breaking enabling often triggers:</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {["Guilt", "Shame", "Fear of rejection", "Fear of being \"the bad one\"", "Fear of family fracture"].map((item, index) => (

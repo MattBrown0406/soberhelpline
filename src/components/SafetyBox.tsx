@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 // this library assumes nobody is in immediate danger; this box says what to do
 // when that isn't true. Pick the topics that apply to the page.
 
-export type SafetyTopic = "emergency" | "suicide" | "overdose" | "withdrawal" | "violence";
+export type SafetyTopic = "emergency" | "suicide" | "overdose" | "withdrawal" | "violence" | "medication";
 
 const TOPIC_TEXT: Record<SafetyTopic, { lead: string; body: string }> = {
   emergency: {
@@ -24,6 +24,10 @@ const TOPIC_TEXT: Record<SafetyTopic, { lead: string; body: string }> = {
   withdrawal: {
     lead: "Stopping alcohol or benzodiazepines suddenly can be dangerous.",
     body: "Someone who drinks heavily every day, or takes benzodiazepines (Xanax, Klonopin, Ativan, Valium), can have seizures or life-threatening withdrawal if they stop all at once. They need medical help to stop. Confusion, shaking, or seeing things in the days after stopping is an emergency: call 911.",
+  },
+  medication: {
+    lead: "Never stop a prescribed medication without talking to the prescriber.",
+    body: "Stopping some medicines suddenly can be dangerous, including antidepressants, benzodiazepines, and medications prescribed for opioid or alcohol addiction. If you are worried about a medication, or how it mixes with drinking or drug use, tell the prescriber or a pharmacist.",
   },
   violence: {
     lead: "If you are afraid of them, your safety comes before any boundary.",

@@ -302,7 +302,7 @@ const TraumaVsExcuses = () => {
           </CardContent>
         </Card>
 
-        <SafetyBox topics={["violence", "emergency"]} title="If you are afraid of them" />
+        <SafetyBox topics={["violence", "suicide", "emergency"]} title="If you are afraid of them, or for them" />
 
         {/* What Boundaries Sound Like */}
         <Card className="mb-6">

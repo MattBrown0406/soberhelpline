@@ -170,7 +170,11 @@ export default function TreatmentModalities() {
               </CardContent>
             </Card>
 
-            <SafetyBox topics={["emergency", "withdrawal"]} title="Safety comes before any of these stages" className="mb-8" />
+            <SafetyBox
+              topics={["emergency", "withdrawal", "overdose", "medication"]}
+              title="Safety comes before any of these stages"
+              className="mb-8"
+            />
 
             {/* Treatment Modalities: all nine shown open so they can be read straight through and printed */}
             <div className="mb-8">
@@ -534,7 +538,7 @@ export default function TreatmentModalities() {
                     Only one or two are usually primary at a time.
                   </p>
                   <p className="text-muted-foreground">
-                    Answer honestly: <strong className="text-foreground">What is the primary problem right now?</strong>
+                    <strong className="text-foreground">What is the primary problem right now?</strong>
                   </p>
                 </div>
 
