@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "exercises": [
+    {
+      "id": "boundary-script",
+      "title": "Write one boundary you can hold",
+      "summary": "Leave with a boundary in your own words, how you'll follow through, and a calm line for when they push back.",
+      "minutes": 6,
+      "scored": false,
+      "basedOn": "BoundaryWorksheet"
+    },
+    {
+      "id": "helping-or-enabling",
+      "title": "Helping or enabling?",
+      "summary": "Before you say yes to a request, walk through it and leave with a clear answer and your next step.",
+      "minutes": 5,
+      "scored": false,
+      "basedOn": "EnablingDecisionTree"
+    },
+    {
+      "id": "guilt-check",
+      "title": "Guilt or responsibility?",
+      "summary": "Catch one guilt thought, sort what is and isn't yours to carry, and leave with a reframe.",
+      "minutes": 5,
+      "scored": false,
+      "basedOn": "GuiltResponsibilityWorksheet"
+    },
+    {
+      "id": "control-sort",
+      "title": "What I can and can't control",
+      "summary": "Sort what's weighing on you into two lists and pick one action for this week.",
+      "minutes": 5,
+      "scored": false,
+      "basedOn": "ControlWorksheet"
+    },
+    {
+      "id": "weekly-self-care",
+      "title": "This week's self-care plan",
+      "summary": "Three small, real commitments for this week, matched to whether you're in a crisis or a calmer stretch.",
+      "minutes": 4,
+      "scored": false,
+      "basedOn": "SelfCareWorksheet"
+    },
+    {
+      "id": "stress-check",
+      "title": "Nervous system check-in",
+      "summary": "Eight quick statements show how much stress your body is carrying. Retake monthly to see the change.",
+      "minutes": 3,
+      "scored": true,
+      "basedOn": "TraumaHypervigilanceAssessment"
+    },
+    {
+      "id": "hard-moment-practice",
+      "title": "Practice a hard moment",
+      "summary": "Pick a moment you dread and plan what you'll say, what you won't do, and who you'll call.",
+      "minutes": 6,
+      "scored": false,
+      "basedOn": "ScenarioWorksheet"
+    },
+    {
+      "id": "family-pulse",
+      "title": "Family pulse check",
+      "summary": "Eight statements about enabling patterns: your strengths and one place to focus. Retake monthly.",
+      "minutes": 4,
+      "scored": true,
+      "basedOn": "FamilySelfAssessment"
+    }
+  ]
+}

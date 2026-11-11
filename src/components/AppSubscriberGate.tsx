@@ -71,7 +71,8 @@ export default function AppSubscriberGate({
             <div className="rounded-md bg-muted p-3 text-center text-sm text-muted-foreground">
               <p>
                 Membership is included in Essential and Premier plans in the Sober Helpline app. If you have one, go
-                back to the app and tap the link to this page again.
+                back to the app and open this page from there again. The website will ask you to confirm your account
+                before it opens.
               </p>
             </div>
           ) : (
@@ -84,7 +85,9 @@ export default function AppSubscriberGate({
                     Become a member — $9.99/month
                   </Link>
                 </Button>
-                <p className="text-center text-xs text-muted-foreground">Start with a 7-day free trial. Cancel anytime.</p>
+                <p className="text-center text-xs text-muted-foreground">
+                  Includes a 7-day free trial. Cancel anytime from your billing page.
+                </p>
               </div>
 
               <Separator />
@@ -92,8 +95,8 @@ export default function AppSubscriberGate({
               <div className="space-y-2 text-center">
                 <p className="text-sm font-medium text-foreground">Use the Sober Helpline app?</p>
                 <p className="text-sm text-muted-foreground">
-                  Essential and Premier members in the app get access here too. Open the app and tap the link to this
-                  page — you'll be signed in automatically.
+                  Essential and Premier plans in the app include website membership. Open the website from inside the
+                  app, confirm it's your account when asked, and the member pages will open.
                 </p>
                 <Button asChild variant="ghost" className="w-full text-logo-blue">
                   <a href={SOBER_HELPLINE_APP_URL} target="_blank" rel="noopener noreferrer">

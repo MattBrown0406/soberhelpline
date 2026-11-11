@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
@@ -20,28 +20,34 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Loader2, AlertTriangle, UserX } from "lucide-react";
+import { MemberPicker } from "./MemberPicker";
+import type { ForumMemberMatch } from "@/lib/publicProfiles";
 
 interface ModeratorActionsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  members: Array<{
-    id: string;
-    username: string | null;
-    first_name: string;
-    last_name: string;
-  }>;
+  /** Prefill from a post ("Moderate" on a post). */
+  preset?: { member: ForumMemberMatch; postContent?: string } | null;
 }
 
-export function ModeratorActionsDialog({ 
-  open, 
-  onOpenChange, 
-  members 
-}: ModeratorActionsDialogProps) {
-  const [selectedMember, setSelectedMember] = useState("");
+/**
+ * Staff (admin/moderator) submit a warning or removal recommendation for admin
+ * review. Members are picked by username; from a post, the author is prefilled.
+ */
+export function ModeratorActionsDialog({ open, onOpenChange, preset }: ModeratorActionsDialogProps) {
+  const [member, setMember] = useState<ForumMemberMatch | null>(null);
   const [actionType, setActionType] = useState<"warning" | "removal_recommendation">("warning");
   const [reason, setReason] = useState("");
   const [postContent, setPostContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const selectedMember = member?.id ?? "";
+
+  useEffect(() => {
+    if (open) {
+      setMember(preset?.member ?? null);
+      setPostContent(preset?.postContent?.slice(0, 2000) ?? "");
+    }
+  }, [open, preset]);
 
   const handleSubmit = async () => {
     if (!selectedMember || !reason.trim()) {
@@ -77,7 +83,7 @@ export function ModeratorActionsDialog({
       );
       
       // Reset form
-      setSelectedMember("");
+      setMember(null);
       setActionType("warning");
       setReason("");
       setPostContent("");
@@ -91,7 +97,7 @@ export function ModeratorActionsDialog({
   };
 
   const handleClose = () => {
-    setSelectedMember("");
+    setMember(null);
     setActionType("warning");
     setReason("");
     setPostContent("");
@@ -141,19 +147,8 @@ export function ModeratorActionsDialog({
           </div>
 
           <div className="space-y-2">
-            <Label>Member</Label>
-            <Select value={selectedMember} onValueChange={setSelectedMember}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a member..." />
-              </SelectTrigger>
-              <SelectContent>
-                {members.map((member) => (
-                  <SelectItem key={member.id} value={member.id}>
-                    {member.username || `${member.first_name} ${member.last_name}`}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label htmlFor="moderate-member">Member</Label>
+            <MemberPicker id="moderate-member" value={member} onChange={setMember} />
           </div>
 
           <div className="space-y-2">

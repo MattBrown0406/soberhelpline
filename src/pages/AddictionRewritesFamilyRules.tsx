@@ -1,20 +1,20 @@
+import SafetyBox from "@/components/SafetyBox";
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Printer, Heart, Shield, AlertCircle, HelpCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, Printer, Heart, Shield, AlertCircle, CheckCircle, ArrowRight, BookOpen } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionRewritesFamilyRules = () => {
-  useGuideTracking("How Addiction Rewrites Family Rules", "/addiction-rewrites-family-rules");
+  useGuideTracking("/addiction-rewrites-family-rules", "How Addiction Rewrites Family Rules");
   const handlePrint = () => {
     window.print();
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
@@ -27,11 +27,12 @@ const AddictionRewritesFamilyRules = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="How Addiction Rewrites Family Rules"
             subtitle="The unspoken codes that keep families stuck — and how to change them. Every family has rules. Addiction rewrites them without anyone noticing."
             clinicalNote="Based on Murray Bowen's family systems theory and Claudia Black's research on unspoken family rules in addiction ('Don't talk, don't trust, don't feel')."
@@ -289,6 +290,36 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          {/* Secrecy vs. Privacy (from The Cost of Secrecy) */}
+          <Card className="mb-8 border-teal-200 bg-teal-50 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Secrecy vs. Privacy (An Essential Distinction)</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white p-4 rounded-lg border border-teal-200">
+                  <p className="font-semibold text-gray-900 mb-2">Privacy protects dignity and boundaries.</p>
+                  <p className="text-gray-700 text-sm mb-2">Privacy sounds like:</p>
+                  <ul className="text-gray-700 text-sm italic space-y-1">
+                    <li>"We share selectively."</li>
+                    <li>"We tell the truth with discretion."</li>
+                    <li>"We protect people's dignity."</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-red-200">
+                  <p className="font-semibold text-gray-900 mb-2">Secrecy protects dysfunction.</p>
+                  <p className="text-gray-700 text-sm mb-2">Secrecy sounds like:</p>
+                  <ul className="text-gray-700 text-sm italic space-y-1">
+                    <li>"We don't talk about it at all."</li>
+                    <li>"We pretend everything is fine."</li>
+                    <li>"No one outside the family can know."</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-teal-800 font-semibold text-center mt-4">
+                Privacy allows honesty. Secrecy requires silence.
+              </p>
+            </CardContent>
+          </Card>
+
           {/* Why These Rules Persist */}
           <Card className="mb-8 border-gray-300 bg-gray-50 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -377,6 +408,8 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          <SafetyBox topics={["violence", "emergency"]} title="Before you change the rules at home" />
+
           {/* How Families Begin Rewriting the Rules */}
           <Card className="mb-8 border-green-200 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -449,6 +482,67 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          {/* Reducing Secrecy Safely (from The Cost of Secrecy) */}
+          <Card className="mb-8 border-teal-200 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">How Families Can Begin Reducing Secrecy Safely</h2>
+
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">What Breaking Secrecy Does Not Mean</h3>
+                <p className="text-gray-700 mb-2">Breaking secrecy does not require:</p>
+                <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                  <li>• Public disclosure</li>
+                  <li>• Oversharing</li>
+                  <li>• Shaming anyone</li>
+                  <li>• Broadcasting private details</li>
+                  <li>• Confrontation without support</li>
+                </ul>
+                <p className="text-gray-800 font-medium mt-2 italic">
+                  Honesty can be measured, intentional, and contained.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Choose One Safe Outlet</h3>
+                  <p className="text-gray-700 mb-2">This could be:</p>
+                  <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                    <li>• A therapist</li>
+                    <li>• A support group</li>
+                    <li>• A trusted friend</li>
+                    <li>• A professional guide</li>
+                  </ul>
+                  <p className="text-teal-700 font-medium mt-2 italic">Secrecy loosens when truth has a place to land.</p>
+                </div>
+
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Speak Truth Without Over-Explaining</h3>
+                  <p className="text-gray-700 mb-2">Honesty does not require justification.</p>
+                  <div className="bg-white p-3 rounded border border-teal-200 mt-2">
+                    <p className="text-sm text-gray-600">Example:</p>
+                    <ul className="text-gray-700 italic space-y-1">
+                      <li>"We're dealing with addiction in our family."</li>
+                      <li>"Things are not okay right now."</li>
+                      <li>"We're getting support."</li>
+                    </ul>
+                  </div>
+                  <p className="text-teal-700 font-medium mt-2 italic">Simple truth is powerful.</p>
+                </div>
+
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Protect Children With Honesty—Not Silence</h3>
+                  <p className="text-gray-700 mb-2">Children need:</p>
+                  <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                    <li>• Reality explained in age-appropriate ways</li>
+                    <li>• Permission to ask questions</li>
+                    <li>• Reassurance without lies</li>
+                  </ul>
+                  <p className="text-teal-700 font-medium mt-2 italic">Silence creates fear. Truth creates safety.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Examples of Healthier Replacement Rules */}
           <Card className="mb-8 border-teal-200 bg-teal-50 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -477,38 +571,6 @@ const AddictionRewritesFamilyRules = () => {
                 <li className="flex items-start gap-2">
                   <ArrowRight className="h-5 w-5 text-teal-600 mt-0.5 flex-shrink-0" />
                   "Stability matters more than appearances."
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Reflection Questions */}
-          <Card className="mb-8 border-purple-200 print:border print:shadow-none">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-purple-600" />
-                Reflection Questions for Families
-              </h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What unspoken rules shaped our family?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Which rules protected us—and which harmed us?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Who benefited from these rules?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Who paid the price?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What new rule would improve safety and clarity right now?
                 </li>
               </ul>
             </CardContent>
@@ -572,6 +634,8 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          <RelatedResources currentPath="/addiction-rewrites-family-rules" />
+
           {/* Back Button */}
           <div className="text-center print:hidden">
             <Link to="/family-education">
@@ -583,9 +647,7 @@ const AddictionRewritesFamilyRules = () => {
           </div>
         </div>
       </div>
-    
-          <RelatedResources currentPath="/addiction-rewrites-family-rules" />
-</Layout>
+    </>
   );
 };
 

@@ -1,10 +1,16 @@
-import { useState, useRef, useCallback } from "react";
+import { useCallback, useRef, type ReactNode } from "react";
 import DOMPurify from "dompurify";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Bold, Italic, Link, List } from "lucide-react";
-import { extractMentions } from "./MentionInput";
+import { Bold, Italic, List } from "lucide-react";
+import { MentionSuggestionList, useMentionSuggestions } from "./MentionInput";
 
+/**
+ * Plain-text editor with a light markdown toolbar (**bold**, *italic*, bullet
+ * lines) and @mention autocomplete. Content is stored as plain text and
+ * rendered with parseRichText, which escapes everything and only emits
+ * <strong>, <em> and safe <a> tags (sanitised again with DOMPurify).
+ */
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -12,245 +18,90 @@ interface RichTextEditorProps {
   className?: string;
   disabled?: boolean;
   minHeight?: string;
+  maxLength?: number;
+  id?: string;
+  /** Hide the @mention hint (e.g. when posting anonymously). */
+  mentionsDisabled?: boolean;
+  "aria-label"?: string;
 }
 
-export function RichTextEditor({ 
-  value, 
-  onChange, 
-  placeholder, 
+export function RichTextEditor({
+  value,
+  onChange,
+  placeholder,
   className,
   disabled,
-  minHeight = "120px"
+  minHeight = "120px",
+  maxLength = 5000,
+  id,
+  mentionsDisabled,
+  "aria-label": ariaLabel,
 }: RichTextEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [suggestions, setSuggestions] = useState<Array<{id: string; username: string | null; first_name: string}>>([]);
-  const [mentionQuery, setMentionQuery] = useState("");
-  const [mentionStart, setMentionStart] = useState(-1);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const mention = useMentionSuggestions(value, onChange, textareaRef);
 
-  const wrapSelection = useCallback((before: string, after: string) => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
+  const wrapSelection = useCallback(
+    (before: string, after: string) => {
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = value.substring(start, end);
+      onChange(value.substring(0, start) + before + selected + after + value.substring(end));
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(start + before.length, end + before.length);
+      }, 0);
+    },
+    [value, onChange],
+  );
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = value.substring(start, end);
-    
-    const newValue = 
-      value.substring(0, start) + 
-      before + selectedText + after + 
-      value.substring(end);
-    
-    onChange(newValue);
-    
-    // Reset cursor position
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(
-        start + before.length, 
-        end + before.length
-      );
-    }, 0);
-  }, [value, onChange]);
-
-  const handleBold = () => wrapSelection('**', '**');
-  const handleItalic = () => wrapSelection('*', '*');
-  const handleLink = () => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-    
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = value.substring(start, end);
-    
-    if (selectedText) {
-      const newValue = 
-        value.substring(0, start) + 
-        `[${selectedText}](url)` + 
-        value.substring(end);
-      onChange(newValue);
-    } else {
-      const newValue = 
-        value.substring(0, start) + 
-        '[link text](url)' + 
-        value.substring(end);
-      onChange(newValue);
-    }
-  };
-  
   const handleList = () => {
     const textarea = textareaRef.current;
     if (!textarea) return;
-    
     const start = textarea.selectionStart;
-    const lineStart = value.lastIndexOf('\n', start - 1) + 1;
-    
-    const newValue = 
-      value.substring(0, lineStart) + 
-      '• ' + 
-      value.substring(lineStart);
-    
-    onChange(newValue);
-  };
-
-  const handleChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    const cursorPos = e.target.selectionStart;
-    
-    onChange(newValue);
-    
-    // Check for @ symbol for mentions
-    const textBeforeCursor = newValue.substring(0, cursorPos);
-    const atIndex = textBeforeCursor.lastIndexOf('@');
-    
-    if (atIndex !== -1) {
-      const textAfterAt = textBeforeCursor.substring(atIndex + 1);
-      if (!textAfterAt.includes(' ') && !textAfterAt.includes('\n')) {
-        setMentionStart(atIndex);
-        setMentionQuery(textAfterAt);
-        
-        // Fetch suggestions
-        if (textAfterAt.length >= 1) {
-          const { supabase } = await import("@/integrations/supabase/client");
-          const { data } = await supabase
-            .from('profiles')
-            .select('id, username, first_name')
-            .or(`username.ilike.%${textAfterAt}%,first_name.ilike.%${textAfterAt}%`)
-            .limit(5);
-          
-          if (data) {
-            setSuggestions(data);
-            setShowSuggestions(true);
-            setSelectedIndex(0);
-          }
-        }
-        return;
-      }
-    }
-    
-    setShowSuggestions(false);
-    setMentionQuery("");
-    setMentionStart(-1);
-  };
-
-  const insertMention = (user: {id: string; username: string | null; first_name: string}) => {
-    if (mentionStart === -1) return;
-    
-    const displayName = user.username || user.first_name;
-    const beforeMention = value.substring(0, mentionStart);
-    const afterMention = value.substring(mentionStart + mentionQuery.length + 1);
-    const newValue = `${beforeMention}@${displayName} ${afterMention}`;
-    
-    onChange(newValue);
-    setShowSuggestions(false);
-    setMentionQuery("");
-    setMentionStart(-1);
-    textareaRef.current?.focus();
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!showSuggestions || suggestions.length === 0) return;
-    
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setSelectedIndex(prev => (prev + 1) % suggestions.length);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setSelectedIndex(prev => (prev - 1 + suggestions.length) % suggestions.length);
-    } else if (e.key === 'Enter' && showSuggestions) {
-      e.preventDefault();
-      insertMention(suggestions[selectedIndex]);
-    } else if (e.key === 'Escape') {
-      setShowSuggestions(false);
-    }
+    const lineStart = value.lastIndexOf("\n", start - 1) + 1;
+    onChange(value.substring(0, lineStart) + "• " + value.substring(lineStart));
+    setTimeout(() => textarea.focus(), 0);
   };
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-1 p-1 border border-b-0 rounded-t-md bg-muted/30">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0"
-          onClick={handleBold}
-          disabled={disabled}
-          title="Bold"
-        >
+      <div className="flex items-center gap-1 rounded-t-xl border border-b-0 border-input bg-muted/40 p-1">
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={() => wrapSelection("**", "**")} disabled={disabled} title="Bold" aria-label="Bold">
           <Bold className="h-4 w-4" />
         </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0"
-          onClick={handleItalic}
-          disabled={disabled}
-          title="Italic"
-        >
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={() => wrapSelection("*", "*")} disabled={disabled} title="Italic" aria-label="Italic">
           <Italic className="h-4 w-4" />
         </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0"
-          onClick={handleLink}
-          disabled={disabled}
-          title="Link"
-        >
-          <Link className="h-4 w-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0"
-          onClick={handleList}
-          disabled={disabled}
-          title="List"
-        >
+        <Button type="button" variant="ghost" size="sm" className="h-11 w-11 rounded-lg p-0" onClick={handleList} disabled={disabled} title="Bullet point" aria-label="Bullet point">
           <List className="h-4 w-4" />
         </Button>
-        <span className="text-xs text-muted-foreground ml-2">
-          Use @username to mention someone
-        </span>
+        {!mentionsDisabled && (
+          <span className="ml-2 min-w-0 truncate text-xs text-slate-600 dark:text-slate-300">Type @ and a username to mention someone</span>
+        )}
       </div>
-      
+
       <Textarea
+        id={id}
         ref={textareaRef}
         value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
+        onChange={mention.handleChange}
+        onKeyDown={mention.handleKeyDown}
         placeholder={placeholder}
-        className={`rounded-t-none ${className}`}
+        className={`rounded-b-xl rounded-t-none text-base leading-relaxed ${className ?? ""}`}
         style={{ minHeight }}
         disabled={disabled}
+        maxLength={maxLength}
+        aria-label={ariaLabel}
       />
-      
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-50 mt-1 w-64 bg-popover border border-border rounded-md shadow-lg overflow-hidden">
-          {suggestions.map((user, index) => (
-            <button
-              key={user.id}
-              type="button"
-              className={`w-full px-3 py-2 text-left text-sm hover:bg-accent flex items-center gap-2 ${
-                index === selectedIndex ? 'bg-accent' : ''
-              }`}
-              onClick={() => insertMention(user)}
-            >
-              <span className="font-medium">
-                {user.username || user.first_name}
-              </span>
-              {user.username && (
-                <span className="text-muted-foreground text-xs">
-                  ({user.first_name})
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+
+      {!mentionsDisabled && (
+        <MentionSuggestionList
+          suggestions={mention.suggestions}
+          selectedIndex={mention.selectedIndex}
+          onPick={mention.insertMention}
+        />
       )}
     </div>
   );
@@ -267,59 +118,77 @@ function escapeHtml(input: string): string {
     .replace(/'/g, "&#039;");
 }
 
+function unescapeHtml(input: string): string {
+  return input
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
 // Only allow http(s) and mailto links — reject javascript:, data:, vbscript:, etc.
 function safeUrl(raw: string): string {
   const trimmed = raw.trim();
   try {
     const url = new URL(trimmed, "https://soberhelpline.com");
-    const allowed = ["http:", "https:", "mailto:"];
-    if (!allowed.includes(url.protocol)) return "#";
+    if (!["http:", "https:", "mailto:"].includes(url.protocol)) return "#";
     return url.toString();
   } catch {
     return "#";
   }
 }
 
-// Parse markdown-like syntax to React elements, sanitizing all HTML output.
-export function parseRichText(content: string): React.ReactNode {
-  // First handle mentions
-  const parts = content.split(/(@\w+)/g);
+function anchor(rawUrl: string, labelHtml: string): string {
+  const url = escapeHtml(safeUrl(unescapeHtml(rawUrl)));
+  return `<a href="${url}" target="_blank" rel="noopener noreferrer nofollow" class="text-primary underline break-words">${labelHtml}</a>`;
+}
 
+function renderSegment(part: string): string {
+  let html = escapeHtml(part);
+  const tokens: string[] = [];
+  const keep = (s: string) => {
+    tokens.push(s);
+    return `\u0000${tokens.length - 1}\u0000`;
+  };
+
+  // [label](url)
+  html = html.replace(/\[([^\]\n]+?)\]\(([^)\s]+?)\)/g, (_m, label: string, url: string) => keep(anchor(url, label)));
+  // Bare links
+  html = html.replace(/\bhttps?:\/\/(?:(?!&quot;|&#039;)[^\s<>])+/g, (match: string) => {
+    const trailing = /[.,;:!?)]+$/.exec(match)?.[0] ?? "";
+    const url = trailing ? match.slice(0, -trailing.length) : match;
+    return keep(anchor(url, url)) + trailing;
+  });
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/\*([^*\n]+?)\*/g, "<em>$1</em>");
+  // eslint-disable-next-line no-control-regex
+  html = html.replace(/\u0000(\d+)\u0000/g, (_m, i: string) => tokens[Number(i)] ?? "");
+
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ["strong", "em", "a", "br"],
+    ALLOWED_ATTR: ["href", "target", "rel", "class"],
+    ALLOWED_URI_REGEXP: /^(?:https?:|mailto:|#)/i,
+  });
+}
+
+// Parse markdown-like syntax to React elements, sanitizing all HTML output.
+export function parseRichText(content: string): ReactNode {
+  const parts = (content ?? "").split(/(@\w+)/g);
   return parts.map((part, index) => {
-    if (part.startsWith('@')) {
+    if (/^@\w+$/.test(part)) {
       return (
         <span key={index} className="text-primary font-medium">
           {part}
         </span>
       );
     }
-
-    // Escape raw HTML first — only our own markup is allowed
-    let html = escapeHtml(part);
-    // Handle bold
-    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    // Handle italic
-    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    // Handle links — validate URL protocol before emitting the anchor
-    html = html.replace(/\[(.+?)\]\((.+?)\)/g, (_m, label: string, rawUrl: string) => {
-      const decodedUrl = rawUrl
-        .replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, "'")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">");
-      const url = escapeHtml(safeUrl(decodedUrl));
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${label}</a>`;
-    });
-
-    const clean = DOMPurify.sanitize(html, {
-      ALLOWED_TAGS: ['strong', 'em', 'a', 'br'],
-      ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
-      ALLOWED_URI_REGEXP: /^(?:https?:|mailto:|#)/i,
-    });
-
-    return (
-      <span key={index} dangerouslySetInnerHTML={{ __html: clean }} />
-    );
+    if (!part) return null;
+    return <span key={index} dangerouslySetInnerHTML={{ __html: renderSegment(part) }} />;
   });
+}
+
+/** Renders stored forum post text safely, keeping line breaks. */
+export function ForumContent({ content, className }: { content: string; className?: string }) {
+  return <div className={`whitespace-pre-wrap break-words ${className ?? ""}`}>{parseRichText(content)}</div>;
 }

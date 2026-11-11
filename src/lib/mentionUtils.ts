@@ -1,78 +1,59 @@
 import { supabase } from "@/integrations/supabase/client";
+import { findForumMembersByUsername } from "@/lib/publicProfiles";
 
-// Extract @mentions from content and create mention records
+const MENTION_REGEX = /@(\w+)/g;
+
+export function extractMentionUsernames(content: string): string[] {
+  const names: string[] = [];
+  let match: RegExpExecArray | null;
+  const re = new RegExp(MENTION_REGEX.source, "g");
+  while ((match = re.exec(content)) !== null) {
+    names.push(match[1]);
+  }
+  return Array.from(new Set(names));
+}
+
+/**
+ * Create @mention rows for a post. Never call this for an anonymous post: a
+ * mention row tells the mentioned member who wrote it. The database refuses
+ * mention rows for anonymous posts and for posts the caller did not write.
+ */
 export async function processMentions(
   content: string,
   postId: string,
-  authorUserId: string
+  authorUserId: string,
+  isAnonymous: boolean,
 ): Promise<void> {
-  const mentionRegex = /@(\w+)/g;
-  const mentionedUsernames: string[] = [];
-  let match;
-
-  while ((match = mentionRegex.exec(content)) !== null) {
-    mentionedUsernames.push(match[1]);
-  }
-
-  if (mentionedUsernames.length === 0) return;
+  if (isAnonymous) return;
+  const usernames = extractMentionUsernames(content);
+  if (usernames.length === 0) return;
 
   try {
-    // Find users by username or first_name
-    const { data: users, error } = await supabase
-      .from('profiles')
-      .select('id, username, first_name')
-      .or(
-        mentionedUsernames
-          .map(name => `username.eq.${name},first_name.eq.${name}`)
-          .join(',')
-      );
+    const members = await findForumMembersByUsername(usernames);
+    const ids = Array.from(new Set(members.map((m) => m.id).filter((id) => id !== authorUserId)));
+    if (ids.length === 0) return;
 
-    if (error || !users || users.length === 0) return;
-
-    // Filter out self-mentions and duplicates
-    const uniqueUserIds = [...new Set(
-      users
-        .filter(u => u.id !== authorUserId)
-        .map(u => u.id)
-    )];
-
-    if (uniqueUserIds.length === 0) return;
-
-    // Create mention records
-    const mentionRecords = uniqueUserIds.map(userId => ({
-      post_id: postId,
-      mentioned_user_id: userId,
-      mentioning_user_id: authorUserId
-    }));
-
-    await supabase
-      .from('forum_mentions')
-      .insert(mentionRecords);
-
+    const { error } = await supabase.from("forum_mentions").insert(
+      ids.map((id) => ({
+        post_id: postId,
+        mentioned_user_id: id,
+        mentioning_user_id: authorUserId,
+      })),
+    );
+    if (error) console.error("Error saving mentions:", error);
   } catch (err) {
-    console.error('Error processing mentions:', err);
+    console.error("Error processing mentions:", err);
   }
 }
 
 // Parse mentions for rendering - returns structured data
 export interface MentionPart {
-  type: 'mention' | 'text';
+  type: "mention" | "text";
   content: string;
 }
 
 export function parseMentions(content: string): MentionPart[] {
-  const parts = content.split(/(@\w+)/g);
-  
-  return parts.map((part) => {
-    if (part.startsWith('@')) {
-      return {
-        type: 'mention' as const,
-        content: part
-      };
-    }
-    return {
-      type: 'text' as const,
-      content: part
-    };
-  });
+  return content.split(/(@\w+)/g).map((part) =>
+    part.startsWith("@") ? { type: "mention" as const, content: part } : { type: "text" as const, content: part },
+  );
 }

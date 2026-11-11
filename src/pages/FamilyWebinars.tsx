@@ -163,49 +163,11 @@ export default function FamilyWebinars() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  // No membership wall here: this page only renders inside SubscriberRoute,
+  // which has already let the visitor in (a member, or staff). A second check
+  // here used to flash a "Members Only" card at members while it loaded, and
+  // lock out admins and moderators.
 
-  if (!hasMembership) {
-    return (
-      <>
-        <Helmet>
-          <title>Monthly Webinars | Sober Helpline</title>
-        </Helmet>
-        <div className="min-h-screen bg-background">
-          <main className="container py-12">
-            <Card className="max-w-md mx-auto">
-              <CardHeader className="text-center">
-                <Lock className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                <CardTitle className="text-2xl">Members Only Content</CardTitle>
-                <CardDescription>
-                  Monthly webinars are exclusive to family support members.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-center text-muted-foreground">
-                  Join our family support membership for just $9.99/month to access live monthly webinars and our complete library of past recordings.
-                </p>
-                <div className="flex flex-col gap-2">
-                  <Link to="/family-membership">
-                    <Button className="w-full">Become a Member</Button>
-                  </Link>
-                  <Link to="/family-support">
-                    <Button variant="outline" className="w-full">Back to Family Support</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </main>
-        </div>
-      </>
-    );
-  }
 
   return (
     <>

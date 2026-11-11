@@ -6,9 +6,10 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function AngerAndBoundaries() {
-  useGuideTracking("Anger and Boundaries Are Not the Same Thing", "/anger-and-boundaries");
+  useGuideTracking("/anger-and-boundaries", "Anger and Boundaries Are Not the Same Thing");
   const handlePrint = () => {
     window.print();
   };
@@ -32,15 +33,17 @@ export default function AngerAndBoundaries() {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
-          <ToolBrandHeader headingAs="h1"
+          <ToolBrandHeader
+            headingAs="h1"
             title="Anger and Boundaries Are Not the Same Thing"
             subtitle="Why limits built on anger collapse — and what holds them instead. Understanding the difference between reactive anger and values-based boundaries."
             clinicalNote="Informed by emotion regulation research (Linehan, DBT) and Al-Anon principles of detachment with love."
           />
+          <SafetyBox topics={["violence", "emergency"]} title="If their anger makes you afraid" />
           <article className="prose prose-slate dark:prose-invert max-w-none">
 
             <section className="mb-10">
@@ -333,16 +336,8 @@ export default function AngerAndBoundaries() {
               </p>
             </section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Reflection Questions for Families</h2>
-              <ol className="list-decimal pl-6 text-muted-foreground space-y-3">
-                <li>What boundary do I only hold when I'm angry?</li>
-                <li>What happens to that boundary when I calm down?</li>
-                <li>What fear or guilt surfaces when anger fades?</li>
-                <li>What value needs protection here?</li>
-                <li>What would it look like to hold this boundary calmly?</li>
-              </ol>
-            </section>
+            {/* "Reflection Questions for Families" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             <section className="mb-10 p-6 bg-muted/50 rounded-lg">
               <h2 className="text-2xl font-semibold text-foreground mb-4">Final Thought</h2>

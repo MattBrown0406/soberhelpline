@@ -7,6 +7,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function TalkingAboutTreatment() {
   useGuideTracking("/talking-about-treatment", "How to Talk to Your Loved One About Treatment");
@@ -30,18 +31,24 @@ export default function TalkingAboutTreatment() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Family Resources
+                Back to Family Education
               </Link>
               <Button onClick={handlePrint} variant="outline" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="How to Talk to Your Loved One About Treatment"
               subtitle="A calm, clear, and effective approach to discussing treatment. Communicate without enabling, negotiating, or threatening."
-              clinicalNote="Based on CRAFT (Community Reinforcement and Family Training) and Motivational Interviewing principles for engaging resistant individuals."
+              clinicalNote="Based on how interventionists and family coaches prepare families to raise treatment: plan the conversation, stay calm, be specific, and have a next step ready."
+            />
+
+            <SafetyBox
+              topics={["suicide", "violence", "withdrawal"]}
+              title="Before you have this conversation"
             />
 
             {/* Purpose */}
@@ -349,8 +356,8 @@ export default function TalkingAboutTreatment() {
                   <Link to="/family-action-plan">
                     <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
-                  <Link to="/family-education">
-                    <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
+                  <Link to="/workbook/boundary-script">
+                    <Button variant="outline" size="sm">Write one boundary you can hold</Button>
                   </Link>
                   <Link to="/crisis-chaos">
                     <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>

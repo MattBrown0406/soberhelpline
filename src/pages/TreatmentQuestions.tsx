@@ -6,6 +6,7 @@ import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function TreatmentQuestions() {
   useGuideTracking("/treatment-questions", "Questions to Ask a Treatment Center");
@@ -30,12 +31,12 @@ export default function TreatmentQuestions() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Family Resources
+                Back to Family Education
               </Link>
               <div className="flex gap-2">
                 <Button onClick={handlePrint} className="gap-2">
                   <Printer className="h-4 w-4" />
-                  Print Document
+                  Print
                 </Button>
               </div>
             </div>
@@ -43,9 +44,15 @@ export default function TreatmentQuestions() {
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
               <ToolBrandHeader
+                headingAs="h1"
                 title="Questions to Ask a Treatment Center"
                 subtitle="A practical guide for families seeking ethical, effective care. Slow down, ask the right questions, and protect your loved one from rushed placements."
                 clinicalNote="Aligned with ASAM (American Society of Addiction Medicine) criteria and SAMHSA's treatment facility evaluation standards."
+              />
+
+              <SafetyBox
+                topics={["withdrawal", "overdose"]}
+                title="Vet the program carefully, but don't wait on medical danger"
               />
 
               {/* Purpose Section */}
@@ -366,18 +373,8 @@ export default function TreatmentQuestions() {
                 </div>
               </section>
 
-              {/* Final Reflection */}
-              <section className="mb-8 p-6 bg-muted/50 rounded-lg print:bg-gray-100">
-                <h2 className="text-xl font-bold text-logo-blue mb-4">Final Reflection for Families</h2>
-                <p className="mb-3 font-medium">After speaking with the center, ask yourself:</p>
-                <ul className="space-y-2 text-sm">
-                  <li>• Did I feel informed or pressured?</li>
-                  <li>• Were answers clear or evasive?</li>
-                  <li>• Did they welcome my questions?</li>
-                  <li>• Do their values align with ours?</li>
-                  <li>• Would I trust them with someone I love?</li>
-                </ul>
-              </section>
+              {/* "Final Reflection for Families" questions now live in the savable
+                  "Reflect and write" section (src/data/reflections/pillars-4-5-6.json). */}
 
               {/* Important Reminder */}
               <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">

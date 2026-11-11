@@ -1,573 +1,433 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Printer, ClipboardList } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import logo from "@/assets/logo.png";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import { useSavedTool } from "@/hooks/useSavedTool";
 import RelatedResources from "@/components/RelatedResources";
-import ToolBrandHeader from "@/components/ToolBrandHeader";
+import {
+  CheckList,
+  CrisisLine,
+  SavedInput,
+  SavedTextarea,
+  ToolNote,
+  ToolSection,
+  ToolShell,
+} from "@/components/tools/ToolKit";
+
+interface Boundary {
+  behavior: string;
+  statement: string;
+  consequence: string;
+}
+
+interface ActionPlan {
+  lovedOneStatus: string[];
+  biggestChallenges: string;
+  repeatedPatterns: string;
+  familyValues: string[];
+  otherValue: string;
+  /** How she will live the values she chose. Added later; older saved plans load it as "". */
+  valuesInPractice: string;
+  nonNegotiables: string;
+  enablingPatterns: string[];
+  additionalPatterns: string;
+  boundaries: Boundary[];
+  trueEmergency: string;
+  notEmergencies: string;
+  crisisResponses: string[];
+  emergencyContacts: string;
+  naloxoneLocation: string;
+  familySupports: string[];
+  selfCareCommitments: string;
+  burnoutSigns: string;
+  groundingPhrase: string;
+  accountabilityPerson: string;
+  reviewFrequency: string[];
+  progressToLookFor: string;
+  signature: string;
+  signDate: string;
+}
+
+const blankBoundary: Boundary = { behavior: "", statement: "", consequence: "" };
+
+const blankPlan: ActionPlan = {
+  lovedOneStatus: [],
+  biggestChallenges: "",
+  repeatedPatterns: "",
+  familyValues: [],
+  otherValue: "",
+  valuesInPractice: "",
+  nonNegotiables: "",
+  enablingPatterns: [],
+  additionalPatterns: "",
+  boundaries: [{ ...blankBoundary }, { ...blankBoundary }],
+  trueEmergency: "",
+  notEmergencies: "",
+  crisisResponses: [],
+  emergencyContacts: "",
+  naloxoneLocation: "",
+  familySupports: [],
+  selfCareCommitments: "",
+  burnoutSigns: "",
+  groundingPhrase: "",
+  accountabilityPerson: "",
+  reviewFrequency: [],
+  progressToLookFor: "",
+  signature: "",
+  signDate: "",
+};
+
+const STATUS_OPTIONS = ["Actively using", "In detox or treatment", "Early recovery", "Long-term recovery", "Relapsed or unstable"];
+// The owner's fuller list from the Values Clarification Exercise. The six
+// original options keep their exact wording, so ticks saved earlier still match.
+const VALUE_OPTIONS = [
+  "Safety",
+  "Honesty",
+  "Integrity",
+  "Compassion",
+  "Accountability",
+  "Stability",
+  "Respect",
+  "Responsibility",
+  "Health",
+  "Growth",
+  "Connection",
+  "Trust",
+  "Boundaries",
+  "Consistency",
+  "Self-respect",
+  "Peace",
+  "Courage",
+  "Family",
+  "Balance",
+  "Clarity",
+];
+const ENABLING_OPTIONS = [
+  "Covering for consequences (work, legal, social)",
+  "Providing money during active use",
+  "Making excuses or lying",
+  "Rescuing from predictable outcomes",
+  "Managing emotions or crises we didn't create",
+];
+const CRISIS_OPTIONS = [
+  "Calling emergency services when appropriate",
+  "Not negotiating under pressure",
+  "Referring to previously set boundaries",
+  "Reaching out to a support person",
+  "Taking a pause before responding",
+];
+const SUPPORT_OPTIONS = ["Therapy or counseling", "Support groups", "Coaching", "Educational resources", "Spiritual or community support"];
+const REVIEW_OPTIONS = ["Monthly", "Quarterly", "As circumstances change"];
+
+const MAX_BOUNDARIES = 6;
 
 export default function FamilyActionPlan() {
-  useGuideTracking("Family Action Plan", "/family-action-plan");
-  // Part 1 state
-  const [lovedOneStatus, setLovedOneStatus] = useState<string[]>([]);
-  const [biggestChallenges, setBiggestChallenges] = useState("");
-  const [repeatedPatterns, setRepeatedPatterns] = useState("");
+  useGuideTracking("/family-action-plan", "Family Recovery Action Plan");
+  const saved = useSavedTool<ActionPlan>("tool:family-action-plan", blankPlan);
+  const plan = saved.data;
+  const boundaries = Array.isArray(plan.boundaries) && plan.boundaries.length > 0 ? plan.boundaries : blankPlan.boundaries;
 
-  // Part 2 state
-  const [familyValues, setFamilyValues] = useState<string[]>([]);
-  const [otherValue, setOtherValue] = useState("");
-  const [nonNegotiables, setNonNegotiables] = useState("");
-
-  // Part 3 state
-  const [enablingPatterns, setEnablingPatterns] = useState<string[]>([]);
-  const [additionalPatterns, setAdditionalPatterns] = useState("");
-
-  // Part 4 state
-  const [boundaries, setBoundaries] = useState([
-    { behavior: "", statement: "", consequence: "" },
-    { behavior: "", statement: "", consequence: "" }
-  ]);
-
-  // Part 5 state
-  const [trueEmergency, setTrueEmergency] = useState("");
-  const [notEmergencies, setNotEmergencies] = useState("");
-  const [crisisResponses, setCrisisResponses] = useState<string[]>([]);
-
-  // Part 6 state
-  const [familySupports, setFamilySupports] = useState<string[]>([]);
-  const [selfCareCommitments, setSelfCareCommitments] = useState("");
-  const [burnoutSigns, setBurnoutSigns] = useState("");
-
-  // Part 7 state
-  const [groundingPhrase, setGroundingPhrase] = useState("");
-
-  // Part 8 state
-  const [accountabilityPerson, setAccountabilityPerson] = useState("");
-  const [reviewFrequency, setReviewFrequency] = useState<string[]>([]);
-  const [progressToLookFor, setProgressToLookFor] = useState("");
-
-  // Part 9 state
-  const [signature, setSignature] = useState("");
-  const [signDate, setSignDate] = useState("");
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const toggleArrayItem = (array: string[], setArray: (arr: string[]) => void, item: string) => {
-    if (array.includes(item)) {
-      setArray(array.filter(i => i !== item));
-    } else {
-      setArray([...array, item]);
-    }
-  };
-
-  const updateBoundary = (index: number, field: keyof typeof boundaries[0], value: string) => {
-    const newBoundaries = [...boundaries];
-    newBoundaries[index][field] = value;
-    setBoundaries(newBoundaries);
-  };
+  const updateBoundary = (index: number, field: keyof Boundary, value: string) =>
+    saved.patch({ boundaries: boundaries.map((b, i) => (i === index ? { ...b, [field]: value } : b)) });
+  const addBoundary = () => saved.patch({ boundaries: [...boundaries, { ...blankBoundary }] });
+  const removeBoundary = (index: number) => saved.patch({ boundaries: boundaries.filter((_, i) => i !== index) });
 
   return (
     <>
       <Helmet>
         <title>Family Recovery Action Plan | Sober Helpline</title>
-        <meta name="description" content="A practical roadmap for stability, boundaries, and healing. Create your family's action plan for recovery." />
+        <meta
+          name="description"
+          content="A practical roadmap for stability, boundaries, and healing. Create your family's action plan for recovery."
+        />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <main className="container py-8 md:py-12">
-          <div className="max-w-4xl mx-auto">
-            {/* Back Link & Print Button - Hidden on print */}
-            <div className="flex items-center justify-between mb-6 print:hidden">
-              <Link
-                to="/family-education"
-                className="inline-flex items-center text-primary hover:text-primary/80"
-              >
-                <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Family Resources
-              </Link>
-              <Button onClick={handlePrint} className="gap-2">
-                <Printer className="h-4 w-4" />
-                Print Document
-              </Button>
-            </div>
+      <ToolShell
+        title="Family Recovery Action Plan"
+        summary="A practical roadmap for stability, boundaries, and healing. Build a unified family plan that holds up under pressure, then come back and update it as things change."
+        note="Structured around family systems theory and the recovery planning used in family coaching."
+        kind="Living plan"
+        minutes={25}
+        saved={saved}
+      >
+        <ToolNote title="This plan is about your recovery, not controlling theirs.">
+          <p>
+            Addiction creates chaos, urgency, and emotional reactivity. This action plan helps families move from crisis
+            management to intentional, values-based decisions, whether your loved one is currently sober, in treatment, or
+            actively using.
+          </p>
+          <ul className="mt-3 list-disc space-y-1 pl-5">
+            <li>Complete this plan during a calm moment, not during a crisis.</li>
+            <li>You don't have to finish in one sitting. It saves as you go.</li>
+            <li>Share it with supportive people who can help you stay accountable.</li>
+            <li>
+              <strong>This plan works best when families commit to consistency over comfort.</strong>
+            </li>
+          </ul>
+        </ToolNote>
 
-            {/* Printable Document Content */}
-            <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
-              <ToolBrandHeader
-                title="Family Recovery Action Plan"
-                subtitle="A practical roadmap for stability, boundaries, and healing. Build a unified family plan that holds up under pressure."
-                clinicalNote="Structured around CRAFT principles, family systems theory, and evidence-based recovery planning frameworks."
-              />
-
-              {/* Purpose Section */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-3">Purpose</h2>
-                <p className="text-muted-foreground mb-4">
-                  Addiction creates chaos, urgency, and emotional reactivity. This action plan helps families move from crisis management to intentional, values-based decisions—regardless of whether their loved one is currently sober, in treatment, or actively using.
-                </p>
-                <p className="font-semibold text-primary italic">
-                  This plan is about your recovery, not controlling theirs.
-                </p>
-              </section>
-
-              {/* How to Use */}
-              <section className="mb-8 p-4 bg-muted/50 rounded-lg print:bg-gray-100">
-                <h2 className="text-lg font-bold mb-3">How to Use This Guide</h2>
-                <ul className="space-y-2 text-sm">
-                  <li>• Complete this plan during a calm moment, not during a crisis.</li>
-                  <li>• Revisit and update it regularly.</li>
-                  <li>• Share it with supportive people who can help you stay accountable.</li>
-                  <li>• <strong>This plan works best when families commit to consistency over comfort.</strong></li>
-                </ul>
-              </section>
-
-              {/* Part 1 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 1: Define Your Current Reality
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Answer honestly.</p>
-
-                <div className="space-y-4">
-                  <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                    <p className="font-medium mb-3">My loved one's current status (check all that apply):</p>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      {["Actively using", "In detox or treatment", "Early recovery", "Long-term recovery", "Relapsed or unstable"].map((status) => (
-                        <label key={status} className="flex items-center gap-2 cursor-pointer">
-                          <Checkbox
-                            checked={lovedOneStatus.includes(status)}
-                            onCheckedChange={() => toggleArrayItem(lovedOneStatus, setLovedOneStatus, status)}
-                          />
-                          {status}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">The biggest ongoing challenges for our family are:</p>
-                    <Textarea
-                      value={biggestChallenges}
-                      onChange={(e) => setBiggestChallenges(e.target.value)}
-                      placeholder="Describe your family's biggest challenges..."
-                      className="min-h-[80px] print:border print:border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">What patterns have repeated despite our best efforts?</p>
-                    <Textarea
-                      value={repeatedPatterns}
-                      onChange={(e) => setRepeatedPatterns(e.target.value)}
-                      placeholder="Describe repeated patterns..."
-                      className="min-h-[80px] print:border print:border-gray-300"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Part 2 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 2: Clarify Your Values & Non-Negotiables
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Recovery decisions should align with values, not fear.</p>
-
-                <div className="space-y-4">
-                  <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                    <p className="font-medium mb-3">The values we want to prioritize in our family include:</p>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                      {["Safety", "Honesty", "Accountability", "Stability", "Respect", "Health"].map((value) => (
-                        <label key={value} className="flex items-center gap-2 cursor-pointer">
-                          <Checkbox
-                            checked={familyValues.includes(value)}
-                            onCheckedChange={() => toggleArrayItem(familyValues, setFamilyValues, value)}
-                          />
-                          {value}
-                        </label>
-                      ))}
-                    </div>
-                    <div className="mt-3 flex items-center gap-2">
-                      <Checkbox
-                        checked={otherValue.length > 0}
-                        onCheckedChange={() => {}}
-                      />
-                      <span className="text-sm">Other:</span>
-                      <Input
-                        value={otherValue}
-                        onChange={(e) => setOtherValue(e.target.value)}
-                        placeholder="Enter other value..."
-                        className="flex-1 h-8 print:border print:border-gray-300"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">Non-negotiables (behaviors we will not accept in our home or lives):</p>
-                    <Textarea
-                      value={nonNegotiables}
-                      onChange={(e) => setNonNegotiables(e.target.value)}
-                      placeholder="List your non-negotiables..."
-                      className="min-h-[100px] print:border print:border-gray-300"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Part 3 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 3: Identify Enabling Patterns to Stop
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Based on education and reflection, identify behaviors you are committed to changing.</p>
-
-                <div className="p-4 bg-primary/5 rounded-lg print:bg-gray-50">
-                  <p className="font-medium mb-3">We will stop:</p>
-                  <ul className="space-y-2 text-sm">
-                    {[
-                      "Covering for consequences (work, legal, social)",
-                      "Providing money during active use",
-                      "Making excuses or lying",
-                      "Rescuing from predictable outcomes",
-                      "Managing emotions or crises we didn't create"
-                    ].map((pattern) => (
-                      <li key={pattern} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={enablingPatterns.includes(pattern)}
-                          onCheckedChange={() => toggleArrayItem(enablingPatterns, setEnablingPatterns, pattern)}
-                        />
-                        {pattern}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-4">
-                  <p className="font-medium mb-2">Additional patterns we will stop:</p>
-                  <Textarea
-                    value={additionalPatterns}
-                    onChange={(e) => setAdditionalPatterns(e.target.value)}
-                    placeholder="List additional patterns..."
-                    className="min-h-[80px] print:border print:border-gray-300"
-                  />
-                </div>
-              </section>
-
-              {/* Part 4 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 4: Boundaries & Consequences Plan
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">For each boundary, be specific.</p>
-
-                <div className="space-y-6">
-                  {boundaries.map((boundary, index) => (
-                    <div key={index} className="p-4 border rounded-lg">
-                      <h3 className="font-semibold mb-3">Boundary #{index + 1}</h3>
-                      <div className="space-y-3">
-                        <div>
-                          <p className="text-sm font-medium mb-1">Behavior triggering the boundary:</p>
-                          <Input
-                            value={boundary.behavior}
-                            onChange={(e) => updateBoundary(index, "behavior", e.target.value)}
-                            placeholder="Describe the triggering behavior..."
-                            className="print:border print:border-gray-300"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium mb-1">Boundary statement:</p>
-                          <Input
-                            value={boundary.statement}
-                            onChange={(e) => updateBoundary(index, "statement", e.target.value)}
-                            placeholder="Write your boundary statement..."
-                            className="print:border print:border-gray-300"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium mb-1">Consequence we will follow through on:</p>
-                          <Input
-                            value={boundary.consequence}
-                            onChange={(e) => updateBoundary(index, "consequence", e.target.value)}
-                            placeholder="Describe the consequence..."
-                            className="print:border print:border-gray-300"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  <p className="text-sm text-muted-foreground italic">(Add additional boundaries as needed.)</p>
-                </div>
-              </section>
-
-              {/* Part 5 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 5: Crisis Response Plan
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Emotions are highest during crises. Decide now.</p>
-
-                <div className="space-y-4">
-                  <div>
-                    <p className="font-medium mb-2">What constitutes a true emergency (health, safety, legal)?</p>
-                    <Textarea
-                      value={trueEmergency}
-                      onChange={(e) => setTrueEmergency(e.target.value)}
-                      placeholder="Define what constitutes a true emergency..."
-                      className="min-h-[60px] print:border print:border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">What behaviors will not be treated as emergencies?</p>
-                    <Textarea
-                      value={notEmergencies}
-                      onChange={(e) => setNotEmergencies(e.target.value)}
-                      placeholder="List behaviors that are not emergencies..."
-                      className="min-h-[60px] print:border print:border-gray-300"
-                    />
-                  </div>
-
-                  <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                    <p className="font-medium mb-3">Our crisis response will include:</p>
-                    <ul className="space-y-2 text-sm">
-                      {[
-                        "Calling emergency services when appropriate",
-                        "Not negotiating under pressure",
-                        "Referring to previously set boundaries",
-                        "Reaching out to a support person",
-                        "Taking a pause before responding"
-                      ].map((response) => (
-                        <li key={response} className="flex items-center gap-2">
-                          <Checkbox
-                            checked={crisisResponses.includes(response)}
-                            onCheckedChange={() => toggleArrayItem(crisisResponses, setCrisisResponses, response)}
-                          />
-                          {response}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* Part 6 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 6: Family Self-Care & Support Plan
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Recovery requires sustained support for families.</p>
-
-                <div className="space-y-4">
-                  <div className="p-4 bg-primary/5 rounded-lg print:bg-gray-50">
-                    <p className="font-medium mb-3">Individual or family supports we will engage in:</p>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      {[
-                        "Therapy or counseling",
-                        "Support groups",
-                        "Coaching",
-                        "Educational resources",
-                        "Spiritual or community support"
-                      ].map((support) => (
-                        <label key={support} className="flex items-center gap-2 cursor-pointer">
-                          <Checkbox
-                            checked={familySupports.includes(support)}
-                            onCheckedChange={() => toggleArrayItem(familySupports, setFamilySupports, support)}
-                          />
-                          {support}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">Personal commitments to self-care:</p>
-                    <Textarea
-                      value={selfCareCommitments}
-                      onChange={(e) => setSelfCareCommitments(e.target.value)}
-                      placeholder="List your self-care commitments..."
-                      className="min-h-[60px] print:border print:border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">Warning signs we are burning out or reverting to old patterns:</p>
-                    <Textarea
-                      value={burnoutSigns}
-                      onChange={(e) => setBurnoutSigns(e.target.value)}
-                      placeholder="Describe warning signs..."
-                      className="min-h-[60px] print:border print:border-gray-300"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Part 7 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 7: Communication Guidelines
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">To reduce conflict and manipulation:</p>
-
-                <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50 mb-4">
-                  <p className="font-medium mb-3">We commit to:</p>
-                  <ul className="space-y-1 text-sm">
-                    <li>• Speaking calmly and briefly</li>
-                    <li>• Avoiding lectures and emotional arguments</li>
-                    <li>• Repeating boundaries without justification</li>
-                    <li>• Ending conversations that become abusive or circular</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <p className="font-medium mb-2">Our grounding response phrase:</p>
-                  <p className="text-sm text-muted-foreground italic mb-2">
-                    Example: "We're not going to argue about this. Our decision remains the same."
-                  </p>
-                  <Input
-                    value={groundingPhrase}
-                    onChange={(e) => setGroundingPhrase(e.target.value)}
-                    placeholder="Enter your grounding response phrase..."
-                    className="print:border print:border-gray-300"
-                  />
-                </div>
-              </section>
-
-              {/* Part 8 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 8: Review & Accountability
-                </h2>
-
-                <div className="space-y-4">
-                  <div>
-                    <p className="font-medium mb-2">Who will help hold us accountable to this plan?</p>
-                    <Input
-                      value={accountabilityPerson}
-                      onChange={(e) => setAccountabilityPerson(e.target.value)}
-                      placeholder="Enter name(s)..."
-                      className="print:border print:border-gray-300"
-                    />
-                  </div>
-
-                  <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                    <p className="font-medium mb-3">How often will we review and update this plan?</p>
-                    <div className="flex flex-wrap gap-4 text-sm">
-                      {["Monthly", "Quarterly", "As circumstances change"].map((freq) => (
-                        <label key={freq} className="flex items-center gap-2 cursor-pointer">
-                          <Checkbox
-                            checked={reviewFrequency.includes(freq)}
-                            onCheckedChange={() => toggleArrayItem(reviewFrequency, setReviewFrequency, freq)}
-                          />
-                          {freq}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-medium mb-2">What progress will we look for in ourselves—not our loved one?</p>
-                    <Textarea
-                      value={progressToLookFor}
-                      onChange={(e) => setProgressToLookFor(e.target.value)}
-                      placeholder="Describe the progress you'll look for..."
-                      className="min-h-[60px] print:border print:border-gray-300"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Part 9 */}
-              <section className="mb-8">
-                <h2 className="text-xl font-bold text-logo-blue mb-4 pb-2 border-b">
-                  Part 9: Commitment Statement
-                </h2>
-                <p className="text-sm text-muted-foreground mb-4">Read and sign:</p>
-
-                <div className="p-6 border-2 rounded-lg bg-muted/30 print:bg-gray-50">
-                  <p className="text-sm italic mb-6">
-                    "We commit to focusing on our recovery, setting clear boundaries, and responding thoughtfully rather than reactively. We understand that we cannot control outcomes, but we can control our actions."
-                  </p>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm font-medium mb-1">Signature(s):</p>
-                      <Input
-                        value={signature}
-                        onChange={(e) => setSignature(e.target.value)}
-                        placeholder="Type your name(s) as signature..."
-                        className="print:border print:border-gray-300"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium mb-1">Date:</p>
-                      <Input
-                        type="date"
-                        value={signDate}
-                        onChange={(e) => setSignDate(e.target.value)}
-                        className="w-48 print:border print:border-gray-300"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Final Perspective */}
-              <section className="p-6 border-2 border-primary/20 rounded-lg bg-primary/5 print:bg-gray-50">
-                <h2 className="text-lg font-bold text-logo-blue mb-3">Final Perspective</h2>
-                <p className="text-muted-foreground mb-4">
-                  Families do not heal by waiting for someone else to change.<br />
-                  They heal by reclaiming their lives, integrity, and peace.
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  This action plan is not rigid. It is a living document designed to support clarity, consistency, and compassion—especially when things get hard.
-                </p>
-              </section>
-
-              {/* Footer for print */}
-              <div className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground print:block hidden">
-                <p>Sober Helpline | (458) 298-8008 | www.soberhelpline.com</p>
-              </div>
-            </div>
-
-            {/* Bottom Print Button - Hidden on print */}
-            <div className="mt-6 text-center print:hidden">
-              <Button onClick={handlePrint} size="lg" className="gap-2">
-                <Printer className="h-5 w-5" />
-                Print This Document
-              </Button>
-            </div>
+        <ToolSection step={1} title="Define your current reality" description="Answer honestly.">
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">My loved one's current status (tick all that apply)</p>
+            <CheckList
+              options={STATUS_OPTIONS}
+              selected={plan.lovedOneStatus}
+              onChange={(lovedOneStatus) => saved.patch({ lovedOneStatus })}
+              columns={2}
+            />
           </div>
-        
-          <RelatedResources currentPath="/family-action-plan" />
-</main>
-      </div>
+          <SavedTextarea
+            label="The biggest ongoing challenges for our family are:"
+            value={plan.biggestChallenges}
+            onChange={(biggestChallenges) => saved.patch({ biggestChallenges })}
+          />
+          <SavedTextarea
+            label="What patterns have repeated despite our best efforts?"
+            value={plan.repeatedPatterns}
+            onChange={(repeatedPatterns) => saved.patch({ repeatedPatterns })}
+          />
+        </ToolSection>
 
-      {/* Print Styles */}
-      <style>{`
-        @media print {
-          body {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .print\\:hidden {
-            display: none !important;
-          }
-          .print\\:block {
-            display: block !important;
-          }
-          @page {
-            margin: 0.5in;
-          }
-        }
-      `}</style>
+        <ToolSection
+          step={2}
+          title="Clarify your values and non-negotiables"
+          description="Recovery decisions should align with values, not fear."
+        >
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">The values we want to prioritize in our family include:</p>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              Choose 5 core values that you want to guide your decisions moving forward. There are no “right” values.
+            </p>
+            <CheckList
+              options={VALUE_OPTIONS}
+              selected={plan.familyValues}
+              onChange={(familyValues) => saved.patch({ familyValues })}
+              columns={2}
+            />
+          </div>
+          <SavedInput
+            label="Another value that matters to us"
+            value={plan.otherValue}
+            onChange={(otherValue) => saved.patch({ otherValue })}
+          />
+          <SavedTextarea
+            label="For each value you chose: one way I can live this value even when things are hard"
+            hint="Values only matter if they guide behavior. One line for each value is enough."
+            rows={5}
+            value={plan.valuesInPractice ?? ""}
+            onChange={(valuesInPractice) => saved.patch({ valuesInPractice })}
+          />
+          <SavedTextarea
+            label="Non-negotiables (behaviors we will not accept in our home or lives):"
+            rows={4}
+            value={plan.nonNegotiables}
+            onChange={(nonNegotiables) => saved.patch({ nonNegotiables })}
+          />
+          <ToolNote>
+            <p className="font-medium">Values do not eliminate pain. They prevent regret.</p>
+            <p className="mt-1">
+              When families act in alignment with their values, they regain clarity, self-respect, and stability—regardless
+              of outcomes.
+            </p>
+          </ToolNote>
+        </ToolSection>
+
+        <ToolSection
+          step={3}
+          title="Identify enabling patterns to stop"
+          description="Based on education and reflection, identify behaviors you are committed to changing."
+        >
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">We will stop:</p>
+            <CheckList
+              options={ENABLING_OPTIONS}
+              selected={plan.enablingPatterns}
+              onChange={(enablingPatterns) => saved.patch({ enablingPatterns })}
+            />
+          </div>
+          <SavedTextarea
+            label="Additional patterns we will stop:"
+            value={plan.additionalPatterns}
+            onChange={(additionalPatterns) => saved.patch({ additionalPatterns })}
+          />
+        </ToolSection>
+
+        <ToolSection step={4} title="Boundaries and consequences plan" description="For each boundary, be specific.">
+          {boundaries.map((boundary, index) => (
+            <div key={index} className="space-y-4 rounded-lg border border-border p-4 print:break-inside-avoid print:border-0 print:p-0">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-foreground">Boundary {index + 1}</h3>
+                {boundaries.length > 1 && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-1.5 text-muted-foreground print:hidden"
+                    onClick={() => removeBoundary(index)}
+                    aria-label={`Remove boundary ${index + 1}`}
+                  >
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
+                    Remove
+                  </Button>
+                )}
+              </div>
+              <SavedInput
+                label="Behavior triggering the boundary"
+                value={boundary.behavior}
+                onChange={(value) => updateBoundary(index, "behavior", value)}
+              />
+              <SavedTextarea
+                label="Boundary statement"
+                hint='In your own words, for example: "If you use in our home, I will ask you to leave for the night."'
+                rows={2}
+                value={boundary.statement}
+                onChange={(value) => updateBoundary(index, "statement", value)}
+              />
+              <SavedTextarea
+                label="Consequence we will follow through on"
+                rows={2}
+                value={boundary.consequence}
+                onChange={(value) => updateBoundary(index, "consequence", value)}
+              />
+            </div>
+          ))}
+          {boundaries.length < MAX_BOUNDARIES && (
+            <Button variant="outline" className="gap-2 print:hidden" onClick={addBoundary}>
+              <Plus className="h-4 w-4" aria-hidden="true" />
+              Add another boundary
+            </Button>
+          )}
+        </ToolSection>
+
+        <ToolSection step={5} title="Crisis response plan" description="Emotions are highest during crises. Decide now.">
+          <CrisisLine />
+          <SavedTextarea
+            label="What constitutes a true emergency (health, safety, legal)?"
+            value={plan.trueEmergency}
+            onChange={(trueEmergency) => saved.patch({ trueEmergency })}
+          />
+          <SavedTextarea
+            label="What behaviors will not be treated as emergencies?"
+            value={plan.notEmergencies}
+            onChange={(notEmergencies) => saved.patch({ notEmergencies })}
+          />
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">Our crisis response will include:</p>
+            <CheckList
+              options={CRISIS_OPTIONS}
+              selected={plan.crisisResponses}
+              onChange={(crisisResponses) => saved.patch({ crisisResponses })}
+            />
+          </div>
+          <SavedTextarea
+            label="Who we call in an emergency (names and numbers):"
+            hint="911 first if anyone is in danger. Then: the people who can come, their doctor or treatment team, a sponsor, the person who can stay with the children."
+            value={plan.emergencyContacts}
+            onChange={(emergencyContacts) => saved.patch({ emergencyContacts })}
+          />
+          <SavedInput
+            label="Where our naloxone (Narcan) is kept, and who knows how to use it:"
+            hint="If opioids or pills from anywhere but a pharmacy could be involved, keep it where everyone in the house can reach it."
+            value={plan.naloxoneLocation}
+            onChange={(naloxoneLocation) => saved.patch({ naloxoneLocation })}
+          />
+        </ToolSection>
+
+        <ToolSection
+          step={6}
+          title="Family self-care and support plan"
+          description="Recovery requires sustained support for families."
+        >
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">Individual or family supports we will engage in:</p>
+            <CheckList
+              options={SUPPORT_OPTIONS}
+              selected={plan.familySupports}
+              onChange={(familySupports) => saved.patch({ familySupports })}
+              columns={2}
+            />
+          </div>
+          <SavedTextarea
+            label="Personal commitments to self-care:"
+            value={plan.selfCareCommitments}
+            onChange={(selfCareCommitments) => saved.patch({ selfCareCommitments })}
+          />
+          <SavedTextarea
+            label="Warning signs we are burning out or reverting to old patterns:"
+            value={plan.burnoutSigns}
+            onChange={(burnoutSigns) => saved.patch({ burnoutSigns })}
+          />
+        </ToolSection>
+
+        <ToolSection step={7} title="Communication guidelines" description="To reduce conflict and manipulation.">
+          <ToolNote title="We commit to:">
+            <ul className="list-disc space-y-1 pl-5">
+              <li>Speaking calmly and briefly</li>
+              <li>Avoiding lectures and emotional arguments</li>
+              <li>Repeating boundaries without justification</li>
+              <li>Ending conversations that become abusive or circular</li>
+            </ul>
+          </ToolNote>
+          <SavedTextarea
+            label="Our grounding response phrase"
+            hint={`Example: "We're not going to argue about this. Our decision remains the same."`}
+            rows={2}
+            value={plan.groundingPhrase}
+            onChange={(groundingPhrase) => saved.patch({ groundingPhrase })}
+          />
+        </ToolSection>
+
+        <ToolSection step={8} title="Review and accountability">
+          <SavedInput
+            label="Who will help hold us accountable to this plan?"
+            value={plan.accountabilityPerson}
+            onChange={(accountabilityPerson) => saved.patch({ accountabilityPerson })}
+          />
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">How often will we review and update this plan?</p>
+            <CheckList
+              options={REVIEW_OPTIONS}
+              selected={plan.reviewFrequency}
+              onChange={(reviewFrequency) => saved.patch({ reviewFrequency })}
+            />
+          </div>
+          <SavedTextarea
+            label="What progress will we look for in ourselves, not our loved one?"
+            value={plan.progressToLookFor}
+            onChange={(progressToLookFor) => saved.patch({ progressToLookFor })}
+          />
+        </ToolSection>
+
+        <ToolSection step={9} title="Commitment statement" description="Read and sign." tone="highlight">
+          <p className="text-base italic leading-relaxed text-foreground">
+            "We commit to focusing on our recovery, setting clear boundaries, and responding thoughtfully rather than
+            reactively. We understand that we cannot control outcomes, but we can control our actions."
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <SavedInput
+              label="Signature(s)"
+              hint="Type your name or names."
+              value={plan.signature}
+              onChange={(signature) => saved.patch({ signature })}
+            />
+            <SavedInput label="Date" type="date" value={plan.signDate} onChange={(signDate) => saved.patch({ signDate })} />
+          </div>
+        </ToolSection>
+
+        <ToolNote title="Final perspective">
+          <p>
+            Families do not heal by waiting for someone else to change. They heal by reclaiming their lives, integrity,
+            and peace.
+          </p>
+          <p className="mt-2">
+            This action plan is not rigid. It is a living document designed to support clarity, consistency, and
+            compassion, especially when things get hard.
+          </p>
+        </ToolNote>
+
+        <div className="print:hidden">
+          <RelatedResources currentPath="/family-action-plan" />
+        </div>
+      </ToolShell>
     </>
   );
 }

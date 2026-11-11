@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Printer, Heart, Brain, Shield, AlertTriangle, HelpCircle, CheckCircle, Scale, Users } from "lucide-react";
+import { Phone, ArrowLeft, Printer, Heart, Brain, Shield, AlertTriangle, HelpCircle, CheckCircle, Scale, Users, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -34,11 +34,12 @@ export default function SiblingGuiltAngerLoyalty() {
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Sibling Guilt, Anger, and Loyalty Conflicts"
               subtitle="Understanding the emotional double bind in families affected by addiction. You can love your sibling and still feel rage, relief, and grief — all at once."
               clinicalNote="Informed by family systems literature on triangulation, loyalty conflicts (Ivan Boszormenyi-Nagy), and sibling relational dynamics in addiction."
@@ -359,37 +360,145 @@ export default function SiblingGuiltAngerLoyalty() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-6 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
+            {/* If They Get Sober (from Rebuilding Sibling Relationships in Recovery) */}
+            <Card className="mb-6 bg-gradient-to-br from-primary/10 to-transparent border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Questions for Siblings
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
+                  <Clock className="h-5 w-5" />
+                  If They Get Sober
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What am I angry about that I've never named?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What guilt shows up when I consider protecting myself?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Who taught me that my feelings were less important?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What does loyalty mean to me now—not then?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What level of involvement feels sustainable and honest?
-                  </li>
+              <CardContent className="space-y-4">
+                <p className="text-foreground font-medium">
+                  Recovery does not automatically repair sibling relationships.<br />
+                  It only creates the <span className="italic">possibility</span> for repair.
+                </p>
+                <div className="bg-muted/50 p-4 rounded-lg text-center">
+                  <p className="text-foreground font-medium">
+                    Sobriety is not a reset button.<br />
+                    It is the first condition for relational repair—not the completion of it.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-6 border-emerald-200 dark:border-emerald-800">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400">
+                  <Shield className="h-5 w-5" />
+                  What Siblings Actually Need to Feel Safe Rebuilding
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3">1. Consistent Behavior Over Time</h4>
+                  <p className="text-muted-foreground mb-2">Words matter less than:</p>
+                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                    <li>Reliability</li>
+                    <li>Accountability</li>
+                    <li>Respect for boundaries</li>
+                    <li>Emotional regulation</li>
+                    <li>Absence of crisis</li>
+                  </ul>
+                  <p className="text-muted-foreground font-medium mt-3">
+                    Trust is rebuilt through pattern, not intention.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3">2. Acknowledgment Without Defense</h4>
+                  <p className="text-muted-foreground mb-2">Meaningful repair begins when the recovering sibling can say:</p>
+                  <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                    <p className="italic text-muted-foreground">"I hurt you."</p>
+                    <p className="italic text-muted-foreground">"You lost things because of me."</p>
+                    <p className="italic text-muted-foreground">"You didn't deserve that."</p>
+                    <p className="italic text-muted-foreground">"I don't expect anything from you."</p>
+                  </div>
+                  <p className="text-muted-foreground font-medium mt-3">
+                    Not explanations. Not justifications. Not comparisons.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3">3. Space to Choose the Pace</h4>
+                  <p className="text-muted-foreground mb-2">Siblings need permission to:</p>
+                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                    <li>Move slowly</li>
+                    <li>Stay distant</li>
+                    <li>Limit contact</li>
+                    <li>Define what feels safe</li>
+                    <li>Change their mind over time</li>
+                  </ul>
+                  <p className="text-muted-foreground font-medium mt-3">
+                    Choice restores agency.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
+                  <CheckCircle className="h-5 w-5" />
+                  What Rebuilding Actually Looks Like (In Reality)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <p className="text-muted-foreground mb-2">Rebuilding may involve:</p>
+                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                    <li>Neutral contact before emotional closeness</li>
+                    <li>Practical trust before vulnerability</li>
+                    <li>Clear boundaries before openness</li>
+                    <li>Separate relationships with parents</li>
+                    <li>Long stretches of quiet consistency</li>
+                  </ul>
+                  <p className="text-muted-foreground font-medium mt-3">
+                    Repair is often quiet—not dramatic.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-foreground mb-3">Signs a Sibling Relationship Is Moving in a Healthy Direction</h4>
+                  <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                    <li>Less hypervigilance</li>
+                    <li>Fewer emotional spikes</li>
+                    <li>Increased predictability</li>
+                    <li>Respect for "no"</li>
+                    <li>No pressure to perform closeness</li>
+                    <li>Emotional honesty without collapse</li>
+                  </ul>
+                  <div className="bg-primary/10 p-4 rounded-lg mt-4">
+                    <p className="text-foreground font-medium text-center">
+                      Closeness is optional. Safety is not.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
+                  <Scale className="h-5 w-5" />
+                  When Distance Is Still the Healthiest Choice
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">In some cases, siblings may decide:</p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li>Limited contact is best</li>
+                  <li>No contact is necessary (temporarily or long-term)</li>
+                  <li>Relationship repair isn't possible yet</li>
                 </ul>
+                <div className="bg-muted/50 p-4 rounded-lg text-center">
+                  <p className="text-foreground font-medium">
+                    This is not failure. It is discernment.
+                  </p>
+                  <p className="text-muted-foreground italic mt-2">
+                    Recovery includes respecting the impact—not insisting on reconciliation.
+                  </p>
+                </div>
               </CardContent>
             </Card>
 
@@ -462,11 +571,8 @@ export default function SiblingGuiltAngerLoyalty() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/sibling-experience">
-                    <Button variant="outline" size="sm">The Sibling Experience in Addiction</Button>
-                  </Link>
-                  <Link to="/growing-up-shadow">
-                    <Button variant="outline" size="sm">Growing Up in the Shadow of Addiction</Button>
+                  <Link to="/parents-repairing-sibling-system">
+                    <Button variant="outline" size="sm">Parents: Repairing the Sibling System</Button>
                   </Link>
                   <Link to="/strong-one">
                     <Button variant="outline" size="sm">The Hidden Cost of Being the "Strong One"</Button>

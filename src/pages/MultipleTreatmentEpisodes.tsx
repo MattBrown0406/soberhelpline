@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function MultipleTreatmentEpisodes() {
   useGuideTracking("/multiple-treatment-episodes", "Why Multiple Treatment Episodes Don't Mean Failure");
@@ -32,7 +33,7 @@ export default function MultipleTreatmentEpisodes() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Family Resources
+                Back to Family Education
               </Link>
               <Button onClick={handlePrint} variant="outline" className="gap-2">
                 <Printer className="h-4 w-4" />
@@ -47,6 +48,7 @@ export default function MultipleTreatmentEpisodes() {
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Why Multiple Treatment Episodes Don't Mean Failure"
               subtitle="A reality-based guide for families navigating repeated attempts at recovery. Multiple treatment episodes are not a sign of failure — they are a recognized part of the chronic disease process."
               clinicalNote="Based on NIDA's Principles of Drug Addiction Treatment and the chronic disease management model endorsed by ASAM (American Society of Addiction Medicine)."
@@ -212,6 +214,11 @@ export default function MultipleTreatmentEpisodes() {
                     <p className="text-sky-600 dark:text-sky-400 font-medium mt-3">
                       Relapse here reflects system failure, not personal failure.
                     </p>
+                    <SafetyBox
+                      topics={["overdose"]}
+                      title="One thing to know before the next attempt"
+                      className="mt-4 mb-0"
+                    />
                   </div>
 
                   {/* Reason 3 */}
@@ -551,9 +558,9 @@ export default function MultipleTreatmentEpisodes() {
                       <CheckCircle className="h-4 w-4" />
                       Family Recovery Action Plan
                     </Link>
-                    <Link to="/family-education" className="flex items-center gap-2 text-primary hover:underline">
+                    <Link to="/workbook/guilt-check" className="flex items-center gap-2 text-primary hover:underline">
                       <CheckCircle className="h-4 w-4" />
-                      Guilt vs. Responsibility Module
+                      Guilt or responsibility?
                     </Link>
                     <Link to="/crisis-chaos" className="flex items-center gap-2 text-primary hover:underline">
                       <CheckCircle className="h-4 w-4" />
@@ -568,10 +575,10 @@ export default function MultipleTreatmentEpisodes() {
             <div className="hidden print:block mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
               <p>Sober Helpline | (458) 298-8008 | www.soberhelpline.com</p>
             </div>
+
+            <RelatedResources currentPath="/multiple-treatment-episodes" />
           </div>
-        
-          <RelatedResources currentPath="/multiple-treatment-episodes" />
-</main>
+        </main>
       </div>
 
       <style>{`

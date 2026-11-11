@@ -14,7 +14,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/': {
     title: 'Family Addiction Support & Education | Sober Helpline',
-    description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, AI tools, coaching, and a community that understands.',
+    description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, coaching, and a community that understands.',
   },
   '/roadmap': {
     title: 'Recovery Roadmap — 8-Stage Family Guide | Sober Helpline',
@@ -188,10 +188,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
     description: 'Free weekly family support group every Monday at 7:00 PM Pacific. Connect with other families, get guidance, and feel less alone.',
   },
-  '/conversation-starters': {
-    title: 'How to Talk About Addiction with a Loved One | Sober Helpline',
-    description: 'Conversation starters for the hardest talk about addiction. Approach your loved one with compassion and clarity.',
-  },
   '/fear-inventory-exercise': {
     title: 'Fear Inventory Exercise for Families | Sober Helpline',
     description: 'Identify the fears that keep you stuck. This exercise helps families move from paralysis to action in dealing with addiction.',
@@ -203,34 +199,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   '/communication-guide': {
     title: 'Addiction Communication Guide for Families | Sober Helpline',
     description: 'How to communicate with an addicted loved one. Stop the arguments, reduce the chaos, and start conversations that matter.',
-  },
-  '/enabling-language-translator': {
-    title: 'Enabling Language Translator — AI Tool | Sober Helpline',
-    description: 'Paste what you\'re about to say and our AI will show you if it\'s enabling, boundary-setting, or somewhere in between.',
-  },
-  '/ai-boundary-builder-coach': {
-    title: 'AI Boundary Builder — Free Coaching Tool | Sober Helpline',
-    description: 'Build personalized boundaries for your specific situation. Free AI coaching tool for families dealing with addiction.',
-  },
-  '/ai-enabling-decision-coach': {
-    title: 'Am I Enabling? — AI Decision Coach | Sober Helpline',
-    description: 'Are you enabling? Describe your situation and find out. Free AI tool for families of addicted loved ones.',
-  },
-  '/ai-addiction-reality-translator': {
-    title: 'Addiction Reality Translator — AI Tool | Sober Helpline',
-    description: 'Translate the confusing behavior of addiction into plain language. Understand what\'s really happening and your options.',
-  },
-  '/ai-treatment-navigator': {
-    title: 'AI Treatment Navigator — Find the Right Care | Sober Helpline',
-    description: 'Find the right level of care for your loved one. Free AI treatment navigator — no personal info required.',
-  },
-  '/ai-relapse-response-guide': {
-    title: 'Relapse Response Guide — AI Support Tool | Sober Helpline',
-    description: 'Your loved one relapsed. Our AI guide walks you through what to do right now — boundaries, safety, and next steps.',
-  },
-  '/ai-life-coach': {
-    title: 'AI Life Coach for Families of Addicts | Sober Helpline',
-    description: 'Get personalized guidance for the challenges of loving someone with addiction. Take care of yourself while navigating recovery.',
   },
   '/medical-detox': {
     title: 'Medical Detox — What Families Need to Know | Sober Helpline',
@@ -264,10 +232,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Questions to Ask a Treatment Center | Sober Helpline',
     description: 'The most important questions to ask before choosing a treatment center. Don\'t commit until you\'ve asked these.',
   },
-  '/treatment-industry-guide': {
-    title: 'The Addiction Treatment Industry — Family Guide | Sober Helpline',
-    description: 'How the treatment industry works, what to watch for, and how to navigate it as a family. Honest, unfiltered guidance.',
-  },
   '/aftercare-checklist': {
     title: 'Aftercare Checklist — Post-Treatment Planning | Sober Helpline',
     description: 'Treatment is just the beginning. Use this aftercare checklist to plan for long-term recovery success and prevent relapse.',
@@ -280,10 +244,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Family Roles in Addiction — Who Plays What Part | Sober Helpline',
     description: 'The hero, the scapegoat, the lost child, the mascot. Understand the roles families adopt around addiction and how to break free.',
   },
-  '/sibling-experience': {
-    title: 'The Sibling Experience — Growing Up with Addiction | Sober Helpline',
-    description: 'Siblings of addicts carry invisible wounds. Understanding their experience is crucial for family healing and recovery.',
-  },
   '/grief-for-family': {
     title: 'Family Grief in Addiction — Mourning a Living Person | Sober Helpline',
     description: 'The grief of watching someone you love disappear into addiction. It\'s real, it\'s valid, and there are ways to process it.',
@@ -291,10 +251,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   '/emotional-regulation': {
     title: 'Emotional Regulation for Families of Addicts | Sober Helpline',
     description: 'When your loved one\'s addiction triggers your emotions, here\'s how to regulate, respond (not react), and protect your mental health.',
-  },
-  '/cost-of-secrecy': {
-    title: 'The Cost of Secrecy in Addiction | Sober Helpline',
-    description: 'Family secrets don\'t protect anyone — they protect the addiction. Why secrecy is dangerous and how to break the cycle.',
   },
   '/guilt-relief-resentment': {
     title: 'Guilt, Relief & Resentment in Addiction | Sober Helpline',
@@ -344,10 +300,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Addiction: Disease vs. Choice — Reality Map | Sober Helpline',
     description: 'Is addiction a disease or a choice? The answer is more nuanced than either side admits. Understand what the science really says.',
   },
-  '/why-willpower-fails': {
-    title: 'Why Willpower Fails in Addiction | Sober Helpline',
-    description: 'Willpower isn\'t enough to overcome addiction. Understand the neuroscience behind why and what actually works instead.',
-  },
   '/addiction-progression-timeline': {
     title: 'Addiction Progression Timeline | Sober Helpline',
     description: 'How addiction progresses over time — from experimentation to dependence. A visual timeline families can use to understand the stages.',
@@ -356,29 +308,9 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Mental Health vs. Substance-Induced Symptoms | Sober Helpline',
     description: 'Is it mental illness or the drugs? How to tell the difference between mental health disorders and substance-induced symptoms.',
   },
-  '/misunderstood-diagnoses': {
-    title: 'Misunderstood Diagnoses in Addiction | Sober Helpline',
-    description: 'Common misdiagnoses in addiction treatment and how they can derail recovery. What families should question and advocate for.',
-  },
-  '/mental-health-delays-recovery': {
-    title: 'When Mental Health Delays Recovery | Sober Helpline',
-    description: 'Untreated mental health conditions can prevent lasting recovery. How families can advocate for proper dual-diagnosis treatment.',
-  },
   '/trauma-vs-excuses': {
     title: 'Trauma vs. Excuses in Addiction | Sober Helpline',
     description: 'Understanding trauma\'s role in addiction without letting it become an excuse. A balanced perspective for families.',
-  },
-  '/how-trauma-shapes-addiction': {
-    title: 'How Trauma Shapes Addiction | Sober Helpline',
-    description: 'The connection between trauma and addiction is powerful. Learn how adverse experiences drive substance use and what heals it.',
-  },
-  '/matching-modality': {
-    title: 'Matching Treatment Modality to Your Loved One | Sober Helpline',
-    description: 'Not all treatment approaches work for everyone. Learn how to match the right modality to your loved one\'s specific needs.',
-  },
-  '/therapy-timing': {
-    title: 'When to Start Therapy in Recovery | Sober Helpline',
-    description: 'Timing matters in recovery therapy. Understand when different types of therapy are most effective and why.',
   },
   '/family-interference': {
     title: 'Family Interference in Recovery | Sober Helpline',
@@ -388,21 +320,9 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'What Changes When Families Change | Sober Helpline',
     description: 'When families stop enabling and start recovering, everything shifts. Understand the ripple effect of family change.',
   },
-  '/insight-behavior-tracker': {
-    title: 'Insight & Behavior Tracker for Families | Sober Helpline',
-    description: 'Track patterns, triggers, and changes in your loved one\'s behavior. A practical tool for families navigating addiction.',
-  },
-  '/values-aligned-decisions': {
-    title: 'Values-Aligned Decisions in Addiction | Sober Helpline',
-    description: 'Make decisions about your loved one\'s addiction that align with your values, not your fears. A framework for families.',
-  },
   '/living-well-regardless': {
     title: 'Living Well Regardless of Their Addiction | Sober Helpline',
     description: 'You can\'t control their recovery, but you can reclaim your life. How to live well regardless of what they choose.',
-  },
-  '/brain-spiritual-recovery': {
-    title: 'Brain Science & Spiritual Recovery | Sober Helpline',
-    description: 'How neuroscience and spirituality intersect in addiction recovery. Understanding the whole-person approach to healing.',
   },
   '/twelve-steps-explained': {
     title: '12 Steps of Recovery Explained for Families | Sober Helpline',
@@ -420,17 +340,9 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'The Strong One — When You Carry Everything | Sober Helpline',
     description: 'You\'ve been the strong one for too long. This guide is for the family member who holds it all together — and is exhausted.',
   },
-  '/growing-up-shadow': {
-    title: 'Growing Up in the Shadow of Addiction | Sober Helpline',
-    description: 'What it\'s like to grow up with an addicted family member. Understanding the lasting impact and finding healing.',
-  },
   '/sibling-guilt-anger-loyalty': {
     title: 'Sibling Guilt, Anger & Loyalty in Addiction | Sober Helpline',
     description: 'Siblings face unique emotional conflicts around addiction. Understanding guilt, anger, and divided loyalty.',
-  },
-  '/rebuilding-sibling-relationships': {
-    title: 'Rebuilding Sibling Relationships After Addiction | Sober Helpline',
-    description: 'Addiction damages sibling bonds. Learn how to begin repairing relationships and rebuilding trust within the family.',
   },
   '/parents-repairing-sibling-system': {
     title: 'Parents Repairing the Sibling System | Sober Helpline',
@@ -452,22 +364,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Anger & Boundaries in Addiction | Sober Helpline',
     description: 'Anger is a signal that your boundaries have been crossed. Learn to use anger constructively in your family recovery.',
   },
-  '/flexibility-vs-instability': {
-    title: 'Flexibility vs. Instability in Family Recovery | Sober Helpline',
-    description: 'Knowing when to be flexible and when to hold firm. The balance families must find in addiction recovery.',
-  },
-  '/addiction-attachment-styles': {
-    title: 'Attachment Styles & Addiction in Families | Sober Helpline',
-    description: 'How attachment patterns influence addiction and family dynamics. Understanding your style can transform your approach.',
-  },
-  '/intergenerational-enabling': {
-    title: 'Intergenerational Enabling Patterns | Sober Helpline',
-    description: 'Enabling behaviors often pass through generations. Recognize inherited patterns and break the cycle in your family.',
-  },
-  '/who-benefits-filter': {
-    title: 'Who Benefits? Decision Filter for Families | Sober Helpline',
-    description: 'Before you help, ask: who really benefits? A decision-making filter for families navigating addiction.',
-  },
   '/family-unity-liability': {
     title: 'Family Unity as a Liability in Addiction | Sober Helpline',
     description: 'When family togetherness enables addiction. Understanding when unity helps and when it hurts recovery.',
@@ -480,17 +376,9 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Addiction as a Stress Response Disorder | Sober Helpline',
     description: 'Understanding addiction through the lens of stress and trauma. A perspective that changes how families respond.',
   },
-  '/scenario-exercise': {
-    title: 'Family Scenario Exercise — Practice Responses | Sober Helpline',
-    description: 'Practice your responses to common addiction scenarios before they happen. Build confidence in your boundary-setting skills.',
-  },
   '/crisis-chaos': {
     title: 'Crisis & Chaos in Addiction — Family Guide | Sober Helpline',
     description: 'When everything is falling apart. A guide for families in the middle of addiction-related chaos and crisis.',
-  },
-  '/values-exercise': {
-    title: 'Values Clarification Exercise for Families | Sober Helpline',
-    description: 'Identify your core values to make better decisions about your loved one\'s addiction. A guided exercise for families.',
   },
   '/talking-about-treatment': {
     title: 'Talking About Treatment with Your Loved One | Sober Helpline',
@@ -507,14 +395,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   '/family-advocacy-toolkit': {
     title: 'Family Advocacy Toolkit for Addiction | Sober Helpline',
     description: 'Tools and resources to help families advocate effectively for their loved one\'s treatment and recovery.',
-  },
-  '/recovery-requirements': {
-    title: 'Recovery Requirements — What It Takes | Sober Helpline',
-    description: 'What recovery actually requires from the addicted person and their family. Setting realistic expectations.',
-  },
-  '/boundary-setting-worksheet': {
-    title: 'Boundary Setting Worksheet for Families | Sober Helpline',
-    description: 'A step-by-step worksheet to help you define, communicate, and enforce healthy boundaries with your addicted loved one.',
   },
   '/book-consultation': {
     title: 'Book a Family Consultation | Sober Helpline',
@@ -539,10 +419,6 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   '/provider-application': {
     title: 'Provider Application — Join Our Directory | Sober Helpline',
     description: 'Apply to join Sober Helpline\'s vetted provider directory. We connect ethical treatment providers with families who need help.',
-  },
-  '/relapse-radar': {
-    title: 'Relapse Radar — Early Warning Signs Assessment | Sober Helpline',
-    description: 'Identify potential relapse risks before a crisis happens. Free interactive assessment tool for families navigating addiction recovery.',
   },
 };
 

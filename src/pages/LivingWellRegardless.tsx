@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, FileText, Heart, Sun, CheckCircle, XCircle, Shield, Brain, Sparkles } from "lucide-react";
+import { ArrowLeft, Printer, FileText, Heart, Sun, CheckCircle, XCircle, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
@@ -20,15 +20,22 @@ export default function LivingWellRegardless() {
       <div className="min-h-screen bg-background">
         <main className="container py-8 md:py-12">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/family-education"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Family Education
-            </Link>
+            <div className="flex items-center justify-between mb-6 print:hidden">
+              <Link
+                to="/family-education"
+                className="inline-flex items-center text-primary hover:text-primary/80"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back to Family Education
+              </Link>
+              <Button onClick={() => window.print()} variant="outline" className="gap-2">
+                <Printer className="h-4 w-4" />
+                Print
+              </Button>
+            </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="Living Well Regardless of Outcome"
               subtitle="How families reclaim their lives without giving up hope. Learning to live fully while caring deeply, regardless of your loved one's recovery outcome."
               clinicalNote="Grounded in Al-Anon's principles of detachment with love and acceptance-based approaches (ACT). Recovery for families is not contingent on another person's choices."
@@ -506,24 +513,8 @@ export default function LivingWellRegardless() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="text-xl text-logo-blue flex items-center gap-2">
-                  <Brain className="h-5 w-5" />
-                  Reflection Questions for Families
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ol className="space-y-3 list-decimal list-inside text-muted-foreground">
-                  <li>What have we put on hold waiting for change?</li>
-                  <li>What does "living well" mean for us right now—not someday?</li>
-                  <li>What guilt do we need to question?</li>
-                  <li>What would stability look like regardless of outcome?</li>
-                  <li>What is one small step toward reclaiming life this month?</li>
-                </ol>
-              </CardContent>
-            </Card>
+            {/* "Reflection Questions for Families" now live in the savable "Reflect and write"
+                section (src/data/reflections/pillars-4-5-6.json). */}
 
             {/* Final Thought */}
             <Card className="mb-8 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900 border-emerald-300 dark:border-emerald-700">
@@ -572,10 +563,10 @@ export default function LivingWellRegardless() {
                       What Changes When Families Change
                     </Button>
                   </Link>
-                  <Link to="/values-aligned-decisions">
+                  <Link to="/family-action-plan">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Values-Aligned Decision Making Exercise
+                      Family Recovery Action Plan
                     </Button>
                   </Link>
                   <Link to="/family-education">
@@ -584,10 +575,10 @@ export default function LivingWellRegardless() {
                       Self-Care vs. Self-Abandonment Audit
                     </Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/workbook/stress-check">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Family Trauma & Hypervigilance Self-Assessment
+                      Nervous system check-in
                     </Button>
                   </Link>
                   <Link to="/family-education">
@@ -600,7 +591,7 @@ export default function LivingWellRegardless() {
               </CardContent>
             </Card>
 
-            <div className="text-center">
+            <div className="text-center print:hidden">
               <Link to="/family-education">
                 <Button variant="outline" className="gap-2">
                   <ArrowLeft className="h-4 w-4" />

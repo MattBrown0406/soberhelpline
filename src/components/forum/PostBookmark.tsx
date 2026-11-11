@@ -67,13 +67,15 @@ export function PostBookmark({ postId, userId }: PostBookmarkProps) {
       variant="ghost"
       size="sm"
       className={cn(
-        "h-7 px-2",
+        "min-h-11 min-w-11 rounded-xl px-2 text-muted-foreground",
         isBookmarked && "text-primary"
       )}
       onClick={toggleBookmark}
       disabled={isLoading}
+      aria-pressed={isBookmarked}
+      aria-label={isBookmarked ? "Remove bookmark" : "Bookmark this post"}
     >
-      <Bookmark className={cn("h-4 w-4", isBookmarked && "fill-current")} />
+      <Bookmark className={cn("h-4 w-4", isBookmarked && "fill-current")} aria-hidden="true" />
     </Button>
   );
 }

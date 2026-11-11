@@ -132,8 +132,8 @@ const weekItems: ChecklistItem[] = [
     description:
       "In crisis, boundaries get blurry. You say 'never again' and then cave 12 hours later because they're crying or threatening. Right now, while you're thinking clearly, write down 2-3 things that are absolutely non-negotiable. Not 10. Not a contract. Just 2-3 lines in the sand that you WILL enforce no matter what. Examples: 'No using in the house — if you use, you leave that night.' 'No driving the kids anywhere — I handle all transportation.' 'No money — period, for any reason, no exceptions.' Write them down. Tell someone else what they are. That person is your accountability partner.",
     icon: FileText,
-    linkText: "Boundary Setting Worksheet",
-    linkUrl: "/boundary-setting-worksheet",
+    linkText: "Write one boundary you can hold",
+    linkUrl: "/workbook/boundary-script",
   },
 ];
 

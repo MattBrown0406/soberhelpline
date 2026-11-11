@@ -24,7 +24,7 @@ const questions = [
 ];
 
 const AddictionAssessment = () => {
-  useGuideTracking("Addiction Assessment", "/addiction-assessment");
+  useGuideTracking("/addiction-assessment", "Addiction Assessment");
   const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
 
   const assessmentSchema = {

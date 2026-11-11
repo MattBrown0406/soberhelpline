@@ -272,7 +272,7 @@ interface SsoSignedInNoticeProps {
 /** Small persistent note shown after signing in from the app (every page of that tab). */
 export function SsoSignedInNotice({ email, onSignOut }: SsoSignedInNoticeProps) {
   return (
-    <div role="status" className="border-b bg-muted/60 px-4 py-2 text-center text-sm text-muted-foreground">
+    <div role="status" className="border-b bg-muted/60 px-4 py-2 text-center text-sm text-muted-foreground print:hidden">
       Signed in from the Sober Helpline app as{" "}
       <span className="font-medium text-foreground break-all">{email}</span>.{" "}
       <button type="button" onClick={onSignOut} className="font-medium text-logo-blue underline-offset-2 hover:underline">

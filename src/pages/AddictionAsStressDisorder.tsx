@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Printer, Brain, AlertTriangle, RefreshCw, Heart, Shield, Clock, Target, Users, Lightbulb, CheckCircle2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
@@ -25,13 +25,11 @@ const AddictionAsStressDisorder = () => {
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="flex justify-between items-center mb-6 print:hidden">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/family-education")}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Family Education
+          <Button asChild variant="ghost" className="flex items-center gap-2">
+            <Link to="/family-education">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Family Education
+            </Link>
           </Button>
           <Button
             variant="outline"
@@ -44,6 +42,7 @@ const AddictionAsStressDisorder = () => {
         </div>
 
         <ToolBrandHeader
+          headingAs="h1"
           title="Addiction as a Stress-Regulation Disorder"
           subtitle="A reframe for families seeking to understand why their loved one keeps returning to substances despite consequences. This isn't about weakness — it's about a nervous system that learned to survive in harmful ways."
           clinicalNote="Based on Dr. Gabor Maté's stress-regulation framework, Polyvagal Theory (Stephen Porges), and ACE (Adverse Childhood Experiences) research."
@@ -423,25 +422,6 @@ const AddictionAsStressDisorder = () => {
           </CardContent>
         </Card>
 
-        {/* Reflection Questions */}
-        <Card className="mb-6 print:break-inside-avoid print:shadow-none print:border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Target className="h-5 w-5 text-primary" />
-              Reflection Questions
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li>What stressors might substances be regulating?</li>
-              <li>How does our family respond to stress?</li>
-              <li>Where might our reactions increase activation?</li>
-              <li>What structure reduces stress—for everyone?</li>
-              <li>What boundaries create predictability?</li>
-            </ul>
-          </CardContent>
-        </Card>
-
         {/* Final Thought */}
         <Card className="mb-6 print:break-inside-avoid print:shadow-none print:border bg-muted">
           <CardHeader>
@@ -504,8 +484,9 @@ const AddictionAsStressDisorder = () => {
             </ul>
           </CardContent>
         </Card>
+
+        <RelatedResources currentPath="/addiction-as-stress-disorder" />
       </div>
-      <RelatedResources currentPath="/addiction-as-stress-disorder" />
     </div>
   );
 };

@@ -223,6 +223,11 @@ All colors MUST be HSL.
   [class*="border-"] {
     border-color: #e5e7eb !important;
   }
+
+  /* Lines to write on, and the rule beside a typed answer, print dark enough to use. */
+  .print-rule {
+    border-color: #6b7280 !important;
+  }
   
   /* Preserve important background colors for visual elements */
   .bg-primary\/5,
@@ -252,6 +257,14 @@ All colors MUST be HSL.
     page-break-inside: avoid;
   }
   
+  /* Long tool sections (a list of saved check-ins, a call log) flow across
+     pages instead of jumping to a new page and leaving a gap. The fields and
+     cards inside them still stay whole. */
+  section.print-flow {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     break-after: avoid;
     page-break-after: avoid;
@@ -276,4 +289,51 @@ All colors MUST be HSL.
   .dark {
     color-scheme: light !important;
   }
+
+  /* Site chrome never belongs on a printed guide or worksheet. (The site
+     footer and top bar carry print:hidden; a guide's own print footer stays.) */
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  /* Printed answers keep their line breaks and sit inside the page width. */
+  textarea,
+  input {
+    border: 1px solid #9ca3af !important;
+  }
+}
+
+/* Library guides sit on the member area's warm background; the white cards
+   and the navy header band do the rest. (Layout marks them .guide-reading.) */
+.guide-reading {
+  background-image: linear-gradient(to bottom, rgb(237 228 207 / 0.5), rgb(237 228 207 / 0.15) 28rem, transparent 60rem);
+}
+.dark .guide-reading {
+  background-image: linear-gradient(to bottom, rgb(15 23 42 / 0.5), transparent 40rem);
+}
+.guide-reading .min-h-screen.bg-background,
+.guide-reading > .bg-background {
+  background-color: transparent;
+}
+@media print {
+  .guide-reading {
+    background-image: none;
+  }
+}
+
+/* Library reading guides: body copy large and dark enough to read comfortably
+   (the guides were written with small grey text). Scoped to the guide pages
+   that Layout marks with .guide-reading; small print and captions keep their size. */
+.guide-reading :is(p, ul, ol, li).text-muted-foreground:not(.text-sm):not(.text-xs) {
+  color: hsl(var(--foreground) / 0.86);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.guide-reading :is(ul, ol).text-muted-foreground:not(.text-sm):not(.text-xs) > li {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.guide-reading :is(p, li).text-muted-foreground.text-sm {
+  color: hsl(var(--foreground) / 0.8);
 }

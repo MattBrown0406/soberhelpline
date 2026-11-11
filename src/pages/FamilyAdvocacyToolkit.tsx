@@ -1,677 +1,680 @@
-import { useState } from "react";
+import SafetyBox from "@/components/SafetyBox";
+import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
-import Layout from "@/components/Layout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Printer, Shield, Users, FileText, MessageSquare, AlertTriangle, Heart, Target, ClipboardList, Scale, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Plus, RotateCcw, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
+import { useSavedTool } from "@/hooks/useSavedTool";
 import RelatedResources from "@/components/RelatedResources";
-import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { CheckList, SavedInput, SavedTextarea, ToolNote, ToolSection, ToolShell } from "@/components/tools/ToolKit";
 
-const FamilyAdvocacyToolkit = () => {
-  useGuideTracking("Family Advocacy Toolkit", "/family-advocacy-toolkit");
-  const [preparationChecklist, setPreparationChecklist] = useState<string[]>([]);
-  const [clinicalQuestions, setClinicalQuestions] = useState<string[]>([]);
-  const [dischargeQuestions, setDischargeQuestions] = useState<string[]>([]);
-  const [ethicsQuestions, setEthicsQuestions] = useState<string[]>([]);
-  const [trackingItems, setTrackingItems] = useState<string[]>([]);
-  const [valuesAnchor, setValuesAnchor] = useState<string[]>([]);
-  const [notes, setNotes] = useState({
-    preparation: "",
-    questions: "",
-    tracking: "",
-    general: "",
-  });
+// ---------------------------------------------------------------------------
+// The checklists (the owner's words)
+// ---------------------------------------------------------------------------
 
-  const preparationItems = [
-    "I am regulated and calm",
-    "I know what decision is being discussed",
-    "I have specific questions written down",
-    "I understand what I'm asking for (clarity, delay, reassessment, support)",
-    "I am prepared to pause the process if needed",
-  ];
+const PREPARATION_ITEMS = [
+  "I am regulated and calm",
+  "I know what decision is being discussed",
+  "I have specific questions written down",
+  "I understand what I'm asking for (clarity, delay, reassessment, support)",
+  "I am prepared to pause the process if needed",
+];
 
-  const clinicalQuestionsItems = [
-    "\"What problem is this level of care addressing specifically?\"",
-    "\"What would indicate this plan is not working?\"",
-    "\"What does success look like in the next 30 days?\"",
-    "\"What happens if motivation drops?\"",
-    "\"What risks concern you most right now?\"",
-  ];
+const CLINICAL_QUESTIONS = [
+  '"What problem is this level of care addressing specifically?"',
+  '"What would indicate this plan is not working?"',
+  '"What does success look like in the next 30 days?"',
+  '"What happens if motivation drops?"',
+  '"What risks concern you most right now?"',
+];
 
-  const dischargeQuestionsItems = [
-    "\"What structure is in place after discharge?\"",
-    "\"What are the relapse risks we should anticipate?\"",
-    "\"Who is accountable for follow-up?\"",
-    "\"What support does the family need to maintain boundaries?\"",
-  ];
+const DISCHARGE_QUESTIONS = [
+  '"What structure is in place after discharge?"',
+  '"What are the relapse risks we should anticipate?"',
+  '"Who is accountable for follow-up?"',
+  '"What support does the family need to maintain boundaries?"',
+];
 
-  const ethicsQuestionsItems = [
-    "\"Are there financial relationships tied to this recommendation?\"",
-    "\"What alternatives did you consider?\"",
-    "\"Can we have this in writing?\"",
-  ];
+const ETHICS_QUESTIONS = [
+  '"Are there financial relationships tied to this recommendation?"',
+  '"What alternatives did you consider?"',
+  '"Can we have this in writing?"',
+];
 
-  const trackingItemsList = [
-    "Names, roles, and contact info documented",
-    "Dates of major decisions recorded",
-    "Recommendations given (in writing if possible)",
-    "Concerns raised and responses noted",
-    "Aftercare commitments confirmed",
-    "Missed follow-ups tracked",
-  ];
+const TRACKING_ITEMS = [
+  "Names, roles, and contact info documented",
+  "Dates of major decisions recorded",
+  "Recommendations given (in writing if possible)",
+  "Concerns raised and responses noted",
+  "Aftercare commitments confirmed",
+  "Missed follow-ups tracked",
+];
 
-  const valuesAnchorItems = [
-    "Did we act with integrity?",
-    "Did we stay within our role?",
-    "Did we protect safety and clarity?",
-    "Did we maintain our boundaries?",
-    "Did we avoid rescuing?",
-  ];
+const VALUES_ANCHOR_ITEMS = [
+  "Did we act with integrity?",
+  "Did we stay within our role?",
+  "Did we protect safety and clarity?",
+  "Did we maintain our boundaries?",
+  "Did we avoid rescuing?",
+];
 
-  const handleCheckboxChange = (
-    section: string[],
-    setSection: React.Dispatch<React.SetStateAction<string[]>>,
-    item: string
-  ) => {
-    if (section.includes(item)) {
-      setSection(section.filter((i) => i !== item));
-    } else {
-      setSection([...section, item]);
-    }
-  };
+const SCRIPTS = [
+  { title: "Asking for Clarity", line: '"Can you help us understand the reasoning behind this recommendation?"' },
+  { title: "Slowing the Process", line: '"We need time to review this before deciding."' },
+  {
+    title: "Addressing Concerns Without Accusation",
+    line: '"We\'re noticing a gap here and want to understand how it\'s being addressed."',
+  },
+  { title: "Reinforcing Boundaries", line: '"Our family boundaries are firm. We want the plan to align with that."' },
+  { title: "Asking for Reassessment", line: '"Given what we\'re seeing, can we revisit the level of care?"' },
+];
 
-  const totalPreparation = preparationChecklist.length;
-  const totalQuestionsAsked = clinicalQuestions.length + dischargeQuestions.length + ethicsQuestions.length;
-  const totalTracking = trackingItems.length;
-  const totalValues = valuesAnchor.length;
+const COMPANION_LINKS = [
+  { to: "/treatment-red-flags", label: "Treatment Industry Red Flags Guide" },
+  { to: "/treatment-questions", label: "40 Questions to Ask a Treatment Center" },
+  { to: "/aftercare-checklist", label: "Aftercare Readiness Checklist" },
+  { to: "/family-action-plan", label: "Family Recovery Action Plan" },
+  { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
+  { to: "/workbook/guilt-check", label: "Guilt or responsibility?" },
+];
 
-  const getReadinessStatus = () => {
-    if (totalPreparation >= 4) {
-      return { message: "Ready to advocate effectively", color: "text-green-600" };
-    } else if (totalPreparation >= 2) {
-      return { message: "Partially prepared—review remaining items", color: "text-yellow-600" };
-    } else {
-      return { message: "Complete preparation before advocating", color: "text-red-600" };
-    }
-  };
+// ---------------------------------------------------------------------------
+// What is saved
+// ---------------------------------------------------------------------------
 
-  const readiness = getReadinessStatus();
+interface ContactNote {
+  id: string;
+  /** YYYY-MM-DD */
+  date: string;
+  who: string;
+  said: string;
+  agreed: string;
+  /** YYYY-MM-DD */
+  followUp: string;
+}
 
-  const handlePrint = () => {
-    window.print();
-  };
+interface AdvocacySheet {
+  preparation: string[];
+  preparationNotes: string;
+  clinicalQuestions: string[];
+  dischargeQuestions: string[];
+  ethicsQuestions: string[];
+  questionNotes: string;
+  tracking: string[];
+  trackingNotes: string;
+  /** Calls and meetings, newest first. */
+  contacts: ContactNote[];
+  valuesAnchor: string[];
+  generalNotes: string;
+}
 
-  const handleReset = () => {
-    setPreparationChecklist([]);
-    setClinicalQuestions([]);
-    setDischargeQuestions([]);
-    setEthicsQuestions([]);
-    setTrackingItems([]);
-    setValuesAnchor([]);
-    setNotes({ preparation: "", questions: "", tracking: "", general: "" });
-  };
+const MAX_CONTACTS = 60;
+const FIRST_CONTACT_ID = "contact-1";
 
-  return (
-    <Layout>
-      <Helmet>
-        <title>Family Advocacy Toolkit | Sober Helpline</title>
-        <meta name="description" content="Learn to advocate effectively for your loved one without burning out or overstepping. Clear frameworks, scripts, and decision tools for families." />
-      </Helmet>
+const blankContact = (id: string): ContactNote => ({ id, date: "", who: "", said: "", agreed: "", followUp: "" });
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Link to="/family-education" className="inline-flex items-center text-logo-blue hover:underline mb-6 print:hidden">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Family Resources
-        </Link>
-
-        <ToolBrandHeader
-          title="Family Advocacy Toolkit"
-          subtitle="How to advocate effectively without burning out or overstepping. Clear frameworks, scripts, and decision tools for families navigating the treatment system."
-          clinicalNote="Based on patient advocacy best practices, NAATP family engagement standards, and clinical ethics in addiction medicine."
-        />
-
-        {/* Purpose Section */}
-        <Alert className="mb-8 border-logo-green/30 bg-logo-blue/5">
-          <Shield className="h-5 w-5 text-logo-blue" />
-          <AlertDescription className="text-foreground">
-            <strong>Purpose:</strong> Families often know something is wrong—but don't know how to speak up, what to ask for, or when to push back. 
-            This toolkit provides clear frameworks, scripts, and decision tools to help families advocate ethically, calmly, and effectively—while still respecting professional roles and boundaries.
-          </AlertDescription>
-        </Alert>
-
-        <Card className="mb-8 bg-blue-50 dark:bg-blue-900/10 border-blue-500/30">
-          <CardContent className="pt-6 text-center">
-            <p className="text-lg font-semibold text-blue-800 dark:text-blue-200">
-              Advocacy is not control.<br />
-              It is informed participation.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Section 1: The Advocacy Mindset */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Target className="h-5 w-5 text-logo-blue" />
-              Section 1: The Advocacy Mindset
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-4 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-500/30">
-                <h4 className="font-semibold text-green-700 dark:text-green-400 mb-3">What Advocacy IS</h4>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Asking informed questions</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Clarifying recommendations</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Ensuring continuity of care</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Protecting safety and dignity</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Slowing rushed decisions</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" /> Representing family reality accurately</li>
-                </ul>
-              </div>
-              <div className="p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-500/30">
-                <h4 className="font-semibold text-red-700 dark:text-red-400 mb-3">What Advocacy is NOT</h4>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" /> Diagnosing</li>
-                  <li className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" /> Arguing clinical judgment emotionally</li>
-                  <li className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" /> Demanding specific outcomes</li>
-                  <li className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" /> Micromanaging treatment</li>
-                  <li className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" /> Speaking for an adult loved one without consent</li>
-                </ul>
-              </div>
-            </div>
-            <Alert className="mt-4 border-blue-500/30 bg-blue-50 dark:bg-blue-900/10">
-              <AlertDescription className="text-foreground text-center">
-                <strong>Key Reframe:</strong> You are not interfering—you are participating.
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-        </Card>
-
-        {/* Section 2: Know Your Role */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Scale className="h-5 w-5 text-logo-blue" />
-              Section 2: Know Your Role (Critical)
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Families are most effective advocates when they stay in the right lane.</p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-4 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-500/30">
-                <h4 className="font-semibold text-green-700 dark:text-green-400 mb-3">Your Lane ✓</h4>
-                <ul className="space-y-2 text-sm">
-                  <li>• History and pattern reporting</li>
-                  <li>• Boundary clarification</li>
-                  <li>• Environmental context</li>
-                  <li>• Follow-through at home</li>
-                  <li>• Support planning</li>
-                  <li>• Asking for explanations</li>
-                </ul>
-              </div>
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-500/30">
-                <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-3">Not Your Lane ✗</h4>
-                <ul className="space-y-2 text-sm">
-                  <li>• Treatment planning details</li>
-                  <li>• Clinical diagnoses</li>
-                  <li>• Medication decisions</li>
-                  <li>• Therapist selection</li>
-                  <li>• Day-to-day treatment execution</li>
-                </ul>
-              </div>
-            </div>
-            <p className="text-sm text-center text-muted-foreground mt-4 italic">
-              Advocacy works best when roles are respected and coordinated.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Sticky Summary */}
-        <Card className="mb-8 sticky top-4 z-10 border-2 border-logo-green/30 shadow-lg print:static print:shadow-none">
-          <CardContent className="pt-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-sm text-muted-foreground">Preparation</p>
-                <p className="text-2xl font-bold">{totalPreparation} / 5</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Questions Asked</p>
-                <p className="text-2xl font-bold text-blue-600">{totalQuestionsAsked} / 12</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Documentation</p>
-                <p className="text-2xl font-bold text-purple-600">{totalTracking} / 6</p>
-              </div>
-              <div className="flex-1 min-w-[200px]">
-                <p className="text-sm text-muted-foreground">Status</p>
-                <p className={`font-semibold ${readiness.color}`}>{readiness.message}</p>
-              </div>
-              <div className="flex gap-2 print:hidden">
-                <Button variant="outline" onClick={handleReset}>Reset</Button>
-                <Button onClick={handlePrint} className="gap-2">
-                  <Printer className="h-4 w-4" />
-                  Print
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Section 3: Advocacy Preparation Checklist */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <ClipboardList className="h-5 w-5 text-logo-blue" />
-              Section 3: Advocacy Preparation Checklist
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Before any important call, meeting, or decision:</p>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {preparationItems.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-3 rounded bg-muted/30 hover:bg-muted/50 transition-colors">
-                <Checkbox
-                  id={`prep-${item}`}
-                  checked={preparationChecklist.includes(item)}
-                  onCheckedChange={() => handleCheckboxChange(preparationChecklist, setPreparationChecklist, item)}
-                  className="mt-0.5"
-                />
-                <label htmlFor={`prep-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                  {item}
-                </label>
-              </div>
-            ))}
-            <Alert className="mt-4 border-amber-500/30 bg-amber-50 dark:bg-amber-900/10">
-              <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="text-foreground">
-                <strong>If emotions are high, delay advocacy.</strong>
-              </AlertDescription>
-            </Alert>
-            <Textarea
-              placeholder="Notes about your preparation..."
-              value={notes.preparation}
-              onChange={(e) => setNotes({ ...notes, preparation: e.target.value })}
-              className="mt-4"
-            />
-          </CardContent>
-        </Card>
-
-        {/* Section 4: Core Advocacy Questions */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-blue-500" />
-              Section 4: Core Advocacy Questions
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Check off questions as you ask them. These surface integrity, planning quality, and realism.</p>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Clinical & Treatment */}
-            <div>
-              <h4 className="font-medium mb-3 text-blue-700 dark:text-blue-400">Clinical & Treatment</h4>
-              <div className="space-y-2">
-                {clinicalQuestionsItems.map((item) => (
-                  <div key={item} className="flex items-start gap-3 p-2 rounded bg-blue-50/50 dark:bg-blue-900/10">
-                    <Checkbox
-                      id={`clinical-${item}`}
-                      checked={clinicalQuestions.includes(item)}
-                      onCheckedChange={() => handleCheckboxChange(clinicalQuestions, setClinicalQuestions, item)}
-                      className="mt-0.5"
-                    />
-                    <label htmlFor={`clinical-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                      {item}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Discharge & Transitions */}
-            <div>
-              <h4 className="font-medium mb-3 text-purple-700 dark:text-purple-400">Discharge & Transitions</h4>
-              <div className="space-y-2">
-                {dischargeQuestionsItems.map((item) => (
-                  <div key={item} className="flex items-start gap-3 p-2 rounded bg-purple-50/50 dark:bg-purple-900/10">
-                    <Checkbox
-                      id={`discharge-${item}`}
-                      checked={dischargeQuestions.includes(item)}
-                      onCheckedChange={() => handleCheckboxChange(dischargeQuestions, setDischargeQuestions, item)}
-                      className="mt-0.5"
-                    />
-                    <label htmlFor={`discharge-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                      {item}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Ethics & Transparency */}
-            <div>
-              <h4 className="font-medium mb-3 text-emerald-700 dark:text-emerald-400">Ethics & Transparency</h4>
-              <div className="space-y-2">
-                {ethicsQuestionsItems.map((item) => (
-                  <div key={item} className="flex items-start gap-3 p-2 rounded bg-emerald-50/50 dark:bg-emerald-900/10">
-                    <Checkbox
-                      id={`ethics-${item}`}
-                      checked={ethicsQuestions.includes(item)}
-                      onCheckedChange={() => handleCheckboxChange(ethicsQuestions, setEthicsQuestions, item)}
-                      className="mt-0.5"
-                    />
-                    <label htmlFor={`ethics-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                      {item}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Textarea
-              placeholder="Notes about responses received..."
-              value={notes.questions}
-              onChange={(e) => setNotes({ ...notes, questions: e.target.value })}
-              className="mt-4"
-            />
-          </CardContent>
-        </Card>
-
-        {/* Section 5: Advocacy Scripts */}
-        <Card className="mb-8 bg-muted/30">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <FileText className="h-5 w-5 text-logo-blue" />
-              Section 5: Advocacy Scripts (Use Calm, Neutral Language)
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid gap-4">
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-2">Asking for Clarity</h4>
-                <p className="text-sm italic">"Can you help us understand the reasoning behind this recommendation?"</p>
-              </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-2">Slowing the Process</h4>
-                <p className="text-sm italic">"We need time to review this before deciding."</p>
-              </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-2">Addressing Concerns Without Accusation</h4>
-                <p className="text-sm italic">"We're noticing a gap here and want to understand how it's being addressed."</p>
-              </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-2">Reinforcing Boundaries</h4>
-                <p className="text-sm italic">"Our family boundaries are firm. We want the plan to align with that."</p>
-              </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-2">Asking for Reassessment</h4>
-                <p className="text-sm italic">"Given what we're seeing, can we revisit the level of care?"</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Section 6: Documentation & Tracking */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <ClipboardList className="h-5 w-5 text-purple-500" />
-              Section 6: Documentation & Tracking Tools
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Families should maintain a simple advocacy record, especially during transitions.</p>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm font-medium mb-3">Keep Track Of:</p>
-            {trackingItemsList.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-2 rounded hover:bg-muted/50 transition-colors">
-                <Checkbox
-                  id={`tracking-${item}`}
-                  checked={trackingItems.includes(item)}
-                  onCheckedChange={() => handleCheckboxChange(trackingItems, setTrackingItems, item)}
-                  className="mt-0.5"
-                />
-                <label htmlFor={`tracking-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                  {item}
-                </label>
-              </div>
-            ))}
-            <Alert className="mt-4 border-blue-500/30 bg-blue-50 dark:bg-blue-900/10">
-              <AlertDescription className="text-foreground">
-                <strong>Why this matters:</strong> Consistency and memory protect families from confusion and miscommunication.
-              </AlertDescription>
-            </Alert>
-            <Textarea
-              placeholder="Additional tracking notes..."
-              value={notes.tracking}
-              onChange={(e) => setNotes({ ...notes, tracking: e.target.value })}
-              className="mt-4"
-            />
-          </CardContent>
-        </Card>
-
-        {/* Section 7: Advocacy During High-Risk Moments */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-amber-500" />
-              Section 7: Advocacy During High-Risk Moments
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-500/30">
-                <h4 className="font-semibold text-red-700 dark:text-red-400 mb-3">During Crisis</h4>
-                <ul className="space-y-2 text-sm">
-                  <li>• Focus on safety first</li>
-                  <li>• Avoid treatment debates</li>
-                  <li>• Document what happened</li>
-                  <li>• Return to advocacy after stabilization</li>
-                </ul>
-              </div>
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-500/30">
-                <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-3">During Discharge</h4>
-                <ul className="space-y-2 text-sm">
-                  <li>• Revisit Aftercare Readiness Checklist</li>
-                  <li>• Confirm appointments and structure</li>
-                  <li>• Reassert family boundaries</li>
-                  <li>• Do not rely on verbal assurances</li>
-                </ul>
-              </div>
-              <div className="p-4 bg-purple-50 dark:bg-purple-900/10 rounded-lg border border-purple-500/30">
-                <h4 className="font-semibold text-purple-700 dark:text-purple-400 mb-3">After Relapse</h4>
-                <ul className="space-y-2 text-sm">
-                  <li>• Avoid blame or panic</li>
-                  <li>• Ask: "What changes now?"</li>
-                  <li>• Reassess structure and accountability</li>
-                  <li>• Advocate for escalation if needed</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Section 8: Common Pitfalls */}
-        <Card className="mb-8 border-red-500/30">
-          <CardHeader>
-            <CardTitle className="text-lg text-red-600">Section 8: Common Advocacy Pitfalls to Avoid</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-2 text-sm">
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Speaking from fear instead of facts</div>
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Advocating alone without support</div>
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Over-sharing family conflict details</div>
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Trying to "convince" instead of clarify</div>
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Backing down due to intimidation</div>
-              <div className="flex items-start gap-2"><AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" /> Assuming professionals know family boundaries</div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Section 9: When to Escalate */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Shield className="h-5 w-5 text-logo-blue" />
-              Section 9: When to Escalate Advocacy
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-medium mb-3">Escalation is appropriate when:</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Safety concerns are dismissed</li>
-                  <li>• Ethical red flags appear</li>
-                  <li>• Communication breaks down</li>
-                  <li>• Aftercare planning is inadequate</li>
-                  <li>• Boundaries are repeatedly ignored</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-medium mb-3">Escalation Options:</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Ask for clinical supervisor involvement</li>
-                  <li>• Request case conference</li>
-                  <li>• Seek second opinions</li>
-                  <li>• Pause discharge</li>
-                  <li>• Consult an independent professional or advocate</li>
-                </ul>
-              </div>
-            </div>
-            <Alert className="mt-4 border-blue-500/30 bg-blue-50 dark:bg-blue-900/10">
-              <AlertDescription className="text-foreground text-center">
-                <strong>Escalation does not equal hostility.</strong>
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-        </Card>
-
-        {/* Section 10: Self-Care */}
-        <Card className="mb-8 bg-rose-50 dark:bg-rose-900/10 border-rose-500/30">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2 text-rose-700 dark:text-rose-400">
-              <Heart className="h-5 w-5" />
-              Section 10: Family Advocacy Self-Care
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Advocacy is emotionally taxing. Families must:</p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-2 text-sm">
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-rose-600" /> Share advocacy responsibilities</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-rose-600" /> Debrief after difficult conversations</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-rose-600" /> Revisit emotional regulation tools</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-rose-600" /> Avoid becoming the "case manager"</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-rose-600" /> Remember advocacy does not equal control</div>
-            </div>
-            <p className="text-sm text-center text-rose-700 dark:text-rose-400 font-medium mt-4">
-              You can advocate fiercely and still step back emotionally.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Section 11: Values Anchor */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Target className="h-5 w-5 text-logo-blue" />
-              Section 11: Advocacy Values Anchor
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">Before and after advocating, ask:</p>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {valuesAnchorItems.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-3 rounded bg-green-50/50 dark:bg-green-900/10">
-                <Checkbox
-                  id={`values-${item}`}
-                  checked={valuesAnchor.includes(item)}
-                  onCheckedChange={() => handleCheckboxChange(valuesAnchor, setValuesAnchor, item)}
-                  className="mt-0.5"
-                />
-                <label htmlFor={`values-${item}`} className="text-sm cursor-pointer leading-relaxed flex-1">
-                  {item}
-                </label>
-              </div>
-            ))}
-            <Alert className="mt-4 border-green-500/30 bg-green-50 dark:bg-green-900/10">
-              <CheckCircle2 className="h-4 w-4 text-green-600" />
-              <AlertDescription className="text-foreground">
-                <strong>If yes to all—you advocated well.</strong>
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-        </Card>
-
-        {/* Final Reframe */}
-        <Card className="mb-8 bg-logo-blue/5 border-logo-green/30">
-          <CardContent className="pt-6 text-center">
-            <h3 className="text-lg font-semibold mb-4">Final Reframe</h3>
-            <p className="text-lg font-medium text-foreground mb-4">
-              Effective advocacy is calm, informed, and persistent—<br />not loud, emotional, or controlling.
-            </p>
-            <p className="text-muted-foreground">
-              Families do not need to fight the system.<br />
-              They need to understand it—and engage wisely.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* General Notes */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg">Additional Notes & Observations</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Textarea
-              placeholder="Document any other advocacy notes, outcomes, or follow-up items..."
-              value={notes.general}
-              onChange={(e) => setNotes({ ...notes, general: e.target.value })}
-              className="min-h-[100px]"
-            />
-          </CardContent>
-        </Card>
-
-        {/* Companion Resources */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-lg">Suggested Companion Resources</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-3">
-              <Link to="/treatment-red-flags" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-red-500" />
-                <span className="text-sm">Treatment Industry Red Flags Guide</span>
-              </Link>
-              <Link to="/treatment-questions" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-blue-500" />
-                <span className="text-sm">40 Questions to Ask a Treatment Center</span>
-              </Link>
-              <Link to="/aftercare-checklist" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-cyan-500" />
-                <span className="text-sm">Aftercare Readiness Checklist</span>
-              </Link>
-              <Link to="/family-action-plan" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-purple-500" />
-                <span className="text-sm">Family Recovery Action Plan</span>
-              </Link>
-              <Link to="/crisis-chaos" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-red-500" />
-                <span className="text-sm">Crisis vs. Chaos Decision Guide</span>
-              </Link>
-              <Link to="/family-education" className="flex items-center gap-2 p-3 rounded border hover:bg-muted/50 transition-colors">
-                <FileText className="h-4 w-4 text-amber-500" />
-                <span className="text-sm">Guilt vs. Responsibility Worksheet</span>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    
-          <RelatedResources currentPath="/family-advocacy-toolkit" />
-</Layout>
-  );
+const blankSheet: AdvocacySheet = {
+  preparation: [],
+  preparationNotes: "",
+  clinicalQuestions: [],
+  dischargeQuestions: [],
+  ethicsQuestions: [],
+  questionNotes: "",
+  tracking: [],
+  trackingNotes: "",
+  contacts: [blankContact(FIRST_CONTACT_ID)],
+  valuesAnchor: [],
+  generalNotes: "",
 };
 
-export default FamilyAdvocacyToolkit;
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  !!value && typeof value === "object" && !Array.isArray(value);
+const asText = (value: unknown): string => (typeof value === "string" ? value : "");
+const asList = (value: unknown): string[] =>
+  Array.isArray(value) ? value.filter((v): v is string => typeof v === "string") : [];
+
+/** Fill in anything missing from an older or partial saved copy. */
+function tidyContacts(raw: unknown): ContactNote[] {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set<string>();
+  return raw.filter(isRecord).map((row, index) => {
+    let id = asText(row.id) || `contact-${index + 1}`;
+    if (seen.has(id)) id = `${id}-${index + 1}`;
+    seen.add(id);
+    return {
+      id,
+      date: asText(row.date),
+      who: asText(row.who),
+      said: asText(row.said),
+      agreed: asText(row.agreed),
+      followUp: asText(row.followUp),
+    };
+  });
+}
+
+const contactHasText = (row: ContactNote) => !!(row.date || row.who.trim() || row.said.trim() || row.agreed.trim() || row.followUp);
+
+// ---------------------------------------------------------------------------
+// Pieces
+// ---------------------------------------------------------------------------
+
+function ReadingList({ title, items, tone = "plain" }: { title: string; items: ReactNode[]; tone?: "plain" | "caution" }) {
+  return (
+    <div
+      className={
+        tone === "caution"
+          ? "rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-950 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100 print:break-inside-avoid print:border-foreground/30"
+          : "rounded-lg border border-border bg-card p-4 text-foreground print:break-inside-avoid print:border-foreground/30"
+      }
+    >
+      <h3 className="text-sm font-semibold">{title}</h3>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ContactCard({
+  row,
+  number,
+  onChange,
+  onRemove,
+}: {
+  row: ContactNote;
+  /** Counted from the oldest, so the number stays with the note. */
+  number: number;
+  onChange: (changes: Partial<ContactNote>) => void;
+  onRemove: () => void;
+}) {
+  const name = `call or meeting ${number}`;
+  return (
+    <div className="space-y-4 rounded-lg border border-border p-4 print:break-inside-avoid print:border-0 print:border-t print:p-0 print:pt-3">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold text-foreground">Call or meeting {number}</h3>
+        {contactHasText(row) ? (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="min-h-11 gap-1.5 text-muted-foreground print:hidden" aria-label={`Remove ${name}`}>
+                <Trash2 className="h-4 w-4" aria-hidden="true" />
+                Remove
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Remove this call or meeting?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This clears what you wrote about it. Your other notes stay as they are.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Keep it</AlertDialogCancel>
+                <AlertDialogAction onClick={onRemove}>Remove</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        ) : (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="min-h-11 gap-1.5 text-muted-foreground print:hidden"
+            onClick={onRemove}
+            aria-label={`Remove ${name}`}
+          >
+            <Trash2 className="h-4 w-4" aria-hidden="true" />
+            Remove
+          </Button>
+        )}
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <SavedInput label="Date" type="date" value={row.date} onChange={(date) => onChange({ date })} />
+        <SavedInput
+          label="Who you spoke with"
+          hint="Name and role."
+          value={row.who}
+          onChange={(who) => onChange({ who })}
+        />
+      </div>
+      <SavedTextarea label="What was said" rows={3} maxLength={1500} value={row.said} onChange={(said) => onChange({ said })} />
+      <SavedTextarea
+        label="What was agreed"
+        hint="Who will do what, and by when."
+        rows={2}
+        maxLength={1500}
+        value={row.agreed}
+        onChange={(agreed) => onChange({ agreed })}
+      />
+      <SavedInput
+        label="Follow-up date"
+        hint="When you will check that it happened."
+        type="date"
+        value={row.followUp}
+        onChange={(followUp) => onChange({ followUp })}
+        className="sm:max-w-xs"
+      />
+    </div>
+  );
+}
+
+function CompanionLinks() {
+  return (
+    <div className="print:hidden">
+      <h2 className="mb-3 text-lg font-semibold text-foreground">Suggested Companion Resources</h2>
+      <ul className="grid gap-2 sm:grid-cols-2">
+        {COMPANION_LINKS.map((link) => (
+          <li key={link.to}>
+            <Link
+              to={link.to}
+              className="flex min-h-12 items-center rounded-lg border border-border px-3.5 py-3 text-sm font-medium text-primary transition-colors hover:border-primary/40 hover:bg-primary/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const inlineLink = "font-medium text-primary underline underline-offset-2 hover:text-primary/80 print:text-foreground print:no-underline";
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+
+export default function FamilyAdvocacyToolkit() {
+  useGuideTracking("/family-advocacy-toolkit", "Family Advocacy Toolkit");
+  const saved = useSavedTool<AdvocacySheet>("tool:family-advocacy-toolkit", blankSheet);
+  const sheet = saved.data;
+
+  // Older or partial saved copies may be missing pieces.
+  const preparation = asList(sheet.preparation);
+  const contacts = tidyContacts(sheet.contacts);
+
+  const updateContact = (id: string, changes: Partial<ContactNote>) =>
+    saved.patch({ contacts: contacts.map((row) => (row.id === id ? { ...row, ...changes } : row)) });
+  const addContact = () =>
+    saved.patch({ contacts: [blankContact(`contact-${Date.now().toString(36)}`), ...contacts].slice(0, MAX_CONTACTS) });
+  const removeContact = (id: string) => saved.patch({ contacts: contacts.filter((row) => row.id !== id) });
+
+  return (
+    <>
+      <Helmet>
+        <title>Family Advocacy Toolkit | Sober Helpline</title>
+        <meta
+          name="description"
+          content="Learn to advocate effectively for your loved one without burning out or overstepping. Clear frameworks, scripts, and decision tools for families."
+        />
+      </Helmet>
+
+      <ToolShell
+        title="Family Advocacy Toolkit"
+        summary="How to advocate effectively without burning out or overstepping. Clear frameworks, scripts, and decision tools for families navigating the treatment system."
+        note="Based on patient advocacy best practices, NAATP family engagement standards, and clinical ethics in addiction medicine."
+        kind="Checklist"
+        saved={saved}
+      >
+        <ToolNote title="Purpose">
+          <p>
+            Families often know something is wrong—but don't know how to speak up, what to ask for, or when to push
+            back. This toolkit provides clear frameworks, scripts, and decision tools to help families advocate
+            ethically, calmly, and effectively—while still respecting professional roles and boundaries.
+          </p>
+          <p className="mt-3 text-base font-semibold">
+            Advocacy is not control.
+            <br />
+            It is informed participation.
+          </p>
+        </ToolNote>
+
+        <ToolSection step={1} title="The Advocacy Mindset">
+          <div className="grid gap-4 md:grid-cols-2">
+            <ReadingList
+              title="What Advocacy IS"
+              items={[
+                "Asking informed questions",
+                "Clarifying recommendations",
+                "Ensuring continuity of care",
+                "Protecting safety and dignity",
+                "Slowing rushed decisions",
+                "Representing family reality accurately",
+              ]}
+            />
+            <ReadingList
+              title="What Advocacy is NOT"
+              tone="caution"
+              items={[
+                "Diagnosing",
+                "Arguing clinical judgment emotionally",
+                "Demanding specific outcomes",
+                "Micromanaging treatment",
+                "Speaking for an adult loved one without consent",
+              ]}
+            />
+          </div>
+          <ToolNote>
+            <strong>Key Reframe:</strong> You are not interfering—you are participating.
+          </ToolNote>
+        </ToolSection>
+
+        <ToolSection
+          step={2}
+          title="Know Your Role (Critical)"
+          description="Families are most effective advocates when they stay in the right lane."
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            <ReadingList
+              title="Your Lane ✓"
+              items={[
+                "History and pattern reporting",
+                "Boundary clarification",
+                "Environmental context",
+                "Follow-through at home",
+                "Support planning",
+                "Asking for explanations",
+              ]}
+            />
+            <ReadingList
+              title="Not Your Lane ✗"
+              tone="caution"
+              items={[
+                "Treatment planning details",
+                "Clinical diagnoses",
+                "Medication decisions",
+                "Therapist selection",
+                "Day-to-day treatment execution",
+              ]}
+            />
+          </div>
+          <p className="text-sm italic leading-relaxed text-muted-foreground">
+            Advocacy works best when roles are respected and coordinated.
+          </p>
+        </ToolSection>
+
+        <ToolSection
+          step={3}
+          title="Advocacy Preparation Checklist"
+          description="Before any important call, meeting, or decision:"
+        >
+          <CheckList
+            options={PREPARATION_ITEMS}
+            selected={preparation}
+            onChange={(next) => saved.patch({ preparation: next })}
+          />
+          {preparation.length > 0 && (
+            <Button
+              variant="ghost"
+              className="min-h-11 gap-1.5 text-muted-foreground print:hidden"
+              onClick={() => saved.patch({ preparation: [] })}
+            >
+              <RotateCcw className="h-4 w-4" aria-hidden="true" />
+              Untick these for the next call
+            </Button>
+          )}
+          <ToolNote tone="caution">
+            <strong>If emotions are high, delay advocacy.</strong>
+          </ToolNote>
+          <SavedTextarea
+            label="Notes about your preparation"
+            hint="For example, the decision being discussed and the questions you want answered."
+            value={asText(sheet.preparationNotes)}
+            onChange={(preparationNotes) => saved.patch({ preparationNotes })}
+          />
+        </ToolSection>
+
+        <ToolSection
+          step={4}
+          title="Core Advocacy Questions"
+          description="Check off questions as you ask them. These surface integrity, planning quality, and realism."
+        >
+          <div className="space-y-1.5">
+            <h3 className="text-sm font-semibold text-foreground">Clinical & Treatment</h3>
+            <CheckList
+              options={CLINICAL_QUESTIONS}
+              selected={asList(sheet.clinicalQuestions)}
+              onChange={(clinicalQuestions) => saved.patch({ clinicalQuestions })}
+            />
+          </div>
+          <div className="space-y-1.5">
+            <h3 className="text-sm font-semibold text-foreground">Discharge & Transitions</h3>
+            <CheckList
+              options={DISCHARGE_QUESTIONS}
+              selected={asList(sheet.dischargeQuestions)}
+              onChange={(dischargeQuestions) => saved.patch({ dischargeQuestions })}
+            />
+          </div>
+          <div className="space-y-1.5">
+            <h3 className="text-sm font-semibold text-foreground">Ethics & Transparency</h3>
+            <CheckList
+              options={ETHICS_QUESTIONS}
+              selected={asList(sheet.ethicsQuestions)}
+              onChange={(ethicsQuestions) => saved.patch({ ethicsQuestions })}
+            />
+          </div>
+          <SavedTextarea
+            label="Notes about responses received"
+            rows={4}
+            value={asText(sheet.questionNotes)}
+            onChange={(questionNotes) => saved.patch({ questionNotes })}
+          />
+        </ToolSection>
+
+        <ToolSection step={5} title="Advocacy Scripts (Use Calm, Neutral Language)">
+          <div className="grid gap-3">
+            {SCRIPTS.map((script) => (
+              <div key={script.title} className="rounded-lg border border-border p-4 print:break-inside-avoid print:border-0 print:p-0">
+                <h3 className="text-sm font-medium text-muted-foreground">{script.title}</h3>
+                <p className="mt-1 text-base italic leading-relaxed text-foreground">{script.line}</p>
+              </div>
+            ))}
+          </div>
+        </ToolSection>
+
+        <ToolSection
+          step={6}
+          title="Documentation & Tracking Tools"
+          description="Families should maintain a simple advocacy record, especially during transitions."
+        >
+          <div className="space-y-1.5">
+            <p className="text-sm font-medium text-foreground">Keep Track Of:</p>
+            <CheckList
+              options={TRACKING_ITEMS}
+              selected={asList(sheet.tracking)}
+              onChange={(tracking) => saved.patch({ tracking })}
+            />
+          </div>
+          <ToolNote>
+            <strong>Why this matters:</strong> Consistency and memory protect families from confusion and
+            miscommunication.
+          </ToolNote>
+
+          <div className="space-y-4 border-t border-border pt-5">
+            <div>
+              <h3 className="text-base font-semibold text-foreground">Calls and meetings</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Write a few lines after each call or meeting, while you still remember it. The newest is at the top.
+              </p>
+            </div>
+            {contacts.length < MAX_CONTACTS && (
+              <Button variant="outline" className="min-h-11 gap-2 print:hidden" onClick={addContact}>
+                <Plus className="h-4 w-4" aria-hidden="true" />
+                Add a call or meeting
+              </Button>
+            )}
+            {contacts.length === 0 && (
+              <p className="text-sm leading-relaxed text-muted-foreground print:hidden">Nothing written down yet.</p>
+            )}
+            {contacts.map((row, index) => (
+              <ContactCard
+                key={row.id}
+                row={row}
+                number={contacts.length - index}
+                onChange={(changes) => updateContact(row.id, changes)}
+                onRemove={() => removeContact(row.id)}
+              />
+            ))}
+          </div>
+
+          <SavedTextarea
+            label="Additional tracking notes"
+            hint="For example, names, roles and phone numbers of the people on the treatment team."
+            value={asText(sheet.trackingNotes)}
+            onChange={(trackingNotes) => saved.patch({ trackingNotes })}
+          />
+        </ToolSection>
+
+        <ToolSection step={7} title="Advocacy During High-Risk Moments">
+          <SafetyBox topics={["emergency", "suicide", "overdose"]} title="In a crisis or after a relapse, safety comes first" />
+          <div className="grid gap-4 md:grid-cols-3">
+            <ReadingList
+              title="During Crisis"
+              tone="caution"
+              items={[
+                "Focus on safety first",
+                "Avoid treatment debates",
+                "Document what happened",
+                "Return to advocacy after stabilization",
+              ]}
+            />
+            <ReadingList
+              title="During Discharge"
+              items={[
+                <>
+                  Revisit{" "}
+                  <Link to="/aftercare-checklist" className={inlineLink}>
+                    Aftercare Readiness Checklist
+                  </Link>
+                </>,
+                "Confirm appointments and structure",
+                "Reassert family boundaries",
+                "Do not rely on verbal assurances",
+              ]}
+            />
+            <ReadingList
+              title="After Relapse"
+              items={[
+                "Avoid blame or panic",
+                'Ask: "What changes now?"',
+                "Reassess structure and accountability",
+                "Advocate for escalation if needed",
+              ]}
+            />
+          </div>
+        </ToolSection>
+
+        <ToolSection step={8} title="Common Advocacy Pitfalls to Avoid">
+          <ul className="grid list-disc gap-x-6 gap-y-1.5 pl-5 text-sm leading-relaxed text-foreground md:grid-cols-2">
+            <li>Speaking from fear instead of facts</li>
+            <li>Advocating alone without support</li>
+            <li>Over-sharing family conflict details</li>
+            <li>Trying to "convince" instead of clarify</li>
+            <li>Backing down due to intimidation</li>
+            <li>Assuming professionals know family boundaries</li>
+          </ul>
+        </ToolSection>
+
+        <ToolSection step={9} title="When to Escalate Advocacy">
+          <div className="grid gap-4 md:grid-cols-2">
+            <ReadingList
+              title="Escalation is appropriate when:"
+              items={[
+                "Safety concerns are dismissed",
+                "Ethical red flags appear",
+                "Communication breaks down",
+                "Aftercare planning is inadequate",
+                "Boundaries are repeatedly ignored",
+              ]}
+            />
+            <ReadingList
+              title="Escalation Options:"
+              items={[
+                "Ask for clinical supervisor involvement",
+                "Request case conference",
+                "Seek second opinions",
+                "Pause discharge",
+                "Consult an independent professional or advocate",
+              ]}
+            />
+          </div>
+          <ToolNote>
+            <strong>Escalation does not equal hostility.</strong>
+          </ToolNote>
+        </ToolSection>
+
+        <ToolSection
+          step={10}
+          title="Family Advocacy Self-Care"
+          description="Advocacy is emotionally taxing. Families must:"
+        >
+          <ul className="grid list-disc gap-x-6 gap-y-1.5 pl-5 text-sm leading-relaxed text-foreground md:grid-cols-2">
+            <li>Share advocacy responsibilities</li>
+            <li>Debrief after difficult conversations</li>
+            <li>
+              Revisit{" "}
+              <Link to="/emotional-regulation" className={inlineLink}>
+                emotional regulation tools
+              </Link>
+            </li>
+            <li>Avoid becoming the "case manager"</li>
+            <li>Remember advocacy does not equal control</li>
+          </ul>
+          <p className="text-sm font-medium leading-relaxed text-foreground">
+            You can advocate fiercely and still step back emotionally.
+          </p>
+        </ToolSection>
+
+        <ToolSection step={11} title="Advocacy Values Anchor" description="Before and after advocating, ask:">
+          <CheckList
+            options={VALUES_ANCHOR_ITEMS}
+            selected={asList(sheet.valuesAnchor)}
+            onChange={(valuesAnchor) => saved.patch({ valuesAnchor })}
+          />
+          <ToolNote>
+            <strong>If yes to all—you advocated well.</strong>
+          </ToolNote>
+        </ToolSection>
+
+        <ToolNote title="Final Reframe">
+          <p className="text-base font-semibold">
+            Effective advocacy is calm, informed, and persistent—not loud, emotional, or controlling.
+          </p>
+          <p className="mt-2">
+            Families do not need to fight the system.
+            <br />
+            They need to understand it—and engage wisely.
+          </p>
+        </ToolNote>
+
+        <ToolSection title="Additional Notes & Observations">
+          <SavedTextarea
+            label="Anything else you want to remember"
+            placeholder="Document any other advocacy notes, outcomes, or follow-up items..."
+            rows={4}
+            value={asText(sheet.generalNotes)}
+            onChange={(generalNotes) => saved.patch({ generalNotes })}
+          />
+        </ToolSection>
+
+        <CompanionLinks />
+
+        <div className="print:hidden">
+          <RelatedResources currentPath="/family-advocacy-toolkit" />
+        </div>
+      </ToolShell>
+    </>
+  );
+}

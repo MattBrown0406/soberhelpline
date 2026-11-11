@@ -47,7 +47,7 @@ const membershipBenefits = `
     </tr>
     <tr>
       <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-        <strong style="color: #1e40af;">📚 60+ Family Education Guides</strong><br/>
+        <strong style="color: #1e40af;">📚 Family Education Library</strong><br/>
         <span style="color: #6b7280; font-size: 14px;">Clinically-grounded resources covering boundaries, enabling, communication, treatment options, and more</span>
       </td>
     </tr>
@@ -65,8 +65,8 @@ const membershipBenefits = `
     </tr>
     <tr>
       <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-        <strong style="color: #1e40af;">🤖 AI-Powered Support Tools</strong><br/>
-        <span style="color: #6b7280; font-size: 14px;">AI Boundary Coach, Treatment Navigator, Relapse Response Guide, and Life Coach — available 24/7</span>
+        <strong style="color: #1e40af;">📝 My Workbook</strong><br/>
+        <span style="color: #6b7280; font-size: 14px;">Short guided exercises (about five minutes each) that save what you write: a boundary you can hold, helping or enabling, practicing a hard moment, and more</span>
       </td>
     </tr>
     <tr>
@@ -195,7 +195,7 @@ function buildExistingUserEmail(firstName: string): string {
         <li><a href="https://soberhelpline.com/family-education" style="color: #1e40af;">Browse the Education Library</a> — Start with the guides most relevant to your situation</li>
         <li><a href="https://soberhelpline.com/monday-zoom-registration" style="color: #1e40af;">Register for “The Family Squares”</a> — Join our weekly live support call</li>
         <li><a href="https://soberhelpline.com/family-forum" style="color: #1e40af;">Visit the Family Forum</a> — Introduce yourself and connect with others</li>
-        <li><a href="https://soberhelpline.com/ai-boundary-coach" style="color: #1e40af;">Try the AI Boundary Coach</a> — Get personalized boundary-setting guidance</li>
+        <li><a href="https://soberhelpline.com/workbook/boundary-script" style="color: #1e40af;">Write one boundary you can hold</a> — A five-minute guided exercise</li>
       </ul>
     </div>
 

@@ -5,11 +5,20 @@ import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { Video, Lock, Loader2, Calendar, Clock, Play, ArrowLeft, Sparkles, Users, BookOpen, Shield, MessageCircle, Tag, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
+import { IconTile, KindPill, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
 import { format } from "date-fns";
+
+// Shared looks, written out in full so Tailwind keeps them.
+const NAV_PILL =
+  "inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-medium text-foreground shadow-sm shadow-slate-900/[0.03] transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+const CHIP =
+  "inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+const CHIP_ON = "border-primary bg-primary text-primary-foreground";
+const CHIP_OFF = "border-border bg-card text-foreground/80 hover:border-primary/50";
+const TAG_PILL =
+  "inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300";
 
 interface KeyTimestamp {
   time: string;
@@ -67,28 +76,29 @@ function ShowNotes({ notes, timestamps }: { notes: string | null; timestamps: Ke
   if (!hasContent) return null;
 
   return (
-    <div className="mt-4 rounded-lg border border-border bg-muted/30">
+    <div className="mt-4 rounded-xl border border-border/70 bg-muted/40">
       <button
         type="button"
-        className="flex w-full items-center justify-between px-4 py-3 text-sm font-semibold text-foreground"
+        aria-expanded={open}
+        className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         onClick={() => setOpen(!open)}
       >
         <span className="flex items-center gap-2">
-          <BookOpen className="h-4 w-4 text-primary" />
+          <BookOpen className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
           Show Notes &amp; Key Moments
         </span>
-        {open ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
+        {open ? <ChevronUp className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" /> : <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />}
       </button>
       {open && (
-        <div className="px-4 pb-4 space-y-4 border-t border-border pt-3">
+        <div className="space-y-4 border-t border-border/70 px-4 pb-4 pt-3">
           {timestamps.length > 0 && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Key Moments</p>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Key Moments</p>
               <div className="space-y-1.5">
                 {timestamps.map((ts, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm">
-                    <span className="font-mono text-primary font-semibold shrink-0 w-14">{ts.time}</span>
-                    <span className="text-foreground">{ts.label}</span>
+                    <span className="w-14 shrink-0 font-mono font-semibold text-primary">{ts.time}</span>
+                    <span className="min-w-0 break-words text-foreground">{ts.label}</span>
                   </div>
                 ))}
               </div>
@@ -96,8 +106,8 @@ function ShowNotes({ notes, timestamps }: { notes: string | null; timestamps: Ke
           )}
           {notes && notes.trim() && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Notes</p>
-              <div className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{notes}</div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">Notes</p>
+              <div className="max-w-prose whitespace-pre-wrap break-words text-sm leading-relaxed text-foreground/80">{notes}</div>
             </div>
           )}
         </div>
@@ -153,73 +163,11 @@ export default function ZoomRecordings() {
     fetchRecordings();
   }, [hasMembership]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  // No membership wall here: this page only renders inside SubscriberRoute,
+  // which has already let the visitor in (a member, or staff). A second check
+  // here used to flash a "Members Only" card at members while it loaded, and
+  // lock out admins and moderators.
 
-  if (!hasMembership) {
-    return (
-      <>
-        <SEOHead
-          title="Past Meeting Recordings | Sober Helpline"
-          description='Watch past "The Family Squares" Zoom recordings. Members-only access to our archive of family support sessions.'
-        />
-        <div className="min-h-screen bg-background">
-          <div className="container mx-auto px-4 py-12 max-w-2xl">
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Lock className="w-8 h-8 text-primary" />
-              </div>
-              <h1 className="text-3xl font-bold text-foreground mb-3">Members-Only Content</h1>
-              <p className="text-muted-foreground text-lg">
-                Past meeting recordings are available exclusively to Family Support members.
-              </p>
-            </div>
-            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background mb-6">
-              <CardHeader className="text-center">
-                <CardTitle className="text-xl">What You Get as a Member</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3">
-                  {[
-                    { icon: Video, text: 'Full archive of past "The Family Squares" recordings with show notes & timestamps' },
-                    { icon: BookOpen, text: "50+ educational guides across 6 pillars" },
-                    { icon: MessageCircle, text: "Private family support forum" },
-                    { icon: Shield, text: "AI-powered coaching tools" },
-                    { icon: Users, text: "Community of families who understand" },
-                  ].map(({ icon: Icon, text }, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-4 h-4 text-primary" />
-                      </div>
-                      <span className="text-sm text-foreground">{text}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <div className="flex flex-col gap-2">
-              <Link to="/family-membership">
-                <Button className="w-full" size="lg">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Become a Member — Starting at $9.99/mo
-                </Button>
-              </Link>
-              {!user && (
-                <Link to="/auth?redirect=/zoom-recordings">
-                  <Button variant="outline" className="w-full">Already a member? Sign in</Button>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
 
   // Collect all unique tags across loaded recordings
   const allTags = Array.from(new Set(recordings.flatMap(r => r.tags || []))).sort();
@@ -231,46 +179,41 @@ export default function ZoomRecordings() {
         title="Past Meeting Recordings | Sober Helpline"
         description='Watch past "The Family Squares" Zoom recordings.'
       />
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-8 max-w-5xl">
-          <div className="flex items-center gap-2 mb-2">
+      <MemberPage>
+        <div className="container mx-auto max-w-5xl space-y-6 px-4 py-6 sm:py-10">
+          <div className="flex items-center gap-2">
             <GoogleTranslate />
           </div>
 
-          <div className="mb-6">
-            <div className="flex items-center gap-3 mb-1">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                <Video className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-foreground">Past Meeting Recordings</h1>
-                <p className="text-muted-foreground text-sm">Catch up on "The Family Squares" sessions you missed</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border">
-              <Link to="/member-learning-paths">
-                <Button variant="outline" size="sm" className="gap-1.5">
-                  <BookOpen className="h-3.5 w-3.5" />
-                  Learning Paths
-                </Button>
-              </Link>
-              <Link to="/member-qa">
-                <Button variant="outline" size="sm" className="gap-1.5">
-                  <MessageCircle className="h-3.5 w-3.5" />
-                  Q&amp;A Archive
-                </Button>
-              </Link>
-            </div>
-          </div>
+          <MemberHero
+            eyebrow="Monday meetings"
+            title="Past Meeting Recordings"
+            subtitle={'Catch up on "The Family Squares" sessions you missed'}
+          />
+
+          <nav aria-label="Related member pages" className="flex flex-wrap gap-2">
+            <Link to="/member-home" className={NAV_PILL}>
+              <BookOpen className="h-4 w-4 text-primary" aria-hidden="true" />
+              Learning Paths
+            </Link>
+            <Link to="/member-qa" className={NAV_PILL}>
+              <MessageCircle className="h-4 w-4 text-primary" aria-hidden="true" />
+              Q&amp;A Archive
+            </Link>
+          </nav>
 
           {selectedRecording ? (
             <div className="space-y-4">
-              <Button variant="ghost" size="sm" onClick={() => setSelectedRecording(null)} className="gap-2">
-                <ArrowLeft className="w-4 h-4" /> Back to all recordings
+              <Button
+                variant="ghost"
+                onClick={() => setSelectedRecording(null)}
+                className="min-h-11 gap-2 rounded-xl px-3 text-primary hover:bg-card hover:text-primary"
+              >
+                <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to all recordings
               </Button>
 
               {getRecordingType(selectedRecording.youtube_url) === 'youtube' ? (
-                <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                <div className="aspect-video overflow-hidden rounded-2xl bg-black shadow-sm shadow-slate-900/[0.04]">
                   <iframe
                     src={getYouTubeEmbedUrl(selectedRecording.youtube_url)}
                     title={selectedRecording.title}
@@ -280,83 +223,85 @@ export default function ZoomRecordings() {
                   />
                 </div>
               ) : (
-                <div className="aspect-video rounded-lg overflow-hidden bg-muted flex flex-col items-center justify-center gap-3 border-2 border-primary/20">
-                  <Video className="w-16 h-16 text-primary/40" />
-                  <a
-                    href={getZoomRecordingUrl(selectedRecording.youtube_url, selectedRecording.zoom_passcode)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="gap-2"><Play className="w-4 h-4" />Watch Recording</Button>
-                  </a>
+                <div className="flex aspect-video flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-[#16294a]/20 bg-card p-4 shadow-sm shadow-slate-900/[0.04] dark:border-sky-400/25">
+                  <IconTile icon={Video} tone="navy" size="lg" />
+                  <Button asChild className="h-12 gap-2 rounded-xl px-6 text-base">
+                    <a
+                      href={getZoomRecordingUrl(selectedRecording.youtube_url, selectedRecording.zoom_passcode)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Play className="w-4 h-4" aria-hidden="true" />Watch Recording
+                    </a>
+                  </Button>
                   {getRecordingType(selectedRecording.youtube_url) === 'zoom' && selectedRecording.zoom_passcode?.trim() && (
-                    <p className="text-xs text-muted-foreground text-center px-4">
+                    <p className="px-4 text-center text-sm text-muted-foreground">
                       If Zoom still asks, enter passcode: <span className="font-mono font-semibold text-foreground">{selectedRecording.zoom_passcode.trim()}</span>
                     </p>
                   )}
                 </div>
               )}
 
-              <div>
-                <h2 className="text-xl font-bold text-foreground">{selectedRecording.title}</h2>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mt-1">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {format(new Date(selectedRecording.recording_date), 'MMMM d, yyyy')}
-                  </span>
-                  {selectedRecording.duration_minutes && (
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {selectedRecording.duration_minutes} min
-                    </span>
-                  )}
+              <Panel>
+                <div className="flex items-start gap-3">
+                  <IconTile icon={Video} tone="navy" />
+                  <div className="min-w-0 flex-1">
+                    <h2 className="break-words text-xl font-bold leading-snug text-foreground">{selectedRecording.title}</h2>
+                    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-muted-foreground">
+                      <KindPill tone="navy" className="gap-1">
+                        <Calendar className="w-3 h-3" aria-hidden="true" />
+                        {format(new Date(selectedRecording.recording_date), 'MMMM d, yyyy')}
+                      </KindPill>
+                      {selectedRecording.duration_minutes && (
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                          {selectedRecording.duration_minutes} min
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 {selectedRecording.tags && selectedRecording.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-2">
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {selectedRecording.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+                      <span key={tag} className={TAG_PILL}>{tag}</span>
                     ))}
                   </div>
                 )}
                 {selectedRecording.description && (
-                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{selectedRecording.description}</p>
+                  <p className="mt-3 max-w-prose break-words text-base leading-relaxed text-foreground/80">{selectedRecording.description}</p>
                 )}
                 <ShowNotes
                   notes={selectedRecording.show_notes}
                   timestamps={selectedRecording.key_timestamps || []}
                 />
-              </div>
+              </Panel>
             </div>
           ) : recordings.length === 0 ? (
-            <Card className="text-center py-12">
-              <CardContent>
-                <Video className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">No Recordings Yet</h3>
-                <p className="text-muted-foreground">
-                  Recordings from our "The Family Squares" sessions will appear here soon.
-                  Join us live every Monday at 7:00 PM Pacific!
-                </p>
-                <Link to="/monday-zoom-registration" className="mt-4 inline-block">
-                  <Button variant="outline" className="gap-2">
-                    <Calendar className="w-4 h-4" />
-                    Register for Next Session
-                  </Button>
+            <Panel className="py-10 text-center sm:py-12">
+              <IconTile icon={Video} tone="navy" size="lg" className="mx-auto mb-4" />
+              <h2 className="mb-2 text-lg font-semibold text-foreground">No Recordings Yet</h2>
+              <p className="mx-auto max-w-prose text-muted-foreground">
+                Recordings from our "The Family Squares" sessions will appear here soon.
+                Join us live every Monday at 7:00 PM Pacific!
+              </p>
+              <Button asChild variant="outline" className="mt-4 min-h-11 gap-2 rounded-xl px-5">
+                <Link to="/monday-zoom-registration">
+                  <Calendar className="w-4 h-4" aria-hidden="true" />
+                  Register for Next Session
                 </Link>
-              </CardContent>
-            </Card>
+              </Button>
+            </Panel>
           ) : (
             <>
               {allTags.length > 0 && (
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                  <Tag className="h-4 w-4 text-muted-foreground shrink-0" />
+                <div className="flex flex-wrap items-center gap-2">
+                  <Tag className="h-4 w-4 shrink-0 text-slate-600 dark:text-slate-300" aria-hidden="true" />
                   <button
                     type="button"
+                    aria-pressed={activeTag === null}
                     onClick={() => setActiveTag(null)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-                      activeTag === null
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background text-muted-foreground border-border hover:border-primary/50"
-                    }`}
+                    className={`${CHIP} ${activeTag === null ? CHIP_ON : CHIP_OFF}`}
                   >
                     All ({recordings.length})
                   </button>
@@ -366,12 +311,9 @@ export default function ZoomRecordings() {
                       <button
                         key={tag}
                         type="button"
+                        aria-pressed={activeTag === tag}
                         onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                        className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-                          activeTag === tag
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "bg-background text-muted-foreground border-border hover:border-primary/50"
-                        }`}
+                        className={`${CHIP} ${activeTag === tag ? CHIP_ON : CHIP_OFF}`}
                       >
                         {tag} ({count})
                       </button>
@@ -381,7 +323,7 @@ export default function ZoomRecordings() {
               )}
 
               {filtered.length === 0 ? (
-                <p className="text-muted-foreground text-sm py-8 text-center">No recordings tagged "{activeTag}".</p>
+                <p className="py-8 text-center text-sm text-slate-600 dark:text-slate-300">No recordings tagged "{activeTag}".</p>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {filtered.map((recording) => {
@@ -391,58 +333,74 @@ export default function ZoomRecordings() {
                         : null);
                     const hasExtras = (recording.show_notes && recording.show_notes.trim()) || recording.key_timestamps?.length > 0;
                     return (
-                      <Card
+                      <div
                         key={recording.id}
-                        className="cursor-pointer hover:shadow-md transition-shadow group overflow-hidden"
+                        className="group cursor-pointer transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
                         onClick={() => setSelectedRecording(recording)}
                       >
-                        <div className="aspect-video bg-muted relative overflow-hidden">
-                          {thumbnail ? (
-                            <img src={thumbnail} alt={recording.title} className="w-full h-full object-cover" />
-                          ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center bg-primary/5 gap-3">
-                              <img src={logo} alt="Sober Helpline" className="w-24 h-auto opacity-50" />
-                              <span className="text-xs font-semibold text-primary/60">
-                                {format(new Date(recording.recording_date), 'MMM d, yyyy')}
-                              </span>
-                            </div>
-                          )}
-                          <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
-                              <Play className="w-6 h-6 text-primary ml-1" />
-                            </div>
-                          </div>
-                          {hasExtras && (
-                            <div className="absolute top-2 right-2 bg-primary text-primary-foreground rounded-full p-1" title="Show notes available">
-                              <BookOpen className="w-3 h-3" />
-                            </div>
-                          )}
-                        </div>
-                        <CardHeader className="p-4 pb-2">
-                          <CardTitle className="text-sm font-semibold line-clamp-2">{recording.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-4 pt-0">
-                          <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <Calendar className="w-3 h-3" />
-                              {format(new Date(recording.recording_date), 'MMM d, yyyy')}
-                            </span>
-                            {recording.duration_minutes && (
-                              <span className="flex items-center gap-1">
-                                <Clock className="w-3 h-3" />
-                                {recording.duration_minutes} min
-                              </span>
+                        <Panel className="flex h-full flex-col overflow-hidden p-0 transition-shadow group-hover:border-primary/30 group-hover:shadow-md sm:p-0">
+                          <div className="relative aspect-video overflow-hidden bg-muted">
+                            {thumbnail ? (
+                              <img src={thumbnail} alt={recording.title} className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#16294a]/[0.05] dark:bg-sky-400/[0.06]">
+                                <img src={logo} alt="Sober Helpline" className="w-24 h-auto opacity-60" />
+                                <span className="text-xs font-semibold text-[#16294a] dark:text-sky-200">
+                                  {format(new Date(recording.recording_date), 'MMM d, yyyy')}
+                                </span>
+                              </div>
                             )}
-                          </div>
-                          {recording.tags && recording.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {recording.tags.slice(0, 3).map(tag => (
-                                <Badge key={tag} variant="secondary" className="text-xs px-1.5 py-0">{tag}</Badge>
-                              ))}
+                            <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity group-hover:opacity-100 motion-reduce:transition-none">
+                              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90">
+                                <Play className="ml-1 h-6 w-6 text-[#16294a]" />
+                              </div>
                             </div>
-                          )}
-                        </CardContent>
-                      </Card>
+                          </div>
+                          <div className="flex flex-1 flex-col p-4">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <IconTile icon={Video} tone="navy" size="sm" />
+                              <KindPill tone="navy" className="gap-1">
+                                <Calendar className="w-3 h-3" aria-hidden="true" />
+                                {format(new Date(recording.recording_date), 'MMM d, yyyy')}
+                              </KindPill>
+                              {recording.duration_minutes && (
+                                <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                                  <Clock className="w-3 h-3" aria-hidden="true" />
+                                  {recording.duration_minutes} min
+                                </span>
+                              )}
+                            </div>
+                            <h2 className="mt-3 break-words text-base font-semibold leading-snug text-foreground">{recording.title}</h2>
+                            {((recording.tags && recording.tags.length > 0) || hasExtras) && (
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                {hasExtras && (
+                                  <span className={`${TAG_PILL} gap-1`}>
+                                    <BookOpen className="w-3 h-3" aria-hidden="true" />
+                                    Show notes
+                                  </span>
+                                )}
+                                {recording.tags && recording.tags.slice(0, 3).map(tag => (
+                                  <span key={tag} className={TAG_PILL}>{tag}</span>
+                                ))}
+                              </div>
+                            )}
+                            <div className="mt-auto pt-4">
+                              <Button
+                                type="button"
+                                className="h-11 w-full gap-2 rounded-xl"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedRecording(recording);
+                                }}
+                              >
+                                <Play className="w-4 h-4" aria-hidden="true" />
+                                Watch recording
+                                <span className="sr-only">: {recording.title}</span>
+                              </Button>
+                            </div>
+                          </div>
+                        </Panel>
+                      </div>
                     );
                   })}
                 </div>
@@ -450,7 +408,7 @@ export default function ZoomRecordings() {
             </>
           )}
         </div>
-      </div>
+      </MemberPage>
     </>
   );
 }

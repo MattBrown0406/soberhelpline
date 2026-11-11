@@ -86,11 +86,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Why Change Doesn't Happen", path: "/why-change-doesnt-happen" },
   ],
-  "/treatment-industry-guide": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Treatment Industry Guide", path: "/treatment-industry-guide" },
-  ],
   "/drug-induced-psychosis": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
@@ -111,11 +106,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Disease vs. Choice", path: "/disease-choice-reality-map" },
   ],
-  "/why-willpower-fails": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Why Willpower Fails", path: "/why-willpower-fails" },
-  ],
   "/addiction-progression-timeline": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
@@ -126,40 +116,15 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Mental Health vs. Substance-Induced", path: "/mental-health-vs-substance-induced" },
   ],
-  "/misunderstood-diagnoses": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Misunderstood Diagnoses", path: "/misunderstood-diagnoses" },
-  ],
-  "/mental-health-delays-recovery": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Mental Health Delays Recovery", path: "/mental-health-delays-recovery" },
-  ],
   "/trauma-vs-excuses": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Trauma vs. Excuses", path: "/trauma-vs-excuses" },
   ],
-  "/how-trauma-shapes-addiction": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "How Trauma Shapes Addiction", path: "/how-trauma-shapes-addiction" },
-  ],
   "/treatment-modalities": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Treatment Modalities", path: "/treatment-modalities" },
-  ],
-  "/matching-modality": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Matching Modality", path: "/matching-modality" },
-  ],
-  "/therapy-timing": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Therapy Timing", path: "/therapy-timing" },
   ],
   "/family-interference": [
     { label: "Home", path: "/" },
@@ -175,11 +140,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "What Changes When Families Change", path: "/what-changes-when-families-change" },
-  ],
-  "/brain-spiritual-recovery": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Brain & Spiritual Recovery", path: "/brain-spiritual-recovery" },
   ],
   "/twelve-steps-explained": [
     { label: "Home", path: "/" },
@@ -216,11 +176,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Addiction Rewrites Family Rules", path: "/addiction-rewrites-family-rules" },
   ],
-  "/cost-of-secrecy": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Cost of Secrecy", path: "/cost-of-secrecy" },
-  ],
   "/boundary-drift": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
@@ -231,35 +186,10 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Anger & Boundaries", path: "/anger-and-boundaries" },
   ],
-  "/flexibility-vs-instability": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Flexibility vs. Instability", path: "/flexibility-vs-instability" },
-  ],
-  "/addiction-attachment-styles": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Addiction & Attachment Styles", path: "/addiction-attachment-styles" },
-  ],
   "/grief-for-family": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Grief for Family", path: "/grief-for-family" },
-  ],
-  "/enabling-language-translator": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Enabling Language Translator", path: "/enabling-language-translator" },
-  ],
-  "/intergenerational-enabling": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Intergenerational Enabling", path: "/intergenerational-enabling" },
-  ],
-  "/who-benefits-filter": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Who Benefits Filter", path: "/who-benefits-filter" },
   ],
   "/family-unity-liability": [
     { label: "Home", path: "/" },
@@ -281,11 +211,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Eating Disorders Guide", path: "/eating-disorders-guide" },
   ],
-  "/conversation-starters": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Conversation Starters", path: "/conversation-starters" },
-  ],
   "/living-well-regardless": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
@@ -293,25 +218,10 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
   ],
 
   // Sibling guides (under Family Education)
-  "/sibling-experience": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "The Sibling Experience", path: "/sibling-experience" },
-  ],
-  "/growing-up-shadow": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Growing Up in the Shadow", path: "/growing-up-shadow" },
-  ],
   "/sibling-guilt-anger-loyalty": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Sibling Guilt, Anger & Loyalty", path: "/sibling-guilt-anger-loyalty" },
-  ],
-  "/rebuilding-sibling-relationships": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Rebuilding Sibling Relationships", path: "/rebuilding-sibling-relationships" },
   ],
   "/parents-repairing-sibling-system": [
     { label: "Home", path: "/" },
@@ -376,36 +286,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
   ],
 
   // AI Coaching Tools
-  "/ai-life-coach": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "AI Life Coach", path: "/ai-life-coach" },
-  ],
-  "/ai-enabling-decision-coach": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "Enabling Decision Coach", path: "/ai-enabling-decision-coach" },
-  ],
-  "/ai-boundary-builder-coach": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "Boundary Builder Coach", path: "/ai-boundary-builder-coach" },
-  ],
-  "/ai-treatment-navigator": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "Treatment Navigator", path: "/ai-treatment-navigator" },
-  ],
-  "/ai-relapse-response-guide": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "Relapse Response Guide", path: "/ai-relapse-response-guide" },
-  ],
-  "/ai-addiction-reality-translator": [
-    { label: "Home", path: "/" },
-    { label: "AI Coaching Tools", path: "/family-education" },
-    { label: "Addiction Reality Translator", path: "/ai-addiction-reality-translator" },
-  ],
 
   // Interactive Tools & Exercises
   "/addiction-assessment": [
@@ -418,11 +298,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Family Action Plan", path: "/family-action-plan" },
   ],
-  "/scenario-exercise": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Scenario Exercise", path: "/scenario-exercise" },
-  ],
   "/crisis-chaos": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
@@ -432,11 +307,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Emotional Regulation", path: "/emotional-regulation" },
-  ],
-  "/values-exercise": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Values Exercise", path: "/values-exercise" },
   ],
   "/talking-about-treatment": [
     { label: "Home", path: "/" },
@@ -477,21 +347,6 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },
     { label: "Treatment Questions", path: "/treatment-questions" },
-  ],
-  "/recovery-requirements": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Recovery Requirements", path: "/recovery-requirements" },
-  ],
-  "/insight-behavior-tracker": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Insight & Behavior Tracker", path: "/insight-behavior-tracker" },
-  ],
-  "/values-aligned-decisions": [
-    { label: "Home", path: "/" },
-    { label: "Family Education", path: "/family-education" },
-    { label: "Values-Aligned Decisions", path: "/values-aligned-decisions" },
   ],
   "/fear-inventory-exercise": [
     { label: "Home", path: "/" },
@@ -614,14 +469,6 @@ export function getBreadcrumbs(pathname: string): BreadcrumbItem[] | null {
       { label: "Community", path: "/family-support" },
       { label: "Family Forum", path: "/family-forum" },
       { label: "Topic", path: pathname },
-    ];
-  }
-
-  if (pathname === "/relapse-radar") {
-    return [
-      { label: "Home", path: "/" },
-      { label: "Family Education", path: "/family-education" },
-      { label: "Relapse Radar", path: "/relapse-radar" },
     ];
   }
 

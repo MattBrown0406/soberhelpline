@@ -1,12 +1,19 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { MessageCircle, Search, BookOpen, Video, Loader2, ArrowLeft, ChevronDown, ChevronUp, X } from "lucide-react";
+import { MessageCircle, MessageCircleQuestion, Search, BookOpen, Video, Loader2, ArrowLeft, CalendarDays, ChevronDown, ChevronUp, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { IconTile, KindPill, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
 import { format } from "date-fns";
+
+// Shared looks, written out in full so Tailwind keeps them.
+const NAV_PILL =
+  "inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-medium text-foreground shadow-sm shadow-slate-900/[0.03] transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+const CHIP =
+  "inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+const CHIP_ON = "border-primary bg-primary text-primary-foreground";
+const CHIP_OFF = "border-border bg-card text-foreground/80 hover:border-primary/50";
 
 interface QAEntry {
   id: string;
@@ -20,37 +27,46 @@ interface QAEntry {
 function QACard({ entry }: { entry: QAEntry }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-lg border border-border bg-card">
+    <Panel className="p-0 sm:p-0">
       <button
         type="button"
-        className="flex w-full items-start justify-between gap-4 p-4 text-left"
+        aria-expanded={open}
+        className="flex w-full items-start gap-3 rounded-2xl p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-5"
         onClick={() => setOpen(!open)}
       >
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-foreground leading-snug">{entry.question}</p>
-          {entry.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-2">
-              {entry.tags.map(tag => (
-                <Badge key={tag} variant="secondary" className="text-xs px-1.5 py-0">{tag}</Badge>
-              ))}
-            </div>
+        <IconTile icon={MessageCircleQuestion} tone="teal" />
+        <span className="min-w-0 flex-1">
+          {entry.meeting_date && (
+            <KindPill tone="navy" className="mb-1.5 gap-1">
+              <CalendarDays className="h-3 w-3" aria-hidden="true" />
+              {format(new Date(entry.meeting_date), "MMM d, yyyy")}
+            </KindPill>
           )}
-        </div>
-        <div className="shrink-0 mt-0.5 text-muted-foreground">
-          {open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-        </div>
+          <span className="block break-words text-base font-semibold leading-snug text-foreground">{entry.question}</span>
+          {entry.tags.length > 0 && (
+            <span className="mt-2 flex flex-wrap gap-1.5">
+              {entry.tags.map(tag => (
+                <span key={tag} className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300">{tag}</span>
+              ))}
+            </span>
+          )}
+          <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+            {open ? "Hide the answer" : "Read the answer"}
+            {open ? <ChevronUp className="h-4 w-4" aria-hidden="true" /> : <ChevronDown className="h-4 w-4" aria-hidden="true" />}
+          </span>
+        </span>
       </button>
       {open && (
-        <div className="px-4 pb-4 border-t border-border pt-3">
-          <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{entry.answer}</div>
+        <div className="border-t border-border/70 px-4 pb-5 pt-4 sm:px-5">
+          <div className="max-w-prose whitespace-pre-wrap break-words text-base leading-relaxed text-foreground">{entry.answer}</div>
           {entry.meeting_date && (
-            <p className="text-xs text-muted-foreground mt-3">
+            <p className="mt-3 text-sm text-muted-foreground">
               From the {format(new Date(entry.meeting_date), "MMMM d, yyyy")} meeting
             </p>
           )}
         </div>
       )}
-    </div>
+    </Panel>
   );
 }
 
@@ -92,110 +108,100 @@ export default function MemberQandA() {
         title="Q&A Archive | Sober Helpline Members"
         description="Browse questions asked during Family Squares meetings, with Matt's answers. Search by topic or keyword."
       />
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-8 max-w-3xl">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-              <MessageCircle className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground">Q&amp;A Archive</h1>
-              <p className="text-muted-foreground text-sm">Real questions from Monday meetings, answered</p>
-            </div>
-          </div>
+      <MemberPage>
+        <div className="container mx-auto max-w-3xl space-y-6 px-4 py-6 sm:py-10">
+          <MemberHero
+            eyebrow="Monday meetings"
+            title="Q&A Archive"
+            subtitle="Real questions from Monday meetings, answered"
+          />
 
-          <div className="flex flex-wrap gap-2 mb-6 pb-5 border-b border-border">
-            <Link to="/zoom-recordings">
-              <Button variant="outline" size="sm" className="gap-1.5">
-                <Video className="h-3.5 w-3.5" />
-                Recordings
-              </Button>
+          <nav aria-label="Related member pages" className="flex flex-wrap gap-2">
+            <Link to="/zoom-recordings" className={NAV_PILL}>
+              <Video className="h-4 w-4 text-primary" aria-hidden="true" />
+              Recordings
             </Link>
-            <Link to="/member-learning-paths">
-              <Button variant="outline" size="sm" className="gap-1.5">
-                <BookOpen className="h-3.5 w-3.5" />
-                Learning Paths
-              </Button>
+            <Link to="/member-home" className={NAV_PILL}>
+              <BookOpen className="h-4 w-4 text-primary" aria-hidden="true" />
+              Learning Paths
             </Link>
-          </div>
+          </nav>
 
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-            <Input
-              ref={searchRef}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search questions and answers…"
-              className="pl-9 pr-9"
-            />
-            {search && (
-              <button
-                type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                onClick={() => { setSearch(""); searchRef.current?.focus(); }}
-              >
-                <X className="h-4 w-4" />
-              </button>
+          <div className="space-y-3">
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input
+                ref={searchRef}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search questions and answers…"
+                aria-label="Search questions and answers"
+                className="h-12 rounded-xl border-border bg-card pl-10 pr-12 text-base shadow-sm shadow-slate-900/[0.03] md:text-base"
+              />
+              {search && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  className="absolute right-0.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  onClick={() => { setSearch(""); searchRef.current?.focus(); }}
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+
+            {allTags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  aria-pressed={activeTag === null}
+                  onClick={() => setActiveTag(null)}
+                  className={`${CHIP} ${activeTag === null ? CHIP_ON : CHIP_OFF}`}
+                >
+                  All ({entries.length})
+                </button>
+                {allTags.map(tag => {
+                  const count = entries.filter(e => e.tags.includes(tag)).length;
+                  return (
+                    <button
+                      key={tag}
+                      type="button"
+                      aria-pressed={activeTag === tag}
+                      onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                      className={`${CHIP} ${activeTag === tag ? CHIP_ON : CHIP_OFF}`}
+                    >
+                      {tag} ({count})
+                    </button>
+                  );
+                })}
+              </div>
             )}
           </div>
 
-          {allTags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-5">
-              <button
-                type="button"
-                onClick={() => setActiveTag(null)}
-                className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-                  activeTag === null
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background text-muted-foreground border-border hover:border-primary/50"
-                }`}
-              >
-                All ({entries.length})
-              </button>
-              {allTags.map(tag => {
-                const count = entries.filter(e => e.tags.includes(tag)).length;
-                return (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-                      activeTag === tag
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background text-muted-foreground border-border hover:border-primary/50"
-                    }`}
-                  >
-                    {tag} ({count})
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
           {isLoading ? (
             <div className="flex items-center justify-center py-16">
-              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              <Loader2 className="h-6 w-6 animate-spin text-primary motion-reduce:animate-none" aria-label="Loading" />
             </div>
           ) : entries.length === 0 ? (
-            <div className="text-center py-16">
-              <MessageCircle className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
-              <p className="text-muted-foreground">No Q&amp;As have been added yet.</p>
-              <p className="text-sm text-muted-foreground mt-1">Check back after Monday's meeting.</p>
-            </div>
+            <Panel className="py-10 text-center sm:py-12">
+              <IconTile icon={MessageCircle} tone="teal" size="lg" className="mx-auto mb-3" />
+              <p className="font-semibold text-foreground">No Q&amp;As have been added yet.</p>
+              <p className="mt-1 text-sm text-muted-foreground">Check back after Monday's meeting.</p>
+            </Panel>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">No results for "{search || activeTag}".</p>
+            <Panel className="py-8 text-center">
+              <p className="break-words text-foreground">No results for "{search || activeTag}".</p>
               <button
                 type="button"
-                className="text-sm text-primary mt-2 hover:underline"
+                className="mt-2 inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 onClick={() => { setSearch(""); setActiveTag(null); }}
               >
                 Clear filters
               </button>
-            </div>
+            </Panel>
           ) : (
-            <div className="space-y-2">
-              <p className="text-xs text-muted-foreground mb-3">
+            <div className="space-y-3">
+              <p className="text-sm text-slate-600 dark:text-slate-300">
                 {filtered.length} {filtered.length === 1 ? "question" : "questions"}
                 {(search || activeTag) ? " matching your filter" : ""}
               </p>
@@ -203,14 +209,17 @@ export default function MemberQandA() {
             </div>
           )}
 
-          <div className="mt-10">
-            <Link to="/family-education" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary">
-              <ArrowLeft className="h-4 w-4 mr-1" />
+          <div className="pt-2">
+            <Link
+              to="/family-education"
+              className="inline-flex min-h-11 items-center gap-1 rounded-lg text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               Back to Education Center
             </Link>
           </div>
         </div>
-      </div>
+      </MemberPage>
     </>
   );
 }

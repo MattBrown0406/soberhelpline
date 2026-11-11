@@ -32,14 +32,6 @@ A free, interactive, stage-based family recovery navigator. Families take a 5-mi
 
 URL: https://soberhelpline.com/roadmap
 
-### AI Coaching Tools
-- AI Life Coach: https://soberhelpline.com/ai-life-coach
-- AI Enabling Decision Coach: https://soberhelpline.com/ai-enabling-decision-coach
-- AI Boundary Builder Coach: https://soberhelpline.com/ai-boundary-builder-coach
-- AI Treatment Navigator: https://soberhelpline.com/ai-treatment-navigator
-- AI Relapse Response Guide: https://soberhelpline.com/ai-relapse-response-guide
-- AI Addiction Reality Translator: https://soberhelpline.com/ai-addiction-reality-translator
-
 ### Provider Directory
 Vetted treatment providers — no referral fees, no kickbacks, no patient brokering. Categories include:
 - Inpatient Treatment: https://soberhelpline.com/inpatient-treatment
@@ -109,15 +101,6 @@ URL: https://soberhelpline.com/family-coaching
 - [Psychiatrists](/psychiatrists): Addiction psychiatry providers.
 - [Sober Coaches & Companions](/sober-coaches-companions): Recovery coaches and sober companions.
 - [Recovery Resources](/recovery-resources): Browse all provider categories.
-
-## AI Coaching Tools
-
-- [AI Life Coach](/ai-life-coach): On-demand life coaching for family members.
-- [AI Enabling Decision Coach](/ai-enabling-decision-coach): Decide whether an action is enabling.
-- [AI Boundary Builder Coach](/ai-boundary-builder-coach): Build boundaries with consequences.
-- [AI Treatment Navigator](/ai-treatment-navigator): Navigate treatment options.
-- [AI Relapse Response Guide](/ai-relapse-response-guide): Respond to relapse situations.
-- [AI Addiction Reality Translator](/ai-addiction-reality-translator): Translate addiction behavior into reality.
 
 ## State Family Support
 

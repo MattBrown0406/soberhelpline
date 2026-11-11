@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, XCircle, MessageCircle } from "lucide-react";
+import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, XCircle, MessageCircle } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
@@ -14,7 +13,7 @@ const ParentsRepairingSiblingSystem = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
@@ -27,11 +26,12 @@ const ParentsRepairingSiblingSystem = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="Parents: Repairing the Sibling System"
             subtitle="How to acknowledge unequal impact, restore trust, and support healing between siblings. This may be the most important work parents do after the crisis stabilizes."
             clinicalNote="Based on family systems therapy principles, sibling relational repair frameworks, and the developmental needs of non-identified patients in addiction families."
@@ -148,6 +148,93 @@ const ParentsRepairingSiblingSystem = () => {
               <p className="text-gray-700 mt-4 italic">
                 Over time, siblings adapt in different—and often conflicting—ways.
               </p>
+            </CardContent>
+          </Card>
+
+          {/* What Siblings Commonly Feel (from The Sibling Experience in Addiction) */}
+          <Card className="mb-8 border-blue-200 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Heart className="h-6 w-6 text-blue-600" />
+                What Siblings Commonly Feel (But Rarely Say)
+              </h2>
+              <p className="text-gray-700 mb-4">Siblings often carry:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Anger that feels disloyal
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Guilt for being "okay"
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Resentment over unequal attention
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Fear of becoming like the addicted sibling
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Shame for wishing things were different
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Pressure to be "the easy one"
+                </li>
+              </ul>
+              <p className="text-blue-700 font-medium mt-4 italic">
+                These feelings are normal—and often unacknowledged.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* How Addiction Alters Sibling Relationships (from The Sibling Experience in Addiction) */}
+          <Card className="mb-8 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Users className="h-6 w-6 text-blue-600" />
+                How Addiction Alters Sibling Relationships
+              </h2>
+
+              <div className="space-y-6">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Unequal Attention</h3>
+                  <p className="text-gray-700 mb-2">
+                    Parents often spend disproportionate time and energy on the addicted child—out of necessity, not preference.
+                  </p>
+                  <p className="text-gray-700 mb-2">Siblings may internalize this as:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4 italic">
+                    <li>• "My needs don't matter"</li>
+                    <li>• "I shouldn't need anything"</li>
+                    <li>• "I shouldn't make things harder"</li>
+                  </ul>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Loyalty Conflicts</h3>
+                  <p className="text-gray-700 mb-2">Siblings may feel torn between:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4">
+                    <li>• Protecting parents</li>
+                    <li>• Supporting or distancing from the addicted sibling</li>
+                    <li>• Protecting themselves</li>
+                  </ul>
+                  <p className="text-gray-800 font-medium mt-2 italic">No choice feels clean.</p>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Emotional Distance</h3>
+                  <p className="text-gray-700 mb-2">Many siblings learn to disconnect emotionally to survive:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4">
+                    <li>• Reduced closeness</li>
+                    <li>• Superficial contact</li>
+                    <li>• Estrangement without clarity</li>
+                  </ul>
+                  <p className="text-gray-800 font-medium mt-2 italic">Distance becomes protection.</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
@@ -457,38 +544,6 @@ const ParentsRepairingSiblingSystem = () => {
             </CardContent>
           </Card>
 
-          {/* Reflection Questions */}
-          <Card className="mb-8 border-purple-200 print:border print:shadow-none">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-purple-600" />
-                Reflection Questions for Parents
-              </h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What did each child lose during the years of addiction?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  Where did we unintentionally rely on certain children to be "easy"?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  How do we react when siblings express anger or distance?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What do we still feel defensive about—and why?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What would accountability look like without self-blame?
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
           {/* Final Thought */}
           <Card className="mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white print:bg-gray-100 print:text-gray-900">
             <CardContent className="p-8">
@@ -518,21 +573,17 @@ const ParentsRepairingSiblingSystem = () => {
             <CardContent className="p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Suggested Companion Resources</h2>
               <div className="grid gap-3">
-                <Link to="/sibling-experience" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → The Sibling Experience in Addiction
-                </Link>
                 <Link to="/sibling-guilt-anger-loyalty" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
                   → Sibling Guilt, Anger, and Loyalty Conflicts
                 </Link>
-                <Link to="/growing-up-shadow" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → Growing Up in the Shadow of Addiction
-                </Link>
-                <Link to="/rebuilding-sibling-relationships" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → Rebuilding Sibling Relationships in Recovery
+                <Link to="/strong-one" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
+                  → The Hidden Cost of Being the "Strong One"
                 </Link>
               </div>
             </CardContent>
           </Card>
+
+          <RelatedResources currentPath="/parents-repairing-sibling-system" />
 
           {/* Back Button */}
           <div className="text-center print:hidden">
@@ -545,9 +596,7 @@ const ParentsRepairingSiblingSystem = () => {
           </div>
         </div>
       </div>
-    
-          <RelatedResources currentPath="/parents-repairing-sibling-system" />
-</Layout>
+    </>
   );
 };
 

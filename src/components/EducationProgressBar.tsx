@@ -1,72 +1,63 @@
-import { BookOpen, CheckCircle, TrendingUp } from "lucide-react";
+import type { ComponentType } from "react";
+import { BookOpen, Headphones, NotebookPen, TrendingUp } from "lucide-react";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
+import { IconTile, Panel, ProgressRing, type Tone } from "@/components/member/MemberUI";
 
-const EducationProgressBar = () => {
+// The member's library progress. The same numbers appear on /member-home and
+// /family-education (both read useEducationProgress().getStats(), which counts
+// against the registry in src/data/memberLibrary.ts).
+
+interface EducationProgressBarProps {
+  /** Drop the outer card (for use inside another card). */
+  bare?: boolean;
+}
+
+const types: { key: "guide" | "worksheet" | "meditation"; label: string; icon: ComponentType<{ className?: string }>; tone: Tone }[] = [
+  { key: "guide", label: "Guides", icon: BookOpen, tone: "sky" },
+  { key: "worksheet", label: "Worksheets & exercises", icon: NotebookPen, tone: "emerald" },
+  { key: "meditation", label: "Meditations", icon: Headphones, tone: "violet" },
+];
+
+const EducationProgressBar = ({ bare = false }: EducationProgressBarProps) => {
   const { loading, getStats, userId } = useEducationProgress();
 
   if (!userId || loading) return null;
 
   const stats = getStats();
 
-  return (
-    <div className="bg-white rounded-xl border shadow-sm p-4 md:p-6 mb-6">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        {/* Progress Bar */}
-        <div className="flex-1 w-full">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-logo-blue" />
-              <span className="text-sm font-semibold text-gray-900">Your Progress</span>
-            </div>
-            <span className="text-sm font-bold text-logo-blue">
-              {stats.totalCompleted}/{stats.totalResources} completed
-            </span>
-          </div>
-          <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-primary to-blue-400 rounded-full transition-all duration-700 ease-out"
-              style={{ width: `${Math.max(stats.completionPercentage, 2)}%` }}
-            />
-          </div>
-          <p className="text-xs text-gray-500 mt-1.5">
-            {stats.completionPercentage}% complete
-            {stats.totalStarted > 0 && ` • ${stats.totalStarted} in progress`}
+  const body = (
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+      <div className="flex items-center gap-4">
+        <ProgressRing value={stats.completionPercentage} label={`${stats.completionPercentage}% complete`}>
+          <span className="text-lg font-bold tabular-nums text-foreground">{stats.completionPercentage}%</span>
+        </ProgressRing>
+        <div className="min-w-0">
+          <p className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+            <TrendingUp className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            Your library progress
           </p>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="flex gap-4 md:gap-6 flex-shrink-0">
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 mx-auto mb-1">
-              <CheckCircle className="w-4 h-4 text-emerald-600" />
-            </div>
-            <p className="text-xs text-gray-500">Guides</p>
-            <p className="text-sm font-bold text-gray-900">
-              {stats.byType.guide?.completed || 0}/{stats.byType.guide?.total || 0}
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 mx-auto mb-1">
-              <BookOpen className="w-4 h-4 text-purple-600" />
-            </div>
-            <p className="text-xs text-gray-500">Worksheets</p>
-            <p className="text-sm font-bold text-gray-900">
-              {stats.byType.worksheet?.completed || 0}/{stats.byType.worksheet?.total || 0}
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 mx-auto mb-1">
-              <span className="text-blue-600 text-sm">🧘</span>
-            </div>
-            <p className="text-xs text-gray-500">Meditations</p>
-            <p className="text-sm font-bold text-gray-900">
-              {stats.byType.meditation?.completed || 0}/{stats.byType.meditation?.total || 0}
-            </p>
-          </div>
+          <p className="mt-0.5 text-sm tabular-nums text-muted-foreground">
+            {stats.totalCompleted} of {stats.totalResources} done
+          </p>
+          {stats.totalStarted > 0 && <p className="text-xs text-muted-foreground">{stats.totalStarted} in progress</p>}
         </div>
       </div>
+
+      <ul className="grid flex-1 grid-cols-3 gap-2">
+        {types.map(({ key, label, icon, tone }) => (
+          <li key={key} className="flex flex-col gap-1.5 rounded-xl bg-muted/50 p-2.5 print:bg-transparent print:p-0">
+            <IconTile icon={icon} tone={tone} size="sm" className="print:hidden" />
+            <span className="text-sm font-semibold tabular-nums leading-none text-foreground">
+              {stats.byType[key].completed}/{stats.byType[key].total}
+            </span>
+            <span className="text-xs leading-snug text-foreground/75">{label}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
+
+  return bare ? <div>{body}</div> : <Panel>{body}</Panel>;
 };
 
 export default EducationProgressBar;

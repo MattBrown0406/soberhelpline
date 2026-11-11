@@ -1,14 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Printer, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function CrisisChaos() {
-  useGuideTracking("Crisis vs. Chaos Decision Guide", "/crisis-chaos");
+  useGuideTracking("/crisis-chaos", "Crisis vs. Chaos Decision Guide");
   const handlePrint = () => {
     window.print();
   };
@@ -31,22 +32,28 @@ export default function CrisisChaos() {
                 className="inline-flex items-center text-primary hover:text-primary/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-1" />
-                Back to Family Resources
+                Back to Family Education
               </Link>
-              <Button onClick={handlePrint} className="gap-2">
+              <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Document
+                Print
               </Button>
             </div>
 
             {/* Printable Document Content */}
             <div className="bg-white dark:bg-card rounded-lg shadow-lg p-8 md:p-12 print:shadow-none print:p-0">
               <ToolBrandHeader
+                headingAs="h1"
                 title="Crisis vs. Chaos"
                 subtitle="A decision guide for families impacted by addiction. Learning to distinguish true emergencies from emotionally charged chaos changes everything."
                 clinicalNote="Based on crisis intervention theory, SAMHSA's crisis response guidelines, and Al-Anon principles of detachment with love."
               />
 
+              {/* Safety first: before the guide asks her to pause */}
+              <SafetyBox
+                topics={["emergency", "suicide", "overdose", "violence"]}
+                title="First: is anyone in danger right now?"
+              />
 
               {/* Purpose Section */}
               <section className="mb-8">
@@ -76,20 +83,20 @@ export default function CrisisChaos() {
                 <p className="text-muted-foreground mb-4">Before responding, ask yourself:</p>
                 <ul className="space-y-2 mb-4">
                   <li className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>Am I reacting out of fear, guilt, or panic?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>Have I handled this situation before?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>Does this require action right now, or does it feel urgent because emotions are high?</span>
                   </li>
                 </ul>
                 <p className="text-sm text-muted-foreground p-4 bg-muted/30 rounded-lg print:bg-gray-50">
-                  <strong>If possible, take a 10–30 minute pause before responding.</strong> Urgency is often used—consciously or unconsciously—to bypass boundaries.
+                  <strong>If no one is in immediate danger, take a 10–30 minute pause before responding.</strong> Urgency is often used—consciously or unconsciously—to bypass boundaries.
                 </p>
               </section>
 
@@ -111,7 +118,7 @@ export default function CrisisChaos() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-destructive font-bold">•</span>
-                      Credible threats of self-harm or harm to others
+                      Any threat of self-harm or harm to others (you do not have to decide whether they mean it)
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-destructive font-bold">•</span>
@@ -135,7 +142,7 @@ export default function CrisisChaos() {
                 <div className="p-4 border-2 border-primary/30 rounded-lg bg-primary/5 print:bg-gray-50">
                   <h3 className="font-semibold mb-3">Appropriate Responses to Crisis</h3>
                   <ul className="space-y-1 text-sm">
-                    <li>• Call emergency services when needed</li>
+                    <li>• Call 911 when anyone is in danger; call or text 988 for any talk of suicide</li>
                     <li>• Involve medical or psychiatric professionals</li>
                     <li>• Prioritize safety over comfort</li>
                     <li>• Follow established emergency protocols</li>
@@ -158,16 +165,19 @@ export default function CrisisChaos() {
                 <div className="p-4 bg-muted/30 rounded-lg print:bg-gray-50">
                   <h3 className="font-semibold mb-3">Common Chaos Situations</h3>
                   <ul className="space-y-2 text-sm">
-                    <li>• Emotional distress, panic, or intoxicated phone calls</li>
+                    <li>• Emotional distress, panic, or upset phone calls (if they sound slurred, are nodding off, or can't stay awake, treat it as a possible overdose and call 911)</li>
                     <li>• Being kicked out of housing due to substance use</li>
                     <li>• Financial emergencies caused by ongoing use</li>
                     <li>• Missed work, school, or responsibilities</li>
                     <li>• Relationship conflict or emotional manipulation</li>
-                    <li>• Threats that appear dramatic but lack immediacy or credibility</li>
+                    <li>• Angry statements meant to pressure you ("you'll be sorry", "I'll never speak to you again"). A threat of suicide or violence is never in this list: treat it as a crisis.</li>
                     <li>• Requests for money, rides, or shelter during active use</li>
                   </ul>
                   <p className="mt-4 font-medium text-primary">
                     These situations are painful—but they are not emergencies.
+                  </p>
+                  <p className="mt-4 rounded-md border border-amber-400/70 bg-amber-50 p-3 text-sm font-medium text-amber-950 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-50 print:border-foreground/40">
+                    If you can't tell which it is, treat it as a crisis: call 911 for a possible overdose, and call or text 988 for any talk of suicide.
                   </p>
                 </div>
               </section>
@@ -183,56 +193,48 @@ export default function CrisisChaos() {
                   <div className="p-4 border rounded-lg">
                     <p className="font-medium mb-2">Is someone's life or immediate safety at risk?</p>
                     <div className="flex gap-6 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      <span className="flex items-center gap-2">
                         Yes → <span className="text-destructive font-semibold">Crisis</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      </span>
+                      <span className="flex items-center gap-2">
                         No → <span className="text-primary font-semibold">Chaos</span>
-                      </label>
+                      </span>
                     </div>
                   </div>
 
                   <div className="p-4 border rounded-lg">
                     <p className="font-medium mb-2">Would delaying my response increase the risk of serious harm?</p>
                     <div className="flex gap-6 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      <span className="flex items-center gap-2">
                         Yes → <span className="text-destructive font-semibold">Crisis</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      </span>
+                      <span className="flex items-center gap-2">
                         No → <span className="text-primary font-semibold">Chaos</span>
-                      </label>
+                      </span>
                     </div>
                   </div>
 
                   <div className="p-4 border rounded-lg">
                     <p className="font-medium mb-2">Have I intervened in this situation before without lasting change?</p>
                     <div className="flex gap-6 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      <span className="flex items-center gap-2">
                         Yes → <span className="text-primary font-semibold">Likely Chaos</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      </span>
+                      <span className="flex items-center gap-2">
                         No → Continue assessing
-                      </label>
+                      </span>
                     </div>
                   </div>
 
                   <div className="p-4 border rounded-lg">
                     <p className="font-medium mb-2">Does responding require professional intervention rather than family rescue?</p>
                     <div className="flex gap-6 text-sm">
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      <span className="flex items-center gap-2">
                         Yes → <span className="text-destructive font-semibold">Crisis</span>
-                      </label>
-                      <label className="flex items-center gap-2">
-                        <span className="w-4 h-4 border border-foreground/50 inline-block"></span>
+                      </span>
+                      <span className="flex items-center gap-2">
                         No → <span className="text-primary font-semibold">Chaos</span>
-                      </label>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -320,28 +322,23 @@ export default function CrisisChaos() {
                 </h2>
                 <p className="text-muted-foreground mb-4">After any intense situation, ask:</p>
 
-                <div className="space-y-4 mb-6">
+                <div className="space-y-4">
                   <div className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>Was this truly a crisis or chaos?</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>Did my response align with my values and plan?</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>What emotions influenced my decision?</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="w-4 h-4 border border-foreground/50 inline-block flex-shrink-0 mt-1"></span>
+                    <span className="text-primary font-bold">•</span>
                     <span>What would I do the same or differently next time?</span>
                   </div>
-                </div>
-
-                <div>
-                  <p className="font-medium mb-2">Write brief notes:</p>
-                  <div className="border-b border-dashed border-foreground/30 h-20"></div>
                 </div>
               </section>
 
@@ -390,17 +387,21 @@ export default function CrisisChaos() {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-primary">•</span>
-                    <span>Boundary Setting Worksheet</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-primary">•</span>
-                    <Link to="/scenario-exercise" className="text-primary hover:underline print:text-foreground print:no-underline">
-                      Scenario-Based Recovery Exercises
+                    <Link to="/workbook/boundary-script" className="text-primary hover:underline print:text-foreground print:no-underline">
+                      Write one boundary you can hold
                     </Link>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-primary">•</span>
-                    <span>Emotional Regulation Tools for Families</span>
+                    <Link to="/workbook/hard-moment-practice" className="text-primary hover:underline print:text-foreground print:no-underline">
+                      Practice a hard moment
+                    </Link>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-primary">•</span>
+                    <Link to="/emotional-regulation" className="text-primary hover:underline print:text-foreground print:no-underline">
+                      Emotional Regulation Tools for Families
+                    </Link>
                   </li>
                 </ul>
               </section>

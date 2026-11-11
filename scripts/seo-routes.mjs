@@ -389,6 +389,8 @@ export const excludedSitemapRoutes = new Set([
 
   '/zoom-recordings',
   '/member-home',
+  '/workbook',
+  '/workbook/earlier',
   '/member-learning-paths',
   '/member-qa',
 ]);

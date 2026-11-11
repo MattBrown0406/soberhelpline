@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Printer, Heart, Brain, Users, AlertTriangle, Shield, HelpCircle, CheckCircle, RefreshCw } from "lucide-react";
+import { Phone, ArrowLeft, Printer, Heart, Brain, Users, AlertTriangle, Shield, HelpCircle, CheckCircle, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -35,11 +35,12 @@ export default function StrongOneGuide() {
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title='The Hidden Cost of Being the "Strong One"'
               subtitle="When competence becomes a survival strategy — and a liability. The family member who holds it together often pays the highest price in silence."
               clinicalNote="Based on codependency research by Pia Mellody, caretaker burnout literature, and Al-Anon's emphasis on self-care as a recovery practice."
@@ -261,6 +262,35 @@ export default function StrongOneGuide() {
               </CardContent>
             </Card>
 
+            {/* Why Minimization Is Common (from Growing Up in the Shadow of Addiction) */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
+                  <Eye className="h-5 w-5" />
+                  Why "It Wasn't That Bad" Is So Common
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground font-medium">Minimization protected you as a child:</p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li>It reduced emotional overwhelm</li>
+                  <li>It helped you function</li>
+                  <li>It preserved attachment</li>
+                </ul>
+                <p className="text-muted-foreground font-medium mt-4">As an adult, minimization can:</p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li>Delay healing</li>
+                  <li>Block self-compassion</li>
+                  <li>Make support feel unnecessary or indulgent</li>
+                </ul>
+                <div className="bg-primary/10 p-4 rounded-lg mt-4">
+                  <p className="text-foreground font-medium text-center">
+                    You don't need trauma to justify healing.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Why Letting Go Feels So Scary */}
             <Card className="mb-6">
               <CardHeader>
@@ -337,40 +367,6 @@ export default function StrongOneGuide() {
               </CardContent>
             </Card>
 
-            {/* Reflection Questions */}
-            <Card className="mb-6 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Questions
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Where did being "the strong one" protect me?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    Where is it costing me now?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What am I afraid would happen if I stopped over-functioning?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What needs have I learned to ignore?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    What would strength look like if it included me?
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
             {/* A Grounding Reframe */}
             <Card className="mb-6 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 border-emerald-300 dark:border-emerald-700">
               <CardContent className="pt-6">
@@ -421,8 +417,8 @@ export default function StrongOneGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/values-aligned-decisions">
-                    <Button variant="outline" size="sm">Values-Aligned Decision Making Exercise</Button>
+                  <Link to="/family-action-plan">
+                    <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
                   <Link to="/living-well-regardless">
                     <Button variant="outline" size="sm">Living Well Regardless of Outcome</Button>

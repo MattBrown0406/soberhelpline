@@ -972,8 +972,8 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
             <Link to="/crisis-chaos">
               <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>
             </Link>
-            <Link to="/boundary-setting-worksheet">
-              <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
+            <Link to="/workbook/boundary-script">
+              <Button variant="outline" size="sm">Write one boundary you can hold</Button>
             </Link>
             <Link to="/emotional-regulation">
               <Button variant="outline" size="sm">Emotional Regulation Tools Guide</Button>

@@ -1,20 +1,19 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, HelpCircle, ArrowRight } from "lucide-react";
+import { ArrowLeft, Printer, Heart, Shield, Users, CheckCircle, AlertCircle, ArrowRight } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const FamilyRolesAddiction = () => {
-  useGuideTracking("Family Roles in Addiction", "/family-roles-addiction");
+  useGuideTracking("/family-roles-addiction", "Family Roles in Addiction");
   const handlePrint = () => {
     window.print();
   };
 
   return (
-    <Layout>
+    <>
       <div className="min-h-screen bg-gradient-to-b from-violet-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
@@ -27,11 +26,12 @@ const FamilyRolesAddiction = () => {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="flex items-center gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="Family Roles in Addiction (Beyond the Clichés)"
             subtitle="How survival strategies form — and how families outgrow them. These roles are not character flaws; they are adaptive responses to an unstable system."
             clinicalNote="Based on Sharon Wegscheider-Cruse's family systems model and Virginia Satir's family roles framework, adapted for addiction contexts."
@@ -482,38 +482,6 @@ const FamilyRolesAddiction = () => {
             </CardContent>
           </Card>
 
-          {/* Reflection Questions */}
-          <Card className="mb-8 border-purple-200 print:border print:shadow-none">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-purple-600" />
-                Reflection Questions for Families
-              </h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What role did I take on to survive?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What did that role protect me from?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What is it costing me now?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  When do I slip back into it?
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-purple-500 mt-1">•</span>
-                  What would balance look like instead?
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
           {/* For Parents: A Key Insight */}
           <Card className="mb-8 border-blue-200 bg-blue-50 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -588,8 +556,8 @@ const FamilyRolesAddiction = () => {
                 <Link to="/parents-repairing-sibling-system" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
                   → Parents: Repairing the Sibling System
                 </Link>
-                <Link to="/how-trauma-shapes-addiction" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
-                  → Family Trauma & Hypervigilance Self-Assessment
+                <Link to="/workbook/stress-check" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
+                  → Nervous system check-in
                 </Link>
                 <Link to="/living-well-regardless" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
                   → Living Well Regardless of Outcome
@@ -597,6 +565,8 @@ const FamilyRolesAddiction = () => {
               </div>
             </CardContent>
           </Card>
+
+          <RelatedResources currentPath="/family-roles-addiction" />
 
           {/* Back Button */}
           <div className="text-center print:hidden">
@@ -609,9 +579,7 @@ const FamilyRolesAddiction = () => {
           </div>
         </div>
       </div>
-    
-          <RelatedResources currentPath="/family-roles-addiction" />
-</Layout>
+    </>
   );
 };
 

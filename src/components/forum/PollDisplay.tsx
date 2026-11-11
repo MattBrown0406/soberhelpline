@@ -110,27 +110,11 @@ export function PollDisplay({ postId, userId }: PollDisplayProps) {
   };
 
   useEffect(() => {
+    // No realtime subscription: one channel per post was heavy, and vote rows
+    // carry voter ids. Results refresh after the member's own vote and when
+    // the thread list reloads.
     fetchPoll();
-
-    // Subscribe to realtime changes
-    const channel = supabase
-      .channel(`poll-votes-${postId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'forum_poll_votes'
-        },
-        () => {
-          fetchPoll();
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId, userId]);
 
   const handleVote = async (optionId: string) => {
@@ -178,10 +162,10 @@ export function PollDisplay({ postId, userId }: PollDisplayProps) {
   const isExpired = poll.ends_at && new Date(poll.ends_at) < new Date();
 
   return (
-    <Card className="mt-4">
+    <Card className="mt-4 max-w-prose rounded-xl border-border/70 shadow-none">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm flex items-center gap-2">
-          <BarChart3 className="h-4 w-4" />
+          <BarChart3 className="h-4 w-4 shrink-0" aria-hidden="true" />
           {poll.question}
         </CardTitle>
       </CardHeader>
@@ -196,7 +180,7 @@ export function PollDisplay({ postId, userId }: PollDisplayProps) {
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full justify-start h-auto py-2 relative overflow-hidden",
+                  "relative h-auto min-h-11 w-full justify-start overflow-hidden whitespace-normal rounded-xl py-2 text-left",
                   option.hasVoted && "border-primary bg-primary/5"
                 )}
                 onClick={() => !isExpired && handleVote(option.id)}
@@ -207,10 +191,10 @@ export function PollDisplay({ postId, userId }: PollDisplayProps) {
                   style={{ width: `${percentage}%` }}
                 />
                 <span className="relative flex items-center gap-2 flex-1">
-                  {option.hasVoted && <Check className="h-4 w-4 text-primary" />}
-                  <span>{option.option_text}</span>
+                  {option.hasVoted && <Check className="h-4 w-4 text-primary" aria-hidden="true" />}
+                  <span className="min-w-0 break-words">{option.option_text}</span>
                 </span>
-                <span className="relative text-sm text-muted-foreground">
+                <span className="relative shrink-0 text-sm text-slate-600 dark:text-slate-300">
                   {percentage}%
                 </span>
               </Button>

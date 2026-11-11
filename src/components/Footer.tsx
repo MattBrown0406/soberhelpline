@@ -14,7 +14,7 @@ const Footer = () => {
   const fromApp = arrivedFromApp();
   
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-auto">
+    <footer className="bg-gray-900 text-gray-300 mt-auto print:hidden">
       <div className="container mx-auto px-4 py-12">
         <div className="mb-10 rounded-lg border border-gray-800 bg-gray-800/60 p-5">
           <p className="text-sm font-semibold text-logo-blue mb-2">Families usually need one clear next step</p>

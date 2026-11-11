@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Home, ArrowLeft, Phone, Heart } from "lucide-react";
 import Footer from "./Footer";
@@ -13,22 +13,54 @@ import StickyContactForm from "./StickyContactForm";
 import WhatsAppLink from "./WhatsAppLink";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
+import GuideMemberBar from "./GuideMemberBar";
+import { memberBarItem, findLibraryItem } from "@/data/memberLibrary";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
+// The app wraps every route in <Layout> (App.tsx), and many older pages also
+// wrap themselves in one. A nested Layout renders only its children, so those
+// pages don't get a second header, footer and contact button.
+const InsideLayout = createContext(false);
+
 const Layout = ({ children }: LayoutProps) => {
-  const { pathname } = useLocation();
+  const nested = useContext(InsideLayout);
+  if (nested) return <>{children}</>;
+  return (
+    <InsideLayout.Provider value={true}>
+      <SiteLayout>{children}</SiteLayout>
+    </InsideLayout.Provider>
+  );
+};
+
+const SiteLayout = ({ children }: LayoutProps) => {
+  const { pathname, hash } = useLocation();
   const navigate = useNavigate();
   const { isMember } = useMembershipStatus();
+  // The member bar is dismissed for one page view at a time.
+  const [barDismissedOn, setBarDismissedOn] = useState<string | null>(null);
 
   // Handle native back button for mobile apps
   useNativeBackButton();
 
   useEffect(() => {
+    // A link to an anchor (e.g. /workbook/hard-moment-practice) is
+    // scrolled by the page itself once its content has loaded.
+    if (hash) return;
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  useEffect(() => {
+    setBarDismissedOn(null);
+  }, [pathname]);
+
+  const barItem = isMember ? memberBarItem(pathname) : undefined;
+  // Library reading guides get the larger, higher-contrast reading styles (index.css).
+  const isLibraryGuide = findLibraryItem(pathname)?.type === "guide";
+  const showMemberBar = !!barItem && barDismissedOn !== pathname;
 
   const isHome = pathname === "/";
   const isReferralFit = pathname === "/referralfit" || pathname === "/referralfit-support";
@@ -59,7 +91,7 @@ const Layout = ({ children }: LayoutProps) => {
       </a>
 
       {!isHome && (
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40">
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/40 print:hidden">
           <div className="container mx-auto px-4 flex items-center h-14">
             {/* Logo */}
             <Link to="/" className="flex items-center mr-4 shrink-0">
@@ -118,14 +150,14 @@ const Layout = ({ children }: LayoutProps) => {
                 </Link>
               </nav>
               <SiteSearch />
-              {isMember && pathname !== "/family-education" && (
+              {isMember && pathname !== "/member-home" && (
                 <Link
-                  to="/family-education"
-                  className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
+                  to="/member-home"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-2 sm:px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
                   aria-label="Go to My Family Hub"
                 >
-                  <Heart className="h-4 w-4" />
-                  <span>My Family Hub</span>
+                  <Heart className="h-4 w-4" aria-hidden="true" />
+                  <span className="hidden sm:inline">My Family Hub</span>
                 </Link>
               )}
               {/* Phone number */}
@@ -145,11 +177,18 @@ const Layout = ({ children }: LayoutProps) => {
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         </div>
       )}
-      <main id="main-content" className="flex-1 pb-safe">
+      <main id="main-content" className={isLibraryGuide ? "flex-1 pb-safe guide-reading" : "flex-1 pb-safe"}>
         {children}
       </main>
-      <Footer />
-      {!isReferralFit && <StickyContactForm />}
+      {/* Room below the footer so the member bar never covers the end of the page. */}
+      <div className={showMemberBar ? "pb-16 print:pb-0" : undefined}>
+        <Footer />
+      </div>
+      {/* Members on library pages get the member bar in place of the contact button. */}
+      {!isReferralFit && !showMemberBar && <StickyContactForm />}
+      {showMemberBar && barItem && (
+        <GuideMemberBar item={barItem} onDismiss={() => setBarDismissedOn(pathname)} />
+      )}
     </div>
     </SEOOverrideProvider>
   );

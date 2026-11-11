@@ -54,20 +54,6 @@ The Recovery Roadmap is a free, interactive tool that guides families through ev
 **Assessment:** https://soberhelpline.com/roadmap/assessment
 **Landing page:** https://soberhelpline.com/roadmap
 
----
-
-## AI Coaching Tools
-
-Interactive AI-powered tools for families, built on Matt Brown's methodology:
-
-| Tool | URL | Purpose |
-|------|-----|---------|
-| AI Life Coach | https://soberhelpline.com/ai-life-coach | General guidance and support |
-| AI Enabling Decision Coach | https://soberhelpline.com/ai-enabling-decision-coach | Help families identify enabling vs. helping |
-| AI Boundary Builder Coach | https://soberhelpline.com/ai-boundary-builder-coach | Build boundaries with real consequences |
-| AI Treatment Navigator | https://soberhelpline.com/ai-treatment-navigator | Navigate treatment options and levels of care |
-| AI Relapse Response Guide | https://soberhelpline.com/ai-relapse-response-guide | What to do when relapse happens |
-| AI Addiction Reality Translator | https://soberhelpline.com/ai-addiction-reality-translator | Translate addiction behaviors into plain language |
 
 ---
 
@@ -96,17 +82,10 @@ Vetted treatment providers with no referral fees or patient brokering:
 |----------|-----|
 | Addiction Assessment | https://soberhelpline.com/addiction-assessment |
 | Family Action Plan | https://soberhelpline.com/family-action-plan |
-| Scenario Exercise | https://soberhelpline.com/scenario-exercise |
 | Crisis & Chaos Tool | https://soberhelpline.com/crisis-chaos |
 | Emotional Regulation | https://soberhelpline.com/emotional-regulation |
-| Values Exercise | https://soberhelpline.com/values-exercise |
 | Readiness Checklist | https://soberhelpline.com/readiness-checklist |
 | Fear Inventory Exercise | https://soberhelpline.com/fear-inventory-exercise |
-| Conversation Starters | https://soberhelpline.com/conversation-starters |
-| Insight Behavior Tracker | https://soberhelpline.com/insight-behavior-tracker |
-| Values-Aligned Decisions | https://soberhelpline.com/values-aligned-decisions |
-| Enabling Language Translator | https://soberhelpline.com/enabling-language-translator |
-| Who Benefits Filter | https://soberhelpline.com/who-benefits-filter |
 
 ### Educational Pages
 | Topic | URL |
@@ -122,16 +101,11 @@ Vetted treatment providers with no referral fees or patient brokering:
 | Free Family Guide | https://soberhelpline.com/free-guide |
 | FAQs | https://soberhelpline.com/faqs |
 | Treatment Questions | https://soberhelpline.com/treatment-questions |
-| Recovery Requirements | https://soberhelpline.com/recovery-requirements |
 | Treatment Red Flags | https://soberhelpline.com/treatment-red-flags |
-| Treatment Industry Guide | https://soberhelpline.com/treatment-industry-guide |
 | Treatment Modalities | https://soberhelpline.com/treatment-modalities |
 | Drug-Induced Psychosis | https://soberhelpline.com/drug-induced-psychosis |
 | Disease vs. Choice Reality Map | https://soberhelpline.com/disease-choice-reality-map |
-| Why Willpower Fails | https://soberhelpline.com/why-willpower-fails |
 | Addiction Progression Timeline | https://soberhelpline.com/addiction-progression-timeline |
-| How Trauma Shapes Addiction | https://soberhelpline.com/how-trauma-shapes-addiction |
-| Brain and Spiritual Recovery | https://soberhelpline.com/brain-spiritual-recovery |
 | Twelve Steps Explained | https://soberhelpline.com/twelve-steps-explained |
 | Non-Twelve-Step Modalities | https://soberhelpline.com/non-twelve-step-modalities |
 
@@ -140,14 +114,10 @@ Vetted treatment providers with no referral fees or patient brokering:
 |-------|-----|
 | Family Roles in Addiction | https://soberhelpline.com/family-roles-addiction |
 | Addiction Rewrites Family Rules | https://soberhelpline.com/addiction-rewrites-family-rules |
-| Cost of Secrecy | https://soberhelpline.com/cost-of-secrecy |
 | Boundary Drift | https://soberhelpline.com/boundary-drift |
 | Boundaries vs. Ultimatums | https://soberhelpline.com/boundaries-ultimatums |
 | Anger and Boundaries | https://soberhelpline.com/anger-and-boundaries |
-| Flexibility vs. Instability | https://soberhelpline.com/flexibility-vs-instability |
-| Addiction and Attachment Styles | https://soberhelpline.com/addiction-attachment-styles |
 | Grief for Family | https://soberhelpline.com/grief-for-family |
-| Intergenerational Enabling | https://soberhelpline.com/intergenerational-enabling |
 | Family Unity as Liability | https://soberhelpline.com/family-unity-liability |
 | What Changes When Families Change | https://soberhelpline.com/what-changes-when-families-change |
 | Living Well Regardless | https://soberhelpline.com/living-well-regardless |
@@ -157,10 +127,7 @@ Vetted treatment providers with no referral fees or patient brokering:
 ### Sibling Experience
 | Topic | URL |
 |-------|-----|
-| Sibling Experience | https://soberhelpline.com/sibling-experience |
-| Growing Up in the Shadow | https://soberhelpline.com/growing-up-shadow |
 | Sibling Guilt, Anger, and Loyalty | https://soberhelpline.com/sibling-guilt-anger-loyalty |
-| Rebuilding Sibling Relationships | https://soberhelpline.com/rebuilding-sibling-relationships |
 | Parents Repairing the Sibling System | https://soberhelpline.com/parents-repairing-sibling-system |
 
 ### Blog Articles (65+)

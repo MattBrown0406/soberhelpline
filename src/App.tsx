@@ -137,12 +137,9 @@ const FamilyConsultationPage = FamilyConsultation;
 const FamilyWebinars = React.lazy(() => import("./pages/FamilyWebinars"));
 const ForumTopic = React.lazy(() => import("./pages/ForumTopic"));
 const TreatmentQuestions = React.lazy(() => import("./pages/TreatmentQuestions"));
-const RecoveryRequirements = React.lazy(() => import("./pages/RecoveryRequirements"));
 const FamilyActionPlan = React.lazy(() => import("./pages/FamilyActionPlan"));
-const ScenarioExercise = React.lazy(() => import("./pages/ScenarioExercise"));
 const CrisisChaos = React.lazy(() => import("./pages/CrisisChaos"));
 const EmotionalRegulation = React.lazy(() => import("./pages/EmotionalRegulation"));
-const ValuesExercise = React.lazy(() => import("./pages/ValuesExercise"));
 const TalkingAboutTreatment = React.lazy(() => import("./pages/TalkingAboutTreatment"));
 const ReadinessChecklist = React.lazy(() => import("./pages/ReadinessChecklist"));
 const RelapseWarningSignsTracker = React.lazy(() => import("./pages/RelapseWarningSignsTracker"));
@@ -151,61 +148,35 @@ const AftercareChecklist = React.lazy(() => import("./pages/AftercareChecklist")
 const TreatmentRedFlags = React.lazy(() => import("./pages/TreatmentRedFlags"));
 const FamilyAdvocacyToolkit = React.lazy(() => import("./pages/FamilyAdvocacyToolkit"));
 const WhyChangeDoesntHappen = React.lazy(() => import("./pages/WhyChangeDoesntHappen"));
-const TreatmentIndustryGuide = React.lazy(() => import("./pages/TreatmentIndustryGuide"));
 const DrugInducedPsychosis = React.lazy(() => import("./pages/DrugInducedPsychosis"));
 const MultipleTreatmentEpisodes = React.lazy(() => import("./pages/MultipleTreatmentEpisodes"));
 const LegalIssuesGuide = React.lazy(() => import("./pages/LegalIssuesGuide"));
 const DiseaseChoiceRealityMap = React.lazy(() => import("./pages/DiseaseChoiceRealityMap"));
-const WhyWillpowerFails = React.lazy(() => import("./pages/WhyWillpowerFails"));
 const AddictionProgressionTimeline = React.lazy(() => import("./pages/AddictionProgressionTimeline"));
 const MentalHealthVsSubstanceInduced = React.lazy(() => import("./pages/MentalHealthVsSubstanceInduced"));
-const MisunderstoodDiagnoses = React.lazy(() => import("./pages/MisunderstoodDiagnoses"));
-const MentalHealthDelaysRecovery = React.lazy(() => import("./pages/MentalHealthDelaysRecovery"));
 const TraumaVsExcuses = React.lazy(() => import("./pages/TraumaVsExcuses"));
-const HowTraumaShapesAddiction = React.lazy(() => import("./pages/HowTraumaShapesAddiction"));
 const TreatmentModalities = React.lazy(() => import("./pages/TreatmentModalities"));
-const MatchingModality = React.lazy(() => import("./pages/MatchingModality"));
-const TherapyTimingGuide = React.lazy(() => import("./pages/TherapyTimingGuide"));
 const FamilyInterferenceGuide = React.lazy(() => import("./pages/FamilyInterferenceGuide"));
 const BoundariesUltimatumsGuide = React.lazy(() => import("./pages/BoundariesUltimatumsGuide"));
 const WhatChangesWhenFamiliesChange = React.lazy(() => import("./pages/WhatChangesWhenFamiliesChange"));
-const InsightBehaviorTracker = React.lazy(() => import("./pages/InsightBehaviorTracker"));
-const ValuesAlignedDecisions = React.lazy(() => import("./pages/ValuesAlignedDecisions"));
 const LivingWellRegardless = React.lazy(() => import("./pages/LivingWellRegardless"));
-const BrainSpiritualRecovery = React.lazy(() => import("./pages/BrainSpiritualRecovery"));
 const TwelveStepsExplained = React.lazy(() => import("./pages/TwelveStepsExplained"));
 const NonTwelveStepModalities = React.lazy(() => import("./pages/NonTwelveStepModalities"));
 const NoNegotiationGuide = React.lazy(() => import("./pages/NoNegotiationGuide"));
 const StrongOneGuide = React.lazy(() => import("./pages/StrongOneGuide"));
 const GuiltReliefResentmentCycle = React.lazy(() => import("./pages/GuiltReliefResentmentCycle"));
-const SiblingExperience = React.lazy(() => import("./pages/SiblingExperience"));
-const GrowingUpShadowAddiction = React.lazy(() => import("./pages/GrowingUpShadowAddiction"));
 const SiblingGuiltAngerLoyalty = React.lazy(() => import("./pages/SiblingGuiltAngerLoyalty"));
-const RebuildingSiblingRelationships = React.lazy(() => import("./pages/RebuilingSiblingRelationships"));
 const ParentsRepairingSiblingSystem = React.lazy(() => import("./pages/ParentsRepairingSiblingSystem"));
 const SiblingSupport = React.lazy(() => import("./pages/SiblingSupport"));
 const FamilyRolesAddiction = React.lazy(() => import("./pages/FamilyRolesAddiction"));
 const AddictionRewritesFamilyRules = React.lazy(() => import("./pages/AddictionRewritesFamilyRules"));
-const CostOfSecrecy = React.lazy(() => import("./pages/CostOfSecrecy"));
 const BoundaryDrift = React.lazy(() => import("./pages/BoundaryDrift"));
 const AngerAndBoundaries = React.lazy(() => import("./pages/AngerAndBoundaries"));
-const FlexibilityVsInstability = React.lazy(() => import("./pages/FlexibilityVsInstability"));
-const AddictionAttachmentStyles = React.lazy(() => import("./pages/AddictionAttachmentStyles"));
 const GriefForFamily = React.lazy(() => import("./pages/GriefForFamily"));
-const EnablingLanguageTranslator = React.lazy(() => import("./pages/EnablingLanguageTranslator"));
-const IntergenerationalEnabling = React.lazy(() => import("./pages/IntergenerationalEnabling"));
-const WhoBenefitsFilter = React.lazy(() => import("./pages/WhoBenefitsFilter"));
 const FamilyUnityLiability = React.lazy(() => import("./pages/FamilyUnityLiability"));
 const SafeToOpenUp = React.lazy(() => import("./pages/SafeToOpenUp"));
 const AddictionAsStressDisorder = React.lazy(() => import("./pages/AddictionAsStressDisorder"));
 const FearInventoryExercise = React.lazy(() => import("./pages/FearInventoryExercise"));
-const ConversationStartersGuide = React.lazy(() => import("./pages/ConversationStartersGuide"));
-const AILifeCoach = React.lazy(() => import("./pages/AILifeCoach"));
-const AIEnablingDecisionCoach = React.lazy(() => import("./pages/AIEnablingDecisionCoach"));
-const AIBoundaryBuilderCoach = React.lazy(() => import("./pages/AIBoundaryBuilderCoach"));
-const AITreatmentNavigator = React.lazy(() => import("./pages/AITreatmentNavigator"));
-const AIRelapseResponseGuide = React.lazy(() => import("./pages/AIRelapseResponseGuide"));
-const AIAddictionRealityTranslator = React.lazy(() => import("./pages/AIAddictionRealityTranslator"));
 const EatingDisordersGuide = React.lazy(() => import("./pages/EatingDisordersGuide"));
 const FreeGuide = React.lazy(() => import("./pages/FreeGuide"));
 const ConsultationProviderDashboard = React.lazy(() => import("./pages/ConsultationProviderDashboard"));
@@ -223,10 +194,11 @@ const CoachingOnboarding = React.lazy(() => import("./pages/CoachingOnboarding")
 const Testimonials = React.lazy(() => import("./pages/Testimonials"));
 const RecoveryResources = React.lazy(() => import("./pages/RecoveryResources"));
 const OnboardingQuiz = React.lazy(() => import("./pages/OnboardingQuiz"));
-const BoundarySettingWorksheet = React.lazy(() => import("./pages/BoundarySettingWorksheet"));
 const ZoomRecordings = React.lazy(() => import("./pages/ZoomRecordings"));
-const MemberLearningPaths = React.lazy(() => import("./pages/MemberLearningPaths"));
 const MemberQandA = React.lazy(() => import("./pages/MemberQandA"));
+const Workbook = React.lazy(() => import("./pages/Workbook"));
+const WorkbookEarlier = React.lazy(() => import("./pages/WorkbookEarlier"));
+const WorkbookExercise = React.lazy(() => import("./pages/WorkbookExercise"));
 const MemberHome = React.lazy(() => import("./pages/MemberHome"));
 const MemberBilling = React.lazy(() => import("./pages/MemberBilling"));
 const CancelMembership = React.lazy(() => import("./pages/CancelMembership"));
@@ -240,7 +212,6 @@ const RoadmapTreatment = React.lazy(() => import("./pages/RoadmapTreatment"));
 const RoadmapEarlyRecovery = React.lazy(() => import("./pages/RoadmapEarlyRecovery"));
 const RoadmapLongTermRecovery = React.lazy(() => import("./pages/RoadmapLongTermRecovery"));
 const RoadmapRelapse = React.lazy(() => import("./pages/RoadmapRelapse"));
-const RelapseRadar = React.lazy(() => import("./pages/RelapseRadar"));
 const Survey = React.lazy(() => import("./pages/Survey"));
 const OregonFamilySupport = React.lazy(() => import("./pages/OregonFamilySupport"));
 const OregonPortlandFamilySupport = React.lazy(() => import("./pages/OregonPortlandFamilySupport"));
@@ -444,76 +415,47 @@ const App = () => (
               <Route path="/admin/meeting-cancellation" element={<AdminMeetingCancellation />} />
               <Route path="/family-webinars" element={<SubscriberRoute><FamilyWebinars /></SubscriberRoute>} />
               <Route path="/treatment-questions" element={<TreatmentQuestions />} />
-              <Route path="/recovery-requirements" element={<RecoveryRequirements />} />
               <Route path="/family-action-plan" element={<FamilyActionPlan />} />
-              <Route path="/scenario-exercise" element={<ScenarioExercise />} />
               <Route path="/crisis-chaos" element={<CrisisChaos />} />
               <Route path="/emotional-regulation" element={<EmotionalRegulation />} />
-              <Route path="/values-exercise" element={<ValuesExercise />} />
               <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
               <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
               <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
-              <Route path="/communication-guide" element={<CommunicationGuide />} />
+              <Route path="/communication-guide" element={<SubscriberRoute><CommunicationGuide /></SubscriberRoute>} />
               <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
               <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
               <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />
               <Route path="/understanding-addiction" element={<UnderstandingAddiction />} />
               <Route path="/why-change-doesnt-happen" element={<WhyChangeDoesntHappen />} />
-              <Route path="/treatment-industry-guide" element={<TreatmentIndustryGuide />} />
               <Route path="/drug-induced-psychosis" element={<DrugInducedPsychosis />} />
               <Route path="/multiple-treatment-episodes" element={<MultipleTreatmentEpisodes />} />
               <Route path="/legal-issues-guide" element={<LegalIssuesGuide />} />
               <Route path="/disease-choice-reality-map" element={<DiseaseChoiceRealityMap />} />
-              <Route path="/why-willpower-fails" element={<WhyWillpowerFails />} />
               <Route path="/addiction-progression-timeline" element={<AddictionProgressionTimeline />} />
               <Route path="/mental-health-vs-substance-induced" element={<MentalHealthVsSubstanceInduced />} />
-              <Route path="/misunderstood-diagnoses" element={<MisunderstoodDiagnoses />} />
-              <Route path="/mental-health-delays-recovery" element={<MentalHealthDelaysRecovery />} />
               <Route path="/trauma-vs-excuses" element={<TraumaVsExcuses />} />
-              <Route path="/how-trauma-shapes-addiction" element={<HowTraumaShapesAddiction />} />
               <Route path="/treatment-modalities" element={<TreatmentModalities />} />
-              <Route path="/matching-modality" element={<MatchingModality />} />
-              <Route path="/therapy-timing" element={<TherapyTimingGuide />} />
               <Route path="/family-interference" element={<FamilyInterferenceGuide />} />
               <Route path="/boundaries-ultimatums" element={<BoundariesUltimatumsGuide />} />
               <Route path="/what-changes-when-families-change" element={<WhatChangesWhenFamiliesChange />} />
-              <Route path="/insight-behavior-tracker" element={<InsightBehaviorTracker />} />
-              <Route path="/values-aligned-decisions" element={<ValuesAlignedDecisions />} />
               <Route path="/living-well-regardless" element={<LivingWellRegardless />} />
-              <Route path="/brain-spiritual-recovery" element={<BrainSpiritualRecovery />} />
               <Route path="/twelve-steps-explained" element={<TwelveStepsExplained />} />
               <Route path="/non-twelve-step-modalities" element={<NonTwelveStepModalities />} />
               <Route path="/no-negotiation" element={<NoNegotiationGuide />} />
               <Route path="/strong-one" element={<StrongOneGuide />} />
               <Route path="/guilt-relief-resentment" element={<GuiltReliefResentmentCycle />} />
-              <Route path="/sibling-experience" element={<SiblingExperience />} />
-              <Route path="/growing-up-shadow" element={<GrowingUpShadowAddiction />} />
               <Route path="/sibling-guilt-anger-loyalty" element={<SiblingGuiltAngerLoyalty />} />
-              <Route path="/rebuilding-sibling-relationships" element={<RebuildingSiblingRelationships />} />
               <Route path="/parents-repairing-sibling-system" element={<ParentsRepairingSiblingSystem />} />
               <Route path="/sibling-support" element={<SiblingSupport />} />
               <Route path="/family-roles-addiction" element={<FamilyRolesAddiction />} />
               <Route path="/addiction-rewrites-family-rules" element={<AddictionRewritesFamilyRules />} />
-              <Route path="/cost-of-secrecy" element={<CostOfSecrecy />} />
               <Route path="/boundary-drift" element={<BoundaryDrift />} />
               <Route path="/anger-and-boundaries" element={<AngerAndBoundaries />} />
-              <Route path="/flexibility-vs-instability" element={<FlexibilityVsInstability />} />
-              <Route path="/addiction-attachment-styles" element={<AddictionAttachmentStyles />} />
               <Route path="/grief-for-family" element={<GriefForFamily />} />
-              <Route path="/enabling-language-translator" element={<EnablingLanguageTranslator />} />
-              <Route path="/intergenerational-enabling" element={<IntergenerationalEnabling />} />
-              <Route path="/who-benefits-filter" element={<WhoBenefitsFilter />} />
               <Route path="/family-unity-liability" element={<FamilyUnityLiability />} />
               <Route path="/safe-to-open-up" element={<SafeToOpenUp />} />
               <Route path="/addiction-as-stress-disorder" element={<AddictionAsStressDisorder />} />
               <Route path="/fear-inventory-exercise" element={<FearInventoryExercise />} />
-              <Route path="/conversation-starters" element={<ConversationStartersGuide />} />
-              <Route path="/ai-life-coach" element={<AILifeCoach />} />
-              <Route path="/ai-enabling-decision-coach" element={<AIEnablingDecisionCoach />} />
-              <Route path="/ai-boundary-builder-coach" element={<AIBoundaryBuilderCoach />} />
-              <Route path="/ai-treatment-navigator" element={<AITreatmentNavigator />} />
-              <Route path="/ai-relapse-response-guide" element={<AIRelapseResponseGuide />} />
-              <Route path="/ai-addiction-reality-translator" element={<AIAddictionRealityTranslator />} />
               <Route path="/eating-disorders-guide" element={<EatingDisordersGuide />} />
               <Route path="/free-guide" element={<FreeGuide />} />
               <Route path="/consultation-provider-dashboard" element={<ConsultationProviderDashboard />} />
@@ -526,11 +468,14 @@ const App = () => (
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/recovery-resources" element={<RecoveryResources />} />
               <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
-              <Route path="/boundary-setting-worksheet" element={<BoundarySettingWorksheet />} />
               <Route path="/zoom-recordings" element={<SubscriberRoute><ZoomRecordings /></SubscriberRoute>} />
               <Route path="/member-home" element={<SubscriberRoute><MemberHome /></SubscriberRoute>} />
-              <Route path="/member-learning-paths" element={<SubscriberRoute><MemberLearningPaths /></SubscriberRoute>} />
+              {/* The old learning paths page: one path system now lives on the member home page. */}
+              <Route path="/member-learning-paths" element={<Navigate to="/member-home" replace />} />
               <Route path="/member-qa" element={<SubscriberRoute><MemberQandA /></SubscriberRoute>} />
+              <Route path="/workbook" element={<SubscriberRoute><Workbook /></SubscriberRoute>} />
+              <Route path="/workbook/earlier" element={<SubscriberRoute><WorkbookEarlier /></SubscriberRoute>} />
+              <Route path="/workbook/:exerciseId" element={<SubscriberRoute><WorkbookExercise /></SubscriberRoute>} />
               <Route path="/member-billing" element={<MemberBilling />} />
               <Route path="/membership/billing" element={<MemberBilling />} />
               <Route path="/cancel-membership" element={<CancelMembership />} />
@@ -545,7 +490,6 @@ const App = () => (
               <Route path="/roadmap/early-recovery" element={<RoadmapEarlyRecovery />} />
               <Route path="/roadmap/long-term-recovery" element={<RoadmapLongTermRecovery />} />
               <Route path="/roadmap/relapse" element={<RoadmapRelapse />} />
-              <Route path="/relapse-radar" element={<RelapseRadar />} />
               <Route path="/survey" element={<Survey />} />
               {/* Washington Family Support SEO Pages */}
               <Route path="/washington-family-support" element={<WashingtonFamilySupport />} />

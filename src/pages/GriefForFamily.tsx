@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GriefForFamily() {
-  useGuideTracking("Grief for the Family You Thought You'd Have", "/grief-for-family");
+  useGuideTracking("/grief-for-family", "Grief for the Family You Thought You'd Have");
   const handlePrint = () => {
     window.print();
   };
@@ -33,11 +33,12 @@ export default function GriefForFamily() {
             </Link>
             <Button onClick={handlePrint} variant="outline" className="gap-2">
               <Printer className="h-4 w-4" />
-              Print Guide
+              Print
             </Button>
           </div>
 
           <ToolBrandHeader
+            headingAs="h1"
             title="Grief for the Family You Thought You'd Have"
             subtitle="Naming the loss no one prepared you for. Understanding ambiguous grief in families affected by addiction and finding permission to grieve what was never yours to control."
             clinicalNote="Informed by Pauline Boss's theory of Ambiguous Loss and grief counseling frameworks adapted for addiction-affected families."
@@ -233,16 +234,8 @@ export default function GriefForFamily() {
               </p>
             </section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">Reflection Questions</h2>
-              <ol className="list-decimal pl-6 text-muted-foreground space-y-3">
-                <li>What family did I imagine we would be?</li>
-                <li>What am I grieving that I've never named?</li>
-                <li>Where have I been holding my breath, waiting?</li>
-                <li>What does acceptance—not approval—look like?</li>
-                <li>What kind of life can I build today, regardless of outcome?</li>
-              </ol>
-            </section>
+            {/* "Reflection Questions" now live in the savable "Reflect and write" section
+                (src/data/reflections/pillars-4-5-6.json). */}
 
             <section className="mb-10 p-6 bg-primary/10 rounded-lg border border-primary/30">
               <h2 className="text-2xl font-semibold text-foreground mb-4">A Grounding Reframe</h2>
@@ -284,8 +277,8 @@ export default function GriefForFamily() {
                 <Link to="/guilt-relief-resentment">
                   <Button variant="outline" size="sm">The Guilt–Relief–Resentment Cycle</Button>
                 </Link>
-                <Link to="/growing-up-shadow">
-                  <Button variant="outline" size="sm">Growing Up in the Shadow of Addiction</Button>
+                <Link to="/strong-one">
+                  <Button variant="outline" size="sm">The Hidden Cost of Being the &quot;Strong One&quot;</Button>
                 </Link>
                 <Link to="/addiction-rewrites-family-rules">
                   <Button variant="outline" size="sm">How Addiction Rewrites Family Rules</Button>

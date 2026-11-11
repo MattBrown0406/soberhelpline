@@ -98,6 +98,14 @@ interface MemberWarning {
   } | null;
 }
 
+// Admin-only screen: real names are fine here.
+function personLabel(p: { username: string | null; first_name: string | null; last_name: string | null } | null): string {
+  if (!p) return "Unknown member";
+  const name = [p.first_name, p.last_name].filter(Boolean).join(" ").trim();
+  return p.username?.trim() ? (name ? `${p.username} (${name})` : p.username) : name || "No name";
+}
+
+/** Admin → review moderator warnings and removal recommendations. No props. */
 export function MemberWarningsManagement() {
   const [warnings, setWarnings] = useState<MemberWarning[]>([]);
   const [loading, setLoading] = useState(true);
@@ -212,7 +220,7 @@ export function MemberWarningsManagement() {
       // First, update the warning status
       const { data: { user } } = await supabase.auth.getUser();
       
-      await supabase
+      const { error: warningError } = await supabase
         .from('member_warnings')
         .update({
           status: 'actioned',
@@ -221,6 +229,7 @@ export function MemberWarningsManagement() {
           reviewed_at: new Date().toISOString()
         })
         .eq('id', warning.id);
+      if (warningError) throw warningError;
 
       // Then, revoke the member's access (all family memberships, including
       // paid-through and app-sourced ones).
@@ -302,11 +311,11 @@ export function MemberWarningsManagement() {
               <TableRow key={warning.id}>
                 <TableCell>{getTypeBadge(warning.warning_type)}</TableCell>
                 <TableCell className="font-medium">
-                  {warning.member_profile?.username || `${warning.member_profile?.first_name} ${warning.member_profile?.last_name}`}
+                  {personLabel(warning.member_profile)}
                 </TableCell>
                 <TableCell className="max-w-xs truncate">{warning.reason}</TableCell>
                 <TableCell>
-                  {warning.moderator_profile?.username || `${warning.moderator_profile?.first_name} ${warning.moderator_profile?.last_name}`}
+                  {personLabel(warning.moderator_profile)}
                 </TableCell>
                 <TableCell>{getStatusBadge(warning.status)}</TableCell>
                 <TableCell>
@@ -363,8 +372,7 @@ export function MemberWarningsManagement() {
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Reported Member</label>
                 <p className="mt-1">
-                  {selectedWarning.member_profile?.username || 
-                   `${selectedWarning.member_profile?.first_name} ${selectedWarning.member_profile?.last_name}`}
+                  {personLabel(selectedWarning.member_profile)}
                   <span className="text-muted-foreground ml-2">({selectedWarning.member_contact?.email || '-'})</span>
                 </p>
               </div>
@@ -372,8 +380,7 @@ export function MemberWarningsManagement() {
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Submitted By (Moderator)</label>
                 <p className="mt-1">
-                  {selectedWarning.moderator_profile?.username || 
-                   `${selectedWarning.moderator_profile?.first_name} ${selectedWarning.moderator_profile?.last_name}`}
+                  {personLabel(selectedWarning.moderator_profile)}
                 </p>
               </div>
 

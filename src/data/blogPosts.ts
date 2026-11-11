@@ -2159,7 +2159,7 @@ The good news is that this is one of the easiest skills a family can learn. All 
 
 Person-first language for addiction puts the human being ahead of the diagnosis. Instead of saying “my son is an addict,” you might say “my son has a substance use disorder” or “my son is struggling with opioids.” The person comes first; the condition is something they have, not who they are.
 
-Addiction is a medical condition that changes how the brain handles reward, motivation, and self-control. Language that treats it like a character flaw (“junkie,” “drunk,” “loser”) quietly tells your loved one they are broken. Language that treats it as a health problem tells them it can be treated. Understanding [why willpower isn’t enough to overcome addiction](/why-willpower-fails) can help families approach these conversations with more compassion.
+Addiction is a medical condition that changes how the brain handles reward, motivation, and self-control. Language that treats it like a character flaw (“junkie,” “drunk,” “loser”) quietly tells your loved one they are broken. Language that treats it as a health problem tells them it can be treated. Understanding [why willpower isn’t enough to overcome addiction](/disease-choice-reality-map) can help families approach these conversations with more compassion.
 
 ## Why Do Words Matter So Much When Someone Is Struggling?
 
@@ -3053,7 +3053,7 @@ Most families lecture because they care, they are scared, and they do not know w
 
 Lecturing backfires because it triggers defensiveness, and a defensive person cannot take in new information. When someone feels judged or cornered, their brain shifts into self-protection. They stop listening and start building a case for why you are wrong, unfair, or overreacting.
 
-There is a second problem. Your loved one already knows everything you are about to say. Addiction is not a knowledge gap. It is a condition where the part of the brain that drives craving overrides the part that weighs consequences. Repeating consequences to someone whose brain is discounting them produces very little, except resentment. If that mechanism is new to you, it is worth understanding [LINK:why willpower alone fails:/why-willpower-fails].
+There is a second problem. Your loved one already knows everything you are about to say. Addiction is not a knowledge gap. It is a condition where the part of the brain that drives craving overrides the part that weighs consequences. Repeating consequences to someone whose brain is discounting them produces very little, except resentment. If that mechanism is new to you, it is worth understanding [LINK:why willpower alone fails:/disease-choice-reality-map].
 
 Here is what a lecture communicates, regardless of your intent:
 
@@ -3257,7 +3257,7 @@ A simple structure that works:
 5. Ask, don't tell. "Have you noticed anything like that? How are you feeling about it?"
 6. Stop talking. Let them respond. Silence is not a failure here.
 
-Notice what is missing: no diagnosis, no ultimatum, no demand that they change today. Early conversations plant seeds. You are not trying to harvest the same afternoon. Our [LINK:conversation starters guide:/conversation-starters] gives you more language to work with.
+Notice what is missing: no diagnosis, no ultimatum, no demand that they change today. Early conversations plant seeds. You are not trying to harvest the same afternoon. Our [LINK:conversation starters guide:/communication-guide] gives you more language to work with.
 
 ## What Should You Avoid Saying?
 
@@ -3377,11 +3377,11 @@ A simple structure for that conversation:
 - Make one clear request or state one boundary. "I'm not going to sit up with you anymore when you drink. I'll be in bed by ten."
 - Offer a next step, not an ultimatum. "If you want help figuring out what to do, I'll help you look."
 
-Keep it short. If you are doing more than half the talking, you have slipped into a lecture. Say your piece, then listen. Our [LINK:conversation starters guide:/conversation-starters] gives you language for that next-day talk.
+Keep it short. If you are doing more than half the talking, you have slipped into a lecture. Say your piece, then listen. Our [LINK:conversation starters guide:/communication-guide] gives you language for that next-day talk.
 
 ## What if They Say Last Night Was No Big Deal?
 
-Minimizing is common and it is not the end of the conversation. You do not need them to agree with your version of events. Stick to what you saw and what you will do differently. "You may not remember it that way. I do. Either way, I'm going to bed at ten from now on." Boundaries do not require permission — see our [LINK:boundary setting worksheet:/boundary-setting-worksheet] for help defining yours.
+Minimizing is common and it is not the end of the conversation. You do not need them to agree with your version of events. Stick to what you saw and what you will do differently. "You may not remember it that way. I do. Either way, I'm going to bed at ten from now on." Boundaries do not require permission — see our [LINK:boundary setting worksheet:/workbook/boundary-script] for help defining yours.
 
 ## How Do You Take Care of Yourself After a Night Like That?
 
@@ -3433,7 +3433,7 @@ The person telling you they want to quit at 9 a.m. is being honest. The person u
 
 The brain keeps choosing the substance because addiction shifts decision-making away from the thoughtful, planning part of the brain and toward the automatic, habit-driven part. The prefrontal cortex, which handles long-term goals and consequences, gets quieter. The circuits that respond to cues, cravings, and stress get louder. When those two systems disagree, the louder one usually wins.
 
-This is why your loved one can make a sincere plan on a calm morning and abandon it by evening. After a hard day, a fight, a text from an old friend, or simply the time of day they always used, the automatic brain takes over. The decision does not feel like a decision. It feels like relief. This is also [why willpower isn't enough](/why-willpower-fails).
+This is why your loved one can make a sincere plan on a calm morning and abandon it by evening. After a hard day, a fight, a text from an old friend, or simply the time of day they always used, the automatic brain takes over. The decision does not feel like a decision. It feels like relief. This is also [why willpower isn't enough](/disease-choice-reality-map).
 
 Three things make the pull stronger:
 
@@ -7137,7 +7137,7 @@ A few anchors for the hard days:
 
 - **Guilt is not evidence.** Feeling guilty means you love someone and changed a pattern, not that the change was wrong.
 - **Stay consistent.** A no that becomes a yes under pressure teaches one lesson: push harder next time. Consistency is kindness with a longer time horizon.
-- **Get support for yourself.** A coach, therapist, [LINK:Al-Anon:https://al-anon.org] meeting, or family group makes it far easier to hold a loving boundary. Boundaries held alone tend to crack. Our guide to [LINK:setting healthy boundaries with an addicted loved one:/boundary-setting-worksheet] can help you plan yours before the next ask.
+- **Get support for yourself.** A coach, therapist, [LINK:Al-Anon:https://al-anon.org] meeting, or family group makes it far easier to hold a loving boundary. Boundaries held alone tend to crack. Our guide to [LINK:setting healthy boundaries with an addicted loved one:/workbook/boundary-script] can help you plan yours before the next ask.
 
 If your loved one ever mentions harming themselves, take it seriously — respond with care and connect them to crisis support such as the 988 Suicide and Crisis Lifeline. You can take a statement seriously without reversing your boundary; the two are separate decisions.
 
@@ -7275,7 +7275,7 @@ This matters because addiction has never really been about the substance. The su
 
 **Why Does Cross-Addiction Happen in the Brain?**
 
-Cross-addiction happens because addiction changes the brain's reward system in ways that outlast any single substance. After years of artificially large [LINK:dopamine surges:/why-willpower-fails], the brain turns down its own volume. Ordinary pleasures — a good meal, a walk, a conversation — register faintly, if at all.
+Cross-addiction happens because addiction changes the brain's reward system in ways that outlast any single substance. After years of artificially large [LINK:dopamine surges:/disease-choice-reality-map], the brain turns down its own volume. Ordinary pleasures — a good meal, a walk, a conversation — register faintly, if at all.
 
 That flattened state has a name: anhedonia, the reduced ability to feel pleasure from normal life. It's common in early recovery and it's temporary, but while it lasts, the brain is essentially scanning for anything that produces a strong enough signal to feel something.
 
@@ -8334,7 +8334,7 @@ The anger you feel is evidence that you have been showing up, again and again, f
 
 You do not have to resolve all of it today. Pick one small step — a walk, a journal entry, one honest conversation, one task you hand back — and start there. Managing anger and resentment when a loved one has addiction is not a single decision; it is a practice you return to. Be as patient with yourself as you have been with everyone else.
 
-If the anger and resentment feel like too much to manage by yourself, that is exactly what ongoing support is for. SoberHelpline.com offers family education, one-on-one [family coaching](/family-coaching), and a community of people who understand what you are living through. You may also find these helpful: [letting go of guilt when a loved one has an addiction](/blog/letting-go-of-guilt-when-loved-one-has-addiction) and our guide on [setting healthy boundaries](/boundary-setting-worksheet). Explore our free resources, join a Monday night family support call, or book a coaching session to get steady, practical guidance for your situation. You have spent enough time taking care of everyone else — let us help you take care of you.`,
+If the anger and resentment feel like too much to manage by yourself, that is exactly what ongoing support is for. SoberHelpline.com offers family education, one-on-one [family coaching](/family-coaching), and a community of people who understand what you are living through. You may also find these helpful: [letting go of guilt when a loved one has an addiction](/blog/letting-go-of-guilt-when-loved-one-has-addiction) and our guide on [setting healthy boundaries](/workbook/boundary-script). Explore our free resources, join a Monday night family support call, or book a coaching session to get steady, practical guidance for your situation. You have spent enough time taking care of everyone else — let us help you take care of you.`,
     faqItems: [
       {
         question: "Is it normal to feel angry at someone with an addiction?",
@@ -9084,7 +9084,7 @@ What families can do at this stage: name what you see, specifically and without 
 
 Tolerance means the person needs more of the substance to get the same effect. Dependence means the body has adapted so completely that it now needs the substance to feel normal, and stopping triggers withdrawal — anxiety, shakiness, nausea, insomnia, or worse depending on the substance.
 
-This is a critical distinction for families to understand: dependence is physical, not moral. At this stage, much of the use is no longer about getting high. It is about avoiding the misery of withdrawal. That is why "just stop" advice fails so consistently — and it is one of the core reasons [why willpower isn't enough](/why-willpower-fails) to overcome addiction on its own.
+This is a critical distinction for families to understand: dependence is physical, not moral. At this stage, much of the use is no longer about getting high. It is about avoiding the misery of withdrawal. That is why "just stop" advice fails so consistently — and it is one of the core reasons [why willpower isn't enough](/disease-choice-reality-map) to overcome addiction on its own.
 
 Warning signs include hiding or stockpiling the substance, using first thing in the morning, distress when access is interrupted, and growing dishonesty about amounts. What families can do: shift from monitoring to mobilizing. Research treatment options, consult a family coach or counselor, and get aligned as a family — before a crisis forces rushed decisions. Know that withdrawal from alcohol and benzodiazepines can be medically dangerous, so detox should always involve medical supervision.
 
@@ -10301,7 +10301,7 @@ Self-medication turns into addiction because the relief is real but temporary, a
 
 The problem is that the fix comes with compounding interest. As tolerance builds, the same amount of the substance produces less relief, so the person uses more. Meanwhile, the underlying condition — the anxiety, the depression, the trauma — is not getting better. In most cases, it's getting worse, because substances disrupt sleep, relationships, brain chemistry, and the very coping skills that could actually help.
 
-Eventually many people reach a painful crossroads: the substance no longer makes them feel good. It just keeps them from feeling terrible. At that point, they aren't using to escape their original pain — they're using to escape withdrawal and the wreckage the addiction itself has created. This is why "just stop" feels impossible from the inside, even when the consequences are piling up on the outside. For more on the brain science behind this, see [why willpower isn't enough](/why-willpower-fails).
+Eventually many people reach a painful crossroads: the substance no longer makes them feel good. It just keeps them from feeling terrible. At that point, they aren't using to escape their original pain — they're using to escape withdrawal and the wreckage the addiction itself has created. This is why "just stop" feels impossible from the inside, even when the consequences are piling up on the outside. For more on the brain science behind this, see [why willpower isn't enough](/disease-choice-reality-map).
 
 ## What Conditions Commonly Drive Self-Medication?
 
@@ -10536,7 +10536,7 @@ Here's the part families often miss: hearing your loved one romanticize the past
 
 The most useful response is to stay calm, stay factual, and avoid turning memory into a courtroom battle. You will not win an argument against someone's own recollection, and trying usually produces defensiveness, not insight.
 
-Don't prosecute the memory. Instead of "That's not how it happened," try "I remember that time differently — I was really scared." Speak from your experience rather than correcting theirs. Help them play the tape forward. Recovery programs teach people to follow the memory past the first drink to what reliably came next. You can gently support this: "And then what usually happened?" asked with curiosity, not sarcasm. Name it without shaming it. If your loved one is in recovery and open to it, it's fair to say, "That sounds like the highlight reel talking." Light touch. One sentence. Then let it go. Take nostalgia seriously as a signal, not a crisis. Frequent romanticizing — especially paired with pulling away from meetings, sponsors, or support — is worth a direct, caring conversation about what support they need right now. The [LINK:Relapse Radar assessment:/relapse-radar] can help you gauge how concerned to be.
+Don't prosecute the memory. Instead of "That's not how it happened," try "I remember that time differently — I was really scared." Speak from your experience rather than correcting theirs. Help them play the tape forward. Recovery programs teach people to follow the memory past the first drink to what reliably came next. You can gently support this: "And then what usually happened?" asked with curiosity, not sarcasm. Name it without shaming it. If your loved one is in recovery and open to it, it's fair to say, "That sounds like the highlight reel talking." Light touch. One sentence. Then let it go. Take nostalgia seriously as a signal, not a crisis. Frequent romanticizing — especially paired with pulling away from meetings, sponsors, or support — is worth a direct, caring conversation about what support they need right now. The [LINK:Relapse Radar assessment:/relapse-warning-signs] can help you gauge how concerned to be.
 
 And keep your own footing. Watching someone fondly recall the era that nearly broke your family is painful. Your memories are valid — you can hold them and heal from them without needing your loved one to co-sign your version of history. If you need help finding the right words, [LINK:what to say when a loved one relapses:/blog/what-to-say-when-loved-one-relapses] is a companion piece worth reading.
 
@@ -10650,7 +10650,7 @@ Recovery rarely falls apart all at once. It tends to erode gradually — and fam
 
 Dropping out of therapy, outpatient, or peer support meetings without a clear alternative plan. Increasing isolation or pulling away from sober connections and community. Returning to old relationships or environments that were associated with use. Mood or behavior shifts that echo patterns from active addiction. Minimizing the need for ongoing support: "I've got this now, I don't need meetings anymore."
 
-If you notice these signs, a calm and direct conversation — framed around genuine concern rather than accusation — is the right first step. If you are not sure how to approach it, getting some [LINK:coaching support:/family-coaching] beforehand can make a real difference in how the conversation lands. The [LINK:Relapse Radar assessment:/relapse-radar] is also a quick way to gauge how concerned to be.
+If you notice these signs, a calm and direct conversation — framed around genuine concern rather than accusation — is the right first step. If you are not sure how to approach it, getting some [LINK:coaching support:/family-coaching] beforehand can make a real difference in how the conversation lands. The [LINK:Relapse Radar assessment:/relapse-warning-signs] is also a quick way to gauge how concerned to be.
 
 **Recovery Is a Long Game — And Families Are Part of It**
 
@@ -11364,7 +11364,7 @@ Enabling means doing things that remove the natural consequences of addiction �
 
 **3. Create and Enforce Boundaries**
 
-[LINK:Boundaries:/boundary-setting-worksheet] are not punishments — they are clear statements about what you will and will not participate in. A boundary might sound like: "I love you, and I will not allow substance use in our home." Or: "I am happy to help you pay for treatment, but I will not give you cash." Strong boundaries require follow-through, which is why working with a therapist or support group can make a real difference.
+[LINK:Boundaries:/workbook/boundary-script] are not punishments — they are clear statements about what you will and will not participate in. A boundary might sound like: "I love you, and I will not allow substance use in our home." Or: "I am happy to help you pay for treatment, but I will not give you cash." Strong boundaries require follow-through, which is why working with a therapist or support group can make a real difference.
 
 **4. Reconnect with Your Own Life**
 
@@ -11460,7 +11460,7 @@ Loving someone with addiction means grieving a version of them that still techni
 
 **Boundaries That Actually Hold**
 
-Many family members know they need boundaries but struggle to set and keep them. Therapy provides a space to understand why boundaries feel so difficult, practice communicating them clearly, and build the internal strength to follow through — even when your loved one pushes back. Our [LINK:boundary setting worksheet:/boundary-setting-worksheet] can also help you get started.
+Many family members know they need boundaries but struggle to set and keep them. Therapy provides a space to understand why boundaries feel so difficult, practice communicating them clearly, and build the internal strength to follow through — even when your loved one pushes back. Our [LINK:boundary setting worksheet:/workbook/boundary-script] can also help you get started.
 
 **Your Own History With Addiction or Trauma**
 
@@ -12072,7 +12072,7 @@ For families, this is also a time for reflection. If your loved one grew up with
 
 You don't have to have all the answers to start making a difference. Here are some practical steps families can take:
 
-• Educate yourself. Understanding the [LINK:ACE study and trauma's effects on the brain:/how-trauma-shapes-addiction] gives you a framework for what's happening and why.
+• Educate yourself. Understanding the [LINK:ACE study and trauma's effects on the brain:/trauma-vs-excuses] gives you a framework for what's happening and why.
 • Shift your language. Replace "why won't you just stop" with genuine curiosity about your loved one's inner experience when it feels safe to do so.
 • Ask about trauma-informed care. When evaluating [LINK:treatment programs:/understanding-addiction], ask specifically whether they screen for trauma and offer trauma-focused therapies.
 • Seek your own support. [LINK:Al-Anon:https://al-anon.org], SMART Recovery for Families, or working with an [LINK:addiction coach or counselor:/family-coaching] can help you process your own pain and develop healthier ways to engage.
@@ -12196,7 +12196,7 @@ Does denial in addiction ever go away on its own? Sometimes. As consequences acc
 
 How do I know if my loved one is ready for help? Watch for signs of ambivalence: moments where they express regret, acknowledge things aren't going well, or seem less certain in their denial. These windows don't always last long. Having a plan ready — a [LINK:treatment option researched:/understanding-addiction] conversation prepared — means you can respond quickly when readiness appears.
 
-SoberHelpline.com is built for families exactly like yours — families who are navigating addiction with love, exhaustion, and a need for real answers. Whether you're trying to understand [LINK:how addiction changes the brain:/why-willpower-fails], figure out [LINK:how to talk to a loved one about addiction:/communication-guide], or find the right treatment program, we're here to help. Explore our resources, connect with a [LINK:family coach:/family-coaching], and know that you don't have to figure this out alone.`
+SoberHelpline.com is built for families exactly like yours — families who are navigating addiction with love, exhaustion, and a need for real answers. Whether you're trying to understand [LINK:how addiction changes the brain:/disease-choice-reality-map], figure out [LINK:how to talk to a loved one about addiction:/communication-guide], or find the right treatment program, we're here to help. Explore our resources, connect with a [LINK:family coach:/family-coaching], and know that you don't have to figure this out alone.`
   },
   {
     id: 97,
@@ -24774,7 +24774,7 @@ Families who believe detox is the finish line often set themselves up for confus
 
 This belief is understandable — and inaccurate. Physical dependence develops through a process the brain undergoes without the person's conscious awareness. And addiction involves changes to the prefrontal cortex (the part responsible for decision-making and impulse control) that genuinely impair a person's ability to simply choose differently in the moment.
 
-That's not an excuse. It's neuroscience. And understanding [LINK:why willpower alone isn't enough:/why-willpower-fails] helps families respond with strategy rather than frustration.
+That's not an excuse. It's neuroscience. And understanding [LINK:why willpower alone isn't enough:/disease-choice-reality-map] helps families respond with strategy rather than frustration.
 
 ### "If there's no withdrawal, they're not really addicted"
 
@@ -24871,7 +24871,7 @@ Families often take relapse personally — as a betrayal, a sign their loved one
 
 A relapse is clinical information. It tells us something about what supports were in place (or missing), what stressors were present, whether the underlying issues driving use have been addressed, and whether the recovery environment is sustainable.
 
-That's not a moral judgment on the person. It's a roadmap for adjusting care. Families who understand this can [LINK:respond to relapse with concern and problem-solving:/ai-relapse-response-guide] rather than punishment and withdrawal — and that response makes re-engagement far more likely.
+That's not a moral judgment on the person. It's a roadmap for adjusting care. Families who understand this can [LINK:respond to relapse with concern and problem-solving:/family-education] rather than punishment and withdrawal — and that response makes re-engagement far more likely.
 
 ## What Long-Term Recovery Actually Looks Like
 
@@ -24913,7 +24913,7 @@ One of the hardest shifts for families is learning to play the long game. When s
 
 People recover. Not always on the schedule their families want, not always in the way they imagined, not always without setbacks. But the research is unambiguous: meaningful, lasting recovery is possible for most people, given adequate treatment, support, and time.
 
-The families who navigate this best are the ones who learn to care deeply without tying their own wellbeing to their loved one's daily decisions. That's not detachment. That's sustainable love — the kind that can go the distance. Understanding [LINK:why willpower alone isn't enough:/why-willpower-fails] is part of building that kind of grounded perspective.
+The families who navigate this best are the ones who learn to care deeply without tying their own wellbeing to their loved one's daily decisions. That's not detachment. That's sustainable love — the kind that can go the distance. Understanding [LINK:why willpower alone isn't enough:/disease-choice-reality-map] is part of building that kind of grounded perspective.
 
 ## Your Next Step
 
@@ -24985,7 +24985,7 @@ Before you say anything to your loved one, be honest with yourself. What specifi
 
 ### 2. Decide What You Will Do Instead
 
-Identify the specific action you will take when that behavior occurs. This is your boundary. It has to be something you're genuinely willing and able to do. If you're not sure you'll follow through, choose something smaller. Our [LINK:AI Boundary Builder Coach:/ai-boundary-builder-coach] can help you draft a boundary that's specific and realistic.
+Identify the specific action you will take when that behavior occurs. This is your boundary. It has to be something you're genuinely willing and able to do. If you're not sure you'll follow through, choose something smaller. Our [LINK:five-minute boundary exercise:/workbook/boundary-script] can help you draft a boundary that's specific and realistic.
 
 ### 3. Communicate It Calmly and Clearly
 

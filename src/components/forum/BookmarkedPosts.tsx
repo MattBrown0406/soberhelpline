@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Bookmark, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { fetchPublicProfiles } from "@/lib/publicProfiles";
+import { fetchUsernames } from "@/lib/publicProfiles";
+import { forumDisplayName, forumPostLink } from "@/lib/forumTopics";
 
 interface BookmarkedPost {
   id: string;
@@ -24,8 +25,7 @@ export function BookmarkedPosts({ userId }: BookmarkedPostsProps) {
   const [bookmarks, setBookmarks] = useState<BookmarkedPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchBookmarks = async () => {
+  const fetchBookmarks = useCallback(async () => {
       try {
         const { data: bookmarkData, error } = await supabase
           .from('forum_bookmarks')
@@ -44,48 +44,49 @@ export function BookmarkedPosts({ userId }: BookmarkedPostsProps) {
         const postIds = bookmarkData.map(b => b.post_id);
         
         const { data: posts, error: postsError } = await supabase
-          .from('forum_posts')
-          .select('id, title, content, topic_id, created_at, user_id')
+          .from('forum_posts_secure')
+          .select('id, title, content, topic_id, created_at, user_id, is_anonymous')
           .in('id', postIds);
 
         if (postsError) throw postsError;
 
-        if (posts && posts.length > 0) {
-          const userIds = [...new Set(posts.map(p => p.user_id))];
-          const profiles = await fetchPublicProfiles(userIds);
-
-          const enrichedPosts = posts.map(post => {
-            const profile = profiles?.find(p => p.id === post.user_id);
-            return {
-              id: post.id,
-              title: post.title,
-              content: post.content.substring(0, 100) + (post.content.length > 100 ? '...' : ''),
-              topic_id: post.topic_id,
-              created_at: post.created_at,
-              author_name: profile?.username || profile?.first_name || 'Anonymous'
-            };
-          });
-
-          setBookmarks(enrichedPosts);
-        }
+        const rows = (posts || []).filter((p) => p.id && p.topic_id);
+        const names = await fetchUsernames(rows.filter((p) => !p.is_anonymous).map((p) => p.user_id));
+        const order = new Map(postIds.map((id, i) => [id, i]));
+        setBookmarks(
+          rows
+            .map((post) => {
+              const text = (post.content || "").replace(/\s+/g, " ").trim();
+              return {
+                id: post.id as string,
+                title: post.title,
+                content: text.length > 100 ? `${text.substring(0, 100)}…` : text,
+                topic_id: post.topic_id as string,
+                created_at: post.created_at as string,
+                author_name: forumDisplayName(post.user_id ? names.get(post.user_id) : null, !!post.is_anonymous),
+              };
+            })
+            .sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0)),
+        );
       } catch (error) {
         console.error('Error fetching bookmarks:', error);
       } finally {
         setIsLoading(false);
       }
-    };
-
-    fetchBookmarks();
   }, [userId]);
 
+  useEffect(() => {
+    void fetchBookmarks();
+  }, [fetchBookmarks]);
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => { if (open) void fetchBookmarks(); }}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Bookmark className="h-4 w-4" />
+        <Button variant="outline" size="sm" className="min-h-11 gap-2 rounded-xl bg-card">
+          <Bookmark className="h-4 w-4" aria-hidden="true" />
           Bookmarks
           {bookmarks.length > 0 && (
-            <span className="bg-primary text-primary-foreground text-xs px-1.5 rounded-full">
+            <span className="bg-primary text-primary-foreground text-xs px-1.5 rounded-full" aria-label={`${bookmarks.length} saved`}>
               {bookmarks.length}
             </span>
           )}
@@ -103,7 +104,7 @@ export function BookmarkedPosts({ userId }: BookmarkedPostsProps) {
             <p className="text-sm text-muted-foreground text-center py-4">Loading...</p>
           ) : bookmarks.length > 0 ? (
             bookmarks.map(post => (
-              <Link key={post.id} to={`/family-forum/${post.topic_id}`}>
+              <Link key={post.id} to={forumPostLink(post.topic_id, post.id)} className="block">
                 <Card className="hover:shadow-md transition-shadow cursor-pointer">
                   <CardContent className="p-3">
                     <div className="flex items-start justify-between gap-2">

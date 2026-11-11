@@ -7,9 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import SafetyBox from "@/components/SafetyBox";
 
 export default function GuiltReliefResentmentCycle() {
-  useGuideTracking("The Guilt-Relief-Resentment Cycle", "/guilt-relief-resentment");
+  useGuideTracking("/guilt-relief-resentment", "The Guilt-Relief-Resentment Cycle");
   const handlePrint = () => {
     window.print();
   };
@@ -35,11 +36,12 @@ export default function GuiltReliefResentmentCycle() {
               </Link>
               <Button onClick={handlePrint} variant="outline" size="sm" className="gap-2">
                 <Printer className="h-4 w-4" />
-                Print Guide
+                Print
               </Button>
             </div>
 
             <ToolBrandHeader
+              headingAs="h1"
               title="The Guilt–Relief–Resentment Cycle"
               subtitle="How good intentions turn into chronic burnout — and how to break the loop. Understanding this cycle is the first step toward interrupting it."
               clinicalNote="Informed by codependency literature (Melody Beattie), Al-Anon's detachment principles, and compassion fatigue research in family systems."
@@ -269,6 +271,11 @@ export default function GuiltReliefResentmentCycle() {
                     <p className="italic text-muted-foreground">"This is guilt—not danger."</p>
                   </div>
                   <p className="text-muted-foreground mt-2 text-sm">Naming slows the nervous system.</p>
+                  <SafetyBox
+                    topics={["suicide", "overdose", "violence"]}
+                    title="When it is danger, not guilt"
+                    className="mb-0 mt-4"
+                  />
                 </div>
 
                 <div>
@@ -361,41 +368,6 @@ export default function GuiltReliefResentmentCycle() {
               </CardContent>
             </Card>
 
-            {/* Reflection Exercise */}
-            <Card className="mb-6 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
-                  <HelpCircle className="h-5 w-5" />
-                  Reflection Exercise
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">Answer honestly:</p>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1 font-bold">1.</span>
-                    What triggers guilt for me most often?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1 font-bold">2.</span>
-                    What action do I usually take to relieve it?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1 font-bold">3.</span>
-                    How long does the relief last?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1 font-bold">4.</span>
-                    How does resentment show up in my body?
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1 font-bold">5.</span>
-                    What boundary would interrupt this cycle right now?
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
             {/* A Grounding Reframe */}
             <Card className="mb-6 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 border-emerald-300 dark:border-emerald-700">
               <CardContent className="pt-6">
@@ -438,8 +410,8 @@ export default function GuiltReliefResentmentCycle() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/values-aligned-decisions">
-                    <Button variant="outline" size="sm">Values-Aligned Decision Making Exercise</Button>
+                  <Link to="/family-action-plan">
+                    <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
                   <Link to="/boundaries-ultimatums">
                     <Button variant="outline" size="sm">Requests, Demands, Ultimatums & Boundaries</Button>
