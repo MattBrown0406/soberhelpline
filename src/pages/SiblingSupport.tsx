@@ -6,11 +6,8 @@ import SEOHead from "@/components/SEOHead";
 import RelatedResources from "@/components/RelatedResources";
 
 const siblingResources = [
-  { title: "The Sibling Experience", href: "/sibling-experience", description: "Understanding the unique pain siblings carry when addiction enters the family." },
-  { title: "Growing Up in the Shadow of Addiction", href: "/growing-up-shadow", description: "How childhood gets reshaped when a sibling's addiction consumes the family's attention." },
-  { title: "Sibling Guilt, Anger, and Loyalty Conflicts", href: "/sibling-guilt-anger-loyalty", description: "Navigating the impossible emotions that come with loving someone in active addiction." },
-  { title: "Rebuilding Sibling Relationships in Recovery", href: "/rebuilding-sibling-relationships", description: "What reconnection looks like — and when it's possible." },
-  { title: "Parents: Repairing the Sibling System", href: "/parents-repairing-sibling-system", description: "A guide for parents working to heal the sibling dynamic after addiction." },
+  { title: "Sibling Guilt, Anger, and Loyalty Conflicts", href: "/sibling-guilt-anger-loyalty", description: "Navigating the impossible emotions that come with loving someone in active addiction, and what rebuilding looks like if they get sober." },
+  { title: "Parents: Repairing the Sibling System", href: "/parents-repairing-sibling-system", description: "What siblings commonly feel but rarely say, and a guide for parents working to heal the sibling dynamic." },
 ];
 
 const recommendedResources = [

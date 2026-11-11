@@ -556,8 +556,8 @@ const FamilyRolesAddiction = () => {
                 <Link to="/parents-repairing-sibling-system" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
                   → Parents: Repairing the Sibling System
                 </Link>
-                <Link to="/how-trauma-shapes-addiction" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
-                  → Family Trauma & Hypervigilance Self-Assessment
+                <Link to="/workbook/stress-check" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
+                  → Nervous system check-in
                 </Link>
                 <Link to="/living-well-regardless" className="text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-2">
                   → Living Well Regardless of Outcome

@@ -633,8 +633,8 @@ export default function SafeToOpenUp() {
                     Living Well Regardless of Outcome
                   </Link>
                   <span className="text-muted-foreground">•</span>
-                  <Link to="/insight-behavior-tracker" className="text-primary hover:underline text-sm">
-                    Insight vs. Behavior Tracker
+                  <Link to="/readiness-checklist" className="text-primary hover:underline text-sm">
+                    Readiness for Change Checklist
                   </Link>
                   <span className="text-muted-foreground">•</span>
                   <Link to="/emotional-regulation" className="text-primary hover:underline text-sm">

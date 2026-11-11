@@ -591,14 +591,8 @@ export default function NonTwelveStepModalities() {
                   <Link to="/treatment-modalities">
                     <Button variant="outline" size="sm">Treatment Modalities Explained</Button>
                   </Link>
-                  <Link to="/matching-modality">
-                    <Button variant="outline" size="sm">Matching the Modality to the Problem</Button>
-                  </Link>
-                  <Link to="/therapy-timing">
-                    <Button variant="outline" size="sm">Why Some Therapies Fail at the Wrong Time</Button>
-                  </Link>
-                  <Link to="/insight-behavior-tracker">
-                    <Button variant="outline" size="sm">Insight vs. Behavior Tracker</Button>
+                  <Link to="/readiness-checklist">
+                    <Button variant="outline" size="sm">Readiness for Change Checklist</Button>
                   </Link>
                   <Link to="/living-well-regardless">
                     <Button variant="outline" size="sm">Living Well Regardless of Outcome</Button>

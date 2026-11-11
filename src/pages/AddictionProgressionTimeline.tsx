@@ -504,11 +504,6 @@ const AddictionProgressionTimeline = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/why-willpower-fails" className="text-primary hover:underline">
-                  Why Willpower Fails Guide
-                </Link>
-              </li>
-              <li>
                 <Link to="/relapse-warning-signs" className="text-primary hover:underline">
                   Relapse Warning Signs Tracker
                 </Link>

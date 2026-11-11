@@ -485,8 +485,8 @@ export default function NoNegotiationGuide() {
                   <Link to="/crisis-chaos">
                     <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>
                   </Link>
-                  <Link to="/insight-behavior-tracker">
-                    <Button variant="outline" size="sm">Insight vs. Behavior Tracker</Button>
+                  <Link to="/readiness-checklist">
+                    <Button variant="outline" size="sm">Readiness for Change Checklist</Button>
                   </Link>
                   <Link to="/what-changes-when-families-change">
                     <Button variant="outline" size="sm">What Changes When Families Change</Button>

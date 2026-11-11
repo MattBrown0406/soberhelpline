@@ -356,8 +356,8 @@ export default function TalkingAboutTreatment() {
                   <Link to="/family-action-plan">
                     <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
-                  <Link to="/family-education">
-                    <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
+                  <Link to="/workbook/boundary-script">
+                    <Button variant="outline" size="sm">Write one boundary you can hold</Button>
                   </Link>
                   <Link to="/crisis-chaos">
                     <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>

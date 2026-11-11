@@ -558,9 +558,9 @@ export default function MultipleTreatmentEpisodes() {
                       <CheckCircle className="h-4 w-4" />
                       Family Recovery Action Plan
                     </Link>
-                    <Link to="/family-education" className="flex items-center gap-2 text-primary hover:underline">
+                    <Link to="/workbook/guilt-check" className="flex items-center gap-2 text-primary hover:underline">
                       <CheckCircle className="h-4 w-4" />
-                      Guilt vs. Responsibility Module
+                      Guilt or responsibility?
                     </Link>
                     <Link to="/crisis-chaos" className="flex items-center gap-2 text-primary hover:underline">
                       <CheckCircle className="h-4 w-4" />

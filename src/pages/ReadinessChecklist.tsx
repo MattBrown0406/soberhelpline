@@ -211,9 +211,9 @@ const bandFor = (score: number): Band => (score <= 10 ? BANDS[0] : score <= 20 ?
 const COMPANION_TOOLS = [
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/workbook/boundary-script", label: "Boundary Setting Worksheet" },
+  { to: "/workbook/boundary-script", label: "Write one boundary you can hold" },
   { to: "/talking-about-treatment", label: '"How to Talk to Your Loved One About Treatment" Guide' },
-  { to: "/workbook/hard-moment-practice", label: "Scenario-Based Exercises" },
+  { to: "/workbook/hard-moment-practice", label: "Practice a hard moment" },
 ];
 
 // Reading carried over from the Insight vs. Behavior Tracker (the owner's

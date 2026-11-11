@@ -563,10 +563,10 @@ export default function LivingWellRegardless() {
                       What Changes When Families Change
                     </Button>
                   </Link>
-                  <Link to="/values-aligned-decisions">
+                  <Link to="/family-action-plan">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Values-Aligned Decision Making Exercise
+                      Family Recovery Action Plan
                     </Button>
                   </Link>
                   <Link to="/family-education">
@@ -575,10 +575,10 @@ export default function LivingWellRegardless() {
                       Self-Care vs. Self-Abandonment Audit
                     </Button>
                   </Link>
-                  <Link to="/family-education">
+                  <Link to="/workbook/stress-check">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Family Trauma & Hypervigilance Self-Assessment
+                      Nervous system check-in
                     </Button>
                   </Link>
                   <Link to="/family-education">

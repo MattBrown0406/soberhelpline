@@ -169,13 +169,13 @@ const RELATED_LINKS = [
     description: "Learn the difference and how to set healthy limits",
   },
   {
-    to: "/values-exercise",
-    title: "Values Clarification Exercise",
+    to: "/family-action-plan",
+    title: "Family Recovery Action Plan",
     description: "Reconnect with what matters most to guide your decisions",
   },
   {
-    to: "/enabling-language-translator",
-    title: "Enabling Language Translator",
+    to: "/communication-guide",
+    title: "What to Say / What Not to Say",
     description: "Transform enabling responses into supportive ones",
   },
   {

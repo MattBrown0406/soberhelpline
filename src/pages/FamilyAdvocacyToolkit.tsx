@@ -87,7 +87,7 @@ const COMPANION_LINKS = [
   { to: "/aftercare-checklist", label: "Aftercare Readiness Checklist" },
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/workbook/guilt-check", label: "Guilt vs. Responsibility Worksheet" },
+  { to: "/workbook/guilt-check", label: "Guilt or responsibility?" },
 ];
 
 // ---------------------------------------------------------------------------

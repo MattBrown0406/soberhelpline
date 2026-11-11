@@ -461,22 +461,22 @@ export default function FamilyInterferenceGuide() {
                       Enabling Self-Assessment
                     </Button>
                   </Link>
-                  <Link to="/boundary-setting-worksheet">
+                  <Link to="/workbook/boundary-script">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Boundary Setting Worksheet
+                      Write one boundary you can hold
                     </Button>
                   </Link>
-                  <Link to="/family-education#worksheet-guilt-responsibility">
+                  <Link to="/workbook/guilt-check">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Guilt vs. Responsibility Module
+                      Guilt or responsibility?
                     </Button>
                   </Link>
-                  <Link to="/family-education#trauma-assessment">
+                  <Link to="/workbook/stress-check">
                     <Button variant="outline" size="sm" className="gap-2">
                       <FileText className="h-3 w-3" />
-                      Family Trauma & Hypervigilance Assessment
+                      Nervous system check-in
                     </Button>
                   </Link>
                 </div>

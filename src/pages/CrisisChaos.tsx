@@ -387,14 +387,14 @@ export default function CrisisChaos() {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-primary">•</span>
-                    <Link to="/boundary-setting-worksheet" className="text-primary hover:underline print:text-foreground print:no-underline">
-                      Boundary Setting Worksheet
+                    <Link to="/workbook/boundary-script" className="text-primary hover:underline print:text-foreground print:no-underline">
+                      Write one boundary you can hold
                     </Link>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-primary">•</span>
-                    <Link to="/scenario-exercise" className="text-primary hover:underline print:text-foreground print:no-underline">
-                      Scenario-Based Recovery Exercises
+                    <Link to="/workbook/hard-moment-practice" className="text-primary hover:underline print:text-foreground print:no-underline">
+                      Practice a hard moment
                     </Link>
                   </li>
                   <li className="flex items-center gap-2">

@@ -410,8 +410,8 @@ export default function GuiltReliefResentmentCycle() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/values-aligned-decisions">
-                    <Button variant="outline" size="sm">Values-Aligned Decision Making Exercise</Button>
+                  <Link to="/family-action-plan">
+                    <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
                   <Link to="/boundaries-ultimatums">
                     <Button variant="outline" size="sm">Requests, Demands, Ultimatums & Boundaries</Button>

@@ -972,7 +972,7 @@ export default function ScenarioWorksheet({ user }: ScenarioWorksheetProps) {
             <Link to="/crisis-chaos">
               <Button variant="outline" size="sm">Crisis vs. Chaos Decision Guide</Button>
             </Link>
-            <Link to="/boundary-setting-worksheet">
+            <Link to="/workbook/boundary-script">
               <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
             </Link>
             <Link to="/emotional-regulation">

@@ -116,8 +116,8 @@ const actionItems: ActionItem[] = [
     description:
       "Boundaries aren't boundaries without consequences attached. 'Don't come home drunk' means nothing if they come home drunk and nothing happens. We'll help you set a boundary that means something.",
     icon: Shield,
-    linkText: "Boundary Setting Worksheet",
-    linkUrl: "/boundary-setting-worksheet",
+    linkText: "Write one boundary you can hold",
+    linkUrl: "/workbook/boundary-script",
     section: "month",
   },
 ];

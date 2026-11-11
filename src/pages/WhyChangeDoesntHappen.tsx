@@ -436,17 +436,17 @@ const WhyChangeDoesntHappen = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">Suggested Companion Resources</h2>
             
             <div className="grid sm:grid-cols-2 gap-3">
-              <Link to="/family-education#worksheet-guilt-responsibility" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/workbook/guilt-check" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <FileText className="h-5 w-5 text-primary" />
-                <span className="text-foreground">Guilt vs. Responsibility Deep-Dive Module</span>
+                <span className="text-foreground">Guilt or responsibility?</span>
               </Link>
-              <Link to="/family-education#worksheet-enabling-decision-tree" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/workbook/helping-or-enabling" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <GitBranch className="h-5 w-5 text-primary" />
-                <span className="text-foreground">Helping vs. Enabling Decision Tree</span>
+                <span className="text-foreground">Helping or enabling?</span>
               </Link>
-              <Link to="/boundary-setting-worksheet" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+              <Link to="/workbook/boundary-script" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <ClipboardList className="h-5 w-5 text-primary" />
-                <span className="text-foreground">Boundary Setting Worksheet</span>
+                <span className="text-foreground">Write one boundary you can hold</span>
               </Link>
               <Link to="/crisis-chaos" className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                 <AlertCircle className="h-5 w-5 text-primary" />

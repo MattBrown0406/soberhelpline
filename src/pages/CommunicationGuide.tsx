@@ -654,7 +654,7 @@ export default function CommunicationGuide() {
               <CardContent>
                 <div className="flex flex-wrap gap-3">
                   <Link to="/workbook/boundary-script">
-                    <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
+                    <Button variant="outline" size="sm">Write one boundary you can hold</Button>
                   </Link>
                   <Link to="/emotional-regulation">
                     <Button variant="outline" size="sm">Emotional Regulation Tools</Button>
@@ -665,8 +665,8 @@ export default function CommunicationGuide() {
                   <Link to="/family-action-plan">
                     <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
-                  <Link to="/family-education#worksheet-enabling-decision-tree">
-                    <Button variant="outline" size="sm">"Is This Help or Enabling?" Decision Tree</Button>
+                  <Link to="/workbook/helping-or-enabling">
+                    <Button variant="outline" size="sm">Helping or enabling?</Button>
                   </Link>
                 </div>
               </CardContent>

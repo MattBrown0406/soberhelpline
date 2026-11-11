@@ -201,7 +201,7 @@ export default function FamilyEducation() {
     checkMembership();
   }, [user]);
 
-  // Links like /family-education#worksheet-scenario: open the right tab, then
+  // Links like /workbook/hard-moment-practice: open the right tab, then
   // scroll once the content is on the page.
   useEffect(() => {
     if (isLoading || !hasMembership) return;

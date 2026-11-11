@@ -46,7 +46,7 @@ const SiteLayout = ({ children }: LayoutProps) => {
   useNativeBackButton();
 
   useEffect(() => {
-    // A link to an anchor (e.g. /family-education#worksheet-scenario) is
+    // A link to an anchor (e.g. /workbook/hard-moment-practice) is
     // scrolled by the page itself once its content has loaded.
     if (hash) return;
     window.scrollTo(0, 0);

@@ -59,9 +59,9 @@ const GROUNDING_STEPS = [
 
 const COMPANION_LINKS = [
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/boundary-setting-worksheet", label: "Boundary Setting Worksheet" },
+  { to: "/workbook/boundary-script", label: "Write one boundary you can hold" },
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
-  { to: "/scenario-exercise", label: "Scenario-Based Exercises" },
+  { to: "/workbook/hard-moment-practice", label: "Practice a hard moment" },
 ];
 
 const inlineLink = "font-medium text-primary underline underline-offset-2 hover:text-primary/80 print:text-foreground print:no-underline";

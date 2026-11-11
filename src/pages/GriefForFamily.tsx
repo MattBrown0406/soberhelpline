@@ -277,8 +277,8 @@ export default function GriefForFamily() {
                 <Link to="/guilt-relief-resentment">
                   <Button variant="outline" size="sm">The Guilt–Relief–Resentment Cycle</Button>
                 </Link>
-                <Link to="/growing-up-shadow">
-                  <Button variant="outline" size="sm">Growing Up in the Shadow of Addiction</Button>
+                <Link to="/strong-one">
+                  <Button variant="outline" size="sm">The Hidden Cost of Being the &quot;Strong One&quot;</Button>
                 </Link>
                 <Link to="/addiction-rewrites-family-rules">
                   <Button variant="outline" size="sm">How Addiction Rewrites Family Rules</Button>
