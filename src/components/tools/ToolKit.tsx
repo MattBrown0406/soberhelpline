@@ -119,9 +119,32 @@ export function ToolShell({
   className,
 }: ToolShellProps) {
   const printedOn = new Date().toLocaleDateString([], { year: "numeric", month: "long", day: "numeric" });
+  const shellRef = useRef<HTMLDivElement>(null);
+
+  // Collapsed "show more" blocks (earlier check-ins and the like) print open.
+  useEffect(() => {
+    let opened: HTMLDetailsElement[] = [];
+    const before = () => {
+      opened = Array.from(shellRef.current?.querySelectorAll<HTMLDetailsElement>("details:not([open])") ?? []);
+      opened.forEach((d) => (d.open = true));
+    };
+    const after = () => {
+      opened.forEach((d) => (d.open = false));
+      opened = [];
+    };
+    window.addEventListener("beforeprint", before);
+    window.addEventListener("afterprint", after);
+    return () => {
+      window.removeEventListener("beforeprint", before);
+      window.removeEventListener("afterprint", after);
+    };
+  }, []);
 
   return (
-    <div className={cn("container mx-auto max-w-3xl px-4 py-6 sm:py-10 print:max-w-none print:px-0 print:py-0", className)}>
+    <div
+      ref={shellRef}
+      className={cn("container mx-auto max-w-3xl px-4 py-6 sm:py-10 print:max-w-none print:px-0 print:py-0", className)}
+    >
       {/* Screen: back + actions */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 print:hidden">
         <Link
@@ -194,7 +217,11 @@ export function ToolShell({
         </div>
       </div>
 
-      <div className="space-y-6 print:space-y-4">{children}</div>
+      {/* Nothing can be typed until her saved answers have loaded, so a slow
+          load can never be overwritten by a few early keystrokes. */}
+      <fieldset disabled={!saved.loaded} aria-busy={!saved.loaded} className="m-0 min-w-0 space-y-6 border-0 p-0 print:space-y-4">
+        {children}
+      </fieldset>
 
       <p className="mt-10 text-center text-xs text-muted-foreground print:hidden">
         What you write here is private to your account. You can come back and change it any time.
@@ -279,7 +306,7 @@ function PrintLines({ lines }: { lines: number }) {
   return (
     <div className="hidden print:block" aria-hidden="true">
       {Array.from({ length: lines }).map((_, i) => (
-        <div key={i} className="h-7 border-b border-foreground/40" />
+        <div key={i} className="print-rule h-7 border-b border-foreground/40" />
       ))}
     </div>
   );
@@ -303,10 +330,16 @@ export function SavedTextarea({ label, hint, value, onChange, placeholder, rows 
   const ref = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight + 2}px`;
+    const fit = () => {
+      const el = ref.current;
+      if (!el) return;
+      el.style.height = "auto";
+      el.style.height = `${el.scrollHeight + 2}px`;
+    };
+    fit();
+    // The text wraps differently when the width changes (rotating a phone).
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
   }, [value]);
 
   return (
@@ -322,7 +355,7 @@ export function SavedTextarea({ label, hint, value, onChange, placeholder, rows 
         className="block w-full resize-none overflow-hidden rounded-lg border border-input bg-card px-3.5 py-3 text-base leading-relaxed text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
       />
       {value.trim() ? (
-        <p className="hidden whitespace-pre-wrap border-l-2 border-foreground/40 pl-3 text-sm leading-relaxed print:block">{value}</p>
+        <p className="print-rule hidden whitespace-pre-wrap border-l-2 border-foreground/40 pl-3 text-sm leading-relaxed print:block">{value}</p>
       ) : (
         <PrintLines lines={rows} />
       )}
@@ -363,7 +396,7 @@ export function SavedInput({ label, hint, value, onChange, placeholder, type = "
         className="block h-12 w-full rounded-lg border border-input bg-card px-3.5 text-base text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
       />
       {value.trim() ? (
-        <p className="hidden border-b border-foreground/40 pb-1 text-sm print:block">{type === "date" ? printableDate(value) : value}</p>
+        <p className="print-rule hidden border-b border-foreground/40 pb-1 text-sm print:block">{type === "date" ? printableDate(value) : value}</p>
       ) : (
         <PrintLines lines={1} />
       )}
@@ -513,10 +546,11 @@ export function ScaleRow({
   highLabel?: string;
 }) {
   const points = Array.from({ length: max - min + 1 }, (_, i) => min + i);
+  const labelId = useId();
   return (
     <div className="space-y-2 print:break-inside-avoid">
-      <p className="text-sm font-medium leading-snug text-foreground">{label}</p>
-      <div className="flex flex-wrap items-center gap-2 print:hidden" role="radiogroup">
+      <p id={labelId} className="text-sm font-medium leading-snug text-foreground">{label}</p>
+      <div className="flex flex-wrap items-center gap-2 print:hidden" role="radiogroup" aria-labelledby={labelId}>
         {points.map((n) => (
           <button
             key={n}

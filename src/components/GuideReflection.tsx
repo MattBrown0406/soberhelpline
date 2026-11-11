@@ -21,6 +21,9 @@ function Reflection({ path }: { path: string }) {
   const saved = useSavedTool<ReflectionAnswers>(reflectionKey(path), blank);
   const prompts = reflectionPrompts(path);
   const { data } = saved;
+  // Answers to questions that have since been reworded or replaced are still
+  // hers: keep showing them (and let her edit or clear them).
+  const earlier = Object.entries(data.answers ?? {}).filter(([question, answer]) => !prompts.includes(question) && answer.trim());
 
   return (
     <section
@@ -44,7 +47,7 @@ function Reflection({ path }: { path: string }) {
         <SaveStatusChip status={saved.status} signedIn={saved.signedIn} lastSavedAt={saved.lastSavedAt} className="print:hidden" />
       </div>
 
-      <div className="space-y-5">
+      <fieldset disabled={!saved.loaded} className="m-0 min-w-0 space-y-5 border-0 p-0">
         {/* Answers are stored under the question's own text, so reordering or
             adding questions never puts an answer under the wrong question. */}
         {prompts.map((prompt) => (
@@ -62,7 +65,21 @@ function Reflection({ path }: { path: string }) {
           value={data.notes}
           onChange={(value) => saved.patch({ notes: value })}
         />
-      </div>
+        {earlier.length > 0 && (
+          <div className="space-y-5 border-t border-border pt-5">
+            <p className="text-sm font-semibold text-foreground">Your earlier answers</p>
+            {earlier.map(([question, answer]) => (
+              <SavedTextarea
+                key={question}
+                label={question}
+                rows={2}
+                value={answer}
+                onChange={(value) => saved.setData((prev) => ({ ...prev, answers: { ...(prev.answers ?? {}), [question]: value } }))}
+              />
+            ))}
+          </div>
+        )}
+      </fieldset>
 
       {saved.loaded && !saved.signedIn && (
         <p className="mt-4 text-sm text-muted-foreground print:hidden">

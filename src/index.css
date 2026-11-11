@@ -223,6 +223,11 @@ All colors MUST be HSL.
   [class*="border-"] {
     border-color: #e5e7eb !important;
   }
+
+  /* Lines to write on, and the rule beside a typed answer, print dark enough to use. */
+  .print-rule {
+    border-color: #6b7280 !important;
+  }
   
   /* Preserve important background colors for visual elements */
   .bg-primary\/5,
