@@ -50,6 +50,20 @@
       "when": 1794367792409,
       "tag": "0006_website_audit_guards_20261110",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794433133686,
+      "tag": "0007_member_area_tables_preferences_cleanup",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794433237316,
+      "tag": "0008_member_area_welcome_forum_privacy",
+      "breakpoints": true
     }
   ]
 }
