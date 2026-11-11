@@ -276,4 +276,33 @@ All colors MUST be HSL.
   .dark {
     color-scheme: light !important;
   }
+
+  /* Site chrome never belongs on a printed guide or worksheet. */
+  footer,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  /* Printed answers keep their line breaks and sit inside the page width. */
+  textarea,
+  input {
+    border: 1px solid #9ca3af !important;
+  }
+}
+
+/* Library reading guides: body copy large and dark enough to read comfortably
+   (the guides were written with small grey text). Scoped to the guide pages
+   that Layout marks with .guide-reading; small print and captions keep their size. */
+.guide-reading :is(p, ul, ol, li).text-muted-foreground:not(.text-sm):not(.text-xs) {
+  color: hsl(var(--foreground) / 0.86);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.guide-reading :is(ul, ol).text-muted-foreground:not(.text-sm):not(.text-xs) > li {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.guide-reading :is(p, li).text-muted-foreground.text-sm {
+  color: hsl(var(--foreground) / 0.8);
 }

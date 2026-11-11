@@ -14,7 +14,7 @@ import WhatsAppLink from "./WhatsAppLink";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import GuideMemberBar from "./GuideMemberBar";
-import { memberBarItem } from "@/data/memberLibrary";
+import { memberBarItem, findLibraryItem } from "@/data/memberLibrary";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -43,6 +43,8 @@ const Layout = ({ children }: LayoutProps) => {
   }, [pathname]);
 
   const barItem = isMember ? memberBarItem(pathname) : undefined;
+  // Library reading guides get the larger, higher-contrast reading styles (index.css).
+  const isLibraryGuide = findLibraryItem(pathname)?.type === "guide";
   const showMemberBar = !!barItem && barDismissedOn !== pathname;
 
   const isHome = pathname === "/";
@@ -160,7 +162,7 @@ const Layout = ({ children }: LayoutProps) => {
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         </div>
       )}
-      <main id="main-content" className="flex-1 pb-safe">
+      <main id="main-content" className={isLibraryGuide ? "flex-1 pb-safe guide-reading" : "flex-1 pb-safe"}>
         {children}
       </main>
       {/* Room below the footer so the member bar never covers the end of the page. */}
