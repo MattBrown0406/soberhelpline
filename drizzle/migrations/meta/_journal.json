@@ -43,6 +43,13 @@
       "when": 1792861972425,
       "tag": "0005_monday_notification_disabled_activation_runner_compatible",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794367792409,
+      "tag": "0006_website_audit_guards_20261110",
+      "breakpoints": true
     }
   ]
 }

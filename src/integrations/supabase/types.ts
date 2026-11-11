@@ -495,7 +495,7 @@ export type Database = {
       }
       coaching_plans: {
         Row: {
-          client_user_id: string
+          client_user_id: string | null
           completed_sessions: number
           created_at: string
           id: string
@@ -508,7 +508,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          client_user_id: string
+          client_user_id?: string | null
           completed_sessions?: number
           created_at?: string
           id?: string
@@ -521,7 +521,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          client_user_id?: string
+          client_user_id?: string | null
           completed_sessions?: number
           created_at?: string
           id?: string
