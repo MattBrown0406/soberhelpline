@@ -45,6 +45,22 @@ thread is posted in This Week's Meeting, and only for The Family Squares).
 
 ## Prompt for Lovable
 
+This replaces my earlier member-area message. Step 0 already passed, so please
+start at step 1. Two things you flagged are corrected in the SQL below:
+
+- **No foreign keys to `auth.users`.** The five new tables hold a plain
+  `user_id uuid`. So that an account's rows still go when the account is
+  deleted, step 1 ends with a small trigger on `public.profiles` (which already
+  cascades from the account): when a profile row is deleted, that person's rows
+  in the five new tables are deleted too. It can never block a deletion.
+- **Service access and grant order.** Every new table grants to `service_role`,
+  and each table's grants come straight after `CREATE TABLE` and before row
+  level security is enabled, like the existing migrations.
+
+The welcome trigger in step 4 still reads the member's email from `auth.users`
+inside a SECURITY DEFINER function, exactly as the current
+`trigger_welcome_email` does today; it creates no foreign key.
+
 Please do these steps in order and tell me the result of each. Steps 1 and 4
 are schema migrations. Step 2 is one data statement and step 5 is the
 scheduled jobs: please run those two as separate SQL, not inside a migration.
@@ -70,14 +86,18 @@ select count(*) as posts, count(*) filter (where is_anonymous) as anonymous_post
 
 ### 1. Schema migration A: new tables and settings
 
-One migration. It only creates things; nothing existing changes behaviour.
+One migration. It only creates things (five tables, two reporting functions,
+three preference columns, and the clean-up trigger on `profiles`); nothing
+existing changes behaviour.
 
 ```sql
 -- member-core: the member's one learning path.
 -- Idempotent: safe to run more than once.
 
 CREATE TABLE IF NOT EXISTS public.member_learning_paths (
-  user_id uuid PRIMARY KEY REFERENCES auth.users (id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); her rows are removed with
+  -- her profile by cleanup_member_area_rows() in account-cleanup.sql.
+  user_id uuid PRIMARY KEY,
   track_id text NOT NULL,
   started_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
@@ -98,9 +118,11 @@ BEGIN
   END IF;
 END $$;
 
-ALTER TABLE public.member_learning_paths ENABLE ROW LEVEL SECURITY;
-
+REVOKE ALL ON public.member_learning_paths FROM anon;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.member_learning_paths TO authenticated;
+GRANT ALL ON public.member_learning_paths TO service_role;
+
+ALTER TABLE public.member_learning_paths ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Members read their own learning path" ON public.member_learning_paths;
 CREATE POLICY "Members read their own learning path"
@@ -147,7 +169,8 @@ CREATE INDEX IF NOT EXISTS member_learning_paths_track_id_idx
 -- with the one before it.
 CREATE TABLE IF NOT EXISTS public.workbook_entries (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users (id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   exercise_id text NOT NULL,
   answers jsonb NOT NULL DEFAULT '{}'::jsonb,
   output jsonb NOT NULL DEFAULT '{}'::jsonb,
@@ -176,6 +199,10 @@ END $$;
 CREATE INDEX IF NOT EXISTS workbook_entries_user_exercise_completed_idx
   ON public.workbook_entries (user_id, exercise_id, completed_at DESC);
 
+REVOKE ALL ON public.workbook_entries FROM anon;
+GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;
+GRANT ALL ON public.workbook_entries TO service_role;
+
 ALTER TABLE public.workbook_entries ENABLE ROW LEVEL SECURITY;
 
 -- Members: their own rows only (read, add, delete). No updates: a result is
@@ -200,21 +227,23 @@ CREATE POLICY "Members delete own workbook entries"
 -- her. (The engagement report counts entries through its own functions.)
 DROP POLICY IF EXISTS "Admins read all workbook entries" ON public.workbook_entries;
 
-REVOKE ALL ON public.workbook_entries FROM anon;
-GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;
-
 -- ---------------------------------------------------------------------
 -- Member engagement: one row per member per day they open a member page,
 -- and two admin-only reports computed in the database (no row caps).
 -- Weeks are Monday–Sunday in Pacific time.
 -- ---------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.member_visits (
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   visit_date date NOT NULL DEFAULT ((now() AT TIME ZONE 'America/Los_Angeles')::date),
   first_path text,
   created_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, visit_date)
 );
+
+REVOKE ALL ON public.member_visits FROM anon;
+GRANT SELECT, INSERT ON public.member_visits TO authenticated;
+GRANT ALL ON public.member_visits TO service_role;
 
 ALTER TABLE public.member_visits ENABLE ROW LEVEL SECURITY;
 
@@ -237,8 +266,6 @@ CREATE POLICY "Admins read visits"
   TO authenticated
   USING (public.has_role(auth.uid(), 'admin'::public.app_role));
 
-GRANT INSERT ON public.member_visits TO authenticated;
-GRANT SELECT ON public.member_visits TO authenticated;
 
 -- Weekly series. plpgsql so it is created even before the other new tables
 -- in this migration exist; it only touches them when it runs.
@@ -455,6 +482,7 @@ CREATE POLICY "Users can update their own preferences"
   WITH CHECK (auth.uid() = user_id);
 
 GRANT SELECT, INSERT, UPDATE ON public.user_notification_preferences TO authenticated;
+GRANT ALL ON public.user_notification_preferences TO service_role;
 
 -- ---------------------------------------------------------------------
 -- 2. Ledgers (service role only: RLS on, no client policies).
@@ -463,25 +491,65 @@ CREATE TABLE IF NOT EXISTS public.forum_notification_log (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   kind text NOT NULL CHECK (kind IN ('reply', 'mention', 'followed', 'host_alert')),
   post_id uuid NOT NULL REFERENCES public.forum_posts(id) ON DELETE CASCADE,
-  recipient_user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  recipient_user_id uuid NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT forum_notification_log_unique UNIQUE (kind, post_id, recipient_user_id)
 );
 CREATE INDEX IF NOT EXISTS forum_notification_log_post_idx ON public.forum_notification_log (post_id);
-ALTER TABLE public.forum_notification_log ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.forum_notification_log FROM anon, authenticated;
+GRANT ALL ON public.forum_notification_log TO service_role;
+ALTER TABLE public.forum_notification_log ENABLE ROW LEVEL SECURITY;
 
 CREATE TABLE IF NOT EXISTS public.member_email_log (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   kind text NOT NULL,
   period_key text NOT NULL,
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT member_email_log_unique UNIQUE (kind, period_key, user_id)
 );
 CREATE INDEX IF NOT EXISTS member_email_log_kind_period_idx ON public.member_email_log (kind, period_key);
-ALTER TABLE public.member_email_log ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.member_email_log FROM anon, authenticated;
+GRANT ALL ON public.member_email_log TO service_role;
+ALTER TABLE public.member_email_log ENABLE ROW LEVEL SECURITY;
+
+-- account-cleanup: when an account is deleted, her member-area rows go too.
+--
+-- The new member-area tables do not reference auth.users (foreign keys to the
+-- auth schema are not allowed here). public.profiles already does (ON DELETE
+-- CASCADE), so deleting an account deletes its profile row, and this trigger
+-- then removes what she wrote and what was recorded about her in the new
+-- tables. Idempotent. It can never block a deletion: any error becomes a
+-- WARNING.
+
+CREATE OR REPLACE FUNCTION public.cleanup_member_area_rows()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  BEGIN
+    DELETE FROM public.workbook_entries WHERE user_id = OLD.id;
+    DELETE FROM public.member_learning_paths WHERE user_id = OLD.id;
+    DELETE FROM public.member_visits WHERE user_id = OLD.id;
+    DELETE FROM public.member_email_log WHERE user_id = OLD.id;
+    DELETE FROM public.forum_notification_log WHERE recipient_user_id = OLD.id;
+  EXCEPTION WHEN others THEN
+    RAISE WARNING 'cleanup_member_area_rows skipped for %: %', OLD.id, SQLERRM;
+  END;
+  RETURN OLD;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.cleanup_member_area_rows() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS cleanup_member_area_rows_trg ON public.profiles;
+CREATE TRIGGER cleanup_member_area_rows_trg
+AFTER DELETE ON public.profiles
+FOR EACH ROW EXECUTE FUNCTION public.cleanup_member_area_rows();
 ```
 
 ### 2. Data step (run as SQL, not a migration): mark today's members as already welcomed
@@ -500,8 +568,8 @@ people who join from now on. It inserts ledger rows and sends nothing.
 INSERT INTO public.member_email_log (kind, period_key, user_id)
 SELECT DISTINCT 'welcome', 'once', ps.user_id
 FROM public.provider_subscriptions ps
-JOIN auth.users au ON au.id = ps.user_id
 WHERE ps.provider_submission_id IS NULL
+  AND ps.user_id IS NOT NULL
   AND ps.status IS DISTINCT FROM 'pending'
 ON CONFLICT (kind, period_key, user_id) DO NOTHING;
 ```
@@ -1196,6 +1264,11 @@ from pg_class c join pg_namespace n on n.oid = c.relnamespace
 where n.nspname = 'public' and c.relname in ('member_learning_paths', 'workbook_entries', 'member_visits',
   'forum_notification_log', 'member_email_log', 'user_notification_preferences')
 order by 1;
+
+-- 7a2. The service role can use every new table (expect 5 rows, all true), and the account clean-up trigger exists (expect 1 row).
+select t as table_name, has_table_privilege('service_role', 'public.' || t, 'SELECT, INSERT, UPDATE, DELETE') as service_role_ok
+from unnest(array['member_learning_paths', 'workbook_entries', 'member_visits', 'forum_notification_log', 'member_email_log']) as t;
+select tgname from pg_trigger where tgname = 'cleanup_member_area_rows_trg' and not tgisinternal;
 
 -- 7b. The forum view exists; forum_posts is out of realtime (expect 1 row, then 0 rows).
 select c.relname, c.reloptions, pg_get_userbyid(c.relowner) as owner from pg_class c where c.relname = 'forum_posts_secure';

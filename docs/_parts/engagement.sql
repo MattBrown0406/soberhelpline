@@ -4,12 +4,17 @@
 -- Weeks are Monday–Sunday in Pacific time.
 -- ---------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.member_visits (
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   visit_date date NOT NULL DEFAULT ((now() AT TIME ZONE 'America/Los_Angeles')::date),
   first_path text,
   created_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, visit_date)
 );
+
+REVOKE ALL ON public.member_visits FROM anon;
+GRANT SELECT, INSERT ON public.member_visits TO authenticated;
+GRANT ALL ON public.member_visits TO service_role;
 
 ALTER TABLE public.member_visits ENABLE ROW LEVEL SECURITY;
 
@@ -32,8 +37,6 @@ CREATE POLICY "Admins read visits"
   TO authenticated
   USING (public.has_role(auth.uid(), 'admin'::public.app_role));
 
-GRANT INSERT ON public.member_visits TO authenticated;
-GRANT SELECT ON public.member_visits TO authenticated;
 
 -- Weekly series. plpgsql so it is created even before the other new tables
 -- in this migration exist; it only touches them when it runs.

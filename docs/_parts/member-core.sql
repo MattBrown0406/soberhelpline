@@ -2,7 +2,9 @@
 -- Idempotent: safe to run more than once.
 
 CREATE TABLE IF NOT EXISTS public.member_learning_paths (
-  user_id uuid PRIMARY KEY REFERENCES auth.users (id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); her rows are removed with
+  -- her profile by cleanup_member_area_rows() in account-cleanup.sql.
+  user_id uuid PRIMARY KEY,
   track_id text NOT NULL,
   started_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
@@ -23,9 +25,11 @@ BEGIN
   END IF;
 END $$;
 
-ALTER TABLE public.member_learning_paths ENABLE ROW LEVEL SECURITY;
-
+REVOKE ALL ON public.member_learning_paths FROM anon;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.member_learning_paths TO authenticated;
+GRANT ALL ON public.member_learning_paths TO service_role;
+
+ALTER TABLE public.member_learning_paths ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Members read their own learning path" ON public.member_learning_paths;
 CREATE POLICY "Members read their own learning path"

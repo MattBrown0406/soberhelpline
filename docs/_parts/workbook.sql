@@ -9,7 +9,8 @@
 -- with the one before it.
 CREATE TABLE IF NOT EXISTS public.workbook_entries (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users (id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   exercise_id text NOT NULL,
   answers jsonb NOT NULL DEFAULT '{}'::jsonb,
   output jsonb NOT NULL DEFAULT '{}'::jsonb,
@@ -38,6 +39,10 @@ END $$;
 CREATE INDEX IF NOT EXISTS workbook_entries_user_exercise_completed_idx
   ON public.workbook_entries (user_id, exercise_id, completed_at DESC);
 
+REVOKE ALL ON public.workbook_entries FROM anon;
+GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;
+GRANT ALL ON public.workbook_entries TO service_role;
+
 ALTER TABLE public.workbook_entries ENABLE ROW LEVEL SECURITY;
 
 -- Members: their own rows only (read, add, delete). No updates: a result is
@@ -61,6 +66,3 @@ CREATE POLICY "Members delete own workbook entries"
 -- No admin read policy: what a member writes in an exercise is private to
 -- her. (The engagement report counts entries through its own functions.)
 DROP POLICY IF EXISTS "Admins read all workbook entries" ON public.workbook_entries;
-
-REVOKE ALL ON public.workbook_entries FROM anon;
-GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;
