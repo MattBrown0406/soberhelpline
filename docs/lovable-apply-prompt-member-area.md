@@ -30,8 +30,8 @@ What this change does:
 5. **Forum.** Three active spaces, anonymous posting that hides the author from
    other members in the database itself (`forum_posts_secure`), and membership
    checked with `is_active_family_member`.
-6. **Member emails.** Reply, mention and followed-space emails (every 15
-   minutes), a Tuesday member note, and a welcome email that fires when a
+6. **Member emails.** Reply, mention and followed-space emails (checked once an
+   hour), a Tuesday member note, and a welcome email that fires when a
    membership actually becomes active. Members can switch each one off.
 7. **Admin.** A Member Engagement tab (`member_visits`, two reporting
    functions) and a Forum Moderation tab.
@@ -1196,10 +1196,11 @@ INSERT INTO public.site_settings (key, value)
 VALUES ('forum_notifications_start_at', to_char(now() AT TIME ZONE 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
 ON CONFLICT (key) DO NOTHING;
 
--- Forum notifications: every 15 minutes.
+-- Forum notifications: once an hour (24 runs a day). The function looks back
+-- 48 hours and its ledger stops repeats, so nothing is missed between runs.
 SELECT cron.schedule(
-  'send-forum-notifications-15min',
-  '*/15 * * * *',
+  'send-forum-notifications-hourly',
+  '7 * * * *',
   $cmd$
   select net.http_post(
     url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/send-forum-notifications',
@@ -1295,10 +1296,10 @@ select count(*) as already_welcomed from public.member_email_log where kind = 'w
 select key, value from public.site_settings where key = 'forum_notifications_start_at';
 select jobname, schedule, active, command ~* 'cron_secret' as sends_cron_secret
 from cron.job
-where jobname in ('send-forum-notifications-15min', 'send-member-weekly-note-a', 'send-member-weekly-note-b')
+where jobname in ('send-forum-notifications-hourly', 'send-member-weekly-note-a', 'send-member-weekly-note-b')
 order by 1;
 
--- 7f. About 15 minutes after step 5: the forum job answers 200, not 401 or 404.
+-- 7f. After the next run (7 minutes past the hour): the forum job answers 200, not 401 or 404.
 select r.status_code, left(r.content, 200) as content, r.created
 from net._http_response r order by r.id desc limit 5;
 ```
@@ -1320,7 +1321,7 @@ from net._http_response r order by r.id desc limit 5;
 
 ## Undo
 
-- Emails: `select cron.unschedule('send-forum-notifications-15min');` and the
+- Emails: `select cron.unschedule('send-forum-notifications-hourly');` and the
   same for `send-member-weekly-note-a` and `-b`.
 - The rest is additive. The forum change (step 4) and the new site depend on
   each other, so roll those back together (revert the merge, then Publish).

@@ -166,10 +166,11 @@ INSERT INTO public.site_settings (key, value)
 VALUES ('forum_notifications_start_at', to_char(now() AT TIME ZONE 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
 ON CONFLICT (key) DO NOTHING;
 
--- Forum notifications: every 15 minutes.
+-- Forum notifications: once an hour (24 runs a day). The function looks back
+-- 48 hours and its ledger stops repeats, so nothing is missed between runs.
 SELECT cron.schedule(
-  'send-forum-notifications-15min',
-  '*/15 * * * *',
+  'send-forum-notifications-hourly',
+  '7 * * * *',
   $cmd$
   select net.http_post(
     url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/send-forum-notifications',

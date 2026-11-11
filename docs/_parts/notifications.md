@@ -2,7 +2,7 @@
 
 ## What it adds
 
-- **Forum emails** (`send-forum-notifications`, every 15 minutes). It looks at forum activity from the last 48 hours and sends four kinds of email:
+- **Forum emails** (`send-forum-notifications`, once an hour). It looks at forum activity from the last 48 hours and sends four kinds of email:
   - **Replies:** one email per thread to the member whose post got a reply.
   - **@mentions.**
   - **Followed topics:** one email per member, listing the new threads.
@@ -59,7 +59,7 @@ select count(*) from public.member_email_log where kind = 'welcome';
 
 -- the three jobs (commands send cron_secret; no pasted keys)
 select jobname, schedule, active, command ~* 'cron_secret' as sends_cron_secret
-from cron.job where jobname in ('send-forum-notifications-15min',
+from cron.job where jobname in ('send-forum-notifications-hourly',
   'send-member-weekly-note-a', 'send-member-weekly-note-b');
 ```
 
