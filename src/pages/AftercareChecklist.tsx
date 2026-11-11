@@ -166,12 +166,14 @@ const BAND_STYLE: Record<"ready" | "gaps" | "major", string> = {
 
 function readinessBand(confirmedCount: number, total: number, concerns: number, answered: number): Band {
   if (confirmedCount === 0 || total === 0) return "none";
+  // No verdict from a half-finished sheet: a single tick must not read as
+  // "discharge may increase relapse risk". The verdict waits for the five
+  // honest questions, which she answers after going through every section.
+  if (answered < REALITY_QUESTIONS.length) return "needs-answers";
   const share = confirmedCount / total;
   // Three or more honest concerns, or fewer than half the items confirmed.
   if (concerns > 2 || share < 0.5) return "major";
-  // "Ready" needs most items confirmed AND few concerns, and the concerns
-  // can't be known until the five questions are answered.
-  if (share >= 0.8 && concerns <= 1) return answered === REALITY_QUESTIONS.length ? "ready" : "needs-answers";
+  if (share >= 0.8 && concerns <= 1) return "ready";
   return "gaps";
 }
 
@@ -287,7 +289,7 @@ export default function AftercareChecklist() {
 
       <ToolShell
         title="Aftercare Readiness Checklist"
-        summary="Preventing discharge-to-relapse patterns. Assess actual readiness based on confirmed plans and observable behaviors, not hope or insurance timelines. Tick things off as they are confirmed, before discharge and after they are home."
+        summary="Preventing discharge-to-relapse patterns. Assess actual readiness based on confirmed plans and observable behaviors — not hope or insurance timelines. Tick things off as they are confirmed, before discharge and after they are home."
         note="Based on ASAM continuing care guidelines and Gorski's relapse prevention model. Discharge should be a clinical transition, not a relief milestone."
         kind="Living plan"
         saved={saved}
@@ -397,7 +399,8 @@ export default function AftercareChecklist() {
 
               {band === "needs-answers" ? (
                 <ToolNote>
-                  Most items are confirmed. Answer the five honest questions in step 7 to see where this leaves you.
+                  When you have been through every section, answer the five honest questions in step 7 to see where
+                  this leaves you.
                 </ToolNote>
               ) : (
                 <div

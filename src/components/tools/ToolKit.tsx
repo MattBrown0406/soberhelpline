@@ -165,7 +165,7 @@ export function ToolShell({
       {/* Print: letterhead */}
       <div className="mb-6 hidden items-center justify-between border-b border-border pb-3 print:flex">
         <img src={logoImg} alt="Sober Helpline" className="h-10 w-auto" />
-        <p className="text-xs">soberhelpline.com · {printedOn}</p>
+        <p className="text-xs">soberhelpline.com · (458) 298-8008 · {printedOn}</p>
       </div>
 
       {/* Header */}
@@ -341,6 +341,13 @@ interface SavedInputProps {
   className?: string;
 }
 
+/** "2026-11-10" from a date field prints as "November 10, 2026". */
+function printableDate(value: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!m) return value;
+  return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).toLocaleDateString([], { year: "numeric", month: "long", day: "numeric" });
+}
+
 /** A short one-line answer. */
 export function SavedInput({ label, hint, value, onChange, placeholder, type = "text", maxLength = 300, className }: SavedInputProps) {
   const id = useId();
@@ -356,7 +363,7 @@ export function SavedInput({ label, hint, value, onChange, placeholder, type = "
         className="block h-12 w-full rounded-lg border border-input bg-card px-3.5 text-base text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring print:hidden"
       />
       {value.trim() ? (
-        <p className="hidden border-b border-foreground/40 pb-1 text-sm print:block">{value}</p>
+        <p className="hidden border-b border-foreground/40 pb-1 text-sm print:block">{type === "date" ? printableDate(value) : value}</p>
       ) : (
         <PrintLines lines={1} />
       )}

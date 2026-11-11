@@ -295,6 +295,10 @@ function changeText(total: number, previous: number | null): string {
   return diff > 0 ? `${diff} more ${signs} than the time before` : `${-diff} fewer ${signs} than the time before`;
 }
 
+/** How today's count compares with the last saved check-in. */
+const sinceLast = (diff: number): string =>
+  diff === 0 ? "The same today." : diff > 0 ? `${diff} more today.` : `${-diff} fewer today.`;
+
 // ---------------------------------------------------------------------------
 // Pieces
 // ---------------------------------------------------------------------------
@@ -409,7 +413,7 @@ function ConcernResult({
               {level.guidance && <p className="mt-2 text-sm leading-relaxed text-foreground/90">{level.guidance}</p>}
               {previous && (
                 <p className="mt-2 text-sm text-foreground/80">
-                  {changeText(total, previous.total)} ({previous.total} of {TOTAL_SIGNS} on {formatDate(previous.date)}).
+                  Your last check-in, {formatDate(previous.date)}: {previous.total} of {TOTAL_SIGNS}. {sinceLast(total - previous.total)}
                 </p>
               )}
             </div>

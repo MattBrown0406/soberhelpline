@@ -315,6 +315,10 @@ function changeText(score: number, previous: number | null): string {
   return diff > 0 ? `${diff} more than the time before` : `${-diff} fewer than the time before`;
 }
 
+/** How today's count compares with the last saved check-in. */
+const sinceLast = (diff: number): string =>
+  diff === 0 ? "The same today." : diff > 0 ? `${diff} more today.` : `${-diff} fewer today.`;
+
 const hasAnything = (checkIn: CheckIn) =>
   checkIn.ticked.length > 0 ||
   checkIn.actions.length > 0 ||
@@ -396,7 +400,7 @@ function ReadinessResult({
               <p className="mt-1 text-sm leading-relaxed text-foreground/90">{band.message}</p>
               {previous && (
                 <p className="mt-2 text-sm text-foreground/80">
-                  {changeText(score, previous.score)} ({previous.score} of {MAX_SCORE} on {formatDate(previous.date)}).
+                  Your last check-in, {formatDate(previous.date)}: {previous.score} of {MAX_SCORE}. {sinceLast(score - previous.score)}
                 </p>
               )}
             </div>
@@ -506,7 +510,7 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
               </div>
               <details className="mt-2 text-sm">
                 <summary className="inline-flex min-h-11 cursor-pointer items-center font-medium text-primary print:hidden">
-                  Sections and notes
+                  Sections, notes and answers
                 </summary>
                 <ul className="mt-1 space-y-1 text-foreground/90">
                   {SECTIONS.map((section) => (
@@ -520,9 +524,20 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
                     <span className="font-medium">{section.title} notes:</span> {checkIn.notes[section.key]}
                   </p>
                 ))}
+                {REALITY_QUESTIONS.filter((question) => checkIn.reality[question.id]).map((question) => (
+                  <p key={question.id} className="mt-2 text-foreground/90">
+                    <span className="font-medium">{question.question}</span>{" "}
+                    {question.options.find((option) => option.value === checkIn.reality[question.id])?.label ?? ""}
+                  </p>
+                ))}
                 {checkIn.actions.length > 0 && (
                   <p className="mt-2 text-foreground/90">
                     <span className="font-medium">Actions chosen:</span> {checkIn.actions.join("; ")}
+                  </p>
+                )}
+                {checkIn.revisitWeeks.trim() !== "" && (
+                  <p className="mt-2 text-foreground/90">
+                    <span className="font-medium">Revisit in:</span> {checkIn.revisitWeeks} weeks
                   </p>
                 )}
               </details>
