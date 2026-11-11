@@ -151,6 +151,93 @@ const ParentsRepairingSiblingSystem = () => {
             </CardContent>
           </Card>
 
+          {/* What Siblings Commonly Feel (from The Sibling Experience in Addiction) */}
+          <Card className="mb-8 border-blue-200 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Heart className="h-6 w-6 text-blue-600" />
+                What Siblings Commonly Feel (But Rarely Say)
+              </h2>
+              <p className="text-gray-700 mb-4">Siblings often carry:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Anger that feels disloyal
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Guilt for being "okay"
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Resentment over unequal attention
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Fear of becoming like the addicted sibling
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Shame for wishing things were different
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500 mt-1">•</span>
+                  Pressure to be "the easy one"
+                </li>
+              </ul>
+              <p className="text-blue-700 font-medium mt-4 italic">
+                These feelings are normal—and often unacknowledged.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* How Addiction Alters Sibling Relationships (from The Sibling Experience in Addiction) */}
+          <Card className="mb-8 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Users className="h-6 w-6 text-blue-600" />
+                How Addiction Alters Sibling Relationships
+              </h2>
+
+              <div className="space-y-6">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Unequal Attention</h3>
+                  <p className="text-gray-700 mb-2">
+                    Parents often spend disproportionate time and energy on the addicted child—out of necessity, not preference.
+                  </p>
+                  <p className="text-gray-700 mb-2">Siblings may internalize this as:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4 italic">
+                    <li>• "My needs don't matter"</li>
+                    <li>• "I shouldn't need anything"</li>
+                    <li>• "I shouldn't make things harder"</li>
+                  </ul>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Loyalty Conflicts</h3>
+                  <p className="text-gray-700 mb-2">Siblings may feel torn between:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4">
+                    <li>• Protecting parents</li>
+                    <li>• Supporting or distancing from the addicted sibling</li>
+                    <li>• Protecting themselves</li>
+                  </ul>
+                  <p className="text-gray-800 font-medium mt-2 italic">No choice feels clean.</p>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Emotional Distance</h3>
+                  <p className="text-gray-700 mb-2">Many siblings learn to disconnect emotionally to survive:</p>
+                  <ul className="space-y-1 text-gray-700 ml-4">
+                    <li>• Reduced closeness</li>
+                    <li>• Superficial contact</li>
+                    <li>• Estrangement without clarity</li>
+                  </ul>
+                  <p className="text-gray-800 font-medium mt-2 italic">Distance becomes protection.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Common Parental Missteps */}
           <Card className="mb-8 border-red-200 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -486,17 +573,11 @@ const ParentsRepairingSiblingSystem = () => {
             <CardContent className="p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Suggested Companion Resources</h2>
               <div className="grid gap-3">
-                <Link to="/sibling-experience" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → The Sibling Experience in Addiction
-                </Link>
                 <Link to="/sibling-guilt-anger-loyalty" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
                   → Sibling Guilt, Anger, and Loyalty Conflicts
                 </Link>
-                <Link to="/growing-up-shadow" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → Growing Up in the Shadow of Addiction
-                </Link>
-                <Link to="/rebuilding-sibling-relationships" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
-                  → Rebuilding Sibling Relationships in Recovery
+                <Link to="/strong-one" className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2">
+                  → The Hidden Cost of Being the "Strong One"
                 </Link>
               </div>
             </CardContent>

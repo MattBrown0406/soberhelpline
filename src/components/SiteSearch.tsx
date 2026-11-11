@@ -184,7 +184,7 @@ export default function SiteSearch() {
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search guides, tools, AI coaches, blog..."
+                placeholder="Search guides, tools, blog..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}

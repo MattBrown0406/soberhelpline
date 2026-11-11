@@ -131,6 +131,29 @@ const MentalHealthVsSubstanceInduced = () => {
           </CardContent>
         </Card>
 
+        {/* When Mental Health Should Be Addressed First (merged from Why Focusing Only on Mental Health Can Delay Recovery) */}
+        <Card className="mb-6 border-orange-500/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              When Mental Health Should Be Addressed First
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>There are exceptions, including:</p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Acute suicidal risk</li>
+              <li>Severe psychosis</li>
+              <li>Immediate psychiatric instability</li>
+            </ul>
+            <div className="bg-muted p-4 rounded-lg">
+              <p className="italic">
+                Even in these cases, addiction must be addressed as soon as stabilization allows.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Key Principle */}
         <Card className="mb-6 border-primary bg-primary/5">
           <CardHeader>
@@ -298,6 +321,187 @@ const MentalHealthVsSubstanceInduced = () => {
           </CardContent>
         </Card>
 
+        {/* Commonly Misunderstood Diagnoses (merged from Commonly Misunderstood Diagnoses in Addiction) */}
+        <Card className="mb-6 border-primary bg-primary/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Brain className="h-5 w-5 text-primary" />
+              Commonly Misunderstood Diagnoses in Addiction
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Families are often given diagnoses—formally or informally—that seem to explain everything:</p>
+            <ul className="space-y-1 ml-4 italic text-muted-foreground">
+              <li>"They're bipolar."</li>
+              <li>"They have borderline personality disorder."</li>
+              <li>"It's ADHD."</li>
+              <li>"It's trauma."</li>
+              <li>"They're antisocial."</li>
+            </ul>
+            <p>
+              Sometimes these diagnoses are accurate. Sometimes they are premature, incomplete, or substance-influenced.
+            </p>
+            <p className="font-semibold">
+              Active substance use can mimic, exaggerate, or temporarily create psychiatric symptoms.
+            </p>
+            <p>This is why:</p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Diagnoses often change after sustained sobriety</li>
+              <li>Early labels should be held lightly</li>
+              <li>Behavior and patterns matter more than names</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        {/* 5. BPD traits */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>5. Borderline Personality Disorder (BPD) Traits</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Why It's Commonly Applied</h4>
+              <p className="text-muted-foreground mb-2">People in active addiction may show:</p>
+              <ul className="list-disc ml-6 text-muted-foreground space-y-1">
+                <li>Emotional volatility</li>
+                <li>Fear of abandonment</li>
+                <li>Intense relationships</li>
+                <li>Impulsivity</li>
+                <li>Self-harming behaviors</li>
+              </ul>
+              <p className="mt-2 italic">These overlap with BPD traits.</p>
+            </div>
+            <div className="bg-orange-50 dark:bg-orange-950/30 p-4 rounded-lg">
+              <h4 className="font-semibold text-orange-700 dark:text-orange-400 mb-2">What Families Often Miss</h4>
+              <ul className="list-disc ml-6 text-sm space-y-1">
+                <li>Substance use alone can create emotional instability</li>
+                <li>Withdrawal amplifies mood swings</li>
+                <li>Crisis-driven behavior can mimic personality pathology</li>
+              </ul>
+            </div>
+            <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg">
+              <h4 className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Important Distinction</h4>
+              <p className="text-sm mb-2"><strong>Traits ≠ a full personality disorder</strong></p>
+              <p className="text-sm">A true diagnosis requires long-term, stable observation—often during sobriety</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">What Helps</h4>
+              <ul className="list-disc ml-6 space-y-1">
+                <li>Structure</li>
+                <li>Boundaries</li>
+                <li>DBT-informed skills</li>
+                <li>Avoiding labels as excuses for harm</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        <SafetyBox topics={["suicide"]} title="If there is self-harm or any talk of suicide" />
+
+        {/* 6. ADHD */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>6. ADHD</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Why ADHD Is Frequently Cited</h4>
+              <p className="text-muted-foreground mb-2">Many people with addiction report:</p>
+              <ul className="list-disc ml-6 text-muted-foreground space-y-1">
+                <li>Restlessness</li>
+                <li>Poor focus</li>
+                <li>Impulsivity</li>
+                <li>Difficulty with organization</li>
+              </ul>
+              <p className="mt-2 italic">These overlap with ADHD symptoms.</p>
+            </div>
+            <div className="bg-orange-50 dark:bg-orange-950/30 p-4 rounded-lg">
+              <h4 className="font-semibold text-orange-700 dark:text-orange-400 mb-2">What Families Should Know</h4>
+              <ul className="list-disc ml-4 text-sm space-y-1">
+                <li>Chronic substance use impairs attention and executive function</li>
+                <li>Sleep deprivation worsens focus</li>
+                <li>Stimulant misuse can mask or exaggerate symptoms</li>
+              </ul>
+            </div>
+            <div className="bg-destructive/10 p-4 rounded-lg">
+              <h4 className="font-semibold text-destructive mb-2">Caution for Families</h4>
+              <ul className="list-disc ml-4 text-sm space-y-1">
+                <li>ADHD medications can be misused</li>
+                <li>Diagnosis should be careful and staged</li>
+                <li>Functioning should be assessed during sobriety</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 7. Antisocial traits */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>7. Antisocial Personality Traits</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Why This Is Especially Confusing</h4>
+              <p className="text-muted-foreground mb-2">Addiction can produce behaviors that look "antisocial":</p>
+              <ul className="list-disc ml-6 text-muted-foreground space-y-1">
+                <li>Lying</li>
+                <li>Manipulation</li>
+                <li>Exploitation</li>
+                <li>Lack of empathy</li>
+                <li>Rule-breaking</li>
+              </ul>
+            </div>
+            <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-lg">
+              <h4 className="font-semibold text-blue-700 dark:text-blue-400 mb-2">What Families Should Know</h4>
+              <ul className="list-disc ml-4 text-sm space-y-1">
+                <li>These behaviors can be survival-driven</li>
+                <li>Chronic use narrows emotional range</li>
+                <li>Moral injury and shame distort behavior</li>
+              </ul>
+            </div>
+            <div className="bg-destructive/10 p-4 rounded-lg">
+              <h4 className="font-semibold text-destructive mb-2">When to Be More Concerned</h4>
+              <ul className="list-disc ml-4 text-sm space-y-1">
+                <li>Longstanding patterns before substance use</li>
+                <li>Lack of remorse across contexts</li>
+                <li>Harm without intoxication or desperation</li>
+              </ul>
+            </div>
+            <div className="bg-muted p-4 rounded-lg text-center">
+              <p className="font-medium">
+                Families should focus on safety and boundaries, not debating labels.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 8. Dual Diagnosis */}
+        <Card className="mb-6 border-orange-500/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              8. "Dual Diagnosis" as a Catch-All
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">The Problem With the Term</h4>
+              <p className="text-muted-foreground mb-2">"Dual diagnosis" is often used to mean:</p>
+              <ul className="list-disc ml-6 text-muted-foreground space-y-1 italic">
+                <li>"It's complicated"</li>
+                <li>"It's not just addiction"</li>
+                <li>"We don't know what's primary"</li>
+              </ul>
+            </div>
+            <p>While dual diagnosis is real, the term can:</p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Blur treatment priorities</li>
+              <li>Delay addiction stabilization</li>
+              <li>Reduce accountability</li>
+            </ul>
+          </CardContent>
+        </Card>
+
         {/* Why Families Focus on Mental Health */}
         <Card className="mb-6">
           <CardHeader>
@@ -315,6 +519,25 @@ const MentalHealthVsSubstanceInduced = () => {
               <li>It preserves hope without boundaries</li>
             </ul>
             <p className="italic">This is understandable—but often counterproductive.</p>
+            {/* Merged from Why Focusing Only on Mental Health Can Delay Recovery */}
+            <div className="border-l-4 border-destructive/50 pl-4">
+              <h4 className="font-semibold mb-2">Therapy Without Sobriety Has Limits</h4>
+              <ul className="list-disc ml-4 text-muted-foreground space-y-1">
+                <li>Insight does not equal behavior change</li>
+                <li>Emotional processing can increase craving</li>
+                <li>Sessions may become repetitive or avoidant</li>
+                <li>Progress collapses between appointments</li>
+              </ul>
+            </div>
+            <div className="border-l-4 border-destructive/50 pl-4">
+              <h4 className="font-semibold mb-2">Medication Becomes a Moving Target</h4>
+              <ul className="list-disc ml-4 text-muted-foreground space-y-1">
+                <li>Substances interfere with effectiveness</li>
+                <li>Side effects increase</li>
+                <li>Doses change frequently</li>
+                <li>Symptoms fluctuate unpredictably</li>
+              </ul>
+            </div>
             <div className="bg-muted p-4 rounded-lg text-center">
               <p className="font-medium text-primary">
                 Treating mental health without addressing addiction is like treating pain while ignoring infection.
@@ -343,6 +566,39 @@ const MentalHealthVsSubstanceInduced = () => {
               <p className="italic">
                 This is not minimizing mental health.<br />
                 It is protecting it.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Why Stabilizing Addiction Often Improves Mental Health (merged from Why Focusing Only on Mental Health Can Delay Recovery) */}
+        <Card className="mb-6 border-primary">
+          <CardHeader className="bg-primary/10">
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              Why Stabilizing Addiction Often Improves Mental Health
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-4">
+            <p>When substance use is reduced or stopped:</p>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                "Sleep improves",
+                "Anxiety often decreases",
+                "Mood stabilizes",
+                "Cognitive function improves",
+                "Therapy becomes more effective",
+                "Diagnoses become clearer"
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-muted p-4 rounded-lg text-center mt-4">
+              <p className="font-semibold text-primary">
+                Many symptoms families feared were "permanent" improve dramatically with sobriety.
               </p>
             </div>
           </CardContent>
@@ -405,6 +661,40 @@ const MentalHealthVsSubstanceInduced = () => {
           </CardContent>
         </Card>
 
+        {/* What Families Can Do Differently (merged from Why Focusing Only on Mental Health Can Delay Recovery) */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              What Families Can Do Differently
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>Ask providers about treatment sequencing</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>Avoid choosing between compassion and boundaries</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>Support addiction treatment without abandoning mental health care</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>Measure progress by behavior, not insight</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>Prepare for structure after crisis</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
         {/* Grounding Reframe */}
         <Card className="mb-6 bg-primary/5">
           <CardHeader>
@@ -419,6 +709,29 @@ const MentalHealthVsSubstanceInduced = () => {
                 Addressing addiction does not invalidate mental health struggles.<br />
                 It often reveals them more clearly.
               </p>
+            </div>
+            {/* Merged from Commonly Misunderstood Diagnoses in Addiction */}
+            <p className="text-lg font-semibold text-center">
+              Diagnoses are tools—not verdicts.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-primary/10 p-4 rounded-lg">
+                <p className="font-medium mb-2">They are meant to:</p>
+                <ul className="list-disc ml-4 text-sm space-y-1">
+                  <li>Inform treatment</li>
+                  <li>Guide support</li>
+                  <li>Reduce suffering</li>
+                </ul>
+              </div>
+              <div className="bg-destructive/10 p-4 rounded-lg">
+                <p className="font-medium mb-2">They should never:</p>
+                <ul className="list-disc ml-4 text-sm space-y-1">
+                  <li>Remove accountability</li>
+                  <li>Override safety</li>
+                  <li>Replace boundaries</li>
+                  <li>Become identity cages</li>
+                </ul>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -456,11 +769,6 @@ const MentalHealthVsSubstanceInduced = () => {
               <li>
                 <Link to="/disease-choice-reality-map" className="text-primary hover:underline">
                   Disease vs. Choice Reality Map
-                </Link>
-              </li>
-              <li>
-                <Link to="/why-willpower-fails" className="text-primary hover:underline">
-                  Why Willpower Fails Guide
                 </Link>
               </li>
               <li>

@@ -289,6 +289,37 @@ const AddictionRewritesFamilyRules = () => {
             </CardContent>
           </Card>
 
+          {/* Secrecy vs. Privacy (from The Cost of Secrecy) */}
+          <Card className="mb-8 border-teal-200 bg-teal-50 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Secrecy vs. Privacy (An Essential Distinction)</h2>
+              <p className="text-gray-700 mb-4">Before going further, this distinction matters:</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white p-4 rounded-lg border border-teal-200">
+                  <p className="font-semibold text-gray-900 mb-2">Privacy protects dignity and boundaries.</p>
+                  <p className="text-gray-700 text-sm mb-2">Privacy sounds like:</p>
+                  <ul className="text-gray-700 text-sm italic space-y-1">
+                    <li>"We share selectively."</li>
+                    <li>"We tell the truth with discretion."</li>
+                    <li>"We protect people's dignity."</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-red-200">
+                  <p className="font-semibold text-gray-900 mb-2">Secrecy protects dysfunction.</p>
+                  <p className="text-gray-700 text-sm mb-2">Secrecy sounds like:</p>
+                  <ul className="text-gray-700 text-sm italic space-y-1">
+                    <li>"We don't talk about it at all."</li>
+                    <li>"We pretend everything is fine."</li>
+                    <li>"No one outside the family can know."</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-teal-800 font-semibold text-center mt-4">
+                Privacy allows honesty. Secrecy requires silence.
+              </p>
+            </CardContent>
+          </Card>
+
           {/* Why These Rules Persist */}
           <Card className="mb-8 border-gray-300 bg-gray-50 print:border print:shadow-none">
             <CardContent className="p-6">
@@ -444,6 +475,67 @@ const AddictionRewritesFamilyRules = () => {
                   <p className="text-green-700 font-medium mt-2 italic">
                     This is not failure. It is reorganization.
                   </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Reducing Secrecy Safely (from The Cost of Secrecy) */}
+          <Card className="mb-8 border-teal-200 print:border print:shadow-none">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">How Families Can Begin Reducing Secrecy Safely</h2>
+
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">What Breaking Secrecy Does Not Mean</h3>
+                <p className="text-gray-700 mb-2">Breaking secrecy does not require:</p>
+                <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                  <li>• Public disclosure</li>
+                  <li>• Oversharing</li>
+                  <li>• Shaming anyone</li>
+                  <li>• Broadcasting private details</li>
+                  <li>• Confrontation without support</li>
+                </ul>
+                <p className="text-gray-800 font-medium mt-2 italic">
+                  Honesty can be measured, intentional, and contained.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Choose One Safe Outlet</h3>
+                  <p className="text-gray-700 mb-2">This could be:</p>
+                  <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                    <li>• A therapist</li>
+                    <li>• A support group</li>
+                    <li>• A trusted friend</li>
+                    <li>• A professional guide</li>
+                  </ul>
+                  <p className="text-teal-700 font-medium mt-2 italic">Secrecy loosens when truth has a place to land.</p>
+                </div>
+
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Speak Truth Without Over-Explaining</h3>
+                  <p className="text-gray-700 mb-2">Honesty does not require justification.</p>
+                  <div className="bg-white p-3 rounded border border-teal-200 mt-2">
+                    <p className="text-sm text-gray-600">Example:</p>
+                    <ul className="text-gray-700 italic space-y-1">
+                      <li>"We're dealing with addiction in our family."</li>
+                      <li>"Things are not okay right now."</li>
+                      <li>"We're getting support."</li>
+                    </ul>
+                  </div>
+                  <p className="text-teal-700 font-medium mt-2 italic">Simple truth is powerful.</p>
+                </div>
+
+                <div className="bg-teal-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-bold text-teal-800 mb-2">Protect Children With Honesty—Not Silence</h3>
+                  <p className="text-gray-700 mb-2">Children need:</p>
+                  <ul className="text-gray-700 text-sm space-y-1 ml-4">
+                    <li>• Reality explained in age-appropriate ways</li>
+                    <li>• Permission to ask questions</li>
+                    <li>• Reassurance without lies</li>
+                  </ul>
+                  <p className="text-teal-700 font-medium mt-2 italic">Silence creates fear. Truth creates safety.</p>
                 </div>
               </div>
             </CardContent>

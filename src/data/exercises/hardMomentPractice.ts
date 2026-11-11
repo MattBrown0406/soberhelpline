@@ -1,9 +1,15 @@
 import type { Answers, ChoiceOption, ExerciseDefinition, ExerciseOutput, OutputSection } from "./types";
 import { lowerFirst, opts, quote, selectedLabels, sentence, stripEnd, text, unquote } from "./helpers";
 
-// Distilled from ScenarioWorksheet ("What Would You Do?"). The eight
-// situations are the author's; the questions are the ones that recur across
-// scenarios, so one short path works for whichever moment she picks.
+// Distilled from ScenarioWorksheet ("What Would You Do?"). The first eight
+// situations are the author's from that worksheet; the last two are his from
+// the Family Recovery Scenario Exercise page, which this exercise replaces.
+// The questions are the ones that recur across scenarios, so one short path
+// works for whichever moment she picks.
+//
+// The two added scenarios had no response line of their own, so their examples
+// are lines the author wrote elsewhere (the "What to Say" guide). Their
+// `remember` items are safety notes in the site's SafetyBox wording.
 
 export interface Scenario {
   value: string;
@@ -72,6 +78,27 @@ export const SCENARIOS: Scenario[] = [
       "Bailing them out may remove a natural consequence that could lead to change.",
     ],
   },
+  {
+    value: "late-night-crisis-call",
+    title: "The late-night crisis call",
+    situation:
+      "It's 11:30 PM. Your loved one calls, intoxicated and emotional. They say they've been kicked out of where they're staying and “have nowhere else to go.” They are crying and accusing you of abandoning them.",
+    example: "“I care about you, and my boundary hasn't changed. We can talk when you're sober.”",
+    remember: [
+      "If they talk about suicide, may have overdosed, or stop responding or can't be woken, this is a crisis, not chaos: call 911, or call or text 988.",
+      "Calling for help is not rescuing or enabling. Your boundary can still stand afterwards.",
+    ],
+  },
+  {
+    value: "treatment-resistance",
+    title: "Treatment resistance",
+    situation:
+      "Your loved one refuses treatment, saying it “won't work” or that they can stop on their own. They ask you to give them more time.",
+    example: "“I believe treatment is necessary. When you're ready for help, we'll support that.”",
+    remember: [
+      "Stopping alcohol or benzodiazepines (Xanax, Klonopin, Ativan, Valium) suddenly can be dangerous. Someone who uses them heavily every day needs medical help to stop.",
+    ],
+  },
 ];
 
 const SCENARIO_OPTIONS: ChoiceOption[] = SCENARIOS.map((s) => ({ value: s.value, label: s.title, hint: s.situation }));
@@ -123,6 +150,8 @@ const hardMomentPractice: ExerciseDefinition = {
       "Most families know what they should do, until emotions take over. Pick one hard moment and practice a values-based, recovery-aligned response before you're under pressure.",
     points: ["Pick the moment that feels most familiar", "Answer honestly, not ideally", "Leave with what you'll say, what you won't do, and who you'll call"],
     note: "Based on CRAFT principles and motivational interviewing techniques. There are no perfect answers. There are consistent ones.",
+    safety:
+      "This practice is for moments when no one is in immediate danger. If anyone is, call 911: that includes a possible overdose, someone who can't be woken, a seizure, or anyone threatening to hurt themselves or someone else. For any talk of suicide, call or text 988. Calling for help is not rescuing or enabling.",
   },
   steps: [
     {

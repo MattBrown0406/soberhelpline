@@ -378,6 +378,60 @@ export default function WhatChangesWhenFamiliesChange() {
               </CardContent>
             </Card>
 
+            {/* Letting Go of Outcomes (merged from "What Recovery Requires From Families") */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="text-xl text-logo-blue">Letting Go of Outcomes</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">
+                  Families must release the belief that they can make recovery happen.
+                </p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-4 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                    <h4 className="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">You can:</h4>
+                    <ul className="space-y-1 text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-500" />
+                        Support healthy behavior
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-500" />
+                        Refuse to support destructive behavior
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-500" />
+                        Offer clarity and consistency
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="p-4 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
+                    <h4 className="font-semibold text-red-700 dark:text-red-400 mb-2">You cannot:</h4>
+                    <ul className="space-y-1 text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <XCircle className="h-4 w-4 shrink-0 text-red-500" />
+                        Force insight
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <XCircle className="h-4 w-4 shrink-0 text-red-500" />
+                        Control sobriety
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <XCircle className="h-4 w-4 shrink-0 text-red-500" />
+                        Prevent every relapse
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
+                  <p className="font-medium">
+                    Letting go of outcomes does not mean you stop caring.<br />
+                    It means you stop sacrificing yourself.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Why Family Change Feels Worse */}
             <Card className="mb-8">
               <CardHeader>
@@ -446,6 +500,26 @@ export default function WhatChangesWhenFamiliesChange() {
                     Recovery cannot grow in chaos.<br />
                     Family stability creates the conditions where change becomes possible—even if delayed.
                   </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* What Families Are NOT Required to Do (merged from "What Recovery Requires From Families") */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="text-xl text-logo-blue">What Families Are NOT Required to Do</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">Recovery does not require families to:</p>
+                <ul className="space-y-1 ml-6 text-muted-foreground">
+                  <li>• Accept abuse or manipulation</li>
+                  <li>• Endure unsafe environments</li>
+                  <li>• Fund ongoing addiction</li>
+                  <li>• Ignore their own needs</li>
+                  <li>• Put life on hold indefinitely</li>
+                </ul>
+                <div className="bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
+                  <p className="font-medium">Choosing yourself is not betrayal.</p>
                 </div>
               </CardContent>
             </Card>

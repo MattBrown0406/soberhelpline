@@ -21,8 +21,8 @@
           "path": "/communication-guide"
         },
         {
-          "title": "Who Benefits From This?",
-          "path": "/who-benefits-filter"
+          "title": "Helping or enabling?",
+          "path": "/workbook/helping-or-enabling"
         },
         {
           "title": "We Don't Negotiate With Terrorists",
@@ -59,20 +59,12 @@
           "path": "/anger-and-boundaries"
         },
         {
-          "title": "Flexibility vs. Instability",
-          "path": "/flexibility-vs-instability"
-        },
-        {
-          "title": "Boundary Setting Worksheet",
-          "path": "/boundary-setting-worksheet"
-        },
-        {
-          "title": "Scenario Practice Exercise",
-          "path": "/scenario-exercise"
-        },
-        {
           "title": "Write one boundary you can hold",
           "path": "/workbook/boundary-script"
+        },
+        {
+          "title": "Practice a hard moment",
+          "path": "/workbook/hard-moment-practice"
         }
       ],
       "forumTopic": {
@@ -97,20 +89,16 @@
           "path": "/treatment-red-flags"
         },
         {
-          "title": "How the Treatment Industry Works",
-          "path": "/treatment-industry-guide"
-        },
-        {
           "title": "Treatment Modalities Explained",
           "path": "/treatment-modalities"
         },
         {
-          "title": "Matching the Modality to the Problem",
-          "path": "/matching-modality"
+          "title": "Family Advocacy Toolkit",
+          "path": "/family-advocacy-toolkit"
         },
         {
-          "title": "Why Some Therapies Fail at the Wrong Time",
-          "path": "/therapy-timing"
+          "title": "Aftercare Readiness Checklist",
+          "path": "/aftercare-checklist"
         }
       ],
       "forumTopic": {
@@ -137,10 +125,6 @@
         {
           "title": "Why Multiple Treatment Episodes Don't Mean Failure",
           "path": "/multiple-treatment-episodes"
-        },
-        {
-          "title": "Insight vs. Behavior Tracker",
-          "path": "/insight-behavior-tracker"
         },
         {
           "title": "Readiness for Change Checklist",
@@ -177,16 +161,16 @@
           "path": "/addiction-rewrites-family-rules"
         },
         {
-          "title": "Breaking Intergenerational Enabling",
-          "path": "/intergenerational-enabling"
+          "title": "When Family Unity Becomes a Liability",
+          "path": "/family-unity-liability"
         },
         {
           "title": "How Families Accidentally Interfere With Recovery",
           "path": "/family-interference"
         },
         {
-          "title": "Enabling Language Translator",
-          "path": "/enabling-language-translator"
+          "title": "What to Say / What Not to Say",
+          "path": "/communication-guide"
         },
         {
           "title": "The Guilt–Relief–Resentment Cycle",
@@ -219,8 +203,8 @@
           "path": "/living-well-regardless"
         },
         {
-          "title": "Values-Aligned Decisions",
-          "path": "/values-aligned-decisions"
+          "title": "Family Recovery Action Plan",
+          "path": "/family-action-plan"
         },
         {
           "title": "Emotional Regulation Tools",
@@ -273,10 +257,6 @@
           "path": "/family-action-plan"
         },
         {
-          "title": "What Recovery Requires From Families",
-          "path": "/recovery-requirements"
-        },
-        {
           "title": "Guilt or responsibility?",
           "path": "/workbook/guilt-check"
         }
@@ -295,20 +275,12 @@
       "audience": "Brothers and sisters navigating loyalty conflicts, family role shifts, and long-term resentment.",
       "steps": [
         {
-          "title": "The Sibling Experience in Addiction",
-          "path": "/sibling-experience"
-        },
-        {
           "title": "Sibling Guilt, Anger, and Loyalty Conflicts",
           "path": "/sibling-guilt-anger-loyalty"
         },
         {
-          "title": "Growing Up in the Shadow of Addiction",
-          "path": "/growing-up-shadow"
-        },
-        {
-          "title": "Rebuilding Sibling Relationships in Recovery",
-          "path": "/rebuilding-sibling-relationships"
+          "title": "The Hidden Cost of Being the Strong One",
+          "path": "/strong-one"
         },
         {
           "title": "Parents: Repairing the Sibling System",

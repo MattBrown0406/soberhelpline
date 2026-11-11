@@ -421,6 +421,92 @@ export default function FamilyUnityLiability() {
             </CardContent>
           </Card>
 
+          {/* Inherited beliefs, pushback and the cycle breaker (from Breaking Intergenerational Enabling) */}
+          <Card className="mb-8 border-amber-500/30 bg-amber-50/50 dark:bg-amber-950/20">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Users className="h-5 w-5 text-amber-600" />
+                How Enabling Gets Passed Down Through Family Beliefs
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <p className="text-foreground font-medium mb-4">
+                  Enabling is rarely taught explicitly. It is inherited quietly—through fear, loyalty, and love.
+                </p>
+                <p className="text-muted-foreground mb-3">Common inherited beliefs include:</p>
+                <div className="grid md:grid-cols-2 gap-2">
+                  {[
+                    "\"Family comes before everything.\"",
+                    "\"We don't abandon our own.\"",
+                    "\"You help, no matter the cost.\"",
+                    "\"Love means never giving up.\"",
+                    "\"We handle problems privately.\""
+                  ].map((belief, index) => (
+                    <div key={index} className="p-3 rounded-lg bg-white/50 dark:bg-slate-900/50 border border-amber-200/50 dark:border-amber-800/50">
+                      <span className="text-sm text-muted-foreground italic">{belief}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-muted-foreground mt-3">
+                  These beliefs are rarely examined. <strong className="text-foreground">They are assumed.</strong>
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-foreground mb-3">Why Intergenerational Enabling Feels So Right</h4>
+                <p className="text-muted-foreground mb-3">Breaking enabling often triggers:</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {["Guilt", "Shame", "Fear of rejection", "Fear of being \"the bad one\"", "Fear of family fracture"].map((item, index) => (
+                    <span key={index} className="px-3 py-1 rounded-full bg-white/50 dark:bg-slate-900/50 text-sm text-muted-foreground">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-3">Families may hear:</p>
+                <div className="space-y-2 mb-4">
+                  {[
+                    "\"That's not how we do things.\"",
+                    "\"You're being selfish.\"",
+                    "\"You've changed.\"",
+                    "\"You think you're better than us.\""
+                  ].map((quote, index) => (
+                    <div key={index} className="p-2 pl-4 border-l-2 border-amber-500/50 bg-white/30 dark:bg-slate-900/30">
+                      <span className="text-sm text-muted-foreground italic">{quote}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-foreground font-medium">
+                  These reactions are protective responses to change—not proof you're wrong.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-8 border-violet-500/30 bg-violet-50/50 dark:bg-violet-950/20">
+            <CardHeader>
+              <CardTitle className="text-lg">For Families Feeling Divided</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Often, one person becomes the "cycle breaker."
+              </p>
+              <p className="text-muted-foreground mb-3">That person may feel:</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {["Isolated", "Misunderstood", "Guilty", "Strong and lonely at the same time"].map((feeling, index) => (
+                  <span key={index} className="px-3 py-1 rounded-full bg-violet-100/50 dark:bg-violet-950/30 text-sm text-muted-foreground">
+                    {feeling}
+                  </span>
+                ))}
+              </div>
+              <p className="text-foreground font-medium">
+                This role is hard—and often necessary.
+              </p>
+              <p className="text-muted-foreground mt-4">Systems rarely change together.</p>
+              <p className="text-primary font-semibold">They change because someone goes first.</p>
+            </CardContent>
+          </Card>
+
           <Card className="mb-8 border-primary/30 bg-primary/5">
             <CardHeader>
               <CardTitle className="text-lg">A Grounding Reframe</CardTitle>
@@ -490,10 +576,10 @@ export default function FamilyUnityLiability() {
                     The Guilt–Relief–Resentment Cycle
                   </Button>
                 </Link>
-                <Link to="/family-education#worksheet-enabling-decision-tree">
+                <Link to="/workbook/helping-or-enabling">
                   <Button variant="outline" size="sm" className="gap-2">
                     <FileText className="h-3 w-3" />
-                    Is This Help or Enabling? Decision Tree
+                    Helping or enabling?
                   </Button>
                 </Link>
                 <Link to="/parents-repairing-sibling-system">

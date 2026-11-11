@@ -56,9 +56,7 @@ export const pillars: Pillar[] = [
     resources: [
       { title: "Why Multiple Treatment Episodes Don't Mean Failure", path: "/multiple-treatment-episodes", color: "blue" },
       { title: "The Disease vs. Choice Reality Map", path: "/disease-choice-reality-map", color: "teal" },
-      { title: "Why Willpower Fails (and What Actually Works)", path: "/why-willpower-fails", color: "orange" },
       { title: "Addiction Progression Timeline", path: "/addiction-progression-timeline", color: "violet" },
-      { title: "Addiction, the Brain & Spiritual Recovery", path: "/brain-spiritual-recovery", color: "emerald" },
       { title: "The 12 Steps Explained for Families", path: "/twelve-steps-explained", color: "cyan" },
       { title: "Addiction as a Stress-Regulation Disorder", path: "/addiction-as-stress-disorder", color: "pink" },
     ],
@@ -75,11 +73,8 @@ export const pillars: Pillar[] = [
       { title: "Understanding Drug-Induced Psychosis", path: "/drug-induced-psychosis", color: "fuchsia" },
       { title: "Mental Health vs. Substance-Induced Symptoms", path: "/mental-health-vs-substance-induced", color: "purple" },
       { title: "Understanding Eating Disorders", path: "/eating-disorders-guide", color: "pink" },
-      { title: "Trauma & Hypervigilance Self-Assessment", path: "#trauma-assessment", color: "violet", isAnchor: true, tool: true },
-      { title: "Commonly Misunderstood Diagnoses", path: "/misunderstood-diagnoses", color: "indigo" },
-      { title: "Why Focusing Only on Mental Health Can Delay Recovery", path: "/mental-health-delays-recovery", color: "rose" },
+      { title: "Nervous system check-in", path: "/workbook/stress-check", color: "violet", tool: true },
       { title: "Trauma vs. Excuses: A Necessary Distinction", path: "/trauma-vs-excuses", color: "amber" },
-      { title: "How Trauma Shapes Addiction", path: "/how-trauma-shapes-addiction", color: "cyan" },
     ],
   },
   {
@@ -96,14 +91,9 @@ export const pillars: Pillar[] = [
         resources: [
           { title: "Family Roles in Addiction (Beyond the Clichés)", path: "/family-roles-addiction", color: "violet" },
           { title: "How Addiction Rewrites Family Rules", path: "/addiction-rewrites-family-rules", color: "teal" },
-          { title: "The Cost of Secrecy", path: "/cost-of-secrecy", color: "rose" },
-          { title: "How Addiction Shapes Attachment Styles", path: "/addiction-attachment-styles", color: "fuchsia" },
           { title: "The Hidden Cost of Being the \"Strong One\"", path: "/strong-one", color: "pink" },
           { title: "The Guilt–Relief–Resentment Cycle", path: "/guilt-relief-resentment", color: "amber" },
-          { title: "The Sibling Experience in Addiction", path: "/sibling-experience", color: "cyan" },
-          { title: "Growing Up in the Shadow of Addiction", path: "/growing-up-shadow", color: "indigo" },
           { title: "Sibling Guilt, Anger, and Loyalty Conflicts", path: "/sibling-guilt-anger-loyalty", color: "purple" },
-          { title: "Rebuilding Sibling Relationships in Recovery", path: "/rebuilding-sibling-relationships", color: "emerald" },
           { title: "Parents: Repairing the Sibling System", path: "/parents-repairing-sibling-system", color: "blue" },
           { title: "When Family Unity Becomes a Liability", path: "/family-unity-liability", color: "orange" },
         ],
@@ -115,9 +105,6 @@ export const pillars: Pillar[] = [
           { title: "Crisis vs. Chaos Decision Guide", path: "/crisis-chaos", color: "red" },
           { title: "What to Say / What Not to Say", path: "/communication-guide", color: "rose" },
           { title: "How Families Accidentally Interfere with Recovery", path: "/family-interference", color: "orange" },
-          { title: "Enabling Language Translator", path: "/enabling-language-translator", color: "lime", tool: true },
-          { title: "Breaking Intergenerational Enabling", path: "/intergenerational-enabling", color: "sky" },
-          { title: "\"Who Benefits From This?\" Decision Filter", path: "/who-benefits-filter", color: "cyan", tool: true },
         ],
       },
     ],
@@ -132,15 +119,12 @@ export const pillars: Pillar[] = [
     description: "Become an informed advocate by understanding treatment options, red flags, and industry practices.",
     resources: [
       { title: "40 Questions to Ask a Treatment Center", path: "/treatment-questions", color: "blue" },
-      { title: "How the Treatment Industry Works", path: "/treatment-industry-guide", color: "slate" },
       { title: "Treatment Industry Red Flags Guide", path: "/treatment-red-flags", color: "red", tool: true },
       { title: "How to Talk About Treatment", path: "/talking-about-treatment", color: "indigo" },
       { title: "Aftercare Readiness Checklist", path: "/aftercare-checklist", color: "cyan", tool: true },
       { title: "Family Advocacy Toolkit", path: "/family-advocacy-toolkit", color: "green", tool: true },
       { title: "Legal Issues Families Should Understand", path: "/legal-issues-guide", color: "slate" },
       { title: "Treatment Modalities Explained", path: "/treatment-modalities", color: "violet" },
-      { title: "Matching the Modality to the Problem", path: "/matching-modality", color: "rose" },
-      { title: "Why Some Therapies Fail at the Wrong Time", path: "/therapy-timing", color: "amber" },
       { title: "Non–12-Step Recovery Modalities", path: "/non-twelve-step-modalities", color: "teal" },
     ],
   },
@@ -154,13 +138,10 @@ export const pillars: Pillar[] = [
     description: "Learn to set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.",
     resources: [
       { title: "Requests, Demands, Ultimatums & Boundaries", path: "/boundaries-ultimatums", color: "emerald" },
-      { title: "Insight vs. Behavior Tracker", path: "/insight-behavior-tracker", color: "violet", tool: true },
-      { title: "Scenario Practice Exercise", path: "/scenario-exercise", color: "orange", tool: true },
       { title: "Readiness for Change Checklist", path: "/readiness-checklist", color: "teal", tool: true },
       { title: "We Don't Negotiate with Terrorists", path: "/no-negotiation", color: "red" },
       { title: "Boundary Drift: How Limits Slowly Erode", path: "/boundary-drift", color: "amber" },
       { title: "Anger and Boundaries Are Not the Same Thing", path: "/anger-and-boundaries", color: "pink" },
-      { title: "The Difference Between Flexibility and Instability", path: "/flexibility-vs-instability", color: "cyan" },
     ],
   },
   {
@@ -173,11 +154,8 @@ export const pillars: Pillar[] = [
     description: "Focus on your own healing journey regardless of your loved one's choices.",
     resources: [
       { title: "What Changes When Families Change", path: "/what-changes-when-families-change", color: "teal" },
-      { title: "What Recovery Requires From Families", path: "/recovery-requirements", color: "emerald" },
       { title: "Family Recovery Action Plan", path: "/family-action-plan", color: "purple", tool: true },
       { title: "Emotional Regulation Tools", path: "/emotional-regulation", color: "sky", tool: true },
-      { title: "Values Clarification Exercise", path: "/values-exercise", color: "amber", tool: true },
-      { title: "Values-Aligned Decision Making Exercise", path: "/values-aligned-decisions", color: "indigo", tool: true },
       { title: "Living Well Regardless of Outcome", path: "/living-well-regardless", color: "rose" },
       { title: "Grief for the Family You Thought You'd Have", path: "/grief-for-family", color: "violet" },
       { title: "Is It Safe to Open Up Again?", path: "/safe-to-open-up", color: "rose" },
@@ -212,14 +190,14 @@ export const meditationPath = (file: string) => `/audio/${file}`;
 export const interactiveTools: LibraryItem[] = [
   { title: "Relapse Warning Signs Tracker", path: "/relapse-warning-signs", type: "worksheet" },
   { title: "Fear Inventory Exercise", path: "/fear-inventory-exercise", type: "worksheet" },
-  { title: "Conversation Starters", path: "/conversation-starters", type: "worksheet" },
-  { title: "Boundary Setting Worksheet", path: "/boundary-setting-worksheet", type: "worksheet" },
 ];
 
 /**
- * The long worksheets embedded on /family-education. `id` is the element id of
- * the card on that page, so /family-education#<id> opens the tools tab there.
- * `worksheetKey` is the worksheet_responses key, for the ones that auto-save.
+ * The long worksheets that used to be embedded on /family-education. They
+ * were retired on 2026-11-11 in favour of the short guided exercises; what a
+ * member wrote in them stays viewable at /workbook/earlier. `worksheetKey` is
+ * the worksheet_responses key for the ones that auto-saved there (the others
+ * saved to their own tables). They no longer count toward library progress.
  */
 export interface EmbeddedWorksheet {
   id: string;
@@ -227,8 +205,7 @@ export interface EmbeddedWorksheet {
   worksheetKey?: string;
 }
 
-export const embeddedWorksheets: EmbeddedWorksheet[] = [
-  { id: "worksheet-enabling-decision-tree", title: "Enabling vs. Helping Decision Tree" },
+export const retiredWorksheets: EmbeddedWorksheet[] = [
   { id: "trauma-assessment", title: "Trauma & Hypervigilance Self-Assessment", worksheetKey: "trauma_hypervigilance_assessment" },
   { id: "worksheet-family-self-assessment", title: "Family Self-Assessment" },
   { id: "worksheet-control", title: "Control Worksheet" },
@@ -238,7 +215,7 @@ export const embeddedWorksheets: EmbeddedWorksheet[] = [
   { id: "worksheet-self-care", title: "Self-Care Worksheet", worksheetKey: "self_care_worksheet" },
 ];
 
-export const embeddedWorksheetPath = (id: string) => `/family-education#${id}`;
+export const EARLIER_WORKSHEETS_PATH = "/workbook/earlier";
 
 export interface GuidedExercise {
   id: string;
@@ -277,7 +254,6 @@ function buildLibrary(): LibraryItem[] {
     ...pillarItems(),
     ...extraGuides,
     ...interactiveTools,
-    ...embeddedWorksheets.map((w) => ({ title: w.title, path: embeddedWorksheetPath(w.id), type: "worksheet" as const })),
     ...guidedExercises.map((e) => ({ title: e.title, path: exercisePath(e.id), type: "worksheet" as const })),
     ...meditations.map((m) => ({ title: m.title, path: meditationPath(m.file), type: "meditation" as const })),
   ];

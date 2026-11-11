@@ -31,7 +31,7 @@ import crisisCopilot from "@/assets/membership-crisis-copilot.png";
 const benefits = [
   {
     icon: BookOpen,
-    title: "60+ family education guides",
+    title: "60+ guides, tools and meditations",
     description: "Practical help with boundaries, treatment decisions, relapse, family roles, communication, and recovery.",
   },
   {

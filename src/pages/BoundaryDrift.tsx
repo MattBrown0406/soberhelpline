@@ -236,6 +236,54 @@ export default function BoundaryDrift() {
               </p>
             </section>
 
+            {/* Merged from "The Difference Between Flexibility and Instability" */}
+            <section className="mb-10">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">The Difference Between Flexibility and Instability</h2>
+              <p className="text-foreground font-medium mb-4">
+                Flexibility and instability are not the same thing.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="p-4 bg-primary/10 rounded-lg border border-primary/30">
+                  <p className="font-semibold text-foreground mb-2">Flexibility</p>
+                  <p className="text-muted-foreground">Intentional adaptation within stable principles.</p>
+                </div>
+                <div className="p-4 bg-destructive/10 rounded-lg border border-destructive/30">
+                  <p className="font-semibold text-foreground mb-2">Instability</p>
+                  <p className="text-muted-foreground">Reactive change driven by emotion, fear, or pressure.</p>
+                </div>
+              </div>
+              <p className="text-foreground font-medium mb-6">
+                One strengthens systems. The other weakens them.
+              </p>
+
+              <div className="space-y-6">
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Flexibility That Supports Recovery (Examples)</h3>
+                  <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+                    <li>Adjusting communication timing—but not boundaries</li>
+                    <li>Offering treatment support in different forms—but not removing the requirement</li>
+                    <li>Modifying logistics—but not expectations</li>
+                    <li>Providing emotional support—without financial rescue</li>
+                    <li>Revisiting plans at set intervals—not in crisis</li>
+                  </ul>
+                  <p className="text-muted-foreground mt-2 font-medium">Flexibility works when the frame stays intact.</p>
+                </div>
+
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">How to Tell the Difference in Real Time</h3>
+                  <p className="text-muted-foreground mb-2">Ask yourself:</p>
+                  <ul className="list-disc pl-6 text-muted-foreground space-y-1">
+                    <li>Is this change planned or reactive?</li>
+                    <li>Are we staying aligned with our values?</li>
+                    <li>Would we make this decision if emotions were calm?</li>
+                    <li>Are we adjusting structure—or removing it?</li>
+                    <li>Is this reducing long-term harm—or just immediate discomfort?</li>
+                  </ul>
+                  <p className="text-muted-foreground mt-2 font-medium">The answers usually reveal the truth.</p>
+                </div>
+              </div>
+            </section>
+
             <section className="mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4">How to Interrupt Boundary Drift</h2>
               
@@ -351,8 +399,8 @@ export default function BoundaryDrift() {
                 <Link to="/boundaries-ultimatums">
                   <Button variant="outline" size="sm">Requests, Demands, Ultimatums & Boundaries</Button>
                 </Link>
-                <Link to="/insight-behavior-tracker">
-                  <Button variant="outline" size="sm">Insight vs. Behavior Tracker</Button>
+                <Link to="/readiness-checklist">
+                  <Button variant="outline" size="sm">Readiness for Change Checklist</Button>
                 </Link>
                 <Link to="/guilt-relief-resentment">
                   <Button variant="outline" size="sm">The Guilt–Relief–Resentment Cycle</Button>

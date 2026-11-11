@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Check, X, Printer } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, X, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -118,6 +118,124 @@ const languageEffects = [
   { style: "Repeating calmly", result: "Builds clarity" },
   { style: "Ending conversations", result: "Protects boundaries" },
   { style: "Emotional speeches", result: "Increases guilt" },
+];
+
+// Carried over from the Enabling Language Translator (the owner's words).
+const languageTranslations: { enabling: string; communicates: string; boundary: string }[] = [
+  {
+    enabling: "Just this once.",
+    communicates: "Exceptions are negotiable.",
+    boundary: "We aren't making exceptions to this boundary.",
+  },
+  {
+    enabling: "I don't want to make things worse.",
+    communicates: "Your emotional reaction controls my decisions.",
+    boundary: "I'm choosing what's healthiest, even if it's uncomfortable.",
+  },
+  {
+    enabling: "I know you're trying.",
+    communicates: "Effort replaces behavior.",
+    boundary: "I care about effort, and I'm looking for consistent follow-through.",
+  },
+  {
+    enabling: "I'll help you this time—but it can't happen again.",
+    communicates: "This pattern has worked before.",
+    boundary: "I'm not able to help in this way.",
+  },
+  {
+    enabling: "I trust you—please don't mess this up.",
+    communicates: "Pressure replaces structure.",
+    boundary: "Trust grows through consistent behavior over time.",
+  },
+  {
+    enabling: "You don't have anywhere else to go.",
+    communicates: "I'm responsible for preventing consequences.",
+    boundary: "I'm not able to provide housing while substances are involved.",
+  },
+  {
+    enabling: "I can't sleep knowing you're out there.",
+    communicates: "My anxiety overrides boundaries.",
+    boundary: "I'm working on managing my fear without changing this boundary.",
+  },
+  {
+    enabling: "I just want you to be okay.",
+    communicates: "Comfort matters more than change.",
+    boundary: "I want you to be safe, and that means treatment/support.",
+  },
+  {
+    enabling: "Please don't do this to me.",
+    communicates: "Responsibility for your emotions is being transferred.",
+    boundary: "I'm responsible for my feelings, and you're responsible for your choices.",
+  },
+  {
+    enabling: "If you really loved me, you would…",
+    communicates: "Love is conditional and emotionally negotiated.",
+    boundary: "I'm setting this boundary because I love you—not to control you.",
+  },
+];
+
+const translationFormula = ["Acknowledge emotion (without fixing it)", "State boundary clearly", "Avoid explanation or debate"];
+
+const reactionsToExpect = ["Pushback", "Emotional escalation", "Accusations", "Silence", "Guilt"];
+
+// Carried over from Conversation Starters for Families (the owner's words).
+const beforeYouStart = [
+  "Check your internal state first; if fear, panic, or urgency are driving the conversation, it will likely escalate",
+  "Regulate yourself before engaging—pause, breathe, take a walk, or write your thoughts down first",
+  "Choose a time when no one is already emotionally activated",
+  "Avoid conversations during or immediately after substance use",
+  "Focus on understanding, not persuading or controlling the outcome",
+  "End or pause the conversation if it becomes unsafe or emotionally charged",
+];
+
+const conversationStarterSets: { title: string; intro: string; questions: string[] }[] = [
+  {
+    title: "Understanding What's Really Happening",
+    intro: "These questions help families move beyond surface-level arguments and defensiveness.",
+    questions: [
+      "What feels hardest about this for you right now?",
+      "What do you think we're all reacting to?",
+      "What worries you the most that you don't usually say out loud?",
+      "What do you feel like we're missing or not talking about?",
+    ],
+  },
+  {
+    title: "Exploring Impact Without Blame",
+    intro: "Use these to acknowledge consequences without turning the conversation into an attack.",
+    questions: [
+      "How has this been affecting the family?",
+      "What has changed in ways we haven't really talked about?",
+      "What feels different now compared to before?",
+      "What are we all doing now that we weren't doing before?",
+    ],
+  },
+  {
+    title: "Helping vs. Enabling",
+    intro: "These questions are useful when families feel stuck between rescuing and resentment.",
+    questions: [
+      "What are we doing that helps in the short term but hurts in the long term?",
+      "What would support look like if it didn't involve fixing or rescuing?",
+      "What are we afraid would happen if we stopped stepping in?",
+    ],
+  },
+  {
+    title: "Boundaries and Safety",
+    intro: "These questions clarify limits without threats, ultimatums, or control.",
+    questions: [
+      "What do we need in order to feel safe and stable?",
+      "What are we willing to participate in—and what are we not?",
+      "What boundary would protect us, even if it doesn't change them?",
+    ],
+  },
+  {
+    title: "Looking Forward",
+    intro: "Use these when the family is ready to think beyond the immediate crisis.",
+    questions: [
+      "What would a healthier version of this look like for us?",
+      "What do we need help with that we can't do alone?",
+      "What's one small change we could make that we could actually hold?",
+    ],
+  },
 ];
 
 export default function CommunicationGuide() {
@@ -269,6 +387,95 @@ export default function CommunicationGuide() {
               </Card>
             ))}
 
+            {/* Enabling language -> boundary language (from the Enabling Language Translator) */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="text-logo-blue">Common Enabling Phrases—and Translations</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <p className="text-muted-foreground">
+                  The words families use in moments of pressure often determine whether a boundary holds—or collapses.
+                  Below are real phrases families use, followed by what addiction hears—and how to translate them.
+                </p>
+                <div className="grid md:grid-cols-2 gap-4 break-inside-avoid">
+                  <div className="p-4 rounded-lg bg-red-100/50 dark:bg-red-950/30 border border-red-200/50 dark:border-red-800/50">
+                    <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Enabling language</p>
+                    <p className="text-muted-foreground text-sm">
+                      focuses on <strong className="text-foreground">relieving discomfort</strong>
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-green-100/50 dark:bg-green-950/30 border border-green-200/50 dark:border-green-800/50">
+                    <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Boundary language</p>
+                    <p className="text-muted-foreground text-sm">
+                      focuses on <strong className="text-foreground">reducing harm</strong>
+                    </p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground">Both may sound compassionate—but only one supports change.</p>
+
+                <div className="space-y-4">
+                  {languageTranslations.map((item, index) => (
+                    <div key={index} className="border border-border rounded-lg overflow-hidden break-inside-avoid">
+                      <div className="bg-red-50/50 dark:bg-red-950/20 p-4 border-b border-border">
+                        <p className="text-xs font-medium text-red-700 dark:text-red-400 uppercase tracking-wide mb-1">
+                          Enabling Phrase
+                        </p>
+                        <p className="font-medium text-foreground italic">"{item.enabling}"</p>
+                        <p className="text-sm text-muted-foreground mt-2">
+                          <strong>What It Communicates:</strong> {item.communicates}
+                        </p>
+                      </div>
+                      <div className="bg-green-50/50 dark:bg-green-950/20 p-4">
+                        <p className="flex items-center gap-2 text-xs font-medium text-green-700 dark:text-green-400 uppercase tracking-wide mb-1">
+                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                          Boundary Translation
+                        </p>
+                        <p className="font-medium text-foreground italic">"{item.boundary}"</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-8 break-inside-avoid">
+              <CardHeader>
+                <CardTitle className="text-logo-blue">A Simple Translation Formula</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-3">
+                  <p className="text-muted-foreground">When unsure what to say, use this structure:</p>
+                  <ol className="list-decimal pl-5 space-y-2 text-foreground">
+                    {translationFormula.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                  <div className="bg-muted/50 p-4 rounded-lg">
+                    <p className="text-sm text-muted-foreground mb-1">Example:</p>
+                    <p className="italic font-medium text-foreground">"I hear that you're upset. This boundary hasn't changed."</p>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-foreground">What to Expect After Using Boundary Language</h4>
+                  <p className="text-muted-foreground">Expect:</p>
+                  <ul className="space-y-2">
+                    {reactionsToExpect.map((reaction) => (
+                      <li key={reaction} className="flex items-start gap-2 text-sm">
+                        <span className="text-logo-blue mt-0.5">•</span>
+                        <span>{reaction}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="font-medium text-foreground">These reactions do not mean the boundary is wrong.</p>
+                  <p className="text-muted-foreground">They mean the old language stopped working.</p>
+                  <p className="font-semibold text-foreground italic">Clarity is not cruelty. It is kindness with structure.</p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Quick Reference Table */}
             <Card className="mb-8 break-inside-avoid">
               <CardHeader>
@@ -292,6 +499,72 @@ export default function CommunicationGuide() {
                       ))}
                     </tbody>
                   </table>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Conversation starters (from Conversation Starters for Families) */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="text-logo-blue">Conversation Starters for Families</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-3">
+                  <p className="text-muted-foreground">
+                    The sections above give you words for hard moments. These questions are for a calmer one.
+                  </p>
+                  <p className="text-muted-foreground">
+                    These conversation starters are not designed to convince, confront, or control anyone. They are meant to
+                    help families slow things down, reduce defensiveness, and speak from a calmer, steadier place.
+                  </p>
+                  <p className="font-medium text-foreground">
+                    You do not need to ask every question. Choose the ones that fit where your family is right now, and
+                    return to others later as clarity grows.
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/20 p-4 space-y-3 break-inside-avoid">
+                  <h4 className="font-semibold text-amber-800 dark:text-amber-300">Before You Start</h4>
+                  <ul className="space-y-2">
+                    {beforeYouStart.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-600 mt-0.5">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="font-medium text-amber-900 dark:text-amber-200">
+                    The calmer and clearer you are, the less power the problem has in the room.
+                  </p>
+                </div>
+
+                {conversationStarterSets.map((set) => (
+                  <div key={set.title} className="space-y-3 break-inside-avoid">
+                    <Separator />
+                    <h4 className="font-semibold text-logo-blue">{set.title}</h4>
+                    <p className="text-sm text-muted-foreground">{set.intro}</p>
+                    <ul className="space-y-2">
+                      {set.questions.map((question) => (
+                        <li key={question} className="flex items-start gap-2 text-sm">
+                          <span className="text-logo-blue mt-0.5">•</span>
+                          <span className="italic">"{question}"</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+
+                <Separator />
+
+                <div className="bg-muted/50 p-4 rounded-lg space-y-2 break-inside-avoid">
+                  <p className="text-sm text-muted-foreground">
+                    These conversations are about changing patterns, not forcing outcomes. You may not see immediate
+                    agreement or relief—and that's okay. Calm, honest conversations held consistently often matter more than
+                    one dramatic discussion.
+                  </p>
+                  <p className="font-semibold text-foreground">
+                    Progress is measured in clarity and consistency, not instant results.
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -324,6 +597,14 @@ export default function CommunicationGuide() {
                     <span className="text-orange-600">•</span>
                     <span>They're intoxicated or abusive</span>
                   </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>Threats appear</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-orange-600">•</span>
+                    <span>The conversation becomes emotionally or physically unsafe</span>
+                  </li>
                 </ul>
                 <div className="bg-white/50 dark:bg-black/20 p-4 rounded-lg mt-4">
                   <p className="font-medium mb-2">You can say:</p>
@@ -331,6 +612,10 @@ export default function CommunicationGuide() {
                   <p className="italic text-muted-foreground">"We'll talk another time."</p>
                   <p className="text-sm mt-2 text-foreground font-medium">Then disengage.</p>
                 </div>
+                <p className="font-medium text-foreground">
+                  Pausing a conversation is not quitting. It's choosing stability over damage.
+                </p>
+                <SafetyBox topics={["emergency", "violence"]} title="If the conversation becomes unsafe" className="mb-0" />
               </CardContent>
             </Card>
 
@@ -368,7 +653,7 @@ export default function CommunicationGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/boundary-setting-worksheet">
+                  <Link to="/workbook/boundary-script">
                     <Button variant="outline" size="sm">Boundary Setting Worksheet</Button>
                   </Link>
                   <Link to="/emotional-regulation">

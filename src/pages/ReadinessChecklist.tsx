@@ -211,9 +211,50 @@ const bandFor = (score: number): Band => (score <= 10 ? BANDS[0] : score <= 20 ?
 const COMPANION_TOOLS = [
   { to: "/family-action-plan", label: "Family Recovery Action Plan" },
   { to: "/crisis-chaos", label: "Crisis vs. Chaos Decision Guide" },
-  { to: "/boundary-setting-worksheet", label: "Boundary Setting Worksheet" },
+  { to: "/workbook/boundary-script", label: "Boundary Setting Worksheet" },
   { to: "/talking-about-treatment", label: '"How to Talk to Your Loved One About Treatment" Guide' },
-  { to: "/scenario-exercise", label: "Scenario-Based Exercises" },
+  { to: "/workbook/hard-moment-practice", label: "Scenario-Based Exercises" },
+];
+
+// Reading carried over from the Insight vs. Behavior Tracker (the owner's
+// words). It helps her read the result; none of it is ticked, scored or saved.
+const INSIGHT_BEHAVIOR_STAGES: { title: string; points: string[]; card: string; heading: string }[] = [
+  {
+    title: "High Insight + Low Behavior",
+    points: [
+      "Common in early recovery or active addiction",
+      "Indicates awareness without capacity",
+      "Structure and boundaries still needed",
+    ],
+    card: "border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950/30",
+    heading: "text-orange-700 dark:text-orange-400",
+  },
+  {
+    title: "Moderate Insight + Moderate Behavior",
+    points: ["Indicates early stabilization", "Progress is fragile", "Avoid increasing freedom too quickly"],
+    card: "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/30",
+    heading: "text-blue-700 dark:text-blue-400",
+  },
+  {
+    title: "Consistent Insight + Consistent Behavior",
+    points: ["Indicates readiness for increased responsibility", "Trust can be rebuilt gradually"],
+    card: "border-emerald-200 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950/30",
+    heading: "text-emerald-700 dark:text-emerald-400",
+  },
+  {
+    title: "Low Insight + Low Behavior",
+    points: ["Indicates resistance or instability", "Focus on safety, structure, and boundaries"],
+    card: "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/30",
+    heading: "text-red-700 dark:text-red-400",
+  },
+];
+
+const FAMILY_RESPONSE_SIGNS = [
+  "We relax boundaries after emotional conversations",
+  "We increase trust based on insight alone",
+  "We feel guilty holding limits when insight is present",
+  "We hope insight means 'this time is different'",
+  "We ignore behavior because insight feels sincere",
 ];
 
 // ---------------------------------------------------------------------------
@@ -551,6 +592,41 @@ function EarlierCheckIns({ history, onRemove }: { history: SavedCheckIn[]; onRem
   );
 }
 
+function InsightVsBehavior() {
+  return (
+    <ToolSection title="Insight vs. Behavior" description="Use this guide—not as a verdict, but as context.">
+      <div className="text-sm leading-relaxed text-foreground/90">
+        <p>
+          <strong>Insight</strong> is awareness. <strong>Behavior</strong> is change. Both matter—but they are not the
+          same.
+        </p>
+        <p className="mt-2">
+          Insight is what is being said. Behavior is what is actually happening, and it is what the count above measures.
+        </p>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2 print:block print:space-y-2">
+        {INSIGHT_BEHAVIOR_STAGES.map((stage) => (
+          <div
+            key={stage.title}
+            className={cn("rounded-lg border p-4 print:break-inside-avoid print:border-0 print:p-0", stage.card)}
+          >
+            <h3 className={cn("mb-2 text-sm font-semibold", stage.heading)}>{stage.title}</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-foreground/80">
+              {stage.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <ToolNote title="A Necessary Reframe for Families">
+        <p>Insight is encouraging—but it is not proof.</p>
+        <p className="mt-2 font-medium">Waiting for behavior is not punishment. It is self-protection.</p>
+      </ToolNote>
+    </ToolSection>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------------
@@ -661,11 +737,25 @@ export default function ReadinessChecklist() {
 
         <ReadinessResult score={score} sectionCounts={sectionCounts} previous={history[0] ?? null} />
 
+        <InsightVsBehavior />
+
         <ToolSection
           step={SECTIONS.length + 1}
           title="Family Reality Check"
           description="Answer honestly. These questions are for you to think about. They are saved with your check-in, and they do not change the count above."
         >
+          <ToolNote title="Family Response Check">
+            <p>Before you answer, notice any of these that apply:</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              {FAMILY_RESPONSE_SIGNS.map((sign) => (
+                <li key={sign}>{sign}</li>
+              ))}
+            </ul>
+            <p className="mt-3">
+              <span className="font-medium">Reflection:</span> What boundary or structure might need to stay in place
+              longer—regardless of insight?
+            </p>
+          </ToolNote>
           {REALITY_QUESTIONS.map((question) => (
             <ChoiceGroup
               key={question.id}

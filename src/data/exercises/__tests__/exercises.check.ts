@@ -12,6 +12,7 @@ import { reframeSentence } from "../guiltCheck";
 import { commitments } from "../weeklySelfCare";
 import { scoreStress } from "../stressCheck";
 import { scorePulse, strengths, focusArea } from "../familyPulse";
+import { SCENARIOS, scenarioFor } from "../hardMomentPractice";
 
 let failed = 0;
 let passed = 0;
@@ -255,6 +256,28 @@ eq("reframe default", reframeSentence(""), "I feel guilty, and I am still respon
   const sayStep = e.steps.find((s) => s.id === "say");
   const example = typeof sayStep?.example === "function" ? sayStep.example(a) : sayStep?.example;
   has("scenario-specific example", example ?? "", "not going to post bail");
+
+  // The picker: ten moments, each with its own value, situation and example line.
+  const picker = e.steps.find((s) => s.id === "scenario");
+  const options = picker?.type === "single" ? picker.options : [];
+  eq("ten scenarios to pick from", options.length, 10);
+  eq("scenario values unique", new Set(SCENARIOS.map((s) => s.value)).size, SCENARIOS.length);
+  check("every scenario has a situation and an example", SCENARIOS.every((s) => !!s.title && !!s.situation && !!s.example));
+  has("intro carries a safety note", e.intro.safety ?? "", "call 911");
+
+  const late: Answers = { scenario: "late-night-crisis-call", crisisOrChaos: "unsure", say: "We can talk when you're sober" };
+  const tl = outputToText(e.buildOutput(late));
+  has("late-night scenario", tl, "The moment: The late-night crisis call");
+  has("late-night situation is the author's", tl, "It's 11:30 PM.");
+  has("late-night remember names the emergencies", tl, "call 911, or call or text 988");
+  has("late-night unsure -> danger question", tl, "is anyone in immediate physical danger?");
+  has("late-night example", scenarioFor(late)?.example ?? "", "We can talk when you're sober.");
+
+  const resist: Answers = { scenario: "treatment-resistance", crisisOrChaos: "chaos" };
+  const tr = outputToText(e.buildOutput(resist));
+  has("treatment resistance scenario", tr, "The moment: Treatment resistance");
+  has("treatment resistance example", scenarioFor(resist)?.example ?? "", "I believe treatment is necessary.");
+  has("treatment resistance withdrawal note", tr, "needs medical help to stop");
 }
 
 // ---------- utilities ----------

@@ -26,6 +26,8 @@ interface ActionPlan {
   repeatedPatterns: string;
   familyValues: string[];
   otherValue: string;
+  /** How she will live the values she chose. Added later; older saved plans load it as "". */
+  valuesInPractice: string;
   nonNegotiables: string;
   enablingPatterns: string[];
   additionalPatterns: string;
@@ -54,6 +56,7 @@ const blankPlan: ActionPlan = {
   repeatedPatterns: "",
   familyValues: [],
   otherValue: "",
+  valuesInPractice: "",
   nonNegotiables: "",
   enablingPatterns: [],
   additionalPatterns: "",
@@ -75,7 +78,30 @@ const blankPlan: ActionPlan = {
 };
 
 const STATUS_OPTIONS = ["Actively using", "In detox or treatment", "Early recovery", "Long-term recovery", "Relapsed or unstable"];
-const VALUE_OPTIONS = ["Safety", "Honesty", "Accountability", "Stability", "Respect", "Health"];
+// The owner's fuller list from the Values Clarification Exercise. The six
+// original options keep their exact wording, so ticks saved earlier still match.
+const VALUE_OPTIONS = [
+  "Safety",
+  "Honesty",
+  "Integrity",
+  "Compassion",
+  "Accountability",
+  "Stability",
+  "Respect",
+  "Responsibility",
+  "Health",
+  "Growth",
+  "Connection",
+  "Trust",
+  "Boundaries",
+  "Consistency",
+  "Self-respect",
+  "Peace",
+  "Courage",
+  "Family",
+  "Balance",
+  "Clarity",
+];
 const ENABLING_OPTIONS = [
   "Covering for consequences (work, legal, social)",
   "Providing money during active use",
@@ -169,6 +195,9 @@ export default function FamilyActionPlan() {
         >
           <div className="space-y-1.5">
             <p className="text-sm font-medium text-foreground">The values we want to prioritize in our family include:</p>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              Choose 5 core values that you want to guide your decisions moving forward. There are no “right” values.
+            </p>
             <CheckList
               options={VALUE_OPTIONS}
               selected={plan.familyValues}
@@ -182,11 +211,25 @@ export default function FamilyActionPlan() {
             onChange={(otherValue) => saved.patch({ otherValue })}
           />
           <SavedTextarea
+            label="For each value you chose: one way I can live this value even when things are hard"
+            hint="Values only matter if they guide behavior. One line for each value is enough."
+            rows={5}
+            value={plan.valuesInPractice ?? ""}
+            onChange={(valuesInPractice) => saved.patch({ valuesInPractice })}
+          />
+          <SavedTextarea
             label="Non-negotiables (behaviors we will not accept in our home or lives):"
             rows={4}
             value={plan.nonNegotiables}
             onChange={(nonNegotiables) => saved.patch({ nonNegotiables })}
           />
+          <ToolNote>
+            <p className="font-medium">Values do not eliminate pain. They prevent regret.</p>
+            <p className="mt-1">
+              When families act in alignment with their values, they regain clarity, self-respect, and stability—regardless
+              of outcomes.
+            </p>
+          </ToolNote>
         </ToolSection>
 
         <ToolSection

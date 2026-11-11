@@ -5,6 +5,11 @@ import { opts, quote, selected, selectedLabels, sentence, singleLabel, text } fr
 // follows the original: crisis -> professional response; reduces consequences
 // -> enabling; fewer than 3 accountability checks -> enabling; otherwise help,
 // unless the self-check raises a flag.
+//
+// The "Who benefits from this?" question in the intro, and the two worked
+// examples on the consequences and self-check steps, are the author's from the
+// "Who Benefits From This?" Decision Filter page, which this exercise replaces.
+// They are reading only: no answer, routing or verdict depends on them.
 
 const CRISIS_RESPONSES = opts([
   "Call 911 / call or text 988 (crisis line)",
@@ -150,6 +155,7 @@ const helpingOrEnabling: ExerciseDefinition = {
     points: [
       "Take one slow breath in. Exhale fully.",
       "Say (silently or out loud): “I don't have to decide right now.”",
+      "Before responding to any request or emotional appeal, ask: “Who benefits from this—short term and long term?”",
       "Helping supports responsibility. Enabling removes it.",
     ],
     note: "Based on CRAFT principles and healthy detachment practices.",
@@ -206,6 +212,8 @@ const helpingOrEnabling: ExerciseDefinition = {
         { value: "yes", label: "Yes", hint: "This is likely enabling" },
         { value: "no", label: "No", hint: "It may be help. Let's check further." },
       ],
+      example:
+        "“If you don't help, I'll have nowhere to go.” Short-term benefit: reduces fear. Long-term impact: shields consequences, increases dependence, reinforces avoidance of treatment. Decision: Hold boundary. Offer treatment-based support only.",
       showIf: (a) => !isCrisis(a),
     },
     {
@@ -224,6 +232,8 @@ const helpingOrEnabling: ExerciseDefinition = {
       help: "This is the most important step. Check any that are true for you.",
       options: SELF_CHECK,
       noneLabel: "None of these are true",
+      example:
+        "“Can you help me just this once?” Short-term benefit: reduces conflict, eases guilt, prevents distress. Long-term impact: reinforces negotiation, weakens boundaries, delays change. Decision: Pause. Do not act.",
       showIf: (a) => !isCrisis(a),
     },
     {

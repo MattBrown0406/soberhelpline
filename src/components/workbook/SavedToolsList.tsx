@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ClipboardList, NotebookPen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { describeSavedKey, savedTools } from "@/data/savedTools";
+import { EARLIER_WORKSHEETS_PATH, retiredWorksheets } from "@/data/memberLibrary";
 
 // My Workbook, second half: the fillable plans, check-ins and checklists (each
 // saves automatically on its own page) and the notes she has written on guides.
@@ -17,6 +18,8 @@ const savedOn = (iso: string) =>
 
 export default function SavedToolsList() {
   const [rows, setRows] = useState<SavedRow[] | null>(null);
+  // Whether she wrote anything in the long worksheets that were retired.
+  const [hasEarlier, setHasEarlier] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -34,7 +37,21 @@ export default function SavedToolsList() {
         .select("worksheet_key, updated_at")
         .eq("user_id", userId)
         .order("updated_at", { ascending: false });
-      if (!cancelled) setRows((data ?? []) as SavedRow[]);
+      if (cancelled) return;
+      const saved = (data ?? []) as SavedRow[];
+      setRows(saved);
+      const retiredKeys = new Set(retiredWorksheets.map((w) => w.worksheetKey).filter(Boolean));
+      if (saved.some((r) => retiredKeys.has(r.worksheet_key))) {
+        setHasEarlier(true);
+        return;
+      }
+      // Three of the long worksheets saved to their own tables.
+      const counts = await Promise.all(
+        (["family_assessments", "family_control_worksheets", "family_boundary_worksheets"] as const).map((table) =>
+          supabase.from(table).select("id", { count: "exact", head: true }).eq("user_id", userId),
+        ),
+      );
+      if (!cancelled && counts.some((c) => !c.error && (c.count ?? 0) > 0)) setHasEarlier(true);
     })();
     return () => {
       cancelled = true;
@@ -81,6 +98,17 @@ export default function SavedToolsList() {
           })}
         </ul>
       </section>
+
+      {hasEarlier && (
+        <p className="mb-12 rounded-xl border border-border bg-card p-4 text-sm leading-relaxed text-muted-foreground">
+          Looking for the longer worksheets you filled in before? They have been replaced by the short exercises above,
+          but what you wrote is still here:{" "}
+          <Link to={EARLIER_WORKSHEETS_PATH} className="font-medium text-primary underline-offset-2 hover:underline">
+            your earlier worksheets
+          </Link>
+          .
+        </p>
+      )}
 
       {notes.length > 0 && (
         <section aria-labelledby="wb-notes" className="mb-12">

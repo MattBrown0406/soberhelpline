@@ -10,23 +10,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
-import FamilySelfAssessment from "@/components/FamilySelfAssessment";
-import ControlWorksheet from "@/components/ControlWorksheet";
-import BoundaryWorksheet from "@/components/BoundaryWorksheet";
-import ScenarioWorksheet from "@/components/ScenarioWorksheet";
-import EnablingDecisionTree from "@/components/EnablingDecisionTree";
-import GuiltResponsibilityWorksheet from "@/components/GuiltResponsibilityWorksheet";
-import SelfCareWorksheet from "@/components/SelfCareWorksheet";
-import TraumaHypervigilanceAssessment from "@/components/TraumaHypervigilanceAssessment";
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import MemberZoomBanner from "@/components/MemberZoomBanner";
 import ExerciseGrid from "@/components/workbook/ExerciseGrid";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
 import { useLearningPath } from "@/hooks/useLearningPath";
+import { savedTools } from "@/data/savedTools";
 import { useToast } from "@/hooks/use-toast";
 import {
-  embeddedWorksheetPath, embeddedWorksheets, guidedExercises, LIBRARY_TYPE_TOTALS, meditationPath,
+  guidedExercises, LIBRARY_TYPE_TOTALS, meditationPath,
   meditations, pillars, type PillarResource,
 } from "@/data/memberLibrary";
 
@@ -63,8 +56,6 @@ function tabForHash(hash: string): string | null {
   if (hash.startsWith("pillar-")) return "pillars";
   return "tools";
 }
-
-const worksheetTitle = (id: string) => embeddedWorksheets.find((w) => w.id === id)?.title ?? id;
 
 /** "Mark as done" toggle that records education_progress for one resource. */
 function DoneToggle({
@@ -106,22 +97,6 @@ function DoneToggle({
       {done ? <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> : <Circle className="h-4 w-4" />}
       {done ? doneLabel : label}
     </Button>
-  );
-}
-
-/** A long worksheet embedded on this page, with a stable id other pages link to. */
-function WorksheetCard({ id, borderClass, children }: { id: string; borderClass: string; children: ReactNode }) {
-  const title = worksheetTitle(id);
-  return (
-    <Card id={id} className={`scroll-mt-24 border-2 ${borderClass} hover:shadow-lg transition-shadow`}>
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-base">{title}</CardTitle>
-          <DoneToggle title={title} path={embeddedWorksheetPath(id)} type="worksheet" />
-        </div>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
   );
 }
 
@@ -174,45 +149,6 @@ function YourPathStrip() {
     </Card>
   );
 }
-
-const linkedTools = [
-  {
-    path: "/relapse-warning-signs",
-    title: "Relapse Warning Signs Tracker",
-    description: "Return to use often begins days or weeks before. Spot the emotional, behavioral and thinking signs early.",
-    icon: AlertTriangle,
-    border: "border-rose-500/30",
-    iconBg: "bg-rose-500/10",
-    iconText: "text-rose-600 dark:text-rose-400",
-  },
-  {
-    path: "/fear-inventory-exercise",
-    title: "Fear Inventory Exercise",
-    description: "Uncover the fears beneath your reactions, so you can respond from clarity instead of anxiety.",
-    icon: Eye,
-    border: "border-indigo-500/30",
-    iconBg: "bg-indigo-500/10",
-    iconText: "text-indigo-600 dark:text-indigo-400",
-  },
-  {
-    path: "/conversation-starters",
-    title: "Conversation Starters",
-    description: "Ready-to-use frameworks for talking with your loved one about treatment, boundaries and recovery.",
-    icon: Users,
-    border: "border-teal-500/30",
-    iconBg: "bg-teal-500/10",
-    iconText: "text-teal-600 dark:text-teal-400",
-  },
-  {
-    path: "/boundary-setting-worksheet",
-    title: "Boundary Setting Worksheet",
-    description: "Work through one boundary step by step: what it is, why it matters, and how you'll hold it.",
-    icon: Shield,
-    border: "border-emerald-500/30",
-    iconBg: "bg-emerald-500/10",
-    iconText: "text-emerald-600 dark:text-emerald-400",
-  },
-];
 
 export default function FamilyEducation() {
   const location = useLocation();
@@ -286,7 +222,7 @@ export default function FamilyEducation() {
 
 
   const pillarButton = (resource: PillarResource, key: string | number) => {
-    const progressPath = resource.isAnchor ? embeddedWorksheetPath(resource.path.replace(/^#/, "")) : resource.path;
+    const progressPath = resource.path;
     const done = isCompleted(progressPath);
     const Icon = done ? CheckCircle2 : resource.isAnchor ? Brain : FileText;
     const button = (
@@ -339,7 +275,7 @@ export default function FamilyEducation() {
                 <h1 className="text-2xl md:text-3xl font-bold text-logo-blue">Family Education Center</h1>
                 <p className="text-sm text-muted-foreground mt-1 max-w-3xl">
                   {LIBRARY_TYPE_TOTALS.guide} guides, {LIBRARY_TYPE_TOTALS.worksheet} worksheets and exercises,{" "}
-                  {LIBRARY_TYPE_TOTALS.meditation} guided meditations and 6 AI tools. Take your time: healing happens
+                  {LIBRARY_TYPE_TOTALS.meditation} guided meditations. Take your time: healing happens
                   gradually, not overnight.
                 </p>
               </div>
@@ -406,8 +342,8 @@ export default function FamilyEducation() {
                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-rose-600" />
                   </div>
                   <div className="text-center sm:text-left min-w-0">
-                    <div className="font-semibold text-[11px] leading-tight sm:text-sm">Wellness &amp; AI</div>
-                    <div className="text-xs opacity-70 hidden sm:block">Meditations, Self-Care & AI Coaches</div>
+                    <div className="font-semibold text-[11px] leading-tight sm:text-sm">Wellness</div>
+                    <div className="text-xs opacity-70 hidden sm:block">Meditations &amp; Self-Care</div>
                   </div>
                 </TabsTrigger>
               </TabsList>
@@ -433,113 +369,40 @@ export default function FamilyEducation() {
                   <ExerciseGrid />
                 </section>
 
-                {/* Full-length worksheets */}
-                <section aria-labelledby="full-worksheets-heading" className="space-y-6">
+                {/* Plans, check-ins and checklists (each has its own page and saves as she fills it in) */}
+                <section aria-labelledby="saved-tools-heading" className="space-y-4">
                   <div>
-                    <h2 id="full-worksheets-heading" className="text-xl font-semibold text-logo-blue flex items-center gap-2">
+                    <h2 id="saved-tools-heading" className="text-xl font-semibold text-logo-blue flex items-center gap-2">
                       <FileText className="h-5 w-5" />
-                      Full-length worksheets
+                      Plans, check-ins and checklists
                     </h2>
-                    <p className="text-sm text-muted-foreground">Longer tools for when you have time to go deeper.</p>
+                    <p className="text-sm text-muted-foreground">
+                      Fill these in at your own pace. They save automatically, and you can print them.
+                    </p>
                   </div>
-
-                  <Card
-                    id="worksheet-enabling-decision-tree"
-                    className="scroll-mt-24 overflow-hidden border-2 border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/10 transition-shadow"
-                  >
-                    <CardHeader className="bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20 pb-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex items-start gap-3">
-                          <div className="p-2 rounded-lg bg-amber-500/10">
-                            <Scale className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-                          </div>
-                          <div>
-                            <CardTitle className="text-lg text-logo-blue">{worksheetTitle("worksheet-enabling-decision-tree")}</CardTitle>
-                            <CardDescription>Navigate difficult situations with clarity</CardDescription>
-                          </div>
-                        </div>
-                        <DoneToggle
-                          title={worksheetTitle("worksheet-enabling-decision-tree")}
-                          path={embeddedWorksheetPath("worksheet-enabling-decision-tree")}
-                          type="worksheet"
-                        />
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <EnablingDecisionTree />
-                    </CardContent>
-                  </Card>
-
-                  {/* Tools with their own page (the member bar there marks them complete) */}
                   <div className="grid gap-4 md:grid-cols-2">
-                    {linkedTools.map((tool) => {
-                      const Icon = tool.icon;
+                    {savedTools.map((tool) => {
                       const done = isCompleted(tool.path);
                       return (
                         <Link key={tool.path} to={tool.path} className="group">
-                          <Card className={`h-full overflow-hidden border-2 ${tool.border} hover:shadow-lg transition-shadow`}>
+                          <Card className="h-full overflow-hidden border-2 border-primary/20 hover:shadow-lg transition-shadow">
                             <CardHeader className="pb-2">
-                              <div className="flex items-start gap-3">
-                                <div className={`p-2 rounded-lg ${tool.iconBg}`}>
-                                  <Icon className={`h-5 w-5 ${tool.iconText}`} />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <CardTitle className="text-base text-logo-blue group-hover:underline">{tool.title}</CardTitle>
-                                  {done && (
-                                    <span className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400">
-                                      <CheckCircle2 className="h-3.5 w-3.5" /> Done
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
+                              <p className="text-xs font-semibold uppercase tracking-wide text-primary">{tool.kind}</p>
+                              <CardTitle className="text-base text-logo-blue group-hover:underline">{tool.title}</CardTitle>
+                              {done && (
+                                <span className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400">
+                                  <CheckCircle2 className="h-3.5 w-3.5" /> Done
+                                </span>
+                              )}
                             </CardHeader>
                             <CardContent>
-                              <p className="text-sm text-muted-foreground">{tool.description}</p>
+                              <p className="text-sm text-muted-foreground">{tool.summary}</p>
                             </CardContent>
                           </Card>
                         </Link>
                       );
                     })}
                   </div>
-
-                  {/* Trauma Assessment */}
-                  <div id="trauma-assessment" className="scroll-mt-24 space-y-2">
-                    <div className="flex justify-end">
-                      <DoneToggle
-                        title={worksheetTitle("trauma-assessment")}
-                        path={embeddedWorksheetPath("trauma-assessment")}
-                        type="worksheet"
-                      />
-                    </div>
-                    <TraumaHypervigilanceAssessment user={user ?? undefined} />
-                  </div>
-
-                  {/* User-specific worksheets */}
-                  {user && (
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-logo-blue">Your personal worksheets</h3>
-                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        <WorksheetCard id="worksheet-family-self-assessment" borderClass="border-blue-500/30">
-                          <FamilySelfAssessment user={user} />
-                        </WorksheetCard>
-                        <WorksheetCard id="worksheet-control" borderClass="border-teal-500/30">
-                          <ControlWorksheet user={user} />
-                        </WorksheetCard>
-                        <WorksheetCard id="worksheet-boundary" borderClass="border-emerald-500/30">
-                          <BoundaryWorksheet user={user} />
-                        </WorksheetCard>
-                        <WorksheetCard id="worksheet-scenario" borderClass="border-orange-500/30">
-                          <ScenarioWorksheet user={user} />
-                        </WorksheetCard>
-                        <WorksheetCard id="worksheet-guilt-responsibility" borderClass="border-rose-500/30">
-                          <GuiltResponsibilityWorksheet user={user} />
-                        </WorksheetCard>
-                        <WorksheetCard id="worksheet-self-care" borderClass="border-pink-500/30">
-                          <SelfCareWorksheet user={user} />
-                        </WorksheetCard>
-                      </div>
-                    </div>
-                  )}
                 </section>
               </TabsContent>
 
@@ -694,129 +557,6 @@ export default function FamilyEducation() {
                         </Card>
                       );
                     })}
-                  </div>
-                </div>
-
-                {/* AI Tools Section */}
-                <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 rounded-lg bg-violet-500/10">
-                      <Sparkles className="h-6 w-6 text-violet-600 dark:text-violet-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-logo-blue">AI Tools</h3>
-                      <p className="text-sm text-muted-foreground">Intelligent support for your journey</p>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Link to="/ai-life-coach">
-                      <Card className="h-full border-2 border-violet-500/20 hover:border-violet-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-violet-500/10 group-hover:bg-violet-500/20 transition-colors">
-                              <Sparkles className="h-6 w-6 text-violet-600 dark:text-violet-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-violet-700 dark:group-hover:text-violet-400 transition-colors mb-1">AI Life Coach</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Transform any AI chatbot into a master life coach and recovery guide with our specialized prompt.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-
-                    <Link to="/ai-enabling-decision-coach">
-                      <Card className="h-full border-2 border-amber-500/20 hover:border-amber-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
-                              <Scale className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors mb-1">Helping vs. Enabling Decision Coach</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Turn AI into a decision coach that helps you distinguish between helping and enabling behaviors.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-
-                    <Link to="/ai-boundary-builder-coach">
-                      <Card className="h-full border-2 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-emerald-500/10 group-hover:bg-emerald-500/20 transition-colors">
-                              <Shield className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors mb-1">Boundary Builder Coach</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Transform AI into a boundary coach that helps you set clear, calm, enforceable boundaries.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-
-                    <Link to="/ai-treatment-navigator">
-                      <Card className="h-full border-2 border-blue-500/20 hover:border-blue-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
-                              <Compass className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors mb-1">Treatment Reality Navigator</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Understand what treatment can and cannot do—without the marketing spin.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-
-                    <Link to="/ai-relapse-response-guide">
-                      <Card className="h-full border-2 border-orange-500/20 hover:border-orange-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-orange-50/50 to-transparent dark:from-orange-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
-                              <RefreshCw className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-orange-700 dark:group-hover:text-orange-400 transition-colors mb-1">Relapse Response Guide</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Respond to relapse without panic, punishment, or enabling—stay consistent when it matters most.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-
-                    <Link to="/ai-addiction-reality-translator">
-                      <Card className="h-full border-2 border-indigo-500/20 hover:border-indigo-500/40 hover:shadow-lg transition-all cursor-pointer group bg-gradient-to-br from-indigo-50/50 to-transparent dark:from-indigo-950/10">
-                        <CardContent className="py-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-lg bg-indigo-500/10 group-hover:bg-indigo-500/20 transition-colors">
-                              <Eye className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors mb-1">Addiction Reality Translator</h4>
-                              <p className="text-sm text-muted-foreground">
-                                Cut through denial, rationalization, and emotional fog—see behavior clearly without moralizing.
-                              </p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
                   </div>
                 </div>
               </TabsContent>

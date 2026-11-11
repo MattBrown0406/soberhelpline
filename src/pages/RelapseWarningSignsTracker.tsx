@@ -126,6 +126,12 @@ interface Level {
   /** The fuller "What to Do Next" text. */
   next: string;
   nextLink?: string;
+  /**
+   * "Recommended Actions" carried over from Relapse Radar (the owner's words),
+   * matched to this tracker's four levels in order, lowest to highest. Shown
+   * under the level she is at. Reading only: they change no count or band.
+   */
+  actions: string[];
   card: string;
   text: string;
   row: string;
@@ -139,6 +145,11 @@ const LEVELS: Level[] = [
     heading: "0-5 Signs: Low Concern",
     guidance: null,
     next: "Continue monitoring. These may be normal stress responses. Focus on maintaining healthy communication and your own wellbeing.",
+    actions: [
+      "Continue open communication with your loved one",
+      "Encourage recovery meetings and support groups",
+      "Maintain healthy family boundaries",
+    ],
     card: "border-green-300 bg-green-100 dark:border-green-800 dark:bg-green-950/50",
     text: "text-green-700 dark:text-green-400",
     row: "bg-green-100 ring-2 ring-green-400 dark:bg-green-950/50",
@@ -154,6 +165,12 @@ const LEVELS: Level[] = [
       </>
     ),
     next: "Increase your own support and self-care. Document patterns. Consider consulting with an addiction professional or attending a support group for families.",
+    actions: [
+      "Schedule a family conversation",
+      "Reinforce existing boundaries",
+      "Encourage additional recovery meetings",
+      "Increase check-ins and accountability",
+    ],
     card: "border-yellow-300 bg-yellow-100 dark:border-yellow-800 dark:bg-yellow-950/50",
     text: "text-yellow-700 dark:text-yellow-400",
     row: "bg-yellow-100 ring-2 ring-yellow-400 dark:bg-yellow-950/50",
@@ -170,6 +187,13 @@ const LEVELS: Level[] = [
     ),
     next: "Consider consulting with an interventionist. Review and strengthen your boundaries. Prepare your support network for potential crisis.",
     nextLink: "We recommend speaking with a professional interventionist about next steps.",
+    actions: [
+      "Have a serious, compassionate conversation",
+      "Reinforce boundaries firmly",
+      "Encourage professional counseling",
+      "Increase accountability measures",
+      "Consider a family intervention meeting",
+    ],
     card: "border-orange-300 bg-orange-100 dark:border-orange-800 dark:bg-orange-950/50",
     text: "text-orange-700 dark:text-orange-400",
     row: "bg-orange-100 ring-2 ring-orange-400 dark:bg-orange-950/50",
@@ -187,6 +211,13 @@ const LEVELS: Level[] = [
     ),
     next: "Immediate professional consultation is strongly recommended. An interventionist can help you navigate this situation safely and effectively.",
     nextLink: "Please consult with an interventionist to create a plan of action.",
+    actions: [
+      "Seek professional guidance immediately",
+      "Contact a professional interventionist",
+      "Reinforce safety boundaries",
+      "Encourage immediate professional support",
+      "Prepare for crisis intervention if needed",
+    ],
     card: "border-red-300 bg-red-100 dark:border-red-800 dark:bg-red-950/50",
     text: "text-red-700 dark:text-red-400",
     row: "bg-red-100 ring-2 ring-red-400 dark:bg-red-950/50",
@@ -454,6 +485,16 @@ function ConcernResult({
                     <ConsultLink>{item.nextLink}</ConsultLink>
                   </p>
                 )}
+                {active && (
+                  <div className="mt-3 border-t border-foreground/15 pt-3">
+                    <p className="font-semibold text-foreground">Recommended Actions</p>
+                    <ul className="mt-1 list-disc space-y-1 pl-5 text-foreground/80">
+                      {item.actions.map((action) => (
+                        <li key={action}>{action}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             );
           })}
@@ -578,6 +619,10 @@ export default function RelapseWarningSignsTracker() {
         />
 
         <ToolNote title="Understanding the Relapse Process">
+          <p className="mb-2">
+            Families often sense that something is wrong before a relapse happens, but they don't always know what the
+            warning signs mean.
+          </p>
           <p>
             <strong>Return to substance use is the END of a process—not the beginning.</strong> By the time someone picks
             up their substance of choice, they have likely been struggling internally for days, weeks, or even months.

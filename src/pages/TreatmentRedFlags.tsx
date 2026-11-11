@@ -511,6 +511,104 @@ export default function TreatmentRedFlags() {
           </ToolNote>
         </ToolSection>
 
+        {/* Merged from "How the Treatment Industry Actually Works" */}
+        <ToolSection
+          title="How the Treatment Industry Actually Works"
+          description="Understanding the business of treatment so you can advocate effectively."
+        >
+          <div>
+            <h3 className="text-base font-semibold text-foreground">How Treatment Centers Are Funded</h3>
+            <div className="mt-3 space-y-4">
+              <div>
+                <h4 className="text-sm font-semibold text-foreground">1. Insurance-Based Programs</h4>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">These programs rely heavily on:</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                  <li>Insurance authorizations</li>
+                  <li>Utilization reviews</li>
+                  <li>Approved lengths of stay</li>
+                </ul>
+                <div className="mt-2 rounded-lg bg-muted/50 p-3 print:bg-transparent print:p-0">
+                  <p className="text-sm font-medium text-foreground">What families should know:</p>
+                  <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                    <li>Length of stay is often influenced by insurance—not just clinical need</li>
+                    <li>Programs may discharge when coverage ends</li>
+                    <li>"Medical necessity" language matters</li>
+                  </ul>
+                  <p className="mt-2 text-sm italic leading-relaxed text-foreground/90">
+                    This does not mean care is bad—but it does mean financial forces are involved.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-foreground">2. Private-Pay Programs</h4>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  These programs are funded directly by families or individuals.
+                </p>
+                <div className="mt-2 rounded-lg bg-muted/50 p-3 print:bg-transparent print:p-0">
+                  <p className="text-sm font-medium text-foreground">What families should know:</p>
+                  <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                    <li>Quality varies widely</li>
+                    <li>Higher cost does not guarantee better care</li>
+                    <li>"Luxury" does not equal "clinical depth"</li>
+                  </ul>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/90">
+                    Private-pay programs should still provide clear clinical rationale, offer structured aftercare
+                    planning, and be transparent about costs and expectations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-base font-semibold text-foreground">Admissions Is Often a Sales Role</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              This is one of the least understood—and most important—areas.
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">In many organizations:</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li>Admissions staff are not clinicians</li>
+              <li>Their role is to fill beds</li>
+              <li>They are trained to reduce hesitation</li>
+            </ul>
+            <p className="mt-2 text-sm italic leading-relaxed text-foreground/90">
+              This doesn't automatically mean deception—but it does mean families must separate marketing language from
+              clinical reality.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-base font-semibold text-foreground">How Referrals Actually Work</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Families often assume recommendations are purely clinical. Sometimes they are. Sometimes they are not.
+            </p>
+            <p className="mt-2 text-sm font-medium text-foreground">Referral Relationships Can Include:</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li>Financial incentives</li>
+              <li>Marketing agreements</li>
+              <li>Ownership overlap</li>
+              <li>Informal "preferred partner" arrangements</li>
+            </ul>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/90">Ethical providers are transparent about this.</p>
+            <p className="mt-3 text-sm font-medium text-foreground">Families should always ask:</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <li>"Are there any financial relationships tied to this referral?"</li>
+              <li>"What alternatives did you consider?"</li>
+              <li>"Why is this level of care appropriate?"</li>
+            </ul>
+          </div>
+        </ToolSection>
+
+        {/* Carried over from the Treatment Reality Navigator prompt page */}
+        <ToolNote title="Common myths, not personal failures">
+          <ul className="list-disc space-y-1 pl-5">
+            <li>"If we find the right place, this will finally be fixed"</li>
+            <li>"More expensive means better"</li>
+            <li>"Length of stay guarantees outcomes"</li>
+            <li>"Treatment will fix motivation, honesty, or willingness"</li>
+          </ul>
+        </ToolNote>
+
         <ProgramPicker programs={programs} activeId={program.id} onSelect={selectProgram} onAdd={addProgram} />
 
         {/* Keyed by program so nothing typed for one program lingers on screen for another. */}
@@ -623,6 +721,33 @@ export default function TreatmentRedFlags() {
             </div>
           )}
         </div>
+
+        {/* Merged from "How the Treatment Industry Actually Works" */}
+        <ToolSection
+          title={'Why Families Are Often Told "Everything Is Going Great"'}
+          description="For after admission, when the updates start coming."
+        >
+          <div>
+            <p className="text-sm leading-relaxed text-muted-foreground">Families frequently hear:</p>
+            <ul className="mt-1 space-y-1 text-sm italic leading-relaxed text-muted-foreground">
+              <li>"They're doing amazing."</li>
+              <li>"They're very motivated."</li>
+              <li>"No major concerns."</li>
+            </ul>
+          </div>
+          <p className="text-sm leading-relaxed text-foreground">
+            <strong>Early stabilization can look like recovery—but it is not the same thing.</strong>
+          </p>
+          <ToolNote title="Families should ask:">
+            <ul className="list-disc space-y-1 pl-5">
+              <li>What behaviors have changed?</li>
+              <li>How are they handling discomfort?</li>
+              <li>What happens when structure is reduced?</li>
+              <li>What does accountability look like after discharge?</li>
+            </ul>
+            <p className="mt-3 font-medium">Honest providers discuss risk, not just progress.</p>
+          </ToolNote>
+        </ToolSection>
 
         <ToolNote title="Final Reframe">
           <p className="text-base font-semibold">

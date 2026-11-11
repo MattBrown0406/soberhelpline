@@ -110,6 +110,31 @@ const TraumaVsExcuses = () => {
           </CardContent>
         </Card>
 
+        {/* A Grounding Truth (merged from How Trauma Shapes Addiction) */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Scale className="h-5 w-5 text-primary" />
+              A Grounding Truth
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-center">
+              <p className="text-lg font-semibold mb-2">
+                Trauma increases risk.
+              </p>
+              <p className="text-muted-foreground">It does not guarantee addiction.</p>
+              <p className="text-muted-foreground">And addiction does not require trauma to exist.</p>
+            </div>
+            <div className="bg-muted p-4 rounded-lg">
+              <ul className="list-disc ml-6 space-y-2">
+                <li>Many people experience trauma and never develop addiction.</li>
+                <li>Many people develop addiction without identifiable trauma.</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* What Trauma Does Explain */}
         <Card className="mb-6">
           <CardHeader>
@@ -215,6 +240,32 @@ const TraumaVsExcuses = () => {
             <div className="bg-muted p-4 rounded-lg text-center mt-4">
               <p className="font-semibold text-primary">
                 Recovery requires safety, structure, and accountability—not protection from reality.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* The Other Trap (merged from How Trauma Shapes Addiction) */}
+        <Card className="mb-6 border-destructive/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              The Other Trap: Trauma Is Dismissed Entirely
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>
+              Families often fall into one of two traps. The first is the one above, where trauma explains everything. In the second:
+            </p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Pain is minimized</li>
+              <li>Shame increases</li>
+              <li>Defensive behavior escalates</li>
+              <li>Trust erodes</li>
+            </ul>
+            <div className="bg-muted p-4 rounded-lg text-center mt-4">
+              <p className="font-semibold text-primary">
+                Neither approach supports recovery.
               </p>
             </div>
           </CardContent>
@@ -332,6 +383,67 @@ const TraumaVsExcuses = () => {
           </CardContent>
         </Card>
 
+        {/* Why Trauma Alone Does Not Sustain Addiction (merged from How Trauma Shapes Addiction) */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <HelpCircle className="h-5 w-5 text-primary" />
+              Why Trauma Alone Does Not Sustain Addiction
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Trauma may open the door—but addiction persists because of:</p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li>Brain chemistry changes</li>
+              <li>Habit loops</li>
+              <li>Reinforced avoidance</li>
+              <li>Environmental access</li>
+              <li>Reduced executive functioning</li>
+            </ul>
+            <div className="bg-muted p-4 rounded-lg">
+              <p className="font-semibold">
+                If trauma were the sole cause, trauma therapy alone would cure addiction.
+              </p>
+              <p className="text-muted-foreground mt-1">It doesn't.</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* The Right Sequence Matters (merged from How Trauma Shapes Addiction) */}
+        <Card className="mb-6 border-primary">
+          <CardHeader className="bg-primary/10">
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              The Right Sequence Matters
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-4">
+            <p>In most cases, effective recovery looks like:</p>
+            <ol className="space-y-3">
+              {[
+                "Stabilize substance use",
+                "Build structure and safety",
+                "Develop basic regulation skills",
+                "Address trauma with support",
+                "Integrate long-term recovery strategies"
+              ].map((step, index) => (
+                <li key={step} className="flex items-center gap-3">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="bg-muted p-4 rounded-lg text-center mt-4">
+              <p className="font-semibold">This is not minimizing trauma.</p>
+              <p className="text-muted-foreground">
+                It is creating the conditions for trauma healing to work.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Critical Reframe */}
         <Card className="mb-6 bg-primary/5">
           <CardHeader>
@@ -399,18 +511,18 @@ const TraumaVsExcuses = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/why-willpower-fails" className="text-primary hover:underline">
-                  Why Willpower Fails Guide
+                <Link to="/disease-choice-reality-map" className="text-primary hover:underline">
+                  Disease vs. Choice Reality Map
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#worksheet-boundary" className="text-primary hover:underline">
-                  Boundary Setting Worksheet
+                <Link to="/workbook/boundary-script" className="text-primary hover:underline">
+                  Boundary Script (Workbook exercise)
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#worksheet-guilt-responsibility" className="text-primary hover:underline">
-                  Guilt vs. Responsibility Module
+                <Link to="/workbook/guilt-check" className="text-primary hover:underline">
+                  Guilt Check (Workbook exercise)
                 </Link>
               </li>
               <li>

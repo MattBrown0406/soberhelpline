@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowLeft, Printer, Heart, Brain, Users, AlertTriangle, Shield, HelpCircle, CheckCircle, RefreshCw } from "lucide-react";
+import { Phone, ArrowLeft, Printer, Heart, Brain, Users, AlertTriangle, Shield, HelpCircle, CheckCircle, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -262,6 +262,35 @@ export default function StrongOneGuide() {
               </CardContent>
             </Card>
 
+            {/* Why Minimization Is Common (from Growing Up in the Shadow of Addiction) */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-logo-blue">
+                  <Eye className="h-5 w-5" />
+                  Why "It Wasn't That Bad" Is So Common
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground font-medium">Minimization protected you as a child:</p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li>It reduced emotional overwhelm</li>
+                  <li>It helped you function</li>
+                  <li>It preserved attachment</li>
+                </ul>
+                <p className="text-muted-foreground font-medium mt-4">As an adult, minimization can:</p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li>Delay healing</li>
+                  <li>Block self-compassion</li>
+                  <li>Make support feel unnecessary or indulgent</li>
+                </ul>
+                <div className="bg-primary/10 p-4 rounded-lg mt-4">
+                  <p className="text-foreground font-medium text-center">
+                    You don't need trauma to justify healing.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Why Letting Go Feels So Scary */}
             <Card className="mb-6">
               <CardHeader>
@@ -388,8 +417,8 @@ export default function StrongOneGuide() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/values-aligned-decisions">
-                    <Button variant="outline" size="sm">Values-Aligned Decision Making Exercise</Button>
+                  <Link to="/family-action-plan">
+                    <Button variant="outline" size="sm">Family Recovery Action Plan</Button>
                   </Link>
                   <Link to="/living-well-regardless">
                     <Button variant="outline" size="sm">Living Well Regardless of Outcome</Button>

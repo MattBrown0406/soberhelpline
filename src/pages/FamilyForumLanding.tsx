@@ -31,7 +31,7 @@ const faqItems = [
   },
   {
     question: "What does membership cost?",
-    answer: "Family support membership is $9.99/month. It includes the forum, the full education library (60+ guides), recorded webinars, AI-powered tools, and access to the Monday Zoom. Cancel anytime.",
+    answer: "Family support membership is $9.99/month. It includes the forum, the full education library (60+ guides, tools and meditations), recorded webinars, and access to the Monday Zoom. Cancel anytime.",
   },
 ];
 
@@ -67,7 +67,7 @@ const benefits = [
   {
     icon: Star,
     title: "Part of a Bigger Support System",
-    desc: "Membership includes the forum, 60+ education guides, recorded webinars, AI tools, and access to the free “The Family Squares”. You're not just joining a forum, you're joining a full recovery support system.",
+    desc: "Membership includes the forum, the education library, recorded webinars, and access to the free “The Family Squares”. You're not just joining a forum, you're joining a full recovery support system.",
   },
 ];
 

@@ -20,7 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { untypedSupabase } from "@/integrations/supabase/untyped";
 import {
-  embeddedWorksheetPath, embeddedWorksheets, exercisePath, findLibraryItem, formatMeetingDay,
+  exercisePath, findLibraryItem, formatMeetingDay,
   formatTimeUntil, formatViewerTime, getMondayMeeting, guidedExercises,
 } from "@/data/memberLibrary";
 
@@ -432,21 +432,6 @@ function ContinueCard({ userId }: { userId: string | null }) {
       title: info.title,
       detail: `Saved ${relativeDate(row.updated_at)}`,
       badge: info.kind,
-      icon: FileText,
-    });
-  }
-
-  for (const row of worksheets) {
-    const sheet = embeddedWorksheets.find((w) => w.worksheetKey === row.worksheet_key);
-    if (!sheet) continue;
-    const path = embeddedWorksheetPath(sheet.id);
-    if (isCompleted(path)) continue;
-    items.push({
-      key: `ws-${sheet.id}`,
-      to: path,
-      title: sheet.title,
-      detail: `Saved ${relativeDate(row.updated_at)}`,
-      badge: "In progress",
       icon: FileText,
     });
   }

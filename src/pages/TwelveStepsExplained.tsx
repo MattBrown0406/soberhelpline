@@ -104,6 +104,34 @@ export default function TwelveStepsExplained() {
               </CardContent>
             </Card>
 
+            {/* Addressing Common Family Concerns (merged from Addiction, the Brain & Spiritual Recovery) */}
+            <Card className="mb-8 border-amber-500/20">
+              <CardHeader>
+                <CardTitle className="text-xl text-amber-700 dark:text-amber-400 flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Addressing Common Family Concerns
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="border-l-4 border-amber-500 pl-4 py-2">
+                  <p className="font-medium text-foreground">"What if my loved one isn't religious?"</p>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Spirituality in recovery is not about belief—it's about relationship, meaning, and surrender of control.
+                  </p>
+                </div>
+                <div className="border-l-4 border-amber-500 pl-4 py-2">
+                  <p className="font-medium text-foreground">"Isn't addiction medical—why not just use medication?"</p>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    Medication can stabilize the brain. It does not rebuild identity, meaning, or community.<br />
+                    <strong>Recovery requires both.</strong>
+                  </p>
+                  <p className="text-muted-foreground text-sm mt-2">
+                    The 12 Steps are not a replacement for medical care.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Step 1 */}
             <Card className="mb-6 border-l-4 border-l-blue-500">
               <CardHeader className="pb-2">
@@ -536,6 +564,34 @@ export default function TwelveStepsExplained() {
               </CardContent>
             </Card>
 
+            {/* The Integration Model (merged from Addiction, the Brain & Spiritual Recovery) */}
+            <Card className="mb-8 border-teal-500/20">
+              <CardHeader>
+                <CardTitle className="text-xl text-teal-700 dark:text-teal-400">
+                  The Integration Model (What Actually Works Best)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">Most sustained recoveries involve:</p>
+                <ul className="space-y-2">
+                  {[
+                    "Medical stabilization (detox, MAT if appropriate)",
+                    "Psychological treatment",
+                    "Behavioral structure",
+                    "Social accountability",
+                    "Spiritual growth or meaning-based practice"
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300 flex items-center justify-center text-sm font-medium">
+                        {index + 1}
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
             {/* Critical Reframe for Families */}
             <Card className="mb-8 bg-gradient-to-br from-primary/5 to-transparent border-primary/30">
               <CardHeader>
@@ -585,17 +641,11 @@ export default function TwelveStepsExplained() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/brain-spiritual-recovery">
-                    <Button variant="outline" size="sm">Addiction & Neuroscience Guide</Button>
-                  </Link>
                   <Link to="/disease-choice-reality-map">
                     <Button variant="outline" size="sm">Disease vs. Choice Reality Map</Button>
                   </Link>
-                  <Link to="/insight-behavior-tracker">
-                    <Button variant="outline" size="sm">Insight vs. Behavior Tracker</Button>
-                  </Link>
-                  <Link to="/why-willpower-fails">
-                    <Button variant="outline" size="sm">Why Willpower Fails Guide</Button>
+                  <Link to="/readiness-checklist">
+                    <Button variant="outline" size="sm">Readiness for Change Checklist</Button>
                   </Link>
                   <Link to="/living-well-regardless">
                     <Button variant="outline" size="sm">Living Well Regardless of Outcome</Button>

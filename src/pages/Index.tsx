@@ -410,7 +410,6 @@ const Index = () => {
                       "A private forum of families who truly get it",
                       "Practical tools for boundaries you can actually hold",
                       "Guided meditations for the moments when stress takes over",
-                      "AI coaching tools for real-time decision support",
                       "More clarity, so you can respond instead of react",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
