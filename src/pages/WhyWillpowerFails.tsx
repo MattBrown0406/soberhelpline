@@ -373,7 +373,7 @@ const WhyWillpowerFails = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#boundary-worksheet" className="text-primary hover:underline">
+                <Link to="/family-education#worksheet-boundary" className="text-primary hover:underline">
                   Boundary-Setting Worksheet
                 </Link>
               </li>

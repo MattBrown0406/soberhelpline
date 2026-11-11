@@ -190,7 +190,10 @@ export default function ForumTopic() {
       .map(([key, list]) => ({
         key,
         label: `For ${formatMeetingDay(key)}`,
-        threads: list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
+        threads: list.sort((a, b) => {
+          if (a.is_pinned !== b.is_pinned) return a.is_pinned ? -1 : 1;
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        }),
       }));
   }, [visibleThreads, isMeetingTopic]);
 
@@ -242,8 +245,14 @@ export default function ForumTopic() {
     if (!deleteConfirm) return;
     setIsDeleting(true);
     try {
-      const { error } = await supabase.from("forum_posts").delete().eq("id", deleteConfirm.post.id);
+      const { data: removed, error } = await supabase
+        .from("forum_posts")
+        .delete()
+        .eq("id", deleteConfirm.post.id)
+        .select("id");
       if (error) throw error;
+      // Nothing removed (not hers, or membership lapsed) is not a success.
+      if (!removed || removed.length === 0) throw new Error("Nothing was deleted");
       toast.success("Deleted");
       setDeleteConfirm(null);
       void fetchPosts();

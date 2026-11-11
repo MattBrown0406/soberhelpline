@@ -4,6 +4,10 @@ How to use: after this change is merged to `main` and Lovable has synced it,
 paste everything in the "Prompt for Lovable" section below into Lovable as one
 message. Then press **Publish** when Lovable says step 6 is done.
 
+Timing: any time except a Tuesday between 3 and 7 PM Pacific (the weekly
+member note goes out then, and it should not go out before you have
+published).
+
 Why the steps are split: Lovable's migration tool only accepts schema changes,
 so the one data step (marking today's members as already welcomed) and the
 scheduled jobs are separate steps, in this order on purpose.
@@ -37,8 +41,8 @@ thread is posted in This Week's Meeting, and only for The Family Squares).
 
 ## Prompt for Lovable
 
-Please do these steps in order and tell me the result of each. Steps 1 and 3
-are schema migrations. Step 2 is one data statement and step 4 is three
+Please do these steps in order and tell me the result of each. Steps 1 and 4
+are schema migrations. Step 2 is one data statement and step 5 is the
 scheduled jobs: please run those two as separate SQL, not inside a migration.
 If any step fails, stop and tell me the error; do not skip ahead.
 
@@ -188,10 +192,9 @@ CREATE POLICY "Members delete own workbook entries"
   USING (auth.uid() = user_id);
 
 -- Admins: read everything (engagement reporting).
+-- No admin read policy: what a member writes in an exercise is private to
+-- her. (The engagement report counts entries through its own functions.)
 DROP POLICY IF EXISTS "Admins read all workbook entries" ON public.workbook_entries;
-CREATE POLICY "Admins read all workbook entries"
-  ON public.workbook_entries FOR SELECT TO authenticated
-  USING (public.has_role(auth.uid(), 'admin'::public.app_role));
 
 REVOKE ALL ON public.workbook_entries FROM anon;
 GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;
@@ -479,7 +482,7 @@ REVOKE ALL ON public.member_email_log FROM anon, authenticated;
 
 ### 2. Data step (run as SQL, not a migration): mark today's members as already welcomed
 
-This must run before step 3, so the corrected welcome email only goes to
+This must run before step 4, so the corrected welcome email only goes to
 people who join from now on. It inserts ledger rows and sends nothing.
 
 ```sql
@@ -501,7 +504,21 @@ ON CONFLICT (kind, period_key, user_id) DO NOTHING;
 
 Please tell me how many rows it inserted.
 
-### 3. Schema migration B: welcome trigger and forum
+### 3. Deploy these edge functions from the synced code
+
+Before step 4, because step 4's welcome trigger calls `send-welcome-email`
+and needs the new version to be there.
+
+- `send-welcome-email` (changed; `verify_jwt = false` in `supabase/config.toml`)
+- `send-forum-notifications` (new)
+- `send-member-weekly-note` (new)
+- `send-member-zoom-reminder` (one link changed)
+- `zoom-webhook` (after-meeting thread only)
+
+Please do not change or redeploy any other function, and do not touch the
+Monday registration functions.
+
+### 4. Schema migration B: welcome trigger and forum
 
 One migration.
 
@@ -526,7 +543,10 @@ DECLARE
 BEGIN
   IF NEW.status IS DISTINCT FROM 'active'
      OR NEW.provider_submission_id IS NOT NULL
-     OR NEW.plan_type IS NOT DISTINCT FROM 'app' THEN
+     OR NEW.plan_type IS NOT DISTINCT FROM 'app'
+     OR NEW.plan_type IS NOT DISTINCT FROM 'free' THEN
+    -- 'app': joined in the mobile app. 'free': granted by an admin, whose
+    -- screen already sends its own welcome (send-free-membership-email).
     RETURN NEW;
   END IF;
   IF TG_OP = 'UPDATE' AND OLD.status IS NOT DISTINCT FROM 'active' THEN
@@ -676,17 +696,49 @@ FOR UPDATE
 TO authenticated
 USING (public.is_forum_staff(auth.uid()))
 WITH CHECK (public.is_forum_staff(auth.uid()));
--- Kept as they are: "Users can update their own posts", "Users can delete own
--- posts" (owner/admin/moderator), "Admins can view all posts".
+
+-- Editing or deleting your own post also needs a current membership (a lapsed
+-- member could otherwise still delete a thread, and other members' replies
+-- with it). Staff can delete any post, as before.
+DROP POLICY IF EXISTS "Users can update their own posts" ON public.forum_posts;
+CREATE POLICY "Users can update their own posts"
+ON public.forum_posts
+FOR UPDATE
+TO authenticated
+USING (
+  auth.uid() = user_id
+  AND (public.is_active_family_member(auth.uid()) OR public.is_forum_staff(auth.uid()))
+)
+WITH CHECK (
+  auth.uid() = user_id
+  AND (public.is_active_family_member(auth.uid()) OR public.is_forum_staff(auth.uid()))
+);
+
+DROP POLICY IF EXISTS "Users can delete own posts" ON public.forum_posts;
+CREATE POLICY "Users can delete own posts"
+ON public.forum_posts
+FOR DELETE
+TO authenticated
+USING (
+  public.is_forum_staff(auth.uid())
+  OR (auth.uid() = user_id AND public.is_active_family_member(auth.uid()))
+);
+-- Kept as it is: "Admins can view all posts".
 
 
 -- ---------------------------------------------------------------------
 -- 3. Write guard on forum_posts (style of prevent_provider_subscription_tampering).
+--    Everyone writing through the API (members and staff):
+--      * created_at is the server's time and never changes;
+--      * a post has a length limit;
+--      * a reply always takes its parent's topic, and a reply to a reply
+--        joins the same conversation (threads are one level deep).
 --    Non-staff:
---      * cannot pin, or change user_id / topic_id / parent_post_id on update;
---      * cannot start a new conversation in an archived space;
---      * a reply always takes its parent's topic.
---    Service role, direct database sessions and admins/moderators bypass.
+--      * cannot pin, or change topic_id / parent_post_id on update;
+--      * cannot start a new conversation in an archived space.
+--    Only an admin can change who a post belongs to, or switch someone
+--    else's post between anonymous and named.
+--    Service role and direct database sessions bypass.
 --    KEEP the active list in sync with ACTIVE_TOPIC_IDS in src/lib/forumTopics.ts.
 -- ---------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION public.guard_forum_post_write()
@@ -697,27 +749,45 @@ SET search_path = public
 AS $$
 DECLARE
   _parent_topic text;
+  _parent_parent uuid;
+  _is_staff boolean;
+  _is_admin boolean;
 BEGIN
   IF current_user NOT IN ('authenticated', 'anon')
-     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role'
-     OR public.is_forum_staff(auth.uid()) THEN
+     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role' THEN
     RETURN NEW;
   END IF;
 
+  _is_staff := coalesce(public.is_forum_staff(auth.uid()), false);
+  _is_admin := coalesce(public.has_role(auth.uid(), 'admin'::public.app_role), false);
+
+  IF (TG_OP = 'INSERT' OR NEW.content IS DISTINCT FROM OLD.content OR NEW.title IS DISTINCT FROM OLD.title)
+     AND (char_length(coalesce(NEW.content, '')) > 20000 OR char_length(coalesce(NEW.title, '')) > 300) THEN
+    RAISE EXCEPTION 'That post is too long. Please shorten it and try again.'
+      USING ERRCODE = '22001';
+  END IF;
+
   IF TG_OP = 'INSERT' THEN
-    NEW.is_pinned := false;
+    NEW.created_at := now();
+    IF NOT _is_staff THEN
+      NEW.is_pinned := false;
+    END IF;
     IF NEW.parent_post_id IS NULL THEN
-      IF NEW.topic_id NOT IN ('this-weeks-meeting', 'ask-community', 'introductions') THEN
+      IF NOT _is_staff
+         AND NEW.topic_id NOT IN ('this-weeks-meeting', 'ask-community', 'introductions') THEN
         RAISE EXCEPTION 'New conversations can only be started in an active forum space'
           USING ERRCODE = '42501';
       END IF;
     ELSE
-      SELECT p.topic_id INTO _parent_topic
+      SELECT p.topic_id, p.parent_post_id INTO _parent_topic, _parent_parent
       FROM public.forum_posts p
       WHERE p.id = NEW.parent_post_id;
       IF _parent_topic IS NULL THEN
         RAISE EXCEPTION 'The conversation you are replying to no longer exists'
           USING ERRCODE = '23503';
+      END IF;
+      IF _parent_parent IS NOT NULL THEN
+        NEW.parent_post_id := _parent_parent;
       END IF;
       NEW.topic_id := _parent_topic;
     END IF;
@@ -725,10 +795,18 @@ BEGIN
   END IF;
 
   -- UPDATE
-  IF NEW.is_pinned IS DISTINCT FROM OLD.is_pinned
-     OR NEW.user_id IS DISTINCT FROM OLD.user_id
-     OR NEW.topic_id IS DISTINCT FROM OLD.topic_id
-     OR NEW.parent_post_id IS DISTINCT FROM OLD.parent_post_id THEN
+  NEW.created_at := OLD.created_at;
+  IF NOT _is_admin
+     AND (NEW.user_id IS DISTINCT FROM OLD.user_id
+          OR (OLD.user_id IS DISTINCT FROM auth.uid()
+              AND NEW.is_anonymous IS DISTINCT FROM OLD.is_anonymous)) THEN
+    RAISE EXCEPTION 'Only an admin can change who a post belongs to or whether it is anonymous'
+      USING ERRCODE = '42501';
+  END IF;
+  IF NOT _is_staff
+     AND (NEW.is_pinned IS DISTINCT FROM OLD.is_pinned
+          OR NEW.topic_id IS DISTINCT FROM OLD.topic_id
+          OR NEW.parent_post_id IS DISTINCT FROM OLD.parent_post_id) THEN
     RAISE EXCEPTION 'Only moderators can pin or move forum posts'
       USING ERRCODE = '42501';
   END IF;
@@ -741,13 +819,36 @@ CREATE TRIGGER guard_forum_post_write_trg
 BEFORE INSERT OR UPDATE ON public.forum_posts
 FOR EACH ROW EXECUTE FUNCTION public.guard_forum_post_write();
 
+-- When a post is switched to anonymous, its @mentions go: a mention row
+-- tells the mentioned member which post mentioned her, and so who wrote it.
+CREATE OR REPLACE FUNCTION public.forum_post_went_anonymous()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  IF NEW.is_anonymous AND NOT coalesce(OLD.is_anonymous, false) THEN
+    DELETE FROM public.forum_mentions WHERE post_id = NEW.id;
+  END IF;
+  RETURN NULL;
+END;
+$$;
+REVOKE ALL ON FUNCTION public.forum_post_went_anonymous() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS forum_post_went_anonymous_trg ON public.forum_posts;
+CREATE TRIGGER forum_post_went_anonymous_trg
+AFTER UPDATE OF is_anonymous ON public.forum_posts
+FOR EACH ROW EXECUTE FUNCTION public.forum_post_went_anonymous();
+
 
 -- ---------------------------------------------------------------------
 -- 4. forum_posts_secure: the ONLY way members read posts.
 --    Runs with the view owner's rights (security_invoker = false), so it
 --    enforces access itself: members (is_active_family_member) and staff.
 --    Masks user_id on anonymous posts unless the viewer is the author or
---    staff. Adds is_mine and author_is_staff (false for anonymous posts).
+--    an admin (moderators moderate without seeing who wrote an anonymous
+--    post). Adds is_mine and author_is_staff (false for anonymous posts).
 --    Same leading columns, in the same order, as the old view.
 -- ---------------------------------------------------------------------
 DROP VIEW IF EXISTS public.forum_posts_secure;
@@ -768,7 +869,7 @@ SELECT
   CASE
     WHEN fp.is_anonymous = false THEN fp.user_id
     WHEN fp.user_id = auth.uid() THEN fp.user_id
-    WHEN (SELECT public.is_forum_staff(auth.uid())) THEN fp.user_id
+    WHEN (SELECT public.has_role(auth.uid(), 'admin'::public.app_role)) THEN fp.user_id
     ELSE NULL
   END AS user_id,
   (auth.uid() IS NOT NULL AND fp.user_id = auth.uid()) AS is_mine,
@@ -794,7 +895,7 @@ GRANT SELECT ON public.forum_posts_secure TO authenticated;
 GRANT SELECT ON public.forum_posts_secure TO service_role;
 
 COMMENT ON VIEW public.forum_posts_secure IS
-  'Members read forum posts ONLY through this view. Owner-rights view (security_invoker=false) that limits rows to active family members and staff, masks user_id on anonymous posts (except for the author and staff), and adds is_mine / author_is_staff. authenticated has no SELECT on forum_posts.user_id.';
+  'Members read forum posts ONLY through this view. Owner-rights view (security_invoker=false) that limits rows to active family members and staff, masks user_id on anonymous posts (except for the author and admins), and adds is_mine / author_is_staff. authenticated has no SELECT on forum_posts.user_id.';
 
 
 -- ---------------------------------------------------------------------
@@ -907,6 +1008,11 @@ WITH CHECK (
 --     are returned to ADMINS only (null for members and moderators). No
 --     admin screen uses this RPC (admins read profiles directly).
 -- ---------------------------------------------------------------------
+-- Members never read another member's profile row (it holds first and last
+-- name): the forum gets usernames through the functions below. Own-profile,
+-- admin and moderator policies stay.
+DROP POLICY IF EXISTS "Active members can view profiles" ON public.profiles;
+
 CREATE OR REPLACE FUNCTION public.get_public_profiles(_user_ids uuid[])
 RETURNS TABLE(
   id uuid,
@@ -995,10 +1101,11 @@ REVOKE ALL ON FUNCTION public.find_forum_members_by_username(text[]) FROM PUBLIC
 GRANT EXECUTE ON FUNCTION public.find_forum_members_by_username(text[]) TO authenticated;
 ```
 
-### 4. Scheduled jobs (run as SQL, not a migration)
+### 5. Scheduled jobs (run as SQL, not a migration)
 
-The cron secret is read from `site_settings` each time a job runs; it is not
-pasted into the job.
+The first statement records when forum emails start, so nothing posted before
+now is ever emailed. The cron secret is read from `site_settings` each time a
+job runs; it is not pasted into the job.
 
 ```sql
 -- ---------------------------------------------------------------------
@@ -1006,6 +1113,12 @@ pasted into the job.
 --    so re-running does not duplicate. The cron secret is read from
 --    site_settings when each job runs (never pasted into the job).
 -- ---------------------------------------------------------------------
+
+-- Forum emails start from now: nothing posted before this moment is ever
+-- emailed (the function does nothing until this is set). Kept if already set.
+INSERT INTO public.site_settings (key, value)
+VALUES ('forum_notifications_start_at', to_char(now() AT TIME ZONE 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
+ON CONFLICT (key) DO NOTHING;
 
 -- Forum notifications: every 15 minutes.
 SELECT cron.schedule(
@@ -1023,11 +1136,12 @@ SELECT cron.schedule(
   $cmd$
 );
 
--- Weekly member note: Tuesday 4 PM Pacific. Two UTC hours cover DST
--- (23:xx UTC Tuesday = 4 PM PDT; 00:xx UTC Wednesday = 4 PM PST); the
--- function only sends on Tuesday in the 4 PM Pacific hour, so one of the two
--- is always a no-op. Every 10 minutes inside that hour so a long member list
--- finishes over several runs (the ledger stops repeats).
+-- Weekly member note: Tuesday from 4 PM Pacific. The function only sends on
+-- Tuesday between 4 and 7 PM Pacific; these UTC hours cover that window in
+-- both seasons (PDT: 23:xx Tue to 01:xx Wed; PST: 00:xx to 02:xx Wed), and
+-- the runs outside it are no-ops. Every 10 minutes so a long member list, or
+-- a bad half hour at the email provider, is caught up the same evening (the
+-- ledger stops repeats).
 SELECT cron.schedule(
   'send-member-weekly-note-a',
   '*/10 23 * * 2',
@@ -1045,7 +1159,7 @@ SELECT cron.schedule(
 
 SELECT cron.schedule(
   'send-member-weekly-note-b',
-  '*/10 0 * * 3',
+  '*/10 0-2 * * 3',
   $cmd$
   select net.http_post(
     url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/send-member-weekly-note',
@@ -1059,21 +1173,10 @@ SELECT cron.schedule(
 );
 ```
 
-### 5. Deploy these edge functions from the synced code
-
-- `send-forum-notifications` (new)
-- `send-member-weekly-note` (new)
-- `send-welcome-email` (changed)
-- `send-member-zoom-reminder` (one link changed)
-- `zoom-webhook` (after-meeting thread only)
-
-Please do not change or redeploy any other function, and do not touch the
-Monday registration functions.
-
 ### 6. Regenerate `src/integrations/supabase/types.ts`
 
 So the new tables, view and functions appear in it. Then tell me, and I will
-press Publish. The forum needs the new site and step 3 together, so please
+press Publish. The forum needs the new site and step 4 together, so please
 don't leave a gap between them.
 
 ### 7. Checks after (read-only): please paste the results
@@ -1095,11 +1198,20 @@ select column_name from information_schema.column_privileges
 where table_schema = 'public' and table_name = 'forum_posts' and grantee = 'authenticated' and privilege_type = 'SELECT'
 order by 1;
 
+-- 7c2. Members can no longer read other members' profile rows (expect 0 rows).
+select policyname from pg_policies
+where schemaname = 'public' and tablename = 'profiles' and policyname = 'Active members can view profiles';
+
+-- 7c3. Workbook answers are private: no admin read policy (expect 0 rows).
+select policyname from pg_policies
+where schemaname = 'public' and tablename = 'workbook_entries' and policyname ilike 'Admins%';
+
 -- 7d. Welcome trigger fires on insert or update; today's members are marked welcomed.
 select tgname, pg_get_triggerdef(oid) from pg_trigger where tgname = 'on_new_family_membership';
 select count(*) as already_welcomed from public.member_email_log where kind = 'welcome';
 
--- 7e. The three new jobs are active and send the cron secret (expect 3 rows, both true).
+-- 7e. Forum emails have a start time; the three new jobs are active and send the cron secret (expect 1 row, then 3 rows, both true).
+select key, value from public.site_settings where key = 'forum_notifications_start_at';
 select jobname, schedule, active, command ~* 'cron_secret' as sends_cron_secret
 from cron.job
 where jobname in ('send-forum-notifications-15min', 'send-member-weekly-note-a', 'send-member-weekly-note-b')
@@ -1122,11 +1234,12 @@ from net._http_response r order by r.id desc limit 5;
    at the bottom, reload: still there.
 5. `/family-forum`: post in Ask the Community, reply, post once anonymously and
    check from a second member account that it shows "Anonymous member".
+   (Only admins can see who wrote an anonymous post; moderators cannot.)
 6. Account settings: the email switches save.
 
 ## Undo
 
 - Emails: `select cron.unschedule('send-forum-notifications-15min');` and the
   same for `send-member-weekly-note-a` and `-b`.
-- The rest is additive. The forum change (step 3) and the new site depend on
+- The rest is additive. The forum change (step 4) and the new site depend on
   each other, so roll those back together (revert the merge, then Publish).

@@ -283,11 +283,17 @@ function YourPathCard() {
             </div>
 
             {nextStep ? (
-              <Button asChild size="lg" className="w-full sm:w-auto gap-2">
+              <Button
+                asChild
+                size="lg"
+                className="h-auto min-h-11 w-full gap-2 whitespace-normal px-4 py-2.5 text-left sm:w-auto sm:px-8"
+              >
                 <Link to={nextStep.path}>
-                  {nextStep.started ? "Continue: " : "Next: "}
-                  {nextStep.title}
-                  <ArrowRight className="h-4 w-4" />
+                  <span>
+                    {nextStep.started ? "Continue: " : "Next: "}
+                    {nextStep.title}
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Link>
               </Button>
             ) : (
@@ -342,13 +348,14 @@ function ContinueCard({ userId }: { userId: string | null }) {
   const { nextStep } = useLearningPath();
   const [worksheets, setWorksheets] = useState<WorksheetRow[]>([]);
   const [workbook, setWorkbook] = useState<WorkbookRow[]>([]);
+  const [bookmarks, setBookmarks] = useState<{ resource_path: string; created_at: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) return;
     let cancelled = false;
     (async () => {
-      const [ws, wb] = await Promise.all([
+      const [ws, wb, bm] = await Promise.all([
         supabase
           .from("worksheet_responses")
           .select("worksheet_key, updated_at")
@@ -360,10 +367,17 @@ function ContinueCard({ userId }: { userId: string | null }) {
           .eq("user_id", userId)
           .order("completed_at", { ascending: false })
           .limit(200),
+        supabase
+          .from("education_bookmarks")
+          .select("resource_path, created_at")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false })
+          .limit(20),
       ]);
       if (cancelled) return;
       setWorksheets(!ws.error && ws.data ? (ws.data as WorksheetRow[]) : []);
       setWorkbook(!wb.error && wb.data ? (wb.data as WorkbookRow[]) : []);
+      setBookmarks(!bm.error && bm.data ? bm.data : []);
       setLoading(false);
     })();
     return () => {
@@ -387,6 +401,23 @@ function ContinueCard({ userId }: { userId: string | null }) {
         icon: BookOpen,
       });
     }
+  }
+
+  // Guides she saved for later (the "Save" button on a guide), until she finishes them.
+  let savedShown = 0;
+  for (const row of bookmarks) {
+    const lib = findLibraryItem(row.resource_path);
+    if (!lib || isCompleted(lib.path) || lib.path === nextStep?.path) continue;
+    if (items.some((item) => item.to === lib.path)) continue;
+    if (++savedShown > 3) break;
+    items.push({
+      key: `bookmark-${lib.path}`,
+      to: lib.path,
+      title: lib.title,
+      detail: `Saved for later ${relativeDate(row.created_at)}`,
+      badge: "Saved",
+      icon: BookOpen,
+    });
   }
 
   // Saved plans, check-ins and guide notes (most recent first; a few notes at most).

@@ -404,12 +404,12 @@ const TraumaVsExcuses = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#boundary-worksheet" className="text-primary hover:underline">
+                <Link to="/family-education#worksheet-boundary" className="text-primary hover:underline">
                   Boundary Setting Worksheet
                 </Link>
               </li>
               <li>
-                <Link to="/family-education#guilt-responsibility" className="text-primary hover:underline">
+                <Link to="/family-education#worksheet-guilt-responsibility" className="text-primary hover:underline">
                   Guilt vs. Responsibility Module
                 </Link>
               </li>

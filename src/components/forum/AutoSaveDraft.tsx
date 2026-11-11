@@ -36,6 +36,8 @@ export function useAutoSaveDraft({
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const draftIdRef = useRef<string | null>(null);
   const loadedRef = useRef(false);
+  // Which conversation the draft has already been loaded for.
+  const loadedScopeRef = useRef<string | null>(null);
   const lastSavedSnapshot = useRef<string>("");
   const onDraftLoadedRef = useRef(onDraftLoaded);
   onDraftLoadedRef.current = onDraftLoaded;
@@ -49,9 +51,13 @@ export function useAutoSaveDraft({
     return parentPostId ? q.eq("parent_post_id", parentPostId) : q.is("parent_post_id", null);
   }, [userId, topicId, parentPostId]);
 
-  // Load an existing draft once when the form opens.
+  // Load an existing draft ONCE when the form opens. Not again after a failed
+  // or rejected submit: reloading then would put back an older saved state
+  // (including "post anonymously" switched off) over what she has on screen.
   useEffect(() => {
     if (!enabled || !userId || !topicId) return;
+    const scope = `${userId}|${topicId}|${parentPostId ?? ""}`;
+    if (loadedScopeRef.current === scope) return;
     loadedRef.current = false;
     draftIdRef.current = null;
     let cancelled = false;
@@ -71,13 +77,16 @@ export function useAutoSaveDraft({
       } catch (err) {
         console.error("Error loading draft:", err);
       } finally {
-        if (!cancelled) loadedRef.current = true;
+        if (!cancelled) {
+          loadedRef.current = true;
+          loadedScopeRef.current = scope;
+        }
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [enabled, userId, topicId, scopeQuery]);
+  }, [enabled, userId, topicId, parentPostId, scopeQuery]);
 
   const saveDraft = useCallback(async () => {
     if (!loadedRef.current) return;

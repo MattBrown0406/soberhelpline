@@ -153,11 +153,11 @@ const SiteLayout = ({ children }: LayoutProps) => {
               {isMember && pathname !== "/member-home" && (
                 <Link
                   to="/member-home"
-                  className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 px-2 sm:px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/15 transition-colors shrink-0"
                   aria-label="Go to My Family Hub"
                 >
-                  <Heart className="h-4 w-4" />
-                  <span>My Family Hub</span>
+                  <Heart className="h-4 w-4" aria-hidden="true" />
+                  <span className="hidden sm:inline">My Family Hub</span>
                 </Link>
               )}
               {/* Phone number */}

@@ -75,9 +75,11 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
         .eq("resource_path", item.path);
       if (!error) setSaved(false);
     } else {
+      // Already saved (a second tap before the saved state loaded) is not an
+      // error, and must not need permission to update the existing row.
       const { error } = await supabase.from("education_bookmarks").upsert(
         { user_id: userId, resource_path: item.path, resource_name: item.title, resource_type: item.type },
-        { onConflict: "user_id,resource_path" },
+        { onConflict: "user_id,resource_path", ignoreDuplicates: true },
       );
       if (!error) setSaved(true);
       else toast({ title: "That didn't save", description: "Please try again in a moment.", variant: "destructive" });
@@ -101,7 +103,7 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
           onClick={toggleComplete}
           disabled={busy === "complete"}
           aria-pressed={completed}
-          className="gap-1.5 shrink-0"
+          className="min-h-11 gap-1.5 shrink-0"
         >
           {completed ? (
             <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -150,7 +152,7 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
             variant="ghost"
             onClick={onDismiss}
             aria-label="Hide this bar"
-            className="h-8 w-8 shrink-0 text-muted-foreground"
+            className="h-11 w-11 shrink-0 text-muted-foreground"
           >
             <X className="h-4 w-4" />
           </Button>

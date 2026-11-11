@@ -58,10 +58,9 @@ CREATE POLICY "Members delete own workbook entries"
   USING (auth.uid() = user_id);
 
 -- Admins: read everything (engagement reporting).
+-- No admin read policy: what a member writes in an exercise is private to
+-- her. (The engagement report counts entries through its own functions.)
 DROP POLICY IF EXISTS "Admins read all workbook entries" ON public.workbook_entries;
-CREATE POLICY "Admins read all workbook entries"
-  ON public.workbook_entries FOR SELECT TO authenticated
-  USING (public.has_role(auth.uid(), 'admin'::public.app_role));
 
 REVOKE ALL ON public.workbook_entries FROM anon;
 GRANT SELECT, INSERT, DELETE ON public.workbook_entries TO authenticated;

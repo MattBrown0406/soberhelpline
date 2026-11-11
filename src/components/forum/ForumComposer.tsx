@@ -37,8 +37,8 @@ function AnonymousToggle({
           Post anonymously
         </span>
         <span className="block text-xs text-muted-foreground mt-0.5">
-          Other members will see "Anonymous member" instead of your username. Moderators can still see who wrote it, to keep
-          the forum safe.
+          Other members will see "Anonymous member" instead of your username. Only the site's administrators can see who
+          wrote it, to keep the forum safe.
         </span>
       </Label>
     </div>
@@ -81,7 +81,9 @@ export function ForumComposer({
   const onDraftLoaded = useCallback((draftTitle: string, draftContent: string, draftAnonymous: boolean) => {
     setTitle((current) => (current.trim() ? current : draftTitle));
     setContent((current) => (current.trim() ? current : draftContent));
-    setIsAnonymous(draftAnonymous);
+    // Never switch "post anonymously" OFF behind her back: if she has already
+    // turned it on, it stays on whatever the saved draft says.
+    setIsAnonymous((current) => current || draftAnonymous);
   }, []);
 
   const draft = useAutoSaveDraft({
@@ -246,7 +248,9 @@ export function ReplyComposer({ userId, topicId, parentPostId, onPosted, onCance
 
   const onDraftLoaded = useCallback((_t: string, draftContent: string, draftAnonymous: boolean) => {
     setContent((current) => (current.trim() ? current : draftContent));
-    setIsAnonymous(draftAnonymous);
+    // Never switch "post anonymously" OFF behind her back: if she has already
+    // turned it on, it stays on whatever the saved draft says.
+    setIsAnonymous((current) => current || draftAnonymous);
   }, []);
 
   const draft = useAutoSaveDraft({

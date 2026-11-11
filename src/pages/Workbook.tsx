@@ -102,7 +102,7 @@ export default function Workbook() {
                 A good place to start is “{first.title}.” It takes about {first.minutes} minutes, and you'll leave with a
                 boundary in your own words and a calm line for when they push back. You can stop anytime.
               </p>
-              <Button asChild size="lg" className="mt-4 h-12">
+              <Button asChild size="lg" className="mt-4 h-auto min-h-12 whitespace-normal py-2.5 text-left">
                 <Link to={exercisePath(first.id)}>Start “{first.title}”</Link>
               </Button>
             </section>

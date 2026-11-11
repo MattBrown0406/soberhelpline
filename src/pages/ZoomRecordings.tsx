@@ -153,73 +153,11 @@ export default function ZoomRecordings() {
     fetchRecordings();
   }, [hasMembership]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  // No membership wall here: this page only renders inside SubscriberRoute,
+  // which has already let the visitor in (a member, or staff). A second check
+  // here used to flash a "Members Only" card at members while it loaded, and
+  // lock out admins and moderators.
 
-  if (!hasMembership) {
-    return (
-      <>
-        <SEOHead
-          title="Past Meeting Recordings | Sober Helpline"
-          description='Watch past "The Family Squares" Zoom recordings. Members-only access to our archive of family support sessions.'
-        />
-        <div className="min-h-screen bg-background">
-          <div className="container mx-auto px-4 py-12 max-w-2xl">
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Lock className="w-8 h-8 text-primary" />
-              </div>
-              <h1 className="text-3xl font-bold text-foreground mb-3">Members-Only Content</h1>
-              <p className="text-muted-foreground text-lg">
-                Past meeting recordings are available exclusively to Family Support members.
-              </p>
-            </div>
-            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background mb-6">
-              <CardHeader className="text-center">
-                <CardTitle className="text-xl">What You Get as a Member</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3">
-                  {[
-                    { icon: Video, text: 'Full archive of past "The Family Squares" recordings with show notes & timestamps' },
-                    { icon: BookOpen, text: "50+ educational guides across 6 pillars" },
-                    { icon: MessageCircle, text: "Private family support forum" },
-                    { icon: Shield, text: "AI-powered coaching tools" },
-                    { icon: Users, text: "Community of families who understand" },
-                  ].map(({ icon: Icon, text }, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-4 h-4 text-primary" />
-                      </div>
-                      <span className="text-sm text-foreground">{text}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <div className="flex flex-col gap-2">
-              <Link to="/family-membership">
-                <Button className="w-full" size="lg">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Become a Member — Starting at $9.99/mo
-                </Button>
-              </Link>
-              {!user && (
-                <Link to="/auth?redirect=/zoom-recordings">
-                  <Button variant="outline" className="w-full">Already a member? Sign in</Button>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
 
   // Collect all unique tags across loaded recordings
   const allTags = Array.from(new Set(recordings.flatMap(r => r.tags || []))).sort();

@@ -145,6 +145,7 @@ serve(async (req) => {
         .from('forum_posts')
         .update({ is_pinned: false })
         .eq('topic_id', 'this-weeks-meeting')
+        .eq('user_id', botUserId) // only this function's own threads, never one the host pinned
         .eq('is_pinned', true)
         .lt('created_at', sevenDaysAgo.toISOString());
 
@@ -163,6 +164,7 @@ serve(async (req) => {
         .from('forum_posts')
         .select('id')
         .eq('topic_id', 'this-weeks-meeting')
+        .eq('user_id', botUserId)
         .eq('is_pinned', true)
         .gte('created_at', `${dateKey}T00:00:00.000Z`)
         .limit(1);
