@@ -155,7 +155,10 @@ CREATE TRIGGER on_new_family_membership
   EXECUTE FUNCTION public.trigger_welcome_email();
 
 -- ---------------------------------------------------------------------
--- 4. Scheduled jobs. cron.schedule with an existing name replaces that job,
+-- 4. Scheduled jobs. NOTE (2026-11-11): Lovable creates these with its managed
+--    HTTP scheduling controls instead (see docs/lovable-apply-prompt-member-scheduling.md).
+--    The SQL below documents the schedules; it was not run on the live project.
+--    Scheduled jobs. cron.schedule with an existing name replaces that job,
 --    so re-running does not duplicate. The cron secret is read from
 --    site_settings when each job runs (never pasted into the job).
 -- ---------------------------------------------------------------------

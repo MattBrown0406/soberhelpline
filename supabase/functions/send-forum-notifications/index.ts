@@ -2,6 +2,7 @@ import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { requireAutomationAuthNow } from "../_shared/automationAuth.ts";
+import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 import {
   buildEmails,
   collectNotices,
@@ -185,8 +186,14 @@ serve(async (req: Request) => {
       body = (await req.json()) ?? {};
     } catch { /* no body */ }
 
-    const denied = await requireAutomationAuthNow(req, admin, body, "send-forum-notifications", corsHeaders);
-    if (denied) return denied;
+    // Two ways in: Lovable's managed scheduler (it signs each call with the
+    // platform's own cron secret, checked by the generated helper), or the
+    // site's own automation credentials (cron secret, service key, an admin).
+    const fromManagedScheduler = authenticateCronRequest(req) === null;
+    if (!fromManagedScheduler) {
+      const denied = await requireAutomationAuthNow(req, admin, body, "send-forum-notifications", corsHeaders);
+      if (denied) return denied;
+    }
 
     const dryRun = body?.dry_run === true;
 
