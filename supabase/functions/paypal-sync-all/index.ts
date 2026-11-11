@@ -1,9 +1,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Real PayPal billing agreements are "I-XXXXXXXXXXXX". Free and promo
+// memberships store a made-up id (FREE-…, FAMILY6-…, FREELIST-…); PayPal has
+// never heard of those, so a lookup returns 404 and must not expire them.
+const isPayPalSubscriptionId = (id: string) => /^I-[A-Z0-9]{6,}$/i.test(id.trim());
 
 const PAYPAL_API_BASE = Deno.env.get('PAYPAL_MODE') === 'sandbox'
   ? 'https://api-m.sandbox.paypal.com'
@@ -42,25 +48,31 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // This function can be called by cron (service role via anon key) or by admin
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
     );
 
+    // Scheduled job (cron secret), the service key or a signed-in admin.
+    const body = req.method === 'POST' ? await req.json().catch(() => null) : null;
+    const denied = await requireAutomationAuth(req, supabaseAdmin, body, 'paypal-sync-all', corsHeaders);
+    if (denied) return denied;
+
     // Fetch all active paid subscriptions with a PayPal subscription ID
-    const { data: subscriptions, error: fetchError } = await supabaseAdmin
+    const { data: candidates, error: fetchError } = await supabaseAdmin
       .from('provider_subscriptions')
       .select('id, paypal_subscription_id, status, next_billing_date')
       .in('status', ['active', 'pending'])
-      .not('paypal_subscription_id', 'is', null)
-      .not('paypal_subscription_id', 'like', 'FREE-%');
+      .not('paypal_subscription_id', 'is', null);
 
     if (fetchError) throw fetchError;
 
-    if (!subscriptions || subscriptions.length === 0) {
+    const subscriptions = (candidates ?? []).filter((s) => isPayPalSubscriptionId(String(s.paypal_subscription_id)));
+    const skippedNonPayPal = (candidates?.length ?? 0) - subscriptions.length;
+
+    if (subscriptions.length === 0) {
       return new Response(
-        JSON.stringify({ message: 'No paid subscriptions to sync', synced: 0 }),
+        JSON.stringify({ message: 'No paid subscriptions to sync', synced: 0, skippedNonPayPal }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       );
     }
@@ -144,7 +156,7 @@ Deno.serve(async (req) => {
     console.log('Sync complete:', results);
 
     return new Response(
-      JSON.stringify({ success: true, total: subscriptions.length, ...results }),
+      JSON.stringify({ success: true, total: subscriptions.length, skippedNonPayPal, ...results }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (error) {

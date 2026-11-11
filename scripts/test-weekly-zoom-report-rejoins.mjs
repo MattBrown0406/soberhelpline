@@ -13,7 +13,7 @@ const report = await transformWithEsbuild(reportSource.replace(/^import .*;\n/gm
 const registration = (id, name) => ({ id, name, email: `${id}@example.invalid`, language: 'en', created_at: '', auto_register: false });
 const session = (name, minutes, registration_id = null) => ({ participant_name: name, participant_email: null, duration_minutes: minutes, registration_id });
 
-async function summarize(registrations, attendance) {
+async function loadHandler(registrations, attendance, { verified = true } = {}) {
   let handler;
   let calls = 0;
   const results = [registrations, attendance, [], []];
@@ -25,10 +25,18 @@ async function summarize(registrations, attendance) {
   } });
   vm.runInNewContext(report.code, {
     ...matcherModule.exports, createClient, URL, Response, console,
+    // Credentials are checked by the shared helper; stand it in.
+    hasAutomationAuth: async () => verified,
+    requireAutomationAuth: async () => null,
     Deno: { serve: (fn) => { handler = fn; }, env: { get: () => undefined } },
     fetch: () => { throw new Error('Network and email sending are forbidden in this test'); },
   });
   assert.equal(typeof handler, 'function');
+  return handler;
+}
+
+async function summarize(registrations, attendance) {
+  const handler = await loadHandler(registrations, attendance);
   const response = await handler({ method: 'GET', url: 'https://example.invalid/?preview=1&meeting_date=2026-11-02' });
   assert.equal(response.status, 200);
   return response.json();
@@ -52,4 +60,13 @@ const ambiguous = await summarize([sara, registration('synthetic-other', 'Sara J
 assert.equal(ambiguous.registered_and_attended.length, 1, 'Already-attended registrants must still participate in ambiguity checks');
 assert.equal(ambiguous.registered_and_attended[0].note, '(10 min)');
 assert.equal(ambiguous.attended_without_registering.length, 1, 'Ambiguous first names must not be assigned to another registrant');
-console.log('PASS weekly report: loose rejoins, exact-plus-loose rejoins, and ambiguous names; no network or emails');
+// Without credentials, an on-demand preview is refused and returns no names or emails.
+for (const query of ['preview=1', 'force=1', 'preview=1&meeting_date=2026-11-02']) {
+  const handler = await loadHandler([sara], [session('Sara', 12)], { verified: false });
+  const response = await handler({ method: 'GET', url: `https://example.invalid/?${query}` });
+  assert.equal(response.status, 401, query);
+  const text = await response.text();
+  assert.ok(!text.includes('example.invalid') && !text.includes('Sara'), `no registrant data for ${query}`);
+}
+
+console.log('PASS weekly report: loose rejoins, exact-plus-loose rejoins, ambiguous names, and unauthenticated previews refused; no network or emails');

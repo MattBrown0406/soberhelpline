@@ -2,6 +2,7 @@ import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 import { findDormantEmails, isFirstMondayOfMonth, isLikelyMistypedEmail } from "../_shared/familySquaresActivity.ts";
 
@@ -65,6 +66,13 @@ serve(async (req: Request) => {
 
     const upcomingDate = getUpcomingMonday();
     console.log(`Re-engagement for upcoming meeting: ${upcomingDate}`);
+
+    // Don't invite people to a meeting that was cancelled.
+    if (await isMeetingCancelled(adminSupabase, upcomingDate, "send-zoom-reengagement")) {
+      return new Response(JSON.stringify({ success: true, sent: 0, skipped: "meeting_cancelled", meetingDate: upcomingDate }), {
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     // Get this week's registrants (to exclude)
     const { data: thisWeek, error: e2 } = await adminSupabase

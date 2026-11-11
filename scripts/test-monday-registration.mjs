@@ -161,6 +161,13 @@ function harness() {
         if (id.endsWith('/mondayNotification.ts')) return load('supabase/functions/_shared/mondayNotification.ts').exports;
         if (id.endsWith('/mondayRegistrationHistory.ts')) return load('supabase/functions/_shared/mondayRegistrationHistory.ts').exports;
         if (id.endsWith('/mondayRegistration.ts')) return load('supabase/functions/_shared/mondayRegistration.ts').exports;
+        // Dormancy and typo filtering have their own tests (familySquaresActivity_test.ts);
+        // here every synthetic registrant is deliverable and active.
+        if (id.endsWith('/familySquaresActivity.ts')) {
+          const real = load('supabase/functions/_shared/familySquaresActivity.ts').exports;
+          return { ...real, isLikelyMistypedEmail: () => false, activeMemberEmails: async () => null, findDormantEmails: async () => new Set() };
+        }
+        if (id.endsWith('/cancelledMeetings.ts')) return load('supabase/functions/_shared/cancelledMeetings.ts').exports;
         throw new Error(`Unexpected import ${id}`);
       },
     }, { filename });
@@ -243,6 +250,13 @@ await test('overlapping auto-registration jobs and manual retry send once', asyn
   await Promise.all([post(auto, {}), post(auto, {})]); assert.equal(state.rows.length, 2); assert.equal(state.calls.length, 1);
   const manual = load('supabase/functions/public-register-monday-zoom/index.ts').handler;
   assert.equal((await post(manual, payload)).body.alreadyRegistered, true); assert.equal(state.calls.length, 1);
+});
+await test('a cancelled Monday gets no auto-registrations and no emails', async () => {
+  const { state, load, post } = harness(); state.cancelled = true;
+  state.rows.push({ ...payload, id: 'old', email: 'person@example.test', meeting_date: '2026-10-05', auto_register: true });
+  const result = await post(load('supabase/functions/auto-register-zoom/index.ts').handler, {});
+  assert.equal(result.status, 200); assert.equal(result.body.registered, 0); assert.equal(result.body.skipped, 'meeting_cancelled');
+  assert.equal(state.rows.length, 1); assert.equal(state.calls.length, 0);
 });
 await test('email sender service authorization plus atomic claim blocks all duplicate effects', async () => {
   const { state, load, post } = harness(); state.rows.push({ ...payload, id: 'reg', consent_email_list: true });

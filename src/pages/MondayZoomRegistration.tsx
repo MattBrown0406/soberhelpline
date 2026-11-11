@@ -74,6 +74,9 @@ export default function MondayZoomRegistration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
+  // The seat is saved either way; only say "check your email" when the
+  // confirmation email was actually accepted for sending.
+  const [confirmationEmailSent, setConfirmationEmailSent] = useState(true);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [meetingInfo, setMeetingInfo] = useState<{ meetingId: string; passcode: string } | null>(null);
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
@@ -296,11 +299,15 @@ export default function MondayZoomRegistration() {
         consentEmailList: formData.consentEmailList,
       });
 
+      const emailSent = registrationResult.emailSent !== false;
+      setConfirmationEmailSent(emailSent);
       setSubmitted(true);
 
       toast({
         title: "Registration Submitted!",
-        description: "You're registered! Check your email for the Zoom meeting link.",
+        description: emailSent
+          ? "You're registered! Check your email for the Zoom meeting link."
+          : "You're registered! Your seat is saved. Use the join button on this page on Monday.",
       });
     } catch (err: unknown) {
       console.error("Registration error:", err);
@@ -351,9 +358,17 @@ export default function MondayZoomRegistration() {
           </div>
         )}
 
+        {!confirmationEmailSent && !alreadyRegistered && !isMemberQuestion && (
+          <div className="mt-6 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-4 text-left" role="status">
+            <p className="text-sm text-amber-900 dark:text-amber-200">
+              <strong>Your seat is saved, but we couldn't send your confirmation email just now.</strong> You don't need it to attend: come back to this page on Monday at 7:00 PM Pacific to join. You'll also get a reminder email about an hour before the meeting.
+            </p>
+          </div>
+        )}
+
         <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-left">
           <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting, a spouse, sibling, parent, or adult child, forward the confirmation email you just received. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
+            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting, a spouse, sibling, parent, or adult child, {confirmationEmailSent ? "forward the confirmation email you just received" : "send them this page so they can register too"}. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
           </p>
         </div>
 

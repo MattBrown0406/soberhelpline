@@ -1,6 +1,7 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -102,6 +103,22 @@ Deno.serve(async (req) => {
         JSON.stringify({ skipped: true, reason: `PT hour is ${ptHour}, expected 20`, meetingDate }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // The scheduled job never sends ?force=1. A hand-run send at any hour needs
+    // real credentials even while enforcement is staged.
+    if (force && !(await hasAutomationAuth(req, supabase, body))) {
+      console.warn("automation_auth_denied send-first-timer-followup");
+      return new Response(JSON.stringify({ error: "unauthorized" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Nobody "joined us tonight" if tonight's meeting was cancelled.
+    if (await isMeetingCancelled(supabase, meetingDate, "send-first-timer-followup")) {
+      return new Response(JSON.stringify({ meetingDate, sent: 0, skipped: "meeting_cancelled" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     // All registrants for tonight

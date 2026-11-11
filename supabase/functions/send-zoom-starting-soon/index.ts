@@ -1,7 +1,8 @@
 import "../_shared/suppression.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
+import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
@@ -53,6 +54,15 @@ serve(async (req: Request) => {
     const denied = await requireAutomationAuth(req, adminSupabase, body, "send-zoom-starting-soon", corsHeaders);
     if (denied) return denied;
 
+    // The scheduled job never sends these. A hand-run send at any hour, or for a
+    // chosen date, needs real credentials even while enforcement is staged.
+    if ((body?.force === true || body?.meeting_date) && !(await hasAutomationAuth(req, adminSupabase, body))) {
+      console.warn("automation_auth_denied send-zoom-starting-soon");
+      return new Response(JSON.stringify({ error: "unauthorized" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Two cron jobs (01:00 and 02:00 UTC) cover PDT and PST. Only the run in
     // the 6 PM Pacific hour sends "starting in 1 hour"; the other is a no-op.
     // A manual run can pass { "force": true }.
@@ -66,6 +76,13 @@ serve(async (req: Request) => {
     if (!SENDGRID_API_KEY) throw new Error("SENDGRID_API_KEY not configured");
 
     const targetDate: string = body.meeting_date || pacificDateStr();
+
+    // No "starting in 1 hour" for a meeting that was cancelled.
+    if (await isMeetingCancelled(adminSupabase, targetDate, "send-zoom-starting-soon")) {
+      return new Response(JSON.stringify({ success: true, sent: 0, skipped: "meeting_cancelled", meetingDate: targetDate }), {
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     // Contract D: people the Sober Helpline app reminds by push are skipped
     // unless the caller asks to email everyone.
     const includeAppHandled = body.include_app_handled === true;

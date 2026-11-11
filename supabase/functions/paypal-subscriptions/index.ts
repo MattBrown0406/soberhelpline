@@ -502,23 +502,12 @@ Deno.serve(async (req) => {
             throw new Error('Failed to create free subscription');
           }
 
-          // Auto-approve the provider submission (only for FREELIST; ownership checked above)
-          if (providerSubmissionId && appliedDiscount === 'FREELIST') {
-            const { error: updateError } = await supabaseClient
-              .from('provider_submissions')
-              .update({ status: 'approved' })
-              .eq('id', providerSubmissionId);
-
-            if (updateError) {
-              console.error('Failed to auto-approve provider:', updateError);
-            } else {
-              console.log('Provider auto-approved with FREELIST code');
-            }
-          }
+          // FREELIST waives the listing fee only. The listing itself still goes
+          // through admin review like any other: a code is not an approval.
 
           const message = appliedDiscount === 'FAMILY6'
             ? '6-month free family membership activated'
-            : 'Free listing activated';
+            : 'Free listing fee waived. Your listing will appear once it has been reviewed.';
 
           // Send admin notification for family membership signups (no provider_submission_id)
           if (!providerSubmissionId) {
