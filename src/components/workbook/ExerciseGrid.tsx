@@ -28,7 +28,7 @@ export default function ExerciseGrid({ limit }: ExerciseGridProps) {
 
   return (
     <div
-      className="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))]"
+      className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr))] sm:gap-4"
       aria-busy={loading || undefined}
     >
       {shown.map((e) => (

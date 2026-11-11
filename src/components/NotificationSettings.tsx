@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Mail } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { untypedSupabase } from "@/integrations/supabase/untyped";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Panel } from "@/components/member/MemberUI";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
@@ -111,41 +110,36 @@ export default function NotificationSettings() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <Mail className="h-5 w-5 text-primary" aria-hidden="true" />
-          Email settings
-        </CardTitle>
-        <CardDescription>
-          Choose which emails you get from us. Emails never show what anyone wrote in a post or who wrote it,
-          just a link to the site (and, for topics you follow, the conversation's title).
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <Panel>
+      <h3 className="text-lg font-semibold leading-snug text-foreground">Email settings</h3>
+      <p className="mt-1 max-w-prose text-sm leading-relaxed text-muted-foreground">
+        Choose which emails you get from us. Emails never show what anyone wrote in a post or who wrote it,
+        just a link to the site (and, for topics you follow, the conversation's title).
+      </p>
+      <div className="mt-4 border-t border-border/70">
         {loading ? (
-          <div className="space-y-4">
+          <div className="space-y-3 pt-4">
             {OPTIONS.map((o) => (
-              <Skeleton key={o.key} className="h-12 w-full" />
+              <Skeleton key={o.key} className="h-12 w-full rounded-xl" />
             ))}
           </div>
         ) : !userId ? (
-          <p className="text-sm text-muted-foreground">Sign in to change your email settings.</p>
+          <p className="pt-4 text-sm text-muted-foreground">Sign in to change your email settings.</p>
         ) : unavailable ? (
-          <p className="text-sm text-muted-foreground">
+          <p className="pt-4 text-sm text-muted-foreground">
             Email settings aren't available right now. Please try again later.
           </p>
         ) : (
-          <ul className="divide-y divide-border">
+          <ul className="divide-y divide-border/70">
             {OPTIONS.map((o) => {
               const id = `email-pref-${o.key}`;
               return (
-                <li key={o.key} className="flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0">
+                <li key={o.key} className="flex min-h-11 items-start justify-between gap-4 py-3.5 last:pb-0">
                   <div className="min-w-0">
-                    <Label htmlFor={id} className="text-base font-medium text-foreground">
+                    <Label htmlFor={id} className="block cursor-pointer text-base font-medium leading-snug text-foreground">
                       {o.label}
                     </Label>
-                    <p id={`${id}-help`} className="mt-1 text-sm text-muted-foreground">
+                    <p id={`${id}-help`} className="mt-1 text-sm leading-snug text-muted-foreground">
                       {o.help}
                     </p>
                   </div>
@@ -162,7 +156,7 @@ export default function NotificationSettings() {
             })}
           </ul>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </Panel>
   );
 }

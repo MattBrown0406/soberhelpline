@@ -4,6 +4,7 @@ import { Video, ExternalLink, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { getMondayMeeting, formatViewerTime } from "@/data/memberLibrary";
+import { IconTile } from "@/components/member/MemberUI";
 
 /** The members' direct join link (site_settings), or null when none is set. */
 export async function fetchMemberJoinUrl(): Promise<string | null> {
@@ -54,27 +55,31 @@ const MemberZoomBanner = () => {
       : "The Family Squares, every Monday at 7:00 PM Pacific";
 
   return (
-    <div className={`border rounded-xl px-4 py-3 mb-6 ${highlight ? "bg-emerald-500/10 border-emerald-500/30" : "bg-primary/5 border-primary/20"}`}>
-      <div className="flex flex-col sm:flex-row items-center gap-3">
-        <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${highlight ? "bg-emerald-500/20" : "bg-primary/15"}`}>
-          <Video className={`w-4 h-4 ${highlight ? "text-emerald-700 dark:text-emerald-400" : "text-primary"}`} />
-        </div>
-        <div className="flex-1 text-center sm:text-left">
-          <p className="text-sm font-semibold text-foreground">{headline}</p>
-          <p className="text-xs text-muted-foreground">
+    <div
+      className={`mb-6 rounded-2xl border px-4 py-3.5 shadow-sm shadow-slate-900/[0.04] ${
+        highlight
+          ? "border-green-200 bg-green-50/70 dark:border-green-400/25 dark:bg-green-400/[0.06]"
+          : "border-border/70 bg-card"
+      }`}
+    >
+      <div className="flex flex-col items-center gap-3 sm:flex-row">
+        <IconTile icon={Video} tone={highlight ? "emerald" : "navy"} />
+        <div className="min-w-0 flex-1 text-center sm:text-left">
+          <p className="text-sm font-semibold leading-snug text-foreground">{headline}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
             {meeting.viewerInOtherZone && !meeting.isLive
               ? `That's ${formatViewerTime(meeting.start)} your time. Members join directly, no registration needed.`
               : "Members join directly, no registration needed."}
           </p>
         </div>
-        <div className="flex gap-2 flex-shrink-0">
-          <Button asChild size="sm" variant="outline" className="gap-2">
+        <div className="flex flex-shrink-0 flex-wrap justify-center gap-2">
+          <Button asChild size="sm" variant="outline" className="min-h-11 gap-2 rounded-xl">
             <Link to={ASK_MONDAY_QUESTION_HREF}>
               <MessageCircle className="w-3.5 h-3.5" />
               Ask a question
             </Link>
           </Button>
-          <Button asChild size="sm" variant={highlight ? "default" : "outline"} className="gap-2">
+          <Button asChild size="sm" variant={highlight ? "default" : "outline"} className="min-h-11 gap-2 rounded-xl">
             <Link to={joinUrl}>
               <ExternalLink className="w-3.5 h-3.5" />
               {meeting.isLive ? "Join now" : "Join meeting"}

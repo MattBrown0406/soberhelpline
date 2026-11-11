@@ -16,7 +16,7 @@ import { formatDistanceToNow } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { KindPill } from "@/components/member/MemberUI";
 import { forumDisplayName, forumPostLink } from "@/lib/forumTopics";
 import type { ForumMemberMatch } from "@/lib/publicProfiles";
 import { ForumContent } from "./RichTextEditor";
@@ -86,11 +86,30 @@ function AuthorLine({
   const username = !anonymous && post.user_id ? names.get(post.user_id) ?? null : null;
   const display = forumDisplayName(username, anonymous);
 
+  // The avatar is decoration only: the first letter of the username already
+  // shown beside it, or a neutral icon when there is no username to show
+  // ("Anonymous member" / "Member"). Nothing else about the author is used.
+  const initial = username ? Array.from(username.trim())[0]?.toUpperCase() : undefined;
+  const avatar = (
+    <span
+      aria-hidden="true"
+      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+        initial
+          ? "bg-[#16294a]/10 text-[#16294a] dark:bg-sky-400/15 dark:text-sky-200"
+          : "bg-muted text-slate-600 dark:text-slate-300"
+      }`}
+    >
+      {initial ?? <User className="h-4 w-4" />}
+    </span>
+  );
+
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
-      <User className="h-3 w-3" aria-hidden="true" />
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-muted-foreground">
       {anonymous || !post.user_id ? (
-        <span>{display}</span>
+        <span className="inline-flex min-h-11 items-center gap-2.5">
+          {avatar}
+          <span className="font-medium text-foreground">{display}</span>
+        </span>
       ) : (
         <MemberProfile
           userId={post.user_id}
@@ -98,21 +117,27 @@ function AuthorLine({
           currentUserId={viewer.userId}
           onMessage={(m) => onMessage(m)}
         >
-          <button type="button" className="font-medium text-foreground hover:underline">
-            {display}
+          <button
+            type="button"
+            className="group inline-flex min-h-11 items-center gap-2.5 rounded-lg text-left font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {avatar}
+            <span className="break-all group-hover:underline">{display}</span>
           </button>
         </MemberProfile>
       )}
       {anonymous && post.is_mine && <span className="text-xs">(you)</span>}
       {post.author_is_staff && (
-        <Badge variant="outline" className="gap-1 border-emerald-500/50 text-emerald-700 dark:text-emerald-300 px-1.5 py-0 text-xs">
-          <Shield className="h-3 w-3" />
+        <span className="inline-flex items-center gap-1 rounded-full bg-[#16294a] px-2.5 py-0.5 text-xs font-semibold text-white dark:bg-sky-300 dark:text-slate-900">
+          <Shield className="h-3 w-3" aria-hidden="true" />
           {isMeetingTopic ? "Host" : "Team"}
-        </Badge>
+        </span>
       )}
       <span aria-hidden="true">•</span>
-      <Clock className="h-3 w-3" aria-hidden="true" />
-      <span>{timeAgo(post.created_at)}</span>
+      <span className="inline-flex items-center gap-1 text-xs">
+        <Clock className="h-3 w-3" aria-hidden="true" />
+        <span>{timeAgo(post.created_at)}</span>
+      </span>
     </div>
   );
 }
@@ -144,8 +169,8 @@ function SaveToQaButton({ thread, reply }: { thread: ForumThreadData; reply: For
   };
 
   return (
-    <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-muted-foreground" onClick={save} disabled={saving || saved}>
-      <BookmarkCheck className="h-3.5 w-3.5 mr-1" />
+    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-3 text-xs text-muted-foreground" onClick={save} disabled={saving || saved}>
+      <BookmarkCheck className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
       {saved ? "Saved to Q&A" : "Save to Q&A archive"}
     </Button>
   );
@@ -191,35 +216,37 @@ export function ForumThread({
   return (
     <Card
       id={`post-${thread.id}`}
-      className={`scroll-mt-24 transition-shadow ${
+      className={`scroll-mt-24 rounded-2xl border-border/70 shadow-sm shadow-slate-900/[0.04] transition-shadow motion-reduce:transition-none ${
         highlighted ? "ring-2 ring-primary ring-offset-2 ring-offset-background shadow-lg" : ""
       }`}
     >
-      <CardContent className="p-4 md:p-6">
+      <CardContent className="p-4 sm:p-6">
         <div className="space-y-3">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0 space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                {thread.is_pinned && (
-                  <Badge variant="secondary" className="gap-1 text-xs">
-                    <Pin className="h-3 w-3" />
-                    Pinned
-                  </Badge>
-                )}
-                {answered && (
-                  <Badge className="gap-1 text-xs bg-emerald-600 hover:bg-emerald-600 text-white dark:bg-emerald-500">
-                    <CheckCircle2 className="h-3 w-3" />
-                    Answered
-                  </Badge>
-                )}
-              </div>
-              {thread.title && <h3 className="font-semibold text-lg text-logo-blue break-words">{thread.title}</h3>}
+              {(thread.is_pinned || answered) && (
+                <div className="flex flex-wrap items-center gap-2">
+                  {thread.is_pinned && (
+                    <KindPill tone="amber" className="gap-1">
+                      <Pin className="h-3 w-3" aria-hidden="true" />
+                      Pinned
+                    </KindPill>
+                  )}
+                  {answered && (
+                    <KindPill tone="emerald" className="gap-1">
+                      <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
+                      Answered
+                    </KindPill>
+                  )}
+                </div>
+              )}
+              {thread.title && <h3 className="break-words text-lg font-semibold leading-snug text-foreground">{thread.title}</h3>}
               <AuthorLine post={thread} names={names} viewer={viewer} isMeetingTopic={isMeetingTopic} onMessage={onMessage} />
             </div>
             <div className="flex items-center shrink-0">
               {viewer.canModerate && thread.user_id && !thread.is_mine && (
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-muted-foreground" onClick={() => moderate(thread)} title="Moderator action" aria-label="Moderator action">
-                  <ShieldAlert className="h-4 w-4" />
+                <Button variant="ghost" size="sm" className="h-11 w-11 rounded-xl p-0 text-muted-foreground" onClick={() => moderate(thread)} title="Moderator action" aria-label="Moderator action">
+                  <ShieldAlert className="h-4 w-4" aria-hidden="true" />
                 </Button>
               )}
               {canDelete(thread) && (
@@ -227,35 +254,41 @@ export function ForumThread({
                   variant="ghost"
                   size="sm"
                   onClick={() => onDelete(thread, replies.length)}
-                  className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive"
+                  className="h-11 w-11 rounded-xl p-0 text-muted-foreground hover:text-destructive"
                   aria-label="Delete post"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4" aria-hidden="true" />
                 </Button>
               )}
             </div>
           </div>
 
-          <ForumContent content={thread.content} className="text-foreground" />
+          <ForumContent content={thread.content} className="max-w-prose text-base leading-relaxed text-foreground" />
 
           <PollDisplay postId={thread.id} userId={viewer.userId} />
 
-          <div className="flex items-center gap-2 pt-2 flex-wrap">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border/60 pt-2">
             <PostReactions postId={thread.id} userId={viewer.userId} />
-            <div className="flex items-center gap-1 ml-auto">
+            <div className="ml-auto flex items-center gap-1">
               {canReply && (
-                <Button variant="ghost" size="sm" onClick={() => setReplying((v) => !v)} className="text-muted-foreground">
-                  <MessageCircle className="h-4 w-4 mr-1" />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setReplying((v) => !v)}
+                  aria-expanded={replying}
+                  className="min-h-11 rounded-xl px-3 text-muted-foreground"
+                >
+                  <MessageCircle className="h-4 w-4 mr-1" aria-hidden="true" />
                   Reply
                   {replies.length > 0 && (
-                    <Badge variant="secondary" className="ml-2">
+                    <span className="ml-1 inline-flex min-w-[1.5rem] items-center justify-center rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
                       {replies.length}
-                    </Badge>
+                    </span>
                   )}
                 </Button>
               )}
-              <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => copyLink(topicId, thread.id)} aria-label="Copy link to this conversation">
-                <Link2 className="h-4 w-4 sm:mr-1" />
+              <Button variant="ghost" size="sm" className="min-h-11 min-w-11 rounded-xl px-3 text-muted-foreground" onClick={() => copyLink(topicId, thread.id)} aria-label="Copy link to this conversation">
+                <Link2 className="h-4 w-4 sm:mr-1" aria-hidden="true" />
                 <span className="hidden sm:inline">Copy link</span>
               </Button>
               <PostBookmark postId={thread.id} userId={viewer.userId} />
@@ -277,9 +310,9 @@ export function ForumThread({
           )}
 
           {replies.length > 0 && (
-            <div className="mt-4 space-y-3 pl-3 sm:pl-4 border-l-2 border-border">
+            <div className="mt-4 space-y-3 border-l-2 border-[#16294a]/15 pl-3 dark:border-sky-400/20 sm:pl-4">
               {hiddenCount > 0 && (
-                <Button variant="link" size="sm" className="px-0 h-auto" onClick={() => setExpanded(true)}>
+                <Button variant="link" size="sm" className="h-auto min-h-11 px-0 font-semibold" onClick={() => setExpanded(true)}>
                   Show {hiddenCount} earlier {hiddenCount === 1 ? "reply" : "replies"}
                 </Button>
               )}
@@ -287,16 +320,18 @@ export function ForumThread({
                 <div
                   key={reply.id}
                   id={`post-${reply.id}`}
-                  className={`rounded-lg p-3 ${
-                    reply.author_is_staff ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-muted/50"
+                  className={`scroll-mt-24 rounded-xl border px-3 pb-1 pt-1.5 sm:px-4 ${
+                    reply.author_is_staff
+                      ? "border-[#16294a]/15 bg-[#16294a]/[0.05] dark:border-sky-400/20 dark:bg-sky-400/[0.08]"
+                      : "border-transparent bg-muted/50"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                  <div className="flex items-start justify-between gap-2">
                     <AuthorLine post={reply} names={names} viewer={viewer} isMeetingTopic={isMeetingTopic} onMessage={onMessage} />
                     <div className="flex items-center shrink-0">
                       {viewer.canModerate && reply.user_id && !reply.is_mine && (
-                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-muted-foreground" onClick={() => moderate(reply)} aria-label="Moderator action">
-                          <ShieldAlert className="h-3 w-3" />
+                        <Button variant="ghost" size="sm" className="h-11 w-11 rounded-xl p-0 text-muted-foreground" onClick={() => moderate(reply)} aria-label="Moderator action">
+                          <ShieldAlert className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       )}
                       {canDelete(reply) && (
@@ -304,18 +339,18 @@ export function ForumThread({
                           variant="ghost"
                           size="sm"
                           onClick={() => onDelete(reply, 0)}
-                          className="h-6 w-6 p-0 text-muted-foreground hover:text-destructive"
+                          className="h-11 w-11 rounded-xl p-0 text-muted-foreground hover:text-destructive"
                           aria-label="Delete reply"
                         >
-                          <Trash2 className="h-3 w-3" />
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       )}
                     </div>
                   </div>
-                  <ForumContent content={reply.content} className="text-foreground text-sm" />
-                  <div className="flex flex-wrap items-center gap-1 mt-2">
-                    <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-muted-foreground" onClick={() => copyLink(topicId, reply.id)}>
-                      <Link2 className="h-3.5 w-3.5 mr-1" />
+                  <ForumContent content={reply.content} className="max-w-prose text-[0.9375rem] leading-relaxed text-foreground" />
+                  <div className="-ml-2 mt-1 flex flex-wrap items-center gap-1">
+                    <Button variant="ghost" size="sm" className="min-h-11 rounded-xl px-2 text-xs text-muted-foreground" onClick={() => copyLink(topicId, reply.id)}>
+                      <Link2 className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
                       Copy link
                     </Button>
                     {isMeetingTopic && viewer.isAdmin && <SaveToQaButton thread={thread} reply={reply} />}

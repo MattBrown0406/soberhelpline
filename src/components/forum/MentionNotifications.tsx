@@ -101,8 +101,8 @@ export function MentionNotifications({ userId }: MentionNotificationsProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { setIsOpen(open); if (open) void fetchMentions(); }}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2 relative" aria-label={unreadCount > 0 ? `Mentions, ${unreadCount} new` : "Mentions"}>
-          <Bell className="h-4 w-4" />
+        <Button variant="outline" size="sm" className="relative min-h-11 gap-2 rounded-xl bg-card" aria-label={unreadCount > 0 ? `Mentions, ${unreadCount} new` : "Mentions"}>
+          <Bell className="h-4 w-4" aria-hidden="true" />
           Mentions
           {unreadCount > 0 && (
             <span className="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-600 text-white text-xs flex items-center justify-center">

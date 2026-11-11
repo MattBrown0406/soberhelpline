@@ -583,7 +583,7 @@ export default function MemberHome() {
             title={firstName ? `Welcome back, ${firstName}` : "Welcome back"}
             subtitle="One step at a time. Here's your week."
           >
-            <div className="grid gap-2.5 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
               <HeroStat
                 icon={CalendarDays}
                 label="Next meeting"
@@ -592,7 +592,7 @@ export default function MemberHome() {
                     ? "Live now"
                     : meeting.isToday
                       ? "Tonight, 7 PM PT"
-                      : `${new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric" }).format(meeting.start)}, 7 PM PT`
+                      : `${new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric" }).format(meeting.start)} · 7 PM PT`
                 }
               />
               <HeroStat

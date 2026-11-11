@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, Archive, Loader2, Mail, MessageCircle, Plus, Shield } from "lucide-react";
+import { ArrowLeft, Archive, CalendarDays, Loader2, Mail, MessageCircle, Plus, Shield } from "lucide-react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,13 @@ import { MeetingRoom } from "@/components/forum/MeetingRoom";
 import { formatMeetingDay, meetingWeekKey } from "@/components/forum/meetingWeek";
 import { useVisiblePolling } from "@/components/forum/useVisiblePolling";
 import { FORUM_POST_COLUMNS, type ForumPostRow, type ForumThreadData } from "@/components/forum/forumTypes";
+import { IconTile, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
+
+// Shared looks, written out in full so Tailwind keeps them.
+const TEXT_LINK =
+  "inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+const FILTER_TAB =
+  "min-h-11 rounded-full px-5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground";
 
 type Filter = "all" | "unanswered";
 
@@ -267,31 +274,31 @@ export default function ForumTopic() {
   // --- render --------------------------------------------------------------
   if (!topic) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <MemberPage className="flex items-center justify-center px-4">
         <Helmet>
           <title>Conversation space not found | Sober Helpline Forum</title>
         </Helmet>
-        <Card className="max-w-md w-full">
+        <Card className="w-full max-w-md rounded-2xl border-border/70 shadow-sm shadow-slate-900/[0.04]">
           <CardContent className="p-6 text-center space-y-4">
-            <MessageCircle className="h-10 w-10 text-muted-foreground mx-auto" />
-            <p className="font-medium">We couldn't find that part of the forum.</p>
-            <p className="text-sm text-muted-foreground">
+            <IconTile icon={MessageCircle} tone="navy" size="lg" className="mx-auto" />
+            <p className="font-semibold text-foreground">We couldn't find that part of the forum.</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
               The link may be old. Everything is still in the forum, in three spaces: {ACTIVE_TOPICS.map((t) => t.title).join(", ")}.
             </p>
-            <Button asChild>
+            <Button asChild className="h-12 rounded-xl px-6 text-base">
               <Link to="/family-forum">Go to the forum</Link>
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </MemberPage>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <MemberPage className="flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
+      </MemberPage>
     );
   }
 
@@ -301,26 +308,26 @@ export default function ForumTopic() {
         <Helmet>
           <title>{topic.title} | Sober Helpline Forum</title>
         </Helmet>
-        <div className="min-h-screen bg-background">
-          <main className="container py-12">
-            <Card className="max-w-md mx-auto">
+        <MemberPage>
+          <main className="container px-4 py-12">
+            <Card className="mx-auto max-w-md rounded-2xl border-border/70 shadow-sm shadow-slate-900/[0.04]">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl">Members only</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">The family forum is part of the family support membership.</p>
                 <div className="flex flex-col gap-2">
-                  <Button asChild className="w-full">
+                  <Button asChild className="h-12 w-full rounded-xl text-base">
                     <Link to="/family-membership">Become a member</Link>
                   </Button>
-                  <Button asChild variant="outline" className="w-full">
+                  <Button asChild variant="outline" className="min-h-11 w-full rounded-xl">
                     <Link to="/family-forum">Back to the forum</Link>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </main>
-        </div>
+        </MemberPage>
       </>
     );
   }
@@ -390,21 +397,24 @@ export default function ForumTopic() {
         />
       )}
 
-      <div className="min-h-screen bg-background">
-        <main className="container px-4 py-8 md:py-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-              <Link to="/family-forum" className="inline-flex items-center text-primary hover:text-primary/80">
-                <ArrowLeft className="h-4 w-4 mr-1" />
+      <MemberPage>
+        <main className="container mx-auto max-w-3xl px-4 py-6 sm:py-10">
+          <div>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+              <Link to="/family-forum" className={TEXT_LINK}>
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 Back to the forum
               </Link>
               <div className="flex flex-wrap gap-2">
                 <MentionNotifications userId={user.id} />
-                <Button variant="outline" size="sm" className="gap-2 relative" onClick={() => setMessagesOpen(true)}>
-                  <Mail className="h-4 w-4" />
+                <Button variant="outline" size="sm" className="relative min-h-11 gap-2 rounded-xl bg-card" onClick={() => setMessagesOpen(true)}>
+                  <Mail className="h-4 w-4" aria-hidden="true" />
                   Messages
                   {unread.count > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-600 text-white text-xs flex items-center justify-center">
+                    <span
+                      className="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-600 text-white text-xs flex items-center justify-center"
+                      aria-label={`${unread.count} unread`}
+                    >
                       {unread.count > 9 ? "9+" : unread.count}
                     </span>
                   )}
@@ -412,28 +422,37 @@ export default function ForumTopic() {
               </div>
             </div>
 
-            <div className="mb-6">
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-lg shrink-0 ${topic.tileClass}`}>
-                  <Icon className="h-6 w-6" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h1 className="text-2xl md:text-3xl font-bold text-logo-blue mb-2">{topic.title}</h1>
-                  <p className="text-muted-foreground">{topic.description}</p>
-                </div>
-              </div>
+            <div className="mb-6 space-y-4">
+              <MemberHero
+                eyebrow="Family Forum"
+                title={
+                  <span className="flex items-center gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/15 print:hidden"
+                    >
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <span className="min-w-0 break-words">{topic.title}</span>
+                  </span>
+                }
+                subtitle={topic.description}
+              />
 
               {topic.archived ? (
-                <div className="rounded-lg border border-border bg-muted/40 p-4 text-sm flex gap-3">
-                  <Archive className="h-5 w-5 text-muted-foreground shrink-0" />
-                  <div>
-                    <p className="font-medium text-foreground">This is an earlier discussion space.</p>
-                    <p className="text-muted-foreground mt-1">
+                <Panel className="flex gap-3 text-sm">
+                  <IconTile icon={Archive} className="bg-muted text-slate-600 dark:bg-muted dark:text-slate-300" />
+                  <div className="min-w-0">
+                    <p className="font-semibold text-foreground">This is an earlier discussion space.</p>
+                    <p className="mt-1 leading-relaxed text-muted-foreground">
                       You can read and reply to these conversations. New conversations now happen in{" "}
                       {ACTIVE_TOPICS.map((t, i) => (
                         <span key={t.id}>
                           {i > 0 && (i === ACTIVE_TOPICS.length - 1 ? " and " : ", ")}
-                          <Link to={`/family-forum/${t.id}`} className="text-primary underline">
+                          <Link
+                            to={`/family-forum/${t.id}`}
+                            className="rounded font-medium text-primary underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          >
                             {t.title}
                           </Link>
                         </span>
@@ -441,21 +460,24 @@ export default function ForumTopic() {
                       .
                     </p>
                   </div>
-                </div>
+                </Panel>
               ) : (
-                <div className="flex flex-wrap gap-2">
-                  <TopicFollow topicId={topic.id} userId={user.id} />
+                <div className="flex flex-wrap items-center gap-2">
                   {!isMeetingTopic && (
-                    <Button onClick={() => openComposer()} className="gap-2">
-                      <Plus className="h-4 w-4" />
+                    <Button
+                      onClick={() => openComposer()}
+                      className="h-12 flex-1 gap-2 rounded-xl px-6 text-base shadow-md shadow-[#16294a]/15 sm:flex-none"
+                    >
+                      <Plus className="h-4 w-4" aria-hidden="true" />
                       Start a conversation
                     </Button>
                   )}
+                  <TopicFollow topicId={topic.id} userId={user.id} />
                 </div>
               )}
               {canModerate && (
-                <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
-                  <Shield className="h-3 w-3" />
+                <p className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300">
+                  <Shield className="h-3.5 w-3.5" aria-hidden="true" />
                   You're seeing moderator tools.
                 </p>
               )}
@@ -493,9 +515,9 @@ export default function ForumTopic() {
 
             {threads.length > 0 && (
               <Tabs value={filter} onValueChange={(v) => setFilter(v as Filter)} className="mb-4">
-                <TabsList>
-                  <TabsTrigger value="all">All</TabsTrigger>
-                  <TabsTrigger value="unanswered">Unanswered{unansweredCount > 0 ? ` (${unansweredCount})` : ""}</TabsTrigger>
+                <TabsList className="h-auto rounded-full border border-border/70 bg-card p-1 shadow-sm shadow-slate-900/[0.03]">
+                  <TabsTrigger value="all" className={FILTER_TAB}>All</TabsTrigger>
+                  <TabsTrigger value="unanswered" className={FILTER_TAB}>Unanswered{unansweredCount > 0 ? ` (${unansweredCount})` : ""}</TabsTrigger>
                 </TabsList>
               </Tabs>
             )}
@@ -505,10 +527,10 @@ export default function ForumTopic() {
                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
               </div>
             ) : visibleThreads.length === 0 ? (
-              <Card>
-                <CardContent className="py-10 text-center space-y-4">
-                  <MessageCircle className="h-10 w-10 text-muted-foreground mx-auto" />
-                  <p className="text-muted-foreground">
+              <Panel className="text-center">
+                <div className="space-y-4 py-4">
+                  <IconTile icon={MessageCircle} tone="navy" size="lg" className="mx-auto" />
+                  <p className="text-base leading-relaxed text-foreground/80">
                     {filter === "unanswered"
                       ? "Every conversation here has a reply."
                       : isMeetingTopic
@@ -518,18 +540,25 @@ export default function ForumTopic() {
                           : "No conversations yet. You could start one."}
                   </p>
                   {!topic.archived && filter === "all" && (
-                    <Button onClick={() => openComposer()}>
-                      <Plus className="h-4 w-4 mr-2" />
+                    <Button onClick={() => openComposer()} className="h-12 rounded-xl px-6 text-base">
+                      <Plus className="h-4 w-4 mr-2" aria-hidden="true" />
                       {isMeetingTopic ? "Ask a question" : "Start a conversation"}
                     </Button>
                   )}
-                </CardContent>
-              </Card>
+                </div>
+              </Panel>
             ) : (
               <div className="space-y-8">
                 {groups.map((group) => (
                   <section key={group.key} aria-label={group.label ?? undefined} className="space-y-4">
-                    {group.label && <h2 className="text-lg font-semibold text-logo-blue">{group.label}</h2>}
+                    {group.label ? (
+                      <h2 className="flex items-center gap-2.5 text-lg font-semibold leading-snug text-foreground">
+                        <IconTile icon={CalendarDays} tone="navy" size="sm" />
+                        {group.label}
+                      </h2>
+                    ) : (
+                      <h2 className="sr-only">Conversations</h2>
+                    )}
                     {group.threads.map((thread) => (
                       <ForumThread
                         key={thread.id}
@@ -559,7 +588,7 @@ export default function ForumTopic() {
             )}
           </div>
         </main>
-      </div>
+      </MemberPage>
     </>
   );
 }

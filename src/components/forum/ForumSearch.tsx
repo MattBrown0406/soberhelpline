@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, X, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { fetchUsernames } from "@/lib/publicProfiles";
 import { forumDisplayName, forumPostLink, getForumTopic } from "@/lib/forumTopics";
@@ -77,27 +76,29 @@ export function ForumSearch() {
   return (
     <div className="space-y-4">
       <div className="flex gap-2">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className="relative min-w-0 flex-1">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
           <Input
             placeholder="Search posts..."
+            aria-label="Search the forum"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            className="pl-10 pr-10"
+            className="h-11 rounded-xl pl-10 pr-11"
           />
           {query && (
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 p-0"
+              className="absolute right-0 top-1/2 h-11 w-11 -translate-y-1/2 rounded-xl p-0 text-muted-foreground"
               onClick={clearSearch}
+              aria-label="Clear search"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" aria-hidden="true" />
             </Button>
           )}
         </div>
-        <Button onClick={handleSearch} disabled={isSearching || !query.trim()}>
+        <Button className="h-11 shrink-0 rounded-xl px-4" onClick={handleSearch} disabled={isSearching || !query.trim()}>
           {isSearching ? <Loader2 className="h-4 w-4 animate-spin" /> : "Search"}
         </Button>
       </div>
@@ -108,27 +109,27 @@ export function ForumSearch() {
             <>
               <p className="text-sm text-muted-foreground">{results.length} {results.length === 1 ? "conversation" : "conversations"} found</p>
               {results.map(result => (
-                <Link key={result.id} to={forumPostLink(result.topic_id, result.id)} className="block">
-                  <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                    <CardContent className="p-4">
-                      <h4 className="font-medium text-logo-blue mb-1">
-                        {result.title || 'Untitled Post'}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mb-2 break-words">{result.content}</p>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span>{result.author_name}</span>
-                        <span>•</span>
-                        <span>{getForumTopic(result.topic_id)?.title ?? "Forum"}</span>
-                        <span>•</span>
-                        <span>{new Date(result.created_at).toLocaleDateString()}</span>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <Link
+                  key={result.id}
+                  to={forumPostLink(result.topic_id, result.id)}
+                  className="block rounded-xl border border-border/70 bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <h3 className="mb-1 break-words text-sm font-semibold leading-snug text-foreground">
+                    {result.title || 'Untitled Post'}
+                  </h3>
+                  <p className="mb-2 break-words text-sm leading-relaxed text-muted-foreground">{result.content}</p>
+                  <div className="flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground">
+                    <span>{result.author_name}</span>
+                    <span aria-hidden="true">•</span>
+                    <span>{getForumTopic(result.topic_id)?.title ?? "Forum"}</span>
+                    <span aria-hidden="true">•</span>
+                    <span>{new Date(result.created_at).toLocaleDateString()}</span>
+                  </div>
                 </Link>
               ))}
             </>
           ) : (
-            <p className="text-sm text-muted-foreground text-center py-4">
+            <p className="break-words py-4 text-center text-sm text-muted-foreground">
               No posts found matching "{query}"
             </p>
           )}

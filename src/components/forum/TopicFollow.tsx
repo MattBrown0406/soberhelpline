@@ -65,18 +65,19 @@ export function TopicFollow({ topicId, userId }: TopicFollowProps) {
     <Button
       variant={isFollowing ? "secondary" : "outline"}
       size="sm"
-      className="gap-2"
+      className={`h-12 gap-2 rounded-xl px-4 ${isFollowing ? "" : "bg-card"}`}
       onClick={toggleFollow}
       disabled={isLoading}
+      aria-pressed={isFollowing}
     >
       {isFollowing ? (
         <>
-          <BellOff className="h-4 w-4" />
+          <BellOff className="h-4 w-4" aria-hidden="true" />
           Following
         </>
       ) : (
         <>
-          <Bell className="h-4 w-4" />
+          <Bell className="h-4 w-4" aria-hidden="true" />
           Follow
         </>
       )}

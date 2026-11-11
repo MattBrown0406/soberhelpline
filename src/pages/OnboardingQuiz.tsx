@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Compass, Heart, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Compass, Heart, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { IconTile, MemberPage, Panel, TONE } from "@/components/member/MemberUI";
 import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
 import { getTrack, savePendingTrack, useLearningPath, type MemberTrack } from "@/hooks/useLearningPath";
@@ -216,113 +215,171 @@ const OnboardingQuiz = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <MemberPage>
       <SEOHead
         title="Find Your Starting Path | Sober Helpline"
         description="Answer five short questions and we'll suggest one learning path that fits what your family is facing right now."
       />
 
-      <div className="max-w-2xl mx-auto px-4 py-8 sm:py-16">
-        {/* Progress bar */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-muted-foreground">
+      <div className="mx-auto max-w-2xl px-4 py-6 sm:py-14">
+        {/* Progress: where she is in the five questions */}
+        <div className="mb-4">
+          <div className="flex min-h-11 items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-foreground/80">
               {isResults ? "Your suggested path" : `Question ${step + 1} of ${totalSteps}`}
             </span>
             {step > 0 && (
               <button
                 type="button"
                 onClick={goBack}
-                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+                className="-mr-2 inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none"
               >
-                <ArrowLeft className="w-3 h-3" /> Back
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back
               </button>
             )}
           </div>
-          <Progress value={progressPercent} className="h-2" />
+          <div
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(progressPercent)}
+            aria-valuetext={`${Math.round(progressPercent)}%`}
+            className="mt-1 flex items-center gap-1.5"
+          >
+            {questions.map((q, i) => (
+              <span
+                key={q.id}
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all duration-300 motion-reduce:transition-none ${
+                  isResults || i < step
+                    ? "w-2 bg-[#16294a] dark:bg-sky-300"
+                    : i === step
+                      ? "w-8 bg-[#16294a] dark:bg-sky-300"
+                      : "w-2 bg-[#16294a]/20 dark:bg-sky-300/25"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className={`transition-all duration-200 ${animating ? (direction === "forward" ? "opacity-0 translate-x-8" : "opacity-0 -translate-x-8") : "opacity-100 translate-x-0"}`}>
+        <div
+          className={`transition-all duration-200 motion-reduce:transform-none motion-reduce:transition-none ${
+            animating ? (direction === "forward" ? "opacity-0 translate-x-8" : "opacity-0 -translate-x-8") : "opacity-100 translate-x-0"
+          }`}
+        >
           {!isResults ? (
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">{questions[step].question}</h1>
-              <p className="text-muted-foreground mb-8">{questions[step].subtitle}</p>
+            <Panel className="sm:p-8">
+              <h1 className="text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">{questions[step].question}</h1>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">{questions[step].subtitle}</p>
 
-              <div className="space-y-3">
-                {questions[step].options.map((option) => (
-                  <button
-                    type="button"
-                    key={option.value}
-                    onClick={() => handleAnswer(option.value)}
-                    className={`w-full text-left p-4 rounded-xl border transition-colors duration-150 ${
-                      answers[questions[step].id as keyof QuizAnswers] === option.value
-                        ? "border-primary bg-primary/10 text-foreground"
-                        : "border-border bg-card text-foreground hover:border-primary/40 hover:bg-muted/50"
-                    }`}
-                  >
-                    <span className="text-base">{option.label}</span>
-                  </button>
-                ))}
+              <div className="mt-6 space-y-3">
+                {questions[step].options.map((option) => {
+                  const selected = answers[questions[step].id as keyof QuizAnswers] === option.value;
+                  return (
+                    <button
+                      type="button"
+                      key={option.value}
+                      onClick={() => handleAnswer(option.value)}
+                      aria-pressed={selected}
+                      className={`flex min-h-14 w-full items-center gap-3.5 rounded-2xl border-2 px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:transition-none ${
+                        selected
+                          ? "border-[#16294a] bg-[#16294a]/[0.06] dark:border-sky-300 dark:bg-sky-400/10"
+                          : "border-border bg-card hover:border-[#16294a]/40 hover:bg-muted/50 dark:hover:border-sky-300/40"
+                      }`}
+                    >
+                      {/* A round mark that fills and shows a tick when chosen, so the choice is not colour alone. */}
+                      <span
+                        aria-hidden="true"
+                        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 ${
+                          selected
+                            ? "border-[#16294a] bg-[#16294a] text-white dark:border-sky-300 dark:bg-sky-300 dark:text-slate-900"
+                            : "border-foreground/50 bg-card"
+                        }`}
+                      >
+                        {selected && <Check className="h-3.5 w-3.5" />}
+                      </span>
+                      <span className={`min-w-0 flex-1 text-base leading-snug text-foreground ${selected ? "font-semibold" : ""}`}>{option.label}</span>
+                    </button>
+                  );
+                })}
               </div>
-            </div>
+            </Panel>
           ) : track && result ? (
-            <div>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
-                  <Heart className="w-7 h-7 text-primary" />
+            <Panel className="sm:p-8">
+              <div className="text-center">
+                <div className="mb-3 flex justify-center">
+                  <IconTile icon={Heart} tone="rose" size="lg" />
                 </div>
-                <p className="text-sm text-muted-foreground mb-1">Based on what you shared, we'd start here:</p>
-                <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{track.title}</h1>
+                <p className="mb-1 text-sm text-muted-foreground">Based on what you shared, we'd start here:</p>
+                <h1 className="text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">{track.title}</h1>
               </div>
 
-              <Card className="mb-6">
-                <CardContent className="p-5 space-y-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Why this path</p>
-                    <p className="text-sm text-foreground leading-relaxed">{result.why}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
-                      The {track.steps.length} steps
-                    </p>
-                    <ol className="space-y-1.5">
-                      {track.steps.map((s, i) => (
-                        <li key={s.path} className="flex gap-3 text-sm">
-                          <span className="w-5 shrink-0 text-right font-medium text-muted-foreground tabular-nums">{i + 1}.</span>
-                          <span className="text-foreground">{s.title}</span>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Take them one at a time. There's no rush, and you can change paths whenever you like.</p>
-                </CardContent>
-              </Card>
+              <div className="mt-6 space-y-5">
+                <div className={`rounded-xl border p-4 print:border-0 print:bg-transparent print:p-0 ${TONE.amber.border} ${TONE.amber.soft}`}>
+                  <p className={`mb-1 text-xs font-semibold uppercase tracking-wide ${TONE.amber.text}`}>Why this path</p>
+                  <p className="text-sm leading-relaxed text-foreground">{result.why}</p>
+                </div>
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    The {track.steps.length} steps
+                  </p>
+                  <ol className="ml-1">
+                    {track.steps.map((s, i) => (
+                      <li key={s.path} className="relative pb-3 pl-9 last:pb-0">
+                        {i < track.steps.length - 1 && (
+                          <span aria-hidden="true" className="absolute left-[11px] top-6 h-[calc(100%-1.5rem)] w-0.5 bg-border print:hidden" />
+                        )}
+                        <span className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border-2 border-border bg-card text-xs font-semibold tabular-nums text-muted-foreground">
+                          {i + 1}
+                        </span>
+                        <span className="block pt-0.5 text-sm leading-snug text-foreground">{s.title}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">Take them one at a time. There's no rush, and you can change paths whenever you like.</p>
+              </div>
 
-              <div className="space-y-3 text-center">
-                <Button size="lg" className="w-full sm:w-auto gap-2" onClick={startPath} disabled={saving}>
+              <div className="mt-6 space-y-3 border-t border-border/70 pt-6 text-center">
+                <Button
+                  size="lg"
+                  className="h-auto min-h-12 w-full gap-2 rounded-xl text-base shadow-md shadow-[#16294a]/15 sm:w-auto"
+                  onClick={startPath}
+                  disabled={saving}
+                >
                   {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Compass className="h-4 w-4" />}
                   {currentTrackId === result.trackId ? "Continue this path" : "Start this path"}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 {!signedIn && (
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     You'll sign in first, then your path is saved on your member home page.
-                    Not a member yet? <Link to="/family-membership" className="text-primary hover:underline">See membership</Link>.
+                    Not a member yet?{" "}
+                    <Link
+                      to="/family-membership"
+                      className="relative inline-block rounded font-semibold text-primary underline underline-offset-4 after:absolute after:inset-x-0 after:-inset-y-3 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      See membership
+                    </Link>
+                    .
                   </p>
                 )}
                 {signedIn && isMember && (
                   <p className="text-sm">
-                    <Link to="/family-education/tracks" className="text-primary hover:underline">
+                    <Link
+                      to="/family-education/tracks"
+                      className="inline-flex min-h-11 items-center rounded-lg px-2 font-semibold text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
                       Or look through all eight paths
                     </Link>
                   </p>
                 )}
               </div>
-            </div>
+            </Panel>
           ) : null}
         </div>
       </div>
-    </div>
+    </MemberPage>
   );
 };
 

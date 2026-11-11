@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, ChevronDown, ChevronUp, Copy, Loader2, Trash2 } from "lucide-react";
+import { BookHeart, CheckCircle2, ChevronDown, ChevronUp, Copy, Loader2, NotebookPen, PenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { HeroStat, IconTile, MemberHero, MemberPage, Panel, SectionHeading, TONE, toneForExercise } from "@/components/member/MemberUI";
 import ExerciseCard from "@/components/workbook/ExerciseCard";
+import { iconForExercise } from "@/components/workbook/exerciseIcons";
 import OutputView from "@/components/workbook/OutputView";
 import CompareView from "@/components/workbook/CompareView";
 import SavedToolsList from "@/components/workbook/SavedToolsList";
@@ -49,6 +51,8 @@ export default function Workbook() {
   }, [entries]);
 
   const first = getExercise(FIRST_EXERCISE_ID);
+  // Hero chips: plain counts of what this page has already loaded.
+  const doneCount = EXERCISES.filter((e) => latestByExercise[e.id]).length;
 
   const confirmDelete = async () => {
     if (!pendingDelete) return;
@@ -80,39 +84,38 @@ export default function Workbook() {
         description="Short guided exercises for families, and everything you've saved from them."
         noIndex
       />
-      <div className="min-h-screen bg-background">
-        <div className="mx-auto w-full max-w-4xl px-4 pb-16 pt-8 sm:pt-12">
-          <header className="mb-8">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                <BookOpen className="h-5 w-5 text-primary" aria-hidden="true" />
+      <MemberPage>
+        <div className="mx-auto w-full max-w-4xl space-y-10 px-4 pb-16 pt-6 sm:pt-10">
+          <MemberHero
+            eyebrow="Exercises and saved plans"
+            title="My Workbook"
+            subtitle="Short guided exercises, about five minutes each, one question at a time. Each one ends with something you keep: a script, a plan, a check-in. Retake any of them after 30 days to see what has changed."
+          >
+            {!error && (loading || entries.length > 0) && (
+              <div className="grid gap-2.5 sm:grid-cols-3">
+                <HeroStat icon={CheckCircle2} label="Exercises done" value={loading ? "…" : `${doneCount} of ${EXERCISES.length}`} />
+                <HeroStat icon={BookHeart} label="Saved results" value={loading ? "…" : entries.length} />
+                {drafts.size > 0 && <HeroStat icon={PenLine} label="In progress" value={drafts.size} />}
               </div>
-              <h1 className="text-3xl font-semibold text-foreground">My Workbook</h1>
-            </div>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              Short guided exercises, about five minutes each, one question at a time. Each one ends with something you
-              keep: a script, a plan, a check-in. Retake any of them after 30 days to see what has changed.
-            </p>
-          </header>
+            )}
+          </MemberHero>
 
           {!loading && !error && entries.length === 0 && first && (
-            <section className="mb-10 rounded-xl border border-primary/30 bg-primary/5 p-5 dark:bg-primary/10 sm:p-6">
+            <Panel tone="emerald" className={TONE.emerald.soft}>
               <h2 className="text-lg font-semibold text-foreground">Your workbook is empty for now</h2>
               <p className="mt-2 text-sm leading-relaxed text-foreground/90">
                 A good place to start is “{first.title}.” It takes about {first.minutes} minutes, and you'll leave with a
                 boundary in your own words and a calm line for when they push back. You can stop anytime.
               </p>
-              <Button asChild size="lg" className="mt-4 h-auto min-h-12 whitespace-normal py-2.5 text-left">
+              <Button asChild size="lg" className="mt-4 h-auto min-h-12 whitespace-normal rounded-xl py-2.5 text-left">
                 <Link to={exercisePath(first.id)}>Start “{first.title}”</Link>
               </Button>
-            </section>
+            </Panel>
           )}
 
-          <section aria-labelledby="wb-exercises" className="mb-12">
-            <h2 id="wb-exercises" className="mb-4 text-xl font-semibold text-foreground">
-              Exercises
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
+          <section aria-labelledby="wb-exercises" className="space-y-4">
+            <SectionHeading id="wb-exercises" icon={NotebookPen} tone="emerald" title="Exercises" />
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
               {EXERCISES.map((e) => (
                 <ExerciseCard
                   key={e.id}
@@ -126,29 +129,27 @@ export default function Workbook() {
 
           <SavedToolsList />
 
-          <section aria-labelledby="wb-saved">
-            <h2 id="wb-saved" className="mb-4 text-xl font-semibold text-foreground">
-              Saved results
-            </h2>
+          <section aria-labelledby="wb-saved" className="space-y-4">
+            <SectionHeading id="wb-saved" icon={BookHeart} tone="navy" title="Saved results" />
 
             {loading && (
-              <div className="flex items-center gap-2 py-6 text-muted-foreground" role="status">
+              <div className="flex items-center gap-2 py-6 text-foreground/80" role="status">
                 <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
                 Loading your saved results…
               </div>
             )}
 
             {!loading && error && (
-              <div className="rounded-lg border border-border bg-muted/30 p-4 text-sm">
+              <Panel className="p-4 text-sm sm:p-5">
                 <p className="text-foreground">{error}</p>
-                <Button variant="outline" size="sm" className="mt-3 h-10" onClick={() => void reload()}>
+                <Button variant="outline" size="sm" className="mt-3 h-11 rounded-xl" onClick={() => void reload()}>
                   Try again
                 </Button>
-              </div>
+              </Panel>
             )}
 
             {!loading && !error && entries.length === 0 && (
-              <p className="text-sm text-muted-foreground">
+              <p className="rounded-2xl border border-dashed border-border bg-card/60 px-4 py-5 text-sm leading-relaxed text-foreground/80">
                 When you finish an exercise, your result is saved here, newest first.
               </p>
             )}
@@ -163,11 +164,15 @@ export default function Workbook() {
                   const comparing = compareId === entry.id && !!prev;
                   const scoreInfo = entry.output?.score;
                   const panelId = `wb-entry-${entry.id}`;
+                  const tone = toneForExercise(entry.exercise_id);
                   return (
-                    <li key={entry.id} className="rounded-xl border border-border bg-card">
+                    <li
+                      key={entry.id}
+                      className={`rounded-2xl border bg-card shadow-sm shadow-slate-900/[0.04] transition-shadow motion-reduce:transition-none ${open ? `shadow-md ${TONE[tone].border}` : "border-border/70 hover:shadow-md"}`}
+                    >
                       <button
                         type="button"
-                        className="flex min-h-14 w-full items-start justify-between gap-4 rounded-xl p-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        className="flex min-h-16 w-full items-center gap-3 rounded-2xl p-3.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-4"
                         aria-expanded={open}
                         aria-controls={panelId}
                         onClick={() => {
@@ -175,49 +180,53 @@ export default function Workbook() {
                           if (open) setCompareId(null);
                         }}
                       >
+                        <IconTile icon={iconForExercise(entry.exercise_id)} tone={tone} />
                         <span className="min-w-0 flex-1">
-                          <span className="block font-semibold text-foreground">{title}</span>
-                          <span className="mt-0.5 block text-sm text-muted-foreground">
-                            {shortDate(entry.completed_at)}
+                          <span className="block font-semibold leading-snug text-foreground">{title}</span>
+                          <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                            <span className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-foreground/80">
+                              {shortDate(entry.completed_at)}
+                            </span>
                             {typeof entry.score === "number" && scoreInfo
-                              ? ` · ${entry.score} of ${scoreInfo.max} · ${scoreInfo.band}`
-                              : ""}
+                              ? <span>{`${entry.score} of ${scoreInfo.max} · ${scoreInfo.band}`}</span>
+                              : null}
                           </span>
                         </span>
                         {open ? (
-                          <ChevronUp className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                          <ChevronUp className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
                         ) : (
-                          <ChevronDown className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                          <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
                         )}
                       </button>
                       {open && (
-                        <div id={panelId} className="space-y-5 border-t border-border px-4 pb-5 pt-4">
+                        <div id={panelId} className="space-y-5 border-t border-border/70 px-3.5 pb-5 pt-4 sm:px-4">
                           {comparing && prev ? (
                             <CompareView
+                              tone={tone}
                               previous={{ output: prev.output, score: prev.score, completedAt: prev.completed_at }}
                               current={{ output: entry.output, score: entry.score, completedAt: entry.completed_at }}
                             />
                           ) : (
-                            <OutputView output={entry.output} hideTitle />
+                            <OutputView output={entry.output} hideTitle tone={tone} />
                           )}
                           <div className="flex flex-wrap gap-2">
                             {prev && (
                               <Button
                                 type="button"
                                 size="sm"
-                                className="h-10"
+                                className="h-11 rounded-xl"
                                 aria-pressed={comparing}
                                 onClick={() => setCompareId(comparing ? null : entry.id)}
                               >
                                 {comparing ? "Show this result only" : `Compare with ${shortDate(prev.completed_at)}`}
                               </Button>
                             )}
-                            <Button type="button" variant="outline" size="sm" className="h-10" onClick={() => void copy(entry)}>
+                            <Button type="button" variant="outline" size="sm" className="h-11 rounded-xl" onClick={() => void copy(entry)}>
                               <Copy className="mr-1.5 h-4 w-4" aria-hidden="true" />
                               Copy
                             </Button>
                             {ex && (
-                              <Button asChild variant="outline" size="sm" className="h-10">
+                              <Button asChild variant="outline" size="sm" className="h-11 rounded-xl">
                                 <Link to={exercisePath(ex.id)}>Do it again</Link>
                               </Button>
                             )}
@@ -225,7 +234,7 @@ export default function Workbook() {
                               type="button"
                               variant="ghost"
                               size="sm"
-                              className="h-10 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                              className="h-11 rounded-xl text-destructive hover:bg-destructive/10 hover:text-destructive"
                               onClick={() => setPendingDelete(entry)}
                             >
                               <Trash2 className="mr-1.5 h-4 w-4" aria-hidden="true" />
@@ -241,7 +250,7 @@ export default function Workbook() {
             )}
           </section>
         </div>
-      </div>
+      </MemberPage>
 
       <AlertDialog open={!!pendingDelete} onOpenChange={(o) => !o && !deleting && setPendingDelete(null)}>
         <AlertDialogContent>

@@ -17,6 +17,14 @@ const reactionEmojis: Record<ReactionType, string> = {
   hug: '🤗'
 };
 
+// Spoken names for the emoji buttons (screen readers and hover hints only).
+const reactionLabels: Record<ReactionType, string> = {
+  pray: 'Praying',
+  strong: 'Strength',
+  heart: 'Love',
+  hug: 'Hug'
+};
+
 interface ReactionCount {
   reaction_type: ReactionType;
   count: number;
@@ -133,14 +141,17 @@ export function PostReactions({ postId, userId }: PostReactionsProps) {
           variant="ghost"
           size="sm"
           className={cn(
-            "h-7 px-2 text-sm gap-1",
-            reaction.hasReacted && "bg-primary/10 text-primary"
+            "min-h-11 min-w-11 gap-1 rounded-full border border-transparent px-2.5 text-base",
+            reaction.hasReacted && "border-primary/40 bg-primary/10 font-semibold text-primary"
           )}
           onClick={() => toggleReaction(reaction.reaction_type)}
           disabled={isLoading}
+          aria-pressed={reaction.hasReacted}
+          aria-label={reaction.count > 0 ? `${reactionLabels[reaction.reaction_type]}, ${reaction.count}` : reactionLabels[reaction.reaction_type]}
+          title={reactionLabels[reaction.reaction_type]}
         >
-          <span>{reactionEmojis[reaction.reaction_type]}</span>
-          {reaction.count > 0 && <span className="text-xs">{reaction.count}</span>}
+          <span aria-hidden="true">{reactionEmojis[reaction.reaction_type]}</span>
+          {reaction.count > 0 && <span className="text-xs" aria-hidden="true">{reaction.count}</span>}
         </Button>
       ))}
     </div>

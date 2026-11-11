@@ -82,8 +82,8 @@ export function BookmarkedPosts({ userId }: BookmarkedPostsProps) {
   return (
     <Dialog onOpenChange={(open) => { if (open) void fetchBookmarks(); }}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Bookmark className="h-4 w-4" />
+        <Button variant="outline" size="sm" className="min-h-11 gap-2 rounded-xl bg-card">
+          <Bookmark className="h-4 w-4" aria-hidden="true" />
           Bookmarks
           {bookmarks.length > 0 && (
             <span className="bg-primary text-primary-foreground text-xs px-1.5 rounded-full" aria-label={`${bookmarks.length} saved`}>

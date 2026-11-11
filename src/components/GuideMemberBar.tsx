@@ -4,6 +4,7 @@ import { ArrowRight, Bookmark, BookmarkCheck, CheckCircle2, Circle, MessageCircl
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
 import { useLearningPath } from "@/hooks/useLearningPath";
 import type { LibraryItem } from "@/data/memberLibrary";
@@ -93,25 +94,30 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
     <div
       role="region"
       aria-label="Your progress on this page"
-      className="print:hidden fixed inset-x-0 bottom-0 z-[90] border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 pb-[env(safe-area-inset-bottom)]"
+      className="print:hidden fixed inset-x-0 bottom-0 z-[90] border-t border-border/70 bg-card pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_20px_-10px_rgba(15,23,42,0.25)] dark:shadow-[0_-6px_20px_-10px_rgba(0,0,0,0.7)]"
     >
-      <div className="container mx-auto flex items-center gap-1.5 px-3 py-2 sm:gap-2 sm:px-4">
+      <div className="container mx-auto flex items-center gap-1 px-3 py-2 sm:gap-2 sm:px-4">
         <Button
           type="button"
           size="sm"
-          variant={completed ? "secondary" : "default"}
+          variant={completed ? "secondary" : next ? "outline" : "default"}
           onClick={toggleComplete}
           disabled={busy === "complete"}
           aria-pressed={completed}
-          className="min-h-11 gap-1.5 shrink-0"
+          className={cn(
+            "h-11 shrink-0 gap-1.5 rounded-xl px-3",
+            completed
+              ? "border border-green-200 bg-green-50 text-green-800 hover:bg-green-100 dark:border-green-400/25 dark:bg-green-400/10 dark:text-green-200 dark:hover:bg-green-400/15"
+              : next && "border-primary/30 bg-card text-primary",
+          )}
         >
           {completed ? (
-            <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" aria-hidden="true" />
           ) : (
-            <Circle className="h-4 w-4" />
+            <Circle className="h-4 w-4" aria-hidden="true" />
           )}
-          <span className="hidden min-[400px]:inline">{completed ? "Completed" : "Mark complete"}</span>
-          <span className="min-[400px]:hidden">{completed ? "Done" : "Done?"}</span>
+          <span className="hidden min-[412px]:inline">{completed ? "Completed" : "Mark complete"}</span>
+          <span className="min-[412px]:hidden">{completed ? "Done" : "Done?"}</span>
         </Button>
 
         <Button
@@ -122,13 +128,13 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
           disabled={busy === "save"}
           aria-pressed={saved}
           aria-label={saved ? "Saved — tap to remove" : "Save for later"}
-          className="gap-1.5 shrink-0 px-2 sm:px-3"
+          className="h-11 min-w-11 shrink-0 gap-1.5 rounded-xl px-2 sm:px-3"
         >
           {saved ? <BookmarkCheck className="h-4 w-4 text-primary" /> : <Bookmark className="h-4 w-4" />}
           <span className="hidden sm:inline">{saved ? "Saved" : "Save"}</span>
         </Button>
 
-        <Button asChild size="sm" variant="ghost" className="gap-1.5 shrink-0 px-2 sm:px-3">
+        <Button asChild size="sm" variant="ghost" className="h-11 min-w-11 shrink-0 gap-1.5 rounded-xl px-2 sm:px-3">
           <Link to={discussHref(item)} aria-label="Discuss this in the forum">
             <MessageCircle className="h-4 w-4" />
             <span className="hidden sm:inline">Discuss</span>
@@ -137,9 +143,9 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
 
         <div className="ml-auto flex min-w-0 items-center gap-1">
           {next && (
-            <Button asChild size="sm" variant="outline" className="min-w-0 gap-1.5">
+            <Button asChild size="sm" className="h-11 min-w-0 gap-1.5 rounded-xl px-3 shadow-sm shadow-[#16294a]/15">
               <Link to={next.path} title={`Next in your path: ${next.title}`}>
-                <span className="hidden md:inline text-muted-foreground">Next in your path:</span>
+                <span className="hidden md:inline text-primary-foreground/80">Next in your path:</span>
                 <span className="md:hidden">Next</span>
                 <span className="hidden md:inline max-w-[16rem] truncate">{next.title}</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
@@ -152,7 +158,7 @@ export default function GuideMemberBar({ item, onDismiss }: GuideMemberBarProps)
             variant="ghost"
             onClick={onDismiss}
             aria-label="Hide this bar"
-            className="h-11 w-11 shrink-0 text-muted-foreground"
+            className="h-11 w-11 shrink-0 rounded-xl text-muted-foreground"
           >
             <X className="h-4 w-4" />
           </Button>

@@ -163,21 +163,25 @@ export function MemberHero({
   );
 }
 
-/** A small glass chip inside the hero: one number or fact, with a label. */
+/**
+ * A small glass chip inside the hero: one number or fact, with a label.
+ * Put three in a `grid grid-cols-3 gap-2 sm:gap-2.5`: on a phone they sit side
+ * by side without their icons, so the hero stays short.
+ */
 export function HeroStat({ icon: IconComp, label, value, to }: { icon: Icon; label: string; value: ReactNode; to?: string }) {
   const inner = (
     <>
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15">
+      <span className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 sm:flex">
         <IconComp className="h-4 w-4" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[11px] font-medium uppercase tracking-wide text-white/65">{label}</span>
-        <span className="block truncate text-sm font-semibold leading-snug text-white">{value}</span>
+        <span className="block text-[10px] font-medium uppercase leading-tight tracking-wide text-white/70 sm:text-[11px]">{label}</span>
+        <span className="mt-0.5 block text-sm font-semibold leading-snug text-white sm:truncate">{value}</span>
       </span>
     </>
   );
   const cls =
-    "flex min-h-14 items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-3.5 py-2.5 backdrop-blur-sm print:hidden";
+    "flex min-h-14 items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-2.5 py-2 backdrop-blur-sm sm:px-3.5 sm:py-2.5 print:hidden";
   return to ? (
     <Link to={to} className={cn(cls, "transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70")}>
       {inner}

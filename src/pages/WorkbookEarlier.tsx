@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, FileText, Info } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { IconTile, MemberHero, MemberPage } from "@/components/member/MemberUI";
 import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import FamilySelfAssessment from "@/components/FamilySelfAssessment";
@@ -47,28 +48,43 @@ export default function WorkbookEarlier() {
   return (
     <>
       <SEOHead title="Your Earlier Worksheets | Sober Helpline Members" description="The longer worksheets you filled in before, kept as you left them." noIndex />
-      <div className="min-h-screen bg-background">
-        <main className="container mx-auto max-w-3xl px-4 py-6 sm:py-10">
+      <MemberPage>
+        <main className="container mx-auto max-w-3xl px-4 py-4 sm:py-8">
           <Link
             to="/workbook"
-            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-md text-sm font-medium text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             My Workbook
           </Link>
-          <h1 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">Your earlier worksheets</h1>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            These longer worksheets have been replaced by the short guided exercises in My Workbook. Anything you wrote
-            in them is still here. Some open with your answers in place. Three of them (Family Self-Assessment, Control
-            Worksheet and Boundary Worksheet) open on a fresh form: look for “View past” inside to see what you saved
-            before.
-          </p>
+          <MemberHero
+            className="mt-2 py-6 sm:py-7"
+            eyebrow="My Workbook"
+            title="Your earlier worksheets"
+            subtitle="These longer worksheets have been replaced by the short guided exercises in My Workbook. Anything you wrote in them is still here."
+          />
+          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-sm shadow-slate-900/[0.04]">
+            <IconTile icon={Info} tone="navy" size="sm" />
+            <p className="min-w-0 text-sm leading-relaxed text-muted-foreground">
+              Some open with your answers in place. Three of them (Family Self-Assessment, Control Worksheet and Boundary
+              Worksheet) open on a fresh form: look for “View past” inside to see what you saved before.
+            </p>
+          </div>
 
           {user && (
             <Accordion type="multiple" className="mt-6 space-y-3">
               {sheets.map((sheet) => (
-                <AccordionItem key={sheet.id} value={sheet.id} className="rounded-xl border border-border bg-card px-4">
-                  <AccordionTrigger className="min-h-12 text-left text-base font-semibold">{title(sheet.id)}</AccordionTrigger>
+                <AccordionItem
+                  key={sheet.id}
+                  value={sheet.id}
+                  className="rounded-2xl border border-border/70 bg-card px-4 shadow-sm shadow-slate-900/[0.04] sm:px-5"
+                >
+                  <AccordionTrigger className="min-h-14 gap-3 rounded-lg py-3 text-left text-base font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card">
+                    <span className="flex min-w-0 items-center gap-3">
+                      <IconTile icon={FileText} tone="navy" size="sm" />
+                      <span className="min-w-0 leading-snug">{title(sheet.id)}</span>
+                    </span>
+                  </AccordionTrigger>
                   {/* Rendered only when opened, so each worksheet loads its answers on demand. */}
                   <AccordionContent className="pt-2">{sheet.render(user)}</AccordionContent>
                 </AccordionItem>
@@ -76,7 +92,7 @@ export default function WorkbookEarlier() {
             </Accordion>
           )}
         </main>
-      </div>
+      </MemberPage>
     </>
   );
 }

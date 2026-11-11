@@ -12,9 +12,11 @@ interface StepViewProps {
   onSubmit: () => void;
 }
 
+// Each answer is a full-width card. Chosen is never shown by colour alone: the
+// box fills with a tick and the card's outline gets heavier.
 const choiceBase =
-  "flex w-full min-h-14 cursor-pointer items-start gap-3 rounded-xl border-2 px-4 py-3 text-left transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background";
-const choiceOn = "border-primary bg-primary/10 dark:bg-primary/20";
+  "flex w-full min-h-[3.75rem] cursor-pointer items-start gap-3.5 rounded-2xl border-2 px-4 py-3.5 text-left transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-card motion-reduce:transition-none";
+const choiceOn = "border-primary bg-primary/[0.07] ring-1 ring-primary dark:bg-primary/15";
 const choiceOff = "border-border bg-card hover:border-primary/50 hover:bg-muted/50";
 
 function Indicator({ on, round }: { on: boolean; round: boolean }) {
@@ -22,19 +24,19 @@ function Indicator({ on, round }: { on: boolean; round: boolean }) {
     <span
       aria-hidden="true"
       className={[
-        "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border-2",
+        "flex h-7 w-7 shrink-0 items-center justify-center border-2 transition-colors motion-reduce:transition-none",
         round ? "rounded-full" : "rounded-md",
-        on ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground/40 bg-background",
+        on ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground/50 bg-background",
       ].join(" ")}
     >
-      {on && <Check className="h-4 w-4" />}
+      {on && <Check className="h-4 w-4" strokeWidth={3} />}
     </span>
   );
 }
 
 function ChoiceLabel({ option }: { option: ChoiceOption }) {
   return (
-    <span className="flex-1">
+    <span className="min-w-0 flex-1 self-center">
       <span className="block text-base leading-snug text-foreground">{option.label}</span>
       {option.hint && <span className="mt-0.5 block text-sm leading-snug text-muted-foreground">{option.hint}</span>}
     </span>
@@ -62,13 +64,13 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
 
   const otherInput = (show: boolean, label: string) =>
     show ? (
-      <div className="pl-1 pt-1">
+      <div className="pt-1">
         <label htmlFor={`${uid}-other`} className="sr-only">
           {label}
         </label>
         <Input
           id={`${uid}-other`}
-          className="h-12 text-base"
+          className="h-12 rounded-xl text-base"
           placeholder="Type it here..."
           maxLength={200}
           value={typeof answers[otherKey(step.id)] === "string" ? (answers[otherKey(step.id)] as string) : ""}
@@ -88,7 +90,7 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
     const raw = answers[step.id];
     const current = raw === undefined || raw === null ? "" : String(raw);
     body = (
-      <div role="radiogroup" aria-labelledby={`${uid}-q`} aria-describedby={step.help ? helpId : undefined} className="space-y-2">
+      <div role="radiogroup" aria-labelledby={`${uid}-q`} aria-describedby={step.help ? helpId : undefined} className="space-y-2.5">
         {options.map((o) => {
           const on = current === o.value;
           return (
@@ -103,7 +105,7 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
               />
               <Indicator on={on} round />
               {step.type === "scale" ? (
-                <span className="flex-1 text-base text-foreground">{o.label}</span>
+                <span className="min-w-0 flex-1 self-center text-base leading-snug text-foreground">{o.label}</span>
               ) : (
                 <ChoiceLabel option={o} />
               )}
@@ -122,7 +124,7 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
       else if (!atMax) onAnswer(step.id, [...values, v]);
     };
     body = (
-      <div role="group" aria-labelledby={`${uid}-q`} aria-describedby={step.help ? helpId : undefined} className="space-y-2">
+      <div role="group" aria-labelledby={`${uid}-q`} aria-describedby={step.help ? helpId : undefined} className="space-y-2.5">
         <p className="text-sm text-muted-foreground">
           {step.max ? `Choose up to ${step.max}.` : "Choose all that apply."}
         </p>
@@ -163,7 +165,7 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
         {step.type === "text" ? (
           <Input
             {...common}
-            className="h-12 text-base"
+            className="h-12 rounded-xl text-base"
             onChange={(e) => onAnswer(step.id, e.target.value)}
             onKeyDown={enterToSubmit}
           />
@@ -171,7 +173,7 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
           <Textarea
             {...common}
             rows={4}
-            className="min-h-32 text-base leading-relaxed"
+            className="min-h-36 rounded-xl px-4 py-3 text-base leading-relaxed"
             onChange={(e) => onAnswer(step.id, e.target.value)}
             onKeyDown={ctrlEnterToSubmit}
           />
@@ -181,13 +183,13 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
   }
 
   return (
-    <div className="space-y-5">
-      <div className="space-y-2">
+    <div className="space-y-6">
+      <div className="space-y-2.5">
         <h2
           id={`${uid}-q`}
           ref={headingRef}
           tabIndex={-1}
-          className="text-2xl font-semibold leading-snug text-foreground outline-none sm:text-3xl"
+          className="text-2xl font-semibold leading-snug tracking-tight text-foreground outline-none sm:text-[1.75rem]"
         >
           {step.type === "scale" ? `“${step.prompt}”` : step.prompt}
         </h2>
@@ -199,8 +201,11 @@ const StepView = forwardRef<HTMLHeadingElement, StepViewProps>(function StepView
       </div>
       {body}
       {exampleText && (
-        <div id={`${uid}-ex`} className="rounded-lg bg-muted/60 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
-          <span className="font-medium text-foreground">For example: </span>
+        <div
+          id={`${uid}-ex`}
+          className="rounded-xl border border-border/70 bg-muted/50 px-4 py-3 text-sm leading-relaxed text-foreground/80"
+        >
+          <span className="font-semibold text-foreground">For example: </span>
           {exampleText}
         </div>
       )}
