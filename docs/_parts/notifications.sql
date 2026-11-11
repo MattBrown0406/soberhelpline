@@ -34,6 +34,7 @@ CREATE POLICY "Users can update their own preferences"
   WITH CHECK (auth.uid() = user_id);
 
 GRANT SELECT, INSERT, UPDATE ON public.user_notification_preferences TO authenticated;
+GRANT ALL ON public.user_notification_preferences TO service_role;
 
 -- ---------------------------------------------------------------------
 -- 2. Ledgers (service role only: RLS on, no client policies).
@@ -42,25 +43,29 @@ CREATE TABLE IF NOT EXISTS public.forum_notification_log (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   kind text NOT NULL CHECK (kind IN ('reply', 'mention', 'followed', 'host_alert')),
   post_id uuid NOT NULL REFERENCES public.forum_posts(id) ON DELETE CASCADE,
-  recipient_user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  recipient_user_id uuid NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT forum_notification_log_unique UNIQUE (kind, post_id, recipient_user_id)
 );
 CREATE INDEX IF NOT EXISTS forum_notification_log_post_idx ON public.forum_notification_log (post_id);
-ALTER TABLE public.forum_notification_log ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.forum_notification_log FROM anon, authenticated;
+GRANT ALL ON public.forum_notification_log TO service_role;
+ALTER TABLE public.forum_notification_log ENABLE ROW LEVEL SECURITY;
 
 CREATE TABLE IF NOT EXISTS public.member_email_log (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   kind text NOT NULL,
   period_key text NOT NULL,
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  -- No foreign key to auth.users (not allowed here); see account-cleanup.sql.
+  user_id uuid NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT member_email_log_unique UNIQUE (kind, period_key, user_id)
 );
 CREATE INDEX IF NOT EXISTS member_email_log_kind_period_idx ON public.member_email_log (kind, period_key);
-ALTER TABLE public.member_email_log ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.member_email_log FROM anon, authenticated;
+GRANT ALL ON public.member_email_log TO service_role;
+ALTER TABLE public.member_email_log ENABLE ROW LEVEL SECURITY;
 
 -- ---------------------------------------------------------------------
 -- 3. Welcome email: existing members are marked as already welcomed, so
@@ -72,8 +77,8 @@ REVOKE ALL ON public.member_email_log FROM anon, authenticated;
 INSERT INTO public.member_email_log (kind, period_key, user_id)
 SELECT DISTINCT 'welcome', 'once', ps.user_id
 FROM public.provider_subscriptions ps
-JOIN auth.users au ON au.id = ps.user_id
 WHERE ps.provider_submission_id IS NULL
+  AND ps.user_id IS NOT NULL
   AND ps.status IS DISTINCT FROM 'pending'
 ON CONFLICT (kind, period_key, user_id) DO NOTHING;
 
@@ -150,7 +155,10 @@ CREATE TRIGGER on_new_family_membership
   EXECUTE FUNCTION public.trigger_welcome_email();
 
 -- ---------------------------------------------------------------------
--- 4. Scheduled jobs. cron.schedule with an existing name replaces that job,
+-- 4. Scheduled jobs. NOTE (2026-11-11): Lovable creates these with its managed
+--    HTTP scheduling controls instead (see docs/lovable-apply-prompt-member-scheduling.md).
+--    The SQL below documents the schedules; it was not run on the live project.
+--    Scheduled jobs. cron.schedule with an existing name replaces that job,
 --    so re-running does not duplicate. The cron secret is read from
 --    site_settings when each job runs (never pasted into the job).
 -- ---------------------------------------------------------------------
@@ -161,10 +169,11 @@ INSERT INTO public.site_settings (key, value)
 VALUES ('forum_notifications_start_at', to_char(now() AT TIME ZONE 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
 ON CONFLICT (key) DO NOTHING;
 
--- Forum notifications: every 15 minutes.
+-- Forum notifications: once an hour (24 runs a day). The function looks back
+-- 48 hours and its ledger stops repeats, so nothing is missed between runs.
 SELECT cron.schedule(
-  'send-forum-notifications-15min',
-  '*/15 * * * *',
+  'send-forum-notifications-hourly',
+  '7 * * * *',
   $cmd$
   select net.http_post(
     url := 'https://anwqprmpzmcqbkttmxos.supabase.co/functions/v1/send-forum-notifications',
