@@ -23,6 +23,10 @@ What this change does:
 4. **Library rebuild.** The guides and tools kept in the library can be filled
    in, save automatically, and print cleanly. Answers use the existing
    `worksheet_responses` table: no database change for this part.
+   Fifteen guides and seven tools were merged into fuller pages and nine pages
+   were retired; every old address redirects to the page that now holds its
+   content. What members wrote in the old long worksheets stays viewable at
+   `/workbook/earlier`.
 5. **Forum.** Three active spaces, anonymous posting that hides the author from
    other members in the database itself (`forum_posts_secure`), and membership
    checked with `is_active_family_member`.
@@ -514,6 +518,7 @@ and needs the new version to be there.
 - `send-member-weekly-note` (new)
 - `send-member-zoom-reminder` (one link changed)
 - `zoom-webhook` (after-meeting thread only)
+- `send-free-membership-email` (wording only: it no longer mentions tools that were removed)
 
 Please do not change or redeploy any other function, and do not touch the
 Monday registration functions.
