@@ -122,7 +122,7 @@ DECLARE
   _parent_topic text;
 BEGIN
   IF current_user NOT IN ('authenticated', 'anon')
-     OR coalesce(current_setting('request.jwt.claims', true)::jsonb ->> 'role', '') = 'service_role'
+     OR coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role', '') = 'service_role'
      OR public.is_forum_staff(auth.uid()) THEN
     RETURN NEW;
   END IF;
