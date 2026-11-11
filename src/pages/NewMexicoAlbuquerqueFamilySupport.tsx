@@ -67,9 +67,9 @@ export default function NewMexicoAlbuquerqueFamilySupport() {
               the city, with large Native American and Latino populations disproportionately impacted. Families in
               Albuquerque are navigating one of the most severe addiction crises in the country — and deserve real support.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4">
               <Link to="/monday-zoom-registration">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2 w-full sm:w-auto h-auto min-h-11 whitespace-normal py-3">
                   <Calendar className="h-4 w-4" />
                   Join Free Monday Zoom — 7:00 PM Pacific
                 </Button>
@@ -323,7 +323,7 @@ export default function NewMexicoAlbuquerqueFamilySupport() {
               You don't have to wait for a crisis. You don't have to figure this out alone.
               Real support is available right now.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />

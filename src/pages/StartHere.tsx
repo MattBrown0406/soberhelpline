@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
 import CommonFamilyQuestions from "@/components/CommonFamilyQuestions";
+import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks";
 
 const paths = [
   {
@@ -110,6 +111,10 @@ export default function StartHere() {
 
           <AfterHoursSafetyStrip source="start_here_after_hours" showTonightLink />
 
+          <div className="container mx-auto max-w-5xl px-4">
+            <RegionalFamilySupportLinks />
+          </div>
+
           <section className="py-8">
             <div className="container mx-auto max-w-5xl px-4">
               <div className="flex flex-col gap-3 rounded-xl border border-primary/15 bg-muted/30 p-4 sm:flex-row sm:items-center sm:justify-between">
@@ -120,7 +125,7 @@ export default function StartHere() {
                   <Button asChild variant="outline" size="sm">
                     <Link to="/what-to-do-tonight">What to do tonight</Link>
                   </Button>
-                  <Button asChild variant="outline" size="sm">
+                  <Button asChild variant="outline" size="sm" className="h-auto min-h-11 whitespace-normal py-2 text-center">
                     <Link to="/two-households">Two households / the other parent is running a different plan.</Link>
                   </Button>
                   <Button asChild variant="outline" size="sm">

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
@@ -182,6 +183,8 @@ export default function FamilyConsultation() {
               heading="If coaching is only one piece of the plan"
               subheading="Some families need one private session. Others need free weekly support, ongoing coaching, or a readiness plan for a professional intervention. These paths keep the next step clear."
             />
+
+            <RegionalFamilySupportLinks />
 
             <div className="mb-6">
               <TestimonialCarousel />
