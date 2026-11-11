@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const FamilyRolesAddiction = () => {
-  useGuideTracking("Family Roles in Addiction", "/family-roles-addiction");
+  useGuideTracking("/family-roles-addiction", "Family Roles in Addiction");
   const handlePrint = () => {
     window.print();
   };

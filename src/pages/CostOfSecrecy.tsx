@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function CostOfSecrecy() {
-  useGuideTracking("The Cost of Secrecy", "/cost-of-secrecy");
+  useGuideTracking("/cost-of-secrecy", "The Cost of Secrecy");
   const handlePrint = () => {
     window.print();
   };

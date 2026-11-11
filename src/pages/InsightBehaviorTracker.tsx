@@ -15,7 +15,7 @@ import { useGuideTracking } from "@/hooks/useGuideTracking";
 import RelatedResources from "@/components/RelatedResources";
 
 export default function InsightBehaviorTracker() {
-  useGuideTracking("Insight vs. Behavior Tracker", "/insight-behavior-tracker");
+  useGuideTracking("/insight-behavior-tracker", "Insight vs. Behavior Tracker");
   const [timeframe, setTimeframe] = useState("");
   const [insightChecks, setInsightChecks] = useState<string[]>([]);
   const [behaviorChecks, setBehaviorChecks] = useState<string[]>([]);

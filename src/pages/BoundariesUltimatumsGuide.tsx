@@ -10,7 +10,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BoundariesUltimatumsGuide() {
-  useGuideTracking("Requests, Demands, Ultimatums & Boundaries", "/boundaries-ultimatums");
+  useGuideTracking("/boundaries-ultimatums", "Requests, Demands, Ultimatums & Boundaries");
   return (
     <>
       <Helmet>

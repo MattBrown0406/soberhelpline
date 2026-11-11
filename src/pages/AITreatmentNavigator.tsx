@@ -198,7 +198,7 @@ const AITreatmentNavigator = () => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  useGuideTracking("AI Treatment Reality Navigator", "/ai-treatment-navigator");
+  useGuideTracking("/ai-treatment-navigator", "AI Treatment Reality Navigator");
 
   const handleCopy = async () => {
     try {

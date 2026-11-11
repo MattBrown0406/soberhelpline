@@ -10,7 +10,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function TherapyTimingGuide() {
-  useGuideTracking("/therapy-timing-guide", "Why Some Therapies Fail at the Wrong Time");
+  useGuideTracking("/therapy-timing", "Why Some Therapies Fail at the Wrong Time");
   const handlePrint = () => {
     window.print();
   };

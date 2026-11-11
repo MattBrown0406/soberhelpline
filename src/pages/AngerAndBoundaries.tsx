@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function AngerAndBoundaries() {
-  useGuideTracking("Anger and Boundaries Are Not the Same Thing", "/anger-and-boundaries");
+  useGuideTracking("/anger-and-boundaries", "Anger and Boundaries Are Not the Same Thing");
   const handlePrint = () => {
     window.print();
   };

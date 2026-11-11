@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function IntergenerationalEnabling() {
-  useGuideTracking("Intergenerational Enabling", "/intergenerational-enabling");
+  useGuideTracking("/intergenerational-enabling", "Intergenerational Enabling");
   const handlePrint = () => {
     window.print();
   };

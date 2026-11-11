@@ -10,7 +10,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FamilyInterferenceGuide() {
-  useGuideTracking("How Families Accidentally Interfere with Recovery", "/family-interference-guide");
+  useGuideTracking("/family-interference", "How Families Accidentally Interfere with Recovery");
   const handlePrint = () => {
     window.print();
   };

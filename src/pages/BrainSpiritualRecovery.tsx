@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BrainSpiritualRecovery() {
-  useGuideTracking("Addiction, the Brain, and Spiritual Recovery", "/brain-spiritual-recovery");
+  useGuideTracking("/brain-spiritual-recovery", "Addiction, the Brain, and Spiritual Recovery");
   return (
     <>
       <Helmet>

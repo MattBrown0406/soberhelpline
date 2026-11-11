@@ -217,7 +217,7 @@ const AIAddictionRealityTranslator = () => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  useGuideTracking("AI Addiction Reality Translator", "/ai-addiction-reality-translator");
+  useGuideTracking("/ai-addiction-reality-translator", "AI Addiction Reality Translator");
 
   const handleCopy = async () => {
     try {

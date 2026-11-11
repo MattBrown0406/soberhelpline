@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function BoundaryDrift() {
-  useGuideTracking("Boundary Drift: How Limits Slowly Erode", "/boundary-drift");
+  useGuideTracking("/boundary-drift", "Boundary Drift: How Limits Slowly Erode");
   const handlePrint = () => {
     window.print();
   };

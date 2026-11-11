@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const DiseaseChoiceRealityMap = () => {
-  useGuideTracking("The Disease vs. Choice Reality Map", "/disease-choice-reality-map");
+  useGuideTracking("/disease-choice-reality-map", "The Disease vs. Choice Reality Map");
   const handlePrint = () => {
     window.print();
   };

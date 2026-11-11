@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const DrugInducedPsychosis = () => {
-  useGuideTracking("Understanding Drug-Induced Psychosis", "/drug-induced-psychosis");
+  useGuideTracking("/drug-induced-psychosis", "Understanding Drug-Induced Psychosis");
   const handlePrint = () => {
     window.print();
   };

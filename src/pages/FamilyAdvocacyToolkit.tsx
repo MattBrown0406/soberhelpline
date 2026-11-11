@@ -13,7 +13,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const FamilyAdvocacyToolkit = () => {
-  useGuideTracking("Family Advocacy Toolkit", "/family-advocacy-toolkit");
+  useGuideTracking("/family-advocacy-toolkit", "Family Advocacy Toolkit");
   const [preparationChecklist, setPreparationChecklist] = useState<string[]>([]);
   const [clinicalQuestions, setClinicalQuestions] = useState<string[]>([]);
   const [dischargeQuestions, setDischargeQuestions] = useState<string[]>([]);

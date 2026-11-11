@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function EnablingLanguageTranslator() {
-  useGuideTracking("Enabling Language Translator", "/enabling-language-translator");
+  useGuideTracking("/enabling-language-translator", "Enabling Language Translator");
   const translations = [
     {
       enabling: '"Just this once."',

@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GuiltReliefResentmentCycle() {
-  useGuideTracking("The Guilt-Relief-Resentment Cycle", "/guilt-relief-resentment");
+  useGuideTracking("/guilt-relief-resentment", "The Guilt-Relief-Resentment Cycle");
   const handlePrint = () => {
     window.print();
   };

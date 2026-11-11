@@ -123,7 +123,7 @@ const languageEffects = [
 ];
 
 export default function CommunicationGuide() {
-  useGuideTracking("What to Say / What Not to Say", "/communication-guide");
+  useGuideTracking("/communication-guide", "What to Say / What Not to Say");
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMembership, setHasMembership] = useState(false);

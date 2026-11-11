@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function AddictionAttachmentStyles() {
-  useGuideTracking("How Addiction Shapes Attachment Styles", "/addiction-attachment-styles");
+  useGuideTracking("/addiction-attachment-styles", "How Addiction Shapes Attachment Styles");
   const handlePrint = () => {
     window.print();
   };

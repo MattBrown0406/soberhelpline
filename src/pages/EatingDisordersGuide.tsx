@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const EatingDisordersGuide = () => {
-  useGuideTracking("Understanding Eating Disorders", "/eating-disorders-guide");
+  useGuideTracking("/eating-disorders-guide", "Understanding Eating Disorders");
   
   const handlePrint = () => {
     window.print();

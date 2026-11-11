@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FlexibilityVsInstability() {
-  useGuideTracking("The Difference Between Flexibility and Instability", "/flexibility-vs-instability");
+  useGuideTracking("/flexibility-vs-instability", "The Difference Between Flexibility and Instability");
   const handlePrint = () => {
     window.print();
   };

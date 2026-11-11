@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GriefForFamily() {
-  useGuideTracking("Grief for the Family You Thought You'd Have", "/grief-for-family");
+  useGuideTracking("/grief-for-family", "Grief for the Family You Thought You'd Have");
   const handlePrint = () => {
     window.print();
   };

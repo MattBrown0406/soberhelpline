@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function CrisisChaos() {
-  useGuideTracking("Crisis vs. Chaos Decision Guide", "/crisis-chaos");
+  useGuideTracking("/crisis-chaos", "Crisis vs. Chaos Decision Guide");
   const handlePrint = () => {
     window.print();
   };

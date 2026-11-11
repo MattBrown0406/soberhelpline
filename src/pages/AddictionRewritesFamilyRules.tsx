@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionRewritesFamilyRules = () => {
-  useGuideTracking("How Addiction Rewrites Family Rules", "/addiction-rewrites-family-rules");
+  useGuideTracking("/addiction-rewrites-family-rules", "How Addiction Rewrites Family Rules");
   const handlePrint = () => {
     window.print();
   };

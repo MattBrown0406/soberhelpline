@@ -8,7 +8,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function EmotionalRegulation() {
-  useGuideTracking("Emotional Regulation Tools for Families", "/emotional-regulation");
+  useGuideTracking("/emotional-regulation", "Emotional Regulation Tools for Families");
   const handlePrint = () => {
     window.print();
   };

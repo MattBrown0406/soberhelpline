@@ -12,7 +12,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AddictionProgressionTimeline = () => {
-  useGuideTracking("Addiction Progression Timeline", "/addiction-progression-timeline");
+  useGuideTracking("/addiction-progression-timeline", "Addiction Progression Timeline");
   const handlePrint = () => {
     window.print();
   };

@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function GrowingUpShadowAddiction() {
-  useGuideTracking("Growing Up in the Shadow of Addiction", "/growing-up-shadow");
+  useGuideTracking("/growing-up-shadow", "Growing Up in the Shadow of Addiction");
   const handlePrint = () => {
     window.print();
   };

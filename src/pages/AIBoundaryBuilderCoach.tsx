@@ -216,7 +216,7 @@ const AIBoundaryBuilderCoach = () => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  useGuideTracking("AI Boundary Builder Coach", "/ai-boundary-builder-coach");
+  useGuideTracking("/ai-boundary-builder-coach", "AI Boundary Builder Coach");
 
   const handleCopy = async () => {
     try {

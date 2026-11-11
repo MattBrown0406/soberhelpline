@@ -200,7 +200,7 @@ const AIEnablingDecisionCoach = () => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  useGuideTracking("AI Helping vs Enabling Decision Coach", "/ai-enabling-decision-coach");
+  useGuideTracking("/ai-enabling-decision-coach", "AI Helping vs Enabling Decision Coach");
 
   const handleCopy = async () => {
     try {

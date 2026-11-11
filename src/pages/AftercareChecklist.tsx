@@ -13,7 +13,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const AftercareChecklist = () => {
-  useGuideTracking("Aftercare Checklist", "/aftercare-checklist");
+  useGuideTracking("/aftercare-checklist", "Aftercare Checklist");
   const [section1, setSection1] = useState<string[]>([]);
   const [section2, setSection2] = useState<string[]>([]);
   const [section3, setSection3] = useState<string[]>([]);

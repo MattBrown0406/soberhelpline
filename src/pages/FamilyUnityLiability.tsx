@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function FamilyUnityLiability() {
-  useGuideTracking("When Family Unity Becomes a Liability", "/family-unity-liability");
+  useGuideTracking("/family-unity-liability", "When Family Unity Becomes a Liability");
   const handlePrint = () => {
     window.print();
   };

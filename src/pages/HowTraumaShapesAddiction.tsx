@@ -9,7 +9,7 @@ import RelatedResources from "@/components/RelatedResources";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 export default function HowTraumaShapesAddiction() {
-  useGuideTracking("How Trauma Shapes Addiction", "/how-trauma-shapes-addiction");
+  useGuideTracking("/how-trauma-shapes-addiction", "How Trauma Shapes Addiction");
   return (
     <>
       <Helmet>

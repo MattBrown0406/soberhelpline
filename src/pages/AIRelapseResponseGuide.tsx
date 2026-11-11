@@ -241,7 +241,7 @@ const AIRelapseResponseGuide = () => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
-  useGuideTracking("AI Relapse Response Guide", "/ai-relapse-response-guide");
+  useGuideTracking("/ai-relapse-response-guide", "AI Relapse Response Guide");
 
   const handleCopy = async () => {
     try {
