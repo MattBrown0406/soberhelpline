@@ -277,8 +277,8 @@ All colors MUST be HSL.
     color-scheme: light !important;
   }
 
-  /* Site chrome never belongs on a printed guide or worksheet. */
-  footer,
+  /* Site chrome never belongs on a printed guide or worksheet. (The site
+     footer and top bar carry print:hidden; a guide's own print footer stays.) */
   [data-print="hide"] {
     display: none !important;
   }

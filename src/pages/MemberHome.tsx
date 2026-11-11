@@ -13,6 +13,7 @@ import EducationProgressBar from "@/components/EducationProgressBar";
 import NotificationSettings from "@/components/NotificationSettings";
 import ExerciseGrid from "@/components/workbook/ExerciseGrid";
 import { ASK_MONDAY_QUESTION_HREF, fetchMemberJoinUrl } from "@/components/MemberZoomBanner";
+import { describeSavedKey } from "@/data/savedTools";
 import { useEducationProgress } from "@/hooks/useEducationProgress";
 import { MEMBER_TRACKS, useLearningPath } from "@/hooks/useLearningPath";
 import { useToast } from "@/hooks/use-toast";
@@ -386,6 +387,22 @@ function ContinueCard({ userId }: { userId: string | null }) {
         icon: BookOpen,
       });
     }
+  }
+
+  // Saved plans, check-ins and guide notes (most recent first; a few notes at most).
+  let notesShown = 0;
+  for (const row of worksheets) {
+    const info = describeSavedKey(row.worksheet_key);
+    if (!info) continue;
+    if (info.kind === "Notes" && ++notesShown > 2) continue;
+    items.push({
+      key: `saved-${row.worksheet_key}`,
+      to: info.path,
+      title: info.title,
+      detail: `Saved ${relativeDate(row.updated_at)}`,
+      badge: info.kind,
+      icon: FileText,
+    });
   }
 
   for (const row of worksheets) {

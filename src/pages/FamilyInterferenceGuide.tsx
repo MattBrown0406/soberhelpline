@@ -98,8 +98,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 1. Over-Functioning */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
-                      <span className="font-semibold text-left">Over-Functioning: Doing What the Person Should Be Doing</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+                    <span className="font-semibold text-left">Over-Functioning: Doing What the Person Should Be Doing</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -140,8 +140,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 2. Emotional Rescuing */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-pink-600 text-white flex items-center justify-center text-xs font-bold">2</span>
-                      <span className="font-semibold text-left">Emotional Rescuing</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-pink-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+                    <span className="font-semibold text-left">Emotional Rescuing</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -186,8 +186,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 3. Inconsistent Boundaries */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs font-bold">3</span>
-                      <span className="font-semibold text-left">Inconsistent Boundaries</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+                    <span className="font-semibold text-left">Inconsistent Boundaries</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -227,8 +227,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 4. Confusing Insight with Readiness */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">4</span>
-                      <span className="font-semibold text-left">Confusing Insight with Readiness</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">4</span>
+                    <span className="font-semibold text-left">Confusing Insight with Readiness</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -267,8 +267,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 5. Shielding from Consequences */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">5</span>
-                      <span className="font-semibold text-left">Shielding from Consequences</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">5</span>
+                    <span className="font-semibold text-left">Shielding from Consequences</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -307,8 +307,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 6. Focusing on Mental Health to Avoid Addiction */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">6</span>
-                      <span className="font-semibold text-left">Focusing on Mental Health to Avoid Addiction</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">6</span>
+                    <span className="font-semibold text-left">Focusing on Mental Health to Avoid Addiction</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>
@@ -347,8 +347,8 @@ export default function FamilyInterferenceGuide() {
                 {/* 7. Carrying the Entire Recovery Process */}
                 <section className="rounded-lg border bg-card p-5 print:break-inside-avoid">
                   <h3 className="flex items-center gap-3 text-lg">
-                      <span className="w-6 h-6 shrink-0 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">7</span>
-                      <span className="font-semibold text-left">Carrying the Entire Recovery Process</span>
+                    <span className="w-6 h-6 shrink-0 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">7</span>
+                    <span className="font-semibold text-left">Carrying the Entire Recovery Process</span>
                   </h3>
                   <div className="space-y-4 pt-4">
                     <div>

@@ -454,7 +454,7 @@ const App = () => (
               <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
               <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
               <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
-              <Route path="/communication-guide" element={<CommunicationGuide />} />
+              <Route path="/communication-guide" element={<SubscriberRoute><CommunicationGuide /></SubscriberRoute>} />
               <Route path="/aftercare-checklist" element={<AftercareChecklist />} />
               <Route path="/treatment-red-flags" element={<TreatmentRedFlags />} />
               <Route path="/family-advocacy-toolkit" element={<FamilyAdvocacyToolkit />} />

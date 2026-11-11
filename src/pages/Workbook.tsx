@@ -17,6 +17,7 @@ import {
 import ExerciseCard from "@/components/workbook/ExerciseCard";
 import OutputView from "@/components/workbook/OutputView";
 import CompareView from "@/components/workbook/CompareView";
+import SavedToolsList from "@/components/workbook/SavedToolsList";
 import { useWorkbook, type WorkbookEntry } from "@/hooks/useWorkbook";
 import { EXERCISES, exercisePath, getExercise, hasDraft, outputToText, shortDate } from "@/data/exercises";
 
@@ -122,6 +123,8 @@ export default function Workbook() {
               ))}
             </div>
           </section>
+
+          <SavedToolsList />
 
           <section aria-labelledby="wb-saved">
             <h2 id="wb-saved" className="mb-4 text-xl font-semibold text-foreground">

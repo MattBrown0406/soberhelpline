@@ -1,1 +1,83 @@
-{}
+{
+  "/treatment-questions": [
+    "After speaking with the center, ask yourself: Did I feel informed or pressured?",
+    "Were answers clear or evasive?",
+    "Did they welcome my questions?",
+    "Do their values align with ours?",
+    "Would I trust them with someone I love?"
+  ],
+  "/talking-about-treatment": [
+    "What have you seen with your own eyes that you will name in this conversation, as facts and not judgments?",
+    "If they choose not to pursue treatment, what will change? Can you say it calmly and briefly?",
+    "What will help you stop talking once you've said it, and not soften the boundary afterwards?"
+  ],
+  "/legal-issues-guide": [
+    "Where have you stepped between your loved one and a legal consequence, and what did it cost you?",
+    "What are you personally exposed to right now (co-signed leases or loans, the car, who lives in your house)?",
+    "Who could advise you before you make the next legal or money decision?"
+  ],
+  "/treatment-modalities": [
+    "What has been recommended for your loved one, and what problem is it meant to treat?",
+    "What are you expecting therapy to do that only structure and boundaries can do?",
+    "What will you ask the treatment team about what happens if this doesn't work?"
+  ],
+  "/non-twelve-step-modalities": [
+    "What in their plan provides daily accountability, connection, and meaning?",
+    "What are you afraid will happen if they choose a path other than the 12 Steps?",
+    "What behavior, not words, would tell you their plan is working?"
+  ],
+  "/boundaries-ultimatums": [
+    "Which tool do we overuse?",
+    "Where do we collapse boundaries emotionally?",
+    "What consequence are we afraid to allow?",
+    "Are we asking for change—or planning for reality?",
+    "What would consistency look like for 30 days?"
+  ],
+  "/no-negotiation": [
+    "What deal or compromise have you made more than once, and what happened to it?",
+    "What is one thing you want to decide now, while it's calm, so you don't have to decide it in the next crisis?",
+    "Who or what outside the family could hold some of the structure, so you aren't the enforcer?"
+  ],
+  "/boundary-drift": [
+    "Where have our boundaries softened over time?",
+    "What emotion tends to trigger exceptions?",
+    "What consequence have we delayed or avoided?",
+    "Where are we more exhausted than intentional?",
+    "What boundary needs to be reset right now?"
+  ],
+  "/anger-and-boundaries": [
+    "What boundary do I only hold when I'm angry?",
+    "What happens to that boundary when I calm down?",
+    "What fear or guilt surfaces when anger fades?",
+    "What value needs protection here?",
+    "What would it look like to hold this boundary calmly?"
+  ],
+  "/what-changes-when-families-change": [
+    "What are we currently doing that keeps the system stuck?",
+    "What would change if we stopped absorbing consequences?",
+    "Where are we confusing love with rescue?",
+    "What would family health look like—regardless of outcome?",
+    "What do we need to protect now?"
+  ],
+  "/living-well-regardless": [
+    "What have we put on hold waiting for change?",
+    "What does \"living well\" mean for us right now—not someday?",
+    "What guilt do we need to question?",
+    "What would stability look like regardless of outcome?",
+    "What is one small step toward reclaiming life this month?"
+  ],
+  "/grief-for-family": [
+    "What family did I imagine we would be?",
+    "What am I grieving that I've never named?",
+    "Where have I been holding my breath, waiting?",
+    "What does acceptance—not approval—look like?",
+    "What kind of life can I build today, regardless of outcome?"
+  ],
+  "/safe-to-open-up": [
+    "What behaviors make me feel safer—not more hopeful?",
+    "What happens in my body when I imagine opening up?",
+    "Where have I overridden my instincts before?",
+    "What pace protects me right now?",
+    "What would self-respect look like in this season?"
+  ]
+}
