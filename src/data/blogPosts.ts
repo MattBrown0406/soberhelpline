@@ -8093,7 +8093,7 @@ What works better:
 
 One of the most powerful things a family can do in recovery is help build a new normal — one where fun doesn't have to include alcohol or other substances.
 
-Summer actually offers a lot of room to do this. Camping trips, hiking, paddleboarding, fishing, outdoor concerts, road trips, farmers markets, cooking out — none of these require a drink in hand to be enjoyable. When families invest in [sober-friendly activities as a family](/recovery-friendly-home-after-rehab) like these, they do something important: they show that connection and joy are available in sobriety.
+Summer actually offers a lot of room to do this. Camping trips, hiking, paddleboarding, fishing, outdoor concerts, road trips, farmers markets, cooking out — none of these require a drink in hand to be enjoyable. When families invest in [sober-friendly activities as a family](/blog/recovery-friendly-home-after-rehab) like these, they do something important: they show that connection and joy are available in sobriety.
 
 This isn't about avoiding everything. It's about expanding the definition of a good time.
 
@@ -8103,7 +8103,7 @@ If your loved one is working the 12-step program, ask about sober events in your
 
 Families often struggle with this: how much attention is enough, and how much is too much?
 
-The honest answer is that anxiety about your loved one's recovery is normal — especially in summer when there are more social variables. But [hypervigilance in recovery](/hypervigilance-families-addiction-recovery) can damage the relationship and undermine your loved one's sense of their own competence.
+The honest answer is that anxiety about your loved one's recovery is normal — especially in summer when there are more social variables. But [hypervigilance in recovery](/addiction-anxiety-family-burnout) can damage the relationship and undermine your loved one's sense of their own competence.
 
 Be concerned if you notice:
 
@@ -8441,7 +8441,7 @@ You are allowed to have a life while someone you love is still struggling. In fa
 
 If you take one thing from this, let it be this: the isolation is a symptom of the situation, not a verdict on you. You are still capable of friendship, laughter, and connection — those parts of you did not vanish, they just went quiet while you held everything together. Begin with one text, one walk, one honest conversation, and let it build from there.
 
-Reconnecting is not a betrayal of your loved one. It is how you stay strong enough to keep loving them well — and how you remember that your life is worth tending, too. If you want steady, judgment-free company as you rebuild, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for families walking this road. You may also find these helpful: [caregiver burnout and self-care for families](/family-education) and [letting go of guilt when a loved one has an addiction](/blog/letting-go-of-guilt-when-loved-one-has-addiction). Take the first small step today, and then take another tomorrow.`,
+Reconnecting is not a betrayal of your loved one. It is how you stay strong enough to keep loving them well — and how you remember that your life is worth tending, too. If you want steady, judgment-free company as you rebuild, SoberHelpline.com offers coaching and a [membership community](/family-membership) built exactly for families walking this road. You may also find these helpful: [caregiver burnout and self-care for families](/family-education) and [letting go of guilt when a loved one has an addiction](/blog/letting-go-of-guilt-when-loved-one-has-addiction). Take the first small step today, and then take another tomorrow.`,
     faqItems: [
       {
         question: "Why do I feel so alone when my loved one is the one with the addiction?",
@@ -8539,7 +8539,7 @@ If you take one thing from this, let it be this: the guilt you feel is proof of 
 
 Healing for your loved one may still be uncertain, but your own healing does not have to wait for theirs. You are allowed to breathe, to rest, and to build a life that holds steady no matter what happens next. That steadiness is not a betrayal of your loved one. It may be the most hopeful thing you can offer them.
 
-If you want steady, judgment-free guidance as you set guilt down and rebuild your footing, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for families walking this road. You may also find these helpful: [setting healthy boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [caregiver burnout and self-care for families](/family-education). You do not have to figure it out alone.`,
+If you want steady, judgment-free guidance as you set guilt down and rebuild your footing, SoberHelpline.com offers coaching and a [membership community](/family-membership) built exactly for families walking this road. You may also find these helpful: [setting healthy boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [caregiver burnout and self-care for families](/family-education). You do not have to figure it out alone.`,
     faqItems: [
       {
         question: "Is it my fault that my loved one became addicted?",
@@ -8642,7 +8642,7 @@ It also helps to agree on this with your immediate family so everyone's telling 
 
 You don't have to explain everything to everyone. You don't have to defend your loved one, your decisions, or your family to people who are reacting instead of helping. The goal isn't secrecy — it's appropriate honesty that protects everyone's dignity, including your own.
 
-If you want support thinking through what to say to a specific person, or you're looking for steady, judgment-free guidance through the harder conversations, SoberHelpline.com offers coaching and a [membership community](/membership) built exactly for this. You may also find these helpful: [setting boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [how to talk to a spouse about addiction](/blog/how-to-talk-to-loved-one-about-addiction). For ongoing peer support, [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) are excellent resources. You don't have to figure it out alone.`,
+If you want support thinking through what to say to a specific person, or you're looking for steady, judgment-free guidance through the harder conversations, SoberHelpline.com offers coaching and a [membership community](/family-membership) built exactly for this. You may also find these helpful: [setting boundaries with an addicted loved one](/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member) and [how to talk to a spouse about addiction](/blog/how-to-talk-to-loved-one-about-addiction). For ongoing peer support, [Al-Anon](https://al-anon.org) and [Nar-Anon](https://www.nar-anon.org) are excellent resources. You don't have to figure it out alone.`,
     faqItems: [
       {
         question: "Should I tell extended family that a loved one is in addiction treatment?",
@@ -9170,7 +9170,7 @@ Examples of these criteria include things like: drinking or using more than inte
 
 Not as cleanly as you'd hope. A "mild" diagnosis doesn't mean someone is fine and doesn't need help. A "severe" diagnosis doesn't mean someone is beyond help. Severity at one point in time is a snapshot — it describes a pattern over the last year, not a life sentence.
 
-What severity level does predict, generally, is the intensity of support that tends to be most helpful. Someone with a mild substance use disorder might respond well to outpatient counseling, a structured program like SMART Recovery, or coaching support. Someone with a severe substance use disorder more often needs medical detox, residential treatment, or a higher [level of care](/level-of-care) before outpatient support can really take hold.
+What severity level does predict, generally, is the intensity of support that tends to be most helpful. Someone with a mild substance use disorder might respond well to outpatient counseling, a structured program like SMART Recovery, or coaching support. Someone with a severe substance use disorder more often needs medical detox, residential treatment, or a higher [level of care](/levels-of-care-addiction-treatment) before outpatient support can really take hold.
 
 This is useful information for treatment planning. It is far less useful as a way to decide how worried you should be, or how much your loved one "really" has a problem. We've talked with families whose loved one technically met criteria for "mild" use disorder and whose lives were falling apart around them — and families whose loved one was assessed as "severe" and went on to build a strong, stable recovery.
 
@@ -24969,7 +24969,7 @@ Healthy boundaries tend to share these qualities:
 
 Setting boundaries with someone you love feels harsh — especially when that person is suffering. Families often confuse love with availability. If I love them, shouldn't I be there for them no matter what?
 
-The problem is that unconditional availability isn't the same as unconditional love. When you keep covering for someone, lending money you know will be spent on substances, or staying silent to keep the peace, you're not protecting them from consequences — you're absorbing those consequences yourself. Over time, this pattern removes one of the most powerful forces that motivates change: the natural outcome of a person's own choices. Learning the difference between [LINK:enabling vs. supporting your addicted loved one:/enabling-vs-supporting-your-addicted-loved-one] is one of the most important shifts a family can make.
+The problem is that unconditional availability isn't the same as unconditional love. When you keep covering for someone, lending money you know will be spent on substances, or staying silent to keep the peace, you're not protecting them from consequences — you're absorbing those consequences yourself. Over time, this pattern removes one of the most powerful forces that motivates change: the natural outcome of a person's own choices. Learning the difference between [LINK:enabling vs. supporting your addicted loved one:/blog/how-to-stop-enabling-addiction] is one of the most important shifts a family can make.
 
 Addiction also makes loved ones very skilled at finding the gaps in family systems. They know who to call, what to say, and how to trigger guilt. If one family member draws a line, another may pick up the slack without realizing it. This is why family systems — not just individuals — need to get on the same page about boundaries.
 
@@ -25105,7 +25105,7 @@ Some conversations are too high-stakes, too emotionally charged, or too entrench
 
 A [LINK:family coach or therapist:/family-coaching] can help you prepare, practice, and sometimes facilitate the conversation directly. There's no award for doing this entirely on your own — asking for help is not giving up, it's being strategic about what your loved one most needs from you right now.
 
-If you've also been struggling with the line between supporting and enabling, our guide on [LINK:how to stop enabling addiction:/enabling-vs-supporting-your-addicted-loved-one] and [LINK:setting healthy boundaries with an addicted loved one:/how-to-set-healthy-boundaries-with-an-addicted-family-member] will give you grounded next steps.
+If you've also been struggling with the line between supporting and enabling, our guide on [LINK:how to stop enabling addiction:/blog/how-to-stop-enabling-addiction] and [LINK:setting healthy boundaries with an addicted loved one:/blog/how-to-set-healthy-boundaries-with-an-addicted-family-member] will give you grounded next steps.
 
 **You Don't Have to Find the Right Words Alone**
 

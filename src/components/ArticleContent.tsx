@@ -1,4 +1,21 @@
 import { Fragment, type ReactNode } from "react";
+import { Link, useInRouterContext } from "react-router-dom";
+
+const linkClass = "text-primary hover:underline font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
+
+// Links to our own pages stay in the same tab and do not reload the site.
+// The static pre-render and the renderer test run without a router, so those
+// get a plain link to the same address.
+const ArticleLink = ({ href, children }: { href: string; children: ReactNode }) => {
+  const inRouter = useInRouterContext();
+  const internal = href.startsWith("/") || href.startsWith("#");
+  if (!internal) {
+    const web = /^https?:/i.test(href);
+    return <a href={href} {...(web ? { target: "_blank", rel: "noopener noreferrer" } : {})} className={linkClass}>{children}</a>;
+  }
+  if (inRouter && href.startsWith("/")) return <Link to={href} className={linkClass}>{children}</Link>;
+  return <a href={href} className={linkClass}>{children}</a>;
+};
 
 // Deliberately small text-only Markdown dialect. Never interpret source HTML.
 const safeHref = (value: string) => {
@@ -20,7 +37,7 @@ const inline = (text: string): ReactNode[] => {
     const label = match[1] ?? match[3];
     const href = safeHref(match[2] ?? match[4] ?? '');
     parts.push(match[5] ? <strong key={match.index}>{match[5]}</strong> : href ?
-      <a key={match.index} href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">{label}</a> :
+      <ArticleLink key={match.index} href={href}>{label}</ArticleLink> :
       <Fragment key={match.index}>{label}</Fragment>);
     end = match.index! + match[0].length;
   }

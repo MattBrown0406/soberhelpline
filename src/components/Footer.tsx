@@ -5,6 +5,7 @@ import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge"
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { arrivedFromApp } from "@/lib/webSession";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,6 +13,10 @@ const Footer = () => {
   // (App Store guideline 3.1.1). Read on every render; Layout re-renders the
   // footer on each page change.
   const fromApp = arrivedFromApp();
+  // Visitors see which links open member pages before they click; the forum
+  // link takes them to the page that explains the forum instead of a lock.
+  const { isMember } = useMembershipStatus();
+  const memberTag = isMember ? null : <span className="text-gray-500"> (members)</span>;
   
   return (
     <footer className="bg-gray-900 text-gray-300 mt-auto print:hidden">
@@ -63,14 +68,14 @@ const Footer = () => {
               <li><Link to="/start-here" className="text-sm hover:text-white transition-colors">Start Here</Link></li>
               <li><Link to="/what-to-do-tonight" className="text-sm hover:text-white transition-colors">What to Do Tonight</Link></li>
               <li><Link to="/two-households" className="text-sm hover:text-white transition-colors">Two Households</Link></li>
-              <li><Link to="/family-forum" className="text-sm hover:text-white transition-colors">Family Forum</Link></li>
-              <li><Link to="/family-education" className="text-sm hover:text-white transition-colors">Education Center</Link></li>
+              <li><Link to={isMember ? "/family-forum" : "/family-support-forum"} className="text-sm hover:text-white transition-colors">Family Forum{memberTag}</Link></li>
+              <li><Link to="/family-education" className="text-sm hover:text-white transition-colors">Education Center{memberTag}</Link></li>
               <li><Link to="/blog" className="text-sm hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/family-coaching" className="text-sm hover:text-white transition-colors">Coaching</Link></li>
               <li><Link to="/family-consultation" className="text-sm hover:text-white transition-colors">Crisis Coaching Session</Link></li>
               <li><Link to="/intervention-help" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
               <li><Link to="/family-squares" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
-              <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings</Link></li>
+              <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings{memberTag}</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>
               <li><Link to="/free-guide" className="text-sm hover:text-white transition-colors">Free Guide</Link></li>
             </ul>

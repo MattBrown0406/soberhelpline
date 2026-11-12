@@ -7,6 +7,7 @@ import { ArrowLeft, Phone } from "lucide-react";
 import { useGuideTracking } from "@/hooks/useGuideTracking";
 import SEOHead from "@/components/SEOHead";
 import RelatedResources from "@/components/RelatedResources";
+import MondayInvite from "@/components/MondayInvite";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
 
 const questions = [
@@ -215,6 +216,13 @@ const AddictionAssessment = () => {
               </Button>
             </a>
           </div>
+
+          <MondayInvite
+            source="addiction_assessment_end"
+            className="mt-6"
+            heading="Checking this for someone you love?"
+            body="Bring what you noticed to Family Squares, the free family support meeting on Zoom every Monday night. You can listen with your camera off or ask what to do next."
+          />
         </div>
       </div>
       <RelatedResources currentPath="/addiction-assessment" />

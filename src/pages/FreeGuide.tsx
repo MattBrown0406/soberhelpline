@@ -3,21 +3,84 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Download, Printer, BookOpen, Heart, Shield, Users, Brain, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import SEOHead from "@/components/SEOHead";
+import MondayInvite from "@/components/MondayInvite";
+import { supabase } from "@/integrations/supabase/client";
+import { trackConversionEvent } from "@/lib/conversionTracking";
+import { arrivedFromApp } from "@/lib/webSession";
+
+const ACCESS_KEY = "freeGuideAccess";
+
+const readStoredAccess = () => {
+  try {
+    return (
+      localStorage.getItem(ACCESS_KEY) === "true" ||
+      // Earlier visitors unlocked the guide by closing the home page pop-up.
+      localStorage.getItem("leadMagnetDismissed") === "true"
+    );
+  } catch {
+    return false;
+  }
+};
 
 const FreeGuide = () => {
   const [searchParams] = useSearchParams();
   const [canAccess, setCanAccess] = useState(false);
 
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
   useEffect(() => {
-    // Check if user came from lead magnet signup or has access token
-    const accessGranted = searchParams.get("access") === "granted" || 
-                          localStorage.getItem("leadMagnetDismissed") === "true";
-    setCanAccess(accessGranted);
+    setCanAccess(searchParams.get("access") === "granted" || readStoredAccess());
   }, [searchParams]);
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const openGuide = () => {
+    try {
+      localStorage.setItem(ACCESS_KEY, "true");
+    } catch {
+      // Private browsing: the guide still opens for this visit.
+    }
+    setCanAccess(true);
+    window.scrollTo(0, 0);
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (submitting) return;
+    const name = firstName.trim();
+    const address = email.trim();
+    if (!name) {
+      setFormError("Please add your first name.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) {
+      setFormError("Please check your email address.");
+      return;
+    }
+    setFormError(null);
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.functions.invoke("lead-magnet-signup", {
+        body: { firstName: name, email: address, source: "free-guide" },
+      });
+      if (error) throw error;
+      trackConversionEvent("lead_magnet_signup", { source: "free_guide_page" });
+    } catch (error) {
+      // Our sign-up service failing is not the reader's problem: they asked for
+      // the guide, so they still get it.
+      console.error("Free guide signup error:", error);
+    } finally {
+      setSubmitting(false);
+      openGuide();
+    }
   };
 
   if (!canAccess) {
@@ -27,17 +90,55 @@ const FreeGuide = () => {
           title="Free Guide - 5 Things Families Wish They Knew | Sober Helpline"
           description="Get our free guide on what every family wishes they knew sooner about addiction."
         />
-        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="min-h-[70vh] bg-background flex items-center justify-center p-4 py-12">
           <Card className="max-w-md w-full">
-            <CardContent className="pt-6 text-center">
-              <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h1 className="text-xl font-bold mb-2">Access Required</h1>
-              <p className="text-muted-foreground mb-6">
-                Share your email and we'll send you straight to the guide.
-              </p>
-              <Link to="/">
-                <Button>Go to Homepage</Button>
-              </Link>
+            <CardContent className="pt-6">
+              <div className="text-center">
+                <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h1 className="text-xl font-bold mb-2">5 Things Families Wish They Knew Sooner</h1>
+                <p className="text-muted-foreground mb-6">
+                  A short, practical guide for families living with a loved one's addiction. Tell us where to
+                  send family resources and you can read it right away.
+                </p>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                <div className="space-y-2">
+                  <Label htmlFor="free-guide-first-name">First name</Label>
+                  <Input
+                    id="free-guide-first-name"
+                    autoComplete="given-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    maxLength={80}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="free-guide-email">Email</Label>
+                  <Input
+                    id="free-guide-email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    maxLength={254}
+                    required
+                  />
+                </div>
+                {formError && (
+                  <p role="alert" className="text-sm text-destructive">
+                    {formError}
+                  </p>
+                )}
+                <Button type="submit" className="w-full" disabled={submitting}>
+                  {submitting ? "Opening the guide..." : "Read the free guide"}
+                </Button>
+                <p className="text-xs text-muted-foreground text-center">
+                  We'll add you to the Sober Helpline email list for family resources. Unsubscribe any time.
+                  See our <Link to="/privacy" className="underline">privacy policy</Link>.
+                </p>
+              </form>
             </CardContent>
           </Card>
         </div>
@@ -296,26 +397,22 @@ const FreeGuide = () => {
             </div>
           </div>
 
-          {/* CTA - No Print */}
-          <div className="no-print text-center border-t pt-12">
-            <h3 className="text-xl font-bold mb-3">Ready for More Support?</h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              If you want more support, the family membership gives you the full curriculum, private forum, live webinars, and other tools you can actually use.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/family-membership">
-                <Button size="lg" className="gap-2">
-                  <Users className="w-4 h-4" />
-                  Explore Membership
-                </Button>
-              </Link>
-              <Link to="/family-education">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <BookOpen className="w-4 h-4" />
-                  View Free Resources
-                </Button>
-              </Link>
-            </div>
+          {/* Next steps - No Print */}
+          <div className="no-print border-t pt-12">
+            <MondayInvite
+              source="free_guide_end"
+              heading="The next step is free too"
+              body="Bring what you just read to Family Squares, the free family support meeting on Zoom every Monday night. Listen with your camera off or ask your question."
+            />
+            {!arrivedFromApp() && (
+              <p className="mt-6 text-center text-sm text-muted-foreground">
+                Want more to work through between Mondays?{" "}
+                <Link to="/family-membership" className="font-medium text-primary hover:underline">
+                  See the family membership
+                </Link>
+                .
+              </p>
+            )}
           </div>
 
           {/* Footer */}

@@ -56,6 +56,10 @@ const Auth = () => {
     [searchParams]
   );
 
+  // Links that start a new membership (?mode=signup) open on the Sign Up tab,
+  // so a new visitor is not shown a login form first.
+  const initialTab = searchParams.get("mode") === "signup" ? "signup" : "login";
+
   // Signup form state
   const [signupData, setSignupData] = useState({
     firstName: "",
@@ -349,7 +353,7 @@ const Auth = () => {
             </CardContent>
           </Card>
         ) : (
-        <Tabs defaultValue="login" className="w-full">
+        <Tabs defaultValue={initialTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
             <TabsTrigger value="signup">Sign Up</TabsTrigger>

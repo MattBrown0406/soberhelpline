@@ -67,7 +67,7 @@ const benefits = [
   {
     icon: Star,
     title: "Part of a Bigger Support System",
-    desc: "Membership includes the forum, the education library, recorded webinars, and access to the free “The Family Squares”. You're not just joining a forum, you're joining a full recovery support system.",
+    desc: "Membership includes the forum, the education library, and recordings of past “The Family Squares” meetings. The live Monday meeting is free for everyone. You're not just joining a forum, you're joining a full recovery support system.",
   },
 ];
 
@@ -357,7 +357,7 @@ export default function FamilyForumLanding() {
             <div className="grid sm:grid-cols-2 gap-4 mb-10">
               {[
                 { icon: MessagesSquare, label: "Private Family Forum", desc: "Anonymous, professionally moderated, always open" },
-                { icon: Calendar, label: "The Family Squares", desc: "Live weekly call with Matt Brown, free for members" },
+                { icon: Calendar, label: "The Family Squares Recordings", desc: "The live Monday call with Matt Brown is free for everyone. Members can watch past sessions" },
                 { icon: BookOpen, label: "60+ Guides, Tools & Meditations", desc: "Evidence-based curriculum for family recovery" },
                 { icon: Sparkles, label: "Guided Exercises & Tools", desc: "Boundary script, helping-or-enabling check, treatment program check" },
                 { icon: Heart, label: "Recorded Webinars", desc: "Watch past sessions on your schedule" },

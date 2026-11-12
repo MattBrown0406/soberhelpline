@@ -28,6 +28,23 @@ const allowedEvents = new Set([
   "family_answer_view",
   "family_answer_click",
   "family_answer_hub_click",
+  // Membership funnel: interest, account, checkout, back-out, member.
+  "membership_click",
+  "membership_trial_click",
+  "membership_checkout_start",
+  "membership_checkout_abandoned",
+  "membership_signup_success",
+  "sober_helpline_app_store_click",
+  "whatsapp_click",
+  "kiosk_attract_view",
+  "kiosk_form_started",
+  "kiosk_registration_submit",
+  "kiosk_registration_success",
+  "kiosk_registration_failure",
+  "kiosk_app_qr_view",
+  "kiosk_offline_view",
+  "kiosk_help_view",
+  "kiosk_form_cleared",
 ]);
 
 const trimText = (value: unknown, maxLength = 500) => {
