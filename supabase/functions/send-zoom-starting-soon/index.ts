@@ -1,4 +1,5 @@
 import "../_shared/suppression.ts";
+import { stopAutoRegistrationUrl } from "../_shared/stopAutoRegistration.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
@@ -104,7 +105,7 @@ serve(async (req: Request) => {
 
     const { data: registrants, error } = await adminSupabase
       .from("zoom_meeting_registrations")
-      .select("id, name, email, registration_source")
+      .select("id, name, email, registration_source, auto_register")
       .eq("meeting_date", targetDate);
 
     if (error) throw error;
@@ -122,8 +123,16 @@ serve(async (req: Request) => {
         .map((r: any) => normalizeEmail(r.email)),
     );
 
+    // Anyone with a weekly automatic registration for tonight, whichever of
+    // their rows is kept below.
+    const autoRegistered = new Set(
+      (registrants || [])
+        .filter((r: any) => r.auto_register === true)
+        .map((r: any) => normalizeEmail(r.email)),
+    );
+
     const seen = new Set<string>();
-    const candidates: { id?: string; name: string; email: string }[] = [];
+    const candidates: { id?: string; name: string; email: string; auto_register?: boolean | null }[] = [];
     for (const r of registrants || []) {
       const key = (r.email || "").toLowerCase();
       if (!key || seen.has(key) || suppressedEmails.has(key)) continue;
@@ -153,6 +162,20 @@ serve(async (req: Request) => {
       const joinUrl = reg.id
         ? `${supabaseUrl}/functions/v1/track-zoom-click?rid=${encodeURIComponent(reg.id)}`
         : baseJoinUrl;
+
+      // People who are registered automatically each week can stop it
+      // themselves. If the link cannot be made, the reminder goes out without it.
+      let stopWeeklyLine = "";
+      if (reg.id && autoRegistered.has(normalizeEmail(reg.email))) {
+        try {
+          const stopUrl = await stopAutoRegistrationUrl(reg.id);
+          if (stopUrl) {
+            stopWeeklyLine = `<p style="color: #6b7280; font-size: 12px;">You are registered for this meeting automatically each week. <a href="${escapeHtml(stopUrl)}" style="color: #6b7280;">Stop weekly registration</a>.</p>`;
+          }
+        } catch (linkError) {
+          console.error("send-zoom-starting-soon: stop link failed:", linkError instanceof Error ? linkError.message : linkError);
+        }
+      }
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
@@ -197,6 +220,7 @@ serve(async (req: Request) => {
             If you have any questions, call us at <strong>(458) 298-8008</strong>.
           </p>
           <p style="color: #6b7280; font-size: 12px;">Sober Helpline — Supporting Families Through Recovery</p>
+          ${stopWeeklyLine}
         </div>
       `;
 
