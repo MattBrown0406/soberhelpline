@@ -61,7 +61,7 @@ const Blog = () => {
               <Card className={`hover:shadow-lg transition-shadow overflow-hidden h-full ${post.content ? "cursor-pointer" : ""}`}>
                 {post.image && (
                   <div className="w-full h-48 overflow-hidden">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                    <img src={post.image} alt={post.title} loading={index < 3 ? "eager" : "lazy"} decoding="async" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <CardHeader>
