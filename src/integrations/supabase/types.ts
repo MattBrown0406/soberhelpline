@@ -1469,6 +1469,94 @@ export type Database = {
           },
         ]
       }
+      family_squares_sms_log: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          kind: string
+          meeting_date: string
+          optin_id: string
+          provider_message_id: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          kind?: string
+          meeting_date: string
+          optin_id: string
+          provider_message_id?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          kind?: string
+          meeting_date?: string
+          optin_id?: string
+          provider_message_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_sms_log_optin_id_fkey"
+            columns: ["optin_id"]
+            isOneToOne: false
+            referencedRelation: "family_squares_sms_optins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_squares_sms_optins: {
+        Row: {
+          confirmation_sent_at: string | null
+          consent_text: string
+          consented_at: string
+          created_at: string
+          email: string
+          id: string
+          opted_out_at: string | null
+          phone: string
+          registration_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          confirmation_sent_at?: string | null
+          consent_text: string
+          consented_at?: string
+          created_at?: string
+          email: string
+          id?: string
+          opted_out_at?: string | null
+          phone: string
+          registration_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          confirmation_sent_at?: string | null
+          consent_text?: string
+          consented_at?: string
+          created_at?: string
+          email?: string
+          id?: string
+          opted_out_at?: string | null
+          phone?: string
+          registration_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_squares_sms_optins_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_meeting_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       family_squares_weekly_checkins: {
         Row: {
           biggest_disagreement: string | null

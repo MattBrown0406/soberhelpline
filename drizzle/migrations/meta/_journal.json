@@ -64,6 +64,13 @@
       "when": 1794433237316,
       "tag": "0008_member_area_welcome_forum_privacy",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1794525764295,
+      "tag": "0009_family_squares_sms_reminders",
+      "breakpoints": true
     }
   ]
 }
