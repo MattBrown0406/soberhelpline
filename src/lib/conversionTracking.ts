@@ -8,6 +8,7 @@ type ConversionEventName =
   | "monday_zoom_registration_success"
   | "monday_zoom_calendar_add"
   | "monday_zoom_family_invite"
+  | "monday_zoom_text_reminder_optin"
   | "intervention_readiness_click"
   | "freedom_interventions_click"
   | "lead_magnet_signup"

@@ -170,3 +170,9 @@ verify_jwt = false
 
 [functions.send-member-weekly-note]
 verify_jwt = false
+
+[functions.family-squares-sms-optin]
+verify_jwt = false
+
+[functions.send-family-squares-sms-reminders]
+verify_jwt = false
