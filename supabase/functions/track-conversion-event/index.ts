@@ -12,6 +12,8 @@ const allowedEvents = new Set([
   "monday_zoom_registration_view",
   "monday_zoom_registration_submit",
   "monday_zoom_registration_success",
+  "monday_zoom_calendar_add",
+  "monday_zoom_family_invite",
   "intervention_readiness_click",
   "freedom_interventions_click",
   "lead_magnet_signup",

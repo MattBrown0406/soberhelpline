@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
+import MondayAfterRegistration from "@/components/MondayAfterRegistration";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
 import { z } from "zod";
@@ -366,11 +367,15 @@ export default function MondayZoomRegistration() {
           </div>
         )}
 
-        <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-left">
-          <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting, a spouse, sibling, parent, or adult child, {confirmationEmailSent ? "forward the confirmation email you just received" : "send them this page so they can register too"}. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
-          </p>
-        </div>
+        {isMemberQuestion ? (
+          <div className="mt-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-left">
+            <p className="text-sm text-blue-800 dark:text-blue-200">
+              <strong>📨 Share this with your family.</strong> If there's anyone else in your family who could benefit from this meeting, a spouse, sibling, parent, or adult child, send them this page so they can register too. Anyone with the link can join. The more of your family that shows up, the more you'll all get out of it.
+            </p>
+          </div>
+        ) : (
+          <MondayAfterRegistration nextMeetingDate={nextMeetingDate} />
+        )}
 
         {!isMemberQuestion && (
           <div className="mt-10">
