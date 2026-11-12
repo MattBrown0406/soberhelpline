@@ -96,6 +96,94 @@ function countFirstWords(names: Array<string | null | undefined>): Map<string, n
   return new Map([...seen].map(([w, set]) => [w, set.size]));
 }
 
+/** The Monday an attendance row belongs to. Rows written during the meeting are
+ *  dated in UTC, which is already Tuesday, so Tuesday rows count for Monday. */
+function mondayOf(dateStr: string): string {
+  return new Date(`${dateStr}T12:00:00Z`).getUTCDay() === 2 ? addDays(dateStr, -1) : dateStr;
+}
+
+const TARGET_ATTENDANCE = 30;
+
+interface TrendRow { meeting_date: string; participant_email: string | null; participant_name: string | null; registration_id: string | null }
+
+/**
+ * Pure rule for the trend numbers in the report.
+ *  - weekly: people in the room on each of the last four Mondays (this one last)
+ *  - average: the four-week average, to compare with the target of 30
+ *  - firstTime / returning: tonight's attendees split by whether any earlier
+ *    attendance row carries their email, full name or one of their registrations
+ * A person is counted once per Monday by email, else full name, else display name.
+ */
+export function attendanceTrends(
+  meetingDate: string,
+  attendance: TrendRow[],
+  registrationOwner: Map<string, { email: string; name: string }>,
+  tonightTotal: number,
+) {
+  const keyOf = (a: TrendRow) => norm(a.participant_email) || fullName(a.participant_name) || norm(a.participant_name);
+  const perMonday = new Map<string, Set<string>>();
+  const earlierEmails = new Set<string>();
+  const earlierNames = new Set<string>();
+  const tonight = new Map<string, { emails: Set<string>; names: Set<string> }>();
+
+  // The after-meeting sync files rows under Monday; rows written live during
+  // the meeting are filed under Tuesday. Where a Monday has synced rows, the
+  // live rows for it are the same people again, so they are left out.
+  const syncedMondays = new Set(attendance.filter((a) => mondayOf(a.meeting_date) === a.meeting_date).map((a) => a.meeting_date));
+
+  for (const a of attendance) {
+    const monday = mondayOf(a.meeting_date);
+    if (monday > meetingDate) continue;
+    if (a.meeting_date !== monday && syncedMondays.has(monday)) continue;
+    const owner = a.registration_id ? registrationOwner.get(a.registration_id) : undefined;
+    const emails = [norm(a.participant_email), norm(owner?.email)].filter(Boolean);
+    const names = [fullName(a.participant_name), fullName(owner?.name)].filter(Boolean);
+    const key = emails[1] || emails[0] || names[names.length - 1] || keyOf(a);
+    if (!key) continue;
+    if (!perMonday.has(monday)) perMonday.set(monday, new Set());
+    perMonday.get(monday)!.add(key);
+    if (monday < meetingDate) {
+      emails.forEach((e) => earlierEmails.add(e));
+      names.forEach((n) => earlierNames.add(n));
+    } else {
+      const person = tonight.get(key) ?? { emails: new Set<string>(), names: new Set<string>() };
+      emails.forEach((e) => person.emails.add(e));
+      names.forEach((n) => person.names.add(n));
+      tonight.set(key, person);
+    }
+  }
+
+  let returning = 0;
+  for (const person of tonight.values()) {
+    if ([...person.emails].some((e) => earlierEmails.has(e)) || [...person.names].some((n) => earlierNames.has(n))) returning += 1;
+  }
+  const firstTime = tonight.size - returning;
+
+  const weekly = [3, 2, 1, 0].map((weeksAgo) => {
+    const date = addDays(meetingDate, -7 * weeksAgo);
+    // The headline total for this meeting uses the report's fuller matching.
+    return { date, people: weeksAgo === 0 ? tonightTotal : perMonday.get(date)?.size ?? 0 };
+  });
+  const held = weekly.filter((w) => w.people > 0);
+  const average = held.length ? Math.round((held.reduce((sum, w) => sum + w.people, 0) / held.length) * 10) / 10 : 0;
+  return { weekly, average, weeksCounted: held.length, firstTime, returning };
+}
+
+// deno-lint-ignore no-explicit-any
+async function fetchAllRows<T>(build: (from: number, to: number) => any): Promise<T[]> {
+  const rows: T[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await build(from, from + 999);
+    if (error) throw new Error(error.message);
+    rows.push(...(data ?? []));
+    if (!data || data.length < 1000) return rows;
+  }
+}
+
+function shortDate(dateStr: string): string {
+  return new Date(`${dateStr}T12:00:00Z`).toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
+}
+
 function prettyDate(dateStr: string): string {
   return new Date(`${dateStr}T12:00:00Z`).toLocaleDateString("en-US", {
     timeZone: "UTC",
@@ -310,6 +398,33 @@ Deno.serve(async (req) => {
 
     const totalRegistrants = registrants.people.length;
     const totalAttendees = registeredAndAttended.length + unregisteredAttendees.length;
+
+    // Trend numbers. They are extra: if anything here fails, the report still goes out.
+    let trends: ReturnType<typeof attendanceTrends> | null = null;
+    try {
+      const [history, owners] = await Promise.all([
+        fetchAllRows<TrendRow>((from, to) => supabase.from("zoom_attendance")
+          .select("meeting_date,participant_email,participant_name,registration_id")
+          .lte("meeting_date", addDays(meetingDate, 1)).order("id").range(from, to)),
+        fetchAllRows<{ id: string; email: string | null; name: string | null }>((from, to) => supabase
+          .from("zoom_meeting_registrations").select("id,email,name")
+          .lte("meeting_date", meetingDate).order("id").range(from, to)),
+      ]);
+      const registrationOwner = new Map(owners.map((o) => [o.id, { email: o.email ?? "", name: o.name ?? "" }]));
+      trends = attendanceTrends(meetingDate, history, registrationOwner, totalAttendees);
+    } catch (trendError) {
+      console.error("send-weekly-zoom-report: trend numbers failed:", trendError instanceof Error ? trendError.message : trendError);
+    }
+    const trendHtml = trends
+      ? `<div style="background:#fdf8ee;border-radius:8px;padding:16px;margin:16px 0;">
+  <p style="margin:0;font-size:15px;"><strong>Four-week average:</strong> ${trends.average} in the room${
+          trends.weeksCounted < 4 ? ` (over ${trends.weeksCounted} meeting${trends.weeksCounted === 1 ? "" : "s"} with attendance recorded)` : ""
+        }. Goal for adding Thursday: ${TARGET_ATTENDANCE}.</p>
+  <p style="margin:4px 0 0;font-size:14px;color:#555;">${trends.weekly.map((w) => `${escapeHtml(shortDate(w.date))}: <strong>${w.people}</strong>`).join(" &nbsp;·&nbsp; ")}</p>
+  <p style="margin:8px 0 0;font-size:15px;"><strong>First time in the room:</strong> ${trends.firstTime} &nbsp;·&nbsp; <strong>Returning:</strong> ${trends.returning}</p>
+  <p style="margin:4px 0 0;font-size:12px;color:#888;">Counts include the host. First time and returning are matched by email, full name or registration, so a person who joins under a device name can be counted as new.</p>
+</div>`
+      : `<p style="color:#888;font-size:13px;">Trend numbers were not available this week.</p>`;
     const englishCount = languageCounts.get("en") || 0;
     const spanishCount = languageCounts.get("es") || 0;
 
@@ -325,6 +440,7 @@ Deno.serve(async (req) => {
     totalRegistrants ? Math.round((registeredAndAttended.length / totalRegistrants) * 100) : 0
   }%</p>
 </div>
+${trendHtml}
 ${listBlock("Registered and attended", registeredAndAttended)}
 ${listBlock("Registered but did not attend", registeredNoShow)}
 ${listBlock("Attended without registering", unregisteredAttendees)}
@@ -338,6 +454,9 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
       english_registrants: englishCount,
       spanish_registrants: spanishCount,
       total_attendees: totalAttendees,
+      four_week_average: trends?.average ?? null,
+      first_time_attendees: trends?.firstTime ?? null,
+      returning_attendees: trends?.returning ?? null,
       registered_and_attended: registeredAndAttended,
       registered_no_show: registeredNoShow,
       attended_without_registering: unregisteredAttendees,
@@ -381,6 +500,9 @@ ${listBlock("Auto-registrants with no attendance in the last 4 weeks", dormantAu
       meeting_date: meetingDate,
       total_registrants: totalRegistrants,
       total_attendees: totalAttendees,
+      four_week_average: trends?.average ?? null,
+      first_time_attendees: trends?.firstTime ?? null,
+      returning_attendees: trends?.returning ?? null,
     };
     return new Response(JSON.stringify({ sent: true, ...(verified ? summary : counts) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

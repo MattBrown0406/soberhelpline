@@ -16,6 +16,11 @@ import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 //   - active members (the sequence invites people to become one)
 //   - a step this address already received in the last REPEAT_DAYS days
 //     (people who register again each week get the sequence once)
+//
+// Spacing: an email is held, not skipped, while the same address has received
+// any Family Squares follow-up (these three, or the after-meeting email from
+// send-after-meeting-followup) in the last MIN_GAP_HOURS hours. It goes out on
+// a later hourly run, so nobody gets two of these on the same day.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,6 +37,7 @@ const START_SETTING = "family_squares_followups_start_at";
 const ADDRESS_SETTING = "email_mailing_address";
 const MAX_LATE_HOURS = 72;
 const REPEAT_DAYS = 90;
+const MIN_GAP_HOURS = 20;
 
 type SkipReason =
   | "before_start"
@@ -196,6 +202,7 @@ serve(async (req: Request) => {
 
     let sent = 0;
     let failed = 0;
+    let held = 0;
     const reasons: Partial<Record<SkipReason, number>> = {};
 
     const skip = async (id: string, reason: SkipReason) => {
@@ -258,6 +265,20 @@ serve(async (req: Request) => {
         if (earlierError) throw earlierError;
         if ((earlier || []).length > 0) {
           await skip(followup.id, "repeat");
+          continue;
+        }
+
+        const gapSince = new Date(nowMs - MIN_GAP_HOURS * 3600_000).toISOString();
+        const { data: recent, error: recentError } = await supabase
+          .from(QUEUE)
+          .select("id")
+          .ilike("email", exactPattern(followup.email))
+          .gte("sent_at", gapSince)
+          .neq("id", followup.id)
+          .limit(1);
+        if (recentError) throw recentError;
+        if ((recent || []).length > 0) {
+          held += 1; // left untouched: a later run sends it
           continue;
         }
 
@@ -324,7 +345,7 @@ serve(async (req: Request) => {
 
     const skipped = Object.values(reasons).reduce((total, count) => total + (count || 0), 0);
     // Counts only: this body is stored in the scheduler's response log.
-    return json({ sent, skipped, failed, reasons });
+    return json({ sent, skipped, failed, held, reasons });
   } catch (error: unknown) {
     console.error("process-family-squares-followups error:", error);
     const message = error instanceof Error ? error.message : "Unknown error";

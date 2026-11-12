@@ -11,6 +11,7 @@ const NOINDEX_ROUTES = new Set([
   "/onboarding-quiz",
   "/subscription/success",
   "/subscription/cancel",
+  "/stop-weekly-registration",
   "/member-billing",
   "/membership/billing",
   "/cancel-membership",

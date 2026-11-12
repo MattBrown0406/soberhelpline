@@ -109,7 +109,10 @@ const buildFollowups = (registration: { id: string; name: string; email: string 
       ? { label: "Review the Family Readiness Intensive", url: `${baseUrl}/family-readiness-intensive`, copy: "If treatment refusal, relapse, or safety risk is the real issue, the next step may need more structure than the free room can provide." }
       : scoring.revenuePath === "crisis_coaching"
         ? { label: "Book a private coaching session", url: `${baseUrl}/book-consultation?plan=emergency`, copy: "If your family needs a specific plan for this week, a private session is the simplest paid next step." }
-        : { label: "See the family membership", url: `${baseUrl}/family-membership`, copy: "If the free meeting helped, membership gives you recordings, education, tools, and a place to keep working between Mondays." };
+        // The first email usually arrives before the person's first meeting, so it
+        // does not sell membership. That offer comes after they have attended
+        // (send-after-meeting-followup) and in the day-7 email.
+        : { label: "See what to expect on Monday", url: `${baseUrl}/family-squares`, copy: "You do not need to prepare anything else. You can join with your camera off and just listen." };
 
   return [
     {
@@ -119,7 +122,7 @@ const buildFollowups = (registration: { id: string; name: string; email: string 
       lead_tier: scoring.leadTier,
       revenue_path: scoring.revenuePath,
       sequence_step: 1,
-      subject: "After Family Squares: choose one next step",
+      subject: "One question to bring to Family Squares",
       scheduled_for: addDays(1),
       body_html: `
         <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; color: #1f2937; line-height: 1.65;">
