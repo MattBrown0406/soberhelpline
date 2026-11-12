@@ -303,6 +303,11 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
     { label: "Family Education", path: "/family-education" },
     { label: "Crisis & Chaos", path: "/crisis-chaos" },
   ],
+  "/ai-prompts": [
+    { label: "Home", path: "/" },
+    { label: "Family Education", path: "/family-education" },
+    { label: "AI Conversation Starters", path: "/ai-prompts" },
+  ],
   "/emotional-regulation": [
     { label: "Home", path: "/" },
     { label: "Family Education", path: "/family-education" },

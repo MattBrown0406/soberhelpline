@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Activity, ArrowRight, ClipboardList, Flag, Gauge, HeartHandshake, History, Home, Megaphone, NotebookPen, PenLine, Search, Wind,
+  Activity, ArrowRight, ClipboardList, Flag, Gauge, HeartHandshake, History, Home, Megaphone, MessagesSquare, NotebookPen, PenLine, Search, Wind,
   type LucideIcon,
 } from "lucide-react";
 import { IconTile, KindPill, SectionHeading, TONE, toneForKind } from "@/components/member/MemberUI";
@@ -27,6 +27,7 @@ const TOOL_ICONS: Record<string, LucideIcon> = {
   "tool:family-advocacy-toolkit": Megaphone,
   "tool:fear-inventory": Search,
   "tool:emotional-regulation": Wind,
+  "tool:ai-prompts": MessagesSquare,
 };
 
 const savedOn = (iso: string) =>
