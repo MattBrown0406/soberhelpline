@@ -374,7 +374,7 @@ export default function MondayZoomRegistration() {
             </p>
           </div>
         ) : (
-          <MondayAfterRegistration nextMeetingDate={nextMeetingDate} />
+          <MondayAfterRegistration nextMeetingDate={nextMeetingDate} email={formData.email.trim() || user?.email || ""} phone={formData.phone.trim()} />
         )}
 
         {!isMemberQuestion && (
