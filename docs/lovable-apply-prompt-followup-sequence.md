@@ -40,6 +40,14 @@ WHERE r.created_at >= now() - interval '30 days'
 
 `sent` must be 0. If it is not 0, STOP and report.
 
+0c. The function checks membership with the service role. This must return true:
+
+```sql
+SELECT has_function_privilege('service_role', 'public.is_active_family_member(uuid)', 'EXECUTE') AS member_check_allowed;
+```
+
+If it returns false, STOP and report. Do not grant anything yourself.
+
 STEP 1. Set the switch-on time and retire the old queue (data statements, not a schema migration)
 
 Run these two statements in this order.
