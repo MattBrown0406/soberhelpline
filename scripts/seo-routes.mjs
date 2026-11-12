@@ -391,6 +391,7 @@ export const excludedSitemapRoutes = new Set([
   '/member-home',
   '/workbook',
   '/workbook/earlier',
+  '/ai-prompts',
   '/member-learning-paths',
   '/member-qa',
 ]);

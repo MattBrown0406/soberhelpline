@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import {
   Activity, AlertTriangle, ArrowRight, BookOpen, Brain, Check, CheckCircle2, ChevronRight, Circle, ClipboardList,
-  Compass, Download, FileText, Flag, Handshake, Headphones, Heart, Home, Lightbulb, ListChecks, NotebookPen,
+  Compass, Download, FileText, Flag, Handshake, Headphones, Heart, Home, Lightbulb, ListChecks, MessagesSquare, NotebookPen,
   ScanSearch, Wind, type LucideIcon,
 } from "lucide-react";
 import GoogleTranslate from "@/components/GoogleTranslate";
@@ -53,6 +53,7 @@ const TOOL_ICONS: Record<string, LucideIcon> = {
   "tool:family-advocacy-toolkit": Handshake,
   "tool:fear-inventory": ScanSearch,
   "tool:emotional-regulation": Wind,
+  "tool:ai-prompts": MessagesSquare,
 };
 
 // One segment of the tab bar: icon above the label on phones, side by side from sm up.

@@ -248,6 +248,10 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     title: 'Family Grief in Addiction — Mourning a Living Person | Sober Helpline',
     description: 'The grief of watching someone you love disappear into addiction. It\'s real, it\'s valid, and there are ways to process it.',
   },
+  '/ai-prompts': {
+    title: 'AI Conversation Starters for Families | Sober Helpline Members',
+    description: 'Three ready-made prompts for any AI chat tool: think a decision through, put a boundary into words, and get ready for a treatment call.',
+  },
   '/emotional-regulation': {
     title: 'Emotional Regulation for Families of Addicts | Sober Helpline',
     description: 'When your loved one\'s addiction triggers your emotions, here\'s how to regulate, respond (not react), and protect your mental health.',

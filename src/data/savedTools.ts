@@ -70,6 +70,13 @@ export const savedTools: SavedToolInfo[] = [
     kind: "Reference",
     summary: "Ten ways to steady yourself, and your own pause plan.",
   },
+  {
+    key: "tool:ai-prompts",
+    title: "AI Conversation Starters",
+    path: "/ai-prompts",
+    kind: "Reference",
+    summary: "Three prompts for any AI chat tool: a decision, a boundary, a treatment call.",
+  },
 ];
 
 const GUIDE_EXERCISES: Record<string, { title: string; path: string }> = {

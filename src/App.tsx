@@ -140,6 +140,7 @@ const TreatmentQuestions = React.lazy(() => import("./pages/TreatmentQuestions")
 const FamilyActionPlan = React.lazy(() => import("./pages/FamilyActionPlan"));
 const CrisisChaos = React.lazy(() => import("./pages/CrisisChaos"));
 const EmotionalRegulation = React.lazy(() => import("./pages/EmotionalRegulation"));
+const AIPrompts = React.lazy(() => import("./pages/AIPrompts"));
 const TalkingAboutTreatment = React.lazy(() => import("./pages/TalkingAboutTreatment"));
 const ReadinessChecklist = React.lazy(() => import("./pages/ReadinessChecklist"));
 const RelapseWarningSignsTracker = React.lazy(() => import("./pages/RelapseWarningSignsTracker"));
@@ -418,6 +419,7 @@ const App = () => (
               <Route path="/family-action-plan" element={<FamilyActionPlan />} />
               <Route path="/crisis-chaos" element={<CrisisChaos />} />
               <Route path="/emotional-regulation" element={<EmotionalRegulation />} />
+              <Route path="/ai-prompts" element={<SubscriberRoute><AIPrompts /></SubscriberRoute>} />
               <Route path="/talking-about-treatment" element={<TalkingAboutTreatment />} />
               <Route path="/readiness-checklist" element={<ReadinessChecklist />} />
               <Route path="/relapse-warning-signs" element={<RelapseWarningSignsTracker />} />
