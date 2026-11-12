@@ -168,9 +168,9 @@ const buildFollowups = (registration: { id: string; name: string; email: string 
         <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; color: #1f2937; line-height: 1.65;">
           <p>Hi ${firstName},</p>
           <p>A meeting can give relief. A plan is what keeps the family from sliding back into the same rescue, argument, silence, or panic.</p>
-          <p>The revenue ladder on Sober Helpline is also a support ladder: free meeting, membership, private coaching, structured stabilization, and readiness work when intervention may be needed.</p>
+          <p>Sober Helpline has more than the free Monday meeting. There is a family membership, private coaching, and readiness work for when an intervention may be needed. Use as much or as little as your family needs.</p>
           <p style="text-align: center; margin: 28px 0;">
-            <a href="${baseUrl}/family-squares-next-step" style="background: #166534; color: white; padding: 13px 22px; border-radius: 8px; text-decoration: none; font-weight: bold;">See the next-step ladder</a>
+            <a href="${baseUrl}/family-squares-next-step" style="background: #166534; color: white; padding: 13px 22px; border-radius: 8px; text-decoration: none; font-weight: bold;">See the next steps</a>
           </p>
           <p>With you in this,<br>Matt Brown<br>Sober Helpline</p>
         </div>
