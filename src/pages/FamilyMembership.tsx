@@ -26,12 +26,19 @@ import { Checkbox } from "@/components/ui/checkbox";
 import SEOHead from "@/components/SEOHead";
 import MembershipSalesPage from "@/components/MembershipSalesPage";
 import { arrivedFromApp } from "@/lib/webSession";
+import { trackConversionEvent } from "@/lib/conversionTracking";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 
 const referralSources = [
+  "The free Monday meeting (Family Squares)",
+  "Google or another search",
+  "The Sober Helpline app",
   "Facebook",
-  "TikTok", 
+  "TikTok",
+  "A treatment program or professional",
   "InterventionOnCall.com",
   "Word of Mouth",
+  "Other",
 ];
 
 // Format phone number as user types: (000) 000-0000
@@ -63,33 +70,11 @@ const membershipFormSchema = z.object({
   lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
   email: z.string().email("Valid email is required").max(255),
   phoneNumber: z.string().min(10, "Valid phone number is required"),
-  city: z.string().min(2, "City is required").max(100),
-  country: z.enum(["US", "CA"], { required_error: "Please select a country" }),
-  state: z.string().min(2, "State/Province is required").max(50),
-  referralSource: z.string().min(1, "Please let us know how you heard about us"),
+  // Optional: it is only used to learn which paths bring families here.
+  referralSource: z.string().max(100).optional(),
 });
 
 type MembershipFormValues = z.infer<typeof membershipFormSchema>;
-
-const usStates = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-  "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
-  "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
-  "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-  "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
-  "New Hampshire", "New Jersey", "New Mexico", "New York",
-  "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
-  "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-  "West Virginia", "Wisconsin", "Wyoming"
-];
-
-const canadianProvinces = [
-  "Alberta", "British Columbia", "Manitoba", "New Brunswick",
-  "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
-  "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
-  "Saskatchewan", "Yukon"
-];
 
 const membershipPlans = {
   trial: {
@@ -121,15 +106,15 @@ const membershipFeatures = {
     'Private family forum access',
     'Recorded sessions and guided tools',
     '$25 member discount on private coaching',
+    'Essential features in the Sober Helpline app',
     'No charge for the first 7 days',
   ],
   paid: [
-    'Full access to all 4 pillars of family education',
-    'Full interactive forum participation',
-    'Exclusive support group access',
-    'Live educational webinars & sessions',
-    'Direct support from our team',
-    'Premium tools and assessments',
+    'Full family education library: 60+ guides, tools and meditations',
+    'Private family forum access',
+    'Recorded sessions and guided tools',
+    '$25 member discount on private coaching',
+    'Essential features in the Sober Helpline app',
     'Cancel anytime',
   ]
 };
@@ -164,6 +149,7 @@ function FamilyMembershipCheckout() {
   const selectedPlan = membershipPlans[billingCycle];
   
   const { createSubscription, isLoading: paypalLoading, paypalUrl, clearPaypalUrl } = usePayPalSubscription();
+  const { isMember, loading: membershipLoading } = useMembershipStatus();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -203,20 +189,43 @@ function FamilyMembershipCheckout() {
       lastName: "",
       email: user?.email || "",
       phoneNumber: "",
-      city: "",
-      country: "US",
-      state: "",
       referralSource: "",
     },
   });
 
-  const selectedCountry = form.watch("country");
-
-  // Update email when user is loaded
+  // Fill in what the person already told us when they made their account, so
+  // nobody types their name, email and phone twice. Only empty fields are filled.
   useEffect(() => {
-    if (user?.email) {
-      form.setValue('email', user.email);
-    }
+    if (!user) return;
+    let cancelled = false;
+    const fillEmpty = (field: "firstName" | "lastName" | "phoneNumber" | "username" | "email", value?: string | null) => {
+      const text = (value ?? "").trim();
+      if (text && !form.getValues(field)) form.setValue(field, field === "phoneNumber" ? formatPhoneNumber(text) : text);
+    };
+    const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+    const metaText = (key: string) => (typeof meta[key] === "string" ? (meta[key] as string) : "");
+    fillEmpty("email", user.email);
+    fillEmpty("firstName", metaText("first_name"));
+    fillEmpty("lastName", metaText("last_name"));
+    fillEmpty("phoneNumber", metaText("phone_number"));
+    void (async () => {
+      try {
+        const [{ data: profile }, { data: contact }] = await Promise.all([
+          supabase.from("profiles").select("first_name, last_name, username").eq("id", user.id).maybeSingle(),
+          supabase.from("profile_private").select("phone_number").eq("user_id", user.id).maybeSingle(),
+        ]);
+        if (cancelled) return;
+        fillEmpty("firstName", profile?.first_name);
+        fillEmpty("lastName", profile?.last_name);
+        fillEmpty("username", profile?.username);
+        fillEmpty("phoneNumber", contact?.phone_number);
+      } catch {
+        // The form still works when this lookup fails; the fields just start empty.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [user, form]);
 
   const handleSubscribe = async () => {
@@ -235,6 +244,18 @@ function FamilyMembershipCheckout() {
     
     try {
       const formData = form.getValues();
+      trackConversionEvent("membership_checkout_start", {
+        source: "family_membership_checkout",
+        plan: billingCycle,
+        heard_from: formData.referralSource || "not given",
+      });
+      // /subscription/cancel is shared with provider listings; this tells it
+      // where "try again" should lead.
+      try {
+        sessionStorage.setItem("checkoutKind", "family");
+      } catch {
+        // Not essential.
+      }
       
       // Update the user's profile with the form data (non-sensitive fields)
       const { error: profileError } = await supabase
@@ -327,6 +348,40 @@ function FamilyMembershipCheckout() {
 
   if (!user) {
     return <MembershipSalesPage />;
+  }
+
+  // Someone who is already a member should not be asked to pay again.
+  if (!membershipLoading && isMember && !freeListingActivated && !processingPayment) {
+    return (
+      <>
+        <SEOHead
+          title="You Are Already a Member | Sober Helpline"
+          description="Your Sober Helpline family membership is active."
+          noIndex={true}
+        />
+        <div className="min-h-[70vh] bg-background">
+          <main className="container py-12">
+            <Card className="max-w-md mx-auto">
+              <CardHeader className="text-center">
+                <CheckCircle2 className="h-14 w-14 text-logo-green mx-auto mb-3" />
+                <CardTitle>You are already a member</CardTitle>
+                <CardDescription>
+                  Your family membership is active, so there is nothing to sign up for here.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button onClick={() => navigate('/member-home')} className="w-full">
+                  Go to My Family Hub
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/member-billing')} className="w-full">
+                  Membership and billing
+                </Button>
+              </CardContent>
+            </Card>
+          </main>
+        </div>
+      </>
+    );
   }
 
   // Show success state for free membership
@@ -521,76 +576,13 @@ function FamilyMembershipCheckout() {
                       )}
                     />
 
-                    <FormField
-                      control={form.control}
-                      name="country"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Country *</FormLabel>
-                          <FormControl>
-                            <select
-                              {...field}
-                              onChange={(e) => {
-                                field.onChange(e);
-                                form.setValue("state", ""); // Reset state when country changes
-                              }}
-                              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                            >
-                              <option value="US">United States</option>
-                              <option value="CA">Canada</option>
-                            </select>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>City *</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Your city" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="state"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{selectedCountry === "CA" ? "Province/Territory" : "State"} *</FormLabel>
-                            <FormControl>
-                              <select
-                                {...field}
-                                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                              >
-                                <option value="">Select {selectedCountry === "CA" ? "a province" : "a state"}</option>
-                                {(selectedCountry === "CA" ? canadianProvinces : usStates).map((region) => (
-                                  <option key={region} value={region}>
-                                    {region}
-                                  </option>
-                                ))}
-                              </select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
                     {/* How did you hear about us */}
                     <FormField
                       control={form.control}
                       name="referralSource"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>How did you hear about us? *</FormLabel>
+                          <FormLabel>How did you hear about us? (optional)</FormLabel>
                           <FormControl>
                             <select
                               {...field}

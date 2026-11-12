@@ -11,6 +11,11 @@ import ArticleContent from "@/components/ArticleContent";
 import { blogPosts, imageMap } from "@/data/blogPosts";
 import RelatedFamilyAnswerLinks from "@/components/RelatedFamilyAnswerLinks";
 import { fitSeoDescription, fitSeoTitle } from "@/lib/seoTitle";
+import MondayInvite from "@/components/MondayInvite";
+import ReadNextArticles from "@/components/ReadNextArticles";
+import { arrivedFromApp } from "@/lib/webSession";
+import { useMembershipStatus } from "@/hooks/useMembershipStatus";
+import { trackConversionEvent } from "@/lib/conversionTracking";
 
 const BASE_URL = "https://soberhelpline.com";
 const BLOG_CANONICAL_ALIASES: Record<string, string> = {
@@ -45,6 +50,7 @@ const BlogArticle = () => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const { setOverridden } = useSEOOverride();
+  const { isMember } = useMembershipStatus();
 
   // Generate a slug from a title for fallback matching
   const generateSlug = (title: string) =>
@@ -361,6 +367,11 @@ const BlogArticle = () => {
             {post.content && <ArticleContent content={post.content} images={imageMap} />}
           </div>
 
+          {/* The free Monday meeting comes first: it is the next step that costs nothing. */}
+          <MondayInvite source="blog_article_end" className="mt-10" />
+
+          <ReadNextArticles current={post} posts={blogPosts} />
+
           <RelatedFamilyAnswerLinks
             post={{
               slug: (post as any).slug || seoData?.postSlug,
@@ -370,34 +381,43 @@ const BlogArticle = () => {
             }}
           />
 
-          {/* Membership CTA */}
-          <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-blue-50 to-white border border-primary/20">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-xs font-semibold mb-3">
-                <BookOpen className="w-3 h-3" />
-                Member Resource
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                This is just one of 62+ resources available to members
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-4 max-w-lg mx-auto">
-                Get access to interactive tools, guided meditations, our private family forum, and weekly “The Family Squares” sessions.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link to="/family-membership">
-                  <Button className="bg-logo-blue hover:bg-logo-blue/90 text-white px-6">
-                    <Lock className="w-4 h-4 mr-2" />
-                    Unlock Full Access — $9.99/mo
-                  </Button>
-                </Link>
-                <Link to="/free-guide">
-                  <Button variant="outline" className="px-6">
-                    Get Free Guide First
-                  </Button>
-                </Link>
+          {/* Membership and the free guide. Members already have it; visitors who
+              came from the Sober Helpline app are not shown website sales
+              (App Store guideline 3.1.1). */}
+          {!isMember && (
+            <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-blue-50 to-white border border-primary/20 print:hidden">
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-logo-blue/10 text-logo-blue text-xs font-semibold mb-3">
+                  <BookOpen className="w-3 h-3" />
+                  More for your family
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                  Want something to work through between Mondays?
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-4 max-w-lg mx-auto">
+                  Start with the free guide. Membership adds 60+ guides, tools and meditations, a private family forum, and recordings of past Monday meetings. The first seven days are free, then it is $9.99 a month.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link to="/free-guide">
+                    <Button className="w-full sm:w-auto bg-logo-blue hover:bg-logo-blue/90 text-white px-6">
+                      Get the free guide
+                    </Button>
+                  </Link>
+                  {!arrivedFromApp() && (
+                    <Link
+                      to="/family-membership"
+                      onClick={() => trackConversionEvent("membership_click", { source: "blog_article_end" })}
+                    >
+                      <Button variant="outline" className="w-full sm:w-auto px-6">
+                        <Lock className="w-4 h-4 mr-2" />
+                        See the membership
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </article>
       </div>
     </div>

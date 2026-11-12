@@ -14,11 +14,17 @@ import WhatsAppLink from "./WhatsAppLink";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import GuideMemberBar from "./GuideMemberBar";
+import MobileNav from "./MobileNav";
+import GuideMembershipPrompt from "./GuideMembershipPrompt";
+import { arrivedFromApp } from "@/lib/webSession";
 import { memberBarItem, findLibraryItem } from "@/data/memberLibrary";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
+
+// Library pages that are members-only: they show the lock card to visitors.
+const GATED_LIBRARY_PATHS = new Set(["/ai-prompts", "/communication-guide"]);
 
 // The app wraps every route in <Layout> (App.tsx), and many older pages also
 // wrap themselves in one. A nested Layout renders only its children, so those
@@ -38,7 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
 const SiteLayout = ({ children }: LayoutProps) => {
   const { pathname, hash } = useLocation();
   const navigate = useNavigate();
-  const { isMember } = useMembershipStatus();
+  const { isMember, loading: membershipLoading } = useMembershipStatus();
   // The member bar is dismissed for one page view at a time.
   const [barDismissedOn, setBarDismissedOn] = useState<string | null>(null);
 
@@ -61,6 +67,12 @@ const SiteLayout = ({ children }: LayoutProps) => {
   // Library reading guides get the larger, higher-contrast reading styles (index.css).
   const isLibraryGuide = findLibraryItem(pathname)?.type === "guide";
   const showMemberBar = !!barItem && barDismissedOn !== pathname;
+  // Library guides that anyone can read end with a note about the membership
+  // they come from. Not on pages that already show the members-only card, and
+  // not for visitors who came from the app (App Store guideline 3.1.1).
+  const openGuide = !isMember && !membershipLoading ? memberBarItem(pathname) : undefined;
+  const showGuidePrompt =
+    !!openGuide && !GATED_LIBRARY_PATHS.has(openGuide.path) && !arrivedFromApp();
 
   const isHome = pathname === "/";
   const isReferralFit = pathname === "/referralfit" || pathname === "/referralfit-support";
@@ -110,7 +122,7 @@ const SiteLayout = ({ children }: LayoutProps) => {
               </button>
               <button
                 onClick={() => navigate("/")}
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
                 aria-label="Go home"
               >
                 <Home className="w-4 h-4" />
@@ -148,6 +160,15 @@ const SiteLayout = ({ children }: LayoutProps) => {
                 >
                   Intervention?
                 </Link>
+                {!isMember && !arrivedFromApp() && (
+                  <Link
+                    to="/family-membership"
+                    onClick={() => trackConversionEvent("membership_click", { source: "desktop_header" })}
+                    className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  >
+                    Membership
+                  </Link>
+                )}
               </nav>
               <SiteSearch />
               {isMember && pathname !== "/member-home" && (
@@ -172,6 +193,8 @@ const SiteLayout = ({ children }: LayoutProps) => {
               <span className="hidden sm:inline">(458) 298-8008</span>
               </a>
               <WhatsAppLink source="layout_header" variant="icon" />
+              {/* The path links above only fit on wide screens; everyone else gets the menu. */}
+              <MobileNav triggerClassName="xl:hidden shrink-0" />
             </div>
           </div>
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
@@ -179,6 +202,7 @@ const SiteLayout = ({ children }: LayoutProps) => {
       )}
       <main id="main-content" className={isLibraryGuide ? "flex-1 pb-safe guide-reading" : "flex-1 pb-safe"}>
         {children}
+        {showGuidePrompt && openGuide && <GuideMembershipPrompt path={openGuide.path} />}
       </main>
       {/* Room below the footer so the member bar never covers the end of the page. */}
       <div className={showMemberBar ? "pb-16 print:pb-0" : undefined}>

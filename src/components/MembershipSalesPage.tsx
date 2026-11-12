@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
-  CalendarDays,
   Check,
   Clock3,
   DollarSign,
@@ -10,6 +9,7 @@ import {
   Lock,
   MessageCircle,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   UserRoundCheck,
   Video,
@@ -55,10 +55,18 @@ const benefits = [
     description: "Members pay $125 instead of $150 for each private session with Matt Brown.",
   },
   {
-    icon: CalendarDays,
-    title: "A clear place to return",
-    description: "Keep your education, tools, community, and next steps together instead of starting over whenever things change.",
+    icon: Smartphone,
+    title: "The Sober Helpline app, included",
+    description: "Your membership unlocks the Essential features in the Sober Helpline app for iPhone. Use the same email address in the app.",
   },
+];
+
+// Guides from the member library that anyone can read, so a visitor can judge
+// the quality before starting a trial.
+const sampleGuides = [
+  { title: "Boundary Drift: How Limits Slowly Erode", path: "/boundary-drift" },
+  { title: "Crisis vs. Chaos Decision Guide", path: "/crisis-chaos" },
+  { title: "The Hidden Cost of Being the \"Strong One\"", path: "/strong-one" },
 ];
 
 const trialSteps = [
@@ -120,7 +128,7 @@ const faqSchema = {
   })),
 };
 
-const authHref = "/auth?redirect=/family-membership";
+const authHref = "/auth?redirect=/family-membership&mode=signup";
 
 function TrialButton({ source, className = "" }: { source: string; className?: string }) {
   return (
@@ -213,6 +221,23 @@ export default function MembershipSalesPage() {
                   </Card>
                 );
               })}
+            </div>
+            <div className="mx-auto mt-10 max-w-3xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-6">
+              <p className="font-semibold text-foreground">Read three guides from the library before you decide</p>
+              <ul className="mt-3 space-y-2">
+                {sampleGuides.map((guide) => (
+                  <li key={guide.path}>
+                    <Link
+                      to={guide.path}
+                      onClick={() => trackConversionEvent("membership_click", { source: "membership_sales_sample_guide", guide: guide.path })}
+                      className="inline-flex items-center gap-2 font-medium text-logo-blue hover:underline"
+                    >
+                      <BookOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      {guide.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
 
