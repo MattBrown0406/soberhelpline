@@ -3,7 +3,7 @@ MOVE TWO REFUSED JOBS TO MANAGED SCHEDULING. Read all of this before doing anyth
 Background: legacy jobs 28 (deliver-app-payment-callback-every-minute) and 38 (send-family-squares-kiosk-followups) are refused by their functions on every run, and their stored credential cannot be repaired with the available controls. The functions on main now also accept the managed scheduler's own sign-in (the generated helper `supabase/functions/_shared/cron-auth.ts`), the same way send-forum-notifications does. This prompt deploys those two functions, creates two managed schedules, checks them, and only then turns the two legacy jobs off.
 
 DO NOT TOUCH
-- Job 26 (process-family-squares-followups-hourly), its function, the secret FOLLOWUP_AUTOMATION_SECRET, or the table family_squares_followup_queue. That queue holds about 551 overdue emails that must NOT be sent. If any step here could make job 26 start succeeding, stop and tell me instead.
+- Job 26 (process-family-squares-followups-hourly), its function, the secret FOLLOWUP_AUTOMATION_SECRET, or the table family_squares_followup_queue. That queue holds old overdue emails that must NOT be sent, and a separate prompt deals with that sequence. If any step here could make job 26 start succeeding, stop and tell me instead.
 - Monday night registration: public-register-monday-zoom, auto-register-zoom, auto-create-monday-zoom, monday_notification_private, zoom_meeting_registrations.
 - Any other job, schedule, function, table or secret. No migrations. No manual invocations. No emails. No publish (nothing in the frontend changed).
 - Never edit `_shared/cron-auth.ts`. Never print a secret value, a job command or a header.
@@ -72,13 +72,14 @@ WHERE created >= now() - interval '20 minutes' AND status_code <> 200
 GROUP BY status_code, left(content, 90);
 
 -- None of the old follow-up emails may have gone out.
-SELECT count(*) FILTER (WHERE sent_at IS NOT NULL) AS followups_sent,
+SELECT (SELECT value FROM public.site_settings WHERE key = 'family_squares_followups_start_at') AS sequence_switched_on_at,
+       count(*) FILTER (WHERE sent_at IS NOT NULL) AS followups_sent,
        count(*) FILTER (WHERE sent_at IS NULL AND skipped_at IS NULL AND scheduled_for <= now()) AS still_waiting
 FROM public.family_squares_followup_queue;
 ```
 
-`followups_sent` must be 0. If it is above 0, say so at the top of your reply.
-The only refusal still expected is `{"error":"Unauthorized"}` once an hour on the hour, from job 26. That is intended for now.
+If `sequence_switched_on_at` is empty, `followups_sent` must be 0: if it is above 0, say so at the top of your reply. If `sequence_switched_on_at` has a time, the follow-up sequence was switched on by a separate prompt and these numbers are only for the record.
+The only refusal still expected is `{"error":"Unauthorized"}` once an hour on the hour, from job 26, and only if job 26 has not already been turned off by that separate prompt.
 
 Also list the schedules for these two functions, old and new, with id, schedule and enabled.
 
