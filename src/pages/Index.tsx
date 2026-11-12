@@ -1,4 +1,4 @@
-import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Headphones, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, MessageCircle, BookOpen, ArrowRight, Sparkles, GraduationCap, TreePine, Eye, X, Check } from "lucide-react";
+import { Building2, Home, Users, Bed, Brain, Stethoscope, Phone, UserCheck, LogIn, Pill, Heart, ChevronDown, Calendar, User as UserIcon, Shield, ArrowRight, Sparkles, Eye, X, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -20,9 +20,6 @@ import HolidayCoachingBanner from "@/components/HolidayCoachingBanner";
 import AfterHoursSafetyStrip from "@/components/AfterHoursSafetyStrip";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { featuredBlogPosts } from "@/data/featuredBlogPosts";
-import FamilySelfAssessment from "@/components/FamilySelfAssessment";
-import SUDAssessment from "@/components/SUDAssessment";
-import EatingDisorderScreening from "@/components/EatingDisorderScreening";
 import SEOHead from "@/components/SEOHead";
 
 import FamilyFunnelDecisionMatrix from "@/components/FamilyFunnelDecisionMatrix";
@@ -30,6 +27,7 @@ import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge"
 import LeadMagnetPopup from "@/components/LeadMagnetPopup";
 import CommonFamilyQuestions from "@/components/CommonFamilyQuestions";
 import { trackConversionEvent } from "@/lib/conversionTracking";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const categories = [
   { name: "Inpatient Treatment", icon: Home, path: "/inpatient-treatment", description: "Residential care programs" },
@@ -40,33 +38,6 @@ const categories = [
   { name: "Sober Living", icon: Bed, path: "/sober-living", description: "Structured environments" },
   { name: "Therapists", icon: Brain, path: "/therapists", description: "Mental health support" },
   { name: "Psychiatrists", icon: Stethoscope, path: "/psychiatrists", description: "Medical expertise" },
-];
-
-const funnelLanes = [
-  {
-    eyebrow: "Soft landing",
-    title: "Family Squares",
-    description: "The free Monday room for families who need live support before they are ready to buy anything.",
-    to: "/family-squares",
-    cta: "Join free Monday support",
-    icon: Calendar,
-  },
-  {
-    eyebrow: "Get immediate help, often same day",
-    title: "Coaching and consults",
-    description: "When you can't wait until Monday, get a calm plan, direct feedback, or help deciding what to do this week.",
-    to: "/family-consultation",
-    cta: "See private help",
-    icon: Phone,
-  },
-  {
-    eyebrow: "High-risk path",
-    title: "Intervention readiness",
-    description: "A bridge toward Freedom Interventions when refusal, safety, relapse, or family conflict has crossed the line.",
-    to: "/intervention-help",
-    cta: "Assess intervention fit",
-    icon: Shield,
-  },
 ];
 
 const Index = () => {
@@ -192,7 +163,15 @@ const Index = () => {
                       Intervention
                     </Button>
                   </Link>
-                  <Link to="/recovery-resources">
+                  {!isMember && !arrivedFromApp() && (
+                    <Link to="/family-membership" className="hidden xl:inline-flex" onClick={() => trackConversionEvent("membership_click", { source: "homepage_header" })}>
+                      <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
+                        Membership
+                      </Button>
+                    </Link>
+                  )}
+                  {/* Below wide screens this link lives in the Learn menu so Login stays on screen. */}
+                  <Link to="/recovery-resources" className="hidden xl:inline-flex">
                     <Button variant="ghost" className="text-foreground/80 hover:text-foreground font-medium">
                       Treatment Options
                     </Button>
@@ -205,6 +184,14 @@ const Index = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="w-56">
+                      {!isMember && !arrivedFromApp() && (
+                        <DropdownMenuItem asChild>
+                          <Link to="/family-membership" className="cursor-pointer font-semibold text-logo-blue" onClick={() => trackConversionEvent("membership_click", { source: "homepage_learn_menu" })}>Family Membership</Link>
+                        </DropdownMenuItem>
+                      )}
+                      <DropdownMenuItem asChild className="xl:hidden">
+                        <Link to="/recovery-resources" className="cursor-pointer">Treatment Options</Link>
+                      </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link to="/roadmap" className="cursor-pointer font-semibold text-logo-blue">Recovery Roadmap</Link>
                       </DropdownMenuItem>
@@ -231,9 +218,11 @@ const Index = () => {
                 </nav>
               </div>
               <div className="flex items-center gap-3">
-                <a href="tel:+14582988008" className="flex items-center gap-2 px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
+                <a href="tel:+14582988008" aria-label="Call Sober Helpline at (458) 298-8008" className="flex items-center gap-2 whitespace-nowrap px-4 py-2 rounded-full bg-logo-blue/10 text-logo-blue font-semibold hover:bg-logo-blue/20 transition-colors">
                   <Phone className="w-4 h-4" />
-                  (458) 298-8008
+                  {/* The number only fits beside the full menu on wide screens. */}
+                  <span className="hidden xl:inline">(458) 298-8008</span>
+                  <span className="xl:hidden">Call</span>
                 </a>
                 <WhatsAppLink source="index_header" variant="icon" />
                   <Link to="/family-squares">
@@ -298,47 +287,6 @@ const Index = () => {
           title="Turn the search into the right next step."
           description="Families often arrive with one urgent question. These answers guide them toward Family Squares, private coaching, or intervention readiness without disrupting the free meeting path."
         />
-
-        <section className="container mx-auto px-4 py-10 md:py-14">
-          <div className="max-w-6xl mx-auto rounded-3xl border border-logo-blue/20 bg-gradient-to-r from-logo-blue/10 via-background to-logo-blue/5 p-6 md:p-8 shadow-sm">
-            <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Coming from No More Enabling?</p>
-                <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-logo-blue via-blue-600 to-brand-amber bg-clip-text text-transparent">This is where reading turns into live support.</h2>
-                <p className="text-sm md:text-lg text-muted-foreground max-w-2xl">
-                  No More Enabling helps families name the pattern. Sober Helpline gives them a place to bring that pattern into a live room, a private consult, or an intervention-readiness conversation.
-                </p>
-                <Button asChild variant="outline" className="mt-5 border-logo-blue/30 text-logo-blue hover:bg-logo-blue/5">
-                  <Link to="/from-no-more-enabling">
-                    Follow the guided bridge
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-              <div className="grid gap-3">
-                {funnelLanes.map((lane) => (
-                  <Link key={lane.title} to={lane.to} className="rounded-2xl border bg-gradient-to-br from-logo-blue/5 via-background to-logo-blue/10 p-4 transition-all hover:border-logo-blue/40 hover:shadow-md">
-                    <div className="flex items-start gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-logo-blue/20 to-logo-blue/5 text-logo-blue">
-                        <lane.icon className="h-5 w-5" />
-                      </span>
-                      <span>
-                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{lane.eyebrow}</span>
-                        <span className="block font-semibold text-foreground">{lane.title}</span>
-                        <span className="mt-1 block text-sm text-muted-foreground">{lane.description}</span>
-                        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-logo-blue">
-                          {lane.cta}
-                          <ArrowRight className="h-4 w-4" />
-                        </span>
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
 
         <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
           <div className="container mx-auto px-4">
@@ -422,12 +370,13 @@ const Index = () => {
               </Card>
             </div>
 
-            <div className="text-center mb-8 md:mb-12">
-              <div className="inline-block bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 rounded-2xl p-6 md:p-8 border border-logo-blue/20">
+            <div className="text-center">
+              <div className="inline-block max-w-2xl bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 rounded-2xl p-6 md:p-8 border border-logo-blue/20">
+                <p className="text-xs md:text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Between Mondays</p>
                 <p className="text-sm md:text-base text-muted-foreground mb-4">
-                  <span className="font-semibold text-foreground">You do not have to figure this out alone.</span> Get practical tools, steady support, and a place to think more clearly again.
+                  <span className="font-semibold text-foreground">Family membership keeps the support going all week.</span> 60+ guides, tools and meditations, a private family forum, recordings of past Monday meetings, member pricing on coaching, and Essential features in the Sober Helpline app.
                 </p>
-                <Link to="/family-membership">
+                <Link to="/family-membership" onClick={() => trackConversionEvent("membership_click", { source: "homepage_membership_block" })}>
                   <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8 shadow-lg shadow-logo-blue/25">
                     <Sparkles className="w-4 h-4" />
                     Explore Membership
@@ -439,172 +388,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
-              {[
-                { color: "emerald", icon: Brain, title: "Making Sense of Their Behavior", desc: "Why willpower fails, how the brain changes, and what families need to know about the disease.", count: "5 resources" },
-                { color: "rose", icon: Heart, title: "When Mental Health Makes It Harder", desc: "How mental health conditions interact with substance use and what families should understand.", count: "5 resources" },
-                { color: "violet", icon: Users, title: "Am I Helping or Making It Worse?", desc: "Recognize patterns that keep families stuck and learn to break the cycle of enabling.", count: "Free assessment — no email", to: "/family-situation-assessment" },
-                { color: "blue", icon: GraduationCap, title: "Finding Treatment That Actually Works", desc: "Navigate the treatment system, ask the right questions, and avoid industry red flags.", count: "8 resources" },
-                { color: "amber", icon: Shield, title: "Setting Boundaries That Stick", desc: "Set and maintain healthy boundaries while understanding the difference between boundaries and ultimatums.", count: "5 resources" },
-                { color: "teal", icon: TreePine, title: "Reclaiming Your Own Life", desc: "Focus on your own healing journey regardless of your loved one's choices.", count: "6 resources" },
-              ].map((pillar) => {
-                const colorMap = {
-                  emerald: "border-emerald-500/30 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20 text-emerald-600 dark:text-emerald-400",
-                  rose: "border-rose-500/30 bg-gradient-to-br from-rose-50/50 to-transparent dark:from-rose-950/20 text-rose-600 dark:text-rose-400",
-                  violet: "border-violet-500/30 bg-gradient-to-br from-violet-50/50 to-transparent dark:from-violet-950/20 text-violet-600 dark:text-violet-400",
-                  blue: "border-blue-500/30 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/20 text-blue-600 dark:text-blue-400",
-                  amber: "border-amber-500/30 bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/20 text-amber-600 dark:text-amber-400",
-                  teal: "border-teal-500/30 bg-gradient-to-br from-teal-50/50 to-transparent dark:from-teal-950/20 text-teal-600 dark:text-teal-400",
-                } as const;
-
-                const card = (
-                  <Card className={`h-full border-2 ${colorMap[pillar.color as keyof typeof colorMap].split(" text-")[0]}`}>
-                    <CardContent className="p-5 md:p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-background/70 flex items-center justify-center flex-shrink-0 border border-border/40">
-                          <pillar.icon className={`w-6 h-6 ${colorMap[pillar.color as keyof typeof colorMap].includes("text-") ? colorMap[pillar.color as keyof typeof colorMap].split(" ").slice(-2).join(" ") : "text-logo-blue"}`} />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-foreground mb-2">{pillar.title}</h3>
-                          <p className="text-xs text-muted-foreground">{pillar.desc}</p>
-                          <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-                            <BookOpen className="w-3.5 h-3.5" />
-                            <span>{pillar.count}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-
-                return "to" in pillar && pillar.to ? (
-                  <Link key={pillar.title} to={pillar.to} className="block h-full transition-transform hover:-translate-y-0.5">
-                    {card}
-                  </Link>
-                ) : (
-                  <div key={pillar.title}>{card}</div>
-                );
-              })}
-            </div>
-
-            <div className="bg-background/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 mb-8 md:mb-10 border border-border/50">
-              <h3 className="text-lg md:text-xl font-semibold text-foreground text-center mb-6">Support You Can Actually Use</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {[
-                  { icon: Headphones, title: "Guided Meditations", desc: "For stress & healing" },
-                  { icon: MessageCircle, title: "Private Forum", desc: "24/7 peer support" },
-                  { icon: BookOpen, title: "Interactive Worksheets", desc: "Track your progress" },
-                  { icon: Sparkles, title: "Guided Exercises", desc: "Five minutes, step by step" },
-                ].map((item) => (
-                  <div key={item.title} className="text-center">
-                    <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                      <item.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="font-medium text-sm text-foreground">{item.title}</div>
-                    <div className="text-xs text-muted-foreground">{item.desc}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
-        </section>
-
-        <section className="container mx-auto px-4 pt-6 md:pt-10">
-          <Link to="/family-squares" className="block">
-            <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
-              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-                <div className="flex items-center gap-3 md:gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Calendar className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="text-xs md:text-sm font-medium text-white/80">Free weekly support</p>
-                    <h3 className="text-base md:text-lg font-bold">“The Family Squares” every Monday at 7:00 PM Pacific</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Live group support every Monday for any family member. No membership required.</p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                    Register Now <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </section>
-
-        <section className="container mx-auto px-4 pt-4 md:pt-6">
-          <Link to="/family-membership" className="block">
-            <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
-              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-                <div className="flex items-center gap-3 md:gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="text-xs md:text-sm font-medium text-white/80">Ongoing support</p>
-                    <h3 className="text-base md:text-lg font-bold">Family Membership for steady support between crises</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">Get the forum, education library, recordings, member pricing on coaching, and Essential-level features in the Sober Helpline app.</p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                    Explore Membership <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </section>
-
-        <section className="container mx-auto px-4 pt-4 md:pt-6 space-y-4">
-          <Link to="/family-coaching" className="block">
-            <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
-              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-                <div className="flex items-center gap-3 md:gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="text-xs md:text-sm font-medium text-white/80">Immediate help, often same day</p>
-                    <h3 className="text-base md:text-lg font-bold">Family coaching when you need one-on-one guidance</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">When the group and membership are not enough—or you can't wait until Monday—private coaching provides one-on-one guidance. Sessions start at $150.</p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                    See Coaching Options <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
-
-          <Link to="/family-readiness-intensive" className="block">
-            <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-r from-violet-700 via-fuchsia-600 to-violet-700 p-4 md:p-6 text-white shadow-lg hover:shadow-xl transition-all group">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
-              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 relative z-10">
-                <div className="flex items-center gap-3 md:gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="text-xs md:text-sm font-medium text-white/80">High-stakes planning</p>
-                    <h3 className="text-base md:text-lg font-bold">Family Readiness Intensive for major family decisions</h3>
-                    <p className="text-xs md:text-sm text-white/70 mt-0.5">A 90-minute strategy session plus 7 days of follow-up support for families who need clarity fast.</p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 rounded-lg px-4 py-2 text-sm font-semibold transition-colors group-hover:scale-105 duration-200">
-                    Explore the Intensive <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
         </section>
 
         <section className="container mx-auto px-4 py-10 md:py-16">
@@ -737,11 +521,6 @@ const Index = () => {
           </div>
         </section>
 
-        <div className="hidden">
-          <FamilySelfAssessment />
-          <SUDAssessment />
-          <EatingDisorderScreening />
-        </div>
       </div>
     </>
   );
