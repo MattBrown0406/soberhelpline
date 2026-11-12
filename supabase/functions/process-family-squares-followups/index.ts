@@ -25,6 +25,11 @@ const corsHeaders = {
 const QUEUE = "family_squares_followup_queue";
 /** site_settings key: ISO time the sequence was switched on. Unset = send nothing. */
 const START_SETTING = "family_squares_followups_start_at";
+/**
+ * site_settings key: the postal address shown under each email. It lives in
+ * the database, not in this public repository. Unset = no address line.
+ */
+const ADDRESS_SETTING = "email_mailing_address";
 const MAX_LATE_HOURS = 72;
 const REPEAT_DAYS = 90;
 
@@ -73,6 +78,16 @@ const json = (body: unknown, status = 200) =>
     status,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
+
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[char] || char));
+
+/** The line under each email: who sent it, the postal address, and why they got it. */
+const footerHtml = (address: string) => `
+  <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 28px auto 0; padding-top: 14px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px; line-height: 1.6; text-align: center;">
+    Sober Helpline, ${escapeHtml(address)}<br>
+    You are receiving this because you registered for Family Squares.
+  </div>`;
 
 /** Escapes LIKE wildcards so ilike() is a case-insensitive exact match. */
 const exactPattern = (value: string) => value.trim().replace(/[\\%_]/g, "\\$&");
@@ -130,16 +145,19 @@ serve(async (req: Request) => {
     );
 
     // The switch-on time. Until it is set, nothing is sent and nothing is changed.
-    const { data: startRow, error: startError } = await supabase
+    const { data: settingRows, error: settingsError } = await supabase
       .from("site_settings")
-      .select("value")
-      .eq("key", START_SETTING)
-      .maybeSingle();
-    if (startError) throw startError;
-    const startMs = Date.parse(String(startRow?.value ?? ""));
+      .select("key, value")
+      .in("key", [START_SETTING, ADDRESS_SETTING]);
+    if (settingsError) throw settingsError;
+    const setting = (key: string) =>
+      String(((settingRows || []) as { key: string; value: string | null }[]).find((row) => row.key === key)?.value ?? "").trim();
+    const startMs = Date.parse(setting(START_SETTING));
     if (!Number.isFinite(startMs)) {
       return json({ sent: 0, skipped: 0, failed: 0, not_started: true });
     }
+    const mailingAddress = setting(ADDRESS_SETTING);
+    const footer = mailingAddress ? footerHtml(mailingAddress) : "";
 
     const nowMs = Date.now();
     const { data: dueData, error: dueError } = await supabase
@@ -258,7 +276,7 @@ serve(async (req: Request) => {
 
         let outcome: "sent" | "suppressed";
         try {
-          outcome = await sendEmail(followup.email, followup.name, followup.subject, followup.body_html);
+          outcome = await sendEmail(followup.email, followup.name, followup.subject, followup.body_html + footer);
         } catch (sendError: unknown) {
           const message = sendError instanceof Error ? sendError.message : "Unknown error";
           await supabase
