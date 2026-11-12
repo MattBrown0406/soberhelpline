@@ -32,7 +32,7 @@ import substanceUseAssessmentImg from "@/assets/blog-substance-use-assessment-be
 import aiCompanionAddictionImg from "@/assets/blog-ai-companion-chatbot-addiction-family-guide.jpg";
 import addictionPersonalityChangesImg from "@/assets/blog-addiction-personality-changes-family.jpg";
 
-import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.png";
+import reluctantLovedOneImg from "@/assets/blog-reluctant-loved-one.jpg";
 import firstStepsImg from "@/assets/blog-first-steps-recovery.png";
 import supportLovedOneImg from "@/assets/blog-support-loved-one.png";
 import aftercareImg from "@/assets/blog-aftercare-recovery.png";

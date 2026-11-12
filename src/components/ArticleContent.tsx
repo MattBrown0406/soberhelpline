@@ -54,7 +54,7 @@ export default function ArticleContent({ content, images = {} }: { content: stri
     if (!line) continue;
     const image = line.match(/^\[IMAGE:(\w+)\]$/);
     if (image) {
-      if (images[image[1]]) blocks.push(<div key={key} className="my-6 rounded-lg overflow-hidden shadow-lg"><img src={images[image[1]]} alt="Article illustration" className="w-full h-auto" /></div>);
+      if (images[image[1]]) blocks.push(<div key={key} className="my-6 rounded-lg overflow-hidden shadow-lg"><img src={images[image[1]]} alt="Article illustration" loading="lazy" decoding="async" className="w-full h-auto" /></div>);
       continue;
     }
     const heading = line.match(/^(#{2,3})\s+(.+)$/);

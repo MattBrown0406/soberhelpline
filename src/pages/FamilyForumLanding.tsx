@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import { ACTIVE_TOPICS, MEETING_TOPIC_ID, forumPostLink } from "@/lib/forumTopics";
-import familyHero from "@/assets/family-hero.png";
+import familyHero from "@/assets/family-hero.jpg";
 import healingCircle from "@/assets/blog-healing-circle-family-support.png";
 
 const faqItems = [
