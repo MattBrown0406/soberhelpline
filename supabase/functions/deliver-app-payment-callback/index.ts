@@ -1,11 +1,14 @@
 // Delivers queued signed callbacks to the iOS app backend.
 // - POST/OPTIONS only.
-// - Requires server-only Authorization: Bearer <SUPABASE_SERVICE_ROLE_KEY> (used by pg_cron).
+// - Server-only. Two callers are accepted: Lovable's managed scheduler (it signs
+//   each call with the platform's cron secret, checked by the generated helper)
+//   or Authorization: Bearer <SUPABASE_SERVICE_ROLE_KEY>.
 // - Atomically leases rows via claim_app_payment_outbox_batch so overlapping
 //   invocations never deliver the same row concurrently.
 // - Expired leases become eligible again automatically.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { signBridgeCallback } from "../_shared/coachingToken.ts";
+import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -49,7 +52,8 @@ Deno.serve(async (req) => {
   const bearer = authHeader.toLowerCase().startsWith("bearer ")
     ? authHeader.slice(7).trim()
     : "";
-  if (!serviceKey || !bearer || !timingSafeEqual(bearer, serviceKey)) {
+  const fromManagedScheduler = authenticateCronRequest(req) === null;
+  if (!serviceKey || (!fromManagedScheduler && (!bearer || !timingSafeEqual(bearer, serviceKey)))) {
     return unauthorized();
   }
 

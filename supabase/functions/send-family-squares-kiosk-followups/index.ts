@@ -1,5 +1,6 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.110.3";
+import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 
 const JSON_HEADERS = { "Content-Type": "application/json" };
 const REGISTRATION_URL = "https://soberhelpline.com/monday-zoom-registration";
@@ -71,7 +72,10 @@ Deno.serve(async (request: Request) => {
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const authorization = request.headers.get("authorization") || "";
 
-    if (!serviceRoleKey || authorization !== `Bearer ${serviceRoleKey}`) {
+    // Two callers are accepted: Lovable's managed scheduler (signed with the
+    // platform's cron secret) or the service-role key.
+    const fromManagedScheduler = authenticateCronRequest(request) === null;
+    if (!serviceRoleKey || (!fromManagedScheduler && authorization !== `Bearer ${serviceRoleKey}`)) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: JSON_HEADERS });
     }
 
