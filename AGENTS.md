@@ -8,3 +8,4 @@
 - Member-area tables use plain user UUIDs and profile-deletion cleanup rather than auth foreign keys; this preserves the managed-auth boundary, with cleanup failures recorded as warnings instead of blocking account deletion.
 - Member forum reads use the owner-rights secure view and polling, with base-table author IDs withheld from authenticated clients; this masks anonymous authors while retaining membership/staff access checks.
 - Preserve the generated cron-auth helper and use managed HTTP scheduling controls rather than hand-authored HTTP cron SQL; this keeps callback credentials under platform management.
+- Keep private-guide startup isolated from site bootstrap; catch both startup imports with a single storage-guarded document retry and a visible fallback so transient fetch failures cannot leave a blank screen or reload loop.

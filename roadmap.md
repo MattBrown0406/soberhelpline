@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Resolve startup dynamic-import blank-screen handling: normal page currently loads; added a one-time fetch-error reload and visible retry fallback to both isolated startup paths. Recovery logic tests and Python browser normal/transient/persistent/private-isolation checks pass with no unhandled errors; build OK. Existing full private-guide script was attempted but its Node browser executable is unavailable; focused private-isolation check passed with the installed Python browser. No live backend changes or publication.
+
 - [x] Finish the mailing-address sender deployment only: synced main 21503e3b contains the setting reference; read-only setting check is 1/true/true. Deployed only process-family-squares-followups unchanged (source SHA-256 232cfa0cc3e00ae018ae19c072b237f81f379d5fccb679817a75122b5c2e23d2) after 2026-11-12T20:49:03Z. Immediate 70-minute response check: one HTTP 200 at 20:35:00.061561 UTC with sent/skipped/failed all 0 and empty reasons; no post-deploy run yet. Queue total 561/sent 0/skipped 561/waiting 0. Job 48 enabled and unchanged at hourly :35; no manual invocation, settings/queue/schedule changes, migrations, or publication.
 
 - [x] Save the requested follow-up mailing-address setting: synced main passes the email_mailing_address text check; executed only the authorized site_settings upsert. No deployments, queue/start changes, schedule changes, manual invocations, migrations, or publication; no step 2 was supplied.

@@ -22,7 +22,9 @@ const initializeApp = async () => {
   }
 };
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root");
+if (!root) throw new Error("Page root is missing");
+createRoot(root).render(
   <HelmetProvider>
     <AnalyticsScripts />
     <App />
