@@ -304,31 +304,70 @@ Deno.serve(async (req) => {
     }
 
     const token = authHeader.replace('Bearer ', '');
-    
-    // Create Supabase client with user's token to verify authentication
-    const supabaseAuth = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      {
-        global: {
-          headers: { Authorization: `Bearer ${token}` }
-        }
+
+    // Server-to-server calls from membership-quick-start (the one-page family
+    // sign-up) arrive with the service role key and name the account they act
+    // for. Only that function holds the key; a browser never does. This path is
+    // limited to starting and activating a FAMILY membership.
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+    const isServiceRole = serviceRoleKey.length > 0 && token === serviceRoleKey;
+
+    let authenticatedUserId: string;
+    let requestBody: Record<string, unknown>;
+
+    if (isServiceRole) {
+      requestBody = await req.json();
+      // membership-quick-start asks this before it shows the one-page sign-up,
+      // so the page falls back to the two-step path if the link is not working.
+      if (requestBody.action === 'service-check') {
+        return new Response(
+          JSON.stringify({ ok: true }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
       }
-    );
-
-    // Get the authenticated user from the token
-    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
-    
-    if (authError || !user) {
-      console.error('Auth error:', authError);
-      return new Response(
-        JSON.stringify({ error: 'Unauthorized - invalid token' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      const onBehalfOf = requestBody.onBehalfOfUserId;
+      const allowed = requestBody.action === 'create-subscription' || requestBody.action === 'activate-subscription';
+      if (
+        typeof onBehalfOf !== 'string' ||
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(onBehalfOf) ||
+        !allowed ||
+        requestBody.providerSubmissionId
+      ) {
+        return new Response(
+          JSON.stringify({ error: 'Invalid service request' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+      authenticatedUserId = onBehalfOf;
+      delete requestBody.onBehalfOfUserId;
+      console.log('Service request on behalf of user:', authenticatedUserId);
+    } else {
+      // Create Supabase client with user's token to verify authentication
+      const supabaseAuth = createClient(
+        Deno.env.get('SUPABASE_URL') ?? '',
+        Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+        {
+          global: {
+            headers: { Authorization: `Bearer ${token}` }
+          }
+        }
       );
-    }
 
-    const authenticatedUserId = user.id;
-    console.log('Authenticated user:', authenticatedUserId);
+      // Get the authenticated user from the token
+      const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
+
+      if (authError || !user) {
+        console.error('Auth error:', authError);
+        return new Response(
+          JSON.stringify({ error: 'Unauthorized - invalid token' }),
+          { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      authenticatedUserId = user.id;
+      console.log('Authenticated user:', authenticatedUserId);
+      requestBody = await req.json();
+    }
 
     // Service role client for database operations
     const supabaseClient = createClient(
@@ -336,7 +375,7 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { action, ...params } = await req.json();
+    const { action, ...params } = requestBody as { action?: string } & Record<string, any>;
     console.log('PayPal action:', action);
 
     const accessToken = await getPayPalAccessToken();

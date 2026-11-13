@@ -73,7 +73,7 @@ const trialSteps = [
   {
     label: "Today",
     title: "Create your private account",
-    description: "Choose a username, approve the subscription through PayPal, and get member access. You are not charged during the first seven days.",
+    description: "Fill in one short form, choose a username, and approve the subscription with PayPal or a card. You are not charged during the first seven days.",
   },
   {
     label: "Days 1–7",
@@ -128,13 +128,14 @@ const faqSchema = {
   })),
 };
 
-const authHref = "/auth?redirect=/family-membership&mode=signup";
+// One page that takes the new member's details and payment together.
+const startHref = "/family-membership?start=1";
 
 function TrialButton({ source, className = "" }: { source: string; className?: string }) {
   return (
     <Button asChild size="lg" className={`w-full gap-2 bg-logo-blue px-7 text-white hover:bg-logo-blue/90 sm:w-auto ${className}`}>
       <Link
-        to={authHref}
+        to={startHref}
         onClick={() => trackConversionEvent("membership_trial_click", { source })}
       >
         Start my 7-day free trial
