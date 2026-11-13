@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { arrivedFromApp } from "@/lib/webSession";
+import MemberPagePreview from "@/components/MemberPagePreview";
 
 const SOBER_HELPLINE_APP_URL = "https://apps.apple.com/app/id6780034996";
 
@@ -29,8 +30,8 @@ export default function AppSubscriberGate({
   const [fromApp] = useState(arrivedFromApp);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
-      <Card className="max-w-md w-full">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-10 px-4 py-12 lg:flex-row lg:items-start lg:gap-12">
+      <Card className="max-w-md w-full lg:order-2">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-logo-blue/10">
             <Lock className="h-7 w-7 text-logo-blue" />
@@ -109,6 +110,10 @@ export default function AppSubscriberGate({
           )}
         </CardContent>
       </Card>
+      {/* The card comes first on a phone so a member can sign in without scrolling. */}
+      <div className="w-full max-w-md lg:order-1">
+        <MemberPagePreview path={returnPath} />
+      </div>
     </div>
   );
 }
