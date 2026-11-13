@@ -22,7 +22,7 @@ export default function FamilyConsultation() {
     <>
       <SEOHead
         title="Crisis Coaching Session | Sober Helpline"
-        description="Book a private 60-minute Crisis Coaching Session with a professional family interventionist. Get a clear, calm next step for your family today."
+        description="Book a private 60-minute Crisis Coaching Session with a professional family interventionist: $150, or $125 for members. Get a clear, calm next step for your family today."
         faqItems={[
           {
             question: "When should a family book a Crisis Coaching Session?",
@@ -136,9 +136,9 @@ export default function FamilyConsultation() {
             <Card className="border-primary/20 bg-primary/5 mb-6">
               <CardContent className="py-5">
                 <p className="text-sm md:text-base text-foreground">
-                  <span className="font-semibold">Members save $25</span> on every coaching session. Active{" "}
+                  <span className="font-semibold">Each 60-minute session is $150, or $125 for members.</span> Active{" "}
                   <Link to="/family-membership" className="text-primary hover:underline font-medium">family membership</Link>
-                  {" "}members are billed at the discounted rate automatically at booking.
+                  {" "}members are billed the $125 member price automatically at booking.
                 </p>
               </CardContent>
             </Card>
