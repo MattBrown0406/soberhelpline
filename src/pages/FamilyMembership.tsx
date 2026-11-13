@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Phone, Check, Loader2, Tag, CheckCircle2, Heart, UserCircle, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
@@ -25,6 +25,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import SEOHead from "@/components/SEOHead";
 import MembershipSalesPage from "@/components/MembershipSalesPage";
+import MembershipOneStepCheckout from "@/components/MembershipOneStepCheckout";
+import { formatPhoneNumber } from "@/lib/formatPhone";
 import { arrivedFromApp } from "@/lib/webSession";
 import { trackConversionEvent } from "@/lib/conversionTracking";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
@@ -40,26 +42,6 @@ const referralSources = [
   "Word of Mouth",
   "Other",
 ];
-
-// Format phone number as user types: (000) 000-0000
-const formatPhoneNumber = (value: string): string => {
-  // Remove all non-digit characters
-  const digits = value.replace(/\D/g, '');
-  
-  // Check if it might be an international number (starts with + or has more than 10 digits)
-  if (value.startsWith('+') || digits.length > 10) {
-    return value; // Don't format international numbers
-  }
-  
-  // Format as US phone number
-  if (digits.length <= 3) {
-    return digits.length > 0 ? `(${digits}` : '';
-  } else if (digits.length <= 6) {
-    return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  } else {
-    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
-  }
-};
 
 const membershipFormSchema = z.object({
   username: z.string()
@@ -136,6 +118,7 @@ export default function FamilyMembership() {
 function FamilyMembershipCheckout() {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -347,11 +330,17 @@ function FamilyMembershipCheckout() {
   }
 
   if (!user) {
-    return <MembershipSalesPage />;
+    // No account yet: the sales page, then one page that takes their details
+    // and payment together (?start=1). People who already have an account log
+    // in and use the checkout below.
+    return searchParams.get("start") ? <MembershipOneStepCheckout /> : <MembershipSalesPage />;
   }
 
-  // Someone who is already a member should not be asked to pay again.
+  // Someone who is already a member should not be asked to pay again. A new
+  // member also lands here from the confirmation link in their email.
   if (!membershipLoading && isMember && !freeListingActivated && !processingPayment) {
+    const confirmedAt = user.email_confirmed_at ? new Date(user.email_confirmed_at).getTime() : 0;
+    const justConfirmed = confirmedAt > 0 && Date.now() - confirmedAt < 15 * 60 * 1000;
     return (
       <>
         <SEOHead
@@ -364,9 +353,11 @@ function FamilyMembershipCheckout() {
             <Card className="max-w-md mx-auto">
               <CardHeader className="text-center">
                 <CheckCircle2 className="h-14 w-14 text-logo-green mx-auto mb-3" />
-                <CardTitle>You are already a member</CardTitle>
+                <CardTitle>{justConfirmed ? "Your email is confirmed. Welcome!" : "You are already a member"}</CardTitle>
                 <CardDescription>
-                  Your family membership is active, so there is nothing to sign up for here.
+                  {justConfirmed
+                    ? "Your family membership is active and everything is open to you."
+                    : "Your family membership is active, so there is nothing to sign up for here."}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
