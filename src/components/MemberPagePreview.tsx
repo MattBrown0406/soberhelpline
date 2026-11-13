@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BookOpen } from "lucide-react";
-import { LIBRARY_TYPE_TOTALS, pillars } from "@/data/memberLibrary";
+import { pillars } from "@/data/memberLibrary";
 import { ACTIVE_TOPICS } from "@/lib/forumTopics";
 
 // What a visitor sees beside the "members only" card: a look at what is behind
@@ -14,8 +14,8 @@ interface Preview {
   links: { label: string; to: string }[];
 }
 
-const libraryTotal = LIBRARY_TYPE_TOTALS.guide + LIBRARY_TYPE_TOTALS.worksheet + LIBRARY_TYPE_TOTALS.meditation;
-const librarySize = `${Math.max(60, Math.floor(libraryTotal / 10) * 10)}+`;
+// The same wording every other page uses for the size of the library.
+const librarySize = "60+";
 
 const sampleGuides = [
   { label: "Boundary Drift: How Limits Slowly Erode", to: "/boundary-drift" },
