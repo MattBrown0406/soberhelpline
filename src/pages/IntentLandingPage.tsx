@@ -54,7 +54,7 @@ const landingPages: IntentLandingConfig[] = [
     routeNotes: [
       "This is the right landing page for general No More Enabling readers who need a private next step.",
       "It does not change or replace the free Family Squares registration.",
-      "It keeps the consultation path separate from the Monday Zoom path.",
+      "It keeps the consultation path separate from the Family Squares path.",
     ],
   },
   {

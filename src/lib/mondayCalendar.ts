@@ -8,7 +8,7 @@ export const SITE_URL = "https://soberhelpline.com";
 export const WEEKLY_JOIN_URL = `${SITE_URL}/join-meeting`;
 export const REGISTRATION_URL = `${SITE_URL}/family-squares`;
 
-const EVENT_TITLE = "The Family Squares (free family support meeting)";
+const EVENT_TITLE = "Family Squares (free family support meeting)";
 const EVENT_DETAILS =
   "Free weekly family support meeting from Sober Helpline, every Monday at 7:00 PM Pacific. " +
   `Join here each week: ${WEEKLY_JOIN_URL}`;
@@ -95,7 +95,7 @@ export function weeklyCalendarFile(firstMonday: string, now: Date = new Date()):
     `URL:${WEEKLY_JOIN_URL}`,
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    "DESCRIPTION:The Family Squares starts in 30 minutes",
+    "DESCRIPTION:Family Squares starts in 30 minutes",
     "TRIGGER:-PT30M",
     "END:VALARM",
     "END:VEVENT",

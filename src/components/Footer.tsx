@@ -55,7 +55,7 @@ const Footer = () => {
             </a>
             <WhatsAppLink source="footer_brand" variant="inline" className="mt-1 text-white/90 hover:text-white" />
             <div className="mt-5 rounded-lg border border-gray-800 bg-gray-800/70 p-3">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sober Helpline App</p>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sober Helpline App · iPhone and iPad</p>
               <SoberHelplineAppStoreBadge height={36} source="footer_brand" />
             </div>
           </div>
@@ -74,7 +74,7 @@ const Footer = () => {
               <li><Link to="/family-coaching" className="text-sm hover:text-white transition-colors">Coaching</Link></li>
               <li><Link to="/family-consultation" className="text-sm hover:text-white transition-colors">Crisis Coaching Session</Link></li>
               <li><Link to="/intervention-help" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
-              <li><Link to="/family-squares" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
+              <li><Link to="/family-squares" className="text-sm hover:text-white transition-colors">Family Squares</Link></li>
               <li><Link to="/text-reminders" className="text-sm hover:text-white transition-colors">Text Reminders</Link></li>
               <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings{memberTag}</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>

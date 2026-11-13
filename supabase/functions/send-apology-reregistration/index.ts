@@ -45,7 +45,7 @@ function buildApologyTrialEmail(firstName: string, email: string): string {
 <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#1f2937;">
   <h1 style="color:#1e3a5f;">Hi ${escapeHtml(firstName)},</h1>
 
-  <p>I want to personally apologize for the inconvenience you experienced during the registration process for <strong>"The Family Squares"</strong> meeting tonight. That's not the experience we want for anyone, and I'm sorry for the trouble.</p>
+  <p>I want to personally apologize for the inconvenience you experienced during the registration process for <strong>Family Squares</strong> meeting tonight. That's not the experience we want for anyone, and I'm sorry for the trouble.</p>
 
   <p>To make it right, <strong>I'd like to offer you a complimentary 3-month membership to Sober Helpline</strong> — completely free, no payment information required.</p>
 
@@ -57,7 +57,7 @@ function buildApologyTrialEmail(firstName: string, email: string): string {
   <div style="background-color:#f0fdf4;border-radius:8px;padding:24px;margin:20px 0;">
     <h3 style="color:#166534;margin-top:0;">What You Get Access To:</h3>
     <ul style="color:#374151;font-size:14px;line-height:2;padding-left:20px;">
-      <li><strong>📅 Free "The Family Squares" Support Calls</strong> — Weekly live group support</li>
+      <li><strong>📅 Free Family Squares Support Calls</strong> — Weekly live group support</li>
       <li><strong>📚 Family Education Library</strong> — Boundaries, enabling, communication & more</li>
       <li><strong>🛠️ Interactive Worksheets & Assessments</strong> — Boundary-setting, enabling audits, readiness assessments</li>
       <li><strong>📝 My Workbook</strong> — Short guided exercises that save what you write</li>
@@ -164,7 +164,7 @@ serve(async (req: Request) => {
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Hi ${safeName},</h1>
-          <p>Thank you for trying to register for <strong>"The Family Squares"</strong>. I want to sincerely apologize for the technical issues that prevented some people from registering properly.</p>
+          <p>Thank you for trying to register for <strong>Family Squares</strong>. I want to sincerely apologize for the technical issues that prevented some people from registering properly.</p>
           <p><strong>The issue has been identified and corrected.</strong></p>
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 24px 0; text-align: center;">
             <h2 style="margin: 0 0 10px 0; color: #166534;">✅ You're Pre-Registered!</h2>

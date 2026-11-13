@@ -257,7 +257,7 @@ serve(async (req: Request) => {
     const googleCalendarUrl = meetingDate
       ? `https://calendar.google.com/calendar/render?${new URLSearchParams({
           action: "TEMPLATE",
-          text: "The Family Squares — Sober Helpline",
+          text: "Family Squares — Sober Helpline",
           dates: `${calendarStart}/${calendarEnd}`,
           ctz: "America/Los_Angeles",
           details: calendarDescription,
@@ -307,7 +307,7 @@ serve(async (req: Request) => {
             `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z")}`,
             `DTSTART;TZID=America/Los_Angeles:${calendarStart}`,
             `DTEND;TZID=America/Los_Angeles:${calendarEnd}`,
-            `SUMMARY:${escapeIcsText("The Family Squares — Sober Helpline")}`,
+            `SUMMARY:${escapeIcsText("Family Squares — Sober Helpline")}`,
             `DESCRIPTION:${escapeIcsText(calendarDescription)}`,
             "LOCATION:Online via Zoom",
             `URL:${joinUrl}`,
@@ -359,14 +359,14 @@ serve(async (req: Request) => {
     }
 
     const attendeeSubject = isSpanish
-      ? "¡Está registrado/a! Reunión Zoom de “The Family Squares”"
-      : "You're Registered! “The Family Squares” Zoom Meeting";
+      ? "¡Está registrado/a! Reunión Zoom de Family Squares"
+      : "You're Registered! Family Squares Zoom Meeting";
 
     const attendeeHtml = isSpanish
       ? `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">¡Bienvenido/a, ${safeName}!</h1>
-          <p>Gracias por registrarse para la <strong>Reunión Zoom de “The Family Squares”</strong>.</p>
+          <p>Gracias por registrarse para la <strong>Reunión Zoom de Family Squares</strong>.</p>
           <p>Este es un espacio gratuito y de apoyo para familias que atraviesan la adicción. Tendrá la oportunidad de hacer preguntas, compartir experiencias y conectar con otras personas que entienden.</p>
 
           ${zoomSection}
@@ -401,7 +401,7 @@ serve(async (req: Request) => {
       : `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
           <h1 style="color: #166534;">Welcome, ${safeName}!</h1>
-          <p>Thank you for registering for the <strong>“The Family Squares” Zoom Meeting</strong>.</p>
+          <p>Thank you for registering for the <strong>Family Squares Zoom Meeting</strong>.</p>
           <p>This is a free, supportive space for families navigating addiction. You'll have the opportunity to ask questions, share experiences, and connect with others who understand.</p>
 
           ${zoomSection}
@@ -490,7 +490,7 @@ serve(async (req: Request) => {
 
     const adminSubject = `${wantsFollowUp ? "📞 FOLLOW-UP REQUEST — " : ""}New Zoom Meeting Registration: ${safeName} (${language === "es" ? "Spanish" : "English"})`;
     const adminHtml = `
-        <h2>New “The Family Squares” Registration</h2>
+        <h2>New Family Squares Registration</h2>
         <ul>
           <li><strong>Name:</strong> ${safeName}</li>
           <li><strong>Email:</strong> ${safeEmail}</li>

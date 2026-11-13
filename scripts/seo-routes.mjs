@@ -34,13 +34,13 @@ export const prerenderPages = [
     route: '/',
     title: 'Family Addiction Support & Education | Sober Helpline',
     description: 'Free education, support, and ethical resources for families affected by addiction. Recovery Roadmap, coaching, and practical next steps for families under strain.',
-    noscriptHtml: '<main><h1>Family Addiction Support and Education</h1><p>Sober Helpline offers family support, coaching, Monday Zoom meetings, and practical next steps for families facing addiction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-membership">Explore family membership</a> · <a href="https://soberhelpline.com/book-consultation">Book a consultation</a></p></main>'
+    noscriptHtml: '<main><h1>Family Addiction Support and Education</h1><p>Sober Helpline offers family support, coaching, Family Squares meetings, and practical next steps for families facing addiction.</p><p><a href="https://soberhelpline.com/family-squares">Join Family Squares</a> · <a href="https://soberhelpline.com/family-membership">Explore family membership</a> · <a href="https://soberhelpline.com/book-consultation">Book a consultation</a></p></main>'
   },
   {
     route: '/family-squares',
     title: 'Family Squares Free Monday Support Meeting | Sober Helpline',
-    description: 'Register for Family Squares, Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
-    noscriptHtml: '<main><h1>Register for Family Squares</h1><p>Join Sober Helpline\'s free Monday Zoom for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
+    description: 'Register for Family Squares, Sober Helpline\'s free Monday meeting for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
+    noscriptHtml: '<main><h1>Register for Family Squares</h1><p>Join Sober Helpline\'s free Family Squares meeting for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
   },
   {
     route: '/from-no-more-enabling',
@@ -82,9 +82,9 @@ export const prerenderPages = [
   {
     route: '/monday-zoom-registration',
     canonicalPath: '/family-squares',
-    title: 'Monday Family Support Zoom | Sober Helpline',
-    description: 'Register for Sober Helpline\'s free Monday Zoom for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
-    noscriptHtml: '<main><h1>Register for the Monday Family Support Zoom</h1><p>Join Sober Helpline\'s free Monday Zoom for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
+    title: 'Family Squares | Sober Helpline',
+    description: 'Register for Sober Helpline\'s free Family Squares meeting for families affected by addiction. Get support, education, and practical next steps in a confidential setting.',
+    noscriptHtml: '<main><h1>Register for Family Squares</h1><p>Join Sober Helpline\'s free Family Squares meeting for families navigating addiction, recovery, boundaries, and treatment decisions.</p><p><a href="https://soberhelpline.com/book-consultation">Need private guidance instead?</a></p></main>'
   },
   {
     route: '/family-membership',
@@ -180,7 +180,7 @@ export const prerenderPages = [
     route: '/family-consultation',
     title: 'Family Consultation for Addiction Support | Sober Helpline',
     description: 'Talk with Sober Helpline about your family\'s situation, treatment questions, and the next right step when addiction has thrown life off balance.',
-    noscriptHtml: '<main><h1>Crisis Coaching Session</h1><p>A private 60-minute session with a professional family interventionist.</p><p>Private coaching is a paid service; review current rates and availability before booking. For a free group option, see the <a href="https://soberhelpline.com/family-squares">Monday Family Squares meeting</a>.</p><p><a href="https://soberhelpline.com/book-consultation">Book your consultation</a></p></main>'
+    noscriptHtml: '<main><h1>Crisis Coaching Session</h1><p>A private 60-minute session with Matt Brown, a professional interventionist.</p><p>Private coaching is a paid service; review current rates and availability before booking. For a free group option, see the <a href="https://soberhelpline.com/family-squares">Monday Family Squares meeting</a>.</p><p><a href="https://soberhelpline.com/book-consultation">Book your consultation</a></p></main>'
   },
   {
     route: '/family-readiness-intensive',
@@ -224,8 +224,8 @@ export const prerenderPages = [
   {
     route: '/texas-family-support',
     title: 'Family Support for Addiction in Texas | Sober Helpline',
-    description: 'Texas families can find addiction family support, coaching, Monday Zoom meetings, treatment guidance, and intervention readiness help.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Texas</h1><p>Practical support for Texas families facing addiction, crisis decisions, enabling patterns, treatment planning, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    description: 'Texas families can find addiction family support, coaching, Family Squares meetings, treatment guidance, and intervention readiness help.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in Texas</h1><p>Practical support for Texas families facing addiction, crisis decisions, enabling patterns, treatment planning, and intervention questions.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Family Squares</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
     route: "/arizona-family-support",
@@ -238,7 +238,7 @@ export const prerenderPages = [
     route: '/colorado-family-support',
     title: 'Family Support for Addiction in Colorado | Sober Helpline',
     description: 'Colorado families can find addiction family resources, Monday support Zoom, private coaching, and professional intervention guidance.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in Colorado</h1><p>Resources for Colorado families navigating addiction, boundaries, relapse, treatment questions, and possible intervention needs.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    noscriptHtml: '<main><h1>Family Support for Addiction in Colorado</h1><p>Resources for Colorado families navigating addiction, boundaries, relapse, treatment questions, and possible intervention needs.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Family Squares</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
     route: "/idaho-family-support",
@@ -264,8 +264,8 @@ export const prerenderPages = [
   {
     route: '/new-mexico-family-support',
     title: 'Family Support for Addiction in New Mexico | Sober Helpline',
-    description: 'New Mexico families can access addiction family support, Monday Zoom meetings, coaching, and intervention readiness planning.',
-    noscriptHtml: '<main><h1>Family Support for Addiction in New Mexico</h1><p>Support for New Mexico families navigating addiction, overdose risk, treatment refusal, boundaries, and intervention planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Monday Zoom</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
+    description: 'New Mexico families can access addiction family support, Family Squares meetings, coaching, and intervention readiness planning.',
+    noscriptHtml: '<main><h1>Family Support for Addiction in New Mexico</h1><p>Support for New Mexico families navigating addiction, overdose risk, treatment refusal, boundaries, and intervention planning.</p><p><a href="https://soberhelpline.com/monday-zoom-registration">Join Family Squares</a> · <a href="https://soberhelpline.com/book-consultation">Book family coaching</a> · <a href="https://soberhelpline.com/intervention-help">Intervention help</a></p></main>'
   },
   {
     route: '/book-consultation',

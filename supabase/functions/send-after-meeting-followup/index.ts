@@ -131,7 +131,7 @@ ${button(registerLink("attended"), "Save my spot for next Monday")}`;
     return {
       subject: "Glad you were with us last night",
       html: wrap(`<p>Hi ${firstName},</p>
-<p>This is Matt from Sober Helpline. Last night was your first time in the room at "The Family Squares", and I wanted to say thank you for coming. It takes something to show up for a meeting like that.</p>
+<p>This is Matt from Sober Helpline. Last night was your first time in the room at Family Squares, and I wanted to say thank you for coming. It takes something to show up for a meeting like that.</p>
 <p>One small thing that helps: before the week gets busy, write down one sentence you heard last night that you want to hold on to.</p>
 ${nextStep}
 <p>If someone else in your family should hear this too, forward them this email. More of the family in the same meeting makes the week at home easier.</p>
@@ -148,7 +148,7 @@ ${button(registerLink("missed"), "Save my spot for next Monday")}
   return {
     subject: "We missed you last night",
     html: wrap(`<p>Hi ${firstName},</p>
-<p>This is Matt from Sober Helpline. You signed up for "The Family Squares" last night and I don't think you made it into the room. No explanation needed. Monday nights fall apart for all kinds of reasons, especially in a house living with addiction.</p>
+<p>This is Matt from Sober Helpline. You signed up for Family Squares last night and I don't think you made it into the room. No explanation needed. Monday nights fall apart for all kinds of reasons, especially in a house living with addiction.</p>
 <p>(If you were there under a different name, thank you for coming, and you can ignore this.)</p>
 ${nextStep}
 <p>If Monday evenings never work for you, reply and tell me. I read these.</p>

@@ -68,7 +68,7 @@ const AppLinkFallback = () => {
     <>
       <SEOHead
         title="Open in the Sober Helpline App | Sober Helpline"
-        description="This link opens in the Sober Helpline app for iPhone. Get the app on the App Store, or continue on the website."
+        description="This link opens in the Sober Helpline app for iPhone and iPad. Get the app on the App Store, or continue on the website."
         noIndex
       />
       <div className="flex min-h-[70vh] items-center justify-center bg-gradient-to-b from-background to-muted/50 px-4 py-12">
@@ -77,8 +77,8 @@ const AppLinkFallback = () => {
           <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl">Open this in the Sober Helpline app</h1>
           <p className="mb-6 text-muted-foreground">
             {destination === APP_HOME
-              ? "This link opens the Sober Helpline app for iPhone."
-              : `This link opens ${destination.label} in the Sober Helpline app for iPhone.`}
+              ? "This link opens the Sober Helpline app for iPhone and iPad."
+              : `This link opens ${destination.label} in the Sober Helpline app for iPhone and iPad.`}
           </p>
 
           <div className="flex justify-center">
@@ -87,7 +87,7 @@ const AppLinkFallback = () => {
           <p className="mt-4 text-sm text-muted-foreground">
             {onAppleMobile
               ? "Already have the app? Tap Open in the banner at the top of this page to open it."
-              : "The Sober Helpline app is free to download on the App Store for iPhone."}
+              : "The Sober Helpline app is free to download on the App Store for iPhone and iPad."}
           </p>
 
           {destination.web && (

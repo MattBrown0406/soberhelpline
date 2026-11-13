@@ -72,7 +72,7 @@ const immediateActions = [
       href: "/book-consultation",
     },
     footnote:
-      "Available 24/7 for crisis situations. If you get voicemail, leave a message — you WILL get a call back.",
+      "This is not a 24/7 crisis line. If no one is free to talk, leave a message and you will get a call back. In an emergency, call 911 or 988.",
   },
 ];
 
@@ -89,11 +89,11 @@ interface ChecklistItem {
 const weekItems: ChecklistItem[] = [
   {
     id: "join-zoom",
-    title: "Join the free “The Family Squares” Zoom call",
+    title: "Join the free Family Squares Zoom call",
     description:
       "Every Monday at 7:00 PM Pacific, families just like yours come together for a free, live support call. You'll hear from others who've been exactly where you are — and from professionals who can help. You don't have to talk. Just showing up is a step.",
     icon: Video,
-    linkText: "Register for Monday Zoom",
+    linkText: "Register for Family Squares",
     linkUrl: "/monday-zoom-registration",
   },
   {
@@ -159,7 +159,7 @@ const monthItems: ChecklistItem[] = [
     id: "start-own-recovery",
     title: "Start your own recovery",
     description:
-      "Here's the thing no one tells you: the addict isn't the only one who needs recovery. You've been living in crisis mode — hypervigilant, anxious, angry, exhausted. Your nervous system is fried. You deserve support too, and getting it isn't selfish — it's strategic. A family that's falling apart can't help anyone get sober. Start with one thing: our free weekly support group, a therapist, Al-Anon, or even just reading one article about family recovery.",
+      "Here's the thing no one tells you: the addict isn't the only one who needs recovery. You've been living in crisis mode — hypervigilant, anxious, angry, exhausted. Your nervous system is fried. You deserve support too, and getting it isn't selfish — it's strategic. A family that's falling apart can't help anyone get sober. Start with one thing: Family Squares (our free Monday meeting), a therapist, Al-Anon, or even just reading one article about family recovery.",
     icon: Heart,
     linkText: "Understanding Family Recovery",
     linkUrl: "/family-support",
@@ -327,7 +327,7 @@ const RoadmapCrisis = () => {
               <CrisisPhone label="Domestic Violence Hotline" number="1-800-799-7233" tel="18007997233" />
               <CrisisPhone label="SAMHSA National Helpline" number="1-800-662-4357" tel="18006624357" />
               <CrisisPhone label="Poison Control (overdose)" number="1-800-222-1222" tel="18002221222" />
-              <CrisisPhone label="Professional Help (24/7)" number="(458) 298-8008" tel="4582988008" />
+              <CrisisPhone label="Sober Helpline (family guidance, not 24/7)" number="(458) 298-8008" tel="4582988008" />
             </CardContent>
           </Card>
 
@@ -349,7 +349,7 @@ const RoadmapCrisis = () => {
                   className="flex items-center gap-2 text-sm text-primary hover:underline py-1 font-medium"
                 >
                   <Video className="w-4 h-4" />
-                  Weekly Support Group — Monday 7:00 PM Pacific
+                  Family Squares — Mondays, 7:00 PM Pacific
                 </Link>
               </div>
             </CardContent>
@@ -524,7 +524,7 @@ function CrisisActionCard({
                     className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
                   >
                     <Video className="w-3.5 h-3.5" />
-                    Join Our Free Weekly Support Group
+                    Join Family Squares, Our Free Monday Meeting
                   </Link>
                 )}
               </CollapsibleContent>

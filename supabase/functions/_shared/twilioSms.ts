@@ -6,7 +6,7 @@
 export const SMS_ENABLED_SETTING = "family_squares_sms_enabled";
 
 export const SMS_CONSENT_TEXT =
-  "I agree to receive text message reminders from Sober Helpline about The Family Squares at this number. " +
+  "I agree to receive text message reminders from Sober Helpline about Family Squares at this number. " +
   "About one message per meeting. Message and data rates may apply. Reply STOP to cancel, HELP for help.";
 
 export function smsConfigured(): boolean {

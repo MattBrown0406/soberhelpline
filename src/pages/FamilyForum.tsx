@@ -617,7 +617,7 @@ export default function FamilyForum() {
               { to: "/family-education", label: "Education" },
               { to: "/family-webinars", label: "Webinars" },
               { to: "/family-coaching", label: "Coaching" },
-              { to: "/monday-zoom-registration", label: "Monday Zoom" },
+              { to: "/monday-zoom-registration", label: "Family Squares" },
               { to: "/zoom-recordings", label: "Past Recordings" },
               { to: "/sibling-support", label: "Sibling Support" },
             ].map((link) => (

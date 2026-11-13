@@ -79,7 +79,7 @@ export const MeetingBlocklistManagement = () => {
       <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 text-sm text-amber-900">
         <p className="font-semibold mb-1">What this does</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Blocks the email from registering for "The Family Squares" via the website</li>
+          <li>Blocks the email from registering for Family Squares via the website</li>
           <li>Suppresses all automated Zoom emails (reminders, follow-ups, re-engagement) to that address</li>
           <li>Blocks the in-browser Zoom join page for signed-in users with this email</li>
           <li><strong>Does not</strong> stop someone who already has the raw Zoom link from opening it in the Zoom app — enable the Zoom Waiting Room and don't admit them.</li>

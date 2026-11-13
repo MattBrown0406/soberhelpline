@@ -39,7 +39,7 @@ export default function WashingtonSpokaneFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Spokane, Washington | Sober Helpline"
-        description="Families in Spokane struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Spokane struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -76,7 +76,7 @@ export default function WashingtonSpokaneFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Free Monday Zoom — 7:00 PM Pacific
+                  Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -113,7 +113,7 @@ export default function WashingtonSpokaneFamilySupport() {
               </p>
               <p>
                 For Spokane families, the distance from major urban resources shouldn't mean isolation. Sober
-                Helpline's virtual coaching and free Monday Zoom bring expert intervention guidance directly
+                Helpline's virtual coaching and free Family Squares meeting bring expert intervention guidance directly
                 to you — no travel required, no expensive in-person teams.
               </p>
             </div>
@@ -234,7 +234,7 @@ export default function WashingtonSpokaneFamilySupport() {
                 <Link to="/monday-zoom-registration">
                   <Button className="gap-2">
                     <Calendar className="h-4 w-4" />
-                    Register for Monday Zoom
+                    Register for Family Squares
                   </Button>
                 </Link>
               </div>
@@ -307,14 +307,14 @@ export default function WashingtonSpokaneFamilySupport() {
               Spokane Families: Help Is Here
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              Distance shouldn't mean you're on your own. Free Monday Zoom or direct coaching —
+              Distance shouldn't mean you're on your own. Free Family Squares on Mondays or direct coaching —
               expert intervention guidance available to Eastern Washington families right now.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

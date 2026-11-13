@@ -354,7 +354,7 @@ export default function MondayZoomRegistration() {
         <p className="text-muted-foreground text-lg mb-8">
           {alreadyRegistered ? "We look forward to seeing you Monday evening!" : isMemberQuestion
             ? "Thank you for submitting your question. We'll do our best to address it during tonight's meeting."
-            : "Thank you for registering for the “The Family Squares” Zoom meeting. When it's time, join directly from this page, no need to leave the site."}
+            : "Thank you for registering for the Family Squares Zoom meeting. When it's time, join directly from this page, no need to leave the site."}
         </p>
 
         {meetingInfo ? (
@@ -362,7 +362,7 @@ export default function MondayZoomRegistration() {
             <Link to={`/join-meeting?mn=${meetingInfo.meetingId}&pwd=${encodeURIComponent(meetingInfo.passcode)}`}>
               <Button size="lg" className="gap-2">
                 <Monitor className="h-5 w-5" />
-                Join “The Family Squares”
+                Join Family Squares
               </Button>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -567,7 +567,7 @@ export default function MondayZoomRegistration() {
                 Submitting...
               </>
             ) : (
-              isMemberQuestion ? "Submit My Question" : "Register for The Family Squares"
+              isMemberQuestion ? "Submit My Question" : "Register for Family Squares"
             )}
           </Button>
 
@@ -590,12 +590,12 @@ export default function MondayZoomRegistration() {
     <>
       <SEOHead
         title={isMemberQuestion ? "Submit a Question for Tonight's Meeting | Sober Helpline" : "Family Squares Free Monday Support Meeting | Sober Helpline"}
-        description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for Family Squares, the free Monday Zoom meeting for families affected by addiction. Get live support, ask practical questions, and find the next right step."}
+        description={isMemberQuestion ? "Already registered for tonight's Family Squares meeting? Submit your question here so we can address it during the live session." : "Register for Family Squares, the free Monday meeting on Zoom for families affected by addiction. Get live support, ask practical questions, and find the next right step."}
         canonicalPath={isMemberQuestion ? undefined : "/family-squares"}
         jsonLd={isMemberQuestion ? undefined : {
           "@context": "https://schema.org",
           "@type": "Event",
-          name: "The Family Squares",
+          name: "Family Squares",
           description: "A free weekly Zoom support meeting for families affected by addiction.",
           eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
           eventStatus: "https://schema.org/EventScheduled",
@@ -683,7 +683,7 @@ export default function MondayZoomRegistration() {
                         Free weekly family support
                       </div>
                       <h1 className="text-3xl font-extrabold tracking-normal text-foreground md:text-5xl md:leading-tight">
-                        Family Squares Monday Zoom
+                        Family Squares
                       </h1>
                       <p className="mt-3 flex items-start gap-2 text-sm font-semibold text-foreground md:text-base">
                         <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -768,7 +768,7 @@ export default function MondayZoomRegistration() {
                 </div>
 
                 <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-4 text-center shadow-sm">
-                  <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your phone before the meeting starts.</p>
+                  <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your iPhone or iPad before the meeting starts.</p>
                   <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
                 </div>
               </>

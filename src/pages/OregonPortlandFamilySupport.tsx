@@ -38,7 +38,7 @@ export default function OregonPortlandFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Portland, Oregon | Sober Helpline"
-        description="Families in Portland struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Portland struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -75,7 +75,7 @@ export default function OregonPortlandFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -207,7 +207,7 @@ export default function OregonPortlandFamilySupport() {
           </div>
         </section>
 
-        {/* Monday Zoom */}
+        {/* Family Squares */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
             <Card className="border-primary/20 bg-primary/5">
@@ -219,7 +219,7 @@ export default function OregonPortlandFamilySupport() {
                       Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
-                      Free “The Family Squares” Zoom
+                      Free Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Portland families join families from across Oregon every Monday for free, judgment-free support.
@@ -335,13 +335,13 @@ export default function OregonPortlandFamilySupport() {
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
               Whether you're in crisis or just starting to recognize the problem, Sober Helpline is here. 
-              Free Monday Zoom every week. Coaching available now.
+              Free Family Squares meeting every Monday. Private coaching by appointment.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

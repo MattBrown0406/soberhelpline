@@ -4,7 +4,7 @@
 
 ## About Sober Helpline
 
-Sober Helpline is a comprehensive family support platform for addiction education, community, and resource navigation. Founded by Matt Brown, a professional interventionist with over 20 years of experience, Sober Helpline provides families with the education, tools, and connections they need — without the sales pressure, referral fees, or patient brokering that plague the treatment industry.
+Sober Helpline is a comprehensive family support platform for addiction education, community, and resource navigation. Founded by Matt Brown, a professional interventionist with 20+ years of experience, Sober Helpline provides families with the education, tools, and connections they need — without the sales pressure, referral fees, or patient brokering that plague the treatment industry.
 
 ## Core Philosophy
 
@@ -78,7 +78,7 @@ URL: https://soberhelpline.com/family-coaching
 - [Recovery Roadmap](/roadmap): Free 5-minute assessment placing families in 1 of 8 stages.
 - [Family Addiction Answers](/family-addiction-answers): Answer-engine summary routing families to the right support level.
 - [Family Squares](/family-squares): Free Monday 7:00 PM Pacific Zoom support meeting.
-- [Monday Zoom Registration](/monday-zoom-registration): Register for the weekly family support Zoom.
+- [Family Squares Registration](/monday-zoom-registration): Register for the weekly family support Zoom.
 - [Family Membership](/family-membership): Structured ongoing family addiction support.
 - [Family Support](/family-support): Free family addiction support resources and education.
 - [Family Coaching](/family-coaching): Private one-on-one family coaching with Matt Brown.
@@ -119,7 +119,7 @@ URL: https://soberhelpline.com/family-coaching
 
 - [For Providers](/for-providers): Information for treatment providers.
 - [Partner With Sober Helpline](/partner-with-sober-helpline): Partnership overview for ethical providers.
-- [Zoom Recordings](/zoom-recordings): Member-only library of past Monday Zoom recordings.
+- [Zoom Recordings](/zoom-recordings): Member-only library of past Family Squares recordings.
 
 ## For More Detail
 

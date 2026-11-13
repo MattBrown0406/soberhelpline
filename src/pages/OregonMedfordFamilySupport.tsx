@@ -35,7 +35,7 @@ export default function OregonMedfordFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Medford, Oregon | Sober Helpline"
-        description="Families in Medford struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Medford struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -72,7 +72,7 @@ export default function OregonMedfordFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -114,7 +114,7 @@ export default function OregonMedfordFamilySupport() {
             <p className="text-muted-foreground text-sm">
               Medford families often exhaust local options quickly. Coaching through Sober Helpline bridges that gap — 
               you get personalized guidance by phone or video, regardless of what's available locally.
-              And our free Monday Zoom connects you with families from across Oregon who understand.
+              And our free Family Squares meeting connects you with families from across Oregon who understand.
             </p>
           </div>
         </section>
@@ -204,7 +204,7 @@ export default function OregonMedfordFamilySupport() {
           </div>
         </section>
 
-        {/* Monday Zoom */}
+        {/* Family Squares */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
             <Card className="border-primary/20 bg-primary/5">
@@ -216,10 +216,10 @@ export default function OregonMedfordFamilySupport() {
                       Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
-                      Free “The Family Squares” Zoom
+                      Free Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      For Medford families dealing with rural isolation, the Monday Zoom is a lifeline. 
+                      For Medford families dealing with rural isolation, Family Squares is a lifeline. 
                       Connect with families from across Oregon — no travel, no cost, no pressure.
                     </p>
                     <ul className="space-y-2 mb-4">
@@ -326,13 +326,13 @@ export default function OregonMedfordFamilySupport() {
               Medford Families: You're Not Alone
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Distance isn't a barrier. Free Monday Zoom. Coaching by phone or video. Real help, right now.
+              Distance isn't a barrier. Free Family Squares every Monday. Coaching by phone or video. Real help, wherever you are.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

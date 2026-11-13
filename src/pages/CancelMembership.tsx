@@ -104,8 +104,8 @@ export default function CancelMembership() {
                   and we will cancel it for you.
                 </p>
                 <p>
-                  Subscriptions purchased inside the Sober Helpline iPhone app are billed by Apple and must be
-                  cancelled in your Apple App Store subscription settings (iPhone Settings, then your name, then Subscriptions).
+                  Subscriptions purchased inside the Sober Helpline app (iPhone and iPad) are billed by Apple and must be
+                  cancelled in your Apple App Store subscription settings (Settings on your iPhone or iPad, then your name, then Subscriptions).
                 </p>
                 <p className="text-sm">
                   Want to remove your account entirely? See{" "}

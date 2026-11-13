@@ -39,7 +39,7 @@ export default function CaliforniaSanJoseFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in San Jose, California | Sober Helpline"
-        description="Families in San Jose struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7:00 PM Pacific. (458) 298-8008."
+        description="Families in San Jose struggling with a loved one's addiction get expert support from Sober Helpline. Free Family Squares every Monday 7:00 PM Pacific. (458) 298-8008."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -70,13 +70,13 @@ export default function CaliforniaSanJoseFamilySupport() {
             <p className="hero-description text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Silicon Valley's prosperity masks a serious addiction problem. San Jose and Santa Clara County
               see significant high-functioning addiction in the tech sector alongside fentanyl and
-              methamphetamine crises. Families deserve real support — not judgment. Help is available now.
+              methamphetamine crises. Families deserve real support — not judgment. Help is available.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Free Monday Zoom — 7:00 PM Pacific
+                  Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -115,7 +115,7 @@ export default function CaliforniaSanJoseFamilySupport() {
               </p>
               <p>
                 Sober Helpline offers San Jose families practical, judgment-free support through our free
-                Monday Zoom and hourly coaching — whether your loved one is a tech professional in denial
+                Family Squares and hourly coaching — whether your loved one is a tech professional in denial
                 or someone lost in active addiction on the street.
               </p>
             </div>
@@ -248,7 +248,7 @@ export default function CaliforniaSanJoseFamilySupport() {
                 <Link to="/monday-zoom-registration">
                   <Button className="gap-2">
                     <Calendar className="h-4 w-4" />
-                    Register for Monday Zoom
+                    Register for Family Squares
                   </Button>
                 </Link>
               </div>
@@ -327,13 +327,13 @@ export default function CaliforniaSanJoseFamilySupport() {
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Real help from a real interventionist — not a call center, not a treatment referral line.
-              Free Monday Zoom or direct coaching, available to Silicon Valley families right now.
+              Free Family Squares on Mondays or private coaching by appointment, for Silicon Valley families.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

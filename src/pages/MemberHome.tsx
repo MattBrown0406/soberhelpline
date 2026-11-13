@@ -136,12 +136,12 @@ function ThisWeekCard() {
                   <span className="mr-1.5 inline-block h-2 w-2 animate-pulse rounded-full bg-white motion-reduce:animate-none" aria-hidden="true" />
                   Live now
                 </Badge>
-                <span className="text-lg font-semibold leading-snug text-foreground">The Family Squares is on until 8:00 PM Pacific</span>
+                <span className="text-lg font-semibold leading-snug text-foreground">Family Squares is on until 8:00 PM Pacific</span>
               </div>
             ) : (
               <>
                 <p className="mt-0.5 text-lg font-semibold leading-snug text-foreground">
-                  The Family Squares: {meeting.isToday ? "tonight" : formatMeetingDay(meeting.start)}, 7:00–8:00 PM Pacific
+                  Family Squares: {meeting.isToday ? "tonight" : formatMeetingDay(meeting.start)}, 7:00–8:00 PM Pacific
                 </p>
                 <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
                   <span className="inline-flex items-center rounded-full bg-[#16294a]/[0.07] px-2.5 py-0.5 font-medium text-[#16294a] dark:bg-sky-400/15 dark:text-sky-200">

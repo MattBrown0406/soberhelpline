@@ -68,7 +68,7 @@ function buildHtml(safeName: string): string {
       <ul style="color: #374151; line-height: 1.6;">
         <li>Family education guides and worksheets</li>
         <li>The Recovery Roadmap for your family's stage</li>
-        <li>"The Family Squares" Monday night Zoom access</li>
+        <li>Family Squares access</li>
         <li>Members: full library, recordings, AI coaching tools, and more</li>
       </ul>
 

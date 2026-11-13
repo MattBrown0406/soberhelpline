@@ -44,7 +44,7 @@ function welcomeHtml(firstName: string): string {
   </p>
   <p><strong>Choose your path.</strong> On your member home, pick the path that fits what your family
     is facing. We'll suggest one step at a time, so you never have to figure out where to start.</p>
-  <p><strong>Come on Monday.</strong> "The Family Squares" meets every Monday, 7:00–8:00 PM Pacific,
+  <p><strong>Come on Monday.</strong> Family Squares meets every Monday, 7:00–8:00 PM Pacific,
     on Zoom. As a member you don't need to register; the link is on your member home.
     If there's something you want to talk about, post it in the forum's
     ${link("/family-forum/this-weeks-meeting", "This Week's Meeting")} room beforehand.</p>

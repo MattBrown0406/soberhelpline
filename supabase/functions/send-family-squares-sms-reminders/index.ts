@@ -23,7 +23,7 @@ const OPTINS = "family_squares_sms_optins";
 const LOG = "family_squares_sms_log";
 const MAX_PER_RUN = 300;
 const REMINDER =
-  "Sober Helpline: The Family Squares starts at 7 PM Pacific tonight. Join here: https://soberhelpline.com/join-meeting Reply STOP to opt out.";
+  "Sober Helpline: Family Squares starts at 7 PM Pacific tonight. Join here: https://soberhelpline.com/join-meeting Reply STOP to opt out.";
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });

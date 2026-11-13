@@ -16,7 +16,7 @@ const paths = [
     icon: Users,
     label: "I need support, but I am not ready to book",
     description: "Start with the free Monday Family Squares Zoom. Bring your questions, listen, and get steadier without making a paid decision today.",
-    cta: "Join Monday Zoom",
+    cta: "Join Family Squares",
     to: "/monday-zoom-registration",
     event: "monday_zoom_click" as const,
     source: "start_here_monday",

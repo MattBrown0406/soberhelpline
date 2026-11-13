@@ -33,7 +33,7 @@ export default function ArizonaScottsdaleFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Scottsdale, Arizona | Sober Helpline"
-        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free “The Family Squares” every Monday 7:00 PM Pacific. (458) 298-8008."
+        description="Families in Scottsdale struggling with a loved one's addiction get expert support from Sober Helpline. Free Family Squares every Monday 7:00 PM Pacific. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -145,14 +145,14 @@ export default function ArizonaScottsdaleFamilySupport() {
           </div>
         </section>
 
-        {/* Monday Zoom */}
+        {/* Family Squares */}
         <section className="py-16">
           <div className="container max-w-4xl mx-auto px-4">
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-2xl">
                   <Calendar className="h-7 w-7 text-primary" />
-                  “The Family Squares” — Free
+                  Family Squares — Free
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -168,7 +168,7 @@ export default function ArizonaScottsdaleFamilySupport() {
                   Scottsdale families often find that connecting with others in similar situations — regardless of zip code or income — is one of the most powerful steps they can take.
                 </p>
                 <Button asChild>
-                  <Link to="/monday-zoom-registration">Join the Monday Zoom →</Link>
+                  <Link to="/monday-zoom-registration">Join Family Squares →</Link>
                 </Button>
               </CardContent>
             </Card>

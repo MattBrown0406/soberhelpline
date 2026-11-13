@@ -106,7 +106,7 @@ const thirtyDayItems: ChecklistItem[] = [
       "The single most common mistake families make in early recovery: they stop taking care of themselves. They were in crisis mode, they went to support groups, they saw a therapist — and now that things are 'better,' they stop. Don't. You are recovering from trauma. Living with active addiction rewires your nervous system just like the drugs rewired theirs. You need ongoing support — therapy, support groups, self-care, boundaries around your own mental health. If you burn out, you can't help anyone. Keep going to your support group. Keep your therapy appointments. This is not selfish — it's survival.",
     icon: Brain,
     extraLinks: [
-      { text: "Join Our Free Weekly Support Group", url: "/monday-zoom-registration" },
+      { text: "Join Family Squares, Our Free Monday Meeting", url: "/monday-zoom-registration" },
     ],
   },
 ];
@@ -436,7 +436,7 @@ const RoadmapEarlyRecovery = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7:00 PM Pacific
+                Family Squares — Mondays, 7:00 PM Pacific
               </Link>
               <p className="text-xs text-muted-foreground italic pl-6">
                 You need this more now than you did during crisis.

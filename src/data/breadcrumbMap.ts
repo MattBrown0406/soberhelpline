@@ -377,7 +377,7 @@ const breadcrumbMap: Record<string, BreadcrumbItem[]> = {
   "/monday-zoom-registration": [
     { label: "Home", path: "/" },
     { label: "Community", path: "/family-support" },
-    { label: "Monday Zoom Registration", path: "/monday-zoom-registration" },
+    { label: "Family Squares Registration", path: "/monday-zoom-registration" },
   ],
   "/family-squares": [
     { label: "Home", path: "/" },

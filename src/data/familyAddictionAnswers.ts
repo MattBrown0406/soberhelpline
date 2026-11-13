@@ -32,7 +32,7 @@ export const familyAddictionAnswers: FamilyAddictionAnswer[] = [
     slug: "what-is-family-squares-meeting",
     question: "What is the free Monday Family Squares meeting for?",
     shortAnswer:
-      "Family Squares is a free Monday Zoom support meeting for parents, spouses, siblings, adult children, and loved ones who need support, education, and steadier thinking before making the next decision.",
+      "Family Squares is a free Monday support meeting on Zoom for parents, spouses, siblings, adult children, and loved ones who need support, education, and steadier thinking before making the next decision.",
     category: "Family Squares",
     deeperAnswer: [
       "The meeting is not a sales presentation and it is not a therapy group. It is a place for families affected by addiction to get grounded, hear practical guidance, ask questions, and realize they are not the only ones dealing with this.",

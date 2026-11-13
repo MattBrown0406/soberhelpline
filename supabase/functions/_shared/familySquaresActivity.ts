@@ -1,4 +1,4 @@
-// Who has gone quiet at "The Family Squares". Auto-registration skips anyone
+// Who has gone quiet at Family Squares. Auto-registration skips anyone
 // with no attendance in the last DORMANT_WEEKS meetings, and re-engagement
 // emails them only on the first Monday of the month. Someone who shows up
 // again (manual signup, then attendance) is active again with no admin step.

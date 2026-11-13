@@ -41,7 +41,7 @@ const membershipBenefits = `
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 16px;">
     <tr>
       <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-        <strong style="color: #1e40af;">📅 Recordings of “The Family Squares”</strong><br/>
+        <strong style="color: #1e40af;">📅 Recordings of Family Squares</strong><br/>
         <span style="color: #6b7280; font-size: 14px;">Watch any past Monday meeting on your own schedule. The live meeting is free for everyone, and as a member you can join without registering</span>
       </td>
     </tr>
@@ -193,7 +193,7 @@ function buildExistingUserEmail(firstName: string): string {
       <p style="color: #1e40af; font-weight: bold; margin-top: 0;">🚀 Quick Start Suggestions:</p>
       <ul style="color: #374151; font-size: 14px; line-height: 1.8; padding-left: 20px; margin-bottom: 0;">
         <li><a href="https://soberhelpline.com/family-education" style="color: #1e40af;">Browse the Education Library</a> — Start with the guides most relevant to your situation</li>
-        <li><a href="https://soberhelpline.com/join-meeting" style="color: #1e40af;">Join “The Family Squares”</a> — every Monday at 7:00 PM Pacific. Members do not need to register</li>
+        <li><a href="https://soberhelpline.com/join-meeting" style="color: #1e40af;">Join Family Squares</a> — every Monday at 7:00 PM Pacific. Members do not need to register</li>
         <li><a href="https://soberhelpline.com/family-forum" style="color: #1e40af;">Visit the Family Forum</a> — Introduce yourself and connect with others</li>
         <li><a href="https://soberhelpline.com/workbook/boundary-script" style="color: #1e40af;">Write one boundary you can hold</a> — A five-minute guided exercise</li>
       </ul>

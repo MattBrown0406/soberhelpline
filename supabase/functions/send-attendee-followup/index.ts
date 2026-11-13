@@ -18,7 +18,7 @@ const MEMBERSHIP_SECTION = `
     <li>📚 <strong>Education & Support Materials</strong> — 60+ guides, tools and guided meditations designed specifically for families</li>
     <li>📝 <strong>My Workbook</strong> — Short guided exercises (about five minutes each) that save what you write: a boundary you can hold, helping or enabling, practicing a hard moment</li>
     <li>💰 <strong>$25 Discount on Coaching Sessions</strong> — Members pay $125 instead of $150 for each private coaching session (the membership more than pays for itself!)</li>
-    <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past “The Family Squares” calls anytime</li>
+    <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past Family Squares calls anytime</li>
   </ul>
 
   <p style="line-height: 1.7; font-size: 15px;">All of this for just <strong>$9.99/month</strong> — less than the cost of a single cup of coffee a week. And with the $25 coaching discount, your membership pays for itself with just one session.</p>
@@ -42,14 +42,14 @@ const buildHtml = (firstName: string, viaApp: boolean) => `
 
   <h2 style="color: #1a1a1a; font-size: 22px;">Thank You for Joining Us, ${firstName}!</h2>
 
-  <p style="line-height: 1.7; font-size: 15px;">It was great having you on our “The Family Squares” call. We hope you found it valuable and felt the support of the community around you.</p>
+  <p style="line-height: 1.7; font-size: 15px;">It was great having you on our Family Squares call. We hope you found it valuable and felt the support of the community around you.</p>
   ${viaApp ? APP_SECTION : MEMBERSHIP_SECTION}
 
   <p style="line-height: 1.7; font-size: 15px;">With care,<br><strong>Matt Brown</strong><br>Sober Helpline<br><a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a></p>
 
   <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
 
-  <p style="font-size: 12px; color: #999; text-align: center;">You're receiving this email because you registered for our “The Family Squares” call. If you have any questions, reply to this email or visit <a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a>.</p>
+  <p style="font-size: 12px; color: #999; text-align: center;">You're receiving this email because you registered for our Family Squares call. If you have any questions, reply to this email or visit <a href="https://soberhelpline.com" style="color: #16a34a;">soberhelpline.com</a>.</p>
 </div>
             `;
 

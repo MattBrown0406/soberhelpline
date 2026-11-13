@@ -22,7 +22,7 @@ export default function FamilyConsultation() {
     <>
       <SEOHead
         title="Crisis Coaching Session | Sober Helpline"
-        description="Book a private 60-minute Crisis Coaching Session with a professional family interventionist: $150, or $125 for members. Get a clear, calm next step for your family today."
+        description="Book a private 60-minute Crisis Coaching Session with Matt Brown, a professional interventionist: $150, or $125 for members. Get a clear, calm next step for your family today."
         faqItems={[
           {
             question: "When should a family book a Crisis Coaching Session?",
@@ -71,7 +71,7 @@ export default function FamilyConsultation() {
                 Crisis Coaching Session
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                A private 60-minute session with a professional family interventionist. If your family cannot wait until Monday, this is where you get answers now and leave with a clear next step.
+                A private 60-minute session with Matt Brown, a professional interventionist with 20+ years of experience. If your family cannot wait until Monday, this is where you get answers now and leave with a clear next step.
               </p>
               <p className="mt-4 text-sm text-muted-foreground max-w-2xl mx-auto">
                 Private coaching is a paid service; review current rates and availability before booking. For a free group option, see the{" "}

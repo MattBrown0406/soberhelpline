@@ -924,13 +924,18 @@ const BookConsultation = () => {
                 {isReadinessIntensive ? "Book the Family Readiness Intensive" : isMultiSession ? (isParallelRecovery ? "Book Parallel Recovery Program™" : "Book Family Stabilization Plan") : "Book a Consultation"}
               </h1>
               <p className="text-muted-foreground text-center mb-3">
-                {isReadinessIntensive
-                  ? `Choose a provider for your 90-minute Family Readiness Intensive${isMember ? " ($2,250 member rate)" : " ($2,500, or $2,250 for members)"}`
-                  : isParallelRecovery
-                  ? `Choose the provider who feels like the best fit for your 12-session program ($1,500)`
-                  : isStabilization
-                  ? "Choose a provider for your 4-session stabilization plan ($500)"
-                  : `Choose a provider for a 60-minute video consultation${isMember ? " ($125 member rate)" : " ($150, or $125 for members)"}`}
+                {/* One provider today. The wording changes by itself if more are added. */}
+                {(() => {
+                  const lead = providers.length === 1 && providers[0]?.name ? `With ${providers[0].name}:` : "Choose a provider for";
+                  const best = providers.length === 1 && providers[0]?.name ? `With ${providers[0].name}:` : "Choose the provider who feels like the best fit for";
+                  return isReadinessIntensive
+                    ? `${lead} your 90-minute Family Readiness Intensive${isMember ? " ($2,250 member rate)" : " ($2,500, or $2,250 for members)"}`
+                    : isParallelRecovery
+                    ? `${best} your 12-session program ($1,500)`
+                    : isStabilization
+                    ? `${lead} your 4-session stabilization plan ($500)`
+                    : `${lead} a 60-minute video session${isMember ? " ($125 member rate)" : " ($150, or $125 for members)"}`;
+                })()}
               </p>
               {!isMultiSession && !isMember && !isReadinessIntensive && (
                 <div className="flex flex-col items-center gap-2 mb-6">

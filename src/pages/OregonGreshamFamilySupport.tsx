@@ -35,7 +35,7 @@ export default function OregonGreshamFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Gresham, Oregon | Sober Helpline"
-        description="Families in Gresham struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Gresham struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -72,7 +72,7 @@ export default function OregonGreshamFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -204,7 +204,7 @@ export default function OregonGreshamFamilySupport() {
           </div>
         </section>
 
-        {/* Monday Zoom */}
+        {/* Family Squares */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
             <Card className="border-primary/20 bg-primary/5">
@@ -216,10 +216,10 @@ export default function OregonGreshamFamilySupport() {
                       Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
-                      Free “The Family Squares” Zoom
+                      Free Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
-                      For Gresham families, cost shouldn't be a barrier to support. Monday Zoom is completely free — 
+                      For Gresham families, cost shouldn't be a barrier to support. Family Squares is completely free — 
                       no sign-up fees, no membership, just real help from a certified interventionist.
                     </p>
                     <ul className="space-y-2 mb-4">
@@ -326,13 +326,13 @@ export default function OregonGreshamFamilySupport() {
               Gresham Families: Free Help Is Here
             </h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Cost shouldn't stop you from getting help. Free Monday Zoom every week. Call anytime.
+              Cost shouldn't stop you from getting help. Free Family Squares meeting every Monday. Call (458) 298-8008.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

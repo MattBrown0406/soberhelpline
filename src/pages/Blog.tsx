@@ -98,7 +98,7 @@ const Blog = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/monday-zoom-registration">
-              <Button>Join the Monday Zoom</Button>
+              <Button>Join Family Squares</Button>
             </Link>
             <Link to="/family-membership">
               <Button variant="outline">Explore Membership</Button>

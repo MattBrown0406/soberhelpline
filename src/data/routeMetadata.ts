@@ -62,11 +62,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/family-coaching': {
     title: 'Family Addiction Coaching for Parents & Spouses | Sober Helpline',
-    description: 'Book private family addiction coaching for boundaries, enabling, relapse, treatment refusal, and a clear next step. Start with coaching or the free Monday Zoom.',
+    description: 'Book private family addiction coaching for boundaries, enabling, relapse, treatment refusal, and a clear next step. Start with coaching or the free Family Squares meeting.',
   },
   '/family-consultation': {
     title: 'Crisis Coaching Session for Families | Sober Helpline',
-    description: 'Book a private 60-minute Crisis Coaching Session with a professional family interventionist. Get a clear, calm next step for addiction-related family crisis.',
+    description: 'Book a private 60-minute Crisis Coaching Session with Matt Brown, a professional interventionist. Get a clear, calm next step for addiction-related family crisis.',
   },
   '/from-no-more-enabling': {
     title: 'Coming From No More Enabling? | Sober Helpline',
@@ -185,7 +185,7 @@ export const routeMetadata: Record<string, RouteMetadata> = {
     description: 'Free Monday support meeting for families affected by addiction. Register for Family Squares, ask practical questions, and find a calmer next step.',
   },
   '/monday-zoom-registration': {
-    title: 'Monday Family Support Group — Free Zoom | Sober Helpline',
+    title: 'Family Squares — Free Monday Family Meeting | Sober Helpline',
     description: 'Free weekly family support group every Monday at 7:00 PM Pacific. Connect with other families, get guidance, and feel less alone.',
   },
   '/fear-inventory-exercise': {

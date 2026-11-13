@@ -11,13 +11,13 @@ const TextReminders = () => {
   return (
     <>
       <SEOHead
-        title="Text Reminders for The Family Squares | Sober Helpline"
-        description="Get a text message about an hour before The Family Squares, the free Monday family support meeting, or stop the texts."
+        title="Text Reminders for Family Squares | Sober Helpline"
+        description="Get a text message about an hour before Family Squares, the free Monday family support meeting, or stop the texts."
       />
       <div className="container mx-auto max-w-2xl px-4 py-12">
         <h1 className="text-3xl font-bold text-foreground">Text reminders</h1>
         <p className="mt-3 text-muted-foreground">
-          One text about an hour before The Family Squares, the free family support meeting every Monday at 7:00 PM
+          One text about an hour before Family Squares, the free family support meeting every Monday at 7:00 PM
           Pacific. You can turn it on or off here any time.
         </p>
 

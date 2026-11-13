@@ -36,7 +36,7 @@ const nextSteps = [
   {
     title: "Need support while you decide?",
     description: "If the situation is not immediate, join the Monday Family Squares Zoom and bring your intervention questions.",
-    cta: "Register for Monday Zoom",
+    cta: "Register for Family Squares",
     to: "/family-squares",
     eventName: "monday_zoom_click" as const,
   },

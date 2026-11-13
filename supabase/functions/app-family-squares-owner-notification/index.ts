@@ -82,7 +82,7 @@ Deno.serve(async (req: Request) => {
     if (suppressed.has(OWNER)) return json({ success: false, status: "suppressed" });
     const apiKey = Deno.env.get("SENDGRID_API_KEY");
     if (!apiKey) throw new Error("email_configuration");
-    const html = `<h2>New “The Family Squares” Registration</h2><ul>
+    const html = `<h2>New Family Squares Registration</h2><ul>
       <li><strong>Source:</strong> Sober Helpline App</li>
       <li><strong>Name:</strong> ${escapeHtml(target.name)}</li>
       <li><strong>Email:</strong> ${escapeHtml(target.email)}</li>
@@ -105,7 +105,7 @@ Deno.serve(async (req: Request) => {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: OWNER }] }],
           from: { email: OWNER, name: "Sober Helpline" },
-          subject: `New App Registration — The Family Squares: ${target.name.replace(/[\r\n]/g, " ")}`,
+          subject: `New App Registration — Family Squares: ${target.name.replace(/[\r\n]/g, " ")}`,
           content: [{ type: "text/html", value: html }],
           tracking_settings: { subscription_tracking: { enable: true } },
         }),

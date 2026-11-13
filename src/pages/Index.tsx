@@ -269,7 +269,7 @@ const Index = () => {
         <section className="border-y border-border/40 bg-muted/30">
           <div className="container mx-auto px-4 py-4 md:py-5">
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm font-medium text-muted-foreground">
-              <span>22+ Years Experience</span>
+              <span>20+ Years Experience</span>
               <span className="text-border">•</span>
               <span>Private consults for families in active chaos</span>
               <span className="text-border">•</span>
@@ -358,7 +358,7 @@ const Index = () => {
                   </div>
                   <ul className="space-y-3">
                     {[
-                      "Free “The Family Squares” calls with other families who get it",
+                      "Free Family Squares calls with other families who get it",
                       "Private coaching sessions when you need one-on-one guidance",
                       "Clear education that explains what you're seeing",
                       "A private forum of families who truly get it",
@@ -519,7 +519,7 @@ const Index = () => {
               </Link>
             </div>
             <div className="mt-6 flex flex-col items-center gap-2">
-              <p className="text-sm font-semibold text-foreground">Prefer help in your pocket?</p>
+              <p className="text-sm font-semibold text-foreground">Prefer help in your pocket? The app is on iPhone and iPad.</p>
               <SoberHelplineAppStoreBadge height={44} source="homepage_bottom_cta" />
             </div>
           </div>
