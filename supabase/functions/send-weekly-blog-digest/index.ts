@@ -1,4 +1,5 @@
 import "../_shared/suppression.ts";
+import { emailsInFollowupSequence } from "../_shared/followupQuiet.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
@@ -240,6 +241,7 @@ serve(async (req: Request) => {
     );
 
     const recipientMap = new Map<string, string>();
+    const memberEmails: string[] = [];
 
     // Active family members
     const { data: activeSubs } = await adminSupabase
@@ -263,6 +265,7 @@ serve(async (req: Request) => {
         const email = mp.email?.toLowerCase();
         if (!email || suppressedEmails.has(email)) continue;
         recipientMap.set(email, nameMap.get(mp.user_id) || "Friend");
+        memberEmails.push(email);
       }
     }
 
@@ -279,13 +282,19 @@ serve(async (req: Request) => {
       recipientMap.set(email, (r.name || "Friend").split(" ")[0]);
     }
 
-    const recipients = [...recipientMap.entries()];
+    // New registrants are getting the follow-up emails this week; the digest
+    // waits until those are done. Members always get the digest.
+    const inSequence = await emailsInFollowupSequence(adminSupabase, "send-weekly-blog-digest");
+    const memberEmailSet = new Set(memberEmails);
+    const recipients = [...recipientMap.entries()].filter(([email]) => memberEmailSet.has(email) || !inSequence.has(email));
+    const heldForSequence = recipientMap.size - recipients.length;
 
     if (dryRun) {
       return new Response(
         JSON.stringify({
           dry_run: true,
           recipient_count: recipients.length,
+          held_for_followup_sequence: heldForSequence,
           posts: recent.map((p) => ({ slug: p.slug, date: p.date })),
           subject,
         }),

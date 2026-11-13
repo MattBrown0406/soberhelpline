@@ -1,15 +1,19 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { normalizeNorthAmericanPhone, sendSms, SMS_CONSENT_TEXT, SMS_ENABLED_SETTING, smsConfigured } from "../_shared/twilioSms.ts";
+import { activeMemberEmails } from "../_shared/familySquaresActivity.ts";
 
-// Opt-in for text reminders about the Monday meeting, from the thank-you
-// screen a person sees after registering.
+// Opt in to, or out of, text reminders about the Monday meeting. Used by the
+// thank-you screen after registering and by the /text-reminders page.
 //
 // Public endpoint, so it is narrow on purpose:
-//   - only works while texting is switched on and configured
+//   - opting in only works while texting is switched on and configured
 //   - consent must be given explicitly (the box starts unticked)
-//   - the email must belong to someone registered for a current meeting
+//   - the email must belong to someone registered for a current meeting, or
+//     to an active member (members do not register each week)
 //   - one confirmation text per number per day, at most three numbers per email
+//   - opting out needs only the number, always works, and answers the same
+//     whether or not the number was signed up
 // It never touches Monday registration.
 
 const corsHeaders = {
@@ -41,6 +45,19 @@ serve(async (req: Request) => {
     const body = await req.json().catch(() => null);
     const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
+    // Opting out works even when texting is switched off.
+    if (body?.action === "opt_out") {
+      const number = normalizeNorthAmericanPhone(body?.phone);
+      if (!number) return json({ ok: false, error: "Please enter the mobile number, with area code." }, 400);
+      const { error: optOutError } = await supabase
+        .from(OPTINS)
+        .update({ opted_out_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+        .eq("phone", number)
+        .is("opted_out_at", null);
+      if (optOutError) throw optOutError;
+      return json({ ok: true });
+    }
+
     const { data: setting } = await supabase.from("site_settings").select("value").eq("key", SMS_ENABLED_SETTING).maybeSingle();
     if (String((setting as { value: string | null } | null)?.value ?? "").trim() !== "true" || !smsConfigured()) {
       return json({ ok: false, error: "not_available" }, 503);
@@ -61,8 +78,14 @@ serve(async (req: Request) => {
       .order("meeting_date", { ascending: true })
       .limit(1);
     if (registrationError) throw registrationError;
-    const registrationId = (registrations as { id: string }[] | null)?.[0]?.id;
-    if (!registrationId) return json({ ok: false, error: "Please register for the meeting first." }, 400);
+    const registrationId = (registrations as { id: string }[] | null)?.[0]?.id ?? null;
+    if (!registrationId) {
+      // Members join without registering, so they can sign up for texts too.
+      const members = await activeMemberEmails(supabase);
+      if (!members || !members.has(email)) {
+        return json({ ok: false, error: "Please register for the meeting first, using this email address." }, 400);
+      }
+    }
 
     const { data: existingRows, error: existingError } = await supabase
       .from(OPTINS).select("id, phone, confirmation_sent_at").ilike("email", exactPattern(email));
