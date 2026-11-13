@@ -2,12 +2,9 @@ import { Link } from "react-router-dom";
 import { BookOpen, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackConversionEvent } from "@/lib/conversionTracking";
-import { LIBRARY_TYPE_TOTALS } from "@/data/memberLibrary";
 
-// Rounded down to the nearest ten so the wording matches the membership page
-// ("60+ guides, tools and meditations") and stays true as the library grows.
-const libraryTotal = LIBRARY_TYPE_TOTALS.guide + LIBRARY_TYPE_TOTALS.worksheet + LIBRARY_TYPE_TOTALS.meditation;
-const librarySize = `${Math.max(60, Math.floor(libraryTotal / 10) * 10)}+`;
+// The same wording every other page uses for the size of the library.
+const librarySize = "60+";
 
 /**
  * Shown to visitors who are not members at the end of a library guide that is

@@ -15,9 +15,9 @@ const MEMBERSHIP_SECTION = `
 
   <ul style="line-height: 2; font-size: 15px; padding-left: 20px;">
     <li>📋 <strong>Private Family Discussion Forum</strong> — A safe, moderated space to connect with other families navigating similar challenges</li>
-    <li>📚 <strong>Education & Support Materials</strong> — 62+ guides, interactive tools, worksheets, and guided meditations designed specifically for families</li>
+    <li>📚 <strong>Education & Support Materials</strong> — 60+ guides, tools and guided meditations designed specifically for families</li>
     <li>📝 <strong>My Workbook</strong> — Short guided exercises (about five minutes each) that save what you write: a boundary you can hold, helping or enabling, practicing a hard moment</li>
-    <li>💰 <strong>$25 Discount on Coaching Sessions</strong> — Members pay $125/hour instead of $150 for 1-on-1 coaching (the membership more than pays for itself!)</li>
+    <li>💰 <strong>$25 Discount on Coaching Sessions</strong> — Members pay $125 instead of $150 for each private coaching session (the membership more than pays for itself!)</li>
     <li>📹 <strong>Access to Recorded Zoom Sessions</strong> — Catch up on past “The Family Squares” calls anytime</li>
   </ul>
 

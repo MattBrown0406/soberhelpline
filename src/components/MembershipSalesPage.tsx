@@ -46,8 +46,8 @@ const benefits = [
   },
   {
     icon: Video,
-    title: "Recordings and member sessions",
-    description: "Watch past educational sessions on your schedule and keep learning between live meetings.",
+    title: "Recordings of Monday meetings",
+    description: "Watch past Family Squares meetings on your schedule, including the weeks you could not make it live.",
   },
   {
     icon: DollarSign,

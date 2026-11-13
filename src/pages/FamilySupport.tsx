@@ -160,16 +160,16 @@ export default function FamilySupport() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-logo-blue">
                         <Video className="h-5 w-5 text-primary" />
-                        Education Videos and Resources
+                        Education Library
                       </CardTitle>
                       <CardDescription>
-                        Expert-led video courses on addiction and recovery
+                        60+ guides, tools and guided meditations
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
                         <p className="text-sm text-muted-foreground">
-                          Access our library of educational videos covering topics like understanding addiction, setting boundaries, and self-care.
+                          Guides, interactive tools and guided meditations on understanding addiction, setting boundaries, and taking care of yourself.
                         </p>
                       </div>
                       <Link to="/family-education">
@@ -188,13 +188,13 @@ export default function FamilySupport() {
                         Monthly Webinars
                       </CardTitle>
                       <CardDescription>
-                        Live sessions with addiction specialists
+                        Planned as the membership grows
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div className="space-y-2">
                         <p className="text-sm text-muted-foreground">
-                          Join monthly live sessions with specialists and revisit past recordings when you need a refresher.
+                          Monthly live webinars will start once the membership reaches 100 families. Until then, recordings of past Monday meetings are in the member area.
                         </p>
                       </div>
                       <Link to="/family-webinars">
@@ -256,15 +256,15 @@ export default function FamilySupport() {
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
-                              <span className="font-medium text-foreground">Education Videos & Resources</span>
-                              <p className="text-sm text-muted-foreground">Clear video lessons on addiction, recovery, and what families can do differently</p>
+                              <span className="font-medium text-foreground">Education Library</span>
+                              <p className="text-sm text-muted-foreground">60+ guides, tools and guided meditations on addiction, recovery, and what families can do differently</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
                             <CheckCircle2 className="h-5 w-5 text-logo-blue flex-shrink-0 mt-0.5" />
                             <div>
-                              <span className="font-medium text-foreground">Monthly Live Webinars</span>
-                              <p className="text-sm text-muted-foreground">Live sessions with addiction specialists you can actually learn from</p>
+                              <span className="font-medium text-foreground">Monday Meeting Recordings</span>
+                              <p className="text-sm text-muted-foreground">Every past Family Squares meeting, to watch on your own schedule</p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">

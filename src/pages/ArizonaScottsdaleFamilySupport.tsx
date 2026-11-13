@@ -157,7 +157,7 @@ export default function ArizonaScottsdaleFamilySupport() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground leading-relaxed">
-                  Every Monday at <strong>7:00 PM Pacific</strong>, Sober Helpline hosts a live Zoom call for families navigating a loved one's addiction — free to attend, no registration required.
+                  Every Monday at <strong>7:00 PM Pacific</strong>, Sober Helpline hosts a live Zoom call for families navigating a loved one's addiction — free to attend, with a short sign-up and no membership required.
                 </p>
                 <div className="bg-white rounded-lg p-4 border border-primary/20">
                   <p className="text-sm font-medium text-foreground">

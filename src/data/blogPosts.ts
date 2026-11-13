@@ -19691,7 +19691,7 @@ Family mental health is central to this process. Anxiety, depression, and burnou
 
 **The Family Membership**
 
-This is exactly why the Sober Helpline family membership exists. Behind the paywall, families gain access to educational videos, structured decision-making tools, guided exercises, and members-only discussion forums. These resources help families replace panic with clarity and isolation with connection.
+This is exactly why the Sober Helpline family membership exists. Behind the paywall, families gain access to guides and guided meditations, structured decision-making tools, guided exercises, and members-only discussion forums. These resources help families replace panic with clarity and isolation with connection.
 
 Membership is not about forcing outcomes. It is about strengthening families so they can respond intentionally instead of react emotionally.
 
@@ -19740,7 +19740,7 @@ This is also where family mental health matters. Anxiety, depression, and emotio
 
 **The Family Membership**
 
-Sober Helpline's family membership was built for this stage. Behind the paywall, families gain access to educational videos, decision-making tools, guided exercises, and members-only discussion forums. These resources provide clarity, structure, and reassurance during an isolating time.
+Sober Helpline's family membership was built for this stage. Behind the paywall, families gain access to guides and guided meditations, decision-making tools, guided exercises, and members-only discussion forums. These resources provide clarity, structure, and reassurance during an isolating time.
 
 Membership is not about convincing someone else to change. It is about empowering families with knowledge, support, and stability. Families who feel supported make better decisions and reduce enabling behaviors without resorting to ultimatums.
 
@@ -19787,7 +19787,7 @@ Mental health plays a critical role here. Anxiety, depression, and chronic stres
 
 **The Family Membership**
 
-This is where Sober Helpline's family membership becomes essential. Behind the paywall, families gain access to educational videos, family decision tools, guided exercises, and members-only discussion forums. These resources provide structure, reassurance, and connection during an isolating time.
+This is where Sober Helpline's family membership becomes essential. Behind the paywall, families gain access to guides and guided meditations, family decision tools, guided exercises, and members-only discussion forums. These resources provide structure, reassurance, and connection during an isolating time.
 
 Membership is not about convincing someone else to change. It is about building a stronger, more unified family system—one that can respond thoughtfully rather than react emotionally.
 
@@ -19844,7 +19844,7 @@ Mental health is an essential part of this process. Anxiety, depression, and emo
 
 **The Family Membership**
 
-This is where the Sober Helpline family membership becomes especially valuable. Behind the paywall, families gain access to educational videos, guided decision-making tools, structured exercises, and members-only discussions with others who understand what they're going through. These resources reduce isolation and replace panic with clarity.
+This is where the Sober Helpline family membership becomes especially valuable. Behind the paywall, families gain access to guides and guided meditations, guided decision-making tools, structured exercises, and members-only discussions with others who understand what they're going through. These resources reduce isolation and replace panic with clarity.
 
 The membership is not about convincing someone else to change. It is about supporting the people who are already affected. Families who feel educated and supported communicate more clearly, set healthier boundaries, and make more grounded decisions—regardless of whether their loved one is ready for treatment.
 
@@ -19899,7 +19899,7 @@ Mental health is a key part of this picture. Anxiety, depression, and chronic st
 
 **The Family Membership**
 
-Sober Helpline's family membership is designed to meet families where they are. Behind the paywall, families gain access to educational videos, decision-making tools, guided exercises, and members-only discussions that reduce isolation and normalize their experience.
+Sober Helpline's family membership is designed to meet families where they are. Behind the paywall, families gain access to guides and guided meditations, decision-making tools, guided exercises, and members-only discussions that reduce isolation and normalize their experience.
 
 Membership is not about forcing outcomes. It is about increasing support, clarity, and confidence. Families who feel supported make better decisions at every stage of the process.
 
@@ -19950,7 +19950,7 @@ Importantly, early intervention focuses on the family's well-being regardless of
 
 **The Family Membership**
 
-Sober Helpline's family membership is designed to meet this need. Members gain access to educational videos, decision-making tools, guided exercises, and members-only discussions that normalize their experience and reduce isolation. These resources help families move from panic to clarity.
+Sober Helpline's family membership is designed to meet this need. Members gain access to guides and guided meditations, decision-making tools, guided exercises, and members-only discussions that normalize their experience and reduce isolation. These resources help families move from panic to clarity.
 
 Joining the family membership does not mean committing to a specific outcome. It means committing to support, education, and stability. Families who feel supported make better decisions—whether change comes quickly or slowly.
 
@@ -20001,7 +20001,7 @@ Mental health plays a significant role here as well. Anxiety, depression, trauma
 
 **The Family Membership**
 
-Sober Helpline's family membership exists for this reason. Behind the paywall, families gain access to educational videos, guided tools, decision-making frameworks, and members-only discussions that normalize what they're experiencing. These resources help families move from panic to clarity.
+Sober Helpline's family membership exists for this reason. Behind the paywall, families gain access to guides and guided meditations, guided tools, decision-making frameworks, and members-only discussions that normalize what they're experiencing. These resources help families move from panic to clarity.
 
 Membership isn't about fixing someone else. It's about stabilizing the family system, building confidence, and reducing isolation. Families who feel supported make better decisions—regardless of whether their loved one is ready for change.
 
