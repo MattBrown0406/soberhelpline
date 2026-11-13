@@ -359,7 +359,7 @@ const Index = () => {
                   <ul className="space-y-3">
                     {[
                       "Free “The Family Squares” calls with other families who get it",
-                      "Hourly coaching when you need one-on-one guidance",
+                      "Private coaching sessions when you need one-on-one guidance",
                       "Clear education that explains what you're seeing",
                       "A private forum of families who truly get it",
                       "Practical tools for boundaries you can actually hold",
@@ -380,7 +380,7 @@ const Index = () => {
               <div className="inline-block max-w-2xl bg-gradient-to-r from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 rounded-2xl p-6 md:p-8 border border-logo-blue/20">
                 <p className="text-xs md:text-sm font-semibold uppercase tracking-wide text-logo-blue mb-2">Between Mondays</p>
                 <p className="text-sm md:text-base text-muted-foreground mb-4">
-                  <span className="font-semibold text-foreground">Family membership keeps the support going all week.</span> 60+ guides, tools and meditations, a private family forum, recordings of past Monday meetings, member pricing on coaching, and Essential features in the Sober Helpline app.
+                  <span className="font-semibold text-foreground">Family membership keeps the support going all week.</span> 60+ guides, tools and meditations, a private family forum, recordings of past Monday meetings, coaching sessions at $125 instead of $150, and Essential features in the Sober Helpline app.
                 </p>
                 <Link to="/family-membership" onClick={() => trackConversionEvent("membership_click", { source: "homepage_membership_block" })}>
                   <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8 shadow-lg shadow-logo-blue/25">

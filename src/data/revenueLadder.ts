@@ -45,7 +45,7 @@ export const revenueLadder: RevenueLadderStep[] = [
     icon: PhoneCall,
     stage: "Paid first step",
     offer: "Crisis Coaching Session",
-    price: "$150",
+    price: "$150 ($125 for members)",
     role: "Converts urgent support into a private plan.",
     bestWhen: "They need a calm conversation about boundaries, treatment, relapse, money, or what to say next.",
     href: "/book-consultation?plan=emergency",
