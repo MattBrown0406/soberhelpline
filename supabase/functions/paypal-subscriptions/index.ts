@@ -1,5 +1,6 @@
 import "../_shared/suppression.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { notifyMembershipApproved } from "../_shared/membershipApprovedNotice.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -657,16 +658,20 @@ Deno.serve(async (req) => {
             .single();
           const memberName = profile ? `${profile.first_name} ${profile.last_name}` : 'Unknown';
           const memberEmail = privateProfile?.email || 'Unknown';
+          // Sent when the pay button is pressed, BEFORE anything is paid. The
+          // "approved" notice (membershipApprovedNotice) follows only if
+          // PayPal approves.
           await sendAdminNotification(
-            `🎉 New Family Membership Signup: ${memberName}`,
-            `<h2>New Family Membership Signup</h2>
+            `Membership checkout started (not paid yet): ${memberName}`,
+            `<h2>Membership checkout started</h2>
+            <p>This person pressed the pay button and was handed to PayPal. <strong>Nothing has been paid or approved yet, and they have no member access.</strong> You will get a second email, "Membership approved by PayPal", if they finish.</p>
             <ul>
               <li><strong>Name:</strong> ${memberName}</li>
               <li><strong>Email:</strong> ${memberEmail}</li>
               <li><strong>Plan:</strong> ${billingCycle}</li>
               <li><strong>Discount Code:</strong> ${appliedDiscount || 'None'}</li>
               <li><strong>Amount:</strong> $${centsToDollars(finalCents)}</li>
-              <li><strong>Status:</strong> Pending PayPal approval</li>
+              <li><strong>Status:</strong> Waiting for PayPal approval</li>
             </ul>`
           );
         }
@@ -687,7 +692,7 @@ Deno.serve(async (req) => {
         // Verify the authenticated user owns this subscription
         const { data: subscription, error: fetchError } = await supabaseClient
           .from('provider_subscriptions')
-          .select('user_id')
+          .select('user_id, status, provider_submission_id, plan_type, amount')
           .eq('paypal_subscription_id', subscriptionId)
           .single();
 
@@ -719,6 +724,11 @@ Deno.serve(async (req) => {
           if (dbError) {
             console.error('Database error:', dbError);
             throw new Error('Failed to update subscription');
+          }
+
+          // Tell the owner once, when a family membership first becomes active.
+          if (subscription.status !== 'active' && !subscription.provider_submission_id) {
+            await notifyMembershipApproved(supabaseClient, subscription, details.billing_info?.next_billing_time);
           }
 
           return new Response(
