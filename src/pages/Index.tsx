@@ -45,7 +45,8 @@ const Index = () => {
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
   const { isMember } = useMembershipStatus();
 
-  const featuredArticles = useMemo(() => featuredBlogPosts, []);
+  // Three, not six: each one is another place for a first-time visitor to wander off to.
+  const featuredArticles = useMemo(() => featuredBlogPosts.slice(0, 3), []);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -286,6 +287,11 @@ const Index = () => {
           eyebrow="Questions families ask before they act"
           title="Turn the search into the right next step."
           description="Families often arrive with one urgent question. These answers guide them toward Family Squares, private coaching, or intervention readiness without disrupting the free meeting path."
+          slugs={[
+            "what-if-we-cannot-wait-until-monday",
+            "should-we-stage-an-intervention",
+            "what-should-family-do-after-relapse",
+          ]}
         />
 
         <section className="bg-gradient-to-b from-muted/30 via-muted/50 to-muted/30 py-12 md:py-20">
@@ -404,20 +410,18 @@ const Index = () => {
               Vetted providers, honest guidance, and practical next steps for families who need clarity.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {categories.map((category) => (
-              <Link key={category.path} to={category.path}>
-                <Card className="h-full hover:shadow-lg hover:border-logo-green/40 transition-all group cursor-pointer">
-                  <CardContent className="p-4 md:p-6 text-center">
-                    <div className="w-12 h-12 mx-auto rounded-xl bg-logo-blue/10 flex items-center justify-center mb-3 group-hover:bg-logo-blue/20 transition-colors">
-                      <category.icon className="w-6 h-6 text-logo-blue" />
-                    </div>
-                    <h3 className="font-semibold text-sm md:text-base text-foreground mb-1">{category.name}</h3>
-                    <p className="text-xs text-muted-foreground hidden md:block">{category.description}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+          {/* One door into the directory. The eight category cards each sent
+              families somewhere different before they had a next step. */}
+          <div className="text-center">
+            <p className="mx-auto mb-5 max-w-2xl text-sm text-muted-foreground">
+              {categories.map((category) => category.name).join(" · ")}
+            </p>
+            <Link to="/recovery-resources">
+              <Button size="lg" variant="outline" className="gap-2 border-logo-blue/40 text-logo-blue hover:bg-logo-blue/5">
+                Browse the provider directory
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </section>
 
