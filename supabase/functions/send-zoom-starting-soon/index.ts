@@ -4,7 +4,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { hasAutomationAuth, requireAutomationAuth } from "../_shared/automationAuth.ts";
 import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
-import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
+import { appHandledEmails, noWebsiteReminder, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -140,9 +140,16 @@ serve(async (req: Request) => {
       candidates.push(r as any);
     }
 
+    // People who signed up for tonight on the website themselves (not through
+    // the app): they asked for this reminder, even with app reminders off.
+    const registeredOnWebsite = new Set(
+      (registrants || [])
+        .filter((r: any) => r.registration_source !== "app")
+        .map((r: any) => normalizeEmail(r.email)),
+    );
     const appHandled = includeAppHandled
       ? new Set<string>()
-      : (await appHandledEmails(candidates.map((r) => r.email), "send-zoom-starting-soon")).handled;
+      : noWebsiteReminder(await appHandledEmails(candidates.map((r) => r.email), "send-zoom-starting-soon"), registeredOnWebsite);
     const unique = candidates.filter((r) => !appHandled.has(normalizeEmail(r.email)));
     const skippedApp = candidates.length - unique.length;
 

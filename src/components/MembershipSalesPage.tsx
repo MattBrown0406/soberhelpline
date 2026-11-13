@@ -42,7 +42,7 @@ const benefits = [
   {
     icon: Sparkles,
     title: "Guided decision tools",
-    description: "Write a boundary you can hold, sort helping from enabling, check a treatment program for red flags, track relapse warning signs, and use Crisis Copilot in the app.",
+    description: "Write a boundary you can hold, sort helping from enabling, check a treatment program for red flags, and track relapse warning signs.",
   },
   {
     icon: Video,
@@ -57,7 +57,7 @@ const benefits = [
   {
     icon: Smartphone,
     title: "The Sober Helpline app, included",
-    description: "Your membership unlocks the Essential features in the Sober Helpline app for iPhone and iPad. Use the same email address in the app.",
+    description: "Your membership unlocks the Essential plan in the Sober Helpline app for iPhone and iPad: coach messaging, groups, conversation rehearsal and the intervention planner. Use the same email address in the app.",
   },
 ];
 
@@ -254,7 +254,7 @@ export default function MembershipSalesPage() {
                 <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">See the tools before you join</p>
                 <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Calm guidance when everything feels urgent</h2>
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-                  Crisis Copilot helps you slow down, check immediate safety, and choose a practical next step. Other tools help you prepare a boundary, respond to requests for money, discuss treatment, and plan for relapse concerns.
+                  Crisis Copilot, free for everyone in the Sober Helpline app, helps you slow down, check immediate safety, and choose a practical next step. Membership adds the tools that help you prepare a boundary, respond to requests for money, discuss treatment, and plan for relapse concerns.
                 </p>
                 <div className="mt-6 rounded-xl border border-logo-green/25 bg-background p-5">
                   <div className="flex items-start gap-3">

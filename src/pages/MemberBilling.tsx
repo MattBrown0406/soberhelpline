@@ -147,6 +147,10 @@ export default function MemberBilling() {
   };
 
   const isFree = isFreeBypassId(membership?.paypal_subscription_id);
+  // Membership that comes with a Sober Helpline app plan. Apple bills it (or a
+  // provider organization covers it), so there is nothing to show or cancel
+  // through PayPal here.
+  const isAppPlan = membership?.plan_type === "app";
   const canCancel =
     !!membership &&
     membership.status === "active" &&
@@ -247,6 +251,19 @@ export default function MemberBilling() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
+                  {isAppPlan ? (
+                    <div className="space-y-3 text-sm">
+                      <p className="font-medium text-foreground">Your membership comes with your Sober Helpline app plan.</p>
+                      <p className="text-muted-foreground">
+                        Nothing is billed through this website. If you subscribed in the app, Apple bills you: to
+                        change or cancel, open Settings on your iPhone or iPad, tap your name, then Subscriptions,
+                        then Sober Helpline.
+                      </p>
+                      <p className="text-muted-foreground">
+                        Website access follows your app plan. If the plan ends, access here ends a few days later.
+                      </p>
+                    </div>
+                  ) : (
                   <dl className="grid gap-4 sm:grid-cols-2 text-sm">
                     <div>
                       <dt className="text-muted-foreground">Plan</dt>
@@ -280,6 +297,7 @@ export default function MemberBilling() {
                       <dd className="font-mono text-foreground">{maskSubscriptionId(membership.paypal_subscription_id)}</dd>
                     </div>
                   </dl>
+                  )}
                 </CardContent>
               </Card>
 

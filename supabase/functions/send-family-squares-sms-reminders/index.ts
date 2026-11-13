@@ -4,10 +4,15 @@ import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 import { sendSms, SMS_ENABLED_SETTING, smsConfigured } from "../_shared/twilioSms.ts";
 import { activeMemberEmails } from "../_shared/familySquaresActivity.ts";
+import { appHandledEmails } from "../_shared/appPushReachable.ts";
 
 // One text, about an hour before the Monday meeting, to people who opted in
 // to text reminders AND are either registered for tonight's meeting or active
 // members (members join without registering).
+//
+// People who use the Sober Helpline app are not texted when the app already
+// reminds them by push, or when they told the app they can't make it this
+// week. If the app cannot be reached, texts go out as if it had said nothing.
 //
 // Sends nothing unless texting is switched on (site_settings) and configured,
 // it is the 6 PM hour on a Monday in Pacific time, and the meeting is on.
@@ -47,7 +52,7 @@ serve(async (req: Request) => {
     if (authenticateCronRequest(req) !== null && !hasAutomationSecret) return json({ error: "Unauthorized" }, 401);
 
     const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-    const counts = { sent: 0, not_registered_tonight: 0, already_done: 0, opted_out: 0, failed: 0 };
+    const counts = { sent: 0, not_registered_tonight: 0, reminded_by_app: 0, declined_in_app: 0, already_done: 0, opted_out: 0, failed: 0 };
 
     const { data: setting, error: settingError } = await supabase
       .from("site_settings").select("value").eq("key", SMS_ENABLED_SETTING).maybeSingle();
@@ -83,11 +88,21 @@ serve(async (req: Request) => {
     // null = the membership lookup failed: then only registered people are texted.
     const members = await activeMemberEmails(supabase);
 
+    const app = await appHandledEmails(optins.map((o) => o.email), "send-family-squares-sms-reminders");
+
     for (const optin of optins) {
       try {
         const address = optin.email.trim().toLowerCase();
         if (!registeredTonight.has(address) && !(members?.has(address))) {
           counts.not_registered_tonight += 1;
+          continue;
+        }
+        if (app.declined.has(address)) {
+          counts.declined_in_app += 1;
+          continue;
+        }
+        if (app.handled.has(address)) {
+          counts.reminded_by_app += 1;
           continue;
         }
         // Claim first: the unique (optin, meeting, kind) row makes a second claim fail.

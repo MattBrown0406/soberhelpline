@@ -229,14 +229,22 @@ function personalData(
   };
 }
 
-/** Active members (is_active_family_member) among family membership rows. */
+/**
+ * Active members (is_active_family_member) who joined on the website.
+ *
+ * People whose only membership rows come from a Sober Helpline app plan
+ * (plan_type "app") are left out: they never signed up for website email, and
+ * the app sends them its own note about the Monday call. Someone who has ever
+ * held a website membership still gets this one.
+ */
 async function activeMemberIds(admin: AdminClient): Promise<string[]> {
-  const rows = await allRows<{ user_id: string }>((from, to) =>
-    admin.from("provider_subscriptions").select("user_id")
+  const rows = await allRows<{ user_id: string; plan_type: string | null }>((from, to) =>
+    admin.from("provider_subscriptions").select("user_id, plan_type")
       .is("provider_submission_id", null).in("status", ["active", "cancelled"])
       .order("id").range(from, to)
   );
-  const candidates = [...new Set(rows.map((r) => r.user_id).filter(Boolean))];
+  const hasWebsiteRow = new Set(rows.filter((r) => r.user_id && r.plan_type !== "app").map((r) => r.user_id));
+  const candidates = [...hasWebsiteRow];
   const active = await mapLimit(candidates, 10, async (id) => {
     const { data, error } = await admin.rpc("is_active_family_member", { _user_id: id });
     return !error && data === true;

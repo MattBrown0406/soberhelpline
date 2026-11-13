@@ -28,10 +28,35 @@ function reachableEndpoint(): string | null {
 export interface AppReachability {
   /** Lower-cased emails the app reminds by push; skip these. */
   handled: Set<string>;
+  /**
+   * What members told the app. Both are empty when the app does not send them
+   * (an older app backend, or its lookup failed): nobody is treated as having
+   * declined or switched reminders off unless the app says so.
+   */
+  /** She answered "can't make it" for this week's call in the app. */
+  declined: Set<string>;
+  /** She turned the Monday call reminder off in the app. */
+  remindersOff: Set<string>;
   /** Distinct emails asked about. */
   checked: number;
   /** Batches that failed open (their emails are NOT in `handled`). */
   failedBatches: number;
+}
+
+/**
+ * Who gets no Monday reminder from the website, given the app's answer:
+ *   - the app reminds her by push
+ *   - she told the app she can't make it this week
+ *   - she turned the Monday call reminder off in the app, unless she also
+ *     registered on the website herself for this meeting (`registeredOnWebsite`):
+ *     that registration is a fresh request for the website's reminder
+ */
+export function noWebsiteReminder(reach: AppReachability, registeredOnWebsite: Set<string> = new Set()): Set<string> {
+  const skip = new Set<string>([...reach.handled, ...reach.declined]);
+  for (const email of reach.remindersOff) {
+    if (!registeredOnWebsite.has(email)) skip.add(email);
+  }
+  return skip;
 }
 
 /**
@@ -40,7 +65,10 @@ export interface AppReachability {
  */
 export async function appHandledEmails(emails: Iterable<string>, label: string): Promise<AppReachability> {
   const unique = [...new Set([...emails].map(normalizeEmail).filter((email) => email.includes("@")))];
-  const result: AppReachability = { handled: new Set<string>(), checked: unique.length, failedBatches: 0 };
+  const result: AppReachability = {
+    handled: new Set<string>(), declined: new Set<string>(), remindersOff: new Set<string>(),
+    checked: unique.length, failedBatches: 0,
+  };
   if (unique.length === 0) return result;
 
   const batches = Math.ceil(unique.length / BATCH_SIZE);
@@ -85,6 +113,15 @@ export async function appHandledEmails(emails: Iterable<string>, label: string):
         const email = normalizeEmail(value);
         if (asked.has(email)) result.handled.add(email);
       }
+      const addAsked = (values: unknown, into: Set<string>) => {
+        if (!Array.isArray(values)) return; // not sent: leave empty
+        for (const value of values) {
+          const email = normalizeEmail(value);
+          if (asked.has(email)) into.add(email);
+        }
+      };
+      addAsked(data?.declined, result.declined);
+      addAsked(data?.reminders_off, result.remindersOff);
     } catch (error) {
       result.failedBatches += 1;
       const reason = error instanceof Error
@@ -97,7 +134,7 @@ export async function appHandledEmails(emails: Iterable<string>, label: string):
   }
 
   console.log(
-    `push_reachable ${label}: checked=${unique.length} handled_by_app=${result.handled.size} failed_batches=${result.failedBatches}`,
+    `push_reachable ${label}: checked=${unique.length} handled_by_app=${result.handled.size} declined=${result.declined.size} reminders_off=${result.remindersOff.size} failed_batches=${result.failedBatches}`,
   );
   return result;
 }

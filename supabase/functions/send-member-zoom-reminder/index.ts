@@ -3,7 +3,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { hasAutomationAuth } from "../_shared/automationAuth.ts";
 import { isMeetingCancelled, upcomingMondayPacific } from "../_shared/cancelledMeetings.ts";
-import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
+import { appHandledEmails, noWebsiteReminder, normalizeEmail } from "../_shared/appPushReachable.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -187,10 +187,10 @@ serve(async (req: Request) => {
     // Contract D: fails open (an empty set) if the app can't be reached.
     const appHandled = includeAppHandled
       ? new Set<string>()
-      : (await appHandledEmails(
+      : noWebsiteReminder(await appHandledEmails(
         (privateProfiles || []).map((pp: any) => normalizeEmail(pp.email)),
         "send-member-zoom-reminder",
-      )).handled;
+      ));
 
     for (const pp of (privateProfiles || [])) {
       if (!pp.email) continue;

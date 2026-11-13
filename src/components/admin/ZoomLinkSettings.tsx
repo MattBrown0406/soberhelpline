@@ -211,7 +211,18 @@ export function ZoomLinkSettings() {
     allWeeks[r.meeting_date].push(r);
   });
 
+  // The app's Join button uses the link; website pages, emails and texts use
+  // the Meeting ID. If the two point at different meetings, half the families
+  // end up in the wrong room.
+  const meetingDigits = meetingId.replace(/\D/g, "");
+  const linkDigits = (zoomLink.match(/\/(?:j|w|wc\/join)\/(\d{9,12})/) || [])[1] ?? "";
+  const linkMismatch = meetingDigits !== "" && linkDigits !== "" && meetingDigits !== linkDigits;
+
   const handleSave = async () => {
+    if (linkMismatch) {
+      toast.error("The link and the Meeting ID are for different meetings. Fix one before saving.");
+      return;
+    }
     setSaving(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -320,6 +331,16 @@ export function ZoomLinkSettings() {
         <div className="space-y-2">
           <Label htmlFor="zoomLink">External Zoom Link (fallback)</Label>
           <Input id="zoomLink" type="url" placeholder="https://zoom.us/j/1234567890?pwd=..." value={zoomLink} onChange={(e) => setZoomLink(e.target.value)} />
+          <p className="text-xs text-muted-foreground">
+            The Sober Helpline app's Join button uses this link. Website pages, emails and texts use the Meeting ID above.
+            Keep both on the same meeting. If you ever replace the link in the app's admin screen, replace it here too.
+          </p>
+          {linkMismatch && (
+            <p role="alert" className="rounded-md border border-destructive/40 bg-destructive/5 p-3 text-sm text-destructive">
+              These do not match: the link is for meeting {linkDigits}, and the Meeting ID is {meetingDigits}. Families
+              using the app and families using the website would land in different meetings.
+            </p>
+          )}
         </div>
 
         <Button onClick={handleSave} disabled={saving}>
