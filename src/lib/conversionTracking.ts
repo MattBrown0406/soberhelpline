@@ -4,6 +4,7 @@ type ConversionEventName =
   | "coaching_click"
   | "monday_zoom_click"
   | "monday_zoom_registration_view"
+  | "monday_zoom_registration_start"
   | "monday_zoom_registration_submit"
   | "monday_zoom_registration_success"
   | "monday_zoom_calendar_add"

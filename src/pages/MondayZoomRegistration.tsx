@@ -17,6 +17,7 @@ import FamilyNextStepCTA from "@/components/FamilyNextStepCTA";
 import MondayAfterRegistration from "@/components/MondayAfterRegistration";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
+import { formatMeetingDay, formatViewerTime, getMondayMeeting } from "@/data/memberLibrary";
 import { z } from "zod";
 
 function getNextMeetingDate(now = new Date()) {
@@ -83,9 +84,24 @@ export default function MondayZoomRegistration() {
   const [isMeetingInfoLoaded, setIsMeetingInfoLoaded] = useState(false);
   const [cancellationReason, setCancellationReason] = useState<string | null>(null);
   const registrationViewTracked = useRef(false);
+  // Phone, language and the question box sit behind a link so the first screen
+  // asks for a name and an email only.
+  const [showMore, setShowMore] = useState(false);
+  // Counted once per visit: the first time someone touches the form. Together
+  // with page views and completed registrations it shows where people stop.
+  const formStartTracked = useRef(false);
+  const trackFormStart = () => {
+    if (formStartTracked.current) return;
+    formStartTracked.current = true;
+    if (!isMemberQuestionRef.current) {
+      trackConversionEvent("monday_zoom_registration_start", { source: "public_registration_form" });
+    }
+  };
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const isMemberQuestion = searchParams.get("member") === "true";
+  const isMemberQuestionRef = useRef(isMemberQuestion);
+  isMemberQuestionRef.current = isMemberQuestion;
   const isFamilySquaresLanding = location.pathname === "/family-squares";
   const { toast } = useToast();
 
@@ -109,6 +125,11 @@ export default function MondayZoomRegistration() {
   const requireName = !isMemberQuestion || !user || !trimmedName;
   const requireEmail = !isMemberQuestion || !hasUserEmail;
   const nextMeetingDate = getNextMeetingDate();
+  // "Monday, November 16, 7:00 PM Pacific (10:00 PM your time)"
+  const upcomingMeeting = getMondayMeeting();
+  const nextMeetingLabel = `${formatMeetingDay(upcomingMeeting.start)}, 7:00 PM Pacific${
+    upcomingMeeting.viewerInOtherZone ? ` (${formatViewerTime(upcomingMeeting.start)} your time)` : ""
+  }`;
 
   const getRegistrationAttribution = useCallback(() => {
     const inboundSource = getInboundSource();
@@ -400,6 +421,171 @@ export default function MondayZoomRegistration() {
     );
   }
 
+  // The cancellation notice and the form are each defined once and placed by the
+  // layout below: at the top beside the headline for visitors, under the member
+  // heading for members submitting a question.
+  const cancellationNotice = cancellationReason ? (
+      <div className="mx-auto mb-6 max-w-2xl rounded-xl border-2 border-destructive/40 bg-destructive/5 p-5 shadow-sm">
+        <div className="flex items-start gap-3">
+          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+            <Calendar className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="mb-1 font-semibold text-foreground">This week's meeting is cancelled</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{cancellationReason}</p>
+          </div>
+        </div>
+      </div>
+  ) : null;
+
+  const registrationCard = (
+    <Card id="register" className="mx-auto w-full max-w-2xl border-2 shadow-lg scroll-mt-24">
+
+      <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50 py-4">
+        <CardTitle className="text-lg text-foreground flex items-center gap-2">
+          <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
+          {isMemberQuestion ? "Your Question" : "Register for the Meeting"}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} onFocusCapture={trackFormStart} className="space-y-4 pt-4">
+          {(!isMemberQuestion || requireName) && (
+            <div className="space-y-2">
+              <Label htmlFor="name">Your Name {requireName ? "*" : ""}</Label>
+              <Input id="name" required={requireName} placeholder="First name is fine" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} className={errors.name ? "border-destructive" : ""} />
+              {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+            </div>
+          )}
+
+          {(!isMemberQuestion || requireEmail) && (
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address {requireEmail ? "*" : ""}</Label>
+              <Input id="email" type="email" required={requireEmail} placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} className={errors.email ? "border-destructive" : ""} />
+              {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+            </div>
+          )}
+
+          {/* Optional details. Members submitting a question see them straight away. */}
+          {!isMemberQuestion && !showMore && (
+            <button
+              type="button"
+              onClick={() => setShowMore(true)}
+              className="text-sm font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+            >
+              Add a question for Monday or a phone number (optional)
+            </button>
+          )}
+          {(isMemberQuestion || showMore) && (
+            <>
+          {!isMemberQuestion && (
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
+              <Input id="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} className={errors.phone ? "border-destructive" : ""} />
+              {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <Label htmlFor="language">Preferred Language / Idioma preferido</Label>
+            <select id="language" value={formData.language} onChange={(e) => setFormData((p) => ({ ...p, language: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+            <p className="text-xs text-muted-foreground">We will send your meeting confirmation in this language.</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="question">What would make this meeting useful for you this week? (Optional)</Label>
+            <Textarea id="question" placeholder="Share what you're hoping to learn or discuss..." rows={4} value={formData.question} onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))} className={errors.question ? "border-destructive" : ""} />
+            {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
+          </div>
+
+            </>
+          )}
+
+          {!isMemberQuestion && (
+            <div className="space-y-4 pt-2">
+              <div className="flex items-start space-x-3">
+                <Checkbox id="autoRegister" checked={formData.autoRegister} onCheckedChange={(checked) => setFormData((p) => ({ ...p, autoRegister: checked === true }))} />
+                <Label htmlFor="autoRegister" className="text-sm leading-snug cursor-pointer">
+                  Automatically register me for future meetings and send me the new link each week.
+                </Label>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <Checkbox id="followUp" checked={formData.requestFollowUp} onCheckedChange={(checked) => setFormData((p) => ({ ...p, requestFollowUp: checked === true }))} />
+                <Label htmlFor="followUp" className="text-sm leading-snug cursor-pointer">
+                  I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
+                </Label>
+              </div>
+
+              {formData.requestFollowUp && (
+                <div className="ml-6 space-y-4 p-4 rounded-lg border border-border bg-muted/30">
+                  <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="contactDate">Preferred Date *</Label>
+                      <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} className={errors.preferredContactDate ? "border-destructive" : ""} />
+                      {errors.preferredContactDate && <p className="text-sm text-destructive">{errors.preferredContactDate}</p>}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="contactTime">Preferred Time *</Label>
+                      <Input id="contactTime" type="time" value={formData.preferredContactTime} onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))} className={errors.preferredContactTime ? "border-destructive" : ""} />
+                      {errors.preferredContactTime && <p className="text-sm text-destructive">{errors.preferredContactTime}</p>}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="timezone">Your Timezone</Label>
+                    <select id="timezone" value={formData.preferredTimezone} onChange={(e) => setFormData((p) => ({ ...p, preferredTimezone: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                      <option value="America/New_York">Eastern (ET)</option>
+                      <option value="America/Chicago">Central (CT)</option>
+                      <option value="America/Denver">Mountain (MT)</option>
+                      <option value="America/Los_Angeles">Pacific (PT)</option>
+                      <option value="America/Anchorage">Alaska (AKT)</option>
+                      <option value="Pacific/Honolulu">Hawaii (HT)</option>
+                      <option value="America/Phoenix">Arizona (MST - no DST)</option>
+                      <option value="America/Halifax">Atlantic (AT)</option>
+                      <option value="America/St_Johns">Newfoundland (NT)</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-start space-x-3">
+                <Checkbox id="emailConsent" checked={formData.consentEmailList} onCheckedChange={(checked) => setFormData((p) => ({ ...p, consentEmailList: checked === true }))} />
+                <Label htmlFor="emailConsent" className="text-sm leading-snug cursor-pointer">
+                  I consent to being added to the email list for updates on special events, resources, or services.
+                </Label>
+              </div>
+            </div>
+          )}
+
+          <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              isMemberQuestion ? "Submit My Question" : "Register for The Family Squares"
+            )}
+          </Button>
+
+          {!isMemberQuestion && (
+            <>
+              <p className="text-center text-sm font-medium text-foreground">
+                Free. Camera off is fine. No membership needed.
+              </p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                By registering, you acknowledge that this meeting is recorded and archived. Recordings are available to paid Sober Helpline members inside the membership area.
+              </p>
+            </>
+          )}
+        </form>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <>
       <SEOHead
@@ -430,7 +616,8 @@ export default function MondayZoomRegistration() {
             availability: "https://schema.org/InStock",
             url: `https://soberhelpline.com${isFamilySquaresLanding ? "/family-squares" : "/monday-zoom-registration"}`
           },
-          startDate: `${nextMeetingDate}T19:00:00-07:00`,
+          // The exact start instant: a fixed "-07:00" was an hour off in winter.
+          startDate: upcomingMeeting.start.toISOString(),
           eventSchedule: {
             "@type": "Schedule",
             repeatFrequency: "P1W",
@@ -467,57 +654,57 @@ export default function MondayZoomRegistration() {
             </div>
 
             {isMemberQuestion ? (
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 border border-logo-blue/20 p-8 md:p-10 mb-8">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-primary/15 mb-4">
-                    <Crown className="h-7 w-7 text-primary" />
+              <>
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-logo-blue/10 via-logo-blue/5 to-logo-blue/10 border border-logo-blue/20 p-8 md:p-10 mb-8">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-primary/15 mb-4">
+                      <Crown className="h-7 w-7 text-primary" />
+                    </div>
+                    <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                      Submit a Question for Tonight's Meeting
+                    </h1>
+                    <p className="text-muted-foreground max-w-lg mx-auto">
+                      As a member, you're already registered. Submit a question below and we'll do our best to address it during tonight's session at 7:00 PM Pacific.
+                    </p>
                   </div>
-                  <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    Submit a Question for Tonight's Meeting
-                  </h1>
-                  <p className="text-muted-foreground max-w-lg mx-auto">
-                    As a member, you're already registered. Submit a question below and we'll do our best to address it during tonight's session at 7:00 PM Pacific.
-                  </p>
                 </div>
-              </div>
+                {cancellationNotice}
+                {registrationCard}
+              </>
             ) : (
               <>
-                <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg md:p-8">
-                  <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-                    <div>
-                      <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                <div className="relative md:overflow-hidden md:rounded-xl md:border md:bg-card md:p-8 md:shadow-lg">
+                  {/* On a phone: headline, then the form, then the details. On a wide
+                      screen the form sits beside the headline and details. */}
+                  <div className="grid gap-5 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-8">
+                    <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+                      <div className="mb-3 inline-flex items-center gap-2 rounded-full border bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
                         <Video className="h-4 w-4" />
                         Free weekly family support
                       </div>
                       <h1 className="text-3xl font-extrabold tracking-normal text-foreground md:text-5xl md:leading-tight">
                         Family Squares Monday Zoom
                       </h1>
-                      <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                        The weekly soft landing for families affected by addiction. Bring the pattern you are seeing, the conversation you are dreading, or the decision you keep avoiding.
-                      </p>
-                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                        Best next-step order: come to the meeting first, use membership if you want ongoing support, and move into coaching or intervention readiness only if your situation needs more structure.
+                      <p className="mt-3 flex items-start gap-2 text-sm font-semibold text-foreground md:text-base">
+                        <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>Next meeting: {nextMeetingLabel}</span>
                       </p>
                     </div>
 
-                    <div className="grid gap-3 rounded-lg border bg-muted/30 p-4">
-                      {[
-                        { icon: Calendar, label: "Every Monday" },
-                        { icon: Clock, label: "7:00 PM Pacific" },
-                        { icon: Users, label: "Open to everyone" },
-                        { icon: Video, label: "Live on Zoom" },
-                      ].map(({ icon: Icon, label }) => (
-                        <div key={label} className="flex items-center gap-3 text-sm font-semibold text-foreground">
-                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          {label}
-                        </div>
-                      ))}
-                      <div className="mt-2 border-t pt-4">
-                        <p className="mb-2 text-xs font-semibold text-muted-foreground">Get the Sober Helpline app</p>
-                        <SoberHelplineAppStoreBadge height={40} source="monday_zoom_hero" />
-                      </div>
+                    {/* The form: nobody has to scroll past the rest of the page to register. */}
+                    <div className="min-w-0 space-y-4 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+                      {cancellationNotice}
+                      {registrationCard}
+                    </div>
+
+                    <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+                      <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                        The weekly soft landing for families affected by addiction. Bring the pattern you are seeing, the conversation you are dreading, or the decision you keep avoiding.
+                      </p>
+                      <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                        <li className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Every Monday, about an hour, live on Zoom</li>
+                        <li className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Open to any family member. Listen with your camera off or ask a question</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -579,153 +766,13 @@ export default function MondayZoomRegistration() {
                     </Button>
                   </Link>
                 </div>
+
+                <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-4 text-center shadow-sm">
+                  <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your phone before the meeting starts.</p>
+                  <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
+                </div>
               </>
             )}
-
-            <div className="mx-auto mb-6 max-w-2xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-4 text-center shadow-sm">
-              <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your phone before the meeting starts.</p>
-              <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
-            </div>
-
-            {cancellationReason ? (
-              <div className="mx-auto mb-6 max-w-2xl rounded-xl border-2 border-destructive/40 bg-destructive/5 p-5 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive">
-                    <Calendar className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <p className="mb-1 font-semibold text-foreground">This week's meeting is cancelled</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{cancellationReason}</p>
-                  </div>
-                </div>
-              </div>
-            ) : null}
-
-            <Card className="mx-auto max-w-2xl border-2 shadow-lg">
-
-              <CardHeader className="bg-muted/30 rounded-t-lg border-b border-border/50">
-                <CardTitle className="text-xl text-foreground flex items-center gap-2">
-                  <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  {isMemberQuestion ? "Your Question" : "Register for the Meeting"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {(!isMemberQuestion || requireName) && (
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name {requireName ? "*" : ""}</Label>
-                      <Input id="name" required={requireName} placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} className={errors.name ? "border-destructive" : ""} />
-                      {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-                    </div>
-                  )}
-
-                  {(!isMemberQuestion || requireEmail) && (
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address {requireEmail ? "*" : ""}</Label>
-                      <Input id="email" type="email" required={requireEmail} placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} className={errors.email ? "border-destructive" : ""} />
-                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                    </div>
-                  )}
-
-                  {!isMemberQuestion && (
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number <span className="text-muted-foreground font-normal">(Optional)</span></Label>
-                      <Input id="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} className={errors.phone ? "border-destructive" : ""} />
-                      {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
-                    </div>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label htmlFor="language">Preferred Language / Idioma preferido</Label>
-                    <select id="language" value={formData.language} onChange={(e) => setFormData((p) => ({ ...p, language: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                      <option value="en">English</option>
-                      <option value="es">Español</option>
-                    </select>
-                    <p className="text-xs text-muted-foreground">We will send your meeting confirmation in this language.</p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="question">What would make this meeting useful for you this week? (Optional)</Label>
-                    <Textarea id="question" placeholder="Share what you're hoping to learn or discuss..." rows={4} value={formData.question} onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))} className={errors.question ? "border-destructive" : ""} />
-                    {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
-                  </div>
-
-                  {!isMemberQuestion && (
-                    <div className="space-y-4 pt-2">
-                      <div className="flex items-start space-x-3">
-                        <Checkbox id="autoRegister" checked={formData.autoRegister} onCheckedChange={(checked) => setFormData((p) => ({ ...p, autoRegister: checked === true }))} />
-                        <Label htmlFor="autoRegister" className="text-sm leading-snug cursor-pointer">
-                          Automatically register me for future meetings and send me the new link each week.
-                        </Label>
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <Checkbox id="followUp" checked={formData.requestFollowUp} onCheckedChange={(checked) => setFormData((p) => ({ ...p, requestFollowUp: checked === true }))} />
-                        <Label htmlFor="followUp" className="text-sm leading-snug cursor-pointer">
-                          I'd like to request a follow-up contact from an interventionist to discuss my situation privately.
-                        </Label>
-                      </div>
-
-                      {formData.requestFollowUp && (
-                        <div className="ml-6 space-y-4 p-4 rounded-lg border border-border bg-muted/30">
-                          <p className="text-sm text-muted-foreground font-medium">When is the best time to reach you?</p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="contactDate">Preferred Date *</Label>
-                              <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} className={errors.preferredContactDate ? "border-destructive" : ""} />
-                              {errors.preferredContactDate && <p className="text-sm text-destructive">{errors.preferredContactDate}</p>}
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="contactTime">Preferred Time *</Label>
-                              <Input id="contactTime" type="time" value={formData.preferredContactTime} onChange={(e) => setFormData((p) => ({ ...p, preferredContactTime: e.target.value }))} className={errors.preferredContactTime ? "border-destructive" : ""} />
-                              {errors.preferredContactTime && <p className="text-sm text-destructive">{errors.preferredContactTime}</p>}
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="timezone">Your Timezone</Label>
-                            <select id="timezone" value={formData.preferredTimezone} onChange={(e) => setFormData((p) => ({ ...p, preferredTimezone: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                              <option value="America/New_York">Eastern (ET)</option>
-                              <option value="America/Chicago">Central (CT)</option>
-                              <option value="America/Denver">Mountain (MT)</option>
-                              <option value="America/Los_Angeles">Pacific (PT)</option>
-                              <option value="America/Anchorage">Alaska (AKT)</option>
-                              <option value="Pacific/Honolulu">Hawaii (HT)</option>
-                              <option value="America/Phoenix">Arizona (MST - no DST)</option>
-                              <option value="America/Halifax">Atlantic (AT)</option>
-                              <option value="America/St_Johns">Newfoundland (NT)</option>
-                            </select>
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-start space-x-3">
-                        <Checkbox id="emailConsent" checked={formData.consentEmailList} onCheckedChange={(checked) => setFormData((p) => ({ ...p, consentEmailList: checked === true }))} />
-                        <Label htmlFor="emailConsent" className="text-sm leading-snug cursor-pointer">
-                          I consent to being added to the email list for updates on special events, resources, or services.
-                        </Label>
-                      </div>
-                    </div>
-                  )}
-
-                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      isMemberQuestion ? "Submit My Question" : "Register for The Family Squares"
-                    )}
-                  </Button>
-
-                  {!isMemberQuestion && (
-                    <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-                      By registering, you acknowledge that this meeting is recorded and archived. Recordings are available to paid Sober Helpline members inside the membership area.
-                    </p>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
           </div>
         </main>
       </div>
