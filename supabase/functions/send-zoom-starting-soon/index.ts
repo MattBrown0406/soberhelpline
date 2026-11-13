@@ -153,6 +153,13 @@ serve(async (req: Request) => {
       );
     }
 
+    // While text reminders are switched on, the email says how to get them.
+    const { data: smsSetting } = await adminSupabase
+      .from("site_settings").select("value").eq("key", "family_squares_sms_enabled").maybeSingle();
+    const textReminderLine = String((smsSetting as any)?.value ?? "").trim() === "true"
+      ? `<p style="color: #6b7280; font-size: 12px;">Prefer a text? <a href="${siteUrl}/text-reminders" style="color: #6b7280;">Get this reminder by text message</a>.</p>`
+      : "";
+
     let sent = 0;
     let failed = 0;
 
@@ -220,6 +227,7 @@ serve(async (req: Request) => {
             If you have any questions, call us at <strong>(458) 298-8008</strong>.
           </p>
           <p style="color: #6b7280; font-size: 12px;">Sober Helpline — Supporting Families Through Recovery</p>
+          ${textReminderLine}
           ${stopWeeklyLine}
         </div>
       `;

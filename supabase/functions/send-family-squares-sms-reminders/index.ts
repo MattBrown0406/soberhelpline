@@ -3,9 +3,11 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 import { sendSms, SMS_ENABLED_SETTING, smsConfigured } from "../_shared/twilioSms.ts";
+import { activeMemberEmails } from "../_shared/familySquaresActivity.ts";
 
 // One text, about an hour before the Monday meeting, to people who opted in
-// to text reminders AND are registered for tonight's meeting.
+// to text reminders AND are either registered for tonight's meeting or active
+// members (members join without registering).
 //
 // Sends nothing unless texting is switched on (site_settings) and configured,
 // it is the 6 PM hour on a Monday in Pacific time, and the meeting is on.
@@ -78,9 +80,13 @@ serve(async (req: Request) => {
       ((registrationRows ?? []) as { email: string | null }[]).map((r) => String(r.email ?? "").trim().toLowerCase()).filter(Boolean),
     );
 
+    // null = the membership lookup failed: then only registered people are texted.
+    const members = await activeMemberEmails(supabase);
+
     for (const optin of optins) {
       try {
-        if (!registeredTonight.has(optin.email.trim().toLowerCase())) {
+        const address = optin.email.trim().toLowerCase();
+        if (!registeredTonight.has(address) && !(members?.has(address))) {
           counts.not_registered_tonight += 1;
           continue;
         }

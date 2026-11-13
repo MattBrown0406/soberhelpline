@@ -75,6 +75,7 @@ const Footer = () => {
               <li><Link to="/family-consultation" className="text-sm hover:text-white transition-colors">Crisis Coaching Session</Link></li>
               <li><Link to="/intervention-help" className="text-sm hover:text-white transition-colors">Intervention Readiness</Link></li>
               <li><Link to="/family-squares" className="text-sm hover:text-white transition-colors">“The Family Squares”</Link></li>
+              <li><Link to="/text-reminders" className="text-sm hover:text-white transition-colors">Text Reminders</Link></li>
               <li><Link to="/zoom-recordings" className="text-sm hover:text-white transition-colors">Past Recordings{memberTag}</Link></li>
               <li><Link to="/addiction-assessment" className="text-sm hover:text-white transition-colors">Addiction Assessment</Link></li>
               <li><Link to="/free-guide" className="text-sm hover:text-white transition-colors">Free Guide</Link></li>

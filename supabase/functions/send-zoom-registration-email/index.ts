@@ -1,5 +1,6 @@
 import { getSuppressedRecipients } from "../_shared/suppression.ts";
 import { registeredHistoryText, validNotificationContext, type NotificationContext } from "../_shared/mondayNotificationContext.ts";
+import { stopAutoRegistrationUrl } from "../_shared/stopAutoRegistration.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -144,7 +145,7 @@ serve(async (req: Request) => {
     // Persisted details are authoritative; caller fields cannot replace private notes/identity.
     const { data: followUp, error: registrationError } = await adminSupabase
       .from("zoom_meeting_registrations")
-      .select("id, name, email, language, consent_email_list, request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question, meeting_date, registration_source")
+      .select("id, name, email, language, consent_email_list, request_follow_up, preferred_contact_date, preferred_contact_time, preferred_timezone, phone, question, meeting_date, registration_source, auto_register")
       .eq("id", registration_id).maybeSingle();
     if (registrationError || !followUp) throw new Error("Registration details unavailable");
     const { name, email, language = "en" } = followUp;
@@ -342,6 +343,21 @@ serve(async (req: Request) => {
         </div>
       `;
 
+    // People registered automatically each week can stop it themselves from this
+    // email. Making the link can never hold up the confirmation: if it fails,
+    // the email goes out without the line.
+    let stopWeeklyLine = "";
+    if (followUp.auto_register === true || followUp.registration_source === "automatic") {
+      try {
+        const stopUrl = await stopAutoRegistrationUrl(followUp.id);
+        if (stopUrl) {
+          stopWeeklyLine = `<p style="color: #6b7280; font-size: 12px;">You are registered for this meeting automatically each week. <a href="${escapeHtml(stopUrl)}" style="color: #6b7280;">Stop weekly registration</a>.</p>`;
+        }
+      } catch (linkError) {
+        console.error("send-zoom-registration-email: stop link failed:", linkError instanceof Error ? linkError.message : linkError);
+      }
+    }
+
     const attendeeSubject = isSpanish
       ? "¡Está registrado/a! Reunión Zoom de “The Family Squares”"
       : "You're Registered! “The Family Squares” Zoom Meeting";
@@ -415,6 +431,7 @@ serve(async (req: Request) => {
           <p style="color: #6b7280; font-size: 12px;">
             Sober Helpline, Supporting Families Through Recovery
           </p>
+          ${stopWeeklyLine}
         </div>
       `;
 

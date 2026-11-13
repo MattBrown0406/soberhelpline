@@ -203,6 +203,7 @@ const WorkbookExercise = React.lazy(() => import("./pages/WorkbookExercise"));
 const MemberHome = React.lazy(() => import("./pages/MemberHome"));
 const MemberBilling = React.lazy(() => import("./pages/MemberBilling"));
 const StopWeeklyRegistration = React.lazy(() => import("./pages/StopWeeklyRegistration"));
+const TextReminders = React.lazy(() => import("./pages/TextReminders"));
 const CancelMembership = React.lazy(() => import("./pages/CancelMembership"));
 const RoadmapLanding = React.lazy(() => import("./pages/RoadmapLanding"));
 const RoadmapAssessment = React.lazy(() => import("./pages/RoadmapAssessment"));
@@ -465,6 +466,7 @@ const App = () => (
               <Route path="/book-consultation" element={<BookConsultationPage />} />
               <Route path="/join-meeting" element={<JoinMeeting />} />
               <Route path="/stop-weekly-registration" element={<StopWeeklyRegistration />} />
+              <Route path="/text-reminders" element={<TextReminders />} />
               <Route path="/family-coaching" element={<FamilyCoachingPage />} />
               <Route path="/family-readiness-intensive" element={<FamilyReadinessIntensivePage />} />
               <Route path="/intervention-help" element={<InterventionHelpPage />} />

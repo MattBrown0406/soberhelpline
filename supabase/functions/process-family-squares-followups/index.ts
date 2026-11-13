@@ -21,6 +21,10 @@ import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 // any Family Squares follow-up (these three, or the after-meeting email from
 // send-after-meeting-followup) in the last MIN_GAP_HOURS hours. It goes out on
 // a later hourly run, so nobody gets two of these on the same day.
+//
+// Mondays: someone who is not registered for tonight's meeting gets the "come
+// tonight" email that morning (send-zoom-reengagement). Their follow-up is held
+// until Tuesday so the two do not land on the same day.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -203,6 +207,15 @@ serve(async (req: Request) => {
     let sent = 0;
     let failed = 0;
     let held = 0;
+
+    // Monday in Pacific time, and the date of tonight's meeting.
+    const pacific = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit", weekday: "short",
+    }).formatToParts(new Date(nowMs));
+    const pacificPart = (type: string) => pacific.find((p) => p.type === type)?.value ?? "";
+    const mondayMeetingDate = pacificPart("weekday") === "Mon"
+      ? `${pacificPart("year")}-${pacificPart("month")}-${pacificPart("day")}`
+      : null;
     const reasons: Partial<Record<SkipReason, number>> = {};
 
     const skip = async (id: string, reason: SkipReason) => {
@@ -266,6 +279,20 @@ serve(async (req: Request) => {
         if ((earlier || []).length > 0) {
           await skip(followup.id, "repeat");
           continue;
+        }
+
+        if (mondayMeetingDate) {
+          const { data: tonight, error: tonightError } = await supabase
+            .from("zoom_meeting_registrations")
+            .select("id")
+            .ilike("email", exactPattern(followup.email))
+            .eq("meeting_date", mondayMeetingDate)
+            .limit(1);
+          if (tonightError) throw tonightError;
+          if ((tonight || []).length === 0) {
+            held += 1; // not coming tonight: they get the Monday-morning invitation instead
+            continue;
+          }
         }
 
         const gapSince = new Date(nowMs - MIN_GAP_HOURS * 3600_000).toISOString();
