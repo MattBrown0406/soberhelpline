@@ -139,7 +139,7 @@ export const searchIndex: SearchEntry[] = [
   { title: "Q&A Archive", path: "/member-qa", description: "Questions and answers from Monday night meetings — searchable by topic.", category: "community", keywords: ["Q&A", "questions", "answers", "Monday meeting", "archive"] },
   { title: "Past Meeting Recordings", path: "/zoom-recordings", description: "Recordings from past Monday night family support meetings.", category: "community", keywords: ["recordings", "video", "Monday meeting", "zoom", "past sessions", "replay"] },
   { title: "Family Discussion Forum", path: "/family-forum", description: "Connect with other families navigating addiction — share, ask, and find support.", category: "community", keywords: ["forum", "community", "discuss", "families", "support group", "connect"] },
-  { title: "Monthly Webinars", path: "/family-webinars", description: "Live sessions with addiction specialists and past webinar recordings.", category: "community", keywords: ["webinar", "live", "specialist", "event", "register"] },
+  { title: "Monthly Webinars", path: "/family-webinars", description: "Member webinars. Monthly live sessions are planned as the membership grows.", category: "community", keywords: ["webinar", "live", "specialist", "event", "register"] },
   { title: "Education Center", path: "/family-education", description: "Guides, worksheets, guided exercises, meditations and interactive tools for families.", category: "community", keywords: ["education", "guides", "worksheets", "pillars", "library", "family", "learn"] },
 ];
 

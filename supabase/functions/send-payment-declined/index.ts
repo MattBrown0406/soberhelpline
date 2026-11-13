@@ -52,7 +52,7 @@ serve(async (req: Request) => {
               
               <p>We're reaching out because your most recent membership payment was <strong>declined</strong>. This can happen for a variety of reasons — an expired card, insufficient funds, or a bank security hold.</p>
               
-              <p>Your Sober Helpline Family Membership is important to us, and we want to make sure you don't lose access to the Family Forum, weekly "The Family Squares" Zoom meetings, and all member resources.</p>
+              <p>Your Sober Helpline Family Membership is important to us, and we want to make sure you don't lose access to the Family Forum, the education library, recordings of past Monday meetings, and your member price on coaching. The live Monday meeting stays free for you either way.</p>
               
               <h2 style="color: #1a365d; font-size: 18px;">Option 1: Update Your Payment Method</h2>
               <p>To keep your membership active, please log in to your <strong>PayPal account</strong> and update your payment method for your Sober Helpline subscription:</p>

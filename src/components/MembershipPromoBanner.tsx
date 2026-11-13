@@ -22,7 +22,7 @@ const MembershipPromoBanner = () => {
           <BookOpen className="w-5 h-5 text-logo-blue mt-0.5 flex-shrink-0" />
           <div>
             <p className="text-sm font-medium text-foreground">Education Center</p>
-            <p className="text-xs text-muted-foreground">Guided videos, worksheets & meditations</p>
+            <p className="text-xs text-muted-foreground">Guides, tools & guided meditations</p>
           </div>
         </div>
         <div className="flex items-start gap-3 bg-background/60 rounded-lg p-3">
@@ -43,7 +43,7 @@ const MembershipPromoBanner = () => {
           <DollarSign className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="text-sm font-medium text-foreground">Member Coaching Discount</p>
-            <p className="text-xs text-muted-foreground">$125/hr sessions — save $25 every time</p>
+            <p className="text-xs text-muted-foreground">$125 per session, a $25 saving every time</p>
           </div>
         </div>
       </div>

@@ -138,11 +138,11 @@ export const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/family-membership': {
     title: 'Family Membership — Premium Support & Tools | Sober Helpline',
-    description: 'Premium family resources, coaching sessions, exclusive content, and community support. Invest in your family\'s recovery journey.',
+    description: '60+ guides, tools and guided meditations, a private family forum, recordings of past Monday meetings, and $25 off private coaching. Seven days free, then $9.99 a month.',
   },
   '/family-webinars': {
-    title: 'Free Family Webinars on Addiction & Recovery | Sober Helpline',
-    description: 'Live and recorded webinars on boundaries, enabling, treatment navigation, and family recovery. Free for all families.',
+    title: 'Member Webinars on Addiction & Recovery | Sober Helpline',
+    description: 'Webinars for Sober Helpline members on boundaries, enabling, treatment navigation, and family recovery. Monthly live sessions are planned as the membership grows.',
   },
   '/family-forum': {
     title: 'Family Support Forum — Connect with Families | Sober Helpline',

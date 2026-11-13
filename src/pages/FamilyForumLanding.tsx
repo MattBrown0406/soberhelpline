@@ -27,11 +27,11 @@ const faqItems = [
   },
   {
     question: "What's the difference between the forum and the Monday Zoom?",
-    answer: "The Monday Zoom is a live, real-time call led by Matt Brown, great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. Both are included with membership.",
+    answer: "The Monday Zoom is a live, real-time call led by Matt Brown, great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. The Monday meeting is free for everyone; the forum is part of membership.",
   },
   {
     question: "What does membership cost?",
-    answer: "Family support membership is $9.99/month. It includes the forum, the full education library (60+ guides, tools and meditations), recorded webinars, and access to the Monday Zoom. Cancel anytime.",
+    answer: "Family support membership is $9.99/month. It includes the forum, the full education library (60+ guides, tools and meditations), and recordings of past Monday meetings. The live Monday meeting is free for everyone, with or without a membership. Cancel anytime.",
   },
 ];
 
@@ -360,7 +360,7 @@ export default function FamilyForumLanding() {
                 { icon: Calendar, label: "The Family Squares Recordings", desc: "The live Monday call with Matt Brown is free for everyone. Members can watch past sessions" },
                 { icon: BookOpen, label: "60+ Guides, Tools & Meditations", desc: "Evidence-based curriculum for family recovery" },
                 { icon: Sparkles, label: "Guided Exercises & Tools", desc: "Boundary script, helping-or-enabling check, treatment program check" },
-                { icon: Heart, label: "Recorded Webinars", desc: "Watch past sessions on your schedule" },
+                { icon: Heart, label: "Monday Meeting Recordings", desc: "Watch past sessions on your schedule" },
                 { icon: Shield, label: "Expert Moderation", desc: "Certified professionals keeping the community safe" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-3 p-4 bg-background rounded-xl border border-border/50">

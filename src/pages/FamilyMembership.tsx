@@ -410,9 +410,9 @@ function FamilyMembershipCheckout() {
                 <div className="bg-muted p-4 rounded-lg text-sm">
                   <p className="font-medium mb-1">What's next?</p>
                   <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Access premium family resources</li>
-                    <li>Join exclusive support groups</li>
-                    <li>Watch educational webinars</li>
+                    <li>Open the family education library</li>
+                    <li>Introduce yourself in the private family forum</li>
+                    <li>Watch recordings of past Monday meetings</li>
                   </ul>
                 </div>
                 <Button onClick={() => navigate('/family-support')} className="w-full">
