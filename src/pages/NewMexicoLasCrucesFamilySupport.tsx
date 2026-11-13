@@ -34,7 +34,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Las Cruces, New Mexico | Sober Helpline"
-        description="Families in Las Cruces struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Las Cruces struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -71,7 +71,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -112,7 +112,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
               Las Cruces' proximity to the US-Mexico border means fentanyl and other drugs are more readily available here
               than in most American cities. NMSU's campus brings a young adult population vulnerable to substance use disorders,
               while the broader community includes many bilingual Latino families where stigma and cultural barriers make it
-              harder to reach out for help. Virtual support options — like Sober Helpline's Monday Zoom — are especially
+              harder to reach out for help. Virtual support options — like Sober Helpline's Family Squares — are especially
               valuable in a community with limited in-person treatment options.
             </p>
           </div>
@@ -235,7 +235,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl font-bold text-logo-blue mb-4">
-                  Free “The Family Squares” Zoom
+                  Free Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7:00 PM Pacific, Las Cruces families join a free Zoom call led by Matt Brown —
@@ -259,7 +259,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
                   <Link to="/monday-zoom-registration">
                     <Button size="lg" className="gap-2">
                       <Calendar className="h-4 w-4" />
-                      Register for Monday Zoom
+                      Register for Family Squares
                     </Button>
                   </Link>
                   <a href="tel:4582988008">
@@ -328,7 +328,7 @@ export default function NewMexicoLasCrucesFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

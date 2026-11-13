@@ -186,9 +186,9 @@ serve(async (req: Request) => {
 
       const html = `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #1f2937;">
-          <h1 style="color: #166534;">Starting in 1 hour: "The Family Squares"</h1>
+          <h1 style="color: #166534;">Starting in 1 hour: Family Squares</h1>
           <p>Hi ${safeName},</p>
-          <p>Just a quick reminder — tonight's <strong>"The Family Squares" Zoom</strong> starts at <strong>7:00 PM Pacific</strong>, one hour from now.</p>
+          <p>Just a quick reminder — tonight's <strong>Family Squares Zoom</strong> starts at <strong>7:00 PM Pacific</strong>, one hour from now.</p>
 
           <div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
             <a href="${escapeHtml(joinUrl)}" style="display: inline-block; padding: 14px 28px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
@@ -242,7 +242,7 @@ serve(async (req: Request) => {
           tracking_settings: { subscription_tracking: { enable: true } },
           personalizations: [{ to: [{ email: reg.email }] }],
           from: { email: "matt@soberhelpline.com", name: "Sober Helpline" },
-          subject: '⏰ Starting in 1 hour — "The Family Squares" at 7:00 PM Pacific',
+          subject: '⏰ Starting in 1 hour — Family Squares at 7:00 PM Pacific',
           content: [{ type: "text/html", value: html }],
         }),
       });

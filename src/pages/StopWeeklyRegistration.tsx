@@ -34,7 +34,7 @@ const StopWeeklyRegistration = () => {
     <>
       <SEOHead
         title="Stop Weekly Registration | Sober Helpline"
-        description="Stop being registered automatically for The Family Squares each week."
+        description="Stop being registered automatically for Family Squares each week."
         noIndex={true}
       />
       <div className="container mx-auto flex min-h-[60vh] max-w-lg items-center px-4 py-12">
@@ -52,7 +52,7 @@ const StopWeeklyRegistration = () => {
                   You are welcome back any week. The meeting is free and you can register whenever you want to come.
                 </p>
                 <Button asChild className="mt-6">
-                  <Link to="/family-squares">Go to The Family Squares</Link>
+                  <Link to="/family-squares">Go to Family Squares</Link>
                 </Button>
               </>
             ) : !linkLooksRight ? (
@@ -69,7 +69,7 @@ const StopWeeklyRegistration = () => {
                 <CalendarX className="mx-auto mb-4 h-12 w-12 text-primary" aria-hidden="true" />
                 <h1 className="text-xl font-bold text-foreground">Stop weekly registration?</h1>
                 <p className="mt-3 text-muted-foreground">
-                  Right now you are signed up for The Family Squares automatically every Monday. If you stop, you
+                  Right now you are signed up for Family Squares automatically every Monday. If you stop, you
                   can still come any week by registering for that meeting.
                 </p>
                 {phase === "error" && (

@@ -71,7 +71,7 @@ export function ZoomAutoRegistrationManagement({ registrations, loading, loadErr
         <AlertDialogHeader>
           <AlertDialogTitle>Stop auto-registration?</AlertDialogTitle>
           <AlertDialogDescription className="break-words">
-            Stop automatically registering {selected?.name} ({selected?.email}) for future Monday meetings of “The Family Squares”? Existing registrations, questions, attendance, and mailing-list preferences will remain unchanged. They can still register manually or opt in again.
+            Stop automatically registering {selected?.name} ({selected?.email}) for future Monday meetings of Family Squares? Existing registrations, questions, attendance, and mailing-list preferences will remain unchanged. They can still register manually or opt in again.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -125,7 +125,7 @@ serve(async (req) => {
   // --- Meeting ended → create post-meeting forum thread ---
   if (event.event === 'meeting.ended') {
     const meetingId = String(event.payload.object.id);
-    const meetingTopic = event.payload.object.topic ?? 'The Family Squares';
+    const meetingTopic = event.payload.object.topic ?? 'Family Squares';
     const endTime = event.payload.object.end_time ?? new Date().toISOString();
     console.log(`Meeting ended: ${meetingId}`);
 
@@ -172,7 +172,7 @@ serve(async (req) => {
       if (existing && existing.length > 0) {
         console.log('Post-meeting thread already exists for today — skipping');
       } else {
-        const title = `🟢 The Family Squares — ${formattedDate} — Share Your Takeaways`;
+        const title = `🟢 Family Squares — ${formattedDate} — Share Your Takeaways`;
 
         const content = `Tonight's meeting just wrapped up. Thank you to everyone who showed up — whether you were on camera, listening quietly, or joined late, your presence matters.
 
@@ -234,7 +234,7 @@ Use this thread to share anything that resonated, a question you're still sittin
     if (!existing) {
       const shareUrl = rec.share_url ?? '';
       const { error } = await supabase.from('zoom_call_recordings').insert({
-        title: rec.topic ?? 'The Family Squares',
+        title: rec.topic ?? 'Family Squares',
         recording_date: recordingDate,
         duration_minutes: durationMinutes,
         youtube_url: shareUrl,

@@ -82,7 +82,7 @@ export default function NevadaFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
             </div>
@@ -301,7 +301,7 @@ export default function NevadaFamilySupport() {
 
         <RegionalFamilySupportOptions state="Nevada" />
 
-        {/* “The Family Squares” */}
+        {/* Family Squares */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -311,7 +311,7 @@ export default function NevadaFamilySupport() {
                   Every Monday — 7:00 PM Pacific
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
-                  Free “The Family Squares” Zoom
+                  Free Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7:00 PM Pacific, families across Nevada (and nationwide) join a free Zoom call
@@ -341,7 +341,7 @@ export default function NevadaFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">Family Squares</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM Pacific</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
@@ -504,7 +504,7 @@ export default function NevadaFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

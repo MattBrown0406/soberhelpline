@@ -10,7 +10,7 @@ const faqItems = [
   {
     question: "How do I help a family member with addiction in New Mexico?",
     answer:
-      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches New Mexico families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. New Mexico families can also connect with Al-Anon New Mexico, Nar-Anon, and Sober Helpline's free “The Family Squares” calls for ongoing support. The 988 Suicide & Crisis Lifeline (call or text 988) offers 24/7 statewide crisis support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
+      "The most effective approach combines education, boundary-setting, and evidence-based strategies like CRAFT (Community Reinforcement and Family Training). CRAFT teaches New Mexico families how to reduce enabling behaviors, communicate effectively, and create conditions that motivate their loved one toward treatment — without confrontation. New Mexico families can also connect with Al-Anon New Mexico, Nar-Anon, and Sober Helpline's free Family Squares calls for ongoing support. The 988 Suicide & Crisis Lifeline (call or text 988) offers 24/7 statewide crisis support. If your loved one is resistant to treatment, a professional intervention coach can guide you through the process step by step.",
   },
   {
     question: "Why does New Mexico have such high drug overdose rates?",
@@ -20,7 +20,7 @@ const faqItems = [
   {
     question: "Are there free family support groups for addiction in New Mexico?",
     answer:
-      "Yes. Al-Anon New Mexico has meetings in Albuquerque, Santa Fe, Las Cruces, and other communities — including online options. Nar-Anon groups are also available. The New Mexico Behavioral Health Services Division (nmhealth.org) can connect families with local resources. Sober Helpline also offers a free “The Family Squares” call every week at 7:00 PM Pacific — led by a certified interventionist — open to any New Mexico family, no sign-up fees or treatment center referrals.",
+      "Yes. Al-Anon New Mexico has meetings in Albuquerque, Santa Fe, Las Cruces, and other communities — including online options. Nar-Anon groups are also available. The New Mexico Behavioral Health Services Division (nmhealth.org) can connect families with local resources. Sober Helpline also offers a free Family Squares call every Monday at 7:00 PM Pacific — led by a certified interventionist — open to any New Mexico family, no sign-up fees or treatment center referrals.",
   },
   {
     question: "What is enabling and how do I stop it in a New Mexico family context?",
@@ -45,7 +45,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Sober Helpline",
   description:
-    "Family support and intervention coaching for families affected by addiction. Serving New Mexico families with free resources, “The Family Squares”, and hourly coaching.",
+    "Family support and intervention coaching for families affected by addiction. Serving New Mexico families with free resources, Family Squares, and hourly coaching.",
   url: "https://soberhelpline.com/new-mexico-family-support",
   telephone: "+14582988008",
   address: {
@@ -65,7 +65,7 @@ export default function NewMexicoFamilySupport() {
     <>
       <SEOHead
         title="Alcohol Interventionist in New Mexico | Family Addiction Support"
-        description="Need an alcohol interventionist in New Mexico? Get family addiction coaching, Monday Zoom support, and clear next steps for relapse, treatment refusal, or crisis."
+        description="Need an alcohol interventionist in New Mexico? Get family addiction coaching, Family Squares support, and clear next steps for relapse, treatment refusal, or crisis."
         faqItems={faqItems}
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
@@ -85,13 +85,13 @@ export default function NewMexicoFamilySupport() {
             </h1>
             <p className="hero-description text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               If someone you love is drinking, using drugs, refusing treatment, or relapsing, your family needs a clear next step.
-              New Mexico families can start with the free Monday Zoom, book private coaching, or call when the situation may require intervention planning.
+              New Mexico families can start with the free Family Squares meeting, book private coaching, or call when the situation may require intervention planning.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -425,7 +425,7 @@ export default function NewMexicoFamilySupport() {
           </div>
         </section>
 
-        {/* “The Family Squares” */}
+        {/* Family Squares */}
         <section className="py-12 bg-primary/5 border-y border-primary/10">
           <div className="container max-w-4xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -435,7 +435,7 @@ export default function NewMexicoFamilySupport() {
                   Every Monday — 7:00 PM Pacific
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-logo-blue mb-4">
-                  Free “The Family Squares” Zoom
+                  Free Family Squares Zoom
                 </h2>
                 <p className="text-muted-foreground mb-4">
                   Every Monday at 7:00 PM Pacific, families across New Mexico (and nationwide) join a free Zoom call
@@ -465,7 +465,7 @@ export default function NewMexicoFamilySupport() {
               <div className="bg-white rounded-xl border border-primary/20 p-6 shadow-sm">
                 <div className="text-center">
                   <div className="text-5xl font-bold text-primary mb-1">FREE</div>
-                  <div className="text-lg font-semibold text-logo-blue mb-1">“The Family Squares”</div>
+                  <div className="text-lg font-semibold text-logo-blue mb-1">Family Squares</div>
                   <div className="text-muted-foreground text-sm mb-4">Every Monday at 7:00 PM Pacific</div>
                   <div className="border-t border-border pt-4 space-y-2 text-sm text-muted-foreground text-left">
                     <div className="flex items-center gap-2">
@@ -642,7 +642,7 @@ export default function NewMexicoFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

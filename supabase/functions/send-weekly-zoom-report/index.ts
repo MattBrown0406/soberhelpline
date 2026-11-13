@@ -429,7 +429,7 @@ Deno.serve(async (req) => {
     const spanishCount = languageCounts.get("es") || 0;
 
     const html = `<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;color:#333;line-height:1.6;">
-<h2 style="color:#111;margin-bottom:4px;">"The Family Squares" — Weekly Meeting Report</h2>
+<h2 style="color:#111;margin-bottom:4px;">Family Squares — Weekly Meeting Report</h2>
 <p style="margin-top:0;color:#666;">Meeting of ${escapeHtml(prettyDate(meetingDate))}</p>
 <div style="background:#f4f7fb;border-radius:8px;padding:16px;margin:16px 0;">
   <p style="margin:0;font-size:15px;"><strong>Total registrants:</strong> ${totalRegistrants}</p>

@@ -26,8 +26,8 @@ const faqItems = [
     answer: "The forum is moderated by certified professionals with direct experience in addiction intervention and family recovery. There are no automated-only moderation systems, a real human reviews flagged content and maintains the tone of the community.",
   },
   {
-    question: "What's the difference between the forum and the Monday Zoom?",
-    answer: "The Monday Zoom is a live, real-time call led by Matt Brown, great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. The Monday meeting is free for everyone; the forum is part of membership.",
+    question: "What's the difference between the forum and Family Squares?",
+    answer: "Family Squares is a live, real-time call led by Matt Brown, great for urgent questions and direct guidance. The forum is always available: post at 2am, respond on your lunch break, read when you're ready. The Monday meeting is free for everyone; the forum is part of membership.",
   },
   {
     question: "What does membership cost?",
@@ -67,7 +67,7 @@ const benefits = [
   {
     icon: Star,
     title: "Part of a Bigger Support System",
-    desc: "Membership includes the forum, the education library, and recordings of past “The Family Squares” meetings. The live Monday meeting is free for everyone. You're not just joining a forum, you're joining a full recovery support system.",
+    desc: "Membership includes the forum, the education library, and recordings of past Family Squares meetings. The live Monday meeting is free for everyone. You're not just joining a forum, you're joining a full recovery support system.",
   },
 ];
 
@@ -148,7 +148,7 @@ export default function FamilyForumLanding() {
                 <Link to="/monday-zoom-registration">
                   <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8">
                     <Calendar className="h-4 w-4" />
-                    Start with the Free Monday Zoom
+                    Start with Family Squares, Free Every Monday
                   </Button>
                 </Link>
                 <Link to="/family-membership">
@@ -174,7 +174,7 @@ export default function FamilyForumLanding() {
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Book a Crisis Family Consult before joining the community</h2>
                   <p className="text-sm md:text-base text-muted-foreground max-w-2xl">
-                    If things are actively escalating and you need one-on-one guidance, start with a private consult. The forum and Monday Zoom are excellent support layers, but some families need a calmer, direct plan first.
+                    If things are actively escalating and you need one-on-one guidance, start with a private consult. The forum and Family Squares are excellent support layers, but some families need a calmer, direct plan first.
                   </p>
                 </div>
                 <div className="grid gap-3">
@@ -357,7 +357,7 @@ export default function FamilyForumLanding() {
             <div className="grid sm:grid-cols-2 gap-4 mb-10">
               {[
                 { icon: MessagesSquare, label: "Private Family Forum", desc: "Anonymous, professionally moderated, always open" },
-                { icon: Calendar, label: "The Family Squares Recordings", desc: "The live Monday call with Matt Brown is free for everyone. Members can watch past sessions" },
+                { icon: Calendar, label: "Family Squares Recordings", desc: "The live Monday call with Matt Brown is free for everyone. Members can watch past sessions" },
                 { icon: BookOpen, label: "60+ Guides, Tools & Meditations", desc: "Evidence-based curriculum for family recovery" },
                 { icon: Sparkles, label: "Guided Exercises & Tools", desc: "Boundary script, helping-or-enabling check, treatment program check" },
                 { icon: Heart, label: "Monday Meeting Recordings", desc: "Watch past sessions on your schedule" },
@@ -421,7 +421,7 @@ export default function FamilyForumLanding() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-8">
                   <Calendar className="h-4 w-4" />
-                  Join the Free Monday Zoom
+                  Join Family Squares, Free Every Monday
                 </Button>
               </Link>
               <Link to="/family-membership">
@@ -438,7 +438,7 @@ export default function FamilyForumLanding() {
               </Link>
             </div>
             <p className="text-xs text-muted-foreground mt-4">
-              Not ready to join? The <Link to="/monday-zoom-registration" className="text-primary hover:underline">free Monday Zoom</Link> is open to everyone, no membership required.
+              Not ready to join? The <Link to="/monday-zoom-registration" className="text-primary hover:underline">free Family Squares meeting</Link> is open to everyone, no membership required.
             </p>
           </div>
         </section>

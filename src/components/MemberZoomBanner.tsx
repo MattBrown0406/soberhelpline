@@ -49,10 +49,10 @@ const MemberZoomBanner = () => {
 
   const highlight = meeting.isToday;
   const headline = meeting.isLive
-    ? "Live now: The Family Squares (until 8:00 PM Pacific)"
+    ? "Live now: Family Squares (until 8:00 PM Pacific)"
     : meeting.isToday
-      ? "Tonight: The Family Squares, 7:00 PM Pacific"
-      : "The Family Squares, every Monday at 7:00 PM Pacific";
+      ? "Tonight: Family Squares, 7:00 PM Pacific"
+      : "Family Squares, every Monday at 7:00 PM Pacific";
 
   return (
     <div

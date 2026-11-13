@@ -34,7 +34,7 @@ export default function UtahSaltLakeCityFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Salt Lake City, Utah | Sober Helpline"
-        description="Families in Salt Lake City struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Salt Lake City struggling with a loved one's addiction get expert support, resources, and guidance from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
       />
 
@@ -72,7 +72,7 @@ export default function UtahSaltLakeCityFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom — 7:00 PM Pacific
+                  Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <Link to="/family-coaching">
@@ -200,7 +200,7 @@ export default function UtahSaltLakeCityFamilySupport() {
           </div>
         </section>
 
-        {/* Monday Zoom */}
+        {/* Family Squares */}
         <section className="py-10">
           <div className="container max-w-4xl mx-auto px-4">
             <Card className="border-primary/20 bg-primary/5">
@@ -212,7 +212,7 @@ export default function UtahSaltLakeCityFamilySupport() {
                       Every Monday — 7:00 PM Pacific
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-3">
-                      Free “The Family Squares” Zoom
+                      Free Family Squares Zoom
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       Salt Lake City families join families from across Utah every Monday for free, judgment-free support.
@@ -295,10 +295,10 @@ export default function UtahSaltLakeCityFamilySupport() {
             <Heart className="h-8 w-8 text-primary mx-auto mb-3" />
             <h2 className="text-xl md:text-2xl font-bold text-logo-blue mb-2">Salt Lake City Families: You Don't Have to Do This Alone</h2>
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto text-sm">
-              Whether you're in crisis or just starting to recognize the problem, Sober Helpline is here. Free Monday Zoom every week. Coaching available now.
+              Whether you're in crisis or just starting to recognize the problem, Sober Helpline is here. Free Family Squares meeting every Monday. Private coaching by appointment.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/monday-zoom-registration"><Button className="gap-2"><Calendar className="h-4 w-4" />Join Free Monday Zoom</Button></Link>
+              <Link to="/monday-zoom-registration"><Button className="gap-2"><Calendar className="h-4 w-4" />Join Free Family Squares</Button></Link>
               <a href="tel:4582988008"><Button variant="outline" className="gap-2"><Phone className="h-4 w-4" />(458) 298-8008</Button></a>
             <WhatsAppLink source="utah_salt_lake_city_cta_2" variant="button" />
             </div>

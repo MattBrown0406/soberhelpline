@@ -180,7 +180,7 @@ const HomeHero = () => {
 
             <div className="shl-app-card">
               <div>
-                <small>TAKE SUPPORT WITH YOU</small>
+                <small>FOR IPHONE AND IPAD</small>
                 <strong>The Sober Helpline app</strong>
               </div>
               <SoberHelplineAppStoreBadge height={34} source="homepage_lighthouse_hero_app" />

@@ -80,11 +80,11 @@ function buildEmailHtml(params: {
               Matt Brown
             </p>
             <p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#64748b;">
-              Sober Helpline &middot; The Family Squares
+              Sober Helpline &middot; Family Squares
             </p>
           </td></tr>
         </table>
-        <p style="margin:16px 0 0;font-size:12px;color:#94a3b8;">You're receiving this because you registered for the Monday Zoom meeting.</p>
+        <p style="margin:16px 0 0;font-size:12px;color:#94a3b8;">You're receiving this because you registered for the Family Squares meeting.</p>
       </td></tr>
     </table>
   </body>

@@ -92,7 +92,7 @@ export default function FamilySupport() {
           {!hasMembership && (
             <Link to="/monday-zoom-registration">
               <Button variant="secondary" size="sm" className="font-semibold">
-                Join the Free Monday Zoom
+                Join Family Squares, Free Every Monday
               </Button>
             </Link>
           )}
@@ -107,13 +107,13 @@ export default function FamilySupport() {
                 <CardContent className="p-6 md:p-8 text-center">
                   <h2 className="text-2xl font-bold text-logo-blue mb-3">Start Here, in This Order</h2>
                   <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                    If things feel confusing, keep it simple. Start with the free Monday Zoom, use membership for ongoing support, and reach for private coaching when you need more direct help.
+                    If things feel confusing, keep it simple. Start with the free Family Squares meeting, use membership for ongoing support, and reach for private coaching when you need more direct help.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
                     <Link to="/monday-zoom-registration">
                       <Button size="lg" className="gap-2 w-full sm:w-auto">
                         <Calendar className="h-4 w-4" />
-                        Join the Free Monday Zoom
+                        Join Family Squares, Free Every Monday
                       </Button>
                     </Link>
                     <Link to="/family-membership">
@@ -338,7 +338,7 @@ export default function FamilySupport() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-logo-blue">
                     <Video className="h-5 w-5 text-logo-blue" />
-                    “The Family Squares” Zoom
+                    Family Squares Zoom
                   </CardTitle>
                   <CardDescription>
                     Free weekly meeting every Monday at 7:00 PM Pacific
@@ -439,13 +439,13 @@ export default function FamilySupport() {
                   Need a Private Next Step?
                 </h2>
                 <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                  Start with the Monday Zoom if you can. If you need more support after that, membership is the next layer. If the situation is urgent or too specific for a group setting, private coaching is available.
+                  Start with Family Squares if you can. If you need more support after that, membership is the next layer. If the situation is urgent or too specific for a group setting, private coaching is available.
                 </p>
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
                   <Link to="/monday-zoom-registration">
                     <Button size="lg" className="gap-2 w-full sm:w-auto">
                       <Calendar className="h-4 w-4" />
-                      Join Monday Zoom
+                      Join Family Squares
                     </Button>
                   </Link>
                   <Link to="/family-membership">

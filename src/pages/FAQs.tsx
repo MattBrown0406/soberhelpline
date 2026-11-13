@@ -356,7 +356,7 @@ export default function FAQs() {
               to="/monday-zoom-registration"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              Join the Monday Zoom
+              Join Family Squares
             </Link>
             <Link
               to="/addiction-assessment"

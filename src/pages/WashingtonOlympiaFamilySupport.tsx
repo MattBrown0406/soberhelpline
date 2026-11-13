@@ -39,7 +39,7 @@ export default function WashingtonOlympiaFamilySupport() {
     <>
       <SEOHead
         title="Family Support for Addiction in Olympia, Washington | Sober Helpline"
-        description="Families in Olympia struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free “The Family Squares”. (458) 298-8008."
+        description="Families in Olympia struggling with a loved one's addiction get expert support and resources from Sober Helpline. Free Family Squares. (458) 298-8008."
         jsonLd={localBusinessSchema}
         speakableSelectors={["h1", "h2", ".hero-description"]}
       />
@@ -76,7 +76,7 @@ export default function WashingtonOlympiaFamilySupport() {
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2 w-full sm:w-auto">
                   <Calendar className="h-4 w-4" />
-                  Free Monday Zoom — 7:00 PM Pacific
+                  Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
               </Link>
               <a href="tel:4582988008">
@@ -232,7 +232,7 @@ export default function WashingtonOlympiaFamilySupport() {
                 <Link to="/monday-zoom-registration">
                   <Button className="gap-2">
                     <Calendar className="h-4 w-4" />
-                    Register for Monday Zoom
+                    Register for Family Squares
                   </Button>
                 </Link>
               </div>
@@ -306,13 +306,13 @@ export default function WashingtonOlympiaFamilySupport() {
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               The public crisis doesn't have to define your private situation. Get expert guidance
-              and take clear action. Free Monday Zoom or direct coaching — available now.
+              and take clear action. Free Family Squares on Mondays or private coaching by appointment.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/monday-zoom-registration">
                 <Button size="lg" className="gap-2">
                   <Calendar className="h-4 w-4" />
-                  Join Free Monday Zoom
+                  Join Free Family Squares
                 </Button>
               </Link>
               <a href="tel:4582988008">

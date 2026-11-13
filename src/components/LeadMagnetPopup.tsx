@@ -80,7 +80,7 @@ const LeadMagnetPopup = () => {
             </div>
           </div>
           <h2 className="text-xl md:text-2xl font-bold text-center text-foreground">
-            Join the Free Monday Night Zoom
+            Join Family Squares, Free Every Monday Night
           </h2>
           <p className="text-center text-muted-foreground mt-2 text-sm">
             Get live guidance from Matt Brown and connect with families who understand what you are carrying right now.

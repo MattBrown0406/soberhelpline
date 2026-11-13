@@ -308,7 +308,7 @@ export default function MemberBilling() {
                           <AlertDialogTitle>Cancel your family membership?</AlertDialogTitle>
                           <AlertDialogDescription>
                             This will cancel your recurring PayPal charge. You will not be billed again.
-                            If you need help first, contact support@soberhelpline.com.
+                            If you need help first, contact matt@soberhelpline.com.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -340,8 +340,8 @@ export default function MemberBilling() {
               <div className="text-xs text-muted-foreground flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5" />
                 Questions? Email{" "}
-                <a href="mailto:support@soberhelpline.com" className="text-primary hover:underline">
-                  support@soberhelpline.com
+                <a href="mailto:matt@soberhelpline.com" className="text-primary hover:underline">
+                  matt@soberhelpline.com
                 </a>
               </div>
             </div>

@@ -44,7 +44,7 @@ try {
           await page.getByRole('heading', { level: 1, name: /Family Support for Addiction in Washington/ }).waitFor();
           assert.equal(new URL(page.url()).pathname, '/washington-family-support');
         } else {
-          const button = page.getByRole('button', { name: 'Join Free Monday Zoom — 7:00 PM Pacific', exact: true });
+          const button = page.getByRole('button', { name: 'Join Free Family Squares — Mondays, 7:00 PM Pacific', exact: true });
           const box = await button.boundingBox();
           assert.ok(box && box.x >= 0 && box.x + box.width <= width + 1 && box.height >= 44, 'Registration CTA must fit and remain tappable');
         }

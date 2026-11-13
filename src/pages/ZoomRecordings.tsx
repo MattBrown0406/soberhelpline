@@ -177,7 +177,7 @@ export default function ZoomRecordings() {
     <>
       <SEOHead
         title="Past Meeting Recordings | Sober Helpline"
-        description='Watch past "The Family Squares" Zoom recordings.'
+        description='Watch past Family Squares Zoom recordings.'
       />
       <MemberPage>
         <div className="container mx-auto max-w-5xl space-y-6 px-4 py-6 sm:py-10">
@@ -188,7 +188,7 @@ export default function ZoomRecordings() {
           <MemberHero
             eyebrow="Monday meetings"
             title="Past Meeting Recordings"
-            subtitle={'Catch up on "The Family Squares" sessions you missed'}
+            subtitle={'Catch up on Family Squares sessions you missed'}
           />
 
           <nav aria-label="Related member pages" className="flex flex-wrap gap-2">
@@ -282,7 +282,7 @@ export default function ZoomRecordings() {
               <IconTile icon={Video} tone="navy" size="lg" className="mx-auto mb-4" />
               <h2 className="mb-2 text-lg font-semibold text-foreground">No Recordings Yet</h2>
               <p className="mx-auto max-w-prose text-muted-foreground">
-                Recordings from our "The Family Squares" sessions will appear here soon.
+                Recordings from our Family Squares sessions will appear here soon.
                 Join us live every Monday at 7:00 PM Pacific!
               </p>
               <Button asChild variant="outline" className="mt-4 min-h-11 gap-2 rounded-xl px-5">

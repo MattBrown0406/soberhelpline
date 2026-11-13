@@ -80,11 +80,11 @@ const triageItems: ChecklistItem[] = [
   },
   {
     id: "join-zoom-support",
-    title: "Join “The Family Squares” — if you haven't been coming",
+    title: "Join Family Squares — if you haven't been coming",
     description:
-      "If you've been skipping the “The Family Squares” calls — or you've never joined one — this is the week to show up. You don't have to talk. You don't have to share what happened. You just need to be in a room (even a virtual one) with people who understand exactly what you're going through. Every Monday at 7:00 PM Pacific, families just like yours log on. Some are in crisis. Some are months into recovery. Some have been through relapse before and came out the other side. There is no judgment. There is no advice you didn't ask for. Just people who get it. This is exactly when you need community most — not when things are going well, but when everything just fell apart.",
+      "If you've been skipping the Family Squares calls — or you've never joined one — this is the week to show up. You don't have to talk. You don't have to share what happened. You just need to be in a room (even a virtual one) with people who understand exactly what you're going through. Every Monday at 7:00 PM Pacific, families just like yours log on. Some are in crisis. Some are months into recovery. Some have been through relapse before and came out the other side. There is no judgment. There is no advice you didn't ask for. Just people who get it. This is exactly when you need community most — not when things are going well, but when everything just fell apart.",
     icon: Video,
-    linkText: "Register for The Family Squares",
+    linkText: "Register for Family Squares",
     linkUrl: "/monday-zoom-registration",
   },
 ];
@@ -203,7 +203,7 @@ const forwardPaths = [
       "If you've been through this cycle multiple times and you need to prioritize yourself and your children — that's a valid choice. It's not abandonment. It's self-preservation. Detaching with love doesn't mean stopping love. It means stopping destruction. Talk to a therapist and a support group before making this decision — but know that this path exists and no one gets to judge you for taking it.",
     links: [
       { text: "Detaching with Love: What It Really Means", url: "#" },
-      { text: "Join Our Free Weekly Support Group", url: "/monday-zoom-registration" },
+      { text: "Join Family Squares, Our Free Monday Meeting", url: "/monday-zoom-registration" },
     ],
   },
   {
@@ -450,7 +450,7 @@ const RoadmapRelapse = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7:00 PM Pacific
+                Family Squares — Mondays, 7:00 PM Pacific
               </Link>
               <p className="text-xs text-muted-foreground italic pl-6">
                 This is exactly when you need to show up.
@@ -463,7 +463,7 @@ const RoadmapRelapse = () => {
                 Talk to Someone: (458) 298-8008
               </a>
               <p className="text-xs text-muted-foreground italic pl-6">
-                Relapse response is what we do. Call anytime.
+                Relapse response is what we do. If no one is free to talk, leave a message and you will get a call back.
               </p>
             </CardContent>
           </Card>

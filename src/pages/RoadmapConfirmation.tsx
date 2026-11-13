@@ -48,11 +48,11 @@ interface ActionItem {
 const actionItems: ActionItem[] = [
   {
     id: "join-zoom",
-    title: "Join the free “The Family Squares” Zoom call",
+    title: "Join the free Family Squares Zoom call",
     description:
       "Every Monday at 7:00 PM Pacific, families just like yours come together for a free, live support call. You'll hear from others who've been exactly where you are — and from professionals who can help. You don't have to talk. Just showing up is a step.",
     icon: Video,
-    linkText: "Register for Monday Zoom",
+    linkText: "Register for Family Squares",
     linkUrl: "/monday-zoom-registration",
     section: "week",
   },
@@ -244,7 +244,7 @@ const RoadmapConfirmation = () => {
             </CardHeader>
             <CardContent className="space-y-2">
               <ResourceLink label="Recovery Podcasts" to="/recovery-podcasts" />
-              <ResourceLink label="Join Our Weekly Support Group" to="/monday-zoom-registration" />
+              <ResourceLink label="Join Family Squares, Our Free Monday Meeting" to="/monday-zoom-registration" />
               <a href="tel:4582988008" className="flex items-center gap-2 text-sm text-primary hover:underline py-1">
                 <Phone className="w-4 h-4" />
                 Talk to Someone: (458) 298-8008

@@ -10,7 +10,7 @@ import { trackConversionEvent } from "@/lib/conversionTracking";
 // Must match SMS_CONSENT_TEXT in supabase/functions/_shared/twilioSms.ts: the
 // server stores the wording the person agreed to.
 const SMS_CONSENT_TEXT =
-  "I agree to receive text message reminders from Sober Helpline about The Family Squares at this number. " +
+  "I agree to receive text message reminders from Sober Helpline about Family Squares at this number. " +
   "About one message per meeting. Message and data rates may apply. Reply STOP to cancel, HELP for help.";
 
 /** The reason a refused request gives, whether it came back as data or as an error. */

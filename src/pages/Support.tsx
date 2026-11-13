@@ -17,7 +17,7 @@ const supportFaqs = [
   },
   {
     question: "How do I manage an Apple App Store subscription?",
-    answer: "Open iPhone Settings, tap your name, tap Subscriptions, choose Sober Helpline, then update or cancel the subscription there.",
+    answer: "Open Settings on your iPhone or iPad, tap your name, tap Subscriptions, choose Sober Helpline, then update or cancel the subscription there.",
   },
 ];
 
@@ -119,7 +119,7 @@ export default function Support() {
               </CardHeader>
               <CardContent className="space-y-4 text-sm text-muted-foreground">
                 <ol className="list-decimal space-y-2 pl-5">
-                  <li>Open the <strong>Settings</strong> app on your iPhone.</li>
+                  <li>Open the <strong>Settings</strong> app on your iPhone or iPad.</li>
                   <li>Tap your name at the top.</li>
                   <li>Tap <strong>Subscriptions</strong>.</li>
                   <li>Select <strong>Sober Helpline</strong>.</li>
@@ -139,7 +139,7 @@ export default function Support() {
               <CardContent>
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />Your name and account email</li>
-                  <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />iPhone model and iOS version</li>
+                  <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />iPhone or iPad model and software version</li>
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />What screen or feature has the problem</li>
                   <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />A screenshot if it helps explain the issue</li>
                 </ul>

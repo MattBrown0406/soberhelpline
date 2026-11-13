@@ -57,7 +57,7 @@ const benefits = [
   {
     icon: Smartphone,
     title: "The Sober Helpline app, included",
-    description: "Your membership unlocks the Essential features in the Sober Helpline app for iPhone. Use the same email address in the app.",
+    description: "Your membership unlocks the Essential features in the Sober Helpline app for iPhone and iPad. Use the same email address in the app.",
   },
 ];
 
@@ -105,7 +105,7 @@ const faqs = [
     answer: "Private coaching is booked separately. Members save $25 on every session, paying $125 instead of $150.",
   },
   {
-    question: "Do I need a membership to attend The Family Squares on Monday?",
+    question: "Do I need a membership to attend Family Squares on Monday?",
     answer: "No. The live Monday Family Squares meeting remains free. Membership adds the private forum, education library, recordings, guided tools, and coaching discount.",
   },
   {
@@ -114,7 +114,7 @@ const faqs = [
   },
   {
     question: "Who provides the professional guidance?",
-    answer: "Sober Helpline is founder-led by Matt Brown, an interventionist with more than 20 years in recovery work. Matt leads The Family Squares and provides the private family coaching sessions, so families are not passed between unfamiliar providers.",
+    answer: "Sober Helpline is founder-led by Matt Brown, an interventionist with 20+ years of experience. Matt leads Family Squares and provides the private family coaching sessions, so families are not passed between unfamiliar providers.",
   },
 ];
 
@@ -277,10 +277,10 @@ export default function MembershipSalesPage() {
                 <p className="text-sm font-semibold uppercase tracking-wide text-logo-blue">Founder-led support</p>
                 <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">You are not handed off to a stranger</h2>
                 <p className="mt-5 leading-relaxed text-muted-foreground">
-                  Matt Brown leads The Family Squares and provides Sober Helpline's private family coaching. If you move from education to a private session, you work with the same person and do not have to start your story over with a rotating provider.
+                  Matt Brown leads Family Squares and provides Sober Helpline's private family coaching. If you move from education to a private session, you work with the same person and do not have to start your story over with a rotating provider.
                 </p>
                 <p className="mt-4 leading-relaxed text-muted-foreground">
-                  Matt has more than 20 years in recovery work and 22 years of personal sobriety. The service is personal by design: one consistent approach, direct accountability, and clear boundaries about what Sober Helpline can and cannot provide.
+                  Matt has 20+ years of experience and 23 years of personal sobriety. The service is personal by design: one consistent approach, direct accountability, and clear boundaries about what Sober Helpline can and cannot provide.
                 </p>
               </div>
               <div className="grid gap-4 sm:grid-cols-3">

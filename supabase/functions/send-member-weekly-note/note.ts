@@ -202,7 +202,7 @@ export function renderWeeklyNote(d: WeeklyNoteData): { subject: string; html: st
   // Next Monday.
   parts.push(block(
     "Next meeting",
-    `<p style="margin:0;"><strong>The Family Squares</strong> meets ${escapeHtml(formatLongDate(nextMonday))}, 7:00–8:00 PM Pacific. As a member you don't need to register. ${link("/member-home", "Your member home")}</p>`,
+    `<p style="margin:0;"><strong>Family Squares</strong> meets ${escapeHtml(formatLongDate(nextMonday))}, 7:00–8:00 PM Pacific. As a member you don't need to register. ${link("/member-home", "Your member home")}</p>`,
   ));
 
   const html = `

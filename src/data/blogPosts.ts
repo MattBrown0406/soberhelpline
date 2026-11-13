@@ -1886,7 +1886,7 @@ Yes. Many grandparents feel love and resentment at the same time, especially whe
 
 Whether you are raising grandchildren, supporting a loved one in recovery, or just trying to make sense of addiction, you deserve guidance and encouragement. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and a community of families who understand what you are going through.
 
-Explore [one-on-one family coaching](/family-coaching) or the free Monday night [“The Family Squares” support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
+Explore [one-on-one family coaching](/family-coaching) or the free Monday night [Family Squares support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
   },
   {
     id: 193,
@@ -2016,7 +2016,7 @@ Encourage treatment during calm, sober moments, and share specific options when 
 
 You don't have to figure this out alone. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and support designed for brothers, sisters, parents, and everyone who loves someone struggling with addiction.
 
-Explore [sibling support](/sibling-support), [one-on-one family coaching](/family-coaching), or the free Monday night [“The Family Squares” support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
+Explore [sibling support](/sibling-support), [one-on-one family coaching](/family-coaching), or the free Monday night [Family Squares support call](/family-support). You can also find peer support through [Al-Anon](https://al-anon.org/) or [Nar-Anon](https://www.nar-anon.org/).`,
   },
   {
     id: 192,
@@ -2127,7 +2127,7 @@ Codependency can absolutely improve with awareness, practice, and support. Many 
 
 You don’t have to figure this out alone. Explore SoberHelpline.com for ongoing family education, one-on-one coaching, and support designed for families navigating addiction. Whether you’re just starting to recognize codependent patterns or you’re ready to build a healthier way forward, we’re here to help you take the next step.
 
-Explore [family coaching](/family-coaching), join our Monday [“The Family Squares” call](/family-support), or find peer support through [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/).`,
+Explore [family coaching](/family-coaching), join our Monday [Family Squares call](/family-support), or find peer support through [Al-Anon](https://al-anon.org/) and [Nar-Anon](https://www.nar-anon.org/).`,
   },
   {
     id: 191,
@@ -2242,7 +2242,7 @@ Start by modeling the language yourself rather than correcting others in the mom
 
 ## Find Ongoing Support at SoberHelpline.com
 
-Ready to keep learning? Our [family coaching](/family-coaching) offers one-on-one help with communication, boundaries, and your own recovery. Join “The Family Squares,” our free [Monday night family call](/family-support), or connect with [Al-Anon](https://al-anon.org/) for ongoing peer support. Whether you are helping someone you love or looking for help for yourself, you do not have to figure this out alone. Call [458-298-8008](tel:4582988008) to talk about your next step.`,
+Ready to keep learning? Our [family coaching](/family-coaching) offers one-on-one help with communication, boundaries, and your own recovery. Join Family Squares, our free [Monday night family call](/family-support), or connect with [Al-Anon](https://al-anon.org/) for ongoing peer support. Whether you are helping someone you love or looking for help for yourself, you do not have to figure this out alone. Call [458-298-8008](tel:4582988008) to talk about your next step.`,
   },
   {
     id: 190,
@@ -2344,7 +2344,7 @@ What helps most is clear information, honest observation, and steady support. Wh
 
 ## Find Ongoing Support
 
-You do not have to figure this out alone. Our [family coaching](/family-coaching) gives you one-on-one help communicating with confidence and taking care of yourself. You can also join "The Family Squares," our free [Monday night family call](/family-support), and find peer support through [Al-Anon](https://al-anon.org). If you are worried about someone's safety right now, call us at [458-298-8008](tel:4582988008).`,
+You do not have to figure this out alone. Our [family coaching](/family-coaching) gives you one-on-one help communicating with confidence and taking care of yourself. You can also join "Family Squares," our free [Monday night family call](/family-support), and find peer support through [Al-Anon](https://al-anon.org). If you are worried about someone's safety right now, call us at [458-298-8008](tel:4582988008).`,
   },
   {
     id: 189,
@@ -2432,7 +2432,7 @@ It’s natural to feel rejected when someone you love keeps choosing drugs or al
 
 ## Find Ongoing Support
 
-You don't have to make sense of this alone. [Family addiction coaching](/family-coaching) can help you plan hard conversations and boundaries. Join other families on our free Monday night call, “The Family Squares” ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own support.`,
+You don't have to make sense of this alone. [Family addiction coaching](/family-coaching) can help you plan hard conversations and boundaries. Join other families on our free Monday night call, Family Squares ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own support.`,
   },
   {
     id: 188,
@@ -2517,7 +2517,7 @@ Sleep may seem like a small piece of a big problem, but it’s one of the places
 
 ## Find Ongoing Support
 
-You don't have to figure this out alone. If sleepless nights are part of a bigger crisis at home, [family addiction coaching](/family-coaching) can help you build a plan. Join other parents and partners on our free Monday night call, “The Family Squares” ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own rest and support.`,
+You don't have to figure this out alone. If sleepless nights are part of a bigger crisis at home, [family addiction coaching](/family-coaching) can help you build a plan. Join other parents and partners on our free Monday night call, Family Squares ([register here](/family-support)), and consider [Al-Anon](https://al-anon.org) or [Nar-Anon](https://www.nar-anon.org) for your own rest and support.`,
   },
   {
     id: 187,
@@ -2603,7 +2603,7 @@ Most importantly, remember that your child said yes to help. Your calm, informed
 
 ## Get Ongoing Support at Sober Helpline
 
-You don't have to figure out insurance, privacy, and family boundaries on your own. Sober Helpline offers ongoing education, [LINK:one-on-one family coaching:/family-coaching], and the free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to help you stay steady and connected while your loved one heals.`,
+You don't have to figure out insurance, privacy, and family boundaries on your own. Sober Helpline offers ongoing education, [LINK:one-on-one family coaching:/family-coaching], and the free Monday night [LINK:Family Squares:/monday-zoom-registration] call to help you stay steady and connected while your loved one heals.`,
   },
   {
     id: 186,
@@ -2684,7 +2684,7 @@ Gather the facts, talk with HR, and ask the treatment program for help with pape
 
 ## Ready for Support on the Road Ahead?
 
-Balancing work, insurance, and treatment at the same time can feel overwhelming, but you don't have to do it alone. Sober Helpline offers ongoing education, [LINK:one-on-one family coaching:/family-coaching], and the free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call. If the stress is wearing on you, a support group like [LINK:Al-Anon:https://al-anon.org] can help too.
+Balancing work, insurance, and treatment at the same time can feel overwhelming, but you don't have to do it alone. Sober Helpline offers ongoing education, [LINK:one-on-one family coaching:/family-coaching], and the free Monday night [LINK:Family Squares:/monday-zoom-registration] call. If the stress is wearing on you, a support group like [LINK:Al-Anon:https://al-anon.org] can help too.
 
 *This article is for general education and is not legal advice. Employment laws vary by state and situation.*`,
   },
@@ -2778,7 +2778,7 @@ Choosing a health plan may not feel like an act of love, but it can be one. By t
 
 ## Get Ongoing Support From Sober Helpline
 
-Insurance is just one piece of helping someone you love. At Sober Helpline, families find clear education, [LINK:one-on-one family coaching:/family-coaching], and steady support for every stage, including the free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call. If the stress of all this is wearing on you, a support group like [LINK:Al-Anon:https://al-anon.org] can help too. Take your next step with a team that understands what you're going through.`,
+Insurance is just one piece of helping someone you love. At Sober Helpline, families find clear education, [LINK:one-on-one family coaching:/family-coaching], and steady support for every stage, including the free Monday night [LINK:Family Squares:/monday-zoom-registration] call. If the stress of all this is wearing on you, a support group like [LINK:Al-Anon:https://al-anon.org] can help too. Take your next step with a team that understands what you're going through.`,
   },
   {
     id: 184,
@@ -2850,7 +2850,7 @@ You can't guarantee a perfect holiday, and trying to control every variable will
 
 ## You Don't Have to Navigate This Season Alone
 
-Every family's holiday season looks a little different, and there's no single script that works for everyone. If you want help building a plan that fits your situation, explore [LINK:family coaching:/family-coaching] or join [LINK:"The Family Squares" Monday night call:/monday-zoom-registration] for real-time support from other families.`,
+Every family's holiday season looks a little different, and there's no single script that works for everyone. If you want help building a plan that fits your situation, explore [LINK:family coaching:/family-coaching] or join [LINK:Family Squares Monday night call:/monday-zoom-registration] for real-time support from other families.`,
   },
   {
     id: 183,
@@ -2925,7 +2925,7 @@ Twenty-three years into my own recovery, I can tell you what I remember from the
 
 You are allowed to have a good life now, not later, not after, not once they are better. Start with one protected hour this week. Let the guilt show up if it wants to. Go anyway.
 
-If you want ongoing support in building a life that holds both love and joy, Sober Helpline offers family education, [LINK:one-on-one coaching:/family-coaching], and a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call with people who understand exactly where you are. You do not have to figure this out alone, and you do not have to wait.`,
+If you want ongoing support in building a life that holds both love and joy, Sober Helpline offers family education, [LINK:one-on-one coaching:/family-coaching], and a free Monday night [LINK:Family Squares:/monday-zoom-registration] call with people who understand exactly where you are. You do not have to figure this out alone, and you do not have to wait.`,
     tags: ["family education", "self-care", "guilt", "boundaries", "addiction"],
     faqItems: [
       { question: "Is it selfish to be happy when my loved one is still using?", answer: "No. Your happiness does not take anything away from your loved one. Living a full life while holding clear boundaries is one of the healthiest things you can model for someone in active addiction. Selfishness would be ignoring the problem; joy is simply refusing to be consumed by it." },
@@ -3023,7 +3023,7 @@ The goal here isn't to stop caring about your loved one. You won't, and you shou
 
 Learning how to stop obsessing over a loved one's addiction is really about learning to trust that you can respond to whatever comes without rehearsing it a thousand times first. Start with one step this week. That's enough to begin.
 
-You don't have to figure this out alone, and you don't have to wait for your loved one to change before your life gets better. Sober Helpline offers ongoing education, one-on-one family coaching, and a community of people who understand exactly what the worry loop feels like. Join a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or book a coaching session when you're ready.`,
+You don't have to figure this out alone, and you don't have to wait for your loved one to change before your life gets better. Sober Helpline offers ongoing education, one-on-one family coaching, and a community of people who understand exactly what the worry loop feels like. Join a free Monday night [LINK:Family Squares:/monday-zoom-registration] call, or book a coaching session when you're ready.`,
     tags: ["family education", "anxiety", "self-care", "boundaries", "addiction"],
     faqItems: [
       { question: "Why do I constantly think about my loved one's addiction?", answer: "Your brain treats their addiction as an unresolved danger and keeps replaying it in an attempt to solve it. Because you can't control their choices, the loop never closes." },
@@ -3126,7 +3126,7 @@ If you have stopped lecturing, set clear boundaries, and your loved one is still
 
 You lecture because you love someone and you are watching them hurt. That love is not the problem. The delivery is. When you trade the speech for one honest sentence and a real question, you are not going soft. You are becoming the one person in their life who tells the truth without making them defend themselves. That is rare, and it is powerful.
 
-You do not have to figure this out alone. Sober Helpline exists for families exactly where you are, with practical education, [LINK:one-on-one family coaching sessions:/family-coaching], and a community of people learning to talk to the person they love without losing themselves. You can also join a Monday night [LINK:"The Family Squares":/monday-zoom-registration] call and hear how other families handle the same conversations.`,
+You do not have to figure this out alone. Sober Helpline exists for families exactly where you are, with practical education, [LINK:one-on-one family coaching sessions:/family-coaching], and a community of people learning to talk to the person they love without losing themselves. You can also join a Monday night [LINK:Family Squares:/monday-zoom-registration] call and hear how other families handle the same conversations.`,
     tags: ["family communication", "addiction", "boundaries", "family support"],
     faqItems: [
       { question: "Why does my addicted loved one get so defensive when I try to talk to them?", answer: "Defensiveness is a protective response to feeling judged or cornered. When a conversation sounds like an accusation, the brain focuses on self-defense rather than reflection. Shorter statements, open questions, and speaking about your own feelings reduce it." },
@@ -3199,7 +3199,7 @@ If the pattern keeps repeating no matter what you try, that's a signal the two o
 
 The goal is not a perfectly united front. It's a united enough front. If you can agree on the goal, name the handful of decisions that matter, and hold a position you can both keep, you've taken away the thing the addiction was counting on. And you'll have a partner in this instead of an opponent, which matters more than most people realize when the road gets long.
 
-If you and your spouse or co-parent can't seem to get there on your own, that's exactly what [LINK:family coaching:/family-coaching] is for. At Sober Helpline, we help parents build a plan they can both stand behind, with education, coaching, and a community of families who've been where you are. Start with our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or explore [LINK:membership:/family-membership] when you're ready. You don't have to figure this out alone, and you don't have to figure it out perfectly.`,
+If you and your spouse or co-parent can't seem to get there on your own, that's exactly what [LINK:family coaching:/family-coaching] is for. At Sober Helpline, we help parents build a plan they can both stand behind, with education, coaching, and a community of families who've been where you are. Start with our free Monday night [LINK:Family Squares:/monday-zoom-registration] call, or explore [LINK:membership:/family-membership] when you're ready. You don't have to figure this out alone, and you don't have to figure it out perfectly.`,
     faqItems: [
       { question: "What should parents do if they disagree about sending their child to rehab?", answer: "Start by agreeing on what would need to be true for both of you to say yes. Often the hesitant parent isn't against treatment; they're against a specific fear, like cost, distance, or the child's reaction. Name those fears specifically, get real information on each one, and revisit the decision together. A consultation with a treatment professional can also give you a shared set of facts to work from." },
       { question: "What if one parent is enabling and the other one is not?", answer: "Enabling is almost always driven by fear, not weakness, so shaming the enabling parent rarely helps. Instead, figure out what that parent is afraid will happen, address it directly, and build a smaller boundary they can actually keep. A boundary both of you will hold beats a stronger one only one of you will." },
@@ -3298,7 +3298,7 @@ There is a myth that people only change when things fall apart. Some do. Many ot
 
 Speaking up early is not overreacting. It is one of the kindest things you can do. If the conversation goes sideways, that is not the end of the story, and you do not have to walk the rest of it alone.
 
-Sober Helpline exists for exactly this stage, when you know something is off but are not sure what to do yet. Our education library, [LINK:family coaching sessions:/family-coaching], and free Monday night [LINK:"The Family Squares":/monday-zoom-registration] calls can help you find the words and figure out the right next step. Start free and take it from there.`,
+Sober Helpline exists for exactly this stage, when you know something is off but are not sure what to do yet. Our education library, [LINK:family coaching sessions:/family-coaching], and free Monday night [LINK:Family Squares:/monday-zoom-registration] calls can help you find the words and figure out the right next step. Start free and take it from there.`,
     faqItems: [
       { question: "How do I bring up someone's drinking without making them angry?", answer: "Choose a sober, private moment and describe specific things you have observed rather than labeling them. Lead with care, keep it brief, and ask an open question instead of making demands. Some defensiveness is normal; staying calm keeps the door open for later." },
       { question: "Should I wait until I'm sure they have a drinking problem?", answer: "No. You do not need certainty to share a concern. Waiting for proof usually means waiting for things to get worse. If a pattern has started to worry you, that is reason enough to speak up gently." },
@@ -3397,7 +3397,7 @@ You cannot reason with the substance. You can only reach the person, and the per
 
 Get through tonight calmly. Keep them safe. Then, in the daylight, say the true thing once, clearly, with love. That is how families change the pattern, one well-timed conversation at a time.
 
-If you want help preparing for that conversation, Sober Helpline offers ongoing [LINK:family coaching and support:/family-coaching], plus a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call with families who have been exactly where you are.`,
+If you want help preparing for that conversation, Sober Helpline offers ongoing [LINK:family coaching and support:/family-coaching], plus a free Monday night [LINK:Family Squares:/monday-zoom-registration] call with families who have been exactly where you are.`,
     faqItems: [
       { question: "Should I confront my loved one while they are drunk?", answer: "No. Confronting someone while they are intoxicated rarely leads to change and often leads to a fight they will not remember. Keep the moment brief and safe, and have the real conversation when they are sober." },
       { question: "What do I say to someone who is high and wants to argue?", answer: "Use one calm sentence and repeat it as needed: 'I'm not going to talk about this while you're high. We can talk tomorrow.' Then step away. Refusing to argue is a boundary, not a punishment." },
@@ -4018,7 +4018,7 @@ Start with the treatment center's billing department, since they submitted the c
 
 **Keep learning with Sober Helpline**
 
-Understanding the paperwork is one piece of a bigger picture. Our free Monday night "The Family Squares" calls are a good place to start, and [family coaching and membership](/family-membership) gives you a steady place to ask questions as treatment unfolds.`,
+Understanding the paperwork is one piece of a bigger picture. Our free Monday night Family Squares calls are a good place to start, and [family coaching and membership](/family-membership) gives you a steady place to ask questions as treatment unfolds.`,
   },
   {
     id: 171,
@@ -4091,7 +4091,7 @@ Support groups such as [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:htt
 
 You don't have to become an expert in addiction medicine to choose well. You have to ask a few pointed questions and pay attention to how they're answered. A program that welcomes those questions, gives specifics, and treats medication as a clinical decision rather than a moral one is likely thinking clearly about your loved one's care in other areas too.
 
-Navigating the treatment industry is a skill, and you're building it right now. Sober Helpline offers ongoing education, [LINK:family coaching and membership:/family-coaching], and a community of people walking exactly this road. Join one of our free Monday night "The Family Squares" calls to talk it through with people who understand.
+Navigating the treatment industry is a skill, and you're building it right now. Sober Helpline offers ongoing education, [LINK:family coaching and membership:/family-coaching], and a community of people walking exactly this road. Join one of our free Monday night Family Squares calls to talk it through with people who understand.
 
 **Frequently Asked Questions About MAT in Rehab**
 
@@ -7054,7 +7054,7 @@ This is exactly the work we do at SoberHelpline. You don't have to figure out th
 
 Denial can make you feel invisible — like everything you say bounces off. But people in recovery consistently tell a different story. They remember the calm conversations. They remember who told them the truth with love instead of anger. When the moment of willingness finally came, they knew exactly who was safe to call.
 
-Keep being that person. Speak honestly, hold your boundaries, take care of yourself, and trust that seeds are being planted even when nothing looks like it's growing. If you'd like guidance for your specific situation — the exact words, the family strategy, the next step — explore the coaching, education, and community at SoberHelpline.com. Join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to connect with other families who genuinely understand. You don't have to do this alone.`,
+Keep being that person. Speak honestly, hold your boundaries, take care of yourself, and trust that seeds are being planted even when nothing looks like it's growing. If you'd like guidance for your specific situation — the exact words, the family strategy, the next step — explore the coaching, education, and community at SoberHelpline.com. Join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call to connect with other families who genuinely understand. You don't have to do this alone.`,
     tags: ["family education", "denial", "communication", "addiction", "boundaries"],
     faqItems: [
       { question: "Why do addicts deny they have a problem?", answer: "Denial is a psychological defense that protects the person from a painful truth, and substance use itself impairs the brain's ability to self-assess. Most people in denial aren't simply lying — they're protecting themselves from a reality that feels unbearable to face." },
@@ -7145,7 +7145,7 @@ If your loved one ever mentions harming themselves, take it seriously — respon
 
 The money conversation is really a love conversation in disguise. Your loved one is asking, "Will you rescue me?" and the most loving long-term answer is, "No — but I will walk with you toward something better." That answer takes practice, and it is far easier with people beside you who understand.
 
-That is what we do at SoberHelpline.com. Our education library, [LINK:family coaching and support membership:/family-coaching], and community exist to help you find the words, hold the line, and keep loving your person through it. You do not have to figure this out alone — join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to start.`,
+That is what we do at SoberHelpline.com. Our education library, [LINK:family coaching and support membership:/family-coaching], and community exist to help you find the words, hold the line, and keep loving your person through it. You do not have to figure this out alone — join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call to start.`,
     tags: ["family education", "enabling", "boundaries", "addiction", "money"],
     faqItems: [
       { question: "Should I give money to a family member with addiction?", answer: "Direct cash to someone in active addiction almost always supports the addiction, even when the stated need is real. Meet needs directly instead — buy the groceries, pay the treatment program, offer the ride. Your generosity stays; the cash pipeline closes." },
@@ -7237,7 +7237,7 @@ Either way, the family should debrief afterward — what worked, what didn't, an
 
 Here is the truth that takes the pressure off: there is no perfect script, and you will not say everything exactly right. What your loved one will remember is not your wording. It is that the people who love them sat down together, told the truth with kindness, and offered a way forward. That is something no addiction can easily argue with. Take a breath, prepare well, and trust that showing up with love and a plan is enough to begin.
 
-A family meeting is one conversation in a longer journey — and you don't have to navigate that journey alone. Explore our [LINK:family education library:/family-education], book a [LINK:family coaching session:/family-coaching], or join our free [LINK:"The Family Squares":/monday-zoom-registration] support call every Monday night. Your family's voice is stronger together — let us help you use it.`,
+A family meeting is one conversation in a longer journey — and you don't have to navigate that journey alone. Explore our [LINK:family education library:/family-education], book a [LINK:family coaching session:/family-coaching], or join our free [LINK:Family Squares:/monday-zoom-registration] support call every Monday night. Your family's voice is stronger together — let us help you use it.`,
     tags: ["family meeting", "addiction conversation", "family intervention", "family recovery", "boundaries"],
     faqItems: [
       { question: "What is the difference between a family meeting and an intervention?", answer: "A family meeting is a calm, planned conversation where the family shares concerns and asks a loved one to take a next step, such as an assessment or counseling. An intervention is a more structured, often professionally led event used when a loved one is in denial or crisis, and it typically includes specific consequences if help is refused." },
@@ -7324,7 +7324,7 @@ Cross-addiction sounds discouraging, but understand what it actually reveals: yo
 
 Families who learn this pattern stop chasing individual behaviors and start supporting the deeper change — and that shift, more than any confrontation about a gaming habit, is what helps recovery take root. You don't have to have this conversation perfectly. You just have to have it honestly, and you don't have to do it alone.
 
-If any of this sounds like your household, explore our [LINK:family education library:/family-education] and [LINK:one-on-one family coaching:/family-coaching] for guidance built for exactly this stage of recovery. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call — a no-commitment place to start with families walking the same road.`,
+If any of this sounds like your household, explore our [LINK:family education library:/family-education] and [LINK:one-on-one family coaching:/family-coaching] for guidance built for exactly this stage of recovery. You can also join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call — a no-commitment place to start with families walking the same road.`,
     tags: ["cross-addiction", "addiction transfer", "family education", "early recovery", "relapse prevention"],
     faqItems: [
       { question: "What is cross-addiction in simple terms?", answer: "Cross-addiction is when someone recovering from one addiction develops a compulsive relationship with a different substance or behavior — like an alcoholic who stops drinking and starts gambling compulsively. The substance changes, but the addictive pattern stays the same." },
@@ -7414,7 +7414,7 @@ If you take one thing from this article, take this: the fact that your loved one
 
 You don't have to wait for the wheels to come off, and you don't have to figure this out alone. Trust what you see. Start where you are.
 
-If any of this sounded like your kitchen table, don't file it away for later. Explore our [LINK:family education library:/family-education] and [LINK:one-on-one family coaching:/family-coaching] for ongoing support built for families in exactly this position. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call — no commitment, just a place to start — or connect with peer communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org].`,
+If any of this sounded like your kitchen table, don't file it away for later. Explore our [LINK:family education library:/family-education] and [LINK:one-on-one family coaching:/family-coaching] for ongoing support built for families in exactly this position. You can also join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call — no commitment, just a place to start — or connect with peer communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org].`,
     tags: ["high-functioning addiction", "family education", "denial", "alcohol use disorder", "early intervention"],
     faqItems: [
       { question: "Is high-functioning addiction a real diagnosis?", answer: "No. Clinicians diagnose substance use disorder on a spectrum of mild, moderate, or severe based on specific criteria. \"High-functioning\" simply describes someone whose external life hasn't visibly collapsed. A person can be high-functioning and still have a severe substance use disorder." },
@@ -7499,7 +7499,7 @@ A ten-minute phone call to your insurer and a few direct questions to the treatm
 
 Navigating in-network vs out-of-network rehab decisions can feel like a second full-time job at the worst possible moment. Take a breath. You do not have to get every detail perfect — ask direct questions, write down the answers, and choose the best available option for your loved one and your finances. The fact that you are researching this carefully means your loved one already has an advocate most people never get.
 
-If you want help thinking through treatment options, insurance questions, or how to talk with your loved one about getting help, our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] offer ongoing education and one-on-one support built for families exactly where you are. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or connect with peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org]. You do not have to figure this out alone.`,
+If you want help thinking through treatment options, insurance questions, or how to talk with your loved one about getting help, our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] offer ongoing education and one-on-one support built for families exactly where you are. You can also join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call, or connect with peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org]. You do not have to figure this out alone.`,
     tags: ["treatment", "insurance", "rehab costs", "single case agreement", "family support"],
     faqItems: [
       { question: "Is out-of-network rehab covered by insurance?", answer: "Sometimes. PPO plans usually include out-of-network benefits with a higher deductible and coinsurance, while HMO and EPO plans generally cover out-of-network treatment only in emergencies. Call member services to confirm before assuming coverage either way." },
@@ -7579,7 +7579,7 @@ FMLA protects the job, but the leave itself is unpaid. Several other workplace b
 
 Fear of job loss keeps people sick. But the reality is that federal law, state law, and most employer benefit packages are built to support treatment, not punish it. If you or someone you love has been putting off getting help because of work, the path is clearer than it feels: confirm FMLA eligibility, loop in the EAP, verify short-term disability, and let the treatment program's admissions team handle the paperwork alongside you. People go to treatment and return to their careers every single day. Recovery and employment are not competing goals — protecting one is how you protect the other.
 
-Navigating leave, insurance, and treatment decisions is a lot to carry alone — and you don't have to. Our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] help families build a plan that protects your loved one, your family, and your future. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call, or explore our guide to [LINK:questions to ask a treatment center:/treatment-questions] before you commit. Peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org] can also help family members through this stretch.`,
+Navigating leave, insurance, and treatment decisions is a lot to carry alone — and you don't have to. Our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] help families build a plan that protects your loved one, your family, and your future. You can also join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call, or explore our guide to [LINK:questions to ask a treatment center:/treatment-questions] before you commit. Peer support communities like [LINK:Al-Anon:https://al-anon.org] and [LINK:Nar-Anon:https://www.nar-anon.org] can also help family members through this stretch.`,
     tags: ["treatment", "FMLA", "job protection", "insurance", "family support"],
     faqItems: [
       { question: "Does FMLA cover going to rehab?", answer: "Yes. Substance use disorder is a serious health condition under FMLA, and eligible employees can take up to 12 weeks of unpaid, job-protected leave for inpatient or outpatient addiction treatment provided by a healthcare provider." },
@@ -7667,7 +7667,7 @@ Healing starts with separating what is actually yours to carry from what never w
 
 The child who held your family together deserved protection, not a job. And the adult reading this deserves a life that isn't organized around someone else's addiction. Letting go of the caretaker role doesn't mean you love your person any less — it means you're finally including yourself among the people worth taking care of. Start small, stay decided, and let someone help you for a change.
 
-If you're ready for guidance, our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] are built for exactly this — untangling old roles, setting limits that hold, and getting your life back. You can also join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call and land somewhere steady while you find your footing.`,
+If you're ready for guidance, our [LINK:family coaching:/family-coaching] and [LINK:family education library:/family-education] are built for exactly this — untangling old roles, setting limits that hold, and getting your life back. You can also join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call and land somewhere steady while you find your footing.`,
     tags: ["family recovery", "parentification", "adult children", "codependency", "enabling"],
     faqItems: [
       { question: "What is parentification in simple terms?", answer: "Parentification is a role reversal where a child takes on adult responsibilities — practical tasks, emotional caretaking, or both — because the adults in the home are unable to. In addicted families it's common, because the addiction consumes the parents' capacity and a child fills the gap." },
@@ -7832,7 +7832,7 @@ For families, the hardest part is often the drive home. That quiet can feel like
 
 Getting someone to the point of admission takes more than most people realize. If that day is close, take a breath: the process is more predictable than it feels right now. You do not have to know everything — just take the next step, and then the one after that.
 
-Stay decided. The center's job is to treat your loved one. Your job is to hand them off well and then take care of yourself so you can be steady for the long road of recovery ahead. If you want a place to land after that drive home, join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call or talk with our [LINK:family coaching team:/family-coaching] — they have walked this exact stretch with hundreds of families.`,
+Stay decided. The center's job is to treat your loved one. Your job is to hand them off well and then take care of yourself so you can be steady for the long road of recovery ahead. If you want a place to land after that drive home, join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call or talk with our [LINK:family coaching team:/family-coaching] — they have walked this exact stretch with hundreds of families.`,
     tags: ["treatment", "rehab admissions", "family support", "intake day", "insurance"],
     faqItems: [
       { question: "How long does the rehab admissions process take?", answer: "It can take anywhere from a few hours to a few days. When a bed is available and the situation is urgent, some centers admit the same day. Insurance verification and clinical assessment are usually what determine the timeline." },
@@ -8128,7 +8128,7 @@ Recovery is not the absence of temptation. It's the ability to face temptation a
 
 Navigating your loved one's recovery — through summer, holidays, and every ordinary Tuesday in between — is one of the hardest things a family can do. It requires patience with your loved one and with yourself.
 
-If you're looking for ongoing education, support, and practical guidance, SoberHelpline.com is here for you. From [family coaching sessions](/family-coaching) to a supportive membership community and our free Monday night ["The Family Squares"](/monday-zoom-registration) call, you'll find real help from people who understand what you're going through.
+If you're looking for ongoing education, support, and practical guidance, SoberHelpline.com is here for you. From [family coaching sessions](/family-coaching) to a supportive membership community and our free Monday night [Family Squares](/monday-zoom-registration) call, you'll find real help from people who understand what you're going through.
 
 This summer can be different. For your loved one — and for your whole family.`,
     faqItems: [
@@ -8960,7 +8960,7 @@ You don't need a medical degree to use this knowledge well. A few practical shif
 
 Tolerance and withdrawal aren't moral failings — they're biology doing what biology does. That doesn't mean there's nothing you can do, and it doesn't mean your loved one is off the hook for their choices. It means the path forward usually requires more than willpower: it requires the right kind of support, often medical, often professional, and almost always sustained over time.
 
-You don't have to figure this out alone. SoberHelpline.com offers ongoing education, coaching, and a community of families who understand exactly what you're carrying — including free Monday night [LINK:"The Family Squares":/monday-zoom-registration] calls where you can ask questions and hear from others walking the same road.`,
+You don't have to figure this out alone. SoberHelpline.com offers ongoing education, coaching, and a community of families who understand exactly what you're carrying — including free Monday night [LINK:Family Squares:/monday-zoom-registration] calls where you can ask questions and hear from others walking the same road.`,
     tags: ["family education", "tolerance", "withdrawal", "medical detox", "addiction"],
     faqItems: [
       { question: "Is it dangerous to stop drinking or using drugs suddenly?", answer: "For some substances — especially alcohol and benzodiazepines — yes, it can be medically dangerous and in rare cases life-threatening due to seizure risk. Opioid withdrawal is rarely fatal on its own but can be severe and is often a major relapse trigger. Anyone considering stopping after heavy or prolonged use should talk to a medical professional first." },
@@ -9031,7 +9031,7 @@ Relapse is hard — for the person living it and for everyone who loves them. Bu
 
 **Keep Learning, Keep Going**
 
-If you're navigating a relapse — or trying to prevent one — you don't have to figure it out alone. SoberHelpline.com offers ongoing education, family coaching, and a free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call for families facing exactly this. Come as you are.`,
+If you're navigating a relapse — or trying to prevent one — you don't have to figure it out alone. SoberHelpline.com offers ongoing education, family coaching, and a free Monday night [LINK:Family Squares:/monday-zoom-registration] call for families facing exactly this. Come as you are.`,
     tags: ["family education", "relapse", "brain science", "recovery", "addiction"],
     faqItems: [
       { question: "Does relapse mean treatment didn't work?", answer: "No. Relapse rates for addiction are similar to those of other chronic illnesses, and a relapse is often a signal that the treatment plan needs to be adjusted — not that it failed entirely. Many people who relapse go on to build lasting recovery, often with a stronger plan in place." },
@@ -12478,83 +12478,62 @@ Recovery is possible, and you don't have to navigate this alone. Understanding y
   },
   {
     id: 93,
-    title: "Sober Helpline: Free, Confidential Support Available 24/7",
-    excerpt: "If you or someone you love is struggling with addiction, you don't have to figure it out alone. A sober helpline is one of the most immediate and accessible resources available — a phone call or chat that connects you with a trained counselor who can listen without judgment.",
+    title: "What Sober Helpline Is, and How to Get Help From Us",
+    excerpt: "Sober Helpline is family support for people who love someone with an addiction, led by interventionist Matt Brown. Here is what we offer, what is free, how to reach us, and where to turn in an emergency.",
     author: "Sober Helpline",
     date: "2026-03-09",
     category: "Getting Help",
     image: soberHelplineFreeSupport,
     slug: "sober-helpline-free-confidential-support",
-    seoTitle: "Sober Helpline: Free, Confidential Addiction Support 24/7",
-    metaDescription: "Call the Sober Helpline for free, confidential addiction support available 24/7. Trained counselors help with substance use, treatment referrals, and family guidance.",
-    keywords: ["sober helpline", "addiction helpline", "free addiction support", "drug and alcohol helpline", "substance abuse hotline", "24/7 addiction help", "confidential addiction support"],
-    content: `If you or someone you love is struggling with addiction, you don't have to figure it out alone. A sober helpline is one of the most immediate and accessible resources available — a phone call or chat that connects you with a trained counselor who can listen without judgment, answer your questions, and help you find the right path forward. At SoberHelpline.com, our goal is simple: make it easier for anyone dealing with substance use disorder to get real help, right now. Whether you're not sure if your drinking has become a problem, you're watching a family member spiral, or you're ready to enter treatment today, we're here.
+    seoTitle: "Sober Helpline: What We Offer Families and How to Reach Us",
+    metaDescription: "Sober Helpline is family addiction support led by interventionist Matt Brown: a free Monday meeting, free guides, private coaching and intervention help. It is not a 24/7 crisis line.",
+    keywords: ["sober helpline", "family addiction support", "free family support meeting", "addiction help for families", "family addiction coaching", "intervention help"],
+    content: `If someone you love is struggling with addiction, you do not have to work out the next step by yourself. Sober Helpline exists for the family: the parent, spouse, sibling or adult child who is trying to help and is worn out from guessing.
 
-**What Is a Sober Helpline?**
+This page explains plainly what Sober Helpline is, what is free, how to reach us, and what we are not.
 
-A sober helpline — also called an addiction helpline, drug and alcohol helpline, or substance abuse hotline — is a dedicated phone line or chat service staffed by counselors trained in substance use disorder. Callers can access support any time of day or night, completely free of charge and in total confidence.
+**What Sober Helpline Is**
 
-Helplines are not the same as emergency services or crisis lines, though they may connect you with those resources if needed. They exist specifically to provide compassionate, non-judgmental listening; accurate information about addiction and treatment options; help navigating insurance, rehab, and recovery resources; support for family members of people struggling with addiction; and guidance through the first steps toward sobriety.
+Sober Helpline is a family support service founded and led by Matt Brown, a professional interventionist with 20+ years of experience and 23 years of personal sobriety. It is small on purpose. When you get help here, you are dealing with one consistent approach, not a call center.
 
-**Who Should Call a Sober Helpline?**
+**What Sober Helpline Is Not**
 
-There is no threshold you need to reach before you deserve support. You don't have to hit rock bottom. You don't have to be in crisis. If substances are causing problems in your life — or in the life of someone you care about — that's reason enough to reach out.
+Sober Helpline is not an emergency service, and it is not staffed around the clock. There is no room of counselors waiting by the phone in the middle of the night.
 
-People Who Are Questioning Their Use: Maybe you've started to notice that drinking or drug use is affecting your sleep, your work, or your relationships. Maybe you've tried to cut back and found it harder than you expected. A counselor can help you get an honest picture of where you are and what options are available.
+- If someone is in immediate danger, call 911.
+- For a suicidal crisis or a mental health emergency, call or text 988.
+- For free treatment referrals at any hour, call the SAMHSA National Helpline at 1-800-662-4357.
 
-People Ready to Start Treatment: If you've made the decision to get sober and want help finding a detox center, rehab program, or outpatient treatment, we can help you navigate those options — including understanding insurance coverage, what to expect in treatment, and how to take the first step today.
+**What Is Free**
 
-Family Members and Loved Ones: Addiction affects the whole family. If you're watching someone you love struggle, a sober helpline can help you understand what you're dealing with, learn how to set healthy boundaries, and find out how to encourage your loved one toward treatment — without enabling their use or burning yourself out in the process.
+- Family Squares: a free family support meeting on Zoom every Monday at 7:00 PM Pacific. You can listen with your camera off or ask a question. [LINK:Save a spot for Monday:/family-squares].
+- Guides and articles for families, including [LINK:what to do tonight:/what-to-do-tonight] when things are tense at home.
+- Self-assessments that help you see where things stand, such as the [LINK:enabling self-assessment:/enabling-self-assessment].
+- A directory of treatment providers you can [LINK:search at no cost:/recovery-resources].
 
-People in Early Recovery: Recovery doesn't end when treatment does. If you're newly sober and struggling — craving, lonely, anxious, or unsure what to do next — reaching out to a helpline can provide grounding support and connect you with ongoing community resources.
+**How to Reach Us**
 
-**What Happens When You Call a Sober Helpline?**
+Call (458) 298-8008 for family guidance. If no one is free to talk when you call, leave your name and number and you will get a call back.
 
-Many people hesitate to call because they don't know what to expect. Here's what a typical call looks like:
+If you would like a set time, [LINK:book a private coaching session:/family-consultation]. Sessions are 60 minutes by video with Matt Brown and cost $150, or $125 for members.
 
-First, a trained counselor will answer — a real person, not a recording. They'll ask a few gentle questions to understand your situation: what you're using, how long it's been going on, what you're hoping to find. You're never required to share more than you're comfortable with.
+**When Your Family Needs More**
 
-From there, the conversation goes where you need it to. Some callers want to talk through their feelings. Others want specific referrals to local treatment programs. Some are calling on behalf of a loved one and need guidance on how to approach a difficult conversation.
+- Family membership: 60+ guides, tools and guided meditations, a private family forum, and recordings of past Family Squares meetings. Seven days free, then $9.99 a month. [LINK:See what membership includes:/family-membership].
+- Private coaching: one conversation about your family's situation, and a clear next step at the end of it.
+- Intervention help: if your loved one keeps refusing treatment or the risk is rising, [LINK:check intervention readiness:/intervention-help].
 
-Whatever you need, there's no script, no pressure, and no judgment. Calls are confidential. We will never share your information without your consent.
+**Who This Is For**
 
-**Is Calling a Helpline Enough to Get Sober?**
+Sober Helpline is built for family members. If you are the one struggling with alcohol or drugs and you want treatment, the SAMHSA helpline above and the [LINK:provider directory:/recovery-resources] are the faster routes.
 
-A helpline is a starting point, not a complete treatment program. Addiction — formally called Substance Use Disorder (SUD) — is a chronic condition that affects brain chemistry and behavior. Most people with moderate to severe addiction benefit from structured treatment, which may include medically supervised detox, inpatient or outpatient rehabilitation, and ongoing support like therapy or peer recovery groups.
+**Is It Confidential?**
 
-That said, the phone call matters enormously. Research shows that early engagement with support — even just one conversation — increases the likelihood that someone will follow through on treatment. Simply making the call is a meaningful act of self-advocacy, and counselors are experienced at helping callers take that next step.
+Yes. What you tell us stays private. Family Squares meetings are recorded for members, and you are welcome to keep your camera off and use only a first name.
 
-**Types of Addiction Help Available Through a Helpline**
+**Start With One Step**
 
-When you call SoberHelpline.com, counselors can connect you with a wide range of treatment and recovery resources, including medical detox programs for safe withdrawal from alcohol, opioids, benzodiazepines, and other substances; inpatient rehab providing intensive, structured care; outpatient programs (IOP/PHP) you can attend while living at home; Medication-Assisted Treatment (MAT) using FDA-approved medications like buprenorphine or naltrexone; sober living homes for supportive housing during early recovery; 12-step and non-12-step support groups including AA, NA, SMART Recovery, and others; mental health co-occurring treatment for addiction alongside anxiety, depression, trauma, or other conditions; and family support programs including Al-Anon, Nar-Anon, and family therapy.
-
-**How to Know What Kind of Help Is Right for You**
-
-Addiction treatment is not one-size-fits-all. The right level of care depends on several factors: the substance involved, the severity of use, co-occurring mental health conditions, your home environment, your work or family responsibilities, and your treatment history.
-
-Counselors on our helpline are trained to help you understand these factors and identify what level and type of care is the best fit for your situation. You don't need to come in with all the answers. You just need to make the call.
-
-**Frequently Asked Questions**
-
-Is the sober helpline really free? Yes. Calling SoberHelpline.com costs nothing. There is no charge to speak with a counselor, receive referrals, or access information about treatment options.
-
-Is my call confidential? Absolutely. Your call is completely confidential. We do not share your information with employers, family members, or any third parties without your explicit consent. The only exception would be if there is an imminent risk of harm to yourself or others.
-
-What if I'm not ready for rehab — can I still call? Yes. You don't have to be ready to commit to treatment to call. Many people call simply to talk through their situation, understand their options, or figure out how to help a loved one. Wherever you are in your journey, there's no wrong time to reach out.
-
-Can a family member call on behalf of someone with addiction? Yes. Family members, friends, and concerned loved ones call helplines regularly. Counselors can help you understand how to approach your loved one, how to set healthy limits, how to stage an intervention, and how to care for your own wellbeing while supporting someone in addiction.
-
-What if I've tried treatment before and relapsed? Relapse is a common part of the recovery process — not a sign of failure. The National Institute on Drug Abuse estimates that 40 to 60 percent of people in recovery experience at least one relapse. Counselors understand this, and there's no judgment. They can help you reassess your treatment plan and find a stronger path forward.
-
-Do you help with all types of substance use? Yes. Our counselors are trained to assist with all forms of substance use disorder, including alcohol, opioids (heroin, prescription painkillers), stimulants (meth, cocaine), benzodiazepines, marijuana, and more. We also provide support for people dealing with multiple substances.
-
-**You Deserve Support — Right Now**
-
-Asking for help is not weakness. It is, in fact, one of the most courageous things a person can do. Addiction is a medical condition — not a character flaw, not a choice, and not something you should have to navigate on your own.
-
-Whether you're taking the first step, navigating a relapse, supporting a loved one, or just trying to understand what's happening, SoberHelpline.com is here. Free. Confidential. Available right now.
-
-Make the call. You're not alone in this.`
+You do not need a plan before you reach out. Come to a Monday meeting, read one guide, or call and leave a message. Any one of those is a real start.`
   },
   {
     id: 92,
@@ -23897,7 +23876,7 @@ Prior authorization is one of the most frustrating parts of getting a loved one 
 
 The families who get their loved ones into treatment are not always the ones with the best insurance. They're the ones who kept making calls, kept asking questions, and refused to take the first "no" as the last word.
 
-At SoberHelpline.com, our coaches work with families every day to help them understand their insurance options, advocate for their loved ones, and make informed decisions about treatment. Whether you're just starting to research or you've already hit your first denial, we're here to help you take the next right step.
+At SoberHelpline.com, we work with families every day to help them understand their insurance options, advocate for their loved ones, and make informed decisions about treatment. Whether you're just starting to research or you've already hit your first denial, we're here to help you take the next right step.
 
 Visit [LINK:SoberHelpline.com:/family-coaching] to explore our family coaching services, join our [LINK:membership community:/family-membership], or sign up for our free Monday night [LINK:Family Squares support call:/monday-zoom-registration]. You've already done the hardest part — deciding that something needs to change. Let us help you figure out what comes next.
 
@@ -24701,7 +24680,7 @@ You won't get it right every time. Nobody does. But showing up with even a littl
 
 At Sober Helpline, families get more than information — they get ongoing support, personal coaching, and a community of people who understand exactly what you're going through. Whether you're just learning about addiction or you've been living with it for years, help is here.
 
-Explore [LINK:family education resources:/family-education], [LINK:join "The Family Squares" community:/family-squares], or [LINK:book a one-on-one coaching session:/family-coaching] with Matt Brown.`,
+Explore [LINK:family education resources:/family-education], [LINK:join Family Squares community:/family-squares], or [LINK:book a one-on-one coaching session:/family-coaching] with Matt Brown.`,
     image: shameAddictionCycleFamilyImg,
     keywords: ["shame and addiction", "shame addiction cycle", "shame and addiction recovery", "guilt vs shame addiction", "how to support loved one addiction without shame"],
     tags: ["shame", "family education", "addiction recovery", "communication", "boundaries"],
@@ -25111,7 +25090,7 @@ If you've also been struggling with the line between supporting and enabling, ou
 
 You didn't cause your loved one's addiction, and you can't fix it by finding exactly the right thing to say. But how you communicate — and how you take care of yourself in the process — does matter. It shapes the relationship, your own well-being, and sometimes, over time, what your loved one is willing to hear.
 
-If you've been having the same exhausting conversations with nothing changing, you don't have to keep doing it alone. SoberHelpline.com offers family coaching, education, and a community of people navigating exactly what you're going through. Join our free Monday night "The Family Squares" call to connect with other families who understand — and stop trying to find the right words in isolation.`,
+If you've been having the same exhausting conversations with nothing changing, you don't have to keep doing it alone. SoberHelpline.com offers family coaching, education, and a community of people navigating exactly what you're going through. Join our free Monday night Family Squares call to connect with other families who understand — and stop trying to find the right words in isolation.`,
     image: productiveConversationAboutAddictionImg,
     keywords: ["how to have a conversation about addiction without fighting", "talking to an addicted loved one", "communication addiction family", "what to say to someone struggling with addiction", "productive conversation addiction"],
     tags: ["communication", "family education", "boundaries", "addiction"],
@@ -25198,7 +25177,7 @@ Ambiguous grief asks something very hard of families: to stay present with loss 
 
 But you don't have to carry it silently, or alone, or until the situation resolves. You can grieve what has been lost. You can acknowledge the love that makes this hard. You can take care of yourself right now — not as a betrayal of your loved one, but as a commitment to your own life and the people who depend on you.
 
-If you're looking for a place where your grief is understood — where you can connect with others who get it, access coaching from someone who has been in the middle of this work for 20+ years, and find practical support at every step — SoberHelpline.com was built for exactly this. Join our free Monday night [LINK:"The Family Squares":/monday-zoom-registration] call to connect with other families who genuinely understand. You don't have to wait for things to get better over there before things get better for you.`,
+If you're looking for a place where your grief is understood — where you can connect with others who get it, access coaching from someone who has been in the middle of this work for 20+ years, and find practical support at every step — SoberHelpline.com was built for exactly this. Join our free Monday night [LINK:Family Squares:/monday-zoom-registration] call to connect with other families who genuinely understand. You don't have to wait for things to get better over there before things get better for you.`,
     image: ambiguousGriefLovingSomeoneAddictionImg,
     keywords: ["grief when loved one is addicted", "ambiguous grief addiction", "ambiguous loss addiction", "grieving someone still alive", "family grief addiction"],
     tags: ["family education", "grief", "ambiguous loss", "addiction", "mental health"],

@@ -45,7 +45,7 @@ function buildEmail(firstName: string, joinUrl: string, externalZoomLink: string
   return `
 <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#1f2937;">
   <h1 style="color:#1e3a5f;">Hi ${escapeHtml(firstName)},</h1>
-  <p>Thanks for your patience last week — I was on a plane to Texas helping a family with an intervention during our normal meeting time, so we had to cancel <strong>"The Family Squares"</strong> on July 6.</p>
+  <p>Thanks for your patience last week — I was on a plane to Texas helping a family with an intervention during our normal meeting time, so we had to cancel <strong>Family Squares</strong> on July 6.</p>
   <p><strong>Good news: we're back to our regular schedule this Monday, July 13 at 7:00 PM PT.</strong></p>
   <div style="background-color:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:20px;margin:24px 0;text-align:center;">
     <h2 style="margin:0 0 10px;color:#166534;">✅ You're Already Registered</h2>
@@ -148,7 +148,7 @@ serve(async (req: Request) => {
       const html = buildEmail(first, joinUrl, externalZoomLink, meetingId, passcode);
       results[u.email] = await sendEmail(
         u.email,
-        "We're back Monday — you're registered for 'The Family Squares' (7/13 @ 7 PM PT)",
+        "We're back Monday — you're registered for 'Family Squares' (7/13 @ 7 PM PT)",
         html,
       );
     }

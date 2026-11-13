@@ -89,7 +89,7 @@ const weekItems: ChecklistItem[] = [
       "If the treatment center offers a family program — family therapy, education sessions, multi-family groups — you attend. All of it. This is not a nice-to-have. Research consistently shows that family involvement during treatment is one of the strongest predictors of long-term recovery. These programs teach you things you need to know: what enabling looks like in recovery (it changes form), how to communicate without triggering, what to expect in early recovery, and how to set boundaries that support sobriety instead of undermining it. If you can't attend in person, ask about virtual options. If the facility doesn't offer a family program, find one independently. Al-Anon, our Monday support group, or a family therapist who specializes in addiction.",
     icon: Users,
     extraLinks: [
-      { text: "Join Our Free Weekly Support Group", url: "/monday-zoom-registration" },
+      { text: "Join Family Squares, Our Free Monday Meeting", url: "/monday-zoom-registration" },
     ],
   },
   {
@@ -110,10 +110,10 @@ const weekItems: ChecklistItem[] = [
     id: "support-network",
     title: "Start building your support network",
     description:
-      "You've been the crisis manager. Now you need support — not for them, for YOU. During treatment is the best time to start because you're not putting out fires for once. Options: a therapist who understands addiction and family systems (not just any therapist — one who specializes), Al-Anon or Nar-Anon meetings, our weekly support group, a faith community if that's meaningful to you, or even just one friend who gets it and won't judge. You need at least one person you can call at 11 PM when things get hard. Line that up now.",
+      "You've been the crisis manager. Now you need support — not for them, for YOU. During treatment is the best time to start because you're not putting out fires for once. Options: a therapist who understands addiction and family systems (not just any therapist — one who specializes), Al-Anon or Nar-Anon meetings, Family Squares (our free Monday meeting), a faith community if that's meaningful to you, or even just one friend who gets it and won't judge. You need at least one person you can call at 11 PM when things get hard. Line that up now.",
     icon: Heart,
     extraLinks: [
-      { text: "Join Our Free Weekly Support Group", url: "/monday-zoom-registration" },
+      { text: "Join Family Squares, Our Free Monday Meeting", url: "/monday-zoom-registration" },
     ],
   },
 ];
@@ -264,14 +264,14 @@ const RoadmapTreatment = () => {
                   This is not you being difficult. This is your nervous system doing the only thing it knows how to do. Recognize it for what it is — and resist the urge to act on it. This is the time to turn toward your own recovery process. Let the professionals care for your loved one. Your job right now is to start caring for yourself.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you haven't already, this may be the perfect time to join our free “The Family Squares” Zoom. You'll be with other families who understand exactly what you're feeling — many of them in this same stage. You don't have to talk. You just have to show up.
+                  If you haven't already, this may be the perfect time to join our free Family Squares Zoom. You'll be with other families who understand exactly what you're feeling — many of them in this same stage. You don't have to talk. You just have to show up.
                 </p>
                 <Link
                   to="/monday-zoom-registration"
                   className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2"
                 >
                   <Video className="w-4 h-4" />
-                  Register for “The Family Squares” — 7:00 PM Pacific
+                  Register for Family Squares — 7:00 PM Pacific
                 </Link>
               </div>
             </div>
@@ -461,7 +461,7 @@ const RoadmapTreatment = () => {
                 className="flex items-center gap-2 text-sm text-primary hover:underline py-1"
               >
                 <Video className="w-3.5 h-3.5 flex-shrink-0" />
-                Weekly Support Group — Monday 7:00 PM Pacific
+                Family Squares — Mondays, 7:00 PM Pacific
               </Link>
               <a
                 href="tel:4582988008"

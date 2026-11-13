@@ -454,7 +454,7 @@ function FamilyMembershipCheckout() {
                 Membership gives your family a steadier place to learn, ask better questions, and make calmer decisions when things feel heavy.
               </p>
               <p className="text-sm text-muted-foreground max-w-xl mx-auto mt-3">
-                If you want the simplest first step, start with the free Monday Zoom. Membership is the next layer of support. Private coaching is there later when you want one-on-one help.
+                If you want the simplest first step, start with the free Family Squares meeting. Membership is the next layer of support. Private coaching is there later when you want one-on-one help.
               </p>
             </div>
 

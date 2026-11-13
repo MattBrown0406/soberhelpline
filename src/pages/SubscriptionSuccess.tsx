@@ -134,7 +134,7 @@ export default function SubscriptionSuccess() {
             </Button>
             <div className="rounded-lg border p-4 text-center">
               <p className="mb-2 text-sm text-muted-foreground">
-                Your membership also works in the Sober Helpline app. Use this same email address there.
+                Your membership also works in the Sober Helpline app for iPhone and iPad. Use this same email address there.
               </p>
               <div className="flex justify-center">
                 <SoberHelplineAppStoreBadge height={40} source="membership_success" />

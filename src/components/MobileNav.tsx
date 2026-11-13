@@ -100,7 +100,7 @@ const MobileNav = ({ user: userProp, onLogout, triggerClassName = "lg:hidden" }:
               </Link>
 
               <div className="rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-3">
-                <p className="mb-2 text-sm font-semibold text-foreground">Sober Helpline App</p>
+                <p className="mb-2 text-sm font-semibold text-foreground">Sober Helpline App for iPhone and iPad</p>
                 <SoberHelplineAppStoreBadge height={38} source="mobile_nav" />
               </div>
 

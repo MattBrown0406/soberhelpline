@@ -108,12 +108,12 @@ const JoinMeeting = () => {
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
         <p className="text-muted-foreground">
           {isWeeklyLink
-            ? "We could not load this week's meeting just now. The Family Squares page has the join button."
+            ? "We could not load this week's meeting just now. Family Squares page has the join button."
             : "No meeting number provided."}
         </p>
         {isWeeklyLink ? (
           <Button asChild>
-            <Link to="/family-squares">Go to The Family Squares</Link>
+            <Link to="/family-squares">Go to Family Squares</Link>
           </Button>
         ) : (
           <Button onClick={() => navigate(-1)} variant="outline" className="gap-2">
@@ -134,7 +134,7 @@ const JoinMeeting = () => {
       return (
         <>
           <SEOHead
-            title="Join The Family Squares | Sober Helpline"
+            title="Join Family Squares | Sober Helpline"
             description="The free Monday family support meeting from Sober Helpline. Every Monday at 7:00 PM Pacific."
           />
           <div className="container mx-auto max-w-xl px-4 py-16 text-center">
@@ -143,7 +143,7 @@ const JoinMeeting = () => {
             </div>
             <h1 className="text-2xl font-bold text-foreground">The next meeting is {formatMeetingDay(meeting.start)}</h1>
             <p className="mt-3 text-muted-foreground">
-              The Family Squares starts at 7:00 PM Pacific
+              Family Squares starts at 7:00 PM Pacific
               {meeting.viewerInOtherZone ? ` (${formatViewerTime(meeting.start)} your time)` : ""}. The room opens 30
               minutes before. Come back to this page then and you will go straight in.
             </p>
@@ -183,7 +183,7 @@ const JoinMeeting = () => {
               <Video className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-foreground">The Family Squares</h1>
+              <h1 className="text-lg font-semibold text-foreground">Family Squares</h1>
               <p className="text-sm text-muted-foreground flex items-center gap-2">
                 <span>Every Monday at 7:00 PM Pacific</span>
                 <span>·</span>
