@@ -247,8 +247,12 @@ export function chooseRecipients(
     if (attendedTonight.has(email)) {
       if (!attendedBefore) chosen.set(email, { kind: "attended", registration: person.registration, viaApp: person.viaApp });
     } else if (!earlierRegistrationEmails.has(email)) {
+      // People who RSVP'd in the app join from the app's own Zoom link, with no
+      // registration attached and often only a device name. Not finding them
+      // proves nothing, so they are never told they were missed.
+      if (person.viaApp) uncertain += 1;
       // Someone unidentified in the room has this person's first name: it may be them.
-      if (person.names.some((name) => unknownFirstWords.has(firstWord(name)))) uncertain += 1;
+      else if (person.names.some((name) => unknownFirstWords.has(firstWord(name)))) uncertain += 1;
       else chosen.set(email, { kind: "missed", registration: person.registration, viaApp: person.viaApp });
     }
   }

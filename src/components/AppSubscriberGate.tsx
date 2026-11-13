@@ -50,6 +50,10 @@ export default function AppSubscriberGate({
                 You're signed in as <span className="font-medium text-foreground">{signedInEmail}</span>, which
                 doesn't have an active membership.
               </p>
+              <p className="mt-2">
+                A membership follows the email address it was bought with, on the website and in the app. If yours
+                is under a different email, sign out and sign in with that one.
+              </p>
               {onSignOut && (
                 <button type="button" onClick={onSignOut} className="mt-1 text-logo-blue hover:underline">
                   Not you? Sign out
@@ -74,6 +78,11 @@ export default function AppSubscriberGate({
                 Membership is included in Essential and Premier plans in the Sober Helpline app. If you have one, go
                 back to the app and open this page from there again. The website will ask you to confirm your account
                 before it opens.
+              </p>
+              <p className="mt-2">
+                Bought your membership on the website instead? It is tied to the email address you used there. Sign
+                in to the app with that same email and both will open. If you need the two joined, write to
+                matt@soberhelpline.com.
               </p>
             </div>
           ) : (

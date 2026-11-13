@@ -3,7 +3,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { requireAutomationAuth } from "../_shared/automationAuth.ts";
 import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
-import { appHandledEmails, normalizeEmail } from "../_shared/appPushReachable.ts";
+import { appHandledEmails, noWebsiteReminder, normalizeEmail } from "../_shared/appPushReachable.ts";
 import { findDormantEmails, isFirstMondayOfMonth, isLikelyMistypedEmail } from "../_shared/familySquaresActivity.ts";
 
 const corsHeaders = {
@@ -139,7 +139,7 @@ serve(async (req: Request) => {
     }
     // People the Sober Helpline app already reminds (or who told the app they
     // can't come) don't also get this email. Fails open if the app can't answer.
-    const appHandled = (await appHandledEmails(candidates.map((r) => r.email), "send-zoom-reengagement")).handled;
+    const appHandled = noWebsiteReminder(await appHandledEmails(candidates.map((r) => r.email), "send-zoom-reengagement"));
     const targets = candidates.filter((r) => !appHandled.has(normalizeEmail(r.email)));
 
     if (targets.length === 0) {

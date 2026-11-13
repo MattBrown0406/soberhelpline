@@ -317,6 +317,7 @@ Deno.serve(async (req) => {
       pending_invites: 0,
       admin_revoked_skipped: 0,
       revoke_candidates: 0,
+      grace_shortened: 0,
       revoked: 0,
       revocation_blocked: false,
       issues: 0,
@@ -464,6 +465,39 @@ Deno.serve(async (req) => {
     const massLimit = Math.max(MASS_REVOKE_MIN, Math.ceil(activeAppRows.length * MASS_REVOKE_SHARE));
     const suspicious = revokeCandidates.length > massLimit ||
       (best.size === 0 && revokeCandidates.length > 0);
+    // --- 7a. Shorten long grace windows for members the app stopped reporting --
+    // A refund or an early end makes the app stop reporting someone, but their
+    // row can carry a grace date set from the old expiry, which on a yearly plan
+    // is months away. They get the normal grace from today instead, and the
+    // next runs revoke the row once it passes. Held back by the same guard as
+    // revocation, so a bad or empty export cannot shorten everyone at once.
+    const shortGraceUntil = now + GRACE_DAYS * DAY_MS;
+    const longGraceRows = activeAppRows.filter((r) =>
+      !adminRevokedUsers.has(r.user_id) &&
+      !activeByUser.has(r.user_id) &&
+      r.app_grace_until !== null &&
+      new Date(r.app_grace_until).getTime() > shortGraceUntil
+    );
+    const shorteningSuspicious = best.size === 0 || longGraceRows.length > massLimit;
+    if (longGraceRows.length > 0 && (!shorteningSuspicious || allowMassRevoke)) {
+      for (const row of longGraceRows) {
+        summary.grace_shortened++;
+        if (dryRun) continue;
+        const { error } = await supabase
+          .from("provider_subscriptions")
+          .update({ app_grace_until: new Date(shortGraceUntil).toISOString(), updated_at: nowIso })
+          .eq("id", row.id)
+          .eq("status", "active")
+          .eq("plan_type", "app");
+        if (error) throw new Error(`grace update failed (row ${row.id}): ${error.message}`);
+      }
+    } else if (longGraceRows.length > 0) {
+      console.error("app membership sync: grace shortening held by the mass guard", {
+        rows: longGraceRows.length,
+        app_members: best.size,
+      });
+    }
+
     if (suspicious && !allowMassRevoke) {
       summary.revocation_blocked = true;
       console.error("app membership sync: revocation blocked by mass-revocation guard", {

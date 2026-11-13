@@ -71,6 +71,32 @@ export default function DeleteAccount() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
+                  <Mail className="h-5 w-5 text-primary" />
+                  Your soberhelpline.com account is separate
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-muted-foreground">
+                <p>
+                  Deleting your app account does not delete your account on this website. If you ever opened a member
+                  page from the app, booked coaching, or posted in the family forum, a soberhelpline.com account
+                  exists under the same email address, and it stays until you ask us to remove it.
+                </p>
+                <p>
+                  To remove it as well, say so in your deletion request, or write to{" "}
+                  <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com?subject=Website%20Account%20Deletion%20Request">support@soberhelpline.com</a>{" "}
+                  from that email address.
+                </p>
+                <p>
+                  A website membership billed through PayPal keeps billing until it is cancelled. Cancel it on the{" "}
+                  <Link className="font-semibold text-primary underline" to="/cancel-membership">cancel membership page</Link>{" "}
+                  before or after you delete your account.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
                   <ShieldCheck className="h-5 w-5 text-primary" />
                   What is deleted
                 </CardTitle>
