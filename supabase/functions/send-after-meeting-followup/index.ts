@@ -4,12 +4,22 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 import { isMeetingCancelled } from "../_shared/cancelledMeetings.ts";
 import { activeMemberEmails, addDays, normalizeEmail, normalizeName } from "../_shared/familySquaresActivity.ts";
+import { firstWord, looseMatch } from "../_shared/attendeeNameMatch.ts";
 
 // The morning after a Family Squares meeting, one email to people for whom it
 // was a first:
 //   - "attended": last night was the first meeting they were in the room for
 //   - "missed":   last night was the first meeting they ever registered for,
 //                 and they were not in the room
+//
+// Zoom shows most people by display name only, and that name often differs
+// from the one on the registration ("Sara" joins as "Sara Vaday", or as
+// "iPhone"). So attendance is matched the way the Tuesday report matches it:
+// by registration, email, full name, then a loose name match when exactly one
+// registrant fits. When someone in the room cannot be told apart from a
+// registrant (same first name, nothing else to go on), that registrant is
+// "uncertain" and gets no email: telling a person who came that we missed them
+// is worse than saying nothing.
 //
 // It replaces send-first-timer-followup, which went out at 8 PM on Monday to
 // everyone registering for the first time, could not tell who had shown up,
@@ -45,7 +55,7 @@ const MAX_PER_RUN = 150;
 const SITE = "https://soberhelpline.com";
 
 type Kind = "attended" | "missed";
-type SkipReason = "unsubscribed" | "bad_address" | "internal";
+type SkipReason = "unsubscribed" | "bad_address" | "internal" | "already_welcomed";
 
 interface Registration {
   id: string;
@@ -65,6 +75,9 @@ interface Attendance {
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+
+/** Escapes LIKE wildcards so ilike() is a case-insensitive exact match. */
+const exactPattern = (value: string) => value.trim().replace(/[\\%_]/g, "\\$&");
 
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[char] || char));
@@ -135,7 +148,8 @@ ${button(registerLink("missed"), "Save my spot for next Monday")}
   return {
     subject: "We missed you last night",
     html: wrap(`<p>Hi ${firstName},</p>
-<p>This is Matt from Sober Helpline. You signed up for "The Family Squares" last night and I did not see you in the room. No explanation needed. Monday nights fall apart for all kinds of reasons, especially in a house living with addiction.</p>
+<p>This is Matt from Sober Helpline. You signed up for "The Family Squares" last night and I don't think you made it into the room. No explanation needed. Monday nights fall apart for all kinds of reasons, especially in a house living with addiction.</p>
+<p>(If you were there under a different name, thank you for coming, and you can ignore this.)</p>
 ${nextStep}
 <p>If Monday evenings never work for you, reply and tell me. I read these.</p>
 ${signOff}`),
@@ -143,13 +157,17 @@ ${signOff}`),
 }
 
 /**
- * Pure rule: who gets which email.
+ * Pure rule: who gets which email, and who is left alone because we cannot tell.
  *
  * - "attended": matched to an attendance row on the meeting date, and to none before it.
- * - "missed":   no registration before the meeting date, and not matched to
- *               attendance on the meeting date.
- * A person is matched to attendance by registration row, then Zoom email, then
- * full name (Zoom often withholds participant emails).
+ * - "missed":   no registration before the meeting date, not matched to
+ *               attendance on the meeting date, and nobody unidentified in the
+ *               room shares their first name.
+ * - uncertain:  would be "missed", but someone unidentified in the room has
+ *               the same first name. No email.
+ *
+ * Matching on the night: registration row, then Zoom email, then full name,
+ * then the report's loose name match when exactly one registrant fits.
  */
 export function chooseRecipients(
   meetingDate: string,
@@ -157,7 +175,7 @@ export function chooseRecipients(
   earlierRegistrationEmails: Set<string>,
   attendance: Attendance[],
   ownRegistrationIds: Map<string, Set<string>>,
-): Map<string, { kind: Kind; registration: Registration; viaApp: boolean }> {
+): { chosen: Map<string, { kind: Kind; registration: Registration; viaApp: boolean }>; uncertain: number } {
   const fullName = (value: unknown) => {
     const name = normalizeName(value);
     return name.includes(" ") ? name : "";
@@ -167,34 +185,74 @@ export function chooseRecipients(
     emails: new Set(rows.map((a) => normalizeEmail(a.participant_email)).filter(Boolean)),
     names: new Set(rows.map((a) => fullName(a.participant_name)).filter(Boolean)),
   });
-  const onTheNight = index(attendance.filter((a) => a.meeting_date === meetingDate));
+  const nightRows = attendance.filter((a) => a.meeting_date === meetingDate);
   const before = index(attendance.filter((a) => a.meeting_date < meetingDate));
 
   // One entry per address: the newest registration row carries the name.
-  const people = new Map<string, { registration: Registration; viaApp: boolean; names: Set<string> }>();
+  interface PersonEntry { email: string; registration: Registration; viaApp: boolean; fullNames: Set<string>; names: string[]; emails: string[] }
+  const people = new Map<string, PersonEntry>();
   for (const row of [...tonight].sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? ""))) {
     const email = normalizeEmail(row.email);
     if (!email) continue;
-    const person = people.get(email) ?? { registration: row, viaApp: false, names: new Set<string>() };
+    const person = people.get(email) ?? { email, registration: row, viaApp: false, fullNames: new Set<string>(), names: [], emails: [email] };
     if (row.registration_source === "app") person.viaApp = true;
     const name = fullName(row.name);
-    if (name) person.names.add(name);
+    if (name) person.fullNames.add(name);
+    if (row.name && !person.names.includes(row.name)) person.names.push(row.name);
     people.set(email, person);
   }
 
+  // Exact matches on the night, row by row, so the rows nobody claimed are known.
+  const ownerOfRegistration = new Map<string, string>();
+  for (const [email, ids] of ownRegistrationIds) for (const id of ids) ownerOfRegistration.set(id, email);
+  const attendedTonight = new Set<string>();
+  const unclaimed: Attendance[] = [];
+  for (const row of nightRows) {
+    const matched = new Set<string>();
+    const byRegistration = row.registration_id ? ownerOfRegistration.get(row.registration_id) : undefined;
+    if (byRegistration && people.has(byRegistration)) matched.add(byRegistration);
+    const rowEmail = normalizeEmail(row.participant_email);
+    if (rowEmail && people.has(rowEmail)) matched.add(rowEmail);
+    const rowName = fullName(row.participant_name);
+    if (rowName) for (const person of people.values()) if (person.fullNames.has(rowName)) matched.add(person.email);
+    if (matched.size > 0) matched.forEach((email) => attendedTonight.add(email));
+    // A row tied to someone else's registration is not a mystery guest.
+    else if (!row.registration_id) unclaimed.push(row);
+  }
+
+  // Loose name matches for the rows nobody claimed. A weak fit (first name
+  // only) counts only when no other unclaimed attendee shares that first name.
+  const displayNamesByFirstWord = new Map<string, Set<string>>();
+  for (const row of unclaimed) {
+    const word = firstWord(row.participant_name);
+    if (!word) continue;
+    if (!displayNamesByFirstWord.has(word)) displayNamesByFirstWord.set(word, new Set());
+    displayNamesByFirstWord.get(word)!.add(String(row.participant_name).toLowerCase().trim());
+  }
+  const candidates = [...people.values()];
+  const unknownFirstWords = new Set<string>();
+  for (const row of unclaimed) {
+    const word = firstWord(row.participant_name);
+    const person = looseMatch(candidates, row.participant_name, displayNamesByFirstWord.get(word)?.size === 1);
+    if (person) attendedTonight.add(person.email);
+    else if (word) unknownFirstWords.add(word);
+  }
+
   const chosen = new Map<string, { kind: Kind; registration: Registration; viaApp: boolean }>();
+  let uncertain = 0;
   for (const [email, person] of people) {
     const ids = ownRegistrationIds.get(email) ?? new Set<string>();
-    const matches = (set: ReturnType<typeof index>) =>
-      [...ids].some((id) => set.ids.has(id)) || set.emails.has(email) || [...person.names].some((n) => set.names.has(n));
-    const attendedTonight = matches(onTheNight);
-    if (attendedTonight) {
-      if (!matches(before)) chosen.set(email, { kind: "attended", registration: person.registration, viaApp: person.viaApp });
+    const attendedBefore =
+      [...ids].some((id) => before.ids.has(id)) || before.emails.has(email) || [...person.fullNames].some((n) => before.names.has(n));
+    if (attendedTonight.has(email)) {
+      if (!attendedBefore) chosen.set(email, { kind: "attended", registration: person.registration, viaApp: person.viaApp });
     } else if (!earlierRegistrationEmails.has(email)) {
-      chosen.set(email, { kind: "missed", registration: person.registration, viaApp: person.viaApp });
+      // Someone unidentified in the room has this person's first name: it may be them.
+      if (person.names.some((name) => unknownFirstWords.has(firstWord(name)))) uncertain += 1;
+      else chosen.set(email, { kind: "missed", registration: person.registration, viaApp: person.viaApp });
     }
   }
-  return chosen;
+  return { chosen, uncertain };
 }
 
 const sendEmail = async (to: string, name: string | null, subject: string, html: string): Promise<"sent" | "suppressed"> => {
@@ -237,7 +295,7 @@ serve(async (req: Request) => {
     if (authenticateCronRequest(req) !== null && !hasAutomationSecret) return json({ error: "Unauthorized" }, 401);
 
     const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-    const counts = { sent: 0, attended: 0, missed: 0, already_done: 0, skipped: 0, failed: 0 };
+    const counts = { sent: 0, attended: 0, missed: 0, uncertain: 0, already_done: 0, skipped: 0, failed: 0 };
 
     const { data: settingRows, error: settingsError } = await supabase
       .from("site_settings").select("key, value").in("key", [START_SETTING, ADDRESS_SETTING]);
@@ -287,7 +345,8 @@ serve(async (req: Request) => {
       ownRegistrationIds.get(email)!.add(row.id);
     }
 
-    const chosen = chooseRecipients(meetingDate, tonight, earlierRegistrationEmails, attendance, ownRegistrationIds);
+    const { chosen, uncertain } = chooseRecipients(meetingDate, tonight, earlierRegistrationEmails, attendance, ownRegistrationIds);
+    counts.uncertain = uncertain;
     // null = the lookup failed. Then nobody is offered membership this run.
     const members = await activeMemberEmails(supabase);
     const mailingAddress = setting(ADDRESS_SETTING);
@@ -311,6 +370,23 @@ serve(async (req: Request) => {
           skip("bad_address");
           continue;
         }
+        // Each address gets each of these emails once, ever. Someone whose Zoom
+        // name only loosely matches could otherwise look "new" again next week.
+        const { data: earlier, error: earlierError } = await supabase
+          .from(QUEUE)
+          .select("id")
+          .ilike("email", exactPattern(email))
+          .eq("sequence_step", AFTER_MEETING_STEP)
+          .eq("revenue_path", `after_meeting_${person.kind}`)
+          .not("sent_at", "is", null)
+          .neq("registration_id", person.registration.id)
+          .limit(1);
+        if (earlierError) throw earlierError;
+        if ((earlier || []).length > 0) {
+          skip("already_welcomed");
+          continue;
+        }
+
         const offerMembership = person.kind === "attended" && !person.viaApp &&
           person.registration.consent_email_list === true && members !== null && !members.has(email);
         const message = buildEmail(person.kind, { name: person.registration.name, viaApp: person.viaApp, offerMembership });
