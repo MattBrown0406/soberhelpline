@@ -309,7 +309,7 @@ Deno.serve(async (req) => {
     // Server-to-server calls from membership-quick-start (the one-page family
     // sign-up) arrive with the service role key and name the account they act
     // for. Only that function holds the key; a browser never does. This path is
-    // limited to starting and activating a FAMILY membership.
+    // limited to starting, activating and cancelling a FAMILY membership.
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
     const isServiceRole = serviceRoleKey.length > 0 && token === serviceRoleKey;
 
@@ -327,7 +327,11 @@ Deno.serve(async (req) => {
         );
       }
       const onBehalfOf = requestBody.onBehalfOfUserId;
-      const allowed = requestBody.action === 'create-subscription' || requestBody.action === 'activate-subscription';
+      // cancel-subscription: used when an account is deleted (accountDeletion.ts),
+      // so a membership never keeps billing someone whose account is gone.
+      const allowed = requestBody.action === 'create-subscription' ||
+        requestBody.action === 'activate-subscription' ||
+        requestBody.action === 'cancel-subscription';
       if (
         typeof onBehalfOf !== 'string' ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(onBehalfOf) ||
