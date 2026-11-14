@@ -90,7 +90,7 @@ function zoneOffsetMinutes(tz: string, instantMs: number): number {
 }
 
 /** The instant (ms) of a wall-clock date + time in `tz`. */
-function zonedToUtcMs(date: string, time: string, tz: string): number {
+export function zonedToUtcMs(date: string, time: string, tz: string): number {
   const [y, mo, d] = date.split("-").map(Number);
   const [h, mi] = time.slice(0, 5).split(":").map(Number);
   const guess = Date.UTC(y, mo - 1, d, h, mi);

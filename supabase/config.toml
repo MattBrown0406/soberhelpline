@@ -94,6 +94,10 @@ verify_jwt = false
 [functions.check-membership-email]
 verify_jwt = false
 
+# The Sober Helpline app asks which coaching sessions a member booked here (secret header).
+[functions.app-coaching-bookings]
+verify_jwt = false
+
 [functions.consultation-payment]
 verify_jwt = false
 
