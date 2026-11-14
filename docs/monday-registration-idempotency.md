@@ -52,7 +52,7 @@ The app bridge creates no confirmation email, marketing, CRM, or Zoom-provider c
 
 ## Routes and side effects traced
 
-- `public/monday-zoom-registration/index.html` takes static precedence on direct navigation.
+- The static copy at `public/monday-zoom-registration/index.html` was removed on 2026-11-14: it took precedence on direct navigation, so people opening that address saw an older page instead of the React one. `/zoom.html` remains as the one standalone emergency form.
 - React `MondayZoomRegistration.tsx` also serves `/family-squares`, `/monday-zoom-registration`, `/monday-zoom`, `/monday-night-zoom` and its member-question mode.
 - `FamilySquaresKiosk.tsx` uses the same public function; it now renders the same friendly outcome and clears shared-device details.
 - `auto-register-zoom` inserts through the same database uniqueness guard; overlapping runs skip conflict without sending.

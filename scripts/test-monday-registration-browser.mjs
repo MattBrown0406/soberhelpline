@@ -44,7 +44,7 @@ try {
         await page.getByText('We look forward to seeing you Monday evening!', { exact: false }).first().waitFor();
         assert.ok((await page.locator('body').innerText()).includes('You’re already registered.'));
       } else {
-        await page.getByText(route.includes('kiosk') ? "You're registered!" : route !== '/family-squares' ? "You're registered. Please check your email for the Zoom meeting link." : "You're Registered!", { exact: true }).first().waitFor();
+        await page.getByText(route.includes('kiosk') ? "You're registered!" : route === '/zoom.html' ? "You're registered. Please check your email for the Zoom meeting link." : "You're Registered!", { exact: true }).first().waitFor();
       }
       assert.equal(submits, 1);
       assert.equal(submittedDate, "2026-11-09", "Monday 20:30 Pacific rolls to next week");
