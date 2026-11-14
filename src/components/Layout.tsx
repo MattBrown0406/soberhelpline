@@ -6,6 +6,7 @@ import SiteSearch from "./SiteSearch";
 import Breadcrumbs from "./Breadcrumbs";
 import { getBreadcrumbs } from "@/data/breadcrumbMap";
 import { useNativeBackButton } from "@/hooks/useNativeBackButton";
+import { useWelcomeAfterConfirm } from "@/hooks/useWelcomeAfterConfirm";
 import DefaultSEO from "./DefaultSEO";
 import { SEOOverrideProvider } from "@/contexts/SEOOverrideContext";
 import logo from "@/assets/logo.png";
@@ -50,6 +51,7 @@ const SiteLayout = ({ children }: LayoutProps) => {
 
   // Handle native back button for mobile apps
   useNativeBackButton();
+  useWelcomeAfterConfirm();
 
   useEffect(() => {
     // A link to an anchor (e.g. /workbook/hard-moment-practice) is
