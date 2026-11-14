@@ -4139,6 +4139,7 @@ export type Database = {
           registration_id: string
         }[]
       }
+      claim_member_welcome: { Args: never; Returns: boolean }
       claim_monday_notification: {
         Args: {
           _email: string
@@ -4580,6 +4581,10 @@ export type Database = {
           id: string
           username: string
         }[]
+      }
+      send_member_welcome_if_due: {
+        Args: { _only_if_joined_before_confirming?: boolean; _user_id: string }
+        Returns: boolean
       }
       update_abandoned_booking: {
         Args: {
