@@ -185,3 +185,11 @@ verify_jwt = false
 
 [functions.membership-quick-start]
 verify_jwt = false
+
+# The member deleting their own website account (signed in).
+[functions.delete-account]
+verify_jwt = true
+
+# The Sober Helpline app says a member deleted their app account (secret header).
+[functions.app-account-deleted]
+verify_jwt = false
