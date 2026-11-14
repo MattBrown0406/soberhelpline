@@ -55,7 +55,14 @@ const foldIcsLine = (line: string) => {
   return parts.join("\r\n ");
 };
 
-/** A calendar file (Apple Calendar, Outlook) for a weekly entry starting on the given Monday. */
+/**
+ * A calendar file (Apple Calendar, Outlook) for a weekly entry starting on the given Monday.
+ *
+ * public/family-squares.ics is a saved copy of this output (first Monday
+ * 2026-11-16) at a fixed address, so the Sober Helpline app can offer "Add to
+ * calendar" by opening https://soberhelpline.com/family-squares.ics. If the
+ * event details here change, write that file again.
+ */
 export function weeklyCalendarFile(firstMonday: string, now: Date = new Date()): string {
   const day = compact(firstMonday);
   const stamp = now.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
