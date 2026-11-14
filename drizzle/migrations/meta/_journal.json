@@ -78,6 +78,13 @@
       "when": 1794623187735,
       "tag": "0010_drop_open_zoom_link_clicks_insert",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1794624891155,
+      "tag": "0011_welcome_email_after_confirmation",
+      "breakpoints": true
     }
   ]
 }
