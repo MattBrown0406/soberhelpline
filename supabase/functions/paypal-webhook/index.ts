@@ -5,6 +5,7 @@ import {
   COACHING_STANDARD_CENTS,
   isAllowedCoachingCents,
 } from "../_shared/coachingToken.ts";
+import { notifyMembershipApproved } from "../_shared/membershipApprovedNotice.ts";
 
 /** Rows an administrator revoked (admin panel / member warnings) must stay revoked. */
 async function hasAdminRevokedRow(
@@ -186,6 +187,20 @@ Deno.serve(async (req) => {
           break;
         }
 
+        // Was it already active (the browser usually gets back from PayPal
+        // first)? Only used to decide whether the owner still needs telling.
+        let alreadyActive = true;
+        try {
+          const { data: before } = await supabaseClient
+            .from('provider_subscriptions')
+            .select('status')
+            .eq('paypal_subscription_id', subscriptionId)
+            .limit(1);
+          alreadyActive = !before || before.length === 0 || before[0].status === 'active';
+        } catch (lookupError) {
+          console.error('Prior status lookup failed (notice skipped):', lookupError);
+        }
+
         // Update subscription status to active. A live PayPal agreement has no
         // access end date, so clear any stale one (membership checks treat an
         // active row with a past access_ends_at as ended).
@@ -210,6 +225,11 @@ Deno.serve(async (req) => {
         }
 
         console.log('Subscription activated successfully:', data);
+
+        // Tell the owner once, when a family membership first becomes active.
+        if (!alreadyActive && data && data.length > 0 && !data[0].provider_submission_id) {
+          await notifyMembershipApproved(supabaseClient, data[0], nextBillingTime);
+        }
 
         // If this is a provider subscription, auto-approve the provider
         if (data && data.length > 0 && data[0].provider_submission_id) {
