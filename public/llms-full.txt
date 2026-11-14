@@ -157,7 +157,7 @@ Selected articles:
 
 | Service | URL | Details |
 |---------|-----|---------|
-| Family Squares | https://soberhelpline.com/monday-zoom-registration | Free, weekly, Mondays 7:00 PM Pacific |
+| Family Squares | https://soberhelpline.com/family-squares | Free, weekly, Mondays 7:00 PM Pacific |
 | Family Addiction Answers | https://soberhelpline.com/family-addiction-answers | Answer center routing families to Family Squares, coaching, or intervention readiness |
 | Family Coaching | https://soberhelpline.com/family-coaching | One-on-one with Matt Brown |
 | Family Consultation | https://soberhelpline.com/family-consultation | Initial consultation |

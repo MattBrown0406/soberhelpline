@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-const files = ['src/pages/MondayZoomRegistration.tsx', 'src/pages/FamilySquaresKiosk.tsx', 'public/monday-zoom-registration/index.html', 'public/zoom.html', 'supabase/functions/register-zoom-meeting/index.ts', 'supabase/functions/auto-register-zoom/index.ts'];
+const files = ['src/pages/MondayZoomRegistration.tsx', 'src/pages/FamilySquaresKiosk.tsx', 'public/zoom.html', 'supabase/functions/register-zoom-meeting/index.ts', 'supabase/functions/auto-register-zoom/index.ts'];
 const cases = [
  ['2026-10-13T02:59:59Z','2026-10-12'], ['2026-10-13T03:00:00Z','2026-10-19'], ['2026-10-13T03:30:00Z','2026-10-19'],
  ['2026-11-03T03:59:59Z','2026-11-02'], ['2026-11-03T04:00:00Z','2026-11-09'], ['2026-11-03T04:30:00Z','2026-11-09'],
