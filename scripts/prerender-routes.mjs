@@ -177,6 +177,62 @@ const { createServer } = await import('vite');
 const articleCompiler = await createServer({ server: { middlewareMode: true }, appType: 'custom', optimizeDeps: { noDiscovery: true, include: [] } });
 try {
   const { pilotSlugs, renderArticlePilot } = await articleCompiler.ssrLoadModule('/src/lib/articlePilot.tsx');
+  // Legacy records without explicit slugs are still served by BlogArticle's
+  // numeric fallback. Give those existing URLs article head tags rather than
+  // the homepage SPA shell; retain the renderer's image-derived canonical.
+  const { blogPosts } = await articleCompiler.ssrLoadModule('/src/data/blogPosts.ts');
+  const { fitSeoDescription } = await articleCompiler.ssrLoadModule('/src/lib/seoTitle.ts');
+  const emittedAssets = await readDistAssets();
+  const builtPosts = blogPosts.map((post) => ({
+    ...post,
+    image: post.image?.startsWith('http') ? post.image : resolveBlogImageUrl((post.image || '').split('/').pop(), emittedAssets),
+  }));
+  const titleSlug = (title) => (title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const imageSlug = (image) => {
+    const fileName = (image || '').split('/').pop()?.toLowerCase() || '';
+    if (!fileName.startsWith('blog-')) return '';
+    const segments = fileName.replace(/\.[a-z0-9]+$/i, '').replace(/^blog-/, '').split('-');
+    const lastSegment = segments[segments.length - 1];
+    if (lastSegment && lastSegment.length >= 8 && /\d/.test(lastSegment)) segments.pop();
+    return segments.join('-');
+  };
+  for (const legacy of builtPosts.filter((post) => !post.slug && post.id != null)) {
+    const id = String(legacy.id);
+    // Match the existing renderer's priority, including image-prefix matches
+    // before numeric IDs. Do not change which article an established URL serves.
+    const post = builtPosts.find((post) =>
+      [post.slug?.toLowerCase(), titleSlug(post.title), imageSlug(post.image)].filter(Boolean).includes(id)
+      || (post.image || '').toLowerCase().includes(`blog-${id}`)
+    ) || builtPosts.find((post) => post.id != null && String(post.id) === id);
+    const route = `/blog/${id}`;
+    if (post.slug) {
+      const primary = blogPostPages.find((page) => page.route === `/blog/${post.slug}`);
+      if (!primary) throw new Error(`Missing numeric fallback metadata: ${route}`);
+      blogPostPages.push({ ...primary, route, canonicalPath: primary.canonicalPath ?? primary.route });
+      continue;
+    }
+    const slug = imageSlug(post.image) || titleSlug(post.title) || id;
+    const canonicalPath = canonicalRouteAliases.get(`/blog/${slug}`) ?? `/blog/${slug}`;
+    const title = post.seoTitle || post.title;
+    const description = fitSeoDescription(post.metaDescription || post.excerpt || (post.content ? post.content.substring(0, 155) + '...' : ''));
+    const image = resolveBlogImageUrl((post.image || '').split('/').pop(), emittedAssets);
+    const canonical = `${SITE_URL}${canonicalPath}`;
+    blogPostPages.push({
+      route, canonicalPath, title: buildSeoTitle(title), description, image,
+      ogType: 'article', publishedTime: post.date, modifiedTime: post.date,
+      section: post.category, author: post.author || 'Matt Brown',
+      jsonLd: {
+        '@context': 'https://schema.org', '@type': 'Article', headline: title,
+        description, image,
+        author: { '@type': 'Person', name: post.author || 'Matt Brown', url: 'https://freedominterventions.com/interventionist' },
+        publisher: { '@type': 'Organization', name: 'Sober Helpline', url: SITE_URL },
+        datePublished: post.date, dateModified: post.date,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+        articleSection: post.category, isAccessibleForFree: true,
+      },
+      noscriptHtml: `<main><h1>${escapeHtml(title)}</h1><img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" style="max-width:100%;height:auto;"><p>${escapeHtml(description)}</p><p><a href="${canonical}">Read this article on Sober Helpline</a></p><p><a href="https://soberhelpline.com/book-consultation">Book a consultation</a> <a href="https://soberhelpline.com/family-squares">Join Family Squares</a></p></main>`,
+    });
+  }
   for (const slug of pilotSlugs) {
     const page = blogPostPages.find(page => page.route === `/blog/${slug}`);
     if (!page) throw new Error(`Missing pilot metadata: ${slug}`);
