@@ -57,6 +57,7 @@ const Footer = () => {
             <div className="mt-5 rounded-lg border border-gray-800 bg-gray-800/70 p-3">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sober Helpline App · iPhone and iPad</p>
               <SoberHelplineAppStoreBadge height={36} source="footer_brand" />
+              <Link to="/sober-helpline-app" className="mt-2 block text-sm text-gray-300 underline-offset-2 hover:text-white hover:underline">See what the app does</Link>
             </div>
           </div>
 
