@@ -143,7 +143,7 @@ const Index = () => {
               <MobileNav user={user} onLogout={handleLogout} />
             </div>
 
-            <div className="hidden lg:flex h-16 items-center justify-between gap-4">
+            <div className="hidden lg:flex min-h-16 flex-wrap items-center justify-between gap-4 py-2">
               <div className="flex items-center gap-6">
                 <Link to="/" className="flex items-center">
                   <img src={bannerLogo} alt="Sober Helpline" width={56} height={56} fetchPriority="high" decoding="async" className="h-14 w-auto" />
@@ -498,7 +498,7 @@ const Index = () => {
             <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 px-2">
               Start with the free Monday meeting, move into a private session when you cannot wait, or check intervention readiness when refusal, relapse, or risk is escalating.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 md:gap-4 px-4">
               <Link to="/family-squares" className="w-full sm:w-auto" onClick={() => trackConversionEvent("monday_zoom_click", { source: "homepage_bottom_cta" })}>
                 <Button size="lg" className="w-full sm:w-auto gap-2 bg-logo-blue hover:bg-logo-blue/90 px-6 md:px-8 text-sm md:text-base">
                   <Calendar className="w-4 h-4 md:w-5 md:h-5" />

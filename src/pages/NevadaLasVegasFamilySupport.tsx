@@ -68,9 +68,9 @@ export default function NevadaLasVegasFamilySupport() {
               the city. Fentanyl and meth have devastated Clark County neighborhoods, and families often don't 
               know where to turn. Sober Helpline is here to help.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/monday-zoom-registration">
-                <Button size="lg" className="gap-2">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+              <Link to="/monday-zoom-registration" className="max-w-full">
+                <Button size="lg" className="gap-2 max-w-full h-auto min-h-11 whitespace-normal py-3">
                   <Calendar className="h-4 w-4" />
                   Join Free Family Squares — Mondays, 7:00 PM Pacific
                 </Button>
