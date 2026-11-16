@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Smartphone } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,14 @@ import logo from "@/assets/logo.png";
 // noindex (lib/indexability), never in the sitemap and never prerendered.
 // The Smart App Banner's "Open" opens the app without a page argument for now
 // (app 4.0 (2) can't route one); see index.html.
+//
+// Someone with the app can still land here on an iPhone or iPad: a link in an
+// email app's own browser, or one pasted into Safari, stays in the browser. For
+// Apple mobile visitors the page therefore offers "Open the Sober Helpline
+// app", which uses the app's own link scheme (as ReturnToAppButton does). A
+// plain link, so nothing here navigates by script: without the app the tap
+// leaves this page as it is (Safari shows a small "address is invalid" notice,
+// never an error page), and the App Store badge sits right below the button.
 
 interface AppDestination {
   /** What the link opens in the app, after "This link opens …". */
@@ -47,9 +55,19 @@ const DESTINATIONS: Record<string, AppDestination> = {
 // /app itself, and any /app/* path the app doesn't know (the app opens its home screen).
 const APP_HOME: AppDestination = { label: "the Sober Helpline app" };
 
+const normalizedPath = (pathname: string) => pathname.replace(/\/+$/, "").toLowerCase();
+
 function destinationFor(pathname: string): AppDestination {
-  const path = pathname.replace(/\/+$/, "").toLowerCase();
-  return DESTINATIONS[path] ?? APP_HOME;
+  return DESTINATIONS[normalizedPath(pathname)] ?? APP_HOME;
+}
+
+// The same destination on the app's own scheme. The app (4.1+) accepts
+// sober-helpline://app/<path> for exactly the paths it accepts on
+// https://soberhelpline.com/app/<path>; anything else just opens the app.
+function appSchemeLinkFor(pathname: string): string {
+  const path = normalizedPath(pathname);
+  // "/app/family-squares" -> "sober-helpline://app/family-squares"
+  return Object.prototype.hasOwnProperty.call(DESTINATIONS, path) ? `sober-helpline://${path.slice(1)}` : "sober-helpline://";
 }
 
 function isAppleMobile(): boolean {
@@ -63,6 +81,7 @@ const AppLinkFallback = () => {
   const { pathname } = useLocation();
   const destination = destinationFor(pathname);
   const onAppleMobile = useMemo(isAppleMobile, []);
+  const appSchemeLink = appSchemeLinkFor(pathname);
 
   return (
     <>
@@ -81,13 +100,30 @@ const AppLinkFallback = () => {
               : `This link opens ${destination.label} in the Sober Helpline app for iPhone and iPad.`}
           </p>
 
+          {onAppleMobile && (
+            <div className="mb-6 flex flex-col items-center gap-2">
+              <Button asChild size="lg" className="w-full gap-2 bg-logo-blue text-white hover:bg-logo-blue/90 sm:w-auto">
+                <a href={appSchemeLink}>
+                  <Smartphone className="h-5 w-5" aria-hidden="true" />
+                  Open the Sober Helpline app
+                </a>
+              </Button>
+              <p className="text-sm text-muted-foreground">Don't have the app yet? It is free on the App Store:</p>
+            </div>
+          )}
+
           <div className="flex justify-center">
             <SoberHelplineAppStoreBadge height={48} source="app_link_fallback" />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
             {onAppleMobile
-              ? "Already have the app? Tap Open in the banner at the top of this page to open it."
+              ? "You can also tap Open in the banner at the top of this page."
               : "The Sober Helpline app is free to download on the App Store for iPhone and iPad."}
+          </p>
+          <p className="mt-3 text-sm">
+            <Link to="/sober-helpline-app" className="font-medium text-logo-blue underline-offset-2 hover:underline">
+              See what the app does
+            </Link>
           </p>
 
           {destination.web && (
