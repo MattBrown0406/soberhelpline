@@ -222,11 +222,14 @@ serve(async (req: Request) => {
 
           ${hasApp ? "" : `<div style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
             <p style="margin: 0 0 8px 0; color: #047857; font-size: 14px;">
-              <strong>📱 Take Sober Helpline with you.</strong> If you haven't already, download the free Sober Helpline app from the Apple App Store.
+              <strong>📱 Make next Monday easier.</strong> With the free Sober Helpline app for iPhone and iPad, you save your seat once and it is held every Monday. You get a reminder and join in one tap.
             </p>
             <a href="https://apps.apple.com/us/app/sober-helpline/id6780034996" style="display: inline-block; padding: 10px 24px; background-color: #166534; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
               Download Sober Helpline
             </a>
+            <p style="margin: 10px 0 0 0; color: #047857; font-size: 13px;">
+              Already have the app? <a clicktracking="off" href="https://soberhelpline.com/app/family-squares" style="color: #166534; font-weight: bold;">Open Family Squares in the app</a>
+            </p>
           </div>`}
 
 
