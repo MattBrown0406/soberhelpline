@@ -350,7 +350,7 @@ const BlogArticle = () => {
           )}
 
           {/* Content */}
-          <div className="prose prose-sm sm:prose-lg max-w-none">
+          <div className="prose prose-sm sm:prose-lg max-w-none [overflow-wrap:anywhere]">
             {blogOverride?.conversionPrompt && (
               <div className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-5">
                 <p className="text-foreground font-medium leading-relaxed">{blogOverride.conversionPrompt}</p>

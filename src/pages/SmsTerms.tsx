@@ -60,7 +60,7 @@ export default function SmsTerms() {
         </section>
 
         <section className="container py-12 md:py-16">
-          <div className="mx-auto grid max-w-4xl gap-6">
+          <div className="mx-auto grid grid-cols-1 max-w-4xl gap-6 [overflow-wrap:anywhere]">
             <Card>
               <CardHeader className="flex flex-row items-center gap-3">
                 <MessageSquare className="h-5 w-5 text-primary" />

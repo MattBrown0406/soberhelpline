@@ -176,7 +176,7 @@ export default function Privacy() {
               <CardContent className="space-y-4 text-muted-foreground">
                 <p>You may request access, correction, deletion, or account closure by contacting us.</p>
                 <ul className="list-disc space-y-2 pl-6">
-                  <li>Email <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> from the email address connected to your account.</li>
+                  <li>Email <a className="font-semibold text-primary underline [overflow-wrap:anywhere]" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> from the email address connected to your account.</li>
                   <li>Use the subject line: <strong>Privacy Request</strong> or <strong>Account Deletion Request</strong>.</li>
                   <li>Tell us what you want deleted, corrected, or accessed.</li>
                 </ul>
@@ -235,7 +235,7 @@ export default function Privacy() {
                 </p>
                 <p>
                   <strong>Sober Helpline</strong><br />
-                  Email: <a className="font-semibold text-primary underline" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a><br />
+                  Email: <a className="font-semibold text-primary underline [overflow-wrap:anywhere]" href="mailto:support@soberhelpline.com">support@soberhelpline.com</a><br />
                   Phone: <a className="font-semibold text-primary underline" href="tel:4582988008">458-298-8008</a>
                 </p>
                 <p>

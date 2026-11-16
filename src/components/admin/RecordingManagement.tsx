@@ -262,7 +262,7 @@ export function RecordingManagement() {
       <TableCell>
         <div className="flex gap-1">
           {showPublish && (
-            <Button variant="default" size="sm" className="gap-1 h-8 text-xs" onClick={() => publishRecording(r.id)} disabled={publishingId === r.id}>
+            <Button variant="default" size="sm" className="gap-1 h-8 min-h-0 py-0 text-xs" onClick={() => publishRecording(r.id)} disabled={publishingId === r.id}>
               <CheckCircle className="h-3.5 w-3.5" />
               {publishingId === r.id ? "Publishing..." : "Publish"}
             </Button>

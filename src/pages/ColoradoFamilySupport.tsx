@@ -498,7 +498,7 @@ export default function ColoradoFamilySupport() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                   <Link to="/family-coaching">
                     <Button size="lg" className="gap-2">
                       <Phone className="h-4 w-4" />

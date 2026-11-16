@@ -178,7 +178,7 @@ const ForProviders = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Who Should List on Sober Helpline?</h2>
               <p className="text-lg text-gray-600">We welcome all ethical addiction and recovery service providers</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {providerTypes.map((type) => (
                 <div key={type} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-logo-blue/5 transition-colors">
                   <CheckCircle className="w-5 h-5 text-logo-blue flex-shrink-0" />

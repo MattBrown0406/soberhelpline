@@ -125,7 +125,7 @@ export default function UtahSaltLakeCityFamilySupport() {
             <h2 className="text-2xl font-bold text-logo-blue mb-6">
               Salt Lake City Local Addiction Family Resources
             </h2>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-base text-logo-blue flex items-center gap-2">
@@ -155,7 +155,7 @@ export default function UtahSaltLakeCityFamilySupport() {
                     University of Utah provides comprehensive substance use treatment, psychiatric evaluation,
                     and family support services. Accepts most insurance including Medicaid.
                   </p>
-                  <a href="https://healthcare.utah.edu/behavioralhealth" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary text-sm hover:underline">
+                  <a href="https://healthcare.utah.edu/behavioralhealth" target="_blank" rel="noopener noreferrer" className="inline-flex max-w-full [overflow-wrap:anywhere] items-center gap-1 text-primary text-sm hover:underline">
                     healthcare.utah.edu/behavioralhealth <ExternalLink className="h-3 w-3" />
                   </a>
                 </CardContent>

@@ -17,7 +17,7 @@ const FamilyRolesAddiction = () => {
       <div className="min-h-screen bg-gradient-to-b from-violet-50 to-white py-12 print:py-4 print:bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 print:hidden">
+          <div className="flex flex-wrap gap-3 items-center justify-between mb-8 print:hidden">
             <Link to="/family-education">
               <Button variant="ghost" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />

@@ -373,7 +373,7 @@ const RoadmapRelapse = () => {
         {/* ─── Where Do You Go From Here ─── */}
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-6">Where Do You Go From Here?</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {forwardPaths.map((path, i) => (
               <Card key={i} className="border-border/40 bg-card hover:shadow-sm transition-shadow">
                 <CardContent className="p-5 flex flex-col h-full">
@@ -418,7 +418,7 @@ const RoadmapRelapse = () => {
         </div>
 
         {/* ─── Resources ─── */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card className="border-border/30">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">

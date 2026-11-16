@@ -264,7 +264,7 @@ const RoadmapPreIntervention = () => {
           <h2 className="text-2xl font-bold text-foreground mb-6">
             After the Intervention
           </h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* If they say yes */}
             <Card className="border-primary/20 bg-primary/5">
               <CardContent className="p-6">
@@ -337,7 +337,7 @@ const RoadmapPreIntervention = () => {
         </Card>
 
         {/* ─── Resources ─── */}
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="border-border/50">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">

@@ -44,7 +44,7 @@ export function MemberPicker({ value, onChange, placeholder = "Type a usernameâ€
     return (
       <div className="flex items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm">
         <span className="font-medium truncate">{value.username}</span>
-        <Button type="button" variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => onChange(null)} aria-label="Choose someone else">
+        <Button type="button" variant="ghost" size="sm" className="h-7 min-h-0 w-7 p-0" onClick={() => onChange(null)} aria-label="Choose someone else">
           <X className="h-4 w-4" />
         </Button>
       </div>

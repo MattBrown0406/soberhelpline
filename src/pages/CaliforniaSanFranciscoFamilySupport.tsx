@@ -126,7 +126,7 @@ export default function CaliforniaSanFranciscoFamilySupport() {
             <h2 className="text-2xl md:text-3xl font-bold text-logo-blue text-center mb-8">
               San Francisco Addiction Family Resources
             </h2>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-logo-blue text-base flex items-center gap-2">

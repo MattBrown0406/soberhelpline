@@ -115,7 +115,7 @@ export default function NewMexicoFamilySupport() {
               <p className="text-muted-foreground leading-relaxed mb-5">
                 If your loved one is refusing treatment, drinking or using despite consequences, or cycling through relapse, start with a private family coaching call or call Sober Helpline before planning a confrontation. The goal is to decide whether your family needs coaching, a structured intervention plan, treatment navigation, or Monday night family support.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <a href="tel:4582988008">
                   <Button size="lg" className="gap-2 w-full sm:w-auto">
                     <Phone className="h-4 w-4" />
@@ -523,7 +523,7 @@ export default function NewMexicoFamilySupport() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                   <Link to="/family-coaching">
                     <Button size="lg" className="gap-2">
                       <Phone className="h-4 w-4" />

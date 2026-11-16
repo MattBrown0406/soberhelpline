@@ -529,7 +529,7 @@ export default function FamilySquaresKiosk() {
           noIndex
           canonicalPath="/family-squares"
         />
-        <main className="grid w-full max-w-4xl items-center gap-6 rounded-3xl bg-white p-7 text-center shadow-2xl md:grid-cols-[1.15fr_0.85fr]">
+        <main className="grid grid-cols-1 w-full max-w-4xl [overflow-wrap:anywhere] items-center gap-6 rounded-3xl bg-white p-7 text-center shadow-2xl md:grid-cols-[1.15fr_0.85fr]">
           <section className="flex flex-col items-center" role="alert" aria-live="assertive">
             <WifiOff className="h-16 w-16 text-amber-600" aria-hidden="true" />
             <h1 className="mt-3 text-4xl font-extrabold text-slate-950">This kiosk is temporarily offline</h1>
@@ -548,9 +548,9 @@ export default function FamilySquaresKiosk() {
             <img
               src={mobileRegistrationQrCode}
               alt="QR code linking to online Family Squares registration"
-              className="mx-auto h-[280px] w-[280px] rounded-2xl border-8 border-white bg-white shadow-xl"
+              className="mx-auto h-auto w-[280px] max-w-full aspect-square rounded-2xl border-8 border-white bg-white shadow-xl"
             />
-            <p className="mt-3 whitespace-nowrap text-sm font-bold tracking-tight text-emerald-900">SoberHelpline.com/family-squares</p>
+            <p className="mt-3 text-sm font-bold tracking-tight text-emerald-900">SoberHelpline.com/family-squares</p>
           </section>
         </main>
       </div>

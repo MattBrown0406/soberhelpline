@@ -128,7 +128,7 @@ export default function FamilyAddictionAnswerDetail() {
               <ArrowLeft className="h-4 w-4" />
               Back to family addiction answers
             </Link>
-            <div className="grid gap-8 lg:grid-cols-[1fr_340px] lg:items-start">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
               <div>
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary">
                   <HelpCircle className="h-4 w-4" />
@@ -172,7 +172,7 @@ export default function FamilyAddictionAnswerDetail() {
         </section>
 
         <section className="py-12 md:py-16">
-          <div className="container mx-auto grid max-w-6xl gap-8 px-4 lg:grid-cols-[1fr_340px]">
+          <div className="container mx-auto grid grid-cols-1 max-w-6xl gap-8 px-4 lg:grid-cols-[minmax(0,1fr)_340px]">
             <div className="space-y-6">
               <Card>
                 <CardContent className="p-6 md:p-8">

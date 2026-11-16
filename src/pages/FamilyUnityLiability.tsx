@@ -23,7 +23,7 @@ export default function FamilyUnityLiability() {
 
       <div className="min-h-screen bg-background">
         <main className="container py-8 md:py-12 max-w-4xl">
-          <div className="flex items-center justify-between mb-6 print:hidden">
+          <div className="flex flex-wrap gap-3 items-center justify-between mb-6 print:hidden">
             <Link to="/family-education">
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
