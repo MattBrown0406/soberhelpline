@@ -519,7 +519,7 @@ const Index = () => {
               </Link>
             </div>
             <div className="mt-6 flex flex-col items-center gap-2">
-              <p className="text-sm font-semibold text-foreground">Prefer help in your pocket? The app is on iPhone and iPad.</p>
+              <p className="text-sm font-semibold text-foreground">With the free iPhone and iPad app, your Monday seat is saved every week. You get a reminder and join in one tap.</p>
               <SoberHelplineAppStoreBadge height={44} source="homepage_bottom_cta" />
             </div>
           </div>

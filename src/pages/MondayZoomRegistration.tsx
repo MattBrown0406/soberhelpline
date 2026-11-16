@@ -768,7 +768,7 @@ export default function MondayZoomRegistration() {
                 </div>
 
                 <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-logo-blue/20 bg-logo-blue/5 p-4 text-center shadow-sm">
-                  <p className="mb-2 text-sm font-semibold text-foreground">Have Sober Helpline on your iPhone or iPad before the meeting starts.</p>
+                  <p className="mb-2 text-sm font-semibold text-foreground">With the free iPhone and iPad app, you save your seat once and it is held every Monday. You get a reminder and join in one tap.</p>
                   <SoberHelplineAppStoreBadge className="justify-center" height={42} source="monday_zoom_before_form" />
                 </div>
               </>
