@@ -195,7 +195,7 @@ serve(async (req: Request) => {
     const appStoreUrl = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
     // Universal link: opens the app's Family Squares card when the app is
     // installed, and the website's fallback page otherwise. Its anchor carries
-    // clicktracking="off" because a SendGrid click-tracking redirect goes
+    // clicktracking=off because a SendGrid click-tracking redirect goes
     // through another host, and iOS then opens the browser instead of the app.
     const appFamilySquaresUrl = "https://soberhelpline.com/app/family-squares";
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -344,7 +344,7 @@ serve(async (req: Request) => {
           <a href="${appStoreUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0b2943; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">
             Download Sober Helpline
           </a>
-          <p style="margin: 12px 0 0 0; font-size: 13px; color: #047857;">Already have the app? <a clicktracking="off" href="${appFamilySquaresUrl}" style="color: #0b2943; font-weight: bold;">Open Family Squares in the app</a></p>
+          <p style="margin: 12px 0 0 0; font-size: 13px; color: #047857;">Already have the app? <a clicktracking=off href="${appFamilySquaresUrl}" style="color: #0b2943; font-weight: bold;">Open Family Squares in the app</a></p>
           <p style="margin: 12px 0 0 0; font-size: 12px; color: #6b7280; word-break: break-all;">${appStoreUrl}</p>
         </div>
       `;

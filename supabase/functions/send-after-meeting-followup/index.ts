@@ -110,11 +110,11 @@ const signOff = `<p>With you in this,<br>Matt Brown<br><em>Sober Helpline</em></
 const registerLink = (kind: Kind) => `${SITE}/family-squares?utm_source=after_meeting_email&utm_campaign=${kind}`;
 
 // Universal link: opens the app's Family Squares card when the app is
-// installed, and the website's fallback page otherwise. clicktracking="off"
+// installed, and the website's fallback page otherwise. clicktracking=off
 // keeps SendGrid from rewriting it: a click-tracking redirect goes through
 // another host, and iOS then opens the browser instead of the app.
 const openInAppLink = (label: string) =>
-  `<a clicktracking="off" href="${SITE}/app/family-squares" style="color: #2563eb; font-weight: bold;">${label}</a>`;
+  `<a clicktracking=off href="${SITE}/app/family-squares" style="color: #2563eb; font-weight: bold;">${label}</a>`;
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
 

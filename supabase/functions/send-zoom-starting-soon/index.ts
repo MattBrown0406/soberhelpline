@@ -228,7 +228,7 @@ serve(async (req: Request) => {
               Download Sober Helpline
             </a>
             <p style="margin: 10px 0 0 0; color: #047857; font-size: 13px;">
-              Already have the app? <a clicktracking="off" href="https://soberhelpline.com/app/family-squares" style="color: #166534; font-weight: bold;">Open Family Squares in the app</a>
+              Already have the app? <a clicktracking=off href="https://soberhelpline.com/app/family-squares" style="color: #166534; font-weight: bold;">Open Family Squares in the app</a>
             </p>
           </div>`}
 
