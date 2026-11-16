@@ -29,12 +29,12 @@ const GuideMembershipPrompt = ({ path }: { path: string }) => (
         a private family forum, and recordings of past Monday meetings. The first seven days are free, then
         it is $9.99 a month.
       </p>
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-5 flex flex-col flex-wrap gap-3 sm:flex-row">
         <Link
           to="/family-membership"
           onClick={() => trackConversionEvent("membership_click", { source: "library_guide_end", guide: path })}
         >
-          <Button className="w-full gap-2 bg-logo-blue text-white hover:bg-logo-blue/90 sm:w-auto">
+          <Button className="w-full max-w-full h-auto min-h-10 whitespace-normal gap-2 bg-logo-blue text-white hover:bg-logo-blue/90 sm:w-auto">
             See what membership includes
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
@@ -43,7 +43,7 @@ const GuideMembershipPrompt = ({ path }: { path: string }) => (
           to="/family-squares"
           onClick={() => trackConversionEvent("monday_zoom_click", { source: "library_guide_end" })}
         >
-          <Button variant="outline" className="w-full sm:w-auto">
+          <Button variant="outline" className="w-full max-w-full h-auto min-h-10 whitespace-normal sm:w-auto">
             Or come to the free Monday meeting
           </Button>
         </Link>
