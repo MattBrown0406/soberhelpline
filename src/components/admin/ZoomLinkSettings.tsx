@@ -227,18 +227,52 @@ export function ZoomLinkSettings() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       const updates = [
-        { key: "monday_zoom_link", value: zoomLink.trim() },
-        { key: "monday_zoom_meeting_id", value: meetingId.trim() },
-        { key: "monday_zoom_passcode", value: passcode.trim() },
+        { key: "monday_zoom_link", label: "Zoom link", value: zoomLink.trim() },
+        { key: "monday_zoom_meeting_id", label: "Meeting ID", value: meetingId.trim() },
+        { key: "monday_zoom_passcode", label: "Passcode", value: passcode.trim() },
       ];
+      // What is written is unchanged. Each update now asks for its row back: no
+      // error with no row means that setting was NOT saved (a lost session, or
+      // the setting's row is missing).
+      const saved: string[] = [];
+      const notSaved: string[] = [];
+      let failure: unknown = null;
       for (const u of updates) {
-        const { error } = await supabase
+        if (failure) {
+          // As before, nothing after a failed write is attempted.
+          notSaved.push(`${u.label} (${u.key})`);
+          continue;
+        }
+        const { data, error } = await supabase
           .from("site_settings")
           .update({ value: u.value, updated_by: user?.id })
-          .eq("key", u.key);
-        if (error) throw error;
+          .eq("key", u.key)
+          .select("key");
+        if (error) {
+          failure = error;
+          notSaved.push(`${u.label} (${u.key})`);
+        } else if (!data || data.length === 0) {
+          notSaved.push(`${u.label} (${u.key})`);
+        } else {
+          saved.push(u.label);
+        }
       }
-      toast.success("Zoom meeting settings updated successfully!");
+      if (failure) console.error("Error saving zoom settings:", failure);
+      if (notSaved.length === 0) {
+        toast.success("Zoom meeting settings updated successfully!");
+      } else if (saved.length === 0) {
+        toast.error(
+          failure
+            ? "Failed to save Zoom settings. Nothing was saved."
+            : "Nothing was saved. Your session may have expired: reload the page, log in, and try again.",
+          { duration: 20000 },
+        );
+      } else {
+        toast.error(
+          `Not everything was saved. Saved: ${saved.join(", ")}. Not saved: ${notSaved.join(", ")}. Reload the page, log in, and try again.`,
+          { duration: 20000 },
+        );
+      }
     } catch (err) {
       console.error("Error saving zoom settings:", err);
       toast.error("Failed to save Zoom settings");

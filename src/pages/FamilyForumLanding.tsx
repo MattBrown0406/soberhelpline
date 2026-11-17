@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEOHead from "@/components/SEOHead";
 import { ACTIVE_TOPICS, MEETING_TOPIC_ID, forumPostLink } from "@/lib/forumTopics";
+import { arrivedFromApp } from "@/lib/webSession";
 import familyHero from "@/assets/family-hero.jpg";
 import healingCircle from "@/assets/blog-healing-circle-family-support.png";
 
@@ -56,7 +57,7 @@ const benefits = [
   },
   {
     icon: Calendar,
-    title: "Available 24/7, Not Just Monday Nights",
+    title: "Open any time, not just Monday nights",
     desc: "Crises don't wait for scheduled calls. Post at 2am when you can't sleep. Read when you need perspective. The community is always there.",
   },
   {
@@ -75,7 +76,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Sober Helpline",
-  description: "Family addiction support forum and community for families navigating a loved one's addiction. Professionally moderated, anonymous, available 24/7.",
+  description: "Family addiction support forum and community for families navigating a loved one's addiction. Professionally moderated, anonymous, open any time.",
   url: "https://soberhelpline.com/family-support-forum",
   telephone: "+14582988008",
   sameAs: ["https://soberhelpline.com"],
@@ -92,6 +93,8 @@ const faqSchema = {
 };
 
 export default function FamilyForumLanding() {
+  // A visitor who came from the app is shown no membership price or purchase link.
+  const fromApp = arrivedFromApp();
   const [featuredThread, setFeaturedThread] = useState<{ id: string; title: string; created_at: string; topic_id: string } | null>(null);
 
   useEffect(() => {
@@ -116,7 +119,7 @@ export default function FamilyForumLanding() {
     <>
       <SEOHead
         title="Family Addiction Support Forum | Connect with Families Who Understand | Sober Helpline"
-        description="Join a professionally moderated sober support forum for families navigating addiction. Anonymous, judgment-free, available 24/7. Or book a private crisis family consult if you need one-on-one help now."
+        description="Join a professionally moderated sober support forum for families navigating addiction. Anonymous, judgment-free, open any time. Or book a private crisis family consult if you need one-on-one help now."
         jsonLd={[localBusinessSchema, faqSchema] as any}
       />
 
@@ -151,12 +154,14 @@ export default function FamilyForumLanding() {
                     Start with Family Squares, Free Every Monday
                   </Button>
                 </Link>
-                <Link to="/family-membership">
-                  <Button size="lg" variant="outline" className="gap-2">
-                    <Users className="h-4 w-4" />
-                    Then Join Membership
-                  </Button>
-                </Link>
+                {!fromApp && (
+                  <Link to="/family-membership">
+                    <Button size="lg" variant="outline" className="gap-2">
+                      <Users className="h-4 w-4" />
+                      Then Join Membership
+                    </Button>
+                  </Link>
+                )}
               </div>
               <p className="text-xs text-muted-foreground mt-4">Free Zoom first, membership for ongoing support, coaching only if you need a private plan</p>
             </div>
@@ -211,7 +216,7 @@ export default function FamilyForumLanding() {
               <span className="hidden sm:block text-border">•</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />Professionally Moderated</span>
               <span className="hidden sm:block text-border">•</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />Available 24/7</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />Open any time</span>
               <span className="hidden sm:block text-border">•</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />No Judgment</span>
               <span className="hidden sm:block text-border">•</span>
@@ -304,14 +309,16 @@ export default function FamilyForumLanding() {
                     and ensure the community stays safe and constructive.
                   </p>
                 </div>
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link to="/family-membership">
-                    <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
-                      Join the Community
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
+                {!fromApp && (
+                  <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                    <Link to="/family-membership">
+                      <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white">
+                        Join the Community
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -338,12 +345,14 @@ export default function FamilyForumLanding() {
             </div>
             <div className="text-center">
               <p className="text-muted-foreground text-sm mb-4">Full access to the forum is included with membership.</p>
-              <Link to="/family-membership">
-                <Button size="lg" className="gap-2">
-                  <Lock className="h-4 w-4" />
-                  Unlock Full Access — $9.99/mo
-                </Button>
-              </Link>
+              {!fromApp && (
+                <Link to="/family-membership">
+                  <Button size="lg" className="gap-2">
+                    <Lock className="h-4 w-4" />
+                    Unlock Full Access — $9.99/mo
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </section>
@@ -374,18 +383,20 @@ export default function FamilyForumLanding() {
                 </div>
               ))}
             </div>
-            <div className="text-center">
-              <div className="inline-block bg-background rounded-2xl border border-primary/20 px-8 py-6 shadow-sm">
-                <p className="text-4xl font-bold text-logo-blue mb-1">$9.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
-                <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
-                <Link to="/family-membership">
-                  <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-10">
-                    <Users className="h-4 w-4" />
-                    Join the Community
-                  </Button>
-                </Link>
+            {!fromApp && (
+              <div className="text-center">
+                <div className="inline-block bg-background rounded-2xl border border-primary/20 px-8 py-6 shadow-sm">
+                  <p className="text-4xl font-bold text-logo-blue mb-1">$9.99<span className="text-lg font-normal text-muted-foreground">/month</span></p>
+                  <p className="text-sm text-muted-foreground mb-4">Everything above, cancel anytime</p>
+                  <Link to="/family-membership">
+                    <Button size="lg" className="gap-2 bg-logo-blue hover:bg-logo-blue/90 text-white px-10">
+                      <Users className="h-4 w-4" />
+                      Join the Community
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 
@@ -424,12 +435,14 @@ export default function FamilyForumLanding() {
                   Join Family Squares, Free Every Monday
                 </Button>
               </Link>
-              <Link to="/family-membership">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <Users className="h-4 w-4" />
-                  Join Membership
-                </Button>
-              </Link>
+              {!fromApp && (
+                <Link to="/family-membership">
+                  <Button size="lg" variant="outline" className="gap-2">
+                    <Users className="h-4 w-4" />
+                    Join Membership
+                  </Button>
+                </Link>
+              )}
               <Link to="/family-consultation">
                 <Button size="lg" variant="outline" className="gap-2">
                   <Phone className="h-4 w-4" />

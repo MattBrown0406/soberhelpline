@@ -389,6 +389,7 @@ export const excludedSitemapRoutes = new Set([
   '/membership/billing',
   '/cancel-membership',
   '/cancel',
+  '/stop-weekly-registration',
   '/family-education',
   '/family-education/tracks',
   '/family-forum',

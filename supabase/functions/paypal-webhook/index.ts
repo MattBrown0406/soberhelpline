@@ -265,17 +265,37 @@ Deno.serve(async (req) => {
           status: newStatus,
           updated_at: nowIso,
         };
-        if (newStatus === 'cancelled') {
-          updatePayload.cancelled_at = nowIso;
-          updatePayload.paypal_cancel_confirmed_at = nowIso;
-          updatePayload.cancellation_source = 'paypal_webhook';
-        }
-
-        const { data: existing } = await supabaseClient
+        const { data: existingRows, error: existingError } = await supabaseClient
           .from('provider_subscriptions')
-          .select('next_billing_date, access_ends_at')
-          .eq('paypal_subscription_id', subscriptionId)
-          .maybeSingle();
+          .select('next_billing_date, access_ends_at, cancellation_source')
+          .eq('paypal_subscription_id', subscriptionId);
+        if (existingError) {
+          // Not knowing whether an administrator revoked this member, do not
+          // write over the row. PayPal sends the notice again.
+          console.error(`Lookup before updating subscription to ${newStatus} failed:`, existingError);
+          return new Response(
+            JSON.stringify({ error: 'Subscription lookup failed' }),
+            { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+        const rowsOnFile = (existingRows ?? []) as { next_billing_date: string | null; access_ends_at: string | null; cancellation_source: string | null }[];
+        const existing = rowsOnFile[0] ?? null;
+
+        // A member an administrator revoked stays revoked, whatever PayPal says
+        // next (cancelled, suspended or expired): the status and the 'admin…'
+        // mark are what keep the membership from being switched back on by a
+        // later payment, sync or app sign-in.
+        const adminRevoked = rowsOnFile.some((r) =>
+          typeof r.cancellation_source === 'string' && r.cancellation_source.startsWith('admin'));
+        if (adminRevoked) delete updatePayload.status;
+
+        if (newStatus === 'cancelled') {
+          updatePayload.paypal_cancel_confirmed_at = nowIso;
+          if (!adminRevoked) {
+            updatePayload.cancelled_at = nowIso;
+            updatePayload.cancellation_source = 'paypal_webhook';
+          }
+        }
 
         if (newStatus === 'cancelled' && existing && !existing.access_ends_at) {
           updatePayload.access_ends_at = existing.next_billing_date || null;

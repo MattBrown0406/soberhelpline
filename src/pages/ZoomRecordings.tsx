@@ -3,13 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { untypedSupabase } from "@/integrations/supabase/untyped";
-import { User } from "@supabase/supabase-js";
 import { Video, Lock, Loader2, Calendar, Clock, Play, ArrowLeft, Sparkles, Users, BookOpen, Shield, MessageCircle, Tag, ChevronDown, ChevronUp, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { IconTile, KindPill, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
-import { format } from "date-fns";
+import { formatDateOnly } from "@/lib/dateOnly";
 import {
   WORKSHEET_BUCKET, WORKSHEET_COLUMNS, WORKSHEET_LINK_SECONDS, WORKSHEET_TABLE,
   formatFileSize, groupWorksheetsByRecording, isWorksheetsNotReadyError, worksheetCountLabel, worksheetDownloadName,
@@ -202,54 +201,41 @@ function Worksheets({ worksheets }: { worksheets: RecordingWorksheet[] }) {
 
 export default function ZoomRecordings() {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasMembership, setHasMembership] = useState(false);
+  // The list request: loading until the first answer, "error" when it failed.
+  const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
+  const [reloadKey, setReloadKey] = useState(0);
   const [recordings, setRecordings] = useState<Recording[]>([]);
   const [selectedRecording, setSelectedRecording] = useState<Recording | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [worksheetsByRecording, setWorksheetsByRecording] = useState<Record<string, RecordingWorksheet[]>>({});
 
+  // This page only renders inside SubscriberRoute, which has already let the
+  // visitor in (a member, or staff), so it loads the list for whoever is here.
+  // The database rules still decide what each person may read.
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-    return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const checkMembership = async () => {
-      if (!user) { setHasMembership(false); setIsLoading(false); return; }
-      try {
-        const { data: isMember, error } = await supabase.rpc('is_active_family_member', { _user_id: user.id });
-        setHasMembership(!error && isMember === true);
-      } catch {
-        setHasMembership(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkMembership();
-  }, [user]);
-
-  useEffect(() => {
+    let cancelled = false;
     const fetchRecordings = async () => {
-      if (!hasMembership) return;
-      const { data, error } = await supabase
-        .from('zoom_call_recordings')
-        .select('*')
-        .eq('is_published', true)
-        .order('recording_date', { ascending: false });
-      if (!error && data) setRecordings(data as unknown as Recording[]);
+      try {
+        const { data, error } = await supabase
+          .from('zoom_call_recordings')
+          .select('*')
+          .eq('is_published', true)
+          .order('recording_date', { ascending: false });
+        if (cancelled) return;
+        if (error || !data) {
+          setLoadState("error");
+          return;
+        }
+        setRecordings(data as unknown as Recording[]);
+        setLoadState("ready");
+      } catch {
+        if (!cancelled) setLoadState("error");
+      }
     };
     // Every worksheet she may see, in one request: the database only returns
     // worksheets of published recordings, which are the ones listed here. The
     // generated types do not know this table yet, hence the untyped client.
     const fetchWorksheets = async () => {
-      if (!hasMembership) return;
       try {
         const { data, error } = await untypedSupabase
           .from(WORKSHEET_TABLE)
@@ -257,6 +243,7 @@ export default function ZoomRecordings() {
           .order('created_at', { ascending: false })
           .limit(1000);
         if (error) throw error;
+        if (cancelled) return;
         setWorksheetsByRecording(groupWorksheetsByRecording((data || []) as RecordingWorksheet[]));
       } catch (error) {
         // Before the table exists there are simply no worksheets to show.
@@ -265,13 +252,14 @@ export default function ZoomRecordings() {
     };
     fetchRecordings();
     fetchWorksheets();
-  }, [hasMembership]);
+    return () => {
+      cancelled = true;
+    };
+  }, [reloadKey]);
 
-  // No membership wall here: this page only renders inside SubscriberRoute,
-  // which has already let the visitor in (a member, or staff). A second check
-  // here used to flash a "Members Only" card at members while it loaded, and
-  // lock out admins and moderators.
-
+  // No membership wall here: a second check on this page used to flash a
+  // "Members Only" card at members while it loaded, and lock out admins and
+  // moderators.
 
   // Collect all unique tags across loaded recordings
   const allTags = Array.from(new Set(recordings.flatMap(r => r.tags || []))).sort();
@@ -354,7 +342,7 @@ export default function ZoomRecordings() {
                     <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-muted-foreground">
                       <KindPill tone="navy" className="gap-1">
                         <Calendar className="w-3 h-3" aria-hidden="true" />
-                        {format(new Date(selectedRecording.recording_date), 'MMMM d, yyyy')}
+                        {formatDateOnly(selectedRecording.recording_date, 'MMMM d, yyyy')}
                       </KindPill>
                       {selectedRecording.duration_minutes && (
                         <span className="flex items-center gap-1">
@@ -385,6 +373,33 @@ export default function ZoomRecordings() {
                 />
               </Panel>
             </div>
+          ) : loadState === "loading" ? (
+            <Panel className="py-10 text-center sm:py-12">
+              <div role="status" className="flex flex-col items-center gap-3 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" aria-hidden="true" />
+                <p>Loading recordings...</p>
+              </div>
+            </Panel>
+          ) : loadState === "error" ? (
+            <Panel className="py-10 text-center sm:py-12">
+              <div role="alert">
+                <h2 className="mb-2 text-lg font-semibold text-foreground">We could not load the recordings just now</h2>
+                <p className="mx-auto max-w-prose text-muted-foreground">
+                  This is usually a weak connection. Please try again.
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                className="mt-4 min-h-11 rounded-xl px-5"
+                onClick={() => {
+                  setLoadState("loading");
+                  setReloadKey((key) => key + 1);
+                }}
+              >
+                Try again
+              </Button>
+            </Panel>
           ) : recordings.length === 0 ? (
             <Panel className="py-10 text-center sm:py-12">
               <IconTile icon={Video} tone="navy" size="lg" className="mx-auto mb-4" />
@@ -455,7 +470,7 @@ export default function ZoomRecordings() {
                               <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#16294a]/[0.05] dark:bg-sky-400/[0.06]">
                                 <img src={logo} alt="Sober Helpline" className="w-24 h-auto opacity-60" />
                                 <span className="text-xs font-semibold text-[#16294a] dark:text-sky-200">
-                                  {format(new Date(recording.recording_date), 'MMM d, yyyy')}
+                                  {formatDateOnly(recording.recording_date, 'MMM d, yyyy')}
                                 </span>
                               </div>
                             )}
@@ -470,7 +485,7 @@ export default function ZoomRecordings() {
                               <IconTile icon={Video} tone="navy" size="sm" />
                               <KindPill tone="navy" className="gap-1">
                                 <Calendar className="w-3 h-3" aria-hidden="true" />
-                                {format(new Date(recording.recording_date), 'MMM d, yyyy')}
+                                {formatDateOnly(recording.recording_date, 'MMM d, yyyy')}
                               </KindPill>
                               {recording.duration_minutes && (
                                 <span className="flex items-center gap-1 text-xs text-muted-foreground">

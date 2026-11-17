@@ -9,6 +9,7 @@ import { User } from "@supabase/supabase-js";
 import SEOHead from "@/components/SEOHead";
 import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks";
 import FreeConsultationCTA from "@/components/FreeConsultationCTA";
+import { arrivedFromApp } from "@/lib/webSession";
 
 export default function FamilySupport() {
   const [user, setUser] = useState<User | null>(null);
@@ -116,12 +117,15 @@ export default function FamilySupport() {
                         Join Family Squares, Free Every Monday
                       </Button>
                     </Link>
-                    <Link to="/family-membership">
-                      <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                        <Users className="h-4 w-4" />
-                        Explore Membership
-                      </Button>
-                    </Link>
+                    {/* No membership button for a visitor who came from the app. */}
+                    {!arrivedFromApp() && (
+                      <Link to="/family-membership">
+                        <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                          <Users className="h-4 w-4" />
+                          Explore Membership
+                        </Button>
+                      </Link>
+                    )}
                     <Link to="/family-coaching">
                       <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                         <Phone className="h-4 w-4" />
@@ -234,8 +238,8 @@ export default function FamilySupport() {
 
                 <div className="border-t border-border pt-8" />
               </div>
-            ) : (
-              /* Non-member Premium Teaser */
+            ) : arrivedFromApp() ? null : (
+              /* Non-member Premium Teaser (not shown to a visitor who came from the app) */
               <div className="mb-12">
                 <Card className="border-l-4 border-l-amber-400 border-t border-r border-b border-border bg-amber-50 dark:bg-amber-950/20">
                   <CardContent className="p-6 md:p-8">
@@ -448,12 +452,14 @@ export default function FamilySupport() {
                       Join Family Squares
                     </Button>
                   </Link>
-                  <Link to="/family-membership">
-                    <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
-                      <Users className="h-4 w-4" />
-                      Start Membership
-                    </Button>
-                  </Link>
+                  {!arrivedFromApp() && (
+                    <Link to="/family-membership">
+                      <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                        <Users className="h-4 w-4" />
+                        Start Membership
+                      </Button>
+                    </Link>
+                  )}
                   <a href="tel:458-298-8008">
                     <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
                       <Phone className="h-4 w-4" />

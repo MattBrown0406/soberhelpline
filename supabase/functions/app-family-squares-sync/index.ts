@@ -234,8 +234,8 @@ Deno.serve(async (req: Request) => {
       // This database does not have that helper. Do here what the batch below
       // does for one attendee: any row on file for that Monday (website or
       // app) is her seat and nothing is written; otherwise one app row. Two
-      // requests at the same moment could both insert: the next batch run
-      // keeps one app row per email and removes the others.
+      // requests at the same moment cannot both insert: the table allows one
+      // app row per email and date, and the loser is told her seat is on file.
       const onFile: Array<{ email: string | null }> = [];
       const pageSize = 1000;
       for (let offset = 0; ; offset += pageSize) {
@@ -253,9 +253,14 @@ Deno.serve(async (req: Request) => {
       const { error: insertError } = await admin
         .from("zoom_meeting_registrations")
         .insert(newAppSeatRow(email, name, meetingDate));
+      // 23505: another request (or the batch below) saved her app row between
+      // the read and this insert. The seat exists, which is all she asked for.
+      if (insertError?.code === "23505") return json({ ok: true, already_registered: true, meeting_date: meetingDate });
       if (insertError) throw insertError;
       return json({ ok: true, already_registered: false, meeting_date: meetingDate });
-    } catch {
+    } catch (error) {
+      // The code only: an error message can carry the email address.
+      console.error("ensure-registration failed", (error as { code?: unknown } | null)?.code ?? "unknown");
       return json({ ok: false, error: "registration_failed" }, 500);
     }
   }

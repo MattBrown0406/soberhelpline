@@ -22,6 +22,20 @@ interface ResolvedSession {
 const STANDARD_CENTS = 15000;
 const MEMBER_CENTS = 12500;
 
+// A refused request (expired link, already paid, ...) comes back with a non-2xx
+// status, so `data` is null and the reason code sits in the response body that
+// rides on the error.
+async function functionErrorCode(error: unknown): Promise<string | null> {
+  const context = (error as { context?: unknown } | null)?.context;
+  if (typeof Response === "undefined" || !(context instanceof Response)) return null;
+  try {
+    const body = await context.clone().json();
+    return typeof body?.code === "string" ? body.code : null;
+  } catch {
+    return null;
+  }
+}
+
 const formatUsd = (cents: number) => `$${(cents / 100).toFixed(2)} USD`;
 
 declare global {
@@ -62,6 +76,8 @@ export default function CoachingCheckout() {
   const [cardEligible, setCardEligible] = useState(false);
   const buttonsHost = useRef<HTMLDivElement | null>(null);
   const buttonsMounted = useRef(false);
+  // Why the last "create order" call was refused, for PayPal's error callbacks.
+  const orderErrorCode = useRef<string | null>(null);
   const paypalClientId = session?.paypal_client_id ?? "";
   // The amount always comes from the server (which took it from the signed token).
   const amountLabel = session ? formatUsd(session.amount_cents) : null;
@@ -82,7 +98,9 @@ export default function CoachingCheckout() {
         });
         if (cancelled) return;
         if (error || !data?.ok) {
-          setErrorCode(data?.code ?? "resolve_failed");
+          const code = data?.code ?? (await functionErrorCode(error)) ?? "resolve_failed";
+          if (cancelled) return;
+          setErrorCode(code);
           setState("error");
           return;
         }
@@ -106,7 +124,12 @@ export default function CoachingCheckout() {
       const { data, error } = await supabase.functions.invoke("coaching-order-create", {
         body: { session_id: session.session_id },
       });
-      if (error || !data?.ok) throw new Error(data?.code ?? "create_failed");
+      if (error || !data?.ok) {
+        const code = data?.code ?? (await functionErrorCode(error)) ?? "create_failed";
+        orderErrorCode.current = code;
+        throw new Error(code);
+      }
+      orderErrorCode.current = null;
       return data.order_id as string;
     };
 
@@ -116,7 +139,7 @@ export default function CoachingCheckout() {
         body: { session_id: session.session_id, order_id: orderId },
       });
       if (error || !data?.ok) {
-        setErrorCode(data?.code ?? "capture_failed");
+        setErrorCode(data?.code ?? (await functionErrorCode(error)) ?? "capture_failed");
         setState("error");
         return;
       }
@@ -135,7 +158,7 @@ export default function CoachingCheckout() {
           createOrder,
           onApprove: (approve: any) => captureOrder(approve.orderID),
           onError: () => {
-            setErrorCode("paypal_button_error");
+            setErrorCode(orderErrorCode.current ?? "paypal_button_error");
             setState("error");
           },
         }).render(buttonsHost.current);
@@ -147,7 +170,7 @@ export default function CoachingCheckout() {
               createOrder,
               onApprove: (data: any) => captureOrder(data.orderID),
               onError: () => {
-                setErrorCode("paypal_card_error");
+                setErrorCode(orderErrorCode.current ?? "paypal_card_error");
                 setState("error");
               },
             });
@@ -175,7 +198,7 @@ export default function CoachingCheckout() {
                   cardFields.submit().catch(() => {
                     btn.removeAttribute("disabled");
                     btn.classList.remove("opacity-60", "cursor-not-allowed");
-                    setErrorCode("paypal_card_error");
+                    setErrorCode(orderErrorCode.current ?? "paypal_card_error");
                     setState("error");
                   });
                 });

@@ -217,16 +217,30 @@ async function start(req: Request, body: Record<string, unknown>) {
       return json({ ok: false, code: "confirm_pending" });
     }
 
-    // Unconfirmed and never paid: an abandoned sign-up (possibly typed by
-    // someone else). Nobody has ever been able to sign in to it, so the person
-    // starting now sets the password and details.
-    const { error: updateError } = await admin.auth.admin.updateUserById(existingId, {
-      password: input.password,
-      user_metadata: { ...(existing.user.user_metadata ?? {}), ...metadata },
-    });
-    if (updateError) {
-      if (isWeakPassword(updateError)) return json({ ok: false, code: "weak_password" });
-      throw new Error(`account update failed: ${updateError.message}`);
+    // Unconfirmed and never paid: an abandoned sign-up. Neither the person who
+    // started it nor the person starting now has shown that the address is
+    // theirs, so neither one's password may be the one the real owner confirms:
+    // whoever is not the owner could then sign in as them. If the password
+    // typed now is the one on file, it is the same person and nothing changes.
+    // If it differs, the password becomes a random one nobody knows. The
+    // confirmation link signs the owner in, and she sets a password from
+    // "Forgot password" on the log-in page.
+    let typedPasswordDiffers = false;
+    try {
+      const probe = createClient(supabaseUrl, Deno.env.get("SUPABASE_ANON_KEY") ?? "", {
+        auth: { persistSession: false, autoRefreshToken: false },
+      });
+      const { error: probeError } = await probe.auth.signInWithPassword({ email: input.email, password: input.password });
+      typedPasswordDiffers = !!probeError &&
+        (probeError.code === "invalid_credentials" || /invalid login credentials/i.test(probeError.message ?? ""));
+    } catch {
+      // Could not tell: leave the password on file alone.
+    }
+    if (typedPasswordDiffers) {
+      const bytes = crypto.getRandomValues(new Uint8Array(24));
+      const random = `Aa1!${btoa(String.fromCharCode(...bytes))}`;
+      const { error: resetError } = await admin.auth.admin.updateUserById(existingId, { password: random });
+      if (resetError) throw new Error(`account update failed: ${resetError.message}`);
     }
     await resendConfirmation();
     userId = existingId;

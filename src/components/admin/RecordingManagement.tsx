@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Video, ExternalLink, CheckCircle, X, FileText, ChevronUp, ChevronDown, Upload, Loader2 } from "lucide-react";
 import { format } from "date-fns";
+import { formatDateOnly, pacificToday } from "@/lib/dateOnly";
 import {
   WORKSHEET_BUCKET, WORKSHEET_COLUMNS, WORKSHEET_FALLBACK_FILE_NAME, WORKSHEET_MIME, WORKSHEET_TABLE, WORKSHEET_TITLE_MAX,
   cleanWorksheetTitle, defaultWorksheetTitle, formatFileSize, isWorksheetsNotReadyError, sortWorksheets,
@@ -70,7 +71,8 @@ const emptyForm: RecordingForm = {
   description: "",
   youtube_url: "",
   zoom_passcode: "",
-  recording_date: new Date().toISOString().split("T")[0],
+  // Filled in with today's Pacific date when the "Add Recording" dialog opens.
+  recording_date: "",
   duration_minutes: "",
   thumbnail_url: "",
   is_published: true,
@@ -146,6 +148,10 @@ export function RecordingManagement() {
   const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number; name: string } | null>(null);
   const [savedWithoutWorksheets, setSavedWithoutWorksheets] = useState(false);
   const worksheetFileInput = useRef<HTMLInputElement>(null);
+  // The list as it is right now. An upload or a move can finish after a title
+  // was saved meanwhile, and must not put the older title back on screen.
+  const latestWorksheets = useRef<RecordingWorksheet[]>(worksheets);
+  latestWorksheets.current = worksheets;
   const worksheetsSection = useRef<HTMLDivElement>(null);
   // The recording whose worksheets the dialog is showing, so a slow answer for another one is ignored.
   const worksheetsFor = useRef<string | null>(null);
@@ -237,7 +243,8 @@ export function RecordingManagement() {
 
   const openNew = () => {
     setEditingId(null);
-    setForm(emptyForm);
+    // Today in Pacific time, worked out now (not the UTC date from when the page loaded).
+    setForm({ ...emptyForm, recording_date: pacificToday() });
     setNewTimestamp({ time: "", label: "" });
     worksheetsFor.current = null;
     resetWorksheetState();
@@ -311,7 +318,14 @@ export function RecordingManagement() {
     const title = cleanWorksheetTitle(pending.title) || defaultWorksheetTitle(pending.file.name);
     const path = worksheetObjectPath(recordingId, newUuid());
     try {
-      const { error: uploadError } = await worksheetsBucket().upload(path, pending.file, {
+      // The storage client sends a File with the File's own type and ignores
+      // `contentType` for it. A PDF handed over with no type (one picked from
+      // iCloud Drive, for one) would go up as a generic file and the PDF-only
+      // bucket would refuse it, so give it its type first.
+      const body = pending.file.type === WORKSHEET_MIME
+        ? pending.file
+        : new File([pending.file], pending.file.name, { type: WORKSHEET_MIME });
+      const { error: uploadError } = await worksheetsBucket().upload(path, body, {
         contentType: WORKSHEET_MIME,
         upsert: false,
       });
@@ -391,7 +405,8 @@ export function RecordingManagement() {
     try {
       const { added, failed } = await uploadPendingWorksheets(recordingId, pendingWorksheets, worksheets);
       setPendingWorksheets(failed);
-      showWorksheets(recordingId, sortWorksheets([...worksheets, ...added]));
+      const addedIds = new Set(added.map((w) => w.id));
+      showWorksheets(recordingId, sortWorksheets([...latestWorksheets.current.filter((w) => !addedIds.has(w.id)), ...added]));
       if (added.length > 0) toast.success(added.length === 1 ? "Worksheet uploaded" : `${added.length} worksheets uploaded`);
       failed.forEach((f) => toast.error(`"${f.file.name}" was not uploaded. ${f.error}`));
       if (failed.length > 0) await loadWorksheets(recordingId);
@@ -441,7 +456,8 @@ export function RecordingManagement() {
         const { data, error } = await worksheetsTable().update({ sort_order: i }).eq("id", reordered[i].id).select("id");
         if (error || !data?.length) throw error || new Error("No worksheet was updated");
       }
-      showWorksheets(recordingId, reordered.map((w, i) => ({ ...w, sort_order: i })));
+      const latest = new Map(latestWorksheets.current.map((w) => [w.id, w]));
+      showWorksheets(recordingId, reordered.map((w, i) => ({ ...(latest.get(w.id) ?? w), sort_order: i })));
     } catch (error) {
       console.error("Worksheet order could not be saved", error);
       toast.error("The new order could not be saved. Please try again.");
@@ -562,13 +578,13 @@ export function RecordingManagement() {
 
     const { data: savedRecording, error } = mutation;
 
-    // Stays false, and the dialog closes as it always has, unless PDFs are waiting.
+    // Stays false, and the dialog closes, unless the save failed or PDFs are waiting.
     let keepDialogOpen = false;
 
     if (error) {
       toast.error(editingId ? "Failed to update recording" : "Failed to add recording");
-      // Do not throw away the PDFs he picked.
-      keepDialogOpen = pendingWorksheets.length > 0;
+      // Do not throw away what he typed or the PDFs he picked.
+      keepDialogOpen = true;
     } else {
       if (payload.is_published && savedRecording?.id) {
         try {
@@ -622,8 +638,13 @@ export function RecordingManagement() {
     const worksheetCount = worksheetCounts[id] || 0;
     if (!confirm(worksheetCount > 0 ? `Delete this recording and its ${worksheetCountLabel(worksheetCount)}?` : "Delete this recording?")) return;
     const files = await removeWorksheetFilesFor(id);
-    const { error } = await supabase.from("zoom_call_recordings").delete().eq("id", id);
-    if (error) {
+    const { data: deletedRows, error } = await supabase.from("zoom_call_recordings").delete().eq("id", id).select("id");
+    // No error and no row back means nothing was deleted (a lost session, or the row is hidden).
+    const notDeleted = !error && (deletedRows?.length ?? 0) === 0;
+    if (error || notDeleted) {
+      const failure = notDeleted
+        ? "The recording was not deleted. Your session may have expired: reload the page, log in, and try again."
+        : "Failed to delete recording.";
       if (files.removedAny) {
         // The files are gone but the recording is not: take its worksheets off too,
         // so no worksheet is listed without a file behind it.
@@ -635,11 +656,12 @@ export function RecordingManagement() {
           rowsRemoved = false;
         }
         toast.error(rowsRemoved
-          ? "Failed to delete recording. Its worksheets were already removed."
-          : "Failed to delete recording. Its worksheet files were already deleted, so open the recording and remove its worksheets.");
+          ? `${failure} Its worksheets were already removed.`
+          : `${failure} Its worksheet files were already deleted, so open the recording and remove its worksheets.`);
         fetchRecordings();
       } else {
-        toast.error("Failed to delete recording");
+        toast.error(notDeleted ? failure : "Failed to delete recording");
+        if (notDeleted) fetchRecordings();
       }
     } else {
       if (files.leftBehind) toast.warning("Recording deleted. Members can no longer see its worksheets, but their files could not be deleted from storage.");
@@ -700,7 +722,7 @@ export function RecordingManagement() {
           </div>
         )}
       </TableCell>
-      <TableCell>{format(new Date(r.recording_date), "MMM d, yyyy")}</TableCell>
+      <TableCell>{formatDateOnly(r.recording_date, "MMM d, yyyy")}</TableCell>
       <TableCell>{r.duration_minutes ? `${r.duration_minutes} min` : "—"}</TableCell>
       <TableCell>{r.key_timestamps?.length || 0}</TableCell>
       <TableCell>{r.is_published ? "✅" : "❌"}</TableCell>

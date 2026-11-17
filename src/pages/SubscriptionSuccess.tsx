@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { usePayPalSubscription } from '@/hooks/usePayPalSubscription';
@@ -77,29 +77,36 @@ export default function SubscriptionSuccess() {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="max-w-md w-full">
-          <CardContent className="pt-6 text-center">
-            <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
-            <p className="text-muted-foreground">Activating your subscription...</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
+  // The internal error text is never shown: a plain sentence says what to do.
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background p-4">
         <Card className="max-w-md w-full">
           <CardHeader>
             <CardTitle className="text-destructive">Activation Error</CardTitle>
-            <CardDescription>{error}</CardDescription>
+            <CardDescription>
+              We could not confirm your membership just now. If you were charged, your membership will still open
+              within a few minutes. If it does not, please use the{' '}
+              <Link to="/contact" className="font-medium text-primary underline underline-offset-4">contact page</Link>.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Button onClick={() => navigate('/')}>Return Home</Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Keep the "Activating" card up until we know which kind of subscription
+  // this is, so a new member never sees the provider-listing text first.
+  if (isLoading || isProviderSubscription === null) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="max-w-md w-full">
+          <CardContent className="pt-6 text-center">
+            <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
+            <p className="text-muted-foreground">Activating your subscription...</p>
           </CardContent>
         </Card>
       </div>

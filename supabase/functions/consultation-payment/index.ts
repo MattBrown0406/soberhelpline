@@ -299,21 +299,36 @@ Deno.serve(async (req) => {
       let captureData: any;
       try {
         const accessToken = await getPayPalAccessToken();
-        const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!captureResponse.ok) {
-          const error = await captureResponse.text();
-          console.error('PayPal capture error:', error);
-          throw new Error('Payment capture failed');
+        let captureResponse: Response | null = null;
+        try {
+          captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+        } catch {
+          console.error('PayPal capture request did not complete');
         }
 
-        captureData = await captureResponse.json();
+        if (captureResponse?.ok) {
+          captureData = await captureResponse.json();
+        } else {
+          if (captureResponse) console.error('PayPal capture error:', await captureResponse.text());
+          // No clear answer does not mean no money moved: an earlier attempt
+          // may have captured the payment and lost PayPal's reply, and PayPal
+          // refuses to capture the same order twice. Ask PayPal what the order
+          // says before telling the customer it failed.
+          const checkResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` },
+          });
+          const orderNow = checkResponse.ok ? await checkResponse.json() : null;
+          if (orderNow?.status !== 'COMPLETED') throw new Error('Payment capture failed');
+          console.log(`Order ${orderId} was already captured; continuing to the booking`);
+          captureData = orderNow;
+        }
+
         if (captureData.status !== 'COMPLETED') {
           throw new Error(`Payment not completed. Status: ${captureData.status}`);
         }
@@ -328,11 +343,31 @@ Deno.serve(async (req) => {
 
       console.log(`Payment captured for order ${orderId}`);
 
-      // Mark order as captured
-      await adminClient
+      // Mark order as captured. Only one request may take it from here: two
+      // that reached this point together (a stale claim taken twice) must not
+      // both create a booking.
+      const { data: markedRows } = await adminClient
         .from('pending_consultation_orders')
         .update({ status: 'captured' })
-        .eq('id', pendingOrder.id);
+        .eq('id', pendingOrder.id)
+        .eq('status', 'capturing')
+        .select('id');
+      if (!markedRows?.length) {
+        const { data: bookingsSoFar } = await adminClient
+          .from('consultation_bookings')
+          .select('id')
+          .eq('paypal_order_id', orderId);
+        if (bookingsSoFar?.length) {
+          return new Response(JSON.stringify({
+            success: true,
+            duplicate: true,
+            bookingIds: bookingsSoFar.map((b: any) => b.id),
+          }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        }
+        return new Response(JSON.stringify({ error: 'Order not found or already processed' }), {
+          status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
 
       // Now create the actual booking via the book-consultation function, with the
       // account, member status and amount decided when this order was created, and

@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import { getTrack, savePendingTrack, useLearningPath, type MemberTrack } from "@/hooks/useLearningPath";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
 import { useToast } from "@/hooks/use-toast";
+import { arrivedFromApp } from "@/lib/webSession";
 
 // --- Types ---
 interface QuizAnswers {
@@ -354,14 +355,19 @@ const OnboardingQuiz = () => {
                 {!signedIn && (
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     You'll sign in first, then your path is saved on your member home page.
-                    Not a member yet?{" "}
-                    <Link
-                      to="/family-membership"
-                      className="relative inline-block rounded font-semibold text-primary underline underline-offset-4 after:absolute after:inset-x-0 after:-inset-y-3 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      See membership
-                    </Link>
-                    .
+                    {/* No membership link for a visitor who came from the app. */}
+                    {!arrivedFromApp() && (
+                      <>
+                        {" "}Not a member yet?{" "}
+                        <Link
+                          to="/family-membership"
+                          className="relative inline-block rounded font-semibold text-primary underline underline-offset-4 after:absolute after:inset-x-0 after:-inset-y-3 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        >
+                          See membership
+                        </Link>
+                        .
+                      </>
+                    )}
                   </p>
                 )}
                 {signedIn && isMember && (

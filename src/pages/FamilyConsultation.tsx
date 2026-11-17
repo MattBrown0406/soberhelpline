@@ -8,6 +8,7 @@ import RegionalFamilySupportLinks from "@/components/RegionalFamilySupportLinks"
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { trackConversionEvent, trackPhoneClick } from "@/lib/conversionTracking";
 import { mattBrownPersonSchema } from "@/lib/mattBrownSchema";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const bookNowSignals = [
   "You cannot wait until Monday to ask the question that is keeping you up.",
@@ -137,7 +138,12 @@ export default function FamilyConsultation() {
               <CardContent className="py-5">
                 <p className="text-sm md:text-base text-foreground">
                   <span className="font-semibold">Each 60-minute session is $150, or $125 for members.</span> Active{" "}
-                  <Link to="/family-membership" className="text-primary hover:underline font-medium">family membership</Link>
+                  {/* Plain words, no membership link, for a visitor who came from the app. */}
+                  {arrivedFromApp() ? (
+                    "family membership"
+                  ) : (
+                    <Link to="/family-membership" className="text-primary hover:underline font-medium">family membership</Link>
+                  )}
                   {" "}members are billed the $125 member price automatically at booking.
                 </p>
               </CardContent>

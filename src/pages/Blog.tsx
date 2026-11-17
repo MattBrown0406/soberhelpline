@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { blogPosts } from "@/data/blogPosts";
 import { blogPostPath } from "@/lib/blogPaths";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -100,9 +101,12 @@ const Blog = () => {
             <Link to="/monday-zoom-registration">
               <Button>Join Family Squares</Button>
             </Link>
-            <Link to="/family-membership">
-              <Button variant="outline">Explore Membership</Button>
-            </Link>
+            {/* No membership button for a visitor who came from the app. */}
+            {!arrivedFromApp() && (
+              <Link to="/family-membership">
+                <Button variant="outline">Explore Membership</Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

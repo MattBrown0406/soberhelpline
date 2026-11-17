@@ -1,5 +1,6 @@
 import AfterHoursSafetyStrip from "@/components/AfterHoursSafetyStrip";
 import { Link } from "react-router-dom";
+import { arrivedFromApp } from "@/lib/webSession";
 
 export default function RegionalFamilySupportOptions({ state }: { state: string }) {
   const linkClass = "font-semibold text-primary underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
@@ -14,7 +15,8 @@ export default function RegionalFamilySupportOptions({ state }: { state: string 
         </p>
         <ul className="mt-6 space-y-5 text-muted-foreground">
           <li><Link to="/monday-zoom-registration" className={linkClass}>Free Monday Family Squares</Link>: a weekly online family-support meeting at 7:00 PM Pacific. Registration is free; check the registration page for the next meeting.</li>
-          <li><Link to="/family-membership" className={linkClass}>Family education membership</Link>: paid access to member resources. Review the current price, trial terms, and included resources before joining.</li>
+          {/* No membership line for a visitor who came from the app. */}
+          {!arrivedFromApp() && <li><Link to="/family-membership" className={linkClass}>Family education membership</Link>: paid access to member resources. Review the current price, trial terms, and included resources before joining.</li>}
           <li><Link to="/family-coaching" className={linkClass}>Private family coaching</Link>: one-on-one conversations about your family situation. Standard sessions are $150, or $125 for members; confirm the provider, rate, and availability on the <Link to="/book-consultation" className={linkClass}>booking page</Link>. Coaching is booked separately from membership.</li>
           <li><Link to="/family-support" className={linkClass}>Family support hub</Link>: compare resources if you are not ready to choose a paid option.</li>
         </ul>

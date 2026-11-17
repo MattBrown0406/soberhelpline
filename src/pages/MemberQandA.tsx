@@ -5,7 +5,7 @@ import { MessageCircle, MessageCircleQuestion, Search, BookOpen, Video, Loader2,
 import { Input } from "@/components/ui/input";
 import SEOHead from "@/components/SEOHead";
 import { IconTile, KindPill, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
-import { format } from "date-fns";
+import { formatDateOnly } from "@/lib/dateOnly";
 
 // Shared looks, written out in full so Tailwind keeps them.
 const NAV_PILL =
@@ -39,7 +39,7 @@ function QACard({ entry }: { entry: QAEntry }) {
           {entry.meeting_date && (
             <KindPill tone="navy" className="mb-1.5 gap-1">
               <CalendarDays className="h-3 w-3" aria-hidden="true" />
-              {format(new Date(entry.meeting_date), "MMM d, yyyy")}
+              {formatDateOnly(entry.meeting_date, "MMM d, yyyy")}
             </KindPill>
           )}
           <span className="block break-words text-base font-semibold leading-snug text-foreground">{entry.question}</span>
@@ -61,7 +61,7 @@ function QACard({ entry }: { entry: QAEntry }) {
           <div className="max-w-prose whitespace-pre-wrap break-words text-base leading-relaxed text-foreground">{entry.answer}</div>
           {entry.meeting_date && (
             <p className="mt-3 text-sm text-muted-foreground">
-              From the {format(new Date(entry.meeting_date), "MMMM d, yyyy")} meeting
+              From the {formatDateOnly(entry.meeting_date, "MMMM d, yyyy")} meeting
             </p>
           )}
         </div>

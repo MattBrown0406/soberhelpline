@@ -696,7 +696,7 @@ Deno.serve(async (req) => {
         // Verify the authenticated user owns this subscription
         const { data: subscription, error: fetchError } = await supabaseClient
           .from('provider_subscriptions')
-          .select('user_id, status, provider_submission_id, plan_type, amount')
+          .select('user_id, status, provider_submission_id, plan_type, amount, cancellation_source')
           .eq('paypal_subscription_id', subscriptionId)
           .single();
 
@@ -707,6 +707,19 @@ Deno.serve(async (req) => {
         if (subscription.user_id !== authenticatedUserId) {
           return new Response(
             JSON.stringify({ error: 'Unauthorized - you do not own this subscription' }),
+            { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        // A membership an administrator revoked is not switched back on here,
+        // even while its PayPal agreement is still live.
+        if (
+          (subscription.status === 'cancelled' || subscription.status === 'expired') &&
+          typeof subscription.cancellation_source === 'string' &&
+          subscription.cancellation_source.startsWith('admin')
+        ) {
+          return new Response(
+            JSON.stringify({ error: 'This membership was ended by an administrator.' }),
             { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
           );
         }

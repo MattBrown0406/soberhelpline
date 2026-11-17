@@ -70,6 +70,11 @@ interface FamilyMember {
   account_created_at?: string | null;
 }
 
+const NOTHING_SAVED = "Nothing was saved. Your session may have expired: reload the page, log in, and try again.";
+
+/** A write that came back with no error and no rows: nothing was changed. */
+class NothingSavedError extends Error {}
+
 // Revoking must END access, not just flip the status: membership checks count a
 // cancelled row until its access_ends_at, and the app sync / app sign-in skip any
 // user whose row has a cancellation_source starting with "admin". Returns how many
@@ -93,8 +98,10 @@ async function revokeFamilyAccess(
     (r) => r.status === "cancelled" && r.access_ends_at && new Date(r.access_ends_at).getTime() > now,
   );
 
+  // Each update asks for its rows back: no error with no rows means nothing changed.
+  let saved = 0;
   if (live.length > 0) {
-    const { error: liveError } = await supabase
+    const { data: liveSaved, error: liveError } = await supabase
       .from("provider_subscriptions")
       .update({
         status: "cancelled",
@@ -103,16 +110,23 @@ async function revokeFamilyAccess(
         cancellation_reason: reason,
         access_ends_at: nowIso,
       })
-      .in("id", live.map((r) => r.id));
+      .in("id", live.map((r) => r.id))
+      .select("id");
     if (liveError) throw liveError;
+    saved += liveSaved?.length ?? 0;
   }
   if (paidThrough.length > 0) {
-    const { error: paidError } = await supabase
+    const { data: paidSaved, error: paidError } = await supabase
       .from("provider_subscriptions")
       .update({ cancellation_source: source, cancellation_reason: reason, access_ends_at: nowIso })
-      .in("id", paidThrough.map((r) => r.id));
+      .in("id", paidThrough.map((r) => r.id))
+      .select("id");
     if (paidError) throw paidError;
+    saved += paidSaved?.length ?? 0;
   }
+  const expected = live.length + paidThrough.length;
+  if (expected > 0 && saved === 0) throw new NothingSavedError();
+  if (saved < expected) throw new Error(`Only ${saved} of ${expected} membership rows were revoked`);
 
   return {
     revoked: live.length + paidThrough.length,
@@ -138,6 +152,15 @@ export function FamilyMemberManagement() {
   const [showGrantDialog, setShowGrantDialog] = useState(false);
   const [grantEmail, setGrantEmail] = useState("");
   const [granting, setGranting] = useState(false);
+  // Set when the membership or invitation is on file but its email is not known
+  // to have gone out: the dialog stays open and offers to send it again.
+  const [emailRetry, setEmailRetry] = useState<{
+    email: string;
+    type: "new_user" | "existing_user";
+    firstName: string;
+    message: string;
+  } | null>(null);
+  const [resendingEmail, setResendingEmail] = useState(false);
 
   useEffect(() => {
     fetchFamilyMembers();
@@ -273,7 +296,9 @@ export function FamilyMemberManagement() {
 
     setRevoking(member.id);
     try {
-      const { livePayPal } = await revokeFamilyAccess(member.id, "admin", "Revoked by an administrator");
+      const { revoked, livePayPal } = await revokeFamilyAccess(member.id, "admin", "Revoked by an administrator");
+      // The list shows a membership, so finding none to revoke means the rows could not be read.
+      if (revoked === 0) throw new NothingSavedError();
 
       toast.success(`Membership revoked for ${member.username || member.first_name}`);
       if (livePayPal > 0) {
@@ -285,7 +310,7 @@ export function FamilyMemberManagement() {
       fetchFamilyMembers();
     } catch (error) {
       console.error("Error revoking membership:", error);
-      toast.error("Failed to revoke membership");
+      toast.error(error instanceof NothingSavedError ? NOTHING_SAVED : "Failed to revoke membership");
     } finally {
       setRevoking(null);
     }
@@ -346,6 +371,48 @@ export function FamilyMemberManagement() {
     }
   };
 
+  // True only when the function reports the email as sent.
+  const sendMembershipEmail = async (
+    email: string,
+    type: "new_user" | "existing_user",
+    firstName: string,
+  ): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.functions.invoke("send-free-membership-email", {
+        body: type === "existing_user" ? { email, type, firstName } : { email, type },
+      });
+      if (error || data?.error || data?.success === false) {
+        console.error("Free membership email was not sent:", error || data?.error);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error("Free membership email was not sent:", error);
+      return false;
+    }
+  };
+
+  const closeGrantDialog = () => {
+    // A membership granted just now (its email still unsent) is not in the list yet.
+    if (emailRetry?.type === "existing_user") fetchFamilyMembers();
+    setShowGrantDialog(false);
+    setGrantEmail("");
+    setEmailRetry(null);
+  };
+
+  const handleResendMembershipEmail = async () => {
+    if (!emailRetry || resendingEmail) return;
+    setResendingEmail(true);
+    const sent = await sendMembershipEmail(emailRetry.email, emailRetry.type, emailRetry.firstName);
+    setResendingEmail(false);
+    if (sent) {
+      toast.success(emailRetry.type === "new_user" ? "Invitation email sent." : "Welcome email sent.");
+      closeGrantDialog();
+    } else {
+      toast.error("The email was not sent. Please try again in a moment.");
+    }
+  };
+
   const handleGrantFreeMembership = async () => {
     if (!grantEmail.trim()) return;
     setGranting(true);
@@ -394,9 +461,18 @@ export function FamilyMemberManagement() {
 
         if (insertError) throw insertError;
 
-        await supabase.functions.invoke("send-free-membership-email", {
-          body: { email, type: "existing_user", firstName: profile?.first_name || "" },
-        });
+        const firstName = profile?.first_name || "";
+        const sent = await sendMembershipEmail(email, "existing_user", firstName);
+        if (!sent) {
+          setEmailRetry({
+            email,
+            type: "existing_user",
+            firstName,
+            message: "The membership was saved, but the welcome email was not sent.",
+          });
+          // The list is refreshed when this dialog closes (a refresh now would hide it).
+          return;
+        }
 
         toast.success("Free membership granted and welcome email sent!");
       } else {
@@ -406,16 +482,40 @@ export function FamilyMemberManagement() {
 
         if (pendingError) {
           if (pendingError.code === '23505') {
-            toast.error("An invitation has already been sent to this email address");
-            setGranting(false);
+            // An invitation is on file for this address. Only one still waiting
+            // to be claimed can be sent again.
+            const { data: onFile, error: onFileError } = await supabase
+              .from('pending_free_memberships')
+              .select('status')
+              .eq('email', email)
+              .maybeSingle();
+            if (onFileError || !onFile) {
+              toast.error("An invitation is already on file for this address, but it could not be checked. Please try again.");
+            } else if (onFile.status === 'pending') {
+              setEmailRetry({
+                email,
+                type: "new_user",
+                firstName: "",
+                message: "An invitation is already waiting for this address.",
+              });
+            } else {
+              toast.error(`An invitation for this address is already on file (status: ${onFile.status}), so a new one was not created and no email was sent.`);
+            }
             return;
           }
           throw pendingError;
         }
 
-        await supabase.functions.invoke("send-free-membership-email", {
-          body: { email, type: "new_user" },
-        });
+        const sent = await sendMembershipEmail(email, "new_user", "");
+        if (!sent) {
+          setEmailRetry({
+            email,
+            type: "new_user",
+            firstName: "",
+            message: "The membership was saved, but the invitation email was not sent.",
+          });
+          return;
+        }
 
         toast.success("Invitation email sent! Membership will activate automatically when they create an account.");
       }
@@ -617,6 +717,15 @@ export function FamilyMemberManagement() {
               Are you sure you want to revoke the membership for{" "}
               <strong>{confirmRevoke?.username || confirmRevoke?.first_name}</strong>?
               They will lose access to the family forum and all member benefits.
+              {confirmRevoke?.subscription?.paypal_subscription_id?.startsWith("I-") && (
+                <>
+                  {" "}
+                  <strong>
+                    This ends access here but does not cancel the PayPal subscription. Cancel it in PayPal too,
+                    or the member keeps being charged.
+                  </strong>
+                </>
+              )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -674,7 +783,7 @@ export function FamilyMemberManagement() {
       </Dialog>
 
       {/* Grant Free Membership Dialog */}
-      <Dialog open={showGrantDialog} onOpenChange={setShowGrantDialog}>
+      <Dialog open={showGrantDialog} onOpenChange={(open) => (open ? setShowGrantDialog(true) : closeGrantDialog())}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Grant Free Family Membership</DialogTitle>
@@ -685,14 +794,28 @@ export function FamilyMemberManagement() {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="grant-email">User Email</Label>
-              <Input id="grant-email" type="email" value={grantEmail} onChange={(e) => setGrantEmail(e.target.value)} placeholder="user@example.com" />
+              <Input id="grant-email" type="email" value={grantEmail} onChange={(e) => setGrantEmail(e.target.value)} placeholder="user@example.com" disabled={!!emailRetry} />
             </div>
+            {emailRetry && (
+              <p role="alert" className="text-sm text-destructive">{emailRetry.message}</p>
+            )}
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => { setShowGrantDialog(false); setGrantEmail(""); }}>Cancel</Button>
-            <Button onClick={handleGrantFreeMembership} disabled={granting || !grantEmail.trim()}>
-              {granting ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Granting...</> : <><UserPlus className="h-4 w-4 mr-2" />Grant Membership</>}
-            </Button>
+            {emailRetry ? (
+              <>
+                <Button variant="outline" onClick={closeGrantDialog} disabled={resendingEmail}>Close</Button>
+                <Button onClick={handleResendMembershipEmail} disabled={resendingEmail}>
+                  {resendingEmail ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Sending...</> : "Send the email again"}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" onClick={closeGrantDialog}>Cancel</Button>
+                <Button onClick={handleGrantFreeMembership} disabled={granting || !grantEmail.trim()}>
+                  {granting ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Granting...</> : <><UserPlus className="h-4 w-4 mr-2" />Grant Membership</>}
+                </Button>
+              </>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -6,6 +6,7 @@ import {
   notifyOwner,
   protectedReason,
   removeLogin,
+  stopMeetingContact,
   secretMatches,
 } from "../_shared/accountDeletion.ts";
 
@@ -64,6 +65,9 @@ Deno.serve(async (req: Request) => {
     if (lookupError) throw new Error(`account lookup failed: ${lookupError.code ?? "unknown"}`);
     if (typeof userId !== "string") {
       await clearWaitingMemberships(admin, email);
+      // No website login, but she may have Family Squares seats and text
+      // reminders under this address (they are kept by email).
+      await stopMeetingContact(admin, email);
       return json({ ok: true, result: "not_found" });
     }
 

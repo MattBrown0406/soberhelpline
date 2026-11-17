@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChevronDown, ChevronUp, ClipboardList, ChevronRight, RotateCcw, AlertTriangle, CheckCircle2, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import ToolBrandHeader from "@/components/ToolBrandHeader";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const timeframeOptions = [
   { value: "never", label: "Never", score: 0 },
@@ -360,11 +361,14 @@ export default function SUDAssessment() {
             <RotateCcw className="mr-2 h-4 w-4" />
             Take Again
           </Button>
-          <Link to="/family-membership" className="flex-1">
-            <Button className="w-full">
-              Learn About Family Resources
-            </Button>
-          </Link>
+          {/* No membership button for a visitor who came from the app. */}
+          {!arrivedFromApp() && (
+            <Link to="/family-membership" className="flex-1">
+              <Button className="w-full">
+                Learn About Family Resources
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     );

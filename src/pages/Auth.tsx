@@ -43,6 +43,10 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  // Set when a login is refused because the email address is not confirmed yet
+  // (a new member who paid and then came here before opening the email).
+  const [unconfirmedEmail, setUnconfirmedEmail] = useState<string | null>(null);
+  const [resendState, setResendState] = useState<"idle" | "sending" | "sent" | "failed">("idle");
   // Arriving from a "reset password" email: let the user choose a new password.
   // (Accounts created by signing in from the Sober Helpline app have no website
   // password until they set one here.)
@@ -233,9 +237,27 @@ const Auth = () => {
     }
   };
 
+  const resendConfirmation = async () => {
+    if (!unconfirmedEmail) return;
+    setResendState("sending");
+    try {
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email: unconfirmedEmail,
+        // Back to where she was headed; the membership page when she came here directly.
+        options: { emailRedirectTo: `${window.location.origin}${redirectPath || "/family-membership"}` },
+      });
+      setResendState(error ? "failed" : "sent");
+    } catch {
+      setResendState("failed");
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setUnconfirmedEmail(null);
+    setResendState("idle");
 
     try {
       // Validate input
@@ -247,7 +269,9 @@ const Auth = () => {
       });
 
       if (error) {
-        if (error.message.includes("Invalid login credentials")) {
+        if (error.code === "email_not_confirmed" || error.message.includes("Email not confirmed")) {
+          setUnconfirmedEmail(loginData.email.trim());
+        } else if (error.message.includes("Invalid login credentials")) {
           toast({
             title: "Login failed",
             description: "Invalid email or password. Please try again.",
@@ -431,6 +455,33 @@ const Auth = () => {
                         required
                       />
                     </div>
+                    {unconfirmedEmail && (
+                      <div className="space-y-2 rounded-lg border border-primary/25 bg-primary/5 p-4" role="alert">
+                        <p className="text-sm leading-relaxed text-foreground">
+                          Please confirm your email first. We sent a link to{" "}
+                          <span className="break-all font-medium">{unconfirmedEmail}</span>. Open that email and
+                          select the link, then log in.
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="w-full"
+                          onClick={resendConfirmation}
+                          disabled={resendState === "sending" || resendState === "sent"}
+                        >
+                          {resendState === "sending"
+                            ? "Sending..."
+                            : resendState === "sent"
+                              ? "Sent. Check your inbox."
+                              : "Send the link again"}
+                        </Button>
+                        {resendState === "failed" && (
+                          <p className="text-center text-sm text-muted-foreground">
+                            We could not send it just now. Please wait a minute and try again.
+                          </p>
+                        )}
+                      </div>
+                    )}
                     <Button type="submit" className="w-full" disabled={isLoading}>
                       {isLoading ? "Logging in..." : "Log In"}
                     </Button>

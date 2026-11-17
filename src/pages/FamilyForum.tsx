@@ -1,6 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   Archive,
@@ -39,6 +39,7 @@ import { BookmarkedPosts } from "@/components/forum/BookmarkedPosts";
 import { MemberSpotlight } from "@/components/forum/MemberSpotlight";
 import { MentionNotifications } from "@/components/forum/MentionNotifications";
 import { fetchUsernames } from "@/lib/publicProfiles";
+import { arrivedFromApp } from "@/lib/webSession";
 import {
   ACTIVE_TOPICS,
   ACTIVE_TOPIC_IDS,
@@ -210,7 +211,11 @@ export default function FamilyForum() {
   const [user, setUser] = useState<User | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasAccess, setHasAccess] = useState(false);
+  // null = not known yet. A failed check never turns a "yes" into a "no".
+  const [access, setAccess] = useState<boolean | null>(null);
+  const accessUserId = useRef<string | null>(null);
+  const [accessRetry, setAccessRetry] = useState(0);
+  const hasAccess = access === true;
   const [showCodeOfConduct, setShowCodeOfConduct] = useState(false);
   const [showReportDialog, setShowReportDialog] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
@@ -234,34 +239,51 @@ export default function FamilyForum() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Keyed on the person, not the session object: the session object is replaced
+  // every time the tab regains focus, and that must not re-run this check.
+  const userId = user?.id ?? null;
   useEffect(() => {
     if (!authChecked) return;
     let cancelled = false;
+    // On a failed check keep the answer we already have for this person.
+    const keepPreviousAnswer = () => {
+      if (accessUserId.current !== userId) setAccess(null);
+    };
     (async () => {
-      if (!user) {
-        setHasAccess(false);
+      if (!userId) {
+        accessUserId.current = null;
+        setAccess(false);
         setIsModerator(false);
         setIsLoading(false);
         return;
       }
       try {
         const [memberRes, profileRes, rolesRes] = await Promise.all([
-          supabase.rpc("is_active_family_member", { _user_id: user.id }),
-          supabase.from("profiles").select("agreed_to_code_of_conduct").eq("id", user.id).maybeSingle(),
-          supabase.from("user_roles").select("role").eq("user_id", user.id).in("role", ["moderator", "admin"]).limit(1),
+          supabase.rpc("is_active_family_member", { _user_id: userId }),
+          supabase.from("profiles").select("agreed_to_code_of_conduct").eq("id", userId).maybeSingle(),
+          supabase.from("user_roles").select("role").eq("user_id", userId).in("role", ["moderator", "admin"]).limit(1),
         ]);
         if (cancelled) return;
         if (memberRes.error) console.error("Error checking membership:", memberRes.error);
         const staff = !rolesRes.error && (rolesRes.data?.length ?? 0) > 0;
-        const access = memberRes.data === true || staff;
-        setIsModerator(staff);
-        setHasAccess(access);
-        if (!profileRes.error && access && profileRes.data?.agreed_to_code_of_conduct !== true) {
-          setShowCodeOfConduct(true);
+        const allowed = memberRes.data === true || staff;
+        if (!rolesRes.error) setIsModerator(staff);
+        if (allowed) {
+          accessUserId.current = userId;
+          setAccess(true);
+          if (!profileRes.error && profileRes.data?.agreed_to_code_of_conduct !== true) {
+            setShowCodeOfConduct(true);
+          }
+        } else if (!memberRes.error && !rolesRes.error) {
+          // The check worked and said no.
+          accessUserId.current = userId;
+          setAccess(false);
+        } else {
+          keepPreviousAnswer();
         }
       } catch (err) {
         console.error("Check failed:", err);
-        setHasAccess(false);
+        if (!cancelled) keepPreviousAnswer();
       } finally {
         if (!cancelled) setIsLoading(false);
       }
@@ -269,7 +291,7 @@ export default function FamilyForum() {
     return () => {
       cancelled = true;
     };
-  }, [user, authChecked]);
+  }, [userId, authChecked, accessRetry]);
 
   const loadOverview = useCallback(async () => {
     // Thread counts (top-level posts only) and last activity per space, using
@@ -361,7 +383,39 @@ export default function FamilyForum() {
     );
   }
 
+  // We could not find out (a failed request). Never show the membership wall
+  // for that: say so and offer another try.
+  if (user && access === null) {
+    return (
+      <>
+        <SEOHead
+          title="Family Discussion Forum | Sober Helpline"
+          description="Connect with other families supporting loved ones through addiction. Share experiences, ask questions, and find community in our members-only forum."
+          noIndex={true}
+        />
+        <MemberPage>
+          <main className="container px-4 py-12">
+            <div className="mx-auto max-w-md text-center" role="alert">
+              <p className="text-base font-medium text-foreground">We could not check your membership.</p>
+              <Button
+                type="button"
+                className="mt-4 min-h-11 rounded-xl px-5"
+                onClick={() => {
+                  setIsLoading(true);
+                  setAccessRetry((n) => n + 1);
+                }}
+              >
+                Try again
+              </Button>
+            </div>
+          </main>
+        </MemberPage>
+      </>
+    );
+  }
+
   if (!hasAccess || !user) {
+    const fromApp = arrivedFromApp();
     return (
       <>
         <SEOHead
@@ -378,13 +432,18 @@ export default function FamilyForum() {
                 <CardDescription>The family forum is part of the family support membership.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* No price and no purchase link for a visitor who came from the app. */}
                 <p className="text-center text-muted-foreground">
-                  Join the family support membership for $9.99/month to talk with other families in the forum.
+                  {fromApp
+                    ? "Membership is available in the Sober Helpline app."
+                    : "Join the family support membership for $9.99/month to talk with other families in the forum."}
                 </p>
                 <div className="flex flex-col gap-2">
-                  <Button asChild className="h-12 w-full rounded-xl text-base">
-                    <Link to="/family-membership">Become a member</Link>
-                  </Button>
+                  {!fromApp && (
+                    <Button asChild className="h-12 w-full rounded-xl text-base">
+                      <Link to="/family-membership">Become a member</Link>
+                    </Button>
+                  )}
                   <Button asChild variant="outline" className="min-h-11 w-full rounded-xl">
                     <Link to="/family-support">Back to Family Support</Link>
                   </Button>

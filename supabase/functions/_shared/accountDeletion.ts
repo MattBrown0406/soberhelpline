@@ -136,9 +136,68 @@ export async function clearWaitingMemberships(admin: SupabaseClient, email: stri
   if (error) console.error("waiting membership cleanup failed:", error.code ?? "unknown");
 }
 
+/** Today's date in Pacific time, as YYYY-MM-DD (the form meeting dates are stored in). */
+const pacificToday = (now = new Date()): string =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+
+/**
+ * Family Squares registrations and text reminders are kept by email address,
+ * not by login, so deleting the login alone would leave a person who asked to
+ * be registered every week being registered, emailed and texted every week.
+ * This stops that for the address: weekly registration off, text reminders
+ * off, and any seat for a meeting that has not happened yet removed. Past
+ * meetings are left as they are. Never throws: a failure here is logged (a
+ * code only) and does not stop the deletion.
+ */
+export async function stopMeetingContact(admin: SupabaseClient, email: string): Promise<void> {
+  const wanted = normalizeEmail(email);
+  if (!wanted) return;
+  try {
+    // Found loosely (stray spaces, capitals), then compared exactly here.
+    const { data: rows, error: findError } = await admin
+      .from("zoom_meeting_registrations")
+      .select("id, email, meeting_date, auto_register")
+      .ilike("email", `%${exactPattern(wanted)}%`)
+      .or(`auto_register.eq.true,meeting_date.gte.${pacificToday()}`)
+      .limit(1000);
+    if (findError) throw findError;
+    const mine = ((rows ?? []) as { id: string; email: string | null; meeting_date: string | null; auto_register: boolean | null }[])
+      .filter((row) => normalizeEmail(row.email) === wanted);
+    const today = pacificToday();
+    const upcoming = mine.filter((row) => typeof row.meeting_date === "string" && row.meeting_date >= today).map((row) => row.id);
+    const weekly = mine.filter((row) => row.auto_register === true && !upcoming.includes(row.id)).map((row) => row.id);
+    if (weekly.length > 0) {
+      const { error } = await admin.from("zoom_meeting_registrations").update({ auto_register: false }).in("id", weekly);
+      if (error) console.error("weekly registration stop failed:", error.code ?? "unknown");
+    }
+    if (upcoming.length > 0) {
+      const { error } = await admin.from("zoom_meeting_registrations").delete().in("id", upcoming);
+      if (error) {
+        console.error("upcoming seat removal failed:", error.code ?? "unknown");
+        // The seat could not be removed: at least stop it repeating.
+        const { error: flagError } = await admin.from("zoom_meeting_registrations").update({ auto_register: false }).in("id", upcoming);
+        if (flagError) console.error("weekly registration stop failed:", flagError.code ?? "unknown");
+      }
+    }
+  } catch (error) {
+    console.error("meeting registration cleanup failed:", (error as { code?: unknown } | null)?.code ?? "unknown");
+  }
+  try {
+    const { error } = await admin
+      .from("family_squares_sms_optins")
+      .update({ opted_out_at: new Date().toISOString() })
+      .ilike("email", exactPattern(wanted))
+      .is("opted_out_at", null);
+    if (error) console.error("text reminder stop failed:", error.code ?? "unknown");
+  } catch (error) {
+    console.error("text reminder stop failed:", (error as { code?: unknown } | null)?.code ?? "unknown");
+  }
+}
+
 /** Removes the login and what hangs off it. Call only after endMemberships succeeded. */
 export async function removeLogin(admin: SupabaseClient, userId: string, email: string): Promise<void> {
   await clearWaitingMemberships(admin, email);
+  await stopMeetingContact(admin, email);
   // Contact details are not tied to the login by a foreign key.
   const { error: contactError } = await admin.from("profile_private").delete().eq("user_id", userId);
   if (contactError) throw new Error(`contact cleanup failed: ${contactError.code ?? "unknown"}`);

@@ -21,6 +21,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { untypedSupabase } from "@/integrations/supabase/untyped";
 import { fetchUsernames, type ForumMemberMatch } from "@/lib/publicProfiles";
 import { ACTIVE_TOPICS, MEETING_TOPIC_ID, getForumTopic, sanitizeRefPath } from "@/lib/forumTopics";
+import { arrivedFromApp } from "@/lib/webSession";
 import { TopicFollow } from "@/components/forum/TopicFollow";
 import { MentionNotifications } from "@/components/forum/MentionNotifications";
 import { PrivateMessagesDialog, useUnreadMessageCount } from "@/components/forum/PrivateMessagesDialog";
@@ -41,8 +42,15 @@ const FILTER_TAB =
 
 type Filter = "all" | "unanswered";
 
+// One mount per topic: moving from one topic's address to another starts the
+// page fresh (posts, follow state, composer, permalink handling), so nothing
+// from the previous topic carries over.
 export default function ForumTopic() {
   const { topicId = "" } = useParams<{ topicId: string }>();
+  return <ForumTopicInner key={topicId} topicId={topicId} />;
+}
+
+function ForumTopicInner({ topicId }: { topicId: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const topic = getForumTopic(topicId);
   const isMeetingTopic = topicId === MEETING_TOPIC_ID;
@@ -50,7 +58,11 @@ export default function ForumTopic() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasAccess, setHasAccess] = useState(false);
+  // null = not known yet. A failed check never turns a "yes" into a "no".
+  const [access, setAccess] = useState<boolean | null>(null);
+  const accessUserId = useRef<string | null>(null);
+  const [accessRetry, setAccessRetry] = useState(0);
+  const hasAccess = access === true;
   const [canModerate, setCanModerate] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -89,29 +101,48 @@ export default function ForumTopic() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Keyed on the person, not the session object: the session object is replaced
+  // every time the tab regains focus, and that must not re-run this check.
+  const userId = user?.id ?? null;
   useEffect(() => {
     if (!authChecked) return;
     let cancelled = false;
+    // On a failed check keep the answer we already have for this person.
+    const keepPreviousAnswer = () => {
+      if (accessUserId.current !== userId) setAccess(null);
+    };
     (async () => {
-      if (!user) {
-        setHasAccess(false);
+      if (!userId) {
+        accessUserId.current = null;
+        setAccess(false);
         setIsLoading(false);
         return;
       }
       try {
         const [memberRes, rolesRes] = await Promise.all([
-          supabase.rpc("is_active_family_member", { _user_id: user.id }),
-          supabase.from("user_roles").select("role").eq("user_id", user.id).in("role", ["moderator", "admin"]),
+          supabase.rpc("is_active_family_member", { _user_id: userId }),
+          supabase.from("user_roles").select("role").eq("user_id", userId).in("role", ["moderator", "admin"]),
         ]);
         if (cancelled) return;
         const roles = (rolesRes.data || []).map((r) => r.role as string);
-        const staff = roles.length > 0;
-        setCanModerate(staff);
-        setIsAdmin(roles.includes("admin"));
-        setHasAccess(memberRes.data === true || staff);
+        const staff = !rolesRes.error && roles.length > 0;
+        if (!rolesRes.error) {
+          setCanModerate(staff);
+          setIsAdmin(roles.includes("admin"));
+        }
+        if (memberRes.data === true || staff) {
+          accessUserId.current = userId;
+          setAccess(true);
+        } else if (!memberRes.error && !rolesRes.error) {
+          // The check worked and said no.
+          accessUserId.current = userId;
+          setAccess(false);
+        } else {
+          keepPreviousAnswer();
+        }
       } catch (err) {
         console.error("Access check failed:", err);
-        setHasAccess(false);
+        if (!cancelled) keepPreviousAnswer();
       } finally {
         if (!cancelled) setIsLoading(false);
       }
@@ -119,7 +150,7 @@ export default function ForumTopic() {
     return () => {
       cancelled = true;
     };
-  }, [user, authChecked]);
+  }, [userId, authChecked, accessRetry]);
 
   // --- posts ---------------------------------------------------------------
   const fetchPosts = useCallback(async () => {
@@ -302,7 +333,37 @@ export default function ForumTopic() {
     );
   }
 
+  // We could not find out (a failed request). Never show the membership wall
+  // for that: say so and offer another try.
+  if (user && access === null) {
+    return (
+      <>
+        <Helmet>
+          <title>{topic.title} | Sober Helpline Forum</title>
+        </Helmet>
+        <MemberPage>
+          <main className="container px-4 py-12">
+            <div className="mx-auto max-w-md text-center" role="alert">
+              <p className="text-base font-medium text-foreground">We could not check your membership.</p>
+              <Button
+                type="button"
+                className="mt-4 min-h-11 rounded-xl px-5"
+                onClick={() => {
+                  setIsLoading(true);
+                  setAccessRetry((n) => n + 1);
+                }}
+              >
+                Try again
+              </Button>
+            </div>
+          </main>
+        </MemberPage>
+      </>
+    );
+  }
+
   if (!hasAccess || !user) {
+    const fromApp = arrivedFromApp();
     return (
       <>
         <Helmet>
@@ -316,10 +377,16 @@ export default function ForumTopic() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-center text-muted-foreground">The family forum is part of the family support membership.</p>
+                {/* No purchase link for a visitor who came from the app. */}
+                {fromApp && (
+                  <p className="text-center text-muted-foreground">Membership is available in the Sober Helpline app.</p>
+                )}
                 <div className="flex flex-col gap-2">
-                  <Button asChild className="h-12 w-full rounded-xl text-base">
-                    <Link to="/family-membership">Become a member</Link>
-                  </Button>
+                  {!fromApp && (
+                    <Button asChild className="h-12 w-full rounded-xl text-base">
+                      <Link to="/family-membership">Become a member</Link>
+                    </Button>
+                  )}
                   <Button asChild variant="outline" className="min-h-11 w-full rounded-xl">
                     <Link to="/family-forum">Back to the forum</Link>
                   </Button>

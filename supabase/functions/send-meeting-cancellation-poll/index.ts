@@ -111,6 +111,8 @@ serve(async (req: Request) => {
   const sharedSecret = Deno.env.get("FOLLOWUP_AUTOMATION_SECRET");
   const providedSecret = req.headers.get("x-cron-secret") ?? "";
   const secretOk = !!sharedSecret && providedSecret === sharedSecret;
+  // The admin who asked, when it was an admin (not the shared secret).
+  let requestedBy: string | null = null;
 
   if (!secretOk) {
     const authHeader = req.headers.get("Authorization") ?? "";
@@ -144,6 +146,7 @@ serve(async (req: Request) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+    requestedBy = userData.user.id;
   }
 
   const admin = createClient(supabaseUrl, serviceKey);
@@ -187,7 +190,7 @@ serve(async (req: Request) => {
             option_1_label: option1Label,
             option_2_label: option2Label,
             meeting_date: meetingDate,
-            created_by: userData.user.id,
+            created_by: requestedBy,
           })
           .select("id")
           .single();

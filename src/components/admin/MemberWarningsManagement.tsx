@@ -18,9 +18,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Loader2, AlertTriangle, UserX, Check, X, RefreshCw, Eye } from "lucide-react";
+
+const NOTHING_SAVED = "Nothing was saved. Your session may have expired: reload the page, log in, and try again.";
+
+/** A write that came back with no error and no rows: nothing was changed. */
+class NothingSavedError extends Error {}
 
 // Revoking must END access, not just flip the status: membership checks count a
 // cancelled row until its access_ends_at, and the app sync / app sign-in skip any
@@ -45,8 +60,10 @@ async function revokeFamilyAccess(
     (r) => r.status === "cancelled" && r.access_ends_at && new Date(r.access_ends_at).getTime() > now,
   );
 
+  // Each update asks for its rows back: no error with no rows means nothing changed.
+  let saved = 0;
   if (live.length > 0) {
-    const { error: liveError } = await supabase
+    const { data: liveSaved, error: liveError } = await supabase
       .from("provider_subscriptions")
       .update({
         status: "cancelled",
@@ -55,16 +72,23 @@ async function revokeFamilyAccess(
         cancellation_reason: reason,
         access_ends_at: nowIso,
       })
-      .in("id", live.map((r) => r.id));
+      .in("id", live.map((r) => r.id))
+      .select("id");
     if (liveError) throw liveError;
+    saved += liveSaved?.length ?? 0;
   }
   if (paidThrough.length > 0) {
-    const { error: paidError } = await supabase
+    const { data: paidSaved, error: paidError } = await supabase
       .from("provider_subscriptions")
       .update({ cancellation_source: source, cancellation_reason: reason, access_ends_at: nowIso })
-      .in("id", paidThrough.map((r) => r.id));
+      .in("id", paidThrough.map((r) => r.id))
+      .select("id");
     if (paidError) throw paidError;
+    saved += paidSaved?.length ?? 0;
   }
+  const expected = live.length + paidThrough.length;
+  if (expected > 0 && saved === 0) throw new NothingSavedError();
+  if (saved < expected) throw new Error(`Only ${saved} of ${expected} membership rows were revoked`);
 
   return {
     revoked: live.length + paidThrough.length,
@@ -112,6 +136,9 @@ export function MemberWarningsManagement() {
   const [processing, setProcessing] = useState<string | null>(null);
   const [selectedWarning, setSelectedWarning] = useState<MemberWarning | null>(null);
   const [adminNotes, setAdminNotes] = useState("");
+  // The report whose "Revoke Access" was clicked, waiting for the owner to confirm.
+  // payPal: true = a live PayPal subscription, false = none, null = could not be checked.
+  const [confirmRevoke, setConfirmRevoke] = useState<{ warning: MemberWarning; payPal: boolean | null } | null>(null);
 
   useEffect(() => {
     fetchWarnings();
@@ -214,30 +241,42 @@ export function MemberWarningsManagement() {
     }
   };
 
+  // "Revoke Access" was clicked: find out whether PayPal is still billing this
+  // member (a read only), then ask the owner to confirm.
+  const askToRevoke = async (warning: MemberWarning) => {
+    setProcessing(warning.id);
+    let payPal: boolean | null = null;
+    try {
+      const { data, error } = await supabase
+        .from("provider_subscriptions")
+        .select("paypal_subscription_id")
+        .eq("user_id", warning.member_id)
+        .is("provider_submission_id", null)
+        .in("status", ["active", "pending", "suspended"]);
+      if (error) throw error;
+      payPal = (data ?? []).some((r) => r.paypal_subscription_id?.startsWith("I-"));
+    } catch (error) {
+      console.error("PayPal status could not be checked before revoking:", error);
+    } finally {
+      setProcessing(null);
+    }
+    setConfirmRevoke({ warning, payPal });
+  };
+
   const handleActionMember = async (warning: MemberWarning) => {
     setProcessing(warning.id);
     try {
-      // First, update the warning status
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      const { error: warningError } = await supabase
-        .from('member_warnings')
-        .update({
-          status: 'actioned',
-          admin_notes: adminNotes || 'Membership revoked based on this recommendation',
-          reviewed_by: user?.id,
-          reviewed_at: new Date().toISOString()
-        })
-        .eq('id', warning.id);
-      if (warningError) throw warningError;
-
-      // Then, revoke the member's access (all family memberships, including
-      // paid-through and app-sourced ones).
-      const { livePayPal } = await revokeFamilyAccess(
+      // First, revoke the member's access (all family memberships, including
+      // paid-through and app-sourced ones). The report is marked only after this worked.
+      const { revoked, livePayPal } = await revokeFamilyAccess(
         warning.member_id,
         "admin_moderation",
         "Membership revoked after a member warning",
       );
+      if (revoked === 0) {
+        toast.error("Nothing was revoked: no active membership was found for this member. If that looks wrong, reload the page, log in, and try again.");
+        return;
+      }
 
       toast.success("Member's access has been revoked");
       if (livePayPal > 0) {
@@ -245,12 +284,31 @@ export function MemberWarningsManagement() {
           description: "Cancel this member's subscription in PayPal too, or they will keep being charged.",
         });
       }
+
+      // Then record it on the report.
+      const { data: { user } } = await supabase.auth.getUser();
+      const { data: marked, error: warningError } = await supabase
+        .from('member_warnings')
+        .update({
+          status: 'actioned',
+          admin_notes: adminNotes || 'Membership revoked based on this recommendation',
+          reviewed_by: user?.id,
+          reviewed_at: new Date().toISOString()
+        })
+        .eq('id', warning.id)
+        .select('id');
+      if (warningError || !marked || marked.length === 0) {
+        if (warningError) console.error("Error marking warning as actioned:", warningError);
+        toast.error("The member's access was revoked, but this report could not be updated. Use Mark Reviewed to close it.");
+        return;
+      }
+
       setSelectedWarning(null);
       setAdminNotes("");
       fetchWarnings();
     } catch (error) {
       console.error("Error actioning member:", error);
-      toast.error("Failed to action member");
+      toast.error(error instanceof NothingSavedError ? NOTHING_SAVED : "Failed to revoke access. The member still has access.");
     } finally {
       setProcessing(null);
     }
@@ -430,7 +488,7 @@ export function MemberWarningsManagement() {
                 {selectedWarning.warning_type === 'removal_recommendation' && (
                   <Button 
                     variant="destructive"
-                    onClick={() => handleActionMember(selectedWarning)}
+                    onClick={() => askToRevoke(selectedWarning)}
                     disabled={!!processing}
                   >
                     {processing === selectedWarning.id ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <UserX className="h-4 w-4 mr-2" />}
@@ -445,6 +503,46 @@ export function MemberWarningsManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={!!confirmRevoke} onOpenChange={(open) => !open && setConfirmRevoke(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Revoke Membership</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to revoke the membership for{" "}
+              <strong>{personLabel(confirmRevoke?.warning.member_profile ?? null)}</strong>?
+              They will lose access to the family forum and all member benefits.
+              {confirmRevoke?.payPal === true && (
+                <>
+                  {" "}
+                  <strong>
+                    This ends access here but does not cancel the PayPal subscription. Cancel it in PayPal too,
+                    or the member keeps being charged.
+                  </strong>
+                </>
+              )}
+              {confirmRevoke?.payPal === null && (
+                <>
+                  {" "}
+                  <strong>
+                    If this member pays through PayPal, this does not cancel the PayPal subscription. Cancel it
+                    in PayPal too, or the member keeps being charged.
+                  </strong>
+                </>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => confirmRevoke && handleActionMember(confirmRevoke.warning)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Revoke Access
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

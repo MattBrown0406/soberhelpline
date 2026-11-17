@@ -174,10 +174,13 @@ export function QandAManagement() {
       ? await supabase.from("meeting_qa_archive").update(payload).eq("id", editingId)
       : await supabase.from("meeting_qa_archive").insert(payload);
 
-    if (error) toast.error(editingId ? "Failed to update Q&A" : "Failed to add Q&A");
-    else toast.success(editingId ? "Q&A updated" : "Q&A added");
-
     setSaving(false);
+    if (error) {
+      // The dialog stays open with what was typed, so it can be saved again.
+      toast.error(editingId ? "Failed to update Q&A" : "Failed to add Q&A");
+      return;
+    }
+    toast.success(editingId ? "Q&A updated" : "Q&A added");
     setDialogOpen(false);
     fetchEntries();
   };

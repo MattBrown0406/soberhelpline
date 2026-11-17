@@ -18,7 +18,27 @@ import MondayAfterRegistration from "@/components/MondayAfterRegistration";
 import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import { getInboundSource, trackConversionEvent } from "@/lib/conversionTracking";
 import { formatMeetingDay, formatViewerTime, getMondayMeeting } from "@/data/memberLibrary";
+import { pacificToday } from "@/lib/dateOnly";
+import { arrivedFromApp } from "@/lib/webSession";
 import { z } from "zod";
+
+const REGISTRATION_FAILED_MESSAGE = "Registration could not be completed. Please try again.";
+
+// What to tell the visitor when the request fails. The function sends its own
+// plain sentence in the response body; the error object itself only carries an
+// internal sentence, which is never shown.
+async function registrationFailureMessage(err: unknown): Promise<string> {
+  const context = (err as { context?: unknown } | null)?.context;
+  if (typeof Response !== "undefined" && context instanceof Response) {
+    try {
+      const body = await context.clone().json();
+      if (typeof body?.error === "string" && body.error.trim()) return body.error.trim();
+    } catch {
+      // No readable body: fall through to the plain sentence.
+    }
+  }
+  return REGISTRATION_FAILED_MESSAGE;
+}
 
 function getNextMeetingDate(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -73,6 +93,10 @@ const afterRegistrationSteps = [
 
 export default function MondayZoomRegistration() {
   const [user, setUser] = useState<User | null>(null);
+  // Display only: true once we know whether anyone is signed in, and (for the
+  // member question view) whether her profile already supplies a name.
+  const [authChecked, setAuthChecked] = useState(false);
+  const [profileHasName, setProfileHasName] = useState<boolean | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
@@ -122,7 +146,9 @@ export default function MondayZoomRegistration() {
   const trimmedName = formData.name.trim();
   const trimmedEmail = formData.email.trim();
   const hasUserEmail = Boolean(user?.email?.trim());
-  const requireName = !isMemberQuestion || !user || !trimmedName;
+  // Decided once from the profile, not from what is being typed, so the name
+  // box does not vanish after the first letter.
+  const requireName = !isMemberQuestion || !user || profileHasName !== true;
   const requireEmail = !isMemberQuestion || !hasUserEmail;
   const nextMeetingDate = getNextMeetingDate();
   // "Monday, November 16, 7:00 PM Pacific (10:00 PM your time)"
@@ -163,9 +189,11 @@ export default function MondayZoomRegistration() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setAuthChecked(true);
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      setAuthChecked(true);
     });
     return () => subscription.unsubscribe();
   }, []);
@@ -181,10 +209,9 @@ export default function MondayZoomRegistration() {
           .select("first_name, last_name")
           .eq("id", user.id)
           .maybeSingle();
-        if (data) {
-          const fullName = [data.first_name, data.last_name].filter(Boolean).join(" ");
-          if (fullName) setFormData((prev) => ({ ...prev, name: fullName }));
-        }
+        const fullName = data ? [data.first_name, data.last_name].filter(Boolean).join(" ") : "";
+        if (fullName) setFormData((prev) => ({ ...prev, name: fullName }));
+        setProfileHasName((prev) => prev ?? Boolean(fullName.trim()));
       };
       fetchProfile();
     }
@@ -256,6 +283,12 @@ export default function MondayZoomRegistration() {
         if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
       });
       setErrors(fieldErrors);
+      return;
+    }
+
+    // The member question view exists only to send a question.
+    if (isMemberQuestion && !result.data.question) {
+      setErrors({ question: "Please type your question." });
       return;
     }
 
@@ -333,7 +366,7 @@ export default function MondayZoomRegistration() {
       });
     } catch (err: unknown) {
       console.error("Registration error:", err);
-      const description = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      const description = await registrationFailureMessage(err);
       toast({
         title: "Registration Failed",
         description,
@@ -495,7 +528,7 @@ export default function MondayZoomRegistration() {
           </p>
 
           <div className="space-y-2">
-            <Label htmlFor="question">What would make this meeting useful for you this week? (Optional)</Label>
+            <Label htmlFor="question">What would make this meeting useful for you this week? {isMemberQuestion ? "*" : "(Optional)"}</Label>
             <Textarea id="question" placeholder="Share what you're hoping to learn or discuss..." rows={4} value={formData.question} onChange={(e) => setFormData((p) => ({ ...p, question: e.target.value }))} className={errors.question ? "border-destructive" : ""} />
             {errors.question && <p className="text-sm text-destructive">{errors.question}</p>}
           </div>
@@ -525,7 +558,7 @@ export default function MondayZoomRegistration() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="contactDate">Preferred Date *</Label>
-                      <Input id="contactDate" type="date" min={new Date().toISOString().split("T")[0]} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} className={errors.preferredContactDate ? "border-destructive" : ""} />
+                      <Input id="contactDate" type="date" min={pacificToday()} value={formData.preferredContactDate} onChange={(e) => setFormData((p) => ({ ...p, preferredContactDate: e.target.value }))} className={errors.preferredContactDate ? "border-destructive" : ""} />
                       {errors.preferredContactDate && <p className="text-sm text-destructive">{errors.preferredContactDate}</p>}
                     </div>
                     <div className="space-y-2">
@@ -582,6 +615,24 @@ export default function MondayZoomRegistration() {
             </>
           )}
         </form>
+      </CardContent>
+    </Card>
+  );
+
+  // The member question view only works for someone who is signed in, so a
+  // visitor who is not sees a way to log in and come straight back here.
+  const memberQuestionSignIn = !authChecked ? (
+    <div className="flex items-center justify-center gap-2 py-8 text-sm text-muted-foreground" role="status">
+      <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+      Loading...
+    </div>
+  ) : (
+    <Card className="mx-auto w-full max-w-2xl border-2 shadow-lg">
+      <CardContent className="space-y-4 p-6 text-center">
+        <p className="text-base font-medium text-foreground">Sign in to send a question for Monday.</p>
+        <Button asChild size="lg">
+          <Link to={`/auth?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`}>Log in</Link>
+        </Button>
       </CardContent>
     </Card>
   );
@@ -669,7 +720,7 @@ export default function MondayZoomRegistration() {
                   </div>
                 </div>
                 {cancellationNotice}
-                {registrationCard}
+                {user ? registrationCard : memberQuestionSignIn}
               </>
             ) : (
               <>
@@ -752,13 +803,16 @@ export default function MondayZoomRegistration() {
                   subheading="You can register for the free meeting below, or move directly into private coaching or intervention planning if your family is dealing with urgent risk."
                 />
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <Link to="/family-membership">
-                    <Button variant="outline" className="w-full gap-2">
-                      <Crown className="h-4 w-4" />
-                      Explore Membership After the Meeting
-                    </Button>
-                  </Link>
+                {/* No membership link for a visitor who came from the app. */}
+                <div className={arrivedFromApp() ? "mx-auto mt-6 max-w-md" : "mt-6 grid gap-3 sm:grid-cols-2"}>
+                  {!arrivedFromApp() && (
+                    <Link to="/family-membership">
+                      <Button variant="outline" className="w-full gap-2">
+                        <Crown className="h-4 w-4" />
+                        Explore Membership After the Meeting
+                      </Button>
+                    </Link>
+                  )}
                   <Link to="/family-coaching">
                     <Button variant="outline" className="w-full gap-2">
                       <Phone className="h-4 w-4" />
