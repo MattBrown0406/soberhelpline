@@ -217,17 +217,12 @@ async function start(req: Request, body: Record<string, unknown>) {
       return json({ ok: false, code: "confirm_pending" });
     }
 
-    // Unconfirmed and never paid: an abandoned sign-up (possibly typed by
-    // someone else). Nobody has ever been able to sign in to it, so the person
-    // starting now sets the password and details.
-    const { error: updateError } = await admin.auth.admin.updateUserById(existingId, {
-      password: input.password,
-      user_metadata: { ...(existing.user.user_metadata ?? {}), ...metadata },
-    });
-    if (updateError) {
-      if (isWeakPassword(updateError)) return json({ ok: false, code: "weak_password" });
-      throw new Error(`account update failed: ${updateError.message}`);
-    }
+    // Unconfirmed and never paid: an abandoned sign-up. The person starting
+    // now has not shown that the address is theirs, so the password on file is
+    // left alone. Otherwise a stranger could set a password here, wait for the
+    // real owner to click the confirmation link, and then sign in as them. The
+    // confirmation link signs its owner in; a forgotten first password is
+    // reset from the log-in page.
     await resendConfirmation();
     userId = existingId;
   } else {
