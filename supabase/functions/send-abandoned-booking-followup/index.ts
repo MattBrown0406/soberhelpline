@@ -8,8 +8,18 @@ const corsHeaders = {
 
 const SITE_URL = "https://soberhelpline.com";
 
-function getPlanFollowup(planType: string | null) {
-  const plans: Record<string, { label: string; subject: string; reassurance: string; alternatePath: string }> = {
+// The name and the plan come from a form anyone can fill in, so nothing from
+// them goes into the email as HTML.
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+const PLAN_FOLLOWUPS: Record<string, { label: string; subject: string; reassurance: string; alternatePath: string }> = {
     emergency: {
       label: "Emergency Game Plan",
       subject: "Still need a game plan today? - Matt at Sober Helpline",
@@ -40,9 +50,11 @@ function getPlanFollowup(planType: string | null) {
       reassurance: "If your family is weighing a formal intervention, it is normal to pause. The intensive exists to help you decide what is actually appropriate before anyone rushes into a major step.",
       alternatePath: "If you are not sure whether this is intervention-level, reply with what has changed recently. I can help you decide whether readiness planning, free Monday support, or Freedom Interventions is the better next conversation.",
     },
-  };
+};
 
-  return plans[planType || ""] || {
+function getPlanFollowup(planType: string | null) {
+  const known = planType && Object.hasOwn(PLAN_FOLLOWUPS, planType) ? PLAN_FOLLOWUPS[planType] : null;
+  return known || {
     label: "Crisis Family Consult",
     subject: "Did something get in the way? - Matt at Sober Helpline",
     reassurance: "The goal is one calm conversation that gives your family a clearer next step, even if that next step is a free resource or a different kind of help.",
@@ -51,10 +63,14 @@ function getPlanFollowup(planType: string | null) {
 }
 
 function buildEmailHtml(name: string | null, planType: string | null) {
-  const greeting = name ? `Hi ${name.split(' ')[0]},` : "Hi there,";
+  // First word of the name only, capped, and escaped.
+  const firstName = (name ?? "").trim().split(/\s+/)[0]?.slice(0, 40) ?? "";
+  const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : "Hi there,";
   const plan = getPlanFollowup(planType);
 
-  const resumeUrl = `${SITE_URL}/book-consultation${planType ? `?plan=${planType}` : ""}`;
+  // Only a plan this site knows goes into the link.
+  const knownPlan = planType && Object.hasOwn(PLAN_FOLLOWUPS, planType) ? planType : "";
+  const resumeUrl = `${SITE_URL}/book-consultation${knownPlan ? `?plan=${encodeURIComponent(knownPlan)}` : ""}`;
 
   return `
 <!DOCTYPE html>
@@ -183,8 +199,8 @@ Deno.serve(async (req) => {
         results.push({ id: record.id, status: 'sent' });
       } else {
         const errText = await sgRes.text();
-        console.error(`Failed to send to ${record.client_email}:`, errText);
-        results.push({ id: record.id, status: 'failed', error: errText });
+        console.error(`Abandoned booking follow-up failed for ${record.id}: ${sgRes.status}`, errText.slice(0, 300));
+        results.push({ id: record.id, status: 'failed' });
       }
     }
 
