@@ -6,9 +6,21 @@ import { Loader2, Send, AlertTriangle, RefreshCw, CheckCircle2 } from "lucide-re
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import { useNavigate } from "react-router-dom";
+import { formatDateOnly, pacificToday } from "@/lib/dateOnly";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const TARGET_MEETING_DATE = "2026-07-06";
 const POLL_SLUG = `meeting-cancel-${TARGET_MEETING_DATE}`;
+const TARGET_MEETING_DATE_LABEL = formatDateOnly(TARGET_MEETING_DATE, "MMMM d, yyyy");
 
 interface VoteRow {
   id: string;
@@ -36,6 +48,7 @@ export default function AdminMeetingCancellation() {
   const [votes, setVotes] = useState<VoteRow[]>([]);
   const [sending, setSending] = useState(false);
   const [result, setResult] = useState<{ sent: number; failed: number; recipients: number } | null>(null);
+  const [confirmSend, setConfirmSend] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -86,7 +99,12 @@ export default function AdminMeetingCancellation() {
     })();
   }, [navigate]);
 
+  // This page was built for one meeting. Once that date has passed (Pacific
+  // time), nothing can be sent from it.
+  const targetPassed = TARGET_MEETING_DATE < pacificToday();
+
   const handleSend = async (dryRun = false) => {
+    if (TARGET_MEETING_DATE < pacificToday()) return;
     setSending(true);
     setResult(null);
     try {
@@ -168,11 +186,11 @@ export default function AdminMeetingCancellation() {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <Button onClick={() => handleSend(true)} variant="outline" disabled={sending}>
+              <Button onClick={() => handleSend(true)} variant="outline" disabled={sending || targetPassed}>
                 {sending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                 Dry run (count only)
               </Button>
-              <Button onClick={() => handleSend(false)} disabled={sending}>
+              <Button onClick={() => setConfirmSend(true)} disabled={sending || targetPassed}>
                 {sending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 ) : (
@@ -185,6 +203,12 @@ export default function AdminMeetingCancellation() {
                 Refresh
               </Button>
             </div>
+
+            {targetPassed ? (
+              <p className="text-sm text-muted-foreground">
+                This page was for the meeting on {TARGET_MEETING_DATE_LABEL}, which has passed.
+              </p>
+            ) : null}
 
             {result ? (
               <div className="text-sm text-muted-foreground">
@@ -252,6 +276,22 @@ export default function AdminMeetingCancellation() {
           </Card>
         ) : null}
       </div>
+
+      <AlertDialog open={confirmSend} onOpenChange={setConfirmSend}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Send the cancellation email?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This emails everyone registered for the meeting on {TARGET_MEETING_DATE_LABEL} who has not
+              been emailed yet. It tells them the meeting is cancelled and asks them to vote on a new time.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => void handleSend(false)}>Send emails</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

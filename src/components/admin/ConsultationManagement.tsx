@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { CheckCircle, XCircle, DollarSign, Eye, ArrowLeft, Calendar, Clock, Video, ExternalLink, ClipboardList } from "lucide-react";
+import { pacificToday } from "@/lib/dateOnly";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -46,13 +47,16 @@ const ProviderDetailView = ({ provider, onBack }: { provider: any; onBack: () =>
     }
   };
 
-  const now = new Date();
-  const pastBookings = bookings.filter(b => new Date(b.booking_date) < now && b.status !== "confirmed");
+  // booking_date is a calendar date ("YYYY-MM-DD"). Compare it as one: new Date()
+  // reads it as midnight UTC, which put tomorrow's session under "Today".
+  const today = pacificToday();
+  const bookingDay = (b: any) => String(b.booking_date ?? "").slice(0, 10);
+  const pastBookings = bookings.filter(b => bookingDay(b) < today && b.status !== "confirmed");
   const currentBookings = bookings.filter(b => {
-    const d = new Date(b.booking_date);
-    return d.toDateString() === now.toDateString() || (b.status === "confirmed" && d <= now);
+    const day = bookingDay(b);
+    return day === today || (b.status === "confirmed" && day < today);
   });
-  const futureBookings = bookings.filter(b => new Date(b.booking_date) > now && b.status === "confirmed");
+  const futureBookings = bookings.filter(b => bookingDay(b) > today && b.status === "confirmed");
 
   if (loading) return <p>Loading provider details...</p>;
 

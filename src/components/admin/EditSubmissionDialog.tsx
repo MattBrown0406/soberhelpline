@@ -34,11 +34,20 @@ export function EditSubmissionDialog({
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // A logo uploaded here is saved to the database at once. If the edit is then
+  // cancelled, the row handed in still carries the old logo until the list reloads.
+  const uploadedLogo = useRef<{ submission: ProviderSubmission; url: string } | null>(null);
+
+  // Start from the saved row every time the dialog opens, so edits that were
+  // cancelled do not come back (and cannot be saved by accident).
   useEffect(() => {
-    if (submission) {
-      setEditedSubmission({ ...submission });
+    if (submission && open) {
+      const logo = uploadedLogo.current;
+      setEditedSubmission(
+        logo && logo.submission === submission ? { ...submission, logo_url: logo.url } : { ...submission },
+      );
     }
-  }, [submission]);
+  }, [submission, open]);
 
   if (!editedSubmission) return null;
 
@@ -90,6 +99,7 @@ export function EditSubmissionDialog({
 
       if (updateError) throw updateError;
 
+      if (submission) uploadedLogo.current = { submission, url: publicUrl };
       updateField('logo_url', publicUrl);
       toast.success("Logo uploaded and saved successfully");
     } catch (error) {
