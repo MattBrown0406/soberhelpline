@@ -241,7 +241,11 @@ Use this thread to share anything that resonated, a question you're still sittin
   // --- Cloud recording completed → auto-insert to zoom_call_recordings ---
   if (event.event === 'recording.completed') {
     const rec = event.payload.object;
-    const recordingDate = new Date(rec.start_time).toISOString().split('T')[0];
+    // The meeting's calendar date in Pacific time. A 7 PM Pacific start is
+    // already the next day in UTC, which filed every Monday recording under Tuesday.
+    const recordingDate = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(new Date(rec.start_time));
     const durationMinutes = rec.duration ?? null;
 
     const { data: existing } = await supabase
