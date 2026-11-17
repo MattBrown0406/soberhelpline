@@ -244,7 +244,8 @@ const Auth = () => {
       const { error } = await supabase.auth.resend({
         type: "signup",
         email: unconfirmedEmail,
-        options: { emailRedirectTo: `${window.location.origin}/family-membership` },
+        // Back to where she was headed; the membership page when she came here directly.
+        options: { emailRedirectTo: `${window.location.origin}${redirectPath || "/family-membership"}` },
       });
       setResendState(error ? "failed" : "sent");
     } catch {

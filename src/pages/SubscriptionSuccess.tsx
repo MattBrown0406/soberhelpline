@@ -86,7 +86,7 @@ export default function SubscriptionSuccess() {
             <CardTitle className="text-destructive">Activation Error</CardTitle>
             <CardDescription>
               We could not confirm your membership just now. If you were charged, your membership will still open
-              within a few minutes. If it does not, reply to your PayPal receipt or use the{' '}
+              within a few minutes. If it does not, please use the{' '}
               <Link to="/contact" className="font-medium text-primary underline underline-offset-4">contact page</Link>.
             </CardDescription>
           </CardHeader>
