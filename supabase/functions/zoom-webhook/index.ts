@@ -59,23 +59,42 @@ serve(async (req) => {
   }
 
   const body = await req.text();
-  const event = JSON.parse(body);
+  // deno-lint-ignore no-explicit-any
+  let event: any;
+  try {
+    event = JSON.parse(body);
+  } catch {
+    return new Response('Bad Request', { status: 400 });
+  }
 
   // Zoom endpoint validation handshake
   if (event.event === 'endpoint.url_validation') {
+    // Zoom's token is a short random string. Sign nothing else: the answer to
+    // this handshake is an HMAC made with the same secret that signs real
+    // events ("v0:<timestamp>:<body>"), so signing arbitrary text here would
+    // let anyone mint a valid signature for an event of their own.
+    const plainToken = event?.payload?.plainToken;
+    if (typeof plainToken !== 'string' || !/^[A-Za-z0-9_\-+/=.]{1,128}$/.test(plainToken)) {
+      console.error('Zoom webhook validation refused: unexpected token shape');
+      return new Response('Bad Request', { status: 400 });
+    }
     const secret = Deno.env.get('ZOOM_WEBHOOK_SECRET_TOKEN') ?? '';
+    if (!secret) {
+      console.error('ZOOM_WEBHOOK_SECRET_TOKEN not set');
+      return new Response('Unauthorized', { status: 401 });
+    }
     const hashForValidate = await crypto.subtle.importKey(
       'raw', new TextEncoder().encode(secret),
       { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
     );
     const hashBuffer = await crypto.subtle.sign(
       'HMAC', hashForValidate,
-      new TextEncoder().encode(event.payload.plainToken)
+      new TextEncoder().encode(plainToken)
     );
     const encryptedToken = Array.from(new Uint8Array(hashBuffer))
       .map(b => b.toString(16).padStart(2, '0')).join('');
     return new Response(JSON.stringify({
-      plainToken: event.payload.plainToken,
+      plainToken,
       encryptedToken,
     }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
