@@ -109,6 +109,19 @@ const signOff = `<p>With you in this,<br>Matt Brown<br><em>Sober Helpline</em></
 
 const registerLink = (kind: Kind) => `${SITE}/family-squares?utm_source=after_meeting_email&utm_campaign=${kind}`;
 
+// Universal link: opens the app's Family Squares card when the app is
+// installed, and the website's fallback page otherwise. clicktracking=off
+// keeps SendGrid from rewriting it: a click-tracking redirect goes through
+// another host, and iOS then opens the browser instead of the app.
+const openInAppLink = (label: string) =>
+  `<a clicktracking=off href="${SITE}/app/family-squares" style="color: #2563eb; font-weight: bold;">${label}</a>`;
+
+const APP_STORE_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
+
+// For people who registered on the website: what the free app does for Mondays.
+const appParagraph = (lead: string) =>
+  `<p>${lead} You save your seat once and it is held every Monday, you get a reminder before the meeting, and you join in one tap. <a href="${APP_STORE_URL}" style="color: #2563eb; font-weight: bold;">Get the app on the App Store</a>. Already have the app? ${openInAppLink("Open Family Squares in the app")}.</p>`;
+
 export interface EmailOptions {
   name: string | null;
   viaApp: boolean;
@@ -121,9 +134,11 @@ export function buildEmail(kind: Kind, options: EmailOptions): { subject: string
 
   if (kind === "attended") {
     const nextStep = options.viaApp
-      ? `<p>We meet again next Monday at 7:00 PM Pacific. You can RSVP and send your question ahead of time in the Sober Helpline app.</p>`
+      ? `<p>We meet again next Monday at 7:00 PM Pacific. In the Sober Helpline app you can save your seat for every Monday and send your question ahead of time.</p>
+<p>${openInAppLink("Open Family Squares in the app")}</p>`
       : `<p>We meet again next Monday at 7:00 PM Pacific. Each meeting has its own sign-up, so save your spot now. If you tick "automatically register me for future meetings" you will not have to sign up again.</p>
-${button(registerLink("attended"), "Save my spot for next Monday")}`;
+${button(registerLink("attended"), "Save my spot for next Monday")}
+${appParagraph("The free Sober Helpline app for iPhone and iPad makes Mondays easier.")}`;
     const membership = options.offerMembership
       ? `<p>One more thing, only if it is useful. Last night's meeting, and every meeting before it, is recorded for members. The family membership also has the full education library and a private forum for the days between Mondays. The first seven days are free, then it is $9.99 a month, and you can cancel any time.</p>
 <p><a href="${SITE}/family-membership?utm_source=after_meeting_email&utm_campaign=attended" style="color: #2563eb; font-weight: bold;">See what the family membership includes</a></p>`
@@ -141,10 +156,12 @@ ${signOff}`),
   }
 
   const nextStep = options.viaApp
-    ? `<p>We meet every Monday at 7:00 PM Pacific. You can RSVP for next week and send your question ahead of time in the Sober Helpline app.</p>`
+    ? `<p>We meet every Monday at 7:00 PM Pacific. In the Sober Helpline app you can save your seat for every Monday and send your question ahead of time.</p>
+<p>${openInAppLink("Open Family Squares in the app")}</p>`
     : `<p>We meet every Monday at 7:00 PM Pacific. Each meeting has its own sign-up, so here is next week's:</p>
 ${button(registerLink("missed"), "Save my spot for next Monday")}
-<p>You can join with your camera off and just listen. Nobody is called on.</p>`;
+<p>You can join with your camera off and just listen. Nobody is called on.</p>
+${appParagraph("If a reminder would help, there is a free Sober Helpline app for iPhone and iPad.")}`;
   return {
     subject: "We missed you last night",
     html: wrap(`<p>Hi ${firstName},</p>

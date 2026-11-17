@@ -193,6 +193,11 @@ serve(async (req: Request) => {
 
     const siteUrl = "https://soberhelpline.com";
     const appStoreUrl = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
+    // Universal link: opens the app's Family Squares card when the app is
+    // installed, and the website's fallback page otherwise. Its anchor carries
+    // clicktracking=off because a SendGrid click-tracking redirect goes
+    // through another host, and iOS then opens the browser instead of the app.
+    const appFamilySquaresUrl = "https://soberhelpline.com/app/family-squares";
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const directJoinUrl = meetingId
       ? `${siteUrl}/join-meeting?mn=${encodeURIComponent(meetingId)}&pwd=${encodeURIComponent(passcode)}`
@@ -334,11 +339,12 @@ serve(async (req: Request) => {
       `
       : `
         <div style="background-color: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; padding: 18px; margin: 20px 0; text-align: center;">
-          <h2 style="margin: 0 0 8px 0; color: #065f46;">📱 Take Sober Helpline with you</h2>
-          <p style="margin: 0 0 14px 0; color: #047857;">If you haven't already, we invite you to download the Sober Helpline app from the Apple App Store.</p>
+          <h2 style="margin: 0 0 8px 0; color: #065f46;">📱 Save your seat once, for every Monday</h2>
+          <p style="margin: 0 0 14px 0; color: #047857;">With the free Sober Helpline app for iPhone and iPad, you save your seat once and it is held every Monday. You get a reminder before the meeting and join in one tap.</p>
           <a href="${appStoreUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0b2943; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">
             Download Sober Helpline
           </a>
+          <p style="margin: 12px 0 0 0; font-size: 13px; color: #047857;">Already have the app? <a clicktracking=off href="${appFamilySquaresUrl}" style="color: #0b2943; font-weight: bold;">Open Family Squares in the app</a></p>
           <p style="margin: 12px 0 0 0; font-size: 12px; color: #6b7280; word-break: break-all;">${appStoreUrl}</p>
         </div>
       `;

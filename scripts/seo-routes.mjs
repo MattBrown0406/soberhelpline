@@ -105,6 +105,12 @@ export const prerenderPages = [
     noscriptHtml: '<main><h1>Sober Helpline App Support</h1><p>Get help with the Sober Helpline mobile app, account access, subscriptions, billing, technical issues, and support resources.</p><p>Email <a href="mailto:support@soberhelpline.com">support@soberhelpline.com</a> or call <a href="tel:4582988008">458-298-8008</a>.</p><p>Sober Helpline is not emergency care. If someone is in immediate danger, call 911. For mental health crisis support in the United States, call or text 988.</p></main>'
   },
   {
+    route: '/sober-helpline-app',
+    title: 'Sober Helpline App for iPhone and iPad | Sober Helpline',
+    description: 'The free Sober Helpline app saves your seat at Family Squares every Monday, reminds you before the meeting, and gives families scripts and safety tools.',
+    noscriptHtml: '<main><h1>The Sober Helpline app</h1><p>Free for iPhone and iPad. Save your seat at Family Squares once and it is held every Monday. You get a reminder before the meeting and join Zoom in one tap.</p><p>Free in the app: Family Squares, the crisis guide and safety tools, boundaries, a daily check-in and tracker, the script library, a treatment finder and planning tools.</p><p><a href="https://apps.apple.com/us/app/sober-helpline/id6780034996">Download the Sober Helpline app on the App Store</a> · <a href="https://soberhelpline.com/family-squares">Family Squares on the website</a> · <a href="https://soberhelpline.com/support">App support</a></p><p>The app is not an emergency service. If someone is in immediate danger, call 911.</p></main>'
+  },
+  {
     route: '/privacy',
     title: 'Privacy Policy | Sober Helpline',
     description: 'Privacy policy for Sober Helpline and the Sober Helpline mobile app, including data collection, use, sharing, retention, account deletion, and contact information.',
@@ -288,6 +294,7 @@ export const sitemapPriority = new Map([
   ['/family-membership', '0.95'],
   ['/family-support', '0.9'],
   ['/support', '0.5'],
+  ['/sober-helpline-app', '0.7'],
   ['/privacy', '0.5'],
   ['/start-here', '0.95'],
   ['/about', '0.7'],
@@ -332,6 +339,7 @@ export const sitemapChangefreq = new Map([
   ['/family-membership', 'weekly'],
   ['/family-support', 'weekly'],
   ['/support', 'monthly'],
+  ['/sober-helpline-app', 'monthly'],
   ['/privacy', 'monthly'],
   ['/start-here', 'weekly'],
   ['/about', 'monthly'],

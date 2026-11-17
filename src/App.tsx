@@ -129,6 +129,7 @@ const FamilyEducationTracks = React.lazy(() => import("./pages/FamilyEducationTr
 const SSO = React.lazy(() => import("./pages/SSO"));
 const SubscriberRoute = React.lazy(() => import("./components/SubscriberRoute"));
 const AppLinkFallback = React.lazy(() => import("./pages/AppLinkFallback"));
+const SoberHelplineApp = React.lazy(() => import("./pages/SoberHelplineApp"));
 
 
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
@@ -398,6 +399,8 @@ const App = () => (
               <Route path="/sso" element={<SSO />} />
               {/* Universal links into the iOS app; this page only shows when the app isn't installed or on desktop. */}
               <Route path="/app/*" element={<AppLinkFallback />} />
+              {/* The page about the app. Not under /app: those paths open the app itself. */}
+              <Route path="/sober-helpline-app" element={<SoberHelplineApp />} />
 
               <Route path="/family-forum" element={<SubscriberRoute><FamilyForum /></SubscriberRoute>} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
