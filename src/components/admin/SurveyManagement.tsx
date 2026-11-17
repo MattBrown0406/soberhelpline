@@ -13,6 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Plus, Trash2, Eye, Send, BarChart3, ChevronDown, ChevronUp, Loader2, X } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Survey {
   id: string;
@@ -55,6 +65,10 @@ export const SurveyManagement = () => {
   const [responses, setResponses] = useState<SurveyResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  // The survey whose "Email" button was clicked, waiting for the owner to confirm.
+  const [surveyToEmail, setSurveyToEmail] = useState<Survey | null>(null);
+  // What the last send reported, shown on that survey's row so it does not vanish with the toast.
+  const [lastSend, setLastSend] = useState<{ surveyId: string; text: string } | null>(null);
 
   // Create survey form
   const [newTitle, setNewTitle] = useState("");
@@ -81,6 +95,7 @@ export const SurveyManagement = () => {
 
     if (error) {
       toast.error("Failed to load surveys");
+      setLoading(false);
       return;
     }
     setSurveys(data || []);
@@ -122,15 +137,14 @@ export const SurveyManagement = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
-      // Deactivate any currently active survey
-      await supabase.from("surveys").update({ is_active: false }).eq("is_active", true);
-
+      // The new survey is saved switched off, with its questions, before anything
+      // else changes. A failure up to here leaves the current survey active.
       const { data: survey, error: surveyError } = await supabase
         .from("surveys")
         .insert({
           title: newTitle,
           description: newDescription || null,
-          is_active: true,
+          is_active: false,
           created_by: user.id,
         })
         .select()
@@ -179,7 +193,28 @@ export const SurveyManagement = () => {
         if (qError) throw qError;
       }
 
-      toast.success("Survey created and activated!");
+      // Switch the new survey on, and only then switch the others off.
+      const { data: activated, error: activateError } = await supabase
+        .from("surveys")
+        .update({ is_active: true })
+        .eq("id", survey.id)
+        .select("id");
+      if (activateError || !activated || activated.length === 0) {
+        if (activateError) console.error("Error activating survey:", activateError);
+        toast.error("The survey was saved but is not active yet. Switch it on in Manage Surveys.");
+      } else {
+        const { error: deactivateError } = await supabase
+          .from("surveys")
+          .update({ is_active: false })
+          .eq("is_active", true)
+          .neq("id", survey.id);
+        if (deactivateError) {
+          console.error("Error deactivating earlier surveys:", deactivateError);
+          toast.warning("The survey was created, but the earlier one is still active. Switch it off in Manage Surveys.");
+        } else {
+          toast.success("Survey created and activated!");
+        }
+      }
       setNewTitle("");
       setNewDescription("");
       setCustomQuestions([]);
@@ -207,19 +242,38 @@ export const SurveyManagement = () => {
     fetchSurveys();
   };
 
-  const sendSurveyEmails = async () => {
-    if (!selectedSurvey) return;
+  // Sends the survey of the row that was clicked (never the one open in Results).
+  const sendSurveyEmails = async (survey: Survey) => {
+    if (sending) return;
     setSending(true);
+    setLastSend(null);
     try {
       const { data, error } = await supabase.functions.invoke("send-survey-emails", {
-        body: { survey_id: selectedSurvey },
+        body: { survey_id: survey.id },
       });
 
       if (error) throw error;
-      toast.success(`Survey emails sent to ${data?.sent_count || 0} participants`);
+
+      const sent = Number(data?.sent_count) || 0;
+      const total = Number(data?.total_unique) || 0;
+      if (sent === 0 && total === 0) {
+        const text = "No emails were sent. No one who can be emailed registered in the last 30 days.";
+        toast.error(text);
+        setLastSend({ surveyId: survey.id, text });
+      } else if (sent < total) {
+        const text = `Survey emailed to ${sent} of ${total} people. ${total - sent} could not be sent.`;
+        toast.warning(text);
+        setLastSend({ surveyId: survey.id, text });
+      } else {
+        const text = `Survey emailed to ${sent} ${sent === 1 ? "person" : "people"}.`;
+        toast.success(text);
+        setLastSend({ surveyId: survey.id, text });
+      }
     } catch (error) {
       console.error("Error sending survey emails:", error);
-      toast.error("Failed to send survey emails");
+      const text = "The send did not finish. Some emails may already have gone out. Sending again emails everyone again.";
+      toast.error(text);
+      setLastSend({ surveyId: survey.id, text });
     } finally {
       setSending(false);
     }
@@ -535,6 +589,9 @@ export const SurveyManagement = () => {
                   <p className="text-xs text-muted-foreground mt-1">
                     Created {new Date(s.created_at).toLocaleDateString()}
                   </p>
+                  {lastSend?.surveyId === s.id && (
+                    <p className="text-xs text-muted-foreground mt-1">{lastSend.text}</p>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -549,12 +606,12 @@ export const SurveyManagement = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => sendSurveyEmails()}
+                    onClick={() => setSurveyToEmail(s)}
                     disabled={sending || !s.is_active}
                     className="gap-1"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    Email
+                    {sending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
+                    {sending ? "Sending..." : "Email"}
                   </Button>
                   <Switch
                     checked={s.is_active}
@@ -571,6 +628,31 @@ export const SurveyManagement = () => {
             </p>
           )}
         </div>
+
+        <AlertDialog open={!!surveyToEmail} onOpenChange={(open) => !open && setSurveyToEmail(null)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Email this survey?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This emails the survey "{surveyToEmail?.title}" to everyone who registered for Family Squares
+                in the last 30 days. Sending again emails all of them again.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                disabled={sending}
+                onClick={() => {
+                  const survey = surveyToEmail;
+                  setSurveyToEmail(null);
+                  if (survey) void sendSurveyEmails(survey);
+                }}
+              >
+                Send emails
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </TabsContent>
     </Tabs>
   );
