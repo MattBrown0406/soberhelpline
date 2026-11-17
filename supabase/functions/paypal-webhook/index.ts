@@ -265,18 +265,32 @@ Deno.serve(async (req) => {
           status: newStatus,
           updated_at: nowIso,
         };
-        const { data: existing } = await supabaseClient
+        const { data: existingRows, error: existingError } = await supabaseClient
           .from('provider_subscriptions')
           .select('next_billing_date, access_ends_at, cancellation_source')
-          .eq('paypal_subscription_id', subscriptionId)
-          .maybeSingle();
+          .eq('paypal_subscription_id', subscriptionId);
+        if (existingError) {
+          // Not knowing whether an administrator revoked this member, do not
+          // write over the row. PayPal sends the notice again.
+          console.error(`Lookup before updating subscription to ${newStatus} failed:`, existingError);
+          return new Response(
+            JSON.stringify({ error: 'Subscription lookup failed' }),
+            { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+        const rowsOnFile = (existingRows ?? []) as { next_billing_date: string | null; access_ends_at: string | null; cancellation_source: string | null }[];
+        const existing = rowsOnFile[0] ?? null;
+
+        // A member an administrator revoked stays revoked, whatever PayPal says
+        // next (cancelled, suspended or expired): the status and the 'admin…'
+        // mark are what keep the membership from being switched back on by a
+        // later payment, sync or app sign-in.
+        const adminRevoked = rowsOnFile.some((r) =>
+          typeof r.cancellation_source === 'string' && r.cancellation_source.startsWith('admin'));
+        if (adminRevoked) delete updatePayload.status;
 
         if (newStatus === 'cancelled') {
           updatePayload.paypal_cancel_confirmed_at = nowIso;
-          // A member an administrator revoked stays marked as revoked when the
-          // agreement is then cancelled in PayPal: that mark is what keeps the
-          // membership from being re-created by a later sync or app sign-in.
-          const adminRevoked = typeof existing?.cancellation_source === 'string' && existing.cancellation_source.startsWith('admin');
           if (!adminRevoked) {
             updatePayload.cancelled_at = nowIso;
             updatePayload.cancellation_source = 'paypal_webhook';
