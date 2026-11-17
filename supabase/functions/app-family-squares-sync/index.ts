@@ -25,6 +25,7 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { validMeetingDate } from "../_shared/mondayRegistration.ts";
+import { hasSeat, newAppSeatRow } from "../_shared/appSeat.ts";
 
 const MAX_BODY_BYTES = 5_000_000;
 const MAX_ATTENDEES = 2000;
@@ -224,10 +225,36 @@ Deno.serve(async (req: Request) => {
       const { data: alreadyRegistered, error } = await admin.rpc("ensure_monday_app_registration", {
         _email: email, _name: name, _meeting_date: meetingDate,
       });
-      if (error || typeof alreadyRegistered !== "boolean") throw error ?? new Error("Missing registration result");
       // App already supplies access/reminders; intentionally no website email,
       // marketing, lead scoring or Zoom-provider registration side effects.
-      return json({ ok: true, already_registered: alreadyRegistered, meeting_date: meetingDate });
+      if (!missingSchema(error)) {
+        if (error || typeof alreadyRegistered !== "boolean") throw error ?? new Error("Missing registration result");
+        return json({ ok: true, already_registered: alreadyRegistered, meeting_date: meetingDate });
+      }
+      // This database does not have that helper. Do here what the batch below
+      // does for one attendee: any row on file for that Monday (website or
+      // app) is her seat and nothing is written; otherwise one app row. Two
+      // requests at the same moment could both insert: the next batch run
+      // keeps one app row per email and removes the others.
+      const onFile: Array<{ email: string | null }> = [];
+      const pageSize = 1000;
+      for (let offset = 0; ; offset += pageSize) {
+        const { data, error: listError } = await admin
+          .from("zoom_meeting_registrations")
+          .select("email")
+          .eq("meeting_date", meetingDate)
+          .order("id", { ascending: true })
+          .range(offset, offset + pageSize - 1);
+        if (listError) throw listError;
+        onFile.push(...((data ?? []) as Array<{ email: string | null }>));
+        if (!data || data.length < pageSize) break;
+      }
+      if (hasSeat(onFile, email)) return json({ ok: true, already_registered: true, meeting_date: meetingDate });
+      const { error: insertError } = await admin
+        .from("zoom_meeting_registrations")
+        .insert(newAppSeatRow(email, name, meetingDate));
+      if (insertError) throw insertError;
+      return json({ ok: true, already_registered: false, meeting_date: meetingDate });
     } catch {
       return json({ ok: false, error: "registration_failed" }, 500);
     }

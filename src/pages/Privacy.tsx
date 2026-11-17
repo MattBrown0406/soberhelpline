@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const privacyFaqs = [
   {
     question: "What information does Sober Helpline collect?",
-    answer: "Sober Helpline may collect account information, app usage information, support requests, subscription status, and information you choose to enter into app features or forms.",
+    answer: "Sober Helpline may collect account information, app usage information, Family Squares meeting seats and attendance, support requests, subscription status, and information you choose to enter into app features or forms.",
   },
   {
     question: "How do I request account deletion or data access?",
@@ -42,7 +42,7 @@ export default function Privacy() {
                 protect, retain, and delete information. It is written for families using Sober Helpline resources,
                 app features, support, subscriptions, forms, coaching, and educational tools.
               </p>
-              <p className="mt-4 text-sm text-muted-foreground">Effective date: June 14, 2026</p>
+              <p className="mt-4 text-sm text-muted-foreground">Effective date: November 16, 2026</p>
             </div>
           </div>
         </section>
@@ -82,6 +82,7 @@ export default function Privacy() {
                   <li><strong>Contact information:</strong> phone number, email address, and details you provide when requesting support or coaching.</li>
                   <li><strong>Payment and subscription information:</strong> subscription status, plan type, purchase history, and billing-related identifiers. App Store purchases are processed by Apple, not directly by Sober Helpline.</li>
                   <li><strong>App usage information:</strong> pages viewed, features used, device type, browser/app version, crash data, diagnostics, and approximate technical logs.</li>
+                  <li><strong>Family Squares meeting information:</strong> for the free Monday meeting, we keep the seat you saved and, in the app, note when you tap Join and when you come back to the app, so we can count attendance. The app does not capture the meeting's audio or video.</li>
                   <li><strong>User-provided content:</strong> form responses, assessment answers, notes, forum/community posts, support messages, coaching intake information, and other information you choose to enter.</li>
                   <li><strong>Communications:</strong> emails, support messages, call notes, and other communications with us.</li>
                 </ul>

@@ -16,6 +16,7 @@ const corsHeaders = {
 };
 
 const SITE_URL = "https://soberhelpline.com";
+const APP_STORE_URL = "https://apps.apple.com/us/app/sober-helpline/id6780034996";
 
 function escapeHtml(text: string): string {
   const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
@@ -48,6 +49,9 @@ function welcomeHtml(firstName: string): string {
     on Zoom. As a member you don't need to register; the link is on your member home.
     If there's something you want to talk about, post it in the forum's
     ${link("/family-forum/this-weeks-meeting", "This Week's Meeting")} room beforehand.</p>
+  <p><strong>Your membership includes the app.</strong> The
+    <a href="${APP_STORE_URL}" style="color:#166534; font-weight:bold;">Sober Helpline app for iPhone and iPad</a>
+    is free to download. Sign in there with this same email address and your membership is already active.</p>
   <p>If you have a question, just reply to this email. I read every one.</p>
   <p>— Matt</p>
   <p style="color:#6b7280;font-size:13px;margin-top:32px;border-top:1px solid #e5e7eb;padding-top:16px;">

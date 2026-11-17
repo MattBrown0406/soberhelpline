@@ -2,7 +2,7 @@ import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, BookOpen, CalendarDays, Check, Compass, CreditCard, ExternalLink, FileText,
-  Loader2, MessageCircle, NotebookPen, PlayCircle, RotateCcw, Users, Video,
+  Loader2, MessageCircle, NotebookPen, PlayCircle, RotateCcw, Smartphone, Users, Video,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,7 @@ import {
 import SEOHead from "@/components/SEOHead";
 import EducationProgressBar from "@/components/EducationProgressBar";
 import NotificationSettings from "@/components/NotificationSettings";
+import SoberHelplineAppStoreBadge from "@/components/SoberHelplineAppStoreBadge";
 import ExerciseGrid from "@/components/workbook/ExerciseGrid";
 import { ASK_MONDAY_QUESTION_HREF, fetchMemberJoinUrl } from "@/components/MemberZoomBanner";
 import { describeSavedKey } from "@/data/savedTools";
@@ -20,6 +21,7 @@ import { MEMBER_TRACKS, useLearningPath } from "@/hooks/useLearningPath";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { untypedSupabase } from "@/integrations/supabase/untyped";
+import { arrivedFromApp } from "@/lib/webSession";
 import {
   exercisePath, findLibraryItem, formatMeetingDay,
   formatTimeUntil, formatViewerTime, getMondayMeeting, guidedExercises,
@@ -526,6 +528,34 @@ function ContinueCard({ userId }: { userId: string | null }) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// The app comes with the membership
+// ─────────────────────────────────────────────────────────────
+
+function AppIncludedCard() {
+  // Opened from the Sober Helpline app: she already has it.
+  const [fromApp] = useState(arrivedFromApp);
+  if (fromApp) return null;
+
+  return (
+    <Panel className="p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+        <div className="flex min-w-0 flex-1 items-start gap-3">
+          <IconTile icon={Smartphone} tone="navy" />
+          <div className="min-w-0">
+            <h2 className="text-base font-semibold leading-snug text-foreground">Your membership includes the app</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              The Sober Helpline app for iPhone and iPad is free to download. Sign in there with the same email
+              address you use here, and your membership is already active in the app.
+            </p>
+          </div>
+        </div>
+        <SoberHelplineAppStoreBadge className="shrink-0" height={40} source="member_home" />
+      </div>
+    </Panel>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // Page
 // ─────────────────────────────────────────────────────────────
 
@@ -612,6 +642,7 @@ export default function MemberHome() {
           <ThisWeekCard />
           <YourPathCard />
           <ContinueCard userId={userId} />
+          <AppIncludedCard />
 
           <section aria-labelledby="exercises-heading" className="space-y-3">
             <SectionHeading
