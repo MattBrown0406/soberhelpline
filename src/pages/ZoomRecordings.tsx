@@ -2,13 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
+import { untypedSupabase } from "@/integrations/supabase/untyped";
 import { User } from "@supabase/supabase-js";
-import { Video, Lock, Loader2, Calendar, Clock, Play, ArrowLeft, Sparkles, Users, BookOpen, Shield, MessageCircle, Tag, ChevronDown, ChevronUp } from "lucide-react";
+import { Video, Lock, Loader2, Calendar, Clock, Play, ArrowLeft, Sparkles, Users, BookOpen, Shield, MessageCircle, Tag, ChevronDown, ChevronUp, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import { IconTile, KindPill, MemberHero, MemberPage, Panel } from "@/components/member/MemberUI";
 import { format } from "date-fns";
+import {
+  WORKSHEET_BUCKET, WORKSHEET_COLUMNS, WORKSHEET_LINK_SECONDS, WORKSHEET_TABLE,
+  formatFileSize, groupWorksheetsByRecording, isWorksheetsNotReadyError, worksheetCountLabel, worksheetDownloadName,
+  type RecordingWorksheet,
+} from "@/lib/recordingWorksheets";
 
 // Shared looks, written out in full so Tailwind keeps them.
 const NAV_PILL =
@@ -116,6 +122,84 @@ function ShowNotes({ notes, timestamps }: { notes: string | null; timestamps: Ke
   );
 }
 
+// The PDFs made for this meeting. Each download asks for a short-lived link to
+// the private file, then sends this tab to it: the link itself tells the
+// browser to save the file, so the page stays where it is. (Opening a new
+// window after waiting for the link is blocked on iPhone, so we do not.)
+function Worksheets({ worksheets }: { worksheets: RecordingWorksheet[] }) {
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [failedId, setFailedId] = useState<string | null>(null);
+  if (worksheets.length === 0) return null;
+
+  const download = async (worksheet: RecordingWorksheet) => {
+    if (busyId) return;
+    setBusyId(worksheet.id);
+    setFailedId(null);
+    try {
+      const { data, error } = await supabase.storage
+        .from(WORKSHEET_BUCKET)
+        .createSignedUrl(worksheet.file_path, WORKSHEET_LINK_SECONDS, {
+          download: worksheet.file_name || worksheetDownloadName(worksheet.title),
+        });
+      if (error || !data?.signedUrl) throw error || new Error("No link was returned");
+      window.location.assign(data.signedUrl);
+      // Hold the button for a moment so a second tap does not ask for a second link.
+      window.setTimeout(() => setBusyId((current) => (current === worksheet.id ? null : current)), 1500);
+    } catch (error) {
+      console.warn("Worksheet link could not be made", error);
+      setFailedId(worksheet.id);
+      setBusyId(null);
+    }
+  };
+
+  return (
+    <section aria-labelledby="recording-worksheets-heading" className="mt-4 rounded-xl border border-border/70 bg-muted/40 px-4 py-4">
+      <h3 id="recording-worksheets-heading" className="flex items-center gap-2 text-sm font-semibold text-foreground">
+        <FileText className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        Worksheets
+      </h3>
+      <p className="mt-1 max-w-prose text-sm leading-relaxed text-foreground/80">
+        Worksheets from this meeting, made to answer the questions families sent in.
+      </p>
+      <ul className="mt-3 space-y-2">
+        {worksheets.map((worksheet) => {
+          const size = formatFileSize(worksheet.file_size);
+          const busy = busyId === worksheet.id;
+          return (
+            <li key={worksheet.id} className="rounded-lg border border-border/70 bg-card px-3 py-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0">
+                  <p className="break-words text-sm font-semibold text-foreground">{worksheet.title}</p>
+                  <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300">PDF{size ? ` · ${size}` : ""}</p>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="min-h-11 shrink-0 gap-2 rounded-xl px-4"
+                  disabled={busyId !== null}
+                  aria-busy={busy}
+                  onClick={() => download(worksheet)}
+                >
+                  {busy
+                    ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                    : <Download className="h-4 w-4" aria-hidden="true" />}
+                  {busy ? "Opening..." : "Download"}
+                  <span className="sr-only">: {worksheet.title} (PDF{size ? `, ${size}` : ""})</span>
+                </Button>
+              </div>
+              {failedId === worksheet.id && (
+                <p role="alert" className="mt-2 text-sm text-destructive">
+                  That worksheet could not be opened. Please try again.
+                </p>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 export default function ZoomRecordings() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
@@ -124,6 +208,7 @@ export default function ZoomRecordings() {
   const [recordings, setRecordings] = useState<Recording[]>([]);
   const [selectedRecording, setSelectedRecording] = useState<Recording | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [worksheetsByRecording, setWorksheetsByRecording] = useState<Record<string, RecordingWorksheet[]>>({});
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -160,7 +245,26 @@ export default function ZoomRecordings() {
         .order('recording_date', { ascending: false });
       if (!error && data) setRecordings(data as unknown as Recording[]);
     };
+    // Every worksheet she may see, in one request: the database only returns
+    // worksheets of published recordings, which are the ones listed here. The
+    // generated types do not know this table yet, hence the untyped client.
+    const fetchWorksheets = async () => {
+      if (!hasMembership) return;
+      try {
+        const { data, error } = await untypedSupabase
+          .from(WORKSHEET_TABLE)
+          .select(WORKSHEET_COLUMNS)
+          .order('created_at', { ascending: false })
+          .limit(1000);
+        if (error) throw error;
+        setWorksheetsByRecording(groupWorksheetsByRecording((data || []) as RecordingWorksheet[]));
+      } catch (error) {
+        // Before the table exists there are simply no worksheets to show.
+        if (!isWorksheetsNotReadyError(error)) console.warn('Worksheets could not be loaded', error);
+      }
+    };
     fetchRecordings();
+    fetchWorksheets();
   }, [hasMembership]);
 
   // No membership wall here: this page only renders inside SubscriberRoute,
@@ -275,6 +379,10 @@ export default function ZoomRecordings() {
                   notes={selectedRecording.show_notes}
                   timestamps={selectedRecording.key_timestamps || []}
                 />
+                <Worksheets
+                  key={selectedRecording.id}
+                  worksheets={worksheetsByRecording[selectedRecording.id] || []}
+                />
               </Panel>
             </div>
           ) : recordings.length === 0 ? (
@@ -332,6 +440,7 @@ export default function ZoomRecordings() {
                         ? getYouTubeThumbnail(recording.youtube_url)
                         : null);
                     const hasExtras = (recording.show_notes && recording.show_notes.trim()) || recording.key_timestamps?.length > 0;
+                    const worksheetCount = worksheetsByRecording[recording.id]?.length || 0;
                     return (
                       <div
                         key={recording.id}
@@ -371,12 +480,18 @@ export default function ZoomRecordings() {
                               )}
                             </div>
                             <h2 className="mt-3 break-words text-base font-semibold leading-snug text-foreground">{recording.title}</h2>
-                            {((recording.tags && recording.tags.length > 0) || hasExtras) && (
+                            {((recording.tags && recording.tags.length > 0) || hasExtras || worksheetCount > 0) && (
                               <div className="mt-2 flex flex-wrap gap-1.5">
                                 {hasExtras && (
                                   <span className={`${TAG_PILL} gap-1`}>
                                     <BookOpen className="w-3 h-3" aria-hidden="true" />
                                     Show notes
+                                  </span>
+                                )}
+                                {worksheetCount > 0 && (
+                                  <span className={`${TAG_PILL} gap-1`}>
+                                    <FileText className="w-3 h-3" aria-hidden="true" />
+                                    {worksheetCountLabel(worksheetCount)}
                                   </span>
                                 )}
                                 {recording.tags && recording.tags.slice(0, 3).map(tag => (
