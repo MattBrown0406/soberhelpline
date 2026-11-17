@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Crown, BookOpen, Users, MessageSquare, Sparkles, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const MembershipPromoBanner = () => {
+  // A visitor who came from the app is not shown website membership sales.
+  if (arrivedFromApp()) return null;
   return (
     <div className="bg-gradient-to-br from-primary/5 via-blue-400/10 to-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 my-10">
       <div className="text-center mb-6">

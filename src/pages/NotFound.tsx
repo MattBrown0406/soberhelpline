@@ -5,6 +5,7 @@ import { Home, Phone, Search, Users, BookOpen, Heart } from "lucide-react";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const NotFound = () => {
   const location = useLocation();
@@ -49,10 +50,13 @@ const NotFound = () => {
         <div className="border-t pt-6">
           <p className="text-sm font-medium text-muted-foreground mb-4">Looking for something specific?</p>
           <div className="grid grid-cols-2 gap-3 text-sm">
-            <Link to="/family-membership" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
-              <Users className="w-4 h-4 text-logo-blue" />
-              <span>Family Membership</span>
-            </Link>
+            {/* A visitor who came from the app is not shown website membership sales. */}
+            {!arrivedFromApp() && (
+              <Link to="/family-membership" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
+                <Users className="w-4 h-4 text-logo-blue" />
+                <span>Family Membership</span>
+              </Link>
+            )}
             <Link to="/inpatient-treatment" className="flex items-center gap-2 p-3 rounded-lg hover:bg-muted transition-colors">
               <Search className="w-4 h-4 text-logo-blue" />
               <span>Find Treatment</span>
