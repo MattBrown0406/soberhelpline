@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import MembershipPromoBanner from "@/components/MembershipPromoBanner";
 import { useMembershipStatus } from "@/hooks/useMembershipStatus";
+import { arrivedFromApp } from "@/lib/webSession";
 
 const US_STATES = [
   "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD",
@@ -162,17 +163,22 @@ const Testimonials = () => {
               <p className="text-muted-foreground text-sm max-w-lg mx-auto mb-4">
                 Your presence matters. Would you take a moment to share how these Family Squares meetings are helping you? Your words encourage other families to take that first step.
               </p>
-              <Button
-                size="lg"
-                onClick={() => navigate('/family-membership')}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
-              >
-                <Star className="w-4 h-4" />
-                Become a Member
-              </Button>
-              <p className="text-xs text-muted-foreground mt-3">
-                Join our community for exclusive resources, coaching discounts, and ongoing support
-              </p>
+              {/* No membership button for a visitor who came from the app. */}
+              {!arrivedFromApp() && (
+                <>
+                  <Button
+                    size="lg"
+                    onClick={() => navigate('/family-membership')}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+                  >
+                    <Star className="w-4 h-4" />
+                    Become a Member
+                  </Button>
+                  <p className="text-xs text-muted-foreground mt-3">
+                    Join our community for exclusive resources, coaching discounts, and ongoing support
+                  </p>
+                </>
+              )}
             </div>
           )}
 
