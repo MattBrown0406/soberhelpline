@@ -53,7 +53,11 @@ export function validateWorksheetFile(file: { name: string; type: string; size: 
   const type = typeof file?.type === "string" ? file.type.trim().toLowerCase() : "";
   const size = file?.size;
 
-  if (type !== WORKSHEET_MIME || !PDF_ENDING.test(name)) {
+  // Some browsers hand over a PDF with no type at all (a file picked from
+  // iCloud Drive, for one). The name must still end in .pdf, the upload is
+  // sent as a PDF, and the storage bucket accepts nothing else.
+  const typeOk = type === WORKSHEET_MIME || type === "";
+  if (!typeOk || !PDF_ENDING.test(name)) {
     return { ok: false, reason: "Only PDF files can be added as worksheets." };
   }
   if (typeof size !== "number" || !Number.isFinite(size) || size <= 0) {

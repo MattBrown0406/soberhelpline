@@ -48,7 +48,9 @@ Deno.test("a file must be a PDF by type and by name", () => {
   assertEquals(validateWorksheetFile(pdf({ name: "boundaries.docx" })), { ok: false, reason });
   assertEquals(validateWorksheetFile(pdf({ name: "boundaries" })), { ok: false, reason });
   assertEquals(validateWorksheetFile(pdf({ name: "boundaries.pdf.exe" })), { ok: false, reason });
-  assertEquals(validateWorksheetFile(pdf({ type: "" })), { ok: false, reason });
+  // No type at all is accepted only with a .pdf name (some browsers send none).
+  assertEquals(validateWorksheetFile(pdf({ type: "" })), { ok: true });
+  assertEquals(validateWorksheetFile(pdf({ type: "", name: "boundaries.docx" })), { ok: false, reason });
   assertEquals(validateWorksheetFile(pdf({ type: "text/html" })), { ok: false, reason });
 });
 
