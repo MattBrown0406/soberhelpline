@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Add the uploaded November 17 validation-without-enabling article as 208 with a photo, all five FAQs, preserved lists and verified internal links; 231 article renders and desktop/mobile card navigation, photo, FAQs, all three onward links and width checks pass, no page errors; build OK. Publication authorized and ready to request. No backend changes.
+
 - [x] Add the uploaded November 16 family-disclosure guide as article 207 with a generated photo, five FAQs, preserved lists and verified links; 230 article renders and desktop/mobile blog-card navigation pass with no page errors or overflow; build OK. Frontend publishing requested, completion unverified; no backend changes.
 
 - [x] Activate the supplied after-meeting email release: main checks, step-0 uniqueness/no-check/zero rows, Monday attendance and required secret passed. Set future Monday start 2026-11-16; deployed only seven specified functions unchanged; managed schedule 50 enabled at 10 16-20 * * 2 with requested body; removed only old first-timer jobs 23/24 and verified absence. Frontend publication requested, completion unverified. Final step_0_rows/sequence_emails_sent both 0; all retained 70-minute HTTP responses 200. Job 48 and protected registration unchanged; no migrations, source edits or manual invocations.
