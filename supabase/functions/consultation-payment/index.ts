@@ -299,21 +299,36 @@ Deno.serve(async (req) => {
       let captureData: any;
       try {
         const accessToken = await getPayPalAccessToken();
-        const captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!captureResponse.ok) {
-          const error = await captureResponse.text();
-          console.error('PayPal capture error:', error);
-          throw new Error('Payment capture failed');
+        let captureResponse: Response | null = null;
+        try {
+          captureResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+        } catch {
+          console.error('PayPal capture request did not complete');
         }
 
-        captureData = await captureResponse.json();
+        if (captureResponse?.ok) {
+          captureData = await captureResponse.json();
+        } else {
+          if (captureResponse) console.error('PayPal capture error:', await captureResponse.text());
+          // No clear answer does not mean no money moved: an earlier attempt
+          // may have captured the payment and lost PayPal's reply, and PayPal
+          // refuses to capture the same order twice. Ask PayPal what the order
+          // says before telling the customer it failed.
+          const checkResponse = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` },
+          });
+          const orderNow = checkResponse.ok ? await checkResponse.json() : null;
+          if (orderNow?.status !== 'COMPLETED') throw new Error('Payment capture failed');
+          console.log(`Order ${orderId} was already captured; continuing to the booking`);
+          captureData = orderNow;
+        }
+
         if (captureData.status !== 'COMPLETED') {
           throw new Error(`Payment not completed. Status: ${captureData.status}`);
         }
