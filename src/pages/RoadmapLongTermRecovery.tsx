@@ -57,8 +57,6 @@ const foundationItems: ChecklistItem[] = [
     description:
       "By now, the acute crisis has passed and there's enough stability to go deeper. The questions that have been sitting in your chest: 'Where did the money go?' 'What were you doing all those nights?' 'Did you drive the kids while you were high?' 'Do you even remember what you said to me?' These conversations are necessary — but they need to happen in the right container. Family therapy. With a professional mediator. Not at the dinner table after a long day. Not in the car. Not during an argument about something else. Schedule it. Contain it. Process it. Then leave it in that room until the next session. These conversations will happen in layers over months — not one big purge. Let them unfold.",
     icon: MessageSquare,
-    linkText: "Processing the Past Without Destroying the Present",
-    linkUrl: "#",
   },
   {
     id: "renegotiate-agreement",
@@ -73,8 +71,6 @@ const foundationItems: ChecklistItem[] = [
     description:
       "During treatment and early recovery, you assessed the damage. Now it's time to actually deal with it. Credit card debt, loans taken during active addiction, missed payments, stolen money, legal fees, treatment costs. This is a practical conversation, not an emotional one. Sit down together (or with a financial counselor) and build a real plan: What do we owe? What's the priority? How do we rebuild credit? When can they have financial autonomy again? Financial transparency should continue — shared access to accounts, regular check-ins on spending. Not because you don't trust them, but because financial secrecy is one of the earliest relapse indicators. This is also the time to address any legal consequences that are still pending — DUI court, probation requirements, restitution.",
     icon: DollarSign,
-    linkText: "Rebuilding Finances After Addiction",
-    linkUrl: "#",
   },
   {
     id: "let-them-fail",
@@ -93,8 +89,6 @@ const identityItems: ChecklistItem[] = [
     description:
       "Here's something nobody talks about: you're not the same person you were before all this. You've been through trauma, hypervigilance, loss, grief, and survival mode. Now that the crisis is over, you might realize some uncomfortable things. Maybe the relationship was broken before the addiction. Maybe you've outgrown patterns you can't go back to. Maybe you've discovered strengths you didn't know you had. Maybe you're angry — not at the addiction, but at the person. Long-term recovery is when the family members finally have space to process THEIR experience. Use it. Therapy isn't just for the person in recovery. It's for you. What do YOU want? Not what do they need. What do you want?",
     icon: Compass,
-    linkText: "Your Own Recovery: Processing Trauma After the Crisis",
-    linkUrl: "#",
   },
   {
     id: "rebuild-intentionally",
@@ -109,8 +103,6 @@ const identityItems: ChecklistItem[] = [
     description:
       "Kids don't recover on the same schedule as adults. A child who seemed fine during the crisis might start acting out six months later. A teenager who was angry might suddenly become withdrawn. A young child might start having nightmares or behavioral issues at school. This is normal. Their little nervous systems stored everything — even the things you thought they didn't notice. They noticed. Family therapy that includes the kids is important, but so is individual therapy for any child who's showing signs of struggle. And keep talking to them: 'Things are getting better. It's okay to have feelings about what happened. I'm here.' Consistently. For as long as it takes.",
     icon: Baby,
-    linkText: "Children and Recovery: A Long-Term Guide",
-    linkUrl: "#",
   },
   {
     id: "life-worth-sober",

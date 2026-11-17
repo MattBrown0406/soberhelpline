@@ -70,7 +70,7 @@ export function ReportContentDialog({ open, onOpenChange }: ReportContentDialogP
             Report Concerning Content
           </DialogTitle>
           <DialogDescription>
-            Help us maintain a safe and supportive community. Your report will be submitted anonymously.
+            Help us maintain a safe and supportive community. The person you report will not be told who reported them.
           </DialogDescription>
         </DialogHeader>
 
@@ -78,7 +78,7 @@ export function ReportContentDialog({ open, onOpenChange }: ReportContentDialogP
           <div className="bg-muted/50 p-3 rounded-lg flex items-start gap-2">
             <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
             <p className="text-xs text-muted-foreground">
-              Your identity will remain anonymous. We only use this information to review the reported content.
+              The person you report will not be told who reported them. We only use this information to review the reported content.
             </p>
           </div>
 

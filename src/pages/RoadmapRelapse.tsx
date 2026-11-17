@@ -67,8 +67,6 @@ const triageItems: ChecklistItem[] = [
     description:
       "If you built a relapse response plan during the Treatment or Early Recovery stage — now is when you use it. Pull it out. It has your answers: who to call, what the consequences are, under what circumstances you pursue re-treatment, what the non-negotiables are. Follow the plan. That's why you wrote it when you were thinking clearly — so you wouldn't have to think clearly right now. If you don't have a relapse plan: that's okay. Keep reading. We'll build one in real time.",
     icon: Shield,
-    linkText: "Family Relapse Response Plan Template",
-    linkUrl: "#",
   },
   {
     id: "call-support",
@@ -104,8 +102,6 @@ const weekItems: ChecklistItem[] = [
     description:
       "This is the moment of truth. Every boundary you set, every consequence you stated — they're live now. 'If you use again, you leave the house.' Did you mean it? 'If you relapse, I'm calling your interventionist.' Are you calling? 'If this happens again, I'm filing for separation.' Is the attorney being contacted? If you don't follow through, you've taught them the most dangerous lesson in addiction: that your words don't mean anything. That's not love. That's enabling disguised as mercy. Following through on consequences is the hardest thing you will ever do. It's also the most loving. It says: 'I love you too much to make it easy for you to kill yourself.' If you set consequences you now realize you can't enforce — that's a lesson for next time. But enforce what you can. Today.",
     icon: Shield,
-    linkText: "Following Through: The Hardest Act of Love",
-    linkUrl: "#",
   },
   {
     id: "separate-person-disease",
@@ -132,8 +128,6 @@ const changesItems: ChecklistItem[] = [
     description:
       "If you had a relapse plan, it just got field-tested. What worked? What didn't? Were the consequences realistic? Did you follow through? Were there warning signs you missed? Update the plan with what you now know. If you didn't have a plan before, write one now — you have real-world data to work with. The updated plan should include: earlier warning signs you now recognize, faster response triggers (don't wait as long next time), adjusted consequences that you WILL enforce, professional contacts on speed dial, and a clear threshold for when re-treatment is non-negotiable.",
     icon: RefreshCw,
-    linkText: "Relapse Plan 2.0: Learning from Experience",
-    linkUrl: "#",
   },
   {
     id: "address-kids",

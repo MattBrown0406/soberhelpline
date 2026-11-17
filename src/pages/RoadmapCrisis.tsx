@@ -124,7 +124,7 @@ const weekItems: ChecklistItem[] = [
       "If there are children in the home, they need to be shielded from the worst of this — but not lied to. Age-appropriate honesty is always better than pretending everything is fine (they already know it's not). If the situation is volatile, make a plan for where the kids can go on short notice — a grandparent, aunt/uncle, trusted friend. Have a bag packed. This isn't dramatic — it's prepared.",
     icon: Baby,
     linkText: "Protecting Children from Addiction",
-    linkUrl: "/protecting-children-addiction",
+    linkUrl: "/blog/protecting-children-addiction",
   },
   {
     id: "write-boundaries",
