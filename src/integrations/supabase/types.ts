@@ -3091,6 +3091,47 @@ export type Database = {
         }
         Relationships: []
       }
+      recording_worksheets: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          recording_id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id?: string
+          recording_id: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          recording_id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recording_worksheets_recording_id_fkey"
+            columns: ["recording_id"]
+            isOneToOne: false
+            referencedRelation: "zoom_call_recordings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       roadmap_assessments: {
         Row: {
           created_at: string | null

@@ -85,6 +85,13 @@
       "when": 1794936880385,
       "tag": "0011_restrict_member_recordings_to_published",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1794937217376,
+      "tag": "0012_create_recording_worksheets_access",
+      "breakpoints": true
     }
   ]
 }
