@@ -146,6 +146,10 @@ export function RecordingManagement() {
   const [uploadProgress, setUploadProgress] = useState<{ current: number; total: number; name: string } | null>(null);
   const [savedWithoutWorksheets, setSavedWithoutWorksheets] = useState(false);
   const worksheetFileInput = useRef<HTMLInputElement>(null);
+  // The list as it is right now. An upload or a move can finish after a title
+  // was saved meanwhile, and must not put the older title back on screen.
+  const latestWorksheets = useRef<RecordingWorksheet[]>(worksheets);
+  latestWorksheets.current = worksheets;
   const worksheetsSection = useRef<HTMLDivElement>(null);
   // The recording whose worksheets the dialog is showing, so a slow answer for another one is ignored.
   const worksheetsFor = useRef<string | null>(null);
@@ -311,7 +315,14 @@ export function RecordingManagement() {
     const title = cleanWorksheetTitle(pending.title) || defaultWorksheetTitle(pending.file.name);
     const path = worksheetObjectPath(recordingId, newUuid());
     try {
-      const { error: uploadError } = await worksheetsBucket().upload(path, pending.file, {
+      // The storage client sends a File with the File's own type and ignores
+      // `contentType` for it. A PDF handed over with no type (one picked from
+      // iCloud Drive, for one) would go up as a generic file and the PDF-only
+      // bucket would refuse it, so give it its type first.
+      const body = pending.file.type === WORKSHEET_MIME
+        ? pending.file
+        : new File([pending.file], pending.file.name, { type: WORKSHEET_MIME });
+      const { error: uploadError } = await worksheetsBucket().upload(path, body, {
         contentType: WORKSHEET_MIME,
         upsert: false,
       });
@@ -391,7 +402,8 @@ export function RecordingManagement() {
     try {
       const { added, failed } = await uploadPendingWorksheets(recordingId, pendingWorksheets, worksheets);
       setPendingWorksheets(failed);
-      showWorksheets(recordingId, sortWorksheets([...worksheets, ...added]));
+      const addedIds = new Set(added.map((w) => w.id));
+      showWorksheets(recordingId, sortWorksheets([...latestWorksheets.current.filter((w) => !addedIds.has(w.id)), ...added]));
       if (added.length > 0) toast.success(added.length === 1 ? "Worksheet uploaded" : `${added.length} worksheets uploaded`);
       failed.forEach((f) => toast.error(`"${f.file.name}" was not uploaded. ${f.error}`));
       if (failed.length > 0) await loadWorksheets(recordingId);
@@ -441,7 +453,8 @@ export function RecordingManagement() {
         const { data, error } = await worksheetsTable().update({ sort_order: i }).eq("id", reordered[i].id).select("id");
         if (error || !data?.length) throw error || new Error("No worksheet was updated");
       }
-      showWorksheets(recordingId, reordered.map((w, i) => ({ ...w, sort_order: i })));
+      const latest = new Map(latestWorksheets.current.map((w) => [w.id, w]));
+      showWorksheets(recordingId, reordered.map((w, i) => ({ ...(latest.get(w.id) ?? w), sort_order: i })));
     } catch (error) {
       console.error("Worksheet order could not be saved", error);
       toast.error("The new order could not be saved. Please try again.");
