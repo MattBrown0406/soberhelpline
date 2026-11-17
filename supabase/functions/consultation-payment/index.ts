@@ -343,11 +343,31 @@ Deno.serve(async (req) => {
 
       console.log(`Payment captured for order ${orderId}`);
 
-      // Mark order as captured
-      await adminClient
+      // Mark order as captured. Only one request may take it from here: two
+      // that reached this point together (a stale claim taken twice) must not
+      // both create a booking.
+      const { data: markedRows } = await adminClient
         .from('pending_consultation_orders')
         .update({ status: 'captured' })
-        .eq('id', pendingOrder.id);
+        .eq('id', pendingOrder.id)
+        .eq('status', 'capturing')
+        .select('id');
+      if (!markedRows?.length) {
+        const { data: bookingsSoFar } = await adminClient
+          .from('consultation_bookings')
+          .select('id')
+          .eq('paypal_order_id', orderId);
+        if (bookingsSoFar?.length) {
+          return new Response(JSON.stringify({
+            success: true,
+            duplicate: true,
+            bookingIds: bookingsSoFar.map((b: any) => b.id),
+          }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        }
+        return new Response(JSON.stringify({ error: 'Order not found or already processed' }), {
+          status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
 
       // Now create the actual booking via the book-consultation function, with the
       // account, member status and amount decided when this order was created, and
