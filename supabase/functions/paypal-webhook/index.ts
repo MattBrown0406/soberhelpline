@@ -265,17 +265,23 @@ Deno.serve(async (req) => {
           status: newStatus,
           updated_at: nowIso,
         };
-        if (newStatus === 'cancelled') {
-          updatePayload.cancelled_at = nowIso;
-          updatePayload.paypal_cancel_confirmed_at = nowIso;
-          updatePayload.cancellation_source = 'paypal_webhook';
-        }
-
         const { data: existing } = await supabaseClient
           .from('provider_subscriptions')
-          .select('next_billing_date, access_ends_at')
+          .select('next_billing_date, access_ends_at, cancellation_source')
           .eq('paypal_subscription_id', subscriptionId)
           .maybeSingle();
+
+        if (newStatus === 'cancelled') {
+          updatePayload.paypal_cancel_confirmed_at = nowIso;
+          // A member an administrator revoked stays marked as revoked when the
+          // agreement is then cancelled in PayPal: that mark is what keeps the
+          // membership from being re-created by a later sync or app sign-in.
+          const adminRevoked = typeof existing?.cancellation_source === 'string' && existing.cancellation_source.startsWith('admin');
+          if (!adminRevoked) {
+            updatePayload.cancelled_at = nowIso;
+            updatePayload.cancellation_source = 'paypal_webhook';
+          }
+        }
 
         if (newStatus === 'cancelled' && existing && !existing.access_ends_at) {
           updatePayload.access_ends_at = existing.next_billing_date || null;

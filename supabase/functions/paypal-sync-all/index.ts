@@ -61,7 +61,7 @@ Deno.serve(async (req) => {
     // Fetch all active paid subscriptions with a PayPal subscription ID
     const { data: candidates, error: fetchError } = await supabaseAdmin
       .from('provider_subscriptions')
-      .select('id, paypal_subscription_id, status, next_billing_date')
+      .select('id, paypal_subscription_id, status, next_billing_date, access_ends_at')
       .in('status', ['active', 'pending'])
       .not('paypal_subscription_id', 'is', null);
 
@@ -128,9 +128,13 @@ Deno.serve(async (req) => {
             .eq('id', sub.id);
           results.synced++;
         } else if (paypalStatus === 'CANCELLED') {
+          // Keep the time the member has paid for, as the PayPal notice and the
+          // member's own cancel do: a cancelled row with no end date is cut off at once.
+          const cancelledUpdate: Record<string, unknown> = { status: 'cancelled', updated_at: new Date().toISOString() };
+          if (!sub.access_ends_at && sub.next_billing_date) cancelledUpdate.access_ends_at = sub.next_billing_date;
           await supabaseAdmin
             .from('provider_subscriptions')
-            .update({ status: 'cancelled', updated_at: new Date().toISOString() })
+            .update(cancelledUpdate)
             .eq('id', sub.id);
           results.cancelled++;
           console.log(`Subscription ${sub.paypal_subscription_id} cancelled in PayPal — updated`);
