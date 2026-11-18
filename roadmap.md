@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Add the uploaded November 18 holiday drinking conversation article as 209 with a photo, five FAQs, preserved lists, verified suggested links and driving/withdrawal safety clarification; 232 article renders and desktop/phone card navigation, image, FAQs, four onward links and width checks pass, no page errors; build OK. Publication authorized and ready to request. No backend changes.
+
 - [x] Add the uploaded November 17 validation-without-enabling article as 208 with a photo, all five FAQs, preserved lists and verified internal links; 231 article renders and desktop/mobile card navigation, photo, FAQs, all three onward links and width checks pass, no page errors; build OK. Publication authorized and ready to request. No backend changes.
 
 - [x] Add the uploaded November 16 family-disclosure guide as article 207 with a generated photo, five FAQs, preserved lists and verified links; 230 article renders and desktop/mobile blog-card navigation pass with no page errors or overflow; build OK. Frontend publishing requested, completion unverified; no backend changes.
