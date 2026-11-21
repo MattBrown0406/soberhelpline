@@ -93,6 +93,53 @@ serve(async (req: Request): Promise<Response> => {
 
     if (!response.ok) {
       if (data.title === "Member Exists") {
+        try {
+          const memberHash = await createMD5Hash(email.toLowerCase().trim());
+          const memberUrl = `https://${datacenter}.api.mailchimp.com/3.0/lists/${audienceId}/members/${memberHash}`;
+          const memberResponse = await fetch(memberUrl, {
+            method: "GET",
+            headers: {
+              "Authorization": `apikey ${apiKey}`,
+              "Content-Type": "application/json",
+            },
+          });
+          const memberData = await memberResponse.json();
+
+          if (!memberResponse.ok) {
+            console.error("Mailchimp member lookup error:", memberData);
+          } else if (memberData.status === "transactional") {
+            const subscribeResponse = await fetch(memberUrl, {
+              method: "PATCH",
+              headers: {
+                "Authorization": `apikey ${apiKey}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ status: "subscribed" }),
+            });
+
+            if (!subscribeResponse.ok) {
+              console.error("Mailchimp member subscription error:", await subscribeResponse.json());
+            } else {
+              const tagsResponse = await fetch(`${memberUrl}/tags`, {
+                method: "POST",
+                headers: {
+                  "Authorization": `apikey ${apiKey}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  tags: tags.map((name) => ({ name, status: "active" })),
+                }),
+              });
+
+              if (!tagsResponse.ok) {
+                console.error("Mailchimp member tags error:", await tagsResponse.json());
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Error subscribing existing transactional Mailchimp member:", error);
+        }
+
         // Update existing member with new phone/SMS opt-in if provided
         if (smsOptIn && phoneNumber) {
           const memberHash = await createMD5Hash(email.toLowerCase().trim());
