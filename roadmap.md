@@ -1,5 +1,7 @@
 # Current tasks
 
+- [x] Add the November 22 parent self-care article as 211 with a hosted photo and five FAQs; 234 article renders and desktop/phone card navigation, lists, support links, related pages and width checks pass; build OK. Hosted photo returns 200; localhost photo placement checked using that hosted response because local Vite does not serve the CDN path. Publication authorized and ready to request. No backend changes.
+
 - [x] Add the uploaded November 20 positive-reinforcement article as 210 with a photo, five FAQs, preserved lists and verified links; 233 article renders and desktop/phone card navigation, photo, FAQs, onward pages and width checks pass without page errors; build OK. Publication authorized and ready to request. No backend changes.
 
 - [x] Add the uploaded November 18 holiday drinking conversation article as 209 with a photo, five FAQs, preserved lists, verified suggested links and driving/withdrawal safety clarification; 232 article renders and desktop/phone card navigation, image, FAQs, four onward links and width checks pass, no page errors; build OK. Publication authorized and ready to request. No backend changes.
