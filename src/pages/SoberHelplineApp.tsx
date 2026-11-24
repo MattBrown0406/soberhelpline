@@ -99,6 +99,13 @@ export default function SoberHelplineApp() {
                   <Smartphone className="h-4 w-4" aria-hidden="true" />
                   Free for iPhone and iPad
                 </p>
+                <Link
+                  to="/sober-helpline-app/tour"
+                  className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline"
+                >
+                  See it in action
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               </div>
             </div>
           </div>
