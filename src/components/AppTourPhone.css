@@ -6,7 +6,7 @@
 .shl-tour {
   --tour-accent: hsl(var(--primary));
   --tour-accent-fg: hsl(var(--primary-foreground));
-  --tour-phone-w: min(272px, 70vw);
+  --tour-phone-w: min(240px, 64vw);
   display: grid;
   justify-items: center;
   gap: 28px;
@@ -109,6 +109,7 @@
 
 @media (min-width: 768px) {
   .shl-tour-panel {
+    max-width: 540px;
     align-items: flex-start;
     text-align: left;
   }
@@ -180,7 +181,7 @@
 .shl-tour-controls {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .shl-tour-dots {
@@ -247,7 +248,7 @@
 @media (min-width: 1024px) {
   .shl-tour-dots {
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
   }
   .shl-tour-dot {
     padding: 0 12px;

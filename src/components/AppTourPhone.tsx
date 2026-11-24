@@ -148,53 +148,43 @@ export default function AppTourPhone({ screens }: AppTourPhoneProps) {
           {advancing && !reducedMotion && <span key={index} style={{ animationDuration: `${ADVANCE_MS}ms` }} />}
         </div>
 
+        <ol className="shl-tour-dots" aria-label="Choose a screen">
+          {screens.map((item, i) => (
+            <li key={item.image}>
+              <button
+                type="button"
+                className={`shl-tour-dot${i === index ? " is-active" : ""}`}
+                onClick={() => goTo(i)}
+                aria-label={`${item.label}, screen ${i + 1} of ${count}`}
+                aria-current={i === index ? "true" : undefined}
+              >
+                <span className="shl-tour-dot-mark" aria-hidden="true" />
+                <span className="shl-tour-dot-label" aria-hidden="true">
+                  {item.label}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ol>
+
         <div className="shl-tour-controls">
-          <button
-            type="button"
-            className="shl-tour-arrow"
-            onClick={() => goTo(index - 1)}
-            aria-label="Previous screen"
-          >
+          <button type="button" className="shl-tour-arrow" onClick={() => goTo(index - 1)} aria-label="Previous screen">
             <ChevronLeft aria-hidden="true" />
           </button>
-          <ol className="shl-tour-dots">
-            {screens.map((item, i) => (
-              <li key={item.image}>
-                <button
-                  type="button"
-                  className={`shl-tour-dot${i === index ? " is-active" : ""}`}
-                  onClick={() => goTo(i)}
-                  aria-label={`${item.label}, screen ${i + 1} of ${count}`}
-                  aria-current={i === index ? "true" : undefined}
-                >
-                  <span className="shl-tour-dot-mark" aria-hidden="true" />
-                  <span className="shl-tour-dot-label" aria-hidden="true">
-                    {item.label}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ol>
           <button
+            ref={toggleRef}
             type="button"
-            className="shl-tour-arrow"
-            onClick={() => goTo(index + 1)}
-            aria-label="Next screen"
+            className="shl-tour-toggle"
+            onClick={() => setPlaying((value) => !value)}
+            aria-label={playing ? "Pause the tour" : "Play the tour"}
           >
+            {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+            <span>{playing ? "Pause" : "Play"}</span>
+          </button>
+          <button type="button" className="shl-tour-arrow" onClick={() => goTo(index + 1)} aria-label="Next screen">
             <ChevronRight aria-hidden="true" />
           </button>
         </div>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          className="shl-tour-toggle"
-          onClick={() => setPlaying((value) => !value)}
-          aria-label={playing ? "Pause the tour" : "Play the tour"}
-        >
-          {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
-          <span>{playing ? "Pause" : "Play"}</span>
-        </button>
       </div>
     </section>
   );
