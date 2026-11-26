@@ -2083,6 +2083,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://soberhelpline.com/sober-helpline-app/tour</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://soberhelpline.com/sober-living</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -2093,12 +2099,6 @@
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://soberhelpline.com/stop-weekly-registration</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://soberhelpline.com/strong-one</loc>

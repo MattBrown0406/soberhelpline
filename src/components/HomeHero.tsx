@@ -182,6 +182,10 @@ const HomeHero = () => {
               <div>
                 <small>FREE APP FOR IPHONE AND IPAD</small>
                 <strong>Save your Monday seat once. Get a reminder. Join in one tap.</strong>
+                <Link to="/sober-helpline-app/tour" className="shl-app-tour-link">
+                  See the app in action
+                  <ArrowRight aria-hidden="true" />
+                </Link>
               </div>
               <SoberHelplineAppStoreBadge height={34} source="homepage_lighthouse_hero_app" />
             </div>

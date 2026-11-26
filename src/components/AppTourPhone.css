@@ -1,0 +1,312 @@
+/* The animated phone on /sober-helpline-app/tour (components/AppTourPhone).
+   The frame is drawn in CSS: no device photo and no logo. Screenshots are
+   600x1304, so the screen keeps that aspect ratio and nothing shifts while
+   they load. */
+
+.shl-tour {
+  --tour-accent: hsl(var(--primary));
+  --tour-accent-fg: hsl(var(--primary-foreground));
+  --tour-phone-w: min(240px, 64vw);
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .shl-tour {
+    --tour-phone-w: 300px;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    gap: 56px;
+  }
+}
+
+/* Phone body */
+.shl-tour-phone {
+  position: relative;
+  width: var(--tour-phone-w);
+  padding: calc(var(--tour-phone-w) * 0.035);
+  border-radius: calc(var(--tour-phone-w) * 0.165);
+  background: linear-gradient(145deg, #2b3445 0%, #10151f 45%, #1d2430 100%);
+  box-shadow:
+    0 0 0 2px #3a4456,
+    0 0 0 3px #0b0f16,
+    0 30px 60px -18px rgba(13, 41, 72, 0.45),
+    0 18px 36px -24px rgba(0, 0, 0, 0.5);
+}
+
+.shl-tour-button {
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: #2a3241;
+}
+.shl-tour-button-action { left: -4px; top: 17%; height: 5%; }
+.shl-tour-button-volume-up { left: -4px; top: 25%; height: 9%; }
+.shl-tour-button-volume-down { left: -4px; top: 36%; height: 9%; }
+.shl-tour-button-side { right: -4px; top: 28%; height: 13%; }
+
+/* Screen: same aspect ratio as the screenshots */
+.shl-tour-screen {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 600 / 1304;
+  border-radius: calc(var(--tour-phone-w) * 0.13);
+  background: #f8f5ee;
+  isolation: isolate;
+}
+
+.shl-tour-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(14%);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.shl-tour-slide.is-active {
+  z-index: 2;
+  opacity: 1;
+  transform: none;
+}
+.shl-tour-slide.is-leaving {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(-14%);
+}
+.shl-tour-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+/* Sits exactly over the island in the screenshots, so it stays still while
+   the screens move under it. */
+.shl-tour-island {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 1.55%;
+  width: 31%;
+  height: 4.2%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+}
+
+/* Caption and controls */
+.shl-tour-panel {
+  display: flex;
+  width: 100%;
+  max-width: 440px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .shl-tour-panel {
+    max-width: 540px;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.shl-tour-caption {
+  min-height: 9.5rem;
+}
+
+.shl-tour-step {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
+}
+
+.shl-tour-caption-body {
+  animation: shl-tour-caption-in 0.5s ease both;
+}
+.shl-tour-caption-body h2 {
+  margin-top: 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: hsl(var(--foreground));
+}
+.shl-tour-caption-body p {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+}
+
+@media (min-width: 768px) {
+  .shl-tour-caption { min-height: 10rem; }
+  .shl-tour-caption-body h2 { font-size: 1.875rem; }
+  .shl-tour-caption-body p { font-size: 1.0625rem; }
+}
+
+@keyframes shl-tour-caption-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.shl-tour-progress {
+  width: 100%;
+  max-width: 280px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: hsl(var(--muted));
+}
+.shl-tour-progress span {
+  display: block;
+  height: 100%;
+  background: var(--tour-accent);
+  transform-origin: left center;
+  animation-name: shl-tour-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@keyframes shl-tour-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.shl-tour-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shl-tour-dots {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.shl-tour-arrow,
+.shl-tour-dot,
+.shl-tour-toggle {
+  border-radius: 999px;
+  color: var(--tour-accent);
+}
+
+.shl-tour-arrow:focus-visible,
+.shl-tour-dot:focus-visible,
+.shl-tour-toggle:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.shl-tour-arrow {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+.shl-tour-arrow:hover { background: hsl(var(--muted)); }
+.shl-tour-arrow svg { width: 22px; height: 22px; }
+
+.shl-tour-dot {
+  display: inline-flex;
+  min-width: 36px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.shl-tour-dot-mark {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border: 2px solid var(--tour-accent);
+  border-radius: 999px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.shl-tour-dot.is-active .shl-tour-dot-mark {
+  background: var(--tour-accent);
+  transform: scale(1.15);
+}
+
+/* Labels show where there is room; the dots carry the same names for
+   screen readers either way. */
+.shl-tour-dot-label {
+  display: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .shl-tour-dots {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .shl-tour-dot {
+    padding: 0 12px;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
+  }
+  .shl-tour-dot:hover { background: hsl(var(--muted)); }
+  .shl-tour-dot.is-active {
+    border-color: var(--tour-accent);
+    background: var(--tour-accent);
+    color: var(--tour-accent-fg);
+  }
+  .shl-tour-dot.is-active .shl-tour-dot-mark {
+    border-color: var(--tour-accent-fg);
+    background: var(--tour-accent-fg);
+  }
+  .shl-tour-dot-label { display: inline; }
+}
+
+.shl-tour-toggle {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.shl-tour-toggle:hover { background: hsl(var(--muted)); }
+.shl-tour-toggle svg { width: 16px; height: 16px; }
+
+/* Reduced motion: no sliding and no fades; the screen changes instantly and
+   only when the visitor asks. */
+.shl-tour-reduced .shl-tour-slide,
+.shl-tour-reduced .shl-tour-dot-mark {
+  transition: none;
+}
+.shl-tour-reduced .shl-tour-slide,
+.shl-tour-reduced .shl-tour-slide.is-leaving {
+  transform: none;
+}
+.shl-tour-reduced .shl-tour-caption-body {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shl-tour-slide,
+  .shl-tour-dot-mark {
+    transition: none;
+  }
+  .shl-tour-slide,
+  .shl-tour-slide.is-leaving {
+    transform: none;
+  }
+  .shl-tour-caption-body,
+  .shl-tour-progress span {
+    animation: none;
+  }
+}

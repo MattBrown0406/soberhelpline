@@ -736,6 +736,25 @@
 .shl-app-card a,
 .shl-app-card img { display: block; max-width: 108px; }
 
+.shl-app-card a.shl-app-tour-link {
+  display: inline-flex;
+  max-width: none;
+  align-self: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  padding: 3px 0;
+  color: #0d2948;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.shl-app-card a.shl-app-tour-link svg { width: 13px; height: 13px; }
+.shl-app-card a.shl-app-tour-link:hover { color: #2f77c8; }
+.shl-app-card a.shl-app-tour-link:focus-visible { outline: 2px solid #2f77c8; outline-offset: 2px; border-radius: 3px; }
+
 .shl-routes {
   position: relative;
   z-index: 12;

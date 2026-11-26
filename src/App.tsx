@@ -130,6 +130,7 @@ const SSO = React.lazy(() => import("./pages/SSO"));
 const SubscriberRoute = React.lazy(() => import("./components/SubscriberRoute"));
 const AppLinkFallback = React.lazy(() => import("./pages/AppLinkFallback"));
 const SoberHelplineApp = React.lazy(() => import("./pages/SoberHelplineApp"));
+const SoberHelplineAppTour = React.lazy(() => import("./pages/SoberHelplineAppTour"));
 
 
 const FamilyForum = React.lazy(() => import("./pages/FamilyForum"));
@@ -401,6 +402,7 @@ const App = () => (
               <Route path="/app/*" element={<AppLinkFallback />} />
               {/* The page about the app. Not under /app: those paths open the app itself. */}
               <Route path="/sober-helpline-app" element={<SoberHelplineApp />} />
+              <Route path="/sober-helpline-app/tour" element={<SoberHelplineAppTour />} />
 
               <Route path="/family-forum" element={<SubscriberRoute><FamilyForum /></SubscriberRoute>} />
               <Route path="/family-support-forum" element={<FamilyForumLanding />} />
